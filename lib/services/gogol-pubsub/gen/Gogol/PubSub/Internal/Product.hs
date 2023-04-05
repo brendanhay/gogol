@@ -30,9 +30,17 @@ module Gogol.PubSub.Internal.Product
     AcknowledgeRequest (..),
     newAcknowledgeRequest,
 
+    -- * BigQueryConfig
+    BigQueryConfig (..),
+    newBigQueryConfig,
+
     -- * Binding
     Binding (..),
     newBinding,
+
+    -- * CommitSchemaRequest
+    CommitSchemaRequest (..),
+    newCommitSchemaRequest,
 
     -- * CreateSnapshotRequest
     CreateSnapshotRequest (..),
@@ -61,6 +69,10 @@ module Gogol.PubSub.Internal.Product
     -- * Expr
     Expr (..),
     newExpr,
+
+    -- * ListSchemaRevisionsResponse
+    ListSchemaRevisionsResponse (..),
+    newListSchemaRevisionsResponse,
 
     -- * ListSchemasResponse
     ListSchemasResponse (..),
@@ -145,6 +157,10 @@ module Gogol.PubSub.Internal.Product
     -- * RetryPolicy
     RetryPolicy (..),
     newRetryPolicy,
+
+    -- * RollbackSchemaRequest
+    RollbackSchemaRequest (..),
+    newRollbackSchemaRequest,
 
     -- * Schema
     Schema (..),
@@ -258,14 +274,70 @@ instance Core.ToJSON AcknowledgeRequest where
     Core.object
       (Core.catMaybes [("ackIds" Core..=) Core.<$> ackIds])
 
+-- | Configuration for a BigQuery subscription.
+--
+-- /See:/ 'newBigQueryConfig' smart constructor.
+data BigQueryConfig = BigQueryConfig
+  { -- | When true and use/topic/schema is true, any fields that are a part of the topic schema that are not part of the BigQuery table schema are dropped when writing to BigQuery. Otherwise, the schemas must be kept in sync and any messages with extra fields are not written and remain in the subscription\'s backlog.
+    dropUnknownFields :: (Core.Maybe Core.Bool),
+    -- | Output only. An output-only field that indicates whether or not the subscription can receive messages.
+    state :: (Core.Maybe BigQueryConfig_State),
+    -- | The name of the table to which to write data, of the form {projectId}.{datasetId}.{tableId}
+    table :: (Core.Maybe Core.Text),
+    -- | When true, use the topic\'s schema as the columns to write to in BigQuery, if it exists.
+    useTopicSchema :: (Core.Maybe Core.Bool),
+    -- | When true, write the subscription name, message/id, publish/time, attributes, and ordering/key to additional columns in the table. The subscription name, message/id, and publish_time fields are put in their own columns while all other message properties (other than data) are written to a JSON object in the attributes column.
+    writeMetadata :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BigQueryConfig' with the minimum fields required to make a request.
+newBigQueryConfig ::
+  BigQueryConfig
+newBigQueryConfig =
+  BigQueryConfig
+    { dropUnknownFields = Core.Nothing,
+      state = Core.Nothing,
+      table = Core.Nothing,
+      useTopicSchema = Core.Nothing,
+      writeMetadata = Core.Nothing
+    }
+
+instance Core.FromJSON BigQueryConfig where
+  parseJSON =
+    Core.withObject
+      "BigQueryConfig"
+      ( \o ->
+          BigQueryConfig
+            Core.<$> (o Core..:? "dropUnknownFields")
+            Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "table")
+            Core.<*> (o Core..:? "useTopicSchema")
+            Core.<*> (o Core..:? "writeMetadata")
+      )
+
+instance Core.ToJSON BigQueryConfig where
+  toJSON BigQueryConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("dropUnknownFields" Core..=)
+              Core.<$> dropUnknownFields,
+            ("state" Core..=) Core.<$> state,
+            ("table" Core..=) Core.<$> table,
+            ("useTopicSchema" Core..=) Core.<$> useTopicSchema,
+            ("writeMetadata" Core..=) Core.<$> writeMetadata
+          ]
+      )
+
 -- | Associates @members@, or principals, with a @role@.
 --
 -- /See:/ 'newBinding' smart constructor.
 data Binding = Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe Expr),
-    -- | Specifies the principals requesting access for a Cloud Platform resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains
-    -- the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@.
+    -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
+    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
     members :: (Core.Maybe [Core.Text]),
     -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
     role' :: (Core.Maybe Core.Text)
@@ -303,11 +375,38 @@ instance Core.ToJSON Binding where
           ]
       )
 
+-- | Request for CommitSchema method.
+--
+-- /See:/ 'newCommitSchemaRequest' smart constructor.
+newtype CommitSchemaRequest = CommitSchemaRequest
+  { -- | Required. The schema revision to commit.
+    schema :: (Core.Maybe Schema)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CommitSchemaRequest' with the minimum fields required to make a request.
+newCommitSchemaRequest ::
+  CommitSchemaRequest
+newCommitSchemaRequest = CommitSchemaRequest {schema = Core.Nothing}
+
+instance Core.FromJSON CommitSchemaRequest where
+  parseJSON =
+    Core.withObject
+      "CommitSchemaRequest"
+      ( \o ->
+          CommitSchemaRequest Core.<$> (o Core..:? "schema")
+      )
+
+instance Core.ToJSON CommitSchemaRequest where
+  toJSON CommitSchemaRequest {..} =
+    Core.object
+      (Core.catMaybes [("schema" Core..=) Core.<$> schema])
+
 -- | Request for the @CreateSnapshot@ method.
 --
 -- /See:/ 'newCreateSnapshotRequest' smart constructor.
 data CreateSnapshotRequest = CreateSnapshotRequest
-  { -- | See Creating and managing labels.
+  { -- | See <https://cloud.google.com/pubsub/docs/labels Creating and managing labels>.
     labels :: (Core.Maybe CreateSnapshotRequest_Labels),
     -- | Required. The subscription whose backlog the snapshot retains. Specifically, the created snapshot is guaranteed to retain: (a) The existing backlog on the subscription. More precisely, this is defined as the messages in the subscription\'s backlog that are unacknowledged upon the successful completion of the @CreateSnapshot@ request; as well as: (b) Any messages published to the subscription\'s topic following the successful completion of the CreateSnapshot request. Format is @projects\/{project}\/subscriptions\/{sub}@.
     subscription :: (Core.Maybe Core.Text)
@@ -339,7 +438,7 @@ instance Core.ToJSON CreateSnapshotRequest where
           ]
       )
 
--- | See Creating and managing labels.
+-- | See <https://cloud.google.com/pubsub/docs/labels Creating and managing labels>.
 --
 -- /See:/ 'newCreateSnapshotRequest_Labels' smart constructor.
 newtype CreateSnapshotRequest_Labels = CreateSnapshotRequest_Labels
@@ -430,7 +529,7 @@ instance Core.FromJSON DetachSubscriptionResponse where
 instance Core.ToJSON DetachSubscriptionResponse where
   toJSON = Core.const Core.emptyObject
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -520,6 +619,45 @@ instance Core.ToJSON Expr where
             ("expression" Core..=) Core.<$> expression,
             ("location" Core..=) Core.<$> location,
             ("title" Core..=) Core.<$> title
+          ]
+      )
+
+-- | Response for the @ListSchemaRevisions@ method.
+--
+-- /See:/ 'newListSchemaRevisionsResponse' smart constructor.
+data ListSchemaRevisionsResponse = ListSchemaRevisionsResponse
+  { -- | A token that can be sent as @page_token@ to retrieve the next page. If this field is empty, there are no subsequent pages.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | The revisions of the schema.
+    schemas :: (Core.Maybe [Schema])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListSchemaRevisionsResponse' with the minimum fields required to make a request.
+newListSchemaRevisionsResponse ::
+  ListSchemaRevisionsResponse
+newListSchemaRevisionsResponse =
+  ListSchemaRevisionsResponse
+    { nextPageToken = Core.Nothing,
+      schemas = Core.Nothing
+    }
+
+instance Core.FromJSON ListSchemaRevisionsResponse where
+  parseJSON =
+    Core.withObject
+      "ListSchemaRevisionsResponse"
+      ( \o ->
+          ListSchemaRevisionsResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "schemas")
+      )
+
+instance Core.ToJSON ListSchemaRevisionsResponse where
+  toJSON ListSchemaRevisionsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("schemas" Core..=) Core.<$> schemas
           ]
       )
 
@@ -851,13 +989,13 @@ instance Core.ToJSON ModifyPushConfigRequest where
           [("pushConfig" Core..=) Core.<$> pushConfig]
       )
 
--- | Contains information needed for generating an <https://developers.google.com/identity/protocols/OpenIDConnect OpenID Connect token>.
+-- | Contains information needed for generating an <https://developers.google.com/identity/protocols/OpenIDConnect OpenID Connect token>. <https://cloud.google.com/iam/docs/service-accounts Service account email> used for generating the OIDC token. For more information on setting up authentication, see <https://cloud.google.com/pubsub/docs/push Push subscriptions>.
 --
 -- /See:/ 'newOidcToken' smart constructor.
 data OidcToken = OidcToken
   { -- | Audience to be used when generating OIDC token. The audience claim identifies the recipients that the JWT is intended for. The audience value is a single case-sensitive string. Having multiple values (array) for the audience field is not supported. More info about the OIDC JWT token audience here: https:\/\/tools.ietf.org\/html\/rfc7519#section-4.1.3 Note: if not specified, the Push endpoint URL will be used.
     audience :: (Core.Maybe Core.Text),
-    -- | <https://cloud.google.com/iam/docs/service-accounts Service account email> to be used for generating the OIDC token. See </pubsub/docs/push#setting_up_for_push_authentication Setting up push authentication> for more details.
+    -- |
     serviceAccountEmail :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -999,7 +1137,7 @@ data PubsubMessage = PubsubMessage
     data' :: (Core.Maybe Core.Base64),
     -- | ID of this message, assigned by the server when the message is published. Guaranteed to be unique within the topic. This value may be read by a subscriber that receives a @PubsubMessage@ via a @Pull@ call or a push delivery. It must not be populated by the publisher in a @Publish@ call.
     messageId :: (Core.Maybe Core.Text),
-    -- | If non-empty, identifies related messages for which publish order should be respected. If a @Subscription@ has @enable_message_ordering@ set to @true@, messages published with the same non-empty @ordering_key@ value will be delivered to subscribers in the order in which they are received by the Pub\/Sub system. All @PubsubMessage@s published in a given @PublishRequest@ must specify the same @ordering_key@ value.
+    -- | If non-empty, identifies related messages for which publish order should be respected. If a @Subscription@ has @enable_message_ordering@ set to @true@, messages published with the same non-empty @ordering_key@ value will be delivered to subscribers in the order in which they are received by the Pub\/Sub system. All @PubsubMessage@s published in a given @PublishRequest@ must specify the same @ordering_key@ value. For more information, see <https://cloud.google.com/pubsub/docs/ordering ordering messages>.
     orderingKey :: (Core.Maybe Core.Text),
     -- | The time at which the message was published, populated by the server when it receives the @Publish@ call. It must not be populated by the publisher in a @Publish@ call.
     publishTime :: (Core.Maybe Core.DateTime)
@@ -1114,7 +1252,7 @@ instance Core.ToJSON PullRequest where
 --
 -- /See:/ 'newPullResponse' smart constructor.
 newtype PullResponse = PullResponse
-  { -- | Received Pub\/Sub messages. The list will be empty if there are no more messages available in the backlog. For JSON, the response can be entirely empty. The Pub\/Sub system may return fewer than the @maxMessages@ requested even if there are more messages available in the backlog.
+  { -- | Received Pub\/Sub messages. The list will be empty if there are no more messages available in the backlog, or if no messages could be returned before the request timeout. For JSON, the response can be entirely empty. The Pub\/Sub system may return fewer than the @maxMessages@ requested even if there are more messages available in the backlog.
     receivedMessages :: (Core.Maybe [ReceivedMessage])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1146,7 +1284,7 @@ instance Core.ToJSON PullResponse where
 --
 -- /See:/ 'newPushConfig' smart constructor.
 data PushConfig = PushConfig
-  { -- | Endpoint configuration attributes that can be used to control different aspects of the message delivery. The only currently supported attribute is @x-goog-version@, which you can use to change the format of the pushed message. This attribute indicates the version of the data expected by the endpoint. This controls the shape of the pushed message (i.e., its fields and metadata). If not present during the @CreateSubscription@ call, it will default to the version of the Pub\/Sub API used to make such call. If not present in a @ModifyPushConfig@ call, its value will not be changed. @GetSubscription@ calls will always return a valid version, even if the subscription was created without this attribute. The only supported values for the @x-goog-version@ attribute are: * @v1beta1@: uses the push format defined in the v1beta1 Pub\/Sub API. * @v1@ or @v1beta2@: uses the push format defined in the v1 Pub\/Sub API. For example: attributes { \"x-goog-version\": \"v1\" }
+  { -- | Endpoint configuration attributes that can be used to control different aspects of the message delivery. The only currently supported attribute is @x-goog-version@, which you can use to change the format of the pushed message. This attribute indicates the version of the data expected by the endpoint. This controls the shape of the pushed message (i.e., its fields and metadata). If not present during the @CreateSubscription@ call, it will default to the version of the Pub\/Sub API used to make such call. If not present in a @ModifyPushConfig@ call, its value will not be changed. @GetSubscription@ calls will always return a valid version, even if the subscription was created without this attribute. The only supported values for the @x-goog-version@ attribute are: * @v1beta1@: uses the push format defined in the v1beta1 Pub\/Sub API. * @v1@ or @v1beta2@: uses the push format defined in the v1 Pub\/Sub API. For example: @attributes { \"x-goog-version\": \"v1\" }@
     attributes :: (Core.Maybe PushConfig_Attributes),
     -- | If specified, Pub\/Sub will generate and attach an OIDC JWT token as an @Authorization@ header in the HTTP request for every pushed message.
     oidcToken :: (Core.Maybe OidcToken),
@@ -1186,7 +1324,7 @@ instance Core.ToJSON PushConfig where
           ]
       )
 
--- | Endpoint configuration attributes that can be used to control different aspects of the message delivery. The only currently supported attribute is @x-goog-version@, which you can use to change the format of the pushed message. This attribute indicates the version of the data expected by the endpoint. This controls the shape of the pushed message (i.e., its fields and metadata). If not present during the @CreateSubscription@ call, it will default to the version of the Pub\/Sub API used to make such call. If not present in a @ModifyPushConfig@ call, its value will not be changed. @GetSubscription@ calls will always return a valid version, even if the subscription was created without this attribute. The only supported values for the @x-goog-version@ attribute are: * @v1beta1@: uses the push format defined in the v1beta1 Pub\/Sub API. * @v1@ or @v1beta2@: uses the push format defined in the v1 Pub\/Sub API. For example: attributes { \"x-goog-version\": \"v1\" }
+-- | Endpoint configuration attributes that can be used to control different aspects of the message delivery. The only currently supported attribute is @x-goog-version@, which you can use to change the format of the pushed message. This attribute indicates the version of the data expected by the endpoint. This controls the shape of the pushed message (i.e., its fields and metadata). If not present during the @CreateSubscription@ call, it will default to the version of the Pub\/Sub API used to make such call. If not present in a @ModifyPushConfig@ call, its value will not be changed. @GetSubscription@ calls will always return a valid version, even if the subscription was created without this attribute. The only supported values for the @x-goog-version@ attribute are: * @v1beta1@: uses the push format defined in the v1beta1 Pub\/Sub API. * @v1@ or @v1beta2@: uses the push format defined in the v1 Pub\/Sub API. For example: @attributes { \"x-goog-version\": \"v1\" }@
 --
 -- /See:/ 'newPushConfig_Attributes' smart constructor.
 newtype PushConfig_Attributes = PushConfig_Attributes
@@ -1296,6 +1434,36 @@ instance Core.ToJSON RetryPolicy where
           ]
       )
 
+-- | Request for the @RollbackSchema@ method.
+--
+-- /See:/ 'newRollbackSchemaRequest' smart constructor.
+newtype RollbackSchemaRequest = RollbackSchemaRequest
+  { -- | Required. The revision ID to roll back to. It must be a revision of the same schema. Example: c7cfa2a8
+    revisionId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RollbackSchemaRequest' with the minimum fields required to make a request.
+newRollbackSchemaRequest ::
+  RollbackSchemaRequest
+newRollbackSchemaRequest = RollbackSchemaRequest {revisionId = Core.Nothing}
+
+instance Core.FromJSON RollbackSchemaRequest where
+  parseJSON =
+    Core.withObject
+      "RollbackSchemaRequest"
+      ( \o ->
+          RollbackSchemaRequest
+            Core.<$> (o Core..:? "revisionId")
+      )
+
+instance Core.ToJSON RollbackSchemaRequest where
+  toJSON RollbackSchemaRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [("revisionId" Core..=) Core.<$> revisionId]
+      )
+
 -- | A schema resource.
 --
 -- /See:/ 'newSchema' smart constructor.
@@ -1357,6 +1525,10 @@ instance Core.ToJSON Schema where
 data SchemaSettings = SchemaSettings
   { -- | The encoding of messages validated against @schema@.
     encoding :: (Core.Maybe SchemaSettings_Encoding),
+    -- | The minimum (inclusive) revision allowed for validating messages. If empty or not present, allow any revision to be validated against last_revision or any revision created before.
+    firstRevisionId :: (Core.Maybe Core.Text),
+    -- | The maximum (inclusive) revision allowed for validating messages. If empty or not present, allow any revision to be validated against first_revision or any revision created after.
+    lastRevisionId :: (Core.Maybe Core.Text),
     -- | Required. The name of the schema that messages published should be validated against. Format is @projects\/{project}\/schemas\/{schema}@. The value of this field will be @_deleted-schema_@ if the schema has been deleted.
     schema :: (Core.Maybe Core.Text)
   }
@@ -1366,7 +1538,12 @@ data SchemaSettings = SchemaSettings
 newSchemaSettings ::
   SchemaSettings
 newSchemaSettings =
-  SchemaSettings {encoding = Core.Nothing, schema = Core.Nothing}
+  SchemaSettings
+    { encoding = Core.Nothing,
+      firstRevisionId = Core.Nothing,
+      lastRevisionId = Core.Nothing,
+      schema = Core.Nothing
+    }
 
 instance Core.FromJSON SchemaSettings where
   parseJSON =
@@ -1375,6 +1552,8 @@ instance Core.FromJSON SchemaSettings where
       ( \o ->
           SchemaSettings
             Core.<$> (o Core..:? "encoding")
+            Core.<*> (o Core..:? "firstRevisionId")
+            Core.<*> (o Core..:? "lastRevisionId")
             Core.<*> (o Core..:? "schema")
       )
 
@@ -1383,6 +1562,8 @@ instance Core.ToJSON SchemaSettings where
     Core.object
       ( Core.catMaybes
           [ ("encoding" Core..=) Core.<$> encoding,
+            ("firstRevisionId" Core..=) Core.<$> firstRevisionId,
+            ("lastRevisionId" Core..=) Core.<$> lastRevisionId,
             ("schema" Core..=) Core.<$> schema
           ]
       )
@@ -1445,7 +1626,7 @@ instance Core.ToJSON SeekResponse where
 --
 -- /See:/ 'newSetIamPolicyRequest' smart constructor.
 newtype SetIamPolicyRequest = SetIamPolicyRequest
-  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
+  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Google Cloud services (such as Projects) might reject them.
     policy :: (Core.Maybe Policy)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1544,13 +1725,15 @@ instance Core.FromJSON Snapshot_Labels where
 instance Core.ToJSON Snapshot_Labels where
   toJSON Snapshot_Labels {..} = Core.toJSON additional
 
--- | A subscription resource.
+-- | A subscription resource. If none of @push_config@ or @bigquery_config@ is set, then the subscriber will pull and ack messages using API methods. At most one of these fields may be set.
 --
 -- /See:/ 'newSubscription' smart constructor.
 data Subscription = Subscription
   { -- | The approximate amount of time (on a best-effort basis) Pub\/Sub waits for the subscriber to acknowledge receipt before resending the message. In the interval after the message is delivered and before it is acknowledged, it is considered to be /outstanding/. During that time period, the message will not be redelivered (on a best-effort basis). For pull subscriptions, this value is used as the initial value for the ack deadline. To override this value for a given message, call @ModifyAckDeadline@ with the corresponding @ack_id@ if using non-streaming pull or send the @ack_id@ in a @StreamingModifyAckDeadlineRequest@ if using streaming pull. The minimum custom deadline you can specify is 10 seconds. The maximum custom deadline you can specify is 600 seconds (10 minutes). If this parameter is 0, a default value of 10 seconds is used. For push delivery, this value is also used to set the request timeout for the call to the push endpoint. If the subscriber never acknowledges the message, the Pub\/Sub system will
     -- eventually redeliver the message.
     ackDeadlineSeconds :: (Core.Maybe Core.Int32),
+    -- | If delivery to BigQuery is used with this subscription, this field is used to configure it.
+    bigqueryConfig :: (Core.Maybe BigQueryConfig),
     -- | A policy that specifies the conditions for dead lettering messages in this subscription. If dead/letter/policy is not set, dead lettering is disabled. The Cloud Pub\/Sub service account associated with this subscriptions\'s parent project (i.e., service-{project_number}\@gcp-sa-pubsub.iam.gserviceaccount.com) must have permission to Acknowledge() messages on this subscription.
     deadLetterPolicy :: (Core.Maybe DeadLetterPolicy),
     -- | Indicates whether the subscription is detached from its topic. Detached subscriptions don\'t receive messages from their topic and don\'t retain any backlog. @Pull@ and @StreamingPull@ requests will return FAILED_PRECONDITION. If the subscription is a push subscription, pushes to the endpoint will not be made.
@@ -1563,13 +1746,13 @@ data Subscription = Subscription
     expirationPolicy :: (Core.Maybe ExpirationPolicy),
     -- | An expression written in the Pub\/Sub <https://cloud.google.com/pubsub/docs/filtering filter language>. If non-empty, then only @PubsubMessage@s whose @attributes@ field matches the filter are delivered on this subscription. If empty, then no messages are filtered out.
     filter :: (Core.Maybe Core.Text),
-    -- | See Creating and managing labels.
+    -- | See <https://cloud.google.com/pubsub/docs/labels Creating and managing labels>.
     labels :: (Core.Maybe Subscription_Labels),
     -- | How long to retain unacknowledged messages in the subscription\'s backlog, from the moment a message is published. If @retain_acked_messages@ is true, then this also configures the retention of acknowledged messages, and thus configures how far back in time a @Seek@ can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10 minutes.
     messageRetentionDuration :: (Core.Maybe Core.Duration),
     -- | Required. The name of the subscription. It must have the format @\"projects\/{project}\/subscriptions\/{subscription}\"@. @{subscription}@ must start with a letter, and contain only letters (@[A-Za-z]@), numbers (@[0-9]@), dashes (@-@), underscores (@_@), periods (@.@), tildes (@~@), plus (@+@) or percent signs (@%@). It must be between 3 and 255 characters in length, and it must not start with @\"goog\"@.
     name :: (Core.Maybe Core.Text),
-    -- | If push delivery is used with this subscription, this field is used to configure it. At most one of @pushConfig@ and @bigQueryConfig@ can be set. If both are empty, then the subscriber will pull and ack messages using API methods.
+    -- | If push delivery is used with this subscription, this field is used to configure it.
     pushConfig :: (Core.Maybe PushConfig),
     -- | Indicates whether to retain acknowledged messages. If true, then messages are not expunged from the subscription\'s backlog, even if they are acknowledged, until they fall out of the @message_retention_duration@ window. This must be true if you would like to [@Seek@ to a timestamp] (https:\/\/cloud.google.com\/pubsub\/docs\/replay-overview#seek/to/a_time) in the past to replay previously-acknowledged messages.
     retainAckedMessages :: (Core.Maybe Core.Bool),
@@ -1590,6 +1773,7 @@ newSubscription ::
 newSubscription =
   Subscription
     { ackDeadlineSeconds = Core.Nothing,
+      bigqueryConfig = Core.Nothing,
       deadLetterPolicy = Core.Nothing,
       detached = Core.Nothing,
       enableExactlyOnceDelivery = Core.Nothing,
@@ -1614,6 +1798,7 @@ instance Core.FromJSON Subscription where
       ( \o ->
           Subscription
             Core.<$> (o Core..:? "ackDeadlineSeconds")
+            Core.<*> (o Core..:? "bigqueryConfig")
             Core.<*> (o Core..:? "deadLetterPolicy")
             Core.<*> (o Core..:? "detached")
             Core.<*> (o Core..:? "enableExactlyOnceDelivery")
@@ -1637,6 +1822,7 @@ instance Core.ToJSON Subscription where
       ( Core.catMaybes
           [ ("ackDeadlineSeconds" Core..=)
               Core.<$> ackDeadlineSeconds,
+            ("bigqueryConfig" Core..=) Core.<$> bigqueryConfig,
             ("deadLetterPolicy" Core..=)
               Core.<$> deadLetterPolicy,
             ("detached" Core..=) Core.<$> detached,
@@ -1662,7 +1848,7 @@ instance Core.ToJSON Subscription where
           ]
       )
 
--- | See Creating and managing labels.
+-- | See <https://cloud.google.com/pubsub/docs/labels Creating and managing labels>.
 --
 -- /See:/ 'newSubscription_Labels' smart constructor.
 newtype Subscription_Labels = Subscription_Labels
@@ -1696,7 +1882,7 @@ instance Core.ToJSON Subscription_Labels where
 --
 -- /See:/ 'newTestIamPermissionsRequest' smart constructor.
 newtype TestIamPermissionsRequest = TestIamPermissionsRequest
-  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as \'/\' or \'storage./\') are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
+  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as @*@ or @storage.*@) are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
     permissions :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

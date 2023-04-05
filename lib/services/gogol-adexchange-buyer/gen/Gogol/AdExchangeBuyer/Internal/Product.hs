@@ -1071,7 +1071,9 @@ instance Core.FromJSON Creative where
             Core.<*> (o Core..:? "accountId")
             Core.<*> (o Core..:? "adChoicesDestinationUrl")
             Core.<*> (o Core..:? "adTechnologyProviders")
-            Core.<*> (o Core..:? "advertiserId")
+            Core.<*> ( o Core..:? "advertiserId"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "advertiserName")
             Core.<*> ( o Core..:? "agencyId"
                          Core.<&> Core.fmap Core.fromAsText
@@ -1114,7 +1116,8 @@ instance Core.ToJSON Creative where
               Core.<$> adChoicesDestinationUrl,
             ("adTechnologyProviders" Core..=)
               Core.<$> adTechnologyProviders,
-            ("advertiserId" Core..=) Core.<$> advertiserId,
+            ("advertiserId" Core..=) Core.. Core.fmap Core.AsText
+              Core.<$> advertiserId,
             ("advertiserName" Core..=) Core.<$> advertiserName,
             ("agencyId" Core..=) Core.. Core.AsText
               Core.<$> agencyId,
@@ -1179,7 +1182,9 @@ instance Core.FromJSON Creative_AdTechnologyProviders where
       "Creative_AdTechnologyProviders"
       ( \o ->
           Creative_AdTechnologyProviders
-            Core.<$> (o Core..:? "detectedProviderIds")
+            Core.<$> ( o Core..:? "detectedProviderIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "hasUnidentifiedProvider")
       )
 
@@ -1188,6 +1193,7 @@ instance Core.ToJSON Creative_AdTechnologyProviders where
     Core.object
       ( Core.catMaybes
           [ ("detectedProviderIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> detectedProviderIds,
             ("hasUnidentifiedProvider" Core..=)
               Core.<$> hasUnidentifiedProvider
@@ -3523,12 +3529,22 @@ instance Core.FromJSON PretargetingConfig where
             Core.<*> (o Core..:? "configName")
             Core.<*> (o Core..:? "creativeType")
             Core.<*> (o Core..:? "dimensions")
-            Core.<*> (o Core..:? "excludedContentLabels")
-            Core.<*> (o Core..:? "excludedGeoCriteriaIds")
+            Core.<*> ( o Core..:? "excludedContentLabels"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
+            Core.<*> ( o Core..:? "excludedGeoCriteriaIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "excludedPlacements")
-            Core.<*> (o Core..:? "excludedUserLists")
-            Core.<*> (o Core..:? "excludedVerticals")
-            Core.<*> (o Core..:? "geoCriteriaIds")
+            Core.<*> ( o Core..:? "excludedUserLists"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
+            Core.<*> ( o Core..:? "excludedVerticals"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
+            Core.<*> ( o Core..:? "geoCriteriaIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "isActive")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "adexchangebuyer#pretargetingConfig"
@@ -3538,16 +3554,30 @@ instance Core.FromJSON PretargetingConfig where
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "minimumViewabilityDecile")
-            Core.<*> (o Core..:? "mobileCarriers")
-            Core.<*> (o Core..:? "mobileDevices")
-            Core.<*> (o Core..:? "mobileOperatingSystemVersions")
+            Core.<*> ( o Core..:? "mobileCarriers"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
+            Core.<*> ( o Core..:? "mobileDevices"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
+            Core.<*> ( o Core..:? "mobileOperatingSystemVersions"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "placements")
             Core.<*> (o Core..:? "platforms")
-            Core.<*> (o Core..:? "supportedCreativeAttributes")
+            Core.<*> ( o Core..:? "supportedCreativeAttributes"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "userIdentifierDataRequired")
-            Core.<*> (o Core..:? "userLists")
-            Core.<*> (o Core..:? "vendorTypes")
-            Core.<*> (o Core..:? "verticals")
+            Core.<*> ( o Core..:? "userLists"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
+            Core.<*> ( o Core..:? "vendorTypes"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
+            Core.<*> ( o Core..:? "verticals"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "videoPlayerSizes")
       )
 
@@ -3563,16 +3593,22 @@ instance Core.ToJSON PretargetingConfig where
             ("creativeType" Core..=) Core.<$> creativeType,
             ("dimensions" Core..=) Core.<$> dimensions,
             ("excludedContentLabels" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> excludedContentLabels,
             ("excludedGeoCriteriaIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> excludedGeoCriteriaIds,
             ("excludedPlacements" Core..=)
               Core.<$> excludedPlacements,
             ("excludedUserLists" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> excludedUserLists,
             ("excludedVerticals" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> excludedVerticals,
-            ("geoCriteriaIds" Core..=) Core.<$> geoCriteriaIds,
+            ("geoCriteriaIds" Core..=)
+              Core.. Core.fmap Core.AsText
+              Core.<$> geoCriteriaIds,
             ("isActive" Core..=) Core.<$> isActive,
             Core.Just ("kind" Core..= kind),
             ("languages" Core..=) Core.<$> languages,
@@ -3580,19 +3616,28 @@ instance Core.ToJSON PretargetingConfig where
               Core.<$> maximumQps,
             ("minimumViewabilityDecile" Core..=)
               Core.<$> minimumViewabilityDecile,
-            ("mobileCarriers" Core..=) Core.<$> mobileCarriers,
-            ("mobileDevices" Core..=) Core.<$> mobileDevices,
+            ("mobileCarriers" Core..=)
+              Core.. Core.fmap Core.AsText
+              Core.<$> mobileCarriers,
+            ("mobileDevices" Core..=)
+              Core.. Core.fmap Core.AsText
+              Core.<$> mobileDevices,
             ("mobileOperatingSystemVersions" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> mobileOperatingSystemVersions,
             ("placements" Core..=) Core.<$> placements,
             ("platforms" Core..=) Core.<$> platforms,
             ("supportedCreativeAttributes" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> supportedCreativeAttributes,
             ("userIdentifierDataRequired" Core..=)
               Core.<$> userIdentifierDataRequired,
-            ("userLists" Core..=) Core.<$> userLists,
-            ("vendorTypes" Core..=) Core.<$> vendorTypes,
-            ("verticals" Core..=) Core.<$> verticals,
+            ("userLists" Core..=) Core.. Core.fmap Core.AsText
+              Core.<$> userLists,
+            ("vendorTypes" Core..=) Core.. Core.fmap Core.AsText
+              Core.<$> vendorTypes,
+            ("verticals" Core..=) Core.. Core.fmap Core.AsText
+              Core.<$> verticals,
             ("videoPlayerSizes" Core..=)
               Core.<$> videoPlayerSizes
           ]
@@ -4421,7 +4466,9 @@ instance Core.FromJSON PublisherProfileApiProto where
             Core.<*> (o Core..:? "overview")
             Core.<*> (o Core..:? "profileId")
             Core.<*> (o Core..:? "programmaticContact")
-            Core.<*> (o Core..:? "publisherAppIds")
+            Core.<*> ( o Core..:? "publisherAppIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "publisherApps")
             Core.<*> (o Core..:? "publisherDomains")
             Core.<*> (o Core..:? "publisherProfileId")
@@ -4455,7 +4502,9 @@ instance Core.ToJSON PublisherProfileApiProto where
             ("profileId" Core..=) Core.<$> profileId,
             ("programmaticContact" Core..=)
               Core.<$> programmaticContact,
-            ("publisherAppIds" Core..=) Core.<$> publisherAppIds,
+            ("publisherAppIds" Core..=)
+              Core.. Core.fmap Core.AsText
+              Core.<$> publisherAppIds,
             ("publisherApps" Core..=) Core.<$> publisherApps,
             ("publisherDomains" Core..=)
               Core.<$> publisherDomains,

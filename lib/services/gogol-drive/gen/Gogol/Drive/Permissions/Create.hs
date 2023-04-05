@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a permission for a file or shared drive.
+-- Creates a permission for a file or shared drive. For more information on creating permissions, see Share files, folders & drives.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.permissions.create@.
 module Gogol.Drive.Permissions.Create
@@ -62,7 +62,7 @@ type DrivePermissionsCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] Permission
     Core.:> Core.Post '[Core.JSON] Permission
 
--- | Creates a permission for a file or shared drive.
+-- | Creates a permission for a file or shared drive. For more information on creating permissions, see Share files, folders & drives.
 --
 -- /See:/ 'newDrivePermissionsCreate' smart constructor.
 data DrivePermissionsCreate = DrivePermissionsCreate

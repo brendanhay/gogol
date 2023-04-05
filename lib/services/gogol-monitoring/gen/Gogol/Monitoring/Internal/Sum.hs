@@ -102,6 +102,8 @@ module Gogol.Monitoring.Internal.Sum
         ContentMatcher_Matcher_NOTCONTAINSSTRING,
         ContentMatcher_Matcher_MATCHESREGEX,
         ContentMatcher_Matcher_NOTMATCHESREGEX,
+        ContentMatcher_Matcher_MATCHESJSONPATH,
+        ContentMatcher_Matcher_NOTMATCHESJSONPATH,
         ..
       ),
 
@@ -142,6 +144,7 @@ module Gogol.Monitoring.Internal.Sum
     HttpCheck_ContentType
       ( HttpCheck_ContentType_TYPEUNSPECIFIED,
         HttpCheck_ContentType_URLENCODED,
+        HttpCheck_ContentType_USERPROVIDED,
         ..
       ),
 
@@ -158,6 +161,14 @@ module Gogol.Monitoring.Internal.Sum
       ( InternalChecker_State_Unspecified,
         InternalChecker_State_Creating,
         InternalChecker_State_Running,
+        ..
+      ),
+
+    -- * JsonPathMatcher_JsonMatcher
+    JsonPathMatcher_JsonMatcher
+      ( JsonPathMatcher_JsonMatcher_JSONPATHMATCHEROPTIONUNSPECIFIED,
+        JsonPathMatcher_JsonMatcher_EXACTMATCH,
+        JsonPathMatcher_JsonMatcher_REGEXMATCH,
         ..
       ),
 
@@ -306,6 +317,18 @@ module Gogol.Monitoring.Internal.Sum
         ..
       ),
 
+    -- * ResponseStatusCode_StatusClass
+    ResponseStatusCode_StatusClass
+      ( ResponseStatusCode_StatusClass_STATUSCLASSUNSPECIFIED,
+        ResponseStatusCode_StatusClass_STATUSCLASS1XX,
+        ResponseStatusCode_StatusClass_STATUSCLASS2XX,
+        ResponseStatusCode_StatusClass_STATUSCLASS3XX,
+        ResponseStatusCode_StatusClass_STATUSCLASS4XX,
+        ResponseStatusCode_StatusClass_STATUSCLASS5XX,
+        ResponseStatusCode_StatusClass_STATUSCLASSANY,
+        ..
+      ),
+
     -- * ServiceLevelObjective_CalendarPeriod
     ServiceLevelObjective_CalendarPeriod
       ( ServiceLevelObjective_CalendarPeriod_CALENDARPERIODUNSPECIFIED,
@@ -344,6 +367,7 @@ module Gogol.Monitoring.Internal.Sum
     Type_Syntax
       ( Type_Syntax_SYNTAX_PROTO2,
         Type_Syntax_SYNTAX_PROTO3,
+        Type_Syntax_SYNTAXEDITIONS,
         ..
       ),
 
@@ -362,6 +386,9 @@ module Gogol.Monitoring.Internal.Sum
         UptimeCheckConfig_SelectedRegionsItem_Europe,
         UptimeCheckConfig_SelectedRegionsItem_SOUTHAMERICA,
         UptimeCheckConfig_SelectedRegionsItem_ASIAPACIFIC,
+        UptimeCheckConfig_SelectedRegionsItem_USAOREGON,
+        UptimeCheckConfig_SelectedRegionsItem_USAIOWA,
+        UptimeCheckConfig_SelectedRegionsItem_USAVIRGINIA,
         ..
       ),
 
@@ -372,6 +399,9 @@ module Gogol.Monitoring.Internal.Sum
         UptimeCheckIp_Region_Europe,
         UptimeCheckIp_Region_SOUTHAMERICA,
         UptimeCheckIp_Region_ASIAPACIFIC,
+        UptimeCheckIp_Region_USAOREGON,
+        UptimeCheckIp_Region_USAIOWA,
+        UptimeCheckIp_Region_USAVIRGINIA,
         ..
       ),
 
@@ -1033,12 +1063,22 @@ pattern ContentMatcher_Matcher_MATCHESREGEX = ContentMatcher_Matcher "MATCHES_RE
 pattern ContentMatcher_Matcher_NOTMATCHESREGEX :: ContentMatcher_Matcher
 pattern ContentMatcher_Matcher_NOTMATCHESREGEX = ContentMatcher_Matcher "NOT_MATCHES_REGEX"
 
+-- | Selects JSONPath matching. See JsonPathMatcher for details on when the match succeeds. JSONPath matching is only supported for HTTP\/HTTPS checks.
+pattern ContentMatcher_Matcher_MATCHESJSONPATH :: ContentMatcher_Matcher
+pattern ContentMatcher_Matcher_MATCHESJSONPATH = ContentMatcher_Matcher "MATCHES_JSON_PATH"
+
+-- | Selects JSONPath matching. See JsonPathMatcher for details on when the match succeeds. Succeeds when output does NOT match as specified. JSONPath is only supported for HTTP\/HTTPS checks.
+pattern ContentMatcher_Matcher_NOTMATCHESJSONPATH :: ContentMatcher_Matcher
+pattern ContentMatcher_Matcher_NOTMATCHESJSONPATH = ContentMatcher_Matcher "NOT_MATCHES_JSON_PATH"
+
 {-# COMPLETE
   ContentMatcher_Matcher_CONTENTMATCHEROPTIONUNSPECIFIED,
   ContentMatcher_Matcher_CONTAINSSTRING,
   ContentMatcher_Matcher_NOTCONTAINSSTRING,
   ContentMatcher_Matcher_MATCHESREGEX,
   ContentMatcher_Matcher_NOTMATCHESREGEX,
+  ContentMatcher_Matcher_MATCHESJSONPATH,
+  ContentMatcher_Matcher_NOTMATCHESJSONPATH,
   ContentMatcher_Matcher
   #-}
 
@@ -1212,9 +1252,14 @@ pattern HttpCheck_ContentType_TYPEUNSPECIFIED = HttpCheck_ContentType "TYPE_UNSP
 pattern HttpCheck_ContentType_URLENCODED :: HttpCheck_ContentType
 pattern HttpCheck_ContentType_URLENCODED = HttpCheck_ContentType "URL_ENCODED"
 
+-- | body is in custom/content/type form. Equivalent to setting the Content-Type to the contents of custom/content/type in the HTTP request.
+pattern HttpCheck_ContentType_USERPROVIDED :: HttpCheck_ContentType
+pattern HttpCheck_ContentType_USERPROVIDED = HttpCheck_ContentType "USER_PROVIDED"
+
 {-# COMPLETE
   HttpCheck_ContentType_TYPEUNSPECIFIED,
   HttpCheck_ContentType_URLENCODED,
+  HttpCheck_ContentType_USERPROVIDED,
   HttpCheck_ContentType
   #-}
 
@@ -1280,6 +1325,38 @@ pattern InternalChecker_State_Running = InternalChecker_State "RUNNING"
   InternalChecker_State_Creating,
   InternalChecker_State_Running,
   InternalChecker_State
+  #-}
+
+-- | The type of JSONPath match that will be applied to the JSON output (ContentMatcher.content)
+newtype JsonPathMatcher_JsonMatcher = JsonPathMatcher_JsonMatcher {fromJsonPathMatcher_JsonMatcher :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | No JSONPath matcher type specified (not valid).
+pattern JsonPathMatcher_JsonMatcher_JSONPATHMATCHEROPTIONUNSPECIFIED :: JsonPathMatcher_JsonMatcher
+pattern JsonPathMatcher_JsonMatcher_JSONPATHMATCHEROPTIONUNSPECIFIED = JsonPathMatcher_JsonMatcher "JSON_PATH_MATCHER_OPTION_UNSPECIFIED"
+
+-- | Selects \'exact string\' matching. The match succeeds if the content at the json_path within the output is exactly the same as the content string.
+pattern JsonPathMatcher_JsonMatcher_EXACTMATCH :: JsonPathMatcher_JsonMatcher
+pattern JsonPathMatcher_JsonMatcher_EXACTMATCH = JsonPathMatcher_JsonMatcher "EXACT_MATCH"
+
+-- | Selects regular-expression matching. The match succeeds if the content at the json_path within the output matches the regular expression specified in the content string.
+pattern JsonPathMatcher_JsonMatcher_REGEXMATCH :: JsonPathMatcher_JsonMatcher
+pattern JsonPathMatcher_JsonMatcher_REGEXMATCH = JsonPathMatcher_JsonMatcher "REGEX_MATCH"
+
+{-# COMPLETE
+  JsonPathMatcher_JsonMatcher_JSONPATHMATCHEROPTIONUNSPECIFIED,
+  JsonPathMatcher_JsonMatcher_EXACTMATCH,
+  JsonPathMatcher_JsonMatcher_REGEXMATCH,
+  JsonPathMatcher_JsonMatcher
   #-}
 
 -- | The type of data that can be assigned to the label.
@@ -1590,7 +1667,7 @@ pattern MetricThreshold_EvaluationMissingData_EVALUATIONMISSINGDATAUNSPECIFIED =
 pattern MetricThreshold_EvaluationMissingData_EVALUATIONMISSINGDATAINACTIVE :: MetricThreshold_EvaluationMissingData
 pattern MetricThreshold_EvaluationMissingData_EVALUATIONMISSINGDATAINACTIVE = MetricThreshold_EvaluationMissingData "EVALUATION_MISSING_DATA_INACTIVE"
 
--- | If there is no data to evaluate the condition, then evaluate the condition as true. The default for conditions with a duration value.
+-- | If there is no data to evaluate the condition, then evaluate the condition as true.
 pattern MetricThreshold_EvaluationMissingData_EVALUATIONMISSINGDATAACTIVE :: MetricThreshold_EvaluationMissingData
 pattern MetricThreshold_EvaluationMissingData_EVALUATIONMISSINGDATAACTIVE = MetricThreshold_EvaluationMissingData "EVALUATION_MISSING_DATA_ACTIVE"
 
@@ -1684,7 +1761,7 @@ pattern MonitoringQueryLanguageCondition_EvaluationMissingData_EVALUATIONMISSING
 pattern MonitoringQueryLanguageCondition_EvaluationMissingData_EVALUATIONMISSINGDATAINACTIVE :: MonitoringQueryLanguageCondition_EvaluationMissingData
 pattern MonitoringQueryLanguageCondition_EvaluationMissingData_EVALUATIONMISSINGDATAINACTIVE = MonitoringQueryLanguageCondition_EvaluationMissingData "EVALUATION_MISSING_DATA_INACTIVE"
 
--- | If there is no data to evaluate the condition, then evaluate the condition as true. The default for conditions with a duration value.
+-- | If there is no data to evaluate the condition, then evaluate the condition as true.
 pattern MonitoringQueryLanguageCondition_EvaluationMissingData_EVALUATIONMISSINGDATAACTIVE :: MonitoringQueryLanguageCondition_EvaluationMissingData
 pattern MonitoringQueryLanguageCondition_EvaluationMissingData_EVALUATIONMISSINGDATAACTIVE = MonitoringQueryLanguageCondition_EvaluationMissingData "EVALUATION_MISSING_DATA_ACTIVE"
 
@@ -1805,11 +1882,11 @@ newtype NotificationChannelDescriptor_SupportedTiersItem = NotificationChannelDe
 pattern NotificationChannelDescriptor_SupportedTiersItem_SERVICETIERUNSPECIFIED :: NotificationChannelDescriptor_SupportedTiersItem
 pattern NotificationChannelDescriptor_SupportedTiersItem_SERVICETIERUNSPECIFIED = NotificationChannelDescriptor_SupportedTiersItem "SERVICE_TIER_UNSPECIFIED"
 
--- | The Stackdriver Basic tier, a free tier of service that provides basic features, a moderate allotment of logs, and access to built-in metrics. A number of features are not available in this tier. For more details, see the service tiers documentation (https:\/\/cloud.google.com\/monitoring\/workspaces\/tiers).
+-- | The Cloud Monitoring Basic tier, a free tier of service that provides basic features, a moderate allotment of logs, and access to built-in metrics. A number of features are not available in this tier. For more details, see the service tiers documentation (https:\/\/cloud.google.com\/monitoring\/workspaces\/tiers).
 pattern NotificationChannelDescriptor_SupportedTiersItem_SERVICETIERBASIC :: NotificationChannelDescriptor_SupportedTiersItem
 pattern NotificationChannelDescriptor_SupportedTiersItem_SERVICETIERBASIC = NotificationChannelDescriptor_SupportedTiersItem "SERVICE_TIER_BASIC"
 
--- | The Stackdriver Premium tier, a higher, more expensive tier of service that provides access to all Stackdriver features, lets you use Stackdriver with AWS accounts, and has a larger allotments for logs and metrics. For more details, see the service tiers documentation (https:\/\/cloud.google.com\/monitoring\/workspaces\/tiers).
+-- | The Cloud Monitoring Premium tier, a higher, more expensive tier of service that provides access to all Cloud Monitoring features, lets you use Cloud Monitoring with AWS accounts, and has a larger allotments for logs and metrics. For more details, see the service tiers documentation (https:\/\/cloud.google.com\/monitoring\/workspaces\/tiers).
 pattern NotificationChannelDescriptor_SupportedTiersItem_SERVICETIERPREMIUM :: NotificationChannelDescriptor_SupportedTiersItem
 pattern NotificationChannelDescriptor_SupportedTiersItem_SERVICETIERPREMIUM = NotificationChannelDescriptor_SupportedTiersItem "SERVICE_TIER_PREMIUM"
 
@@ -1892,6 +1969,58 @@ pattern ResourceGroup_ResourceType_AWSELBLOADBALANCER = ResourceGroup_ResourceTy
   ResourceGroup_ResourceType_Instance,
   ResourceGroup_ResourceType_AWSELBLOADBALANCER,
   ResourceGroup_ResourceType
+  #-}
+
+-- | A class of status codes to accept.
+newtype ResponseStatusCode_StatusClass = ResponseStatusCode_StatusClass {fromResponseStatusCode_StatusClass :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value that matches no status codes.
+pattern ResponseStatusCode_StatusClass_STATUSCLASSUNSPECIFIED :: ResponseStatusCode_StatusClass
+pattern ResponseStatusCode_StatusClass_STATUSCLASSUNSPECIFIED = ResponseStatusCode_StatusClass "STATUS_CLASS_UNSPECIFIED"
+
+-- | The class of status codes between 100 and 199.
+pattern ResponseStatusCode_StatusClass_STATUSCLASS1XX :: ResponseStatusCode_StatusClass
+pattern ResponseStatusCode_StatusClass_STATUSCLASS1XX = ResponseStatusCode_StatusClass "STATUS_CLASS_1XX"
+
+-- | The class of status codes between 200 and 299.
+pattern ResponseStatusCode_StatusClass_STATUSCLASS2XX :: ResponseStatusCode_StatusClass
+pattern ResponseStatusCode_StatusClass_STATUSCLASS2XX = ResponseStatusCode_StatusClass "STATUS_CLASS_2XX"
+
+-- | The class of status codes between 300 and 399.
+pattern ResponseStatusCode_StatusClass_STATUSCLASS3XX :: ResponseStatusCode_StatusClass
+pattern ResponseStatusCode_StatusClass_STATUSCLASS3XX = ResponseStatusCode_StatusClass "STATUS_CLASS_3XX"
+
+-- | The class of status codes between 400 and 499.
+pattern ResponseStatusCode_StatusClass_STATUSCLASS4XX :: ResponseStatusCode_StatusClass
+pattern ResponseStatusCode_StatusClass_STATUSCLASS4XX = ResponseStatusCode_StatusClass "STATUS_CLASS_4XX"
+
+-- | The class of status codes between 500 and 599.
+pattern ResponseStatusCode_StatusClass_STATUSCLASS5XX :: ResponseStatusCode_StatusClass
+pattern ResponseStatusCode_StatusClass_STATUSCLASS5XX = ResponseStatusCode_StatusClass "STATUS_CLASS_5XX"
+
+-- | The class of all status codes.
+pattern ResponseStatusCode_StatusClass_STATUSCLASSANY :: ResponseStatusCode_StatusClass
+pattern ResponseStatusCode_StatusClass_STATUSCLASSANY = ResponseStatusCode_StatusClass "STATUS_CLASS_ANY"
+
+{-# COMPLETE
+  ResponseStatusCode_StatusClass_STATUSCLASSUNSPECIFIED,
+  ResponseStatusCode_StatusClass_STATUSCLASS1XX,
+  ResponseStatusCode_StatusClass_STATUSCLASS2XX,
+  ResponseStatusCode_StatusClass_STATUSCLASS3XX,
+  ResponseStatusCode_StatusClass_STATUSCLASS4XX,
+  ResponseStatusCode_StatusClass_STATUSCLASS5XX,
+  ResponseStatusCode_StatusClass_STATUSCLASSANY,
+  ResponseStatusCode_StatusClass
   #-}
 
 -- | A calendar period, semantically \"since the start of the current \". At this time, only DAY, WEEK, FORTNIGHT, and MONTH are supported.
@@ -2061,9 +2190,14 @@ pattern Type_Syntax_SYNTAX_PROTO2 = Type_Syntax "SYNTAX_PROTO2"
 pattern Type_Syntax_SYNTAX_PROTO3 :: Type_Syntax
 pattern Type_Syntax_SYNTAX_PROTO3 = Type_Syntax "SYNTAX_PROTO3"
 
+-- | Syntax editions.
+pattern Type_Syntax_SYNTAXEDITIONS :: Type_Syntax
+pattern Type_Syntax_SYNTAXEDITIONS = Type_Syntax "SYNTAX_EDITIONS"
+
 {-# COMPLETE
   Type_Syntax_SYNTAX_PROTO2,
   Type_Syntax_SYNTAX_PROTO3,
+  Type_Syntax_SYNTAXEDITIONS,
   Type_Syntax
   #-}
 
@@ -2131,12 +2265,27 @@ pattern UptimeCheckConfig_SelectedRegionsItem_SOUTHAMERICA = UptimeCheckConfig_S
 pattern UptimeCheckConfig_SelectedRegionsItem_ASIAPACIFIC :: UptimeCheckConfig_SelectedRegionsItem
 pattern UptimeCheckConfig_SelectedRegionsItem_ASIAPACIFIC = UptimeCheckConfig_SelectedRegionsItem "ASIA_PACIFIC"
 
+-- | Allows checks to run from locations within the western United States of America
+pattern UptimeCheckConfig_SelectedRegionsItem_USAOREGON :: UptimeCheckConfig_SelectedRegionsItem
+pattern UptimeCheckConfig_SelectedRegionsItem_USAOREGON = UptimeCheckConfig_SelectedRegionsItem "USA_OREGON"
+
+-- | Allows checks to run from locations within the central United States of America
+pattern UptimeCheckConfig_SelectedRegionsItem_USAIOWA :: UptimeCheckConfig_SelectedRegionsItem
+pattern UptimeCheckConfig_SelectedRegionsItem_USAIOWA = UptimeCheckConfig_SelectedRegionsItem "USA_IOWA"
+
+-- | Allows checks to run from locations within the eastern United States of America
+pattern UptimeCheckConfig_SelectedRegionsItem_USAVIRGINIA :: UptimeCheckConfig_SelectedRegionsItem
+pattern UptimeCheckConfig_SelectedRegionsItem_USAVIRGINIA = UptimeCheckConfig_SelectedRegionsItem "USA_VIRGINIA"
+
 {-# COMPLETE
   UptimeCheckConfig_SelectedRegionsItem_REGIONUNSPECIFIED,
   UptimeCheckConfig_SelectedRegionsItem_Usa,
   UptimeCheckConfig_SelectedRegionsItem_Europe,
   UptimeCheckConfig_SelectedRegionsItem_SOUTHAMERICA,
   UptimeCheckConfig_SelectedRegionsItem_ASIAPACIFIC,
+  UptimeCheckConfig_SelectedRegionsItem_USAOREGON,
+  UptimeCheckConfig_SelectedRegionsItem_USAIOWA,
+  UptimeCheckConfig_SelectedRegionsItem_USAVIRGINIA,
   UptimeCheckConfig_SelectedRegionsItem
   #-}
 
@@ -2173,12 +2322,27 @@ pattern UptimeCheckIp_Region_SOUTHAMERICA = UptimeCheckIp_Region "SOUTH_AMERICA"
 pattern UptimeCheckIp_Region_ASIAPACIFIC :: UptimeCheckIp_Region
 pattern UptimeCheckIp_Region_ASIAPACIFIC = UptimeCheckIp_Region "ASIA_PACIFIC"
 
+-- | Allows checks to run from locations within the western United States of America
+pattern UptimeCheckIp_Region_USAOREGON :: UptimeCheckIp_Region
+pattern UptimeCheckIp_Region_USAOREGON = UptimeCheckIp_Region "USA_OREGON"
+
+-- | Allows checks to run from locations within the central United States of America
+pattern UptimeCheckIp_Region_USAIOWA :: UptimeCheckIp_Region
+pattern UptimeCheckIp_Region_USAIOWA = UptimeCheckIp_Region "USA_IOWA"
+
+-- | Allows checks to run from locations within the eastern United States of America
+pattern UptimeCheckIp_Region_USAVIRGINIA :: UptimeCheckIp_Region
+pattern UptimeCheckIp_Region_USAVIRGINIA = UptimeCheckIp_Region "USA_VIRGINIA"
+
 {-# COMPLETE
   UptimeCheckIp_Region_REGIONUNSPECIFIED,
   UptimeCheckIp_Region_Usa,
   UptimeCheckIp_Region_Europe,
   UptimeCheckIp_Region_SOUTHAMERICA,
   UptimeCheckIp_Region_ASIAPACIFIC,
+  UptimeCheckIp_Region_USAOREGON,
+  UptimeCheckIp_Region_USAIOWA,
+  UptimeCheckIp_Region_USAVIRGINIA,
   UptimeCheckIp_Region
   #-}
 

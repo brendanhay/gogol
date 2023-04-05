@@ -53,6 +53,7 @@ type GamesPlayersGetResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "language" Core.Text
+    Core.:> Core.QueryParam "playerIdConsistencyToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -72,6 +73,8 @@ data GamesPlayersGet = GamesPlayersGet
     language :: (Core.Maybe Core.Text),
     -- | A player ID. A value of @me@ may be used in place of the authenticated player\'s ID.
     playerId :: Core.Text,
+    -- | Consistency token of the player id. The call returns a \'not found\' result when the token is present and invalid. Empty value is ignored. See also GlobalPlayerIdConsistencyTokenProto
+    playerIdConsistencyToken :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -91,6 +94,7 @@ newGamesPlayersGet playerId =
       callback = Core.Nothing,
       language = Core.Nothing,
       playerId = playerId,
+      playerIdConsistencyToken = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
@@ -105,6 +109,7 @@ instance Core.GoogleRequest GamesPlayersGet where
       accessToken
       callback
       language
+      playerIdConsistencyToken
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)

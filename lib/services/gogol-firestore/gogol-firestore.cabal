@@ -56,6 +56,8 @@ library
     Gogol.FireStore.Projects.Databases.CollectionGroups.Indexes.Delete
     Gogol.FireStore.Projects.Databases.CollectionGroups.Indexes.Get
     Gogol.FireStore.Projects.Databases.CollectionGroups.Indexes.List
+    Gogol.FireStore.Projects.Databases.Create
+    Gogol.FireStore.Projects.Databases.Delete
     Gogol.FireStore.Projects.Databases.Documents.BatchGet
     Gogol.FireStore.Projects.Databases.Documents.BatchWrite
     Gogol.FireStore.Projects.Databases.Documents.BeginTransaction
@@ -70,6 +72,7 @@ library
     Gogol.FireStore.Projects.Databases.Documents.PartitionQuery
     Gogol.FireStore.Projects.Databases.Documents.Patch
     Gogol.FireStore.Projects.Databases.Documents.Rollback
+    Gogol.FireStore.Projects.Databases.Documents.RunAggregationQuery
     Gogol.FireStore.Projects.Databases.Documents.RunQuery
     Gogol.FireStore.Projects.Databases.Documents.Write
     Gogol.FireStore.Projects.Databases.ExportDocuments
@@ -90,5 +93,5 @@ library
     Gogol.FireStore.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

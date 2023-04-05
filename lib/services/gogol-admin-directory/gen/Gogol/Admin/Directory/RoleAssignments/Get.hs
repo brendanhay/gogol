@@ -70,7 +70,7 @@ data DirectoryRoleAssignmentsGet = DirectoryRoleAssignmentsGet
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Immutable ID of the Google Workspace account.
+    -- | The unique ID for the customer\'s Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, use this field instead of @domain@. You can also use the @my_customer@ alias to represent your account\'s @customerId@. The @customerId@ is also returned as part of the </admin-sdk/directory/v1/reference/users Users> resource. You must provide either the @customer@ or the @domain@ parameter.
     customer :: Core.Text,
     -- | Immutable ID of the role assignment.
     roleAssignmentId :: Core.Text,
@@ -83,7 +83,7 @@ data DirectoryRoleAssignmentsGet = DirectoryRoleAssignmentsGet
 
 -- | Creates a value of 'DirectoryRoleAssignmentsGet' with the minimum fields required to make a request.
 newDirectoryRoleAssignmentsGet ::
-  -- |  Immutable ID of the Google Workspace account. See 'customer'.
+  -- |  The unique ID for the customer\'s Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, use this field instead of @domain@. You can also use the @my_customer@ alias to represent your account\'s @customerId@. The @customerId@ is also returned as part of the </admin-sdk/directory/v1/reference/users Users> resource. You must provide either the @customer@ or the @domain@ parameter. See 'customer'.
   Core.Text ->
   -- |  Immutable ID of the role assignment. See 'roleAssignmentId'.
   Core.Text ->

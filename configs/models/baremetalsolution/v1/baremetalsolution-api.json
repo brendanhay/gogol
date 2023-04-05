@@ -226,49 +226,9 @@
           ]
         }
       }
-    },
-    "projects": {
-      "resources": {
-        "locations": {
-          "resources": {
-            "instances": {
-              "methods": {
-                "resetInstance": {
-                  "description": "Perform an ungraceful, hard reset on a machine (equivalent to shutting the power off, and then turning it back on).",
-                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/instances/{instancesId}:resetInstance",
-                  "httpMethod": "POST",
-                  "id": "baremetalsolution.projects.locations.instances.resetInstance",
-                  "parameterOrder": [
-                    "instance"
-                  ],
-                  "parameters": {
-                    "instance": {
-                      "description": "Required. Name of the instance to reset.",
-                      "location": "path",
-                      "pattern": "^projects/[^/]+/locations/[^/]+/instances/[^/]+$",
-                      "required": true,
-                      "type": "string"
-                    }
-                  },
-                  "path": "v1/{+instance}:resetInstance",
-                  "request": {
-                    "$ref": "ResetInstanceRequest"
-                  },
-                  "response": {
-                    "$ref": "ResetInstanceResponse"
-                  },
-                  "scopes": [
-                    "https://www.googleapis.com/auth/cloud-platform"
-                  ]
-                }
-              }
-            }
-          }
-        }
-      }
     }
   },
-  "revision": "20220118",
+  "revision": "20220921",
   "rootUrl": "https://baremetalsolution.googleapis.com/",
   "schemas": {
     "CancelOperationRequest": {
@@ -278,7 +238,7 @@
       "type": "object"
     },
     "Empty": {
-      "description": "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`.",
+      "description": "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }",
       "id": "Empty",
       "properties": {},
       "type": "object"
@@ -334,18 +294,6 @@
           "type": "object"
         }
       },
-      "type": "object"
-    },
-    "ResetInstanceRequest": {
-      "description": "Request for ResetInstance.",
-      "id": "ResetInstanceRequest",
-      "properties": {},
-      "type": "object"
-    },
-    "ResetInstanceResponse": {
-      "description": "Response for ResetInstance.",
-      "id": "ResetInstanceResponse",
-      "properties": {},
       "type": "object"
     },
     "Status": {

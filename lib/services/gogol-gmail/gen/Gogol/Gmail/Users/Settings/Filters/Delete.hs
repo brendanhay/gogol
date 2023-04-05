@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a filter.
+-- Immediately and permanently deletes the specified filter.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.settings.filters.delete@.
 module Gogol.Gmail.Users.Settings.Filters.Delete
@@ -60,7 +60,7 @@ type GmailUsersSettingsFiltersDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] ()
 
--- | Deletes a filter.
+-- | Immediately and permanently deletes the specified filter.
 --
 -- /See:/ 'newGmailUsersSettingsFiltersDelete' smart constructor.
 data GmailUsersSettingsFiltersDelete = GmailUsersSettingsFiltersDelete

@@ -74,13 +74,13 @@ data CloudSearchIndexingDatasourcesItemsDelete = CloudSearchIndexingDatasourcesI
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Name of connector making this call. Format: datasources\/{source_id}\/connectors\/{ID}
+    -- | The name of connector making this call. Format: datasources\/{source_id}\/connectors\/{ID}
     connectorName :: (Core.Maybe Core.Text),
     -- | If you are asked by Google to help with debugging, set this field. Otherwise, ignore this field.
     debugOptionsEnableDebugging :: (Core.Maybe Core.Bool),
     -- | Required. The RequestMode for this request.
     mode :: (Core.Maybe IndexingDatasourcesItemsDeleteMode),
-    -- | Required. Name of the item to delete. Format: datasources\/{source/id}\/items\/{item/id}
+    -- | Required. The name of the item to delete. Format: datasources\/{source/id}\/items\/{item/id}
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -93,7 +93,7 @@ data CloudSearchIndexingDatasourcesItemsDelete = CloudSearchIndexingDatasourcesI
 
 -- | Creates a value of 'CloudSearchIndexingDatasourcesItemsDelete' with the minimum fields required to make a request.
 newCloudSearchIndexingDatasourcesItemsDelete ::
-  -- |  Required. Name of the item to delete. Format: datasources\/{source/id}\/items\/{item/id} See 'name'.
+  -- |  Required. The name of the item to delete. Format: datasources\/{source/id}\/items\/{item/id} See 'name'.
   Core.Text ->
   CloudSearchIndexingDatasourcesItemsDelete
 newCloudSearchIndexingDatasourcesItemsDelete name =

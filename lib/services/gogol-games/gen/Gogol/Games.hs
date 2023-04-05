@@ -134,6 +134,16 @@ module Gogol.Games
     GamesPlayersGet (..),
     newGamesPlayersGet,
 
+    -- ** games.players.getMultipleApplicationPlayerIds
+    GamesPlayersGetMultipleApplicationPlayerIdsResource,
+    GamesPlayersGetMultipleApplicationPlayerIds (..),
+    newGamesPlayersGetMultipleApplicationPlayerIds,
+
+    -- ** games.players.getScopedPlayerIds
+    GamesPlayersGetScopedPlayerIdsResource,
+    GamesPlayersGetScopedPlayerIds (..),
+    newGamesPlayersGetScopedPlayerIds,
+
     -- ** games.players.list
     GamesPlayersListResource,
     GamesPlayersList (..),
@@ -255,6 +265,10 @@ module Gogol.Games
     ApplicationCategory (..),
     newApplicationCategory,
 
+    -- ** ApplicationPlayerId
+    ApplicationPlayerId (..),
+    newApplicationPlayerId,
+
     -- ** ApplicationVerifyResponse
     ApplicationVerifyResponse (..),
     newApplicationVerifyResponse,
@@ -327,6 +341,10 @@ module Gogol.Games
     -- ** GamesAchievementSetStepsAtLeast
     GamesAchievementSetStepsAtLeast (..),
     newGamesAchievementSetStepsAtLeast,
+
+    -- ** GetMultipleApplicationPlayerIdsResponse
+    GetMultipleApplicationPlayerIdsResponse (..),
+    newGetMultipleApplicationPlayerIdsResponse,
 
     -- ** ImageAsset
     ImageAsset (..),
@@ -470,6 +488,10 @@ module Gogol.Games
     -- ** RevisionCheckResponse_RevisionStatus
     RevisionCheckResponse_RevisionStatus (..),
 
+    -- ** ScopedPlayerIds
+    ScopedPlayerIds (..),
+    newScopedPlayerIds,
+
     -- ** ScoreSubmission
     ScoreSubmission (..),
     newScoreSubmission,
@@ -547,6 +569,8 @@ import Gogol.Games.Leaderboards.List
 import Gogol.Games.Metagame.GetMetagameConfig
 import Gogol.Games.Metagame.ListCategoriesByPlayer
 import Gogol.Games.Players.Get
+import Gogol.Games.Players.GetMultipleApplicationPlayerIds
+import Gogol.Games.Players.GetScopedPlayerIds
 import Gogol.Games.Players.List
 import Gogol.Games.Revisions.Check
 import Gogol.Games.Scores.Get

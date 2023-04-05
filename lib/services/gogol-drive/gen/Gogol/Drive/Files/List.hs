@@ -52,6 +52,7 @@ type DriveFilesListResource =
     Core.:> Core.QueryParam "corpus" FilesListCorpus
     Core.:> Core.QueryParam "driveId" Core.Text
     Core.:> Core.QueryParam "includeItemsFromAllDrives" Core.Bool
+    Core.:> Core.QueryParam "includeLabels" Core.Text
     Core.:> Core.QueryParam "includePermissionsForView" Core.Text
     Core.:> Core.QueryParam "includeTeamDriveItems" Core.Bool
     Core.:> Core.QueryParam "orderBy" Core.Text
@@ -79,6 +80,8 @@ data DriveFilesList = DriveFilesList
     driveId :: (Core.Maybe Core.Text),
     -- | Whether both My Drive and shared drive items should be included in results.
     includeItemsFromAllDrives :: Core.Bool,
+    -- | A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    includeLabels :: (Core.Maybe Core.Text),
     -- | Specifies which additional view\'s permissions to include in the response. Only \'published\' is supported.
     includePermissionsForView :: (Core.Maybe Core.Text),
     -- | Deprecated use includeItemsFromAllDrives instead.
@@ -91,7 +94,7 @@ data DriveFilesList = DriveFilesList
     pageToken :: (Core.Maybe Core.Text),
     -- | A query for filtering the file results. See the \"Search for Files\" guide for supported syntax.
     q :: (Core.Maybe Core.Text),
-    -- | A comma-separated list of spaces to query within the corpus. Supported values are \'drive\' and \'appDataFolder\'.
+    -- | A comma-separated list of spaces to query within the corpora. Supported values are \'drive\' and \'appDataFolder\'.
     spaces :: Core.Text,
     -- | Whether the requesting application supports both My Drives and shared drives.
     supportsAllDrives :: Core.Bool,
@@ -111,6 +114,7 @@ newDriveFilesList =
       corpus = Core.Nothing,
       driveId = Core.Nothing,
       includeItemsFromAllDrives = Core.False,
+      includeLabels = Core.Nothing,
       includePermissionsForView = Core.Nothing,
       includeTeamDriveItems = Core.False,
       orderBy = Core.Nothing,
@@ -141,6 +145,7 @@ instance Core.GoogleRequest DriveFilesList where
       corpus
       driveId
       (Core.Just includeItemsFromAllDrives)
+      includeLabels
       includePermissionsForView
       (Core.Just includeTeamDriveItems)
       orderBy

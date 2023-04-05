@@ -37,6 +37,7 @@ module Gogol.SQLAdmin.Internal.Sum
     ApiWarning_Code
       ( ApiWarning_Code_SQLAPIWARNINGCODEUNSPECIFIED,
         ApiWarning_Code_REGIONUNREACHABLE,
+        ApiWarning_Code_MAXRESULTSEXCEEDSLIMIT,
         ..
       ),
 
@@ -94,19 +95,25 @@ module Gogol.SQLAdmin.Internal.Sum
         ConnectSettings_DatabaseVersion_MYSQL_5_5,
         ConnectSettings_DatabaseVersion_MYSQL_5_6,
         ConnectSettings_DatabaseVersion_MYSQL_5_7,
-        ConnectSettings_DatabaseVersion_POSTGRES_9_6,
-        ConnectSettings_DatabaseVersion_POSTGRES_11,
         ConnectSettings_DatabaseVersion_SQLSERVER2017STANDARD,
         ConnectSettings_DatabaseVersion_SQLSERVER2017ENTERPRISE,
         ConnectSettings_DatabaseVersion_SQLSERVER2017EXPRESS,
         ConnectSettings_DatabaseVersion_SQLSERVER2017WEB,
+        ConnectSettings_DatabaseVersion_POSTGRES_9_6,
         ConnectSettings_DatabaseVersion_POSTGRES_10,
+        ConnectSettings_DatabaseVersion_POSTGRES_11,
         ConnectSettings_DatabaseVersion_POSTGRES_12,
+        ConnectSettings_DatabaseVersion_POSTGRES_13,
+        ConnectSettings_DatabaseVersion_POSTGRES_14,
         ConnectSettings_DatabaseVersion_MYSQL_8_0,
         ConnectSettings_DatabaseVersion_MYSQL_8_0_18,
         ConnectSettings_DatabaseVersion_MYSQL_8_0_26,
-        ConnectSettings_DatabaseVersion_POSTGRES_13,
-        ConnectSettings_DatabaseVersion_POSTGRES_14,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_27,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_28,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_29,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_30,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_31,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_32,
         ConnectSettings_DatabaseVersion_SQLSERVER2019STANDARD,
         ConnectSettings_DatabaseVersion_SQLSERVER2019ENTERPRISE,
         ConnectSettings_DatabaseVersion_SQLSERVER2019EXPRESS,
@@ -130,19 +137,25 @@ module Gogol.SQLAdmin.Internal.Sum
         DatabaseInstance_DatabaseVersion_MYSQL_5_5,
         DatabaseInstance_DatabaseVersion_MYSQL_5_6,
         DatabaseInstance_DatabaseVersion_MYSQL_5_7,
-        DatabaseInstance_DatabaseVersion_POSTGRES_9_6,
-        DatabaseInstance_DatabaseVersion_POSTGRES_11,
         DatabaseInstance_DatabaseVersion_SQLSERVER2017STANDARD,
         DatabaseInstance_DatabaseVersion_SQLSERVER2017ENTERPRISE,
         DatabaseInstance_DatabaseVersion_SQLSERVER2017EXPRESS,
         DatabaseInstance_DatabaseVersion_SQLSERVER2017WEB,
+        DatabaseInstance_DatabaseVersion_POSTGRES_9_6,
         DatabaseInstance_DatabaseVersion_POSTGRES_10,
+        DatabaseInstance_DatabaseVersion_POSTGRES_11,
         DatabaseInstance_DatabaseVersion_POSTGRES_12,
+        DatabaseInstance_DatabaseVersion_POSTGRES_13,
+        DatabaseInstance_DatabaseVersion_POSTGRES_14,
         DatabaseInstance_DatabaseVersion_MYSQL_8_0,
         DatabaseInstance_DatabaseVersion_MYSQL_8_0_18,
         DatabaseInstance_DatabaseVersion_MYSQL_8_0_26,
-        DatabaseInstance_DatabaseVersion_POSTGRES_13,
-        DatabaseInstance_DatabaseVersion_POSTGRES_14,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_27,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_28,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_29,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_30,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_31,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_32,
         DatabaseInstance_DatabaseVersion_SQLSERVER2019STANDARD,
         DatabaseInstance_DatabaseVersion_SQLSERVER2019ENTERPRISE,
         DatabaseInstance_DatabaseVersion_SQLSERVER2019EXPRESS,
@@ -198,19 +211,25 @@ module Gogol.SQLAdmin.Internal.Sum
         Flag_AppliesToItem_MYSQL_5_5,
         Flag_AppliesToItem_MYSQL_5_6,
         Flag_AppliesToItem_MYSQL_5_7,
-        Flag_AppliesToItem_POSTGRES_9_6,
-        Flag_AppliesToItem_POSTGRES_11,
         Flag_AppliesToItem_SQLSERVER2017STANDARD,
         Flag_AppliesToItem_SQLSERVER2017ENTERPRISE,
         Flag_AppliesToItem_SQLSERVER2017EXPRESS,
         Flag_AppliesToItem_SQLSERVER2017WEB,
+        Flag_AppliesToItem_POSTGRES_9_6,
         Flag_AppliesToItem_POSTGRES_10,
+        Flag_AppliesToItem_POSTGRES_11,
         Flag_AppliesToItem_POSTGRES_12,
+        Flag_AppliesToItem_POSTGRES_13,
+        Flag_AppliesToItem_POSTGRES_14,
         Flag_AppliesToItem_MYSQL_8_0,
         Flag_AppliesToItem_MYSQL_8_0_18,
         Flag_AppliesToItem_MYSQL_8_0_26,
-        Flag_AppliesToItem_POSTGRES_13,
-        Flag_AppliesToItem_POSTGRES_14,
+        Flag_AppliesToItem_MYSQL_8_0_27,
+        Flag_AppliesToItem_MYSQL_8_0_28,
+        Flag_AppliesToItem_MYSQL_8_0_29,
+        Flag_AppliesToItem_MYSQL_8_0_30,
+        Flag_AppliesToItem_MYSQL_8_0_31,
+        Flag_AppliesToItem_MYSQL_8_0_32,
         Flag_AppliesToItem_SQLSERVER2019STANDARD,
         Flag_AppliesToItem_SQLSERVER2019ENTERPRISE,
         Flag_AppliesToItem_SQLSERVER2019EXPRESS,
@@ -295,6 +314,9 @@ module Gogol.SQLAdmin.Internal.Sum
         Operation_OperationType_CREATECLONE,
         Operation_OperationType_RESCHEDULEMAINTENANCE,
         Operation_OperationType_STARTEXTERNALSYNC,
+        Operation_OperationType_LOGCLEANUP,
+        Operation_OperationType_AUTORESTART,
+        Operation_OperationType_Reencrypt,
         ..
       ),
 
@@ -337,6 +359,14 @@ module Gogol.SQLAdmin.Internal.Sum
       ( Settings_AvailabilityType_SQLAVAILABILITYTYPEUNSPECIFIED,
         Settings_AvailabilityType_Zonal,
         Settings_AvailabilityType_Regional,
+        ..
+      ),
+
+    -- * Settings_ConnectorEnforcement
+    Settings_ConnectorEnforcement
+      ( Settings_ConnectorEnforcement_CONNECTORENFORCEMENTUNSPECIFIED,
+        Settings_ConnectorEnforcement_NOTREQUIRED,
+        Settings_ConnectorEnforcement_Required,
         ..
       ),
 
@@ -393,6 +423,9 @@ module Gogol.SQLAdmin.Internal.Sum
         SqlExternalSyncSettingError_Type_PRIMARYALREADYSETUP,
         SqlExternalSyncSettingError_Type_UNSUPPORTEDBINLOGFORMAT,
         SqlExternalSyncSettingError_Type_BINLOGRETENTIONSETTING,
+        SqlExternalSyncSettingError_Type_UNSUPPORTEDSTORAGEENGINE,
+        SqlExternalSyncSettingError_Type_LIMITEDSUPPORTTABLES,
+        SqlExternalSyncSettingError_Type_EXISTINGDATAINREPLICA,
         ..
       ),
 
@@ -417,6 +450,15 @@ module Gogol.SQLAdmin.Internal.Sum
       ( SqlOutOfDiskReport_SqlOutOfDiskState_SQLOUTOFDISKSTATEUNSPECIFIED,
         SqlOutOfDiskReport_SqlOutOfDiskState_Normal,
         SqlOutOfDiskReport_SqlOutOfDiskState_SOFTSHUTDOWN,
+        ..
+      ),
+
+    -- * User_DualPasswordType
+    User_DualPasswordType
+      ( User_DualPasswordType_DUALPASSWORDTYPEUNSPECIFIED,
+        User_DualPasswordType_NOMODIFYDUALPASSWORD,
+        User_DualPasswordType_NODUALPASSWORD,
+        User_DualPasswordType_DUALPASSWORD,
         ..
       ),
 
@@ -480,9 +522,14 @@ pattern ApiWarning_Code_SQLAPIWARNINGCODEUNSPECIFIED = ApiWarning_Code "SQL_API_
 pattern ApiWarning_Code_REGIONUNREACHABLE :: ApiWarning_Code
 pattern ApiWarning_Code_REGIONUNREACHABLE = ApiWarning_Code "REGION_UNREACHABLE"
 
+-- | Warning when user provided maxResults parameter exceeds the limit. The returned result set may be incomplete.
+pattern ApiWarning_Code_MAXRESULTSEXCEEDSLIMIT :: ApiWarning_Code
+pattern ApiWarning_Code_MAXRESULTSEXCEEDSLIMIT = ApiWarning_Code "MAX_RESULTS_EXCEEDS_LIMIT"
+
 {-# COMPLETE
   ApiWarning_Code_SQLAPIWARNINGCODEUNSPECIFIED,
   ApiWarning_Code_REGIONUNREACHABLE,
+  ApiWarning_Code_MAXRESULTSEXCEEDSLIMIT,
   ApiWarning_Code
   #-}
 
@@ -612,7 +659,7 @@ pattern BackupRun_Status_Deleted = BackupRun_Status "DELETED"
   BackupRun_Status
   #-}
 
--- | The type of this run; can be either \"AUTOMATED\" or \"ON/DEMAND\". This field defaults to \"ON/DEMAND\" and is ignored, when specified for insert requests.
+-- | The type of this run; can be either \"AUTOMATED\" or \"ON/DEMAND\" or \"FINAL\". This field defaults to \"ON/DEMAND\" and is ignored, when specified for insert requests.
 newtype BackupRun_Type = BackupRun_Type {fromBackupRun_Type :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -714,14 +761,6 @@ pattern ConnectSettings_DatabaseVersion_MYSQL_5_6 = ConnectSettings_DatabaseVers
 pattern ConnectSettings_DatabaseVersion_MYSQL_5_7 :: ConnectSettings_DatabaseVersion
 pattern ConnectSettings_DatabaseVersion_MYSQL_5_7 = ConnectSettings_DatabaseVersion "MYSQL_5_7"
 
--- | The database version is PostgreSQL 9.6.
-pattern ConnectSettings_DatabaseVersion_POSTGRES_9_6 :: ConnectSettings_DatabaseVersion
-pattern ConnectSettings_DatabaseVersion_POSTGRES_9_6 = ConnectSettings_DatabaseVersion "POSTGRES_9_6"
-
--- | The database version is PostgreSQL 11.
-pattern ConnectSettings_DatabaseVersion_POSTGRES_11 :: ConnectSettings_DatabaseVersion
-pattern ConnectSettings_DatabaseVersion_POSTGRES_11 = ConnectSettings_DatabaseVersion "POSTGRES_11"
-
 -- | The database version is SQL Server 2017 Standard.
 pattern ConnectSettings_DatabaseVersion_SQLSERVER2017STANDARD :: ConnectSettings_DatabaseVersion
 pattern ConnectSettings_DatabaseVersion_SQLSERVER2017STANDARD = ConnectSettings_DatabaseVersion "SQLSERVER_2017_STANDARD"
@@ -738,13 +777,29 @@ pattern ConnectSettings_DatabaseVersion_SQLSERVER2017EXPRESS = ConnectSettings_D
 pattern ConnectSettings_DatabaseVersion_SQLSERVER2017WEB :: ConnectSettings_DatabaseVersion
 pattern ConnectSettings_DatabaseVersion_SQLSERVER2017WEB = ConnectSettings_DatabaseVersion "SQLSERVER_2017_WEB"
 
+-- | The database version is PostgreSQL 9.6.
+pattern ConnectSettings_DatabaseVersion_POSTGRES_9_6 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_POSTGRES_9_6 = ConnectSettings_DatabaseVersion "POSTGRES_9_6"
+
 -- | The database version is PostgreSQL 10.
 pattern ConnectSettings_DatabaseVersion_POSTGRES_10 :: ConnectSettings_DatabaseVersion
 pattern ConnectSettings_DatabaseVersion_POSTGRES_10 = ConnectSettings_DatabaseVersion "POSTGRES_10"
 
+-- | The database version is PostgreSQL 11.
+pattern ConnectSettings_DatabaseVersion_POSTGRES_11 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_POSTGRES_11 = ConnectSettings_DatabaseVersion "POSTGRES_11"
+
 -- | The database version is PostgreSQL 12.
 pattern ConnectSettings_DatabaseVersion_POSTGRES_12 :: ConnectSettings_DatabaseVersion
 pattern ConnectSettings_DatabaseVersion_POSTGRES_12 = ConnectSettings_DatabaseVersion "POSTGRES_12"
+
+-- | The database version is PostgreSQL 13.
+pattern ConnectSettings_DatabaseVersion_POSTGRES_13 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_POSTGRES_13 = ConnectSettings_DatabaseVersion "POSTGRES_13"
+
+-- | The database version is PostgreSQL 14.
+pattern ConnectSettings_DatabaseVersion_POSTGRES_14 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_POSTGRES_14 = ConnectSettings_DatabaseVersion "POSTGRES_14"
 
 -- | The database version is MySQL 8.
 pattern ConnectSettings_DatabaseVersion_MYSQL_8_0 :: ConnectSettings_DatabaseVersion
@@ -758,13 +813,29 @@ pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_18 = ConnectSettings_DatabaseV
 pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_26 :: ConnectSettings_DatabaseVersion
 pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_26 = ConnectSettings_DatabaseVersion "MYSQL_8_0_26"
 
--- | The database version is PostgreSQL 13.
-pattern ConnectSettings_DatabaseVersion_POSTGRES_13 :: ConnectSettings_DatabaseVersion
-pattern ConnectSettings_DatabaseVersion_POSTGRES_13 = ConnectSettings_DatabaseVersion "POSTGRES_13"
+-- | The database major version is MySQL 8.0 and the minor version is 27.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_27 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_27 = ConnectSettings_DatabaseVersion "MYSQL_8_0_27"
 
--- | The database version is PostgreSQL 14.
-pattern ConnectSettings_DatabaseVersion_POSTGRES_14 :: ConnectSettings_DatabaseVersion
-pattern ConnectSettings_DatabaseVersion_POSTGRES_14 = ConnectSettings_DatabaseVersion "POSTGRES_14"
+-- | The database major version is MySQL 8.0 and the minor version is 28.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_28 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_28 = ConnectSettings_DatabaseVersion "MYSQL_8_0_28"
+
+-- | The database major version is MySQL 8.0 and the minor version is 29.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_29 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_29 = ConnectSettings_DatabaseVersion "MYSQL_8_0_29"
+
+-- | The database major version is MySQL 8.0 and the minor version is 30.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_30 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_30 = ConnectSettings_DatabaseVersion "MYSQL_8_0_30"
+
+-- | The database major version is MySQL 8.0 and the minor version is 31.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_31 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_31 = ConnectSettings_DatabaseVersion "MYSQL_8_0_31"
+
+-- | The database major version is MySQL 8.0 and the minor version is 32.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_32 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_32 = ConnectSettings_DatabaseVersion "MYSQL_8_0_32"
 
 -- | The database version is SQL Server 2019 Standard.
 pattern ConnectSettings_DatabaseVersion_SQLSERVER2019STANDARD :: ConnectSettings_DatabaseVersion
@@ -788,19 +859,25 @@ pattern ConnectSettings_DatabaseVersion_SQLSERVER2019WEB = ConnectSettings_Datab
   ConnectSettings_DatabaseVersion_MYSQL_5_5,
   ConnectSettings_DatabaseVersion_MYSQL_5_6,
   ConnectSettings_DatabaseVersion_MYSQL_5_7,
-  ConnectSettings_DatabaseVersion_POSTGRES_9_6,
-  ConnectSettings_DatabaseVersion_POSTGRES_11,
   ConnectSettings_DatabaseVersion_SQLSERVER2017STANDARD,
   ConnectSettings_DatabaseVersion_SQLSERVER2017ENTERPRISE,
   ConnectSettings_DatabaseVersion_SQLSERVER2017EXPRESS,
   ConnectSettings_DatabaseVersion_SQLSERVER2017WEB,
+  ConnectSettings_DatabaseVersion_POSTGRES_9_6,
   ConnectSettings_DatabaseVersion_POSTGRES_10,
+  ConnectSettings_DatabaseVersion_POSTGRES_11,
   ConnectSettings_DatabaseVersion_POSTGRES_12,
+  ConnectSettings_DatabaseVersion_POSTGRES_13,
+  ConnectSettings_DatabaseVersion_POSTGRES_14,
   ConnectSettings_DatabaseVersion_MYSQL_8_0,
   ConnectSettings_DatabaseVersion_MYSQL_8_0_18,
   ConnectSettings_DatabaseVersion_MYSQL_8_0_26,
-  ConnectSettings_DatabaseVersion_POSTGRES_13,
-  ConnectSettings_DatabaseVersion_POSTGRES_14,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_27,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_28,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_29,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_30,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_31,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_32,
   ConnectSettings_DatabaseVersion_SQLSERVER2019STANDARD,
   ConnectSettings_DatabaseVersion_SQLSERVER2019ENTERPRISE,
   ConnectSettings_DatabaseVersion_SQLSERVER2019EXPRESS,
@@ -878,14 +955,6 @@ pattern DatabaseInstance_DatabaseVersion_MYSQL_5_6 = DatabaseInstance_DatabaseVe
 pattern DatabaseInstance_DatabaseVersion_MYSQL_5_7 :: DatabaseInstance_DatabaseVersion
 pattern DatabaseInstance_DatabaseVersion_MYSQL_5_7 = DatabaseInstance_DatabaseVersion "MYSQL_5_7"
 
--- | The database version is PostgreSQL 9.6.
-pattern DatabaseInstance_DatabaseVersion_POSTGRES_9_6 :: DatabaseInstance_DatabaseVersion
-pattern DatabaseInstance_DatabaseVersion_POSTGRES_9_6 = DatabaseInstance_DatabaseVersion "POSTGRES_9_6"
-
--- | The database version is PostgreSQL 11.
-pattern DatabaseInstance_DatabaseVersion_POSTGRES_11 :: DatabaseInstance_DatabaseVersion
-pattern DatabaseInstance_DatabaseVersion_POSTGRES_11 = DatabaseInstance_DatabaseVersion "POSTGRES_11"
-
 -- | The database version is SQL Server 2017 Standard.
 pattern DatabaseInstance_DatabaseVersion_SQLSERVER2017STANDARD :: DatabaseInstance_DatabaseVersion
 pattern DatabaseInstance_DatabaseVersion_SQLSERVER2017STANDARD = DatabaseInstance_DatabaseVersion "SQLSERVER_2017_STANDARD"
@@ -902,13 +971,29 @@ pattern DatabaseInstance_DatabaseVersion_SQLSERVER2017EXPRESS = DatabaseInstance
 pattern DatabaseInstance_DatabaseVersion_SQLSERVER2017WEB :: DatabaseInstance_DatabaseVersion
 pattern DatabaseInstance_DatabaseVersion_SQLSERVER2017WEB = DatabaseInstance_DatabaseVersion "SQLSERVER_2017_WEB"
 
+-- | The database version is PostgreSQL 9.6.
+pattern DatabaseInstance_DatabaseVersion_POSTGRES_9_6 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_POSTGRES_9_6 = DatabaseInstance_DatabaseVersion "POSTGRES_9_6"
+
 -- | The database version is PostgreSQL 10.
 pattern DatabaseInstance_DatabaseVersion_POSTGRES_10 :: DatabaseInstance_DatabaseVersion
 pattern DatabaseInstance_DatabaseVersion_POSTGRES_10 = DatabaseInstance_DatabaseVersion "POSTGRES_10"
 
+-- | The database version is PostgreSQL 11.
+pattern DatabaseInstance_DatabaseVersion_POSTGRES_11 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_POSTGRES_11 = DatabaseInstance_DatabaseVersion "POSTGRES_11"
+
 -- | The database version is PostgreSQL 12.
 pattern DatabaseInstance_DatabaseVersion_POSTGRES_12 :: DatabaseInstance_DatabaseVersion
 pattern DatabaseInstance_DatabaseVersion_POSTGRES_12 = DatabaseInstance_DatabaseVersion "POSTGRES_12"
+
+-- | The database version is PostgreSQL 13.
+pattern DatabaseInstance_DatabaseVersion_POSTGRES_13 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_POSTGRES_13 = DatabaseInstance_DatabaseVersion "POSTGRES_13"
+
+-- | The database version is PostgreSQL 14.
+pattern DatabaseInstance_DatabaseVersion_POSTGRES_14 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_POSTGRES_14 = DatabaseInstance_DatabaseVersion "POSTGRES_14"
 
 -- | The database version is MySQL 8.
 pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0 :: DatabaseInstance_DatabaseVersion
@@ -922,13 +1007,29 @@ pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_18 = DatabaseInstance_Databas
 pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_26 :: DatabaseInstance_DatabaseVersion
 pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_26 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_26"
 
--- | The database version is PostgreSQL 13.
-pattern DatabaseInstance_DatabaseVersion_POSTGRES_13 :: DatabaseInstance_DatabaseVersion
-pattern DatabaseInstance_DatabaseVersion_POSTGRES_13 = DatabaseInstance_DatabaseVersion "POSTGRES_13"
+-- | The database major version is MySQL 8.0 and the minor version is 27.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_27 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_27 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_27"
 
--- | The database version is PostgreSQL 14.
-pattern DatabaseInstance_DatabaseVersion_POSTGRES_14 :: DatabaseInstance_DatabaseVersion
-pattern DatabaseInstance_DatabaseVersion_POSTGRES_14 = DatabaseInstance_DatabaseVersion "POSTGRES_14"
+-- | The database major version is MySQL 8.0 and the minor version is 28.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_28 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_28 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_28"
+
+-- | The database major version is MySQL 8.0 and the minor version is 29.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_29 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_29 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_29"
+
+-- | The database major version is MySQL 8.0 and the minor version is 30.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_30 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_30 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_30"
+
+-- | The database major version is MySQL 8.0 and the minor version is 31.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_31 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_31 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_31"
+
+-- | The database major version is MySQL 8.0 and the minor version is 32.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_32 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_32 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_32"
 
 -- | The database version is SQL Server 2019 Standard.
 pattern DatabaseInstance_DatabaseVersion_SQLSERVER2019STANDARD :: DatabaseInstance_DatabaseVersion
@@ -952,19 +1053,25 @@ pattern DatabaseInstance_DatabaseVersion_SQLSERVER2019WEB = DatabaseInstance_Dat
   DatabaseInstance_DatabaseVersion_MYSQL_5_5,
   DatabaseInstance_DatabaseVersion_MYSQL_5_6,
   DatabaseInstance_DatabaseVersion_MYSQL_5_7,
-  DatabaseInstance_DatabaseVersion_POSTGRES_9_6,
-  DatabaseInstance_DatabaseVersion_POSTGRES_11,
   DatabaseInstance_DatabaseVersion_SQLSERVER2017STANDARD,
   DatabaseInstance_DatabaseVersion_SQLSERVER2017ENTERPRISE,
   DatabaseInstance_DatabaseVersion_SQLSERVER2017EXPRESS,
   DatabaseInstance_DatabaseVersion_SQLSERVER2017WEB,
+  DatabaseInstance_DatabaseVersion_POSTGRES_9_6,
   DatabaseInstance_DatabaseVersion_POSTGRES_10,
+  DatabaseInstance_DatabaseVersion_POSTGRES_11,
   DatabaseInstance_DatabaseVersion_POSTGRES_12,
+  DatabaseInstance_DatabaseVersion_POSTGRES_13,
+  DatabaseInstance_DatabaseVersion_POSTGRES_14,
   DatabaseInstance_DatabaseVersion_MYSQL_8_0,
   DatabaseInstance_DatabaseVersion_MYSQL_8_0_18,
   DatabaseInstance_DatabaseVersion_MYSQL_8_0_26,
-  DatabaseInstance_DatabaseVersion_POSTGRES_13,
-  DatabaseInstance_DatabaseVersion_POSTGRES_14,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_27,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_28,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_29,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_30,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_31,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_32,
   DatabaseInstance_DatabaseVersion_SQLSERVER2019STANDARD,
   DatabaseInstance_DatabaseVersion_SQLSERVER2019ENTERPRISE,
   DatabaseInstance_DatabaseVersion_SQLSERVER2019EXPRESS,
@@ -1176,14 +1283,6 @@ pattern Flag_AppliesToItem_MYSQL_5_6 = Flag_AppliesToItem "MYSQL_5_6"
 pattern Flag_AppliesToItem_MYSQL_5_7 :: Flag_AppliesToItem
 pattern Flag_AppliesToItem_MYSQL_5_7 = Flag_AppliesToItem "MYSQL_5_7"
 
--- | The database version is PostgreSQL 9.6.
-pattern Flag_AppliesToItem_POSTGRES_9_6 :: Flag_AppliesToItem
-pattern Flag_AppliesToItem_POSTGRES_9_6 = Flag_AppliesToItem "POSTGRES_9_6"
-
--- | The database version is PostgreSQL 11.
-pattern Flag_AppliesToItem_POSTGRES_11 :: Flag_AppliesToItem
-pattern Flag_AppliesToItem_POSTGRES_11 = Flag_AppliesToItem "POSTGRES_11"
-
 -- | The database version is SQL Server 2017 Standard.
 pattern Flag_AppliesToItem_SQLSERVER2017STANDARD :: Flag_AppliesToItem
 pattern Flag_AppliesToItem_SQLSERVER2017STANDARD = Flag_AppliesToItem "SQLSERVER_2017_STANDARD"
@@ -1200,13 +1299,29 @@ pattern Flag_AppliesToItem_SQLSERVER2017EXPRESS = Flag_AppliesToItem "SQLSERVER_
 pattern Flag_AppliesToItem_SQLSERVER2017WEB :: Flag_AppliesToItem
 pattern Flag_AppliesToItem_SQLSERVER2017WEB = Flag_AppliesToItem "SQLSERVER_2017_WEB"
 
+-- | The database version is PostgreSQL 9.6.
+pattern Flag_AppliesToItem_POSTGRES_9_6 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_POSTGRES_9_6 = Flag_AppliesToItem "POSTGRES_9_6"
+
 -- | The database version is PostgreSQL 10.
 pattern Flag_AppliesToItem_POSTGRES_10 :: Flag_AppliesToItem
 pattern Flag_AppliesToItem_POSTGRES_10 = Flag_AppliesToItem "POSTGRES_10"
 
+-- | The database version is PostgreSQL 11.
+pattern Flag_AppliesToItem_POSTGRES_11 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_POSTGRES_11 = Flag_AppliesToItem "POSTGRES_11"
+
 -- | The database version is PostgreSQL 12.
 pattern Flag_AppliesToItem_POSTGRES_12 :: Flag_AppliesToItem
 pattern Flag_AppliesToItem_POSTGRES_12 = Flag_AppliesToItem "POSTGRES_12"
+
+-- | The database version is PostgreSQL 13.
+pattern Flag_AppliesToItem_POSTGRES_13 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_POSTGRES_13 = Flag_AppliesToItem "POSTGRES_13"
+
+-- | The database version is PostgreSQL 14.
+pattern Flag_AppliesToItem_POSTGRES_14 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_POSTGRES_14 = Flag_AppliesToItem "POSTGRES_14"
 
 -- | The database version is MySQL 8.
 pattern Flag_AppliesToItem_MYSQL_8_0 :: Flag_AppliesToItem
@@ -1220,13 +1335,29 @@ pattern Flag_AppliesToItem_MYSQL_8_0_18 = Flag_AppliesToItem "MYSQL_8_0_18"
 pattern Flag_AppliesToItem_MYSQL_8_0_26 :: Flag_AppliesToItem
 pattern Flag_AppliesToItem_MYSQL_8_0_26 = Flag_AppliesToItem "MYSQL_8_0_26"
 
--- | The database version is PostgreSQL 13.
-pattern Flag_AppliesToItem_POSTGRES_13 :: Flag_AppliesToItem
-pattern Flag_AppliesToItem_POSTGRES_13 = Flag_AppliesToItem "POSTGRES_13"
+-- | The database major version is MySQL 8.0 and the minor version is 27.
+pattern Flag_AppliesToItem_MYSQL_8_0_27 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_27 = Flag_AppliesToItem "MYSQL_8_0_27"
 
--- | The database version is PostgreSQL 14.
-pattern Flag_AppliesToItem_POSTGRES_14 :: Flag_AppliesToItem
-pattern Flag_AppliesToItem_POSTGRES_14 = Flag_AppliesToItem "POSTGRES_14"
+-- | The database major version is MySQL 8.0 and the minor version is 28.
+pattern Flag_AppliesToItem_MYSQL_8_0_28 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_28 = Flag_AppliesToItem "MYSQL_8_0_28"
+
+-- | The database major version is MySQL 8.0 and the minor version is 29.
+pattern Flag_AppliesToItem_MYSQL_8_0_29 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_29 = Flag_AppliesToItem "MYSQL_8_0_29"
+
+-- | The database major version is MySQL 8.0 and the minor version is 30.
+pattern Flag_AppliesToItem_MYSQL_8_0_30 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_30 = Flag_AppliesToItem "MYSQL_8_0_30"
+
+-- | The database major version is MySQL 8.0 and the minor version is 31.
+pattern Flag_AppliesToItem_MYSQL_8_0_31 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_31 = Flag_AppliesToItem "MYSQL_8_0_31"
+
+-- | The database major version is MySQL 8.0 and the minor version is 32.
+pattern Flag_AppliesToItem_MYSQL_8_0_32 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_32 = Flag_AppliesToItem "MYSQL_8_0_32"
 
 -- | The database version is SQL Server 2019 Standard.
 pattern Flag_AppliesToItem_SQLSERVER2019STANDARD :: Flag_AppliesToItem
@@ -1250,19 +1381,25 @@ pattern Flag_AppliesToItem_SQLSERVER2019WEB = Flag_AppliesToItem "SQLSERVER_2019
   Flag_AppliesToItem_MYSQL_5_5,
   Flag_AppliesToItem_MYSQL_5_6,
   Flag_AppliesToItem_MYSQL_5_7,
-  Flag_AppliesToItem_POSTGRES_9_6,
-  Flag_AppliesToItem_POSTGRES_11,
   Flag_AppliesToItem_SQLSERVER2017STANDARD,
   Flag_AppliesToItem_SQLSERVER2017ENTERPRISE,
   Flag_AppliesToItem_SQLSERVER2017EXPRESS,
   Flag_AppliesToItem_SQLSERVER2017WEB,
+  Flag_AppliesToItem_POSTGRES_9_6,
   Flag_AppliesToItem_POSTGRES_10,
+  Flag_AppliesToItem_POSTGRES_11,
   Flag_AppliesToItem_POSTGRES_12,
+  Flag_AppliesToItem_POSTGRES_13,
+  Flag_AppliesToItem_POSTGRES_14,
   Flag_AppliesToItem_MYSQL_8_0,
   Flag_AppliesToItem_MYSQL_8_0_18,
   Flag_AppliesToItem_MYSQL_8_0_26,
-  Flag_AppliesToItem_POSTGRES_13,
-  Flag_AppliesToItem_POSTGRES_14,
+  Flag_AppliesToItem_MYSQL_8_0_27,
+  Flag_AppliesToItem_MYSQL_8_0_28,
+  Flag_AppliesToItem_MYSQL_8_0_29,
+  Flag_AppliesToItem_MYSQL_8_0_30,
+  Flag_AppliesToItem_MYSQL_8_0_31,
+  Flag_AppliesToItem_MYSQL_8_0_32,
   Flag_AppliesToItem_SQLSERVER2019STANDARD,
   Flag_AppliesToItem_SQLSERVER2019ENTERPRISE,
   Flag_AppliesToItem_SQLSERVER2019EXPRESS,
@@ -1591,6 +1728,18 @@ pattern Operation_OperationType_RESCHEDULEMAINTENANCE = Operation_OperationType 
 pattern Operation_OperationType_STARTEXTERNALSYNC :: Operation_OperationType
 pattern Operation_OperationType_STARTEXTERNALSYNC = Operation_OperationType "START_EXTERNAL_SYNC"
 
+-- | Recovers logs from an instance\'s old data disk.
+pattern Operation_OperationType_LOGCLEANUP :: Operation_OperationType
+pattern Operation_OperationType_LOGCLEANUP = Operation_OperationType "LOG_CLEANUP"
+
+-- | Performs auto-restart of an HA-enabled Cloud SQL database for auto recovery.
+pattern Operation_OperationType_AUTORESTART :: Operation_OperationType
+pattern Operation_OperationType_AUTORESTART = Operation_OperationType "AUTO_RESTART"
+
+-- | Re-encrypts CMEK instances with latest key version.
+pattern Operation_OperationType_Reencrypt :: Operation_OperationType
+pattern Operation_OperationType_Reencrypt = Operation_OperationType "REENCRYPT"
+
 {-# COMPLETE
   Operation_OperationType_SQLOPERATIONTYPEUNSPECIFIED,
   Operation_OperationType_Import,
@@ -1627,6 +1776,9 @@ pattern Operation_OperationType_STARTEXTERNALSYNC = Operation_OperationType "STA
   Operation_OperationType_CREATECLONE,
   Operation_OperationType_RESCHEDULEMAINTENANCE,
   Operation_OperationType_STARTEXTERNALSYNC,
+  Operation_OperationType_LOGCLEANUP,
+  Operation_OperationType_AUTORESTART,
+  Operation_OperationType_Reencrypt,
   Operation_OperationType
   #-}
 
@@ -1798,6 +1950,38 @@ pattern Settings_AvailabilityType_Regional = Settings_AvailabilityType "REGIONAL
   Settings_AvailabilityType_Zonal,
   Settings_AvailabilityType_Regional,
   Settings_AvailabilityType
+  #-}
+
+-- | Specifies if connections must use Cloud SQL connectors. Option values include the following: @NOT_REQUIRED@ (Cloud SQL instances can be connected without Cloud SQL Connectors) and @REQUIRED@ (Only allow connections that use Cloud SQL Connectors). Note that using REQUIRED disables all existing authorized networks. If this field is not specified when creating a new instance, NOT_REQUIRED is used. If this field is not specified when patching or updating an existing instance, it is left unchanged in the instance.
+newtype Settings_ConnectorEnforcement = Settings_ConnectorEnforcement {fromSettings_ConnectorEnforcement :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The requirement for Cloud SQL connectors is unknown.
+pattern Settings_ConnectorEnforcement_CONNECTORENFORCEMENTUNSPECIFIED :: Settings_ConnectorEnforcement
+pattern Settings_ConnectorEnforcement_CONNECTORENFORCEMENTUNSPECIFIED = Settings_ConnectorEnforcement "CONNECTOR_ENFORCEMENT_UNSPECIFIED"
+
+-- | Do not require Cloud SQL connectors.
+pattern Settings_ConnectorEnforcement_NOTREQUIRED :: Settings_ConnectorEnforcement
+pattern Settings_ConnectorEnforcement_NOTREQUIRED = Settings_ConnectorEnforcement "NOT_REQUIRED"
+
+-- | Require all connections to use Cloud SQL connectors, including the Cloud SQL Auth Proxy and Cloud SQL Java, Python, and Go connectors. Note: This disables all existing authorized networks.
+pattern Settings_ConnectorEnforcement_Required :: Settings_ConnectorEnforcement
+pattern Settings_ConnectorEnforcement_Required = Settings_ConnectorEnforcement "REQUIRED"
+
+{-# COMPLETE
+  Settings_ConnectorEnforcement_CONNECTORENFORCEMENTUNSPECIFIED,
+  Settings_ConnectorEnforcement_NOTREQUIRED,
+  Settings_ConnectorEnforcement_Required,
+  Settings_ConnectorEnforcement
   #-}
 
 -- | The type of data disk: @PD_SSD@ (default) or @PD_HDD@. Not used for First Generation instances.
@@ -2018,6 +2202,18 @@ pattern SqlExternalSyncSettingError_Type_UNSUPPORTEDBINLOGFORMAT = SqlExternalSy
 pattern SqlExternalSyncSettingError_Type_BINLOGRETENTIONSETTING :: SqlExternalSyncSettingError_Type
 pattern SqlExternalSyncSettingError_Type_BINLOGRETENTIONSETTING = SqlExternalSyncSettingError_Type "BINLOG_RETENTION_SETTING"
 
+-- | The primary instance has tables with unsupported storage engine.
+pattern SqlExternalSyncSettingError_Type_UNSUPPORTEDSTORAGEENGINE :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_UNSUPPORTEDSTORAGEENGINE = SqlExternalSyncSettingError_Type "UNSUPPORTED_STORAGE_ENGINE"
+
+-- | Source has tables with limited support eg: PostgreSQL tables without primary keys
+pattern SqlExternalSyncSettingError_Type_LIMITEDSUPPORTTABLES :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_LIMITEDSUPPORTTABLES = SqlExternalSyncSettingError_Type "LIMITED_SUPPORT_TABLES"
+
+-- | The replica instance contains existing data.
+pattern SqlExternalSyncSettingError_Type_EXISTINGDATAINREPLICA :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_EXISTINGDATAINREPLICA = SqlExternalSyncSettingError_Type "EXISTING_DATA_IN_REPLICA"
+
 {-# COMPLETE
   SqlExternalSyncSettingError_Type_SQLEXTERNALSYNCSETTINGERRORTYPEUNSPECIFIED,
   SqlExternalSyncSettingError_Type_CONNECTIONFAILURE,
@@ -2045,6 +2241,9 @@ pattern SqlExternalSyncSettingError_Type_BINLOGRETENTIONSETTING = SqlExternalSyn
   SqlExternalSyncSettingError_Type_PRIMARYALREADYSETUP,
   SqlExternalSyncSettingError_Type_UNSUPPORTEDBINLOGFORMAT,
   SqlExternalSyncSettingError_Type_BINLOGRETENTIONSETTING,
+  SqlExternalSyncSettingError_Type_UNSUPPORTEDSTORAGEENGINE,
+  SqlExternalSyncSettingError_Type_LIMITEDSUPPORTTABLES,
+  SqlExternalSyncSettingError_Type_EXISTINGDATAINREPLICA,
   SqlExternalSyncSettingError_Type
   #-}
 
@@ -2142,6 +2341,43 @@ pattern SqlOutOfDiskReport_SqlOutOfDiskState_SOFTSHUTDOWN = SqlOutOfDiskReport_S
   SqlOutOfDiskReport_SqlOutOfDiskState_Normal,
   SqlOutOfDiskReport_SqlOutOfDiskState_SOFTSHUTDOWN,
   SqlOutOfDiskReport_SqlOutOfDiskState
+  #-}
+
+-- | Dual password status for the user.
+newtype User_DualPasswordType = User_DualPasswordType {fromUser_DualPasswordType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The default value.
+pattern User_DualPasswordType_DUALPASSWORDTYPEUNSPECIFIED :: User_DualPasswordType
+pattern User_DualPasswordType_DUALPASSWORDTYPEUNSPECIFIED = User_DualPasswordType "DUAL_PASSWORD_TYPE_UNSPECIFIED"
+
+-- | Do not update the user\'s dual password status.
+pattern User_DualPasswordType_NOMODIFYDUALPASSWORD :: User_DualPasswordType
+pattern User_DualPasswordType_NOMODIFYDUALPASSWORD = User_DualPasswordType "NO_MODIFY_DUAL_PASSWORD"
+
+-- | No dual password usable for connecting using this user.
+pattern User_DualPasswordType_NODUALPASSWORD :: User_DualPasswordType
+pattern User_DualPasswordType_NODUALPASSWORD = User_DualPasswordType "NO_DUAL_PASSWORD"
+
+-- | Dual password usable for connecting using this user.
+pattern User_DualPasswordType_DUALPASSWORD :: User_DualPasswordType
+pattern User_DualPasswordType_DUALPASSWORD = User_DualPasswordType "DUAL_PASSWORD"
+
+{-# COMPLETE
+  User_DualPasswordType_DUALPASSWORDTYPEUNSPECIFIED,
+  User_DualPasswordType_NOMODIFYDUALPASSWORD,
+  User_DualPasswordType_NODUALPASSWORD,
+  User_DualPasswordType_DUALPASSWORD,
+  User_DualPasswordType
   #-}
 
 -- | The user type. It determines the method to authenticate the user during login. The default is the database\'s built-in user type.

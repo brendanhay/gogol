@@ -30,6 +30,10 @@ module Gogol.Container.Internal.Product
     AcceleratorConfig (..),
     newAcceleratorConfig,
 
+    -- * AdditionalPodRangesConfig
+    AdditionalPodRangesConfig (..),
+    newAdditionalPodRangesConfig,
+
     -- * AddonsConfig
     AddonsConfig (..),
     newAddonsConfig,
@@ -61,6 +65,14 @@ module Gogol.Container.Internal.Product
     -- * BinaryAuthorization
     BinaryAuthorization (..),
     newBinaryAuthorization,
+
+    -- * BlueGreenInfo
+    BlueGreenInfo (..),
+    newBlueGreenInfo,
+
+    -- * BlueGreenSettings
+    BlueGreenSettings (..),
+    newBlueGreenSettings,
 
     -- * CancelOperationRequest
     CancelOperationRequest (..),
@@ -98,6 +110,10 @@ module Gogol.Container.Internal.Product
     CompleteIPRotationRequest (..),
     newCompleteIPRotationRequest,
 
+    -- * CompleteNodePoolUpgradeRequest
+    CompleteNodePoolUpgradeRequest (..),
+    newCompleteNodePoolUpgradeRequest,
+
     -- * ConfidentialNodes
     ConfidentialNodes (..),
     newConfidentialNodes,
@@ -109,6 +125,10 @@ module Gogol.Container.Internal.Product
     -- * ConsumptionMeteringConfig
     ConsumptionMeteringConfig (..),
     newConsumptionMeteringConfig,
+
+    -- * CostManagementConfig
+    CostManagementConfig (..),
+    newCostManagementConfig,
 
     -- * CreateClusterRequest
     CreateClusterRequest (..),
@@ -142,9 +162,29 @@ module Gogol.Container.Internal.Product
     Empty (..),
     newEmpty,
 
+    -- * EphemeralStorageLocalSsdConfig
+    EphemeralStorageLocalSsdConfig (..),
+    newEphemeralStorageLocalSsdConfig,
+
+    -- * FastSocket
+    FastSocket (..),
+    newFastSocket,
+
     -- * Filter
     Filter (..),
     newFilter,
+
+    -- * Fleet
+    Fleet (..),
+    newFleet,
+
+    -- * GPUSharingConfig
+    GPUSharingConfig (..),
+    newGPUSharingConfig,
+
+    -- * GatewayAPIConfig
+    GatewayAPIConfig (..),
+    newGatewayAPIConfig,
 
     -- * GcePersistentDiskCsiDriverConfig
     GcePersistentDiskCsiDriverConfig (..),
@@ -165,6 +205,10 @@ module Gogol.Container.Internal.Product
     -- * GetOpenIDConfigResponse
     GetOpenIDConfigResponse (..),
     newGetOpenIDConfigResponse,
+
+    -- * GkeBackupAgentConfig
+    GkeBackupAgentConfig (..),
+    newGkeBackupAgentConfig,
 
     -- * HorizontalPodAutoscaling
     HorizontalPodAutoscaling (..),
@@ -230,6 +274,10 @@ module Gogol.Container.Internal.Product
     ListUsableSubnetworksResponse (..),
     newListUsableSubnetworksResponse,
 
+    -- * LocalNvmeSsdBlockConfig
+    LocalNvmeSsdBlockConfig (..),
+    newLocalNvmeSsdBlockConfig,
+
     -- * LoggingComponentConfig
     LoggingComponentConfig (..),
     newLoggingComponentConfig,
@@ -237,6 +285,10 @@ module Gogol.Container.Internal.Product
     -- * LoggingConfig
     LoggingConfig (..),
     newLoggingConfig,
+
+    -- * LoggingVariantConfig
+    LoggingVariantConfig (..),
+    newLoggingVariantConfig,
 
     -- * MaintenanceExclusionOptions
     MaintenanceExclusionOptions (..),
@@ -253,6 +305,10 @@ module Gogol.Container.Internal.Product
     -- * MaintenanceWindow_MaintenanceExclusions
     MaintenanceWindow_MaintenanceExclusions (..),
     newMaintenanceWindow_MaintenanceExclusions,
+
+    -- * ManagedPrometheusConfig
+    ManagedPrometheusConfig (..),
+    newManagedPrometheusConfig,
 
     -- * MasterAuth
     MasterAuth (..),
@@ -286,6 +342,10 @@ module Gogol.Container.Internal.Product
     NetworkConfig (..),
     newNetworkConfig,
 
+    -- * NetworkPerformanceConfig
+    NetworkPerformanceConfig (..),
+    newNetworkPerformanceConfig,
+
     -- * NetworkPolicy
     NetworkPolicy (..),
     newNetworkPolicy,
@@ -310,6 +370,10 @@ module Gogol.Container.Internal.Product
     NodeConfig_Metadata (..),
     newNodeConfig_Metadata,
 
+    -- * NodeConfig_ResourceLabels
+    NodeConfig_ResourceLabels (..),
+    newNodeConfig_ResourceLabels,
+
     -- * NodeConfigDefaults
     NodeConfigDefaults (..),
     newNodeConfigDefaults,
@@ -317,6 +381,14 @@ module Gogol.Container.Internal.Product
     -- * NodeKubeletConfig
     NodeKubeletConfig (..),
     newNodeKubeletConfig,
+
+    -- * NodeLabels
+    NodeLabels (..),
+    newNodeLabels,
+
+    -- * NodeLabels_Labels
+    NodeLabels_Labels (..),
+    newNodeLabels_Labels,
 
     -- * NodeManagement
     NodeManagement (..),
@@ -342,9 +414,17 @@ module Gogol.Container.Internal.Product
     NodePoolDefaults (..),
     newNodePoolDefaults,
 
+    -- * NodePoolLoggingConfig
+    NodePoolLoggingConfig (..),
+    newNodePoolLoggingConfig,
+
     -- * NodeTaint
     NodeTaint (..),
     newNodeTaint,
+
+    -- * NodeTaints
+    NodeTaints (..),
+    newNodeTaints,
 
     -- * NotificationConfig
     NotificationConfig (..),
@@ -357,6 +437,14 @@ module Gogol.Container.Internal.Product
     -- * OperationProgress
     OperationProgress (..),
     newOperationProgress,
+
+    -- * PlacementPolicy
+    PlacementPolicy (..),
+    newPlacementPolicy,
+
+    -- * PodCIDROverprovisionConfig
+    PodCIDROverprovisionConfig (..),
+    newPodCIDROverprovisionConfig,
 
     -- * PrivateClusterConfig
     PrivateClusterConfig (..),
@@ -385,6 +473,14 @@ module Gogol.Container.Internal.Product
     -- * ReservationAffinity
     ReservationAffinity (..),
     newReservationAffinity,
+
+    -- * ResourceLabels
+    ResourceLabels (..),
+    newResourceLabels,
+
+    -- * ResourceLabels_Labels
+    ResourceLabels_Labels (..),
+    newResourceLabels_Labels,
 
     -- * ResourceLimit
     ResourceLimit (..),
@@ -474,6 +570,10 @@ module Gogol.Container.Internal.Product
     ShieldedNodes (..),
     newShieldedNodes,
 
+    -- * StandardRolloutPolicy
+    StandardRolloutPolicy (..),
+    newStandardRolloutPolicy,
+
     -- * StartIPRotationRequest
     StartIPRotationRequest (..),
     newStartIPRotationRequest,
@@ -497,6 +597,10 @@ module Gogol.Container.Internal.Product
     -- * UpdateClusterRequest
     UpdateClusterRequest (..),
     newUpdateClusterRequest,
+
+    -- * UpdateInfo
+    UpdateInfo (..),
+    newUpdateInfo,
 
     -- * UpdateMasterRequest
     UpdateMasterRequest (..),
@@ -534,6 +638,10 @@ module Gogol.Container.Internal.Product
     VirtualNIC (..),
     newVirtualNIC,
 
+    -- * WindowsNodeConfig
+    WindowsNodeConfig (..),
+    newWindowsNodeConfig,
+
     -- * WorkloadIdentityConfig
     WorkloadIdentityConfig (..),
     newWorkloadIdentityConfig,
@@ -556,7 +664,9 @@ data AcceleratorConfig = AcceleratorConfig
     -- | The accelerator type resource name. List of supported accelerators <https://cloud.google.com/compute/docs/gpus here>
     acceleratorType :: (Core.Maybe Core.Text),
     -- | Size of partitions to create on the GPU. Valid values are described in the NVIDIA <https://docs.nvidia.com/datacenter/tesla/mig-user-guide/#partitioning mig user guide>.
-    gpuPartitionSize :: (Core.Maybe Core.Text)
+    gpuPartitionSize :: (Core.Maybe Core.Text),
+    -- | The configuration for GPU sharing options.
+    gpuSharingConfig :: (Core.Maybe GPUSharingConfig)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -567,7 +677,8 @@ newAcceleratorConfig =
   AcceleratorConfig
     { acceleratorCount = Core.Nothing,
       acceleratorType = Core.Nothing,
-      gpuPartitionSize = Core.Nothing
+      gpuPartitionSize = Core.Nothing,
+      gpuSharingConfig = Core.Nothing
     }
 
 instance Core.FromJSON AcceleratorConfig where
@@ -581,6 +692,7 @@ instance Core.FromJSON AcceleratorConfig where
                      )
             Core.<*> (o Core..:? "acceleratorType")
             Core.<*> (o Core..:? "gpuPartitionSize")
+            Core.<*> (o Core..:? "gpuSharingConfig")
       )
 
 instance Core.ToJSON AcceleratorConfig where
@@ -591,9 +703,31 @@ instance Core.ToJSON AcceleratorConfig where
               Core.<$> acceleratorCount,
             ("acceleratorType" Core..=) Core.<$> acceleratorType,
             ("gpuPartitionSize" Core..=)
-              Core.<$> gpuPartitionSize
+              Core.<$> gpuPartitionSize,
+            ("gpuSharingConfig" Core..=)
+              Core.<$> gpuSharingConfig
           ]
       )
+
+-- | AdditionalPodRangesConfig is the configuration for additional pod secondary ranges supporting the ClusterUpdate message.
+--
+-- /See:/ 'newAdditionalPodRangesConfig' smart constructor.
+data AdditionalPodRangesConfig = AdditionalPodRangesConfig
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AdditionalPodRangesConfig' with the minimum fields required to make a request.
+newAdditionalPodRangesConfig ::
+  AdditionalPodRangesConfig
+newAdditionalPodRangesConfig = AdditionalPodRangesConfig
+
+instance Core.FromJSON AdditionalPodRangesConfig where
+  parseJSON =
+    Core.withObject
+      "AdditionalPodRangesConfig"
+      (\o -> Core.pure AdditionalPodRangesConfig)
+
+instance Core.ToJSON AdditionalPodRangesConfig where
+  toJSON = Core.const Core.emptyObject
 
 -- | Configuration for the addons that can be automatically spun up in the cluster, enabling additional functionality.
 --
@@ -609,6 +743,8 @@ data AddonsConfig = AddonsConfig
     gcePersistentDiskCsiDriverConfig :: (Core.Maybe GcePersistentDiskCsiDriverConfig),
     -- | Configuration for the GCP Filestore CSI driver.
     gcpFilestoreCsiDriverConfig :: (Core.Maybe GcpFilestoreCsiDriverConfig),
+    -- | Configuration for the Backup for GKE agent addon.
+    gkeBackupAgentConfig :: (Core.Maybe GkeBackupAgentConfig),
     -- | Configuration for the horizontal pod autoscaling feature, which increases or decreases the number of replica pods a replication controller has based on the resource usage of the existing pods.
     horizontalPodAutoscaling :: (Core.Maybe HorizontalPodAutoscaling),
     -- | Configuration for the HTTP (L7) load balancing controller addon, which makes it easy to set up HTTP load balancers for services in a cluster.
@@ -630,6 +766,7 @@ newAddonsConfig =
       dnsCacheConfig = Core.Nothing,
       gcePersistentDiskCsiDriverConfig = Core.Nothing,
       gcpFilestoreCsiDriverConfig = Core.Nothing,
+      gkeBackupAgentConfig = Core.Nothing,
       horizontalPodAutoscaling = Core.Nothing,
       httpLoadBalancing = Core.Nothing,
       kubernetesDashboard = Core.Nothing,
@@ -647,6 +784,7 @@ instance Core.FromJSON AddonsConfig where
             Core.<*> (o Core..:? "dnsCacheConfig")
             Core.<*> (o Core..:? "gcePersistentDiskCsiDriverConfig")
             Core.<*> (o Core..:? "gcpFilestoreCsiDriverConfig")
+            Core.<*> (o Core..:? "gkeBackupAgentConfig")
             Core.<*> (o Core..:? "horizontalPodAutoscaling")
             Core.<*> (o Core..:? "httpLoadBalancing")
             Core.<*> (o Core..:? "kubernetesDashboard")
@@ -665,6 +803,8 @@ instance Core.ToJSON AddonsConfig where
               Core.<$> gcePersistentDiskCsiDriverConfig,
             ("gcpFilestoreCsiDriverConfig" Core..=)
               Core.<$> gcpFilestoreCsiDriverConfig,
+            ("gkeBackupAgentConfig" Core..=)
+              Core.<$> gkeBackupAgentConfig,
             ("horizontalPodAutoscaling" Core..=)
               Core.<$> horizontalPodAutoscaling,
             ("httpLoadBalancing" Core..=)
@@ -827,11 +967,11 @@ data AutoprovisioningNodePoolDefaults = AutoprovisioningNodePoolDefaults
     diskSizeGb :: (Core.Maybe Core.Int32),
     -- | Type of the disk attached to each node (e.g. \'pd-standard\', \'pd-ssd\' or \'pd-balanced\') If unspecified, the default disk type is \'pd-standard\'
     diskType :: (Core.Maybe Core.Text),
-    -- | The image type to use for NAP created node.
+    -- | The image type to use for NAP created node. Please see https:\/\/cloud.google.com\/kubernetes-engine\/docs\/concepts\/node-images for available image types.
     imageType :: (Core.Maybe Core.Text),
     -- | Specifies the node management options for NAP created node-pools.
     management :: (Core.Maybe NodeManagement),
-    -- | Deprecated. Minimum CPU platform to be used for NAP created node pools. The instance may be scheduled on the specified or newer CPU platform. Applicable values are the friendly names of CPU platforms, such as minCpuPlatform: Intel Haswell or minCpuPlatform: Intel Sandy Bridge. For more information, read <https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform how to specify min CPU platform> This field is deprecated, min/cpu/platform should be specified using cloud.google.com\/requested-min-cpu-platform label selector on the pod. To unset the min cpu platform field pass \"automatic\" as field value.
+    -- | Deprecated. Minimum CPU platform to be used for NAP created node pools. The instance may be scheduled on the specified or newer CPU platform. Applicable values are the friendly names of CPU platforms, such as minCpuPlatform: Intel Haswell or minCpuPlatform: Intel Sandy Bridge. For more information, read <https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform how to specify min CPU platform>. This field is deprecated, min/cpu/platform should be specified using @cloud.google.com\/requested-min-cpu-platform@ label selector on the pod. To unset the min cpu platform field pass \"automatic\" as field value.
     minCpuPlatform :: (Core.Maybe Core.Text),
     -- | Scopes that are used by NAP when creating node pools.
     oauthScopes :: (Core.Maybe [Core.Text]),
@@ -934,30 +1074,136 @@ instance Core.ToJSON BigQueryDestination where
 -- | Configuration for Binary Authorization.
 --
 -- /See:/ 'newBinaryAuthorization' smart constructor.
-newtype BinaryAuthorization = BinaryAuthorization
-  { -- | Enable Binary Authorization for this cluster. If enabled, all container images will be validated by Binary Authorization.
-    enabled :: (Core.Maybe Core.Bool)
+data BinaryAuthorization = BinaryAuthorization
+  { -- | This field is deprecated. Leave this unset and instead configure BinaryAuthorization using evaluation/mode. If evaluation/mode is set to anything other than EVALUATION/MODE/UNSPECIFIED, this field is ignored.
+    enabled :: (Core.Maybe Core.Bool),
+    -- | Mode of operation for binauthz policy evaluation. If unspecified, defaults to DISABLED.
+    evaluationMode :: (Core.Maybe BinaryAuthorization_EvaluationMode)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'BinaryAuthorization' with the minimum fields required to make a request.
 newBinaryAuthorization ::
   BinaryAuthorization
-newBinaryAuthorization = BinaryAuthorization {enabled = Core.Nothing}
+newBinaryAuthorization =
+  BinaryAuthorization {enabled = Core.Nothing, evaluationMode = Core.Nothing}
 
 instance Core.FromJSON BinaryAuthorization where
   parseJSON =
     Core.withObject
       "BinaryAuthorization"
       ( \o ->
-          BinaryAuthorization Core.<$> (o Core..:? "enabled")
+          BinaryAuthorization
+            Core.<$> (o Core..:? "enabled")
+            Core.<*> (o Core..:? "evaluationMode")
       )
 
 instance Core.ToJSON BinaryAuthorization where
   toJSON BinaryAuthorization {..} =
     Core.object
       ( Core.catMaybes
-          [("enabled" Core..=) Core.<$> enabled]
+          [ ("enabled" Core..=) Core.<$> enabled,
+            ("evaluationMode" Core..=) Core.<$> evaluationMode
+          ]
+      )
+
+-- | Information relevant to blue-green upgrade.
+--
+-- /See:/ 'newBlueGreenInfo' smart constructor.
+data BlueGreenInfo = BlueGreenInfo
+  { -- | The resource URLs of the [managed instance groups] (\/compute\/docs\/instance-groups\/creating-groups-of-managed-instances) associated with blue pool.
+    blueInstanceGroupUrls :: (Core.Maybe [Core.Text]),
+    -- | Time to start deleting blue pool to complete blue-green upgrade, in <https://www.ietf.org/rfc/rfc3339.txt RFC3339> text format.
+    bluePoolDeletionStartTime :: (Core.Maybe Core.Text),
+    -- | The resource URLs of the [managed instance groups] (\/compute\/docs\/instance-groups\/creating-groups-of-managed-instances) associated with green pool.
+    greenInstanceGroupUrls :: (Core.Maybe [Core.Text]),
+    -- | Version of green pool.
+    greenPoolVersion :: (Core.Maybe Core.Text),
+    -- | Current blue-green upgrade phase.
+    phase :: (Core.Maybe BlueGreenInfo_Phase)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BlueGreenInfo' with the minimum fields required to make a request.
+newBlueGreenInfo ::
+  BlueGreenInfo
+newBlueGreenInfo =
+  BlueGreenInfo
+    { blueInstanceGroupUrls = Core.Nothing,
+      bluePoolDeletionStartTime = Core.Nothing,
+      greenInstanceGroupUrls = Core.Nothing,
+      greenPoolVersion = Core.Nothing,
+      phase = Core.Nothing
+    }
+
+instance Core.FromJSON BlueGreenInfo where
+  parseJSON =
+    Core.withObject
+      "BlueGreenInfo"
+      ( \o ->
+          BlueGreenInfo
+            Core.<$> (o Core..:? "blueInstanceGroupUrls")
+            Core.<*> (o Core..:? "bluePoolDeletionStartTime")
+            Core.<*> (o Core..:? "greenInstanceGroupUrls")
+            Core.<*> (o Core..:? "greenPoolVersion")
+            Core.<*> (o Core..:? "phase")
+      )
+
+instance Core.ToJSON BlueGreenInfo where
+  toJSON BlueGreenInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("blueInstanceGroupUrls" Core..=)
+              Core.<$> blueInstanceGroupUrls,
+            ("bluePoolDeletionStartTime" Core..=)
+              Core.<$> bluePoolDeletionStartTime,
+            ("greenInstanceGroupUrls" Core..=)
+              Core.<$> greenInstanceGroupUrls,
+            ("greenPoolVersion" Core..=)
+              Core.<$> greenPoolVersion,
+            ("phase" Core..=) Core.<$> phase
+          ]
+      )
+
+-- | Settings for blue-green upgrade.
+--
+-- /See:/ 'newBlueGreenSettings' smart constructor.
+data BlueGreenSettings = BlueGreenSettings
+  { -- | Time needed after draining entire blue pool. After this period, blue pool will be cleaned up.
+    nodePoolSoakDuration :: (Core.Maybe Core.Duration),
+    -- | Standard policy for the blue-green upgrade.
+    standardRolloutPolicy :: (Core.Maybe StandardRolloutPolicy)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BlueGreenSettings' with the minimum fields required to make a request.
+newBlueGreenSettings ::
+  BlueGreenSettings
+newBlueGreenSettings =
+  BlueGreenSettings
+    { nodePoolSoakDuration = Core.Nothing,
+      standardRolloutPolicy = Core.Nothing
+    }
+
+instance Core.FromJSON BlueGreenSettings where
+  parseJSON =
+    Core.withObject
+      "BlueGreenSettings"
+      ( \o ->
+          BlueGreenSettings
+            Core.<$> (o Core..:? "nodePoolSoakDuration")
+            Core.<*> (o Core..:? "standardRolloutPolicy")
+      )
+
+instance Core.ToJSON BlueGreenSettings where
+  toJSON BlueGreenSettings {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nodePoolSoakDuration" Core..=)
+              Core.<$> nodePoolSoakDuration,
+            ("standardRolloutPolicy" Core..=)
+              Core.<$> standardRolloutPolicy
+          ]
       )
 
 -- | CancelOperationRequest cancels a single operation.
@@ -968,7 +1214,7 @@ data CancelOperationRequest = CancelOperationRequest
     name :: (Core.Maybe Core.Text),
     -- | Deprecated. The server-assigned @name@ of the operation. This field has been deprecated and replaced by the name field.
     operationId :: (Core.Maybe Core.Text),
-    -- | Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the name field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the name field.
     projectId :: (Core.Maybe Core.Text),
     -- | Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the operation resides. This field has been deprecated and replaced by the name field.
     zone :: (Core.Maybe Core.Text)
@@ -1134,6 +1380,8 @@ data Cluster = Cluster
     conditions :: (Core.Maybe [StatusCondition]),
     -- | Configuration of Confidential Nodes. All the nodes in the cluster will be Confidential VM once enabled.
     confidentialNodes :: (Core.Maybe ConfidentialNodes),
+    -- | Configuration for the fine-grained cost management feature.
+    costManagementConfig :: (Core.Maybe CostManagementConfig),
     -- | [Output only] The time the cluster was created, in <https://www.ietf.org/rfc/rfc3339.txt RFC3339> text format.
     createTime :: (Core.Maybe Core.Text),
     -- | [Output only] The current software version of the master endpoint.
@@ -1154,8 +1402,12 @@ data Cluster = Cluster
     enableTpu :: (Core.Maybe Core.Bool),
     -- | [Output only] The IP address of this cluster\'s master endpoint. The endpoint can be accessed from the internet at @https:\/\/username:password\@endpoint\/@. See the @masterAuth@ property of this resource for username and password information.
     endpoint :: (Core.Maybe Core.Text),
+    -- | This checksum is computed by the server based on the value of cluster fields, and may be sent on update requests to ensure the client has an up-to-date value before proceeding.
+    etag :: (Core.Maybe Core.Text),
     -- | [Output only] The time the cluster will be automatically deleted in <https://www.ietf.org/rfc/rfc3339.txt RFC3339> text format.
     expireTime :: (Core.Maybe Core.Text),
+    -- | Fleet information for the cluster.
+    fleet :: (Core.Maybe Fleet),
     -- | Output only. Unique id for the cluster.
     id :: (Core.Maybe Core.Text),
     -- | Configuration for Identity Service component.
@@ -1256,6 +1508,7 @@ newCluster =
       clusterIpv4Cidr = Core.Nothing,
       conditions = Core.Nothing,
       confidentialNodes = Core.Nothing,
+      costManagementConfig = Core.Nothing,
       createTime = Core.Nothing,
       currentMasterVersion = Core.Nothing,
       currentNodeCount = Core.Nothing,
@@ -1266,7 +1519,9 @@ newCluster =
       enableKubernetesAlpha = Core.Nothing,
       enableTpu = Core.Nothing,
       endpoint = Core.Nothing,
+      etag = Core.Nothing,
       expireTime = Core.Nothing,
+      fleet = Core.Nothing,
       id = Core.Nothing,
       identityServiceConfig = Core.Nothing,
       initialClusterVersion = Core.Nothing,
@@ -1325,6 +1580,7 @@ instance Core.FromJSON Cluster where
             Core.<*> (o Core..:? "clusterIpv4Cidr")
             Core.<*> (o Core..:? "conditions")
             Core.<*> (o Core..:? "confidentialNodes")
+            Core.<*> (o Core..:? "costManagementConfig")
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "currentMasterVersion")
             Core.<*> (o Core..:? "currentNodeCount")
@@ -1335,7 +1591,9 @@ instance Core.FromJSON Cluster where
             Core.<*> (o Core..:? "enableKubernetesAlpha")
             Core.<*> (o Core..:? "enableTpu")
             Core.<*> (o Core..:? "endpoint")
+            Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "expireTime")
+            Core.<*> (o Core..:? "fleet")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "identityServiceConfig")
             Core.<*> (o Core..:? "initialClusterVersion")
@@ -1395,6 +1653,8 @@ instance Core.ToJSON Cluster where
             ("conditions" Core..=) Core.<$> conditions,
             ("confidentialNodes" Core..=)
               Core.<$> confidentialNodes,
+            ("costManagementConfig" Core..=)
+              Core.<$> costManagementConfig,
             ("createTime" Core..=) Core.<$> createTime,
             ("currentMasterVersion" Core..=)
               Core.<$> currentMasterVersion,
@@ -1411,7 +1671,9 @@ instance Core.ToJSON Cluster where
               Core.<$> enableKubernetesAlpha,
             ("enableTpu" Core..=) Core.<$> enableTpu,
             ("endpoint" Core..=) Core.<$> endpoint,
+            ("etag" Core..=) Core.<$> etag,
             ("expireTime" Core..=) Core.<$> expireTime,
+            ("fleet" Core..=) Core.<$> fleet,
             ("id" Core..=) Core.<$> id,
             ("identityServiceConfig" Core..=)
               Core.<$> identityServiceConfig,
@@ -1570,7 +1832,9 @@ instance Core.ToJSON ClusterAutoscaling where
 --
 -- /See:/ 'newClusterUpdate' smart constructor.
 data ClusterUpdate = ClusterUpdate
-  { -- | Configurations for the various addons available to run in the cluster.
+  { -- | The additional pod ranges to be added to the cluster. These pod ranges can be used by node pools to allocate pod IPs.
+    additionalPodRangesConfig :: (Core.Maybe AdditionalPodRangesConfig),
+    -- | Configurations for the various addons available to run in the cluster.
     desiredAddonsConfig :: (Core.Maybe AddonsConfig),
     -- | The desired authenticator groups config for the cluster.
     desiredAuthenticatorGroupsConfig :: (Core.Maybe AuthenticatorGroupsConfig),
@@ -1578,6 +1842,8 @@ data ClusterUpdate = ClusterUpdate
     desiredBinaryAuthorization :: (Core.Maybe BinaryAuthorization),
     -- | Cluster-level autoscaling configuration.
     desiredClusterAutoscaling :: (Core.Maybe ClusterAutoscaling),
+    -- | The desired configuration for the fine-grained cost management feature.
+    desiredCostManagementConfig :: (Core.Maybe CostManagementConfig),
     -- | Configuration of etcd encryption.
     desiredDatabaseEncryption :: (Core.Maybe DatabaseEncryption),
     -- | The desired datapath provider for the cluster.
@@ -1586,6 +1852,10 @@ data ClusterUpdate = ClusterUpdate
     desiredDefaultSnatStatus :: (Core.Maybe DefaultSnatStatus),
     -- | DNSConfig contains clusterDNS config for this cluster.
     desiredDnsConfig :: (Core.Maybe DNSConfig),
+    -- | Enable\/Disable private endpoint for the cluster\'s master.
+    desiredEnablePrivateEndpoint :: (Core.Maybe Core.Bool),
+    -- | The desired config of Gateway API on this cluster.
+    desiredGatewayApiConfig :: (Core.Maybe GatewayAPIConfig),
     -- | The desired GCFS config for the cluster
     desiredGcfsConfig :: (Core.Maybe GcfsConfig),
     -- | The desired Identity Service component configuration.
@@ -1618,6 +1888,8 @@ data ClusterUpdate = ClusterUpdate
     desiredNodePoolAutoscaling :: (Core.Maybe NodePoolAutoscaling),
     -- | The node pool to be upgraded. This field is mandatory if \"desired/node/version\", \"desired/image/family\" or \"desired/node/pool_autoscaling\" is specified and there is more than one node pool on the cluster.
     desiredNodePoolId :: (Core.Maybe Core.Text),
+    -- | The desired node pool logging configuration defaults for the cluster.
+    desiredNodePoolLoggingConfig :: (Core.Maybe NodePoolLoggingConfig),
     -- | The Kubernetes version to change the nodes to (typically an upgrade). Users may specify either explicit versions offered by Kubernetes Engine or version aliases, which have the following behavior: - \"latest\": picks the highest valid Kubernetes version - \"1.X\": picks the highest valid patch+gke.N patch in the 1.X version - \"1.X.Y\": picks the highest valid gke.N patch in the 1.X.Y version - \"1.X.Y-gke.N\": picks an explicit Kubernetes version - \"-\": picks the Kubernetes master version
     desiredNodeVersion :: (Core.Maybe Core.Text),
     -- | The desired notification configuration.
@@ -1634,10 +1906,16 @@ data ClusterUpdate = ClusterUpdate
     desiredServiceExternalIpsConfig :: (Core.Maybe ServiceExternalIPsConfig),
     -- | Configuration for Shielded Nodes.
     desiredShieldedNodes :: (Core.Maybe ShieldedNodes),
+    -- | The desired stack type of the cluster. If a stack type is provided and does not match the current stack type of the cluster, update will attempt to change the stack type to the new type.
+    desiredStackType :: (Core.Maybe ClusterUpdate_DesiredStackType),
     -- | Cluster-level Vertical Pod Autoscaling configuration.
     desiredVerticalPodAutoscaling :: (Core.Maybe VerticalPodAutoscaling),
     -- | Configuration for Workload Identity.
-    desiredWorkloadIdentityConfig :: (Core.Maybe WorkloadIdentityConfig)
+    desiredWorkloadIdentityConfig :: (Core.Maybe WorkloadIdentityConfig),
+    -- | The current etag of the cluster. If an etag is provided and does not match the current etag of the cluster, update will be blocked and an ABORTED error will be returned.
+    etag :: (Core.Maybe Core.Text),
+    -- | The additional pod ranges that are to be removed from the cluster. The pod ranges specified here must have been specified earlier in the \'additional/pod/ranges_config\' argument.
+    removedAdditionalPodRangesConfig :: (Core.Maybe AdditionalPodRangesConfig)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1646,14 +1924,18 @@ newClusterUpdate ::
   ClusterUpdate
 newClusterUpdate =
   ClusterUpdate
-    { desiredAddonsConfig = Core.Nothing,
+    { additionalPodRangesConfig = Core.Nothing,
+      desiredAddonsConfig = Core.Nothing,
       desiredAuthenticatorGroupsConfig = Core.Nothing,
       desiredBinaryAuthorization = Core.Nothing,
       desiredClusterAutoscaling = Core.Nothing,
+      desiredCostManagementConfig = Core.Nothing,
       desiredDatabaseEncryption = Core.Nothing,
       desiredDatapathProvider = Core.Nothing,
       desiredDefaultSnatStatus = Core.Nothing,
       desiredDnsConfig = Core.Nothing,
+      desiredEnablePrivateEndpoint = Core.Nothing,
+      desiredGatewayApiConfig = Core.Nothing,
       desiredGcfsConfig = Core.Nothing,
       desiredIdentityServiceConfig = Core.Nothing,
       desiredImageType = Core.Nothing,
@@ -1670,6 +1952,7 @@ newClusterUpdate =
       desiredNodePoolAutoConfigNetworkTags = Core.Nothing,
       desiredNodePoolAutoscaling = Core.Nothing,
       desiredNodePoolId = Core.Nothing,
+      desiredNodePoolLoggingConfig = Core.Nothing,
       desiredNodeVersion = Core.Nothing,
       desiredNotificationConfig = Core.Nothing,
       desiredPrivateClusterConfig = Core.Nothing,
@@ -1678,8 +1961,11 @@ newClusterUpdate =
       desiredResourceUsageExportConfig = Core.Nothing,
       desiredServiceExternalIpsConfig = Core.Nothing,
       desiredShieldedNodes = Core.Nothing,
+      desiredStackType = Core.Nothing,
       desiredVerticalPodAutoscaling = Core.Nothing,
-      desiredWorkloadIdentityConfig = Core.Nothing
+      desiredWorkloadIdentityConfig = Core.Nothing,
+      etag = Core.Nothing,
+      removedAdditionalPodRangesConfig = Core.Nothing
     }
 
 instance Core.FromJSON ClusterUpdate where
@@ -1688,14 +1974,18 @@ instance Core.FromJSON ClusterUpdate where
       "ClusterUpdate"
       ( \o ->
           ClusterUpdate
-            Core.<$> (o Core..:? "desiredAddonsConfig")
+            Core.<$> (o Core..:? "additionalPodRangesConfig")
+            Core.<*> (o Core..:? "desiredAddonsConfig")
             Core.<*> (o Core..:? "desiredAuthenticatorGroupsConfig")
             Core.<*> (o Core..:? "desiredBinaryAuthorization")
             Core.<*> (o Core..:? "desiredClusterAutoscaling")
+            Core.<*> (o Core..:? "desiredCostManagementConfig")
             Core.<*> (o Core..:? "desiredDatabaseEncryption")
             Core.<*> (o Core..:? "desiredDatapathProvider")
             Core.<*> (o Core..:? "desiredDefaultSnatStatus")
             Core.<*> (o Core..:? "desiredDnsConfig")
+            Core.<*> (o Core..:? "desiredEnablePrivateEndpoint")
+            Core.<*> (o Core..:? "desiredGatewayApiConfig")
             Core.<*> (o Core..:? "desiredGcfsConfig")
             Core.<*> (o Core..:? "desiredIdentityServiceConfig")
             Core.<*> (o Core..:? "desiredImageType")
@@ -1712,6 +2002,7 @@ instance Core.FromJSON ClusterUpdate where
             Core.<*> (o Core..:? "desiredNodePoolAutoConfigNetworkTags")
             Core.<*> (o Core..:? "desiredNodePoolAutoscaling")
             Core.<*> (o Core..:? "desiredNodePoolId")
+            Core.<*> (o Core..:? "desiredNodePoolLoggingConfig")
             Core.<*> (o Core..:? "desiredNodeVersion")
             Core.<*> (o Core..:? "desiredNotificationConfig")
             Core.<*> (o Core..:? "desiredPrivateClusterConfig")
@@ -1720,15 +2011,20 @@ instance Core.FromJSON ClusterUpdate where
             Core.<*> (o Core..:? "desiredResourceUsageExportConfig")
             Core.<*> (o Core..:? "desiredServiceExternalIpsConfig")
             Core.<*> (o Core..:? "desiredShieldedNodes")
+            Core.<*> (o Core..:? "desiredStackType")
             Core.<*> (o Core..:? "desiredVerticalPodAutoscaling")
             Core.<*> (o Core..:? "desiredWorkloadIdentityConfig")
+            Core.<*> (o Core..:? "etag")
+            Core.<*> (o Core..:? "removedAdditionalPodRangesConfig")
       )
 
 instance Core.ToJSON ClusterUpdate where
   toJSON ClusterUpdate {..} =
     Core.object
       ( Core.catMaybes
-          [ ("desiredAddonsConfig" Core..=)
+          [ ("additionalPodRangesConfig" Core..=)
+              Core.<$> additionalPodRangesConfig,
+            ("desiredAddonsConfig" Core..=)
               Core.<$> desiredAddonsConfig,
             ("desiredAuthenticatorGroupsConfig" Core..=)
               Core.<$> desiredAuthenticatorGroupsConfig,
@@ -1736,6 +2032,8 @@ instance Core.ToJSON ClusterUpdate where
               Core.<$> desiredBinaryAuthorization,
             ("desiredClusterAutoscaling" Core..=)
               Core.<$> desiredClusterAutoscaling,
+            ("desiredCostManagementConfig" Core..=)
+              Core.<$> desiredCostManagementConfig,
             ("desiredDatabaseEncryption" Core..=)
               Core.<$> desiredDatabaseEncryption,
             ("desiredDatapathProvider" Core..=)
@@ -1744,6 +2042,10 @@ instance Core.ToJSON ClusterUpdate where
               Core.<$> desiredDefaultSnatStatus,
             ("desiredDnsConfig" Core..=)
               Core.<$> desiredDnsConfig,
+            ("desiredEnablePrivateEndpoint" Core..=)
+              Core.<$> desiredEnablePrivateEndpoint,
+            ("desiredGatewayApiConfig" Core..=)
+              Core.<$> desiredGatewayApiConfig,
             ("desiredGcfsConfig" Core..=)
               Core.<$> desiredGcfsConfig,
             ("desiredIdentityServiceConfig" Core..=)
@@ -1776,6 +2078,8 @@ instance Core.ToJSON ClusterUpdate where
               Core.<$> desiredNodePoolAutoscaling,
             ("desiredNodePoolId" Core..=)
               Core.<$> desiredNodePoolId,
+            ("desiredNodePoolLoggingConfig" Core..=)
+              Core.<$> desiredNodePoolLoggingConfig,
             ("desiredNodeVersion" Core..=)
               Core.<$> desiredNodeVersion,
             ("desiredNotificationConfig" Core..=)
@@ -1792,10 +2096,15 @@ instance Core.ToJSON ClusterUpdate where
               Core.<$> desiredServiceExternalIpsConfig,
             ("desiredShieldedNodes" Core..=)
               Core.<$> desiredShieldedNodes,
+            ("desiredStackType" Core..=)
+              Core.<$> desiredStackType,
             ("desiredVerticalPodAutoscaling" Core..=)
               Core.<$> desiredVerticalPodAutoscaling,
             ("desiredWorkloadIdentityConfig" Core..=)
-              Core.<$> desiredWorkloadIdentityConfig
+              Core.<$> desiredWorkloadIdentityConfig,
+            ("etag" Core..=) Core.<$> etag,
+            ("removedAdditionalPodRangesConfig" Core..=)
+              Core.<$> removedAdditionalPodRangesConfig
           ]
       )
 
@@ -1807,7 +2116,7 @@ data CompleteIPRotationRequest = CompleteIPRotationRequest
     clusterId :: (Core.Maybe Core.Text),
     -- | The name (project, location, cluster name) of the cluster to complete IP rotation. Specified in the format @projects\/*\/locations\/*\/clusters\/*@.
     name :: (Core.Maybe Core.Text),
-    -- | Deprecated. The Google Developers Console <https://developers.google.com/console/help/new/#projectnumber project ID or project number>. This field has been deprecated and replaced by the name field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the name field.
     projectId :: (Core.Maybe Core.Text),
     -- | Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides. This field has been deprecated and replaced by the name field.
     zone :: (Core.Maybe Core.Text)
@@ -1847,6 +2156,26 @@ instance Core.ToJSON CompleteIPRotationRequest where
             ("zone" Core..=) Core.<$> zone
           ]
       )
+
+-- | CompleteNodePoolUpgradeRequest sets the name of target node pool to complete upgrade.
+--
+-- /See:/ 'newCompleteNodePoolUpgradeRequest' smart constructor.
+data CompleteNodePoolUpgradeRequest = CompleteNodePoolUpgradeRequest
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CompleteNodePoolUpgradeRequest' with the minimum fields required to make a request.
+newCompleteNodePoolUpgradeRequest ::
+  CompleteNodePoolUpgradeRequest
+newCompleteNodePoolUpgradeRequest = CompleteNodePoolUpgradeRequest
+
+instance Core.FromJSON CompleteNodePoolUpgradeRequest where
+  parseJSON =
+    Core.withObject
+      "CompleteNodePoolUpgradeRequest"
+      (\o -> Core.pure CompleteNodePoolUpgradeRequest)
+
+instance Core.ToJSON CompleteNodePoolUpgradeRequest where
+  toJSON = Core.const Core.emptyObject
 
 -- | ConfidentialNodes is configuration for the confidential nodes feature, which makes nodes run on confidential VMs.
 --
@@ -1938,6 +2267,35 @@ instance Core.ToJSON ConsumptionMeteringConfig where
           [("enabled" Core..=) Core.<$> enabled]
       )
 
+-- | Configuration for fine-grained cost management feature.
+--
+-- /See:/ 'newCostManagementConfig' smart constructor.
+newtype CostManagementConfig = CostManagementConfig
+  { -- | Whether the feature is enabled or not.
+    enabled :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CostManagementConfig' with the minimum fields required to make a request.
+newCostManagementConfig ::
+  CostManagementConfig
+newCostManagementConfig = CostManagementConfig {enabled = Core.Nothing}
+
+instance Core.FromJSON CostManagementConfig where
+  parseJSON =
+    Core.withObject
+      "CostManagementConfig"
+      ( \o ->
+          CostManagementConfig Core.<$> (o Core..:? "enabled")
+      )
+
+instance Core.ToJSON CostManagementConfig where
+  toJSON CostManagementConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [("enabled" Core..=) Core.<$> enabled]
+      )
+
 -- | CreateClusterRequest creates a cluster.
 --
 -- /See:/ 'newCreateClusterRequest' smart constructor.
@@ -1946,7 +2304,7 @@ data CreateClusterRequest = CreateClusterRequest
     cluster :: (Core.Maybe Cluster),
     -- | The parent (project and location) where the cluster will be created. Specified in the format @projects\/*\/locations\/*@.
     parent :: (Core.Maybe Core.Text),
-    -- | Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the parent field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the parent field.
     projectId :: (Core.Maybe Core.Text),
     -- | Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides. This field has been deprecated and replaced by the parent field.
     zone :: (Core.Maybe Core.Text)
@@ -1997,7 +2355,7 @@ data CreateNodePoolRequest = CreateNodePoolRequest
     nodePool :: (Core.Maybe NodePool),
     -- | The parent (project, location, cluster name) where the node pool will be created. Specified in the format @projects\/*\/locations\/*\/clusters\/*@.
     parent :: (Core.Maybe Core.Text),
-    -- | Deprecated. The Google Developers Console <https://developers.google.com/console/help/new/#projectnumber project ID or project number>. This field has been deprecated and replaced by the parent field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the parent field.
     projectId :: (Core.Maybe Core.Text),
     -- | Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides. This field has been deprecated and replaced by the parent field.
     zone :: (Core.Maybe Core.Text)
@@ -2216,7 +2574,7 @@ instance Core.ToJSON DnsCacheConfig where
           [("enabled" Core..=) Core.<$> enabled]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -2233,6 +2591,64 @@ instance Core.FromJSON Empty where
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
+
+-- | EphemeralStorageLocalSsdConfig contains configuration for the node ephemeral storage using Local SSD.
+--
+-- /See:/ 'newEphemeralStorageLocalSsdConfig' smart constructor.
+newtype EphemeralStorageLocalSsdConfig = EphemeralStorageLocalSsdConfig
+  { -- | Number of local SSDs to use to back ephemeral storage. Uses NVMe interfaces. Each local SSD is 375 GB in size. If zero, it means to disable using local SSDs as ephemeral storage. The limit for this value is dependent upon the maximum number of disks available on a machine per zone. See: https:\/\/cloud.google.com\/compute\/docs\/disks\/local-ssd for more information.
+    localSsdCount :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'EphemeralStorageLocalSsdConfig' with the minimum fields required to make a request.
+newEphemeralStorageLocalSsdConfig ::
+  EphemeralStorageLocalSsdConfig
+newEphemeralStorageLocalSsdConfig =
+  EphemeralStorageLocalSsdConfig {localSsdCount = Core.Nothing}
+
+instance Core.FromJSON EphemeralStorageLocalSsdConfig where
+  parseJSON =
+    Core.withObject
+      "EphemeralStorageLocalSsdConfig"
+      ( \o ->
+          EphemeralStorageLocalSsdConfig
+            Core.<$> (o Core..:? "localSsdCount")
+      )
+
+instance Core.ToJSON EphemeralStorageLocalSsdConfig where
+  toJSON EphemeralStorageLocalSsdConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [("localSsdCount" Core..=) Core.<$> localSsdCount]
+      )
+
+-- | Configuration of Fast Socket feature.
+--
+-- /See:/ 'newFastSocket' smart constructor.
+newtype FastSocket = FastSocket
+  { -- | Whether Fast Socket features are enabled in the node pool.
+    enabled :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FastSocket' with the minimum fields required to make a request.
+newFastSocket ::
+  FastSocket
+newFastSocket = FastSocket {enabled = Core.Nothing}
+
+instance Core.FromJSON FastSocket where
+  parseJSON =
+    Core.withObject
+      "FastSocket"
+      (\o -> FastSocket Core.<$> (o Core..:? "enabled"))
+
+instance Core.ToJSON FastSocket where
+  toJSON FastSocket {..} =
+    Core.object
+      ( Core.catMaybes
+          [("enabled" Core..=) Core.<$> enabled]
+      )
 
 -- | Allows filtering to one or more specific event types. If event types are present, those and only those event types will be transmitted to the cluster. Other types will be skipped. If no filter is specified, or no event types are present, all event types will be sent
 --
@@ -2259,6 +2675,122 @@ instance Core.ToJSON Filter where
     Core.object
       ( Core.catMaybes
           [("eventType" Core..=) Core.<$> eventType]
+      )
+
+-- | Fleet is the fleet configuration for the cluster.
+--
+-- /See:/ 'newFleet' smart constructor.
+data Fleet = Fleet
+  { -- | [Output only] The full resource name of the registered fleet membership of the cluster, in the format @\/\/gkehub.googleapis.com\/projects\/*\/locations\/*\/memberships\/*@.
+    membership :: (Core.Maybe Core.Text),
+    -- | [Output only] Whether the cluster has been registered through the fleet API.
+    preRegistered :: (Core.Maybe Core.Bool),
+    -- | The Fleet host project(project ID or project number) where this cluster will be registered to. This field cannot be changed after the cluster has been registered.
+    project :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Fleet' with the minimum fields required to make a request.
+newFleet ::
+  Fleet
+newFleet =
+  Fleet
+    { membership = Core.Nothing,
+      preRegistered = Core.Nothing,
+      project = Core.Nothing
+    }
+
+instance Core.FromJSON Fleet where
+  parseJSON =
+    Core.withObject
+      "Fleet"
+      ( \o ->
+          Fleet
+            Core.<$> (o Core..:? "membership")
+            Core.<*> (o Core..:? "preRegistered")
+            Core.<*> (o Core..:? "project")
+      )
+
+instance Core.ToJSON Fleet where
+  toJSON Fleet {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("membership" Core..=) Core.<$> membership,
+            ("preRegistered" Core..=) Core.<$> preRegistered,
+            ("project" Core..=) Core.<$> project
+          ]
+      )
+
+-- | GPUSharingConfig represents the GPU sharing configuration for Hardware Accelerators.
+--
+-- /See:/ 'newGPUSharingConfig' smart constructor.
+data GPUSharingConfig = GPUSharingConfig
+  { -- | The type of GPU sharing strategy to enable on the GPU node.
+    gpuSharingStrategy :: (Core.Maybe GPUSharingConfig_GpuSharingStrategy),
+    -- | The max number of containers that can share a physical GPU.
+    maxSharedClientsPerGpu :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GPUSharingConfig' with the minimum fields required to make a request.
+newGPUSharingConfig ::
+  GPUSharingConfig
+newGPUSharingConfig =
+  GPUSharingConfig
+    { gpuSharingStrategy = Core.Nothing,
+      maxSharedClientsPerGpu = Core.Nothing
+    }
+
+instance Core.FromJSON GPUSharingConfig where
+  parseJSON =
+    Core.withObject
+      "GPUSharingConfig"
+      ( \o ->
+          GPUSharingConfig
+            Core.<$> (o Core..:? "gpuSharingStrategy")
+            Core.<*> ( o Core..:? "maxSharedClientsPerGpu"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+      )
+
+instance Core.ToJSON GPUSharingConfig where
+  toJSON GPUSharingConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("gpuSharingStrategy" Core..=)
+              Core.<$> gpuSharingStrategy,
+            ("maxSharedClientsPerGpu" Core..=) Core.. Core.AsText
+              Core.<$> maxSharedClientsPerGpu
+          ]
+      )
+
+-- | GatewayAPIConfig contains the desired config of Gateway API on this cluster.
+--
+-- /See:/ 'newGatewayAPIConfig' smart constructor.
+newtype GatewayAPIConfig = GatewayAPIConfig
+  { -- | The Gateway API release channel to use for Gateway API.
+    channel :: (Core.Maybe GatewayAPIConfig_Channel)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GatewayAPIConfig' with the minimum fields required to make a request.
+newGatewayAPIConfig ::
+  GatewayAPIConfig
+newGatewayAPIConfig = GatewayAPIConfig {channel = Core.Nothing}
+
+instance Core.FromJSON GatewayAPIConfig where
+  parseJSON =
+    Core.withObject
+      "GatewayAPIConfig"
+      ( \o ->
+          GatewayAPIConfig Core.<$> (o Core..:? "channel")
+      )
+
+instance Core.ToJSON GatewayAPIConfig where
+  toJSON GatewayAPIConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [("channel" Core..=) Core.<$> channel]
       )
 
 -- | Configuration for the Compute Engine PD CSI driver.
@@ -2462,6 +2994,35 @@ instance Core.ToJSON GetOpenIDConfigResponse where
           ]
       )
 
+-- | Configuration for the Backup for GKE Agent.
+--
+-- /See:/ 'newGkeBackupAgentConfig' smart constructor.
+newtype GkeBackupAgentConfig = GkeBackupAgentConfig
+  { -- | Whether the Backup for GKE agent is enabled for this cluster.
+    enabled :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GkeBackupAgentConfig' with the minimum fields required to make a request.
+newGkeBackupAgentConfig ::
+  GkeBackupAgentConfig
+newGkeBackupAgentConfig = GkeBackupAgentConfig {enabled = Core.Nothing}
+
+instance Core.FromJSON GkeBackupAgentConfig where
+  parseJSON =
+    Core.withObject
+      "GkeBackupAgentConfig"
+      ( \o ->
+          GkeBackupAgentConfig Core.<$> (o Core..:? "enabled")
+      )
+
+instance Core.ToJSON GkeBackupAgentConfig where
+  toJSON GkeBackupAgentConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [("enabled" Core..=) Core.<$> enabled]
+      )
+
 -- | Configuration options for the horizontal pod autoscaling feature, which increases or decreases the number of replica pods a replication controller has based on the resource usage of the existing pods.
 --
 -- /See:/ 'newHorizontalPodAutoscaling' smart constructor.
@@ -2598,7 +3159,9 @@ instance Core.ToJSON ILBSubsettingConfig where
 --
 -- /See:/ 'newIPAllocationPolicy' smart constructor.
 data IPAllocationPolicy = IPAllocationPolicy
-  { -- | This field is deprecated, use cluster/ipv4/cidr_block.
+  { -- | Output only. [Output only] The additional pod ranges that are added to the cluster. These pod ranges can be used by new node pools to allocate pod IPs automatically. Once the range is removed it will not show up in IPAllocationPolicy.
+    additionalPodRangesConfig :: (Core.Maybe AdditionalPodRangesConfig),
+    -- | This field is deprecated, use cluster/ipv4/cidr_block.
     clusterIpv4Cidr :: (Core.Maybe Core.Text),
     -- | The IP address range for the cluster pod IPs. If this field is set, then @cluster.cluster_ipv4_cidr@ must be left blank. This field is only applicable when @use_ip_aliases@ is true. Set to blank to have a range chosen with the default size. Set to \/netmask (e.g. @\/14@) to have a range chosen with a specific netmask. Set to a <http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing CIDR> notation (e.g. @10.96.0.0\/14@) from the RFC-1918 private networks (e.g. @10.0.0.0\/8@, @172.16.0.0\/12@, @192.168.0.0\/16@) to pick a specific range to use.
     clusterIpv4CidrBlock :: (Core.Maybe Core.Text),
@@ -2606,16 +3169,26 @@ data IPAllocationPolicy = IPAllocationPolicy
     clusterSecondaryRangeName :: (Core.Maybe Core.Text),
     -- | Whether a new subnetwork will be created automatically for the cluster. This field is only applicable when @use_ip_aliases@ is true.
     createSubnetwork :: (Core.Maybe Core.Bool),
+    -- | The ipv6 access type (internal or external) when create_subnetwork is true
+    ipv6AccessType :: (Core.Maybe IPAllocationPolicy_Ipv6AccessType),
     -- | This field is deprecated, use node/ipv4/cidr_block.
     nodeIpv4Cidr :: (Core.Maybe Core.Text),
     -- | The IP address range of the instance IPs in this cluster. This is applicable only if @create_subnetwork@ is true. Set to blank to have a range chosen with the default size. Set to \/netmask (e.g. @\/14@) to have a range chosen with a specific netmask. Set to a <http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing CIDR> notation (e.g. @10.96.0.0\/14@) from the RFC-1918 private networks (e.g. @10.0.0.0\/8@, @172.16.0.0\/12@, @192.168.0.0\/16@) to pick a specific range to use.
     nodeIpv4CidrBlock :: (Core.Maybe Core.Text),
+    -- | [PRIVATE FIELD] Pod CIDR size overprovisioning config for the cluster. Pod CIDR size per node depends on max/pods/per/node. By default, the value of max/pods/per/node is doubled and then rounded off to next power of 2 to get the size of pod CIDR block per node. Example: max/pods/per/node of 30 would result in 64 IPs (\/26). This config can disable the doubling of IPs (we still round off to next power of 2) Example: max/pods/per/node of 30 will result in 32 IPs (\/27) when overprovisioning is disabled.
+    podCidrOverprovisionConfig :: (Core.Maybe PodCIDROverprovisionConfig),
     -- | This field is deprecated, use services/ipv4/cidr_block.
     servicesIpv4Cidr :: (Core.Maybe Core.Text),
     -- | The IP address range of the services IPs in this cluster. If blank, a range will be automatically chosen with the default size. This field is only applicable when @use_ip_aliases@ is true. Set to blank to have a range chosen with the default size. Set to \/netmask (e.g. @\/14@) to have a range chosen with a specific netmask. Set to a <http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing CIDR> notation (e.g. @10.96.0.0\/14@) from the RFC-1918 private networks (e.g. @10.0.0.0\/8@, @172.16.0.0\/12@, @192.168.0.0\/16@) to pick a specific range to use.
     servicesIpv4CidrBlock :: (Core.Maybe Core.Text),
+    -- | Output only. [Output only] The services IPv6 CIDR block for the cluster.
+    servicesIpv6CidrBlock :: (Core.Maybe Core.Text),
     -- | The name of the secondary range to be used as for the services CIDR block. The secondary range will be used for service ClusterIPs. This must be an existing secondary range associated with the cluster subnetwork. This field is only applicable with use/ip/aliases is true and create_subnetwork is false.
     servicesSecondaryRangeName :: (Core.Maybe Core.Text),
+    -- | The IP stack type of the cluster
+    stackType :: (Core.Maybe IPAllocationPolicy_StackType),
+    -- | Output only. [Output only] The subnet\'s IPv6 CIDR block used by nodes and pods.
+    subnetIpv6CidrBlock :: (Core.Maybe Core.Text),
     -- | A custom subnetwork name to be used if @create_subnetwork@ is true. If this field is empty, then an automatic name will be chosen for the new subnetwork.
     subnetworkName :: (Core.Maybe Core.Text),
     -- | The IP address range of the Cloud TPUs in this cluster. If unspecified, a range will be automatically chosen with the default size. This field is only applicable when @use_ip_aliases@ is true. If unspecified, the range will use the default size. Set to \/netmask (e.g. @\/14@) to have a range chosen with a specific netmask. Set to a <http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing CIDR> notation (e.g. @10.96.0.0\/14@) from the RFC-1918 private networks (e.g. @10.0.0.0\/8@, @172.16.0.0\/12@, @192.168.0.0\/16@) to pick a specific range to use.
@@ -2632,15 +3205,21 @@ newIPAllocationPolicy ::
   IPAllocationPolicy
 newIPAllocationPolicy =
   IPAllocationPolicy
-    { clusterIpv4Cidr = Core.Nothing,
+    { additionalPodRangesConfig = Core.Nothing,
+      clusterIpv4Cidr = Core.Nothing,
       clusterIpv4CidrBlock = Core.Nothing,
       clusterSecondaryRangeName = Core.Nothing,
       createSubnetwork = Core.Nothing,
+      ipv6AccessType = Core.Nothing,
       nodeIpv4Cidr = Core.Nothing,
       nodeIpv4CidrBlock = Core.Nothing,
+      podCidrOverprovisionConfig = Core.Nothing,
       servicesIpv4Cidr = Core.Nothing,
       servicesIpv4CidrBlock = Core.Nothing,
+      servicesIpv6CidrBlock = Core.Nothing,
       servicesSecondaryRangeName = Core.Nothing,
+      stackType = Core.Nothing,
+      subnetIpv6CidrBlock = Core.Nothing,
       subnetworkName = Core.Nothing,
       tpuIpv4CidrBlock = Core.Nothing,
       useIpAliases = Core.Nothing,
@@ -2653,15 +3232,21 @@ instance Core.FromJSON IPAllocationPolicy where
       "IPAllocationPolicy"
       ( \o ->
           IPAllocationPolicy
-            Core.<$> (o Core..:? "clusterIpv4Cidr")
+            Core.<$> (o Core..:? "additionalPodRangesConfig")
+            Core.<*> (o Core..:? "clusterIpv4Cidr")
             Core.<*> (o Core..:? "clusterIpv4CidrBlock")
             Core.<*> (o Core..:? "clusterSecondaryRangeName")
             Core.<*> (o Core..:? "createSubnetwork")
+            Core.<*> (o Core..:? "ipv6AccessType")
             Core.<*> (o Core..:? "nodeIpv4Cidr")
             Core.<*> (o Core..:? "nodeIpv4CidrBlock")
+            Core.<*> (o Core..:? "podCidrOverprovisionConfig")
             Core.<*> (o Core..:? "servicesIpv4Cidr")
             Core.<*> (o Core..:? "servicesIpv4CidrBlock")
+            Core.<*> (o Core..:? "servicesIpv6CidrBlock")
             Core.<*> (o Core..:? "servicesSecondaryRangeName")
+            Core.<*> (o Core..:? "stackType")
+            Core.<*> (o Core..:? "subnetIpv6CidrBlock")
             Core.<*> (o Core..:? "subnetworkName")
             Core.<*> (o Core..:? "tpuIpv4CidrBlock")
             Core.<*> (o Core..:? "useIpAliases")
@@ -2672,23 +3257,32 @@ instance Core.ToJSON IPAllocationPolicy where
   toJSON IPAllocationPolicy {..} =
     Core.object
       ( Core.catMaybes
-          [ ("clusterIpv4Cidr" Core..=)
-              Core.<$> clusterIpv4Cidr,
+          [ ("additionalPodRangesConfig" Core..=)
+              Core.<$> additionalPodRangesConfig,
+            ("clusterIpv4Cidr" Core..=) Core.<$> clusterIpv4Cidr,
             ("clusterIpv4CidrBlock" Core..=)
               Core.<$> clusterIpv4CidrBlock,
             ("clusterSecondaryRangeName" Core..=)
               Core.<$> clusterSecondaryRangeName,
             ("createSubnetwork" Core..=)
               Core.<$> createSubnetwork,
+            ("ipv6AccessType" Core..=) Core.<$> ipv6AccessType,
             ("nodeIpv4Cidr" Core..=) Core.<$> nodeIpv4Cidr,
             ("nodeIpv4CidrBlock" Core..=)
               Core.<$> nodeIpv4CidrBlock,
+            ("podCidrOverprovisionConfig" Core..=)
+              Core.<$> podCidrOverprovisionConfig,
             ("servicesIpv4Cidr" Core..=)
               Core.<$> servicesIpv4Cidr,
             ("servicesIpv4CidrBlock" Core..=)
               Core.<$> servicesIpv4CidrBlock,
+            ("servicesIpv6CidrBlock" Core..=)
+              Core.<$> servicesIpv6CidrBlock,
             ("servicesSecondaryRangeName" Core..=)
               Core.<$> servicesSecondaryRangeName,
+            ("stackType" Core..=) Core.<$> stackType,
+            ("subnetIpv6CidrBlock" Core..=)
+              Core.<$> subnetIpv6CidrBlock,
             ("subnetworkName" Core..=) Core.<$> subnetworkName,
             ("tpuIpv4CidrBlock" Core..=)
               Core.<$> tpuIpv4CidrBlock,
@@ -2891,8 +3485,10 @@ instance Core.ToJSON LegacyAbac where
 -- | Parameters that can be configured on Linux nodes.
 --
 -- /See:/ 'newLinuxNodeConfig' smart constructor.
-newtype LinuxNodeConfig = LinuxNodeConfig
-  { -- | The Linux kernel parameters to be applied to the nodes and all pods running on the nodes. The following parameters are supported. net.core.netdev/max/backlog net.core.rmem/max net.core.wmem/default net.core.wmem/max net.core.optmem/max net.core.somaxconn net.ipv4.tcp/rmem net.ipv4.tcp/wmem net.ipv4.tcp/tw/reuse
+data LinuxNodeConfig = LinuxNodeConfig
+  { -- | cgroup_mode specifies the cgroup mode to be used on the node.
+    cgroupMode :: (Core.Maybe LinuxNodeConfig_CgroupMode),
+    -- | The Linux kernel parameters to be applied to the nodes and all pods running on the nodes. The following parameters are supported. net.core.busy/poll net.core.busy/read net.core.netdev/max/backlog net.core.rmem/max net.core.wmem/default net.core.wmem/max net.core.optmem/max net.core.somaxconn net.ipv4.tcp/rmem net.ipv4.tcp/wmem net.ipv4.tcp/tw/reuse
     sysctls :: (Core.Maybe LinuxNodeConfig_Sysctls)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2900,24 +3496,29 @@ newtype LinuxNodeConfig = LinuxNodeConfig
 -- | Creates a value of 'LinuxNodeConfig' with the minimum fields required to make a request.
 newLinuxNodeConfig ::
   LinuxNodeConfig
-newLinuxNodeConfig = LinuxNodeConfig {sysctls = Core.Nothing}
+newLinuxNodeConfig =
+  LinuxNodeConfig {cgroupMode = Core.Nothing, sysctls = Core.Nothing}
 
 instance Core.FromJSON LinuxNodeConfig where
   parseJSON =
     Core.withObject
       "LinuxNodeConfig"
       ( \o ->
-          LinuxNodeConfig Core.<$> (o Core..:? "sysctls")
+          LinuxNodeConfig
+            Core.<$> (o Core..:? "cgroupMode")
+            Core.<*> (o Core..:? "sysctls")
       )
 
 instance Core.ToJSON LinuxNodeConfig where
   toJSON LinuxNodeConfig {..} =
     Core.object
       ( Core.catMaybes
-          [("sysctls" Core..=) Core.<$> sysctls]
+          [ ("cgroupMode" Core..=) Core.<$> cgroupMode,
+            ("sysctls" Core..=) Core.<$> sysctls
+          ]
       )
 
--- | The Linux kernel parameters to be applied to the nodes and all pods running on the nodes. The following parameters are supported. net.core.netdev/max/backlog net.core.rmem/max net.core.wmem/default net.core.wmem/max net.core.optmem/max net.core.somaxconn net.ipv4.tcp/rmem net.ipv4.tcp/wmem net.ipv4.tcp/tw/reuse
+-- | The Linux kernel parameters to be applied to the nodes and all pods running on the nodes. The following parameters are supported. net.core.busy/poll net.core.busy/read net.core.netdev/max/backlog net.core.rmem/max net.core.wmem/default net.core.wmem/max net.core.optmem/max net.core.somaxconn net.ipv4.tcp/rmem net.ipv4.tcp/wmem net.ipv4.tcp/tw/reuse
 --
 -- /See:/ 'newLinuxNodeConfig_Sysctls' smart constructor.
 newtype LinuxNodeConfig_Sysctls = LinuxNodeConfig_Sysctls
@@ -3091,6 +3692,37 @@ instance Core.ToJSON ListUsableSubnetworksResponse where
           ]
       )
 
+-- | LocalNvmeSsdBlockConfig contains configuration for using raw-block local NVMe SSD.
+--
+-- /See:/ 'newLocalNvmeSsdBlockConfig' smart constructor.
+newtype LocalNvmeSsdBlockConfig = LocalNvmeSsdBlockConfig
+  { -- | The number of raw-block local NVMe SSD disks to be attached to the node. Each local SSD is 375 GB in size. If zero, it means no raw-block local NVMe SSD disks to be attached to the node. The limit for this value is dependent upon the maximum number of disks available on a machine per zone. See: https:\/\/cloud.google.com\/compute\/docs\/disks\/local-ssd for more information.
+    localSsdCount :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LocalNvmeSsdBlockConfig' with the minimum fields required to make a request.
+newLocalNvmeSsdBlockConfig ::
+  LocalNvmeSsdBlockConfig
+newLocalNvmeSsdBlockConfig =
+  LocalNvmeSsdBlockConfig {localSsdCount = Core.Nothing}
+
+instance Core.FromJSON LocalNvmeSsdBlockConfig where
+  parseJSON =
+    Core.withObject
+      "LocalNvmeSsdBlockConfig"
+      ( \o ->
+          LocalNvmeSsdBlockConfig
+            Core.<$> (o Core..:? "localSsdCount")
+      )
+
+instance Core.ToJSON LocalNvmeSsdBlockConfig where
+  toJSON LocalNvmeSsdBlockConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [("localSsdCount" Core..=) Core.<$> localSsdCount]
+      )
+
 -- | LoggingComponentConfig is cluster logging component configuration.
 --
 -- /See:/ 'newLoggingComponentConfig' smart constructor.
@@ -3154,6 +3786,35 @@ instance Core.ToJSON LoggingConfig where
           [ ("componentConfig" Core..=)
               Core.<$> componentConfig
           ]
+      )
+
+-- | LoggingVariantConfig specifies the behaviour of the logging component.
+--
+-- /See:/ 'newLoggingVariantConfig' smart constructor.
+newtype LoggingVariantConfig = LoggingVariantConfig
+  { -- | Logging variant deployed on nodes.
+    variant :: (Core.Maybe LoggingVariantConfig_Variant)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LoggingVariantConfig' with the minimum fields required to make a request.
+newLoggingVariantConfig ::
+  LoggingVariantConfig
+newLoggingVariantConfig = LoggingVariantConfig {variant = Core.Nothing}
+
+instance Core.FromJSON LoggingVariantConfig where
+  parseJSON =
+    Core.withObject
+      "LoggingVariantConfig"
+      ( \o ->
+          LoggingVariantConfig Core.<$> (o Core..:? "variant")
+      )
+
+instance Core.ToJSON LoggingVariantConfig where
+  toJSON LoggingVariantConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [("variant" Core..=) Core.<$> variant]
       )
 
 -- | Represents the Maintenance exclusion option.
@@ -3305,6 +3966,36 @@ instance
   toJSON MaintenanceWindow_MaintenanceExclusions {..} =
     Core.toJSON additional
 
+-- | ManagedPrometheusConfig defines the configuration for Google Cloud Managed Service for Prometheus.
+--
+-- /See:/ 'newManagedPrometheusConfig' smart constructor.
+newtype ManagedPrometheusConfig = ManagedPrometheusConfig
+  { -- | Enable Managed Collection.
+    enabled :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ManagedPrometheusConfig' with the minimum fields required to make a request.
+newManagedPrometheusConfig ::
+  ManagedPrometheusConfig
+newManagedPrometheusConfig = ManagedPrometheusConfig {enabled = Core.Nothing}
+
+instance Core.FromJSON ManagedPrometheusConfig where
+  parseJSON =
+    Core.withObject
+      "ManagedPrometheusConfig"
+      ( \o ->
+          ManagedPrometheusConfig
+            Core.<$> (o Core..:? "enabled")
+      )
+
+instance Core.ToJSON ManagedPrometheusConfig where
+  toJSON ManagedPrometheusConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [("enabled" Core..=) Core.<$> enabled]
+      )
+
 -- | The authentication information for accessing the master endpoint. Authentication can be done using HTTP basic auth or using client certificates.
 --
 -- /See:/ 'newMasterAuth' smart constructor.
@@ -3374,7 +4065,9 @@ data MasterAuthorizedNetworksConfig = MasterAuthorizedNetworksConfig
   { -- | cidr_blocks define up to 50 external networks that could access Kubernetes master through HTTPS.
     cidrBlocks :: (Core.Maybe [CidrBlock]),
     -- | Whether or not master authorized networks is enabled.
-    enabled :: (Core.Maybe Core.Bool)
+    enabled :: (Core.Maybe Core.Bool),
+    -- | Whether master is accessbile via Google Compute Engine Public IP addresses.
+    gcpPublicCidrsAccessEnabled :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3384,7 +4077,8 @@ newMasterAuthorizedNetworksConfig ::
 newMasterAuthorizedNetworksConfig =
   MasterAuthorizedNetworksConfig
     { cidrBlocks = Core.Nothing,
-      enabled = Core.Nothing
+      enabled = Core.Nothing,
+      gcpPublicCidrsAccessEnabled = Core.Nothing
     }
 
 instance Core.FromJSON MasterAuthorizedNetworksConfig where
@@ -3395,6 +4089,7 @@ instance Core.FromJSON MasterAuthorizedNetworksConfig where
           MasterAuthorizedNetworksConfig
             Core.<$> (o Core..:? "cidrBlocks")
             Core.<*> (o Core..:? "enabled")
+            Core.<*> (o Core..:? "gcpPublicCidrsAccessEnabled")
       )
 
 instance Core.ToJSON MasterAuthorizedNetworksConfig where
@@ -3402,7 +4097,9 @@ instance Core.ToJSON MasterAuthorizedNetworksConfig where
     Core.object
       ( Core.catMaybes
           [ ("cidrBlocks" Core..=) Core.<$> cidrBlocks,
-            ("enabled" Core..=) Core.<$> enabled
+            ("enabled" Core..=) Core.<$> enabled,
+            ("gcpPublicCidrsAccessEnabled" Core..=)
+              Core.<$> gcpPublicCidrsAccessEnabled
           ]
       )
 
@@ -3560,16 +4257,22 @@ instance Core.ToJSON MonitoringComponentConfig where
 -- | MonitoringConfig is cluster monitoring configuration.
 --
 -- /See:/ 'newMonitoringConfig' smart constructor.
-newtype MonitoringConfig = MonitoringConfig
+data MonitoringConfig = MonitoringConfig
   { -- | Monitoring components configuration
-    componentConfig :: (Core.Maybe MonitoringComponentConfig)
+    componentConfig :: (Core.Maybe MonitoringComponentConfig),
+    -- | Enable Google Cloud Managed Service for Prometheus in the cluster.
+    managedPrometheusConfig :: (Core.Maybe ManagedPrometheusConfig)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'MonitoringConfig' with the minimum fields required to make a request.
 newMonitoringConfig ::
   MonitoringConfig
-newMonitoringConfig = MonitoringConfig {componentConfig = Core.Nothing}
+newMonitoringConfig =
+  MonitoringConfig
+    { componentConfig = Core.Nothing,
+      managedPrometheusConfig = Core.Nothing
+    }
 
 instance Core.FromJSON MonitoringConfig where
   parseJSON =
@@ -3578,6 +4281,7 @@ instance Core.FromJSON MonitoringConfig where
       ( \o ->
           MonitoringConfig
             Core.<$> (o Core..:? "componentConfig")
+            Core.<*> (o Core..:? "managedPrometheusConfig")
       )
 
 instance Core.ToJSON MonitoringConfig where
@@ -3585,7 +4289,9 @@ instance Core.ToJSON MonitoringConfig where
     Core.object
       ( Core.catMaybes
           [ ("componentConfig" Core..=)
-              Core.<$> componentConfig
+              Core.<$> componentConfig,
+            ("managedPrometheusConfig" Core..=)
+              Core.<$> managedPrometheusConfig
           ]
       )
 
@@ -3603,6 +4309,8 @@ data NetworkConfig = NetworkConfig
     enableIntraNodeVisibility :: (Core.Maybe Core.Bool),
     -- | Whether L4ILB Subsetting is enabled for this cluster.
     enableL4ilbSubsetting :: (Core.Maybe Core.Bool),
+    -- | GatewayAPIConfig contains the desired config of Gateway API on this cluster.
+    gatewayApiConfig :: (Core.Maybe GatewayAPIConfig),
     -- | Output only. The relative name of the Google Compute Engine network(https:\/\/cloud.google.com\/compute\/docs\/networks-and-firewalls#networks) to which the cluster is connected. Example: projects\/my-project\/global\/networks\/my-network
     network :: (Core.Maybe Core.Text),
     -- | The desired state of IPv6 connectivity to Google Services. By default, no private IPv6 access to or from Google Services (all access will be via IPv4)
@@ -3624,6 +4332,7 @@ newNetworkConfig =
       dnsConfig = Core.Nothing,
       enableIntraNodeVisibility = Core.Nothing,
       enableL4ilbSubsetting = Core.Nothing,
+      gatewayApiConfig = Core.Nothing,
       network = Core.Nothing,
       privateIpv6GoogleAccess = Core.Nothing,
       serviceExternalIpsConfig = Core.Nothing,
@@ -3641,6 +4350,7 @@ instance Core.FromJSON NetworkConfig where
             Core.<*> (o Core..:? "dnsConfig")
             Core.<*> (o Core..:? "enableIntraNodeVisibility")
             Core.<*> (o Core..:? "enableL4ilbSubsetting")
+            Core.<*> (o Core..:? "gatewayApiConfig")
             Core.<*> (o Core..:? "network")
             Core.<*> (o Core..:? "privateIpv6GoogleAccess")
             Core.<*> (o Core..:? "serviceExternalIpsConfig")
@@ -3660,12 +4370,47 @@ instance Core.ToJSON NetworkConfig where
               Core.<$> enableIntraNodeVisibility,
             ("enableL4ilbSubsetting" Core..=)
               Core.<$> enableL4ilbSubsetting,
+            ("gatewayApiConfig" Core..=)
+              Core.<$> gatewayApiConfig,
             ("network" Core..=) Core.<$> network,
             ("privateIpv6GoogleAccess" Core..=)
               Core.<$> privateIpv6GoogleAccess,
             ("serviceExternalIpsConfig" Core..=)
               Core.<$> serviceExternalIpsConfig,
             ("subnetwork" Core..=) Core.<$> subnetwork
+          ]
+      )
+
+-- | Configuration of all network bandwidth tiers
+--
+-- /See:/ 'newNetworkPerformanceConfig' smart constructor.
+newtype NetworkPerformanceConfig = NetworkPerformanceConfig
+  { -- | Specifies the total network bandwidth tier for the NodePool.
+    totalEgressBandwidthTier :: (Core.Maybe NetworkPerformanceConfig_TotalEgressBandwidthTier)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NetworkPerformanceConfig' with the minimum fields required to make a request.
+newNetworkPerformanceConfig ::
+  NetworkPerformanceConfig
+newNetworkPerformanceConfig =
+  NetworkPerformanceConfig {totalEgressBandwidthTier = Core.Nothing}
+
+instance Core.FromJSON NetworkPerformanceConfig where
+  parseJSON =
+    Core.withObject
+      "NetworkPerformanceConfig"
+      ( \o ->
+          NetworkPerformanceConfig
+            Core.<$> (o Core..:? "totalEgressBandwidthTier")
+      )
+
+instance Core.ToJSON NetworkPerformanceConfig where
+  toJSON NetworkPerformanceConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("totalEgressBandwidthTier" Core..=)
+              Core.<$> totalEgressBandwidthTier
           ]
       )
 
@@ -3759,7 +4504,7 @@ instance Core.ToJSON NetworkTags where
     Core.object
       (Core.catMaybes [("tags" Core..=) Core.<$> tags])
 
--- | Parameters that describe the nodes in a cluster.
+-- | Parameters that describe the nodes in a cluster. GKE Autopilot clusters do not recognize parameters in @NodeConfig@. Use AutoprovisioningNodePoolDefaults instead.
 --
 -- /See:/ 'newNodeConfig' smart constructor.
 data NodeConfig = NodeConfig
@@ -3769,15 +4514,21 @@ data NodeConfig = NodeConfig
     advancedMachineFeatures :: (Core.Maybe AdvancedMachineFeatures),
     -- | The Customer Managed Encryption Key used to encrypt the boot disk attached to each node in the node pool. This should be of the form projects\/[KEY/PROJECT/ID]\/locations\/[LOCATION]\/keyRings\/[RING/NAME]\/cryptoKeys\/[KEY/NAME]. For more information about protecting resources with Cloud KMS Keys please see: https:\/\/cloud.google.com\/compute\/docs\/disks\/customer-managed-encryption
     bootDiskKmsKey :: (Core.Maybe Core.Text),
+    -- | Confidential nodes config. All the nodes in the node pool will be Confidential VM once enabled.
+    confidentialNodes :: (Core.Maybe ConfidentialNodes),
     -- | Size of the disk attached to each node, specified in GB. The smallest allowed disk size is 10GB. If unspecified, the default disk size is 100GB.
     diskSizeGb :: (Core.Maybe Core.Int32),
     -- | Type of the disk attached to each node (e.g. \'pd-standard\', \'pd-ssd\' or \'pd-balanced\') If unspecified, the default disk type is \'pd-standard\'
     diskType :: (Core.Maybe Core.Text),
+    -- | Parameters for the node ephemeral storage using Local SSDs. If unspecified, ephemeral storage is backed by the boot disk.
+    ephemeralStorageLocalSsdConfig :: (Core.Maybe EphemeralStorageLocalSsdConfig),
+    -- | Enable or disable NCCL fast socket for the node pool.
+    fastSocket :: (Core.Maybe FastSocket),
     -- | Google Container File System (image streaming) configs.
     gcfsConfig :: (Core.Maybe GcfsConfig),
     -- | Enable or disable gvnic in the node pool.
     gvnic :: (Core.Maybe VirtualNIC),
-    -- | The image type to use for this node. Note that for a given image type, the latest version of it will be used.
+    -- | The image type to use for this node. Note that for a given image type, the latest version of it will be used. Please see https:\/\/cloud.google.com\/kubernetes-engine\/docs\/concepts\/node-images for available image types.
     imageType :: (Core.Maybe Core.Text),
     -- | Node kubelet configs.
     kubeletConfig :: (Core.Maybe NodeKubeletConfig),
@@ -3785,8 +4536,12 @@ data NodeConfig = NodeConfig
     labels :: (Core.Maybe NodeConfig_Labels),
     -- | Parameters that can be configured on Linux nodes.
     linuxNodeConfig :: (Core.Maybe LinuxNodeConfig),
+    -- | Parameters for using raw-block Local NVMe SSDs.
+    localNvmeSsdBlockConfig :: (Core.Maybe LocalNvmeSsdBlockConfig),
     -- | The number of local SSD disks to be attached to the node. The limit for this value is dependent upon the maximum number of disks available on a machine per zone. See: https:\/\/cloud.google.com\/compute\/docs\/disks\/local-ssd for more information.
     localSsdCount :: (Core.Maybe Core.Int32),
+    -- | Logging configuration.
+    loggingConfig :: (Core.Maybe NodePoolLoggingConfig),
     -- | The name of a Google Compute Engine <https://cloud.google.com/compute/docs/machine-types machine type> If unspecified, the default machine type is @e2-medium@.
     machineType :: (Core.Maybe Core.Text),
     -- | The metadata key\/value pairs assigned to instances in the cluster. Keys must conform to the regexp @[a-zA-Z0-9-_]+@ and be less than 128 bytes in length. These are reflected as part of a URL in the metadata server. Additionally, to avoid ambiguity, keys must not conflict with any other metadata keys for the project or be one of the reserved keys: - \"cluster-location\" - \"cluster-name\" - \"cluster-uid\" - \"configure-sh\" - \"containerd-configure-sh\" - \"enable-os-login\" - \"gci-ensure-gke-docker\" - \"gci-metrics-enabled\" - \"gci-update-strategy\" - \"instance-template\" - \"kube-env\" - \"startup-script\" - \"user-data\" - \"disable-address-manager\" - \"windows-startup-script-ps1\" - \"common-psm1\" - \"k8s-node-setup-psm1\" - \"install-ssh-psm1\" - \"user-profile-psm1\" Values are free-form strings, and only have meaning as interpreted by the image running in the instance. The only restriction placed on them is that each value\'s size must be less than or equal to 32 KB. The total size of all keys
@@ -3802,6 +4557,8 @@ data NodeConfig = NodeConfig
     preemptible :: (Core.Maybe Core.Bool),
     -- | The optional reservation affinity. Setting this field will apply the specified <https://cloud.google.com/compute/docs/instances/reserving-zonal-resources Zonal Compute Reservation> to this node pool.
     reservationAffinity :: (Core.Maybe ReservationAffinity),
+    -- | The resource labels for the node pool to use to annotate any related Google Compute Engine resources.
+    resourceLabels :: (Core.Maybe NodeConfig_ResourceLabels),
     -- | Sandbox configuration for this node.
     sandboxConfig :: (Core.Maybe SandboxConfig),
     -- | The Google Cloud Platform Service Account to be used by the node VMs. Specify the email address of the Service Account; otherwise, if no Service Account is specified, the \"default\" service account is used.
@@ -3814,6 +4571,8 @@ data NodeConfig = NodeConfig
     tags :: (Core.Maybe [Core.Text]),
     -- | List of kubernetes taints to be applied to each node. For more information, including usage and the valid values, see: https:\/\/kubernetes.io\/docs\/concepts\/configuration\/taint-and-toleration\/
     taints :: (Core.Maybe [NodeTaint]),
+    -- | Parameters that can be configured on Windows nodes.
+    windowsNodeConfig :: (Core.Maybe WindowsNodeConfig),
     -- | The workload metadata configuration for this node.
     workloadMetadataConfig :: (Core.Maybe WorkloadMetadataConfig)
   }
@@ -3827,15 +4586,20 @@ newNodeConfig =
     { accelerators = Core.Nothing,
       advancedMachineFeatures = Core.Nothing,
       bootDiskKmsKey = Core.Nothing,
+      confidentialNodes = Core.Nothing,
       diskSizeGb = Core.Nothing,
       diskType = Core.Nothing,
+      ephemeralStorageLocalSsdConfig = Core.Nothing,
+      fastSocket = Core.Nothing,
       gcfsConfig = Core.Nothing,
       gvnic = Core.Nothing,
       imageType = Core.Nothing,
       kubeletConfig = Core.Nothing,
       labels = Core.Nothing,
       linuxNodeConfig = Core.Nothing,
+      localNvmeSsdBlockConfig = Core.Nothing,
       localSsdCount = Core.Nothing,
+      loggingConfig = Core.Nothing,
       machineType = Core.Nothing,
       metadata = Core.Nothing,
       minCpuPlatform = Core.Nothing,
@@ -3843,12 +4607,14 @@ newNodeConfig =
       oauthScopes = Core.Nothing,
       preemptible = Core.Nothing,
       reservationAffinity = Core.Nothing,
+      resourceLabels = Core.Nothing,
       sandboxConfig = Core.Nothing,
       serviceAccount = Core.Nothing,
       shieldedInstanceConfig = Core.Nothing,
       spot = Core.Nothing,
       tags = Core.Nothing,
       taints = Core.Nothing,
+      windowsNodeConfig = Core.Nothing,
       workloadMetadataConfig = Core.Nothing
     }
 
@@ -3861,15 +4627,20 @@ instance Core.FromJSON NodeConfig where
             Core.<$> (o Core..:? "accelerators")
             Core.<*> (o Core..:? "advancedMachineFeatures")
             Core.<*> (o Core..:? "bootDiskKmsKey")
+            Core.<*> (o Core..:? "confidentialNodes")
             Core.<*> (o Core..:? "diskSizeGb")
             Core.<*> (o Core..:? "diskType")
+            Core.<*> (o Core..:? "ephemeralStorageLocalSsdConfig")
+            Core.<*> (o Core..:? "fastSocket")
             Core.<*> (o Core..:? "gcfsConfig")
             Core.<*> (o Core..:? "gvnic")
             Core.<*> (o Core..:? "imageType")
             Core.<*> (o Core..:? "kubeletConfig")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "linuxNodeConfig")
+            Core.<*> (o Core..:? "localNvmeSsdBlockConfig")
             Core.<*> (o Core..:? "localSsdCount")
+            Core.<*> (o Core..:? "loggingConfig")
             Core.<*> (o Core..:? "machineType")
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "minCpuPlatform")
@@ -3877,12 +4648,14 @@ instance Core.FromJSON NodeConfig where
             Core.<*> (o Core..:? "oauthScopes")
             Core.<*> (o Core..:? "preemptible")
             Core.<*> (o Core..:? "reservationAffinity")
+            Core.<*> (o Core..:? "resourceLabels")
             Core.<*> (o Core..:? "sandboxConfig")
             Core.<*> (o Core..:? "serviceAccount")
             Core.<*> (o Core..:? "shieldedInstanceConfig")
             Core.<*> (o Core..:? "spot")
             Core.<*> (o Core..:? "tags")
             Core.<*> (o Core..:? "taints")
+            Core.<*> (o Core..:? "windowsNodeConfig")
             Core.<*> (o Core..:? "workloadMetadataConfig")
       )
 
@@ -3894,15 +4667,23 @@ instance Core.ToJSON NodeConfig where
             ("advancedMachineFeatures" Core..=)
               Core.<$> advancedMachineFeatures,
             ("bootDiskKmsKey" Core..=) Core.<$> bootDiskKmsKey,
+            ("confidentialNodes" Core..=)
+              Core.<$> confidentialNodes,
             ("diskSizeGb" Core..=) Core.<$> diskSizeGb,
             ("diskType" Core..=) Core.<$> diskType,
+            ("ephemeralStorageLocalSsdConfig" Core..=)
+              Core.<$> ephemeralStorageLocalSsdConfig,
+            ("fastSocket" Core..=) Core.<$> fastSocket,
             ("gcfsConfig" Core..=) Core.<$> gcfsConfig,
             ("gvnic" Core..=) Core.<$> gvnic,
             ("imageType" Core..=) Core.<$> imageType,
             ("kubeletConfig" Core..=) Core.<$> kubeletConfig,
             ("labels" Core..=) Core.<$> labels,
             ("linuxNodeConfig" Core..=) Core.<$> linuxNodeConfig,
+            ("localNvmeSsdBlockConfig" Core..=)
+              Core.<$> localNvmeSsdBlockConfig,
             ("localSsdCount" Core..=) Core.<$> localSsdCount,
+            ("loggingConfig" Core..=) Core.<$> loggingConfig,
             ("machineType" Core..=) Core.<$> machineType,
             ("metadata" Core..=) Core.<$> metadata,
             ("minCpuPlatform" Core..=) Core.<$> minCpuPlatform,
@@ -3911,6 +4692,7 @@ instance Core.ToJSON NodeConfig where
             ("preemptible" Core..=) Core.<$> preemptible,
             ("reservationAffinity" Core..=)
               Core.<$> reservationAffinity,
+            ("resourceLabels" Core..=) Core.<$> resourceLabels,
             ("sandboxConfig" Core..=) Core.<$> sandboxConfig,
             ("serviceAccount" Core..=) Core.<$> serviceAccount,
             ("shieldedInstanceConfig" Core..=)
@@ -3918,6 +4700,8 @@ instance Core.ToJSON NodeConfig where
             ("spot" Core..=) Core.<$> spot,
             ("tags" Core..=) Core.<$> tags,
             ("taints" Core..=) Core.<$> taints,
+            ("windowsNodeConfig" Core..=)
+              Core.<$> windowsNodeConfig,
             ("workloadMetadataConfig" Core..=)
               Core.<$> workloadMetadataConfig
           ]
@@ -3981,19 +4765,52 @@ instance Core.ToJSON NodeConfig_Metadata where
   toJSON NodeConfig_Metadata {..} =
     Core.toJSON additional
 
+-- | The resource labels for the node pool to use to annotate any related Google Compute Engine resources.
+--
+-- /See:/ 'newNodeConfig_ResourceLabels' smart constructor.
+newtype NodeConfig_ResourceLabels = NodeConfig_ResourceLabels
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NodeConfig_ResourceLabels' with the minimum fields required to make a request.
+newNodeConfig_ResourceLabels ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  NodeConfig_ResourceLabels
+newNodeConfig_ResourceLabels additional =
+  NodeConfig_ResourceLabels {additional = additional}
+
+instance Core.FromJSON NodeConfig_ResourceLabels where
+  parseJSON =
+    Core.withObject
+      "NodeConfig_ResourceLabels"
+      ( \o ->
+          NodeConfig_ResourceLabels
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON NodeConfig_ResourceLabels where
+  toJSON NodeConfig_ResourceLabels {..} =
+    Core.toJSON additional
+
 -- | Subset of NodeConfig message that has defaults.
 --
 -- /See:/ 'newNodeConfigDefaults' smart constructor.
-newtype NodeConfigDefaults = NodeConfigDefaults
-  { -- | GCFS (Google Container File System, a.k.a Riptide) options.
-    gcfsConfig :: (Core.Maybe GcfsConfig)
+data NodeConfigDefaults = NodeConfigDefaults
+  { -- | GCFS (Google Container File System, also known as Riptide) options.
+    gcfsConfig :: (Core.Maybe GcfsConfig),
+    -- | Logging configuration for node pools.
+    loggingConfig :: (Core.Maybe NodePoolLoggingConfig)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'NodeConfigDefaults' with the minimum fields required to make a request.
 newNodeConfigDefaults ::
   NodeConfigDefaults
-newNodeConfigDefaults = NodeConfigDefaults {gcfsConfig = Core.Nothing}
+newNodeConfigDefaults =
+  NodeConfigDefaults {gcfsConfig = Core.Nothing, loggingConfig = Core.Nothing}
 
 instance Core.FromJSON NodeConfigDefaults where
   parseJSON =
@@ -4002,13 +4819,16 @@ instance Core.FromJSON NodeConfigDefaults where
       ( \o ->
           NodeConfigDefaults
             Core.<$> (o Core..:? "gcfsConfig")
+            Core.<*> (o Core..:? "loggingConfig")
       )
 
 instance Core.ToJSON NodeConfigDefaults where
   toJSON NodeConfigDefaults {..} =
     Core.object
       ( Core.catMaybes
-          [("gcfsConfig" Core..=) Core.<$> gcfsConfig]
+          [ ("gcfsConfig" Core..=) Core.<$> gcfsConfig,
+            ("loggingConfig" Core..=) Core.<$> loggingConfig
+          ]
       )
 
 -- | Node kubelet configs.
@@ -4020,7 +4840,9 @@ data NodeKubeletConfig = NodeKubeletConfig
     -- | Set the CPU CFS quota period value \'cpu.cfs/period/us\'. The string must be a sequence of decimal numbers, each with optional fraction and a unit suffix, such as \"300ms\". Valid time units are \"ns\", \"us\" (or \"µs\"), \"ms\", \"s\", \"m\", \"h\". The value must be a positive duration.
     cpuCfsQuotaPeriod :: (Core.Maybe Core.Text),
     -- | Control the CPU management policy on the node. See https:\/\/kubernetes.io\/docs\/tasks\/administer-cluster\/cpu-management-policies\/ The following values are allowed. * \"none\": the default, which represents the existing scheduling behavior. * \"static\": allows pods with certain resource characteristics to be granted increased CPU affinity and exclusivity on the node. The default value is \'none\' if unspecified.
-    cpuManagerPolicy :: (Core.Maybe Core.Text)
+    cpuManagerPolicy :: (Core.Maybe Core.Text),
+    -- | Set the Pod PID limits. See https:\/\/kubernetes.io\/docs\/concepts\/policy\/pid-limiting\/#pod-pid-limits Controls the maximum number of processes allowed to run in a pod. The value must be greater than or equal to 1024 and less than 4194304.
+    podPidsLimit :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4031,7 +4853,8 @@ newNodeKubeletConfig =
   NodeKubeletConfig
     { cpuCfsQuota = Core.Nothing,
       cpuCfsQuotaPeriod = Core.Nothing,
-      cpuManagerPolicy = Core.Nothing
+      cpuManagerPolicy = Core.Nothing,
+      podPidsLimit = Core.Nothing
     }
 
 instance Core.FromJSON NodeKubeletConfig where
@@ -4043,6 +4866,9 @@ instance Core.FromJSON NodeKubeletConfig where
             Core.<$> (o Core..:? "cpuCfsQuota")
             Core.<*> (o Core..:? "cpuCfsQuotaPeriod")
             Core.<*> (o Core..:? "cpuManagerPolicy")
+            Core.<*> ( o Core..:? "podPidsLimit"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON NodeKubeletConfig where
@@ -4053,9 +4879,63 @@ instance Core.ToJSON NodeKubeletConfig where
             ("cpuCfsQuotaPeriod" Core..=)
               Core.<$> cpuCfsQuotaPeriod,
             ("cpuManagerPolicy" Core..=)
-              Core.<$> cpuManagerPolicy
+              Core.<$> cpuManagerPolicy,
+            ("podPidsLimit" Core..=) Core.. Core.AsText
+              Core.<$> podPidsLimit
           ]
       )
+
+-- | Collection of node-level <https://kubernetes.io/docs/concepts/overview/working-with-objects/labels Kubernetes labels>.
+--
+-- /See:/ 'newNodeLabels' smart constructor.
+newtype NodeLabels = NodeLabels
+  { -- | Map of node label keys and node label values.
+    labels :: (Core.Maybe NodeLabels_Labels)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NodeLabels' with the minimum fields required to make a request.
+newNodeLabels ::
+  NodeLabels
+newNodeLabels = NodeLabels {labels = Core.Nothing}
+
+instance Core.FromJSON NodeLabels where
+  parseJSON =
+    Core.withObject
+      "NodeLabels"
+      (\o -> NodeLabels Core.<$> (o Core..:? "labels"))
+
+instance Core.ToJSON NodeLabels where
+  toJSON NodeLabels {..} =
+    Core.object
+      (Core.catMaybes [("labels" Core..=) Core.<$> labels])
+
+-- | Map of node label keys and node label values.
+--
+-- /See:/ 'newNodeLabels_Labels' smart constructor.
+newtype NodeLabels_Labels = NodeLabels_Labels
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NodeLabels_Labels' with the minimum fields required to make a request.
+newNodeLabels_Labels ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  NodeLabels_Labels
+newNodeLabels_Labels additional = NodeLabels_Labels {additional = additional}
+
+instance Core.FromJSON NodeLabels_Labels where
+  parseJSON =
+    Core.withObject
+      "NodeLabels_Labels"
+      ( \o ->
+          NodeLabels_Labels Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON NodeLabels_Labels where
+  toJSON NodeLabels_Labels {..} = Core.toJSON additional
 
 -- | NodeManagement defines the set of node management services turned on for the node pool.
 --
@@ -4107,6 +4987,12 @@ instance Core.ToJSON NodeManagement where
 data NodeNetworkConfig = NodeNetworkConfig
   { -- | Input only. Whether to create a new range for pod IPs in this node pool. Defaults are provided for @pod_range@ and @pod_ipv4_cidr_block@ if they are not specified. If neither @create_pod_range@ or @pod_range@ are specified, the cluster-level default (@ip_allocation_policy.cluster_ipv4_cidr_block@) is used. Only applicable if @ip_allocation_policy.use_ip_aliases@ is true. This field cannot be changed after the node pool has been created.
     createPodRange :: (Core.Maybe Core.Bool),
+    -- | Whether nodes have internal IP addresses only. If enable/private/nodes is not specified, then the value is derived from cluster.privateClusterConfig.enablePrivateNodes
+    enablePrivateNodes :: (Core.Maybe Core.Bool),
+    -- | Network bandwidth tier configuration.
+    networkPerformanceConfig :: (Core.Maybe NetworkPerformanceConfig),
+    -- | [PRIVATE FIELD] Pod CIDR size overprovisioning config for the nodepool. Pod CIDR size per node depends on max/pods/per/node. By default, the value of max/pods/per/node is rounded off to next power of 2 and we then double that to get the size of pod CIDR block per node. Example: max/pods/per/node of 30 would result in 64 IPs (\/26). This config can disable the doubling of IPs (we still round off to next power of 2) Example: max/pods/per/node of 30 will result in 32 IPs (\/27) when overprovisioning is disabled.
+    podCidrOverprovisionConfig :: (Core.Maybe PodCIDROverprovisionConfig),
     -- | The IP address range for pod IPs in this node pool. Only applicable if @create_pod_range@ is true. Set to blank to have a range chosen with the default size. Set to \/netmask (e.g. @\/14@) to have a range chosen with a specific netmask. Set to a <https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing CIDR> notation (e.g. @10.96.0.0\/14@) to pick a specific range to use. Only applicable if @ip_allocation_policy.use_ip_aliases@ is true. This field cannot be changed after the node pool has been created.
     podIpv4CidrBlock :: (Core.Maybe Core.Text),
     -- | The ID of the secondary range for pod IPs. If @create_pod_range@ is true, this ID is used for the new range. If @create_pod_range@ is false, uses an existing secondary range with this ID. Only applicable if @ip_allocation_policy.use_ip_aliases@ is true. This field cannot be changed after the node pool has been created.
@@ -4120,6 +5006,9 @@ newNodeNetworkConfig ::
 newNodeNetworkConfig =
   NodeNetworkConfig
     { createPodRange = Core.Nothing,
+      enablePrivateNodes = Core.Nothing,
+      networkPerformanceConfig = Core.Nothing,
+      podCidrOverprovisionConfig = Core.Nothing,
       podIpv4CidrBlock = Core.Nothing,
       podRange = Core.Nothing
     }
@@ -4131,6 +5020,9 @@ instance Core.FromJSON NodeNetworkConfig where
       ( \o ->
           NodeNetworkConfig
             Core.<$> (o Core..:? "createPodRange")
+            Core.<*> (o Core..:? "enablePrivateNodes")
+            Core.<*> (o Core..:? "networkPerformanceConfig")
+            Core.<*> (o Core..:? "podCidrOverprovisionConfig")
             Core.<*> (o Core..:? "podIpv4CidrBlock")
             Core.<*> (o Core..:? "podRange")
       )
@@ -4140,6 +5032,12 @@ instance Core.ToJSON NodeNetworkConfig where
     Core.object
       ( Core.catMaybes
           [ ("createPodRange" Core..=) Core.<$> createPodRange,
+            ("enablePrivateNodes" Core..=)
+              Core.<$> enablePrivateNodes,
+            ("networkPerformanceConfig" Core..=)
+              Core.<$> networkPerformanceConfig,
+            ("podCidrOverprovisionConfig" Core..=)
+              Core.<$> podCidrOverprovisionConfig,
             ("podIpv4CidrBlock" Core..=)
               Core.<$> podIpv4CidrBlock,
             ("podRange" Core..=) Core.<$> podRange
@@ -4156,9 +5054,11 @@ data NodePool = NodePool
     conditions :: (Core.Maybe [StatusCondition]),
     -- | The node configuration of the pool.
     config :: (Core.Maybe NodeConfig),
+    -- | This checksum is computed by the server based on the value of node pool fields, and may be sent on update requests to ensure the client has an up-to-date value before proceeding.
+    etag :: (Core.Maybe Core.Text),
     -- | The initial node count for the pool. You must ensure that your Compute Engine <https://cloud.google.com/compute/quotas resource quota> is sufficient for this number of instances. You must also have available firewall and routes quota.
     initialNodeCount :: (Core.Maybe Core.Int32),
-    -- | [Output only] The resource URLs of the <https://cloud.google.com/compute/docs/instance-groups/creating-groups-of-managed-instances managed instance groups> associated with this node pool.
+    -- | [Output only] The resource URLs of the <https://cloud.google.com/compute/docs/instance-groups/creating-groups-of-managed-instances managed instance groups> associated with this node pool. During the node pool blue-green upgrade operation, the URLs contain both blue and green resources.
     instanceGroupUrls :: (Core.Maybe [Core.Text]),
     -- | The list of Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zones> in which the NodePool\'s nodes should be located. If this value is unspecified during node pool creation, the <https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters#Cluster.FIELDS.locations Cluster.Locations> value will be used, instead. Warning: changing node pool locations will result in nodes being added and\/or removed.
     locations :: (Core.Maybe [Core.Text]),
@@ -4170,6 +5070,8 @@ data NodePool = NodePool
     name :: (Core.Maybe Core.Text),
     -- | Networking configuration for this NodePool. If specified, it overrides the cluster-level defaults.
     networkConfig :: (Core.Maybe NodeNetworkConfig),
+    -- | Specifies the node placement policy.
+    placementPolicy :: (Core.Maybe PlacementPolicy),
     -- | [Output only] The pod CIDR block size per node in this node pool.
     podIpv4CidrSize :: (Core.Maybe Core.Int32),
     -- | [Output only] Server-defined URL for the resource.
@@ -4178,9 +5080,11 @@ data NodePool = NodePool
     status :: (Core.Maybe NodePool_Status),
     -- | [Output only] Deprecated. Use conditions instead. Additional information about the current status of this node pool instance, if available.
     statusMessage :: (Core.Maybe Core.Text),
+    -- | Output only. [Output only] Update info contains relevant information during a node pool update.
+    updateInfo :: (Core.Maybe UpdateInfo),
     -- | Upgrade settings control disruption and speed of the upgrade.
     upgradeSettings :: (Core.Maybe UpgradeSettings),
-    -- | The version of the Kubernetes of this node.
+    -- | The version of Kubernetes running on this NodePool\'s nodes. If unspecified, it defaults as described <https://cloud.google.com/kubernetes-engine/versioning#specifying_node_version here>.
     version :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4193,6 +5097,7 @@ newNodePool =
     { autoscaling = Core.Nothing,
       conditions = Core.Nothing,
       config = Core.Nothing,
+      etag = Core.Nothing,
       initialNodeCount = Core.Nothing,
       instanceGroupUrls = Core.Nothing,
       locations = Core.Nothing,
@@ -4200,10 +5105,12 @@ newNodePool =
       maxPodsConstraint = Core.Nothing,
       name = Core.Nothing,
       networkConfig = Core.Nothing,
+      placementPolicy = Core.Nothing,
       podIpv4CidrSize = Core.Nothing,
       selfLink = Core.Nothing,
       status = Core.Nothing,
       statusMessage = Core.Nothing,
+      updateInfo = Core.Nothing,
       upgradeSettings = Core.Nothing,
       version = Core.Nothing
     }
@@ -4217,6 +5124,7 @@ instance Core.FromJSON NodePool where
             Core.<$> (o Core..:? "autoscaling")
             Core.<*> (o Core..:? "conditions")
             Core.<*> (o Core..:? "config")
+            Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "initialNodeCount")
             Core.<*> (o Core..:? "instanceGroupUrls")
             Core.<*> (o Core..:? "locations")
@@ -4224,10 +5132,12 @@ instance Core.FromJSON NodePool where
             Core.<*> (o Core..:? "maxPodsConstraint")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "networkConfig")
+            Core.<*> (o Core..:? "placementPolicy")
             Core.<*> (o Core..:? "podIpv4CidrSize")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "statusMessage")
+            Core.<*> (o Core..:? "updateInfo")
             Core.<*> (o Core..:? "upgradeSettings")
             Core.<*> (o Core..:? "version")
       )
@@ -4239,6 +5149,7 @@ instance Core.ToJSON NodePool where
           [ ("autoscaling" Core..=) Core.<$> autoscaling,
             ("conditions" Core..=) Core.<$> conditions,
             ("config" Core..=) Core.<$> config,
+            ("etag" Core..=) Core.<$> etag,
             ("initialNodeCount" Core..=)
               Core.<$> initialNodeCount,
             ("instanceGroupUrls" Core..=)
@@ -4249,10 +5160,12 @@ instance Core.ToJSON NodePool where
               Core.<$> maxPodsConstraint,
             ("name" Core..=) Core.<$> name,
             ("networkConfig" Core..=) Core.<$> networkConfig,
+            ("placementPolicy" Core..=) Core.<$> placementPolicy,
             ("podIpv4CidrSize" Core..=) Core.<$> podIpv4CidrSize,
             ("selfLink" Core..=) Core.<$> selfLink,
             ("status" Core..=) Core.<$> status,
             ("statusMessage" Core..=) Core.<$> statusMessage,
+            ("updateInfo" Core..=) Core.<$> updateInfo,
             ("upgradeSettings" Core..=) Core.<$> upgradeSettings,
             ("version" Core..=) Core.<$> version
           ]
@@ -4296,10 +5209,16 @@ data NodePoolAutoscaling = NodePoolAutoscaling
     autoprovisioned :: (Core.Maybe Core.Bool),
     -- | Is autoscaling enabled for this node pool.
     enabled :: (Core.Maybe Core.Bool),
+    -- | Location policy used when scaling up a nodepool.
+    locationPolicy :: (Core.Maybe NodePoolAutoscaling_LocationPolicy),
     -- | Maximum number of nodes for one location in the NodePool. Must be >= min/node/count. There has to be enough quota to scale up the cluster.
     maxNodeCount :: (Core.Maybe Core.Int32),
     -- | Minimum number of nodes for one location in the NodePool. Must be >= 1 and \<= max/node/count.
-    minNodeCount :: (Core.Maybe Core.Int32)
+    minNodeCount :: (Core.Maybe Core.Int32),
+    -- | Maximum number of nodes in the node pool. Must be greater than total/min/node/count. There has to be enough quota to scale up the cluster. The total/node/count fields are mutually exclusive with the node/count fields.
+    totalMaxNodeCount :: (Core.Maybe Core.Int32),
+    -- | Minimum number of nodes in the node pool. Must be greater than 1 less than total/max/node/count. The total/node/count fields are mutually exclusive with the node/count fields.
+    totalMinNodeCount :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4310,8 +5229,11 @@ newNodePoolAutoscaling =
   NodePoolAutoscaling
     { autoprovisioned = Core.Nothing,
       enabled = Core.Nothing,
+      locationPolicy = Core.Nothing,
       maxNodeCount = Core.Nothing,
-      minNodeCount = Core.Nothing
+      minNodeCount = Core.Nothing,
+      totalMaxNodeCount = Core.Nothing,
+      totalMinNodeCount = Core.Nothing
     }
 
 instance Core.FromJSON NodePoolAutoscaling where
@@ -4322,8 +5244,11 @@ instance Core.FromJSON NodePoolAutoscaling where
           NodePoolAutoscaling
             Core.<$> (o Core..:? "autoprovisioned")
             Core.<*> (o Core..:? "enabled")
+            Core.<*> (o Core..:? "locationPolicy")
             Core.<*> (o Core..:? "maxNodeCount")
             Core.<*> (o Core..:? "minNodeCount")
+            Core.<*> (o Core..:? "totalMaxNodeCount")
+            Core.<*> (o Core..:? "totalMinNodeCount")
       )
 
 instance Core.ToJSON NodePoolAutoscaling where
@@ -4333,8 +5258,13 @@ instance Core.ToJSON NodePoolAutoscaling where
           [ ("autoprovisioned" Core..=)
               Core.<$> autoprovisioned,
             ("enabled" Core..=) Core.<$> enabled,
+            ("locationPolicy" Core..=) Core.<$> locationPolicy,
             ("maxNodeCount" Core..=) Core.<$> maxNodeCount,
-            ("minNodeCount" Core..=) Core.<$> minNodeCount
+            ("minNodeCount" Core..=) Core.<$> minNodeCount,
+            ("totalMaxNodeCount" Core..=)
+              Core.<$> totalMaxNodeCount,
+            ("totalMinNodeCount" Core..=)
+              Core.<$> totalMinNodeCount
           ]
       )
 
@@ -4370,7 +5300,37 @@ instance Core.ToJSON NodePoolDefaults where
           ]
       )
 
--- | Kubernetes taint is comprised of three fields: key, value, and effect. Effect can only be one of three types: NoSchedule, PreferNoSchedule or NoExecute. See <https://kubernetes.io/docs/concepts/configuration/taint-and-toleration here> for more information, including usage and the valid values.
+-- | NodePoolLoggingConfig specifies logging configuration for nodepools.
+--
+-- /See:/ 'newNodePoolLoggingConfig' smart constructor.
+newtype NodePoolLoggingConfig = NodePoolLoggingConfig
+  { -- | Logging variant configuration.
+    variantConfig :: (Core.Maybe LoggingVariantConfig)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NodePoolLoggingConfig' with the minimum fields required to make a request.
+newNodePoolLoggingConfig ::
+  NodePoolLoggingConfig
+newNodePoolLoggingConfig = NodePoolLoggingConfig {variantConfig = Core.Nothing}
+
+instance Core.FromJSON NodePoolLoggingConfig where
+  parseJSON =
+    Core.withObject
+      "NodePoolLoggingConfig"
+      ( \o ->
+          NodePoolLoggingConfig
+            Core.<$> (o Core..:? "variantConfig")
+      )
+
+instance Core.ToJSON NodePoolLoggingConfig where
+  toJSON NodePoolLoggingConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [("variantConfig" Core..=) Core.<$> variantConfig]
+      )
+
+-- | Kubernetes taint is composed of three fields: key, value, and effect. Effect can only be one of three types: NoSchedule, PreferNoSchedule or NoExecute. See <https://kubernetes.io/docs/concepts/configuration/taint-and-toleration here> for more information, including usage and the valid values.
 --
 -- /See:/ 'newNodeTaint' smart constructor.
 data NodeTaint = NodeTaint
@@ -4409,6 +5369,31 @@ instance Core.ToJSON NodeTaint where
             ("value" Core..=) Core.<$> value
           ]
       )
+
+-- | Collection of Kubernetes <https://kubernetes.io/docs/concepts/configuration/taint-and-toleration node taints>.
+--
+-- /See:/ 'newNodeTaints' smart constructor.
+newtype NodeTaints = NodeTaints
+  { -- | List of node taints.
+    taints :: (Core.Maybe [NodeTaint])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NodeTaints' with the minimum fields required to make a request.
+newNodeTaints ::
+  NodeTaints
+newNodeTaints = NodeTaints {taints = Core.Nothing}
+
+instance Core.FromJSON NodeTaints where
+  parseJSON =
+    Core.withObject
+      "NodeTaints"
+      (\o -> NodeTaints Core.<$> (o Core..:? "taints"))
+
+instance Core.ToJSON NodeTaints where
+  toJSON NodeTaints {..} =
+    Core.object
+      (Core.catMaybes [("taints" Core..=) Core.<$> taints])
 
 -- | NotificationConfig is the configuration of notifications.
 --
@@ -4592,6 +5577,62 @@ instance Core.ToJSON OperationProgress where
           ]
       )
 
+-- | PlacementPolicy defines the placement policy used by the node pool.
+--
+-- /See:/ 'newPlacementPolicy' smart constructor.
+newtype PlacementPolicy = PlacementPolicy
+  { -- | The type of placement.
+    type' :: (Core.Maybe PlacementPolicy_Type)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PlacementPolicy' with the minimum fields required to make a request.
+newPlacementPolicy ::
+  PlacementPolicy
+newPlacementPolicy = PlacementPolicy {type' = Core.Nothing}
+
+instance Core.FromJSON PlacementPolicy where
+  parseJSON =
+    Core.withObject
+      "PlacementPolicy"
+      (\o -> PlacementPolicy Core.<$> (o Core..:? "type"))
+
+instance Core.ToJSON PlacementPolicy where
+  toJSON PlacementPolicy {..} =
+    Core.object
+      (Core.catMaybes [("type" Core..=) Core.<$> type'])
+
+-- | [PRIVATE FIELD] Config for pod CIDR size overprovisioning.
+--
+-- /See:/ 'newPodCIDROverprovisionConfig' smart constructor.
+newtype PodCIDROverprovisionConfig = PodCIDROverprovisionConfig
+  { -- | Whether Pod CIDR overprovisioning is disabled. Note: Pod CIDR overprovisioning is enabled by default.
+    disable :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PodCIDROverprovisionConfig' with the minimum fields required to make a request.
+newPodCIDROverprovisionConfig ::
+  PodCIDROverprovisionConfig
+newPodCIDROverprovisionConfig =
+  PodCIDROverprovisionConfig {disable = Core.Nothing}
+
+instance Core.FromJSON PodCIDROverprovisionConfig where
+  parseJSON =
+    Core.withObject
+      "PodCIDROverprovisionConfig"
+      ( \o ->
+          PodCIDROverprovisionConfig
+            Core.<$> (o Core..:? "disable")
+      )
+
+instance Core.ToJSON PodCIDROverprovisionConfig where
+  toJSON PodCIDROverprovisionConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [("disable" Core..=) Core.<$> disable]
+      )
+
 -- | Configuration options for private clusters.
 --
 -- /See:/ 'newPrivateClusterConfig' smart constructor.
@@ -4608,6 +5649,8 @@ data PrivateClusterConfig = PrivateClusterConfig
     peeringName :: (Core.Maybe Core.Text),
     -- | Output only. The internal IP address of this cluster\'s master endpoint.
     privateEndpoint :: (Core.Maybe Core.Text),
+    -- | Subnet to provision the master\'s private endpoint during cluster creation. Specified in projects\//\/regions\//\/subnetworks\/* format.
+    privateEndpointSubnetwork :: (Core.Maybe Core.Text),
     -- | Output only. The external IP address of this cluster\'s master endpoint.
     publicEndpoint :: (Core.Maybe Core.Text)
   }
@@ -4624,6 +5667,7 @@ newPrivateClusterConfig =
       masterIpv4CidrBlock = Core.Nothing,
       peeringName = Core.Nothing,
       privateEndpoint = Core.Nothing,
+      privateEndpointSubnetwork = Core.Nothing,
       publicEndpoint = Core.Nothing
     }
 
@@ -4639,6 +5683,7 @@ instance Core.FromJSON PrivateClusterConfig where
             Core.<*> (o Core..:? "masterIpv4CidrBlock")
             Core.<*> (o Core..:? "peeringName")
             Core.<*> (o Core..:? "privateEndpoint")
+            Core.<*> (o Core..:? "privateEndpointSubnetwork")
             Core.<*> (o Core..:? "publicEndpoint")
       )
 
@@ -4656,6 +5701,8 @@ instance Core.ToJSON PrivateClusterConfig where
               Core.<$> masterIpv4CidrBlock,
             ("peeringName" Core..=) Core.<$> peeringName,
             ("privateEndpoint" Core..=) Core.<$> privateEndpoint,
+            ("privateEndpointSubnetwork" Core..=)
+              Core.<$> privateEndpointSubnetwork,
             ("publicEndpoint" Core..=) Core.<$> publicEndpoint
           ]
       )
@@ -4853,7 +5900,7 @@ instance Core.ToJSON ReleaseChannelConfig where
 data ReservationAffinity = ReservationAffinity
   { -- | Corresponds to the type of reservation consumption.
     consumeReservationType :: (Core.Maybe ReservationAffinity_ConsumeReservationType),
-    -- | Corresponds to the label key of a reservation resource. To target a SPECIFIC_RESERVATION by name, specify \"googleapis.com\/reservation-name\" as the key and specify the name of your reservation as its value.
+    -- | Corresponds to the label key of a reservation resource. To target a SPECIFIC_RESERVATION by name, specify \"compute.googleapis.com\/reservation-name\" as the key and specify the name of your reservation as its value.
     key :: (Core.Maybe Core.Text),
     -- | Corresponds to the label value(s) of reservation resource(s).
     values :: (Core.Maybe [Core.Text])
@@ -4891,6 +5938,63 @@ instance Core.ToJSON ReservationAffinity where
             ("values" Core..=) Core.<$> values
           ]
       )
+
+-- | Collection of <https://cloud.google.com/resource-manager/docs/creating-managing-labels GCP labels>.
+--
+-- /See:/ 'newResourceLabels' smart constructor.
+newtype ResourceLabels = ResourceLabels
+  { -- | Map of node label keys and node label values.
+    labels :: (Core.Maybe ResourceLabels_Labels)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ResourceLabels' with the minimum fields required to make a request.
+newResourceLabels ::
+  ResourceLabels
+newResourceLabels = ResourceLabels {labels = Core.Nothing}
+
+instance Core.FromJSON ResourceLabels where
+  parseJSON =
+    Core.withObject
+      "ResourceLabels"
+      ( \o ->
+          ResourceLabels Core.<$> (o Core..:? "labels")
+      )
+
+instance Core.ToJSON ResourceLabels where
+  toJSON ResourceLabels {..} =
+    Core.object
+      (Core.catMaybes [("labels" Core..=) Core.<$> labels])
+
+-- | Map of node label keys and node label values.
+--
+-- /See:/ 'newResourceLabels_Labels' smart constructor.
+newtype ResourceLabels_Labels = ResourceLabels_Labels
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ResourceLabels_Labels' with the minimum fields required to make a request.
+newResourceLabels_Labels ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  ResourceLabels_Labels
+newResourceLabels_Labels additional =
+  ResourceLabels_Labels {additional = additional}
+
+instance Core.FromJSON ResourceLabels_Labels where
+  parseJSON =
+    Core.withObject
+      "ResourceLabels_Labels"
+      ( \o ->
+          ResourceLabels_Labels
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON ResourceLabels_Labels where
+  toJSON ResourceLabels_Labels {..} =
+    Core.toJSON additional
 
 -- | Contains information about amount of some resource in the cluster. For memory, value should be in GB.
 --
@@ -4999,8 +6103,10 @@ data RollbackNodePoolUpgradeRequest = RollbackNodePoolUpgradeRequest
     name :: (Core.Maybe Core.Text),
     -- | Deprecated. The name of the node pool to rollback. This field has been deprecated and replaced by the name field.
     nodePoolId :: (Core.Maybe Core.Text),
-    -- | Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the name field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the name field.
     projectId :: (Core.Maybe Core.Text),
+    -- | Option for rollback to ignore the PodDisruptionBudget. Default value is false.
+    respectPdb :: (Core.Maybe Core.Bool),
     -- | Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides. This field has been deprecated and replaced by the name field.
     zone :: (Core.Maybe Core.Text)
   }
@@ -5015,6 +6121,7 @@ newRollbackNodePoolUpgradeRequest =
       name = Core.Nothing,
       nodePoolId = Core.Nothing,
       projectId = Core.Nothing,
+      respectPdb = Core.Nothing,
       zone = Core.Nothing
     }
 
@@ -5028,6 +6135,7 @@ instance Core.FromJSON RollbackNodePoolUpgradeRequest where
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "nodePoolId")
             Core.<*> (o Core..:? "projectId")
+            Core.<*> (o Core..:? "respectPdb")
             Core.<*> (o Core..:? "zone")
       )
 
@@ -5039,6 +6147,7 @@ instance Core.ToJSON RollbackNodePoolUpgradeRequest where
             ("name" Core..=) Core.<$> name,
             ("nodePoolId" Core..=) Core.<$> nodePoolId,
             ("projectId" Core..=) Core.<$> projectId,
+            ("respectPdb" Core..=) Core.<$> respectPdb,
             ("zone" Core..=) Core.<$> zone
           ]
       )
@@ -5255,7 +6364,7 @@ data SetAddonsConfigRequest = SetAddonsConfigRequest
     clusterId :: (Core.Maybe Core.Text),
     -- | The name (project, location, cluster) of the cluster to set addons. Specified in the format @projects\/*\/locations\/*\/clusters\/*@.
     name :: (Core.Maybe Core.Text),
-    -- | Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the name field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the name field.
     projectId :: (Core.Maybe Core.Text),
     -- | Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides. This field has been deprecated and replaced by the name field.
     zone :: (Core.Maybe Core.Text)
@@ -5309,7 +6418,7 @@ data SetLabelsRequest = SetLabelsRequest
     labelFingerprint :: (Core.Maybe Core.Text),
     -- | The name (project, location, cluster name) of the cluster to set labels. Specified in the format @projects\/*\/locations\/*\/clusters\/*@.
     name :: (Core.Maybe Core.Text),
-    -- | Deprecated. The Google Developers Console <https://developers.google.com/console/help/new/#projectnumber project ID or project number>. This field has been deprecated and replaced by the name field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the name field.
     projectId :: (Core.Maybe Core.Text),
     -- | Required. The labels to set for that cluster.
     resourceLabels :: (Core.Maybe SetLabelsRequest_ResourceLabels),
@@ -5402,7 +6511,7 @@ data SetLegacyAbacRequest = SetLegacyAbacRequest
     enabled :: (Core.Maybe Core.Bool),
     -- | The name (project, location, cluster name) of the cluster to set legacy abac. Specified in the format @projects\/*\/locations\/*\/clusters\/*@.
     name :: (Core.Maybe Core.Text),
-    -- | Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the name field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the name field.
     projectId :: (Core.Maybe Core.Text),
     -- | Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides. This field has been deprecated and replaced by the name field.
     zone :: (Core.Maybe Core.Text)
@@ -5456,7 +6565,7 @@ data SetLocationsRequest = SetLocationsRequest
     locations :: (Core.Maybe [Core.Text]),
     -- | The name (project, location, cluster) of the cluster to set locations. Specified in the format @projects\/*\/locations\/*\/clusters\/*@.
     name :: (Core.Maybe Core.Text),
-    -- | Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the name field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the name field.
     projectId :: (Core.Maybe Core.Text),
     -- | Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides. This field has been deprecated and replaced by the name field.
     zone :: (Core.Maybe Core.Text)
@@ -5510,7 +6619,7 @@ data SetLoggingServiceRequest = SetLoggingServiceRequest
     loggingService :: (Core.Maybe Core.Text),
     -- | The name (project, location, cluster) of the cluster to set logging. Specified in the format @projects\/*\/locations\/*\/clusters\/*@.
     name :: (Core.Maybe Core.Text),
-    -- | Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the name field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the name field.
     projectId :: (Core.Maybe Core.Text),
     -- | Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides. This field has been deprecated and replaced by the name field.
     zone :: (Core.Maybe Core.Text)
@@ -5564,7 +6673,7 @@ data SetMaintenancePolicyRequest = SetMaintenancePolicyRequest
     maintenancePolicy :: (Core.Maybe MaintenancePolicy),
     -- | The name (project, location, cluster name) of the cluster to set maintenance policy. Specified in the format @projects\/*\/locations\/*\/clusters\/*@.
     name :: (Core.Maybe Core.Text),
-    -- | Required. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>.
+    -- | Required. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>.
     projectId :: (Core.Maybe Core.Text),
     -- | Required. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides.
     zone :: (Core.Maybe Core.Text)
@@ -5619,7 +6728,7 @@ data SetMasterAuthRequest = SetMasterAuthRequest
     clusterId :: (Core.Maybe Core.Text),
     -- | The name (project, location, cluster) of the cluster to set auth. Specified in the format @projects\/*\/locations\/*\/clusters\/*@.
     name :: (Core.Maybe Core.Text),
-    -- | Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the name field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the name field.
     projectId :: (Core.Maybe Core.Text),
     -- | Required. A description of the update.
     update :: (Core.Maybe MasterAuth),
@@ -5678,7 +6787,7 @@ data SetMonitoringServiceRequest = SetMonitoringServiceRequest
     monitoringService :: (Core.Maybe Core.Text),
     -- | The name (project, location, cluster) of the cluster to set monitoring. Specified in the format @projects\/*\/locations\/*\/clusters\/*@.
     name :: (Core.Maybe Core.Text),
-    -- | Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the name field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the name field.
     projectId :: (Core.Maybe Core.Text),
     -- | Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides. This field has been deprecated and replaced by the name field.
     zone :: (Core.Maybe Core.Text)
@@ -5733,7 +6842,7 @@ data SetNetworkPolicyRequest = SetNetworkPolicyRequest
     name :: (Core.Maybe Core.Text),
     -- | Required. Configuration options for the NetworkPolicy feature.
     networkPolicy :: (Core.Maybe NetworkPolicy),
-    -- | Deprecated. The Google Developers Console <https://developers.google.com/console/help/new/#projectnumber project ID or project number>. This field has been deprecated and replaced by the name field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the name field.
     projectId :: (Core.Maybe Core.Text),
     -- | Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides. This field has been deprecated and replaced by the name field.
     zone :: (Core.Maybe Core.Text)
@@ -5789,7 +6898,7 @@ data SetNodePoolAutoscalingRequest = SetNodePoolAutoscalingRequest
     name :: (Core.Maybe Core.Text),
     -- | Deprecated. The name of the node pool to upgrade. This field has been deprecated and replaced by the name field.
     nodePoolId :: (Core.Maybe Core.Text),
-    -- | Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the name field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the name field.
     projectId :: (Core.Maybe Core.Text),
     -- | Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides. This field has been deprecated and replaced by the name field.
     zone :: (Core.Maybe Core.Text)
@@ -5848,7 +6957,7 @@ data SetNodePoolManagementRequest = SetNodePoolManagementRequest
     name :: (Core.Maybe Core.Text),
     -- | Deprecated. The name of the node pool to update. This field has been deprecated and replaced by the name field.
     nodePoolId :: (Core.Maybe Core.Text),
-    -- | Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the name field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the name field.
     projectId :: (Core.Maybe Core.Text),
     -- | Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides. This field has been deprecated and replaced by the name field.
     zone :: (Core.Maybe Core.Text)
@@ -5907,7 +7016,7 @@ data SetNodePoolSizeRequest = SetNodePoolSizeRequest
     nodeCount :: (Core.Maybe Core.Int32),
     -- | Deprecated. The name of the node pool to update. This field has been deprecated and replaced by the name field.
     nodePoolId :: (Core.Maybe Core.Text),
-    -- | Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the name field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the name field.
     projectId :: (Core.Maybe Core.Text),
     -- | Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides. This field has been deprecated and replaced by the name field.
     zone :: (Core.Maybe Core.Text)
@@ -6024,6 +7133,51 @@ instance Core.ToJSON ShieldedNodes where
           [("enabled" Core..=) Core.<$> enabled]
       )
 
+-- | Standard rollout policy is the default policy for blue-green.
+--
+-- /See:/ 'newStandardRolloutPolicy' smart constructor.
+data StandardRolloutPolicy = StandardRolloutPolicy
+  { -- | Number of blue nodes to drain in a batch.
+    batchNodeCount :: (Core.Maybe Core.Int32),
+    -- | Percentage of the blue pool nodes to drain in a batch. The range of this field should be (0.0, 1.0].
+    batchPercentage :: (Core.Maybe Core.Double),
+    -- | Soak time after each batch gets drained. Default to zero.
+    batchSoakDuration :: (Core.Maybe Core.Duration)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'StandardRolloutPolicy' with the minimum fields required to make a request.
+newStandardRolloutPolicy ::
+  StandardRolloutPolicy
+newStandardRolloutPolicy =
+  StandardRolloutPolicy
+    { batchNodeCount = Core.Nothing,
+      batchPercentage = Core.Nothing,
+      batchSoakDuration = Core.Nothing
+    }
+
+instance Core.FromJSON StandardRolloutPolicy where
+  parseJSON =
+    Core.withObject
+      "StandardRolloutPolicy"
+      ( \o ->
+          StandardRolloutPolicy
+            Core.<$> (o Core..:? "batchNodeCount")
+            Core.<*> (o Core..:? "batchPercentage")
+            Core.<*> (o Core..:? "batchSoakDuration")
+      )
+
+instance Core.ToJSON StandardRolloutPolicy where
+  toJSON StandardRolloutPolicy {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("batchNodeCount" Core..=) Core.<$> batchNodeCount,
+            ("batchPercentage" Core..=) Core.<$> batchPercentage,
+            ("batchSoakDuration" Core..=)
+              Core.<$> batchSoakDuration
+          ]
+      )
+
 -- | StartIPRotationRequest creates a new IP for the cluster and then performs a node upgrade on each node pool to point to the new IP.
 --
 -- /See:/ 'newStartIPRotationRequest' smart constructor.
@@ -6032,7 +7186,7 @@ data StartIPRotationRequest = StartIPRotationRequest
     clusterId :: (Core.Maybe Core.Text),
     -- | The name (project, location, cluster name) of the cluster to start IP rotation. Specified in the format @projects\/*\/locations\/*\/clusters\/*@.
     name :: (Core.Maybe Core.Text),
-    -- | Deprecated. The Google Developers Console <https://developers.google.com/console/help/new/#projectnumber project ID or project number>. This field has been deprecated and replaced by the name field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the name field.
     projectId :: (Core.Maybe Core.Text),
     -- | Whether to rotate credentials during IP rotation.
     rotateCredentials :: (Core.Maybe Core.Bool),
@@ -6243,7 +7397,7 @@ data UpdateClusterRequest = UpdateClusterRequest
     clusterId :: (Core.Maybe Core.Text),
     -- | The name (project, location, cluster) of the cluster to update. Specified in the format @projects\/*\/locations\/*\/clusters\/*@.
     name :: (Core.Maybe Core.Text),
-    -- | Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the name field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the name field.
     projectId :: (Core.Maybe Core.Text),
     -- | Required. A description of the update.
     update :: (Core.Maybe ClusterUpdate),
@@ -6289,6 +7443,35 @@ instance Core.ToJSON UpdateClusterRequest where
           ]
       )
 
+-- | UpdateInfo contains resource (instance groups, etc), status and other intermediate information relevant to a node pool upgrade.
+--
+-- /See:/ 'newUpdateInfo' smart constructor.
+newtype UpdateInfo = UpdateInfo
+  { -- | Information of a blue-green upgrade.
+    blueGreenInfo :: (Core.Maybe BlueGreenInfo)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UpdateInfo' with the minimum fields required to make a request.
+newUpdateInfo ::
+  UpdateInfo
+newUpdateInfo = UpdateInfo {blueGreenInfo = Core.Nothing}
+
+instance Core.FromJSON UpdateInfo where
+  parseJSON =
+    Core.withObject
+      "UpdateInfo"
+      ( \o ->
+          UpdateInfo Core.<$> (o Core..:? "blueGreenInfo")
+      )
+
+instance Core.ToJSON UpdateInfo where
+  toJSON UpdateInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [("blueGreenInfo" Core..=) Core.<$> blueGreenInfo]
+      )
+
 -- | UpdateMasterRequest updates the master of the cluster.
 --
 -- /See:/ 'newUpdateMasterRequest' smart constructor.
@@ -6299,7 +7482,7 @@ data UpdateMasterRequest = UpdateMasterRequest
     masterVersion :: (Core.Maybe Core.Text),
     -- | The name (project, location, cluster) of the cluster to update. Specified in the format @projects\/*\/locations\/*\/clusters\/*@.
     name :: (Core.Maybe Core.Text),
-    -- | Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the name field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the name field.
     projectId :: (Core.Maybe Core.Text),
     -- | Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides. This field has been deprecated and replaced by the name field.
     zone :: (Core.Maybe Core.Text)
@@ -6349,28 +7532,48 @@ instance Core.ToJSON UpdateMasterRequest where
 data UpdateNodePoolRequest = UpdateNodePoolRequest
   { -- | Deprecated. The name of the cluster to upgrade. This field has been deprecated and replaced by the name field.
     clusterId :: (Core.Maybe Core.Text),
+    -- | Confidential nodes config. All the nodes in the node pool will be Confidential VM once enabled.
+    confidentialNodes :: (Core.Maybe ConfidentialNodes),
+    -- | The current etag of the node pool. If an etag is provided and does not match the current etag of the node pool, update will be blocked and an ABORTED error will be returned.
+    etag :: (Core.Maybe Core.Text),
+    -- | Enable or disable NCCL fast socket for the node pool.
+    fastSocket :: (Core.Maybe FastSocket),
     -- | GCFS config.
     gcfsConfig :: (Core.Maybe GcfsConfig),
     -- | Enable or disable gvnic on the node pool.
     gvnic :: (Core.Maybe VirtualNIC),
-    -- | Required. The desired image type for the node pool.
+    -- | Required. The desired image type for the node pool. Please see https:\/\/cloud.google.com\/kubernetes-engine\/docs\/concepts\/node-images for available image types.
     imageType :: (Core.Maybe Core.Text),
     -- | Node kubelet configs.
     kubeletConfig :: (Core.Maybe NodeKubeletConfig),
+    -- | The desired node labels to be applied to all nodes in the node pool. If this field is not present, the labels will not be changed. Otherwise, the existing node labels will be /replaced/ with the provided labels.
+    labels :: (Core.Maybe NodeLabels),
     -- | Parameters that can be configured on Linux nodes.
     linuxNodeConfig :: (Core.Maybe LinuxNodeConfig),
     -- | The desired list of Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zones> in which the node pool\'s nodes should be located. Changing the locations for a node pool will result in nodes being either created or removed from the node pool, depending on whether locations are being added or removed.
     locations :: (Core.Maybe [Core.Text]),
+    -- | Logging configuration.
+    loggingConfig :: (Core.Maybe NodePoolLoggingConfig),
     -- | The name (project, location, cluster, node pool) of the node pool to update. Specified in the format @projects\/*\/locations\/*\/clusters\/*\/nodePools\/*@.
     name :: (Core.Maybe Core.Text),
+    -- | Node network config.
+    nodeNetworkConfig :: (Core.Maybe NodeNetworkConfig),
     -- | Deprecated. The name of the node pool to upgrade. This field has been deprecated and replaced by the name field.
     nodePoolId :: (Core.Maybe Core.Text),
     -- | Required. The Kubernetes version to change the nodes to (typically an upgrade). Users may specify either explicit versions offered by Kubernetes Engine or version aliases, which have the following behavior: - \"latest\": picks the highest valid Kubernetes version - \"1.X\": picks the highest valid patch+gke.N patch in the 1.X version - \"1.X.Y\": picks the highest valid gke.N patch in the 1.X.Y version - \"1.X.Y-gke.N\": picks an explicit Kubernetes version - \"-\": picks the Kubernetes master version
     nodeVersion :: (Core.Maybe Core.Text),
-    -- | Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the name field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the name field.
     projectId :: (Core.Maybe Core.Text),
+    -- | The resource labels for the node pool to use to annotate any related Google Compute Engine resources.
+    resourceLabels :: (Core.Maybe ResourceLabels),
+    -- | The desired network tags to be applied to all nodes in the node pool. If this field is not present, the tags will not be changed. Otherwise, the existing network tags will be /replaced/ with the provided tags.
+    tags :: (Core.Maybe NetworkTags),
+    -- | The desired node taints to be applied to all nodes in the node pool. If this field is not present, the taints will not be changed. Otherwise, the existing node taints will be /replaced/ with the provided taints.
+    taints :: (Core.Maybe NodeTaints),
     -- | Upgrade settings control disruption and speed of the upgrade.
     upgradeSettings :: (Core.Maybe UpgradeSettings),
+    -- | Parameters that can be configured on Windows nodes.
+    windowsNodeConfig :: (Core.Maybe WindowsNodeConfig),
     -- | The desired workload metadata config for the node pool.
     workloadMetadataConfig :: (Core.Maybe WorkloadMetadataConfig),
     -- | Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides. This field has been deprecated and replaced by the name field.
@@ -6384,17 +7587,27 @@ newUpdateNodePoolRequest ::
 newUpdateNodePoolRequest =
   UpdateNodePoolRequest
     { clusterId = Core.Nothing,
+      confidentialNodes = Core.Nothing,
+      etag = Core.Nothing,
+      fastSocket = Core.Nothing,
       gcfsConfig = Core.Nothing,
       gvnic = Core.Nothing,
       imageType = Core.Nothing,
       kubeletConfig = Core.Nothing,
+      labels = Core.Nothing,
       linuxNodeConfig = Core.Nothing,
       locations = Core.Nothing,
+      loggingConfig = Core.Nothing,
       name = Core.Nothing,
+      nodeNetworkConfig = Core.Nothing,
       nodePoolId = Core.Nothing,
       nodeVersion = Core.Nothing,
       projectId = Core.Nothing,
+      resourceLabels = Core.Nothing,
+      tags = Core.Nothing,
+      taints = Core.Nothing,
       upgradeSettings = Core.Nothing,
+      windowsNodeConfig = Core.Nothing,
       workloadMetadataConfig = Core.Nothing,
       zone = Core.Nothing
     }
@@ -6406,17 +7619,27 @@ instance Core.FromJSON UpdateNodePoolRequest where
       ( \o ->
           UpdateNodePoolRequest
             Core.<$> (o Core..:? "clusterId")
+            Core.<*> (o Core..:? "confidentialNodes")
+            Core.<*> (o Core..:? "etag")
+            Core.<*> (o Core..:? "fastSocket")
             Core.<*> (o Core..:? "gcfsConfig")
             Core.<*> (o Core..:? "gvnic")
             Core.<*> (o Core..:? "imageType")
             Core.<*> (o Core..:? "kubeletConfig")
+            Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "linuxNodeConfig")
             Core.<*> (o Core..:? "locations")
+            Core.<*> (o Core..:? "loggingConfig")
             Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "nodeNetworkConfig")
             Core.<*> (o Core..:? "nodePoolId")
             Core.<*> (o Core..:? "nodeVersion")
             Core.<*> (o Core..:? "projectId")
+            Core.<*> (o Core..:? "resourceLabels")
+            Core.<*> (o Core..:? "tags")
+            Core.<*> (o Core..:? "taints")
             Core.<*> (o Core..:? "upgradeSettings")
+            Core.<*> (o Core..:? "windowsNodeConfig")
             Core.<*> (o Core..:? "workloadMetadataConfig")
             Core.<*> (o Core..:? "zone")
       )
@@ -6426,17 +7649,30 @@ instance Core.ToJSON UpdateNodePoolRequest where
     Core.object
       ( Core.catMaybes
           [ ("clusterId" Core..=) Core.<$> clusterId,
+            ("confidentialNodes" Core..=)
+              Core.<$> confidentialNodes,
+            ("etag" Core..=) Core.<$> etag,
+            ("fastSocket" Core..=) Core.<$> fastSocket,
             ("gcfsConfig" Core..=) Core.<$> gcfsConfig,
             ("gvnic" Core..=) Core.<$> gvnic,
             ("imageType" Core..=) Core.<$> imageType,
             ("kubeletConfig" Core..=) Core.<$> kubeletConfig,
+            ("labels" Core..=) Core.<$> labels,
             ("linuxNodeConfig" Core..=) Core.<$> linuxNodeConfig,
             ("locations" Core..=) Core.<$> locations,
+            ("loggingConfig" Core..=) Core.<$> loggingConfig,
             ("name" Core..=) Core.<$> name,
+            ("nodeNetworkConfig" Core..=)
+              Core.<$> nodeNetworkConfig,
             ("nodePoolId" Core..=) Core.<$> nodePoolId,
             ("nodeVersion" Core..=) Core.<$> nodeVersion,
             ("projectId" Core..=) Core.<$> projectId,
+            ("resourceLabels" Core..=) Core.<$> resourceLabels,
+            ("tags" Core..=) Core.<$> tags,
+            ("taints" Core..=) Core.<$> taints,
             ("upgradeSettings" Core..=) Core.<$> upgradeSettings,
+            ("windowsNodeConfig" Core..=)
+              Core.<$> windowsNodeConfig,
             ("workloadMetadataConfig" Core..=)
               Core.<$> workloadMetadataConfig,
             ("zone" Core..=) Core.<$> zone
@@ -6553,14 +7789,19 @@ instance Core.ToJSON UpgradeEvent where
       )
 
 -- | These upgrade settings control the level of parallelism and the level of disruption caused by an upgrade. maxUnavailable controls the number of nodes that can be simultaneously unavailable. maxSurge controls the number of additional nodes that can be added to the node pool temporarily for the time of the upgrade to increase the number of available nodes. (maxUnavailable + maxSurge) determines the level of parallelism (how many nodes are being upgraded at the same time). Note: upgrades inevitably introduce some disruption since workloads need to be moved from old nodes to new, upgraded ones. Even if maxUnavailable=0, this holds true. (Disruption stays within the limits of PodDisruptionBudget, if it is configured.) Consider a hypothetical node pool with 5 nodes having maxSurge=2, maxUnavailable=1. This means the upgrade process upgrades 3 nodes simultaneously. It creates 2 additional (upgraded) nodes, then it brings down 3 old (not yet upgraded) nodes at the same time. This ensures that there are always at
--- least 4 nodes available.
+-- least 4 nodes available. These upgrade settings configure the upgrade strategy for the node pool. Use strategy to switch between the strategies applied to the node pool. If the strategy is ROLLING, use max/surge and max/unavailable to control the level of parallelism and the level of disruption caused by upgrade. 1. maxSurge controls the number of additional nodes that can be added to the node pool temporarily for the time of the upgrade to increase the number of available nodes. 2. maxUnavailable controls the number of nodes that can be simultaneously unavailable. 3. (maxUnavailable + maxSurge) determines the level of parallelism (how many nodes are being upgraded at the same time). If the strategy is BLUE/GREEN, use blue/green/settings to configure the blue-green upgrade related settings. 1. standard/rollout/policy is the default policy. The policy is used to control the way blue pool gets drained. The draining is executed in the batch mode. The batch size could be specified as either percentage of the node
+-- pool size or the number of nodes. batch/soak/duration is the soak time after each batch gets drained. 2. node/pool/soak/duration is the soak time after all blue nodes are drained. After this period, the blue pool nodes will be deleted.
 --
 -- /See:/ 'newUpgradeSettings' smart constructor.
 data UpgradeSettings = UpgradeSettings
-  { -- | The maximum number of nodes that can be created beyond the current size of the node pool during the upgrade process.
+  { -- | Settings for blue-green upgrade strategy.
+    blueGreenSettings :: (Core.Maybe BlueGreenSettings),
+    -- | The maximum number of nodes that can be created beyond the current size of the node pool during the upgrade process.
     maxSurge :: (Core.Maybe Core.Int32),
     -- | The maximum number of nodes that can be simultaneously unavailable during the upgrade process. A node is considered available if its status is Ready.
-    maxUnavailable :: (Core.Maybe Core.Int32)
+    maxUnavailable :: (Core.Maybe Core.Int32),
+    -- | Update strategy of the node pool.
+    strategy :: (Core.Maybe UpgradeSettings_Strategy)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6568,7 +7809,12 @@ data UpgradeSettings = UpgradeSettings
 newUpgradeSettings ::
   UpgradeSettings
 newUpgradeSettings =
-  UpgradeSettings {maxSurge = Core.Nothing, maxUnavailable = Core.Nothing}
+  UpgradeSettings
+    { blueGreenSettings = Core.Nothing,
+      maxSurge = Core.Nothing,
+      maxUnavailable = Core.Nothing,
+      strategy = Core.Nothing
+    }
 
 instance Core.FromJSON UpgradeSettings where
   parseJSON =
@@ -6576,16 +7822,21 @@ instance Core.FromJSON UpgradeSettings where
       "UpgradeSettings"
       ( \o ->
           UpgradeSettings
-            Core.<$> (o Core..:? "maxSurge")
+            Core.<$> (o Core..:? "blueGreenSettings")
+            Core.<*> (o Core..:? "maxSurge")
             Core.<*> (o Core..:? "maxUnavailable")
+            Core.<*> (o Core..:? "strategy")
       )
 
 instance Core.ToJSON UpgradeSettings where
   toJSON UpgradeSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("maxSurge" Core..=) Core.<$> maxSurge,
-            ("maxUnavailable" Core..=) Core.<$> maxUnavailable
+          [ ("blueGreenSettings" Core..=)
+              Core.<$> blueGreenSettings,
+            ("maxSurge" Core..=) Core.<$> maxSurge,
+            ("maxUnavailable" Core..=) Core.<$> maxUnavailable,
+            ("strategy" Core..=) Core.<$> strategy
           ]
       )
 
@@ -6743,6 +7994,35 @@ instance Core.ToJSON VirtualNIC where
     Core.object
       ( Core.catMaybes
           [("enabled" Core..=) Core.<$> enabled]
+      )
+
+-- | Parameters that can be configured on Windows nodes. Windows Node Config that define the parameters that will be used to configure the Windows node pool settings
+--
+-- /See:/ 'newWindowsNodeConfig' smart constructor.
+newtype WindowsNodeConfig = WindowsNodeConfig
+  { -- | OSVersion specifies the Windows node config to be used on the node
+    osVersion :: (Core.Maybe WindowsNodeConfig_OsVersion)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'WindowsNodeConfig' with the minimum fields required to make a request.
+newWindowsNodeConfig ::
+  WindowsNodeConfig
+newWindowsNodeConfig = WindowsNodeConfig {osVersion = Core.Nothing}
+
+instance Core.FromJSON WindowsNodeConfig where
+  parseJSON =
+    Core.withObject
+      "WindowsNodeConfig"
+      ( \o ->
+          WindowsNodeConfig Core.<$> (o Core..:? "osVersion")
+      )
+
+instance Core.ToJSON WindowsNodeConfig where
+  toJSON WindowsNodeConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [("osVersion" Core..=) Core.<$> osVersion]
       )
 
 -- | Configuration for the use of Kubernetes Service Accounts in GCP IAM policies.

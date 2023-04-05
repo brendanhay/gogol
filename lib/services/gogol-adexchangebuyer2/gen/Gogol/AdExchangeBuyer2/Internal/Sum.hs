@@ -741,7 +741,7 @@ pattern AdSize_SizeType_Interstitial = AdSize_SizeType "INTERSTITIAL"
 pattern AdSize_SizeType_Native :: AdSize_SizeType
 pattern AdSize_SizeType_Native = AdSize_SizeType "NATIVE"
 
--- | Fluid size (i.e., responsive size) can be resized automatically with the change of outside environment.
+-- | Fluid size (for example, responsive size) can be resized automatically with the change of outside environment.
 pattern AdSize_SizeType_Fluid :: AdSize_SizeType
 pattern AdSize_SizeType_Fluid = AdSize_SizeType "FLUID"
 
@@ -2582,7 +2582,7 @@ newtype FilterSet_Format = FilterSet_Format {fromFilterSet_Format :: Core.Text}
 pattern FilterSet_Format_FORMATUNSPECIFIED :: FilterSet_Format
 pattern FilterSet_Format_FORMATUNSPECIFIED = FilterSet_Format "FORMAT_UNSPECIFIED"
 
--- | The ad impression is a native ad, and display (i.e., image) format.
+-- | The ad impression is a native ad, and display (for example, image) format.
 pattern FilterSet_Format_NATIVEDISPLAY :: FilterSet_Format
 pattern FilterSet_Format_NATIVEDISPLAY = FilterSet_Format "NATIVE_DISPLAY"
 
@@ -2590,7 +2590,7 @@ pattern FilterSet_Format_NATIVEDISPLAY = FilterSet_Format "NATIVE_DISPLAY"
 pattern FilterSet_Format_NATIVEVIDEO :: FilterSet_Format
 pattern FilterSet_Format_NATIVEVIDEO = FilterSet_Format "NATIVE_VIDEO"
 
--- | The ad impression is not a native ad, and display (i.e., image) format.
+-- | The ad impression is not a native ad, and display (for example, image) format.
 pattern FilterSet_Format_NONNATIVEDISPLAY :: FilterSet_Format
 pattern FilterSet_Format_NONNATIVEDISPLAY = FilterSet_Format "NON_NATIVE_DISPLAY"
 
@@ -2623,7 +2623,7 @@ newtype FilterSet_FormatsItem = FilterSet_FormatsItem {fromFilterSet_FormatsItem
 pattern FilterSet_FormatsItem_FORMATUNSPECIFIED :: FilterSet_FormatsItem
 pattern FilterSet_FormatsItem_FORMATUNSPECIFIED = FilterSet_FormatsItem "FORMAT_UNSPECIFIED"
 
--- | The ad impression is a native ad, and display (i.e., image) format.
+-- | The ad impression is a native ad, and display (for example, image) format.
 pattern FilterSet_FormatsItem_NATIVEDISPLAY :: FilterSet_FormatsItem
 pattern FilterSet_FormatsItem_NATIVEDISPLAY = FilterSet_FormatsItem "NATIVE_DISPLAY"
 
@@ -2631,7 +2631,7 @@ pattern FilterSet_FormatsItem_NATIVEDISPLAY = FilterSet_FormatsItem "NATIVE_DISP
 pattern FilterSet_FormatsItem_NATIVEVIDEO :: FilterSet_FormatsItem
 pattern FilterSet_FormatsItem_NATIVEVIDEO = FilterSet_FormatsItem "NATIVE_VIDEO"
 
--- | The ad impression is not a native ad, and display (i.e., image) format.
+-- | The ad impression is not a native ad, and display (for example, image) format.
 pattern FilterSet_FormatsItem_NONNATIVEDISPLAY :: FilterSet_FormatsItem
 pattern FilterSet_FormatsItem_NONNATIVEDISPLAY = FilterSet_FormatsItem "NON_NATIVE_DISPLAY"
 
@@ -2684,7 +2684,7 @@ pattern FilterSet_PlatformsItem_Mobile = FilterSet_PlatformsItem "MOBILE"
   FilterSet_PlatformsItem
   #-}
 
--- | The granularity of time intervals if a time series breakdown is desired; optional.
+-- | The granularity of time intervals if a time series breakdown is preferred; optional.
 newtype FilterSet_TimeSeriesGranularity = FilterSet_TimeSeriesGranularity {fromFilterSet_TimeSeriesGranularity :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype

@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of the sensitive information types that the DLP API supports. See https:\/\/cloud.google.com\/dlp\/docs\/infotypes-reference to learn more.
+-- Returns a list of the sensitive information types that DLP API supports. See https:\/\/cloud.google.com\/dlp\/docs\/infotypes-reference to learn more.
 --
 -- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.locations.infoTypes.list@.
 module Gogol.DLP.Locations.InfoTypes.List
@@ -61,7 +61,7 @@ type DLPLocationsInfoTypesListResource =
               '[Core.JSON]
               GooglePrivacyDlpV2ListInfoTypesResponse
 
--- | Returns a list of the sensitive information types that the DLP API supports. See https:\/\/cloud.google.com\/dlp\/docs\/infotypes-reference to learn more.
+-- | Returns a list of the sensitive information types that DLP API supports. See https:\/\/cloud.google.com\/dlp\/docs\/infotypes-reference to learn more.
 --
 -- /See:/ 'newDLPLocationsInfoTypesList' smart constructor.
 data DLPLocationsInfoTypesList = DLPLocationsInfoTypesList

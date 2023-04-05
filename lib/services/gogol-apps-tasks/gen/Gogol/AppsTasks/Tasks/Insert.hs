@@ -28,7 +28,7 @@
 --
 -- Creates a new task on the specified task list.
 --
--- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasks.insert@.
+-- /See:/ <https://developers.google.com/tasks/ Google Tasks API Reference> for @tasks.tasks.insert@.
 module Gogol.AppsTasks.Tasks.Insert
   ( -- * Resource
     TasksTasksInsertResource,

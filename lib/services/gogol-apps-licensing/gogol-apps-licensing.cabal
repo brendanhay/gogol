@@ -16,7 +16,7 @@ extra-source-files:
   src/.gitkeep
 
 description:
-  The Google Enterprise License Manager API\'s allows you to license apps for all the users of a domain managed by you.
+  The Google Enterprise License Manager API lets you manage Google Workspace and related licenses for all users of a customer that you manage.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -63,5 +63,5 @@ library
     Gogol.AppsLicensing.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

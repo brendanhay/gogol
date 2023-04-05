@@ -59,6 +59,11 @@ library
     Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.List
     Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.ResetSecret
     Gogol.IAP.Projects.Brands.List
+    Gogol.IAP.Projects.Iap_tunnel.Locations.DestGroups.Create
+    Gogol.IAP.Projects.Iap_tunnel.Locations.DestGroups.Delete
+    Gogol.IAP.Projects.Iap_tunnel.Locations.DestGroups.Get
+    Gogol.IAP.Projects.Iap_tunnel.Locations.DestGroups.List
+    Gogol.IAP.Projects.Iap_tunnel.Locations.DestGroups.Patch
     Gogol.IAP.SetIamPolicy
     Gogol.IAP.TestIamPermissions
     Gogol.IAP.Types
@@ -69,5 +74,5 @@ library
     Gogol.IAP.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

@@ -116,6 +116,14 @@ module Gogol.AndroidManagement.Internal.Sum
         ..
       ),
 
+    -- * ApplicationPolicy_AlwaysOnVpnLockdownExemption
+    ApplicationPolicy_AlwaysOnVpnLockdownExemption
+      ( ApplicationPolicy_AlwaysOnVpnLockdownExemption_ALWAYSONVPNLOCKDOWNEXEMPTIONUNSPECIFIED,
+        ApplicationPolicy_AlwaysOnVpnLockdownExemption_VPNLOCKDOWNENFORCED,
+        ApplicationPolicy_AlwaysOnVpnLockdownExemption_VPNLOCKDOWNEXEMPTION,
+        ..
+      ),
+
     -- * ApplicationPolicy_AutoUpdateMode
     ApplicationPolicy_AutoUpdateMode
       ( ApplicationPolicy_AutoUpdateMode_AUTOUPDATEMODEUNSPECIFIED,
@@ -151,6 +159,8 @@ module Gogol.AndroidManagement.Internal.Sum
         ApplicationPolicy_DelegatedScopesItem_PERMISSIONGRANT,
         ApplicationPolicy_DelegatedScopesItem_PACKAGEACCESS,
         ApplicationPolicy_DelegatedScopesItem_ENABLESYSTEMAPP,
+        ApplicationPolicy_DelegatedScopesItem_NETWORKACTIVITYLOGS,
+        ApplicationPolicy_DelegatedScopesItem_SECURITYLOGS,
         ..
       ),
 
@@ -163,6 +173,14 @@ module Gogol.AndroidManagement.Internal.Sum
         ApplicationPolicy_InstallType_Available,
         ApplicationPolicy_InstallType_REQUIREDFORSETUP,
         ApplicationPolicy_InstallType_Kiosk,
+        ..
+      ),
+
+    -- * ApplicationPolicy_WorkProfileWidgets
+    ApplicationPolicy_WorkProfileWidgets
+      ( ApplicationPolicy_WorkProfileWidgets_WORKPROFILEWIDGETSUNSPECIFIED,
+        ApplicationPolicy_WorkProfileWidgets_WORKPROFILEWIDGETSALLOWED,
+        ApplicationPolicy_WorkProfileWidgets_WORKPROFILEWIDGETSDISALLOWED,
         ..
       ),
 
@@ -218,6 +236,7 @@ module Gogol.AndroidManagement.Internal.Sum
         Command_Type_RESETPASSWORD,
         Command_Type_Reboot,
         Command_Type_RELINQUISHOWNERSHIP,
+        Command_Type_CLEARAPPDATA,
         ..
       ),
 
@@ -251,6 +270,14 @@ module Gogol.AndroidManagement.Internal.Sum
       ( CrossProfilePolicies_ShowWorkContactsInPersonalProfile_SHOWWORKCONTACTSINPERSONALPROFILEUNSPECIFIED,
         CrossProfilePolicies_ShowWorkContactsInPersonalProfile_SHOWWORKCONTACTSINPERSONALPROFILEDISALLOWED,
         CrossProfilePolicies_ShowWorkContactsInPersonalProfile_SHOWWORKCONTACTSINPERSONALPROFILEALLOWED,
+        ..
+      ),
+
+    -- * CrossProfilePolicies_WorkProfileWidgetsDefault
+    CrossProfilePolicies_WorkProfileWidgetsDefault
+      ( CrossProfilePolicies_WorkProfileWidgetsDefault_WORKPROFILEWIDGETSDEFAULTUNSPECIFIED,
+        CrossProfilePolicies_WorkProfileWidgetsDefault_WORKPROFILEWIDGETSDEFAULTALLOWED,
+        CrossProfilePolicies_WorkProfileWidgetsDefault_WORKPROFILEWIDGETSDEFAULTDISALLOWED,
         ..
       ),
 
@@ -327,6 +354,7 @@ module Gogol.AndroidManagement.Internal.Sum
         Enterprise_EnabledNotificationTypesItem_COMPLIANCEREPORT,
         Enterprise_EnabledNotificationTypesItem_STATUSREPORT,
         Enterprise_EnabledNotificationTypesItem_Command,
+        Enterprise_EnabledNotificationTypesItem_USAGELOGS,
         ..
       ),
 
@@ -437,6 +465,17 @@ module Gogol.AndroidManagement.Internal.Sum
         ..
       ),
 
+    -- * NonComplianceDetail_SpecificNonComplianceReason
+    NonComplianceDetail_SpecificNonComplianceReason
+      ( NonComplianceDetail_SpecificNonComplianceReason_SPECIFICNONCOMPLIANCEREASONUNSPECIFIED,
+        NonComplianceDetail_SpecificNonComplianceReason_PASSWORDPOLICIESUSERCREDENTIALSCONFIRMATIONREQUIRED,
+        NonComplianceDetail_SpecificNonComplianceReason_PASSWORDPOLICIESPASSWORDEXPIRED,
+        NonComplianceDetail_SpecificNonComplianceReason_PASSWORDPOLICIESPASSWORDNOTSUFFICIENT,
+        NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIINVALIDVALUE,
+        NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIAPILEVEL,
+        ..
+      ),
+
     -- * NonComplianceDetailCondition_NonComplianceReason
     NonComplianceDetailCondition_NonComplianceReason
       ( NonComplianceDetailCondition_NonComplianceReason_NONCOMPLIANCEREASONUNSPECIFIED,
@@ -450,6 +489,32 @@ module Gogol.AndroidManagement.Internal.Sum
         NonComplianceDetailCondition_NonComplianceReason_Pending,
         NonComplianceDetailCondition_NonComplianceReason_APPINCOMPATIBLE,
         NonComplianceDetailCondition_NonComplianceReason_APPNOTUPDATED,
+        ..
+      ),
+
+    -- * OsStartupEvent_VerifiedBootState
+    OsStartupEvent_VerifiedBootState
+      ( OsStartupEvent_VerifiedBootState_VERIFIEDBOOTSTATEUNSPECIFIED,
+        OsStartupEvent_VerifiedBootState_Green,
+        OsStartupEvent_VerifiedBootState_Yellow,
+        OsStartupEvent_VerifiedBootState_Orange,
+        ..
+      ),
+
+    -- * OsStartupEvent_VerityMode
+    OsStartupEvent_VerityMode
+      ( OsStartupEvent_VerityMode_DMVERITYMODEUNSPECIFIED,
+        OsStartupEvent_VerityMode_Enforcing,
+        OsStartupEvent_VerityMode_IOERROR,
+        OsStartupEvent_VerityMode_Disabled,
+        ..
+      ),
+
+    -- * PasswordPoliciesContext_PasswordPolicyScope
+    PasswordPoliciesContext_PasswordPolicyScope
+      ( PasswordPoliciesContext_PasswordPolicyScope_SCOPEUNSPECIFIED,
+        PasswordPoliciesContext_PasswordPolicyScope_SCOPEDEVICE,
+        PasswordPoliciesContext_PasswordPolicyScope_SCOPEPROFILE,
         ..
       ),
 
@@ -490,6 +555,16 @@ module Gogol.AndroidManagement.Internal.Sum
       ( PasswordRequirements_UnifiedLockSettings_UNIFIEDLOCKSETTINGSUNSPECIFIED,
         PasswordRequirements_UnifiedLockSettings_ALLOWUNIFIEDWORKANDPERSONALLOCK,
         PasswordRequirements_UnifiedLockSettings_REQUIRESEPARATEWORKLOCK,
+        ..
+      ),
+
+    -- * PerAppResult_ClearingResult
+    PerAppResult_ClearingResult
+      ( PerAppResult_ClearingResult_CLEARINGRESULTUNSPECIFIED,
+        PerAppResult_ClearingResult_Success,
+        PerAppResult_ClearingResult_APPNOTFOUND,
+        PerAppResult_ClearingResult_APPPROTECTED,
+        PerAppResult_ClearingResult_APILEVEL,
         ..
       ),
 
@@ -639,6 +714,7 @@ module Gogol.AndroidManagement.Internal.Sum
       ( PostureDetail_SecurityRisk_SECURITYRISKUNSPECIFIED,
         PostureDetail_SecurityRisk_UNKNOWNOS,
         PostureDetail_SecurityRisk_COMPROMISEDOS,
+        PostureDetail_SecurityRisk_HARDWAREBACKEDEVALUATIONFAILED,
         ..
       ),
 
@@ -688,6 +764,55 @@ module Gogol.AndroidManagement.Internal.Sum
         SystemUpdateInfo_UpdateStatus_UNKNOWNUPDATEAVAILABLE,
         SystemUpdateInfo_UpdateStatus_SECURITYUPDATEAVAILABLE,
         SystemUpdateInfo_UpdateStatus_OSUPDATEAVAILABLE,
+        ..
+      ),
+
+    -- * UsageLog_EnabledLogTypesItem
+    UsageLog_EnabledLogTypesItem
+      ( UsageLog_EnabledLogTypesItem_LOGTYPEUNSPECIFIED,
+        UsageLog_EnabledLogTypesItem_SECURITYLOGS,
+        UsageLog_EnabledLogTypesItem_NETWORKACTIVITYLOGS,
+        ..
+      ),
+
+    -- * UsageLog_UploadOnCellularAllowedItem
+    UsageLog_UploadOnCellularAllowedItem
+      ( UsageLog_UploadOnCellularAllowedItem_LOGTYPEUNSPECIFIED,
+        UsageLog_UploadOnCellularAllowedItem_SECURITYLOGS,
+        UsageLog_UploadOnCellularAllowedItem_NETWORKACTIVITYLOGS,
+        ..
+      ),
+
+    -- * UsageLogEvent_EventType
+    UsageLogEvent_EventType
+      ( UsageLogEvent_EventType_EVENTTYPEUNSPECIFIED,
+        UsageLogEvent_EventType_ADBSHELLCOMMAND,
+        UsageLogEvent_EventType_ADBSHELLINTERACTIVE,
+        UsageLogEvent_EventType_APPPROCESSSTART,
+        UsageLogEvent_EventType_KEYGUARDDISMISSED,
+        UsageLogEvent_EventType_KEYGUARDDISMISSAUTHATTEMPT,
+        UsageLogEvent_EventType_KEYGUARDSECURED,
+        UsageLogEvent_EventType_FILEPULLED,
+        UsageLogEvent_EventType_FILEPUSHED,
+        UsageLogEvent_EventType_CERTAUTHORITYINSTALLED,
+        UsageLogEvent_EventType_CERTAUTHORITYREMOVED,
+        UsageLogEvent_EventType_CERTVALIDATIONFAILURE,
+        UsageLogEvent_EventType_CRYPTOSELFTESTCOMPLETED,
+        UsageLogEvent_EventType_KEYDESTRUCTION,
+        UsageLogEvent_EventType_KEYGENERATED,
+        UsageLogEvent_EventType_KEYIMPORT,
+        UsageLogEvent_EventType_KEYINTEGRITYVIOLATION,
+        UsageLogEvent_EventType_LOGGINGSTARTED,
+        UsageLogEvent_EventType_LOGGINGSTOPPED,
+        UsageLogEvent_EventType_LOGBUFFERSIZECRITICAL,
+        UsageLogEvent_EventType_MEDIAMOUNT,
+        UsageLogEvent_EventType_MEDIAUNMOUNT,
+        UsageLogEvent_EventType_OSSHUTDOWN,
+        UsageLogEvent_EventType_OSSTARTUP,
+        UsageLogEvent_EventType_REMOTELOCK,
+        UsageLogEvent_EventType_WIPEFAILURE,
+        UsageLogEvent_EventType_Connect,
+        UsageLogEvent_EventType_Dns,
         ..
       ),
 
@@ -1107,6 +1232,38 @@ pattern ApplicationEvent_EventType_Unpinned = ApplicationEvent_EventType "UNPINN
   ApplicationEvent_EventType
   #-}
 
+-- | Specifies whether the app is allowed networking when the VPN is not connected and alwaysOnVpnPackage.lockdownEnabled is enabled. If set to VPN/LOCKDOWN/ENFORCED, the app is not allowed networking, and if set to VPN/LOCKDOWN/EXEMPTION, the app is allowed networking. Only supported on devices running Android 10 and above. If this is not supported by the device, the device will contain a NonComplianceDetail with non/compliance/reason set to API/LEVEL and a fieldPath. If this is not applicable to the app, the device will contain a NonComplianceDetail with non/compliance_reason set to UNSUPPORTED and a fieldPath. The fieldPath is set to applications[i].alwaysOnVpnLockdownExemption, where i is the index of the package in the applications policy.
+newtype ApplicationPolicy_AlwaysOnVpnLockdownExemption = ApplicationPolicy_AlwaysOnVpnLockdownExemption {fromApplicationPolicy_AlwaysOnVpnLockdownExemption :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Defaults to VPN/LOCKDOWN/ENFORCED.
+pattern ApplicationPolicy_AlwaysOnVpnLockdownExemption_ALWAYSONVPNLOCKDOWNEXEMPTIONUNSPECIFIED :: ApplicationPolicy_AlwaysOnVpnLockdownExemption
+pattern ApplicationPolicy_AlwaysOnVpnLockdownExemption_ALWAYSONVPNLOCKDOWNEXEMPTIONUNSPECIFIED = ApplicationPolicy_AlwaysOnVpnLockdownExemption "ALWAYS_ON_VPN_LOCKDOWN_EXEMPTION_UNSPECIFIED"
+
+-- | The app respects the always-on VPN lockdown setting.
+pattern ApplicationPolicy_AlwaysOnVpnLockdownExemption_VPNLOCKDOWNENFORCED :: ApplicationPolicy_AlwaysOnVpnLockdownExemption
+pattern ApplicationPolicy_AlwaysOnVpnLockdownExemption_VPNLOCKDOWNENFORCED = ApplicationPolicy_AlwaysOnVpnLockdownExemption "VPN_LOCKDOWN_ENFORCED"
+
+-- | The app is exempt from the always-on VPN lockdown setting.
+pattern ApplicationPolicy_AlwaysOnVpnLockdownExemption_VPNLOCKDOWNEXEMPTION :: ApplicationPolicy_AlwaysOnVpnLockdownExemption
+pattern ApplicationPolicy_AlwaysOnVpnLockdownExemption_VPNLOCKDOWNEXEMPTION = ApplicationPolicy_AlwaysOnVpnLockdownExemption "VPN_LOCKDOWN_EXEMPTION"
+
+{-# COMPLETE
+  ApplicationPolicy_AlwaysOnVpnLockdownExemption_ALWAYSONVPNLOCKDOWNEXEMPTIONUNSPECIFIED,
+  ApplicationPolicy_AlwaysOnVpnLockdownExemption_VPNLOCKDOWNENFORCED,
+  ApplicationPolicy_AlwaysOnVpnLockdownExemption_VPNLOCKDOWNEXEMPTION,
+  ApplicationPolicy_AlwaysOnVpnLockdownExemption
+  #-}
+
 -- | Controls the auto-update mode for the app.
 newtype ApplicationPolicy_AutoUpdateMode = ApplicationPolicy_AutoUpdateMode {fromApplicationPolicy_AutoUpdateMode :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1253,6 +1410,14 @@ pattern ApplicationPolicy_DelegatedScopesItem_PACKAGEACCESS = ApplicationPolicy_
 pattern ApplicationPolicy_DelegatedScopesItem_ENABLESYSTEMAPP :: ApplicationPolicy_DelegatedScopesItem
 pattern ApplicationPolicy_DelegatedScopesItem_ENABLESYSTEMAPP = ApplicationPolicy_DelegatedScopesItem "ENABLE_SYSTEM_APP"
 
+-- | Grants access to network activity logs. Allows the delegated application to call setNetworkLoggingEnabled (https:\/\/developer.android.com\/reference\/android\/app\/admin\/DevicePolicyManager#setNetworkLoggingEnabled%28android.content.ComponentName,%20boolean%29), isNetworkLoggingEnabled (https:\/\/developer.android.com\/reference\/android\/app\/admin\/DevicePolicyManager#isNetworkLoggingEnabled%28android.content.ComponentName%29) and retrieveNetworkLogs (https:\/\/developer.android.com\/reference\/android\/app\/admin\/DevicePolicyManager#retrieveNetworkLogs%28android.content.ComponentName,%20long%29) methods. This scope can be delegated to at most one application. Supported for fully managed devices on Android 10 and above. Supported for a work profile on Android 12 and above. When delegation is supported and set, NETWORK/ACTIVITY/LOGS is ignored.
+pattern ApplicationPolicy_DelegatedScopesItem_NETWORKACTIVITYLOGS :: ApplicationPolicy_DelegatedScopesItem
+pattern ApplicationPolicy_DelegatedScopesItem_NETWORKACTIVITYLOGS = ApplicationPolicy_DelegatedScopesItem "NETWORK_ACTIVITY_LOGS"
+
+-- | Grants access to security logs. Allows the delegated application to call setSecurityLoggingEnabled (https:\/\/developer.android.com\/reference\/android\/app\/admin\/DevicePolicyManager#setSecurityLoggingEnabled%28android.content.ComponentName,%20boolean%29), isSecurityLoggingEnabled (https:\/\/developer.android.com\/reference\/android\/app\/admin\/DevicePolicyManager#isSecurityLoggingEnabled%28android.content.ComponentName%29), retrieveSecurityLogs (https:\/\/developer.android.com\/reference\/android\/app\/admin\/DevicePolicyManager#retrieveSecurityLogs%28android.content.ComponentName%29) and retrievePreRebootSecurityLogs (https:\/\/developer.android.com\/reference\/android\/app\/admin\/DevicePolicyManager#retrievePreRebootSecurityLogs%28android.content.ComponentName%29) methods. This scope can be delegated to at most one application. Supported for fully managed devices and company-owned devices with a work profile on Android 12 and above. When delegation is supported and set, SECURITY_LOGS is ignored.
+pattern ApplicationPolicy_DelegatedScopesItem_SECURITYLOGS :: ApplicationPolicy_DelegatedScopesItem
+pattern ApplicationPolicy_DelegatedScopesItem_SECURITYLOGS = ApplicationPolicy_DelegatedScopesItem "SECURITY_LOGS"
+
 {-# COMPLETE
   ApplicationPolicy_DelegatedScopesItem_DELEGATEDSCOPEUNSPECIFIED,
   ApplicationPolicy_DelegatedScopesItem_CERTINSTALL,
@@ -1261,6 +1426,8 @@ pattern ApplicationPolicy_DelegatedScopesItem_ENABLESYSTEMAPP = ApplicationPolic
   ApplicationPolicy_DelegatedScopesItem_PERMISSIONGRANT,
   ApplicationPolicy_DelegatedScopesItem_PACKAGEACCESS,
   ApplicationPolicy_DelegatedScopesItem_ENABLESYSTEMAPP,
+  ApplicationPolicy_DelegatedScopesItem_NETWORKACTIVITYLOGS,
+  ApplicationPolicy_DelegatedScopesItem_SECURITYLOGS,
   ApplicationPolicy_DelegatedScopesItem
   #-}
 
@@ -1314,6 +1481,38 @@ pattern ApplicationPolicy_InstallType_Kiosk = ApplicationPolicy_InstallType "KIO
   ApplicationPolicy_InstallType_REQUIREDFORSETUP,
   ApplicationPolicy_InstallType_Kiosk,
   ApplicationPolicy_InstallType
+  #-}
+
+-- | Specifies whether the app installed in the work profile is allowed to add widgets to the home screen.
+newtype ApplicationPolicy_WorkProfileWidgets = ApplicationPolicy_WorkProfileWidgets {fromApplicationPolicy_WorkProfileWidgets :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Defaults to work/profile/widgets_default
+pattern ApplicationPolicy_WorkProfileWidgets_WORKPROFILEWIDGETSUNSPECIFIED :: ApplicationPolicy_WorkProfileWidgets
+pattern ApplicationPolicy_WorkProfileWidgets_WORKPROFILEWIDGETSUNSPECIFIED = ApplicationPolicy_WorkProfileWidgets "WORK_PROFILE_WIDGETS_UNSPECIFIED"
+
+-- | Work profile widgets are allowed. This means the application will be able to add widgets to the home screen.
+pattern ApplicationPolicy_WorkProfileWidgets_WORKPROFILEWIDGETSALLOWED :: ApplicationPolicy_WorkProfileWidgets
+pattern ApplicationPolicy_WorkProfileWidgets_WORKPROFILEWIDGETSALLOWED = ApplicationPolicy_WorkProfileWidgets "WORK_PROFILE_WIDGETS_ALLOWED"
+
+-- | Work profile widgets are disallowed. This means the application will not be able to add widgets to the home screen.
+pattern ApplicationPolicy_WorkProfileWidgets_WORKPROFILEWIDGETSDISALLOWED :: ApplicationPolicy_WorkProfileWidgets
+pattern ApplicationPolicy_WorkProfileWidgets_WORKPROFILEWIDGETSDISALLOWED = ApplicationPolicy_WorkProfileWidgets "WORK_PROFILE_WIDGETS_DISALLOWED"
+
+{-# COMPLETE
+  ApplicationPolicy_WorkProfileWidgets_WORKPROFILEWIDGETSUNSPECIFIED,
+  ApplicationPolicy_WorkProfileWidgets_WORKPROFILEWIDGETSALLOWED,
+  ApplicationPolicy_WorkProfileWidgets_WORKPROFILEWIDGETSDISALLOWED,
+  ApplicationPolicy_WorkProfileWidgets
   #-}
 
 -- | The source of the package.
@@ -1533,12 +1732,17 @@ pattern Command_Type_Reboot = Command_Type "REBOOT"
 pattern Command_Type_RELINQUISHOWNERSHIP :: Command_Type
 pattern Command_Type_RELINQUISHOWNERSHIP = Command_Type "RELINQUISH_OWNERSHIP"
 
+-- | Clears the application data of specified apps. This is supported on Android 9 and above. Note that an application can store data outside of its application data, for example in external storage or in a user dictionary. See also clear/apps/data_params.
+pattern Command_Type_CLEARAPPDATA :: Command_Type
+pattern Command_Type_CLEARAPPDATA = Command_Type "CLEAR_APP_DATA"
+
 {-# COMPLETE
   Command_Type_COMMANDTYPEUNSPECIFIED,
   Command_Type_Lock,
   Command_Type_RESETPASSWORD,
   Command_Type_Reboot,
   Command_Type_RELINQUISHOWNERSHIP,
+  Command_Type_CLEARAPPDATA,
   Command_Type
   #-}
 
@@ -1673,6 +1877,38 @@ pattern CrossProfilePolicies_ShowWorkContactsInPersonalProfile_SHOWWORKCONTACTSI
   CrossProfilePolicies_ShowWorkContactsInPersonalProfile_SHOWWORKCONTACTSINPERSONALPROFILEDISALLOWED,
   CrossProfilePolicies_ShowWorkContactsInPersonalProfile_SHOWWORKCONTACTSINPERSONALPROFILEALLOWED,
   CrossProfilePolicies_ShowWorkContactsInPersonalProfile
+  #-}
+
+-- | Specifies the default behaviour for work profile widgets. If the policy does not specify work/profile/widgets for a specific application, it will behave according to the value specified here.
+newtype CrossProfilePolicies_WorkProfileWidgetsDefault = CrossProfilePolicies_WorkProfileWidgetsDefault {fromCrossProfilePolicies_WorkProfileWidgetsDefault :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Defaults to WORK/PROFILE/WIDGETS/DEFAULT/DISALLOWED.
+pattern CrossProfilePolicies_WorkProfileWidgetsDefault_WORKPROFILEWIDGETSDEFAULTUNSPECIFIED :: CrossProfilePolicies_WorkProfileWidgetsDefault
+pattern CrossProfilePolicies_WorkProfileWidgetsDefault_WORKPROFILEWIDGETSDEFAULTUNSPECIFIED = CrossProfilePolicies_WorkProfileWidgetsDefault "WORK_PROFILE_WIDGETS_DEFAULT_UNSPECIFIED"
+
+-- | Work profile widgets are allowed by default. This means that if the policy does not specify work/profile/widgets as WORK/PROFILE/WIDGETS_DISALLOWED for the application, it will be able to add widgets to the home screen.
+pattern CrossProfilePolicies_WorkProfileWidgetsDefault_WORKPROFILEWIDGETSDEFAULTALLOWED :: CrossProfilePolicies_WorkProfileWidgetsDefault
+pattern CrossProfilePolicies_WorkProfileWidgetsDefault_WORKPROFILEWIDGETSDEFAULTALLOWED = CrossProfilePolicies_WorkProfileWidgetsDefault "WORK_PROFILE_WIDGETS_DEFAULT_ALLOWED"
+
+-- | Work profile widgets are disallowed by default. This means that if the policy does not specify work/profile/widgets as WORK/PROFILE/WIDGETS_ALLOWED for the application, it will be unable to add widgets to the home screen.
+pattern CrossProfilePolicies_WorkProfileWidgetsDefault_WORKPROFILEWIDGETSDEFAULTDISALLOWED :: CrossProfilePolicies_WorkProfileWidgetsDefault
+pattern CrossProfilePolicies_WorkProfileWidgetsDefault_WORKPROFILEWIDGETSDEFAULTDISALLOWED = CrossProfilePolicies_WorkProfileWidgetsDefault "WORK_PROFILE_WIDGETS_DEFAULT_DISALLOWED"
+
+{-# COMPLETE
+  CrossProfilePolicies_WorkProfileWidgetsDefault_WORKPROFILEWIDGETSDEFAULTUNSPECIFIED,
+  CrossProfilePolicies_WorkProfileWidgetsDefault_WORKPROFILEWIDGETSDEFAULTALLOWED,
+  CrossProfilePolicies_WorkProfileWidgetsDefault_WORKPROFILEWIDGETSDEFAULTDISALLOWED,
+  CrossProfilePolicies_WorkProfileWidgetsDefault
   #-}
 
 -- | The state currently applied to the device.
@@ -1981,12 +2217,17 @@ pattern Enterprise_EnabledNotificationTypesItem_STATUSREPORT = Enterprise_Enable
 pattern Enterprise_EnabledNotificationTypesItem_Command :: Enterprise_EnabledNotificationTypesItem
 pattern Enterprise_EnabledNotificationTypesItem_Command = Enterprise_EnabledNotificationTypesItem "COMMAND"
 
+-- | A notification sent when device sends BatchUsageLogEvents.
+pattern Enterprise_EnabledNotificationTypesItem_USAGELOGS :: Enterprise_EnabledNotificationTypesItem
+pattern Enterprise_EnabledNotificationTypesItem_USAGELOGS = Enterprise_EnabledNotificationTypesItem "USAGE_LOGS"
+
 {-# COMPLETE
   Enterprise_EnabledNotificationTypesItem_NOTIFICATIONTYPEUNSPECIFIED,
   Enterprise_EnabledNotificationTypesItem_Enrollment,
   Enterprise_EnabledNotificationTypesItem_COMPLIANCEREPORT,
   Enterprise_EnabledNotificationTypesItem_STATUSREPORT,
   Enterprise_EnabledNotificationTypesItem_Command,
+  Enterprise_EnabledNotificationTypesItem_USAGELOGS,
   Enterprise_EnabledNotificationTypesItem
   #-}
 
@@ -2445,6 +2686,53 @@ pattern NonComplianceDetail_NonComplianceReason_APPNOTUPDATED = NonComplianceDet
   NonComplianceDetail_NonComplianceReason
   #-}
 
+-- | The policy-specific reason the device is not in compliance with the setting.
+newtype NonComplianceDetail_SpecificNonComplianceReason = NonComplianceDetail_SpecificNonComplianceReason {fromNonComplianceDetail_SpecificNonComplianceReason :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Specific non-compliance reason is not specified. Fields in specific/non/compliance_context are not set.
+pattern NonComplianceDetail_SpecificNonComplianceReason_SPECIFICNONCOMPLIANCEREASONUNSPECIFIED :: NonComplianceDetail_SpecificNonComplianceReason
+pattern NonComplianceDetail_SpecificNonComplianceReason_SPECIFICNONCOMPLIANCEREASONUNSPECIFIED = NonComplianceDetail_SpecificNonComplianceReason "SPECIFIC_NON_COMPLIANCE_REASON_UNSPECIFIED"
+
+-- | User needs to confirm credentials by entering the screen lock. Fields in specific/non/compliance/context are not set. nonComplianceReason is set to USER/ACTION.
+pattern NonComplianceDetail_SpecificNonComplianceReason_PASSWORDPOLICIESUSERCREDENTIALSCONFIRMATIONREQUIRED :: NonComplianceDetail_SpecificNonComplianceReason
+pattern NonComplianceDetail_SpecificNonComplianceReason_PASSWORDPOLICIESUSERCREDENTIALSCONFIRMATIONREQUIRED = NonComplianceDetail_SpecificNonComplianceReason "PASSWORD_POLICIES_USER_CREDENTIALS_CONFIRMATION_REQUIRED"
+
+-- | The device or profile password has expired. passwordPoliciesContext is set. nonComplianceReason is set to USER_ACTION.
+pattern NonComplianceDetail_SpecificNonComplianceReason_PASSWORDPOLICIESPASSWORDEXPIRED :: NonComplianceDetail_SpecificNonComplianceReason
+pattern NonComplianceDetail_SpecificNonComplianceReason_PASSWORDPOLICIESPASSWORDEXPIRED = NonComplianceDetail_SpecificNonComplianceReason "PASSWORD_POLICIES_PASSWORD_EXPIRED"
+
+-- | The device password does not satisfy password requirements. passwordPoliciesContext is set. nonComplianceReason is set to USER_ACTION.
+pattern NonComplianceDetail_SpecificNonComplianceReason_PASSWORDPOLICIESPASSWORDNOTSUFFICIENT :: NonComplianceDetail_SpecificNonComplianceReason
+pattern NonComplianceDetail_SpecificNonComplianceReason_PASSWORDPOLICIESPASSWORDNOTSUFFICIENT = NonComplianceDetail_SpecificNonComplianceReason "PASSWORD_POLICIES_PASSWORD_NOT_SUFFICIENT"
+
+-- | There is an incorrect value in ONC Wi-Fi configuration. fieldPath specifies which field value is incorrect. oncWifiContext is set. nonComplianceReason is set to INVALID_VALUE.
+pattern NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIINVALIDVALUE :: NonComplianceDetail_SpecificNonComplianceReason
+pattern NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIINVALIDVALUE = NonComplianceDetail_SpecificNonComplianceReason "ONC_WIFI_INVALID_VALUE"
+
+-- | The ONC Wi-Fi setting is not supported in the API level of the Android version running on the device. fieldPath specifies which field value is not supported. oncWifiContext is set. nonComplianceReason is set to API_LEVEL.
+pattern NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIAPILEVEL :: NonComplianceDetail_SpecificNonComplianceReason
+pattern NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIAPILEVEL = NonComplianceDetail_SpecificNonComplianceReason "ONC_WIFI_API_LEVEL"
+
+{-# COMPLETE
+  NonComplianceDetail_SpecificNonComplianceReason_SPECIFICNONCOMPLIANCEREASONUNSPECIFIED,
+  NonComplianceDetail_SpecificNonComplianceReason_PASSWORDPOLICIESUSERCREDENTIALSCONFIRMATIONREQUIRED,
+  NonComplianceDetail_SpecificNonComplianceReason_PASSWORDPOLICIESPASSWORDEXPIRED,
+  NonComplianceDetail_SpecificNonComplianceReason_PASSWORDPOLICIESPASSWORDNOTSUFFICIENT,
+  NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIINVALIDVALUE,
+  NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIAPILEVEL,
+  NonComplianceDetail_SpecificNonComplianceReason
+  #-}
+
 -- | The reason the device is not in compliance with the setting. If not set, then this condition matches any reason.
 newtype NonComplianceDetailCondition_NonComplianceReason = NonComplianceDetailCondition_NonComplianceReason {fromNonComplianceDetailCondition_NonComplianceReason :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -2515,6 +2803,112 @@ pattern NonComplianceDetailCondition_NonComplianceReason_APPNOTUPDATED = NonComp
   NonComplianceDetailCondition_NonComplianceReason_APPINCOMPATIBLE,
   NonComplianceDetailCondition_NonComplianceReason_APPNOTUPDATED,
   NonComplianceDetailCondition_NonComplianceReason
+  #-}
+
+-- | Verified Boot state.
+newtype OsStartupEvent_VerifiedBootState = OsStartupEvent_VerifiedBootState {fromOsStartupEvent_VerifiedBootState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unknown value.
+pattern OsStartupEvent_VerifiedBootState_VERIFIEDBOOTSTATEUNSPECIFIED :: OsStartupEvent_VerifiedBootState
+pattern OsStartupEvent_VerifiedBootState_VERIFIEDBOOTSTATEUNSPECIFIED = OsStartupEvent_VerifiedBootState "VERIFIED_BOOT_STATE_UNSPECIFIED"
+
+-- | Indicates that there is a full chain of trust extending from the bootloader to verified partitions including the bootloader, boot partition, and all verified partitions.
+pattern OsStartupEvent_VerifiedBootState_Green :: OsStartupEvent_VerifiedBootState
+pattern OsStartupEvent_VerifiedBootState_Green = OsStartupEvent_VerifiedBootState "GREEN"
+
+-- | Indicates that the boot partition has been verified using the embedded certificate and the signature is valid.
+pattern OsStartupEvent_VerifiedBootState_Yellow :: OsStartupEvent_VerifiedBootState
+pattern OsStartupEvent_VerifiedBootState_Yellow = OsStartupEvent_VerifiedBootState "YELLOW"
+
+-- | Indicates that the device may be freely modified. Device integrity is left to the user to verify out-of-band.
+pattern OsStartupEvent_VerifiedBootState_Orange :: OsStartupEvent_VerifiedBootState
+pattern OsStartupEvent_VerifiedBootState_Orange = OsStartupEvent_VerifiedBootState "ORANGE"
+
+{-# COMPLETE
+  OsStartupEvent_VerifiedBootState_VERIFIEDBOOTSTATEUNSPECIFIED,
+  OsStartupEvent_VerifiedBootState_Green,
+  OsStartupEvent_VerifiedBootState_Yellow,
+  OsStartupEvent_VerifiedBootState_Orange,
+  OsStartupEvent_VerifiedBootState
+  #-}
+
+-- | dm-verity mode.
+newtype OsStartupEvent_VerityMode = OsStartupEvent_VerityMode {fromOsStartupEvent_VerityMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unknown value.
+pattern OsStartupEvent_VerityMode_DMVERITYMODEUNSPECIFIED :: OsStartupEvent_VerityMode
+pattern OsStartupEvent_VerityMode_DMVERITYMODEUNSPECIFIED = OsStartupEvent_VerityMode "DM_VERITY_MODE_UNSPECIFIED"
+
+-- | Indicates that the device will be restarted when corruption is detected.
+pattern OsStartupEvent_VerityMode_Enforcing :: OsStartupEvent_VerityMode
+pattern OsStartupEvent_VerityMode_Enforcing = OsStartupEvent_VerityMode "ENFORCING"
+
+-- | Indicates that an I\/O error will be returned for an attempt to read corrupted data blocks (also known as eio boot state).
+pattern OsStartupEvent_VerityMode_IOERROR :: OsStartupEvent_VerityMode
+pattern OsStartupEvent_VerityMode_IOERROR = OsStartupEvent_VerityMode "IO_ERROR"
+
+-- | Indicates that dm-verity is disabled on device.
+pattern OsStartupEvent_VerityMode_Disabled :: OsStartupEvent_VerityMode
+pattern OsStartupEvent_VerityMode_Disabled = OsStartupEvent_VerityMode "DISABLED"
+
+{-# COMPLETE
+  OsStartupEvent_VerityMode_DMVERITYMODEUNSPECIFIED,
+  OsStartupEvent_VerityMode_Enforcing,
+  OsStartupEvent_VerityMode_IOERROR,
+  OsStartupEvent_VerityMode_Disabled,
+  OsStartupEvent_VerityMode
+  #-}
+
+-- | The scope of non-compliant password.
+newtype PasswordPoliciesContext_PasswordPolicyScope = PasswordPoliciesContext_PasswordPolicyScope {fromPasswordPoliciesContext_PasswordPolicyScope :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The scope is unspecified. The password requirements are applied to the work profile for work profile devices and the whole device for fully managed or dedicated devices.
+pattern PasswordPoliciesContext_PasswordPolicyScope_SCOPEUNSPECIFIED :: PasswordPoliciesContext_PasswordPolicyScope
+pattern PasswordPoliciesContext_PasswordPolicyScope_SCOPEUNSPECIFIED = PasswordPoliciesContext_PasswordPolicyScope "SCOPE_UNSPECIFIED"
+
+-- | The password requirements are only applied to the device.
+pattern PasswordPoliciesContext_PasswordPolicyScope_SCOPEDEVICE :: PasswordPoliciesContext_PasswordPolicyScope
+pattern PasswordPoliciesContext_PasswordPolicyScope_SCOPEDEVICE = PasswordPoliciesContext_PasswordPolicyScope "SCOPE_DEVICE"
+
+-- | The password requirements are only applied to the work profile.
+pattern PasswordPoliciesContext_PasswordPolicyScope_SCOPEPROFILE :: PasswordPoliciesContext_PasswordPolicyScope
+pattern PasswordPoliciesContext_PasswordPolicyScope_SCOPEPROFILE = PasswordPoliciesContext_PasswordPolicyScope "SCOPE_PROFILE"
+
+{-# COMPLETE
+  PasswordPoliciesContext_PasswordPolicyScope_SCOPEUNSPECIFIED,
+  PasswordPoliciesContext_PasswordPolicyScope_SCOPEDEVICE,
+  PasswordPoliciesContext_PasswordPolicyScope_SCOPEPROFILE,
+  PasswordPoliciesContext_PasswordPolicyScope
   #-}
 
 -- | The required password quality.
@@ -2653,7 +3047,7 @@ pattern PasswordRequirements_RequirePasswordUnlock_REQUIREEVERYDAY = PasswordReq
   PasswordRequirements_RequirePasswordUnlock
   #-}
 
--- | Controls whether a unified lock is allowed for the device and the work profile, on devices running Android 9 and above with a work profile. This has no effect on other devices. This can be set only if password/scope is set to SCOPE/PROFILE, the policy will be rejected otherwise. If user has not set a separate work lock and this field is set to REQUIRE/SEPARATE/WORK/LOCK, a NonComplianceDetail is reported with nonComplianceReason set to USER/ACTION.
+-- | Controls whether a unified lock is allowed for the device and the work profile, on devices running Android 9 and above with a work profile. This can be set only if password/scope is set to SCOPE/PROFILE, the policy will be rejected otherwise. If user has not set a separate work lock and this field is set to REQUIRE/SEPARATE/WORK/LOCK, a NonComplianceDetail is reported with nonComplianceReason set to USER/ACTION.
 newtype PasswordRequirements_UnifiedLockSettings = PasswordRequirements_UnifiedLockSettings {fromPasswordRequirements_UnifiedLockSettings :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -2683,6 +3077,48 @@ pattern PasswordRequirements_UnifiedLockSettings_REQUIRESEPARATEWORKLOCK = Passw
   PasswordRequirements_UnifiedLockSettings_ALLOWUNIFIEDWORKANDPERSONALLOCK,
   PasswordRequirements_UnifiedLockSettings_REQUIRESEPARATEWORKLOCK,
   PasswordRequirements_UnifiedLockSettings
+  #-}
+
+-- | The result of an attempt to clear the data of a single app.
+newtype PerAppResult_ClearingResult = PerAppResult_ClearingResult {fromPerAppResult_ClearingResult :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified result.
+pattern PerAppResult_ClearingResult_CLEARINGRESULTUNSPECIFIED :: PerAppResult_ClearingResult
+pattern PerAppResult_ClearingResult_CLEARINGRESULTUNSPECIFIED = PerAppResult_ClearingResult "CLEARING_RESULT_UNSPECIFIED"
+
+-- | This app’s data was successfully cleared.
+pattern PerAppResult_ClearingResult_Success :: PerAppResult_ClearingResult
+pattern PerAppResult_ClearingResult_Success = PerAppResult_ClearingResult "SUCCESS"
+
+-- | This app’s data could not be cleared because the app was not found.
+pattern PerAppResult_ClearingResult_APPNOTFOUND :: PerAppResult_ClearingResult
+pattern PerAppResult_ClearingResult_APPNOTFOUND = PerAppResult_ClearingResult "APP_NOT_FOUND"
+
+-- | This app’s data could not be cleared because the app is protected. For example, this may apply to apps critical to the functioning of the device, such as Google Play Store.
+pattern PerAppResult_ClearingResult_APPPROTECTED :: PerAppResult_ClearingResult
+pattern PerAppResult_ClearingResult_APPPROTECTED = PerAppResult_ClearingResult "APP_PROTECTED"
+
+-- | This app’s data could not be cleared because the device API level does not support this command.
+pattern PerAppResult_ClearingResult_APILEVEL :: PerAppResult_ClearingResult
+pattern PerAppResult_ClearingResult_APILEVEL = PerAppResult_ClearingResult "API_LEVEL"
+
+{-# COMPLETE
+  PerAppResult_ClearingResult_CLEARINGRESULTUNSPECIFIED,
+  PerAppResult_ClearingResult_Success,
+  PerAppResult_ClearingResult_APPNOTFOUND,
+  PerAppResult_ClearingResult_APPPROTECTED,
+  PerAppResult_ClearingResult_APILEVEL,
+  PerAppResult_ClearingResult
   #-}
 
 -- | The policy for granting the permission.
@@ -3292,10 +3728,15 @@ pattern PostureDetail_SecurityRisk_UNKNOWNOS = PostureDetail_SecurityRisk "UNKNO
 pattern PostureDetail_SecurityRisk_COMPROMISEDOS :: PostureDetail_SecurityRisk
 pattern PostureDetail_SecurityRisk_COMPROMISEDOS = PostureDetail_SecurityRisk "COMPROMISED_OS"
 
+-- | SafetyNet detects that the device does not have a strong guarantee of system integrity, such as a hardware-backed keystore (https:\/\/developer.android.com\/training\/articles\/security-key-attestation).
+pattern PostureDetail_SecurityRisk_HARDWAREBACKEDEVALUATIONFAILED :: PostureDetail_SecurityRisk
+pattern PostureDetail_SecurityRisk_HARDWAREBACKEDEVALUATIONFAILED = PostureDetail_SecurityRisk "HARDWARE_BACKED_EVALUATION_FAILED"
+
 {-# COMPLETE
   PostureDetail_SecurityRisk_SECURITYRISKUNSPECIFIED,
   PostureDetail_SecurityRisk_UNKNOWNOS,
   PostureDetail_SecurityRisk_COMPROMISEDOS,
+  PostureDetail_SecurityRisk_HARDWAREBACKEDEVALUATIONFAILED,
   PostureDetail_SecurityRisk
   #-}
 
@@ -3502,6 +3943,225 @@ pattern SystemUpdateInfo_UpdateStatus_OSUPDATEAVAILABLE = SystemUpdateInfo_Updat
   SystemUpdateInfo_UpdateStatus_SECURITYUPDATEAVAILABLE,
   SystemUpdateInfo_UpdateStatus_OSUPDATEAVAILABLE,
   SystemUpdateInfo_UpdateStatus
+  #-}
+
+newtype UsageLog_EnabledLogTypesItem = UsageLog_EnabledLogTypesItem {fromUsageLog_EnabledLogTypesItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | This value is not used.
+pattern UsageLog_EnabledLogTypesItem_LOGTYPEUNSPECIFIED :: UsageLog_EnabledLogTypesItem
+pattern UsageLog_EnabledLogTypesItem_LOGTYPEUNSPECIFIED = UsageLog_EnabledLogTypesItem "LOG_TYPE_UNSPECIFIED"
+
+-- | Enable logging of on-device security events, like when the device password is incorrectly entered or removable storage is mounted. See UsageLogEvent for a complete description of the logged security events. Supported for fully managed devices on Android 7 and above. Supported for company-owned devices with a work profile on Android 12 and above, on which only security events from the work profile are logged. Can be overridden by the application delegated scope SECURITY_LOGS
+pattern UsageLog_EnabledLogTypesItem_SECURITYLOGS :: UsageLog_EnabledLogTypesItem
+pattern UsageLog_EnabledLogTypesItem_SECURITYLOGS = UsageLog_EnabledLogTypesItem "SECURITY_LOGS"
+
+-- | Enable logging of on-device network events, like DNS lookups and TCP connections. See UsageLogEvent for a complete description of the logged network events. Supported for fully managed devices on Android 8 and above. Supported for company-owned devices with a work profile on Android 12 and above, on which only network events from the work profile are logged. Can be overridden by the application delegated scope NETWORK/ACTIVITY/LOGS
+pattern UsageLog_EnabledLogTypesItem_NETWORKACTIVITYLOGS :: UsageLog_EnabledLogTypesItem
+pattern UsageLog_EnabledLogTypesItem_NETWORKACTIVITYLOGS = UsageLog_EnabledLogTypesItem "NETWORK_ACTIVITY_LOGS"
+
+{-# COMPLETE
+  UsageLog_EnabledLogTypesItem_LOGTYPEUNSPECIFIED,
+  UsageLog_EnabledLogTypesItem_SECURITYLOGS,
+  UsageLog_EnabledLogTypesItem_NETWORKACTIVITYLOGS,
+  UsageLog_EnabledLogTypesItem
+  #-}
+
+newtype UsageLog_UploadOnCellularAllowedItem = UsageLog_UploadOnCellularAllowedItem {fromUsageLog_UploadOnCellularAllowedItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | This value is not used.
+pattern UsageLog_UploadOnCellularAllowedItem_LOGTYPEUNSPECIFIED :: UsageLog_UploadOnCellularAllowedItem
+pattern UsageLog_UploadOnCellularAllowedItem_LOGTYPEUNSPECIFIED = UsageLog_UploadOnCellularAllowedItem "LOG_TYPE_UNSPECIFIED"
+
+-- | Enable logging of on-device security events, like when the device password is incorrectly entered or removable storage is mounted. See UsageLogEvent for a complete description of the logged security events. Supported for fully managed devices on Android 7 and above. Supported for company-owned devices with a work profile on Android 12 and above, on which only security events from the work profile are logged. Can be overridden by the application delegated scope SECURITY_LOGS
+pattern UsageLog_UploadOnCellularAllowedItem_SECURITYLOGS :: UsageLog_UploadOnCellularAllowedItem
+pattern UsageLog_UploadOnCellularAllowedItem_SECURITYLOGS = UsageLog_UploadOnCellularAllowedItem "SECURITY_LOGS"
+
+-- | Enable logging of on-device network events, like DNS lookups and TCP connections. See UsageLogEvent for a complete description of the logged network events. Supported for fully managed devices on Android 8 and above. Supported for company-owned devices with a work profile on Android 12 and above, on which only network events from the work profile are logged. Can be overridden by the application delegated scope NETWORK/ACTIVITY/LOGS
+pattern UsageLog_UploadOnCellularAllowedItem_NETWORKACTIVITYLOGS :: UsageLog_UploadOnCellularAllowedItem
+pattern UsageLog_UploadOnCellularAllowedItem_NETWORKACTIVITYLOGS = UsageLog_UploadOnCellularAllowedItem "NETWORK_ACTIVITY_LOGS"
+
+{-# COMPLETE
+  UsageLog_UploadOnCellularAllowedItem_LOGTYPEUNSPECIFIED,
+  UsageLog_UploadOnCellularAllowedItem_SECURITYLOGS,
+  UsageLog_UploadOnCellularAllowedItem_NETWORKACTIVITYLOGS,
+  UsageLog_UploadOnCellularAllowedItem
+  #-}
+
+-- | The particular usage log event type that was reported on the device. Use this to determine which event field to access.
+newtype UsageLogEvent_EventType = UsageLogEvent_EventType {fromUsageLogEvent_EventType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | This value is not used
+pattern UsageLogEvent_EventType_EVENTTYPEUNSPECIFIED :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_EVENTTYPEUNSPECIFIED = UsageLogEvent_EventType "EVENT_TYPE_UNSPECIFIED"
+
+-- | Indicates adb/shell/command_event has been set.
+pattern UsageLogEvent_EventType_ADBSHELLCOMMAND :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_ADBSHELLCOMMAND = UsageLogEvent_EventType "ADB_SHELL_COMMAND"
+
+-- | Indicates adb/shell/interactive_event has been set.
+pattern UsageLogEvent_EventType_ADBSHELLINTERACTIVE :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_ADBSHELLINTERACTIVE = UsageLogEvent_EventType "ADB_SHELL_INTERACTIVE"
+
+-- | Indicates app/process/start_event has been set.
+pattern UsageLogEvent_EventType_APPPROCESSSTART :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_APPPROCESSSTART = UsageLogEvent_EventType "APP_PROCESS_START"
+
+-- | Indicates keyguard/dismissed/event has been set.
+pattern UsageLogEvent_EventType_KEYGUARDDISMISSED :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_KEYGUARDDISMISSED = UsageLogEvent_EventType "KEYGUARD_DISMISSED"
+
+-- | Indicates keyguard/dismiss/auth/attempt/event has been set.
+pattern UsageLogEvent_EventType_KEYGUARDDISMISSAUTHATTEMPT :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_KEYGUARDDISMISSAUTHATTEMPT = UsageLogEvent_EventType "KEYGUARD_DISMISS_AUTH_ATTEMPT"
+
+-- | Indicates keyguard/secured/event has been set.
+pattern UsageLogEvent_EventType_KEYGUARDSECURED :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_KEYGUARDSECURED = UsageLogEvent_EventType "KEYGUARD_SECURED"
+
+-- | Indicates file/pulled/event has been set.
+pattern UsageLogEvent_EventType_FILEPULLED :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_FILEPULLED = UsageLogEvent_EventType "FILE_PULLED"
+
+-- | Indicates file/pushed/event has been set.
+pattern UsageLogEvent_EventType_FILEPUSHED :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_FILEPUSHED = UsageLogEvent_EventType "FILE_PUSHED"
+
+-- | Indicates cert/authority/installed_event has been set.
+pattern UsageLogEvent_EventType_CERTAUTHORITYINSTALLED :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_CERTAUTHORITYINSTALLED = UsageLogEvent_EventType "CERT_AUTHORITY_INSTALLED"
+
+-- | Indicates cert/authority/removed_event has been set.
+pattern UsageLogEvent_EventType_CERTAUTHORITYREMOVED :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_CERTAUTHORITYREMOVED = UsageLogEvent_EventType "CERT_AUTHORITY_REMOVED"
+
+-- | Indicates cert/validation/failure_event has been set.
+pattern UsageLogEvent_EventType_CERTVALIDATIONFAILURE :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_CERTVALIDATIONFAILURE = UsageLogEvent_EventType "CERT_VALIDATION_FAILURE"
+
+-- | Indicates crypto/self/test/completed/event has been set.
+pattern UsageLogEvent_EventType_CRYPTOSELFTESTCOMPLETED :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_CRYPTOSELFTESTCOMPLETED = UsageLogEvent_EventType "CRYPTO_SELF_TEST_COMPLETED"
+
+-- | Indicates key/destruction/event has been set.
+pattern UsageLogEvent_EventType_KEYDESTRUCTION :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_KEYDESTRUCTION = UsageLogEvent_EventType "KEY_DESTRUCTION"
+
+-- | Indicates key/generated/event has been set.
+pattern UsageLogEvent_EventType_KEYGENERATED :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_KEYGENERATED = UsageLogEvent_EventType "KEY_GENERATED"
+
+-- | Indicates key/import/event has been set.
+pattern UsageLogEvent_EventType_KEYIMPORT :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_KEYIMPORT = UsageLogEvent_EventType "KEY_IMPORT"
+
+-- | Indicates key/integrity/violation_event has been set.
+pattern UsageLogEvent_EventType_KEYINTEGRITYVIOLATION :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_KEYINTEGRITYVIOLATION = UsageLogEvent_EventType "KEY_INTEGRITY_VIOLATION"
+
+-- | Indicates logging/started/event has been set.
+pattern UsageLogEvent_EventType_LOGGINGSTARTED :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_LOGGINGSTARTED = UsageLogEvent_EventType "LOGGING_STARTED"
+
+-- | Indicates logging/stopped/event has been set.
+pattern UsageLogEvent_EventType_LOGGINGSTOPPED :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_LOGGINGSTOPPED = UsageLogEvent_EventType "LOGGING_STOPPED"
+
+-- | Indicates log/buffer/size/critical/event has been set.
+pattern UsageLogEvent_EventType_LOGBUFFERSIZECRITICAL :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_LOGBUFFERSIZECRITICAL = UsageLogEvent_EventType "LOG_BUFFER_SIZE_CRITICAL"
+
+-- | Indicates media/mount/event has been set.
+pattern UsageLogEvent_EventType_MEDIAMOUNT :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_MEDIAMOUNT = UsageLogEvent_EventType "MEDIA_MOUNT"
+
+-- | Indicates media/unmount/event has been set.
+pattern UsageLogEvent_EventType_MEDIAUNMOUNT :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_MEDIAUNMOUNT = UsageLogEvent_EventType "MEDIA_UNMOUNT"
+
+-- | Indicates os/shutdown/event has been set.
+pattern UsageLogEvent_EventType_OSSHUTDOWN :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_OSSHUTDOWN = UsageLogEvent_EventType "OS_SHUTDOWN"
+
+-- | Indicates os/startup/event has been set.
+pattern UsageLogEvent_EventType_OSSTARTUP :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_OSSTARTUP = UsageLogEvent_EventType "OS_STARTUP"
+
+-- | Indicates remote/lock/event has been set.
+pattern UsageLogEvent_EventType_REMOTELOCK :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_REMOTELOCK = UsageLogEvent_EventType "REMOTE_LOCK"
+
+-- | Indicates wipe/failure/event has been set.
+pattern UsageLogEvent_EventType_WIPEFAILURE :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_WIPEFAILURE = UsageLogEvent_EventType "WIPE_FAILURE"
+
+-- | Indicates connect_event has been set.
+pattern UsageLogEvent_EventType_Connect :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_Connect = UsageLogEvent_EventType "CONNECT"
+
+-- | Indicates dns_event has been set.
+pattern UsageLogEvent_EventType_Dns :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_Dns = UsageLogEvent_EventType "DNS"
+
+{-# COMPLETE
+  UsageLogEvent_EventType_EVENTTYPEUNSPECIFIED,
+  UsageLogEvent_EventType_ADBSHELLCOMMAND,
+  UsageLogEvent_EventType_ADBSHELLINTERACTIVE,
+  UsageLogEvent_EventType_APPPROCESSSTART,
+  UsageLogEvent_EventType_KEYGUARDDISMISSED,
+  UsageLogEvent_EventType_KEYGUARDDISMISSAUTHATTEMPT,
+  UsageLogEvent_EventType_KEYGUARDSECURED,
+  UsageLogEvent_EventType_FILEPULLED,
+  UsageLogEvent_EventType_FILEPUSHED,
+  UsageLogEvent_EventType_CERTAUTHORITYINSTALLED,
+  UsageLogEvent_EventType_CERTAUTHORITYREMOVED,
+  UsageLogEvent_EventType_CERTVALIDATIONFAILURE,
+  UsageLogEvent_EventType_CRYPTOSELFTESTCOMPLETED,
+  UsageLogEvent_EventType_KEYDESTRUCTION,
+  UsageLogEvent_EventType_KEYGENERATED,
+  UsageLogEvent_EventType_KEYIMPORT,
+  UsageLogEvent_EventType_KEYINTEGRITYVIOLATION,
+  UsageLogEvent_EventType_LOGGINGSTARTED,
+  UsageLogEvent_EventType_LOGGINGSTOPPED,
+  UsageLogEvent_EventType_LOGBUFFERSIZECRITICAL,
+  UsageLogEvent_EventType_MEDIAMOUNT,
+  UsageLogEvent_EventType_MEDIAUNMOUNT,
+  UsageLogEvent_EventType_OSSHUTDOWN,
+  UsageLogEvent_EventType_OSSTARTUP,
+  UsageLogEvent_EventType_REMOTELOCK,
+  UsageLogEvent_EventType_WIPEFAILURE,
+  UsageLogEvent_EventType_Connect,
+  UsageLogEvent_EventType_Dns,
+  UsageLogEvent_EventType
   #-}
 
 -- | The display mode of the web app.

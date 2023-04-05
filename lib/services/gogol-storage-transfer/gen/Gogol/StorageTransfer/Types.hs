@@ -48,6 +48,10 @@ module Gogol.StorageTransfer.Types
     AwsAccessKey (..),
     newAwsAccessKey,
 
+    -- ** AwsS3CompatibleData
+    AwsS3CompatibleData (..),
+    newAwsS3CompatibleData,
+
     -- ** AwsS3Data
     AwsS3Data (..),
     newAwsS3Data,
@@ -86,6 +90,10 @@ module Gogol.StorageTransfer.Types
 
     -- ** ErrorSummary_ErrorCode
     ErrorSummary_ErrorCode (..),
+
+    -- ** EventStream
+    EventStream (..),
+    newEventStream,
 
     -- ** GcsData
     GcsData (..),
@@ -194,6 +202,22 @@ module Gogol.StorageTransfer.Types
     RunTransferJobRequest (..),
     newRunTransferJobRequest,
 
+    -- ** S3CompatibleMetadata
+    S3CompatibleMetadata (..),
+    newS3CompatibleMetadata,
+
+    -- ** S3CompatibleMetadata_AuthMethod
+    S3CompatibleMetadata_AuthMethod (..),
+
+    -- ** S3CompatibleMetadata_ListApi
+    S3CompatibleMetadata_ListApi (..),
+
+    -- ** S3CompatibleMetadata_Protocol
+    S3CompatibleMetadata_Protocol (..),
+
+    -- ** S3CompatibleMetadata_RequestModel
+    S3CompatibleMetadata_RequestModel (..),
+
     -- ** Schedule
     Schedule (..),
     newSchedule,
@@ -235,6 +259,9 @@ module Gogol.StorageTransfer.Types
     -- ** TransferOptions
     TransferOptions (..),
     newTransferOptions,
+
+    -- ** TransferOptions_OverwriteWhen
+    TransferOptions_OverwriteWhen (..),
 
     -- ** TransferSpec
     TransferSpec (..),

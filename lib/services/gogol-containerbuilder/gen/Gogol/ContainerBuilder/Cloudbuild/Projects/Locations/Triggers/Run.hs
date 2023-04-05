@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Runs a @BuildTrigger@ at a particular source revision.
+-- Runs a @BuildTrigger@ at a particular source revision. To run a regional or global trigger, use the POST request that includes the location endpoint in the path (ex. v1\/projects\/{projectId}\/locations\/{region}\/triggers\/{triggerId}:run). The POST request that does not include the location endpoint in the path can only be used when running global triggers.
 --
 -- /See:/ <https://cloud.google.com/cloud-build/docs/ Cloud Build API Reference> for @cloudbuild.projects.locations.triggers.run@.
 module Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Triggers.Run
@@ -56,7 +56,7 @@ type CloudbuildProjectsLocationsTriggersRunResource =
     Core.:> Core.ReqBody '[Core.JSON] RunBuildTriggerRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Runs a @BuildTrigger@ at a particular source revision.
+-- | Runs a @BuildTrigger@ at a particular source revision. To run a regional or global trigger, use the POST request that includes the location endpoint in the path (ex. v1\/projects\/{projectId}\/locations\/{region}\/triggers\/{triggerId}:run). The POST request that does not include the location endpoint in the path can only be used when running global triggers.
 --
 -- /See:/ 'newCloudbuildProjectsLocationsTriggersRun' smart constructor.
 data CloudbuildProjectsLocationsTriggersRun = CloudbuildProjectsLocationsTriggersRun

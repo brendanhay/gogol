@@ -551,7 +551,7 @@ pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateReque
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_CLIENTINCIDENT :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_CLIENTINCIDENT = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType "CLIENT_INCIDENT"
 
--- | Whitelist used when detecting client incident threats. This enum was never launched and should be re-used for the next list.
+-- | Whitelist used when detecting client incident threats.
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_CLIENTINCIDENTWHITELIST :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_CLIENTINCIDENTWHITELIST = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType "CLIENT_INCIDENT_WHITELIST"
 
@@ -559,7 +559,7 @@ pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateReque
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_APKMALWAREOFFLINE :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_APKMALWAREOFFLINE = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType "APK_MALWARE_OFFLINE"
 
--- | Patterns to be used for activating the subresource filter. Interstitial will not be shown for patterns from this list.
+-- | Patterns to be used for activating the subresource filter.
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_SUBRESOURCEFILTER :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_SUBRESOURCEFILTER = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType "SUBRESOURCE_FILTER"
 
@@ -567,15 +567,15 @@ pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateReque
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_Suspicious :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_Suspicious = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType "SUSPICIOUS"
 
--- | Trick-to-bill threat list.
+-- | Trick-to-bill threat type.
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_TRICKTOBILL :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_TRICKTOBILL = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType "TRICK_TO_BILL"
 
--- | Safe list to ship hashes of known safe URL expressions.
+-- | URL expressions that are very likely to be safe.
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_HIGHCONFIDENCEALLOWLIST :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_HIGHCONFIDENCEALLOWLIST = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType "HIGH_CONFIDENCE_ALLOWLIST"
 
--- | List from the Jigsaw team to show accuracy tips in Chrome. See go\/sb-accuracytips.
+-- | An experimental threat type related to Jigsaw. See https:\/\/jigsaw.google.com\/.
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_ACCURACYTIPS :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType_ACCURACYTIPS = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest_ThreatType "ACCURACY_TIPS"
 
@@ -835,7 +835,7 @@ pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResp
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_CLIENTINCIDENT :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_CLIENTINCIDENT = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType "CLIENT_INCIDENT"
 
--- | Whitelist used when detecting client incident threats. This enum was never launched and should be re-used for the next list.
+-- | Whitelist used when detecting client incident threats.
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_CLIENTINCIDENTWHITELIST :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_CLIENTINCIDENTWHITELIST = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType "CLIENT_INCIDENT_WHITELIST"
 
@@ -843,7 +843,7 @@ pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResp
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_APKMALWAREOFFLINE :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_APKMALWAREOFFLINE = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType "APK_MALWARE_OFFLINE"
 
--- | Patterns to be used for activating the subresource filter. Interstitial will not be shown for patterns from this list.
+-- | Patterns to be used for activating the subresource filter.
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_SUBRESOURCEFILTER :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_SUBRESOURCEFILTER = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType "SUBRESOURCE_FILTER"
 
@@ -851,15 +851,15 @@ pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResp
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_Suspicious :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_Suspicious = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType "SUSPICIOUS"
 
--- | Trick-to-bill threat list.
+-- | Trick-to-bill threat type.
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_TRICKTOBILL :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_TRICKTOBILL = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType "TRICK_TO_BILL"
 
--- | Safe list to ship hashes of known safe URL expressions.
+-- | URL expressions that are very likely to be safe.
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_HIGHCONFIDENCEALLOWLIST :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_HIGHCONFIDENCEALLOWLIST = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType "HIGH_CONFIDENCE_ALLOWLIST"
 
--- | List from the Jigsaw team to show accuracy tips in Chrome. See go\/sb-accuracytips.
+-- | An experimental threat type related to Jigsaw. See https:\/\/jigsaw.google.com\/.
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_ACCURACYTIPS :: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType
 pattern GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType_ACCURACYTIPS = GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse_ThreatType "ACCURACY_TIPS"
 
@@ -1036,7 +1036,7 @@ pattern GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_CSDDOWNLOADWHITELIST = 
 pattern GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_CLIENTINCIDENT :: GoogleSecuritySafebrowsingV4ThreatHit_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_CLIENTINCIDENT = GoogleSecuritySafebrowsingV4ThreatHit_ThreatType "CLIENT_INCIDENT"
 
--- | Whitelist used when detecting client incident threats. This enum was never launched and should be re-used for the next list.
+-- | Whitelist used when detecting client incident threats.
 pattern GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_CLIENTINCIDENTWHITELIST :: GoogleSecuritySafebrowsingV4ThreatHit_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_CLIENTINCIDENTWHITELIST = GoogleSecuritySafebrowsingV4ThreatHit_ThreatType "CLIENT_INCIDENT_WHITELIST"
 
@@ -1044,7 +1044,7 @@ pattern GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_CLIENTINCIDENTWHITELIST
 pattern GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_APKMALWAREOFFLINE :: GoogleSecuritySafebrowsingV4ThreatHit_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_APKMALWAREOFFLINE = GoogleSecuritySafebrowsingV4ThreatHit_ThreatType "APK_MALWARE_OFFLINE"
 
--- | Patterns to be used for activating the subresource filter. Interstitial will not be shown for patterns from this list.
+-- | Patterns to be used for activating the subresource filter.
 pattern GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_SUBRESOURCEFILTER :: GoogleSecuritySafebrowsingV4ThreatHit_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_SUBRESOURCEFILTER = GoogleSecuritySafebrowsingV4ThreatHit_ThreatType "SUBRESOURCE_FILTER"
 
@@ -1052,15 +1052,15 @@ pattern GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_SUBRESOURCEFILTER = Goo
 pattern GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_Suspicious :: GoogleSecuritySafebrowsingV4ThreatHit_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_Suspicious = GoogleSecuritySafebrowsingV4ThreatHit_ThreatType "SUSPICIOUS"
 
--- | Trick-to-bill threat list.
+-- | Trick-to-bill threat type.
 pattern GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_TRICKTOBILL :: GoogleSecuritySafebrowsingV4ThreatHit_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_TRICKTOBILL = GoogleSecuritySafebrowsingV4ThreatHit_ThreatType "TRICK_TO_BILL"
 
--- | Safe list to ship hashes of known safe URL expressions.
+-- | URL expressions that are very likely to be safe.
 pattern GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_HIGHCONFIDENCEALLOWLIST :: GoogleSecuritySafebrowsingV4ThreatHit_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_HIGHCONFIDENCEALLOWLIST = GoogleSecuritySafebrowsingV4ThreatHit_ThreatType "HIGH_CONFIDENCE_ALLOWLIST"
 
--- | List from the Jigsaw team to show accuracy tips in Chrome. See go\/sb-accuracytips.
+-- | An experimental threat type related to Jigsaw. See https:\/\/jigsaw.google.com\/.
 pattern GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_ACCURACYTIPS :: GoogleSecuritySafebrowsingV4ThreatHit_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatHit_ThreatType_ACCURACYTIPS = GoogleSecuritySafebrowsingV4ThreatHit_ThreatType "ACCURACY_TIPS"
 
@@ -1296,7 +1296,7 @@ pattern GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_CSDDOWNLOADWHITEL
 pattern GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_CLIENTINCIDENT :: GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem
 pattern GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_CLIENTINCIDENT = GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem "CLIENT_INCIDENT"
 
--- | Whitelist used when detecting client incident threats. This enum was never launched and should be re-used for the next list.
+-- | Whitelist used when detecting client incident threats.
 pattern GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_CLIENTINCIDENTWHITELIST :: GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem
 pattern GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_CLIENTINCIDENTWHITELIST = GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem "CLIENT_INCIDENT_WHITELIST"
 
@@ -1304,7 +1304,7 @@ pattern GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_CLIENTINCIDENTWHI
 pattern GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_APKMALWAREOFFLINE :: GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem
 pattern GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_APKMALWAREOFFLINE = GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem "APK_MALWARE_OFFLINE"
 
--- | Patterns to be used for activating the subresource filter. Interstitial will not be shown for patterns from this list.
+-- | Patterns to be used for activating the subresource filter.
 pattern GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_SUBRESOURCEFILTER :: GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem
 pattern GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_SUBRESOURCEFILTER = GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem "SUBRESOURCE_FILTER"
 
@@ -1312,15 +1312,15 @@ pattern GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_SUBRESOURCEFILTER
 pattern GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_Suspicious :: GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem
 pattern GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_Suspicious = GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem "SUSPICIOUS"
 
--- | Trick-to-bill threat list.
+-- | Trick-to-bill threat type.
 pattern GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_TRICKTOBILL :: GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem
 pattern GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_TRICKTOBILL = GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem "TRICK_TO_BILL"
 
--- | Safe list to ship hashes of known safe URL expressions.
+-- | URL expressions that are very likely to be safe.
 pattern GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_HIGHCONFIDENCEALLOWLIST :: GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem
 pattern GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_HIGHCONFIDENCEALLOWLIST = GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem "HIGH_CONFIDENCE_ALLOWLIST"
 
--- | List from the Jigsaw team to show accuracy tips in Chrome. See go\/sb-accuracytips.
+-- | An experimental threat type related to Jigsaw. See https:\/\/jigsaw.google.com\/.
 pattern GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_ACCURACYTIPS :: GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem
 pattern GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem_ACCURACYTIPS = GoogleSecuritySafebrowsingV4ThreatInfo_ThreatTypesItem "ACCURACY_TIPS"
 
@@ -1517,7 +1517,7 @@ pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_CSDDOWNLOADW
 pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_CLIENTINCIDENT :: GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_CLIENTINCIDENT = GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType "CLIENT_INCIDENT"
 
--- | Whitelist used when detecting client incident threats. This enum was never launched and should be re-used for the next list.
+-- | Whitelist used when detecting client incident threats.
 pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_CLIENTINCIDENTWHITELIST :: GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_CLIENTINCIDENTWHITELIST = GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType "CLIENT_INCIDENT_WHITELIST"
 
@@ -1525,7 +1525,7 @@ pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_CLIENTINCIDE
 pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_APKMALWAREOFFLINE :: GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_APKMALWAREOFFLINE = GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType "APK_MALWARE_OFFLINE"
 
--- | Patterns to be used for activating the subresource filter. Interstitial will not be shown for patterns from this list.
+-- | Patterns to be used for activating the subresource filter.
 pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_SUBRESOURCEFILTER :: GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_SUBRESOURCEFILTER = GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType "SUBRESOURCE_FILTER"
 
@@ -1533,15 +1533,15 @@ pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_SUBRESOURCEF
 pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_Suspicious :: GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_Suspicious = GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType "SUSPICIOUS"
 
--- | Trick-to-bill threat list.
+-- | Trick-to-bill threat type.
 pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_TRICKTOBILL :: GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_TRICKTOBILL = GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType "TRICK_TO_BILL"
 
--- | Safe list to ship hashes of known safe URL expressions.
+-- | URL expressions that are very likely to be safe.
 pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_HIGHCONFIDENCEALLOWLIST :: GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_HIGHCONFIDENCEALLOWLIST = GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType "HIGH_CONFIDENCE_ALLOWLIST"
 
--- | List from the Jigsaw team to show accuracy tips in Chrome. See go\/sb-accuracytips.
+-- | An experimental threat type related to Jigsaw. See https:\/\/jigsaw.google.com\/.
 pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_ACCURACYTIPS :: GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType_ACCURACYTIPS = GoogleSecuritySafebrowsingV4ThreatListDescriptor_ThreatType "ACCURACY_TIPS"
 
@@ -1738,7 +1738,7 @@ pattern GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_CSDDOWNLOADWHITELIST 
 pattern GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_CLIENTINCIDENT :: GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_CLIENTINCIDENT = GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType "CLIENT_INCIDENT"
 
--- | Whitelist used when detecting client incident threats. This enum was never launched and should be re-used for the next list.
+-- | Whitelist used when detecting client incident threats.
 pattern GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_CLIENTINCIDENTWHITELIST :: GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_CLIENTINCIDENTWHITELIST = GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType "CLIENT_INCIDENT_WHITELIST"
 
@@ -1746,7 +1746,7 @@ pattern GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_CLIENTINCIDENTWHITELI
 pattern GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_APKMALWAREOFFLINE :: GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_APKMALWAREOFFLINE = GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType "APK_MALWARE_OFFLINE"
 
--- | Patterns to be used for activating the subresource filter. Interstitial will not be shown for patterns from this list.
+-- | Patterns to be used for activating the subresource filter.
 pattern GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_SUBRESOURCEFILTER :: GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_SUBRESOURCEFILTER = GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType "SUBRESOURCE_FILTER"
 
@@ -1754,15 +1754,15 @@ pattern GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_SUBRESOURCEFILTER = G
 pattern GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_Suspicious :: GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_Suspicious = GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType "SUSPICIOUS"
 
--- | Trick-to-bill threat list.
+-- | Trick-to-bill threat type.
 pattern GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_TRICKTOBILL :: GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_TRICKTOBILL = GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType "TRICK_TO_BILL"
 
--- | Safe list to ship hashes of known safe URL expressions.
+-- | URL expressions that are very likely to be safe.
 pattern GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_HIGHCONFIDENCEALLOWLIST :: GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_HIGHCONFIDENCEALLOWLIST = GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType "HIGH_CONFIDENCE_ALLOWLIST"
 
--- | List from the Jigsaw team to show accuracy tips in Chrome. See go\/sb-accuracytips.
+-- | An experimental threat type related to Jigsaw. See https:\/\/jigsaw.google.com\/.
 pattern GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_ACCURACYTIPS :: GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType
 pattern GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType_ACCURACYTIPS = GoogleSecuritySafebrowsingV4ThreatMatch_ThreatType "ACCURACY_TIPS"
 

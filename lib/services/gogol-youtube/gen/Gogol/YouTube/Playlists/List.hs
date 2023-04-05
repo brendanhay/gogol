@@ -81,7 +81,7 @@ data YouTubePlaylistsList = YouTubePlaylistsList
     callback :: (Core.Maybe Core.Text),
     -- | Return the playlists owned by the specified channel ID.
     channelId :: (Core.Maybe Core.Text),
-    -- | Returen content in specified language
+    -- | Return content in specified language
     hl :: (Core.Maybe Core.Text),
     -- | Return the playlists with the given IDs for Stubby or Apiary.
     id :: (Core.Maybe [Core.Text]),

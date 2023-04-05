@@ -104,6 +104,13 @@ module Gogol.ResourceManager.Internal.Sum
         Project_State_DELETEREQUESTED,
         ..
       ),
+
+    -- * TagKey_Purpose
+    TagKey_Purpose
+      ( TagKey_Purpose_PURPOSEUNSPECIFIED,
+        TagKey_Purpose_GCEFIREWALL,
+        ..
+      ),
   )
 where
 
@@ -430,4 +437,31 @@ pattern Project_State_DELETEREQUESTED = Project_State "DELETE_REQUESTED"
   Project_State_Active,
   Project_State_DELETEREQUESTED,
   Project_State
+  #-}
+
+-- | Optional. A purpose denotes that this Tag is intended for use in policies of a specific policy engine, and will involve that policy engine in management operations involving this Tag. A purpose does not grant a policy engine exclusive rights to the Tag, and it may be referenced by other policy engines. A purpose cannot be changed once set.
+newtype TagKey_Purpose = TagKey_Purpose {fromTagKey_Purpose :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified purpose.
+pattern TagKey_Purpose_PURPOSEUNSPECIFIED :: TagKey_Purpose
+pattern TagKey_Purpose_PURPOSEUNSPECIFIED = TagKey_Purpose "PURPOSE_UNSPECIFIED"
+
+-- | Purpose for Compute Engine firewalls. A corresponding purpose/data should be set for the network the tag is intended for. The key should be \'network\' and the value should be in either of these two formats: -https:\/\/www.googleapis.com\/compute\/{compute/version}\/projects\/{project/id}\/global\/networks\/{network/id} -{project/id}\/{network/name} Examples: -https:\/\/www.googleapis.com\/compute\/staging_v1\/projects\/fail-closed-load-testing\/global\/networks\/6992953698831725600 -fail-closed-load-testing\/load-testing-network
+pattern TagKey_Purpose_GCEFIREWALL :: TagKey_Purpose
+pattern TagKey_Purpose_GCEFIREWALL = TagKey_Purpose "GCE_FIREWALL"
+
+{-# COMPLETE
+  TagKey_Purpose_PURPOSEUNSPECIFIED,
+  TagKey_Purpose_GCEFIREWALL,
+  TagKey_Purpose
   #-}

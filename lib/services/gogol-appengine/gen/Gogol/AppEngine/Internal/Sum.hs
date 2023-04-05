@@ -135,12 +135,86 @@ module Gogol.AppEngine.Internal.Sum
         ..
       ),
 
+    -- * Network_InstanceIpMode
+    Network_InstanceIpMode
+      ( Network_InstanceIpMode_INSTANCEIPMODEUNSPECIFIED,
+        Network_InstanceIpMode_External,
+        Network_InstanceIpMode_Internal,
+        ..
+      ),
+
     -- * NetworkSettings_IngressTrafficAllowed
     NetworkSettings_IngressTrafficAllowed
       ( NetworkSettings_IngressTrafficAllowed_INGRESSTRAFFICALLOWEDUNSPECIFIED,
         NetworkSettings_IngressTrafficAllowed_INGRESSTRAFFICALLOWEDALL,
         NetworkSettings_IngressTrafficAllowed_INGRESSTRAFFICALLOWEDINTERNALONLY,
         NetworkSettings_IngressTrafficAllowed_INGRESSTRAFFICALLOWEDINTERNALANDLB,
+        ..
+      ),
+
+    -- * ProjectEvent_Phase
+    ProjectEvent_Phase
+      ( ProjectEvent_Phase_Unknown,
+        ProjectEvent_Phase_BEFORERESOURCEHANDLING,
+        ProjectEvent_Phase_AFTERRESOURCEHANDLING,
+        ..
+      ),
+
+    -- * ProjectState_State
+    ProjectState_State
+      ( ProjectState_State_UNKNOWNSTATE,
+        ProjectState_State_ON,
+        ProjectState_State_Off,
+        ProjectState_State_Deleted,
+        ..
+      ),
+
+    -- * ProjectsMetadata_ConsumerProjectState
+    ProjectsMetadata_ConsumerProjectState
+      ( ProjectsMetadata_ConsumerProjectState_UNKNOWNSTATE,
+        ProjectsMetadata_ConsumerProjectState_ON,
+        ProjectsMetadata_ConsumerProjectState_Off,
+        ProjectsMetadata_ConsumerProjectState_Deleted,
+        ..
+      ),
+
+    -- * Reasons_Abuse
+    Reasons_Abuse
+      ( Reasons_Abuse_ABUSEUNKNOWNREASON,
+        Reasons_Abuse_ABUSECONTROLPLANESYNC,
+        Reasons_Abuse_Suspend,
+        Reasons_Abuse_Reinstate,
+        ..
+      ),
+
+    -- * Reasons_Billing
+    Reasons_Billing
+      ( Reasons_Billing_BILLINGUNKNOWNREASON,
+        Reasons_Billing_BILLINGCONTROLPLANESYNC,
+        Reasons_Billing_Probation,
+        Reasons_Billing_Close,
+        Reasons_Billing_Open,
+        ..
+      ),
+
+    -- * Reasons_DataGovernance
+    Reasons_DataGovernance
+      ( Reasons_DataGovernance_DATAGOVERNANCEUNKNOWNREASON,
+        Reasons_DataGovernance_DATAGOVERNANCECONTROLPLANESYNC,
+        Reasons_DataGovernance_Hide,
+        Reasons_DataGovernance_Unhide,
+        Reasons_DataGovernance_Purge,
+        ..
+      ),
+
+    -- * Reasons_ServiceManagement
+    Reasons_ServiceManagement
+      ( Reasons_ServiceManagement_SERVICEMANAGEMENTUNKNOWNREASON,
+        Reasons_ServiceManagement_SERVICEMANAGEMENTCONTROLPLANESYNC,
+        Reasons_ServiceManagement_Activation,
+        Reasons_ServiceManagement_PREPAREDEACTIVATION,
+        Reasons_ServiceManagement_ABORTDEACTIVATION,
+        Reasons_ServiceManagement_COMMITDEACTIVATION,
         ..
       ),
 
@@ -726,6 +800,38 @@ pattern ManagedCertificate_Status_FAILEDRETRYINGCAACHECKING = ManagedCertificate
   ManagedCertificate_Status
   #-}
 
+-- | The IP mode for instances. Only applicable in the App Engine flexible environment.
+newtype Network_InstanceIpMode = Network_InstanceIpMode {fromNetwork_InstanceIpMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified is treated as EXTERNAL.
+pattern Network_InstanceIpMode_INSTANCEIPMODEUNSPECIFIED :: Network_InstanceIpMode
+pattern Network_InstanceIpMode_INSTANCEIPMODEUNSPECIFIED = Network_InstanceIpMode "INSTANCE_IP_MODE_UNSPECIFIED"
+
+-- | Instances are created with both internal and external IP addresses.
+pattern Network_InstanceIpMode_External :: Network_InstanceIpMode
+pattern Network_InstanceIpMode_External = Network_InstanceIpMode "EXTERNAL"
+
+-- | Instances are created with internal IP addresses only.
+pattern Network_InstanceIpMode_Internal :: Network_InstanceIpMode
+pattern Network_InstanceIpMode_Internal = Network_InstanceIpMode "INTERNAL"
+
+{-# COMPLETE
+  Network_InstanceIpMode_INSTANCEIPMODEUNSPECIFIED,
+  Network_InstanceIpMode_External,
+  Network_InstanceIpMode_Internal,
+  Network_InstanceIpMode
+  #-}
+
 -- | The ingress settings for version or service.
 newtype NetworkSettings_IngressTrafficAllowed = NetworkSettings_IngressTrafficAllowed {fromNetworkSettings_IngressTrafficAllowed :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -761,6 +867,275 @@ pattern NetworkSettings_IngressTrafficAllowed_INGRESSTRAFFICALLOWEDINTERNALANDLB
   NetworkSettings_IngressTrafficAllowed_INGRESSTRAFFICALLOWEDINTERNALONLY,
   NetworkSettings_IngressTrafficAllowed_INGRESSTRAFFICALLOWEDINTERNALANDLB,
   NetworkSettings_IngressTrafficAllowed
+  #-}
+
+newtype ProjectEvent_Phase = ProjectEvent_Phase {fromProjectEvent_Phase :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern ProjectEvent_Phase_Unknown :: ProjectEvent_Phase
+pattern ProjectEvent_Phase_Unknown = ProjectEvent_Phase "UNKNOWN"
+
+-- |
+pattern ProjectEvent_Phase_BEFORERESOURCEHANDLING :: ProjectEvent_Phase
+pattern ProjectEvent_Phase_BEFORERESOURCEHANDLING = ProjectEvent_Phase "BEFORE_RESOURCE_HANDLING"
+
+-- |
+pattern ProjectEvent_Phase_AFTERRESOURCEHANDLING :: ProjectEvent_Phase
+pattern ProjectEvent_Phase_AFTERRESOURCEHANDLING = ProjectEvent_Phase "AFTER_RESOURCE_HANDLING"
+
+{-# COMPLETE
+  ProjectEvent_Phase_Unknown,
+  ProjectEvent_Phase_BEFORERESOURCEHANDLING,
+  ProjectEvent_Phase_AFTERRESOURCEHANDLING,
+  ProjectEvent_Phase
+  #-}
+
+-- | The current state of the project. This state is the culmination of all of the opinions from external systems that CCFE knows about of the project.
+newtype ProjectState_State = ProjectState_State {fromProjectState_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | A project should never be in an unknown state. Receipt of a project with this state is an error.
+pattern ProjectState_State_UNKNOWNSTATE :: ProjectState_State
+pattern ProjectState_State_UNKNOWNSTATE = ProjectState_State "UNKNOWN_STATE"
+
+-- | CCFE considers the project to be serving or transitioning into serving.
+pattern ProjectState_State_ON :: ProjectState_State
+pattern ProjectState_State_ON = ProjectState_State "ON"
+
+-- | CCFE considers the project to be in an OFF state. This could occur due to various factors. The state could be triggered by Google-internal audits (ex. abuse suspension, billing closed) or cleanups trigged by compliance systems (ex. data governance hide). User-initiated events such as service management deactivation trigger a project to an OFF state.CLHs might choose to do nothing in this case or to turn off costly resources. CLHs need to consider the customer experience if an ON\/OFF\/ON sequence of state transitions occurs vs. the cost of deleting resources, keeping metadata about resources, or even keeping resources live for a period of time.CCFE will not send any new customer requests to the CLH when the project is in an OFF state. However, CCFE will allow all previous customer requests relayed to CLH to complete.
+pattern ProjectState_State_Off :: ProjectState_State
+pattern ProjectState_State_Off = ProjectState_State "OFF"
+
+-- | This state indicates that the project has been (or is being) completely removed. This is often due to a data governance purge request and therefore resources should be deleted when this state is reached.
+pattern ProjectState_State_Deleted :: ProjectState_State
+pattern ProjectState_State_Deleted = ProjectState_State "DELETED"
+
+{-# COMPLETE
+  ProjectState_State_UNKNOWNSTATE,
+  ProjectState_State_ON,
+  ProjectState_State_Off,
+  ProjectState_State_Deleted,
+  ProjectState_State
+  #-}
+
+-- | The CCFE state of the consumer project. It is the same state that is communicated to the CLH during project events. Notice that this field is not set in the DB, it is only set in this proto when communicated to CLH in the side channel.
+newtype ProjectsMetadata_ConsumerProjectState = ProjectsMetadata_ConsumerProjectState {fromProjectsMetadata_ConsumerProjectState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | A project should never be in an unknown state. Receipt of a project with this state is an error.
+pattern ProjectsMetadata_ConsumerProjectState_UNKNOWNSTATE :: ProjectsMetadata_ConsumerProjectState
+pattern ProjectsMetadata_ConsumerProjectState_UNKNOWNSTATE = ProjectsMetadata_ConsumerProjectState "UNKNOWN_STATE"
+
+-- | CCFE considers the project to be serving or transitioning into serving.
+pattern ProjectsMetadata_ConsumerProjectState_ON :: ProjectsMetadata_ConsumerProjectState
+pattern ProjectsMetadata_ConsumerProjectState_ON = ProjectsMetadata_ConsumerProjectState "ON"
+
+-- | CCFE considers the project to be in an OFF state. This could occur due to various factors. The state could be triggered by Google-internal audits (ex. abuse suspension, billing closed) or cleanups trigged by compliance systems (ex. data governance hide). User-initiated events such as service management deactivation trigger a project to an OFF state.CLHs might choose to do nothing in this case or to turn off costly resources. CLHs need to consider the customer experience if an ON\/OFF\/ON sequence of state transitions occurs vs. the cost of deleting resources, keeping metadata about resources, or even keeping resources live for a period of time.CCFE will not send any new customer requests to the CLH when the project is in an OFF state. However, CCFE will allow all previous customer requests relayed to CLH to complete.
+pattern ProjectsMetadata_ConsumerProjectState_Off :: ProjectsMetadata_ConsumerProjectState
+pattern ProjectsMetadata_ConsumerProjectState_Off = ProjectsMetadata_ConsumerProjectState "OFF"
+
+-- | This state indicates that the project has been (or is being) completely removed. This is often due to a data governance purge request and therefore resources should be deleted when this state is reached.
+pattern ProjectsMetadata_ConsumerProjectState_Deleted :: ProjectsMetadata_ConsumerProjectState
+pattern ProjectsMetadata_ConsumerProjectState_Deleted = ProjectsMetadata_ConsumerProjectState "DELETED"
+
+{-# COMPLETE
+  ProjectsMetadata_ConsumerProjectState_UNKNOWNSTATE,
+  ProjectsMetadata_ConsumerProjectState_ON,
+  ProjectsMetadata_ConsumerProjectState_Off,
+  ProjectsMetadata_ConsumerProjectState_Deleted,
+  ProjectsMetadata_ConsumerProjectState
+  #-}
+
+newtype Reasons_Abuse = Reasons_Abuse {fromReasons_Abuse :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | An unknown reason indicates that the abuse system has not sent a signal for this project.
+pattern Reasons_Abuse_ABUSEUNKNOWNREASON :: Reasons_Abuse
+pattern Reasons_Abuse_ABUSEUNKNOWNREASON = Reasons_Abuse "ABUSE_UNKNOWN_REASON"
+
+-- | Due to various reasons CCFE might proactively restate a project state to a CLH to ensure that the CLH and CCFE are both aware of the project state. This reason can be tied to any of the states.
+pattern Reasons_Abuse_ABUSECONTROLPLANESYNC :: Reasons_Abuse
+pattern Reasons_Abuse_ABUSECONTROLPLANESYNC = Reasons_Abuse "ABUSE_CONTROL_PLANE_SYNC"
+
+-- | If a project is deemed abusive we receive a suspend signal. Suspend is a reason to put the project into an INTERNAL_OFF state.
+pattern Reasons_Abuse_Suspend :: Reasons_Abuse
+pattern Reasons_Abuse_Suspend = Reasons_Abuse "SUSPEND"
+
+-- | Projects that were once considered abusive can later be deemed non-abusive. When this happens we must reinstate the project. Reinstate is a reason to put the project into an ON state.
+pattern Reasons_Abuse_Reinstate :: Reasons_Abuse
+pattern Reasons_Abuse_Reinstate = Reasons_Abuse "REINSTATE"
+
+{-# COMPLETE
+  Reasons_Abuse_ABUSEUNKNOWNREASON,
+  Reasons_Abuse_ABUSECONTROLPLANESYNC,
+  Reasons_Abuse_Suspend,
+  Reasons_Abuse_Reinstate,
+  Reasons_Abuse
+  #-}
+
+newtype Reasons_Billing = Reasons_Billing {fromReasons_Billing :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | An unknown reason indicates that the billing system has not sent a signal for this project.
+pattern Reasons_Billing_BILLINGUNKNOWNREASON :: Reasons_Billing
+pattern Reasons_Billing_BILLINGUNKNOWNREASON = Reasons_Billing "BILLING_UNKNOWN_REASON"
+
+-- | Due to various reasons CCFE might proactively restate a project state to a CLH to ensure that the CLH and CCFE are both aware of the project state. This reason can be tied to any of the states.
+pattern Reasons_Billing_BILLINGCONTROLPLANESYNC :: Reasons_Billing
+pattern Reasons_Billing_BILLINGCONTROLPLANESYNC = Reasons_Billing "BILLING_CONTROL_PLANE_SYNC"
+
+-- | Minor infractions cause a probation signal to be sent. Probation is a reason to put the project into a ON state even though it is a negative signal. CCFE will block mutations for this project while it is on billing probation, but the CLH is expected to serve non-mutation requests.
+pattern Reasons_Billing_Probation :: Reasons_Billing
+pattern Reasons_Billing_Probation = Reasons_Billing "PROBATION"
+
+-- | When a billing account is closed, it is a stronger signal about non-payment. Close is a reason to put the project into an INTERNAL_OFF state.
+pattern Reasons_Billing_Close :: Reasons_Billing
+pattern Reasons_Billing_Close = Reasons_Billing "CLOSE"
+
+-- | Consumers can re-open billing accounts and update accounts to pull them out of probation. When this happens, we get a signal that the account is open. Open is a reason to put the project into an ON state.
+pattern Reasons_Billing_Open :: Reasons_Billing
+pattern Reasons_Billing_Open = Reasons_Billing "OPEN"
+
+{-# COMPLETE
+  Reasons_Billing_BILLINGUNKNOWNREASON,
+  Reasons_Billing_BILLINGCONTROLPLANESYNC,
+  Reasons_Billing_Probation,
+  Reasons_Billing_Close,
+  Reasons_Billing_Open,
+  Reasons_Billing
+  #-}
+
+newtype Reasons_DataGovernance = Reasons_DataGovernance {fromReasons_DataGovernance :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | An unknown reason indicates that data governance has not sent a signal for this project.
+pattern Reasons_DataGovernance_DATAGOVERNANCEUNKNOWNREASON :: Reasons_DataGovernance
+pattern Reasons_DataGovernance_DATAGOVERNANCEUNKNOWNREASON = Reasons_DataGovernance "DATA_GOVERNANCE_UNKNOWN_REASON"
+
+-- | Due to various reasons CCFE might proactively restate a project state to a CLH to ensure that the CLH and CCFE are both aware of the project state. This reason can be tied to any of the states.
+pattern Reasons_DataGovernance_DATAGOVERNANCECONTROLPLANESYNC :: Reasons_DataGovernance
+pattern Reasons_DataGovernance_DATAGOVERNANCECONTROLPLANESYNC = Reasons_DataGovernance "DATA_GOVERNANCE_CONTROL_PLANE_SYNC"
+
+-- | When a project is deleted we retain some data for a period of time to allow the consumer to change their mind. Data governance sends a signal to hide the data when this occurs. Hide is a reason to put the project in an INTERNAL_OFF state.
+pattern Reasons_DataGovernance_Hide :: Reasons_DataGovernance
+pattern Reasons_DataGovernance_Hide = Reasons_DataGovernance "HIDE"
+
+-- | The decision to un-delete a project can be made. When this happens data governance tells us to unhide any hidden data. Unhide is a reason to put the project in an ON state.
+pattern Reasons_DataGovernance_Unhide :: Reasons_DataGovernance
+pattern Reasons_DataGovernance_Unhide = Reasons_DataGovernance "UNHIDE"
+
+-- | After a period of time data must be completely removed from our systems. When data governance sends a purge signal we need to remove data. Purge is a reason to put the project in a DELETED state. Purge is the only event that triggers a delete mutation. All other events have update semantics.
+pattern Reasons_DataGovernance_Purge :: Reasons_DataGovernance
+pattern Reasons_DataGovernance_Purge = Reasons_DataGovernance "PURGE"
+
+{-# COMPLETE
+  Reasons_DataGovernance_DATAGOVERNANCEUNKNOWNREASON,
+  Reasons_DataGovernance_DATAGOVERNANCECONTROLPLANESYNC,
+  Reasons_DataGovernance_Hide,
+  Reasons_DataGovernance_Unhide,
+  Reasons_DataGovernance_Purge,
+  Reasons_DataGovernance
+  #-}
+
+newtype Reasons_ServiceManagement = Reasons_ServiceManagement {fromReasons_ServiceManagement :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | An unknown reason indicates that we have not received a signal from service management about this project. Since projects are created by request of service management, this reason should never be set.
+pattern Reasons_ServiceManagement_SERVICEMANAGEMENTUNKNOWNREASON :: Reasons_ServiceManagement
+pattern Reasons_ServiceManagement_SERVICEMANAGEMENTUNKNOWNREASON = Reasons_ServiceManagement "SERVICE_MANAGEMENT_UNKNOWN_REASON"
+
+-- | Due to various reasons CCFE might proactively restate a project state to a CLH to ensure that the CLH and CCFE are both aware of the project state. This reason can be tied to any of the states.
+pattern Reasons_ServiceManagement_SERVICEMANAGEMENTCONTROLPLANESYNC :: Reasons_ServiceManagement
+pattern Reasons_ServiceManagement_SERVICEMANAGEMENTCONTROLPLANESYNC = Reasons_ServiceManagement "SERVICE_MANAGEMENT_CONTROL_PLANE_SYNC"
+
+-- | When a customer activates an API CCFE notifies the CLH and sets the project to the ON state.
+pattern Reasons_ServiceManagement_Activation :: Reasons_ServiceManagement
+pattern Reasons_ServiceManagement_Activation = Reasons_ServiceManagement "ACTIVATION"
+
+-- | When a customer deactivates and API service management starts a two-step process to perform the deactivation. The first step is to prepare. Prepare is a reason to put the project in a EXTERNAL_OFF state.
+pattern Reasons_ServiceManagement_PREPAREDEACTIVATION :: Reasons_ServiceManagement
+pattern Reasons_ServiceManagement_PREPAREDEACTIVATION = Reasons_ServiceManagement "PREPARE_DEACTIVATION"
+
+-- | If the deactivation is cancelled, service managed needs to abort the deactivation. Abort is a reason to put the project in an ON state.
+pattern Reasons_ServiceManagement_ABORTDEACTIVATION :: Reasons_ServiceManagement
+pattern Reasons_ServiceManagement_ABORTDEACTIVATION = Reasons_ServiceManagement "ABORT_DEACTIVATION"
+
+-- | If the deactivation is followed through with, service management needs to finish deactivation. Commit is a reason to put the project in a DELETED state.
+pattern Reasons_ServiceManagement_COMMITDEACTIVATION :: Reasons_ServiceManagement
+pattern Reasons_ServiceManagement_COMMITDEACTIVATION = Reasons_ServiceManagement "COMMIT_DEACTIVATION"
+
+{-# COMPLETE
+  Reasons_ServiceManagement_SERVICEMANAGEMENTUNKNOWNREASON,
+  Reasons_ServiceManagement_SERVICEMANAGEMENTCONTROLPLANESYNC,
+  Reasons_ServiceManagement_Activation,
+  Reasons_ServiceManagement_PREPAREDEACTIVATION,
+  Reasons_ServiceManagement_ABORTDEACTIVATION,
+  Reasons_ServiceManagement_COMMITDEACTIVATION,
+  Reasons_ServiceManagement
   #-}
 
 -- | Resource record type. Example: AAAA.

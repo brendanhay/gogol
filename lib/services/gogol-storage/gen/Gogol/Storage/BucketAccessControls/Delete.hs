@@ -51,7 +51,6 @@ type StorageBucketAccessControlsDeleteResource =
     Core.:> Core.Capture "bucket" Core.Text
     Core.:> "acl"
     Core.:> Core.Capture "entity" Core.Text
-    Core.:> Core.QueryParam "provisionalUserProject" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "userProject" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -65,8 +64,6 @@ data StorageBucketAccessControlsDelete = StorageBucketAccessControlsDelete
     bucket :: Core.Text,
     -- | The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
     entity :: Core.Text,
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
     uploadType :: (Core.Maybe Core.Text),
     -- | The project to be billed for this request. Required for Requester Pays buckets.
@@ -85,7 +82,6 @@ newStorageBucketAccessControlsDelete bucket entity =
   StorageBucketAccessControlsDelete
     { bucket = bucket,
       entity = entity,
-      provisionalUserProject = Core.Nothing,
       uploadType = Core.Nothing,
       userProject = Core.Nothing
     }
@@ -102,7 +98,6 @@ instance
     go
       bucket
       entity
-      provisionalUserProject
       uploadType
       userProject
       (Core.Just Core.AltJSON)

@@ -119,6 +119,11 @@ module Gogol.Datastore
     DatastoreProjectsRollback (..),
     newDatastoreProjectsRollback,
 
+    -- ** datastore.projects.runAggregationQuery
+    DatastoreProjectsRunAggregationQueryResource,
+    DatastoreProjectsRunAggregationQuery (..),
+    newDatastoreProjectsRunAggregationQuery,
+
     -- ** datastore.projects.runQuery
     DatastoreProjectsRunQueryResource,
     DatastoreProjectsRunQuery (..),
@@ -128,6 +133,29 @@ module Gogol.Datastore
 
     -- ** Xgafv
     Xgafv (..),
+
+    -- ** Aggregation
+    Aggregation (..),
+    newAggregation,
+
+    -- ** AggregationQuery
+    AggregationQuery (..),
+    newAggregationQuery,
+
+    -- ** AggregationResult
+    AggregationResult (..),
+    newAggregationResult,
+
+    -- ** AggregationResult_AggregateProperties
+    AggregationResult_AggregateProperties (..),
+    newAggregationResult_AggregateProperties,
+
+    -- ** AggregationResultBatch
+    AggregationResultBatch (..),
+    newAggregationResultBatch,
+
+    -- ** AggregationResultBatch_MoreResults
+    AggregationResultBatch_MoreResults (..),
 
     -- ** AllocateIdsRequest
     AllocateIdsRequest (..),
@@ -166,6 +194,10 @@ module Gogol.Datastore
 
     -- ** CompositeFilter_Op
     CompositeFilter_Op (..),
+
+    -- ** Count
+    Count (..),
+    newCount,
 
     -- ** Empty
     Empty (..),
@@ -465,6 +497,14 @@ module Gogol.Datastore
     RollbackResponse (..),
     newRollbackResponse,
 
+    -- ** RunAggregationQueryRequest
+    RunAggregationQueryRequest (..),
+    newRunAggregationQueryRequest,
+
+    -- ** RunAggregationQueryResponse
+    RunAggregationQueryResponse (..),
+    newRunAggregationQueryResponse,
+
     -- ** RunQueryRequest
     RunQueryRequest (..),
     newRunQueryRequest,
@@ -510,5 +550,6 @@ import Gogol.Datastore.Projects.Operations.Get
 import Gogol.Datastore.Projects.Operations.List
 import Gogol.Datastore.Projects.ReserveIds
 import Gogol.Datastore.Projects.Rollback
+import Gogol.Datastore.Projects.RunAggregationQuery
 import Gogol.Datastore.Projects.RunQuery
 import Gogol.Datastore.Types

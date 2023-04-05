@@ -53,7 +53,6 @@ type StorageBucketsGetIamPolicyResource =
     Core.:> Core.QueryParam
               "optionsRequestedPolicyVersion"
               Core.Int32
-    Core.:> Core.QueryParam "provisionalUserProject" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "userProject" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -67,8 +66,6 @@ data StorageBucketsGetIamPolicy = StorageBucketsGetIamPolicy
     bucket :: Core.Text,
     -- | The IAM policy format version to be returned. If the optionsRequestedPolicyVersion is for an older version that doesn\'t support part of the requested IAM policy, the request fails.
     optionsRequestedPolicyVersion :: (Core.Maybe Core.Int32),
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
     uploadType :: (Core.Maybe Core.Text),
     -- | The project to be billed for this request. Required for Requester Pays buckets.
@@ -85,7 +82,6 @@ newStorageBucketsGetIamPolicy bucket =
   StorageBucketsGetIamPolicy
     { bucket = bucket,
       optionsRequestedPolicyVersion = Core.Nothing,
-      provisionalUserProject = Core.Nothing,
       uploadType = Core.Nothing,
       userProject = Core.Nothing
     }
@@ -102,7 +98,6 @@ instance
     go
       bucket
       optionsRequestedPolicyVersion
-      provisionalUserProject
       uploadType
       userProject
       (Core.Just Core.AltJSON)

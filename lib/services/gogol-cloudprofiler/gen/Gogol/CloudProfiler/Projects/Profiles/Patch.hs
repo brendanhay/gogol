@@ -28,7 +28,7 @@
 --
 -- UpdateProfile updates the profile bytes and labels on the profile resource created in the online mode. Updating the bytes for profiles created in the offline mode is currently not supported: the profile content must be provided at the time of the profile creation.
 --
--- /See:/ <https://cloud.google.com/profiler/ Stackdriver Profiler API Reference> for @cloudprofiler.projects.profiles.patch@.
+-- /See:/ <https://cloud.google.com/profiler/ Cloud Profiler API Reference> for @cloudprofiler.projects.profiles.patch@.
 module Gogol.CloudProfiler.Projects.Profiles.Patch
   ( -- * Resource
     CloudProfilerProjectsProfilesPatchResource,

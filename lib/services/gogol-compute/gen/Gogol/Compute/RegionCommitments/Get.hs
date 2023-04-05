@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified commitment resource. Gets a list of available commitments by making a list() request.
+-- Returns the specified commitment resource.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.regionCommitments.get@.
 module Gogol.Compute.RegionCommitments.Get
@@ -61,7 +61,7 @@ type ComputeRegionCommitmentsGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Commitment
 
--- | Returns the specified commitment resource. Gets a list of available commitments by making a list() request.
+-- | Returns the specified commitment resource.
 --
 -- /See:/ 'newComputeRegionCommitmentsGet' smart constructor.
 data ComputeRegionCommitmentsGet = ComputeRegionCommitmentsGet

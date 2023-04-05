@@ -827,7 +827,7 @@
           ]
         },
         "get": {
-          "description": "Returns an event.",
+          "description": "Returns an event based on its Google Calendar ID. To retrieve an event using its iCalendar ID, call the events.list method using the iCalUID parameter.",
           "httpMethod": "GET",
           "id": "calendar.events.get",
           "parameterOrder": [
@@ -1087,8 +1087,14 @@
               "required": true,
               "type": "string"
             },
+            "eventTypes": {
+              "description": "Event types to return. Optional. The default is [\"default\", \"outOfOffice\", \"focusTime\"]. Only the default value is available, unless you're enrolled in the Working Locations developer preview. Developer Preview.",
+              "location": "query",
+              "repeated": true,
+              "type": "string"
+            },
             "iCalUID": {
-              "description": "Specifies event ID in the iCalendar format to be included in the response. Optional.",
+              "description": "Specifies an event ID in the iCalendar format to be provided in the response. Optional. Use this if you want to search for an event by its iCalendar ID.",
               "location": "query",
               "type": "string"
             },
@@ -1132,7 +1138,7 @@
               "type": "string"
             },
             "q": {
-              "description": "Free text search terms to find events that match these terms in any field, except for extended properties. Optional.",
+              "description": "Free text search terms to find events that match these terms in the following fields: summary, description, location, attendee's displayName, attendee's email. Optional.",
               "location": "query",
               "type": "string"
             },
@@ -1484,8 +1490,14 @@
               "required": true,
               "type": "string"
             },
+            "eventTypes": {
+              "description": "Event types to return. Optional. The default is [\"default\", \"outOfOffice\", \"focusTime\"]. Only the default value is available, unless you're enrolled in the Working Locations developer preview. Developer Preview.",
+              "location": "query",
+              "repeated": true,
+              "type": "string"
+            },
             "iCalUID": {
-              "description": "Specifies event ID in the iCalendar format to be included in the response. Optional.",
+              "description": "Specifies an event ID in the iCalendar format to be provided in the response. Optional. Use this if you want to search for an event by its iCalendar ID.",
               "location": "query",
               "type": "string"
             },
@@ -1529,7 +1541,7 @@
               "type": "string"
             },
             "q": {
-              "description": "Free text search terms to find events that match these terms in any field, except for extended properties. Optional.",
+              "description": "Free text search terms to find events that match these terms in the following fields: summary, description, location, attendee's displayName, attendee's email. Optional.",
               "location": "query",
               "type": "string"
             },
@@ -1723,7 +1735,7 @@
       }
     }
   },
-  "revision": "20220203",
+  "revision": "20230324",
   "rootUrl": "https://www.googleapis.com/",
   "schemas": {
     "Acl": {
@@ -2300,7 +2312,7 @@
           "type": "boolean"
         },
         "attachments": {
-          "description": "File attachments for the event. Currently only Google Drive attachments are supported.\nIn order to modify attachments the supportsAttachments request parameter should be set to true.\nThere can be at most 25 attachments per event,",
+          "description": "File attachments for the event.\nIn order to modify attachments the supportsAttachments request parameter should be set to true.\nThere can be at most 25 attachments per event,",
           "items": {
             "$ref": "EventAttachment"
           },
@@ -2380,7 +2392,7 @@
         },
         "eventType": {
           "default": "default",
-          "description": "Specific type of the event. Read-only. Possible values are:  \n- \"default\" - A regular event or not further specified. \n- \"outOfOffice\" - An out-of-office event. \n- \"focusTime\" - A focus-time event.",
+          "description": "Specific type of the event. Read-only. Possible values are:  \n- \"default\" - A regular event or not further specified. \n- \"outOfOffice\" - An out-of-office event. \n- \"focusTime\" - A focus-time event. \n- \"workingLocation\" - A working location event. Developer Preview.",
           "type": "string"
         },
         "extendedProperties": {
@@ -2478,7 +2490,7 @@
               "calendar.events.import"
             ]
           },
-          "description": "Event unique identifier as defined in RFC5545. It is used to uniquely identify events accross calendaring systems and must be supplied when importing events via the import method.\nNote that the icalUID and the id are not identical and only one of them should be supplied at event creation time. One difference in their semantics is that in recurring events, all occurrences of one event have different ids while they all share the same icalUIDs.",
+          "description": "Event unique identifier as defined in RFC5545. It is used to uniquely identify events accross calendaring systems and must be supplied when importing events via the import method.\nNote that the iCalUID and the id are not identical and only one of them should be supplied at event creation time. One difference in their semantics is that in recurring events, all occurrences of one event have different ids while they all share the same iCalUIDs. To retrieve an event using its iCalUID, call the events.list method using the iCalUID parameter. To retrieve an event using its id, call the events.get method.",
           "type": "string"
         },
         "id": {
@@ -2611,6 +2623,10 @@
           "default": "default",
           "description": "Visibility of the event. Optional. Possible values are:  \n- \"default\" - Uses the default visibility for events on the calendar. This is the default value. \n- \"public\" - The event is public and event details are visible to all readers of the calendar. \n- \"private\" - The event is private and only event attendees may view event details. \n- \"confidential\" - The event is private. This value is provided for compatibility reasons.",
           "type": "string"
+        },
+        "workingLocationProperties": {
+          "$ref": "EventWorkingLocationProperties",
+          "description": "Developer Preview: Working Location event data. Read-only."
         }
       },
       "type": "object"
@@ -2627,7 +2643,7 @@
           "type": "string"
         },
         "iconLink": {
-          "description": "URL link to the attachment's icon. Read-only.",
+          "description": "URL link to the attachment's icon. This field can only be modified for custom third-party attachments.",
           "type": "string"
         },
         "mimeType": {
@@ -2681,7 +2697,7 @@
           "type": "boolean"
         },
         "responseStatus": {
-          "description": "The attendee's response status. Possible values are:  \n- \"needsAction\" - The attendee has not responded to the invitation. \n- \"declined\" - The attendee has declined the invitation. \n- \"tentative\" - The attendee has tentatively accepted the invitation. \n- \"accepted\" - The attendee has accepted the invitation.",
+          "description": "The attendee's response status. Possible values are:  \n- \"needsAction\" - The attendee has not responded to the invitation (recommended for new events). \n- \"declined\" - The attendee has declined the invitation. \n- \"tentative\" - The attendee has tentatively accepted the invitation. \n- \"accepted\" - The attendee has accepted the invitation.  Warning: If you add an event using the values declined, tentative, or accepted, attendees with the \"Add invitations to my calendar\" setting set to \"When I respond to invitation in email\" won't see an event on their calendar unless they choose to change their invitation response in the event invitation email.",
           "type": "string"
         },
         "self": {
@@ -2723,6 +2739,52 @@
           "description": "Number of minutes before the start of the event when the reminder should trigger. Valid values are between 0 and 40320 (4 weeks in minutes).\nRequired when adding a reminder.",
           "format": "int32",
           "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "EventWorkingLocationProperties": {
+      "id": "EventWorkingLocationProperties",
+      "properties": {
+        "customLocation": {
+          "description": "If present, specifies that the user is working from a custom location.",
+          "properties": {
+            "label": {
+              "description": "An optional extra label for additional information.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "homeOffice": {
+          "description": "If present, specifies that the user is working at home.",
+          "type": "any"
+        },
+        "officeLocation": {
+          "description": "If present, specifies that the user is working from an office.",
+          "properties": {
+            "buildingId": {
+              "description": "An optional building identifier. This should reference a building ID in the organization's Resources database.",
+              "type": "string"
+            },
+            "deskId": {
+              "description": "An optional arbitrary desk identifier.",
+              "type": "string"
+            },
+            "floorId": {
+              "description": "An optional arbitrary floor identifier.",
+              "type": "string"
+            },
+            "floorSectionId": {
+              "description": "An optional arbitrary floor section identifier.",
+              "type": "string"
+            },
+            "label": {
+              "description": "An optional extra label for additional information.",
+              "type": "string"
+            }
+          },
+          "type": "object"
         }
       },
       "type": "object"

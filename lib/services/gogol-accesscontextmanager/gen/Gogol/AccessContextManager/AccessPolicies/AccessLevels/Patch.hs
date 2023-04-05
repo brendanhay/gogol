@@ -67,7 +67,7 @@ data AccessContextManagerAccessPoliciesAccessLevelsPatch = AccessContextManagerA
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. Resource name for the Access Level. The @short_name@ component must begin with a letter and only include alphanumeric and \'_\'. Format: @accessPolicies\/{access_policy}\/accessLevels\/{access_level}@. The maximum length of the @access_level@ component is 50 characters.
+    -- | Resource name for the @AccessLevel@. Format: @accessPolicies\/{access_policy}\/accessLevels\/{access_level}@. The @access_level@ component must begin with a letter, followed by alphanumeric characters or @_@. Its maximum length is 50 characters. After you create an @AccessLevel@, you cannot change its @name@.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: AccessLevel,
@@ -82,7 +82,7 @@ data AccessContextManagerAccessPoliciesAccessLevelsPatch = AccessContextManagerA
 
 -- | Creates a value of 'AccessContextManagerAccessPoliciesAccessLevelsPatch' with the minimum fields required to make a request.
 newAccessContextManagerAccessPoliciesAccessLevelsPatch ::
-  -- |  Required. Resource name for the Access Level. The @short_name@ component must begin with a letter and only include alphanumeric and \'_\'. Format: @accessPolicies\/{access_policy}\/accessLevels\/{access_level}@. The maximum length of the @access_level@ component is 50 characters. See 'name'.
+  -- |  Resource name for the @AccessLevel@. Format: @accessPolicies\/{access_policy}\/accessLevels\/{access_level}@. The @access_level@ component must begin with a letter, followed by alphanumeric characters or @_@. Its maximum length is 50 characters. After you create an @AccessLevel@, you cannot change its @name@. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   AccessLevel ->

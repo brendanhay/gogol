@@ -71,7 +71,7 @@ data ServiceManagementServicesConfigsGet = ServiceManagementServicesConfigsGet
     callback :: (Core.Maybe Core.Text),
     -- | Required. The id of the service configuration resource. This field must be specified for the server to return all fields, including @SourceInfo@.
     configId :: Core.Text,
-    -- | Required. The name of the service. See the </service-management/overview overview> for naming requirements. For example: @example.googleapis.com@.
+    -- | Required. The name of the service. See the <https://cloud.google.com/service-management/overview overview> for naming requirements. For example: @example.googleapis.com@.
     serviceName :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -86,7 +86,7 @@ data ServiceManagementServicesConfigsGet = ServiceManagementServicesConfigsGet
 newServiceManagementServicesConfigsGet ::
   -- |  Required. The id of the service configuration resource. This field must be specified for the server to return all fields, including @SourceInfo@. See 'configId'.
   Core.Text ->
-  -- |  Required. The name of the service. See the </service-management/overview overview> for naming requirements. For example: @example.googleapis.com@. See 'serviceName'.
+  -- |  Required. The name of the service. See the <https://cloud.google.com/service-management/overview overview> for naming requirements. For example: @example.googleapis.com@. See 'serviceName'.
   Core.Text ->
   ServiceManagementServicesConfigsGet
 newServiceManagementServicesConfigsGet configId serviceName =

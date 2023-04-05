@@ -66,7 +66,7 @@ data TagManagerAccountsGet = TagManagerAccountsGet
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | GTM Accounts\'s API relative path. Example: accounts\/{account_id}
+    -- | GTM Account\'s API relative path. Example: accounts\/{account_id}
     path :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -77,7 +77,7 @@ data TagManagerAccountsGet = TagManagerAccountsGet
 
 -- | Creates a value of 'TagManagerAccountsGet' with the minimum fields required to make a request.
 newTagManagerAccountsGet ::
-  -- |  GTM Accounts\'s API relative path. Example: accounts\/{account_id} See 'path'.
+  -- |  GTM Account\'s API relative path. Example: accounts\/{account_id} See 'path'.
   Core.Text ->
   TagManagerAccountsGet
 newTagManagerAccountsGet path =

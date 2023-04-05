@@ -58,7 +58,6 @@ type StorageObjectsComposeResource =
     Core.:> Core.QueryParam "ifGenerationMatch" Core.Int64
     Core.:> Core.QueryParam "ifMetagenerationMatch" Core.Int64
     Core.:> Core.QueryParam "kmsKeyName" Core.Text
-    Core.:> Core.QueryParam "provisionalUserProject" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "userProject" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -83,8 +82,6 @@ data StorageObjectsCompose = StorageObjectsCompose
     kmsKeyName :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
     payload :: ComposeRequest,
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
     uploadType :: (Core.Maybe Core.Text),
     -- | The project to be billed for this request. Required for Requester Pays buckets.
@@ -110,7 +107,6 @@ newStorageObjectsCompose destinationBucket destinationObject payload =
       ifMetagenerationMatch = Core.Nothing,
       kmsKeyName = Core.Nothing,
       payload = payload,
-      provisionalUserProject = Core.Nothing,
       uploadType = Core.Nothing,
       userProject = Core.Nothing
     }
@@ -131,7 +127,6 @@ instance Core.GoogleRequest StorageObjectsCompose where
       ifGenerationMatch
       ifMetagenerationMatch
       kmsKeyName
-      provisionalUserProject
       uploadType
       userProject
       (Core.Just Core.AltJSON)

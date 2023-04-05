@@ -28,7 +28,7 @@
 --
 -- Lists post and user info pairs.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.postUserInfos.list@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.postUserInfos.list@.
 module Gogol.Blogger.PostUserInfos.List
   ( -- * Resource
     BloggerPostUserInfosListResource,

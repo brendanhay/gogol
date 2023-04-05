@@ -98,6 +98,10 @@ module Gogol.CivicInfo.Internal.Product
     PollingLocation (..),
     newPollingLocation,
 
+    -- * Precinct
+    Precinct (..),
+    newPrecinct,
+
     -- * RepresentativeInfoData
     RepresentativeInfoData (..),
     newRepresentativeInfoData,
@@ -426,8 +430,6 @@ data Contest = Contest
     office :: (Core.Maybe Core.Text),
     -- | If this is a partisan election, the name of the party\/parties it is for.
     primaryParties :: (Core.Maybe [Core.Text]),
-    -- | [DEPRECATED] If this is a partisan election, the name of the party it is for. This field as deprecated in favor of the array \"primaryParties\", as contests may contain more than one party.
-    primaryParty :: (Core.Maybe Core.Text),
     -- | The set of ballot responses for the referendum. A ballot response represents a line on the ballot. Common examples might include \"yes\" or \"no\" for referenda. This field is only populated for contests of type \'Referendum\'.
     referendumBallotResponses :: (Core.Maybe [Core.Text]),
     -- | Specifies a short summary of the referendum that is typically on the ballot below the title but above the text. This field is only populated for contests of type \'Referendum\'.
@@ -474,7 +476,6 @@ newContest =
       numberVotingFor = Core.Nothing,
       office = Core.Nothing,
       primaryParties = Core.Nothing,
-      primaryParty = Core.Nothing,
       referendumBallotResponses = Core.Nothing,
       referendumBrief = Core.Nothing,
       referendumConStatement = Core.Nothing,
@@ -513,7 +514,6 @@ instance Core.FromJSON Contest where
                      )
             Core.<*> (o Core..:? "office")
             Core.<*> (o Core..:? "primaryParties")
-            Core.<*> (o Core..:? "primaryParty")
             Core.<*> (o Core..:? "referendumBallotResponses")
             Core.<*> (o Core..:? "referendumBrief")
             Core.<*> (o Core..:? "referendumConStatement")
@@ -548,7 +548,6 @@ instance Core.ToJSON Contest where
               Core.<$> numberVotingFor,
             ("office" Core..=) Core.<$> office,
             ("primaryParties" Core..=) Core.<$> primaryParties,
-            ("primaryParty" Core..=) Core.<$> primaryParty,
             ("referendumBallotResponses" Core..=)
               Core.<$> referendumBallotResponses,
             ("referendumBrief" Core..=) Core.<$> referendumBrief,
@@ -668,7 +667,9 @@ data Election = Election
     -- | A displayable name for the election.
     name :: (Core.Maybe Core.Text),
     -- | The political division of the election. Represented as an OCD Division ID. Voters within these political jurisdictions are covered by this election. This is typically a state such as ocd-division\/country:us\/state:ca or for the midterms or general election the entire US (i.e. ocd-division\/country:us).
-    ocdDivisionId :: (Core.Maybe Core.Text)
+    ocdDivisionId :: (Core.Maybe Core.Text),
+    -- |
+    shapeLookupBehavior :: (Core.Maybe Election_ShapeLookupBehavior)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -680,7 +681,8 @@ newElection =
     { electionDay = Core.Nothing,
       id = Core.Nothing,
       name = Core.Nothing,
-      ocdDivisionId = Core.Nothing
+      ocdDivisionId = Core.Nothing,
+      shapeLookupBehavior = Core.Nothing
     }
 
 instance Core.FromJSON Election where
@@ -693,6 +695,7 @@ instance Core.FromJSON Election where
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "ocdDivisionId")
+            Core.<*> (o Core..:? "shapeLookupBehavior")
       )
 
 instance Core.ToJSON Election where
@@ -702,7 +705,9 @@ instance Core.ToJSON Election where
           [ ("electionDay" Core..=) Core.<$> electionDay,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("name" Core..=) Core.<$> name,
-            ("ocdDivisionId" Core..=) Core.<$> ocdDivisionId
+            ("ocdDivisionId" Core..=) Core.<$> ocdDivisionId,
+            ("shapeLookupBehavior" Core..=)
+              Core.<$> shapeLookupBehavior
           ]
       )
 
@@ -1231,6 +1236,111 @@ instance Core.ToJSON PollingLocation where
       )
 
 --
+-- /See:/ 'newPrecinct' smart constructor.
+data Precinct = Precinct
+  { -- | ID of the AdministrationRegion message for this precinct. Corresponds to LocalityId xml tag.
+    administrationRegionId :: (Core.Maybe Core.Text),
+    -- | ID(s) of the Contest message(s) for this precinct.
+    contestId :: (Core.Maybe [Core.Text]),
+    -- | Required. Dataset ID. What datasets our Precincts come from.
+    datasetId :: (Core.Maybe Core.Int64),
+    -- | ID(s) of the PollingLocation message(s) for this precinct.
+    earlyVoteSiteId :: (Core.Maybe [Core.Text]),
+    -- | ID(s) of the ElectoralDistrict message(s) for this precinct.
+    electoralDistrictId :: (Core.Maybe [Core.Text]),
+    -- | Required. A unique identifier for this precinct.
+    id :: (Core.Maybe Core.Text),
+    -- | Specifies if the precinct runs mail-only elections.
+    mailOnly :: (Core.Maybe Core.Bool),
+    -- | Required. The name of the precinct.
+    name :: (Core.Maybe Core.Text),
+    -- | The number of the precinct.
+    number :: (Core.Maybe Core.Text),
+    -- | Encouraged. The OCD ID of the precinct
+    ocdId :: (Core.Maybe [Core.Text]),
+    -- | ID(s) of the PollingLocation message(s) for this precinct.
+    pollingLocationId :: (Core.Maybe [Core.Text]),
+    -- | ID(s) of the SpatialBoundary message(s) for this precinct. Used to specify a geometrical boundary of the precinct.
+    spatialBoundaryId :: (Core.Maybe [Core.Text]),
+    -- | If present, this proto corresponds to one portion of split precinct. Other portions of this precinct are guaranteed to have the same @name@. If not present, this proto represents a full precicnt.
+    splitName :: (Core.Maybe Core.Text),
+    -- | Specifies the ward the precinct is contained within.
+    ward :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Precinct' with the minimum fields required to make a request.
+newPrecinct ::
+  Precinct
+newPrecinct =
+  Precinct
+    { administrationRegionId = Core.Nothing,
+      contestId = Core.Nothing,
+      datasetId = Core.Nothing,
+      earlyVoteSiteId = Core.Nothing,
+      electoralDistrictId = Core.Nothing,
+      id = Core.Nothing,
+      mailOnly = Core.Nothing,
+      name = Core.Nothing,
+      number = Core.Nothing,
+      ocdId = Core.Nothing,
+      pollingLocationId = Core.Nothing,
+      spatialBoundaryId = Core.Nothing,
+      splitName = Core.Nothing,
+      ward = Core.Nothing
+    }
+
+instance Core.FromJSON Precinct where
+  parseJSON =
+    Core.withObject
+      "Precinct"
+      ( \o ->
+          Precinct
+            Core.<$> (o Core..:? "administrationRegionId")
+            Core.<*> (o Core..:? "contestId")
+            Core.<*> ( o Core..:? "datasetId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "earlyVoteSiteId")
+            Core.<*> (o Core..:? "electoralDistrictId")
+            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "mailOnly")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "number")
+            Core.<*> (o Core..:? "ocdId")
+            Core.<*> (o Core..:? "pollingLocationId")
+            Core.<*> (o Core..:? "spatialBoundaryId")
+            Core.<*> (o Core..:? "splitName")
+            Core.<*> (o Core..:? "ward")
+      )
+
+instance Core.ToJSON Precinct where
+  toJSON Precinct {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("administrationRegionId" Core..=)
+              Core.<$> administrationRegionId,
+            ("contestId" Core..=) Core.<$> contestId,
+            ("datasetId" Core..=) Core.. Core.AsText
+              Core.<$> datasetId,
+            ("earlyVoteSiteId" Core..=) Core.<$> earlyVoteSiteId,
+            ("electoralDistrictId" Core..=)
+              Core.<$> electoralDistrictId,
+            ("id" Core..=) Core.<$> id,
+            ("mailOnly" Core..=) Core.<$> mailOnly,
+            ("name" Core..=) Core.<$> name,
+            ("number" Core..=) Core.<$> number,
+            ("ocdId" Core..=) Core.<$> ocdId,
+            ("pollingLocationId" Core..=)
+              Core.<$> pollingLocationId,
+            ("spatialBoundaryId" Core..=)
+              Core.<$> spatialBoundaryId,
+            ("splitName" Core..=) Core.<$> splitName,
+            ("ward" Core..=) Core.<$> ward
+          ]
+      )
+
+--
 -- /See:/ 'newRepresentativeInfoData' smart constructor.
 data RepresentativeInfoData = RepresentativeInfoData
   { -- | A map of political geographic divisions that contain the requested address, keyed by the unique Open Civic Data identifier for this division.
@@ -1520,6 +1630,8 @@ data VoterInfoResponse = VoterInfoResponse
     pollingLocations :: (Core.Maybe [PollingLocation]),
     -- |
     precinctId :: (Core.Maybe Core.Text),
+    -- | The precincts that match this voter\'s address. Will only be returned for project IDs which have been whitelisted as \"partner projects\".
+    precincts :: (Core.Maybe [Precinct]),
     -- | Local Election Information for the state that the voter votes in. For the US, there will only be one element in this array.
     state :: (Core.Maybe [AdministrationRegion])
   }
@@ -1540,6 +1652,7 @@ newVoterInfoResponse =
       otherElections = Core.Nothing,
       pollingLocations = Core.Nothing,
       precinctId = Core.Nothing,
+      precincts = Core.Nothing,
       state = Core.Nothing
     }
 
@@ -1561,6 +1674,7 @@ instance Core.FromJSON VoterInfoResponse where
             Core.<*> (o Core..:? "otherElections")
             Core.<*> (o Core..:? "pollingLocations")
             Core.<*> (o Core..:? "precinctId")
+            Core.<*> (o Core..:? "precincts")
             Core.<*> (o Core..:? "state")
       )
 
@@ -1580,6 +1694,7 @@ instance Core.ToJSON VoterInfoResponse where
             ("pollingLocations" Core..=)
               Core.<$> pollingLocations,
             ("precinctId" Core..=) Core.<$> precinctId,
+            ("precincts" Core..=) Core.<$> precincts,
             ("state" Core..=) Core.<$> state
           ]
       )

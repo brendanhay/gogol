@@ -28,7 +28,7 @@
 --
 -- Inserts a page.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.pages.insert@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.pages.insert@.
 module Gogol.Blogger.Pages.Insert
   ( -- * Resource
     BloggerPagesInsertResource,

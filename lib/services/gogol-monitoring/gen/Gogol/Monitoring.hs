@@ -191,6 +191,26 @@ module Gogol.Monitoring
     MonitoringProjectsNotificationChannelsVerify (..),
     newMonitoringProjectsNotificationChannelsVerify,
 
+    -- ** monitoring.projects.snoozes.create
+    MonitoringProjectsSnoozesCreateResource,
+    MonitoringProjectsSnoozesCreate (..),
+    newMonitoringProjectsSnoozesCreate,
+
+    -- ** monitoring.projects.snoozes.get
+    MonitoringProjectsSnoozesGetResource,
+    MonitoringProjectsSnoozesGet (..),
+    newMonitoringProjectsSnoozesGet,
+
+    -- ** monitoring.projects.snoozes.list
+    MonitoringProjectsSnoozesListResource,
+    MonitoringProjectsSnoozesList (..),
+    newMonitoringProjectsSnoozesList,
+
+    -- ** monitoring.projects.snoozes.patch
+    MonitoringProjectsSnoozesPatchResource,
+    MonitoringProjectsSnoozesPatch (..),
+    newMonitoringProjectsSnoozesPatch,
+
     -- ** monitoring.projects.timeSeries.create
     MonitoringProjectsTimeSeriesCreateResource,
     MonitoringProjectsTimeSeriesCreate (..),
@@ -333,6 +353,14 @@ module Gogol.Monitoring
     BasicAuthentication (..),
     newBasicAuthentication,
 
+    -- ** BasicService
+    BasicService (..),
+    newBasicService,
+
+    -- ** BasicService_ServiceLabels
+    BasicService_ServiceLabels (..),
+    newBasicService_ServiceLabels,
+
     -- ** BasicSli
     BasicSli (..),
     newBasicSli,
@@ -344,6 +372,10 @@ module Gogol.Monitoring
     -- ** CloudEndpoints
     CloudEndpoints (..),
     newCloudEndpoints,
+
+    -- ** CloudRun
+    CloudRun (..),
+    newCloudRun,
 
     -- ** ClusterIstio
     ClusterIstio (..),
@@ -398,6 +430,10 @@ module Gogol.Monitoring
     -- ** CreateTimeSeriesSummary
     CreateTimeSeriesSummary (..),
     newCreateTimeSeriesSummary,
+
+    -- ** Criteria
+    Criteria (..),
+    newCriteria,
 
     -- ** Custom
     Custom (..),
@@ -457,6 +493,10 @@ module Gogol.Monitoring
     -- ** Field_Kind
     Field_Kind (..),
 
+    -- ** ForecastOptions
+    ForecastOptions (..),
+    newForecastOptions,
+
     -- ** GetNotificationChannelVerificationCodeRequest
     GetNotificationChannelVerificationCodeRequest (..),
     newGetNotificationChannelVerificationCodeRequest,
@@ -464,6 +504,18 @@ module Gogol.Monitoring
     -- ** GetNotificationChannelVerificationCodeResponse
     GetNotificationChannelVerificationCodeResponse (..),
     newGetNotificationChannelVerificationCodeResponse,
+
+    -- ** GkeNamespace
+    GkeNamespace (..),
+    newGkeNamespace,
+
+    -- ** GkeService
+    GkeService (..),
+    newGkeService,
+
+    -- ** GkeWorkload
+    GkeWorkload (..),
+    newGkeWorkload,
 
     -- ** GoogleMonitoringV3Range
     GoogleMonitoringV3Range (..),
@@ -497,6 +549,13 @@ module Gogol.Monitoring
     -- ** IstioCanonicalService
     IstioCanonicalService (..),
     newIstioCanonicalService,
+
+    -- ** JsonPathMatcher
+    JsonPathMatcher (..),
+    newJsonPathMatcher,
+
+    -- ** JsonPathMatcher_JsonMatcher
+    JsonPathMatcher_JsonMatcher (..),
 
     -- ** LabelDescriptor
     LabelDescriptor (..),
@@ -552,6 +611,10 @@ module Gogol.Monitoring
     -- ** ListServicesResponse
     ListServicesResponse (..),
     newListServicesResponse,
+
+    -- ** ListSnoozesResponse
+    ListSnoozesResponse (..),
+    newListSnoozesResponse,
 
     -- ** ListTimeSeriesResponse
     ListTimeSeriesResponse (..),
@@ -686,6 +749,10 @@ module Gogol.Monitoring
     -- ** NotificationChannelDescriptor_SupportedTiersItem
     NotificationChannelDescriptor_SupportedTiersItem (..),
 
+    -- ** NotificationChannelStrategy
+    NotificationChannelStrategy (..),
+    newNotificationChannelStrategy,
+
     -- ** NotificationRateLimit
     NotificationRateLimit (..),
     newNotificationRateLimit,
@@ -708,6 +775,10 @@ module Gogol.Monitoring
     -- ** PerformanceThreshold
     PerformanceThreshold (..),
     newPerformanceThreshold,
+
+    -- ** PingConfig
+    PingConfig (..),
+    newPingConfig,
 
     -- ** Point
     Point (..),
@@ -740,6 +811,13 @@ module Gogol.Monitoring
     -- ** ResourceGroup_ResourceType
     ResourceGroup_ResourceType (..),
 
+    -- ** ResponseStatusCode
+    ResponseStatusCode (..),
+    newResponseStatusCode,
+
+    -- ** ResponseStatusCode_StatusClass
+    ResponseStatusCode_StatusClass (..),
+
     -- ** SendNotificationChannelVerificationCodeRequest
     SendNotificationChannelVerificationCodeRequest (..),
     newSendNotificationChannelVerificationCodeRequest,
@@ -766,6 +844,10 @@ module Gogol.Monitoring
     -- ** ServiceLevelObjective_UserLabels
     ServiceLevelObjective_UserLabels (..),
     newServiceLevelObjective_UserLabels,
+
+    -- ** Snooze
+    Snooze (..),
+    newSnooze,
 
     -- ** SourceContext
     SourceContext (..),
@@ -841,6 +923,10 @@ module Gogol.Monitoring
 
     -- ** UptimeCheckConfig_SelectedRegionsItem
     UptimeCheckConfig_SelectedRegionsItem (..),
+
+    -- ** UptimeCheckConfig_UserLabels
+    UptimeCheckConfig_UserLabels (..),
+    newUptimeCheckConfig_UserLabels,
 
     -- ** UptimeCheckIp
     UptimeCheckIp (..),
@@ -950,6 +1036,10 @@ import Gogol.Monitoring.Projects.NotificationChannels.List
 import Gogol.Monitoring.Projects.NotificationChannels.Patch
 import Gogol.Monitoring.Projects.NotificationChannels.SendVerificationCode
 import Gogol.Monitoring.Projects.NotificationChannels.Verify
+import Gogol.Monitoring.Projects.Snoozes.Create
+import Gogol.Monitoring.Projects.Snoozes.Get
+import Gogol.Monitoring.Projects.Snoozes.List
+import Gogol.Monitoring.Projects.Snoozes.Patch
 import Gogol.Monitoring.Projects.TimeSeries.Create
 import Gogol.Monitoring.Projects.TimeSeries.CreateService
 import Gogol.Monitoring.Projects.TimeSeries.List

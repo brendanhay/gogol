@@ -65,6 +65,21 @@ module Gogol.Gmail.Types
     BatchModifyMessagesRequest (..),
     newBatchModifyMessagesRequest,
 
+    -- ** CseIdentity
+    CseIdentity (..),
+    newCseIdentity,
+
+    -- ** CseKeyPair
+    CseKeyPair (..),
+    newCseKeyPair,
+
+    -- ** CseKeyPair_EnablementState
+    CseKeyPair_EnablementState (..),
+
+    -- ** CsePrivateKeyMetadata
+    CsePrivateKeyMetadata (..),
+    newCsePrivateKeyMetadata,
+
     -- ** Delegate
     Delegate (..),
     newDelegate,
@@ -72,9 +87,17 @@ module Gogol.Gmail.Types
     -- ** Delegate_VerificationStatus
     Delegate_VerificationStatus (..),
 
+    -- ** DisableCseKeyPairRequest
+    DisableCseKeyPairRequest (..),
+    newDisableCseKeyPairRequest,
+
     -- ** Draft
     Draft (..),
     newDraft,
+
+    -- ** EnableCseKeyPairRequest
+    EnableCseKeyPairRequest (..),
+    newEnableCseKeyPairRequest,
 
     -- ** Filter
     Filter (..),
@@ -125,6 +148,10 @@ module Gogol.Gmail.Types
     -- ** ImapSettings_ExpungeBehavior
     ImapSettings_ExpungeBehavior (..),
 
+    -- ** KaclsKeyMetadata
+    KaclsKeyMetadata (..),
+    newKaclsKeyMetadata,
+
     -- ** Label
     Label (..),
     newLabel,
@@ -145,6 +172,14 @@ module Gogol.Gmail.Types
     -- ** LanguageSettings
     LanguageSettings (..),
     newLanguageSettings,
+
+    -- ** ListCseIdentitiesResponse
+    ListCseIdentitiesResponse (..),
+    newListCseIdentitiesResponse,
+
+    -- ** ListCseKeyPairsResponse
+    ListCseKeyPairsResponse (..),
+    newListCseKeyPairsResponse,
 
     -- ** ListDelegatesResponse
     ListDelegatesResponse (..),
@@ -209,6 +244,10 @@ module Gogol.Gmail.Types
     -- ** ModifyThreadRequest
     ModifyThreadRequest (..),
     newModifyThreadRequest,
+
+    -- ** ObliterateCseKeyPairRequest
+    ObliterateCseKeyPairRequest (..),
+    newObliterateCseKeyPairRequest,
 
     -- ** PopSettings
     PopSettings (..),

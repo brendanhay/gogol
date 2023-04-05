@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates multiple instances. Count specifies the number of instances to create.
+-- Creates multiple instances. Count specifies the number of instances to create. For more information, see About bulk creation of VMs.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.instances.bulkInsert@.
 module Gogol.Compute.Instances.BulkInsert
@@ -65,7 +65,7 @@ type ComputeInstancesBulkInsertResource =
               BulkInsertInstanceResource
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Creates multiple instances. Count specifies the number of instances to create.
+-- | Creates multiple instances. Count specifies the number of instances to create. For more information, see About bulk creation of VMs.
 --
 -- /See:/ 'newComputeInstancesBulkInsert' smart constructor.
 data ComputeInstancesBulkInsert = ComputeInstancesBulkInsert

@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an InspectTemplate for re-using frequently used configuration for inspecting content, images, and storage. See https:\/\/cloud.google.com\/dlp\/docs\/creating-templates to learn more.
+-- Creates an InspectTemplate for reusing frequently used configuration for inspecting content, images, and storage. See https:\/\/cloud.google.com\/dlp\/docs\/creating-templates to learn more.
 --
 -- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.projects.locations.inspectTemplates.create@.
 module Gogol.DLP.Projects.Locations.InspectTemplates.Create
@@ -61,7 +61,7 @@ type DLPProjectsLocationsInspectTemplatesCreateResource =
               '[Core.JSON]
               GooglePrivacyDlpV2InspectTemplate
 
--- | Creates an InspectTemplate for re-using frequently used configuration for inspecting content, images, and storage. See https:\/\/cloud.google.com\/dlp\/docs\/creating-templates to learn more.
+-- | Creates an InspectTemplate for reusing frequently used configuration for inspecting content, images, and storage. See https:\/\/cloud.google.com\/dlp\/docs\/creating-templates to learn more.
 --
 -- /See:/ 'newDLPProjectsLocationsInspectTemplatesCreate' smart constructor.
 data DLPProjectsLocationsInspectTemplatesCreate = DLPProjectsLocationsInspectTemplatesCreate

@@ -28,7 +28,7 @@
 --
 -- Deletes a comment by blog id, post id and comment id.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.comments.delete@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.comments.delete@.
 module Gogol.Blogger.Comments.Delete
   ( -- * Resource
     BloggerCommentsDeleteResource,

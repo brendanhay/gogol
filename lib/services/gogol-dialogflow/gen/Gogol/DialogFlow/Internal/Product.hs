@@ -82,6 +82,10 @@ module Gogol.DialogFlow.Internal.Product
     GoogleCloudDialogflowCxV3ContinuousTestResult (..),
     newGoogleCloudDialogflowCxV3ContinuousTestResult,
 
+    -- * GoogleCloudDialogflowCxV3ConversationSignals
+    GoogleCloudDialogflowCxV3ConversationSignals (..),
+    newGoogleCloudDialogflowCxV3ConversationSignals,
+
     -- * GoogleCloudDialogflowCxV3ConversationTurn
     GoogleCloudDialogflowCxV3ConversationTurn (..),
     newGoogleCloudDialogflowCxV3ConversationTurn,
@@ -173,6 +177,10 @@ module Gogol.DialogFlow.Internal.Product
     -- * GoogleCloudDialogflowCxV3EnvironmentVersionConfig
     GoogleCloudDialogflowCxV3EnvironmentVersionConfig (..),
     newGoogleCloudDialogflowCxV3EnvironmentVersionConfig,
+
+    -- * GoogleCloudDialogflowCxV3EnvironmentWebhookConfig
+    GoogleCloudDialogflowCxV3EnvironmentWebhookConfig (..),
+    newGoogleCloudDialogflowCxV3EnvironmentWebhookConfig,
 
     -- * GoogleCloudDialogflowCxV3EventHandler
     GoogleCloudDialogflowCxV3EventHandler (..),
@@ -281,6 +289,10 @@ module Gogol.DialogFlow.Internal.Product
     -- * GoogleCloudDialogflowCxV3FulfillmentSetParameterAction
     GoogleCloudDialogflowCxV3FulfillmentSetParameterAction (..),
     newGoogleCloudDialogflowCxV3FulfillmentSetParameterAction,
+
+    -- * GoogleCloudDialogflowCxV3GcsDestination
+    GoogleCloudDialogflowCxV3GcsDestination (..),
+    newGoogleCloudDialogflowCxV3GcsDestination,
 
     -- * GoogleCloudDialogflowCxV3GenericKnowledgeOperationMetadata
     GoogleCloudDialogflowCxV3GenericKnowledgeOperationMetadata (..),
@@ -606,6 +618,10 @@ module Gogol.DialogFlow.Internal.Product
     GoogleCloudDialogflowCxV3SecuritySettings (..),
     newGoogleCloudDialogflowCxV3SecuritySettings,
 
+    -- * GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings
+    GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings (..),
+    newGoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings,
+
     -- * GoogleCloudDialogflowCxV3SecuritySettingsInsightsExportSettings
     GoogleCloudDialogflowCxV3SecuritySettingsInsightsExportSettings (..),
     newGoogleCloudDialogflowCxV3SecuritySettingsInsightsExportSettings,
@@ -670,6 +686,14 @@ module Gogol.DialogFlow.Internal.Product
     GoogleCloudDialogflowCxV3TextInput (..),
     newGoogleCloudDialogflowCxV3TextInput,
 
+    -- * GoogleCloudDialogflowCxV3TextToSpeechSettings
+    GoogleCloudDialogflowCxV3TextToSpeechSettings (..),
+    newGoogleCloudDialogflowCxV3TextToSpeechSettings,
+
+    -- * GoogleCloudDialogflowCxV3TextToSpeechSettings_SynthesizeSpeechConfigs
+    GoogleCloudDialogflowCxV3TextToSpeechSettings_SynthesizeSpeechConfigs (..),
+    newGoogleCloudDialogflowCxV3TextToSpeechSettings_SynthesizeSpeechConfigs,
+
     -- * GoogleCloudDialogflowCxV3TrainFlowRequest
     GoogleCloudDialogflowCxV3TrainFlowRequest (..),
     newGoogleCloudDialogflowCxV3TrainFlowRequest,
@@ -705,6 +729,10 @@ module Gogol.DialogFlow.Internal.Product
     -- * GoogleCloudDialogflowCxV3TransitionRouteGroupCoverageCoverageTransition
     GoogleCloudDialogflowCxV3TransitionRouteGroupCoverageCoverageTransition (..),
     newGoogleCloudDialogflowCxV3TransitionRouteGroupCoverageCoverageTransition,
+
+    -- * GoogleCloudDialogflowCxV3TurnSignals
+    GoogleCloudDialogflowCxV3TurnSignals (..),
+    newGoogleCloudDialogflowCxV3TurnSignals,
 
     -- * GoogleCloudDialogflowCxV3UpdateDocumentOperationMetadata
     GoogleCloudDialogflowCxV3UpdateDocumentOperationMetadata (..),
@@ -814,6 +842,10 @@ module Gogol.DialogFlow.Internal.Product
     GoogleCloudDialogflowCxV3beta1ContinuousTestResult (..),
     newGoogleCloudDialogflowCxV3beta1ContinuousTestResult,
 
+    -- * GoogleCloudDialogflowCxV3beta1ConversationSignals
+    GoogleCloudDialogflowCxV3beta1ConversationSignals (..),
+    newGoogleCloudDialogflowCxV3beta1ConversationSignals,
+
     -- * GoogleCloudDialogflowCxV3beta1ConversationTurn
     GoogleCloudDialogflowCxV3beta1ConversationTurn (..),
     newGoogleCloudDialogflowCxV3beta1ConversationTurn,
@@ -873,6 +905,10 @@ module Gogol.DialogFlow.Internal.Product
     -- * GoogleCloudDialogflowCxV3beta1EnvironmentVersionConfig
     GoogleCloudDialogflowCxV3beta1EnvironmentVersionConfig (..),
     newGoogleCloudDialogflowCxV3beta1EnvironmentVersionConfig,
+
+    -- * GoogleCloudDialogflowCxV3beta1EnvironmentWebhookConfig
+    GoogleCloudDialogflowCxV3beta1EnvironmentWebhookConfig (..),
+    newGoogleCloudDialogflowCxV3beta1EnvironmentWebhookConfig,
 
     -- * GoogleCloudDialogflowCxV3beta1EventHandler
     GoogleCloudDialogflowCxV3beta1EventHandler (..),
@@ -1114,9 +1150,25 @@ module Gogol.DialogFlow.Internal.Product
     GoogleCloudDialogflowCxV3beta1TransitionRoute (..),
     newGoogleCloudDialogflowCxV3beta1TransitionRoute,
 
+    -- * GoogleCloudDialogflowCxV3beta1TurnSignals
+    GoogleCloudDialogflowCxV3beta1TurnSignals (..),
+    newGoogleCloudDialogflowCxV3beta1TurnSignals,
+
     -- * GoogleCloudDialogflowCxV3beta1UpdateDocumentOperationMetadata
     GoogleCloudDialogflowCxV3beta1UpdateDocumentOperationMetadata (..),
     newGoogleCloudDialogflowCxV3beta1UpdateDocumentOperationMetadata,
+
+    -- * GoogleCloudDialogflowCxV3beta1Webhook
+    GoogleCloudDialogflowCxV3beta1Webhook (..),
+    newGoogleCloudDialogflowCxV3beta1Webhook,
+
+    -- * GoogleCloudDialogflowCxV3beta1WebhookGenericWebService
+    GoogleCloudDialogflowCxV3beta1WebhookGenericWebService (..),
+    newGoogleCloudDialogflowCxV3beta1WebhookGenericWebService,
+
+    -- * GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_RequestHeaders
+    GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_RequestHeaders (..),
+    newGoogleCloudDialogflowCxV3beta1WebhookGenericWebService_RequestHeaders,
 
     -- * GoogleCloudDialogflowCxV3beta1WebhookRequest
     GoogleCloudDialogflowCxV3beta1WebhookRequest (..),
@@ -1157,6 +1209,10 @@ module Gogol.DialogFlow.Internal.Product
     -- * GoogleCloudDialogflowCxV3beta1WebhookResponseFulfillmentResponse
     GoogleCloudDialogflowCxV3beta1WebhookResponseFulfillmentResponse (..),
     newGoogleCloudDialogflowCxV3beta1WebhookResponseFulfillmentResponse,
+
+    -- * GoogleCloudDialogflowCxV3beta1WebhookServiceDirectoryConfig
+    GoogleCloudDialogflowCxV3beta1WebhookServiceDirectoryConfig (..),
+    newGoogleCloudDialogflowCxV3beta1WebhookServiceDirectoryConfig,
 
     -- * GoogleCloudDialogflowV2AnnotatedMessagePart
     GoogleCloudDialogflowV2AnnotatedMessagePart (..),
@@ -1874,6 +1930,10 @@ module Gogol.DialogFlow.Internal.Product
     GoogleCloudDialogflowV2beta1WebhookResponse_Payload (..),
     newGoogleCloudDialogflowV2beta1WebhookResponse_Payload,
 
+    -- * GoogleCloudDialogflowV3alpha1ConversationSignals
+    GoogleCloudDialogflowV3alpha1ConversationSignals (..),
+    newGoogleCloudDialogflowV3alpha1ConversationSignals,
+
     -- * GoogleCloudDialogflowV3alpha1CreateDocumentOperationMetadata
     GoogleCloudDialogflowV3alpha1CreateDocumentOperationMetadata (..),
     newGoogleCloudDialogflowV3alpha1CreateDocumentOperationMetadata,
@@ -1897,6 +1957,10 @@ module Gogol.DialogFlow.Internal.Product
     -- * GoogleCloudDialogflowV3alpha1ReloadDocumentOperationMetadata
     GoogleCloudDialogflowV3alpha1ReloadDocumentOperationMetadata (..),
     newGoogleCloudDialogflowV3alpha1ReloadDocumentOperationMetadata,
+
+    -- * GoogleCloudDialogflowV3alpha1TurnSignals
+    GoogleCloudDialogflowV3alpha1TurnSignals (..),
+    newGoogleCloudDialogflowV3alpha1TurnSignals,
 
     -- * GoogleCloudDialogflowV3alpha1UpdateDocumentOperationMetadata
     GoogleCloudDialogflowV3alpha1UpdateDocumentOperationMetadata (..),
@@ -1955,11 +2019,13 @@ where
 import Gogol.DialogFlow.Internal.Sum
 import qualified Gogol.Prelude as Core
 
--- | Hierarchical advanced settings for agent\/flow\/page\/fulfillment\/parameter. Settings exposed at lower level overrides the settings exposed at higher level. Hierarchy: Agent->Flow->Page->Fulfillment\/Parameter.
+-- | Hierarchical advanced settings for agent\/flow\/page\/fulfillment\/parameter. Settings exposed at lower level overrides the settings exposed at higher level. Overriding occurs at the sub-setting level. For example, the playback/interruption/settings at fulfillment level only overrides the playback/interruption/settings at the agent level, leaving other settings at the agent level unchanged. DTMF settings does not override each other. DTMF settings set at different levels define DTMF detections running in parallel. Hierarchy: Agent->Flow->Page->Fulfillment\/Parameter.
 --
 -- /See:/ 'newGoogleCloudDialogflowCxV3AdvancedSettings' smart constructor.
-newtype GoogleCloudDialogflowCxV3AdvancedSettings = GoogleCloudDialogflowCxV3AdvancedSettings
-  { -- | Settings for logging. Settings for Dialogflow History, Contact Center messages, StackDriver logs, and speech logging. Exposed at the following levels: - Agent level.
+data GoogleCloudDialogflowCxV3AdvancedSettings = GoogleCloudDialogflowCxV3AdvancedSettings
+  { -- | If present, incoming audio is exported by Dialogflow to the configured Google Cloud Storage destination. Exposed at the following levels: - Agent level - Flow level
+    audioExportGcsDestination :: (Core.Maybe GoogleCloudDialogflowCxV3GcsDestination),
+    -- | Settings for logging. Settings for Dialogflow History, Contact Center messages, StackDriver logs, and speech logging. Exposed at the following levels: - Agent level.
     loggingSettings ::
       ( Core.Maybe
           GoogleCloudDialogflowCxV3AdvancedSettingsLoggingSettings
@@ -1971,7 +2037,10 @@ newtype GoogleCloudDialogflowCxV3AdvancedSettings = GoogleCloudDialogflowCxV3Adv
 newGoogleCloudDialogflowCxV3AdvancedSettings ::
   GoogleCloudDialogflowCxV3AdvancedSettings
 newGoogleCloudDialogflowCxV3AdvancedSettings =
-  GoogleCloudDialogflowCxV3AdvancedSettings {loggingSettings = Core.Nothing}
+  GoogleCloudDialogflowCxV3AdvancedSettings
+    { audioExportGcsDestination = Core.Nothing,
+      loggingSettings = Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -1982,7 +2051,8 @@ instance
       "GoogleCloudDialogflowCxV3AdvancedSettings"
       ( \o ->
           GoogleCloudDialogflowCxV3AdvancedSettings
-            Core.<$> (o Core..:? "loggingSettings")
+            Core.<$> (o Core..:? "audioExportGcsDestination")
+            Core.<*> (o Core..:? "loggingSettings")
       )
 
 instance
@@ -1992,7 +2062,9 @@ instance
   toJSON GoogleCloudDialogflowCxV3AdvancedSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("loggingSettings" Core..=)
+          [ ("audioExportGcsDestination" Core..=)
+              Core.<$> audioExportGcsDestination,
+            ("loggingSettings" Core..=)
               Core.<$> loggingSettings
           ]
       )
@@ -2063,6 +2135,8 @@ data GoogleCloudDialogflowCxV3Agent = GoogleCloudDialogflowCxV3Agent
     enableSpellCorrection :: (Core.Maybe Core.Bool),
     -- | Indicates if stackdriver logging is enabled for the agent. Please use agent.advanced_settings instead.
     enableStackdriverLogging :: (Core.Maybe Core.Bool),
+    -- | Indicates whether the agent is locked for changes. If the agent is locked, modifications to the agent will be rejected except for RestoreAgent.
+    locked :: (Core.Maybe Core.Bool),
     -- | The unique identifier of the agent. Required for the Agents.UpdateAgent method. Agents.CreateAgent populates the name automatically. Format: @projects\/\/locations\/\/agents\/@.
     name :: (Core.Maybe Core.Text),
     -- | Name of the SecuritySettings reference for the agent. Format: @projects\/\/locations\/\/securitySettings\/@.
@@ -2073,6 +2147,8 @@ data GoogleCloudDialogflowCxV3Agent = GoogleCloudDialogflowCxV3Agent
     startFlow :: (Core.Maybe Core.Text),
     -- | The list of all languages supported by the agent (except for the @default_language_code@).
     supportedLanguageCodes :: (Core.Maybe [Core.Text]),
+    -- | Settings on instructing the speech synthesizer on how to generate the output audio content.
+    textToSpeechSettings :: (Core.Maybe GoogleCloudDialogflowCxV3TextToSpeechSettings),
     -- | Required. The time zone of the agent from the <https://www.iana.org/time-zones time zone database>, e.g., America\/New_York, Europe\/Paris.
     timeZone :: (Core.Maybe Core.Text)
   }
@@ -2090,11 +2166,13 @@ newGoogleCloudDialogflowCxV3Agent =
       displayName = Core.Nothing,
       enableSpellCorrection = Core.Nothing,
       enableStackdriverLogging = Core.Nothing,
+      locked = Core.Nothing,
       name = Core.Nothing,
       securitySettings = Core.Nothing,
       speechToTextSettings = Core.Nothing,
       startFlow = Core.Nothing,
       supportedLanguageCodes = Core.Nothing,
+      textToSpeechSettings = Core.Nothing,
       timeZone = Core.Nothing
     }
 
@@ -2111,11 +2189,13 @@ instance Core.FromJSON GoogleCloudDialogflowCxV3Agent where
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "enableSpellCorrection")
             Core.<*> (o Core..:? "enableStackdriverLogging")
+            Core.<*> (o Core..:? "locked")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "securitySettings")
             Core.<*> (o Core..:? "speechToTextSettings")
             Core.<*> (o Core..:? "startFlow")
             Core.<*> (o Core..:? "supportedLanguageCodes")
+            Core.<*> (o Core..:? "textToSpeechSettings")
             Core.<*> (o Core..:? "timeZone")
       )
 
@@ -2134,6 +2214,7 @@ instance Core.ToJSON GoogleCloudDialogflowCxV3Agent where
               Core.<$> enableSpellCorrection,
             ("enableStackdriverLogging" Core..=)
               Core.<$> enableStackdriverLogging,
+            ("locked" Core..=) Core.<$> locked,
             ("name" Core..=) Core.<$> name,
             ("securitySettings" Core..=)
               Core.<$> securitySettings,
@@ -2142,6 +2223,8 @@ instance Core.ToJSON GoogleCloudDialogflowCxV3Agent where
             ("startFlow" Core..=) Core.<$> startFlow,
             ("supportedLanguageCodes" Core..=)
               Core.<$> supportedLanguageCodes,
+            ("textToSpeechSettings" Core..=)
+              Core.<$> textToSpeechSettings,
             ("timeZone" Core..=) Core.<$> timeZone
           ]
       )
@@ -2197,7 +2280,7 @@ instance
 --
 -- /See:/ 'newGoogleCloudDialogflowCxV3AudioInput' smart constructor.
 data GoogleCloudDialogflowCxV3AudioInput = GoogleCloudDialogflowCxV3AudioInput
-  { -- | The natural language speech audio to be processed. A single request can contain up to 1 minute of speech audio data. The transcribed text cannot contain more than 256 bytes. For non-streaming audio detect intent, both @config@ and @audio@ must be provided. For streaming audio detect intent, @config@ must be provided in the first request and @audio@ must be provided in all following requests.
+  { -- | The natural language speech audio to be processed. A single request can contain up to 2 minutes of speech audio data. The transcribed text cannot contain more than 256 bytes. For non-streaming audio detect intent, both @config@ and @audio@ must be provided. For streaming audio detect intent, @config@ must be provided in the first request and @audio@ must be provided in all following requests.
     audio :: (Core.Maybe Core.Base64),
     -- | Required. Instructs the speech recognizer how to process the speech audio.
     config :: (Core.Maybe GoogleCloudDialogflowCxV3InputAudioConfig)
@@ -2674,6 +2757,44 @@ instance
               ("testCaseResults" Core..=)
                 Core.<$> testCaseResults
             ]
+        )
+
+-- | This message is used to hold all the Conversation Signals data, which will be converted to JSON and exported to BigQuery.
+--
+-- /See:/ 'newGoogleCloudDialogflowCxV3ConversationSignals' smart constructor.
+newtype GoogleCloudDialogflowCxV3ConversationSignals = GoogleCloudDialogflowCxV3ConversationSignals
+  { -- | Required. Turn signals for the current turn.
+    turnSignals :: (Core.Maybe GoogleCloudDialogflowCxV3TurnSignals)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudDialogflowCxV3ConversationSignals' with the minimum fields required to make a request.
+newGoogleCloudDialogflowCxV3ConversationSignals ::
+  GoogleCloudDialogflowCxV3ConversationSignals
+newGoogleCloudDialogflowCxV3ConversationSignals =
+  GoogleCloudDialogflowCxV3ConversationSignals {turnSignals = Core.Nothing}
+
+instance
+  Core.FromJSON
+    GoogleCloudDialogflowCxV3ConversationSignals
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudDialogflowCxV3ConversationSignals"
+      ( \o ->
+          GoogleCloudDialogflowCxV3ConversationSignals
+            Core.<$> (o Core..:? "turnSignals")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudDialogflowCxV3ConversationSignals
+  where
+  toJSON
+    GoogleCloudDialogflowCxV3ConversationSignals {..} =
+      Core.object
+        ( Core.catMaybes
+            [("turnSignals" Core..=) Core.<$> turnSignals]
         )
 
 -- | One interaction between a human and virtual agent. The human provides some input and the virtual agent provides a response.
@@ -3234,7 +3355,7 @@ instance
             ]
         )
 
--- | Represents an deployment in an environment. A deployment happens when a flow version configured to be active in the environment. You can configure running pre-deployment steps, e.g. running validation test cases, experiment auto-rollout, etc.
+-- | Represents a deployment in an environment. A deployment happens when a flow version configured to be active in the environment. You can configure running pre-deployment steps, e.g. running validation test cases, experiment auto-rollout, etc.
 --
 -- /See:/ 'newGoogleCloudDialogflowCxV3Deployment' smart constructor.
 data GoogleCloudDialogflowCxV3Deployment = GoogleCloudDialogflowCxV3Deployment
@@ -3686,8 +3807,10 @@ data GoogleCloudDialogflowCxV3Environment = GoogleCloudDialogflowCxV3Environment
     testCasesConfig :: (Core.Maybe GoogleCloudDialogflowCxV3EnvironmentTestCasesConfig),
     -- | Output only. Update time of this environment.
     updateTime :: (Core.Maybe Core.DateTime),
-    -- | Required. A list of configurations for flow versions. You should include version configs for all flows that are reachable from @Start Flow@ in the agent. Otherwise, an error will be returned.
-    versionConfigs :: (Core.Maybe [GoogleCloudDialogflowCxV3EnvironmentVersionConfig])
+    -- | A list of configurations for flow versions. You should include version configs for all flows that are reachable from @Start Flow@ in the agent. Otherwise, an error will be returned.
+    versionConfigs :: (Core.Maybe [GoogleCloudDialogflowCxV3EnvironmentVersionConfig]),
+    -- | The webhook configuration for this environment.
+    webhookConfig :: (Core.Maybe GoogleCloudDialogflowCxV3EnvironmentWebhookConfig)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3701,7 +3824,8 @@ newGoogleCloudDialogflowCxV3Environment =
       name = Core.Nothing,
       testCasesConfig = Core.Nothing,
       updateTime = Core.Nothing,
-      versionConfigs = Core.Nothing
+      versionConfigs = Core.Nothing,
+      webhookConfig = Core.Nothing
     }
 
 instance
@@ -3719,6 +3843,7 @@ instance
             Core.<*> (o Core..:? "testCasesConfig")
             Core.<*> (o Core..:? "updateTime")
             Core.<*> (o Core..:? "versionConfigs")
+            Core.<*> (o Core..:? "webhookConfig")
       )
 
 instance
@@ -3733,7 +3858,8 @@ instance
             ("name" Core..=) Core.<$> name,
             ("testCasesConfig" Core..=) Core.<$> testCasesConfig,
             ("updateTime" Core..=) Core.<$> updateTime,
-            ("versionConfigs" Core..=) Core.<$> versionConfigs
+            ("versionConfigs" Core..=) Core.<$> versionConfigs,
+            ("webhookConfig" Core..=) Core.<$> webhookConfig
           ]
       )
 
@@ -3826,6 +3952,48 @@ instance
       Core.object
         ( Core.catMaybes
             [("version" Core..=) Core.<$> version]
+        )
+
+-- | Configuration for webhooks.
+--
+-- /See:/ 'newGoogleCloudDialogflowCxV3EnvironmentWebhookConfig' smart constructor.
+newtype GoogleCloudDialogflowCxV3EnvironmentWebhookConfig = GoogleCloudDialogflowCxV3EnvironmentWebhookConfig
+  { -- | The list of webhooks to override for the agent environment. The webhook must exist in the agent. You can override fields in @generic_web_service@ and @service_directory@.
+    webhookOverrides :: (Core.Maybe [GoogleCloudDialogflowCxV3Webhook])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudDialogflowCxV3EnvironmentWebhookConfig' with the minimum fields required to make a request.
+newGoogleCloudDialogflowCxV3EnvironmentWebhookConfig ::
+  GoogleCloudDialogflowCxV3EnvironmentWebhookConfig
+newGoogleCloudDialogflowCxV3EnvironmentWebhookConfig =
+  GoogleCloudDialogflowCxV3EnvironmentWebhookConfig
+    { webhookOverrides = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudDialogflowCxV3EnvironmentWebhookConfig
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudDialogflowCxV3EnvironmentWebhookConfig"
+      ( \o ->
+          GoogleCloudDialogflowCxV3EnvironmentWebhookConfig
+            Core.<$> (o Core..:? "webhookOverrides")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudDialogflowCxV3EnvironmentWebhookConfig
+  where
+  toJSON
+    GoogleCloudDialogflowCxV3EnvironmentWebhookConfig {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("webhookOverrides" Core..=)
+                Core.<$> webhookOverrides
+            ]
         )
 
 -- | An event handler specifies an event that can be handled during a session. When the specified event happens, the following actions are taken in order: * If there is a @trigger_fulfillment@ associated with the event, it will be called. * If there is a @target_page@ associated with the event, the session will transition into the specified page. * If there is a @target_flow@ associated with the event, the session will transition into the specified flow.
@@ -4314,6 +4482,8 @@ instance
 data GoogleCloudDialogflowCxV3ExportAgentRequest = GoogleCloudDialogflowCxV3ExportAgentRequest
   { -- | Optional. The <https://cloud.google.com/storage/docs/ Google Cloud Storage> URI to export the agent to. The format of this URI must be @gs:\/\/\/@. If left unspecified, the serialized agent is returned inline. Dialogflow performs a write operation for the Cloud Storage object on the caller\'s behalf, so your request authentication must have write permissions for the object. For more information, see <https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage Dialogflow access control>.
     agentUri :: (Core.Maybe Core.Text),
+    -- | Optional. The data format of the exported agent. If not specified, @BLOB@ is assumed.
+    dataFormat :: (Core.Maybe GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat),
     -- | Optional. Environment name. If not set, draft environment is assumed. Format: @projects\/\/locations\/\/agents\/\/environments\/@.
     environment :: (Core.Maybe Core.Text)
   }
@@ -4325,6 +4495,7 @@ newGoogleCloudDialogflowCxV3ExportAgentRequest ::
 newGoogleCloudDialogflowCxV3ExportAgentRequest =
   GoogleCloudDialogflowCxV3ExportAgentRequest
     { agentUri = Core.Nothing,
+      dataFormat = Core.Nothing,
       environment = Core.Nothing
     }
 
@@ -4338,6 +4509,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3ExportAgentRequest
             Core.<$> (o Core..:? "agentUri")
+            Core.<*> (o Core..:? "dataFormat")
             Core.<*> (o Core..:? "environment")
       )
 
@@ -4350,6 +4522,7 @@ instance
       Core.object
         ( Core.catMaybes
             [ ("agentUri" Core..=) Core.<$> agentUri,
+              ("dataFormat" Core..=) Core.<$> dataFormat,
               ("environment" Core..=) Core.<$> environment
             ]
         )
@@ -4638,7 +4811,7 @@ data GoogleCloudDialogflowCxV3Flow = GoogleCloudDialogflowCxV3Flow
     nluSettings :: (Core.Maybe GoogleCloudDialogflowCxV3NluSettings),
     -- | A flow\'s transition route group serve two purposes: * They are responsible for matching the user\'s first utterances in the flow. * They are inherited by every page\'s transition route groups. Transition route groups defined in the page have higher priority than those defined in the flow. Format:@projects\/\/locations\/\/agents\/\/flows\/\/transitionRouteGroups\/@.
     transitionRouteGroups :: (Core.Maybe [Core.Text]),
-    -- | A flow\'s transition routes serve two purposes: * They are responsible for matching the user\'s first utterances in the flow. * They are inherited by every page\'s transition routes and can support use cases such as the user saying \"help\" or \"can I talk to a human?\", which can be handled in a common way regardless of the current page. Transition routes defined in the page have higher priority than those defined in the flow. TransitionRoutes are evalauted in the following order: * TransitionRoutes with intent specified.. * TransitionRoutes with only condition specified. TransitionRoutes with intent specified are inherited by pages in the flow.
+    -- | A flow\'s transition routes serve two purposes: * They are responsible for matching the user\'s first utterances in the flow. * They are inherited by every page\'s transition routes and can support use cases such as the user saying \"help\" or \"can I talk to a human?\", which can be handled in a common way regardless of the current page. Transition routes defined in the page have higher priority than those defined in the flow. TransitionRoutes are evalauted in the following order: * TransitionRoutes with intent specified. * TransitionRoutes with only condition specified. TransitionRoutes with intent specified are inherited by pages in the flow.
     transitionRoutes :: (Core.Maybe [GoogleCloudDialogflowCxV3TransitionRoute])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5015,7 +5188,7 @@ data GoogleCloudDialogflowCxV3Fulfillment = GoogleCloudDialogflowCxV3Fulfillment
       ( Core.Maybe
           [GoogleCloudDialogflowCxV3FulfillmentSetParameterAction]
       ),
-    -- | The tag used by the webhook to identify which fulfillment is being called. This field is required if @webhook@ is specified.
+    -- | The value of this field will be populated in the WebhookRequest @fulfillmentInfo.tag@ field by Dialogflow when the associated webhook is called. The tag is typically used by the webhook service to identify which fulfillment is being called, but it could be used for other purposes. This field is required if @webhook@ is specified.
     tag :: (Core.Maybe Core.Text),
     -- | The webhook to call. Format: @projects\/\/locations\/\/agents\/\/webhooks\/@.
     webhook :: (Core.Maybe Core.Text)
@@ -5251,6 +5424,41 @@ instance
               ("value" Core..=) Core.<$> value
             ]
         )
+
+-- | Google Cloud Storage location for a Dialogflow operation that writes or exports objects (e.g. exported agent or transcripts) outside of Dialogflow.
+--
+-- /See:/ 'newGoogleCloudDialogflowCxV3GcsDestination' smart constructor.
+newtype GoogleCloudDialogflowCxV3GcsDestination = GoogleCloudDialogflowCxV3GcsDestination
+  { -- | Required. The Google Cloud Storage URI for the exported objects. A URI is of the form: gs:\/\/bucket\/object-name-or-prefix Whether a full object name, or just a prefix, its usage depends on the Dialogflow operation.
+    uri :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudDialogflowCxV3GcsDestination' with the minimum fields required to make a request.
+newGoogleCloudDialogflowCxV3GcsDestination ::
+  GoogleCloudDialogflowCxV3GcsDestination
+newGoogleCloudDialogflowCxV3GcsDestination =
+  GoogleCloudDialogflowCxV3GcsDestination {uri = Core.Nothing}
+
+instance
+  Core.FromJSON
+    GoogleCloudDialogflowCxV3GcsDestination
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudDialogflowCxV3GcsDestination"
+      ( \o ->
+          GoogleCloudDialogflowCxV3GcsDestination
+            Core.<$> (o Core..:? "uri")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudDialogflowCxV3GcsDestination
+  where
+  toJSON GoogleCloudDialogflowCxV3GcsDestination {..} =
+    Core.object
+      (Core.catMaybes [("uri" Core..=) Core.<$> uri])
 
 -- | Metadata in google::longrunning::Operation for Knowledge operations.
 --
@@ -5594,7 +5802,7 @@ data GoogleCloudDialogflowCxV3InputAudioConfig = GoogleCloudDialogflowCxV3InputA
       ),
     -- | Optional. If @true@, Dialogflow returns SpeechWordInfo in StreamingRecognitionResult with information about the recognized speech words, e.g. start and end time offsets. If false or unspecified, Speech doesn\'t return any word-level information.
     enableWordInfo :: (Core.Maybe Core.Bool),
-    -- | Optional. Which Speech model to select for the given request. Select the model best suited to your domain to get best results. If a model is not explicitly specified, then we auto-select a model based on the parameters in the InputAudioConfig. If enhanced speech model is enabled for the agent and an enhanced version of the specified model for the language does not exist, then the speech is recognized using the standard version of the specified model. Refer to <https://cloud.google.com/speech-to-text/docs/basics#select-model Cloud Speech API documentation> for more details.
+    -- | Optional. Which Speech model to select for the given request. Select the model best suited to your domain to get best results. If a model is not explicitly specified, then we auto-select a model based on the parameters in the InputAudioConfig. If enhanced speech model is enabled for the agent and an enhanced version of the specified model for the language does not exist, then the speech is recognized using the standard version of the specified model. Refer to <https://cloud.google.com/speech-to-text/docs/basics#select-model Cloud Speech API documentation> for more details. If you specify a model, the following models typically have the best performance: - phone/call (best for Agent Assist and telephony) - latest/short (best for Dialogflow non-telephony) - command/and/search (best for very short utterances and commands)
     model :: (Core.Maybe Core.Text),
     -- | Optional. Which variant of the Speech model to use.
     modelVariant :: (Core.Maybe GoogleCloudDialogflowCxV3InputAudioConfig_ModelVariant),
@@ -5657,7 +5865,7 @@ instance
           ]
       )
 
--- | An intent represents a user\'s intent to interact with a conversational agent. You can provide information for the Dialogflow API to use to match user input to an intent by adding training phrases (i.e., examples of user input) to your intent.
+-- | An intent represents a user\'s intent to interact with a conversational agent. You can provide information for the Dialogflow API to use to match user input to an intent by adding training phrases (i.e., examples of user input) to your intent. Next ID: 15
 --
 -- /See:/ 'newGoogleCloudDialogflowCxV3Intent' smart constructor.
 data GoogleCloudDialogflowCxV3Intent = GoogleCloudDialogflowCxV3Intent
@@ -7015,7 +7223,9 @@ instance
 --
 -- /See:/ 'newGoogleCloudDialogflowCxV3MatchIntentRequest' smart constructor.
 data GoogleCloudDialogflowCxV3MatchIntentRequest = GoogleCloudDialogflowCxV3MatchIntentRequest
-  { -- | Required. The input specification.
+  { -- | Persist session parameter changes from @query_params@.
+    persistParameterChanges :: (Core.Maybe Core.Bool),
+    -- | Required. The input specification.
     queryInput :: (Core.Maybe GoogleCloudDialogflowCxV3QueryInput),
     -- | The parameters of this query.
     queryParams :: (Core.Maybe GoogleCloudDialogflowCxV3QueryParameters)
@@ -7027,7 +7237,8 @@ newGoogleCloudDialogflowCxV3MatchIntentRequest ::
   GoogleCloudDialogflowCxV3MatchIntentRequest
 newGoogleCloudDialogflowCxV3MatchIntentRequest =
   GoogleCloudDialogflowCxV3MatchIntentRequest
-    { queryInput = Core.Nothing,
+    { persistParameterChanges = Core.Nothing,
+      queryInput = Core.Nothing,
       queryParams = Core.Nothing
     }
 
@@ -7040,7 +7251,8 @@ instance
       "GoogleCloudDialogflowCxV3MatchIntentRequest"
       ( \o ->
           GoogleCloudDialogflowCxV3MatchIntentRequest
-            Core.<$> (o Core..:? "queryInput")
+            Core.<$> (o Core..:? "persistParameterChanges")
+            Core.<*> (o Core..:? "queryInput")
             Core.<*> (o Core..:? "queryParams")
       )
 
@@ -7052,7 +7264,9 @@ instance
     GoogleCloudDialogflowCxV3MatchIntentRequest {..} =
       Core.object
         ( Core.catMaybes
-            [ ("queryInput" Core..=) Core.<$> queryInput,
+            [ ("persistParameterChanges" Core..=)
+                Core.<$> persistParameterChanges,
+              ("queryInput" Core..=) Core.<$> queryInput,
               ("queryParams" Core..=) Core.<$> queryParams
             ]
         )
@@ -7233,7 +7447,7 @@ instance
 --
 -- /See:/ 'newGoogleCloudDialogflowCxV3Page' smart constructor.
 data GoogleCloudDialogflowCxV3Page = GoogleCloudDialogflowCxV3Page
-  { -- | Required. The human-readable name of the page, unique within the agent.
+  { -- | Required. The human-readable name of the page, unique within the flow.
     displayName :: (Core.Maybe Core.Text),
     -- | The fulfillment to call when the session is entering the page.
     entryFulfillment :: (Core.Maybe GoogleCloudDialogflowCxV3Fulfillment),
@@ -7521,6 +7735,8 @@ instance
 data GoogleCloudDialogflowCxV3QueryParameters = GoogleCloudDialogflowCxV3QueryParameters
   { -- | Configures whether sentiment analysis should be performed. If not provided, sentiment analysis is not performed.
     analyzeQueryTextSentiment :: (Core.Maybe Core.Bool),
+    -- | The channel which this query is for. If specified, only the ResponseMessage associated with the channel will be returned. If no ResponseMessage is associated with the channel, it falls back to the ResponseMessage with unspecified channel. If unspecified, the ResponseMessage with unspecified channel will be returned.
+    channel :: (Core.Maybe Core.Text),
     -- | The unique identifier of the page to override the current page in the session. Format: @projects\/\/locations\/\/agents\/\/flows\/\/pages\/@. If @current_page@ is specified, the previous state of the session will be ignored by Dialogflow, including the previous page and the previous session parameters. In most cases, current_page and parameters should be configured together to direct a session to a specific state.
     currentPage :: (Core.Maybe Core.Text),
     -- | Whether to disable webhook calls for this request.
@@ -7551,6 +7767,7 @@ newGoogleCloudDialogflowCxV3QueryParameters ::
 newGoogleCloudDialogflowCxV3QueryParameters =
   GoogleCloudDialogflowCxV3QueryParameters
     { analyzeQueryTextSentiment = Core.Nothing,
+      channel = Core.Nothing,
       currentPage = Core.Nothing,
       disableWebhook = Core.Nothing,
       flowVersions = Core.Nothing,
@@ -7572,6 +7789,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3QueryParameters
             Core.<$> (o Core..:? "analyzeQueryTextSentiment")
+            Core.<*> (o Core..:? "channel")
             Core.<*> (o Core..:? "currentPage")
             Core.<*> (o Core..:? "disableWebhook")
             Core.<*> (o Core..:? "flowVersions")
@@ -7592,6 +7810,7 @@ instance
       ( Core.catMaybes
           [ ("analyzeQueryTextSentiment" Core..=)
               Core.<$> analyzeQueryTextSentiment,
+            ("channel" Core..=) Core.<$> channel,
             ("currentPage" Core..=) Core.<$> currentPage,
             ("disableWebhook" Core..=) Core.<$> disableWebhook,
             ("flowVersions" Core..=) Core.<$> flowVersions,
@@ -7724,9 +7943,9 @@ instance
 data GoogleCloudDialogflowCxV3QueryResult = GoogleCloudDialogflowCxV3QueryResult
   { -- | The current Page. Some, not all fields are filled in this message, including but not limited to @name@ and @display_name@.
     currentPage :: (Core.Maybe GoogleCloudDialogflowCxV3Page),
-    -- | The free-form diagnostic info. For example, this field could contain webhook call latency. The string keys of the Struct\'s fields map can change without notice.
+    -- | The free-form diagnostic info. For example, this field could contain webhook call latency. The fields of this data can change without notice, so you should not write code that depends on its structure. One of the fields is called \"Alternative Matched Intents\", which may aid with debugging. The following describes these intent results: - The list is empty if no intent was matched to end-user input. - Only intents that are referenced in the currently active flow are included. - The matched intent is included. - Other intents that could have matched end-user input, but did not match because they are referenced by intent routes that are out of <https://cloud.google.com/dialogflow/cx/docs/concept/handler#scope scope>, are included. - Other intents referenced by intent routes in scope that matched end-user input, but had a lower confidence score.
     diagnosticInfo :: (Core.Maybe GoogleCloudDialogflowCxV3QueryResult_DiagnosticInfo),
-    -- | If a DTMF was provided as input, this field will contain a copy of the DTMFInput.
+    -- | If a DTMF was provided as input, this field will contain a copy of the DtmfInput.
     dtmf :: (Core.Maybe GoogleCloudDialogflowCxV3DtmfInput),
     -- | The Intent that matched the conversational query. Some, not all fields are filled in this message, including but not limited to: @name@ and @display_name@. This field is deprecated, please use QueryResult.match instead.
     intent :: (Core.Maybe GoogleCloudDialogflowCxV3Intent),
@@ -7840,7 +8059,7 @@ instance
           ]
       )
 
--- | The free-form diagnostic info. For example, this field could contain webhook call latency. The string keys of the Struct\'s fields map can change without notice.
+-- | The free-form diagnostic info. For example, this field could contain webhook call latency. The fields of this data can change without notice, so you should not write code that depends on its structure. One of the fields is called \"Alternative Matched Intents\", which may aid with debugging. The following describes these intent results: - The list is empty if no intent was matched to end-user input. - Only intents that are referenced in the currently active flow are included. - The matched intent is included. - Other intents that could have matched end-user input, but did not match because they are referenced by intent routes that are out of <https://cloud.google.com/dialogflow/cx/docs/concept/handler#scope scope>, are included. - Other intents referenced by intent routes in scope that matched end-user input, but had a lower confidence score.
 --
 -- /See:/ 'newGoogleCloudDialogflowCxV3QueryResult_DiagnosticInfo' smart constructor.
 newtype GoogleCloudDialogflowCxV3QueryResult_DiagnosticInfo = GoogleCloudDialogflowCxV3QueryResult_DiagnosticInfo
@@ -8046,7 +8265,9 @@ instance
 --
 -- /See:/ 'newGoogleCloudDialogflowCxV3ResponseMessage' smart constructor.
 data GoogleCloudDialogflowCxV3ResponseMessage = GoogleCloudDialogflowCxV3ResponseMessage
-  { -- | Indicates that the conversation succeeded.
+  { -- | The channel which the response is associated with. Clients can specify the channel via QueryParameters.channel, and only associated channel response will be returned.
+    channel :: (Core.Maybe Core.Text),
+    -- | Indicates that the conversation succeeded.
     conversationSuccess ::
       ( Core.Maybe
           GoogleCloudDialogflowCxV3ResponseMessageConversationSuccess
@@ -8084,7 +8305,8 @@ newGoogleCloudDialogflowCxV3ResponseMessage ::
   GoogleCloudDialogflowCxV3ResponseMessage
 newGoogleCloudDialogflowCxV3ResponseMessage =
   GoogleCloudDialogflowCxV3ResponseMessage
-    { conversationSuccess = Core.Nothing,
+    { channel = Core.Nothing,
+      conversationSuccess = Core.Nothing,
       endInteraction = Core.Nothing,
       liveAgentHandoff = Core.Nothing,
       mixedAudio = Core.Nothing,
@@ -8104,7 +8326,8 @@ instance
       "GoogleCloudDialogflowCxV3ResponseMessage"
       ( \o ->
           GoogleCloudDialogflowCxV3ResponseMessage
-            Core.<$> (o Core..:? "conversationSuccess")
+            Core.<$> (o Core..:? "channel")
+            Core.<*> (o Core..:? "conversationSuccess")
             Core.<*> (o Core..:? "endInteraction")
             Core.<*> (o Core..:? "liveAgentHandoff")
             Core.<*> (o Core..:? "mixedAudio")
@@ -8122,7 +8345,8 @@ instance
   toJSON GoogleCloudDialogflowCxV3ResponseMessage {..} =
     Core.object
       ( Core.catMaybes
-          [ ("conversationSuccess" Core..=)
+          [ ("channel" Core..=) Core.<$> channel,
+            ("conversationSuccess" Core..=)
               Core.<$> conversationSuccess,
             ("endInteraction" Core..=) Core.<$> endInteraction,
             ("liveAgentHandoff" Core..=)
@@ -9070,7 +9294,12 @@ instance
 --
 -- /See:/ 'newGoogleCloudDialogflowCxV3SecuritySettings' smart constructor.
 data GoogleCloudDialogflowCxV3SecuritySettings = GoogleCloudDialogflowCxV3SecuritySettings
-  { -- | <https://cloud.google.com/dlp/docs DLP> deidentify template name. Use this template to define de-identification configuration for the content. The @DLP De-identify Templates Reader@ role is needed on the Dialogflow service identity service account (has the form @service-PROJECT_NUMBER\@gcp-sa-dialogflow.iam.gserviceaccount.com@) for your agent\'s project. If empty, Dialogflow replaces sensitive info with @[redacted]@ text. The template name will have one of the following formats: @projects\/\/locations\/\/deidentifyTemplates\/@ OR @organizations\/\/locations\/\/deidentifyTemplates\/@ Note: @deidentify_template@ must be located in the same region as the @SecuritySettings@.
+  { -- | Controls audio export settings for post-conversation analytics when ingesting audio to conversations via Participants.AnalyzeContent or Participants.StreamingAnalyzeContent. If retention/strategy is set to REMOVE/AFTER/CONVERSATION or audio/export/settings.gcs/bucket is empty, audio export is disabled. If audio export is enabled, audio is recorded and saved to audio/export/settings.gcs/bucket, subject to retention policy of audio/export/settings.gcs/bucket. This setting won\'t effect audio input for implicit sessions via Sessions.DetectIntent or Sessions.StreamingDetectIntent.
+    audioExportSettings ::
+      ( Core.Maybe
+          GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings
+      ),
+    -- | <https://cloud.google.com/dlp/docs DLP> deidentify template name. Use this template to define de-identification configuration for the content. The @DLP De-identify Templates Reader@ role is needed on the Dialogflow service identity service account (has the form @service-PROJECT_NUMBER\@gcp-sa-dialogflow.iam.gserviceaccount.com@) for your agent\'s project. If empty, Dialogflow replaces sensitive info with @[redacted]@ text. The template name will have one of the following formats: @projects\/\/locations\/\/deidentifyTemplates\/@ OR @organizations\/\/locations\/\/deidentifyTemplates\/@ Note: @deidentify_template@ must be located in the same region as the @SecuritySettings@.
     deidentifyTemplate :: (Core.Maybe Core.Text),
     -- | Required. The human-readable name of the security settings, unique within the location.
     displayName :: (Core.Maybe Core.Text),
@@ -9098,7 +9327,7 @@ data GoogleCloudDialogflowCxV3SecuritySettings = GoogleCloudDialogflowCxV3Securi
       ( Core.Maybe
           GoogleCloudDialogflowCxV3SecuritySettings_RedactionStrategy
       ),
-    -- | Retains data in interaction logging for the specified number of days. This does not apply to Cloud logging, which is owned by the user - not Dialogflow. User must set a value lower than Dialogflow\'s default 365d TTL. Setting a value higher than that has no effect. A missing value or setting to 0 also means we use Dialogflow\'s default TTL. Note: Interaction logging is a limited access feature. Talk to your Google representative to check availability for you.
+    -- | Retains the data for the specified number of days. User must set a value lower than Dialogflow\'s default 365d TTL (30 days for Agent Assist traffic), higher value will be ignored and use default. Setting a value higher than that has no effect. A missing value or setting to 0 also means we use default TTL.
     retentionWindowDays :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -9108,7 +9337,8 @@ newGoogleCloudDialogflowCxV3SecuritySettings ::
   GoogleCloudDialogflowCxV3SecuritySettings
 newGoogleCloudDialogflowCxV3SecuritySettings =
   GoogleCloudDialogflowCxV3SecuritySettings
-    { deidentifyTemplate = Core.Nothing,
+    { audioExportSettings = Core.Nothing,
+      deidentifyTemplate = Core.Nothing,
       displayName = Core.Nothing,
       insightsExportSettings = Core.Nothing,
       inspectTemplate = Core.Nothing,
@@ -9128,7 +9358,8 @@ instance
       "GoogleCloudDialogflowCxV3SecuritySettings"
       ( \o ->
           GoogleCloudDialogflowCxV3SecuritySettings
-            Core.<$> (o Core..:? "deidentifyTemplate")
+            Core.<$> (o Core..:? "audioExportSettings")
+            Core.<*> (o Core..:? "deidentifyTemplate")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "insightsExportSettings")
             Core.<*> (o Core..:? "inspectTemplate")
@@ -9146,7 +9377,9 @@ instance
   toJSON GoogleCloudDialogflowCxV3SecuritySettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("deidentifyTemplate" Core..=)
+          [ ("audioExportSettings" Core..=)
+              Core.<$> audioExportSettings,
+            ("deidentifyTemplate" Core..=)
               Core.<$> deidentifyTemplate,
             ("displayName" Core..=) Core.<$> displayName,
             ("insightsExportSettings" Core..=)
@@ -9161,6 +9394,67 @@ instance
               Core.<$> retentionWindowDays
           ]
       )
+
+-- | Settings for exporting audio.
+--
+-- /See:/ 'newGoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings' smart constructor.
+data GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings = GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings
+  { -- | Filename pattern for exported audio.
+    audioExportPattern :: (Core.Maybe Core.Text),
+    -- | File format for exported audio file. Currently only in telephony recordings.
+    audioFormat ::
+      ( Core.Maybe
+          GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat
+      ),
+    -- | Enable audio redaction if it is true.
+    enableAudioRedaction :: (Core.Maybe Core.Bool),
+    -- | Cloud Storage bucket to export audio record to. Setting this field would grant the Storage Object Creator role to the Dialogflow Service Agent. API caller that tries to modify this field should have the permission of storage.buckets.setIamPolicy.
+    gcsBucket :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings' with the minimum fields required to make a request.
+newGoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings ::
+  GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings
+newGoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings =
+  GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings
+    { audioExportPattern = Core.Nothing,
+      audioFormat = Core.Nothing,
+      enableAudioRedaction = Core.Nothing,
+      gcsBucket = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings"
+      ( \o ->
+          GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings
+            Core.<$> (o Core..:? "audioExportPattern")
+              Core.<*> (o Core..:? "audioFormat")
+              Core.<*> (o Core..:? "enableAudioRedaction")
+              Core.<*> (o Core..:? "gcsBucket")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings
+  where
+  toJSON
+    GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("audioExportPattern" Core..=)
+                Core.<$> audioExportPattern,
+              ("audioFormat" Core..=) Core.<$> audioFormat,
+              ("enableAudioRedaction" Core..=)
+                Core.<$> enableAudioRedaction,
+              ("gcsBucket" Core..=) Core.<$> gcsBucket
+            ]
+        )
 
 -- | Settings for exporting conversations to <https://cloud.google.com/contact-center/insights/docs Insights>.
 --
@@ -9913,6 +10207,94 @@ instance
     Core.object
       (Core.catMaybes [("text" Core..=) Core.<$> text])
 
+-- | Settings related to speech generating.
+--
+-- /See:/ 'newGoogleCloudDialogflowCxV3TextToSpeechSettings' smart constructor.
+newtype GoogleCloudDialogflowCxV3TextToSpeechSettings = GoogleCloudDialogflowCxV3TextToSpeechSettings
+  { -- | Configuration of how speech should be synthesized, mapping from language (https:\/\/dialogflow.com\/docs\/reference\/language) to SynthesizeSpeechConfig.
+    synthesizeSpeechConfigs ::
+      ( Core.Maybe
+          GoogleCloudDialogflowCxV3TextToSpeechSettings_SynthesizeSpeechConfigs
+      )
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudDialogflowCxV3TextToSpeechSettings' with the minimum fields required to make a request.
+newGoogleCloudDialogflowCxV3TextToSpeechSettings ::
+  GoogleCloudDialogflowCxV3TextToSpeechSettings
+newGoogleCloudDialogflowCxV3TextToSpeechSettings =
+  GoogleCloudDialogflowCxV3TextToSpeechSettings
+    { synthesizeSpeechConfigs = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudDialogflowCxV3TextToSpeechSettings
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudDialogflowCxV3TextToSpeechSettings"
+      ( \o ->
+          GoogleCloudDialogflowCxV3TextToSpeechSettings
+            Core.<$> (o Core..:? "synthesizeSpeechConfigs")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudDialogflowCxV3TextToSpeechSettings
+  where
+  toJSON
+    GoogleCloudDialogflowCxV3TextToSpeechSettings {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("synthesizeSpeechConfigs" Core..=)
+                Core.<$> synthesizeSpeechConfigs
+            ]
+        )
+
+-- | Configuration of how speech should be synthesized, mapping from language (https:\/\/dialogflow.com\/docs\/reference\/language) to SynthesizeSpeechConfig.
+--
+-- /See:/ 'newGoogleCloudDialogflowCxV3TextToSpeechSettings_SynthesizeSpeechConfigs' smart constructor.
+newtype GoogleCloudDialogflowCxV3TextToSpeechSettings_SynthesizeSpeechConfigs = GoogleCloudDialogflowCxV3TextToSpeechSettings_SynthesizeSpeechConfigs
+  { -- |
+    additional ::
+      ( Core.HashMap
+          Core.Text
+          GoogleCloudDialogflowCxV3SynthesizeSpeechConfig
+      )
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudDialogflowCxV3TextToSpeechSettings_SynthesizeSpeechConfigs' with the minimum fields required to make a request.
+newGoogleCloudDialogflowCxV3TextToSpeechSettings_SynthesizeSpeechConfigs ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text GoogleCloudDialogflowCxV3SynthesizeSpeechConfig ->
+  GoogleCloudDialogflowCxV3TextToSpeechSettings_SynthesizeSpeechConfigs
+newGoogleCloudDialogflowCxV3TextToSpeechSettings_SynthesizeSpeechConfigs additional =
+  GoogleCloudDialogflowCxV3TextToSpeechSettings_SynthesizeSpeechConfigs
+    { additional = additional
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudDialogflowCxV3TextToSpeechSettings_SynthesizeSpeechConfigs
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudDialogflowCxV3TextToSpeechSettings_SynthesizeSpeechConfigs"
+      ( \o ->
+          GoogleCloudDialogflowCxV3TextToSpeechSettings_SynthesizeSpeechConfigs
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudDialogflowCxV3TextToSpeechSettings_SynthesizeSpeechConfigs
+  where
+  toJSON
+    GoogleCloudDialogflowCxV3TextToSpeechSettings_SynthesizeSpeechConfigs {..} =
+      Core.toJSON additional
+
 -- | The request message for Flows.TrainFlow.
 --
 -- /See:/ 'newGoogleCloudDialogflowCxV3TrainFlowRequest' smart constructor.
@@ -10179,7 +10561,7 @@ instance
 --
 -- /See:/ 'newGoogleCloudDialogflowCxV3TransitionRouteGroup' smart constructor.
 data GoogleCloudDialogflowCxV3TransitionRouteGroup = GoogleCloudDialogflowCxV3TransitionRouteGroup
-  { -- | Required. The human-readable name of the transition route group, unique within the Agent. The display name can be no longer than 30 characters.
+  { -- | Required. The human-readable name of the transition route group, unique within the flow. The display name can be no longer than 30 characters.
     displayName :: (Core.Maybe Core.Text),
     -- | The unique identifier of the transition route group. TransitionRouteGroups.CreateTransitionRouteGroup populates the name automatically. Format: @projects\/\/locations\/\/agents\/\/flows\/\/transitionRouteGroups\/@.
     name :: (Core.Maybe Core.Text),
@@ -10376,6 +10758,85 @@ instance
                 Core.<$> transitionRoute
             ]
         )
+
+-- | Collection of all signals that were extracted for a single turn of the conversation.
+--
+-- /See:/ 'newGoogleCloudDialogflowCxV3TurnSignals' smart constructor.
+data GoogleCloudDialogflowCxV3TurnSignals = GoogleCloudDialogflowCxV3TurnSignals
+  { -- | Whether agent responded with LiveAgentHandoff fulfillment.
+    agentEscalated :: (Core.Maybe Core.Bool),
+    -- | Whether user was using DTMF input.
+    dtmfUsed :: (Core.Maybe Core.Bool),
+    -- | Failure reasons of the turn.
+    failureReasons ::
+      ( Core.Maybe
+          [GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem]
+      ),
+    -- | Whether NLU predicted NO_MATCH.
+    noMatch :: (Core.Maybe Core.Bool),
+    -- | Whether user provided no input.
+    noUserInput :: (Core.Maybe Core.Bool),
+    -- | Whether turn resulted in End Session page.
+    reachedEndPage :: (Core.Maybe Core.Bool),
+    -- | Whether user was specifically asking for a live agent.
+    userEscalated :: (Core.Maybe Core.Bool),
+    -- | Human-readable statuses of the webhooks triggered during this turn.
+    webhookStatuses :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudDialogflowCxV3TurnSignals' with the minimum fields required to make a request.
+newGoogleCloudDialogflowCxV3TurnSignals ::
+  GoogleCloudDialogflowCxV3TurnSignals
+newGoogleCloudDialogflowCxV3TurnSignals =
+  GoogleCloudDialogflowCxV3TurnSignals
+    { agentEscalated = Core.Nothing,
+      dtmfUsed = Core.Nothing,
+      failureReasons = Core.Nothing,
+      noMatch = Core.Nothing,
+      noUserInput = Core.Nothing,
+      reachedEndPage = Core.Nothing,
+      userEscalated = Core.Nothing,
+      webhookStatuses = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudDialogflowCxV3TurnSignals
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudDialogflowCxV3TurnSignals"
+      ( \o ->
+          GoogleCloudDialogflowCxV3TurnSignals
+            Core.<$> (o Core..:? "agentEscalated")
+            Core.<*> (o Core..:? "dtmfUsed")
+            Core.<*> (o Core..:? "failureReasons")
+            Core.<*> (o Core..:? "noMatch")
+            Core.<*> (o Core..:? "noUserInput")
+            Core.<*> (o Core..:? "reachedEndPage")
+            Core.<*> (o Core..:? "userEscalated")
+            Core.<*> (o Core..:? "webhookStatuses")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudDialogflowCxV3TurnSignals
+  where
+  toJSON GoogleCloudDialogflowCxV3TurnSignals {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("agentEscalated" Core..=) Core.<$> agentEscalated,
+            ("dtmfUsed" Core..=) Core.<$> dtmfUsed,
+            ("failureReasons" Core..=) Core.<$> failureReasons,
+            ("noMatch" Core..=) Core.<$> noMatch,
+            ("noUserInput" Core..=) Core.<$> noUserInput,
+            ("reachedEndPage" Core..=) Core.<$> reachedEndPage,
+            ("userEscalated" Core..=) Core.<$> userEscalated,
+            ("webhookStatuses" Core..=)
+              Core.<$> webhookStatuses
+          ]
+      )
 
 -- | Metadata for UpdateDocument operation.
 --
@@ -10974,12 +11435,14 @@ instance
     GoogleCloudDialogflowCxV3WebhookGenericWebService_RequestHeaders {..} =
       Core.toJSON additional
 
--- | The request message for a webhook call. The request is sent as a JSON object and the field names will be presented in camel cases.
+-- | The request message for a webhook call. The request is sent as a JSON object and the field names will be presented in camel cases. You may see undocumented fields in an actual request. These fields are used internally by Dialogflow and should be ignored.
 --
 -- /See:/ 'newGoogleCloudDialogflowCxV3WebhookRequest' smart constructor.
 data GoogleCloudDialogflowCxV3WebhookRequest = GoogleCloudDialogflowCxV3WebhookRequest
   { -- | Always present. The unique identifier of the DetectIntentResponse that will be returned to the API caller.
     detectIntentResponseId :: (Core.Maybe Core.Text),
+    -- | If DTMF was provided as input, this field will contain the DTMF digits.
+    dtmfDigits :: (Core.Maybe Core.Text),
     -- | Always present. Information about the fulfillment that triggered this webhook call.
     fulfillmentInfo :: (Core.Maybe GoogleCloudDialogflowCxV3WebhookRequestFulfillmentInfo),
     -- | Information about the last matched intent.
@@ -11016,6 +11479,7 @@ newGoogleCloudDialogflowCxV3WebhookRequest ::
 newGoogleCloudDialogflowCxV3WebhookRequest =
   GoogleCloudDialogflowCxV3WebhookRequest
     { detectIntentResponseId = Core.Nothing,
+      dtmfDigits = Core.Nothing,
       fulfillmentInfo = Core.Nothing,
       intentInfo = Core.Nothing,
       languageCode = Core.Nothing,
@@ -11040,6 +11504,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3WebhookRequest
             Core.<$> (o Core..:? "detectIntentResponseId")
+            Core.<*> (o Core..:? "dtmfDigits")
             Core.<*> (o Core..:? "fulfillmentInfo")
             Core.<*> (o Core..:? "intentInfo")
             Core.<*> (o Core..:? "languageCode")
@@ -11063,6 +11528,7 @@ instance
       ( Core.catMaybes
           [ ("detectIntentResponseId" Core..=)
               Core.<$> detectIntentResponseId,
+            ("dtmfDigits" Core..=) Core.<$> dtmfDigits,
             ("fulfillmentInfo" Core..=) Core.<$> fulfillmentInfo,
             ("intentInfo" Core..=) Core.<$> intentInfo,
             ("languageCode" Core..=) Core.<$> languageCode,
@@ -11120,7 +11586,7 @@ instance
 --
 -- /See:/ 'newGoogleCloudDialogflowCxV3WebhookRequestFulfillmentInfo' smart constructor.
 newtype GoogleCloudDialogflowCxV3WebhookRequestFulfillmentInfo = GoogleCloudDialogflowCxV3WebhookRequestFulfillmentInfo
-  { -- | Always present. The tag used to identify which fulfillment is being called.
+  { -- | Always present. The value of the Fulfillment.tag field will be populated in this field by Dialogflow when the associated webhook is called. The tag is typically used by the webhook service to identify which fulfillment is being called, but it could be used for other purposes.
     tag :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -11553,7 +12019,7 @@ instance
 --
 -- /See:/ 'newGoogleCloudDialogflowCxV3beta1AudioInput' smart constructor.
 data GoogleCloudDialogflowCxV3beta1AudioInput = GoogleCloudDialogflowCxV3beta1AudioInput
-  { -- | The natural language speech audio to be processed. A single request can contain up to 1 minute of speech audio data. The transcribed text cannot contain more than 256 bytes. For non-streaming audio detect intent, both @config@ and @audio@ must be provided. For streaming audio detect intent, @config@ must be provided in the first request and @audio@ must be provided in all following requests.
+  { -- | The natural language speech audio to be processed. A single request can contain up to 2 minutes of speech audio data. The transcribed text cannot contain more than 256 bytes. For non-streaming audio detect intent, both @config@ and @audio@ must be provided. For streaming audio detect intent, @config@ must be provided in the first request and @audio@ must be provided in all following requests.
     audio :: (Core.Maybe Core.Base64),
     -- | Required. Instructs the speech recognizer how to process the speech audio.
     config :: (Core.Maybe GoogleCloudDialogflowCxV3beta1InputAudioConfig)
@@ -11728,6 +12194,44 @@ instance
               ("testCaseResults" Core..=)
                 Core.<$> testCaseResults
             ]
+        )
+
+-- | This message is used to hold all the Conversation Signals data, which will be converted to JSON and exported to BigQuery.
+--
+-- /See:/ 'newGoogleCloudDialogflowCxV3beta1ConversationSignals' smart constructor.
+newtype GoogleCloudDialogflowCxV3beta1ConversationSignals = GoogleCloudDialogflowCxV3beta1ConversationSignals
+  { -- | Required. Turn signals for the current turn.
+    turnSignals :: (Core.Maybe GoogleCloudDialogflowCxV3beta1TurnSignals)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudDialogflowCxV3beta1ConversationSignals' with the minimum fields required to make a request.
+newGoogleCloudDialogflowCxV3beta1ConversationSignals ::
+  GoogleCloudDialogflowCxV3beta1ConversationSignals
+newGoogleCloudDialogflowCxV3beta1ConversationSignals =
+  GoogleCloudDialogflowCxV3beta1ConversationSignals {turnSignals = Core.Nothing}
+
+instance
+  Core.FromJSON
+    GoogleCloudDialogflowCxV3beta1ConversationSignals
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudDialogflowCxV3beta1ConversationSignals"
+      ( \o ->
+          GoogleCloudDialogflowCxV3beta1ConversationSignals
+            Core.<$> (o Core..:? "turnSignals")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudDialogflowCxV3beta1ConversationSignals
+  where
+  toJSON
+    GoogleCloudDialogflowCxV3beta1ConversationSignals {..} =
+      Core.object
+        ( Core.catMaybes
+            [("turnSignals" Core..=) Core.<$> turnSignals]
         )
 
 -- | One interaction between a human and virtual agent. The human provides some input and the virtual agent provides a response.
@@ -12317,11 +12821,13 @@ data GoogleCloudDialogflowCxV3beta1Environment = GoogleCloudDialogflowCxV3beta1E
       ),
     -- | Output only. Update time of this environment.
     updateTime :: (Core.Maybe Core.DateTime),
-    -- | Required. A list of configurations for flow versions. You should include version configs for all flows that are reachable from @Start Flow@ in the agent. Otherwise, an error will be returned.
+    -- | A list of configurations for flow versions. You should include version configs for all flows that are reachable from @Start Flow@ in the agent. Otherwise, an error will be returned.
     versionConfigs ::
       ( Core.Maybe
           [GoogleCloudDialogflowCxV3beta1EnvironmentVersionConfig]
-      )
+      ),
+    -- | The webhook configuration for this environment.
+    webhookConfig :: (Core.Maybe GoogleCloudDialogflowCxV3beta1EnvironmentWebhookConfig)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -12335,7 +12841,8 @@ newGoogleCloudDialogflowCxV3beta1Environment =
       name = Core.Nothing,
       testCasesConfig = Core.Nothing,
       updateTime = Core.Nothing,
-      versionConfigs = Core.Nothing
+      versionConfigs = Core.Nothing,
+      webhookConfig = Core.Nothing
     }
 
 instance
@@ -12353,6 +12860,7 @@ instance
             Core.<*> (o Core..:? "testCasesConfig")
             Core.<*> (o Core..:? "updateTime")
             Core.<*> (o Core..:? "versionConfigs")
+            Core.<*> (o Core..:? "webhookConfig")
       )
 
 instance
@@ -12367,7 +12875,8 @@ instance
             ("name" Core..=) Core.<$> name,
             ("testCasesConfig" Core..=) Core.<$> testCasesConfig,
             ("updateTime" Core..=) Core.<$> updateTime,
-            ("versionConfigs" Core..=) Core.<$> versionConfigs
+            ("versionConfigs" Core..=) Core.<$> versionConfigs,
+            ("webhookConfig" Core..=) Core.<$> webhookConfig
           ]
       )
 
@@ -12462,6 +12971,48 @@ instance
       Core.object
         ( Core.catMaybes
             [("version" Core..=) Core.<$> version]
+        )
+
+-- | Configuration for webhooks.
+--
+-- /See:/ 'newGoogleCloudDialogflowCxV3beta1EnvironmentWebhookConfig' smart constructor.
+newtype GoogleCloudDialogflowCxV3beta1EnvironmentWebhookConfig = GoogleCloudDialogflowCxV3beta1EnvironmentWebhookConfig
+  { -- | The list of webhooks to override for the agent environment. The webhook must exist in the agent. You can override fields in @generic_web_service@ and @service_directory@.
+    webhookOverrides :: (Core.Maybe [GoogleCloudDialogflowCxV3beta1Webhook])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudDialogflowCxV3beta1EnvironmentWebhookConfig' with the minimum fields required to make a request.
+newGoogleCloudDialogflowCxV3beta1EnvironmentWebhookConfig ::
+  GoogleCloudDialogflowCxV3beta1EnvironmentWebhookConfig
+newGoogleCloudDialogflowCxV3beta1EnvironmentWebhookConfig =
+  GoogleCloudDialogflowCxV3beta1EnvironmentWebhookConfig
+    { webhookOverrides = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudDialogflowCxV3beta1EnvironmentWebhookConfig
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudDialogflowCxV3beta1EnvironmentWebhookConfig"
+      ( \o ->
+          GoogleCloudDialogflowCxV3beta1EnvironmentWebhookConfig
+            Core.<$> (o Core..:? "webhookOverrides")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudDialogflowCxV3beta1EnvironmentWebhookConfig
+  where
+  toJSON
+    GoogleCloudDialogflowCxV3beta1EnvironmentWebhookConfig {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("webhookOverrides" Core..=)
+                Core.<$> webhookOverrides
+            ]
         )
 
 -- | An event handler specifies an event that can be handled during a session. When the specified event happens, the following actions are taken in order: * If there is a @trigger_fulfillment@ associated with the event, it will be called. * If there is a @target_page@ associated with the event, the session will transition into the specified page. * If there is a @target_flow@ associated with the event, the session will transition into the specified flow.
@@ -12906,7 +13457,7 @@ data GoogleCloudDialogflowCxV3beta1Fulfillment = GoogleCloudDialogflowCxV3beta1F
       ( Core.Maybe
           [GoogleCloudDialogflowCxV3beta1FulfillmentSetParameterAction]
       ),
-    -- | The tag used by the webhook to identify which fulfillment is being called. This field is required if @webhook@ is specified.
+    -- | The value of this field will be populated in the WebhookRequest @fulfillmentInfo.tag@ field by Dialogflow when the associated webhook is called. The tag is typically used by the webhook service to identify which fulfillment is being called, but it could be used for other purposes. This field is required if @webhook@ is specified.
     tag :: (Core.Maybe Core.Text),
     -- | The webhook to call. Format: @projects\/\/locations\/\/agents\/\/webhooks\/@.
     webhook :: (Core.Maybe Core.Text)
@@ -13393,7 +13944,7 @@ data GoogleCloudDialogflowCxV3beta1InputAudioConfig = GoogleCloudDialogflowCxV3b
       ),
     -- | Optional. If @true@, Dialogflow returns SpeechWordInfo in StreamingRecognitionResult with information about the recognized speech words, e.g. start and end time offsets. If false or unspecified, Speech doesn\'t return any word-level information.
     enableWordInfo :: (Core.Maybe Core.Bool),
-    -- | Optional. Which Speech model to select for the given request. Select the model best suited to your domain to get best results. If a model is not explicitly specified, then we auto-select a model based on the parameters in the InputAudioConfig. If enhanced speech model is enabled for the agent and an enhanced version of the specified model for the language does not exist, then the speech is recognized using the standard version of the specified model. Refer to <https://cloud.google.com/speech-to-text/docs/basics#select-model Cloud Speech API documentation> for more details.
+    -- | Optional. Which Speech model to select for the given request. Select the model best suited to your domain to get best results. If a model is not explicitly specified, then we auto-select a model based on the parameters in the InputAudioConfig. If enhanced speech model is enabled for the agent and an enhanced version of the specified model for the language does not exist, then the speech is recognized using the standard version of the specified model. Refer to <https://cloud.google.com/speech-to-text/docs/basics#select-model Cloud Speech API documentation> for more details. If you specify a model, the following models typically have the best performance: - phone/call (best for Agent Assist and telephony) - latest/short (best for Dialogflow non-telephony) - command/and/search (best for very short utterances and commands)
     model :: (Core.Maybe Core.Text),
     -- | Optional. Which variant of the Speech model to use.
     modelVariant ::
@@ -13663,7 +14214,7 @@ instance
             ]
         )
 
--- | Represents an example that the agent is trained on to identify the intent.
+-- | Represents an example that the agent is trained on to identify the intent. Next ID: 15
 --
 -- /See:/ 'newGoogleCloudDialogflowCxV3beta1IntentTrainingPhrase' smart constructor.
 data GoogleCloudDialogflowCxV3beta1IntentTrainingPhrase = GoogleCloudDialogflowCxV3beta1IntentTrainingPhrase
@@ -13766,7 +14317,7 @@ instance
 --
 -- /See:/ 'newGoogleCloudDialogflowCxV3beta1Page' smart constructor.
 data GoogleCloudDialogflowCxV3beta1Page = GoogleCloudDialogflowCxV3beta1Page
-  { -- | Required. The human-readable name of the page, unique within the agent.
+  { -- | Required. The human-readable name of the page, unique within the flow.
     displayName :: (Core.Maybe Core.Text),
     -- | The fulfillment to call when the session is entering the page.
     entryFulfillment :: (Core.Maybe GoogleCloudDialogflowCxV3beta1Fulfillment),
@@ -14104,7 +14655,9 @@ instance
 --
 -- /See:/ 'newGoogleCloudDialogflowCxV3beta1ResponseMessage' smart constructor.
 data GoogleCloudDialogflowCxV3beta1ResponseMessage = GoogleCloudDialogflowCxV3beta1ResponseMessage
-  { -- | Indicates that the conversation succeeded.
+  { -- | The channel which the response is associated with. Clients can specify the channel via QueryParameters.channel, and only associated channel response will be returned.
+    channel :: (Core.Maybe Core.Text),
+    -- | Indicates that the conversation succeeded.
     conversationSuccess ::
       ( Core.Maybe
           GoogleCloudDialogflowCxV3beta1ResponseMessageConversationSuccess
@@ -14148,7 +14701,8 @@ newGoogleCloudDialogflowCxV3beta1ResponseMessage ::
   GoogleCloudDialogflowCxV3beta1ResponseMessage
 newGoogleCloudDialogflowCxV3beta1ResponseMessage =
   GoogleCloudDialogflowCxV3beta1ResponseMessage
-    { conversationSuccess = Core.Nothing,
+    { channel = Core.Nothing,
+      conversationSuccess = Core.Nothing,
       endInteraction = Core.Nothing,
       liveAgentHandoff = Core.Nothing,
       mixedAudio = Core.Nothing,
@@ -14168,7 +14722,8 @@ instance
       "GoogleCloudDialogflowCxV3beta1ResponseMessage"
       ( \o ->
           GoogleCloudDialogflowCxV3beta1ResponseMessage
-            Core.<$> (o Core..:? "conversationSuccess")
+            Core.<$> (o Core..:? "channel")
+              Core.<*> (o Core..:? "conversationSuccess")
               Core.<*> (o Core..:? "endInteraction")
               Core.<*> (o Core..:? "liveAgentHandoff")
               Core.<*> (o Core..:? "mixedAudio")
@@ -14187,7 +14742,8 @@ instance
     GoogleCloudDialogflowCxV3beta1ResponseMessage {..} =
       Core.object
         ( Core.catMaybes
-            [ ("conversationSuccess" Core..=)
+            [ ("channel" Core..=) Core.<$> channel,
+              ("conversationSuccess" Core..=)
                 Core.<$> conversationSuccess,
               ("endInteraction" Core..=) Core.<$> endInteraction,
               ("liveAgentHandoff" Core..=)
@@ -15380,6 +15936,85 @@ instance
             ]
         )
 
+-- | Collection of all signals that were extracted for a single turn of the conversation.
+--
+-- /See:/ 'newGoogleCloudDialogflowCxV3beta1TurnSignals' smart constructor.
+data GoogleCloudDialogflowCxV3beta1TurnSignals = GoogleCloudDialogflowCxV3beta1TurnSignals
+  { -- | Whether agent responded with LiveAgentHandoff fulfillment.
+    agentEscalated :: (Core.Maybe Core.Bool),
+    -- | Whether user was using DTMF input.
+    dtmfUsed :: (Core.Maybe Core.Bool),
+    -- | Failure reasons of the turn.
+    failureReasons ::
+      ( Core.Maybe
+          [GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem]
+      ),
+    -- | Whether NLU predicted NO_MATCH.
+    noMatch :: (Core.Maybe Core.Bool),
+    -- | Whether user provided no input.
+    noUserInput :: (Core.Maybe Core.Bool),
+    -- | Whether turn resulted in End Session page.
+    reachedEndPage :: (Core.Maybe Core.Bool),
+    -- | Whether user was specifically asking for a live agent.
+    userEscalated :: (Core.Maybe Core.Bool),
+    -- | Human-readable statuses of the webhooks triggered during this turn.
+    webhookStatuses :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudDialogflowCxV3beta1TurnSignals' with the minimum fields required to make a request.
+newGoogleCloudDialogflowCxV3beta1TurnSignals ::
+  GoogleCloudDialogflowCxV3beta1TurnSignals
+newGoogleCloudDialogflowCxV3beta1TurnSignals =
+  GoogleCloudDialogflowCxV3beta1TurnSignals
+    { agentEscalated = Core.Nothing,
+      dtmfUsed = Core.Nothing,
+      failureReasons = Core.Nothing,
+      noMatch = Core.Nothing,
+      noUserInput = Core.Nothing,
+      reachedEndPage = Core.Nothing,
+      userEscalated = Core.Nothing,
+      webhookStatuses = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudDialogflowCxV3beta1TurnSignals
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudDialogflowCxV3beta1TurnSignals"
+      ( \o ->
+          GoogleCloudDialogflowCxV3beta1TurnSignals
+            Core.<$> (o Core..:? "agentEscalated")
+            Core.<*> (o Core..:? "dtmfUsed")
+            Core.<*> (o Core..:? "failureReasons")
+            Core.<*> (o Core..:? "noMatch")
+            Core.<*> (o Core..:? "noUserInput")
+            Core.<*> (o Core..:? "reachedEndPage")
+            Core.<*> (o Core..:? "userEscalated")
+            Core.<*> (o Core..:? "webhookStatuses")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudDialogflowCxV3beta1TurnSignals
+  where
+  toJSON GoogleCloudDialogflowCxV3beta1TurnSignals {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("agentEscalated" Core..=) Core.<$> agentEscalated,
+            ("dtmfUsed" Core..=) Core.<$> dtmfUsed,
+            ("failureReasons" Core..=) Core.<$> failureReasons,
+            ("noMatch" Core..=) Core.<$> noMatch,
+            ("noUserInput" Core..=) Core.<$> noUserInput,
+            ("reachedEndPage" Core..=) Core.<$> reachedEndPage,
+            ("userEscalated" Core..=) Core.<$> userEscalated,
+            ("webhookStatuses" Core..=)
+              Core.<$> webhookStatuses
+          ]
+      )
+
 -- | Metadata for UpdateDocument operation.
 --
 -- /See:/ 'newGoogleCloudDialogflowCxV3beta1UpdateDocumentOperationMetadata' smart constructor.
@@ -15425,12 +16060,187 @@ instance
             ]
         )
 
--- | The request message for a webhook call. The request is sent as a JSON object and the field names will be presented in camel cases.
+-- | Webhooks host the developer\'s business logic. During a session, webhooks allow the developer to use the data extracted by Dialogflow\'s natural language processing to generate dynamic responses, validate collected data, or trigger actions on the backend.
+--
+-- /See:/ 'newGoogleCloudDialogflowCxV3beta1Webhook' smart constructor.
+data GoogleCloudDialogflowCxV3beta1Webhook = GoogleCloudDialogflowCxV3beta1Webhook
+  { -- | Indicates whether the webhook is disabled.
+    disabled :: (Core.Maybe Core.Bool),
+    -- | Required. The human-readable name of the webhook, unique within the agent.
+    displayName :: (Core.Maybe Core.Text),
+    -- | Configuration for a generic web service.
+    genericWebService :: (Core.Maybe GoogleCloudDialogflowCxV3beta1WebhookGenericWebService),
+    -- | The unique identifier of the webhook. Required for the Webhooks.UpdateWebhook method. Webhooks.CreateWebhook populates the name automatically. Format: @projects\/\/locations\/\/agents\/\/webhooks\/@.
+    name :: (Core.Maybe Core.Text),
+    -- | Configuration for a <https://cloud.google.com/service-directory Service Directory> service.
+    serviceDirectory ::
+      ( Core.Maybe
+          GoogleCloudDialogflowCxV3beta1WebhookServiceDirectoryConfig
+      ),
+    -- | Webhook execution timeout. Execution is considered failed if Dialogflow doesn\'t receive a response from webhook at the end of the timeout period. Defaults to 5 seconds, maximum allowed timeout is 30 seconds.
+    timeout :: (Core.Maybe Core.Duration)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudDialogflowCxV3beta1Webhook' with the minimum fields required to make a request.
+newGoogleCloudDialogflowCxV3beta1Webhook ::
+  GoogleCloudDialogflowCxV3beta1Webhook
+newGoogleCloudDialogflowCxV3beta1Webhook =
+  GoogleCloudDialogflowCxV3beta1Webhook
+    { disabled = Core.Nothing,
+      displayName = Core.Nothing,
+      genericWebService = Core.Nothing,
+      name = Core.Nothing,
+      serviceDirectory = Core.Nothing,
+      timeout = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudDialogflowCxV3beta1Webhook
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudDialogflowCxV3beta1Webhook"
+      ( \o ->
+          GoogleCloudDialogflowCxV3beta1Webhook
+            Core.<$> (o Core..:? "disabled")
+            Core.<*> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "genericWebService")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "serviceDirectory")
+            Core.<*> (o Core..:? "timeout")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudDialogflowCxV3beta1Webhook
+  where
+  toJSON GoogleCloudDialogflowCxV3beta1Webhook {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("disabled" Core..=) Core.<$> disabled,
+            ("displayName" Core..=) Core.<$> displayName,
+            ("genericWebService" Core..=)
+              Core.<$> genericWebService,
+            ("name" Core..=) Core.<$> name,
+            ("serviceDirectory" Core..=)
+              Core.<$> serviceDirectory,
+            ("timeout" Core..=) Core.<$> timeout
+          ]
+      )
+
+-- | Represents configuration for a generic web service.
+--
+-- /See:/ 'newGoogleCloudDialogflowCxV3beta1WebhookGenericWebService' smart constructor.
+data GoogleCloudDialogflowCxV3beta1WebhookGenericWebService = GoogleCloudDialogflowCxV3beta1WebhookGenericWebService
+  { -- | Optional. Specifies a list of allowed custom CA certificates (in DER format) for HTTPS verification. This overrides the default SSL trust store. If this is empty or unspecified, Dialogflow will use Google\'s default trust store to verify certificates. N.B. Make sure the HTTPS server certificates are signed with \"subject alt name\". For instance a certificate can be self-signed using the following command, @openssl x509 -req -days 200 -in example.com.csr \\ -signkey example.com.key \\ -out example.com.crt \\ -extfile \<(printf \"\\nsubjectAltName=\'DNS:www.example.com\'\")@
+    allowedCaCerts :: (Core.Maybe [Core.Base64]),
+    -- | The password for HTTP Basic authentication.
+    password :: (Core.Maybe Core.Text),
+    -- | The HTTP request headers to send together with webhook requests.
+    requestHeaders ::
+      ( Core.Maybe
+          GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_RequestHeaders
+      ),
+    -- | Required. The webhook URI for receiving POST requests. It must use https protocol.
+    uri :: (Core.Maybe Core.Text),
+    -- | The user name for HTTP Basic authentication.
+    username :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudDialogflowCxV3beta1WebhookGenericWebService' with the minimum fields required to make a request.
+newGoogleCloudDialogflowCxV3beta1WebhookGenericWebService ::
+  GoogleCloudDialogflowCxV3beta1WebhookGenericWebService
+newGoogleCloudDialogflowCxV3beta1WebhookGenericWebService =
+  GoogleCloudDialogflowCxV3beta1WebhookGenericWebService
+    { allowedCaCerts = Core.Nothing,
+      password = Core.Nothing,
+      requestHeaders = Core.Nothing,
+      uri = Core.Nothing,
+      username = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudDialogflowCxV3beta1WebhookGenericWebService
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudDialogflowCxV3beta1WebhookGenericWebService"
+      ( \o ->
+          GoogleCloudDialogflowCxV3beta1WebhookGenericWebService
+            Core.<$> (o Core..:? "allowedCaCerts")
+              Core.<*> (o Core..:? "password")
+              Core.<*> (o Core..:? "requestHeaders")
+              Core.<*> (o Core..:? "uri")
+              Core.<*> (o Core..:? "username")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudDialogflowCxV3beta1WebhookGenericWebService
+  where
+  toJSON
+    GoogleCloudDialogflowCxV3beta1WebhookGenericWebService {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("allowedCaCerts" Core..=) Core.<$> allowedCaCerts,
+              ("password" Core..=) Core.<$> password,
+              ("requestHeaders" Core..=) Core.<$> requestHeaders,
+              ("uri" Core..=) Core.<$> uri,
+              ("username" Core..=) Core.<$> username
+            ]
+        )
+
+-- | The HTTP request headers to send together with webhook requests.
+--
+-- /See:/ 'newGoogleCloudDialogflowCxV3beta1WebhookGenericWebService_RequestHeaders' smart constructor.
+newtype GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_RequestHeaders = GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_RequestHeaders
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_RequestHeaders' with the minimum fields required to make a request.
+newGoogleCloudDialogflowCxV3beta1WebhookGenericWebService_RequestHeaders ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_RequestHeaders
+newGoogleCloudDialogflowCxV3beta1WebhookGenericWebService_RequestHeaders additional =
+  GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_RequestHeaders
+    { additional = additional
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_RequestHeaders
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_RequestHeaders"
+      ( \o ->
+          GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_RequestHeaders
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_RequestHeaders
+  where
+  toJSON
+    GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_RequestHeaders {..} =
+      Core.toJSON additional
+
+-- | The request message for a webhook call. The request is sent as a JSON object and the field names will be presented in camel cases. You may see undocumented fields in an actual request. These fields are used internally by Dialogflow and should be ignored.
 --
 -- /See:/ 'newGoogleCloudDialogflowCxV3beta1WebhookRequest' smart constructor.
 data GoogleCloudDialogflowCxV3beta1WebhookRequest = GoogleCloudDialogflowCxV3beta1WebhookRequest
   { -- | Always present. The unique identifier of the DetectIntentResponse that will be returned to the API caller.
     detectIntentResponseId :: (Core.Maybe Core.Text),
+    -- | If DTMF was provided as input, this field will contain the DTMF digits.
+    dtmfDigits :: (Core.Maybe Core.Text),
     -- | Always present. Information about the fulfillment that triggered this webhook call.
     fulfillmentInfo ::
       ( Core.Maybe
@@ -15470,6 +16280,7 @@ newGoogleCloudDialogflowCxV3beta1WebhookRequest ::
 newGoogleCloudDialogflowCxV3beta1WebhookRequest =
   GoogleCloudDialogflowCxV3beta1WebhookRequest
     { detectIntentResponseId = Core.Nothing,
+      dtmfDigits = Core.Nothing,
       fulfillmentInfo = Core.Nothing,
       intentInfo = Core.Nothing,
       languageCode = Core.Nothing,
@@ -15494,6 +16305,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3beta1WebhookRequest
             Core.<$> (o Core..:? "detectIntentResponseId")
+            Core.<*> (o Core..:? "dtmfDigits")
             Core.<*> (o Core..:? "fulfillmentInfo")
             Core.<*> (o Core..:? "intentInfo")
             Core.<*> (o Core..:? "languageCode")
@@ -15518,6 +16330,7 @@ instance
         ( Core.catMaybes
             [ ("detectIntentResponseId" Core..=)
                 Core.<$> detectIntentResponseId,
+              ("dtmfDigits" Core..=) Core.<$> dtmfDigits,
               ("fulfillmentInfo" Core..=) Core.<$> fulfillmentInfo,
               ("intentInfo" Core..=) Core.<$> intentInfo,
               ("languageCode" Core..=) Core.<$> languageCode,
@@ -15575,7 +16388,7 @@ instance
 --
 -- /See:/ 'newGoogleCloudDialogflowCxV3beta1WebhookRequestFulfillmentInfo' smart constructor.
 newtype GoogleCloudDialogflowCxV3beta1WebhookRequestFulfillmentInfo = GoogleCloudDialogflowCxV3beta1WebhookRequestFulfillmentInfo
-  { -- | Always present. The tag used to identify which fulfillment is being called.
+  { -- | Always present. The value of the Fulfillment.tag field will be populated in this field by Dialogflow when the associated webhook is called. The tag is typically used by the webhook service to identify which fulfillment is being called, but it could be used for other purposes.
     tag :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -15959,6 +16772,53 @@ instance
         ( Core.catMaybes
             [ ("mergeBehavior" Core..=) Core.<$> mergeBehavior,
               ("messages" Core..=) Core.<$> messages
+            ]
+        )
+
+-- | Represents configuration for a <https://cloud.google.com/service-directory Service Directory> service.
+--
+-- /See:/ 'newGoogleCloudDialogflowCxV3beta1WebhookServiceDirectoryConfig' smart constructor.
+data GoogleCloudDialogflowCxV3beta1WebhookServiceDirectoryConfig = GoogleCloudDialogflowCxV3beta1WebhookServiceDirectoryConfig
+  { -- | Generic Service configuration of this webhook.
+    genericWebService :: (Core.Maybe GoogleCloudDialogflowCxV3beta1WebhookGenericWebService),
+    -- | Required. The name of <https://cloud.google.com/service-directory Service Directory> service. Format: @projects\/\/locations\/\/namespaces\/\/services\/@. @Location ID@ of the service directory must be the same as the location of the agent.
+    service :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudDialogflowCxV3beta1WebhookServiceDirectoryConfig' with the minimum fields required to make a request.
+newGoogleCloudDialogflowCxV3beta1WebhookServiceDirectoryConfig ::
+  GoogleCloudDialogflowCxV3beta1WebhookServiceDirectoryConfig
+newGoogleCloudDialogflowCxV3beta1WebhookServiceDirectoryConfig =
+  GoogleCloudDialogflowCxV3beta1WebhookServiceDirectoryConfig
+    { genericWebService = Core.Nothing,
+      service = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudDialogflowCxV3beta1WebhookServiceDirectoryConfig
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudDialogflowCxV3beta1WebhookServiceDirectoryConfig"
+      ( \o ->
+          GoogleCloudDialogflowCxV3beta1WebhookServiceDirectoryConfig
+            Core.<$> (o Core..:? "genericWebService")
+              Core.<*> (o Core..:? "service")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudDialogflowCxV3beta1WebhookServiceDirectoryConfig
+  where
+  toJSON
+    GoogleCloudDialogflowCxV3beta1WebhookServiceDirectoryConfig {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("genericWebService" Core..=)
+                Core.<$> genericWebService,
+              ("service" Core..=) Core.<$> service
             ]
         )
 
@@ -16518,7 +17378,10 @@ instance
 -- | Metadata for ConversationDatasets.
 --
 -- /See:/ 'newGoogleCloudDialogflowV2CreateConversationDatasetOperationMetadata' smart constructor.
-data GoogleCloudDialogflowV2CreateConversationDatasetOperationMetadata = GoogleCloudDialogflowV2CreateConversationDatasetOperationMetadata
+newtype GoogleCloudDialogflowV2CreateConversationDatasetOperationMetadata = GoogleCloudDialogflowV2CreateConversationDatasetOperationMetadata
+  { -- | The resource name of the conversation dataset that will be created. Format: @projects\/\/locations\/\/conversationDatasets\/@
+    conversationDataset :: (Core.Maybe Core.Text)
+  }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'GoogleCloudDialogflowV2CreateConversationDatasetOperationMetadata' with the minimum fields required to make a request.
@@ -16526,6 +17389,8 @@ newGoogleCloudDialogflowV2CreateConversationDatasetOperationMetadata ::
   GoogleCloudDialogflowV2CreateConversationDatasetOperationMetadata
 newGoogleCloudDialogflowV2CreateConversationDatasetOperationMetadata =
   GoogleCloudDialogflowV2CreateConversationDatasetOperationMetadata
+    { conversationDataset = Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -16535,15 +17400,22 @@ instance
     Core.withObject
       "GoogleCloudDialogflowV2CreateConversationDatasetOperationMetadata"
       ( \o ->
-          Core.pure
-            GoogleCloudDialogflowV2CreateConversationDatasetOperationMetadata
+          GoogleCloudDialogflowV2CreateConversationDatasetOperationMetadata
+            Core.<$> (o Core..:? "conversationDataset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudDialogflowV2CreateConversationDatasetOperationMetadata
   where
-  toJSON = Core.const Core.emptyObject
+  toJSON
+    GoogleCloudDialogflowV2CreateConversationDatasetOperationMetadata {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("conversationDataset" Core..=)
+                Core.<$> conversationDataset
+            ]
+        )
 
 -- | Metadata for a ConversationModels.CreateConversationModelEvaluation operation.
 --
@@ -19544,7 +20416,7 @@ data GoogleCloudDialogflowV2QueryResult = GoogleCloudDialogflowV2QueryResult
     action :: (Core.Maybe Core.Text),
     -- | This field is set to: - @false@ if the matched intent has required parameters and not all of the required parameter values have been collected. - @true@ if all required parameter values have been collected, or if the matched intent doesn\'t contain any required parameters.
     allRequiredParamsPresent :: (Core.Maybe Core.Bool),
-    -- | Indicates whether the conversational query triggers a cancellation for slot filling.
+    -- | Indicates whether the conversational query triggers a cancellation for slot filling. For more information, see the <https://cloud.google.com/dialogflow/es/docs/intents-actions-parameters#cancel cancel slot filling documentation>.
     cancelsSlotFilling :: (Core.Maybe Core.Bool),
     -- | Free-form diagnostic information for the associated detect intent request. The fields of this data can change without notice, so you should not write code that depends on its structure. The data may contain: - webhook call latency - webhook errors
     diagnosticInfo :: (Core.Maybe GoogleCloudDialogflowV2QueryResult_DiagnosticInfo),
@@ -19768,7 +20640,7 @@ instance
     GoogleCloudDialogflowV2QueryResult_WebhookPayload {..} =
       Core.toJSON additional
 
--- | The sentiment, such as positive\/negative feeling or association, for a unit of analysis, such as the query text.
+-- | The sentiment, such as positive\/negative feeling or association, for a unit of analysis, such as the query text. See: https:\/\/cloud.google.com\/natural-language\/docs\/basics#interpreting/sentiment/analysis_values for how to interpret the result.
 --
 -- /See:/ 'newGoogleCloudDialogflowV2Sentiment' smart constructor.
 data GoogleCloudDialogflowV2Sentiment = GoogleCloudDialogflowV2Sentiment
@@ -24448,7 +25320,7 @@ data GoogleCloudDialogflowV2beta1QueryResult = GoogleCloudDialogflowV2beta1Query
     action :: (Core.Maybe Core.Text),
     -- | This field is set to: - @false@ if the matched intent has required parameters and not all of the required parameter values have been collected. - @true@ if all required parameter values have been collected, or if the matched intent doesn\'t contain any required parameters.
     allRequiredParamsPresent :: (Core.Maybe Core.Bool),
-    -- | Indicates whether the conversational query triggers a cancellation for slot filling.
+    -- | Indicates whether the conversational query triggers a cancellation for slot filling. For more information, see the <https://cloud.google.com/dialogflow/es/docs/intents-actions-parameters#cancel cancel slot filling documentation>.
     cancelsSlotFilling :: (Core.Maybe Core.Bool),
     -- | Free-form diagnostic information for the associated detect intent request. The fields of this data can change without notice, so you should not write code that depends on its structure. The data may contain: - webhook call latency - webhook errors
     diagnosticInfo :: (Core.Maybe GoogleCloudDialogflowV2beta1QueryResult_DiagnosticInfo),
@@ -24682,7 +25554,7 @@ instance
     GoogleCloudDialogflowV2beta1QueryResult_WebhookPayload {..} =
       Core.toJSON additional
 
--- | The sentiment, such as positive\/negative feeling or association, for a unit of analysis, such as the query text.
+-- | The sentiment, such as positive\/negative feeling or association, for a unit of analysis, such as the query text. See: https:\/\/cloud.google.com\/natural-language\/docs\/basics#interpreting/sentiment/analysis_values for how to interpret the result.
 --
 -- /See:/ 'newGoogleCloudDialogflowV2beta1Sentiment' smart constructor.
 data GoogleCloudDialogflowV2beta1Sentiment = GoogleCloudDialogflowV2beta1Sentiment
@@ -25342,6 +26214,44 @@ instance
     GoogleCloudDialogflowV2beta1WebhookResponse_Payload {..} =
       Core.toJSON additional
 
+-- | This message is used to hold all the Conversation Signals data, which will be converted to JSON and exported to BigQuery.
+--
+-- /See:/ 'newGoogleCloudDialogflowV3alpha1ConversationSignals' smart constructor.
+newtype GoogleCloudDialogflowV3alpha1ConversationSignals = GoogleCloudDialogflowV3alpha1ConversationSignals
+  { -- | Required. Turn signals for the current turn.
+    turnSignals :: (Core.Maybe GoogleCloudDialogflowV3alpha1TurnSignals)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudDialogflowV3alpha1ConversationSignals' with the minimum fields required to make a request.
+newGoogleCloudDialogflowV3alpha1ConversationSignals ::
+  GoogleCloudDialogflowV3alpha1ConversationSignals
+newGoogleCloudDialogflowV3alpha1ConversationSignals =
+  GoogleCloudDialogflowV3alpha1ConversationSignals {turnSignals = Core.Nothing}
+
+instance
+  Core.FromJSON
+    GoogleCloudDialogflowV3alpha1ConversationSignals
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudDialogflowV3alpha1ConversationSignals"
+      ( \o ->
+          GoogleCloudDialogflowV3alpha1ConversationSignals
+            Core.<$> (o Core..:? "turnSignals")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudDialogflowV3alpha1ConversationSignals
+  where
+  toJSON
+    GoogleCloudDialogflowV3alpha1ConversationSignals {..} =
+      Core.object
+        ( Core.catMaybes
+            [("turnSignals" Core..=) Core.<$> turnSignals]
+        )
+
 -- | Metadata for CreateDocument operation.
 --
 -- /See:/ 'newGoogleCloudDialogflowV3alpha1CreateDocumentOperationMetadata' smart constructor.
@@ -25600,6 +26510,91 @@ instance
                 Core.<$> genericMetadata
             ]
         )
+
+-- | Collection of all signals that were extracted for a single turn of the conversation.
+--
+-- /See:/ 'newGoogleCloudDialogflowV3alpha1TurnSignals' smart constructor.
+data GoogleCloudDialogflowV3alpha1TurnSignals = GoogleCloudDialogflowV3alpha1TurnSignals
+  { -- | Whether agent responded with LiveAgentHandoff fulfillment.
+    agentEscalated :: (Core.Maybe Core.Bool),
+    -- | Whether user was using DTMF input.
+    dtmfUsed :: (Core.Maybe Core.Bool),
+    -- | Failure reasons of the turn.
+    failureReasons ::
+      ( Core.Maybe
+          [GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem]
+      ),
+    -- | Whether NLU predicted NO_MATCH.
+    noMatch :: (Core.Maybe Core.Bool),
+    -- | Whether user provided no input.
+    noUserInput :: (Core.Maybe Core.Bool),
+    -- | Whether turn resulted in End Session page.
+    reachedEndPage :: (Core.Maybe Core.Bool),
+    -- | Whether agent has triggered the event corresponding to user abandoning the conversation.
+    triggeredAbandonmentEvent :: (Core.Maybe Core.Bool),
+    -- | Whether user was specifically asking for a live agent.
+    userEscalated :: (Core.Maybe Core.Bool),
+    -- | Human-readable statuses of the webhooks triggered during this turn.
+    webhookStatuses :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudDialogflowV3alpha1TurnSignals' with the minimum fields required to make a request.
+newGoogleCloudDialogflowV3alpha1TurnSignals ::
+  GoogleCloudDialogflowV3alpha1TurnSignals
+newGoogleCloudDialogflowV3alpha1TurnSignals =
+  GoogleCloudDialogflowV3alpha1TurnSignals
+    { agentEscalated = Core.Nothing,
+      dtmfUsed = Core.Nothing,
+      failureReasons = Core.Nothing,
+      noMatch = Core.Nothing,
+      noUserInput = Core.Nothing,
+      reachedEndPage = Core.Nothing,
+      triggeredAbandonmentEvent = Core.Nothing,
+      userEscalated = Core.Nothing,
+      webhookStatuses = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudDialogflowV3alpha1TurnSignals
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudDialogflowV3alpha1TurnSignals"
+      ( \o ->
+          GoogleCloudDialogflowV3alpha1TurnSignals
+            Core.<$> (o Core..:? "agentEscalated")
+            Core.<*> (o Core..:? "dtmfUsed")
+            Core.<*> (o Core..:? "failureReasons")
+            Core.<*> (o Core..:? "noMatch")
+            Core.<*> (o Core..:? "noUserInput")
+            Core.<*> (o Core..:? "reachedEndPage")
+            Core.<*> (o Core..:? "triggeredAbandonmentEvent")
+            Core.<*> (o Core..:? "userEscalated")
+            Core.<*> (o Core..:? "webhookStatuses")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudDialogflowV3alpha1TurnSignals
+  where
+  toJSON GoogleCloudDialogflowV3alpha1TurnSignals {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("agentEscalated" Core..=) Core.<$> agentEscalated,
+            ("dtmfUsed" Core..=) Core.<$> dtmfUsed,
+            ("failureReasons" Core..=) Core.<$> failureReasons,
+            ("noMatch" Core..=) Core.<$> noMatch,
+            ("noUserInput" Core..=) Core.<$> noUserInput,
+            ("reachedEndPage" Core..=) Core.<$> reachedEndPage,
+            ("triggeredAbandonmentEvent" Core..=)
+              Core.<$> triggeredAbandonmentEvent,
+            ("userEscalated" Core..=) Core.<$> userEscalated,
+            ("webhookStatuses" Core..=)
+              Core.<$> webhookStatuses
+          ]
+      )
 
 -- | Metadata for UpdateDocument operation.
 --
@@ -25988,7 +26983,7 @@ instance
   toJSON GoogleLongrunningOperation_Response {..} =
     Core.toJSON additional
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newGoogleProtobufEmpty' smart constructor.
 data GoogleProtobufEmpty = GoogleProtobufEmpty

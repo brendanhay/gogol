@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets testers.
+-- Gets testers. Note: Testers resource does not support email lists.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.edits.testers.get@.
 module Gogol.AndroidPublisher.Edits.Testers.Get
@@ -61,7 +61,7 @@ type AndroidPublisherEditsTestersGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Testers
 
--- | Gets testers.
+-- | Gets testers. Note: Testers resource does not support email lists.
 --
 -- /See:/ 'newAndroidPublisherEditsTestersGet' smart constructor.
 data AndroidPublisherEditsTestersGet = AndroidPublisherEditsTestersGet

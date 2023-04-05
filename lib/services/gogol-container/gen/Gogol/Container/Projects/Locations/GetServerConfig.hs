@@ -70,7 +70,7 @@ data ContainerProjectsLocationsGetServerConfig = ContainerProjectsLocationsGetSe
     callback :: (Core.Maybe Core.Text),
     -- | The name (project and location) of the server config to get, specified in the format @projects\/*\/locations\/*@.
     name :: Core.Text,
-    -- | Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the name field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the name field.
     projectId :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),

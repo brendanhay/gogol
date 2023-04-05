@@ -80,7 +80,7 @@ data ContainerProjectsZonesClustersSetMaintenancePolicy = ContainerProjectsZones
     clusterId :: Core.Text,
     -- | Multipart request metadata.
     payload :: SetMaintenancePolicyRequest,
-    -- | Required. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>.
+    -- | Required. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>.
     projectId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -97,7 +97,7 @@ newContainerProjectsZonesClustersSetMaintenancePolicy ::
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   SetMaintenancePolicyRequest ->
-  -- |  Required. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. See 'projectId'.
+  -- |  Required. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. See 'projectId'.
   Core.Text ->
   -- |  Required. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides. See 'zone'.
   Core.Text ->

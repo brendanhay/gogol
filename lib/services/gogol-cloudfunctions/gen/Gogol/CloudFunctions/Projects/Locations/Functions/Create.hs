@@ -45,7 +45,7 @@ import qualified Gogol.Prelude as Core
 -- | A resource alias for @cloudfunctions.projects.locations.functions.create@ method which the
 -- 'CloudFunctionsProjectsLocationsFunctionsCreate' request conforms to.
 type CloudFunctionsProjectsLocationsFunctionsCreateResource =
-  "v2beta"
+  "v2"
     Core.:> Core.Capture "parent" Core.Text
     Core.:> "functions"
     Core.:> Core.QueryParam "$.xgafv" Xgafv

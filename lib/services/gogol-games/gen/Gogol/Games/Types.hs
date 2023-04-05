@@ -104,6 +104,10 @@ module Gogol.Games.Types
     ApplicationCategory (..),
     newApplicationCategory,
 
+    -- ** ApplicationPlayerId
+    ApplicationPlayerId (..),
+    newApplicationPlayerId,
+
     -- ** ApplicationVerifyResponse
     ApplicationVerifyResponse (..),
     newApplicationVerifyResponse,
@@ -176,6 +180,10 @@ module Gogol.Games.Types
     -- ** GamesAchievementSetStepsAtLeast
     GamesAchievementSetStepsAtLeast (..),
     newGamesAchievementSetStepsAtLeast,
+
+    -- ** GetMultipleApplicationPlayerIdsResponse
+    GetMultipleApplicationPlayerIdsResponse (..),
+    newGetMultipleApplicationPlayerIdsResponse,
 
     -- ** ImageAsset
     ImageAsset (..),
@@ -318,6 +326,10 @@ module Gogol.Games.Types
 
     -- ** RevisionCheckResponse_RevisionStatus
     RevisionCheckResponse_RevisionStatus (..),
+
+    -- ** ScopedPlayerIds
+    ScopedPlayerIds (..),
+    newScopedPlayerIds,
 
     -- ** ScoreSubmission
     ScoreSubmission (..),

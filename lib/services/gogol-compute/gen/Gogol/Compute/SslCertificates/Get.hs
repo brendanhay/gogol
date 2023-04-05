@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified SslCertificate resource. Gets a list of available SSL certificates by making a list() request.
+-- Returns the specified SslCertificate resource.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.sslCertificates.get@.
 module Gogol.Compute.SslCertificates.Get
@@ -60,7 +60,7 @@ type ComputeSslCertificatesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] SslCertificate
 
--- | Returns the specified SslCertificate resource. Gets a list of available SSL certificates by making a list() request.
+-- | Returns the specified SslCertificate resource.
 --
 -- /See:/ 'newComputeSslCertificatesGet' smart constructor.
 data ComputeSslCertificatesGet = ComputeSslCertificatesGet

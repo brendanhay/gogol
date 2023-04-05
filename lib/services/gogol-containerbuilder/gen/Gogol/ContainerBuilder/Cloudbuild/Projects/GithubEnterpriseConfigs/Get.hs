@@ -69,7 +69,7 @@ data CloudbuildProjectsGithubEnterpriseConfigsGet = CloudbuildProjectsGithubEnte
     callback :: (Core.Maybe Core.Text),
     -- | Unique identifier of the @GitHubEnterpriseConfig@
     configId :: (Core.Maybe Core.Text),
-    -- | This field should contain the name of the enterprise config resource. For example: \"projects\/{$project/id}\/githubEnterpriseConfigs\/{$config/id}\"
+    -- | This field should contain the name of the enterprise config resource. For example: \"projects\/{$project/id}\/locations\/{$location/id}\/githubEnterpriseConfigs\/{$config_id}\"
     name :: Core.Text,
     -- | ID of the project
     projectId :: (Core.Maybe Core.Text),
@@ -82,7 +82,7 @@ data CloudbuildProjectsGithubEnterpriseConfigsGet = CloudbuildProjectsGithubEnte
 
 -- | Creates a value of 'CloudbuildProjectsGithubEnterpriseConfigsGet' with the minimum fields required to make a request.
 newCloudbuildProjectsGithubEnterpriseConfigsGet ::
-  -- |  This field should contain the name of the enterprise config resource. For example: \"projects\/{$project/id}\/githubEnterpriseConfigs\/{$config/id}\" See 'name'.
+  -- |  This field should contain the name of the enterprise config resource. For example: \"projects\/{$project/id}\/locations\/{$location/id}\/githubEnterpriseConfigs\/{$config_id}\" See 'name'.
   Core.Text ->
   CloudbuildProjectsGithubEnterpriseConfigsGet
 newCloudbuildProjectsGithubEnterpriseConfigsGet name =

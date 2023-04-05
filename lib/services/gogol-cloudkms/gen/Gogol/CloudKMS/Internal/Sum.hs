@@ -98,6 +98,10 @@ module Gogol.CloudKMS.Internal.Sum
         CryptoKeyVersion_Algorithm_EC_SIGN_P384_SHA384,
         CryptoKeyVersion_Algorithm_EC_SIGN_SECP256K1_SHA256,
         CryptoKeyVersion_Algorithm_HMAC_SHA256,
+        CryptoKeyVersion_Algorithm_HMAC_SHA1,
+        CryptoKeyVersion_Algorithm_HMAC_SHA384,
+        CryptoKeyVersion_Algorithm_HMAC_SHA512,
+        CryptoKeyVersion_Algorithm_HMAC_SHA224,
         CryptoKeyVersion_Algorithm_EXTERNALSYMMETRICENCRYPTION,
         ..
       ),
@@ -122,6 +126,9 @@ module Gogol.CloudKMS.Internal.Sum
         CryptoKeyVersion_State_DESTROYSCHEDULED,
         CryptoKeyVersion_State_PENDINGIMPORT,
         CryptoKeyVersion_State_IMPORTFAILED,
+        CryptoKeyVersion_State_GENERATIONFAILED,
+        CryptoKeyVersion_State_PENDINGEXTERNALDESTRUCTION,
+        CryptoKeyVersion_State_EXTERNALDESTRUCTIONFAILED,
         ..
       ),
 
@@ -151,6 +158,10 @@ module Gogol.CloudKMS.Internal.Sum
         CryptoKeyVersionTemplate_Algorithm_EC_SIGN_P384_SHA384,
         CryptoKeyVersionTemplate_Algorithm_EC_SIGN_SECP256K1_SHA256,
         CryptoKeyVersionTemplate_Algorithm_HMAC_SHA256,
+        CryptoKeyVersionTemplate_Algorithm_HMAC_SHA1,
+        CryptoKeyVersionTemplate_Algorithm_HMAC_SHA384,
+        CryptoKeyVersionTemplate_Algorithm_HMAC_SHA512,
+        CryptoKeyVersionTemplate_Algorithm_HMAC_SHA224,
         CryptoKeyVersionTemplate_Algorithm_EXTERNALSYMMETRICENCRYPTION,
         ..
       ),
@@ -172,6 +183,14 @@ module Gogol.CloudKMS.Internal.Sum
         DecryptResponse_ProtectionLevel_Hsm,
         DecryptResponse_ProtectionLevel_External,
         DecryptResponse_ProtectionLevel_EXTERNALVPC,
+        ..
+      ),
+
+    -- * EkmConnection_KeyManagementMode
+    EkmConnection_KeyManagementMode
+      ( EkmConnection_KeyManagementMode_KEYMANAGEMENTMODEUNSPECIFIED,
+        EkmConnection_KeyManagementMode_Manual,
+        EkmConnection_KeyManagementMode_CLOUDKMS,
         ..
       ),
 
@@ -221,6 +240,10 @@ module Gogol.CloudKMS.Internal.Sum
         ImportCryptoKeyVersionRequest_Algorithm_EC_SIGN_P384_SHA384,
         ImportCryptoKeyVersionRequest_Algorithm_EC_SIGN_SECP256K1_SHA256,
         ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA256,
+        ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA1,
+        ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA384,
+        ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA512,
+        ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA224,
         ImportCryptoKeyVersionRequest_Algorithm_EXTERNALSYMMETRICENCRYPTION,
         ..
       ),
@@ -230,6 +253,10 @@ module Gogol.CloudKMS.Internal.Sum
       ( ImportJob_ImportMethod_IMPORTMETHODUNSPECIFIED,
         ImportJob_ImportMethod_RSA_OAEP_3072_SHA1_AES_256,
         ImportJob_ImportMethod_RSA_OAEP_4096_SHA1_AES_256,
+        ImportJob_ImportMethod_RSA_OAEP_3072_SHA256_AES_256,
+        ImportJob_ImportMethod_RSA_OAEP_4096_SHA256_AES_256,
+        ImportJob_ImportMethod_RSA_OAEP_3072_SHA256,
+        ImportJob_ImportMethod_RSA_OAEP_4096_SHA256,
         ..
       ),
 
@@ -306,6 +333,10 @@ module Gogol.CloudKMS.Internal.Sum
         PublicKey_Algorithm_EC_SIGN_P384_SHA384,
         PublicKey_Algorithm_EC_SIGN_SECP256K1_SHA256,
         PublicKey_Algorithm_HMAC_SHA256,
+        PublicKey_Algorithm_HMAC_SHA1,
+        PublicKey_Algorithm_HMAC_SHA384,
+        PublicKey_Algorithm_HMAC_SHA512,
+        PublicKey_Algorithm_HMAC_SHA224,
         PublicKey_Algorithm_EXTERNALSYMMETRICENCRYPTION,
         ..
       ),
@@ -637,6 +668,22 @@ pattern CryptoKeyVersion_Algorithm_EC_SIGN_SECP256K1_SHA256 = CryptoKeyVersion_A
 pattern CryptoKeyVersion_Algorithm_HMAC_SHA256 :: CryptoKeyVersion_Algorithm
 pattern CryptoKeyVersion_Algorithm_HMAC_SHA256 = CryptoKeyVersion_Algorithm "HMAC_SHA256"
 
+-- | HMAC-SHA1 signing with a 160 bit key.
+pattern CryptoKeyVersion_Algorithm_HMAC_SHA1 :: CryptoKeyVersion_Algorithm
+pattern CryptoKeyVersion_Algorithm_HMAC_SHA1 = CryptoKeyVersion_Algorithm "HMAC_SHA1"
+
+-- | HMAC-SHA384 signing with a 384 bit key.
+pattern CryptoKeyVersion_Algorithm_HMAC_SHA384 :: CryptoKeyVersion_Algorithm
+pattern CryptoKeyVersion_Algorithm_HMAC_SHA384 = CryptoKeyVersion_Algorithm "HMAC_SHA384"
+
+-- | HMAC-SHA512 signing with a 512 bit key.
+pattern CryptoKeyVersion_Algorithm_HMAC_SHA512 :: CryptoKeyVersion_Algorithm
+pattern CryptoKeyVersion_Algorithm_HMAC_SHA512 = CryptoKeyVersion_Algorithm "HMAC_SHA512"
+
+-- | HMAC-SHA224 signing with a 224 bit key.
+pattern CryptoKeyVersion_Algorithm_HMAC_SHA224 :: CryptoKeyVersion_Algorithm
+pattern CryptoKeyVersion_Algorithm_HMAC_SHA224 = CryptoKeyVersion_Algorithm "HMAC_SHA224"
+
 -- | Algorithm representing symmetric encryption by an external key manager.
 pattern CryptoKeyVersion_Algorithm_EXTERNALSYMMETRICENCRYPTION :: CryptoKeyVersion_Algorithm
 pattern CryptoKeyVersion_Algorithm_EXTERNALSYMMETRICENCRYPTION = CryptoKeyVersion_Algorithm "EXTERNAL_SYMMETRIC_ENCRYPTION"
@@ -666,6 +713,10 @@ pattern CryptoKeyVersion_Algorithm_EXTERNALSYMMETRICENCRYPTION = CryptoKeyVersio
   CryptoKeyVersion_Algorithm_EC_SIGN_P384_SHA384,
   CryptoKeyVersion_Algorithm_EC_SIGN_SECP256K1_SHA256,
   CryptoKeyVersion_Algorithm_HMAC_SHA256,
+  CryptoKeyVersion_Algorithm_HMAC_SHA1,
+  CryptoKeyVersion_Algorithm_HMAC_SHA384,
+  CryptoKeyVersion_Algorithm_HMAC_SHA512,
+  CryptoKeyVersion_Algorithm_HMAC_SHA224,
   CryptoKeyVersion_Algorithm_EXTERNALSYMMETRICENCRYPTION,
   CryptoKeyVersion_Algorithm
   #-}
@@ -757,6 +808,18 @@ pattern CryptoKeyVersion_State_PENDINGIMPORT = CryptoKeyVersion_State "PENDING_I
 pattern CryptoKeyVersion_State_IMPORTFAILED :: CryptoKeyVersion_State
 pattern CryptoKeyVersion_State_IMPORTFAILED = CryptoKeyVersion_State "IMPORT_FAILED"
 
+-- | This version was not generated successfully. It may not be used, enabled, disabled, or destroyed. Additional details can be found in CryptoKeyVersion.generation/failure/reason.
+pattern CryptoKeyVersion_State_GENERATIONFAILED :: CryptoKeyVersion_State
+pattern CryptoKeyVersion_State_GENERATIONFAILED = CryptoKeyVersion_State "GENERATION_FAILED"
+
+-- | This version was destroyed, and it may not be used or enabled again. Cloud KMS is waiting for the corresponding key material residing in an external key manager to be destroyed.
+pattern CryptoKeyVersion_State_PENDINGEXTERNALDESTRUCTION :: CryptoKeyVersion_State
+pattern CryptoKeyVersion_State_PENDINGEXTERNALDESTRUCTION = CryptoKeyVersion_State "PENDING_EXTERNAL_DESTRUCTION"
+
+-- | This version was destroyed, and it may not be used or enabled again. However, Cloud KMS could not confirm that the corresponding key material residing in an external key manager was destroyed. Additional details can be found in CryptoKeyVersion.external/destruction/failure_reason.
+pattern CryptoKeyVersion_State_EXTERNALDESTRUCTIONFAILED :: CryptoKeyVersion_State
+pattern CryptoKeyVersion_State_EXTERNALDESTRUCTIONFAILED = CryptoKeyVersion_State "EXTERNAL_DESTRUCTION_FAILED"
+
 {-# COMPLETE
   CryptoKeyVersion_State_CRYPTOKEYVERSIONSTATEUNSPECIFIED,
   CryptoKeyVersion_State_PENDINGGENERATION,
@@ -766,6 +829,9 @@ pattern CryptoKeyVersion_State_IMPORTFAILED = CryptoKeyVersion_State "IMPORT_FAI
   CryptoKeyVersion_State_DESTROYSCHEDULED,
   CryptoKeyVersion_State_PENDINGIMPORT,
   CryptoKeyVersion_State_IMPORTFAILED,
+  CryptoKeyVersion_State_GENERATIONFAILED,
+  CryptoKeyVersion_State_PENDINGEXTERNALDESTRUCTION,
+  CryptoKeyVersion_State_EXTERNALDESTRUCTIONFAILED,
   CryptoKeyVersion_State
   #-}
 
@@ -878,6 +944,22 @@ pattern CryptoKeyVersionTemplate_Algorithm_EC_SIGN_SECP256K1_SHA256 = CryptoKeyV
 pattern CryptoKeyVersionTemplate_Algorithm_HMAC_SHA256 :: CryptoKeyVersionTemplate_Algorithm
 pattern CryptoKeyVersionTemplate_Algorithm_HMAC_SHA256 = CryptoKeyVersionTemplate_Algorithm "HMAC_SHA256"
 
+-- | HMAC-SHA1 signing with a 160 bit key.
+pattern CryptoKeyVersionTemplate_Algorithm_HMAC_SHA1 :: CryptoKeyVersionTemplate_Algorithm
+pattern CryptoKeyVersionTemplate_Algorithm_HMAC_SHA1 = CryptoKeyVersionTemplate_Algorithm "HMAC_SHA1"
+
+-- | HMAC-SHA384 signing with a 384 bit key.
+pattern CryptoKeyVersionTemplate_Algorithm_HMAC_SHA384 :: CryptoKeyVersionTemplate_Algorithm
+pattern CryptoKeyVersionTemplate_Algorithm_HMAC_SHA384 = CryptoKeyVersionTemplate_Algorithm "HMAC_SHA384"
+
+-- | HMAC-SHA512 signing with a 512 bit key.
+pattern CryptoKeyVersionTemplate_Algorithm_HMAC_SHA512 :: CryptoKeyVersionTemplate_Algorithm
+pattern CryptoKeyVersionTemplate_Algorithm_HMAC_SHA512 = CryptoKeyVersionTemplate_Algorithm "HMAC_SHA512"
+
+-- | HMAC-SHA224 signing with a 224 bit key.
+pattern CryptoKeyVersionTemplate_Algorithm_HMAC_SHA224 :: CryptoKeyVersionTemplate_Algorithm
+pattern CryptoKeyVersionTemplate_Algorithm_HMAC_SHA224 = CryptoKeyVersionTemplate_Algorithm "HMAC_SHA224"
+
 -- | Algorithm representing symmetric encryption by an external key manager.
 pattern CryptoKeyVersionTemplate_Algorithm_EXTERNALSYMMETRICENCRYPTION :: CryptoKeyVersionTemplate_Algorithm
 pattern CryptoKeyVersionTemplate_Algorithm_EXTERNALSYMMETRICENCRYPTION = CryptoKeyVersionTemplate_Algorithm "EXTERNAL_SYMMETRIC_ENCRYPTION"
@@ -907,6 +989,10 @@ pattern CryptoKeyVersionTemplate_Algorithm_EXTERNALSYMMETRICENCRYPTION = CryptoK
   CryptoKeyVersionTemplate_Algorithm_EC_SIGN_P384_SHA384,
   CryptoKeyVersionTemplate_Algorithm_EC_SIGN_SECP256K1_SHA256,
   CryptoKeyVersionTemplate_Algorithm_HMAC_SHA256,
+  CryptoKeyVersionTemplate_Algorithm_HMAC_SHA1,
+  CryptoKeyVersionTemplate_Algorithm_HMAC_SHA384,
+  CryptoKeyVersionTemplate_Algorithm_HMAC_SHA512,
+  CryptoKeyVersionTemplate_Algorithm_HMAC_SHA224,
   CryptoKeyVersionTemplate_Algorithm_EXTERNALSYMMETRICENCRYPTION,
   CryptoKeyVersionTemplate_Algorithm
   #-}
@@ -993,6 +1079,38 @@ pattern DecryptResponse_ProtectionLevel_EXTERNALVPC = DecryptResponse_Protection
   DecryptResponse_ProtectionLevel_External,
   DecryptResponse_ProtectionLevel_EXTERNALVPC,
   DecryptResponse_ProtectionLevel
+  #-}
+
+-- | Optional. Describes who can perform control plane operations on the EKM. If unset, this defaults to MANUAL.
+newtype EkmConnection_KeyManagementMode = EkmConnection_KeyManagementMode {fromEkmConnection_KeyManagementMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified.
+pattern EkmConnection_KeyManagementMode_KEYMANAGEMENTMODEUNSPECIFIED :: EkmConnection_KeyManagementMode
+pattern EkmConnection_KeyManagementMode_KEYMANAGEMENTMODEUNSPECIFIED = EkmConnection_KeyManagementMode "KEY_MANAGEMENT_MODE_UNSPECIFIED"
+
+-- | EKM-side key management operations on CryptoKeys created with this EkmConnection must be initiated from the EKM directly and cannot be performed from Cloud KMS. This means that: * When creating a CryptoKeyVersion associated with this EkmConnection, the caller must supply the key path of pre-existing external key material that will be linked to the CryptoKeyVersion. * Destruction of external key material cannot be requested via the Cloud KMS API and must be performed directly in the EKM. * Automatic rotation of key material is not supported.
+pattern EkmConnection_KeyManagementMode_Manual :: EkmConnection_KeyManagementMode
+pattern EkmConnection_KeyManagementMode_Manual = EkmConnection_KeyManagementMode "MANUAL"
+
+-- | All CryptoKeys created with this EkmConnection use EKM-side key management operations initiated from Cloud KMS. This means that: * When a CryptoKeyVersion associated with this EkmConnection is created, the EKM automatically generates new key material and a new key path. The caller cannot supply the key path of pre-existing external key material. * Destruction of external key material associated with this EkmConnection can be requested by calling DestroyCryptoKeyVersion. * Automatic rotation of key material is supported.
+pattern EkmConnection_KeyManagementMode_CLOUDKMS :: EkmConnection_KeyManagementMode
+pattern EkmConnection_KeyManagementMode_CLOUDKMS = EkmConnection_KeyManagementMode "CLOUD_KMS"
+
+{-# COMPLETE
+  EkmConnection_KeyManagementMode_KEYMANAGEMENTMODEUNSPECIFIED,
+  EkmConnection_KeyManagementMode_Manual,
+  EkmConnection_KeyManagementMode_CLOUDKMS,
+  EkmConnection_KeyManagementMode
   #-}
 
 -- | The ProtectionLevel of the CryptoKeyVersion used in encryption.
@@ -1188,6 +1306,22 @@ pattern ImportCryptoKeyVersionRequest_Algorithm_EC_SIGN_SECP256K1_SHA256 = Impor
 pattern ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA256 :: ImportCryptoKeyVersionRequest_Algorithm
 pattern ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA256 = ImportCryptoKeyVersionRequest_Algorithm "HMAC_SHA256"
 
+-- | HMAC-SHA1 signing with a 160 bit key.
+pattern ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA1 :: ImportCryptoKeyVersionRequest_Algorithm
+pattern ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA1 = ImportCryptoKeyVersionRequest_Algorithm "HMAC_SHA1"
+
+-- | HMAC-SHA384 signing with a 384 bit key.
+pattern ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA384 :: ImportCryptoKeyVersionRequest_Algorithm
+pattern ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA384 = ImportCryptoKeyVersionRequest_Algorithm "HMAC_SHA384"
+
+-- | HMAC-SHA512 signing with a 512 bit key.
+pattern ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA512 :: ImportCryptoKeyVersionRequest_Algorithm
+pattern ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA512 = ImportCryptoKeyVersionRequest_Algorithm "HMAC_SHA512"
+
+-- | HMAC-SHA224 signing with a 224 bit key.
+pattern ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA224 :: ImportCryptoKeyVersionRequest_Algorithm
+pattern ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA224 = ImportCryptoKeyVersionRequest_Algorithm "HMAC_SHA224"
+
 -- | Algorithm representing symmetric encryption by an external key manager.
 pattern ImportCryptoKeyVersionRequest_Algorithm_EXTERNALSYMMETRICENCRYPTION :: ImportCryptoKeyVersionRequest_Algorithm
 pattern ImportCryptoKeyVersionRequest_Algorithm_EXTERNALSYMMETRICENCRYPTION = ImportCryptoKeyVersionRequest_Algorithm "EXTERNAL_SYMMETRIC_ENCRYPTION"
@@ -1217,6 +1351,10 @@ pattern ImportCryptoKeyVersionRequest_Algorithm_EXTERNALSYMMETRICENCRYPTION = Im
   ImportCryptoKeyVersionRequest_Algorithm_EC_SIGN_P384_SHA384,
   ImportCryptoKeyVersionRequest_Algorithm_EC_SIGN_SECP256K1_SHA256,
   ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA256,
+  ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA1,
+  ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA384,
+  ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA512,
+  ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA224,
   ImportCryptoKeyVersionRequest_Algorithm_EXTERNALSYMMETRICENCRYPTION,
   ImportCryptoKeyVersionRequest_Algorithm
   #-}
@@ -1246,10 +1384,30 @@ pattern ImportJob_ImportMethod_RSA_OAEP_3072_SHA1_AES_256 = ImportJob_ImportMeth
 pattern ImportJob_ImportMethod_RSA_OAEP_4096_SHA1_AES_256 :: ImportJob_ImportMethod
 pattern ImportJob_ImportMethod_RSA_OAEP_4096_SHA1_AES_256 = ImportJob_ImportMethod "RSA_OAEP_4096_SHA1_AES_256"
 
+-- | This ImportMethod represents the CKM/RSA/AES/KEY/WRAP key wrapping scheme defined in the PKCS #11 standard. In summary, this involves wrapping the raw key with an ephemeral AES key, and wrapping the ephemeral AES key with a 3072 bit RSA key. For more details, see <http://docs.oasis-open.org/pkcs11/pkcs11-curr/v2.40/cos01/pkcs11-curr-v2.40-cos01.html#_Toc408226908 RSA AES key wrap mechanism>.
+pattern ImportJob_ImportMethod_RSA_OAEP_3072_SHA256_AES_256 :: ImportJob_ImportMethod
+pattern ImportJob_ImportMethod_RSA_OAEP_3072_SHA256_AES_256 = ImportJob_ImportMethod "RSA_OAEP_3072_SHA256_AES_256"
+
+-- | This ImportMethod represents the CKM/RSA/AES/KEY/WRAP key wrapping scheme defined in the PKCS #11 standard. In summary, this involves wrapping the raw key with an ephemeral AES key, and wrapping the ephemeral AES key with a 4096 bit RSA key. For more details, see <http://docs.oasis-open.org/pkcs11/pkcs11-curr/v2.40/cos01/pkcs11-curr-v2.40-cos01.html#_Toc408226908 RSA AES key wrap mechanism>.
+pattern ImportJob_ImportMethod_RSA_OAEP_4096_SHA256_AES_256 :: ImportJob_ImportMethod
+pattern ImportJob_ImportMethod_RSA_OAEP_4096_SHA256_AES_256 = ImportJob_ImportMethod "RSA_OAEP_4096_SHA256_AES_256"
+
+-- | This ImportMethod represents RSAES-OAEP with a 3072 bit RSA key. The key material to be imported is wrapped directly with the RSA key. Due to technical limitations of RSA wrapping, this method cannot be used to wrap RSA keys for import.
+pattern ImportJob_ImportMethod_RSA_OAEP_3072_SHA256 :: ImportJob_ImportMethod
+pattern ImportJob_ImportMethod_RSA_OAEP_3072_SHA256 = ImportJob_ImportMethod "RSA_OAEP_3072_SHA256"
+
+-- | This ImportMethod represents RSAES-OAEP with a 4096 bit RSA key. The key material to be imported is wrapped directly with the RSA key. Due to technical limitations of RSA wrapping, this method cannot be used to wrap RSA keys for import.
+pattern ImportJob_ImportMethod_RSA_OAEP_4096_SHA256 :: ImportJob_ImportMethod
+pattern ImportJob_ImportMethod_RSA_OAEP_4096_SHA256 = ImportJob_ImportMethod "RSA_OAEP_4096_SHA256"
+
 {-# COMPLETE
   ImportJob_ImportMethod_IMPORTMETHODUNSPECIFIED,
   ImportJob_ImportMethod_RSA_OAEP_3072_SHA1_AES_256,
   ImportJob_ImportMethod_RSA_OAEP_4096_SHA1_AES_256,
+  ImportJob_ImportMethod_RSA_OAEP_3072_SHA256_AES_256,
+  ImportJob_ImportMethod_RSA_OAEP_4096_SHA256_AES_256,
+  ImportJob_ImportMethod_RSA_OAEP_3072_SHA256,
+  ImportJob_ImportMethod_RSA_OAEP_4096_SHA256,
   ImportJob_ImportMethod
   #-}
 
@@ -1557,6 +1715,22 @@ pattern PublicKey_Algorithm_EC_SIGN_SECP256K1_SHA256 = PublicKey_Algorithm "EC_S
 pattern PublicKey_Algorithm_HMAC_SHA256 :: PublicKey_Algorithm
 pattern PublicKey_Algorithm_HMAC_SHA256 = PublicKey_Algorithm "HMAC_SHA256"
 
+-- | HMAC-SHA1 signing with a 160 bit key.
+pattern PublicKey_Algorithm_HMAC_SHA1 :: PublicKey_Algorithm
+pattern PublicKey_Algorithm_HMAC_SHA1 = PublicKey_Algorithm "HMAC_SHA1"
+
+-- | HMAC-SHA384 signing with a 384 bit key.
+pattern PublicKey_Algorithm_HMAC_SHA384 :: PublicKey_Algorithm
+pattern PublicKey_Algorithm_HMAC_SHA384 = PublicKey_Algorithm "HMAC_SHA384"
+
+-- | HMAC-SHA512 signing with a 512 bit key.
+pattern PublicKey_Algorithm_HMAC_SHA512 :: PublicKey_Algorithm
+pattern PublicKey_Algorithm_HMAC_SHA512 = PublicKey_Algorithm "HMAC_SHA512"
+
+-- | HMAC-SHA224 signing with a 224 bit key.
+pattern PublicKey_Algorithm_HMAC_SHA224 :: PublicKey_Algorithm
+pattern PublicKey_Algorithm_HMAC_SHA224 = PublicKey_Algorithm "HMAC_SHA224"
+
 -- | Algorithm representing symmetric encryption by an external key manager.
 pattern PublicKey_Algorithm_EXTERNALSYMMETRICENCRYPTION :: PublicKey_Algorithm
 pattern PublicKey_Algorithm_EXTERNALSYMMETRICENCRYPTION = PublicKey_Algorithm "EXTERNAL_SYMMETRIC_ENCRYPTION"
@@ -1586,6 +1760,10 @@ pattern PublicKey_Algorithm_EXTERNALSYMMETRICENCRYPTION = PublicKey_Algorithm "E
   PublicKey_Algorithm_EC_SIGN_P384_SHA384,
   PublicKey_Algorithm_EC_SIGN_SECP256K1_SHA256,
   PublicKey_Algorithm_HMAC_SHA256,
+  PublicKey_Algorithm_HMAC_SHA1,
+  PublicKey_Algorithm_HMAC_SHA384,
+  PublicKey_Algorithm_HMAC_SHA512,
+  PublicKey_Algorithm_HMAC_SHA224,
   PublicKey_Algorithm_EXTERNALSYMMETRICENCRYPTION,
   PublicKey_Algorithm
   #-}

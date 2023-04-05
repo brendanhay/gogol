@@ -61,6 +61,10 @@ library
     Gogol.Dataproc.Projects.Locations.Batches.Delete
     Gogol.Dataproc.Projects.Locations.Batches.Get
     Gogol.Dataproc.Projects.Locations.Batches.List
+    Gogol.Dataproc.Projects.Locations.Operations.Cancel
+    Gogol.Dataproc.Projects.Locations.Operations.Delete
+    Gogol.Dataproc.Projects.Locations.Operations.Get
+    Gogol.Dataproc.Projects.Locations.Operations.List
     Gogol.Dataproc.Projects.Locations.WorkflowTemplates.Create
     Gogol.Dataproc.Projects.Locations.WorkflowTemplates.Delete
     Gogol.Dataproc.Projects.Locations.WorkflowTemplates.Get
@@ -86,6 +90,9 @@ library
     Gogol.Dataproc.Projects.Regions.Clusters.GetIamPolicy
     Gogol.Dataproc.Projects.Regions.Clusters.InjectCredentials
     Gogol.Dataproc.Projects.Regions.Clusters.List
+    Gogol.Dataproc.Projects.Regions.Clusters.NodeGroups.Create
+    Gogol.Dataproc.Projects.Regions.Clusters.NodeGroups.Get
+    Gogol.Dataproc.Projects.Regions.Clusters.NodeGroups.Resize
     Gogol.Dataproc.Projects.Regions.Clusters.Patch
     Gogol.Dataproc.Projects.Regions.Clusters.Repair
     Gogol.Dataproc.Projects.Regions.Clusters.SetIamPolicy
@@ -126,5 +133,5 @@ library
     Gogol.Dataproc.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

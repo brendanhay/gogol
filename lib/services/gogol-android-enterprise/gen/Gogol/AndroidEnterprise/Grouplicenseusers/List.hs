@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the IDs of the users who have been granted entitlements under the license.
+-- Retrieves the IDs of the users who have been granted entitlements under the license. __Note:__ This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.grouplicenseusers.list@.
 module Gogol.AndroidEnterprise.Grouplicenseusers.List
@@ -62,7 +62,7 @@ type AndroidEnterpriseGrouplicenseusersListResource =
               '[Core.JSON]
               GroupLicenseUsersListResponse
 
--- | Retrieves the IDs of the users who have been granted entitlements under the license.
+-- | Retrieves the IDs of the users who have been granted entitlements under the license. __Note:__ This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
 --
 -- /See:/ 'newAndroidEnterpriseGrouplicenseusersList' smart constructor.
 data AndroidEnterpriseGrouplicenseusersList = AndroidEnterpriseGrouplicenseusersList

@@ -138,6 +138,13 @@ module Gogol.TPU
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** AcceleratorConfig
+    AcceleratorConfig (..),
+    newAcceleratorConfig,
+
+    -- ** AcceleratorConfig_Type
+    AcceleratorConfig_Type (..),
+
     -- ** AcceleratorType
     AcceleratorType (..),
     newAcceleratorType,
@@ -277,6 +284,10 @@ module Gogol.TPU
     -- ** ServiceIdentity
     ServiceIdentity (..),
     newServiceIdentity,
+
+    -- ** ShieldedInstanceConfig
+    ShieldedInstanceConfig (..),
+    newShieldedInstanceConfig,
 
     -- ** StartNodeRequest
     StartNodeRequest (..),

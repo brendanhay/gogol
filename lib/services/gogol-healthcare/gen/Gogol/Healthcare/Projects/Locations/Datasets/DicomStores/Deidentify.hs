@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- De-identifies data from the source store and writes it to the destination store. The metadata field type is OperationMetadata. If the request is successful, the response field type is DeidentifyDicomStoreSummary. If errors occur, error is set. The LRO result may still be successful if de-identification fails for some DICOM instances. The output DICOM store will not contain these failed resources. Failed resource totals are tracked in Operation.metadata. Error details are also logged to Cloud Logging (see </healthcare/docs/how-tos/logging Viewing error logs in Cloud Logging>).
+-- De-identifies data from the source store and writes it to the destination store. The metadata field type is OperationMetadata. If the request is successful, the response field type is DeidentifyDicomStoreSummary. If errors occur, error is set. The LRO result may still be successful if de-identification fails for some DICOM instances. The output DICOM store will not contain these failed resources. Failed resource totals are tracked in Operation.metadata. Error details are also logged to Cloud Logging (see <https://cloud.google.com/healthcare/docs/how-tos/logging Viewing error logs in Cloud Logging>).
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.dicomStores.deidentify@.
 module Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Deidentify
@@ -56,7 +56,7 @@ type HealthcareProjectsLocationsDatasetsDicomStoresDeidentifyResource =
     Core.:> Core.ReqBody '[Core.JSON] DeidentifyDicomStoreRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | De-identifies data from the source store and writes it to the destination store. The metadata field type is OperationMetadata. If the request is successful, the response field type is DeidentifyDicomStoreSummary. If errors occur, error is set. The LRO result may still be successful if de-identification fails for some DICOM instances. The output DICOM store will not contain these failed resources. Failed resource totals are tracked in Operation.metadata. Error details are also logged to Cloud Logging (see </healthcare/docs/how-tos/logging Viewing error logs in Cloud Logging>).
+-- | De-identifies data from the source store and writes it to the destination store. The metadata field type is OperationMetadata. If the request is successful, the response field type is DeidentifyDicomStoreSummary. If errors occur, error is set. The LRO result may still be successful if de-identification fails for some DICOM instances. The output DICOM store will not contain these failed resources. Failed resource totals are tracked in Operation.metadata. Error details are also logged to Cloud Logging (see <https://cloud.google.com/healthcare/docs/how-tos/logging Viewing error logs in Cloud Logging>).
 --
 -- /See:/ 'newHealthcareProjectsLocationsDatasetsDicomStoresDeidentify' smart constructor.
 data HealthcareProjectsLocationsDatasetsDicomStoresDeidentify = HealthcareProjectsLocationsDatasetsDicomStoresDeidentify

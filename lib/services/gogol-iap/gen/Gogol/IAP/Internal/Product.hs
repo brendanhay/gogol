@@ -34,9 +34,17 @@ module Gogol.IAP.Internal.Product
     AccessSettings (..),
     newAccessSettings,
 
+    -- * AllowedDomainsSettings
+    AllowedDomainsSettings (..),
+    newAllowedDomainsSettings,
+
     -- * ApplicationSettings
     ApplicationSettings (..),
     newApplicationSettings,
+
+    -- * AttributePropagationSettings
+    AttributePropagationSettings (..),
+    newAttributePropagationSettings,
 
     -- * Binding
     Binding (..),
@@ -90,6 +98,10 @@ module Gogol.IAP.Internal.Product
     ListIdentityAwareProxyClientsResponse (..),
     newListIdentityAwareProxyClientsResponse,
 
+    -- * ListTunnelDestGroupsResponse
+    ListTunnelDestGroupsResponse (..),
+    newListTunnelDestGroupsResponse,
+
     -- * OAuthSettings
     OAuthSettings (..),
     newOAuthSettings,
@@ -133,6 +145,10 @@ module Gogol.IAP.Internal.Product
     -- * TestIamPermissionsResponse
     TestIamPermissionsResponse (..),
     newTestIamPermissionsResponse,
+
+    -- * TunnelDestGroup
+    TunnelDestGroup (..),
+    newTunnelDestGroup,
   )
 where
 
@@ -146,7 +162,9 @@ data AccessDeniedPageSettings = AccessDeniedPageSettings
   { -- | The URI to be redirected to when access is denied.
     accessDeniedPageUri :: (Core.Maybe Core.Text),
     -- | Whether to generate a troubleshooting URL on access denied events to this application.
-    generateTroubleshootingUri :: (Core.Maybe Core.Bool)
+    generateTroubleshootingUri :: (Core.Maybe Core.Bool),
+    -- | Whether to generate remediation token on access denied events to this application.
+    remediationTokenGenerationEnabled :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -156,7 +174,8 @@ newAccessDeniedPageSettings ::
 newAccessDeniedPageSettings =
   AccessDeniedPageSettings
     { accessDeniedPageUri = Core.Nothing,
-      generateTroubleshootingUri = Core.Nothing
+      generateTroubleshootingUri = Core.Nothing,
+      remediationTokenGenerationEnabled = Core.Nothing
     }
 
 instance Core.FromJSON AccessDeniedPageSettings where
@@ -167,6 +186,7 @@ instance Core.FromJSON AccessDeniedPageSettings where
           AccessDeniedPageSettings
             Core.<$> (o Core..:? "accessDeniedPageUri")
             Core.<*> (o Core..:? "generateTroubleshootingUri")
+            Core.<*> (o Core..:? "remediationTokenGenerationEnabled")
       )
 
 instance Core.ToJSON AccessDeniedPageSettings where
@@ -176,7 +196,9 @@ instance Core.ToJSON AccessDeniedPageSettings where
           [ ("accessDeniedPageUri" Core..=)
               Core.<$> accessDeniedPageUri,
             ("generateTroubleshootingUri" Core..=)
-              Core.<$> generateTroubleshootingUri
+              Core.<$> generateTroubleshootingUri,
+            ("remediationTokenGenerationEnabled" Core..=)
+              Core.<$> remediationTokenGenerationEnabled
           ]
       )
 
@@ -184,7 +206,9 @@ instance Core.ToJSON AccessDeniedPageSettings where
 --
 -- /See:/ 'newAccessSettings' smart constructor.
 data AccessSettings = AccessSettings
-  { -- | Configuration to allow cross-origin requests via IAP.
+  { -- | Settings to configure and enable allowed domains.
+    allowedDomainsSettings :: (Core.Maybe AllowedDomainsSettings),
+    -- | Configuration to allow cross-origin requests via IAP.
     corsSettings :: (Core.Maybe CorsSettings),
     -- | GCIP claims and endpoint configurations for 3p identity providers.
     gcipSettings :: (Core.Maybe GcipSettings),
@@ -202,7 +226,8 @@ newAccessSettings ::
   AccessSettings
 newAccessSettings =
   AccessSettings
-    { corsSettings = Core.Nothing,
+    { allowedDomainsSettings = Core.Nothing,
+      corsSettings = Core.Nothing,
       gcipSettings = Core.Nothing,
       oauthSettings = Core.Nothing,
       policyDelegationSettings = Core.Nothing,
@@ -215,7 +240,8 @@ instance Core.FromJSON AccessSettings where
       "AccessSettings"
       ( \o ->
           AccessSettings
-            Core.<$> (o Core..:? "corsSettings")
+            Core.<$> (o Core..:? "allowedDomainsSettings")
+            Core.<*> (o Core..:? "corsSettings")
             Core.<*> (o Core..:? "gcipSettings")
             Core.<*> (o Core..:? "oauthSettings")
             Core.<*> (o Core..:? "policyDelegationSettings")
@@ -226,12 +252,50 @@ instance Core.ToJSON AccessSettings where
   toJSON AccessSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("corsSettings" Core..=) Core.<$> corsSettings,
+          [ ("allowedDomainsSettings" Core..=)
+              Core.<$> allowedDomainsSettings,
+            ("corsSettings" Core..=) Core.<$> corsSettings,
             ("gcipSettings" Core..=) Core.<$> gcipSettings,
             ("oauthSettings" Core..=) Core.<$> oauthSettings,
             ("policyDelegationSettings" Core..=)
               Core.<$> policyDelegationSettings,
             ("reauthSettings" Core..=) Core.<$> reauthSettings
+          ]
+      )
+
+-- | Configuration for IAP allowed domains. Lets you to restrict access to an app and allow access to only the domains that you list.
+--
+-- /See:/ 'newAllowedDomainsSettings' smart constructor.
+data AllowedDomainsSettings = AllowedDomainsSettings
+  { -- | List of trusted domains.
+    domains :: (Core.Maybe [Core.Text]),
+    -- | Configuration for customers to opt in for the feature.
+    enable :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AllowedDomainsSettings' with the minimum fields required to make a request.
+newAllowedDomainsSettings ::
+  AllowedDomainsSettings
+newAllowedDomainsSettings =
+  AllowedDomainsSettings {domains = Core.Nothing, enable = Core.Nothing}
+
+instance Core.FromJSON AllowedDomainsSettings where
+  parseJSON =
+    Core.withObject
+      "AllowedDomainsSettings"
+      ( \o ->
+          AllowedDomainsSettings
+            Core.<$> (o Core..:? "domains")
+            Core.<*> (o Core..:? "enable")
+      )
+
+instance Core.ToJSON AllowedDomainsSettings where
+  toJSON AllowedDomainsSettings {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("domains" Core..=) Core.<$> domains,
+            ("enable" Core..=) Core.<$> enable
           ]
       )
 
@@ -241,9 +305,11 @@ instance Core.ToJSON AccessSettings where
 data ApplicationSettings = ApplicationSettings
   { -- | Customization for Access Denied page.
     accessDeniedPageSettings :: (Core.Maybe AccessDeniedPageSettings),
+    -- | Settings to configure attribute propagation.
+    attributePropagationSettings :: (Core.Maybe AttributePropagationSettings),
     -- | The Domain value to set for cookies generated by IAP. This value is not validated by the API, but will be ignored at runtime if invalid.
     cookieDomain :: (Core.Maybe Core.Text),
-    -- | Settings to configure IAP\'s behavior for a CSM mesh.
+    -- | Settings to configure IAP\'s behavior for a service mesh.
     csmSettings :: (Core.Maybe CsmSettings)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -254,6 +320,7 @@ newApplicationSettings ::
 newApplicationSettings =
   ApplicationSettings
     { accessDeniedPageSettings = Core.Nothing,
+      attributePropagationSettings = Core.Nothing,
       cookieDomain = Core.Nothing,
       csmSettings = Core.Nothing
     }
@@ -265,6 +332,7 @@ instance Core.FromJSON ApplicationSettings where
       ( \o ->
           ApplicationSettings
             Core.<$> (o Core..:? "accessDeniedPageSettings")
+            Core.<*> (o Core..:? "attributePropagationSettings")
             Core.<*> (o Core..:? "cookieDomain")
             Core.<*> (o Core..:? "csmSettings")
       )
@@ -275,8 +343,55 @@ instance Core.ToJSON ApplicationSettings where
       ( Core.catMaybes
           [ ("accessDeniedPageSettings" Core..=)
               Core.<$> accessDeniedPageSettings,
+            ("attributePropagationSettings" Core..=)
+              Core.<$> attributePropagationSettings,
             ("cookieDomain" Core..=) Core.<$> cookieDomain,
             ("csmSettings" Core..=) Core.<$> csmSettings
+          ]
+      )
+
+-- | Configuration for propagating attributes to applications protected by IAP.
+--
+-- /See:/ 'newAttributePropagationSettings' smart constructor.
+data AttributePropagationSettings = AttributePropagationSettings
+  { -- | Whether the provided attribute propagation settings should be evaluated on user requests. If set to true, attributes returned from the expression will be propagated in the set output credentials.
+    enable :: (Core.Maybe Core.Bool),
+    -- | Raw string CEL expression. Must return a list of attributes. A maximum of 45 attributes can be selected. Expressions can select different attribute types from @attributes@: @attributes.saml_attributes@, @attributes.iap_attributes@. The following functions are supported: - filter @.filter(, )@: Returns a subset of @where@ is true for every item. - in @in@: Returns true if @contains@. - selectByName @.selectByName()@: Returns the attribute in @with the given@ name, otherwise returns empty. - emitAs @.emitAs()@: Sets the @name field to the given@ for propagation in selected output credentials. - strict @.strict()@: Ignores the @x-goog-iap-attr-@ prefix for the provided @when propagating with the \`HEADER\` output credential, such as request headers. - append \`.append()\` OR \`.append()\`: Appends the provided@ or @to the end of@. Example expression: @attributes.saml_attributes.filter(x, x.name in [\'test\']).append(attributes.iap_attributes.selectByName(\'exact\').emitAs(\'custom\').strict())@
+    expression :: (Core.Maybe Core.Text),
+    -- | Which output credentials attributes selected by the CEL expression should be propagated in. All attributes will be fully duplicated in each selected output credential.
+    outputCredentials :: (Core.Maybe [AttributePropagationSettings_OutputCredentialsItem])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AttributePropagationSettings' with the minimum fields required to make a request.
+newAttributePropagationSettings ::
+  AttributePropagationSettings
+newAttributePropagationSettings =
+  AttributePropagationSettings
+    { enable = Core.Nothing,
+      expression = Core.Nothing,
+      outputCredentials = Core.Nothing
+    }
+
+instance Core.FromJSON AttributePropagationSettings where
+  parseJSON =
+    Core.withObject
+      "AttributePropagationSettings"
+      ( \o ->
+          AttributePropagationSettings
+            Core.<$> (o Core..:? "enable")
+            Core.<*> (o Core..:? "expression")
+            Core.<*> (o Core..:? "outputCredentials")
+      )
+
+instance Core.ToJSON AttributePropagationSettings where
+  toJSON AttributePropagationSettings {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("enable" Core..=) Core.<$> enable,
+            ("expression" Core..=) Core.<$> expression,
+            ("outputCredentials" Core..=)
+              Core.<$> outputCredentials
           ]
       )
 
@@ -286,8 +401,9 @@ instance Core.ToJSON ApplicationSettings where
 data Binding = Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe Expr),
-    -- | Specifies the principals requesting access for a Cloud Platform resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains
-    -- the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@.
+    -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
+    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
     members :: (Core.Maybe [Core.Text]),
     -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
     role' :: (Core.Maybe Core.Text)
@@ -407,7 +523,7 @@ instance Core.ToJSON CorsSettings where
           ]
       )
 
--- | Configuration for RCTokens generated for CSM workloads protected by IAP. RCTokens are IAP generated JWTs that can be verified at the application. The RCToken is primarily used for ISTIO deployments, and can be scoped to a single mesh by configuring the audience field accordingly
+-- | Configuration for RCToken generated for service mesh workloads protected by IAP. RCToken are IAP generated JWTs that can be verified at the application. The RCToken is primarily used for service mesh deployments, and can be scoped to a single mesh by configuring the audience field accordingly.
 --
 -- /See:/ 'newCsmSettings' smart constructor.
 newtype CsmSettings = CsmSettings
@@ -436,7 +552,7 @@ instance Core.ToJSON CsmSettings where
           [("rctokenAud" Core..=) Core.<$> rctokenAud]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -763,6 +879,46 @@ instance
           ]
       )
 
+-- | The response from ListTunnelDestGroups.
+--
+-- /See:/ 'newListTunnelDestGroupsResponse' smart constructor.
+data ListTunnelDestGroupsResponse = ListTunnelDestGroupsResponse
+  { -- | A token that you can send as @page_token@ to retrieve the next page. If this field is omitted, there are no subsequent pages.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | TunnelDestGroup existing in the project.
+    tunnelDestGroups :: (Core.Maybe [TunnelDestGroup])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListTunnelDestGroupsResponse' with the minimum fields required to make a request.
+newListTunnelDestGroupsResponse ::
+  ListTunnelDestGroupsResponse
+newListTunnelDestGroupsResponse =
+  ListTunnelDestGroupsResponse
+    { nextPageToken = Core.Nothing,
+      tunnelDestGroups = Core.Nothing
+    }
+
+instance Core.FromJSON ListTunnelDestGroupsResponse where
+  parseJSON =
+    Core.withObject
+      "ListTunnelDestGroupsResponse"
+      ( \o ->
+          ListTunnelDestGroupsResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "tunnelDestGroups")
+      )
+
+instance Core.ToJSON ListTunnelDestGroupsResponse where
+  toJSON ListTunnelDestGroupsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("tunnelDestGroups" Core..=)
+              Core.<$> tunnelDestGroups
+          ]
+      )
+
 -- | Configuration for OAuth login&consent flow behavior as well as for OAuth Credentials.
 --
 -- /See:/ 'newOAuthSettings' smart constructor.
@@ -930,7 +1086,7 @@ instance Core.ToJSON PolicyName where
 data ReauthSettings = ReauthSettings
   { -- | Reauth session lifetime, how long before a user has to reauthenticate again.
     maxAge :: (Core.Maybe Core.Duration),
-    -- | Reauth method required by the policy.
+    -- | Reauth method requested.
     method :: (Core.Maybe ReauthSettings_Method),
     -- | How IAP determines the effective policy in cases of hierarchial policies. Policies are merged from higher in the hierarchy to lower in the hierarchy.
     policyType :: (Core.Maybe ReauthSettings_PolicyType)
@@ -1076,7 +1232,7 @@ instance Core.ToJSON Resource_Labels where
 --
 -- /See:/ 'newSetIamPolicyRequest' smart constructor.
 newtype SetIamPolicyRequest = SetIamPolicyRequest
-  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
+  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Google Cloud services (such as Projects) might reject them.
     policy :: (Core.Maybe Policy)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1103,7 +1259,7 @@ instance Core.ToJSON SetIamPolicyRequest where
 --
 -- /See:/ 'newTestIamPermissionsRequest' smart constructor.
 newtype TestIamPermissionsRequest = TestIamPermissionsRequest
-  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as \'/\' or \'storage./\') are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
+  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as @*@ or @storage.*@) are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
     permissions :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1159,4 +1315,48 @@ instance Core.ToJSON TestIamPermissionsResponse where
     Core.object
       ( Core.catMaybes
           [("permissions" Core..=) Core.<$> permissions]
+      )
+
+-- | A TunnelDestGroup.
+--
+-- /See:/ 'newTunnelDestGroup' smart constructor.
+data TunnelDestGroup = TunnelDestGroup
+  { -- | Unordered list. List of CIDRs that this group applies to.
+    cidrs :: (Core.Maybe [Core.Text]),
+    -- | Unordered list. List of FQDNs that this group applies to.
+    fqdns :: (Core.Maybe [Core.Text]),
+    -- | Required. Immutable. Identifier for the TunnelDestGroup. Must be unique within the project and contain only lower case letters (a-z) and dashes (-).
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TunnelDestGroup' with the minimum fields required to make a request.
+newTunnelDestGroup ::
+  TunnelDestGroup
+newTunnelDestGroup =
+  TunnelDestGroup
+    { cidrs = Core.Nothing,
+      fqdns = Core.Nothing,
+      name = Core.Nothing
+    }
+
+instance Core.FromJSON TunnelDestGroup where
+  parseJSON =
+    Core.withObject
+      "TunnelDestGroup"
+      ( \o ->
+          TunnelDestGroup
+            Core.<$> (o Core..:? "cidrs")
+            Core.<*> (o Core..:? "fqdns")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON TunnelDestGroup where
+  toJSON TunnelDestGroup {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("cidrs" Core..=) Core.<$> cidrs,
+            ("fqdns" Core..=) Core.<$> fqdns,
+            ("name" Core..=) Core.<$> name
+          ]
       )

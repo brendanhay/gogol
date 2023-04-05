@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an existing snapshot. Snapshots are used in Seek operations, which allow you to manage message acknowledgments in bulk. That is, you can set the acknowledgment state of messages in an existing subscription to the state captured by a snapshot.
+-- Updates an existing snapshot. Snapshots are used in <https://cloud.google.com/pubsub/docs/replay-overview Seek> operations, which allow you to manage message acknowledgments in bulk. That is, you can set the acknowledgment state of messages in an existing subscription to the state captured by a snapshot.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.snapshots.patch@.
 module Gogol.PubSub.Projects.Snapshots.Patch
@@ -56,7 +56,7 @@ type PubSubProjectsSnapshotsPatchResource =
     Core.:> Core.ReqBody '[Core.JSON] UpdateSnapshotRequest
     Core.:> Core.Patch '[Core.JSON] Snapshot
 
--- | Updates an existing snapshot. Snapshots are used in Seek operations, which allow you to manage message acknowledgments in bulk. That is, you can set the acknowledgment state of messages in an existing subscription to the state captured by a snapshot.
+-- | Updates an existing snapshot. Snapshots are used in <https://cloud.google.com/pubsub/docs/replay-overview Seek> operations, which allow you to manage message acknowledgments in bulk. That is, you can set the acknowledgment state of messages in an existing subscription to the state captured by a snapshot.
 --
 -- /See:/ 'newPubSubProjectsSnapshotsPatch' smart constructor.
 data PubSubProjectsSnapshotsPatch = PubSubProjectsSnapshotsPatch

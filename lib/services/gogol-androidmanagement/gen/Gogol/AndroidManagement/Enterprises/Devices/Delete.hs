@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a device. This operation wipes the device.
+-- Deletes a device. This operation wipes the device. Deleted devices do not show up in enterprises.devices.list calls and a 404 is returned from enterprises.devices.get.
 --
 -- /See:/ <https://developers.google.com/android/management Android Management API Reference> for @androidmanagement.enterprises.devices.delete@.
 module Gogol.AndroidManagement.Enterprises.Devices.Delete
@@ -59,7 +59,7 @@ type AndroidManagementEnterprisesDevicesDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] Empty
 
--- | Deletes a device. This operation wipes the device.
+-- | Deletes a device. This operation wipes the device. Deleted devices do not show up in enterprises.devices.list calls and a 404 is returned from enterprises.devices.get.
 --
 -- /See:/ 'newAndroidManagementEnterprisesDevicesDelete' smart constructor.
 data AndroidManagementEnterprisesDevicesDelete = AndroidManagementEnterprisesDevicesDelete

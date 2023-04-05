@@ -70,7 +70,7 @@ data DirectorySchemasGet = DirectorySchemasGet
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Immutable ID of the Google Workspace account.
+    -- | The unique ID for the customer\'s Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, use this field instead of @domain@. You can also use the @my_customer@ alias to represent your account\'s @customerId@. The @customerId@ is also returned as part of the </admin-sdk/directory/v1/reference/users Users> resource. You must provide either the @customer@ or the @domain@ parameter.
     customerId :: Core.Text,
     -- | Name or immutable ID of the schema.
     schemaKey :: Core.Text,
@@ -83,7 +83,7 @@ data DirectorySchemasGet = DirectorySchemasGet
 
 -- | Creates a value of 'DirectorySchemasGet' with the minimum fields required to make a request.
 newDirectorySchemasGet ::
-  -- |  Immutable ID of the Google Workspace account. See 'customerId'.
+  -- |  The unique ID for the customer\'s Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, use this field instead of @domain@. You can also use the @my_customer@ alias to represent your account\'s @customerId@. The @customerId@ is also returned as part of the </admin-sdk/directory/v1/reference/users Users> resource. You must provide either the @customer@ or the @domain@ parameter. See 'customerId'.
   Core.Text ->
   -- |  Name or immutable ID of the schema. See 'schemaKey'.
   Core.Text ->

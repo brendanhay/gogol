@@ -28,7 +28,7 @@
 --
 -- Gets a post by path.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.posts.getByPath@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.posts.getByPath@.
 module Gogol.Blogger.Posts.GetByPath
   ( -- * Resource
     BloggerPostsGetByPathResource,

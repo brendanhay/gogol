@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns an event.
+-- Returns an event based on its Google Calendar ID. To retrieve an event using its iCalendar ID, call the events.list method using the iCalUID parameter.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.events.get@.
 module Gogol.AppsCalendar.Calendar.Events.Get
@@ -57,7 +57,7 @@ type CalendarEventsGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Event
 
--- | Returns an event.
+-- | Returns an event based on its Google Calendar ID. To retrieve an event using its iCalendar ID, call the events.list method using the iCalUID parameter.
 --
 -- /See:/ 'newCalendarEventsGet' smart constructor.
 data CalendarEventsGet = CalendarEventsGet

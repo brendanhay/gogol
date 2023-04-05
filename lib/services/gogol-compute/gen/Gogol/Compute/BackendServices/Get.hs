@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified BackendService resource. Gets a list of available backend services.
+-- Returns the specified BackendService resource.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.backendServices.get@.
 module Gogol.Compute.BackendServices.Get
@@ -60,7 +60,7 @@ type ComputeBackendServicesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] BackendService
 
--- | Returns the specified BackendService resource. Gets a list of available backend services.
+-- | Returns the specified BackendService resource.
 --
 -- /See:/ 'newComputeBackendServicesGet' smart constructor.
 data ComputeBackendServicesGet = ComputeBackendServicesGet

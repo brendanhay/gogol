@@ -50,9 +50,17 @@ module Gogol.DataFusion.Internal.Product
     CryptoKeyConfig (..),
     newCryptoKeyConfig,
 
+    -- * DnsPeering
+    DnsPeering (..),
+    newDnsPeering,
+
     -- * Empty
     Empty (..),
     newEmpty,
+
+    -- * EventPublishConfig
+    EventPublishConfig (..),
+    newEventPublishConfig,
 
     -- * Expr
     Expr (..),
@@ -73,6 +81,10 @@ module Gogol.DataFusion.Internal.Product
     -- * ListAvailableVersionsResponse
     ListAvailableVersionsResponse (..),
     newListAvailableVersionsResponse,
+
+    -- * ListDnsPeeringsResponse
+    ListDnsPeeringsResponse (..),
+    newListDnsPeeringsResponse,
 
     -- * ListInstancesResponse
     ListInstancesResponse (..),
@@ -165,7 +177,7 @@ import qualified Gogol.Prelude as Core
 data Accelerator = Accelerator
   { -- | The type of an accelator for a CDF instance.
     acceleratorType :: (Core.Maybe Accelerator_AcceleratorType),
-    -- | The state of the accelerator
+    -- | The state of the accelerator.
     state :: (Core.Maybe Accelerator_State)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -197,7 +209,7 @@ instance Core.ToJSON Accelerator where
       )
 
 -- | Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs. If there are AuditConfigs for both @allServices@ and a specific service, the union of the two AuditConfigs is used for that service: the log/types specified in each AuditConfig are enabled, and the exempted/members in each AuditLogConfig are exempted. Example Policy with multiple AuditConfigs: { \"audit/configs\": [ { \"service\": \"allServices\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\", \"exempted/members\": [ \"user:jose\@example.com\" ] }, { \"log/type\": \"DATA/WRITE\" }, { \"log/type\": \"ADMIN/READ\" } ] }, { \"service\": \"sampleservice.googleapis.com\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\" }, { \"log/type\": \"DATA/WRITE\", \"exempted/members\": [ \"user:aliya\@example.com\" ] } ] } ] } For sampleservice, this policy enables DATA/READ, DATA/WRITE and
--- ADMIN/READ logging. It also exempts jose\@example.com from DATA/READ logging, and aliya\@example.com from DATA/WRITE logging.
+-- ADMIN/READ logging. It also exempts @jose\@example.com@ from DATA/READ logging, and @aliya\@example.com@ from DATA/WRITE logging.
 --
 -- /See:/ 'newAuditConfig' smart constructor.
 data AuditConfig = AuditConfig
@@ -277,8 +289,9 @@ instance Core.ToJSON AuditLogConfig where
 data Binding = Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe Expr),
-    -- | Specifies the principals requesting access for a Cloud Platform resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains
-    -- the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@.
+    -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
+    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
     members :: (Core.Maybe [Core.Text]),
     -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
     role' :: (Core.Maybe Core.Text)
@@ -365,7 +378,61 @@ instance Core.ToJSON CryptoKeyConfig where
           [("keyReference" Core..=) Core.<$> keyReference]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | DNS peering configuration. These configurations are used to create DNS peering with the customer Cloud DNS.
+--
+-- /See:/ 'newDnsPeering' smart constructor.
+data DnsPeering = DnsPeering
+  { -- | Optional. Optional description of the dns zone.
+    description :: (Core.Maybe Core.Text),
+    -- | Required. The dns name suffix of the zone.
+    domain :: (Core.Maybe Core.Text),
+    -- | Required. The resource name of the dns peering zone. Format: projects\/{project}\/locations\/{location}\/instances\/{instance}\/dnsPeerings\/{dns_peering}
+    name :: (Core.Maybe Core.Text),
+    -- | Optional. Optional target network to which dns peering should happen.
+    targetNetwork :: (Core.Maybe Core.Text),
+    -- | Optional. Optional target project to which dns peering should happen.
+    targetProject :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DnsPeering' with the minimum fields required to make a request.
+newDnsPeering ::
+  DnsPeering
+newDnsPeering =
+  DnsPeering
+    { description = Core.Nothing,
+      domain = Core.Nothing,
+      name = Core.Nothing,
+      targetNetwork = Core.Nothing,
+      targetProject = Core.Nothing
+    }
+
+instance Core.FromJSON DnsPeering where
+  parseJSON =
+    Core.withObject
+      "DnsPeering"
+      ( \o ->
+          DnsPeering
+            Core.<$> (o Core..:? "description")
+            Core.<*> (o Core..:? "domain")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "targetNetwork")
+            Core.<*> (o Core..:? "targetProject")
+      )
+
+instance Core.ToJSON DnsPeering where
+  toJSON DnsPeering {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("description" Core..=) Core.<$> description,
+            ("domain" Core..=) Core.<$> domain,
+            ("name" Core..=) Core.<$> name,
+            ("targetNetwork" Core..=) Core.<$> targetNetwork,
+            ("targetProject" Core..=) Core.<$> targetProject
+          ]
+      )
+
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -382,6 +449,41 @@ instance Core.FromJSON Empty where
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
+
+-- | Confirguration of PubSubEventWriter.
+--
+-- /See:/ 'newEventPublishConfig' smart constructor.
+data EventPublishConfig = EventPublishConfig
+  { -- | Required. Option to enable Event Publishing.
+    enabled :: (Core.Maybe Core.Bool),
+    -- | Required. The resource name of the Pub\/Sub topic. Format: projects\/{project/id}\/topics\/{topic/id}
+    topic :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'EventPublishConfig' with the minimum fields required to make a request.
+newEventPublishConfig ::
+  EventPublishConfig
+newEventPublishConfig =
+  EventPublishConfig {enabled = Core.Nothing, topic = Core.Nothing}
+
+instance Core.FromJSON EventPublishConfig where
+  parseJSON =
+    Core.withObject
+      "EventPublishConfig"
+      ( \o ->
+          EventPublishConfig
+            Core.<$> (o Core..:? "enabled") Core.<*> (o Core..:? "topic")
+      )
+
+instance Core.ToJSON EventPublishConfig where
+  toJSON EventPublishConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("enabled" Core..=) Core.<$> enabled,
+            ("topic" Core..=) Core.<$> topic
+          ]
+      )
 
 -- | Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https:\/\/github.com\/google\/cel-spec. Example (Comparison): title: \"Summary size limit\" description: \"Determines if a summary is less than 100 chars\" expression: \"document.summary.size() \< 100\" Example (Equality): title: \"Requestor is owner\" description: \"Determines if requestor is the document owner\" expression: \"document.owner == request.auth.claims.email\" Example (Logic): title: \"Public documents\" description: \"Determine whether the document should be publicly visible\" expression: \"document.type != \'private\' && document.type != \'internal\'\" Example (Data Manipulation): title: \"Notification string\" description: \"Create a notification string with a timestamp.\" expression: \"\'New message received at \' + string(document.create_time)\" The exact variables and functions that may be referenced within an expression are
 -- determined by the service that evaluates it. See the service documentation for additional information.
@@ -437,11 +539,11 @@ instance Core.ToJSON Expr where
 --
 -- /See:/ 'newInstance' smart constructor.
 data Instance = Instance
-  { -- | List of accelerators enabled for this CDF instance.
+  { -- | Output only. List of accelerators enabled for this CDF instance.
     accelerators :: (Core.Maybe [Accelerator]),
     -- | Output only. Endpoint on which the REST APIs is accessible.
     apiEndpoint :: (Core.Maybe Core.Text),
-    -- | Available versions that the instance can be upgraded to using UpdateInstanceRequest.
+    -- | Output only. Available versions that the instance can be upgraded to using UpdateInstanceRequest.
     availableVersion :: (Core.Maybe [Version]),
     -- | Output only. The time the instance was created.
     createTime :: (Core.Maybe Core.DateTime),
@@ -461,6 +563,10 @@ data Instance = Instance
     enableStackdriverLogging :: (Core.Maybe Core.Bool),
     -- | Option to enable Stackdriver Monitoring.
     enableStackdriverMonitoring :: (Core.Maybe Core.Bool),
+    -- | Option to enable granular zone separation.
+    enableZoneSeparation :: (Core.Maybe Core.Bool),
+    -- | Option to enable and pass metadata for event publishing.
+    eventPublishConfig :: (Core.Maybe EventPublishConfig),
     -- | Output only. Cloud Storage bucket generated by Data Fusion in the customer project.
     gcsBucket :: (Core.Maybe Core.Text),
     -- | The resource labels for instance to use to annotate any related underlying resources such as Compute Engine VMs. The character \'=\' is not allowed to be used within the labels.
@@ -513,6 +619,8 @@ newInstance =
       enableRbac = Core.Nothing,
       enableStackdriverLogging = Core.Nothing,
       enableStackdriverMonitoring = Core.Nothing,
+      enableZoneSeparation = Core.Nothing,
+      eventPublishConfig = Core.Nothing,
       gcsBucket = Core.Nothing,
       labels = Core.Nothing,
       name = Core.Nothing,
@@ -549,6 +657,8 @@ instance Core.FromJSON Instance where
             Core.<*> (o Core..:? "enableRbac")
             Core.<*> (o Core..:? "enableStackdriverLogging")
             Core.<*> (o Core..:? "enableStackdriverMonitoring")
+            Core.<*> (o Core..:? "enableZoneSeparation")
+            Core.<*> (o Core..:? "eventPublishConfig")
             Core.<*> (o Core..:? "gcsBucket")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
@@ -587,6 +697,10 @@ instance Core.ToJSON Instance where
               Core.<$> enableStackdriverLogging,
             ("enableStackdriverMonitoring" Core..=)
               Core.<$> enableStackdriverMonitoring,
+            ("enableZoneSeparation" Core..=)
+              Core.<$> enableZoneSeparation,
+            ("eventPublishConfig" Core..=)
+              Core.<$> eventPublishConfig,
             ("gcsBucket" Core..=) Core.<$> gcsBucket,
             ("labels" Core..=) Core.<$> labels,
             ("name" Core..=) Core.<$> name,
@@ -697,6 +811,45 @@ instance Core.ToJSON ListAvailableVersionsResponse where
       ( Core.catMaybes
           [ ("availableVersions" Core..=)
               Core.<$> availableVersions,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
+-- | Response message for list DNS peerings.
+--
+-- /See:/ 'newListDnsPeeringsResponse' smart constructor.
+data ListDnsPeeringsResponse = ListDnsPeeringsResponse
+  { -- | List of dns peering.
+    dnsPeerings :: (Core.Maybe [DnsPeering]),
+    -- | A token, which can be sent as @page_token@ to retrieve the next page. If this field is omitted, there are no subsequent pages.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListDnsPeeringsResponse' with the minimum fields required to make a request.
+newListDnsPeeringsResponse ::
+  ListDnsPeeringsResponse
+newListDnsPeeringsResponse =
+  ListDnsPeeringsResponse
+    { dnsPeerings = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON ListDnsPeeringsResponse where
+  parseJSON =
+    Core.withObject
+      "ListDnsPeeringsResponse"
+      ( \o ->
+          ListDnsPeeringsResponse
+            Core.<$> (o Core..:? "dnsPeerings")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON ListDnsPeeringsResponse where
+  toJSON ListDnsPeeringsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("dnsPeerings" Core..=) Core.<$> dnsPeerings,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -1257,7 +1410,7 @@ instance Core.ToJSON RestartInstanceRequest where
 --
 -- /See:/ 'newSetIamPolicyRequest' smart constructor.
 data SetIamPolicyRequest = SetIamPolicyRequest
-  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
+  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Google Cloud services (such as Projects) might reject them.
     policy :: (Core.Maybe Policy),
     -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: @paths: \"bindings, etag\"@
     updateMask :: (Core.Maybe Core.FieldMask)
@@ -1360,7 +1513,7 @@ instance Core.ToJSON Status_DetailsItem where
 --
 -- /See:/ 'newTestIamPermissionsRequest' smart constructor.
 newtype TestIamPermissionsRequest = TestIamPermissionsRequest
-  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as \'/\' or \'storage./\') are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
+  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as @*@ or @storage.*@) are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
     permissions :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

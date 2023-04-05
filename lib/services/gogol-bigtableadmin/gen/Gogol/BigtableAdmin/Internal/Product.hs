@@ -86,6 +86,18 @@ module Gogol.BigtableAdmin.Internal.Product
     ColumnFamily (..),
     newColumnFamily,
 
+    -- * ColumnFamilyStats
+    ColumnFamilyStats (..),
+    newColumnFamilyStats,
+
+    -- * CopyBackupMetadata
+    CopyBackupMetadata (..),
+    newCopyBackupMetadata,
+
+    -- * CopyBackupRequest
+    CopyBackupRequest (..),
+    newCopyBackupRequest,
+
     -- * CreateBackupMetadata
     CreateBackupMetadata (..),
     newCreateBackupMetadata,
@@ -158,6 +170,10 @@ module Gogol.BigtableAdmin.Internal.Product
     GetPolicyOptions (..),
     newGetPolicyOptions,
 
+    -- * HotTablet
+    HotTablet (..),
+    newHotTablet,
+
     -- * Instance
     Instance (..),
     newInstance,
@@ -181,6 +197,10 @@ module Gogol.BigtableAdmin.Internal.Product
     -- * ListClustersResponse
     ListClustersResponse (..),
     newListClustersResponse,
+
+    -- * ListHotTabletsResponse
+    ListHotTabletsResponse (..),
+    newListHotTabletsResponse,
 
     -- * ListInstancesResponse
     ListInstancesResponse (..),
@@ -306,6 +326,10 @@ module Gogol.BigtableAdmin.Internal.Product
     TableProgress (..),
     newTableProgress,
 
+    -- * TableStats
+    TableStats (..),
+    newTableStats,
+
     -- * TestIamPermissionsRequest
     TestIamPermissionsRequest (..),
     newTestIamPermissionsRequest,
@@ -313,6 +337,14 @@ module Gogol.BigtableAdmin.Internal.Product
     -- * TestIamPermissionsResponse
     TestIamPermissionsResponse (..),
     newTestIamPermissionsResponse,
+
+    -- * UndeleteTableMetadata
+    UndeleteTableMetadata (..),
+    newUndeleteTableMetadata,
+
+    -- * UndeleteTableRequest
+    UndeleteTableRequest (..),
+    newUndeleteTableRequest,
 
     -- * Union
     Union (..),
@@ -329,6 +361,10 @@ module Gogol.BigtableAdmin.Internal.Product
     -- * UpdateInstanceMetadata
     UpdateInstanceMetadata (..),
     newUpdateInstanceMetadata,
+
+    -- * UpdateTableMetadata
+    UpdateTableMetadata (..),
+    newUpdateTableMetadata,
   )
 where
 
@@ -392,7 +428,7 @@ instance Core.ToJSON AppProfile where
       )
 
 -- | Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs. If there are AuditConfigs for both @allServices@ and a specific service, the union of the two AuditConfigs is used for that service: the log/types specified in each AuditConfig are enabled, and the exempted/members in each AuditLogConfig are exempted. Example Policy with multiple AuditConfigs: { \"audit/configs\": [ { \"service\": \"allServices\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\", \"exempted/members\": [ \"user:jose\@example.com\" ] }, { \"log/type\": \"DATA/WRITE\" }, { \"log/type\": \"ADMIN/READ\" } ] }, { \"service\": \"sampleservice.googleapis.com\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\" }, { \"log/type\": \"DATA/WRITE\", \"exempted/members\": [ \"user:aliya\@example.com\" ] } ] } ] } For sampleservice, this policy enables DATA/READ, DATA/WRITE and
--- ADMIN/READ logging. It also exempts jose\@example.com from DATA/READ logging, and aliya\@example.com from DATA/WRITE logging.
+-- ADMIN/READ logging. It also exempts @jose\@example.com@ from DATA/READ logging, and @aliya\@example.com@ from DATA/WRITE logging.
 --
 -- /See:/ 'newAuditConfig' smart constructor.
 data AuditConfig = AuditConfig
@@ -505,9 +541,11 @@ instance Core.ToJSON AutoscalingLimits where
 -- | The Autoscaling targets for a Cluster. These determine the recommended nodes.
 --
 -- /See:/ 'newAutoscalingTargets' smart constructor.
-newtype AutoscalingTargets = AutoscalingTargets
-  { -- | The cpu utilization that the Autoscaler should be trying to achieve. This number is on a scale from 0 (no utilization) to 100 (total utilization), and is limited between 10 and 80.
-    cpuUtilizationPercent :: (Core.Maybe Core.Int32)
+data AutoscalingTargets = AutoscalingTargets
+  { -- | The cpu utilization that the Autoscaler should be trying to achieve. This number is on a scale from 0 (no utilization) to 100 (total utilization), and is limited between 10 and 80, otherwise it will return INVALID_ARGUMENT error.
+    cpuUtilizationPercent :: (Core.Maybe Core.Int32),
+    -- | The storage utilization that the Autoscaler should be trying to achieve. This number is limited between 2560 (2.5TiB) and 5120 (5TiB) for a SSD cluster and between 8192 (8TiB) and 16384 (16TiB) for an HDD cluster, otherwise it will return INVALID_ARGUMENT error. If this value is set to 0, it will be treated as if it were set to the default value: 2560 for SSD, 8192 for HDD.
+    storageUtilizationGibPerNode :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -515,7 +553,10 @@ newtype AutoscalingTargets = AutoscalingTargets
 newAutoscalingTargets ::
   AutoscalingTargets
 newAutoscalingTargets =
-  AutoscalingTargets {cpuUtilizationPercent = Core.Nothing}
+  AutoscalingTargets
+    { cpuUtilizationPercent = Core.Nothing,
+      storageUtilizationGibPerNode = Core.Nothing
+    }
 
 instance Core.FromJSON AutoscalingTargets where
   parseJSON =
@@ -524,6 +565,7 @@ instance Core.FromJSON AutoscalingTargets where
       ( \o ->
           AutoscalingTargets
             Core.<$> (o Core..:? "cpuUtilizationPercent")
+            Core.<*> (o Core..:? "storageUtilizationGibPerNode")
       )
 
 instance Core.ToJSON AutoscalingTargets where
@@ -531,7 +573,9 @@ instance Core.ToJSON AutoscalingTargets where
     Core.object
       ( Core.catMaybes
           [ ("cpuUtilizationPercent" Core..=)
-              Core.<$> cpuUtilizationPercent
+              Core.<$> cpuUtilizationPercent,
+            ("storageUtilizationGibPerNode" Core..=)
+              Core.<$> storageUtilizationGibPerNode
           ]
       )
 
@@ -549,6 +593,8 @@ data Backup = Backup
     name :: (Core.Maybe Core.Text),
     -- | Output only. Size of the backup in bytes.
     sizeBytes :: (Core.Maybe Core.Int64),
+    -- | Output only. Name of the backup from which this backup was copied. If a backup is not created by copying a backup, this field will be empty. Values are of the form: projects\/\/instances\/\/backups\/.
+    sourceBackup :: (Core.Maybe Core.Text),
     -- | Required. Immutable. Name of the table from which this backup was created. This needs to be in the same instance as the backup. Values are of the form @projects\/{project}\/instances\/{instance}\/tables\/{source_table}@.
     sourceTable :: (Core.Maybe Core.Text),
     -- | Output only. @start_time@ is the time that the backup was started (i.e. approximately the time the CreateBackup request is received). The row data in this backup will be no older than this timestamp.
@@ -568,6 +614,7 @@ newBackup =
       expireTime = Core.Nothing,
       name = Core.Nothing,
       sizeBytes = Core.Nothing,
+      sourceBackup = Core.Nothing,
       sourceTable = Core.Nothing,
       startTime = Core.Nothing,
       state = Core.Nothing
@@ -586,6 +633,7 @@ instance Core.FromJSON Backup where
             Core.<*> ( o Core..:? "sizeBytes"
                          Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "sourceBackup")
             Core.<*> (o Core..:? "sourceTable")
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "state")
@@ -601,6 +649,7 @@ instance Core.ToJSON Backup where
             ("name" Core..=) Core.<$> name,
             ("sizeBytes" Core..=) Core.. Core.AsText
               Core.<$> sizeBytes,
+            ("sourceBackup" Core..=) Core.<$> sourceBackup,
             ("sourceTable" Core..=) Core.<$> sourceTable,
             ("startTime" Core..=) Core.<$> startTime,
             ("state" Core..=) Core.<$> state
@@ -615,6 +664,8 @@ data BackupInfo = BackupInfo
     backup :: (Core.Maybe Core.Text),
     -- | Output only. This time that the backup was finished. Row data in the backup will be no newer than this timestamp.
     endTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. Name of the backup from which this backup was copied. If a backup is not created by copying a backup, this field will be empty. Values are of the form: projects\/\/instances\/\/backups\/.
+    sourceBackup :: (Core.Maybe Core.Text),
     -- | Output only. Name of the table the backup was created from.
     sourceTable :: (Core.Maybe Core.Text),
     -- | Output only. The time that the backup was started. Row data in the backup will be no older than this timestamp.
@@ -629,6 +680,7 @@ newBackupInfo =
   BackupInfo
     { backup = Core.Nothing,
       endTime = Core.Nothing,
+      sourceBackup = Core.Nothing,
       sourceTable = Core.Nothing,
       startTime = Core.Nothing
     }
@@ -641,6 +693,7 @@ instance Core.FromJSON BackupInfo where
           BackupInfo
             Core.<$> (o Core..:? "backup")
             Core.<*> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "sourceBackup")
             Core.<*> (o Core..:? "sourceTable")
             Core.<*> (o Core..:? "startTime")
       )
@@ -651,6 +704,7 @@ instance Core.ToJSON BackupInfo where
       ( Core.catMaybes
           [ ("backup" Core..=) Core.<$> backup,
             ("endTime" Core..=) Core.<$> endTime,
+            ("sourceBackup" Core..=) Core.<$> sourceBackup,
             ("sourceTable" Core..=) Core.<$> sourceTable,
             ("startTime" Core..=) Core.<$> startTime
           ]
@@ -662,8 +716,9 @@ instance Core.ToJSON BackupInfo where
 data Binding = Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe Expr),
-    -- | Specifies the principals requesting access for a Cloud Platform resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains
-    -- the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@.
+    -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
+    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
     members :: (Core.Maybe [Core.Text]),
     -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
     role' :: (Core.Maybe Core.Text)
@@ -944,27 +999,174 @@ instance Core.ToJSON ClusterState where
 -- | A set of columns within a table which share a common configuration.
 --
 -- /See:/ 'newColumnFamily' smart constructor.
-newtype ColumnFamily = ColumnFamily
+data ColumnFamily = ColumnFamily
   { -- | Garbage collection rule specified as a protobuf. Must serialize to at most 500 bytes. NOTE: Garbage collection executes opportunistically in the background, and so it\'s possible for reads to return a cell even if it matches the active GC expression for its family.
-    gcRule :: (Core.Maybe GcRule)
+    gcRule :: (Core.Maybe GcRule),
+    -- | Only available with STATS_VIEW, this includes summary statistics about column family contents. For statistics over an entire table, see TableStats above.
+    stats :: (Core.Maybe ColumnFamilyStats)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ColumnFamily' with the minimum fields required to make a request.
 newColumnFamily ::
   ColumnFamily
-newColumnFamily = ColumnFamily {gcRule = Core.Nothing}
+newColumnFamily = ColumnFamily {gcRule = Core.Nothing, stats = Core.Nothing}
 
 instance Core.FromJSON ColumnFamily where
   parseJSON =
     Core.withObject
       "ColumnFamily"
-      (\o -> ColumnFamily Core.<$> (o Core..:? "gcRule"))
+      ( \o ->
+          ColumnFamily
+            Core.<$> (o Core..:? "gcRule") Core.<*> (o Core..:? "stats")
+      )
 
 instance Core.ToJSON ColumnFamily where
   toJSON ColumnFamily {..} =
     Core.object
-      (Core.catMaybes [("gcRule" Core..=) Core.<$> gcRule])
+      ( Core.catMaybes
+          [ ("gcRule" Core..=) Core.<$> gcRule,
+            ("stats" Core..=) Core.<$> stats
+          ]
+      )
+
+-- | Approximate statistics related to a single column family within a table. This information may change rapidly, interpreting these values at a point in time may already preset out-of-date information. Everything below is approximate, unless otherwise specified.
+--
+-- /See:/ 'newColumnFamilyStats' smart constructor.
+data ColumnFamilyStats = ColumnFamilyStats
+  { -- | How many cells are present per column qualifier in this column family, averaged over all rows containing any column in the column family. e.g. For column family \"family\" in a table with 3 rows: * A row with 3 cells in \"family:col\" and 1 cell in \"other:col\" (3 cells \/ 1 column in \"family\") * A row with 1 cell in \"family:col\", 7 cells in \"family:other_col\", and 7 cells in \"other:data\" (8 cells \/ 2 columns in \"family\") * A row with 3 cells in \"other:col\" (0 columns in \"family\", \"family\" not present) would report (3 + 8 + 0)\/(1 + 2 + 0) = 3.66 in this field.
+    averageCellsPerColumn :: (Core.Maybe Core.Double),
+    -- | How many column qualifiers are present in this column family, averaged over all rows in the table. e.g. For column family \"family\" in a table with 3 rows: * A row with cells in \"family:col\" and \"other:col\" (1 column in \"family\") * A row with cells in \"family:col\", \"family:other_col\", and \"other:data\" (2 columns in \"family\") * A row with cells in \"other:col\" (0 columns in \"family\", \"family\" not present) would report (1 + 2 + 0)\/3 = 1.5 in this field.
+    averageColumnsPerRow :: (Core.Maybe Core.Double),
+    -- | How much space the data in the column family occupies. This is roughly how many bytes would be needed to read the contents of the entire column family (e.g. by streaming all contents out).
+    logicalDataBytes :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ColumnFamilyStats' with the minimum fields required to make a request.
+newColumnFamilyStats ::
+  ColumnFamilyStats
+newColumnFamilyStats =
+  ColumnFamilyStats
+    { averageCellsPerColumn = Core.Nothing,
+      averageColumnsPerRow = Core.Nothing,
+      logicalDataBytes = Core.Nothing
+    }
+
+instance Core.FromJSON ColumnFamilyStats where
+  parseJSON =
+    Core.withObject
+      "ColumnFamilyStats"
+      ( \o ->
+          ColumnFamilyStats
+            Core.<$> (o Core..:? "averageCellsPerColumn")
+            Core.<*> (o Core..:? "averageColumnsPerRow")
+            Core.<*> ( o Core..:? "logicalDataBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+      )
+
+instance Core.ToJSON ColumnFamilyStats where
+  toJSON ColumnFamilyStats {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("averageCellsPerColumn" Core..=)
+              Core.<$> averageCellsPerColumn,
+            ("averageColumnsPerRow" Core..=)
+              Core.<$> averageColumnsPerRow,
+            ("logicalDataBytes" Core..=) Core.. Core.AsText
+              Core.<$> logicalDataBytes
+          ]
+      )
+
+-- | Metadata type for the google.longrunning.Operation returned by CopyBackup.
+--
+-- /See:/ 'newCopyBackupMetadata' smart constructor.
+data CopyBackupMetadata = CopyBackupMetadata
+  { -- | The name of the backup being created through the copy operation. Values are of the form @projects\/\/instances\/\/clusters\/\/backups\/@.
+    name :: (Core.Maybe Core.Text),
+    -- | The progress of the CopyBackup operation.
+    progress :: (Core.Maybe OperationProgress),
+    -- | Information about the source backup that is being copied from.
+    sourceBackupInfo :: (Core.Maybe BackupInfo)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CopyBackupMetadata' with the minimum fields required to make a request.
+newCopyBackupMetadata ::
+  CopyBackupMetadata
+newCopyBackupMetadata =
+  CopyBackupMetadata
+    { name = Core.Nothing,
+      progress = Core.Nothing,
+      sourceBackupInfo = Core.Nothing
+    }
+
+instance Core.FromJSON CopyBackupMetadata where
+  parseJSON =
+    Core.withObject
+      "CopyBackupMetadata"
+      ( \o ->
+          CopyBackupMetadata
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "progress")
+            Core.<*> (o Core..:? "sourceBackupInfo")
+      )
+
+instance Core.ToJSON CopyBackupMetadata where
+  toJSON CopyBackupMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("name" Core..=) Core.<$> name,
+            ("progress" Core..=) Core.<$> progress,
+            ("sourceBackupInfo" Core..=)
+              Core.<$> sourceBackupInfo
+          ]
+      )
+
+-- | The request for CopyBackup.
+--
+-- /See:/ 'newCopyBackupRequest' smart constructor.
+data CopyBackupRequest = CopyBackupRequest
+  { -- | Required. The id of the new backup. The @backup_id@ along with @parent@ are combined as {parent}\/backups\/{backup/id} to create the full backup name, of the form: @projects\/{project}\/instances\/{instance}\/clusters\/{cluster}\/backups\/{backup_id}@. This string must be between 1 and 50 characters in length and match the regex /a-zA-Z0-9*.
+    backupId :: (Core.Maybe Core.Text),
+    -- | Required. Required. The expiration time of the copied backup with microsecond granularity that must be at least 6 hours and at most 30 days from the time the request is received. Once the @expire_time@ has passed, Cloud Bigtable will delete the backup and free the resources used by the backup.
+    expireTime :: (Core.Maybe Core.DateTime),
+    -- | Required. The source backup to be copied from. The source backup needs to be in READY state for it to be copied. Copying a copied backup is not allowed. Once CopyBackup is in progress, the source backup cannot be deleted or cleaned up on expiration until CopyBackup is finished. Values are of the form: @projects\/\/instances\/\/clusters\/\/backups\/@.
+    sourceBackup :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CopyBackupRequest' with the minimum fields required to make a request.
+newCopyBackupRequest ::
+  CopyBackupRequest
+newCopyBackupRequest =
+  CopyBackupRequest
+    { backupId = Core.Nothing,
+      expireTime = Core.Nothing,
+      sourceBackup = Core.Nothing
+    }
+
+instance Core.FromJSON CopyBackupRequest where
+  parseJSON =
+    Core.withObject
+      "CopyBackupRequest"
+      ( \o ->
+          CopyBackupRequest
+            Core.<$> (o Core..:? "backupId")
+            Core.<*> (o Core..:? "expireTime")
+            Core.<*> (o Core..:? "sourceBackup")
+      )
+
+instance Core.ToJSON CopyBackupRequest where
+  toJSON CopyBackupRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("backupId" Core..=) Core.<$> backupId,
+            ("expireTime" Core..=) Core.<$> expireTime,
+            ("sourceBackup" Core..=) Core.<$> sourceBackup
+          ]
+      )
 
 -- | Metadata type for the operation returned by CreateBackup.
 --
@@ -1186,7 +1388,7 @@ instance Core.ToJSON CreateInstanceMetadata where
 --
 -- /See:/ 'newCreateInstanceRequest' smart constructor.
 data CreateInstanceRequest = CreateInstanceRequest
-  { -- | Required. The clusters to be created within the instance, mapped by desired cluster ID, e.g., just @mycluster@ rather than @projects\/myproject\/instances\/myinstance\/clusters\/mycluster@. Fields marked @OutputOnly@ must be left blank. Currently, at most four clusters can be specified.
+  { -- | Required. The clusters to be created within the instance, mapped by desired cluster ID, e.g., just @mycluster@ rather than @projects\/myproject\/instances\/myinstance\/clusters\/mycluster@. Fields marked @OutputOnly@ must be left blank.
     clusters :: (Core.Maybe CreateInstanceRequest_Clusters),
     -- | Required. The instance to create. Fields marked @OutputOnly@ must be left blank.
     instance' :: (Core.Maybe Instance),
@@ -1231,7 +1433,7 @@ instance Core.ToJSON CreateInstanceRequest where
           ]
       )
 
--- | Required. The clusters to be created within the instance, mapped by desired cluster ID, e.g., just @mycluster@ rather than @projects\/myproject\/instances\/myinstance\/clusters\/mycluster@. Fields marked @OutputOnly@ must be left blank. Currently, at most four clusters can be specified.
+-- | Required. The clusters to be created within the instance, mapped by desired cluster ID, e.g., just @mycluster@ rather than @projects\/myproject\/instances\/myinstance\/clusters\/mycluster@. Fields marked @OutputOnly@ must be left blank.
 --
 -- /See:/ 'newCreateInstanceRequest_Clusters' smart constructor.
 newtype CreateInstanceRequest_Clusters = CreateInstanceRequest_Clusters
@@ -1345,7 +1547,7 @@ instance Core.ToJSON DropRowRangeRequest where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -1367,7 +1569,7 @@ instance Core.ToJSON Empty where
 --
 -- /See:/ 'newEncryptionConfig' smart constructor.
 newtype EncryptionConfig = EncryptionConfig
-  { -- | Describes the Cloud KMS encryption key that will be used to protect the destination Bigtable cluster. The requirements for this key are: 1) The Cloud Bigtable service account associated with the project that contains this cluster must be granted the @cloudkms.cryptoKeyEncrypterDecrypter@ role on the CMEK key. 2) Only regional keys can be used and the region of the CMEK key must match the region of the cluster. 3) All clusters within an instance must use the same CMEK key. Values are of the form @projects\/{project}\/locations\/{location}\/keyRings\/{keyring}\/cryptoKeys\/{key}@
+  { -- | Describes the Cloud KMS encryption key that will be used to protect the destination Bigtable cluster. The requirements for this key are: 1) The Cloud Bigtable service account associated with the project that contains this cluster must be granted the @cloudkms.cryptoKeyEncrypterDecrypter@ role on the CMEK key. 2) Only regional keys can be used and the region of the CMEK key must match the region of the cluster. Values are of the form @projects\/{project}\/locations\/{location}\/keyRings\/{keyring}\/cryptoKeys\/{key}@
     kmsKeyName :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1656,21 +1858,88 @@ instance Core.ToJSON GetPolicyOptions where
           ]
       )
 
+-- | A tablet is a defined by a start and end key and is explained in https:\/\/cloud.google.com\/bigtable\/docs\/overview#architecture and https:\/\/cloud.google.com\/bigtable\/docs\/performance#optimization. A Hot tablet is a tablet that exhibits high average cpu usage during the time interval from start time to end time.
+--
+-- /See:/ 'newHotTablet' smart constructor.
+data HotTablet = HotTablet
+  { -- | Tablet End Key (inclusive).
+    endKey :: (Core.Maybe Core.Text),
+    -- | Output only. The end time of the hot tablet.
+    endTime :: (Core.Maybe Core.DateTime),
+    -- | The unique name of the hot tablet. Values are of the form @projects\/{project}\/instances\/{instance}\/clusters\/{cluster}\/hotTablets\/[a-zA-Z0-9_-]*@.
+    name :: (Core.Maybe Core.Text),
+    -- | Output only. The average CPU usage spent by a node on this tablet over the start/time to end/time time range. The percentage is the amount of CPU used by the node to serve the tablet, from 0% (tablet was not interacted with) to 100% (the node spent all cycles serving the hot tablet).
+    nodeCpuUsagePercent :: (Core.Maybe Core.Double),
+    -- | Tablet Start Key (inclusive).
+    startKey :: (Core.Maybe Core.Text),
+    -- | Output only. The start time of the hot tablet.
+    startTime :: (Core.Maybe Core.DateTime),
+    -- | Name of the table that contains the tablet. Values are of the form @projects\/{project}\/instances\/{instance}\/tables\/_a-zA-Z0-9*@.
+    tableName :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'HotTablet' with the minimum fields required to make a request.
+newHotTablet ::
+  HotTablet
+newHotTablet =
+  HotTablet
+    { endKey = Core.Nothing,
+      endTime = Core.Nothing,
+      name = Core.Nothing,
+      nodeCpuUsagePercent = Core.Nothing,
+      startKey = Core.Nothing,
+      startTime = Core.Nothing,
+      tableName = Core.Nothing
+    }
+
+instance Core.FromJSON HotTablet where
+  parseJSON =
+    Core.withObject
+      "HotTablet"
+      ( \o ->
+          HotTablet
+            Core.<$> (o Core..:? "endKey")
+            Core.<*> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "nodeCpuUsagePercent")
+            Core.<*> (o Core..:? "startKey")
+            Core.<*> (o Core..:? "startTime")
+            Core.<*> (o Core..:? "tableName")
+      )
+
+instance Core.ToJSON HotTablet where
+  toJSON HotTablet {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("endKey" Core..=) Core.<$> endKey,
+            ("endTime" Core..=) Core.<$> endTime,
+            ("name" Core..=) Core.<$> name,
+            ("nodeCpuUsagePercent" Core..=)
+              Core.<$> nodeCpuUsagePercent,
+            ("startKey" Core..=) Core.<$> startKey,
+            ("startTime" Core..=) Core.<$> startTime,
+            ("tableName" Core..=) Core.<$> tableName
+          ]
+      )
+
 -- | A collection of Bigtable Tables and the resources that serve them. All tables in an instance are served from all Clusters in the instance.
 --
 -- /See:/ 'newInstance' smart constructor.
 data Instance = Instance
-  { -- | Output only. A server-assigned timestamp representing when this Instance was created. For instances created before this field was added (August 2021), this value is @seconds: 0, nanos: 1@.
+  { -- | Output only. A commit timestamp representing when this Instance was created. For instances created before this field was added (August 2021), this value is @seconds: 0, nanos: 1@.
     createTime :: (Core.Maybe Core.DateTime),
     -- | Required. The descriptive name for this instance as it appears in UIs. Can be changed at any time, but should be kept globally unique to avoid confusion.
     displayName :: (Core.Maybe Core.Text),
-    -- | Required. Labels are a flexible and lightweight mechanism for organizing cloud resources into groups that reflect a customer\'s organizational needs and deployment strategies. They can be used to filter resources and aggregate metrics. * Label keys must be between 1 and 63 characters long and must conform to the regular expression: @\\p{Ll}\\p{Lo}{0,62}@. * Label values must be between 0 and 63 characters long and must conform to the regular expression: @[\\p{Ll}\\p{Lo}\\p{N}_-]{0,63}@. * No more than 64 labels can be associated with a given resource. * Keys and values must both be under 128 bytes.
+    -- | Labels are a flexible and lightweight mechanism for organizing cloud resources into groups that reflect a customer\'s organizational needs and deployment strategies. They can be used to filter resources and aggregate metrics. * Label keys must be between 1 and 63 characters long and must conform to the regular expression: @\\p{Ll}\\p{Lo}{0,62}@. * Label values must be between 0 and 63 characters long and must conform to the regular expression: @[\\p{Ll}\\p{Lo}\\p{N}_-]{0,63}@. * No more than 64 labels can be associated with a given resource. * Keys and values must both be under 128 bytes.
     labels :: (Core.Maybe Instance_Labels),
     -- | The unique name of the instance. Values are of the form @projects\/{project}\/instances\/a-z+[a-z0-9]@.
     name :: (Core.Maybe Core.Text),
+    -- | Output only. Reserved for future use.
+    satisfiesPzs :: (Core.Maybe Core.Bool),
     -- | Output only. The current state of the instance.
     state :: (Core.Maybe Instance_State),
-    -- | Required. The type of the instance. Defaults to @PRODUCTION@.
+    -- | The type of the instance. Defaults to @PRODUCTION@.
     type' :: (Core.Maybe Instance_Type)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1684,6 +1953,7 @@ newInstance =
       displayName = Core.Nothing,
       labels = Core.Nothing,
       name = Core.Nothing,
+      satisfiesPzs = Core.Nothing,
       state = Core.Nothing,
       type' = Core.Nothing
     }
@@ -1698,6 +1968,7 @@ instance Core.FromJSON Instance where
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "satisfiesPzs")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "type")
       )
@@ -1710,12 +1981,13 @@ instance Core.ToJSON Instance where
             ("displayName" Core..=) Core.<$> displayName,
             ("labels" Core..=) Core.<$> labels,
             ("name" Core..=) Core.<$> name,
+            ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
             ("state" Core..=) Core.<$> state,
             ("type" Core..=) Core.<$> type'
           ]
       )
 
--- | Required. Labels are a flexible and lightweight mechanism for organizing cloud resources into groups that reflect a customer\'s organizational needs and deployment strategies. They can be used to filter resources and aggregate metrics. * Label keys must be between 1 and 63 characters long and must conform to the regular expression: @\\p{Ll}\\p{Lo}{0,62}@. * Label values must be between 0 and 63 characters long and must conform to the regular expression: @[\\p{Ll}\\p{Lo}\\p{N}_-]{0,63}@. * No more than 64 labels can be associated with a given resource. * Keys and values must both be under 128 bytes.
+-- | Labels are a flexible and lightweight mechanism for organizing cloud resources into groups that reflect a customer\'s organizational needs and deployment strategies. They can be used to filter resources and aggregate metrics. * Label keys must be between 1 and 63 characters long and must conform to the regular expression: @\\p{Ll}\\p{Lo}{0,62}@. * Label values must be between 0 and 63 characters long and must conform to the regular expression: @[\\p{Ll}\\p{Lo}\\p{N}_-]{0,63}@. * No more than 64 labels can be associated with a given resource. * Keys and values must both be under 128 bytes.
 --
 -- /See:/ 'newInstance_Labels' smart constructor.
 newtype Instance_Labels = Instance_Labels
@@ -1887,6 +2159,45 @@ instance Core.ToJSON ListClustersResponse where
       ( Core.catMaybes
           [ ("clusters" Core..=) Core.<$> clusters,
             ("failedLocations" Core..=) Core.<$> failedLocations,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
+-- | Response message for BigtableInstanceAdmin.ListHotTablets.
+--
+-- /See:/ 'newListHotTabletsResponse' smart constructor.
+data ListHotTabletsResponse = ListHotTabletsResponse
+  { -- | List of hot tablets in the tables of the requested cluster that fall within the requested time range. Hot tablets are ordered by node cpu usage percent. If there are multiple hot tablets that correspond to the same tablet within a 15-minute interval, only the hot tablet with the highest node cpu usage will be included in the response.
+    hotTablets :: (Core.Maybe [HotTablet]),
+    -- | Set if not all hot tablets could be returned in a single response. Pass this value to @page_token@ in another request to get the next page of results.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListHotTabletsResponse' with the minimum fields required to make a request.
+newListHotTabletsResponse ::
+  ListHotTabletsResponse
+newListHotTabletsResponse =
+  ListHotTabletsResponse
+    { hotTablets = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON ListHotTabletsResponse where
+  parseJSON =
+    Core.withObject
+      "ListHotTabletsResponse"
+      ( \o ->
+          ListHotTabletsResponse
+            Core.<$> (o Core..:? "hotTablets")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON ListHotTabletsResponse where
+  toJSON ListHotTabletsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("hotTablets" Core..=) Core.<$> hotTablets,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -2760,7 +3071,7 @@ instance Core.ToJSON RestoreTableRequest where
 --
 -- /See:/ 'newSetIamPolicyRequest' smart constructor.
 data SetIamPolicyRequest = SetIamPolicyRequest
-  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
+  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Google Cloud services (such as Projects) might reject them.
     policy :: (Core.Maybe Policy),
     -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: @paths: \"bindings, etag\"@
     updateMask :: (Core.Maybe Core.FieldMask)
@@ -2930,14 +3241,18 @@ instance Core.ToJSON Status_DetailsItem where
 data Table = Table
   { -- | Output only. Map from cluster ID to per-cluster table state. If it could not be determined whether or not the table has data in a particular cluster (for example, if its zone is unavailable), then there will be an entry for the cluster with UNKNOWN @replication_status@. Views: @REPLICATION_VIEW@, @ENCRYPTION_VIEW@, @FULL@
     clusterStates :: (Core.Maybe Table_ClusterStates),
-    -- | The column families configured for this table, mapped by column family ID. Views: @SCHEMA_VIEW@, @FULL@
+    -- | The column families configured for this table, mapped by column family ID. Views: @SCHEMA_VIEW@, @STATS_VIEW@, @FULL@
     columnFamilies :: (Core.Maybe Table_ColumnFamilies),
+    -- | Set to true to make the table protected against data loss. i.e. deleting the following resources through Admin APIs are prohibited: * The table. * The column families in the table. * The instance containing the table. Note one can still delete the data stored in the table through Data APIs.
+    deletionProtection :: (Core.Maybe Core.Bool),
     -- | Immutable. The granularity (i.e. @MILLIS@) at which timestamps are stored in this table. Timestamps not matching the granularity will be rejected. If unspecified at creation time, the value will be set to @MILLIS@. Views: @SCHEMA_VIEW@, @FULL@.
     granularity :: (Core.Maybe Table_Granularity),
-    -- | The unique name of the table. Values are of the form @projects\/{project}\/instances\/{instance}\/tables\/_a-zA-Z0-9*@. Views: @NAME_ONLY@, @SCHEMA_VIEW@, @REPLICATION_VIEW@, @FULL@
+    -- | The unique name of the table. Values are of the form @projects\/{project}\/instances\/{instance}\/tables\/_a-zA-Z0-9*@. Views: @NAME_ONLY@, @SCHEMA_VIEW@, @REPLICATION_VIEW@, @STATS_VIEW@, @FULL@
     name :: (Core.Maybe Core.Text),
     -- | Output only. If this table was restored from another data source (e.g. a backup), this field will be populated with information about the restore.
-    restoreInfo :: (Core.Maybe RestoreInfo)
+    restoreInfo :: (Core.Maybe RestoreInfo),
+    -- | Only available with STATS_VIEW, this includes summary statistics about the entire table contents. For statistics about a specific column family, see ColumnFamilyStats in the mapped ColumnFamily collection above.
+    stats :: (Core.Maybe TableStats)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2948,9 +3263,11 @@ newTable =
   Table
     { clusterStates = Core.Nothing,
       columnFamilies = Core.Nothing,
+      deletionProtection = Core.Nothing,
       granularity = Core.Nothing,
       name = Core.Nothing,
-      restoreInfo = Core.Nothing
+      restoreInfo = Core.Nothing,
+      stats = Core.Nothing
     }
 
 instance Core.FromJSON Table where
@@ -2961,9 +3278,11 @@ instance Core.FromJSON Table where
           Table
             Core.<$> (o Core..:? "clusterStates")
             Core.<*> (o Core..:? "columnFamilies")
+            Core.<*> (o Core..:? "deletionProtection")
             Core.<*> (o Core..:? "granularity")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "restoreInfo")
+            Core.<*> (o Core..:? "stats")
       )
 
 instance Core.ToJSON Table where
@@ -2972,9 +3291,12 @@ instance Core.ToJSON Table where
       ( Core.catMaybes
           [ ("clusterStates" Core..=) Core.<$> clusterStates,
             ("columnFamilies" Core..=) Core.<$> columnFamilies,
+            ("deletionProtection" Core..=)
+              Core.<$> deletionProtection,
             ("granularity" Core..=) Core.<$> granularity,
             ("name" Core..=) Core.<$> name,
-            ("restoreInfo" Core..=) Core.<$> restoreInfo
+            ("restoreInfo" Core..=) Core.<$> restoreInfo,
+            ("stats" Core..=) Core.<$> stats
           ]
       )
 
@@ -3008,7 +3330,7 @@ instance Core.ToJSON Table_ClusterStates where
   toJSON Table_ClusterStates {..} =
     Core.toJSON additional
 
--- | The column families configured for this table, mapped by column family ID. Views: @SCHEMA_VIEW@, @FULL@
+-- | The column families configured for this table, mapped by column family ID. Views: @SCHEMA_VIEW@, @STATS_VIEW@, @FULL@
 --
 -- /See:/ 'newTable_ColumnFamilies' smart constructor.
 newtype Table_ColumnFamilies = Table_ColumnFamilies
@@ -3088,11 +3410,68 @@ instance Core.ToJSON TableProgress where
           ]
       )
 
+-- | Approximate statistics related to a table. These statistics are calculated infrequently, while simultaneously, data in the table can change rapidly. Thus the values reported here (e.g. row count) are very likely out-of date, even the instant they are received in this API. Thus, only treat these values as approximate. IMPORTANT: Everything below is approximate, unless otherwise specified.
+--
+-- /See:/ 'newTableStats' smart constructor.
+data TableStats = TableStats
+  { -- | How many cells are present per column (column family, column qualifier) combinations, averaged over all columns in all rows in the table. e.g. A table with 2 rows: * A row with 3 cells in \"family:col\" and 1 cell in \"other:col\" (4 cells \/ 2 columns) * A row with 1 cell in \"family:col\", 7 cells in \"family:other_col\", and 7 cells in \"other:data\" (15 cells \/ 3 columns) would report (4 + 15)\/(2 + 3) = 3.8 in this field.
+    averageCellsPerColumn :: (Core.Maybe Core.Double),
+    -- | How many (column family, column qualifier) combinations are present per row in the table, averaged over all rows in the table. e.g. A table with 2 rows: * A row with cells in \"family:col\" and \"other:col\" (2 distinct columns) * A row with cells in \"family:col\", \"family:other_col\", and \"other:data\" (3 distinct columns) would report (2 + 3)\/2 = 2.5 in this field.
+    averageColumnsPerRow :: (Core.Maybe Core.Double),
+    -- | This is roughly how many bytes would be needed to read the entire table (e.g. by streaming all contents out).
+    logicalDataBytes :: (Core.Maybe Core.Int64),
+    -- | How many rows are in the table.
+    rowCount :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TableStats' with the minimum fields required to make a request.
+newTableStats ::
+  TableStats
+newTableStats =
+  TableStats
+    { averageCellsPerColumn = Core.Nothing,
+      averageColumnsPerRow = Core.Nothing,
+      logicalDataBytes = Core.Nothing,
+      rowCount = Core.Nothing
+    }
+
+instance Core.FromJSON TableStats where
+  parseJSON =
+    Core.withObject
+      "TableStats"
+      ( \o ->
+          TableStats
+            Core.<$> (o Core..:? "averageCellsPerColumn")
+            Core.<*> (o Core..:? "averageColumnsPerRow")
+            Core.<*> ( o Core..:? "logicalDataBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "rowCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+      )
+
+instance Core.ToJSON TableStats where
+  toJSON TableStats {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("averageCellsPerColumn" Core..=)
+              Core.<$> averageCellsPerColumn,
+            ("averageColumnsPerRow" Core..=)
+              Core.<$> averageColumnsPerRow,
+            ("logicalDataBytes" Core..=) Core.. Core.AsText
+              Core.<$> logicalDataBytes,
+            ("rowCount" Core..=) Core.. Core.AsText
+              Core.<$> rowCount
+          ]
+      )
+
 -- | Request message for @TestIamPermissions@ method.
 --
 -- /See:/ 'newTestIamPermissionsRequest' smart constructor.
 newtype TestIamPermissionsRequest = TestIamPermissionsRequest
-  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as \'/\' or \'storage./\') are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
+  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as @*@ or @storage.*@) are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
     permissions :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3149,6 +3528,70 @@ instance Core.ToJSON TestIamPermissionsResponse where
       ( Core.catMaybes
           [("permissions" Core..=) Core.<$> permissions]
       )
+
+-- | Metadata type for the operation returned by google.bigtable.admin.v2.BigtableTableAdmin.UndeleteTable.
+--
+-- /See:/ 'newUndeleteTableMetadata' smart constructor.
+data UndeleteTableMetadata = UndeleteTableMetadata
+  { -- | If set, the time at which this operation finished or was cancelled.
+    endTime :: (Core.Maybe Core.DateTime),
+    -- | The name of the table being restored.
+    name :: (Core.Maybe Core.Text),
+    -- | The time at which this operation started.
+    startTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UndeleteTableMetadata' with the minimum fields required to make a request.
+newUndeleteTableMetadata ::
+  UndeleteTableMetadata
+newUndeleteTableMetadata =
+  UndeleteTableMetadata
+    { endTime = Core.Nothing,
+      name = Core.Nothing,
+      startTime = Core.Nothing
+    }
+
+instance Core.FromJSON UndeleteTableMetadata where
+  parseJSON =
+    Core.withObject
+      "UndeleteTableMetadata"
+      ( \o ->
+          UndeleteTableMetadata
+            Core.<$> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "startTime")
+      )
+
+instance Core.ToJSON UndeleteTableMetadata where
+  toJSON UndeleteTableMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("endTime" Core..=) Core.<$> endTime,
+            ("name" Core..=) Core.<$> name,
+            ("startTime" Core..=) Core.<$> startTime
+          ]
+      )
+
+-- | Request message for google.bigtable.admin.v2.BigtableTableAdmin.UndeleteTable
+--
+-- /See:/ 'newUndeleteTableRequest' smart constructor.
+data UndeleteTableRequest = UndeleteTableRequest
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UndeleteTableRequest' with the minimum fields required to make a request.
+newUndeleteTableRequest ::
+  UndeleteTableRequest
+newUndeleteTableRequest = UndeleteTableRequest
+
+instance Core.FromJSON UndeleteTableRequest where
+  parseJSON =
+    Core.withObject
+      "UndeleteTableRequest"
+      (\o -> Core.pure UndeleteTableRequest)
+
+instance Core.ToJSON UndeleteTableRequest where
+  toJSON = Core.const Core.emptyObject
 
 -- | A GcRule which deletes cells matching any of the given rules.
 --
@@ -3280,5 +3723,49 @@ instance Core.ToJSON UpdateInstanceMetadata where
           [ ("finishTime" Core..=) Core.<$> finishTime,
             ("originalRequest" Core..=) Core.<$> originalRequest,
             ("requestTime" Core..=) Core.<$> requestTime
+          ]
+      )
+
+-- | Metadata type for the operation returned by UpdateTable.
+--
+-- /See:/ 'newUpdateTableMetadata' smart constructor.
+data UpdateTableMetadata = UpdateTableMetadata
+  { -- | If set, the time at which this operation finished or was canceled.
+    endTime :: (Core.Maybe Core.DateTime),
+    -- | The name of the table being updated.
+    name :: (Core.Maybe Core.Text),
+    -- | The time at which this operation started.
+    startTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UpdateTableMetadata' with the minimum fields required to make a request.
+newUpdateTableMetadata ::
+  UpdateTableMetadata
+newUpdateTableMetadata =
+  UpdateTableMetadata
+    { endTime = Core.Nothing,
+      name = Core.Nothing,
+      startTime = Core.Nothing
+    }
+
+instance Core.FromJSON UpdateTableMetadata where
+  parseJSON =
+    Core.withObject
+      "UpdateTableMetadata"
+      ( \o ->
+          UpdateTableMetadata
+            Core.<$> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "startTime")
+      )
+
+instance Core.ToJSON UpdateTableMetadata where
+  toJSON UpdateTableMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("endTime" Core..=) Core.<$> endTime,
+            ("name" Core..=) Core.<$> name,
+            ("startTime" Core..=) Core.<$> startTime
           ]
       )

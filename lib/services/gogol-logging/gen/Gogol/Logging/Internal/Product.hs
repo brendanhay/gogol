@@ -26,9 +26,17 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Logging.Internal.Product
-  ( -- * BigQueryOptions
+  ( -- * BigQueryDataset
+    BigQueryDataset (..),
+    newBigQueryDataset,
+
+    -- * BigQueryOptions
     BigQueryOptions (..),
     newBigQueryOptions,
+
+    -- * BucketMetadata
+    BucketMetadata (..),
+    newBucketMetadata,
 
     -- * BucketOptions
     BucketOptions (..),
@@ -54,6 +62,18 @@ module Gogol.Logging.Internal.Product
     CopyLogEntriesResponse (..),
     newCopyLogEntriesResponse,
 
+    -- * CreateBucketRequest
+    CreateBucketRequest (..),
+    newCreateBucketRequest,
+
+    -- * CreateLinkRequest
+    CreateLinkRequest (..),
+    newCreateLinkRequest,
+
+    -- * DeleteLinkRequest
+    DeleteLinkRequest (..),
+    newDeleteLinkRequest,
+
     -- * Empty
     Empty (..),
     newEmpty,
@@ -70,6 +90,10 @@ module Gogol.Logging.Internal.Product
     HttpRequest (..),
     newHttpRequest,
 
+    -- * IndexConfig
+    IndexConfig (..),
+    newIndexConfig,
+
     -- * LabelDescriptor
     LabelDescriptor (..),
     newLabelDescriptor,
@@ -78,6 +102,14 @@ module Gogol.Logging.Internal.Product
     Linear (..),
     newLinear,
 
+    -- * Link
+    Link (..),
+    newLink,
+
+    -- * LinkMetadata
+    LinkMetadata (..),
+    newLinkMetadata,
+
     -- * ListBucketsResponse
     ListBucketsResponse (..),
     newListBucketsResponse,
@@ -85,6 +117,10 @@ module Gogol.Logging.Internal.Product
     -- * ListExclusionsResponse
     ListExclusionsResponse (..),
     newListExclusionsResponse,
+
+    -- * ListLinksResponse
+    ListLinksResponse (..),
+    newListLinksResponse,
 
     -- * ListLocationsResponse
     ListLocationsResponse (..),
@@ -133,6 +169,10 @@ module Gogol.Logging.Internal.Product
     -- * Location_Metadata
     Location_Metadata (..),
     newLocation_Metadata,
+
+    -- * LocationMetadata
+    LocationMetadata (..),
+    newLocationMetadata,
 
     -- * LogBucket
     LogBucket (..),
@@ -274,6 +314,10 @@ module Gogol.Logging.Internal.Product
     UndeleteBucketRequest (..),
     newUndeleteBucketRequest,
 
+    -- * UpdateBucketRequest
+    UpdateBucketRequest (..),
+    newUpdateBucketRequest,
+
     -- * WriteLogEntriesRequest
     WriteLogEntriesRequest (..),
     newWriteLogEntriesRequest,
@@ -290,6 +334,35 @@ where
 
 import Gogol.Logging.Internal.Sum
 import qualified Gogol.Prelude as Core
+
+-- | Describes a BigQuery dataset that was created by a link.
+--
+-- /See:/ 'newBigQueryDataset' smart constructor.
+newtype BigQueryDataset = BigQueryDataset
+  { -- | Output only. The full resource name of the BigQuery dataset. The DATASET/ID will match the ID of the link, so the link must match the naming restrictions of BigQuery datasets (alphanumeric characters and underscores only).The dataset will have a resource path of \"bigquery.googleapis.com\/projects\/PROJECT/ID\/datasets\/DATASET_ID\"
+    datasetId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BigQueryDataset' with the minimum fields required to make a request.
+newBigQueryDataset ::
+  BigQueryDataset
+newBigQueryDataset = BigQueryDataset {datasetId = Core.Nothing}
+
+instance Core.FromJSON BigQueryDataset where
+  parseJSON =
+    Core.withObject
+      "BigQueryDataset"
+      ( \o ->
+          BigQueryDataset Core.<$> (o Core..:? "datasetId")
+      )
+
+instance Core.ToJSON BigQueryDataset where
+  toJSON BigQueryDataset {..} =
+    Core.object
+      ( Core.catMaybes
+          [("datasetId" Core..=) Core.<$> datasetId]
+      )
 
 -- | Options that change functionality of a sink exporting data to BigQuery.
 --
@@ -329,6 +402,62 @@ instance Core.ToJSON BigQueryOptions where
               Core.<$> usePartitionedTables,
             ("usesTimestampColumnPartitioning" Core..=)
               Core.<$> usesTimestampColumnPartitioning
+          ]
+      )
+
+-- | Metadata for LongRunningUpdateBucket Operations.
+--
+-- /See:/ 'newBucketMetadata' smart constructor.
+data BucketMetadata = BucketMetadata
+  { -- | LongRunningCreateBucket RPC request.
+    createBucketRequest :: (Core.Maybe CreateBucketRequest),
+    -- | The end time of an operation.
+    endTime :: (Core.Maybe Core.DateTime),
+    -- | The create time of an operation.
+    startTime :: (Core.Maybe Core.DateTime),
+    -- | State of an operation.
+    state :: (Core.Maybe BucketMetadata_State),
+    -- | LongRunningUpdateBucket RPC request.
+    updateBucketRequest :: (Core.Maybe UpdateBucketRequest)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BucketMetadata' with the minimum fields required to make a request.
+newBucketMetadata ::
+  BucketMetadata
+newBucketMetadata =
+  BucketMetadata
+    { createBucketRequest = Core.Nothing,
+      endTime = Core.Nothing,
+      startTime = Core.Nothing,
+      state = Core.Nothing,
+      updateBucketRequest = Core.Nothing
+    }
+
+instance Core.FromJSON BucketMetadata where
+  parseJSON =
+    Core.withObject
+      "BucketMetadata"
+      ( \o ->
+          BucketMetadata
+            Core.<$> (o Core..:? "createBucketRequest")
+            Core.<*> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "startTime")
+            Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "updateBucketRequest")
+      )
+
+instance Core.ToJSON BucketMetadata where
+  toJSON BucketMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("createBucketRequest" Core..=)
+              Core.<$> createBucketRequest,
+            ("endTime" Core..=) Core.<$> endTime,
+            ("startTime" Core..=) Core.<$> startTime,
+            ("state" Core..=) Core.<$> state,
+            ("updateBucketRequest" Core..=)
+              Core.<$> updateBucketRequest
           ]
       )
 
@@ -405,6 +534,8 @@ data CmekSettings = CmekSettings
   { -- | The resource name for the configured Cloud KMS key.KMS key name format: \"projects\/[PROJECT/ID]\/locations\/[LOCATION]\/keyRings\/[KEYRING]\/cryptoKeys\/[KEY]\" For example:\"projects\/my-project\/locations\/us-central1\/keyRings\/my-ring\/cryptoKeys\/my-key\"To enable CMEK for the Log Router, set this field to a valid kms/key/name for which the associated service account has the required cloudkms.cryptoKeyEncrypterDecrypter roles assigned for the key.The Cloud KMS key used by the Log Router can be updated by changing the kms/key_name to a new valid key name or disabled by setting the key name to an empty string. Encryption operations that are in progress will be completed with the key that was in use when they started. Decryption operations will be completed using the key that was used at the time of encryption unless access to that key has been revoked.To disable CMEK for the Log Router, set this field to an empty string.See Enabling CMEK for Log Router
     -- (https:\/\/cloud.google.com\/logging\/docs\/routing\/managed-encryption) for more information.
     kmsKeyName :: (Core.Maybe Core.Text),
+    -- | The CryptoKeyVersion resource name for the configured Cloud KMS key.KMS key name format: \"projects\/[PROJECT/ID]\/locations\/[LOCATION]\/keyRings\/[KEYRING]\/cryptoKeys\/[KEY]\/cryptoKeyVersions\/[VERSION]\" For example:\"projects\/my-project\/locations\/us-central1\/keyRings\/my-ring\/cryptoKeys\/my-key\/cryptoKeyVersions\/1\"This is a read-only field used to convey the specific configured CryptoKeyVersion of kms/key that has been configured. It will be populated in cases where the CMEK settings are bound to a single key version.If this field is populated, the kms_key is tied to a specific CryptoKeyVersion.
+    kmsKeyVersionName :: (Core.Maybe Core.Text),
     -- | Output only. The resource name of the CMEK settings.
     name :: (Core.Maybe Core.Text),
     -- | Output only. The service account that will be used by the Log Router to access your Cloud KMS key.Before enabling CMEK for Log Router, you must first assign the cloudkms.cryptoKeyEncrypterDecrypter role to the service account that the Log Router will use to access your Cloud KMS key. Use GetCmekSettings to obtain the service account ID.See Enabling CMEK for Log Router (https:\/\/cloud.google.com\/logging\/docs\/routing\/managed-encryption) for more information.
@@ -418,6 +549,7 @@ newCmekSettings ::
 newCmekSettings =
   CmekSettings
     { kmsKeyName = Core.Nothing,
+      kmsKeyVersionName = Core.Nothing,
       name = Core.Nothing,
       serviceAccountId = Core.Nothing
     }
@@ -429,6 +561,7 @@ instance Core.FromJSON CmekSettings where
       ( \o ->
           CmekSettings
             Core.<$> (o Core..:? "kmsKeyName")
+            Core.<*> (o Core..:? "kmsKeyVersionName")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "serviceAccountId")
       )
@@ -438,6 +571,8 @@ instance Core.ToJSON CmekSettings where
     Core.object
       ( Core.catMaybes
           [ ("kmsKeyName" Core..=) Core.<$> kmsKeyName,
+            ("kmsKeyVersionName" Core..=)
+              Core.<$> kmsKeyVersionName,
             ("name" Core..=) Core.<$> name,
             ("serviceAccountId" Core..=)
               Core.<$> serviceAccountId
@@ -588,7 +723,122 @@ instance Core.ToJSON CopyLogEntriesResponse where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for Empty is empty JSON object {}.
+-- | The parameters to CreateBucket.
+--
+-- /See:/ 'newCreateBucketRequest' smart constructor.
+data CreateBucketRequest = CreateBucketRequest
+  { -- | Required. The new bucket. The region specified in the new bucket must be compliant with any Location Restriction Org Policy. The name field in the bucket is ignored.
+    bucket :: (Core.Maybe LogBucket),
+    -- | Required. A client-assigned identifier such as \"my-bucket\". Identifiers are limited to 100 characters and can include only letters, digits, underscores, hyphens, and periods.
+    bucketId :: (Core.Maybe Core.Text),
+    -- | Required. The resource in which to create the log bucket: \"projects\/[PROJECT/ID]\/locations\/[LOCATION/ID]\" For example:\"projects\/my-project\/locations\/global\"
+    parent :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CreateBucketRequest' with the minimum fields required to make a request.
+newCreateBucketRequest ::
+  CreateBucketRequest
+newCreateBucketRequest =
+  CreateBucketRequest
+    { bucket = Core.Nothing,
+      bucketId = Core.Nothing,
+      parent = Core.Nothing
+    }
+
+instance Core.FromJSON CreateBucketRequest where
+  parseJSON =
+    Core.withObject
+      "CreateBucketRequest"
+      ( \o ->
+          CreateBucketRequest
+            Core.<$> (o Core..:? "bucket")
+            Core.<*> (o Core..:? "bucketId")
+            Core.<*> (o Core..:? "parent")
+      )
+
+instance Core.ToJSON CreateBucketRequest where
+  toJSON CreateBucketRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("bucket" Core..=) Core.<$> bucket,
+            ("bucketId" Core..=) Core.<$> bucketId,
+            ("parent" Core..=) Core.<$> parent
+          ]
+      )
+
+-- | The parameters to CreateLink.
+--
+-- /See:/ 'newCreateLinkRequest' smart constructor.
+data CreateLinkRequest = CreateLinkRequest
+  { -- | Required. The new link.
+    link :: (Core.Maybe Link),
+    -- | Required. The ID to use for the link. The link/id can have up to 100 characters. A valid link/id must only have alphanumeric characters and underscores within it.
+    linkId :: (Core.Maybe Core.Text),
+    -- | Required. The full resource name of the bucket to create a link for. \"projects\/[PROJECT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"organizations\/[ORGANIZATION/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"billingAccounts\/[BILLING/ACCOUNT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"folders\/[FOLDER/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET_ID]\"
+    parent :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CreateLinkRequest' with the minimum fields required to make a request.
+newCreateLinkRequest ::
+  CreateLinkRequest
+newCreateLinkRequest =
+  CreateLinkRequest
+    { link = Core.Nothing,
+      linkId = Core.Nothing,
+      parent = Core.Nothing
+    }
+
+instance Core.FromJSON CreateLinkRequest where
+  parseJSON =
+    Core.withObject
+      "CreateLinkRequest"
+      ( \o ->
+          CreateLinkRequest
+            Core.<$> (o Core..:? "link")
+            Core.<*> (o Core..:? "linkId")
+            Core.<*> (o Core..:? "parent")
+      )
+
+instance Core.ToJSON CreateLinkRequest where
+  toJSON CreateLinkRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("link" Core..=) Core.<$> link,
+            ("linkId" Core..=) Core.<$> linkId,
+            ("parent" Core..=) Core.<$> parent
+          ]
+      )
+
+-- | The parameters to DeleteLink.
+--
+-- /See:/ 'newDeleteLinkRequest' smart constructor.
+newtype DeleteLinkRequest = DeleteLinkRequest
+  { -- | Required. The full resource name of the link to delete.\"projects\/PROJECT/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/links\/LINK/ID\" \"organizations\/ORGANIZATION/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/links\/LINK/ID\" \"billingAccounts\/BILLING/ACCOUNT/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/links\/LINK/ID\" \"folders\/FOLDER/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/links\/LINK_ID\"
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DeleteLinkRequest' with the minimum fields required to make a request.
+newDeleteLinkRequest ::
+  DeleteLinkRequest
+newDeleteLinkRequest = DeleteLinkRequest {name = Core.Nothing}
+
+instance Core.FromJSON DeleteLinkRequest where
+  parseJSON =
+    Core.withObject
+      "DeleteLinkRequest"
+      ( \o ->
+          DeleteLinkRequest Core.<$> (o Core..:? "name")
+      )
+
+instance Core.ToJSON DeleteLinkRequest where
+  toJSON DeleteLinkRequest {..} =
+    Core.object
+      (Core.catMaybes [("name" Core..=) Core.<$> name])
+
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -790,6 +1040,50 @@ instance Core.ToJSON HttpRequest where
           ]
       )
 
+-- | Configuration for an indexed field.
+--
+-- /See:/ 'newIndexConfig' smart constructor.
+data IndexConfig = IndexConfig
+  { -- | Output only. The timestamp when the index was last modified.This is used to return the timestamp, and will be ignored if supplied during update.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | Required. The LogEntry field path to index.Note that some paths are automatically indexed, and other paths are not eligible for indexing. See indexing documentation( https:\/\/cloud.google.com\/logging\/docs\/view\/advanced-queries#indexed-fields) for details.For example: jsonPayload.request.status
+    fieldPath :: (Core.Maybe Core.Text),
+    -- | Required. The type of data in this index.
+    type' :: (Core.Maybe IndexConfig_Type)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'IndexConfig' with the minimum fields required to make a request.
+newIndexConfig ::
+  IndexConfig
+newIndexConfig =
+  IndexConfig
+    { createTime = Core.Nothing,
+      fieldPath = Core.Nothing,
+      type' = Core.Nothing
+    }
+
+instance Core.FromJSON IndexConfig where
+  parseJSON =
+    Core.withObject
+      "IndexConfig"
+      ( \o ->
+          IndexConfig
+            Core.<$> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "fieldPath")
+            Core.<*> (o Core..:? "type")
+      )
+
+instance Core.ToJSON IndexConfig where
+  toJSON IndexConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("createTime" Core..=) Core.<$> createTime,
+            ("fieldPath" Core..=) Core.<$> fieldPath,
+            ("type" Core..=) Core.<$> type'
+          ]
+      )
+
 -- | A description of a label.
 --
 -- /See:/ 'newLabelDescriptor' smart constructor.
@@ -879,6 +1173,117 @@ instance Core.ToJSON Linear where
           ]
       )
 
+-- | Describes a link connected to an analytics enabled bucket.
+--
+-- /See:/ 'newLink' smart constructor.
+data Link = Link
+  { -- | The information of a BigQuery Dataset. When a link is created, a BigQuery dataset is created along with it, in the same project as the LogBucket it\'s linked to. This dataset will also have BigQuery Views corresponding to the LogViews in the bucket.
+    bigqueryDataset :: (Core.Maybe BigQueryDataset),
+    -- | Output only. The creation timestamp of the link.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | Describes this link.The maximum length of the description is 8000 characters.
+    description :: (Core.Maybe Core.Text),
+    -- | Output only. The resource lifecycle state.
+    lifecycleState :: (Core.Maybe Link_LifecycleState),
+    -- | The resource name of the link. The name can have up to 100 characters. A valid link id (at the end of the link name) must only have alphanumeric characters and underscores within it. \"projects\/[PROJECT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/links\/[LINK/ID]\" \"organizations\/[ORGANIZATION/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/links\/[LINK/ID]\" \"billingAccounts\/[BILLING/ACCOUNT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/links\/[LINK/ID]\" \"folders\/[FOLDER/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/links\/[LINK/ID]\" For example:\`projects\/my-project\/locations\/global\/buckets\/my-bucket\/links\/my/link
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Link' with the minimum fields required to make a request.
+newLink ::
+  Link
+newLink =
+  Link
+    { bigqueryDataset = Core.Nothing,
+      createTime = Core.Nothing,
+      description = Core.Nothing,
+      lifecycleState = Core.Nothing,
+      name = Core.Nothing
+    }
+
+instance Core.FromJSON Link where
+  parseJSON =
+    Core.withObject
+      "Link"
+      ( \o ->
+          Link
+            Core.<$> (o Core..:? "bigqueryDataset")
+            Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "description")
+            Core.<*> (o Core..:? "lifecycleState")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON Link where
+  toJSON Link {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("bigqueryDataset" Core..=)
+              Core.<$> bigqueryDataset,
+            ("createTime" Core..=) Core.<$> createTime,
+            ("description" Core..=) Core.<$> description,
+            ("lifecycleState" Core..=) Core.<$> lifecycleState,
+            ("name" Core..=) Core.<$> name
+          ]
+      )
+
+-- | Metadata for long running Link operations.
+--
+-- /See:/ 'newLinkMetadata' smart constructor.
+data LinkMetadata = LinkMetadata
+  { -- | CreateLink RPC request.
+    createLinkRequest :: (Core.Maybe CreateLinkRequest),
+    -- | DeleteLink RPC request.
+    deleteLinkRequest :: (Core.Maybe DeleteLinkRequest),
+    -- | The end time of an operation.
+    endTime :: (Core.Maybe Core.DateTime),
+    -- | The start time of an operation.
+    startTime :: (Core.Maybe Core.DateTime),
+    -- | State of an operation.
+    state :: (Core.Maybe LinkMetadata_State)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LinkMetadata' with the minimum fields required to make a request.
+newLinkMetadata ::
+  LinkMetadata
+newLinkMetadata =
+  LinkMetadata
+    { createLinkRequest = Core.Nothing,
+      deleteLinkRequest = Core.Nothing,
+      endTime = Core.Nothing,
+      startTime = Core.Nothing,
+      state = Core.Nothing
+    }
+
+instance Core.FromJSON LinkMetadata where
+  parseJSON =
+    Core.withObject
+      "LinkMetadata"
+      ( \o ->
+          LinkMetadata
+            Core.<$> (o Core..:? "createLinkRequest")
+            Core.<*> (o Core..:? "deleteLinkRequest")
+            Core.<*> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "startTime")
+            Core.<*> (o Core..:? "state")
+      )
+
+instance Core.ToJSON LinkMetadata where
+  toJSON LinkMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("createLinkRequest" Core..=)
+              Core.<$> createLinkRequest,
+            ("deleteLinkRequest" Core..=)
+              Core.<$> deleteLinkRequest,
+            ("endTime" Core..=) Core.<$> endTime,
+            ("startTime" Core..=) Core.<$> startTime,
+            ("state" Core..=) Core.<$> state
+          ]
+      )
+
 -- | The response from ListBuckets.
 --
 -- /See:/ 'newListBucketsResponse' smart constructor.
@@ -954,6 +1359,42 @@ instance Core.ToJSON ListExclusionsResponse where
           ]
       )
 
+-- | The response from ListLinks.
+--
+-- /See:/ 'newListLinksResponse' smart constructor.
+data ListLinksResponse = ListLinksResponse
+  { -- | A list of links.
+    links :: (Core.Maybe [Link]),
+    -- | If there might be more results than those appearing in this response, then nextPageToken is included. To get the next set of results, call the same method again using the value of nextPageToken as pageToken.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListLinksResponse' with the minimum fields required to make a request.
+newListLinksResponse ::
+  ListLinksResponse
+newListLinksResponse =
+  ListLinksResponse {links = Core.Nothing, nextPageToken = Core.Nothing}
+
+instance Core.FromJSON ListLinksResponse where
+  parseJSON =
+    Core.withObject
+      "ListLinksResponse"
+      ( \o ->
+          ListLinksResponse
+            Core.<$> (o Core..:? "links")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON ListLinksResponse where
+  toJSON ListLinksResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("links" Core..=) Core.<$> links,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
 -- | The response message for Locations.ListLocations.
 --
 -- /See:/ 'newListLocationsResponse' smart constructor.
@@ -994,7 +1435,7 @@ instance Core.ToJSON ListLocationsResponse where
 --
 -- /See:/ 'newListLogEntriesRequest' smart constructor.
 data ListLogEntriesRequest = ListLogEntriesRequest
-  { -- | Optional. A filter that chooses which log entries to return. See Advanced Logs Queries (https:\/\/cloud.google.com\/logging\/docs\/view\/advanced-queries). Only log entries that match the filter are returned. An empty filter matches all log entries in the resources listed in resource/names. Referencing a parent resource that is not listed in resource/names will cause the filter to return no results. The maximum length of the filter is 20000 characters.
+  { -- | Optional. Only log entries that match the filter are returned. An empty filter matches all log entries in the resources listed in resource/names. Referencing a parent resource that is not listed in resource/names will cause the filter to return no results. The maximum length of a filter is 20,000 characters.
     filter :: (Core.Maybe Core.Text),
     -- | Optional. How the results should be sorted. Presently, the only permitted values are \"timestamp asc\" (default) and \"timestamp desc\". The first option returns entries in order of increasing values of LogEntry.timestamp (oldest first), and the second option returns entries in order of decreasing timestamps (newest first). Entries with equal timestamps are returned in order of their insert_id values.
     orderBy :: (Core.Maybe Core.Text),
@@ -1004,7 +1445,7 @@ data ListLogEntriesRequest = ListLogEntriesRequest
     pageToken :: (Core.Maybe Core.Text),
     -- | Optional. Deprecated. Use resource_names instead. One or more project identifiers or project numbers from which to retrieve log entries. Example: \"my-project-1A\".
     projectIds :: (Core.Maybe [Core.Text]),
-    -- | Required. Names of one or more parent resources from which to retrieve log entries: projects\/[PROJECT/ID] organizations\/[ORGANIZATION/ID] billingAccounts\/[BILLING/ACCOUNT/ID] folders\/[FOLDER/ID]May alternatively be one or more views: projects\/[PROJECT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/views\/[VIEW/ID] organizations\/[ORGANIZATION/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/views\/[VIEW/ID] billingAccounts\/[BILLING/ACCOUNT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/views\/[VIEW/ID] folders\/[FOLDER/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/views\/[VIEW/ID]Projects listed in the project_ids field are added to this list.
+    -- | Required. Names of one or more parent resources from which to retrieve log entries: projects\/[PROJECT/ID] organizations\/[ORGANIZATION/ID] billingAccounts\/[BILLING/ACCOUNT/ID] folders\/[FOLDER/ID]May alternatively be one or more views: projects\/[PROJECT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/views\/[VIEW/ID] organizations\/[ORGANIZATION/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/views\/[VIEW/ID] billingAccounts\/[BILLING/ACCOUNT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/views\/[VIEW/ID] folders\/[FOLDER/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/views\/[VIEW/ID]Projects listed in the project_ids field are added to this list. A maximum of 100 resources may be specified in a single request.
     resourceNames :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1422,16 +1863,52 @@ instance Core.FromJSON Location_Metadata where
 instance Core.ToJSON Location_Metadata where
   toJSON Location_Metadata {..} = Core.toJSON additional
 
+-- | Cloud Logging specific location metadata.
+--
+-- /See:/ 'newLocationMetadata' smart constructor.
+newtype LocationMetadata = LocationMetadata
+  { -- | Indicates whether or not Log Analytics features are supported in the given location.
+    logAnalyticsEnabled :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
+newLocationMetadata ::
+  LocationMetadata
+newLocationMetadata = LocationMetadata {logAnalyticsEnabled = Core.Nothing}
+
+instance Core.FromJSON LocationMetadata where
+  parseJSON =
+    Core.withObject
+      "LocationMetadata"
+      ( \o ->
+          LocationMetadata
+            Core.<$> (o Core..:? "logAnalyticsEnabled")
+      )
+
+instance Core.ToJSON LocationMetadata where
+  toJSON LocationMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("logAnalyticsEnabled" Core..=)
+              Core.<$> logAnalyticsEnabled
+          ]
+      )
+
 -- | Describes a repository in which log entries are stored.
 --
 -- /See:/ 'newLogBucket' smart constructor.
 data LogBucket = LogBucket
-  { -- | The CMEK settings of the log bucket. If present, new log entries written to this log bucket are encrypted using the CMEK key provided in this configuration. If a log bucket has CMEK settings, the CMEK settings cannot be disabled later by updating the log bucket. Changing the KMS key is allowed.
+  { -- | Whether log analytics is enabled for this bucket.Once enabled, log analytics features cannot be disabled.
+    analyticsEnabled :: (Core.Maybe Core.Bool),
+    -- | The CMEK settings of the log bucket. If present, new log entries written to this log bucket are encrypted using the CMEK key provided in this configuration. If a log bucket has CMEK settings, the CMEK settings cannot be disabled later by updating the log bucket. Changing the KMS key is allowed.
     cmekSettings :: (Core.Maybe CmekSettings),
     -- | Output only. The creation timestamp of the bucket. This is not set for any of the default buckets.
     createTime :: (Core.Maybe Core.DateTime),
     -- | Describes this bucket.
     description :: (Core.Maybe Core.Text),
+    -- | A list of indexed fields and related configuration data.
+    indexConfigs :: (Core.Maybe [IndexConfig]),
     -- | Output only. The bucket lifecycle state.
     lifecycleState :: (Core.Maybe LogBucket_LifecycleState),
     -- | Whether the bucket is locked.The retention period on a locked bucket cannot be changed. Locked buckets may only be deleted if they are empty.
@@ -1452,9 +1929,11 @@ newLogBucket ::
   LogBucket
 newLogBucket =
   LogBucket
-    { cmekSettings = Core.Nothing,
+    { analyticsEnabled = Core.Nothing,
+      cmekSettings = Core.Nothing,
       createTime = Core.Nothing,
       description = Core.Nothing,
+      indexConfigs = Core.Nothing,
       lifecycleState = Core.Nothing,
       locked = Core.Nothing,
       name = Core.Nothing,
@@ -1469,9 +1948,11 @@ instance Core.FromJSON LogBucket where
       "LogBucket"
       ( \o ->
           LogBucket
-            Core.<$> (o Core..:? "cmekSettings")
+            Core.<$> (o Core..:? "analyticsEnabled")
+            Core.<*> (o Core..:? "cmekSettings")
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "description")
+            Core.<*> (o Core..:? "indexConfigs")
             Core.<*> (o Core..:? "lifecycleState")
             Core.<*> (o Core..:? "locked")
             Core.<*> (o Core..:? "name")
@@ -1484,9 +1965,12 @@ instance Core.ToJSON LogBucket where
   toJSON LogBucket {..} =
     Core.object
       ( Core.catMaybes
-          [ ("cmekSettings" Core..=) Core.<$> cmekSettings,
+          [ ("analyticsEnabled" Core..=)
+              Core.<$> analyticsEnabled,
+            ("cmekSettings" Core..=) Core.<$> cmekSettings,
             ("createTime" Core..=) Core.<$> createTime,
             ("description" Core..=) Core.<$> description,
+            ("indexConfigs" Core..=) Core.<$> indexConfigs,
             ("lifecycleState" Core..=) Core.<$> lifecycleState,
             ("locked" Core..=) Core.<$> locked,
             ("name" Core..=) Core.<$> name,
@@ -1526,7 +2010,8 @@ data LogEntry = LogEntry
     severity :: (Core.Maybe LogEntry_Severity),
     -- | Optional. Source code location information associated with the log entry, if any.
     sourceLocation :: (Core.Maybe LogEntrySourceLocation),
-    -- | Optional. The span ID within the trace associated with the log entry.For Trace spans, this is the same format that the Trace API v2 uses: a 16-character hexadecimal encoding of an 8-byte array, such as 000000000000004a.
+    -- | Optional. The ID of the Cloud Trace (https:\/\/cloud.google.com\/trace) span associated with the current operation in which the log is being written. For example, if a span has the REST resource name of \"projects\/some-project\/traces\/some-trace\/spans\/some-span-id\", then the span_id field is \"some-span-id\".A Span (https:\/\/cloud.google.com\/trace\/docs\/reference\/v2\/rest\/v2\/projects.traces\/batchWrite#Span) represents a single operation within a trace. Whereas a trace may involve multiple different microservices running on multiple different machines, a span generally corresponds to a single logical operation being performed in a single instance of a microservice on one specific machine. Spans are the nodes within the tree that is a trace.Applications that are instrumented for tracing (https:\/\/cloud.google.com\/trace\/docs\/setup) will generally assign a new, unique span ID on each incoming request. It is also common to create and record additional spans corresponding to internal processing
+    -- elements as well as issuing requests to dependencies.The span ID is expected to be a 16-character, hexadecimal encoding of an 8-byte array and should not be zero. It should be unique within the trace and should, ideally, be generated in a manner that is uniformly random.Example values: 000000000000004a 7a2190356c3fc94b 0000f00300090021 d39223e101960076
     spanId :: (Core.Maybe Core.Text),
     -- | Optional. Information indicating this LogEntry is part of a sequence of multiple log entries split from a single LogEntry.
     split :: (Core.Maybe LogSplit),
@@ -1534,7 +2019,7 @@ data LogEntry = LogEntry
     textPayload :: (Core.Maybe Core.Text),
     -- | Optional. The time the event described by the log entry occurred. This time is used to compute the log entry\'s age and to enforce the logs retention period. If this field is omitted in a new log entry, then Logging assigns it the current time. Timestamps have nanosecond accuracy, but trailing zeros in the fractional seconds might be omitted when the timestamp is displayed.Incoming log entries must have timestamps that don\'t exceed the logs retention period (https:\/\/cloud.google.com\/logging\/quotas#logs/retention/periods) in the past, and that don\'t exceed 24 hours in the future. Log entries outside those time boundaries aren\'t ingested by Logging.
     timestamp :: (Core.Maybe Core.DateTime),
-    -- | Optional. Resource name of the trace associated with the log entry, if any. If it contains a relative resource name, the name is assumed to be relative to \/\/tracing.googleapis.com. Example: projects\/my-projectid\/traces\/06796866738c859f2f19b7cfb3214824
+    -- | Optional. The REST resource name of the trace being written to Cloud Trace (https:\/\/cloud.google.com\/trace) in association with this log entry. For example, if your trace data is stored in the Cloud project \"my-trace-project\" and if the service that is creating the log entry receives a trace header that includes the trace ID \"12345\", then the service should use \"projects\/my-tracing-project\/traces\/12345\".The trace field provides the link between logs and traces. By using this field, you can navigate from a log entry to a trace.
     trace :: (Core.Maybe Core.Text),
     -- | Optional. The sampling decision of the trace associated with the log entry.True means that the trace resource name in the trace field was sampled for storage in a trace backend. False means that the trace was not sampled for storage when this log entry was written, or the sampling decision was unknown at the time. A non-sampled trace value is still useful as a request correlation identifier. The default is False.
     traceSampled :: (Core.Maybe Core.Bool)
@@ -1912,7 +2397,9 @@ instance Core.ToJSON LogLine where
 --
 -- /See:/ 'newLogMetric' smart constructor.
 data LogMetric = LogMetric
-  { -- | Optional. The bucket_options are required when the logs-based metric is using a DISTRIBUTION value type and it describes the bucket boundaries used to create a histogram of the extracted values.
+  { -- | Optional. The resource name of the Log Bucket that owns the Log Metric. Only Log Buckets in projects are supported. The bucket has to be in the same project as the metric.For example:projects\/my-project\/locations\/global\/buckets\/my-bucketIf empty, then the Log Metric is considered a non-Bucket Log Metric.
+    bucketName :: (Core.Maybe Core.Text),
+    -- | Optional. The bucket_options are required when the logs-based metric is using a DISTRIBUTION value type and it describes the bucket boundaries used to create a histogram of the extracted values.
     bucketOptions :: (Core.Maybe BucketOptions),
     -- | Output only. The creation timestamp of the metric.This field may not be present for older metrics.
     createTime :: (Core.Maybe Core.DateTime),
@@ -1922,7 +2409,7 @@ data LogMetric = LogMetric
     disabled :: (Core.Maybe Core.Bool),
     -- | Required. An advanced logs filter (https:\/\/cloud.google.com\/logging\/docs\/view\/advanced/filters) which is used to match log entries. Example: \"resource.type=gae/app AND severity>=ERROR\" The maximum length of the filter is 20000 characters.
     filter :: (Core.Maybe Core.Text),
-    -- | Optional. A map from a label key string to an extractor expression which is used to extract data from a log entry field and assign as the label value. Each label key specified in the LabelDescriptor must have an associated extractor expression in this map. The syntax of the extractor expression is the same as for the value_extractor field.The extracted value is converted to the type defined in the label descriptor. If the either the extraction or the type conversion fails, the label will have a default value. The default value for a string label is an empty string, for an integer label its 0, and for a boolean label its false.Note that there are upper bounds on the maximum number of labels and the number of active time series that are allowed in a project.
+    -- | Optional. A map from a label key string to an extractor expression which is used to extract data from a log entry field and assign as the label value. Each label key specified in the LabelDescriptor must have an associated extractor expression in this map. The syntax of the extractor expression is the same as for the value_extractor field.The extracted value is converted to the type defined in the label descriptor. If either the extraction or the type conversion fails, the label will have a default value. The default value for a string label is an empty string, for an integer label its 0, and for a boolean label its false.Note that there are upper bounds on the maximum number of labels and the number of active time series that are allowed in a project.
     labelExtractors :: (Core.Maybe LogMetric_LabelExtractors),
     -- | Optional. The metric descriptor associated with the logs-based metric. If unspecified, it uses a default metric descriptor with a DELTA metric kind, INT64 value type, with no labels and a unit of \"1\". Such a metric counts the number of log entries matching the filter expression.The name, type, and description fields in the metric/descriptor are output only, and is constructed using the name and description field in the LogMetric.To create a logs-based metric that records a distribution of log values, a DELTA metric kind with a DISTRIBUTION value type must be used along with a value/extractor expression in the LogMetric.Each label in the metric descriptor must have a matching label name as the key and an extractor expression as the value in the label/extractors map.The metric/kind and value/type fields in the metric/descriptor cannot be updated once initially configured. New labels can be added in the metric_descriptor, but existing labels cannot be modified except for their description.
     metricDescriptor :: (Core.Maybe MetricDescriptor),
@@ -1930,7 +2417,7 @@ data LogMetric = LogMetric
     name :: (Core.Maybe Core.Text),
     -- | Output only. The last update timestamp of the metric.This field may not be present for older metrics.
     updateTime :: (Core.Maybe Core.DateTime),
-    -- | Optional. A value/extractor is required when using a distribution logs-based metric to extract the values to record from a log entry. Two functions are supported for value extraction: EXTRACT(field) or REGEXP/EXTRACT(field, regex). The argument are: 1. field: The name of the log entry field from which the value is to be extracted. 2. regex: A regular expression using the Google RE2 syntax (https:\/\/github.com\/google\/re2\/wiki\/Syntax) with a single capture group to extract data from the specified log entry field. The value of the field is converted to a string before applying the regex. It is an error to specify a regex that does not include exactly one capture group.The result of the extraction must be convertible to a double type, as the distribution always records double values. If either the extraction or the conversion to double fails, then those values are not recorded in the distribution.Example: REGEXP_EXTRACT(jsonPayload.request, \"./quantity=(\\d+)./\")
+    -- | Optional. A value/extractor is required when using a distribution logs-based metric to extract the values to record from a log entry. Two functions are supported for value extraction: EXTRACT(field) or REGEXP/EXTRACT(field, regex). The arguments are: field: The name of the log entry field from which the value is to be extracted. regex: A regular expression using the Google RE2 syntax (https:\/\/github.com\/google\/re2\/wiki\/Syntax) with a single capture group to extract data from the specified log entry field. The value of the field is converted to a string before applying the regex. It is an error to specify a regex that does not include exactly one capture group.The result of the extraction must be convertible to a double type, as the distribution always records double values. If either the extraction or the conversion to double fails, then those values are not recorded in the distribution.Example: REGEXP_EXTRACT(jsonPayload.request, \"./quantity=(\\d+)./\")
     valueExtractor :: (Core.Maybe Core.Text),
     -- | Deprecated. The API version that created or updated this metric. The v2 format is used by default and cannot be changed.
     version :: (Core.Maybe LogMetric_Version)
@@ -1942,7 +2429,8 @@ newLogMetric ::
   LogMetric
 newLogMetric =
   LogMetric
-    { bucketOptions = Core.Nothing,
+    { bucketName = Core.Nothing,
+      bucketOptions = Core.Nothing,
       createTime = Core.Nothing,
       description = Core.Nothing,
       disabled = Core.Nothing,
@@ -1961,7 +2449,8 @@ instance Core.FromJSON LogMetric where
       "LogMetric"
       ( \o ->
           LogMetric
-            Core.<$> (o Core..:? "bucketOptions")
+            Core.<$> (o Core..:? "bucketName")
+            Core.<*> (o Core..:? "bucketOptions")
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "disabled")
@@ -1978,7 +2467,8 @@ instance Core.ToJSON LogMetric where
   toJSON LogMetric {..} =
     Core.object
       ( Core.catMaybes
-          [ ("bucketOptions" Core..=) Core.<$> bucketOptions,
+          [ ("bucketName" Core..=) Core.<$> bucketName,
+            ("bucketOptions" Core..=) Core.<$> bucketOptions,
             ("createTime" Core..=) Core.<$> createTime,
             ("description" Core..=) Core.<$> description,
             ("disabled" Core..=) Core.<$> disabled,
@@ -1993,7 +2483,7 @@ instance Core.ToJSON LogMetric where
           ]
       )
 
--- | Optional. A map from a label key string to an extractor expression which is used to extract data from a log entry field and assign as the label value. Each label key specified in the LabelDescriptor must have an associated extractor expression in this map. The syntax of the extractor expression is the same as for the value_extractor field.The extracted value is converted to the type defined in the label descriptor. If the either the extraction or the type conversion fails, the label will have a default value. The default value for a string label is an empty string, for an integer label its 0, and for a boolean label its false.Note that there are upper bounds on the maximum number of labels and the number of active time series that are allowed in a project.
+-- | Optional. A map from a label key string to an extractor expression which is used to extract data from a log entry field and assign as the label value. Each label key specified in the LabelDescriptor must have an associated extractor expression in this map. The syntax of the extractor expression is the same as for the value_extractor field.The extracted value is converted to the type defined in the label descriptor. If either the extraction or the type conversion fails, the label will have a default value. The default value for a string label is an empty string, for an integer label its 0, and for a boolean label its false.Note that there are upper bounds on the maximum number of labels and the number of active time series that are allowed in a project.
 --
 -- /See:/ 'newLogMetric_LabelExtractors' smart constructor.
 newtype LogMetric_LabelExtractors = LogMetric_LabelExtractors
@@ -2049,7 +2539,7 @@ data LogSink = LogSink
     outputVersionFormat :: (Core.Maybe LogSink_OutputVersionFormat),
     -- | Output only. The last update timestamp of the sink.This field may not be present for older sinks.
     updateTime :: (Core.Maybe Core.DateTime),
-    -- | Output only. An IAM identity—a service account or group—under which Cloud Logging writes the exported log entries to the sink\'s destination. This field is set by sinks.create and sinks.update based on the value of unique/writer/identity in those methods.Until you grant this identity write-access to the destination, log entry exports from this sink will fail. For more information, see Granting Access for a Resource (https:\/\/cloud.google.com\/iam\/docs\/granting-roles-to-service-accounts#granting/access/to/a/service/account/for/a/resource). Consult the destination service\'s documentation to determine the appropriate IAM roles to assign to the identity.Sinks that have a destination that is a log bucket in the same project as the sink do not have a writer_identity and no additional permissions are required.
+    -- | Output only. An IAM identity—a service account or group—under which Cloud Logging writes the exported log entries to the sink\'s destination. This field is either set by specifying custom/writer/identity or set automatically by sinks.create and sinks.update based on the value of unique/writer/identity in those methods.Until you grant this identity write-access to the destination, log entry exports from this sink will fail. For more information, see Granting Access for a Resource (https:\/\/cloud.google.com\/iam\/docs\/granting-roles-to-service-accounts#granting/access/to/a/service/account/for/a/resource). Consult the destination service\'s documentation to determine the appropriate IAM roles to assign to the identity.Sinks that have a destination that is a log bucket in the same project as the sink cannot have a writer_identity and no additional permissions are required.
     writerIdentity :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2739,6 +3229,8 @@ data RequestLog = RequestLog
     responseSize :: (Core.Maybe Core.Int64),
     -- | Source code for the application that handled this request. There can be more than one source reference per deployed application if source code is distributed among multiple repositories.
     sourceReference :: (Core.Maybe [SourceReference]),
+    -- | Stackdriver Trace span identifier for this request.
+    spanId :: (Core.Maybe Core.Text),
     -- | Time when the request started.
     startTime :: (Core.Maybe Core.DateTime),
     -- | HTTP response status code. Example: 200, 404.
@@ -2790,6 +3282,7 @@ newRequestLog =
       resource = Core.Nothing,
       responseSize = Core.Nothing,
       sourceReference = Core.Nothing,
+      spanId = Core.Nothing,
       startTime = Core.Nothing,
       status = Core.Nothing,
       taskName = Core.Nothing,
@@ -2835,6 +3328,7 @@ instance Core.FromJSON RequestLog where
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "sourceReference")
+            Core.<*> (o Core..:? "spanId")
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "taskName")
@@ -2877,6 +3371,7 @@ instance Core.ToJSON RequestLog where
             ("responseSize" Core..=) Core.. Core.AsText
               Core.<$> responseSize,
             ("sourceReference" Core..=) Core.<$> sourceReference,
+            ("spanId" Core..=) Core.<$> spanId,
             ("startTime" Core..=) Core.<$> startTime,
             ("status" Core..=) Core.<$> status,
             ("taskName" Core..=) Core.<$> taskName,
@@ -3141,7 +3636,7 @@ instance Core.ToJSON SuppressionInfo where
 data TailLogEntriesRequest = TailLogEntriesRequest
   { -- | Optional. The amount of time to buffer log entries at the server before being returned to prevent out of order results due to late arriving log entries. Valid values are between 0-60000 milliseconds. Defaults to 2000 milliseconds.
     bufferWindow :: (Core.Maybe Core.Duration),
-    -- | Optional. A filter that chooses which log entries to return. See Advanced Logs Filters (https:\/\/cloud.google.com\/logging\/docs\/view\/advanced/filters). Only log entries that match the filter are returned. An empty filter matches all log entries in the resources listed in resource/names. Referencing a parent resource that is not in resource_names will cause the filter to return no results. The maximum length of the filter is 20000 characters.
+    -- | Optional. Only log entries that match the filter are returned. An empty filter matches all log entries in the resources listed in resource/names. Referencing a parent resource that is not listed in resource/names will cause the filter to return no results. The maximum length of a filter is 20,000 characters.
     filter :: (Core.Maybe Core.Text),
     -- | Required. Name of a parent resource from which to retrieve log entries: projects\/[PROJECT/ID] organizations\/[ORGANIZATION/ID] billingAccounts\/[BILLING/ACCOUNT/ID] folders\/[FOLDER/ID]May alternatively be one or more views: projects\/[PROJECT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/views\/[VIEW/ID] organizations\/[ORGANIZATION/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/views\/[VIEW/ID] billingAccounts\/[BILLING/ACCOUNT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/views\/[VIEW/ID] folders\/[FOLDER/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/views\/[VIEW/ID]
     resourceNames :: (Core.Maybe [Core.Text])
@@ -3239,6 +3734,50 @@ instance Core.FromJSON UndeleteBucketRequest where
 instance Core.ToJSON UndeleteBucketRequest where
   toJSON = Core.const Core.emptyObject
 
+-- | The parameters to UpdateBucket.
+--
+-- /See:/ 'newUpdateBucketRequest' smart constructor.
+data UpdateBucketRequest = UpdateBucketRequest
+  { -- | Required. The updated bucket.
+    bucket :: (Core.Maybe LogBucket),
+    -- | Required. The full resource name of the bucket to update. \"projects\/[PROJECT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"organizations\/[ORGANIZATION/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"billingAccounts\/[BILLING/ACCOUNT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"folders\/[FOLDER/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET_ID]\" For example:\"projects\/my-project\/locations\/global\/buckets\/my-bucket\"
+    name :: (Core.Maybe Core.Text),
+    -- | Required. Field mask that specifies the fields in bucket that need an update. A bucket field will be overwritten if, and only if, it is in the update mask. name and output only fields cannot be updated.For a detailed FieldMask definition, see: https:\/\/developers.google.com\/protocol-buffers\/docs\/reference\/google.protobuf#google.protobuf.FieldMaskFor example: updateMask=retention_days
+    updateMask :: (Core.Maybe Core.FieldMask)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UpdateBucketRequest' with the minimum fields required to make a request.
+newUpdateBucketRequest ::
+  UpdateBucketRequest
+newUpdateBucketRequest =
+  UpdateBucketRequest
+    { bucket = Core.Nothing,
+      name = Core.Nothing,
+      updateMask = Core.Nothing
+    }
+
+instance Core.FromJSON UpdateBucketRequest where
+  parseJSON =
+    Core.withObject
+      "UpdateBucketRequest"
+      ( \o ->
+          UpdateBucketRequest
+            Core.<$> (o Core..:? "bucket")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "updateMask")
+      )
+
+instance Core.ToJSON UpdateBucketRequest where
+  toJSON UpdateBucketRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("bucket" Core..=) Core.<$> bucket,
+            ("name" Core..=) Core.<$> name,
+            ("updateMask" Core..=) Core.<$> updateMask
+          ]
+      )
+
 -- | The parameters to WriteLogEntries.
 --
 -- /See:/ 'newWriteLogEntriesRequest' smart constructor.
@@ -3252,7 +3791,7 @@ data WriteLogEntriesRequest = WriteLogEntriesRequest
     labels :: (Core.Maybe WriteLogEntriesRequest_Labels),
     -- | Optional. A default log resource name that is assigned to all log entries in entries that do not specify a value for log/name: projects\/[PROJECT/ID]\/logs\/[LOG/ID] organizations\/[ORGANIZATION/ID]\/logs\/[LOG/ID] billingAccounts\/[BILLING/ACCOUNT/ID]\/logs\/[LOG/ID] folders\/[FOLDER_ID]\/logs\/[LOG_ID][LOG_ID] must be URL-encoded. For example: \"projects\/my-project-id\/logs\/syslog\" \"organizations\/123\/logs\/cloudaudit.googleapis.com%2Factivity\" The permission logging.logEntries.create is needed on each project, organization, billing account, or folder that is receiving new log entries, whether the resource is specified in logName or in an individual log entry.
     logName :: (Core.Maybe Core.Text),
-    -- | Optional. Whether valid entries should be written even if some other entries fail due to INVALID/ARGUMENT or PERMISSION/DENIED errors. If any entry is not written, then the response status is the error associated with one of the failed entries and the response includes error details keyed by the entries\' zero-based index in the entries.write method.
+    -- | Optional. Whether a batch\'s valid entries should be written even if some other entry failed due to a permanent error such as INVALID/ARGUMENT or PERMISSION/DENIED. If any entry failed, then the response status is the response status of one of the failed entries. The response will include error details in WriteLogEntriesPartialErrors.log/entry/errors keyed by the entries\' zero-based index in the entries. Failed requests for which no entries are written will not include per-entry errors.
     partialSuccess :: (Core.Maybe Core.Bool),
     -- | Optional. A default monitored resource object that is assigned to all log entries in entries that do not specify a value for resource. Example: { \"type\": \"gce/instance\", \"labels\": { \"zone\": \"us-central1-a\", \"instance/id\": \"00000000000000000000\" }} See LogEntry.
     resource :: (Core.Maybe MonitoredResource)

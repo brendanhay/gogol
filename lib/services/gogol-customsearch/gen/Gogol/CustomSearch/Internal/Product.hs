@@ -356,7 +356,7 @@ instance Core.ToJSON Result where
 --
 -- /See:/ 'newResult_Image' smart constructor.
 data Result_Image = Result_Image
-  { -- | The size of the image, in pixels.
+  { -- | The size of the image, in bytes.
     byteSize :: (Core.Maybe Core.Int32),
     -- | A URL pointing to the webpage hosting the image.
     contextLink :: (Core.Maybe Core.Text),

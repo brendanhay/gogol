@@ -37,6 +37,18 @@ module Gogol.AndroidPublisher.Types
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** AcquisitionTargetingRule
+    AcquisitionTargetingRule (..),
+    newAcquisitionTargetingRule,
+
+    -- ** ActivateBasePlanRequest
+    ActivateBasePlanRequest (..),
+    newActivateBasePlanRequest,
+
+    -- ** ActivateSubscriptionOfferRequest
+    ActivateSubscriptionOfferRequest (..),
+    newActivateSubscriptionOfferRequest,
+
     -- ** Apk
     Apk (..),
     newApk,
@@ -65,6 +77,31 @@ module Gogol.AndroidPublisher.Types
     AppEdit (..),
     newAppEdit,
 
+    -- ** ArchiveSubscriptionRequest
+    ArchiveSubscriptionRequest (..),
+    newArchiveSubscriptionRequest,
+
+    -- ** AutoRenewingBasePlanType
+    AutoRenewingBasePlanType (..),
+    newAutoRenewingBasePlanType,
+
+    -- ** AutoRenewingBasePlanType_ProrationMode
+    AutoRenewingBasePlanType_ProrationMode (..),
+
+    -- ** AutoRenewingBasePlanType_ResubscribeState
+    AutoRenewingBasePlanType_ResubscribeState (..),
+
+    -- ** AutoRenewingPlan
+    AutoRenewingPlan (..),
+    newAutoRenewingPlan,
+
+    -- ** BasePlan
+    BasePlan (..),
+    newBasePlan,
+
+    -- ** BasePlan_State
+    BasePlan_State (..),
+
     -- ** Bundle
     Bundle (..),
     newBundle,
@@ -72,6 +109,17 @@ module Gogol.AndroidPublisher.Types
     -- ** BundlesListResponse
     BundlesListResponse (..),
     newBundlesListResponse,
+
+    -- ** CancelSurveyResult
+    CancelSurveyResult (..),
+    newCancelSurveyResult,
+
+    -- ** CancelSurveyResult_Reason
+    CancelSurveyResult_Reason (..),
+
+    -- ** CanceledStateContext
+    CanceledStateContext (..),
+    newCanceledStateContext,
 
     -- ** Comment
     Comment (..),
@@ -101,6 +149,14 @@ module Gogol.AndroidPublisher.Types
     CountryTargeting (..),
     newCountryTargeting,
 
+    -- ** DeactivateBasePlanRequest
+    DeactivateBasePlanRequest (..),
+    newDeactivateBasePlanRequest,
+
+    -- ** DeactivateSubscriptionOfferRequest
+    DeactivateSubscriptionOfferRequest (..),
+    newDeactivateSubscriptionOfferRequest,
+
     -- ** DeobfuscationFile
     DeobfuscationFile (..),
     newDeobfuscationFile,
@@ -116,13 +172,45 @@ module Gogol.AndroidPublisher.Types
     DeveloperComment (..),
     newDeveloperComment,
 
+    -- ** DeveloperInitiatedCancellation
+    DeveloperInitiatedCancellation (..),
+    newDeveloperInitiatedCancellation,
+
+    -- ** DeviceGroup
+    DeviceGroup (..),
+    newDeviceGroup,
+
+    -- ** DeviceId
+    DeviceId (..),
+    newDeviceId,
+
     -- ** DeviceMetadata
     DeviceMetadata (..),
     newDeviceMetadata,
 
+    -- ** DeviceRam
+    DeviceRam (..),
+    newDeviceRam,
+
+    -- ** DeviceSelector
+    DeviceSelector (..),
+    newDeviceSelector,
+
     -- ** DeviceSpec
     DeviceSpec (..),
     newDeviceSpec,
+
+    -- ** DeviceTier
+    DeviceTier (..),
+    newDeviceTier,
+
+    -- ** DeviceTierConfig
+    DeviceTierConfig (..),
+    newDeviceTierConfig,
+
+    -- ** DeviceTierSet
+    DeviceTierSet (..),
+    newDeviceTierSet,
 
     -- ** ExpansionFile
     ExpansionFile (..),
@@ -131,6 +219,10 @@ module Gogol.AndroidPublisher.Types
     -- ** ExpansionFilesUploadResponse
     ExpansionFilesUploadResponse (..),
     newExpansionFilesUploadResponse,
+
+    -- ** ExternalAccountIdentifiers
+    ExternalAccountIdentifiers (..),
+    newExternalAccountIdentifiers,
 
     -- ** ExternallyHostedApk
     ExternallyHostedApk (..),
@@ -217,6 +309,18 @@ module Gogol.AndroidPublisher.Types
     IntroductoryPriceInfo (..),
     newIntroductoryPriceInfo,
 
+    -- ** ListDeviceTierConfigsResponse
+    ListDeviceTierConfigsResponse (..),
+    newListDeviceTierConfigsResponse,
+
+    -- ** ListSubscriptionOffersResponse
+    ListSubscriptionOffersResponse (..),
+    newListSubscriptionOffersResponse,
+
+    -- ** ListSubscriptionsResponse
+    ListSubscriptionsResponse (..),
+    newListSubscriptionsResponse,
+
     -- ** ListUsersResponse
     ListUsersResponse (..),
     newListUsersResponse,
@@ -244,13 +348,60 @@ module Gogol.AndroidPublisher.Types
     ManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode (..),
     newManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode,
 
+    -- ** MigrateBasePlanPricesRequest
+    MigrateBasePlanPricesRequest (..),
+    newMigrateBasePlanPricesRequest,
+
+    -- ** MigrateBasePlanPricesResponse
+    MigrateBasePlanPricesResponse (..),
+    newMigrateBasePlanPricesResponse,
+
     -- ** Money
     Money (..),
     newMoney,
 
+    -- ** OfferDetails
+    OfferDetails (..),
+    newOfferDetails,
+
+    -- ** OfferTag
+    OfferTag (..),
+    newOfferTag,
+
+    -- ** OtherRegionsBasePlanConfig
+    OtherRegionsBasePlanConfig (..),
+    newOtherRegionsBasePlanConfig,
+
+    -- ** OtherRegionsSubscriptionOfferConfig
+    OtherRegionsSubscriptionOfferConfig (..),
+    newOtherRegionsSubscriptionOfferConfig,
+
+    -- ** OtherRegionsSubscriptionOfferPhaseConfig
+    OtherRegionsSubscriptionOfferPhaseConfig (..),
+    newOtherRegionsSubscriptionOfferPhaseConfig,
+
+    -- ** OtherRegionsSubscriptionOfferPhasePrices
+    OtherRegionsSubscriptionOfferPhasePrices (..),
+    newOtherRegionsSubscriptionOfferPhasePrices,
+
     -- ** PageInfo
     PageInfo (..),
     newPageInfo,
+
+    -- ** PausedStateContext
+    PausedStateContext (..),
+    newPausedStateContext,
+
+    -- ** PrepaidBasePlanType
+    PrepaidBasePlanType (..),
+    newPrepaidBasePlanType,
+
+    -- ** PrepaidBasePlanType_TimeExtension
+    PrepaidBasePlanType_TimeExtension (..),
+
+    -- ** PrepaidPlan
+    PrepaidPlan (..),
+    newPrepaidPlan,
 
     -- ** Price
     Price (..),
@@ -264,12 +415,39 @@ module Gogol.AndroidPublisher.Types
     ProductPurchasesAcknowledgeRequest (..),
     newProductPurchasesAcknowledgeRequest,
 
+    -- ** RegionalBasePlanConfig
+    RegionalBasePlanConfig (..),
+    newRegionalBasePlanConfig,
+
+    -- ** RegionalPriceMigrationConfig
+    RegionalPriceMigrationConfig (..),
+    newRegionalPriceMigrationConfig,
+
+    -- ** RegionalSubscriptionOfferConfig
+    RegionalSubscriptionOfferConfig (..),
+    newRegionalSubscriptionOfferConfig,
+
+    -- ** RegionalSubscriptionOfferPhaseConfig
+    RegionalSubscriptionOfferPhaseConfig (..),
+    newRegionalSubscriptionOfferPhaseConfig,
+
     -- ** RegionalTaxRateInfo
     RegionalTaxRateInfo (..),
     newRegionalTaxRateInfo,
 
+    -- ** RegionalTaxRateInfo_StreamingTaxType
+    RegionalTaxRateInfo_StreamingTaxType (..),
+
     -- ** RegionalTaxRateInfo_TaxTier
     RegionalTaxRateInfo_TaxTier (..),
+
+    -- ** RegionsVersion
+    RegionsVersion (..),
+    newRegionsVersion,
+
+    -- ** ReplacementCancellation
+    ReplacementCancellation (..),
+    newReplacementCancellation,
 
     -- ** Review
     Review (..),
@@ -291,6 +469,14 @@ module Gogol.AndroidPublisher.Types
     ReviewsReplyResponse (..),
     newReviewsReplyResponse,
 
+    -- ** SubscribeWithGoogleInfo
+    SubscribeWithGoogleInfo (..),
+    newSubscribeWithGoogleInfo,
+
+    -- ** Subscription
+    Subscription (..),
+    newSubscription,
+
     -- ** SubscriptionCancelSurveyResult
     SubscriptionCancelSurveyResult (..),
     newSubscriptionCancelSurveyResult,
@@ -299,6 +485,35 @@ module Gogol.AndroidPublisher.Types
     SubscriptionDeferralInfo (..),
     newSubscriptionDeferralInfo,
 
+    -- ** SubscriptionItemPriceChangeDetails
+    SubscriptionItemPriceChangeDetails (..),
+    newSubscriptionItemPriceChangeDetails,
+
+    -- ** SubscriptionItemPriceChangeDetails_PriceChangeMode
+    SubscriptionItemPriceChangeDetails_PriceChangeMode (..),
+
+    -- ** SubscriptionItemPriceChangeDetails_PriceChangeState
+    SubscriptionItemPriceChangeDetails_PriceChangeState (..),
+
+    -- ** SubscriptionListing
+    SubscriptionListing (..),
+    newSubscriptionListing,
+
+    -- ** SubscriptionOffer
+    SubscriptionOffer (..),
+    newSubscriptionOffer,
+
+    -- ** SubscriptionOffer_State
+    SubscriptionOffer_State (..),
+
+    -- ** SubscriptionOfferPhase
+    SubscriptionOfferPhase (..),
+    newSubscriptionOfferPhase,
+
+    -- ** SubscriptionOfferTargeting
+    SubscriptionOfferTargeting (..),
+    newSubscriptionOfferTargeting,
+
     -- ** SubscriptionPriceChange
     SubscriptionPriceChange (..),
     newSubscriptionPriceChange,
@@ -306,6 +521,20 @@ module Gogol.AndroidPublisher.Types
     -- ** SubscriptionPurchase
     SubscriptionPurchase (..),
     newSubscriptionPurchase,
+
+    -- ** SubscriptionPurchaseLineItem
+    SubscriptionPurchaseLineItem (..),
+    newSubscriptionPurchaseLineItem,
+
+    -- ** SubscriptionPurchaseV2
+    SubscriptionPurchaseV2 (..),
+    newSubscriptionPurchaseV2,
+
+    -- ** SubscriptionPurchaseV2_AcknowledgementState
+    SubscriptionPurchaseV2_AcknowledgementState (..),
+
+    -- ** SubscriptionPurchaseV2_SubscriptionState
+    SubscriptionPurchaseV2_SubscriptionState (..),
 
     -- ** SubscriptionPurchasesAcknowledgeRequest
     SubscriptionPurchasesAcknowledgeRequest (..),
@@ -333,6 +562,22 @@ module Gogol.AndroidPublisher.Types
     -- ** SystemApksListResponse
     SystemApksListResponse (..),
     newSystemApksListResponse,
+
+    -- ** SystemFeature
+    SystemFeature (..),
+    newSystemFeature,
+
+    -- ** SystemInitiatedCancellation
+    SystemInitiatedCancellation (..),
+    newSystemInitiatedCancellation,
+
+    -- ** TargetingRuleScope
+    TargetingRuleScope (..),
+    newTargetingRuleScope,
+
+    -- ** TestPurchase
+    TestPurchase (..),
+    newTestPurchase,
 
     -- ** Testers
     Testers (..),
@@ -369,6 +614,10 @@ module Gogol.AndroidPublisher.Types
     TracksListResponse (..),
     newTracksListResponse,
 
+    -- ** UpgradeTargetingRule
+    UpgradeTargetingRule (..),
+    newUpgradeTargetingRule,
+
     -- ** User
     User (..),
     newUser,
@@ -382,6 +631,14 @@ module Gogol.AndroidPublisher.Types
     -- ** UserComment
     UserComment (..),
     newUserComment,
+
+    -- ** UserCountrySet
+    UserCountrySet (..),
+    newUserCountrySet,
+
+    -- ** UserInitiatedCancellation
+    UserInitiatedCancellation (..),
+    newUserInitiatedCancellation,
 
     -- ** UsesPermission
     UsesPermission (..),

@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves TagValue. If the TagValue or namespaced name does not exist, or if the user does not have permission to view it, this method will return @PERMISSION_DENIED@.
+-- Retrieves a TagValue. This method will return @PERMISSION_DENIED@ if the value does not exist or the user does not have permission to view it.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Cloud Resource Manager API Reference> for @cloudresourcemanager.tagValues.get@.
 module Gogol.ResourceManager.Cloudresourcemanager.TagValues.Get
@@ -55,7 +55,7 @@ type CloudresourcemanagerTagValuesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] TagValue
 
--- | Retrieves TagValue. If the TagValue or namespaced name does not exist, or if the user does not have permission to view it, this method will return @PERMISSION_DENIED@.
+-- | Retrieves a TagValue. This method will return @PERMISSION_DENIED@ if the value does not exist or the user does not have permission to view it.
 --
 -- /See:/ 'newCloudresourcemanagerTagValuesGet' smart constructor.
 data CloudresourcemanagerTagValuesGet = CloudresourcemanagerTagValuesGet

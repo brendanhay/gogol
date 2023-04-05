@@ -38,13 +38,33 @@ module Gogol.Gmail.Internal.Product
     BatchModifyMessagesRequest (..),
     newBatchModifyMessagesRequest,
 
+    -- * CseIdentity
+    CseIdentity (..),
+    newCseIdentity,
+
+    -- * CseKeyPair
+    CseKeyPair (..),
+    newCseKeyPair,
+
+    -- * CsePrivateKeyMetadata
+    CsePrivateKeyMetadata (..),
+    newCsePrivateKeyMetadata,
+
     -- * Delegate
     Delegate (..),
     newDelegate,
 
+    -- * DisableCseKeyPairRequest
+    DisableCseKeyPairRequest (..),
+    newDisableCseKeyPairRequest,
+
     -- * Draft
     Draft (..),
     newDraft,
+
+    -- * EnableCseKeyPairRequest
+    EnableCseKeyPairRequest (..),
+    newEnableCseKeyPairRequest,
 
     -- * Filter
     Filter (..),
@@ -86,6 +106,10 @@ module Gogol.Gmail.Internal.Product
     ImapSettings (..),
     newImapSettings,
 
+    -- * KaclsKeyMetadata
+    KaclsKeyMetadata (..),
+    newKaclsKeyMetadata,
+
     -- * Label
     Label (..),
     newLabel,
@@ -97,6 +121,14 @@ module Gogol.Gmail.Internal.Product
     -- * LanguageSettings
     LanguageSettings (..),
     newLanguageSettings,
+
+    -- * ListCseIdentitiesResponse
+    ListCseIdentitiesResponse (..),
+    newListCseIdentitiesResponse,
+
+    -- * ListCseKeyPairsResponse
+    ListCseKeyPairsResponse (..),
+    newListCseKeyPairsResponse,
 
     -- * ListDelegatesResponse
     ListDelegatesResponse (..),
@@ -161,6 +193,10 @@ module Gogol.Gmail.Internal.Product
     -- * ModifyThreadRequest
     ModifyThreadRequest (..),
     newModifyThreadRequest,
+
+    -- * ObliterateCseKeyPairRequest
+    ObliterateCseKeyPairRequest (..),
+    newObliterateCseKeyPairRequest,
 
     -- * PopSettings
     PopSettings (..),
@@ -317,6 +353,150 @@ instance Core.ToJSON BatchModifyMessagesRequest where
           ]
       )
 
+-- | The client-side encryption (CSE) configuration for the email address of an authenticated user. Gmail uses CSE configurations to save drafts of client-side encrypted email messages, and to sign and send encrypted email messages.
+--
+-- /See:/ 'newCseIdentity' smart constructor.
+data CseIdentity = CseIdentity
+  { -- | The email address for the sending identity. The email address must be the primary email address of the authenticated user.
+    emailAddress :: (Core.Maybe Core.Text),
+    -- | If a key pair is associated, the identifier of the key pair, CseKeyPair.
+    primaryKeyPairId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CseIdentity' with the minimum fields required to make a request.
+newCseIdentity ::
+  CseIdentity
+newCseIdentity =
+  CseIdentity {emailAddress = Core.Nothing, primaryKeyPairId = Core.Nothing}
+
+instance Core.FromJSON CseIdentity where
+  parseJSON =
+    Core.withObject
+      "CseIdentity"
+      ( \o ->
+          CseIdentity
+            Core.<$> (o Core..:? "emailAddress")
+            Core.<*> (o Core..:? "primaryKeyPairId")
+      )
+
+instance Core.ToJSON CseIdentity where
+  toJSON CseIdentity {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("emailAddress" Core..=) Core.<$> emailAddress,
+            ("primaryKeyPairId" Core..=)
+              Core.<$> primaryKeyPairId
+          ]
+      )
+
+-- | A client-side encryption S\/MIME key pair, which is comprised of a public key, its certificate chain, and metadata for its paired private key. Gmail uses the key pair to complete the following tasks: - Sign outgoing client-side encrypted messages. - Save and reopen drafts of client-side encrypted messages. - Save and reopen sent messages. - Decrypt incoming or archived S\/MIME messages.
+--
+-- /See:/ 'newCseKeyPair' smart constructor.
+data CseKeyPair = CseKeyPair
+  { -- | Output only. If a key pair is set to @DISABLED@, the time that the key pair\'s state changed from @ENABLED@ to @DISABLED@. This field is present only when the key pair is in state @DISABLED@.
+    disableTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. The current state of the key pair.
+    enablementState :: (Core.Maybe CseKeyPair_EnablementState),
+    -- | Output only. The immutable ID for the client-side encryption S\/MIME key pair.
+    keyPairId :: (Core.Maybe Core.Text),
+    -- | Output only. The public key and its certificate chain, in <https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail PEM> format.
+    pem :: (Core.Maybe Core.Text),
+    -- | Input only. The public key and its certificate chain. The chain must be in <https://en.wikipedia.org/wiki/PKCS_7 PKCS#7> format and use PEM encoding and ASCII armor.
+    pkcs7 :: (Core.Maybe Core.Text),
+    -- | Metadata for instances of this key pair\'s private key.
+    privateKeyMetadata :: (Core.Maybe [CsePrivateKeyMetadata]),
+    -- | Output only. The email address identities that are specified on the leaf certificate.
+    subjectEmailAddresses :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CseKeyPair' with the minimum fields required to make a request.
+newCseKeyPair ::
+  CseKeyPair
+newCseKeyPair =
+  CseKeyPair
+    { disableTime = Core.Nothing,
+      enablementState = Core.Nothing,
+      keyPairId = Core.Nothing,
+      pem = Core.Nothing,
+      pkcs7 = Core.Nothing,
+      privateKeyMetadata = Core.Nothing,
+      subjectEmailAddresses = Core.Nothing
+    }
+
+instance Core.FromJSON CseKeyPair where
+  parseJSON =
+    Core.withObject
+      "CseKeyPair"
+      ( \o ->
+          CseKeyPair
+            Core.<$> (o Core..:? "disableTime")
+            Core.<*> (o Core..:? "enablementState")
+            Core.<*> (o Core..:? "keyPairId")
+            Core.<*> (o Core..:? "pem")
+            Core.<*> (o Core..:? "pkcs7")
+            Core.<*> (o Core..:? "privateKeyMetadata")
+            Core.<*> (o Core..:? "subjectEmailAddresses")
+      )
+
+instance Core.ToJSON CseKeyPair where
+  toJSON CseKeyPair {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("disableTime" Core..=) Core.<$> disableTime,
+            ("enablementState" Core..=) Core.<$> enablementState,
+            ("keyPairId" Core..=) Core.<$> keyPairId,
+            ("pem" Core..=) Core.<$> pem,
+            ("pkcs7" Core..=) Core.<$> pkcs7,
+            ("privateKeyMetadata" Core..=)
+              Core.<$> privateKeyMetadata,
+            ("subjectEmailAddresses" Core..=)
+              Core.<$> subjectEmailAddresses
+          ]
+      )
+
+-- | Metadata for a private key instance.
+--
+-- /See:/ 'newCsePrivateKeyMetadata' smart constructor.
+data CsePrivateKeyMetadata = CsePrivateKeyMetadata
+  { -- | Metadata for a private key instance managed by an external key access control list service.
+    kaclsKeyMetadata :: (Core.Maybe KaclsKeyMetadata),
+    -- | Output only. The immutable ID for the private key metadata instance.
+    privateKeyMetadataId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CsePrivateKeyMetadata' with the minimum fields required to make a request.
+newCsePrivateKeyMetadata ::
+  CsePrivateKeyMetadata
+newCsePrivateKeyMetadata =
+  CsePrivateKeyMetadata
+    { kaclsKeyMetadata = Core.Nothing,
+      privateKeyMetadataId = Core.Nothing
+    }
+
+instance Core.FromJSON CsePrivateKeyMetadata where
+  parseJSON =
+    Core.withObject
+      "CsePrivateKeyMetadata"
+      ( \o ->
+          CsePrivateKeyMetadata
+            Core.<$> (o Core..:? "kaclsKeyMetadata")
+            Core.<*> (o Core..:? "privateKeyMetadataId")
+      )
+
+instance Core.ToJSON CsePrivateKeyMetadata where
+  toJSON CsePrivateKeyMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("kaclsKeyMetadata" Core..=)
+              Core.<$> kaclsKeyMetadata,
+            ("privateKeyMetadataId" Core..=)
+              Core.<$> privateKeyMetadataId
+          ]
+      )
+
 -- | Settings for a delegate. Delegates can read, send, and delete messages, as well as view and add contacts, for the delegator\'s account. See \"Set up mail delegation\" for more information about delegates.
 --
 -- /See:/ 'newDelegate' smart constructor.
@@ -354,6 +534,26 @@ instance Core.ToJSON Delegate where
           ]
       )
 
+-- | Requests to turn off a client-side encryption key pair.
+--
+-- /See:/ 'newDisableCseKeyPairRequest' smart constructor.
+data DisableCseKeyPairRequest = DisableCseKeyPairRequest
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DisableCseKeyPairRequest' with the minimum fields required to make a request.
+newDisableCseKeyPairRequest ::
+  DisableCseKeyPairRequest
+newDisableCseKeyPairRequest = DisableCseKeyPairRequest
+
+instance Core.FromJSON DisableCseKeyPairRequest where
+  parseJSON =
+    Core.withObject
+      "DisableCseKeyPairRequest"
+      (\o -> Core.pure DisableCseKeyPairRequest)
+
+instance Core.ToJSON DisableCseKeyPairRequest where
+  toJSON = Core.const Core.emptyObject
+
 -- | A draft email in the user\'s mailbox.
 --
 -- /See:/ 'newDraft' smart constructor.
@@ -387,6 +587,26 @@ instance Core.ToJSON Draft where
             ("message" Core..=) Core.<$> message
           ]
       )
+
+-- | Requests to turn on a client-side encryption key pair.
+--
+-- /See:/ 'newEnableCseKeyPairRequest' smart constructor.
+data EnableCseKeyPairRequest = EnableCseKeyPairRequest
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'EnableCseKeyPairRequest' with the minimum fields required to make a request.
+newEnableCseKeyPairRequest ::
+  EnableCseKeyPairRequest
+newEnableCseKeyPairRequest = EnableCseKeyPairRequest
+
+instance Core.FromJSON EnableCseKeyPairRequest where
+  parseJSON =
+    Core.withObject
+      "EnableCseKeyPairRequest"
+      (\o -> Core.pure EnableCseKeyPairRequest)
+
+instance Core.ToJSON EnableCseKeyPairRequest where
+  toJSON = Core.const Core.emptyObject
 
 -- | Resource definition for Gmail filters. Filters apply to specific messages instead of an entire email thread.
 --
@@ -823,6 +1043,42 @@ instance Core.ToJSON ImapSettings where
           ]
       )
 
+-- | Metadata for private keys managed by an external key access control list service. For details about managing key access, see <https://developers.google.com/workspace/cse/reference Google Workspace CSE API Reference>.
+--
+-- /See:/ 'newKaclsKeyMetadata' smart constructor.
+data KaclsKeyMetadata = KaclsKeyMetadata
+  { -- | Opaque data generated and used by the key access control list service. Maximum size: 8 KiB.
+    kaclsData :: (Core.Maybe Core.Text),
+    -- | The URI of the key access control list service that manages the private key.
+    kaclsUri :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'KaclsKeyMetadata' with the minimum fields required to make a request.
+newKaclsKeyMetadata ::
+  KaclsKeyMetadata
+newKaclsKeyMetadata =
+  KaclsKeyMetadata {kaclsData = Core.Nothing, kaclsUri = Core.Nothing}
+
+instance Core.FromJSON KaclsKeyMetadata where
+  parseJSON =
+    Core.withObject
+      "KaclsKeyMetadata"
+      ( \o ->
+          KaclsKeyMetadata
+            Core.<$> (o Core..:? "kaclsData")
+            Core.<*> (o Core..:? "kaclsUri")
+      )
+
+instance Core.ToJSON KaclsKeyMetadata where
+  toJSON KaclsKeyMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("kaclsData" Core..=) Core.<$> kaclsData,
+            ("kaclsUri" Core..=) Core.<$> kaclsUri
+          ]
+      )
+
 -- | Labels are used to categorize messages and threads within the user\'s mailbox. The maximum number of labels supported for a user\'s mailbox is 10,000.
 --
 -- /See:/ 'newLabel' smart constructor.
@@ -971,6 +1227,82 @@ instance Core.ToJSON LanguageSettings where
       ( Core.catMaybes
           [ ("displayLanguage" Core..=)
               Core.<$> displayLanguage
+          ]
+      )
+
+--
+-- /See:/ 'newListCseIdentitiesResponse' smart constructor.
+data ListCseIdentitiesResponse = ListCseIdentitiesResponse
+  { -- | One page of the list of CSE identities configured for the user.
+    cseIdentities :: (Core.Maybe [CseIdentity]),
+    -- | Pagination token to be passed to a subsequent ListCseIdentities call in order to retrieve the next page of identities. If this value is not returned or is the empty string, then no further pages remain.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListCseIdentitiesResponse' with the minimum fields required to make a request.
+newListCseIdentitiesResponse ::
+  ListCseIdentitiesResponse
+newListCseIdentitiesResponse =
+  ListCseIdentitiesResponse
+    { cseIdentities = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON ListCseIdentitiesResponse where
+  parseJSON =
+    Core.withObject
+      "ListCseIdentitiesResponse"
+      ( \o ->
+          ListCseIdentitiesResponse
+            Core.<$> (o Core..:? "cseIdentities")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON ListCseIdentitiesResponse where
+  toJSON ListCseIdentitiesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("cseIdentities" Core..=) Core.<$> cseIdentities,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
+--
+-- /See:/ 'newListCseKeyPairsResponse' smart constructor.
+data ListCseKeyPairsResponse = ListCseKeyPairsResponse
+  { -- | One page of the list of CSE key pairs installed for the user.
+    cseKeyPairs :: (Core.Maybe [CseKeyPair]),
+    -- | Pagination token to be passed to a subsequent ListCseKeyPairs call in order to retrieve the next page of key pairs. If this value is not returned, then no further pages remain.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListCseKeyPairsResponse' with the minimum fields required to make a request.
+newListCseKeyPairsResponse ::
+  ListCseKeyPairsResponse
+newListCseKeyPairsResponse =
+  ListCseKeyPairsResponse
+    { cseKeyPairs = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON ListCseKeyPairsResponse where
+  parseJSON =
+    Core.withObject
+      "ListCseKeyPairsResponse"
+      ( \o ->
+          ListCseKeyPairsResponse
+            Core.<$> (o Core..:? "cseKeyPairs")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON ListCseKeyPairsResponse where
+  toJSON ListCseKeyPairsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("cseKeyPairs" Core..=) Core.<$> cseKeyPairs,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
 
@@ -1620,6 +1952,26 @@ instance Core.ToJSON ModifyThreadRequest where
           ]
       )
 
+-- | Request to obliterate a CSE key pair.
+--
+-- /See:/ 'newObliterateCseKeyPairRequest' smart constructor.
+data ObliterateCseKeyPairRequest = ObliterateCseKeyPairRequest
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ObliterateCseKeyPairRequest' with the minimum fields required to make a request.
+newObliterateCseKeyPairRequest ::
+  ObliterateCseKeyPairRequest
+newObliterateCseKeyPairRequest = ObliterateCseKeyPairRequest
+
+instance Core.FromJSON ObliterateCseKeyPairRequest where
+  parseJSON =
+    Core.withObject
+      "ObliterateCseKeyPairRequest"
+      (\o -> Core.pure ObliterateCseKeyPairRequest)
+
+instance Core.ToJSON ObliterateCseKeyPairRequest where
+  toJSON = Core.const Core.emptyObject
+
 -- | POP settings for an account.
 --
 -- /See:/ 'newPopSettings' smart constructor.
@@ -1973,7 +2325,7 @@ data VacationSettings = VacationSettings
     responseSubject :: (Core.Maybe Core.Text),
     -- | Flag that determines whether responses are sent to recipients who are not in the user\'s list of contacts.
     restrictToContacts :: (Core.Maybe Core.Bool),
-    -- | Flag that determines whether responses are sent to recipients who are outside of the user\'s domain. This feature is only available for G Suite users.
+    -- | Flag that determines whether responses are sent to recipients who are outside of the user\'s domain. This feature is only available for Google Workspace users.
     restrictToDomain :: (Core.Maybe Core.Bool),
     -- | An optional start time for sending auto-replies (epoch ms). When this is specified, Gmail will automatically reply only to messages that it receives after the start time. If both @startTime@ and @endTime@ are specified, @startTime@ must precede @endTime@.
     startTime :: (Core.Maybe Core.Int64)

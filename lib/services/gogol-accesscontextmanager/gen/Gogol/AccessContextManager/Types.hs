@@ -64,6 +64,19 @@ module Gogol.AccessContextManager.Types
     -- ** AuditLogConfig_LogType
     AuditLogConfig_LogType (..),
 
+    -- ** AuthorizedOrgsDesc
+    AuthorizedOrgsDesc (..),
+    newAuthorizedOrgsDesc,
+
+    -- ** AuthorizedOrgsDesc_AssetType
+    AuthorizedOrgsDesc_AssetType (..),
+
+    -- ** AuthorizedOrgsDesc_AuthorizationDirection
+    AuthorizedOrgsDesc_AuthorizationDirection (..),
+
+    -- ** AuthorizedOrgsDesc_AuthorizationType
+    AuthorizedOrgsDesc_AuthorizationType (..),
+
     -- ** BasicLevel
     BasicLevel (..),
     newBasicLevel,
@@ -170,6 +183,10 @@ module Gogol.AccessContextManager.Types
     -- ** ListAccessPoliciesResponse
     ListAccessPoliciesResponse (..),
     newListAccessPoliciesResponse,
+
+    -- ** ListAuthorizedOrgsDescsResponse
+    ListAuthorizedOrgsDescsResponse (..),
+    newListAuthorizedOrgsDescsResponse,
 
     -- ** ListGcpUserAccessBindingsResponse
     ListGcpUserAccessBindingsResponse (..),

@@ -58,6 +58,7 @@ library
     Gogol.BigtableAdmin.Projects.Instances.AppProfiles.Get
     Gogol.BigtableAdmin.Projects.Instances.AppProfiles.List
     Gogol.BigtableAdmin.Projects.Instances.AppProfiles.Patch
+    Gogol.BigtableAdmin.Projects.Instances.Clusters.Backups.Copy
     Gogol.BigtableAdmin.Projects.Instances.Clusters.Backups.Create
     Gogol.BigtableAdmin.Projects.Instances.Clusters.Backups.Delete
     Gogol.BigtableAdmin.Projects.Instances.Clusters.Backups.Get
@@ -69,6 +70,7 @@ library
     Gogol.BigtableAdmin.Projects.Instances.Clusters.Create
     Gogol.BigtableAdmin.Projects.Instances.Clusters.Delete
     Gogol.BigtableAdmin.Projects.Instances.Clusters.Get
+    Gogol.BigtableAdmin.Projects.Instances.Clusters.HotTablets.List
     Gogol.BigtableAdmin.Projects.Instances.Clusters.List
     Gogol.BigtableAdmin.Projects.Instances.Clusters.PartialUpdateCluster
     Gogol.BigtableAdmin.Projects.Instances.Clusters.Update
@@ -88,9 +90,11 @@ library
     Gogol.BigtableAdmin.Projects.Instances.Tables.GetIamPolicy
     Gogol.BigtableAdmin.Projects.Instances.Tables.List
     Gogol.BigtableAdmin.Projects.Instances.Tables.ModifyColumnFamilies
+    Gogol.BigtableAdmin.Projects.Instances.Tables.Patch
     Gogol.BigtableAdmin.Projects.Instances.Tables.Restore
     Gogol.BigtableAdmin.Projects.Instances.Tables.SetIamPolicy
     Gogol.BigtableAdmin.Projects.Instances.Tables.TestIamPermissions
+    Gogol.BigtableAdmin.Projects.Instances.Tables.Undelete
     Gogol.BigtableAdmin.Projects.Instances.TestIamPermissions
     Gogol.BigtableAdmin.Projects.Instances.Update
     Gogol.BigtableAdmin.Projects.Locations.Get
@@ -102,5 +106,5 @@ library
     Gogol.BigtableAdmin.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

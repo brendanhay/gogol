@@ -194,6 +194,18 @@ module Gogol.AppsCalendar.Types
     EventReminder (..),
     newEventReminder,
 
+    -- ** EventWorkingLocationProperties
+    EventWorkingLocationProperties (..),
+    newEventWorkingLocationProperties,
+
+    -- ** EventWorkingLocationProperties_CustomLocation
+    EventWorkingLocationProperties_CustomLocation (..),
+    newEventWorkingLocationProperties_CustomLocation,
+
+    -- ** EventWorkingLocationProperties_OfficeLocation
+    EventWorkingLocationProperties_OfficeLocation (..),
+    newEventWorkingLocationProperties_OfficeLocation,
+
     -- ** Events
     Events (..),
     newEvents,

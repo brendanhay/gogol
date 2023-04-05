@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified Zone resource. Gets a list of available zones by making a list() request.
+-- Returns the specified Zone resource.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.zones.get@.
 module Gogol.Compute.Zones.Get
@@ -59,7 +59,7 @@ type ComputeZonesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Zone
 
--- | Returns the specified Zone resource. Gets a list of available zones by making a list() request.
+-- | Returns the specified Zone resource.
 --
 -- /See:/ 'newComputeZonesGet' smart constructor.
 data ComputeZonesGet = ComputeZonesGet

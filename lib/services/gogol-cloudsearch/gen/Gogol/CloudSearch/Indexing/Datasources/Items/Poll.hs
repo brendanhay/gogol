@@ -68,7 +68,7 @@ data CloudSearchIndexingDatasourcesItemsPoll = CloudSearchIndexingDatasourcesIte
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Name of the Data Source to poll items. Format: datasources\/{source_id}
+    -- | The name of the Data Source to poll items. Format: datasources\/{source_id}
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: PollItemsRequest,
@@ -81,7 +81,7 @@ data CloudSearchIndexingDatasourcesItemsPoll = CloudSearchIndexingDatasourcesIte
 
 -- | Creates a value of 'CloudSearchIndexingDatasourcesItemsPoll' with the minimum fields required to make a request.
 newCloudSearchIndexingDatasourcesItemsPoll ::
-  -- |  Name of the Data Source to poll items. Format: datasources\/{source_id} See 'name'.
+  -- |  The name of the Data Source to poll items. Format: datasources\/{source_id} See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   PollItemsRequest ->

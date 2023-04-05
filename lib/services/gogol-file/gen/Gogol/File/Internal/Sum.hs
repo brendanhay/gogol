@@ -77,6 +77,8 @@ module Gogol.File.Internal.Sum
         Instance_State_Error',
         Instance_State_Restoring,
         Instance_State_Suspended,
+        Instance_State_Suspending,
+        Instance_State_Resuming,
         ..
       ),
 
@@ -165,6 +167,9 @@ module Gogol.File.Internal.Sum
       ( UpdatePolicy_Channel_UPDATECHANNELUNSPECIFIED,
         UpdatePolicy_Channel_Earlier,
         UpdatePolicy_Channel_Later,
+        UpdatePolicy_Channel_WEEK1,
+        UpdatePolicy_Channel_WEEK2,
+        UpdatePolicy_Channel_WEEK5,
         ..
       ),
   )
@@ -199,7 +204,7 @@ pattern Xgafv_2 = Xgafv "2"
   Xgafv
   #-}
 
--- | Output only. The service tier of the source Cloud Filestore instance that this backup is created from.
+-- | Output only. The service tier of the source Filestore instance that this backup is created from.
 newtype Backup_SourceInstanceTier = Backup_SourceInstanceTier {fromBackup_SourceInstanceTier :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -216,11 +221,11 @@ newtype Backup_SourceInstanceTier = Backup_SourceInstanceTier {fromBackup_Source
 pattern Backup_SourceInstanceTier_TIERUNSPECIFIED :: Backup_SourceInstanceTier
 pattern Backup_SourceInstanceTier_TIERUNSPECIFIED = Backup_SourceInstanceTier "TIER_UNSPECIFIED"
 
--- | STANDARD tier.
+-- | STANDARD tier. BASIC_HDD is the preferred term for this tier.
 pattern Backup_SourceInstanceTier_Standard :: Backup_SourceInstanceTier
 pattern Backup_SourceInstanceTier_Standard = Backup_SourceInstanceTier "STANDARD"
 
--- | PREMIUM tier.
+-- | PREMIUM tier. BASIC_SSD is the preferred term for this tier.
 pattern Backup_SourceInstanceTier_Premium :: Backup_SourceInstanceTier
 pattern Backup_SourceInstanceTier_Premium = Backup_SourceInstanceTier "PREMIUM"
 
@@ -390,6 +395,14 @@ pattern Instance_State_Restoring = Instance_State "RESTORING"
 pattern Instance_State_Suspended :: Instance_State
 pattern Instance_State_Suspended = Instance_State "SUSPENDED"
 
+-- | The instance is in the process of becoming suspended.
+pattern Instance_State_Suspending :: Instance_State
+pattern Instance_State_Suspending = Instance_State "SUSPENDING"
+
+-- | The instance is in the process of becoming active.
+pattern Instance_State_Resuming :: Instance_State
+pattern Instance_State_Resuming = Instance_State "RESUMING"
+
 {-# COMPLETE
   Instance_State_STATEUNSPECIFIED,
   Instance_State_Creating,
@@ -399,6 +412,8 @@ pattern Instance_State_Suspended = Instance_State "SUSPENDED"
   Instance_State_Error',
   Instance_State_Restoring,
   Instance_State_Suspended,
+  Instance_State_Suspending,
+  Instance_State_Resuming,
   Instance_State
   #-}
 
@@ -445,11 +460,11 @@ newtype Instance_Tier = Instance_Tier {fromInstance_Tier :: Core.Text}
 pattern Instance_Tier_TIERUNSPECIFIED :: Instance_Tier
 pattern Instance_Tier_TIERUNSPECIFIED = Instance_Tier "TIER_UNSPECIFIED"
 
--- | STANDARD tier.
+-- | STANDARD tier. BASIC_HDD is the preferred term for this tier.
 pattern Instance_Tier_Standard :: Instance_Tier
 pattern Instance_Tier_Standard = Instance_Tier "STANDARD"
 
--- | PREMIUM tier.
+-- | PREMIUM tier. BASIC_SSD is the preferred term for this tier.
 pattern Instance_Tier_Premium :: Instance_Tier
 pattern Instance_Tier_Premium = Instance_Tier "PREMIUM"
 
@@ -753,9 +768,24 @@ pattern UpdatePolicy_Channel_Earlier = UpdatePolicy_Channel "EARLIER"
 pattern UpdatePolicy_Channel_Later :: UpdatePolicy_Channel
 pattern UpdatePolicy_Channel_Later = UpdatePolicy_Channel "LATER"
 
+-- | ! ! The follow channels can ONLY be used if you adopt the new MW system! ! ! NOTE: all WEEK channels are assumed to be under a weekly window. ! There is currently no dedicated channel definitions for Daily windows. ! If you use Daily window, the system will assume a 1d (24Hours) advanced ! notification period b\/w EARLY and LATER. ! We may consider support more flexible daily channel specifications in ! the future. WEEK1 == EARLIER with minimum 7d advanced notification. {7d, 14d} The system will treat them equally and will use WEEK1 whenever it can. New customers are encouraged to use this channel annotation.
+pattern UpdatePolicy_Channel_WEEK1 :: UpdatePolicy_Channel
+pattern UpdatePolicy_Channel_WEEK1 = UpdatePolicy_Channel "WEEK1"
+
+-- | WEEK2 == LATER with minimum 14d advanced notification {14d, 21d}.
+pattern UpdatePolicy_Channel_WEEK2 :: UpdatePolicy_Channel
+pattern UpdatePolicy_Channel_WEEK2 = UpdatePolicy_Channel "WEEK2"
+
+-- | WEEK5 == 40d support. minimum 35d advanced notification {35d, 42d}.
+pattern UpdatePolicy_Channel_WEEK5 :: UpdatePolicy_Channel
+pattern UpdatePolicy_Channel_WEEK5 = UpdatePolicy_Channel "WEEK5"
+
 {-# COMPLETE
   UpdatePolicy_Channel_UPDATECHANNELUNSPECIFIED,
   UpdatePolicy_Channel_Earlier,
   UpdatePolicy_Channel_Later,
+  UpdatePolicy_Channel_WEEK1,
+  UpdatePolicy_Channel_WEEK2,
+  UpdatePolicy_Channel_WEEK5,
   UpdatePolicy_Channel
   #-}

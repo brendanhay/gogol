@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a message.
+-- Creates a message. For example usage, see <https://developers.google.com/chat/api/guides/crudl/messages#create_a_message Create a message>. Requires <https://developers.google.com/chat/api/guides/auth authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.messages@ or @chat.messages.create@ authorization scope. Because Chat provides authentication for <https://developers.google.com/chat/how-tos/webhooks webhooks> as part of the URL that\'s generated when a webhook is registered, webhooks can create messages without a service account or user authentication.
 --
 -- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference> for @chat.spaces.messages.create@.
 module Gogol.Chat.Spaces.Messages.Create
@@ -51,6 +51,10 @@ type ChatSpacesMessagesCreateResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "messageId" Core.Text
+    Core.:> Core.QueryParam
+              "messageReplyOption"
+              SpacesMessagesCreateMessageReplyOption
     Core.:> Core.QueryParam "requestId" Core.Text
     Core.:> Core.QueryParam "threadKey" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
@@ -59,7 +63,7 @@ type ChatSpacesMessagesCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] Message
     Core.:> Core.Post '[Core.JSON] Message
 
--- | Creates a message.
+-- | Creates a message. For example usage, see <https://developers.google.com/chat/api/guides/crudl/messages#create_a_message Create a message>. Requires <https://developers.google.com/chat/api/guides/auth authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.messages@ or @chat.messages.create@ authorization scope. Because Chat provides authentication for <https://developers.google.com/chat/how-tos/webhooks webhooks> as part of the URL that\'s generated when a webhook is registered, webhooks can create messages without a service account or user authentication.
 --
 -- /See:/ 'newChatSpacesMessagesCreate' smart constructor.
 data ChatSpacesMessagesCreate = ChatSpacesMessagesCreate
@@ -69,13 +73,17 @@ data ChatSpacesMessagesCreate = ChatSpacesMessagesCreate
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. Space resource name, in the form \"spaces\/*\". Example: spaces\/AAAAAAAAAAA
+    -- | Optional. A custom name for a Chat message assigned at creation. Must start with @client-@ and contain only lowercase letters, numbers, and hyphens up to 63 characters in length. Specify this field to get, update, or delete the message with the specified value. For example usage, see <https://developers.google.com/chat/api/guides/crudl/messages#name_a_created_message Name a created message>.
+    messageId :: (Core.Maybe Core.Text),
+    -- | Optional. Specifies whether a message starts a thread or replies to one. Only supported in named spaces.
+    messageReplyOption :: (Core.Maybe SpacesMessagesCreateMessageReplyOption),
+    -- | Required. The resource name of the space in which to create a message. Format: spaces\/{space}
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: Message,
     -- | Optional. A unique request ID for this message. Specifying an existing request ID returns the message created with that ID instead of creating a new message.
     requestId :: (Core.Maybe Core.Text),
-    -- | Optional. Opaque thread identifier string that can be specified to group messages into a single thread. If this is the first message with a given thread identifier, a new thread is created. Subsequent messages with the same thread identifier will be posted into the same thread. This relieves bots and webhooks from having to store the Google Chat thread ID of a thread (created earlier by them) to post further updates to it. Has no effect if thread field, corresponding to an existing thread, is set in message.
+    -- | Optional. Deprecated: Use thread.thread_key instead. Opaque thread identifier. To start or add to a thread, create a message and specify a @threadKey@ or the thread.name. For example usage, see <https://developers.google.com/chat/api/guides/crudl/messages#start_or_reply_to_a_message_thread Start or reply to a message thread>.
     threadKey :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -86,7 +94,7 @@ data ChatSpacesMessagesCreate = ChatSpacesMessagesCreate
 
 -- | Creates a value of 'ChatSpacesMessagesCreate' with the minimum fields required to make a request.
 newChatSpacesMessagesCreate ::
-  -- |  Required. Space resource name, in the form \"spaces\/*\". Example: spaces\/AAAAAAAAAAA See 'parent'.
+  -- |  Required. The resource name of the space in which to create a message. Format: spaces\/{space} See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   Message ->
@@ -96,6 +104,8 @@ newChatSpacesMessagesCreate parent payload =
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      messageId = Core.Nothing,
+      messageReplyOption = Core.Nothing,
       parent = parent,
       payload = payload,
       requestId = Core.Nothing,
@@ -106,13 +116,17 @@ newChatSpacesMessagesCreate parent payload =
 
 instance Core.GoogleRequest ChatSpacesMessagesCreate where
   type Rs ChatSpacesMessagesCreate = Message
-  type Scopes ChatSpacesMessagesCreate = '[]
+  type
+    Scopes ChatSpacesMessagesCreate =
+      '[Chat'Bot, Chat'Messages, Chat'Messages'Create]
   requestClient ChatSpacesMessagesCreate {..} =
     go
       parent
       xgafv
       accessToken
       callback
+      messageId
+      messageReplyOption
       requestId
       threadKey
       uploadType

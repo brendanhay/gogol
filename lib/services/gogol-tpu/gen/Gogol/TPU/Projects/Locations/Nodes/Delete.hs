@@ -45,12 +45,11 @@ import Gogol.TPU.Types
 -- | A resource alias for @tpu.projects.locations.nodes.delete@ method which the
 -- 'TPUProjectsLocationsNodesDelete' request conforms to.
 type TPUProjectsLocationsNodesDeleteResource =
-  "v2alpha1"
+  "v2"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "requestId" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -68,8 +67,6 @@ data TPUProjectsLocationsNodesDelete = TPUProjectsLocationsNodesDelete
     callback :: (Core.Maybe Core.Text),
     -- | Required. The resource name.
     name :: Core.Text,
-    -- | Idempotent request UUID.
-    requestId :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -88,7 +85,6 @@ newTPUProjectsLocationsNodesDelete name =
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
-      requestId = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
@@ -107,7 +103,6 @@ instance
       xgafv
       accessToken
       callback
-      requestId
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)

@@ -54,17 +54,53 @@ module Gogol.StreetViewPublish.Internal.Product
     Empty (..),
     newEmpty,
 
+    -- * GpsDataGapFailureDetails
+    GpsDataGapFailureDetails (..),
+    newGpsDataGapFailureDetails,
+
+    -- * Imu
+    Imu (..),
+    newImu,
+
+    -- * ImuDataGapFailureDetails
+    ImuDataGapFailureDetails (..),
+    newImuDataGapFailureDetails,
+
+    -- * InsufficientGpsFailureDetails
+    InsufficientGpsFailureDetails (..),
+    newInsufficientGpsFailureDetails,
+
     -- * LatLng
     LatLng (..),
     newLatLng,
+
+    -- * LatLngBounds
+    LatLngBounds (..),
+    newLatLngBounds,
 
     -- * Level
     Level (..),
     newLevel,
 
+    -- * ListPhotoSequencesResponse
+    ListPhotoSequencesResponse (..),
+    newListPhotoSequencesResponse,
+
     -- * ListPhotosResponse
     ListPhotosResponse (..),
     newListPhotosResponse,
+
+    -- * Measurement3d
+    Measurement3d (..),
+    newMeasurement3d,
+
+    -- * NoOverlapGpsFailureDetails
+    NoOverlapGpsFailureDetails (..),
+    newNoOverlapGpsFailureDetails,
+
+    -- * NotOutdoorsFailureDetails
+    NotOutdoorsFailureDetails (..),
+    newNotOutdoorsFailureDetails,
 
     -- * Operation
     Operation (..),
@@ -90,6 +126,10 @@ module Gogol.StreetViewPublish.Internal.Product
     PhotoResponse (..),
     newPhotoResponse,
 
+    -- * PhotoSequence
+    PhotoSequence (..),
+    newPhotoSequence,
+
     -- * Place
     Place (..),
     newPlace,
@@ -97,6 +137,10 @@ module Gogol.StreetViewPublish.Internal.Product
     -- * Pose
     Pose (..),
     newPose,
+
+    -- * ProcessingFailureDetails
+    ProcessingFailureDetails (..),
+    newProcessingFailureDetails,
 
     -- * Status
     Status (..),
@@ -296,7 +340,7 @@ instance Core.ToJSON Connection where
     Core.object
       (Core.catMaybes [("target" Core..=) Core.<$> target])
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -313,6 +357,155 @@ instance Core.FromJSON Empty where
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
+
+-- | Details related to ProcessingFailureReason#GPS/DATA/GAP. If there are multiple GPS data gaps, only the one with the largest duration is reported here.
+--
+-- /See:/ 'newGpsDataGapFailureDetails' smart constructor.
+data GpsDataGapFailureDetails = GpsDataGapFailureDetails
+  { -- | The duration of the gap in GPS data that was found.
+    gapDuration :: (Core.Maybe Core.Duration),
+    -- | Relative time (from the start of the video stream) when the gap started.
+    gapStartTime :: (Core.Maybe Core.Duration)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GpsDataGapFailureDetails' with the minimum fields required to make a request.
+newGpsDataGapFailureDetails ::
+  GpsDataGapFailureDetails
+newGpsDataGapFailureDetails =
+  GpsDataGapFailureDetails
+    { gapDuration = Core.Nothing,
+      gapStartTime = Core.Nothing
+    }
+
+instance Core.FromJSON GpsDataGapFailureDetails where
+  parseJSON =
+    Core.withObject
+      "GpsDataGapFailureDetails"
+      ( \o ->
+          GpsDataGapFailureDetails
+            Core.<$> (o Core..:? "gapDuration")
+            Core.<*> (o Core..:? "gapStartTime")
+      )
+
+instance Core.ToJSON GpsDataGapFailureDetails where
+  toJSON GpsDataGapFailureDetails {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("gapDuration" Core..=) Core.<$> gapDuration,
+            ("gapStartTime" Core..=) Core.<$> gapStartTime
+          ]
+      )
+
+-- | IMU data from the device sensors.
+--
+-- /See:/ 'newImu' smart constructor.
+data Imu = Imu
+  { -- | The accelerometer measurements in meters\/sec^2 with increasing timestamps from devices.
+    accelMpsps :: (Core.Maybe [Measurement3d]),
+    -- | The gyroscope measurements in radians\/sec with increasing timestamps from devices.
+    gyroRps :: (Core.Maybe [Measurement3d]),
+    -- | The magnetometer measurements of the magnetic field in microtesla (uT) with increasing timestamps from devices.
+    magUt :: (Core.Maybe [Measurement3d])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Imu' with the minimum fields required to make a request.
+newImu ::
+  Imu
+newImu =
+  Imu {accelMpsps = Core.Nothing, gyroRps = Core.Nothing, magUt = Core.Nothing}
+
+instance Core.FromJSON Imu where
+  parseJSON =
+    Core.withObject
+      "Imu"
+      ( \o ->
+          Imu
+            Core.<$> (o Core..:? "accelMpsps")
+            Core.<*> (o Core..:? "gyroRps")
+            Core.<*> (o Core..:? "magUt")
+      )
+
+instance Core.ToJSON Imu where
+  toJSON Imu {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("accelMpsps" Core..=) Core.<$> accelMpsps,
+            ("gyroRps" Core..=) Core.<$> gyroRps,
+            ("magUt" Core..=) Core.<$> magUt
+          ]
+      )
+
+-- | Details related to ProcessingFailureReason#IMU/DATA/GAP. If there are multiple IMU data gaps, only the one with the largest duration is reported here.
+--
+-- /See:/ 'newImuDataGapFailureDetails' smart constructor.
+data ImuDataGapFailureDetails = ImuDataGapFailureDetails
+  { -- | The duration of the gap in IMU data that was found.
+    gapDuration :: (Core.Maybe Core.Duration),
+    -- | Relative time (from the start of the video stream) when the gap started.
+    gapStartTime :: (Core.Maybe Core.Duration)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ImuDataGapFailureDetails' with the minimum fields required to make a request.
+newImuDataGapFailureDetails ::
+  ImuDataGapFailureDetails
+newImuDataGapFailureDetails =
+  ImuDataGapFailureDetails
+    { gapDuration = Core.Nothing,
+      gapStartTime = Core.Nothing
+    }
+
+instance Core.FromJSON ImuDataGapFailureDetails where
+  parseJSON =
+    Core.withObject
+      "ImuDataGapFailureDetails"
+      ( \o ->
+          ImuDataGapFailureDetails
+            Core.<$> (o Core..:? "gapDuration")
+            Core.<*> (o Core..:? "gapStartTime")
+      )
+
+instance Core.ToJSON ImuDataGapFailureDetails where
+  toJSON ImuDataGapFailureDetails {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("gapDuration" Core..=) Core.<$> gapDuration,
+            ("gapStartTime" Core..=) Core.<$> gapStartTime
+          ]
+      )
+
+-- | Details related to ProcessingFailureReason#INSUFFICIENT_GPS.
+--
+-- /See:/ 'newInsufficientGpsFailureDetails' smart constructor.
+newtype InsufficientGpsFailureDetails = InsufficientGpsFailureDetails
+  { -- | The number of GPS points that were found in the video.
+    gpsPointsFound :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InsufficientGpsFailureDetails' with the minimum fields required to make a request.
+newInsufficientGpsFailureDetails ::
+  InsufficientGpsFailureDetails
+newInsufficientGpsFailureDetails =
+  InsufficientGpsFailureDetails {gpsPointsFound = Core.Nothing}
+
+instance Core.FromJSON InsufficientGpsFailureDetails where
+  parseJSON =
+    Core.withObject
+      "InsufficientGpsFailureDetails"
+      ( \o ->
+          InsufficientGpsFailureDetails
+            Core.<$> (o Core..:? "gpsPointsFound")
+      )
+
+instance Core.ToJSON InsufficientGpsFailureDetails where
+  toJSON InsufficientGpsFailureDetails {..} =
+    Core.object
+      ( Core.catMaybes
+          [("gpsPointsFound" Core..=) Core.<$> gpsPointsFound]
+      )
 
 -- | An object that represents a latitude\/longitude pair. This is expressed as a pair of doubles to represent degrees latitude and degrees longitude. Unless specified otherwise, this object must conform to the WGS84 standard. Values must be within normalized ranges.
 --
@@ -346,6 +539,42 @@ instance Core.ToJSON LatLng where
       ( Core.catMaybes
           [ ("latitude" Core..=) Core.<$> latitude,
             ("longitude" Core..=) Core.<$> longitude
+          ]
+      )
+
+-- | A rectangle in geographical coordinates.
+--
+-- /See:/ 'newLatLngBounds' smart constructor.
+data LatLngBounds = LatLngBounds
+  { -- | The northeast corner of these bounds.
+    northeast :: (Core.Maybe LatLng),
+    -- | The southwest corner of these bounds.
+    southwest :: (Core.Maybe LatLng)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LatLngBounds' with the minimum fields required to make a request.
+newLatLngBounds ::
+  LatLngBounds
+newLatLngBounds =
+  LatLngBounds {northeast = Core.Nothing, southwest = Core.Nothing}
+
+instance Core.FromJSON LatLngBounds where
+  parseJSON =
+    Core.withObject
+      "LatLngBounds"
+      ( \o ->
+          LatLngBounds
+            Core.<$> (o Core..:? "northeast")
+            Core.<*> (o Core..:? "southwest")
+      )
+
+instance Core.ToJSON LatLngBounds where
+  toJSON LatLngBounds {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("northeast" Core..=) Core.<$> northeast,
+            ("southwest" Core..=) Core.<$> southwest
           ]
       )
 
@@ -383,6 +612,45 @@ instance Core.ToJSON Level where
           ]
       )
 
+-- | Response to list all photo sequences that belong to a user.
+--
+-- /See:/ 'newListPhotoSequencesResponse' smart constructor.
+data ListPhotoSequencesResponse = ListPhotoSequencesResponse
+  { -- | Token to retrieve the next page of results, or empty if there are no more results in the list.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | List of photo sequences via Operation interface. The maximum number of items returned is based on the pageSize field in the request. Each item in the list can have three possible states, * @Operation.done@ = false, if the processing of PhotoSequence is not finished yet. * @Operation.done@ = true and @Operation.error@ is populated, if there was an error in processing. * @Operation.done@ = true and @Operation.response@ contains a PhotoSequence message, In each sequence, only Id is populated.
+    photoSequences :: (Core.Maybe [Operation])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListPhotoSequencesResponse' with the minimum fields required to make a request.
+newListPhotoSequencesResponse ::
+  ListPhotoSequencesResponse
+newListPhotoSequencesResponse =
+  ListPhotoSequencesResponse
+    { nextPageToken = Core.Nothing,
+      photoSequences = Core.Nothing
+    }
+
+instance Core.FromJSON ListPhotoSequencesResponse where
+  parseJSON =
+    Core.withObject
+      "ListPhotoSequencesResponse"
+      ( \o ->
+          ListPhotoSequencesResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "photoSequences")
+      )
+
+instance Core.ToJSON ListPhotoSequencesResponse where
+  toJSON ListPhotoSequencesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("photoSequences" Core..=) Core.<$> photoSequences
+          ]
+      )
+
 -- | Response to list all photos that belong to a user.
 --
 -- /See:/ 'newListPhotosResponse' smart constructor.
@@ -417,6 +685,135 @@ instance Core.ToJSON ListPhotosResponse where
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
             ("photos" Core..=) Core.<$> photos
           ]
+      )
+
+-- | A Generic 3d measurement sample.
+--
+-- /See:/ 'newMeasurement3d' smart constructor.
+data Measurement3d = Measurement3d
+  { -- | The timestamp of the IMU measurement.
+    captureTime :: (Core.Maybe Core.DateTime),
+    -- | The sensor measurement in the x axis.
+    x :: (Core.Maybe Core.Double),
+    -- | The sensor measurement in the y axis.
+    y :: (Core.Maybe Core.Double),
+    -- | The sensor measurement in the z axis.
+    z :: (Core.Maybe Core.Double)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Measurement3d' with the minimum fields required to make a request.
+newMeasurement3d ::
+  Measurement3d
+newMeasurement3d =
+  Measurement3d
+    { captureTime = Core.Nothing,
+      x = Core.Nothing,
+      y = Core.Nothing,
+      z = Core.Nothing
+    }
+
+instance Core.FromJSON Measurement3d where
+  parseJSON =
+    Core.withObject
+      "Measurement3d"
+      ( \o ->
+          Measurement3d
+            Core.<$> (o Core..:? "captureTime")
+            Core.<*> (o Core..:? "x")
+            Core.<*> (o Core..:? "y")
+            Core.<*> (o Core..:? "z")
+      )
+
+instance Core.ToJSON Measurement3d where
+  toJSON Measurement3d {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("captureTime" Core..=) Core.<$> captureTime,
+            ("x" Core..=) Core.<$> x,
+            ("y" Core..=) Core.<$> y,
+            ("z" Core..=) Core.<$> z
+          ]
+      )
+
+-- | Details related to PhotoSequenceProcessingFailureReason#NO/OVERLAP/GPS.
+--
+-- /See:/ 'newNoOverlapGpsFailureDetails' smart constructor.
+data NoOverlapGpsFailureDetails = NoOverlapGpsFailureDetails
+  { -- | Time of last recorded GPS point.
+    gpsEndTime :: (Core.Maybe Core.DateTime),
+    -- | Time of first recorded GPS point.
+    gpsStartTime :: (Core.Maybe Core.DateTime),
+    -- | End time of video.
+    videoEndTime :: (Core.Maybe Core.DateTime),
+    -- | Start time of video.
+    videoStartTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NoOverlapGpsFailureDetails' with the minimum fields required to make a request.
+newNoOverlapGpsFailureDetails ::
+  NoOverlapGpsFailureDetails
+newNoOverlapGpsFailureDetails =
+  NoOverlapGpsFailureDetails
+    { gpsEndTime = Core.Nothing,
+      gpsStartTime = Core.Nothing,
+      videoEndTime = Core.Nothing,
+      videoStartTime = Core.Nothing
+    }
+
+instance Core.FromJSON NoOverlapGpsFailureDetails where
+  parseJSON =
+    Core.withObject
+      "NoOverlapGpsFailureDetails"
+      ( \o ->
+          NoOverlapGpsFailureDetails
+            Core.<$> (o Core..:? "gpsEndTime")
+            Core.<*> (o Core..:? "gpsStartTime")
+            Core.<*> (o Core..:? "videoEndTime")
+            Core.<*> (o Core..:? "videoStartTime")
+      )
+
+instance Core.ToJSON NoOverlapGpsFailureDetails where
+  toJSON NoOverlapGpsFailureDetails {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("gpsEndTime" Core..=) Core.<$> gpsEndTime,
+            ("gpsStartTime" Core..=) Core.<$> gpsStartTime,
+            ("videoEndTime" Core..=) Core.<$> videoEndTime,
+            ("videoStartTime" Core..=) Core.<$> videoStartTime
+          ]
+      )
+
+-- | Details related to ProcessingFailureReason#NOT_OUTDOORS. If there are multiple indoor frames found, the first frame is recorded here.
+--
+-- /See:/ 'newNotOutdoorsFailureDetails' smart constructor.
+newtype NotOutdoorsFailureDetails = NotOutdoorsFailureDetails
+  { -- | Relative time (from the start of the video stream) when an indoor frame was found.
+    startTime :: (Core.Maybe Core.Duration)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NotOutdoorsFailureDetails' with the minimum fields required to make a request.
+newNotOutdoorsFailureDetails ::
+  NotOutdoorsFailureDetails
+newNotOutdoorsFailureDetails =
+  NotOutdoorsFailureDetails {startTime = Core.Nothing}
+
+instance Core.FromJSON NotOutdoorsFailureDetails where
+  parseJSON =
+    Core.withObject
+      "NotOutdoorsFailureDetails"
+      ( \o ->
+          NotOutdoorsFailureDetails
+            Core.<$> (o Core..:? "startTime")
+      )
+
+instance Core.ToJSON NotOutdoorsFailureDetails where
+  toJSON NotOutdoorsFailureDetails {..} =
+    Core.object
+      ( Core.catMaybes
+          [("startTime" Core..=) Core.<$> startTime]
       )
 
 -- | This resource represents a long-running operation that is the result of a network API call.
@@ -686,6 +1083,114 @@ instance Core.ToJSON PhotoResponse where
           ]
       )
 
+-- | A sequence of 360 photos along with metadata.
+--
+-- /See:/ 'newPhotoSequence' smart constructor.
+data PhotoSequence = PhotoSequence
+  { -- | Optional. Absolute time when the photo sequence starts to be captured. If the photo sequence is a video, this is the start time of the video. If this field is populated in input, it overrides the capture time in the video or XDM file.
+    captureTimeOverride :: (Core.Maybe Core.DateTime),
+    -- | Output only. The computed distance of the photo sequence in meters.
+    distanceMeters :: (Core.Maybe Core.Double),
+    -- | Output only. If this sequence has @failure_reason@ set, this may contain additional details about the failure.
+    failureDetails :: (Core.Maybe ProcessingFailureDetails),
+    -- | Output only. If this sequence has processing/state = FAILED, this will contain the reason why it failed. If the processing/state is any other value, this field will be unset.
+    failureReason :: (Core.Maybe PhotoSequence_FailureReason),
+    -- | Output only. The filename of the upload. Does not include the directory path. Only available if the sequence was uploaded on a platform that provides the filename.
+    filename :: (Core.Maybe Core.Text),
+    -- | Input only. If both raw/gps/timeline and the Camera Motion Metadata Track (CAMM) contain GPS measurements, indicate which takes precedence.
+    gpsSource :: (Core.Maybe PhotoSequence_GpsSource),
+    -- | Output only. Unique identifier for the photo sequence. This also acts as a long running operation ID if uploading is performed asynchronously.
+    id :: (Core.Maybe Core.Text),
+    -- | Input only. Three axis IMU data for the collection. If this data is too large to put in the request, then it should be put in the CAMM track for the video. This data always takes precedence over the equivalent CAMM data, if it exists.
+    imu :: (Core.Maybe Imu),
+    -- | Output only. Photos with increasing timestamps.
+    photos :: (Core.Maybe [Photo]),
+    -- | Output only. The processing state of this sequence.
+    processingState :: (Core.Maybe PhotoSequence_ProcessingState),
+    -- | Input only. Raw GPS measurements with increasing timestamps from the device that aren\'t time synced with each photo. These raw measurements will be used to infer the pose of each frame. Required in input when InputType is VIDEO and raw GPS measurements are not in Camera Motion Metadata Track (CAMM). User can indicate which takes precedence using gps/source if raw GPS measurements are provided in both raw/gps_timeline and Camera Motion Metadata Track (CAMM).
+    rawGpsTimeline :: (Core.Maybe [Pose]),
+    -- | Output only. A rectangular box that encapsulates every image in this photo sequence.
+    sequenceBounds :: (Core.Maybe LatLngBounds),
+    -- | Input only. Required when creating photo sequence. The resource name where the bytes of the photo sequence (in the form of video) are uploaded.
+    uploadReference :: (Core.Maybe UploadRef),
+    -- | Output only. The time this photo sequence was created in uSV Store service.
+    uploadTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. The total number of views that all the published images in this PhotoSequence have received.
+    viewCount :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PhotoSequence' with the minimum fields required to make a request.
+newPhotoSequence ::
+  PhotoSequence
+newPhotoSequence =
+  PhotoSequence
+    { captureTimeOverride = Core.Nothing,
+      distanceMeters = Core.Nothing,
+      failureDetails = Core.Nothing,
+      failureReason = Core.Nothing,
+      filename = Core.Nothing,
+      gpsSource = Core.Nothing,
+      id = Core.Nothing,
+      imu = Core.Nothing,
+      photos = Core.Nothing,
+      processingState = Core.Nothing,
+      rawGpsTimeline = Core.Nothing,
+      sequenceBounds = Core.Nothing,
+      uploadReference = Core.Nothing,
+      uploadTime = Core.Nothing,
+      viewCount = Core.Nothing
+    }
+
+instance Core.FromJSON PhotoSequence where
+  parseJSON =
+    Core.withObject
+      "PhotoSequence"
+      ( \o ->
+          PhotoSequence
+            Core.<$> (o Core..:? "captureTimeOverride")
+            Core.<*> (o Core..:? "distanceMeters")
+            Core.<*> (o Core..:? "failureDetails")
+            Core.<*> (o Core..:? "failureReason")
+            Core.<*> (o Core..:? "filename")
+            Core.<*> (o Core..:? "gpsSource")
+            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "imu")
+            Core.<*> (o Core..:? "photos")
+            Core.<*> (o Core..:? "processingState")
+            Core.<*> (o Core..:? "rawGpsTimeline")
+            Core.<*> (o Core..:? "sequenceBounds")
+            Core.<*> (o Core..:? "uploadReference")
+            Core.<*> (o Core..:? "uploadTime")
+            Core.<*> ( o Core..:? "viewCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+      )
+
+instance Core.ToJSON PhotoSequence where
+  toJSON PhotoSequence {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("captureTimeOverride" Core..=)
+              Core.<$> captureTimeOverride,
+            ("distanceMeters" Core..=) Core.<$> distanceMeters,
+            ("failureDetails" Core..=) Core.<$> failureDetails,
+            ("failureReason" Core..=) Core.<$> failureReason,
+            ("filename" Core..=) Core.<$> filename,
+            ("gpsSource" Core..=) Core.<$> gpsSource,
+            ("id" Core..=) Core.<$> id,
+            ("imu" Core..=) Core.<$> imu,
+            ("photos" Core..=) Core.<$> photos,
+            ("processingState" Core..=) Core.<$> processingState,
+            ("rawGpsTimeline" Core..=) Core.<$> rawGpsTimeline,
+            ("sequenceBounds" Core..=) Core.<$> sequenceBounds,
+            ("uploadReference" Core..=) Core.<$> uploadReference,
+            ("uploadTime" Core..=) Core.<$> uploadTime,
+            ("viewCount" Core..=) Core.. Core.AsText
+              Core.<$> viewCount
+          ]
+      )
+
 -- | Place metadata for an entity.
 --
 -- /See:/ 'newPlace' smart constructor.
@@ -738,6 +1243,8 @@ data Pose = Pose
     accuracyMeters :: (Core.Maybe Core.Double),
     -- | Altitude of the pose in meters above WGS84 ellipsoid. NaN indicates an unmeasured quantity.
     altitude :: (Core.Maybe Core.Double),
+    -- | Time of the GPS record since UTC epoch.
+    gpsRecordTimestampUnixEpoch :: (Core.Maybe Core.DateTime),
     -- | The following pose parameters pertain to the center of the photo. They match https:\/\/developers.google.com\/streetview\/spherical-metadata. Compass heading, measured at the center of the photo in degrees clockwise from North. Value must be >=0 and \<360. NaN indicates an unmeasured quantity.
     heading :: (Core.Maybe Core.Double),
     -- | Latitude and longitude pair of the pose, as explained here: https:\/\/cloud.google.com\/datastore\/docs\/reference\/rest\/Shared.Types\/LatLng When creating a Photo, if the latitude and longitude pair are not provided, the geolocation from the exif header is used. A latitude and longitude pair not provided in the photo or exif header causes the photo process to fail.
@@ -758,6 +1265,7 @@ newPose =
   Pose
     { accuracyMeters = Core.Nothing,
       altitude = Core.Nothing,
+      gpsRecordTimestampUnixEpoch = Core.Nothing,
       heading = Core.Nothing,
       latLngPair = Core.Nothing,
       level = Core.Nothing,
@@ -773,6 +1281,7 @@ instance Core.FromJSON Pose where
           Pose
             Core.<$> (o Core..:? "accuracyMeters")
             Core.<*> (o Core..:? "altitude")
+            Core.<*> (o Core..:? "gpsRecordTimestampUnixEpoch")
             Core.<*> (o Core..:? "heading")
             Core.<*> (o Core..:? "latLngPair")
             Core.<*> (o Core..:? "level")
@@ -786,11 +1295,72 @@ instance Core.ToJSON Pose where
       ( Core.catMaybes
           [ ("accuracyMeters" Core..=) Core.<$> accuracyMeters,
             ("altitude" Core..=) Core.<$> altitude,
+            ("gpsRecordTimestampUnixEpoch" Core..=)
+              Core.<$> gpsRecordTimestampUnixEpoch,
             ("heading" Core..=) Core.<$> heading,
             ("latLngPair" Core..=) Core.<$> latLngPair,
             ("level" Core..=) Core.<$> level,
             ("pitch" Core..=) Core.<$> pitch,
             ("roll" Core..=) Core.<$> roll
+          ]
+      )
+
+-- | Additional details to accompany the ProcessingFailureReason enum. This message is always expected to be used in conjunction with ProcessingFailureReason, and the oneof value set in this message should match the FailureReason.
+--
+-- /See:/ 'newProcessingFailureDetails' smart constructor.
+data ProcessingFailureDetails = ProcessingFailureDetails
+  { -- | See GpsDataGapFailureDetails.
+    gpsDataGapDetails :: (Core.Maybe GpsDataGapFailureDetails),
+    -- | See ImuDataGapFailureDetails.
+    imuDataGapDetails :: (Core.Maybe ImuDataGapFailureDetails),
+    -- | See InsufficientGpsFailureDetails.
+    insufficientGpsDetails :: (Core.Maybe InsufficientGpsFailureDetails),
+    -- | See NoOverlapGpsFailureDetails.
+    noOverlapGpsDetails :: (Core.Maybe NoOverlapGpsFailureDetails),
+    -- | See NotOutdoorsFailureDetails.
+    notOutdoorsDetails :: (Core.Maybe NotOutdoorsFailureDetails)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ProcessingFailureDetails' with the minimum fields required to make a request.
+newProcessingFailureDetails ::
+  ProcessingFailureDetails
+newProcessingFailureDetails =
+  ProcessingFailureDetails
+    { gpsDataGapDetails = Core.Nothing,
+      imuDataGapDetails = Core.Nothing,
+      insufficientGpsDetails = Core.Nothing,
+      noOverlapGpsDetails = Core.Nothing,
+      notOutdoorsDetails = Core.Nothing
+    }
+
+instance Core.FromJSON ProcessingFailureDetails where
+  parseJSON =
+    Core.withObject
+      "ProcessingFailureDetails"
+      ( \o ->
+          ProcessingFailureDetails
+            Core.<$> (o Core..:? "gpsDataGapDetails")
+            Core.<*> (o Core..:? "imuDataGapDetails")
+            Core.<*> (o Core..:? "insufficientGpsDetails")
+            Core.<*> (o Core..:? "noOverlapGpsDetails")
+            Core.<*> (o Core..:? "notOutdoorsDetails")
+      )
+
+instance Core.ToJSON ProcessingFailureDetails where
+  toJSON ProcessingFailureDetails {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("gpsDataGapDetails" Core..=)
+              Core.<$> gpsDataGapDetails,
+            ("imuDataGapDetails" Core..=)
+              Core.<$> imuDataGapDetails,
+            ("insufficientGpsDetails" Core..=)
+              Core.<$> insufficientGpsDetails,
+            ("noOverlapGpsDetails" Core..=)
+              Core.<$> noOverlapGpsDetails,
+            ("notOutdoorsDetails" Core..=)
+              Core.<$> notOutdoorsDetails
           ]
       )
 
@@ -867,7 +1437,7 @@ instance Core.ToJSON Status_DetailsItem where
 data UpdatePhotoRequest = UpdatePhotoRequest
   { -- | Required. Photo object containing the new metadata.
     photo :: (Core.Maybe Photo),
-    -- | Required. Mask that identifies fields on the photo metadata to update. If not present, the old Photo metadata is entirely replaced with the new Photo metadata in this request. The update fails if invalid fields are specified. Multiple fields can be specified in a comma-delimited list. The following fields are valid: * @pose.heading@ * @pose.latLngPair@ * @pose.pitch@ * @pose.roll@ * @pose.level@ * @pose.altitude@ * @connections@ * @places@ > Note: When updateMask contains repeated fields, the entire set of repeated values get replaced with the new contents. For example, if updateMask contains @connections@ and @UpdatePhotoRequest.photo.connections@ is empty, all connections are removed.
+    -- | Required. Mask that identifies fields on the photo metadata to update. If not present, the old Photo metadata is entirely replaced with the new Photo metadata in this request. The update fails if invalid fields are specified. Multiple fields can be specified in a comma-delimited list. The following fields are valid: * @pose.heading@ * @pose.lat_lng_pair@ * @pose.pitch@ * @pose.roll@ * @pose.level@ * @pose.altitude@ * @connections@ * @places@ > Note: When updateMask contains repeated fields, the entire set of repeated values get replaced with the new contents. For example, if updateMask contains @connections@ and @UpdatePhotoRequest.photo.connections@ is empty, all connections are removed.
     updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

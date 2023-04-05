@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a membership.
+-- Returns a membership. Requires <https://developers.google.com/chat/api/guides/auth/ authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.memberships@ or @chat.memberships.readonly@ authorization scope.
 --
 -- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference> for @chat.spaces.members.get@.
 module Gogol.Chat.Spaces.Members.Get
@@ -55,7 +55,7 @@ type ChatSpacesMembersGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Membership
 
--- | Returns a membership.
+-- | Returns a membership. Requires <https://developers.google.com/chat/api/guides/auth/ authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.memberships@ or @chat.memberships.readonly@ authorization scope.
 --
 -- /See:/ 'newChatSpacesMembersGet' smart constructor.
 data ChatSpacesMembersGet = ChatSpacesMembersGet
@@ -65,7 +65,7 @@ data ChatSpacesMembersGet = ChatSpacesMembersGet
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. Resource name of the membership to be retrieved, in the form \"spaces\//\/members\//\". Example: spaces\/AAAAAAAAAAAA\/members\/111111111111111111111
+    -- | Required. Resource name of the membership to retrieve. Format: spaces\/{space}\/members\/{member}
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -76,7 +76,7 @@ data ChatSpacesMembersGet = ChatSpacesMembersGet
 
 -- | Creates a value of 'ChatSpacesMembersGet' with the minimum fields required to make a request.
 newChatSpacesMembersGet ::
-  -- |  Required. Resource name of the membership to be retrieved, in the form \"spaces\//\/members\//\". Example: spaces\/AAAAAAAAAAAA\/members\/111111111111111111111 See 'name'.
+  -- |  Required. Resource name of the membership to retrieve. Format: spaces\/{space}\/members\/{member} See 'name'.
   Core.Text ->
   ChatSpacesMembersGet
 newChatSpacesMembersGet name =
@@ -91,7 +91,12 @@ newChatSpacesMembersGet name =
 
 instance Core.GoogleRequest ChatSpacesMembersGet where
   type Rs ChatSpacesMembersGet = Membership
-  type Scopes ChatSpacesMembersGet = '[]
+  type
+    Scopes ChatSpacesMembersGet =
+      '[ Chat'Bot,
+         Chat'Memberships,
+         Chat'Memberships'Readonly
+       ]
   requestClient ChatSpacesMembersGet {..} =
     go
       name

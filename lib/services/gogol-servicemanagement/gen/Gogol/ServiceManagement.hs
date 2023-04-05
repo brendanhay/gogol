@@ -202,6 +202,10 @@ module Gogol.ServiceManagement
     BackendRule (..),
     newBackendRule,
 
+    -- ** BackendRule_OverridesByRequestProtocol
+    BackendRule_OverridesByRequestProtocol (..),
+    newBackendRule_OverridesByRequestProtocol,
+
     -- ** BackendRule_PathTranslation
     BackendRule_PathTranslation (..),
 
@@ -220,6 +224,20 @@ module Gogol.ServiceManagement
     -- ** ChangeReport
     ChangeReport (..),
     newChangeReport,
+
+    -- ** ClientLibrarySettings
+    ClientLibrarySettings (..),
+    newClientLibrarySettings,
+
+    -- ** ClientLibrarySettings_LaunchStage
+    ClientLibrarySettings_LaunchStage (..),
+
+    -- ** CommonLanguageSettings
+    CommonLanguageSettings (..),
+    newCommonLanguageSettings,
+
+    -- ** CommonLanguageSettings_DestinationsItem
+    CommonLanguageSettings_DestinationsItem (..),
 
     -- ** ConfigChange
     ConfigChange (..),
@@ -255,6 +273,10 @@ module Gogol.ServiceManagement
     Control (..),
     newControl,
 
+    -- ** CppSettings
+    CppSettings (..),
+    newCppSettings,
+
     -- ** CustomError
     CustomError (..),
     newCustomError,
@@ -285,6 +307,22 @@ module Gogol.ServiceManagement
     -- ** DocumentationRule
     DocumentationRule (..),
     newDocumentationRule,
+
+    -- ** DotnetSettings
+    DotnetSettings (..),
+    newDotnetSettings,
+
+    -- ** DotnetSettings_RenamedResources
+    DotnetSettings_RenamedResources (..),
+    newDotnetSettings_RenamedResources,
+
+    -- ** DotnetSettings_RenamedServices
+    DotnetSettings_RenamedServices (..),
+    newDotnetSettings_RenamedServices,
+
+    -- ** EnableServiceResponse
+    EnableServiceResponse (..),
+    newEnableServiceResponse,
 
     -- ** Endpoint
     Endpoint (..),
@@ -343,6 +381,10 @@ module Gogol.ServiceManagement
     GetPolicyOptions (..),
     newGetPolicyOptions,
 
+    -- ** GoSettings
+    GoSettings (..),
+    newGoSettings,
+
     -- ** Http
     Http (..),
     newHttp,
@@ -350,6 +392,14 @@ module Gogol.ServiceManagement
     -- ** HttpRule
     HttpRule (..),
     newHttpRule,
+
+    -- ** JavaSettings
+    JavaSettings (..),
+    newJavaSettings,
+
+    -- ** JavaSettings_ServiceClassNames
+    JavaSettings_ServiceClassNames (..),
+    newJavaSettings_ServiceClassNames,
 
     -- ** JwtLocation
     JwtLocation (..),
@@ -390,6 +440,10 @@ module Gogol.ServiceManagement
     LoggingDestination (..),
     newLoggingDestination,
 
+    -- ** LongRunning
+    LongRunning (..),
+    newLongRunning,
+
     -- ** ManagedService
     ManagedService (..),
     newManagedService,
@@ -400,6 +454,10 @@ module Gogol.ServiceManagement
 
     -- ** Method_Syntax
     Method_Syntax (..),
+
+    -- ** MethodSettings
+    MethodSettings (..),
+    newMethodSettings,
 
     -- ** MetricDescriptor
     MetricDescriptor (..),
@@ -448,6 +506,10 @@ module Gogol.ServiceManagement
     MonitoringDestination (..),
     newMonitoringDestination,
 
+    -- ** NodeSettings
+    NodeSettings (..),
+    newNodeSettings,
+
     -- ** OAuthRequirements
     OAuthRequirements (..),
     newOAuthRequirements,
@@ -484,9 +546,24 @@ module Gogol.ServiceManagement
     Page (..),
     newPage,
 
+    -- ** PhpSettings
+    PhpSettings (..),
+    newPhpSettings,
+
     -- ** Policy
     Policy (..),
     newPolicy,
+
+    -- ** Publishing
+    Publishing (..),
+    newPublishing,
+
+    -- ** Publishing_Organization
+    Publishing_Organization (..),
+
+    -- ** PythonSettings
+    PythonSettings (..),
+    newPythonSettings,
 
     -- ** Quota
     Quota (..),
@@ -510,6 +587,10 @@ module Gogol.ServiceManagement
 
     -- ** Rollout_Status
     Rollout_Status (..),
+
+    -- ** RubySettings
+    RubySettings (..),
+    newRubySettings,
 
     -- ** Service
     Service (..),

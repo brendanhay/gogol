@@ -52,6 +52,7 @@ type DriveFilesCopyResource =
     Core.:> "copy"
     Core.:> Core.QueryParam "enforceSingleParent" Core.Bool
     Core.:> Core.QueryParam "ignoreDefaultVisibility" Core.Bool
+    Core.:> Core.QueryParam "includeLabels" Core.Text
     Core.:> Core.QueryParam "includePermissionsForView" Core.Text
     Core.:> Core.QueryParam "keepRevisionForever" Core.Bool
     Core.:> Core.QueryParam "ocrLanguage" Core.Text
@@ -71,6 +72,8 @@ data DriveFilesCopy = DriveFilesCopy
     fileId :: Core.Text,
     -- | Whether to ignore the domain\'s default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
     ignoreDefaultVisibility :: Core.Bool,
+    -- | A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    includeLabels :: (Core.Maybe Core.Text),
     -- | Specifies which additional view\'s permissions to include in the response. Only \'published\' is supported.
     includePermissionsForView :: (Core.Maybe Core.Text),
     -- | Whether to set the \'keepForever\' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
@@ -98,6 +101,7 @@ newDriveFilesCopy fileId payload =
     { enforceSingleParent = Core.False,
       fileId = fileId,
       ignoreDefaultVisibility = Core.False,
+      includeLabels = Core.Nothing,
       includePermissionsForView = Core.Nothing,
       keepRevisionForever = Core.False,
       ocrLanguage = Core.Nothing,
@@ -120,6 +124,7 @@ instance Core.GoogleRequest DriveFilesCopy where
       fileId
       (Core.Just enforceSingleParent)
       (Core.Just ignoreDefaultVisibility)
+      includeLabels
       includePermissionsForView
       (Core.Just keepRevisionForever)
       ocrLanguage

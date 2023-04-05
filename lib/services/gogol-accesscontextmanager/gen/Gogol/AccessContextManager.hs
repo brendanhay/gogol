@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- An API for setting attribute based access control to requests to GCP services.
+-- An API for setting attribute based access control to requests to Google Cloud services.
 --
 -- /See:/ <https://cloud.google.com/access-context-manager/docs/reference/rest/ Access Context Manager API Reference>
 module Gogol.AccessContextManager
@@ -72,6 +72,31 @@ module Gogol.AccessContextManager
     AccessContextManagerAccessPoliciesAccessLevelsTestIamPermissionsResource,
     AccessContextManagerAccessPoliciesAccessLevelsTestIamPermissions (..),
     newAccessContextManagerAccessPoliciesAccessLevelsTestIamPermissions,
+
+    -- ** accesscontextmanager.accessPolicies.authorizedOrgsDescs.create
+    AccessContextManagerAccessPoliciesAuthorizedOrgsDescsCreateResource,
+    AccessContextManagerAccessPoliciesAuthorizedOrgsDescsCreate (..),
+    newAccessContextManagerAccessPoliciesAuthorizedOrgsDescsCreate,
+
+    -- ** accesscontextmanager.accessPolicies.authorizedOrgsDescs.delete
+    AccessContextManagerAccessPoliciesAuthorizedOrgsDescsDeleteResource,
+    AccessContextManagerAccessPoliciesAuthorizedOrgsDescsDelete (..),
+    newAccessContextManagerAccessPoliciesAuthorizedOrgsDescsDelete,
+
+    -- ** accesscontextmanager.accessPolicies.authorizedOrgsDescs.get
+    AccessContextManagerAccessPoliciesAuthorizedOrgsDescsGetResource,
+    AccessContextManagerAccessPoliciesAuthorizedOrgsDescsGet (..),
+    newAccessContextManagerAccessPoliciesAuthorizedOrgsDescsGet,
+
+    -- ** accesscontextmanager.accessPolicies.authorizedOrgsDescs.list
+    AccessContextManagerAccessPoliciesAuthorizedOrgsDescsListResource,
+    AccessContextManagerAccessPoliciesAuthorizedOrgsDescsList (..),
+    newAccessContextManagerAccessPoliciesAuthorizedOrgsDescsList,
+
+    -- ** accesscontextmanager.accessPolicies.authorizedOrgsDescs.patch
+    AccessContextManagerAccessPoliciesAuthorizedOrgsDescsPatchResource,
+    AccessContextManagerAccessPoliciesAuthorizedOrgsDescsPatch (..),
+    newAccessContextManagerAccessPoliciesAuthorizedOrgsDescsPatch,
 
     -- ** accesscontextmanager.accessPolicies.create
     AccessContextManagerAccessPoliciesCreateResource,
@@ -230,6 +255,19 @@ module Gogol.AccessContextManager
     -- ** AuditLogConfig_LogType
     AuditLogConfig_LogType (..),
 
+    -- ** AuthorizedOrgsDesc
+    AuthorizedOrgsDesc (..),
+    newAuthorizedOrgsDesc,
+
+    -- ** AuthorizedOrgsDesc_AssetType
+    AuthorizedOrgsDesc_AssetType (..),
+
+    -- ** AuthorizedOrgsDesc_AuthorizationDirection
+    AuthorizedOrgsDesc_AuthorizationDirection (..),
+
+    -- ** AuthorizedOrgsDesc_AuthorizationType
+    AuthorizedOrgsDesc_AuthorizationType (..),
+
     -- ** BasicLevel
     BasicLevel (..),
     newBasicLevel,
@@ -337,6 +375,10 @@ module Gogol.AccessContextManager
     ListAccessPoliciesResponse (..),
     newListAccessPoliciesResponse,
 
+    -- ** ListAuthorizedOrgsDescsResponse
+    ListAuthorizedOrgsDescsResponse (..),
+    newListAuthorizedOrgsDescsResponse,
+
     -- ** ListGcpUserAccessBindingsResponse
     ListGcpUserAccessBindingsResponse (..),
     newListGcpUserAccessBindingsResponse,
@@ -442,6 +484,11 @@ import Gogol.AccessContextManager.AccessPolicies.AccessLevels.List
 import Gogol.AccessContextManager.AccessPolicies.AccessLevels.Patch
 import Gogol.AccessContextManager.AccessPolicies.AccessLevels.ReplaceAll
 import Gogol.AccessContextManager.AccessPolicies.AccessLevels.TestIamPermissions
+import Gogol.AccessContextManager.AccessPolicies.AuthorizedOrgsDescs.Create
+import Gogol.AccessContextManager.AccessPolicies.AuthorizedOrgsDescs.Delete
+import Gogol.AccessContextManager.AccessPolicies.AuthorizedOrgsDescs.Get
+import Gogol.AccessContextManager.AccessPolicies.AuthorizedOrgsDescs.List
+import Gogol.AccessContextManager.AccessPolicies.AuthorizedOrgsDescs.Patch
 import Gogol.AccessContextManager.AccessPolicies.Create
 import Gogol.AccessContextManager.AccessPolicies.Delete
 import Gogol.AccessContextManager.AccessPolicies.Get

@@ -84,7 +84,7 @@ data ReportsUserUsageReportGet = ReportsUserUsageReportGet
     callback :: (Core.Maybe Core.Text),
     -- | The unique ID of the customer to retrieve data for.
     customerId :: (Core.Maybe Core.Text),
-    -- | Represents the date the usage occurred. The timestamp is in the ISO 8601 format, yyyy-mm-dd. We recommend you use your account\'s time zone for this.
+    -- | Represents the date the usage occurred, based on GMT-7:00 (Pacific Standard Time). The timestamp is in the <https://en.wikipedia.org/wiki/ISO_8601 ISO 8601 format>, @yyyy-mm-dd@.
     date :: Core.Text,
     -- | The @filters@ query string is a comma-separated list of an application\'s event parameters where the parameter\'s value is manipulated by a relational operator. The @filters@ query string includes the name of the application whose usage is returned in the report. The application values for the Users Usage Report include @accounts@, @docs@, and @gmail@. Filters are in the form @[application name]:parameter name[parameter value],...@. In this example, the @\<>@ \'not equal to\' operator is URL-encoded in the request\'s query string (%3C%3E): GET https:\/\/www.googleapis.com\/admin\/reports\/v1\/usage\/users\/all\/dates\/2013-03-03 ?parameters=accounts:last/login/time &filters=accounts:last/login/time%3C%3E2010-10-28T10:26:35.000Z The relational operators include: - @==@ - \'equal to\'. - @\<>@ - \'not equal to\'. It is URL-encoded (%3C%3E). - @\<@ - \'less than\'. It is URL-encoded (%3C). - @\<=@ - \'less than or equal to\'. It is URL-encoded (%3C=). - @>@ - \'greater than\'. It is URL-encoded (%3E). - @>=@ -
     -- \'greater than or equal to\'. It is URL-encoded (%3E=).
@@ -110,7 +110,7 @@ data ReportsUserUsageReportGet = ReportsUserUsageReportGet
 
 -- | Creates a value of 'ReportsUserUsageReportGet' with the minimum fields required to make a request.
 newReportsUserUsageReportGet ::
-  -- |  Represents the date the usage occurred. The timestamp is in the ISO 8601 format, yyyy-mm-dd. We recommend you use your account\'s time zone for this. See 'date'.
+  -- |  Represents the date the usage occurred, based on GMT-7:00 (Pacific Standard Time). The timestamp is in the <https://en.wikipedia.org/wiki/ISO_8601 ISO 8601 format>, @yyyy-mm-dd@. See 'date'.
   Core.Text ->
   -- |  Represents the profile ID or the user email for which the data should be filtered. Can be @all@ for all information, or @userKey@ for a user\'s unique Google Workspace profile ID or their primary email address. Must not be a deleted user. For a deleted user, call @users.list@ in Directory API with @showDeleted=true@, then use the returned @ID@ as the @userKey@. See 'userKey'.
   Core.Text ->

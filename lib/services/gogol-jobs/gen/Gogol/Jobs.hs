@@ -408,6 +408,9 @@ module Gogol.Jobs
     NamespacedDebugInput_ForcedRollouts (..),
     newNamespacedDebugInput_ForcedRollouts,
 
+    -- ** NamespacedDebugInput_TestingMode
+    NamespacedDebugInput_TestingMode (..),
+
     -- ** Operation
     Operation (..),
     newOperation,

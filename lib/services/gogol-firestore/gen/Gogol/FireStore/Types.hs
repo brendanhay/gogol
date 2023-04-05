@@ -38,6 +38,18 @@ module Gogol.FireStore.Types
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** Aggregation
+    Aggregation (..),
+    newAggregation,
+
+    -- ** AggregationResult
+    AggregationResult (..),
+    newAggregationResult,
+
+    -- ** AggregationResult_AggregateFields
+    AggregationResult_AggregateFields (..),
+    newAggregationResult_AggregateFields,
+
     -- ** ArrayValue
     ArrayValue (..),
     newArrayValue,
@@ -88,6 +100,10 @@ module Gogol.FireStore.Types
 
     -- ** CompositeFilter_Op
     CompositeFilter_Op (..),
+
+    -- ** Count
+    Count (..),
+    newCount,
 
     -- ** Cursor
     Cursor (..),
@@ -209,6 +225,9 @@ module Gogol.FireStore.Types
     GoogleFirestoreAdminV1Index (..),
     newGoogleFirestoreAdminV1Index,
 
+    -- ** GoogleFirestoreAdminV1Index_ApiScope
+    GoogleFirestoreAdminV1Index_ApiScope (..),
+
     -- ** GoogleFirestoreAdminV1Index_QueryScope
     GoogleFirestoreAdminV1Index_QueryScope (..),
 
@@ -262,6 +281,20 @@ module Gogol.FireStore.Types
     -- ** GoogleFirestoreAdminV1Progress
     GoogleFirestoreAdminV1Progress (..),
     newGoogleFirestoreAdminV1Progress,
+
+    -- ** GoogleFirestoreAdminV1TtlConfig
+    GoogleFirestoreAdminV1TtlConfig (..),
+    newGoogleFirestoreAdminV1TtlConfig,
+
+    -- ** GoogleFirestoreAdminV1TtlConfig_State
+    GoogleFirestoreAdminV1TtlConfig_State (..),
+
+    -- ** GoogleFirestoreAdminV1TtlConfigDelta
+    GoogleFirestoreAdminV1TtlConfigDelta (..),
+    newGoogleFirestoreAdminV1TtlConfigDelta,
+
+    -- ** GoogleFirestoreAdminV1TtlConfigDelta_ChangeType
+    GoogleFirestoreAdminV1TtlConfigDelta_ChangeType (..),
 
     -- ** GoogleFirestoreAdminV1UpdateDatabaseMetadata
     GoogleFirestoreAdminV1UpdateDatabaseMetadata (..),
@@ -378,6 +411,14 @@ module Gogol.FireStore.Types
     RollbackRequest (..),
     newRollbackRequest,
 
+    -- ** RunAggregationQueryRequest
+    RunAggregationQueryRequest (..),
+    newRunAggregationQueryRequest,
+
+    -- ** RunAggregationQueryResponse
+    RunAggregationQueryResponse (..),
+    newRunAggregationQueryResponse,
+
     -- ** RunQueryRequest
     RunQueryRequest (..),
     newRunQueryRequest,
@@ -393,6 +434,10 @@ module Gogol.FireStore.Types
     -- ** Status_DetailsItem
     Status_DetailsItem (..),
     newStatus_DetailsItem,
+
+    -- ** StructuredAggregationQuery
+    StructuredAggregationQuery (..),
+    newStructuredAggregationQuery,
 
     -- ** StructuredQuery
     StructuredQuery (..),

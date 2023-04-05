@@ -167,6 +167,10 @@ module Gogol.Healthcare.Types
     DateShiftConfig (..),
     newDateShiftConfig,
 
+    -- ** DeidentifiedStoreDestination
+    DeidentifiedStoreDestination (..),
+    newDeidentifiedStoreDestination,
+
     -- ** DeidentifyConfig
     DeidentifyConfig (..),
     newDeidentifyConfig,
@@ -285,12 +289,23 @@ module Gogol.Healthcare.Types
     FhirStore (..),
     newFhirStore,
 
+    -- ** FhirStore_ComplexDataTypeReferenceParsing
+    FhirStore_ComplexDataTypeReferenceParsing (..),
+
     -- ** FhirStore_Labels
     FhirStore_Labels (..),
     newFhirStore_Labels,
 
     -- ** FhirStore_Version
     FhirStore_Version (..),
+
+    -- ** FhirStoreMetric
+    FhirStoreMetric (..),
+    newFhirStoreMetric,
+
+    -- ** FhirStoreMetrics
+    FhirStoreMetrics (..),
+    newFhirStoreMetrics,
 
     -- ** Field
     Field (..),
@@ -448,6 +463,10 @@ module Gogol.Healthcare.Types
     -- ** IngestMessageResponse
     IngestMessageResponse (..),
     newIngestMessageResponse,
+
+    -- ** KmsWrappedCryptoKey
+    KmsWrappedCryptoKey (..),
+    newKmsWrappedCryptoKey,
 
     -- ** LinkedEntity
     LinkedEntity (..),
@@ -696,6 +715,13 @@ module Gogol.Healthcare.Types
     -- ** TextSpan
     TextSpan (..),
     newTextSpan,
+
+    -- ** TimePartitioning
+    TimePartitioning (..),
+    newTimePartitioning,
+
+    -- ** TimePartitioning_Type
+    TimePartitioning_Type (..),
 
     -- ** Type
     Type (..),

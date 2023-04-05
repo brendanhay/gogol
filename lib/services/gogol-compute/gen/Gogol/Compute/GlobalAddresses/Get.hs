@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified address resource. Gets a list of available addresses by making a list() request.
+-- Returns the specified address resource.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.globalAddresses.get@.
 module Gogol.Compute.GlobalAddresses.Get
@@ -60,7 +60,7 @@ type ComputeGlobalAddressesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Address
 
--- | Returns the specified address resource. Gets a list of available addresses by making a list() request.
+-- | Returns the specified address resource.
 --
 -- /See:/ 'newComputeGlobalAddressesGet' smart constructor.
 data ComputeGlobalAddressesGet = ComputeGlobalAddressesGet

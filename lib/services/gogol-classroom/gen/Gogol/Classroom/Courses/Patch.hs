@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates one or more fields in a course. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting user is not permitted to modify the requested course or for access errors. * @NOT_FOUND@ if no course exists with the requested ID. * @INVALID_ARGUMENT@ if invalid fields are specified in the update mask or if no update mask is supplied. * @FAILED_PRECONDITION@ for the following request errors: * CourseNotModifiable
+-- Updates one or more fields in a course. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting user is not permitted to modify the requested course or for access errors. * @NOT_FOUND@ if no course exists with the requested ID. * @INVALID_ARGUMENT@ if invalid fields are specified in the update mask or if no update mask is supplied. * @FAILED_PRECONDITION@ for the following request errors: * CourseNotModifiable * InactiveCourseOwner * IneligibleOwner
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.courses.patch@.
 module Gogol.Classroom.Courses.Patch
@@ -58,7 +58,7 @@ type ClassroomCoursesPatchResource =
     Core.:> Core.ReqBody '[Core.JSON] Course
     Core.:> Core.Patch '[Core.JSON] Course
 
--- | Updates one or more fields in a course. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting user is not permitted to modify the requested course or for access errors. * @NOT_FOUND@ if no course exists with the requested ID. * @INVALID_ARGUMENT@ if invalid fields are specified in the update mask or if no update mask is supplied. * @FAILED_PRECONDITION@ for the following request errors: * CourseNotModifiable
+-- | Updates one or more fields in a course. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting user is not permitted to modify the requested course or for access errors. * @NOT_FOUND@ if no course exists with the requested ID. * @INVALID_ARGUMENT@ if invalid fields are specified in the update mask or if no update mask is supplied. * @FAILED_PRECONDITION@ for the following request errors: * CourseNotModifiable * InactiveCourseOwner * IneligibleOwner
 --
 -- /See:/ 'newClassroomCoursesPatch' smart constructor.
 data ClassroomCoursesPatch = ClassroomCoursesPatch

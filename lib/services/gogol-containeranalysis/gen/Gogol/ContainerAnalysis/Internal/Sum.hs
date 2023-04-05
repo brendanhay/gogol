@@ -42,6 +42,32 @@ module Gogol.ContainerAnalysis.Internal.Sum
         ..
       ),
 
+    -- * Assessment_State
+    Assessment_State
+      ( Assessment_State_STATEUNSPECIFIED,
+        Assessment_State_Affected,
+        Assessment_State_NOTAFFECTED,
+        Assessment_State_Fixed,
+        Assessment_State_UNDERINVESTIGATION,
+        ..
+      ),
+
+    -- * BuildStep_Status
+    BuildStep_Status
+      ( BuildStep_Status_STATUSUNKNOWN,
+        BuildStep_Status_Pending,
+        BuildStep_Status_Queuing,
+        BuildStep_Status_Queued,
+        BuildStep_Status_Working,
+        BuildStep_Status_Success,
+        BuildStep_Status_Failure,
+        BuildStep_Status_INTERNALERROR,
+        BuildStep_Status_Timeout,
+        BuildStep_Status_Cancelled,
+        BuildStep_Status_Expired,
+        ..
+      ),
+
     -- * CVSS_AttackComplexity
     CVSS_AttackComplexity
       ( CVSS_AttackComplexity_ATTACKCOMPLEXITYUNSPECIFIED,
@@ -247,6 +273,13 @@ module Gogol.ContainerAnalysis.Internal.Sum
         ..
       ),
 
+    -- * ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior
+    ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior
+      ( ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior_DEFAULTLOGSBUCKETBEHAVIORUNSPECIFIED,
+        ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior_REGIONALUSEROWNEDBUCKET,
+        ..
+      ),
+
     -- * ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption
     ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption
       ( ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption_STREAMDEFAULT,
@@ -352,6 +385,7 @@ module Gogol.ContainerAnalysis.Internal.Sum
         DiscoveryNote_AnalysisKind_Upgrade,
         DiscoveryNote_AnalysisKind_Compliance,
         DiscoveryNote_AnalysisKind_DSSEATTESTATION,
+        DiscoveryNote_AnalysisKind_VULNERABILITYASSESSMENT,
         ..
       ),
 
@@ -361,6 +395,7 @@ module Gogol.ContainerAnalysis.Internal.Sum
         DiscoveryOccurrence_AnalysisStatus_Pending,
         DiscoveryOccurrence_AnalysisStatus_Scanning,
         DiscoveryOccurrence_AnalysisStatus_FINISHEDSUCCESS,
+        DiscoveryOccurrence_AnalysisStatus_Complete,
         DiscoveryOccurrence_AnalysisStatus_FINISHEDFAILED,
         DiscoveryOccurrence_AnalysisStatus_FINISHEDUNSUPPORTED,
         ..
@@ -393,6 +428,17 @@ module Gogol.ContainerAnalysis.Internal.Sum
         ..
       ),
 
+    -- * Justification_JustificationType
+    Justification_JustificationType
+      ( Justification_JustificationType_JUSTIFICATIONTYPEUNSPECIFIED,
+        Justification_JustificationType_COMPONENTNOTPRESENT,
+        Justification_JustificationType_VULNERABLECODENOTPRESENT,
+        Justification_JustificationType_VULNERABLECODENOTINEXECUTEPATH,
+        Justification_JustificationType_VULNERABLECODECANNOTBECONTROLLEDBYADVERSARY,
+        Justification_JustificationType_INLINEMITIGATIONSALREADYEXIST,
+        ..
+      ),
+
     -- * Note_Kind
     Note_Kind
       ( Note_Kind_NOTEKINDUNSPECIFIED,
@@ -406,6 +452,7 @@ module Gogol.ContainerAnalysis.Internal.Sum
         Note_Kind_Upgrade,
         Note_Kind_Compliance,
         Note_Kind_DSSEATTESTATION,
+        Note_Kind_VULNERABILITYASSESSMENT,
         ..
       ),
 
@@ -422,6 +469,7 @@ module Gogol.ContainerAnalysis.Internal.Sum
         Occurrence_Kind_Upgrade,
         Occurrence_Kind_Compliance,
         Occurrence_Kind_DSSEATTESTATION,
+        Occurrence_Kind_VULNERABILITYASSESSMENT,
         ..
       ),
 
@@ -436,12 +484,57 @@ module Gogol.ContainerAnalysis.Internal.Sum
         ..
       ),
 
+    -- * PackageNote_Architecture
+    PackageNote_Architecture
+      ( PackageNote_Architecture_ARCHITECTUREUNSPECIFIED,
+        PackageNote_Architecture_X86,
+        PackageNote_Architecture_X64,
+        ..
+      ),
+
+    -- * PackageOccurrence_Architecture
+    PackageOccurrence_Architecture
+      ( PackageOccurrence_Architecture_ARCHITECTUREUNSPECIFIED,
+        PackageOccurrence_Architecture_X86,
+        PackageOccurrence_Architecture_X64,
+        ..
+      ),
+
+    -- * Remediation_RemediationType
+    Remediation_RemediationType
+      ( Remediation_RemediationType_REMEDIATIONTYPEUNSPECIFIED,
+        Remediation_RemediationType_Mitigation,
+        Remediation_RemediationType_NOFIXPLANNED,
+        Remediation_RemediationType_NONEAVAILABLE,
+        Remediation_RemediationType_VENDORFIX,
+        Remediation_RemediationType_Workaround,
+        ..
+      ),
+
     -- * Version_Kind
     Version_Kind
       ( Version_Kind_VERSIONKINDUNSPECIFIED,
         Version_Kind_Normal,
         Version_Kind_Minimum,
         Version_Kind_Maximum,
+        ..
+      ),
+
+    -- * VexAssessment_State
+    VexAssessment_State
+      ( VexAssessment_State_STATEUNSPECIFIED,
+        VexAssessment_State_Affected,
+        VexAssessment_State_NOTAFFECTED,
+        VexAssessment_State_Fixed,
+        VexAssessment_State_UNDERINVESTIGATION,
+        ..
+      ),
+
+    -- * VulnerabilityNote_CvssVersion
+    VulnerabilityNote_CvssVersion
+      ( VulnerabilityNote_CvssVersion_CVSSVERSIONUNSPECIFIED,
+        VulnerabilityNote_CvssVersion_CVSS_VERSION_2,
+        VulnerabilityNote_CvssVersion_CVSS_VERSION_3,
         ..
       ),
 
@@ -453,6 +546,14 @@ module Gogol.ContainerAnalysis.Internal.Sum
         VulnerabilityNote_Severity_Medium,
         VulnerabilityNote_Severity_High,
         VulnerabilityNote_Severity_Critical,
+        ..
+      ),
+
+    -- * VulnerabilityOccurrence_CvssVersion
+    VulnerabilityOccurrence_CvssVersion
+      ( VulnerabilityOccurrence_CvssVersion_CVSSVERSIONUNSPECIFIED,
+        VulnerabilityOccurrence_CvssVersion_CVSS_VERSION_2,
+        VulnerabilityOccurrence_CvssVersion_CVSS_VERSION_3,
         ..
       ),
 
@@ -544,6 +645,120 @@ pattern AliasContext_Kind_Other = AliasContext_Kind "OTHER"
   AliasContext_Kind_Movable,
   AliasContext_Kind_Other,
   AliasContext_Kind
+  #-}
+
+-- | Provides the state of this Vulnerability assessment.
+newtype Assessment_State = Assessment_State {fromAssessment_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | No state is specified.
+pattern Assessment_State_STATEUNSPECIFIED :: Assessment_State
+pattern Assessment_State_STATEUNSPECIFIED = Assessment_State "STATE_UNSPECIFIED"
+
+-- | This product is known to be affected by this vulnerability.
+pattern Assessment_State_Affected :: Assessment_State
+pattern Assessment_State_Affected = Assessment_State "AFFECTED"
+
+-- | This product is known to be not affected by this vulnerability.
+pattern Assessment_State_NOTAFFECTED :: Assessment_State
+pattern Assessment_State_NOTAFFECTED = Assessment_State "NOT_AFFECTED"
+
+-- | This product contains a fix for this vulnerability.
+pattern Assessment_State_Fixed :: Assessment_State
+pattern Assessment_State_Fixed = Assessment_State "FIXED"
+
+-- | It is not known yet whether these versions are or are not affected by the vulnerability. However, it is still under investigation.
+pattern Assessment_State_UNDERINVESTIGATION :: Assessment_State
+pattern Assessment_State_UNDERINVESTIGATION = Assessment_State "UNDER_INVESTIGATION"
+
+{-# COMPLETE
+  Assessment_State_STATEUNSPECIFIED,
+  Assessment_State_Affected,
+  Assessment_State_NOTAFFECTED,
+  Assessment_State_Fixed,
+  Assessment_State_UNDERINVESTIGATION,
+  Assessment_State
+  #-}
+
+-- | Output only. Status of the build step. At this time, build step status is only updated on build completion; step status is not updated in real-time as the build progresses.
+newtype BuildStep_Status = BuildStep_Status {fromBuildStep_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Status of the build is unknown.
+pattern BuildStep_Status_STATUSUNKNOWN :: BuildStep_Status
+pattern BuildStep_Status_STATUSUNKNOWN = BuildStep_Status "STATUS_UNKNOWN"
+
+-- | Build has been created and is pending execution and queuing. It has not been queued.
+pattern BuildStep_Status_Pending :: BuildStep_Status
+pattern BuildStep_Status_Pending = BuildStep_Status "PENDING"
+
+-- | Build has been received and is being queued.
+pattern BuildStep_Status_Queuing :: BuildStep_Status
+pattern BuildStep_Status_Queuing = BuildStep_Status "QUEUING"
+
+-- | Build or step is queued; work has not yet begun.
+pattern BuildStep_Status_Queued :: BuildStep_Status
+pattern BuildStep_Status_Queued = BuildStep_Status "QUEUED"
+
+-- | Build or step is being executed.
+pattern BuildStep_Status_Working :: BuildStep_Status
+pattern BuildStep_Status_Working = BuildStep_Status "WORKING"
+
+-- | Build or step finished successfully.
+pattern BuildStep_Status_Success :: BuildStep_Status
+pattern BuildStep_Status_Success = BuildStep_Status "SUCCESS"
+
+-- | Build or step failed to complete successfully.
+pattern BuildStep_Status_Failure :: BuildStep_Status
+pattern BuildStep_Status_Failure = BuildStep_Status "FAILURE"
+
+-- | Build or step failed due to an internal cause.
+pattern BuildStep_Status_INTERNALERROR :: BuildStep_Status
+pattern BuildStep_Status_INTERNALERROR = BuildStep_Status "INTERNAL_ERROR"
+
+-- | Build or step took longer than was allowed.
+pattern BuildStep_Status_Timeout :: BuildStep_Status
+pattern BuildStep_Status_Timeout = BuildStep_Status "TIMEOUT"
+
+-- | Build or step was canceled by a user.
+pattern BuildStep_Status_Cancelled :: BuildStep_Status
+pattern BuildStep_Status_Cancelled = BuildStep_Status "CANCELLED"
+
+-- | Build was enqueued for longer than the value of @queue_ttl@.
+pattern BuildStep_Status_Expired :: BuildStep_Status
+pattern BuildStep_Status_Expired = BuildStep_Status "EXPIRED"
+
+{-# COMPLETE
+  BuildStep_Status_STATUSUNKNOWN,
+  BuildStep_Status_Pending,
+  BuildStep_Status_Queuing,
+  BuildStep_Status_Queued,
+  BuildStep_Status_Working,
+  BuildStep_Status_Success,
+  BuildStep_Status_Failure,
+  BuildStep_Status_INTERNALERROR,
+  BuildStep_Status_Timeout,
+  BuildStep_Status_Cancelled,
+  BuildStep_Status_Expired,
+  BuildStep_Status
   #-}
 
 newtype CVSS_AttackComplexity = CVSS_AttackComplexity {fromCVSS_AttackComplexity :: Core.Text}
@@ -1379,6 +1594,33 @@ pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type_FETCHSO
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo_Type
   #-}
 
+-- | Optional. Option to specify how default logs buckets are setup.
+newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior {fromContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified.
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior_DEFAULTLOGSBUCKETBEHAVIORUNSPECIFIED :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior_DEFAULTLOGSBUCKETBEHAVIORUNSPECIFIED = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior "DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED"
+
+-- | Bucket is located in user-owned project in the same region as the build. The builder service account must have access to create and write to GCS buckets in the build project.
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior_REGIONALUSEROWNEDBUCKET :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior_REGIONALUSEROWNEDBUCKET = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior "REGIONAL_USER_OWNED_BUCKET"
+
+{-# COMPLETE
+  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior_DEFAULTLOGSBUCKETBEHAVIORUNSPECIFIED,
+  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior_REGIONALUSEROWNEDBUCKET,
+  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior
+  #-}
+
 -- | Option to define build log streaming behavior to Google Cloud Storage.
 newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption {fromContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1513,11 +1755,11 @@ newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyO
       Core.FromJSONKey
     )
 
--- | Not a verifiable build. (default)
+-- | Not a verifiable build (the default).
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption_NOTVERIFIED :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption_NOTVERIFIED = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption "NOT_VERIFIED"
 
--- | Verified build.
+-- | Build must be verified.
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption_Verified :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption_Verified = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption "VERIFIED"
 
@@ -1815,6 +2057,10 @@ pattern DiscoveryNote_AnalysisKind_Compliance = DiscoveryNote_AnalysisKind "COMP
 pattern DiscoveryNote_AnalysisKind_DSSEATTESTATION :: DiscoveryNote_AnalysisKind
 pattern DiscoveryNote_AnalysisKind_DSSEATTESTATION = DiscoveryNote_AnalysisKind "DSSE_ATTESTATION"
 
+-- | This represents a Vulnerability Assessment.
+pattern DiscoveryNote_AnalysisKind_VULNERABILITYASSESSMENT :: DiscoveryNote_AnalysisKind
+pattern DiscoveryNote_AnalysisKind_VULNERABILITYASSESSMENT = DiscoveryNote_AnalysisKind "VULNERABILITY_ASSESSMENT"
+
 {-# COMPLETE
   DiscoveryNote_AnalysisKind_NOTEKINDUNSPECIFIED,
   DiscoveryNote_AnalysisKind_Vulnerability,
@@ -1827,6 +2073,7 @@ pattern DiscoveryNote_AnalysisKind_DSSEATTESTATION = DiscoveryNote_AnalysisKind 
   DiscoveryNote_AnalysisKind_Upgrade,
   DiscoveryNote_AnalysisKind_Compliance,
   DiscoveryNote_AnalysisKind_DSSEATTESTATION,
+  DiscoveryNote_AnalysisKind_VULNERABILITYASSESSMENT,
   DiscoveryNote_AnalysisKind
   #-}
 
@@ -1859,11 +2106,15 @@ pattern DiscoveryOccurrence_AnalysisStatus_Scanning = DiscoveryOccurrence_Analys
 pattern DiscoveryOccurrence_AnalysisStatus_FINISHEDSUCCESS :: DiscoveryOccurrence_AnalysisStatus
 pattern DiscoveryOccurrence_AnalysisStatus_FINISHEDSUCCESS = DiscoveryOccurrence_AnalysisStatus "FINISHED_SUCCESS"
 
+-- | Analysis has completed.
+pattern DiscoveryOccurrence_AnalysisStatus_Complete :: DiscoveryOccurrence_AnalysisStatus
+pattern DiscoveryOccurrence_AnalysisStatus_Complete = DiscoveryOccurrence_AnalysisStatus "COMPLETE"
+
 -- | Analysis has finished unsuccessfully, the analysis itself is in a bad state.
 pattern DiscoveryOccurrence_AnalysisStatus_FINISHEDFAILED :: DiscoveryOccurrence_AnalysisStatus
 pattern DiscoveryOccurrence_AnalysisStatus_FINISHEDFAILED = DiscoveryOccurrence_AnalysisStatus "FINISHED_FAILED"
 
--- | The resource is known not to be supported
+-- | The resource is known not to be supported.
 pattern DiscoveryOccurrence_AnalysisStatus_FINISHEDUNSUPPORTED :: DiscoveryOccurrence_AnalysisStatus
 pattern DiscoveryOccurrence_AnalysisStatus_FINISHEDUNSUPPORTED = DiscoveryOccurrence_AnalysisStatus "FINISHED_UNSUPPORTED"
 
@@ -1872,6 +2123,7 @@ pattern DiscoveryOccurrence_AnalysisStatus_FINISHEDUNSUPPORTED = DiscoveryOccurr
   DiscoveryOccurrence_AnalysisStatus_Pending,
   DiscoveryOccurrence_AnalysisStatus_Scanning,
   DiscoveryOccurrence_AnalysisStatus_FINISHEDSUCCESS,
+  DiscoveryOccurrence_AnalysisStatus_Complete,
   DiscoveryOccurrence_AnalysisStatus_FINISHEDFAILED,
   DiscoveryOccurrence_AnalysisStatus_FINISHEDUNSUPPORTED,
   DiscoveryOccurrence_AnalysisStatus
@@ -1988,6 +2240,53 @@ pattern FixableTotalByDigest_Severity_Critical = FixableTotalByDigest_Severity "
   FixableTotalByDigest_Severity
   #-}
 
+-- | The justification type for this vulnerability.
+newtype Justification_JustificationType = Justification_JustificationType {fromJustification_JustificationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | JUSTIFICATION/TYPE/UNSPECIFIED.
+pattern Justification_JustificationType_JUSTIFICATIONTYPEUNSPECIFIED :: Justification_JustificationType
+pattern Justification_JustificationType_JUSTIFICATIONTYPEUNSPECIFIED = Justification_JustificationType "JUSTIFICATION_TYPE_UNSPECIFIED"
+
+-- | The vulnerable component is not present in the product.
+pattern Justification_JustificationType_COMPONENTNOTPRESENT :: Justification_JustificationType
+pattern Justification_JustificationType_COMPONENTNOTPRESENT = Justification_JustificationType "COMPONENT_NOT_PRESENT"
+
+-- | The vulnerable code is not present. Typically this case occurs when source code is configured or built in a way that excludes the vulnerable code.
+pattern Justification_JustificationType_VULNERABLECODENOTPRESENT :: Justification_JustificationType
+pattern Justification_JustificationType_VULNERABLECODENOTPRESENT = Justification_JustificationType "VULNERABLE_CODE_NOT_PRESENT"
+
+-- | The vulnerable code can not be executed. Typically this case occurs when the product includes the vulnerable code but does not call or use the vulnerable code.
+pattern Justification_JustificationType_VULNERABLECODENOTINEXECUTEPATH :: Justification_JustificationType
+pattern Justification_JustificationType_VULNERABLECODENOTINEXECUTEPATH = Justification_JustificationType "VULNERABLE_CODE_NOT_IN_EXECUTE_PATH"
+
+-- | The vulnerable code cannot be controlled by an attacker to exploit the vulnerability.
+pattern Justification_JustificationType_VULNERABLECODECANNOTBECONTROLLEDBYADVERSARY :: Justification_JustificationType
+pattern Justification_JustificationType_VULNERABLECODECANNOTBECONTROLLEDBYADVERSARY = Justification_JustificationType "VULNERABLE_CODE_CANNOT_BE_CONTROLLED_BY_ADVERSARY"
+
+-- | The product includes built-in protections or features that prevent exploitation of the vulnerability. These built-in protections cannot be subverted by the attacker and cannot be configured or disabled by the user. These mitigations completely prevent exploitation based on known attack vectors.
+pattern Justification_JustificationType_INLINEMITIGATIONSALREADYEXIST :: Justification_JustificationType
+pattern Justification_JustificationType_INLINEMITIGATIONSALREADYEXIST = Justification_JustificationType "INLINE_MITIGATIONS_ALREADY_EXIST"
+
+{-# COMPLETE
+  Justification_JustificationType_JUSTIFICATIONTYPEUNSPECIFIED,
+  Justification_JustificationType_COMPONENTNOTPRESENT,
+  Justification_JustificationType_VULNERABLECODENOTPRESENT,
+  Justification_JustificationType_VULNERABLECODENOTINEXECUTEPATH,
+  Justification_JustificationType_VULNERABLECODECANNOTBECONTROLLEDBYADVERSARY,
+  Justification_JustificationType_INLINEMITIGATIONSALREADYEXIST,
+  Justification_JustificationType
+  #-}
+
 -- | Output only. The type of analysis. This field can be used as a filter in list requests.
 newtype Note_Kind = Note_Kind {fromNote_Kind :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -2045,6 +2344,10 @@ pattern Note_Kind_Compliance = Note_Kind "COMPLIANCE"
 pattern Note_Kind_DSSEATTESTATION :: Note_Kind
 pattern Note_Kind_DSSEATTESTATION = Note_Kind "DSSE_ATTESTATION"
 
+-- | This represents a Vulnerability Assessment.
+pattern Note_Kind_VULNERABILITYASSESSMENT :: Note_Kind
+pattern Note_Kind_VULNERABILITYASSESSMENT = Note_Kind "VULNERABILITY_ASSESSMENT"
+
 {-# COMPLETE
   Note_Kind_NOTEKINDUNSPECIFIED,
   Note_Kind_Vulnerability,
@@ -2057,6 +2360,7 @@ pattern Note_Kind_DSSEATTESTATION = Note_Kind "DSSE_ATTESTATION"
   Note_Kind_Upgrade,
   Note_Kind_Compliance,
   Note_Kind_DSSEATTESTATION,
+  Note_Kind_VULNERABILITYASSESSMENT,
   Note_Kind
   #-}
 
@@ -2117,6 +2421,10 @@ pattern Occurrence_Kind_Compliance = Occurrence_Kind "COMPLIANCE"
 pattern Occurrence_Kind_DSSEATTESTATION :: Occurrence_Kind
 pattern Occurrence_Kind_DSSEATTESTATION = Occurrence_Kind "DSSE_ATTESTATION"
 
+-- | This represents a Vulnerability Assessment.
+pattern Occurrence_Kind_VULNERABILITYASSESSMENT :: Occurrence_Kind
+pattern Occurrence_Kind_VULNERABILITYASSESSMENT = Occurrence_Kind "VULNERABILITY_ASSESSMENT"
+
 {-# COMPLETE
   Occurrence_Kind_NOTEKINDUNSPECIFIED,
   Occurrence_Kind_Vulnerability,
@@ -2129,6 +2437,7 @@ pattern Occurrence_Kind_DSSEATTESTATION = Occurrence_Kind "DSSE_ATTESTATION"
   Occurrence_Kind_Upgrade,
   Occurrence_Kind_Compliance,
   Occurrence_Kind_DSSEATTESTATION,
+  Occurrence_Kind_VULNERABILITYASSESSMENT,
   Occurrence_Kind
   #-}
 
@@ -2179,6 +2488,117 @@ pattern PackageIssue_EffectiveSeverity_Critical = PackageIssue_EffectiveSeverity
   PackageIssue_EffectiveSeverity
   #-}
 
+-- | The CPU architecture for which packages in this distribution channel were built. Architecture will be blank for language packages.
+newtype PackageNote_Architecture = PackageNote_Architecture {fromPackageNote_Architecture :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unknown architecture.
+pattern PackageNote_Architecture_ARCHITECTUREUNSPECIFIED :: PackageNote_Architecture
+pattern PackageNote_Architecture_ARCHITECTUREUNSPECIFIED = PackageNote_Architecture "ARCHITECTURE_UNSPECIFIED"
+
+-- | X86 architecture.
+pattern PackageNote_Architecture_X86 :: PackageNote_Architecture
+pattern PackageNote_Architecture_X86 = PackageNote_Architecture "X86"
+
+-- | X64 architecture.
+pattern PackageNote_Architecture_X64 :: PackageNote_Architecture
+pattern PackageNote_Architecture_X64 = PackageNote_Architecture "X64"
+
+{-# COMPLETE
+  PackageNote_Architecture_ARCHITECTUREUNSPECIFIED,
+  PackageNote_Architecture_X86,
+  PackageNote_Architecture_X64,
+  PackageNote_Architecture
+  #-}
+
+-- | Output only. The CPU architecture for which packages in this distribution channel were built. Architecture will be blank for language packages.
+newtype PackageOccurrence_Architecture = PackageOccurrence_Architecture {fromPackageOccurrence_Architecture :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unknown architecture.
+pattern PackageOccurrence_Architecture_ARCHITECTUREUNSPECIFIED :: PackageOccurrence_Architecture
+pattern PackageOccurrence_Architecture_ARCHITECTUREUNSPECIFIED = PackageOccurrence_Architecture "ARCHITECTURE_UNSPECIFIED"
+
+-- | X86 architecture.
+pattern PackageOccurrence_Architecture_X86 :: PackageOccurrence_Architecture
+pattern PackageOccurrence_Architecture_X86 = PackageOccurrence_Architecture "X86"
+
+-- | X64 architecture.
+pattern PackageOccurrence_Architecture_X64 :: PackageOccurrence_Architecture
+pattern PackageOccurrence_Architecture_X64 = PackageOccurrence_Architecture "X64"
+
+{-# COMPLETE
+  PackageOccurrence_Architecture_ARCHITECTUREUNSPECIFIED,
+  PackageOccurrence_Architecture_X86,
+  PackageOccurrence_Architecture_X64,
+  PackageOccurrence_Architecture
+  #-}
+
+-- | The type of remediation that can be applied.
+newtype Remediation_RemediationType = Remediation_RemediationType {fromRemediation_RemediationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | No remediation type specified.
+pattern Remediation_RemediationType_REMEDIATIONTYPEUNSPECIFIED :: Remediation_RemediationType
+pattern Remediation_RemediationType_REMEDIATIONTYPEUNSPECIFIED = Remediation_RemediationType "REMEDIATION_TYPE_UNSPECIFIED"
+
+-- | A MITIGATION is available.
+pattern Remediation_RemediationType_Mitigation :: Remediation_RemediationType
+pattern Remediation_RemediationType_Mitigation = Remediation_RemediationType "MITIGATION"
+
+-- | No fix is planned.
+pattern Remediation_RemediationType_NOFIXPLANNED :: Remediation_RemediationType
+pattern Remediation_RemediationType_NOFIXPLANNED = Remediation_RemediationType "NO_FIX_PLANNED"
+
+-- | Not available.
+pattern Remediation_RemediationType_NONEAVAILABLE :: Remediation_RemediationType
+pattern Remediation_RemediationType_NONEAVAILABLE = Remediation_RemediationType "NONE_AVAILABLE"
+
+-- | A vendor fix is available.
+pattern Remediation_RemediationType_VENDORFIX :: Remediation_RemediationType
+pattern Remediation_RemediationType_VENDORFIX = Remediation_RemediationType "VENDOR_FIX"
+
+-- | A workaround is available.
+pattern Remediation_RemediationType_Workaround :: Remediation_RemediationType
+pattern Remediation_RemediationType_Workaround = Remediation_RemediationType "WORKAROUND"
+
+{-# COMPLETE
+  Remediation_RemediationType_REMEDIATIONTYPEUNSPECIFIED,
+  Remediation_RemediationType_Mitigation,
+  Remediation_RemediationType_NOFIXPLANNED,
+  Remediation_RemediationType_NONEAVAILABLE,
+  Remediation_RemediationType_VENDORFIX,
+  Remediation_RemediationType_Workaround,
+  Remediation_RemediationType
+  #-}
+
 -- | Required. Distinguishes between sentinel MIN\/MAX versions and normal versions.
 newtype Version_Kind = Version_Kind {fromVersion_Kind :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -2214,6 +2634,80 @@ pattern Version_Kind_Maximum = Version_Kind "MAXIMUM"
   Version_Kind_Minimum,
   Version_Kind_Maximum,
   Version_Kind
+  #-}
+
+-- | Provides the state of this Vulnerability assessment.
+newtype VexAssessment_State = VexAssessment_State {fromVexAssessment_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | No state is specified.
+pattern VexAssessment_State_STATEUNSPECIFIED :: VexAssessment_State
+pattern VexAssessment_State_STATEUNSPECIFIED = VexAssessment_State "STATE_UNSPECIFIED"
+
+-- | This product is known to be affected by this vulnerability.
+pattern VexAssessment_State_Affected :: VexAssessment_State
+pattern VexAssessment_State_Affected = VexAssessment_State "AFFECTED"
+
+-- | This product is known to be not affected by this vulnerability.
+pattern VexAssessment_State_NOTAFFECTED :: VexAssessment_State
+pattern VexAssessment_State_NOTAFFECTED = VexAssessment_State "NOT_AFFECTED"
+
+-- | This product contains a fix for this vulnerability.
+pattern VexAssessment_State_Fixed :: VexAssessment_State
+pattern VexAssessment_State_Fixed = VexAssessment_State "FIXED"
+
+-- | It is not known yet whether these versions are or are not affected by the vulnerability. However, it is still under investigation.
+pattern VexAssessment_State_UNDERINVESTIGATION :: VexAssessment_State
+pattern VexAssessment_State_UNDERINVESTIGATION = VexAssessment_State "UNDER_INVESTIGATION"
+
+{-# COMPLETE
+  VexAssessment_State_STATEUNSPECIFIED,
+  VexAssessment_State_Affected,
+  VexAssessment_State_NOTAFFECTED,
+  VexAssessment_State_Fixed,
+  VexAssessment_State_UNDERINVESTIGATION,
+  VexAssessment_State
+  #-}
+
+-- | CVSS version used to populate cvss_score and severity.
+newtype VulnerabilityNote_CvssVersion = VulnerabilityNote_CvssVersion {fromVulnerabilityNote_CvssVersion :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern VulnerabilityNote_CvssVersion_CVSSVERSIONUNSPECIFIED :: VulnerabilityNote_CvssVersion
+pattern VulnerabilityNote_CvssVersion_CVSSVERSIONUNSPECIFIED = VulnerabilityNote_CvssVersion "CVSS_VERSION_UNSPECIFIED"
+
+-- |
+pattern VulnerabilityNote_CvssVersion_CVSS_VERSION_2 :: VulnerabilityNote_CvssVersion
+pattern VulnerabilityNote_CvssVersion_CVSS_VERSION_2 = VulnerabilityNote_CvssVersion "CVSS_VERSION_2"
+
+-- |
+pattern VulnerabilityNote_CvssVersion_CVSS_VERSION_3 :: VulnerabilityNote_CvssVersion
+pattern VulnerabilityNote_CvssVersion_CVSS_VERSION_3 = VulnerabilityNote_CvssVersion "CVSS_VERSION_3"
+
+{-# COMPLETE
+  VulnerabilityNote_CvssVersion_CVSSVERSIONUNSPECIFIED,
+  VulnerabilityNote_CvssVersion_CVSS_VERSION_2,
+  VulnerabilityNote_CvssVersion_CVSS_VERSION_3,
+  VulnerabilityNote_CvssVersion
   #-}
 
 -- | The note provider assigned severity of this vulnerability.
@@ -2261,6 +2755,38 @@ pattern VulnerabilityNote_Severity_Critical = VulnerabilityNote_Severity "CRITIC
   VulnerabilityNote_Severity_High,
   VulnerabilityNote_Severity_Critical,
   VulnerabilityNote_Severity
+  #-}
+
+-- | Output only. CVSS version used to populate cvss_score and severity.
+newtype VulnerabilityOccurrence_CvssVersion = VulnerabilityOccurrence_CvssVersion {fromVulnerabilityOccurrence_CvssVersion :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern VulnerabilityOccurrence_CvssVersion_CVSSVERSIONUNSPECIFIED :: VulnerabilityOccurrence_CvssVersion
+pattern VulnerabilityOccurrence_CvssVersion_CVSSVERSIONUNSPECIFIED = VulnerabilityOccurrence_CvssVersion "CVSS_VERSION_UNSPECIFIED"
+
+-- |
+pattern VulnerabilityOccurrence_CvssVersion_CVSS_VERSION_2 :: VulnerabilityOccurrence_CvssVersion
+pattern VulnerabilityOccurrence_CvssVersion_CVSS_VERSION_2 = VulnerabilityOccurrence_CvssVersion "CVSS_VERSION_2"
+
+-- |
+pattern VulnerabilityOccurrence_CvssVersion_CVSS_VERSION_3 :: VulnerabilityOccurrence_CvssVersion
+pattern VulnerabilityOccurrence_CvssVersion_CVSS_VERSION_3 = VulnerabilityOccurrence_CvssVersion "CVSS_VERSION_3"
+
+{-# COMPLETE
+  VulnerabilityOccurrence_CvssVersion_CVSSVERSIONUNSPECIFIED,
+  VulnerabilityOccurrence_CvssVersion_CVSS_VERSION_2,
+  VulnerabilityOccurrence_CvssVersion_CVSS_VERSION_3,
+  VulnerabilityOccurrence_CvssVersion
   #-}
 
 -- | The distro assigned severity for this vulnerability when it is available, otherwise this is the note provider assigned severity. When there are multiple PackageIssues for this vulnerability, they can have different effective severities because some might be provided by the distro while others are provided by the language ecosystem for a language pack. For this reason, it is advised to use the effective severity on the PackageIssue level. In the case where multiple PackageIssues have differing effective severities, this field should be the highest severity for any of the PackageIssues.

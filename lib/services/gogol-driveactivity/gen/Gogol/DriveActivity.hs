@@ -80,6 +80,17 @@ module Gogol.DriveActivity
     -- ** ApplicationReference_Type
     ApplicationReference_Type (..),
 
+    -- ** AppliedLabelChange
+    AppliedLabelChange (..),
+    newAppliedLabelChange,
+
+    -- ** AppliedLabelChangeDetail
+    AppliedLabelChangeDetail (..),
+    newAppliedLabelChangeDetail,
+
+    -- ** AppliedLabelChangeDetail_TypesItem
+    AppliedLabelChangeDetail_TypesItem (..),
+
     -- ** Assignment
     Assignment (..),
     newAssignment,
@@ -109,6 +120,10 @@ module Gogol.DriveActivity
 
     -- ** DataLeakPreventionChange_Type
     DataLeakPreventionChange_Type (..),
+
+    -- ** Date
+    Date (..),
+    newDate,
 
     -- ** Delete'
     Delete' (..),
@@ -160,6 +175,14 @@ module Gogol.DriveActivity
     Edit (..),
     newEdit,
 
+    -- ** FieldValue
+    FieldValue (..),
+    newFieldValue,
+
+    -- ** FieldValueChange
+    FieldValueChange (..),
+    newFieldValueChange,
+
     -- ** File
     File (..),
     newFile,
@@ -182,6 +205,10 @@ module Gogol.DriveActivity
     -- ** Impersonation
     Impersonation (..),
     newImpersonation,
+
+    -- ** Integer
+    Integer (..),
+    newInteger,
 
     -- ** KnownUser
     KnownUser (..),
@@ -254,9 +281,21 @@ module Gogol.DriveActivity
     -- ** RestrictionChange_NewRestriction
     RestrictionChange_NewRestriction (..),
 
+    -- ** Selection
+    Selection (..),
+    newSelection,
+
+    -- ** SelectionList
+    SelectionList (..),
+    newSelectionList,
+
     -- ** SettingsChange
     SettingsChange (..),
     newSettingsChange,
+
+    -- ** SingleUser
+    SingleUser (..),
+    newSingleUser,
 
     -- ** Suggestion
     Suggestion (..),
@@ -288,6 +327,14 @@ module Gogol.DriveActivity
     TeamDriveReference (..),
     newTeamDriveReference,
 
+    -- ** Text
+    Text (..),
+    newText,
+
+    -- ** TextList
+    TextList (..),
+    newTextList,
+
     -- ** TimeRange
     TimeRange (..),
     newTimeRange,
@@ -303,6 +350,10 @@ module Gogol.DriveActivity
     -- ** User
     User (..),
     newUser,
+
+    -- ** UserList
+    UserList (..),
+    newUserList,
   )
 where
 

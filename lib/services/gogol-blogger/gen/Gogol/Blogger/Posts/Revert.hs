@@ -28,7 +28,7 @@
 --
 -- Reverts a published or scheduled post to draft state.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.posts.revert@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.posts.revert@.
 module Gogol.Blogger.Posts.Revert
   ( -- * Resource
     BloggerPostsRevertResource,

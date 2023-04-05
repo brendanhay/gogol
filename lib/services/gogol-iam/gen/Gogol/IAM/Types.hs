@@ -37,312 +37,80 @@ module Gogol.IAM.Types
     -- ** Xgafv
     Xgafv (..),
 
-    -- ** AdminAuditData
-    AdminAuditData (..),
-    newAdminAuditData,
-
-    -- ** AuditConfig
-    AuditConfig (..),
-    newAuditConfig,
-
-    -- ** AuditData
-    AuditData (..),
-    newAuditData,
-
-    -- ** AuditLogConfig
-    AuditLogConfig (..),
-    newAuditLogConfig,
-
-    -- ** AuditLogConfig_LogType
-    AuditLogConfig_LogType (..),
-
-    -- ** AuditableService
-    AuditableService (..),
-    newAuditableService,
-
-    -- ** Aws
-    Aws (..),
-    newAws,
-
-    -- ** Binding
-    Binding (..),
-    newBinding,
-
-    -- ** BindingDelta
-    BindingDelta (..),
-    newBindingDelta,
-
-    -- ** BindingDelta_Action
-    BindingDelta_Action (..),
-
-    -- ** CreateRoleRequest
-    CreateRoleRequest (..),
-    newCreateRoleRequest,
-
-    -- ** CreateServiceAccountKeyRequest
-    CreateServiceAccountKeyRequest (..),
-    newCreateServiceAccountKeyRequest,
-
-    -- ** CreateServiceAccountKeyRequest_KeyAlgorithm
-    CreateServiceAccountKeyRequest_KeyAlgorithm (..),
-
-    -- ** CreateServiceAccountKeyRequest_PrivateKeyType
-    CreateServiceAccountKeyRequest_PrivateKeyType (..),
-
-    -- ** CreateServiceAccountRequest
-    CreateServiceAccountRequest (..),
-    newCreateServiceAccountRequest,
-
-    -- ** DisableServiceAccountKeyRequest
-    DisableServiceAccountKeyRequest (..),
-    newDisableServiceAccountKeyRequest,
-
-    -- ** DisableServiceAccountRequest
-    DisableServiceAccountRequest (..),
-    newDisableServiceAccountRequest,
-
-    -- ** Empty
-    Empty (..),
-    newEmpty,
-
-    -- ** EnableServiceAccountKeyRequest
-    EnableServiceAccountKeyRequest (..),
-    newEnableServiceAccountKeyRequest,
-
-    -- ** EnableServiceAccountRequest
-    EnableServiceAccountRequest (..),
-    newEnableServiceAccountRequest,
-
-    -- ** Expr
-    Expr (..),
-    newExpr,
-
-    -- ** LintPolicyRequest
-    LintPolicyRequest (..),
-    newLintPolicyRequest,
-
-    -- ** LintPolicyResponse
-    LintPolicyResponse (..),
-    newLintPolicyResponse,
-
-    -- ** LintResult
-    LintResult (..),
-    newLintResult,
-
-    -- ** LintResult_Level
-    LintResult_Level (..),
-
-    -- ** LintResult_Severity
-    LintResult_Severity (..),
-
-    -- ** ListRolesResponse
-    ListRolesResponse (..),
-    newListRolesResponse,
-
-    -- ** ListServiceAccountKeysResponse
-    ListServiceAccountKeysResponse (..),
-    newListServiceAccountKeysResponse,
-
-    -- ** ListServiceAccountsResponse
-    ListServiceAccountsResponse (..),
-    newListServiceAccountsResponse,
-
-    -- ** ListWorkloadIdentityPoolProvidersResponse
-    ListWorkloadIdentityPoolProvidersResponse (..),
-    newListWorkloadIdentityPoolProvidersResponse,
-
-    -- ** ListWorkloadIdentityPoolsResponse
-    ListWorkloadIdentityPoolsResponse (..),
-    newListWorkloadIdentityPoolsResponse,
-
-    -- ** Oidc
-    Oidc (..),
-    newOidc,
-
-    -- ** Operation
-    Operation (..),
-    newOperation,
-
-    -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
-
-    -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
-
-    -- ** PatchServiceAccountRequest
-    PatchServiceAccountRequest (..),
-    newPatchServiceAccountRequest,
-
-    -- ** Permission
-    Permission (..),
-    newPermission,
-
-    -- ** Permission_CustomRolesSupportLevel
-    Permission_CustomRolesSupportLevel (..),
-
-    -- ** Permission_Stage
-    Permission_Stage (..),
-
-    -- ** PermissionDelta
-    PermissionDelta (..),
-    newPermissionDelta,
-
-    -- ** Policy
-    Policy (..),
-    newPolicy,
-
-    -- ** PolicyDelta
-    PolicyDelta (..),
-    newPolicyDelta,
-
-    -- ** QueryAuditableServicesRequest
-    QueryAuditableServicesRequest (..),
-    newQueryAuditableServicesRequest,
-
-    -- ** QueryAuditableServicesResponse
-    QueryAuditableServicesResponse (..),
-    newQueryAuditableServicesResponse,
-
-    -- ** QueryGrantableRolesRequest
-    QueryGrantableRolesRequest (..),
-    newQueryGrantableRolesRequest,
-
-    -- ** QueryGrantableRolesRequest_View
-    QueryGrantableRolesRequest_View (..),
-
-    -- ** QueryGrantableRolesResponse
-    QueryGrantableRolesResponse (..),
-    newQueryGrantableRolesResponse,
-
-    -- ** QueryTestablePermissionsRequest
-    QueryTestablePermissionsRequest (..),
-    newQueryTestablePermissionsRequest,
-
-    -- ** QueryTestablePermissionsResponse
-    QueryTestablePermissionsResponse (..),
-    newQueryTestablePermissionsResponse,
-
-    -- ** Role
-    Role (..),
-    newRole,
-
-    -- ** Role_Stage
-    Role_Stage (..),
-
-    -- ** ServiceAccount
-    ServiceAccount (..),
-    newServiceAccount,
-
-    -- ** ServiceAccountKey
-    ServiceAccountKey (..),
-    newServiceAccountKey,
-
-    -- ** ServiceAccountKey_KeyAlgorithm
-    ServiceAccountKey_KeyAlgorithm (..),
-
-    -- ** ServiceAccountKey_KeyOrigin
-    ServiceAccountKey_KeyOrigin (..),
-
-    -- ** ServiceAccountKey_KeyType
-    ServiceAccountKey_KeyType (..),
-
-    -- ** ServiceAccountKey_PrivateKeyType
-    ServiceAccountKey_PrivateKeyType (..),
-
-    -- ** SetIamPolicyRequest
-    SetIamPolicyRequest (..),
-    newSetIamPolicyRequest,
-
-    -- ** SignBlobRequest
-    SignBlobRequest (..),
-    newSignBlobRequest,
-
-    -- ** SignBlobResponse
-    SignBlobResponse (..),
-    newSignBlobResponse,
-
-    -- ** SignJwtRequest
-    SignJwtRequest (..),
-    newSignJwtRequest,
-
-    -- ** SignJwtResponse
-    SignJwtResponse (..),
-    newSignJwtResponse,
-
-    -- ** Status
-    Status (..),
-    newStatus,
-
-    -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
-
-    -- ** TestIamPermissionsRequest
-    TestIamPermissionsRequest (..),
-    newTestIamPermissionsRequest,
-
-    -- ** TestIamPermissionsResponse
-    TestIamPermissionsResponse (..),
-    newTestIamPermissionsResponse,
-
-    -- ** UndeleteRoleRequest
-    UndeleteRoleRequest (..),
-    newUndeleteRoleRequest,
-
-    -- ** UndeleteServiceAccountRequest
-    UndeleteServiceAccountRequest (..),
-    newUndeleteServiceAccountRequest,
-
-    -- ** UndeleteServiceAccountResponse
-    UndeleteServiceAccountResponse (..),
-    newUndeleteServiceAccountResponse,
-
-    -- ** UndeleteWorkloadIdentityPoolProviderRequest
-    UndeleteWorkloadIdentityPoolProviderRequest (..),
-    newUndeleteWorkloadIdentityPoolProviderRequest,
-
-    -- ** UndeleteWorkloadIdentityPoolRequest
-    UndeleteWorkloadIdentityPoolRequest (..),
-    newUndeleteWorkloadIdentityPoolRequest,
-
-    -- ** UploadServiceAccountKeyRequest
-    UploadServiceAccountKeyRequest (..),
-    newUploadServiceAccountKeyRequest,
-
-    -- ** WorkloadIdentityPool
-    WorkloadIdentityPool (..),
-    newWorkloadIdentityPool,
-
-    -- ** WorkloadIdentityPool_State
-    WorkloadIdentityPool_State (..),
-
-    -- ** WorkloadIdentityPoolProvider
-    WorkloadIdentityPoolProvider (..),
-    newWorkloadIdentityPoolProvider,
-
-    -- ** WorkloadIdentityPoolProvider_AttributeMapping
-    WorkloadIdentityPoolProvider_AttributeMapping (..),
-    newWorkloadIdentityPoolProvider_AttributeMapping,
-
-    -- ** WorkloadIdentityPoolProvider_State
-    WorkloadIdentityPoolProvider_State (..),
-
-    -- ** OrganizationsRolesListView
-    OrganizationsRolesListView (..),
-
-    -- ** ProjectsRolesListView
-    ProjectsRolesListView (..),
-
-    -- ** ProjectsServiceAccountsKeysGetPublicKeyType
-    ProjectsServiceAccountsKeysGetPublicKeyType (..),
-
-    -- ** ProjectsServiceAccountsKeysListKeyTypes
-    ProjectsServiceAccountsKeysListKeyTypes (..),
-
-    -- ** RolesListView
-    RolesListView (..),
+    -- ** GoogleIamAdminV1AuditData
+    GoogleIamAdminV1AuditData (..),
+    newGoogleIamAdminV1AuditData,
+
+    -- ** GoogleIamAdminV1AuditDataPermissionDelta
+    GoogleIamAdminV1AuditDataPermissionDelta (..),
+    newGoogleIamAdminV1AuditDataPermissionDelta,
+
+    -- ** GoogleIamV1BindingDelta
+    GoogleIamV1BindingDelta (..),
+    newGoogleIamV1BindingDelta,
+
+    -- ** GoogleIamV1BindingDelta_Action
+    GoogleIamV1BindingDelta_Action (..),
+
+    -- ** GoogleIamV1LoggingAuditData
+    GoogleIamV1LoggingAuditData (..),
+    newGoogleIamV1LoggingAuditData,
+
+    -- ** GoogleIamV1PolicyDelta
+    GoogleIamV1PolicyDelta (..),
+    newGoogleIamV1PolicyDelta,
+
+    -- ** GoogleIamV1betaWorkloadIdentityPoolOperationMetadata
+    GoogleIamV1betaWorkloadIdentityPoolOperationMetadata (..),
+    newGoogleIamV1betaWorkloadIdentityPoolOperationMetadata,
+
+    -- ** GoogleIamV2DenyRule
+    GoogleIamV2DenyRule (..),
+    newGoogleIamV2DenyRule,
+
+    -- ** GoogleIamV2ListPoliciesResponse
+    GoogleIamV2ListPoliciesResponse (..),
+    newGoogleIamV2ListPoliciesResponse,
+
+    -- ** GoogleIamV2Policy
+    GoogleIamV2Policy (..),
+    newGoogleIamV2Policy,
+
+    -- ** GoogleIamV2Policy_Annotations
+    GoogleIamV2Policy_Annotations (..),
+    newGoogleIamV2Policy_Annotations,
+
+    -- ** GoogleIamV2PolicyOperationMetadata
+    GoogleIamV2PolicyOperationMetadata (..),
+    newGoogleIamV2PolicyOperationMetadata,
+
+    -- ** GoogleIamV2PolicyRule
+    GoogleIamV2PolicyRule (..),
+    newGoogleIamV2PolicyRule,
+
+    -- ** GoogleLongrunningOperation
+    GoogleLongrunningOperation (..),
+    newGoogleLongrunningOperation,
+
+    -- ** GoogleLongrunningOperation_Metadata
+    GoogleLongrunningOperation_Metadata (..),
+    newGoogleLongrunningOperation_Metadata,
+
+    -- ** GoogleLongrunningOperation_Response
+    GoogleLongrunningOperation_Response (..),
+    newGoogleLongrunningOperation_Response,
+
+    -- ** GoogleRpcStatus
+    GoogleRpcStatus (..),
+    newGoogleRpcStatus,
+
+    -- ** GoogleRpcStatus_DetailsItem
+    GoogleRpcStatus_DetailsItem (..),
+    newGoogleRpcStatus_DetailsItem,
+
+    -- ** GoogleTypeExpr
+    GoogleTypeExpr (..),
+    newGoogleTypeExpr,
   )
 where
 
@@ -350,11 +118,11 @@ import Gogol.IAM.Internal.Product
 import Gogol.IAM.Internal.Sum
 import qualified Gogol.Prelude as Core
 
--- | Default request referring to version @v1@ of the Identity and Access Management (IAM) API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version @v2@ of the Identity and Access Management (IAM) API. This contains the host and root path used as a starting point for constructing service requests.
 iAMService :: Core.ServiceConfig
 iAMService =
   Core.defaultService
-    (Core.ServiceId "iam:v1")
+    (Core.ServiceId "iam:v2")
     "iam.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.

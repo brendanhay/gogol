@@ -68,6 +68,9 @@ type DoubleClickSearchConversionGetResource =
               "criterionId"
               Core.Int64
     Core.:> Core.QueryParam
+              "customerId"
+              Core.Text
+    Core.:> Core.QueryParam
               "uploadType"
               Core.Text
     Core.:> Core.QueryParam
@@ -102,6 +105,8 @@ data DoubleClickSearchConversionGet = DoubleClickSearchConversionGet
     campaignId :: (Core.Maybe Core.Int64),
     -- | Numeric ID of the criterion.
     criterionId :: (Core.Maybe Core.Int64),
+    -- | Customer ID of a client account in the new Search Ads 360 experience.
+    customerId :: (Core.Maybe Core.Text),
     -- | Last date (inclusive) on which to retrieve conversions. Format is yyyymmdd.
     endDate :: Core.Int32,
     -- | Numeric ID of the engine account.
@@ -147,6 +152,7 @@ newDoubleClickSearchConversionGet advertiserId agencyId endDate engineAccountId 
       callback = Core.Nothing,
       campaignId = Core.Nothing,
       criterionId = Core.Nothing,
+      customerId = Core.Nothing,
       endDate = endDate,
       engineAccountId = engineAccountId,
       rowCount = rowCount,
@@ -182,6 +188,7 @@ instance
       callback
       campaignId
       criterionId
+      customerId
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)

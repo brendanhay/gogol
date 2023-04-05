@@ -79,6 +79,10 @@ library
     Gogol.Monitoring.Projects.NotificationChannels.Patch
     Gogol.Monitoring.Projects.NotificationChannels.SendVerificationCode
     Gogol.Monitoring.Projects.NotificationChannels.Verify
+    Gogol.Monitoring.Projects.Snoozes.Create
+    Gogol.Monitoring.Projects.Snoozes.Get
+    Gogol.Monitoring.Projects.Snoozes.List
+    Gogol.Monitoring.Projects.Snoozes.Patch
     Gogol.Monitoring.Projects.TimeSeries.Create
     Gogol.Monitoring.Projects.TimeSeries.CreateService
     Gogol.Monitoring.Projects.TimeSeries.List
@@ -106,5 +110,5 @@ library
     Gogol.Monitoring.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

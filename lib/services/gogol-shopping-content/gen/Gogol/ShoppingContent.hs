@@ -243,6 +243,36 @@ module Gogol.ShoppingContent
     ContentCollectionstatusesList (..),
     newContentCollectionstatusesList,
 
+    -- ** content.conversionsources.create
+    ContentConversionsourcesCreateResource,
+    ContentConversionsourcesCreate (..),
+    newContentConversionsourcesCreate,
+
+    -- ** content.conversionsources.delete
+    ContentConversionsourcesDeleteResource,
+    ContentConversionsourcesDelete (..),
+    newContentConversionsourcesDelete,
+
+    -- ** content.conversionsources.get
+    ContentConversionsourcesGetResource,
+    ContentConversionsourcesGet (..),
+    newContentConversionsourcesGet,
+
+    -- ** content.conversionsources.list
+    ContentConversionsourcesListResource,
+    ContentConversionsourcesList (..),
+    newContentConversionsourcesList,
+
+    -- ** content.conversionsources.patch
+    ContentConversionsourcesPatchResource,
+    ContentConversionsourcesPatch (..),
+    newContentConversionsourcesPatch,
+
+    -- ** content.conversionsources.undelete
+    ContentConversionsourcesUndeleteResource,
+    ContentConversionsourcesUndelete (..),
+    newContentConversionsourcesUndelete,
+
     -- ** content.csses.get
     ContentCssesGetResource,
     ContentCssesGet (..),
@@ -578,6 +608,21 @@ module Gogol.ShoppingContent
     ContentPosSale (..),
     newContentPosSale,
 
+    -- ** content.productdeliverytime.create
+    ContentProductdeliverytimeCreateResource,
+    ContentProductdeliverytimeCreate (..),
+    newContentProductdeliverytimeCreate,
+
+    -- ** content.productdeliverytime.delete
+    ContentProductdeliverytimeDeleteResource,
+    ContentProductdeliverytimeDelete (..),
+    newContentProductdeliverytimeDelete,
+
+    -- ** content.productdeliverytime.get
+    ContentProductdeliverytimeGetResource,
+    ContentProductdeliverytimeGet (..),
+    newContentProductdeliverytimeGet,
+
     -- ** content.products.custombatch
     ContentProductsCustombatchResource,
     ContentProductsCustombatch (..),
@@ -647,6 +692,21 @@ module Gogol.ShoppingContent
     ContentPubsubnotificationsettingsUpdateResource,
     ContentPubsubnotificationsettingsUpdate (..),
     newContentPubsubnotificationsettingsUpdate,
+
+    -- ** content.quotas.list
+    ContentQuotasListResource,
+    ContentQuotasList (..),
+    newContentQuotasList,
+
+    -- ** content.recommendations.generate
+    ContentRecommendationsGenerateResource,
+    ContentRecommendationsGenerate (..),
+    newContentRecommendationsGenerate,
+
+    -- ** content.recommendations.reportInteraction
+    ContentRecommendationsReportInteractionResource,
+    ContentRecommendationsReportInteraction (..),
+    newContentRecommendationsReportInteraction,
 
     -- ** content.regionalinventory.custombatch
     ContentRegionalinventoryCustombatchResource,
@@ -878,6 +938,10 @@ module Gogol.ShoppingContent
     AccountBusinessInformation (..),
     newAccountBusinessInformation,
 
+    -- ** AccountConversionSettings
+    AccountConversionSettings (..),
+    newAccountConversionSettings,
+
     -- ** AccountCredentials
     AccountCredentials (..),
     newAccountCredentials,
@@ -1071,6 +1135,37 @@ module Gogol.ShoppingContent
     Amount (..),
     newAmount,
 
+    -- ** AttributionSettings
+    AttributionSettings (..),
+    newAttributionSettings,
+
+    -- ** AttributionSettings_AttributionModel
+    AttributionSettings_AttributionModel (..),
+
+    -- ** AttributionSettingsConversionType
+    AttributionSettingsConversionType (..),
+    newAttributionSettingsConversionType,
+
+    -- ** BestSellers
+    BestSellers (..),
+    newBestSellers,
+
+    -- ** BestSellers_PreviousRelativeDemand
+    BestSellers_PreviousRelativeDemand (..),
+
+    -- ** BestSellers_RelativeDemand
+    BestSellers_RelativeDemand (..),
+
+    -- ** BestSellers_RelativeDemandChange
+    BestSellers_RelativeDemandChange (..),
+
+    -- ** BestSellers_ReportGranularity
+    BestSellers_ReportGranularity (..),
+
+    -- ** Brand
+    Brand (..),
+    newBrand,
+
     -- ** BusinessDayConfig
     BusinessDayConfig (..),
     newBusinessDayConfig,
@@ -1126,6 +1221,13 @@ module Gogol.ShoppingContent
     -- ** CollectionStatusItemLevelIssue
     CollectionStatusItemLevelIssue (..),
     newCollectionStatusItemLevelIssue,
+
+    -- ** ConversionSource
+    ConversionSource (..),
+    newConversionSource,
+
+    -- ** ConversionSource_State
+    ConversionSource_State (..),
 
     -- ** Css
     Css (..),
@@ -1223,6 +1325,14 @@ module Gogol.ShoppingContent
     DateTime' (..),
     newDateTime,
 
+    -- ** DeliveryArea
+    DeliveryArea (..),
+    newDeliveryArea,
+
+    -- ** DeliveryAreaPostalCodeRange
+    DeliveryAreaPostalCodeRange (..),
+    newDeliveryAreaPostalCodeRange,
+
     -- ** DeliveryTime
     DeliveryTime (..),
     newDeliveryTime,
@@ -1263,6 +1373,10 @@ module Gogol.ShoppingContent
     FreeListingsProgramStatusReviewIneligibilityReasonDetails (..),
     newFreeListingsProgramStatusReviewIneligibilityReasonDetails,
 
+    -- ** GenerateRecommendationsResponse
+    GenerateRecommendationsResponse (..),
+    newGenerateRecommendationsResponse,
+
     -- ** GmbAccounts
     GmbAccounts (..),
     newGmbAccounts,
@@ -1270,6 +1384,10 @@ module Gogol.ShoppingContent
     -- ** GmbAccountsGmbAccount
     GmbAccountsGmbAccount (..),
     newGmbAccountsGmbAccount,
+
+    -- ** GoogleAnalyticsLink
+    GoogleAnalyticsLink (..),
+    newGoogleAnalyticsLink,
 
     -- ** Headers
     Headers (..),
@@ -1398,9 +1516,17 @@ module Gogol.ShoppingContent
     ListCollectionsResponse (..),
     newListCollectionsResponse,
 
+    -- ** ListConversionSourcesResponse
+    ListConversionSourcesResponse (..),
+    newListConversionSourcesResponse,
+
     -- ** ListCssesResponse
     ListCssesResponse (..),
     newListCssesResponse,
+
+    -- ** ListMethodQuotasResponse
+    ListMethodQuotasResponse (..),
+    newListMethodQuotasResponse,
 
     -- ** ListRegionsResponse
     ListRegionsResponse (..),
@@ -1450,6 +1576,10 @@ module Gogol.ShoppingContent
     LoyaltyPoints (..),
     newLoyaltyPoints,
 
+    -- ** MerchantCenterDestination
+    MerchantCenterDestination (..),
+    newMerchantCenterDestination,
+
     -- ** MerchantOrderReturn
     MerchantOrderReturn (..),
     newMerchantOrderReturn,
@@ -1461,6 +1591,10 @@ module Gogol.ShoppingContent
     -- ** MerchantRejectionReason
     MerchantRejectionReason (..),
     newMerchantRejectionReason,
+
+    -- ** MethodQuota
+    MethodQuota (..),
+    newMethodQuota,
 
     -- ** Metrics
     Metrics (..),
@@ -1945,6 +2079,14 @@ module Gogol.ShoppingContent
     PriceAmount (..),
     newPriceAmount,
 
+    -- ** PriceCompetitiveness
+    PriceCompetitiveness (..),
+    newPriceCompetitiveness,
+
+    -- ** PriceInsights
+    PriceInsights (..),
+    newPriceInsights,
+
     -- ** Product
     Product (..),
     newProduct,
@@ -1953,9 +2095,35 @@ module Gogol.ShoppingContent
     ProductAmount (..),
     newProductAmount,
 
+    -- ** ProductCluster
+    ProductCluster (..),
+    newProductCluster,
+
+    -- ** ProductCluster_BrandInventoryStatus
+    ProductCluster_BrandInventoryStatus (..),
+
+    -- ** ProductCluster_InventoryStatus
+    ProductCluster_InventoryStatus (..),
+
+    -- ** ProductDeliveryTime
+    ProductDeliveryTime (..),
+    newProductDeliveryTime,
+
+    -- ** ProductDeliveryTimeAreaDeliveryTime
+    ProductDeliveryTimeAreaDeliveryTime (..),
+    newProductDeliveryTimeAreaDeliveryTime,
+
+    -- ** ProductDeliveryTimeAreaDeliveryTimeDeliveryTime
+    ProductDeliveryTimeAreaDeliveryTimeDeliveryTime (..),
+    newProductDeliveryTimeAreaDeliveryTimeDeliveryTime,
+
     -- ** ProductDimension
     ProductDimension (..),
     newProductDimension,
+
+    -- ** ProductId
+    ProductId (..),
+    newProductId,
 
     -- ** ProductProductDetail
     ProductProductDetail (..),
@@ -2000,6 +2168,38 @@ module Gogol.ShoppingContent
     -- ** ProductUnitPricingMeasure
     ProductUnitPricingMeasure (..),
     newProductUnitPricingMeasure,
+
+    -- ** ProductView
+    ProductView (..),
+    newProductView,
+
+    -- ** ProductView_AggregatedDestinationStatus
+    ProductView_AggregatedDestinationStatus (..),
+
+    -- ** ProductView_Channel
+    ProductView_Channel (..),
+
+    -- ** ProductViewItemIssue
+    ProductViewItemIssue (..),
+    newProductViewItemIssue,
+
+    -- ** ProductViewItemIssue_Resolution
+    ProductViewItemIssue_Resolution (..),
+
+    -- ** ProductViewItemIssueIssueSeverityPerDestination
+    ProductViewItemIssueIssueSeverityPerDestination (..),
+    newProductViewItemIssueIssueSeverityPerDestination,
+
+    -- ** ProductViewItemIssueItemIssueSeverity
+    ProductViewItemIssueItemIssueSeverity (..),
+    newProductViewItemIssueItemIssueSeverity,
+
+    -- ** ProductViewItemIssueItemIssueSeverity_AggregatedSeverity
+    ProductViewItemIssueItemIssueSeverity_AggregatedSeverity (..),
+
+    -- ** ProductViewItemIssueItemIssueType
+    ProductViewItemIssueItemIssueType (..),
+    newProductViewItemIssueItemIssueType,
 
     -- ** ProductWeight
     ProductWeight (..),
@@ -2061,6 +2261,24 @@ module Gogol.ShoppingContent
     -- ** Promotion_RedemptionChannelItem
     Promotion_RedemptionChannelItem (..),
 
+    -- ** Promotion_StoreApplicability
+    Promotion_StoreApplicability (..),
+
+    -- ** PromotionPromotionStatus
+    PromotionPromotionStatus (..),
+    newPromotionPromotionStatus,
+
+    -- ** PromotionPromotionStatusDestinationStatus
+    PromotionPromotionStatusDestinationStatus (..),
+    newPromotionPromotionStatusDestinationStatus,
+
+    -- ** PromotionPromotionStatusDestinationStatus_Status
+    PromotionPromotionStatusDestinationStatus_Status (..),
+
+    -- ** PromotionPromotionStatusPromotionIssue
+    PromotionPromotionStatusPromotionIssue (..),
+    newPromotionPromotionStatusPromotionIssue,
+
     -- ** PubsubNotificationSettings
     PubsubNotificationSettings (..),
     newPubsubNotificationSettings,
@@ -2068,6 +2286,28 @@ module Gogol.ShoppingContent
     -- ** RateGroup
     RateGroup (..),
     newRateGroup,
+
+    -- ** Recommendation
+    Recommendation (..),
+    newRecommendation,
+
+    -- ** RecommendationCallToAction
+    RecommendationCallToAction (..),
+    newRecommendationCallToAction,
+
+    -- ** RecommendationCreative
+    RecommendationCreative (..),
+    newRecommendationCreative,
+
+    -- ** RecommendationCreative_Type
+    RecommendationCreative_Type (..),
+
+    -- ** RecommendationDescription
+    RecommendationDescription (..),
+    newRecommendationDescription,
+
+    -- ** RecommendationDescription_Type
+    RecommendationDescription_Type (..),
 
     -- ** RefundReason
     RefundReason (..),
@@ -2108,6 +2348,13 @@ module Gogol.ShoppingContent
     -- ** RegionalinventoryCustomBatchResponseEntry
     RegionalinventoryCustomBatchResponseEntry (..),
     newRegionalinventoryCustomBatchResponseEntry,
+
+    -- ** ReportInteractionRequest
+    ReportInteractionRequest (..),
+    newReportInteractionRequest,
+
+    -- ** ReportInteractionRequest_InteractionType
+    ReportInteractionRequest_InteractionType (..),
 
     -- ** ReportRow
     ReportRow (..),
@@ -2489,6 +2736,10 @@ module Gogol.ShoppingContent
     TransitTableTransitTimeRowTransitTimeValue (..),
     newTransitTableTransitTimeRowTransitTimeValue,
 
+    -- ** UndeleteConversionSourceRequest
+    UndeleteConversionSourceRequest (..),
+    newUndeleteConversionSourceRequest,
+
     -- ** UnitInvoice
     UnitInvoice (..),
     newUnitInvoice,
@@ -2599,6 +2850,12 @@ import Gogol.ShoppingContent.Content.Collections.Get
 import Gogol.ShoppingContent.Content.Collections.List
 import Gogol.ShoppingContent.Content.Collectionstatuses.Get
 import Gogol.ShoppingContent.Content.Collectionstatuses.List
+import Gogol.ShoppingContent.Content.Conversionsources.Create
+import Gogol.ShoppingContent.Content.Conversionsources.Delete
+import Gogol.ShoppingContent.Content.Conversionsources.Get
+import Gogol.ShoppingContent.Content.Conversionsources.List
+import Gogol.ShoppingContent.Content.Conversionsources.Patch
+import Gogol.ShoppingContent.Content.Conversionsources.Undelete
 import Gogol.ShoppingContent.Content.Csses.Get
 import Gogol.ShoppingContent.Content.Csses.List
 import Gogol.ShoppingContent.Content.Csses.Updatelabels
@@ -2666,6 +2923,9 @@ import Gogol.ShoppingContent.Content.Pos.Insert
 import Gogol.ShoppingContent.Content.Pos.Inventory
 import Gogol.ShoppingContent.Content.Pos.List
 import Gogol.ShoppingContent.Content.Pos.Sale
+import Gogol.ShoppingContent.Content.Productdeliverytime.Create
+import Gogol.ShoppingContent.Content.Productdeliverytime.Delete
+import Gogol.ShoppingContent.Content.Productdeliverytime.Get
 import Gogol.ShoppingContent.Content.Products.Custombatch
 import Gogol.ShoppingContent.Content.Products.Delete
 import Gogol.ShoppingContent.Content.Products.Get
@@ -2680,6 +2940,9 @@ import Gogol.ShoppingContent.Content.Promotions.Create
 import Gogol.ShoppingContent.Content.Promotions.Get
 import Gogol.ShoppingContent.Content.Pubsubnotificationsettings.Get
 import Gogol.ShoppingContent.Content.Pubsubnotificationsettings.Update
+import Gogol.ShoppingContent.Content.Quotas.List
+import Gogol.ShoppingContent.Content.Recommendations.Generate
+import Gogol.ShoppingContent.Content.Recommendations.ReportInteraction
 import Gogol.ShoppingContent.Content.Regionalinventory.Custombatch
 import Gogol.ShoppingContent.Content.Regionalinventory.Insert
 import Gogol.ShoppingContent.Content.Regions.Create

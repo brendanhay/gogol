@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Invokes a fetch for the datafeed in your Merchant Center account. If you need to call this method more than once per day, we recommend you use the Products service to update your product data.
+-- Invokes a fetch for the datafeed in your Merchant Center account. If you need to call this method more than once per day, we recommend you use the <https://developers.google.com/shopping-content/reference/rest/v2.1/products Products service> to update your product data.
 --
 -- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.datafeeds.fetchnow@.
 module Gogol.ShoppingContent.Content.Datafeeds.Fetchnow
@@ -59,7 +59,7 @@ type ContentDatafeedsFetchnowResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] DatafeedsFetchNowResponse
 
--- | Invokes a fetch for the datafeed in your Merchant Center account. If you need to call this method more than once per day, we recommend you use the Products service to update your product data.
+-- | Invokes a fetch for the datafeed in your Merchant Center account. If you need to call this method more than once per day, we recommend you use the <https://developers.google.com/shopping-content/reference/rest/v2.1/products Products service> to update your product data.
 --
 -- /See:/ 'newContentDatafeedsFetchnow' smart constructor.
 data ContentDatafeedsFetchnow = ContentDatafeedsFetchnow

@@ -54,6 +54,14 @@ module Gogol.DriveActivity.Internal.Product
     ApplicationReference (..),
     newApplicationReference,
 
+    -- * AppliedLabelChange
+    AppliedLabelChange (..),
+    newAppliedLabelChange,
+
+    -- * AppliedLabelChangeDetail
+    AppliedLabelChangeDetail (..),
+    newAppliedLabelChangeDetail,
+
     -- * Assignment
     Assignment (..),
     newAssignment,
@@ -77,6 +85,10 @@ module Gogol.DriveActivity.Internal.Product
     -- * DataLeakPreventionChange
     DataLeakPreventionChange (..),
     newDataLeakPreventionChange,
+
+    -- * Date
+    Date (..),
+    newDate,
 
     -- * Delete'
     Delete' (..),
@@ -122,6 +134,14 @@ module Gogol.DriveActivity.Internal.Product
     Edit (..),
     newEdit,
 
+    -- * FieldValue
+    FieldValue (..),
+    newFieldValue,
+
+    -- * FieldValueChange
+    FieldValueChange (..),
+    newFieldValueChange,
+
     -- * File
     File (..),
     newFile,
@@ -141,6 +161,10 @@ module Gogol.DriveActivity.Internal.Product
     -- * Impersonation
     Impersonation (..),
     newImpersonation,
+
+    -- * Integer
+    Integer (..),
+    newInteger,
 
     -- * KnownUser
     KnownUser (..),
@@ -198,9 +222,21 @@ module Gogol.DriveActivity.Internal.Product
     RestrictionChange (..),
     newRestrictionChange,
 
+    -- * Selection
+    Selection (..),
+    newSelection,
+
+    -- * SelectionList
+    SelectionList (..),
+    newSelectionList,
+
     -- * SettingsChange
     SettingsChange (..),
     newSettingsChange,
+
+    -- * SingleUser
+    SingleUser (..),
+    newSingleUser,
 
     -- * Suggestion
     Suggestion (..),
@@ -226,6 +262,14 @@ module Gogol.DriveActivity.Internal.Product
     TeamDriveReference (..),
     newTeamDriveReference,
 
+    -- * Text
+    Text (..),
+    newText,
+
+    -- * TextList
+    TextList (..),
+    newTextList,
+
     -- * TimeRange
     TimeRange (..),
     newTimeRange,
@@ -241,6 +285,10 @@ module Gogol.DriveActivity.Internal.Product
     -- * User
     User (..),
     newUser,
+
+    -- * UserList
+    UserList (..),
+    newUserList,
   )
 where
 
@@ -305,7 +353,9 @@ instance Core.ToJSON Action where
 --
 -- /See:/ 'newActionDetail' smart constructor.
 data ActionDetail = ActionDetail
-  { -- | A change about comments was made.
+  { -- | Label was changed.
+    appliedLabelChange :: (Core.Maybe AppliedLabelChange),
+    -- | A change about comments was made.
     comment :: (Core.Maybe Comment),
     -- | An object was created.
     create :: (Core.Maybe Create),
@@ -335,7 +385,8 @@ newActionDetail ::
   ActionDetail
 newActionDetail =
   ActionDetail
-    { comment = Core.Nothing,
+    { appliedLabelChange = Core.Nothing,
+      comment = Core.Nothing,
       create = Core.Nothing,
       delete = Core.Nothing,
       dlpChange = Core.Nothing,
@@ -354,7 +405,8 @@ instance Core.FromJSON ActionDetail where
       "ActionDetail"
       ( \o ->
           ActionDetail
-            Core.<$> (o Core..:? "comment")
+            Core.<$> (o Core..:? "appliedLabelChange")
+            Core.<*> (o Core..:? "comment")
             Core.<*> (o Core..:? "create")
             Core.<*> (o Core..:? "delete")
             Core.<*> (o Core..:? "dlpChange")
@@ -371,7 +423,9 @@ instance Core.ToJSON ActionDetail where
   toJSON ActionDetail {..} =
     Core.object
       ( Core.catMaybes
-          [ ("comment" Core..=) Core.<$> comment,
+          [ ("appliedLabelChange" Core..=)
+              Core.<$> appliedLabelChange,
+            ("comment" Core..=) Core.<$> comment,
             ("create" Core..=) Core.<$> create,
             ("delete" Core..=) Core.<$> delete,
             ("dlpChange" Core..=) Core.<$> dlpChange,
@@ -525,6 +579,84 @@ instance Core.ToJSON ApplicationReference where
     Core.object
       (Core.catMaybes [("type" Core..=) Core.<$> type'])
 
+-- | Label changes that were made on the Target.
+--
+-- /See:/ 'newAppliedLabelChange' smart constructor.
+newtype AppliedLabelChange = AppliedLabelChange
+  { -- | Changes that were made to the Label on the Target.
+    changes :: (Core.Maybe [AppliedLabelChangeDetail])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AppliedLabelChange' with the minimum fields required to make a request.
+newAppliedLabelChange ::
+  AppliedLabelChange
+newAppliedLabelChange = AppliedLabelChange {changes = Core.Nothing}
+
+instance Core.FromJSON AppliedLabelChange where
+  parseJSON =
+    Core.withObject
+      "AppliedLabelChange"
+      ( \o ->
+          AppliedLabelChange Core.<$> (o Core..:? "changes")
+      )
+
+instance Core.ToJSON AppliedLabelChange where
+  toJSON AppliedLabelChange {..} =
+    Core.object
+      ( Core.catMaybes
+          [("changes" Core..=) Core.<$> changes]
+      )
+
+-- | A change made to a Label on the Target.
+--
+-- /See:/ 'newAppliedLabelChangeDetail' smart constructor.
+data AppliedLabelChangeDetail = AppliedLabelChangeDetail
+  { -- | Field Changes. Only present if @types@ contains @LABEL_FIELD_VALUE_CHANGED@.
+    fieldChanges :: (Core.Maybe [FieldValueChange]),
+    -- | The Label name representing the Label that changed. This name always contains the revision of the Label that was used when this Action occurred. The format is @labels\/id\@revision@.
+    label :: (Core.Maybe Core.Text),
+    -- | The human-readable title of the label that changed.
+    title :: (Core.Maybe Core.Text),
+    -- | The types of changes made to the Label on the Target.
+    types :: (Core.Maybe [AppliedLabelChangeDetail_TypesItem])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AppliedLabelChangeDetail' with the minimum fields required to make a request.
+newAppliedLabelChangeDetail ::
+  AppliedLabelChangeDetail
+newAppliedLabelChangeDetail =
+  AppliedLabelChangeDetail
+    { fieldChanges = Core.Nothing,
+      label = Core.Nothing,
+      title = Core.Nothing,
+      types = Core.Nothing
+    }
+
+instance Core.FromJSON AppliedLabelChangeDetail where
+  parseJSON =
+    Core.withObject
+      "AppliedLabelChangeDetail"
+      ( \o ->
+          AppliedLabelChangeDetail
+            Core.<$> (o Core..:? "fieldChanges")
+            Core.<*> (o Core..:? "label")
+            Core.<*> (o Core..:? "title")
+            Core.<*> (o Core..:? "types")
+      )
+
+instance Core.ToJSON AppliedLabelChangeDetail where
+  toJSON AppliedLabelChangeDetail {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("fieldChanges" Core..=) Core.<$> fieldChanges,
+            ("label" Core..=) Core.<$> label,
+            ("title" Core..=) Core.<$> title,
+            ("types" Core..=) Core.<$> types
+          ]
+      )
+
 -- | A comment with an assignment.
 --
 -- /See:/ 'newAssignment' smart constructor.
@@ -609,7 +741,7 @@ instance Core.ToJSON Comment where
           ]
       )
 
--- | How the individual activities are consolidated. A set of activities may be consolidated into one combined activity if they are related in some way, such as one actor performing the same action on multiple targets, or multiple actors performing the same action on a single target. The strategy defines the rules for which activities are related.
+-- | How the individual activities are consolidated. If a set of activities is related they can be consolidated into one combined activity, such as one actor performing the same action on multiple targets, or multiple actors performing the same action on a single target. The strategy defines the rules for which activities are related.
 --
 -- /See:/ 'newConsolidationStrategy' smart constructor.
 data ConsolidationStrategy = ConsolidationStrategy
@@ -738,6 +870,31 @@ instance Core.ToJSON DataLeakPreventionChange where
   toJSON DataLeakPreventionChange {..} =
     Core.object
       (Core.catMaybes [("type" Core..=) Core.<$> type'])
+
+-- | Wrapper for Date Field value.
+--
+-- /See:/ 'newDate' smart constructor.
+newtype Date = Date
+  { -- | Date value.
+    value :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Date' with the minimum fields required to make a request.
+newDate ::
+  Date
+newDate = Date {value = Core.Nothing}
+
+instance Core.FromJSON Date where
+  parseJSON =
+    Core.withObject
+      "Date"
+      (\o -> Date Core.<$> (o Core..:? "value"))
+
+instance Core.ToJSON Date where
+  toJSON Date {..} =
+    Core.object
+      (Core.catMaybes [("value" Core..=) Core.<$> value])
 
 -- | An object was deleted.
 --
@@ -1143,6 +1300,124 @@ instance Core.FromJSON Edit where
 instance Core.ToJSON Edit where
   toJSON = Core.const Core.emptyObject
 
+-- | Contains a value of a Field.
+--
+-- /See:/ 'newFieldValue' smart constructor.
+data FieldValue = FieldValue
+  { -- | Date Field value.
+    date :: (Core.Maybe Date),
+    -- | Integer Field value.
+    integer :: (Core.Maybe Integer),
+    -- | Selection Field value.
+    selection :: (Core.Maybe Selection),
+    -- | Selection List Field value.
+    selectionList :: (Core.Maybe SelectionList),
+    -- | Text Field value.
+    text :: (Core.Maybe Text),
+    -- | Text List Field value.
+    textList :: (Core.Maybe TextList),
+    -- | User Field value.
+    user :: (Core.Maybe SingleUser),
+    -- | User List Field value.
+    userList :: (Core.Maybe UserList)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FieldValue' with the minimum fields required to make a request.
+newFieldValue ::
+  FieldValue
+newFieldValue =
+  FieldValue
+    { date = Core.Nothing,
+      integer = Core.Nothing,
+      selection = Core.Nothing,
+      selectionList = Core.Nothing,
+      text = Core.Nothing,
+      textList = Core.Nothing,
+      user = Core.Nothing,
+      userList = Core.Nothing
+    }
+
+instance Core.FromJSON FieldValue where
+  parseJSON =
+    Core.withObject
+      "FieldValue"
+      ( \o ->
+          FieldValue
+            Core.<$> (o Core..:? "date")
+            Core.<*> (o Core..:? "integer")
+            Core.<*> (o Core..:? "selection")
+            Core.<*> (o Core..:? "selectionList")
+            Core.<*> (o Core..:? "text")
+            Core.<*> (o Core..:? "textList")
+            Core.<*> (o Core..:? "user")
+            Core.<*> (o Core..:? "userList")
+      )
+
+instance Core.ToJSON FieldValue where
+  toJSON FieldValue {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("date" Core..=) Core.<$> date,
+            ("integer" Core..=) Core.<$> integer,
+            ("selection" Core..=) Core.<$> selection,
+            ("selectionList" Core..=) Core.<$> selectionList,
+            ("text" Core..=) Core.<$> text,
+            ("textList" Core..=) Core.<$> textList,
+            ("user" Core..=) Core.<$> user,
+            ("userList" Core..=) Core.<$> userList
+          ]
+      )
+
+-- | Change to a Field value.
+--
+-- /See:/ 'newFieldValueChange' smart constructor.
+data FieldValueChange = FieldValueChange
+  { -- | The human-readable display name for this field.
+    displayName :: (Core.Maybe Core.Text),
+    -- | The ID of this field. Field IDs are unique within a Label.
+    fieldId :: (Core.Maybe Core.Text),
+    -- | The value that is now set on the field. If not present, the field was cleared. At least one of {old/value|new/value} is always set.
+    newValue' :: (Core.Maybe FieldValue),
+    -- | The value that was previously set on the field. If not present, the field was newly set. At least one of {old/value|new/value} is always set.
+    oldValue :: (Core.Maybe FieldValue)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FieldValueChange' with the minimum fields required to make a request.
+newFieldValueChange ::
+  FieldValueChange
+newFieldValueChange =
+  FieldValueChange
+    { displayName = Core.Nothing,
+      fieldId = Core.Nothing,
+      newValue' = Core.Nothing,
+      oldValue = Core.Nothing
+    }
+
+instance Core.FromJSON FieldValueChange where
+  parseJSON =
+    Core.withObject
+      "FieldValueChange"
+      ( \o ->
+          FieldValueChange
+            Core.<$> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "fieldId")
+            Core.<*> (o Core..:? "newValue")
+            Core.<*> (o Core..:? "oldValue")
+      )
+
+instance Core.ToJSON FieldValueChange where
+  toJSON FieldValueChange {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("displayName" Core..=) Core.<$> displayName,
+            ("fieldId" Core..=) Core.<$> fieldId,
+            ("newValue" Core..=) Core.<$> newValue',
+            ("oldValue" Core..=) Core.<$> oldValue
+          ]
+      )
+
 -- | This item is deprecated; please see @DriveFile@ instead.
 --
 -- /See:/ 'newFile' smart constructor.
@@ -1304,6 +1579,40 @@ instance Core.ToJSON Impersonation where
           ]
       )
 
+-- | Wrapper for Integer Field value.
+--
+-- /See:/ 'newInteger' smart constructor.
+newtype Integer = Integer
+  { -- | Integer value.
+    value :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Integer' with the minimum fields required to make a request.
+newInteger ::
+  Integer
+newInteger = Integer {value = Core.Nothing}
+
+instance Core.FromJSON Integer where
+  parseJSON =
+    Core.withObject
+      "Integer"
+      ( \o ->
+          Integer
+            Core.<$> ( o Core..:? "value"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+      )
+
+instance Core.ToJSON Integer where
+  toJSON Integer {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("value" Core..=) Core.. Core.AsText
+              Core.<$> value
+          ]
+      )
+
 -- | A known user.
 --
 -- /See:/ 'newKnownUser' smart constructor.
@@ -1340,7 +1649,7 @@ instance Core.ToJSON KnownUser where
           ]
       )
 
--- | A strategy which consolidates activities using the grouping rules from the legacy V1 Activity API. Similar actions occurring within a window of time can be grouped across multiple targets (such as moving a set of files at once) or multiple actors (such as several users editing the same item). Grouping rules for this strategy are specific to each type of action.
+-- | A strategy that consolidates activities using the grouping rules from the legacy V1 Activity API. Similar actions occurring within a window of time can be grouped across multiple targets (such as moving a set of files at once) or multiple actors (such as several users editing the same item). Grouping rules for this strategy are specific to each type of action.
 --
 -- /See:/ 'newLegacy' smart constructor.
 data Legacy = Legacy
@@ -1411,7 +1720,7 @@ instance Core.FromJSON New where
 instance Core.ToJSON New where
   toJSON = Core.const Core.emptyObject
 
--- | A strategy which does no consolidation of individual activities.
+-- | A strategy that does no consolidation of individual activities.
 --
 -- /See:/ 'newNoConsolidation' smart constructor.
 data NoConsolidation = NoConsolidation
@@ -1611,17 +1920,17 @@ instance Core.ToJSON Post' where
 --
 -- /See:/ 'newQueryDriveActivityRequest' smart constructor.
 data QueryDriveActivityRequest = QueryDriveActivityRequest
-  { -- | Return activities for this Drive folder and all children and descendants. The format is @items\/ITEM_ID@.
+  { -- | Return activities for this Drive folder, plus all children and descendants. The format is @items\/ITEM_ID@.
     ancestorName :: (Core.Maybe Core.Text),
-    -- | Details on how to consolidate related actions that make up the activity. If not set, then related actions are not consolidated.
+    -- | Details on how to consolidate related actions that make up the activity. If not set, then related actions aren\'t consolidated.
     consolidationStrategy :: (Core.Maybe ConsolidationStrategy),
-    -- | The filtering for items returned from this query request. The format of the filter string is a sequence of expressions, joined by an optional \"AND\", where each expression is of the form \"field operator value\". Supported fields: - @time@: Uses numerical operators on date values either in terms of milliseconds since Jan 1, 1970 or in RFC 3339 format. Examples: - @time > 1452409200000 AND time \<= 1492812924310@ - @time >= \"2016-01-10T01:02:03-05:00\"@ - @detail.action_detail_case@: Uses the \"has\" operator (:) and either a singular value or a list of allowed action types enclosed in parentheses. Examples: - @detail.action_detail_case: RENAME@ - @detail.action_detail_case:(CREATE EDIT)@ - @-detail.action_detail_case:MOVE@
+    -- | The filtering for items returned from this query request. The format of the filter string is a sequence of expressions, joined by an optional \"AND\", where each expression is of the form \"field operator value\". Supported fields: - @time@: Uses numerical operators on date values either in terms of milliseconds since Jan 1, 1970 or in RFC 3339 format. Examples: - @time > 1452409200000 AND time \<= 1492812924310@ - @time >= \"2016-01-10T01:02:03-05:00\"@ - @detail.action_detail_case@: Uses the \"has\" operator (:) and either a singular value or a list of allowed action types enclosed in parentheses, separated by a space. To exclude a result from the response, prepend a hyphen (@-@) to the beginning of the filter string. Examples: - @detail.action_detail_case:RENAME@ - @detail.action_detail_case:(CREATE RESTORE)@ - @-detail.action_detail_case:MOVE@
     filter :: (Core.Maybe Core.Text),
     -- | Return activities for this Drive item. The format is @items\/ITEM_ID@.
     itemName :: (Core.Maybe Core.Text),
-    -- | The miminum number of activities desired in the response; the server will attempt to return at least this quanitity. The server may also return fewer activities if it has a partial response ready before the request times out. If not set, a default value is used.
+    -- | The minimum number of activities desired in the response; the server attempts to return at least this quantity. The server may also return fewer activities if it has a partial response ready before the request times out. If not set, a default value is used.
     pageSize :: (Core.Maybe Core.Int32),
-    -- | The token identifying which page of results to return. Set this to the next/page/token value returned from a previous query to obtain the following page of results. If not set, the first page of results will be returned.
+    -- | The token identifies which page of results to return. Set this to the next/page/token value returned from a previous query to obtain the following page of results. If not set, the first page of results is returned.
     pageToken :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1802,6 +2111,66 @@ instance Core.ToJSON RestrictionChange where
           ]
       )
 
+-- | Wrapper for Selection Field value as combined value\/display_name pair for selected choice.
+--
+-- /See:/ 'newSelection' smart constructor.
+data Selection = Selection
+  { -- | Selection value as human-readable display string.
+    displayName :: (Core.Maybe Core.Text),
+    -- | Selection value as Field Choice ID.
+    value :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Selection' with the minimum fields required to make a request.
+newSelection ::
+  Selection
+newSelection = Selection {displayName = Core.Nothing, value = Core.Nothing}
+
+instance Core.FromJSON Selection where
+  parseJSON =
+    Core.withObject
+      "Selection"
+      ( \o ->
+          Selection
+            Core.<$> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "value")
+      )
+
+instance Core.ToJSON Selection where
+  toJSON Selection {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("displayName" Core..=) Core.<$> displayName,
+            ("value" Core..=) Core.<$> value
+          ]
+      )
+
+-- | Wrapper for SelectionList Field value.
+--
+-- /See:/ 'newSelectionList' smart constructor.
+newtype SelectionList = SelectionList
+  { -- | Selection values.
+    values :: (Core.Maybe [Selection])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SelectionList' with the minimum fields required to make a request.
+newSelectionList ::
+  SelectionList
+newSelectionList = SelectionList {values = Core.Nothing}
+
+instance Core.FromJSON SelectionList where
+  parseJSON =
+    Core.withObject
+      "SelectionList"
+      (\o -> SelectionList Core.<$> (o Core..:? "values"))
+
+instance Core.ToJSON SelectionList where
+  toJSON SelectionList {..} =
+    Core.object
+      (Core.catMaybes [("values" Core..=) Core.<$> values])
+
 -- | Information about settings changes.
 --
 -- /See:/ 'newSettingsChange' smart constructor.
@@ -1833,6 +2202,31 @@ instance Core.ToJSON SettingsChange where
               Core.<$> restrictionChanges
           ]
       )
+
+-- | Wrapper for User Field value.
+--
+-- /See:/ 'newSingleUser' smart constructor.
+newtype SingleUser = SingleUser
+  { -- | User value as email.
+    value :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SingleUser' with the minimum fields required to make a request.
+newSingleUser ::
+  SingleUser
+newSingleUser = SingleUser {value = Core.Nothing}
+
+instance Core.FromJSON SingleUser where
+  parseJSON =
+    Core.withObject
+      "SingleUser"
+      (\o -> SingleUser Core.<$> (o Core..:? "value"))
+
+instance Core.ToJSON SingleUser where
+  toJSON SingleUser {..} =
+    Core.object
+      (Core.catMaybes [("value" Core..=) Core.<$> value])
 
 -- | A suggestion.
 --
@@ -1886,7 +2280,7 @@ instance Core.ToJSON SystemEvent where
     Core.object
       (Core.catMaybes [("type" Core..=) Core.<$> type'])
 
--- | Information about the target of activity.
+-- | Information about the target of activity. For more information on how activity history is shared with users, see <https://developers.google.com/drive/activity/v2#activityhistory Activity history visibility>.
 --
 -- /See:/ 'newTarget' smart constructor.
 data Target = Target
@@ -2054,6 +2448,56 @@ instance Core.ToJSON TeamDriveReference where
           ]
       )
 
+-- | Wrapper for Text Field value.
+--
+-- /See:/ 'newText' smart constructor.
+newtype Text = Text
+  { -- | Value of Text Field.
+    value :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Text' with the minimum fields required to make a request.
+newText ::
+  Text
+newText = Text {value = Core.Nothing}
+
+instance Core.FromJSON Text where
+  parseJSON =
+    Core.withObject
+      "Text"
+      (\o -> Text Core.<$> (o Core..:? "value"))
+
+instance Core.ToJSON Text where
+  toJSON Text {..} =
+    Core.object
+      (Core.catMaybes [("value" Core..=) Core.<$> value])
+
+-- | Wrapper for Text List Field value.
+--
+-- /See:/ 'newTextList' smart constructor.
+newtype TextList = TextList
+  { -- | Text values.
+    values :: (Core.Maybe [Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TextList' with the minimum fields required to make a request.
+newTextList ::
+  TextList
+newTextList = TextList {values = Core.Nothing}
+
+instance Core.FromJSON TextList where
+  parseJSON =
+    Core.withObject
+      "TextList"
+      (\o -> TextList Core.<$> (o Core..:? "values"))
+
+instance Core.ToJSON TextList where
+  toJSON TextList {..} =
+    Core.object
+      (Core.catMaybes [("values" Core..=) Core.<$> values])
+
 -- | Information about time ranges.
 --
 -- /See:/ 'newTimeRange' smart constructor.
@@ -2170,3 +2614,28 @@ instance Core.ToJSON User where
             ("unknownUser" Core..=) Core.<$> unknownUser
           ]
       )
+
+-- | Wrapper for UserList Field value.
+--
+-- /See:/ 'newUserList' smart constructor.
+newtype UserList = UserList
+  { -- | User values.
+    values :: (Core.Maybe [SingleUser])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UserList' with the minimum fields required to make a request.
+newUserList ::
+  UserList
+newUserList = UserList {values = Core.Nothing}
+
+instance Core.FromJSON UserList where
+  parseJSON =
+    Core.withObject
+      "UserList"
+      (\o -> UserList Core.<$> (o Core..:? "values"))
+
+instance Core.ToJSON UserList where
+  toJSON UserList {..} =
+    Core.object
+      (Core.catMaybes [("values" Core..=) Core.<$> values])

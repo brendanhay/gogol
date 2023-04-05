@@ -874,7 +874,7 @@ pattern UpdateContactPhotoRequest_SourcesItem_READSOURCETYPEDOMAINCONTACT = Upda
   UpdateContactPhotoRequest_SourcesItem
   #-}
 
--- | Optional. A mask of what source types to return. Defaults to READ/SOURCE/TYPE_CONTACT if not set.
+-- | Optional. A mask of what source types to return. Defaults to READ/SOURCE/TYPE/CONTACT if not set. Possible values for this field are: * READ/SOURCE/TYPE/CONTACT * READ/SOURCE/TYPE/CONTACT,READ/SOURCE/TYPE/PROFILE Specifying READ/SOURCE/TYPE/PROFILE without specifying READ/SOURCE/TYPE/CONTACT is not permitted.
 newtype OtherContactsListSources = OtherContactsListSources {fromOtherContactsListSources :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype

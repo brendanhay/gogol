@@ -67,7 +67,7 @@ data AccessContextManagerAccessPoliciesServicePerimetersPatch = AccessContextMan
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. Resource name for the ServicePerimeter. The @short_name@ component must begin with a letter and only include alphanumeric and \'_\'. Format: @accessPolicies\/{access_policy}\/servicePerimeters\/{service_perimeter}@
+    -- | Resource name for the @ServicePerimeter@. Format: @accessPolicies\/{access_policy}\/servicePerimeters\/{service_perimeter}@. The @service_perimeter@ component must begin with a letter, followed by alphanumeric characters or @_@. After you create a @ServicePerimeter@, you cannot change its @name@.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: ServicePerimeter,
@@ -82,7 +82,7 @@ data AccessContextManagerAccessPoliciesServicePerimetersPatch = AccessContextMan
 
 -- | Creates a value of 'AccessContextManagerAccessPoliciesServicePerimetersPatch' with the minimum fields required to make a request.
 newAccessContextManagerAccessPoliciesServicePerimetersPatch ::
-  -- |  Required. Resource name for the ServicePerimeter. The @short_name@ component must begin with a letter and only include alphanumeric and \'_\'. Format: @accessPolicies\/{access_policy}\/servicePerimeters\/{service_perimeter}@ See 'name'.
+  -- |  Resource name for the @ServicePerimeter@. Format: @accessPolicies\/{access_policy}\/servicePerimeters\/{service_perimeter}@. The @service_perimeter@ component must begin with a letter, followed by alphanumeric characters or @_@. After you create a @ServicePerimeter@, you cannot change its @name@. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   ServicePerimeter ->

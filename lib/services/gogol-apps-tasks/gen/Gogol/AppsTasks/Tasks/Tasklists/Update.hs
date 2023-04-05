@@ -28,7 +28,7 @@
 --
 -- Updates the authenticated user\'s specified task list.
 --
--- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasklists.update@.
+-- /See:/ <https://developers.google.com/tasks/ Google Tasks API Reference> for @tasks.tasklists.update@.
 module Gogol.AppsTasks.Tasks.Tasklists.Update
   ( -- * Resource
     TasksTasklistsUpdateResource,

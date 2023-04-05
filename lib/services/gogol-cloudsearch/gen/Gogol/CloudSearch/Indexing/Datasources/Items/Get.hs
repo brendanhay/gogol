@@ -70,11 +70,11 @@ data CloudSearchIndexingDatasourcesItemsGet = CloudSearchIndexingDatasourcesItem
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Name of connector making this call. Format: datasources\/{source_id}\/connectors\/{ID}
+    -- | The name of connector making this call. Format: datasources\/{source_id}\/connectors\/{ID}
     connectorName :: (Core.Maybe Core.Text),
     -- | If you are asked by Google to help with debugging, set this field. Otherwise, ignore this field.
     debugOptionsEnableDebugging :: (Core.Maybe Core.Bool),
-    -- | Name of the item to get info. Format: datasources\/{source/id}\/items\/{item/id}
+    -- | The name of the item to get info. Format: datasources\/{source/id}\/items\/{item/id}
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -85,7 +85,7 @@ data CloudSearchIndexingDatasourcesItemsGet = CloudSearchIndexingDatasourcesItem
 
 -- | Creates a value of 'CloudSearchIndexingDatasourcesItemsGet' with the minimum fields required to make a request.
 newCloudSearchIndexingDatasourcesItemsGet ::
-  -- |  Name of the item to get info. Format: datasources\/{source/id}\/items\/{item/id} See 'name'.
+  -- |  The name of the item to get info. Format: datasources\/{source/id}\/items\/{item/id} See 'name'.
   Core.Text ->
   CloudSearchIndexingDatasourcesItemsGet
 newCloudSearchIndexingDatasourcesItemsGet name =

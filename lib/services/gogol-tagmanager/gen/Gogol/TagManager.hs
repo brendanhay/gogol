@@ -44,6 +44,11 @@ module Gogol.TagManager
 
     -- * Resources
 
+    -- ** tagmanager.accounts.containers.combine
+    TagManagerAccountsContainersCombineResource,
+    TagManagerAccountsContainersCombine (..),
+    newTagManagerAccountsContainersCombine,
+
     -- ** tagmanager.accounts.containers.create
     TagManagerAccountsContainersCreateResource,
     TagManagerAccountsContainersCreate (..),
@@ -53,6 +58,21 @@ module Gogol.TagManager
     TagManagerAccountsContainersDeleteResource,
     TagManagerAccountsContainersDelete (..),
     newTagManagerAccountsContainersDelete,
+
+    -- ** tagmanager.accounts.containers.destinations.get
+    TagManagerAccountsContainersDestinationsGetResource,
+    TagManagerAccountsContainersDestinationsGet (..),
+    newTagManagerAccountsContainersDestinationsGet,
+
+    -- ** tagmanager.accounts.containers.destinations.link
+    TagManagerAccountsContainersDestinationsLinkResource,
+    TagManagerAccountsContainersDestinationsLink (..),
+    newTagManagerAccountsContainersDestinationsLink,
+
+    -- ** tagmanager.accounts.containers.destinations.list
+    TagManagerAccountsContainersDestinationsListResource,
+    TagManagerAccountsContainersDestinationsList (..),
+    newTagManagerAccountsContainersDestinationsList,
 
     -- ** tagmanager.accounts.containers.environments.create
     TagManagerAccountsContainersEnvironmentsCreateResource,
@@ -93,6 +113,21 @@ module Gogol.TagManager
     TagManagerAccountsContainersListResource,
     TagManagerAccountsContainersList (..),
     newTagManagerAccountsContainersList,
+
+    -- ** tagmanager.accounts.containers.lookup
+    TagManagerAccountsContainersLookupResource,
+    TagManagerAccountsContainersLookup (..),
+    newTagManagerAccountsContainersLookup,
+
+    -- ** tagmanager.accounts.containers.move_tag_id
+    TagManagerAccountsContainersMove_tag_idResource,
+    TagManagerAccountsContainersMove_tag_id (..),
+    newTagManagerAccountsContainersMove_tag_id,
+
+    -- ** tagmanager.accounts.containers.snippet
+    TagManagerAccountsContainersSnippetResource,
+    TagManagerAccountsContainersSnippet (..),
+    newTagManagerAccountsContainersSnippet,
 
     -- ** tagmanager.accounts.containers.update
     TagManagerAccountsContainersUpdateResource,
@@ -258,6 +293,31 @@ module Gogol.TagManager
     TagManagerAccountsContainersWorkspacesGetStatusResource,
     TagManagerAccountsContainersWorkspacesGetStatus (..),
     newTagManagerAccountsContainersWorkspacesGetStatus,
+
+    -- ** tagmanager.accounts.containers.workspaces.gtag_config.create
+    TagManagerAccountsContainersWorkspacesGtag_configCreateResource,
+    TagManagerAccountsContainersWorkspacesGtag_configCreate (..),
+    newTagManagerAccountsContainersWorkspacesGtag_configCreate,
+
+    -- ** tagmanager.accounts.containers.workspaces.gtag_config.delete
+    TagManagerAccountsContainersWorkspacesGtag_configDeleteResource,
+    TagManagerAccountsContainersWorkspacesGtag_configDelete (..),
+    newTagManagerAccountsContainersWorkspacesGtag_configDelete,
+
+    -- ** tagmanager.accounts.containers.workspaces.gtag_config.get
+    TagManagerAccountsContainersWorkspacesGtag_configGetResource,
+    TagManagerAccountsContainersWorkspacesGtag_configGet (..),
+    newTagManagerAccountsContainersWorkspacesGtag_configGet,
+
+    -- ** tagmanager.accounts.containers.workspaces.gtag_config.list
+    TagManagerAccountsContainersWorkspacesGtag_configListResource,
+    TagManagerAccountsContainersWorkspacesGtag_configList (..),
+    newTagManagerAccountsContainersWorkspacesGtag_configList,
+
+    -- ** tagmanager.accounts.containers.workspaces.gtag_config.update
+    TagManagerAccountsContainersWorkspacesGtag_configUpdateResource,
+    TagManagerAccountsContainersWorkspacesGtag_configUpdate (..),
+    newTagManagerAccountsContainersWorkspacesGtag_configUpdate,
 
     -- ** tagmanager.accounts.containers.workspaces.list
     TagManagerAccountsContainersWorkspacesListResource,
@@ -490,6 +550,10 @@ module Gogol.TagManager
     -- ** AccountAccess_Permission
     AccountAccess_Permission (..),
 
+    -- ** AccountFeatures
+    AccountFeatures (..),
+    newAccountFeatures,
+
     -- ** BuiltInVariable
     BuiltInVariable (..),
     newBuiltInVariable,
@@ -522,6 +586,10 @@ module Gogol.TagManager
     -- ** ContainerAccess_Permission
     ContainerAccess_Permission (..),
 
+    -- ** ContainerFeatures
+    ContainerFeatures (..),
+    newContainerFeatures,
+
     -- ** ContainerVersion
     ContainerVersion (..),
     newContainerVersion,
@@ -545,6 +613,10 @@ module Gogol.TagManager
     -- ** CustomTemplate
     CustomTemplate (..),
     newCustomTemplate,
+
+    -- ** Destination
+    Destination (..),
+    newDestination,
 
     -- ** Entity
     Entity (..),
@@ -572,9 +644,17 @@ module Gogol.TagManager
     GalleryReference (..),
     newGalleryReference,
 
+    -- ** GetContainerSnippetResponse
+    GetContainerSnippetResponse (..),
+    newGetContainerSnippetResponse,
+
     -- ** GetWorkspaceStatusResponse
     GetWorkspaceStatusResponse (..),
     newGetWorkspaceStatusResponse,
+
+    -- ** GtagConfig
+    GtagConfig (..),
+    newGtagConfig,
 
     -- ** ListAccountsResponse
     ListAccountsResponse (..),
@@ -592,6 +672,10 @@ module Gogol.TagManager
     ListContainersResponse (..),
     newListContainersResponse,
 
+    -- ** ListDestinationsResponse
+    ListDestinationsResponse (..),
+    newListDestinationsResponse,
+
     -- ** ListEnabledBuiltInVariablesResponse
     ListEnabledBuiltInVariablesResponse (..),
     newListEnabledBuiltInVariablesResponse,
@@ -603,6 +687,10 @@ module Gogol.TagManager
     -- ** ListFoldersResponse
     ListFoldersResponse (..),
     newListFoldersResponse,
+
+    -- ** ListGtagConfigResponse
+    ListGtagConfigResponse (..),
+    newListGtagConfigResponse,
 
     -- ** ListTagsResponse
     ListTagsResponse (..),
@@ -755,6 +843,9 @@ module Gogol.TagManager
     ZoneTypeRestriction (..),
     newZoneTypeRestriction,
 
+    -- ** AccountsContainersCombineSettingSource
+    AccountsContainersCombineSettingSource (..),
+
     -- ** AccountsContainersWorkspacesBuilt_in_variablesCreateType
     AccountsContainersWorkspacesBuilt_in_variablesCreateType (..),
 
@@ -766,8 +857,12 @@ module Gogol.TagManager
   )
 where
 
+import Gogol.TagManager.Accounts.Containers.Combine
 import Gogol.TagManager.Accounts.Containers.Create
 import Gogol.TagManager.Accounts.Containers.Delete
+import Gogol.TagManager.Accounts.Containers.Destinations.Get
+import Gogol.TagManager.Accounts.Containers.Destinations.Link
+import Gogol.TagManager.Accounts.Containers.Destinations.List
 import Gogol.TagManager.Accounts.Containers.Environments.Create
 import Gogol.TagManager.Accounts.Containers.Environments.Delete
 import Gogol.TagManager.Accounts.Containers.Environments.Get
@@ -776,6 +871,9 @@ import Gogol.TagManager.Accounts.Containers.Environments.Reauthorize
 import Gogol.TagManager.Accounts.Containers.Environments.Update
 import Gogol.TagManager.Accounts.Containers.Get
 import Gogol.TagManager.Accounts.Containers.List
+import Gogol.TagManager.Accounts.Containers.Lookup
+import Gogol.TagManager.Accounts.Containers.Move_tag_id
+import Gogol.TagManager.Accounts.Containers.Snippet
 import Gogol.TagManager.Accounts.Containers.Update
 import Gogol.TagManager.Accounts.Containers.Version_headers.Latest
 import Gogol.TagManager.Accounts.Containers.Version_headers.List
@@ -809,6 +907,11 @@ import Gogol.TagManager.Accounts.Containers.Workspaces.Folders.Revert
 import Gogol.TagManager.Accounts.Containers.Workspaces.Folders.Update
 import Gogol.TagManager.Accounts.Containers.Workspaces.Get
 import Gogol.TagManager.Accounts.Containers.Workspaces.GetStatus
+import Gogol.TagManager.Accounts.Containers.Workspaces.Gtag_config.Create
+import Gogol.TagManager.Accounts.Containers.Workspaces.Gtag_config.Delete
+import Gogol.TagManager.Accounts.Containers.Workspaces.Gtag_config.Get
+import Gogol.TagManager.Accounts.Containers.Workspaces.Gtag_config.List
+import Gogol.TagManager.Accounts.Containers.Workspaces.Gtag_config.Update
 import Gogol.TagManager.Accounts.Containers.Workspaces.List
 import Gogol.TagManager.Accounts.Containers.Workspaces.Quick_preview
 import Gogol.TagManager.Accounts.Containers.Workspaces.Resolve_conflict

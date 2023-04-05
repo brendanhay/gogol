@@ -43,6 +43,11 @@ module Gogol.DoubleClickSearch
     DoubleClickSearchConversionGet (..),
     newDoubleClickSearchConversionGet,
 
+    -- ** doubleclicksearch.conversion.getByCustomerId
+    DoubleClickSearchConversionGetByCustomerIdResource,
+    DoubleClickSearchConversionGetByCustomerId (..),
+    newDoubleClickSearchConversionGetByCustomerId,
+
     -- ** doubleclicksearch.conversion.insert
     DoubleClickSearchConversionInsertResource,
     DoubleClickSearchConversionInsert (..),
@@ -72,6 +77,11 @@ module Gogol.DoubleClickSearch
     DoubleClickSearchReportsGetFileResource,
     DoubleClickSearchReportsGetFile (..),
     newDoubleClickSearchReportsGetFile,
+
+    -- ** doubleclicksearch.reports.getIdMappingFile
+    DoubleClickSearchReportsGetIdMappingFileResource,
+    DoubleClickSearchReportsGetIdMappingFile (..),
+    newDoubleClickSearchReportsGetIdMappingFile,
 
     -- ** doubleclicksearch.reports.request
     DoubleClickSearchReportsRequestResource,
@@ -107,6 +117,10 @@ module Gogol.DoubleClickSearch
     -- ** CustomMetric
     CustomMetric (..),
     newCustomMetric,
+
+    -- ** IdMappingFile
+    IdMappingFile (..),
+    newIdMappingFile,
 
     -- ** Report
     Report (..),
@@ -163,12 +177,14 @@ module Gogol.DoubleClickSearch
 where
 
 import Gogol.DoubleClickSearch.Conversion.Get
+import Gogol.DoubleClickSearch.Conversion.GetByCustomerId
 import Gogol.DoubleClickSearch.Conversion.Insert
 import Gogol.DoubleClickSearch.Conversion.Update
 import Gogol.DoubleClickSearch.Conversion.UpdateAvailability
 import Gogol.DoubleClickSearch.Reports.Generate
 import Gogol.DoubleClickSearch.Reports.Get
 import Gogol.DoubleClickSearch.Reports.GetFile
+import Gogol.DoubleClickSearch.Reports.GetIdMappingFile
 import Gogol.DoubleClickSearch.Reports.Request
 import Gogol.DoubleClickSearch.SavedColumns.List
 import Gogol.DoubleClickSearch.Types

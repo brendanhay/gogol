@@ -527,6 +527,10 @@ module Gogol.Docs.Types
     PersonProperties (..),
     newPersonProperties,
 
+    -- ** PinTableHeaderRowsRequest
+    PinTableHeaderRowsRequest (..),
+    newPinTableHeaderRowsRequest,
+
     -- ** PositionedObject
     PositionedObject (..),
     newPositionedObject,

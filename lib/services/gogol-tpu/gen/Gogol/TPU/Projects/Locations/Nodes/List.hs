@@ -45,7 +45,7 @@ import Gogol.TPU.Types
 -- | A resource alias for @tpu.projects.locations.nodes.list@ method which the
 -- 'TPUProjectsLocationsNodesList' request conforms to.
 type TPUProjectsLocationsNodesListResource =
-  "v2alpha1"
+  "v2"
     Core.:> Core.Capture "parent" Core.Text
     Core.:> "nodes"
     Core.:> Core.QueryParam "$.xgafv" Xgafv

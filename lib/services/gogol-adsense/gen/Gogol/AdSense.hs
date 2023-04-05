@@ -39,6 +39,11 @@ module Gogol.AdSense
 
     -- * Resources
 
+    -- ** adsense.accounts.adclients.adunits.create
+    AdSenseAccountsAdclientsAdunitsCreateResource,
+    AdSenseAccountsAdclientsAdunitsCreate (..),
+    newAdSenseAccountsAdclientsAdunitsCreate,
+
     -- ** adsense.accounts.adclients.adunits.get
     AdSenseAccountsAdclientsAdunitsGetResource,
     AdSenseAccountsAdclientsAdunitsGet (..),
@@ -59,6 +64,21 @@ module Gogol.AdSense
     AdSenseAccountsAdclientsAdunitsListLinkedCustomChannels (..),
     newAdSenseAccountsAdclientsAdunitsListLinkedCustomChannels,
 
+    -- ** adsense.accounts.adclients.adunits.patch
+    AdSenseAccountsAdclientsAdunitsPatchResource,
+    AdSenseAccountsAdclientsAdunitsPatch (..),
+    newAdSenseAccountsAdclientsAdunitsPatch,
+
+    -- ** adsense.accounts.adclients.customchannels.create
+    AdSenseAccountsAdclientsCustomchannelsCreateResource,
+    AdSenseAccountsAdclientsCustomchannelsCreate (..),
+    newAdSenseAccountsAdclientsCustomchannelsCreate,
+
+    -- ** adsense.accounts.adclients.customchannels.delete
+    AdSenseAccountsAdclientsCustomchannelsDeleteResource,
+    AdSenseAccountsAdclientsCustomchannelsDelete (..),
+    newAdSenseAccountsAdclientsCustomchannelsDelete,
+
     -- ** adsense.accounts.adclients.customchannels.get
     AdSenseAccountsAdclientsCustomchannelsGetResource,
     AdSenseAccountsAdclientsCustomchannelsGet (..),
@@ -74,6 +94,16 @@ module Gogol.AdSense
     AdSenseAccountsAdclientsCustomchannelsListLinkedAdUnits (..),
     newAdSenseAccountsAdclientsCustomchannelsListLinkedAdUnits,
 
+    -- ** adsense.accounts.adclients.customchannels.patch
+    AdSenseAccountsAdclientsCustomchannelsPatchResource,
+    AdSenseAccountsAdclientsCustomchannelsPatch (..),
+    newAdSenseAccountsAdclientsCustomchannelsPatch,
+
+    -- ** adsense.accounts.adclients.get
+    AdSenseAccountsAdclientsGetResource,
+    AdSenseAccountsAdclientsGet (..),
+    newAdSenseAccountsAdclientsGet,
+
     -- ** adsense.accounts.adclients.getAdcode
     AdSenseAccountsAdclientsGetAdcodeResource,
     AdSenseAccountsAdclientsGetAdcode (..),
@@ -83,6 +113,11 @@ module Gogol.AdSense
     AdSenseAccountsAdclientsListResource,
     AdSenseAccountsAdclientsList (..),
     newAdSenseAccountsAdclientsList,
+
+    -- ** adsense.accounts.adclients.urlchannels.get
+    AdSenseAccountsAdclientsUrlchannelsGetResource,
+    AdSenseAccountsAdclientsUrlchannelsGet (..),
+    newAdSenseAccountsAdclientsUrlchannelsGet,
 
     -- ** adsense.accounts.adclients.urlchannels.list
     AdSenseAccountsAdclientsUrlchannelsListResource,
@@ -98,6 +133,11 @@ module Gogol.AdSense
     AdSenseAccountsGetResource,
     AdSenseAccountsGet (..),
     newAdSenseAccountsGet,
+
+    -- ** adsense.accounts.getAdBlockingRecoveryTag
+    AdSenseAccountsGetAdBlockingRecoveryTagResource,
+    AdSenseAccountsGetAdBlockingRecoveryTag (..),
+    newAdSenseAccountsGetAdBlockingRecoveryTag,
 
     -- ** adsense.accounts.list
     AdSenseAccountsListResource,
@@ -123,6 +163,11 @@ module Gogol.AdSense
     AdSenseAccountsReportsGenerateCsvResource,
     AdSenseAccountsReportsGenerateCsv (..),
     newAdSenseAccountsReportsGenerateCsv,
+
+    -- ** adsense.accounts.reports.getSaved
+    AdSenseAccountsReportsGetSavedResource,
+    AdSenseAccountsReportsGetSaved (..),
+    newAdSenseAccountsReportsGetSaved,
 
     -- ** adsense.accounts.reports.saved.generate
     AdSenseAccountsReportsSavedGenerateResource,
@@ -158,9 +203,19 @@ module Gogol.AdSense
     Account (..),
     newAccount,
 
+    -- ** Account_State
+    Account_State (..),
+
+    -- ** AdBlockingRecoveryTag
+    AdBlockingRecoveryTag (..),
+    newAdBlockingRecoveryTag,
+
     -- ** AdClient
     AdClient (..),
     newAdClient,
+
+    -- ** AdClient_State
+    AdClient_State (..),
 
     -- ** AdClientAdCode
     AdClientAdCode (..),
@@ -202,6 +257,10 @@ module Gogol.AdSense
     -- ** Date
     Date (..),
     newDate,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
     -- ** Header
     Header (..),
@@ -335,23 +394,32 @@ module Gogol.AdSense
   )
 where
 
+import Gogol.AdSense.Accounts.Adclients.Adunits.Create
 import Gogol.AdSense.Accounts.Adclients.Adunits.Get
 import Gogol.AdSense.Accounts.Adclients.Adunits.GetAdcode
 import Gogol.AdSense.Accounts.Adclients.Adunits.List
 import Gogol.AdSense.Accounts.Adclients.Adunits.ListLinkedCustomChannels
+import Gogol.AdSense.Accounts.Adclients.Adunits.Patch
+import Gogol.AdSense.Accounts.Adclients.Customchannels.Create
+import Gogol.AdSense.Accounts.Adclients.Customchannels.Delete
 import Gogol.AdSense.Accounts.Adclients.Customchannels.Get
 import Gogol.AdSense.Accounts.Adclients.Customchannels.List
 import Gogol.AdSense.Accounts.Adclients.Customchannels.ListLinkedAdUnits
+import Gogol.AdSense.Accounts.Adclients.Customchannels.Patch
+import Gogol.AdSense.Accounts.Adclients.Get
 import Gogol.AdSense.Accounts.Adclients.GetAdcode
 import Gogol.AdSense.Accounts.Adclients.List
+import Gogol.AdSense.Accounts.Adclients.Urlchannels.Get
 import Gogol.AdSense.Accounts.Adclients.Urlchannels.List
 import Gogol.AdSense.Accounts.Alerts.List
 import Gogol.AdSense.Accounts.Get
+import Gogol.AdSense.Accounts.GetAdBlockingRecoveryTag
 import Gogol.AdSense.Accounts.List
 import Gogol.AdSense.Accounts.ListChildAccounts
 import Gogol.AdSense.Accounts.Payments.List
 import Gogol.AdSense.Accounts.Reports.Generate
 import Gogol.AdSense.Accounts.Reports.GenerateCsv
+import Gogol.AdSense.Accounts.Reports.GetSaved
 import Gogol.AdSense.Accounts.Reports.Saved.Generate
 import Gogol.AdSense.Accounts.Reports.Saved.GenerateCsv
 import Gogol.AdSense.Accounts.Reports.Saved.List

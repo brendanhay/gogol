@@ -49,6 +49,7 @@ library
 
   exposed-modules:
     Gogol.ResourceManager
+    Gogol.ResourceManager.Cloudresourcemanager.EffectiveTags.List
     Gogol.ResourceManager.Cloudresourcemanager.Folders.Create
     Gogol.ResourceManager.Cloudresourcemanager.Folders.Delete
     Gogol.ResourceManager.Cloudresourcemanager.Folders.Get
@@ -99,6 +100,9 @@ library
     Gogol.ResourceManager.Cloudresourcemanager.TagValues.List
     Gogol.ResourceManager.Cloudresourcemanager.TagValues.Patch
     Gogol.ResourceManager.Cloudresourcemanager.TagValues.SetIamPolicy
+    Gogol.ResourceManager.Cloudresourcemanager.TagValues.TagHolds.Create
+    Gogol.ResourceManager.Cloudresourcemanager.TagValues.TagHolds.Delete
+    Gogol.ResourceManager.Cloudresourcemanager.TagValues.TagHolds.List
     Gogol.ResourceManager.Cloudresourcemanager.TagValues.TestIamPermissions
     Gogol.ResourceManager.Types
 
@@ -107,5 +111,5 @@ library
     Gogol.ResourceManager.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

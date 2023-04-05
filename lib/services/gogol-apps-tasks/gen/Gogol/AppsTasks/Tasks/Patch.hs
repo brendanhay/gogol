@@ -28,7 +28,7 @@
 --
 -- Updates the specified task. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasks.patch@.
+-- /See:/ <https://developers.google.com/tasks/ Google Tasks API Reference> for @tasks.tasks.patch@.
 module Gogol.AppsTasks.Tasks.Patch
   ( -- * Resource
     TasksTasksPatchResource,

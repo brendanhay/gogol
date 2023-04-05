@@ -43,6 +43,14 @@ module Gogol.Gmail.Internal.Sum
         ..
       ),
 
+    -- * CseKeyPair_EnablementState
+    CseKeyPair_EnablementState
+      ( CseKeyPair_EnablementState_StateUnspecified,
+        CseKeyPair_EnablementState_Enabled,
+        CseKeyPair_EnablementState_Disabled,
+        ..
+      ),
+
     -- * Delegate_VerificationStatus
     Delegate_VerificationStatus
       ( Delegate_VerificationStatus_VerificationStatusUnspecified,
@@ -263,6 +271,38 @@ pattern AutoForwarding_Disposition_MarkRead = AutoForwarding_Disposition "markRe
   AutoForwarding_Disposition_Trash,
   AutoForwarding_Disposition_MarkRead,
   AutoForwarding_Disposition
+  #-}
+
+-- | Output only. The current state of the key pair.
+newtype CseKeyPair_EnablementState = CseKeyPair_EnablementState {fromCseKeyPair_EnablementState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The current state of the key pair is not set. The key pair is neither turned on nor turned off.
+pattern CseKeyPair_EnablementState_StateUnspecified :: CseKeyPair_EnablementState
+pattern CseKeyPair_EnablementState_StateUnspecified = CseKeyPair_EnablementState "stateUnspecified"
+
+-- | The key pair is turned on. For any email messages that this key pair encrypts, Gmail decrypts the messages and signs any outgoing mail with the private key. To turn on a key pair, use the EnableCseKeyPair method.
+pattern CseKeyPair_EnablementState_Enabled :: CseKeyPair_EnablementState
+pattern CseKeyPair_EnablementState_Enabled = CseKeyPair_EnablementState "enabled"
+
+-- | The key pair is turned off. Authenticated users cannot decrypt email messages nor sign outgoing messages. If a key pair is turned off for more than 30 days, you can permanently delete it. To turn off a key pair, use the DisableCseKeyPair method.
+pattern CseKeyPair_EnablementState_Disabled :: CseKeyPair_EnablementState
+pattern CseKeyPair_EnablementState_Disabled = CseKeyPair_EnablementState "disabled"
+
+{-# COMPLETE
+  CseKeyPair_EnablementState_StateUnspecified,
+  CseKeyPair_EnablementState_Enabled,
+  CseKeyPair_EnablementState_Disabled,
+  CseKeyPair_EnablementState
   #-}
 
 -- | Indicates whether this address has been verified and can act as a delegate for the account. Read-only.

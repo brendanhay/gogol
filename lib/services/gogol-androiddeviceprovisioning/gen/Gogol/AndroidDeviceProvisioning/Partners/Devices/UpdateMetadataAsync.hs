@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the reseller metadata attached to a batch of devices. This method updates devices asynchronously and returns an @Operation@ that can be used to track progress. Read </zero-touch/guides/how-it-works#operations Long‑running batch operations>.
+-- Updates the reseller metadata attached to a batch of devices. This method updates devices asynchronously and returns an @Operation@ that can be used to track progress. Read </zero-touch/guides/how-it-works#operations Long‑running batch operations>. Android Devices only.
 --
 -- /See:/ <https://developers.google.com/zero-touch/ Android Device Provisioning Partner API Reference> for @androiddeviceprovisioning.partners.devices.updateMetadataAsync@.
 module Gogol.AndroidDeviceProvisioning.Partners.Devices.UpdateMetadataAsync
@@ -60,7 +60,7 @@ type AndroidDeviceProvisioningPartnersDevicesUpdateMetadataAsyncResource =
               UpdateDeviceMetadataInBatchRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Updates the reseller metadata attached to a batch of devices. This method updates devices asynchronously and returns an @Operation@ that can be used to track progress. Read </zero-touch/guides/how-it-works#operations Long‑running batch operations>.
+-- | Updates the reseller metadata attached to a batch of devices. This method updates devices asynchronously and returns an @Operation@ that can be used to track progress. Read </zero-touch/guides/how-it-works#operations Long‑running batch operations>. Android Devices only.
 --
 -- /See:/ 'newAndroidDeviceProvisioningPartnersDevicesUpdateMetadataAsync' smart constructor.
 data AndroidDeviceProvisioningPartnersDevicesUpdateMetadataAsync = AndroidDeviceProvisioningPartnersDevicesUpdateMetadataAsync

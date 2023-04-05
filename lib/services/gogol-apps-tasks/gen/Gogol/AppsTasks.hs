@@ -28,7 +28,7 @@
 --
 -- The Google Tasks API lets you manage your tasks and task lists.
 --
--- /See:/ <https://developers.google.com/tasks/ Tasks API Reference>
+-- /See:/ <https://developers.google.com/tasks/ Google Tasks API Reference>
 module Gogol.AppsTasks
   ( -- * Configuration
     appsTasksService,

@@ -68,7 +68,7 @@ data CloudSearchIndexingDatasourcesItemsDeleteQueueItems = CloudSearchIndexingDa
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Name of the Data Source to delete items in a queue. Format: datasources\/{source_id}
+    -- | The name of the Data Source to delete items in a queue. Format: datasources\/{source_id}
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: DeleteQueueItemsRequest,
@@ -81,7 +81,7 @@ data CloudSearchIndexingDatasourcesItemsDeleteQueueItems = CloudSearchIndexingDa
 
 -- | Creates a value of 'CloudSearchIndexingDatasourcesItemsDeleteQueueItems' with the minimum fields required to make a request.
 newCloudSearchIndexingDatasourcesItemsDeleteQueueItems ::
-  -- |  Name of the Data Source to delete items in a queue. Format: datasources\/{source_id} See 'name'.
+  -- |  The name of the Data Source to delete items in a queue. Format: datasources\/{source_id} See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   DeleteQueueItemsRequest ->

@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified machine image. Gets a list of available machine images by making a list() request.
+-- Returns the specified machine image.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.machineImages.get@.
 module Gogol.Compute.MachineImages.Get
@@ -60,7 +60,7 @@ type ComputeMachineImagesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] MachineImage
 
--- | Returns the specified machine image. Gets a list of available machine images by making a list() request.
+-- | Returns the specified machine image.
 --
 -- /See:/ 'newComputeMachineImagesGet' smart constructor.
 data ComputeMachineImagesGet = ComputeMachineImagesGet

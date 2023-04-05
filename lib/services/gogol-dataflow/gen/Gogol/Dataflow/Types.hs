@@ -273,9 +273,21 @@ module Gogol.Dataflow.Types
     Histogram (..),
     newHistogram,
 
+    -- ** HotKeyDebuggingInfo
+    HotKeyDebuggingInfo (..),
+    newHotKeyDebuggingInfo,
+
+    -- ** HotKeyDebuggingInfo_DetectedHotKeys
+    HotKeyDebuggingInfo_DetectedHotKeys (..),
+    newHotKeyDebuggingInfo_DetectedHotKeys,
+
     -- ** HotKeyDetection
     HotKeyDetection (..),
     newHotKeyDetection,
+
+    -- ** HotKeyInfo
+    HotKeyInfo (..),
+    newHotKeyInfo,
 
     -- ** InstructionInput
     InstructionInput (..),
@@ -348,6 +360,10 @@ module Gogol.Dataflow.Types
     -- ** JobMetadata
     JobMetadata (..),
     newJobMetadata,
+
+    -- ** JobMetadata_UserDisplayProperties
+    JobMetadata_UserDisplayProperties (..),
+    newJobMetadata_UserDisplayProperties,
 
     -- ** JobMetrics
     JobMetrics (..),
@@ -538,13 +554,6 @@ module Gogol.Dataflow.Types
     -- ** PubsubSnapshotMetadata
     PubsubSnapshotMetadata (..),
     newPubsubSnapshotMetadata,
-
-    -- ** QueryInfo
-    QueryInfo (..),
-    newQueryInfo,
-
-    -- ** QueryInfo_QueryPropertyItem
-    QueryInfo_QueryPropertyItem (..),
 
     -- ** ReadInstruction
     ReadInstruction (..),
@@ -786,6 +795,30 @@ module Gogol.Dataflow.Types
     Step_Properties (..),
     newStep_Properties,
 
+    -- ** Straggler
+    Straggler (..),
+    newStraggler,
+
+    -- ** StragglerDebuggingInfo
+    StragglerDebuggingInfo (..),
+    newStragglerDebuggingInfo,
+
+    -- ** StragglerInfo
+    StragglerInfo (..),
+    newStragglerInfo,
+
+    -- ** StragglerInfo_Causes
+    StragglerInfo_Causes (..),
+    newStragglerInfo_Causes,
+
+    -- ** StragglerSummary
+    StragglerSummary (..),
+    newStragglerSummary,
+
+    -- ** StragglerSummary_StragglerCauseCount
+    StragglerSummary_StragglerCauseCount (..),
+    newStragglerSummary_StragglerCauseCount,
+
     -- ** StreamLocation
     StreamLocation (..),
     newStreamLocation,
@@ -833,6 +866,10 @@ module Gogol.Dataflow.Types
     StreamingStageLocation (..),
     newStreamingStageLocation,
 
+    -- ** StreamingStragglerInfo
+    StreamingStragglerInfo (..),
+    newStreamingStragglerInfo,
+
     -- ** StringList
     StringList (..),
     newStringList,
@@ -863,10 +900,6 @@ module Gogol.Dataflow.Types
 
     -- ** TransformSummary_Kind
     TransformSummary_Kind (..),
-
-    -- ** ValidateResponse
-    ValidateResponse (..),
-    newValidateResponse,
 
     -- ** WorkItem
     WorkItem (..),
@@ -970,6 +1003,14 @@ module Gogol.Dataflow.Types
     -- ** WorkerShutdownNoticeResponse
     WorkerShutdownNoticeResponse (..),
     newWorkerShutdownNoticeResponse,
+
+    -- ** WorkerThreadScalingReport
+    WorkerThreadScalingReport (..),
+    newWorkerThreadScalingReport,
+
+    -- ** WorkerThreadScalingReportResponse
+    WorkerThreadScalingReportResponse (..),
+    newWorkerThreadScalingReportResponse,
 
     -- ** WriteInstruction
     WriteInstruction (..),

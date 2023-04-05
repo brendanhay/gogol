@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a TagBinding between a TagValue and a cloud resource (currently project, folder, or organization).
+-- Creates a TagBinding between a TagValue and a Google Cloud resource.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Cloud Resource Manager API Reference> for @cloudresourcemanager.tagBindings.create@.
 module Gogol.ResourceManager.Cloudresourcemanager.TagBindings.Create
@@ -57,7 +57,7 @@ type CloudresourcemanagerTagBindingsCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] TagBinding
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Creates a TagBinding between a TagValue and a cloud resource (currently project, folder, or organization).
+-- | Creates a TagBinding between a TagValue and a Google Cloud resource.
 --
 -- /See:/ 'newCloudresourcemanagerTagBindingsCreate' smart constructor.
 data CloudresourcemanagerTagBindingsCreate = CloudresourcemanagerTagBindingsCreate

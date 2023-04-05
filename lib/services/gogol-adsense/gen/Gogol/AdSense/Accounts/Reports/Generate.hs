@@ -117,7 +117,7 @@ data AdSenseAccountsReportsGenerate = AdSenseAccountsReportsGenerate
     endDateMonth :: (Core.Maybe Core.Int32),
     -- | Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
     endDateYear :: (Core.Maybe Core.Int32),
-    -- | Filters to be run on the report.
+    -- | A list of </adsense/management/reporting/filtering filters> to apply to the report. All provided filters must match in order for the data to be included in the report.
     filters :: (Core.Maybe [Core.Text]),
     -- | The language to use for translating report output. If unspecified, this defaults to English (\"en\"). If the given language is not supported, report output will be returned in English. The language is specified as an <https://en.wikipedia.org/wiki/IETF_language_tag IETF BCP-47 language code>.
     languageCode :: (Core.Maybe Core.Text),

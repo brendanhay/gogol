@@ -138,6 +138,10 @@ module Gogol.Drive.Internal.Product
     File_ImageMediaMetadata_Location (..),
     newFile_ImageMediaMetadata_Location,
 
+    -- * File_LabelInfo
+    File_LabelInfo (..),
+    newFile_LabelInfo,
+
     -- * File_LinkShareMetadata
     File_LinkShareMetadata (..),
     newFile_LinkShareMetadata,
@@ -161,6 +165,38 @@ module Gogol.Drive.Internal.Product
     -- * GeneratedIds
     GeneratedIds (..),
     newGeneratedIds,
+
+    -- * Label
+    Label (..),
+    newLabel,
+
+    -- * Label_Fields
+    Label_Fields (..),
+    newLabel_Fields,
+
+    -- * LabelField
+    LabelField (..),
+    newLabelField,
+
+    -- * LabelFieldModification
+    LabelFieldModification (..),
+    newLabelFieldModification,
+
+    -- * LabelList
+    LabelList (..),
+    newLabelList,
+
+    -- * LabelModification
+    LabelModification (..),
+    newLabelModification,
+
+    -- * ModifyLabelsRequest
+    ModifyLabelsRequest (..),
+    newModifyLabelsRequest,
+
+    -- * ModifyLabelsResponse
+    ModifyLabelsResponse (..),
+    newModifyLabelsResponse,
 
     -- * Permission
     Permission (..),
@@ -1038,13 +1074,13 @@ instance Core.ToJSON ContentRestriction where
 --
 -- /See:/ 'newDrive' smart constructor.
 data Drive = Drive
-  { -- | An image file and cropping parameters from which a background image for this shared drive is set. This is a write only field; it can only be set on drive.drives.update requests that don\'t set themeId. When specified, all fields of the backgroundImageFile must be set.
+  { -- | An image file and cropping parameters from which a background image for this shared drive is set. This is a write-only field; it can only be set on drive.drives.update requests that don\'t set themeId. When specified, all fields of the backgroundImageFile must be set.
     backgroundImageFile :: (Core.Maybe Drive_BackgroundImageFile),
     -- | A short-lived link to this shared drive\'s background image.
     backgroundImageLink :: (Core.Maybe Core.Text),
     -- | Capabilities the current user has on this shared drive.
     capabilities :: (Core.Maybe Drive_Capabilities),
-    -- | The color of this shared drive as an RGB hex string. It can only be set on a drive.drives.update request that does not set themeId.
+    -- | The color of this shared drive as an RGB hex string. It can only be set on drive.drives.update requests that don\'t set themeId.
     colorRgb :: (Core.Maybe Core.Text),
     -- | The time at which the shared drive was created (RFC 3339 date-time).
     createdTime :: (Core.Maybe Core.DateTime),
@@ -1060,7 +1096,7 @@ data Drive = Drive
     orgUnitId :: (Core.Maybe Core.Text),
     -- | A set of restrictions that apply to this shared drive or items inside this shared drive.
     restrictions :: (Core.Maybe Drive_Restrictions),
-    -- | The ID of the theme from which the background image and color will be set. The set of possible driveThemes can be retrieved from a drive.about.get response. When not specified on a drive.drives.create request, a random theme is chosen from which the background image and color are set. This is a write-only field; it can only be set on requests that don\'t set colorRgb or backgroundImageFile.
+    -- | The ID of the theme from which the background image and color are set. The set of possible driveThemes can be retrieved from a drive.about.get response. When not specified on a drive.drives.create request, a random theme is chosen from which the background image and color are set. This is a write-only field; it can only be set on requests that don\'t set colorRgb or backgroundImageFile.
     themeId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1125,7 +1161,7 @@ instance Core.ToJSON Drive where
           ]
       )
 
--- | An image file and cropping parameters from which a background image for this shared drive is set. This is a write only field; it can only be set on drive.drives.update requests that don\'t set themeId. When specified, all fields of the backgroundImageFile must be set.
+-- | An image file and cropping parameters from which a background image for this shared drive is set. This is a write-only field; it can only be set on drive.drives.update requests that don\'t set themeId. When specified, all fields of the backgroundImageFile must be set.
 --
 -- /See:/ 'newDrive_BackgroundImageFile' smart constructor.
 data Drive_BackgroundImageFile = Drive_BackgroundImageFile
@@ -1188,6 +1224,8 @@ data Drive_Capabilities = Drive_Capabilities
     canChangeDriveBackground :: (Core.Maybe Core.Bool),
     -- | Whether the current user can change the driveMembersOnly restriction of this shared drive.
     canChangeDriveMembersOnlyRestriction :: (Core.Maybe Core.Bool),
+    -- | Whether the current user can change the sharingFoldersRequiresOrganizerPermission restriction of this shared drive.
+    canChangeSharingFoldersRequiresOrganizerPermissionRestriction :: (Core.Maybe Core.Bool),
     -- | Whether the current user can comment on files in this shared drive.
     canComment :: (Core.Maybe Core.Bool),
     -- | Whether the current user can copy files in this shared drive.
@@ -1210,6 +1248,8 @@ data Drive_Capabilities = Drive_Capabilities
     canRename :: (Core.Maybe Core.Bool),
     -- | Whether the current user can rename this shared drive.
     canRenameDrive :: (Core.Maybe Core.Bool),
+    -- | Whether the current user can reset the shared drive restrictions to defaults.
+    canResetDriveRestrictions :: (Core.Maybe Core.Bool),
     -- | Whether the current user can share files or folders in this shared drive.
     canShare :: (Core.Maybe Core.Bool),
     -- | Whether the current user can trash children from folders in this shared drive.
@@ -1227,6 +1267,8 @@ newDrive_Capabilities =
       canChangeDomainUsersOnlyRestriction = Core.Nothing,
       canChangeDriveBackground = Core.Nothing,
       canChangeDriveMembersOnlyRestriction = Core.Nothing,
+      canChangeSharingFoldersRequiresOrganizerPermissionRestriction =
+        Core.Nothing,
       canComment = Core.Nothing,
       canCopy = Core.Nothing,
       canDeleteChildren = Core.Nothing,
@@ -1238,6 +1280,7 @@ newDrive_Capabilities =
       canReadRevisions = Core.Nothing,
       canRename = Core.Nothing,
       canRenameDrive = Core.Nothing,
+      canResetDriveRestrictions = Core.Nothing,
       canShare = Core.Nothing,
       canTrashChildren = Core.Nothing
     }
@@ -1255,6 +1298,9 @@ instance Core.FromJSON Drive_Capabilities where
             Core.<*> (o Core..:? "canChangeDomainUsersOnlyRestriction")
             Core.<*> (o Core..:? "canChangeDriveBackground")
             Core.<*> (o Core..:? "canChangeDriveMembersOnlyRestriction")
+            Core.<*> ( o
+                         Core..:? "canChangeSharingFoldersRequiresOrganizerPermissionRestriction"
+                     )
             Core.<*> (o Core..:? "canComment")
             Core.<*> (o Core..:? "canCopy")
             Core.<*> (o Core..:? "canDeleteChildren")
@@ -1266,6 +1312,7 @@ instance Core.FromJSON Drive_Capabilities where
             Core.<*> (o Core..:? "canReadRevisions")
             Core.<*> (o Core..:? "canRename")
             Core.<*> (o Core..:? "canRenameDrive")
+            Core.<*> (o Core..:? "canResetDriveRestrictions")
             Core.<*> (o Core..:? "canShare")
             Core.<*> (o Core..:? "canTrashChildren")
       )
@@ -1285,6 +1332,10 @@ instance Core.ToJSON Drive_Capabilities where
               Core.<$> canChangeDriveBackground,
             ("canChangeDriveMembersOnlyRestriction" Core..=)
               Core.<$> canChangeDriveMembersOnlyRestriction,
+            ( "canChangeSharingFoldersRequiresOrganizerPermissionRestriction"
+                Core..=
+            )
+              Core.<$> canChangeSharingFoldersRequiresOrganizerPermissionRestriction,
             ("canComment" Core..=) Core.<$> canComment,
             ("canCopy" Core..=) Core.<$> canCopy,
             ("canDeleteChildren" Core..=)
@@ -1299,6 +1350,8 @@ instance Core.ToJSON Drive_Capabilities where
               Core.<$> canReadRevisions,
             ("canRename" Core..=) Core.<$> canRename,
             ("canRenameDrive" Core..=) Core.<$> canRenameDrive,
+            ("canResetDriveRestrictions" Core..=)
+              Core.<$> canResetDriveRestrictions,
             ("canShare" Core..=) Core.<$> canShare,
             ("canTrashChildren" Core..=)
               Core.<$> canTrashChildren
@@ -1316,7 +1369,9 @@ data Drive_Restrictions = Drive_Restrictions
     -- | Whether access to this shared drive and items inside this shared drive is restricted to users of the domain to which this shared drive belongs. This restriction may be overridden by other sharing policies controlled outside of this shared drive.
     domainUsersOnly :: (Core.Maybe Core.Bool),
     -- | Whether access to items inside this shared drive is restricted to its members.
-    driveMembersOnly :: (Core.Maybe Core.Bool)
+    driveMembersOnly :: (Core.Maybe Core.Bool),
+    -- | If true, only users with the organizer role can share folders. If false, users with either the organizer role or the file organizer role can share folders.
+    sharingFoldersRequiresOrganizerPermission :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1328,7 +1383,8 @@ newDrive_Restrictions =
     { adminManagedRestrictions = Core.Nothing,
       copyRequiresWriterPermission = Core.Nothing,
       domainUsersOnly = Core.Nothing,
-      driveMembersOnly = Core.Nothing
+      driveMembersOnly = Core.Nothing,
+      sharingFoldersRequiresOrganizerPermission = Core.Nothing
     }
 
 instance Core.FromJSON Drive_Restrictions where
@@ -1341,6 +1397,9 @@ instance Core.FromJSON Drive_Restrictions where
             Core.<*> (o Core..:? "copyRequiresWriterPermission")
             Core.<*> (o Core..:? "domainUsersOnly")
             Core.<*> (o Core..:? "driveMembersOnly")
+            Core.<*> ( o
+                         Core..:? "sharingFoldersRequiresOrganizerPermission"
+                     )
       )
 
 instance Core.ToJSON Drive_Restrictions where
@@ -1353,7 +1412,9 @@ instance Core.ToJSON Drive_Restrictions where
               Core.<$> copyRequiresWriterPermission,
             ("domainUsersOnly" Core..=) Core.<$> domainUsersOnly,
             ("driveMembersOnly" Core..=)
-              Core.<$> driveMembersOnly
+              Core.<$> driveMembersOnly,
+            ("sharingFoldersRequiresOrganizerPermission" Core..=)
+              Core.<$> sharingFoldersRequiresOrganizerPermission
           ]
       )
 
@@ -1429,7 +1490,7 @@ data File = File
     fileExtension :: (Core.Maybe Core.Text),
     -- | The color for a folder or shortcut to a folder as an RGB hex string. The supported colors are published in the folderColorPalette field of the About resource. If an unsupported color is specified, the closest color in the palette will be used instead.
     folderColorRgb :: (Core.Maybe Core.Text),
-    -- | The full file extension extracted from the name field. May contain multiple concatenated extensions, such as \"tar.gz\". This is only available for files with binary content in Google Drive. This is automatically updated when the name field changes, however it is not cleared if the new name does not contain a valid extension.
+    -- | The full file extension extracted from the name field. May contain multiple concatenated extensions, such as \"tar.gz\". This is only available for files with binary content in Google Drive. This is automatically updated when the name field changes, however it isn\'t cleared if the new name does not contain a valid extension.
     fullFileExtension :: (Core.Maybe Core.Text),
     -- | Whether there are permissions directly on this file. This field is only populated for items in shared drives.
     hasAugmentedPermissions :: (Core.Maybe Core.Bool),
@@ -1447,6 +1508,8 @@ data File = File
     isAppAuthorized :: (Core.Maybe Core.Bool),
     -- | Identifies what kind of resource this is. Value: the fixed string \"drive#file\".
     kind :: Core.Text,
+    -- | An overview of the labels on the file.
+    labelInfo :: (Core.Maybe File_LabelInfo),
     -- | The last user to modify the file.
     lastModifyingUser :: (Core.Maybe User),
     -- | Contains details about the link URLs that clients are using to refer to this item.
@@ -1481,6 +1544,10 @@ data File = File
     quotaBytesUsed :: (Core.Maybe Core.Int64),
     -- | A key needed to access the item via a shared link.
     resourceKey :: (Core.Maybe Core.Text),
+    -- | The SHA1 checksum associated with this file, if available. This field is only populated for files with content stored in Google Drive; it isn\'t populated for Docs Editors or shortcut files.
+    sha1Checksum :: (Core.Maybe Core.Text),
+    -- | The SHA256 checksum associated with this file, if available. This field is only populated for files with content stored in Google Drive; it isn\'t populated for Docs Editors or shortcut files.
+    sha256Checksum :: (Core.Maybe Core.Text),
     -- | Whether the file has been shared. Not populated for items in shared drives.
     shared :: (Core.Maybe Core.Bool),
     -- | The time at which the file was shared with the user, if applicable (RFC 3339 date-time).
@@ -1489,7 +1556,7 @@ data File = File
     sharingUser :: (Core.Maybe User),
     -- | Shortcut file details. Only populated for shortcut files, which have the mimeType field set to application\/vnd.google-apps.shortcut.
     shortcutDetails :: (Core.Maybe File_ShortcutDetails),
-    -- | The size of the file\'s content in bytes. This is applicable to binary files in Google Drive and Google Docs files.
+    -- | The size of the file\'s content in bytes. This field is populated for files with binary content stored in Google Drive and for Docs Editors files; it is not populated for shortcuts or folders.
     size :: (Core.Maybe Core.Int64),
     -- | The list of spaces which contain the file. The currently supported values are \'drive\', \'appDataFolder\' and \'photos\'.
     spaces :: (Core.Maybe [Core.Text]),
@@ -1552,6 +1619,7 @@ newFile =
       imageMediaMetadata = Core.Nothing,
       isAppAuthorized = Core.Nothing,
       kind = "drive#file",
+      labelInfo = Core.Nothing,
       lastModifyingUser = Core.Nothing,
       linkShareMetadata = Core.Nothing,
       md5Checksum = Core.Nothing,
@@ -1569,6 +1637,8 @@ newFile =
       properties = Core.Nothing,
       quotaBytesUsed = Core.Nothing,
       resourceKey = Core.Nothing,
+      sha1Checksum = Core.Nothing,
+      sha256Checksum = Core.Nothing,
       shared = Core.Nothing,
       sharedWithMeTime = Core.Nothing,
       sharingUser = Core.Nothing,
@@ -1619,6 +1689,7 @@ instance Core.FromJSON File where
             Core.<*> (o Core..:? "imageMediaMetadata")
             Core.<*> (o Core..:? "isAppAuthorized")
             Core.<*> (o Core..:? "kind" Core..!= "drive#file")
+            Core.<*> (o Core..:? "labelInfo")
             Core.<*> (o Core..:? "lastModifyingUser")
             Core.<*> (o Core..:? "linkShareMetadata")
             Core.<*> (o Core..:? "md5Checksum")
@@ -1638,6 +1709,8 @@ instance Core.FromJSON File where
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "resourceKey")
+            Core.<*> (o Core..:? "sha1Checksum")
+            Core.<*> (o Core..:? "sha256Checksum")
             Core.<*> (o Core..:? "shared")
             Core.<*> (o Core..:? "sharedWithMeTime")
             Core.<*> (o Core..:? "sharingUser")
@@ -1698,6 +1771,7 @@ instance Core.ToJSON File where
               Core.<$> imageMediaMetadata,
             ("isAppAuthorized" Core..=) Core.<$> isAppAuthorized,
             Core.Just ("kind" Core..= kind),
+            ("labelInfo" Core..=) Core.<$> labelInfo,
             ("lastModifyingUser" Core..=)
               Core.<$> lastModifyingUser,
             ("linkShareMetadata" Core..=)
@@ -1720,6 +1794,8 @@ instance Core.ToJSON File where
             ("quotaBytesUsed" Core..=) Core.. Core.AsText
               Core.<$> quotaBytesUsed,
             ("resourceKey" Core..=) Core.<$> resourceKey,
+            ("sha1Checksum" Core..=) Core.<$> sha1Checksum,
+            ("sha256Checksum" Core..=) Core.<$> sha256Checksum,
             ("shared" Core..=) Core.<$> shared,
             ("sharedWithMeTime" Core..=)
               Core.<$> sharedWithMeTime,
@@ -1814,6 +1890,8 @@ data File_Capabilities = File_Capabilities
     canModifyContent :: (Core.Maybe Core.Bool),
     -- | Whether the current user can modify restrictions on content of this file.
     canModifyContentRestriction :: (Core.Maybe Core.Bool),
+    -- | Whether the current user can modify the labels on this file.
+    canModifyLabels :: (Core.Maybe Core.Bool),
     -- | Whether the current user can move children of this folder outside of the shared drive. This is false when the item is not a folder. Only populated for items in shared drives.
     canMoveChildrenOutOfDrive :: (Core.Maybe Core.Bool),
     -- | Deprecated - use canMoveChildrenOutOfDrive instead.
@@ -1836,7 +1914,9 @@ data File_Capabilities = File_Capabilities
     canMoveTeamDriveItem :: (Core.Maybe Core.Bool),
     -- | Whether the current user can read the shared drive to which this file belongs. Only populated for items in shared drives.
     canReadDrive :: (Core.Maybe Core.Bool),
-    -- | Whether the current user can read the revisions resource of this file. For a shared drive item, whether revisions of non-folder descendants of this item, or this item itself if it is not a folder, can be read.
+    -- | Whether the current user can read the labels on this file.
+    canReadLabels :: (Core.Maybe Core.Bool),
+    -- | Whether the current user can read the revisions resource of this file. For a shared drive item, whether revisions of non-folder descendants of this item, or this item itself if it isn\'t a folder, can be read.
     canReadRevisions :: (Core.Maybe Core.Bool),
     -- | Deprecated - use canReadDrive instead.
     canReadTeamDrive :: (Core.Maybe Core.Bool),
@@ -1878,6 +1958,7 @@ newFile_Capabilities =
       canListChildren = Core.Nothing,
       canModifyContent = Core.Nothing,
       canModifyContentRestriction = Core.Nothing,
+      canModifyLabels = Core.Nothing,
       canMoveChildrenOutOfDrive = Core.Nothing,
       canMoveChildrenOutOfTeamDrive = Core.Nothing,
       canMoveChildrenWithinDrive = Core.Nothing,
@@ -1889,6 +1970,7 @@ newFile_Capabilities =
       canMoveItemWithinTeamDrive = Core.Nothing,
       canMoveTeamDriveItem = Core.Nothing,
       canReadDrive = Core.Nothing,
+      canReadLabels = Core.Nothing,
       canReadRevisions = Core.Nothing,
       canReadTeamDrive = Core.Nothing,
       canRemoveChildren = Core.Nothing,
@@ -1922,6 +2004,7 @@ instance Core.FromJSON File_Capabilities where
             Core.<*> (o Core..:? "canListChildren")
             Core.<*> (o Core..:? "canModifyContent")
             Core.<*> (o Core..:? "canModifyContentRestriction")
+            Core.<*> (o Core..:? "canModifyLabels")
             Core.<*> (o Core..:? "canMoveChildrenOutOfDrive")
             Core.<*> (o Core..:? "canMoveChildrenOutOfTeamDrive")
             Core.<*> (o Core..:? "canMoveChildrenWithinDrive")
@@ -1933,6 +2016,7 @@ instance Core.FromJSON File_Capabilities where
             Core.<*> (o Core..:? "canMoveItemWithinTeamDrive")
             Core.<*> (o Core..:? "canMoveTeamDriveItem")
             Core.<*> (o Core..:? "canReadDrive")
+            Core.<*> (o Core..:? "canReadLabels")
             Core.<*> (o Core..:? "canReadRevisions")
             Core.<*> (o Core..:? "canReadTeamDrive")
             Core.<*> (o Core..:? "canRemoveChildren")
@@ -1973,6 +2057,7 @@ instance Core.ToJSON File_Capabilities where
               Core.<$> canModifyContent,
             ("canModifyContentRestriction" Core..=)
               Core.<$> canModifyContentRestriction,
+            ("canModifyLabels" Core..=) Core.<$> canModifyLabels,
             ("canMoveChildrenOutOfDrive" Core..=)
               Core.<$> canMoveChildrenOutOfDrive,
             ("canMoveChildrenOutOfTeamDrive" Core..=)
@@ -1994,6 +2079,7 @@ instance Core.ToJSON File_Capabilities where
             ("canMoveTeamDriveItem" Core..=)
               Core.<$> canMoveTeamDriveItem,
             ("canReadDrive" Core..=) Core.<$> canReadDrive,
+            ("canReadLabels" Core..=) Core.<$> canReadLabels,
             ("canReadRevisions" Core..=)
               Core.<$> canReadRevisions,
             ("canReadTeamDrive" Core..=)
@@ -2015,7 +2101,7 @@ instance Core.ToJSON File_Capabilities where
 --
 -- /See:/ 'newFile_ContentHints' smart constructor.
 data File_ContentHints = File_ContentHints
-  { -- | Text to be indexed for the file to improve fullText queries. This is limited to 128KB in length and may contain HTML elements.
+  { -- | Text to be indexed for the file to improve fullText queries. This is limited to 128 KB in length and may contain HTML elements. For more information, see Manage file metadata.
     indexableText :: (Core.Maybe Core.Text),
     -- | A thumbnail for the file. This will only be used if Google Drive cannot generate a standard thumbnail.
     thumbnail :: (Core.Maybe File_ContentHints_Thumbnail)
@@ -2292,6 +2378,33 @@ instance Core.ToJSON File_ImageMediaMetadata_Location where
           ]
       )
 
+-- | An overview of the labels on the file.
+--
+-- /See:/ 'newFile_LabelInfo' smart constructor.
+newtype File_LabelInfo = File_LabelInfo
+  { -- | The set of labels on the file as requested by the label IDs in the includeLabels parameter. By default, no labels are returned.
+    labels :: (Core.Maybe [Label])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'File_LabelInfo' with the minimum fields required to make a request.
+newFile_LabelInfo ::
+  File_LabelInfo
+newFile_LabelInfo = File_LabelInfo {labels = Core.Nothing}
+
+instance Core.FromJSON File_LabelInfo where
+  parseJSON =
+    Core.withObject
+      "File_LabelInfo"
+      ( \o ->
+          File_LabelInfo Core.<$> (o Core..:? "labels")
+      )
+
+instance Core.ToJSON File_LabelInfo where
+  toJSON File_LabelInfo {..} =
+    Core.object
+      (Core.catMaybes [("labels" Core..=) Core.<$> labels])
+
 -- | Contains details about the link URLs that clients are using to refer to this item.
 --
 -- /See:/ 'newFile_LinkShareMetadata' smart constructor.
@@ -2546,7 +2659,411 @@ instance Core.ToJSON GeneratedIds where
           ]
       )
 
--- | A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
+-- | Representation of a label and its fields.
+--
+-- /See:/ 'newLabel' smart constructor.
+data Label = Label
+  { -- | A map of the label\'s fields keyed by the field ID.
+    fields :: (Core.Maybe Label_Fields),
+    -- | The ID of the label.
+    id :: (Core.Maybe Core.Text),
+    -- | This is always drive#label
+    kind :: Core.Text,
+    -- | The revision ID of the label.
+    revisionId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Label' with the minimum fields required to make a request.
+newLabel ::
+  Label
+newLabel =
+  Label
+    { fields = Core.Nothing,
+      id = Core.Nothing,
+      kind = "drive#label",
+      revisionId = Core.Nothing
+    }
+
+instance Core.FromJSON Label where
+  parseJSON =
+    Core.withObject
+      "Label"
+      ( \o ->
+          Label
+            Core.<$> (o Core..:? "fields")
+            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "kind" Core..!= "drive#label")
+            Core.<*> (o Core..:? "revisionId")
+      )
+
+instance Core.ToJSON Label where
+  toJSON Label {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("fields" Core..=) Core.<$> fields,
+            ("id" Core..=) Core.<$> id,
+            Core.Just ("kind" Core..= kind),
+            ("revisionId" Core..=) Core.<$> revisionId
+          ]
+      )
+
+-- | A map of the label\'s fields keyed by the field ID.
+--
+-- /See:/ 'newLabel_Fields' smart constructor.
+newtype Label_Fields = Label_Fields
+  { -- |
+    additional :: (Core.HashMap Core.Text LabelField)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Label_Fields' with the minimum fields required to make a request.
+newLabel_Fields ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text LabelField ->
+  Label_Fields
+newLabel_Fields additional = Label_Fields {additional = additional}
+
+instance Core.FromJSON Label_Fields where
+  parseJSON =
+    Core.withObject
+      "Label_Fields"
+      ( \o ->
+          Label_Fields Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON Label_Fields where
+  toJSON Label_Fields {..} = Core.toJSON additional
+
+-- | Representation of a label field.
+--
+-- /See:/ 'newLabelField' smart constructor.
+data LabelField = LabelField
+  { -- | Only present if valueType is dateString. RFC 3339 formatted date: YYYY-MM-DD.
+    dateString :: (Core.Maybe [Core.Date]),
+    -- | The identifier of this field.
+    id :: (Core.Maybe Core.Text),
+    -- | Only present if valueType is integer.
+    integer :: (Core.Maybe [Core.Int64]),
+    -- | This is always drive#labelField.
+    kind :: Core.Text,
+    -- | Only present if valueType is selection.
+    selection :: (Core.Maybe [Core.Text]),
+    -- | Only present if valueType is text.
+    text :: (Core.Maybe [Core.Text]),
+    -- | Only present if valueType is user.
+    user :: (Core.Maybe [User]),
+    -- | The field type. While new values may be supported in the future, the following are currently allowed:
+    -- - dateString - integer - selection - text - user
+    valueType :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LabelField' with the minimum fields required to make a request.
+newLabelField ::
+  LabelField
+newLabelField =
+  LabelField
+    { dateString = Core.Nothing,
+      id = Core.Nothing,
+      integer = Core.Nothing,
+      kind = "drive#labelField",
+      selection = Core.Nothing,
+      text = Core.Nothing,
+      user = Core.Nothing,
+      valueType = Core.Nothing
+    }
+
+instance Core.FromJSON LabelField where
+  parseJSON =
+    Core.withObject
+      "LabelField"
+      ( \o ->
+          LabelField
+            Core.<$> (o Core..:? "dateString")
+            Core.<*> (o Core..:? "id")
+            Core.<*> ( o Core..:? "integer"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
+            Core.<*> (o Core..:? "kind" Core..!= "drive#labelField")
+            Core.<*> (o Core..:? "selection")
+            Core.<*> (o Core..:? "text")
+            Core.<*> (o Core..:? "user")
+            Core.<*> (o Core..:? "valueType")
+      )
+
+instance Core.ToJSON LabelField where
+  toJSON LabelField {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("dateString" Core..=) Core.<$> dateString,
+            ("id" Core..=) Core.<$> id,
+            ("integer" Core..=) Core.. Core.fmap Core.AsText
+              Core.<$> integer,
+            Core.Just ("kind" Core..= kind),
+            ("selection" Core..=) Core.<$> selection,
+            ("text" Core..=) Core.<$> text,
+            ("user" Core..=) Core.<$> user,
+            ("valueType" Core..=) Core.<$> valueType
+          ]
+      )
+
+-- | A modification to a label\'s field.
+--
+-- /See:/ 'newLabelFieldModification' smart constructor.
+data LabelFieldModification = LabelFieldModification
+  { -- | The ID of the Field to be modified.
+    fieldId :: (Core.Maybe Core.Text),
+    -- | This is always drive#labelFieldModification.
+    kind :: Core.Text,
+    -- | Replaces a dateString field with these new values. The values must be strings in the RFC 3339 full-date format: YYYY-MM-DD.
+    setDateValues :: (Core.Maybe [Core.Date]),
+    -- | Replaces an integer field with these new values.
+    setIntegerValues :: (Core.Maybe [Core.Int64]),
+    -- | Replaces a selection field with these new values.
+    setSelectionValues :: (Core.Maybe [Core.Text]),
+    -- | Replaces a text field with these new values.
+    setTextValues :: (Core.Maybe [Core.Text]),
+    -- | Replaces a user field with these new values. The values must be valid email addresses.
+    setUserValues :: (Core.Maybe [Core.Text]),
+    -- | Unsets the values for this field.
+    unsetValues :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LabelFieldModification' with the minimum fields required to make a request.
+newLabelFieldModification ::
+  LabelFieldModification
+newLabelFieldModification =
+  LabelFieldModification
+    { fieldId = Core.Nothing,
+      kind = "drive#labelFieldModification",
+      setDateValues = Core.Nothing,
+      setIntegerValues = Core.Nothing,
+      setSelectionValues = Core.Nothing,
+      setTextValues = Core.Nothing,
+      setUserValues = Core.Nothing,
+      unsetValues = Core.Nothing
+    }
+
+instance Core.FromJSON LabelFieldModification where
+  parseJSON =
+    Core.withObject
+      "LabelFieldModification"
+      ( \o ->
+          LabelFieldModification
+            Core.<$> (o Core..:? "fieldId")
+            Core.<*> ( o Core..:? "kind"
+                         Core..!= "drive#labelFieldModification"
+                     )
+            Core.<*> (o Core..:? "setDateValues")
+            Core.<*> ( o Core..:? "setIntegerValues"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
+            Core.<*> (o Core..:? "setSelectionValues")
+            Core.<*> (o Core..:? "setTextValues")
+            Core.<*> (o Core..:? "setUserValues")
+            Core.<*> (o Core..:? "unsetValues")
+      )
+
+instance Core.ToJSON LabelFieldModification where
+  toJSON LabelFieldModification {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("fieldId" Core..=) Core.<$> fieldId,
+            Core.Just ("kind" Core..= kind),
+            ("setDateValues" Core..=) Core.<$> setDateValues,
+            ("setIntegerValues" Core..=)
+              Core.. Core.fmap Core.AsText
+              Core.<$> setIntegerValues,
+            ("setSelectionValues" Core..=)
+              Core.<$> setSelectionValues,
+            ("setTextValues" Core..=) Core.<$> setTextValues,
+            ("setUserValues" Core..=) Core.<$> setUserValues,
+            ("unsetValues" Core..=) Core.<$> unsetValues
+          ]
+      )
+
+-- | A list of labels.
+--
+-- /See:/ 'newLabelList' smart constructor.
+data LabelList = LabelList
+  { -- | This is always drive#labelList
+    kind :: Core.Text,
+    -- | The list of labels.
+    labels :: (Core.Maybe [Label]),
+    -- | The page token for the next page of labels. This field will be absent if the end of the list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LabelList' with the minimum fields required to make a request.
+newLabelList ::
+  LabelList
+newLabelList =
+  LabelList
+    { kind = "drive#labelList",
+      labels = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON LabelList where
+  parseJSON =
+    Core.withObject
+      "LabelList"
+      ( \o ->
+          LabelList
+            Core.<$> (o Core..:? "kind" Core..!= "drive#labelList")
+            Core.<*> (o Core..:? "labels")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON LabelList where
+  toJSON LabelList {..} =
+    Core.object
+      ( Core.catMaybes
+          [ Core.Just ("kind" Core..= kind),
+            ("labels" Core..=) Core.<$> labels,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
+-- | A modification to a label on a file. A LabelModification can be used to apply a label to a file, update an existing label on a file, or remove a label from a file.
+--
+-- /See:/ 'newLabelModification' smart constructor.
+data LabelModification = LabelModification
+  { -- | The list of modifications to this label\'s fields.
+    fieldModifications :: (Core.Maybe [LabelFieldModification]),
+    -- | This is always drive#labelModification.
+    kind :: Core.Text,
+    -- | The ID of the label to modify.
+    labelId :: (Core.Maybe Core.Text),
+    -- | If true, the label will be removed from the file.
+    removeLabel :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LabelModification' with the minimum fields required to make a request.
+newLabelModification ::
+  LabelModification
+newLabelModification =
+  LabelModification
+    { fieldModifications = Core.Nothing,
+      kind = "drive#labelModification",
+      labelId = Core.Nothing,
+      removeLabel = Core.Nothing
+    }
+
+instance Core.FromJSON LabelModification where
+  parseJSON =
+    Core.withObject
+      "LabelModification"
+      ( \o ->
+          LabelModification
+            Core.<$> (o Core..:? "fieldModifications")
+            Core.<*> ( o Core..:? "kind"
+                         Core..!= "drive#labelModification"
+                     )
+            Core.<*> (o Core..:? "labelId")
+            Core.<*> (o Core..:? "removeLabel")
+      )
+
+instance Core.ToJSON LabelModification where
+  toJSON LabelModification {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("fieldModifications" Core..=)
+              Core.<$> fieldModifications,
+            Core.Just ("kind" Core..= kind),
+            ("labelId" Core..=) Core.<$> labelId,
+            ("removeLabel" Core..=) Core.<$> removeLabel
+          ]
+      )
+
+-- | A request to modify the set of labels on a file. This request may contain many modifications that will either all succeed or all fail transactionally.
+--
+-- /See:/ 'newModifyLabelsRequest' smart constructor.
+data ModifyLabelsRequest = ModifyLabelsRequest
+  { -- | This is always drive#modifyLabelsRequest
+    kind :: Core.Text,
+    -- | The list of modifications to apply to the labels on the file.
+    labelModifications :: (Core.Maybe [LabelModification])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ModifyLabelsRequest' with the minimum fields required to make a request.
+newModifyLabelsRequest ::
+  ModifyLabelsRequest
+newModifyLabelsRequest =
+  ModifyLabelsRequest
+    { kind = "drive#modifyLabelsRequest",
+      labelModifications = Core.Nothing
+    }
+
+instance Core.FromJSON ModifyLabelsRequest where
+  parseJSON =
+    Core.withObject
+      "ModifyLabelsRequest"
+      ( \o ->
+          ModifyLabelsRequest
+            Core.<$> ( o Core..:? "kind"
+                         Core..!= "drive#modifyLabelsRequest"
+                     )
+            Core.<*> (o Core..:? "labelModifications")
+      )
+
+instance Core.ToJSON ModifyLabelsRequest where
+  toJSON ModifyLabelsRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ Core.Just ("kind" Core..= kind),
+            ("labelModifications" Core..=)
+              Core.<$> labelModifications
+          ]
+      )
+
+-- | Response to a ModifyLabels request. This contains only those labels which were added or updated by the request.
+--
+-- /See:/ 'newModifyLabelsResponse' smart constructor.
+data ModifyLabelsResponse = ModifyLabelsResponse
+  { -- | This is always drive#modifyLabelsResponse
+    kind :: Core.Text,
+    -- | The list of labels which were added or updated by the request.
+    modifiedLabels :: (Core.Maybe [Label])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ModifyLabelsResponse' with the minimum fields required to make a request.
+newModifyLabelsResponse ::
+  ModifyLabelsResponse
+newModifyLabelsResponse =
+  ModifyLabelsResponse
+    { kind = "drive#modifyLabelsResponse",
+      modifiedLabels = Core.Nothing
+    }
+
+instance Core.FromJSON ModifyLabelsResponse where
+  parseJSON =
+    Core.withObject
+      "ModifyLabelsResponse"
+      ( \o ->
+          ModifyLabelsResponse
+            Core.<$> ( o Core..:? "kind"
+                         Core..!= "drive#modifyLabelsResponse"
+                     )
+            Core.<*> (o Core..:? "modifiedLabels")
+      )
+
+instance Core.ToJSON ModifyLabelsResponse where
+  toJSON ModifyLabelsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ Core.Just ("kind" Core..= kind),
+            ("modifiedLabels" Core..=) Core.<$> modifiedLabels
+          ]
+      )
+
+-- | A permission for a file. A permission grants a user, group, domain, or the world access to a file or a folder hierarchy.
 --
 -- /See:/ 'newPermission' smart constructor.
 data Permission = Permission
@@ -2555,22 +3072,23 @@ data Permission = Permission
     -- | Whether the account associated with this permission has been deleted. This field only pertains to user and group permissions.
     deleted :: (Core.Maybe Core.Bool),
     -- | The \"pretty\" name of the value of the permission. The following is a list of examples for each type of permission:
-    -- - user - User\'s full name, as defined for their Google account, such as \"Joe Smith.\" - group - Name of the Google Group, such as \"The Company Administrators.\" - domain - String domain name, such as \"thecompany.com.\" - anyone - No displayName is present.
+    -- - user - User\'s full name, as defined for their Google Account, such as \"Joe Smith.\" - group - Name of the Google Group, such as \"The Company Administrators.\" - domain - String domain name, such as \"your-company.com.\" - anyone - No displayName is present.
     displayName :: (Core.Maybe Core.Text),
-    -- | The domain to which this permission refers.
+    -- | The domain to which this permission refers. The following options are currently allowed:
+    -- - The entire domain, such as \"your-company.com.\" - A target audience, such as \"ID.audience.googledomains.com.\"
     domain :: (Core.Maybe Core.Text),
     -- | The email address of the user or group to which this permission refers.
     emailAddress :: (Core.Maybe Core.Text),
     -- | The time at which this permission will expire (RFC 3339 date-time). Expiration times have the following restrictions:
-    -- - They can only be set on user and group permissions - The time must be in the future - The time cannot be more than a year in the future
+    -- - They cannot be set on shared drive items. - They can only be set on user and group permissions. - The time must be in the future. - The time cannot be more than one year in the future.
     expirationTime :: (Core.Maybe Core.DateTime),
     -- | The ID of this permission. This is a unique identifier for the grantee, and is published in User resources as permissionId. IDs should be treated as opaque values.
     id :: (Core.Maybe Core.Text),
     -- | Identifies what kind of resource this is. Value: the fixed string \"drive#permission\".
     kind :: Core.Text,
-    -- | Whether the account associated with this permission is a pending owner. Only populated for user type permissions for files that are not in a shared drive.
+    -- | Whether the account associated with this permission is a pending owner. Only populated for user type permissions for files that aren\'t in a shared drive.
     pendingOwner :: (Core.Maybe Core.Bool),
-    -- | Details of whether the permissions on this shared drive item are inherited or directly on this item. This is an output-only field which is present only for shared drive items.
+    -- | Details of whether the permissions on this shared drive item are inherited or are directly on this item. This is an output-only field that\'s present only for shared drive items.
     permissionDetails :: (Core.Maybe [Permission_PermissionDetailsItem]),
     -- | A link to the user\'s profile photo, if available.
     photoLink :: (Core.Maybe Core.Text),
@@ -2580,7 +3098,7 @@ data Permission = Permission
     -- | Deprecated - use permissionDetails instead.
     teamDrivePermissionDetails :: (Core.Maybe [Permission_TeamDrivePermissionDetailsItem]),
     -- | The type of the grantee. Valid values are:
-    -- - user - group - domain - anyone When creating a permission, if type is user or group, you must provide an emailAddress for the user or group. When type is domain, you must provide a domain. There isn\'t extra information required for a anyone type.
+    -- - user - group - domain - anyone When creating a permission, if type is user or group, you must provide an emailAddress for the user or group. When type is domain, you must provide a domain. There isn\'t extra information required for the anyone type.
     type' :: (Core.Maybe Core.Text),
     -- | Indicates the view for this permission. Only populated for permissions that belong to a view. published is the only supported value.
     view :: (Core.Maybe Core.Text)
@@ -2664,10 +3182,10 @@ data Permission_PermissionDetailsItem = Permission_PermissionDetailsItem
     inherited :: (Core.Maybe Core.Bool),
     -- | The ID of the item from which this permission is inherited. This is an output-only field.
     inheritedFrom :: (Core.Maybe Core.Text),
-    -- | The permission type for this user. While new values may be added in future, the following are currently possible:
+    -- | The permission type for this user. While new values may be added in future, the following are currently allowed:
     -- - file - member
     permissionType :: (Core.Maybe Core.Text),
-    -- | The primary role for this user. While new values may be added in the future, the following are currently possible:
+    -- | The primary role for this user. While new values may be added in the future, the following are currently allowed:
     -- - organizer - fileOrganizer - writer - commenter - reader
     role' :: (Core.Maybe Core.Text)
   }
@@ -3286,6 +3804,8 @@ data TeamDrive_Capabilities = TeamDrive_Capabilities
     canChangeCopyRequiresWriterPermissionRestriction :: (Core.Maybe Core.Bool),
     -- | Whether the current user can change the domainUsersOnly restriction of this Team Drive.
     canChangeDomainUsersOnlyRestriction :: (Core.Maybe Core.Bool),
+    -- | Whether the current user can change the sharingFoldersRequiresOrganizerPermission restriction of this Team Drive.
+    canChangeSharingFoldersRequiresOrganizerPermissionRestriction :: (Core.Maybe Core.Bool),
     -- | Whether the current user can change the background of this Team Drive.
     canChangeTeamDriveBackground :: (Core.Maybe Core.Bool),
     -- | Whether the current user can change the teamMembersOnly restriction of this Team Drive.
@@ -3314,6 +3834,8 @@ data TeamDrive_Capabilities = TeamDrive_Capabilities
     canRename :: (Core.Maybe Core.Bool),
     -- | Whether the current user can rename this Team Drive.
     canRenameTeamDrive :: (Core.Maybe Core.Bool),
+    -- | Whether the current user can reset the Team Drive restrictions to defaults.
+    canResetTeamDriveRestrictions :: (Core.Maybe Core.Bool),
     -- | Whether the current user can share files or folders in this Team Drive.
     canShare :: (Core.Maybe Core.Bool),
     -- | Whether the current user can trash children from folders in this Team Drive.
@@ -3329,6 +3851,8 @@ newTeamDrive_Capabilities =
     { canAddChildren = Core.Nothing,
       canChangeCopyRequiresWriterPermissionRestriction = Core.Nothing,
       canChangeDomainUsersOnlyRestriction = Core.Nothing,
+      canChangeSharingFoldersRequiresOrganizerPermissionRestriction =
+        Core.Nothing,
       canChangeTeamDriveBackground = Core.Nothing,
       canChangeTeamMembersOnlyRestriction = Core.Nothing,
       canComment = Core.Nothing,
@@ -3343,6 +3867,7 @@ newTeamDrive_Capabilities =
       canRemoveChildren = Core.Nothing,
       canRename = Core.Nothing,
       canRenameTeamDrive = Core.Nothing,
+      canResetTeamDriveRestrictions = Core.Nothing,
       canShare = Core.Nothing,
       canTrashChildren = Core.Nothing
     }
@@ -3358,6 +3883,9 @@ instance Core.FromJSON TeamDrive_Capabilities where
                          Core..:? "canChangeCopyRequiresWriterPermissionRestriction"
                      )
             Core.<*> (o Core..:? "canChangeDomainUsersOnlyRestriction")
+            Core.<*> ( o
+                         Core..:? "canChangeSharingFoldersRequiresOrganizerPermissionRestriction"
+                     )
             Core.<*> (o Core..:? "canChangeTeamDriveBackground")
             Core.<*> (o Core..:? "canChangeTeamMembersOnlyRestriction")
             Core.<*> (o Core..:? "canComment")
@@ -3372,6 +3900,7 @@ instance Core.FromJSON TeamDrive_Capabilities where
             Core.<*> (o Core..:? "canRemoveChildren")
             Core.<*> (o Core..:? "canRename")
             Core.<*> (o Core..:? "canRenameTeamDrive")
+            Core.<*> (o Core..:? "canResetTeamDriveRestrictions")
             Core.<*> (o Core..:? "canShare")
             Core.<*> (o Core..:? "canTrashChildren")
       )
@@ -3387,6 +3916,10 @@ instance Core.ToJSON TeamDrive_Capabilities where
               Core.<$> canChangeCopyRequiresWriterPermissionRestriction,
             ("canChangeDomainUsersOnlyRestriction" Core..=)
               Core.<$> canChangeDomainUsersOnlyRestriction,
+            ( "canChangeSharingFoldersRequiresOrganizerPermissionRestriction"
+                Core..=
+            )
+              Core.<$> canChangeSharingFoldersRequiresOrganizerPermissionRestriction,
             ("canChangeTeamDriveBackground" Core..=)
               Core.<$> canChangeTeamDriveBackground,
             ("canChangeTeamMembersOnlyRestriction" Core..=)
@@ -3409,6 +3942,8 @@ instance Core.ToJSON TeamDrive_Capabilities where
             ("canRename" Core..=) Core.<$> canRename,
             ("canRenameTeamDrive" Core..=)
               Core.<$> canRenameTeamDrive,
+            ("canResetTeamDriveRestrictions" Core..=)
+              Core.<$> canResetTeamDriveRestrictions,
             ("canShare" Core..=) Core.<$> canShare,
             ("canTrashChildren" Core..=)
               Core.<$> canTrashChildren
@@ -3425,6 +3960,8 @@ data TeamDrive_Restrictions = TeamDrive_Restrictions
     copyRequiresWriterPermission :: (Core.Maybe Core.Bool),
     -- | Whether access to this Team Drive and items inside this Team Drive is restricted to users of the domain to which this Team Drive belongs. This restriction may be overridden by other sharing policies controlled outside of this Team Drive.
     domainUsersOnly :: (Core.Maybe Core.Bool),
+    -- | If true, only users with the organizer role can share folders. If false, users with either the organizer role or the file organizer role can share folders.
+    sharingFoldersRequiresOrganizerPermission :: (Core.Maybe Core.Bool),
     -- | Whether access to items inside this Team Drive is restricted to members of this Team Drive.
     teamMembersOnly :: (Core.Maybe Core.Bool)
   }
@@ -3438,6 +3975,7 @@ newTeamDrive_Restrictions =
     { adminManagedRestrictions = Core.Nothing,
       copyRequiresWriterPermission = Core.Nothing,
       domainUsersOnly = Core.Nothing,
+      sharingFoldersRequiresOrganizerPermission = Core.Nothing,
       teamMembersOnly = Core.Nothing
     }
 
@@ -3450,6 +3988,9 @@ instance Core.FromJSON TeamDrive_Restrictions where
             Core.<$> (o Core..:? "adminManagedRestrictions")
             Core.<*> (o Core..:? "copyRequiresWriterPermission")
             Core.<*> (o Core..:? "domainUsersOnly")
+            Core.<*> ( o
+                         Core..:? "sharingFoldersRequiresOrganizerPermission"
+                     )
             Core.<*> (o Core..:? "teamMembersOnly")
       )
 
@@ -3462,6 +4003,8 @@ instance Core.ToJSON TeamDrive_Restrictions where
             ("copyRequiresWriterPermission" Core..=)
               Core.<$> copyRequiresWriterPermission,
             ("domainUsersOnly" Core..=) Core.<$> domainUsersOnly,
+            ("sharingFoldersRequiresOrganizerPermission" Core..=)
+              Core.<$> sharingFoldersRequiresOrganizerPermission,
             ("teamMembersOnly" Core..=)
               Core.<$> teamMembersOnly
           ]

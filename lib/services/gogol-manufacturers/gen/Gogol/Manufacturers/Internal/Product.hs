@@ -34,6 +34,10 @@ module Gogol.Manufacturers.Internal.Product
     Capacity (..),
     newCapacity,
 
+    -- * Certification
+    Certification (..),
+    newCertification,
+
     -- * Count
     Count (..),
     newCount,
@@ -50,6 +54,14 @@ module Gogol.Manufacturers.Internal.Product
     FeatureDescription (..),
     newFeatureDescription,
 
+    -- * FloatUnit
+    FloatUnit (..),
+    newFloatUnit,
+
+    -- * Grocery
+    Grocery (..),
+    newGrocery,
+
     -- * Image
     Image (..),
     newImage,
@@ -58,9 +70,17 @@ module Gogol.Manufacturers.Internal.Product
     Issue (..),
     newIssue,
 
+    -- * ListProductCertificationsResponse
+    ListProductCertificationsResponse (..),
+    newListProductCertificationsResponse,
+
     -- * ListProductsResponse
     ListProductsResponse (..),
     newListProductsResponse,
+
+    -- * Nutrition
+    Nutrition (..),
+    newNutrition,
 
     -- * Price
     Price (..),
@@ -70,9 +90,17 @@ module Gogol.Manufacturers.Internal.Product
     Product (..),
     newProduct,
 
+    -- * ProductCertification
+    ProductCertification (..),
+    newProductCertification,
+
     -- * ProductDetail
     ProductDetail (..),
     newProductDetail,
+
+    -- * VoluntaryNutritionFact
+    VoluntaryNutritionFact (..),
+    newVoluntaryNutritionFact,
   )
 where
 
@@ -109,6 +137,8 @@ data Attributes = Attributes
     format :: (Core.Maybe Core.Text),
     -- | The target gender of the product. For more information, see https:\/\/support.google.com\/manufacturers\/answer\/6124116#gender.
     gender :: (Core.Maybe Core.Text),
+    -- | Grocery Attributes. See more at https:\/\/support.google.com\/manufacturers\/answer\/12098458#grocery.
+    grocery :: (Core.Maybe Grocery),
     -- | The Global Trade Item Number (GTIN) of the product. For more information, see https:\/\/support.google.com\/manufacturers\/answer\/6124116#gtin.
     gtin :: (Core.Maybe [Core.Text]),
     -- | The image of the product. For more information, see https:\/\/support.google.com\/manufacturers\/answer\/6124116#image.
@@ -121,6 +151,8 @@ data Attributes = Attributes
     material :: (Core.Maybe Core.Text),
     -- | The Manufacturer Part Number (MPN) of the product. For more information, see https:\/\/support.google.com\/manufacturers\/answer\/6124116#mpn.
     mpn :: (Core.Maybe Core.Text),
+    -- | Nutrition Attributes. See more at https:\/\/support.google.com\/manufacturers\/answer\/12098458#food-servings.
+    nutrition :: (Core.Maybe Nutrition),
     -- | The pattern of the product. For more information, see https:\/\/support.google.com\/manufacturers\/answer\/6124116#pattern.
     pattern' :: (Core.Maybe Core.Text),
     -- | The details of the product. For more information, see https:\/\/support.google.com\/manufacturers\/answer\/6124116#productdetail.
@@ -178,12 +210,14 @@ newAttributes =
       flavor = Core.Nothing,
       format = Core.Nothing,
       gender = Core.Nothing,
+      grocery = Core.Nothing,
       gtin = Core.Nothing,
       imageLink = Core.Nothing,
       includedDestination = Core.Nothing,
       itemGroupId = Core.Nothing,
       material = Core.Nothing,
       mpn = Core.Nothing,
+      nutrition = Core.Nothing,
       pattern' = Core.Nothing,
       productDetail = Core.Nothing,
       productHighlight = Core.Nothing,
@@ -223,12 +257,14 @@ instance Core.FromJSON Attributes where
             Core.<*> (o Core..:? "flavor")
             Core.<*> (o Core..:? "format")
             Core.<*> (o Core..:? "gender")
+            Core.<*> (o Core..:? "grocery")
             Core.<*> (o Core..:? "gtin")
             Core.<*> (o Core..:? "imageLink")
             Core.<*> (o Core..:? "includedDestination")
             Core.<*> (o Core..:? "itemGroupId")
             Core.<*> (o Core..:? "material")
             Core.<*> (o Core..:? "mpn")
+            Core.<*> (o Core..:? "nutrition")
             Core.<*> (o Core..:? "pattern")
             Core.<*> (o Core..:? "productDetail")
             Core.<*> (o Core..:? "productHighlight")
@@ -269,6 +305,7 @@ instance Core.ToJSON Attributes where
             ("flavor" Core..=) Core.<$> flavor,
             ("format" Core..=) Core.<$> format,
             ("gender" Core..=) Core.<$> gender,
+            ("grocery" Core..=) Core.<$> grocery,
             ("gtin" Core..=) Core.<$> gtin,
             ("imageLink" Core..=) Core.<$> imageLink,
             ("includedDestination" Core..=)
@@ -276,6 +313,7 @@ instance Core.ToJSON Attributes where
             ("itemGroupId" Core..=) Core.<$> itemGroupId,
             ("material" Core..=) Core.<$> material,
             ("mpn" Core..=) Core.<$> mpn,
+            ("nutrition" Core..=) Core.<$> nutrition,
             ("pattern" Core..=) Core.<$> pattern',
             ("productDetail" Core..=) Core.<$> productDetail,
             ("productHighlight" Core..=)
@@ -334,6 +372,65 @@ instance Core.ToJSON Capacity where
       ( Core.catMaybes
           [ ("unit" Core..=) Core.<$> unit,
             ("value" Core..=) Core.. Core.AsText Core.<$> value
+          ]
+      )
+
+-- | Description of a certification.
+--
+-- /See:/ 'newCertification' smart constructor.
+data Certification = Certification
+  { -- | Required. Name of the certification body.
+    authority :: (Core.Maybe Core.Text),
+    -- | Optional. A URL link to the certification.
+    link :: (Core.Maybe Core.Text),
+    -- | Optional. A URL link to the certification logo.
+    logo :: (Core.Maybe Core.Text),
+    -- | Required. Name of the certification.
+    name :: (Core.Maybe Core.Text),
+    -- | Optional. The expiration date (UTC).
+    validUntil :: (Core.Maybe Core.Text),
+    -- | Required. A custom value of the certification.
+    value :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Certification' with the minimum fields required to make a request.
+newCertification ::
+  Certification
+newCertification =
+  Certification
+    { authority = Core.Nothing,
+      link = Core.Nothing,
+      logo = Core.Nothing,
+      name = Core.Nothing,
+      validUntil = Core.Nothing,
+      value = Core.Nothing
+    }
+
+instance Core.FromJSON Certification where
+  parseJSON =
+    Core.withObject
+      "Certification"
+      ( \o ->
+          Certification
+            Core.<$> (o Core..:? "authority")
+            Core.<*> (o Core..:? "link")
+            Core.<*> (o Core..:? "logo")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "validUntil")
+            Core.<*> (o Core..:? "value")
+      )
+
+instance Core.ToJSON Certification where
+  toJSON Certification {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("authority" Core..=) Core.<$> authority,
+            ("link" Core..=) Core.<$> link,
+            ("logo" Core..=) Core.<$> logo,
+            ("name" Core..=) Core.<$> name,
+            ("validUntil" Core..=) Core.<$> validUntil,
+            ("value" Core..=) Core.<$> value
           ]
       )
 
@@ -410,7 +507,7 @@ instance Core.ToJSON DestinationStatus where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -469,6 +566,116 @@ instance Core.ToJSON FeatureDescription where
           [ ("headline" Core..=) Core.<$> headline,
             ("image" Core..=) Core.<$> image,
             ("text" Core..=) Core.<$> text
+          ]
+      )
+
+-- | Combination of float amount and unit.
+--
+-- /See:/ 'newFloatUnit' smart constructor.
+data FloatUnit = FloatUnit
+  { -- | amount.
+    amount :: (Core.Maybe Core.Double),
+    -- | unit.
+    unit :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FloatUnit' with the minimum fields required to make a request.
+newFloatUnit ::
+  FloatUnit
+newFloatUnit = FloatUnit {amount = Core.Nothing, unit = Core.Nothing}
+
+instance Core.FromJSON FloatUnit where
+  parseJSON =
+    Core.withObject
+      "FloatUnit"
+      ( \o ->
+          FloatUnit
+            Core.<$> (o Core..:? "amount") Core.<*> (o Core..:? "unit")
+      )
+
+instance Core.ToJSON FloatUnit where
+  toJSON FloatUnit {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("amount" Core..=) Core.<$> amount,
+            ("unit" Core..=) Core.<$> unit
+          ]
+      )
+
+--
+-- /See:/ 'newGrocery' smart constructor.
+data Grocery = Grocery
+  { -- | Active ingredients.
+    activeIngredients :: (Core.Maybe Core.Text),
+    -- | Alcohol by volume.
+    alcoholByVolume :: (Core.Maybe Core.Double),
+    -- | Allergens.
+    allergens :: (Core.Maybe Core.Text),
+    -- | Derived nutrition claim.
+    derivedNutritionClaim :: (Core.Maybe [Core.Text]),
+    -- | Directions.
+    directions :: (Core.Maybe Core.Text),
+    -- | Indications.
+    indications :: (Core.Maybe Core.Text),
+    -- | Ingredients.
+    ingredients :: (Core.Maybe Core.Text),
+    -- | Nutrition claim.
+    nutritionClaim :: (Core.Maybe [Core.Text]),
+    -- | Storage instructions.
+    storageInstructions :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Grocery' with the minimum fields required to make a request.
+newGrocery ::
+  Grocery
+newGrocery =
+  Grocery
+    { activeIngredients = Core.Nothing,
+      alcoholByVolume = Core.Nothing,
+      allergens = Core.Nothing,
+      derivedNutritionClaim = Core.Nothing,
+      directions = Core.Nothing,
+      indications = Core.Nothing,
+      ingredients = Core.Nothing,
+      nutritionClaim = Core.Nothing,
+      storageInstructions = Core.Nothing
+    }
+
+instance Core.FromJSON Grocery where
+  parseJSON =
+    Core.withObject
+      "Grocery"
+      ( \o ->
+          Grocery
+            Core.<$> (o Core..:? "activeIngredients")
+            Core.<*> (o Core..:? "alcoholByVolume")
+            Core.<*> (o Core..:? "allergens")
+            Core.<*> (o Core..:? "derivedNutritionClaim")
+            Core.<*> (o Core..:? "directions")
+            Core.<*> (o Core..:? "indications")
+            Core.<*> (o Core..:? "ingredients")
+            Core.<*> (o Core..:? "nutritionClaim")
+            Core.<*> (o Core..:? "storageInstructions")
+      )
+
+instance Core.ToJSON Grocery where
+  toJSON Grocery {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("activeIngredients" Core..=)
+              Core.<$> activeIngredients,
+            ("alcoholByVolume" Core..=) Core.<$> alcoholByVolume,
+            ("allergens" Core..=) Core.<$> allergens,
+            ("derivedNutritionClaim" Core..=)
+              Core.<$> derivedNutritionClaim,
+            ("directions" Core..=) Core.<$> directions,
+            ("indications" Core..=) Core.<$> indications,
+            ("ingredients" Core..=) Core.<$> ingredients,
+            ("nutritionClaim" Core..=) Core.<$> nutritionClaim,
+            ("storageInstructions" Core..=)
+              Core.<$> storageInstructions
           ]
       )
 
@@ -581,6 +788,52 @@ instance Core.ToJSON Issue where
           ]
       )
 
+-- | Response for ListProductCertifications method.
+--
+-- /See:/ 'newListProductCertificationsResponse' smart constructor.
+data ListProductCertificationsResponse = ListProductCertificationsResponse
+  { -- | A token, which can be sent as @page_token@ to retrieve the next page. If this field is omitted, there are no subsequent pages.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | The product certifications from the specified certification body.
+    productCertifications :: (Core.Maybe [ProductCertification])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListProductCertificationsResponse' with the minimum fields required to make a request.
+newListProductCertificationsResponse ::
+  ListProductCertificationsResponse
+newListProductCertificationsResponse =
+  ListProductCertificationsResponse
+    { nextPageToken = Core.Nothing,
+      productCertifications = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    ListProductCertificationsResponse
+  where
+  parseJSON =
+    Core.withObject
+      "ListProductCertificationsResponse"
+      ( \o ->
+          ListProductCertificationsResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "productCertifications")
+      )
+
+instance
+  Core.ToJSON
+    ListProductCertificationsResponse
+  where
+  toJSON ListProductCertificationsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("productCertifications" Core..=)
+              Core.<$> productCertifications
+          ]
+      )
+
 --
 -- /See:/ 'newListProductsResponse' smart constructor.
 data ListProductsResponse = ListProductsResponse
@@ -613,6 +866,273 @@ instance Core.ToJSON ListProductsResponse where
       ( Core.catMaybes
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
             ("products" Core..=) Core.<$> products
+          ]
+      )
+
+--
+-- /See:/ 'newNutrition' smart constructor.
+data Nutrition = Nutrition
+  { -- | Added sugars.
+    addedSugars :: (Core.Maybe FloatUnit),
+    -- | Added sugars daily percentage.
+    addedSugarsDailyPercentage :: (Core.Maybe Core.Double),
+    -- | Calcium.
+    calcium :: (Core.Maybe FloatUnit),
+    -- | Calcium daily percentage.
+    calciumDailyPercentage :: (Core.Maybe Core.Double),
+    -- | Cholesterol.
+    cholesterol :: (Core.Maybe FloatUnit),
+    -- | Cholesterol daily percentage.
+    cholesterolDailyPercentage :: (Core.Maybe Core.Double),
+    -- | Dietary fiber.
+    dietaryFiber :: (Core.Maybe FloatUnit),
+    -- | Dietary fiber daily percentage.
+    dietaryFiberDailyPercentage :: (Core.Maybe Core.Double),
+    -- | Mandatory Nutrition Facts. Energy.
+    energy :: (Core.Maybe FloatUnit),
+    -- | Energy from fat.
+    energyFromFat :: (Core.Maybe FloatUnit),
+    -- | Folate daily percentage.
+    folateDailyPercentage :: (Core.Maybe Core.Double),
+    -- | Folate folic acid.
+    folateFolicAcid :: (Core.Maybe FloatUnit),
+    -- | Folate mcg DFE.
+    folateMcgDfe :: (Core.Maybe Core.Double),
+    -- | Iron.
+    iron :: (Core.Maybe FloatUnit),
+    -- | Iron daily percentage.
+    ironDailyPercentage :: (Core.Maybe Core.Double),
+    -- | Monounsaturated fat.
+    monounsaturatedFat :: (Core.Maybe FloatUnit),
+    -- | Nutrition fact measure.
+    nutritionFactMeasure :: (Core.Maybe Core.Text),
+    -- | Polyols.
+    polyols :: (Core.Maybe FloatUnit),
+    -- | Polyunsaturated fat.
+    polyunsaturatedFat :: (Core.Maybe FloatUnit),
+    -- | Potassium.
+    potassium :: (Core.Maybe FloatUnit),
+    -- | Potassium daily percentage.
+    potassiumDailyPercentage :: (Core.Maybe Core.Double),
+    -- | Prepared size description.
+    preparedSizeDescription :: (Core.Maybe Core.Text),
+    -- | Protein.
+    protein :: (Core.Maybe FloatUnit),
+    -- | Protein daily percentage.
+    proteinDailyPercentage :: (Core.Maybe Core.Double),
+    -- | Saturated fat.
+    saturatedFat :: (Core.Maybe FloatUnit),
+    -- | Saturated fat daily percentage.
+    saturatedFatDailyPercentage :: (Core.Maybe Core.Double),
+    -- | Food Serving Size. Serving size description.
+    servingSizeDescription :: (Core.Maybe Core.Text),
+    -- | Serving size measure.
+    servingSizeMeasure :: (Core.Maybe FloatUnit),
+    -- | Servings per container.
+    servingsPerContainer :: (Core.Maybe Core.Text),
+    -- | Sodium.
+    sodium :: (Core.Maybe FloatUnit),
+    -- | Sodium daily percentage.
+    sodiumDailyPercentage :: (Core.Maybe Core.Double),
+    -- | Starch.
+    starch :: (Core.Maybe FloatUnit),
+    -- | Total carbohydrate.
+    totalCarbohydrate :: (Core.Maybe FloatUnit),
+    -- | Total carbohydrate daily percentage.
+    totalCarbohydrateDailyPercentage :: (Core.Maybe Core.Double),
+    -- | Total fat.
+    totalFat :: (Core.Maybe FloatUnit),
+    -- | Total fat daily percentage.
+    totalFatDailyPercentage :: (Core.Maybe Core.Double),
+    -- | Total sugars.
+    totalSugars :: (Core.Maybe FloatUnit),
+    -- | Total sugars daily percentage.
+    totalSugarsDailyPercentage :: (Core.Maybe Core.Double),
+    -- | Trans fat.
+    transFat :: (Core.Maybe FloatUnit),
+    -- | Trans fat daily percentage.
+    transFatDailyPercentage :: (Core.Maybe Core.Double),
+    -- | Vitamin D.
+    vitaminD :: (Core.Maybe FloatUnit),
+    -- | Vitamin D daily percentage.
+    vitaminDDailyPercentage :: (Core.Maybe Core.Double),
+    -- | Voluntary nutrition fact.
+    voluntaryNutritionFact :: (Core.Maybe [VoluntaryNutritionFact])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Nutrition' with the minimum fields required to make a request.
+newNutrition ::
+  Nutrition
+newNutrition =
+  Nutrition
+    { addedSugars = Core.Nothing,
+      addedSugarsDailyPercentage = Core.Nothing,
+      calcium = Core.Nothing,
+      calciumDailyPercentage = Core.Nothing,
+      cholesterol = Core.Nothing,
+      cholesterolDailyPercentage = Core.Nothing,
+      dietaryFiber = Core.Nothing,
+      dietaryFiberDailyPercentage = Core.Nothing,
+      energy = Core.Nothing,
+      energyFromFat = Core.Nothing,
+      folateDailyPercentage = Core.Nothing,
+      folateFolicAcid = Core.Nothing,
+      folateMcgDfe = Core.Nothing,
+      iron = Core.Nothing,
+      ironDailyPercentage = Core.Nothing,
+      monounsaturatedFat = Core.Nothing,
+      nutritionFactMeasure = Core.Nothing,
+      polyols = Core.Nothing,
+      polyunsaturatedFat = Core.Nothing,
+      potassium = Core.Nothing,
+      potassiumDailyPercentage = Core.Nothing,
+      preparedSizeDescription = Core.Nothing,
+      protein = Core.Nothing,
+      proteinDailyPercentage = Core.Nothing,
+      saturatedFat = Core.Nothing,
+      saturatedFatDailyPercentage = Core.Nothing,
+      servingSizeDescription = Core.Nothing,
+      servingSizeMeasure = Core.Nothing,
+      servingsPerContainer = Core.Nothing,
+      sodium = Core.Nothing,
+      sodiumDailyPercentage = Core.Nothing,
+      starch = Core.Nothing,
+      totalCarbohydrate = Core.Nothing,
+      totalCarbohydrateDailyPercentage = Core.Nothing,
+      totalFat = Core.Nothing,
+      totalFatDailyPercentage = Core.Nothing,
+      totalSugars = Core.Nothing,
+      totalSugarsDailyPercentage = Core.Nothing,
+      transFat = Core.Nothing,
+      transFatDailyPercentage = Core.Nothing,
+      vitaminD = Core.Nothing,
+      vitaminDDailyPercentage = Core.Nothing,
+      voluntaryNutritionFact = Core.Nothing
+    }
+
+instance Core.FromJSON Nutrition where
+  parseJSON =
+    Core.withObject
+      "Nutrition"
+      ( \o ->
+          Nutrition
+            Core.<$> (o Core..:? "addedSugars")
+            Core.<*> (o Core..:? "addedSugarsDailyPercentage")
+            Core.<*> (o Core..:? "calcium")
+            Core.<*> (o Core..:? "calciumDailyPercentage")
+            Core.<*> (o Core..:? "cholesterol")
+            Core.<*> (o Core..:? "cholesterolDailyPercentage")
+            Core.<*> (o Core..:? "dietaryFiber")
+            Core.<*> (o Core..:? "dietaryFiberDailyPercentage")
+            Core.<*> (o Core..:? "energy")
+            Core.<*> (o Core..:? "energyFromFat")
+            Core.<*> (o Core..:? "folateDailyPercentage")
+            Core.<*> (o Core..:? "folateFolicAcid")
+            Core.<*> (o Core..:? "folateMcgDfe")
+            Core.<*> (o Core..:? "iron")
+            Core.<*> (o Core..:? "ironDailyPercentage")
+            Core.<*> (o Core..:? "monounsaturatedFat")
+            Core.<*> (o Core..:? "nutritionFactMeasure")
+            Core.<*> (o Core..:? "polyols")
+            Core.<*> (o Core..:? "polyunsaturatedFat")
+            Core.<*> (o Core..:? "potassium")
+            Core.<*> (o Core..:? "potassiumDailyPercentage")
+            Core.<*> (o Core..:? "preparedSizeDescription")
+            Core.<*> (o Core..:? "protein")
+            Core.<*> (o Core..:? "proteinDailyPercentage")
+            Core.<*> (o Core..:? "saturatedFat")
+            Core.<*> (o Core..:? "saturatedFatDailyPercentage")
+            Core.<*> (o Core..:? "servingSizeDescription")
+            Core.<*> (o Core..:? "servingSizeMeasure")
+            Core.<*> (o Core..:? "servingsPerContainer")
+            Core.<*> (o Core..:? "sodium")
+            Core.<*> (o Core..:? "sodiumDailyPercentage")
+            Core.<*> (o Core..:? "starch")
+            Core.<*> (o Core..:? "totalCarbohydrate")
+            Core.<*> (o Core..:? "totalCarbohydrateDailyPercentage")
+            Core.<*> (o Core..:? "totalFat")
+            Core.<*> (o Core..:? "totalFatDailyPercentage")
+            Core.<*> (o Core..:? "totalSugars")
+            Core.<*> (o Core..:? "totalSugarsDailyPercentage")
+            Core.<*> (o Core..:? "transFat")
+            Core.<*> (o Core..:? "transFatDailyPercentage")
+            Core.<*> (o Core..:? "vitaminD")
+            Core.<*> (o Core..:? "vitaminDDailyPercentage")
+            Core.<*> (o Core..:? "voluntaryNutritionFact")
+      )
+
+instance Core.ToJSON Nutrition where
+  toJSON Nutrition {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("addedSugars" Core..=) Core.<$> addedSugars,
+            ("addedSugarsDailyPercentage" Core..=)
+              Core.<$> addedSugarsDailyPercentage,
+            ("calcium" Core..=) Core.<$> calcium,
+            ("calciumDailyPercentage" Core..=)
+              Core.<$> calciumDailyPercentage,
+            ("cholesterol" Core..=) Core.<$> cholesterol,
+            ("cholesterolDailyPercentage" Core..=)
+              Core.<$> cholesterolDailyPercentage,
+            ("dietaryFiber" Core..=) Core.<$> dietaryFiber,
+            ("dietaryFiberDailyPercentage" Core..=)
+              Core.<$> dietaryFiberDailyPercentage,
+            ("energy" Core..=) Core.<$> energy,
+            ("energyFromFat" Core..=) Core.<$> energyFromFat,
+            ("folateDailyPercentage" Core..=)
+              Core.<$> folateDailyPercentage,
+            ("folateFolicAcid" Core..=) Core.<$> folateFolicAcid,
+            ("folateMcgDfe" Core..=) Core.<$> folateMcgDfe,
+            ("iron" Core..=) Core.<$> iron,
+            ("ironDailyPercentage" Core..=)
+              Core.<$> ironDailyPercentage,
+            ("monounsaturatedFat" Core..=)
+              Core.<$> monounsaturatedFat,
+            ("nutritionFactMeasure" Core..=)
+              Core.<$> nutritionFactMeasure,
+            ("polyols" Core..=) Core.<$> polyols,
+            ("polyunsaturatedFat" Core..=)
+              Core.<$> polyunsaturatedFat,
+            ("potassium" Core..=) Core.<$> potassium,
+            ("potassiumDailyPercentage" Core..=)
+              Core.<$> potassiumDailyPercentage,
+            ("preparedSizeDescription" Core..=)
+              Core.<$> preparedSizeDescription,
+            ("protein" Core..=) Core.<$> protein,
+            ("proteinDailyPercentage" Core..=)
+              Core.<$> proteinDailyPercentage,
+            ("saturatedFat" Core..=) Core.<$> saturatedFat,
+            ("saturatedFatDailyPercentage" Core..=)
+              Core.<$> saturatedFatDailyPercentage,
+            ("servingSizeDescription" Core..=)
+              Core.<$> servingSizeDescription,
+            ("servingSizeMeasure" Core..=)
+              Core.<$> servingSizeMeasure,
+            ("servingsPerContainer" Core..=)
+              Core.<$> servingsPerContainer,
+            ("sodium" Core..=) Core.<$> sodium,
+            ("sodiumDailyPercentage" Core..=)
+              Core.<$> sodiumDailyPercentage,
+            ("starch" Core..=) Core.<$> starch,
+            ("totalCarbohydrate" Core..=)
+              Core.<$> totalCarbohydrate,
+            ("totalCarbohydrateDailyPercentage" Core..=)
+              Core.<$> totalCarbohydrateDailyPercentage,
+            ("totalFat" Core..=) Core.<$> totalFat,
+            ("totalFatDailyPercentage" Core..=)
+              Core.<$> totalFatDailyPercentage,
+            ("totalSugars" Core..=) Core.<$> totalSugars,
+            ("totalSugarsDailyPercentage" Core..=)
+              Core.<$> totalSugarsDailyPercentage,
+            ("transFat" Core..=) Core.<$> transFat,
+            ("transFatDailyPercentage" Core..=)
+              Core.<$> transFatDailyPercentage,
+            ("vitaminD" Core..=) Core.<$> vitaminD,
+            ("vitaminDDailyPercentage" Core..=)
+              Core.<$> vitaminDDailyPercentage,
+            ("voluntaryNutritionFact" Core..=)
+              Core.<$> voluntaryNutritionFact
           ]
       )
 
@@ -721,6 +1241,86 @@ instance Core.ToJSON Product where
           ]
       )
 
+-- | Product certification data.
+--
+-- /See:/ 'newProductCertification' smart constructor.
+data ProductCertification = ProductCertification
+  { -- | Required. This is the product\'s brand name. The brand is used to help identify your product.
+    brand :: (Core.Maybe Core.Text),
+    -- | Required. A list of certifications to link to the described product.
+    certification :: (Core.Maybe [Certification]),
+    -- | Optional. A 2-letter country code (ISO 3166-1 Alpha 2).
+    countryCode :: (Core.Maybe [Core.Text]),
+    -- | Output only. The statuses of the destinations.
+    destinationStatuses :: (Core.Maybe [DestinationStatus]),
+    -- | Output only. A server-generated list of issues associated with the product.
+    issues :: (Core.Maybe [Issue]),
+    -- | Optional. These are the Manufacturer Part Numbers (MPN). MPNs are used to uniquely identify a specific product among all products from the same manufacturer
+    mpn :: (Core.Maybe [Core.Text]),
+    -- | Required. The unique name identifier of a product certification Format: accounts\/{account}\/languages\/{language_code}\/productCertifications\/{id} Where @id@ is a some unique identifier and @language_code@ is a 2-letter ISO 639-1 code of a Shopping supported language according to https:\/\/support.google.com\/merchants\/answer\/160637.
+    name :: (Core.Maybe Core.Text),
+    -- | Optional. Another name for GTIN.
+    productCode :: (Core.Maybe [Core.Text]),
+    -- | Optional. These are your own product categorization system in your product data.
+    productType :: (Core.Maybe [Core.Text]),
+    -- | Required. This is to clearly identify the product you are certifying.
+    title :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ProductCertification' with the minimum fields required to make a request.
+newProductCertification ::
+  ProductCertification
+newProductCertification =
+  ProductCertification
+    { brand = Core.Nothing,
+      certification = Core.Nothing,
+      countryCode = Core.Nothing,
+      destinationStatuses = Core.Nothing,
+      issues = Core.Nothing,
+      mpn = Core.Nothing,
+      name = Core.Nothing,
+      productCode = Core.Nothing,
+      productType = Core.Nothing,
+      title = Core.Nothing
+    }
+
+instance Core.FromJSON ProductCertification where
+  parseJSON =
+    Core.withObject
+      "ProductCertification"
+      ( \o ->
+          ProductCertification
+            Core.<$> (o Core..:? "brand")
+            Core.<*> (o Core..:? "certification")
+            Core.<*> (o Core..:? "countryCode")
+            Core.<*> (o Core..:? "destinationStatuses")
+            Core.<*> (o Core..:? "issues")
+            Core.<*> (o Core..:? "mpn")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "productCode")
+            Core.<*> (o Core..:? "productType")
+            Core.<*> (o Core..:? "title")
+      )
+
+instance Core.ToJSON ProductCertification where
+  toJSON ProductCertification {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("brand" Core..=) Core.<$> brand,
+            ("certification" Core..=) Core.<$> certification,
+            ("countryCode" Core..=) Core.<$> countryCode,
+            ("destinationStatuses" Core..=)
+              Core.<$> destinationStatuses,
+            ("issues" Core..=) Core.<$> issues,
+            ("mpn" Core..=) Core.<$> mpn,
+            ("name" Core..=) Core.<$> name,
+            ("productCode" Core..=) Core.<$> productCode,
+            ("productType" Core..=) Core.<$> productType,
+            ("title" Core..=) Core.<$> title
+          ]
+      )
+
 -- | A product detail of the product. For more information, see https:\/\/support.google.com\/manufacturers\/answer\/6124116#productdetail.
 --
 -- /See:/ 'newProductDetail' smart constructor.
@@ -762,5 +1362,50 @@ instance Core.ToJSON ProductDetail where
           [ ("attributeName" Core..=) Core.<$> attributeName,
             ("attributeValue" Core..=) Core.<$> attributeValue,
             ("sectionName" Core..=) Core.<$> sectionName
+          ]
+      )
+
+-- | Voluntary Nutrition Facts.
+--
+-- /See:/ 'newVoluntaryNutritionFact' smart constructor.
+data VoluntaryNutritionFact = VoluntaryNutritionFact
+  { -- | Daily percentage.
+    dailyPercentage :: (Core.Maybe Core.Double),
+    -- | Name.
+    name :: (Core.Maybe Core.Text),
+    -- | Value.
+    value :: (Core.Maybe FloatUnit)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'VoluntaryNutritionFact' with the minimum fields required to make a request.
+newVoluntaryNutritionFact ::
+  VoluntaryNutritionFact
+newVoluntaryNutritionFact =
+  VoluntaryNutritionFact
+    { dailyPercentage = Core.Nothing,
+      name = Core.Nothing,
+      value = Core.Nothing
+    }
+
+instance Core.FromJSON VoluntaryNutritionFact where
+  parseJSON =
+    Core.withObject
+      "VoluntaryNutritionFact"
+      ( \o ->
+          VoluntaryNutritionFact
+            Core.<$> (o Core..:? "dailyPercentage")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "value")
+      )
+
+instance Core.ToJSON VoluntaryNutritionFact where
+  toJSON VoluntaryNutritionFact {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("dailyPercentage" Core..=)
+              Core.<$> dailyPercentage,
+            ("name" Core..=) Core.<$> name,
+            ("value" Core..=) Core.<$> value
           ]
       )

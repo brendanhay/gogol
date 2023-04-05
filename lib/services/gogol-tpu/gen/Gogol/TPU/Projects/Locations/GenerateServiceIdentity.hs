@@ -45,7 +45,7 @@ import Gogol.TPU.Types
 -- | A resource alias for @tpu.projects.locations.generateServiceIdentity@ method which the
 -- 'TPUProjectsLocationsGenerateServiceIdentity' request conforms to.
 type TPUProjectsLocationsGenerateServiceIdentityResource =
-  "v2alpha1"
+  "v2"
     Core.:> Core.CaptureMode
               "parent"
               "generateServiceIdentity"

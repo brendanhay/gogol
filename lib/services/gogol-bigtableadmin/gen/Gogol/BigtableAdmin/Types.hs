@@ -120,6 +120,18 @@ module Gogol.BigtableAdmin.Types
     ColumnFamily (..),
     newColumnFamily,
 
+    -- ** ColumnFamilyStats
+    ColumnFamilyStats (..),
+    newColumnFamilyStats,
+
+    -- ** CopyBackupMetadata
+    CopyBackupMetadata (..),
+    newCopyBackupMetadata,
+
+    -- ** CopyBackupRequest
+    CopyBackupRequest (..),
+    newCopyBackupRequest,
+
     -- ** CreateBackupMetadata
     CreateBackupMetadata (..),
     newCreateBackupMetadata,
@@ -195,6 +207,10 @@ module Gogol.BigtableAdmin.Types
     GetPolicyOptions (..),
     newGetPolicyOptions,
 
+    -- ** HotTablet
+    HotTablet (..),
+    newHotTablet,
+
     -- ** Instance
     Instance (..),
     newInstance,
@@ -224,6 +240,10 @@ module Gogol.BigtableAdmin.Types
     -- ** ListClustersResponse
     ListClustersResponse (..),
     newListClustersResponse,
+
+    -- ** ListHotTabletsResponse
+    ListHotTabletsResponse (..),
+    newListHotTabletsResponse,
 
     -- ** ListInstancesResponse
     ListInstancesResponse (..),
@@ -361,6 +381,10 @@ module Gogol.BigtableAdmin.Types
     -- ** TableProgress_State
     TableProgress_State (..),
 
+    -- ** TableStats
+    TableStats (..),
+    newTableStats,
+
     -- ** TestIamPermissionsRequest
     TestIamPermissionsRequest (..),
     newTestIamPermissionsRequest,
@@ -368,6 +392,14 @@ module Gogol.BigtableAdmin.Types
     -- ** TestIamPermissionsResponse
     TestIamPermissionsResponse (..),
     newTestIamPermissionsResponse,
+
+    -- ** UndeleteTableMetadata
+    UndeleteTableMetadata (..),
+    newUndeleteTableMetadata,
+
+    -- ** UndeleteTableRequest
+    UndeleteTableRequest (..),
+    newUndeleteTableRequest,
 
     -- ** Union
     Union (..),
@@ -384,6 +416,10 @@ module Gogol.BigtableAdmin.Types
     -- ** UpdateInstanceMetadata
     UpdateInstanceMetadata (..),
     newUpdateInstanceMetadata,
+
+    -- ** UpdateTableMetadata
+    UpdateTableMetadata (..),
+    newUpdateTableMetadata,
 
     -- ** ProjectsInstancesTablesGetView
     ProjectsInstancesTablesGetView (..),

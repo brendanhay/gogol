@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a Interconnect in the specified project using the data included in the request.
+-- Creates an Interconnect in the specified project using the data included in the request.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.interconnects.insert@.
 module Gogol.Compute.Interconnects.Insert
@@ -61,7 +61,7 @@ type ComputeInterconnectsInsertResource =
     Core.:> Core.ReqBody '[Core.JSON] Interconnect
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Creates a Interconnect in the specified project using the data included in the request.
+-- | Creates an Interconnect in the specified project using the data included in the request.
 --
 -- /See:/ 'newComputeInterconnectsInsert' smart constructor.
 data ComputeInterconnectsInsert = ComputeInterconnectsInsert

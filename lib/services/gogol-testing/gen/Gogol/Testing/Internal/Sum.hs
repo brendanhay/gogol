@@ -101,6 +101,26 @@ module Gogol.Testing.Internal.Sum
         ..
       ),
 
+    -- * PerAndroidVersionInfo_DeviceCapacity
+    PerAndroidVersionInfo_DeviceCapacity
+      ( PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYUNSPECIFIED,
+        PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYHIGH,
+        PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYMEDIUM,
+        PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYLOW,
+        PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYNONE,
+        ..
+      ),
+
+    -- * PerIosVersionInfo_DeviceCapacity
+    PerIosVersionInfo_DeviceCapacity
+      ( PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYUNSPECIFIED,
+        PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYHIGH,
+        PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYMEDIUM,
+        PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYLOW,
+        PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYNONE,
+        ..
+      ),
+
     -- * RoboDirective_ActionType
     RoboDirective_ActionType
       ( RoboDirective_ActionType_ACTIONTYPEUNSPECIFIED,
@@ -163,6 +183,10 @@ module Gogol.Testing.Internal.Sum
         TestMatrix_InvalidMatrixDetails_NOCODEAPK,
         TestMatrix_InvalidMatrixDetails_INVALIDINPUTAPK,
         TestMatrix_InvalidMatrixDetails_INVALIDAPKPREVIEWSDK,
+        TestMatrix_InvalidMatrixDetails_MATRIXTOOLARGE,
+        TestMatrix_InvalidMatrixDetails_TESTQUOTAEXCEEDED,
+        TestMatrix_InvalidMatrixDetails_SERVICENOTACTIVATED,
+        TestMatrix_InvalidMatrixDetails_UNKNOWNPERMISSIONERROR,
         ..
       ),
 
@@ -518,6 +542,90 @@ pattern IosModel_FormFactor_Wearable = IosModel_FormFactor "WEARABLE"
   IosModel_FormFactor
   #-}
 
+-- | The number of online devices for an Android version.
+newtype PerAndroidVersionInfo_DeviceCapacity = PerAndroidVersionInfo_DeviceCapacity {fromPerAndroidVersionInfo_DeviceCapacity :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The value of device capacity is unknown or unset.
+pattern PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYUNSPECIFIED :: PerAndroidVersionInfo_DeviceCapacity
+pattern PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYUNSPECIFIED = PerAndroidVersionInfo_DeviceCapacity "DEVICE_CAPACITY_UNSPECIFIED"
+
+-- | Devices that are high in capacity (The lab has a large number of these devices). These devices are generally suggested for running a large number of simultaneous tests (e.g. more than 100 tests). Please note that high capacity devices do not guarantee short wait times due to several factors: 1. Traffic (how heavily they are used at any given moment) 2. High capacity devices are prioritized for certain usages, which may cause user tests to be slower than selecting other similar device types.
+pattern PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYHIGH :: PerAndroidVersionInfo_DeviceCapacity
+pattern PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYHIGH = PerAndroidVersionInfo_DeviceCapacity "DEVICE_CAPACITY_HIGH"
+
+-- | Devices that are medium in capacity (The lab has a decent number of these devices, though not as many as high capacity devices). These devices are suitable for fewer test runs (e.g. fewer than 100 tests) and only for low shard counts (e.g. less than 10 shards).
+pattern PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYMEDIUM :: PerAndroidVersionInfo_DeviceCapacity
+pattern PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYMEDIUM = PerAndroidVersionInfo_DeviceCapacity "DEVICE_CAPACITY_MEDIUM"
+
+-- | Devices that are low in capacity (The lab has a small number of these devices). These devices may be used if users need to test on this specific device model and version. Please note that due to low capacity, the tests may take much longer to finish, especially if a large number of tests are invoked at once. These devices are not suitable for test sharding.
+pattern PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYLOW :: PerAndroidVersionInfo_DeviceCapacity
+pattern PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYLOW = PerAndroidVersionInfo_DeviceCapacity "DEVICE_CAPACITY_LOW"
+
+-- | Devices that are completely missing from the lab. These devices are unavailable either temporarily or permanently and should not be requested. If the device is also marked as deprecated, this state is very likely permanent.
+pattern PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYNONE :: PerAndroidVersionInfo_DeviceCapacity
+pattern PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYNONE = PerAndroidVersionInfo_DeviceCapacity "DEVICE_CAPACITY_NONE"
+
+{-# COMPLETE
+  PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYUNSPECIFIED,
+  PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYHIGH,
+  PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYMEDIUM,
+  PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYLOW,
+  PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYNONE,
+  PerAndroidVersionInfo_DeviceCapacity
+  #-}
+
+-- | The number of online devices for an iOS version.
+newtype PerIosVersionInfo_DeviceCapacity = PerIosVersionInfo_DeviceCapacity {fromPerIosVersionInfo_DeviceCapacity :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The value of device capacity is unknown or unset.
+pattern PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYUNSPECIFIED :: PerIosVersionInfo_DeviceCapacity
+pattern PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYUNSPECIFIED = PerIosVersionInfo_DeviceCapacity "DEVICE_CAPACITY_UNSPECIFIED"
+
+-- | Devices that are high in capacity (The lab has a large number of these devices). These devices are generally suggested for running a large number of simultaneous tests (e.g. more than 100 tests). Please note that high capacity devices do not guarantee short wait times due to several factors: 1. Traffic (how heavily they are used at any given moment) 2. High capacity devices are prioritized for certain usages, which may cause user tests to be slower than selecting other similar device types.
+pattern PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYHIGH :: PerIosVersionInfo_DeviceCapacity
+pattern PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYHIGH = PerIosVersionInfo_DeviceCapacity "DEVICE_CAPACITY_HIGH"
+
+-- | Devices that are medium in capacity (The lab has a decent number of these devices, though not as many as high capacity devices). These devices are suitable for fewer test runs (e.g. fewer than 100 tests) and only for low shard counts (e.g. less than 10 shards).
+pattern PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYMEDIUM :: PerIosVersionInfo_DeviceCapacity
+pattern PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYMEDIUM = PerIosVersionInfo_DeviceCapacity "DEVICE_CAPACITY_MEDIUM"
+
+-- | Devices that are low in capacity (The lab has a small number of these devices). These devices may be used if users need to test on this specific device model and version. Please note that due to low capacity, the tests may take much longer to finish, especially if a large number of tests are invoked at once. These devices are not suitable for test sharding.
+pattern PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYLOW :: PerIosVersionInfo_DeviceCapacity
+pattern PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYLOW = PerIosVersionInfo_DeviceCapacity "DEVICE_CAPACITY_LOW"
+
+-- | Devices that are completely missing from the lab. These devices are unavailable either temporarily or permanently and should not be requested. If the device is also marked as deprecated, this state is very likely permanent.
+pattern PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYNONE :: PerIosVersionInfo_DeviceCapacity
+pattern PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYNONE = PerIosVersionInfo_DeviceCapacity "DEVICE_CAPACITY_NONE"
+
+{-# COMPLETE
+  PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYUNSPECIFIED,
+  PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYHIGH,
+  PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYMEDIUM,
+  PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYLOW,
+  PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYNONE,
+  PerIosVersionInfo_DeviceCapacity
+  #-}
+
 -- | Required. The type of action that Robo should perform on the specified element.
 newtype RoboDirective_ActionType = RoboDirective_ActionType {fromRoboDirective_ActionType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -780,6 +888,22 @@ pattern TestMatrix_InvalidMatrixDetails_INVALIDINPUTAPK = TestMatrix_InvalidMatr
 pattern TestMatrix_InvalidMatrixDetails_INVALIDAPKPREVIEWSDK :: TestMatrix_InvalidMatrixDetails
 pattern TestMatrix_InvalidMatrixDetails_INVALIDAPKPREVIEWSDK = TestMatrix_InvalidMatrixDetails "INVALID_APK_PREVIEW_SDK"
 
+-- | The matrix expanded to contain too many executions.
+pattern TestMatrix_InvalidMatrixDetails_MATRIXTOOLARGE :: TestMatrix_InvalidMatrixDetails
+pattern TestMatrix_InvalidMatrixDetails_MATRIXTOOLARGE = TestMatrix_InvalidMatrixDetails "MATRIX_TOO_LARGE"
+
+-- | Not enough test quota to run the executions in this matrix.
+pattern TestMatrix_InvalidMatrixDetails_TESTQUOTAEXCEEDED :: TestMatrix_InvalidMatrixDetails
+pattern TestMatrix_InvalidMatrixDetails_TESTQUOTAEXCEEDED = TestMatrix_InvalidMatrixDetails "TEST_QUOTA_EXCEEDED"
+
+-- | A required cloud service api is not activated. See: https:\/\/firebase.google.com\/docs\/test-lab\/android\/continuous#requirements
+pattern TestMatrix_InvalidMatrixDetails_SERVICENOTACTIVATED :: TestMatrix_InvalidMatrixDetails
+pattern TestMatrix_InvalidMatrixDetails_SERVICENOTACTIVATED = TestMatrix_InvalidMatrixDetails "SERVICE_NOT_ACTIVATED"
+
+-- | There was an unknown permission issue running this test.
+pattern TestMatrix_InvalidMatrixDetails_UNKNOWNPERMISSIONERROR :: TestMatrix_InvalidMatrixDetails
+pattern TestMatrix_InvalidMatrixDetails_UNKNOWNPERMISSIONERROR = TestMatrix_InvalidMatrixDetails "UNKNOWN_PERMISSION_ERROR"
+
 {-# COMPLETE
   TestMatrix_InvalidMatrixDetails_INVALIDMATRIXDETAILSUNSPECIFIED,
   TestMatrix_InvalidMatrixDetails_DETAILSUNAVAILABLE,
@@ -816,6 +940,10 @@ pattern TestMatrix_InvalidMatrixDetails_INVALIDAPKPREVIEWSDK = TestMatrix_Invali
   TestMatrix_InvalidMatrixDetails_NOCODEAPK,
   TestMatrix_InvalidMatrixDetails_INVALIDINPUTAPK,
   TestMatrix_InvalidMatrixDetails_INVALIDAPKPREVIEWSDK,
+  TestMatrix_InvalidMatrixDetails_MATRIXTOOLARGE,
+  TestMatrix_InvalidMatrixDetails_TESTQUOTAEXCEEDED,
+  TestMatrix_InvalidMatrixDetails_SERVICENOTACTIVATED,
+  TestMatrix_InvalidMatrixDetails_UNKNOWNPERMISSIONERROR,
   TestMatrix_InvalidMatrixDetails
   #-}
 

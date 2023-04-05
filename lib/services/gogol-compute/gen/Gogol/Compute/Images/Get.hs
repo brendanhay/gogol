@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified image. Gets a list of available images by making a list() request.
+-- Returns the specified image.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.images.get@.
 module Gogol.Compute.Images.Get
@@ -60,7 +60,7 @@ type ComputeImagesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Image
 
--- | Returns the specified image. Gets a list of available images by making a list() request.
+-- | Returns the specified image.
 --
 -- /See:/ 'newComputeImagesGet' smart constructor.
 data ComputeImagesGet = ComputeImagesGet

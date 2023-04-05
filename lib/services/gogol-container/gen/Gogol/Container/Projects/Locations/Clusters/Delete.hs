@@ -72,7 +72,7 @@ data ContainerProjectsLocationsClustersDelete = ContainerProjectsLocationsCluste
     clusterId :: (Core.Maybe Core.Text),
     -- | The name (project, location, cluster) of the cluster to delete. Specified in the format @projects\/*\/locations\/*\/clusters\/*@.
     name :: Core.Text,
-    -- | Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the name field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the name field.
     projectId :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),

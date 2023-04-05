@@ -38,6 +38,10 @@ module Gogol.Composer.Internal.Product
     CheckUpgradeResponse_PypiDependencies (..),
     newCheckUpgradeResponse_PypiDependencies,
 
+    -- * CidrBlock
+    CidrBlock (..),
+    newCidrBlock,
+
     -- * DatabaseConfig
     DatabaseConfig (..),
     newDatabaseConfig,
@@ -86,9 +90,25 @@ module Gogol.Composer.Internal.Product
     ListOperationsResponse (..),
     newListOperationsResponse,
 
+    -- * LoadSnapshotRequest
+    LoadSnapshotRequest (..),
+    newLoadSnapshotRequest,
+
+    -- * LoadSnapshotResponse
+    LoadSnapshotResponse (..),
+    newLoadSnapshotResponse,
+
     -- * MaintenanceWindow
     MaintenanceWindow (..),
     newMaintenanceWindow,
+
+    -- * MasterAuthorizedNetworksConfig
+    MasterAuthorizedNetworksConfig (..),
+    newMasterAuthorizedNetworksConfig,
+
+    -- * NetworkingConfig
+    NetworkingConfig (..),
+    newNetworkingConfig,
 
     -- * NodeConfig
     NodeConfig (..),
@@ -117,6 +137,22 @@ module Gogol.Composer.Internal.Product
     -- * PrivateEnvironmentConfig
     PrivateEnvironmentConfig (..),
     newPrivateEnvironmentConfig,
+
+    -- * RecoveryConfig
+    RecoveryConfig (..),
+    newRecoveryConfig,
+
+    -- * SaveSnapshotRequest
+    SaveSnapshotRequest (..),
+    newSaveSnapshotRequest,
+
+    -- * SaveSnapshotResponse
+    SaveSnapshotResponse (..),
+    newSaveSnapshotResponse,
+
+    -- * ScheduledSnapshotsConfig
+    ScheduledSnapshotsConfig (..),
+    newScheduledSnapshotsConfig,
 
     -- * SchedulerResource
     SchedulerResource (..),
@@ -300,6 +336,41 @@ instance
   toJSON CheckUpgradeResponse_PypiDependencies {..} =
     Core.toJSON additional
 
+-- | CIDR block with an optional name.
+--
+-- /See:/ 'newCidrBlock' smart constructor.
+data CidrBlock = CidrBlock
+  { -- | CIDR block that must be specified in CIDR notation.
+    cidrBlock :: (Core.Maybe Core.Text),
+    -- | User-defined name that identifies the CIDR block.
+    displayName :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CidrBlock' with the minimum fields required to make a request.
+newCidrBlock ::
+  CidrBlock
+newCidrBlock = CidrBlock {cidrBlock = Core.Nothing, displayName = Core.Nothing}
+
+instance Core.FromJSON CidrBlock where
+  parseJSON =
+    Core.withObject
+      "CidrBlock"
+      ( \o ->
+          CidrBlock
+            Core.<$> (o Core..:? "cidrBlock")
+            Core.<*> (o Core..:? "displayName")
+      )
+
+instance Core.ToJSON CidrBlock where
+  toJSON CidrBlock {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("cidrBlock" Core..=) Core.<$> cidrBlock,
+            ("displayName" Core..=) Core.<$> displayName
+          ]
+      )
+
 -- | The configuration of Cloud SQL instance that is used by the Apache Airflow software.
 --
 -- /See:/ 'newDatabaseConfig' smart constructor.
@@ -368,7 +439,7 @@ instance Core.ToJSON Date where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -511,7 +582,9 @@ instance Core.ToJSON Environment_Labels where
 --
 -- /See:/ 'newEnvironmentConfig' smart constructor.
 data EnvironmentConfig = EnvironmentConfig
-  { -- | Output only. The URI of the Apache Airflow Web UI hosted within this environment (see </composer/docs/how-to/accessing/airflow-web-interface Airflow web interface>).
+  { -- | Output only. The \'bring your own identity\' variant of the URI of the Apache Airflow Web UI hosted within this environment, to be accessed with external identities using workforce identity federation (see </composer/docs/composer-2/access-environments-with-workforce-identity-federation Access environments with workforce identity federation>).
+    airflowByoidUri :: (Core.Maybe Core.Text),
+    -- | Output only. The URI of the Apache Airflow Web UI hosted within this environment (see </composer/docs/how-to/accessing/airflow-web-interface Airflow web interface>).
     airflowUri :: (Core.Maybe Core.Text),
     -- | Output only. The Cloud Storage prefix of the DAGs for this environment. Although Cloud Storage objects reside in a flat namespace, a hierarchical file tree can be simulated using \"\/\"-delimited object name prefixes. DAG objects for this environment reside in a simulated directory with the given prefix.
     dagGcsPrefix :: (Core.Maybe Core.Text),
@@ -525,12 +598,16 @@ data EnvironmentConfig = EnvironmentConfig
     gkeCluster :: (Core.Maybe Core.Text),
     -- | Optional. The maintenance window is the period when Cloud Composer components may undergo maintenance. It is defined so that maintenance is not executed during peak hours or critical time periods. The system will not be under maintenance for every occurrence of this window, but when maintenance is planned, it will be scheduled during the window. The maintenance window period must encompass at least 12 hours per week. This may be split into multiple chunks, each with a size of at least 4 hours. If this value is omitted, the default value for maintenance window will be applied. The default value is Saturday and Sunday 00-06 GMT.
     maintenanceWindow :: (Core.Maybe MaintenanceWindow),
+    -- | Optional. The configuration options for GKE cluster master authorized networks. By default master authorized networks feature is: - in case of private environment: enabled with no external networks allowlisted. - in case of public environment: disabled.
+    masterAuthorizedNetworksConfig :: (Core.Maybe MasterAuthorizedNetworksConfig),
     -- | The configuration used for the Kubernetes Engine cluster.
     nodeConfig :: (Core.Maybe NodeConfig),
     -- | The number of nodes in the Kubernetes Engine cluster that will be used to run this environment. This field is supported for Cloud Composer environments in versions composer-1././-airflow-/./.*.
     nodeCount :: (Core.Maybe Core.Int32),
     -- | The configuration used for the Private IP Cloud Composer environment.
     privateEnvironmentConfig :: (Core.Maybe PrivateEnvironmentConfig),
+    -- | Optional. The Recovery settings configuration of an environment. This field is supported for Cloud Composer environments in versions composer-2././-airflow-/./.* and newer.
+    recoveryConfig :: (Core.Maybe RecoveryConfig),
     -- | The configuration settings for software inside the environment.
     softwareConfig :: (Core.Maybe SoftwareConfig),
     -- | Optional. The configuration settings for the Airflow web server App Engine instance.
@@ -547,16 +624,19 @@ newEnvironmentConfig ::
   EnvironmentConfig
 newEnvironmentConfig =
   EnvironmentConfig
-    { airflowUri = Core.Nothing,
+    { airflowByoidUri = Core.Nothing,
+      airflowUri = Core.Nothing,
       dagGcsPrefix = Core.Nothing,
       databaseConfig = Core.Nothing,
       encryptionConfig = Core.Nothing,
       environmentSize = Core.Nothing,
       gkeCluster = Core.Nothing,
       maintenanceWindow = Core.Nothing,
+      masterAuthorizedNetworksConfig = Core.Nothing,
       nodeConfig = Core.Nothing,
       nodeCount = Core.Nothing,
       privateEnvironmentConfig = Core.Nothing,
+      recoveryConfig = Core.Nothing,
       softwareConfig = Core.Nothing,
       webServerConfig = Core.Nothing,
       webServerNetworkAccessControl = Core.Nothing,
@@ -569,16 +649,19 @@ instance Core.FromJSON EnvironmentConfig where
       "EnvironmentConfig"
       ( \o ->
           EnvironmentConfig
-            Core.<$> (o Core..:? "airflowUri")
+            Core.<$> (o Core..:? "airflowByoidUri")
+            Core.<*> (o Core..:? "airflowUri")
             Core.<*> (o Core..:? "dagGcsPrefix")
             Core.<*> (o Core..:? "databaseConfig")
             Core.<*> (o Core..:? "encryptionConfig")
             Core.<*> (o Core..:? "environmentSize")
             Core.<*> (o Core..:? "gkeCluster")
             Core.<*> (o Core..:? "maintenanceWindow")
+            Core.<*> (o Core..:? "masterAuthorizedNetworksConfig")
             Core.<*> (o Core..:? "nodeConfig")
             Core.<*> (o Core..:? "nodeCount")
             Core.<*> (o Core..:? "privateEnvironmentConfig")
+            Core.<*> (o Core..:? "recoveryConfig")
             Core.<*> (o Core..:? "softwareConfig")
             Core.<*> (o Core..:? "webServerConfig")
             Core.<*> (o Core..:? "webServerNetworkAccessControl")
@@ -589,7 +672,9 @@ instance Core.ToJSON EnvironmentConfig where
   toJSON EnvironmentConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("airflowUri" Core..=) Core.<$> airflowUri,
+          [ ("airflowByoidUri" Core..=)
+              Core.<$> airflowByoidUri,
+            ("airflowUri" Core..=) Core.<$> airflowUri,
             ("dagGcsPrefix" Core..=) Core.<$> dagGcsPrefix,
             ("databaseConfig" Core..=) Core.<$> databaseConfig,
             ("encryptionConfig" Core..=)
@@ -598,10 +683,13 @@ instance Core.ToJSON EnvironmentConfig where
             ("gkeCluster" Core..=) Core.<$> gkeCluster,
             ("maintenanceWindow" Core..=)
               Core.<$> maintenanceWindow,
+            ("masterAuthorizedNetworksConfig" Core..=)
+              Core.<$> masterAuthorizedNetworksConfig,
             ("nodeConfig" Core..=) Core.<$> nodeConfig,
             ("nodeCount" Core..=) Core.<$> nodeCount,
             ("privateEnvironmentConfig" Core..=)
               Core.<$> privateEnvironmentConfig,
+            ("recoveryConfig" Core..=) Core.<$> recoveryConfig,
             ("softwareConfig" Core..=) Core.<$> softwareConfig,
             ("webServerConfig" Core..=) Core.<$> webServerConfig,
             ("webServerNetworkAccessControl" Core..=)
@@ -848,6 +936,84 @@ instance Core.ToJSON ListOperationsResponse where
           ]
       )
 
+-- | Request to load a snapshot into a Cloud Composer environment.
+--
+-- /See:/ 'newLoadSnapshotRequest' smart constructor.
+data LoadSnapshotRequest = LoadSnapshotRequest
+  { -- | Whether or not to skip setting Airflow overrides when loading the environment\'s state.
+    skipAirflowOverridesSetting :: (Core.Maybe Core.Bool),
+    -- | Whether or not to skip setting environment variables when loading the environment\'s state.
+    skipEnvironmentVariablesSetting :: (Core.Maybe Core.Bool),
+    -- | Whether or not to skip copying Cloud Storage data when loading the environment\'s state.
+    skipGcsDataCopying :: (Core.Maybe Core.Bool),
+    -- | Whether or not to skip installing Pypi packages when loading the environment\'s state.
+    skipPypiPackagesInstallation :: (Core.Maybe Core.Bool),
+    -- | A Cloud Storage path to a snapshot to load, e.g.: \"gs:\/\/my-bucket\/snapshots\/project/location/environment_timestamp\".
+    snapshotPath :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LoadSnapshotRequest' with the minimum fields required to make a request.
+newLoadSnapshotRequest ::
+  LoadSnapshotRequest
+newLoadSnapshotRequest =
+  LoadSnapshotRequest
+    { skipAirflowOverridesSetting = Core.Nothing,
+      skipEnvironmentVariablesSetting = Core.Nothing,
+      skipGcsDataCopying = Core.Nothing,
+      skipPypiPackagesInstallation = Core.Nothing,
+      snapshotPath = Core.Nothing
+    }
+
+instance Core.FromJSON LoadSnapshotRequest where
+  parseJSON =
+    Core.withObject
+      "LoadSnapshotRequest"
+      ( \o ->
+          LoadSnapshotRequest
+            Core.<$> (o Core..:? "skipAirflowOverridesSetting")
+            Core.<*> (o Core..:? "skipEnvironmentVariablesSetting")
+            Core.<*> (o Core..:? "skipGcsDataCopying")
+            Core.<*> (o Core..:? "skipPypiPackagesInstallation")
+            Core.<*> (o Core..:? "snapshotPath")
+      )
+
+instance Core.ToJSON LoadSnapshotRequest where
+  toJSON LoadSnapshotRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("skipAirflowOverridesSetting" Core..=)
+              Core.<$> skipAirflowOverridesSetting,
+            ("skipEnvironmentVariablesSetting" Core..=)
+              Core.<$> skipEnvironmentVariablesSetting,
+            ("skipGcsDataCopying" Core..=)
+              Core.<$> skipGcsDataCopying,
+            ("skipPypiPackagesInstallation" Core..=)
+              Core.<$> skipPypiPackagesInstallation,
+            ("snapshotPath" Core..=) Core.<$> snapshotPath
+          ]
+      )
+
+-- | Response to LoadSnapshotRequest.
+--
+-- /See:/ 'newLoadSnapshotResponse' smart constructor.
+data LoadSnapshotResponse = LoadSnapshotResponse
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LoadSnapshotResponse' with the minimum fields required to make a request.
+newLoadSnapshotResponse ::
+  LoadSnapshotResponse
+newLoadSnapshotResponse = LoadSnapshotResponse
+
+instance Core.FromJSON LoadSnapshotResponse where
+  parseJSON =
+    Core.withObject
+      "LoadSnapshotResponse"
+      (\o -> Core.pure LoadSnapshotResponse)
+
+instance Core.ToJSON LoadSnapshotResponse where
+  toJSON = Core.const Core.emptyObject
+
 -- | The configuration settings for Cloud Composer maintenance window. The following example: @{ \"startTime\":\"2019-08-01T01:00:00Z\" \"endTime\":\"2019-08-01T07:00:00Z\" \"recurrence\":\"FREQ=WEEKLY;BYDAY=TU,WE\" }@ would define a maintenance window between 01 and 07 hours UTC during each Tuesday and Wednesday.
 --
 -- /See:/ 'newMaintenanceWindow' smart constructor.
@@ -892,12 +1058,83 @@ instance Core.ToJSON MaintenanceWindow where
           ]
       )
 
+-- | Configuration options for the master authorized networks feature. Enabled master authorized networks will disallow all external traffic to access Kubernetes master through HTTPS except traffic from the given CIDR blocks, Google Compute Engine Public IPs and Google Prod IPs.
+--
+-- /See:/ 'newMasterAuthorizedNetworksConfig' smart constructor.
+data MasterAuthorizedNetworksConfig = MasterAuthorizedNetworksConfig
+  { -- | Up to 50 external networks that could access Kubernetes master through HTTPS.
+    cidrBlocks :: (Core.Maybe [CidrBlock]),
+    -- | Whether or not master authorized networks feature is enabled.
+    enabled :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MasterAuthorizedNetworksConfig' with the minimum fields required to make a request.
+newMasterAuthorizedNetworksConfig ::
+  MasterAuthorizedNetworksConfig
+newMasterAuthorizedNetworksConfig =
+  MasterAuthorizedNetworksConfig
+    { cidrBlocks = Core.Nothing,
+      enabled = Core.Nothing
+    }
+
+instance Core.FromJSON MasterAuthorizedNetworksConfig where
+  parseJSON =
+    Core.withObject
+      "MasterAuthorizedNetworksConfig"
+      ( \o ->
+          MasterAuthorizedNetworksConfig
+            Core.<$> (o Core..:? "cidrBlocks")
+            Core.<*> (o Core..:? "enabled")
+      )
+
+instance Core.ToJSON MasterAuthorizedNetworksConfig where
+  toJSON MasterAuthorizedNetworksConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("cidrBlocks" Core..=) Core.<$> cidrBlocks,
+            ("enabled" Core..=) Core.<$> enabled
+          ]
+      )
+
+-- | Configuration options for networking connections in the Composer 2 environment.
+--
+-- /See:/ 'newNetworkingConfig' smart constructor.
+newtype NetworkingConfig = NetworkingConfig
+  { -- | Optional. Indicates the user requested specifc connection type between Tenant and Customer projects. You cannot set networking connection type in public IP environment.
+    connectionType :: (Core.Maybe NetworkingConfig_ConnectionType)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NetworkingConfig' with the minimum fields required to make a request.
+newNetworkingConfig ::
+  NetworkingConfig
+newNetworkingConfig = NetworkingConfig {connectionType = Core.Nothing}
+
+instance Core.FromJSON NetworkingConfig where
+  parseJSON =
+    Core.withObject
+      "NetworkingConfig"
+      ( \o ->
+          NetworkingConfig
+            Core.<$> (o Core..:? "connectionType")
+      )
+
+instance Core.ToJSON NetworkingConfig where
+  toJSON NetworkingConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [("connectionType" Core..=) Core.<$> connectionType]
+      )
+
 -- | The configuration information for the Kubernetes Engine nodes running the Apache Airflow software.
 --
 -- /See:/ 'newNodeConfig' smart constructor.
 data NodeConfig = NodeConfig
-  { -- | Optional. The disk size in GB used for node VMs. Minimum size is 20GB. If unspecified, defaults to 100GB. Cannot be updated. This field is supported for Cloud Composer environments in versions composer-1././-airflow-/./.*.
+  { -- | Optional. The disk size in GB used for node VMs. Minimum size is 30GB. If unspecified, defaults to 100GB. Cannot be updated. This field is supported for Cloud Composer environments in versions composer-1././-airflow-/./.*.
     diskSizeGb :: (Core.Maybe Core.Int32),
+    -- | Optional. Deploys \'ip-masq-agent\' daemon set in the GKE cluster and defines nonMasqueradeCIDRs equals to pod IP range so IP masquerading is used for all destination addresses, except between pods traffic. See: https:\/\/cloud.google.com\/kubernetes-engine\/docs\/how-to\/ip-masquerade-agent
+    enableIpMasqAgent :: (Core.Maybe Core.Bool),
     -- | Optional. The configuration for controlling how IPs are allocated in the GKE cluster.
     ipAllocationPolicy :: (Core.Maybe IPAllocationPolicy),
     -- | Optional. The Compute Engine </compute/docs/regions-zones zone> in which to deploy the VMs used to run the Apache Airflow software, specified as a </apis/design/resource_names#relative_resource_name relative resource name>. For example: \"projects\/{projectId}\/zones\/{zoneId}\". This @location@ must belong to the enclosing environment\'s project and location. If both this field and @nodeConfig.machineType@ are specified, @nodeConfig.machineType@ must belong to this @location@; if both are unspecified, the service will pick a zone in the Compute Engine region corresponding to the Cloud Composer location, and propagate that choice to both fields. If only one field (@location@ or @nodeConfig.machineType@) is specified, the location information from the specified field will be propagated to the unspecified field. This field is supported for Cloud Composer environments in versions composer-1././-airflow-/./.*.
@@ -913,7 +1150,7 @@ data NodeConfig = NodeConfig
     serviceAccount :: (Core.Maybe Core.Text),
     -- | Optional. The Compute Engine subnetwork to be used for machine communications, specified as a </apis/design/resource_names#relative_resource_name relative resource name>. For example: \"projects\/{projectId}\/regions\/{regionId}\/subnetworks\/{subnetworkId}\" If a subnetwork is provided, @nodeConfig.network@ must also be provided, and the subnetwork must belong to the enclosing environment\'s project and location.
     subnetwork :: (Core.Maybe Core.Text),
-    -- | Optional. The list of instance tags applied to all node VMs. Tags are used to identify valid sources or targets for network firewalls. Each tag within the list must comply with <https://www.ietf.org/rfc/rfc1035.txt RFC1035>. Cannot be updated. This field is supported for Cloud Composer environments in versions composer-1././-airflow-/./.*.
+    -- | Optional. The list of instance tags applied to all node VMs. Tags are used to identify valid sources or targets for network firewalls. Each tag within the list must comply with <https://www.ietf.org/rfc/rfc1035.txt RFC1035>. Cannot be updated.
     tags :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -924,6 +1161,7 @@ newNodeConfig ::
 newNodeConfig =
   NodeConfig
     { diskSizeGb = Core.Nothing,
+      enableIpMasqAgent = Core.Nothing,
       ipAllocationPolicy = Core.Nothing,
       location = Core.Nothing,
       machineType = Core.Nothing,
@@ -941,6 +1179,7 @@ instance Core.FromJSON NodeConfig where
       ( \o ->
           NodeConfig
             Core.<$> (o Core..:? "diskSizeGb")
+            Core.<*> (o Core..:? "enableIpMasqAgent")
             Core.<*> (o Core..:? "ipAllocationPolicy")
             Core.<*> (o Core..:? "location")
             Core.<*> (o Core..:? "machineType")
@@ -956,6 +1195,8 @@ instance Core.ToJSON NodeConfig where
     Core.object
       ( Core.catMaybes
           [ ("diskSizeGb" Core..=) Core.<$> diskSizeGb,
+            ("enableIpMasqAgent" Core..=)
+              Core.<$> enableIpMasqAgent,
             ("ipAllocationPolicy" Core..=)
               Core.<$> ipAllocationPolicy,
             ("location" Core..=) Core.<$> location,
@@ -1198,6 +1439,10 @@ data PrivateEnvironmentConfig = PrivateEnvironmentConfig
     cloudSqlIpv4CidrBlock :: (Core.Maybe Core.Text),
     -- | Optional. If @true@, a Private IP Cloud Composer environment is created. If this field is set to true, @IPAllocationPolicy.use_ip_aliases@ must be set to true for Cloud Composer environments in versions composer-1././-airflow-/./.*.
     enablePrivateEnvironment :: (Core.Maybe Core.Bool),
+    -- | Optional. When enabled, IPs from public (non-RFC1918) ranges can be used for @IPAllocationPolicy.cluster_ipv4_cidr_block@ and @IPAllocationPolicy.service_ipv4_cidr_block@.
+    enablePrivatelyUsedPublicIps :: (Core.Maybe Core.Bool),
+    -- | Optional. Configuration for the network connections configuration in the environment.
+    networkingConfig :: (Core.Maybe NetworkingConfig),
     -- | Optional. Configuration for the private GKE cluster for a Private IP Cloud Composer environment.
     privateClusterConfig :: (Core.Maybe PrivateClusterConfig),
     -- | Optional. The CIDR block from which IP range for web server will be reserved. Needs to be disjoint from @private_cluster_config.master_ipv4_cidr_block@ and @cloud_sql_ipv4_cidr_block@. This field is supported for Cloud Composer environments in versions composer-1././-airflow-/./.*.
@@ -1217,6 +1462,8 @@ newPrivateEnvironmentConfig =
       cloudComposerNetworkIpv4ReservedRange = Core.Nothing,
       cloudSqlIpv4CidrBlock = Core.Nothing,
       enablePrivateEnvironment = Core.Nothing,
+      enablePrivatelyUsedPublicIps = Core.Nothing,
+      networkingConfig = Core.Nothing,
       privateClusterConfig = Core.Nothing,
       webServerIpv4CidrBlock = Core.Nothing,
       webServerIpv4ReservedRange = Core.Nothing
@@ -1233,6 +1480,8 @@ instance Core.FromJSON PrivateEnvironmentConfig where
             Core.<*> (o Core..:? "cloudComposerNetworkIpv4ReservedRange")
             Core.<*> (o Core..:? "cloudSqlIpv4CidrBlock")
             Core.<*> (o Core..:? "enablePrivateEnvironment")
+            Core.<*> (o Core..:? "enablePrivatelyUsedPublicIps")
+            Core.<*> (o Core..:? "networkingConfig")
             Core.<*> (o Core..:? "privateClusterConfig")
             Core.<*> (o Core..:? "webServerIpv4CidrBlock")
             Core.<*> (o Core..:? "webServerIpv4ReservedRange")
@@ -1252,12 +1501,161 @@ instance Core.ToJSON PrivateEnvironmentConfig where
               Core.<$> cloudSqlIpv4CidrBlock,
             ("enablePrivateEnvironment" Core..=)
               Core.<$> enablePrivateEnvironment,
+            ("enablePrivatelyUsedPublicIps" Core..=)
+              Core.<$> enablePrivatelyUsedPublicIps,
+            ("networkingConfig" Core..=)
+              Core.<$> networkingConfig,
             ("privateClusterConfig" Core..=)
               Core.<$> privateClusterConfig,
             ("webServerIpv4CidrBlock" Core..=)
               Core.<$> webServerIpv4CidrBlock,
             ("webServerIpv4ReservedRange" Core..=)
               Core.<$> webServerIpv4ReservedRange
+          ]
+      )
+
+-- | The Recovery settings of an environment.
+--
+-- /See:/ 'newRecoveryConfig' smart constructor.
+newtype RecoveryConfig = RecoveryConfig
+  { -- | Optional. The configuration for scheduled snapshot creation mechanism.
+    scheduledSnapshotsConfig :: (Core.Maybe ScheduledSnapshotsConfig)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RecoveryConfig' with the minimum fields required to make a request.
+newRecoveryConfig ::
+  RecoveryConfig
+newRecoveryConfig = RecoveryConfig {scheduledSnapshotsConfig = Core.Nothing}
+
+instance Core.FromJSON RecoveryConfig where
+  parseJSON =
+    Core.withObject
+      "RecoveryConfig"
+      ( \o ->
+          RecoveryConfig
+            Core.<$> (o Core..:? "scheduledSnapshotsConfig")
+      )
+
+instance Core.ToJSON RecoveryConfig where
+  toJSON RecoveryConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("scheduledSnapshotsConfig" Core..=)
+              Core.<$> scheduledSnapshotsConfig
+          ]
+      )
+
+-- | Request to create a snapshot of a Cloud Composer environment.
+--
+-- /See:/ 'newSaveSnapshotRequest' smart constructor.
+newtype SaveSnapshotRequest = SaveSnapshotRequest
+  { -- | Location in a Cloud Storage where the snapshot is going to be stored, e.g.: \"gs:\/\/my-bucket\/snapshots\".
+    snapshotLocation :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SaveSnapshotRequest' with the minimum fields required to make a request.
+newSaveSnapshotRequest ::
+  SaveSnapshotRequest
+newSaveSnapshotRequest = SaveSnapshotRequest {snapshotLocation = Core.Nothing}
+
+instance Core.FromJSON SaveSnapshotRequest where
+  parseJSON =
+    Core.withObject
+      "SaveSnapshotRequest"
+      ( \o ->
+          SaveSnapshotRequest
+            Core.<$> (o Core..:? "snapshotLocation")
+      )
+
+instance Core.ToJSON SaveSnapshotRequest where
+  toJSON SaveSnapshotRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("snapshotLocation" Core..=)
+              Core.<$> snapshotLocation
+          ]
+      )
+
+-- | Response to SaveSnapshotRequest.
+--
+-- /See:/ 'newSaveSnapshotResponse' smart constructor.
+newtype SaveSnapshotResponse = SaveSnapshotResponse
+  { -- | The fully-resolved Cloud Storage path of the created snapshot, e.g.: \"gs:\/\/my-bucket\/snapshots\/project/location/environment_timestamp\". This field is populated only if the snapshot creation was successful.
+    snapshotPath :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SaveSnapshotResponse' with the minimum fields required to make a request.
+newSaveSnapshotResponse ::
+  SaveSnapshotResponse
+newSaveSnapshotResponse = SaveSnapshotResponse {snapshotPath = Core.Nothing}
+
+instance Core.FromJSON SaveSnapshotResponse where
+  parseJSON =
+    Core.withObject
+      "SaveSnapshotResponse"
+      ( \o ->
+          SaveSnapshotResponse
+            Core.<$> (o Core..:? "snapshotPath")
+      )
+
+instance Core.ToJSON SaveSnapshotResponse where
+  toJSON SaveSnapshotResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [("snapshotPath" Core..=) Core.<$> snapshotPath]
+      )
+
+-- | The configuration for scheduled snapshot creation mechanism.
+--
+-- /See:/ 'newScheduledSnapshotsConfig' smart constructor.
+data ScheduledSnapshotsConfig = ScheduledSnapshotsConfig
+  { -- | Optional. Whether scheduled snapshots creation is enabled.
+    enabled :: (Core.Maybe Core.Bool),
+    -- | Optional. The cron expression representing the time when snapshots creation mechanism runs. This field is subject to additional validation around frequency of execution.
+    snapshotCreationSchedule :: (Core.Maybe Core.Text),
+    -- | Optional. The Cloud Storage location for storing automatically created snapshots.
+    snapshotLocation :: (Core.Maybe Core.Text),
+    -- | Optional. Time zone that sets the context to interpret snapshot/creation/schedule.
+    timeZone :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ScheduledSnapshotsConfig' with the minimum fields required to make a request.
+newScheduledSnapshotsConfig ::
+  ScheduledSnapshotsConfig
+newScheduledSnapshotsConfig =
+  ScheduledSnapshotsConfig
+    { enabled = Core.Nothing,
+      snapshotCreationSchedule = Core.Nothing,
+      snapshotLocation = Core.Nothing,
+      timeZone = Core.Nothing
+    }
+
+instance Core.FromJSON ScheduledSnapshotsConfig where
+  parseJSON =
+    Core.withObject
+      "ScheduledSnapshotsConfig"
+      ( \o ->
+          ScheduledSnapshotsConfig
+            Core.<$> (o Core..:? "enabled")
+            Core.<*> (o Core..:? "snapshotCreationSchedule")
+            Core.<*> (o Core..:? "snapshotLocation")
+            Core.<*> (o Core..:? "timeZone")
+      )
+
+instance Core.ToJSON ScheduledSnapshotsConfig where
+  toJSON ScheduledSnapshotsConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("enabled" Core..=) Core.<$> enabled,
+            ("snapshotCreationSchedule" Core..=)
+              Core.<$> snapshotCreationSchedule,
+            ("snapshotLocation" Core..=)
+              Core.<$> snapshotLocation,
+            ("timeZone" Core..=) Core.<$> timeZone
           ]
       )
 
@@ -1318,8 +1716,8 @@ data SoftwareConfig = SoftwareConfig
     airflowConfigOverrides :: (Core.Maybe SoftwareConfig_AirflowConfigOverrides),
     -- | Optional. Additional environment variables to provide to the Apache Airflow scheduler, worker, and webserver processes. Environment variable names must match the regular expression @a-zA-Z_*@. They cannot specify Apache Airflow software configuration overrides (they cannot match the regular expression @AIRFLOW__[A-Z0-9_]+__[A-Z0-9_]+@), and they cannot match any of the following reserved names: * @AIRFLOW_HOME@ * @C_FORCE_ROOT@ * @CONTAINER_NAME@ * @DAGS_FOLDER@ * @GCP_PROJECT@ * @GCS_BUCKET@ * @GKE_CLUSTER_NAME@ * @SQL_DATABASE@ * @SQL_INSTANCE@ * @SQL_PASSWORD@ * @SQL_PROJECT@ * @SQL_REGION@ * @SQL_USER@
     envVariables :: (Core.Maybe SoftwareConfig_EnvVariables),
-    -- | The version of the software running in the environment. This encapsulates both the version of Cloud Composer functionality and the version of Apache Airflow. It must match the regular expression @composer-([0-9]+(\\.[0-9]+\\.[0-9]+(-preview\\.[0-9]+)?)?|latest)-airflow-([0-9]+\\.[0-9]+(\\.[0-9]+)?)@. When used as input, the server also checks if the provided version is supported and denies the request for an unsupported version. The Cloud Composer portion of the image version is a full <https://semver.org semantic version>, or an alias in the form of major version number or @latest@. When an alias is provided, the server replaces it with the current Cloud Composer version that satisfies the alias. The Apache Airflow portion of the image version is a full semantic version that points to one of the supported Apache Airflow versions, or an alias in the form of only major and minor versions specified. When an alias is provided, the server replaces it with the latest Apache Airflow version that satisfies the alias
-    -- and is supported in the given Cloud Composer version. In all cases, the resolved image version is stored in the same field. See also </composer/docs/concepts/versioning/composer-versions version list> and </composer/docs/concepts/versioning/composer-versioning-overview versioning overview>.
+    -- | The version of the software running in the environment. This encapsulates both the version of Cloud Composer functionality and the version of Apache Airflow. It must match the regular expression @composer-([0-9]+(\\.[0-9]+\\.[0-9]+(-preview\\.[0-9]+)?)?|latest)-airflow-([0-9]+(\\.[0-9]+(\\.[0-9]+)?)?)@. When used as input, the server also checks if the provided version is supported and denies the request for an unsupported version. The Cloud Composer portion of the image version is a full <https://semver.org semantic version>, or an alias in the form of major version number or @latest@. When an alias is provided, the server replaces it with the current Cloud Composer version that satisfies the alias. The Apache Airflow portion of the image version is a full semantic version that points to one of the supported Apache Airflow versions, or an alias in the form of only major or major.minor versions specified. When an alias is provided, the server replaces it with the latest Apache Airflow version that satisfies
+    -- the alias and is supported in the given Cloud Composer version. In all cases, the resolved image version is stored in the same field. See also </composer/docs/concepts/versioning/composer-versions version list> and </composer/docs/concepts/versioning/composer-versioning-overview versioning overview>.
     imageVersion :: (Core.Maybe Core.Text),
     -- | Optional. Custom Python Package Index (PyPI) packages to be installed in the environment. Keys refer to the lowercase package name such as \"numpy\" and values are the lowercase extras and version specifier such as \"==1.12.0\", \"[devel,gcp_api]\", or \"[devel]>=1.8.2, \<1.9.2\". To specify a package without pinning it to a version specifier, use the empty string as the value.
     pypiPackages :: (Core.Maybe SoftwareConfig_PypiPackages),

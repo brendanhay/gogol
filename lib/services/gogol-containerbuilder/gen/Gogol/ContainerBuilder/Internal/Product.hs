@@ -26,15 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.ContainerBuilder.Internal.Product
-  ( -- * AddBitbucketServerConnectedRepositoryRequest
-    AddBitbucketServerConnectedRepositoryRequest (..),
-    newAddBitbucketServerConnectedRepositoryRequest,
-
-    -- * AddBitbucketServerConnectedRepositoryResponse
-    AddBitbucketServerConnectedRepositoryResponse (..),
-    newAddBitbucketServerConnectedRepositoryResponse,
-
-    -- * ApprovalConfig
+  ( -- * ApprovalConfig
     ApprovalConfig (..),
     newApprovalConfig,
 
@@ -69,6 +61,18 @@ module Gogol.ContainerBuilder.Internal.Product
     -- * BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata
     BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata (..),
     newBatchCreateBitbucketServerConnectedRepositoriesResponseMetadata,
+
+    -- * BatchCreateGitLabConnectedRepositoriesRequest
+    BatchCreateGitLabConnectedRepositoriesRequest (..),
+    newBatchCreateGitLabConnectedRepositoriesRequest,
+
+    -- * BatchCreateGitLabConnectedRepositoriesResponse
+    BatchCreateGitLabConnectedRepositoriesResponse (..),
+    newBatchCreateGitLabConnectedRepositoriesResponse,
+
+    -- * BatchCreateGitLabConnectedRepositoriesResponseMetadata
+    BatchCreateGitLabConnectedRepositoriesResponseMetadata (..),
+    newBatchCreateGitLabConnectedRepositoriesResponseMetadata,
 
     -- * BitbucketServerConfig
     BitbucketServerConfig (..),
@@ -158,6 +162,10 @@ module Gogol.ContainerBuilder.Internal.Product
     CreateGitLabConfigOperationMetadata (..),
     newCreateGitLabConfigOperationMetadata,
 
+    -- * CreateGitLabConnectedRepositoryRequest
+    CreateGitLabConnectedRepositoryRequest (..),
+    newCreateGitLabConnectedRepositoryRequest,
+
     -- * CreateWorkerPoolOperationMetadata
     CreateWorkerPoolOperationMetadata (..),
     newCreateWorkerPoolOperationMetadata,
@@ -206,17 +214,37 @@ module Gogol.ContainerBuilder.Internal.Product
     GitHubEventsConfig (..),
     newGitHubEventsConfig,
 
+    -- * GitLabConfig
+    GitLabConfig (..),
+    newGitLabConfig,
+
+    -- * GitLabConnectedRepository
+    GitLabConnectedRepository (..),
+    newGitLabConnectedRepository,
+
+    -- * GitLabEnterpriseConfig
+    GitLabEnterpriseConfig (..),
+    newGitLabEnterpriseConfig,
+
+    -- * GitLabEventsConfig
+    GitLabEventsConfig (..),
+    newGitLabEventsConfig,
+
+    -- * GitLabRepository
+    GitLabRepository (..),
+    newGitLabRepository,
+
+    -- * GitLabRepositoryId
+    GitLabRepositoryId (..),
+    newGitLabRepositoryId,
+
+    -- * GitLabSecrets
+    GitLabSecrets (..),
+    newGitLabSecrets,
+
     -- * GitRepoSource
     GitRepoSource (..),
     newGitRepoSource,
-
-    -- * GoogleDevtoolsCloudbuildV2OperationMetadata
-    GoogleDevtoolsCloudbuildV2OperationMetadata (..),
-    newGoogleDevtoolsCloudbuildV2OperationMetadata,
-
-    -- * HTTPDelivery
-    HTTPDelivery (..),
-    newHTTPDelivery,
 
     -- * Hash
     Hash (..),
@@ -254,6 +282,14 @@ module Gogol.ContainerBuilder.Internal.Product
     ListBuildsResponse (..),
     newListBuildsResponse,
 
+    -- * ListGitLabConfigsResponse
+    ListGitLabConfigsResponse (..),
+    newListGitLabConfigsResponse,
+
+    -- * ListGitLabRepositoriesResponse
+    ListGitLabRepositoriesResponse (..),
+    newListGitLabRepositoriesResponse,
+
     -- * ListGithubEnterpriseConfigsResponse
     ListGithubEnterpriseConfigsResponse (..),
     newListGithubEnterpriseConfigsResponse,
@@ -262,37 +298,13 @@ module Gogol.ContainerBuilder.Internal.Product
     ListWorkerPoolsResponse (..),
     newListWorkerPoolsResponse,
 
+    -- * MavenArtifact
+    MavenArtifact (..),
+    newMavenArtifact,
+
     -- * NetworkConfig
     NetworkConfig (..),
     newNetworkConfig,
-
-    -- * Notification
-    Notification (..),
-    newNotification,
-
-    -- * Notification_StructDelivery
-    Notification_StructDelivery (..),
-    newNotification_StructDelivery,
-
-    -- * NotifierConfig
-    NotifierConfig (..),
-    newNotifierConfig,
-
-    -- * NotifierMetadata
-    NotifierMetadata (..),
-    newNotifierMetadata,
-
-    -- * NotifierSecret
-    NotifierSecret (..),
-    newNotifierSecret,
-
-    -- * NotifierSecretRef
-    NotifierSecretRef (..),
-    newNotifierSecretRef,
-
-    -- * NotifierSpec
-    NotifierSpec (..),
-    newNotifierSpec,
 
     -- * Operation
     Operation (..),
@@ -334,6 +346,10 @@ module Gogol.ContainerBuilder.Internal.Product
     PushFilter (..),
     newPushFilter,
 
+    -- * PythonPackage
+    PythonPackage (..),
+    newPythonPackage,
+
     -- * ReceiveTriggerWebhookResponse
     ReceiveTriggerWebhookResponse (..),
     newReceiveTriggerWebhookResponse,
@@ -342,6 +358,10 @@ module Gogol.ContainerBuilder.Internal.Product
     RemoveBitbucketServerConnectedRepositoryRequest (..),
     newRemoveBitbucketServerConnectedRepositoryRequest,
 
+    -- * RemoveGitLabConnectedRepositoryRequest
+    RemoveGitLabConnectedRepositoryRequest (..),
+    newRemoveGitLabConnectedRepositoryRequest,
+
     -- * RepoSource
     RepoSource (..),
     newRepoSource,
@@ -349,6 +369,10 @@ module Gogol.ContainerBuilder.Internal.Product
     -- * RepoSource_Substitutions
     RepoSource_Substitutions (..),
     newRepoSource_Substitutions,
+
+    -- * RepositoryEventConfig
+    RepositoryEventConfig (..),
+    newRepositoryEventConfig,
 
     -- * Results
     Results (..),
@@ -361,14 +385,6 @@ module Gogol.ContainerBuilder.Internal.Product
     -- * RunBuildTriggerRequest
     RunBuildTriggerRequest (..),
     newRunBuildTriggerRequest,
-
-    -- * RunWorkflowCustomOperationMetadata
-    RunWorkflowCustomOperationMetadata (..),
-    newRunWorkflowCustomOperationMetadata,
-
-    -- * SMTPDelivery
-    SMTPDelivery (..),
-    newSMTPDelivery,
 
     -- * Secret
     Secret (..),
@@ -386,9 +402,9 @@ module Gogol.ContainerBuilder.Internal.Product
     Secrets (..),
     newSecrets,
 
-    -- * SlackDelivery
-    SlackDelivery (..),
-    newSlackDelivery,
+    -- * ServiceDirectoryConfig
+    ServiceDirectoryConfig (..),
+    newServiceDirectoryConfig,
 
     -- * Source
     Source (..),
@@ -438,6 +454,14 @@ module Gogol.ContainerBuilder.Internal.Product
     UpdateWorkerPoolOperationMetadata (..),
     newUpdateWorkerPoolOperationMetadata,
 
+    -- * UploadedMavenArtifact
+    UploadedMavenArtifact (..),
+    newUploadedMavenArtifact,
+
+    -- * UploadedPythonPackage
+    UploadedPythonPackage (..),
+    newUploadedPythonPackage,
+
     -- * Volume
     Volume (..),
     newVolume,
@@ -466,95 +490,6 @@ where
 
 import Gogol.ContainerBuilder.Internal.Sum
 import qualified Gogol.Prelude as Core
-
--- | RPC request object accepted by the AddBitbucketServerConnectedRepository RPC method.
---
--- /See:/ 'newAddBitbucketServerConnectedRepositoryRequest' smart constructor.
-newtype AddBitbucketServerConnectedRepositoryRequest = AddBitbucketServerConnectedRepositoryRequest
-  { -- | The connected repository to add.
-    connectedRepository :: (Core.Maybe BitbucketServerRepositoryId)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'AddBitbucketServerConnectedRepositoryRequest' with the minimum fields required to make a request.
-newAddBitbucketServerConnectedRepositoryRequest ::
-  AddBitbucketServerConnectedRepositoryRequest
-newAddBitbucketServerConnectedRepositoryRequest =
-  AddBitbucketServerConnectedRepositoryRequest
-    { connectedRepository = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    AddBitbucketServerConnectedRepositoryRequest
-  where
-  parseJSON =
-    Core.withObject
-      "AddBitbucketServerConnectedRepositoryRequest"
-      ( \o ->
-          AddBitbucketServerConnectedRepositoryRequest
-            Core.<$> (o Core..:? "connectedRepository")
-      )
-
-instance
-  Core.ToJSON
-    AddBitbucketServerConnectedRepositoryRequest
-  where
-  toJSON
-    AddBitbucketServerConnectedRepositoryRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("connectedRepository" Core..=)
-                Core.<$> connectedRepository
-            ]
-        )
-
--- | RPC request object returned by the AddBitbucketServerConnectedRepository RPC method.
---
--- /See:/ 'newAddBitbucketServerConnectedRepositoryResponse' smart constructor.
-data AddBitbucketServerConnectedRepositoryResponse = AddBitbucketServerConnectedRepositoryResponse
-  { -- | The name of the @BitbucketServerConfig@ that added connected repository. Format: @projects\/{project}\/locations\/{location}\/bitbucketServerConfigs\/{config}@
-    config :: (Core.Maybe Core.Text),
-    -- | The connected repository.
-    connectedRepository :: (Core.Maybe BitbucketServerRepositoryId)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'AddBitbucketServerConnectedRepositoryResponse' with the minimum fields required to make a request.
-newAddBitbucketServerConnectedRepositoryResponse ::
-  AddBitbucketServerConnectedRepositoryResponse
-newAddBitbucketServerConnectedRepositoryResponse =
-  AddBitbucketServerConnectedRepositoryResponse
-    { config = Core.Nothing,
-      connectedRepository = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    AddBitbucketServerConnectedRepositoryResponse
-  where
-  parseJSON =
-    Core.withObject
-      "AddBitbucketServerConnectedRepositoryResponse"
-      ( \o ->
-          AddBitbucketServerConnectedRepositoryResponse
-            Core.<$> (o Core..:? "config")
-              Core.<*> (o Core..:? "connectedRepository")
-      )
-
-instance
-  Core.ToJSON
-    AddBitbucketServerConnectedRepositoryResponse
-  where
-  toJSON
-    AddBitbucketServerConnectedRepositoryResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("config" Core..=) Core.<$> config,
-              ("connectedRepository" Core..=)
-                Core.<$> connectedRepository
-            ]
-        )
 
 -- | ApprovalConfig describes configuration for manual approval of a build.
 --
@@ -758,15 +693,25 @@ instance Core.ToJSON ArtifactResult where
 data Artifacts = Artifacts
   { -- | A list of images to be pushed upon the successful completion of all build steps. The images will be pushed using the builder service account\'s credentials. The digests of the pushed images will be stored in the Build resource\'s results field. If any of the images fail to be pushed, the build is marked FAILURE.
     images :: (Core.Maybe [Core.Text]),
+    -- | A list of Maven artifacts to be uploaded to Artifact Registry upon successful completion of all build steps. Artifacts in the workspace matching specified paths globs will be uploaded to the specified Artifact Registry repository using the builder service account\'s credentials. If any artifacts fail to be pushed, the build is marked FAILURE.
+    mavenArtifacts :: (Core.Maybe [MavenArtifact]),
     -- | A list of objects to be uploaded to Cloud Storage upon successful completion of all build steps. Files in the workspace matching specified paths globs will be uploaded to the specified Cloud Storage location using the builder service account\'s credentials. The location and generation of the uploaded objects will be stored in the Build resource\'s results field. If any objects fail to be pushed, the build is marked FAILURE.
-    objects :: (Core.Maybe ArtifactObjects)
+    objects :: (Core.Maybe ArtifactObjects),
+    -- | A list of Python packages to be uploaded to Artifact Registry upon successful completion of all build steps. The build service account credentials will be used to perform the upload. If any objects fail to be pushed, the build is marked FAILURE.
+    pythonPackages :: (Core.Maybe [PythonPackage])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'Artifacts' with the minimum fields required to make a request.
 newArtifacts ::
   Artifacts
-newArtifacts = Artifacts {images = Core.Nothing, objects = Core.Nothing}
+newArtifacts =
+  Artifacts
+    { images = Core.Nothing,
+      mavenArtifacts = Core.Nothing,
+      objects = Core.Nothing,
+      pythonPackages = Core.Nothing
+    }
 
 instance Core.FromJSON Artifacts where
   parseJSON =
@@ -775,7 +720,9 @@ instance Core.FromJSON Artifacts where
       ( \o ->
           Artifacts
             Core.<$> (o Core..:? "images")
+            Core.<*> (o Core..:? "mavenArtifacts")
             Core.<*> (o Core..:? "objects")
+            Core.<*> (o Core..:? "pythonPackages")
       )
 
 instance Core.ToJSON Artifacts where
@@ -783,7 +730,9 @@ instance Core.ToJSON Artifacts where
     Core.object
       ( Core.catMaybes
           [ ("images" Core..=) Core.<$> images,
-            ("objects" Core..=) Core.<$> objects
+            ("mavenArtifacts" Core..=) Core.<$> mavenArtifacts,
+            ("objects" Core..=) Core.<$> objects,
+            ("pythonPackages" Core..=) Core.<$> pythonPackages
           ]
       )
 
@@ -912,6 +861,137 @@ instance
   where
   toJSON
     BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("completeTime" Core..=) Core.<$> completeTime,
+              ("config" Core..=) Core.<$> config,
+              ("createTime" Core..=) Core.<$> createTime
+            ]
+        )
+
+-- | RPC request object accepted by BatchCreateGitLabConnectedRepositories RPC method.
+--
+-- /See:/ 'newBatchCreateGitLabConnectedRepositoriesRequest' smart constructor.
+newtype BatchCreateGitLabConnectedRepositoriesRequest = BatchCreateGitLabConnectedRepositoriesRequest
+  { -- | Required. Requests to connect GitLab repositories.
+    requests :: (Core.Maybe [CreateGitLabConnectedRepositoryRequest])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BatchCreateGitLabConnectedRepositoriesRequest' with the minimum fields required to make a request.
+newBatchCreateGitLabConnectedRepositoriesRequest ::
+  BatchCreateGitLabConnectedRepositoriesRequest
+newBatchCreateGitLabConnectedRepositoriesRequest =
+  BatchCreateGitLabConnectedRepositoriesRequest {requests = Core.Nothing}
+
+instance
+  Core.FromJSON
+    BatchCreateGitLabConnectedRepositoriesRequest
+  where
+  parseJSON =
+    Core.withObject
+      "BatchCreateGitLabConnectedRepositoriesRequest"
+      ( \o ->
+          BatchCreateGitLabConnectedRepositoriesRequest
+            Core.<$> (o Core..:? "requests")
+      )
+
+instance
+  Core.ToJSON
+    BatchCreateGitLabConnectedRepositoriesRequest
+  where
+  toJSON
+    BatchCreateGitLabConnectedRepositoriesRequest {..} =
+      Core.object
+        ( Core.catMaybes
+            [("requests" Core..=) Core.<$> requests]
+        )
+
+-- | Response of BatchCreateGitLabConnectedRepositories RPC method.
+--
+-- /See:/ 'newBatchCreateGitLabConnectedRepositoriesResponse' smart constructor.
+newtype BatchCreateGitLabConnectedRepositoriesResponse = BatchCreateGitLabConnectedRepositoriesResponse
+  { -- | The GitLab connected repository requests\' responses.
+    gitlabConnectedRepositories :: (Core.Maybe [GitLabConnectedRepository])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BatchCreateGitLabConnectedRepositoriesResponse' with the minimum fields required to make a request.
+newBatchCreateGitLabConnectedRepositoriesResponse ::
+  BatchCreateGitLabConnectedRepositoriesResponse
+newBatchCreateGitLabConnectedRepositoriesResponse =
+  BatchCreateGitLabConnectedRepositoriesResponse
+    { gitlabConnectedRepositories = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    BatchCreateGitLabConnectedRepositoriesResponse
+  where
+  parseJSON =
+    Core.withObject
+      "BatchCreateGitLabConnectedRepositoriesResponse"
+      ( \o ->
+          BatchCreateGitLabConnectedRepositoriesResponse
+            Core.<$> (o Core..:? "gitlabConnectedRepositories")
+      )
+
+instance
+  Core.ToJSON
+    BatchCreateGitLabConnectedRepositoriesResponse
+  where
+  toJSON
+    BatchCreateGitLabConnectedRepositoriesResponse {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("gitlabConnectedRepositories" Core..=)
+                Core.<$> gitlabConnectedRepositories
+            ]
+        )
+
+-- | Metadata for @BatchCreateGitLabConnectedRepositories@ operation.
+--
+-- /See:/ 'newBatchCreateGitLabConnectedRepositoriesResponseMetadata' smart constructor.
+data BatchCreateGitLabConnectedRepositoriesResponseMetadata = BatchCreateGitLabConnectedRepositoriesResponseMetadata
+  { -- | Time the operation was completed.
+    completeTime :: (Core.Maybe Core.DateTime),
+    -- | The name of the @GitLabConfig@ that added connected repositories. Format: @projects\/{project}\/locations\/{location}\/gitLabConfigs\/{config}@
+    config :: (Core.Maybe Core.Text),
+    -- | Time the operation was created.
+    createTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BatchCreateGitLabConnectedRepositoriesResponseMetadata' with the minimum fields required to make a request.
+newBatchCreateGitLabConnectedRepositoriesResponseMetadata ::
+  BatchCreateGitLabConnectedRepositoriesResponseMetadata
+newBatchCreateGitLabConnectedRepositoriesResponseMetadata =
+  BatchCreateGitLabConnectedRepositoriesResponseMetadata
+    { completeTime = Core.Nothing,
+      config = Core.Nothing,
+      createTime = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    BatchCreateGitLabConnectedRepositoriesResponseMetadata
+  where
+  parseJSON =
+    Core.withObject
+      "BatchCreateGitLabConnectedRepositoriesResponseMetadata"
+      ( \o ->
+          BatchCreateGitLabConnectedRepositoriesResponseMetadata
+            Core.<$> (o Core..:? "completeTime")
+              Core.<*> (o Core..:? "config")
+              Core.<*> (o Core..:? "createTime")
+      )
+
+instance
+  Core.ToJSON
+    BatchCreateGitLabConnectedRepositoriesResponseMetadata
+  where
+  toJSON
+    BatchCreateGitLabConnectedRepositoriesResponseMetadata {..} =
       Core.object
         ( Core.catMaybes
             [ ("completeTime" Core..=) Core.<$> completeTime,
@@ -1203,13 +1283,13 @@ data BitbucketServerTriggerConfig = BitbucketServerTriggerConfig
     bitbucketServerConfig :: (Core.Maybe BitbucketServerConfig),
     -- | Required. The Bitbucket server config resource that this trigger config maps to.
     bitbucketServerConfigResource :: (Core.Maybe Core.Text),
-    -- | Required. Key of the project that the repo is in. For example: The key for http:\/\/mybitbucket.server\/projects\/TEST\/repos\/test-repo is \"TEST\".
+    -- | Required. Key of the project that the repo is in. For example: The key for https:\/\/mybitbucket.server\/projects\/TEST\/repos\/test-repo is \"TEST\".
     projectKey :: (Core.Maybe Core.Text),
     -- | Filter to match changes in pull requests.
     pullRequest :: (Core.Maybe PullRequestFilter),
     -- | Filter to match changes in refs like branches, tags.
     push :: (Core.Maybe PushFilter),
-    -- | Required. Slug of the repository. A repository slug is a URL-friendly version of a repository name, automatically generated by Bitbucket for use in the URL. For example, if the repository name is \'test repo\', in the URL it would become \'test-repo\' as in http:\/\/mybitbucket.server\/projects\/TEST\/repos\/test-repo.
+    -- | Required. Slug of the repository. A repository slug is a URL-friendly version of a repository name, automatically generated by Bitbucket for use in the URL. For example, if the repository name is \'test repo\', in the URL it would become \'test-repo\' as in https:\/\/mybitbucket.server\/projects\/TEST\/repos\/test-repo.
     repoSlug :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1312,9 +1392,9 @@ data Build = Build
     substitutions :: (Core.Maybe Build_Substitutions),
     -- | Tags for annotation of a @Build@. These are not docker tags.
     tags :: (Core.Maybe [Core.Text]),
-    -- | Amount of time that this build should be allowed to run, to second granularity. If this amount of time elapses, work on the build will cease and the build status will be @TIMEOUT@. @timeout@ starts ticking from @startTime@. Default time is ten minutes.
+    -- | Amount of time that this build should be allowed to run, to second granularity. If this amount of time elapses, work on the build will cease and the build status will be @TIMEOUT@. @timeout@ starts ticking from @startTime@. Default time is 60 minutes.
     timeout :: (Core.Maybe Core.Duration),
-    -- | Output only. Stores timing information for phases of the build. Valid keys are: * BUILD: time to execute all build steps. * PUSH: time to push all specified images. * FETCHSOURCE: time to fetch source. * SETUPBUILD: time to set up build. If the build does not specify source or images, these keys will not be included.
+    -- | Output only. Stores timing information for phases of the build. Valid keys are: * BUILD: time to execute all build steps. * PUSH: time to push all artifacts including docker images and non docker artifacts. * FETCHSOURCE: time to fetch source. * SETUPBUILD: time to set up build. If the build does not specify source or images, these keys will not be included.
     timing :: (Core.Maybe Build_Timing),
     -- | Output only. Non-fatal problems encountered during the execution of the build.
     warnings :: (Core.Maybe [Warning])
@@ -1462,7 +1542,7 @@ instance Core.ToJSON Build_Substitutions where
   toJSON Build_Substitutions {..} =
     Core.toJSON additional
 
--- | Output only. Stores timing information for phases of the build. Valid keys are: * BUILD: time to execute all build steps. * PUSH: time to push all specified images. * FETCHSOURCE: time to fetch source. * SETUPBUILD: time to set up build. If the build does not specify source or images, these keys will not be included.
+-- | Output only. Stores timing information for phases of the build. Valid keys are: * BUILD: time to execute all build steps. * PUSH: time to push all artifacts including docker images and non docker artifacts. * FETCHSOURCE: time to fetch source. * SETUPBUILD: time to set up build. If the build does not specify source or images, these keys will not be included.
 --
 -- /See:/ 'newBuild_Timing' smart constructor.
 newtype Build_Timing = Build_Timing
@@ -1564,7 +1644,9 @@ instance Core.ToJSON BuildOperationMetadata where
 --
 -- /See:/ 'newBuildOptions' smart constructor.
 data BuildOptions = BuildOptions
-  { -- | Requested disk size for the VM that runs the build. Note that this is /NOT/ \"disk free\"; some of the space will be used by the operating system and build utilities. Also note that this is the minimum disk size that will be allocated for the build -- the build may run with a larger disk than requested. At present, the maximum disk size is 1000GB; builds that request more than the maximum are rejected with an error.
+  { -- | Optional. Option to specify how default logs buckets are setup.
+    defaultLogsBucketBehavior :: (Core.Maybe BuildOptions_DefaultLogsBucketBehavior),
+    -- | Requested disk size for the VM that runs the build. Note that this is /NOT/ \"disk free\"; some of the space will be used by the operating system and build utilities. Also note that this is the minimum disk size that will be allocated for the build -- the build may run with a larger disk than requested. At present, the maximum disk size is 2000GB; builds that request more than the maximum are rejected with an error.
     diskSizeGb :: (Core.Maybe Core.Int64),
     -- | Option to specify whether or not to apply bash style string operations to the substitutions. NOTE: this is always enabled for triggered builds and cannot be overridden in the build configuration file.
     dynamicSubstitutions :: (Core.Maybe Core.Bool),
@@ -1598,7 +1680,8 @@ newBuildOptions ::
   BuildOptions
 newBuildOptions =
   BuildOptions
-    { diskSizeGb = Core.Nothing,
+    { defaultLogsBucketBehavior = Core.Nothing,
+      diskSizeGb = Core.Nothing,
       dynamicSubstitutions = Core.Nothing,
       env = Core.Nothing,
       logStreamingOption = Core.Nothing,
@@ -1619,7 +1702,8 @@ instance Core.FromJSON BuildOptions where
       "BuildOptions"
       ( \o ->
           BuildOptions
-            Core.<$> ( o Core..:? "diskSizeGb"
+            Core.<$> (o Core..:? "defaultLogsBucketBehavior")
+            Core.<*> ( o Core..:? "diskSizeGb"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "dynamicSubstitutions")
@@ -1640,7 +1724,9 @@ instance Core.ToJSON BuildOptions where
   toJSON BuildOptions {..} =
     Core.object
       ( Core.catMaybes
-          [ ("diskSizeGb" Core..=) Core.. Core.AsText
+          [ ("defaultLogsBucketBehavior" Core..=)
+              Core.<$> defaultLogsBucketBehavior,
+            ("diskSizeGb" Core..=) Core.. Core.AsText
               Core.<$> diskSizeGb,
             ("dynamicSubstitutions" Core..=)
               Core.<$> dynamicSubstitutions,
@@ -1666,7 +1752,11 @@ instance Core.ToJSON BuildOptions where
 --
 -- /See:/ 'newBuildStep' smart constructor.
 data BuildStep = BuildStep
-  { -- | A list of arguments that will be presented to the step when it is started. If the image used to run the step\'s container has an entrypoint, the @args@ are used as arguments to that entrypoint. If the image does not define an entrypoint, the first element in args is used as the entrypoint, and the remainder will be used as arguments.
+  { -- | Allow this build step to fail without failing the entire build if and only if the exit code is one of the specified codes. If allow_failure is also specified, this field will take precedence.
+    allowExitCodes :: (Core.Maybe [Core.Int32]),
+    -- | Allow this build step to fail without failing the entire build. If false, the entire build will fail if this step fails. Otherwise, the build will succeed, but this step will still have a failure status. Error information will be reported in the failure_detail field.
+    allowFailure :: (Core.Maybe Core.Bool),
+    -- | A list of arguments that will be presented to the step when it is started. If the image used to run the step\'s container has an entrypoint, the @args@ are used as arguments to that entrypoint. If the image does not define an entrypoint, the first element in args is used as the entrypoint, and the remainder will be used as arguments.
     args :: (Core.Maybe [Core.Text]),
     -- | Working directory to use when running this step\'s container. If this value is a relative path, it is relative to the build\'s working directory. If this value is absolute, it may be outside the build\'s working directory, in which case the contents of the path may not be persisted across build step executions, unless a @volume@ for that path is specified. If the build specifies a @RepoSource@ with @dir@ and a step with a @dir@, which specifies an absolute path, the @RepoSource@ @dir@ is ignored for the step\'s execution.
     dir :: (Core.Maybe Core.Text),
@@ -1674,6 +1764,8 @@ data BuildStep = BuildStep
     entrypoint :: (Core.Maybe Core.Text),
     -- | A list of environment variable definitions to be used when running a step. The elements are of the form \"KEY=VALUE\" for the environment variable \"KEY\" being given the value \"VALUE\".
     env :: (Core.Maybe [Core.Text]),
+    -- | Output only. Return code from running the step.
+    exitCode :: (Core.Maybe Core.Int32),
     -- | Unique identifier for this build step, used in @wait_for@ to reference this build step as a dependency.
     id :: (Core.Maybe Core.Text),
     -- | Required. The name of the container image that will run this particular build step. If the image is available in the host\'s Docker daemon\'s cache, it will be run directly. If not, the host will attempt to pull the image first, using the builder service account\'s credentials if necessary. The Docker daemon\'s cache will already have the latest versions of all of the officially supported build steps (<https://github.com/GoogleCloudPlatform/cloud-builders>). The Docker daemon will also have cached many of the layers for some popular images, like \"ubuntu\", \"debian\", but they will be refreshed at the time you attempt to use them. If you built an image in a previous build step, it will be stored in the host\'s Docker daemon\'s cache and is available to use as the name for a later build step.
@@ -1702,10 +1794,13 @@ newBuildStep ::
   BuildStep
 newBuildStep =
   BuildStep
-    { args = Core.Nothing,
+    { allowExitCodes = Core.Nothing,
+      allowFailure = Core.Nothing,
+      args = Core.Nothing,
       dir = Core.Nothing,
       entrypoint = Core.Nothing,
       env = Core.Nothing,
+      exitCode = Core.Nothing,
       id = Core.Nothing,
       name = Core.Nothing,
       pullTiming = Core.Nothing,
@@ -1724,10 +1819,13 @@ instance Core.FromJSON BuildStep where
       "BuildStep"
       ( \o ->
           BuildStep
-            Core.<$> (o Core..:? "args")
+            Core.<$> (o Core..:? "allowExitCodes")
+            Core.<*> (o Core..:? "allowFailure")
+            Core.<*> (o Core..:? "args")
             Core.<*> (o Core..:? "dir")
             Core.<*> (o Core..:? "entrypoint")
             Core.<*> (o Core..:? "env")
+            Core.<*> (o Core..:? "exitCode")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "pullTiming")
@@ -1744,10 +1842,13 @@ instance Core.ToJSON BuildStep where
   toJSON BuildStep {..} =
     Core.object
       ( Core.catMaybes
-          [ ("args" Core..=) Core.<$> args,
+          [ ("allowExitCodes" Core..=) Core.<$> allowExitCodes,
+            ("allowFailure" Core..=) Core.<$> allowFailure,
+            ("args" Core..=) Core.<$> args,
             ("dir" Core..=) Core.<$> dir,
             ("entrypoint" Core..=) Core.<$> entrypoint,
             ("env" Core..=) Core.<$> env,
+            ("exitCode" Core..=) Core.<$> exitCode,
             ("id" Core..=) Core.<$> id,
             ("name" Core..=) Core.<$> name,
             ("pullTiming" Core..=) Core.<$> pullTiming,
@@ -1789,16 +1890,22 @@ data BuildTrigger = BuildTrigger
     gitFileSource :: (Core.Maybe GitFileSource),
     -- | GitHubEventsConfig describes the configuration of a trigger that creates a build whenever a GitHub event is received. Mutually exclusive with @trigger_template@.
     github :: (Core.Maybe GitHubEventsConfig),
+    -- | GitLabEnterpriseEventsConfig describes the configuration of a trigger that creates a build whenever a GitLab Enterprise event is received.
+    gitlabEnterpriseEventsConfig :: (Core.Maybe GitLabEventsConfig),
     -- | Output only. Unique identifier of the trigger.
     id :: (Core.Maybe Core.Text),
     -- | ignored/files and included/files are file glob matches using https:\/\/golang.org\/pkg\/path\/filepath\/#Match extended with support for \"**\". If ignored/files and changed files are both empty, then they are not used to determine whether or not to trigger a build. If ignored/files is not empty, then we ignore any files that match any of the ignored/file globs. If the change has no files that are outside of the ignored/files globs, then we do not trigger a build.
     ignoredFiles :: (Core.Maybe [Core.Text]),
+    -- | If set to INCLUDE/BUILD/LOGS/WITH/STATUS, log url will be shown on GitHub page when build status is final. Setting this field to INCLUDE/BUILD/LOGS/WITH/STATUS for non GitHub triggers results in INVALID_ARGUMENT error.
+    includeBuildLogs :: (Core.Maybe BuildTrigger_IncludeBuildLogs),
     -- | If any of the files altered in the commit pass the ignored/files filter and included/files is empty, then as far as this filter is concerned, we should trigger the build. If any of the files altered in the commit pass the ignored/files filter and included/files is not empty, then we make sure that at least one of those files matches a included_files glob. If not, then we do not trigger a build.
     includedFiles :: (Core.Maybe [Core.Text]),
     -- | User-assigned name of the trigger. Must be unique within the project. Trigger names must meet the following requirements: + They must contain only alphanumeric characters and dashes. + They can be 1-64 characters long. + They must begin and end with an alphanumeric character.
     name :: (Core.Maybe Core.Text),
     -- | PubsubConfig describes the configuration of a trigger that creates a build whenever a Pub\/Sub message is published.
     pubsubConfig :: (Core.Maybe PubsubConfig),
+    -- | The configuration of a trigger that creates a build whenever an event from Repo API is received.
+    repositoryEventConfig :: (Core.Maybe RepositoryEventConfig),
     -- | The @Trigger@ name with format: @projects\/{project}\/locations\/{location}\/triggers\/{trigger}@, where {trigger} is a unique identifier generated by the service.
     resourceName :: (Core.Maybe Core.Text),
     -- | The service account used for all user-controlled operations including UpdateBuildTrigger, RunBuildTrigger, CreateBuild, and CancelBuild. If no service account is set, then the standard Cloud Build service account ([PROJECT_NUM]\@system.gserviceaccount.com) will be used instead. Format: @projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT_ID_OR_EMAIL}@
@@ -1833,11 +1940,14 @@ newBuildTrigger =
       filter = Core.Nothing,
       gitFileSource = Core.Nothing,
       github = Core.Nothing,
+      gitlabEnterpriseEventsConfig = Core.Nothing,
       id = Core.Nothing,
       ignoredFiles = Core.Nothing,
+      includeBuildLogs = Core.Nothing,
       includedFiles = Core.Nothing,
       name = Core.Nothing,
       pubsubConfig = Core.Nothing,
+      repositoryEventConfig = Core.Nothing,
       resourceName = Core.Nothing,
       serviceAccount = Core.Nothing,
       sourceToBuild = Core.Nothing,
@@ -1865,11 +1975,14 @@ instance Core.FromJSON BuildTrigger where
             Core.<*> (o Core..:? "filter")
             Core.<*> (o Core..:? "gitFileSource")
             Core.<*> (o Core..:? "github")
+            Core.<*> (o Core..:? "gitlabEnterpriseEventsConfig")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "ignoredFiles")
+            Core.<*> (o Core..:? "includeBuildLogs")
             Core.<*> (o Core..:? "includedFiles")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "pubsubConfig")
+            Core.<*> (o Core..:? "repositoryEventConfig")
             Core.<*> (o Core..:? "resourceName")
             Core.<*> (o Core..:? "serviceAccount")
             Core.<*> (o Core..:? "sourceToBuild")
@@ -1896,11 +2009,17 @@ instance Core.ToJSON BuildTrigger where
             ("filter" Core..=) Core.<$> filter,
             ("gitFileSource" Core..=) Core.<$> gitFileSource,
             ("github" Core..=) Core.<$> github,
+            ("gitlabEnterpriseEventsConfig" Core..=)
+              Core.<$> gitlabEnterpriseEventsConfig,
             ("id" Core..=) Core.<$> id,
             ("ignoredFiles" Core..=) Core.<$> ignoredFiles,
+            ("includeBuildLogs" Core..=)
+              Core.<$> includeBuildLogs,
             ("includedFiles" Core..=) Core.<$> includedFiles,
             ("name" Core..=) Core.<$> name,
             ("pubsubConfig" Core..=) Core.<$> pubsubConfig,
+            ("repositoryEventConfig" Core..=)
+              Core.<$> repositoryEventConfig,
             ("resourceName" Core..=) Core.<$> resourceName,
             ("serviceAccount" Core..=) Core.<$> serviceAccount,
             ("sourceToBuild" Core..=) Core.<$> sourceToBuild,
@@ -2250,6 +2369,52 @@ instance
           ]
       )
 
+-- | Request to connect a repository from a connected GitLab host.
+--
+-- /See:/ 'newCreateGitLabConnectedRepositoryRequest' smart constructor.
+data CreateGitLabConnectedRepositoryRequest = CreateGitLabConnectedRepositoryRequest
+  { -- | Required. The GitLab repository to connect.
+    gitlabConnectedRepository :: (Core.Maybe GitLabConnectedRepository),
+    -- | Required. The name of the @GitLabConfig@ that adds connected repository. Format: @projects\/{project}\/locations\/{location}\/gitLabConfigs\/{config}@
+    parent :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CreateGitLabConnectedRepositoryRequest' with the minimum fields required to make a request.
+newCreateGitLabConnectedRepositoryRequest ::
+  CreateGitLabConnectedRepositoryRequest
+newCreateGitLabConnectedRepositoryRequest =
+  CreateGitLabConnectedRepositoryRequest
+    { gitlabConnectedRepository = Core.Nothing,
+      parent = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    CreateGitLabConnectedRepositoryRequest
+  where
+  parseJSON =
+    Core.withObject
+      "CreateGitLabConnectedRepositoryRequest"
+      ( \o ->
+          CreateGitLabConnectedRepositoryRequest
+            Core.<$> (o Core..:? "gitlabConnectedRepository")
+            Core.<*> (o Core..:? "parent")
+      )
+
+instance
+  Core.ToJSON
+    CreateGitLabConnectedRepositoryRequest
+  where
+  toJSON CreateGitLabConnectedRepositoryRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("gitlabConnectedRepository" Core..=)
+              Core.<$> gitlabConnectedRepository,
+            ("parent" Core..=) Core.<$> parent
+          ]
+      )
+
 -- | Metadata for the @CreateWorkerPool@ operation.
 --
 -- /See:/ 'newCreateWorkerPoolOperationMetadata' smart constructor.
@@ -2504,7 +2669,7 @@ instance
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -2597,7 +2762,7 @@ data GitFileSource = GitFileSource
     repoType :: (Core.Maybe GitFileSource_RepoType),
     -- | The branch, tag, arbitrary ref, or SHA version of the repo to use when resolving the filename (optional). This field respects the same syntax\/resolution as described here: https:\/\/git-scm.com\/docs\/gitrevisions If unspecified, the revision from which the trigger invocation originated is assumed to be the revision from which to read the specified path.
     revision :: (Core.Maybe Core.Text),
-    -- | The URI of the repo (optional). If unspecified, the repo from which the trigger invocation originated is assumed to be the repo from which to read the specified path.
+    -- | The URI of the repo. Either uri or repository can be specified. If unspecified, the repo from which the trigger invocation originated is assumed to be the repo from which to read the specified path.
     uri :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2656,7 +2821,7 @@ data GitHubEnterpriseConfig = GitHubEnterpriseConfig
     displayName :: (Core.Maybe Core.Text),
     -- | The URL of the github enterprise host the configuration is for.
     hostUrl :: (Core.Maybe Core.Text),
-    -- | Optional. The full resource name for the GitHubEnterpriseConfig For example: \"projects\/{$project/id}\/githubEnterpriseConfigs\/{$config/id}\"
+    -- | Optional. The full resource name for the GitHubEnterpriseConfig For example: \"projects\/{$project/id}\/locations\/{$location/id}\/githubEnterpriseConfigs\/{$config_id}\"
     name :: (Core.Maybe Core.Text),
     -- | Optional. The network to be used when reaching out to the GitHub Enterprise server. The VPC network must be enabled for private service connection. This should be set if the GitHub Enterprise server is hosted on-premises and not reachable by public internet. If this field is left empty, no network peering will occur and calls to the GitHub Enterprise server will be made over the public internet. Must be in the format @projects\/{project}\/global\/networks\/{network}@, where {project} is a project number or id and {network} is the name of a VPC network in the project.
     peeredNetwork :: (Core.Maybe Core.Text),
@@ -2799,7 +2964,7 @@ instance Core.ToJSON GitHubEnterpriseSecrets where
 --
 -- /See:/ 'newGitHubEventsConfig' smart constructor.
 data GitHubEventsConfig = GitHubEventsConfig
-  { -- | Optional. The resource name of the github enterprise config that should be applied to this installation. For example: \"projects\/{$project/id}\/githubEnterpriseConfigs\/{$config/id}\"
+  { -- | Optional. The resource name of the github enterprise config that should be applied to this installation. For example: \"projects\/{$project/id}\/locations\/{$location/id}\/githubEnterpriseConfigs\/{$config_id}\"
     enterpriseConfigResourceName :: (Core.Maybe Core.Text),
     -- | The installationID that emits the GitHub event.
     installationId :: (Core.Maybe Core.Int64),
@@ -2858,6 +3023,358 @@ instance Core.ToJSON GitHubEventsConfig where
           ]
       )
 
+-- | GitLabConfig represents the configuration for a GitLab integration.
+--
+-- /See:/ 'newGitLabConfig' smart constructor.
+data GitLabConfig = GitLabConfig
+  { -- | Connected GitLab.com or GitLabEnterprise repositories for this config.
+    connectedRepositories :: (Core.Maybe [GitLabRepositoryId]),
+    -- | Output only. Time when the config was created.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | Optional. GitLabEnterprise config.
+    enterpriseConfig :: (Core.Maybe GitLabEnterpriseConfig),
+    -- | The resource name for the config.
+    name :: (Core.Maybe Core.Text),
+    -- | Required. Secret Manager secrets needed by the config.
+    secrets :: (Core.Maybe GitLabSecrets),
+    -- | Username of the GitLab.com or GitLab Enterprise account Cloud Build will use.
+    username :: (Core.Maybe Core.Text),
+    -- | Output only. UUID included in webhook requests. The UUID is used to look up the corresponding config.
+    webhookKey :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GitLabConfig' with the minimum fields required to make a request.
+newGitLabConfig ::
+  GitLabConfig
+newGitLabConfig =
+  GitLabConfig
+    { connectedRepositories = Core.Nothing,
+      createTime = Core.Nothing,
+      enterpriseConfig = Core.Nothing,
+      name = Core.Nothing,
+      secrets = Core.Nothing,
+      username = Core.Nothing,
+      webhookKey = Core.Nothing
+    }
+
+instance Core.FromJSON GitLabConfig where
+  parseJSON =
+    Core.withObject
+      "GitLabConfig"
+      ( \o ->
+          GitLabConfig
+            Core.<$> (o Core..:? "connectedRepositories")
+            Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "enterpriseConfig")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "secrets")
+            Core.<*> (o Core..:? "username")
+            Core.<*> (o Core..:? "webhookKey")
+      )
+
+instance Core.ToJSON GitLabConfig where
+  toJSON GitLabConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("connectedRepositories" Core..=)
+              Core.<$> connectedRepositories,
+            ("createTime" Core..=) Core.<$> createTime,
+            ("enterpriseConfig" Core..=)
+              Core.<$> enterpriseConfig,
+            ("name" Core..=) Core.<$> name,
+            ("secrets" Core..=) Core.<$> secrets,
+            ("username" Core..=) Core.<$> username,
+            ("webhookKey" Core..=) Core.<$> webhookKey
+          ]
+      )
+
+-- | GitLabConnectedRepository represents a GitLab connected repository request response.
+--
+-- /See:/ 'newGitLabConnectedRepository' smart constructor.
+data GitLabConnectedRepository = GitLabConnectedRepository
+  { -- | The name of the @GitLabConfig@ that added connected repository. Format: @projects\/{project}\/locations\/{location}\/gitLabConfigs\/{config}@
+    parent :: (Core.Maybe Core.Text),
+    -- | The GitLab repositories to connect.
+    repo :: (Core.Maybe GitLabRepositoryId),
+    -- | Output only. The status of the repo connection request.
+    status :: (Core.Maybe Status)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GitLabConnectedRepository' with the minimum fields required to make a request.
+newGitLabConnectedRepository ::
+  GitLabConnectedRepository
+newGitLabConnectedRepository =
+  GitLabConnectedRepository
+    { parent = Core.Nothing,
+      repo = Core.Nothing,
+      status = Core.Nothing
+    }
+
+instance Core.FromJSON GitLabConnectedRepository where
+  parseJSON =
+    Core.withObject
+      "GitLabConnectedRepository"
+      ( \o ->
+          GitLabConnectedRepository
+            Core.<$> (o Core..:? "parent")
+            Core.<*> (o Core..:? "repo")
+            Core.<*> (o Core..:? "status")
+      )
+
+instance Core.ToJSON GitLabConnectedRepository where
+  toJSON GitLabConnectedRepository {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("parent" Core..=) Core.<$> parent,
+            ("repo" Core..=) Core.<$> repo,
+            ("status" Core..=) Core.<$> status
+          ]
+      )
+
+-- | GitLabEnterpriseConfig represents the configuration for a GitLabEnterprise integration.
+--
+-- /See:/ 'newGitLabEnterpriseConfig' smart constructor.
+data GitLabEnterpriseConfig = GitLabEnterpriseConfig
+  { -- | Immutable. The URI of the GitlabEnterprise host.
+    hostUri :: (Core.Maybe Core.Text),
+    -- | The Service Directory configuration to be used when reaching out to the GitLab Enterprise instance.
+    serviceDirectoryConfig :: (Core.Maybe ServiceDirectoryConfig),
+    -- | The SSL certificate to use in requests to GitLab Enterprise instances.
+    sslCa :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GitLabEnterpriseConfig' with the minimum fields required to make a request.
+newGitLabEnterpriseConfig ::
+  GitLabEnterpriseConfig
+newGitLabEnterpriseConfig =
+  GitLabEnterpriseConfig
+    { hostUri = Core.Nothing,
+      serviceDirectoryConfig = Core.Nothing,
+      sslCa = Core.Nothing
+    }
+
+instance Core.FromJSON GitLabEnterpriseConfig where
+  parseJSON =
+    Core.withObject
+      "GitLabEnterpriseConfig"
+      ( \o ->
+          GitLabEnterpriseConfig
+            Core.<$> (o Core..:? "hostUri")
+            Core.<*> (o Core..:? "serviceDirectoryConfig")
+            Core.<*> (o Core..:? "sslCa")
+      )
+
+instance Core.ToJSON GitLabEnterpriseConfig where
+  toJSON GitLabEnterpriseConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("hostUri" Core..=) Core.<$> hostUri,
+            ("serviceDirectoryConfig" Core..=)
+              Core.<$> serviceDirectoryConfig,
+            ("sslCa" Core..=) Core.<$> sslCa
+          ]
+      )
+
+-- | GitLabEventsConfig describes the configuration of a trigger that creates a build whenever a GitLab event is received.
+--
+-- /See:/ 'newGitLabEventsConfig' smart constructor.
+data GitLabEventsConfig = GitLabEventsConfig
+  { -- | Output only. The GitLabConfig specified in the gitlab/config/resource field.
+    gitlabConfig :: (Core.Maybe GitLabConfig),
+    -- | The GitLab config resource that this trigger config maps to.
+    gitlabConfigResource :: (Core.Maybe Core.Text),
+    -- | Namespace of the GitLab project.
+    projectNamespace :: (Core.Maybe Core.Text),
+    -- | Filter to match changes in pull requests.
+    pullRequest :: (Core.Maybe PullRequestFilter),
+    -- | Filter to match changes in refs like branches, tags.
+    push :: (Core.Maybe PushFilter)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GitLabEventsConfig' with the minimum fields required to make a request.
+newGitLabEventsConfig ::
+  GitLabEventsConfig
+newGitLabEventsConfig =
+  GitLabEventsConfig
+    { gitlabConfig = Core.Nothing,
+      gitlabConfigResource = Core.Nothing,
+      projectNamespace = Core.Nothing,
+      pullRequest = Core.Nothing,
+      push = Core.Nothing
+    }
+
+instance Core.FromJSON GitLabEventsConfig where
+  parseJSON =
+    Core.withObject
+      "GitLabEventsConfig"
+      ( \o ->
+          GitLabEventsConfig
+            Core.<$> (o Core..:? "gitlabConfig")
+            Core.<*> (o Core..:? "gitlabConfigResource")
+            Core.<*> (o Core..:? "projectNamespace")
+            Core.<*> (o Core..:? "pullRequest")
+            Core.<*> (o Core..:? "push")
+      )
+
+instance Core.ToJSON GitLabEventsConfig where
+  toJSON GitLabEventsConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("gitlabConfig" Core..=) Core.<$> gitlabConfig,
+            ("gitlabConfigResource" Core..=)
+              Core.<$> gitlabConfigResource,
+            ("projectNamespace" Core..=)
+              Core.<$> projectNamespace,
+            ("pullRequest" Core..=) Core.<$> pullRequest,
+            ("push" Core..=) Core.<$> push
+          ]
+      )
+
+-- | Proto Representing a GitLabRepository
+--
+-- /See:/ 'newGitLabRepository' smart constructor.
+data GitLabRepository = GitLabRepository
+  { -- | Link to the browse repo page on the GitLab instance
+    browseUri :: (Core.Maybe Core.Text),
+    -- | Description of the repository
+    description :: (Core.Maybe Core.Text),
+    -- | Display name of the repository
+    displayName :: (Core.Maybe Core.Text),
+    -- | The resource name of the repository
+    name :: (Core.Maybe Core.Text),
+    -- | Identifier for a repository
+    repositoryId :: (Core.Maybe GitLabRepositoryId)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GitLabRepository' with the minimum fields required to make a request.
+newGitLabRepository ::
+  GitLabRepository
+newGitLabRepository =
+  GitLabRepository
+    { browseUri = Core.Nothing,
+      description = Core.Nothing,
+      displayName = Core.Nothing,
+      name = Core.Nothing,
+      repositoryId = Core.Nothing
+    }
+
+instance Core.FromJSON GitLabRepository where
+  parseJSON =
+    Core.withObject
+      "GitLabRepository"
+      ( \o ->
+          GitLabRepository
+            Core.<$> (o Core..:? "browseUri")
+            Core.<*> (o Core..:? "description")
+            Core.<*> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "repositoryId")
+      )
+
+instance Core.ToJSON GitLabRepository where
+  toJSON GitLabRepository {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("browseUri" Core..=) Core.<$> browseUri,
+            ("description" Core..=) Core.<$> description,
+            ("displayName" Core..=) Core.<$> displayName,
+            ("name" Core..=) Core.<$> name,
+            ("repositoryId" Core..=) Core.<$> repositoryId
+          ]
+      )
+
+-- | GitLabRepositoryId identifies a specific repository hosted on GitLab.com or GitLabEnterprise
+--
+-- /See:/ 'newGitLabRepositoryId' smart constructor.
+data GitLabRepositoryId = GitLabRepositoryId
+  { -- | Required. Identifier for the repository. example: \"namespace\/project-slug\", namespace is usually the username or group ID
+    id :: (Core.Maybe Core.Text),
+    -- | Output only. The ID of the webhook that was created for receiving events from this repo. We only create and manage a single webhook for each repo.
+    webhookId :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GitLabRepositoryId' with the minimum fields required to make a request.
+newGitLabRepositoryId ::
+  GitLabRepositoryId
+newGitLabRepositoryId =
+  GitLabRepositoryId {id = Core.Nothing, webhookId = Core.Nothing}
+
+instance Core.FromJSON GitLabRepositoryId where
+  parseJSON =
+    Core.withObject
+      "GitLabRepositoryId"
+      ( \o ->
+          GitLabRepositoryId
+            Core.<$> (o Core..:? "id") Core.<*> (o Core..:? "webhookId")
+      )
+
+instance Core.ToJSON GitLabRepositoryId where
+  toJSON GitLabRepositoryId {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("id" Core..=) Core.<$> id,
+            ("webhookId" Core..=) Core.<$> webhookId
+          ]
+      )
+
+-- | GitLabSecrets represents the secrets in Secret Manager for a GitLab integration.
+--
+-- /See:/ 'newGitLabSecrets' smart constructor.
+data GitLabSecrets = GitLabSecrets
+  { -- | Required. The resource name for the api access token’s secret version
+    apiAccessTokenVersion :: (Core.Maybe Core.Text),
+    -- | Required. Immutable. API Key that will be attached to webhook requests from GitLab to Cloud Build.
+    apiKeyVersion :: (Core.Maybe Core.Text),
+    -- | Required. The resource name for the read access token’s secret version
+    readAccessTokenVersion :: (Core.Maybe Core.Text),
+    -- | Required. Immutable. The resource name for the webhook secret’s secret version. Once this field has been set, it cannot be changed. If you need to change it, please create another GitLabConfig.
+    webhookSecretVersion :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GitLabSecrets' with the minimum fields required to make a request.
+newGitLabSecrets ::
+  GitLabSecrets
+newGitLabSecrets =
+  GitLabSecrets
+    { apiAccessTokenVersion = Core.Nothing,
+      apiKeyVersion = Core.Nothing,
+      readAccessTokenVersion = Core.Nothing,
+      webhookSecretVersion = Core.Nothing
+    }
+
+instance Core.FromJSON GitLabSecrets where
+  parseJSON =
+    Core.withObject
+      "GitLabSecrets"
+      ( \o ->
+          GitLabSecrets
+            Core.<$> (o Core..:? "apiAccessTokenVersion")
+            Core.<*> (o Core..:? "apiKeyVersion")
+            Core.<*> (o Core..:? "readAccessTokenVersion")
+            Core.<*> (o Core..:? "webhookSecretVersion")
+      )
+
+instance Core.ToJSON GitLabSecrets where
+  toJSON GitLabSecrets {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("apiAccessTokenVersion" Core..=)
+              Core.<$> apiAccessTokenVersion,
+            ("apiKeyVersion" Core..=) Core.<$> apiKeyVersion,
+            ("readAccessTokenVersion" Core..=)
+              Core.<$> readAccessTokenVersion,
+            ("webhookSecretVersion" Core..=)
+              Core.<$> webhookSecretVersion
+          ]
+      )
+
 -- | GitRepoSource describes a repo and ref of a code repository.
 --
 -- /See:/ 'newGitRepoSource' smart constructor.
@@ -2870,7 +3387,7 @@ data GitRepoSource = GitRepoSource
     ref :: (Core.Maybe Core.Text),
     -- | See RepoType below.
     repoType :: (Core.Maybe GitRepoSource_RepoType),
-    -- | The URI of the repo (required).
+    -- | The URI of the repo. Either uri or repository can be specified and is required.
     uri :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2913,103 +3430,6 @@ instance Core.ToJSON GitRepoSource where
             ("uri" Core..=) Core.<$> uri
           ]
       )
-
--- | Represents the metadata of the long-running operation.
---
--- /See:/ 'newGoogleDevtoolsCloudbuildV2OperationMetadata' smart constructor.
-data GoogleDevtoolsCloudbuildV2OperationMetadata = GoogleDevtoolsCloudbuildV2OperationMetadata
-  { -- | Output only. API version used to start the operation.
-    apiVersion :: (Core.Maybe Core.Text),
-    -- | Output only. The time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime),
-    -- | Output only. The time the operation finished running.
-    endTime :: (Core.Maybe Core.DateTime),
-    -- | Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
-    requestedCancellation :: (Core.Maybe Core.Bool),
-    -- | Output only. Human-readable status of the operation, if any.
-    statusMessage :: (Core.Maybe Core.Text),
-    -- | Output only. Server-defined resource path for the target of the operation.
-    target :: (Core.Maybe Core.Text),
-    -- | Output only. Name of the verb executed by the operation.
-    verb :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'GoogleDevtoolsCloudbuildV2OperationMetadata' with the minimum fields required to make a request.
-newGoogleDevtoolsCloudbuildV2OperationMetadata ::
-  GoogleDevtoolsCloudbuildV2OperationMetadata
-newGoogleDevtoolsCloudbuildV2OperationMetadata =
-  GoogleDevtoolsCloudbuildV2OperationMetadata
-    { apiVersion = Core.Nothing,
-      createTime = Core.Nothing,
-      endTime = Core.Nothing,
-      requestedCancellation = Core.Nothing,
-      statusMessage = Core.Nothing,
-      target = Core.Nothing,
-      verb = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    GoogleDevtoolsCloudbuildV2OperationMetadata
-  where
-  parseJSON =
-    Core.withObject
-      "GoogleDevtoolsCloudbuildV2OperationMetadata"
-      ( \o ->
-          GoogleDevtoolsCloudbuildV2OperationMetadata
-            Core.<$> (o Core..:? "apiVersion")
-            Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "endTime")
-            Core.<*> (o Core..:? "requestedCancellation")
-            Core.<*> (o Core..:? "statusMessage")
-            Core.<*> (o Core..:? "target")
-            Core.<*> (o Core..:? "verb")
-      )
-
-instance
-  Core.ToJSON
-    GoogleDevtoolsCloudbuildV2OperationMetadata
-  where
-  toJSON
-    GoogleDevtoolsCloudbuildV2OperationMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("apiVersion" Core..=) Core.<$> apiVersion,
-              ("createTime" Core..=) Core.<$> createTime,
-              ("endTime" Core..=) Core.<$> endTime,
-              ("requestedCancellation" Core..=)
-                Core.<$> requestedCancellation,
-              ("statusMessage" Core..=) Core.<$> statusMessage,
-              ("target" Core..=) Core.<$> target,
-              ("verb" Core..=) Core.<$> verb
-            ]
-        )
-
--- | HTTPDelivery is the delivery configuration for an HTTP notification.
---
--- /See:/ 'newHTTPDelivery' smart constructor.
-newtype HTTPDelivery = HTTPDelivery
-  { -- | The URI to which JSON-containing HTTP POST requests should be sent.
-    uri :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'HTTPDelivery' with the minimum fields required to make a request.
-newHTTPDelivery ::
-  HTTPDelivery
-newHTTPDelivery = HTTPDelivery {uri = Core.Nothing}
-
-instance Core.FromJSON HTTPDelivery where
-  parseJSON =
-    Core.withObject
-      "HTTPDelivery"
-      (\o -> HTTPDelivery Core.<$> (o Core..:? "uri"))
-
-instance Core.ToJSON HTTPDelivery where
-  toJSON HTTPDelivery {..} =
-    Core.object
-      (Core.catMaybes [("uri" Core..=) Core.<$> uri])
 
 -- | Container message for hash values.
 --
@@ -3352,6 +3772,85 @@ instance Core.ToJSON ListBuildsResponse where
           ]
       )
 
+-- | RPC response object returned by ListGitLabConfigs RPC method.
+--
+-- /See:/ 'newListGitLabConfigsResponse' smart constructor.
+data ListGitLabConfigsResponse = ListGitLabConfigsResponse
+  { -- | A list of GitLabConfigs
+    gitlabConfigs :: (Core.Maybe [GitLabConfig]),
+    -- | A token that can be sent as @page_token@ to retrieve the next page If this field is omitted, there are no subsequent pages.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListGitLabConfigsResponse' with the minimum fields required to make a request.
+newListGitLabConfigsResponse ::
+  ListGitLabConfigsResponse
+newListGitLabConfigsResponse =
+  ListGitLabConfigsResponse
+    { gitlabConfigs = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON ListGitLabConfigsResponse where
+  parseJSON =
+    Core.withObject
+      "ListGitLabConfigsResponse"
+      ( \o ->
+          ListGitLabConfigsResponse
+            Core.<$> (o Core..:? "gitlabConfigs")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON ListGitLabConfigsResponse where
+  toJSON ListGitLabConfigsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("gitlabConfigs" Core..=) Core.<$> gitlabConfigs,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
+-- | RPC response object returned by the ListGitLabRepositories RPC method.
+--
+-- /See:/ 'newListGitLabRepositoriesResponse' smart constructor.
+data ListGitLabRepositoriesResponse = ListGitLabRepositoriesResponse
+  { -- | List of GitLab repositories
+    gitlabRepositories :: (Core.Maybe [GitLabRepository]),
+    -- | A token that can be sent as @page_token@ to retrieve the next page. If this field is omitted, there are no subsequent pages.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListGitLabRepositoriesResponse' with the minimum fields required to make a request.
+newListGitLabRepositoriesResponse ::
+  ListGitLabRepositoriesResponse
+newListGitLabRepositoriesResponse =
+  ListGitLabRepositoriesResponse
+    { gitlabRepositories = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON ListGitLabRepositoriesResponse where
+  parseJSON =
+    Core.withObject
+      "ListGitLabRepositoriesResponse"
+      ( \o ->
+          ListGitLabRepositoriesResponse
+            Core.<$> (o Core..:? "gitlabRepositories")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON ListGitLabRepositoriesResponse where
+  toJSON ListGitLabRepositoriesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("gitlabRepositories" Core..=)
+              Core.<$> gitlabRepositories,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
 -- | RPC response object returned by ListGithubEnterpriseConfigs RPC method.
 --
 -- /See:/ 'newListGithubEnterpriseConfigsResponse' smart constructor.
@@ -3428,6 +3927,60 @@ instance Core.ToJSON ListWorkerPoolsResponse where
           ]
       )
 
+-- | A Maven artifact to upload to Artifact Registry upon successful completion of all build steps.
+--
+-- /See:/ 'newMavenArtifact' smart constructor.
+data MavenArtifact = MavenArtifact
+  { -- | Maven @artifactId@ value used when uploading the artifact to Artifact Registry.
+    artifactId :: (Core.Maybe Core.Text),
+    -- | Maven @groupId@ value used when uploading the artifact to Artifact Registry.
+    groupId :: (Core.Maybe Core.Text),
+    -- | Path to an artifact in the build\'s workspace to be uploaded to Artifact Registry. This can be either an absolute path, e.g. \/workspace\/my-app\/target\/my-app-1.0.SNAPSHOT.jar or a relative path from \/workspace, e.g. my-app\/target\/my-app-1.0.SNAPSHOT.jar.
+    path :: (Core.Maybe Core.Text),
+    -- | Artifact Registry repository, in the form \"https:\/\/$REGION-maven.pkg.dev\/$PROJECT\/$REPOSITORY\" Artifact in the workspace specified by path will be uploaded to Artifact Registry with this location as a prefix.
+    repository :: (Core.Maybe Core.Text),
+    -- | Maven @version@ value used when uploading the artifact to Artifact Registry.
+    version :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MavenArtifact' with the minimum fields required to make a request.
+newMavenArtifact ::
+  MavenArtifact
+newMavenArtifact =
+  MavenArtifact
+    { artifactId = Core.Nothing,
+      groupId = Core.Nothing,
+      path = Core.Nothing,
+      repository = Core.Nothing,
+      version = Core.Nothing
+    }
+
+instance Core.FromJSON MavenArtifact where
+  parseJSON =
+    Core.withObject
+      "MavenArtifact"
+      ( \o ->
+          MavenArtifact
+            Core.<$> (o Core..:? "artifactId")
+            Core.<*> (o Core..:? "groupId")
+            Core.<*> (o Core..:? "path")
+            Core.<*> (o Core..:? "repository")
+            Core.<*> (o Core..:? "version")
+      )
+
+instance Core.ToJSON MavenArtifact where
+  toJSON MavenArtifact {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("artifactId" Core..=) Core.<$> artifactId,
+            ("groupId" Core..=) Core.<$> groupId,
+            ("path" Core..=) Core.<$> path,
+            ("repository" Core..=) Core.<$> repository,
+            ("version" Core..=) Core.<$> version
+          ]
+      )
+
 -- | Defines the network configuration for the pool.
 --
 -- /See:/ 'newNetworkConfig' smart constructor.
@@ -3435,7 +3988,9 @@ data NetworkConfig = NetworkConfig
   { -- | Option to configure network egress for the workers.
     egressOption :: (Core.Maybe NetworkConfig_EgressOption),
     -- | Required. Immutable. The network definition that the workers are peered to. If this section is left empty, the workers will be peered to @WorkerPool.project_id@ on the service producer network. Must be in the format @projects\/{project}\/global\/networks\/{network}@, where @{project}@ is a project number, such as @12345@, and @{network}@ is the name of a VPC network in the project. See <https://cloud.google.com/build/docs/private-pools/set-up-private-pool-environment Understanding network configuration options>
-    peeredNetwork :: (Core.Maybe Core.Text)
+    peeredNetwork :: (Core.Maybe Core.Text),
+    -- | Immutable. Subnet IP range within the peered network. This is specified in CIDR notation with a slash and the subnet prefix size. You can optionally specify an IP address before the subnet prefix value. e.g. @192.168.0.0\/29@ would specify an IP range starting at 192.168.0.0 with a prefix size of 29 bits. @\/16@ would specify a prefix size of 16 bits, with an automatically determined IP within the peered VPC. If unspecified, a value of @\/24@ will be used.
+    peeredNetworkIpRange :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3443,7 +3998,11 @@ data NetworkConfig = NetworkConfig
 newNetworkConfig ::
   NetworkConfig
 newNetworkConfig =
-  NetworkConfig {egressOption = Core.Nothing, peeredNetwork = Core.Nothing}
+  NetworkConfig
+    { egressOption = Core.Nothing,
+      peeredNetwork = Core.Nothing,
+      peeredNetworkIpRange = Core.Nothing
+    }
 
 instance Core.FromJSON NetworkConfig where
   parseJSON =
@@ -3453,6 +4012,7 @@ instance Core.FromJSON NetworkConfig where
           NetworkConfig
             Core.<$> (o Core..:? "egressOption")
             Core.<*> (o Core..:? "peeredNetwork")
+            Core.<*> (o Core..:? "peeredNetworkIpRange")
       )
 
 instance Core.ToJSON NetworkConfig where
@@ -3460,274 +4020,9 @@ instance Core.ToJSON NetworkConfig where
     Core.object
       ( Core.catMaybes
           [ ("egressOption" Core..=) Core.<$> egressOption,
-            ("peeredNetwork" Core..=) Core.<$> peeredNetwork
-          ]
-      )
-
--- | Notification is the container which holds the data that is relevant to this particular notification.
---
--- /See:/ 'newNotification' smart constructor.
-data Notification = Notification
-  { -- | The filter string to use for notification filtering. Currently, this is assumed to be a CEL program. See https:\/\/opensource.google\/projects\/cel for more.
-    filter :: (Core.Maybe Core.Text),
-    -- | Configuration for HTTP delivery.
-    httpDelivery :: (Core.Maybe HTTPDelivery),
-    -- | Configuration for Slack delivery.
-    slackDelivery :: (Core.Maybe SlackDelivery),
-    -- | Configuration for SMTP (email) delivery.
-    smtpDelivery :: (Core.Maybe SMTPDelivery),
-    -- | Escape hatch for users to supply custom delivery configs.
-    structDelivery :: (Core.Maybe Notification_StructDelivery)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'Notification' with the minimum fields required to make a request.
-newNotification ::
-  Notification
-newNotification =
-  Notification
-    { filter = Core.Nothing,
-      httpDelivery = Core.Nothing,
-      slackDelivery = Core.Nothing,
-      smtpDelivery = Core.Nothing,
-      structDelivery = Core.Nothing
-    }
-
-instance Core.FromJSON Notification where
-  parseJSON =
-    Core.withObject
-      "Notification"
-      ( \o ->
-          Notification
-            Core.<$> (o Core..:? "filter")
-            Core.<*> (o Core..:? "httpDelivery")
-            Core.<*> (o Core..:? "slackDelivery")
-            Core.<*> (o Core..:? "smtpDelivery")
-            Core.<*> (o Core..:? "structDelivery")
-      )
-
-instance Core.ToJSON Notification where
-  toJSON Notification {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("filter" Core..=) Core.<$> filter,
-            ("httpDelivery" Core..=) Core.<$> httpDelivery,
-            ("slackDelivery" Core..=) Core.<$> slackDelivery,
-            ("smtpDelivery" Core..=) Core.<$> smtpDelivery,
-            ("structDelivery" Core..=) Core.<$> structDelivery
-          ]
-      )
-
--- | Escape hatch for users to supply custom delivery configs.
---
--- /See:/ 'newNotification_StructDelivery' smart constructor.
-newtype Notification_StructDelivery = Notification_StructDelivery
-  { -- | Properties of the object.
-    additional :: (Core.HashMap Core.Text Core.Value)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'Notification_StructDelivery' with the minimum fields required to make a request.
-newNotification_StructDelivery ::
-  -- |  Properties of the object. See 'additional'.
-  Core.HashMap Core.Text Core.Value ->
-  Notification_StructDelivery
-newNotification_StructDelivery additional =
-  Notification_StructDelivery {additional = additional}
-
-instance Core.FromJSON Notification_StructDelivery where
-  parseJSON =
-    Core.withObject
-      "Notification_StructDelivery"
-      ( \o ->
-          Notification_StructDelivery
-            Core.<$> (Core.parseJSONObject o)
-      )
-
-instance Core.ToJSON Notification_StructDelivery where
-  toJSON Notification_StructDelivery {..} =
-    Core.toJSON additional
-
--- | NotifierConfig is the top-level configuration message.
---
--- /See:/ 'newNotifierConfig' smart constructor.
-data NotifierConfig = NotifierConfig
-  { -- | The API version of this configuration format.
-    apiVersion :: (Core.Maybe Core.Text),
-    -- | The type of notifier to use (e.g. SMTPNotifier).
-    kind :: (Core.Maybe Core.Text),
-    -- | Metadata for referring to\/handling\/deploying this notifier.
-    metadata :: (Core.Maybe NotifierMetadata),
-    -- | The actual configuration for this notifier.
-    spec :: (Core.Maybe NotifierSpec)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'NotifierConfig' with the minimum fields required to make a request.
-newNotifierConfig ::
-  NotifierConfig
-newNotifierConfig =
-  NotifierConfig
-    { apiVersion = Core.Nothing,
-      kind = Core.Nothing,
-      metadata = Core.Nothing,
-      spec = Core.Nothing
-    }
-
-instance Core.FromJSON NotifierConfig where
-  parseJSON =
-    Core.withObject
-      "NotifierConfig"
-      ( \o ->
-          NotifierConfig
-            Core.<$> (o Core..:? "apiVersion")
-            Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "metadata")
-            Core.<*> (o Core..:? "spec")
-      )
-
-instance Core.ToJSON NotifierConfig where
-  toJSON NotifierConfig {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("apiVersion" Core..=) Core.<$> apiVersion,
-            ("kind" Core..=) Core.<$> kind,
-            ("metadata" Core..=) Core.<$> metadata,
-            ("spec" Core..=) Core.<$> spec
-          ]
-      )
-
--- | NotifierMetadata contains the data which can be used to reference or describe this notifier.
---
--- /See:/ 'newNotifierMetadata' smart constructor.
-data NotifierMetadata = NotifierMetadata
-  { -- | The human-readable and user-given name for the notifier. For example: \"repo-merge-email-notifier\".
-    name :: (Core.Maybe Core.Text),
-    -- | The string representing the name and version of notifier to deploy. Expected to be of the form of \"\/:\". For example: \"gcr.io\/my-project\/notifiers\/smtp:1.2.34\".
-    notifier :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'NotifierMetadata' with the minimum fields required to make a request.
-newNotifierMetadata ::
-  NotifierMetadata
-newNotifierMetadata =
-  NotifierMetadata {name = Core.Nothing, notifier = Core.Nothing}
-
-instance Core.FromJSON NotifierMetadata where
-  parseJSON =
-    Core.withObject
-      "NotifierMetadata"
-      ( \o ->
-          NotifierMetadata
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "notifier")
-      )
-
-instance Core.ToJSON NotifierMetadata where
-  toJSON NotifierMetadata {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("notifier" Core..=) Core.<$> notifier
-          ]
-      )
-
--- | NotifierSecret is the container that maps a secret name (reference) to its Google Cloud Secret Manager resource path.
---
--- /See:/ 'newNotifierSecret' smart constructor.
-data NotifierSecret = NotifierSecret
-  { -- | Name is the local name of the secret, such as the verbatim string \"my-smtp-password\".
-    name :: (Core.Maybe Core.Text),
-    -- | Value is interpreted to be a resource path for fetching the actual (versioned) secret data for this secret. For example, this would be a Google Cloud Secret Manager secret version resource path like: \"projects\/my-project\/secrets\/my-secret\/versions\/latest\".
-    value :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'NotifierSecret' with the minimum fields required to make a request.
-newNotifierSecret ::
-  NotifierSecret
-newNotifierSecret = NotifierSecret {name = Core.Nothing, value = Core.Nothing}
-
-instance Core.FromJSON NotifierSecret where
-  parseJSON =
-    Core.withObject
-      "NotifierSecret"
-      ( \o ->
-          NotifierSecret
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
-      )
-
-instance Core.ToJSON NotifierSecret where
-  toJSON NotifierSecret {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("value" Core..=) Core.<$> value
-          ]
-      )
-
--- | NotifierSecretRef contains the reference to a secret stored in the corresponding NotifierSpec.
---
--- /See:/ 'newNotifierSecretRef' smart constructor.
-newtype NotifierSecretRef = NotifierSecretRef
-  { -- | The value of @secret_ref@ should be a @name@ that is registered in a @Secret@ in the @secrets@ list of the @Spec@.
-    secretRef :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'NotifierSecretRef' with the minimum fields required to make a request.
-newNotifierSecretRef ::
-  NotifierSecretRef
-newNotifierSecretRef = NotifierSecretRef {secretRef = Core.Nothing}
-
-instance Core.FromJSON NotifierSecretRef where
-  parseJSON =
-    Core.withObject
-      "NotifierSecretRef"
-      ( \o ->
-          NotifierSecretRef Core.<$> (o Core..:? "secretRef")
-      )
-
-instance Core.ToJSON NotifierSecretRef where
-  toJSON NotifierSecretRef {..} =
-    Core.object
-      ( Core.catMaybes
-          [("secretRef" Core..=) Core.<$> secretRef]
-      )
-
--- | NotifierSpec is the configuration container for notifications.
---
--- /See:/ 'newNotifierSpec' smart constructor.
-data NotifierSpec = NotifierSpec
-  { -- | The configuration of this particular notifier.
-    notification :: (Core.Maybe Notification),
-    -- | Configurations for secret resources used by this particular notifier.
-    secrets :: (Core.Maybe [NotifierSecret])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'NotifierSpec' with the minimum fields required to make a request.
-newNotifierSpec ::
-  NotifierSpec
-newNotifierSpec =
-  NotifierSpec {notification = Core.Nothing, secrets = Core.Nothing}
-
-instance Core.FromJSON NotifierSpec where
-  parseJSON =
-    Core.withObject
-      "NotifierSpec"
-      ( \o ->
-          NotifierSpec
-            Core.<$> (o Core..:? "notification")
-            Core.<*> (o Core..:? "secrets")
-      )
-
-instance Core.ToJSON NotifierSpec where
-  toJSON NotifierSpec {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("notification" Core..=) Core.<$> notification,
-            ("secrets" Core..=) Core.<$> secrets
+            ("peeredNetwork" Core..=) Core.<$> peeredNetwork,
+            ("peeredNetworkIpRange" Core..=)
+              Core.<$> peeredNetworkIpRange
           ]
       )
 
@@ -4159,6 +4454,42 @@ instance Core.ToJSON PushFilter where
           ]
       )
 
+-- | Python package to upload to Artifact Registry upon successful completion of all build steps. A package can encapsulate multiple objects to be uploaded to a single repository.
+--
+-- /See:/ 'newPythonPackage' smart constructor.
+data PythonPackage = PythonPackage
+  { -- | Path globs used to match files in the build\'s workspace. For Python\/ Twine, this is usually @dist\/*@, and sometimes additionally an @.asc@ file.
+    paths :: (Core.Maybe [Core.Text]),
+    -- | Artifact Registry repository, in the form \"https:\/\/$REGION-python.pkg.dev\/$PROJECT\/$REPOSITORY\" Files in the workspace matching any path pattern will be uploaded to Artifact Registry with this location as a prefix.
+    repository :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PythonPackage' with the minimum fields required to make a request.
+newPythonPackage ::
+  PythonPackage
+newPythonPackage =
+  PythonPackage {paths = Core.Nothing, repository = Core.Nothing}
+
+instance Core.FromJSON PythonPackage where
+  parseJSON =
+    Core.withObject
+      "PythonPackage"
+      ( \o ->
+          PythonPackage
+            Core.<$> (o Core..:? "paths")
+            Core.<*> (o Core..:? "repository")
+      )
+
+instance Core.ToJSON PythonPackage where
+  toJSON PythonPackage {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("paths" Core..=) Core.<$> paths,
+            ("repository" Core..=) Core.<$> repository
+          ]
+      )
+
 -- | ReceiveTriggerWebhookResponse [Experimental] is the response object for the ReceiveTriggerWebhook method.
 --
 -- /See:/ 'newReceiveTriggerWebhookResponse' smart constructor.
@@ -4220,6 +4551,45 @@ instance
                 Core.<$> connectedRepository
             ]
         )
+
+-- | RPC request object accepted by RemoveGitLabConnectedRepository RPC method.
+--
+-- /See:/ 'newRemoveGitLabConnectedRepositoryRequest' smart constructor.
+newtype RemoveGitLabConnectedRepositoryRequest = RemoveGitLabConnectedRepositoryRequest
+  { -- | The connected repository to remove.
+    connectedRepository :: (Core.Maybe GitLabRepositoryId)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RemoveGitLabConnectedRepositoryRequest' with the minimum fields required to make a request.
+newRemoveGitLabConnectedRepositoryRequest ::
+  RemoveGitLabConnectedRepositoryRequest
+newRemoveGitLabConnectedRepositoryRequest =
+  RemoveGitLabConnectedRepositoryRequest {connectedRepository = Core.Nothing}
+
+instance
+  Core.FromJSON
+    RemoveGitLabConnectedRepositoryRequest
+  where
+  parseJSON =
+    Core.withObject
+      "RemoveGitLabConnectedRepositoryRequest"
+      ( \o ->
+          RemoveGitLabConnectedRepositoryRequest
+            Core.<$> (o Core..:? "connectedRepository")
+      )
+
+instance
+  Core.ToJSON
+    RemoveGitLabConnectedRepositoryRequest
+  where
+  toJSON RemoveGitLabConnectedRepositoryRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("connectedRepository" Core..=)
+              Core.<$> connectedRepository
+          ]
+      )
 
 -- | Location of the source in a Google Cloud Source Repository.
 --
@@ -4320,13 +4690,62 @@ instance Core.ToJSON RepoSource_Substitutions where
   toJSON RepoSource_Substitutions {..} =
     Core.toJSON additional
 
+-- | The configuration of a trigger that creates a build whenever an event from Repo API is received.
+--
+-- /See:/ 'newRepositoryEventConfig' smart constructor.
+data RepositoryEventConfig = RepositoryEventConfig
+  { -- | Filter to match changes in pull requests.
+    pullRequest :: (Core.Maybe PullRequestFilter),
+    -- | Filter to match changes in refs like branches, tags.
+    push :: (Core.Maybe PushFilter),
+    -- | The resource name of the Repo API resource.
+    repository :: (Core.Maybe Core.Text),
+    -- | Output only. The type of the SCM vendor the repository points to.
+    repositoryType :: (Core.Maybe RepositoryEventConfig_RepositoryType)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RepositoryEventConfig' with the minimum fields required to make a request.
+newRepositoryEventConfig ::
+  RepositoryEventConfig
+newRepositoryEventConfig =
+  RepositoryEventConfig
+    { pullRequest = Core.Nothing,
+      push = Core.Nothing,
+      repository = Core.Nothing,
+      repositoryType = Core.Nothing
+    }
+
+instance Core.FromJSON RepositoryEventConfig where
+  parseJSON =
+    Core.withObject
+      "RepositoryEventConfig"
+      ( \o ->
+          RepositoryEventConfig
+            Core.<$> (o Core..:? "pullRequest")
+            Core.<*> (o Core..:? "push")
+            Core.<*> (o Core..:? "repository")
+            Core.<*> (o Core..:? "repositoryType")
+      )
+
+instance Core.ToJSON RepositoryEventConfig where
+  toJSON RepositoryEventConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("pullRequest" Core..=) Core.<$> pullRequest,
+            ("push" Core..=) Core.<$> push,
+            ("repository" Core..=) Core.<$> repository,
+            ("repositoryType" Core..=) Core.<$> repositoryType
+          ]
+      )
+
 -- | Artifacts created by the build pipeline.
 --
 -- /See:/ 'newResults' smart constructor.
 data Results = Results
-  { -- | Path to the artifact manifest. Only populated when artifacts are uploaded.
+  { -- | Path to the artifact manifest for non-container artifacts uploaded to Cloud Storage. Only populated when artifacts are uploaded to Cloud Storage.
     artifactManifest :: (Core.Maybe Core.Text),
-    -- | Time to push all non-container artifacts.
+    -- | Time to push all non-container artifacts to Cloud Storage.
     artifactTiming :: (Core.Maybe TimeSpan),
     -- | List of build step digests, in the order corresponding to build step indices.
     buildStepImages :: (Core.Maybe [Core.Text]),
@@ -4334,8 +4753,12 @@ data Results = Results
     buildStepOutputs :: (Core.Maybe [Core.Base64]),
     -- | Container images that were built as a part of the build.
     images :: (Core.Maybe [BuiltImage]),
-    -- | Number of artifacts uploaded. Only populated when artifacts are uploaded.
-    numArtifacts :: (Core.Maybe Core.Int64)
+    -- | Maven artifacts uploaded to Artifact Registry at the end of the build.
+    mavenArtifacts :: (Core.Maybe [UploadedMavenArtifact]),
+    -- | Number of non-container artifacts uploaded to Cloud Storage. Only populated when artifacts are uploaded to Cloud Storage.
+    numArtifacts :: (Core.Maybe Core.Int64),
+    -- | Python artifacts uploaded to Artifact Registry at the end of the build.
+    pythonPackages :: (Core.Maybe [UploadedPythonPackage])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4349,7 +4772,9 @@ newResults =
       buildStepImages = Core.Nothing,
       buildStepOutputs = Core.Nothing,
       images = Core.Nothing,
-      numArtifacts = Core.Nothing
+      mavenArtifacts = Core.Nothing,
+      numArtifacts = Core.Nothing,
+      pythonPackages = Core.Nothing
     }
 
 instance Core.FromJSON Results where
@@ -4363,9 +4788,11 @@ instance Core.FromJSON Results where
             Core.<*> (o Core..:? "buildStepImages")
             Core.<*> (o Core..:? "buildStepOutputs")
             Core.<*> (o Core..:? "images")
+            Core.<*> (o Core..:? "mavenArtifacts")
             Core.<*> ( o Core..:? "numArtifacts"
                          Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "pythonPackages")
       )
 
 instance Core.ToJSON Results where
@@ -4379,8 +4806,10 @@ instance Core.ToJSON Results where
             ("buildStepOutputs" Core..=)
               Core.<$> buildStepOutputs,
             ("images" Core..=) Core.<$> images,
+            ("mavenArtifacts" Core..=) Core.<$> mavenArtifacts,
             ("numArtifacts" Core..=) Core.. Core.AsText
-              Core.<$> numArtifacts
+              Core.<$> numArtifacts,
+            ("pythonPackages" Core..=) Core.<$> pythonPackages
           ]
       )
 
@@ -4469,137 +4898,6 @@ instance Core.ToJSON RunBuildTriggerRequest where
           [ ("projectId" Core..=) Core.<$> projectId,
             ("source" Core..=) Core.<$> source,
             ("triggerId" Core..=) Core.<$> triggerId
-          ]
-      )
-
--- | Represents the custom metadata of the RunWorkflow long-running operation.
---
--- /See:/ 'newRunWorkflowCustomOperationMetadata' smart constructor.
-data RunWorkflowCustomOperationMetadata = RunWorkflowCustomOperationMetadata
-  { -- | Output only. API version used to start the operation.
-    apiVersion :: (Core.Maybe Core.Text),
-    -- | Output only. The time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime),
-    -- | Output only. The time the operation finished running.
-    endTime :: (Core.Maybe Core.DateTime),
-    -- | Output only. ID of the pipeline run created by RunWorkflow.
-    pipelineRunId :: (Core.Maybe Core.Text),
-    -- | Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
-    requestedCancellation :: (Core.Maybe Core.Bool),
-    -- | Output only. Server-defined resource path for the target of the operation.
-    target :: (Core.Maybe Core.Text),
-    -- | Output only. Name of the verb executed by the operation.
-    verb :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'RunWorkflowCustomOperationMetadata' with the minimum fields required to make a request.
-newRunWorkflowCustomOperationMetadata ::
-  RunWorkflowCustomOperationMetadata
-newRunWorkflowCustomOperationMetadata =
-  RunWorkflowCustomOperationMetadata
-    { apiVersion = Core.Nothing,
-      createTime = Core.Nothing,
-      endTime = Core.Nothing,
-      pipelineRunId = Core.Nothing,
-      requestedCancellation = Core.Nothing,
-      target = Core.Nothing,
-      verb = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    RunWorkflowCustomOperationMetadata
-  where
-  parseJSON =
-    Core.withObject
-      "RunWorkflowCustomOperationMetadata"
-      ( \o ->
-          RunWorkflowCustomOperationMetadata
-            Core.<$> (o Core..:? "apiVersion")
-            Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "endTime")
-            Core.<*> (o Core..:? "pipelineRunId")
-            Core.<*> (o Core..:? "requestedCancellation")
-            Core.<*> (o Core..:? "target")
-            Core.<*> (o Core..:? "verb")
-      )
-
-instance
-  Core.ToJSON
-    RunWorkflowCustomOperationMetadata
-  where
-  toJSON RunWorkflowCustomOperationMetadata {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("apiVersion" Core..=) Core.<$> apiVersion,
-            ("createTime" Core..=) Core.<$> createTime,
-            ("endTime" Core..=) Core.<$> endTime,
-            ("pipelineRunId" Core..=) Core.<$> pipelineRunId,
-            ("requestedCancellation" Core..=)
-              Core.<$> requestedCancellation,
-            ("target" Core..=) Core.<$> target,
-            ("verb" Core..=) Core.<$> verb
-          ]
-      )
-
--- | SMTPDelivery is the delivery configuration for an SMTP (email) notification.
---
--- /See:/ 'newSMTPDelivery' smart constructor.
-data SMTPDelivery = SMTPDelivery
-  { -- | This is the SMTP account\/email that appears in the @From:@ of the email. If empty, it is assumed to be sender.
-    fromAddress :: (Core.Maybe Core.Text),
-    -- | The SMTP sender\'s password.
-    password :: (Core.Maybe NotifierSecretRef),
-    -- | The SMTP port of the server.
-    port :: (Core.Maybe Core.Text),
-    -- | This is the list of addresses to which we send the email (i.e. in the @To:@ of the email).
-    recipientAddresses :: (Core.Maybe [Core.Text]),
-    -- | This is the SMTP account\/email that is used to send the message.
-    senderAddress :: (Core.Maybe Core.Text),
-    -- | The address of the SMTP server.
-    server :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'SMTPDelivery' with the minimum fields required to make a request.
-newSMTPDelivery ::
-  SMTPDelivery
-newSMTPDelivery =
-  SMTPDelivery
-    { fromAddress = Core.Nothing,
-      password = Core.Nothing,
-      port = Core.Nothing,
-      recipientAddresses = Core.Nothing,
-      senderAddress = Core.Nothing,
-      server = Core.Nothing
-    }
-
-instance Core.FromJSON SMTPDelivery where
-  parseJSON =
-    Core.withObject
-      "SMTPDelivery"
-      ( \o ->
-          SMTPDelivery
-            Core.<$> (o Core..:? "fromAddress")
-            Core.<*> (o Core..:? "password")
-            Core.<*> (o Core..:? "port")
-            Core.<*> (o Core..:? "recipientAddresses")
-            Core.<*> (o Core..:? "senderAddress")
-            Core.<*> (o Core..:? "server")
-      )
-
-instance Core.ToJSON SMTPDelivery where
-  toJSON SMTPDelivery {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("fromAddress" Core..=) Core.<$> fromAddress,
-            ("password" Core..=) Core.<$> password,
-            ("port" Core..=) Core.<$> port,
-            ("recipientAddresses" Core..=)
-              Core.<$> recipientAddresses,
-            ("senderAddress" Core..=) Core.<$> senderAddress,
-            ("server" Core..=) Core.<$> server
           ]
       )
 
@@ -4736,33 +5034,34 @@ instance Core.ToJSON Secrets where
           ]
       )
 
--- | SlackDelivery is the delivery configuration for delivering Slack messages via webhooks. See Slack webhook documentation at: https:\/\/api.slack.com\/messaging\/webhooks.
+-- | ServiceDirectoryConfig represents Service Directory configuration for a SCM host connection.
 --
--- /See:/ 'newSlackDelivery' smart constructor.
-newtype SlackDelivery = SlackDelivery
-  { -- | The secret reference for the Slack webhook URI for sending messages to a channel.
-    webhookUri :: (Core.Maybe NotifierSecretRef)
+-- /See:/ 'newServiceDirectoryConfig' smart constructor.
+newtype ServiceDirectoryConfig = ServiceDirectoryConfig
+  { -- | The Service Directory service name. Format: projects\/{project}\/locations\/{location}\/namespaces\/{namespace}\/services\/{service}.
+    service :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'SlackDelivery' with the minimum fields required to make a request.
-newSlackDelivery ::
-  SlackDelivery
-newSlackDelivery = SlackDelivery {webhookUri = Core.Nothing}
+-- | Creates a value of 'ServiceDirectoryConfig' with the minimum fields required to make a request.
+newServiceDirectoryConfig ::
+  ServiceDirectoryConfig
+newServiceDirectoryConfig = ServiceDirectoryConfig {service = Core.Nothing}
 
-instance Core.FromJSON SlackDelivery where
+instance Core.FromJSON ServiceDirectoryConfig where
   parseJSON =
     Core.withObject
-      "SlackDelivery"
+      "ServiceDirectoryConfig"
       ( \o ->
-          SlackDelivery Core.<$> (o Core..:? "webhookUri")
+          ServiceDirectoryConfig
+            Core.<$> (o Core..:? "service")
       )
 
-instance Core.ToJSON SlackDelivery where
-  toJSON SlackDelivery {..} =
+instance Core.ToJSON ServiceDirectoryConfig where
+  toJSON ServiceDirectoryConfig {..} =
     Core.object
       ( Core.catMaybes
-          [("webhookUri" Core..=) Core.<$> webhookUri]
+          [("service" Core..=) Core.<$> service]
       )
 
 -- | Location of the source in a supported storage service.
@@ -5292,6 +5591,94 @@ instance
           ]
       )
 
+-- | A Maven artifact uploaded using the MavenArtifact directive.
+--
+-- /See:/ 'newUploadedMavenArtifact' smart constructor.
+data UploadedMavenArtifact = UploadedMavenArtifact
+  { -- | Hash types and values of the Maven Artifact.
+    fileHashes :: (Core.Maybe FileHashes),
+    -- | Output only. Stores timing information for pushing the specified artifact.
+    pushTiming :: (Core.Maybe TimeSpan),
+    -- | URI of the uploaded artifact.
+    uri :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UploadedMavenArtifact' with the minimum fields required to make a request.
+newUploadedMavenArtifact ::
+  UploadedMavenArtifact
+newUploadedMavenArtifact =
+  UploadedMavenArtifact
+    { fileHashes = Core.Nothing,
+      pushTiming = Core.Nothing,
+      uri = Core.Nothing
+    }
+
+instance Core.FromJSON UploadedMavenArtifact where
+  parseJSON =
+    Core.withObject
+      "UploadedMavenArtifact"
+      ( \o ->
+          UploadedMavenArtifact
+            Core.<$> (o Core..:? "fileHashes")
+            Core.<*> (o Core..:? "pushTiming")
+            Core.<*> (o Core..:? "uri")
+      )
+
+instance Core.ToJSON UploadedMavenArtifact where
+  toJSON UploadedMavenArtifact {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("fileHashes" Core..=) Core.<$> fileHashes,
+            ("pushTiming" Core..=) Core.<$> pushTiming,
+            ("uri" Core..=) Core.<$> uri
+          ]
+      )
+
+-- | Artifact uploaded using the PythonPackage directive.
+--
+-- /See:/ 'newUploadedPythonPackage' smart constructor.
+data UploadedPythonPackage = UploadedPythonPackage
+  { -- | Hash types and values of the Python Artifact.
+    fileHashes :: (Core.Maybe FileHashes),
+    -- | Output only. Stores timing information for pushing the specified artifact.
+    pushTiming :: (Core.Maybe TimeSpan),
+    -- | URI of the uploaded artifact.
+    uri :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UploadedPythonPackage' with the minimum fields required to make a request.
+newUploadedPythonPackage ::
+  UploadedPythonPackage
+newUploadedPythonPackage =
+  UploadedPythonPackage
+    { fileHashes = Core.Nothing,
+      pushTiming = Core.Nothing,
+      uri = Core.Nothing
+    }
+
+instance Core.FromJSON UploadedPythonPackage where
+  parseJSON =
+    Core.withObject
+      "UploadedPythonPackage"
+      ( \o ->
+          UploadedPythonPackage
+            Core.<$> (o Core..:? "fileHashes")
+            Core.<*> (o Core..:? "pushTiming")
+            Core.<*> (o Core..:? "uri")
+      )
+
+instance Core.ToJSON UploadedPythonPackage where
+  toJSON UploadedPythonPackage {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("fileHashes" Core..=) Core.<$> fileHashes,
+            ("pushTiming" Core..=) Core.<$> pushTiming,
+            ("uri" Core..=) Core.<$> uri
+          ]
+      )
+
 -- | Volume describes a Docker container volume which is mounted into build steps in order to persist files across build step execution.
 --
 -- /See:/ 'newVolume' smart constructor.
@@ -5398,7 +5785,7 @@ instance Core.ToJSON WebhookConfig where
 --
 -- /See:/ 'newWorkerConfig' smart constructor.
 data WorkerConfig = WorkerConfig
-  { -- | Size of the disk attached to the worker, in GB. See <https://cloud.google.com/build/docs/private-pools/worker-pool-config-file-schema Worker pool config file>. Specify a value of up to 1000. If @0@ is specified, Cloud Build will use a standard disk size.
+  { -- | Size of the disk attached to the worker, in GB. See <https://cloud.google.com/build/docs/private-pools/worker-pool-config-file-schema Worker pool config file>. Specify a value of up to 2000. If @0@ is specified, Cloud Build will use a standard disk size.
     diskSizeGb :: (Core.Maybe Core.Int64),
     -- | Machine type of a worker, such as @e2-medium@. See <https://cloud.google.com/build/docs/private-pools/worker-pool-config-file-schema Worker pool config file>. If left blank, Cloud Build will use a sensible default.
     machineType :: (Core.Maybe Core.Text)

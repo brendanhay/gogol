@@ -180,12 +180,32 @@ module Gogol.CloudIdentity.Internal.Sum
         ..
       ),
 
+    -- * InboundSsoAssignment_SsoMode
+    InboundSsoAssignment_SsoMode
+      ( InboundSsoAssignment_SsoMode_SSOMODEUNSPECIFIED,
+        InboundSsoAssignment_SsoMode_SSOOFF,
+        InboundSsoAssignment_SsoMode_SAMLSSO,
+        InboundSsoAssignment_SsoMode_DOMAINWIDESAMLIFENABLED,
+        ..
+      ),
+
     -- * MemberRelation_RelationType
     MemberRelation_RelationType
       ( MemberRelation_RelationType_RELATIONTYPEUNSPECIFIED,
         MemberRelation_RelationType_Direct,
         MemberRelation_RelationType_Indirect,
         MemberRelation_RelationType_DIRECTANDINDIRECT,
+        ..
+      ),
+
+    -- * Membership_DeliverySetting
+    Membership_DeliverySetting
+      ( Membership_DeliverySetting_DELIVERYSETTINGUNSPECIFIED,
+        Membership_DeliverySetting_ALLMAIL,
+        Membership_DeliverySetting_Digest,
+        Membership_DeliverySetting_Daily,
+        Membership_DeliverySetting_None,
+        Membership_DeliverySetting_Disabled,
         ..
       ),
 
@@ -217,6 +237,23 @@ module Gogol.CloudIdentity.Internal.Sum
         RestrictionEvaluation_State_Compliant,
         RestrictionEvaluation_State_FORWARDCOMPLIANT,
         RestrictionEvaluation_State_NONCOMPLIANT,
+        ..
+      ),
+
+    -- * SignInBehavior_RedirectCondition
+    SignInBehavior_RedirectCondition
+      ( SignInBehavior_RedirectCondition_REDIRECTCONDITIONUNSPECIFIED,
+        SignInBehavior_RedirectCondition_Never,
+        ..
+      ),
+
+    -- * UserInvitation_State
+    UserInvitation_State
+      ( UserInvitation_State_STATEUNSPECIFIED,
+        UserInvitation_State_NOTYETSENT,
+        UserInvitation_State_Invited,
+        UserInvitation_State_Accepted,
+        UserInvitation_State_Declined,
         ..
       ),
 
@@ -898,6 +935,43 @@ pattern GroupRelation_RelationType_DIRECTANDINDIRECT = GroupRelation_RelationTyp
   GroupRelation_RelationType
   #-}
 
+-- | Inbound SSO behavior.
+newtype InboundSsoAssignment_SsoMode = InboundSsoAssignment_SsoMode {fromInboundSsoAssignment_SsoMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not allowed.
+pattern InboundSsoAssignment_SsoMode_SSOMODEUNSPECIFIED :: InboundSsoAssignment_SsoMode
+pattern InboundSsoAssignment_SsoMode_SSOMODEUNSPECIFIED = InboundSsoAssignment_SsoMode "SSO_MODE_UNSPECIFIED"
+
+-- | Disable SSO for the targeted users.
+pattern InboundSsoAssignment_SsoMode_SSOOFF :: InboundSsoAssignment_SsoMode
+pattern InboundSsoAssignment_SsoMode_SSOOFF = InboundSsoAssignment_SsoMode "SSO_OFF"
+
+-- | Use an external SAML Identity Provider for SSO for the targeted users.
+pattern InboundSsoAssignment_SsoMode_SAMLSSO :: InboundSsoAssignment_SsoMode
+pattern InboundSsoAssignment_SsoMode_SAMLSSO = InboundSsoAssignment_SsoMode "SAML_SSO"
+
+-- | Use the domain-wide SAML Identity Provider for the targeted users if one is configured; otherwise, this is equivalent to @SSO_OFF@. Note that this will also be equivalent to @SSO_OFF@ if\/when support for domain-wide SAML is removed. Google may disallow this mode at that point and existing assignments with this mode may be automatically changed to @SSO_OFF@.
+pattern InboundSsoAssignment_SsoMode_DOMAINWIDESAMLIFENABLED :: InboundSsoAssignment_SsoMode
+pattern InboundSsoAssignment_SsoMode_DOMAINWIDESAMLIFENABLED = InboundSsoAssignment_SsoMode "DOMAIN_WIDE_SAML_IF_ENABLED"
+
+{-# COMPLETE
+  InboundSsoAssignment_SsoMode_SSOMODEUNSPECIFIED,
+  InboundSsoAssignment_SsoMode_SSOOFF,
+  InboundSsoAssignment_SsoMode_SAMLSSO,
+  InboundSsoAssignment_SsoMode_DOMAINWIDESAMLIFENABLED,
+  InboundSsoAssignment_SsoMode
+  #-}
+
 -- | The relation between the group and the transitive member.
 newtype MemberRelation_RelationType = MemberRelation_RelationType {fromMemberRelation_RelationType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -933,6 +1007,53 @@ pattern MemberRelation_RelationType_DIRECTANDINDIRECT = MemberRelation_RelationT
   MemberRelation_RelationType_Indirect,
   MemberRelation_RelationType_DIRECTANDINDIRECT,
   MemberRelation_RelationType
+  #-}
+
+-- | Output only. Delivery setting associated with the membership.
+newtype Membership_DeliverySetting = Membership_DeliverySetting {fromMembership_DeliverySetting :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default. Should not be used.
+pattern Membership_DeliverySetting_DELIVERYSETTINGUNSPECIFIED :: Membership_DeliverySetting
+pattern Membership_DeliverySetting_DELIVERYSETTINGUNSPECIFIED = Membership_DeliverySetting "DELIVERY_SETTING_UNSPECIFIED"
+
+-- | Represents each mail should be delivered
+pattern Membership_DeliverySetting_ALLMAIL :: Membership_DeliverySetting
+pattern Membership_DeliverySetting_ALLMAIL = Membership_DeliverySetting "ALL_MAIL"
+
+-- | Represents 1 email for every 25 messages.
+pattern Membership_DeliverySetting_Digest :: Membership_DeliverySetting
+pattern Membership_DeliverySetting_Digest = Membership_DeliverySetting "DIGEST"
+
+-- | Represents daily summary of messages.
+pattern Membership_DeliverySetting_Daily :: Membership_DeliverySetting
+pattern Membership_DeliverySetting_Daily = Membership_DeliverySetting "DAILY"
+
+-- | Represents no delivery.
+pattern Membership_DeliverySetting_None :: Membership_DeliverySetting
+pattern Membership_DeliverySetting_None = Membership_DeliverySetting "NONE"
+
+-- | Represents disabled state.
+pattern Membership_DeliverySetting_Disabled :: Membership_DeliverySetting
+pattern Membership_DeliverySetting_Disabled = Membership_DeliverySetting "DISABLED"
+
+{-# COMPLETE
+  Membership_DeliverySetting_DELIVERYSETTINGUNSPECIFIED,
+  Membership_DeliverySetting_ALLMAIL,
+  Membership_DeliverySetting_Digest,
+  Membership_DeliverySetting_Daily,
+  Membership_DeliverySetting_None,
+  Membership_DeliverySetting_Disabled,
+  Membership_DeliverySetting
   #-}
 
 -- | Output only. The type of the membership.
@@ -1064,6 +1185,75 @@ pattern RestrictionEvaluation_State_NONCOMPLIANT = RestrictionEvaluation_State "
   RestrictionEvaluation_State_FORWARDCOMPLIANT,
   RestrictionEvaluation_State_NONCOMPLIANT,
   RestrictionEvaluation_State
+  #-}
+
+-- | When to redirect sign-ins to the IdP.
+newtype SignInBehavior_RedirectCondition = SignInBehavior_RedirectCondition {fromSignInBehavior_RedirectCondition :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default and means \"always\"
+pattern SignInBehavior_RedirectCondition_REDIRECTCONDITIONUNSPECIFIED :: SignInBehavior_RedirectCondition
+pattern SignInBehavior_RedirectCondition_REDIRECTCONDITIONUNSPECIFIED = SignInBehavior_RedirectCondition "REDIRECT_CONDITION_UNSPECIFIED"
+
+-- | Sign-in flows where the user is prompted for their identity will not redirect to the IdP (so the user will most likely be prompted by Google for a password), but special flows like IdP-initiated SAML and sign-in following automatic redirection to the IdP by domain-specific service URLs will accept the IdP\'s assertion of the user\'s identity.
+pattern SignInBehavior_RedirectCondition_Never :: SignInBehavior_RedirectCondition
+pattern SignInBehavior_RedirectCondition_Never = SignInBehavior_RedirectCondition "NEVER"
+
+{-# COMPLETE
+  SignInBehavior_RedirectCondition_REDIRECTCONDITIONUNSPECIFIED,
+  SignInBehavior_RedirectCondition_Never,
+  SignInBehavior_RedirectCondition
+  #-}
+
+-- | State of the @UserInvitation@.
+newtype UserInvitation_State = UserInvitation_State {fromUserInvitation_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The default value. This value is used if the state is omitted.
+pattern UserInvitation_State_STATEUNSPECIFIED :: UserInvitation_State
+pattern UserInvitation_State_STATEUNSPECIFIED = UserInvitation_State "STATE_UNSPECIFIED"
+
+-- | The @UserInvitation@ has been created and is ready for sending as an email.
+pattern UserInvitation_State_NOTYETSENT :: UserInvitation_State
+pattern UserInvitation_State_NOTYETSENT = UserInvitation_State "NOT_YET_SENT"
+
+-- | The user has been invited by email.
+pattern UserInvitation_State_Invited :: UserInvitation_State
+pattern UserInvitation_State_Invited = UserInvitation_State "INVITED"
+
+-- | The user has accepted the invitation and is part of the organization.
+pattern UserInvitation_State_Accepted :: UserInvitation_State
+pattern UserInvitation_State_Accepted = UserInvitation_State "ACCEPTED"
+
+-- | The user declined the invitation.
+pattern UserInvitation_State_Declined :: UserInvitation_State
+pattern UserInvitation_State_Declined = UserInvitation_State "DECLINED"
+
+{-# COMPLETE
+  UserInvitation_State_STATEUNSPECIFIED,
+  UserInvitation_State_NOTYETSENT,
+  UserInvitation_State_Invited,
+  UserInvitation_State_Accepted,
+  UserInvitation_State_Declined,
+  UserInvitation_State
   #-}
 
 -- | Optional. The view to use for the List request.

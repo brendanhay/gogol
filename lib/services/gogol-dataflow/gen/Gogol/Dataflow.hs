@@ -196,11 +196,6 @@ module Gogol.Dataflow
     DataflowProjectsLocationsSnapshotsList (..),
     newDataflowProjectsLocationsSnapshotsList,
 
-    -- ** dataflow.projects.locations.sql.validate
-    DataflowProjectsLocationsSqlValidateResource,
-    DataflowProjectsLocationsSqlValidate (..),
-    newDataflowProjectsLocationsSqlValidate,
-
     -- ** dataflow.projects.locations.templates.create
     DataflowProjectsLocationsTemplatesCreateResource,
     DataflowProjectsLocationsTemplatesCreate (..),
@@ -489,9 +484,21 @@ module Gogol.Dataflow
     Histogram (..),
     newHistogram,
 
+    -- ** HotKeyDebuggingInfo
+    HotKeyDebuggingInfo (..),
+    newHotKeyDebuggingInfo,
+
+    -- ** HotKeyDebuggingInfo_DetectedHotKeys
+    HotKeyDebuggingInfo_DetectedHotKeys (..),
+    newHotKeyDebuggingInfo_DetectedHotKeys,
+
     -- ** HotKeyDetection
     HotKeyDetection (..),
     newHotKeyDetection,
+
+    -- ** HotKeyInfo
+    HotKeyInfo (..),
+    newHotKeyInfo,
 
     -- ** InstructionInput
     InstructionInput (..),
@@ -564,6 +571,10 @@ module Gogol.Dataflow
     -- ** JobMetadata
     JobMetadata (..),
     newJobMetadata,
+
+    -- ** JobMetadata_UserDisplayProperties
+    JobMetadata_UserDisplayProperties (..),
+    newJobMetadata_UserDisplayProperties,
 
     -- ** JobMetrics
     JobMetrics (..),
@@ -754,13 +765,6 @@ module Gogol.Dataflow
     -- ** PubsubSnapshotMetadata
     PubsubSnapshotMetadata (..),
     newPubsubSnapshotMetadata,
-
-    -- ** QueryInfo
-    QueryInfo (..),
-    newQueryInfo,
-
-    -- ** QueryInfo_QueryPropertyItem
-    QueryInfo_QueryPropertyItem (..),
 
     -- ** ReadInstruction
     ReadInstruction (..),
@@ -1002,6 +1006,30 @@ module Gogol.Dataflow
     Step_Properties (..),
     newStep_Properties,
 
+    -- ** Straggler
+    Straggler (..),
+    newStraggler,
+
+    -- ** StragglerDebuggingInfo
+    StragglerDebuggingInfo (..),
+    newStragglerDebuggingInfo,
+
+    -- ** StragglerInfo
+    StragglerInfo (..),
+    newStragglerInfo,
+
+    -- ** StragglerInfo_Causes
+    StragglerInfo_Causes (..),
+    newStragglerInfo_Causes,
+
+    -- ** StragglerSummary
+    StragglerSummary (..),
+    newStragglerSummary,
+
+    -- ** StragglerSummary_StragglerCauseCount
+    StragglerSummary_StragglerCauseCount (..),
+    newStragglerSummary_StragglerCauseCount,
+
     -- ** StreamLocation
     StreamLocation (..),
     newStreamLocation,
@@ -1049,6 +1077,10 @@ module Gogol.Dataflow
     StreamingStageLocation (..),
     newStreamingStageLocation,
 
+    -- ** StreamingStragglerInfo
+    StreamingStragglerInfo (..),
+    newStreamingStragglerInfo,
+
     -- ** StringList
     StringList (..),
     newStringList,
@@ -1079,10 +1111,6 @@ module Gogol.Dataflow
 
     -- ** TransformSummary_Kind
     TransformSummary_Kind (..),
-
-    -- ** ValidateResponse
-    ValidateResponse (..),
-    newValidateResponse,
 
     -- ** WorkItem
     WorkItem (..),
@@ -1187,6 +1215,14 @@ module Gogol.Dataflow
     WorkerShutdownNoticeResponse (..),
     newWorkerShutdownNoticeResponse,
 
+    -- ** WorkerThreadScalingReport
+    WorkerThreadScalingReport (..),
+    newWorkerThreadScalingReport,
+
+    -- ** WorkerThreadScalingReportResponse
+    WorkerThreadScalingReportResponse (..),
+    newWorkerThreadScalingReportResponse,
+
     -- ** WriteInstruction
     WriteInstruction (..),
     newWriteInstruction,
@@ -1266,7 +1302,6 @@ import Gogol.Dataflow.Projects.Locations.Jobs.WorkItems.ReportStatus
 import Gogol.Dataflow.Projects.Locations.Snapshots.Delete
 import Gogol.Dataflow.Projects.Locations.Snapshots.Get
 import Gogol.Dataflow.Projects.Locations.Snapshots.List
-import Gogol.Dataflow.Projects.Locations.Sql.Validate
 import Gogol.Dataflow.Projects.Locations.Templates.Create
 import Gogol.Dataflow.Projects.Locations.Templates.Get
 import Gogol.Dataflow.Projects.Locations.Templates.Launch

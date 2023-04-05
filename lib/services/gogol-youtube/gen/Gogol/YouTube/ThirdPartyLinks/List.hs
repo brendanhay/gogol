@@ -58,7 +58,7 @@ type YouTubeThirdPartyLinksListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] ThirdPartyLink
+    Core.:> Core.Get '[Core.JSON] ThirdPartyLinkListResponse
 
 -- | Retrieves a list of resources, possibly filtered.
 --
@@ -107,7 +107,9 @@ instance
   Core.GoogleRequest
     YouTubeThirdPartyLinksList
   where
-  type Rs YouTubeThirdPartyLinksList = ThirdPartyLink
+  type
+    Rs YouTubeThirdPartyLinksList =
+      ThirdPartyLinkListResponse
   type Scopes YouTubeThirdPartyLinksList = '[]
   requestClient YouTubeThirdPartyLinksList {..} =
     go

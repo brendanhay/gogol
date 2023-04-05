@@ -175,6 +175,10 @@ module Gogol.AppEngine.Types
     -- ** FirewallRule_Action
     FirewallRule_Action (..),
 
+    -- ** FlexibleRuntimeSettings
+    FlexibleRuntimeSettings (..),
+    newFlexibleRuntimeSettings,
+
     -- ** GoogleAppengineV1betaLocationMetadata
     GoogleAppengineV1betaLocationMetadata (..),
     newGoogleAppengineV1betaLocationMetadata,
@@ -272,6 +276,9 @@ module Gogol.AppEngine.Types
     Network (..),
     newNetwork,
 
+    -- ** Network_InstanceIpMode
+    Network_InstanceIpMode (..),
+
     -- ** NetworkSettings
     NetworkSettings (..),
     newNetworkSettings,
@@ -307,9 +314,46 @@ module Gogol.AppEngine.Types
     OperationMetadataV1Beta (..),
     newOperationMetadataV1Beta,
 
+    -- ** ProjectEvent
+    ProjectEvent (..),
+    newProjectEvent,
+
+    -- ** ProjectEvent_Phase
+    ProjectEvent_Phase (..),
+
+    -- ** ProjectState
+    ProjectState (..),
+    newProjectState,
+
+    -- ** ProjectState_State
+    ProjectState_State (..),
+
+    -- ** ProjectsMetadata
+    ProjectsMetadata (..),
+    newProjectsMetadata,
+
+    -- ** ProjectsMetadata_ConsumerProjectState
+    ProjectsMetadata_ConsumerProjectState (..),
+
     -- ** ReadinessCheck
     ReadinessCheck (..),
     newReadinessCheck,
+
+    -- ** Reasons
+    Reasons (..),
+    newReasons,
+
+    -- ** Reasons_Abuse
+    Reasons_Abuse (..),
+
+    -- ** Reasons_Billing
+    Reasons_Billing (..),
+
+    -- ** Reasons_DataGovernance
+    Reasons_DataGovernance (..),
+
+    -- ** Reasons_ServiceManagement
+    Reasons_ServiceManagement (..),
 
     -- ** RepairApplicationRequest
     RepairApplicationRequest (..),

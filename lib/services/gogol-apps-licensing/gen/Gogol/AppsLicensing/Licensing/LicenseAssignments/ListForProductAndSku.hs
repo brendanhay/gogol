@@ -76,7 +76,7 @@ data LicensingLicenseAssignmentsListForProductAndSku = LicensingLicenseAssignmen
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Customer\'s @customerId@. A previous version of this API accepted the primary domain name as a value for this field. If the customer is suspended, the server returns an error.
+    -- | The customer\'s unique ID as defined in the Admin console, such as @C00000000@. If the customer is suspended, the server returns an error.
     customerId :: Core.Text,
     -- | The @maxResults@ query string determines how many entries are returned on each page of a large response. This is an optional parameter. The value must be a positive number.
     maxResults :: Core.Word32,
@@ -95,7 +95,7 @@ data LicensingLicenseAssignmentsListForProductAndSku = LicensingLicenseAssignmen
 
 -- | Creates a value of 'LicensingLicenseAssignmentsListForProductAndSku' with the minimum fields required to make a request.
 newLicensingLicenseAssignmentsListForProductAndSku ::
-  -- |  Customer\'s @customerId@. A previous version of this API accepted the primary domain name as a value for this field. If the customer is suspended, the server returns an error. See 'customerId'.
+  -- |  The customer\'s unique ID as defined in the Admin console, such as @C00000000@. If the customer is suspended, the server returns an error. See 'customerId'.
   Core.Text ->
   -- |  A product\'s unique identifier. For more information about products in this version of the API, see Products and SKUs. See 'productId'.
   Core.Text ->

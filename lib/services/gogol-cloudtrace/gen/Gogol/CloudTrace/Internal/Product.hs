@@ -287,7 +287,7 @@ instance Core.ToJSON BatchWriteSpansRequest where
     Core.object
       (Core.catMaybes [("spans" Core..=) Core.<$> spans])
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -480,7 +480,7 @@ instance Core.ToJSON Module where
           ]
       )
 
--- | A span represents a single operation within a trace. Spans can be nested to form a trace tree. Often, a trace contains a root span that describes the end-to-end latency, and one or more subspans for its sub-operations. A trace can also contain multiple root spans, or none at all. Spans do not need to be contiguous—there might be gaps or overlaps between spans in a trace.
+-- | A span represents a single operation within a trace. Spans can be nested to form a trace tree. Often, a trace contains a root span that describes the end-to-end latency, and one or more subspans for its sub-operations. A trace can also contain multiple root spans, or none at all. Spans do not need to be contiguous. There might be gaps or overlaps between spans in a trace.
 --
 -- /See:/ 'newSpan' smart constructor.
 data Span = Span
@@ -488,7 +488,7 @@ data Span = Span
     attributes :: (Core.Maybe Attributes),
     -- | Optional. The number of child spans that were generated while this span was active. If set, allows implementation to detect missing child spans.
     childSpanCount :: (Core.Maybe Core.Int32),
-    -- | Required. A description of the span\'s operation (up to 128 bytes). Cloud Trace displays the description in the Cloud Console. For example, the display name can be a qualified method name or a file name and a line number where the operation is called. A best practice is to use the same display name within an application and at the same call point. This makes it easier to correlate spans in different traces.
+    -- | Required. A description of the span\'s operation (up to 128 bytes). Cloud Trace displays the description in the Cloud console. For example, the display name can be a qualified method name or a file name and a line number where the operation is called. A best practice is to use the same display name within an application and at the same call point. This makes it easier to correlate spans in different traces.
     displayName :: (Core.Maybe TruncatableString),
     -- | Required. The end time of the span. On the client side, this is the time kept by the local machine where the span execution ends. On the server side, this is the time when the server application handler stops running.
     endTime :: (Core.Maybe Core.DateTime),
@@ -594,7 +594,7 @@ data StackFrame = StackFrame
     lineNumber :: (Core.Maybe Core.Int64),
     -- | The binary module from where the code was loaded.
     loadModule :: (Core.Maybe Module),
-    -- | An un-mangled function name, if @function_name@ is <http://www.avabodh.com/cxxin/namemangling.html mangled>. The name can be fully-qualified (up to 1024 bytes).
+    -- | An un-mangled function name, if @function_name@ is mangled. To get information about name mangling, run <https://www.google.com/search?q=cxx+name+mangling this search>. The name can be fully-qualified (up to 1024 bytes).
     originalFunctionName :: (Core.Maybe TruncatableString),
     -- | The version of the deployed source code (up to 128 bytes).
     sourceVersion :: (Core.Maybe TruncatableString)

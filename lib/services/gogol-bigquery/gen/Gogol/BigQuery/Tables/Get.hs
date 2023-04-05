@@ -54,6 +54,7 @@ type BigQueryTablesGetResource =
     Core.:> "tables"
     Core.:> Core.Capture "tableId" Core.Text
     Core.:> Core.QueryParam "selectedFields" Core.Text
+    Core.:> Core.QueryParam "view" TablesGetView
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Table
 
@@ -68,7 +69,9 @@ data BigQueryTablesGet = BigQueryTablesGet
     -- | List of fields to return (comma-separated). If unspecified, all fields are returned
     selectedFields :: (Core.Maybe Core.Text),
     -- | Table ID of the requested table
-    tableId :: Core.Text
+    tableId :: Core.Text,
+    -- | Specifies the view that determines which table information is returned. By default, basic table information and storage statistics (STORAGE_STATS) are returned.
+    view :: (Core.Maybe TablesGetView)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -86,7 +89,8 @@ newBigQueryTablesGet datasetId projectId tableId =
     { datasetId = datasetId,
       projectId = projectId,
       selectedFields = Core.Nothing,
-      tableId = tableId
+      tableId = tableId,
+      view = Core.Nothing
     }
 
 instance Core.GoogleRequest BigQueryTablesGet where
@@ -103,6 +107,7 @@ instance Core.GoogleRequest BigQueryTablesGet where
       datasetId
       tableId
       selectedFields
+      view
       (Core.Just Core.AltJSON)
       bigQueryService
     where

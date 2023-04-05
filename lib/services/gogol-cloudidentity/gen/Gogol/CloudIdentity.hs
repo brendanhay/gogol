@@ -43,6 +43,31 @@ module Gogol.CloudIdentity
 
     -- * Resources
 
+    -- ** cloudidentity.customers.userinvitations.cancel
+    CloudIdentityCustomersUserinvitationsCancelResource,
+    CloudIdentityCustomersUserinvitationsCancel (..),
+    newCloudIdentityCustomersUserinvitationsCancel,
+
+    -- ** cloudidentity.customers.userinvitations.get
+    CloudIdentityCustomersUserinvitationsGetResource,
+    CloudIdentityCustomersUserinvitationsGet (..),
+    newCloudIdentityCustomersUserinvitationsGet,
+
+    -- ** cloudidentity.customers.userinvitations.isInvitableUser
+    CloudIdentityCustomersUserinvitationsIsInvitableUserResource,
+    CloudIdentityCustomersUserinvitationsIsInvitableUser (..),
+    newCloudIdentityCustomersUserinvitationsIsInvitableUser,
+
+    -- ** cloudidentity.customers.userinvitations.list
+    CloudIdentityCustomersUserinvitationsListResource,
+    CloudIdentityCustomersUserinvitationsList (..),
+    newCloudIdentityCustomersUserinvitationsList,
+
+    -- ** cloudidentity.customers.userinvitations.send
+    CloudIdentityCustomersUserinvitationsSendResource,
+    CloudIdentityCustomersUserinvitationsSend (..),
+    newCloudIdentityCustomersUserinvitationsSend,
+
     -- ** cloudidentity.devices.cancelWipe
     CloudIdentityDevicesCancelWipeResource,
     CloudIdentityDevicesCancelWipe (..),
@@ -198,6 +223,11 @@ module Gogol.CloudIdentity
     CloudIdentityGroupsMembershipsModifyMembershipRoles (..),
     newCloudIdentityGroupsMembershipsModifyMembershipRoles,
 
+    -- ** cloudidentity.groups.memberships.searchDirectGroups
+    CloudIdentityGroupsMembershipsSearchDirectGroupsResource,
+    CloudIdentityGroupsMembershipsSearchDirectGroups (..),
+    newCloudIdentityGroupsMembershipsSearchDirectGroups,
+
     -- ** cloudidentity.groups.memberships.searchTransitiveGroups
     CloudIdentityGroupsMembershipsSearchTransitiveGroupsResource,
     CloudIdentityGroupsMembershipsSearchTransitiveGroups (..),
@@ -223,10 +253,92 @@ module Gogol.CloudIdentity
     CloudIdentityGroupsUpdateSecuritySettings (..),
     newCloudIdentityGroupsUpdateSecuritySettings,
 
+    -- ** cloudidentity.inboundSamlSsoProfiles.create
+    CloudIdentityInboundSamlSsoProfilesCreateResource,
+    CloudIdentityInboundSamlSsoProfilesCreate (..),
+    newCloudIdentityInboundSamlSsoProfilesCreate,
+
+    -- ** cloudidentity.inboundSamlSsoProfiles.delete
+    CloudIdentityInboundSamlSsoProfilesDeleteResource,
+    CloudIdentityInboundSamlSsoProfilesDelete (..),
+    newCloudIdentityInboundSamlSsoProfilesDelete,
+
+    -- ** cloudidentity.inboundSamlSsoProfiles.get
+    CloudIdentityInboundSamlSsoProfilesGetResource,
+    CloudIdentityInboundSamlSsoProfilesGet (..),
+    newCloudIdentityInboundSamlSsoProfilesGet,
+
+    -- ** cloudidentity.inboundSamlSsoProfiles.idpCredentials.add
+    CloudIdentityInboundSamlSsoProfilesIdpCredentialsAddResource,
+    CloudIdentityInboundSamlSsoProfilesIdpCredentialsAdd (..),
+    newCloudIdentityInboundSamlSsoProfilesIdpCredentialsAdd,
+
+    -- ** cloudidentity.inboundSamlSsoProfiles.idpCredentials.delete
+    CloudIdentityInboundSamlSsoProfilesIdpCredentialsDeleteResource,
+    CloudIdentityInboundSamlSsoProfilesIdpCredentialsDelete (..),
+    newCloudIdentityInboundSamlSsoProfilesIdpCredentialsDelete,
+
+    -- ** cloudidentity.inboundSamlSsoProfiles.idpCredentials.get
+    CloudIdentityInboundSamlSsoProfilesIdpCredentialsGetResource,
+    CloudIdentityInboundSamlSsoProfilesIdpCredentialsGet (..),
+    newCloudIdentityInboundSamlSsoProfilesIdpCredentialsGet,
+
+    -- ** cloudidentity.inboundSamlSsoProfiles.idpCredentials.list
+    CloudIdentityInboundSamlSsoProfilesIdpCredentialsListResource,
+    CloudIdentityInboundSamlSsoProfilesIdpCredentialsList (..),
+    newCloudIdentityInboundSamlSsoProfilesIdpCredentialsList,
+
+    -- ** cloudidentity.inboundSamlSsoProfiles.list
+    CloudIdentityInboundSamlSsoProfilesListResource,
+    CloudIdentityInboundSamlSsoProfilesList (..),
+    newCloudIdentityInboundSamlSsoProfilesList,
+
+    -- ** cloudidentity.inboundSamlSsoProfiles.patch
+    CloudIdentityInboundSamlSsoProfilesPatchResource,
+    CloudIdentityInboundSamlSsoProfilesPatch (..),
+    newCloudIdentityInboundSamlSsoProfilesPatch,
+
+    -- ** cloudidentity.inboundSsoAssignments.create
+    CloudIdentityInboundSsoAssignmentsCreateResource,
+    CloudIdentityInboundSsoAssignmentsCreate (..),
+    newCloudIdentityInboundSsoAssignmentsCreate,
+
+    -- ** cloudidentity.inboundSsoAssignments.delete
+    CloudIdentityInboundSsoAssignmentsDeleteResource,
+    CloudIdentityInboundSsoAssignmentsDelete (..),
+    newCloudIdentityInboundSsoAssignmentsDelete,
+
+    -- ** cloudidentity.inboundSsoAssignments.get
+    CloudIdentityInboundSsoAssignmentsGetResource,
+    CloudIdentityInboundSsoAssignmentsGet (..),
+    newCloudIdentityInboundSsoAssignmentsGet,
+
+    -- ** cloudidentity.inboundSsoAssignments.list
+    CloudIdentityInboundSsoAssignmentsListResource,
+    CloudIdentityInboundSsoAssignmentsList (..),
+    newCloudIdentityInboundSsoAssignmentsList,
+
+    -- ** cloudidentity.inboundSsoAssignments.patch
+    CloudIdentityInboundSsoAssignmentsPatchResource,
+    CloudIdentityInboundSsoAssignmentsPatch (..),
+    newCloudIdentityInboundSsoAssignmentsPatch,
+
     -- * Types
 
     -- ** Xgafv
     Xgafv (..),
+
+    -- ** AddIdpCredentialOperationMetadata
+    AddIdpCredentialOperationMetadata (..),
+    newAddIdpCredentialOperationMetadata,
+
+    -- ** AddIdpCredentialRequest
+    AddIdpCredentialRequest (..),
+    newAddIdpCredentialRequest,
+
+    -- ** CancelUserInvitationRequest
+    CancelUserInvitationRequest (..),
+    newCancelUserInvitationRequest,
 
     -- ** CheckTransitiveMembershipResponse
     CheckTransitiveMembershipResponse (..),
@@ -236,6 +348,14 @@ module Gogol.CloudIdentity
     CreateGroupMetadata (..),
     newCreateGroupMetadata,
 
+    -- ** CreateInboundSamlSsoProfileOperationMetadata
+    CreateInboundSamlSsoProfileOperationMetadata (..),
+    newCreateInboundSamlSsoProfileOperationMetadata,
+
+    -- ** CreateInboundSsoAssignmentOperationMetadata
+    CreateInboundSsoAssignmentOperationMetadata (..),
+    newCreateInboundSsoAssignmentOperationMetadata,
+
     -- ** CreateMembershipMetadata
     CreateMembershipMetadata (..),
     newCreateMembershipMetadata,
@@ -244,9 +364,25 @@ module Gogol.CloudIdentity
     DeleteGroupMetadata (..),
     newDeleteGroupMetadata,
 
+    -- ** DeleteIdpCredentialOperationMetadata
+    DeleteIdpCredentialOperationMetadata (..),
+    newDeleteIdpCredentialOperationMetadata,
+
+    -- ** DeleteInboundSamlSsoProfileOperationMetadata
+    DeleteInboundSamlSsoProfileOperationMetadata (..),
+    newDeleteInboundSamlSsoProfileOperationMetadata,
+
+    -- ** DeleteInboundSsoAssignmentOperationMetadata
+    DeleteInboundSsoAssignmentOperationMetadata (..),
+    newDeleteInboundSsoAssignmentOperationMetadata,
+
     -- ** DeleteMembershipMetadata
     DeleteMembershipMetadata (..),
     newDeleteMembershipMetadata,
+
+    -- ** DsaPublicKeyInfo
+    DsaPublicKeyInfo (..),
+    newDsaPublicKeyInfo,
 
     -- ** DynamicGroupMetadata
     DynamicGroupMetadata (..),
@@ -480,13 +616,48 @@ module Gogol.CloudIdentity
     -- ** GroupRelation_RelationType
     GroupRelation_RelationType (..),
 
+    -- ** IdpCredential
+    IdpCredential (..),
+    newIdpCredential,
+
+    -- ** InboundSamlSsoProfile
+    InboundSamlSsoProfile (..),
+    newInboundSamlSsoProfile,
+
+    -- ** InboundSsoAssignment
+    InboundSsoAssignment (..),
+    newInboundSsoAssignment,
+
+    -- ** InboundSsoAssignment_SsoMode
+    InboundSsoAssignment_SsoMode (..),
+
+    -- ** IsInvitableUserResponse
+    IsInvitableUserResponse (..),
+    newIsInvitableUserResponse,
+
     -- ** ListGroupsResponse
     ListGroupsResponse (..),
     newListGroupsResponse,
 
+    -- ** ListIdpCredentialsResponse
+    ListIdpCredentialsResponse (..),
+    newListIdpCredentialsResponse,
+
+    -- ** ListInboundSamlSsoProfilesResponse
+    ListInboundSamlSsoProfilesResponse (..),
+    newListInboundSamlSsoProfilesResponse,
+
+    -- ** ListInboundSsoAssignmentsResponse
+    ListInboundSsoAssignmentsResponse (..),
+    newListInboundSsoAssignmentsResponse,
+
     -- ** ListMembershipsResponse
     ListMembershipsResponse (..),
     newListMembershipsResponse,
+
+    -- ** ListUserInvitationsResponse
+    ListUserInvitationsResponse (..),
+    newListUserInvitationsResponse,
 
     -- ** LookupGroupNameResponse
     LookupGroupNameResponse (..),
@@ -511,12 +682,23 @@ module Gogol.CloudIdentity
     Membership (..),
     newMembership,
 
+    -- ** Membership_DeliverySetting
+    Membership_DeliverySetting (..),
+
     -- ** Membership_Type
     Membership_Type (..),
 
     -- ** MembershipAdjacencyList
     MembershipAdjacencyList (..),
     newMembershipAdjacencyList,
+
+    -- ** MembershipRelation
+    MembershipRelation (..),
+    newMembershipRelation,
+
+    -- ** MembershipRelation_Labels
+    MembershipRelation_Labels (..),
+    newMembershipRelation_Labels,
 
     -- ** MembershipRole
     MembershipRole (..),
@@ -560,6 +742,26 @@ module Gogol.CloudIdentity
     RestrictionEvaluations (..),
     newRestrictionEvaluations,
 
+    -- ** RsaPublicKeyInfo
+    RsaPublicKeyInfo (..),
+    newRsaPublicKeyInfo,
+
+    -- ** SamlIdpConfig
+    SamlIdpConfig (..),
+    newSamlIdpConfig,
+
+    -- ** SamlSpConfig
+    SamlSpConfig (..),
+    newSamlSpConfig,
+
+    -- ** SamlSsoInfo
+    SamlSsoInfo (..),
+    newSamlSsoInfo,
+
+    -- ** SearchDirectGroupsResponse
+    SearchDirectGroupsResponse (..),
+    newSearchDirectGroupsResponse,
+
     -- ** SearchGroupsResponse
     SearchGroupsResponse (..),
     newSearchGroupsResponse,
@@ -575,6 +777,17 @@ module Gogol.CloudIdentity
     -- ** SecuritySettings
     SecuritySettings (..),
     newSecuritySettings,
+
+    -- ** SendUserInvitationRequest
+    SendUserInvitationRequest (..),
+    newSendUserInvitationRequest,
+
+    -- ** SignInBehavior
+    SignInBehavior (..),
+    newSignInBehavior,
+
+    -- ** SignInBehavior_RedirectCondition
+    SignInBehavior_RedirectCondition (..),
 
     -- ** Status
     Status (..),
@@ -592,6 +805,14 @@ module Gogol.CloudIdentity
     UpdateGroupMetadata (..),
     newUpdateGroupMetadata,
 
+    -- ** UpdateInboundSamlSsoProfileOperationMetadata
+    UpdateInboundSamlSsoProfileOperationMetadata (..),
+    newUpdateInboundSamlSsoProfileOperationMetadata,
+
+    -- ** UpdateInboundSsoAssignmentOperationMetadata
+    UpdateInboundSsoAssignmentOperationMetadata (..),
+    newUpdateInboundSsoAssignmentOperationMetadata,
+
     -- ** UpdateMembershipMetadata
     UpdateMembershipMetadata (..),
     newUpdateMembershipMetadata,
@@ -599,6 +820,13 @@ module Gogol.CloudIdentity
     -- ** UpdateMembershipRolesParams
     UpdateMembershipRolesParams (..),
     newUpdateMembershipRolesParams,
+
+    -- ** UserInvitation
+    UserInvitation (..),
+    newUserInvitation,
+
+    -- ** UserInvitation_State
+    UserInvitation_State (..),
 
     -- ** DevicesListView
     DevicesListView (..),
@@ -617,6 +845,11 @@ module Gogol.CloudIdentity
   )
 where
 
+import Gogol.CloudIdentity.Customers.Userinvitations.Cancel
+import Gogol.CloudIdentity.Customers.Userinvitations.Get
+import Gogol.CloudIdentity.Customers.Userinvitations.IsInvitableUser
+import Gogol.CloudIdentity.Customers.Userinvitations.List
+import Gogol.CloudIdentity.Customers.Userinvitations.Send
 import Gogol.CloudIdentity.Devices.CancelWipe
 import Gogol.CloudIdentity.Devices.Create
 import Gogol.CloudIdentity.Devices.Delete
@@ -648,9 +881,24 @@ import Gogol.CloudIdentity.Groups.Memberships.GetMembershipGraph
 import Gogol.CloudIdentity.Groups.Memberships.List
 import Gogol.CloudIdentity.Groups.Memberships.Lookup
 import Gogol.CloudIdentity.Groups.Memberships.ModifyMembershipRoles
+import Gogol.CloudIdentity.Groups.Memberships.SearchDirectGroups
 import Gogol.CloudIdentity.Groups.Memberships.SearchTransitiveGroups
 import Gogol.CloudIdentity.Groups.Memberships.SearchTransitiveMemberships
 import Gogol.CloudIdentity.Groups.Patch
 import Gogol.CloudIdentity.Groups.Search
 import Gogol.CloudIdentity.Groups.UpdateSecuritySettings
+import Gogol.CloudIdentity.InboundSamlSsoProfiles.Create
+import Gogol.CloudIdentity.InboundSamlSsoProfiles.Delete
+import Gogol.CloudIdentity.InboundSamlSsoProfiles.Get
+import Gogol.CloudIdentity.InboundSamlSsoProfiles.IdpCredentials.Add
+import Gogol.CloudIdentity.InboundSamlSsoProfiles.IdpCredentials.Delete
+import Gogol.CloudIdentity.InboundSamlSsoProfiles.IdpCredentials.Get
+import Gogol.CloudIdentity.InboundSamlSsoProfiles.IdpCredentials.List
+import Gogol.CloudIdentity.InboundSamlSsoProfiles.List
+import Gogol.CloudIdentity.InboundSamlSsoProfiles.Patch
+import Gogol.CloudIdentity.InboundSsoAssignments.Create
+import Gogol.CloudIdentity.InboundSsoAssignments.Delete
+import Gogol.CloudIdentity.InboundSsoAssignments.Get
+import Gogol.CloudIdentity.InboundSsoAssignments.List
+import Gogol.CloudIdentity.InboundSsoAssignments.Patch
 import Gogol.CloudIdentity.Types

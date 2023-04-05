@@ -67,7 +67,7 @@ data CloudbuildProjectsLocationsGithubEnterpriseConfigsPatch = CloudbuildProject
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Optional. The full resource name for the GitHubEnterpriseConfig For example: \"projects\/{$project/id}\/githubEnterpriseConfigs\/{$config/id}\"
+    -- | Optional. The full resource name for the GitHubEnterpriseConfig For example: \"projects\/{$project/id}\/locations\/{$location/id}\/githubEnterpriseConfigs\/{$config_id}\"
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: GitHubEnterpriseConfig,
@@ -82,7 +82,7 @@ data CloudbuildProjectsLocationsGithubEnterpriseConfigsPatch = CloudbuildProject
 
 -- | Creates a value of 'CloudbuildProjectsLocationsGithubEnterpriseConfigsPatch' with the minimum fields required to make a request.
 newCloudbuildProjectsLocationsGithubEnterpriseConfigsPatch ::
-  -- |  Optional. The full resource name for the GitHubEnterpriseConfig For example: \"projects\/{$project/id}\/githubEnterpriseConfigs\/{$config/id}\" See 'name'.
+  -- |  Optional. The full resource name for the GitHubEnterpriseConfig For example: \"projects\/{$project/id}\/locations\/{$location/id}\/githubEnterpriseConfigs\/{$config_id}\" See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   GitHubEnterpriseConfig ->

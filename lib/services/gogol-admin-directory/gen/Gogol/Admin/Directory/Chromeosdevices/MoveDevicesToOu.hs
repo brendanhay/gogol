@@ -75,7 +75,7 @@ data DirectoryChromeosdevicesMoveDevicesToOu = DirectoryChromeosdevicesMoveDevic
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Immutable ID of the Google Workspace account
+    -- | Immutable. ID of the Google Workspace account
     customerId :: Core.Text,
     -- | Full path of the target organizational unit or its ID
     orgUnitPath :: Core.Text,
@@ -90,7 +90,7 @@ data DirectoryChromeosdevicesMoveDevicesToOu = DirectoryChromeosdevicesMoveDevic
 
 -- | Creates a value of 'DirectoryChromeosdevicesMoveDevicesToOu' with the minimum fields required to make a request.
 newDirectoryChromeosdevicesMoveDevicesToOu ::
-  -- |  Immutable ID of the Google Workspace account See 'customerId'.
+  -- |  Immutable. ID of the Google Workspace account See 'customerId'.
   Core.Text ->
   -- |  Full path of the target organizational unit or its ID See 'orgUnitPath'.
   Core.Text ->

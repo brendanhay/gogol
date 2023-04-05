@@ -54,6 +54,10 @@ module Gogol.TagManager.Types
     -- ** AccountAccess_Permission
     AccountAccess_Permission (..),
 
+    -- ** AccountFeatures
+    AccountFeatures (..),
+    newAccountFeatures,
+
     -- ** BuiltInVariable
     BuiltInVariable (..),
     newBuiltInVariable,
@@ -86,6 +90,10 @@ module Gogol.TagManager.Types
     -- ** ContainerAccess_Permission
     ContainerAccess_Permission (..),
 
+    -- ** ContainerFeatures
+    ContainerFeatures (..),
+    newContainerFeatures,
+
     -- ** ContainerVersion
     ContainerVersion (..),
     newContainerVersion,
@@ -109,6 +117,10 @@ module Gogol.TagManager.Types
     -- ** CustomTemplate
     CustomTemplate (..),
     newCustomTemplate,
+
+    -- ** Destination
+    Destination (..),
+    newDestination,
 
     -- ** Entity
     Entity (..),
@@ -136,9 +148,17 @@ module Gogol.TagManager.Types
     GalleryReference (..),
     newGalleryReference,
 
+    -- ** GetContainerSnippetResponse
+    GetContainerSnippetResponse (..),
+    newGetContainerSnippetResponse,
+
     -- ** GetWorkspaceStatusResponse
     GetWorkspaceStatusResponse (..),
     newGetWorkspaceStatusResponse,
+
+    -- ** GtagConfig
+    GtagConfig (..),
+    newGtagConfig,
 
     -- ** ListAccountsResponse
     ListAccountsResponse (..),
@@ -156,6 +176,10 @@ module Gogol.TagManager.Types
     ListContainersResponse (..),
     newListContainersResponse,
 
+    -- ** ListDestinationsResponse
+    ListDestinationsResponse (..),
+    newListDestinationsResponse,
+
     -- ** ListEnabledBuiltInVariablesResponse
     ListEnabledBuiltInVariablesResponse (..),
     newListEnabledBuiltInVariablesResponse,
@@ -167,6 +191,10 @@ module Gogol.TagManager.Types
     -- ** ListFoldersResponse
     ListFoldersResponse (..),
     newListFoldersResponse,
+
+    -- ** ListGtagConfigResponse
+    ListGtagConfigResponse (..),
+    newListGtagConfigResponse,
 
     -- ** ListTagsResponse
     ListTagsResponse (..),
@@ -318,6 +346,9 @@ module Gogol.TagManager.Types
     -- ** ZoneTypeRestriction
     ZoneTypeRestriction (..),
     newZoneTypeRestriction,
+
+    -- ** AccountsContainersCombineSettingSource
+    AccountsContainersCombineSettingSource (..),
 
     -- ** AccountsContainersWorkspacesBuilt_in_variablesCreateType
     AccountsContainersWorkspacesBuilt_in_variablesCreateType (..),

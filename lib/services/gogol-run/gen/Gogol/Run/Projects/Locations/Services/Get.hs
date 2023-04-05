@@ -65,7 +65,7 @@ data RunProjectsLocationsServicesGet = RunProjectsLocationsServicesGet
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The full name of the Service. Format: projects\/{projectnumber}\/locations\/{location}\/services\/{service}
+    -- | Required. The full name of the Service. Format: projects\/{project}\/locations\/{location}\/services\/{service}, where {project} can be project id or number.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -76,7 +76,7 @@ data RunProjectsLocationsServicesGet = RunProjectsLocationsServicesGet
 
 -- | Creates a value of 'RunProjectsLocationsServicesGet' with the minimum fields required to make a request.
 newRunProjectsLocationsServicesGet ::
-  -- |  Required. The full name of the Service. Format: projects\/{projectnumber}\/locations\/{location}\/services\/{service} See 'name'.
+  -- |  Required. The full name of the Service. Format: projects\/{project}\/locations\/{location}\/services\/{service}, where {project} can be project id or number. See 'name'.
   Core.Text ->
   RunProjectsLocationsServicesGet
 newRunProjectsLocationsServicesGet name =

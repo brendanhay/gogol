@@ -45,7 +45,7 @@ import qualified Gogol.Prelude as Core
 -- | A resource alias for @cloudfunctions.projects.locations.functions.patch@ method which the
 -- 'CloudFunctionsProjectsLocationsFunctionsPatch' request conforms to.
 type CloudFunctionsProjectsLocationsFunctionsPatchResource =
-  "v2beta"
+  "v2"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text

@@ -72,7 +72,7 @@ data ContainerProjectsLocationsOperationsGet = ContainerProjectsLocationsOperati
     name :: Core.Text,
     -- | Deprecated. The server-assigned @name@ of the operation. This field has been deprecated and replaced by the name field.
     operationId :: (Core.Maybe Core.Text),
-    -- | Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the name field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the name field.
     projectId :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),

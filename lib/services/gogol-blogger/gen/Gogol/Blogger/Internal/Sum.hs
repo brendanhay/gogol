@@ -256,6 +256,14 @@ module Gogol.Blogger.Internal.Sum
         ..
       ),
 
+    -- * PostsListSortOption
+    PostsListSortOption
+      ( PostsListSortOption_SORTOPTIONUNSPECIFIED,
+        PostsListSortOption_Descending,
+        PostsListSortOption_Ascending,
+        ..
+      ),
+
     -- * PostsListStatus
     PostsListStatus
       ( PostsListStatus_Live,
@@ -1200,6 +1208,38 @@ pattern PostsListOrderBy_Updated = PostsListOrderBy "UPDATED"
   PostsListOrderBy_Published,
   PostsListOrderBy_Updated,
   PostsListOrderBy
+  #-}
+
+-- | Sort direction applied to post list.
+newtype PostsListSortOption = PostsListSortOption {fromPostsListSortOption :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The unspecified sort option.
+pattern PostsListSortOption_SORTOPTIONUNSPECIFIED :: PostsListSortOption
+pattern PostsListSortOption_SORTOPTIONUNSPECIFIED = PostsListSortOption "SORT_OPTION_UNSPECIFIED"
+
+-- | The option to sort posts in descending order in time.
+pattern PostsListSortOption_Descending :: PostsListSortOption
+pattern PostsListSortOption_Descending = PostsListSortOption "DESCENDING"
+
+-- | The option to sort posts in ascending order in time.
+pattern PostsListSortOption_Ascending :: PostsListSortOption
+pattern PostsListSortOption_Ascending = PostsListSortOption "ASCENDING"
+
+{-# COMPLETE
+  PostsListSortOption_SORTOPTIONUNSPECIFIED,
+  PostsListSortOption_Descending,
+  PostsListSortOption_Ascending,
+  PostsListSortOption
   #-}
 
 newtype PostsListStatus = PostsListStatus {fromPostsListStatus :: Core.Text}

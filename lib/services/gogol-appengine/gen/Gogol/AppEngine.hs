@@ -230,6 +230,16 @@ module Gogol.AppEngine
     AppEngineAppsServicesVersionsPatch (..),
     newAppEngineAppsServicesVersionsPatch,
 
+    -- ** appengine.projects.locations.applications.create
+    AppEngineProjectsLocationsApplicationsCreateResource,
+    AppEngineProjectsLocationsApplicationsCreate (..),
+    newAppEngineProjectsLocationsApplicationsCreate,
+
+    -- ** appengine.projects.locations.applications.get
+    AppEngineProjectsLocationsApplicationsGetResource,
+    AppEngineProjectsLocationsApplicationsGet (..),
+    newAppEngineProjectsLocationsApplicationsGet,
+
     -- * Types
 
     -- ** Xgafv
@@ -371,6 +381,10 @@ module Gogol.AppEngine
     -- ** FirewallRule_Action
     FirewallRule_Action (..),
 
+    -- ** FlexibleRuntimeSettings
+    FlexibleRuntimeSettings (..),
+    newFlexibleRuntimeSettings,
+
     -- ** GoogleAppengineV1betaLocationMetadata
     GoogleAppengineV1betaLocationMetadata (..),
     newGoogleAppengineV1betaLocationMetadata,
@@ -468,6 +482,9 @@ module Gogol.AppEngine
     Network (..),
     newNetwork,
 
+    -- ** Network_InstanceIpMode
+    Network_InstanceIpMode (..),
+
     -- ** NetworkSettings
     NetworkSettings (..),
     newNetworkSettings,
@@ -503,9 +520,46 @@ module Gogol.AppEngine
     OperationMetadataV1Beta (..),
     newOperationMetadataV1Beta,
 
+    -- ** ProjectEvent
+    ProjectEvent (..),
+    newProjectEvent,
+
+    -- ** ProjectEvent_Phase
+    ProjectEvent_Phase (..),
+
+    -- ** ProjectState
+    ProjectState (..),
+    newProjectState,
+
+    -- ** ProjectState_State
+    ProjectState_State (..),
+
+    -- ** ProjectsMetadata
+    ProjectsMetadata (..),
+    newProjectsMetadata,
+
+    -- ** ProjectsMetadata_ConsumerProjectState
+    ProjectsMetadata_ConsumerProjectState (..),
+
     -- ** ReadinessCheck
     ReadinessCheck (..),
     newReadinessCheck,
+
+    -- ** Reasons
+    Reasons (..),
+    newReasons,
+
+    -- ** Reasons_Abuse
+    Reasons_Abuse (..),
+
+    -- ** Reasons_Billing
+    Reasons_Billing (..),
+
+    -- ** Reasons_DataGovernance
+    Reasons_DataGovernance (..),
+
+    -- ** Reasons_ServiceManagement
+    Reasons_ServiceManagement (..),
 
     -- ** RepairApplicationRequest
     RepairApplicationRequest (..),
@@ -688,4 +742,6 @@ import Gogol.AppEngine.Apps.Services.Versions.Instances.Get
 import Gogol.AppEngine.Apps.Services.Versions.Instances.List
 import Gogol.AppEngine.Apps.Services.Versions.List
 import Gogol.AppEngine.Apps.Services.Versions.Patch
+import Gogol.AppEngine.Projects.Locations.Applications.Create
+import Gogol.AppEngine.Projects.Locations.Applications.Get
 import Gogol.AppEngine.Types

@@ -33,6 +33,18 @@ module Gogol.Logging.Internal.Sum
         ..
       ),
 
+    -- * BucketMetadata_State
+    BucketMetadata_State
+      ( BucketMetadata_State_OPERATIONSTATEUNSPECIFIED,
+        BucketMetadata_State_OPERATIONSTATESCHEDULED,
+        BucketMetadata_State_OPERATIONSTATEWAITINGFORPERMISSIONS,
+        BucketMetadata_State_OPERATIONSTATERUNNING,
+        BucketMetadata_State_OPERATIONSTATESUCCEEDED,
+        BucketMetadata_State_OPERATIONSTATEFAILED,
+        BucketMetadata_State_OPERATIONSTATECANCELLED,
+        ..
+      ),
+
     -- * CopyLogEntriesMetadata_State
     CopyLogEntriesMetadata_State
       ( CopyLogEntriesMetadata_State_OPERATIONSTATEUNSPECIFIED,
@@ -45,6 +57,14 @@ module Gogol.Logging.Internal.Sum
         ..
       ),
 
+    -- * IndexConfig_Type
+    IndexConfig_Type
+      ( IndexConfig_Type_INDEXTYPEUNSPECIFIED,
+        IndexConfig_Type_INDEXTYPESTRING,
+        IndexConfig_Type_INDEXTYPEINTEGER,
+        ..
+      ),
+
     -- * LabelDescriptor_ValueType
     LabelDescriptor_ValueType
       ( LabelDescriptor_ValueType_String,
@@ -53,11 +73,37 @@ module Gogol.Logging.Internal.Sum
         ..
       ),
 
+    -- * Link_LifecycleState
+    Link_LifecycleState
+      ( Link_LifecycleState_LIFECYCLESTATEUNSPECIFIED,
+        Link_LifecycleState_Active,
+        Link_LifecycleState_DELETEREQUESTED,
+        Link_LifecycleState_Updating,
+        Link_LifecycleState_Creating,
+        Link_LifecycleState_Failed,
+        ..
+      ),
+
+    -- * LinkMetadata_State
+    LinkMetadata_State
+      ( LinkMetadata_State_OPERATIONSTATEUNSPECIFIED,
+        LinkMetadata_State_OPERATIONSTATESCHEDULED,
+        LinkMetadata_State_OPERATIONSTATEWAITINGFORPERMISSIONS,
+        LinkMetadata_State_OPERATIONSTATERUNNING,
+        LinkMetadata_State_OPERATIONSTATESUCCEEDED,
+        LinkMetadata_State_OPERATIONSTATEFAILED,
+        LinkMetadata_State_OPERATIONSTATECANCELLED,
+        ..
+      ),
+
     -- * LogBucket_LifecycleState
     LogBucket_LifecycleState
       ( LogBucket_LifecycleState_LIFECYCLESTATEUNSPECIFIED,
         LogBucket_LifecycleState_Active,
         LogBucket_LifecycleState_DELETEREQUESTED,
+        LogBucket_LifecycleState_Updating,
+        LogBucket_LifecycleState_Creating,
+        LogBucket_LifecycleState_Failed,
         ..
       ),
 
@@ -204,6 +250,58 @@ pattern Xgafv_2 = Xgafv "2"
   #-}
 
 -- | State of an operation.
+newtype BucketMetadata_State = BucketMetadata_State {fromBucketMetadata_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Should not be used.
+pattern BucketMetadata_State_OPERATIONSTATEUNSPECIFIED :: BucketMetadata_State
+pattern BucketMetadata_State_OPERATIONSTATEUNSPECIFIED = BucketMetadata_State "OPERATION_STATE_UNSPECIFIED"
+
+-- | The operation is scheduled.
+pattern BucketMetadata_State_OPERATIONSTATESCHEDULED :: BucketMetadata_State
+pattern BucketMetadata_State_OPERATIONSTATESCHEDULED = BucketMetadata_State "OPERATION_STATE_SCHEDULED"
+
+-- | Waiting for necessary permissions.
+pattern BucketMetadata_State_OPERATIONSTATEWAITINGFORPERMISSIONS :: BucketMetadata_State
+pattern BucketMetadata_State_OPERATIONSTATEWAITINGFORPERMISSIONS = BucketMetadata_State "OPERATION_STATE_WAITING_FOR_PERMISSIONS"
+
+-- | The operation is running.
+pattern BucketMetadata_State_OPERATIONSTATERUNNING :: BucketMetadata_State
+pattern BucketMetadata_State_OPERATIONSTATERUNNING = BucketMetadata_State "OPERATION_STATE_RUNNING"
+
+-- | The operation was completed successfully.
+pattern BucketMetadata_State_OPERATIONSTATESUCCEEDED :: BucketMetadata_State
+pattern BucketMetadata_State_OPERATIONSTATESUCCEEDED = BucketMetadata_State "OPERATION_STATE_SUCCEEDED"
+
+-- | The operation failed.
+pattern BucketMetadata_State_OPERATIONSTATEFAILED :: BucketMetadata_State
+pattern BucketMetadata_State_OPERATIONSTATEFAILED = BucketMetadata_State "OPERATION_STATE_FAILED"
+
+-- | The operation was cancelled by the user.
+pattern BucketMetadata_State_OPERATIONSTATECANCELLED :: BucketMetadata_State
+pattern BucketMetadata_State_OPERATIONSTATECANCELLED = BucketMetadata_State "OPERATION_STATE_CANCELLED"
+
+{-# COMPLETE
+  BucketMetadata_State_OPERATIONSTATEUNSPECIFIED,
+  BucketMetadata_State_OPERATIONSTATESCHEDULED,
+  BucketMetadata_State_OPERATIONSTATEWAITINGFORPERMISSIONS,
+  BucketMetadata_State_OPERATIONSTATERUNNING,
+  BucketMetadata_State_OPERATIONSTATESUCCEEDED,
+  BucketMetadata_State_OPERATIONSTATEFAILED,
+  BucketMetadata_State_OPERATIONSTATECANCELLED,
+  BucketMetadata_State
+  #-}
+
+-- | State of an operation.
 newtype CopyLogEntriesMetadata_State = CopyLogEntriesMetadata_State {fromCopyLogEntriesMetadata_State :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -255,6 +353,38 @@ pattern CopyLogEntriesMetadata_State_OPERATIONSTATECANCELLED = CopyLogEntriesMet
   CopyLogEntriesMetadata_State
   #-}
 
+-- | Required. The type of data in this index.
+newtype IndexConfig_Type = IndexConfig_Type {fromIndexConfig_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The index\'s type is unspecified.
+pattern IndexConfig_Type_INDEXTYPEUNSPECIFIED :: IndexConfig_Type
+pattern IndexConfig_Type_INDEXTYPEUNSPECIFIED = IndexConfig_Type "INDEX_TYPE_UNSPECIFIED"
+
+-- | The index is a string-type index.
+pattern IndexConfig_Type_INDEXTYPESTRING :: IndexConfig_Type
+pattern IndexConfig_Type_INDEXTYPESTRING = IndexConfig_Type "INDEX_TYPE_STRING"
+
+-- | The index is a integer-type index.
+pattern IndexConfig_Type_INDEXTYPEINTEGER :: IndexConfig_Type
+pattern IndexConfig_Type_INDEXTYPEINTEGER = IndexConfig_Type "INDEX_TYPE_INTEGER"
+
+{-# COMPLETE
+  IndexConfig_Type_INDEXTYPEUNSPECIFIED,
+  IndexConfig_Type_INDEXTYPESTRING,
+  IndexConfig_Type_INDEXTYPEINTEGER,
+  IndexConfig_Type
+  #-}
+
 -- | The type of data that can be assigned to the label.
 newtype LabelDescriptor_ValueType = LabelDescriptor_ValueType {fromLabelDescriptor_ValueType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -287,6 +417,105 @@ pattern LabelDescriptor_ValueType_INT64 = LabelDescriptor_ValueType "INT64"
   LabelDescriptor_ValueType
   #-}
 
+-- | Output only. The resource lifecycle state.
+newtype Link_LifecycleState = Link_LifecycleState {fromLink_LifecycleState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified state. This is only used\/useful for distinguishing unset values.
+pattern Link_LifecycleState_LIFECYCLESTATEUNSPECIFIED :: Link_LifecycleState
+pattern Link_LifecycleState_LIFECYCLESTATEUNSPECIFIED = Link_LifecycleState "LIFECYCLE_STATE_UNSPECIFIED"
+
+-- | The normal and active state.
+pattern Link_LifecycleState_Active :: Link_LifecycleState
+pattern Link_LifecycleState_Active = Link_LifecycleState "ACTIVE"
+
+-- | The resource has been marked for deletion by the user. For some resources (e.g. buckets), this can be reversed by an un-delete operation.
+pattern Link_LifecycleState_DELETEREQUESTED :: Link_LifecycleState
+pattern Link_LifecycleState_DELETEREQUESTED = Link_LifecycleState "DELETE_REQUESTED"
+
+-- | The resource has been marked for an update by the user. It will remain in this state until the update is complete.
+pattern Link_LifecycleState_Updating :: Link_LifecycleState
+pattern Link_LifecycleState_Updating = Link_LifecycleState "UPDATING"
+
+-- | The resource has been marked for creation by the user. It will remain in this state until the creation is complete.
+pattern Link_LifecycleState_Creating :: Link_LifecycleState
+pattern Link_LifecycleState_Creating = Link_LifecycleState "CREATING"
+
+-- | The resource is in an INTERNAL error state.
+pattern Link_LifecycleState_Failed :: Link_LifecycleState
+pattern Link_LifecycleState_Failed = Link_LifecycleState "FAILED"
+
+{-# COMPLETE
+  Link_LifecycleState_LIFECYCLESTATEUNSPECIFIED,
+  Link_LifecycleState_Active,
+  Link_LifecycleState_DELETEREQUESTED,
+  Link_LifecycleState_Updating,
+  Link_LifecycleState_Creating,
+  Link_LifecycleState_Failed,
+  Link_LifecycleState
+  #-}
+
+-- | State of an operation.
+newtype LinkMetadata_State = LinkMetadata_State {fromLinkMetadata_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Should not be used.
+pattern LinkMetadata_State_OPERATIONSTATEUNSPECIFIED :: LinkMetadata_State
+pattern LinkMetadata_State_OPERATIONSTATEUNSPECIFIED = LinkMetadata_State "OPERATION_STATE_UNSPECIFIED"
+
+-- | The operation is scheduled.
+pattern LinkMetadata_State_OPERATIONSTATESCHEDULED :: LinkMetadata_State
+pattern LinkMetadata_State_OPERATIONSTATESCHEDULED = LinkMetadata_State "OPERATION_STATE_SCHEDULED"
+
+-- | Waiting for necessary permissions.
+pattern LinkMetadata_State_OPERATIONSTATEWAITINGFORPERMISSIONS :: LinkMetadata_State
+pattern LinkMetadata_State_OPERATIONSTATEWAITINGFORPERMISSIONS = LinkMetadata_State "OPERATION_STATE_WAITING_FOR_PERMISSIONS"
+
+-- | The operation is running.
+pattern LinkMetadata_State_OPERATIONSTATERUNNING :: LinkMetadata_State
+pattern LinkMetadata_State_OPERATIONSTATERUNNING = LinkMetadata_State "OPERATION_STATE_RUNNING"
+
+-- | The operation was completed successfully.
+pattern LinkMetadata_State_OPERATIONSTATESUCCEEDED :: LinkMetadata_State
+pattern LinkMetadata_State_OPERATIONSTATESUCCEEDED = LinkMetadata_State "OPERATION_STATE_SUCCEEDED"
+
+-- | The operation failed.
+pattern LinkMetadata_State_OPERATIONSTATEFAILED :: LinkMetadata_State
+pattern LinkMetadata_State_OPERATIONSTATEFAILED = LinkMetadata_State "OPERATION_STATE_FAILED"
+
+-- | The operation was cancelled by the user.
+pattern LinkMetadata_State_OPERATIONSTATECANCELLED :: LinkMetadata_State
+pattern LinkMetadata_State_OPERATIONSTATECANCELLED = LinkMetadata_State "OPERATION_STATE_CANCELLED"
+
+{-# COMPLETE
+  LinkMetadata_State_OPERATIONSTATEUNSPECIFIED,
+  LinkMetadata_State_OPERATIONSTATESCHEDULED,
+  LinkMetadata_State_OPERATIONSTATEWAITINGFORPERMISSIONS,
+  LinkMetadata_State_OPERATIONSTATERUNNING,
+  LinkMetadata_State_OPERATIONSTATESUCCEEDED,
+  LinkMetadata_State_OPERATIONSTATEFAILED,
+  LinkMetadata_State_OPERATIONSTATECANCELLED,
+  LinkMetadata_State
+  #-}
+
 -- | Output only. The bucket lifecycle state.
 newtype LogBucket_LifecycleState = LogBucket_LifecycleState {fromLogBucket_LifecycleState :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -312,10 +541,25 @@ pattern LogBucket_LifecycleState_Active = LogBucket_LifecycleState "ACTIVE"
 pattern LogBucket_LifecycleState_DELETEREQUESTED :: LogBucket_LifecycleState
 pattern LogBucket_LifecycleState_DELETEREQUESTED = LogBucket_LifecycleState "DELETE_REQUESTED"
 
+-- | The resource has been marked for an update by the user. It will remain in this state until the update is complete.
+pattern LogBucket_LifecycleState_Updating :: LogBucket_LifecycleState
+pattern LogBucket_LifecycleState_Updating = LogBucket_LifecycleState "UPDATING"
+
+-- | The resource has been marked for creation by the user. It will remain in this state until the creation is complete.
+pattern LogBucket_LifecycleState_Creating :: LogBucket_LifecycleState
+pattern LogBucket_LifecycleState_Creating = LogBucket_LifecycleState "CREATING"
+
+-- | The resource is in an INTERNAL error state.
+pattern LogBucket_LifecycleState_Failed :: LogBucket_LifecycleState
+pattern LogBucket_LifecycleState_Failed = LogBucket_LifecycleState "FAILED"
+
 {-# COMPLETE
   LogBucket_LifecycleState_LIFECYCLESTATEUNSPECIFIED,
   LogBucket_LifecycleState_Active,
   LogBucket_LifecycleState_DELETEREQUESTED,
+  LogBucket_LifecycleState_Updating,
+  LogBucket_LifecycleState_Creating,
+  LogBucket_LifecycleState_Failed,
   LogBucket_LifecycleState
   #-}
 

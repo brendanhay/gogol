@@ -60,9 +60,6 @@ type StorageObjectsPatchResource =
               "predefinedAcl"
               ObjectsPatchPredefinedAcl
     Core.:> Core.QueryParam "projection" ObjectsPatchProjection
-    Core.:> Core.QueryParam
-              "provisionalUserProject"
-              Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "userProject" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -93,8 +90,6 @@ data StorageObjectsPatch = StorageObjectsPatch
     predefinedAcl :: (Core.Maybe ObjectsPatchPredefinedAcl),
     -- | Set of properties to return. Defaults to full.
     projection :: (Core.Maybe ObjectsPatchProjection),
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
     uploadType :: (Core.Maybe Core.Text),
     -- | The project to be billed for this request, for Requester Pays buckets.
@@ -123,7 +118,6 @@ newStorageObjectsPatch bucket object payload =
       payload = payload,
       predefinedAcl = Core.Nothing,
       projection = Core.Nothing,
-      provisionalUserProject = Core.Nothing,
       uploadType = Core.Nothing,
       userProject = Core.Nothing
     }
@@ -144,7 +138,6 @@ instance Core.GoogleRequest StorageObjectsPatch where
       ifMetagenerationNotMatch
       predefinedAcl
       projection
-      provisionalUserProject
       uploadType
       userProject
       (Core.Just Core.AltJSON)

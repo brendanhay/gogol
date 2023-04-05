@@ -80,7 +80,7 @@ data MonitoringServicesServiceLevelObjectivesList = MonitoringServicesServiceLev
     pageSize :: (Core.Maybe Core.Int32),
     -- | If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. Resource name of the parent containing the listed SLOs, either a project or a Monitoring Workspace. The formats are: projects\/[PROJECT/ID/OR/NUMBER]\/services\/[SERVICE/ID] workspaces\/[HOST/PROJECT/ID/OR/NUMBER]\/services\/-
+    -- | Required. Resource name of the parent containing the listed SLOs, either a project or a Monitoring Metrics Scope. The formats are: projects\/[PROJECT/ID/OR/NUMBER]\/services\/[SERVICE/ID] workspaces\/[HOST/PROJECT/ID/OR/NUMBER]\/services\/-
     parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -93,7 +93,7 @@ data MonitoringServicesServiceLevelObjectivesList = MonitoringServicesServiceLev
 
 -- | Creates a value of 'MonitoringServicesServiceLevelObjectivesList' with the minimum fields required to make a request.
 newMonitoringServicesServiceLevelObjectivesList ::
-  -- |  Required. Resource name of the parent containing the listed SLOs, either a project or a Monitoring Workspace. The formats are: projects\/[PROJECT/ID/OR/NUMBER]\/services\/[SERVICE/ID] workspaces\/[HOST/PROJECT/ID/OR/NUMBER]\/services\/- See 'parent'.
+  -- |  Required. Resource name of the parent containing the listed SLOs, either a project or a Monitoring Metrics Scope. The formats are: projects\/[PROJECT/ID/OR/NUMBER]\/services\/[SERVICE/ID] workspaces\/[HOST/PROJECT/ID/OR/NUMBER]\/services\/- See 'parent'.
   Core.Text ->
   MonitoringServicesServiceLevelObjectivesList
 newMonitoringServicesServiceLevelObjectivesList parent =

@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified TargetSslProxy resource. Gets a list of available target SSL proxies by making a list() request.
+-- Returns the specified TargetSslProxy resource.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.targetSslProxies.get@.
 module Gogol.Compute.TargetSslProxies.Get
@@ -60,7 +60,7 @@ type ComputeTargetSslProxiesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] TargetSslProxy
 
--- | Returns the specified TargetSslProxy resource. Gets a list of available target SSL proxies by making a list() request.
+-- | Returns the specified TargetSslProxy resource.
 --
 -- /See:/ 'newComputeTargetSslProxiesGet' smart constructor.
 data ComputeTargetSslProxiesGet = ComputeTargetSslProxiesGet

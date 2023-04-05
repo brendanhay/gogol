@@ -38,6 +38,11 @@ module Gogol.ContainerBuilder
 
     -- * Resources
 
+    -- ** cloudbuild.githubDotComWebhook.receive
+    CloudbuildGithubDotComWebhookReceiveResource,
+    CloudbuildGithubDotComWebhookReceive (..),
+    newCloudbuildGithubDotComWebhookReceive,
+
     -- ** cloudbuild.locations.regionalWebhook
     CloudbuildLocationsRegionalWebhookResource,
     CloudbuildLocationsRegionalWebhook (..),
@@ -108,11 +113,6 @@ module Gogol.ContainerBuilder
     CloudbuildProjectsGithubEnterpriseConfigsPatch (..),
     newCloudbuildProjectsGithubEnterpriseConfigsPatch,
 
-    -- ** cloudbuild.projects.locations.bitbucketServerConfigs.addBitbucketServerConnectedRepository
-    CloudbuildProjectsLocationsBitbucketServerConfigsAddBitbucketServerConnectedRepositoryResource,
-    CloudbuildProjectsLocationsBitbucketServerConfigsAddBitbucketServerConnectedRepository (..),
-    newCloudbuildProjectsLocationsBitbucketServerConfigsAddBitbucketServerConnectedRepository,
-
     -- ** cloudbuild.projects.locations.bitbucketServerConfigs.connectedRepositories.batchCreate
     CloudbuildProjectsLocationsBitbucketServerConfigsConnectedRepositoriesBatchCreateResource,
     CloudbuildProjectsLocationsBitbucketServerConfigsConnectedRepositoriesBatchCreate (..),
@@ -182,6 +182,46 @@ module Gogol.ContainerBuilder
     CloudbuildProjectsLocationsBuildsRetryResource,
     CloudbuildProjectsLocationsBuildsRetry (..),
     newCloudbuildProjectsLocationsBuildsRetry,
+
+    -- ** cloudbuild.projects.locations.gitLabConfigs.connectedRepositories.batchCreate
+    CloudbuildProjectsLocationsGitLabConfigsConnectedRepositoriesBatchCreateResource,
+    CloudbuildProjectsLocationsGitLabConfigsConnectedRepositoriesBatchCreate (..),
+    newCloudbuildProjectsLocationsGitLabConfigsConnectedRepositoriesBatchCreate,
+
+    -- ** cloudbuild.projects.locations.gitLabConfigs.create
+    CloudbuildProjectsLocationsGitLabConfigsCreateResource,
+    CloudbuildProjectsLocationsGitLabConfigsCreate (..),
+    newCloudbuildProjectsLocationsGitLabConfigsCreate,
+
+    -- ** cloudbuild.projects.locations.gitLabConfigs.delete
+    CloudbuildProjectsLocationsGitLabConfigsDeleteResource,
+    CloudbuildProjectsLocationsGitLabConfigsDelete (..),
+    newCloudbuildProjectsLocationsGitLabConfigsDelete,
+
+    -- ** cloudbuild.projects.locations.gitLabConfigs.get
+    CloudbuildProjectsLocationsGitLabConfigsGetResource,
+    CloudbuildProjectsLocationsGitLabConfigsGet (..),
+    newCloudbuildProjectsLocationsGitLabConfigsGet,
+
+    -- ** cloudbuild.projects.locations.gitLabConfigs.list
+    CloudbuildProjectsLocationsGitLabConfigsListResource,
+    CloudbuildProjectsLocationsGitLabConfigsList (..),
+    newCloudbuildProjectsLocationsGitLabConfigsList,
+
+    -- ** cloudbuild.projects.locations.gitLabConfigs.patch
+    CloudbuildProjectsLocationsGitLabConfigsPatchResource,
+    CloudbuildProjectsLocationsGitLabConfigsPatch (..),
+    newCloudbuildProjectsLocationsGitLabConfigsPatch,
+
+    -- ** cloudbuild.projects.locations.gitLabConfigs.removeGitLabConnectedRepository
+    CloudbuildProjectsLocationsGitLabConfigsRemoveGitLabConnectedRepositoryResource,
+    CloudbuildProjectsLocationsGitLabConfigsRemoveGitLabConnectedRepository (..),
+    newCloudbuildProjectsLocationsGitLabConfigsRemoveGitLabConnectedRepository,
+
+    -- ** cloudbuild.projects.locations.gitLabConfigs.repos.list
+    CloudbuildProjectsLocationsGitLabConfigsReposListResource,
+    CloudbuildProjectsLocationsGitLabConfigsReposList (..),
+    newCloudbuildProjectsLocationsGitLabConfigsReposList,
 
     -- ** cloudbuild.projects.locations.githubEnterpriseConfigs.create
     CloudbuildProjectsLocationsGithubEnterpriseConfigsCreateResource,
@@ -323,14 +363,6 @@ module Gogol.ContainerBuilder
     -- ** Xgafv
     Xgafv (..),
 
-    -- ** AddBitbucketServerConnectedRepositoryRequest
-    AddBitbucketServerConnectedRepositoryRequest (..),
-    newAddBitbucketServerConnectedRepositoryRequest,
-
-    -- ** AddBitbucketServerConnectedRepositoryResponse
-    AddBitbucketServerConnectedRepositoryResponse (..),
-    newAddBitbucketServerConnectedRepositoryResponse,
-
     -- ** ApprovalConfig
     ApprovalConfig (..),
     newApprovalConfig,
@@ -369,6 +401,18 @@ module Gogol.ContainerBuilder
     -- ** BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata
     BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata (..),
     newBatchCreateBitbucketServerConnectedRepositoriesResponseMetadata,
+
+    -- ** BatchCreateGitLabConnectedRepositoriesRequest
+    BatchCreateGitLabConnectedRepositoriesRequest (..),
+    newBatchCreateGitLabConnectedRepositoriesRequest,
+
+    -- ** BatchCreateGitLabConnectedRepositoriesResponse
+    BatchCreateGitLabConnectedRepositoriesResponse (..),
+    newBatchCreateGitLabConnectedRepositoriesResponse,
+
+    -- ** BatchCreateGitLabConnectedRepositoriesResponseMetadata
+    BatchCreateGitLabConnectedRepositoriesResponseMetadata (..),
+    newBatchCreateGitLabConnectedRepositoriesResponseMetadata,
 
     -- ** BitbucketServerConfig
     BitbucketServerConfig (..),
@@ -424,6 +468,9 @@ module Gogol.ContainerBuilder
     BuildOptions (..),
     newBuildOptions,
 
+    -- ** BuildOptions_DefaultLogsBucketBehavior
+    BuildOptions_DefaultLogsBucketBehavior (..),
+
     -- ** BuildOptions_LogStreamingOption
     BuildOptions_LogStreamingOption (..),
 
@@ -456,6 +503,9 @@ module Gogol.ContainerBuilder
     -- ** BuildTrigger_EventType
     BuildTrigger_EventType (..),
 
+    -- ** BuildTrigger_IncludeBuildLogs
+    BuildTrigger_IncludeBuildLogs (..),
+
     -- ** BuildTrigger_Substitutions
     BuildTrigger_Substitutions (..),
     newBuildTrigger_Substitutions,
@@ -487,6 +537,10 @@ module Gogol.ContainerBuilder
     -- ** CreateGitLabConfigOperationMetadata
     CreateGitLabConfigOperationMetadata (..),
     newCreateGitLabConfigOperationMetadata,
+
+    -- ** CreateGitLabConnectedRepositoryRequest
+    CreateGitLabConnectedRepositoryRequest (..),
+    newCreateGitLabConnectedRepositoryRequest,
 
     -- ** CreateWorkerPoolOperationMetadata
     CreateWorkerPoolOperationMetadata (..),
@@ -542,20 +596,40 @@ module Gogol.ContainerBuilder
     GitHubEventsConfig (..),
     newGitHubEventsConfig,
 
+    -- ** GitLabConfig
+    GitLabConfig (..),
+    newGitLabConfig,
+
+    -- ** GitLabConnectedRepository
+    GitLabConnectedRepository (..),
+    newGitLabConnectedRepository,
+
+    -- ** GitLabEnterpriseConfig
+    GitLabEnterpriseConfig (..),
+    newGitLabEnterpriseConfig,
+
+    -- ** GitLabEventsConfig
+    GitLabEventsConfig (..),
+    newGitLabEventsConfig,
+
+    -- ** GitLabRepository
+    GitLabRepository (..),
+    newGitLabRepository,
+
+    -- ** GitLabRepositoryId
+    GitLabRepositoryId (..),
+    newGitLabRepositoryId,
+
+    -- ** GitLabSecrets
+    GitLabSecrets (..),
+    newGitLabSecrets,
+
     -- ** GitRepoSource
     GitRepoSource (..),
     newGitRepoSource,
 
     -- ** GitRepoSource_RepoType
     GitRepoSource_RepoType (..),
-
-    -- ** GoogleDevtoolsCloudbuildV2OperationMetadata
-    GoogleDevtoolsCloudbuildV2OperationMetadata (..),
-    newGoogleDevtoolsCloudbuildV2OperationMetadata,
-
-    -- ** HTTPDelivery
-    HTTPDelivery (..),
-    newHTTPDelivery,
 
     -- ** Hash
     Hash (..),
@@ -596,6 +670,14 @@ module Gogol.ContainerBuilder
     ListBuildsResponse (..),
     newListBuildsResponse,
 
+    -- ** ListGitLabConfigsResponse
+    ListGitLabConfigsResponse (..),
+    newListGitLabConfigsResponse,
+
+    -- ** ListGitLabRepositoriesResponse
+    ListGitLabRepositoriesResponse (..),
+    newListGitLabRepositoriesResponse,
+
     -- ** ListGithubEnterpriseConfigsResponse
     ListGithubEnterpriseConfigsResponse (..),
     newListGithubEnterpriseConfigsResponse,
@@ -604,40 +686,16 @@ module Gogol.ContainerBuilder
     ListWorkerPoolsResponse (..),
     newListWorkerPoolsResponse,
 
+    -- ** MavenArtifact
+    MavenArtifact (..),
+    newMavenArtifact,
+
     -- ** NetworkConfig
     NetworkConfig (..),
     newNetworkConfig,
 
     -- ** NetworkConfig_EgressOption
     NetworkConfig_EgressOption (..),
-
-    -- ** Notification
-    Notification (..),
-    newNotification,
-
-    -- ** Notification_StructDelivery
-    Notification_StructDelivery (..),
-    newNotification_StructDelivery,
-
-    -- ** NotifierConfig
-    NotifierConfig (..),
-    newNotifierConfig,
-
-    -- ** NotifierMetadata
-    NotifierMetadata (..),
-    newNotifierMetadata,
-
-    -- ** NotifierSecret
-    NotifierSecret (..),
-    newNotifierSecret,
-
-    -- ** NotifierSecretRef
-    NotifierSecretRef (..),
-    newNotifierSecretRef,
-
-    -- ** NotifierSpec
-    NotifierSpec (..),
-    newNotifierSpec,
 
     -- ** Operation
     Operation (..),
@@ -685,6 +743,10 @@ module Gogol.ContainerBuilder
     PushFilter (..),
     newPushFilter,
 
+    -- ** PythonPackage
+    PythonPackage (..),
+    newPythonPackage,
+
     -- ** ReceiveTriggerWebhookResponse
     ReceiveTriggerWebhookResponse (..),
     newReceiveTriggerWebhookResponse,
@@ -693,6 +755,10 @@ module Gogol.ContainerBuilder
     RemoveBitbucketServerConnectedRepositoryRequest (..),
     newRemoveBitbucketServerConnectedRepositoryRequest,
 
+    -- ** RemoveGitLabConnectedRepositoryRequest
+    RemoveGitLabConnectedRepositoryRequest (..),
+    newRemoveGitLabConnectedRepositoryRequest,
+
     -- ** RepoSource
     RepoSource (..),
     newRepoSource,
@@ -700,6 +766,13 @@ module Gogol.ContainerBuilder
     -- ** RepoSource_Substitutions
     RepoSource_Substitutions (..),
     newRepoSource_Substitutions,
+
+    -- ** RepositoryEventConfig
+    RepositoryEventConfig (..),
+    newRepositoryEventConfig,
+
+    -- ** RepositoryEventConfig_RepositoryType
+    RepositoryEventConfig_RepositoryType (..),
 
     -- ** Results
     Results (..),
@@ -712,14 +785,6 @@ module Gogol.ContainerBuilder
     -- ** RunBuildTriggerRequest
     RunBuildTriggerRequest (..),
     newRunBuildTriggerRequest,
-
-    -- ** RunWorkflowCustomOperationMetadata
-    RunWorkflowCustomOperationMetadata (..),
-    newRunWorkflowCustomOperationMetadata,
-
-    -- ** SMTPDelivery
-    SMTPDelivery (..),
-    newSMTPDelivery,
 
     -- ** Secret
     Secret (..),
@@ -737,9 +802,9 @@ module Gogol.ContainerBuilder
     Secrets (..),
     newSecrets,
 
-    -- ** SlackDelivery
-    SlackDelivery (..),
-    newSlackDelivery,
+    -- ** ServiceDirectoryConfig
+    ServiceDirectoryConfig (..),
+    newServiceDirectoryConfig,
 
     -- ** Source
     Source (..),
@@ -789,6 +854,14 @@ module Gogol.ContainerBuilder
     UpdateWorkerPoolOperationMetadata (..),
     newUpdateWorkerPoolOperationMetadata,
 
+    -- ** UploadedMavenArtifact
+    UploadedMavenArtifact (..),
+    newUploadedMavenArtifact,
+
+    -- ** UploadedPythonPackage
+    UploadedPythonPackage (..),
+    newUploadedPythonPackage,
+
     -- ** Volume
     Volume (..),
     newVolume,
@@ -824,6 +897,7 @@ module Gogol.ContainerBuilder
   )
 where
 
+import Gogol.ContainerBuilder.Cloudbuild.GithubDotComWebhook.Receive
 import Gogol.ContainerBuilder.Cloudbuild.Locations.RegionalWebhook
 import Gogol.ContainerBuilder.Cloudbuild.Operations.Cancel
 import Gogol.ContainerBuilder.Cloudbuild.Operations.Get
@@ -838,7 +912,6 @@ import Gogol.ContainerBuilder.Cloudbuild.Projects.GithubEnterpriseConfigs.Delete
 import Gogol.ContainerBuilder.Cloudbuild.Projects.GithubEnterpriseConfigs.Get
 import Gogol.ContainerBuilder.Cloudbuild.Projects.GithubEnterpriseConfigs.List
 import Gogol.ContainerBuilder.Cloudbuild.Projects.GithubEnterpriseConfigs.Patch
-import Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.BitbucketServerConfigs.AddBitbucketServerConnectedRepository
 import Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.BitbucketServerConfigs.ConnectedRepositories.BatchCreate
 import Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.BitbucketServerConfigs.Create
 import Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.BitbucketServerConfigs.Delete
@@ -853,6 +926,14 @@ import Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Builds.Create
 import Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Builds.Get
 import Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Builds.List
 import Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Builds.Retry
+import Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GitLabConfigs.ConnectedRepositories.BatchCreate
+import Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GitLabConfigs.Create
+import Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GitLabConfigs.Delete
+import Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GitLabConfigs.Get
+import Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GitLabConfigs.List
+import Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GitLabConfigs.Patch
+import Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GitLabConfigs.RemoveGitLabConnectedRepository
+import Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GitLabConfigs.Repos.List
 import Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GithubEnterpriseConfigs.Create
 import Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GithubEnterpriseConfigs.Delete
 import Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GithubEnterpriseConfigs.Get

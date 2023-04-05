@@ -28,7 +28,7 @@
 --
 -- Searches for posts matching given query terms in the specified blog.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.posts.search@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.posts.search@.
 module Gogol.Blogger.Posts.Search
   ( -- * Resource
     BloggerPostsSearchResource,

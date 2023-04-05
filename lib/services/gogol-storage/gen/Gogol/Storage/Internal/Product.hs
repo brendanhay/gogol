@@ -821,7 +821,7 @@ instance Core.ToJSON Bucket_Lifecycle_RuleItem where
 data Bucket_Lifecycle_RuleItem_Action = Bucket_Lifecycle_RuleItem_Action
   { -- | Target storage class. Required iff the type of the action is SetStorageClass.
     storageClass :: (Core.Maybe Core.Text),
-    -- | Type of the action. Currently, only Delete and SetStorageClass are supported.
+    -- | Type of the action. Currently, only Delete, SetStorageClass, and AbortIncompleteMultipartUpload are supported.
     type' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -875,8 +875,12 @@ data Bucket_Lifecycle_RuleItem_Condition = Bucket_Lifecycle_RuleItem_Condition
     isLive :: (Core.Maybe Core.Bool),
     -- | A regular expression that satisfies the RE2 syntax. This condition is satisfied when the name of the object matches the RE2 pattern. Note: This feature is currently in the \"Early Access\" launch stage and is only available to a whitelisted set of users; that means that this feature may be changed in backward-incompatible ways and that it is not guaranteed to be released.
     matchesPattern :: (Core.Maybe Core.Text),
+    -- | List of object name prefixes. This condition will be satisfied when at least one of the prefixes exactly matches the beginning of the object name.
+    matchesPrefix :: (Core.Maybe [Core.Text]),
     -- | Objects having any of the storage classes specified by this condition will be matched. Values include MULTI/REGIONAL, REGIONAL, NEARLINE, COLDLINE, ARCHIVE, STANDARD, and DURABLE/REDUCED_AVAILABILITY.
     matchesStorageClass :: (Core.Maybe [Core.Text]),
+    -- | List of object name suffixes. This condition will be satisfied when at least one of the suffixes exactly matches the end of the object name.
+    matchesSuffix :: (Core.Maybe [Core.Text]),
     -- | A date in RFC 3339 format with only the date part (for instance, \"2013-01-15\"). This condition is satisfied when the noncurrent time on an object is before this date in UTC. This condition is relevant only for versioned objects.
     noncurrentTimeBefore :: (Core.Maybe Core.Date),
     -- | Relevant only for versioned objects. If the value is N, this condition is satisfied when there are at least N versions (including the live version) newer than this version of the object.
@@ -896,7 +900,9 @@ newBucket_Lifecycle_RuleItem_Condition =
       daysSinceNoncurrentTime = Core.Nothing,
       isLive = Core.Nothing,
       matchesPattern = Core.Nothing,
+      matchesPrefix = Core.Nothing,
       matchesStorageClass = Core.Nothing,
+      matchesSuffix = Core.Nothing,
       noncurrentTimeBefore = Core.Nothing,
       numNewerVersions = Core.Nothing
     }
@@ -917,7 +923,9 @@ instance
             Core.<*> (o Core..:? "daysSinceNoncurrentTime")
             Core.<*> (o Core..:? "isLive")
             Core.<*> (o Core..:? "matchesPattern")
+            Core.<*> (o Core..:? "matchesPrefix")
             Core.<*> (o Core..:? "matchesStorageClass")
+            Core.<*> (o Core..:? "matchesSuffix")
             Core.<*> (o Core..:? "noncurrentTimeBefore")
             Core.<*> (o Core..:? "numNewerVersions")
       )
@@ -939,8 +947,10 @@ instance
               Core.<$> daysSinceNoncurrentTime,
             ("isLive" Core..=) Core.<$> isLive,
             ("matchesPattern" Core..=) Core.<$> matchesPattern,
+            ("matchesPrefix" Core..=) Core.<$> matchesPrefix,
             ("matchesStorageClass" Core..=)
               Core.<$> matchesStorageClass,
+            ("matchesSuffix" Core..=) Core.<$> matchesSuffix,
             ("noncurrentTimeBefore" Core..=)
               Core.<$> noncurrentTimeBefore,
             ("numNewerVersions" Core..=)
@@ -2021,7 +2031,7 @@ data Object = Object
     timeDeleted :: (Core.Maybe Core.DateTime),
     -- | The time at which the object\'s storage class was last changed. When the object is initially created, it will be set to timeCreated.
     timeStorageClassUpdated :: (Core.Maybe Core.DateTime),
-    -- | The modification time of the object metadata in RFC 3339 format.
+    -- | The modification time of the object metadata in RFC 3339 format. Set initially to object creation time and then updated whenever any metadata of the object changes. This includes changes made by a requester, such as modifying custom metadata, as well as changes made by Cloud Storage on behalf of a requester, such as changing the storage class based on an Object Lifecycle Configuration.
     updated :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

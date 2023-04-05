@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified interconnect.
+-- Deletes the specified Interconnect.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.interconnects.delete@.
 module Gogol.Compute.Interconnects.Delete
@@ -61,7 +61,7 @@ type ComputeInterconnectsDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] Operation
 
--- | Deletes the specified interconnect.
+-- | Deletes the specified Interconnect.
 --
 -- /See:/ 'newComputeInterconnectsDelete' smart constructor.
 data ComputeInterconnectsDelete = ComputeInterconnectsDelete

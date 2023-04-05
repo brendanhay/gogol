@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified network. Gets a list of available networks by making a list() request.
+-- Returns the specified network.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.networks.get@.
 module Gogol.Compute.Networks.Get
@@ -60,7 +60,7 @@ type ComputeNetworksGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Network
 
--- | Returns the specified network. Gets a list of available networks by making a list() request.
+-- | Returns the specified network.
 --
 -- /See:/ 'newComputeNetworksGet' smart constructor.
 data ComputeNetworksGet = ComputeNetworksGet

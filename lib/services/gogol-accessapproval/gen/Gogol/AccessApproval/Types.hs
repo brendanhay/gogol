@@ -87,6 +87,10 @@ module Gogol.AccessApproval.Types
     -- ** EnrolledService_EnrollmentLevel
     EnrolledService_EnrollmentLevel (..),
 
+    -- ** InvalidateApprovalRequestMessage
+    InvalidateApprovalRequestMessage (..),
+    newInvalidateApprovalRequestMessage,
+
     -- ** ListApprovalRequestsResponse
     ListApprovalRequestsResponse (..),
     newListApprovalRequestsResponse,

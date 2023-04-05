@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google Enterprise License Manager API\'s allows you to license apps for all the users of a domain managed by you.
+-- The Google Enterprise License Manager API lets you manage Google Workspace and related licenses for all users of a customer that you manage.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/licensing/ Enterprise License Manager API Reference>
 module Gogol.AppsLicensing

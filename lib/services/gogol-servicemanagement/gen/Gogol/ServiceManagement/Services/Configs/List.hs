@@ -73,7 +73,7 @@ data ServiceManagementServicesConfigsList = ServiceManagementServicesConfigsList
     pageSize :: (Core.Maybe Core.Int32),
     -- | The token of the page to retrieve.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. The name of the service. See the </service-management/overview overview> for naming requirements. For example: @example.googleapis.com@.
+    -- | Required. The name of the service. See the <https://cloud.google.com/service-management/overview overview> for naming requirements. For example: @example.googleapis.com@.
     serviceName :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -84,7 +84,7 @@ data ServiceManagementServicesConfigsList = ServiceManagementServicesConfigsList
 
 -- | Creates a value of 'ServiceManagementServicesConfigsList' with the minimum fields required to make a request.
 newServiceManagementServicesConfigsList ::
-  -- |  Required. The name of the service. See the </service-management/overview overview> for naming requirements. For example: @example.googleapis.com@. See 'serviceName'.
+  -- |  Required. The name of the service. See the <https://cloud.google.com/service-management/overview overview> for naming requirements. For example: @example.googleapis.com@. See 'serviceName'.
   Core.Text ->
   ServiceManagementServicesConfigsList
 newServiceManagementServicesConfigsList serviceName =

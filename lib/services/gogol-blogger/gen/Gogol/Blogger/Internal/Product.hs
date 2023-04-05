@@ -841,6 +841,8 @@ data Page = Page
     status :: (Core.Maybe Page_Status),
     -- | The title of this entity. This is the name displayed in the Admin user interface.
     title :: (Core.Maybe Core.Text),
+    -- | RFC 3339 date-time when this Page was trashed.
+    trashed :: (Core.Maybe Core.Text),
     -- | RFC 3339 date-time when this Page was last updated.
     updated :: (Core.Maybe Core.Text),
     -- | The URL that this Page is displayed at.
@@ -863,6 +865,7 @@ newPage =
       selfLink = Core.Nothing,
       status = Core.Nothing,
       title = Core.Nothing,
+      trashed = Core.Nothing,
       updated = Core.Nothing,
       url = Core.Nothing
     }
@@ -883,6 +886,7 @@ instance Core.FromJSON Page where
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "title")
+            Core.<*> (o Core..:? "trashed")
             Core.<*> (o Core..:? "updated")
             Core.<*> (o Core..:? "url")
       )
@@ -901,6 +905,7 @@ instance Core.ToJSON Page where
             ("selfLink" Core..=) Core.<$> selfLink,
             ("status" Core..=) Core.<$> status,
             ("title" Core..=) Core.<$> title,
+            ("trashed" Core..=) Core.<$> trashed,
             ("updated" Core..=) Core.<$> updated,
             ("url" Core..=) Core.<$> url
           ]
@@ -1168,6 +1173,8 @@ data Post' = Post'
     title :: (Core.Maybe Core.Text),
     -- | The title link URL, similar to atom\'s related link.
     titleLink :: (Core.Maybe Core.Text),
+    -- | RFC 3339 date-time when this Post was last trashed.
+    trashed :: (Core.Maybe Core.Text),
     -- | RFC 3339 date-time when this Post was last updated.
     updated :: (Core.Maybe Core.Text),
     -- | The URL where this Post is displayed.
@@ -1197,6 +1204,7 @@ newPost =
       status = Core.Nothing,
       title = Core.Nothing,
       titleLink = Core.Nothing,
+      trashed = Core.Nothing,
       updated = Core.Nothing,
       url = Core.Nothing
     }
@@ -1224,6 +1232,7 @@ instance Core.FromJSON Post' where
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "title")
             Core.<*> (o Core..:? "titleLink")
+            Core.<*> (o Core..:? "trashed")
             Core.<*> (o Core..:? "updated")
             Core.<*> (o Core..:? "url")
       )
@@ -1249,6 +1258,7 @@ instance Core.ToJSON Post' where
             ("status" Core..=) Core.<$> status,
             ("title" Core..=) Core.<$> title,
             ("titleLink" Core..=) Core.<$> titleLink,
+            ("trashed" Core..=) Core.<$> trashed,
             ("updated" Core..=) Core.<$> updated,
             ("url" Core..=) Core.<$> url
           ]

@@ -70,7 +70,7 @@ data TagManagerAccountsContainersList = TagManagerAccountsContainersList
     callback :: (Core.Maybe Core.Text),
     -- | Continuation token for fetching the next page of results.
     pageToken :: (Core.Maybe Core.Text),
-    -- | GTM Accounts\'s API relative path. Example: accounts\/{account_id}.
+    -- | GTM Account\'s API relative path. Example: accounts\/{account_id}.
     parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -81,7 +81,7 @@ data TagManagerAccountsContainersList = TagManagerAccountsContainersList
 
 -- | Creates a value of 'TagManagerAccountsContainersList' with the minimum fields required to make a request.
 newTagManagerAccountsContainersList ::
-  -- |  GTM Accounts\'s API relative path. Example: accounts\/{account_id}. See 'parent'.
+  -- |  GTM Account\'s API relative path. Example: accounts\/{account_id}. See 'parent'.
   Core.Text ->
   TagManagerAccountsContainersList
 newTagManagerAccountsContainersList parent =

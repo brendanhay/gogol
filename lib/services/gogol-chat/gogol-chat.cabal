@@ -16,7 +16,7 @@ extra-source-files:
   src/.gitkeep
 
 description:
-  Enables apps to fetch information and perform actions in Google Chat. Authentication using a service account is a prerequisite for using the Google Chat REST API.
+  Enables apps to fetch information and perform actions in Google Chat. Authentication is a prerequisite for using the Google Chat REST API.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -49,13 +49,7 @@ library
 
   exposed-modules:
     Gogol.Chat
-    Gogol.Chat.Dms.Conversations.Messages
-    Gogol.Chat.Dms.Messages
-    Gogol.Chat.Dms.Webhooks
     Gogol.Chat.Media.Download
-    Gogol.Chat.Rooms.Conversations.Messages
-    Gogol.Chat.Rooms.Messages
-    Gogol.Chat.Rooms.Webhooks
     Gogol.Chat.Spaces.Get
     Gogol.Chat.Spaces.List
     Gogol.Chat.Spaces.Members.Get
@@ -64,8 +58,8 @@ library
     Gogol.Chat.Spaces.Messages.Create
     Gogol.Chat.Spaces.Messages.Delete
     Gogol.Chat.Spaces.Messages.Get
+    Gogol.Chat.Spaces.Messages.Patch
     Gogol.Chat.Spaces.Messages.Update
-    Gogol.Chat.Spaces.Webhooks
     Gogol.Chat.Types
 
   other-modules:
@@ -73,5 +67,5 @@ library
     Gogol.Chat.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

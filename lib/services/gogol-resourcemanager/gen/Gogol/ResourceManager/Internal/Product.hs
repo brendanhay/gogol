@@ -90,6 +90,10 @@ module Gogol.ResourceManager.Internal.Product
     DeleteTagValueMetadata (..),
     newDeleteTagValueMetadata,
 
+    -- * EffectiveTag
+    EffectiveTag (..),
+    newEffectiveTag,
+
     -- * Empty
     Empty (..),
     newEmpty,
@@ -122,6 +126,10 @@ module Gogol.ResourceManager.Internal.Product
     Lien (..),
     newLien,
 
+    -- * ListEffectiveTagsResponse
+    ListEffectiveTagsResponse (..),
+    newListEffectiveTagsResponse,
+
     -- * ListFoldersResponse
     ListFoldersResponse (..),
     newListFoldersResponse,
@@ -137,6 +145,10 @@ module Gogol.ResourceManager.Internal.Product
     -- * ListTagBindingsResponse
     ListTagBindingsResponse (..),
     newListTagBindingsResponse,
+
+    -- * ListTagHoldsResponse
+    ListTagHoldsResponse (..),
+    newListTagHoldsResponse,
 
     -- * ListTagKeysResponse
     ListTagKeysResponse (..),
@@ -222,9 +234,17 @@ module Gogol.ResourceManager.Internal.Product
     TagBinding (..),
     newTagBinding,
 
+    -- * TagHold
+    TagHold (..),
+    newTagHold,
+
     -- * TagKey
     TagKey (..),
     newTagKey,
+
+    -- * TagKey_PurposeData
+    TagKey_PurposeData (..),
+    newTagKey_PurposeData,
 
     -- * TagValue
     TagValue (..),
@@ -280,7 +300,7 @@ import qualified Gogol.Prelude as Core
 import Gogol.ResourceManager.Internal.Sum
 
 -- | Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs. If there are AuditConfigs for both @allServices@ and a specific service, the union of the two AuditConfigs is used for that service: the log/types specified in each AuditConfig are enabled, and the exempted/members in each AuditLogConfig are exempted. Example Policy with multiple AuditConfigs: { \"audit/configs\": [ { \"service\": \"allServices\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\", \"exempted/members\": [ \"user:jose\@example.com\" ] }, { \"log/type\": \"DATA/WRITE\" }, { \"log/type\": \"ADMIN/READ\" } ] }, { \"service\": \"sampleservice.googleapis.com\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\" }, { \"log/type\": \"DATA/WRITE\", \"exempted/members\": [ \"user:aliya\@example.com\" ] } ] } ] } For sampleservice, this policy enables DATA/READ, DATA/WRITE and
--- ADMIN/READ logging. It also exempts jose\@example.com from DATA/READ logging, and aliya\@example.com from DATA/WRITE logging.
+-- ADMIN/READ logging. It also exempts @jose\@example.com@ from DATA/READ logging, and @aliya\@example.com@ from DATA/WRITE logging.
 --
 -- /See:/ 'newAuditConfig' smart constructor.
 data AuditConfig = AuditConfig
@@ -360,8 +380,9 @@ instance Core.ToJSON AuditLogConfig where
 data Binding = Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe Expr),
-    -- | Specifies the principals requesting access for a Cloud Platform resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains
-    -- the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@.
+    -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
+    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
     members :: (Core.Maybe [Core.Text]),
     -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
     role' :: (Core.Maybe Core.Text)
@@ -779,7 +800,69 @@ instance Core.FromJSON DeleteTagValueMetadata where
 instance Core.ToJSON DeleteTagValueMetadata where
   toJSON = Core.const Core.emptyObject
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | An EffectiveTag represents a tag that applies to a resource during policy evaluation. Tags can be either directly bound to a resource or inherited from its ancestor. EffectiveTag contains the name and namespaced_name of the tag value and tag key, with additional fields of @inherited@ to indicate the inheritance status of the effective tag.
+--
+-- /See:/ 'newEffectiveTag' smart constructor.
+data EffectiveTag = EffectiveTag
+  { -- | Indicates the inheritance status of a tag value attached to the given resource. If the tag value is inherited from one of the resource\'s ancestors, inherited will be true. If false, then the tag value is directly attached to the resource, inherited will be false.
+    inherited :: (Core.Maybe Core.Bool),
+    -- | The namespaced_name of the TagKey. Now only supported in the format of @{organization_id}\/{tag_key_short_name}@. Other formats will be supported when we add non-org parented tags.
+    namespacedTagKey :: (Core.Maybe Core.Text),
+    -- | Namespaced name of the TagValue. Now only supported in the format @{organization_id}\/{tag_key_short_name}\/{tag_value_short_name}@. Other formats will be supported when we add non-org parented tags.
+    namespacedTagValue :: (Core.Maybe Core.Text),
+    -- | The name of the TagKey, in the format @tagKeys\/{id}@, such as @tagKeys\/123@.
+    tagKey :: (Core.Maybe Core.Text),
+    -- | The parent name of the tag key. Must be in the format @organizations\/{organization_id}@.
+    tagKeyParentName :: (Core.Maybe Core.Text),
+    -- | Resource name for TagValue in the format @tagValues\/456@.
+    tagValue :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'EffectiveTag' with the minimum fields required to make a request.
+newEffectiveTag ::
+  EffectiveTag
+newEffectiveTag =
+  EffectiveTag
+    { inherited = Core.Nothing,
+      namespacedTagKey = Core.Nothing,
+      namespacedTagValue = Core.Nothing,
+      tagKey = Core.Nothing,
+      tagKeyParentName = Core.Nothing,
+      tagValue = Core.Nothing
+    }
+
+instance Core.FromJSON EffectiveTag where
+  parseJSON =
+    Core.withObject
+      "EffectiveTag"
+      ( \o ->
+          EffectiveTag
+            Core.<$> (o Core..:? "inherited")
+            Core.<*> (o Core..:? "namespacedTagKey")
+            Core.<*> (o Core..:? "namespacedTagValue")
+            Core.<*> (o Core..:? "tagKey")
+            Core.<*> (o Core..:? "tagKeyParentName")
+            Core.<*> (o Core..:? "tagValue")
+      )
+
+instance Core.ToJSON EffectiveTag where
+  toJSON EffectiveTag {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("inherited" Core..=) Core.<$> inherited,
+            ("namespacedTagKey" Core..=)
+              Core.<$> namespacedTagKey,
+            ("namespacedTagValue" Core..=)
+              Core.<$> namespacedTagValue,
+            ("tagKey" Core..=) Core.<$> tagKey,
+            ("tagKeyParentName" Core..=)
+              Core.<$> tagKeyParentName,
+            ("tagValue" Core..=) Core.<$> tagValue
+          ]
+      )
+
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -1116,6 +1199,45 @@ instance Core.ToJSON Lien where
           ]
       )
 
+-- | The response of ListEffectiveTags.
+--
+-- /See:/ 'newListEffectiveTagsResponse' smart constructor.
+data ListEffectiveTagsResponse = ListEffectiveTagsResponse
+  { -- | A possibly paginated list of effective tags for the specified resource.
+    effectiveTags :: (Core.Maybe [EffectiveTag]),
+    -- | Pagination token. If the result set is too large to fit in a single response, this token is returned. It encodes the position of the current result cursor. Feeding this value into a new list request with the @page_token@ parameter gives the next page of the results. When @next_page_token@ is not filled in, there is no next page and the list returned is the last page in the result set. Pagination tokens have a limited lifetime.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListEffectiveTagsResponse' with the minimum fields required to make a request.
+newListEffectiveTagsResponse ::
+  ListEffectiveTagsResponse
+newListEffectiveTagsResponse =
+  ListEffectiveTagsResponse
+    { effectiveTags = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON ListEffectiveTagsResponse where
+  parseJSON =
+    Core.withObject
+      "ListEffectiveTagsResponse"
+      ( \o ->
+          ListEffectiveTagsResponse
+            Core.<$> (o Core..:? "effectiveTags")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON ListEffectiveTagsResponse where
+  toJSON ListEffectiveTagsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("effectiveTags" Core..=) Core.<$> effectiveTags,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
 -- | The ListFolders response message.
 --
 -- /See:/ 'newListFoldersResponse' smart constructor.
@@ -1260,6 +1382,42 @@ instance Core.ToJSON ListTagBindingsResponse where
       ( Core.catMaybes
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
             ("tagBindings" Core..=) Core.<$> tagBindings
+          ]
+      )
+
+-- | The ListTagHolds response.
+--
+-- /See:/ 'newListTagHoldsResponse' smart constructor.
+data ListTagHoldsResponse = ListTagHoldsResponse
+  { -- | Pagination token. If the result set is too large to fit in a single response, this token is returned. It encodes the position of the current result cursor. Feeding this value into a new list request with the @page_token@ parameter gives the next page of the results. When @next_page_token@ is not filled in, there is no next page and the list returned is the last page in the result set. Pagination tokens have a limited lifetime.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | A possibly paginated list of TagHolds.
+    tagHolds :: (Core.Maybe [TagHold])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListTagHoldsResponse' with the minimum fields required to make a request.
+newListTagHoldsResponse ::
+  ListTagHoldsResponse
+newListTagHoldsResponse =
+  ListTagHoldsResponse {nextPageToken = Core.Nothing, tagHolds = Core.Nothing}
+
+instance Core.FromJSON ListTagHoldsResponse where
+  parseJSON =
+    Core.withObject
+      "ListTagHoldsResponse"
+      ( \o ->
+          ListTagHoldsResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "tagHolds")
+      )
+
+instance Core.ToJSON ListTagHoldsResponse where
+  toJSON ListTagHoldsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("tagHolds" Core..=) Core.<$> tagHolds
           ]
       )
 
@@ -1708,7 +1866,7 @@ data Project = Project
     displayName :: (Core.Maybe Core.Text),
     -- | Output only. A checksum computed by the server based on the current value of the Project resource. This may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding.
     etag :: (Core.Maybe Core.Text),
-    -- | Optional. The labels associated with this project. Label keys must be between 1 and 63 characters long and must conform to the following regular expression: [a-z]([-a-z0-9]/[a-z0-9])?. Label values must be between 0 and 63 characters long and must conform to the regular expression ([a-z]([-a-z0-9]/[a-z0-9])?)?. No more than 256 labels can be associated with a given resource. Clients should store labels in a representation such as JSON that does not depend on specific characters being disallowed. Example: @\"myBusinessDimension\" : \"businessValue\"@
+    -- | Optional. The labels associated with this project. Label keys must be between 1 and 63 characters long and must conform to the following regular expression: [a-z]([-a-z0-9]/[a-z0-9])?. Label values must be between 0 and 63 characters long and must conform to the regular expression ([a-z]([-a-z0-9]/[a-z0-9])?)?. No more than 64 labels can be associated with a given resource. Clients should store labels in a representation such as JSON that does not depend on specific characters being disallowed. Example: @\"myBusinessDimension\" : \"businessValue\"@
     labels :: (Core.Maybe Project_Labels),
     -- | Output only. The unique resource name of the project. It is an int64 generated number prefixed by \"projects\/\". Example: @projects\/415104041262@
     name :: (Core.Maybe Core.Text),
@@ -1775,7 +1933,7 @@ instance Core.ToJSON Project where
           ]
       )
 
--- | Optional. The labels associated with this project. Label keys must be between 1 and 63 characters long and must conform to the following regular expression: [a-z]([-a-z0-9]/[a-z0-9])?. Label values must be between 0 and 63 characters long and must conform to the regular expression ([a-z]([-a-z0-9]/[a-z0-9])?)?. No more than 256 labels can be associated with a given resource. Clients should store labels in a representation such as JSON that does not depend on specific characters being disallowed. Example: @\"myBusinessDimension\" : \"businessValue\"@
+-- | Optional. The labels associated with this project. Label keys must be between 1 and 63 characters long and must conform to the following regular expression: [a-z]([-a-z0-9]/[a-z0-9])?. Label values must be between 0 and 63 characters long and must conform to the regular expression ([a-z]([-a-z0-9]/[a-z0-9])?)?. No more than 64 labels can be associated with a given resource. Clients should store labels in a representation such as JSON that does not depend on specific characters being disallowed. Example: @\"myBusinessDimension\" : \"businessValue\"@
 --
 -- /See:/ 'newProject_Labels' smart constructor.
 newtype Project_Labels = Project_Labels
@@ -1961,7 +2119,7 @@ instance Core.ToJSON SearchProjectsResponse where
 --
 -- /See:/ 'newSetIamPolicyRequest' smart constructor.
 data SetIamPolicyRequest = SetIamPolicyRequest
-  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
+  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Google Cloud services (such as Projects) might reject them.
     policy :: (Core.Maybe Policy),
     -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: @paths: \"bindings, etag\"@
     updateMask :: (Core.Maybe Core.FieldMask)
@@ -2060,7 +2218,7 @@ instance Core.ToJSON Status_DetailsItem where
   toJSON Status_DetailsItem {..} =
     Core.toJSON additional
 
--- | A TagBinding represents a connection between a TagValue and a cloud resource (currently project, folder, or organization). Once a TagBinding is created, the TagValue is applied to all the descendants of the cloud resource.
+-- | A TagBinding represents a connection between a TagValue and a cloud resource Once a TagBinding is created, the TagValue is applied to all the descendants of the Google Cloud resource.
 --
 -- /See:/ 'newTagBinding' smart constructor.
 data TagBinding = TagBinding
@@ -2104,6 +2262,60 @@ instance Core.ToJSON TagBinding where
           ]
       )
 
+-- | A TagHold represents the use of a TagValue that is not captured by TagBindings. If a TagValue has any TagHolds, deletion will be blocked. This resource is intended to be created in the same cloud location as the @holder@.
+--
+-- /See:/ 'newTagHold' smart constructor.
+data TagHold = TagHold
+  { -- | Output only. The time this TagHold was created.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | Optional. A URL where an end user can learn more about removing this hold. E.g. @https:\/\/cloud.google.com\/resource-manager\/docs\/tags\/tags-creating-and-managing@
+    helpLink :: (Core.Maybe Core.Text),
+    -- | Required. The name of the resource where the TagValue is being used. Must be less than 200 characters. E.g. @\/\/compute.googleapis.com\/compute\/projects\/myproject\/regions\/us-east-1\/instanceGroupManagers\/instance-group@
+    holder :: (Core.Maybe Core.Text),
+    -- | Output only. The resource name of a TagHold. This is a String of the form: @tagValues\/{tag-value-id}\/tagHolds\/{tag-hold-id}@ (e.g. @tagValues\/123\/tagHolds\/456@). This resource name is generated by the server.
+    name :: (Core.Maybe Core.Text),
+    -- | Optional. An optional string representing the origin of this request. This field should include human-understandable information to distinguish origins from each other. Must be less than 200 characters. E.g. @migs-35678234@
+    origin :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TagHold' with the minimum fields required to make a request.
+newTagHold ::
+  TagHold
+newTagHold =
+  TagHold
+    { createTime = Core.Nothing,
+      helpLink = Core.Nothing,
+      holder = Core.Nothing,
+      name = Core.Nothing,
+      origin = Core.Nothing
+    }
+
+instance Core.FromJSON TagHold where
+  parseJSON =
+    Core.withObject
+      "TagHold"
+      ( \o ->
+          TagHold
+            Core.<$> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "helpLink")
+            Core.<*> (o Core..:? "holder")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "origin")
+      )
+
+instance Core.ToJSON TagHold where
+  toJSON TagHold {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("createTime" Core..=) Core.<$> createTime,
+            ("helpLink" Core..=) Core.<$> helpLink,
+            ("holder" Core..=) Core.<$> holder,
+            ("name" Core..=) Core.<$> name,
+            ("origin" Core..=) Core.<$> origin
+          ]
+      )
+
 -- | A TagKey, used to group a set of TagValues.
 --
 -- /See:/ 'newTagKey' smart constructor.
@@ -2120,6 +2332,10 @@ data TagKey = TagKey
     namespacedName :: (Core.Maybe Core.Text),
     -- | Immutable. The resource name of the new TagKey\'s parent. Must be of the form @organizations\/{org_id}@.
     parent :: (Core.Maybe Core.Text),
+    -- | Optional. A purpose denotes that this Tag is intended for use in policies of a specific policy engine, and will involve that policy engine in management operations involving this Tag. A purpose does not grant a policy engine exclusive rights to the Tag, and it may be referenced by other policy engines. A purpose cannot be changed once set.
+    purpose :: (Core.Maybe TagKey_Purpose),
+    -- | Optional. Purpose data corresponds to the policy system that the tag is intended for. See documentation for @Purpose@ for formatting of this field. Purpose data cannot be changed once set.
+    purposeData :: (Core.Maybe TagKey_PurposeData),
     -- | Required. Immutable. The user friendly name for a TagKey. The short name should be unique for TagKeys within the same tag namespace. The short name must be 1-63 characters, beginning and ending with an alphanumeric character ([a-z0-9A-Z]) with dashes (-), underscores (_), dots (.), and alphanumerics between.
     shortName :: (Core.Maybe Core.Text),
     -- | Output only. Update time.
@@ -2138,6 +2354,8 @@ newTagKey =
       name = Core.Nothing,
       namespacedName = Core.Nothing,
       parent = Core.Nothing,
+      purpose = Core.Nothing,
+      purposeData = Core.Nothing,
       shortName = Core.Nothing,
       updateTime = Core.Nothing
     }
@@ -2154,6 +2372,8 @@ instance Core.FromJSON TagKey where
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "namespacedName")
             Core.<*> (o Core..:? "parent")
+            Core.<*> (o Core..:? "purpose")
+            Core.<*> (o Core..:? "purposeData")
             Core.<*> (o Core..:? "shortName")
             Core.<*> (o Core..:? "updateTime")
       )
@@ -2168,10 +2388,40 @@ instance Core.ToJSON TagKey where
             ("name" Core..=) Core.<$> name,
             ("namespacedName" Core..=) Core.<$> namespacedName,
             ("parent" Core..=) Core.<$> parent,
+            ("purpose" Core..=) Core.<$> purpose,
+            ("purposeData" Core..=) Core.<$> purposeData,
             ("shortName" Core..=) Core.<$> shortName,
             ("updateTime" Core..=) Core.<$> updateTime
           ]
       )
+
+-- | Optional. Purpose data corresponds to the policy system that the tag is intended for. See documentation for @Purpose@ for formatting of this field. Purpose data cannot be changed once set.
+--
+-- /See:/ 'newTagKey_PurposeData' smart constructor.
+newtype TagKey_PurposeData = TagKey_PurposeData
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TagKey_PurposeData' with the minimum fields required to make a request.
+newTagKey_PurposeData ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  TagKey_PurposeData
+newTagKey_PurposeData additional = TagKey_PurposeData {additional = additional}
+
+instance Core.FromJSON TagKey_PurposeData where
+  parseJSON =
+    Core.withObject
+      "TagKey_PurposeData"
+      ( \o ->
+          TagKey_PurposeData Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON TagKey_PurposeData where
+  toJSON TagKey_PurposeData {..} =
+    Core.toJSON additional
 
 -- | A TagValue is a child of a particular TagKey. This is used to group cloud resources for the purpose of controlling them using policies.
 --
@@ -2185,7 +2435,7 @@ data TagValue = TagValue
     etag :: (Core.Maybe Core.Text),
     -- | Immutable. Resource name for TagValue in the format @tagValues\/456@.
     name :: (Core.Maybe Core.Text),
-    -- | Output only. Namespaced name of the TagValue. Must be in the format @{organization_id}\/{tag_key_short_name}\/{short_name}@.
+    -- | Output only. Namespaced name of the TagValue. Now only supported in the format @{organization_id}\/{tag_key_short_name}\/{short_name}@. Other formats will be supported when we add non-org parented tags.
     namespacedName :: (Core.Maybe Core.Text),
     -- | Immutable. The resource name of the new TagValue\'s parent TagKey. Must be of the form @tagKeys\/{tag_key_id}@.
     parent :: (Core.Maybe Core.Text),
@@ -2246,7 +2496,7 @@ instance Core.ToJSON TagValue where
 --
 -- /See:/ 'newTestIamPermissionsRequest' smart constructor.
 newtype TestIamPermissionsRequest = TestIamPermissionsRequest
-  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as \'/\' or \'storage./\') are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
+  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as @*@ or @storage.*@) are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
     permissions :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

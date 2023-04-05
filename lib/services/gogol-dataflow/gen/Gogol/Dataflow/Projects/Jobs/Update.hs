@@ -54,6 +54,7 @@ type DataflowProjectsJobsUpdateResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "location" Core.Text
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -78,6 +79,8 @@ data DataflowProjectsJobsUpdate = DataflowProjectsJobsUpdate
     payload :: Job,
     -- | The ID of the Cloud Platform project that the job belongs to.
     projectId :: Core.Text,
+    -- | The list of fields to update relative to Job. If empty, only RequestedJobState will be considered for update. If the FieldMask is not empty and RequestedJobState is none\/empty, The fields specified in the update mask will be the only ones considered for update. If both RequestedJobState and update/mask are specified, we will first handle RequestedJobState and then the update/mask fields.
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -103,6 +106,7 @@ newDataflowProjectsJobsUpdate jobId payload projectId =
       location = Core.Nothing,
       payload = payload,
       projectId = projectId,
+      updateMask = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
@@ -127,6 +131,7 @@ instance
       accessToken
       callback
       location
+      updateMask
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)

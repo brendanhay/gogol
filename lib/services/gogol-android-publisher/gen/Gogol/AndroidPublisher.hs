@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets Android application developers access their Google Play accounts.
+-- Lets Android application developers access their Google Play accounts. At a high level, the expected workflow is to \"insert\" an Edit, make changes as necessary, and then \"commit\" it.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference>
 module Gogol.AndroidPublisher
@@ -37,6 +37,21 @@ module Gogol.AndroidPublisher
     Androidpublisher'FullControl,
 
     -- * Resources
+
+    -- ** androidpublisher.applications.deviceTierConfigs.create
+    AndroidPublisherApplicationsDeviceTierConfigsCreateResource,
+    AndroidPublisherApplicationsDeviceTierConfigsCreate (..),
+    newAndroidPublisherApplicationsDeviceTierConfigsCreate,
+
+    -- ** androidpublisher.applications.deviceTierConfigs.get
+    AndroidPublisherApplicationsDeviceTierConfigsGetResource,
+    AndroidPublisherApplicationsDeviceTierConfigsGet (..),
+    newAndroidPublisherApplicationsDeviceTierConfigsGet,
+
+    -- ** androidpublisher.applications.deviceTierConfigs.list
+    AndroidPublisherApplicationsDeviceTierConfigsListResource,
+    AndroidPublisherApplicationsDeviceTierConfigsList (..),
+    newAndroidPublisherApplicationsDeviceTierConfigsList,
 
     -- ** androidpublisher.edits.apks.addexternallyhosted
     AndroidPublisherEditsApksAddexternallyhostedResource,
@@ -288,6 +303,91 @@ module Gogol.AndroidPublisher
     AndroidPublisherMonetizationConvertRegionPrices (..),
     newAndroidPublisherMonetizationConvertRegionPrices,
 
+    -- ** androidpublisher.monetization.subscriptions.archive
+    AndroidPublisherMonetizationSubscriptionsArchiveResource,
+    AndroidPublisherMonetizationSubscriptionsArchive (..),
+    newAndroidPublisherMonetizationSubscriptionsArchive,
+
+    -- ** androidpublisher.monetization.subscriptions.basePlans.activate
+    AndroidPublisherMonetizationSubscriptionsBasePlansActivateResource,
+    AndroidPublisherMonetizationSubscriptionsBasePlansActivate (..),
+    newAndroidPublisherMonetizationSubscriptionsBasePlansActivate,
+
+    -- ** androidpublisher.monetization.subscriptions.basePlans.deactivate
+    AndroidPublisherMonetizationSubscriptionsBasePlansDeactivateResource,
+    AndroidPublisherMonetizationSubscriptionsBasePlansDeactivate (..),
+    newAndroidPublisherMonetizationSubscriptionsBasePlansDeactivate,
+
+    -- ** androidpublisher.monetization.subscriptions.basePlans.delete
+    AndroidPublisherMonetizationSubscriptionsBasePlansDeleteResource,
+    AndroidPublisherMonetizationSubscriptionsBasePlansDelete (..),
+    newAndroidPublisherMonetizationSubscriptionsBasePlansDelete,
+
+    -- ** androidpublisher.monetization.subscriptions.basePlans.migratePrices
+    AndroidPublisherMonetizationSubscriptionsBasePlansMigratePricesResource,
+    AndroidPublisherMonetizationSubscriptionsBasePlansMigratePrices (..),
+    newAndroidPublisherMonetizationSubscriptionsBasePlansMigratePrices,
+
+    -- ** androidpublisher.monetization.subscriptions.basePlans.offers.activate
+    AndroidPublisherMonetizationSubscriptionsBasePlansOffersActivateResource,
+    AndroidPublisherMonetizationSubscriptionsBasePlansOffersActivate (..),
+    newAndroidPublisherMonetizationSubscriptionsBasePlansOffersActivate,
+
+    -- ** androidpublisher.monetization.subscriptions.basePlans.offers.create
+    AndroidPublisherMonetizationSubscriptionsBasePlansOffersCreateResource,
+    AndroidPublisherMonetizationSubscriptionsBasePlansOffersCreate (..),
+    newAndroidPublisherMonetizationSubscriptionsBasePlansOffersCreate,
+
+    -- ** androidpublisher.monetization.subscriptions.basePlans.offers.deactivate
+    AndroidPublisherMonetizationSubscriptionsBasePlansOffersDeactivateResource,
+    AndroidPublisherMonetizationSubscriptionsBasePlansOffersDeactivate (..),
+    newAndroidPublisherMonetizationSubscriptionsBasePlansOffersDeactivate,
+
+    -- ** androidpublisher.monetization.subscriptions.basePlans.offers.delete
+    AndroidPublisherMonetizationSubscriptionsBasePlansOffersDeleteResource,
+    AndroidPublisherMonetizationSubscriptionsBasePlansOffersDelete (..),
+    newAndroidPublisherMonetizationSubscriptionsBasePlansOffersDelete,
+
+    -- ** androidpublisher.monetization.subscriptions.basePlans.offers.get
+    AndroidPublisherMonetizationSubscriptionsBasePlansOffersGetResource,
+    AndroidPublisherMonetizationSubscriptionsBasePlansOffersGet (..),
+    newAndroidPublisherMonetizationSubscriptionsBasePlansOffersGet,
+
+    -- ** androidpublisher.monetization.subscriptions.basePlans.offers.list
+    AndroidPublisherMonetizationSubscriptionsBasePlansOffersListResource,
+    AndroidPublisherMonetizationSubscriptionsBasePlansOffersList (..),
+    newAndroidPublisherMonetizationSubscriptionsBasePlansOffersList,
+
+    -- ** androidpublisher.monetization.subscriptions.basePlans.offers.patch
+    AndroidPublisherMonetizationSubscriptionsBasePlansOffersPatchResource,
+    AndroidPublisherMonetizationSubscriptionsBasePlansOffersPatch (..),
+    newAndroidPublisherMonetizationSubscriptionsBasePlansOffersPatch,
+
+    -- ** androidpublisher.monetization.subscriptions.create
+    AndroidPublisherMonetizationSubscriptionsCreateResource,
+    AndroidPublisherMonetizationSubscriptionsCreate (..),
+    newAndroidPublisherMonetizationSubscriptionsCreate,
+
+    -- ** androidpublisher.monetization.subscriptions.delete
+    AndroidPublisherMonetizationSubscriptionsDeleteResource,
+    AndroidPublisherMonetizationSubscriptionsDelete (..),
+    newAndroidPublisherMonetizationSubscriptionsDelete,
+
+    -- ** androidpublisher.monetization.subscriptions.get
+    AndroidPublisherMonetizationSubscriptionsGetResource,
+    AndroidPublisherMonetizationSubscriptionsGet (..),
+    newAndroidPublisherMonetizationSubscriptionsGet,
+
+    -- ** androidpublisher.monetization.subscriptions.list
+    AndroidPublisherMonetizationSubscriptionsListResource,
+    AndroidPublisherMonetizationSubscriptionsList (..),
+    newAndroidPublisherMonetizationSubscriptionsList,
+
+    -- ** androidpublisher.monetization.subscriptions.patch
+    AndroidPublisherMonetizationSubscriptionsPatchResource,
+    AndroidPublisherMonetizationSubscriptionsPatch (..),
+    newAndroidPublisherMonetizationSubscriptionsPatch,
+
     -- ** androidpublisher.orders.refund
     AndroidPublisherOrdersRefundResource,
     AndroidPublisherOrdersRefund (..),
@@ -297,6 +397,11 @@ module Gogol.AndroidPublisher
     AndroidPublisherPurchasesProductsAcknowledgeResource,
     AndroidPublisherPurchasesProductsAcknowledge (..),
     newAndroidPublisherPurchasesProductsAcknowledge,
+
+    -- ** androidpublisher.purchases.products.consume
+    AndroidPublisherPurchasesProductsConsumeResource,
+    AndroidPublisherPurchasesProductsConsume (..),
+    newAndroidPublisherPurchasesProductsConsume,
 
     -- ** androidpublisher.purchases.products.get
     AndroidPublisherPurchasesProductsGetResource,
@@ -332,6 +437,11 @@ module Gogol.AndroidPublisher
     AndroidPublisherPurchasesSubscriptionsRevokeResource,
     AndroidPublisherPurchasesSubscriptionsRevoke (..),
     newAndroidPublisherPurchasesSubscriptionsRevoke,
+
+    -- ** androidpublisher.purchases.subscriptionsv2.get
+    AndroidPublisherPurchasesSubscriptionsv2GetResource,
+    AndroidPublisherPurchasesSubscriptionsv2Get (..),
+    newAndroidPublisherPurchasesSubscriptionsv2Get,
 
     -- ** androidpublisher.purchases.voidedpurchases.list
     AndroidPublisherPurchasesVoidedpurchasesListResource,
@@ -398,6 +508,18 @@ module Gogol.AndroidPublisher
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** AcquisitionTargetingRule
+    AcquisitionTargetingRule (..),
+    newAcquisitionTargetingRule,
+
+    -- ** ActivateBasePlanRequest
+    ActivateBasePlanRequest (..),
+    newActivateBasePlanRequest,
+
+    -- ** ActivateSubscriptionOfferRequest
+    ActivateSubscriptionOfferRequest (..),
+    newActivateSubscriptionOfferRequest,
+
     -- ** Apk
     Apk (..),
     newApk,
@@ -426,6 +548,31 @@ module Gogol.AndroidPublisher
     AppEdit (..),
     newAppEdit,
 
+    -- ** ArchiveSubscriptionRequest
+    ArchiveSubscriptionRequest (..),
+    newArchiveSubscriptionRequest,
+
+    -- ** AutoRenewingBasePlanType
+    AutoRenewingBasePlanType (..),
+    newAutoRenewingBasePlanType,
+
+    -- ** AutoRenewingBasePlanType_ProrationMode
+    AutoRenewingBasePlanType_ProrationMode (..),
+
+    -- ** AutoRenewingBasePlanType_ResubscribeState
+    AutoRenewingBasePlanType_ResubscribeState (..),
+
+    -- ** AutoRenewingPlan
+    AutoRenewingPlan (..),
+    newAutoRenewingPlan,
+
+    -- ** BasePlan
+    BasePlan (..),
+    newBasePlan,
+
+    -- ** BasePlan_State
+    BasePlan_State (..),
+
     -- ** Bundle
     Bundle (..),
     newBundle,
@@ -433,6 +580,17 @@ module Gogol.AndroidPublisher
     -- ** BundlesListResponse
     BundlesListResponse (..),
     newBundlesListResponse,
+
+    -- ** CancelSurveyResult
+    CancelSurveyResult (..),
+    newCancelSurveyResult,
+
+    -- ** CancelSurveyResult_Reason
+    CancelSurveyResult_Reason (..),
+
+    -- ** CanceledStateContext
+    CanceledStateContext (..),
+    newCanceledStateContext,
 
     -- ** Comment
     Comment (..),
@@ -462,6 +620,14 @@ module Gogol.AndroidPublisher
     CountryTargeting (..),
     newCountryTargeting,
 
+    -- ** DeactivateBasePlanRequest
+    DeactivateBasePlanRequest (..),
+    newDeactivateBasePlanRequest,
+
+    -- ** DeactivateSubscriptionOfferRequest
+    DeactivateSubscriptionOfferRequest (..),
+    newDeactivateSubscriptionOfferRequest,
+
     -- ** DeobfuscationFile
     DeobfuscationFile (..),
     newDeobfuscationFile,
@@ -477,13 +643,45 @@ module Gogol.AndroidPublisher
     DeveloperComment (..),
     newDeveloperComment,
 
+    -- ** DeveloperInitiatedCancellation
+    DeveloperInitiatedCancellation (..),
+    newDeveloperInitiatedCancellation,
+
+    -- ** DeviceGroup
+    DeviceGroup (..),
+    newDeviceGroup,
+
+    -- ** DeviceId
+    DeviceId (..),
+    newDeviceId,
+
     -- ** DeviceMetadata
     DeviceMetadata (..),
     newDeviceMetadata,
 
+    -- ** DeviceRam
+    DeviceRam (..),
+    newDeviceRam,
+
+    -- ** DeviceSelector
+    DeviceSelector (..),
+    newDeviceSelector,
+
     -- ** DeviceSpec
     DeviceSpec (..),
     newDeviceSpec,
+
+    -- ** DeviceTier
+    DeviceTier (..),
+    newDeviceTier,
+
+    -- ** DeviceTierConfig
+    DeviceTierConfig (..),
+    newDeviceTierConfig,
+
+    -- ** DeviceTierSet
+    DeviceTierSet (..),
+    newDeviceTierSet,
 
     -- ** ExpansionFile
     ExpansionFile (..),
@@ -492,6 +690,10 @@ module Gogol.AndroidPublisher
     -- ** ExpansionFilesUploadResponse
     ExpansionFilesUploadResponse (..),
     newExpansionFilesUploadResponse,
+
+    -- ** ExternalAccountIdentifiers
+    ExternalAccountIdentifiers (..),
+    newExternalAccountIdentifiers,
 
     -- ** ExternallyHostedApk
     ExternallyHostedApk (..),
@@ -578,6 +780,18 @@ module Gogol.AndroidPublisher
     IntroductoryPriceInfo (..),
     newIntroductoryPriceInfo,
 
+    -- ** ListDeviceTierConfigsResponse
+    ListDeviceTierConfigsResponse (..),
+    newListDeviceTierConfigsResponse,
+
+    -- ** ListSubscriptionOffersResponse
+    ListSubscriptionOffersResponse (..),
+    newListSubscriptionOffersResponse,
+
+    -- ** ListSubscriptionsResponse
+    ListSubscriptionsResponse (..),
+    newListSubscriptionsResponse,
+
     -- ** ListUsersResponse
     ListUsersResponse (..),
     newListUsersResponse,
@@ -605,13 +819,60 @@ module Gogol.AndroidPublisher
     ManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode (..),
     newManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode,
 
+    -- ** MigrateBasePlanPricesRequest
+    MigrateBasePlanPricesRequest (..),
+    newMigrateBasePlanPricesRequest,
+
+    -- ** MigrateBasePlanPricesResponse
+    MigrateBasePlanPricesResponse (..),
+    newMigrateBasePlanPricesResponse,
+
     -- ** Money
     Money (..),
     newMoney,
 
+    -- ** OfferDetails
+    OfferDetails (..),
+    newOfferDetails,
+
+    -- ** OfferTag
+    OfferTag (..),
+    newOfferTag,
+
+    -- ** OtherRegionsBasePlanConfig
+    OtherRegionsBasePlanConfig (..),
+    newOtherRegionsBasePlanConfig,
+
+    -- ** OtherRegionsSubscriptionOfferConfig
+    OtherRegionsSubscriptionOfferConfig (..),
+    newOtherRegionsSubscriptionOfferConfig,
+
+    -- ** OtherRegionsSubscriptionOfferPhaseConfig
+    OtherRegionsSubscriptionOfferPhaseConfig (..),
+    newOtherRegionsSubscriptionOfferPhaseConfig,
+
+    -- ** OtherRegionsSubscriptionOfferPhasePrices
+    OtherRegionsSubscriptionOfferPhasePrices (..),
+    newOtherRegionsSubscriptionOfferPhasePrices,
+
     -- ** PageInfo
     PageInfo (..),
     newPageInfo,
+
+    -- ** PausedStateContext
+    PausedStateContext (..),
+    newPausedStateContext,
+
+    -- ** PrepaidBasePlanType
+    PrepaidBasePlanType (..),
+    newPrepaidBasePlanType,
+
+    -- ** PrepaidBasePlanType_TimeExtension
+    PrepaidBasePlanType_TimeExtension (..),
+
+    -- ** PrepaidPlan
+    PrepaidPlan (..),
+    newPrepaidPlan,
 
     -- ** Price
     Price (..),
@@ -625,12 +886,39 @@ module Gogol.AndroidPublisher
     ProductPurchasesAcknowledgeRequest (..),
     newProductPurchasesAcknowledgeRequest,
 
+    -- ** RegionalBasePlanConfig
+    RegionalBasePlanConfig (..),
+    newRegionalBasePlanConfig,
+
+    -- ** RegionalPriceMigrationConfig
+    RegionalPriceMigrationConfig (..),
+    newRegionalPriceMigrationConfig,
+
+    -- ** RegionalSubscriptionOfferConfig
+    RegionalSubscriptionOfferConfig (..),
+    newRegionalSubscriptionOfferConfig,
+
+    -- ** RegionalSubscriptionOfferPhaseConfig
+    RegionalSubscriptionOfferPhaseConfig (..),
+    newRegionalSubscriptionOfferPhaseConfig,
+
     -- ** RegionalTaxRateInfo
     RegionalTaxRateInfo (..),
     newRegionalTaxRateInfo,
 
+    -- ** RegionalTaxRateInfo_StreamingTaxType
+    RegionalTaxRateInfo_StreamingTaxType (..),
+
     -- ** RegionalTaxRateInfo_TaxTier
     RegionalTaxRateInfo_TaxTier (..),
+
+    -- ** RegionsVersion
+    RegionsVersion (..),
+    newRegionsVersion,
+
+    -- ** ReplacementCancellation
+    ReplacementCancellation (..),
+    newReplacementCancellation,
 
     -- ** Review
     Review (..),
@@ -652,6 +940,14 @@ module Gogol.AndroidPublisher
     ReviewsReplyResponse (..),
     newReviewsReplyResponse,
 
+    -- ** SubscribeWithGoogleInfo
+    SubscribeWithGoogleInfo (..),
+    newSubscribeWithGoogleInfo,
+
+    -- ** Subscription
+    Subscription (..),
+    newSubscription,
+
     -- ** SubscriptionCancelSurveyResult
     SubscriptionCancelSurveyResult (..),
     newSubscriptionCancelSurveyResult,
@@ -660,6 +956,35 @@ module Gogol.AndroidPublisher
     SubscriptionDeferralInfo (..),
     newSubscriptionDeferralInfo,
 
+    -- ** SubscriptionItemPriceChangeDetails
+    SubscriptionItemPriceChangeDetails (..),
+    newSubscriptionItemPriceChangeDetails,
+
+    -- ** SubscriptionItemPriceChangeDetails_PriceChangeMode
+    SubscriptionItemPriceChangeDetails_PriceChangeMode (..),
+
+    -- ** SubscriptionItemPriceChangeDetails_PriceChangeState
+    SubscriptionItemPriceChangeDetails_PriceChangeState (..),
+
+    -- ** SubscriptionListing
+    SubscriptionListing (..),
+    newSubscriptionListing,
+
+    -- ** SubscriptionOffer
+    SubscriptionOffer (..),
+    newSubscriptionOffer,
+
+    -- ** SubscriptionOffer_State
+    SubscriptionOffer_State (..),
+
+    -- ** SubscriptionOfferPhase
+    SubscriptionOfferPhase (..),
+    newSubscriptionOfferPhase,
+
+    -- ** SubscriptionOfferTargeting
+    SubscriptionOfferTargeting (..),
+    newSubscriptionOfferTargeting,
+
     -- ** SubscriptionPriceChange
     SubscriptionPriceChange (..),
     newSubscriptionPriceChange,
@@ -667,6 +992,20 @@ module Gogol.AndroidPublisher
     -- ** SubscriptionPurchase
     SubscriptionPurchase (..),
     newSubscriptionPurchase,
+
+    -- ** SubscriptionPurchaseLineItem
+    SubscriptionPurchaseLineItem (..),
+    newSubscriptionPurchaseLineItem,
+
+    -- ** SubscriptionPurchaseV2
+    SubscriptionPurchaseV2 (..),
+    newSubscriptionPurchaseV2,
+
+    -- ** SubscriptionPurchaseV2_AcknowledgementState
+    SubscriptionPurchaseV2_AcknowledgementState (..),
+
+    -- ** SubscriptionPurchaseV2_SubscriptionState
+    SubscriptionPurchaseV2_SubscriptionState (..),
 
     -- ** SubscriptionPurchasesAcknowledgeRequest
     SubscriptionPurchasesAcknowledgeRequest (..),
@@ -694,6 +1033,22 @@ module Gogol.AndroidPublisher
     -- ** SystemApksListResponse
     SystemApksListResponse (..),
     newSystemApksListResponse,
+
+    -- ** SystemFeature
+    SystemFeature (..),
+    newSystemFeature,
+
+    -- ** SystemInitiatedCancellation
+    SystemInitiatedCancellation (..),
+    newSystemInitiatedCancellation,
+
+    -- ** TargetingRuleScope
+    TargetingRuleScope (..),
+    newTargetingRuleScope,
+
+    -- ** TestPurchase
+    TestPurchase (..),
+    newTestPurchase,
 
     -- ** Testers
     Testers (..),
@@ -730,6 +1085,10 @@ module Gogol.AndroidPublisher
     TracksListResponse (..),
     newTracksListResponse,
 
+    -- ** UpgradeTargetingRule
+    UpgradeTargetingRule (..),
+    newUpgradeTargetingRule,
+
     -- ** User
     User (..),
     newUser,
@@ -743,6 +1102,14 @@ module Gogol.AndroidPublisher
     -- ** UserComment
     UserComment (..),
     newUserComment,
+
+    -- ** UserCountrySet
+    UserCountrySet (..),
+    newUserCountrySet,
+
+    -- ** UserInitiatedCancellation
+    UserInitiatedCancellation (..),
+    newUserInitiatedCancellation,
 
     -- ** UsesPermission
     UsesPermission (..),
@@ -789,6 +1156,9 @@ module Gogol.AndroidPublisher
   )
 where
 
+import Gogol.AndroidPublisher.Applications.DeviceTierConfigs.Create
+import Gogol.AndroidPublisher.Applications.DeviceTierConfigs.Get
+import Gogol.AndroidPublisher.Applications.DeviceTierConfigs.List
 import Gogol.AndroidPublisher.Edits.Apks.Addexternallyhosted
 import Gogol.AndroidPublisher.Edits.Apks.List
 import Gogol.AndroidPublisher.Edits.Apks.Upload
@@ -839,8 +1209,26 @@ import Gogol.AndroidPublisher.Inappproducts.Update
 import Gogol.AndroidPublisher.Internalappsharingartifacts.Uploadapk
 import Gogol.AndroidPublisher.Internalappsharingartifacts.Uploadbundle
 import Gogol.AndroidPublisher.Monetization.ConvertRegionPrices
+import Gogol.AndroidPublisher.Monetization.Subscriptions.Archive
+import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Activate
+import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Deactivate
+import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Delete
+import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.MigratePrices
+import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Activate
+import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Create
+import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Deactivate
+import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Delete
+import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Get
+import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.List
+import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Patch
+import Gogol.AndroidPublisher.Monetization.Subscriptions.Create
+import Gogol.AndroidPublisher.Monetization.Subscriptions.Delete
+import Gogol.AndroidPublisher.Monetization.Subscriptions.Get
+import Gogol.AndroidPublisher.Monetization.Subscriptions.List
+import Gogol.AndroidPublisher.Monetization.Subscriptions.Patch
 import Gogol.AndroidPublisher.Orders.Refund
 import Gogol.AndroidPublisher.Purchases.Products.Acknowledge
+import Gogol.AndroidPublisher.Purchases.Products.Consume
 import Gogol.AndroidPublisher.Purchases.Products.Get
 import Gogol.AndroidPublisher.Purchases.Subscriptions.Acknowledge
 import Gogol.AndroidPublisher.Purchases.Subscriptions.Cancel
@@ -848,6 +1236,7 @@ import Gogol.AndroidPublisher.Purchases.Subscriptions.Defer
 import Gogol.AndroidPublisher.Purchases.Subscriptions.Get
 import Gogol.AndroidPublisher.Purchases.Subscriptions.Refund
 import Gogol.AndroidPublisher.Purchases.Subscriptions.Revoke
+import Gogol.AndroidPublisher.Purchases.Subscriptionsv2.Get
 import Gogol.AndroidPublisher.Purchases.Voidedpurchases.List
 import Gogol.AndroidPublisher.Reviews.Get
 import Gogol.AndroidPublisher.Reviews.List

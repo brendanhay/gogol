@@ -54,6 +54,66 @@ module Gogol.Run.Internal.Product
     GoogleCloudRunV2EnvVarSource (..),
     newGoogleCloudRunV2EnvVarSource,
 
+    -- * GoogleCloudRunV2Execution
+    GoogleCloudRunV2Execution (..),
+    newGoogleCloudRunV2Execution,
+
+    -- * GoogleCloudRunV2Execution_Annotations
+    GoogleCloudRunV2Execution_Annotations (..),
+    newGoogleCloudRunV2Execution_Annotations,
+
+    -- * GoogleCloudRunV2Execution_Labels
+    GoogleCloudRunV2Execution_Labels (..),
+    newGoogleCloudRunV2Execution_Labels,
+
+    -- * GoogleCloudRunV2ExecutionReference
+    GoogleCloudRunV2ExecutionReference (..),
+    newGoogleCloudRunV2ExecutionReference,
+
+    -- * GoogleCloudRunV2ExecutionTemplate
+    GoogleCloudRunV2ExecutionTemplate (..),
+    newGoogleCloudRunV2ExecutionTemplate,
+
+    -- * GoogleCloudRunV2ExecutionTemplate_Annotations
+    GoogleCloudRunV2ExecutionTemplate_Annotations (..),
+    newGoogleCloudRunV2ExecutionTemplate_Annotations,
+
+    -- * GoogleCloudRunV2ExecutionTemplate_Labels
+    GoogleCloudRunV2ExecutionTemplate_Labels (..),
+    newGoogleCloudRunV2ExecutionTemplate_Labels,
+
+    -- * GoogleCloudRunV2GRPCAction
+    GoogleCloudRunV2GRPCAction (..),
+    newGoogleCloudRunV2GRPCAction,
+
+    -- * GoogleCloudRunV2HTTPGetAction
+    GoogleCloudRunV2HTTPGetAction (..),
+    newGoogleCloudRunV2HTTPGetAction,
+
+    -- * GoogleCloudRunV2HTTPHeader
+    GoogleCloudRunV2HTTPHeader (..),
+    newGoogleCloudRunV2HTTPHeader,
+
+    -- * GoogleCloudRunV2Job
+    GoogleCloudRunV2Job (..),
+    newGoogleCloudRunV2Job,
+
+    -- * GoogleCloudRunV2Job_Annotations
+    GoogleCloudRunV2Job_Annotations (..),
+    newGoogleCloudRunV2Job_Annotations,
+
+    -- * GoogleCloudRunV2Job_Labels
+    GoogleCloudRunV2Job_Labels (..),
+    newGoogleCloudRunV2Job_Labels,
+
+    -- * GoogleCloudRunV2ListExecutionsResponse
+    GoogleCloudRunV2ListExecutionsResponse (..),
+    newGoogleCloudRunV2ListExecutionsResponse,
+
+    -- * GoogleCloudRunV2ListJobsResponse
+    GoogleCloudRunV2ListJobsResponse (..),
+    newGoogleCloudRunV2ListJobsResponse,
+
     -- * GoogleCloudRunV2ListRevisionsResponse
     GoogleCloudRunV2ListRevisionsResponse (..),
     newGoogleCloudRunV2ListRevisionsResponse,
@@ -61,6 +121,14 @@ module Gogol.Run.Internal.Product
     -- * GoogleCloudRunV2ListServicesResponse
     GoogleCloudRunV2ListServicesResponse (..),
     newGoogleCloudRunV2ListServicesResponse,
+
+    -- * GoogleCloudRunV2ListTasksResponse
+    GoogleCloudRunV2ListTasksResponse (..),
+    newGoogleCloudRunV2ListTasksResponse,
+
+    -- * GoogleCloudRunV2Probe
+    GoogleCloudRunV2Probe (..),
+    newGoogleCloudRunV2Probe,
 
     -- * GoogleCloudRunV2ResourceRequirements
     GoogleCloudRunV2ResourceRequirements (..),
@@ -98,6 +166,10 @@ module Gogol.Run.Internal.Product
     GoogleCloudRunV2RevisionTemplate_Labels (..),
     newGoogleCloudRunV2RevisionTemplate_Labels,
 
+    -- * GoogleCloudRunV2RunJobRequest
+    GoogleCloudRunV2RunJobRequest (..),
+    newGoogleCloudRunV2RunJobRequest,
+
     -- * GoogleCloudRunV2SecretKeySelector
     GoogleCloudRunV2SecretKeySelector (..),
     newGoogleCloudRunV2SecretKeySelector,
@@ -117,6 +189,30 @@ module Gogol.Run.Internal.Product
     -- * GoogleCloudRunV2Service_Labels
     GoogleCloudRunV2Service_Labels (..),
     newGoogleCloudRunV2Service_Labels,
+
+    -- * GoogleCloudRunV2TCPSocketAction
+    GoogleCloudRunV2TCPSocketAction (..),
+    newGoogleCloudRunV2TCPSocketAction,
+
+    -- * GoogleCloudRunV2Task
+    GoogleCloudRunV2Task (..),
+    newGoogleCloudRunV2Task,
+
+    -- * GoogleCloudRunV2Task_Annotations
+    GoogleCloudRunV2Task_Annotations (..),
+    newGoogleCloudRunV2Task_Annotations,
+
+    -- * GoogleCloudRunV2Task_Labels
+    GoogleCloudRunV2Task_Labels (..),
+    newGoogleCloudRunV2Task_Labels,
+
+    -- * GoogleCloudRunV2TaskAttemptResult
+    GoogleCloudRunV2TaskAttemptResult (..),
+    newGoogleCloudRunV2TaskAttemptResult,
+
+    -- * GoogleCloudRunV2TaskTemplate
+    GoogleCloudRunV2TaskTemplate (..),
+    newGoogleCloudRunV2TaskTemplate,
 
     -- * GoogleCloudRunV2TrafficTarget
     GoogleCloudRunV2TrafficTarget (..),
@@ -186,6 +282,10 @@ module Gogol.Run.Internal.Product
     GoogleLongrunningOperation_Response (..),
     newGoogleLongrunningOperation_Response,
 
+    -- * GoogleLongrunningWaitOperationRequest
+    GoogleLongrunningWaitOperationRequest (..),
+    newGoogleLongrunningWaitOperationRequest,
+
     -- * GoogleProtobufEmpty
     GoogleProtobufEmpty (..),
     newGoogleProtobufEmpty,
@@ -253,12 +353,12 @@ instance
           ]
       )
 
--- | Represents a specific Cloud SQL instance.
+-- | Represents a set of Cloud SQL instances. Each one will be available under \/cloudsql\/[instance]. Visit https:\/\/cloud.google.com\/sql\/docs\/mysql\/connect-run for more information on how to connect Cloud SQL and Cloud Run.
 --
 -- /See:/ 'newGoogleCloudRunV2CloudSqlInstance' smart constructor.
 newtype GoogleCloudRunV2CloudSqlInstance = GoogleCloudRunV2CloudSqlInstance
   { -- | The Cloud SQL instance connection names, as can be found in https:\/\/console.cloud.google.com\/sql\/instances. Visit https:\/\/cloud.google.com\/sql\/docs\/mysql\/connect-run for more information on how to connect Cloud SQL and Cloud Run. Format: {project}:{location}:{instance}
-    connections :: (Core.Maybe [Core.Text])
+    instances :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -266,7 +366,7 @@ newtype GoogleCloudRunV2CloudSqlInstance = GoogleCloudRunV2CloudSqlInstance
 newGoogleCloudRunV2CloudSqlInstance ::
   GoogleCloudRunV2CloudSqlInstance
 newGoogleCloudRunV2CloudSqlInstance =
-  GoogleCloudRunV2CloudSqlInstance {connections = Core.Nothing}
+  GoogleCloudRunV2CloudSqlInstance {instances = Core.Nothing}
 
 instance
   Core.FromJSON
@@ -277,26 +377,22 @@ instance
       "GoogleCloudRunV2CloudSqlInstance"
       ( \o ->
           GoogleCloudRunV2CloudSqlInstance
-            Core.<$> (o Core..:? "connections")
+            Core.<$> (o Core..:? "instances")
       )
 
 instance Core.ToJSON GoogleCloudRunV2CloudSqlInstance where
   toJSON GoogleCloudRunV2CloudSqlInstance {..} =
     Core.object
       ( Core.catMaybes
-          [("connections" Core..=) Core.<$> connections]
+          [("instances" Core..=) Core.<$> instances]
       )
 
 -- | Defines a status condition for a resource.
 --
 -- /See:/ 'newGoogleCloudRunV2Condition' smart constructor.
 data GoogleCloudRunV2Condition = GoogleCloudRunV2Condition
-  { -- | A reason for the domain mapping condition.
-    domainMappingReason :: (Core.Maybe GoogleCloudRunV2Condition_DomainMappingReason),
-    -- | A reason for the execution condition.
+  { -- | A reason for the execution condition.
     executionReason :: (Core.Maybe GoogleCloudRunV2Condition_ExecutionReason),
-    -- | A reason for the internal condition.
-    internalReason :: (Core.Maybe GoogleCloudRunV2Condition_InternalReason),
     -- | Last time the condition transitioned from one status to another.
     lastTransitionTime :: (Core.Maybe Core.DateTime),
     -- | Human readable message indicating details about the current status.
@@ -319,9 +415,7 @@ newGoogleCloudRunV2Condition ::
   GoogleCloudRunV2Condition
 newGoogleCloudRunV2Condition =
   GoogleCloudRunV2Condition
-    { domainMappingReason = Core.Nothing,
-      executionReason = Core.Nothing,
-      internalReason = Core.Nothing,
+    { executionReason = Core.Nothing,
       lastTransitionTime = Core.Nothing,
       message = Core.Nothing,
       reason = Core.Nothing,
@@ -337,9 +431,7 @@ instance Core.FromJSON GoogleCloudRunV2Condition where
       "GoogleCloudRunV2Condition"
       ( \o ->
           GoogleCloudRunV2Condition
-            Core.<$> (o Core..:? "domainMappingReason")
-            Core.<*> (o Core..:? "executionReason")
-            Core.<*> (o Core..:? "internalReason")
+            Core.<$> (o Core..:? "executionReason")
             Core.<*> (o Core..:? "lastTransitionTime")
             Core.<*> (o Core..:? "message")
             Core.<*> (o Core..:? "reason")
@@ -353,10 +445,8 @@ instance Core.ToJSON GoogleCloudRunV2Condition where
   toJSON GoogleCloudRunV2Condition {..} =
     Core.object
       ( Core.catMaybes
-          [ ("domainMappingReason" Core..=)
-              Core.<$> domainMappingReason,
-            ("executionReason" Core..=) Core.<$> executionReason,
-            ("internalReason" Core..=) Core.<$> internalReason,
+          [ ("executionReason" Core..=)
+              Core.<$> executionReason,
             ("lastTransitionTime" Core..=)
               Core.<$> lastTransitionTime,
             ("message" Core..=) Core.<$> message,
@@ -378,16 +468,22 @@ data GoogleCloudRunV2Container = GoogleCloudRunV2Container
     command :: (Core.Maybe [Core.Text]),
     -- | List of environment variables to set in the container.
     env :: (Core.Maybe [GoogleCloudRunV2EnvVar]),
-    -- | Required. URL of the Container image in Google Container Registry or Docker More info: https:\/\/kubernetes.io\/docs\/concepts\/containers\/images
+    -- | Required. Name of the container image in Dockerhub, Google Artifact Registry, or Google Container Registry. If the host is not provided, Dockerhub is assumed. More info: https:\/\/kubernetes.io\/docs\/concepts\/containers\/images
     image :: (Core.Maybe Core.Text),
-    -- | Name of the container specified as a DNS_LABEL.
+    -- | Periodic probe of container liveness. Container will be restarted if the probe fails. More info: https:\/\/kubernetes.io\/docs\/concepts\/workloads\/pods\/pod-lifecycle#container-probes
+    livenessProbe :: (Core.Maybe GoogleCloudRunV2Probe),
+    -- | Name of the container specified as a DNS_LABEL (RFC 1123).
     name :: (Core.Maybe Core.Text),
     -- | List of ports to expose from the container. Only a single port can be specified. The specified ports must be listening on all interfaces (0.0.0.0) within the container to be accessible. If omitted, a port number will be chosen and passed to the container through the PORT environment variable for the container to listen on.
     ports :: (Core.Maybe [GoogleCloudRunV2ContainerPort]),
     -- | Compute Resource requirements by this container. More info: https:\/\/kubernetes.io\/docs\/concepts\/storage\/persistent-volumes#resources
     resources :: (Core.Maybe GoogleCloudRunV2ResourceRequirements),
+    -- | Startup probe of application within the container. All other probes are disabled if a startup probe is provided, until it succeeds. Container will not be added to service endpoints if the probe fails. More info: https:\/\/kubernetes.io\/docs\/concepts\/workloads\/pods\/pod-lifecycle#container-probes
+    startupProbe :: (Core.Maybe GoogleCloudRunV2Probe),
     -- | Volume to mount into the container\'s filesystem.
-    volumeMounts :: (Core.Maybe [GoogleCloudRunV2VolumeMount])
+    volumeMounts :: (Core.Maybe [GoogleCloudRunV2VolumeMount]),
+    -- | Container\'s working directory. If not specified, the container runtime\'s default will be used, which might be configured in the container image.
+    workingDir :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -400,10 +496,13 @@ newGoogleCloudRunV2Container =
       command = Core.Nothing,
       env = Core.Nothing,
       image = Core.Nothing,
+      livenessProbe = Core.Nothing,
       name = Core.Nothing,
       ports = Core.Nothing,
       resources = Core.Nothing,
-      volumeMounts = Core.Nothing
+      startupProbe = Core.Nothing,
+      volumeMounts = Core.Nothing,
+      workingDir = Core.Nothing
     }
 
 instance Core.FromJSON GoogleCloudRunV2Container where
@@ -416,10 +515,13 @@ instance Core.FromJSON GoogleCloudRunV2Container where
             Core.<*> (o Core..:? "command")
             Core.<*> (o Core..:? "env")
             Core.<*> (o Core..:? "image")
+            Core.<*> (o Core..:? "livenessProbe")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "ports")
             Core.<*> (o Core..:? "resources")
+            Core.<*> (o Core..:? "startupProbe")
             Core.<*> (o Core..:? "volumeMounts")
+            Core.<*> (o Core..:? "workingDir")
       )
 
 instance Core.ToJSON GoogleCloudRunV2Container where
@@ -430,10 +532,13 @@ instance Core.ToJSON GoogleCloudRunV2Container where
             ("command" Core..=) Core.<$> command,
             ("env" Core..=) Core.<$> env,
             ("image" Core..=) Core.<$> image,
+            ("livenessProbe" Core..=) Core.<$> livenessProbe,
             ("name" Core..=) Core.<$> name,
             ("ports" Core..=) Core.<$> ports,
             ("resources" Core..=) Core.<$> resources,
-            ("volumeMounts" Core..=) Core.<$> volumeMounts
+            ("startupProbe" Core..=) Core.<$> startupProbe,
+            ("volumeMounts" Core..=) Core.<$> volumeMounts,
+            ("workingDir" Core..=) Core.<$> workingDir
           ]
       )
 
@@ -551,6 +656,851 @@ instance Core.ToJSON GoogleCloudRunV2EnvVarSource where
           [("secretKeyRef" Core..=) Core.<$> secretKeyRef]
       )
 
+-- | Execution represents the configuration of a single execution. A execution an immutable resource that references a container image which is run to completion.
+--
+-- /See:/ 'newGoogleCloudRunV2Execution' smart constructor.
+data GoogleCloudRunV2Execution = GoogleCloudRunV2Execution
+  { -- | KRM-style annotations for the resource.
+    annotations :: (Core.Maybe GoogleCloudRunV2Execution_Annotations),
+    -- | Output only. The number of tasks which reached phase Cancelled.
+    cancelledCount :: (Core.Maybe Core.Int32),
+    -- | Output only. Represents time when the execution was completed. It is not guaranteed to be set in happens-before order across separate operations.
+    completionTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. The Condition of this Execution, containing its readiness status, and detailed error information in case it did not reach the desired state.
+    conditions :: (Core.Maybe [GoogleCloudRunV2Condition]),
+    -- | Output only. Represents time when the execution was acknowledged by the execution controller. It is not guaranteed to be set in happens-before order across separate operations.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. For a deleted resource, the deletion time. It is only populated as a response to a Delete request.
+    deleteTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. A system-generated fingerprint for this version of the resource. May be used to detect modification conflict during updates.
+    etag :: (Core.Maybe Core.Text),
+    -- | Output only. For a deleted resource, the time after which it will be permamently deleted. It is only populated as a response to a Delete request.
+    expireTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. The number of tasks which reached phase Failed.
+    failedCount :: (Core.Maybe Core.Int32),
+    -- | Output only. A number that monotonically increases every time the user modifies the desired state.
+    generation :: (Core.Maybe Core.Int64),
+    -- | Output only. The name of the parent Job.
+    job :: (Core.Maybe Core.Text),
+    -- | KRM-style labels for the resource. User-provided labels are shared with Google\'s billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https:\/\/cloud.google.com\/resource-manager\/docs\/creating-managing-labels or https:\/\/cloud.google.com\/run\/docs\/configuring\/labels
+    labels :: (Core.Maybe GoogleCloudRunV2Execution_Labels),
+    -- | The least stable launch stage needed to create this resource, as defined by <https://cloud.google.com/terms/launch-stages Google Cloud Platform Launch Stages>. Cloud Run supports @ALPHA@, @BETA@, and @GA@. Note that this value might not be what was used as input. For example, if ALPHA was provided as input in the parent resource, but only BETA and GA-level features are were, this field will be BETA.
+    launchStage :: (Core.Maybe GoogleCloudRunV2Execution_LaunchStage),
+    -- | Output only. URI where logs for this execution can be found in Cloud Console.
+    logUri :: (Core.Maybe Core.Text),
+    -- | Output only. The unique name of this Execution.
+    name :: (Core.Maybe Core.Text),
+    -- | Output only. The generation of this Execution. See comments in @reconciling@ for additional information on reconciliation process in Cloud Run.
+    observedGeneration :: (Core.Maybe Core.Int64),
+    -- | Output only. Specifies the maximum desired number of tasks the execution should run at any given time. Must be \<= task/count. The actual number of tasks running in steady state will be less than this number when ((.spec.task/count - .status.successful) \< .spec.parallelism), i.e. when the work left to do is less than max parallelism. More info: https:\/\/kubernetes.io\/docs\/concepts\/workloads\/controllers\/jobs-run-to-completion\/
+    parallelism :: (Core.Maybe Core.Int32),
+    -- | Output only. Indicates whether the resource\'s reconciliation is still in progress. See comments in @Job.reconciling@ for additional information on reconciliation process in Cloud Run.
+    reconciling :: (Core.Maybe Core.Bool),
+    -- | Output only. The number of tasks which have retried at least once.
+    retriedCount :: (Core.Maybe Core.Int32),
+    -- | Output only. The number of actively running tasks.
+    runningCount :: (Core.Maybe Core.Int32),
+    -- | Output only. Reserved for future use.
+    satisfiesPzs :: (Core.Maybe Core.Bool),
+    -- | Output only. Represents time when the execution started to run. It is not guaranteed to be set in happens-before order across separate operations.
+    startTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. The number of tasks which reached phase Succeeded.
+    succeededCount :: (Core.Maybe Core.Int32),
+    -- | Output only. Specifies the desired number of tasks the execution should run. Setting to 1 means that parallelism is limited to 1 and the success of that task signals the success of the execution. More info: https:\/\/kubernetes.io\/docs\/concepts\/workloads\/controllers\/jobs-run-to-completion\/
+    taskCount :: (Core.Maybe Core.Int32),
+    -- | Output only. The template used to create tasks for this execution.
+    template :: (Core.Maybe GoogleCloudRunV2TaskTemplate),
+    -- | Output only. Server assigned unique identifier for the Execution. The value is a UUID4 string and guaranteed to remain unchanged until the resource is deleted.
+    uid :: (Core.Maybe Core.Text),
+    -- | Output only. The last-modified time.
+    updateTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2Execution' with the minimum fields required to make a request.
+newGoogleCloudRunV2Execution ::
+  GoogleCloudRunV2Execution
+newGoogleCloudRunV2Execution =
+  GoogleCloudRunV2Execution
+    { annotations = Core.Nothing,
+      cancelledCount = Core.Nothing,
+      completionTime = Core.Nothing,
+      conditions = Core.Nothing,
+      createTime = Core.Nothing,
+      deleteTime = Core.Nothing,
+      etag = Core.Nothing,
+      expireTime = Core.Nothing,
+      failedCount = Core.Nothing,
+      generation = Core.Nothing,
+      job = Core.Nothing,
+      labels = Core.Nothing,
+      launchStage = Core.Nothing,
+      logUri = Core.Nothing,
+      name = Core.Nothing,
+      observedGeneration = Core.Nothing,
+      parallelism = Core.Nothing,
+      reconciling = Core.Nothing,
+      retriedCount = Core.Nothing,
+      runningCount = Core.Nothing,
+      satisfiesPzs = Core.Nothing,
+      startTime = Core.Nothing,
+      succeededCount = Core.Nothing,
+      taskCount = Core.Nothing,
+      template = Core.Nothing,
+      uid = Core.Nothing,
+      updateTime = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleCloudRunV2Execution where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2Execution"
+      ( \o ->
+          GoogleCloudRunV2Execution
+            Core.<$> (o Core..:? "annotations")
+            Core.<*> (o Core..:? "cancelledCount")
+            Core.<*> (o Core..:? "completionTime")
+            Core.<*> (o Core..:? "conditions")
+            Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "deleteTime")
+            Core.<*> (o Core..:? "etag")
+            Core.<*> (o Core..:? "expireTime")
+            Core.<*> (o Core..:? "failedCount")
+            Core.<*> ( o Core..:? "generation"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "job")
+            Core.<*> (o Core..:? "labels")
+            Core.<*> (o Core..:? "launchStage")
+            Core.<*> (o Core..:? "logUri")
+            Core.<*> (o Core..:? "name")
+            Core.<*> ( o Core..:? "observedGeneration"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "parallelism")
+            Core.<*> (o Core..:? "reconciling")
+            Core.<*> (o Core..:? "retriedCount")
+            Core.<*> (o Core..:? "runningCount")
+            Core.<*> (o Core..:? "satisfiesPzs")
+            Core.<*> (o Core..:? "startTime")
+            Core.<*> (o Core..:? "succeededCount")
+            Core.<*> (o Core..:? "taskCount")
+            Core.<*> (o Core..:? "template")
+            Core.<*> (o Core..:? "uid")
+            Core.<*> (o Core..:? "updateTime")
+      )
+
+instance Core.ToJSON GoogleCloudRunV2Execution where
+  toJSON GoogleCloudRunV2Execution {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("annotations" Core..=) Core.<$> annotations,
+            ("cancelledCount" Core..=) Core.<$> cancelledCount,
+            ("completionTime" Core..=) Core.<$> completionTime,
+            ("conditions" Core..=) Core.<$> conditions,
+            ("createTime" Core..=) Core.<$> createTime,
+            ("deleteTime" Core..=) Core.<$> deleteTime,
+            ("etag" Core..=) Core.<$> etag,
+            ("expireTime" Core..=) Core.<$> expireTime,
+            ("failedCount" Core..=) Core.<$> failedCount,
+            ("generation" Core..=) Core.. Core.AsText
+              Core.<$> generation,
+            ("job" Core..=) Core.<$> job,
+            ("labels" Core..=) Core.<$> labels,
+            ("launchStage" Core..=) Core.<$> launchStage,
+            ("logUri" Core..=) Core.<$> logUri,
+            ("name" Core..=) Core.<$> name,
+            ("observedGeneration" Core..=) Core.. Core.AsText
+              Core.<$> observedGeneration,
+            ("parallelism" Core..=) Core.<$> parallelism,
+            ("reconciling" Core..=) Core.<$> reconciling,
+            ("retriedCount" Core..=) Core.<$> retriedCount,
+            ("runningCount" Core..=) Core.<$> runningCount,
+            ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
+            ("startTime" Core..=) Core.<$> startTime,
+            ("succeededCount" Core..=) Core.<$> succeededCount,
+            ("taskCount" Core..=) Core.<$> taskCount,
+            ("template" Core..=) Core.<$> template,
+            ("uid" Core..=) Core.<$> uid,
+            ("updateTime" Core..=) Core.<$> updateTime
+          ]
+      )
+
+-- | KRM-style annotations for the resource.
+--
+-- /See:/ 'newGoogleCloudRunV2Execution_Annotations' smart constructor.
+newtype GoogleCloudRunV2Execution_Annotations = GoogleCloudRunV2Execution_Annotations
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2Execution_Annotations' with the minimum fields required to make a request.
+newGoogleCloudRunV2Execution_Annotations ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GoogleCloudRunV2Execution_Annotations
+newGoogleCloudRunV2Execution_Annotations additional =
+  GoogleCloudRunV2Execution_Annotations {additional = additional}
+
+instance
+  Core.FromJSON
+    GoogleCloudRunV2Execution_Annotations
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2Execution_Annotations"
+      ( \o ->
+          GoogleCloudRunV2Execution_Annotations
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudRunV2Execution_Annotations
+  where
+  toJSON GoogleCloudRunV2Execution_Annotations {..} =
+    Core.toJSON additional
+
+-- | KRM-style labels for the resource. User-provided labels are shared with Google\'s billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https:\/\/cloud.google.com\/resource-manager\/docs\/creating-managing-labels or https:\/\/cloud.google.com\/run\/docs\/configuring\/labels
+--
+-- /See:/ 'newGoogleCloudRunV2Execution_Labels' smart constructor.
+newtype GoogleCloudRunV2Execution_Labels = GoogleCloudRunV2Execution_Labels
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2Execution_Labels' with the minimum fields required to make a request.
+newGoogleCloudRunV2Execution_Labels ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GoogleCloudRunV2Execution_Labels
+newGoogleCloudRunV2Execution_Labels additional =
+  GoogleCloudRunV2Execution_Labels {additional = additional}
+
+instance
+  Core.FromJSON
+    GoogleCloudRunV2Execution_Labels
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2Execution_Labels"
+      ( \o ->
+          GoogleCloudRunV2Execution_Labels
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON GoogleCloudRunV2Execution_Labels where
+  toJSON GoogleCloudRunV2Execution_Labels {..} =
+    Core.toJSON additional
+
+-- | Reference to an Execution. Use \/Executions.GetExecution with the given name to get full execution including the latest status.
+--
+-- /See:/ 'newGoogleCloudRunV2ExecutionReference' smart constructor.
+data GoogleCloudRunV2ExecutionReference = GoogleCloudRunV2ExecutionReference
+  { -- | Creation timestamp of the execution.
+    completionTime :: (Core.Maybe Core.DateTime),
+    -- | Creation timestamp of the execution.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | Name of the execution.
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2ExecutionReference' with the minimum fields required to make a request.
+newGoogleCloudRunV2ExecutionReference ::
+  GoogleCloudRunV2ExecutionReference
+newGoogleCloudRunV2ExecutionReference =
+  GoogleCloudRunV2ExecutionReference
+    { completionTime = Core.Nothing,
+      createTime = Core.Nothing,
+      name = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudRunV2ExecutionReference
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2ExecutionReference"
+      ( \o ->
+          GoogleCloudRunV2ExecutionReference
+            Core.<$> (o Core..:? "completionTime")
+            Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudRunV2ExecutionReference
+  where
+  toJSON GoogleCloudRunV2ExecutionReference {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("completionTime" Core..=) Core.<$> completionTime,
+            ("createTime" Core..=) Core.<$> createTime,
+            ("name" Core..=) Core.<$> name
+          ]
+      )
+
+-- | ExecutionTemplate describes the data an execution should have when created from a template.
+--
+-- /See:/ 'newGoogleCloudRunV2ExecutionTemplate' smart constructor.
+data GoogleCloudRunV2ExecutionTemplate = GoogleCloudRunV2ExecutionTemplate
+  { -- | KRM-style annotations for the resource. Cloud Run API v2 does not support annotations with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected. All system annotations in v1 now have a corresponding field in v2 ExecutionTemplate.
+    annotations :: (Core.Maybe GoogleCloudRunV2ExecutionTemplate_Annotations),
+    -- | KRM-style labels for the resource. Cloud Run API v2 does not support labels with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected. All system labels in v1 now have a corresponding field in v2 ExecutionTemplate.
+    labels :: (Core.Maybe GoogleCloudRunV2ExecutionTemplate_Labels),
+    -- | Specifies the maximum desired number of tasks the execution should run at given time. Must be \<= task_count. When the job is run, if this field is 0 or unset, the maximum possible value will be used for that execution. The actual number of tasks running in steady state will be less than this number when there are fewer tasks waiting to be completed remaining, i.e. when the work left to do is less than max parallelism.
+    parallelism :: (Core.Maybe Core.Int32),
+    -- | Specifies the desired number of tasks the execution should run. Setting to 1 means that parallelism is limited to 1 and the success of that task signals the success of the execution. Defaults to 1.
+    taskCount :: (Core.Maybe Core.Int32),
+    -- | Required. Describes the task(s) that will be created when executing an execution.
+    template :: (Core.Maybe GoogleCloudRunV2TaskTemplate)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2ExecutionTemplate' with the minimum fields required to make a request.
+newGoogleCloudRunV2ExecutionTemplate ::
+  GoogleCloudRunV2ExecutionTemplate
+newGoogleCloudRunV2ExecutionTemplate =
+  GoogleCloudRunV2ExecutionTemplate
+    { annotations = Core.Nothing,
+      labels = Core.Nothing,
+      parallelism = Core.Nothing,
+      taskCount = Core.Nothing,
+      template = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudRunV2ExecutionTemplate
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2ExecutionTemplate"
+      ( \o ->
+          GoogleCloudRunV2ExecutionTemplate
+            Core.<$> (o Core..:? "annotations")
+            Core.<*> (o Core..:? "labels")
+            Core.<*> (o Core..:? "parallelism")
+            Core.<*> (o Core..:? "taskCount")
+            Core.<*> (o Core..:? "template")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudRunV2ExecutionTemplate
+  where
+  toJSON GoogleCloudRunV2ExecutionTemplate {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("annotations" Core..=) Core.<$> annotations,
+            ("labels" Core..=) Core.<$> labels,
+            ("parallelism" Core..=) Core.<$> parallelism,
+            ("taskCount" Core..=) Core.<$> taskCount,
+            ("template" Core..=) Core.<$> template
+          ]
+      )
+
+-- | KRM-style annotations for the resource. Cloud Run API v2 does not support annotations with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected. All system annotations in v1 now have a corresponding field in v2 ExecutionTemplate.
+--
+-- /See:/ 'newGoogleCloudRunV2ExecutionTemplate_Annotations' smart constructor.
+newtype GoogleCloudRunV2ExecutionTemplate_Annotations = GoogleCloudRunV2ExecutionTemplate_Annotations
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2ExecutionTemplate_Annotations' with the minimum fields required to make a request.
+newGoogleCloudRunV2ExecutionTemplate_Annotations ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GoogleCloudRunV2ExecutionTemplate_Annotations
+newGoogleCloudRunV2ExecutionTemplate_Annotations additional =
+  GoogleCloudRunV2ExecutionTemplate_Annotations {additional = additional}
+
+instance
+  Core.FromJSON
+    GoogleCloudRunV2ExecutionTemplate_Annotations
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2ExecutionTemplate_Annotations"
+      ( \o ->
+          GoogleCloudRunV2ExecutionTemplate_Annotations
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudRunV2ExecutionTemplate_Annotations
+  where
+  toJSON
+    GoogleCloudRunV2ExecutionTemplate_Annotations {..} =
+      Core.toJSON additional
+
+-- | KRM-style labels for the resource. Cloud Run API v2 does not support labels with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected. All system labels in v1 now have a corresponding field in v2 ExecutionTemplate.
+--
+-- /See:/ 'newGoogleCloudRunV2ExecutionTemplate_Labels' smart constructor.
+newtype GoogleCloudRunV2ExecutionTemplate_Labels = GoogleCloudRunV2ExecutionTemplate_Labels
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2ExecutionTemplate_Labels' with the minimum fields required to make a request.
+newGoogleCloudRunV2ExecutionTemplate_Labels ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GoogleCloudRunV2ExecutionTemplate_Labels
+newGoogleCloudRunV2ExecutionTemplate_Labels additional =
+  GoogleCloudRunV2ExecutionTemplate_Labels {additional = additional}
+
+instance
+  Core.FromJSON
+    GoogleCloudRunV2ExecutionTemplate_Labels
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2ExecutionTemplate_Labels"
+      ( \o ->
+          GoogleCloudRunV2ExecutionTemplate_Labels
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudRunV2ExecutionTemplate_Labels
+  where
+  toJSON GoogleCloudRunV2ExecutionTemplate_Labels {..} =
+    Core.toJSON additional
+
+-- | GRPCAction describes an action involving a GRPC port.
+--
+-- /See:/ 'newGoogleCloudRunV2GRPCAction' smart constructor.
+data GoogleCloudRunV2GRPCAction = GoogleCloudRunV2GRPCAction
+  { -- | Port number of the gRPC service. Number must be in the range 1 to 65535. If not specified, defaults to the exposed port of the container, which is the value of container.ports[0].containerPort.
+    port :: (Core.Maybe Core.Int32),
+    -- | Service is the name of the service to place in the gRPC HealthCheckRequest (see https:\/\/github.com\/grpc\/grpc\/blob\/master\/doc\/health-checking.md). If this is not specified, the default behavior is defined by gRPC.
+    service :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2GRPCAction' with the minimum fields required to make a request.
+newGoogleCloudRunV2GRPCAction ::
+  GoogleCloudRunV2GRPCAction
+newGoogleCloudRunV2GRPCAction =
+  GoogleCloudRunV2GRPCAction {port = Core.Nothing, service = Core.Nothing}
+
+instance Core.FromJSON GoogleCloudRunV2GRPCAction where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2GRPCAction"
+      ( \o ->
+          GoogleCloudRunV2GRPCAction
+            Core.<$> (o Core..:? "port") Core.<*> (o Core..:? "service")
+      )
+
+instance Core.ToJSON GoogleCloudRunV2GRPCAction where
+  toJSON GoogleCloudRunV2GRPCAction {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("port" Core..=) Core.<$> port,
+            ("service" Core..=) Core.<$> service
+          ]
+      )
+
+-- | HTTPGetAction describes an action based on HTTP Get requests.
+--
+-- /See:/ 'newGoogleCloudRunV2HTTPGetAction' smart constructor.
+data GoogleCloudRunV2HTTPGetAction = GoogleCloudRunV2HTTPGetAction
+  { -- | Custom headers to set in the request. HTTP allows repeated headers.
+    httpHeaders :: (Core.Maybe [GoogleCloudRunV2HTTPHeader]),
+    -- | Path to access on the HTTP server. Defaults to \'\/\'.
+    path :: (Core.Maybe Core.Text),
+    -- | Port number to access on the container. Must be in the range 1 to 65535. If not specified, defaults to the exposed port of the container, which is the value of container.ports[0].containerPort.
+    port :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2HTTPGetAction' with the minimum fields required to make a request.
+newGoogleCloudRunV2HTTPGetAction ::
+  GoogleCloudRunV2HTTPGetAction
+newGoogleCloudRunV2HTTPGetAction =
+  GoogleCloudRunV2HTTPGetAction
+    { httpHeaders = Core.Nothing,
+      path = Core.Nothing,
+      port = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleCloudRunV2HTTPGetAction where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2HTTPGetAction"
+      ( \o ->
+          GoogleCloudRunV2HTTPGetAction
+            Core.<$> (o Core..:? "httpHeaders")
+            Core.<*> (o Core..:? "path")
+            Core.<*> (o Core..:? "port")
+      )
+
+instance Core.ToJSON GoogleCloudRunV2HTTPGetAction where
+  toJSON GoogleCloudRunV2HTTPGetAction {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("httpHeaders" Core..=) Core.<$> httpHeaders,
+            ("path" Core..=) Core.<$> path,
+            ("port" Core..=) Core.<$> port
+          ]
+      )
+
+-- | HTTPHeader describes a custom header to be used in HTTP probes
+--
+-- /See:/ 'newGoogleCloudRunV2HTTPHeader' smart constructor.
+data GoogleCloudRunV2HTTPHeader = GoogleCloudRunV2HTTPHeader
+  { -- | Required. The header field name
+    name :: (Core.Maybe Core.Text),
+    -- | The header field value
+    value :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2HTTPHeader' with the minimum fields required to make a request.
+newGoogleCloudRunV2HTTPHeader ::
+  GoogleCloudRunV2HTTPHeader
+newGoogleCloudRunV2HTTPHeader =
+  GoogleCloudRunV2HTTPHeader {name = Core.Nothing, value = Core.Nothing}
+
+instance Core.FromJSON GoogleCloudRunV2HTTPHeader where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2HTTPHeader"
+      ( \o ->
+          GoogleCloudRunV2HTTPHeader
+            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
+      )
+
+instance Core.ToJSON GoogleCloudRunV2HTTPHeader where
+  toJSON GoogleCloudRunV2HTTPHeader {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("name" Core..=) Core.<$> name,
+            ("value" Core..=) Core.<$> value
+          ]
+      )
+
+-- | Job represents the configuration of a single job, which references a container image that is run to completion.
+--
+-- /See:/ 'newGoogleCloudRunV2Job' smart constructor.
+data GoogleCloudRunV2Job = GoogleCloudRunV2Job
+  { -- | KRM-style annotations for the resource. Unstructured key value map that may be set by external tools to store and arbitrary metadata. They are not queryable and should be preserved when modifying objects. Cloud Run API v2 does not support annotations with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected. All system annotations in v1 now have a corresponding field in v2 Job. This field follows Kubernetes annotations\' namespacing, limits, and rules. More info: https:\/\/kubernetes.io\/docs\/user-guide\/annotations
+    annotations :: (Core.Maybe GoogleCloudRunV2Job_Annotations),
+    -- | Settings for the Binary Authorization feature.
+    binaryAuthorization :: (Core.Maybe GoogleCloudRunV2BinaryAuthorization),
+    -- | Arbitrary identifier for the API client.
+    client :: (Core.Maybe Core.Text),
+    -- | Arbitrary version identifier for the API client.
+    clientVersion :: (Core.Maybe Core.Text),
+    -- | Output only. The Conditions of all other associated sub-resources. They contain additional diagnostics information in case the Job does not reach its desired state. See comments in @reconciling@ for additional information on reconciliation process in Cloud Run.
+    conditions :: (Core.Maybe [GoogleCloudRunV2Condition]),
+    -- | Output only. The creation time.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. Email address of the authenticated creator.
+    creator :: (Core.Maybe Core.Text),
+    -- | Output only. The deletion time.
+    deleteTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. A system-generated fingerprint for this version of the resource. May be used to detect modification conflict during updates.
+    etag :: (Core.Maybe Core.Text),
+    -- | Output only. Number of executions created for this job.
+    executionCount :: (Core.Maybe Core.Int32),
+    -- | Output only. For a deleted resource, the time after which it will be permamently deleted.
+    expireTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. A number that monotonically increases every time the user modifies the desired state.
+    generation :: (Core.Maybe Core.Int64),
+    -- | KRM-style labels for the resource. User-provided labels are shared with Google\'s billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https:\/\/cloud.google.com\/resource-manager\/docs\/creating-managing-labels or https:\/\/cloud.google.com\/run\/docs\/configuring\/labels Cloud Run API v2 does not support labels with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected. All system labels in v1 now have a corresponding field in v2 Job.
+    labels :: (Core.Maybe GoogleCloudRunV2Job_Labels),
+    -- | Output only. Email address of the last authenticated modifier.
+    lastModifier :: (Core.Maybe Core.Text),
+    -- | Output only. Name of the last created execution.
+    latestCreatedExecution :: (Core.Maybe GoogleCloudRunV2ExecutionReference),
+    -- | The launch stage as defined by <https://cloud.google.com/terms/launch-stages Google Cloud Platform Launch Stages>. Cloud Run supports @ALPHA@, @BETA@, and @GA@. If no value is specified, GA is assumed. Set the launch stage to a preview stage on input to allow use of preview features in that stage. On read (or output), describes whether the resource uses preview features. For example, if ALPHA is provided as input, but only BETA and GA-level features are used, this field will be BETA on output.
+    launchStage :: (Core.Maybe GoogleCloudRunV2Job_LaunchStage),
+    -- | The fully qualified name of this Job. Format: projects\/{project}\/locations\/{location}\/jobs\/{job}
+    name :: (Core.Maybe Core.Text),
+    -- | Output only. The generation of this Job. See comments in @reconciling@ for additional information on reconciliation process in Cloud Run.
+    observedGeneration :: (Core.Maybe Core.Int64),
+    -- | Output only. Returns true if the Job is currently being acted upon by the system to bring it into the desired state. When a new Job is created, or an existing one is updated, Cloud Run will asynchronously perform all necessary steps to bring the Job to the desired state. This process is called reconciliation. While reconciliation is in process, @observed_generation@ and @latest_succeeded_execution@, will have transient values that might mismatch the intended state: Once reconciliation is over (and this field is false), there are two possible outcomes: reconciliation succeeded and the state matches the Job, or there was an error, and reconciliation failed. This state can be found in @terminal_condition.state@. If reconciliation succeeded, the following fields will match: @observed_generation@ and @generation@, @latest_succeeded_execution@ and @latest_created_execution@. If reconciliation failed, @observed_generation@ and @latest_succeeded_execution@ will have the state of the last succeeded execution or empty
+    -- for newly created Job. Additional information on the failure can be found in @terminal_condition@ and @conditions@.
+    reconciling :: (Core.Maybe Core.Bool),
+    -- | Output only. Reserved for future use.
+    satisfiesPzs :: (Core.Maybe Core.Bool),
+    -- | Required. The template used to create executions for this Job.
+    template :: (Core.Maybe GoogleCloudRunV2ExecutionTemplate),
+    -- | Output only. The Condition of this Job, containing its readiness status, and detailed error information in case it did not reach the desired state.
+    terminalCondition :: (Core.Maybe GoogleCloudRunV2Condition),
+    -- | Output only. Server assigned unique identifier for the Execution. The value is a UUID4 string and guaranteed to remain unchanged until the resource is deleted.
+    uid :: (Core.Maybe Core.Text),
+    -- | Output only. The last-modified time.
+    updateTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2Job' with the minimum fields required to make a request.
+newGoogleCloudRunV2Job ::
+  GoogleCloudRunV2Job
+newGoogleCloudRunV2Job =
+  GoogleCloudRunV2Job
+    { annotations = Core.Nothing,
+      binaryAuthorization = Core.Nothing,
+      client = Core.Nothing,
+      clientVersion = Core.Nothing,
+      conditions = Core.Nothing,
+      createTime = Core.Nothing,
+      creator = Core.Nothing,
+      deleteTime = Core.Nothing,
+      etag = Core.Nothing,
+      executionCount = Core.Nothing,
+      expireTime = Core.Nothing,
+      generation = Core.Nothing,
+      labels = Core.Nothing,
+      lastModifier = Core.Nothing,
+      latestCreatedExecution = Core.Nothing,
+      launchStage = Core.Nothing,
+      name = Core.Nothing,
+      observedGeneration = Core.Nothing,
+      reconciling = Core.Nothing,
+      satisfiesPzs = Core.Nothing,
+      template = Core.Nothing,
+      terminalCondition = Core.Nothing,
+      uid = Core.Nothing,
+      updateTime = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleCloudRunV2Job where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2Job"
+      ( \o ->
+          GoogleCloudRunV2Job
+            Core.<$> (o Core..:? "annotations")
+            Core.<*> (o Core..:? "binaryAuthorization")
+            Core.<*> (o Core..:? "client")
+            Core.<*> (o Core..:? "clientVersion")
+            Core.<*> (o Core..:? "conditions")
+            Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "creator")
+            Core.<*> (o Core..:? "deleteTime")
+            Core.<*> (o Core..:? "etag")
+            Core.<*> (o Core..:? "executionCount")
+            Core.<*> (o Core..:? "expireTime")
+            Core.<*> ( o Core..:? "generation"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "labels")
+            Core.<*> (o Core..:? "lastModifier")
+            Core.<*> (o Core..:? "latestCreatedExecution")
+            Core.<*> (o Core..:? "launchStage")
+            Core.<*> (o Core..:? "name")
+            Core.<*> ( o Core..:? "observedGeneration"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "reconciling")
+            Core.<*> (o Core..:? "satisfiesPzs")
+            Core.<*> (o Core..:? "template")
+            Core.<*> (o Core..:? "terminalCondition")
+            Core.<*> (o Core..:? "uid")
+            Core.<*> (o Core..:? "updateTime")
+      )
+
+instance Core.ToJSON GoogleCloudRunV2Job where
+  toJSON GoogleCloudRunV2Job {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("annotations" Core..=) Core.<$> annotations,
+            ("binaryAuthorization" Core..=)
+              Core.<$> binaryAuthorization,
+            ("client" Core..=) Core.<$> client,
+            ("clientVersion" Core..=) Core.<$> clientVersion,
+            ("conditions" Core..=) Core.<$> conditions,
+            ("createTime" Core..=) Core.<$> createTime,
+            ("creator" Core..=) Core.<$> creator,
+            ("deleteTime" Core..=) Core.<$> deleteTime,
+            ("etag" Core..=) Core.<$> etag,
+            ("executionCount" Core..=) Core.<$> executionCount,
+            ("expireTime" Core..=) Core.<$> expireTime,
+            ("generation" Core..=) Core.. Core.AsText
+              Core.<$> generation,
+            ("labels" Core..=) Core.<$> labels,
+            ("lastModifier" Core..=) Core.<$> lastModifier,
+            ("latestCreatedExecution" Core..=)
+              Core.<$> latestCreatedExecution,
+            ("launchStage" Core..=) Core.<$> launchStage,
+            ("name" Core..=) Core.<$> name,
+            ("observedGeneration" Core..=) Core.. Core.AsText
+              Core.<$> observedGeneration,
+            ("reconciling" Core..=) Core.<$> reconciling,
+            ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
+            ("template" Core..=) Core.<$> template,
+            ("terminalCondition" Core..=)
+              Core.<$> terminalCondition,
+            ("uid" Core..=) Core.<$> uid,
+            ("updateTime" Core..=) Core.<$> updateTime
+          ]
+      )
+
+-- | KRM-style annotations for the resource. Unstructured key value map that may be set by external tools to store and arbitrary metadata. They are not queryable and should be preserved when modifying objects. Cloud Run API v2 does not support annotations with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected. All system annotations in v1 now have a corresponding field in v2 Job. This field follows Kubernetes annotations\' namespacing, limits, and rules. More info: https:\/\/kubernetes.io\/docs\/user-guide\/annotations
+--
+-- /See:/ 'newGoogleCloudRunV2Job_Annotations' smart constructor.
+newtype GoogleCloudRunV2Job_Annotations = GoogleCloudRunV2Job_Annotations
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2Job_Annotations' with the minimum fields required to make a request.
+newGoogleCloudRunV2Job_Annotations ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GoogleCloudRunV2Job_Annotations
+newGoogleCloudRunV2Job_Annotations additional =
+  GoogleCloudRunV2Job_Annotations {additional = additional}
+
+instance
+  Core.FromJSON
+    GoogleCloudRunV2Job_Annotations
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2Job_Annotations"
+      ( \o ->
+          GoogleCloudRunV2Job_Annotations
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON GoogleCloudRunV2Job_Annotations where
+  toJSON GoogleCloudRunV2Job_Annotations {..} =
+    Core.toJSON additional
+
+-- | KRM-style labels for the resource. User-provided labels are shared with Google\'s billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https:\/\/cloud.google.com\/resource-manager\/docs\/creating-managing-labels or https:\/\/cloud.google.com\/run\/docs\/configuring\/labels Cloud Run API v2 does not support labels with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected. All system labels in v1 now have a corresponding field in v2 Job.
+--
+-- /See:/ 'newGoogleCloudRunV2Job_Labels' smart constructor.
+newtype GoogleCloudRunV2Job_Labels = GoogleCloudRunV2Job_Labels
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2Job_Labels' with the minimum fields required to make a request.
+newGoogleCloudRunV2Job_Labels ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GoogleCloudRunV2Job_Labels
+newGoogleCloudRunV2Job_Labels additional =
+  GoogleCloudRunV2Job_Labels {additional = additional}
+
+instance Core.FromJSON GoogleCloudRunV2Job_Labels where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2Job_Labels"
+      ( \o ->
+          GoogleCloudRunV2Job_Labels
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON GoogleCloudRunV2Job_Labels where
+  toJSON GoogleCloudRunV2Job_Labels {..} =
+    Core.toJSON additional
+
+-- | Response message containing a list of Executions.
+--
+-- /See:/ 'newGoogleCloudRunV2ListExecutionsResponse' smart constructor.
+data GoogleCloudRunV2ListExecutionsResponse = GoogleCloudRunV2ListExecutionsResponse
+  { -- | The resulting list of Executions.
+    executions :: (Core.Maybe [GoogleCloudRunV2Execution]),
+    -- | A token indicating there are more items than page_size. Use it in the next ListExecutions request to continue.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2ListExecutionsResponse' with the minimum fields required to make a request.
+newGoogleCloudRunV2ListExecutionsResponse ::
+  GoogleCloudRunV2ListExecutionsResponse
+newGoogleCloudRunV2ListExecutionsResponse =
+  GoogleCloudRunV2ListExecutionsResponse
+    { executions = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudRunV2ListExecutionsResponse
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2ListExecutionsResponse"
+      ( \o ->
+          GoogleCloudRunV2ListExecutionsResponse
+            Core.<$> (o Core..:? "executions")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudRunV2ListExecutionsResponse
+  where
+  toJSON GoogleCloudRunV2ListExecutionsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("executions" Core..=) Core.<$> executions,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
+-- | Response message containing a list of Jobs.
+--
+-- /See:/ 'newGoogleCloudRunV2ListJobsResponse' smart constructor.
+data GoogleCloudRunV2ListJobsResponse = GoogleCloudRunV2ListJobsResponse
+  { -- | The resulting list of Jobs.
+    jobs :: (Core.Maybe [GoogleCloudRunV2Job]),
+    -- | A token indicating there are more items than page_size. Use it in the next ListJobs request to continue.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2ListJobsResponse' with the minimum fields required to make a request.
+newGoogleCloudRunV2ListJobsResponse ::
+  GoogleCloudRunV2ListJobsResponse
+newGoogleCloudRunV2ListJobsResponse =
+  GoogleCloudRunV2ListJobsResponse
+    { jobs = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudRunV2ListJobsResponse
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2ListJobsResponse"
+      ( \o ->
+          GoogleCloudRunV2ListJobsResponse
+            Core.<$> (o Core..:? "jobs")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON GoogleCloudRunV2ListJobsResponse where
+  toJSON GoogleCloudRunV2ListJobsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("jobs" Core..=) Core.<$> jobs,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
 -- | Response message containing a list of Revisions.
 --
 -- /See:/ 'newGoogleCloudRunV2ListRevisionsResponse' smart constructor.
@@ -641,13 +1591,124 @@ instance
           ]
       )
 
+-- | Response message containing a list of Tasks.
+--
+-- /See:/ 'newGoogleCloudRunV2ListTasksResponse' smart constructor.
+data GoogleCloudRunV2ListTasksResponse = GoogleCloudRunV2ListTasksResponse
+  { -- | A token indicating there are more items than page_size. Use it in the next ListTasks request to continue.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | The resulting list of Tasks.
+    tasks :: (Core.Maybe [GoogleCloudRunV2Task])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2ListTasksResponse' with the minimum fields required to make a request.
+newGoogleCloudRunV2ListTasksResponse ::
+  GoogleCloudRunV2ListTasksResponse
+newGoogleCloudRunV2ListTasksResponse =
+  GoogleCloudRunV2ListTasksResponse
+    { nextPageToken = Core.Nothing,
+      tasks = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudRunV2ListTasksResponse
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2ListTasksResponse"
+      ( \o ->
+          GoogleCloudRunV2ListTasksResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "tasks")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudRunV2ListTasksResponse
+  where
+  toJSON GoogleCloudRunV2ListTasksResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("tasks" Core..=) Core.<$> tasks
+          ]
+      )
+
+-- | Probe describes a health check to be performed against a container to determine whether it is alive or ready to receive traffic.
+--
+-- /See:/ 'newGoogleCloudRunV2Probe' smart constructor.
+data GoogleCloudRunV2Probe = GoogleCloudRunV2Probe
+  { -- | Minimum consecutive failures for the probe to be considered failed after having succeeded. Defaults to 3. Minimum value is 1.
+    failureThreshold :: (Core.Maybe Core.Int32),
+    -- | GRPC specifies an action involving a gRPC port. Exactly one of httpGet, tcpSocket, or grpc must be specified.
+    grpc :: (Core.Maybe GoogleCloudRunV2GRPCAction),
+    -- | HTTPGet specifies the http request to perform. Exactly one of httpGet, tcpSocket, or grpc must be specified.
+    httpGet :: (Core.Maybe GoogleCloudRunV2HTTPGetAction),
+    -- | Number of seconds after the container has started before the probe is initiated. Defaults to 0 seconds. Minimum value is 0. Maximum value for liveness probe is 3600. Maximum value for startup probe is 240. More info: https:\/\/kubernetes.io\/docs\/concepts\/workloads\/pods\/pod-lifecycle#container-probes
+    initialDelaySeconds :: (Core.Maybe Core.Int32),
+    -- | How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1. Maximum value for liveness probe is 3600. Maximum value for startup probe is 240. Must be greater or equal than timeout_seconds.
+    periodSeconds :: (Core.Maybe Core.Int32),
+    -- | TCPSocket specifies an action involving a TCP port. Exactly one of httpGet, tcpSocket, or grpc must be specified.
+    tcpSocket :: (Core.Maybe GoogleCloudRunV2TCPSocketAction),
+    -- | Number of seconds after which the probe times out. Defaults to 1 second. Minimum value is 1. Maximum value is 3600. Must be smaller than period_seconds. More info: https:\/\/kubernetes.io\/docs\/concepts\/workloads\/pods\/pod-lifecycle#container-probes
+    timeoutSeconds :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2Probe' with the minimum fields required to make a request.
+newGoogleCloudRunV2Probe ::
+  GoogleCloudRunV2Probe
+newGoogleCloudRunV2Probe =
+  GoogleCloudRunV2Probe
+    { failureThreshold = Core.Nothing,
+      grpc = Core.Nothing,
+      httpGet = Core.Nothing,
+      initialDelaySeconds = Core.Nothing,
+      periodSeconds = Core.Nothing,
+      tcpSocket = Core.Nothing,
+      timeoutSeconds = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleCloudRunV2Probe where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2Probe"
+      ( \o ->
+          GoogleCloudRunV2Probe
+            Core.<$> (o Core..:? "failureThreshold")
+            Core.<*> (o Core..:? "grpc")
+            Core.<*> (o Core..:? "httpGet")
+            Core.<*> (o Core..:? "initialDelaySeconds")
+            Core.<*> (o Core..:? "periodSeconds")
+            Core.<*> (o Core..:? "tcpSocket")
+            Core.<*> (o Core..:? "timeoutSeconds")
+      )
+
+instance Core.ToJSON GoogleCloudRunV2Probe where
+  toJSON GoogleCloudRunV2Probe {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("failureThreshold" Core..=)
+              Core.<$> failureThreshold,
+            ("grpc" Core..=) Core.<$> grpc,
+            ("httpGet" Core..=) Core.<$> httpGet,
+            ("initialDelaySeconds" Core..=)
+              Core.<$> initialDelaySeconds,
+            ("periodSeconds" Core..=) Core.<$> periodSeconds,
+            ("tcpSocket" Core..=) Core.<$> tcpSocket,
+            ("timeoutSeconds" Core..=) Core.<$> timeoutSeconds
+          ]
+      )
+
 -- | ResourceRequirements describes the compute resource requirements.
 --
 -- /See:/ 'newGoogleCloudRunV2ResourceRequirements' smart constructor.
 data GoogleCloudRunV2ResourceRequirements = GoogleCloudRunV2ResourceRequirements
   { -- | Determines whether CPU should be throttled or not outside of requests.
     cpuIdle :: (Core.Maybe Core.Bool),
-    -- | Only memory and CPU are supported. Note: The only supported values for CPU are \'1\', \'2\', and \'4\'. Setting 4 CPU requires at least 2Gi of memory. The values of the map is string form of the \'quantity\' k8s type: https:\/\/github.com\/kubernetes\/kubernetes\/blob\/master\/staging\/src\/k8s.io\/apimachinery\/pkg\/api\/resource\/quantity.go
+    -- | Only memory and CPU are supported. Note: The only supported values for CPU are \'1\', \'2\', \'4\', and \'8\'. Setting 4 CPU requires at least 2Gi of memory. The values of the map is string form of the \'quantity\' k8s type: https:\/\/github.com\/kubernetes\/kubernetes\/blob\/master\/staging\/src\/k8s.io\/apimachinery\/pkg\/api\/resource\/quantity.go
     limits :: (Core.Maybe GoogleCloudRunV2ResourceRequirements_Limits)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -686,7 +1747,7 @@ instance
           ]
       )
 
--- | Only memory and CPU are supported. Note: The only supported values for CPU are \'1\', \'2\', and \'4\'. Setting 4 CPU requires at least 2Gi of memory. The values of the map is string form of the \'quantity\' k8s type: https:\/\/github.com\/kubernetes\/kubernetes\/blob\/master\/staging\/src\/k8s.io\/apimachinery\/pkg\/api\/resource\/quantity.go
+-- | Only memory and CPU are supported. Note: The only supported values for CPU are \'1\', \'2\', \'4\', and \'8\'. Setting 4 CPU requires at least 2Gi of memory. The values of the map is string form of the \'quantity\' k8s type: https:\/\/github.com\/kubernetes\/kubernetes\/blob\/master\/staging\/src\/k8s.io\/apimachinery\/pkg\/api\/resource\/quantity.go
 --
 -- /See:/ 'newGoogleCloudRunV2ResourceRequirements_Limits' smart constructor.
 newtype GoogleCloudRunV2ResourceRequirements_Limits = GoogleCloudRunV2ResourceRequirements_Limits
@@ -731,10 +1792,6 @@ data GoogleCloudRunV2Revision = GoogleCloudRunV2Revision
     annotations :: (Core.Maybe GoogleCloudRunV2Revision_Annotations),
     -- | Output only. The Condition of this Revision, containing its readiness status, and detailed error information in case it did not reach a serving state.
     conditions :: (Core.Maybe [GoogleCloudRunV2Condition]),
-    -- | Indicates whether Confidential Cloud Run is enabled in this Revision.
-    confidential :: (Core.Maybe Core.Bool),
-    -- | Sets the maximum number of requests that each serving instance can receive.
-    containerConcurrency :: (Core.Maybe Core.Int32),
     -- | Holds the single container that defines the unit of execution for this Revision.
     containers :: (Core.Maybe [GoogleCloudRunV2Container]),
     -- | Output only. The creation time.
@@ -743,6 +1800,10 @@ data GoogleCloudRunV2Revision = GoogleCloudRunV2Revision
     deleteTime :: (Core.Maybe Core.DateTime),
     -- | A reference to a customer managed encryption key (CMEK) to use to encrypt this container image. For more information, go to https:\/\/cloud.google.com\/run\/docs\/securing\/using-cmek
     encryptionKey :: (Core.Maybe Core.Text),
+    -- | The action to take if the encryption key is revoked.
+    encryptionKeyRevocationAction :: (Core.Maybe GoogleCloudRunV2Revision_EncryptionKeyRevocationAction),
+    -- | If encryption/key/revocation_action is SHUTDOWN, the duration before shutting down all instances. The minimum increment is 1 hour.
+    encryptionKeyShutdownDuration :: (Core.Maybe Core.Duration),
     -- | Output only. A system-generated fingerprint for this version of the resource. May be used to detect modification conflict during updates.
     etag :: (Core.Maybe Core.Text),
     -- | The execution environment being used to host this Revision.
@@ -751,18 +1812,22 @@ data GoogleCloudRunV2Revision = GoogleCloudRunV2Revision
     expireTime :: (Core.Maybe Core.DateTime),
     -- | Output only. A number that monotonically increases every time the user modifies the desired state.
     generation :: (Core.Maybe Core.Int64),
-    -- | KRM-style labels for the resource. User-provided labels are shared with Google\'s billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https:\/\/cloud.google.com\/resource-manager\/docs\/creating-managing-labels or https:\/\/cloud.google.com\/run\/docs\/configuring\/labels Cloud Run will populate some labels with \'run.googleapis.com\' or \'serving.knative.dev\' namespaces. Those labels are read-only, and user changes will not be preserved.
+    -- | KRM-style labels for the resource. User-provided labels are shared with Google\'s billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https:\/\/cloud.google.com\/resource-manager\/docs\/creating-managing-labels or https:\/\/cloud.google.com\/run\/docs\/configuring\/labels
     labels :: (Core.Maybe GoogleCloudRunV2Revision_Labels),
-    -- | Set the launch stage to a preview stage on write to allow use of preview features in that stage. On read, describes whether the resource uses preview features. Launch Stages are defined at <https://cloud.google.com/terms/launch-stages Google Cloud Platform Launch Stages>.
+    -- | The least stable launch stage needed to create this resource, as defined by <https://cloud.google.com/terms/launch-stages Google Cloud Platform Launch Stages>. Cloud Run supports @ALPHA@, @BETA@, and @GA@. Note that this value might not be what was used as input. For example, if ALPHA was provided as input in the parent resource, but only BETA and GA-level features are were, this field will be BETA.
     launchStage :: (Core.Maybe GoogleCloudRunV2Revision_LaunchStage),
     -- | Output only. The Google Console URI to obtain logs for the Revision.
     logUri :: (Core.Maybe Core.Text),
+    -- | Sets the maximum number of requests that each serving instance can receive.
+    maxInstanceRequestConcurrency :: (Core.Maybe Core.Int32),
     -- | Output only. The unique name of this Revision.
     name :: (Core.Maybe Core.Text),
     -- | Output only. The generation of this Revision currently serving traffic. See comments in @reconciling@ for additional information on reconciliation process in Cloud Run.
     observedGeneration :: (Core.Maybe Core.Int64),
     -- | Output only. Indicates whether the resource\'s reconciliation is still in progress. See comments in @Service.reconciling@ for additional information on reconciliation process in Cloud Run.
     reconciling :: (Core.Maybe Core.Bool),
+    -- | Output only. Reserved for future use.
+    satisfiesPzs :: (Core.Maybe Core.Bool),
     -- | Scaling settings for this revision.
     scaling :: (Core.Maybe GoogleCloudRunV2RevisionScaling),
     -- | Output only. The name of the parent service.
@@ -789,12 +1854,12 @@ newGoogleCloudRunV2Revision =
   GoogleCloudRunV2Revision
     { annotations = Core.Nothing,
       conditions = Core.Nothing,
-      confidential = Core.Nothing,
-      containerConcurrency = Core.Nothing,
       containers = Core.Nothing,
       createTime = Core.Nothing,
       deleteTime = Core.Nothing,
       encryptionKey = Core.Nothing,
+      encryptionKeyRevocationAction = Core.Nothing,
+      encryptionKeyShutdownDuration = Core.Nothing,
       etag = Core.Nothing,
       executionEnvironment = Core.Nothing,
       expireTime = Core.Nothing,
@@ -802,9 +1867,11 @@ newGoogleCloudRunV2Revision =
       labels = Core.Nothing,
       launchStage = Core.Nothing,
       logUri = Core.Nothing,
+      maxInstanceRequestConcurrency = Core.Nothing,
       name = Core.Nothing,
       observedGeneration = Core.Nothing,
       reconciling = Core.Nothing,
+      satisfiesPzs = Core.Nothing,
       scaling = Core.Nothing,
       service = Core.Nothing,
       serviceAccount = Core.Nothing,
@@ -823,12 +1890,12 @@ instance Core.FromJSON GoogleCloudRunV2Revision where
           GoogleCloudRunV2Revision
             Core.<$> (o Core..:? "annotations")
             Core.<*> (o Core..:? "conditions")
-            Core.<*> (o Core..:? "confidential")
-            Core.<*> (o Core..:? "containerConcurrency")
             Core.<*> (o Core..:? "containers")
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "deleteTime")
             Core.<*> (o Core..:? "encryptionKey")
+            Core.<*> (o Core..:? "encryptionKeyRevocationAction")
+            Core.<*> (o Core..:? "encryptionKeyShutdownDuration")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "executionEnvironment")
             Core.<*> (o Core..:? "expireTime")
@@ -838,11 +1905,13 @@ instance Core.FromJSON GoogleCloudRunV2Revision where
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "launchStage")
             Core.<*> (o Core..:? "logUri")
+            Core.<*> (o Core..:? "maxInstanceRequestConcurrency")
             Core.<*> (o Core..:? "name")
             Core.<*> ( o Core..:? "observedGeneration"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "reconciling")
+            Core.<*> (o Core..:? "satisfiesPzs")
             Core.<*> (o Core..:? "scaling")
             Core.<*> (o Core..:? "service")
             Core.<*> (o Core..:? "serviceAccount")
@@ -859,13 +1928,14 @@ instance Core.ToJSON GoogleCloudRunV2Revision where
       ( Core.catMaybes
           [ ("annotations" Core..=) Core.<$> annotations,
             ("conditions" Core..=) Core.<$> conditions,
-            ("confidential" Core..=) Core.<$> confidential,
-            ("containerConcurrency" Core..=)
-              Core.<$> containerConcurrency,
             ("containers" Core..=) Core.<$> containers,
             ("createTime" Core..=) Core.<$> createTime,
             ("deleteTime" Core..=) Core.<$> deleteTime,
             ("encryptionKey" Core..=) Core.<$> encryptionKey,
+            ("encryptionKeyRevocationAction" Core..=)
+              Core.<$> encryptionKeyRevocationAction,
+            ("encryptionKeyShutdownDuration" Core..=)
+              Core.<$> encryptionKeyShutdownDuration,
             ("etag" Core..=) Core.<$> etag,
             ("executionEnvironment" Core..=)
               Core.<$> executionEnvironment,
@@ -875,10 +1945,13 @@ instance Core.ToJSON GoogleCloudRunV2Revision where
             ("labels" Core..=) Core.<$> labels,
             ("launchStage" Core..=) Core.<$> launchStage,
             ("logUri" Core..=) Core.<$> logUri,
+            ("maxInstanceRequestConcurrency" Core..=)
+              Core.<$> maxInstanceRequestConcurrency,
             ("name" Core..=) Core.<$> name,
             ("observedGeneration" Core..=) Core.. Core.AsText
               Core.<$> observedGeneration,
             ("reconciling" Core..=) Core.<$> reconciling,
+            ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
             ("scaling" Core..=) Core.<$> scaling,
             ("service" Core..=) Core.<$> service,
             ("serviceAccount" Core..=) Core.<$> serviceAccount,
@@ -926,7 +1999,7 @@ instance
   toJSON GoogleCloudRunV2Revision_Annotations {..} =
     Core.toJSON additional
 
--- | KRM-style labels for the resource. User-provided labels are shared with Google\'s billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https:\/\/cloud.google.com\/resource-manager\/docs\/creating-managing-labels or https:\/\/cloud.google.com\/run\/docs\/configuring\/labels Cloud Run will populate some labels with \'run.googleapis.com\' or \'serving.knative.dev\' namespaces. Those labels are read-only, and user changes will not be preserved.
+-- | KRM-style labels for the resource. User-provided labels are shared with Google\'s billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https:\/\/cloud.google.com\/resource-manager\/docs\/creating-managing-labels or https:\/\/cloud.google.com\/run\/docs\/configuring\/labels
 --
 -- /See:/ 'newGoogleCloudRunV2Revision_Labels' smart constructor.
 newtype GoogleCloudRunV2Revision_Labels = GoogleCloudRunV2Revision_Labels
@@ -1007,20 +2080,18 @@ instance Core.ToJSON GoogleCloudRunV2RevisionScaling where
 --
 -- /See:/ 'newGoogleCloudRunV2RevisionTemplate' smart constructor.
 data GoogleCloudRunV2RevisionTemplate = GoogleCloudRunV2RevisionTemplate
-  { -- | KRM-style annotations for the resource.
+  { -- | KRM-style annotations for the resource. Cloud Run API v2 does not support annotations with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected. All system annotations in v1 now have a corresponding field in v2 RevisionTemplate.
     annotations :: (Core.Maybe GoogleCloudRunV2RevisionTemplate_Annotations),
-    -- | Enables Confidential Cloud Run in Revisions created using this template.
-    confidential :: (Core.Maybe Core.Bool),
-    -- | Sets the maximum number of requests that each serving instance can receive.
-    containerConcurrency :: (Core.Maybe Core.Int32),
     -- | Holds the single container that defines the unit of execution for this Revision.
     containers :: (Core.Maybe [GoogleCloudRunV2Container]),
     -- | A reference to a customer managed encryption key (CMEK) to use to encrypt this container image. For more information, go to https:\/\/cloud.google.com\/run\/docs\/securing\/using-cmek
     encryptionKey :: (Core.Maybe Core.Text),
     -- | The sandbox environment to host this Revision.
     executionEnvironment :: (Core.Maybe GoogleCloudRunV2RevisionTemplate_ExecutionEnvironment),
-    -- | KRM-style labels for the resource.
+    -- | KRM-style labels for the resource. Cloud Run API v2 does not support labels with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected. All system labels in v1 now have a corresponding field in v2 RevisionTemplate.
     labels :: (Core.Maybe GoogleCloudRunV2RevisionTemplate_Labels),
+    -- | Sets the maximum number of requests that each serving instance can receive.
+    maxInstanceRequestConcurrency :: (Core.Maybe Core.Int32),
     -- | The unique name for the revision. If this field is omitted, it will be automatically generated based on the Service name.
     revision :: (Core.Maybe Core.Text),
     -- | Scaling settings for this Revision.
@@ -1042,12 +2113,11 @@ newGoogleCloudRunV2RevisionTemplate ::
 newGoogleCloudRunV2RevisionTemplate =
   GoogleCloudRunV2RevisionTemplate
     { annotations = Core.Nothing,
-      confidential = Core.Nothing,
-      containerConcurrency = Core.Nothing,
       containers = Core.Nothing,
       encryptionKey = Core.Nothing,
       executionEnvironment = Core.Nothing,
       labels = Core.Nothing,
+      maxInstanceRequestConcurrency = Core.Nothing,
       revision = Core.Nothing,
       scaling = Core.Nothing,
       serviceAccount = Core.Nothing,
@@ -1066,12 +2136,11 @@ instance
       ( \o ->
           GoogleCloudRunV2RevisionTemplate
             Core.<$> (o Core..:? "annotations")
-            Core.<*> (o Core..:? "confidential")
-            Core.<*> (o Core..:? "containerConcurrency")
             Core.<*> (o Core..:? "containers")
             Core.<*> (o Core..:? "encryptionKey")
             Core.<*> (o Core..:? "executionEnvironment")
             Core.<*> (o Core..:? "labels")
+            Core.<*> (o Core..:? "maxInstanceRequestConcurrency")
             Core.<*> (o Core..:? "revision")
             Core.<*> (o Core..:? "scaling")
             Core.<*> (o Core..:? "serviceAccount")
@@ -1085,14 +2154,13 @@ instance Core.ToJSON GoogleCloudRunV2RevisionTemplate where
     Core.object
       ( Core.catMaybes
           [ ("annotations" Core..=) Core.<$> annotations,
-            ("confidential" Core..=) Core.<$> confidential,
-            ("containerConcurrency" Core..=)
-              Core.<$> containerConcurrency,
             ("containers" Core..=) Core.<$> containers,
             ("encryptionKey" Core..=) Core.<$> encryptionKey,
             ("executionEnvironment" Core..=)
               Core.<$> executionEnvironment,
             ("labels" Core..=) Core.<$> labels,
+            ("maxInstanceRequestConcurrency" Core..=)
+              Core.<$> maxInstanceRequestConcurrency,
             ("revision" Core..=) Core.<$> revision,
             ("scaling" Core..=) Core.<$> scaling,
             ("serviceAccount" Core..=) Core.<$> serviceAccount,
@@ -1102,7 +2170,7 @@ instance Core.ToJSON GoogleCloudRunV2RevisionTemplate where
           ]
       )
 
--- | KRM-style annotations for the resource.
+-- | KRM-style annotations for the resource. Cloud Run API v2 does not support annotations with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected. All system annotations in v1 now have a corresponding field in v2 RevisionTemplate.
 --
 -- /See:/ 'newGoogleCloudRunV2RevisionTemplate_Annotations' smart constructor.
 newtype GoogleCloudRunV2RevisionTemplate_Annotations = GoogleCloudRunV2RevisionTemplate_Annotations
@@ -1139,7 +2207,7 @@ instance
     GoogleCloudRunV2RevisionTemplate_Annotations {..} =
       Core.toJSON additional
 
--- | KRM-style labels for the resource.
+-- | KRM-style labels for the resource. Cloud Run API v2 does not support labels with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected. All system labels in v1 now have a corresponding field in v2 RevisionTemplate.
 --
 -- /See:/ 'newGoogleCloudRunV2RevisionTemplate_Labels' smart constructor.
 newtype GoogleCloudRunV2RevisionTemplate_Labels = GoogleCloudRunV2RevisionTemplate_Labels
@@ -1175,13 +2243,52 @@ instance
   toJSON GoogleCloudRunV2RevisionTemplate_Labels {..} =
     Core.toJSON additional
 
+-- | Request message to create a new Execution of a Job.
+--
+-- /See:/ 'newGoogleCloudRunV2RunJobRequest' smart constructor.
+data GoogleCloudRunV2RunJobRequest = GoogleCloudRunV2RunJobRequest
+  { -- | A system-generated fingerprint for this version of the resource. May be used to detect modification conflict during updates.
+    etag :: (Core.Maybe Core.Text),
+    -- | Indicates that the request should be validated without actually deleting any resources.
+    validateOnly :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2RunJobRequest' with the minimum fields required to make a request.
+newGoogleCloudRunV2RunJobRequest ::
+  GoogleCloudRunV2RunJobRequest
+newGoogleCloudRunV2RunJobRequest =
+  GoogleCloudRunV2RunJobRequest
+    { etag = Core.Nothing,
+      validateOnly = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleCloudRunV2RunJobRequest where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2RunJobRequest"
+      ( \o ->
+          GoogleCloudRunV2RunJobRequest
+            Core.<$> (o Core..:? "etag")
+            Core.<*> (o Core..:? "validateOnly")
+      )
+
+instance Core.ToJSON GoogleCloudRunV2RunJobRequest where
+  toJSON GoogleCloudRunV2RunJobRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("etag" Core..=) Core.<$> etag,
+            ("validateOnly" Core..=) Core.<$> validateOnly
+          ]
+      )
+
 -- | SecretEnvVarSource represents a source for the value of an EnvVar.
 --
 -- /See:/ 'newGoogleCloudRunV2SecretKeySelector' smart constructor.
 data GoogleCloudRunV2SecretKeySelector = GoogleCloudRunV2SecretKeySelector
   { -- | Required. The name of the secret in Cloud Secret Manager. Format: {secret/name} if the secret is in the same project. projects\/{project}\/secrets\/{secret/name} if the secret is in a different project.
     secret :: (Core.Maybe Core.Text),
-    -- | The Cloud Secret Manager secret version. Can be \'latest\' for the latest value or an integer for a specific version.
+    -- | The Cloud Secret Manager secret version. Can be \'latest\' for the latest version, an integer for a specific version, or a version alias.
     version :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1224,7 +2331,7 @@ instance
 --
 -- /See:/ 'newGoogleCloudRunV2SecretVolumeSource' smart constructor.
 data GoogleCloudRunV2SecretVolumeSource = GoogleCloudRunV2SecretVolumeSource
-  { -- | Integer representation of mode bits to use on created files by default. Must be a value between 0000 and 0777 (octal), defaulting to 0644. Directories within the path are not affected by this setting. Notes * Internally, a umask of 0222 will be applied to any non-zero value. * This is an integer representation of the mode bits. So, the octal integer value should look exactly as the chmod numeric notation with a leading zero. Some examples: for chmod 777 (a=rwx), set to 0777 (octal) or 511 (base-10). For chmod 640 (u=rw,g=r), set to 0640 (octal) or 416 (base-10). For chmod 755 (u=rwx,g=rx,o=rx), set to 0755 (octal) or 493 (base-10). * This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set. This might be in conflict with other options that affect the file mode, like fsGroup, and as a result, other mode bits could be set.
+  { -- | Integer representation of mode bits to use on created files by default. Must be a value between 0000 and 0777 (octal), defaulting to 0444. Directories within the path are not affected by this setting. Notes * Internally, a umask of 0222 will be applied to any non-zero value. * This is an integer representation of the mode bits. So, the octal integer value should look exactly as the chmod numeric notation with a leading zero. Some examples: for chmod 777 (a=rwx), set to 0777 (octal) or 511 (base-10). For chmod 640 (u=rw,g=r), set to 0640 (octal) or 416 (base-10). For chmod 755 (u=rwx,g=rx,o=rx), set to 0755 (octal) or 493 (base-10). * This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set. This might be in conflict with other options that affect the file mode, like fsGroup, and as a result, other mode bits could be set.
     defaultMode :: (Core.Maybe Core.Int32),
     -- | If unspecified, the volume will expose a file whose name is the secret, relative to VolumeMount.mount_path. If specified, the key will be used as the version to fetch from Cloud Secret Manager and the path will be the name of the file exposed in the volume. When items are defined, they must specify a path and a version.
     items :: (Core.Maybe [GoogleCloudRunV2VersionToPath]),
@@ -1274,7 +2381,7 @@ instance
 --
 -- /See:/ 'newGoogleCloudRunV2Service' smart constructor.
 data GoogleCloudRunV2Service = GoogleCloudRunV2Service
-  { -- | Unstructured key value map that may be set by external tools to store and arbitrary metadata. They are not queryable and should be preserved when modifying objects. Cloud Run will populate some annotations using \'run.googleapis.com\' or \'serving.knative.dev\' namespaces. This field follows Kubernetes annotations\' namespacing, limits, and rules. More info: https:\/\/kubernetes.io\/docs\/user-guide\/annotations
+  { -- | Unstructured key value map that may be set by external tools to store and arbitrary metadata. They are not queryable and should be preserved when modifying objects. Cloud Run API v2 does not support annotations with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected. All system annotations in v1 now have a corresponding field in v2 Service. This field follows Kubernetes annotations\' namespacing, limits, and rules. More info: https:\/\/kubernetes.io\/docs\/user-guide\/annotations
     annotations :: (Core.Maybe GoogleCloudRunV2Service_Annotations),
     -- | Settings for the Binary Authorization feature.
     binaryAuthorization :: (Core.Maybe GoogleCloudRunV2BinaryAuthorization),
@@ -1296,11 +2403,11 @@ data GoogleCloudRunV2Service = GoogleCloudRunV2Service
     etag :: (Core.Maybe Core.Text),
     -- | Output only. For a deleted resource, the time after which it will be permamently deleted.
     expireTime :: (Core.Maybe Core.DateTime),
-    -- | Output only. A number that monotonically increases every time the user modifies the desired state.
+    -- | Output only. A number that monotonically increases every time the user modifies the desired state. Please note that unlike v1, this is an int64 value. As with most Google APIs, its JSON representation will be a @string@ instead of an @integer@.
     generation :: (Core.Maybe Core.Int64),
     -- | Provides the ingress settings for this Service. On output, returns the currently observed ingress settings, or INGRESS/TRAFFIC/UNSPECIFIED if no revision is active.
     ingress :: (Core.Maybe GoogleCloudRunV2Service_Ingress),
-    -- | Map of string keys and values that can be used to organize and categorize objects. User-provided labels are shared with Google\'s billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https:\/\/cloud.google.com\/resource-manager\/docs\/creating-managing-labels or https:\/\/cloud.google.com\/run\/docs\/configuring\/labels Cloud Run will populate some labels with \'run.googleapis.com\' or \'serving.knative.dev\' namespaces. Those labels are read-only, and user changes will not be preserved.
+    -- | Map of string keys and values that can be used to organize and categorize objects. User-provided labels are shared with Google\'s billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https:\/\/cloud.google.com\/resource-manager\/docs\/creating-managing-labels or https:\/\/cloud.google.com\/run\/docs\/configuring\/labels Cloud Run API v2 does not support labels with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected. All system labels in v1 now have a corresponding field in v2 Service.
     labels :: (Core.Maybe GoogleCloudRunV2Service_Labels),
     -- | Output only. Email address of the last authenticated modifier.
     lastModifier :: (Core.Maybe Core.Text),
@@ -1308,15 +2415,17 @@ data GoogleCloudRunV2Service = GoogleCloudRunV2Service
     latestCreatedRevision :: (Core.Maybe Core.Text),
     -- | Output only. Name of the latest revision that is serving traffic. See comments in @reconciling@ for additional information on reconciliation process in Cloud Run.
     latestReadyRevision :: (Core.Maybe Core.Text),
-    -- | The launch stage as defined by <https://cloud.google.com/terms/launch-stages Google Cloud Platform Launch Stages>. Cloud Run supports @ALPHA@, @BETA@, and @GA@. If no value is specified, GA is assumed.
+    -- | The launch stage as defined by <https://cloud.google.com/terms/launch-stages Google Cloud Platform Launch Stages>. Cloud Run supports @ALPHA@, @BETA@, and @GA@. If no value is specified, GA is assumed. Set the launch stage to a preview stage on input to allow use of preview features in that stage. On read (or output), describes whether the resource uses preview features. For example, if ALPHA is provided as input, but only BETA and GA-level features are used, this field will be BETA on output.
     launchStage :: (Core.Maybe GoogleCloudRunV2Service_LaunchStage),
     -- | The fully qualified name of this Service. In CreateServiceRequest, this field is ignored, and instead composed from CreateServiceRequest.parent and CreateServiceRequest.service/id. Format: projects\/{project}\/locations\/{location}\/services\/{service/id}
     name :: (Core.Maybe Core.Text),
-    -- | Output only. The generation of this Service currently serving traffic. See comments in @reconciling@ for additional information on reconciliation process in Cloud Run.
+    -- | Output only. The generation of this Service currently serving traffic. See comments in @reconciling@ for additional information on reconciliation process in Cloud Run. Please note that unlike v1, this is an int64 value. As with most Google APIs, its JSON representation will be a @string@ instead of an @integer@.
     observedGeneration :: (Core.Maybe Core.Int64),
     -- | Output only. Returns true if the Service is currently being acted upon by the system to bring it into the desired state. When a new Service is created, or an existing one is updated, Cloud Run will asynchronously perform all necessary steps to bring the Service to the desired serving state. This process is called reconciliation. While reconciliation is in process, @observed_generation@, @latest_ready_revison@, @traffic_statuses@, and @uri@ will have transient values that might mismatch the intended state: Once reconciliation is over (and this field is false), there are two possible outcomes: reconciliation succeeded and the serving state matches the Service, or there was an error, and reconciliation failed. This state can be found in @terminal_condition.state@. If reconciliation succeeded, the following fields will match: @traffic@ and @traffic_statuses@, @observed_generation@ and @generation@, @latest_ready_revision@ and @latest_created_revision@. If reconciliation failed, @traffic_statuses@,
     -- @observed_generation@, and @latest_ready_revision@ will have the state of the last serving revision, or empty for newly created Services. Additional information on the failure can be found in @terminal_condition@ and @conditions@.
     reconciling :: (Core.Maybe Core.Bool),
+    -- | Output only. Reserved for future use.
+    satisfiesPzs :: (Core.Maybe Core.Bool),
     -- | Required. The template used to create revisions for this Service.
     template :: (Core.Maybe GoogleCloudRunV2RevisionTemplate),
     -- | Output only. The Condition of this Service, containing its readiness status, and detailed error information in case it did not reach a serving state. See comments in @reconciling@ for additional information on reconciliation process in Cloud Run.
@@ -1360,6 +2469,7 @@ newGoogleCloudRunV2Service =
       name = Core.Nothing,
       observedGeneration = Core.Nothing,
       reconciling = Core.Nothing,
+      satisfiesPzs = Core.Nothing,
       template = Core.Nothing,
       terminalCondition = Core.Nothing,
       traffic = Core.Nothing,
@@ -1400,6 +2510,7 @@ instance Core.FromJSON GoogleCloudRunV2Service where
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "reconciling")
+            Core.<*> (o Core..:? "satisfiesPzs")
             Core.<*> (o Core..:? "template")
             Core.<*> (o Core..:? "terminalCondition")
             Core.<*> (o Core..:? "traffic")
@@ -1439,6 +2550,7 @@ instance Core.ToJSON GoogleCloudRunV2Service where
             ("observedGeneration" Core..=) Core.. Core.AsText
               Core.<$> observedGeneration,
             ("reconciling" Core..=) Core.<$> reconciling,
+            ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
             ("template" Core..=) Core.<$> template,
             ("terminalCondition" Core..=)
               Core.<$> terminalCondition,
@@ -1450,7 +2562,7 @@ instance Core.ToJSON GoogleCloudRunV2Service where
           ]
       )
 
--- | Unstructured key value map that may be set by external tools to store and arbitrary metadata. They are not queryable and should be preserved when modifying objects. Cloud Run will populate some annotations using \'run.googleapis.com\' or \'serving.knative.dev\' namespaces. This field follows Kubernetes annotations\' namespacing, limits, and rules. More info: https:\/\/kubernetes.io\/docs\/user-guide\/annotations
+-- | Unstructured key value map that may be set by external tools to store and arbitrary metadata. They are not queryable and should be preserved when modifying objects. Cloud Run API v2 does not support annotations with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected. All system annotations in v1 now have a corresponding field in v2 Service. This field follows Kubernetes annotations\' namespacing, limits, and rules. More info: https:\/\/kubernetes.io\/docs\/user-guide\/annotations
 --
 -- /See:/ 'newGoogleCloudRunV2Service_Annotations' smart constructor.
 newtype GoogleCloudRunV2Service_Annotations = GoogleCloudRunV2Service_Annotations
@@ -1486,7 +2598,7 @@ instance
   toJSON GoogleCloudRunV2Service_Annotations {..} =
     Core.toJSON additional
 
--- | Map of string keys and values that can be used to organize and categorize objects. User-provided labels are shared with Google\'s billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https:\/\/cloud.google.com\/resource-manager\/docs\/creating-managing-labels or https:\/\/cloud.google.com\/run\/docs\/configuring\/labels Cloud Run will populate some labels with \'run.googleapis.com\' or \'serving.knative.dev\' namespaces. Those labels are read-only, and user changes will not be preserved.
+-- | Map of string keys and values that can be used to organize and categorize objects. User-provided labels are shared with Google\'s billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https:\/\/cloud.google.com\/resource-manager\/docs\/creating-managing-labels or https:\/\/cloud.google.com\/run\/docs\/configuring\/labels Cloud Run API v2 does not support labels with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected. All system labels in v1 now have a corresponding field in v2 Service.
 --
 -- /See:/ 'newGoogleCloudRunV2Service_Labels' smart constructor.
 newtype GoogleCloudRunV2Service_Labels = GoogleCloudRunV2Service_Labels
@@ -1515,6 +2627,403 @@ instance Core.FromJSON GoogleCloudRunV2Service_Labels where
 instance Core.ToJSON GoogleCloudRunV2Service_Labels where
   toJSON GoogleCloudRunV2Service_Labels {..} =
     Core.toJSON additional
+
+-- | TCPSocketAction describes an action based on opening a socket
+--
+-- /See:/ 'newGoogleCloudRunV2TCPSocketAction' smart constructor.
+newtype GoogleCloudRunV2TCPSocketAction = GoogleCloudRunV2TCPSocketAction
+  { -- | Port number to access on the container. Must be in the range 1 to 65535. If not specified, defaults to the exposed port of the container, which is the value of container.ports[0].containerPort.
+    port :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2TCPSocketAction' with the minimum fields required to make a request.
+newGoogleCloudRunV2TCPSocketAction ::
+  GoogleCloudRunV2TCPSocketAction
+newGoogleCloudRunV2TCPSocketAction =
+  GoogleCloudRunV2TCPSocketAction {port = Core.Nothing}
+
+instance
+  Core.FromJSON
+    GoogleCloudRunV2TCPSocketAction
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2TCPSocketAction"
+      ( \o ->
+          GoogleCloudRunV2TCPSocketAction
+            Core.<$> (o Core..:? "port")
+      )
+
+instance Core.ToJSON GoogleCloudRunV2TCPSocketAction where
+  toJSON GoogleCloudRunV2TCPSocketAction {..} =
+    Core.object
+      (Core.catMaybes [("port" Core..=) Core.<$> port])
+
+-- | Task represents a single run of a container to completion.
+--
+-- /See:/ 'newGoogleCloudRunV2Task' smart constructor.
+data GoogleCloudRunV2Task = GoogleCloudRunV2Task
+  { -- | KRM-style annotations for the resource.
+    annotations :: (Core.Maybe GoogleCloudRunV2Task_Annotations),
+    -- | Output only. Represents time when the Task was completed. It is not guaranteed to be set in happens-before order across separate operations.
+    completionTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. The Condition of this Task, containing its readiness status, and detailed error information in case it did not reach the desired state.
+    conditions :: (Core.Maybe [GoogleCloudRunV2Condition]),
+    -- | Holds the single container that defines the unit of execution for this task.
+    containers :: (Core.Maybe [GoogleCloudRunV2Container]),
+    -- | Output only. Represents time when the task was created by the job controller. It is not guaranteed to be set in happens-before order across separate operations.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. For a deleted resource, the deletion time. It is only populated as a response to a Delete request.
+    deleteTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. A reference to a customer managed encryption key (CMEK) to use to encrypt this container image. For more information, go to https:\/\/cloud.google.com\/run\/docs\/securing\/using-cmek
+    encryptionKey :: (Core.Maybe Core.Text),
+    -- | Output only. A system-generated fingerprint for this version of the resource. May be used to detect modification conflict during updates.
+    etag :: (Core.Maybe Core.Text),
+    -- | Output only. The name of the parent Execution.
+    execution :: (Core.Maybe Core.Text),
+    -- | The execution environment being used to host this Task.
+    executionEnvironment :: (Core.Maybe GoogleCloudRunV2Task_ExecutionEnvironment),
+    -- | Output only. For a deleted resource, the time after which it will be permamently deleted. It is only populated as a response to a Delete request.
+    expireTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. A number that monotonically increases every time the user modifies the desired state.
+    generation :: (Core.Maybe Core.Int64),
+    -- | Output only. Index of the Task, unique per execution, and beginning at 0.
+    index :: (Core.Maybe Core.Int32),
+    -- | Output only. The name of the parent Job.
+    job :: (Core.Maybe Core.Text),
+    -- | KRM-style labels for the resource. User-provided labels are shared with Google\'s billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https:\/\/cloud.google.com\/resource-manager\/docs\/creating-managing-labels or https:\/\/cloud.google.com\/run\/docs\/configuring\/labels
+    labels :: (Core.Maybe GoogleCloudRunV2Task_Labels),
+    -- | Output only. Result of the last attempt of this Task.
+    lastAttemptResult :: (Core.Maybe GoogleCloudRunV2TaskAttemptResult),
+    -- | Output only. URI where logs for this execution can be found in Cloud Console.
+    logUri :: (Core.Maybe Core.Text),
+    -- | Number of retries allowed per Task, before marking this Task failed.
+    maxRetries :: (Core.Maybe Core.Int32),
+    -- | Output only. The unique name of this Task.
+    name :: (Core.Maybe Core.Text),
+    -- | Output only. The generation of this Task. See comments in @Job.reconciling@ for additional information on reconciliation process in Cloud Run.
+    observedGeneration :: (Core.Maybe Core.Int64),
+    -- | Output only. Indicates whether the resource\'s reconciliation is still in progress. See comments in @Job.reconciling@ for additional information on reconciliation process in Cloud Run.
+    reconciling :: (Core.Maybe Core.Bool),
+    -- | Output only. The number of times this Task was retried. Tasks are retried when they fail up to the maxRetries limit.
+    retried :: (Core.Maybe Core.Int32),
+    -- | Output only. Reserved for future use.
+    satisfiesPzs :: (Core.Maybe Core.Bool),
+    -- | Email address of the IAM service account associated with the Task of a Job. The service account represents the identity of the running task, and determines what permissions the task has. If not provided, the task will use the project\'s default service account.
+    serviceAccount :: (Core.Maybe Core.Text),
+    -- | Output only. Represents time when the task started to run. It is not guaranteed to be set in happens-before order across separate operations.
+    startTime :: (Core.Maybe Core.DateTime),
+    -- | Max allowed time duration the Task may be active before the system will actively try to mark it failed and kill associated containers. This applies per attempt of a task, meaning each retry can run for the full timeout.
+    timeout :: (Core.Maybe Core.Duration),
+    -- | Output only. Server assigned unique identifier for the Task. The value is a UUID4 string and guaranteed to remain unchanged until the resource is deleted.
+    uid :: (Core.Maybe Core.Text),
+    -- | Output only. The last-modified time.
+    updateTime :: (Core.Maybe Core.DateTime),
+    -- | A list of Volumes to make available to containers.
+    volumes :: (Core.Maybe [GoogleCloudRunV2Volume]),
+    -- | Output only. VPC Access configuration to use for this Task. For more information, visit https:\/\/cloud.google.com\/run\/docs\/configuring\/connecting-vpc.
+    vpcAccess :: (Core.Maybe GoogleCloudRunV2VpcAccess)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2Task' with the minimum fields required to make a request.
+newGoogleCloudRunV2Task ::
+  GoogleCloudRunV2Task
+newGoogleCloudRunV2Task =
+  GoogleCloudRunV2Task
+    { annotations = Core.Nothing,
+      completionTime = Core.Nothing,
+      conditions = Core.Nothing,
+      containers = Core.Nothing,
+      createTime = Core.Nothing,
+      deleteTime = Core.Nothing,
+      encryptionKey = Core.Nothing,
+      etag = Core.Nothing,
+      execution = Core.Nothing,
+      executionEnvironment = Core.Nothing,
+      expireTime = Core.Nothing,
+      generation = Core.Nothing,
+      index = Core.Nothing,
+      job = Core.Nothing,
+      labels = Core.Nothing,
+      lastAttemptResult = Core.Nothing,
+      logUri = Core.Nothing,
+      maxRetries = Core.Nothing,
+      name = Core.Nothing,
+      observedGeneration = Core.Nothing,
+      reconciling = Core.Nothing,
+      retried = Core.Nothing,
+      satisfiesPzs = Core.Nothing,
+      serviceAccount = Core.Nothing,
+      startTime = Core.Nothing,
+      timeout = Core.Nothing,
+      uid = Core.Nothing,
+      updateTime = Core.Nothing,
+      volumes = Core.Nothing,
+      vpcAccess = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleCloudRunV2Task where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2Task"
+      ( \o ->
+          GoogleCloudRunV2Task
+            Core.<$> (o Core..:? "annotations")
+            Core.<*> (o Core..:? "completionTime")
+            Core.<*> (o Core..:? "conditions")
+            Core.<*> (o Core..:? "containers")
+            Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "deleteTime")
+            Core.<*> (o Core..:? "encryptionKey")
+            Core.<*> (o Core..:? "etag")
+            Core.<*> (o Core..:? "execution")
+            Core.<*> (o Core..:? "executionEnvironment")
+            Core.<*> (o Core..:? "expireTime")
+            Core.<*> ( o Core..:? "generation"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "index")
+            Core.<*> (o Core..:? "job")
+            Core.<*> (o Core..:? "labels")
+            Core.<*> (o Core..:? "lastAttemptResult")
+            Core.<*> (o Core..:? "logUri")
+            Core.<*> (o Core..:? "maxRetries")
+            Core.<*> (o Core..:? "name")
+            Core.<*> ( o Core..:? "observedGeneration"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "reconciling")
+            Core.<*> (o Core..:? "retried")
+            Core.<*> (o Core..:? "satisfiesPzs")
+            Core.<*> (o Core..:? "serviceAccount")
+            Core.<*> (o Core..:? "startTime")
+            Core.<*> (o Core..:? "timeout")
+            Core.<*> (o Core..:? "uid")
+            Core.<*> (o Core..:? "updateTime")
+            Core.<*> (o Core..:? "volumes")
+            Core.<*> (o Core..:? "vpcAccess")
+      )
+
+instance Core.ToJSON GoogleCloudRunV2Task where
+  toJSON GoogleCloudRunV2Task {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("annotations" Core..=) Core.<$> annotations,
+            ("completionTime" Core..=) Core.<$> completionTime,
+            ("conditions" Core..=) Core.<$> conditions,
+            ("containers" Core..=) Core.<$> containers,
+            ("createTime" Core..=) Core.<$> createTime,
+            ("deleteTime" Core..=) Core.<$> deleteTime,
+            ("encryptionKey" Core..=) Core.<$> encryptionKey,
+            ("etag" Core..=) Core.<$> etag,
+            ("execution" Core..=) Core.<$> execution,
+            ("executionEnvironment" Core..=)
+              Core.<$> executionEnvironment,
+            ("expireTime" Core..=) Core.<$> expireTime,
+            ("generation" Core..=) Core.. Core.AsText
+              Core.<$> generation,
+            ("index" Core..=) Core.<$> index,
+            ("job" Core..=) Core.<$> job,
+            ("labels" Core..=) Core.<$> labels,
+            ("lastAttemptResult" Core..=)
+              Core.<$> lastAttemptResult,
+            ("logUri" Core..=) Core.<$> logUri,
+            ("maxRetries" Core..=) Core.<$> maxRetries,
+            ("name" Core..=) Core.<$> name,
+            ("observedGeneration" Core..=) Core.. Core.AsText
+              Core.<$> observedGeneration,
+            ("reconciling" Core..=) Core.<$> reconciling,
+            ("retried" Core..=) Core.<$> retried,
+            ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
+            ("serviceAccount" Core..=) Core.<$> serviceAccount,
+            ("startTime" Core..=) Core.<$> startTime,
+            ("timeout" Core..=) Core.<$> timeout,
+            ("uid" Core..=) Core.<$> uid,
+            ("updateTime" Core..=) Core.<$> updateTime,
+            ("volumes" Core..=) Core.<$> volumes,
+            ("vpcAccess" Core..=) Core.<$> vpcAccess
+          ]
+      )
+
+-- | KRM-style annotations for the resource.
+--
+-- /See:/ 'newGoogleCloudRunV2Task_Annotations' smart constructor.
+newtype GoogleCloudRunV2Task_Annotations = GoogleCloudRunV2Task_Annotations
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2Task_Annotations' with the minimum fields required to make a request.
+newGoogleCloudRunV2Task_Annotations ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GoogleCloudRunV2Task_Annotations
+newGoogleCloudRunV2Task_Annotations additional =
+  GoogleCloudRunV2Task_Annotations {additional = additional}
+
+instance
+  Core.FromJSON
+    GoogleCloudRunV2Task_Annotations
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2Task_Annotations"
+      ( \o ->
+          GoogleCloudRunV2Task_Annotations
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON GoogleCloudRunV2Task_Annotations where
+  toJSON GoogleCloudRunV2Task_Annotations {..} =
+    Core.toJSON additional
+
+-- | KRM-style labels for the resource. User-provided labels are shared with Google\'s billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https:\/\/cloud.google.com\/resource-manager\/docs\/creating-managing-labels or https:\/\/cloud.google.com\/run\/docs\/configuring\/labels
+--
+-- /See:/ 'newGoogleCloudRunV2Task_Labels' smart constructor.
+newtype GoogleCloudRunV2Task_Labels = GoogleCloudRunV2Task_Labels
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2Task_Labels' with the minimum fields required to make a request.
+newGoogleCloudRunV2Task_Labels ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GoogleCloudRunV2Task_Labels
+newGoogleCloudRunV2Task_Labels additional =
+  GoogleCloudRunV2Task_Labels {additional = additional}
+
+instance Core.FromJSON GoogleCloudRunV2Task_Labels where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2Task_Labels"
+      ( \o ->
+          GoogleCloudRunV2Task_Labels
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON GoogleCloudRunV2Task_Labels where
+  toJSON GoogleCloudRunV2Task_Labels {..} =
+    Core.toJSON additional
+
+-- | Result of a task attempt.
+--
+-- /See:/ 'newGoogleCloudRunV2TaskAttemptResult' smart constructor.
+data GoogleCloudRunV2TaskAttemptResult = GoogleCloudRunV2TaskAttemptResult
+  { -- | Output only. The exit code of this attempt. This may be unset if the container was unable to exit cleanly with a code due to some other failure. See status field for possible failure details.
+    exitCode :: (Core.Maybe Core.Int32),
+    -- | Output only. The status of this attempt. If the status code is OK, then the attempt succeeded.
+    status :: (Core.Maybe GoogleRpcStatus)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2TaskAttemptResult' with the minimum fields required to make a request.
+newGoogleCloudRunV2TaskAttemptResult ::
+  GoogleCloudRunV2TaskAttemptResult
+newGoogleCloudRunV2TaskAttemptResult =
+  GoogleCloudRunV2TaskAttemptResult
+    { exitCode = Core.Nothing,
+      status = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudRunV2TaskAttemptResult
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2TaskAttemptResult"
+      ( \o ->
+          GoogleCloudRunV2TaskAttemptResult
+            Core.<$> (o Core..:? "exitCode")
+            Core.<*> (o Core..:? "status")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudRunV2TaskAttemptResult
+  where
+  toJSON GoogleCloudRunV2TaskAttemptResult {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("exitCode" Core..=) Core.<$> exitCode,
+            ("status" Core..=) Core.<$> status
+          ]
+      )
+
+-- | TaskTemplate describes the data a task should have when created from a template.
+--
+-- /See:/ 'newGoogleCloudRunV2TaskTemplate' smart constructor.
+data GoogleCloudRunV2TaskTemplate = GoogleCloudRunV2TaskTemplate
+  { -- | Holds the single container that defines the unit of execution for this task.
+    containers :: (Core.Maybe [GoogleCloudRunV2Container]),
+    -- | A reference to a customer managed encryption key (CMEK) to use to encrypt this container image. For more information, go to https:\/\/cloud.google.com\/run\/docs\/securing\/using-cmek
+    encryptionKey :: (Core.Maybe Core.Text),
+    -- | The execution environment being used to host this Task.
+    executionEnvironment :: (Core.Maybe GoogleCloudRunV2TaskTemplate_ExecutionEnvironment),
+    -- | Number of retries allowed per Task, before marking this Task failed. Defaults to 3.
+    maxRetries :: (Core.Maybe Core.Int32),
+    -- | Email address of the IAM service account associated with the Task of a Job. The service account represents the identity of the running task, and determines what permissions the task has. If not provided, the task will use the project\'s default service account.
+    serviceAccount :: (Core.Maybe Core.Text),
+    -- | Max allowed time duration the Task may be active before the system will actively try to mark it failed and kill associated containers. This applies per attempt of a task, meaning each retry can run for the full timeout. Defaults to 600 seconds.
+    timeout :: (Core.Maybe Core.Duration),
+    -- | A list of Volumes to make available to containers.
+    volumes :: (Core.Maybe [GoogleCloudRunV2Volume]),
+    -- | VPC Access configuration to use for this Task. For more information, visit https:\/\/cloud.google.com\/run\/docs\/configuring\/connecting-vpc.
+    vpcAccess :: (Core.Maybe GoogleCloudRunV2VpcAccess)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2TaskTemplate' with the minimum fields required to make a request.
+newGoogleCloudRunV2TaskTemplate ::
+  GoogleCloudRunV2TaskTemplate
+newGoogleCloudRunV2TaskTemplate =
+  GoogleCloudRunV2TaskTemplate
+    { containers = Core.Nothing,
+      encryptionKey = Core.Nothing,
+      executionEnvironment = Core.Nothing,
+      maxRetries = Core.Nothing,
+      serviceAccount = Core.Nothing,
+      timeout = Core.Nothing,
+      volumes = Core.Nothing,
+      vpcAccess = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleCloudRunV2TaskTemplate where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2TaskTemplate"
+      ( \o ->
+          GoogleCloudRunV2TaskTemplate
+            Core.<$> (o Core..:? "containers")
+            Core.<*> (o Core..:? "encryptionKey")
+            Core.<*> (o Core..:? "executionEnvironment")
+            Core.<*> (o Core..:? "maxRetries")
+            Core.<*> (o Core..:? "serviceAccount")
+            Core.<*> (o Core..:? "timeout")
+            Core.<*> (o Core..:? "volumes")
+            Core.<*> (o Core..:? "vpcAccess")
+      )
+
+instance Core.ToJSON GoogleCloudRunV2TaskTemplate where
+  toJSON GoogleCloudRunV2TaskTemplate {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("containers" Core..=) Core.<$> containers,
+            ("encryptionKey" Core..=) Core.<$> encryptionKey,
+            ("executionEnvironment" Core..=)
+              Core.<$> executionEnvironment,
+            ("maxRetries" Core..=) Core.<$> maxRetries,
+            ("serviceAccount" Core..=) Core.<$> serviceAccount,
+            ("timeout" Core..=) Core.<$> timeout,
+            ("volumes" Core..=) Core.<$> volumes,
+            ("vpcAccess" Core..=) Core.<$> vpcAccess
+          ]
+      )
 
 -- | Holds a single traffic routing entry for the Service. Allocations can be done to a specific Revision name, or pointing to the latest Ready Revision.
 --
@@ -1633,7 +3142,7 @@ data GoogleCloudRunV2VersionToPath = GoogleCloudRunV2VersionToPath
     mode :: (Core.Maybe Core.Int32),
     -- | Required. The relative path of the secret in the container.
     path :: (Core.Maybe Core.Text),
-    -- | The Cloud Secret Manager secret version. Can be \'latest\' for the latest value or an integer for a specific version.
+    -- | The Cloud Secret Manager secret version. Can be \'latest\' for the latest value, or an integer or a secret alias for a specific version.
     version :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1754,7 +3263,7 @@ instance Core.ToJSON GoogleCloudRunV2VolumeMount where
 --
 -- /See:/ 'newGoogleCloudRunV2VpcAccess' smart constructor.
 data GoogleCloudRunV2VpcAccess = GoogleCloudRunV2VpcAccess
-  { -- | VPC Access connector name. Format: projects\/{project}\/locations\/{location}\/connectors\/{connector}
+  { -- | VPC Access connector name. Format: projects\/{project}\/locations\/{location}\/connectors\/{connector}, where {project} can be project id or number.
     connector :: (Core.Maybe Core.Text),
     -- | Traffic VPC egress settings.
     egress :: (Core.Maybe GoogleCloudRunV2VpcAccess_Egress)
@@ -1787,7 +3296,7 @@ instance Core.ToJSON GoogleCloudRunV2VpcAccess where
       )
 
 -- | Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs. If there are AuditConfigs for both @allServices@ and a specific service, the union of the two AuditConfigs is used for that service: the log/types specified in each AuditConfig are enabled, and the exempted/members in each AuditLogConfig are exempted. Example Policy with multiple AuditConfigs: { \"audit/configs\": [ { \"service\": \"allServices\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\", \"exempted/members\": [ \"user:jose\@example.com\" ] }, { \"log/type\": \"DATA/WRITE\" }, { \"log/type\": \"ADMIN/READ\" } ] }, { \"service\": \"sampleservice.googleapis.com\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\" }, { \"log/type\": \"DATA/WRITE\", \"exempted/members\": [ \"user:aliya\@example.com\" ] } ] } ] } For sampleservice, this policy enables DATA/READ, DATA/WRITE and
--- ADMIN/READ logging. It also exempts jose\@example.com from DATA/READ logging, and aliya\@example.com from DATA/WRITE logging.
+-- ADMIN/READ logging. It also exempts @jose\@example.com@ from DATA/READ logging, and @aliya\@example.com@ from DATA/WRITE logging.
 --
 -- /See:/ 'newGoogleIamV1AuditConfig' smart constructor.
 data GoogleIamV1AuditConfig = GoogleIamV1AuditConfig
@@ -1873,8 +3382,9 @@ instance Core.ToJSON GoogleIamV1AuditLogConfig where
 data GoogleIamV1Binding = GoogleIamV1Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe GoogleTypeExpr),
-    -- | Specifies the principals requesting access for a Cloud Platform resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains
-    -- the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@.
+    -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
+    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
     members :: (Core.Maybe [Core.Text]),
     -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
     role' :: (Core.Maybe Core.Text)
@@ -1968,7 +3478,7 @@ instance Core.ToJSON GoogleIamV1Policy where
 --
 -- /See:/ 'newGoogleIamV1SetIamPolicyRequest' smart constructor.
 data GoogleIamV1SetIamPolicyRequest = GoogleIamV1SetIamPolicyRequest
-  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
+  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Google Cloud services (such as Projects) might reject them.
     policy :: (Core.Maybe GoogleIamV1Policy),
     -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: @paths: \"bindings, etag\"@
     updateMask :: (Core.Maybe Core.FieldMask)
@@ -2007,7 +3517,7 @@ instance Core.ToJSON GoogleIamV1SetIamPolicyRequest where
 --
 -- /See:/ 'newGoogleIamV1TestIamPermissionsRequest' smart constructor.
 newtype GoogleIamV1TestIamPermissionsRequest = GoogleIamV1TestIamPermissionsRequest
-  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as \'/\' or \'storage./\') are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
+  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as @*@ or @storage.*@) are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
     permissions :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2248,7 +3758,44 @@ instance
   toJSON GoogleLongrunningOperation_Response {..} =
     Core.toJSON additional
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | The request message for Operations.WaitOperation.
+--
+-- /See:/ 'newGoogleLongrunningWaitOperationRequest' smart constructor.
+newtype GoogleLongrunningWaitOperationRequest = GoogleLongrunningWaitOperationRequest
+  { -- | The maximum duration to wait before timing out. If left blank, the wait will be at most the time permitted by the underlying HTTP\/RPC protocol. If RPC context deadline is also specified, the shorter one will be used.
+    timeout :: (Core.Maybe Core.Duration)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleLongrunningWaitOperationRequest' with the minimum fields required to make a request.
+newGoogleLongrunningWaitOperationRequest ::
+  GoogleLongrunningWaitOperationRequest
+newGoogleLongrunningWaitOperationRequest =
+  GoogleLongrunningWaitOperationRequest {timeout = Core.Nothing}
+
+instance
+  Core.FromJSON
+    GoogleLongrunningWaitOperationRequest
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleLongrunningWaitOperationRequest"
+      ( \o ->
+          GoogleLongrunningWaitOperationRequest
+            Core.<$> (o Core..:? "timeout")
+      )
+
+instance
+  Core.ToJSON
+    GoogleLongrunningWaitOperationRequest
+  where
+  toJSON GoogleLongrunningWaitOperationRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [("timeout" Core..=) Core.<$> timeout]
+      )
+
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newGoogleProtobufEmpty' smart constructor.
 data GoogleProtobufEmpty = GoogleProtobufEmpty

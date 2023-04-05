@@ -68,7 +68,7 @@ data CloudSearchIndexingDatasourcesItemsUnreserve = CloudSearchIndexingDatasourc
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Name of the Data Source to unreserve all items. Format: datasources\/{source_id}
+    -- | The name of the Data Source to unreserve all items. Format: datasources\/{source_id}
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: UnreserveItemsRequest,
@@ -81,7 +81,7 @@ data CloudSearchIndexingDatasourcesItemsUnreserve = CloudSearchIndexingDatasourc
 
 -- | Creates a value of 'CloudSearchIndexingDatasourcesItemsUnreserve' with the minimum fields required to make a request.
 newCloudSearchIndexingDatasourcesItemsUnreserve ::
-  -- |  Name of the Data Source to unreserve all items. Format: datasources\/{source_id} See 'name'.
+  -- |  The name of the Data Source to unreserve all items. Format: datasources\/{source_id} See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   UnreserveItemsRequest ->

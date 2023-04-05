@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the latest image that is part of an image family and is not deprecated.
+-- Returns the latest image that is part of an image family and is not deprecated. For more information on image families, see Public image families documentation.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.images.getFromFamily@.
 module Gogol.Compute.Images.GetFromFamily
@@ -61,7 +61,7 @@ type ComputeImagesGetFromFamilyResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Image
 
--- | Returns the latest image that is part of an image family and is not deprecated.
+-- | Returns the latest image that is part of an image family and is not deprecated. For more information on image families, see Public image families documentation.
 --
 -- /See:/ 'newComputeImagesGetFromFamily' smart constructor.
 data ComputeImagesGetFromFamily = ComputeImagesGetFromFamily
@@ -73,7 +73,7 @@ data ComputeImagesGetFromFamily = ComputeImagesGetFromFamily
     callback :: (Core.Maybe Core.Text),
     -- | Name of the image family to search for.
     family :: Core.Text,
-    -- | Project ID for this request.
+    -- | The image project that the image belongs to. For example, to get a CentOS image, specify centos-cloud as the image project.
     project :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -86,7 +86,7 @@ data ComputeImagesGetFromFamily = ComputeImagesGetFromFamily
 newComputeImagesGetFromFamily ::
   -- |  Name of the image family to search for. See 'family'.
   Core.Text ->
-  -- |  Project ID for this request. See 'project'.
+  -- |  The image project that the image belongs to. For example, to get a CentOS image, specify centos-cloud as the image project. See 'project'.
   Core.Text ->
   ComputeImagesGetFromFamily
 newComputeImagesGetFromFamily family project =

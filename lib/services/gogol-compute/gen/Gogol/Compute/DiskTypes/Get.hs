@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified disk type. Gets a list of available disk types by making a list() request.
+-- Returns the specified disk type.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.diskTypes.get@.
 module Gogol.Compute.DiskTypes.Get
@@ -61,7 +61,7 @@ type ComputeDiskTypesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] DiskType
 
--- | Returns the specified disk type. Gets a list of available disk types by making a list() request.
+-- | Returns the specified disk type.
 --
 -- /See:/ 'newComputeDiskTypesGet' smart constructor.
 data ComputeDiskTypesGet = ComputeDiskTypesGet

@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a TagValue as a child of the specified TagKey. If a another request with the same parameters is sent while the original request is in process the second request will receive an error. A maximum of 300 TagValues can exist under a TagKey at any given time.
+-- Creates a TagValue as a child of the specified TagKey. If a another request with the same parameters is sent while the original request is in process the second request will receive an error. A maximum of 1000 TagValues can exist under a TagKey at any given time.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Cloud Resource Manager API Reference> for @cloudresourcemanager.tagValues.create@.
 module Gogol.ResourceManager.Cloudresourcemanager.TagValues.Create
@@ -57,7 +57,7 @@ type CloudresourcemanagerTagValuesCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] TagValue
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Creates a TagValue as a child of the specified TagKey. If a another request with the same parameters is sent while the original request is in process the second request will receive an error. A maximum of 300 TagValues can exist under a TagKey at any given time.
+-- | Creates a TagValue as a child of the specified TagKey. If a another request with the same parameters is sent while the original request is in process the second request will receive an error. A maximum of 1000 TagValues can exist under a TagKey at any given time.
 --
 -- /See:/ 'newCloudresourcemanagerTagValuesCreate' smart constructor.
 data CloudresourcemanagerTagValuesCreate = CloudresourcemanagerTagValuesCreate

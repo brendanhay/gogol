@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Imports the test cases from a Cloud Storage bucket or a local file. It always creates new test cases and won\'t overwite any existing ones. The provided ID in the imported test case is neglected. This method is a <https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation long-running operation>. The returned @Operation@ type has the following method-specific fields: - @metadata@: ImportTestCasesMetadata - @response@: ImportTestCasesResponse
+-- Imports the test cases from a Cloud Storage bucket or a local file. It always creates new test cases and won\'t overwrite any existing ones. The provided ID in the imported test case is neglected. This method is a <https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation long-running operation>. The returned @Operation@ type has the following method-specific fields: - @metadata@: ImportTestCasesMetadata - @response@: ImportTestCasesResponse
 --
 -- /See:/ <https://cloud.google.com/dialogflow/ Dialogflow API Reference> for @dialogflow.projects.locations.agents.testCases.import@.
 module Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Import
@@ -59,7 +59,7 @@ type DialogFlowProjectsLocationsAgentsTestCasesImportResource =
               GoogleCloudDialogflowCxV3ImportTestCasesRequest
     Core.:> Core.Post '[Core.JSON] GoogleLongrunningOperation
 
--- | Imports the test cases from a Cloud Storage bucket or a local file. It always creates new test cases and won\'t overwite any existing ones. The provided ID in the imported test case is neglected. This method is a <https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation long-running operation>. The returned @Operation@ type has the following method-specific fields: - @metadata@: ImportTestCasesMetadata - @response@: ImportTestCasesResponse
+-- | Imports the test cases from a Cloud Storage bucket or a local file. It always creates new test cases and won\'t overwrite any existing ones. The provided ID in the imported test case is neglected. This method is a <https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation long-running operation>. The returned @Operation@ type has the following method-specific fields: - @metadata@: ImportTestCasesMetadata - @response@: ImportTestCasesResponse
 --
 -- /See:/ 'newDialogFlowProjectsLocationsAgentsTestCasesImport' smart constructor.
 data DialogFlowProjectsLocationsAgentsTestCasesImport = DialogFlowProjectsLocationsAgentsTestCasesImport

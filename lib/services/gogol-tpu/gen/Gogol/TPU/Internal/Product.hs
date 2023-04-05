@@ -26,7 +26,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.TPU.Internal.Product
-  ( -- * AcceleratorType
+  ( -- * AcceleratorConfig
+    AcceleratorConfig (..),
+    newAcceleratorConfig,
+
+    -- * AcceleratorType
     AcceleratorType (..),
     newAcceleratorType,
 
@@ -154,6 +158,10 @@ module Gogol.TPU.Internal.Product
     ServiceIdentity (..),
     newServiceIdentity,
 
+    -- * ShieldedInstanceConfig
+    ShieldedInstanceConfig (..),
+    newShieldedInstanceConfig,
+
     -- * StartNodeRequest
     StartNodeRequest (..),
     newStartNodeRequest,
@@ -179,11 +187,48 @@ where
 import qualified Gogol.Prelude as Core
 import Gogol.TPU.Internal.Sum
 
+-- | A TPU accelerator configuration.
+--
+-- /See:/ 'newAcceleratorConfig' smart constructor.
+data AcceleratorConfig = AcceleratorConfig
+  { -- | Required. Topology of TPU in chips.
+    topology :: (Core.Maybe Core.Text),
+    -- | Required. Type of TPU.
+    type' :: (Core.Maybe AcceleratorConfig_Type)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AcceleratorConfig' with the minimum fields required to make a request.
+newAcceleratorConfig ::
+  AcceleratorConfig
+newAcceleratorConfig =
+  AcceleratorConfig {topology = Core.Nothing, type' = Core.Nothing}
+
+instance Core.FromJSON AcceleratorConfig where
+  parseJSON =
+    Core.withObject
+      "AcceleratorConfig"
+      ( \o ->
+          AcceleratorConfig
+            Core.<$> (o Core..:? "topology") Core.<*> (o Core..:? "type")
+      )
+
+instance Core.ToJSON AcceleratorConfig where
+  toJSON AcceleratorConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("topology" Core..=) Core.<$> topology,
+            ("type" Core..=) Core.<$> type'
+          ]
+      )
+
 -- | A accelerator type that a Node can be configured with.
 --
 -- /See:/ 'newAcceleratorType' smart constructor.
 data AcceleratorType = AcceleratorType
-  { -- | The resource name.
+  { -- | The accelerator config.
+    acceleratorConfigs :: (Core.Maybe [AcceleratorConfig]),
+    -- | The resource name.
     name :: (Core.Maybe Core.Text),
     -- | the accelerator type.
     type' :: (Core.Maybe Core.Text)
@@ -193,7 +238,12 @@ data AcceleratorType = AcceleratorType
 -- | Creates a value of 'AcceleratorType' with the minimum fields required to make a request.
 newAcceleratorType ::
   AcceleratorType
-newAcceleratorType = AcceleratorType {name = Core.Nothing, type' = Core.Nothing}
+newAcceleratorType =
+  AcceleratorType
+    { acceleratorConfigs = Core.Nothing,
+      name = Core.Nothing,
+      type' = Core.Nothing
+    }
 
 instance Core.FromJSON AcceleratorType where
   parseJSON =
@@ -201,14 +251,18 @@ instance Core.FromJSON AcceleratorType where
       "AcceleratorType"
       ( \o ->
           AcceleratorType
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "acceleratorConfigs")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON AcceleratorType where
   toJSON AcceleratorType {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
+          [ ("acceleratorConfigs" Core..=)
+              Core.<$> acceleratorConfigs,
+            ("name" Core..=) Core.<$> name,
             ("type" Core..=) Core.<$> type'
           ]
       )
@@ -277,7 +331,7 @@ instance Core.ToJSON AttachedDisk where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -939,7 +993,9 @@ instance Core.ToJSON NetworkEndpoint where
 --
 -- /See:/ 'newNode' smart constructor.
 data Node = Node
-  { -- | Required. The type of hardware accelerators associated with this node.
+  { -- | The AccleratorConfig for the TPU Node.
+    acceleratorConfig :: (Core.Maybe AcceleratorConfig),
+    -- | Required. The type of hardware accelerators associated with this node.
     acceleratorType :: (Core.Maybe Core.Text),
     -- | Output only. The API version that created this Node.
     apiVersion :: (Core.Maybe Node_ApiVersion),
@@ -973,6 +1029,8 @@ data Node = Node
     schedulingConfig :: (Core.Maybe SchedulingConfig),
     -- | The Google Cloud Platform Service Account to be used by the TPU node VMs. If None is specified, the default compute service account will be used.
     serviceAccount :: (Core.Maybe ServiceAccount),
+    -- | Shielded Instance options.
+    shieldedInstanceConfig :: (Core.Maybe ShieldedInstanceConfig),
     -- | Output only. The current state for the TPU Node.
     state :: (Core.Maybe Node_State),
     -- | Output only. The Symptoms that have occurred to the TPU Node.
@@ -987,7 +1045,8 @@ newNode ::
   Node
 newNode =
   Node
-    { acceleratorType = Core.Nothing,
+    { acceleratorConfig = Core.Nothing,
+      acceleratorType = Core.Nothing,
       apiVersion = Core.Nothing,
       cidrBlock = Core.Nothing,
       createTime = Core.Nothing,
@@ -1004,6 +1063,7 @@ newNode =
       runtimeVersion = Core.Nothing,
       schedulingConfig = Core.Nothing,
       serviceAccount = Core.Nothing,
+      shieldedInstanceConfig = Core.Nothing,
       state = Core.Nothing,
       symptoms = Core.Nothing,
       tags = Core.Nothing
@@ -1015,7 +1075,8 @@ instance Core.FromJSON Node where
       "Node"
       ( \o ->
           Node
-            Core.<$> (o Core..:? "acceleratorType")
+            Core.<$> (o Core..:? "acceleratorConfig")
+            Core.<*> (o Core..:? "acceleratorType")
             Core.<*> (o Core..:? "apiVersion")
             Core.<*> (o Core..:? "cidrBlock")
             Core.<*> (o Core..:? "createTime")
@@ -1032,6 +1093,7 @@ instance Core.FromJSON Node where
             Core.<*> (o Core..:? "runtimeVersion")
             Core.<*> (o Core..:? "schedulingConfig")
             Core.<*> (o Core..:? "serviceAccount")
+            Core.<*> (o Core..:? "shieldedInstanceConfig")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "symptoms")
             Core.<*> (o Core..:? "tags")
@@ -1041,8 +1103,9 @@ instance Core.ToJSON Node where
   toJSON Node {..} =
     Core.object
       ( Core.catMaybes
-          [ ("acceleratorType" Core..=)
-              Core.<$> acceleratorType,
+          [ ("acceleratorConfig" Core..=)
+              Core.<$> acceleratorConfig,
+            ("acceleratorType" Core..=) Core.<$> acceleratorType,
             ("apiVersion" Core..=) Core.<$> apiVersion,
             ("cidrBlock" Core..=) Core.<$> cidrBlock,
             ("createTime" Core..=) Core.<$> createTime,
@@ -1062,6 +1125,8 @@ instance Core.ToJSON Node where
             ("schedulingConfig" Core..=)
               Core.<$> schedulingConfig,
             ("serviceAccount" Core..=) Core.<$> serviceAccount,
+            ("shieldedInstanceConfig" Core..=)
+              Core.<$> shieldedInstanceConfig,
             ("state" Core..=) Core.<$> state,
             ("symptoms" Core..=) Core.<$> symptoms,
             ("tags" Core..=) Core.<$> tags
@@ -1426,6 +1491,39 @@ instance Core.ToJSON ServiceIdentity where
   toJSON ServiceIdentity {..} =
     Core.object
       (Core.catMaybes [("email" Core..=) Core.<$> email])
+
+-- | A set of Shielded Instance options.
+--
+-- /See:/ 'newShieldedInstanceConfig' smart constructor.
+newtype ShieldedInstanceConfig = ShieldedInstanceConfig
+  { -- | Defines whether the instance has Secure Boot enabled.
+    enableSecureBoot :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ShieldedInstanceConfig' with the minimum fields required to make a request.
+newShieldedInstanceConfig ::
+  ShieldedInstanceConfig
+newShieldedInstanceConfig =
+  ShieldedInstanceConfig {enableSecureBoot = Core.Nothing}
+
+instance Core.FromJSON ShieldedInstanceConfig where
+  parseJSON =
+    Core.withObject
+      "ShieldedInstanceConfig"
+      ( \o ->
+          ShieldedInstanceConfig
+            Core.<$> (o Core..:? "enableSecureBoot")
+      )
+
+instance Core.ToJSON ShieldedInstanceConfig where
+  toJSON ShieldedInstanceConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("enableSecureBoot" Core..=)
+              Core.<$> enableSecureBoot
+          ]
+      )
 
 -- | Request for StartNode.
 --

@@ -42,6 +42,29 @@ module Gogol.AccessContextManager.Internal.Sum
         ..
       ),
 
+    -- * AuthorizedOrgsDesc_AssetType
+    AuthorizedOrgsDesc_AssetType
+      ( AuthorizedOrgsDesc_AssetType_ASSETTYPEUNSPECIFIED,
+        AuthorizedOrgsDesc_AssetType_ASSETTYPEDEVICE,
+        AuthorizedOrgsDesc_AssetType_ASSETTYPECREDENTIALSTRENGTH,
+        ..
+      ),
+
+    -- * AuthorizedOrgsDesc_AuthorizationDirection
+    AuthorizedOrgsDesc_AuthorizationDirection
+      ( AuthorizedOrgsDesc_AuthorizationDirection_AUTHORIZATIONDIRECTIONUNSPECIFIED,
+        AuthorizedOrgsDesc_AuthorizationDirection_AUTHORIZATIONDIRECTIONTO,
+        AuthorizedOrgsDesc_AuthorizationDirection_AUTHORIZATIONDIRECTIONFROM,
+        ..
+      ),
+
+    -- * AuthorizedOrgsDesc_AuthorizationType
+    AuthorizedOrgsDesc_AuthorizationType
+      ( AuthorizedOrgsDesc_AuthorizationType_AUTHORIZATIONTYPEUNSPECIFIED,
+        AuthorizedOrgsDesc_AuthorizationType_AUTHORIZATIONTYPETRUST,
+        ..
+      ),
+
     -- * BasicLevel_CombiningFunction
     BasicLevel_CombiningFunction
       ( BasicLevel_CombiningFunction_And,
@@ -186,6 +209,97 @@ pattern AuditLogConfig_LogType_DATAREAD = AuditLogConfig_LogType "DATA_READ"
   AuditLogConfig_LogType_DATAWRITE,
   AuditLogConfig_LogType_DATAREAD,
   AuditLogConfig_LogType
+  #-}
+
+-- | The asset type of this authorized orgs desc. Valid values are @ASSET_TYPE_DEVICE@, and @ASSET_TYPE_CREDENTIAL_STRENGTH@.
+newtype AuthorizedOrgsDesc_AssetType = AuthorizedOrgsDesc_AssetType {fromAuthorizedOrgsDesc_AssetType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | No asset type specified.
+pattern AuthorizedOrgsDesc_AssetType_ASSETTYPEUNSPECIFIED :: AuthorizedOrgsDesc_AssetType
+pattern AuthorizedOrgsDesc_AssetType_ASSETTYPEUNSPECIFIED = AuthorizedOrgsDesc_AssetType "ASSET_TYPE_UNSPECIFIED"
+
+-- | Device asset type.
+pattern AuthorizedOrgsDesc_AssetType_ASSETTYPEDEVICE :: AuthorizedOrgsDesc_AssetType
+pattern AuthorizedOrgsDesc_AssetType_ASSETTYPEDEVICE = AuthorizedOrgsDesc_AssetType "ASSET_TYPE_DEVICE"
+
+-- | Credential strength asset type.
+pattern AuthorizedOrgsDesc_AssetType_ASSETTYPECREDENTIALSTRENGTH :: AuthorizedOrgsDesc_AssetType
+pattern AuthorizedOrgsDesc_AssetType_ASSETTYPECREDENTIALSTRENGTH = AuthorizedOrgsDesc_AssetType "ASSET_TYPE_CREDENTIAL_STRENGTH"
+
+{-# COMPLETE
+  AuthorizedOrgsDesc_AssetType_ASSETTYPEUNSPECIFIED,
+  AuthorizedOrgsDesc_AssetType_ASSETTYPEDEVICE,
+  AuthorizedOrgsDesc_AssetType_ASSETTYPECREDENTIALSTRENGTH,
+  AuthorizedOrgsDesc_AssetType
+  #-}
+
+-- | The direction of the authorization relationship between this organization and the organizations listed in the @orgs@ field. The valid values for this field include the following: @AUTHORIZATION_DIRECTION_FROM@: Allows this organization to evaluate traffic in the organizations listed in the @orgs@ field. @AUTHORIZATION_DIRECTION_TO@: Allows the organizations listed in the @orgs@ field to evaluate the traffic in this organization. For the authorization relationship to take effect, all of the organizations must authorize and specify the appropriate relationship direction. For example, if organization A authorized organization B and C to evaluate its traffic, by specifying @AUTHORIZATION_DIRECTION_TO@ as the authorization direction, organizations B and C must specify @AUTHORIZATION_DIRECTION_FROM@ as the authorization direction in their @AuthorizedOrgsDesc@ resource.
+newtype AuthorizedOrgsDesc_AuthorizationDirection = AuthorizedOrgsDesc_AuthorizationDirection {fromAuthorizedOrgsDesc_AuthorizationDirection :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | No direction specified.
+pattern AuthorizedOrgsDesc_AuthorizationDirection_AUTHORIZATIONDIRECTIONUNSPECIFIED :: AuthorizedOrgsDesc_AuthorizationDirection
+pattern AuthorizedOrgsDesc_AuthorizationDirection_AUTHORIZATIONDIRECTIONUNSPECIFIED = AuthorizedOrgsDesc_AuthorizationDirection "AUTHORIZATION_DIRECTION_UNSPECIFIED"
+
+-- | The specified organizations are authorized to evaluate traffic in this organization.
+pattern AuthorizedOrgsDesc_AuthorizationDirection_AUTHORIZATIONDIRECTIONTO :: AuthorizedOrgsDesc_AuthorizationDirection
+pattern AuthorizedOrgsDesc_AuthorizationDirection_AUTHORIZATIONDIRECTIONTO = AuthorizedOrgsDesc_AuthorizationDirection "AUTHORIZATION_DIRECTION_TO"
+
+-- | The traffic of the specified organizations can be evaluated by this organization.
+pattern AuthorizedOrgsDesc_AuthorizationDirection_AUTHORIZATIONDIRECTIONFROM :: AuthorizedOrgsDesc_AuthorizationDirection
+pattern AuthorizedOrgsDesc_AuthorizationDirection_AUTHORIZATIONDIRECTIONFROM = AuthorizedOrgsDesc_AuthorizationDirection "AUTHORIZATION_DIRECTION_FROM"
+
+{-# COMPLETE
+  AuthorizedOrgsDesc_AuthorizationDirection_AUTHORIZATIONDIRECTIONUNSPECIFIED,
+  AuthorizedOrgsDesc_AuthorizationDirection_AUTHORIZATIONDIRECTIONTO,
+  AuthorizedOrgsDesc_AuthorizationDirection_AUTHORIZATIONDIRECTIONFROM,
+  AuthorizedOrgsDesc_AuthorizationDirection
+  #-}
+
+-- | A granular control type for authorization levels. Valid value is @AUTHORIZATION_TYPE_TRUST@.
+newtype AuthorizedOrgsDesc_AuthorizationType = AuthorizedOrgsDesc_AuthorizationType {fromAuthorizedOrgsDesc_AuthorizationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | No authorization type specified.
+pattern AuthorizedOrgsDesc_AuthorizationType_AUTHORIZATIONTYPEUNSPECIFIED :: AuthorizedOrgsDesc_AuthorizationType
+pattern AuthorizedOrgsDesc_AuthorizationType_AUTHORIZATIONTYPEUNSPECIFIED = AuthorizedOrgsDesc_AuthorizationType "AUTHORIZATION_TYPE_UNSPECIFIED"
+
+-- | This authorization relationship is \"trust\".
+pattern AuthorizedOrgsDesc_AuthorizationType_AUTHORIZATIONTYPETRUST :: AuthorizedOrgsDesc_AuthorizationType
+pattern AuthorizedOrgsDesc_AuthorizationType_AUTHORIZATIONTYPETRUST = AuthorizedOrgsDesc_AuthorizationType "AUTHORIZATION_TYPE_TRUST"
+
+{-# COMPLETE
+  AuthorizedOrgsDesc_AuthorizationType_AUTHORIZATIONTYPEUNSPECIFIED,
+  AuthorizedOrgsDesc_AuthorizationType_AUTHORIZATIONTYPETRUST,
+  AuthorizedOrgsDesc_AuthorizationType
   #-}
 
 -- | How the @conditions@ list should be combined to determine if a request is granted this @AccessLevel@. If AND is used, each @Condition@ in @conditions@ must be satisfied for the @AccessLevel@ to be applied. If OR is used, at least one @Condition@ in @conditions@ must be satisfied for the @AccessLevel@ to be applied. Default behavior is AND.
@@ -413,7 +527,7 @@ pattern OsConstraint_OsType_Ios = OsConstraint_OsType "IOS"
   OsConstraint_OsType
   #-}
 
--- | Perimeter type indicator. A single project is allowed to be a member of single regular perimeter, but multiple service perimeter bridges. A project cannot be a included in a perimeter bridge without being included in regular perimeter. For perimeter bridges, the restricted service list as well as access level lists must be empty.
+-- | Perimeter type indicator. A single project or VPC network is allowed to be a member of single regular perimeter, but multiple service perimeter bridges. A project cannot be a included in a perimeter bridge without being included in regular perimeter. For perimeter bridges, the restricted service list as well as access level lists must be empty.
 newtype ServicePerimeter_PerimeterType = ServicePerimeter_PerimeterType {fromServicePerimeter_PerimeterType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -426,7 +540,7 @@ newtype ServicePerimeter_PerimeterType = ServicePerimeter_PerimeterType {fromSer
       Core.FromJSONKey
     )
 
--- | Regular Perimeter.
+-- | Regular Perimeter. When no value is specified, the perimeter uses this type.
 pattern ServicePerimeter_PerimeterType_PERIMETERTYPEREGULAR :: ServicePerimeter_PerimeterType
 pattern ServicePerimeter_PerimeterType_PERIMETERTYPEREGULAR = ServicePerimeter_PerimeterType "PERIMETER_TYPE_REGULAR"
 

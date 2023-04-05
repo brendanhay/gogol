@@ -51,6 +51,7 @@ type CloudSearchSettingsSearchapplicationsUpdateResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -67,10 +68,12 @@ data CloudSearchSettingsSearchapplicationsUpdate = CloudSearchSettingsSearchappl
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Name of the Search Application. Format: searchapplications\/{application_id}.
+    -- | The name of the Search Application. Format: searchapplications\/{application_id}.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: SearchApplication,
+    -- | Only applies to <https://developers.google.com/cloud-search/docs/reference/rest/v1/settings.searchapplications/patch settings.searchapplications.patch>. Update mask to control which fields to update. Example field paths: @search_application.name@, @search_application.displayName@. * If @update_mask@ is non-empty, then only the fields specified in the @update_mask@ are updated. * If you specify a field in the @update_mask@, but don\'t specify its value in the @search_application@, then that field is cleared. * If the @update_mask@ is not present or empty or has the value @*@, then all fields are updated.
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -80,7 +83,7 @@ data CloudSearchSettingsSearchapplicationsUpdate = CloudSearchSettingsSearchappl
 
 -- | Creates a value of 'CloudSearchSettingsSearchapplicationsUpdate' with the minimum fields required to make a request.
 newCloudSearchSettingsSearchapplicationsUpdate ::
-  -- |  Name of the Search Application. Format: searchapplications\/{application_id}. See 'name'.
+  -- |  The name of the Search Application. Format: searchapplications\/{application_id}. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   SearchApplication ->
@@ -92,6 +95,7 @@ newCloudSearchSettingsSearchapplicationsUpdate name payload =
       callback = Core.Nothing,
       name = name,
       payload = payload,
+      updateMask = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
@@ -117,6 +121,7 @@ instance
         xgafv
         accessToken
         callback
+        updateMask
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)

@@ -33,6 +33,16 @@ module Gogol.Datastore.Internal.Sum
         ..
       ),
 
+    -- * AggregationResultBatch_MoreResults
+    AggregationResultBatch_MoreResults
+      ( AggregationResultBatch_MoreResults_MORERESULTSTYPEUNSPECIFIED,
+        AggregationResultBatch_MoreResults_NOTFINISHED,
+        AggregationResultBatch_MoreResults_MORERESULTSAFTERLIMIT,
+        AggregationResultBatch_MoreResults_MORERESULTSAFTERCURSOR,
+        AggregationResultBatch_MoreResults_NOMORERESULTS,
+        ..
+      ),
+
     -- * CommitRequest_Mode
     CommitRequest_Mode
       ( CommitRequest_Mode_MODEUNSPECIFIED,
@@ -45,6 +55,7 @@ module Gogol.Datastore.Internal.Sum
     CompositeFilter_Op
       ( CompositeFilter_Op_OPERATORUNSPECIFIED,
         CompositeFilter_Op_And,
+        CompositeFilter_Op_OR,
         ..
       ),
 
@@ -188,7 +199,10 @@ module Gogol.Datastore.Internal.Sum
         PropertyFilter_Op_GREATERTHAN,
         PropertyFilter_Op_GREATERTHANOREQUAL,
         PropertyFilter_Op_Equal,
+        PropertyFilter_Op_IN,
+        PropertyFilter_Op_NOTEQUAL,
         PropertyFilter_Op_HASANCESTOR,
+        PropertyFilter_Op_NOTIN,
         ..
       ),
 
@@ -264,6 +278,48 @@ pattern Xgafv_2 = Xgafv "2"
   Xgafv
   #-}
 
+-- | The state of the query after the current batch. Only COUNT(*) aggregations are supported in the initial launch. Therefore, expected result type is limited to @NO_MORE_RESULTS@.
+newtype AggregationResultBatch_MoreResults = AggregationResultBatch_MoreResults {fromAggregationResultBatch_MoreResults :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. This value is never used.
+pattern AggregationResultBatch_MoreResults_MORERESULTSTYPEUNSPECIFIED :: AggregationResultBatch_MoreResults
+pattern AggregationResultBatch_MoreResults_MORERESULTSTYPEUNSPECIFIED = AggregationResultBatch_MoreResults "MORE_RESULTS_TYPE_UNSPECIFIED"
+
+-- | There may be additional batches to fetch from this query.
+pattern AggregationResultBatch_MoreResults_NOTFINISHED :: AggregationResultBatch_MoreResults
+pattern AggregationResultBatch_MoreResults_NOTFINISHED = AggregationResultBatch_MoreResults "NOT_FINISHED"
+
+-- | The query is finished, but there may be more results after the limit.
+pattern AggregationResultBatch_MoreResults_MORERESULTSAFTERLIMIT :: AggregationResultBatch_MoreResults
+pattern AggregationResultBatch_MoreResults_MORERESULTSAFTERLIMIT = AggregationResultBatch_MoreResults "MORE_RESULTS_AFTER_LIMIT"
+
+-- | The query is finished, but there may be more results after the end cursor.
+pattern AggregationResultBatch_MoreResults_MORERESULTSAFTERCURSOR :: AggregationResultBatch_MoreResults
+pattern AggregationResultBatch_MoreResults_MORERESULTSAFTERCURSOR = AggregationResultBatch_MoreResults "MORE_RESULTS_AFTER_CURSOR"
+
+-- | The query is finished, and there are no more results.
+pattern AggregationResultBatch_MoreResults_NOMORERESULTS :: AggregationResultBatch_MoreResults
+pattern AggregationResultBatch_MoreResults_NOMORERESULTS = AggregationResultBatch_MoreResults "NO_MORE_RESULTS"
+
+{-# COMPLETE
+  AggregationResultBatch_MoreResults_MORERESULTSTYPEUNSPECIFIED,
+  AggregationResultBatch_MoreResults_NOTFINISHED,
+  AggregationResultBatch_MoreResults_MORERESULTSAFTERLIMIT,
+  AggregationResultBatch_MoreResults_MORERESULTSAFTERCURSOR,
+  AggregationResultBatch_MoreResults_NOMORERESULTS,
+  AggregationResultBatch_MoreResults
+  #-}
+
 -- | The type of commit to perform. Defaults to @TRANSACTIONAL@.
 newtype CommitRequest_Mode = CommitRequest_Mode {fromCommitRequest_Mode :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -317,9 +373,14 @@ pattern CompositeFilter_Op_OPERATORUNSPECIFIED = CompositeFilter_Op "OPERATOR_UN
 pattern CompositeFilter_Op_And :: CompositeFilter_Op
 pattern CompositeFilter_Op_And = CompositeFilter_Op "AND"
 
+-- | Documents are required to satisfy at least one of the combined filters.
+pattern CompositeFilter_Op_OR :: CompositeFilter_Op
+pattern CompositeFilter_Op_OR = CompositeFilter_Op "OR"
+
 {-# COMPLETE
   CompositeFilter_Op_OPERATORUNSPECIFIED,
   CompositeFilter_Op_And,
+  CompositeFilter_Op_OR,
   CompositeFilter_Op
   #-}
 
@@ -916,9 +977,21 @@ pattern PropertyFilter_Op_GREATERTHANOREQUAL = PropertyFilter_Op "GREATER_THAN_O
 pattern PropertyFilter_Op_Equal :: PropertyFilter_Op
 pattern PropertyFilter_Op_Equal = PropertyFilter_Op "EQUAL"
 
--- | Limit the result set to the given entity and its descendants. Requires: * That @value@ is an entity key.
+-- | The given @property@ is equal to at least one value in the given array. Requires: * That @value@ is a non-empty @ArrayValue@, subject to disjunction limits. * No @NOT_IN@ is in the same query.
+pattern PropertyFilter_Op_IN :: PropertyFilter_Op
+pattern PropertyFilter_Op_IN = PropertyFilter_Op "IN"
+
+-- | The given @property@ is not equal to the given @value@. Requires: * No other @NOT_EQUAL@ or @NOT_IN@ is in the same query. * That @property@ comes first in the @order_by@.
+pattern PropertyFilter_Op_NOTEQUAL :: PropertyFilter_Op
+pattern PropertyFilter_Op_NOTEQUAL = PropertyFilter_Op "NOT_EQUAL"
+
+-- | Limit the result set to the given entity and its descendants. Requires: * That @value@ is an entity key. * All evaluated disjunctions must have the same @HAS_ANCESTOR@ filter.
 pattern PropertyFilter_Op_HASANCESTOR :: PropertyFilter_Op
 pattern PropertyFilter_Op_HASANCESTOR = PropertyFilter_Op "HAS_ANCESTOR"
+
+-- | The value of the @property@ is not in the given array. Requires: * That @value@ is a non-empty @ArrayValue@ with at most 10 values. * No other @OR@, @IN@, @NOT_IN@, @NOT_EQUAL@ is in the same query. * That @field@ comes first in the @order_by@.
+pattern PropertyFilter_Op_NOTIN :: PropertyFilter_Op
+pattern PropertyFilter_Op_NOTIN = PropertyFilter_Op "NOT_IN"
 
 {-# COMPLETE
   PropertyFilter_Op_OPERATORUNSPECIFIED,
@@ -927,7 +1000,10 @@ pattern PropertyFilter_Op_HASANCESTOR = PropertyFilter_Op "HAS_ANCESTOR"
   PropertyFilter_Op_GREATERTHAN,
   PropertyFilter_Op_GREATERTHANOREQUAL,
   PropertyFilter_Op_Equal,
+  PropertyFilter_Op_IN,
+  PropertyFilter_Op_NOTEQUAL,
   PropertyFilter_Op_HASANCESTOR,
+  PropertyFilter_Op_NOTIN,
   PropertyFilter_Op
   #-}
 
@@ -1042,7 +1118,7 @@ pattern QueryResultBatch_MoreResults_NOMORERESULTS = QueryResultBatch_MoreResult
   QueryResultBatch_MoreResults
   #-}
 
--- | The non-transactional read consistency to use. Cannot be set to @STRONG@ for global queries.
+-- | The non-transactional read consistency to use.
 newtype ReadOptions_ReadConsistency = ReadOptions_ReadConsistency {fromReadOptions_ReadConsistency :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype

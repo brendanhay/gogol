@@ -38,6 +38,26 @@ module Gogol.Manufacturers
 
     -- * Resources
 
+    -- ** manufacturers.accounts.languages.productCertifications.delete
+    ManufacturersAccountsLanguagesProductCertificationsDeleteResource,
+    ManufacturersAccountsLanguagesProductCertificationsDelete (..),
+    newManufacturersAccountsLanguagesProductCertificationsDelete,
+
+    -- ** manufacturers.accounts.languages.productCertifications.get
+    ManufacturersAccountsLanguagesProductCertificationsGetResource,
+    ManufacturersAccountsLanguagesProductCertificationsGet (..),
+    newManufacturersAccountsLanguagesProductCertificationsGet,
+
+    -- ** manufacturers.accounts.languages.productCertifications.list
+    ManufacturersAccountsLanguagesProductCertificationsListResource,
+    ManufacturersAccountsLanguagesProductCertificationsList (..),
+    newManufacturersAccountsLanguagesProductCertificationsList,
+
+    -- ** manufacturers.accounts.languages.productCertifications.patch
+    ManufacturersAccountsLanguagesProductCertificationsPatchResource,
+    ManufacturersAccountsLanguagesProductCertificationsPatch (..),
+    newManufacturersAccountsLanguagesProductCertificationsPatch,
+
     -- ** manufacturers.accounts.products.delete
     ManufacturersAccountsProductsDeleteResource,
     ManufacturersAccountsProductsDelete (..),
@@ -71,6 +91,10 @@ module Gogol.Manufacturers
     Capacity (..),
     newCapacity,
 
+    -- ** Certification
+    Certification (..),
+    newCertification,
+
     -- ** Count
     Count (..),
     newCount,
@@ -89,6 +113,14 @@ module Gogol.Manufacturers
     -- ** FeatureDescription
     FeatureDescription (..),
     newFeatureDescription,
+
+    -- ** FloatUnit
+    FloatUnit (..),
+    newFloatUnit,
+
+    -- ** Grocery
+    Grocery (..),
+    newGrocery,
 
     -- ** Image
     Image (..),
@@ -110,9 +142,17 @@ module Gogol.Manufacturers
     -- ** Issue_Severity
     Issue_Severity (..),
 
+    -- ** ListProductCertificationsResponse
+    ListProductCertificationsResponse (..),
+    newListProductCertificationsResponse,
+
     -- ** ListProductsResponse
     ListProductsResponse (..),
     newListProductsResponse,
+
+    -- ** Nutrition
+    Nutrition (..),
+    newNutrition,
 
     -- ** Price
     Price (..),
@@ -122,9 +162,17 @@ module Gogol.Manufacturers
     Product (..),
     newProduct,
 
+    -- ** ProductCertification
+    ProductCertification (..),
+    newProductCertification,
+
     -- ** ProductDetail
     ProductDetail (..),
     newProductDetail,
+
+    -- ** VoluntaryNutritionFact
+    VoluntaryNutritionFact (..),
+    newVoluntaryNutritionFact,
 
     -- ** AccountsProductsGetInclude
     AccountsProductsGetInclude (..),
@@ -134,6 +182,10 @@ module Gogol.Manufacturers
   )
 where
 
+import Gogol.Manufacturers.Accounts.Languages.ProductCertifications.Delete
+import Gogol.Manufacturers.Accounts.Languages.ProductCertifications.Get
+import Gogol.Manufacturers.Accounts.Languages.ProductCertifications.List
+import Gogol.Manufacturers.Accounts.Languages.ProductCertifications.Patch
 import Gogol.Manufacturers.Accounts.Products.Delete
 import Gogol.Manufacturers.Accounts.Products.Get
 import Gogol.Manufacturers.Accounts.Products.List

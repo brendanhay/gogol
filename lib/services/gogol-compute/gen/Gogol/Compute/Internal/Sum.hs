@@ -43,10 +43,12 @@ module Gogol.Compute.Internal.Sum
         AcceleratorTypeAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         AcceleratorTypeAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         AcceleratorTypeAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        AcceleratorTypeAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         AcceleratorTypeAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         AcceleratorTypeAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         AcceleratorTypeAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         AcceleratorTypeAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        AcceleratorTypeAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         AcceleratorTypeAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         AcceleratorTypeAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         AcceleratorTypeAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -73,10 +75,12 @@ module Gogol.Compute.Internal.Sum
         AcceleratorTypeList_Warning_Code_EXTERNALAPIWARNING,
         AcceleratorTypeList_Warning_Code_FIELDVALUEOVERRIDEN,
         AcceleratorTypeList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        AcceleratorTypeList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         AcceleratorTypeList_Warning_Code_LARGEDEPLOYMENTWARNING,
         AcceleratorTypeList_Warning_Code_MISSINGTYPEDEPENDENCY,
         AcceleratorTypeList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         AcceleratorTypeList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        AcceleratorTypeList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         AcceleratorTypeList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         AcceleratorTypeList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         AcceleratorTypeList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -103,10 +107,12 @@ module Gogol.Compute.Internal.Sum
         AcceleratorTypesScopedList_Warning_Code_EXTERNALAPIWARNING,
         AcceleratorTypesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         AcceleratorTypesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        AcceleratorTypesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         AcceleratorTypesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         AcceleratorTypesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         AcceleratorTypesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         AcceleratorTypesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        AcceleratorTypesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         AcceleratorTypesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         AcceleratorTypesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         AcceleratorTypesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -155,6 +161,13 @@ module Gogol.Compute.Internal.Sum
         ..
       ),
 
+    -- * Address_Ipv6EndpointType
+    Address_Ipv6EndpointType
+      ( Address_Ipv6EndpointType_Netlb,
+        Address_Ipv6EndpointType_VM,
+        ..
+      ),
+
     -- * Address_NetworkTier
     Address_NetworkTier
       ( Address_NetworkTier_FIXEDSTANDARD,
@@ -171,6 +184,7 @@ module Gogol.Compute.Internal.Sum
         Address_Purpose_IPSECINTERCONNECT,
         Address_Purpose_NATAUTO,
         Address_Purpose_PRIVATESERVICECONNECT,
+        Address_Purpose_Serverless,
         Address_Purpose_SHAREDLOADBALANCERVIP,
         Address_Purpose_VPCPEERING,
         ..
@@ -194,10 +208,12 @@ module Gogol.Compute.Internal.Sum
         AddressAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         AddressAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         AddressAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        AddressAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         AddressAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         AddressAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         AddressAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         AddressAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        AddressAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         AddressAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         AddressAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         AddressAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -224,10 +240,12 @@ module Gogol.Compute.Internal.Sum
         AddressList_Warning_Code_EXTERNALAPIWARNING,
         AddressList_Warning_Code_FIELDVALUEOVERRIDEN,
         AddressList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        AddressList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         AddressList_Warning_Code_LARGEDEPLOYMENTWARNING,
         AddressList_Warning_Code_MISSINGTYPEDEPENDENCY,
         AddressList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         AddressList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        AddressList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         AddressList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         AddressList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         AddressList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -254,10 +272,12 @@ module Gogol.Compute.Internal.Sum
         AddressesScopedList_Warning_Code_EXTERNALAPIWARNING,
         AddressesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         AddressesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        AddressesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         AddressesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         AddressesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         AddressesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         AddressesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        AddressesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         AddressesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         AddressesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         AddressesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -281,6 +301,14 @@ module Gogol.Compute.Internal.Sum
         ..
       ),
 
+    -- * AttachedDisk_Architecture
+    AttachedDisk_Architecture
+      ( AttachedDisk_Architecture_ARCHITECTUREUNSPECIFIED,
+        AttachedDisk_Architecture_ARM64,
+        AttachedDisk_Architecture_X86_64,
+        ..
+      ),
+
     -- * AttachedDisk_Interface
     AttachedDisk_Interface
       ( AttachedDisk_Interface_Nvme,
@@ -299,6 +327,14 @@ module Gogol.Compute.Internal.Sum
     AttachedDisk_Type
       ( AttachedDisk_Type_Persistent,
         AttachedDisk_Type_Scratch,
+        ..
+      ),
+
+    -- * AttachedDiskInitializeParams_Architecture
+    AttachedDiskInitializeParams_Architecture
+      ( AttachedDiskInitializeParams_Architecture_ARCHITECTUREUNSPECIFIED,
+        AttachedDiskInitializeParams_Architecture_ARM64,
+        AttachedDiskInitializeParams_Architecture_X86_64,
         ..
       ),
 
@@ -348,10 +384,12 @@ module Gogol.Compute.Internal.Sum
         AutoscalerAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         AutoscalerAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         AutoscalerAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        AutoscalerAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         AutoscalerAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         AutoscalerAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         AutoscalerAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         AutoscalerAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        AutoscalerAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         AutoscalerAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         AutoscalerAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         AutoscalerAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -378,10 +416,12 @@ module Gogol.Compute.Internal.Sum
         AutoscalerList_Warning_Code_EXTERNALAPIWARNING,
         AutoscalerList_Warning_Code_FIELDVALUEOVERRIDEN,
         AutoscalerList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        AutoscalerList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         AutoscalerList_Warning_Code_LARGEDEPLOYMENTWARNING,
         AutoscalerList_Warning_Code_MISSINGTYPEDEPENDENCY,
         AutoscalerList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         AutoscalerList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        AutoscalerList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         AutoscalerList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         AutoscalerList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         AutoscalerList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -433,10 +473,12 @@ module Gogol.Compute.Internal.Sum
         AutoscalersScopedList_Warning_Code_EXTERNALAPIWARNING,
         AutoscalersScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         AutoscalersScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        AutoscalersScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         AutoscalersScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         AutoscalersScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         AutoscalersScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         AutoscalersScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        AutoscalersScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         AutoscalersScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         AutoscalersScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         AutoscalersScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -485,6 +527,13 @@ module Gogol.Compute.Internal.Sum
         ..
       ),
 
+    -- * BackendBucket_CompressionMode
+    BackendBucket_CompressionMode
+      ( BackendBucket_CompressionMode_Automatic,
+        BackendBucket_CompressionMode_Disabled,
+        ..
+      ),
+
     -- * BackendBucketCdnPolicy_CacheMode
     BackendBucketCdnPolicy_CacheMode
       ( BackendBucketCdnPolicy_CacheMode_CACHEALLSTATIC,
@@ -504,10 +553,12 @@ module Gogol.Compute.Internal.Sum
         BackendBucketList_Warning_Code_EXTERNALAPIWARNING,
         BackendBucketList_Warning_Code_FIELDVALUEOVERRIDEN,
         BackendBucketList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        BackendBucketList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         BackendBucketList_Warning_Code_LARGEDEPLOYMENTWARNING,
         BackendBucketList_Warning_Code_MISSINGTYPEDEPENDENCY,
         BackendBucketList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         BackendBucketList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        BackendBucketList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         BackendBucketList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         BackendBucketList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         BackendBucketList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -521,6 +572,13 @@ module Gogol.Compute.Internal.Sum
         BackendBucketList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
         BackendBucketList_Warning_Code_UNDECLAREDPROPERTIES,
         BackendBucketList_Warning_Code_Unreachable,
+        ..
+      ),
+
+    -- * BackendService_CompressionMode
+    BackendService_CompressionMode
+      ( BackendService_CompressionMode_Automatic,
+        BackendService_CompressionMode_Disabled,
         ..
       ),
 
@@ -544,6 +602,7 @@ module Gogol.Compute.Internal.Sum
         BackendService_LocalityLbPolicy_Random,
         BackendService_LocalityLbPolicy_RINGHASH,
         BackendService_LocalityLbPolicy_ROUNDROBIN,
+        BackendService_LocalityLbPolicy_WEIGHTEDMAGLEV,
         ..
       ),
 
@@ -583,10 +642,12 @@ module Gogol.Compute.Internal.Sum
         BackendServiceAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         BackendServiceAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         BackendServiceAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        BackendServiceAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         BackendServiceAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         BackendServiceAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         BackendServiceAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         BackendServiceAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        BackendServiceAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         BackendServiceAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         BackendServiceAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         BackendServiceAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -638,10 +699,12 @@ module Gogol.Compute.Internal.Sum
         BackendServiceList_Warning_Code_EXTERNALAPIWARNING,
         BackendServiceList_Warning_Code_FIELDVALUEOVERRIDEN,
         BackendServiceList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        BackendServiceList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         BackendServiceList_Warning_Code_LARGEDEPLOYMENTWARNING,
         BackendServiceList_Warning_Code_MISSINGTYPEDEPENDENCY,
         BackendServiceList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         BackendServiceList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        BackendServiceList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         BackendServiceList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         BackendServiceList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         BackendServiceList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -658,6 +721,27 @@ module Gogol.Compute.Internal.Sum
         ..
       ),
 
+    -- * BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name
+    BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name
+      ( BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_INVALIDLBPOLICY,
+        BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_LEASTREQUEST,
+        BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_Maglev,
+        BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_ORIGINALDESTINATION,
+        BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_Random,
+        BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_RINGHASH,
+        BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_ROUNDROBIN,
+        BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_WEIGHTEDMAGLEV,
+        ..
+      ),
+
+    -- * BackendServiceLogConfig_OptionalMode
+    BackendServiceLogConfig_OptionalMode
+      ( BackendServiceLogConfig_OptionalMode_Custom,
+        BackendServiceLogConfig_OptionalMode_EXCLUDEALLOPTIONAL,
+        BackendServiceLogConfig_OptionalMode_INCLUDEALLOPTIONAL,
+        ..
+      ),
+
     -- * BackendServicesScopedList_Warning_Code
     BackendServicesScopedList_Warning_Code
       ( BackendServicesScopedList_Warning_Code_CLEANUPFAILED,
@@ -668,10 +752,12 @@ module Gogol.Compute.Internal.Sum
         BackendServicesScopedList_Warning_Code_EXTERNALAPIWARNING,
         BackendServicesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         BackendServicesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        BackendServicesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         BackendServicesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         BackendServicesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         BackendServicesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         BackendServicesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        BackendServicesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         BackendServicesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         BackendServicesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         BackendServicesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -765,6 +851,7 @@ module Gogol.Compute.Internal.Sum
     -- * Commitment_Status
     Commitment_Status
       ( Commitment_Status_Active,
+        Commitment_Status_Cancelled,
         Commitment_Status_Creating,
         Commitment_Status_Expired,
         Commitment_Status_NOTYETACTIVE,
@@ -776,12 +863,14 @@ module Gogol.Compute.Internal.Sum
       ( Commitment_Type_ACCELERATOROPTIMIZED,
         Commitment_Type_COMPUTEOPTIMIZED,
         Commitment_Type_COMPUTEOPTIMIZEDC2D,
+        Commitment_Type_COMPUTE_OPTIMIZED_C3,
         Commitment_Type_GENERALPURPOSE,
         Commitment_Type_GENERAL_PURPOSE_E2,
         Commitment_Type_GENERAL_PURPOSE_N2,
         Commitment_Type_GENERALPURPOSEN2D,
         Commitment_Type_GENERALPURPOSET2D,
         Commitment_Type_MEMORYOPTIMIZED,
+        Commitment_Type_MEMORY_OPTIMIZED_M3,
         Commitment_Type_TYPEUNSPECIFIED,
         ..
       ),
@@ -796,10 +885,12 @@ module Gogol.Compute.Internal.Sum
         CommitmentAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         CommitmentAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         CommitmentAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        CommitmentAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         CommitmentAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         CommitmentAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         CommitmentAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         CommitmentAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        CommitmentAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         CommitmentAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         CommitmentAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         CommitmentAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -826,10 +917,12 @@ module Gogol.Compute.Internal.Sum
         CommitmentList_Warning_Code_EXTERNALAPIWARNING,
         CommitmentList_Warning_Code_FIELDVALUEOVERRIDEN,
         CommitmentList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        CommitmentList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         CommitmentList_Warning_Code_LARGEDEPLOYMENTWARNING,
         CommitmentList_Warning_Code_MISSINGTYPEDEPENDENCY,
         CommitmentList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         CommitmentList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        CommitmentList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         CommitmentList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         CommitmentList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         CommitmentList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -856,10 +949,12 @@ module Gogol.Compute.Internal.Sum
         CommitmentsScopedList_Warning_Code_EXTERNALAPIWARNING,
         CommitmentsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         CommitmentsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        CommitmentsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         CommitmentsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         CommitmentsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         CommitmentsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         CommitmentsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        CommitmentsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         CommitmentsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         CommitmentsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         CommitmentsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -919,6 +1014,14 @@ module Gogol.Compute.Internal.Sum
         ..
       ),
 
+    -- * Disk_Architecture
+    Disk_Architecture
+      ( Disk_Architecture_ARCHITECTUREUNSPECIFIED,
+        Disk_Architecture_ARM64,
+        Disk_Architecture_X86_64,
+        ..
+      ),
+
     -- * Disk_Status
     Disk_Status
       ( Disk_Status_Creating,
@@ -939,10 +1042,12 @@ module Gogol.Compute.Internal.Sum
         DiskAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         DiskAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         DiskAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        DiskAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         DiskAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         DiskAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         DiskAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         DiskAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        DiskAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         DiskAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         DiskAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         DiskAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -981,10 +1086,12 @@ module Gogol.Compute.Internal.Sum
         DiskList_Warning_Code_EXTERNALAPIWARNING,
         DiskList_Warning_Code_FIELDVALUEOVERRIDEN,
         DiskList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        DiskList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         DiskList_Warning_Code_LARGEDEPLOYMENTWARNING,
         DiskList_Warning_Code_MISSINGTYPEDEPENDENCY,
         DiskList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         DiskList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        DiskList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         DiskList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         DiskList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         DiskList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -1011,10 +1118,12 @@ module Gogol.Compute.Internal.Sum
         DiskTypeAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         DiskTypeAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         DiskTypeAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        DiskTypeAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         DiskTypeAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         DiskTypeAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         DiskTypeAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         DiskTypeAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        DiskTypeAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         DiskTypeAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         DiskTypeAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         DiskTypeAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -1041,10 +1150,12 @@ module Gogol.Compute.Internal.Sum
         DiskTypeList_Warning_Code_EXTERNALAPIWARNING,
         DiskTypeList_Warning_Code_FIELDVALUEOVERRIDEN,
         DiskTypeList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        DiskTypeList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         DiskTypeList_Warning_Code_LARGEDEPLOYMENTWARNING,
         DiskTypeList_Warning_Code_MISSINGTYPEDEPENDENCY,
         DiskTypeList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         DiskTypeList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        DiskTypeList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         DiskTypeList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         DiskTypeList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         DiskTypeList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -1071,10 +1182,12 @@ module Gogol.Compute.Internal.Sum
         DiskTypesScopedList_Warning_Code_EXTERNALAPIWARNING,
         DiskTypesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         DiskTypesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        DiskTypesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         DiskTypesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         DiskTypesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         DiskTypesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         DiskTypesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        DiskTypesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         DiskTypesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         DiskTypesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         DiskTypesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -1101,10 +1214,12 @@ module Gogol.Compute.Internal.Sum
         DisksScopedList_Warning_Code_EXTERNALAPIWARNING,
         DisksScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         DisksScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        DisksScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         DisksScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         DisksScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         DisksScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         DisksScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        DisksScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         DisksScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         DisksScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         DisksScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -1147,10 +1262,12 @@ module Gogol.Compute.Internal.Sum
         ExchangedPeeringRoutesList_Warning_Code_EXTERNALAPIWARNING,
         ExchangedPeeringRoutesList_Warning_Code_FIELDVALUEOVERRIDEN,
         ExchangedPeeringRoutesList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        ExchangedPeeringRoutesList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         ExchangedPeeringRoutesList_Warning_Code_LARGEDEPLOYMENTWARNING,
         ExchangedPeeringRoutesList_Warning_Code_MISSINGTYPEDEPENDENCY,
         ExchangedPeeringRoutesList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         ExchangedPeeringRoutesList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        ExchangedPeeringRoutesList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         ExchangedPeeringRoutesList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         ExchangedPeeringRoutesList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         ExchangedPeeringRoutesList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -1185,10 +1302,12 @@ module Gogol.Compute.Internal.Sum
         ExternalVpnGatewayList_Warning_Code_EXTERNALAPIWARNING,
         ExternalVpnGatewayList_Warning_Code_FIELDVALUEOVERRIDEN,
         ExternalVpnGatewayList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        ExternalVpnGatewayList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         ExternalVpnGatewayList_Warning_Code_LARGEDEPLOYMENTWARNING,
         ExternalVpnGatewayList_Warning_Code_MISSINGTYPEDEPENDENCY,
         ExternalVpnGatewayList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         ExternalVpnGatewayList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        ExternalVpnGatewayList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         ExternalVpnGatewayList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         ExternalVpnGatewayList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         ExternalVpnGatewayList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -1230,10 +1349,12 @@ module Gogol.Compute.Internal.Sum
         FirewallList_Warning_Code_EXTERNALAPIWARNING,
         FirewallList_Warning_Code_FIELDVALUEOVERRIDEN,
         FirewallList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        FirewallList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         FirewallList_Warning_Code_LARGEDEPLOYMENTWARNING,
         FirewallList_Warning_Code_MISSINGTYPEDEPENDENCY,
         FirewallList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         FirewallList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        FirewallList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         FirewallList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         FirewallList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         FirewallList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -1267,10 +1388,12 @@ module Gogol.Compute.Internal.Sum
         FirewallPolicyList_Warning_Code_EXTERNALAPIWARNING,
         FirewallPolicyList_Warning_Code_FIELDVALUEOVERRIDEN,
         FirewallPolicyList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        FirewallPolicyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         FirewallPolicyList_Warning_Code_LARGEDEPLOYMENTWARNING,
         FirewallPolicyList_Warning_Code_MISSINGTYPEDEPENDENCY,
         FirewallPolicyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         FirewallPolicyList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        FirewallPolicyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         FirewallPolicyList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         FirewallPolicyList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         FirewallPolicyList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -1345,6 +1468,7 @@ module Gogol.Compute.Internal.Sum
     ForwardingRule_PscConnectionStatus
       ( ForwardingRule_PscConnectionStatus_Accepted,
         ForwardingRule_PscConnectionStatus_Closed,
+        ForwardingRule_PscConnectionStatus_NEEDSATTENTION,
         ForwardingRule_PscConnectionStatus_Pending,
         ForwardingRule_PscConnectionStatus_Rejected,
         ForwardingRule_PscConnectionStatus_STATUSUNSPECIFIED,
@@ -1361,10 +1485,12 @@ module Gogol.Compute.Internal.Sum
         ForwardingRuleAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         ForwardingRuleAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         ForwardingRuleAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        ForwardingRuleAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         ForwardingRuleAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         ForwardingRuleAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         ForwardingRuleAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         ForwardingRuleAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        ForwardingRuleAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         ForwardingRuleAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         ForwardingRuleAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         ForwardingRuleAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -1391,10 +1517,12 @@ module Gogol.Compute.Internal.Sum
         ForwardingRuleList_Warning_Code_EXTERNALAPIWARNING,
         ForwardingRuleList_Warning_Code_FIELDVALUEOVERRIDEN,
         ForwardingRuleList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        ForwardingRuleList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         ForwardingRuleList_Warning_Code_LARGEDEPLOYMENTWARNING,
         ForwardingRuleList_Warning_Code_MISSINGTYPEDEPENDENCY,
         ForwardingRuleList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         ForwardingRuleList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        ForwardingRuleList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         ForwardingRuleList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         ForwardingRuleList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         ForwardingRuleList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -1421,10 +1549,12 @@ module Gogol.Compute.Internal.Sum
         ForwardingRulesScopedList_Warning_Code_EXTERNALAPIWARNING,
         ForwardingRulesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         ForwardingRulesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        ForwardingRulesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         ForwardingRulesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         ForwardingRulesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         ForwardingRulesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         ForwardingRulesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        ForwardingRulesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         ForwardingRulesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         ForwardingRulesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         ForwardingRulesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -1456,6 +1586,8 @@ module Gogol.Compute.Internal.Sum
         GuestOsFeature_Type_MULTIIPSUBNET,
         GuestOsFeature_Type_SECUREBOOT,
         GuestOsFeature_Type_SEVCAPABLE,
+        GuestOsFeature_Type_SEVLIVEMIGRATABLE,
+        GuestOsFeature_Type_SEVSNPCAPABLE,
         GuestOsFeature_Type_UEFICOMPATIBLE,
         GuestOsFeature_Type_VIRTIOSCSIMULTIQUEUE,
         GuestOsFeature_Type_Windows,
@@ -1529,10 +1661,12 @@ module Gogol.Compute.Internal.Sum
         HealthCheckList_Warning_Code_EXTERNALAPIWARNING,
         HealthCheckList_Warning_Code_FIELDVALUEOVERRIDEN,
         HealthCheckList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        HealthCheckList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         HealthCheckList_Warning_Code_LARGEDEPLOYMENTWARNING,
         HealthCheckList_Warning_Code_MISSINGTYPEDEPENDENCY,
         HealthCheckList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         HealthCheckList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        HealthCheckList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         HealthCheckList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         HealthCheckList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         HealthCheckList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -1566,10 +1700,12 @@ module Gogol.Compute.Internal.Sum
         HealthCheckServicesList_Warning_Code_EXTERNALAPIWARNING,
         HealthCheckServicesList_Warning_Code_FIELDVALUEOVERRIDEN,
         HealthCheckServicesList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        HealthCheckServicesList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         HealthCheckServicesList_Warning_Code_LARGEDEPLOYMENTWARNING,
         HealthCheckServicesList_Warning_Code_MISSINGTYPEDEPENDENCY,
         HealthCheckServicesList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         HealthCheckServicesList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        HealthCheckServicesList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         HealthCheckServicesList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         HealthCheckServicesList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         HealthCheckServicesList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -1596,10 +1732,12 @@ module Gogol.Compute.Internal.Sum
         HealthChecksAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         HealthChecksAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         HealthChecksAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        HealthChecksAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         HealthChecksAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         HealthChecksAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         HealthChecksAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         HealthChecksAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        HealthChecksAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         HealthChecksAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         HealthChecksAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         HealthChecksAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -1626,10 +1764,12 @@ module Gogol.Compute.Internal.Sum
         HealthChecksScopedList_Warning_Code_EXTERNALAPIWARNING,
         HealthChecksScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         HealthChecksScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        HealthChecksScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         HealthChecksScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         HealthChecksScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         HealthChecksScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         HealthChecksScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        HealthChecksScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         HealthChecksScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         HealthChecksScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         HealthChecksScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -1681,10 +1821,12 @@ module Gogol.Compute.Internal.Sum
         HttpHealthCheckList_Warning_Code_EXTERNALAPIWARNING,
         HttpHealthCheckList_Warning_Code_FIELDVALUEOVERRIDEN,
         HttpHealthCheckList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        HttpHealthCheckList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         HttpHealthCheckList_Warning_Code_LARGEDEPLOYMENTWARNING,
         HttpHealthCheckList_Warning_Code_MISSINGTYPEDEPENDENCY,
         HttpHealthCheckList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         HttpHealthCheckList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        HttpHealthCheckList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         HttpHealthCheckList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         HttpHealthCheckList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         HttpHealthCheckList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -1721,10 +1863,12 @@ module Gogol.Compute.Internal.Sum
         HttpsHealthCheckList_Warning_Code_EXTERNALAPIWARNING,
         HttpsHealthCheckList_Warning_Code_FIELDVALUEOVERRIDEN,
         HttpsHealthCheckList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        HttpsHealthCheckList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         HttpsHealthCheckList_Warning_Code_LARGEDEPLOYMENTWARNING,
         HttpsHealthCheckList_Warning_Code_MISSINGTYPEDEPENDENCY,
         HttpsHealthCheckList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         HttpsHealthCheckList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        HttpsHealthCheckList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         HttpsHealthCheckList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         HttpsHealthCheckList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         HttpsHealthCheckList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -1738,6 +1882,14 @@ module Gogol.Compute.Internal.Sum
         HttpsHealthCheckList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
         HttpsHealthCheckList_Warning_Code_UNDECLAREDPROPERTIES,
         HttpsHealthCheckList_Warning_Code_Unreachable,
+        ..
+      ),
+
+    -- * Image_Architecture
+    Image_Architecture
+      ( Image_Architecture_ARCHITECTUREUNSPECIFIED,
+        Image_Architecture_ARM64,
+        Image_Architecture_X86_64,
         ..
       ),
 
@@ -1772,10 +1924,12 @@ module Gogol.Compute.Internal.Sum
         ImageList_Warning_Code_EXTERNALAPIWARNING,
         ImageList_Warning_Code_FIELDVALUEOVERRIDEN,
         ImageList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        ImageList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         ImageList_Warning_Code_LARGEDEPLOYMENTWARNING,
         ImageList_Warning_Code_MISSINGTYPEDEPENDENCY,
         ImageList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         ImageList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        ImageList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         ImageList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         ImageList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         ImageList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -1789,6 +1943,14 @@ module Gogol.Compute.Internal.Sum
         ImageList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
         ImageList_Warning_Code_UNDECLAREDPROPERTIES,
         ImageList_Warning_Code_Unreachable,
+        ..
+      ),
+
+    -- * Instance_KeyRevocationActionType
+    Instance_KeyRevocationActionType
+      ( Instance_KeyRevocationActionType_KEYREVOCATIONACTIONTYPEUNSPECIFIED,
+        Instance_KeyRevocationActionType_None,
+        Instance_KeyRevocationActionType_Stop,
         ..
       ),
 
@@ -1825,10 +1987,12 @@ module Gogol.Compute.Internal.Sum
         InstanceAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         InstanceAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         InstanceAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        InstanceAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         InstanceAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         InstanceAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         InstanceAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         InstanceAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        InstanceAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         InstanceAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         InstanceAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         InstanceAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -1855,10 +2019,12 @@ module Gogol.Compute.Internal.Sum
         InstanceGroupAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         InstanceGroupAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         InstanceGroupAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        InstanceGroupAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         InstanceGroupAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         InstanceGroupAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         InstanceGroupAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         InstanceGroupAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        InstanceGroupAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         InstanceGroupAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         InstanceGroupAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         InstanceGroupAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -1885,10 +2051,12 @@ module Gogol.Compute.Internal.Sum
         InstanceGroupList_Warning_Code_EXTERNALAPIWARNING,
         InstanceGroupList_Warning_Code_FIELDVALUEOVERRIDEN,
         InstanceGroupList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        InstanceGroupList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         InstanceGroupList_Warning_Code_LARGEDEPLOYMENTWARNING,
         InstanceGroupList_Warning_Code_MISSINGTYPEDEPENDENCY,
         InstanceGroupList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         InstanceGroupList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        InstanceGroupList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         InstanceGroupList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         InstanceGroupList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         InstanceGroupList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -1905,6 +2073,13 @@ module Gogol.Compute.Internal.Sum
         ..
       ),
 
+    -- * InstanceGroupManager_ListManagedInstancesResults
+    InstanceGroupManager_ListManagedInstancesResults
+      ( InstanceGroupManager_ListManagedInstancesResults_Pageless,
+        InstanceGroupManager_ListManagedInstancesResults_Paginated,
+        ..
+      ),
+
     -- * InstanceGroupManagerAggregatedList_Warning_Code
     InstanceGroupManagerAggregatedList_Warning_Code
       ( InstanceGroupManagerAggregatedList_Warning_Code_CLEANUPFAILED,
@@ -1915,10 +2090,12 @@ module Gogol.Compute.Internal.Sum
         InstanceGroupManagerAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         InstanceGroupManagerAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         InstanceGroupManagerAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        InstanceGroupManagerAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         InstanceGroupManagerAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         InstanceGroupManagerAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         InstanceGroupManagerAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         InstanceGroupManagerAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        InstanceGroupManagerAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         InstanceGroupManagerAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         InstanceGroupManagerAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         InstanceGroupManagerAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -1945,10 +2122,12 @@ module Gogol.Compute.Internal.Sum
         InstanceGroupManagerList_Warning_Code_EXTERNALAPIWARNING,
         InstanceGroupManagerList_Warning_Code_FIELDVALUEOVERRIDEN,
         InstanceGroupManagerList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        InstanceGroupManagerList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         InstanceGroupManagerList_Warning_Code_LARGEDEPLOYMENTWARNING,
         InstanceGroupManagerList_Warning_Code_MISSINGTYPEDEPENDENCY,
         InstanceGroupManagerList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         InstanceGroupManagerList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        InstanceGroupManagerList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         InstanceGroupManagerList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         InstanceGroupManagerList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         InstanceGroupManagerList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -2032,10 +2211,12 @@ module Gogol.Compute.Internal.Sum
         InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_EXTERNALAPIWARNING,
         InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_FIELDVALUEOVERRIDEN,
         InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_LARGEDEPLOYMENTWARNING,
         InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_MISSINGTYPEDEPENDENCY,
         InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_NEXTHOPNOTRUNNING,
@@ -2062,10 +2243,12 @@ module Gogol.Compute.Internal.Sum
         InstanceGroupManagersScopedList_Warning_Code_EXTERNALAPIWARNING,
         InstanceGroupManagersScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         InstanceGroupManagersScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        InstanceGroupManagersScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         InstanceGroupManagersScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         InstanceGroupManagersScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         InstanceGroupManagersScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         InstanceGroupManagersScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        InstanceGroupManagersScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         InstanceGroupManagersScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         InstanceGroupManagersScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         InstanceGroupManagersScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -2092,10 +2275,12 @@ module Gogol.Compute.Internal.Sum
         InstanceGroupsListInstances_Warning_Code_EXTERNALAPIWARNING,
         InstanceGroupsListInstances_Warning_Code_FIELDVALUEOVERRIDEN,
         InstanceGroupsListInstances_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        InstanceGroupsListInstances_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         InstanceGroupsListInstances_Warning_Code_LARGEDEPLOYMENTWARNING,
         InstanceGroupsListInstances_Warning_Code_MISSINGTYPEDEPENDENCY,
         InstanceGroupsListInstances_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         InstanceGroupsListInstances_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        InstanceGroupsListInstances_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         InstanceGroupsListInstances_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         InstanceGroupsListInstances_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         InstanceGroupsListInstances_Warning_Code_NEXTHOPNOTRUNNING,
@@ -2129,10 +2314,12 @@ module Gogol.Compute.Internal.Sum
         InstanceGroupsScopedList_Warning_Code_EXTERNALAPIWARNING,
         InstanceGroupsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         InstanceGroupsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        InstanceGroupsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         InstanceGroupsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         InstanceGroupsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         InstanceGroupsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         InstanceGroupsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        InstanceGroupsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         InstanceGroupsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         InstanceGroupsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         InstanceGroupsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -2159,10 +2346,12 @@ module Gogol.Compute.Internal.Sum
         InstanceList_Warning_Code_EXTERNALAPIWARNING,
         InstanceList_Warning_Code_FIELDVALUEOVERRIDEN,
         InstanceList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        InstanceList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         InstanceList_Warning_Code_LARGEDEPLOYMENTWARNING,
         InstanceList_Warning_Code_MISSINGTYPEDEPENDENCY,
         InstanceList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         InstanceList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        InstanceList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         InstanceList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         InstanceList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         InstanceList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -2189,10 +2378,12 @@ module Gogol.Compute.Internal.Sum
         InstanceListReferrers_Warning_Code_EXTERNALAPIWARNING,
         InstanceListReferrers_Warning_Code_FIELDVALUEOVERRIDEN,
         InstanceListReferrers_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        InstanceListReferrers_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         InstanceListReferrers_Warning_Code_LARGEDEPLOYMENTWARNING,
         InstanceListReferrers_Warning_Code_MISSINGTYPEDEPENDENCY,
         InstanceListReferrers_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         InstanceListReferrers_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        InstanceListReferrers_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         InstanceListReferrers_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         InstanceListReferrers_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         InstanceListReferrers_Warning_Code_NEXTHOPNOTRUNNING,
@@ -2227,11 +2418,51 @@ module Gogol.Compute.Internal.Sum
         ..
       ),
 
+    -- * InstanceProperties_KeyRevocationActionType
+    InstanceProperties_KeyRevocationActionType
+      ( InstanceProperties_KeyRevocationActionType_KEYREVOCATIONACTIONTYPEUNSPECIFIED,
+        InstanceProperties_KeyRevocationActionType_None,
+        InstanceProperties_KeyRevocationActionType_Stop,
+        ..
+      ),
+
     -- * InstanceProperties_PrivateIpv6GoogleAccess
     InstanceProperties_PrivateIpv6GoogleAccess
       ( InstanceProperties_PrivateIpv6GoogleAccess_ENABLEBIDIRECTIONALACCESSTOGOOGLE,
         InstanceProperties_PrivateIpv6GoogleAccess_ENABLEOUTBOUNDVMACCESSTOGOOGLE,
         InstanceProperties_PrivateIpv6GoogleAccess_INHERITFROMSUBNETWORK,
+        ..
+      ),
+
+    -- * InstanceTemplateAggregatedList_Warning_Code
+    InstanceTemplateAggregatedList_Warning_Code
+      ( InstanceTemplateAggregatedList_Warning_Code_CLEANUPFAILED,
+        InstanceTemplateAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+        InstanceTemplateAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
+        InstanceTemplateAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+        InstanceTemplateAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED,
+        InstanceTemplateAggregatedList_Warning_Code_EXTERNALAPIWARNING,
+        InstanceTemplateAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
+        InstanceTemplateAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        InstanceTemplateAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+        InstanceTemplateAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+        InstanceTemplateAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+        InstanceTemplateAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+        InstanceTemplateAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        InstanceTemplateAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+        InstanceTemplateAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+        InstanceTemplateAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+        InstanceTemplateAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
+        InstanceTemplateAggregatedList_Warning_Code_NOTCRITICALERROR,
+        InstanceTemplateAggregatedList_Warning_Code_NORESULTSONPAGE,
+        InstanceTemplateAggregatedList_Warning_Code_PARTIALSUCCESS,
+        InstanceTemplateAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT,
+        InstanceTemplateAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+        InstanceTemplateAggregatedList_Warning_Code_RESOURCENOTDELETED,
+        InstanceTemplateAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+        InstanceTemplateAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+        InstanceTemplateAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
+        InstanceTemplateAggregatedList_Warning_Code_Unreachable,
         ..
       ),
 
@@ -2245,10 +2476,12 @@ module Gogol.Compute.Internal.Sum
         InstanceTemplateList_Warning_Code_EXTERNALAPIWARNING,
         InstanceTemplateList_Warning_Code_FIELDVALUEOVERRIDEN,
         InstanceTemplateList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        InstanceTemplateList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         InstanceTemplateList_Warning_Code_LARGEDEPLOYMENTWARNING,
         InstanceTemplateList_Warning_Code_MISSINGTYPEDEPENDENCY,
         InstanceTemplateList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         InstanceTemplateList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        InstanceTemplateList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         InstanceTemplateList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         InstanceTemplateList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         InstanceTemplateList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -2262,6 +2495,38 @@ module Gogol.Compute.Internal.Sum
         InstanceTemplateList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
         InstanceTemplateList_Warning_Code_UNDECLAREDPROPERTIES,
         InstanceTemplateList_Warning_Code_Unreachable,
+        ..
+      ),
+
+    -- * InstanceTemplatesScopedList_Warning_Code
+    InstanceTemplatesScopedList_Warning_Code
+      ( InstanceTemplatesScopedList_Warning_Code_CLEANUPFAILED,
+        InstanceTemplatesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+        InstanceTemplatesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
+        InstanceTemplatesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+        InstanceTemplatesScopedList_Warning_Code_EXPERIMENTALTYPEUSED,
+        InstanceTemplatesScopedList_Warning_Code_EXTERNALAPIWARNING,
+        InstanceTemplatesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
+        InstanceTemplatesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        InstanceTemplatesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+        InstanceTemplatesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+        InstanceTemplatesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+        InstanceTemplatesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+        InstanceTemplatesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        InstanceTemplatesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+        InstanceTemplatesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+        InstanceTemplatesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+        InstanceTemplatesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
+        InstanceTemplatesScopedList_Warning_Code_NOTCRITICALERROR,
+        InstanceTemplatesScopedList_Warning_Code_NORESULTSONPAGE,
+        InstanceTemplatesScopedList_Warning_Code_PARTIALSUCCESS,
+        InstanceTemplatesScopedList_Warning_Code_REQUIREDTOSAGREEMENT,
+        InstanceTemplatesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+        InstanceTemplatesScopedList_Warning_Code_RESOURCENOTDELETED,
+        InstanceTemplatesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+        InstanceTemplatesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+        InstanceTemplatesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
+        InstanceTemplatesScopedList_Warning_Code_Unreachable,
         ..
       ),
 
@@ -2299,10 +2564,12 @@ module Gogol.Compute.Internal.Sum
         InstancesScopedList_Warning_Code_EXTERNALAPIWARNING,
         InstancesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         InstancesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        InstancesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         InstancesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         InstancesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         InstancesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         InstancesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        InstancesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         InstancesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         InstancesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         InstancesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -2424,10 +2691,12 @@ module Gogol.Compute.Internal.Sum
         InterconnectAttachmentAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         InterconnectAttachmentAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         InterconnectAttachmentAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        InterconnectAttachmentAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         InterconnectAttachmentAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         InterconnectAttachmentAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         InterconnectAttachmentAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         InterconnectAttachmentAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        InterconnectAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         InterconnectAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         InterconnectAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         InterconnectAttachmentAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -2454,10 +2723,12 @@ module Gogol.Compute.Internal.Sum
         InterconnectAttachmentList_Warning_Code_EXTERNALAPIWARNING,
         InterconnectAttachmentList_Warning_Code_FIELDVALUEOVERRIDEN,
         InterconnectAttachmentList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        InterconnectAttachmentList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         InterconnectAttachmentList_Warning_Code_LARGEDEPLOYMENTWARNING,
         InterconnectAttachmentList_Warning_Code_MISSINGTYPEDEPENDENCY,
         InterconnectAttachmentList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         InterconnectAttachmentList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        InterconnectAttachmentList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         InterconnectAttachmentList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         InterconnectAttachmentList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         InterconnectAttachmentList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -2484,10 +2755,12 @@ module Gogol.Compute.Internal.Sum
         InterconnectAttachmentsScopedList_Warning_Code_EXTERNALAPIWARNING,
         InterconnectAttachmentsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         InterconnectAttachmentsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        InterconnectAttachmentsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         InterconnectAttachmentsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         InterconnectAttachmentsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         InterconnectAttachmentsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         InterconnectAttachmentsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        InterconnectAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         InterconnectAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         InterconnectAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         InterconnectAttachmentsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -2501,6 +2774,20 @@ module Gogol.Compute.Internal.Sum
         InterconnectAttachmentsScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
         InterconnectAttachmentsScopedList_Warning_Code_UNDECLAREDPROPERTIES,
         InterconnectAttachmentsScopedList_Warning_Code_Unreachable,
+        ..
+      ),
+
+    -- * InterconnectDiagnostics_BundleAggregationType
+    InterconnectDiagnostics_BundleAggregationType
+      ( InterconnectDiagnostics_BundleAggregationType_BUNDLEAGGREGATIONTYPELACP,
+        InterconnectDiagnostics_BundleAggregationType_BUNDLEAGGREGATIONTYPESTATIC,
+        ..
+      ),
+
+    -- * InterconnectDiagnostics_BundleOperationalStatus
+    InterconnectDiagnostics_BundleOperationalStatus
+      ( InterconnectDiagnostics_BundleOperationalStatus_BUNDLEOPERATIONALSTATUSDOWN,
+        InterconnectDiagnostics_BundleOperationalStatus_BUNDLEOPERATIONALSTATUSUP,
         ..
       ),
 
@@ -2521,6 +2808,13 @@ module Gogol.Compute.Internal.Sum
         ..
       ),
 
+    -- * InterconnectDiagnosticsLinkStatus_OperationalStatus
+    InterconnectDiagnosticsLinkStatus_OperationalStatus
+      ( InterconnectDiagnosticsLinkStatus_OperationalStatus_LINKOPERATIONALSTATUSDOWN,
+        InterconnectDiagnosticsLinkStatus_OperationalStatus_LINKOPERATIONALSTATUSUP,
+        ..
+      ),
+
     -- * InterconnectList_Warning_Code
     InterconnectList_Warning_Code
       ( InterconnectList_Warning_Code_CLEANUPFAILED,
@@ -2531,10 +2825,12 @@ module Gogol.Compute.Internal.Sum
         InterconnectList_Warning_Code_EXTERNALAPIWARNING,
         InterconnectList_Warning_Code_FIELDVALUEOVERRIDEN,
         InterconnectList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        InterconnectList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         InterconnectList_Warning_Code_LARGEDEPLOYMENTWARNING,
         InterconnectList_Warning_Code_MISSINGTYPEDEPENDENCY,
         InterconnectList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         InterconnectList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        InterconnectList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         InterconnectList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         InterconnectList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         InterconnectList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -2583,10 +2879,12 @@ module Gogol.Compute.Internal.Sum
         InterconnectLocationList_Warning_Code_EXTERNALAPIWARNING,
         InterconnectLocationList_Warning_Code_FIELDVALUEOVERRIDEN,
         InterconnectLocationList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        InterconnectLocationList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         InterconnectLocationList_Warning_Code_LARGEDEPLOYMENTWARNING,
         InterconnectLocationList_Warning_Code_MISSINGTYPEDEPENDENCY,
         InterconnectLocationList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         InterconnectLocationList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        InterconnectLocationList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         InterconnectLocationList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         InterconnectLocationList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         InterconnectLocationList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -2658,10 +2956,12 @@ module Gogol.Compute.Internal.Sum
         LicensesListResponse_Warning_Code_EXTERNALAPIWARNING,
         LicensesListResponse_Warning_Code_FIELDVALUEOVERRIDEN,
         LicensesListResponse_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        LicensesListResponse_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         LicensesListResponse_Warning_Code_LARGEDEPLOYMENTWARNING,
         LicensesListResponse_Warning_Code_MISSINGTYPEDEPENDENCY,
         LicensesListResponse_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         LicensesListResponse_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        LicensesListResponse_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         LicensesListResponse_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         LicensesListResponse_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         LicensesListResponse_Warning_Code_NEXTHOPNOTRUNNING,
@@ -2675,6 +2975,14 @@ module Gogol.Compute.Internal.Sum
         LicensesListResponse_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
         LicensesListResponse_Warning_Code_UNDECLAREDPROPERTIES,
         LicensesListResponse_Warning_Code_Unreachable,
+        ..
+      ),
+
+    -- * LocationPolicy_TargetShape
+    LocationPolicy_TargetShape
+      ( LocationPolicy_TargetShape_Any,
+        LocationPolicy_TargetShape_ANYSINGLEZONE,
+        LocationPolicy_TargetShape_Balanced,
         ..
       ),
 
@@ -2721,10 +3029,12 @@ module Gogol.Compute.Internal.Sum
         MachineImageList_Warning_Code_EXTERNALAPIWARNING,
         MachineImageList_Warning_Code_FIELDVALUEOVERRIDEN,
         MachineImageList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        MachineImageList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         MachineImageList_Warning_Code_LARGEDEPLOYMENTWARNING,
         MachineImageList_Warning_Code_MISSINGTYPEDEPENDENCY,
         MachineImageList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         MachineImageList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        MachineImageList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         MachineImageList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         MachineImageList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         MachineImageList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -2751,10 +3061,12 @@ module Gogol.Compute.Internal.Sum
         MachineTypeAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         MachineTypeAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         MachineTypeAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        MachineTypeAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         MachineTypeAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         MachineTypeAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         MachineTypeAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         MachineTypeAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        MachineTypeAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         MachineTypeAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         MachineTypeAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         MachineTypeAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -2781,10 +3093,12 @@ module Gogol.Compute.Internal.Sum
         MachineTypeList_Warning_Code_EXTERNALAPIWARNING,
         MachineTypeList_Warning_Code_FIELDVALUEOVERRIDEN,
         MachineTypeList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        MachineTypeList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         MachineTypeList_Warning_Code_LARGEDEPLOYMENTWARNING,
         MachineTypeList_Warning_Code_MISSINGTYPEDEPENDENCY,
         MachineTypeList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         MachineTypeList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        MachineTypeList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         MachineTypeList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         MachineTypeList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         MachineTypeList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -2811,10 +3125,12 @@ module Gogol.Compute.Internal.Sum
         MachineTypesScopedList_Warning_Code_EXTERNALAPIWARNING,
         MachineTypesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         MachineTypesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        MachineTypesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         MachineTypesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         MachineTypesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         MachineTypesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         MachineTypesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        MachineTypesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         MachineTypesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         MachineTypesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         MachineTypesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -2889,6 +3205,185 @@ module Gogol.Compute.Internal.Sum
         ..
       ),
 
+    -- * NetworkAttachment_ConnectionPreference
+    NetworkAttachment_ConnectionPreference
+      ( NetworkAttachment_ConnectionPreference_ACCEPTAUTOMATIC,
+        NetworkAttachment_ConnectionPreference_ACCEPTMANUAL,
+        NetworkAttachment_ConnectionPreference_Invalid,
+        ..
+      ),
+
+    -- * NetworkAttachmentAggregatedList_Warning_Code
+    NetworkAttachmentAggregatedList_Warning_Code
+      ( NetworkAttachmentAggregatedList_Warning_Code_CLEANUPFAILED,
+        NetworkAttachmentAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+        NetworkAttachmentAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
+        NetworkAttachmentAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+        NetworkAttachmentAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED,
+        NetworkAttachmentAggregatedList_Warning_Code_EXTERNALAPIWARNING,
+        NetworkAttachmentAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
+        NetworkAttachmentAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        NetworkAttachmentAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+        NetworkAttachmentAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+        NetworkAttachmentAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+        NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+        NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+        NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+        NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+        NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
+        NetworkAttachmentAggregatedList_Warning_Code_NOTCRITICALERROR,
+        NetworkAttachmentAggregatedList_Warning_Code_NORESULTSONPAGE,
+        NetworkAttachmentAggregatedList_Warning_Code_PARTIALSUCCESS,
+        NetworkAttachmentAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT,
+        NetworkAttachmentAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+        NetworkAttachmentAggregatedList_Warning_Code_RESOURCENOTDELETED,
+        NetworkAttachmentAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+        NetworkAttachmentAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+        NetworkAttachmentAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
+        NetworkAttachmentAggregatedList_Warning_Code_Unreachable,
+        ..
+      ),
+
+    -- * NetworkAttachmentConnectedEndpoint_Status
+    NetworkAttachmentConnectedEndpoint_Status
+      ( NetworkAttachmentConnectedEndpoint_Status_Accepted,
+        NetworkAttachmentConnectedEndpoint_Status_Closed,
+        NetworkAttachmentConnectedEndpoint_Status_NEEDSATTENTION,
+        NetworkAttachmentConnectedEndpoint_Status_Pending,
+        NetworkAttachmentConnectedEndpoint_Status_Rejected,
+        NetworkAttachmentConnectedEndpoint_Status_STATUSUNSPECIFIED,
+        ..
+      ),
+
+    -- * NetworkAttachmentList_Warning_Code
+    NetworkAttachmentList_Warning_Code
+      ( NetworkAttachmentList_Warning_Code_CLEANUPFAILED,
+        NetworkAttachmentList_Warning_Code_DEPRECATEDRESOURCEUSED,
+        NetworkAttachmentList_Warning_Code_DEPRECATEDTYPEUSED,
+        NetworkAttachmentList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+        NetworkAttachmentList_Warning_Code_EXPERIMENTALTYPEUSED,
+        NetworkAttachmentList_Warning_Code_EXTERNALAPIWARNING,
+        NetworkAttachmentList_Warning_Code_FIELDVALUEOVERRIDEN,
+        NetworkAttachmentList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        NetworkAttachmentList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+        NetworkAttachmentList_Warning_Code_LARGEDEPLOYMENTWARNING,
+        NetworkAttachmentList_Warning_Code_MISSINGTYPEDEPENDENCY,
+        NetworkAttachmentList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+        NetworkAttachmentList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        NetworkAttachmentList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+        NetworkAttachmentList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+        NetworkAttachmentList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+        NetworkAttachmentList_Warning_Code_NEXTHOPNOTRUNNING,
+        NetworkAttachmentList_Warning_Code_NOTCRITICALERROR,
+        NetworkAttachmentList_Warning_Code_NORESULTSONPAGE,
+        NetworkAttachmentList_Warning_Code_PARTIALSUCCESS,
+        NetworkAttachmentList_Warning_Code_REQUIREDTOSAGREEMENT,
+        NetworkAttachmentList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+        NetworkAttachmentList_Warning_Code_RESOURCENOTDELETED,
+        NetworkAttachmentList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+        NetworkAttachmentList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+        NetworkAttachmentList_Warning_Code_UNDECLAREDPROPERTIES,
+        NetworkAttachmentList_Warning_Code_Unreachable,
+        ..
+      ),
+
+    -- * NetworkAttachmentsScopedList_Warning_Code
+    NetworkAttachmentsScopedList_Warning_Code
+      ( NetworkAttachmentsScopedList_Warning_Code_CLEANUPFAILED,
+        NetworkAttachmentsScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+        NetworkAttachmentsScopedList_Warning_Code_DEPRECATEDTYPEUSED,
+        NetworkAttachmentsScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+        NetworkAttachmentsScopedList_Warning_Code_EXPERIMENTALTYPEUSED,
+        NetworkAttachmentsScopedList_Warning_Code_EXTERNALAPIWARNING,
+        NetworkAttachmentsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
+        NetworkAttachmentsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        NetworkAttachmentsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+        NetworkAttachmentsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+        NetworkAttachmentsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+        NetworkAttachmentsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+        NetworkAttachmentsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        NetworkAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+        NetworkAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+        NetworkAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+        NetworkAttachmentsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
+        NetworkAttachmentsScopedList_Warning_Code_NOTCRITICALERROR,
+        NetworkAttachmentsScopedList_Warning_Code_NORESULTSONPAGE,
+        NetworkAttachmentsScopedList_Warning_Code_PARTIALSUCCESS,
+        NetworkAttachmentsScopedList_Warning_Code_REQUIREDTOSAGREEMENT,
+        NetworkAttachmentsScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+        NetworkAttachmentsScopedList_Warning_Code_RESOURCENOTDELETED,
+        NetworkAttachmentsScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+        NetworkAttachmentsScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+        NetworkAttachmentsScopedList_Warning_Code_UNDECLAREDPROPERTIES,
+        NetworkAttachmentsScopedList_Warning_Code_Unreachable,
+        ..
+      ),
+
+    -- * NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+    NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+      ( NetworkEdgeSecurityServiceAggregatedList_Warning_Code_CLEANUPFAILED,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_EXTERNALAPIWARNING,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NOTCRITICALERROR,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NORESULTSONPAGE,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_PARTIALSUCCESS,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_RESOURCENOTDELETED,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
+        NetworkEdgeSecurityServiceAggregatedList_Warning_Code_Unreachable,
+        ..
+      ),
+
+    -- * NetworkEdgeSecurityServicesScopedList_Warning_Code
+    NetworkEdgeSecurityServicesScopedList_Warning_Code
+      ( NetworkEdgeSecurityServicesScopedList_Warning_Code_CLEANUPFAILED,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_EXPERIMENTALTYPEUSED,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_EXTERNALAPIWARNING,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_NOTCRITICALERROR,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_NORESULTSONPAGE,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_PARTIALSUCCESS,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_REQUIREDTOSAGREEMENT,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_RESOURCENOTDELETED,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
+        NetworkEdgeSecurityServicesScopedList_Warning_Code_Unreachable,
+        ..
+      ),
+
     -- * NetworkEndpointGroup_NetworkEndpointType
     NetworkEndpointGroup_NetworkEndpointType
       ( NetworkEndpointGroup_NetworkEndpointType_GCEVMIP,
@@ -2911,10 +3406,12 @@ module Gogol.Compute.Internal.Sum
         NetworkEndpointGroupAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         NetworkEndpointGroupAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         NetworkEndpointGroupAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        NetworkEndpointGroupAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         NetworkEndpointGroupAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         NetworkEndpointGroupAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         NetworkEndpointGroupAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         NetworkEndpointGroupAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        NetworkEndpointGroupAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         NetworkEndpointGroupAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         NetworkEndpointGroupAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         NetworkEndpointGroupAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -2941,10 +3438,12 @@ module Gogol.Compute.Internal.Sum
         NetworkEndpointGroupList_Warning_Code_EXTERNALAPIWARNING,
         NetworkEndpointGroupList_Warning_Code_FIELDVALUEOVERRIDEN,
         NetworkEndpointGroupList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        NetworkEndpointGroupList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         NetworkEndpointGroupList_Warning_Code_LARGEDEPLOYMENTWARNING,
         NetworkEndpointGroupList_Warning_Code_MISSINGTYPEDEPENDENCY,
         NetworkEndpointGroupList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         NetworkEndpointGroupList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        NetworkEndpointGroupList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         NetworkEndpointGroupList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         NetworkEndpointGroupList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         NetworkEndpointGroupList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -2958,6 +3457,17 @@ module Gogol.Compute.Internal.Sum
         NetworkEndpointGroupList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
         NetworkEndpointGroupList_Warning_Code_UNDECLAREDPROPERTIES,
         NetworkEndpointGroupList_Warning_Code_Unreachable,
+        ..
+      ),
+
+    -- * NetworkEndpointGroupPscData_PscConnectionStatus
+    NetworkEndpointGroupPscData_PscConnectionStatus
+      ( NetworkEndpointGroupPscData_PscConnectionStatus_Accepted,
+        NetworkEndpointGroupPscData_PscConnectionStatus_Closed,
+        NetworkEndpointGroupPscData_PscConnectionStatus_NEEDSATTENTION,
+        NetworkEndpointGroupPscData_PscConnectionStatus_Pending,
+        NetworkEndpointGroupPscData_PscConnectionStatus_Rejected,
+        NetworkEndpointGroupPscData_PscConnectionStatus_STATUSUNSPECIFIED,
         ..
       ),
 
@@ -2978,10 +3488,12 @@ module Gogol.Compute.Internal.Sum
         NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_EXTERNALAPIWARNING,
         NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_FIELDVALUEOVERRIDEN,
         NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_LARGEDEPLOYMENTWARNING,
         NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_MISSINGTYPEDEPENDENCY,
         NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3008,10 +3520,12 @@ module Gogol.Compute.Internal.Sum
         NetworkEndpointGroupsScopedList_Warning_Code_EXTERNALAPIWARNING,
         NetworkEndpointGroupsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         NetworkEndpointGroupsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        NetworkEndpointGroupsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         NetworkEndpointGroupsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         NetworkEndpointGroupsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         NetworkEndpointGroupsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         NetworkEndpointGroupsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        NetworkEndpointGroupsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         NetworkEndpointGroupsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         NetworkEndpointGroupsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         NetworkEndpointGroupsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3060,10 +3574,12 @@ module Gogol.Compute.Internal.Sum
         NetworkList_Warning_Code_EXTERNALAPIWARNING,
         NetworkList_Warning_Code_FIELDVALUEOVERRIDEN,
         NetworkList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        NetworkList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         NetworkList_Warning_Code_LARGEDEPLOYMENTWARNING,
         NetworkList_Warning_Code_MISSINGTYPEDEPENDENCY,
         NetworkList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         NetworkList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        NetworkList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         NetworkList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         NetworkList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         NetworkList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3077,6 +3593,13 @@ module Gogol.Compute.Internal.Sum
         NetworkList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
         NetworkList_Warning_Code_UNDECLAREDPROPERTIES,
         NetworkList_Warning_Code_Unreachable,
+        ..
+      ),
+
+    -- * NetworkPeering_StackType
+    NetworkPeering_StackType
+      ( NetworkPeering_StackType_IPV4_IPV6,
+        NetworkPeering_StackType_IPV4ONLY,
         ..
       ),
 
@@ -3137,10 +3660,12 @@ module Gogol.Compute.Internal.Sum
         NodeGroupAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         NodeGroupAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         NodeGroupAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        NodeGroupAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         NodeGroupAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         NodeGroupAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         NodeGroupAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         NodeGroupAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        NodeGroupAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         NodeGroupAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         NodeGroupAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         NodeGroupAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3176,10 +3701,12 @@ module Gogol.Compute.Internal.Sum
         NodeGroupList_Warning_Code_EXTERNALAPIWARNING,
         NodeGroupList_Warning_Code_FIELDVALUEOVERRIDEN,
         NodeGroupList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        NodeGroupList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         NodeGroupList_Warning_Code_LARGEDEPLOYMENTWARNING,
         NodeGroupList_Warning_Code_MISSINGTYPEDEPENDENCY,
         NodeGroupList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         NodeGroupList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        NodeGroupList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         NodeGroupList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         NodeGroupList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         NodeGroupList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3224,10 +3751,12 @@ module Gogol.Compute.Internal.Sum
         NodeGroupsListNodes_Warning_Code_EXTERNALAPIWARNING,
         NodeGroupsListNodes_Warning_Code_FIELDVALUEOVERRIDEN,
         NodeGroupsListNodes_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        NodeGroupsListNodes_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         NodeGroupsListNodes_Warning_Code_LARGEDEPLOYMENTWARNING,
         NodeGroupsListNodes_Warning_Code_MISSINGTYPEDEPENDENCY,
         NodeGroupsListNodes_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         NodeGroupsListNodes_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        NodeGroupsListNodes_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         NodeGroupsListNodes_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         NodeGroupsListNodes_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         NodeGroupsListNodes_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3254,10 +3783,12 @@ module Gogol.Compute.Internal.Sum
         NodeGroupsScopedList_Warning_Code_EXTERNALAPIWARNING,
         NodeGroupsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         NodeGroupsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        NodeGroupsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         NodeGroupsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         NodeGroupsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         NodeGroupsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         NodeGroupsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        NodeGroupsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         NodeGroupsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         NodeGroupsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         NodeGroupsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3301,10 +3832,12 @@ module Gogol.Compute.Internal.Sum
         NodeTemplateAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         NodeTemplateAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         NodeTemplateAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        NodeTemplateAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         NodeTemplateAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         NodeTemplateAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         NodeTemplateAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         NodeTemplateAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        NodeTemplateAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         NodeTemplateAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         NodeTemplateAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         NodeTemplateAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3331,10 +3864,12 @@ module Gogol.Compute.Internal.Sum
         NodeTemplateList_Warning_Code_EXTERNALAPIWARNING,
         NodeTemplateList_Warning_Code_FIELDVALUEOVERRIDEN,
         NodeTemplateList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        NodeTemplateList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         NodeTemplateList_Warning_Code_LARGEDEPLOYMENTWARNING,
         NodeTemplateList_Warning_Code_MISSINGTYPEDEPENDENCY,
         NodeTemplateList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         NodeTemplateList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        NodeTemplateList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         NodeTemplateList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         NodeTemplateList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         NodeTemplateList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3361,10 +3896,12 @@ module Gogol.Compute.Internal.Sum
         NodeTemplatesScopedList_Warning_Code_EXTERNALAPIWARNING,
         NodeTemplatesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         NodeTemplatesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        NodeTemplatesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         NodeTemplatesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         NodeTemplatesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         NodeTemplatesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         NodeTemplatesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        NodeTemplatesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         NodeTemplatesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         NodeTemplatesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         NodeTemplatesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3391,10 +3928,12 @@ module Gogol.Compute.Internal.Sum
         NodeTypeAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         NodeTypeAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         NodeTypeAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        NodeTypeAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         NodeTypeAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         NodeTypeAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         NodeTypeAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         NodeTypeAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        NodeTypeAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         NodeTypeAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         NodeTypeAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         NodeTypeAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3421,10 +3960,12 @@ module Gogol.Compute.Internal.Sum
         NodeTypeList_Warning_Code_EXTERNALAPIWARNING,
         NodeTypeList_Warning_Code_FIELDVALUEOVERRIDEN,
         NodeTypeList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        NodeTypeList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         NodeTypeList_Warning_Code_LARGEDEPLOYMENTWARNING,
         NodeTypeList_Warning_Code_MISSINGTYPEDEPENDENCY,
         NodeTypeList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         NodeTypeList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        NodeTypeList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         NodeTypeList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         NodeTypeList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         NodeTypeList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3451,10 +3992,12 @@ module Gogol.Compute.Internal.Sum
         NodeTypesScopedList_Warning_Code_EXTERNALAPIWARNING,
         NodeTypesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         NodeTypesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        NodeTypesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         NodeTypesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         NodeTypesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         NodeTypesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         NodeTypesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        NodeTypesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         NodeTypesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         NodeTypesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         NodeTypesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3481,10 +4024,12 @@ module Gogol.Compute.Internal.Sum
         NotificationEndpointList_Warning_Code_EXTERNALAPIWARNING,
         NotificationEndpointList_Warning_Code_FIELDVALUEOVERRIDEN,
         NotificationEndpointList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        NotificationEndpointList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         NotificationEndpointList_Warning_Code_LARGEDEPLOYMENTWARNING,
         NotificationEndpointList_Warning_Code_MISSINGTYPEDEPENDENCY,
         NotificationEndpointList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         NotificationEndpointList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        NotificationEndpointList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         NotificationEndpointList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         NotificationEndpointList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         NotificationEndpointList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3519,10 +4064,12 @@ module Gogol.Compute.Internal.Sum
         Operation_WarningsItem_Code_EXTERNALAPIWARNING,
         Operation_WarningsItem_Code_FIELDVALUEOVERRIDEN,
         Operation_WarningsItem_Code_INJECTEDKERNELSDEPRECATED,
+        Operation_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         Operation_WarningsItem_Code_LARGEDEPLOYMENTWARNING,
         Operation_WarningsItem_Code_MISSINGTYPEDEPENDENCY,
         Operation_WarningsItem_Code_NEXTHOPADDRESSNOTASSIGNED,
         Operation_WarningsItem_Code_NEXTHOPCANNOTIPFORWARD,
+        Operation_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         Operation_WarningsItem_Code_NEXTHOPINSTANCENOTFOUND,
         Operation_WarningsItem_Code_NEXTHOPINSTANCENOTONNETWORK,
         Operation_WarningsItem_Code_NEXTHOPNOTRUNNING,
@@ -3549,10 +4096,12 @@ module Gogol.Compute.Internal.Sum
         OperationAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         OperationAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         OperationAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        OperationAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         OperationAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         OperationAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         OperationAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         OperationAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        OperationAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         OperationAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         OperationAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         OperationAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3579,10 +4128,12 @@ module Gogol.Compute.Internal.Sum
         OperationList_Warning_Code_EXTERNALAPIWARNING,
         OperationList_Warning_Code_FIELDVALUEOVERRIDEN,
         OperationList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        OperationList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         OperationList_Warning_Code_LARGEDEPLOYMENTWARNING,
         OperationList_Warning_Code_MISSINGTYPEDEPENDENCY,
         OperationList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         OperationList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        OperationList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         OperationList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         OperationList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         OperationList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3609,10 +4160,12 @@ module Gogol.Compute.Internal.Sum
         OperationsScopedList_Warning_Code_EXTERNALAPIWARNING,
         OperationsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         OperationsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        OperationsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         OperationsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         OperationsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         OperationsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         OperationsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        OperationsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         OperationsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         OperationsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         OperationsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3664,10 +4217,12 @@ module Gogol.Compute.Internal.Sum
         PacketMirroringAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         PacketMirroringAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         PacketMirroringAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        PacketMirroringAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         PacketMirroringAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         PacketMirroringAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         PacketMirroringAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         PacketMirroringAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        PacketMirroringAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         PacketMirroringAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         PacketMirroringAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         PacketMirroringAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3702,10 +4257,12 @@ module Gogol.Compute.Internal.Sum
         PacketMirroringList_Warning_Code_EXTERNALAPIWARNING,
         PacketMirroringList_Warning_Code_FIELDVALUEOVERRIDEN,
         PacketMirroringList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        PacketMirroringList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         PacketMirroringList_Warning_Code_LARGEDEPLOYMENTWARNING,
         PacketMirroringList_Warning_Code_MISSINGTYPEDEPENDENCY,
         PacketMirroringList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         PacketMirroringList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        PacketMirroringList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         PacketMirroringList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         PacketMirroringList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         PacketMirroringList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3732,10 +4289,12 @@ module Gogol.Compute.Internal.Sum
         PacketMirroringsScopedList_Warning_Code_EXTERNALAPIWARNING,
         PacketMirroringsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         PacketMirroringsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        PacketMirroringsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         PacketMirroringsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         PacketMirroringsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         PacketMirroringsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         PacketMirroringsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        PacketMirroringsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         PacketMirroringsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         PacketMirroringsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         PacketMirroringsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3786,6 +4345,15 @@ module Gogol.Compute.Internal.Sum
         ..
       ),
 
+    -- * Project_VmDnsSetting
+    Project_VmDnsSetting
+      ( Project_VmDnsSetting_GLOBALDEFAULT,
+        Project_VmDnsSetting_UNSPECIFIEDVMDNSSETTING,
+        Project_VmDnsSetting_ZONALDEFAULT,
+        Project_VmDnsSetting_ZONALONLY,
+        ..
+      ),
+
     -- * Project_XpnProjectStatus
     Project_XpnProjectStatus
       ( Project_XpnProjectStatus_Host,
@@ -3824,10 +4392,12 @@ module Gogol.Compute.Internal.Sum
         PublicAdvertisedPrefixList_Warning_Code_EXTERNALAPIWARNING,
         PublicAdvertisedPrefixList_Warning_Code_FIELDVALUEOVERRIDEN,
         PublicAdvertisedPrefixList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        PublicAdvertisedPrefixList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         PublicAdvertisedPrefixList_Warning_Code_LARGEDEPLOYMENTWARNING,
         PublicAdvertisedPrefixList_Warning_Code_MISSINGTYPEDEPENDENCY,
         PublicAdvertisedPrefixList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         PublicAdvertisedPrefixList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        PublicAdvertisedPrefixList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         PublicAdvertisedPrefixList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         PublicAdvertisedPrefixList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         PublicAdvertisedPrefixList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3863,10 +4433,12 @@ module Gogol.Compute.Internal.Sum
         PublicDelegatedPrefixAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         PublicDelegatedPrefixAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         PublicDelegatedPrefixAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        PublicDelegatedPrefixAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         PublicDelegatedPrefixAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         PublicDelegatedPrefixAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         PublicDelegatedPrefixAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         PublicDelegatedPrefixAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        PublicDelegatedPrefixAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         PublicDelegatedPrefixAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         PublicDelegatedPrefixAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         PublicDelegatedPrefixAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3893,10 +4465,12 @@ module Gogol.Compute.Internal.Sum
         PublicDelegatedPrefixList_Warning_Code_EXTERNALAPIWARNING,
         PublicDelegatedPrefixList_Warning_Code_FIELDVALUEOVERRIDEN,
         PublicDelegatedPrefixList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        PublicDelegatedPrefixList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         PublicDelegatedPrefixList_Warning_Code_LARGEDEPLOYMENTWARNING,
         PublicDelegatedPrefixList_Warning_Code_MISSINGTYPEDEPENDENCY,
         PublicDelegatedPrefixList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         PublicDelegatedPrefixList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        PublicDelegatedPrefixList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         PublicDelegatedPrefixList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         PublicDelegatedPrefixList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         PublicDelegatedPrefixList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3930,10 +4504,12 @@ module Gogol.Compute.Internal.Sum
         PublicDelegatedPrefixesScopedList_Warning_Code_EXTERNALAPIWARNING,
         PublicDelegatedPrefixesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         PublicDelegatedPrefixesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        PublicDelegatedPrefixesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         PublicDelegatedPrefixesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         PublicDelegatedPrefixesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         PublicDelegatedPrefixesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         PublicDelegatedPrefixesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        PublicDelegatedPrefixesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         PublicDelegatedPrefixesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         PublicDelegatedPrefixesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         PublicDelegatedPrefixesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -3974,6 +4550,7 @@ module Gogol.Compute.Internal.Sum
         Quota_Metric_COMMITTEDN2ACPUS,
         Quota_Metric_COMMITTEDN2DCPUS,
         Quota_Metric_COMMITTEDN2CPUS,
+        Quota_Metric_COMMITTEDNVIDIAA10080GBGPUS,
         Quota_Metric_COMMITTEDNVIDIAA100GPUS,
         Quota_Metric_COMMITTEDNVIDIAK80GPUS,
         Quota_Metric_COMMITTEDNVIDIAP100GPUS,
@@ -3992,8 +4569,12 @@ module Gogol.Compute.Internal.Sum
         Quota_Metric_EXTERNALVPNGATEWAYS,
         Quota_Metric_Firewalls,
         Quota_Metric_FORWARDINGRULES,
+        Quota_Metric_GLOBALEXTERNALMANAGEDBACKENDSERVICES,
         Quota_Metric_GLOBALEXTERNALMANAGEDFORWARDINGRULES,
+        Quota_Metric_GLOBALEXTERNALPROXYLBBACKENDSERVICES,
         Quota_Metric_GLOBALINTERNALADDRESSES,
+        Quota_Metric_GLOBALINTERNALMANAGEDBACKENDSERVICES,
+        Quota_Metric_GLOBALINTERNALTRAFFICDIRECTORBACKENDSERVICES,
         Quota_Metric_GPUSALLREGIONS,
         Quota_Metric_HEALTHCHECKS,
         Quota_Metric_Images,
@@ -4020,10 +4601,12 @@ module Gogol.Compute.Internal.Sum
         Quota_Metric_N2DCPUS,
         Quota_Metric_N2CPUS,
         Quota_Metric_Networks,
+        Quota_Metric_NETWORKATTACHMENTS,
         Quota_Metric_NETWORKENDPOINTGROUPS,
         Quota_Metric_NETWORKFIREWALLPOLICIES,
         Quota_Metric_NODEGROUPS,
         Quota_Metric_NODETEMPLATES,
+        Quota_Metric_NVIDIAA10080GBGPUS,
         Quota_Metric_NVIDIAA100GPUS,
         Quota_Metric_NVIDIAK80GPUS,
         Quota_Metric_NVIDIAP100GPUS,
@@ -4037,6 +4620,7 @@ module Gogol.Compute.Internal.Sum
         Quota_Metric_PDEXTREMETOTALPROVISIONEDIOPS,
         Quota_Metric_PREEMPTIBLECPUS,
         Quota_Metric_PREEMPTIBLELOCALSSDGB,
+        Quota_Metric_PREEMPTIBLENVIDIAA10080GBGPUS,
         Quota_Metric_PREEMPTIBLENVIDIAA100GPUS,
         Quota_Metric_PREEMPTIBLENVIDIAK80GPUS,
         Quota_Metric_PREEMPTIBLENVIDIAP100GPUS,
@@ -4051,7 +4635,11 @@ module Gogol.Compute.Internal.Sum
         Quota_Metric_PUBLICADVERTISEDPREFIXES,
         Quota_Metric_PUBLICDELEGATEDPREFIXES,
         Quota_Metric_REGIONALAUTOSCALERS,
+        Quota_Metric_REGIONALEXTERNALMANAGEDBACKENDSERVICES,
+        Quota_Metric_REGIONALEXTERNALNETWORKLBBACKENDSERVICES,
         Quota_Metric_REGIONALINSTANCEGROUPMANAGERS,
+        Quota_Metric_REGIONALINTERNALLBBACKENDSERVICES,
+        Quota_Metric_REGIONALINTERNALMANAGEDBACKENDSERVICES,
         Quota_Metric_Reservations,
         Quota_Metric_RESOURCEPOLICIES,
         Quota_Metric_Routers,
@@ -4067,6 +4655,7 @@ module Gogol.Compute.Internal.Sum
         Quota_Metric_SSLCERTIFICATES,
         Quota_Metric_STATICADDRESSES,
         Quota_Metric_STATICBYOIPADDRESSES,
+        Quota_Metric_STATICEXTERNALIPV6ADDRESSRANGES,
         Quota_Metric_Subnetworks,
         Quota_Metric_T2ACPUS,
         Quota_Metric_T2DCPUS,
@@ -4101,10 +4690,12 @@ module Gogol.Compute.Internal.Sum
         RegionAutoscalerList_Warning_Code_EXTERNALAPIWARNING,
         RegionAutoscalerList_Warning_Code_FIELDVALUEOVERRIDEN,
         RegionAutoscalerList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        RegionAutoscalerList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         RegionAutoscalerList_Warning_Code_LARGEDEPLOYMENTWARNING,
         RegionAutoscalerList_Warning_Code_MISSINGTYPEDEPENDENCY,
         RegionAutoscalerList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         RegionAutoscalerList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        RegionAutoscalerList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         RegionAutoscalerList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         RegionAutoscalerList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         RegionAutoscalerList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -4131,10 +4722,12 @@ module Gogol.Compute.Internal.Sum
         RegionDiskTypeList_Warning_Code_EXTERNALAPIWARNING,
         RegionDiskTypeList_Warning_Code_FIELDVALUEOVERRIDEN,
         RegionDiskTypeList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        RegionDiskTypeList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         RegionDiskTypeList_Warning_Code_LARGEDEPLOYMENTWARNING,
         RegionDiskTypeList_Warning_Code_MISSINGTYPEDEPENDENCY,
         RegionDiskTypeList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         RegionDiskTypeList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        RegionDiskTypeList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         RegionDiskTypeList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         RegionDiskTypeList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         RegionDiskTypeList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -4161,10 +4754,12 @@ module Gogol.Compute.Internal.Sum
         RegionInstanceGroupList_Warning_Code_EXTERNALAPIWARNING,
         RegionInstanceGroupList_Warning_Code_FIELDVALUEOVERRIDEN,
         RegionInstanceGroupList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        RegionInstanceGroupList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         RegionInstanceGroupList_Warning_Code_LARGEDEPLOYMENTWARNING,
         RegionInstanceGroupList_Warning_Code_MISSINGTYPEDEPENDENCY,
         RegionInstanceGroupList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         RegionInstanceGroupList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        RegionInstanceGroupList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         RegionInstanceGroupList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         RegionInstanceGroupList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         RegionInstanceGroupList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -4191,10 +4786,12 @@ module Gogol.Compute.Internal.Sum
         RegionInstanceGroupManagerList_Warning_Code_EXTERNALAPIWARNING,
         RegionInstanceGroupManagerList_Warning_Code_FIELDVALUEOVERRIDEN,
         RegionInstanceGroupManagerList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        RegionInstanceGroupManagerList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         RegionInstanceGroupManagerList_Warning_Code_LARGEDEPLOYMENTWARNING,
         RegionInstanceGroupManagerList_Warning_Code_MISSINGTYPEDEPENDENCY,
         RegionInstanceGroupManagerList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         RegionInstanceGroupManagerList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        RegionInstanceGroupManagerList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         RegionInstanceGroupManagerList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         RegionInstanceGroupManagerList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         RegionInstanceGroupManagerList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -4239,10 +4836,12 @@ module Gogol.Compute.Internal.Sum
         RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_EXTERNALAPIWARNING,
         RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_FIELDVALUEOVERRIDEN,
         RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_LARGEDEPLOYMENTWARNING,
         RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_MISSINGTYPEDEPENDENCY,
         RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_NEXTHOPNOTRUNNING,
@@ -4269,10 +4868,12 @@ module Gogol.Compute.Internal.Sum
         RegionInstanceGroupsListInstances_Warning_Code_EXTERNALAPIWARNING,
         RegionInstanceGroupsListInstances_Warning_Code_FIELDVALUEOVERRIDEN,
         RegionInstanceGroupsListInstances_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        RegionInstanceGroupsListInstances_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         RegionInstanceGroupsListInstances_Warning_Code_LARGEDEPLOYMENTWARNING,
         RegionInstanceGroupsListInstances_Warning_Code_MISSINGTYPEDEPENDENCY,
         RegionInstanceGroupsListInstances_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         RegionInstanceGroupsListInstances_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        RegionInstanceGroupsListInstances_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         RegionInstanceGroupsListInstances_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         RegionInstanceGroupsListInstances_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         RegionInstanceGroupsListInstances_Warning_Code_NEXTHOPNOTRUNNING,
@@ -4306,10 +4907,12 @@ module Gogol.Compute.Internal.Sum
         RegionList_Warning_Code_EXTERNALAPIWARNING,
         RegionList_Warning_Code_FIELDVALUEOVERRIDEN,
         RegionList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        RegionList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         RegionList_Warning_Code_LARGEDEPLOYMENTWARNING,
         RegionList_Warning_Code_MISSINGTYPEDEPENDENCY,
         RegionList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         RegionList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        RegionList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         RegionList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         RegionList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         RegionList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -4364,10 +4967,12 @@ module Gogol.Compute.Internal.Sum
         ReservationAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         ReservationAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         ReservationAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        ReservationAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         ReservationAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         ReservationAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         ReservationAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         ReservationAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        ReservationAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         ReservationAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         ReservationAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         ReservationAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -4394,10 +4999,12 @@ module Gogol.Compute.Internal.Sum
         ReservationList_Warning_Code_EXTERNALAPIWARNING,
         ReservationList_Warning_Code_FIELDVALUEOVERRIDEN,
         ReservationList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        ReservationList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         ReservationList_Warning_Code_LARGEDEPLOYMENTWARNING,
         ReservationList_Warning_Code_MISSINGTYPEDEPENDENCY,
         ReservationList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         ReservationList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        ReservationList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         ReservationList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         ReservationList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         ReservationList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -4424,10 +5031,12 @@ module Gogol.Compute.Internal.Sum
         ReservationsScopedList_Warning_Code_EXTERNALAPIWARNING,
         ReservationsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         ReservationsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        ReservationsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         ReservationsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         ReservationsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         ReservationsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         ReservationsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        ReservationsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         ReservationsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         ReservationsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         ReservationsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -4464,10 +5073,12 @@ module Gogol.Compute.Internal.Sum
         ResourcePoliciesScopedList_Warning_Code_EXTERNALAPIWARNING,
         ResourcePoliciesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         ResourcePoliciesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        ResourcePoliciesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         ResourcePoliciesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         ResourcePoliciesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         ResourcePoliciesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         ResourcePoliciesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        ResourcePoliciesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         ResourcePoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         ResourcePoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         ResourcePoliciesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -4504,10 +5115,12 @@ module Gogol.Compute.Internal.Sum
         ResourcePolicyAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         ResourcePolicyAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         ResourcePolicyAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        ResourcePolicyAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         ResourcePolicyAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         ResourcePolicyAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         ResourcePolicyAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         ResourcePolicyAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        ResourcePolicyAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         ResourcePolicyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         ResourcePolicyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         ResourcePolicyAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -4541,10 +5154,12 @@ module Gogol.Compute.Internal.Sum
         ResourcePolicyList_Warning_Code_EXTERNALAPIWARNING,
         ResourcePolicyList_Warning_Code_FIELDVALUEOVERRIDEN,
         ResourcePolicyList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        ResourcePolicyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         ResourcePolicyList_Warning_Code_LARGEDEPLOYMENTWARNING,
         ResourcePolicyList_Warning_Code_MISSINGTYPEDEPENDENCY,
         ResourcePolicyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         ResourcePolicyList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        ResourcePolicyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         ResourcePolicyList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         ResourcePolicyList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         ResourcePolicyList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -4582,6 +5197,15 @@ module Gogol.Compute.Internal.Sum
         ..
       ),
 
+    -- * Route_RouteStatus
+    Route_RouteStatus
+      ( Route_RouteStatus_Active,
+        Route_RouteStatus_Dropped,
+        Route_RouteStatus_Inactive,
+        Route_RouteStatus_Pending,
+        ..
+      ),
+
     -- * Route_RouteType
     Route_RouteType
       ( Route_RouteType_Bgp,
@@ -4601,10 +5225,12 @@ module Gogol.Compute.Internal.Sum
         Route_WarningsItem_Code_EXTERNALAPIWARNING,
         Route_WarningsItem_Code_FIELDVALUEOVERRIDEN,
         Route_WarningsItem_Code_INJECTEDKERNELSDEPRECATED,
+        Route_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         Route_WarningsItem_Code_LARGEDEPLOYMENTWARNING,
         Route_WarningsItem_Code_MISSINGTYPEDEPENDENCY,
         Route_WarningsItem_Code_NEXTHOPADDRESSNOTASSIGNED,
         Route_WarningsItem_Code_NEXTHOPCANNOTIPFORWARD,
+        Route_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         Route_WarningsItem_Code_NEXTHOPINSTANCENOTFOUND,
         Route_WarningsItem_Code_NEXTHOPINSTANCENOTONNETWORK,
         Route_WarningsItem_Code_NEXTHOPNOTRUNNING,
@@ -4640,10 +5266,12 @@ module Gogol.Compute.Internal.Sum
         RouteList_Warning_Code_EXTERNALAPIWARNING,
         RouteList_Warning_Code_FIELDVALUEOVERRIDEN,
         RouteList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        RouteList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         RouteList_Warning_Code_LARGEDEPLOYMENTWARNING,
         RouteList_Warning_Code_MISSINGTYPEDEPENDENCY,
         RouteList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         RouteList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        RouteList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         RouteList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         RouteList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         RouteList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -4670,10 +5298,12 @@ module Gogol.Compute.Internal.Sum
         RouterAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         RouterAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         RouterAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        RouterAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         RouterAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         RouterAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         RouterAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         RouterAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        RouterAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         RouterAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         RouterAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         RouterAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -4755,10 +5385,12 @@ module Gogol.Compute.Internal.Sum
         RouterList_Warning_Code_EXTERNALAPIWARNING,
         RouterList_Warning_Code_FIELDVALUEOVERRIDEN,
         RouterList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        RouterList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         RouterList_Warning_Code_LARGEDEPLOYMENTWARNING,
         RouterList_Warning_Code_MISSINGTYPEDEPENDENCY,
         RouterList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         RouterList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        RouterList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         RouterList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         RouterList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         RouterList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -4772,6 +5404,13 @@ module Gogol.Compute.Internal.Sum
         RouterList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
         RouterList_Warning_Code_UNDECLAREDPROPERTIES,
         RouterList_Warning_Code_Unreachable,
+        ..
+      ),
+
+    -- * RouterNat_EndpointTypesItem
+    RouterNat_EndpointTypesItem
+      ( RouterNat_EndpointTypesItem_ENDPOINTTYPESWG,
+        RouterNat_EndpointTypesItem_ENDPOINTTYPEVM,
         ..
       ),
 
@@ -4814,6 +5453,13 @@ module Gogol.Compute.Internal.Sum
         ..
       ),
 
+    -- * RouterStatusBgpPeerStatus_StatusReason
+    RouterStatusBgpPeerStatus_StatusReason
+      ( RouterStatusBgpPeerStatus_StatusReason_MD5AUTHINTERNALPROBLEM,
+        RouterStatusBgpPeerStatus_StatusReason_STATUSREASONUNSPECIFIED,
+        ..
+      ),
+
     -- * RoutersScopedList_Warning_Code
     RoutersScopedList_Warning_Code
       ( RoutersScopedList_Warning_Code_CLEANUPFAILED,
@@ -4824,10 +5470,12 @@ module Gogol.Compute.Internal.Sum
         RoutersScopedList_Warning_Code_EXTERNALAPIWARNING,
         RoutersScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         RoutersScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        RoutersScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         RoutersScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         RoutersScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         RoutersScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         RoutersScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        RoutersScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         RoutersScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         RoutersScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         RoutersScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -4898,6 +5546,14 @@ module Gogol.Compute.Internal.Sum
         ..
       ),
 
+    -- * SavedDisk_Architecture
+    SavedDisk_Architecture
+      ( SavedDisk_Architecture_ARCHITECTUREUNSPECIFIED,
+        SavedDisk_Architecture_ARM64,
+        SavedDisk_Architecture_X86_64,
+        ..
+      ),
+
     -- * SavedDisk_StorageBytesStatus
     SavedDisk_StorageBytesStatus
       ( SavedDisk_StorageBytesStatus_Updating,
@@ -4944,10 +5600,75 @@ module Gogol.Compute.Internal.Sum
         ..
       ),
 
+    -- * SecurityPoliciesAggregatedList_Warning_Code
+    SecurityPoliciesAggregatedList_Warning_Code
+      ( SecurityPoliciesAggregatedList_Warning_Code_CLEANUPFAILED,
+        SecurityPoliciesAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+        SecurityPoliciesAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
+        SecurityPoliciesAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+        SecurityPoliciesAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED,
+        SecurityPoliciesAggregatedList_Warning_Code_EXTERNALAPIWARNING,
+        SecurityPoliciesAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
+        SecurityPoliciesAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        SecurityPoliciesAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+        SecurityPoliciesAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+        SecurityPoliciesAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+        SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+        SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+        SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+        SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+        SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
+        SecurityPoliciesAggregatedList_Warning_Code_NOTCRITICALERROR,
+        SecurityPoliciesAggregatedList_Warning_Code_NORESULTSONPAGE,
+        SecurityPoliciesAggregatedList_Warning_Code_PARTIALSUCCESS,
+        SecurityPoliciesAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT,
+        SecurityPoliciesAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+        SecurityPoliciesAggregatedList_Warning_Code_RESOURCENOTDELETED,
+        SecurityPoliciesAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+        SecurityPoliciesAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+        SecurityPoliciesAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
+        SecurityPoliciesAggregatedList_Warning_Code_Unreachable,
+        ..
+      ),
+
+    -- * SecurityPoliciesScopedList_Warning_Code
+    SecurityPoliciesScopedList_Warning_Code
+      ( SecurityPoliciesScopedList_Warning_Code_CLEANUPFAILED,
+        SecurityPoliciesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+        SecurityPoliciesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
+        SecurityPoliciesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+        SecurityPoliciesScopedList_Warning_Code_EXPERIMENTALTYPEUSED,
+        SecurityPoliciesScopedList_Warning_Code_EXTERNALAPIWARNING,
+        SecurityPoliciesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
+        SecurityPoliciesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        SecurityPoliciesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+        SecurityPoliciesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+        SecurityPoliciesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+        SecurityPoliciesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+        SecurityPoliciesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        SecurityPoliciesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+        SecurityPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+        SecurityPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+        SecurityPoliciesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
+        SecurityPoliciesScopedList_Warning_Code_NOTCRITICALERROR,
+        SecurityPoliciesScopedList_Warning_Code_NORESULTSONPAGE,
+        SecurityPoliciesScopedList_Warning_Code_PARTIALSUCCESS,
+        SecurityPoliciesScopedList_Warning_Code_REQUIREDTOSAGREEMENT,
+        SecurityPoliciesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+        SecurityPoliciesScopedList_Warning_Code_RESOURCENOTDELETED,
+        SecurityPoliciesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+        SecurityPoliciesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+        SecurityPoliciesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
+        SecurityPoliciesScopedList_Warning_Code_Unreachable,
+        ..
+      ),
+
     -- * SecurityPolicy_Type
     SecurityPolicy_Type
       ( SecurityPolicy_Type_CLOUDARMOR,
         SecurityPolicy_Type_CLOUDARMOREDGE,
+        SecurityPolicy_Type_CLOUDARMORNETWORK,
         ..
       ),
 
@@ -4972,6 +5693,13 @@ module Gogol.Compute.Internal.Sum
         ..
       ),
 
+    -- * SecurityPolicyDdosProtectionConfig_DdosProtection
+    SecurityPolicyDdosProtectionConfig_DdosProtection
+      ( SecurityPolicyDdosProtectionConfig_DdosProtection_Advanced,
+        SecurityPolicyDdosProtectionConfig_DdosProtection_Standard,
+        ..
+      ),
+
     -- * SecurityPolicyList_Warning_Code
     SecurityPolicyList_Warning_Code
       ( SecurityPolicyList_Warning_Code_CLEANUPFAILED,
@@ -4982,10 +5710,12 @@ module Gogol.Compute.Internal.Sum
         SecurityPolicyList_Warning_Code_EXTERNALAPIWARNING,
         SecurityPolicyList_Warning_Code_FIELDVALUEOVERRIDEN,
         SecurityPolicyList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        SecurityPolicyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         SecurityPolicyList_Warning_Code_LARGEDEPLOYMENTWARNING,
         SecurityPolicyList_Warning_Code_MISSINGTYPEDEPENDENCY,
         SecurityPolicyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         SecurityPolicyList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        SecurityPolicyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         SecurityPolicyList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         SecurityPolicyList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         SecurityPolicyList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5008,12 +5738,25 @@ module Gogol.Compute.Internal.Sum
         ..
       ),
 
+    -- * SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op
+    SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op
+      ( SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op_Contains,
+        SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op_ENDSWITH,
+        SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op_Equals,
+        SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op_EQUALSANY,
+        SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op_STARTSWITH,
+        ..
+      ),
+
     -- * SecurityPolicyRuleRateLimitOptions_EnforceOnKey
     SecurityPolicyRuleRateLimitOptions_EnforceOnKey
       ( SecurityPolicyRuleRateLimitOptions_EnforceOnKey_All,
         SecurityPolicyRuleRateLimitOptions_EnforceOnKey_HTTPCOOKIE,
         SecurityPolicyRuleRateLimitOptions_EnforceOnKey_HTTPHEADER,
+        SecurityPolicyRuleRateLimitOptions_EnforceOnKey_HTTPPATH,
         SecurityPolicyRuleRateLimitOptions_EnforceOnKey_IP,
+        SecurityPolicyRuleRateLimitOptions_EnforceOnKey_REGIONCODE,
+        SecurityPolicyRuleRateLimitOptions_EnforceOnKey_Sni,
         SecurityPolicyRuleRateLimitOptions_EnforceOnKey_XFFIP,
         ..
       ),
@@ -5051,10 +5794,12 @@ module Gogol.Compute.Internal.Sum
         ServiceAttachmentAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         ServiceAttachmentAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         ServiceAttachmentAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        ServiceAttachmentAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         ServiceAttachmentAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         ServiceAttachmentAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         ServiceAttachmentAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         ServiceAttachmentAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        ServiceAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         ServiceAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         ServiceAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         ServiceAttachmentAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5075,6 +5820,7 @@ module Gogol.Compute.Internal.Sum
     ServiceAttachmentConnectedEndpoint_Status
       ( ServiceAttachmentConnectedEndpoint_Status_Accepted,
         ServiceAttachmentConnectedEndpoint_Status_Closed,
+        ServiceAttachmentConnectedEndpoint_Status_NEEDSATTENTION,
         ServiceAttachmentConnectedEndpoint_Status_Pending,
         ServiceAttachmentConnectedEndpoint_Status_Rejected,
         ServiceAttachmentConnectedEndpoint_Status_STATUSUNSPECIFIED,
@@ -5091,10 +5837,12 @@ module Gogol.Compute.Internal.Sum
         ServiceAttachmentList_Warning_Code_EXTERNALAPIWARNING,
         ServiceAttachmentList_Warning_Code_FIELDVALUEOVERRIDEN,
         ServiceAttachmentList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        ServiceAttachmentList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         ServiceAttachmentList_Warning_Code_LARGEDEPLOYMENTWARNING,
         ServiceAttachmentList_Warning_Code_MISSINGTYPEDEPENDENCY,
         ServiceAttachmentList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         ServiceAttachmentList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        ServiceAttachmentList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         ServiceAttachmentList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         ServiceAttachmentList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         ServiceAttachmentList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5121,10 +5869,12 @@ module Gogol.Compute.Internal.Sum
         ServiceAttachmentsScopedList_Warning_Code_EXTERNALAPIWARNING,
         ServiceAttachmentsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         ServiceAttachmentsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        ServiceAttachmentsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         ServiceAttachmentsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         ServiceAttachmentsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         ServiceAttachmentsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         ServiceAttachmentsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        ServiceAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         ServiceAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         ServiceAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         ServiceAttachmentsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5144,8 +5894,24 @@ module Gogol.Compute.Internal.Sum
     -- * ShareSettings_ShareType
     ShareSettings_ShareType
       ( ShareSettings_ShareType_Local,
+        ShareSettings_ShareType_Organization,
         ShareSettings_ShareType_SHARETYPEUNSPECIFIED,
         ShareSettings_ShareType_SPECIFICPROJECTS,
+        ..
+      ),
+
+    -- * Snapshot_Architecture
+    Snapshot_Architecture
+      ( Snapshot_Architecture_ARCHITECTUREUNSPECIFIED,
+        Snapshot_Architecture_ARM64,
+        Snapshot_Architecture_X86_64,
+        ..
+      ),
+
+    -- * Snapshot_SnapshotType
+    Snapshot_SnapshotType
+      ( Snapshot_SnapshotType_Archive,
+        Snapshot_SnapshotType_Standard,
         ..
       ),
 
@@ -5176,10 +5942,12 @@ module Gogol.Compute.Internal.Sum
         SnapshotList_Warning_Code_EXTERNALAPIWARNING,
         SnapshotList_Warning_Code_FIELDVALUEOVERRIDEN,
         SnapshotList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        SnapshotList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         SnapshotList_Warning_Code_LARGEDEPLOYMENTWARNING,
         SnapshotList_Warning_Code_MISSINGTYPEDEPENDENCY,
         SnapshotList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         SnapshotList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        SnapshotList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         SnapshotList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         SnapshotList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         SnapshotList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5193,6 +5961,14 @@ module Gogol.Compute.Internal.Sum
         SnapshotList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
         SnapshotList_Warning_Code_UNDECLAREDPROPERTIES,
         SnapshotList_Warning_Code_Unreachable,
+        ..
+      ),
+
+    -- * SourceInstanceProperties_KeyRevocationActionType
+    SourceInstanceProperties_KeyRevocationActionType
+      ( SourceInstanceProperties_KeyRevocationActionType_KEYREVOCATIONACTIONTYPEUNSPECIFIED,
+        SourceInstanceProperties_KeyRevocationActionType_None,
+        SourceInstanceProperties_KeyRevocationActionType_Stop,
         ..
       ),
 
@@ -5214,10 +5990,12 @@ module Gogol.Compute.Internal.Sum
         SslCertificateAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         SslCertificateAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         SslCertificateAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        SslCertificateAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         SslCertificateAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         SslCertificateAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         SslCertificateAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         SslCertificateAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        SslCertificateAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         SslCertificateAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         SslCertificateAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         SslCertificateAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5244,10 +6022,12 @@ module Gogol.Compute.Internal.Sum
         SslCertificateList_Warning_Code_EXTERNALAPIWARNING,
         SslCertificateList_Warning_Code_FIELDVALUEOVERRIDEN,
         SslCertificateList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        SslCertificateList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         SslCertificateList_Warning_Code_LARGEDEPLOYMENTWARNING,
         SslCertificateList_Warning_Code_MISSINGTYPEDEPENDENCY,
         SslCertificateList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         SslCertificateList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        SslCertificateList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         SslCertificateList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         SslCertificateList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         SslCertificateList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5297,10 +6077,12 @@ module Gogol.Compute.Internal.Sum
         SslCertificatesScopedList_Warning_Code_EXTERNALAPIWARNING,
         SslCertificatesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         SslCertificatesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        SslCertificatesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         SslCertificatesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         SslCertificatesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         SslCertificatesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         SslCertificatesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        SslCertificatesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         SslCertificatesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         SslCertificatesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         SslCertificatesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5317,6 +6099,38 @@ module Gogol.Compute.Internal.Sum
         ..
       ),
 
+    -- * SslPoliciesAggregatedList_Warning_Code
+    SslPoliciesAggregatedList_Warning_Code
+      ( SslPoliciesAggregatedList_Warning_Code_CLEANUPFAILED,
+        SslPoliciesAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+        SslPoliciesAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
+        SslPoliciesAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+        SslPoliciesAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED,
+        SslPoliciesAggregatedList_Warning_Code_EXTERNALAPIWARNING,
+        SslPoliciesAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
+        SslPoliciesAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        SslPoliciesAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+        SslPoliciesAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+        SslPoliciesAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+        SslPoliciesAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+        SslPoliciesAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        SslPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+        SslPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+        SslPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+        SslPoliciesAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
+        SslPoliciesAggregatedList_Warning_Code_NOTCRITICALERROR,
+        SslPoliciesAggregatedList_Warning_Code_NORESULTSONPAGE,
+        SslPoliciesAggregatedList_Warning_Code_PARTIALSUCCESS,
+        SslPoliciesAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT,
+        SslPoliciesAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+        SslPoliciesAggregatedList_Warning_Code_RESOURCENOTDELETED,
+        SslPoliciesAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+        SslPoliciesAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+        SslPoliciesAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
+        SslPoliciesAggregatedList_Warning_Code_Unreachable,
+        ..
+      ),
+
     -- * SslPoliciesList_Warning_Code
     SslPoliciesList_Warning_Code
       ( SslPoliciesList_Warning_Code_CLEANUPFAILED,
@@ -5327,10 +6141,12 @@ module Gogol.Compute.Internal.Sum
         SslPoliciesList_Warning_Code_EXTERNALAPIWARNING,
         SslPoliciesList_Warning_Code_FIELDVALUEOVERRIDEN,
         SslPoliciesList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        SslPoliciesList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         SslPoliciesList_Warning_Code_LARGEDEPLOYMENTWARNING,
         SslPoliciesList_Warning_Code_MISSINGTYPEDEPENDENCY,
         SslPoliciesList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         SslPoliciesList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        SslPoliciesList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         SslPoliciesList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         SslPoliciesList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         SslPoliciesList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5344,6 +6160,38 @@ module Gogol.Compute.Internal.Sum
         SslPoliciesList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
         SslPoliciesList_Warning_Code_UNDECLAREDPROPERTIES,
         SslPoliciesList_Warning_Code_Unreachable,
+        ..
+      ),
+
+    -- * SslPoliciesScopedList_Warning_Code
+    SslPoliciesScopedList_Warning_Code
+      ( SslPoliciesScopedList_Warning_Code_CLEANUPFAILED,
+        SslPoliciesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+        SslPoliciesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
+        SslPoliciesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+        SslPoliciesScopedList_Warning_Code_EXPERIMENTALTYPEUSED,
+        SslPoliciesScopedList_Warning_Code_EXTERNALAPIWARNING,
+        SslPoliciesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
+        SslPoliciesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        SslPoliciesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+        SslPoliciesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+        SslPoliciesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+        SslPoliciesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+        SslPoliciesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        SslPoliciesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+        SslPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+        SslPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+        SslPoliciesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
+        SslPoliciesScopedList_Warning_Code_NOTCRITICALERROR,
+        SslPoliciesScopedList_Warning_Code_NORESULTSONPAGE,
+        SslPoliciesScopedList_Warning_Code_PARTIALSUCCESS,
+        SslPoliciesScopedList_Warning_Code_REQUIREDTOSAGREEMENT,
+        SslPoliciesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+        SslPoliciesScopedList_Warning_Code_RESOURCENOTDELETED,
+        SslPoliciesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+        SslPoliciesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+        SslPoliciesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
+        SslPoliciesScopedList_Warning_Code_Unreachable,
         ..
       ),
 
@@ -5374,10 +6222,12 @@ module Gogol.Compute.Internal.Sum
         SslPolicy_WarningsItem_Code_EXTERNALAPIWARNING,
         SslPolicy_WarningsItem_Code_FIELDVALUEOVERRIDEN,
         SslPolicy_WarningsItem_Code_INJECTEDKERNELSDEPRECATED,
+        SslPolicy_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         SslPolicy_WarningsItem_Code_LARGEDEPLOYMENTWARNING,
         SslPolicy_WarningsItem_Code_MISSINGTYPEDEPENDENCY,
         SslPolicy_WarningsItem_Code_NEXTHOPADDRESSNOTASSIGNED,
         SslPolicy_WarningsItem_Code_NEXTHOPCANNOTIPFORWARD,
+        SslPolicy_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         SslPolicy_WarningsItem_Code_NEXTHOPINSTANCENOTFOUND,
         SslPolicy_WarningsItem_Code_NEXTHOPINSTANCENOTONNETWORK,
         SslPolicy_WarningsItem_Code_NEXTHOPNOTRUNNING,
@@ -5457,10 +6307,12 @@ module Gogol.Compute.Internal.Sum
         SubnetworkAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         SubnetworkAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         SubnetworkAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        SubnetworkAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         SubnetworkAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         SubnetworkAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         SubnetworkAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         SubnetworkAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        SubnetworkAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         SubnetworkAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         SubnetworkAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         SubnetworkAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5487,10 +6339,12 @@ module Gogol.Compute.Internal.Sum
         SubnetworkList_Warning_Code_EXTERNALAPIWARNING,
         SubnetworkList_Warning_Code_FIELDVALUEOVERRIDEN,
         SubnetworkList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        SubnetworkList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         SubnetworkList_Warning_Code_LARGEDEPLOYMENTWARNING,
         SubnetworkList_Warning_Code_MISSINGTYPEDEPENDENCY,
         SubnetworkList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         SubnetworkList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        SubnetworkList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         SubnetworkList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         SubnetworkList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         SubnetworkList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5536,10 +6390,12 @@ module Gogol.Compute.Internal.Sum
         SubnetworksScopedList_Warning_Code_EXTERNALAPIWARNING,
         SubnetworksScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         SubnetworksScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        SubnetworksScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         SubnetworksScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         SubnetworksScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         SubnetworksScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         SubnetworksScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        SubnetworksScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         SubnetworksScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         SubnetworksScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         SubnetworksScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5588,10 +6444,12 @@ module Gogol.Compute.Internal.Sum
         TargetGrpcProxyList_Warning_Code_EXTERNALAPIWARNING,
         TargetGrpcProxyList_Warning_Code_FIELDVALUEOVERRIDEN,
         TargetGrpcProxyList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        TargetGrpcProxyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         TargetGrpcProxyList_Warning_Code_LARGEDEPLOYMENTWARNING,
         TargetGrpcProxyList_Warning_Code_MISSINGTYPEDEPENDENCY,
         TargetGrpcProxyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         TargetGrpcProxyList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        TargetGrpcProxyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         TargetGrpcProxyList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         TargetGrpcProxyList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         TargetGrpcProxyList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5618,10 +6476,12 @@ module Gogol.Compute.Internal.Sum
         TargetHttpProxiesScopedList_Warning_Code_EXTERNALAPIWARNING,
         TargetHttpProxiesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         TargetHttpProxiesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        TargetHttpProxiesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         TargetHttpProxiesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         TargetHttpProxiesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         TargetHttpProxiesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         TargetHttpProxiesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        TargetHttpProxiesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         TargetHttpProxiesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         TargetHttpProxiesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         TargetHttpProxiesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5648,10 +6508,12 @@ module Gogol.Compute.Internal.Sum
         TargetHttpProxyList_Warning_Code_EXTERNALAPIWARNING,
         TargetHttpProxyList_Warning_Code_FIELDVALUEOVERRIDEN,
         TargetHttpProxyList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        TargetHttpProxyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         TargetHttpProxyList_Warning_Code_LARGEDEPLOYMENTWARNING,
         TargetHttpProxyList_Warning_Code_MISSINGTYPEDEPENDENCY,
         TargetHttpProxyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         TargetHttpProxyList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        TargetHttpProxyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         TargetHttpProxyList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         TargetHttpProxyList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         TargetHttpProxyList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5678,10 +6540,12 @@ module Gogol.Compute.Internal.Sum
         TargetHttpsProxiesScopedList_Warning_Code_EXTERNALAPIWARNING,
         TargetHttpsProxiesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         TargetHttpsProxiesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        TargetHttpsProxiesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         TargetHttpsProxiesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         TargetHttpsProxiesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         TargetHttpsProxiesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         TargetHttpsProxiesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        TargetHttpsProxiesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         TargetHttpsProxiesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         TargetHttpsProxiesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         TargetHttpsProxiesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5724,10 +6588,12 @@ module Gogol.Compute.Internal.Sum
         TargetHttpsProxyAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         TargetHttpsProxyAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         TargetHttpsProxyAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        TargetHttpsProxyAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         TargetHttpsProxyAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         TargetHttpsProxyAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         TargetHttpsProxyAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         TargetHttpsProxyAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        TargetHttpsProxyAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         TargetHttpsProxyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         TargetHttpsProxyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         TargetHttpsProxyAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5754,10 +6620,12 @@ module Gogol.Compute.Internal.Sum
         TargetHttpsProxyList_Warning_Code_EXTERNALAPIWARNING,
         TargetHttpsProxyList_Warning_Code_FIELDVALUEOVERRIDEN,
         TargetHttpsProxyList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        TargetHttpsProxyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         TargetHttpsProxyList_Warning_Code_LARGEDEPLOYMENTWARNING,
         TargetHttpsProxyList_Warning_Code_MISSINGTYPEDEPENDENCY,
         TargetHttpsProxyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         TargetHttpsProxyList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        TargetHttpsProxyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         TargetHttpsProxyList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         TargetHttpsProxyList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         TargetHttpsProxyList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5790,10 +6658,12 @@ module Gogol.Compute.Internal.Sum
         TargetInstanceAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         TargetInstanceAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         TargetInstanceAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        TargetInstanceAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         TargetInstanceAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         TargetInstanceAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         TargetInstanceAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         TargetInstanceAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        TargetInstanceAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         TargetInstanceAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         TargetInstanceAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         TargetInstanceAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5820,10 +6690,12 @@ module Gogol.Compute.Internal.Sum
         TargetInstanceList_Warning_Code_EXTERNALAPIWARNING,
         TargetInstanceList_Warning_Code_FIELDVALUEOVERRIDEN,
         TargetInstanceList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        TargetInstanceList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         TargetInstanceList_Warning_Code_LARGEDEPLOYMENTWARNING,
         TargetInstanceList_Warning_Code_MISSINGTYPEDEPENDENCY,
         TargetInstanceList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         TargetInstanceList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        TargetInstanceList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         TargetInstanceList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         TargetInstanceList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         TargetInstanceList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5850,10 +6722,12 @@ module Gogol.Compute.Internal.Sum
         TargetInstancesScopedList_Warning_Code_EXTERNALAPIWARNING,
         TargetInstancesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         TargetInstancesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        TargetInstancesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         TargetInstancesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         TargetInstancesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         TargetInstancesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         TargetInstancesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        TargetInstancesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         TargetInstancesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         TargetInstancesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         TargetInstancesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5893,10 +6767,12 @@ module Gogol.Compute.Internal.Sum
         TargetPoolAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         TargetPoolAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         TargetPoolAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        TargetPoolAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         TargetPoolAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         TargetPoolAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         TargetPoolAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         TargetPoolAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        TargetPoolAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         TargetPoolAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         TargetPoolAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         TargetPoolAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5923,10 +6799,12 @@ module Gogol.Compute.Internal.Sum
         TargetPoolList_Warning_Code_EXTERNALAPIWARNING,
         TargetPoolList_Warning_Code_FIELDVALUEOVERRIDEN,
         TargetPoolList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        TargetPoolList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         TargetPoolList_Warning_Code_LARGEDEPLOYMENTWARNING,
         TargetPoolList_Warning_Code_MISSINGTYPEDEPENDENCY,
         TargetPoolList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         TargetPoolList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        TargetPoolList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         TargetPoolList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         TargetPoolList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         TargetPoolList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5953,10 +6831,12 @@ module Gogol.Compute.Internal.Sum
         TargetPoolsScopedList_Warning_Code_EXTERNALAPIWARNING,
         TargetPoolsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         TargetPoolsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        TargetPoolsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         TargetPoolsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         TargetPoolsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         TargetPoolsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         TargetPoolsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        TargetPoolsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         TargetPoolsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         TargetPoolsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         TargetPoolsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -5997,10 +6877,12 @@ module Gogol.Compute.Internal.Sum
         TargetSslProxyList_Warning_Code_EXTERNALAPIWARNING,
         TargetSslProxyList_Warning_Code_FIELDVALUEOVERRIDEN,
         TargetSslProxyList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        TargetSslProxyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         TargetSslProxyList_Warning_Code_LARGEDEPLOYMENTWARNING,
         TargetSslProxyList_Warning_Code_MISSINGTYPEDEPENDENCY,
         TargetSslProxyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         TargetSslProxyList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        TargetSslProxyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         TargetSslProxyList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         TargetSslProxyList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         TargetSslProxyList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -6014,6 +6896,38 @@ module Gogol.Compute.Internal.Sum
         TargetSslProxyList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
         TargetSslProxyList_Warning_Code_UNDECLAREDPROPERTIES,
         TargetSslProxyList_Warning_Code_Unreachable,
+        ..
+      ),
+
+    -- * TargetTcpProxiesScopedList_Warning_Code
+    TargetTcpProxiesScopedList_Warning_Code
+      ( TargetTcpProxiesScopedList_Warning_Code_CLEANUPFAILED,
+        TargetTcpProxiesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+        TargetTcpProxiesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
+        TargetTcpProxiesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+        TargetTcpProxiesScopedList_Warning_Code_EXPERIMENTALTYPEUSED,
+        TargetTcpProxiesScopedList_Warning_Code_EXTERNALAPIWARNING,
+        TargetTcpProxiesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
+        TargetTcpProxiesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        TargetTcpProxiesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+        TargetTcpProxiesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+        TargetTcpProxiesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+        TargetTcpProxiesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+        TargetTcpProxiesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        TargetTcpProxiesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+        TargetTcpProxiesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+        TargetTcpProxiesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+        TargetTcpProxiesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
+        TargetTcpProxiesScopedList_Warning_Code_NOTCRITICALERROR,
+        TargetTcpProxiesScopedList_Warning_Code_NORESULTSONPAGE,
+        TargetTcpProxiesScopedList_Warning_Code_PARTIALSUCCESS,
+        TargetTcpProxiesScopedList_Warning_Code_REQUIREDTOSAGREEMENT,
+        TargetTcpProxiesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+        TargetTcpProxiesScopedList_Warning_Code_RESOURCENOTDELETED,
+        TargetTcpProxiesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+        TargetTcpProxiesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+        TargetTcpProxiesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
+        TargetTcpProxiesScopedList_Warning_Code_Unreachable,
         ..
       ),
 
@@ -6031,6 +6945,38 @@ module Gogol.Compute.Internal.Sum
         ..
       ),
 
+    -- * TargetTcpProxyAggregatedList_Warning_Code
+    TargetTcpProxyAggregatedList_Warning_Code
+      ( TargetTcpProxyAggregatedList_Warning_Code_CLEANUPFAILED,
+        TargetTcpProxyAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+        TargetTcpProxyAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
+        TargetTcpProxyAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+        TargetTcpProxyAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED,
+        TargetTcpProxyAggregatedList_Warning_Code_EXTERNALAPIWARNING,
+        TargetTcpProxyAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
+        TargetTcpProxyAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        TargetTcpProxyAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+        TargetTcpProxyAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+        TargetTcpProxyAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+        TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+        TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+        TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+        TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+        TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
+        TargetTcpProxyAggregatedList_Warning_Code_NOTCRITICALERROR,
+        TargetTcpProxyAggregatedList_Warning_Code_NORESULTSONPAGE,
+        TargetTcpProxyAggregatedList_Warning_Code_PARTIALSUCCESS,
+        TargetTcpProxyAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT,
+        TargetTcpProxyAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+        TargetTcpProxyAggregatedList_Warning_Code_RESOURCENOTDELETED,
+        TargetTcpProxyAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+        TargetTcpProxyAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+        TargetTcpProxyAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
+        TargetTcpProxyAggregatedList_Warning_Code_Unreachable,
+        ..
+      ),
+
     -- * TargetTcpProxyList_Warning_Code
     TargetTcpProxyList_Warning_Code
       ( TargetTcpProxyList_Warning_Code_CLEANUPFAILED,
@@ -6041,10 +6987,12 @@ module Gogol.Compute.Internal.Sum
         TargetTcpProxyList_Warning_Code_EXTERNALAPIWARNING,
         TargetTcpProxyList_Warning_Code_FIELDVALUEOVERRIDEN,
         TargetTcpProxyList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        TargetTcpProxyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         TargetTcpProxyList_Warning_Code_LARGEDEPLOYMENTWARNING,
         TargetTcpProxyList_Warning_Code_MISSINGTYPEDEPENDENCY,
         TargetTcpProxyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         TargetTcpProxyList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        TargetTcpProxyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         TargetTcpProxyList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         TargetTcpProxyList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         TargetTcpProxyList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -6080,10 +7028,12 @@ module Gogol.Compute.Internal.Sum
         TargetVpnGatewayAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         TargetVpnGatewayAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         TargetVpnGatewayAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        TargetVpnGatewayAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         TargetVpnGatewayAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         TargetVpnGatewayAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         TargetVpnGatewayAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         TargetVpnGatewayAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        TargetVpnGatewayAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         TargetVpnGatewayAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         TargetVpnGatewayAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         TargetVpnGatewayAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -6110,10 +7060,12 @@ module Gogol.Compute.Internal.Sum
         TargetVpnGatewayList_Warning_Code_EXTERNALAPIWARNING,
         TargetVpnGatewayList_Warning_Code_FIELDVALUEOVERRIDEN,
         TargetVpnGatewayList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        TargetVpnGatewayList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         TargetVpnGatewayList_Warning_Code_LARGEDEPLOYMENTWARNING,
         TargetVpnGatewayList_Warning_Code_MISSINGTYPEDEPENDENCY,
         TargetVpnGatewayList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         TargetVpnGatewayList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        TargetVpnGatewayList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         TargetVpnGatewayList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         TargetVpnGatewayList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         TargetVpnGatewayList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -6140,10 +7092,12 @@ module Gogol.Compute.Internal.Sum
         TargetVpnGatewaysScopedList_Warning_Code_EXTERNALAPIWARNING,
         TargetVpnGatewaysScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         TargetVpnGatewaysScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        TargetVpnGatewaysScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         TargetVpnGatewaysScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         TargetVpnGatewaysScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         TargetVpnGatewaysScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         TargetVpnGatewaysScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        TargetVpnGatewaysScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         TargetVpnGatewaysScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         TargetVpnGatewaysScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         TargetVpnGatewaysScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -6170,10 +7124,12 @@ module Gogol.Compute.Internal.Sum
         UrlMapList_Warning_Code_EXTERNALAPIWARNING,
         UrlMapList_Warning_Code_FIELDVALUEOVERRIDEN,
         UrlMapList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        UrlMapList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         UrlMapList_Warning_Code_LARGEDEPLOYMENTWARNING,
         UrlMapList_Warning_Code_MISSINGTYPEDEPENDENCY,
         UrlMapList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         UrlMapList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        UrlMapList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         UrlMapList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         UrlMapList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         UrlMapList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -6200,10 +7156,12 @@ module Gogol.Compute.Internal.Sum
         UrlMapsAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         UrlMapsAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         UrlMapsAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        UrlMapsAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         UrlMapsAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         UrlMapsAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         UrlMapsAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         UrlMapsAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        UrlMapsAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         UrlMapsAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         UrlMapsAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         UrlMapsAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -6230,10 +7188,12 @@ module Gogol.Compute.Internal.Sum
         UrlMapsScopedList_Warning_Code_EXTERNALAPIWARNING,
         UrlMapsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         UrlMapsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        UrlMapsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         UrlMapsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         UrlMapsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         UrlMapsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         UrlMapsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        UrlMapsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         UrlMapsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         UrlMapsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         UrlMapsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -6258,6 +7218,37 @@ module Gogol.Compute.Internal.Sum
         ..
       ),
 
+    -- * UsableSubnetwork_Ipv6AccessType
+    UsableSubnetwork_Ipv6AccessType
+      ( UsableSubnetwork_Ipv6AccessType_External,
+        UsableSubnetwork_Ipv6AccessType_Internal,
+        ..
+      ),
+
+    -- * UsableSubnetwork_Purpose
+    UsableSubnetwork_Purpose
+      ( UsableSubnetwork_Purpose_INTERNALHTTPSLOADBALANCER,
+        UsableSubnetwork_Purpose_Private,
+        UsableSubnetwork_Purpose_PRIVATE_RFC_1918,
+        UsableSubnetwork_Purpose_PRIVATESERVICECONNECT,
+        UsableSubnetwork_Purpose_REGIONALMANAGEDPROXY,
+        ..
+      ),
+
+    -- * UsableSubnetwork_Role
+    UsableSubnetwork_Role
+      ( UsableSubnetwork_Role_Active,
+        UsableSubnetwork_Role_Backup,
+        ..
+      ),
+
+    -- * UsableSubnetwork_StackType
+    UsableSubnetwork_StackType
+      ( UsableSubnetwork_StackType_IPV4_IPV6,
+        UsableSubnetwork_StackType_IPV4ONLY,
+        ..
+      ),
+
     -- * UsableSubnetworksAggregatedList_Warning_Code
     UsableSubnetworksAggregatedList_Warning_Code
       ( UsableSubnetworksAggregatedList_Warning_Code_CLEANUPFAILED,
@@ -6268,10 +7259,12 @@ module Gogol.Compute.Internal.Sum
         UsableSubnetworksAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         UsableSubnetworksAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         UsableSubnetworksAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        UsableSubnetworksAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         UsableSubnetworksAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         UsableSubnetworksAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         UsableSubnetworksAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         UsableSubnetworksAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        UsableSubnetworksAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         UsableSubnetworksAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         UsableSubnetworksAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         UsableSubnetworksAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -6298,10 +7291,12 @@ module Gogol.Compute.Internal.Sum
         VmEndpointNatMappingsList_Warning_Code_EXTERNALAPIWARNING,
         VmEndpointNatMappingsList_Warning_Code_FIELDVALUEOVERRIDEN,
         VmEndpointNatMappingsList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        VmEndpointNatMappingsList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         VmEndpointNatMappingsList_Warning_Code_LARGEDEPLOYMENTWARNING,
         VmEndpointNatMappingsList_Warning_Code_MISSINGTYPEDEPENDENCY,
         VmEndpointNatMappingsList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         VmEndpointNatMappingsList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        VmEndpointNatMappingsList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         VmEndpointNatMappingsList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         VmEndpointNatMappingsList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         VmEndpointNatMappingsList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -6335,10 +7330,12 @@ module Gogol.Compute.Internal.Sum
         VpnGatewayAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         VpnGatewayAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         VpnGatewayAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        VpnGatewayAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         VpnGatewayAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         VpnGatewayAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         VpnGatewayAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         VpnGatewayAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        VpnGatewayAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         VpnGatewayAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         VpnGatewayAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         VpnGatewayAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -6365,10 +7362,12 @@ module Gogol.Compute.Internal.Sum
         VpnGatewayList_Warning_Code_EXTERNALAPIWARNING,
         VpnGatewayList_Warning_Code_FIELDVALUEOVERRIDEN,
         VpnGatewayList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        VpnGatewayList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         VpnGatewayList_Warning_Code_LARGEDEPLOYMENTWARNING,
         VpnGatewayList_Warning_Code_MISSINGTYPEDEPENDENCY,
         VpnGatewayList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         VpnGatewayList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        VpnGatewayList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         VpnGatewayList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         VpnGatewayList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         VpnGatewayList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -6408,10 +7407,12 @@ module Gogol.Compute.Internal.Sum
         VpnGatewaysScopedList_Warning_Code_EXTERNALAPIWARNING,
         VpnGatewaysScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         VpnGatewaysScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        VpnGatewaysScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         VpnGatewaysScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         VpnGatewaysScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         VpnGatewaysScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         VpnGatewaysScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        VpnGatewaysScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         VpnGatewaysScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         VpnGatewaysScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         VpnGatewaysScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -6456,10 +7457,12 @@ module Gogol.Compute.Internal.Sum
         VpnTunnelAggregatedList_Warning_Code_EXTERNALAPIWARNING,
         VpnTunnelAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
         VpnTunnelAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        VpnTunnelAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         VpnTunnelAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         VpnTunnelAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         VpnTunnelAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         VpnTunnelAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        VpnTunnelAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         VpnTunnelAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         VpnTunnelAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         VpnTunnelAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -6486,10 +7489,12 @@ module Gogol.Compute.Internal.Sum
         VpnTunnelList_Warning_Code_EXTERNALAPIWARNING,
         VpnTunnelList_Warning_Code_FIELDVALUEOVERRIDEN,
         VpnTunnelList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        VpnTunnelList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         VpnTunnelList_Warning_Code_LARGEDEPLOYMENTWARNING,
         VpnTunnelList_Warning_Code_MISSINGTYPEDEPENDENCY,
         VpnTunnelList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         VpnTunnelList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        VpnTunnelList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         VpnTunnelList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         VpnTunnelList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         VpnTunnelList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -6516,10 +7521,12 @@ module Gogol.Compute.Internal.Sum
         VpnTunnelsScopedList_Warning_Code_EXTERNALAPIWARNING,
         VpnTunnelsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
         VpnTunnelsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        VpnTunnelsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         VpnTunnelsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
         VpnTunnelsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
         VpnTunnelsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         VpnTunnelsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        VpnTunnelsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         VpnTunnelsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         VpnTunnelsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         VpnTunnelsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -6546,10 +7553,12 @@ module Gogol.Compute.Internal.Sum
         XpnHostList_Warning_Code_EXTERNALAPIWARNING,
         XpnHostList_Warning_Code_FIELDVALUEOVERRIDEN,
         XpnHostList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        XpnHostList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         XpnHostList_Warning_Code_LARGEDEPLOYMENTWARNING,
         XpnHostList_Warning_Code_MISSINGTYPEDEPENDENCY,
         XpnHostList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         XpnHostList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        XpnHostList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         XpnHostList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         XpnHostList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         XpnHostList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -6590,10 +7599,12 @@ module Gogol.Compute.Internal.Sum
         ZoneList_Warning_Code_EXTERNALAPIWARNING,
         ZoneList_Warning_Code_FIELDVALUEOVERRIDEN,
         ZoneList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        ZoneList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         ZoneList_Warning_Code_LARGEDEPLOYMENTWARNING,
         ZoneList_Warning_Code_MISSINGTYPEDEPENDENCY,
         ZoneList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
         ZoneList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        ZoneList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
         ZoneList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
         ZoneList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
         ZoneList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -6711,6 +7722,10 @@ pattern AcceleratorTypeAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = Acceler
 pattern AcceleratorTypeAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: AcceleratorTypeAggregatedList_Warning_Code
 pattern AcceleratorTypeAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = AcceleratorTypeAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern AcceleratorTypeAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: AcceleratorTypeAggregatedList_Warning_Code
+pattern AcceleratorTypeAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = AcceleratorTypeAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern AcceleratorTypeAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: AcceleratorTypeAggregatedList_Warning_Code
 pattern AcceleratorTypeAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = AcceleratorTypeAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -6726,6 +7741,10 @@ pattern AcceleratorTypeAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = A
 -- | The route\'s next hop instance cannot ip forward.
 pattern AcceleratorTypeAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: AcceleratorTypeAggregatedList_Warning_Code
 pattern AcceleratorTypeAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = AcceleratorTypeAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern AcceleratorTypeAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: AcceleratorTypeAggregatedList_Warning_Code
+pattern AcceleratorTypeAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = AcceleratorTypeAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern AcceleratorTypeAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: AcceleratorTypeAggregatedList_Warning_Code
@@ -6788,10 +7807,12 @@ pattern AcceleratorTypeAggregatedList_Warning_Code_Unreachable = AcceleratorType
   AcceleratorTypeAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   AcceleratorTypeAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   AcceleratorTypeAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  AcceleratorTypeAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   AcceleratorTypeAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   AcceleratorTypeAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   AcceleratorTypeAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   AcceleratorTypeAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  AcceleratorTypeAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   AcceleratorTypeAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   AcceleratorTypeAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   AcceleratorTypeAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -6853,6 +7874,10 @@ pattern AcceleratorTypeList_Warning_Code_FIELDVALUEOVERRIDEN = AcceleratorTypeLi
 pattern AcceleratorTypeList_Warning_Code_INJECTEDKERNELSDEPRECATED :: AcceleratorTypeList_Warning_Code
 pattern AcceleratorTypeList_Warning_Code_INJECTEDKERNELSDEPRECATED = AcceleratorTypeList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern AcceleratorTypeList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: AcceleratorTypeList_Warning_Code
+pattern AcceleratorTypeList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = AcceleratorTypeList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern AcceleratorTypeList_Warning_Code_LARGEDEPLOYMENTWARNING :: AcceleratorTypeList_Warning_Code
 pattern AcceleratorTypeList_Warning_Code_LARGEDEPLOYMENTWARNING = AcceleratorTypeList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -6868,6 +7893,10 @@ pattern AcceleratorTypeList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Accelerator
 -- | The route\'s next hop instance cannot ip forward.
 pattern AcceleratorTypeList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: AcceleratorTypeList_Warning_Code
 pattern AcceleratorTypeList_Warning_Code_NEXTHOPCANNOTIPFORWARD = AcceleratorTypeList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern AcceleratorTypeList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: AcceleratorTypeList_Warning_Code
+pattern AcceleratorTypeList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = AcceleratorTypeList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern AcceleratorTypeList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: AcceleratorTypeList_Warning_Code
@@ -6930,10 +7959,12 @@ pattern AcceleratorTypeList_Warning_Code_Unreachable = AcceleratorTypeList_Warni
   AcceleratorTypeList_Warning_Code_EXTERNALAPIWARNING,
   AcceleratorTypeList_Warning_Code_FIELDVALUEOVERRIDEN,
   AcceleratorTypeList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  AcceleratorTypeList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   AcceleratorTypeList_Warning_Code_LARGEDEPLOYMENTWARNING,
   AcceleratorTypeList_Warning_Code_MISSINGTYPEDEPENDENCY,
   AcceleratorTypeList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   AcceleratorTypeList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  AcceleratorTypeList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   AcceleratorTypeList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   AcceleratorTypeList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   AcceleratorTypeList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -6995,6 +8026,10 @@ pattern AcceleratorTypesScopedList_Warning_Code_FIELDVALUEOVERRIDEN = Accelerato
 pattern AcceleratorTypesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: AcceleratorTypesScopedList_Warning_Code
 pattern AcceleratorTypesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = AcceleratorTypesScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern AcceleratorTypesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: AcceleratorTypesScopedList_Warning_Code
+pattern AcceleratorTypesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = AcceleratorTypesScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern AcceleratorTypesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: AcceleratorTypesScopedList_Warning_Code
 pattern AcceleratorTypesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = AcceleratorTypesScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -7010,6 +8045,10 @@ pattern AcceleratorTypesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Acce
 -- | The route\'s next hop instance cannot ip forward.
 pattern AcceleratorTypesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: AcceleratorTypesScopedList_Warning_Code
 pattern AcceleratorTypesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = AcceleratorTypesScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern AcceleratorTypesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: AcceleratorTypesScopedList_Warning_Code
+pattern AcceleratorTypesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = AcceleratorTypesScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern AcceleratorTypesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: AcceleratorTypesScopedList_Warning_Code
@@ -7072,10 +8111,12 @@ pattern AcceleratorTypesScopedList_Warning_Code_Unreachable = AcceleratorTypesSc
   AcceleratorTypesScopedList_Warning_Code_EXTERNALAPIWARNING,
   AcceleratorTypesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   AcceleratorTypesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  AcceleratorTypesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   AcceleratorTypesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   AcceleratorTypesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   AcceleratorTypesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   AcceleratorTypesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  AcceleratorTypesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   AcceleratorTypesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   AcceleratorTypesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   AcceleratorTypesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -7129,7 +8170,7 @@ pattern AccessConfig_NetworkTier_STANDARDOVERRIDESFIXEDSTANDARD = AccessConfig_N
   AccessConfig_NetworkTier
   #-}
 
--- | The type of configuration. The default and only option is ONE/TO/ONE_NAT.
+-- | The type of configuration. In accessConfigs (IPv4), the default and only option is ONE/TO/ONE/NAT. In ipv6AccessConfigs, the default and only option is DIRECT/IPV6.
 newtype AccessConfig_Type = AccessConfig_Type {fromAccessConfig_Type :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -7220,6 +8261,33 @@ pattern Address_IpVersion_UNSPECIFIEDVERSION = Address_IpVersion "UNSPECIFIED_VE
   Address_IpVersion
   #-}
 
+-- | The endpoint type of this address, which should be VM or NETLB. This is used for deciding which type of endpoint this address can be used after the external IPv6 address reservation.
+newtype Address_Ipv6EndpointType = Address_Ipv6EndpointType {fromAddress_Ipv6EndpointType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Reserved IPv6 address can be used on network load balancer.
+pattern Address_Ipv6EndpointType_Netlb :: Address_Ipv6EndpointType
+pattern Address_Ipv6EndpointType_Netlb = Address_Ipv6EndpointType "NETLB"
+
+-- | Reserved IPv6 address can be used on VM.
+pattern Address_Ipv6EndpointType_VM :: Address_Ipv6EndpointType
+pattern Address_Ipv6EndpointType_VM = Address_Ipv6EndpointType "VM"
+
+{-# COMPLETE
+  Address_Ipv6EndpointType_Netlb,
+  Address_Ipv6EndpointType_VM,
+  Address_Ipv6EndpointType
+  #-}
+
 -- | This signifies the networking tier used for configuring this address and can only take the following values: PREMIUM or STANDARD. Internal IP addresses are always Premium Tier; global external IP addresses are always Premium Tier; regional external IP addresses can be either Standard or Premium Tier. If this field is not specified, it is assumed to be PREMIUM.
 newtype Address_NetworkTier = Address_NetworkTier {fromAddress_NetworkTier :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -7257,8 +8325,8 @@ pattern Address_NetworkTier_STANDARDOVERRIDESFIXEDSTANDARD = Address_NetworkTier
   Address_NetworkTier
   #-}
 
--- | The purpose of this resource, which can be one of the following values: - GCE/ENDPOINT for addresses that are used by VM instances, alias IP ranges, load balancers, and similar resources. - DNS/RESOLVER for a DNS resolver address in a subnetwork for a Cloud DNS inbound forwarder IP addresses (regional internal IP address in a subnet of a VPC network) - VPC/PEERING for global internal IP addresses used for private services access allocated ranges. - NAT/AUTO for the regional external IP addresses used by Cloud NAT when allocating addresses using automatic NAT IP address allocation. - IPSEC_INTERCONNECT for addresses created from a private IP range that are reserved for a VLAN attachment in an /IPsec-encrypted Cloud Interconnect/ configuration. These addresses are regional resources. Not currently available publicly. - @SHARED_LOADBALANCER_VIP@ for an internal IP address that is assigned to multiple internal forwarding rules. - @PRIVATE_SERVICE_CONNECT@ for a private network address that is used to configure
--- Private Service Connect. Only global internal addresses can use this purpose.
+-- | The purpose of this resource, which can be one of the following values: - GCE/ENDPOINT for addresses that are used by VM instances, alias IP ranges, load balancers, and similar resources. - DNS/RESOLVER for a DNS resolver address in a subnetwork for a Cloud DNS inbound forwarder IP addresses (regional internal IP address in a subnet of a VPC network) - VPC/PEERING for global internal IP addresses used for private services access allocated ranges. - NAT/AUTO for the regional external IP addresses used by Cloud NAT when allocating addresses using automatic NAT IP address allocation. - IPSEC_INTERCONNECT for addresses created from a private IP range that are reserved for a VLAN attachment in an /HA VPN over Cloud Interconnect/ configuration. These addresses are regional resources. - @SHARED_LOADBALANCER_VIP@ for an internal IP address that is assigned to multiple internal forwarding rules. - @PRIVATE_SERVICE_CONNECT@ for a private network address that is used to configure Private Service Connect. Only global
+-- internal addresses can use this purpose.
 newtype Address_Purpose = Address_Purpose {fromAddress_Purpose :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -7279,7 +8347,7 @@ pattern Address_Purpose_DNSRESOLVER = Address_Purpose "DNS_RESOLVER"
 pattern Address_Purpose_GCEENDPOINT :: Address_Purpose
 pattern Address_Purpose_GCEENDPOINT = Address_Purpose "GCE_ENDPOINT"
 
--- | A regional internal IP address range reserved for the VLAN attachment that is used in IPsec-encrypted Cloud Interconnect. This regional internal IP address range must not overlap with any IP address range of subnet\/route in the VPC network and its peering networks. After the VLAN attachment is created with the reserved IP address range, when creating a new VPN gateway, its interface IP address is allocated from the associated VLAN attachment’s IP address range.
+-- | A regional internal IP address range reserved for the VLAN attachment that is used in HA VPN over Cloud Interconnect. This regional internal IP address range must not overlap with any IP address range of subnet\/route in the VPC network and its peering networks. After the VLAN attachment is created with the reserved IP address range, when creating a new VPN gateway, its interface IP address is allocated from the associated VLAN attachment’s IP address range.
 pattern Address_Purpose_IPSECINTERCONNECT :: Address_Purpose
 pattern Address_Purpose_IPSECINTERCONNECT = Address_Purpose "IPSEC_INTERCONNECT"
 
@@ -7290,6 +8358,10 @@ pattern Address_Purpose_NATAUTO = Address_Purpose "NAT_AUTO"
 -- | A private network IP address that can be used to configure Private Service Connect. This purpose can be specified only for GLOBAL addresses of Type INTERNAL
 pattern Address_Purpose_PRIVATESERVICECONNECT :: Address_Purpose
 pattern Address_Purpose_PRIVATESERVICECONNECT = Address_Purpose "PRIVATE_SERVICE_CONNECT"
+
+-- | A regional internal IP address range reserved for Serverless.
+pattern Address_Purpose_Serverless :: Address_Purpose
+pattern Address_Purpose_Serverless = Address_Purpose "SERVERLESS"
 
 -- | A private network IP address that can be shared by multiple Internal Load Balancer forwarding rules.
 pattern Address_Purpose_SHAREDLOADBALANCERVIP :: Address_Purpose
@@ -7305,6 +8377,7 @@ pattern Address_Purpose_VPCPEERING = Address_Purpose "VPC_PEERING"
   Address_Purpose_IPSECINTERCONNECT,
   Address_Purpose_NATAUTO,
   Address_Purpose_PRIVATESERVICECONNECT,
+  Address_Purpose_Serverless,
   Address_Purpose_SHAREDLOADBALANCERVIP,
   Address_Purpose_VPCPEERING,
   Address_Purpose
@@ -7387,6 +8460,10 @@ pattern AddressAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = AddressAggregat
 pattern AddressAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: AddressAggregatedList_Warning_Code
 pattern AddressAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = AddressAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern AddressAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: AddressAggregatedList_Warning_Code
+pattern AddressAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = AddressAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern AddressAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: AddressAggregatedList_Warning_Code
 pattern AddressAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = AddressAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -7402,6 +8479,10 @@ pattern AddressAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = AddressAg
 -- | The route\'s next hop instance cannot ip forward.
 pattern AddressAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: AddressAggregatedList_Warning_Code
 pattern AddressAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = AddressAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern AddressAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: AddressAggregatedList_Warning_Code
+pattern AddressAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = AddressAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern AddressAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: AddressAggregatedList_Warning_Code
@@ -7464,10 +8545,12 @@ pattern AddressAggregatedList_Warning_Code_Unreachable = AddressAggregatedList_W
   AddressAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   AddressAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   AddressAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  AddressAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   AddressAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   AddressAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   AddressAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   AddressAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  AddressAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   AddressAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   AddressAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   AddressAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -7529,6 +8612,10 @@ pattern AddressList_Warning_Code_FIELDVALUEOVERRIDEN = AddressList_Warning_Code 
 pattern AddressList_Warning_Code_INJECTEDKERNELSDEPRECATED :: AddressList_Warning_Code
 pattern AddressList_Warning_Code_INJECTEDKERNELSDEPRECATED = AddressList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern AddressList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: AddressList_Warning_Code
+pattern AddressList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = AddressList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern AddressList_Warning_Code_LARGEDEPLOYMENTWARNING :: AddressList_Warning_Code
 pattern AddressList_Warning_Code_LARGEDEPLOYMENTWARNING = AddressList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -7544,6 +8631,10 @@ pattern AddressList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = AddressList_Warning
 -- | The route\'s next hop instance cannot ip forward.
 pattern AddressList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: AddressList_Warning_Code
 pattern AddressList_Warning_Code_NEXTHOPCANNOTIPFORWARD = AddressList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern AddressList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: AddressList_Warning_Code
+pattern AddressList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = AddressList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern AddressList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: AddressList_Warning_Code
@@ -7606,10 +8697,12 @@ pattern AddressList_Warning_Code_Unreachable = AddressList_Warning_Code "UNREACH
   AddressList_Warning_Code_EXTERNALAPIWARNING,
   AddressList_Warning_Code_FIELDVALUEOVERRIDEN,
   AddressList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  AddressList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   AddressList_Warning_Code_LARGEDEPLOYMENTWARNING,
   AddressList_Warning_Code_MISSINGTYPEDEPENDENCY,
   AddressList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   AddressList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  AddressList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   AddressList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   AddressList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   AddressList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -7671,6 +8764,10 @@ pattern AddressesScopedList_Warning_Code_FIELDVALUEOVERRIDEN = AddressesScopedLi
 pattern AddressesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: AddressesScopedList_Warning_Code
 pattern AddressesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = AddressesScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern AddressesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: AddressesScopedList_Warning_Code
+pattern AddressesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = AddressesScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern AddressesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: AddressesScopedList_Warning_Code
 pattern AddressesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = AddressesScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -7686,6 +8783,10 @@ pattern AddressesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = AddressesSc
 -- | The route\'s next hop instance cannot ip forward.
 pattern AddressesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: AddressesScopedList_Warning_Code
 pattern AddressesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = AddressesScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern AddressesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: AddressesScopedList_Warning_Code
+pattern AddressesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = AddressesScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern AddressesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: AddressesScopedList_Warning_Code
@@ -7748,10 +8849,12 @@ pattern AddressesScopedList_Warning_Code_Unreachable = AddressesScopedList_Warni
   AddressesScopedList_Warning_Code_EXTERNALAPIWARNING,
   AddressesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   AddressesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  AddressesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   AddressesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   AddressesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   AddressesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   AddressesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  AddressesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   AddressesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   AddressesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   AddressesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -7795,7 +8898,39 @@ pattern AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_I
   AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk_Interface
   #-}
 
--- | Specifies the disk interface to use for attaching this disk, which is either SCSI or NVME. The default is SCSI. Persistent disks must always use SCSI and the request will fail if you attempt to attach a persistent disk in any other format than SCSI. Local SSDs can use either NVME or SCSI. For performance characteristics of SCSI over NVMe, see Local SSD performance.
+-- | [Output Only] The architecture of the attached disk. Valid values are ARM64 or X86_64.
+newtype AttachedDisk_Architecture = AttachedDisk_Architecture {fromAttachedDisk_Architecture :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value indicating Architecture is not set.
+pattern AttachedDisk_Architecture_ARCHITECTUREUNSPECIFIED :: AttachedDisk_Architecture
+pattern AttachedDisk_Architecture_ARCHITECTUREUNSPECIFIED = AttachedDisk_Architecture "ARCHITECTURE_UNSPECIFIED"
+
+-- | Machines with architecture ARM64
+pattern AttachedDisk_Architecture_ARM64 :: AttachedDisk_Architecture
+pattern AttachedDisk_Architecture_ARM64 = AttachedDisk_Architecture "ARM64"
+
+-- | Machines with architecture X86_64
+pattern AttachedDisk_Architecture_X86_64 :: AttachedDisk_Architecture
+pattern AttachedDisk_Architecture_X86_64 = AttachedDisk_Architecture "X86_64"
+
+{-# COMPLETE
+  AttachedDisk_Architecture_ARCHITECTUREUNSPECIFIED,
+  AttachedDisk_Architecture_ARM64,
+  AttachedDisk_Architecture_X86_64,
+  AttachedDisk_Architecture
+  #-}
+
+-- | Specifies the disk interface to use for attaching this disk, which is either SCSI or NVME. For most machine types, the default is SCSI. Local SSDs can use either NVME or SCSI. In certain configurations, persistent disks can use NVMe. For more information, see About persistent disks.
 newtype AttachedDisk_Interface = AttachedDisk_Interface {fromAttachedDisk_Interface :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -7874,6 +9009,38 @@ pattern AttachedDisk_Type_Scratch = AttachedDisk_Type "SCRATCH"
   AttachedDisk_Type_Persistent,
   AttachedDisk_Type_Scratch,
   AttachedDisk_Type
+  #-}
+
+-- | The architecture of the attached disk. Valid values are arm64 or x86_64.
+newtype AttachedDiskInitializeParams_Architecture = AttachedDiskInitializeParams_Architecture {fromAttachedDiskInitializeParams_Architecture :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value indicating Architecture is not set.
+pattern AttachedDiskInitializeParams_Architecture_ARCHITECTUREUNSPECIFIED :: AttachedDiskInitializeParams_Architecture
+pattern AttachedDiskInitializeParams_Architecture_ARCHITECTUREUNSPECIFIED = AttachedDiskInitializeParams_Architecture "ARCHITECTURE_UNSPECIFIED"
+
+-- | Machines with architecture ARM64
+pattern AttachedDiskInitializeParams_Architecture_ARM64 :: AttachedDiskInitializeParams_Architecture
+pattern AttachedDiskInitializeParams_Architecture_ARM64 = AttachedDiskInitializeParams_Architecture "ARM64"
+
+-- | Machines with architecture X86_64
+pattern AttachedDiskInitializeParams_Architecture_X86_64 :: AttachedDiskInitializeParams_Architecture
+pattern AttachedDiskInitializeParams_Architecture_X86_64 = AttachedDiskInitializeParams_Architecture "X86_64"
+
+{-# COMPLETE
+  AttachedDiskInitializeParams_Architecture_ARCHITECTUREUNSPECIFIED,
+  AttachedDiskInitializeParams_Architecture_ARM64,
+  AttachedDiskInitializeParams_Architecture_X86_64,
+  AttachedDiskInitializeParams_Architecture
   #-}
 
 -- | Specifies which action to take on instance update with this disk. Default is to use the existing disk.
@@ -8069,6 +9236,10 @@ pattern AutoscalerAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = AutoscalerAg
 pattern AutoscalerAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: AutoscalerAggregatedList_Warning_Code
 pattern AutoscalerAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = AutoscalerAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern AutoscalerAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: AutoscalerAggregatedList_Warning_Code
+pattern AutoscalerAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = AutoscalerAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern AutoscalerAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: AutoscalerAggregatedList_Warning_Code
 pattern AutoscalerAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = AutoscalerAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -8084,6 +9255,10 @@ pattern AutoscalerAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Autosc
 -- | The route\'s next hop instance cannot ip forward.
 pattern AutoscalerAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: AutoscalerAggregatedList_Warning_Code
 pattern AutoscalerAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = AutoscalerAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern AutoscalerAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: AutoscalerAggregatedList_Warning_Code
+pattern AutoscalerAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = AutoscalerAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern AutoscalerAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: AutoscalerAggregatedList_Warning_Code
@@ -8146,10 +9321,12 @@ pattern AutoscalerAggregatedList_Warning_Code_Unreachable = AutoscalerAggregated
   AutoscalerAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   AutoscalerAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   AutoscalerAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  AutoscalerAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   AutoscalerAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   AutoscalerAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   AutoscalerAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   AutoscalerAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  AutoscalerAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   AutoscalerAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   AutoscalerAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   AutoscalerAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -8211,6 +9388,10 @@ pattern AutoscalerList_Warning_Code_FIELDVALUEOVERRIDEN = AutoscalerList_Warning
 pattern AutoscalerList_Warning_Code_INJECTEDKERNELSDEPRECATED :: AutoscalerList_Warning_Code
 pattern AutoscalerList_Warning_Code_INJECTEDKERNELSDEPRECATED = AutoscalerList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern AutoscalerList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: AutoscalerList_Warning_Code
+pattern AutoscalerList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = AutoscalerList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern AutoscalerList_Warning_Code_LARGEDEPLOYMENTWARNING :: AutoscalerList_Warning_Code
 pattern AutoscalerList_Warning_Code_LARGEDEPLOYMENTWARNING = AutoscalerList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -8226,6 +9407,10 @@ pattern AutoscalerList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = AutoscalerList_W
 -- | The route\'s next hop instance cannot ip forward.
 pattern AutoscalerList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: AutoscalerList_Warning_Code
 pattern AutoscalerList_Warning_Code_NEXTHOPCANNOTIPFORWARD = AutoscalerList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern AutoscalerList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: AutoscalerList_Warning_Code
+pattern AutoscalerList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = AutoscalerList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern AutoscalerList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: AutoscalerList_Warning_Code
@@ -8288,10 +9473,12 @@ pattern AutoscalerList_Warning_Code_Unreachable = AutoscalerList_Warning_Code "U
   AutoscalerList_Warning_Code_EXTERNALAPIWARNING,
   AutoscalerList_Warning_Code_FIELDVALUEOVERRIDEN,
   AutoscalerList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  AutoscalerList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   AutoscalerList_Warning_Code_LARGEDEPLOYMENTWARNING,
   AutoscalerList_Warning_Code_MISSINGTYPEDEPENDENCY,
   AutoscalerList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   AutoscalerList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  AutoscalerList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   AutoscalerList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   AutoscalerList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   AutoscalerList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -8472,6 +9659,10 @@ pattern AutoscalersScopedList_Warning_Code_FIELDVALUEOVERRIDEN = AutoscalersScop
 pattern AutoscalersScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: AutoscalersScopedList_Warning_Code
 pattern AutoscalersScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = AutoscalersScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern AutoscalersScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: AutoscalersScopedList_Warning_Code
+pattern AutoscalersScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = AutoscalersScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern AutoscalersScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: AutoscalersScopedList_Warning_Code
 pattern AutoscalersScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = AutoscalersScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -8487,6 +9678,10 @@ pattern AutoscalersScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Autoscale
 -- | The route\'s next hop instance cannot ip forward.
 pattern AutoscalersScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: AutoscalersScopedList_Warning_Code
 pattern AutoscalersScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = AutoscalersScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern AutoscalersScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: AutoscalersScopedList_Warning_Code
+pattern AutoscalersScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = AutoscalersScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern AutoscalersScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: AutoscalersScopedList_Warning_Code
@@ -8549,10 +9744,12 @@ pattern AutoscalersScopedList_Warning_Code_Unreachable = AutoscalersScopedList_W
   AutoscalersScopedList_Warning_Code_EXTERNALAPIWARNING,
   AutoscalersScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   AutoscalersScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  AutoscalersScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   AutoscalersScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   AutoscalersScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   AutoscalersScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   AutoscalersScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  AutoscalersScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   AutoscalersScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   AutoscalersScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   AutoscalersScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -8697,6 +9894,33 @@ pattern Backend_BalancingMode_Utilization = Backend_BalancingMode "UTILIZATION"
   Backend_BalancingMode
   #-}
 
+-- | Compress text responses using Brotli or gzip compression, based on the client\'s Accept-Encoding header.
+newtype BackendBucket_CompressionMode = BackendBucket_CompressionMode {fromBackendBucket_CompressionMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Automatically uses the best compression based on the Accept-Encoding header sent by the client.
+pattern BackendBucket_CompressionMode_Automatic :: BackendBucket_CompressionMode
+pattern BackendBucket_CompressionMode_Automatic = BackendBucket_CompressionMode "AUTOMATIC"
+
+-- | Disables compression. Existing compressed responses cached by Cloud CDN will not be served to clients.
+pattern BackendBucket_CompressionMode_Disabled :: BackendBucket_CompressionMode
+pattern BackendBucket_CompressionMode_Disabled = BackendBucket_CompressionMode "DISABLED"
+
+{-# COMPLETE
+  BackendBucket_CompressionMode_Automatic,
+  BackendBucket_CompressionMode_Disabled,
+  BackendBucket_CompressionMode
+  #-}
+
 -- | Specifies the cache setting for all responses from this backend. The possible values are: USE/ORIGIN/HEADERS Requires the origin to set valid caching headers to cache content. Responses without these headers will not be cached at Google\'s edge, and will require a full trip to the origin on every request, potentially impacting performance and increasing load on the origin server. FORCE/CACHE/ALL Cache all content, ignoring any \"private\", \"no-store\" or \"no-cache\" directives in Cache-Control response headers. Warning: this may result in Cloud CDN caching private, per-user (user identifiable) content. CACHE/ALL/STATIC Automatically cache static content, including common image formats, media (video and audio), and web assets (JavaScript and CSS). Requests and responses that are marked as uncacheable, as well as dynamic content (including HTML), will not be cached.
 newtype BackendBucketCdnPolicy_CacheMode = BackendBucketCdnPolicy_CacheMode {fromBackendBucketCdnPolicy_CacheMode :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -8779,6 +10003,10 @@ pattern BackendBucketList_Warning_Code_FIELDVALUEOVERRIDEN = BackendBucketList_W
 pattern BackendBucketList_Warning_Code_INJECTEDKERNELSDEPRECATED :: BackendBucketList_Warning_Code
 pattern BackendBucketList_Warning_Code_INJECTEDKERNELSDEPRECATED = BackendBucketList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern BackendBucketList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: BackendBucketList_Warning_Code
+pattern BackendBucketList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = BackendBucketList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern BackendBucketList_Warning_Code_LARGEDEPLOYMENTWARNING :: BackendBucketList_Warning_Code
 pattern BackendBucketList_Warning_Code_LARGEDEPLOYMENTWARNING = BackendBucketList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -8794,6 +10022,10 @@ pattern BackendBucketList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = BackendBucket
 -- | The route\'s next hop instance cannot ip forward.
 pattern BackendBucketList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: BackendBucketList_Warning_Code
 pattern BackendBucketList_Warning_Code_NEXTHOPCANNOTIPFORWARD = BackendBucketList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern BackendBucketList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: BackendBucketList_Warning_Code
+pattern BackendBucketList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = BackendBucketList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern BackendBucketList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: BackendBucketList_Warning_Code
@@ -8856,10 +10088,12 @@ pattern BackendBucketList_Warning_Code_Unreachable = BackendBucketList_Warning_C
   BackendBucketList_Warning_Code_EXTERNALAPIWARNING,
   BackendBucketList_Warning_Code_FIELDVALUEOVERRIDEN,
   BackendBucketList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  BackendBucketList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   BackendBucketList_Warning_Code_LARGEDEPLOYMENTWARNING,
   BackendBucketList_Warning_Code_MISSINGTYPEDEPENDENCY,
   BackendBucketList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   BackendBucketList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  BackendBucketList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   BackendBucketList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   BackendBucketList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   BackendBucketList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -8874,6 +10108,33 @@ pattern BackendBucketList_Warning_Code_Unreachable = BackendBucketList_Warning_C
   BackendBucketList_Warning_Code_UNDECLAREDPROPERTIES,
   BackendBucketList_Warning_Code_Unreachable,
   BackendBucketList_Warning_Code
+  #-}
+
+-- | Compress text responses using Brotli or gzip compression, based on the client\'s Accept-Encoding header.
+newtype BackendService_CompressionMode = BackendService_CompressionMode {fromBackendService_CompressionMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Automatically uses the best compression based on the Accept-Encoding header sent by the client.
+pattern BackendService_CompressionMode_Automatic :: BackendService_CompressionMode
+pattern BackendService_CompressionMode_Automatic = BackendService_CompressionMode "AUTOMATIC"
+
+-- | Disables compression. Existing compressed responses cached by Cloud CDN will not be served to clients.
+pattern BackendService_CompressionMode_Disabled :: BackendService_CompressionMode
+pattern BackendService_CompressionMode_Disabled = BackendService_CompressionMode "DISABLED"
+
+{-# COMPLETE
+  BackendService_CompressionMode_Automatic,
+  BackendService_CompressionMode_Disabled,
+  BackendService_CompressionMode
   #-}
 
 -- | Specifies the load balancer type. A backend service created for one type of load balancer cannot be used with another. For more information, refer to Choosing a load balancer.
@@ -8965,6 +10226,10 @@ pattern BackendService_LocalityLbPolicy_RINGHASH = BackendService_LocalityLbPoli
 pattern BackendService_LocalityLbPolicy_ROUNDROBIN :: BackendService_LocalityLbPolicy
 pattern BackendService_LocalityLbPolicy_ROUNDROBIN = BackendService_LocalityLbPolicy "ROUND_ROBIN"
 
+-- | Per-instance weighted Load Balancing via health check reported weights. If set, the Backend Service must configure a non legacy HTTP-based Health Check, and health check replies are expected to contain non-standard HTTP response header field X-Load-Balancing-Endpoint-Weight to specify the per-instance weights. If set, Load Balancing is weighted based on the per-instance weights reported in the last processed health check replies, as long as every instance either reported a valid weight or had UNAVAILABLE_WEIGHT. Otherwise, Load Balancing remains equal-weight. This option is only supported in Network Load Balancing.
+pattern BackendService_LocalityLbPolicy_WEIGHTEDMAGLEV :: BackendService_LocalityLbPolicy
+pattern BackendService_LocalityLbPolicy_WEIGHTEDMAGLEV = BackendService_LocalityLbPolicy "WEIGHTED_MAGLEV"
+
 {-# COMPLETE
   BackendService_LocalityLbPolicy_INVALIDLBPOLICY,
   BackendService_LocalityLbPolicy_LEASTREQUEST,
@@ -8973,6 +10238,7 @@ pattern BackendService_LocalityLbPolicy_ROUNDROBIN = BackendService_LocalityLbPo
   BackendService_LocalityLbPolicy_Random,
   BackendService_LocalityLbPolicy_RINGHASH,
   BackendService_LocalityLbPolicy_ROUNDROBIN,
+  BackendService_LocalityLbPolicy_WEIGHTEDMAGLEV,
   BackendService_LocalityLbPolicy
   #-}
 
@@ -9135,6 +10401,10 @@ pattern BackendServiceAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = BackendS
 pattern BackendServiceAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: BackendServiceAggregatedList_Warning_Code
 pattern BackendServiceAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = BackendServiceAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern BackendServiceAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: BackendServiceAggregatedList_Warning_Code
+pattern BackendServiceAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = BackendServiceAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern BackendServiceAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: BackendServiceAggregatedList_Warning_Code
 pattern BackendServiceAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = BackendServiceAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -9150,6 +10420,10 @@ pattern BackendServiceAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Ba
 -- | The route\'s next hop instance cannot ip forward.
 pattern BackendServiceAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: BackendServiceAggregatedList_Warning_Code
 pattern BackendServiceAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = BackendServiceAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern BackendServiceAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: BackendServiceAggregatedList_Warning_Code
+pattern BackendServiceAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = BackendServiceAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern BackendServiceAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: BackendServiceAggregatedList_Warning_Code
@@ -9212,10 +10486,12 @@ pattern BackendServiceAggregatedList_Warning_Code_Unreachable = BackendServiceAg
   BackendServiceAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   BackendServiceAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   BackendServiceAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  BackendServiceAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   BackendServiceAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   BackendServiceAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   BackendServiceAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   BackendServiceAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  BackendServiceAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   BackendServiceAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   BackendServiceAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   BackendServiceAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -9379,6 +10655,10 @@ pattern BackendServiceList_Warning_Code_FIELDVALUEOVERRIDEN = BackendServiceList
 pattern BackendServiceList_Warning_Code_INJECTEDKERNELSDEPRECATED :: BackendServiceList_Warning_Code
 pattern BackendServiceList_Warning_Code_INJECTEDKERNELSDEPRECATED = BackendServiceList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern BackendServiceList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: BackendServiceList_Warning_Code
+pattern BackendServiceList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = BackendServiceList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern BackendServiceList_Warning_Code_LARGEDEPLOYMENTWARNING :: BackendServiceList_Warning_Code
 pattern BackendServiceList_Warning_Code_LARGEDEPLOYMENTWARNING = BackendServiceList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -9394,6 +10674,10 @@ pattern BackendServiceList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = BackendServi
 -- | The route\'s next hop instance cannot ip forward.
 pattern BackendServiceList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: BackendServiceList_Warning_Code
 pattern BackendServiceList_Warning_Code_NEXTHOPCANNOTIPFORWARD = BackendServiceList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern BackendServiceList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: BackendServiceList_Warning_Code
+pattern BackendServiceList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = BackendServiceList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern BackendServiceList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: BackendServiceList_Warning_Code
@@ -9456,10 +10740,12 @@ pattern BackendServiceList_Warning_Code_Unreachable = BackendServiceList_Warning
   BackendServiceList_Warning_Code_EXTERNALAPIWARNING,
   BackendServiceList_Warning_Code_FIELDVALUEOVERRIDEN,
   BackendServiceList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  BackendServiceList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   BackendServiceList_Warning_Code_LARGEDEPLOYMENTWARNING,
   BackendServiceList_Warning_Code_MISSINGTYPEDEPENDENCY,
   BackendServiceList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   BackendServiceList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  BackendServiceList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   BackendServiceList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   BackendServiceList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   BackendServiceList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -9474,6 +10760,95 @@ pattern BackendServiceList_Warning_Code_Unreachable = BackendServiceList_Warning
   BackendServiceList_Warning_Code_UNDECLAREDPROPERTIES,
   BackendServiceList_Warning_Code_Unreachable,
   BackendServiceList_Warning_Code
+  #-}
+
+-- | The name of a locality load-balancing policy. Valid values include ROUND/ROBIN and, for Java clients, LEAST/REQUEST. For information about these values, see the description of localityLbPolicy. Do not specify the same policy more than once for a backend. If you do, the configuration is rejected.
+newtype BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name = BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name {fromBackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_INVALIDLBPOLICY :: BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name
+pattern BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_INVALIDLBPOLICY = BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name "INVALID_LB_POLICY"
+
+-- | An O(1) algorithm which selects two random healthy hosts and picks the host which has fewer active requests.
+pattern BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_LEASTREQUEST :: BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name
+pattern BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_LEASTREQUEST = BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name "LEAST_REQUEST"
+
+-- | This algorithm implements consistent hashing to backends. Maglev can be used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see https:\/\/ai.google\/research\/pubs\/pub44824
+pattern BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_Maglev :: BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name
+pattern BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_Maglev = BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name "MAGLEV"
+
+-- | Backend host is selected based on the client connection metadata, i.e., connections are opened to the same address as the destination address of the incoming connection before the connection was redirected to the load balancer.
+pattern BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_ORIGINALDESTINATION :: BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name
+pattern BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_ORIGINALDESTINATION = BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name "ORIGINAL_DESTINATION"
+
+-- | The load balancer selects a random healthy host.
+pattern BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_Random :: BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name
+pattern BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_Random = BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name "RANDOM"
+
+-- | The ring\/modulo hash load balancer implements consistent hashing to backends. The algorithm has the property that the addition\/removal of a host from a set of N hosts only affects 1\/N of the requests.
+pattern BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_RINGHASH :: BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name
+pattern BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_RINGHASH = BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name "RING_HASH"
+
+-- | This is a simple policy in which each healthy backend is selected in round robin order. This is the default.
+pattern BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_ROUNDROBIN :: BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name
+pattern BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_ROUNDROBIN = BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name "ROUND_ROBIN"
+
+-- | Per-instance weighted Load Balancing via health check reported weights. If set, the Backend Service must configure a non legacy HTTP-based Health Check, and health check replies are expected to contain non-standard HTTP response header field X-Load-Balancing-Endpoint-Weight to specify the per-instance weights. If set, Load Balancing is weighted based on the per-instance weights reported in the last processed health check replies, as long as every instance either reported a valid weight or had UNAVAILABLE_WEIGHT. Otherwise, Load Balancing remains equal-weight. This option is only supported in Network Load Balancing.
+pattern BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_WEIGHTEDMAGLEV :: BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name
+pattern BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_WEIGHTEDMAGLEV = BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name "WEIGHTED_MAGLEV"
+
+{-# COMPLETE
+  BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_INVALIDLBPOLICY,
+  BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_LEASTREQUEST,
+  BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_Maglev,
+  BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_ORIGINALDESTINATION,
+  BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_Random,
+  BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_RINGHASH,
+  BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_ROUNDROBIN,
+  BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_WEIGHTEDMAGLEV,
+  BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name
+  #-}
+
+-- | This field can only be specified if logging is enabled for this backend service. Configures whether all, none or a subset of optional fields should be added to the reported logs. One of [INCLUDE/ALL/OPTIONAL, EXCLUDE/ALL/OPTIONAL, CUSTOM]. Default is EXCLUDE/ALL/OPTIONAL.
+newtype BackendServiceLogConfig_OptionalMode = BackendServiceLogConfig_OptionalMode {fromBackendServiceLogConfig_OptionalMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | A subset of optional fields.
+pattern BackendServiceLogConfig_OptionalMode_Custom :: BackendServiceLogConfig_OptionalMode
+pattern BackendServiceLogConfig_OptionalMode_Custom = BackendServiceLogConfig_OptionalMode "CUSTOM"
+
+-- | None optional fields.
+pattern BackendServiceLogConfig_OptionalMode_EXCLUDEALLOPTIONAL :: BackendServiceLogConfig_OptionalMode
+pattern BackendServiceLogConfig_OptionalMode_EXCLUDEALLOPTIONAL = BackendServiceLogConfig_OptionalMode "EXCLUDE_ALL_OPTIONAL"
+
+-- | All optional fields.
+pattern BackendServiceLogConfig_OptionalMode_INCLUDEALLOPTIONAL :: BackendServiceLogConfig_OptionalMode
+pattern BackendServiceLogConfig_OptionalMode_INCLUDEALLOPTIONAL = BackendServiceLogConfig_OptionalMode "INCLUDE_ALL_OPTIONAL"
+
+{-# COMPLETE
+  BackendServiceLogConfig_OptionalMode_Custom,
+  BackendServiceLogConfig_OptionalMode_EXCLUDEALLOPTIONAL,
+  BackendServiceLogConfig_OptionalMode_INCLUDEALLOPTIONAL,
+  BackendServiceLogConfig_OptionalMode
   #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
@@ -9521,6 +10896,10 @@ pattern BackendServicesScopedList_Warning_Code_FIELDVALUEOVERRIDEN = BackendServ
 pattern BackendServicesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: BackendServicesScopedList_Warning_Code
 pattern BackendServicesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = BackendServicesScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern BackendServicesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: BackendServicesScopedList_Warning_Code
+pattern BackendServicesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = BackendServicesScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern BackendServicesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: BackendServicesScopedList_Warning_Code
 pattern BackendServicesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = BackendServicesScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -9536,6 +10915,10 @@ pattern BackendServicesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Backe
 -- | The route\'s next hop instance cannot ip forward.
 pattern BackendServicesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: BackendServicesScopedList_Warning_Code
 pattern BackendServicesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = BackendServicesScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern BackendServicesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: BackendServicesScopedList_Warning_Code
+pattern BackendServicesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = BackendServicesScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern BackendServicesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: BackendServicesScopedList_Warning_Code
@@ -9598,10 +10981,12 @@ pattern BackendServicesScopedList_Warning_Code_Unreachable = BackendServicesScop
   BackendServicesScopedList_Warning_Code_EXTERNALAPIWARNING,
   BackendServicesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   BackendServicesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  BackendServicesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   BackendServicesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   BackendServicesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   BackendServicesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   BackendServicesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  BackendServicesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   BackendServicesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   BackendServicesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   BackendServicesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -9949,6 +11334,10 @@ newtype Commitment_Status = Commitment_Status {fromCommitment_Status :: Core.Tex
 pattern Commitment_Status_Active :: Commitment_Status
 pattern Commitment_Status_Active = Commitment_Status "ACTIVE"
 
+-- | Deprecate CANCELED status. Will use separate status to differentiate cancel by mergeCud or manual cancellation.
+pattern Commitment_Status_Cancelled :: Commitment_Status
+pattern Commitment_Status_Cancelled = Commitment_Status "CANCELLED"
+
 -- |
 pattern Commitment_Status_Creating :: Commitment_Status
 pattern Commitment_Status_Creating = Commitment_Status "CREATING"
@@ -9963,6 +11352,7 @@ pattern Commitment_Status_NOTYETACTIVE = Commitment_Status "NOT_YET_ACTIVE"
 
 {-# COMPLETE
   Commitment_Status_Active,
+  Commitment_Status_Cancelled,
   Commitment_Status_Creating,
   Commitment_Status_Expired,
   Commitment_Status_NOTYETACTIVE,
@@ -9995,6 +11385,10 @@ pattern Commitment_Type_COMPUTEOPTIMIZEDC2D :: Commitment_Type
 pattern Commitment_Type_COMPUTEOPTIMIZEDC2D = Commitment_Type "COMPUTE_OPTIMIZED_C2D"
 
 -- |
+pattern Commitment_Type_COMPUTE_OPTIMIZED_C3 :: Commitment_Type
+pattern Commitment_Type_COMPUTE_OPTIMIZED_C3 = Commitment_Type "COMPUTE_OPTIMIZED_C3"
+
+-- |
 pattern Commitment_Type_GENERALPURPOSE :: Commitment_Type
 pattern Commitment_Type_GENERALPURPOSE = Commitment_Type "GENERAL_PURPOSE"
 
@@ -10019,6 +11413,10 @@ pattern Commitment_Type_MEMORYOPTIMIZED :: Commitment_Type
 pattern Commitment_Type_MEMORYOPTIMIZED = Commitment_Type "MEMORY_OPTIMIZED"
 
 -- |
+pattern Commitment_Type_MEMORY_OPTIMIZED_M3 :: Commitment_Type
+pattern Commitment_Type_MEMORY_OPTIMIZED_M3 = Commitment_Type "MEMORY_OPTIMIZED_M3"
+
+-- |
 pattern Commitment_Type_TYPEUNSPECIFIED :: Commitment_Type
 pattern Commitment_Type_TYPEUNSPECIFIED = Commitment_Type "TYPE_UNSPECIFIED"
 
@@ -10026,12 +11424,14 @@ pattern Commitment_Type_TYPEUNSPECIFIED = Commitment_Type "TYPE_UNSPECIFIED"
   Commitment_Type_ACCELERATOROPTIMIZED,
   Commitment_Type_COMPUTEOPTIMIZED,
   Commitment_Type_COMPUTEOPTIMIZEDC2D,
+  Commitment_Type_COMPUTE_OPTIMIZED_C3,
   Commitment_Type_GENERALPURPOSE,
   Commitment_Type_GENERAL_PURPOSE_E2,
   Commitment_Type_GENERAL_PURPOSE_N2,
   Commitment_Type_GENERALPURPOSEN2D,
   Commitment_Type_GENERALPURPOSET2D,
   Commitment_Type_MEMORYOPTIMIZED,
+  Commitment_Type_MEMORY_OPTIMIZED_M3,
   Commitment_Type_TYPEUNSPECIFIED,
   Commitment_Type
   #-}
@@ -10081,6 +11481,10 @@ pattern CommitmentAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = CommitmentAg
 pattern CommitmentAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: CommitmentAggregatedList_Warning_Code
 pattern CommitmentAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = CommitmentAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern CommitmentAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: CommitmentAggregatedList_Warning_Code
+pattern CommitmentAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = CommitmentAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern CommitmentAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: CommitmentAggregatedList_Warning_Code
 pattern CommitmentAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = CommitmentAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -10096,6 +11500,10 @@ pattern CommitmentAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Commit
 -- | The route\'s next hop instance cannot ip forward.
 pattern CommitmentAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: CommitmentAggregatedList_Warning_Code
 pattern CommitmentAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = CommitmentAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern CommitmentAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: CommitmentAggregatedList_Warning_Code
+pattern CommitmentAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = CommitmentAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern CommitmentAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: CommitmentAggregatedList_Warning_Code
@@ -10158,10 +11566,12 @@ pattern CommitmentAggregatedList_Warning_Code_Unreachable = CommitmentAggregated
   CommitmentAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   CommitmentAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   CommitmentAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  CommitmentAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   CommitmentAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   CommitmentAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   CommitmentAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   CommitmentAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  CommitmentAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   CommitmentAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   CommitmentAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   CommitmentAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -10223,6 +11633,10 @@ pattern CommitmentList_Warning_Code_FIELDVALUEOVERRIDEN = CommitmentList_Warning
 pattern CommitmentList_Warning_Code_INJECTEDKERNELSDEPRECATED :: CommitmentList_Warning_Code
 pattern CommitmentList_Warning_Code_INJECTEDKERNELSDEPRECATED = CommitmentList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern CommitmentList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: CommitmentList_Warning_Code
+pattern CommitmentList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = CommitmentList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern CommitmentList_Warning_Code_LARGEDEPLOYMENTWARNING :: CommitmentList_Warning_Code
 pattern CommitmentList_Warning_Code_LARGEDEPLOYMENTWARNING = CommitmentList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -10238,6 +11652,10 @@ pattern CommitmentList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = CommitmentList_W
 -- | The route\'s next hop instance cannot ip forward.
 pattern CommitmentList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: CommitmentList_Warning_Code
 pattern CommitmentList_Warning_Code_NEXTHOPCANNOTIPFORWARD = CommitmentList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern CommitmentList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: CommitmentList_Warning_Code
+pattern CommitmentList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = CommitmentList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern CommitmentList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: CommitmentList_Warning_Code
@@ -10300,10 +11718,12 @@ pattern CommitmentList_Warning_Code_Unreachable = CommitmentList_Warning_Code "U
   CommitmentList_Warning_Code_EXTERNALAPIWARNING,
   CommitmentList_Warning_Code_FIELDVALUEOVERRIDEN,
   CommitmentList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  CommitmentList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   CommitmentList_Warning_Code_LARGEDEPLOYMENTWARNING,
   CommitmentList_Warning_Code_MISSINGTYPEDEPENDENCY,
   CommitmentList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   CommitmentList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  CommitmentList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   CommitmentList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   CommitmentList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   CommitmentList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -10365,6 +11785,10 @@ pattern CommitmentsScopedList_Warning_Code_FIELDVALUEOVERRIDEN = CommitmentsScop
 pattern CommitmentsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: CommitmentsScopedList_Warning_Code
 pattern CommitmentsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = CommitmentsScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern CommitmentsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: CommitmentsScopedList_Warning_Code
+pattern CommitmentsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = CommitmentsScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern CommitmentsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: CommitmentsScopedList_Warning_Code
 pattern CommitmentsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = CommitmentsScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -10380,6 +11804,10 @@ pattern CommitmentsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Commitmen
 -- | The route\'s next hop instance cannot ip forward.
 pattern CommitmentsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: CommitmentsScopedList_Warning_Code
 pattern CommitmentsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = CommitmentsScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern CommitmentsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: CommitmentsScopedList_Warning_Code
+pattern CommitmentsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = CommitmentsScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern CommitmentsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: CommitmentsScopedList_Warning_Code
@@ -10442,10 +11870,12 @@ pattern CommitmentsScopedList_Warning_Code_Unreachable = CommitmentsScopedList_W
   CommitmentsScopedList_Warning_Code_EXTERNALAPIWARNING,
   CommitmentsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   CommitmentsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  CommitmentsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   CommitmentsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   CommitmentsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   CommitmentsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   CommitmentsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  CommitmentsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   CommitmentsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   CommitmentsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   CommitmentsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -10645,6 +12075,38 @@ pattern DeprecationStatus_State_Obsolete = DeprecationStatus_State "OBSOLETE"
   DeprecationStatus_State
   #-}
 
+-- | The architecture of the disk. Valid values are ARM64 or X86_64.
+newtype Disk_Architecture = Disk_Architecture {fromDisk_Architecture :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value indicating Architecture is not set.
+pattern Disk_Architecture_ARCHITECTUREUNSPECIFIED :: Disk_Architecture
+pattern Disk_Architecture_ARCHITECTUREUNSPECIFIED = Disk_Architecture "ARCHITECTURE_UNSPECIFIED"
+
+-- | Machines with architecture ARM64
+pattern Disk_Architecture_ARM64 :: Disk_Architecture
+pattern Disk_Architecture_ARM64 = Disk_Architecture "ARM64"
+
+-- | Machines with architecture X86_64
+pattern Disk_Architecture_X86_64 :: Disk_Architecture
+pattern Disk_Architecture_X86_64 = Disk_Architecture "X86_64"
+
+{-# COMPLETE
+  Disk_Architecture_ARCHITECTUREUNSPECIFIED,
+  Disk_Architecture_ARM64,
+  Disk_Architecture_X86_64,
+  Disk_Architecture
+  #-}
+
 -- | [Output Only] The status of disk creation. - CREATING: Disk is provisioning. - RESTORING: Source data is being copied into the disk. - FAILED: Disk creation failed. - READY: Disk is ready for use. - DELETING: Disk is deleting.
 newtype Disk_Status = Disk_Status {fromDisk_Status :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -10732,6 +12194,10 @@ pattern DiskAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = DiskAggregatedList
 pattern DiskAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: DiskAggregatedList_Warning_Code
 pattern DiskAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = DiskAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern DiskAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: DiskAggregatedList_Warning_Code
+pattern DiskAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = DiskAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern DiskAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: DiskAggregatedList_Warning_Code
 pattern DiskAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = DiskAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -10747,6 +12213,10 @@ pattern DiskAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = DiskAggregat
 -- | The route\'s next hop instance cannot ip forward.
 pattern DiskAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: DiskAggregatedList_Warning_Code
 pattern DiskAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = DiskAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern DiskAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: DiskAggregatedList_Warning_Code
+pattern DiskAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = DiskAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern DiskAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: DiskAggregatedList_Warning_Code
@@ -10809,10 +12279,12 @@ pattern DiskAggregatedList_Warning_Code_Unreachable = DiskAggregatedList_Warning
   DiskAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   DiskAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   DiskAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  DiskAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   DiskAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   DiskAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   DiskAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   DiskAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  DiskAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   DiskAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   DiskAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   DiskAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -10926,6 +12398,10 @@ pattern DiskList_Warning_Code_FIELDVALUEOVERRIDEN = DiskList_Warning_Code "FIELD
 pattern DiskList_Warning_Code_INJECTEDKERNELSDEPRECATED :: DiskList_Warning_Code
 pattern DiskList_Warning_Code_INJECTEDKERNELSDEPRECATED = DiskList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern DiskList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: DiskList_Warning_Code
+pattern DiskList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = DiskList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern DiskList_Warning_Code_LARGEDEPLOYMENTWARNING :: DiskList_Warning_Code
 pattern DiskList_Warning_Code_LARGEDEPLOYMENTWARNING = DiskList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -10941,6 +12417,10 @@ pattern DiskList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = DiskList_Warning_Code 
 -- | The route\'s next hop instance cannot ip forward.
 pattern DiskList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: DiskList_Warning_Code
 pattern DiskList_Warning_Code_NEXTHOPCANNOTIPFORWARD = DiskList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern DiskList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: DiskList_Warning_Code
+pattern DiskList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = DiskList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern DiskList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: DiskList_Warning_Code
@@ -11003,10 +12483,12 @@ pattern DiskList_Warning_Code_Unreachable = DiskList_Warning_Code "UNREACHABLE"
   DiskList_Warning_Code_EXTERNALAPIWARNING,
   DiskList_Warning_Code_FIELDVALUEOVERRIDEN,
   DiskList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  DiskList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   DiskList_Warning_Code_LARGEDEPLOYMENTWARNING,
   DiskList_Warning_Code_MISSINGTYPEDEPENDENCY,
   DiskList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   DiskList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  DiskList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   DiskList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   DiskList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   DiskList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -11068,6 +12550,10 @@ pattern DiskTypeAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = DiskTypeAggreg
 pattern DiskTypeAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: DiskTypeAggregatedList_Warning_Code
 pattern DiskTypeAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = DiskTypeAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern DiskTypeAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: DiskTypeAggregatedList_Warning_Code
+pattern DiskTypeAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = DiskTypeAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern DiskTypeAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: DiskTypeAggregatedList_Warning_Code
 pattern DiskTypeAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = DiskTypeAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -11083,6 +12569,10 @@ pattern DiskTypeAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = DiskType
 -- | The route\'s next hop instance cannot ip forward.
 pattern DiskTypeAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: DiskTypeAggregatedList_Warning_Code
 pattern DiskTypeAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = DiskTypeAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern DiskTypeAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: DiskTypeAggregatedList_Warning_Code
+pattern DiskTypeAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = DiskTypeAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern DiskTypeAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: DiskTypeAggregatedList_Warning_Code
@@ -11145,10 +12635,12 @@ pattern DiskTypeAggregatedList_Warning_Code_Unreachable = DiskTypeAggregatedList
   DiskTypeAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   DiskTypeAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   DiskTypeAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  DiskTypeAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   DiskTypeAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   DiskTypeAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   DiskTypeAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   DiskTypeAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  DiskTypeAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   DiskTypeAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   DiskTypeAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   DiskTypeAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -11210,6 +12702,10 @@ pattern DiskTypeList_Warning_Code_FIELDVALUEOVERRIDEN = DiskTypeList_Warning_Cod
 pattern DiskTypeList_Warning_Code_INJECTEDKERNELSDEPRECATED :: DiskTypeList_Warning_Code
 pattern DiskTypeList_Warning_Code_INJECTEDKERNELSDEPRECATED = DiskTypeList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern DiskTypeList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: DiskTypeList_Warning_Code
+pattern DiskTypeList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = DiskTypeList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern DiskTypeList_Warning_Code_LARGEDEPLOYMENTWARNING :: DiskTypeList_Warning_Code
 pattern DiskTypeList_Warning_Code_LARGEDEPLOYMENTWARNING = DiskTypeList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -11225,6 +12721,10 @@ pattern DiskTypeList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = DiskTypeList_Warni
 -- | The route\'s next hop instance cannot ip forward.
 pattern DiskTypeList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: DiskTypeList_Warning_Code
 pattern DiskTypeList_Warning_Code_NEXTHOPCANNOTIPFORWARD = DiskTypeList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern DiskTypeList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: DiskTypeList_Warning_Code
+pattern DiskTypeList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = DiskTypeList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern DiskTypeList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: DiskTypeList_Warning_Code
@@ -11287,10 +12787,12 @@ pattern DiskTypeList_Warning_Code_Unreachable = DiskTypeList_Warning_Code "UNREA
   DiskTypeList_Warning_Code_EXTERNALAPIWARNING,
   DiskTypeList_Warning_Code_FIELDVALUEOVERRIDEN,
   DiskTypeList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  DiskTypeList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   DiskTypeList_Warning_Code_LARGEDEPLOYMENTWARNING,
   DiskTypeList_Warning_Code_MISSINGTYPEDEPENDENCY,
   DiskTypeList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   DiskTypeList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  DiskTypeList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   DiskTypeList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   DiskTypeList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   DiskTypeList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -11352,6 +12854,10 @@ pattern DiskTypesScopedList_Warning_Code_FIELDVALUEOVERRIDEN = DiskTypesScopedLi
 pattern DiskTypesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: DiskTypesScopedList_Warning_Code
 pattern DiskTypesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = DiskTypesScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern DiskTypesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: DiskTypesScopedList_Warning_Code
+pattern DiskTypesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = DiskTypesScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern DiskTypesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: DiskTypesScopedList_Warning_Code
 pattern DiskTypesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = DiskTypesScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -11367,6 +12873,10 @@ pattern DiskTypesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = DiskTypesSc
 -- | The route\'s next hop instance cannot ip forward.
 pattern DiskTypesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: DiskTypesScopedList_Warning_Code
 pattern DiskTypesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = DiskTypesScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern DiskTypesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: DiskTypesScopedList_Warning_Code
+pattern DiskTypesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = DiskTypesScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern DiskTypesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: DiskTypesScopedList_Warning_Code
@@ -11429,10 +12939,12 @@ pattern DiskTypesScopedList_Warning_Code_Unreachable = DiskTypesScopedList_Warni
   DiskTypesScopedList_Warning_Code_EXTERNALAPIWARNING,
   DiskTypesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   DiskTypesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  DiskTypesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   DiskTypesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   DiskTypesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   DiskTypesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   DiskTypesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  DiskTypesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   DiskTypesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   DiskTypesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   DiskTypesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -11494,6 +13006,10 @@ pattern DisksScopedList_Warning_Code_FIELDVALUEOVERRIDEN = DisksScopedList_Warni
 pattern DisksScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: DisksScopedList_Warning_Code
 pattern DisksScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = DisksScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern DisksScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: DisksScopedList_Warning_Code
+pattern DisksScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = DisksScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern DisksScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: DisksScopedList_Warning_Code
 pattern DisksScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = DisksScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -11509,6 +13025,10 @@ pattern DisksScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = DisksScopedList
 -- | The route\'s next hop instance cannot ip forward.
 pattern DisksScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: DisksScopedList_Warning_Code
 pattern DisksScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = DisksScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern DisksScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: DisksScopedList_Warning_Code
+pattern DisksScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = DisksScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern DisksScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: DisksScopedList_Warning_Code
@@ -11571,10 +13091,12 @@ pattern DisksScopedList_Warning_Code_Unreachable = DisksScopedList_Warning_Code 
   DisksScopedList_Warning_Code_EXTERNALAPIWARNING,
   DisksScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   DisksScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  DisksScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   DisksScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   DisksScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   DisksScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   DisksScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  DisksScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   DisksScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   DisksScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   DisksScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -11700,6 +13222,10 @@ pattern ExchangedPeeringRoutesList_Warning_Code_FIELDVALUEOVERRIDEN = ExchangedP
 pattern ExchangedPeeringRoutesList_Warning_Code_INJECTEDKERNELSDEPRECATED :: ExchangedPeeringRoutesList_Warning_Code
 pattern ExchangedPeeringRoutesList_Warning_Code_INJECTEDKERNELSDEPRECATED = ExchangedPeeringRoutesList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern ExchangedPeeringRoutesList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: ExchangedPeeringRoutesList_Warning_Code
+pattern ExchangedPeeringRoutesList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = ExchangedPeeringRoutesList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern ExchangedPeeringRoutesList_Warning_Code_LARGEDEPLOYMENTWARNING :: ExchangedPeeringRoutesList_Warning_Code
 pattern ExchangedPeeringRoutesList_Warning_Code_LARGEDEPLOYMENTWARNING = ExchangedPeeringRoutesList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -11715,6 +13241,10 @@ pattern ExchangedPeeringRoutesList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Exch
 -- | The route\'s next hop instance cannot ip forward.
 pattern ExchangedPeeringRoutesList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: ExchangedPeeringRoutesList_Warning_Code
 pattern ExchangedPeeringRoutesList_Warning_Code_NEXTHOPCANNOTIPFORWARD = ExchangedPeeringRoutesList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern ExchangedPeeringRoutesList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: ExchangedPeeringRoutesList_Warning_Code
+pattern ExchangedPeeringRoutesList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = ExchangedPeeringRoutesList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern ExchangedPeeringRoutesList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: ExchangedPeeringRoutesList_Warning_Code
@@ -11777,10 +13307,12 @@ pattern ExchangedPeeringRoutesList_Warning_Code_Unreachable = ExchangedPeeringRo
   ExchangedPeeringRoutesList_Warning_Code_EXTERNALAPIWARNING,
   ExchangedPeeringRoutesList_Warning_Code_FIELDVALUEOVERRIDEN,
   ExchangedPeeringRoutesList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  ExchangedPeeringRoutesList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   ExchangedPeeringRoutesList_Warning_Code_LARGEDEPLOYMENTWARNING,
   ExchangedPeeringRoutesList_Warning_Code_MISSINGTYPEDEPENDENCY,
   ExchangedPeeringRoutesList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   ExchangedPeeringRoutesList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  ExchangedPeeringRoutesList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   ExchangedPeeringRoutesList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   ExchangedPeeringRoutesList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   ExchangedPeeringRoutesList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -11874,6 +13406,10 @@ pattern ExternalVpnGatewayList_Warning_Code_FIELDVALUEOVERRIDEN = ExternalVpnGat
 pattern ExternalVpnGatewayList_Warning_Code_INJECTEDKERNELSDEPRECATED :: ExternalVpnGatewayList_Warning_Code
 pattern ExternalVpnGatewayList_Warning_Code_INJECTEDKERNELSDEPRECATED = ExternalVpnGatewayList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern ExternalVpnGatewayList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: ExternalVpnGatewayList_Warning_Code
+pattern ExternalVpnGatewayList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = ExternalVpnGatewayList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern ExternalVpnGatewayList_Warning_Code_LARGEDEPLOYMENTWARNING :: ExternalVpnGatewayList_Warning_Code
 pattern ExternalVpnGatewayList_Warning_Code_LARGEDEPLOYMENTWARNING = ExternalVpnGatewayList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -11889,6 +13425,10 @@ pattern ExternalVpnGatewayList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = External
 -- | The route\'s next hop instance cannot ip forward.
 pattern ExternalVpnGatewayList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: ExternalVpnGatewayList_Warning_Code
 pattern ExternalVpnGatewayList_Warning_Code_NEXTHOPCANNOTIPFORWARD = ExternalVpnGatewayList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern ExternalVpnGatewayList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: ExternalVpnGatewayList_Warning_Code
+pattern ExternalVpnGatewayList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = ExternalVpnGatewayList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern ExternalVpnGatewayList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: ExternalVpnGatewayList_Warning_Code
@@ -11951,10 +13491,12 @@ pattern ExternalVpnGatewayList_Warning_Code_Unreachable = ExternalVpnGatewayList
   ExternalVpnGatewayList_Warning_Code_EXTERNALAPIWARNING,
   ExternalVpnGatewayList_Warning_Code_FIELDVALUEOVERRIDEN,
   ExternalVpnGatewayList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  ExternalVpnGatewayList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   ExternalVpnGatewayList_Warning_Code_LARGEDEPLOYMENTWARNING,
   ExternalVpnGatewayList_Warning_Code_MISSINGTYPEDEPENDENCY,
   ExternalVpnGatewayList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   ExternalVpnGatewayList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  ExternalVpnGatewayList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   ExternalVpnGatewayList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   ExternalVpnGatewayList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   ExternalVpnGatewayList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -12003,7 +13545,7 @@ pattern FileContentBuffer_FileType_X509 = FileContentBuffer_FileType "X509"
   FileContentBuffer_FileType
   #-}
 
--- | Direction of traffic to which this firewall applies, either @INGRESS@ or @EGRESS@. The default is @INGRESS@. For @INGRESS@ traffic, you cannot specify the destinationRanges field, and for @EGRESS@ traffic, you cannot specify the sourceRanges or sourceTags fields.
+-- | Direction of traffic to which this firewall applies, either @INGRESS@ or @EGRESS@. The default is @INGRESS@. For @EGRESS@ traffic, you cannot specify the sourceTags fields.
 newtype Firewall_Direction = Firewall_Direction {fromFirewall_Direction :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -12075,6 +13617,10 @@ pattern FirewallList_Warning_Code_FIELDVALUEOVERRIDEN = FirewallList_Warning_Cod
 pattern FirewallList_Warning_Code_INJECTEDKERNELSDEPRECATED :: FirewallList_Warning_Code
 pattern FirewallList_Warning_Code_INJECTEDKERNELSDEPRECATED = FirewallList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern FirewallList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: FirewallList_Warning_Code
+pattern FirewallList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = FirewallList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern FirewallList_Warning_Code_LARGEDEPLOYMENTWARNING :: FirewallList_Warning_Code
 pattern FirewallList_Warning_Code_LARGEDEPLOYMENTWARNING = FirewallList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -12090,6 +13636,10 @@ pattern FirewallList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = FirewallList_Warni
 -- | The route\'s next hop instance cannot ip forward.
 pattern FirewallList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: FirewallList_Warning_Code
 pattern FirewallList_Warning_Code_NEXTHOPCANNOTIPFORWARD = FirewallList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern FirewallList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: FirewallList_Warning_Code
+pattern FirewallList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = FirewallList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern FirewallList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: FirewallList_Warning_Code
@@ -12152,10 +13702,12 @@ pattern FirewallList_Warning_Code_Unreachable = FirewallList_Warning_Code "UNREA
   FirewallList_Warning_Code_EXTERNALAPIWARNING,
   FirewallList_Warning_Code_FIELDVALUEOVERRIDEN,
   FirewallList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  FirewallList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   FirewallList_Warning_Code_LARGEDEPLOYMENTWARNING,
   FirewallList_Warning_Code_MISSINGTYPEDEPENDENCY,
   FirewallList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   FirewallList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  FirewallList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   FirewallList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   FirewallList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   FirewallList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -12244,6 +13796,10 @@ pattern FirewallPolicyList_Warning_Code_FIELDVALUEOVERRIDEN = FirewallPolicyList
 pattern FirewallPolicyList_Warning_Code_INJECTEDKERNELSDEPRECATED :: FirewallPolicyList_Warning_Code
 pattern FirewallPolicyList_Warning_Code_INJECTEDKERNELSDEPRECATED = FirewallPolicyList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern FirewallPolicyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: FirewallPolicyList_Warning_Code
+pattern FirewallPolicyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = FirewallPolicyList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern FirewallPolicyList_Warning_Code_LARGEDEPLOYMENTWARNING :: FirewallPolicyList_Warning_Code
 pattern FirewallPolicyList_Warning_Code_LARGEDEPLOYMENTWARNING = FirewallPolicyList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -12259,6 +13815,10 @@ pattern FirewallPolicyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = FirewallPoli
 -- | The route\'s next hop instance cannot ip forward.
 pattern FirewallPolicyList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: FirewallPolicyList_Warning_Code
 pattern FirewallPolicyList_Warning_Code_NEXTHOPCANNOTIPFORWARD = FirewallPolicyList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern FirewallPolicyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: FirewallPolicyList_Warning_Code
+pattern FirewallPolicyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = FirewallPolicyList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern FirewallPolicyList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: FirewallPolicyList_Warning_Code
@@ -12321,10 +13881,12 @@ pattern FirewallPolicyList_Warning_Code_Unreachable = FirewallPolicyList_Warning
   FirewallPolicyList_Warning_Code_EXTERNALAPIWARNING,
   FirewallPolicyList_Warning_Code_FIELDVALUEOVERRIDEN,
   FirewallPolicyList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  FirewallPolicyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   FirewallPolicyList_Warning_Code_LARGEDEPLOYMENTWARNING,
   FirewallPolicyList_Warning_Code_MISSINGTYPEDEPENDENCY,
   FirewallPolicyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   FirewallPolicyList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  FirewallPolicyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   FirewallPolicyList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   FirewallPolicyList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   FirewallPolicyList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -12447,7 +14009,7 @@ pattern ForwardingRule_IPProtocol_Udp = ForwardingRule_IPProtocol "UDP"
   ForwardingRule_IPProtocol
   #-}
 
--- | The IP Version that will be used by this forwarding rule. Valid options are IPV4 or IPV6. This can only be specified for an external global forwarding rule.
+-- | The IP Version that will be used by this forwarding rule. Valid options are IPV4 or IPV6.
 newtype ForwardingRule_IpVersion = ForwardingRule_IpVersion {fromForwardingRule_IpVersion :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -12583,6 +14145,10 @@ pattern ForwardingRule_PscConnectionStatus_Accepted = ForwardingRule_PscConnecti
 pattern ForwardingRule_PscConnectionStatus_Closed :: ForwardingRule_PscConnectionStatus
 pattern ForwardingRule_PscConnectionStatus_Closed = ForwardingRule_PscConnectionStatus "CLOSED"
 
+-- | The connection has been accepted by the producer, but the producer needs to take further action before the forwarding rule can serve traffic.
+pattern ForwardingRule_PscConnectionStatus_NEEDSATTENTION :: ForwardingRule_PscConnectionStatus
+pattern ForwardingRule_PscConnectionStatus_NEEDSATTENTION = ForwardingRule_PscConnectionStatus "NEEDS_ATTENTION"
+
 -- | The connection is pending acceptance by the producer.
 pattern ForwardingRule_PscConnectionStatus_Pending :: ForwardingRule_PscConnectionStatus
 pattern ForwardingRule_PscConnectionStatus_Pending = ForwardingRule_PscConnectionStatus "PENDING"
@@ -12598,6 +14164,7 @@ pattern ForwardingRule_PscConnectionStatus_STATUSUNSPECIFIED = ForwardingRule_Ps
 {-# COMPLETE
   ForwardingRule_PscConnectionStatus_Accepted,
   ForwardingRule_PscConnectionStatus_Closed,
+  ForwardingRule_PscConnectionStatus_NEEDSATTENTION,
   ForwardingRule_PscConnectionStatus_Pending,
   ForwardingRule_PscConnectionStatus_Rejected,
   ForwardingRule_PscConnectionStatus_STATUSUNSPECIFIED,
@@ -12649,6 +14216,10 @@ pattern ForwardingRuleAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = Forwardi
 pattern ForwardingRuleAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: ForwardingRuleAggregatedList_Warning_Code
 pattern ForwardingRuleAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = ForwardingRuleAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern ForwardingRuleAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: ForwardingRuleAggregatedList_Warning_Code
+pattern ForwardingRuleAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = ForwardingRuleAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern ForwardingRuleAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: ForwardingRuleAggregatedList_Warning_Code
 pattern ForwardingRuleAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = ForwardingRuleAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -12664,6 +14235,10 @@ pattern ForwardingRuleAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Fo
 -- | The route\'s next hop instance cannot ip forward.
 pattern ForwardingRuleAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: ForwardingRuleAggregatedList_Warning_Code
 pattern ForwardingRuleAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = ForwardingRuleAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern ForwardingRuleAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: ForwardingRuleAggregatedList_Warning_Code
+pattern ForwardingRuleAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = ForwardingRuleAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern ForwardingRuleAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: ForwardingRuleAggregatedList_Warning_Code
@@ -12726,10 +14301,12 @@ pattern ForwardingRuleAggregatedList_Warning_Code_Unreachable = ForwardingRuleAg
   ForwardingRuleAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   ForwardingRuleAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   ForwardingRuleAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  ForwardingRuleAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   ForwardingRuleAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   ForwardingRuleAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   ForwardingRuleAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   ForwardingRuleAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  ForwardingRuleAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   ForwardingRuleAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   ForwardingRuleAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   ForwardingRuleAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -12791,6 +14368,10 @@ pattern ForwardingRuleList_Warning_Code_FIELDVALUEOVERRIDEN = ForwardingRuleList
 pattern ForwardingRuleList_Warning_Code_INJECTEDKERNELSDEPRECATED :: ForwardingRuleList_Warning_Code
 pattern ForwardingRuleList_Warning_Code_INJECTEDKERNELSDEPRECATED = ForwardingRuleList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern ForwardingRuleList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: ForwardingRuleList_Warning_Code
+pattern ForwardingRuleList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = ForwardingRuleList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern ForwardingRuleList_Warning_Code_LARGEDEPLOYMENTWARNING :: ForwardingRuleList_Warning_Code
 pattern ForwardingRuleList_Warning_Code_LARGEDEPLOYMENTWARNING = ForwardingRuleList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -12806,6 +14387,10 @@ pattern ForwardingRuleList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = ForwardingRu
 -- | The route\'s next hop instance cannot ip forward.
 pattern ForwardingRuleList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: ForwardingRuleList_Warning_Code
 pattern ForwardingRuleList_Warning_Code_NEXTHOPCANNOTIPFORWARD = ForwardingRuleList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern ForwardingRuleList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: ForwardingRuleList_Warning_Code
+pattern ForwardingRuleList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = ForwardingRuleList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern ForwardingRuleList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: ForwardingRuleList_Warning_Code
@@ -12868,10 +14453,12 @@ pattern ForwardingRuleList_Warning_Code_Unreachable = ForwardingRuleList_Warning
   ForwardingRuleList_Warning_Code_EXTERNALAPIWARNING,
   ForwardingRuleList_Warning_Code_FIELDVALUEOVERRIDEN,
   ForwardingRuleList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  ForwardingRuleList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   ForwardingRuleList_Warning_Code_LARGEDEPLOYMENTWARNING,
   ForwardingRuleList_Warning_Code_MISSINGTYPEDEPENDENCY,
   ForwardingRuleList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   ForwardingRuleList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  ForwardingRuleList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   ForwardingRuleList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   ForwardingRuleList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   ForwardingRuleList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -12933,6 +14520,10 @@ pattern ForwardingRulesScopedList_Warning_Code_FIELDVALUEOVERRIDEN = ForwardingR
 pattern ForwardingRulesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: ForwardingRulesScopedList_Warning_Code
 pattern ForwardingRulesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = ForwardingRulesScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern ForwardingRulesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: ForwardingRulesScopedList_Warning_Code
+pattern ForwardingRulesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = ForwardingRulesScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern ForwardingRulesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: ForwardingRulesScopedList_Warning_Code
 pattern ForwardingRulesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = ForwardingRulesScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -12948,6 +14539,10 @@ pattern ForwardingRulesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Forwa
 -- | The route\'s next hop instance cannot ip forward.
 pattern ForwardingRulesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: ForwardingRulesScopedList_Warning_Code
 pattern ForwardingRulesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = ForwardingRulesScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern ForwardingRulesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: ForwardingRulesScopedList_Warning_Code
+pattern ForwardingRulesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = ForwardingRulesScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern ForwardingRulesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: ForwardingRulesScopedList_Warning_Code
@@ -13010,10 +14605,12 @@ pattern ForwardingRulesScopedList_Warning_Code_Unreachable = ForwardingRulesScop
   ForwardingRulesScopedList_Warning_Code_EXTERNALAPIWARNING,
   ForwardingRulesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   ForwardingRulesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  ForwardingRulesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   ForwardingRulesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   ForwardingRulesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   ForwardingRulesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   ForwardingRulesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  ForwardingRulesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   ForwardingRulesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   ForwardingRulesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   ForwardingRulesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -13030,7 +14627,8 @@ pattern ForwardingRulesScopedList_Warning_Code_Unreachable = ForwardingRulesScop
   ForwardingRulesScopedList_Warning_Code
   #-}
 
--- | Specifies how port is selected for health checking, can be one of following values: USE/FIXED/PORT: The port number in port is used for health checking. USE/NAMED/PORT: The portName is used for health checking. USE/SERVING/PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, gRPC health check follows behavior specified in port and portName fields.
+-- | Specifies how a port is selected for health checking. Can be one of the following values: USE/FIXED/PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Not supported by target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE/VM/IP network endpoint groups, GCE/VM/IP/PORT network endpoint groups, and instance group backends. USE/NAMED/PORT: Not supported. USE/SERVING/PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE/VM/IP/PORT network endpoint groups and instance group backends. For GCE/VM/IP_PORT network
+-- endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service\'s named port in the instance group\'s list of named ports.
 newtype GRPCHealthCheck_PortSpecification = GRPCHealthCheck_PortSpecification {fromGRPCHealthCheck_PortSpecification :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -13043,15 +14641,15 @@ newtype GRPCHealthCheck_PortSpecification = GRPCHealthCheck_PortSpecification {f
       Core.FromJSONKey
     )
 
--- | The port number in port is used for health checking.
+-- | The port number in the health check\'s port is used for health checking. Applies to network endpoint group and instance group backends.
 pattern GRPCHealthCheck_PortSpecification_USEFIXEDPORT :: GRPCHealthCheck_PortSpecification
 pattern GRPCHealthCheck_PortSpecification_USEFIXEDPORT = GRPCHealthCheck_PortSpecification "USE_FIXED_PORT"
 
--- | The portName is used for health checking.
+-- | Not supported.
 pattern GRPCHealthCheck_PortSpecification_USENAMEDPORT :: GRPCHealthCheck_PortSpecification
 pattern GRPCHealthCheck_PortSpecification_USENAMEDPORT = GRPCHealthCheck_PortSpecification "USE_NAMED_PORT"
 
--- | For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking.
+-- | For network endpoint group backends, the health check uses the port number specified on each endpoint in the network endpoint group. For instance group backends, the health check uses the port number specified for the backend service\'s named port defined in the instance group\'s named ports.
 pattern GRPCHealthCheck_PortSpecification_USESERVINGPORT :: GRPCHealthCheck_PortSpecification
 pattern GRPCHealthCheck_PortSpecification_USESERVINGPORT = GRPCHealthCheck_PortSpecification "USE_SERVING_PORT"
 
@@ -13062,7 +14660,7 @@ pattern GRPCHealthCheck_PortSpecification_USESERVINGPORT = GRPCHealthCheck_PortS
   GRPCHealthCheck_PortSpecification
   #-}
 
--- | The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO/SCSI/MULTIQUEUE - WINDOWS - MULTI/IP/SUBNET - UEFI/COMPATIBLE - SECURE/BOOT - GVNIC - SEV/CAPABLE - SUSPEND/RESUME/COMPATIBLE - SEV/SNP_CAPABLE For more information, see Enabling guest operating system features.
+-- | The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO/SCSI/MULTIQUEUE - WINDOWS - MULTI/IP/SUBNET - UEFI/COMPATIBLE - GVNIC - SEV/CAPABLE - SUSPEND/RESUME/COMPATIBLE - SEV/LIVE/MIGRATABLE - SEV/SNP/CAPABLE - TDX_CAPABLE For more information, see Enabling guest operating system features.
 newtype GuestOsFeature_Type = GuestOsFeature_Type {fromGuestOsFeature_Type :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -13096,6 +14694,14 @@ pattern GuestOsFeature_Type_SEVCAPABLE :: GuestOsFeature_Type
 pattern GuestOsFeature_Type_SEVCAPABLE = GuestOsFeature_Type "SEV_CAPABLE"
 
 -- |
+pattern GuestOsFeature_Type_SEVLIVEMIGRATABLE :: GuestOsFeature_Type
+pattern GuestOsFeature_Type_SEVLIVEMIGRATABLE = GuestOsFeature_Type "SEV_LIVE_MIGRATABLE"
+
+-- |
+pattern GuestOsFeature_Type_SEVSNPCAPABLE :: GuestOsFeature_Type
+pattern GuestOsFeature_Type_SEVSNPCAPABLE = GuestOsFeature_Type "SEV_SNP_CAPABLE"
+
+-- |
 pattern GuestOsFeature_Type_UEFICOMPATIBLE :: GuestOsFeature_Type
 pattern GuestOsFeature_Type_UEFICOMPATIBLE = GuestOsFeature_Type "UEFI_COMPATIBLE"
 
@@ -13113,13 +14719,16 @@ pattern GuestOsFeature_Type_Windows = GuestOsFeature_Type "WINDOWS"
   GuestOsFeature_Type_MULTIIPSUBNET,
   GuestOsFeature_Type_SECUREBOOT,
   GuestOsFeature_Type_SEVCAPABLE,
+  GuestOsFeature_Type_SEVLIVEMIGRATABLE,
+  GuestOsFeature_Type_SEVSNPCAPABLE,
   GuestOsFeature_Type_UEFICOMPATIBLE,
   GuestOsFeature_Type_VIRTIOSCSIMULTIQUEUE,
   GuestOsFeature_Type_Windows,
   GuestOsFeature_Type
   #-}
 
--- | Specifies how port is selected for health checking, can be one of following values: USE/FIXED/PORT: The port number in port is used for health checking. USE/NAMED/PORT: The portName is used for health checking. USE/SERVING/PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, HTTP2 health check follows behavior specified in port and portName fields.
+-- | Specifies how a port is selected for health checking. Can be one of the following values: USE/FIXED/PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Not supported by target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE/VM/IP network endpoint groups, GCE/VM/IP/PORT network endpoint groups, and instance group backends. USE/NAMED/PORT: Not supported. USE/SERVING/PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE/VM/IP/PORT network endpoint groups and instance group backends. For GCE/VM/IP_PORT network
+-- endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service\'s named port in the instance group\'s list of named ports.
 newtype HTTP2HealthCheck_PortSpecification = HTTP2HealthCheck_PortSpecification {fromHTTP2HealthCheck_PortSpecification :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -13132,15 +14741,15 @@ newtype HTTP2HealthCheck_PortSpecification = HTTP2HealthCheck_PortSpecification 
       Core.FromJSONKey
     )
 
--- | The port number in port is used for health checking.
+-- | The port number in the health check\'s port is used for health checking. Applies to network endpoint group and instance group backends.
 pattern HTTP2HealthCheck_PortSpecification_USEFIXEDPORT :: HTTP2HealthCheck_PortSpecification
 pattern HTTP2HealthCheck_PortSpecification_USEFIXEDPORT = HTTP2HealthCheck_PortSpecification "USE_FIXED_PORT"
 
--- | The portName is used for health checking.
+-- | Not supported.
 pattern HTTP2HealthCheck_PortSpecification_USENAMEDPORT :: HTTP2HealthCheck_PortSpecification
 pattern HTTP2HealthCheck_PortSpecification_USENAMEDPORT = HTTP2HealthCheck_PortSpecification "USE_NAMED_PORT"
 
--- | For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking.
+-- | For network endpoint group backends, the health check uses the port number specified on each endpoint in the network endpoint group. For instance group backends, the health check uses the port number specified for the backend service\'s named port defined in the instance group\'s named ports.
 pattern HTTP2HealthCheck_PortSpecification_USESERVINGPORT :: HTTP2HealthCheck_PortSpecification
 pattern HTTP2HealthCheck_PortSpecification_USESERVINGPORT = HTTP2HealthCheck_PortSpecification "USE_SERVING_PORT"
 
@@ -13178,7 +14787,8 @@ pattern HTTP2HealthCheck_ProxyHeader_PROXY_V1 = HTTP2HealthCheck_ProxyHeader "PR
   HTTP2HealthCheck_ProxyHeader
   #-}
 
--- | Specifies how port is selected for health checking, can be one of following values: USE/FIXED/PORT: The port number in port is used for health checking. USE/NAMED/PORT: The portName is used for health checking. USE/SERVING/PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, HTTP health check follows behavior specified in port and portName fields.
+-- | Specifies how a port is selected for health checking. Can be one of the following values: USE/FIXED/PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Also supported in legacy HTTP health checks for target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE/VM/IP network endpoint groups, GCE/VM/IP/PORT network endpoint groups, and instance group backends. USE/NAMED/PORT: Not supported. USE/SERVING/PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE/VM/IP/PORT network endpoint groups and instance group
+-- backends. For GCE/VM/IP_PORT network endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service\'s named port in the instance group\'s list of named ports.
 newtype HTTPHealthCheck_PortSpecification = HTTPHealthCheck_PortSpecification {fromHTTPHealthCheck_PortSpecification :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -13191,15 +14801,15 @@ newtype HTTPHealthCheck_PortSpecification = HTTPHealthCheck_PortSpecification {f
       Core.FromJSONKey
     )
 
--- | The port number in port is used for health checking.
+-- | The port number in the health check\'s port is used for health checking. Applies to network endpoint group and instance group backends.
 pattern HTTPHealthCheck_PortSpecification_USEFIXEDPORT :: HTTPHealthCheck_PortSpecification
 pattern HTTPHealthCheck_PortSpecification_USEFIXEDPORT = HTTPHealthCheck_PortSpecification "USE_FIXED_PORT"
 
--- | The portName is used for health checking.
+-- | Not supported.
 pattern HTTPHealthCheck_PortSpecification_USENAMEDPORT :: HTTPHealthCheck_PortSpecification
 pattern HTTPHealthCheck_PortSpecification_USENAMEDPORT = HTTPHealthCheck_PortSpecification "USE_NAMED_PORT"
 
--- | For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking.
+-- | For network endpoint group backends, the health check uses the port number specified on each endpoint in the network endpoint group. For instance group backends, the health check uses the port number specified for the backend service\'s named port defined in the instance group\'s named ports.
 pattern HTTPHealthCheck_PortSpecification_USESERVINGPORT :: HTTPHealthCheck_PortSpecification
 pattern HTTPHealthCheck_PortSpecification_USESERVINGPORT = HTTPHealthCheck_PortSpecification "USE_SERVING_PORT"
 
@@ -13237,7 +14847,8 @@ pattern HTTPHealthCheck_ProxyHeader_PROXY_V1 = HTTPHealthCheck_ProxyHeader "PROX
   HTTPHealthCheck_ProxyHeader
   #-}
 
--- | Specifies how port is selected for health checking, can be one of following values: USE/FIXED/PORT: The port number in port is used for health checking. USE/NAMED/PORT: The portName is used for health checking. USE/SERVING/PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, HTTPS health check follows behavior specified in port and portName fields.
+-- | Specifies how a port is selected for health checking. Can be one of the following values: USE/FIXED/PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Not supported by target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE/VM/IP network endpoint groups, GCE/VM/IP/PORT network endpoint groups, and instance group backends. USE/NAMED/PORT: Not supported. USE/SERVING/PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE/VM/IP/PORT network endpoint groups and instance group backends. For GCE/VM/IP_PORT network
+-- endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service\'s named port in the instance group\'s list of named ports.
 newtype HTTPSHealthCheck_PortSpecification = HTTPSHealthCheck_PortSpecification {fromHTTPSHealthCheck_PortSpecification :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -13250,15 +14861,15 @@ newtype HTTPSHealthCheck_PortSpecification = HTTPSHealthCheck_PortSpecification 
       Core.FromJSONKey
     )
 
--- | The port number in port is used for health checking.
+-- | The port number in the health check\'s port is used for health checking. Applies to network endpoint group and instance group backends.
 pattern HTTPSHealthCheck_PortSpecification_USEFIXEDPORT :: HTTPSHealthCheck_PortSpecification
 pattern HTTPSHealthCheck_PortSpecification_USEFIXEDPORT = HTTPSHealthCheck_PortSpecification "USE_FIXED_PORT"
 
--- | The portName is used for health checking.
+-- | Not supported.
 pattern HTTPSHealthCheck_PortSpecification_USENAMEDPORT :: HTTPSHealthCheck_PortSpecification
 pattern HTTPSHealthCheck_PortSpecification_USENAMEDPORT = HTTPSHealthCheck_PortSpecification "USE_NAMED_PORT"
 
--- | For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking.
+-- | For network endpoint group backends, the health check uses the port number specified on each endpoint in the network endpoint group. For instance group backends, the health check uses the port number specified for the backend service\'s named port defined in the instance group\'s named ports.
 pattern HTTPSHealthCheck_PortSpecification_USESERVINGPORT :: HTTPSHealthCheck_PortSpecification
 pattern HTTPSHealthCheck_PortSpecification_USESERVINGPORT = HTTPSHealthCheck_PortSpecification "USE_SERVING_PORT"
 
@@ -13296,7 +14907,7 @@ pattern HTTPSHealthCheck_ProxyHeader_PROXY_V1 = HTTPSHealthCheck_ProxyHeader "PR
   HTTPSHealthCheck_ProxyHeader
   #-}
 
--- | Specifies the type of the healthCheck, either TCP, SSL, HTTP, HTTPS or HTTP2. Exactly one of the protocol-specific health check field must be specified, which must match type field.
+-- | Specifies the type of the healthCheck, either TCP, SSL, HTTP, HTTPS, HTTP2 or GRPC. Exactly one of the protocol-specific health check fields must be specified, which must match type field.
 newtype HealthCheck_Type = HealthCheck_Type {fromHealthCheck_Type :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -13393,6 +15004,10 @@ pattern HealthCheckList_Warning_Code_FIELDVALUEOVERRIDEN = HealthCheckList_Warni
 pattern HealthCheckList_Warning_Code_INJECTEDKERNELSDEPRECATED :: HealthCheckList_Warning_Code
 pattern HealthCheckList_Warning_Code_INJECTEDKERNELSDEPRECATED = HealthCheckList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern HealthCheckList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: HealthCheckList_Warning_Code
+pattern HealthCheckList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = HealthCheckList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern HealthCheckList_Warning_Code_LARGEDEPLOYMENTWARNING :: HealthCheckList_Warning_Code
 pattern HealthCheckList_Warning_Code_LARGEDEPLOYMENTWARNING = HealthCheckList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -13408,6 +15023,10 @@ pattern HealthCheckList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = HealthCheckList
 -- | The route\'s next hop instance cannot ip forward.
 pattern HealthCheckList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: HealthCheckList_Warning_Code
 pattern HealthCheckList_Warning_Code_NEXTHOPCANNOTIPFORWARD = HealthCheckList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern HealthCheckList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: HealthCheckList_Warning_Code
+pattern HealthCheckList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = HealthCheckList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern HealthCheckList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: HealthCheckList_Warning_Code
@@ -13470,10 +15089,12 @@ pattern HealthCheckList_Warning_Code_Unreachable = HealthCheckList_Warning_Code 
   HealthCheckList_Warning_Code_EXTERNALAPIWARNING,
   HealthCheckList_Warning_Code_FIELDVALUEOVERRIDEN,
   HealthCheckList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  HealthCheckList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   HealthCheckList_Warning_Code_LARGEDEPLOYMENTWARNING,
   HealthCheckList_Warning_Code_MISSINGTYPEDEPENDENCY,
   HealthCheckList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   HealthCheckList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  HealthCheckList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   HealthCheckList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   HealthCheckList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   HealthCheckList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -13490,7 +15111,7 @@ pattern HealthCheckList_Warning_Code_Unreachable = HealthCheckList_Warning_Code 
   HealthCheckList_Warning_Code
   #-}
 
--- | Optional. Policy for how the results from multiple health checks for the same endpoint are aggregated. Defaults to NO/AGGREGATION if unspecified. - NO/AGGREGATION. An EndpointHealth message is returned for each pair in the health check service. - AND. If any health check of an endpoint reports UNHEALTHY, then UNHEALTHY is the HealthState of the endpoint. If all health checks report HEALTHY, the HealthState of the endpoint is HEALTHY. .
+-- | Optional. Policy for how the results from multiple health checks for the same endpoint are aggregated. Defaults to NO/AGGREGATION if unspecified. - NO/AGGREGATION. An EndpointHealth message is returned for each pair in the health check service. - AND. If any health check of an endpoint reports UNHEALTHY, then UNHEALTHY is the HealthState of the endpoint. If all health checks report HEALTHY, the HealthState of the endpoint is HEALTHY. . This is only allowed with regional HealthCheckService.
 newtype HealthCheckService_HealthStatusAggregationPolicy = HealthCheckService_HealthStatusAggregationPolicy {fromHealthCheckService_HealthStatusAggregationPolicy :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -13562,6 +15183,10 @@ pattern HealthCheckServicesList_Warning_Code_FIELDVALUEOVERRIDEN = HealthCheckSe
 pattern HealthCheckServicesList_Warning_Code_INJECTEDKERNELSDEPRECATED :: HealthCheckServicesList_Warning_Code
 pattern HealthCheckServicesList_Warning_Code_INJECTEDKERNELSDEPRECATED = HealthCheckServicesList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern HealthCheckServicesList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: HealthCheckServicesList_Warning_Code
+pattern HealthCheckServicesList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = HealthCheckServicesList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern HealthCheckServicesList_Warning_Code_LARGEDEPLOYMENTWARNING :: HealthCheckServicesList_Warning_Code
 pattern HealthCheckServicesList_Warning_Code_LARGEDEPLOYMENTWARNING = HealthCheckServicesList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -13577,6 +15202,10 @@ pattern HealthCheckServicesList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = HealthC
 -- | The route\'s next hop instance cannot ip forward.
 pattern HealthCheckServicesList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: HealthCheckServicesList_Warning_Code
 pattern HealthCheckServicesList_Warning_Code_NEXTHOPCANNOTIPFORWARD = HealthCheckServicesList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern HealthCheckServicesList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: HealthCheckServicesList_Warning_Code
+pattern HealthCheckServicesList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = HealthCheckServicesList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern HealthCheckServicesList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: HealthCheckServicesList_Warning_Code
@@ -13639,10 +15268,12 @@ pattern HealthCheckServicesList_Warning_Code_Unreachable = HealthCheckServicesLi
   HealthCheckServicesList_Warning_Code_EXTERNALAPIWARNING,
   HealthCheckServicesList_Warning_Code_FIELDVALUEOVERRIDEN,
   HealthCheckServicesList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  HealthCheckServicesList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   HealthCheckServicesList_Warning_Code_LARGEDEPLOYMENTWARNING,
   HealthCheckServicesList_Warning_Code_MISSINGTYPEDEPENDENCY,
   HealthCheckServicesList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   HealthCheckServicesList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  HealthCheckServicesList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   HealthCheckServicesList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   HealthCheckServicesList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   HealthCheckServicesList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -13704,6 +15335,10 @@ pattern HealthChecksAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = HealthChec
 pattern HealthChecksAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: HealthChecksAggregatedList_Warning_Code
 pattern HealthChecksAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = HealthChecksAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern HealthChecksAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: HealthChecksAggregatedList_Warning_Code
+pattern HealthChecksAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = HealthChecksAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern HealthChecksAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: HealthChecksAggregatedList_Warning_Code
 pattern HealthChecksAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = HealthChecksAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -13719,6 +15354,10 @@ pattern HealthChecksAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Heal
 -- | The route\'s next hop instance cannot ip forward.
 pattern HealthChecksAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: HealthChecksAggregatedList_Warning_Code
 pattern HealthChecksAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = HealthChecksAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern HealthChecksAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: HealthChecksAggregatedList_Warning_Code
+pattern HealthChecksAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = HealthChecksAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern HealthChecksAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: HealthChecksAggregatedList_Warning_Code
@@ -13781,10 +15420,12 @@ pattern HealthChecksAggregatedList_Warning_Code_Unreachable = HealthChecksAggreg
   HealthChecksAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   HealthChecksAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   HealthChecksAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  HealthChecksAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   HealthChecksAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   HealthChecksAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   HealthChecksAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   HealthChecksAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  HealthChecksAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   HealthChecksAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   HealthChecksAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   HealthChecksAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -13846,6 +15487,10 @@ pattern HealthChecksScopedList_Warning_Code_FIELDVALUEOVERRIDEN = HealthChecksSc
 pattern HealthChecksScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: HealthChecksScopedList_Warning_Code
 pattern HealthChecksScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = HealthChecksScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern HealthChecksScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: HealthChecksScopedList_Warning_Code
+pattern HealthChecksScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = HealthChecksScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern HealthChecksScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: HealthChecksScopedList_Warning_Code
 pattern HealthChecksScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = HealthChecksScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -13861,6 +15506,10 @@ pattern HealthChecksScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = HealthCh
 -- | The route\'s next hop instance cannot ip forward.
 pattern HealthChecksScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: HealthChecksScopedList_Warning_Code
 pattern HealthChecksScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = HealthChecksScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern HealthChecksScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: HealthChecksScopedList_Warning_Code
+pattern HealthChecksScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = HealthChecksScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern HealthChecksScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: HealthChecksScopedList_Warning_Code
@@ -13923,10 +15572,12 @@ pattern HealthChecksScopedList_Warning_Code_Unreachable = HealthChecksScopedList
   HealthChecksScopedList_Warning_Code_EXTERNALAPIWARNING,
   HealthChecksScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   HealthChecksScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  HealthChecksScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   HealthChecksScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   HealthChecksScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   HealthChecksScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   HealthChecksScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  HealthChecksScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   HealthChecksScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   HealthChecksScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   HealthChecksScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -13943,7 +15594,7 @@ pattern HealthChecksScopedList_Warning_Code_Unreachable = HealthChecksScopedList
   HealthChecksScopedList_Warning_Code
   #-}
 
--- | Health state of the instance.
+-- | Health state of the IPv4 address of the instance.
 newtype HealthStatus_HealthState = HealthStatus_HealthState {fromHealthStatus_HealthState :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -14019,19 +15670,19 @@ newtype HealthStatusForNetworkEndpoint_HealthState = HealthStatusForNetworkEndpo
       Core.FromJSONKey
     )
 
--- |
+-- | Endpoint is being drained.
 pattern HealthStatusForNetworkEndpoint_HealthState_Draining :: HealthStatusForNetworkEndpoint_HealthState
 pattern HealthStatusForNetworkEndpoint_HealthState_Draining = HealthStatusForNetworkEndpoint_HealthState "DRAINING"
 
--- |
+-- | Endpoint is healthy.
 pattern HealthStatusForNetworkEndpoint_HealthState_Healthy :: HealthStatusForNetworkEndpoint_HealthState
 pattern HealthStatusForNetworkEndpoint_HealthState_Healthy = HealthStatusForNetworkEndpoint_HealthState "HEALTHY"
 
--- |
+-- | Endpoint is unhealthy.
 pattern HealthStatusForNetworkEndpoint_HealthState_Unhealthy :: HealthStatusForNetworkEndpoint_HealthState
 pattern HealthStatusForNetworkEndpoint_HealthState_Unhealthy = HealthStatusForNetworkEndpoint_HealthState "UNHEALTHY"
 
--- |
+-- | Health status of the endpoint is unknown.
 pattern HealthStatusForNetworkEndpoint_HealthState_Unknown :: HealthStatusForNetworkEndpoint_HealthState
 pattern HealthStatusForNetworkEndpoint_HealthState_Unknown = HealthStatusForNetworkEndpoint_HealthState "UNKNOWN"
 
@@ -14088,6 +15739,10 @@ pattern HttpHealthCheckList_Warning_Code_FIELDVALUEOVERRIDEN = HttpHealthCheckLi
 pattern HttpHealthCheckList_Warning_Code_INJECTEDKERNELSDEPRECATED :: HttpHealthCheckList_Warning_Code
 pattern HttpHealthCheckList_Warning_Code_INJECTEDKERNELSDEPRECATED = HttpHealthCheckList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern HttpHealthCheckList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: HttpHealthCheckList_Warning_Code
+pattern HttpHealthCheckList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = HttpHealthCheckList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern HttpHealthCheckList_Warning_Code_LARGEDEPLOYMENTWARNING :: HttpHealthCheckList_Warning_Code
 pattern HttpHealthCheckList_Warning_Code_LARGEDEPLOYMENTWARNING = HttpHealthCheckList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -14103,6 +15758,10 @@ pattern HttpHealthCheckList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = HttpHealthC
 -- | The route\'s next hop instance cannot ip forward.
 pattern HttpHealthCheckList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: HttpHealthCheckList_Warning_Code
 pattern HttpHealthCheckList_Warning_Code_NEXTHOPCANNOTIPFORWARD = HttpHealthCheckList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern HttpHealthCheckList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: HttpHealthCheckList_Warning_Code
+pattern HttpHealthCheckList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = HttpHealthCheckList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern HttpHealthCheckList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: HttpHealthCheckList_Warning_Code
@@ -14165,10 +15824,12 @@ pattern HttpHealthCheckList_Warning_Code_Unreachable = HttpHealthCheckList_Warni
   HttpHealthCheckList_Warning_Code_EXTERNALAPIWARNING,
   HttpHealthCheckList_Warning_Code_FIELDVALUEOVERRIDEN,
   HttpHealthCheckList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  HttpHealthCheckList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   HttpHealthCheckList_Warning_Code_LARGEDEPLOYMENTWARNING,
   HttpHealthCheckList_Warning_Code_MISSINGTYPEDEPENDENCY,
   HttpHealthCheckList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   HttpHealthCheckList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  HttpHealthCheckList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   HttpHealthCheckList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   HttpHealthCheckList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   HttpHealthCheckList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -14272,6 +15933,10 @@ pattern HttpsHealthCheckList_Warning_Code_FIELDVALUEOVERRIDEN = HttpsHealthCheck
 pattern HttpsHealthCheckList_Warning_Code_INJECTEDKERNELSDEPRECATED :: HttpsHealthCheckList_Warning_Code
 pattern HttpsHealthCheckList_Warning_Code_INJECTEDKERNELSDEPRECATED = HttpsHealthCheckList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern HttpsHealthCheckList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: HttpsHealthCheckList_Warning_Code
+pattern HttpsHealthCheckList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = HttpsHealthCheckList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern HttpsHealthCheckList_Warning_Code_LARGEDEPLOYMENTWARNING :: HttpsHealthCheckList_Warning_Code
 pattern HttpsHealthCheckList_Warning_Code_LARGEDEPLOYMENTWARNING = HttpsHealthCheckList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -14287,6 +15952,10 @@ pattern HttpsHealthCheckList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = HttpsHealt
 -- | The route\'s next hop instance cannot ip forward.
 pattern HttpsHealthCheckList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: HttpsHealthCheckList_Warning_Code
 pattern HttpsHealthCheckList_Warning_Code_NEXTHOPCANNOTIPFORWARD = HttpsHealthCheckList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern HttpsHealthCheckList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: HttpsHealthCheckList_Warning_Code
+pattern HttpsHealthCheckList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = HttpsHealthCheckList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern HttpsHealthCheckList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: HttpsHealthCheckList_Warning_Code
@@ -14349,10 +16018,12 @@ pattern HttpsHealthCheckList_Warning_Code_Unreachable = HttpsHealthCheckList_War
   HttpsHealthCheckList_Warning_Code_EXTERNALAPIWARNING,
   HttpsHealthCheckList_Warning_Code_FIELDVALUEOVERRIDEN,
   HttpsHealthCheckList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  HttpsHealthCheckList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   HttpsHealthCheckList_Warning_Code_LARGEDEPLOYMENTWARNING,
   HttpsHealthCheckList_Warning_Code_MISSINGTYPEDEPENDENCY,
   HttpsHealthCheckList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   HttpsHealthCheckList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  HttpsHealthCheckList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   HttpsHealthCheckList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   HttpsHealthCheckList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   HttpsHealthCheckList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -14367,6 +16038,38 @@ pattern HttpsHealthCheckList_Warning_Code_Unreachable = HttpsHealthCheckList_War
   HttpsHealthCheckList_Warning_Code_UNDECLAREDPROPERTIES,
   HttpsHealthCheckList_Warning_Code_Unreachable,
   HttpsHealthCheckList_Warning_Code
+  #-}
+
+-- | The architecture of the image. Valid values are ARM64 or X86_64.
+newtype Image_Architecture = Image_Architecture {fromImage_Architecture :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value indicating Architecture is not set.
+pattern Image_Architecture_ARCHITECTUREUNSPECIFIED :: Image_Architecture
+pattern Image_Architecture_ARCHITECTUREUNSPECIFIED = Image_Architecture "ARCHITECTURE_UNSPECIFIED"
+
+-- | Machines with architecture ARM64
+pattern Image_Architecture_ARM64 :: Image_Architecture
+pattern Image_Architecture_ARM64 = Image_Architecture "ARM64"
+
+-- | Machines with architecture X86_64
+pattern Image_Architecture_X86_64 :: Image_Architecture
+pattern Image_Architecture_X86_64 = Image_Architecture "X86_64"
+
+{-# COMPLETE
+  Image_Architecture_ARCHITECTUREUNSPECIFIED,
+  Image_Architecture_ARM64,
+  Image_Architecture_X86_64,
+  Image_Architecture
   #-}
 
 -- | The format used to encode and transmit the block device, which should be TAR. This is just a container and transmission format and not a runtime format. Provided by the client when the disk image is created.
@@ -14391,7 +16094,7 @@ pattern Image_RawDisk_ContainerType_Tar = Image_RawDisk_ContainerType "TAR"
   Image_RawDisk_ContainerType
   #-}
 
--- | The type of the image used to create this disk. The default and only value is RAW
+-- | The type of the image used to create this disk. The default and only valid value is RAW.
 newtype Image_SourceType = Image_SourceType {fromImage_SourceType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -14495,6 +16198,10 @@ pattern ImageList_Warning_Code_FIELDVALUEOVERRIDEN = ImageList_Warning_Code "FIE
 pattern ImageList_Warning_Code_INJECTEDKERNELSDEPRECATED :: ImageList_Warning_Code
 pattern ImageList_Warning_Code_INJECTEDKERNELSDEPRECATED = ImageList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern ImageList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: ImageList_Warning_Code
+pattern ImageList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = ImageList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern ImageList_Warning_Code_LARGEDEPLOYMENTWARNING :: ImageList_Warning_Code
 pattern ImageList_Warning_Code_LARGEDEPLOYMENTWARNING = ImageList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -14510,6 +16217,10 @@ pattern ImageList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = ImageList_Warning_Cod
 -- | The route\'s next hop instance cannot ip forward.
 pattern ImageList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: ImageList_Warning_Code
 pattern ImageList_Warning_Code_NEXTHOPCANNOTIPFORWARD = ImageList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern ImageList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: ImageList_Warning_Code
+pattern ImageList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = ImageList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern ImageList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: ImageList_Warning_Code
@@ -14572,10 +16283,12 @@ pattern ImageList_Warning_Code_Unreachable = ImageList_Warning_Code "UNREACHABLE
   ImageList_Warning_Code_EXTERNALAPIWARNING,
   ImageList_Warning_Code_FIELDVALUEOVERRIDEN,
   ImageList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  ImageList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   ImageList_Warning_Code_LARGEDEPLOYMENTWARNING,
   ImageList_Warning_Code_MISSINGTYPEDEPENDENCY,
   ImageList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   ImageList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  ImageList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   ImageList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   ImageList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   ImageList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -14590,6 +16303,38 @@ pattern ImageList_Warning_Code_Unreachable = ImageList_Warning_Code "UNREACHABLE
   ImageList_Warning_Code_UNDECLAREDPROPERTIES,
   ImageList_Warning_Code_Unreachable,
   ImageList_Warning_Code
+  #-}
+
+-- | KeyRevocationActionType of the instance. Supported options are \"STOP\" and \"NONE\". The default value is \"NONE\" if it is not specified.
+newtype Instance_KeyRevocationActionType = Instance_KeyRevocationActionType {fromInstance_KeyRevocationActionType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. This value is unused.
+pattern Instance_KeyRevocationActionType_KEYREVOCATIONACTIONTYPEUNSPECIFIED :: Instance_KeyRevocationActionType
+pattern Instance_KeyRevocationActionType_KEYREVOCATIONACTIONTYPEUNSPECIFIED = Instance_KeyRevocationActionType "KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED"
+
+-- | Indicates user chose no operation.
+pattern Instance_KeyRevocationActionType_None :: Instance_KeyRevocationActionType
+pattern Instance_KeyRevocationActionType_None = Instance_KeyRevocationActionType "NONE"
+
+-- | Indicates user chose to opt for VM shutdown on key revocation.
+pattern Instance_KeyRevocationActionType_Stop :: Instance_KeyRevocationActionType
+pattern Instance_KeyRevocationActionType_Stop = Instance_KeyRevocationActionType "STOP"
+
+{-# COMPLETE
+  Instance_KeyRevocationActionType_KEYREVOCATIONACTIONTYPEUNSPECIFIED,
+  Instance_KeyRevocationActionType_None,
+  Instance_KeyRevocationActionType_Stop,
+  Instance_KeyRevocationActionType
   #-}
 
 -- | The private IPv6 google access type for the VM. If not specified, use INHERIT/FROM/SUBNETWORK as default.
@@ -14637,7 +16382,7 @@ newtype Instance_Status = Instance_Status {fromInstance_Status :: Core.Text}
       Core.FromJSONKey
     )
 
--- | The Nanny is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.
+-- | The instance is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.
 pattern Instance_Status_Deprovisioning :: Instance_Status
 pattern Instance_Status_Deprovisioning = Instance_Status "DEPROVISIONING"
 
@@ -14736,6 +16481,10 @@ pattern InstanceAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = InstanceAggreg
 pattern InstanceAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: InstanceAggregatedList_Warning_Code
 pattern InstanceAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = InstanceAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern InstanceAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: InstanceAggregatedList_Warning_Code
+pattern InstanceAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = InstanceAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern InstanceAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: InstanceAggregatedList_Warning_Code
 pattern InstanceAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = InstanceAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -14751,6 +16500,10 @@ pattern InstanceAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Instance
 -- | The route\'s next hop instance cannot ip forward.
 pattern InstanceAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: InstanceAggregatedList_Warning_Code
 pattern InstanceAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = InstanceAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern InstanceAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: InstanceAggregatedList_Warning_Code
+pattern InstanceAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = InstanceAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern InstanceAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: InstanceAggregatedList_Warning_Code
@@ -14813,10 +16566,12 @@ pattern InstanceAggregatedList_Warning_Code_Unreachable = InstanceAggregatedList
   InstanceAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   InstanceAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   InstanceAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  InstanceAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   InstanceAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   InstanceAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   InstanceAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   InstanceAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  InstanceAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   InstanceAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   InstanceAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   InstanceAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -14878,6 +16633,10 @@ pattern InstanceGroupAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = InstanceG
 pattern InstanceGroupAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: InstanceGroupAggregatedList_Warning_Code
 pattern InstanceGroupAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = InstanceGroupAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern InstanceGroupAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: InstanceGroupAggregatedList_Warning_Code
+pattern InstanceGroupAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = InstanceGroupAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern InstanceGroupAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: InstanceGroupAggregatedList_Warning_Code
 pattern InstanceGroupAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = InstanceGroupAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -14893,6 +16652,10 @@ pattern InstanceGroupAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Ins
 -- | The route\'s next hop instance cannot ip forward.
 pattern InstanceGroupAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: InstanceGroupAggregatedList_Warning_Code
 pattern InstanceGroupAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = InstanceGroupAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern InstanceGroupAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: InstanceGroupAggregatedList_Warning_Code
+pattern InstanceGroupAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = InstanceGroupAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern InstanceGroupAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: InstanceGroupAggregatedList_Warning_Code
@@ -14955,10 +16718,12 @@ pattern InstanceGroupAggregatedList_Warning_Code_Unreachable = InstanceGroupAggr
   InstanceGroupAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   InstanceGroupAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   InstanceGroupAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  InstanceGroupAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   InstanceGroupAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   InstanceGroupAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   InstanceGroupAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   InstanceGroupAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  InstanceGroupAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   InstanceGroupAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   InstanceGroupAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   InstanceGroupAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -15020,6 +16785,10 @@ pattern InstanceGroupList_Warning_Code_FIELDVALUEOVERRIDEN = InstanceGroupList_W
 pattern InstanceGroupList_Warning_Code_INJECTEDKERNELSDEPRECATED :: InstanceGroupList_Warning_Code
 pattern InstanceGroupList_Warning_Code_INJECTEDKERNELSDEPRECATED = InstanceGroupList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern InstanceGroupList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: InstanceGroupList_Warning_Code
+pattern InstanceGroupList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = InstanceGroupList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern InstanceGroupList_Warning_Code_LARGEDEPLOYMENTWARNING :: InstanceGroupList_Warning_Code
 pattern InstanceGroupList_Warning_Code_LARGEDEPLOYMENTWARNING = InstanceGroupList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -15035,6 +16804,10 @@ pattern InstanceGroupList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = InstanceGroup
 -- | The route\'s next hop instance cannot ip forward.
 pattern InstanceGroupList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: InstanceGroupList_Warning_Code
 pattern InstanceGroupList_Warning_Code_NEXTHOPCANNOTIPFORWARD = InstanceGroupList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern InstanceGroupList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: InstanceGroupList_Warning_Code
+pattern InstanceGroupList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = InstanceGroupList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern InstanceGroupList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: InstanceGroupList_Warning_Code
@@ -15097,10 +16870,12 @@ pattern InstanceGroupList_Warning_Code_Unreachable = InstanceGroupList_Warning_C
   InstanceGroupList_Warning_Code_EXTERNALAPIWARNING,
   InstanceGroupList_Warning_Code_FIELDVALUEOVERRIDEN,
   InstanceGroupList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  InstanceGroupList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   InstanceGroupList_Warning_Code_LARGEDEPLOYMENTWARNING,
   InstanceGroupList_Warning_Code_MISSINGTYPEDEPENDENCY,
   InstanceGroupList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   InstanceGroupList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  InstanceGroupList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   InstanceGroupList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   InstanceGroupList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   InstanceGroupList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -15115,6 +16890,33 @@ pattern InstanceGroupList_Warning_Code_Unreachable = InstanceGroupList_Warning_C
   InstanceGroupList_Warning_Code_UNDECLAREDPROPERTIES,
   InstanceGroupList_Warning_Code_Unreachable,
   InstanceGroupList_Warning_Code
+  #-}
+
+-- | Pagination behavior of the listManagedInstances API method for this managed instance group.
+newtype InstanceGroupManager_ListManagedInstancesResults = InstanceGroupManager_ListManagedInstancesResults {fromInstanceGroupManager_ListManagedInstancesResults :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | (Default) Pagination is disabled for the group\'s listManagedInstances API method. maxResults and pageToken query parameters are ignored and all instances are returned in a single response.
+pattern InstanceGroupManager_ListManagedInstancesResults_Pageless :: InstanceGroupManager_ListManagedInstancesResults
+pattern InstanceGroupManager_ListManagedInstancesResults_Pageless = InstanceGroupManager_ListManagedInstancesResults "PAGELESS"
+
+-- | Pagination is enabled for the group\'s listManagedInstances API method. maxResults and pageToken query parameters are respected.
+pattern InstanceGroupManager_ListManagedInstancesResults_Paginated :: InstanceGroupManager_ListManagedInstancesResults
+pattern InstanceGroupManager_ListManagedInstancesResults_Paginated = InstanceGroupManager_ListManagedInstancesResults "PAGINATED"
+
+{-# COMPLETE
+  InstanceGroupManager_ListManagedInstancesResults_Pageless,
+  InstanceGroupManager_ListManagedInstancesResults_Paginated,
+  InstanceGroupManager_ListManagedInstancesResults
   #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
@@ -15162,6 +16964,10 @@ pattern InstanceGroupManagerAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = In
 pattern InstanceGroupManagerAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: InstanceGroupManagerAggregatedList_Warning_Code
 pattern InstanceGroupManagerAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = InstanceGroupManagerAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern InstanceGroupManagerAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: InstanceGroupManagerAggregatedList_Warning_Code
+pattern InstanceGroupManagerAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = InstanceGroupManagerAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern InstanceGroupManagerAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: InstanceGroupManagerAggregatedList_Warning_Code
 pattern InstanceGroupManagerAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = InstanceGroupManagerAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -15177,6 +16983,10 @@ pattern InstanceGroupManagerAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNE
 -- | The route\'s next hop instance cannot ip forward.
 pattern InstanceGroupManagerAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: InstanceGroupManagerAggregatedList_Warning_Code
 pattern InstanceGroupManagerAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = InstanceGroupManagerAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern InstanceGroupManagerAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: InstanceGroupManagerAggregatedList_Warning_Code
+pattern InstanceGroupManagerAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = InstanceGroupManagerAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern InstanceGroupManagerAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: InstanceGroupManagerAggregatedList_Warning_Code
@@ -15239,10 +17049,12 @@ pattern InstanceGroupManagerAggregatedList_Warning_Code_Unreachable = InstanceGr
   InstanceGroupManagerAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   InstanceGroupManagerAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   InstanceGroupManagerAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  InstanceGroupManagerAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   InstanceGroupManagerAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   InstanceGroupManagerAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   InstanceGroupManagerAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   InstanceGroupManagerAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  InstanceGroupManagerAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   InstanceGroupManagerAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   InstanceGroupManagerAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   InstanceGroupManagerAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -15304,6 +17116,10 @@ pattern InstanceGroupManagerList_Warning_Code_FIELDVALUEOVERRIDEN = InstanceGrou
 pattern InstanceGroupManagerList_Warning_Code_INJECTEDKERNELSDEPRECATED :: InstanceGroupManagerList_Warning_Code
 pattern InstanceGroupManagerList_Warning_Code_INJECTEDKERNELSDEPRECATED = InstanceGroupManagerList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern InstanceGroupManagerList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: InstanceGroupManagerList_Warning_Code
+pattern InstanceGroupManagerList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = InstanceGroupManagerList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern InstanceGroupManagerList_Warning_Code_LARGEDEPLOYMENTWARNING :: InstanceGroupManagerList_Warning_Code
 pattern InstanceGroupManagerList_Warning_Code_LARGEDEPLOYMENTWARNING = InstanceGroupManagerList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -15319,6 +17135,10 @@ pattern InstanceGroupManagerList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Instan
 -- | The route\'s next hop instance cannot ip forward.
 pattern InstanceGroupManagerList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: InstanceGroupManagerList_Warning_Code
 pattern InstanceGroupManagerList_Warning_Code_NEXTHOPCANNOTIPFORWARD = InstanceGroupManagerList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern InstanceGroupManagerList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: InstanceGroupManagerList_Warning_Code
+pattern InstanceGroupManagerList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = InstanceGroupManagerList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern InstanceGroupManagerList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: InstanceGroupManagerList_Warning_Code
@@ -15381,10 +17201,12 @@ pattern InstanceGroupManagerList_Warning_Code_Unreachable = InstanceGroupManager
   InstanceGroupManagerList_Warning_Code_EXTERNALAPIWARNING,
   InstanceGroupManagerList_Warning_Code_FIELDVALUEOVERRIDEN,
   InstanceGroupManagerList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  InstanceGroupManagerList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   InstanceGroupManagerList_Warning_Code_LARGEDEPLOYMENTWARNING,
   InstanceGroupManagerList_Warning_Code_MISSINGTYPEDEPENDENCY,
   InstanceGroupManagerList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   InstanceGroupManagerList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  InstanceGroupManagerList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   InstanceGroupManagerList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   InstanceGroupManagerList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   InstanceGroupManagerList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -15428,7 +17250,7 @@ pattern InstanceGroupManagerUpdatePolicy_InstanceRedistributionType_Proactive = 
   InstanceGroupManagerUpdatePolicy_InstanceRedistributionType
   #-}
 
--- | Minimal action to be taken on an instance. You can specify either RESTART to restart existing instances or REPLACE to delete and create new instances from the target template. If you specify a RESTART, the Updater will attempt to perform that action only. However, if the Updater determines that the minimal action you specify is not enough to perform the update, it might perform a more disruptive action.
+-- | Minimal action to be taken on an instance. Use this option to minimize disruption as much as possible or to apply a more disruptive action than is necessary. - To limit disruption as much as possible, set the minimal action to REFRESH. If your update requires a more disruptive action, Compute Engine performs the necessary action to execute the update. - To apply a more disruptive action than is strictly necessary, set the minimal action to RESTART or REPLACE. For example, Compute Engine does not need to restart a VM to change its metadata. But if your application reads instance metadata only when a VM is restarted, you can set the minimal action to RESTART in order to pick up metadata changes.
 newtype InstanceGroupManagerUpdatePolicy_MinimalAction = InstanceGroupManagerUpdatePolicy_MinimalAction {fromInstanceGroupManagerUpdatePolicy_MinimalAction :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -15675,6 +17497,10 @@ pattern InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_FIELDVALUEO
 pattern InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_INJECTEDKERNELSDEPRECATED :: InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code
 pattern InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_INJECTEDKERNELSDEPRECATED = InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code
+pattern InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_LARGEDEPLOYMENTWARNING :: InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code
 pattern InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_LARGEDEPLOYMENTWARNING = InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -15690,6 +17516,10 @@ pattern InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_NEXTHOPADDR
 -- | The route\'s next hop instance cannot ip forward.
 pattern InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_NEXTHOPCANNOTIPFORWARD :: InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code
 pattern InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_NEXTHOPCANNOTIPFORWARD = InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code
+pattern InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_NEXTHOPINSTANCENOTFOUND :: InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code
@@ -15752,10 +17582,12 @@ pattern InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_Unreachable
   InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_EXTERNALAPIWARNING,
   InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_FIELDVALUEOVERRIDEN,
   InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_LARGEDEPLOYMENTWARNING,
   InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_MISSINGTYPEDEPENDENCY,
   InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   InstanceGroupManagersListPerInstanceConfigsResp_Warning_Code_NEXTHOPNOTRUNNING,
@@ -15817,6 +17649,10 @@ pattern InstanceGroupManagersScopedList_Warning_Code_FIELDVALUEOVERRIDEN = Insta
 pattern InstanceGroupManagersScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: InstanceGroupManagersScopedList_Warning_Code
 pattern InstanceGroupManagersScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = InstanceGroupManagersScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern InstanceGroupManagersScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: InstanceGroupManagersScopedList_Warning_Code
+pattern InstanceGroupManagersScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = InstanceGroupManagersScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern InstanceGroupManagersScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: InstanceGroupManagersScopedList_Warning_Code
 pattern InstanceGroupManagersScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = InstanceGroupManagersScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -15832,6 +17668,10 @@ pattern InstanceGroupManagersScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED =
 -- | The route\'s next hop instance cannot ip forward.
 pattern InstanceGroupManagersScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: InstanceGroupManagersScopedList_Warning_Code
 pattern InstanceGroupManagersScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = InstanceGroupManagersScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern InstanceGroupManagersScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: InstanceGroupManagersScopedList_Warning_Code
+pattern InstanceGroupManagersScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = InstanceGroupManagersScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern InstanceGroupManagersScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: InstanceGroupManagersScopedList_Warning_Code
@@ -15894,10 +17734,12 @@ pattern InstanceGroupManagersScopedList_Warning_Code_Unreachable = InstanceGroup
   InstanceGroupManagersScopedList_Warning_Code_EXTERNALAPIWARNING,
   InstanceGroupManagersScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   InstanceGroupManagersScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  InstanceGroupManagersScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   InstanceGroupManagersScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   InstanceGroupManagersScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   InstanceGroupManagersScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   InstanceGroupManagersScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  InstanceGroupManagersScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   InstanceGroupManagersScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   InstanceGroupManagersScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   InstanceGroupManagersScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -15959,6 +17801,10 @@ pattern InstanceGroupsListInstances_Warning_Code_FIELDVALUEOVERRIDEN = InstanceG
 pattern InstanceGroupsListInstances_Warning_Code_INJECTEDKERNELSDEPRECATED :: InstanceGroupsListInstances_Warning_Code
 pattern InstanceGroupsListInstances_Warning_Code_INJECTEDKERNELSDEPRECATED = InstanceGroupsListInstances_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern InstanceGroupsListInstances_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: InstanceGroupsListInstances_Warning_Code
+pattern InstanceGroupsListInstances_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = InstanceGroupsListInstances_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern InstanceGroupsListInstances_Warning_Code_LARGEDEPLOYMENTWARNING :: InstanceGroupsListInstances_Warning_Code
 pattern InstanceGroupsListInstances_Warning_Code_LARGEDEPLOYMENTWARNING = InstanceGroupsListInstances_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -15974,6 +17820,10 @@ pattern InstanceGroupsListInstances_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Ins
 -- | The route\'s next hop instance cannot ip forward.
 pattern InstanceGroupsListInstances_Warning_Code_NEXTHOPCANNOTIPFORWARD :: InstanceGroupsListInstances_Warning_Code
 pattern InstanceGroupsListInstances_Warning_Code_NEXTHOPCANNOTIPFORWARD = InstanceGroupsListInstances_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern InstanceGroupsListInstances_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: InstanceGroupsListInstances_Warning_Code
+pattern InstanceGroupsListInstances_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = InstanceGroupsListInstances_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern InstanceGroupsListInstances_Warning_Code_NEXTHOPINSTANCENOTFOUND :: InstanceGroupsListInstances_Warning_Code
@@ -16036,10 +17886,12 @@ pattern InstanceGroupsListInstances_Warning_Code_Unreachable = InstanceGroupsLis
   InstanceGroupsListInstances_Warning_Code_EXTERNALAPIWARNING,
   InstanceGroupsListInstances_Warning_Code_FIELDVALUEOVERRIDEN,
   InstanceGroupsListInstances_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  InstanceGroupsListInstances_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   InstanceGroupsListInstances_Warning_Code_LARGEDEPLOYMENTWARNING,
   InstanceGroupsListInstances_Warning_Code_MISSINGTYPEDEPENDENCY,
   InstanceGroupsListInstances_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   InstanceGroupsListInstances_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  InstanceGroupsListInstances_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   InstanceGroupsListInstances_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   InstanceGroupsListInstances_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   InstanceGroupsListInstances_Warning_Code_NEXTHOPNOTRUNNING,
@@ -16128,6 +17980,10 @@ pattern InstanceGroupsScopedList_Warning_Code_FIELDVALUEOVERRIDEN = InstanceGrou
 pattern InstanceGroupsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: InstanceGroupsScopedList_Warning_Code
 pattern InstanceGroupsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = InstanceGroupsScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern InstanceGroupsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: InstanceGroupsScopedList_Warning_Code
+pattern InstanceGroupsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = InstanceGroupsScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern InstanceGroupsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: InstanceGroupsScopedList_Warning_Code
 pattern InstanceGroupsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = InstanceGroupsScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -16143,6 +17999,10 @@ pattern InstanceGroupsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Instan
 -- | The route\'s next hop instance cannot ip forward.
 pattern InstanceGroupsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: InstanceGroupsScopedList_Warning_Code
 pattern InstanceGroupsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = InstanceGroupsScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern InstanceGroupsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: InstanceGroupsScopedList_Warning_Code
+pattern InstanceGroupsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = InstanceGroupsScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern InstanceGroupsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: InstanceGroupsScopedList_Warning_Code
@@ -16205,10 +18065,12 @@ pattern InstanceGroupsScopedList_Warning_Code_Unreachable = InstanceGroupsScoped
   InstanceGroupsScopedList_Warning_Code_EXTERNALAPIWARNING,
   InstanceGroupsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   InstanceGroupsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  InstanceGroupsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   InstanceGroupsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   InstanceGroupsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   InstanceGroupsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   InstanceGroupsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  InstanceGroupsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   InstanceGroupsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   InstanceGroupsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   InstanceGroupsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -16270,6 +18132,10 @@ pattern InstanceList_Warning_Code_FIELDVALUEOVERRIDEN = InstanceList_Warning_Cod
 pattern InstanceList_Warning_Code_INJECTEDKERNELSDEPRECATED :: InstanceList_Warning_Code
 pattern InstanceList_Warning_Code_INJECTEDKERNELSDEPRECATED = InstanceList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern InstanceList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: InstanceList_Warning_Code
+pattern InstanceList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = InstanceList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern InstanceList_Warning_Code_LARGEDEPLOYMENTWARNING :: InstanceList_Warning_Code
 pattern InstanceList_Warning_Code_LARGEDEPLOYMENTWARNING = InstanceList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -16285,6 +18151,10 @@ pattern InstanceList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = InstanceList_Warni
 -- | The route\'s next hop instance cannot ip forward.
 pattern InstanceList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: InstanceList_Warning_Code
 pattern InstanceList_Warning_Code_NEXTHOPCANNOTIPFORWARD = InstanceList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern InstanceList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: InstanceList_Warning_Code
+pattern InstanceList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = InstanceList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern InstanceList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: InstanceList_Warning_Code
@@ -16347,10 +18217,12 @@ pattern InstanceList_Warning_Code_Unreachable = InstanceList_Warning_Code "UNREA
   InstanceList_Warning_Code_EXTERNALAPIWARNING,
   InstanceList_Warning_Code_FIELDVALUEOVERRIDEN,
   InstanceList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  InstanceList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   InstanceList_Warning_Code_LARGEDEPLOYMENTWARNING,
   InstanceList_Warning_Code_MISSINGTYPEDEPENDENCY,
   InstanceList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   InstanceList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  InstanceList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   InstanceList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   InstanceList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   InstanceList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -16412,6 +18284,10 @@ pattern InstanceListReferrers_Warning_Code_FIELDVALUEOVERRIDEN = InstanceListRef
 pattern InstanceListReferrers_Warning_Code_INJECTEDKERNELSDEPRECATED :: InstanceListReferrers_Warning_Code
 pattern InstanceListReferrers_Warning_Code_INJECTEDKERNELSDEPRECATED = InstanceListReferrers_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern InstanceListReferrers_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: InstanceListReferrers_Warning_Code
+pattern InstanceListReferrers_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = InstanceListReferrers_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern InstanceListReferrers_Warning_Code_LARGEDEPLOYMENTWARNING :: InstanceListReferrers_Warning_Code
 pattern InstanceListReferrers_Warning_Code_LARGEDEPLOYMENTWARNING = InstanceListReferrers_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -16427,6 +18303,10 @@ pattern InstanceListReferrers_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = InstanceL
 -- | The route\'s next hop instance cannot ip forward.
 pattern InstanceListReferrers_Warning_Code_NEXTHOPCANNOTIPFORWARD :: InstanceListReferrers_Warning_Code
 pattern InstanceListReferrers_Warning_Code_NEXTHOPCANNOTIPFORWARD = InstanceListReferrers_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern InstanceListReferrers_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: InstanceListReferrers_Warning_Code
+pattern InstanceListReferrers_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = InstanceListReferrers_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern InstanceListReferrers_Warning_Code_NEXTHOPINSTANCENOTFOUND :: InstanceListReferrers_Warning_Code
@@ -16489,10 +18369,12 @@ pattern InstanceListReferrers_Warning_Code_Unreachable = InstanceListReferrers_W
   InstanceListReferrers_Warning_Code_EXTERNALAPIWARNING,
   InstanceListReferrers_Warning_Code_FIELDVALUEOVERRIDEN,
   InstanceListReferrers_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  InstanceListReferrers_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   InstanceListReferrers_Warning_Code_LARGEDEPLOYMENTWARNING,
   InstanceListReferrers_Warning_Code_MISSINGTYPEDEPENDENCY,
   InstanceListReferrers_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   InstanceListReferrers_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  InstanceListReferrers_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   InstanceListReferrers_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   InstanceListReferrers_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   InstanceListReferrers_Warning_Code_NEXTHOPNOTRUNNING,
@@ -16591,6 +18473,38 @@ pattern InstanceManagedByIgmErrorInstanceActionDetails_Action_Verifying = Instan
   InstanceManagedByIgmErrorInstanceActionDetails_Action
   #-}
 
+-- | KeyRevocationActionType of the instance. Supported options are \"STOP\" and \"NONE\". The default value is \"NONE\" if it is not specified.
+newtype InstanceProperties_KeyRevocationActionType = InstanceProperties_KeyRevocationActionType {fromInstanceProperties_KeyRevocationActionType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. This value is unused.
+pattern InstanceProperties_KeyRevocationActionType_KEYREVOCATIONACTIONTYPEUNSPECIFIED :: InstanceProperties_KeyRevocationActionType
+pattern InstanceProperties_KeyRevocationActionType_KEYREVOCATIONACTIONTYPEUNSPECIFIED = InstanceProperties_KeyRevocationActionType "KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED"
+
+-- | Indicates user chose no operation.
+pattern InstanceProperties_KeyRevocationActionType_None :: InstanceProperties_KeyRevocationActionType
+pattern InstanceProperties_KeyRevocationActionType_None = InstanceProperties_KeyRevocationActionType "NONE"
+
+-- | Indicates user chose to opt for VM shutdown on key revocation.
+pattern InstanceProperties_KeyRevocationActionType_Stop :: InstanceProperties_KeyRevocationActionType
+pattern InstanceProperties_KeyRevocationActionType_Stop = InstanceProperties_KeyRevocationActionType "STOP"
+
+{-# COMPLETE
+  InstanceProperties_KeyRevocationActionType_KEYREVOCATIONACTIONTYPEUNSPECIFIED,
+  InstanceProperties_KeyRevocationActionType_None,
+  InstanceProperties_KeyRevocationActionType_Stop,
+  InstanceProperties_KeyRevocationActionType
+  #-}
+
 -- | The private IPv6 google access type for VMs. If not specified, use INHERIT/FROM/SUBNETWORK as default. Note that for MachineImage, this is not supported yet.
 newtype InstanceProperties_PrivateIpv6GoogleAccess = InstanceProperties_PrivateIpv6GoogleAccess {fromInstanceProperties_PrivateIpv6GoogleAccess :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -16621,6 +18535,158 @@ pattern InstanceProperties_PrivateIpv6GoogleAccess_INHERITFROMSUBNETWORK = Insta
   InstanceProperties_PrivateIpv6GoogleAccess_ENABLEOUTBOUNDVMACCESSTOGOOGLE,
   InstanceProperties_PrivateIpv6GoogleAccess_INHERITFROMSUBNETWORK,
   InstanceProperties_PrivateIpv6GoogleAccess
+  #-}
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
+newtype InstanceTemplateAggregatedList_Warning_Code = InstanceTemplateAggregatedList_Warning_Code {fromInstanceTemplateAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Warning about failed cleanup of transient changes made by a failed operation.
+pattern InstanceTemplateAggregatedList_Warning_Code_CLEANUPFAILED :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_CLEANUPFAILED = InstanceTemplateAggregatedList_Warning_Code "CLEANUP_FAILED"
+
+-- | A link to a deprecated resource was created.
+pattern InstanceTemplateAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED = InstanceTemplateAggregatedList_Warning_Code "DEPRECATED_RESOURCE_USED"
+
+-- | When deploying and at least one of the resources has a type marked as deprecated
+pattern InstanceTemplateAggregatedList_Warning_Code_DEPRECATEDTYPEUSED :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_DEPRECATEDTYPEUSED = InstanceTemplateAggregatedList_Warning_Code "DEPRECATED_TYPE_USED"
+
+-- | The user created a boot disk that is larger than image size.
+pattern InstanceTemplateAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE = InstanceTemplateAggregatedList_Warning_Code "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+
+-- | When deploying and at least one of the resources has a type marked as experimental
+pattern InstanceTemplateAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED = InstanceTemplateAggregatedList_Warning_Code "EXPERIMENTAL_TYPE_USED"
+
+-- | Warning that is present in an external api call
+pattern InstanceTemplateAggregatedList_Warning_Code_EXTERNALAPIWARNING :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_EXTERNALAPIWARNING = InstanceTemplateAggregatedList_Warning_Code "EXTERNAL_API_WARNING"
+
+-- | Warning that value of a field has been overridden. Deprecated unused field.
+pattern InstanceTemplateAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = InstanceTemplateAggregatedList_Warning_Code "FIELD_VALUE_OVERRIDEN"
+
+-- | The operation involved use of an injected kernel, which is deprecated.
+pattern InstanceTemplateAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = InstanceTemplateAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
+
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern InstanceTemplateAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = InstanceTemplateAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
+-- | When deploying a deployment with a exceedingly large number of resources
+pattern InstanceTemplateAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = InstanceTemplateAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
+
+-- | A resource depends on a missing type
+pattern InstanceTemplateAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY = InstanceTemplateAggregatedList_Warning_Code "MISSING_TYPE_DEPENDENCY"
+
+-- | The route\'s nextHopIp address is not assigned to an instance on the network.
+pattern InstanceTemplateAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = InstanceTemplateAggregatedList_Warning_Code "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+
+-- | The route\'s next hop instance cannot ip forward.
+pattern InstanceTemplateAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = InstanceTemplateAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern InstanceTemplateAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = InstanceTemplateAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not exist.
+pattern InstanceTemplateAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND = InstanceTemplateAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_FOUND"
+
+-- | The route\'s nextHopInstance URL refers to an instance that is not on the same network as the route.
+pattern InstanceTemplateAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK = InstanceTemplateAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+
+-- | The route\'s next hop instance does not have a status of RUNNING.
+pattern InstanceTemplateAggregatedList_Warning_Code_NEXTHOPNOTRUNNING :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_NEXTHOPNOTRUNNING = InstanceTemplateAggregatedList_Warning_Code "NEXT_HOP_NOT_RUNNING"
+
+-- | Error which is not critical. We decided to continue the process despite the mentioned error.
+pattern InstanceTemplateAggregatedList_Warning_Code_NOTCRITICALERROR :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_NOTCRITICALERROR = InstanceTemplateAggregatedList_Warning_Code "NOT_CRITICAL_ERROR"
+
+-- | No results are present on a particular list page.
+pattern InstanceTemplateAggregatedList_Warning_Code_NORESULTSONPAGE :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_NORESULTSONPAGE = InstanceTemplateAggregatedList_Warning_Code "NO_RESULTS_ON_PAGE"
+
+-- | Success is reported, but some results may be missing due to errors
+pattern InstanceTemplateAggregatedList_Warning_Code_PARTIALSUCCESS :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_PARTIALSUCCESS = InstanceTemplateAggregatedList_Warning_Code "PARTIAL_SUCCESS"
+
+-- | The user attempted to use a resource that requires a TOS they have not accepted.
+pattern InstanceTemplateAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT = InstanceTemplateAggregatedList_Warning_Code "REQUIRED_TOS_AGREEMENT"
+
+-- | Warning that a resource is in use.
+pattern InstanceTemplateAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING = InstanceTemplateAggregatedList_Warning_Code "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+
+-- | One or more of the resources set to auto-delete could not be deleted because they were in use.
+pattern InstanceTemplateAggregatedList_Warning_Code_RESOURCENOTDELETED :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_RESOURCENOTDELETED = InstanceTemplateAggregatedList_Warning_Code "RESOURCE_NOT_DELETED"
+
+-- | When a resource schema validation is ignored.
+pattern InstanceTemplateAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED = InstanceTemplateAggregatedList_Warning_Code "SCHEMA_VALIDATION_IGNORED"
+
+-- | Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.
+pattern InstanceTemplateAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE = InstanceTemplateAggregatedList_Warning_Code "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+
+-- | When undeclared properties in the schema are present
+pattern InstanceTemplateAggregatedList_Warning_Code_UNDECLAREDPROPERTIES :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_UNDECLAREDPROPERTIES = InstanceTemplateAggregatedList_Warning_Code "UNDECLARED_PROPERTIES"
+
+-- | A given scope cannot be reached.
+pattern InstanceTemplateAggregatedList_Warning_Code_Unreachable :: InstanceTemplateAggregatedList_Warning_Code
+pattern InstanceTemplateAggregatedList_Warning_Code_Unreachable = InstanceTemplateAggregatedList_Warning_Code "UNREACHABLE"
+
+{-# COMPLETE
+  InstanceTemplateAggregatedList_Warning_Code_CLEANUPFAILED,
+  InstanceTemplateAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+  InstanceTemplateAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
+  InstanceTemplateAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+  InstanceTemplateAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED,
+  InstanceTemplateAggregatedList_Warning_Code_EXTERNALAPIWARNING,
+  InstanceTemplateAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
+  InstanceTemplateAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  InstanceTemplateAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+  InstanceTemplateAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+  InstanceTemplateAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+  InstanceTemplateAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+  InstanceTemplateAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  InstanceTemplateAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+  InstanceTemplateAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+  InstanceTemplateAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+  InstanceTemplateAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
+  InstanceTemplateAggregatedList_Warning_Code_NOTCRITICALERROR,
+  InstanceTemplateAggregatedList_Warning_Code_NORESULTSONPAGE,
+  InstanceTemplateAggregatedList_Warning_Code_PARTIALSUCCESS,
+  InstanceTemplateAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT,
+  InstanceTemplateAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+  InstanceTemplateAggregatedList_Warning_Code_RESOURCENOTDELETED,
+  InstanceTemplateAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+  InstanceTemplateAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+  InstanceTemplateAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
+  InstanceTemplateAggregatedList_Warning_Code_Unreachable,
+  InstanceTemplateAggregatedList_Warning_Code
   #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
@@ -16668,6 +18734,10 @@ pattern InstanceTemplateList_Warning_Code_FIELDVALUEOVERRIDEN = InstanceTemplate
 pattern InstanceTemplateList_Warning_Code_INJECTEDKERNELSDEPRECATED :: InstanceTemplateList_Warning_Code
 pattern InstanceTemplateList_Warning_Code_INJECTEDKERNELSDEPRECATED = InstanceTemplateList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern InstanceTemplateList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: InstanceTemplateList_Warning_Code
+pattern InstanceTemplateList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = InstanceTemplateList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern InstanceTemplateList_Warning_Code_LARGEDEPLOYMENTWARNING :: InstanceTemplateList_Warning_Code
 pattern InstanceTemplateList_Warning_Code_LARGEDEPLOYMENTWARNING = InstanceTemplateList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -16683,6 +18753,10 @@ pattern InstanceTemplateList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = InstanceTe
 -- | The route\'s next hop instance cannot ip forward.
 pattern InstanceTemplateList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: InstanceTemplateList_Warning_Code
 pattern InstanceTemplateList_Warning_Code_NEXTHOPCANNOTIPFORWARD = InstanceTemplateList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern InstanceTemplateList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: InstanceTemplateList_Warning_Code
+pattern InstanceTemplateList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = InstanceTemplateList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern InstanceTemplateList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: InstanceTemplateList_Warning_Code
@@ -16745,10 +18819,12 @@ pattern InstanceTemplateList_Warning_Code_Unreachable = InstanceTemplateList_War
   InstanceTemplateList_Warning_Code_EXTERNALAPIWARNING,
   InstanceTemplateList_Warning_Code_FIELDVALUEOVERRIDEN,
   InstanceTemplateList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  InstanceTemplateList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   InstanceTemplateList_Warning_Code_LARGEDEPLOYMENTWARNING,
   InstanceTemplateList_Warning_Code_MISSINGTYPEDEPENDENCY,
   InstanceTemplateList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   InstanceTemplateList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  InstanceTemplateList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   InstanceTemplateList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   InstanceTemplateList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   InstanceTemplateList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -16765,6 +18841,158 @@ pattern InstanceTemplateList_Warning_Code_Unreachable = InstanceTemplateList_War
   InstanceTemplateList_Warning_Code
   #-}
 
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
+newtype InstanceTemplatesScopedList_Warning_Code = InstanceTemplatesScopedList_Warning_Code {fromInstanceTemplatesScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Warning about failed cleanup of transient changes made by a failed operation.
+pattern InstanceTemplatesScopedList_Warning_Code_CLEANUPFAILED :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_CLEANUPFAILED = InstanceTemplatesScopedList_Warning_Code "CLEANUP_FAILED"
+
+-- | A link to a deprecated resource was created.
+pattern InstanceTemplatesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED = InstanceTemplatesScopedList_Warning_Code "DEPRECATED_RESOURCE_USED"
+
+-- | When deploying and at least one of the resources has a type marked as deprecated
+pattern InstanceTemplatesScopedList_Warning_Code_DEPRECATEDTYPEUSED :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_DEPRECATEDTYPEUSED = InstanceTemplatesScopedList_Warning_Code "DEPRECATED_TYPE_USED"
+
+-- | The user created a boot disk that is larger than image size.
+pattern InstanceTemplatesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE = InstanceTemplatesScopedList_Warning_Code "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+
+-- | When deploying and at least one of the resources has a type marked as experimental
+pattern InstanceTemplatesScopedList_Warning_Code_EXPERIMENTALTYPEUSED :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_EXPERIMENTALTYPEUSED = InstanceTemplatesScopedList_Warning_Code "EXPERIMENTAL_TYPE_USED"
+
+-- | Warning that is present in an external api call
+pattern InstanceTemplatesScopedList_Warning_Code_EXTERNALAPIWARNING :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_EXTERNALAPIWARNING = InstanceTemplatesScopedList_Warning_Code "EXTERNAL_API_WARNING"
+
+-- | Warning that value of a field has been overridden. Deprecated unused field.
+pattern InstanceTemplatesScopedList_Warning_Code_FIELDVALUEOVERRIDEN :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_FIELDVALUEOVERRIDEN = InstanceTemplatesScopedList_Warning_Code "FIELD_VALUE_OVERRIDEN"
+
+-- | The operation involved use of an injected kernel, which is deprecated.
+pattern InstanceTemplatesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = InstanceTemplatesScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
+
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern InstanceTemplatesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = InstanceTemplatesScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
+-- | When deploying a deployment with a exceedingly large number of resources
+pattern InstanceTemplatesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = InstanceTemplatesScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
+
+-- | A resource depends on a missing type
+pattern InstanceTemplatesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY = InstanceTemplatesScopedList_Warning_Code "MISSING_TYPE_DEPENDENCY"
+
+-- | The route\'s nextHopIp address is not assigned to an instance on the network.
+pattern InstanceTemplatesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = InstanceTemplatesScopedList_Warning_Code "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+
+-- | The route\'s next hop instance cannot ip forward.
+pattern InstanceTemplatesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = InstanceTemplatesScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern InstanceTemplatesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = InstanceTemplatesScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not exist.
+pattern InstanceTemplatesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND = InstanceTemplatesScopedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_FOUND"
+
+-- | The route\'s nextHopInstance URL refers to an instance that is not on the same network as the route.
+pattern InstanceTemplatesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK = InstanceTemplatesScopedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+
+-- | The route\'s next hop instance does not have a status of RUNNING.
+pattern InstanceTemplatesScopedList_Warning_Code_NEXTHOPNOTRUNNING :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_NEXTHOPNOTRUNNING = InstanceTemplatesScopedList_Warning_Code "NEXT_HOP_NOT_RUNNING"
+
+-- | Error which is not critical. We decided to continue the process despite the mentioned error.
+pattern InstanceTemplatesScopedList_Warning_Code_NOTCRITICALERROR :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_NOTCRITICALERROR = InstanceTemplatesScopedList_Warning_Code "NOT_CRITICAL_ERROR"
+
+-- | No results are present on a particular list page.
+pattern InstanceTemplatesScopedList_Warning_Code_NORESULTSONPAGE :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_NORESULTSONPAGE = InstanceTemplatesScopedList_Warning_Code "NO_RESULTS_ON_PAGE"
+
+-- | Success is reported, but some results may be missing due to errors
+pattern InstanceTemplatesScopedList_Warning_Code_PARTIALSUCCESS :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_PARTIALSUCCESS = InstanceTemplatesScopedList_Warning_Code "PARTIAL_SUCCESS"
+
+-- | The user attempted to use a resource that requires a TOS they have not accepted.
+pattern InstanceTemplatesScopedList_Warning_Code_REQUIREDTOSAGREEMENT :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_REQUIREDTOSAGREEMENT = InstanceTemplatesScopedList_Warning_Code "REQUIRED_TOS_AGREEMENT"
+
+-- | Warning that a resource is in use.
+pattern InstanceTemplatesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING = InstanceTemplatesScopedList_Warning_Code "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+
+-- | One or more of the resources set to auto-delete could not be deleted because they were in use.
+pattern InstanceTemplatesScopedList_Warning_Code_RESOURCENOTDELETED :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_RESOURCENOTDELETED = InstanceTemplatesScopedList_Warning_Code "RESOURCE_NOT_DELETED"
+
+-- | When a resource schema validation is ignored.
+pattern InstanceTemplatesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED = InstanceTemplatesScopedList_Warning_Code "SCHEMA_VALIDATION_IGNORED"
+
+-- | Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.
+pattern InstanceTemplatesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE = InstanceTemplatesScopedList_Warning_Code "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+
+-- | When undeclared properties in the schema are present
+pattern InstanceTemplatesScopedList_Warning_Code_UNDECLAREDPROPERTIES :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_UNDECLAREDPROPERTIES = InstanceTemplatesScopedList_Warning_Code "UNDECLARED_PROPERTIES"
+
+-- | A given scope cannot be reached.
+pattern InstanceTemplatesScopedList_Warning_Code_Unreachable :: InstanceTemplatesScopedList_Warning_Code
+pattern InstanceTemplatesScopedList_Warning_Code_Unreachable = InstanceTemplatesScopedList_Warning_Code "UNREACHABLE"
+
+{-# COMPLETE
+  InstanceTemplatesScopedList_Warning_Code_CLEANUPFAILED,
+  InstanceTemplatesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+  InstanceTemplatesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
+  InstanceTemplatesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+  InstanceTemplatesScopedList_Warning_Code_EXPERIMENTALTYPEUSED,
+  InstanceTemplatesScopedList_Warning_Code_EXTERNALAPIWARNING,
+  InstanceTemplatesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
+  InstanceTemplatesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  InstanceTemplatesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+  InstanceTemplatesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+  InstanceTemplatesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+  InstanceTemplatesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+  InstanceTemplatesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  InstanceTemplatesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+  InstanceTemplatesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+  InstanceTemplatesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+  InstanceTemplatesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
+  InstanceTemplatesScopedList_Warning_Code_NOTCRITICALERROR,
+  InstanceTemplatesScopedList_Warning_Code_NORESULTSONPAGE,
+  InstanceTemplatesScopedList_Warning_Code_PARTIALSUCCESS,
+  InstanceTemplatesScopedList_Warning_Code_REQUIREDTOSAGREEMENT,
+  InstanceTemplatesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+  InstanceTemplatesScopedList_Warning_Code_RESOURCENOTDELETED,
+  InstanceTemplatesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+  InstanceTemplatesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+  InstanceTemplatesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
+  InstanceTemplatesScopedList_Warning_Code_Unreachable,
+  InstanceTemplatesScopedList_Warning_Code
+  #-}
+
 -- | [Output Only] The status of the instance.
 newtype InstanceWithNamedPorts_Status = InstanceWithNamedPorts_Status {fromInstanceWithNamedPorts_Status :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -16778,7 +19006,7 @@ newtype InstanceWithNamedPorts_Status = InstanceWithNamedPorts_Status {fromInsta
       Core.FromJSONKey
     )
 
--- | The Nanny is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.
+-- | The instance is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.
 pattern InstanceWithNamedPorts_Status_Deprovisioning :: InstanceWithNamedPorts_Status
 pattern InstanceWithNamedPorts_Status_Deprovisioning = InstanceWithNamedPorts_Status "DEPROVISIONING"
 
@@ -16914,6 +19142,10 @@ pattern InstancesScopedList_Warning_Code_FIELDVALUEOVERRIDEN = InstancesScopedLi
 pattern InstancesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: InstancesScopedList_Warning_Code
 pattern InstancesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = InstancesScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern InstancesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: InstancesScopedList_Warning_Code
+pattern InstancesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = InstancesScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern InstancesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: InstancesScopedList_Warning_Code
 pattern InstancesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = InstancesScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -16929,6 +19161,10 @@ pattern InstancesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = InstancesSc
 -- | The route\'s next hop instance cannot ip forward.
 pattern InstancesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: InstancesScopedList_Warning_Code
 pattern InstancesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = InstancesScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern InstancesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: InstancesScopedList_Warning_Code
+pattern InstancesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = InstancesScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern InstancesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: InstancesScopedList_Warning_Code
@@ -16991,10 +19227,12 @@ pattern InstancesScopedList_Warning_Code_Unreachable = InstancesScopedList_Warni
   InstancesScopedList_Warning_Code_EXTERNALAPIWARNING,
   InstancesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   InstancesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  InstancesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   InstancesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   InstancesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   InstancesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   InstancesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  InstancesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   InstancesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   InstancesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   InstancesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -17233,7 +19471,7 @@ pattern InterconnectAttachment_EdgeAvailabilityDomain_AVAILABILITYDOMAINANY = In
   InterconnectAttachment_EdgeAvailabilityDomain
   #-}
 
--- | Indicates the user-supplied encryption option of this VLAN attachment (interconnectAttachment). Can only be specified at attachment creation for PARTNER or DEDICATED attachments. Possible values are: - NONE - This is the default value, which means that the VLAN attachment carries unencrypted traffic. VMs are able to send traffic to, or receive traffic from, such a VLAN attachment. - IPSEC - The VLAN attachment carries only encrypted traffic that is encrypted by an IPsec device, such as an HA VPN gateway or third-party IPsec VPN. VMs cannot directly send traffic to, or receive traffic from, such a VLAN attachment. To use /IPsec-encrypted Cloud Interconnect/, the VLAN attachment must be created with this option. Not currently available publicly.
+-- | Indicates the user-supplied encryption option of this VLAN attachment (interconnectAttachment). Can only be specified at attachment creation for PARTNER or DEDICATED attachments. Possible values are: - NONE - This is the default value, which means that the VLAN attachment carries unencrypted traffic. VMs are able to send traffic to, or receive traffic from, such a VLAN attachment. - IPSEC - The VLAN attachment carries only encrypted traffic that is encrypted by an IPsec device, such as an HA VPN gateway or third-party IPsec VPN. VMs cannot directly send traffic to, or receive traffic from, such a VLAN attachment. To use /HA VPN over Cloud Interconnect/, the VLAN attachment must be created with this option.
 newtype InterconnectAttachment_Encryption = InterconnectAttachment_Encryption {fromInterconnectAttachment_Encryption :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -17246,7 +19484,7 @@ newtype InterconnectAttachment_Encryption = InterconnectAttachment_Encryption {f
       Core.FromJSONKey
     )
 
--- | The interconnect attachment will carry only encrypted traffic that is encrypted by an IPsec device such as HA VPN gateway; VMs cannot directly send traffic to or receive traffic from such an interconnect attachment. To use IPsec-encrypted Cloud Interconnect, the interconnect attachment must be created with this option.
+-- | The interconnect attachment will carry only encrypted traffic that is encrypted by an IPsec device such as HA VPN gateway; VMs cannot directly send traffic to or receive traffic from such an interconnect attachment. To use HA VPN over Cloud Interconnect, the interconnect attachment must be created with this option.
 pattern InterconnectAttachment_Encryption_Ipsec :: InterconnectAttachment_Encryption
 pattern InterconnectAttachment_Encryption_Ipsec = InterconnectAttachment_Encryption "IPSEC"
 
@@ -17444,6 +19682,10 @@ pattern InterconnectAttachmentAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = 
 pattern InterconnectAttachmentAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: InterconnectAttachmentAggregatedList_Warning_Code
 pattern InterconnectAttachmentAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = InterconnectAttachmentAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern InterconnectAttachmentAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: InterconnectAttachmentAggregatedList_Warning_Code
+pattern InterconnectAttachmentAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = InterconnectAttachmentAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern InterconnectAttachmentAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: InterconnectAttachmentAggregatedList_Warning_Code
 pattern InterconnectAttachmentAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = InterconnectAttachmentAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -17459,6 +19701,10 @@ pattern InterconnectAttachmentAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIG
 -- | The route\'s next hop instance cannot ip forward.
 pattern InterconnectAttachmentAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: InterconnectAttachmentAggregatedList_Warning_Code
 pattern InterconnectAttachmentAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = InterconnectAttachmentAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern InterconnectAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: InterconnectAttachmentAggregatedList_Warning_Code
+pattern InterconnectAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = InterconnectAttachmentAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern InterconnectAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: InterconnectAttachmentAggregatedList_Warning_Code
@@ -17521,10 +19767,12 @@ pattern InterconnectAttachmentAggregatedList_Warning_Code_Unreachable = Intercon
   InterconnectAttachmentAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   InterconnectAttachmentAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   InterconnectAttachmentAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  InterconnectAttachmentAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   InterconnectAttachmentAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   InterconnectAttachmentAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   InterconnectAttachmentAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   InterconnectAttachmentAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  InterconnectAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   InterconnectAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   InterconnectAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   InterconnectAttachmentAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -17586,6 +19834,10 @@ pattern InterconnectAttachmentList_Warning_Code_FIELDVALUEOVERRIDEN = Interconne
 pattern InterconnectAttachmentList_Warning_Code_INJECTEDKERNELSDEPRECATED :: InterconnectAttachmentList_Warning_Code
 pattern InterconnectAttachmentList_Warning_Code_INJECTEDKERNELSDEPRECATED = InterconnectAttachmentList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern InterconnectAttachmentList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: InterconnectAttachmentList_Warning_Code
+pattern InterconnectAttachmentList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = InterconnectAttachmentList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern InterconnectAttachmentList_Warning_Code_LARGEDEPLOYMENTWARNING :: InterconnectAttachmentList_Warning_Code
 pattern InterconnectAttachmentList_Warning_Code_LARGEDEPLOYMENTWARNING = InterconnectAttachmentList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -17601,6 +19853,10 @@ pattern InterconnectAttachmentList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Inte
 -- | The route\'s next hop instance cannot ip forward.
 pattern InterconnectAttachmentList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: InterconnectAttachmentList_Warning_Code
 pattern InterconnectAttachmentList_Warning_Code_NEXTHOPCANNOTIPFORWARD = InterconnectAttachmentList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern InterconnectAttachmentList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: InterconnectAttachmentList_Warning_Code
+pattern InterconnectAttachmentList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = InterconnectAttachmentList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern InterconnectAttachmentList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: InterconnectAttachmentList_Warning_Code
@@ -17663,10 +19919,12 @@ pattern InterconnectAttachmentList_Warning_Code_Unreachable = InterconnectAttach
   InterconnectAttachmentList_Warning_Code_EXTERNALAPIWARNING,
   InterconnectAttachmentList_Warning_Code_FIELDVALUEOVERRIDEN,
   InterconnectAttachmentList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  InterconnectAttachmentList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   InterconnectAttachmentList_Warning_Code_LARGEDEPLOYMENTWARNING,
   InterconnectAttachmentList_Warning_Code_MISSINGTYPEDEPENDENCY,
   InterconnectAttachmentList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   InterconnectAttachmentList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  InterconnectAttachmentList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   InterconnectAttachmentList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   InterconnectAttachmentList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   InterconnectAttachmentList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -17728,6 +19986,10 @@ pattern InterconnectAttachmentsScopedList_Warning_Code_FIELDVALUEOVERRIDEN = Int
 pattern InterconnectAttachmentsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: InterconnectAttachmentsScopedList_Warning_Code
 pattern InterconnectAttachmentsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = InterconnectAttachmentsScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern InterconnectAttachmentsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: InterconnectAttachmentsScopedList_Warning_Code
+pattern InterconnectAttachmentsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = InterconnectAttachmentsScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern InterconnectAttachmentsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: InterconnectAttachmentsScopedList_Warning_Code
 pattern InterconnectAttachmentsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = InterconnectAttachmentsScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -17743,6 +20005,10 @@ pattern InterconnectAttachmentsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED
 -- | The route\'s next hop instance cannot ip forward.
 pattern InterconnectAttachmentsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: InterconnectAttachmentsScopedList_Warning_Code
 pattern InterconnectAttachmentsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = InterconnectAttachmentsScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern InterconnectAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: InterconnectAttachmentsScopedList_Warning_Code
+pattern InterconnectAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = InterconnectAttachmentsScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern InterconnectAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: InterconnectAttachmentsScopedList_Warning_Code
@@ -17805,10 +20071,12 @@ pattern InterconnectAttachmentsScopedList_Warning_Code_Unreachable = Interconnec
   InterconnectAttachmentsScopedList_Warning_Code_EXTERNALAPIWARNING,
   InterconnectAttachmentsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   InterconnectAttachmentsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  InterconnectAttachmentsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   InterconnectAttachmentsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   InterconnectAttachmentsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   InterconnectAttachmentsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   InterconnectAttachmentsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  InterconnectAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   InterconnectAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   InterconnectAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   InterconnectAttachmentsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -17823,6 +20091,60 @@ pattern InterconnectAttachmentsScopedList_Warning_Code_Unreachable = Interconnec
   InterconnectAttachmentsScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   InterconnectAttachmentsScopedList_Warning_Code_Unreachable,
   InterconnectAttachmentsScopedList_Warning_Code
+  #-}
+
+-- | The aggregation type of the bundle interface.
+newtype InterconnectDiagnostics_BundleAggregationType = InterconnectDiagnostics_BundleAggregationType {fromInterconnectDiagnostics_BundleAggregationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | LACP is enabled.
+pattern InterconnectDiagnostics_BundleAggregationType_BUNDLEAGGREGATIONTYPELACP :: InterconnectDiagnostics_BundleAggregationType
+pattern InterconnectDiagnostics_BundleAggregationType_BUNDLEAGGREGATIONTYPELACP = InterconnectDiagnostics_BundleAggregationType "BUNDLE_AGGREGATION_TYPE_LACP"
+
+-- | LACP is disabled.
+pattern InterconnectDiagnostics_BundleAggregationType_BUNDLEAGGREGATIONTYPESTATIC :: InterconnectDiagnostics_BundleAggregationType
+pattern InterconnectDiagnostics_BundleAggregationType_BUNDLEAGGREGATIONTYPESTATIC = InterconnectDiagnostics_BundleAggregationType "BUNDLE_AGGREGATION_TYPE_STATIC"
+
+{-# COMPLETE
+  InterconnectDiagnostics_BundleAggregationType_BUNDLEAGGREGATIONTYPELACP,
+  InterconnectDiagnostics_BundleAggregationType_BUNDLEAGGREGATIONTYPESTATIC,
+  InterconnectDiagnostics_BundleAggregationType
+  #-}
+
+-- | The operational status of the bundle interface.
+newtype InterconnectDiagnostics_BundleOperationalStatus = InterconnectDiagnostics_BundleOperationalStatus {fromInterconnectDiagnostics_BundleOperationalStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | If bundleAggregationType is LACP: LACP is not established and\/or all links in the bundle have DOWN operational status. If bundleAggregationType is STATIC: one or more links in the bundle has DOWN operational status.
+pattern InterconnectDiagnostics_BundleOperationalStatus_BUNDLEOPERATIONALSTATUSDOWN :: InterconnectDiagnostics_BundleOperationalStatus
+pattern InterconnectDiagnostics_BundleOperationalStatus_BUNDLEOPERATIONALSTATUSDOWN = InterconnectDiagnostics_BundleOperationalStatus "BUNDLE_OPERATIONAL_STATUS_DOWN"
+
+-- | If bundleAggregationType is LACP: LACP is established and at least one link in the bundle has UP operational status. If bundleAggregationType is STATIC: all links in the bundle (typically just one) have UP operational status.
+pattern InterconnectDiagnostics_BundleOperationalStatus_BUNDLEOPERATIONALSTATUSUP :: InterconnectDiagnostics_BundleOperationalStatus
+pattern InterconnectDiagnostics_BundleOperationalStatus_BUNDLEOPERATIONALSTATUSUP = InterconnectDiagnostics_BundleOperationalStatus "BUNDLE_OPERATIONAL_STATUS_UP"
+
+{-# COMPLETE
+  InterconnectDiagnostics_BundleOperationalStatus_BUNDLEOPERATIONALSTATUSDOWN,
+  InterconnectDiagnostics_BundleOperationalStatus_BUNDLEOPERATIONALSTATUSUP,
+  InterconnectDiagnostics_BundleOperationalStatus
   #-}
 
 -- | The state of a LACP link, which can take one of the following values: - ACTIVE: The link is configured and active within the bundle. - DETACHED: The link is not configured within the bundle. This means that the rest of the object should be empty.
@@ -17894,6 +20216,33 @@ pattern InterconnectDiagnosticsLinkOpticalPower_State_OK = InterconnectDiagnosti
   InterconnectDiagnosticsLinkOpticalPower_State
   #-}
 
+-- | The operational status of the link.
+newtype InterconnectDiagnosticsLinkStatus_OperationalStatus = InterconnectDiagnosticsLinkStatus_OperationalStatus {fromInterconnectDiagnosticsLinkStatus_OperationalStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The interface is unable to communicate with the remote end.
+pattern InterconnectDiagnosticsLinkStatus_OperationalStatus_LINKOPERATIONALSTATUSDOWN :: InterconnectDiagnosticsLinkStatus_OperationalStatus
+pattern InterconnectDiagnosticsLinkStatus_OperationalStatus_LINKOPERATIONALSTATUSDOWN = InterconnectDiagnosticsLinkStatus_OperationalStatus "LINK_OPERATIONAL_STATUS_DOWN"
+
+-- | The interface has low level communication with the remote end.
+pattern InterconnectDiagnosticsLinkStatus_OperationalStatus_LINKOPERATIONALSTATUSUP :: InterconnectDiagnosticsLinkStatus_OperationalStatus
+pattern InterconnectDiagnosticsLinkStatus_OperationalStatus_LINKOPERATIONALSTATUSUP = InterconnectDiagnosticsLinkStatus_OperationalStatus "LINK_OPERATIONAL_STATUS_UP"
+
+{-# COMPLETE
+  InterconnectDiagnosticsLinkStatus_OperationalStatus_LINKOPERATIONALSTATUSDOWN,
+  InterconnectDiagnosticsLinkStatus_OperationalStatus_LINKOPERATIONALSTATUSUP,
+  InterconnectDiagnosticsLinkStatus_OperationalStatus
+  #-}
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
 newtype InterconnectList_Warning_Code = InterconnectList_Warning_Code {fromInterconnectList_Warning_Code :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -17939,6 +20288,10 @@ pattern InterconnectList_Warning_Code_FIELDVALUEOVERRIDEN = InterconnectList_War
 pattern InterconnectList_Warning_Code_INJECTEDKERNELSDEPRECATED :: InterconnectList_Warning_Code
 pattern InterconnectList_Warning_Code_INJECTEDKERNELSDEPRECATED = InterconnectList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern InterconnectList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: InterconnectList_Warning_Code
+pattern InterconnectList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = InterconnectList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern InterconnectList_Warning_Code_LARGEDEPLOYMENTWARNING :: InterconnectList_Warning_Code
 pattern InterconnectList_Warning_Code_LARGEDEPLOYMENTWARNING = InterconnectList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -17954,6 +20307,10 @@ pattern InterconnectList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = InterconnectLi
 -- | The route\'s next hop instance cannot ip forward.
 pattern InterconnectList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: InterconnectList_Warning_Code
 pattern InterconnectList_Warning_Code_NEXTHOPCANNOTIPFORWARD = InterconnectList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern InterconnectList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: InterconnectList_Warning_Code
+pattern InterconnectList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = InterconnectList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern InterconnectList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: InterconnectList_Warning_Code
@@ -18016,10 +20373,12 @@ pattern InterconnectList_Warning_Code_Unreachable = InterconnectList_Warning_Cod
   InterconnectList_Warning_Code_EXTERNALAPIWARNING,
   InterconnectList_Warning_Code_FIELDVALUEOVERRIDEN,
   InterconnectList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  InterconnectList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   InterconnectList_Warning_Code_LARGEDEPLOYMENTWARNING,
   InterconnectList_Warning_Code_MISSINGTYPEDEPENDENCY,
   InterconnectList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   InterconnectList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  InterconnectList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   InterconnectList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   InterconnectList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   InterconnectList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -18175,6 +20534,10 @@ pattern InterconnectLocationList_Warning_Code_FIELDVALUEOVERRIDEN = Interconnect
 pattern InterconnectLocationList_Warning_Code_INJECTEDKERNELSDEPRECATED :: InterconnectLocationList_Warning_Code
 pattern InterconnectLocationList_Warning_Code_INJECTEDKERNELSDEPRECATED = InterconnectLocationList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern InterconnectLocationList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: InterconnectLocationList_Warning_Code
+pattern InterconnectLocationList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = InterconnectLocationList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern InterconnectLocationList_Warning_Code_LARGEDEPLOYMENTWARNING :: InterconnectLocationList_Warning_Code
 pattern InterconnectLocationList_Warning_Code_LARGEDEPLOYMENTWARNING = InterconnectLocationList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -18190,6 +20553,10 @@ pattern InterconnectLocationList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Interc
 -- | The route\'s next hop instance cannot ip forward.
 pattern InterconnectLocationList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: InterconnectLocationList_Warning_Code
 pattern InterconnectLocationList_Warning_Code_NEXTHOPCANNOTIPFORWARD = InterconnectLocationList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern InterconnectLocationList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: InterconnectLocationList_Warning_Code
+pattern InterconnectLocationList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = InterconnectLocationList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern InterconnectLocationList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: InterconnectLocationList_Warning_Code
@@ -18252,10 +20619,12 @@ pattern InterconnectLocationList_Warning_Code_Unreachable = InterconnectLocation
   InterconnectLocationList_Warning_Code_EXTERNALAPIWARNING,
   InterconnectLocationList_Warning_Code_FIELDVALUEOVERRIDEN,
   InterconnectLocationList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  InterconnectLocationList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   InterconnectLocationList_Warning_Code_LARGEDEPLOYMENTWARNING,
   InterconnectLocationList_Warning_Code_MISSINGTYPEDEPENDENCY,
   InterconnectLocationList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   InterconnectLocationList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  InterconnectLocationList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   InterconnectLocationList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   InterconnectLocationList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   InterconnectLocationList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -18502,6 +20871,10 @@ pattern LicensesListResponse_Warning_Code_FIELDVALUEOVERRIDEN = LicensesListResp
 pattern LicensesListResponse_Warning_Code_INJECTEDKERNELSDEPRECATED :: LicensesListResponse_Warning_Code
 pattern LicensesListResponse_Warning_Code_INJECTEDKERNELSDEPRECATED = LicensesListResponse_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern LicensesListResponse_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: LicensesListResponse_Warning_Code
+pattern LicensesListResponse_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = LicensesListResponse_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern LicensesListResponse_Warning_Code_LARGEDEPLOYMENTWARNING :: LicensesListResponse_Warning_Code
 pattern LicensesListResponse_Warning_Code_LARGEDEPLOYMENTWARNING = LicensesListResponse_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -18517,6 +20890,10 @@ pattern LicensesListResponse_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = LicensesLi
 -- | The route\'s next hop instance cannot ip forward.
 pattern LicensesListResponse_Warning_Code_NEXTHOPCANNOTIPFORWARD :: LicensesListResponse_Warning_Code
 pattern LicensesListResponse_Warning_Code_NEXTHOPCANNOTIPFORWARD = LicensesListResponse_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern LicensesListResponse_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: LicensesListResponse_Warning_Code
+pattern LicensesListResponse_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = LicensesListResponse_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern LicensesListResponse_Warning_Code_NEXTHOPINSTANCENOTFOUND :: LicensesListResponse_Warning_Code
@@ -18579,10 +20956,12 @@ pattern LicensesListResponse_Warning_Code_Unreachable = LicensesListResponse_War
   LicensesListResponse_Warning_Code_EXTERNALAPIWARNING,
   LicensesListResponse_Warning_Code_FIELDVALUEOVERRIDEN,
   LicensesListResponse_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  LicensesListResponse_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   LicensesListResponse_Warning_Code_LARGEDEPLOYMENTWARNING,
   LicensesListResponse_Warning_Code_MISSINGTYPEDEPENDENCY,
   LicensesListResponse_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   LicensesListResponse_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  LicensesListResponse_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   LicensesListResponse_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   LicensesListResponse_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   LicensesListResponse_Warning_Code_NEXTHOPNOTRUNNING,
@@ -18599,7 +20978,39 @@ pattern LicensesListResponse_Warning_Code_Unreachable = LicensesListResponse_War
   LicensesListResponse_Warning_Code
   #-}
 
--- | Preference for a given location.
+-- | Strategy for distributing VMs across zones in a region.
+newtype LocationPolicy_TargetShape = LocationPolicy_TargetShape {fromLocationPolicy_TargetShape :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | GCE picks zones for creating VM instances to fulfill the requested number of VMs within present resource constraints and to maximize utilization of unused zonal reservations. Recommended for batch workloads that do not require high availability.
+pattern LocationPolicy_TargetShape_Any :: LocationPolicy_TargetShape
+pattern LocationPolicy_TargetShape_Any = LocationPolicy_TargetShape "ANY"
+
+-- | GCE always selects a single zone for all the VMs, optimizing for resource quotas, available reservations and general capacity. Recommended for batch workloads that cannot tollerate distribution over multiple zones. This the default shape in Bulk Insert and Capacity Advisor APIs.
+pattern LocationPolicy_TargetShape_ANYSINGLEZONE :: LocationPolicy_TargetShape
+pattern LocationPolicy_TargetShape_ANYSINGLEZONE = LocationPolicy_TargetShape "ANY_SINGLE_ZONE"
+
+-- | GCE prioritizes acquisition of resources, scheduling VMs in zones where resources are available while distributing VMs as evenly as possible across allowed zones to minimize the impact of zonal failure. Recommended for highly available serving workloads.
+pattern LocationPolicy_TargetShape_Balanced :: LocationPolicy_TargetShape
+pattern LocationPolicy_TargetShape_Balanced = LocationPolicy_TargetShape "BALANCED"
+
+{-# COMPLETE
+  LocationPolicy_TargetShape_Any,
+  LocationPolicy_TargetShape_ANYSINGLEZONE,
+  LocationPolicy_TargetShape_Balanced,
+  LocationPolicy_TargetShape
+  #-}
+
+-- | Preference for a given location. Set to either ALLOW or DENY.
 newtype LocationPolicyLocation_Preference = LocationPolicyLocation_Preference {fromLocationPolicyLocation_Preference :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -18777,6 +21188,10 @@ pattern MachineImageList_Warning_Code_FIELDVALUEOVERRIDEN = MachineImageList_War
 pattern MachineImageList_Warning_Code_INJECTEDKERNELSDEPRECATED :: MachineImageList_Warning_Code
 pattern MachineImageList_Warning_Code_INJECTEDKERNELSDEPRECATED = MachineImageList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern MachineImageList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: MachineImageList_Warning_Code
+pattern MachineImageList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = MachineImageList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern MachineImageList_Warning_Code_LARGEDEPLOYMENTWARNING :: MachineImageList_Warning_Code
 pattern MachineImageList_Warning_Code_LARGEDEPLOYMENTWARNING = MachineImageList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -18792,6 +21207,10 @@ pattern MachineImageList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = MachineImageLi
 -- | The route\'s next hop instance cannot ip forward.
 pattern MachineImageList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: MachineImageList_Warning_Code
 pattern MachineImageList_Warning_Code_NEXTHOPCANNOTIPFORWARD = MachineImageList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern MachineImageList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: MachineImageList_Warning_Code
+pattern MachineImageList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = MachineImageList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern MachineImageList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: MachineImageList_Warning_Code
@@ -18854,10 +21273,12 @@ pattern MachineImageList_Warning_Code_Unreachable = MachineImageList_Warning_Cod
   MachineImageList_Warning_Code_EXTERNALAPIWARNING,
   MachineImageList_Warning_Code_FIELDVALUEOVERRIDEN,
   MachineImageList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  MachineImageList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   MachineImageList_Warning_Code_LARGEDEPLOYMENTWARNING,
   MachineImageList_Warning_Code_MISSINGTYPEDEPENDENCY,
   MachineImageList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   MachineImageList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  MachineImageList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   MachineImageList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   MachineImageList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   MachineImageList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -18919,6 +21340,10 @@ pattern MachineTypeAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = MachineType
 pattern MachineTypeAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: MachineTypeAggregatedList_Warning_Code
 pattern MachineTypeAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = MachineTypeAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern MachineTypeAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: MachineTypeAggregatedList_Warning_Code
+pattern MachineTypeAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = MachineTypeAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern MachineTypeAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: MachineTypeAggregatedList_Warning_Code
 pattern MachineTypeAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = MachineTypeAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -18934,6 +21359,10 @@ pattern MachineTypeAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Machi
 -- | The route\'s next hop instance cannot ip forward.
 pattern MachineTypeAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: MachineTypeAggregatedList_Warning_Code
 pattern MachineTypeAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = MachineTypeAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern MachineTypeAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: MachineTypeAggregatedList_Warning_Code
+pattern MachineTypeAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = MachineTypeAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern MachineTypeAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: MachineTypeAggregatedList_Warning_Code
@@ -18996,10 +21425,12 @@ pattern MachineTypeAggregatedList_Warning_Code_Unreachable = MachineTypeAggregat
   MachineTypeAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   MachineTypeAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   MachineTypeAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  MachineTypeAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   MachineTypeAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   MachineTypeAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   MachineTypeAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   MachineTypeAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  MachineTypeAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   MachineTypeAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   MachineTypeAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   MachineTypeAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -19061,6 +21492,10 @@ pattern MachineTypeList_Warning_Code_FIELDVALUEOVERRIDEN = MachineTypeList_Warni
 pattern MachineTypeList_Warning_Code_INJECTEDKERNELSDEPRECATED :: MachineTypeList_Warning_Code
 pattern MachineTypeList_Warning_Code_INJECTEDKERNELSDEPRECATED = MachineTypeList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern MachineTypeList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: MachineTypeList_Warning_Code
+pattern MachineTypeList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = MachineTypeList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern MachineTypeList_Warning_Code_LARGEDEPLOYMENTWARNING :: MachineTypeList_Warning_Code
 pattern MachineTypeList_Warning_Code_LARGEDEPLOYMENTWARNING = MachineTypeList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -19076,6 +21511,10 @@ pattern MachineTypeList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = MachineTypeList
 -- | The route\'s next hop instance cannot ip forward.
 pattern MachineTypeList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: MachineTypeList_Warning_Code
 pattern MachineTypeList_Warning_Code_NEXTHOPCANNOTIPFORWARD = MachineTypeList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern MachineTypeList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: MachineTypeList_Warning_Code
+pattern MachineTypeList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = MachineTypeList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern MachineTypeList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: MachineTypeList_Warning_Code
@@ -19138,10 +21577,12 @@ pattern MachineTypeList_Warning_Code_Unreachable = MachineTypeList_Warning_Code 
   MachineTypeList_Warning_Code_EXTERNALAPIWARNING,
   MachineTypeList_Warning_Code_FIELDVALUEOVERRIDEN,
   MachineTypeList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  MachineTypeList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   MachineTypeList_Warning_Code_LARGEDEPLOYMENTWARNING,
   MachineTypeList_Warning_Code_MISSINGTYPEDEPENDENCY,
   MachineTypeList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   MachineTypeList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  MachineTypeList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   MachineTypeList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   MachineTypeList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   MachineTypeList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -19203,6 +21644,10 @@ pattern MachineTypesScopedList_Warning_Code_FIELDVALUEOVERRIDEN = MachineTypesSc
 pattern MachineTypesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: MachineTypesScopedList_Warning_Code
 pattern MachineTypesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = MachineTypesScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern MachineTypesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: MachineTypesScopedList_Warning_Code
+pattern MachineTypesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = MachineTypesScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern MachineTypesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: MachineTypesScopedList_Warning_Code
 pattern MachineTypesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = MachineTypesScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -19218,6 +21663,10 @@ pattern MachineTypesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = MachineT
 -- | The route\'s next hop instance cannot ip forward.
 pattern MachineTypesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: MachineTypesScopedList_Warning_Code
 pattern MachineTypesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = MachineTypesScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern MachineTypesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: MachineTypesScopedList_Warning_Code
+pattern MachineTypesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = MachineTypesScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern MachineTypesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: MachineTypesScopedList_Warning_Code
@@ -19280,10 +21729,12 @@ pattern MachineTypesScopedList_Warning_Code_Unreachable = MachineTypesScopedList
   MachineTypesScopedList_Warning_Code_EXTERNALAPIWARNING,
   MachineTypesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   MachineTypesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  MachineTypesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   MachineTypesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   MachineTypesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   MachineTypesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   MachineTypesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  MachineTypesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   MachineTypesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   MachineTypesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   MachineTypesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -19396,7 +21847,7 @@ newtype ManagedInstance_InstanceStatus = ManagedInstance_InstanceStatus {fromMan
       Core.FromJSONKey
     )
 
--- | The Nanny is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.
+-- | The instance is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.
 pattern ManagedInstance_InstanceStatus_Deprovisioning :: ManagedInstance_InstanceStatus
 pattern ManagedInstance_InstanceStatus_Deprovisioning = ManagedInstance_InstanceStatus "DEPROVISIONING"
 
@@ -19551,6 +22002,844 @@ pattern Network_NetworkFirewallPolicyEnforcementOrder_BEFORECLASSICFIREWALL = Ne
   Network_NetworkFirewallPolicyEnforcementOrder
   #-}
 
+newtype NetworkAttachment_ConnectionPreference = NetworkAttachment_ConnectionPreference {fromNetworkAttachment_ConnectionPreference :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern NetworkAttachment_ConnectionPreference_ACCEPTAUTOMATIC :: NetworkAttachment_ConnectionPreference
+pattern NetworkAttachment_ConnectionPreference_ACCEPTAUTOMATIC = NetworkAttachment_ConnectionPreference "ACCEPT_AUTOMATIC"
+
+-- |
+pattern NetworkAttachment_ConnectionPreference_ACCEPTMANUAL :: NetworkAttachment_ConnectionPreference
+pattern NetworkAttachment_ConnectionPreference_ACCEPTMANUAL = NetworkAttachment_ConnectionPreference "ACCEPT_MANUAL"
+
+-- |
+pattern NetworkAttachment_ConnectionPreference_Invalid :: NetworkAttachment_ConnectionPreference
+pattern NetworkAttachment_ConnectionPreference_Invalid = NetworkAttachment_ConnectionPreference "INVALID"
+
+{-# COMPLETE
+  NetworkAttachment_ConnectionPreference_ACCEPTAUTOMATIC,
+  NetworkAttachment_ConnectionPreference_ACCEPTMANUAL,
+  NetworkAttachment_ConnectionPreference_Invalid,
+  NetworkAttachment_ConnectionPreference
+  #-}
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
+newtype NetworkAttachmentAggregatedList_Warning_Code = NetworkAttachmentAggregatedList_Warning_Code {fromNetworkAttachmentAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Warning about failed cleanup of transient changes made by a failed operation.
+pattern NetworkAttachmentAggregatedList_Warning_Code_CLEANUPFAILED :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_CLEANUPFAILED = NetworkAttachmentAggregatedList_Warning_Code "CLEANUP_FAILED"
+
+-- | A link to a deprecated resource was created.
+pattern NetworkAttachmentAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED = NetworkAttachmentAggregatedList_Warning_Code "DEPRECATED_RESOURCE_USED"
+
+-- | When deploying and at least one of the resources has a type marked as deprecated
+pattern NetworkAttachmentAggregatedList_Warning_Code_DEPRECATEDTYPEUSED :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_DEPRECATEDTYPEUSED = NetworkAttachmentAggregatedList_Warning_Code "DEPRECATED_TYPE_USED"
+
+-- | The user created a boot disk that is larger than image size.
+pattern NetworkAttachmentAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE = NetworkAttachmentAggregatedList_Warning_Code "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+
+-- | When deploying and at least one of the resources has a type marked as experimental
+pattern NetworkAttachmentAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED = NetworkAttachmentAggregatedList_Warning_Code "EXPERIMENTAL_TYPE_USED"
+
+-- | Warning that is present in an external api call
+pattern NetworkAttachmentAggregatedList_Warning_Code_EXTERNALAPIWARNING :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_EXTERNALAPIWARNING = NetworkAttachmentAggregatedList_Warning_Code "EXTERNAL_API_WARNING"
+
+-- | Warning that value of a field has been overridden. Deprecated unused field.
+pattern NetworkAttachmentAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = NetworkAttachmentAggregatedList_Warning_Code "FIELD_VALUE_OVERRIDEN"
+
+-- | The operation involved use of an injected kernel, which is deprecated.
+pattern NetworkAttachmentAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = NetworkAttachmentAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
+
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern NetworkAttachmentAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = NetworkAttachmentAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
+-- | When deploying a deployment with a exceedingly large number of resources
+pattern NetworkAttachmentAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = NetworkAttachmentAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
+
+-- | A resource depends on a missing type
+pattern NetworkAttachmentAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY = NetworkAttachmentAggregatedList_Warning_Code "MISSING_TYPE_DEPENDENCY"
+
+-- | The route\'s nextHopIp address is not assigned to an instance on the network.
+pattern NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = NetworkAttachmentAggregatedList_Warning_Code "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+
+-- | The route\'s next hop instance cannot ip forward.
+pattern NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = NetworkAttachmentAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = NetworkAttachmentAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not exist.
+pattern NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND = NetworkAttachmentAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_FOUND"
+
+-- | The route\'s nextHopInstance URL refers to an instance that is not on the same network as the route.
+pattern NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK = NetworkAttachmentAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+
+-- | The route\'s next hop instance does not have a status of RUNNING.
+pattern NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPNOTRUNNING :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPNOTRUNNING = NetworkAttachmentAggregatedList_Warning_Code "NEXT_HOP_NOT_RUNNING"
+
+-- | Error which is not critical. We decided to continue the process despite the mentioned error.
+pattern NetworkAttachmentAggregatedList_Warning_Code_NOTCRITICALERROR :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_NOTCRITICALERROR = NetworkAttachmentAggregatedList_Warning_Code "NOT_CRITICAL_ERROR"
+
+-- | No results are present on a particular list page.
+pattern NetworkAttachmentAggregatedList_Warning_Code_NORESULTSONPAGE :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_NORESULTSONPAGE = NetworkAttachmentAggregatedList_Warning_Code "NO_RESULTS_ON_PAGE"
+
+-- | Success is reported, but some results may be missing due to errors
+pattern NetworkAttachmentAggregatedList_Warning_Code_PARTIALSUCCESS :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_PARTIALSUCCESS = NetworkAttachmentAggregatedList_Warning_Code "PARTIAL_SUCCESS"
+
+-- | The user attempted to use a resource that requires a TOS they have not accepted.
+pattern NetworkAttachmentAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT = NetworkAttachmentAggregatedList_Warning_Code "REQUIRED_TOS_AGREEMENT"
+
+-- | Warning that a resource is in use.
+pattern NetworkAttachmentAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING = NetworkAttachmentAggregatedList_Warning_Code "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+
+-- | One or more of the resources set to auto-delete could not be deleted because they were in use.
+pattern NetworkAttachmentAggregatedList_Warning_Code_RESOURCENOTDELETED :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_RESOURCENOTDELETED = NetworkAttachmentAggregatedList_Warning_Code "RESOURCE_NOT_DELETED"
+
+-- | When a resource schema validation is ignored.
+pattern NetworkAttachmentAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED = NetworkAttachmentAggregatedList_Warning_Code "SCHEMA_VALIDATION_IGNORED"
+
+-- | Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.
+pattern NetworkAttachmentAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE = NetworkAttachmentAggregatedList_Warning_Code "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+
+-- | When undeclared properties in the schema are present
+pattern NetworkAttachmentAggregatedList_Warning_Code_UNDECLAREDPROPERTIES :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_UNDECLAREDPROPERTIES = NetworkAttachmentAggregatedList_Warning_Code "UNDECLARED_PROPERTIES"
+
+-- | A given scope cannot be reached.
+pattern NetworkAttachmentAggregatedList_Warning_Code_Unreachable :: NetworkAttachmentAggregatedList_Warning_Code
+pattern NetworkAttachmentAggregatedList_Warning_Code_Unreachable = NetworkAttachmentAggregatedList_Warning_Code "UNREACHABLE"
+
+{-# COMPLETE
+  NetworkAttachmentAggregatedList_Warning_Code_CLEANUPFAILED,
+  NetworkAttachmentAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+  NetworkAttachmentAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
+  NetworkAttachmentAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+  NetworkAttachmentAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED,
+  NetworkAttachmentAggregatedList_Warning_Code_EXTERNALAPIWARNING,
+  NetworkAttachmentAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
+  NetworkAttachmentAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  NetworkAttachmentAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+  NetworkAttachmentAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+  NetworkAttachmentAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+  NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+  NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+  NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+  NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+  NetworkAttachmentAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
+  NetworkAttachmentAggregatedList_Warning_Code_NOTCRITICALERROR,
+  NetworkAttachmentAggregatedList_Warning_Code_NORESULTSONPAGE,
+  NetworkAttachmentAggregatedList_Warning_Code_PARTIALSUCCESS,
+  NetworkAttachmentAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT,
+  NetworkAttachmentAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+  NetworkAttachmentAggregatedList_Warning_Code_RESOURCENOTDELETED,
+  NetworkAttachmentAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+  NetworkAttachmentAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+  NetworkAttachmentAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
+  NetworkAttachmentAggregatedList_Warning_Code_Unreachable,
+  NetworkAttachmentAggregatedList_Warning_Code
+  #-}
+
+-- | The status of a connected endpoint to this network attachment.
+newtype NetworkAttachmentConnectedEndpoint_Status = NetworkAttachmentConnectedEndpoint_Status {fromNetworkAttachmentConnectedEndpoint_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The consumer allows traffic from the producer to reach its VPC.
+pattern NetworkAttachmentConnectedEndpoint_Status_Accepted :: NetworkAttachmentConnectedEndpoint_Status
+pattern NetworkAttachmentConnectedEndpoint_Status_Accepted = NetworkAttachmentConnectedEndpoint_Status "ACCEPTED"
+
+-- | The consumer network attachment no longer exists.
+pattern NetworkAttachmentConnectedEndpoint_Status_Closed :: NetworkAttachmentConnectedEndpoint_Status
+pattern NetworkAttachmentConnectedEndpoint_Status_Closed = NetworkAttachmentConnectedEndpoint_Status "CLOSED"
+
+-- | The consumer needs to take further action before traffic can be served.
+pattern NetworkAttachmentConnectedEndpoint_Status_NEEDSATTENTION :: NetworkAttachmentConnectedEndpoint_Status
+pattern NetworkAttachmentConnectedEndpoint_Status_NEEDSATTENTION = NetworkAttachmentConnectedEndpoint_Status "NEEDS_ATTENTION"
+
+-- | The consumer neither allows nor prohibits traffic from the producer to reach its VPC.
+pattern NetworkAttachmentConnectedEndpoint_Status_Pending :: NetworkAttachmentConnectedEndpoint_Status
+pattern NetworkAttachmentConnectedEndpoint_Status_Pending = NetworkAttachmentConnectedEndpoint_Status "PENDING"
+
+-- | The consumer prohibits traffic from the producer to reach its VPC.
+pattern NetworkAttachmentConnectedEndpoint_Status_Rejected :: NetworkAttachmentConnectedEndpoint_Status
+pattern NetworkAttachmentConnectedEndpoint_Status_Rejected = NetworkAttachmentConnectedEndpoint_Status "REJECTED"
+
+-- |
+pattern NetworkAttachmentConnectedEndpoint_Status_STATUSUNSPECIFIED :: NetworkAttachmentConnectedEndpoint_Status
+pattern NetworkAttachmentConnectedEndpoint_Status_STATUSUNSPECIFIED = NetworkAttachmentConnectedEndpoint_Status "STATUS_UNSPECIFIED"
+
+{-# COMPLETE
+  NetworkAttachmentConnectedEndpoint_Status_Accepted,
+  NetworkAttachmentConnectedEndpoint_Status_Closed,
+  NetworkAttachmentConnectedEndpoint_Status_NEEDSATTENTION,
+  NetworkAttachmentConnectedEndpoint_Status_Pending,
+  NetworkAttachmentConnectedEndpoint_Status_Rejected,
+  NetworkAttachmentConnectedEndpoint_Status_STATUSUNSPECIFIED,
+  NetworkAttachmentConnectedEndpoint_Status
+  #-}
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
+newtype NetworkAttachmentList_Warning_Code = NetworkAttachmentList_Warning_Code {fromNetworkAttachmentList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Warning about failed cleanup of transient changes made by a failed operation.
+pattern NetworkAttachmentList_Warning_Code_CLEANUPFAILED :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_CLEANUPFAILED = NetworkAttachmentList_Warning_Code "CLEANUP_FAILED"
+
+-- | A link to a deprecated resource was created.
+pattern NetworkAttachmentList_Warning_Code_DEPRECATEDRESOURCEUSED :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_DEPRECATEDRESOURCEUSED = NetworkAttachmentList_Warning_Code "DEPRECATED_RESOURCE_USED"
+
+-- | When deploying and at least one of the resources has a type marked as deprecated
+pattern NetworkAttachmentList_Warning_Code_DEPRECATEDTYPEUSED :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_DEPRECATEDTYPEUSED = NetworkAttachmentList_Warning_Code "DEPRECATED_TYPE_USED"
+
+-- | The user created a boot disk that is larger than image size.
+pattern NetworkAttachmentList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE = NetworkAttachmentList_Warning_Code "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+
+-- | When deploying and at least one of the resources has a type marked as experimental
+pattern NetworkAttachmentList_Warning_Code_EXPERIMENTALTYPEUSED :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_EXPERIMENTALTYPEUSED = NetworkAttachmentList_Warning_Code "EXPERIMENTAL_TYPE_USED"
+
+-- | Warning that is present in an external api call
+pattern NetworkAttachmentList_Warning_Code_EXTERNALAPIWARNING :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_EXTERNALAPIWARNING = NetworkAttachmentList_Warning_Code "EXTERNAL_API_WARNING"
+
+-- | Warning that value of a field has been overridden. Deprecated unused field.
+pattern NetworkAttachmentList_Warning_Code_FIELDVALUEOVERRIDEN :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_FIELDVALUEOVERRIDEN = NetworkAttachmentList_Warning_Code "FIELD_VALUE_OVERRIDEN"
+
+-- | The operation involved use of an injected kernel, which is deprecated.
+pattern NetworkAttachmentList_Warning_Code_INJECTEDKERNELSDEPRECATED :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_INJECTEDKERNELSDEPRECATED = NetworkAttachmentList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
+
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern NetworkAttachmentList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = NetworkAttachmentList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
+-- | When deploying a deployment with a exceedingly large number of resources
+pattern NetworkAttachmentList_Warning_Code_LARGEDEPLOYMENTWARNING :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_LARGEDEPLOYMENTWARNING = NetworkAttachmentList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
+
+-- | A resource depends on a missing type
+pattern NetworkAttachmentList_Warning_Code_MISSINGTYPEDEPENDENCY :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_MISSINGTYPEDEPENDENCY = NetworkAttachmentList_Warning_Code "MISSING_TYPE_DEPENDENCY"
+
+-- | The route\'s nextHopIp address is not assigned to an instance on the network.
+pattern NetworkAttachmentList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = NetworkAttachmentList_Warning_Code "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+
+-- | The route\'s next hop instance cannot ip forward.
+pattern NetworkAttachmentList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_NEXTHOPCANNOTIPFORWARD = NetworkAttachmentList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern NetworkAttachmentList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = NetworkAttachmentList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not exist.
+pattern NetworkAttachmentList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_NEXTHOPINSTANCENOTFOUND = NetworkAttachmentList_Warning_Code "NEXT_HOP_INSTANCE_NOT_FOUND"
+
+-- | The route\'s nextHopInstance URL refers to an instance that is not on the same network as the route.
+pattern NetworkAttachmentList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK = NetworkAttachmentList_Warning_Code "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+
+-- | The route\'s next hop instance does not have a status of RUNNING.
+pattern NetworkAttachmentList_Warning_Code_NEXTHOPNOTRUNNING :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_NEXTHOPNOTRUNNING = NetworkAttachmentList_Warning_Code "NEXT_HOP_NOT_RUNNING"
+
+-- | Error which is not critical. We decided to continue the process despite the mentioned error.
+pattern NetworkAttachmentList_Warning_Code_NOTCRITICALERROR :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_NOTCRITICALERROR = NetworkAttachmentList_Warning_Code "NOT_CRITICAL_ERROR"
+
+-- | No results are present on a particular list page.
+pattern NetworkAttachmentList_Warning_Code_NORESULTSONPAGE :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_NORESULTSONPAGE = NetworkAttachmentList_Warning_Code "NO_RESULTS_ON_PAGE"
+
+-- | Success is reported, but some results may be missing due to errors
+pattern NetworkAttachmentList_Warning_Code_PARTIALSUCCESS :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_PARTIALSUCCESS = NetworkAttachmentList_Warning_Code "PARTIAL_SUCCESS"
+
+-- | The user attempted to use a resource that requires a TOS they have not accepted.
+pattern NetworkAttachmentList_Warning_Code_REQUIREDTOSAGREEMENT :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_REQUIREDTOSAGREEMENT = NetworkAttachmentList_Warning_Code "REQUIRED_TOS_AGREEMENT"
+
+-- | Warning that a resource is in use.
+pattern NetworkAttachmentList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING = NetworkAttachmentList_Warning_Code "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+
+-- | One or more of the resources set to auto-delete could not be deleted because they were in use.
+pattern NetworkAttachmentList_Warning_Code_RESOURCENOTDELETED :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_RESOURCENOTDELETED = NetworkAttachmentList_Warning_Code "RESOURCE_NOT_DELETED"
+
+-- | When a resource schema validation is ignored.
+pattern NetworkAttachmentList_Warning_Code_SCHEMAVALIDATIONIGNORED :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_SCHEMAVALIDATIONIGNORED = NetworkAttachmentList_Warning_Code "SCHEMA_VALIDATION_IGNORED"
+
+-- | Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.
+pattern NetworkAttachmentList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE = NetworkAttachmentList_Warning_Code "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+
+-- | When undeclared properties in the schema are present
+pattern NetworkAttachmentList_Warning_Code_UNDECLAREDPROPERTIES :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_UNDECLAREDPROPERTIES = NetworkAttachmentList_Warning_Code "UNDECLARED_PROPERTIES"
+
+-- | A given scope cannot be reached.
+pattern NetworkAttachmentList_Warning_Code_Unreachable :: NetworkAttachmentList_Warning_Code
+pattern NetworkAttachmentList_Warning_Code_Unreachable = NetworkAttachmentList_Warning_Code "UNREACHABLE"
+
+{-# COMPLETE
+  NetworkAttachmentList_Warning_Code_CLEANUPFAILED,
+  NetworkAttachmentList_Warning_Code_DEPRECATEDRESOURCEUSED,
+  NetworkAttachmentList_Warning_Code_DEPRECATEDTYPEUSED,
+  NetworkAttachmentList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+  NetworkAttachmentList_Warning_Code_EXPERIMENTALTYPEUSED,
+  NetworkAttachmentList_Warning_Code_EXTERNALAPIWARNING,
+  NetworkAttachmentList_Warning_Code_FIELDVALUEOVERRIDEN,
+  NetworkAttachmentList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  NetworkAttachmentList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+  NetworkAttachmentList_Warning_Code_LARGEDEPLOYMENTWARNING,
+  NetworkAttachmentList_Warning_Code_MISSINGTYPEDEPENDENCY,
+  NetworkAttachmentList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+  NetworkAttachmentList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  NetworkAttachmentList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+  NetworkAttachmentList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+  NetworkAttachmentList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+  NetworkAttachmentList_Warning_Code_NEXTHOPNOTRUNNING,
+  NetworkAttachmentList_Warning_Code_NOTCRITICALERROR,
+  NetworkAttachmentList_Warning_Code_NORESULTSONPAGE,
+  NetworkAttachmentList_Warning_Code_PARTIALSUCCESS,
+  NetworkAttachmentList_Warning_Code_REQUIREDTOSAGREEMENT,
+  NetworkAttachmentList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+  NetworkAttachmentList_Warning_Code_RESOURCENOTDELETED,
+  NetworkAttachmentList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+  NetworkAttachmentList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+  NetworkAttachmentList_Warning_Code_UNDECLAREDPROPERTIES,
+  NetworkAttachmentList_Warning_Code_Unreachable,
+  NetworkAttachmentList_Warning_Code
+  #-}
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
+newtype NetworkAttachmentsScopedList_Warning_Code = NetworkAttachmentsScopedList_Warning_Code {fromNetworkAttachmentsScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Warning about failed cleanup of transient changes made by a failed operation.
+pattern NetworkAttachmentsScopedList_Warning_Code_CLEANUPFAILED :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_CLEANUPFAILED = NetworkAttachmentsScopedList_Warning_Code "CLEANUP_FAILED"
+
+-- | A link to a deprecated resource was created.
+pattern NetworkAttachmentsScopedList_Warning_Code_DEPRECATEDRESOURCEUSED :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_DEPRECATEDRESOURCEUSED = NetworkAttachmentsScopedList_Warning_Code "DEPRECATED_RESOURCE_USED"
+
+-- | When deploying and at least one of the resources has a type marked as deprecated
+pattern NetworkAttachmentsScopedList_Warning_Code_DEPRECATEDTYPEUSED :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_DEPRECATEDTYPEUSED = NetworkAttachmentsScopedList_Warning_Code "DEPRECATED_TYPE_USED"
+
+-- | The user created a boot disk that is larger than image size.
+pattern NetworkAttachmentsScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE = NetworkAttachmentsScopedList_Warning_Code "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+
+-- | When deploying and at least one of the resources has a type marked as experimental
+pattern NetworkAttachmentsScopedList_Warning_Code_EXPERIMENTALTYPEUSED :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_EXPERIMENTALTYPEUSED = NetworkAttachmentsScopedList_Warning_Code "EXPERIMENTAL_TYPE_USED"
+
+-- | Warning that is present in an external api call
+pattern NetworkAttachmentsScopedList_Warning_Code_EXTERNALAPIWARNING :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_EXTERNALAPIWARNING = NetworkAttachmentsScopedList_Warning_Code "EXTERNAL_API_WARNING"
+
+-- | Warning that value of a field has been overridden. Deprecated unused field.
+pattern NetworkAttachmentsScopedList_Warning_Code_FIELDVALUEOVERRIDEN :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_FIELDVALUEOVERRIDEN = NetworkAttachmentsScopedList_Warning_Code "FIELD_VALUE_OVERRIDEN"
+
+-- | The operation involved use of an injected kernel, which is deprecated.
+pattern NetworkAttachmentsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = NetworkAttachmentsScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
+
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern NetworkAttachmentsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = NetworkAttachmentsScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
+-- | When deploying a deployment with a exceedingly large number of resources
+pattern NetworkAttachmentsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = NetworkAttachmentsScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
+
+-- | A resource depends on a missing type
+pattern NetworkAttachmentsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY = NetworkAttachmentsScopedList_Warning_Code "MISSING_TYPE_DEPENDENCY"
+
+-- | The route\'s nextHopIp address is not assigned to an instance on the network.
+pattern NetworkAttachmentsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = NetworkAttachmentsScopedList_Warning_Code "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+
+-- | The route\'s next hop instance cannot ip forward.
+pattern NetworkAttachmentsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = NetworkAttachmentsScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern NetworkAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = NetworkAttachmentsScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not exist.
+pattern NetworkAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND = NetworkAttachmentsScopedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_FOUND"
+
+-- | The route\'s nextHopInstance URL refers to an instance that is not on the same network as the route.
+pattern NetworkAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK = NetworkAttachmentsScopedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+
+-- | The route\'s next hop instance does not have a status of RUNNING.
+pattern NetworkAttachmentsScopedList_Warning_Code_NEXTHOPNOTRUNNING :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_NEXTHOPNOTRUNNING = NetworkAttachmentsScopedList_Warning_Code "NEXT_HOP_NOT_RUNNING"
+
+-- | Error which is not critical. We decided to continue the process despite the mentioned error.
+pattern NetworkAttachmentsScopedList_Warning_Code_NOTCRITICALERROR :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_NOTCRITICALERROR = NetworkAttachmentsScopedList_Warning_Code "NOT_CRITICAL_ERROR"
+
+-- | No results are present on a particular list page.
+pattern NetworkAttachmentsScopedList_Warning_Code_NORESULTSONPAGE :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_NORESULTSONPAGE = NetworkAttachmentsScopedList_Warning_Code "NO_RESULTS_ON_PAGE"
+
+-- | Success is reported, but some results may be missing due to errors
+pattern NetworkAttachmentsScopedList_Warning_Code_PARTIALSUCCESS :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_PARTIALSUCCESS = NetworkAttachmentsScopedList_Warning_Code "PARTIAL_SUCCESS"
+
+-- | The user attempted to use a resource that requires a TOS they have not accepted.
+pattern NetworkAttachmentsScopedList_Warning_Code_REQUIREDTOSAGREEMENT :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_REQUIREDTOSAGREEMENT = NetworkAttachmentsScopedList_Warning_Code "REQUIRED_TOS_AGREEMENT"
+
+-- | Warning that a resource is in use.
+pattern NetworkAttachmentsScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING = NetworkAttachmentsScopedList_Warning_Code "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+
+-- | One or more of the resources set to auto-delete could not be deleted because they were in use.
+pattern NetworkAttachmentsScopedList_Warning_Code_RESOURCENOTDELETED :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_RESOURCENOTDELETED = NetworkAttachmentsScopedList_Warning_Code "RESOURCE_NOT_DELETED"
+
+-- | When a resource schema validation is ignored.
+pattern NetworkAttachmentsScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED = NetworkAttachmentsScopedList_Warning_Code "SCHEMA_VALIDATION_IGNORED"
+
+-- | Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.
+pattern NetworkAttachmentsScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE = NetworkAttachmentsScopedList_Warning_Code "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+
+-- | When undeclared properties in the schema are present
+pattern NetworkAttachmentsScopedList_Warning_Code_UNDECLAREDPROPERTIES :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_UNDECLAREDPROPERTIES = NetworkAttachmentsScopedList_Warning_Code "UNDECLARED_PROPERTIES"
+
+-- | A given scope cannot be reached.
+pattern NetworkAttachmentsScopedList_Warning_Code_Unreachable :: NetworkAttachmentsScopedList_Warning_Code
+pattern NetworkAttachmentsScopedList_Warning_Code_Unreachable = NetworkAttachmentsScopedList_Warning_Code "UNREACHABLE"
+
+{-# COMPLETE
+  NetworkAttachmentsScopedList_Warning_Code_CLEANUPFAILED,
+  NetworkAttachmentsScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+  NetworkAttachmentsScopedList_Warning_Code_DEPRECATEDTYPEUSED,
+  NetworkAttachmentsScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+  NetworkAttachmentsScopedList_Warning_Code_EXPERIMENTALTYPEUSED,
+  NetworkAttachmentsScopedList_Warning_Code_EXTERNALAPIWARNING,
+  NetworkAttachmentsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
+  NetworkAttachmentsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  NetworkAttachmentsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+  NetworkAttachmentsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+  NetworkAttachmentsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+  NetworkAttachmentsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+  NetworkAttachmentsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  NetworkAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+  NetworkAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+  NetworkAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+  NetworkAttachmentsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
+  NetworkAttachmentsScopedList_Warning_Code_NOTCRITICALERROR,
+  NetworkAttachmentsScopedList_Warning_Code_NORESULTSONPAGE,
+  NetworkAttachmentsScopedList_Warning_Code_PARTIALSUCCESS,
+  NetworkAttachmentsScopedList_Warning_Code_REQUIREDTOSAGREEMENT,
+  NetworkAttachmentsScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+  NetworkAttachmentsScopedList_Warning_Code_RESOURCENOTDELETED,
+  NetworkAttachmentsScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+  NetworkAttachmentsScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+  NetworkAttachmentsScopedList_Warning_Code_UNDECLAREDPROPERTIES,
+  NetworkAttachmentsScopedList_Warning_Code_Unreachable,
+  NetworkAttachmentsScopedList_Warning_Code
+  #-}
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
+newtype NetworkEdgeSecurityServiceAggregatedList_Warning_Code = NetworkEdgeSecurityServiceAggregatedList_Warning_Code {fromNetworkEdgeSecurityServiceAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Warning about failed cleanup of transient changes made by a failed operation.
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_CLEANUPFAILED :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_CLEANUPFAILED = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "CLEANUP_FAILED"
+
+-- | A link to a deprecated resource was created.
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "DEPRECATED_RESOURCE_USED"
+
+-- | When deploying and at least one of the resources has a type marked as deprecated
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_DEPRECATEDTYPEUSED :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_DEPRECATEDTYPEUSED = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "DEPRECATED_TYPE_USED"
+
+-- | The user created a boot disk that is larger than image size.
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+
+-- | When deploying and at least one of the resources has a type marked as experimental
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "EXPERIMENTAL_TYPE_USED"
+
+-- | Warning that is present in an external api call
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_EXTERNALAPIWARNING :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_EXTERNALAPIWARNING = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "EXTERNAL_API_WARNING"
+
+-- | Warning that value of a field has been overridden. Deprecated unused field.
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "FIELD_VALUE_OVERRIDEN"
+
+-- | The operation involved use of an injected kernel, which is deprecated.
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
+
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
+-- | When deploying a deployment with a exceedingly large number of resources
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
+
+-- | A resource depends on a missing type
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "MISSING_TYPE_DEPENDENCY"
+
+-- | The route\'s nextHopIp address is not assigned to an instance on the network.
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+
+-- | The route\'s next hop instance cannot ip forward.
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not exist.
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_FOUND"
+
+-- | The route\'s nextHopInstance URL refers to an instance that is not on the same network as the route.
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+
+-- | The route\'s next hop instance does not have a status of RUNNING.
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPNOTRUNNING :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPNOTRUNNING = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "NEXT_HOP_NOT_RUNNING"
+
+-- | Error which is not critical. We decided to continue the process despite the mentioned error.
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NOTCRITICALERROR :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NOTCRITICALERROR = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "NOT_CRITICAL_ERROR"
+
+-- | No results are present on a particular list page.
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NORESULTSONPAGE :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NORESULTSONPAGE = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "NO_RESULTS_ON_PAGE"
+
+-- | Success is reported, but some results may be missing due to errors
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_PARTIALSUCCESS :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_PARTIALSUCCESS = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "PARTIAL_SUCCESS"
+
+-- | The user attempted to use a resource that requires a TOS they have not accepted.
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "REQUIRED_TOS_AGREEMENT"
+
+-- | Warning that a resource is in use.
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+
+-- | One or more of the resources set to auto-delete could not be deleted because they were in use.
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_RESOURCENOTDELETED :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_RESOURCENOTDELETED = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "RESOURCE_NOT_DELETED"
+
+-- | When a resource schema validation is ignored.
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "SCHEMA_VALIDATION_IGNORED"
+
+-- | Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+
+-- | When undeclared properties in the schema are present
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_UNDECLAREDPROPERTIES :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_UNDECLAREDPROPERTIES = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "UNDECLARED_PROPERTIES"
+
+-- | A given scope cannot be reached.
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_Unreachable :: NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+pattern NetworkEdgeSecurityServiceAggregatedList_Warning_Code_Unreachable = NetworkEdgeSecurityServiceAggregatedList_Warning_Code "UNREACHABLE"
+
+{-# COMPLETE
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_CLEANUPFAILED,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_EXTERNALAPIWARNING,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NOTCRITICALERROR,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_NORESULTSONPAGE,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_PARTIALSUCCESS,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_RESOURCENOTDELETED,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code_Unreachable,
+  NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+  #-}
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
+newtype NetworkEdgeSecurityServicesScopedList_Warning_Code = NetworkEdgeSecurityServicesScopedList_Warning_Code {fromNetworkEdgeSecurityServicesScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Warning about failed cleanup of transient changes made by a failed operation.
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_CLEANUPFAILED :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_CLEANUPFAILED = NetworkEdgeSecurityServicesScopedList_Warning_Code "CLEANUP_FAILED"
+
+-- | A link to a deprecated resource was created.
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED = NetworkEdgeSecurityServicesScopedList_Warning_Code "DEPRECATED_RESOURCE_USED"
+
+-- | When deploying and at least one of the resources has a type marked as deprecated
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_DEPRECATEDTYPEUSED :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_DEPRECATEDTYPEUSED = NetworkEdgeSecurityServicesScopedList_Warning_Code "DEPRECATED_TYPE_USED"
+
+-- | The user created a boot disk that is larger than image size.
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE = NetworkEdgeSecurityServicesScopedList_Warning_Code "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+
+-- | When deploying and at least one of the resources has a type marked as experimental
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_EXPERIMENTALTYPEUSED :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_EXPERIMENTALTYPEUSED = NetworkEdgeSecurityServicesScopedList_Warning_Code "EXPERIMENTAL_TYPE_USED"
+
+-- | Warning that is present in an external api call
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_EXTERNALAPIWARNING :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_EXTERNALAPIWARNING = NetworkEdgeSecurityServicesScopedList_Warning_Code "EXTERNAL_API_WARNING"
+
+-- | Warning that value of a field has been overridden. Deprecated unused field.
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_FIELDVALUEOVERRIDEN :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_FIELDVALUEOVERRIDEN = NetworkEdgeSecurityServicesScopedList_Warning_Code "FIELD_VALUE_OVERRIDEN"
+
+-- | The operation involved use of an injected kernel, which is deprecated.
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = NetworkEdgeSecurityServicesScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
+
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = NetworkEdgeSecurityServicesScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
+-- | When deploying a deployment with a exceedingly large number of resources
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = NetworkEdgeSecurityServicesScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
+
+-- | A resource depends on a missing type
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY = NetworkEdgeSecurityServicesScopedList_Warning_Code "MISSING_TYPE_DEPENDENCY"
+
+-- | The route\'s nextHopIp address is not assigned to an instance on the network.
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = NetworkEdgeSecurityServicesScopedList_Warning_Code "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+
+-- | The route\'s next hop instance cannot ip forward.
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = NetworkEdgeSecurityServicesScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = NetworkEdgeSecurityServicesScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not exist.
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND = NetworkEdgeSecurityServicesScopedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_FOUND"
+
+-- | The route\'s nextHopInstance URL refers to an instance that is not on the same network as the route.
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK = NetworkEdgeSecurityServicesScopedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+
+-- | The route\'s next hop instance does not have a status of RUNNING.
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPNOTRUNNING :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPNOTRUNNING = NetworkEdgeSecurityServicesScopedList_Warning_Code "NEXT_HOP_NOT_RUNNING"
+
+-- | Error which is not critical. We decided to continue the process despite the mentioned error.
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_NOTCRITICALERROR :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_NOTCRITICALERROR = NetworkEdgeSecurityServicesScopedList_Warning_Code "NOT_CRITICAL_ERROR"
+
+-- | No results are present on a particular list page.
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_NORESULTSONPAGE :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_NORESULTSONPAGE = NetworkEdgeSecurityServicesScopedList_Warning_Code "NO_RESULTS_ON_PAGE"
+
+-- | Success is reported, but some results may be missing due to errors
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_PARTIALSUCCESS :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_PARTIALSUCCESS = NetworkEdgeSecurityServicesScopedList_Warning_Code "PARTIAL_SUCCESS"
+
+-- | The user attempted to use a resource that requires a TOS they have not accepted.
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_REQUIREDTOSAGREEMENT :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_REQUIREDTOSAGREEMENT = NetworkEdgeSecurityServicesScopedList_Warning_Code "REQUIRED_TOS_AGREEMENT"
+
+-- | Warning that a resource is in use.
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING = NetworkEdgeSecurityServicesScopedList_Warning_Code "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+
+-- | One or more of the resources set to auto-delete could not be deleted because they were in use.
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_RESOURCENOTDELETED :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_RESOURCENOTDELETED = NetworkEdgeSecurityServicesScopedList_Warning_Code "RESOURCE_NOT_DELETED"
+
+-- | When a resource schema validation is ignored.
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED = NetworkEdgeSecurityServicesScopedList_Warning_Code "SCHEMA_VALIDATION_IGNORED"
+
+-- | Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE = NetworkEdgeSecurityServicesScopedList_Warning_Code "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+
+-- | When undeclared properties in the schema are present
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_UNDECLAREDPROPERTIES :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_UNDECLAREDPROPERTIES = NetworkEdgeSecurityServicesScopedList_Warning_Code "UNDECLARED_PROPERTIES"
+
+-- | A given scope cannot be reached.
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_Unreachable :: NetworkEdgeSecurityServicesScopedList_Warning_Code
+pattern NetworkEdgeSecurityServicesScopedList_Warning_Code_Unreachable = NetworkEdgeSecurityServicesScopedList_Warning_Code "UNREACHABLE"
+
+{-# COMPLETE
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_CLEANUPFAILED,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_EXPERIMENTALTYPEUSED,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_EXTERNALAPIWARNING,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_NOTCRITICALERROR,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_NORESULTSONPAGE,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_PARTIALSUCCESS,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_REQUIREDTOSAGREEMENT,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_RESOURCENOTDELETED,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code_Unreachable,
+  NetworkEdgeSecurityServicesScopedList_Warning_Code
+  #-}
+
 -- | Type of network endpoints in this network endpoint group. Can be one of GCE/VM/IP, GCE/VM/IP/PORT, NON/GCP/PRIVATE/IP/PORT, INTERNET/FQDN/PORT, INTERNET/IP/PORT, SERVERLESS, PRIVATE/SERVICE_CONNECT.
 newtype NetworkEndpointGroup_NetworkEndpointType = NetworkEndpointGroup_NetworkEndpointType {fromNetworkEndpointGroup_NetworkEndpointType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -19648,6 +22937,10 @@ pattern NetworkEndpointGroupAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = Ne
 pattern NetworkEndpointGroupAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: NetworkEndpointGroupAggregatedList_Warning_Code
 pattern NetworkEndpointGroupAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = NetworkEndpointGroupAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern NetworkEndpointGroupAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: NetworkEndpointGroupAggregatedList_Warning_Code
+pattern NetworkEndpointGroupAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = NetworkEndpointGroupAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern NetworkEndpointGroupAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: NetworkEndpointGroupAggregatedList_Warning_Code
 pattern NetworkEndpointGroupAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = NetworkEndpointGroupAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -19663,6 +22956,10 @@ pattern NetworkEndpointGroupAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNE
 -- | The route\'s next hop instance cannot ip forward.
 pattern NetworkEndpointGroupAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: NetworkEndpointGroupAggregatedList_Warning_Code
 pattern NetworkEndpointGroupAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = NetworkEndpointGroupAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern NetworkEndpointGroupAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: NetworkEndpointGroupAggregatedList_Warning_Code
+pattern NetworkEndpointGroupAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = NetworkEndpointGroupAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern NetworkEndpointGroupAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: NetworkEndpointGroupAggregatedList_Warning_Code
@@ -19725,10 +23022,12 @@ pattern NetworkEndpointGroupAggregatedList_Warning_Code_Unreachable = NetworkEnd
   NetworkEndpointGroupAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   NetworkEndpointGroupAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   NetworkEndpointGroupAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  NetworkEndpointGroupAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   NetworkEndpointGroupAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   NetworkEndpointGroupAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   NetworkEndpointGroupAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   NetworkEndpointGroupAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  NetworkEndpointGroupAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   NetworkEndpointGroupAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   NetworkEndpointGroupAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   NetworkEndpointGroupAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -19790,6 +23089,10 @@ pattern NetworkEndpointGroupList_Warning_Code_FIELDVALUEOVERRIDEN = NetworkEndpo
 pattern NetworkEndpointGroupList_Warning_Code_INJECTEDKERNELSDEPRECATED :: NetworkEndpointGroupList_Warning_Code
 pattern NetworkEndpointGroupList_Warning_Code_INJECTEDKERNELSDEPRECATED = NetworkEndpointGroupList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern NetworkEndpointGroupList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: NetworkEndpointGroupList_Warning_Code
+pattern NetworkEndpointGroupList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = NetworkEndpointGroupList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern NetworkEndpointGroupList_Warning_Code_LARGEDEPLOYMENTWARNING :: NetworkEndpointGroupList_Warning_Code
 pattern NetworkEndpointGroupList_Warning_Code_LARGEDEPLOYMENTWARNING = NetworkEndpointGroupList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -19805,6 +23108,10 @@ pattern NetworkEndpointGroupList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Networ
 -- | The route\'s next hop instance cannot ip forward.
 pattern NetworkEndpointGroupList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: NetworkEndpointGroupList_Warning_Code
 pattern NetworkEndpointGroupList_Warning_Code_NEXTHOPCANNOTIPFORWARD = NetworkEndpointGroupList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern NetworkEndpointGroupList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: NetworkEndpointGroupList_Warning_Code
+pattern NetworkEndpointGroupList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = NetworkEndpointGroupList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern NetworkEndpointGroupList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: NetworkEndpointGroupList_Warning_Code
@@ -19867,10 +23174,12 @@ pattern NetworkEndpointGroupList_Warning_Code_Unreachable = NetworkEndpointGroup
   NetworkEndpointGroupList_Warning_Code_EXTERNALAPIWARNING,
   NetworkEndpointGroupList_Warning_Code_FIELDVALUEOVERRIDEN,
   NetworkEndpointGroupList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  NetworkEndpointGroupList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   NetworkEndpointGroupList_Warning_Code_LARGEDEPLOYMENTWARNING,
   NetworkEndpointGroupList_Warning_Code_MISSINGTYPEDEPENDENCY,
   NetworkEndpointGroupList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   NetworkEndpointGroupList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  NetworkEndpointGroupList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   NetworkEndpointGroupList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   NetworkEndpointGroupList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   NetworkEndpointGroupList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -19885,6 +23194,53 @@ pattern NetworkEndpointGroupList_Warning_Code_Unreachable = NetworkEndpointGroup
   NetworkEndpointGroupList_Warning_Code_UNDECLAREDPROPERTIES,
   NetworkEndpointGroupList_Warning_Code_Unreachable,
   NetworkEndpointGroupList_Warning_Code
+  #-}
+
+-- | [Output Only] The connection status of the PSC Forwarding Rule.
+newtype NetworkEndpointGroupPscData_PscConnectionStatus = NetworkEndpointGroupPscData_PscConnectionStatus {fromNetworkEndpointGroupPscData_PscConnectionStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The connection has been accepted by the producer.
+pattern NetworkEndpointGroupPscData_PscConnectionStatus_Accepted :: NetworkEndpointGroupPscData_PscConnectionStatus
+pattern NetworkEndpointGroupPscData_PscConnectionStatus_Accepted = NetworkEndpointGroupPscData_PscConnectionStatus "ACCEPTED"
+
+-- | The connection has been closed by the producer and will not serve traffic going forward.
+pattern NetworkEndpointGroupPscData_PscConnectionStatus_Closed :: NetworkEndpointGroupPscData_PscConnectionStatus
+pattern NetworkEndpointGroupPscData_PscConnectionStatus_Closed = NetworkEndpointGroupPscData_PscConnectionStatus "CLOSED"
+
+-- | The connection has been accepted by the producer, but the producer needs to take further action before the forwarding rule can serve traffic.
+pattern NetworkEndpointGroupPscData_PscConnectionStatus_NEEDSATTENTION :: NetworkEndpointGroupPscData_PscConnectionStatus
+pattern NetworkEndpointGroupPscData_PscConnectionStatus_NEEDSATTENTION = NetworkEndpointGroupPscData_PscConnectionStatus "NEEDS_ATTENTION"
+
+-- | The connection is pending acceptance by the producer.
+pattern NetworkEndpointGroupPscData_PscConnectionStatus_Pending :: NetworkEndpointGroupPscData_PscConnectionStatus
+pattern NetworkEndpointGroupPscData_PscConnectionStatus_Pending = NetworkEndpointGroupPscData_PscConnectionStatus "PENDING"
+
+-- | The connection has been rejected by the producer.
+pattern NetworkEndpointGroupPscData_PscConnectionStatus_Rejected :: NetworkEndpointGroupPscData_PscConnectionStatus
+pattern NetworkEndpointGroupPscData_PscConnectionStatus_Rejected = NetworkEndpointGroupPscData_PscConnectionStatus "REJECTED"
+
+-- |
+pattern NetworkEndpointGroupPscData_PscConnectionStatus_STATUSUNSPECIFIED :: NetworkEndpointGroupPscData_PscConnectionStatus
+pattern NetworkEndpointGroupPscData_PscConnectionStatus_STATUSUNSPECIFIED = NetworkEndpointGroupPscData_PscConnectionStatus "STATUS_UNSPECIFIED"
+
+{-# COMPLETE
+  NetworkEndpointGroupPscData_PscConnectionStatus_Accepted,
+  NetworkEndpointGroupPscData_PscConnectionStatus_Closed,
+  NetworkEndpointGroupPscData_PscConnectionStatus_NEEDSATTENTION,
+  NetworkEndpointGroupPscData_PscConnectionStatus_Pending,
+  NetworkEndpointGroupPscData_PscConnectionStatus_Rejected,
+  NetworkEndpointGroupPscData_PscConnectionStatus_STATUSUNSPECIFIED,
+  NetworkEndpointGroupPscData_PscConnectionStatus
   #-}
 
 -- | Optional query parameter for showing the health status of each network endpoint. Valid options are SKIP or SHOW. If you don\'t specify this parameter, the health status of network endpoints will not be provided.
@@ -19959,6 +23315,10 @@ pattern NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_FIELDVALUEOVERRID
 pattern NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_INJECTEDKERNELSDEPRECATED :: NetworkEndpointGroupsListNetworkEndpoints_Warning_Code
 pattern NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_INJECTEDKERNELSDEPRECATED = NetworkEndpointGroupsListNetworkEndpoints_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: NetworkEndpointGroupsListNetworkEndpoints_Warning_Code
+pattern NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = NetworkEndpointGroupsListNetworkEndpoints_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_LARGEDEPLOYMENTWARNING :: NetworkEndpointGroupsListNetworkEndpoints_Warning_Code
 pattern NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_LARGEDEPLOYMENTWARNING = NetworkEndpointGroupsListNetworkEndpoints_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -19974,6 +23334,10 @@ pattern NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_NEXTHOPADDRESSNOT
 -- | The route\'s next hop instance cannot ip forward.
 pattern NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_NEXTHOPCANNOTIPFORWARD :: NetworkEndpointGroupsListNetworkEndpoints_Warning_Code
 pattern NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_NEXTHOPCANNOTIPFORWARD = NetworkEndpointGroupsListNetworkEndpoints_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: NetworkEndpointGroupsListNetworkEndpoints_Warning_Code
+pattern NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = NetworkEndpointGroupsListNetworkEndpoints_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_NEXTHOPINSTANCENOTFOUND :: NetworkEndpointGroupsListNetworkEndpoints_Warning_Code
@@ -20036,10 +23400,12 @@ pattern NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_Unreachable = Net
   NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_EXTERNALAPIWARNING,
   NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_FIELDVALUEOVERRIDEN,
   NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_LARGEDEPLOYMENTWARNING,
   NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_MISSINGTYPEDEPENDENCY,
   NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   NetworkEndpointGroupsListNetworkEndpoints_Warning_Code_NEXTHOPNOTRUNNING,
@@ -20101,6 +23467,10 @@ pattern NetworkEndpointGroupsScopedList_Warning_Code_FIELDVALUEOVERRIDEN = Netwo
 pattern NetworkEndpointGroupsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: NetworkEndpointGroupsScopedList_Warning_Code
 pattern NetworkEndpointGroupsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = NetworkEndpointGroupsScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern NetworkEndpointGroupsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: NetworkEndpointGroupsScopedList_Warning_Code
+pattern NetworkEndpointGroupsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = NetworkEndpointGroupsScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern NetworkEndpointGroupsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: NetworkEndpointGroupsScopedList_Warning_Code
 pattern NetworkEndpointGroupsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = NetworkEndpointGroupsScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -20116,6 +23486,10 @@ pattern NetworkEndpointGroupsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED =
 -- | The route\'s next hop instance cannot ip forward.
 pattern NetworkEndpointGroupsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: NetworkEndpointGroupsScopedList_Warning_Code
 pattern NetworkEndpointGroupsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = NetworkEndpointGroupsScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern NetworkEndpointGroupsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: NetworkEndpointGroupsScopedList_Warning_Code
+pattern NetworkEndpointGroupsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = NetworkEndpointGroupsScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern NetworkEndpointGroupsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: NetworkEndpointGroupsScopedList_Warning_Code
@@ -20178,10 +23552,12 @@ pattern NetworkEndpointGroupsScopedList_Warning_Code_Unreachable = NetworkEndpoi
   NetworkEndpointGroupsScopedList_Warning_Code_EXTERNALAPIWARNING,
   NetworkEndpointGroupsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   NetworkEndpointGroupsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  NetworkEndpointGroupsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   NetworkEndpointGroupsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   NetworkEndpointGroupsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   NetworkEndpointGroupsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   NetworkEndpointGroupsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  NetworkEndpointGroupsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   NetworkEndpointGroupsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   NetworkEndpointGroupsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   NetworkEndpointGroupsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -20257,7 +23633,7 @@ pattern NetworkInterface_NicType_VIRTIONET = NetworkInterface_NicType "VIRTIO_NE
   NetworkInterface_NicType
   #-}
 
--- | The stack type for this network interface to identify whether the IPv6 feature is enabled or not. If not specified, IPV4_ONLY will be used. This field can be both set at instance creation and update network interface operations.
+-- | The stack type for this network interface. To assign only IPv4 addresses, use IPV4/ONLY. To assign both IPv4 and IPv6 addresses, use IPV4/IPV6. If not specified, IPV4_ONLY is used. This field can be both set at instance creation and update network interface operations.
 newtype NetworkInterface_StackType = NetworkInterface_StackType {fromNetworkInterface_StackType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -20329,6 +23705,10 @@ pattern NetworkList_Warning_Code_FIELDVALUEOVERRIDEN = NetworkList_Warning_Code 
 pattern NetworkList_Warning_Code_INJECTEDKERNELSDEPRECATED :: NetworkList_Warning_Code
 pattern NetworkList_Warning_Code_INJECTEDKERNELSDEPRECATED = NetworkList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern NetworkList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: NetworkList_Warning_Code
+pattern NetworkList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = NetworkList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern NetworkList_Warning_Code_LARGEDEPLOYMENTWARNING :: NetworkList_Warning_Code
 pattern NetworkList_Warning_Code_LARGEDEPLOYMENTWARNING = NetworkList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -20344,6 +23724,10 @@ pattern NetworkList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = NetworkList_Warning
 -- | The route\'s next hop instance cannot ip forward.
 pattern NetworkList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: NetworkList_Warning_Code
 pattern NetworkList_Warning_Code_NEXTHOPCANNOTIPFORWARD = NetworkList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern NetworkList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: NetworkList_Warning_Code
+pattern NetworkList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = NetworkList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern NetworkList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: NetworkList_Warning_Code
@@ -20406,10 +23790,12 @@ pattern NetworkList_Warning_Code_Unreachable = NetworkList_Warning_Code "UNREACH
   NetworkList_Warning_Code_EXTERNALAPIWARNING,
   NetworkList_Warning_Code_FIELDVALUEOVERRIDEN,
   NetworkList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  NetworkList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   NetworkList_Warning_Code_LARGEDEPLOYMENTWARNING,
   NetworkList_Warning_Code_MISSINGTYPEDEPENDENCY,
   NetworkList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   NetworkList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  NetworkList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   NetworkList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   NetworkList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   NetworkList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -20424,6 +23810,33 @@ pattern NetworkList_Warning_Code_Unreachable = NetworkList_Warning_Code "UNREACH
   NetworkList_Warning_Code_UNDECLAREDPROPERTIES,
   NetworkList_Warning_Code_Unreachable,
   NetworkList_Warning_Code
+  #-}
+
+-- | Which IP version(s) of traffic and routes are allowed to be imported or exported between peer networks. The default value is IPV4_ONLY.
+newtype NetworkPeering_StackType = NetworkPeering_StackType {fromNetworkPeering_StackType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | This Peering will allow IPv4 traffic and routes to be exchanged. Additionally if the matching peering is IPV4_IPV6, IPv6 traffic and routes will be exchanged as well.
+pattern NetworkPeering_StackType_IPV4_IPV6 :: NetworkPeering_StackType
+pattern NetworkPeering_StackType_IPV4_IPV6 = NetworkPeering_StackType "IPV4_IPV6"
+
+-- | This Peering will only allow IPv4 traffic and routes to be exchanged, even if the matching peering is IPV4_IPV6.
+pattern NetworkPeering_StackType_IPV4ONLY :: NetworkPeering_StackType
+pattern NetworkPeering_StackType_IPV4ONLY = NetworkPeering_StackType "IPV4_ONLY"
+
+{-# COMPLETE
+  NetworkPeering_StackType_IPV4_IPV6,
+  NetworkPeering_StackType_IPV4ONLY,
+  NetworkPeering_StackType
   #-}
 
 -- | [Output Only] State for the peering, either @ACTIVE@ or @INACTIVE@. The peering is @ACTIVE@ when there\'s a matching configuration in the peer network.
@@ -20656,6 +24069,10 @@ pattern NodeGroupAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = NodeGroupAggr
 pattern NodeGroupAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: NodeGroupAggregatedList_Warning_Code
 pattern NodeGroupAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = NodeGroupAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern NodeGroupAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: NodeGroupAggregatedList_Warning_Code
+pattern NodeGroupAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = NodeGroupAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern NodeGroupAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: NodeGroupAggregatedList_Warning_Code
 pattern NodeGroupAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = NodeGroupAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -20671,6 +24088,10 @@ pattern NodeGroupAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = NodeGro
 -- | The route\'s next hop instance cannot ip forward.
 pattern NodeGroupAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: NodeGroupAggregatedList_Warning_Code
 pattern NodeGroupAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = NodeGroupAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern NodeGroupAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: NodeGroupAggregatedList_Warning_Code
+pattern NodeGroupAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = NodeGroupAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern NodeGroupAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: NodeGroupAggregatedList_Warning_Code
@@ -20733,10 +24154,12 @@ pattern NodeGroupAggregatedList_Warning_Code_Unreachable = NodeGroupAggregatedLi
   NodeGroupAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   NodeGroupAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   NodeGroupAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  NodeGroupAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   NodeGroupAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   NodeGroupAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   NodeGroupAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   NodeGroupAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  NodeGroupAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   NodeGroupAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   NodeGroupAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   NodeGroupAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -20835,6 +24258,10 @@ pattern NodeGroupList_Warning_Code_FIELDVALUEOVERRIDEN = NodeGroupList_Warning_C
 pattern NodeGroupList_Warning_Code_INJECTEDKERNELSDEPRECATED :: NodeGroupList_Warning_Code
 pattern NodeGroupList_Warning_Code_INJECTEDKERNELSDEPRECATED = NodeGroupList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern NodeGroupList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: NodeGroupList_Warning_Code
+pattern NodeGroupList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = NodeGroupList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern NodeGroupList_Warning_Code_LARGEDEPLOYMENTWARNING :: NodeGroupList_Warning_Code
 pattern NodeGroupList_Warning_Code_LARGEDEPLOYMENTWARNING = NodeGroupList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -20850,6 +24277,10 @@ pattern NodeGroupList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = NodeGroupList_War
 -- | The route\'s next hop instance cannot ip forward.
 pattern NodeGroupList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: NodeGroupList_Warning_Code
 pattern NodeGroupList_Warning_Code_NEXTHOPCANNOTIPFORWARD = NodeGroupList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern NodeGroupList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: NodeGroupList_Warning_Code
+pattern NodeGroupList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = NodeGroupList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern NodeGroupList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: NodeGroupList_Warning_Code
@@ -20912,10 +24343,12 @@ pattern NodeGroupList_Warning_Code_Unreachable = NodeGroupList_Warning_Code "UNR
   NodeGroupList_Warning_Code_EXTERNALAPIWARNING,
   NodeGroupList_Warning_Code_FIELDVALUEOVERRIDEN,
   NodeGroupList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  NodeGroupList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   NodeGroupList_Warning_Code_LARGEDEPLOYMENTWARNING,
   NodeGroupList_Warning_Code_MISSINGTYPEDEPENDENCY,
   NodeGroupList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   NodeGroupList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  NodeGroupList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   NodeGroupList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   NodeGroupList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   NodeGroupList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -21050,6 +24483,10 @@ pattern NodeGroupsListNodes_Warning_Code_FIELDVALUEOVERRIDEN = NodeGroupsListNod
 pattern NodeGroupsListNodes_Warning_Code_INJECTEDKERNELSDEPRECATED :: NodeGroupsListNodes_Warning_Code
 pattern NodeGroupsListNodes_Warning_Code_INJECTEDKERNELSDEPRECATED = NodeGroupsListNodes_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern NodeGroupsListNodes_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: NodeGroupsListNodes_Warning_Code
+pattern NodeGroupsListNodes_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = NodeGroupsListNodes_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern NodeGroupsListNodes_Warning_Code_LARGEDEPLOYMENTWARNING :: NodeGroupsListNodes_Warning_Code
 pattern NodeGroupsListNodes_Warning_Code_LARGEDEPLOYMENTWARNING = NodeGroupsListNodes_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -21065,6 +24502,10 @@ pattern NodeGroupsListNodes_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = NodeGroupsL
 -- | The route\'s next hop instance cannot ip forward.
 pattern NodeGroupsListNodes_Warning_Code_NEXTHOPCANNOTIPFORWARD :: NodeGroupsListNodes_Warning_Code
 pattern NodeGroupsListNodes_Warning_Code_NEXTHOPCANNOTIPFORWARD = NodeGroupsListNodes_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern NodeGroupsListNodes_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: NodeGroupsListNodes_Warning_Code
+pattern NodeGroupsListNodes_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = NodeGroupsListNodes_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern NodeGroupsListNodes_Warning_Code_NEXTHOPINSTANCENOTFOUND :: NodeGroupsListNodes_Warning_Code
@@ -21127,10 +24568,12 @@ pattern NodeGroupsListNodes_Warning_Code_Unreachable = NodeGroupsListNodes_Warni
   NodeGroupsListNodes_Warning_Code_EXTERNALAPIWARNING,
   NodeGroupsListNodes_Warning_Code_FIELDVALUEOVERRIDEN,
   NodeGroupsListNodes_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  NodeGroupsListNodes_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   NodeGroupsListNodes_Warning_Code_LARGEDEPLOYMENTWARNING,
   NodeGroupsListNodes_Warning_Code_MISSINGTYPEDEPENDENCY,
   NodeGroupsListNodes_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   NodeGroupsListNodes_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  NodeGroupsListNodes_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   NodeGroupsListNodes_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   NodeGroupsListNodes_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   NodeGroupsListNodes_Warning_Code_NEXTHOPNOTRUNNING,
@@ -21192,6 +24635,10 @@ pattern NodeGroupsScopedList_Warning_Code_FIELDVALUEOVERRIDEN = NodeGroupsScoped
 pattern NodeGroupsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: NodeGroupsScopedList_Warning_Code
 pattern NodeGroupsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = NodeGroupsScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern NodeGroupsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: NodeGroupsScopedList_Warning_Code
+pattern NodeGroupsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = NodeGroupsScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern NodeGroupsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: NodeGroupsScopedList_Warning_Code
 pattern NodeGroupsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = NodeGroupsScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -21207,6 +24654,10 @@ pattern NodeGroupsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = NodeGroups
 -- | The route\'s next hop instance cannot ip forward.
 pattern NodeGroupsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: NodeGroupsScopedList_Warning_Code
 pattern NodeGroupsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = NodeGroupsScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern NodeGroupsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: NodeGroupsScopedList_Warning_Code
+pattern NodeGroupsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = NodeGroupsScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern NodeGroupsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: NodeGroupsScopedList_Warning_Code
@@ -21269,10 +24720,12 @@ pattern NodeGroupsScopedList_Warning_Code_Unreachable = NodeGroupsScopedList_War
   NodeGroupsScopedList_Warning_Code_EXTERNALAPIWARNING,
   NodeGroupsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   NodeGroupsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  NodeGroupsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   NodeGroupsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   NodeGroupsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   NodeGroupsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   NodeGroupsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  NodeGroupsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   NodeGroupsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   NodeGroupsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   NodeGroupsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -21403,6 +24856,10 @@ pattern NodeTemplateAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = NodeTempla
 pattern NodeTemplateAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: NodeTemplateAggregatedList_Warning_Code
 pattern NodeTemplateAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = NodeTemplateAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern NodeTemplateAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: NodeTemplateAggregatedList_Warning_Code
+pattern NodeTemplateAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = NodeTemplateAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern NodeTemplateAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: NodeTemplateAggregatedList_Warning_Code
 pattern NodeTemplateAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = NodeTemplateAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -21418,6 +24875,10 @@ pattern NodeTemplateAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Node
 -- | The route\'s next hop instance cannot ip forward.
 pattern NodeTemplateAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: NodeTemplateAggregatedList_Warning_Code
 pattern NodeTemplateAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = NodeTemplateAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern NodeTemplateAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: NodeTemplateAggregatedList_Warning_Code
+pattern NodeTemplateAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = NodeTemplateAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern NodeTemplateAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: NodeTemplateAggregatedList_Warning_Code
@@ -21480,10 +24941,12 @@ pattern NodeTemplateAggregatedList_Warning_Code_Unreachable = NodeTemplateAggreg
   NodeTemplateAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   NodeTemplateAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   NodeTemplateAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  NodeTemplateAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   NodeTemplateAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   NodeTemplateAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   NodeTemplateAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   NodeTemplateAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  NodeTemplateAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   NodeTemplateAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   NodeTemplateAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   NodeTemplateAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -21545,6 +25008,10 @@ pattern NodeTemplateList_Warning_Code_FIELDVALUEOVERRIDEN = NodeTemplateList_War
 pattern NodeTemplateList_Warning_Code_INJECTEDKERNELSDEPRECATED :: NodeTemplateList_Warning_Code
 pattern NodeTemplateList_Warning_Code_INJECTEDKERNELSDEPRECATED = NodeTemplateList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern NodeTemplateList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: NodeTemplateList_Warning_Code
+pattern NodeTemplateList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = NodeTemplateList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern NodeTemplateList_Warning_Code_LARGEDEPLOYMENTWARNING :: NodeTemplateList_Warning_Code
 pattern NodeTemplateList_Warning_Code_LARGEDEPLOYMENTWARNING = NodeTemplateList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -21560,6 +25027,10 @@ pattern NodeTemplateList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = NodeTemplateLi
 -- | The route\'s next hop instance cannot ip forward.
 pattern NodeTemplateList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: NodeTemplateList_Warning_Code
 pattern NodeTemplateList_Warning_Code_NEXTHOPCANNOTIPFORWARD = NodeTemplateList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern NodeTemplateList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: NodeTemplateList_Warning_Code
+pattern NodeTemplateList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = NodeTemplateList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern NodeTemplateList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: NodeTemplateList_Warning_Code
@@ -21622,10 +25093,12 @@ pattern NodeTemplateList_Warning_Code_Unreachable = NodeTemplateList_Warning_Cod
   NodeTemplateList_Warning_Code_EXTERNALAPIWARNING,
   NodeTemplateList_Warning_Code_FIELDVALUEOVERRIDEN,
   NodeTemplateList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  NodeTemplateList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   NodeTemplateList_Warning_Code_LARGEDEPLOYMENTWARNING,
   NodeTemplateList_Warning_Code_MISSINGTYPEDEPENDENCY,
   NodeTemplateList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   NodeTemplateList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  NodeTemplateList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   NodeTemplateList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   NodeTemplateList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   NodeTemplateList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -21687,6 +25160,10 @@ pattern NodeTemplatesScopedList_Warning_Code_FIELDVALUEOVERRIDEN = NodeTemplates
 pattern NodeTemplatesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: NodeTemplatesScopedList_Warning_Code
 pattern NodeTemplatesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = NodeTemplatesScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern NodeTemplatesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: NodeTemplatesScopedList_Warning_Code
+pattern NodeTemplatesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = NodeTemplatesScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern NodeTemplatesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: NodeTemplatesScopedList_Warning_Code
 pattern NodeTemplatesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = NodeTemplatesScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -21702,6 +25179,10 @@ pattern NodeTemplatesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = NodeTem
 -- | The route\'s next hop instance cannot ip forward.
 pattern NodeTemplatesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: NodeTemplatesScopedList_Warning_Code
 pattern NodeTemplatesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = NodeTemplatesScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern NodeTemplatesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: NodeTemplatesScopedList_Warning_Code
+pattern NodeTemplatesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = NodeTemplatesScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern NodeTemplatesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: NodeTemplatesScopedList_Warning_Code
@@ -21764,10 +25245,12 @@ pattern NodeTemplatesScopedList_Warning_Code_Unreachable = NodeTemplatesScopedLi
   NodeTemplatesScopedList_Warning_Code_EXTERNALAPIWARNING,
   NodeTemplatesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   NodeTemplatesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  NodeTemplatesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   NodeTemplatesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   NodeTemplatesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   NodeTemplatesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   NodeTemplatesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  NodeTemplatesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   NodeTemplatesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   NodeTemplatesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   NodeTemplatesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -21829,6 +25312,10 @@ pattern NodeTypeAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = NodeTypeAggreg
 pattern NodeTypeAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: NodeTypeAggregatedList_Warning_Code
 pattern NodeTypeAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = NodeTypeAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern NodeTypeAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: NodeTypeAggregatedList_Warning_Code
+pattern NodeTypeAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = NodeTypeAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern NodeTypeAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: NodeTypeAggregatedList_Warning_Code
 pattern NodeTypeAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = NodeTypeAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -21844,6 +25331,10 @@ pattern NodeTypeAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = NodeType
 -- | The route\'s next hop instance cannot ip forward.
 pattern NodeTypeAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: NodeTypeAggregatedList_Warning_Code
 pattern NodeTypeAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = NodeTypeAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern NodeTypeAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: NodeTypeAggregatedList_Warning_Code
+pattern NodeTypeAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = NodeTypeAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern NodeTypeAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: NodeTypeAggregatedList_Warning_Code
@@ -21906,10 +25397,12 @@ pattern NodeTypeAggregatedList_Warning_Code_Unreachable = NodeTypeAggregatedList
   NodeTypeAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   NodeTypeAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   NodeTypeAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  NodeTypeAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   NodeTypeAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   NodeTypeAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   NodeTypeAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   NodeTypeAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  NodeTypeAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   NodeTypeAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   NodeTypeAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   NodeTypeAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -21971,6 +25464,10 @@ pattern NodeTypeList_Warning_Code_FIELDVALUEOVERRIDEN = NodeTypeList_Warning_Cod
 pattern NodeTypeList_Warning_Code_INJECTEDKERNELSDEPRECATED :: NodeTypeList_Warning_Code
 pattern NodeTypeList_Warning_Code_INJECTEDKERNELSDEPRECATED = NodeTypeList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern NodeTypeList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: NodeTypeList_Warning_Code
+pattern NodeTypeList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = NodeTypeList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern NodeTypeList_Warning_Code_LARGEDEPLOYMENTWARNING :: NodeTypeList_Warning_Code
 pattern NodeTypeList_Warning_Code_LARGEDEPLOYMENTWARNING = NodeTypeList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -21986,6 +25483,10 @@ pattern NodeTypeList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = NodeTypeList_Warni
 -- | The route\'s next hop instance cannot ip forward.
 pattern NodeTypeList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: NodeTypeList_Warning_Code
 pattern NodeTypeList_Warning_Code_NEXTHOPCANNOTIPFORWARD = NodeTypeList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern NodeTypeList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: NodeTypeList_Warning_Code
+pattern NodeTypeList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = NodeTypeList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern NodeTypeList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: NodeTypeList_Warning_Code
@@ -22048,10 +25549,12 @@ pattern NodeTypeList_Warning_Code_Unreachable = NodeTypeList_Warning_Code "UNREA
   NodeTypeList_Warning_Code_EXTERNALAPIWARNING,
   NodeTypeList_Warning_Code_FIELDVALUEOVERRIDEN,
   NodeTypeList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  NodeTypeList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   NodeTypeList_Warning_Code_LARGEDEPLOYMENTWARNING,
   NodeTypeList_Warning_Code_MISSINGTYPEDEPENDENCY,
   NodeTypeList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   NodeTypeList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  NodeTypeList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   NodeTypeList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   NodeTypeList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   NodeTypeList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -22113,6 +25616,10 @@ pattern NodeTypesScopedList_Warning_Code_FIELDVALUEOVERRIDEN = NodeTypesScopedLi
 pattern NodeTypesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: NodeTypesScopedList_Warning_Code
 pattern NodeTypesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = NodeTypesScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern NodeTypesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: NodeTypesScopedList_Warning_Code
+pattern NodeTypesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = NodeTypesScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern NodeTypesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: NodeTypesScopedList_Warning_Code
 pattern NodeTypesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = NodeTypesScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -22128,6 +25635,10 @@ pattern NodeTypesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = NodeTypesSc
 -- | The route\'s next hop instance cannot ip forward.
 pattern NodeTypesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: NodeTypesScopedList_Warning_Code
 pattern NodeTypesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = NodeTypesScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern NodeTypesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: NodeTypesScopedList_Warning_Code
+pattern NodeTypesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = NodeTypesScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern NodeTypesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: NodeTypesScopedList_Warning_Code
@@ -22190,10 +25701,12 @@ pattern NodeTypesScopedList_Warning_Code_Unreachable = NodeTypesScopedList_Warni
   NodeTypesScopedList_Warning_Code_EXTERNALAPIWARNING,
   NodeTypesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   NodeTypesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  NodeTypesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   NodeTypesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   NodeTypesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   NodeTypesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   NodeTypesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  NodeTypesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   NodeTypesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   NodeTypesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   NodeTypesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -22255,6 +25768,10 @@ pattern NotificationEndpointList_Warning_Code_FIELDVALUEOVERRIDEN = Notification
 pattern NotificationEndpointList_Warning_Code_INJECTEDKERNELSDEPRECATED :: NotificationEndpointList_Warning_Code
 pattern NotificationEndpointList_Warning_Code_INJECTEDKERNELSDEPRECATED = NotificationEndpointList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern NotificationEndpointList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: NotificationEndpointList_Warning_Code
+pattern NotificationEndpointList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = NotificationEndpointList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern NotificationEndpointList_Warning_Code_LARGEDEPLOYMENTWARNING :: NotificationEndpointList_Warning_Code
 pattern NotificationEndpointList_Warning_Code_LARGEDEPLOYMENTWARNING = NotificationEndpointList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -22270,6 +25787,10 @@ pattern NotificationEndpointList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Notifi
 -- | The route\'s next hop instance cannot ip forward.
 pattern NotificationEndpointList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: NotificationEndpointList_Warning_Code
 pattern NotificationEndpointList_Warning_Code_NEXTHOPCANNOTIPFORWARD = NotificationEndpointList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern NotificationEndpointList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: NotificationEndpointList_Warning_Code
+pattern NotificationEndpointList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = NotificationEndpointList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern NotificationEndpointList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: NotificationEndpointList_Warning_Code
@@ -22332,10 +25853,12 @@ pattern NotificationEndpointList_Warning_Code_Unreachable = NotificationEndpoint
   NotificationEndpointList_Warning_Code_EXTERNALAPIWARNING,
   NotificationEndpointList_Warning_Code_FIELDVALUEOVERRIDEN,
   NotificationEndpointList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  NotificationEndpointList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   NotificationEndpointList_Warning_Code_LARGEDEPLOYMENTWARNING,
   NotificationEndpointList_Warning_Code_MISSINGTYPEDEPENDENCY,
   NotificationEndpointList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   NotificationEndpointList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  NotificationEndpointList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   NotificationEndpointList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   NotificationEndpointList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   NotificationEndpointList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -22429,6 +25952,10 @@ pattern Operation_WarningsItem_Code_FIELDVALUEOVERRIDEN = Operation_WarningsItem
 pattern Operation_WarningsItem_Code_INJECTEDKERNELSDEPRECATED :: Operation_WarningsItem_Code
 pattern Operation_WarningsItem_Code_INJECTEDKERNELSDEPRECATED = Operation_WarningsItem_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern Operation_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: Operation_WarningsItem_Code
+pattern Operation_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = Operation_WarningsItem_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern Operation_WarningsItem_Code_LARGEDEPLOYMENTWARNING :: Operation_WarningsItem_Code
 pattern Operation_WarningsItem_Code_LARGEDEPLOYMENTWARNING = Operation_WarningsItem_Code "LARGE_DEPLOYMENT_WARNING"
@@ -22444,6 +25971,10 @@ pattern Operation_WarningsItem_Code_NEXTHOPADDRESSNOTASSIGNED = Operation_Warnin
 -- | The route\'s next hop instance cannot ip forward.
 pattern Operation_WarningsItem_Code_NEXTHOPCANNOTIPFORWARD :: Operation_WarningsItem_Code
 pattern Operation_WarningsItem_Code_NEXTHOPCANNOTIPFORWARD = Operation_WarningsItem_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern Operation_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: Operation_WarningsItem_Code
+pattern Operation_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = Operation_WarningsItem_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern Operation_WarningsItem_Code_NEXTHOPINSTANCENOTFOUND :: Operation_WarningsItem_Code
@@ -22506,10 +26037,12 @@ pattern Operation_WarningsItem_Code_Unreachable = Operation_WarningsItem_Code "U
   Operation_WarningsItem_Code_EXTERNALAPIWARNING,
   Operation_WarningsItem_Code_FIELDVALUEOVERRIDEN,
   Operation_WarningsItem_Code_INJECTEDKERNELSDEPRECATED,
+  Operation_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   Operation_WarningsItem_Code_LARGEDEPLOYMENTWARNING,
   Operation_WarningsItem_Code_MISSINGTYPEDEPENDENCY,
   Operation_WarningsItem_Code_NEXTHOPADDRESSNOTASSIGNED,
   Operation_WarningsItem_Code_NEXTHOPCANNOTIPFORWARD,
+  Operation_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   Operation_WarningsItem_Code_NEXTHOPINSTANCENOTFOUND,
   Operation_WarningsItem_Code_NEXTHOPINSTANCENOTONNETWORK,
   Operation_WarningsItem_Code_NEXTHOPNOTRUNNING,
@@ -22571,6 +26104,10 @@ pattern OperationAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = OperationAggr
 pattern OperationAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: OperationAggregatedList_Warning_Code
 pattern OperationAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = OperationAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern OperationAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: OperationAggregatedList_Warning_Code
+pattern OperationAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = OperationAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern OperationAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: OperationAggregatedList_Warning_Code
 pattern OperationAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = OperationAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -22586,6 +26123,10 @@ pattern OperationAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Operati
 -- | The route\'s next hop instance cannot ip forward.
 pattern OperationAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: OperationAggregatedList_Warning_Code
 pattern OperationAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = OperationAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern OperationAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: OperationAggregatedList_Warning_Code
+pattern OperationAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = OperationAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern OperationAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: OperationAggregatedList_Warning_Code
@@ -22648,10 +26189,12 @@ pattern OperationAggregatedList_Warning_Code_Unreachable = OperationAggregatedLi
   OperationAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   OperationAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   OperationAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  OperationAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   OperationAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   OperationAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   OperationAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   OperationAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  OperationAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   OperationAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   OperationAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   OperationAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -22713,6 +26256,10 @@ pattern OperationList_Warning_Code_FIELDVALUEOVERRIDEN = OperationList_Warning_C
 pattern OperationList_Warning_Code_INJECTEDKERNELSDEPRECATED :: OperationList_Warning_Code
 pattern OperationList_Warning_Code_INJECTEDKERNELSDEPRECATED = OperationList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern OperationList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: OperationList_Warning_Code
+pattern OperationList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = OperationList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern OperationList_Warning_Code_LARGEDEPLOYMENTWARNING :: OperationList_Warning_Code
 pattern OperationList_Warning_Code_LARGEDEPLOYMENTWARNING = OperationList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -22728,6 +26275,10 @@ pattern OperationList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = OperationList_War
 -- | The route\'s next hop instance cannot ip forward.
 pattern OperationList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: OperationList_Warning_Code
 pattern OperationList_Warning_Code_NEXTHOPCANNOTIPFORWARD = OperationList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern OperationList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: OperationList_Warning_Code
+pattern OperationList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = OperationList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern OperationList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: OperationList_Warning_Code
@@ -22790,10 +26341,12 @@ pattern OperationList_Warning_Code_Unreachable = OperationList_Warning_Code "UNR
   OperationList_Warning_Code_EXTERNALAPIWARNING,
   OperationList_Warning_Code_FIELDVALUEOVERRIDEN,
   OperationList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  OperationList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   OperationList_Warning_Code_LARGEDEPLOYMENTWARNING,
   OperationList_Warning_Code_MISSINGTYPEDEPENDENCY,
   OperationList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   OperationList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  OperationList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   OperationList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   OperationList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   OperationList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -22855,6 +26408,10 @@ pattern OperationsScopedList_Warning_Code_FIELDVALUEOVERRIDEN = OperationsScoped
 pattern OperationsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: OperationsScopedList_Warning_Code
 pattern OperationsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = OperationsScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern OperationsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: OperationsScopedList_Warning_Code
+pattern OperationsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = OperationsScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern OperationsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: OperationsScopedList_Warning_Code
 pattern OperationsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = OperationsScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -22870,6 +26427,10 @@ pattern OperationsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Operations
 -- | The route\'s next hop instance cannot ip forward.
 pattern OperationsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: OperationsScopedList_Warning_Code
 pattern OperationsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = OperationsScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern OperationsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: OperationsScopedList_Warning_Code
+pattern OperationsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = OperationsScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern OperationsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: OperationsScopedList_Warning_Code
@@ -22932,10 +26493,12 @@ pattern OperationsScopedList_Warning_Code_Unreachable = OperationsScopedList_War
   OperationsScopedList_Warning_Code_EXTERNALAPIWARNING,
   OperationsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   OperationsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  OperationsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   OperationsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   OperationsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   OperationsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   OperationsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  OperationsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   OperationsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   OperationsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   OperationsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -23098,6 +26661,10 @@ pattern PacketMirroringAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = PacketM
 pattern PacketMirroringAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: PacketMirroringAggregatedList_Warning_Code
 pattern PacketMirroringAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = PacketMirroringAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern PacketMirroringAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: PacketMirroringAggregatedList_Warning_Code
+pattern PacketMirroringAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = PacketMirroringAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern PacketMirroringAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: PacketMirroringAggregatedList_Warning_Code
 pattern PacketMirroringAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = PacketMirroringAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -23113,6 +26680,10 @@ pattern PacketMirroringAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = P
 -- | The route\'s next hop instance cannot ip forward.
 pattern PacketMirroringAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: PacketMirroringAggregatedList_Warning_Code
 pattern PacketMirroringAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = PacketMirroringAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern PacketMirroringAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: PacketMirroringAggregatedList_Warning_Code
+pattern PacketMirroringAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = PacketMirroringAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern PacketMirroringAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: PacketMirroringAggregatedList_Warning_Code
@@ -23175,10 +26746,12 @@ pattern PacketMirroringAggregatedList_Warning_Code_Unreachable = PacketMirroring
   PacketMirroringAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   PacketMirroringAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   PacketMirroringAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  PacketMirroringAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   PacketMirroringAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   PacketMirroringAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   PacketMirroringAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   PacketMirroringAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  PacketMirroringAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   PacketMirroringAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   PacketMirroringAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   PacketMirroringAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -23272,6 +26845,10 @@ pattern PacketMirroringList_Warning_Code_FIELDVALUEOVERRIDEN = PacketMirroringLi
 pattern PacketMirroringList_Warning_Code_INJECTEDKERNELSDEPRECATED :: PacketMirroringList_Warning_Code
 pattern PacketMirroringList_Warning_Code_INJECTEDKERNELSDEPRECATED = PacketMirroringList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern PacketMirroringList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: PacketMirroringList_Warning_Code
+pattern PacketMirroringList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = PacketMirroringList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern PacketMirroringList_Warning_Code_LARGEDEPLOYMENTWARNING :: PacketMirroringList_Warning_Code
 pattern PacketMirroringList_Warning_Code_LARGEDEPLOYMENTWARNING = PacketMirroringList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -23287,6 +26864,10 @@ pattern PacketMirroringList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = PacketMirro
 -- | The route\'s next hop instance cannot ip forward.
 pattern PacketMirroringList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: PacketMirroringList_Warning_Code
 pattern PacketMirroringList_Warning_Code_NEXTHOPCANNOTIPFORWARD = PacketMirroringList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern PacketMirroringList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: PacketMirroringList_Warning_Code
+pattern PacketMirroringList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = PacketMirroringList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern PacketMirroringList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: PacketMirroringList_Warning_Code
@@ -23349,10 +26930,12 @@ pattern PacketMirroringList_Warning_Code_Unreachable = PacketMirroringList_Warni
   PacketMirroringList_Warning_Code_EXTERNALAPIWARNING,
   PacketMirroringList_Warning_Code_FIELDVALUEOVERRIDEN,
   PacketMirroringList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  PacketMirroringList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   PacketMirroringList_Warning_Code_LARGEDEPLOYMENTWARNING,
   PacketMirroringList_Warning_Code_MISSINGTYPEDEPENDENCY,
   PacketMirroringList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   PacketMirroringList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  PacketMirroringList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   PacketMirroringList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   PacketMirroringList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   PacketMirroringList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -23414,6 +26997,10 @@ pattern PacketMirroringsScopedList_Warning_Code_FIELDVALUEOVERRIDEN = PacketMirr
 pattern PacketMirroringsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: PacketMirroringsScopedList_Warning_Code
 pattern PacketMirroringsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = PacketMirroringsScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern PacketMirroringsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: PacketMirroringsScopedList_Warning_Code
+pattern PacketMirroringsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = PacketMirroringsScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern PacketMirroringsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: PacketMirroringsScopedList_Warning_Code
 pattern PacketMirroringsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = PacketMirroringsScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -23429,6 +27016,10 @@ pattern PacketMirroringsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Pack
 -- | The route\'s next hop instance cannot ip forward.
 pattern PacketMirroringsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: PacketMirroringsScopedList_Warning_Code
 pattern PacketMirroringsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = PacketMirroringsScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern PacketMirroringsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: PacketMirroringsScopedList_Warning_Code
+pattern PacketMirroringsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = PacketMirroringsScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern PacketMirroringsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: PacketMirroringsScopedList_Warning_Code
@@ -23491,10 +27082,12 @@ pattern PacketMirroringsScopedList_Warning_Code_Unreachable = PacketMirroringsSc
   PacketMirroringsScopedList_Warning_Code_EXTERNALAPIWARNING,
   PacketMirroringsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   PacketMirroringsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  PacketMirroringsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   PacketMirroringsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   PacketMirroringsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   PacketMirroringsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   PacketMirroringsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  PacketMirroringsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   PacketMirroringsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   PacketMirroringsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   PacketMirroringsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -23511,7 +27104,7 @@ pattern PacketMirroringsScopedList_Warning_Code_Unreachable = PacketMirroringsSc
   PacketMirroringsScopedList_Warning_Code
   #-}
 
--- | The status of applying this per-instance config on the corresponding managed instance.
+-- | The status of applying this per-instance configuration on the corresponding managed instance.
 newtype PerInstanceConfig_Status = PerInstanceConfig_Status {fromPerInstanceConfig_Status :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -23524,27 +27117,27 @@ newtype PerInstanceConfig_Status = PerInstanceConfig_Status {fromPerInstanceConf
       Core.FromJSONKey
     )
 
--- | The per-instance config is being applied to the instance, but is not yet effective, possibly waiting for the instance to, for example, REFRESH.
+-- | The per-instance configuration is being applied to the instance, but is not yet effective, possibly waiting for the instance to, for example, REFRESH.
 pattern PerInstanceConfig_Status_Applying :: PerInstanceConfig_Status
 pattern PerInstanceConfig_Status_Applying = PerInstanceConfig_Status "APPLYING"
 
--- | The per-instance config deletion is being applied on the instance, possibly waiting for the instance to, for example, REFRESH.
+-- | The per-instance configuration deletion is being applied on the instance, possibly waiting for the instance to, for example, REFRESH.
 pattern PerInstanceConfig_Status_Deleting :: PerInstanceConfig_Status
 pattern PerInstanceConfig_Status_Deleting = PerInstanceConfig_Status "DELETING"
 
--- | The per-instance config is effective on the instance, meaning that all disks, ips and metadata specified in this config are attached or set on the instance.
+-- | The per-instance configuration is effective on the instance, meaning that all disks, ips and metadata specified in this configuration are attached or set on the instance.
 pattern PerInstanceConfig_Status_Effective :: PerInstanceConfig_Status
 pattern PerInstanceConfig_Status_Effective = PerInstanceConfig_Status "EFFECTIVE"
 
--- | /[Default]/ The default status, when no per-instance config exists.
+-- | /[Default]/ The default status, when no per-instance configuration exists.
 pattern PerInstanceConfig_Status_None :: PerInstanceConfig_Status
 pattern PerInstanceConfig_Status_None = PerInstanceConfig_Status "NONE"
 
--- | The per-instance config is set on an instance but not been applied yet.
+-- | The per-instance configuration is set on an instance but not been applied yet.
 pattern PerInstanceConfig_Status_Unapplied :: PerInstanceConfig_Status
 pattern PerInstanceConfig_Status_Unapplied = PerInstanceConfig_Status "UNAPPLIED"
 
--- | The per-instance config has been deleted, but the deletion is not yet applied.
+-- | The per-instance configuration has been deleted, but the deletion is not yet applied.
 pattern PerInstanceConfig_Status_UNAPPLIEDDELETION :: PerInstanceConfig_Status
 pattern PerInstanceConfig_Status_UNAPPLIEDDELETION = PerInstanceConfig_Status "UNAPPLIED_DELETION"
 
@@ -23647,6 +27240,43 @@ pattern Project_DefaultNetworkTier_STANDARDOVERRIDESFIXEDSTANDARD = Project_Defa
   Project_DefaultNetworkTier_Standard,
   Project_DefaultNetworkTier_STANDARDOVERRIDESFIXEDSTANDARD,
   Project_DefaultNetworkTier
+  #-}
+
+-- | [Output Only] Default internal DNS setting used by VMs running in this project.
+newtype Project_VmDnsSetting = Project_VmDnsSetting {fromProject_VmDnsSetting :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern Project_VmDnsSetting_GLOBALDEFAULT :: Project_VmDnsSetting
+pattern Project_VmDnsSetting_GLOBALDEFAULT = Project_VmDnsSetting "GLOBAL_DEFAULT"
+
+-- |
+pattern Project_VmDnsSetting_UNSPECIFIEDVMDNSSETTING :: Project_VmDnsSetting
+pattern Project_VmDnsSetting_UNSPECIFIEDVMDNSSETTING = Project_VmDnsSetting "UNSPECIFIED_VM_DNS_SETTING"
+
+-- |
+pattern Project_VmDnsSetting_ZONALDEFAULT :: Project_VmDnsSetting
+pattern Project_VmDnsSetting_ZONALDEFAULT = Project_VmDnsSetting "ZONAL_DEFAULT"
+
+-- |
+pattern Project_VmDnsSetting_ZONALONLY :: Project_VmDnsSetting
+pattern Project_VmDnsSetting_ZONALONLY = Project_VmDnsSetting "ZONAL_ONLY"
+
+{-# COMPLETE
+  Project_VmDnsSetting_GLOBALDEFAULT,
+  Project_VmDnsSetting_UNSPECIFIEDVMDNSSETTING,
+  Project_VmDnsSetting_ZONALDEFAULT,
+  Project_VmDnsSetting_ZONALONLY,
+  Project_VmDnsSetting
   #-}
 
 -- | [Output Only] The role this project has in a shared VPC configuration. Currently, only projects with the host role, which is specified by the value HOST, are differentiated.
@@ -23810,6 +27440,10 @@ pattern PublicAdvertisedPrefixList_Warning_Code_FIELDVALUEOVERRIDEN = PublicAdve
 pattern PublicAdvertisedPrefixList_Warning_Code_INJECTEDKERNELSDEPRECATED :: PublicAdvertisedPrefixList_Warning_Code
 pattern PublicAdvertisedPrefixList_Warning_Code_INJECTEDKERNELSDEPRECATED = PublicAdvertisedPrefixList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern PublicAdvertisedPrefixList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: PublicAdvertisedPrefixList_Warning_Code
+pattern PublicAdvertisedPrefixList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = PublicAdvertisedPrefixList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern PublicAdvertisedPrefixList_Warning_Code_LARGEDEPLOYMENTWARNING :: PublicAdvertisedPrefixList_Warning_Code
 pattern PublicAdvertisedPrefixList_Warning_Code_LARGEDEPLOYMENTWARNING = PublicAdvertisedPrefixList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -23825,6 +27459,10 @@ pattern PublicAdvertisedPrefixList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Publ
 -- | The route\'s next hop instance cannot ip forward.
 pattern PublicAdvertisedPrefixList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: PublicAdvertisedPrefixList_Warning_Code
 pattern PublicAdvertisedPrefixList_Warning_Code_NEXTHOPCANNOTIPFORWARD = PublicAdvertisedPrefixList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern PublicAdvertisedPrefixList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: PublicAdvertisedPrefixList_Warning_Code
+pattern PublicAdvertisedPrefixList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = PublicAdvertisedPrefixList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern PublicAdvertisedPrefixList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: PublicAdvertisedPrefixList_Warning_Code
@@ -23887,10 +27525,12 @@ pattern PublicAdvertisedPrefixList_Warning_Code_Unreachable = PublicAdvertisedPr
   PublicAdvertisedPrefixList_Warning_Code_EXTERNALAPIWARNING,
   PublicAdvertisedPrefixList_Warning_Code_FIELDVALUEOVERRIDEN,
   PublicAdvertisedPrefixList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  PublicAdvertisedPrefixList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   PublicAdvertisedPrefixList_Warning_Code_LARGEDEPLOYMENTWARNING,
   PublicAdvertisedPrefixList_Warning_Code_MISSINGTYPEDEPENDENCY,
   PublicAdvertisedPrefixList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   PublicAdvertisedPrefixList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  PublicAdvertisedPrefixList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   PublicAdvertisedPrefixList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   PublicAdvertisedPrefixList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   PublicAdvertisedPrefixList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -23989,6 +27629,10 @@ pattern PublicDelegatedPrefixAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = P
 pattern PublicDelegatedPrefixAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: PublicDelegatedPrefixAggregatedList_Warning_Code
 pattern PublicDelegatedPrefixAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = PublicDelegatedPrefixAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern PublicDelegatedPrefixAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: PublicDelegatedPrefixAggregatedList_Warning_Code
+pattern PublicDelegatedPrefixAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = PublicDelegatedPrefixAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern PublicDelegatedPrefixAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: PublicDelegatedPrefixAggregatedList_Warning_Code
 pattern PublicDelegatedPrefixAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = PublicDelegatedPrefixAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -24004,6 +27648,10 @@ pattern PublicDelegatedPrefixAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGN
 -- | The route\'s next hop instance cannot ip forward.
 pattern PublicDelegatedPrefixAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: PublicDelegatedPrefixAggregatedList_Warning_Code
 pattern PublicDelegatedPrefixAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = PublicDelegatedPrefixAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern PublicDelegatedPrefixAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: PublicDelegatedPrefixAggregatedList_Warning_Code
+pattern PublicDelegatedPrefixAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = PublicDelegatedPrefixAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern PublicDelegatedPrefixAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: PublicDelegatedPrefixAggregatedList_Warning_Code
@@ -24066,10 +27714,12 @@ pattern PublicDelegatedPrefixAggregatedList_Warning_Code_Unreachable = PublicDel
   PublicDelegatedPrefixAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   PublicDelegatedPrefixAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   PublicDelegatedPrefixAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  PublicDelegatedPrefixAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   PublicDelegatedPrefixAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   PublicDelegatedPrefixAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   PublicDelegatedPrefixAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   PublicDelegatedPrefixAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  PublicDelegatedPrefixAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   PublicDelegatedPrefixAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   PublicDelegatedPrefixAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   PublicDelegatedPrefixAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -24131,6 +27781,10 @@ pattern PublicDelegatedPrefixList_Warning_Code_FIELDVALUEOVERRIDEN = PublicDeleg
 pattern PublicDelegatedPrefixList_Warning_Code_INJECTEDKERNELSDEPRECATED :: PublicDelegatedPrefixList_Warning_Code
 pattern PublicDelegatedPrefixList_Warning_Code_INJECTEDKERNELSDEPRECATED = PublicDelegatedPrefixList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern PublicDelegatedPrefixList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: PublicDelegatedPrefixList_Warning_Code
+pattern PublicDelegatedPrefixList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = PublicDelegatedPrefixList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern PublicDelegatedPrefixList_Warning_Code_LARGEDEPLOYMENTWARNING :: PublicDelegatedPrefixList_Warning_Code
 pattern PublicDelegatedPrefixList_Warning_Code_LARGEDEPLOYMENTWARNING = PublicDelegatedPrefixList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -24146,6 +27800,10 @@ pattern PublicDelegatedPrefixList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Publi
 -- | The route\'s next hop instance cannot ip forward.
 pattern PublicDelegatedPrefixList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: PublicDelegatedPrefixList_Warning_Code
 pattern PublicDelegatedPrefixList_Warning_Code_NEXTHOPCANNOTIPFORWARD = PublicDelegatedPrefixList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern PublicDelegatedPrefixList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: PublicDelegatedPrefixList_Warning_Code
+pattern PublicDelegatedPrefixList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = PublicDelegatedPrefixList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern PublicDelegatedPrefixList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: PublicDelegatedPrefixList_Warning_Code
@@ -24208,10 +27866,12 @@ pattern PublicDelegatedPrefixList_Warning_Code_Unreachable = PublicDelegatedPref
   PublicDelegatedPrefixList_Warning_Code_EXTERNALAPIWARNING,
   PublicDelegatedPrefixList_Warning_Code_FIELDVALUEOVERRIDEN,
   PublicDelegatedPrefixList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  PublicDelegatedPrefixList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   PublicDelegatedPrefixList_Warning_Code_LARGEDEPLOYMENTWARNING,
   PublicDelegatedPrefixList_Warning_Code_MISSINGTYPEDEPENDENCY,
   PublicDelegatedPrefixList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   PublicDelegatedPrefixList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  PublicDelegatedPrefixList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   PublicDelegatedPrefixList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   PublicDelegatedPrefixList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   PublicDelegatedPrefixList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -24300,6 +27960,10 @@ pattern PublicDelegatedPrefixesScopedList_Warning_Code_FIELDVALUEOVERRIDEN = Pub
 pattern PublicDelegatedPrefixesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: PublicDelegatedPrefixesScopedList_Warning_Code
 pattern PublicDelegatedPrefixesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = PublicDelegatedPrefixesScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern PublicDelegatedPrefixesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: PublicDelegatedPrefixesScopedList_Warning_Code
+pattern PublicDelegatedPrefixesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = PublicDelegatedPrefixesScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern PublicDelegatedPrefixesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: PublicDelegatedPrefixesScopedList_Warning_Code
 pattern PublicDelegatedPrefixesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = PublicDelegatedPrefixesScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -24315,6 +27979,10 @@ pattern PublicDelegatedPrefixesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED
 -- | The route\'s next hop instance cannot ip forward.
 pattern PublicDelegatedPrefixesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: PublicDelegatedPrefixesScopedList_Warning_Code
 pattern PublicDelegatedPrefixesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = PublicDelegatedPrefixesScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern PublicDelegatedPrefixesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: PublicDelegatedPrefixesScopedList_Warning_Code
+pattern PublicDelegatedPrefixesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = PublicDelegatedPrefixesScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern PublicDelegatedPrefixesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: PublicDelegatedPrefixesScopedList_Warning_Code
@@ -24377,10 +28045,12 @@ pattern PublicDelegatedPrefixesScopedList_Warning_Code_Unreachable = PublicDeleg
   PublicDelegatedPrefixesScopedList_Warning_Code_EXTERNALAPIWARNING,
   PublicDelegatedPrefixesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   PublicDelegatedPrefixesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  PublicDelegatedPrefixesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   PublicDelegatedPrefixesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   PublicDelegatedPrefixesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   PublicDelegatedPrefixesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   PublicDelegatedPrefixesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  PublicDelegatedPrefixesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   PublicDelegatedPrefixesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   PublicDelegatedPrefixesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   PublicDelegatedPrefixesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -24499,6 +28169,10 @@ pattern Quota_Metric_COMMITTEDN2CPUS :: Quota_Metric
 pattern Quota_Metric_COMMITTEDN2CPUS = Quota_Metric "COMMITTED_N2_CPUS"
 
 -- |
+pattern Quota_Metric_COMMITTEDNVIDIAA10080GBGPUS :: Quota_Metric
+pattern Quota_Metric_COMMITTEDNVIDIAA10080GBGPUS = Quota_Metric "COMMITTED_NVIDIA_A100_80GB_GPUS"
+
+-- |
 pattern Quota_Metric_COMMITTEDNVIDIAA100GPUS :: Quota_Metric
 pattern Quota_Metric_COMMITTEDNVIDIAA100GPUS = Quota_Metric "COMMITTED_NVIDIA_A100_GPUS"
 
@@ -24571,12 +28245,28 @@ pattern Quota_Metric_FORWARDINGRULES :: Quota_Metric
 pattern Quota_Metric_FORWARDINGRULES = Quota_Metric "FORWARDING_RULES"
 
 -- |
+pattern Quota_Metric_GLOBALEXTERNALMANAGEDBACKENDSERVICES :: Quota_Metric
+pattern Quota_Metric_GLOBALEXTERNALMANAGEDBACKENDSERVICES = Quota_Metric "GLOBAL_EXTERNAL_MANAGED_BACKEND_SERVICES"
+
+-- |
 pattern Quota_Metric_GLOBALEXTERNALMANAGEDFORWARDINGRULES :: Quota_Metric
 pattern Quota_Metric_GLOBALEXTERNALMANAGEDFORWARDINGRULES = Quota_Metric "GLOBAL_EXTERNAL_MANAGED_FORWARDING_RULES"
 
 -- |
+pattern Quota_Metric_GLOBALEXTERNALPROXYLBBACKENDSERVICES :: Quota_Metric
+pattern Quota_Metric_GLOBALEXTERNALPROXYLBBACKENDSERVICES = Quota_Metric "GLOBAL_EXTERNAL_PROXY_LB_BACKEND_SERVICES"
+
+-- |
 pattern Quota_Metric_GLOBALINTERNALADDRESSES :: Quota_Metric
 pattern Quota_Metric_GLOBALINTERNALADDRESSES = Quota_Metric "GLOBAL_INTERNAL_ADDRESSES"
+
+-- |
+pattern Quota_Metric_GLOBALINTERNALMANAGEDBACKENDSERVICES :: Quota_Metric
+pattern Quota_Metric_GLOBALINTERNALMANAGEDBACKENDSERVICES = Quota_Metric "GLOBAL_INTERNAL_MANAGED_BACKEND_SERVICES"
+
+-- |
+pattern Quota_Metric_GLOBALINTERNALTRAFFICDIRECTORBACKENDSERVICES :: Quota_Metric
+pattern Quota_Metric_GLOBALINTERNALTRAFFICDIRECTORBACKENDSERVICES = Quota_Metric "GLOBAL_INTERNAL_TRAFFIC_DIRECTOR_BACKEND_SERVICES"
 
 -- |
 pattern Quota_Metric_GPUSALLREGIONS :: Quota_Metric
@@ -24683,6 +28373,10 @@ pattern Quota_Metric_Networks :: Quota_Metric
 pattern Quota_Metric_Networks = Quota_Metric "NETWORKS"
 
 -- |
+pattern Quota_Metric_NETWORKATTACHMENTS :: Quota_Metric
+pattern Quota_Metric_NETWORKATTACHMENTS = Quota_Metric "NETWORK_ATTACHMENTS"
+
+-- |
 pattern Quota_Metric_NETWORKENDPOINTGROUPS :: Quota_Metric
 pattern Quota_Metric_NETWORKENDPOINTGROUPS = Quota_Metric "NETWORK_ENDPOINT_GROUPS"
 
@@ -24697,6 +28391,10 @@ pattern Quota_Metric_NODEGROUPS = Quota_Metric "NODE_GROUPS"
 -- |
 pattern Quota_Metric_NODETEMPLATES :: Quota_Metric
 pattern Quota_Metric_NODETEMPLATES = Quota_Metric "NODE_TEMPLATES"
+
+-- |
+pattern Quota_Metric_NVIDIAA10080GBGPUS :: Quota_Metric
+pattern Quota_Metric_NVIDIAA10080GBGPUS = Quota_Metric "NVIDIA_A100_80GB_GPUS"
 
 -- |
 pattern Quota_Metric_NVIDIAA100GPUS :: Quota_Metric
@@ -24749,6 +28447,10 @@ pattern Quota_Metric_PREEMPTIBLECPUS = Quota_Metric "PREEMPTIBLE_CPUS"
 -- |
 pattern Quota_Metric_PREEMPTIBLELOCALSSDGB :: Quota_Metric
 pattern Quota_Metric_PREEMPTIBLELOCALSSDGB = Quota_Metric "PREEMPTIBLE_LOCAL_SSD_GB"
+
+-- |
+pattern Quota_Metric_PREEMPTIBLENVIDIAA10080GBGPUS :: Quota_Metric
+pattern Quota_Metric_PREEMPTIBLENVIDIAA10080GBGPUS = Quota_Metric "PREEMPTIBLE_NVIDIA_A100_80GB_GPUS"
 
 -- |
 pattern Quota_Metric_PREEMPTIBLENVIDIAA100GPUS :: Quota_Metric
@@ -24807,8 +28509,24 @@ pattern Quota_Metric_REGIONALAUTOSCALERS :: Quota_Metric
 pattern Quota_Metric_REGIONALAUTOSCALERS = Quota_Metric "REGIONAL_AUTOSCALERS"
 
 -- |
+pattern Quota_Metric_REGIONALEXTERNALMANAGEDBACKENDSERVICES :: Quota_Metric
+pattern Quota_Metric_REGIONALEXTERNALMANAGEDBACKENDSERVICES = Quota_Metric "REGIONAL_EXTERNAL_MANAGED_BACKEND_SERVICES"
+
+-- |
+pattern Quota_Metric_REGIONALEXTERNALNETWORKLBBACKENDSERVICES :: Quota_Metric
+pattern Quota_Metric_REGIONALEXTERNALNETWORKLBBACKENDSERVICES = Quota_Metric "REGIONAL_EXTERNAL_NETWORK_LB_BACKEND_SERVICES"
+
+-- |
 pattern Quota_Metric_REGIONALINSTANCEGROUPMANAGERS :: Quota_Metric
 pattern Quota_Metric_REGIONALINSTANCEGROUPMANAGERS = Quota_Metric "REGIONAL_INSTANCE_GROUP_MANAGERS"
+
+-- |
+pattern Quota_Metric_REGIONALINTERNALLBBACKENDSERVICES :: Quota_Metric
+pattern Quota_Metric_REGIONALINTERNALLBBACKENDSERVICES = Quota_Metric "REGIONAL_INTERNAL_LB_BACKEND_SERVICES"
+
+-- |
+pattern Quota_Metric_REGIONALINTERNALMANAGEDBACKENDSERVICES :: Quota_Metric
+pattern Quota_Metric_REGIONALINTERNALMANAGEDBACKENDSERVICES = Quota_Metric "REGIONAL_INTERNAL_MANAGED_BACKEND_SERVICES"
 
 -- |
 pattern Quota_Metric_Reservations :: Quota_Metric
@@ -24869,6 +28587,10 @@ pattern Quota_Metric_STATICADDRESSES = Quota_Metric "STATIC_ADDRESSES"
 -- |
 pattern Quota_Metric_STATICBYOIPADDRESSES :: Quota_Metric
 pattern Quota_Metric_STATICBYOIPADDRESSES = Quota_Metric "STATIC_BYOIP_ADDRESSES"
+
+-- |
+pattern Quota_Metric_STATICEXTERNALIPV6ADDRESSRANGES :: Quota_Metric
+pattern Quota_Metric_STATICEXTERNALIPV6ADDRESSRANGES = Quota_Metric "STATIC_EXTERNAL_IPV6_ADDRESS_RANGES"
 
 -- |
 pattern Quota_Metric_Subnetworks :: Quota_Metric
@@ -24949,6 +28671,7 @@ pattern Quota_Metric_XPNSERVICEPROJECTS = Quota_Metric "XPN_SERVICE_PROJECTS"
   Quota_Metric_COMMITTEDN2ACPUS,
   Quota_Metric_COMMITTEDN2DCPUS,
   Quota_Metric_COMMITTEDN2CPUS,
+  Quota_Metric_COMMITTEDNVIDIAA10080GBGPUS,
   Quota_Metric_COMMITTEDNVIDIAA100GPUS,
   Quota_Metric_COMMITTEDNVIDIAK80GPUS,
   Quota_Metric_COMMITTEDNVIDIAP100GPUS,
@@ -24967,8 +28690,12 @@ pattern Quota_Metric_XPNSERVICEPROJECTS = Quota_Metric "XPN_SERVICE_PROJECTS"
   Quota_Metric_EXTERNALVPNGATEWAYS,
   Quota_Metric_Firewalls,
   Quota_Metric_FORWARDINGRULES,
+  Quota_Metric_GLOBALEXTERNALMANAGEDBACKENDSERVICES,
   Quota_Metric_GLOBALEXTERNALMANAGEDFORWARDINGRULES,
+  Quota_Metric_GLOBALEXTERNALPROXYLBBACKENDSERVICES,
   Quota_Metric_GLOBALINTERNALADDRESSES,
+  Quota_Metric_GLOBALINTERNALMANAGEDBACKENDSERVICES,
+  Quota_Metric_GLOBALINTERNALTRAFFICDIRECTORBACKENDSERVICES,
   Quota_Metric_GPUSALLREGIONS,
   Quota_Metric_HEALTHCHECKS,
   Quota_Metric_Images,
@@ -24995,10 +28722,12 @@ pattern Quota_Metric_XPNSERVICEPROJECTS = Quota_Metric "XPN_SERVICE_PROJECTS"
   Quota_Metric_N2DCPUS,
   Quota_Metric_N2CPUS,
   Quota_Metric_Networks,
+  Quota_Metric_NETWORKATTACHMENTS,
   Quota_Metric_NETWORKENDPOINTGROUPS,
   Quota_Metric_NETWORKFIREWALLPOLICIES,
   Quota_Metric_NODEGROUPS,
   Quota_Metric_NODETEMPLATES,
+  Quota_Metric_NVIDIAA10080GBGPUS,
   Quota_Metric_NVIDIAA100GPUS,
   Quota_Metric_NVIDIAK80GPUS,
   Quota_Metric_NVIDIAP100GPUS,
@@ -25012,6 +28741,7 @@ pattern Quota_Metric_XPNSERVICEPROJECTS = Quota_Metric "XPN_SERVICE_PROJECTS"
   Quota_Metric_PDEXTREMETOTALPROVISIONEDIOPS,
   Quota_Metric_PREEMPTIBLECPUS,
   Quota_Metric_PREEMPTIBLELOCALSSDGB,
+  Quota_Metric_PREEMPTIBLENVIDIAA10080GBGPUS,
   Quota_Metric_PREEMPTIBLENVIDIAA100GPUS,
   Quota_Metric_PREEMPTIBLENVIDIAK80GPUS,
   Quota_Metric_PREEMPTIBLENVIDIAP100GPUS,
@@ -25026,7 +28756,11 @@ pattern Quota_Metric_XPNSERVICEPROJECTS = Quota_Metric "XPN_SERVICE_PROJECTS"
   Quota_Metric_PUBLICADVERTISEDPREFIXES,
   Quota_Metric_PUBLICDELEGATEDPREFIXES,
   Quota_Metric_REGIONALAUTOSCALERS,
+  Quota_Metric_REGIONALEXTERNALMANAGEDBACKENDSERVICES,
+  Quota_Metric_REGIONALEXTERNALNETWORKLBBACKENDSERVICES,
   Quota_Metric_REGIONALINSTANCEGROUPMANAGERS,
+  Quota_Metric_REGIONALINTERNALLBBACKENDSERVICES,
+  Quota_Metric_REGIONALINTERNALMANAGEDBACKENDSERVICES,
   Quota_Metric_Reservations,
   Quota_Metric_RESOURCEPOLICIES,
   Quota_Metric_Routers,
@@ -25042,6 +28776,7 @@ pattern Quota_Metric_XPNSERVICEPROJECTS = Quota_Metric "XPN_SERVICE_PROJECTS"
   Quota_Metric_SSLCERTIFICATES,
   Quota_Metric_STATICADDRESSES,
   Quota_Metric_STATICBYOIPADDRESSES,
+  Quota_Metric_STATICEXTERNALIPV6ADDRESSRANGES,
   Quota_Metric_Subnetworks,
   Quota_Metric_T2ACPUS,
   Quota_Metric_T2DCPUS,
@@ -25131,6 +28866,10 @@ pattern RegionAutoscalerList_Warning_Code_FIELDVALUEOVERRIDEN = RegionAutoscaler
 pattern RegionAutoscalerList_Warning_Code_INJECTEDKERNELSDEPRECATED :: RegionAutoscalerList_Warning_Code
 pattern RegionAutoscalerList_Warning_Code_INJECTEDKERNELSDEPRECATED = RegionAutoscalerList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern RegionAutoscalerList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: RegionAutoscalerList_Warning_Code
+pattern RegionAutoscalerList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = RegionAutoscalerList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern RegionAutoscalerList_Warning_Code_LARGEDEPLOYMENTWARNING :: RegionAutoscalerList_Warning_Code
 pattern RegionAutoscalerList_Warning_Code_LARGEDEPLOYMENTWARNING = RegionAutoscalerList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -25146,6 +28885,10 @@ pattern RegionAutoscalerList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = RegionAuto
 -- | The route\'s next hop instance cannot ip forward.
 pattern RegionAutoscalerList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: RegionAutoscalerList_Warning_Code
 pattern RegionAutoscalerList_Warning_Code_NEXTHOPCANNOTIPFORWARD = RegionAutoscalerList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern RegionAutoscalerList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: RegionAutoscalerList_Warning_Code
+pattern RegionAutoscalerList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = RegionAutoscalerList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern RegionAutoscalerList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: RegionAutoscalerList_Warning_Code
@@ -25208,10 +28951,12 @@ pattern RegionAutoscalerList_Warning_Code_Unreachable = RegionAutoscalerList_War
   RegionAutoscalerList_Warning_Code_EXTERNALAPIWARNING,
   RegionAutoscalerList_Warning_Code_FIELDVALUEOVERRIDEN,
   RegionAutoscalerList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  RegionAutoscalerList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   RegionAutoscalerList_Warning_Code_LARGEDEPLOYMENTWARNING,
   RegionAutoscalerList_Warning_Code_MISSINGTYPEDEPENDENCY,
   RegionAutoscalerList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   RegionAutoscalerList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  RegionAutoscalerList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   RegionAutoscalerList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   RegionAutoscalerList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   RegionAutoscalerList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -25273,6 +29018,10 @@ pattern RegionDiskTypeList_Warning_Code_FIELDVALUEOVERRIDEN = RegionDiskTypeList
 pattern RegionDiskTypeList_Warning_Code_INJECTEDKERNELSDEPRECATED :: RegionDiskTypeList_Warning_Code
 pattern RegionDiskTypeList_Warning_Code_INJECTEDKERNELSDEPRECATED = RegionDiskTypeList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern RegionDiskTypeList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: RegionDiskTypeList_Warning_Code
+pattern RegionDiskTypeList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = RegionDiskTypeList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern RegionDiskTypeList_Warning_Code_LARGEDEPLOYMENTWARNING :: RegionDiskTypeList_Warning_Code
 pattern RegionDiskTypeList_Warning_Code_LARGEDEPLOYMENTWARNING = RegionDiskTypeList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -25288,6 +29037,10 @@ pattern RegionDiskTypeList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = RegionDiskTy
 -- | The route\'s next hop instance cannot ip forward.
 pattern RegionDiskTypeList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: RegionDiskTypeList_Warning_Code
 pattern RegionDiskTypeList_Warning_Code_NEXTHOPCANNOTIPFORWARD = RegionDiskTypeList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern RegionDiskTypeList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: RegionDiskTypeList_Warning_Code
+pattern RegionDiskTypeList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = RegionDiskTypeList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern RegionDiskTypeList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: RegionDiskTypeList_Warning_Code
@@ -25350,10 +29103,12 @@ pattern RegionDiskTypeList_Warning_Code_Unreachable = RegionDiskTypeList_Warning
   RegionDiskTypeList_Warning_Code_EXTERNALAPIWARNING,
   RegionDiskTypeList_Warning_Code_FIELDVALUEOVERRIDEN,
   RegionDiskTypeList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  RegionDiskTypeList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   RegionDiskTypeList_Warning_Code_LARGEDEPLOYMENTWARNING,
   RegionDiskTypeList_Warning_Code_MISSINGTYPEDEPENDENCY,
   RegionDiskTypeList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   RegionDiskTypeList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  RegionDiskTypeList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   RegionDiskTypeList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   RegionDiskTypeList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   RegionDiskTypeList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -25415,6 +29170,10 @@ pattern RegionInstanceGroupList_Warning_Code_FIELDVALUEOVERRIDEN = RegionInstanc
 pattern RegionInstanceGroupList_Warning_Code_INJECTEDKERNELSDEPRECATED :: RegionInstanceGroupList_Warning_Code
 pattern RegionInstanceGroupList_Warning_Code_INJECTEDKERNELSDEPRECATED = RegionInstanceGroupList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern RegionInstanceGroupList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: RegionInstanceGroupList_Warning_Code
+pattern RegionInstanceGroupList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = RegionInstanceGroupList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern RegionInstanceGroupList_Warning_Code_LARGEDEPLOYMENTWARNING :: RegionInstanceGroupList_Warning_Code
 pattern RegionInstanceGroupList_Warning_Code_LARGEDEPLOYMENTWARNING = RegionInstanceGroupList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -25430,6 +29189,10 @@ pattern RegionInstanceGroupList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = RegionI
 -- | The route\'s next hop instance cannot ip forward.
 pattern RegionInstanceGroupList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: RegionInstanceGroupList_Warning_Code
 pattern RegionInstanceGroupList_Warning_Code_NEXTHOPCANNOTIPFORWARD = RegionInstanceGroupList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern RegionInstanceGroupList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: RegionInstanceGroupList_Warning_Code
+pattern RegionInstanceGroupList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = RegionInstanceGroupList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern RegionInstanceGroupList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: RegionInstanceGroupList_Warning_Code
@@ -25492,10 +29255,12 @@ pattern RegionInstanceGroupList_Warning_Code_Unreachable = RegionInstanceGroupLi
   RegionInstanceGroupList_Warning_Code_EXTERNALAPIWARNING,
   RegionInstanceGroupList_Warning_Code_FIELDVALUEOVERRIDEN,
   RegionInstanceGroupList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  RegionInstanceGroupList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   RegionInstanceGroupList_Warning_Code_LARGEDEPLOYMENTWARNING,
   RegionInstanceGroupList_Warning_Code_MISSINGTYPEDEPENDENCY,
   RegionInstanceGroupList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   RegionInstanceGroupList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  RegionInstanceGroupList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   RegionInstanceGroupList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   RegionInstanceGroupList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   RegionInstanceGroupList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -25557,6 +29322,10 @@ pattern RegionInstanceGroupManagerList_Warning_Code_FIELDVALUEOVERRIDEN = Region
 pattern RegionInstanceGroupManagerList_Warning_Code_INJECTEDKERNELSDEPRECATED :: RegionInstanceGroupManagerList_Warning_Code
 pattern RegionInstanceGroupManagerList_Warning_Code_INJECTEDKERNELSDEPRECATED = RegionInstanceGroupManagerList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern RegionInstanceGroupManagerList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: RegionInstanceGroupManagerList_Warning_Code
+pattern RegionInstanceGroupManagerList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = RegionInstanceGroupManagerList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern RegionInstanceGroupManagerList_Warning_Code_LARGEDEPLOYMENTWARNING :: RegionInstanceGroupManagerList_Warning_Code
 pattern RegionInstanceGroupManagerList_Warning_Code_LARGEDEPLOYMENTWARNING = RegionInstanceGroupManagerList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -25572,6 +29341,10 @@ pattern RegionInstanceGroupManagerList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = 
 -- | The route\'s next hop instance cannot ip forward.
 pattern RegionInstanceGroupManagerList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: RegionInstanceGroupManagerList_Warning_Code
 pattern RegionInstanceGroupManagerList_Warning_Code_NEXTHOPCANNOTIPFORWARD = RegionInstanceGroupManagerList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern RegionInstanceGroupManagerList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: RegionInstanceGroupManagerList_Warning_Code
+pattern RegionInstanceGroupManagerList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = RegionInstanceGroupManagerList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern RegionInstanceGroupManagerList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: RegionInstanceGroupManagerList_Warning_Code
@@ -25634,10 +29407,12 @@ pattern RegionInstanceGroupManagerList_Warning_Code_Unreachable = RegionInstance
   RegionInstanceGroupManagerList_Warning_Code_EXTERNALAPIWARNING,
   RegionInstanceGroupManagerList_Warning_Code_FIELDVALUEOVERRIDEN,
   RegionInstanceGroupManagerList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  RegionInstanceGroupManagerList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   RegionInstanceGroupManagerList_Warning_Code_LARGEDEPLOYMENTWARNING,
   RegionInstanceGroupManagerList_Warning_Code_MISSINGTYPEDEPENDENCY,
   RegionInstanceGroupManagerList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   RegionInstanceGroupManagerList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  RegionInstanceGroupManagerList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   RegionInstanceGroupManagerList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   RegionInstanceGroupManagerList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   RegionInstanceGroupManagerList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -25773,6 +29548,10 @@ pattern RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_FIELDVAL
 pattern RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_INJECTEDKERNELSDEPRECATED :: RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code
 pattern RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_INJECTEDKERNELSDEPRECATED = RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code
+pattern RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_LARGEDEPLOYMENTWARNING :: RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code
 pattern RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_LARGEDEPLOYMENTWARNING = RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -25788,6 +29567,10 @@ pattern RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_NEXTHOPA
 -- | The route\'s next hop instance cannot ip forward.
 pattern RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_NEXTHOPCANNOTIPFORWARD :: RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code
 pattern RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_NEXTHOPCANNOTIPFORWARD = RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code
+pattern RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_NEXTHOPINSTANCENOTFOUND :: RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code
@@ -25850,10 +29633,12 @@ pattern RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_Unreacha
   RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_EXTERNALAPIWARNING,
   RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_FIELDVALUEOVERRIDEN,
   RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_LARGEDEPLOYMENTWARNING,
   RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_MISSINGTYPEDEPENDENCY,
   RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   RegionInstanceGroupManagersListInstanceConfigsResp_Warning_Code_NEXTHOPNOTRUNNING,
@@ -25915,6 +29700,10 @@ pattern RegionInstanceGroupsListInstances_Warning_Code_FIELDVALUEOVERRIDEN = Reg
 pattern RegionInstanceGroupsListInstances_Warning_Code_INJECTEDKERNELSDEPRECATED :: RegionInstanceGroupsListInstances_Warning_Code
 pattern RegionInstanceGroupsListInstances_Warning_Code_INJECTEDKERNELSDEPRECATED = RegionInstanceGroupsListInstances_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern RegionInstanceGroupsListInstances_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: RegionInstanceGroupsListInstances_Warning_Code
+pattern RegionInstanceGroupsListInstances_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = RegionInstanceGroupsListInstances_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern RegionInstanceGroupsListInstances_Warning_Code_LARGEDEPLOYMENTWARNING :: RegionInstanceGroupsListInstances_Warning_Code
 pattern RegionInstanceGroupsListInstances_Warning_Code_LARGEDEPLOYMENTWARNING = RegionInstanceGroupsListInstances_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -25930,6 +29719,10 @@ pattern RegionInstanceGroupsListInstances_Warning_Code_NEXTHOPADDRESSNOTASSIGNED
 -- | The route\'s next hop instance cannot ip forward.
 pattern RegionInstanceGroupsListInstances_Warning_Code_NEXTHOPCANNOTIPFORWARD :: RegionInstanceGroupsListInstances_Warning_Code
 pattern RegionInstanceGroupsListInstances_Warning_Code_NEXTHOPCANNOTIPFORWARD = RegionInstanceGroupsListInstances_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern RegionInstanceGroupsListInstances_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: RegionInstanceGroupsListInstances_Warning_Code
+pattern RegionInstanceGroupsListInstances_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = RegionInstanceGroupsListInstances_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern RegionInstanceGroupsListInstances_Warning_Code_NEXTHOPINSTANCENOTFOUND :: RegionInstanceGroupsListInstances_Warning_Code
@@ -25992,10 +29785,12 @@ pattern RegionInstanceGroupsListInstances_Warning_Code_Unreachable = RegionInsta
   RegionInstanceGroupsListInstances_Warning_Code_EXTERNALAPIWARNING,
   RegionInstanceGroupsListInstances_Warning_Code_FIELDVALUEOVERRIDEN,
   RegionInstanceGroupsListInstances_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  RegionInstanceGroupsListInstances_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   RegionInstanceGroupsListInstances_Warning_Code_LARGEDEPLOYMENTWARNING,
   RegionInstanceGroupsListInstances_Warning_Code_MISSINGTYPEDEPENDENCY,
   RegionInstanceGroupsListInstances_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   RegionInstanceGroupsListInstances_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  RegionInstanceGroupsListInstances_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   RegionInstanceGroupsListInstances_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   RegionInstanceGroupsListInstances_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   RegionInstanceGroupsListInstances_Warning_Code_NEXTHOPNOTRUNNING,
@@ -26084,6 +29879,10 @@ pattern RegionList_Warning_Code_FIELDVALUEOVERRIDEN = RegionList_Warning_Code "F
 pattern RegionList_Warning_Code_INJECTEDKERNELSDEPRECATED :: RegionList_Warning_Code
 pattern RegionList_Warning_Code_INJECTEDKERNELSDEPRECATED = RegionList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern RegionList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: RegionList_Warning_Code
+pattern RegionList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = RegionList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern RegionList_Warning_Code_LARGEDEPLOYMENTWARNING :: RegionList_Warning_Code
 pattern RegionList_Warning_Code_LARGEDEPLOYMENTWARNING = RegionList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -26099,6 +29898,10 @@ pattern RegionList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = RegionList_Warning_C
 -- | The route\'s next hop instance cannot ip forward.
 pattern RegionList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: RegionList_Warning_Code
 pattern RegionList_Warning_Code_NEXTHOPCANNOTIPFORWARD = RegionList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern RegionList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: RegionList_Warning_Code
+pattern RegionList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = RegionList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern RegionList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: RegionList_Warning_Code
@@ -26161,10 +29964,12 @@ pattern RegionList_Warning_Code_Unreachable = RegionList_Warning_Code "UNREACHAB
   RegionList_Warning_Code_EXTERNALAPIWARNING,
   RegionList_Warning_Code_FIELDVALUEOVERRIDEN,
   RegionList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  RegionList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   RegionList_Warning_Code_LARGEDEPLOYMENTWARNING,
   RegionList_Warning_Code_MISSINGTYPEDEPENDENCY,
   RegionList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   RegionList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  RegionList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   RegionList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   RegionList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   RegionList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -26342,6 +30147,10 @@ pattern ReservationAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = Reservation
 pattern ReservationAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: ReservationAggregatedList_Warning_Code
 pattern ReservationAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = ReservationAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern ReservationAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: ReservationAggregatedList_Warning_Code
+pattern ReservationAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = ReservationAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern ReservationAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: ReservationAggregatedList_Warning_Code
 pattern ReservationAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = ReservationAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -26357,6 +30166,10 @@ pattern ReservationAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Reser
 -- | The route\'s next hop instance cannot ip forward.
 pattern ReservationAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: ReservationAggregatedList_Warning_Code
 pattern ReservationAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = ReservationAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern ReservationAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: ReservationAggregatedList_Warning_Code
+pattern ReservationAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = ReservationAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern ReservationAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: ReservationAggregatedList_Warning_Code
@@ -26419,10 +30232,12 @@ pattern ReservationAggregatedList_Warning_Code_Unreachable = ReservationAggregat
   ReservationAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   ReservationAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   ReservationAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  ReservationAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   ReservationAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   ReservationAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   ReservationAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   ReservationAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  ReservationAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   ReservationAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   ReservationAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   ReservationAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -26484,6 +30299,10 @@ pattern ReservationList_Warning_Code_FIELDVALUEOVERRIDEN = ReservationList_Warni
 pattern ReservationList_Warning_Code_INJECTEDKERNELSDEPRECATED :: ReservationList_Warning_Code
 pattern ReservationList_Warning_Code_INJECTEDKERNELSDEPRECATED = ReservationList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern ReservationList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: ReservationList_Warning_Code
+pattern ReservationList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = ReservationList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern ReservationList_Warning_Code_LARGEDEPLOYMENTWARNING :: ReservationList_Warning_Code
 pattern ReservationList_Warning_Code_LARGEDEPLOYMENTWARNING = ReservationList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -26499,6 +30318,10 @@ pattern ReservationList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = ReservationList
 -- | The route\'s next hop instance cannot ip forward.
 pattern ReservationList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: ReservationList_Warning_Code
 pattern ReservationList_Warning_Code_NEXTHOPCANNOTIPFORWARD = ReservationList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern ReservationList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: ReservationList_Warning_Code
+pattern ReservationList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = ReservationList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern ReservationList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: ReservationList_Warning_Code
@@ -26561,10 +30384,12 @@ pattern ReservationList_Warning_Code_Unreachable = ReservationList_Warning_Code 
   ReservationList_Warning_Code_EXTERNALAPIWARNING,
   ReservationList_Warning_Code_FIELDVALUEOVERRIDEN,
   ReservationList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  ReservationList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   ReservationList_Warning_Code_LARGEDEPLOYMENTWARNING,
   ReservationList_Warning_Code_MISSINGTYPEDEPENDENCY,
   ReservationList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   ReservationList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  ReservationList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   ReservationList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   ReservationList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   ReservationList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -26626,6 +30451,10 @@ pattern ReservationsScopedList_Warning_Code_FIELDVALUEOVERRIDEN = ReservationsSc
 pattern ReservationsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: ReservationsScopedList_Warning_Code
 pattern ReservationsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = ReservationsScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern ReservationsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: ReservationsScopedList_Warning_Code
+pattern ReservationsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = ReservationsScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern ReservationsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: ReservationsScopedList_Warning_Code
 pattern ReservationsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = ReservationsScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -26641,6 +30470,10 @@ pattern ReservationsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Reservat
 -- | The route\'s next hop instance cannot ip forward.
 pattern ReservationsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: ReservationsScopedList_Warning_Code
 pattern ReservationsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = ReservationsScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern ReservationsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: ReservationsScopedList_Warning_Code
+pattern ReservationsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = ReservationsScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern ReservationsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: ReservationsScopedList_Warning_Code
@@ -26703,10 +30536,12 @@ pattern ReservationsScopedList_Warning_Code_Unreachable = ReservationsScopedList
   ReservationsScopedList_Warning_Code_EXTERNALAPIWARNING,
   ReservationsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   ReservationsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  ReservationsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   ReservationsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   ReservationsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   ReservationsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   ReservationsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  ReservationsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   ReservationsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   ReservationsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   ReservationsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -26723,7 +30558,7 @@ pattern ReservationsScopedList_Warning_Code_Unreachable = ReservationsScopedList
   ReservationsScopedList_Warning_Code
   #-}
 
--- | Type of resource for which this commitment applies. Possible values are VCPU and MEMORY
+-- | Type of resource for which this commitment applies. Possible values are VCPU, MEMORY, LOCAL_SSD, and ACCELERATOR.
 newtype ResourceCommitment_Type = ResourceCommitment_Type {fromResourceCommitment_Type :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -26810,6 +30645,10 @@ pattern ResourcePoliciesScopedList_Warning_Code_FIELDVALUEOVERRIDEN = ResourcePo
 pattern ResourcePoliciesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: ResourcePoliciesScopedList_Warning_Code
 pattern ResourcePoliciesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = ResourcePoliciesScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern ResourcePoliciesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: ResourcePoliciesScopedList_Warning_Code
+pattern ResourcePoliciesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = ResourcePoliciesScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern ResourcePoliciesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: ResourcePoliciesScopedList_Warning_Code
 pattern ResourcePoliciesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = ResourcePoliciesScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -26825,6 +30664,10 @@ pattern ResourcePoliciesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Reso
 -- | The route\'s next hop instance cannot ip forward.
 pattern ResourcePoliciesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: ResourcePoliciesScopedList_Warning_Code
 pattern ResourcePoliciesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = ResourcePoliciesScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern ResourcePoliciesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: ResourcePoliciesScopedList_Warning_Code
+pattern ResourcePoliciesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = ResourcePoliciesScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern ResourcePoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: ResourcePoliciesScopedList_Warning_Code
@@ -26887,10 +30730,12 @@ pattern ResourcePoliciesScopedList_Warning_Code_Unreachable = ResourcePoliciesSc
   ResourcePoliciesScopedList_Warning_Code_EXTERNALAPIWARNING,
   ResourcePoliciesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   ResourcePoliciesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  ResourcePoliciesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   ResourcePoliciesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   ResourcePoliciesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   ResourcePoliciesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   ResourcePoliciesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  ResourcePoliciesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   ResourcePoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   ResourcePoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   ResourcePoliciesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -26994,6 +30839,10 @@ pattern ResourcePolicyAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = Resource
 pattern ResourcePolicyAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: ResourcePolicyAggregatedList_Warning_Code
 pattern ResourcePolicyAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = ResourcePolicyAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern ResourcePolicyAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: ResourcePolicyAggregatedList_Warning_Code
+pattern ResourcePolicyAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = ResourcePolicyAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern ResourcePolicyAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: ResourcePolicyAggregatedList_Warning_Code
 pattern ResourcePolicyAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = ResourcePolicyAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -27009,6 +30858,10 @@ pattern ResourcePolicyAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Re
 -- | The route\'s next hop instance cannot ip forward.
 pattern ResourcePolicyAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: ResourcePolicyAggregatedList_Warning_Code
 pattern ResourcePolicyAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = ResourcePolicyAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern ResourcePolicyAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: ResourcePolicyAggregatedList_Warning_Code
+pattern ResourcePolicyAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = ResourcePolicyAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern ResourcePolicyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: ResourcePolicyAggregatedList_Warning_Code
@@ -27071,10 +30924,12 @@ pattern ResourcePolicyAggregatedList_Warning_Code_Unreachable = ResourcePolicyAg
   ResourcePolicyAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   ResourcePolicyAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   ResourcePolicyAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  ResourcePolicyAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   ResourcePolicyAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   ResourcePolicyAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   ResourcePolicyAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   ResourcePolicyAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  ResourcePolicyAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   ResourcePolicyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   ResourcePolicyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   ResourcePolicyAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -27163,6 +31018,10 @@ pattern ResourcePolicyList_Warning_Code_FIELDVALUEOVERRIDEN = ResourcePolicyList
 pattern ResourcePolicyList_Warning_Code_INJECTEDKERNELSDEPRECATED :: ResourcePolicyList_Warning_Code
 pattern ResourcePolicyList_Warning_Code_INJECTEDKERNELSDEPRECATED = ResourcePolicyList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern ResourcePolicyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: ResourcePolicyList_Warning_Code
+pattern ResourcePolicyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = ResourcePolicyList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern ResourcePolicyList_Warning_Code_LARGEDEPLOYMENTWARNING :: ResourcePolicyList_Warning_Code
 pattern ResourcePolicyList_Warning_Code_LARGEDEPLOYMENTWARNING = ResourcePolicyList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -27178,6 +31037,10 @@ pattern ResourcePolicyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = ResourcePoli
 -- | The route\'s next hop instance cannot ip forward.
 pattern ResourcePolicyList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: ResourcePolicyList_Warning_Code
 pattern ResourcePolicyList_Warning_Code_NEXTHOPCANNOTIPFORWARD = ResourcePolicyList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern ResourcePolicyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: ResourcePolicyList_Warning_Code
+pattern ResourcePolicyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = ResourcePolicyList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern ResourcePolicyList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: ResourcePolicyList_Warning_Code
@@ -27240,10 +31103,12 @@ pattern ResourcePolicyList_Warning_Code_Unreachable = ResourcePolicyList_Warning
   ResourcePolicyList_Warning_Code_EXTERNALAPIWARNING,
   ResourcePolicyList_Warning_Code_FIELDVALUEOVERRIDEN,
   ResourcePolicyList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  ResourcePolicyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   ResourcePolicyList_Warning_Code_LARGEDEPLOYMENTWARNING,
   ResourcePolicyList_Warning_Code_MISSINGTYPEDEPENDENCY,
   ResourcePolicyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   ResourcePolicyList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  ResourcePolicyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   ResourcePolicyList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   ResourcePolicyList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   ResourcePolicyList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -27349,6 +31214,43 @@ pattern ResourcePolicyWeeklyCycleDayOfWeek_Day_Wednesday = ResourcePolicyWeeklyC
   ResourcePolicyWeeklyCycleDayOfWeek_Day
   #-}
 
+-- | [Output only] The status of the route.
+newtype Route_RouteStatus = Route_RouteStatus {fromRoute_RouteStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | This route is processed and active.
+pattern Route_RouteStatus_Active :: Route_RouteStatus
+pattern Route_RouteStatus_Active = Route_RouteStatus "ACTIVE"
+
+-- | The route is dropped due to the VPC exceeding the dynamic route limit. For dynamic route limit, please refer to the Learned route example
+pattern Route_RouteStatus_Dropped :: Route_RouteStatus
+pattern Route_RouteStatus_Dropped = Route_RouteStatus "DROPPED"
+
+-- | This route is processed but inactive due to failure from the backend. The backend may have rejected the route
+pattern Route_RouteStatus_Inactive :: Route_RouteStatus
+pattern Route_RouteStatus_Inactive = Route_RouteStatus "INACTIVE"
+
+-- | This route is being processed internally. The status will change once processed.
+pattern Route_RouteStatus_Pending :: Route_RouteStatus
+pattern Route_RouteStatus_Pending = Route_RouteStatus "PENDING"
+
+{-# COMPLETE
+  Route_RouteStatus_Active,
+  Route_RouteStatus_Dropped,
+  Route_RouteStatus_Inactive,
+  Route_RouteStatus_Pending,
+  Route_RouteStatus
+  #-}
+
 -- | [Output Only] The type of this route, which can be one of the following values: - \'TRANSIT\' for a transit route that this router learned from another Cloud Router and will readvertise to one of its BGP peers - \'SUBNET\' for a route from a subnet of the VPC - \'BGP\' for a route learned from a BGP peer of this router - \'STATIC\' for a static route
 newtype Route_RouteType = Route_RouteType {fromRoute_RouteType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -27431,6 +31333,10 @@ pattern Route_WarningsItem_Code_FIELDVALUEOVERRIDEN = Route_WarningsItem_Code "F
 pattern Route_WarningsItem_Code_INJECTEDKERNELSDEPRECATED :: Route_WarningsItem_Code
 pattern Route_WarningsItem_Code_INJECTEDKERNELSDEPRECATED = Route_WarningsItem_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern Route_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: Route_WarningsItem_Code
+pattern Route_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = Route_WarningsItem_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern Route_WarningsItem_Code_LARGEDEPLOYMENTWARNING :: Route_WarningsItem_Code
 pattern Route_WarningsItem_Code_LARGEDEPLOYMENTWARNING = Route_WarningsItem_Code "LARGE_DEPLOYMENT_WARNING"
@@ -27446,6 +31352,10 @@ pattern Route_WarningsItem_Code_NEXTHOPADDRESSNOTASSIGNED = Route_WarningsItem_C
 -- | The route\'s next hop instance cannot ip forward.
 pattern Route_WarningsItem_Code_NEXTHOPCANNOTIPFORWARD :: Route_WarningsItem_Code
 pattern Route_WarningsItem_Code_NEXTHOPCANNOTIPFORWARD = Route_WarningsItem_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern Route_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: Route_WarningsItem_Code
+pattern Route_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = Route_WarningsItem_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern Route_WarningsItem_Code_NEXTHOPINSTANCENOTFOUND :: Route_WarningsItem_Code
@@ -27508,10 +31418,12 @@ pattern Route_WarningsItem_Code_Unreachable = Route_WarningsItem_Code "UNREACHAB
   Route_WarningsItem_Code_EXTERNALAPIWARNING,
   Route_WarningsItem_Code_FIELDVALUEOVERRIDEN,
   Route_WarningsItem_Code_INJECTEDKERNELSDEPRECATED,
+  Route_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   Route_WarningsItem_Code_LARGEDEPLOYMENTWARNING,
   Route_WarningsItem_Code_MISSINGTYPEDEPENDENCY,
   Route_WarningsItem_Code_NEXTHOPADDRESSNOTASSIGNED,
   Route_WarningsItem_Code_NEXTHOPCANNOTIPFORWARD,
+  Route_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   Route_WarningsItem_Code_NEXTHOPINSTANCENOTFOUND,
   Route_WarningsItem_Code_NEXTHOPINSTANCENOTONNETWORK,
   Route_WarningsItem_Code_NEXTHOPNOTRUNNING,
@@ -27610,6 +31522,10 @@ pattern RouteList_Warning_Code_FIELDVALUEOVERRIDEN = RouteList_Warning_Code "FIE
 pattern RouteList_Warning_Code_INJECTEDKERNELSDEPRECATED :: RouteList_Warning_Code
 pattern RouteList_Warning_Code_INJECTEDKERNELSDEPRECATED = RouteList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern RouteList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: RouteList_Warning_Code
+pattern RouteList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = RouteList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern RouteList_Warning_Code_LARGEDEPLOYMENTWARNING :: RouteList_Warning_Code
 pattern RouteList_Warning_Code_LARGEDEPLOYMENTWARNING = RouteList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -27625,6 +31541,10 @@ pattern RouteList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = RouteList_Warning_Cod
 -- | The route\'s next hop instance cannot ip forward.
 pattern RouteList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: RouteList_Warning_Code
 pattern RouteList_Warning_Code_NEXTHOPCANNOTIPFORWARD = RouteList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern RouteList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: RouteList_Warning_Code
+pattern RouteList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = RouteList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern RouteList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: RouteList_Warning_Code
@@ -27687,10 +31607,12 @@ pattern RouteList_Warning_Code_Unreachable = RouteList_Warning_Code "UNREACHABLE
   RouteList_Warning_Code_EXTERNALAPIWARNING,
   RouteList_Warning_Code_FIELDVALUEOVERRIDEN,
   RouteList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  RouteList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   RouteList_Warning_Code_LARGEDEPLOYMENTWARNING,
   RouteList_Warning_Code_MISSINGTYPEDEPENDENCY,
   RouteList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   RouteList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  RouteList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   RouteList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   RouteList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   RouteList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -27752,6 +31674,10 @@ pattern RouterAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = RouterAggregated
 pattern RouterAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: RouterAggregatedList_Warning_Code
 pattern RouterAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = RouterAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern RouterAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: RouterAggregatedList_Warning_Code
+pattern RouterAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = RouterAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern RouterAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: RouterAggregatedList_Warning_Code
 pattern RouterAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = RouterAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -27767,6 +31693,10 @@ pattern RouterAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = RouterAggr
 -- | The route\'s next hop instance cannot ip forward.
 pattern RouterAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: RouterAggregatedList_Warning_Code
 pattern RouterAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = RouterAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern RouterAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: RouterAggregatedList_Warning_Code
+pattern RouterAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = RouterAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern RouterAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: RouterAggregatedList_Warning_Code
@@ -27829,10 +31759,12 @@ pattern RouterAggregatedList_Warning_Code_Unreachable = RouterAggregatedList_War
   RouterAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   RouterAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   RouterAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  RouterAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   RouterAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   RouterAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   RouterAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   RouterAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  RouterAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   RouterAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   RouterAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   RouterAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -28103,6 +32035,10 @@ pattern RouterList_Warning_Code_FIELDVALUEOVERRIDEN = RouterList_Warning_Code "F
 pattern RouterList_Warning_Code_INJECTEDKERNELSDEPRECATED :: RouterList_Warning_Code
 pattern RouterList_Warning_Code_INJECTEDKERNELSDEPRECATED = RouterList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern RouterList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: RouterList_Warning_Code
+pattern RouterList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = RouterList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern RouterList_Warning_Code_LARGEDEPLOYMENTWARNING :: RouterList_Warning_Code
 pattern RouterList_Warning_Code_LARGEDEPLOYMENTWARNING = RouterList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -28118,6 +32054,10 @@ pattern RouterList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = RouterList_Warning_C
 -- | The route\'s next hop instance cannot ip forward.
 pattern RouterList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: RouterList_Warning_Code
 pattern RouterList_Warning_Code_NEXTHOPCANNOTIPFORWARD = RouterList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern RouterList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: RouterList_Warning_Code
+pattern RouterList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = RouterList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern RouterList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: RouterList_Warning_Code
@@ -28180,10 +32120,12 @@ pattern RouterList_Warning_Code_Unreachable = RouterList_Warning_Code "UNREACHAB
   RouterList_Warning_Code_EXTERNALAPIWARNING,
   RouterList_Warning_Code_FIELDVALUEOVERRIDEN,
   RouterList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  RouterList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   RouterList_Warning_Code_LARGEDEPLOYMENTWARNING,
   RouterList_Warning_Code_MISSINGTYPEDEPENDENCY,
   RouterList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   RouterList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  RouterList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   RouterList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   RouterList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   RouterList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -28198,6 +32140,32 @@ pattern RouterList_Warning_Code_Unreachable = RouterList_Warning_Code "UNREACHAB
   RouterList_Warning_Code_UNDECLAREDPROPERTIES,
   RouterList_Warning_Code_Unreachable,
   RouterList_Warning_Code
+  #-}
+
+newtype RouterNat_EndpointTypesItem = RouterNat_EndpointTypesItem {fromRouterNat_EndpointTypesItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | This is used for Secure Web Gateway endpoints.
+pattern RouterNat_EndpointTypesItem_ENDPOINTTYPESWG :: RouterNat_EndpointTypesItem
+pattern RouterNat_EndpointTypesItem_ENDPOINTTYPESWG = RouterNat_EndpointTypesItem "ENDPOINT_TYPE_SWG"
+
+-- | This is the default.
+pattern RouterNat_EndpointTypesItem_ENDPOINTTYPEVM :: RouterNat_EndpointTypesItem
+pattern RouterNat_EndpointTypesItem_ENDPOINTTYPEVM = RouterNat_EndpointTypesItem "ENDPOINT_TYPE_VM"
+
+{-# COMPLETE
+  RouterNat_EndpointTypesItem_ENDPOINTTYPESWG,
+  RouterNat_EndpointTypesItem_ENDPOINTTYPEVM,
+  RouterNat_EndpointTypesItem
   #-}
 
 -- | Specify the NatIpAllocateOption, which can take one of the following values: - MANUAL/ONLY: Uses only Nat IP addresses provided by customers. When there are not enough specified Nat IPs, the Nat service fails for new VMs. - AUTO/ONLY: Nat IPs are allocated by Google Cloud Platform; customers can\'t specify any Nat IPs. When choosing AUTO/ONLY, then nat/ip should be empty.
@@ -28354,6 +32322,33 @@ pattern RouterStatusBgpPeerStatus_Status_UP = RouterStatusBgpPeerStatus_Status "
   RouterStatusBgpPeerStatus_Status
   #-}
 
+-- | Indicates why particular status was returned.
+newtype RouterStatusBgpPeerStatus_StatusReason = RouterStatusBgpPeerStatus_StatusReason {fromRouterStatusBgpPeerStatus_StatusReason :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Indicates internal problems with configuration of MD5 authentication. This particular reason can only be returned when md5AuthEnabled is true and status is DOWN.
+pattern RouterStatusBgpPeerStatus_StatusReason_MD5AUTHINTERNALPROBLEM :: RouterStatusBgpPeerStatus_StatusReason
+pattern RouterStatusBgpPeerStatus_StatusReason_MD5AUTHINTERNALPROBLEM = RouterStatusBgpPeerStatus_StatusReason "MD5_AUTH_INTERNAL_PROBLEM"
+
+-- |
+pattern RouterStatusBgpPeerStatus_StatusReason_STATUSREASONUNSPECIFIED :: RouterStatusBgpPeerStatus_StatusReason
+pattern RouterStatusBgpPeerStatus_StatusReason_STATUSREASONUNSPECIFIED = RouterStatusBgpPeerStatus_StatusReason "STATUS_REASON_UNSPECIFIED"
+
+{-# COMPLETE
+  RouterStatusBgpPeerStatus_StatusReason_MD5AUTHINTERNALPROBLEM,
+  RouterStatusBgpPeerStatus_StatusReason_STATUSREASONUNSPECIFIED,
+  RouterStatusBgpPeerStatus_StatusReason
+  #-}
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
 newtype RoutersScopedList_Warning_Code = RoutersScopedList_Warning_Code {fromRoutersScopedList_Warning_Code :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -28399,6 +32394,10 @@ pattern RoutersScopedList_Warning_Code_FIELDVALUEOVERRIDEN = RoutersScopedList_W
 pattern RoutersScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: RoutersScopedList_Warning_Code
 pattern RoutersScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = RoutersScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern RoutersScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: RoutersScopedList_Warning_Code
+pattern RoutersScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = RoutersScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern RoutersScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: RoutersScopedList_Warning_Code
 pattern RoutersScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = RoutersScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -28414,6 +32413,10 @@ pattern RoutersScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = RoutersScoped
 -- | The route\'s next hop instance cannot ip forward.
 pattern RoutersScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: RoutersScopedList_Warning_Code
 pattern RoutersScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = RoutersScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern RoutersScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: RoutersScopedList_Warning_Code
+pattern RoutersScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = RoutersScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern RoutersScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: RoutersScopedList_Warning_Code
@@ -28476,10 +32479,12 @@ pattern RoutersScopedList_Warning_Code_Unreachable = RoutersScopedList_Warning_C
   RoutersScopedList_Warning_Code_EXTERNALAPIWARNING,
   RoutersScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   RoutersScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  RoutersScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   RoutersScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   RoutersScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   RoutersScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   RoutersScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  RoutersScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   RoutersScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   RoutersScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   RoutersScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -28543,7 +32548,8 @@ pattern Rule_Action_NOACTION = Rule_Action "NO_ACTION"
   Rule_Action
   #-}
 
--- | Specifies how port is selected for health checking, can be one of following values: USE/FIXED/PORT: The port number in port is used for health checking. USE/NAMED/PORT: The portName is used for health checking. USE/SERVING/PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, SSL health check follows behavior specified in port and portName fields.
+-- | Specifies how a port is selected for health checking. Can be one of the following values: USE/FIXED/PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Not supported by target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE/VM/IP network endpoint groups, GCE/VM/IP/PORT network endpoint groups, and instance group backends. USE/NAMED/PORT: Not supported. USE/SERVING/PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE/VM/IP/PORT network endpoint groups and instance group backends. For GCE/VM/IP_PORT network
+-- endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service\'s named port in the instance group\'s list of named ports.
 newtype SSLHealthCheck_PortSpecification = SSLHealthCheck_PortSpecification {fromSSLHealthCheck_PortSpecification :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -28556,15 +32562,15 @@ newtype SSLHealthCheck_PortSpecification = SSLHealthCheck_PortSpecification {fro
       Core.FromJSONKey
     )
 
--- | The port number in port is used for health checking.
+-- | The port number in the health check\'s port is used for health checking. Applies to network endpoint group and instance group backends.
 pattern SSLHealthCheck_PortSpecification_USEFIXEDPORT :: SSLHealthCheck_PortSpecification
 pattern SSLHealthCheck_PortSpecification_USEFIXEDPORT = SSLHealthCheck_PortSpecification "USE_FIXED_PORT"
 
--- | The portName is used for health checking.
+-- | Not supported.
 pattern SSLHealthCheck_PortSpecification_USENAMEDPORT :: SSLHealthCheck_PortSpecification
 pattern SSLHealthCheck_PortSpecification_USENAMEDPORT = SSLHealthCheck_PortSpecification "USE_NAMED_PORT"
 
--- | For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking.
+-- | For network endpoint group backends, the health check uses the port number specified on each endpoint in the network endpoint group. For instance group backends, the health check uses the port number specified for the backend service\'s named port defined in the instance group\'s named ports.
 pattern SSLHealthCheck_PortSpecification_USESERVINGPORT :: SSLHealthCheck_PortSpecification
 pattern SSLHealthCheck_PortSpecification_USESERVINGPORT = SSLHealthCheck_PortSpecification "USE_SERVING_PORT"
 
@@ -28710,6 +32716,38 @@ pattern SavedAttachedDisk_Type_Scratch = SavedAttachedDisk_Type "SCRATCH"
   SavedAttachedDisk_Type
   #-}
 
+-- | [Output Only] The architecture of the attached disk.
+newtype SavedDisk_Architecture = SavedDisk_Architecture {fromSavedDisk_Architecture :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value indicating Architecture is not set.
+pattern SavedDisk_Architecture_ARCHITECTUREUNSPECIFIED :: SavedDisk_Architecture
+pattern SavedDisk_Architecture_ARCHITECTUREUNSPECIFIED = SavedDisk_Architecture "ARCHITECTURE_UNSPECIFIED"
+
+-- | Machines with architecture ARM64
+pattern SavedDisk_Architecture_ARM64 :: SavedDisk_Architecture
+pattern SavedDisk_Architecture_ARM64 = SavedDisk_Architecture "ARM64"
+
+-- | Machines with architecture X86_64
+pattern SavedDisk_Architecture_X86_64 :: SavedDisk_Architecture
+pattern SavedDisk_Architecture_X86_64 = SavedDisk_Architecture "X86_64"
+
+{-# COMPLETE
+  SavedDisk_Architecture_ARCHITECTUREUNSPECIFIED,
+  SavedDisk_Architecture_ARM64,
+  SavedDisk_Architecture_X86_64,
+  SavedDisk_Architecture
+  #-}
+
 -- | [Output Only] An indicator whether storageBytes is in a stable state or it is being adjusted as a result of shared storage reallocation. This status can either be UPDATING, meaning the size of the snapshot is being updated, or UP/TO/DATE, meaning the size of the snapshot is up-to-date.
 newtype SavedDisk_StorageBytesStatus = SavedDisk_StorageBytesStatus {fromSavedDisk_StorageBytesStatus :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -28806,7 +32844,7 @@ pattern Scheduling_InstanceTerminationAction_Stop = Scheduling_InstanceTerminati
   Scheduling_InstanceTerminationAction
   #-}
 
--- | Defines the maintenance behavior for this instance. For standard instances, the default behavior is MIGRATE. For preemptible instances, the default and only possible behavior is TERMINATE. For more information, see Set VM availability policies.
+-- | Defines the maintenance behavior for this instance. For standard instances, the default behavior is MIGRATE. For preemptible instances, the default and only possible behavior is TERMINATE. For more information, see Set VM host maintenance policy.
 newtype Scheduling_OnHostMaintenance = Scheduling_OnHostMaintenance {fromScheduling_OnHostMaintenance :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -28892,7 +32930,312 @@ pattern SchedulingNodeAffinity_Operator_OPERATORUNSPECIFIED = SchedulingNodeAffi
   SchedulingNodeAffinity_Operator
   #-}
 
--- | The type indicates the intended use of the security policy. - CLOUD/ARMOR: Cloud Armor backend security policies can be configured to filter incoming HTTP requests targeting backend services. They filter requests before they hit the origin servers. - CLOUD/ARMOR/EDGE: Cloud Armor edge security policies can be configured to filter incoming HTTP requests targeting backend services (including Cloud CDN-enabled) as well as backend buckets (Cloud Storage). They filter requests before the request is served from Google\'s cache. - CLOUD/ARMOR/INTERNAL/SERVICE: Cloud Armor internal service policies can be configured to filter HTTP requests targeting services managed by Traffic Director in a service mesh. They filter requests before the request is served from the application. This field can be set only at resource creation time.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
+newtype SecurityPoliciesAggregatedList_Warning_Code = SecurityPoliciesAggregatedList_Warning_Code {fromSecurityPoliciesAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Warning about failed cleanup of transient changes made by a failed operation.
+pattern SecurityPoliciesAggregatedList_Warning_Code_CLEANUPFAILED :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_CLEANUPFAILED = SecurityPoliciesAggregatedList_Warning_Code "CLEANUP_FAILED"
+
+-- | A link to a deprecated resource was created.
+pattern SecurityPoliciesAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED = SecurityPoliciesAggregatedList_Warning_Code "DEPRECATED_RESOURCE_USED"
+
+-- | When deploying and at least one of the resources has a type marked as deprecated
+pattern SecurityPoliciesAggregatedList_Warning_Code_DEPRECATEDTYPEUSED :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_DEPRECATEDTYPEUSED = SecurityPoliciesAggregatedList_Warning_Code "DEPRECATED_TYPE_USED"
+
+-- | The user created a boot disk that is larger than image size.
+pattern SecurityPoliciesAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE = SecurityPoliciesAggregatedList_Warning_Code "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+
+-- | When deploying and at least one of the resources has a type marked as experimental
+pattern SecurityPoliciesAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED = SecurityPoliciesAggregatedList_Warning_Code "EXPERIMENTAL_TYPE_USED"
+
+-- | Warning that is present in an external api call
+pattern SecurityPoliciesAggregatedList_Warning_Code_EXTERNALAPIWARNING :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_EXTERNALAPIWARNING = SecurityPoliciesAggregatedList_Warning_Code "EXTERNAL_API_WARNING"
+
+-- | Warning that value of a field has been overridden. Deprecated unused field.
+pattern SecurityPoliciesAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = SecurityPoliciesAggregatedList_Warning_Code "FIELD_VALUE_OVERRIDEN"
+
+-- | The operation involved use of an injected kernel, which is deprecated.
+pattern SecurityPoliciesAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = SecurityPoliciesAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
+
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern SecurityPoliciesAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = SecurityPoliciesAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
+-- | When deploying a deployment with a exceedingly large number of resources
+pattern SecurityPoliciesAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = SecurityPoliciesAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
+
+-- | A resource depends on a missing type
+pattern SecurityPoliciesAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY = SecurityPoliciesAggregatedList_Warning_Code "MISSING_TYPE_DEPENDENCY"
+
+-- | The route\'s nextHopIp address is not assigned to an instance on the network.
+pattern SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = SecurityPoliciesAggregatedList_Warning_Code "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+
+-- | The route\'s next hop instance cannot ip forward.
+pattern SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = SecurityPoliciesAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = SecurityPoliciesAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not exist.
+pattern SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND = SecurityPoliciesAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_FOUND"
+
+-- | The route\'s nextHopInstance URL refers to an instance that is not on the same network as the route.
+pattern SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK = SecurityPoliciesAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+
+-- | The route\'s next hop instance does not have a status of RUNNING.
+pattern SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPNOTRUNNING :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPNOTRUNNING = SecurityPoliciesAggregatedList_Warning_Code "NEXT_HOP_NOT_RUNNING"
+
+-- | Error which is not critical. We decided to continue the process despite the mentioned error.
+pattern SecurityPoliciesAggregatedList_Warning_Code_NOTCRITICALERROR :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_NOTCRITICALERROR = SecurityPoliciesAggregatedList_Warning_Code "NOT_CRITICAL_ERROR"
+
+-- | No results are present on a particular list page.
+pattern SecurityPoliciesAggregatedList_Warning_Code_NORESULTSONPAGE :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_NORESULTSONPAGE = SecurityPoliciesAggregatedList_Warning_Code "NO_RESULTS_ON_PAGE"
+
+-- | Success is reported, but some results may be missing due to errors
+pattern SecurityPoliciesAggregatedList_Warning_Code_PARTIALSUCCESS :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_PARTIALSUCCESS = SecurityPoliciesAggregatedList_Warning_Code "PARTIAL_SUCCESS"
+
+-- | The user attempted to use a resource that requires a TOS they have not accepted.
+pattern SecurityPoliciesAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT = SecurityPoliciesAggregatedList_Warning_Code "REQUIRED_TOS_AGREEMENT"
+
+-- | Warning that a resource is in use.
+pattern SecurityPoliciesAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING = SecurityPoliciesAggregatedList_Warning_Code "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+
+-- | One or more of the resources set to auto-delete could not be deleted because they were in use.
+pattern SecurityPoliciesAggregatedList_Warning_Code_RESOURCENOTDELETED :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_RESOURCENOTDELETED = SecurityPoliciesAggregatedList_Warning_Code "RESOURCE_NOT_DELETED"
+
+-- | When a resource schema validation is ignored.
+pattern SecurityPoliciesAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED = SecurityPoliciesAggregatedList_Warning_Code "SCHEMA_VALIDATION_IGNORED"
+
+-- | Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.
+pattern SecurityPoliciesAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE = SecurityPoliciesAggregatedList_Warning_Code "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+
+-- | When undeclared properties in the schema are present
+pattern SecurityPoliciesAggregatedList_Warning_Code_UNDECLAREDPROPERTIES :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_UNDECLAREDPROPERTIES = SecurityPoliciesAggregatedList_Warning_Code "UNDECLARED_PROPERTIES"
+
+-- | A given scope cannot be reached.
+pattern SecurityPoliciesAggregatedList_Warning_Code_Unreachable :: SecurityPoliciesAggregatedList_Warning_Code
+pattern SecurityPoliciesAggregatedList_Warning_Code_Unreachable = SecurityPoliciesAggregatedList_Warning_Code "UNREACHABLE"
+
+{-# COMPLETE
+  SecurityPoliciesAggregatedList_Warning_Code_CLEANUPFAILED,
+  SecurityPoliciesAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+  SecurityPoliciesAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
+  SecurityPoliciesAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+  SecurityPoliciesAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED,
+  SecurityPoliciesAggregatedList_Warning_Code_EXTERNALAPIWARNING,
+  SecurityPoliciesAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
+  SecurityPoliciesAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  SecurityPoliciesAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+  SecurityPoliciesAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+  SecurityPoliciesAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+  SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+  SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+  SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+  SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+  SecurityPoliciesAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
+  SecurityPoliciesAggregatedList_Warning_Code_NOTCRITICALERROR,
+  SecurityPoliciesAggregatedList_Warning_Code_NORESULTSONPAGE,
+  SecurityPoliciesAggregatedList_Warning_Code_PARTIALSUCCESS,
+  SecurityPoliciesAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT,
+  SecurityPoliciesAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+  SecurityPoliciesAggregatedList_Warning_Code_RESOURCENOTDELETED,
+  SecurityPoliciesAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+  SecurityPoliciesAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+  SecurityPoliciesAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
+  SecurityPoliciesAggregatedList_Warning_Code_Unreachable,
+  SecurityPoliciesAggregatedList_Warning_Code
+  #-}
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
+newtype SecurityPoliciesScopedList_Warning_Code = SecurityPoliciesScopedList_Warning_Code {fromSecurityPoliciesScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Warning about failed cleanup of transient changes made by a failed operation.
+pattern SecurityPoliciesScopedList_Warning_Code_CLEANUPFAILED :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_CLEANUPFAILED = SecurityPoliciesScopedList_Warning_Code "CLEANUP_FAILED"
+
+-- | A link to a deprecated resource was created.
+pattern SecurityPoliciesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED = SecurityPoliciesScopedList_Warning_Code "DEPRECATED_RESOURCE_USED"
+
+-- | When deploying and at least one of the resources has a type marked as deprecated
+pattern SecurityPoliciesScopedList_Warning_Code_DEPRECATEDTYPEUSED :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_DEPRECATEDTYPEUSED = SecurityPoliciesScopedList_Warning_Code "DEPRECATED_TYPE_USED"
+
+-- | The user created a boot disk that is larger than image size.
+pattern SecurityPoliciesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE = SecurityPoliciesScopedList_Warning_Code "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+
+-- | When deploying and at least one of the resources has a type marked as experimental
+pattern SecurityPoliciesScopedList_Warning_Code_EXPERIMENTALTYPEUSED :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_EXPERIMENTALTYPEUSED = SecurityPoliciesScopedList_Warning_Code "EXPERIMENTAL_TYPE_USED"
+
+-- | Warning that is present in an external api call
+pattern SecurityPoliciesScopedList_Warning_Code_EXTERNALAPIWARNING :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_EXTERNALAPIWARNING = SecurityPoliciesScopedList_Warning_Code "EXTERNAL_API_WARNING"
+
+-- | Warning that value of a field has been overridden. Deprecated unused field.
+pattern SecurityPoliciesScopedList_Warning_Code_FIELDVALUEOVERRIDEN :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_FIELDVALUEOVERRIDEN = SecurityPoliciesScopedList_Warning_Code "FIELD_VALUE_OVERRIDEN"
+
+-- | The operation involved use of an injected kernel, which is deprecated.
+pattern SecurityPoliciesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = SecurityPoliciesScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
+
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern SecurityPoliciesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = SecurityPoliciesScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
+-- | When deploying a deployment with a exceedingly large number of resources
+pattern SecurityPoliciesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = SecurityPoliciesScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
+
+-- | A resource depends on a missing type
+pattern SecurityPoliciesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY = SecurityPoliciesScopedList_Warning_Code "MISSING_TYPE_DEPENDENCY"
+
+-- | The route\'s nextHopIp address is not assigned to an instance on the network.
+pattern SecurityPoliciesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = SecurityPoliciesScopedList_Warning_Code "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+
+-- | The route\'s next hop instance cannot ip forward.
+pattern SecurityPoliciesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = SecurityPoliciesScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern SecurityPoliciesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = SecurityPoliciesScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not exist.
+pattern SecurityPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND = SecurityPoliciesScopedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_FOUND"
+
+-- | The route\'s nextHopInstance URL refers to an instance that is not on the same network as the route.
+pattern SecurityPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK = SecurityPoliciesScopedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+
+-- | The route\'s next hop instance does not have a status of RUNNING.
+pattern SecurityPoliciesScopedList_Warning_Code_NEXTHOPNOTRUNNING :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_NEXTHOPNOTRUNNING = SecurityPoliciesScopedList_Warning_Code "NEXT_HOP_NOT_RUNNING"
+
+-- | Error which is not critical. We decided to continue the process despite the mentioned error.
+pattern SecurityPoliciesScopedList_Warning_Code_NOTCRITICALERROR :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_NOTCRITICALERROR = SecurityPoliciesScopedList_Warning_Code "NOT_CRITICAL_ERROR"
+
+-- | No results are present on a particular list page.
+pattern SecurityPoliciesScopedList_Warning_Code_NORESULTSONPAGE :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_NORESULTSONPAGE = SecurityPoliciesScopedList_Warning_Code "NO_RESULTS_ON_PAGE"
+
+-- | Success is reported, but some results may be missing due to errors
+pattern SecurityPoliciesScopedList_Warning_Code_PARTIALSUCCESS :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_PARTIALSUCCESS = SecurityPoliciesScopedList_Warning_Code "PARTIAL_SUCCESS"
+
+-- | The user attempted to use a resource that requires a TOS they have not accepted.
+pattern SecurityPoliciesScopedList_Warning_Code_REQUIREDTOSAGREEMENT :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_REQUIREDTOSAGREEMENT = SecurityPoliciesScopedList_Warning_Code "REQUIRED_TOS_AGREEMENT"
+
+-- | Warning that a resource is in use.
+pattern SecurityPoliciesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING = SecurityPoliciesScopedList_Warning_Code "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+
+-- | One or more of the resources set to auto-delete could not be deleted because they were in use.
+pattern SecurityPoliciesScopedList_Warning_Code_RESOURCENOTDELETED :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_RESOURCENOTDELETED = SecurityPoliciesScopedList_Warning_Code "RESOURCE_NOT_DELETED"
+
+-- | When a resource schema validation is ignored.
+pattern SecurityPoliciesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED = SecurityPoliciesScopedList_Warning_Code "SCHEMA_VALIDATION_IGNORED"
+
+-- | Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.
+pattern SecurityPoliciesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE = SecurityPoliciesScopedList_Warning_Code "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+
+-- | When undeclared properties in the schema are present
+pattern SecurityPoliciesScopedList_Warning_Code_UNDECLAREDPROPERTIES :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_UNDECLAREDPROPERTIES = SecurityPoliciesScopedList_Warning_Code "UNDECLARED_PROPERTIES"
+
+-- | A given scope cannot be reached.
+pattern SecurityPoliciesScopedList_Warning_Code_Unreachable :: SecurityPoliciesScopedList_Warning_Code
+pattern SecurityPoliciesScopedList_Warning_Code_Unreachable = SecurityPoliciesScopedList_Warning_Code "UNREACHABLE"
+
+{-# COMPLETE
+  SecurityPoliciesScopedList_Warning_Code_CLEANUPFAILED,
+  SecurityPoliciesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+  SecurityPoliciesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
+  SecurityPoliciesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+  SecurityPoliciesScopedList_Warning_Code_EXPERIMENTALTYPEUSED,
+  SecurityPoliciesScopedList_Warning_Code_EXTERNALAPIWARNING,
+  SecurityPoliciesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
+  SecurityPoliciesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  SecurityPoliciesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+  SecurityPoliciesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+  SecurityPoliciesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+  SecurityPoliciesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+  SecurityPoliciesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  SecurityPoliciesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+  SecurityPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+  SecurityPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+  SecurityPoliciesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
+  SecurityPoliciesScopedList_Warning_Code_NOTCRITICALERROR,
+  SecurityPoliciesScopedList_Warning_Code_NORESULTSONPAGE,
+  SecurityPoliciesScopedList_Warning_Code_PARTIALSUCCESS,
+  SecurityPoliciesScopedList_Warning_Code_REQUIREDTOSAGREEMENT,
+  SecurityPoliciesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+  SecurityPoliciesScopedList_Warning_Code_RESOURCENOTDELETED,
+  SecurityPoliciesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+  SecurityPoliciesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+  SecurityPoliciesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
+  SecurityPoliciesScopedList_Warning_Code_Unreachable,
+  SecurityPoliciesScopedList_Warning_Code
+  #-}
+
+-- | The type indicates the intended use of the security policy. - CLOUD/ARMOR: Cloud Armor backend security policies can be configured to filter incoming HTTP requests targeting backend services. They filter requests before they hit the origin servers. - CLOUD/ARMOR/EDGE: Cloud Armor edge security policies can be configured to filter incoming HTTP requests targeting backend services (including Cloud CDN-enabled) as well as backend buckets (Cloud Storage). They filter requests before the request is served from Google\'s cache. - CLOUD/ARMOR/INTERNAL/SERVICE: Cloud Armor internal service policies can be configured to filter HTTP requests targeting services managed by Traffic Director in a service mesh. They filter requests before the request is served from the application. - CLOUD/ARMOR/NETWORK: Cloud Armor network policies can be configured to filter packets targeting network load balancing resources such as backend services, target pools, target instances, and instances with external IPs. They filter requests
+-- before the request is served from the application. This field can be set only at resource creation time.
 newtype SecurityPolicy_Type = SecurityPolicy_Type {fromSecurityPolicy_Type :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -28913,9 +33256,14 @@ pattern SecurityPolicy_Type_CLOUDARMOR = SecurityPolicy_Type "CLOUD_ARMOR"
 pattern SecurityPolicy_Type_CLOUDARMOREDGE :: SecurityPolicy_Type
 pattern SecurityPolicy_Type_CLOUDARMOREDGE = SecurityPolicy_Type "CLOUD_ARMOR_EDGE"
 
+-- |
+pattern SecurityPolicy_Type_CLOUDARMORNETWORK :: SecurityPolicy_Type
+pattern SecurityPolicy_Type_CLOUDARMORNETWORK = SecurityPolicy_Type "CLOUD_ARMOR_NETWORK"
+
 {-# COMPLETE
   SecurityPolicy_Type_CLOUDARMOR,
   SecurityPolicy_Type_CLOUDARMOREDGE,
+  SecurityPolicy_Type_CLOUDARMORNETWORK,
   SecurityPolicy_Type
   #-}
 
@@ -28998,6 +33346,32 @@ pattern SecurityPolicyAdvancedOptionsConfig_LogLevel_Verbose = SecurityPolicyAdv
   SecurityPolicyAdvancedOptionsConfig_LogLevel
   #-}
 
+newtype SecurityPolicyDdosProtectionConfig_DdosProtection = SecurityPolicyDdosProtectionConfig_DdosProtection {fromSecurityPolicyDdosProtectionConfig_DdosProtection :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern SecurityPolicyDdosProtectionConfig_DdosProtection_Advanced :: SecurityPolicyDdosProtectionConfig_DdosProtection
+pattern SecurityPolicyDdosProtectionConfig_DdosProtection_Advanced = SecurityPolicyDdosProtectionConfig_DdosProtection "ADVANCED"
+
+-- |
+pattern SecurityPolicyDdosProtectionConfig_DdosProtection_Standard :: SecurityPolicyDdosProtectionConfig_DdosProtection
+pattern SecurityPolicyDdosProtectionConfig_DdosProtection_Standard = SecurityPolicyDdosProtectionConfig_DdosProtection "STANDARD"
+
+{-# COMPLETE
+  SecurityPolicyDdosProtectionConfig_DdosProtection_Advanced,
+  SecurityPolicyDdosProtectionConfig_DdosProtection_Standard,
+  SecurityPolicyDdosProtectionConfig_DdosProtection
+  #-}
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
 newtype SecurityPolicyList_Warning_Code = SecurityPolicyList_Warning_Code {fromSecurityPolicyList_Warning_Code :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -29043,6 +33417,10 @@ pattern SecurityPolicyList_Warning_Code_FIELDVALUEOVERRIDEN = SecurityPolicyList
 pattern SecurityPolicyList_Warning_Code_INJECTEDKERNELSDEPRECATED :: SecurityPolicyList_Warning_Code
 pattern SecurityPolicyList_Warning_Code_INJECTEDKERNELSDEPRECATED = SecurityPolicyList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern SecurityPolicyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: SecurityPolicyList_Warning_Code
+pattern SecurityPolicyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = SecurityPolicyList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern SecurityPolicyList_Warning_Code_LARGEDEPLOYMENTWARNING :: SecurityPolicyList_Warning_Code
 pattern SecurityPolicyList_Warning_Code_LARGEDEPLOYMENTWARNING = SecurityPolicyList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -29058,6 +33436,10 @@ pattern SecurityPolicyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = SecurityPoli
 -- | The route\'s next hop instance cannot ip forward.
 pattern SecurityPolicyList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: SecurityPolicyList_Warning_Code
 pattern SecurityPolicyList_Warning_Code_NEXTHOPCANNOTIPFORWARD = SecurityPolicyList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern SecurityPolicyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: SecurityPolicyList_Warning_Code
+pattern SecurityPolicyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = SecurityPolicyList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern SecurityPolicyList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: SecurityPolicyList_Warning_Code
@@ -29120,10 +33502,12 @@ pattern SecurityPolicyList_Warning_Code_Unreachable = SecurityPolicyList_Warning
   SecurityPolicyList_Warning_Code_EXTERNALAPIWARNING,
   SecurityPolicyList_Warning_Code_FIELDVALUEOVERRIDEN,
   SecurityPolicyList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  SecurityPolicyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   SecurityPolicyList_Warning_Code_LARGEDEPLOYMENTWARNING,
   SecurityPolicyList_Warning_Code_MISSINGTYPEDEPENDENCY,
   SecurityPolicyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   SecurityPolicyList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  SecurityPolicyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   SecurityPolicyList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   SecurityPolicyList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   SecurityPolicyList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -29162,8 +33546,50 @@ pattern SecurityPolicyRuleMatcher_VersionedExpr_SRC_IPS_V1 = SecurityPolicyRuleM
   SecurityPolicyRuleMatcher_VersionedExpr
   #-}
 
--- | Determines the key to enforce the rate/limit/threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if this field \'enforce/on/key\' is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP/HEADER: The value of the HTTP header whose name is configured under \"enforce/on/key/name\". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF/IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP/COOKIE: The value of the HTTP cookie whose name is configured under \"enforce/on/key_name\". The key value is truncated to the first 128 bytes of the
--- cookie value. If no such cookie is present in the request, the key type defaults to ALL.
+-- | The match operator for the field.
+newtype SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op = SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op {fromSecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The operator matches if the field value contains the specified value.
+pattern SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op_Contains :: SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op
+pattern SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op_Contains = SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op "CONTAINS"
+
+-- | The operator matches if the field value ends with the specified value.
+pattern SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op_ENDSWITH :: SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op
+pattern SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op_ENDSWITH = SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op "ENDS_WITH"
+
+-- | The operator matches if the field value equals the specified value.
+pattern SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op_Equals :: SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op
+pattern SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op_Equals = SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op "EQUALS"
+
+-- | The operator matches if the field value is any value.
+pattern SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op_EQUALSANY :: SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op
+pattern SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op_EQUALSANY = SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op "EQUALS_ANY"
+
+-- | The operator matches if the field value starts with the specified value.
+pattern SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op_STARTSWITH :: SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op
+pattern SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op_STARTSWITH = SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op "STARTS_WITH"
+
+{-# COMPLETE
+  SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op_Contains,
+  SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op_ENDSWITH,
+  SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op_Equals,
+  SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op_EQUALSANY,
+  SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op_STARTSWITH,
+  SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op
+  #-}
+
+-- | Determines the key to enforce the rate/limit/threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if \"enforceOnKey\" is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP/HEADER: The value of the HTTP header whose name is configured under \"enforceOnKeyName\". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF/IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP/COOKIE: The value of the HTTP cookie whose name is configured under \"enforceOnKeyName\". The key value is truncated to the first 128 bytes of the cookie value. If no
+-- such cookie is present in the request, the key type defaults to ALL. - HTTP/PATH: The URL path of the HTTP request. The key value is truncated to the first 128 bytes. - SNI: Server name indication in the TLS session of the HTTPS request. The key value is truncated to the first 128 bytes. The key type defaults to ALL on a HTTP session. - REGION_CODE: The country\/region from which the request originates.
 newtype SecurityPolicyRuleRateLimitOptions_EnforceOnKey = SecurityPolicyRuleRateLimitOptions_EnforceOnKey {fromSecurityPolicyRuleRateLimitOptions_EnforceOnKey :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -29189,8 +33615,20 @@ pattern SecurityPolicyRuleRateLimitOptions_EnforceOnKey_HTTPHEADER :: SecurityPo
 pattern SecurityPolicyRuleRateLimitOptions_EnforceOnKey_HTTPHEADER = SecurityPolicyRuleRateLimitOptions_EnforceOnKey "HTTP_HEADER"
 
 -- |
+pattern SecurityPolicyRuleRateLimitOptions_EnforceOnKey_HTTPPATH :: SecurityPolicyRuleRateLimitOptions_EnforceOnKey
+pattern SecurityPolicyRuleRateLimitOptions_EnforceOnKey_HTTPPATH = SecurityPolicyRuleRateLimitOptions_EnforceOnKey "HTTP_PATH"
+
+-- |
 pattern SecurityPolicyRuleRateLimitOptions_EnforceOnKey_IP :: SecurityPolicyRuleRateLimitOptions_EnforceOnKey
 pattern SecurityPolicyRuleRateLimitOptions_EnforceOnKey_IP = SecurityPolicyRuleRateLimitOptions_EnforceOnKey "IP"
+
+-- |
+pattern SecurityPolicyRuleRateLimitOptions_EnforceOnKey_REGIONCODE :: SecurityPolicyRuleRateLimitOptions_EnforceOnKey
+pattern SecurityPolicyRuleRateLimitOptions_EnforceOnKey_REGIONCODE = SecurityPolicyRuleRateLimitOptions_EnforceOnKey "REGION_CODE"
+
+-- |
+pattern SecurityPolicyRuleRateLimitOptions_EnforceOnKey_Sni :: SecurityPolicyRuleRateLimitOptions_EnforceOnKey
+pattern SecurityPolicyRuleRateLimitOptions_EnforceOnKey_Sni = SecurityPolicyRuleRateLimitOptions_EnforceOnKey "SNI"
 
 -- |
 pattern SecurityPolicyRuleRateLimitOptions_EnforceOnKey_XFFIP :: SecurityPolicyRuleRateLimitOptions_EnforceOnKey
@@ -29200,7 +33638,10 @@ pattern SecurityPolicyRuleRateLimitOptions_EnforceOnKey_XFFIP = SecurityPolicyRu
   SecurityPolicyRuleRateLimitOptions_EnforceOnKey_All,
   SecurityPolicyRuleRateLimitOptions_EnforceOnKey_HTTPCOOKIE,
   SecurityPolicyRuleRateLimitOptions_EnforceOnKey_HTTPHEADER,
+  SecurityPolicyRuleRateLimitOptions_EnforceOnKey_HTTPPATH,
   SecurityPolicyRuleRateLimitOptions_EnforceOnKey_IP,
+  SecurityPolicyRuleRateLimitOptions_EnforceOnKey_REGIONCODE,
+  SecurityPolicyRuleRateLimitOptions_EnforceOnKey_Sni,
   SecurityPolicyRuleRateLimitOptions_EnforceOnKey_XFFIP,
   SecurityPolicyRuleRateLimitOptions_EnforceOnKey
   #-}
@@ -29340,6 +33781,10 @@ pattern ServiceAttachmentAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = Servi
 pattern ServiceAttachmentAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: ServiceAttachmentAggregatedList_Warning_Code
 pattern ServiceAttachmentAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = ServiceAttachmentAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern ServiceAttachmentAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: ServiceAttachmentAggregatedList_Warning_Code
+pattern ServiceAttachmentAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = ServiceAttachmentAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern ServiceAttachmentAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: ServiceAttachmentAggregatedList_Warning_Code
 pattern ServiceAttachmentAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = ServiceAttachmentAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -29355,6 +33800,10 @@ pattern ServiceAttachmentAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED =
 -- | The route\'s next hop instance cannot ip forward.
 pattern ServiceAttachmentAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: ServiceAttachmentAggregatedList_Warning_Code
 pattern ServiceAttachmentAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = ServiceAttachmentAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern ServiceAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: ServiceAttachmentAggregatedList_Warning_Code
+pattern ServiceAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = ServiceAttachmentAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern ServiceAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: ServiceAttachmentAggregatedList_Warning_Code
@@ -29417,10 +33866,12 @@ pattern ServiceAttachmentAggregatedList_Warning_Code_Unreachable = ServiceAttach
   ServiceAttachmentAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   ServiceAttachmentAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   ServiceAttachmentAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  ServiceAttachmentAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   ServiceAttachmentAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   ServiceAttachmentAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   ServiceAttachmentAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   ServiceAttachmentAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  ServiceAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   ServiceAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   ServiceAttachmentAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   ServiceAttachmentAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -29458,6 +33909,10 @@ pattern ServiceAttachmentConnectedEndpoint_Status_Accepted = ServiceAttachmentCo
 pattern ServiceAttachmentConnectedEndpoint_Status_Closed :: ServiceAttachmentConnectedEndpoint_Status
 pattern ServiceAttachmentConnectedEndpoint_Status_Closed = ServiceAttachmentConnectedEndpoint_Status "CLOSED"
 
+-- | The connection has been accepted by the producer, but the producer needs to take further action before the forwarding rule can serve traffic.
+pattern ServiceAttachmentConnectedEndpoint_Status_NEEDSATTENTION :: ServiceAttachmentConnectedEndpoint_Status
+pattern ServiceAttachmentConnectedEndpoint_Status_NEEDSATTENTION = ServiceAttachmentConnectedEndpoint_Status "NEEDS_ATTENTION"
+
 -- | The connection is pending acceptance by the producer.
 pattern ServiceAttachmentConnectedEndpoint_Status_Pending :: ServiceAttachmentConnectedEndpoint_Status
 pattern ServiceAttachmentConnectedEndpoint_Status_Pending = ServiceAttachmentConnectedEndpoint_Status "PENDING"
@@ -29473,6 +33928,7 @@ pattern ServiceAttachmentConnectedEndpoint_Status_STATUSUNSPECIFIED = ServiceAtt
 {-# COMPLETE
   ServiceAttachmentConnectedEndpoint_Status_Accepted,
   ServiceAttachmentConnectedEndpoint_Status_Closed,
+  ServiceAttachmentConnectedEndpoint_Status_NEEDSATTENTION,
   ServiceAttachmentConnectedEndpoint_Status_Pending,
   ServiceAttachmentConnectedEndpoint_Status_Rejected,
   ServiceAttachmentConnectedEndpoint_Status_STATUSUNSPECIFIED,
@@ -29524,6 +33980,10 @@ pattern ServiceAttachmentList_Warning_Code_FIELDVALUEOVERRIDEN = ServiceAttachme
 pattern ServiceAttachmentList_Warning_Code_INJECTEDKERNELSDEPRECATED :: ServiceAttachmentList_Warning_Code
 pattern ServiceAttachmentList_Warning_Code_INJECTEDKERNELSDEPRECATED = ServiceAttachmentList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern ServiceAttachmentList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: ServiceAttachmentList_Warning_Code
+pattern ServiceAttachmentList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = ServiceAttachmentList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern ServiceAttachmentList_Warning_Code_LARGEDEPLOYMENTWARNING :: ServiceAttachmentList_Warning_Code
 pattern ServiceAttachmentList_Warning_Code_LARGEDEPLOYMENTWARNING = ServiceAttachmentList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -29539,6 +33999,10 @@ pattern ServiceAttachmentList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = ServiceAt
 -- | The route\'s next hop instance cannot ip forward.
 pattern ServiceAttachmentList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: ServiceAttachmentList_Warning_Code
 pattern ServiceAttachmentList_Warning_Code_NEXTHOPCANNOTIPFORWARD = ServiceAttachmentList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern ServiceAttachmentList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: ServiceAttachmentList_Warning_Code
+pattern ServiceAttachmentList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = ServiceAttachmentList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern ServiceAttachmentList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: ServiceAttachmentList_Warning_Code
@@ -29601,10 +34065,12 @@ pattern ServiceAttachmentList_Warning_Code_Unreachable = ServiceAttachmentList_W
   ServiceAttachmentList_Warning_Code_EXTERNALAPIWARNING,
   ServiceAttachmentList_Warning_Code_FIELDVALUEOVERRIDEN,
   ServiceAttachmentList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  ServiceAttachmentList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   ServiceAttachmentList_Warning_Code_LARGEDEPLOYMENTWARNING,
   ServiceAttachmentList_Warning_Code_MISSINGTYPEDEPENDENCY,
   ServiceAttachmentList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   ServiceAttachmentList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  ServiceAttachmentList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   ServiceAttachmentList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   ServiceAttachmentList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   ServiceAttachmentList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -29666,6 +34132,10 @@ pattern ServiceAttachmentsScopedList_Warning_Code_FIELDVALUEOVERRIDEN = ServiceA
 pattern ServiceAttachmentsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: ServiceAttachmentsScopedList_Warning_Code
 pattern ServiceAttachmentsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = ServiceAttachmentsScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern ServiceAttachmentsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: ServiceAttachmentsScopedList_Warning_Code
+pattern ServiceAttachmentsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = ServiceAttachmentsScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern ServiceAttachmentsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: ServiceAttachmentsScopedList_Warning_Code
 pattern ServiceAttachmentsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = ServiceAttachmentsScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -29681,6 +34151,10 @@ pattern ServiceAttachmentsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Se
 -- | The route\'s next hop instance cannot ip forward.
 pattern ServiceAttachmentsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: ServiceAttachmentsScopedList_Warning_Code
 pattern ServiceAttachmentsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = ServiceAttachmentsScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern ServiceAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: ServiceAttachmentsScopedList_Warning_Code
+pattern ServiceAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = ServiceAttachmentsScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern ServiceAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: ServiceAttachmentsScopedList_Warning_Code
@@ -29743,10 +34217,12 @@ pattern ServiceAttachmentsScopedList_Warning_Code_Unreachable = ServiceAttachmen
   ServiceAttachmentsScopedList_Warning_Code_EXTERNALAPIWARNING,
   ServiceAttachmentsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   ServiceAttachmentsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  ServiceAttachmentsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   ServiceAttachmentsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   ServiceAttachmentsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   ServiceAttachmentsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   ServiceAttachmentsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  ServiceAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   ServiceAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   ServiceAttachmentsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   ServiceAttachmentsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -29780,6 +34256,10 @@ newtype ShareSettings_ShareType = ShareSettings_ShareType {fromShareSettings_Sha
 pattern ShareSettings_ShareType_Local :: ShareSettings_ShareType
 pattern ShareSettings_ShareType_Local = ShareSettings_ShareType "LOCAL"
 
+-- | Shared-reservation is open to entire Organization
+pattern ShareSettings_ShareType_Organization :: ShareSettings_ShareType
+pattern ShareSettings_ShareType_Organization = ShareSettings_ShareType "ORGANIZATION"
+
 -- | Default value. This value is unused.
 pattern ShareSettings_ShareType_SHARETYPEUNSPECIFIED :: ShareSettings_ShareType
 pattern ShareSettings_ShareType_SHARETYPEUNSPECIFIED = ShareSettings_ShareType "SHARE_TYPE_UNSPECIFIED"
@@ -29790,9 +34270,69 @@ pattern ShareSettings_ShareType_SPECIFICPROJECTS = ShareSettings_ShareType "SPEC
 
 {-# COMPLETE
   ShareSettings_ShareType_Local,
+  ShareSettings_ShareType_Organization,
   ShareSettings_ShareType_SHARETYPEUNSPECIFIED,
   ShareSettings_ShareType_SPECIFICPROJECTS,
   ShareSettings_ShareType
+  #-}
+
+-- | [Output Only] The architecture of the snapshot. Valid values are ARM64 or X86_64.
+newtype Snapshot_Architecture = Snapshot_Architecture {fromSnapshot_Architecture :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value indicating Architecture is not set.
+pattern Snapshot_Architecture_ARCHITECTUREUNSPECIFIED :: Snapshot_Architecture
+pattern Snapshot_Architecture_ARCHITECTUREUNSPECIFIED = Snapshot_Architecture "ARCHITECTURE_UNSPECIFIED"
+
+-- | Machines with architecture ARM64
+pattern Snapshot_Architecture_ARM64 :: Snapshot_Architecture
+pattern Snapshot_Architecture_ARM64 = Snapshot_Architecture "ARM64"
+
+-- | Machines with architecture X86_64
+pattern Snapshot_Architecture_X86_64 :: Snapshot_Architecture
+pattern Snapshot_Architecture_X86_64 = Snapshot_Architecture "X86_64"
+
+{-# COMPLETE
+  Snapshot_Architecture_ARCHITECTUREUNSPECIFIED,
+  Snapshot_Architecture_ARM64,
+  Snapshot_Architecture_X86_64,
+  Snapshot_Architecture
+  #-}
+
+-- | Indicates the type of the snapshot.
+newtype Snapshot_SnapshotType = Snapshot_SnapshotType {fromSnapshot_SnapshotType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern Snapshot_SnapshotType_Archive :: Snapshot_SnapshotType
+pattern Snapshot_SnapshotType_Archive = Snapshot_SnapshotType "ARCHIVE"
+
+-- |
+pattern Snapshot_SnapshotType_Standard :: Snapshot_SnapshotType
+pattern Snapshot_SnapshotType_Standard = Snapshot_SnapshotType "STANDARD"
+
+{-# COMPLETE
+  Snapshot_SnapshotType_Archive,
+  Snapshot_SnapshotType_Standard,
+  Snapshot_SnapshotType
   #-}
 
 -- | [Output Only] The status of the snapshot. This can be CREATING, DELETING, FAILED, READY, or UPLOADING.
@@ -29909,6 +34449,10 @@ pattern SnapshotList_Warning_Code_FIELDVALUEOVERRIDEN = SnapshotList_Warning_Cod
 pattern SnapshotList_Warning_Code_INJECTEDKERNELSDEPRECATED :: SnapshotList_Warning_Code
 pattern SnapshotList_Warning_Code_INJECTEDKERNELSDEPRECATED = SnapshotList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern SnapshotList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: SnapshotList_Warning_Code
+pattern SnapshotList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = SnapshotList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern SnapshotList_Warning_Code_LARGEDEPLOYMENTWARNING :: SnapshotList_Warning_Code
 pattern SnapshotList_Warning_Code_LARGEDEPLOYMENTWARNING = SnapshotList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -29924,6 +34468,10 @@ pattern SnapshotList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = SnapshotList_Warni
 -- | The route\'s next hop instance cannot ip forward.
 pattern SnapshotList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: SnapshotList_Warning_Code
 pattern SnapshotList_Warning_Code_NEXTHOPCANNOTIPFORWARD = SnapshotList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern SnapshotList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: SnapshotList_Warning_Code
+pattern SnapshotList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = SnapshotList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern SnapshotList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: SnapshotList_Warning_Code
@@ -29986,10 +34534,12 @@ pattern SnapshotList_Warning_Code_Unreachable = SnapshotList_Warning_Code "UNREA
   SnapshotList_Warning_Code_EXTERNALAPIWARNING,
   SnapshotList_Warning_Code_FIELDVALUEOVERRIDEN,
   SnapshotList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  SnapshotList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   SnapshotList_Warning_Code_LARGEDEPLOYMENTWARNING,
   SnapshotList_Warning_Code_MISSINGTYPEDEPENDENCY,
   SnapshotList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   SnapshotList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  SnapshotList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   SnapshotList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   SnapshotList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   SnapshotList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -30004,6 +34554,38 @@ pattern SnapshotList_Warning_Code_Unreachable = SnapshotList_Warning_Code "UNREA
   SnapshotList_Warning_Code_UNDECLAREDPROPERTIES,
   SnapshotList_Warning_Code_Unreachable,
   SnapshotList_Warning_Code
+  #-}
+
+-- | KeyRevocationActionType of the instance. Supported options are \"STOP\" and \"NONE\". The default value is \"NONE\" if it is not specified.
+newtype SourceInstanceProperties_KeyRevocationActionType = SourceInstanceProperties_KeyRevocationActionType {fromSourceInstanceProperties_KeyRevocationActionType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. This value is unused.
+pattern SourceInstanceProperties_KeyRevocationActionType_KEYREVOCATIONACTIONTYPEUNSPECIFIED :: SourceInstanceProperties_KeyRevocationActionType
+pattern SourceInstanceProperties_KeyRevocationActionType_KEYREVOCATIONACTIONTYPEUNSPECIFIED = SourceInstanceProperties_KeyRevocationActionType "KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED"
+
+-- | Indicates user chose no operation.
+pattern SourceInstanceProperties_KeyRevocationActionType_None :: SourceInstanceProperties_KeyRevocationActionType
+pattern SourceInstanceProperties_KeyRevocationActionType_None = SourceInstanceProperties_KeyRevocationActionType "NONE"
+
+-- | Indicates user chose to opt for VM shutdown on key revocation.
+pattern SourceInstanceProperties_KeyRevocationActionType_Stop :: SourceInstanceProperties_KeyRevocationActionType
+pattern SourceInstanceProperties_KeyRevocationActionType_Stop = SourceInstanceProperties_KeyRevocationActionType "STOP"
+
+{-# COMPLETE
+  SourceInstanceProperties_KeyRevocationActionType_KEYREVOCATIONACTIONTYPEUNSPECIFIED,
+  SourceInstanceProperties_KeyRevocationActionType_None,
+  SourceInstanceProperties_KeyRevocationActionType_Stop,
+  SourceInstanceProperties_KeyRevocationActionType
   #-}
 
 -- | (Optional) Specifies the type of SSL certificate, either \"SELF/MANAGED\" or \"MANAGED\". If not specified, the certificate is self-managed and the fields certificate and private/key are used.
@@ -30083,6 +34665,10 @@ pattern SslCertificateAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = SslCerti
 pattern SslCertificateAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: SslCertificateAggregatedList_Warning_Code
 pattern SslCertificateAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = SslCertificateAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern SslCertificateAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: SslCertificateAggregatedList_Warning_Code
+pattern SslCertificateAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = SslCertificateAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern SslCertificateAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: SslCertificateAggregatedList_Warning_Code
 pattern SslCertificateAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = SslCertificateAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -30098,6 +34684,10 @@ pattern SslCertificateAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Ss
 -- | The route\'s next hop instance cannot ip forward.
 pattern SslCertificateAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: SslCertificateAggregatedList_Warning_Code
 pattern SslCertificateAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = SslCertificateAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern SslCertificateAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: SslCertificateAggregatedList_Warning_Code
+pattern SslCertificateAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = SslCertificateAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern SslCertificateAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: SslCertificateAggregatedList_Warning_Code
@@ -30160,10 +34750,12 @@ pattern SslCertificateAggregatedList_Warning_Code_Unreachable = SslCertificateAg
   SslCertificateAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   SslCertificateAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   SslCertificateAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  SslCertificateAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   SslCertificateAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   SslCertificateAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   SslCertificateAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   SslCertificateAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  SslCertificateAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   SslCertificateAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   SslCertificateAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   SslCertificateAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -30225,6 +34817,10 @@ pattern SslCertificateList_Warning_Code_FIELDVALUEOVERRIDEN = SslCertificateList
 pattern SslCertificateList_Warning_Code_INJECTEDKERNELSDEPRECATED :: SslCertificateList_Warning_Code
 pattern SslCertificateList_Warning_Code_INJECTEDKERNELSDEPRECATED = SslCertificateList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern SslCertificateList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: SslCertificateList_Warning_Code
+pattern SslCertificateList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = SslCertificateList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern SslCertificateList_Warning_Code_LARGEDEPLOYMENTWARNING :: SslCertificateList_Warning_Code
 pattern SslCertificateList_Warning_Code_LARGEDEPLOYMENTWARNING = SslCertificateList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -30240,6 +34836,10 @@ pattern SslCertificateList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = SslCertifica
 -- | The route\'s next hop instance cannot ip forward.
 pattern SslCertificateList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: SslCertificateList_Warning_Code
 pattern SslCertificateList_Warning_Code_NEXTHOPCANNOTIPFORWARD = SslCertificateList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern SslCertificateList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: SslCertificateList_Warning_Code
+pattern SslCertificateList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = SslCertificateList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern SslCertificateList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: SslCertificateList_Warning_Code
@@ -30302,10 +34902,12 @@ pattern SslCertificateList_Warning_Code_Unreachable = SslCertificateList_Warning
   SslCertificateList_Warning_Code_EXTERNALAPIWARNING,
   SslCertificateList_Warning_Code_FIELDVALUEOVERRIDEN,
   SslCertificateList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  SslCertificateList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   SslCertificateList_Warning_Code_LARGEDEPLOYMENTWARNING,
   SslCertificateList_Warning_Code_MISSINGTYPEDEPENDENCY,
   SslCertificateList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   SslCertificateList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  SslCertificateList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   SslCertificateList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   SslCertificateList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   SslCertificateList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -30465,6 +35067,10 @@ pattern SslCertificatesScopedList_Warning_Code_FIELDVALUEOVERRIDEN = SslCertific
 pattern SslCertificatesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: SslCertificatesScopedList_Warning_Code
 pattern SslCertificatesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = SslCertificatesScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern SslCertificatesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: SslCertificatesScopedList_Warning_Code
+pattern SslCertificatesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = SslCertificatesScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern SslCertificatesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: SslCertificatesScopedList_Warning_Code
 pattern SslCertificatesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = SslCertificatesScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -30480,6 +35086,10 @@ pattern SslCertificatesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = SslCe
 -- | The route\'s next hop instance cannot ip forward.
 pattern SslCertificatesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: SslCertificatesScopedList_Warning_Code
 pattern SslCertificatesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = SslCertificatesScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern SslCertificatesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: SslCertificatesScopedList_Warning_Code
+pattern SslCertificatesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = SslCertificatesScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern SslCertificatesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: SslCertificatesScopedList_Warning_Code
@@ -30542,10 +35152,12 @@ pattern SslCertificatesScopedList_Warning_Code_Unreachable = SslCertificatesScop
   SslCertificatesScopedList_Warning_Code_EXTERNALAPIWARNING,
   SslCertificatesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   SslCertificatesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  SslCertificatesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   SslCertificatesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   SslCertificatesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   SslCertificatesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   SslCertificatesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  SslCertificatesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   SslCertificatesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   SslCertificatesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   SslCertificatesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -30560,6 +35172,158 @@ pattern SslCertificatesScopedList_Warning_Code_Unreachable = SslCertificatesScop
   SslCertificatesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
   SslCertificatesScopedList_Warning_Code_Unreachable,
   SslCertificatesScopedList_Warning_Code
+  #-}
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
+newtype SslPoliciesAggregatedList_Warning_Code = SslPoliciesAggregatedList_Warning_Code {fromSslPoliciesAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Warning about failed cleanup of transient changes made by a failed operation.
+pattern SslPoliciesAggregatedList_Warning_Code_CLEANUPFAILED :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_CLEANUPFAILED = SslPoliciesAggregatedList_Warning_Code "CLEANUP_FAILED"
+
+-- | A link to a deprecated resource was created.
+pattern SslPoliciesAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED = SslPoliciesAggregatedList_Warning_Code "DEPRECATED_RESOURCE_USED"
+
+-- | When deploying and at least one of the resources has a type marked as deprecated
+pattern SslPoliciesAggregatedList_Warning_Code_DEPRECATEDTYPEUSED :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_DEPRECATEDTYPEUSED = SslPoliciesAggregatedList_Warning_Code "DEPRECATED_TYPE_USED"
+
+-- | The user created a boot disk that is larger than image size.
+pattern SslPoliciesAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE = SslPoliciesAggregatedList_Warning_Code "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+
+-- | When deploying and at least one of the resources has a type marked as experimental
+pattern SslPoliciesAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED = SslPoliciesAggregatedList_Warning_Code "EXPERIMENTAL_TYPE_USED"
+
+-- | Warning that is present in an external api call
+pattern SslPoliciesAggregatedList_Warning_Code_EXTERNALAPIWARNING :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_EXTERNALAPIWARNING = SslPoliciesAggregatedList_Warning_Code "EXTERNAL_API_WARNING"
+
+-- | Warning that value of a field has been overridden. Deprecated unused field.
+pattern SslPoliciesAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = SslPoliciesAggregatedList_Warning_Code "FIELD_VALUE_OVERRIDEN"
+
+-- | The operation involved use of an injected kernel, which is deprecated.
+pattern SslPoliciesAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = SslPoliciesAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
+
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern SslPoliciesAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = SslPoliciesAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
+-- | When deploying a deployment with a exceedingly large number of resources
+pattern SslPoliciesAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = SslPoliciesAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
+
+-- | A resource depends on a missing type
+pattern SslPoliciesAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY = SslPoliciesAggregatedList_Warning_Code "MISSING_TYPE_DEPENDENCY"
+
+-- | The route\'s nextHopIp address is not assigned to an instance on the network.
+pattern SslPoliciesAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = SslPoliciesAggregatedList_Warning_Code "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+
+-- | The route\'s next hop instance cannot ip forward.
+pattern SslPoliciesAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = SslPoliciesAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern SslPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = SslPoliciesAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not exist.
+pattern SslPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND = SslPoliciesAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_FOUND"
+
+-- | The route\'s nextHopInstance URL refers to an instance that is not on the same network as the route.
+pattern SslPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK = SslPoliciesAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+
+-- | The route\'s next hop instance does not have a status of RUNNING.
+pattern SslPoliciesAggregatedList_Warning_Code_NEXTHOPNOTRUNNING :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_NEXTHOPNOTRUNNING = SslPoliciesAggregatedList_Warning_Code "NEXT_HOP_NOT_RUNNING"
+
+-- | Error which is not critical. We decided to continue the process despite the mentioned error.
+pattern SslPoliciesAggregatedList_Warning_Code_NOTCRITICALERROR :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_NOTCRITICALERROR = SslPoliciesAggregatedList_Warning_Code "NOT_CRITICAL_ERROR"
+
+-- | No results are present on a particular list page.
+pattern SslPoliciesAggregatedList_Warning_Code_NORESULTSONPAGE :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_NORESULTSONPAGE = SslPoliciesAggregatedList_Warning_Code "NO_RESULTS_ON_PAGE"
+
+-- | Success is reported, but some results may be missing due to errors
+pattern SslPoliciesAggregatedList_Warning_Code_PARTIALSUCCESS :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_PARTIALSUCCESS = SslPoliciesAggregatedList_Warning_Code "PARTIAL_SUCCESS"
+
+-- | The user attempted to use a resource that requires a TOS they have not accepted.
+pattern SslPoliciesAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT = SslPoliciesAggregatedList_Warning_Code "REQUIRED_TOS_AGREEMENT"
+
+-- | Warning that a resource is in use.
+pattern SslPoliciesAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING = SslPoliciesAggregatedList_Warning_Code "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+
+-- | One or more of the resources set to auto-delete could not be deleted because they were in use.
+pattern SslPoliciesAggregatedList_Warning_Code_RESOURCENOTDELETED :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_RESOURCENOTDELETED = SslPoliciesAggregatedList_Warning_Code "RESOURCE_NOT_DELETED"
+
+-- | When a resource schema validation is ignored.
+pattern SslPoliciesAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED = SslPoliciesAggregatedList_Warning_Code "SCHEMA_VALIDATION_IGNORED"
+
+-- | Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.
+pattern SslPoliciesAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE = SslPoliciesAggregatedList_Warning_Code "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+
+-- | When undeclared properties in the schema are present
+pattern SslPoliciesAggregatedList_Warning_Code_UNDECLAREDPROPERTIES :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_UNDECLAREDPROPERTIES = SslPoliciesAggregatedList_Warning_Code "UNDECLARED_PROPERTIES"
+
+-- | A given scope cannot be reached.
+pattern SslPoliciesAggregatedList_Warning_Code_Unreachable :: SslPoliciesAggregatedList_Warning_Code
+pattern SslPoliciesAggregatedList_Warning_Code_Unreachable = SslPoliciesAggregatedList_Warning_Code "UNREACHABLE"
+
+{-# COMPLETE
+  SslPoliciesAggregatedList_Warning_Code_CLEANUPFAILED,
+  SslPoliciesAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+  SslPoliciesAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
+  SslPoliciesAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+  SslPoliciesAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED,
+  SslPoliciesAggregatedList_Warning_Code_EXTERNALAPIWARNING,
+  SslPoliciesAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
+  SslPoliciesAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  SslPoliciesAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+  SslPoliciesAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+  SslPoliciesAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+  SslPoliciesAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+  SslPoliciesAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  SslPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+  SslPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+  SslPoliciesAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+  SslPoliciesAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
+  SslPoliciesAggregatedList_Warning_Code_NOTCRITICALERROR,
+  SslPoliciesAggregatedList_Warning_Code_NORESULTSONPAGE,
+  SslPoliciesAggregatedList_Warning_Code_PARTIALSUCCESS,
+  SslPoliciesAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT,
+  SslPoliciesAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+  SslPoliciesAggregatedList_Warning_Code_RESOURCENOTDELETED,
+  SslPoliciesAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+  SslPoliciesAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+  SslPoliciesAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
+  SslPoliciesAggregatedList_Warning_Code_Unreachable,
+  SslPoliciesAggregatedList_Warning_Code
   #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
@@ -30607,6 +35371,10 @@ pattern SslPoliciesList_Warning_Code_FIELDVALUEOVERRIDEN = SslPoliciesList_Warni
 pattern SslPoliciesList_Warning_Code_INJECTEDKERNELSDEPRECATED :: SslPoliciesList_Warning_Code
 pattern SslPoliciesList_Warning_Code_INJECTEDKERNELSDEPRECATED = SslPoliciesList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern SslPoliciesList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: SslPoliciesList_Warning_Code
+pattern SslPoliciesList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = SslPoliciesList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern SslPoliciesList_Warning_Code_LARGEDEPLOYMENTWARNING :: SslPoliciesList_Warning_Code
 pattern SslPoliciesList_Warning_Code_LARGEDEPLOYMENTWARNING = SslPoliciesList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -30622,6 +35390,10 @@ pattern SslPoliciesList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = SslPoliciesList
 -- | The route\'s next hop instance cannot ip forward.
 pattern SslPoliciesList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: SslPoliciesList_Warning_Code
 pattern SslPoliciesList_Warning_Code_NEXTHOPCANNOTIPFORWARD = SslPoliciesList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern SslPoliciesList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: SslPoliciesList_Warning_Code
+pattern SslPoliciesList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = SslPoliciesList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern SslPoliciesList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: SslPoliciesList_Warning_Code
@@ -30684,10 +35456,12 @@ pattern SslPoliciesList_Warning_Code_Unreachable = SslPoliciesList_Warning_Code 
   SslPoliciesList_Warning_Code_EXTERNALAPIWARNING,
   SslPoliciesList_Warning_Code_FIELDVALUEOVERRIDEN,
   SslPoliciesList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  SslPoliciesList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   SslPoliciesList_Warning_Code_LARGEDEPLOYMENTWARNING,
   SslPoliciesList_Warning_Code_MISSINGTYPEDEPENDENCY,
   SslPoliciesList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   SslPoliciesList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  SslPoliciesList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   SslPoliciesList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   SslPoliciesList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   SslPoliciesList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -30702,6 +35476,158 @@ pattern SslPoliciesList_Warning_Code_Unreachable = SslPoliciesList_Warning_Code 
   SslPoliciesList_Warning_Code_UNDECLAREDPROPERTIES,
   SslPoliciesList_Warning_Code_Unreachable,
   SslPoliciesList_Warning_Code
+  #-}
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
+newtype SslPoliciesScopedList_Warning_Code = SslPoliciesScopedList_Warning_Code {fromSslPoliciesScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Warning about failed cleanup of transient changes made by a failed operation.
+pattern SslPoliciesScopedList_Warning_Code_CLEANUPFAILED :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_CLEANUPFAILED = SslPoliciesScopedList_Warning_Code "CLEANUP_FAILED"
+
+-- | A link to a deprecated resource was created.
+pattern SslPoliciesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED = SslPoliciesScopedList_Warning_Code "DEPRECATED_RESOURCE_USED"
+
+-- | When deploying and at least one of the resources has a type marked as deprecated
+pattern SslPoliciesScopedList_Warning_Code_DEPRECATEDTYPEUSED :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_DEPRECATEDTYPEUSED = SslPoliciesScopedList_Warning_Code "DEPRECATED_TYPE_USED"
+
+-- | The user created a boot disk that is larger than image size.
+pattern SslPoliciesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE = SslPoliciesScopedList_Warning_Code "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+
+-- | When deploying and at least one of the resources has a type marked as experimental
+pattern SslPoliciesScopedList_Warning_Code_EXPERIMENTALTYPEUSED :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_EXPERIMENTALTYPEUSED = SslPoliciesScopedList_Warning_Code "EXPERIMENTAL_TYPE_USED"
+
+-- | Warning that is present in an external api call
+pattern SslPoliciesScopedList_Warning_Code_EXTERNALAPIWARNING :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_EXTERNALAPIWARNING = SslPoliciesScopedList_Warning_Code "EXTERNAL_API_WARNING"
+
+-- | Warning that value of a field has been overridden. Deprecated unused field.
+pattern SslPoliciesScopedList_Warning_Code_FIELDVALUEOVERRIDEN :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_FIELDVALUEOVERRIDEN = SslPoliciesScopedList_Warning_Code "FIELD_VALUE_OVERRIDEN"
+
+-- | The operation involved use of an injected kernel, which is deprecated.
+pattern SslPoliciesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = SslPoliciesScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
+
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern SslPoliciesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = SslPoliciesScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
+-- | When deploying a deployment with a exceedingly large number of resources
+pattern SslPoliciesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = SslPoliciesScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
+
+-- | A resource depends on a missing type
+pattern SslPoliciesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY = SslPoliciesScopedList_Warning_Code "MISSING_TYPE_DEPENDENCY"
+
+-- | The route\'s nextHopIp address is not assigned to an instance on the network.
+pattern SslPoliciesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = SslPoliciesScopedList_Warning_Code "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+
+-- | The route\'s next hop instance cannot ip forward.
+pattern SslPoliciesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = SslPoliciesScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern SslPoliciesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = SslPoliciesScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not exist.
+pattern SslPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND = SslPoliciesScopedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_FOUND"
+
+-- | The route\'s nextHopInstance URL refers to an instance that is not on the same network as the route.
+pattern SslPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK = SslPoliciesScopedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+
+-- | The route\'s next hop instance does not have a status of RUNNING.
+pattern SslPoliciesScopedList_Warning_Code_NEXTHOPNOTRUNNING :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_NEXTHOPNOTRUNNING = SslPoliciesScopedList_Warning_Code "NEXT_HOP_NOT_RUNNING"
+
+-- | Error which is not critical. We decided to continue the process despite the mentioned error.
+pattern SslPoliciesScopedList_Warning_Code_NOTCRITICALERROR :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_NOTCRITICALERROR = SslPoliciesScopedList_Warning_Code "NOT_CRITICAL_ERROR"
+
+-- | No results are present on a particular list page.
+pattern SslPoliciesScopedList_Warning_Code_NORESULTSONPAGE :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_NORESULTSONPAGE = SslPoliciesScopedList_Warning_Code "NO_RESULTS_ON_PAGE"
+
+-- | Success is reported, but some results may be missing due to errors
+pattern SslPoliciesScopedList_Warning_Code_PARTIALSUCCESS :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_PARTIALSUCCESS = SslPoliciesScopedList_Warning_Code "PARTIAL_SUCCESS"
+
+-- | The user attempted to use a resource that requires a TOS they have not accepted.
+pattern SslPoliciesScopedList_Warning_Code_REQUIREDTOSAGREEMENT :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_REQUIREDTOSAGREEMENT = SslPoliciesScopedList_Warning_Code "REQUIRED_TOS_AGREEMENT"
+
+-- | Warning that a resource is in use.
+pattern SslPoliciesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING = SslPoliciesScopedList_Warning_Code "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+
+-- | One or more of the resources set to auto-delete could not be deleted because they were in use.
+pattern SslPoliciesScopedList_Warning_Code_RESOURCENOTDELETED :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_RESOURCENOTDELETED = SslPoliciesScopedList_Warning_Code "RESOURCE_NOT_DELETED"
+
+-- | When a resource schema validation is ignored.
+pattern SslPoliciesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED = SslPoliciesScopedList_Warning_Code "SCHEMA_VALIDATION_IGNORED"
+
+-- | Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.
+pattern SslPoliciesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE = SslPoliciesScopedList_Warning_Code "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+
+-- | When undeclared properties in the schema are present
+pattern SslPoliciesScopedList_Warning_Code_UNDECLAREDPROPERTIES :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_UNDECLAREDPROPERTIES = SslPoliciesScopedList_Warning_Code "UNDECLARED_PROPERTIES"
+
+-- | A given scope cannot be reached.
+pattern SslPoliciesScopedList_Warning_Code_Unreachable :: SslPoliciesScopedList_Warning_Code
+pattern SslPoliciesScopedList_Warning_Code_Unreachable = SslPoliciesScopedList_Warning_Code "UNREACHABLE"
+
+{-# COMPLETE
+  SslPoliciesScopedList_Warning_Code_CLEANUPFAILED,
+  SslPoliciesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+  SslPoliciesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
+  SslPoliciesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+  SslPoliciesScopedList_Warning_Code_EXPERIMENTALTYPEUSED,
+  SslPoliciesScopedList_Warning_Code_EXTERNALAPIWARNING,
+  SslPoliciesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
+  SslPoliciesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  SslPoliciesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+  SslPoliciesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+  SslPoliciesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+  SslPoliciesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+  SslPoliciesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  SslPoliciesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+  SslPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+  SslPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+  SslPoliciesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
+  SslPoliciesScopedList_Warning_Code_NOTCRITICALERROR,
+  SslPoliciesScopedList_Warning_Code_NORESULTSONPAGE,
+  SslPoliciesScopedList_Warning_Code_PARTIALSUCCESS,
+  SslPoliciesScopedList_Warning_Code_REQUIREDTOSAGREEMENT,
+  SslPoliciesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+  SslPoliciesScopedList_Warning_Code_RESOURCENOTDELETED,
+  SslPoliciesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+  SslPoliciesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+  SslPoliciesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
+  SslPoliciesScopedList_Warning_Code_Unreachable,
+  SslPoliciesScopedList_Warning_Code
   #-}
 
 -- | The minimum version of SSL protocol that can be used by the clients to establish a connection with the load balancer. This can be one of TLS/1/0, TLS/1/1, TLS/1/2.
@@ -30818,6 +35744,10 @@ pattern SslPolicy_WarningsItem_Code_FIELDVALUEOVERRIDEN = SslPolicy_WarningsItem
 pattern SslPolicy_WarningsItem_Code_INJECTEDKERNELSDEPRECATED :: SslPolicy_WarningsItem_Code
 pattern SslPolicy_WarningsItem_Code_INJECTEDKERNELSDEPRECATED = SslPolicy_WarningsItem_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern SslPolicy_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: SslPolicy_WarningsItem_Code
+pattern SslPolicy_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = SslPolicy_WarningsItem_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern SslPolicy_WarningsItem_Code_LARGEDEPLOYMENTWARNING :: SslPolicy_WarningsItem_Code
 pattern SslPolicy_WarningsItem_Code_LARGEDEPLOYMENTWARNING = SslPolicy_WarningsItem_Code "LARGE_DEPLOYMENT_WARNING"
@@ -30833,6 +35763,10 @@ pattern SslPolicy_WarningsItem_Code_NEXTHOPADDRESSNOTASSIGNED = SslPolicy_Warnin
 -- | The route\'s next hop instance cannot ip forward.
 pattern SslPolicy_WarningsItem_Code_NEXTHOPCANNOTIPFORWARD :: SslPolicy_WarningsItem_Code
 pattern SslPolicy_WarningsItem_Code_NEXTHOPCANNOTIPFORWARD = SslPolicy_WarningsItem_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern SslPolicy_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: SslPolicy_WarningsItem_Code
+pattern SslPolicy_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = SslPolicy_WarningsItem_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern SslPolicy_WarningsItem_Code_NEXTHOPINSTANCENOTFOUND :: SslPolicy_WarningsItem_Code
@@ -30895,10 +35829,12 @@ pattern SslPolicy_WarningsItem_Code_Unreachable = SslPolicy_WarningsItem_Code "U
   SslPolicy_WarningsItem_Code_EXTERNALAPIWARNING,
   SslPolicy_WarningsItem_Code_FIELDVALUEOVERRIDEN,
   SslPolicy_WarningsItem_Code_INJECTEDKERNELSDEPRECATED,
+  SslPolicy_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   SslPolicy_WarningsItem_Code_LARGEDEPLOYMENTWARNING,
   SslPolicy_WarningsItem_Code_MISSINGTYPEDEPENDENCY,
   SslPolicy_WarningsItem_Code_NEXTHOPADDRESSNOTASSIGNED,
   SslPolicy_WarningsItem_Code_NEXTHOPCANNOTIPFORWARD,
+  SslPolicy_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   SslPolicy_WarningsItem_Code_NEXTHOPINSTANCENOTFOUND,
   SslPolicy_WarningsItem_Code_NEXTHOPINSTANCENOTONNETWORK,
   SslPolicy_WarningsItem_Code_NEXTHOPNOTRUNNING,
@@ -30942,7 +35878,7 @@ pattern StatefulPolicyPreservedStateDiskDevice_AutoDelete_ONPERMANENTINSTANCEDEL
   StatefulPolicyPreservedStateDiskDevice_AutoDelete
   #-}
 
--- | The access type of IPv6 address this subnet holds. It\'s immutable and can only be specified during creation or the first time the subnet is updated into IPV4/IPV6 dual stack. If the ipv6/type is EXTERNAL then this subnet cannot enable direct path.
+-- | The access type of IPv6 address this subnet holds. It\'s immutable and can only be specified during creation or the first time the subnet is updated into IPV4_IPV6 dual stack.
 newtype Subnetwork_Ipv6AccessType = Subnetwork_Ipv6AccessType {fromSubnetwork_Ipv6AccessType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -30955,7 +35891,7 @@ newtype Subnetwork_Ipv6AccessType = Subnetwork_Ipv6AccessType {fromSubnetwork_Ip
       Core.FromJSONKey
     )
 
--- | VMs on this subnet will be assigned IPv6 addresses that are accesible via the Internet, as well as the VPC network.
+-- | VMs on this subnet will be assigned IPv6 addresses that are accessible via the Internet, as well as the VPC network.
 pattern Subnetwork_Ipv6AccessType_External :: Subnetwork_Ipv6AccessType
 pattern Subnetwork_Ipv6AccessType_External = Subnetwork_Ipv6AccessType "EXTERNAL"
 
@@ -30969,7 +35905,7 @@ pattern Subnetwork_Ipv6AccessType_Internal = Subnetwork_Ipv6AccessType "INTERNAL
   Subnetwork_Ipv6AccessType
   #-}
 
--- | The private IPv6 google access type for the VMs in this subnet. This is an expanded field of enablePrivateV6Access. If both fields are set, privateIpv6GoogleAccess will take priority. This field can be both set at resource creation time and updated using patch.
+-- | This field is for internal use. This field can be both set at resource creation time and updated using patch.
 newtype Subnetwork_PrivateIpv6GoogleAccess = Subnetwork_PrivateIpv6GoogleAccess {fromSubnetwork_PrivateIpv6GoogleAccess :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -31169,6 +36105,10 @@ pattern SubnetworkAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = SubnetworkAg
 pattern SubnetworkAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: SubnetworkAggregatedList_Warning_Code
 pattern SubnetworkAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = SubnetworkAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern SubnetworkAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: SubnetworkAggregatedList_Warning_Code
+pattern SubnetworkAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = SubnetworkAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern SubnetworkAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: SubnetworkAggregatedList_Warning_Code
 pattern SubnetworkAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = SubnetworkAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -31184,6 +36124,10 @@ pattern SubnetworkAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Subnet
 -- | The route\'s next hop instance cannot ip forward.
 pattern SubnetworkAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: SubnetworkAggregatedList_Warning_Code
 pattern SubnetworkAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = SubnetworkAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern SubnetworkAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: SubnetworkAggregatedList_Warning_Code
+pattern SubnetworkAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = SubnetworkAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern SubnetworkAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: SubnetworkAggregatedList_Warning_Code
@@ -31246,10 +36190,12 @@ pattern SubnetworkAggregatedList_Warning_Code_Unreachable = SubnetworkAggregated
   SubnetworkAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   SubnetworkAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   SubnetworkAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  SubnetworkAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   SubnetworkAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   SubnetworkAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   SubnetworkAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   SubnetworkAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  SubnetworkAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   SubnetworkAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   SubnetworkAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   SubnetworkAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -31311,6 +36257,10 @@ pattern SubnetworkList_Warning_Code_FIELDVALUEOVERRIDEN = SubnetworkList_Warning
 pattern SubnetworkList_Warning_Code_INJECTEDKERNELSDEPRECATED :: SubnetworkList_Warning_Code
 pattern SubnetworkList_Warning_Code_INJECTEDKERNELSDEPRECATED = SubnetworkList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern SubnetworkList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: SubnetworkList_Warning_Code
+pattern SubnetworkList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = SubnetworkList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern SubnetworkList_Warning_Code_LARGEDEPLOYMENTWARNING :: SubnetworkList_Warning_Code
 pattern SubnetworkList_Warning_Code_LARGEDEPLOYMENTWARNING = SubnetworkList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -31326,6 +36276,10 @@ pattern SubnetworkList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = SubnetworkList_W
 -- | The route\'s next hop instance cannot ip forward.
 pattern SubnetworkList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: SubnetworkList_Warning_Code
 pattern SubnetworkList_Warning_Code_NEXTHOPCANNOTIPFORWARD = SubnetworkList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern SubnetworkList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: SubnetworkList_Warning_Code
+pattern SubnetworkList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = SubnetworkList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern SubnetworkList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: SubnetworkList_Warning_Code
@@ -31388,10 +36342,12 @@ pattern SubnetworkList_Warning_Code_Unreachable = SubnetworkList_Warning_Code "U
   SubnetworkList_Warning_Code_EXTERNALAPIWARNING,
   SubnetworkList_Warning_Code_FIELDVALUEOVERRIDEN,
   SubnetworkList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  SubnetworkList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   SubnetworkList_Warning_Code_LARGEDEPLOYMENTWARNING,
   SubnetworkList_Warning_Code_MISSINGTYPEDEPENDENCY,
   SubnetworkList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   SubnetworkList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  SubnetworkList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   SubnetworkList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   SubnetworkList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   SubnetworkList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -31532,6 +36488,10 @@ pattern SubnetworksScopedList_Warning_Code_FIELDVALUEOVERRIDEN = SubnetworksScop
 pattern SubnetworksScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: SubnetworksScopedList_Warning_Code
 pattern SubnetworksScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = SubnetworksScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern SubnetworksScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: SubnetworksScopedList_Warning_Code
+pattern SubnetworksScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = SubnetworksScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern SubnetworksScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: SubnetworksScopedList_Warning_Code
 pattern SubnetworksScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = SubnetworksScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -31547,6 +36507,10 @@ pattern SubnetworksScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Subnetwor
 -- | The route\'s next hop instance cannot ip forward.
 pattern SubnetworksScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: SubnetworksScopedList_Warning_Code
 pattern SubnetworksScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = SubnetworksScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern SubnetworksScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: SubnetworksScopedList_Warning_Code
+pattern SubnetworksScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = SubnetworksScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern SubnetworksScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: SubnetworksScopedList_Warning_Code
@@ -31609,10 +36573,12 @@ pattern SubnetworksScopedList_Warning_Code_Unreachable = SubnetworksScopedList_W
   SubnetworksScopedList_Warning_Code_EXTERNALAPIWARNING,
   SubnetworksScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   SubnetworksScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  SubnetworksScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   SubnetworksScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   SubnetworksScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   SubnetworksScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   SubnetworksScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  SubnetworksScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   SubnetworksScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   SubnetworksScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   SubnetworksScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -31655,7 +36621,8 @@ pattern Subsetting_Policy_None = Subsetting_Policy "NONE"
   Subsetting_Policy
   #-}
 
--- | Specifies how port is selected for health checking, can be one of following values: USE/FIXED/PORT: The port number in port is used for health checking. USE/NAMED/PORT: The portName is used for health checking. USE/SERVING/PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, TCP health check follows behavior specified in port and portName fields.
+-- | Specifies how a port is selected for health checking. Can be one of the following values: USE/FIXED/PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Not supported by target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE/VM/IP network endpoint groups, GCE/VM/IP/PORT network endpoint groups, and instance group backends. USE/NAMED/PORT: Not supported. USE/SERVING/PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE/VM/IP/PORT network endpoint groups and instance group backends. For GCE/VM/IP_PORT network
+-- endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service\'s named port in the instance group\'s list of named ports.
 newtype TCPHealthCheck_PortSpecification = TCPHealthCheck_PortSpecification {fromTCPHealthCheck_PortSpecification :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -31668,15 +36635,15 @@ newtype TCPHealthCheck_PortSpecification = TCPHealthCheck_PortSpecification {fro
       Core.FromJSONKey
     )
 
--- | The port number in port is used for health checking.
+-- | The port number in the health check\'s port is used for health checking. Applies to network endpoint group and instance group backends.
 pattern TCPHealthCheck_PortSpecification_USEFIXEDPORT :: TCPHealthCheck_PortSpecification
 pattern TCPHealthCheck_PortSpecification_USEFIXEDPORT = TCPHealthCheck_PortSpecification "USE_FIXED_PORT"
 
--- | The portName is used for health checking.
+-- | Not supported.
 pattern TCPHealthCheck_PortSpecification_USENAMEDPORT :: TCPHealthCheck_PortSpecification
 pattern TCPHealthCheck_PortSpecification_USENAMEDPORT = TCPHealthCheck_PortSpecification "USE_NAMED_PORT"
 
--- | For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking.
+-- | For network endpoint group backends, the health check uses the port number specified on each endpoint in the network endpoint group. For instance group backends, the health check uses the port number specified for the backend service\'s named port defined in the instance group\'s named ports.
 pattern TCPHealthCheck_PortSpecification_USESERVINGPORT :: TCPHealthCheck_PortSpecification
 pattern TCPHealthCheck_PortSpecification_USESERVINGPORT = TCPHealthCheck_PortSpecification "USE_SERVING_PORT"
 
@@ -31759,6 +36726,10 @@ pattern TargetGrpcProxyList_Warning_Code_FIELDVALUEOVERRIDEN = TargetGrpcProxyLi
 pattern TargetGrpcProxyList_Warning_Code_INJECTEDKERNELSDEPRECATED :: TargetGrpcProxyList_Warning_Code
 pattern TargetGrpcProxyList_Warning_Code_INJECTEDKERNELSDEPRECATED = TargetGrpcProxyList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern TargetGrpcProxyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: TargetGrpcProxyList_Warning_Code
+pattern TargetGrpcProxyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = TargetGrpcProxyList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern TargetGrpcProxyList_Warning_Code_LARGEDEPLOYMENTWARNING :: TargetGrpcProxyList_Warning_Code
 pattern TargetGrpcProxyList_Warning_Code_LARGEDEPLOYMENTWARNING = TargetGrpcProxyList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -31774,6 +36745,10 @@ pattern TargetGrpcProxyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = TargetGrpcP
 -- | The route\'s next hop instance cannot ip forward.
 pattern TargetGrpcProxyList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: TargetGrpcProxyList_Warning_Code
 pattern TargetGrpcProxyList_Warning_Code_NEXTHOPCANNOTIPFORWARD = TargetGrpcProxyList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern TargetGrpcProxyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: TargetGrpcProxyList_Warning_Code
+pattern TargetGrpcProxyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = TargetGrpcProxyList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern TargetGrpcProxyList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: TargetGrpcProxyList_Warning_Code
@@ -31836,10 +36811,12 @@ pattern TargetGrpcProxyList_Warning_Code_Unreachable = TargetGrpcProxyList_Warni
   TargetGrpcProxyList_Warning_Code_EXTERNALAPIWARNING,
   TargetGrpcProxyList_Warning_Code_FIELDVALUEOVERRIDEN,
   TargetGrpcProxyList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  TargetGrpcProxyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   TargetGrpcProxyList_Warning_Code_LARGEDEPLOYMENTWARNING,
   TargetGrpcProxyList_Warning_Code_MISSINGTYPEDEPENDENCY,
   TargetGrpcProxyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   TargetGrpcProxyList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  TargetGrpcProxyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   TargetGrpcProxyList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   TargetGrpcProxyList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   TargetGrpcProxyList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -31901,6 +36878,10 @@ pattern TargetHttpProxiesScopedList_Warning_Code_FIELDVALUEOVERRIDEN = TargetHtt
 pattern TargetHttpProxiesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: TargetHttpProxiesScopedList_Warning_Code
 pattern TargetHttpProxiesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = TargetHttpProxiesScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern TargetHttpProxiesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: TargetHttpProxiesScopedList_Warning_Code
+pattern TargetHttpProxiesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = TargetHttpProxiesScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern TargetHttpProxiesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: TargetHttpProxiesScopedList_Warning_Code
 pattern TargetHttpProxiesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = TargetHttpProxiesScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -31916,6 +36897,10 @@ pattern TargetHttpProxiesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Tar
 -- | The route\'s next hop instance cannot ip forward.
 pattern TargetHttpProxiesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: TargetHttpProxiesScopedList_Warning_Code
 pattern TargetHttpProxiesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = TargetHttpProxiesScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern TargetHttpProxiesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: TargetHttpProxiesScopedList_Warning_Code
+pattern TargetHttpProxiesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = TargetHttpProxiesScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern TargetHttpProxiesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: TargetHttpProxiesScopedList_Warning_Code
@@ -31978,10 +36963,12 @@ pattern TargetHttpProxiesScopedList_Warning_Code_Unreachable = TargetHttpProxies
   TargetHttpProxiesScopedList_Warning_Code_EXTERNALAPIWARNING,
   TargetHttpProxiesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   TargetHttpProxiesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  TargetHttpProxiesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   TargetHttpProxiesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   TargetHttpProxiesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   TargetHttpProxiesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   TargetHttpProxiesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  TargetHttpProxiesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   TargetHttpProxiesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   TargetHttpProxiesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   TargetHttpProxiesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -32043,6 +37030,10 @@ pattern TargetHttpProxyList_Warning_Code_FIELDVALUEOVERRIDEN = TargetHttpProxyLi
 pattern TargetHttpProxyList_Warning_Code_INJECTEDKERNELSDEPRECATED :: TargetHttpProxyList_Warning_Code
 pattern TargetHttpProxyList_Warning_Code_INJECTEDKERNELSDEPRECATED = TargetHttpProxyList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern TargetHttpProxyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: TargetHttpProxyList_Warning_Code
+pattern TargetHttpProxyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = TargetHttpProxyList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern TargetHttpProxyList_Warning_Code_LARGEDEPLOYMENTWARNING :: TargetHttpProxyList_Warning_Code
 pattern TargetHttpProxyList_Warning_Code_LARGEDEPLOYMENTWARNING = TargetHttpProxyList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -32058,6 +37049,10 @@ pattern TargetHttpProxyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = TargetHttpP
 -- | The route\'s next hop instance cannot ip forward.
 pattern TargetHttpProxyList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: TargetHttpProxyList_Warning_Code
 pattern TargetHttpProxyList_Warning_Code_NEXTHOPCANNOTIPFORWARD = TargetHttpProxyList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern TargetHttpProxyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: TargetHttpProxyList_Warning_Code
+pattern TargetHttpProxyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = TargetHttpProxyList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern TargetHttpProxyList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: TargetHttpProxyList_Warning_Code
@@ -32120,10 +37115,12 @@ pattern TargetHttpProxyList_Warning_Code_Unreachable = TargetHttpProxyList_Warni
   TargetHttpProxyList_Warning_Code_EXTERNALAPIWARNING,
   TargetHttpProxyList_Warning_Code_FIELDVALUEOVERRIDEN,
   TargetHttpProxyList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  TargetHttpProxyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   TargetHttpProxyList_Warning_Code_LARGEDEPLOYMENTWARNING,
   TargetHttpProxyList_Warning_Code_MISSINGTYPEDEPENDENCY,
   TargetHttpProxyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   TargetHttpProxyList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  TargetHttpProxyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   TargetHttpProxyList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   TargetHttpProxyList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   TargetHttpProxyList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -32185,6 +37182,10 @@ pattern TargetHttpsProxiesScopedList_Warning_Code_FIELDVALUEOVERRIDEN = TargetHt
 pattern TargetHttpsProxiesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: TargetHttpsProxiesScopedList_Warning_Code
 pattern TargetHttpsProxiesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = TargetHttpsProxiesScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern TargetHttpsProxiesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: TargetHttpsProxiesScopedList_Warning_Code
+pattern TargetHttpsProxiesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = TargetHttpsProxiesScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern TargetHttpsProxiesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: TargetHttpsProxiesScopedList_Warning_Code
 pattern TargetHttpsProxiesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = TargetHttpsProxiesScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -32200,6 +37201,10 @@ pattern TargetHttpsProxiesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Ta
 -- | The route\'s next hop instance cannot ip forward.
 pattern TargetHttpsProxiesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: TargetHttpsProxiesScopedList_Warning_Code
 pattern TargetHttpsProxiesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = TargetHttpsProxiesScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern TargetHttpsProxiesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: TargetHttpsProxiesScopedList_Warning_Code
+pattern TargetHttpsProxiesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = TargetHttpsProxiesScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern TargetHttpsProxiesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: TargetHttpsProxiesScopedList_Warning_Code
@@ -32262,10 +37267,12 @@ pattern TargetHttpsProxiesScopedList_Warning_Code_Unreachable = TargetHttpsProxi
   TargetHttpsProxiesScopedList_Warning_Code_EXTERNALAPIWARNING,
   TargetHttpsProxiesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   TargetHttpsProxiesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  TargetHttpsProxiesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   TargetHttpsProxiesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   TargetHttpsProxiesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   TargetHttpsProxiesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   TargetHttpsProxiesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  TargetHttpsProxiesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   TargetHttpsProxiesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   TargetHttpsProxiesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   TargetHttpsProxiesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -32391,6 +37398,10 @@ pattern TargetHttpsProxyAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = Target
 pattern TargetHttpsProxyAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: TargetHttpsProxyAggregatedList_Warning_Code
 pattern TargetHttpsProxyAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = TargetHttpsProxyAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern TargetHttpsProxyAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: TargetHttpsProxyAggregatedList_Warning_Code
+pattern TargetHttpsProxyAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = TargetHttpsProxyAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern TargetHttpsProxyAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: TargetHttpsProxyAggregatedList_Warning_Code
 pattern TargetHttpsProxyAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = TargetHttpsProxyAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -32406,6 +37417,10 @@ pattern TargetHttpsProxyAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = 
 -- | The route\'s next hop instance cannot ip forward.
 pattern TargetHttpsProxyAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: TargetHttpsProxyAggregatedList_Warning_Code
 pattern TargetHttpsProxyAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = TargetHttpsProxyAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern TargetHttpsProxyAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: TargetHttpsProxyAggregatedList_Warning_Code
+pattern TargetHttpsProxyAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = TargetHttpsProxyAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern TargetHttpsProxyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: TargetHttpsProxyAggregatedList_Warning_Code
@@ -32468,10 +37483,12 @@ pattern TargetHttpsProxyAggregatedList_Warning_Code_Unreachable = TargetHttpsPro
   TargetHttpsProxyAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   TargetHttpsProxyAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   TargetHttpsProxyAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  TargetHttpsProxyAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   TargetHttpsProxyAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   TargetHttpsProxyAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   TargetHttpsProxyAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   TargetHttpsProxyAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  TargetHttpsProxyAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   TargetHttpsProxyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   TargetHttpsProxyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   TargetHttpsProxyAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -32533,6 +37550,10 @@ pattern TargetHttpsProxyList_Warning_Code_FIELDVALUEOVERRIDEN = TargetHttpsProxy
 pattern TargetHttpsProxyList_Warning_Code_INJECTEDKERNELSDEPRECATED :: TargetHttpsProxyList_Warning_Code
 pattern TargetHttpsProxyList_Warning_Code_INJECTEDKERNELSDEPRECATED = TargetHttpsProxyList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern TargetHttpsProxyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: TargetHttpsProxyList_Warning_Code
+pattern TargetHttpsProxyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = TargetHttpsProxyList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern TargetHttpsProxyList_Warning_Code_LARGEDEPLOYMENTWARNING :: TargetHttpsProxyList_Warning_Code
 pattern TargetHttpsProxyList_Warning_Code_LARGEDEPLOYMENTWARNING = TargetHttpsProxyList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -32548,6 +37569,10 @@ pattern TargetHttpsProxyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = TargetHttp
 -- | The route\'s next hop instance cannot ip forward.
 pattern TargetHttpsProxyList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: TargetHttpsProxyList_Warning_Code
 pattern TargetHttpsProxyList_Warning_Code_NEXTHOPCANNOTIPFORWARD = TargetHttpsProxyList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern TargetHttpsProxyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: TargetHttpsProxyList_Warning_Code
+pattern TargetHttpsProxyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = TargetHttpsProxyList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern TargetHttpsProxyList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: TargetHttpsProxyList_Warning_Code
@@ -32610,10 +37635,12 @@ pattern TargetHttpsProxyList_Warning_Code_Unreachable = TargetHttpsProxyList_War
   TargetHttpsProxyList_Warning_Code_EXTERNALAPIWARNING,
   TargetHttpsProxyList_Warning_Code_FIELDVALUEOVERRIDEN,
   TargetHttpsProxyList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  TargetHttpsProxyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   TargetHttpsProxyList_Warning_Code_LARGEDEPLOYMENTWARNING,
   TargetHttpsProxyList_Warning_Code_MISSINGTYPEDEPENDENCY,
   TargetHttpsProxyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   TargetHttpsProxyList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  TargetHttpsProxyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   TargetHttpsProxyList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   TargetHttpsProxyList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   TargetHttpsProxyList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -32630,7 +37657,7 @@ pattern TargetHttpsProxyList_Warning_Code_Unreachable = TargetHttpsProxyList_War
   TargetHttpsProxyList_Warning_Code
   #-}
 
--- | NAT option controlling how IPs are NAT\'ed to the instance. Currently only NO_NAT (default value) is supported.
+-- | Must have a value of NO_NAT. Protocol forwarding delivers packets while preserving the destination IP address of the forwarding rule referencing the target instance.
 newtype TargetInstance_NatPolicy = TargetInstance_NatPolicy {fromTargetInstance_NatPolicy :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -32697,6 +37724,10 @@ pattern TargetInstanceAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = TargetIn
 pattern TargetInstanceAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: TargetInstanceAggregatedList_Warning_Code
 pattern TargetInstanceAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = TargetInstanceAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern TargetInstanceAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: TargetInstanceAggregatedList_Warning_Code
+pattern TargetInstanceAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = TargetInstanceAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern TargetInstanceAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: TargetInstanceAggregatedList_Warning_Code
 pattern TargetInstanceAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = TargetInstanceAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -32712,6 +37743,10 @@ pattern TargetInstanceAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Ta
 -- | The route\'s next hop instance cannot ip forward.
 pattern TargetInstanceAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: TargetInstanceAggregatedList_Warning_Code
 pattern TargetInstanceAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = TargetInstanceAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern TargetInstanceAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: TargetInstanceAggregatedList_Warning_Code
+pattern TargetInstanceAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = TargetInstanceAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern TargetInstanceAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: TargetInstanceAggregatedList_Warning_Code
@@ -32774,10 +37809,12 @@ pattern TargetInstanceAggregatedList_Warning_Code_Unreachable = TargetInstanceAg
   TargetInstanceAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   TargetInstanceAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   TargetInstanceAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  TargetInstanceAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   TargetInstanceAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   TargetInstanceAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   TargetInstanceAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   TargetInstanceAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  TargetInstanceAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   TargetInstanceAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   TargetInstanceAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   TargetInstanceAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -32839,6 +37876,10 @@ pattern TargetInstanceList_Warning_Code_FIELDVALUEOVERRIDEN = TargetInstanceList
 pattern TargetInstanceList_Warning_Code_INJECTEDKERNELSDEPRECATED :: TargetInstanceList_Warning_Code
 pattern TargetInstanceList_Warning_Code_INJECTEDKERNELSDEPRECATED = TargetInstanceList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern TargetInstanceList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: TargetInstanceList_Warning_Code
+pattern TargetInstanceList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = TargetInstanceList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern TargetInstanceList_Warning_Code_LARGEDEPLOYMENTWARNING :: TargetInstanceList_Warning_Code
 pattern TargetInstanceList_Warning_Code_LARGEDEPLOYMENTWARNING = TargetInstanceList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -32854,6 +37895,10 @@ pattern TargetInstanceList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = TargetInstan
 -- | The route\'s next hop instance cannot ip forward.
 pattern TargetInstanceList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: TargetInstanceList_Warning_Code
 pattern TargetInstanceList_Warning_Code_NEXTHOPCANNOTIPFORWARD = TargetInstanceList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern TargetInstanceList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: TargetInstanceList_Warning_Code
+pattern TargetInstanceList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = TargetInstanceList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern TargetInstanceList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: TargetInstanceList_Warning_Code
@@ -32916,10 +37961,12 @@ pattern TargetInstanceList_Warning_Code_Unreachable = TargetInstanceList_Warning
   TargetInstanceList_Warning_Code_EXTERNALAPIWARNING,
   TargetInstanceList_Warning_Code_FIELDVALUEOVERRIDEN,
   TargetInstanceList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  TargetInstanceList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   TargetInstanceList_Warning_Code_LARGEDEPLOYMENTWARNING,
   TargetInstanceList_Warning_Code_MISSINGTYPEDEPENDENCY,
   TargetInstanceList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   TargetInstanceList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  TargetInstanceList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   TargetInstanceList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   TargetInstanceList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   TargetInstanceList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -32981,6 +38028,10 @@ pattern TargetInstancesScopedList_Warning_Code_FIELDVALUEOVERRIDEN = TargetInsta
 pattern TargetInstancesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: TargetInstancesScopedList_Warning_Code
 pattern TargetInstancesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = TargetInstancesScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern TargetInstancesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: TargetInstancesScopedList_Warning_Code
+pattern TargetInstancesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = TargetInstancesScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern TargetInstancesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: TargetInstancesScopedList_Warning_Code
 pattern TargetInstancesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = TargetInstancesScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -32996,6 +38047,10 @@ pattern TargetInstancesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Targe
 -- | The route\'s next hop instance cannot ip forward.
 pattern TargetInstancesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: TargetInstancesScopedList_Warning_Code
 pattern TargetInstancesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = TargetInstancesScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern TargetInstancesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: TargetInstancesScopedList_Warning_Code
+pattern TargetInstancesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = TargetInstancesScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern TargetInstancesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: TargetInstancesScopedList_Warning_Code
@@ -33058,10 +38113,12 @@ pattern TargetInstancesScopedList_Warning_Code_Unreachable = TargetInstancesScop
   TargetInstancesScopedList_Warning_Code_EXTERNALAPIWARNING,
   TargetInstancesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   TargetInstancesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  TargetInstancesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   TargetInstancesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   TargetInstancesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   TargetInstancesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   TargetInstancesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  TargetInstancesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   TargetInstancesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   TargetInstancesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   TargetInstancesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -33180,6 +38237,10 @@ pattern TargetPoolAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = TargetPoolAg
 pattern TargetPoolAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: TargetPoolAggregatedList_Warning_Code
 pattern TargetPoolAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = TargetPoolAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern TargetPoolAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: TargetPoolAggregatedList_Warning_Code
+pattern TargetPoolAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = TargetPoolAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern TargetPoolAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: TargetPoolAggregatedList_Warning_Code
 pattern TargetPoolAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = TargetPoolAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -33195,6 +38256,10 @@ pattern TargetPoolAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Target
 -- | The route\'s next hop instance cannot ip forward.
 pattern TargetPoolAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: TargetPoolAggregatedList_Warning_Code
 pattern TargetPoolAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = TargetPoolAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern TargetPoolAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: TargetPoolAggregatedList_Warning_Code
+pattern TargetPoolAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = TargetPoolAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern TargetPoolAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: TargetPoolAggregatedList_Warning_Code
@@ -33257,10 +38322,12 @@ pattern TargetPoolAggregatedList_Warning_Code_Unreachable = TargetPoolAggregated
   TargetPoolAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   TargetPoolAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   TargetPoolAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  TargetPoolAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   TargetPoolAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   TargetPoolAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   TargetPoolAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   TargetPoolAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  TargetPoolAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   TargetPoolAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   TargetPoolAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   TargetPoolAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -33322,6 +38389,10 @@ pattern TargetPoolList_Warning_Code_FIELDVALUEOVERRIDEN = TargetPoolList_Warning
 pattern TargetPoolList_Warning_Code_INJECTEDKERNELSDEPRECATED :: TargetPoolList_Warning_Code
 pattern TargetPoolList_Warning_Code_INJECTEDKERNELSDEPRECATED = TargetPoolList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern TargetPoolList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: TargetPoolList_Warning_Code
+pattern TargetPoolList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = TargetPoolList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern TargetPoolList_Warning_Code_LARGEDEPLOYMENTWARNING :: TargetPoolList_Warning_Code
 pattern TargetPoolList_Warning_Code_LARGEDEPLOYMENTWARNING = TargetPoolList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -33337,6 +38408,10 @@ pattern TargetPoolList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = TargetPoolList_W
 -- | The route\'s next hop instance cannot ip forward.
 pattern TargetPoolList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: TargetPoolList_Warning_Code
 pattern TargetPoolList_Warning_Code_NEXTHOPCANNOTIPFORWARD = TargetPoolList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern TargetPoolList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: TargetPoolList_Warning_Code
+pattern TargetPoolList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = TargetPoolList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern TargetPoolList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: TargetPoolList_Warning_Code
@@ -33399,10 +38474,12 @@ pattern TargetPoolList_Warning_Code_Unreachable = TargetPoolList_Warning_Code "U
   TargetPoolList_Warning_Code_EXTERNALAPIWARNING,
   TargetPoolList_Warning_Code_FIELDVALUEOVERRIDEN,
   TargetPoolList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  TargetPoolList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   TargetPoolList_Warning_Code_LARGEDEPLOYMENTWARNING,
   TargetPoolList_Warning_Code_MISSINGTYPEDEPENDENCY,
   TargetPoolList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   TargetPoolList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  TargetPoolList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   TargetPoolList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   TargetPoolList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   TargetPoolList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -33464,6 +38541,10 @@ pattern TargetPoolsScopedList_Warning_Code_FIELDVALUEOVERRIDEN = TargetPoolsScop
 pattern TargetPoolsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: TargetPoolsScopedList_Warning_Code
 pattern TargetPoolsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = TargetPoolsScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern TargetPoolsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: TargetPoolsScopedList_Warning_Code
+pattern TargetPoolsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = TargetPoolsScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern TargetPoolsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: TargetPoolsScopedList_Warning_Code
 pattern TargetPoolsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = TargetPoolsScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -33479,6 +38560,10 @@ pattern TargetPoolsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = TargetPoo
 -- | The route\'s next hop instance cannot ip forward.
 pattern TargetPoolsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: TargetPoolsScopedList_Warning_Code
 pattern TargetPoolsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = TargetPoolsScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern TargetPoolsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: TargetPoolsScopedList_Warning_Code
+pattern TargetPoolsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = TargetPoolsScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern TargetPoolsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: TargetPoolsScopedList_Warning_Code
@@ -33541,10 +38626,12 @@ pattern TargetPoolsScopedList_Warning_Code_Unreachable = TargetPoolsScopedList_W
   TargetPoolsScopedList_Warning_Code_EXTERNALAPIWARNING,
   TargetPoolsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   TargetPoolsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  TargetPoolsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   TargetPoolsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   TargetPoolsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   TargetPoolsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   TargetPoolsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  TargetPoolsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   TargetPoolsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   TargetPoolsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   TargetPoolsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -33660,6 +38747,10 @@ pattern TargetSslProxyList_Warning_Code_FIELDVALUEOVERRIDEN = TargetSslProxyList
 pattern TargetSslProxyList_Warning_Code_INJECTEDKERNELSDEPRECATED :: TargetSslProxyList_Warning_Code
 pattern TargetSslProxyList_Warning_Code_INJECTEDKERNELSDEPRECATED = TargetSslProxyList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern TargetSslProxyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: TargetSslProxyList_Warning_Code
+pattern TargetSslProxyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = TargetSslProxyList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern TargetSslProxyList_Warning_Code_LARGEDEPLOYMENTWARNING :: TargetSslProxyList_Warning_Code
 pattern TargetSslProxyList_Warning_Code_LARGEDEPLOYMENTWARNING = TargetSslProxyList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -33675,6 +38766,10 @@ pattern TargetSslProxyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = TargetSslPro
 -- | The route\'s next hop instance cannot ip forward.
 pattern TargetSslProxyList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: TargetSslProxyList_Warning_Code
 pattern TargetSslProxyList_Warning_Code_NEXTHOPCANNOTIPFORWARD = TargetSslProxyList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern TargetSslProxyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: TargetSslProxyList_Warning_Code
+pattern TargetSslProxyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = TargetSslProxyList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern TargetSslProxyList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: TargetSslProxyList_Warning_Code
@@ -33737,10 +38832,12 @@ pattern TargetSslProxyList_Warning_Code_Unreachable = TargetSslProxyList_Warning
   TargetSslProxyList_Warning_Code_EXTERNALAPIWARNING,
   TargetSslProxyList_Warning_Code_FIELDVALUEOVERRIDEN,
   TargetSslProxyList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  TargetSslProxyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   TargetSslProxyList_Warning_Code_LARGEDEPLOYMENTWARNING,
   TargetSslProxyList_Warning_Code_MISSINGTYPEDEPENDENCY,
   TargetSslProxyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   TargetSslProxyList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  TargetSslProxyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   TargetSslProxyList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   TargetSslProxyList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   TargetSslProxyList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -33755,6 +38852,158 @@ pattern TargetSslProxyList_Warning_Code_Unreachable = TargetSslProxyList_Warning
   TargetSslProxyList_Warning_Code_UNDECLAREDPROPERTIES,
   TargetSslProxyList_Warning_Code_Unreachable,
   TargetSslProxyList_Warning_Code
+  #-}
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
+newtype TargetTcpProxiesScopedList_Warning_Code = TargetTcpProxiesScopedList_Warning_Code {fromTargetTcpProxiesScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Warning about failed cleanup of transient changes made by a failed operation.
+pattern TargetTcpProxiesScopedList_Warning_Code_CLEANUPFAILED :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_CLEANUPFAILED = TargetTcpProxiesScopedList_Warning_Code "CLEANUP_FAILED"
+
+-- | A link to a deprecated resource was created.
+pattern TargetTcpProxiesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED = TargetTcpProxiesScopedList_Warning_Code "DEPRECATED_RESOURCE_USED"
+
+-- | When deploying and at least one of the resources has a type marked as deprecated
+pattern TargetTcpProxiesScopedList_Warning_Code_DEPRECATEDTYPEUSED :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_DEPRECATEDTYPEUSED = TargetTcpProxiesScopedList_Warning_Code "DEPRECATED_TYPE_USED"
+
+-- | The user created a boot disk that is larger than image size.
+pattern TargetTcpProxiesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE = TargetTcpProxiesScopedList_Warning_Code "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+
+-- | When deploying and at least one of the resources has a type marked as experimental
+pattern TargetTcpProxiesScopedList_Warning_Code_EXPERIMENTALTYPEUSED :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_EXPERIMENTALTYPEUSED = TargetTcpProxiesScopedList_Warning_Code "EXPERIMENTAL_TYPE_USED"
+
+-- | Warning that is present in an external api call
+pattern TargetTcpProxiesScopedList_Warning_Code_EXTERNALAPIWARNING :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_EXTERNALAPIWARNING = TargetTcpProxiesScopedList_Warning_Code "EXTERNAL_API_WARNING"
+
+-- | Warning that value of a field has been overridden. Deprecated unused field.
+pattern TargetTcpProxiesScopedList_Warning_Code_FIELDVALUEOVERRIDEN :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_FIELDVALUEOVERRIDEN = TargetTcpProxiesScopedList_Warning_Code "FIELD_VALUE_OVERRIDEN"
+
+-- | The operation involved use of an injected kernel, which is deprecated.
+pattern TargetTcpProxiesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = TargetTcpProxiesScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
+
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern TargetTcpProxiesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = TargetTcpProxiesScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
+-- | When deploying a deployment with a exceedingly large number of resources
+pattern TargetTcpProxiesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = TargetTcpProxiesScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
+
+-- | A resource depends on a missing type
+pattern TargetTcpProxiesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY = TargetTcpProxiesScopedList_Warning_Code "MISSING_TYPE_DEPENDENCY"
+
+-- | The route\'s nextHopIp address is not assigned to an instance on the network.
+pattern TargetTcpProxiesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = TargetTcpProxiesScopedList_Warning_Code "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+
+-- | The route\'s next hop instance cannot ip forward.
+pattern TargetTcpProxiesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = TargetTcpProxiesScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern TargetTcpProxiesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = TargetTcpProxiesScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not exist.
+pattern TargetTcpProxiesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND = TargetTcpProxiesScopedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_FOUND"
+
+-- | The route\'s nextHopInstance URL refers to an instance that is not on the same network as the route.
+pattern TargetTcpProxiesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK = TargetTcpProxiesScopedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+
+-- | The route\'s next hop instance does not have a status of RUNNING.
+pattern TargetTcpProxiesScopedList_Warning_Code_NEXTHOPNOTRUNNING :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_NEXTHOPNOTRUNNING = TargetTcpProxiesScopedList_Warning_Code "NEXT_HOP_NOT_RUNNING"
+
+-- | Error which is not critical. We decided to continue the process despite the mentioned error.
+pattern TargetTcpProxiesScopedList_Warning_Code_NOTCRITICALERROR :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_NOTCRITICALERROR = TargetTcpProxiesScopedList_Warning_Code "NOT_CRITICAL_ERROR"
+
+-- | No results are present on a particular list page.
+pattern TargetTcpProxiesScopedList_Warning_Code_NORESULTSONPAGE :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_NORESULTSONPAGE = TargetTcpProxiesScopedList_Warning_Code "NO_RESULTS_ON_PAGE"
+
+-- | Success is reported, but some results may be missing due to errors
+pattern TargetTcpProxiesScopedList_Warning_Code_PARTIALSUCCESS :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_PARTIALSUCCESS = TargetTcpProxiesScopedList_Warning_Code "PARTIAL_SUCCESS"
+
+-- | The user attempted to use a resource that requires a TOS they have not accepted.
+pattern TargetTcpProxiesScopedList_Warning_Code_REQUIREDTOSAGREEMENT :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_REQUIREDTOSAGREEMENT = TargetTcpProxiesScopedList_Warning_Code "REQUIRED_TOS_AGREEMENT"
+
+-- | Warning that a resource is in use.
+pattern TargetTcpProxiesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING = TargetTcpProxiesScopedList_Warning_Code "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+
+-- | One or more of the resources set to auto-delete could not be deleted because they were in use.
+pattern TargetTcpProxiesScopedList_Warning_Code_RESOURCENOTDELETED :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_RESOURCENOTDELETED = TargetTcpProxiesScopedList_Warning_Code "RESOURCE_NOT_DELETED"
+
+-- | When a resource schema validation is ignored.
+pattern TargetTcpProxiesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED = TargetTcpProxiesScopedList_Warning_Code "SCHEMA_VALIDATION_IGNORED"
+
+-- | Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.
+pattern TargetTcpProxiesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE = TargetTcpProxiesScopedList_Warning_Code "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+
+-- | When undeclared properties in the schema are present
+pattern TargetTcpProxiesScopedList_Warning_Code_UNDECLAREDPROPERTIES :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_UNDECLAREDPROPERTIES = TargetTcpProxiesScopedList_Warning_Code "UNDECLARED_PROPERTIES"
+
+-- | A given scope cannot be reached.
+pattern TargetTcpProxiesScopedList_Warning_Code_Unreachable :: TargetTcpProxiesScopedList_Warning_Code
+pattern TargetTcpProxiesScopedList_Warning_Code_Unreachable = TargetTcpProxiesScopedList_Warning_Code "UNREACHABLE"
+
+{-# COMPLETE
+  TargetTcpProxiesScopedList_Warning_Code_CLEANUPFAILED,
+  TargetTcpProxiesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+  TargetTcpProxiesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
+  TargetTcpProxiesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+  TargetTcpProxiesScopedList_Warning_Code_EXPERIMENTALTYPEUSED,
+  TargetTcpProxiesScopedList_Warning_Code_EXTERNALAPIWARNING,
+  TargetTcpProxiesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
+  TargetTcpProxiesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  TargetTcpProxiesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+  TargetTcpProxiesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+  TargetTcpProxiesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+  TargetTcpProxiesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+  TargetTcpProxiesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  TargetTcpProxiesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+  TargetTcpProxiesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+  TargetTcpProxiesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+  TargetTcpProxiesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
+  TargetTcpProxiesScopedList_Warning_Code_NOTCRITICALERROR,
+  TargetTcpProxiesScopedList_Warning_Code_NORESULTSONPAGE,
+  TargetTcpProxiesScopedList_Warning_Code_PARTIALSUCCESS,
+  TargetTcpProxiesScopedList_Warning_Code_REQUIREDTOSAGREEMENT,
+  TargetTcpProxiesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+  TargetTcpProxiesScopedList_Warning_Code_RESOURCENOTDELETED,
+  TargetTcpProxiesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+  TargetTcpProxiesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+  TargetTcpProxiesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
+  TargetTcpProxiesScopedList_Warning_Code_Unreachable,
+  TargetTcpProxiesScopedList_Warning_Code
   #-}
 
 -- | The new type of proxy header to append before sending data to the backend. NONE or PROXY_V1 are allowed.
@@ -33812,6 +39061,158 @@ pattern TargetTcpProxy_ProxyHeader_PROXY_V1 = TargetTcpProxy_ProxyHeader "PROXY_
   #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
+newtype TargetTcpProxyAggregatedList_Warning_Code = TargetTcpProxyAggregatedList_Warning_Code {fromTargetTcpProxyAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Warning about failed cleanup of transient changes made by a failed operation.
+pattern TargetTcpProxyAggregatedList_Warning_Code_CLEANUPFAILED :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_CLEANUPFAILED = TargetTcpProxyAggregatedList_Warning_Code "CLEANUP_FAILED"
+
+-- | A link to a deprecated resource was created.
+pattern TargetTcpProxyAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED = TargetTcpProxyAggregatedList_Warning_Code "DEPRECATED_RESOURCE_USED"
+
+-- | When deploying and at least one of the resources has a type marked as deprecated
+pattern TargetTcpProxyAggregatedList_Warning_Code_DEPRECATEDTYPEUSED :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_DEPRECATEDTYPEUSED = TargetTcpProxyAggregatedList_Warning_Code "DEPRECATED_TYPE_USED"
+
+-- | The user created a boot disk that is larger than image size.
+pattern TargetTcpProxyAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE = TargetTcpProxyAggregatedList_Warning_Code "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+
+-- | When deploying and at least one of the resources has a type marked as experimental
+pattern TargetTcpProxyAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED = TargetTcpProxyAggregatedList_Warning_Code "EXPERIMENTAL_TYPE_USED"
+
+-- | Warning that is present in an external api call
+pattern TargetTcpProxyAggregatedList_Warning_Code_EXTERNALAPIWARNING :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_EXTERNALAPIWARNING = TargetTcpProxyAggregatedList_Warning_Code "EXTERNAL_API_WARNING"
+
+-- | Warning that value of a field has been overridden. Deprecated unused field.
+pattern TargetTcpProxyAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = TargetTcpProxyAggregatedList_Warning_Code "FIELD_VALUE_OVERRIDEN"
+
+-- | The operation involved use of an injected kernel, which is deprecated.
+pattern TargetTcpProxyAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = TargetTcpProxyAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
+
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern TargetTcpProxyAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = TargetTcpProxyAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
+-- | When deploying a deployment with a exceedingly large number of resources
+pattern TargetTcpProxyAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = TargetTcpProxyAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
+
+-- | A resource depends on a missing type
+pattern TargetTcpProxyAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY = TargetTcpProxyAggregatedList_Warning_Code "MISSING_TYPE_DEPENDENCY"
+
+-- | The route\'s nextHopIp address is not assigned to an instance on the network.
+pattern TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = TargetTcpProxyAggregatedList_Warning_Code "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+
+-- | The route\'s next hop instance cannot ip forward.
+pattern TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = TargetTcpProxyAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = TargetTcpProxyAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not exist.
+pattern TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND = TargetTcpProxyAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_FOUND"
+
+-- | The route\'s nextHopInstance URL refers to an instance that is not on the same network as the route.
+pattern TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK = TargetTcpProxyAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+
+-- | The route\'s next hop instance does not have a status of RUNNING.
+pattern TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPNOTRUNNING :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPNOTRUNNING = TargetTcpProxyAggregatedList_Warning_Code "NEXT_HOP_NOT_RUNNING"
+
+-- | Error which is not critical. We decided to continue the process despite the mentioned error.
+pattern TargetTcpProxyAggregatedList_Warning_Code_NOTCRITICALERROR :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_NOTCRITICALERROR = TargetTcpProxyAggregatedList_Warning_Code "NOT_CRITICAL_ERROR"
+
+-- | No results are present on a particular list page.
+pattern TargetTcpProxyAggregatedList_Warning_Code_NORESULTSONPAGE :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_NORESULTSONPAGE = TargetTcpProxyAggregatedList_Warning_Code "NO_RESULTS_ON_PAGE"
+
+-- | Success is reported, but some results may be missing due to errors
+pattern TargetTcpProxyAggregatedList_Warning_Code_PARTIALSUCCESS :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_PARTIALSUCCESS = TargetTcpProxyAggregatedList_Warning_Code "PARTIAL_SUCCESS"
+
+-- | The user attempted to use a resource that requires a TOS they have not accepted.
+pattern TargetTcpProxyAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT = TargetTcpProxyAggregatedList_Warning_Code "REQUIRED_TOS_AGREEMENT"
+
+-- | Warning that a resource is in use.
+pattern TargetTcpProxyAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING = TargetTcpProxyAggregatedList_Warning_Code "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+
+-- | One or more of the resources set to auto-delete could not be deleted because they were in use.
+pattern TargetTcpProxyAggregatedList_Warning_Code_RESOURCENOTDELETED :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_RESOURCENOTDELETED = TargetTcpProxyAggregatedList_Warning_Code "RESOURCE_NOT_DELETED"
+
+-- | When a resource schema validation is ignored.
+pattern TargetTcpProxyAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED = TargetTcpProxyAggregatedList_Warning_Code "SCHEMA_VALIDATION_IGNORED"
+
+-- | Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.
+pattern TargetTcpProxyAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE = TargetTcpProxyAggregatedList_Warning_Code "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+
+-- | When undeclared properties in the schema are present
+pattern TargetTcpProxyAggregatedList_Warning_Code_UNDECLAREDPROPERTIES :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_UNDECLAREDPROPERTIES = TargetTcpProxyAggregatedList_Warning_Code "UNDECLARED_PROPERTIES"
+
+-- | A given scope cannot be reached.
+pattern TargetTcpProxyAggregatedList_Warning_Code_Unreachable :: TargetTcpProxyAggregatedList_Warning_Code
+pattern TargetTcpProxyAggregatedList_Warning_Code_Unreachable = TargetTcpProxyAggregatedList_Warning_Code "UNREACHABLE"
+
+{-# COMPLETE
+  TargetTcpProxyAggregatedList_Warning_Code_CLEANUPFAILED,
+  TargetTcpProxyAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+  TargetTcpProxyAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
+  TargetTcpProxyAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+  TargetTcpProxyAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED,
+  TargetTcpProxyAggregatedList_Warning_Code_EXTERNALAPIWARNING,
+  TargetTcpProxyAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
+  TargetTcpProxyAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  TargetTcpProxyAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+  TargetTcpProxyAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+  TargetTcpProxyAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+  TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+  TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+  TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+  TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+  TargetTcpProxyAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
+  TargetTcpProxyAggregatedList_Warning_Code_NOTCRITICALERROR,
+  TargetTcpProxyAggregatedList_Warning_Code_NORESULTSONPAGE,
+  TargetTcpProxyAggregatedList_Warning_Code_PARTIALSUCCESS,
+  TargetTcpProxyAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT,
+  TargetTcpProxyAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+  TargetTcpProxyAggregatedList_Warning_Code_RESOURCENOTDELETED,
+  TargetTcpProxyAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+  TargetTcpProxyAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+  TargetTcpProxyAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
+  TargetTcpProxyAggregatedList_Warning_Code_Unreachable,
+  TargetTcpProxyAggregatedList_Warning_Code
+  #-}
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
 newtype TargetTcpProxyList_Warning_Code = TargetTcpProxyList_Warning_Code {fromTargetTcpProxyList_Warning_Code :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -33856,6 +39257,10 @@ pattern TargetTcpProxyList_Warning_Code_FIELDVALUEOVERRIDEN = TargetTcpProxyList
 pattern TargetTcpProxyList_Warning_Code_INJECTEDKERNELSDEPRECATED :: TargetTcpProxyList_Warning_Code
 pattern TargetTcpProxyList_Warning_Code_INJECTEDKERNELSDEPRECATED = TargetTcpProxyList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern TargetTcpProxyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: TargetTcpProxyList_Warning_Code
+pattern TargetTcpProxyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = TargetTcpProxyList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern TargetTcpProxyList_Warning_Code_LARGEDEPLOYMENTWARNING :: TargetTcpProxyList_Warning_Code
 pattern TargetTcpProxyList_Warning_Code_LARGEDEPLOYMENTWARNING = TargetTcpProxyList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -33871,6 +39276,10 @@ pattern TargetTcpProxyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = TargetTcpPro
 -- | The route\'s next hop instance cannot ip forward.
 pattern TargetTcpProxyList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: TargetTcpProxyList_Warning_Code
 pattern TargetTcpProxyList_Warning_Code_NEXTHOPCANNOTIPFORWARD = TargetTcpProxyList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern TargetTcpProxyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: TargetTcpProxyList_Warning_Code
+pattern TargetTcpProxyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = TargetTcpProxyList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern TargetTcpProxyList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: TargetTcpProxyList_Warning_Code
@@ -33933,10 +39342,12 @@ pattern TargetTcpProxyList_Warning_Code_Unreachable = TargetTcpProxyList_Warning
   TargetTcpProxyList_Warning_Code_EXTERNALAPIWARNING,
   TargetTcpProxyList_Warning_Code_FIELDVALUEOVERRIDEN,
   TargetTcpProxyList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  TargetTcpProxyList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   TargetTcpProxyList_Warning_Code_LARGEDEPLOYMENTWARNING,
   TargetTcpProxyList_Warning_Code_MISSINGTYPEDEPENDENCY,
   TargetTcpProxyList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   TargetTcpProxyList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  TargetTcpProxyList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   TargetTcpProxyList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   TargetTcpProxyList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   TargetTcpProxyList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -34035,6 +39446,10 @@ pattern TargetVpnGatewayAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = Target
 pattern TargetVpnGatewayAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: TargetVpnGatewayAggregatedList_Warning_Code
 pattern TargetVpnGatewayAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = TargetVpnGatewayAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern TargetVpnGatewayAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: TargetVpnGatewayAggregatedList_Warning_Code
+pattern TargetVpnGatewayAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = TargetVpnGatewayAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern TargetVpnGatewayAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: TargetVpnGatewayAggregatedList_Warning_Code
 pattern TargetVpnGatewayAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = TargetVpnGatewayAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -34050,6 +39465,10 @@ pattern TargetVpnGatewayAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = 
 -- | The route\'s next hop instance cannot ip forward.
 pattern TargetVpnGatewayAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: TargetVpnGatewayAggregatedList_Warning_Code
 pattern TargetVpnGatewayAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = TargetVpnGatewayAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern TargetVpnGatewayAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: TargetVpnGatewayAggregatedList_Warning_Code
+pattern TargetVpnGatewayAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = TargetVpnGatewayAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern TargetVpnGatewayAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: TargetVpnGatewayAggregatedList_Warning_Code
@@ -34112,10 +39531,12 @@ pattern TargetVpnGatewayAggregatedList_Warning_Code_Unreachable = TargetVpnGatew
   TargetVpnGatewayAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   TargetVpnGatewayAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   TargetVpnGatewayAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  TargetVpnGatewayAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   TargetVpnGatewayAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   TargetVpnGatewayAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   TargetVpnGatewayAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   TargetVpnGatewayAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  TargetVpnGatewayAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   TargetVpnGatewayAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   TargetVpnGatewayAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   TargetVpnGatewayAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -34177,6 +39598,10 @@ pattern TargetVpnGatewayList_Warning_Code_FIELDVALUEOVERRIDEN = TargetVpnGateway
 pattern TargetVpnGatewayList_Warning_Code_INJECTEDKERNELSDEPRECATED :: TargetVpnGatewayList_Warning_Code
 pattern TargetVpnGatewayList_Warning_Code_INJECTEDKERNELSDEPRECATED = TargetVpnGatewayList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern TargetVpnGatewayList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: TargetVpnGatewayList_Warning_Code
+pattern TargetVpnGatewayList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = TargetVpnGatewayList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern TargetVpnGatewayList_Warning_Code_LARGEDEPLOYMENTWARNING :: TargetVpnGatewayList_Warning_Code
 pattern TargetVpnGatewayList_Warning_Code_LARGEDEPLOYMENTWARNING = TargetVpnGatewayList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -34192,6 +39617,10 @@ pattern TargetVpnGatewayList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = TargetVpnG
 -- | The route\'s next hop instance cannot ip forward.
 pattern TargetVpnGatewayList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: TargetVpnGatewayList_Warning_Code
 pattern TargetVpnGatewayList_Warning_Code_NEXTHOPCANNOTIPFORWARD = TargetVpnGatewayList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern TargetVpnGatewayList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: TargetVpnGatewayList_Warning_Code
+pattern TargetVpnGatewayList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = TargetVpnGatewayList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern TargetVpnGatewayList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: TargetVpnGatewayList_Warning_Code
@@ -34254,10 +39683,12 @@ pattern TargetVpnGatewayList_Warning_Code_Unreachable = TargetVpnGatewayList_War
   TargetVpnGatewayList_Warning_Code_EXTERNALAPIWARNING,
   TargetVpnGatewayList_Warning_Code_FIELDVALUEOVERRIDEN,
   TargetVpnGatewayList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  TargetVpnGatewayList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   TargetVpnGatewayList_Warning_Code_LARGEDEPLOYMENTWARNING,
   TargetVpnGatewayList_Warning_Code_MISSINGTYPEDEPENDENCY,
   TargetVpnGatewayList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   TargetVpnGatewayList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  TargetVpnGatewayList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   TargetVpnGatewayList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   TargetVpnGatewayList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   TargetVpnGatewayList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -34319,6 +39750,10 @@ pattern TargetVpnGatewaysScopedList_Warning_Code_FIELDVALUEOVERRIDEN = TargetVpn
 pattern TargetVpnGatewaysScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: TargetVpnGatewaysScopedList_Warning_Code
 pattern TargetVpnGatewaysScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = TargetVpnGatewaysScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern TargetVpnGatewaysScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: TargetVpnGatewaysScopedList_Warning_Code
+pattern TargetVpnGatewaysScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = TargetVpnGatewaysScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern TargetVpnGatewaysScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: TargetVpnGatewaysScopedList_Warning_Code
 pattern TargetVpnGatewaysScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = TargetVpnGatewaysScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -34334,6 +39769,10 @@ pattern TargetVpnGatewaysScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = Tar
 -- | The route\'s next hop instance cannot ip forward.
 pattern TargetVpnGatewaysScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: TargetVpnGatewaysScopedList_Warning_Code
 pattern TargetVpnGatewaysScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = TargetVpnGatewaysScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern TargetVpnGatewaysScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: TargetVpnGatewaysScopedList_Warning_Code
+pattern TargetVpnGatewaysScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = TargetVpnGatewaysScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern TargetVpnGatewaysScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: TargetVpnGatewaysScopedList_Warning_Code
@@ -34396,10 +39835,12 @@ pattern TargetVpnGatewaysScopedList_Warning_Code_Unreachable = TargetVpnGateways
   TargetVpnGatewaysScopedList_Warning_Code_EXTERNALAPIWARNING,
   TargetVpnGatewaysScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   TargetVpnGatewaysScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  TargetVpnGatewaysScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   TargetVpnGatewaysScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   TargetVpnGatewaysScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   TargetVpnGatewaysScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   TargetVpnGatewaysScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  TargetVpnGatewaysScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   TargetVpnGatewaysScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   TargetVpnGatewaysScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   TargetVpnGatewaysScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -34461,6 +39902,10 @@ pattern UrlMapList_Warning_Code_FIELDVALUEOVERRIDEN = UrlMapList_Warning_Code "F
 pattern UrlMapList_Warning_Code_INJECTEDKERNELSDEPRECATED :: UrlMapList_Warning_Code
 pattern UrlMapList_Warning_Code_INJECTEDKERNELSDEPRECATED = UrlMapList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern UrlMapList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: UrlMapList_Warning_Code
+pattern UrlMapList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = UrlMapList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern UrlMapList_Warning_Code_LARGEDEPLOYMENTWARNING :: UrlMapList_Warning_Code
 pattern UrlMapList_Warning_Code_LARGEDEPLOYMENTWARNING = UrlMapList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -34476,6 +39921,10 @@ pattern UrlMapList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = UrlMapList_Warning_C
 -- | The route\'s next hop instance cannot ip forward.
 pattern UrlMapList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: UrlMapList_Warning_Code
 pattern UrlMapList_Warning_Code_NEXTHOPCANNOTIPFORWARD = UrlMapList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern UrlMapList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: UrlMapList_Warning_Code
+pattern UrlMapList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = UrlMapList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern UrlMapList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: UrlMapList_Warning_Code
@@ -34538,10 +39987,12 @@ pattern UrlMapList_Warning_Code_Unreachable = UrlMapList_Warning_Code "UNREACHAB
   UrlMapList_Warning_Code_EXTERNALAPIWARNING,
   UrlMapList_Warning_Code_FIELDVALUEOVERRIDEN,
   UrlMapList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  UrlMapList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   UrlMapList_Warning_Code_LARGEDEPLOYMENTWARNING,
   UrlMapList_Warning_Code_MISSINGTYPEDEPENDENCY,
   UrlMapList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   UrlMapList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  UrlMapList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   UrlMapList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   UrlMapList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   UrlMapList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -34603,6 +40054,10 @@ pattern UrlMapsAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = UrlMapsAggregat
 pattern UrlMapsAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: UrlMapsAggregatedList_Warning_Code
 pattern UrlMapsAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = UrlMapsAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern UrlMapsAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: UrlMapsAggregatedList_Warning_Code
+pattern UrlMapsAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = UrlMapsAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern UrlMapsAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: UrlMapsAggregatedList_Warning_Code
 pattern UrlMapsAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = UrlMapsAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -34618,6 +40073,10 @@ pattern UrlMapsAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = UrlMapsAg
 -- | The route\'s next hop instance cannot ip forward.
 pattern UrlMapsAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: UrlMapsAggregatedList_Warning_Code
 pattern UrlMapsAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = UrlMapsAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern UrlMapsAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: UrlMapsAggregatedList_Warning_Code
+pattern UrlMapsAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = UrlMapsAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern UrlMapsAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: UrlMapsAggregatedList_Warning_Code
@@ -34680,10 +40139,12 @@ pattern UrlMapsAggregatedList_Warning_Code_Unreachable = UrlMapsAggregatedList_W
   UrlMapsAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   UrlMapsAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   UrlMapsAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  UrlMapsAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   UrlMapsAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   UrlMapsAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   UrlMapsAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   UrlMapsAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  UrlMapsAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   UrlMapsAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   UrlMapsAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   UrlMapsAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -34745,6 +40206,10 @@ pattern UrlMapsScopedList_Warning_Code_FIELDVALUEOVERRIDEN = UrlMapsScopedList_W
 pattern UrlMapsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: UrlMapsScopedList_Warning_Code
 pattern UrlMapsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = UrlMapsScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern UrlMapsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: UrlMapsScopedList_Warning_Code
+pattern UrlMapsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = UrlMapsScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern UrlMapsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: UrlMapsScopedList_Warning_Code
 pattern UrlMapsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = UrlMapsScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -34760,6 +40225,10 @@ pattern UrlMapsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = UrlMapsScoped
 -- | The route\'s next hop instance cannot ip forward.
 pattern UrlMapsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: UrlMapsScopedList_Warning_Code
 pattern UrlMapsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = UrlMapsScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern UrlMapsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: UrlMapsScopedList_Warning_Code
+pattern UrlMapsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = UrlMapsScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern UrlMapsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: UrlMapsScopedList_Warning_Code
@@ -34822,10 +40291,12 @@ pattern UrlMapsScopedList_Warning_Code_Unreachable = UrlMapsScopedList_Warning_C
   UrlMapsScopedList_Warning_Code_EXTERNALAPIWARNING,
   UrlMapsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   UrlMapsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  UrlMapsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   UrlMapsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   UrlMapsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   UrlMapsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   UrlMapsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  UrlMapsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   UrlMapsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   UrlMapsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   UrlMapsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -34873,6 +40344,129 @@ pattern UrlMapsValidateRequest_LoadBalancingSchemesItem_LOADBALANCINGSCHEMEUNSPE
   UrlMapsValidateRequest_LoadBalancingSchemesItem
   #-}
 
+-- | The access type of IPv6 address this subnet holds. It\'s immutable and can only be specified during creation or the first time the subnet is updated into IPV4_IPV6 dual stack.
+newtype UsableSubnetwork_Ipv6AccessType = UsableSubnetwork_Ipv6AccessType {fromUsableSubnetwork_Ipv6AccessType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | VMs on this subnet will be assigned IPv6 addresses that are accessible via the Internet, as well as the VPC network.
+pattern UsableSubnetwork_Ipv6AccessType_External :: UsableSubnetwork_Ipv6AccessType
+pattern UsableSubnetwork_Ipv6AccessType_External = UsableSubnetwork_Ipv6AccessType "EXTERNAL"
+
+-- | VMs on this subnet will be assigned IPv6 addresses that are only accessible over the VPC network.
+pattern UsableSubnetwork_Ipv6AccessType_Internal :: UsableSubnetwork_Ipv6AccessType
+pattern UsableSubnetwork_Ipv6AccessType_Internal = UsableSubnetwork_Ipv6AccessType "INTERNAL"
+
+{-# COMPLETE
+  UsableSubnetwork_Ipv6AccessType_External,
+  UsableSubnetwork_Ipv6AccessType_Internal,
+  UsableSubnetwork_Ipv6AccessType
+  #-}
+
+-- | The purpose of the resource. This field can be either PRIVATE/RFC/1918 or INTERNAL/HTTPS/LOAD/BALANCER. A subnetwork with purpose set to INTERNAL/HTTPS/LOAD/BALANCER is a user-created subnetwork that is reserved for Internal HTTP(S) Load Balancing. If unspecified, the purpose defaults to PRIVATE/RFC/1918. The enableFlowLogs field isn\'t supported with the purpose field set to INTERNAL/HTTPS/LOAD_BALANCER.
+newtype UsableSubnetwork_Purpose = UsableSubnetwork_Purpose {fromUsableSubnetwork_Purpose :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Subnet reserved for Internal HTTP(S) Load Balancing.
+pattern UsableSubnetwork_Purpose_INTERNALHTTPSLOADBALANCER :: UsableSubnetwork_Purpose
+pattern UsableSubnetwork_Purpose_INTERNALHTTPSLOADBALANCER = UsableSubnetwork_Purpose "INTERNAL_HTTPS_LOAD_BALANCER"
+
+-- | Regular user created or automatically created subnet.
+pattern UsableSubnetwork_Purpose_Private :: UsableSubnetwork_Purpose
+pattern UsableSubnetwork_Purpose_Private = UsableSubnetwork_Purpose "PRIVATE"
+
+-- | Regular user created or automatically created subnet.
+pattern UsableSubnetwork_Purpose_PRIVATE_RFC_1918 :: UsableSubnetwork_Purpose
+pattern UsableSubnetwork_Purpose_PRIVATE_RFC_1918 = UsableSubnetwork_Purpose "PRIVATE_RFC_1918"
+
+-- | Subnetworks created for Private Service Connect in the producer network.
+pattern UsableSubnetwork_Purpose_PRIVATESERVICECONNECT :: UsableSubnetwork_Purpose
+pattern UsableSubnetwork_Purpose_PRIVATESERVICECONNECT = UsableSubnetwork_Purpose "PRIVATE_SERVICE_CONNECT"
+
+-- | Subnetwork used for Regional Internal\/External HTTP(S) Load Balancing.
+pattern UsableSubnetwork_Purpose_REGIONALMANAGEDPROXY :: UsableSubnetwork_Purpose
+pattern UsableSubnetwork_Purpose_REGIONALMANAGEDPROXY = UsableSubnetwork_Purpose "REGIONAL_MANAGED_PROXY"
+
+{-# COMPLETE
+  UsableSubnetwork_Purpose_INTERNALHTTPSLOADBALANCER,
+  UsableSubnetwork_Purpose_Private,
+  UsableSubnetwork_Purpose_PRIVATE_RFC_1918,
+  UsableSubnetwork_Purpose_PRIVATESERVICECONNECT,
+  UsableSubnetwork_Purpose_REGIONALMANAGEDPROXY,
+  UsableSubnetwork_Purpose
+  #-}
+
+-- | The role of subnetwork. Currently, this field is only used when purpose = INTERNAL/HTTPS/LOAD_BALANCER. The value can be set to ACTIVE or BACKUP. An ACTIVE subnetwork is one that is currently being used for Internal HTTP(S) Load Balancing. A BACKUP subnetwork is one that is ready to be promoted to ACTIVE or is currently draining. This field can be updated with a patch request.
+newtype UsableSubnetwork_Role = UsableSubnetwork_Role {fromUsableSubnetwork_Role :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The ACTIVE subnet that is currently used.
+pattern UsableSubnetwork_Role_Active :: UsableSubnetwork_Role
+pattern UsableSubnetwork_Role_Active = UsableSubnetwork_Role "ACTIVE"
+
+-- | The BACKUP subnet that could be promoted to ACTIVE.
+pattern UsableSubnetwork_Role_Backup :: UsableSubnetwork_Role
+pattern UsableSubnetwork_Role_Backup = UsableSubnetwork_Role "BACKUP"
+
+{-# COMPLETE
+  UsableSubnetwork_Role_Active,
+  UsableSubnetwork_Role_Backup,
+  UsableSubnetwork_Role
+  #-}
+
+-- | The stack type for the subnet. If set to IPV4/ONLY, new VMs in the subnet are assigned IPv4 addresses only. If set to IPV4/IPV6, new VMs in the subnet can be assigned both IPv4 and IPv6 addresses. If not specified, IPV4_ONLY is used. This field can be both set at resource creation time and updated using patch.
+newtype UsableSubnetwork_StackType = UsableSubnetwork_StackType {fromUsableSubnetwork_StackType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | New VMs in this subnet can have both IPv4 and IPv6 addresses.
+pattern UsableSubnetwork_StackType_IPV4_IPV6 :: UsableSubnetwork_StackType
+pattern UsableSubnetwork_StackType_IPV4_IPV6 = UsableSubnetwork_StackType "IPV4_IPV6"
+
+-- | New VMs in this subnet will only be assigned IPv4 addresses.
+pattern UsableSubnetwork_StackType_IPV4ONLY :: UsableSubnetwork_StackType
+pattern UsableSubnetwork_StackType_IPV4ONLY = UsableSubnetwork_StackType "IPV4_ONLY"
+
+{-# COMPLETE
+  UsableSubnetwork_StackType_IPV4_IPV6,
+  UsableSubnetwork_StackType_IPV4ONLY,
+  UsableSubnetwork_StackType
+  #-}
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
 newtype UsableSubnetworksAggregatedList_Warning_Code = UsableSubnetworksAggregatedList_Warning_Code {fromUsableSubnetworksAggregatedList_Warning_Code :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -34918,6 +40512,10 @@ pattern UsableSubnetworksAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = Usabl
 pattern UsableSubnetworksAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: UsableSubnetworksAggregatedList_Warning_Code
 pattern UsableSubnetworksAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = UsableSubnetworksAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern UsableSubnetworksAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: UsableSubnetworksAggregatedList_Warning_Code
+pattern UsableSubnetworksAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = UsableSubnetworksAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern UsableSubnetworksAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: UsableSubnetworksAggregatedList_Warning_Code
 pattern UsableSubnetworksAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = UsableSubnetworksAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -34933,6 +40531,10 @@ pattern UsableSubnetworksAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED =
 -- | The route\'s next hop instance cannot ip forward.
 pattern UsableSubnetworksAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: UsableSubnetworksAggregatedList_Warning_Code
 pattern UsableSubnetworksAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = UsableSubnetworksAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern UsableSubnetworksAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: UsableSubnetworksAggregatedList_Warning_Code
+pattern UsableSubnetworksAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = UsableSubnetworksAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern UsableSubnetworksAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: UsableSubnetworksAggregatedList_Warning_Code
@@ -34995,10 +40597,12 @@ pattern UsableSubnetworksAggregatedList_Warning_Code_Unreachable = UsableSubnetw
   UsableSubnetworksAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   UsableSubnetworksAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   UsableSubnetworksAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  UsableSubnetworksAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   UsableSubnetworksAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   UsableSubnetworksAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   UsableSubnetworksAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   UsableSubnetworksAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  UsableSubnetworksAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   UsableSubnetworksAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   UsableSubnetworksAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   UsableSubnetworksAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -35060,6 +40664,10 @@ pattern VmEndpointNatMappingsList_Warning_Code_FIELDVALUEOVERRIDEN = VmEndpointN
 pattern VmEndpointNatMappingsList_Warning_Code_INJECTEDKERNELSDEPRECATED :: VmEndpointNatMappingsList_Warning_Code
 pattern VmEndpointNatMappingsList_Warning_Code_INJECTEDKERNELSDEPRECATED = VmEndpointNatMappingsList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern VmEndpointNatMappingsList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: VmEndpointNatMappingsList_Warning_Code
+pattern VmEndpointNatMappingsList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = VmEndpointNatMappingsList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern VmEndpointNatMappingsList_Warning_Code_LARGEDEPLOYMENTWARNING :: VmEndpointNatMappingsList_Warning_Code
 pattern VmEndpointNatMappingsList_Warning_Code_LARGEDEPLOYMENTWARNING = VmEndpointNatMappingsList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -35075,6 +40683,10 @@ pattern VmEndpointNatMappingsList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = VmEnd
 -- | The route\'s next hop instance cannot ip forward.
 pattern VmEndpointNatMappingsList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: VmEndpointNatMappingsList_Warning_Code
 pattern VmEndpointNatMappingsList_Warning_Code_NEXTHOPCANNOTIPFORWARD = VmEndpointNatMappingsList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern VmEndpointNatMappingsList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: VmEndpointNatMappingsList_Warning_Code
+pattern VmEndpointNatMappingsList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = VmEndpointNatMappingsList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern VmEndpointNatMappingsList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: VmEndpointNatMappingsList_Warning_Code
@@ -35137,10 +40749,12 @@ pattern VmEndpointNatMappingsList_Warning_Code_Unreachable = VmEndpointNatMappin
   VmEndpointNatMappingsList_Warning_Code_EXTERNALAPIWARNING,
   VmEndpointNatMappingsList_Warning_Code_FIELDVALUEOVERRIDEN,
   VmEndpointNatMappingsList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  VmEndpointNatMappingsList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   VmEndpointNatMappingsList_Warning_Code_LARGEDEPLOYMENTWARNING,
   VmEndpointNatMappingsList_Warning_Code_MISSINGTYPEDEPENDENCY,
   VmEndpointNatMappingsList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   VmEndpointNatMappingsList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  VmEndpointNatMappingsList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   VmEndpointNatMappingsList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   VmEndpointNatMappingsList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   VmEndpointNatMappingsList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -35157,7 +40771,7 @@ pattern VmEndpointNatMappingsList_Warning_Code_Unreachable = VmEndpointNatMappin
   VmEndpointNatMappingsList_Warning_Code
   #-}
 
--- | The stack type for this VPN gateway to identify the IP protocols that are enabled. If not specified, IPV4_ONLY will be used.
+-- | The stack type for this VPN gateway to identify the IP protocols that are enabled. Possible values are: IPV4/ONLY, IPV4/IPV6. If not specified, IPV4_ONLY will be used.
 newtype VpnGateway_StackType = VpnGateway_StackType {fromVpnGateway_StackType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -35229,6 +40843,10 @@ pattern VpnGatewayAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = VpnGatewayAg
 pattern VpnGatewayAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: VpnGatewayAggregatedList_Warning_Code
 pattern VpnGatewayAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = VpnGatewayAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern VpnGatewayAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: VpnGatewayAggregatedList_Warning_Code
+pattern VpnGatewayAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = VpnGatewayAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern VpnGatewayAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: VpnGatewayAggregatedList_Warning_Code
 pattern VpnGatewayAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = VpnGatewayAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -35244,6 +40862,10 @@ pattern VpnGatewayAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = VpnGat
 -- | The route\'s next hop instance cannot ip forward.
 pattern VpnGatewayAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: VpnGatewayAggregatedList_Warning_Code
 pattern VpnGatewayAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = VpnGatewayAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern VpnGatewayAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: VpnGatewayAggregatedList_Warning_Code
+pattern VpnGatewayAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = VpnGatewayAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern VpnGatewayAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: VpnGatewayAggregatedList_Warning_Code
@@ -35306,10 +40928,12 @@ pattern VpnGatewayAggregatedList_Warning_Code_Unreachable = VpnGatewayAggregated
   VpnGatewayAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   VpnGatewayAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   VpnGatewayAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  VpnGatewayAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   VpnGatewayAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   VpnGatewayAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   VpnGatewayAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   VpnGatewayAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  VpnGatewayAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   VpnGatewayAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   VpnGatewayAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   VpnGatewayAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -35371,6 +40995,10 @@ pattern VpnGatewayList_Warning_Code_FIELDVALUEOVERRIDEN = VpnGatewayList_Warning
 pattern VpnGatewayList_Warning_Code_INJECTEDKERNELSDEPRECATED :: VpnGatewayList_Warning_Code
 pattern VpnGatewayList_Warning_Code_INJECTEDKERNELSDEPRECATED = VpnGatewayList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern VpnGatewayList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: VpnGatewayList_Warning_Code
+pattern VpnGatewayList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = VpnGatewayList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern VpnGatewayList_Warning_Code_LARGEDEPLOYMENTWARNING :: VpnGatewayList_Warning_Code
 pattern VpnGatewayList_Warning_Code_LARGEDEPLOYMENTWARNING = VpnGatewayList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -35386,6 +41014,10 @@ pattern VpnGatewayList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = VpnGatewayList_W
 -- | The route\'s next hop instance cannot ip forward.
 pattern VpnGatewayList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: VpnGatewayList_Warning_Code
 pattern VpnGatewayList_Warning_Code_NEXTHOPCANNOTIPFORWARD = VpnGatewayList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern VpnGatewayList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: VpnGatewayList_Warning_Code
+pattern VpnGatewayList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = VpnGatewayList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern VpnGatewayList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: VpnGatewayList_Warning_Code
@@ -35448,10 +41080,12 @@ pattern VpnGatewayList_Warning_Code_Unreachable = VpnGatewayList_Warning_Code "U
   VpnGatewayList_Warning_Code_EXTERNALAPIWARNING,
   VpnGatewayList_Warning_Code_FIELDVALUEOVERRIDEN,
   VpnGatewayList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  VpnGatewayList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   VpnGatewayList_Warning_Code_LARGEDEPLOYMENTWARNING,
   VpnGatewayList_Warning_Code_MISSINGTYPEDEPENDENCY,
   VpnGatewayList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   VpnGatewayList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  VpnGatewayList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   VpnGatewayList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   VpnGatewayList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   VpnGatewayList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -35562,6 +41196,10 @@ pattern VpnGatewaysScopedList_Warning_Code_FIELDVALUEOVERRIDEN = VpnGatewaysScop
 pattern VpnGatewaysScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: VpnGatewaysScopedList_Warning_Code
 pattern VpnGatewaysScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = VpnGatewaysScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern VpnGatewaysScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: VpnGatewaysScopedList_Warning_Code
+pattern VpnGatewaysScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = VpnGatewaysScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern VpnGatewaysScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: VpnGatewaysScopedList_Warning_Code
 pattern VpnGatewaysScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = VpnGatewaysScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -35577,6 +41215,10 @@ pattern VpnGatewaysScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = VpnGatewa
 -- | The route\'s next hop instance cannot ip forward.
 pattern VpnGatewaysScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: VpnGatewaysScopedList_Warning_Code
 pattern VpnGatewaysScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = VpnGatewaysScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern VpnGatewaysScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: VpnGatewaysScopedList_Warning_Code
+pattern VpnGatewaysScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = VpnGatewaysScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern VpnGatewaysScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: VpnGatewaysScopedList_Warning_Code
@@ -35639,10 +41281,12 @@ pattern VpnGatewaysScopedList_Warning_Code_Unreachable = VpnGatewaysScopedList_W
   VpnGatewaysScopedList_Warning_Code_EXTERNALAPIWARNING,
   VpnGatewaysScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   VpnGatewaysScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  VpnGatewaysScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   VpnGatewaysScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   VpnGatewaysScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   VpnGatewaysScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   VpnGatewaysScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  VpnGatewaysScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   VpnGatewaysScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   VpnGatewaysScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   VpnGatewaysScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -35787,6 +41431,10 @@ pattern VpnTunnelAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = VpnTunnelAggr
 pattern VpnTunnelAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: VpnTunnelAggregatedList_Warning_Code
 pattern VpnTunnelAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = VpnTunnelAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern VpnTunnelAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: VpnTunnelAggregatedList_Warning_Code
+pattern VpnTunnelAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = VpnTunnelAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern VpnTunnelAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: VpnTunnelAggregatedList_Warning_Code
 pattern VpnTunnelAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = VpnTunnelAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -35802,6 +41450,10 @@ pattern VpnTunnelAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = VpnTunn
 -- | The route\'s next hop instance cannot ip forward.
 pattern VpnTunnelAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: VpnTunnelAggregatedList_Warning_Code
 pattern VpnTunnelAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = VpnTunnelAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern VpnTunnelAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: VpnTunnelAggregatedList_Warning_Code
+pattern VpnTunnelAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = VpnTunnelAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern VpnTunnelAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: VpnTunnelAggregatedList_Warning_Code
@@ -35864,10 +41516,12 @@ pattern VpnTunnelAggregatedList_Warning_Code_Unreachable = VpnTunnelAggregatedLi
   VpnTunnelAggregatedList_Warning_Code_EXTERNALAPIWARNING,
   VpnTunnelAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
   VpnTunnelAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  VpnTunnelAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   VpnTunnelAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   VpnTunnelAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   VpnTunnelAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   VpnTunnelAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  VpnTunnelAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   VpnTunnelAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   VpnTunnelAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   VpnTunnelAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -35929,6 +41583,10 @@ pattern VpnTunnelList_Warning_Code_FIELDVALUEOVERRIDEN = VpnTunnelList_Warning_C
 pattern VpnTunnelList_Warning_Code_INJECTEDKERNELSDEPRECATED :: VpnTunnelList_Warning_Code
 pattern VpnTunnelList_Warning_Code_INJECTEDKERNELSDEPRECATED = VpnTunnelList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern VpnTunnelList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: VpnTunnelList_Warning_Code
+pattern VpnTunnelList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = VpnTunnelList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern VpnTunnelList_Warning_Code_LARGEDEPLOYMENTWARNING :: VpnTunnelList_Warning_Code
 pattern VpnTunnelList_Warning_Code_LARGEDEPLOYMENTWARNING = VpnTunnelList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -35944,6 +41602,10 @@ pattern VpnTunnelList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = VpnTunnelList_War
 -- | The route\'s next hop instance cannot ip forward.
 pattern VpnTunnelList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: VpnTunnelList_Warning_Code
 pattern VpnTunnelList_Warning_Code_NEXTHOPCANNOTIPFORWARD = VpnTunnelList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern VpnTunnelList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: VpnTunnelList_Warning_Code
+pattern VpnTunnelList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = VpnTunnelList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern VpnTunnelList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: VpnTunnelList_Warning_Code
@@ -36006,10 +41668,12 @@ pattern VpnTunnelList_Warning_Code_Unreachable = VpnTunnelList_Warning_Code "UNR
   VpnTunnelList_Warning_Code_EXTERNALAPIWARNING,
   VpnTunnelList_Warning_Code_FIELDVALUEOVERRIDEN,
   VpnTunnelList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  VpnTunnelList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   VpnTunnelList_Warning_Code_LARGEDEPLOYMENTWARNING,
   VpnTunnelList_Warning_Code_MISSINGTYPEDEPENDENCY,
   VpnTunnelList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   VpnTunnelList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  VpnTunnelList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   VpnTunnelList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   VpnTunnelList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   VpnTunnelList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -36071,6 +41735,10 @@ pattern VpnTunnelsScopedList_Warning_Code_FIELDVALUEOVERRIDEN = VpnTunnelsScoped
 pattern VpnTunnelsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: VpnTunnelsScopedList_Warning_Code
 pattern VpnTunnelsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = VpnTunnelsScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern VpnTunnelsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: VpnTunnelsScopedList_Warning_Code
+pattern VpnTunnelsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = VpnTunnelsScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern VpnTunnelsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: VpnTunnelsScopedList_Warning_Code
 pattern VpnTunnelsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = VpnTunnelsScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -36086,6 +41754,10 @@ pattern VpnTunnelsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = VpnTunnels
 -- | The route\'s next hop instance cannot ip forward.
 pattern VpnTunnelsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: VpnTunnelsScopedList_Warning_Code
 pattern VpnTunnelsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = VpnTunnelsScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern VpnTunnelsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: VpnTunnelsScopedList_Warning_Code
+pattern VpnTunnelsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = VpnTunnelsScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern VpnTunnelsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: VpnTunnelsScopedList_Warning_Code
@@ -36148,10 +41820,12 @@ pattern VpnTunnelsScopedList_Warning_Code_Unreachable = VpnTunnelsScopedList_War
   VpnTunnelsScopedList_Warning_Code_EXTERNALAPIWARNING,
   VpnTunnelsScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
   VpnTunnelsScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  VpnTunnelsScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   VpnTunnelsScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
   VpnTunnelsScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
   VpnTunnelsScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   VpnTunnelsScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  VpnTunnelsScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   VpnTunnelsScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   VpnTunnelsScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   VpnTunnelsScopedList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -36213,6 +41887,10 @@ pattern XpnHostList_Warning_Code_FIELDVALUEOVERRIDEN = XpnHostList_Warning_Code 
 pattern XpnHostList_Warning_Code_INJECTEDKERNELSDEPRECATED :: XpnHostList_Warning_Code
 pattern XpnHostList_Warning_Code_INJECTEDKERNELSDEPRECATED = XpnHostList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern XpnHostList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: XpnHostList_Warning_Code
+pattern XpnHostList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = XpnHostList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern XpnHostList_Warning_Code_LARGEDEPLOYMENTWARNING :: XpnHostList_Warning_Code
 pattern XpnHostList_Warning_Code_LARGEDEPLOYMENTWARNING = XpnHostList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -36228,6 +41906,10 @@ pattern XpnHostList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = XpnHostList_Warning
 -- | The route\'s next hop instance cannot ip forward.
 pattern XpnHostList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: XpnHostList_Warning_Code
 pattern XpnHostList_Warning_Code_NEXTHOPCANNOTIPFORWARD = XpnHostList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern XpnHostList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: XpnHostList_Warning_Code
+pattern XpnHostList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = XpnHostList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern XpnHostList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: XpnHostList_Warning_Code
@@ -36290,10 +41972,12 @@ pattern XpnHostList_Warning_Code_Unreachable = XpnHostList_Warning_Code "UNREACH
   XpnHostList_Warning_Code_EXTERNALAPIWARNING,
   XpnHostList_Warning_Code_FIELDVALUEOVERRIDEN,
   XpnHostList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  XpnHostList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   XpnHostList_Warning_Code_LARGEDEPLOYMENTWARNING,
   XpnHostList_Warning_Code_MISSINGTYPEDEPENDENCY,
   XpnHostList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   XpnHostList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  XpnHostList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   XpnHostList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   XpnHostList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   XpnHostList_Warning_Code_NEXTHOPNOTRUNNING,
@@ -36409,6 +42093,10 @@ pattern ZoneList_Warning_Code_FIELDVALUEOVERRIDEN = ZoneList_Warning_Code "FIELD
 pattern ZoneList_Warning_Code_INJECTEDKERNELSDEPRECATED :: ZoneList_Warning_Code
 pattern ZoneList_Warning_Code_INJECTEDKERNELSDEPRECATED = ZoneList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
 
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern ZoneList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: ZoneList_Warning_Code
+pattern ZoneList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = ZoneList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 -- | When deploying a deployment with a exceedingly large number of resources
 pattern ZoneList_Warning_Code_LARGEDEPLOYMENTWARNING :: ZoneList_Warning_Code
 pattern ZoneList_Warning_Code_LARGEDEPLOYMENTWARNING = ZoneList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
@@ -36424,6 +42112,10 @@ pattern ZoneList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = ZoneList_Warning_Code 
 -- | The route\'s next hop instance cannot ip forward.
 pattern ZoneList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: ZoneList_Warning_Code
 pattern ZoneList_Warning_Code_NEXTHOPCANNOTIPFORWARD = ZoneList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern ZoneList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: ZoneList_Warning_Code
+pattern ZoneList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = ZoneList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
 
 -- | The route\'s nextHopInstance URL refers to an instance that does not exist.
 pattern ZoneList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: ZoneList_Warning_Code
@@ -36486,10 +42178,12 @@ pattern ZoneList_Warning_Code_Unreachable = ZoneList_Warning_Code "UNREACHABLE"
   ZoneList_Warning_Code_EXTERNALAPIWARNING,
   ZoneList_Warning_Code_FIELDVALUEOVERRIDEN,
   ZoneList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  ZoneList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   ZoneList_Warning_Code_LARGEDEPLOYMENTWARNING,
   ZoneList_Warning_Code_MISSINGTYPEDEPENDENCY,
   ZoneList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
   ZoneList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  ZoneList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
   ZoneList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
   ZoneList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
   ZoneList_Warning_Code_NEXTHOPNOTRUNNING,

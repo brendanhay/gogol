@@ -67,7 +67,7 @@ data HealthcareProjectsLocationsDatasetsHl7V2StoresPatch = HealthcareProjectsLoc
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Resource name of the HL7v2 store, of the form @projects\/{project_id}\/datasets\/{dataset_id}\/hl7V2Stores\/{hl7v2_store_id}@.
+    -- | Resource name of the HL7v2 store, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/hl7V2Stores\/{hl7v2_store_id}@.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: Hl7V2Store,
@@ -82,7 +82,7 @@ data HealthcareProjectsLocationsDatasetsHl7V2StoresPatch = HealthcareProjectsLoc
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsHl7V2StoresPatch' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsHl7V2StoresPatch ::
-  -- |  Resource name of the HL7v2 store, of the form @projects\/{project_id}\/datasets\/{dataset_id}\/hl7V2Stores\/{hl7v2_store_id}@. See 'name'.
+  -- |  Resource name of the HL7v2 store, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/hl7V2Stores\/{hl7v2_store_id}@. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   Hl7V2Store ->

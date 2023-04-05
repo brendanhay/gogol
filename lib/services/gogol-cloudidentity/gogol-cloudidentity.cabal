@@ -49,6 +49,11 @@ library
 
   exposed-modules:
     Gogol.CloudIdentity
+    Gogol.CloudIdentity.Customers.Userinvitations.Cancel
+    Gogol.CloudIdentity.Customers.Userinvitations.Get
+    Gogol.CloudIdentity.Customers.Userinvitations.IsInvitableUser
+    Gogol.CloudIdentity.Customers.Userinvitations.List
+    Gogol.CloudIdentity.Customers.Userinvitations.Send
     Gogol.CloudIdentity.Devices.CancelWipe
     Gogol.CloudIdentity.Devices.Create
     Gogol.CloudIdentity.Devices.Delete
@@ -80,11 +85,26 @@ library
     Gogol.CloudIdentity.Groups.Memberships.List
     Gogol.CloudIdentity.Groups.Memberships.Lookup
     Gogol.CloudIdentity.Groups.Memberships.ModifyMembershipRoles
+    Gogol.CloudIdentity.Groups.Memberships.SearchDirectGroups
     Gogol.CloudIdentity.Groups.Memberships.SearchTransitiveGroups
     Gogol.CloudIdentity.Groups.Memberships.SearchTransitiveMemberships
     Gogol.CloudIdentity.Groups.Patch
     Gogol.CloudIdentity.Groups.Search
     Gogol.CloudIdentity.Groups.UpdateSecuritySettings
+    Gogol.CloudIdentity.InboundSamlSsoProfiles.Create
+    Gogol.CloudIdentity.InboundSamlSsoProfiles.Delete
+    Gogol.CloudIdentity.InboundSamlSsoProfiles.Get
+    Gogol.CloudIdentity.InboundSamlSsoProfiles.IdpCredentials.Add
+    Gogol.CloudIdentity.InboundSamlSsoProfiles.IdpCredentials.Delete
+    Gogol.CloudIdentity.InboundSamlSsoProfiles.IdpCredentials.Get
+    Gogol.CloudIdentity.InboundSamlSsoProfiles.IdpCredentials.List
+    Gogol.CloudIdentity.InboundSamlSsoProfiles.List
+    Gogol.CloudIdentity.InboundSamlSsoProfiles.Patch
+    Gogol.CloudIdentity.InboundSsoAssignments.Create
+    Gogol.CloudIdentity.InboundSsoAssignments.Delete
+    Gogol.CloudIdentity.InboundSsoAssignments.Get
+    Gogol.CloudIdentity.InboundSsoAssignments.List
+    Gogol.CloudIdentity.InboundSsoAssignments.Patch
     Gogol.CloudIdentity.Types
 
   other-modules:
@@ -92,5 +112,5 @@ library
     Gogol.CloudIdentity.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

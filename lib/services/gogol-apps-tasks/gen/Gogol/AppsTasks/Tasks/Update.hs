@@ -28,7 +28,7 @@
 --
 -- Updates the specified task.
 --
--- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasks.update@.
+-- /See:/ <https://developers.google.com/tasks/ Google Tasks API Reference> for @tasks.tasks.update@.
 module Gogol.AppsTasks.Tasks.Update
   ( -- * Resource
     TasksTasksUpdateResource,

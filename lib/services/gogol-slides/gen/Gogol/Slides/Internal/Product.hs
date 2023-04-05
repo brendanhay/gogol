@@ -936,11 +936,11 @@ instance Core.ToJSON ColorStop where
 --
 -- /See:/ 'newCreateImageRequest' smart constructor.
 data CreateImageRequest = CreateImageRequest
-  { -- | The element properties for the image. When the aspect ratio of the provided size does not match the image aspect ratio, the image is scaled and centered with respect to the size in order to maintain aspect ratio. The provided transform is applied after this operation. The PageElementProperties.size property is optional. If you don\'t specify the size, the default size of the image is used. The PageElementProperties.transform property is optional. If you don\'t specify a transform, the image will be placed at the top left corner of the page.
+  { -- | The element properties for the image. When the aspect ratio of the provided size does not match the image aspect ratio, the image is scaled and centered with respect to the size in order to maintain the aspect ratio. The provided transform is applied after this operation. The PageElementProperties.size property is optional. If you don\'t specify the size, the default size of the image is used. The PageElementProperties.transform property is optional. If you don\'t specify a transform, the image will be placed at the top-left corner of the page.
     elementProperties :: (Core.Maybe PageElementProperties),
     -- | A user-supplied object ID. If you specify an ID, it must be unique among all pages and page elements in the presentation. The ID must start with an alphanumeric character or an underscore (matches regex @[a-zA-Z0-9_]@); remaining characters may include those as well as a hyphen or colon (matches regex @[a-zA-Z0-9_-:]@). The length of the ID must not be less than 5 or greater than 50. If you don\'t specify an ID, a unique one is generated.
     objectId :: (Core.Maybe Core.Text),
-    -- | The image URL. The image is fetched once at insertion time and a copy is stored for display inside the presentation. Images must be less than 50MB in size, cannot exceed 25 megapixels, and must be in one of PNG, JPEG, or GIF format. The provided URL can be at most 2 kB in length. The URL itself is saved with the image, and exposed via the Image.source_url field.
+    -- | The image URL. The image is fetched once at insertion time and a copy is stored for display inside the presentation. Images must be less than 50 MB in size, can\'t exceed 25 megapixels, and must be in one of PNG, JPEG, or GIF formats. The provided URL must be publicly accessible and up to 2 KB in length. The URL is saved with the image, and exposed through the Image.source_url field.
     url :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1294,17 +1294,17 @@ instance Core.ToJSON CreateSheetsChartResponse where
           [("objectId" Core..=) Core.<$> objectId]
       )
 
--- | Creates a new slide.
+-- | Creates a slide.
 --
 -- /See:/ 'newCreateSlideRequest' smart constructor.
 data CreateSlideRequest = CreateSlideRequest
-  { -- | The optional zero-based index indicating where to insert the slides. If you don\'t specify an index, the new slide is created at the end.
+  { -- | The optional zero-based index indicating where to insert the slides. If you don\'t specify an index, the slide is created at the end.
     insertionIndex :: (Core.Maybe Core.Int32),
-    -- | A user-supplied object ID. If you specify an ID, it must be unique among all pages and page elements in the presentation. The ID must start with an alphanumeric character or an underscore (matches regex @[a-zA-Z0-9_]@); remaining characters may include those as well as a hyphen or colon (matches regex @[a-zA-Z0-9_-:]@). The length of the ID must not be less than 5 or greater than 50. If you don\'t specify an ID, a unique one is generated.
+    -- | A user-supplied object ID. If you specify an ID, it must be unique among all pages and page elements in the presentation. The ID must start with an alphanumeric character or an underscore (matches regex @[a-zA-Z0-9_]@); remaining characters may include those as well as a hyphen or colon (matches regex @[a-zA-Z0-9_-:]@). The ID length must be between 5 and 50 characters, inclusive. If you don\'t specify an ID, a unique one is generated.
     objectId :: (Core.Maybe Core.Text),
-    -- | An optional list of object ID mappings from the placeholder(s) on the layout to the placeholder(s) that will be created on the new slide from that specified layout. Can only be used when @slide_layout_reference@ is specified.
+    -- | An optional list of object ID mappings from the placeholder(s) on the layout to the placeholders that are created on the slide from the specified layout. Can only be used when @slide_layout_reference@ is specified.
     placeholderIdMappings :: (Core.Maybe [LayoutPlaceholderIdMapping]),
-    -- | Layout reference of the slide to be inserted, based on the /current master/, which is one of the following: - The master of the previous slide index. - The master of the first slide, if the insertion_index is zero. - The first master in the presentation, if there are no slides. If the LayoutReference is not found in the current master, a 400 bad request error is returned. If you don\'t specify a layout reference, then the new slide will use the predefined layout @BLANK@.
+    -- | Layout reference of the slide to be inserted, based on the /current master/, which is one of the following: - The master of the previous slide index. - The master of the first slide, if the insertion_index is zero. - The first master in the presentation, if there are no slides. If the LayoutReference is not found in the current master, a 400 bad request error is returned. If you don\'t specify a layout reference, the slide uses the predefined @BLANK@ layout.
     slideLayoutReference :: (Core.Maybe LayoutReference)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2986,7 +2986,7 @@ data Page = Page
     pageProperties :: (Core.Maybe PageProperties),
     -- | The type of the page.
     pageType :: (Core.Maybe Page_PageType),
-    -- | The revision ID of the presentation containing this page. Can be used in update requests to assert that the presentation revision hasn\'t changed since the last read operation. Only populated if the user has edit access to the presentation. The format of the revision ID may change over time, so it should be treated opaquely. A returned revision ID is only guaranteed to be valid for 24 hours after it has been returned and cannot be shared across users. If the revision ID is unchanged between calls, then the presentation has not changed. Conversely, a changed ID (for the same presentation and user) usually means the presentation has been updated; however, a changed ID can also be due to internal factors such as ID format changes.
+    -- | Output only. The revision ID of the presentation. Can be used in update requests to assert the presentation revision hasn\'t changed since the last read operation. Only populated if the user has edit access to the presentation. The revision ID is not a sequential number but an opaque string. The format of the revision ID might change over time. A returned revision ID is only guaranteed to be valid for 24 hours after it has been returned and cannot be shared across users. If the revision ID is unchanged between calls, then the presentation has not changed. Conversely, a changed ID (for the same presentation and user) usually means the presentation has been updated. However, a changed ID can also be due to internal factors such as ID format changes.
     revisionId :: (Core.Maybe Core.Text),
     -- | Slide specific properties. Only set if page_type = SLIDE.
     slideProperties :: (Core.Maybe SlideProperties)
@@ -3434,7 +3434,7 @@ data Presentation = Presentation
     pageSize :: (Core.Maybe Size),
     -- | The ID of the presentation.
     presentationId :: (Core.Maybe Core.Text),
-    -- | The revision ID of the presentation. Can be used in update requests to assert that the presentation revision hasn\'t changed since the last read operation. Only populated if the user has edit access to the presentation. The format of the revision ID may change over time, so it should be treated opaquely. A returned revision ID is only guaranteed to be valid for 24 hours after it has been returned and cannot be shared across users. If the revision ID is unchanged between calls, then the presentation has not changed. Conversely, a changed ID (for the same presentation and user) usually means the presentation has been updated; however, a changed ID can also be due to internal factors such as ID format changes.
+    -- | Output only. The revision ID of the presentation. Can be used in update requests to assert the presentation revision hasn\'t changed since the last read operation. Only populated if the user has edit access to the presentation. The revision ID is not a sequential number but a nebulous string. The format of the revision ID may change over time, so it should be treated opaquely. A returned revision ID is only guaranteed to be valid for 24 hours after it has been returned and cannot be shared across users. If the revision ID is unchanged between calls, then the presentation has not changed. Conversely, a changed ID (for the same presentation and user) usually means the presentation has been updated. However, a changed ID can also be due to internal factors such as ID format changes.
     revisionId :: (Core.Maybe Core.Text),
     -- | The slides in the presentation. A slide inherits properties from a slide layout.
     slides :: (Core.Maybe [Page]),
@@ -3879,11 +3879,11 @@ instance Core.ToJSON ReplaceAllTextResponse where
 --
 -- /See:/ 'newReplaceImageRequest' smart constructor.
 data ReplaceImageRequest = ReplaceImageRequest
-  { -- | The ID of the existing image that will be replaced.
+  { -- | The ID of the existing image that will be replaced. The ID can be retrieved from the response of a get request.
     imageObjectId :: (Core.Maybe Core.Text),
     -- | The replacement method.
     imageReplaceMethod :: (Core.Maybe ReplaceImageRequest_ImageReplaceMethod),
-    -- | The image URL. The image is fetched once at insertion time and a copy is stored for display inside the presentation. Images must be less than 50MB in size, cannot exceed 25 megapixels, and must be in one of PNG, JPEG, or GIF format. The provided URL can be at most 2 kB in length. The URL itself is saved with the image, and exposed via the Image.source_url field.
+    -- | The image URL. The image is fetched once at insertion time and a copy is stored for display inside the presentation. Images must be less than 50MB, cannot exceed 25 megapixels, and must be in PNG, JPEG, or GIF format. The provided URL can\'t surpass 2 KB in length. The URL is saved with the image, and exposed through the Image.source_url field.
     url :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6742,7 +6742,7 @@ instance Core.ToJSON WordArt where
 --
 -- /See:/ 'newWriteControl' smart constructor.
 newtype WriteControl = WriteControl
-  { -- | The revision ID of the presentation required for the write request. If specified and the @required_revision_id@ doesn\'t exactly match the presentation\'s current @revision_id@, the request will not be processed and will return a 400 bad request error.
+  { -- | The revision ID of the presentation required for the write request. If specified and the required revision ID doesn\'t match the presentation\'s current revision ID, the request is not processed and returns a 400 bad request error. When a required revision ID is returned in a response, it indicates the revision ID of the document after the request was applied.
     requiredRevisionId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

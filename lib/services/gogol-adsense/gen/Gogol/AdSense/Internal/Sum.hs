@@ -33,6 +33,24 @@ module Gogol.AdSense.Internal.Sum
         ..
       ),
 
+    -- * Account_State
+    Account_State
+      ( Account_State_STATEUNSPECIFIED,
+        Account_State_Ready,
+        Account_State_NEEDSATTENTION,
+        Account_State_Closed,
+        ..
+      ),
+
+    -- * AdClient_State
+    AdClient_State
+      ( AdClient_State_STATEUNSPECIFIED,
+        AdClient_State_Ready,
+        AdClient_State_GETTINGREADY,
+        AdClient_State_REQUIRESREVIEW,
+        ..
+      ),
+
     -- * AdUnit_State
     AdUnit_State
       ( AdUnit_State_STATEUNSPECIFIED,
@@ -104,6 +122,7 @@ module Gogol.AdSense.Internal.Sum
         AccountsReportsGenerateDimensions_Month,
         AccountsReportsGenerateDimensions_ACCOUNTNAME,
         AccountsReportsGenerateDimensions_ADCLIENTID,
+        AccountsReportsGenerateDimensions_HOSTEDADCLIENTID,
         AccountsReportsGenerateDimensions_PRODUCTNAME,
         AccountsReportsGenerateDimensions_PRODUCTCODE,
         AccountsReportsGenerateDimensions_ADUNITNAME,
@@ -114,6 +133,7 @@ module Gogol.AdSense.Internal.Sum
         AccountsReportsGenerateDimensions_CUSTOMCHANNELID,
         AccountsReportsGenerateDimensions_OWNEDSITEDOMAINNAME,
         AccountsReportsGenerateDimensions_OWNEDSITEID,
+        AccountsReportsGenerateDimensions_PAGEURL,
         AccountsReportsGenerateDimensions_URLCHANNELNAME,
         AccountsReportsGenerateDimensions_URLCHANNELID,
         AccountsReportsGenerateDimensions_BUYERNETWORKNAME,
@@ -214,6 +234,7 @@ module Gogol.AdSense.Internal.Sum
         AccountsReportsGenerateCsvDimensions_Month,
         AccountsReportsGenerateCsvDimensions_ACCOUNTNAME,
         AccountsReportsGenerateCsvDimensions_ADCLIENTID,
+        AccountsReportsGenerateCsvDimensions_HOSTEDADCLIENTID,
         AccountsReportsGenerateCsvDimensions_PRODUCTNAME,
         AccountsReportsGenerateCsvDimensions_PRODUCTCODE,
         AccountsReportsGenerateCsvDimensions_ADUNITNAME,
@@ -224,6 +245,7 @@ module Gogol.AdSense.Internal.Sum
         AccountsReportsGenerateCsvDimensions_CUSTOMCHANNELID,
         AccountsReportsGenerateCsvDimensions_OWNEDSITEDOMAINNAME,
         AccountsReportsGenerateCsvDimensions_OWNEDSITEID,
+        AccountsReportsGenerateCsvDimensions_PAGEURL,
         AccountsReportsGenerateCsvDimensions_URLCHANNELNAME,
         AccountsReportsGenerateCsvDimensions_URLCHANNELID,
         AccountsReportsGenerateCsvDimensions_BUYERNETWORKNAME,
@@ -376,6 +398,80 @@ pattern Xgafv_2 = Xgafv "2"
   Xgafv
   #-}
 
+-- | Output only. State of the account.
+newtype Account_State = Account_State {fromAccount_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | State unspecified.
+pattern Account_State_STATEUNSPECIFIED :: Account_State
+pattern Account_State_STATEUNSPECIFIED = Account_State "STATE_UNSPECIFIED"
+
+-- | The account is open and ready to serve ads.
+pattern Account_State_Ready :: Account_State
+pattern Account_State_Ready = Account_State "READY"
+
+-- | There are some issues with this account. Publishers should visit AdSense in order to fix the account.
+pattern Account_State_NEEDSATTENTION :: Account_State
+pattern Account_State_NEEDSATTENTION = Account_State "NEEDS_ATTENTION"
+
+-- | The account is closed and can\'t serve ads.
+pattern Account_State_Closed :: Account_State
+pattern Account_State_Closed = Account_State "CLOSED"
+
+{-# COMPLETE
+  Account_State_STATEUNSPECIFIED,
+  Account_State_Ready,
+  Account_State_NEEDSATTENTION,
+  Account_State_Closed,
+  Account_State
+  #-}
+
+-- | Output only. State of the ad client.
+newtype AdClient_State = AdClient_State {fromAdClient_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | State unspecified.
+pattern AdClient_State_STATEUNSPECIFIED :: AdClient_State
+pattern AdClient_State_STATEUNSPECIFIED = AdClient_State "STATE_UNSPECIFIED"
+
+-- | The ad client is ready to show ads.
+pattern AdClient_State_Ready :: AdClient_State
+pattern AdClient_State_Ready = AdClient_State "READY"
+
+-- | Running some checks on the ad client before it is ready to serve ads.
+pattern AdClient_State_GETTINGREADY :: AdClient_State
+pattern AdClient_State_GETTINGREADY = AdClient_State "GETTING_READY"
+
+-- | The ad client hasn\'t been checked yet. There are tasks pending before AdSense will start the review.
+pattern AdClient_State_REQUIRESREVIEW :: AdClient_State
+pattern AdClient_State_REQUIRESREVIEW = AdClient_State "REQUIRES_REVIEW"
+
+{-# COMPLETE
+  AdClient_State_STATEUNSPECIFIED,
+  AdClient_State_Ready,
+  AdClient_State_GETTINGREADY,
+  AdClient_State_REQUIRESREVIEW,
+  AdClient_State
+  #-}
+
 -- | State of the ad unit.
 newtype AdUnit_State = AdUnit_State {fromAdUnit_State :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -445,7 +541,7 @@ pattern Alert_Severity_Severe = Alert_Severity "SEVERE"
   Alert_Severity
   #-}
 
--- | Type of the ad unit.
+-- | Required. Type of the ad unit.
 newtype ContentAdsSettings_Type = ContentAdsSettings_Type {fromContentAdsSettings_Type :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -561,19 +657,19 @@ newtype Site_State = Site_State {fromSite_State :: Core.Text}
 pattern Site_State_STATEUNSPECIFIED :: Site_State
 pattern Site_State_STATEUNSPECIFIED = Site_State "STATE_UNSPECIFIED"
 
--- | The site hasn\'t been checked yet.
+-- | Either: * The site hasn\'t been checked yet. * The site is inactive and needs another review before it can show ads again. Learn how to <https://support.google.com/adsense/answer/9393996 request a review for an inactive site>.
 pattern Site_State_REQUIRESREVIEW :: Site_State
 pattern Site_State_REQUIRESREVIEW = Site_State "REQUIRES_REVIEW"
 
--- | Running some checks on the site. This usually takes a few days, but in some cases can take up to 2 weeks.
+-- | Google is running some checks on the site. This usually takes a few days, but in some cases it can take two to four weeks.
 pattern Site_State_GETTINGREADY :: Site_State
 pattern Site_State_GETTINGREADY = Site_State "GETTING_READY"
 
--- | The site is ready to show ads.
+-- | The site is ready to show ads. Learn how to <https://support.google.com/adsense/answer/7037624 set up ads on the site>.
 pattern Site_State_Ready :: Site_State
 pattern Site_State_Ready = Site_State "READY"
 
--- | Publisher needs to fix some issues before the site is ready to show ads.
+-- | Publisher needs to fix some issues before the site is ready to show ads. Learn what to do <https://support.google.com/adsense/answer/9061852 if a new site isn\'t ready>.
 pattern Site_State_NEEDSATTENTION :: Site_State
 pattern Site_State_NEEDSATTENTION = Site_State "NEEDS_ATTENTION"
 
@@ -680,6 +776,10 @@ pattern AccountsReportsGenerateDimensions_ACCOUNTNAME = AccountsReportsGenerateD
 pattern AccountsReportsGenerateDimensions_ADCLIENTID :: AccountsReportsGenerateDimensions
 pattern AccountsReportsGenerateDimensions_ADCLIENTID = AccountsReportsGenerateDimensions "AD_CLIENT_ID"
 
+-- | Unique ID of a sub-account\'s ad client. The members of this dimension match the values from AdClient.reporting/dimension/id (for the sub-account).
+pattern AccountsReportsGenerateDimensions_HOSTEDADCLIENTID :: AccountsReportsGenerateDimensions
+pattern AccountsReportsGenerateDimensions_HOSTEDADCLIENTID = AccountsReportsGenerateDimensions "HOSTED_AD_CLIENT_ID"
+
 -- | Localized product name (e.g. \"AdSense for Content\", \"AdSense for Search\").
 pattern AccountsReportsGenerateDimensions_PRODUCTNAME :: AccountsReportsGenerateDimensions
 pattern AccountsReportsGenerateDimensions_PRODUCTNAME = AccountsReportsGenerateDimensions "PRODUCT_NAME"
@@ -719,6 +819,10 @@ pattern AccountsReportsGenerateDimensions_OWNEDSITEDOMAINNAME = AccountsReportsG
 -- | Unique ID of a verified site. The members of this dimension match the values from Site.reporting/dimension/id.
 pattern AccountsReportsGenerateDimensions_OWNEDSITEID :: AccountsReportsGenerateDimensions
 pattern AccountsReportsGenerateDimensions_OWNEDSITEID = AccountsReportsGenerateDimensions "OWNED_SITE_ID"
+
+-- | URL of the page upon which the ad was served. This is a complete URL including scheme and query parameters. Note that the URL that appears in this dimension may be a canonicalized version of the one that was used in the original request, and so may not exactly match the URL that a user might have seen. Note that there are also some caveats to be aware of when using this dimension. For more information, see <https://support.google.com/adsense/answer/11988478 Page URL breakdown>.
+pattern AccountsReportsGenerateDimensions_PAGEURL :: AccountsReportsGenerateDimensions
+pattern AccountsReportsGenerateDimensions_PAGEURL = AccountsReportsGenerateDimensions "PAGE_URL"
 
 -- | Name of a URL channel. The members of this dimension match the values from UrlChannel.uri_pattern.
 pattern AccountsReportsGenerateDimensions_URLCHANNELNAME :: AccountsReportsGenerateDimensions
@@ -847,6 +951,7 @@ pattern AccountsReportsGenerateDimensions_WEBSEARCHQUERYSTRING = AccountsReports
   AccountsReportsGenerateDimensions_Month,
   AccountsReportsGenerateDimensions_ACCOUNTNAME,
   AccountsReportsGenerateDimensions_ADCLIENTID,
+  AccountsReportsGenerateDimensions_HOSTEDADCLIENTID,
   AccountsReportsGenerateDimensions_PRODUCTNAME,
   AccountsReportsGenerateDimensions_PRODUCTCODE,
   AccountsReportsGenerateDimensions_ADUNITNAME,
@@ -857,6 +962,7 @@ pattern AccountsReportsGenerateDimensions_WEBSEARCHQUERYSTRING = AccountsReports
   AccountsReportsGenerateDimensions_CUSTOMCHANNELID,
   AccountsReportsGenerateDimensions_OWNEDSITEDOMAINNAME,
   AccountsReportsGenerateDimensions_OWNEDSITEID,
+  AccountsReportsGenerateDimensions_PAGEURL,
   AccountsReportsGenerateDimensions_URLCHANNELNAME,
   AccountsReportsGenerateDimensions_URLCHANNELID,
   AccountsReportsGenerateDimensions_BUYERNETWORKNAME,
@@ -1027,7 +1133,7 @@ pattern AccountsReportsGenerateMetrics_COSTPERCLICK = AccountsReportsGenerateMet
 pattern AccountsReportsGenerateMetrics_ADSPERIMPRESSION :: AccountsReportsGenerateMetrics
 pattern AccountsReportsGenerateMetrics_ADSPERIMPRESSION = AccountsReportsGenerateMetrics "ADS_PER_IMPRESSION"
 
--- | Total earnings.
+-- | Total earnings are the gross estimated earnings from revenue shared traffic before any parent and child account revenue share is applied.
 pattern AccountsReportsGenerateMetrics_TOTALEARNINGS :: AccountsReportsGenerateMetrics
 pattern AccountsReportsGenerateMetrics_TOTALEARNINGS = AccountsReportsGenerateMetrics "TOTAL_EARNINGS"
 
@@ -1198,6 +1304,10 @@ pattern AccountsReportsGenerateCsvDimensions_ACCOUNTNAME = AccountsReportsGenera
 pattern AccountsReportsGenerateCsvDimensions_ADCLIENTID :: AccountsReportsGenerateCsvDimensions
 pattern AccountsReportsGenerateCsvDimensions_ADCLIENTID = AccountsReportsGenerateCsvDimensions "AD_CLIENT_ID"
 
+-- | Unique ID of a sub-account\'s ad client. The members of this dimension match the values from AdClient.reporting/dimension/id (for the sub-account).
+pattern AccountsReportsGenerateCsvDimensions_HOSTEDADCLIENTID :: AccountsReportsGenerateCsvDimensions
+pattern AccountsReportsGenerateCsvDimensions_HOSTEDADCLIENTID = AccountsReportsGenerateCsvDimensions "HOSTED_AD_CLIENT_ID"
+
 -- | Localized product name (e.g. \"AdSense for Content\", \"AdSense for Search\").
 pattern AccountsReportsGenerateCsvDimensions_PRODUCTNAME :: AccountsReportsGenerateCsvDimensions
 pattern AccountsReportsGenerateCsvDimensions_PRODUCTNAME = AccountsReportsGenerateCsvDimensions "PRODUCT_NAME"
@@ -1237,6 +1347,10 @@ pattern AccountsReportsGenerateCsvDimensions_OWNEDSITEDOMAINNAME = AccountsRepor
 -- | Unique ID of a verified site. The members of this dimension match the values from Site.reporting/dimension/id.
 pattern AccountsReportsGenerateCsvDimensions_OWNEDSITEID :: AccountsReportsGenerateCsvDimensions
 pattern AccountsReportsGenerateCsvDimensions_OWNEDSITEID = AccountsReportsGenerateCsvDimensions "OWNED_SITE_ID"
+
+-- | URL of the page upon which the ad was served. This is a complete URL including scheme and query parameters. Note that the URL that appears in this dimension may be a canonicalized version of the one that was used in the original request, and so may not exactly match the URL that a user might have seen. Note that there are also some caveats to be aware of when using this dimension. For more information, see <https://support.google.com/adsense/answer/11988478 Page URL breakdown>.
+pattern AccountsReportsGenerateCsvDimensions_PAGEURL :: AccountsReportsGenerateCsvDimensions
+pattern AccountsReportsGenerateCsvDimensions_PAGEURL = AccountsReportsGenerateCsvDimensions "PAGE_URL"
 
 -- | Name of a URL channel. The members of this dimension match the values from UrlChannel.uri_pattern.
 pattern AccountsReportsGenerateCsvDimensions_URLCHANNELNAME :: AccountsReportsGenerateCsvDimensions
@@ -1365,6 +1479,7 @@ pattern AccountsReportsGenerateCsvDimensions_WEBSEARCHQUERYSTRING = AccountsRepo
   AccountsReportsGenerateCsvDimensions_Month,
   AccountsReportsGenerateCsvDimensions_ACCOUNTNAME,
   AccountsReportsGenerateCsvDimensions_ADCLIENTID,
+  AccountsReportsGenerateCsvDimensions_HOSTEDADCLIENTID,
   AccountsReportsGenerateCsvDimensions_PRODUCTNAME,
   AccountsReportsGenerateCsvDimensions_PRODUCTCODE,
   AccountsReportsGenerateCsvDimensions_ADUNITNAME,
@@ -1375,6 +1490,7 @@ pattern AccountsReportsGenerateCsvDimensions_WEBSEARCHQUERYSTRING = AccountsRepo
   AccountsReportsGenerateCsvDimensions_CUSTOMCHANNELID,
   AccountsReportsGenerateCsvDimensions_OWNEDSITEDOMAINNAME,
   AccountsReportsGenerateCsvDimensions_OWNEDSITEID,
+  AccountsReportsGenerateCsvDimensions_PAGEURL,
   AccountsReportsGenerateCsvDimensions_URLCHANNELNAME,
   AccountsReportsGenerateCsvDimensions_URLCHANNELID,
   AccountsReportsGenerateCsvDimensions_BUYERNETWORKNAME,
@@ -1545,7 +1661,7 @@ pattern AccountsReportsGenerateCsvMetrics_COSTPERCLICK = AccountsReportsGenerate
 pattern AccountsReportsGenerateCsvMetrics_ADSPERIMPRESSION :: AccountsReportsGenerateCsvMetrics
 pattern AccountsReportsGenerateCsvMetrics_ADSPERIMPRESSION = AccountsReportsGenerateCsvMetrics "ADS_PER_IMPRESSION"
 
--- | Total earnings.
+-- | Total earnings are the gross estimated earnings from revenue shared traffic before any parent and child account revenue share is applied.
 pattern AccountsReportsGenerateCsvMetrics_TOTALEARNINGS :: AccountsReportsGenerateCsvMetrics
 pattern AccountsReportsGenerateCsvMetrics_TOTALEARNINGS = AccountsReportsGenerateCsvMetrics "TOTAL_EARNINGS"
 

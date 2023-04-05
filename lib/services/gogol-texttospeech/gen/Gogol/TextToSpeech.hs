@@ -38,6 +38,31 @@ module Gogol.TextToSpeech
 
     -- * Resources
 
+    -- ** texttospeech.operations.cancel
+    TextToSpeechOperationsCancelResource,
+    TextToSpeechOperationsCancel (..),
+    newTextToSpeechOperationsCancel,
+
+    -- ** texttospeech.operations.delete
+    TextToSpeechOperationsDeleteResource,
+    TextToSpeechOperationsDelete (..),
+    newTextToSpeechOperationsDelete,
+
+    -- ** texttospeech.projects.locations.operations.get
+    TextToSpeechProjectsLocationsOperationsGetResource,
+    TextToSpeechProjectsLocationsOperationsGet (..),
+    newTextToSpeechProjectsLocationsOperationsGet,
+
+    -- ** texttospeech.projects.locations.operations.list
+    TextToSpeechProjectsLocationsOperationsListResource,
+    TextToSpeechProjectsLocationsOperationsList (..),
+    newTextToSpeechProjectsLocationsOperationsList,
+
+    -- ** texttospeech.projects.locations.synthesizeLongAudio
+    TextToSpeechProjectsLocationsSynthesizeLongAudioResource,
+    TextToSpeechProjectsLocationsSynthesizeLongAudio (..),
+    newTextToSpeechProjectsLocationsSynthesizeLongAudio,
+
     -- ** texttospeech.text.synthesize
     TextToSpeechTextSynthesizeResource,
     TextToSpeechTextSynthesize (..),
@@ -60,13 +85,64 @@ module Gogol.TextToSpeech
     -- ** AudioConfig_AudioEncoding
     AudioConfig_AudioEncoding (..),
 
+    -- ** CancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
+
+    -- ** CustomVoiceParams
+    CustomVoiceParams (..),
+    newCustomVoiceParams,
+
+    -- ** CustomVoiceParams_ReportedUsage
+    CustomVoiceParams_ReportedUsage (..),
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** GoogleCloudTexttospeechV1SynthesizeLongAudioMetadata
+    GoogleCloudTexttospeechV1SynthesizeLongAudioMetadata (..),
+    newGoogleCloudTexttospeechV1SynthesizeLongAudioMetadata,
+
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
+
     -- ** ListVoicesResponse
     ListVoicesResponse (..),
     newListVoicesResponse,
 
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
     -- ** SynthesisInput
     SynthesisInput (..),
     newSynthesisInput,
+
+    -- ** SynthesizeLongAudioMetadata
+    SynthesizeLongAudioMetadata (..),
+    newSynthesizeLongAudioMetadata,
+
+    -- ** SynthesizeLongAudioRequest
+    SynthesizeLongAudioRequest (..),
+    newSynthesizeLongAudioRequest,
 
     -- ** SynthesizeSpeechRequest
     SynthesizeSpeechRequest (..),
@@ -92,6 +168,11 @@ module Gogol.TextToSpeech
   )
 where
 
+import Gogol.TextToSpeech.Operations.Cancel
+import Gogol.TextToSpeech.Operations.Delete
+import Gogol.TextToSpeech.Projects.Locations.Operations.Get
+import Gogol.TextToSpeech.Projects.Locations.Operations.List
+import Gogol.TextToSpeech.Projects.Locations.SynthesizeLongAudio
 import Gogol.TextToSpeech.Text.Synthesize
 import Gogol.TextToSpeech.Types
 import Gogol.TextToSpeech.Voices.List

@@ -94,6 +94,10 @@ module Gogol.CloudKMS.Internal.Product
     Digest (..),
     newDigest,
 
+    -- * EkmConfig
+    EkmConfig (..),
+    newEkmConfig,
+
     -- * EkmConnection
     EkmConnection (..),
     newEkmConnection,
@@ -450,7 +454,7 @@ instance Core.ToJSON AsymmetricSignResponse where
       )
 
 -- | Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs. If there are AuditConfigs for both @allServices@ and a specific service, the union of the two AuditConfigs is used for that service: the log/types specified in each AuditConfig are enabled, and the exempted/members in each AuditLogConfig are exempted. Example Policy with multiple AuditConfigs: { \"audit/configs\": [ { \"service\": \"allServices\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\", \"exempted/members\": [ \"user:jose\@example.com\" ] }, { \"log/type\": \"DATA/WRITE\" }, { \"log/type\": \"ADMIN/READ\" } ] }, { \"service\": \"sampleservice.googleapis.com\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\" }, { \"log/type\": \"DATA/WRITE\", \"exempted/members\": [ \"user:aliya\@example.com\" ] } ] } ] } For sampleservice, this policy enables DATA/READ, DATA/WRITE and
--- ADMIN/READ logging. It also exempts jose\@example.com from DATA/READ logging, and aliya\@example.com from DATA/WRITE logging.
+-- ADMIN/READ logging. It also exempts @jose\@example.com@ from DATA/READ logging, and @aliya\@example.com@ from DATA/WRITE logging.
 --
 -- /See:/ 'newAuditConfig' smart constructor.
 data AuditConfig = AuditConfig
@@ -530,8 +534,9 @@ instance Core.ToJSON AuditLogConfig where
 data Binding = Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe Expr),
-    -- | Specifies the principals requesting access for a Cloud Platform resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains
-    -- the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@.
+    -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
+    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
     members :: (Core.Maybe [Core.Text]),
     -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
     role' :: (Core.Maybe Core.Text)
@@ -819,10 +824,14 @@ data CryptoKeyVersion = CryptoKeyVersion
     destroyEventTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The time this CryptoKeyVersion\'s key material is scheduled for destruction. Only present if state is DESTROY_SCHEDULED.
     destroyTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. The root cause of the most recent external destruction failure. Only present if state is EXTERNAL/DESTRUCTION/FAILED.
+    externalDestructionFailureReason :: (Core.Maybe Core.Text),
     -- | ExternalProtectionLevelOptions stores a group of additional fields for configuring a CryptoKeyVersion that are specific to the EXTERNAL protection level and EXTERNAL_VPC protection levels.
     externalProtectionLevelOptions :: (Core.Maybe ExternalProtectionLevelOptions),
     -- | Output only. The time this CryptoKeyVersion\'s key material was generated.
     generateTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. The root cause of the most recent generation failure. Only present if state is GENERATION_FAILED.
+    generationFailureReason :: (Core.Maybe Core.Text),
     -- | Output only. The root cause of the most recent import failure. Only present if state is IMPORT_FAILED.
     importFailureReason :: (Core.Maybe Core.Text),
     -- | Output only. The name of the ImportJob used in the most recent import of this CryptoKeyVersion. Only present if the underlying key material was imported.
@@ -850,8 +859,10 @@ newCryptoKeyVersion =
       createTime = Core.Nothing,
       destroyEventTime = Core.Nothing,
       destroyTime = Core.Nothing,
+      externalDestructionFailureReason = Core.Nothing,
       externalProtectionLevelOptions = Core.Nothing,
       generateTime = Core.Nothing,
+      generationFailureReason = Core.Nothing,
       importFailureReason = Core.Nothing,
       importJob = Core.Nothing,
       importTime = Core.Nothing,
@@ -872,8 +883,10 @@ instance Core.FromJSON CryptoKeyVersion where
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "destroyEventTime")
             Core.<*> (o Core..:? "destroyTime")
+            Core.<*> (o Core..:? "externalDestructionFailureReason")
             Core.<*> (o Core..:? "externalProtectionLevelOptions")
             Core.<*> (o Core..:? "generateTime")
+            Core.<*> (o Core..:? "generationFailureReason")
             Core.<*> (o Core..:? "importFailureReason")
             Core.<*> (o Core..:? "importJob")
             Core.<*> (o Core..:? "importTime")
@@ -893,9 +906,13 @@ instance Core.ToJSON CryptoKeyVersion where
             ("destroyEventTime" Core..=)
               Core.<$> destroyEventTime,
             ("destroyTime" Core..=) Core.<$> destroyTime,
+            ("externalDestructionFailureReason" Core..=)
+              Core.<$> externalDestructionFailureReason,
             ("externalProtectionLevelOptions" Core..=)
               Core.<$> externalProtectionLevelOptions,
             ("generateTime" Core..=) Core.<$> generateTime,
+            ("generationFailureReason" Core..=)
+              Core.<$> generationFailureReason,
             ("importFailureReason" Core..=)
               Core.<$> importFailureReason,
             ("importJob" Core..=) Core.<$> importJob,
@@ -1117,14 +1134,55 @@ instance Core.ToJSON Digest where
           ]
       )
 
+-- | An EkmConfig is a singleton resource that represents configuration parameters that apply to all CryptoKeys and CryptoKeyVersions with a ProtectionLevel of EXTERNAL_VPC in a given project and location.
+--
+-- /See:/ 'newEkmConfig' smart constructor.
+data EkmConfig = EkmConfig
+  { -- | Optional. Resource name of the default EkmConnection. Setting this field to the empty string removes the default.
+    defaultEkmConnection :: (Core.Maybe Core.Text),
+    -- | Output only. The resource name for the EkmConfig in the format @projects\/*\/locations\/*\/ekmConfig@.
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'EkmConfig' with the minimum fields required to make a request.
+newEkmConfig ::
+  EkmConfig
+newEkmConfig =
+  EkmConfig {defaultEkmConnection = Core.Nothing, name = Core.Nothing}
+
+instance Core.FromJSON EkmConfig where
+  parseJSON =
+    Core.withObject
+      "EkmConfig"
+      ( \o ->
+          EkmConfig
+            Core.<$> (o Core..:? "defaultEkmConnection")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON EkmConfig where
+  toJSON EkmConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("defaultEkmConnection" Core..=)
+              Core.<$> defaultEkmConnection,
+            ("name" Core..=) Core.<$> name
+          ]
+      )
+
 -- | An EkmConnection represents an individual EKM connection. It can be used for creating CryptoKeys and CryptoKeyVersions with a ProtectionLevel of EXTERNAL_VPC, as well as performing cryptographic operations using keys created within the EkmConnection.
 --
 -- /See:/ 'newEkmConnection' smart constructor.
 data EkmConnection = EkmConnection
   { -- | Output only. The time at which the EkmConnection was created.
     createTime :: (Core.Maybe Core.DateTime),
-    -- | This checksum is computed by the server based on the value of other fields, and may be sent on update requests to ensure the client has an up-to-date value before proceeding.
+    -- | Optional. Identifies the EKM Crypto Space that this EkmConnection maps to. Note: This field is required if KeyManagementMode is CLOUD_KMS.
+    cryptoSpacePath :: (Core.Maybe Core.Text),
+    -- | Optional. Etag of the currently stored EkmConnection.
     etag :: (Core.Maybe Core.Text),
+    -- | Optional. Describes who can perform control plane operations on the EKM. If unset, this defaults to MANUAL.
+    keyManagementMode :: (Core.Maybe EkmConnection_KeyManagementMode),
     -- | Output only. The resource name for the EkmConnection in the format @projects\/*\/locations\/*\/ekmConnections\/*@.
     name :: (Core.Maybe Core.Text),
     -- | A list of ServiceResolvers where the EKM can be reached. There should be one ServiceResolver per EKM replica. Currently, only a single ServiceResolver is supported.
@@ -1138,7 +1196,9 @@ newEkmConnection ::
 newEkmConnection =
   EkmConnection
     { createTime = Core.Nothing,
+      cryptoSpacePath = Core.Nothing,
       etag = Core.Nothing,
+      keyManagementMode = Core.Nothing,
       name = Core.Nothing,
       serviceResolvers = Core.Nothing
     }
@@ -1150,7 +1210,9 @@ instance Core.FromJSON EkmConnection where
       ( \o ->
           EkmConnection
             Core.<$> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "cryptoSpacePath")
             Core.<*> (o Core..:? "etag")
+            Core.<*> (o Core..:? "keyManagementMode")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "serviceResolvers")
       )
@@ -1160,7 +1222,10 @@ instance Core.ToJSON EkmConnection where
     Core.object
       ( Core.catMaybes
           [ ("createTime" Core..=) Core.<$> createTime,
+            ("cryptoSpacePath" Core..=) Core.<$> cryptoSpacePath,
             ("etag" Core..=) Core.<$> etag,
+            ("keyManagementMode" Core..=)
+              Core.<$> keyManagementMode,
             ("name" Core..=) Core.<$> name,
             ("serviceResolvers" Core..=)
               Core.<$> serviceResolvers
@@ -1171,11 +1236,11 @@ instance Core.ToJSON EkmConnection where
 --
 -- /See:/ 'newEncryptRequest' smart constructor.
 data EncryptRequest = EncryptRequest
-  { -- | Optional. Optional data that, if specified, must also be provided during decryption through DecryptRequest.additional/authenticated/data. The maximum size depends on the key version\'s protection/level. For SOFTWARE keys, the AAD must be no larger than 64KiB. For HSM keys, the combined length of the plaintext and additional/authenticated_data fields must be no larger than 8KiB.
+  { -- | Optional. Optional data that, if specified, must also be provided during decryption through DecryptRequest.additional/authenticated/data. The maximum size depends on the key version\'s protection/level. For SOFTWARE, EXTERNAL, and EXTERNAL/VPC keys the AAD must be no larger than 64KiB. For HSM keys, the combined length of the plaintext and additional/authenticated/data fields must be no larger than 8KiB.
     additionalAuthenticatedData :: (Core.Maybe Core.Base64),
     -- | Optional. An optional CRC32C checksum of the EncryptRequest.additional/authenticated/data. If specified, KeyManagementService will verify the integrity of the received EncryptRequest.additional/authenticated/data using this checksum. KeyManagementService will report an error if the checksum verification fails. If you receive a checksum error, your client should verify that CRC32C(EncryptRequest.additional/authenticated/data) is equal to EncryptRequest.additional/authenticated/data_crc32c, and if so, perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed 2^32-1, and can be safely downconverted to uint32 in languages that support this type.
     additionalAuthenticatedDataCrc32c :: (Core.Maybe Core.Int64),
-    -- | Required. The data to encrypt. Must be no larger than 64KiB. The maximum size depends on the key version\'s protection/level. For SOFTWARE keys, the plaintext must be no larger than 64KiB. For HSM keys, the combined length of the plaintext and additional/authenticated_data fields must be no larger than 8KiB.
+    -- | Required. The data to encrypt. Must be no larger than 64KiB. The maximum size depends on the key version\'s protection/level. For SOFTWARE, EXTERNAL, and EXTERNAL/VPC keys, the plaintext must be no larger than 64KiB. For HSM keys, the combined length of the plaintext and additional/authenticated/data fields must be no larger than 8KiB.
     plaintext :: (Core.Maybe Core.Base64),
     -- | Optional. An optional CRC32C checksum of the EncryptRequest.plaintext. If specified, KeyManagementService will verify the integrity of the received EncryptRequest.plaintext using this checksum. KeyManagementService will report an error if the checksum verification fails. If you receive a checksum error, your client should verify that CRC32C(EncryptRequest.plaintext) is equal to EncryptRequest.plaintext_crc32c, and if so, perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed 2^32-1, and can be safely downconverted to uint32 in languages that support this type.
     plaintextCrc32c :: (Core.Maybe Core.Int64)
@@ -1469,8 +1534,11 @@ data ImportCryptoKeyVersionRequest = ImportCryptoKeyVersionRequest
     cryptoKeyVersion :: (Core.Maybe Core.Text),
     -- | Required. The name of the ImportJob that was used to wrap this key material.
     importJob :: (Core.Maybe Core.Text),
-    -- | Wrapped key material produced with RSA/OAEP/3072/SHA1/AES/256 or RSA/OAEP/4096/SHA1/AES/256. This field contains the concatenation of two wrapped keys: 1. An ephemeral AES-256 wrapping key wrapped with the public/key using RSAES-OAEP with SHA-1\/SHA-256, MGF1 with SHA-1\/SHA-256, and an empty label. 2. The key to be imported, wrapped with the ephemeral AES-256 key using AES-KWP (RFC 5649). If importing symmetric key material, it is expected that the unwrapped key contains plain bytes. If importing asymmetric key material, it is expected that the unwrapped key is in PKCS#8-encoded DER format (the PrivateKeyInfo structure from RFC 5208). This format is the same as the format produced by PKCS#11 mechanism CKM/RSA/AES/KEY_WRAP.
-    rsaAesWrappedKey :: (Core.Maybe Core.Base64)
+    -- | Optional. This field has the same meaning as wrapped_key. Prefer to use that field in new work. Either that field or this field (but not both) must be specified.
+    rsaAesWrappedKey :: (Core.Maybe Core.Base64),
+    -- | Optional. The wrapped key material to import. Before wrapping, key material must be formatted. If importing symmetric key material, the expected key material format is plain bytes. If importing asymmetric key material, the expected key material format is PKCS#8-encoded DER (the PrivateKeyInfo structure from RFC 5208). When wrapping with import methods (RSA/OAEP/3072/SHA1/AES/256 or RSA/OAEP/4096/SHA1/AES/256 or RSA/OAEP/3072/SHA256/AES/256 or RSA/OAEP/4096/SHA256/AES/256), this field must contain the concatenation of: 1. An ephemeral AES-256 wrapping key wrapped with the public/key using RSAES-OAEP with SHA-1\/SHA-256, MGF1 with SHA-1\/SHA-256, and an empty label. 2. The formatted key to be imported, wrapped with the ephemeral AES-256 key using AES-KWP (RFC 5649). This format is the same as the format produced by PKCS#11 mechanism CKM/RSA/AES/KEY/WRAP. When wrapping with import methods (RSA/OAEP/3072/SHA256 or RSA/OAEP/4096/SHA256), this field must contain the formatted key to be imported, wrapped with the
+    -- public/key using RSAES-OAEP with SHA-256, MGF1 with SHA-256, and an empty label.
+    wrappedKey :: (Core.Maybe Core.Base64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1482,7 +1550,8 @@ newImportCryptoKeyVersionRequest =
     { algorithm = Core.Nothing,
       cryptoKeyVersion = Core.Nothing,
       importJob = Core.Nothing,
-      rsaAesWrappedKey = Core.Nothing
+      rsaAesWrappedKey = Core.Nothing,
+      wrappedKey = Core.Nothing
     }
 
 instance Core.FromJSON ImportCryptoKeyVersionRequest where
@@ -1495,6 +1564,7 @@ instance Core.FromJSON ImportCryptoKeyVersionRequest where
             Core.<*> (o Core..:? "cryptoKeyVersion")
             Core.<*> (o Core..:? "importJob")
             Core.<*> (o Core..:? "rsaAesWrappedKey")
+            Core.<*> (o Core..:? "wrappedKey")
       )
 
 instance Core.ToJSON ImportCryptoKeyVersionRequest where
@@ -1506,7 +1576,8 @@ instance Core.ToJSON ImportCryptoKeyVersionRequest where
               Core.<$> cryptoKeyVersion,
             ("importJob" Core..=) Core.<$> importJob,
             ("rsaAesWrappedKey" Core..=)
-              Core.<$> rsaAesWrappedKey
+              Core.<$> rsaAesWrappedKey,
+            ("wrappedKey" Core..=) Core.<$> wrappedKey
           ]
       )
 
@@ -1758,7 +1829,7 @@ instance Core.ToJSON ListCryptoKeysResponse where
           ]
       )
 
--- | Response message for KeyManagementService.ListEkmConnections.
+-- | Response message for EkmService.ListEkmConnections.
 --
 -- /See:/ 'newListEkmConnectionsResponse' smart constructor.
 data ListEkmConnectionsResponse = ListEkmConnectionsResponse
@@ -2469,7 +2540,7 @@ instance Core.ToJSON ServiceResolver where
 --
 -- /See:/ 'newSetIamPolicyRequest' smart constructor.
 data SetIamPolicyRequest = SetIamPolicyRequest
-  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
+  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Google Cloud services (such as Projects) might reject them.
     policy :: (Core.Maybe Policy),
     -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: @paths: \"bindings, etag\"@
     updateMask :: (Core.Maybe Core.FieldMask)
@@ -2505,7 +2576,7 @@ instance Core.ToJSON SetIamPolicyRequest where
 --
 -- /See:/ 'newTestIamPermissionsRequest' smart constructor.
 newtype TestIamPermissionsRequest = TestIamPermissionsRequest
-  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as \'/\' or \'storage./\') are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
+  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as @*@ or @storage.*@) are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
     permissions :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

@@ -340,7 +340,7 @@ data DataSourceParameter = DataSourceParameter
     fields :: (Core.Maybe [DataSourceParameter]),
     -- | Cannot be changed after initial creation.
     immutable :: (Core.Maybe Core.Bool),
-    -- | For integer and double values specifies maxminum allowed value.
+    -- | For integer and double values specifies maximum allowed value.
     maxValue :: (Core.Maybe Core.Double),
     -- | For integer and double values specifies minimum allowed value.
     minValue :: (Core.Maybe Core.Double),
@@ -468,7 +468,7 @@ instance Core.ToJSON EmailPreferences where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -1110,7 +1110,7 @@ instance Core.ToJSON TimeRange where
 data TransferConfig = TransferConfig
   { -- | The number of days to look back to automatically refresh the data. For example, if @data_refresh_window_days = 10@, then every day BigQuery reingests data for [today-10, today-1], rather than ingesting data for just [today-1]. Only valid if the data source supports the feature. Set the value to 0 to use the default value.
     dataRefreshWindowDays :: (Core.Maybe Core.Int32),
-    -- | Data source id. Cannot be changed once data transfer is created.
+    -- | Data source ID. This cannot be changed once data transfer is created. The full list of available data source IDs can be returned through an API call: https:\/\/cloud.google.com\/bigquery-transfer\/docs\/reference\/datatransfer\/rest\/v1\/projects.locations.dataSources\/list
     dataSourceId :: (Core.Maybe Core.Text),
     -- | Output only. Region in which BigQuery dataset is located.
     datasetRegion :: (Core.Maybe Core.Text),

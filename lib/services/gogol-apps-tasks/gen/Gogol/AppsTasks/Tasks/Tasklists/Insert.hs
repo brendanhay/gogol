@@ -28,7 +28,7 @@
 --
 -- Creates a new task list and adds it to the authenticated user\'s task lists.
 --
--- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasklists.insert@.
+-- /See:/ <https://developers.google.com/tasks/ Google Tasks API Reference> for @tasks.tasklists.insert@.
 module Gogol.AppsTasks.Tasks.Tasklists.Insert
   ( -- * Resource
     TasksTasklistsInsertResource,

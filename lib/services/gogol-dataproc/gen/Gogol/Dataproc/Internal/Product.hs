@@ -42,6 +42,14 @@ module Gogol.Dataproc.Internal.Product
     AutoscalingPolicy_Labels (..),
     newAutoscalingPolicy_Labels,
 
+    -- * AuxiliaryNodeGroup
+    AuxiliaryNodeGroup (..),
+    newAuxiliaryNodeGroup,
+
+    -- * AuxiliaryServicesConfig
+    AuxiliaryServicesConfig (..),
+    newAuxiliaryServicesConfig,
+
     -- * BasicAutoscalingAlgorithm
     BasicAutoscalingAlgorithm (..),
     newBasicAutoscalingAlgorithm,
@@ -146,6 +154,10 @@ module Gogol.Dataproc.Internal.Product
     DiskConfig (..),
     newDiskConfig,
 
+    -- * DriverSchedulingConfig
+    DriverSchedulingConfig (..),
+    newDriverSchedulingConfig,
+
     -- * Empty
     Empty (..),
     newEmpty,
@@ -193,6 +205,26 @@ module Gogol.Dataproc.Internal.Product
     -- * GkeClusterConfig
     GkeClusterConfig (..),
     newGkeClusterConfig,
+
+    -- * GkeNodeConfig
+    GkeNodeConfig (..),
+    newGkeNodeConfig,
+
+    -- * GkeNodePoolAcceleratorConfig
+    GkeNodePoolAcceleratorConfig (..),
+    newGkeNodePoolAcceleratorConfig,
+
+    -- * GkeNodePoolAutoscalingConfig
+    GkeNodePoolAutoscalingConfig (..),
+    newGkeNodePoolAutoscalingConfig,
+
+    -- * GkeNodePoolConfig
+    GkeNodePoolConfig (..),
+    newGkeNodePoolConfig,
+
+    -- * GkeNodePoolTarget
+    GkeNodePoolTarget (..),
+    newGkeNodePoolTarget,
 
     -- * HadoopJob
     HadoopJob (..),
@@ -246,6 +278,10 @@ module Gogol.Dataproc.Internal.Product
     InstantiateWorkflowTemplateRequest_Parameters (..),
     newInstantiateWorkflowTemplateRequest_Parameters,
 
+    -- * Interval
+    Interval (..),
+    newInterval,
+
     -- * Job
     Job (..),
     newJob,
@@ -281,6 +317,22 @@ module Gogol.Dataproc.Internal.Product
     -- * KerberosConfig
     KerberosConfig (..),
     newKerberosConfig,
+
+    -- * KubernetesClusterConfig
+    KubernetesClusterConfig (..),
+    newKubernetesClusterConfig,
+
+    -- * KubernetesSoftwareConfig
+    KubernetesSoftwareConfig (..),
+    newKubernetesSoftwareConfig,
+
+    -- * KubernetesSoftwareConfig_ComponentVersion
+    KubernetesSoftwareConfig_ComponentVersion (..),
+    newKubernetesSoftwareConfig_ComponentVersion,
+
+    -- * KubernetesSoftwareConfig_Properties
+    KubernetesSoftwareConfig_Properties (..),
+    newKubernetesSoftwareConfig_Properties,
 
     -- * LifecycleConfig
     LifecycleConfig (..),
@@ -342,13 +394,33 @@ module Gogol.Dataproc.Internal.Product
     NamespacedGkeDeploymentTarget (..),
     newNamespacedGkeDeploymentTarget,
 
+    -- * NodeGroup
+    NodeGroup (..),
+    newNodeGroup,
+
+    -- * NodeGroup_Labels
+    NodeGroup_Labels (..),
+    newNodeGroup_Labels,
+
     -- * NodeGroupAffinity
     NodeGroupAffinity (..),
     newNodeGroupAffinity,
 
+    -- * NodeGroupOperationMetadata
+    NodeGroupOperationMetadata (..),
+    newNodeGroupOperationMetadata,
+
+    -- * NodeGroupOperationMetadata_Labels
+    NodeGroupOperationMetadata_Labels (..),
+    newNodeGroupOperationMetadata_Labels,
+
     -- * NodeInitializationAction
     NodeInitializationAction (..),
     newNodeInitializationAction,
+
+    -- * NodePool
+    NodePool (..),
+    newNodePool,
 
     -- * Operation
     Operation (..),
@@ -429,6 +501,10 @@ module Gogol.Dataproc.Internal.Product
     -- * ReservationAffinity
     ReservationAffinity (..),
     newReservationAffinity,
+
+    -- * ResizeNodeGroupRequest
+    ResizeNodeGroupRequest (..),
+    newResizeNodeGroupRequest,
 
     -- * RuntimeConfig
     RuntimeConfig (..),
@@ -562,9 +638,29 @@ module Gogol.Dataproc.Internal.Product
     TestIamPermissionsResponse (..),
     newTestIamPermissionsResponse,
 
+    -- * TrinoJob
+    TrinoJob (..),
+    newTrinoJob,
+
+    -- * TrinoJob_Properties
+    TrinoJob_Properties (..),
+    newTrinoJob_Properties,
+
+    -- * UsageMetrics
+    UsageMetrics (..),
+    newUsageMetrics,
+
+    -- * UsageSnapshot
+    UsageSnapshot (..),
+    newUsageSnapshot,
+
     -- * ValueValidation
     ValueValidation (..),
     newValueValidation,
+
+    -- * VirtualClusterConfig
+    VirtualClusterConfig (..),
+    newVirtualClusterConfig,
 
     -- * WorkflowGraph
     WorkflowGraph (..),
@@ -609,7 +705,7 @@ import qualified Gogol.Prelude as Core
 data AcceleratorConfig = AcceleratorConfig
   { -- | The number of the accelerator cards of this type exposed to this instance.
     acceleratorCount :: (Core.Maybe Core.Int32),
-    -- | Full URL, partial URI, or short name of the accelerator type resource to expose to this instance. See Compute Engine AcceleratorTypes (https:\/\/cloud.google.com\/compute\/docs\/reference\/beta\/acceleratorTypes).Examples: https:\/\/www.googleapis.com\/compute\/beta\/projects\/[project/id]\/zones\/us-east1-a\/acceleratorTypes\/nvidia-tesla-k80 projects\/[project/id]\/zones\/us-east1-a\/acceleratorTypes\/nvidia-tesla-k80 nvidia-tesla-k80Auto Zone Exception: If you are using the Dataproc Auto Zone Placement (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/configuring-clusters\/auto-zone#using/auto/zone_placement) feature, you must use the short name of the accelerator type resource, for example, nvidia-tesla-k80.
+    -- | Full URL, partial URI, or short name of the accelerator type resource to expose to this instance. See Compute Engine AcceleratorTypes (https:\/\/cloud.google.com\/compute\/docs\/reference\/v1\/acceleratorTypes).Examples: https:\/\/www.googleapis.com\/compute\/v1\/projects\/[project/id]\/zones\/[zone]\/acceleratorTypes\/nvidia-tesla-k80 projects\/[project/id]\/zones\/[zone]\/acceleratorTypes\/nvidia-tesla-k80 nvidia-tesla-k80Auto Zone Exception: If you are using the Dataproc Auto Zone Placement (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/configuring-clusters\/auto-zone#using/auto/zone_placement) feature, you must use the short name of the accelerator type resource, for example, nvidia-tesla-k80.
     acceleratorTypeUri :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -762,6 +858,83 @@ instance Core.FromJSON AutoscalingPolicy_Labels where
 instance Core.ToJSON AutoscalingPolicy_Labels where
   toJSON AutoscalingPolicy_Labels {..} =
     Core.toJSON additional
+
+-- | Node group identification and configuration information.
+--
+-- /See:/ 'newAuxiliaryNodeGroup' smart constructor.
+data AuxiliaryNodeGroup = AuxiliaryNodeGroup
+  { -- | Required. Node group configuration.
+    nodeGroup :: (Core.Maybe NodeGroup),
+    -- | Optional. A node group ID. Generated if not specified.The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). Cannot begin or end with underscore or hyphen. Must consist of from 3 to 33 characters.
+    nodeGroupId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AuxiliaryNodeGroup' with the minimum fields required to make a request.
+newAuxiliaryNodeGroup ::
+  AuxiliaryNodeGroup
+newAuxiliaryNodeGroup =
+  AuxiliaryNodeGroup {nodeGroup = Core.Nothing, nodeGroupId = Core.Nothing}
+
+instance Core.FromJSON AuxiliaryNodeGroup where
+  parseJSON =
+    Core.withObject
+      "AuxiliaryNodeGroup"
+      ( \o ->
+          AuxiliaryNodeGroup
+            Core.<$> (o Core..:? "nodeGroup")
+            Core.<*> (o Core..:? "nodeGroupId")
+      )
+
+instance Core.ToJSON AuxiliaryNodeGroup where
+  toJSON AuxiliaryNodeGroup {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nodeGroup" Core..=) Core.<$> nodeGroup,
+            ("nodeGroupId" Core..=) Core.<$> nodeGroupId
+          ]
+      )
+
+-- | Auxiliary services configuration for a Cluster.
+--
+-- /See:/ 'newAuxiliaryServicesConfig' smart constructor.
+data AuxiliaryServicesConfig = AuxiliaryServicesConfig
+  { -- | Optional. The Hive Metastore configuration for this workload.
+    metastoreConfig :: (Core.Maybe MetastoreConfig),
+    -- | Optional. The Spark History Server configuration for the workload.
+    sparkHistoryServerConfig :: (Core.Maybe SparkHistoryServerConfig)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AuxiliaryServicesConfig' with the minimum fields required to make a request.
+newAuxiliaryServicesConfig ::
+  AuxiliaryServicesConfig
+newAuxiliaryServicesConfig =
+  AuxiliaryServicesConfig
+    { metastoreConfig = Core.Nothing,
+      sparkHistoryServerConfig = Core.Nothing
+    }
+
+instance Core.FromJSON AuxiliaryServicesConfig where
+  parseJSON =
+    Core.withObject
+      "AuxiliaryServicesConfig"
+      ( \o ->
+          AuxiliaryServicesConfig
+            Core.<$> (o Core..:? "metastoreConfig")
+            Core.<*> (o Core..:? "sparkHistoryServerConfig")
+      )
+
+instance Core.ToJSON AuxiliaryServicesConfig where
+  toJSON AuxiliaryServicesConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("metastoreConfig" Core..=)
+              Core.<$> metastoreConfig,
+            ("sparkHistoryServerConfig" Core..=)
+              Core.<$> sparkHistoryServerConfig
+          ]
+      )
 
 -- | Basic algorithm for autoscaling.
 --
@@ -1112,8 +1285,9 @@ instance Core.ToJSON BatchOperationMetadata_Labels where
 data Binding = Binding
   { -- | The condition that is associated with this binding.If the condition evaluates to true, then this binding applies to the current request.If the condition evaluates to false, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding.To learn which resources support conditions in their IAM policies, see the IAM documentation (https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
     condition :: (Core.Maybe Expr),
-    -- | Specifies the principals requesting access for a Cloud Platform resource. members can have the following values: allUsers: A special identifier that represents anyone who is on the internet; with or without a Google account. allAuthenticatedUsers: A special identifier that represents anyone who is authenticated with a Google account or a service account. user:{emailid}: An email address that represents a specific Google account. For example, alice\@example.com . serviceAccount:{emailid}: An email address that represents a service account. For example, my-other-app\@appspot.gserviceaccount.com. group:{emailid}: An email address that represents a Google group. For example, admins\@example.com. deleted:user:{emailid}?uid={uniqueid}: An email address (plus unique identifier) representing a user that has been recently deleted. For example, alice\@example.com?uid=123456789012345678901. If the user is recovered, this value reverts to user:{emailid} and the recovered user retains the role in the binding.
-    -- deleted:serviceAccount:{emailid}?uid={uniqueid}: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901. If the service account is undeleted, this value reverts to serviceAccount:{emailid} and the undeleted service account retains the role in the binding. deleted:group:{emailid}?uid={uniqueid}: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, admins\@example.com?uid=123456789012345678901. If the group is recovered, this value reverts to group:{emailid} and the recovered group retains the role in the binding. domain:{domain}: The G Suite domain (primary) that represents all the users of that domain. For example, google.com or example.com.
+    -- | Specifies the principals requesting access for a Google Cloud resource. members can have the following values: allUsers: A special identifier that represents anyone who is on the internet; with or without a Google account. allAuthenticatedUsers: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. user:{emailid}: An email address that represents a specific Google account. For example, alice\@example.com . serviceAccount:{emailid}: An email address that represents a Google service account. For example, my-other-app\@appspot.gserviceaccount.com. serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]: An identifier for a Kubernetes service account (https:\/\/cloud.google.com\/kubernetes-engine\/docs\/how-to\/kubernetes-service-accounts). For example, my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]. group:{emailid}: An email address
+    -- that represents a Google group. For example, admins\@example.com. domain:{domain}: The G Suite domain (primary) that represents all the users of that domain. For example, google.com or example.com. deleted:user:{emailid}?uid={uniqueid}: An email address (plus unique identifier) representing a user that has been recently deleted. For example, alice\@example.com?uid=123456789012345678901. If the user is recovered, this value reverts to user:{emailid} and the recovered user retains the role in the binding. deleted:serviceAccount:{emailid}?uid={uniqueid}: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901. If the service account is undeleted, this value reverts to serviceAccount:{emailid} and the undeleted service account retains the role in the binding. deleted:group:{emailid}?uid={uniqueid}: An email address (plus unique identifier) representing a Google group that has been
+    -- recently deleted. For example, admins\@example.com?uid=123456789012345678901. If the group is recovered, this value reverts to group:{emailid} and the recovered group retains the role in the binding.
     members :: (Core.Maybe [Core.Text]),
     -- | Role that is assigned to the list of members, or principals. For example, roles\/viewer, roles\/editor, or roles\/owner.
     role' :: (Core.Maybe Core.Text)
@@ -1175,11 +1349,11 @@ instance Core.ToJSON CancelJobRequest where
 --
 -- /See:/ 'newCluster' smart constructor.
 data Cluster = Cluster
-  { -- | Required. The cluster name. Cluster names within a project must be unique. Names of deleted clusters can be reused.
+  { -- | Required. The cluster name, which must be unique within a project. The name must start with a lowercase letter, and can contain up to 51 lowercase letters, numbers, and hyphens. It cannot end with a hyphen. The name of a deleted cluster can be reused.
     clusterName :: (Core.Maybe Core.Text),
     -- | Output only. A cluster UUID (Unique Universal Identifier). Dataproc generates this value when it creates the cluster.
     clusterUuid :: (Core.Maybe Core.Text),
-    -- | Optional. The cluster config for a cluster of Compute Engine Instances. Note that Dataproc may set default values, and values may change when clusters are updated.
+    -- | Optional. The cluster config for a cluster of Compute Engine Instances. Note that Dataproc may set default values, and values may change when clusters are updated.Exactly one of ClusterConfig or VirtualClusterConfig must be specified.
     config :: (Core.Maybe ClusterConfig),
     -- | Optional. The labels to associate with this cluster. Label keys must contain 1 to 63 characters, and must conform to RFC 1035 (https:\/\/www.ietf.org\/rfc\/rfc1035.txt). Label values may be empty, but, if present, must contain 1 to 63 characters, and must conform to RFC 1035 (https:\/\/www.ietf.org\/rfc\/rfc1035.txt). No more than 32 labels can be associated with a cluster.
     labels :: (Core.Maybe Cluster_Labels),
@@ -1190,7 +1364,9 @@ data Cluster = Cluster
     -- | Output only. Cluster status.
     status :: (Core.Maybe ClusterStatus),
     -- | Output only. The previous cluster status.
-    statusHistory :: (Core.Maybe [ClusterStatus])
+    statusHistory :: (Core.Maybe [ClusterStatus]),
+    -- | Optional. The virtual cluster config is used when creating a Dataproc cluster that does not directly control the underlying compute resources, for example, when creating a Dataproc-on-GKE cluster (https:\/\/cloud.google.com\/dataproc\/docs\/guides\/dpgke\/dataproc-gke-overview). Dataproc may set default values, and values may change when clusters are updated. Exactly one of config or virtual/cluster/config must be specified.
+    virtualClusterConfig :: (Core.Maybe VirtualClusterConfig)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1206,7 +1382,8 @@ newCluster =
       metrics = Core.Nothing,
       projectId = Core.Nothing,
       status = Core.Nothing,
-      statusHistory = Core.Nothing
+      statusHistory = Core.Nothing,
+      virtualClusterConfig = Core.Nothing
     }
 
 instance Core.FromJSON Cluster where
@@ -1223,6 +1400,7 @@ instance Core.FromJSON Cluster where
             Core.<*> (o Core..:? "projectId")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "statusHistory")
+            Core.<*> (o Core..:? "virtualClusterConfig")
       )
 
 instance Core.ToJSON Cluster where
@@ -1236,7 +1414,9 @@ instance Core.ToJSON Cluster where
             ("metrics" Core..=) Core.<$> metrics,
             ("projectId" Core..=) Core.<$> projectId,
             ("status" Core..=) Core.<$> status,
-            ("statusHistory" Core..=) Core.<$> statusHistory
+            ("statusHistory" Core..=) Core.<$> statusHistory,
+            ("virtualClusterConfig" Core..=)
+              Core.<$> virtualClusterConfig
           ]
       )
 
@@ -1273,9 +1453,11 @@ instance Core.ToJSON Cluster_Labels where
 data ClusterConfig = ClusterConfig
   { -- | Optional. Autoscaling config for the policy associated with the cluster. Cluster does not autoscale if this field is unset.
     autoscalingConfig :: (Core.Maybe AutoscalingConfig),
+    -- | Optional. The node group settings.
+    auxiliaryNodeGroups :: (Core.Maybe [AuxiliaryNodeGroup]),
     -- | Optional. A Cloud Storage bucket used to stage job dependencies, config files, and job driver console output. If you do not specify a staging bucket, Cloud Dataproc will determine a Cloud Storage location (US, ASIA, or EU) for your cluster\'s staging bucket according to the Compute Engine zone where your cluster is deployed, and then create and manage this project-level, per-location bucket (see Dataproc staging and temp buckets (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/configuring-clusters\/staging-bucket)). This field requires a Cloud Storage bucket name, not a gs:\/\/... URI to a Cloud Storage bucket.
     configBucket :: (Core.Maybe Core.Text),
-    -- | Optional. The configuration(s) for a dataproc metric(s).
+    -- | Optional. The config for Dataproc metrics.
     dataprocMetricConfig :: (Core.Maybe DataprocMetricConfig),
     -- | Optional. Encryption settings for the cluster.
     encryptionConfig :: (Core.Maybe EncryptionConfig),
@@ -1283,7 +1465,7 @@ data ClusterConfig = ClusterConfig
     endpointConfig :: (Core.Maybe EndpointConfig),
     -- | Optional. The shared Compute Engine config settings for all instances in a cluster.
     gceClusterConfig :: (Core.Maybe GceClusterConfig),
-    -- | Optional. BETA. The Kubernetes Engine config for Dataproc clusters deployed to Kubernetes. Setting this is considered mutually exclusive with Compute Engine-based options such as gce/cluster/config, master/config, worker/config, secondary/worker/config, and autoscaling_config.
+    -- | Optional. BETA. The Kubernetes Engine config for Dataproc clusters deployed to The Kubernetes Engine config for Dataproc clusters deployed to Kubernetes. These config settings are mutually exclusive with Compute Engine-based options, such as gce/cluster/config, master/config, worker/config, secondary/worker/config, and autoscaling_config.
     gkeClusterConfig :: (Core.Maybe GkeClusterConfig),
     -- | Optional. Commands to execute on each node after config is completed. By default, executables are run on master and all worker nodes. You can test a node\'s role metadata to run an executable on a master or worker node, as shown below using curl (you can also use wget): ROLE=$(curl -H Metadata-Flavor:Google http:\/\/metadata\/computeMetadata\/v1\/instance\/attributes\/dataproc-role) if [[ \"${ROLE}\" == \'Master\' ]]; then ... master specific actions ... else ... worker specific actions ... fi
     initializationActions :: (Core.Maybe [NodeInitializationAction]),
@@ -1312,6 +1494,7 @@ newClusterConfig ::
 newClusterConfig =
   ClusterConfig
     { autoscalingConfig = Core.Nothing,
+      auxiliaryNodeGroups = Core.Nothing,
       configBucket = Core.Nothing,
       dataprocMetricConfig = Core.Nothing,
       encryptionConfig = Core.Nothing,
@@ -1336,6 +1519,7 @@ instance Core.FromJSON ClusterConfig where
       ( \o ->
           ClusterConfig
             Core.<$> (o Core..:? "autoscalingConfig")
+            Core.<*> (o Core..:? "auxiliaryNodeGroups")
             Core.<*> (o Core..:? "configBucket")
             Core.<*> (o Core..:? "dataprocMetricConfig")
             Core.<*> (o Core..:? "encryptionConfig")
@@ -1359,6 +1543,8 @@ instance Core.ToJSON ClusterConfig where
       ( Core.catMaybes
           [ ("autoscalingConfig" Core..=)
               Core.<$> autoscalingConfig,
+            ("auxiliaryNodeGroups" Core..=)
+              Core.<$> auxiliaryNodeGroups,
             ("configBucket" Core..=) Core.<$> configBucket,
             ("dataprocMetricConfig" Core..=)
               Core.<$> dataprocMetricConfig,
@@ -1389,7 +1575,7 @@ instance Core.ToJSON ClusterConfig where
 data ClusterMetrics = ClusterMetrics
   { -- | The HDFS metrics.
     hdfsMetrics :: (Core.Maybe ClusterMetrics_HdfsMetrics),
-    -- | The YARN metrics.
+    -- | YARN metrics.
     yarnMetrics :: (Core.Maybe ClusterMetrics_YarnMetrics)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1449,7 +1635,7 @@ instance Core.ToJSON ClusterMetrics_HdfsMetrics where
   toJSON ClusterMetrics_HdfsMetrics {..} =
     Core.toJSON additional
 
--- | The YARN metrics.
+-- | YARN metrics.
 --
 -- /See:/ 'newClusterMetrics_YarnMetrics' smart constructor.
 newtype ClusterMetrics_YarnMetrics = ClusterMetrics_YarnMetrics
@@ -1527,7 +1713,9 @@ instance Core.ToJSON ClusterOperation where
 --
 -- /See:/ 'newClusterOperationMetadata' smart constructor.
 data ClusterOperationMetadata = ClusterOperationMetadata
-  { -- | Output only. Name of the cluster for the operation.
+  { -- | Output only. Child operation ids
+    childOperationIds :: (Core.Maybe [Core.Text]),
+    -- | Output only. Name of the cluster for the operation.
     clusterName :: (Core.Maybe Core.Text),
     -- | Output only. Cluster UUID for the operation.
     clusterUuid :: (Core.Maybe Core.Text),
@@ -1551,7 +1739,8 @@ newClusterOperationMetadata ::
   ClusterOperationMetadata
 newClusterOperationMetadata =
   ClusterOperationMetadata
-    { clusterName = Core.Nothing,
+    { childOperationIds = Core.Nothing,
+      clusterName = Core.Nothing,
       clusterUuid = Core.Nothing,
       description = Core.Nothing,
       labels = Core.Nothing,
@@ -1567,7 +1756,8 @@ instance Core.FromJSON ClusterOperationMetadata where
       "ClusterOperationMetadata"
       ( \o ->
           ClusterOperationMetadata
-            Core.<$> (o Core..:? "clusterName")
+            Core.<$> (o Core..:? "childOperationIds")
+            Core.<*> (o Core..:? "clusterName")
             Core.<*> (o Core..:? "clusterUuid")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "labels")
@@ -1581,7 +1771,9 @@ instance Core.ToJSON ClusterOperationMetadata where
   toJSON ClusterOperationMetadata {..} =
     Core.object
       ( Core.catMaybes
-          [ ("clusterName" Core..=) Core.<$> clusterName,
+          [ ("childOperationIds" Core..=)
+              Core.<$> childOperationIds,
+            ("clusterName" Core..=) Core.<$> clusterName,
             ("clusterUuid" Core..=) Core.<$> clusterUuid,
             ("description" Core..=) Core.<$> description,
             ("labels" Core..=) Core.<$> labels,
@@ -1822,11 +2014,11 @@ instance Core.ToJSON ConfidentialInstanceConfig where
           ]
       )
 
--- | Contains dataproc metric config.
+-- | Dataproc metric config.
 --
 -- /See:/ 'newDataprocMetricConfig' smart constructor.
 newtype DataprocMetricConfig = DataprocMetricConfig
-  { -- | Required. Metrics to be enabled.
+  { -- | Required. Metrics sources to enable.
     metrics :: (Core.Maybe [Metric])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1855,21 +2047,58 @@ instance Core.ToJSON DataprocMetricConfig where
 --
 -- /See:/ 'newDiagnoseClusterRequest' smart constructor.
 data DiagnoseClusterRequest = DiagnoseClusterRequest
+  { -- | Optional. Time interval in which diagnosis should be carried out on the cluster.
+    diagnosisInterval :: (Core.Maybe Interval),
+    -- | Optional. DEPRECATED Specifies the job on which diagnosis is to be performed. Format: projects\/{project}\/regions\/{region}\/jobs\/{job}
+    job :: (Core.Maybe Core.Text),
+    -- | Optional. Specifies a list of jobs on which diagnosis is to be performed. Format: projects\/{project}\/regions\/{region}\/jobs\/{job}
+    jobs :: (Core.Maybe [Core.Text]),
+    -- | Optional. DEPRECATED Specifies the yarn application on which diagnosis is to be performed.
+    yarnApplicationId :: (Core.Maybe Core.Text),
+    -- | Optional. Specifies a list of yarn applications on which diagnosis is to be performed.
+    yarnApplicationIds :: (Core.Maybe [Core.Text])
+  }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DiagnoseClusterRequest' with the minimum fields required to make a request.
 newDiagnoseClusterRequest ::
   DiagnoseClusterRequest
-newDiagnoseClusterRequest = DiagnoseClusterRequest
+newDiagnoseClusterRequest =
+  DiagnoseClusterRequest
+    { diagnosisInterval = Core.Nothing,
+      job = Core.Nothing,
+      jobs = Core.Nothing,
+      yarnApplicationId = Core.Nothing,
+      yarnApplicationIds = Core.Nothing
+    }
 
 instance Core.FromJSON DiagnoseClusterRequest where
   parseJSON =
     Core.withObject
       "DiagnoseClusterRequest"
-      (\o -> Core.pure DiagnoseClusterRequest)
+      ( \o ->
+          DiagnoseClusterRequest
+            Core.<$> (o Core..:? "diagnosisInterval")
+            Core.<*> (o Core..:? "job")
+            Core.<*> (o Core..:? "jobs")
+            Core.<*> (o Core..:? "yarnApplicationId")
+            Core.<*> (o Core..:? "yarnApplicationIds")
+      )
 
 instance Core.ToJSON DiagnoseClusterRequest where
-  toJSON = Core.const Core.emptyObject
+  toJSON DiagnoseClusterRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("diagnosisInterval" Core..=)
+              Core.<$> diagnosisInterval,
+            ("job" Core..=) Core.<$> job,
+            ("jobs" Core..=) Core.<$> jobs,
+            ("yarnApplicationId" Core..=)
+              Core.<$> yarnApplicationId,
+            ("yarnApplicationIds" Core..=)
+              Core.<$> yarnApplicationIds
+          ]
+      )
 
 -- | The location of diagnostic output.
 --
@@ -1911,7 +2140,7 @@ data DiskConfig = DiskConfig
     bootDiskType :: (Core.Maybe Core.Text),
     -- | Optional. Interface type of local SSDs (default is \"scsi\"). Valid values: \"scsi\" (Small Computer System Interface), \"nvme\" (Non-Volatile Memory Express). See local SSD performance (https:\/\/cloud.google.com\/compute\/docs\/disks\/local-ssd#performance).
     localSsdInterface :: (Core.Maybe Core.Text),
-    -- | Optional. Number of attached SSDs, from 0 to 4 (default is 0). If SSDs are not attached, the boot disk is used to store runtime logs and HDFS (https:\/\/hadoop.apache.org\/docs\/r1.2.1\/hdfs/user/guide.html) data. If one or more SSDs are attached, this runtime bulk data is spread across them, and the boot disk contains only basic config and installed binaries.
+    -- | Optional. Number of attached SSDs, from 0 to 8 (default is 0). If SSDs are not attached, the boot disk is used to store runtime logs and HDFS (https:\/\/hadoop.apache.org\/docs\/r1.2.1\/hdfs/user/guide.html) data. If one or more SSDs are attached, this runtime bulk data is spread across them, and the boot disk contains only basic config and installed binaries.Note: Local SSD options may vary by machine type and number of vCPUs selected.
     numLocalSsds :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1951,7 +2180,43 @@ instance Core.ToJSON DiskConfig where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for Empty is empty JSON object {}.
+-- | Driver scheduling configuration.
+--
+-- /See:/ 'newDriverSchedulingConfig' smart constructor.
+data DriverSchedulingConfig = DriverSchedulingConfig
+  { -- | Required. The amount of memory in MB the driver is requesting.
+    memoryMb :: (Core.Maybe Core.Int32),
+    -- | Required. The number of vCPUs the driver is requesting.
+    vcores :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DriverSchedulingConfig' with the minimum fields required to make a request.
+newDriverSchedulingConfig ::
+  DriverSchedulingConfig
+newDriverSchedulingConfig =
+  DriverSchedulingConfig {memoryMb = Core.Nothing, vcores = Core.Nothing}
+
+instance Core.FromJSON DriverSchedulingConfig where
+  parseJSON =
+    Core.withObject
+      "DriverSchedulingConfig"
+      ( \o ->
+          DriverSchedulingConfig
+            Core.<$> (o Core..:? "memoryMb")
+            Core.<*> (o Core..:? "vcores")
+      )
+
+instance Core.ToJSON DriverSchedulingConfig where
+  toJSON DriverSchedulingConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("memoryMb" Core..=) Core.<$> memoryMb,
+            ("vcores" Core..=) Core.<$> vcores
+          ]
+      )
+
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -1972,16 +2237,19 @@ instance Core.ToJSON Empty where
 -- | Encryption settings for the cluster.
 --
 -- /See:/ 'newEncryptionConfig' smart constructor.
-newtype EncryptionConfig = EncryptionConfig
+data EncryptionConfig = EncryptionConfig
   { -- | Optional. The Cloud KMS key name to use for PD disk encryption for all instances in the cluster.
-    gcePdKmsKeyName :: (Core.Maybe Core.Text)
+    gcePdKmsKeyName :: (Core.Maybe Core.Text),
+    -- | Optional. The Cloud KMS key name to use for encrypting customer core content and cluster PD disk for all instances in the cluster.
+    kmsKey :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'EncryptionConfig' with the minimum fields required to make a request.
 newEncryptionConfig ::
   EncryptionConfig
-newEncryptionConfig = EncryptionConfig {gcePdKmsKeyName = Core.Nothing}
+newEncryptionConfig =
+  EncryptionConfig {gcePdKmsKeyName = Core.Nothing, kmsKey = Core.Nothing}
 
 instance Core.FromJSON EncryptionConfig where
   parseJSON =
@@ -1990,6 +2258,7 @@ instance Core.FromJSON EncryptionConfig where
       ( \o ->
           EncryptionConfig
             Core.<$> (o Core..:? "gcePdKmsKeyName")
+            Core.<*> (o Core..:? "kmsKey")
       )
 
 instance Core.ToJSON EncryptionConfig where
@@ -1997,7 +2266,8 @@ instance Core.ToJSON EncryptionConfig where
     Core.object
       ( Core.catMaybes
           [ ("gcePdKmsKeyName" Core..=)
-              Core.<$> gcePdKmsKeyName
+              Core.<$> gcePdKmsKeyName,
+            ("kmsKey" Core..=) Core.<$> kmsKey
           ]
       )
 
@@ -2113,7 +2383,9 @@ instance Core.ToJSON EnvironmentConfig where
 --
 -- /See:/ 'newExecutionConfig' smart constructor.
 data ExecutionConfig = ExecutionConfig
-  { -- | Optional. The Cloud KMS key to use for encryption.
+  { -- | Optional. The duration to keep the session alive while it\'s idling. Exceeding this threshold causes the session to terminate. This field cannot be set on a batch workload. Minimum value is 10 minutes; maximum value is 14 days (see JSON representation of Duration (https:\/\/developers.google.com\/protocol-buffers\/docs\/proto3#json)). Defaults to 4 hours if not set. If both ttl and idle/ttl are specified, the conditions are treated as OR conditions: the workload will be terminated when it has been idle for idle/ttl or when ttl has been exceed, whichever occurs first.
+    idleTtl :: (Core.Maybe Core.Duration),
+    -- | Optional. The Cloud KMS key to use for encryption.
     kmsKey :: (Core.Maybe Core.Text),
     -- | Optional. Tags used for network traffic control.
     networkTags :: (Core.Maybe [Core.Text]),
@@ -2121,8 +2393,12 @@ data ExecutionConfig = ExecutionConfig
     networkUri :: (Core.Maybe Core.Text),
     -- | Optional. Service account that used to execute workload.
     serviceAccount :: (Core.Maybe Core.Text),
+    -- | Optional. A Cloud Storage bucket used to stage workload dependencies, config files, and store workload output and other ephemeral data, such as Spark history files. If you do not specify a staging bucket, Cloud Dataproc will determine a Cloud Storage location according to the region where your workload is running, and then create and manage project-level, per-location staging and temporary buckets. This field requires a Cloud Storage bucket name, not a gs:\/\/... URI to a Cloud Storage bucket.
+    stagingBucket :: (Core.Maybe Core.Text),
     -- | Optional. Subnetwork URI to connect workload to.
-    subnetworkUri :: (Core.Maybe Core.Text)
+    subnetworkUri :: (Core.Maybe Core.Text),
+    -- | Optional. The duration after which the workload will be terminated. When the workload exceeds this duration, it will be unconditionally terminated without waiting for ongoing work to finish. If ttl is not specified for a batch workload, the workload will be allowed to run until it exits naturally (or runs forever without exiting). If ttl is not specified for an interactive session, it defaults to 24h. Minimum value is 10 minutes; maximum value is 14 days (see JSON representation of Duration (https:\/\/developers.google.com\/protocol-buffers\/docs\/proto3#json)). If both ttl and idle/ttl are specified (for an interactive session), the conditions are treated as OR conditions: the workload will be terminated when it has been idle for idle/ttl or when ttl has been exceeded, whichever occurs first.
+    ttl :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2131,11 +2407,14 @@ newExecutionConfig ::
   ExecutionConfig
 newExecutionConfig =
   ExecutionConfig
-    { kmsKey = Core.Nothing,
+    { idleTtl = Core.Nothing,
+      kmsKey = Core.Nothing,
       networkTags = Core.Nothing,
       networkUri = Core.Nothing,
       serviceAccount = Core.Nothing,
-      subnetworkUri = Core.Nothing
+      stagingBucket = Core.Nothing,
+      subnetworkUri = Core.Nothing,
+      ttl = Core.Nothing
     }
 
 instance Core.FromJSON ExecutionConfig where
@@ -2144,22 +2423,28 @@ instance Core.FromJSON ExecutionConfig where
       "ExecutionConfig"
       ( \o ->
           ExecutionConfig
-            Core.<$> (o Core..:? "kmsKey")
+            Core.<$> (o Core..:? "idleTtl")
+            Core.<*> (o Core..:? "kmsKey")
             Core.<*> (o Core..:? "networkTags")
             Core.<*> (o Core..:? "networkUri")
             Core.<*> (o Core..:? "serviceAccount")
+            Core.<*> (o Core..:? "stagingBucket")
             Core.<*> (o Core..:? "subnetworkUri")
+            Core.<*> (o Core..:? "ttl")
       )
 
 instance Core.ToJSON ExecutionConfig where
   toJSON ExecutionConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("kmsKey" Core..=) Core.<$> kmsKey,
+          [ ("idleTtl" Core..=) Core.<$> idleTtl,
+            ("kmsKey" Core..=) Core.<$> kmsKey,
             ("networkTags" Core..=) Core.<$> networkTags,
             ("networkUri" Core..=) Core.<$> networkUri,
             ("serviceAccount" Core..=) Core.<$> serviceAccount,
-            ("subnetworkUri" Core..=) Core.<$> subnetworkUri
+            ("stagingBucket" Core..=) Core.<$> stagingBucket,
+            ("subnetworkUri" Core..=) Core.<$> subnetworkUri,
+            ("ttl" Core..=) Core.<$> ttl
           ]
       )
 
@@ -2223,7 +2508,7 @@ data GceClusterConfig = GceClusterConfig
     internalIpOnly :: (Core.Maybe Core.Bool),
     -- | The Compute Engine metadata entries to add to all instances (see Project and instance metadata (https:\/\/cloud.google.com\/compute\/docs\/storing-retrieving-metadata#project/and/instance_metadata)).
     metadata :: (Core.Maybe GceClusterConfig_Metadata),
-    -- | Optional. The Compute Engine network to be used for machine communications. Cannot be specified with subnetwork/uri. If neither network/uri nor subnetwork/uri is specified, the \"default\" network of the project is used, if it exists. Cannot be a \"Custom Subnet Network\" (see Using Subnetworks (https:\/\/cloud.google.com\/compute\/docs\/subnetworks) for more information).A full URL, partial URI, or short name are valid. Examples: https:\/\/www.googleapis.com\/compute\/v1\/projects\/[project/id]\/regions\/global\/default projects\/[project_id]\/regions\/global\/default default
+    -- | Optional. The Compute Engine network to be used for machine communications. Cannot be specified with subnetwork/uri. If neither network/uri nor subnetwork/uri is specified, the \"default\" network of the project is used, if it exists. Cannot be a \"Custom Subnet Network\" (see Using Subnetworks (https:\/\/cloud.google.com\/compute\/docs\/subnetworks) for more information).A full URL, partial URI, or short name are valid. Examples: https:\/\/www.googleapis.com\/compute\/v1\/projects\/[project/id]\/global\/networks\/default projects\/[project_id]\/global\/networks\/default default
     networkUri :: (Core.Maybe Core.Text),
     -- | Optional. Node Group Affinity for sole-tenant clusters.
     nodeGroupAffinity :: (Core.Maybe NodeGroupAffinity),
@@ -2237,11 +2522,11 @@ data GceClusterConfig = GceClusterConfig
     serviceAccountScopes :: (Core.Maybe [Core.Text]),
     -- | Optional. Shielded Instance Config for clusters using Compute Engine Shielded VMs (https:\/\/cloud.google.com\/security\/shielded-cloud\/shielded-vm).
     shieldedInstanceConfig :: (Core.Maybe ShieldedInstanceConfig),
-    -- | Optional. The Compute Engine subnetwork to be used for machine communications. Cannot be specified with network/uri.A full URL, partial URI, or short name are valid. Examples: https:\/\/www.googleapis.com\/compute\/v1\/projects\/[project/id]\/regions\/us-east1\/subnetworks\/sub0 projects\/[project_id]\/regions\/us-east1\/subnetworks\/sub0 sub0
+    -- | Optional. The Compute Engine subnetwork to be used for machine communications. Cannot be specified with network/uri.A full URL, partial URI, or short name are valid. Examples: https:\/\/www.googleapis.com\/compute\/v1\/projects\/[project/id]\/regions\/[region]\/subnetworks\/sub0 projects\/[project_id]\/regions\/[region]\/subnetworks\/sub0 sub0
     subnetworkUri :: (Core.Maybe Core.Text),
     -- | The Compute Engine tags to add to all instances (see Tagging instances (https:\/\/cloud.google.com\/compute\/docs\/label-or-tag-resources#tags)).
     tags :: (Core.Maybe [Core.Text]),
-    -- | Optional. The zone where the Compute Engine cluster will be located. On a create request, it is required in the \"global\" region. If omitted in a non-global Dataproc region, the service will pick a zone in the corresponding Compute Engine region. On a get request, zone will always be present.A full URL, partial URI, or short name are valid. Examples: https:\/\/www.googleapis.com\/compute\/v1\/projects\/[project/id]\/zones\/[zone] projects\/[project/id]\/zones\/[zone] us-central1-f
+    -- | Optional. The Compute Engine zone where the Dataproc cluster will be located. If omitted, the service will pick a zone in the cluster\'s Compute Engine region. On a get request, zone will always be present.A full URL, partial URI, or short name are valid. Examples: https:\/\/www.googleapis.com\/compute\/v1\/projects\/[project/id]\/zones\/[zone] projects\/[project/id]\/zones\/[zone] [zone]
     zoneUri :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2407,9 +2692,13 @@ instance Core.ToJSON GetPolicyOptions where
 -- | The cluster\'s GKE config.
 --
 -- /See:/ 'newGkeClusterConfig' smart constructor.
-newtype GkeClusterConfig = GkeClusterConfig
-  { -- | Optional. A target for the deployment.
-    namespacedGkeDeploymentTarget :: (Core.Maybe NamespacedGkeDeploymentTarget)
+data GkeClusterConfig = GkeClusterConfig
+  { -- | Optional. A target GKE cluster to deploy to. It must be in the same project and region as the Dataproc cluster (the GKE cluster can be zonal or regional). Format: \'projects\/{project}\/locations\/{location}\/clusters\/{cluster_id}\'
+    gkeClusterTarget :: (Core.Maybe Core.Text),
+    -- | Optional. Deprecated. Use gkeClusterTarget. Used only for the deprecated beta. A target for the deployment.
+    namespacedGkeDeploymentTarget :: (Core.Maybe NamespacedGkeDeploymentTarget),
+    -- | Optional. GKE node pools where workloads will be scheduled. At least one node pool must be assigned the DEFAULT GkeNodePoolTarget.Role. If a GkeNodePoolTarget is not specified, Dataproc constructs a DEFAULT GkeNodePoolTarget. Each role can be given to only one GkeNodePoolTarget. All node pools must have the same location settings.
+    nodePoolTarget :: (Core.Maybe [GkeNodePoolTarget])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2417,7 +2706,11 @@ newtype GkeClusterConfig = GkeClusterConfig
 newGkeClusterConfig ::
   GkeClusterConfig
 newGkeClusterConfig =
-  GkeClusterConfig {namespacedGkeDeploymentTarget = Core.Nothing}
+  GkeClusterConfig
+    { gkeClusterTarget = Core.Nothing,
+      namespacedGkeDeploymentTarget = Core.Nothing,
+      nodePoolTarget = Core.Nothing
+    }
 
 instance Core.FromJSON GkeClusterConfig where
   parseJSON =
@@ -2425,15 +2718,259 @@ instance Core.FromJSON GkeClusterConfig where
       "GkeClusterConfig"
       ( \o ->
           GkeClusterConfig
-            Core.<$> (o Core..:? "namespacedGkeDeploymentTarget")
+            Core.<$> (o Core..:? "gkeClusterTarget")
+            Core.<*> (o Core..:? "namespacedGkeDeploymentTarget")
+            Core.<*> (o Core..:? "nodePoolTarget")
       )
 
 instance Core.ToJSON GkeClusterConfig where
   toJSON GkeClusterConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("namespacedGkeDeploymentTarget" Core..=)
-              Core.<$> namespacedGkeDeploymentTarget
+          [ ("gkeClusterTarget" Core..=)
+              Core.<$> gkeClusterTarget,
+            ("namespacedGkeDeploymentTarget" Core..=)
+              Core.<$> namespacedGkeDeploymentTarget,
+            ("nodePoolTarget" Core..=) Core.<$> nodePoolTarget
+          ]
+      )
+
+-- | Parameters that describe cluster nodes.
+--
+-- /See:/ 'newGkeNodeConfig' smart constructor.
+data GkeNodeConfig = GkeNodeConfig
+  { -- | Optional. A list of hardware accelerators (https:\/\/cloud.google.com\/compute\/docs\/gpus) to attach to each node.
+    accelerators :: (Core.Maybe [GkeNodePoolAcceleratorConfig]),
+    -- | Optional. The Customer Managed Encryption Key (CMEK) (https:\/\/cloud.google.com\/kubernetes-engine\/docs\/how-to\/using-cmek) used to encrypt the boot disk attached to each node in the node pool. Specify the key using the following format: projects\/KEY/PROJECT/ID\/locations\/LOCATION \/keyRings\/RING/NAME\/cryptoKeys\/KEY/NAME.
+    bootDiskKmsKey :: (Core.Maybe Core.Text),
+    -- | Optional. The number of local SSD disks to attach to the node, which is limited by the maximum number of disks allowable per zone (see Adding Local SSDs (https:\/\/cloud.google.com\/compute\/docs\/disks\/local-ssd)).
+    localSsdCount :: (Core.Maybe Core.Int32),
+    -- | Optional. The name of a Compute Engine machine type (https:\/\/cloud.google.com\/compute\/docs\/machine-types).
+    machineType :: (Core.Maybe Core.Text),
+    -- | Optional. Minimum CPU platform (https:\/\/cloud.google.com\/compute\/docs\/instances\/specify-min-cpu-platform) to be used by this instance. The instance may be scheduled on the specified or a newer CPU platform. Specify the friendly names of CPU platforms, such as \"Intel Haswell\"\` or Intel Sandy Bridge\".
+    minCpuPlatform :: (Core.Maybe Core.Text),
+    -- | Optional. Whether the nodes are created as legacy preemptible VM instances (https:\/\/cloud.google.com\/compute\/docs\/instances\/preemptible). Also see Spot VMs, preemptible VM instances without a maximum lifetime. Legacy and Spot preemptible nodes cannot be used in a node pool with the CONTROLLER role or in the DEFAULT node pool if the CONTROLLER role is not assigned (the DEFAULT node pool will assume the CONTROLLER role).
+    preemptible :: (Core.Maybe Core.Bool),
+    -- | Optional. Whether the nodes are created as Spot VM instances (https:\/\/cloud.google.com\/compute\/docs\/instances\/spot). Spot VMs are the latest update to legacy preemptible VMs. Spot VMs do not have a maximum lifetime. Legacy and Spot preemptible nodes cannot be used in a node pool with the CONTROLLER role or in the DEFAULT node pool if the CONTROLLER role is not assigned (the DEFAULT node pool will assume the CONTROLLER role).
+    spot :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GkeNodeConfig' with the minimum fields required to make a request.
+newGkeNodeConfig ::
+  GkeNodeConfig
+newGkeNodeConfig =
+  GkeNodeConfig
+    { accelerators = Core.Nothing,
+      bootDiskKmsKey = Core.Nothing,
+      localSsdCount = Core.Nothing,
+      machineType = Core.Nothing,
+      minCpuPlatform = Core.Nothing,
+      preemptible = Core.Nothing,
+      spot = Core.Nothing
+    }
+
+instance Core.FromJSON GkeNodeConfig where
+  parseJSON =
+    Core.withObject
+      "GkeNodeConfig"
+      ( \o ->
+          GkeNodeConfig
+            Core.<$> (o Core..:? "accelerators")
+            Core.<*> (o Core..:? "bootDiskKmsKey")
+            Core.<*> (o Core..:? "localSsdCount")
+            Core.<*> (o Core..:? "machineType")
+            Core.<*> (o Core..:? "minCpuPlatform")
+            Core.<*> (o Core..:? "preemptible")
+            Core.<*> (o Core..:? "spot")
+      )
+
+instance Core.ToJSON GkeNodeConfig where
+  toJSON GkeNodeConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("accelerators" Core..=) Core.<$> accelerators,
+            ("bootDiskKmsKey" Core..=) Core.<$> bootDiskKmsKey,
+            ("localSsdCount" Core..=) Core.<$> localSsdCount,
+            ("machineType" Core..=) Core.<$> machineType,
+            ("minCpuPlatform" Core..=) Core.<$> minCpuPlatform,
+            ("preemptible" Core..=) Core.<$> preemptible,
+            ("spot" Core..=) Core.<$> spot
+          ]
+      )
+
+-- | A GkeNodeConfigAcceleratorConfig represents a Hardware Accelerator request for a node pool.
+--
+-- /See:/ 'newGkeNodePoolAcceleratorConfig' smart constructor.
+data GkeNodePoolAcceleratorConfig = GkeNodePoolAcceleratorConfig
+  { -- | The number of accelerator cards exposed to an instance.
+    acceleratorCount :: (Core.Maybe Core.Int64),
+    -- | The accelerator type resource namename (see GPUs on Compute Engine).
+    acceleratorType :: (Core.Maybe Core.Text),
+    -- | Size of partitions to create on the GPU. Valid values are described in the NVIDIA mig user guide (https:\/\/docs.nvidia.com\/datacenter\/tesla\/mig-user-guide\/#partitioning).
+    gpuPartitionSize :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GkeNodePoolAcceleratorConfig' with the minimum fields required to make a request.
+newGkeNodePoolAcceleratorConfig ::
+  GkeNodePoolAcceleratorConfig
+newGkeNodePoolAcceleratorConfig =
+  GkeNodePoolAcceleratorConfig
+    { acceleratorCount = Core.Nothing,
+      acceleratorType = Core.Nothing,
+      gpuPartitionSize = Core.Nothing
+    }
+
+instance Core.FromJSON GkeNodePoolAcceleratorConfig where
+  parseJSON =
+    Core.withObject
+      "GkeNodePoolAcceleratorConfig"
+      ( \o ->
+          GkeNodePoolAcceleratorConfig
+            Core.<$> ( o Core..:? "acceleratorCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "acceleratorType")
+            Core.<*> (o Core..:? "gpuPartitionSize")
+      )
+
+instance Core.ToJSON GkeNodePoolAcceleratorConfig where
+  toJSON GkeNodePoolAcceleratorConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("acceleratorCount" Core..=) Core.. Core.AsText
+              Core.<$> acceleratorCount,
+            ("acceleratorType" Core..=) Core.<$> acceleratorType,
+            ("gpuPartitionSize" Core..=)
+              Core.<$> gpuPartitionSize
+          ]
+      )
+
+-- | GkeNodePoolAutoscaling contains information the cluster autoscaler needs to adjust the size of the node pool to the current cluster usage.
+--
+-- /See:/ 'newGkeNodePoolAutoscalingConfig' smart constructor.
+data GkeNodePoolAutoscalingConfig = GkeNodePoolAutoscalingConfig
+  { -- | The maximum number of nodes in the node pool. Must be >= min/node/count, and must be > 0. Note: Quota must be sufficient to scale up the cluster.
+    maxNodeCount :: (Core.Maybe Core.Int32),
+    -- | The minimum number of nodes in the node pool. Must be >= 0 and \<= max/node/count.
+    minNodeCount :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GkeNodePoolAutoscalingConfig' with the minimum fields required to make a request.
+newGkeNodePoolAutoscalingConfig ::
+  GkeNodePoolAutoscalingConfig
+newGkeNodePoolAutoscalingConfig =
+  GkeNodePoolAutoscalingConfig
+    { maxNodeCount = Core.Nothing,
+      minNodeCount = Core.Nothing
+    }
+
+instance Core.FromJSON GkeNodePoolAutoscalingConfig where
+  parseJSON =
+    Core.withObject
+      "GkeNodePoolAutoscalingConfig"
+      ( \o ->
+          GkeNodePoolAutoscalingConfig
+            Core.<$> (o Core..:? "maxNodeCount")
+            Core.<*> (o Core..:? "minNodeCount")
+      )
+
+instance Core.ToJSON GkeNodePoolAutoscalingConfig where
+  toJSON GkeNodePoolAutoscalingConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("maxNodeCount" Core..=) Core.<$> maxNodeCount,
+            ("minNodeCount" Core..=) Core.<$> minNodeCount
+          ]
+      )
+
+-- | The configuration of a GKE node pool used by a Dataproc-on-GKE cluster (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/jobs\/dataproc-gke#create-a-dataproc-on-gke-cluster).
+--
+-- /See:/ 'newGkeNodePoolConfig' smart constructor.
+data GkeNodePoolConfig = GkeNodePoolConfig
+  { -- | Optional. The autoscaler configuration for this node pool. The autoscaler is enabled only when a valid configuration is present.
+    autoscaling :: (Core.Maybe GkeNodePoolAutoscalingConfig),
+    -- | Optional. The node pool configuration.
+    config :: (Core.Maybe GkeNodeConfig),
+    -- | Optional. The list of Compute Engine zones (https:\/\/cloud.google.com\/compute\/docs\/zones#available) where node pool nodes associated with a Dataproc on GKE virtual cluster will be located.Note: All node pools associated with a virtual cluster must be located in the same region as the virtual cluster, and they must be located in the same zone within that region.If a location is not specified during node pool creation, Dataproc on GKE will choose the zone.
+    locations :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GkeNodePoolConfig' with the minimum fields required to make a request.
+newGkeNodePoolConfig ::
+  GkeNodePoolConfig
+newGkeNodePoolConfig =
+  GkeNodePoolConfig
+    { autoscaling = Core.Nothing,
+      config = Core.Nothing,
+      locations = Core.Nothing
+    }
+
+instance Core.FromJSON GkeNodePoolConfig where
+  parseJSON =
+    Core.withObject
+      "GkeNodePoolConfig"
+      ( \o ->
+          GkeNodePoolConfig
+            Core.<$> (o Core..:? "autoscaling")
+            Core.<*> (o Core..:? "config")
+            Core.<*> (o Core..:? "locations")
+      )
+
+instance Core.ToJSON GkeNodePoolConfig where
+  toJSON GkeNodePoolConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("autoscaling" Core..=) Core.<$> autoscaling,
+            ("config" Core..=) Core.<$> config,
+            ("locations" Core..=) Core.<$> locations
+          ]
+      )
+
+-- | GKE node pools that Dataproc workloads run on.
+--
+-- /See:/ 'newGkeNodePoolTarget' smart constructor.
+data GkeNodePoolTarget = GkeNodePoolTarget
+  { -- | Required. The target GKE node pool. Format: \'projects\/{project}\/locations\/{location}\/clusters\/{cluster}\/nodePools\/{node_pool}\'
+    nodePool :: (Core.Maybe Core.Text),
+    -- | Input only. The configuration for the GKE node pool.If specified, Dataproc attempts to create a node pool with the specified shape. If one with the same name already exists, it is verified against all specified fields. If a field differs, the virtual cluster creation will fail.If omitted, any node pool with the specified name is used. If a node pool with the specified name does not exist, Dataproc create a node pool with default values.This is an input only field. It will not be returned by the API.
+    nodePoolConfig :: (Core.Maybe GkeNodePoolConfig),
+    -- | Required. The roles associated with the GKE node pool.
+    roles :: (Core.Maybe [GkeNodePoolTarget_RolesItem])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GkeNodePoolTarget' with the minimum fields required to make a request.
+newGkeNodePoolTarget ::
+  GkeNodePoolTarget
+newGkeNodePoolTarget =
+  GkeNodePoolTarget
+    { nodePool = Core.Nothing,
+      nodePoolConfig = Core.Nothing,
+      roles = Core.Nothing
+    }
+
+instance Core.FromJSON GkeNodePoolTarget where
+  parseJSON =
+    Core.withObject
+      "GkeNodePoolTarget"
+      ( \o ->
+          GkeNodePoolTarget
+            Core.<$> (o Core..:? "nodePool")
+            Core.<*> (o Core..:? "nodePoolConfig")
+            Core.<*> (o Core..:? "roles")
+      )
+
+instance Core.ToJSON GkeNodePoolTarget where
+  toJSON GkeNodePoolTarget {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nodePool" Core..=) Core.<$> nodePool,
+            ("nodePoolConfig" Core..=) Core.<$> nodePoolConfig,
+            ("roles" Core..=) Core.<$> roles
           ]
       )
 
@@ -2821,7 +3358,7 @@ data InstanceGroupConfig = InstanceGroupConfig
     accelerators :: (Core.Maybe [AcceleratorConfig]),
     -- | Optional. Disk option config settings.
     diskConfig :: (Core.Maybe DiskConfig),
-    -- | Optional. The Compute Engine image resource used for cluster instances.The URI can represent an image or image family.Image examples: https:\/\/www.googleapis.com\/compute\/beta\/projects\/[project/id]\/global\/images\/[image-id] projects\/[project/id]\/global\/images\/[image-id] image-idImage family examples. Dataproc will use the most recent image from the family: https:\/\/www.googleapis.com\/compute\/beta\/projects\/[project/id]\/global\/images\/family\/[custom-image-family-name] projects\/[project/id]\/global\/images\/family\/[custom-image-family-name]If the URI is unspecified, it will be inferred from SoftwareConfig.image_version or the system default.
+    -- | Optional. The Compute Engine image resource used for cluster instances.The URI can represent an image or image family.Image examples: https:\/\/www.googleapis.com\/compute\/v1\/projects\/[project/id]\/global\/images\/[image-id] projects\/[project/id]\/global\/images\/[image-id] image-idImage family examples. Dataproc will use the most recent image from the family: https:\/\/www.googleapis.com\/compute\/v1\/projects\/[project/id]\/global\/images\/family\/[custom-image-family-name] projects\/[project/id]\/global\/images\/family\/[custom-image-family-name]If the URI is unspecified, it will be inferred from SoftwareConfig.image_version or the system default.
     imageUri :: (Core.Maybe Core.Text),
     -- | Output only. The list of instance names. Dataproc derives the names from cluster/name, num/instances, and the instance group.
     instanceNames :: (Core.Maybe [Core.Text]),
@@ -2829,7 +3366,7 @@ data InstanceGroupConfig = InstanceGroupConfig
     instanceReferences :: (Core.Maybe [InstanceReference]),
     -- | Output only. Specifies that this instance group contains preemptible instances.
     isPreemptible :: (Core.Maybe Core.Bool),
-    -- | Optional. The Compute Engine machine type used for cluster instances.A full URL, partial URI, or short name are valid. Examples: https:\/\/www.googleapis.com\/compute\/v1\/projects\/[project/id]\/zones\/us-east1-a\/machineTypes\/n1-standard-2 projects\/[project/id]\/zones\/us-east1-a\/machineTypes\/n1-standard-2 n1-standard-2Auto Zone Exception: If you are using the Dataproc Auto Zone Placement (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/configuring-clusters\/auto-zone#using/auto/zone_placement) feature, you must use the short name of the machine type resource, for example, n1-standard-2.
+    -- | Optional. The Compute Engine machine type used for cluster instances.A full URL, partial URI, or short name are valid. Examples: https:\/\/www.googleapis.com\/compute\/v1\/projects\/[project/id]\/zones\/[zone]\/machineTypes\/n1-standard-2 projects\/[project/id]\/zones\/[zone]\/machineTypes\/n1-standard-2 n1-standard-2Auto Zone Exception: If you are using the Dataproc Auto Zone Placement (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/configuring-clusters\/auto-zone#using/auto/zone_placement) feature, you must use the short name of the machine type resource, for example, n1-standard-2.
     machineTypeUri :: (Core.Maybe Core.Text),
     -- | Output only. The config for Compute Engine Instance Group Manager that manages this group. This is only used for preemptible instance groups.
     managedGroupConfig :: (Core.Maybe ManagedGroupConfig),
@@ -3035,6 +3572,41 @@ instance
     InstantiateWorkflowTemplateRequest_Parameters {..} =
       Core.toJSON additional
 
+-- | Represents a time interval, encoded as a Timestamp start (inclusive) and a Timestamp end (exclusive).The start must be less than or equal to the end. When the start equals the end, the interval is empty (matches no time). When both start and end are unspecified, the interval matches any time.
+--
+-- /See:/ 'newInterval' smart constructor.
+data Interval = Interval
+  { -- | Optional. Exclusive end of the interval.If specified, a Timestamp matching this interval will have to be before the end.
+    endTime :: (Core.Maybe Core.DateTime),
+    -- | Optional. Inclusive start of the interval.If specified, a Timestamp matching this interval will have to be the same or after the start.
+    startTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Interval' with the minimum fields required to make a request.
+newInterval ::
+  Interval
+newInterval = Interval {endTime = Core.Nothing, startTime = Core.Nothing}
+
+instance Core.FromJSON Interval where
+  parseJSON =
+    Core.withObject
+      "Interval"
+      ( \o ->
+          Interval
+            Core.<$> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "startTime")
+      )
+
+instance Core.ToJSON Interval where
+  toJSON Interval {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("endTime" Core..=) Core.<$> endTime,
+            ("startTime" Core..=) Core.<$> startTime
+          ]
+      )
+
 -- | A Dataproc job resource.
 --
 -- /See:/ 'newJob' smart constructor.
@@ -3045,6 +3617,8 @@ data Job = Job
     driverControlFilesUri :: (Core.Maybe Core.Text),
     -- | Output only. A URI pointing to the location of the stdout of the job\'s driver program.
     driverOutputResourceUri :: (Core.Maybe Core.Text),
+    -- | Optional. Driver scheduling configuration.
+    driverSchedulingConfig :: (Core.Maybe DriverSchedulingConfig),
     -- | Optional. Job is a Hadoop job.
     hadoopJob :: (Core.Maybe HadoopJob),
     -- | Optional. Job is a Hive job.
@@ -3075,6 +3649,8 @@ data Job = Job
     status :: (Core.Maybe JobStatus),
     -- | Output only. The previous job status.
     statusHistory :: (Core.Maybe [JobStatus]),
+    -- | Optional. Job is a Trino job.
+    trinoJob :: (Core.Maybe TrinoJob),
     -- | Output only. The collection of YARN applications spun up by this job.Beta Feature: This report is available for testing purposes only. It may be changed before final release.
     yarnApplications :: (Core.Maybe [YarnApplication])
   }
@@ -3088,6 +3664,7 @@ newJob =
     { done = Core.Nothing,
       driverControlFilesUri = Core.Nothing,
       driverOutputResourceUri = Core.Nothing,
+      driverSchedulingConfig = Core.Nothing,
       hadoopJob = Core.Nothing,
       hiveJob = Core.Nothing,
       jobUuid = Core.Nothing,
@@ -3103,6 +3680,7 @@ newJob =
       sparkSqlJob = Core.Nothing,
       status = Core.Nothing,
       statusHistory = Core.Nothing,
+      trinoJob = Core.Nothing,
       yarnApplications = Core.Nothing
     }
 
@@ -3115,6 +3693,7 @@ instance Core.FromJSON Job where
             Core.<$> (o Core..:? "done")
             Core.<*> (o Core..:? "driverControlFilesUri")
             Core.<*> (o Core..:? "driverOutputResourceUri")
+            Core.<*> (o Core..:? "driverSchedulingConfig")
             Core.<*> (o Core..:? "hadoopJob")
             Core.<*> (o Core..:? "hiveJob")
             Core.<*> (o Core..:? "jobUuid")
@@ -3130,6 +3709,7 @@ instance Core.FromJSON Job where
             Core.<*> (o Core..:? "sparkSqlJob")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "statusHistory")
+            Core.<*> (o Core..:? "trinoJob")
             Core.<*> (o Core..:? "yarnApplications")
       )
 
@@ -3142,6 +3722,8 @@ instance Core.ToJSON Job where
               Core.<$> driverControlFilesUri,
             ("driverOutputResourceUri" Core..=)
               Core.<$> driverOutputResourceUri,
+            ("driverSchedulingConfig" Core..=)
+              Core.<$> driverSchedulingConfig,
             ("hadoopJob" Core..=) Core.<$> hadoopJob,
             ("hiveJob" Core..=) Core.<$> hiveJob,
             ("jobUuid" Core..=) Core.<$> jobUuid,
@@ -3157,6 +3739,7 @@ instance Core.ToJSON Job where
             ("sparkSqlJob" Core..=) Core.<$> sparkSqlJob,
             ("status" Core..=) Core.<$> status,
             ("statusHistory" Core..=) Core.<$> statusHistory,
+            ("trinoJob" Core..=) Core.<$> trinoJob,
             ("yarnApplications" Core..=)
               Core.<$> yarnApplications
           ]
@@ -3349,9 +3932,9 @@ instance Core.ToJSON JobReference where
 --
 -- /See:/ 'newJobScheduling' smart constructor.
 data JobScheduling = JobScheduling
-  { -- | Optional. Maximum number of times per hour a driver may be restarted as a result of driver exiting with non-zero code before job is reported failed.A job may be reported as thrashing if driver exits with non-zero code 4 times within 10 minute window.Maximum value is 10.Note: Currently, this restartable job option is not supported in Dataproc workflow template (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/workflows\/using-workflows#adding/jobs/to/a/template) jobs.
+  { -- | Optional. Maximum number of times per hour a driver may be restarted as a result of driver exiting with non-zero code before job is reported failed.A job may be reported as thrashing if the driver exits with a non-zero code four times within a 10-minute window.Maximum value is 10.Note: This restartable job option is not supported in Dataproc workflow templates (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/workflows\/using-workflows#adding/jobs/to/a/template).
     maxFailuresPerHour :: (Core.Maybe Core.Int32),
-    -- | Optional. Maximum number of times in total a driver may be restarted as a result of driver exiting with non-zero code before job is reported failed. Maximum value is 240.Note: Currently, this restartable job option is not supported in Dataproc workflow template (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/workflows\/using-workflows#adding/jobs/to/a/template) jobs.
+    -- | Optional. Maximum total number of times a driver may be restarted as a result of the driver exiting with a non-zero code. After the maximum number is reached, the job will be reported as failed.Maximum value is 240.Note: Currently, this restartable job option is not supported in Dataproc workflow templates (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/workflows\/using-workflows#adding/jobs/to/a/template).
     maxFailuresTotal :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3546,6 +4129,165 @@ instance Core.ToJSON KerberosConfig where
             ("truststoreUri" Core..=) Core.<$> truststoreUri
           ]
       )
+
+-- | The configuration for running the Dataproc cluster on Kubernetes.
+--
+-- /See:/ 'newKubernetesClusterConfig' smart constructor.
+data KubernetesClusterConfig = KubernetesClusterConfig
+  { -- | Required. The configuration for running the Dataproc cluster on GKE.
+    gkeClusterConfig :: (Core.Maybe GkeClusterConfig),
+    -- | Optional. A namespace within the Kubernetes cluster to deploy into. If this namespace does not exist, it is created. If it exists, Dataproc verifies that another Dataproc VirtualCluster is not installed into it. If not specified, the name of the Dataproc Cluster is used.
+    kubernetesNamespace :: (Core.Maybe Core.Text),
+    -- | Optional. The software configuration for this Dataproc cluster running on Kubernetes.
+    kubernetesSoftwareConfig :: (Core.Maybe KubernetesSoftwareConfig)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'KubernetesClusterConfig' with the minimum fields required to make a request.
+newKubernetesClusterConfig ::
+  KubernetesClusterConfig
+newKubernetesClusterConfig =
+  KubernetesClusterConfig
+    { gkeClusterConfig = Core.Nothing,
+      kubernetesNamespace = Core.Nothing,
+      kubernetesSoftwareConfig = Core.Nothing
+    }
+
+instance Core.FromJSON KubernetesClusterConfig where
+  parseJSON =
+    Core.withObject
+      "KubernetesClusterConfig"
+      ( \o ->
+          KubernetesClusterConfig
+            Core.<$> (o Core..:? "gkeClusterConfig")
+            Core.<*> (o Core..:? "kubernetesNamespace")
+            Core.<*> (o Core..:? "kubernetesSoftwareConfig")
+      )
+
+instance Core.ToJSON KubernetesClusterConfig where
+  toJSON KubernetesClusterConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("gkeClusterConfig" Core..=)
+              Core.<$> gkeClusterConfig,
+            ("kubernetesNamespace" Core..=)
+              Core.<$> kubernetesNamespace,
+            ("kubernetesSoftwareConfig" Core..=)
+              Core.<$> kubernetesSoftwareConfig
+          ]
+      )
+
+-- | The software configuration for this Dataproc cluster running on Kubernetes.
+--
+-- /See:/ 'newKubernetesSoftwareConfig' smart constructor.
+data KubernetesSoftwareConfig = KubernetesSoftwareConfig
+  { -- | The components that should be installed in this Dataproc cluster. The key must be a string from the KubernetesComponent enumeration. The value is the version of the software to be installed. At least one entry must be specified.
+    componentVersion :: (Core.Maybe KubernetesSoftwareConfig_ComponentVersion),
+    -- | The properties to set on daemon config files.Property keys are specified in prefix:property format, for example spark:spark.kubernetes.container.image. The following are supported prefixes and their mappings: spark: spark-defaults.confFor more information, see Cluster properties (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/cluster-properties).
+    properties :: (Core.Maybe KubernetesSoftwareConfig_Properties)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'KubernetesSoftwareConfig' with the minimum fields required to make a request.
+newKubernetesSoftwareConfig ::
+  KubernetesSoftwareConfig
+newKubernetesSoftwareConfig =
+  KubernetesSoftwareConfig
+    { componentVersion = Core.Nothing,
+      properties = Core.Nothing
+    }
+
+instance Core.FromJSON KubernetesSoftwareConfig where
+  parseJSON =
+    Core.withObject
+      "KubernetesSoftwareConfig"
+      ( \o ->
+          KubernetesSoftwareConfig
+            Core.<$> (o Core..:? "componentVersion")
+            Core.<*> (o Core..:? "properties")
+      )
+
+instance Core.ToJSON KubernetesSoftwareConfig where
+  toJSON KubernetesSoftwareConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("componentVersion" Core..=)
+              Core.<$> componentVersion,
+            ("properties" Core..=) Core.<$> properties
+          ]
+      )
+
+-- | The components that should be installed in this Dataproc cluster. The key must be a string from the KubernetesComponent enumeration. The value is the version of the software to be installed. At least one entry must be specified.
+--
+-- /See:/ 'newKubernetesSoftwareConfig_ComponentVersion' smart constructor.
+newtype KubernetesSoftwareConfig_ComponentVersion = KubernetesSoftwareConfig_ComponentVersion
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'KubernetesSoftwareConfig_ComponentVersion' with the minimum fields required to make a request.
+newKubernetesSoftwareConfig_ComponentVersion ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  KubernetesSoftwareConfig_ComponentVersion
+newKubernetesSoftwareConfig_ComponentVersion additional =
+  KubernetesSoftwareConfig_ComponentVersion {additional = additional}
+
+instance
+  Core.FromJSON
+    KubernetesSoftwareConfig_ComponentVersion
+  where
+  parseJSON =
+    Core.withObject
+      "KubernetesSoftwareConfig_ComponentVersion"
+      ( \o ->
+          KubernetesSoftwareConfig_ComponentVersion
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    KubernetesSoftwareConfig_ComponentVersion
+  where
+  toJSON KubernetesSoftwareConfig_ComponentVersion {..} =
+    Core.toJSON additional
+
+-- | The properties to set on daemon config files.Property keys are specified in prefix:property format, for example spark:spark.kubernetes.container.image. The following are supported prefixes and their mappings: spark: spark-defaults.confFor more information, see Cluster properties (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/cluster-properties).
+--
+-- /See:/ 'newKubernetesSoftwareConfig_Properties' smart constructor.
+newtype KubernetesSoftwareConfig_Properties = KubernetesSoftwareConfig_Properties
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'KubernetesSoftwareConfig_Properties' with the minimum fields required to make a request.
+newKubernetesSoftwareConfig_Properties ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  KubernetesSoftwareConfig_Properties
+newKubernetesSoftwareConfig_Properties additional =
+  KubernetesSoftwareConfig_Properties {additional = additional}
+
+instance
+  Core.FromJSON
+    KubernetesSoftwareConfig_Properties
+  where
+  parseJSON =
+    Core.withObject
+      "KubernetesSoftwareConfig_Properties"
+      ( \o ->
+          KubernetesSoftwareConfig_Properties
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    KubernetesSoftwareConfig_Properties
+  where
+  toJSON KubernetesSoftwareConfig_Properties {..} =
+    Core.toJSON additional
 
 -- | Specifies the cluster auto-delete schedule configuration.
 --
@@ -4033,13 +4775,14 @@ instance Core.ToJSON MetastoreConfig where
           ]
       )
 
--- | Metric source to enable along with any optional metrics for this source that override the dataproc defaults
+-- | A Dataproc OSS metric.
 --
 -- /See:/ 'newMetric' smart constructor.
 data Metric = Metric
-  { -- | Optional. Optional Metrics to override the dataproc default metrics configured for the metric source
+  { -- | Optional. Specify one or more available OSS metrics (https:\/\/cloud.google.com\/dataproc\/docs\/guides\/monitoring#available/oss/metrics) to collect for the metric course (for the SPARK metric source, any Spark metric (https:\/\/spark.apache.org\/docs\/latest\/monitoring.html#metrics) can be specified).Provide metrics in the following format: METRIC_SOURCE: INSTANCE:GROUP:METRIC Use camelcase as appropriate.Examples: yarn:ResourceManager:QueueMetrics:AppsCompleted spark:driver:DAGScheduler:job.allJobs sparkHistoryServer:JVM:Memory:NonHeapMemoryUsage.committed hiveserver2:JVM:Memory:NonHeapMemoryUsage.used Notes: Only the specified overridden metrics will be collected for the metric source. For example, if one or more spark:executive metrics are listed as metric overrides, other SPARK metrics will not be collected. The collection of the default metrics for other OSS metric sources is unaffected. For example, if both SPARK andd YARN metric sources are enabled, and overrides are provided for Spark metrics only,
+    -- all default YARN metrics will be collected.
     metricOverrides :: (Core.Maybe [Core.Text]),
-    -- | Required. MetricSource that should be enabled
+    -- | Required. Default metrics are collected unless metricOverrides are specified for the metric source (see Available OSS metrics (https:\/\/cloud.google.com\/dataproc\/docs\/guides\/monitoring#available/oss/metrics) for more information).
     metricSource :: (Core.Maybe Metric_MetricSource)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4069,7 +4812,7 @@ instance Core.ToJSON Metric where
           ]
       )
 
--- | A full, namespace-isolated deployment target for an existing GKE cluster.
+-- | Deprecated. Used only for the deprecated beta. A full, namespace-isolated deployment target for an existing GKE cluster.
 --
 -- /See:/ 'newNamespacedGkeDeploymentTarget' smart constructor.
 data NamespacedGkeDeploymentTarget = NamespacedGkeDeploymentTarget
@@ -4110,11 +4853,87 @@ instance Core.ToJSON NamespacedGkeDeploymentTarget where
           ]
       )
 
--- | Node Group Affinity for clusters using sole-tenant node groups.
+-- | Dataproc Node Group. The Dataproc NodeGroup resource is not related to the Dataproc NodeGroupAffinity resource.
+--
+-- /See:/ 'newNodeGroup' smart constructor.
+data NodeGroup = NodeGroup
+  { -- | Optional. Node group labels. Label keys must consist of from 1 to 63 characters and conform to RFC 1035 (https:\/\/www.ietf.org\/rfc\/rfc1035.txt). Label values can be empty. If specified, they must consist of from 1 to 63 characters and conform to RFC 1035 (https:\/\/www.ietf.org\/rfc\/rfc1035.txt). The node group must have no more than 32 labelsn.
+    labels :: (Core.Maybe NodeGroup_Labels),
+    -- | The Node group resource name (https:\/\/aip.dev\/122).
+    name :: (Core.Maybe Core.Text),
+    -- | Optional. The node group instance group configuration.
+    nodeGroupConfig :: (Core.Maybe InstanceGroupConfig),
+    -- | Required. Node group roles.
+    roles :: (Core.Maybe [NodeGroup_RolesItem])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NodeGroup' with the minimum fields required to make a request.
+newNodeGroup ::
+  NodeGroup
+newNodeGroup =
+  NodeGroup
+    { labels = Core.Nothing,
+      name = Core.Nothing,
+      nodeGroupConfig = Core.Nothing,
+      roles = Core.Nothing
+    }
+
+instance Core.FromJSON NodeGroup where
+  parseJSON =
+    Core.withObject
+      "NodeGroup"
+      ( \o ->
+          NodeGroup
+            Core.<$> (o Core..:? "labels")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "nodeGroupConfig")
+            Core.<*> (o Core..:? "roles")
+      )
+
+instance Core.ToJSON NodeGroup where
+  toJSON NodeGroup {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("labels" Core..=) Core.<$> labels,
+            ("name" Core..=) Core.<$> name,
+            ("nodeGroupConfig" Core..=) Core.<$> nodeGroupConfig,
+            ("roles" Core..=) Core.<$> roles
+          ]
+      )
+
+-- | Optional. Node group labels. Label keys must consist of from 1 to 63 characters and conform to RFC 1035 (https:\/\/www.ietf.org\/rfc\/rfc1035.txt). Label values can be empty. If specified, they must consist of from 1 to 63 characters and conform to RFC 1035 (https:\/\/www.ietf.org\/rfc\/rfc1035.txt). The node group must have no more than 32 labelsn.
+--
+-- /See:/ 'newNodeGroup_Labels' smart constructor.
+newtype NodeGroup_Labels = NodeGroup_Labels
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NodeGroup_Labels' with the minimum fields required to make a request.
+newNodeGroup_Labels ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  NodeGroup_Labels
+newNodeGroup_Labels additional = NodeGroup_Labels {additional = additional}
+
+instance Core.FromJSON NodeGroup_Labels where
+  parseJSON =
+    Core.withObject
+      "NodeGroup_Labels"
+      ( \o ->
+          NodeGroup_Labels Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON NodeGroup_Labels where
+  toJSON NodeGroup_Labels {..} = Core.toJSON additional
+
+-- | Node Group Affinity for clusters using sole-tenant node groups. The Dataproc NodeGroupAffinity resource is not related to the Dataproc NodeGroup resource.
 --
 -- /See:/ 'newNodeGroupAffinity' smart constructor.
 newtype NodeGroupAffinity = NodeGroupAffinity
-  { -- | Required. The URI of a sole-tenant node group resource (https:\/\/cloud.google.com\/compute\/docs\/reference\/rest\/v1\/nodeGroups) that the cluster will be created on.A full URL, partial URI, or node group name are valid. Examples: https:\/\/www.googleapis.com\/compute\/v1\/projects\/[project/id]\/zones\/us-central1-a\/nodeGroups\/node-group-1 projects\/[project/id]\/zones\/us-central1-a\/nodeGroups\/node-group-1 node-group-1
+  { -- | Required. The URI of a sole-tenant node group resource (https:\/\/cloud.google.com\/compute\/docs\/reference\/rest\/v1\/nodeGroups) that the cluster will be created on.A full URL, partial URI, or node group name are valid. Examples: https:\/\/www.googleapis.com\/compute\/v1\/projects\/[project/id]\/zones\/[zone]\/nodeGroups\/node-group-1 projects\/[project/id]\/zones\/[zone]\/nodeGroups\/node-group-1 node-group-1
     nodeGroupUri :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4139,6 +4958,111 @@ instance Core.ToJSON NodeGroupAffinity where
       ( Core.catMaybes
           [("nodeGroupUri" Core..=) Core.<$> nodeGroupUri]
       )
+
+-- | Metadata describing the node group operation.
+--
+-- /See:/ 'newNodeGroupOperationMetadata' smart constructor.
+data NodeGroupOperationMetadata = NodeGroupOperationMetadata
+  { -- | Output only. Cluster UUID associated with the node group operation.
+    clusterUuid :: (Core.Maybe Core.Text),
+    -- | Output only. Short description of operation.
+    description :: (Core.Maybe Core.Text),
+    -- | Output only. Labels associated with the operation.
+    labels :: (Core.Maybe NodeGroupOperationMetadata_Labels),
+    -- | Output only. Node group ID for the operation.
+    nodeGroupId :: (Core.Maybe Core.Text),
+    -- | The operation type.
+    operationType :: (Core.Maybe NodeGroupOperationMetadata_OperationType),
+    -- | Output only. Current operation status.
+    status :: (Core.Maybe ClusterOperationStatus),
+    -- | Output only. The previous operation status.
+    statusHistory :: (Core.Maybe [ClusterOperationStatus]),
+    -- | Output only. Errors encountered during operation execution.
+    warnings :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NodeGroupOperationMetadata' with the minimum fields required to make a request.
+newNodeGroupOperationMetadata ::
+  NodeGroupOperationMetadata
+newNodeGroupOperationMetadata =
+  NodeGroupOperationMetadata
+    { clusterUuid = Core.Nothing,
+      description = Core.Nothing,
+      labels = Core.Nothing,
+      nodeGroupId = Core.Nothing,
+      operationType = Core.Nothing,
+      status = Core.Nothing,
+      statusHistory = Core.Nothing,
+      warnings = Core.Nothing
+    }
+
+instance Core.FromJSON NodeGroupOperationMetadata where
+  parseJSON =
+    Core.withObject
+      "NodeGroupOperationMetadata"
+      ( \o ->
+          NodeGroupOperationMetadata
+            Core.<$> (o Core..:? "clusterUuid")
+            Core.<*> (o Core..:? "description")
+            Core.<*> (o Core..:? "labels")
+            Core.<*> (o Core..:? "nodeGroupId")
+            Core.<*> (o Core..:? "operationType")
+            Core.<*> (o Core..:? "status")
+            Core.<*> (o Core..:? "statusHistory")
+            Core.<*> (o Core..:? "warnings")
+      )
+
+instance Core.ToJSON NodeGroupOperationMetadata where
+  toJSON NodeGroupOperationMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("clusterUuid" Core..=) Core.<$> clusterUuid,
+            ("description" Core..=) Core.<$> description,
+            ("labels" Core..=) Core.<$> labels,
+            ("nodeGroupId" Core..=) Core.<$> nodeGroupId,
+            ("operationType" Core..=) Core.<$> operationType,
+            ("status" Core..=) Core.<$> status,
+            ("statusHistory" Core..=) Core.<$> statusHistory,
+            ("warnings" Core..=) Core.<$> warnings
+          ]
+      )
+
+-- | Output only. Labels associated with the operation.
+--
+-- /See:/ 'newNodeGroupOperationMetadata_Labels' smart constructor.
+newtype NodeGroupOperationMetadata_Labels = NodeGroupOperationMetadata_Labels
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NodeGroupOperationMetadata_Labels' with the minimum fields required to make a request.
+newNodeGroupOperationMetadata_Labels ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  NodeGroupOperationMetadata_Labels
+newNodeGroupOperationMetadata_Labels additional =
+  NodeGroupOperationMetadata_Labels {additional = additional}
+
+instance
+  Core.FromJSON
+    NodeGroupOperationMetadata_Labels
+  where
+  parseJSON =
+    Core.withObject
+      "NodeGroupOperationMetadata_Labels"
+      ( \o ->
+          NodeGroupOperationMetadata_Labels
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    NodeGroupOperationMetadata_Labels
+  where
+  toJSON NodeGroupOperationMetadata_Labels {..} =
+    Core.toJSON additional
 
 -- | Specifies an executable to run on a fully configured node and a timeout period for executable completion.
 --
@@ -4177,6 +5101,50 @@ instance Core.ToJSON NodeInitializationAction where
           [ ("executableFile" Core..=) Core.<$> executableFile,
             ("executionTimeout" Core..=)
               Core.<$> executionTimeout
+          ]
+      )
+
+-- | indicating a list of workers of same type
+--
+-- /See:/ 'newNodePool' smart constructor.
+data NodePool = NodePool
+  { -- | Required. A unique id of the node pool. Primary and Secondary workers can be specified using special reserved ids PRIMARY/WORKER/POOL and SECONDARY/WORKER/POOL respectively. Aux node pools can be referenced using corresponding pool id.
+    id :: (Core.Maybe Core.Text),
+    -- | Name of instances to be repaired. These instances must belong to specified node pool.
+    instanceNames :: (Core.Maybe [Core.Text]),
+    -- | Required. Repair action to take on specified resources of the node pool.
+    repairAction :: (Core.Maybe NodePool_RepairAction)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NodePool' with the minimum fields required to make a request.
+newNodePool ::
+  NodePool
+newNodePool =
+  NodePool
+    { id = Core.Nothing,
+      instanceNames = Core.Nothing,
+      repairAction = Core.Nothing
+    }
+
+instance Core.FromJSON NodePool where
+  parseJSON =
+    Core.withObject
+      "NodePool"
+      ( \o ->
+          NodePool
+            Core.<$> (o Core..:? "id")
+            Core.<*> (o Core..:? "instanceNames")
+            Core.<*> (o Core..:? "repairAction")
+      )
+
+instance Core.ToJSON NodePool where
+  toJSON NodePool {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("id" Core..=) Core.<$> id,
+            ("instanceNames" Core..=) Core.<$> instanceNames,
+            ("repairAction" Core..=) Core.<$> repairAction
           ]
       )
 
@@ -4317,7 +5285,9 @@ data OrderedJob = OrderedJob
     -- | Optional. Job is a SparkSql job.
     sparkSqlJob :: (Core.Maybe SparkSqlJob),
     -- | Required. The step id. The id must be unique among all jobs within the template.The step id is used as prefix for job id, as job goog-dataproc-workflow-step-id label, and in prerequisiteStepIds field from other steps.The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). Cannot begin or end with underscore or hyphen. Must consist of between 3 and 50 characters.
-    stepId :: (Core.Maybe Core.Text)
+    stepId :: (Core.Maybe Core.Text),
+    -- | Optional. Job is a Trino job.
+    trinoJob :: (Core.Maybe TrinoJob)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4337,7 +5307,8 @@ newOrderedJob =
       sparkJob = Core.Nothing,
       sparkRJob = Core.Nothing,
       sparkSqlJob = Core.Nothing,
-      stepId = Core.Nothing
+      stepId = Core.Nothing,
+      trinoJob = Core.Nothing
     }
 
 instance Core.FromJSON OrderedJob where
@@ -4358,6 +5329,7 @@ instance Core.FromJSON OrderedJob where
             Core.<*> (o Core..:? "sparkRJob")
             Core.<*> (o Core..:? "sparkSqlJob")
             Core.<*> (o Core..:? "stepId")
+            Core.<*> (o Core..:? "trinoJob")
       )
 
 instance Core.ToJSON OrderedJob where
@@ -4376,7 +5348,8 @@ instance Core.ToJSON OrderedJob where
             ("sparkJob" Core..=) Core.<$> sparkJob,
             ("sparkRJob" Core..=) Core.<$> sparkRJob,
             ("sparkSqlJob" Core..=) Core.<$> sparkSqlJob,
-            ("stepId" Core..=) Core.<$> stepId
+            ("stepId" Core..=) Core.<$> stepId,
+            ("trinoJob" Core..=) Core.<$> trinoJob
           ]
       )
 
@@ -4966,6 +5939,12 @@ instance Core.ToJSON RegexValidation where
 data RepairClusterRequest = RepairClusterRequest
   { -- | Optional. Specifying the cluster/uuid means the RPC will fail (with error NOT/FOUND) if a cluster with the specified UUID does not exist.
     clusterUuid :: (Core.Maybe Core.Text),
+    -- | Optional. Timeout for graceful YARN decommissioning. Graceful decommissioning facilitates the removal of cluster nodes without interrupting jobs in progress. The timeout specifies the amount of time to wait for jobs finish before forcefully removing nodes. The default timeout is 0 for forceful decommissioning, and the maximum timeout period is 1 day. (see JSON Mapping—Duration (https:\/\/developers.google.com\/protocol-buffers\/docs\/proto3#json)).graceful/decommission/timeout is supported in Dataproc image versions 1.2+.
+    gracefulDecommissionTimeout :: (Core.Maybe Core.Duration),
+    -- | Optional. Node pools and corresponding repair action to be taken. All node pools should be unique in this request. i.e. Multiple entries for the same node pool id are not allowed.
+    nodePools :: (Core.Maybe [NodePool]),
+    -- | Optional. operation id of the parent operation sending the repair request
+    parentOperationId :: (Core.Maybe Core.Text),
     -- | Optional. A unique ID used to identify the request. If the server receives two RepairClusterRequests with the same ID, the second request is ignored, and the first google.longrunning.Operation created and stored in the backend is returned.Recommendation: Set this value to a UUID (https:\/\/en.wikipedia.org\/wiki\/Universally/unique/identifier).The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.
     requestId :: (Core.Maybe Core.Text)
   }
@@ -4975,7 +5954,13 @@ data RepairClusterRequest = RepairClusterRequest
 newRepairClusterRequest ::
   RepairClusterRequest
 newRepairClusterRequest =
-  RepairClusterRequest {clusterUuid = Core.Nothing, requestId = Core.Nothing}
+  RepairClusterRequest
+    { clusterUuid = Core.Nothing,
+      gracefulDecommissionTimeout = Core.Nothing,
+      nodePools = Core.Nothing,
+      parentOperationId = Core.Nothing,
+      requestId = Core.Nothing
+    }
 
 instance Core.FromJSON RepairClusterRequest where
   parseJSON =
@@ -4984,6 +5969,9 @@ instance Core.FromJSON RepairClusterRequest where
       ( \o ->
           RepairClusterRequest
             Core.<$> (o Core..:? "clusterUuid")
+            Core.<*> (o Core..:? "gracefulDecommissionTimeout")
+            Core.<*> (o Core..:? "nodePools")
+            Core.<*> (o Core..:? "parentOperationId")
             Core.<*> (o Core..:? "requestId")
       )
 
@@ -4992,6 +5980,11 @@ instance Core.ToJSON RepairClusterRequest where
     Core.object
       ( Core.catMaybes
           [ ("clusterUuid" Core..=) Core.<$> clusterUuid,
+            ("gracefulDecommissionTimeout" Core..=)
+              Core.<$> gracefulDecommissionTimeout,
+            ("nodePools" Core..=) Core.<$> nodePools,
+            ("parentOperationId" Core..=)
+              Core.<$> parentOperationId,
             ("requestId" Core..=) Core.<$> requestId
           ]
       )
@@ -5038,6 +6031,51 @@ instance Core.ToJSON ReservationAffinity where
               Core.<$> consumeReservationType,
             ("key" Core..=) Core.<$> key,
             ("values" Core..=) Core.<$> values
+          ]
+      )
+
+-- | A request to resize a node group.
+--
+-- /See:/ 'newResizeNodeGroupRequest' smart constructor.
+data ResizeNodeGroupRequest = ResizeNodeGroupRequest
+  { -- | Optional. Timeout for graceful YARN decomissioning. Graceful decommissioning (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/configuring-clusters\/scaling-clusters#graceful_decommissioning) allows the removal of nodes from the Compute Engine node group without interrupting jobs in progress. This timeout specifies how long to wait for jobs in progress to finish before forcefully removing nodes (and potentially interrupting jobs). Default timeout is 0 (for forceful decommission), and the maximum allowed timeout is 1 day. (see JSON representation of Duration (https:\/\/developers.google.com\/protocol-buffers\/docs\/proto3#json)).Only supported on Dataproc image versions 1.2 and higher.
+    gracefulDecommissionTimeout :: (Core.Maybe Core.Duration),
+    -- | Optional. A unique ID used to identify the request. If the server receives two ResizeNodeGroupRequest (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rpc\/google.cloud.dataproc.v1#google.cloud.dataproc.v1.ResizeNodeGroupRequests) with the same ID, the second request is ignored and the first google.longrunning.Operation created and stored in the backend is returned.Recommendation: Set this value to a UUID (https:\/\/en.wikipedia.org\/wiki\/Universally/unique/identifier).The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.
+    requestId :: (Core.Maybe Core.Text),
+    -- | Required. The number of running instances for the node group to maintain. The group adds or removes instances to maintain the number of instances specified by this parameter.
+    size :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ResizeNodeGroupRequest' with the minimum fields required to make a request.
+newResizeNodeGroupRequest ::
+  ResizeNodeGroupRequest
+newResizeNodeGroupRequest =
+  ResizeNodeGroupRequest
+    { gracefulDecommissionTimeout = Core.Nothing,
+      requestId = Core.Nothing,
+      size = Core.Nothing
+    }
+
+instance Core.FromJSON ResizeNodeGroupRequest where
+  parseJSON =
+    Core.withObject
+      "ResizeNodeGroupRequest"
+      ( \o ->
+          ResizeNodeGroupRequest
+            Core.<$> (o Core..:? "gracefulDecommissionTimeout")
+            Core.<*> (o Core..:? "requestId")
+            Core.<*> (o Core..:? "size")
+      )
+
+instance Core.ToJSON ResizeNodeGroupRequest where
+  toJSON ResizeNodeGroupRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("gracefulDecommissionTimeout" Core..=)
+              Core.<$> gracefulDecommissionTimeout,
+            ("requestId" Core..=) Core.<$> requestId,
+            ("size" Core..=) Core.<$> size
           ]
       )
 
@@ -5119,7 +6157,11 @@ instance Core.ToJSON RuntimeConfig_Properties where
 --
 -- /See:/ 'newRuntimeInfo' smart constructor.
 data RuntimeInfo = RuntimeInfo
-  { -- | Output only. A URI pointing to the location of the diagnostics tarball.
+  { -- | Output only. Approximate workload resource usage calculated after workload finishes (see Dataproc Serverless pricing (https:\/\/cloud.google.com\/dataproc-serverless\/pricing)).
+    approximateUsage :: (Core.Maybe UsageMetrics),
+    -- | Output only. Snapshot of current workload resource usage.
+    currentUsage :: (Core.Maybe UsageSnapshot),
+    -- | Output only. A URI pointing to the location of the diagnostics tarball.
     diagnosticOutputUri :: (Core.Maybe Core.Text),
     -- | Output only. Map of remote access endpoints (such as web interfaces and APIs) to their URIs.
     endpoints :: (Core.Maybe RuntimeInfo_Endpoints),
@@ -5133,7 +6175,9 @@ newRuntimeInfo ::
   RuntimeInfo
 newRuntimeInfo =
   RuntimeInfo
-    { diagnosticOutputUri = Core.Nothing,
+    { approximateUsage = Core.Nothing,
+      currentUsage = Core.Nothing,
+      diagnosticOutputUri = Core.Nothing,
       endpoints = Core.Nothing,
       outputUri = Core.Nothing
     }
@@ -5144,7 +6188,9 @@ instance Core.FromJSON RuntimeInfo where
       "RuntimeInfo"
       ( \o ->
           RuntimeInfo
-            Core.<$> (o Core..:? "diagnosticOutputUri")
+            Core.<$> (o Core..:? "approximateUsage")
+            Core.<*> (o Core..:? "currentUsage")
+            Core.<*> (o Core..:? "diagnosticOutputUri")
             Core.<*> (o Core..:? "endpoints")
             Core.<*> (o Core..:? "outputUri")
       )
@@ -5153,7 +6199,10 @@ instance Core.ToJSON RuntimeInfo where
   toJSON RuntimeInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("diagnosticOutputUri" Core..=)
+          [ ("approximateUsage" Core..=)
+              Core.<$> approximateUsage,
+            ("currentUsage" Core..=) Core.<$> currentUsage,
+            ("diagnosticOutputUri" Core..=)
               Core.<$> diagnosticOutputUri,
             ("endpoints" Core..=) Core.<$> endpoints,
             ("outputUri" Core..=) Core.<$> outputUri
@@ -5332,7 +6381,7 @@ instance Core.ToJSON SessionOperationMetadata_Labels where
 --
 -- /See:/ 'newSetIamPolicyRequest' smart constructor.
 newtype SetIamPolicyRequest = SetIamPolicyRequest
-  { -- | REQUIRED: The complete policy to be applied to the resource. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
+  { -- | REQUIRED: The complete policy to be applied to the resource. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Google Cloud services (such as Projects) might reject them.
     policy :: (Core.Maybe Policy)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6331,7 +7380,7 @@ instance Core.ToJSON TemplateParameter where
 --
 -- /See:/ 'newTestIamPermissionsRequest' smart constructor.
 newtype TestIamPermissionsRequest = TestIamPermissionsRequest
-  { -- | The set of permissions to check for the resource. Permissions with wildcards (such as \'/\' or \'storage./\') are not allowed. For more information see IAM Overview (https:\/\/cloud.google.com\/iam\/docs\/overview#permissions).
+  { -- | The set of permissions to check for the resource. Permissions with wildcards (such as * or storage.*) are not allowed. For more information see IAM Overview (https:\/\/cloud.google.com\/iam\/docs\/overview#permissions).
     permissions :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6389,6 +7438,197 @@ instance Core.ToJSON TestIamPermissionsResponse where
           [("permissions" Core..=) Core.<$> permissions]
       )
 
+-- | A Dataproc job for running Trino (https:\/\/trino.io\/) queries. IMPORTANT: The Dataproc Trino Optional Component (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/components\/trino) must be enabled when the cluster is created to submit a Trino job to the cluster.
+--
+-- /See:/ 'newTrinoJob' smart constructor.
+data TrinoJob = TrinoJob
+  { -- | Optional. Trino client tags to attach to this query
+    clientTags :: (Core.Maybe [Core.Text]),
+    -- | Optional. Whether to continue executing queries if a query fails. The default value is false. Setting to true can be useful when executing independent parallel queries.
+    continueOnFailure :: (Core.Maybe Core.Bool),
+    -- | Optional. The runtime log config for job execution.
+    loggingConfig :: (Core.Maybe LoggingConfig),
+    -- | Optional. The format in which query output will be displayed. See the Trino documentation for supported output formats
+    outputFormat :: (Core.Maybe Core.Text),
+    -- | Optional. A mapping of property names to values. Used to set Trino session properties (https:\/\/trino.io\/docs\/current\/sql\/set-session.html) Equivalent to using the --session flag in the Trino CLI
+    properties :: (Core.Maybe TrinoJob_Properties),
+    -- | The HCFS URI of the script that contains SQL queries.
+    queryFileUri :: (Core.Maybe Core.Text),
+    -- | A list of queries.
+    queryList :: (Core.Maybe QueryList)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TrinoJob' with the minimum fields required to make a request.
+newTrinoJob ::
+  TrinoJob
+newTrinoJob =
+  TrinoJob
+    { clientTags = Core.Nothing,
+      continueOnFailure = Core.Nothing,
+      loggingConfig = Core.Nothing,
+      outputFormat = Core.Nothing,
+      properties = Core.Nothing,
+      queryFileUri = Core.Nothing,
+      queryList = Core.Nothing
+    }
+
+instance Core.FromJSON TrinoJob where
+  parseJSON =
+    Core.withObject
+      "TrinoJob"
+      ( \o ->
+          TrinoJob
+            Core.<$> (o Core..:? "clientTags")
+            Core.<*> (o Core..:? "continueOnFailure")
+            Core.<*> (o Core..:? "loggingConfig")
+            Core.<*> (o Core..:? "outputFormat")
+            Core.<*> (o Core..:? "properties")
+            Core.<*> (o Core..:? "queryFileUri")
+            Core.<*> (o Core..:? "queryList")
+      )
+
+instance Core.ToJSON TrinoJob where
+  toJSON TrinoJob {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("clientTags" Core..=) Core.<$> clientTags,
+            ("continueOnFailure" Core..=)
+              Core.<$> continueOnFailure,
+            ("loggingConfig" Core..=) Core.<$> loggingConfig,
+            ("outputFormat" Core..=) Core.<$> outputFormat,
+            ("properties" Core..=) Core.<$> properties,
+            ("queryFileUri" Core..=) Core.<$> queryFileUri,
+            ("queryList" Core..=) Core.<$> queryList
+          ]
+      )
+
+-- | Optional. A mapping of property names to values. Used to set Trino session properties (https:\/\/trino.io\/docs\/current\/sql\/set-session.html) Equivalent to using the --session flag in the Trino CLI
+--
+-- /See:/ 'newTrinoJob_Properties' smart constructor.
+newtype TrinoJob_Properties = TrinoJob_Properties
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TrinoJob_Properties' with the minimum fields required to make a request.
+newTrinoJob_Properties ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  TrinoJob_Properties
+newTrinoJob_Properties additional =
+  TrinoJob_Properties {additional = additional}
+
+instance Core.FromJSON TrinoJob_Properties where
+  parseJSON =
+    Core.withObject
+      "TrinoJob_Properties"
+      ( \o ->
+          TrinoJob_Properties
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON TrinoJob_Properties where
+  toJSON TrinoJob_Properties {..} =
+    Core.toJSON additional
+
+-- | Usage metrics represent approximate total resources consumed by a workload.
+--
+-- /See:/ 'newUsageMetrics' smart constructor.
+data UsageMetrics = UsageMetrics
+  { -- | Optional. DCU (Dataproc Compute Units) usage in (milliDCU x seconds) (see Dataproc Serverless pricing (https:\/\/cloud.google.com\/dataproc-serverless\/pricing)).
+    milliDcuSeconds :: (Core.Maybe Core.Int64),
+    -- | Optional. Shuffle storage usage in (GB x seconds) (see Dataproc Serverless pricing (https:\/\/cloud.google.com\/dataproc-serverless\/pricing)).
+    shuffleStorageGbSeconds :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UsageMetrics' with the minimum fields required to make a request.
+newUsageMetrics ::
+  UsageMetrics
+newUsageMetrics =
+  UsageMetrics
+    { milliDcuSeconds = Core.Nothing,
+      shuffleStorageGbSeconds = Core.Nothing
+    }
+
+instance Core.FromJSON UsageMetrics where
+  parseJSON =
+    Core.withObject
+      "UsageMetrics"
+      ( \o ->
+          UsageMetrics
+            Core.<$> ( o Core..:? "milliDcuSeconds"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "shuffleStorageGbSeconds"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+      )
+
+instance Core.ToJSON UsageMetrics where
+  toJSON UsageMetrics {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("milliDcuSeconds" Core..=) Core.. Core.AsText
+              Core.<$> milliDcuSeconds,
+            ("shuffleStorageGbSeconds" Core..=)
+              Core.. Core.AsText
+              Core.<$> shuffleStorageGbSeconds
+          ]
+      )
+
+-- | The usage snaphot represents the resources consumed by a workload at a specified time.
+--
+-- /See:/ 'newUsageSnapshot' smart constructor.
+data UsageSnapshot = UsageSnapshot
+  { -- | Optional. Milli (one-thousandth) Dataproc Compute Units (DCUs) (see Dataproc Serverless pricing (https:\/\/cloud.google.com\/dataproc-serverless\/pricing)).
+    milliDcu :: (Core.Maybe Core.Int64),
+    -- | Optional. Shuffle Storage in gigabytes (GB). (see Dataproc Serverless pricing (https:\/\/cloud.google.com\/dataproc-serverless\/pricing))
+    shuffleStorageGb :: (Core.Maybe Core.Int64),
+    -- | Optional. The timestamp of the usage snapshot.
+    snapshotTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UsageSnapshot' with the minimum fields required to make a request.
+newUsageSnapshot ::
+  UsageSnapshot
+newUsageSnapshot =
+  UsageSnapshot
+    { milliDcu = Core.Nothing,
+      shuffleStorageGb = Core.Nothing,
+      snapshotTime = Core.Nothing
+    }
+
+instance Core.FromJSON UsageSnapshot where
+  parseJSON =
+    Core.withObject
+      "UsageSnapshot"
+      ( \o ->
+          UsageSnapshot
+            Core.<$> ( o Core..:? "milliDcu"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "shuffleStorageGb"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "snapshotTime")
+      )
+
+instance Core.ToJSON UsageSnapshot where
+  toJSON UsageSnapshot {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("milliDcu" Core..=) Core.. Core.AsText
+              Core.<$> milliDcu,
+            ("shuffleStorageGb" Core..=) Core.. Core.AsText
+              Core.<$> shuffleStorageGb,
+            ("snapshotTime" Core..=) Core.<$> snapshotTime
+          ]
+      )
+
 -- | Validation based on a list of allowed values.
 --
 -- /See:/ 'newValueValidation' smart constructor.
@@ -6415,6 +7655,52 @@ instance Core.ToJSON ValueValidation where
   toJSON ValueValidation {..} =
     Core.object
       (Core.catMaybes [("values" Core..=) Core.<$> values])
+
+-- | The Dataproc cluster config for a cluster that does not directly control the underlying compute resources, such as a Dataproc-on-GKE cluster (https:\/\/cloud.google.com\/dataproc\/docs\/guides\/dpgke\/dataproc-gke-overview).
+--
+-- /See:/ 'newVirtualClusterConfig' smart constructor.
+data VirtualClusterConfig = VirtualClusterConfig
+  { -- | Optional. Configuration of auxiliary services used by this cluster.
+    auxiliaryServicesConfig :: (Core.Maybe AuxiliaryServicesConfig),
+    -- | Required. The configuration for running the Dataproc cluster on Kubernetes.
+    kubernetesClusterConfig :: (Core.Maybe KubernetesClusterConfig),
+    -- | Optional. A Cloud Storage bucket used to stage job dependencies, config files, and job driver console output. If you do not specify a staging bucket, Cloud Dataproc will determine a Cloud Storage location (US, ASIA, or EU) for your cluster\'s staging bucket according to the Compute Engine zone where your cluster is deployed, and then create and manage this project-level, per-location bucket (see Dataproc staging and temp buckets (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/configuring-clusters\/staging-bucket)). This field requires a Cloud Storage bucket name, not a gs:\/\/... URI to a Cloud Storage bucket.
+    stagingBucket :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'VirtualClusterConfig' with the minimum fields required to make a request.
+newVirtualClusterConfig ::
+  VirtualClusterConfig
+newVirtualClusterConfig =
+  VirtualClusterConfig
+    { auxiliaryServicesConfig = Core.Nothing,
+      kubernetesClusterConfig = Core.Nothing,
+      stagingBucket = Core.Nothing
+    }
+
+instance Core.FromJSON VirtualClusterConfig where
+  parseJSON =
+    Core.withObject
+      "VirtualClusterConfig"
+      ( \o ->
+          VirtualClusterConfig
+            Core.<$> (o Core..:? "auxiliaryServicesConfig")
+            Core.<*> (o Core..:? "kubernetesClusterConfig")
+            Core.<*> (o Core..:? "stagingBucket")
+      )
+
+instance Core.ToJSON VirtualClusterConfig where
+  toJSON VirtualClusterConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("auxiliaryServicesConfig" Core..=)
+              Core.<$> auxiliaryServicesConfig,
+            ("kubernetesClusterConfig" Core..=)
+              Core.<$> kubernetesClusterConfig,
+            ("stagingBucket" Core..=) Core.<$> stagingBucket
+          ]
+      )
 
 -- | The workflow graph.
 --

@@ -57,6 +57,10 @@ module Gogol.ShoppingContent.Types
     AccountBusinessInformation (..),
     newAccountBusinessInformation,
 
+    -- ** AccountConversionSettings
+    AccountConversionSettings (..),
+    newAccountConversionSettings,
+
     -- ** AccountCredentials
     AccountCredentials (..),
     newAccountCredentials,
@@ -250,6 +254,37 @@ module Gogol.ShoppingContent.Types
     Amount (..),
     newAmount,
 
+    -- ** AttributionSettings
+    AttributionSettings (..),
+    newAttributionSettings,
+
+    -- ** AttributionSettings_AttributionModel
+    AttributionSettings_AttributionModel (..),
+
+    -- ** AttributionSettingsConversionType
+    AttributionSettingsConversionType (..),
+    newAttributionSettingsConversionType,
+
+    -- ** BestSellers
+    BestSellers (..),
+    newBestSellers,
+
+    -- ** BestSellers_PreviousRelativeDemand
+    BestSellers_PreviousRelativeDemand (..),
+
+    -- ** BestSellers_RelativeDemand
+    BestSellers_RelativeDemand (..),
+
+    -- ** BestSellers_RelativeDemandChange
+    BestSellers_RelativeDemandChange (..),
+
+    -- ** BestSellers_ReportGranularity
+    BestSellers_ReportGranularity (..),
+
+    -- ** Brand
+    Brand (..),
+    newBrand,
+
     -- ** BusinessDayConfig
     BusinessDayConfig (..),
     newBusinessDayConfig,
@@ -305,6 +340,13 @@ module Gogol.ShoppingContent.Types
     -- ** CollectionStatusItemLevelIssue
     CollectionStatusItemLevelIssue (..),
     newCollectionStatusItemLevelIssue,
+
+    -- ** ConversionSource
+    ConversionSource (..),
+    newConversionSource,
+
+    -- ** ConversionSource_State
+    ConversionSource_State (..),
 
     -- ** Css
     Css (..),
@@ -402,6 +444,14 @@ module Gogol.ShoppingContent.Types
     DateTime' (..),
     newDateTime,
 
+    -- ** DeliveryArea
+    DeliveryArea (..),
+    newDeliveryArea,
+
+    -- ** DeliveryAreaPostalCodeRange
+    DeliveryAreaPostalCodeRange (..),
+    newDeliveryAreaPostalCodeRange,
+
     -- ** DeliveryTime
     DeliveryTime (..),
     newDeliveryTime,
@@ -442,6 +492,10 @@ module Gogol.ShoppingContent.Types
     FreeListingsProgramStatusReviewIneligibilityReasonDetails (..),
     newFreeListingsProgramStatusReviewIneligibilityReasonDetails,
 
+    -- ** GenerateRecommendationsResponse
+    GenerateRecommendationsResponse (..),
+    newGenerateRecommendationsResponse,
+
     -- ** GmbAccounts
     GmbAccounts (..),
     newGmbAccounts,
@@ -449,6 +503,10 @@ module Gogol.ShoppingContent.Types
     -- ** GmbAccountsGmbAccount
     GmbAccountsGmbAccount (..),
     newGmbAccountsGmbAccount,
+
+    -- ** GoogleAnalyticsLink
+    GoogleAnalyticsLink (..),
+    newGoogleAnalyticsLink,
 
     -- ** Headers
     Headers (..),
@@ -577,9 +635,17 @@ module Gogol.ShoppingContent.Types
     ListCollectionsResponse (..),
     newListCollectionsResponse,
 
+    -- ** ListConversionSourcesResponse
+    ListConversionSourcesResponse (..),
+    newListConversionSourcesResponse,
+
     -- ** ListCssesResponse
     ListCssesResponse (..),
     newListCssesResponse,
+
+    -- ** ListMethodQuotasResponse
+    ListMethodQuotasResponse (..),
+    newListMethodQuotasResponse,
 
     -- ** ListRegionsResponse
     ListRegionsResponse (..),
@@ -629,6 +695,10 @@ module Gogol.ShoppingContent.Types
     LoyaltyPoints (..),
     newLoyaltyPoints,
 
+    -- ** MerchantCenterDestination
+    MerchantCenterDestination (..),
+    newMerchantCenterDestination,
+
     -- ** MerchantOrderReturn
     MerchantOrderReturn (..),
     newMerchantOrderReturn,
@@ -640,6 +710,10 @@ module Gogol.ShoppingContent.Types
     -- ** MerchantRejectionReason
     MerchantRejectionReason (..),
     newMerchantRejectionReason,
+
+    -- ** MethodQuota
+    MethodQuota (..),
+    newMethodQuota,
 
     -- ** Metrics
     Metrics (..),
@@ -1124,6 +1198,14 @@ module Gogol.ShoppingContent.Types
     PriceAmount (..),
     newPriceAmount,
 
+    -- ** PriceCompetitiveness
+    PriceCompetitiveness (..),
+    newPriceCompetitiveness,
+
+    -- ** PriceInsights
+    PriceInsights (..),
+    newPriceInsights,
+
     -- ** Product
     Product (..),
     newProduct,
@@ -1132,9 +1214,35 @@ module Gogol.ShoppingContent.Types
     ProductAmount (..),
     newProductAmount,
 
+    -- ** ProductCluster
+    ProductCluster (..),
+    newProductCluster,
+
+    -- ** ProductCluster_BrandInventoryStatus
+    ProductCluster_BrandInventoryStatus (..),
+
+    -- ** ProductCluster_InventoryStatus
+    ProductCluster_InventoryStatus (..),
+
+    -- ** ProductDeliveryTime
+    ProductDeliveryTime (..),
+    newProductDeliveryTime,
+
+    -- ** ProductDeliveryTimeAreaDeliveryTime
+    ProductDeliveryTimeAreaDeliveryTime (..),
+    newProductDeliveryTimeAreaDeliveryTime,
+
+    -- ** ProductDeliveryTimeAreaDeliveryTimeDeliveryTime
+    ProductDeliveryTimeAreaDeliveryTimeDeliveryTime (..),
+    newProductDeliveryTimeAreaDeliveryTimeDeliveryTime,
+
     -- ** ProductDimension
     ProductDimension (..),
     newProductDimension,
+
+    -- ** ProductId
+    ProductId (..),
+    newProductId,
 
     -- ** ProductProductDetail
     ProductProductDetail (..),
@@ -1179,6 +1287,38 @@ module Gogol.ShoppingContent.Types
     -- ** ProductUnitPricingMeasure
     ProductUnitPricingMeasure (..),
     newProductUnitPricingMeasure,
+
+    -- ** ProductView
+    ProductView (..),
+    newProductView,
+
+    -- ** ProductView_AggregatedDestinationStatus
+    ProductView_AggregatedDestinationStatus (..),
+
+    -- ** ProductView_Channel
+    ProductView_Channel (..),
+
+    -- ** ProductViewItemIssue
+    ProductViewItemIssue (..),
+    newProductViewItemIssue,
+
+    -- ** ProductViewItemIssue_Resolution
+    ProductViewItemIssue_Resolution (..),
+
+    -- ** ProductViewItemIssueIssueSeverityPerDestination
+    ProductViewItemIssueIssueSeverityPerDestination (..),
+    newProductViewItemIssueIssueSeverityPerDestination,
+
+    -- ** ProductViewItemIssueItemIssueSeverity
+    ProductViewItemIssueItemIssueSeverity (..),
+    newProductViewItemIssueItemIssueSeverity,
+
+    -- ** ProductViewItemIssueItemIssueSeverity_AggregatedSeverity
+    ProductViewItemIssueItemIssueSeverity_AggregatedSeverity (..),
+
+    -- ** ProductViewItemIssueItemIssueType
+    ProductViewItemIssueItemIssueType (..),
+    newProductViewItemIssueItemIssueType,
 
     -- ** ProductWeight
     ProductWeight (..),
@@ -1240,6 +1380,24 @@ module Gogol.ShoppingContent.Types
     -- ** Promotion_RedemptionChannelItem
     Promotion_RedemptionChannelItem (..),
 
+    -- ** Promotion_StoreApplicability
+    Promotion_StoreApplicability (..),
+
+    -- ** PromotionPromotionStatus
+    PromotionPromotionStatus (..),
+    newPromotionPromotionStatus,
+
+    -- ** PromotionPromotionStatusDestinationStatus
+    PromotionPromotionStatusDestinationStatus (..),
+    newPromotionPromotionStatusDestinationStatus,
+
+    -- ** PromotionPromotionStatusDestinationStatus_Status
+    PromotionPromotionStatusDestinationStatus_Status (..),
+
+    -- ** PromotionPromotionStatusPromotionIssue
+    PromotionPromotionStatusPromotionIssue (..),
+    newPromotionPromotionStatusPromotionIssue,
+
     -- ** PubsubNotificationSettings
     PubsubNotificationSettings (..),
     newPubsubNotificationSettings,
@@ -1247,6 +1405,28 @@ module Gogol.ShoppingContent.Types
     -- ** RateGroup
     RateGroup (..),
     newRateGroup,
+
+    -- ** Recommendation
+    Recommendation (..),
+    newRecommendation,
+
+    -- ** RecommendationCallToAction
+    RecommendationCallToAction (..),
+    newRecommendationCallToAction,
+
+    -- ** RecommendationCreative
+    RecommendationCreative (..),
+    newRecommendationCreative,
+
+    -- ** RecommendationCreative_Type
+    RecommendationCreative_Type (..),
+
+    -- ** RecommendationDescription
+    RecommendationDescription (..),
+    newRecommendationDescription,
+
+    -- ** RecommendationDescription_Type
+    RecommendationDescription_Type (..),
 
     -- ** RefundReason
     RefundReason (..),
@@ -1287,6 +1467,13 @@ module Gogol.ShoppingContent.Types
     -- ** RegionalinventoryCustomBatchResponseEntry
     RegionalinventoryCustomBatchResponseEntry (..),
     newRegionalinventoryCustomBatchResponseEntry,
+
+    -- ** ReportInteractionRequest
+    ReportInteractionRequest (..),
+    newReportInteractionRequest,
+
+    -- ** ReportInteractionRequest_InteractionType
+    ReportInteractionRequest_InteractionType (..),
 
     -- ** ReportRow
     ReportRow (..),
@@ -1667,6 +1854,10 @@ module Gogol.ShoppingContent.Types
     -- ** TransitTableTransitTimeRowTransitTimeValue
     TransitTableTransitTimeRowTransitTimeValue (..),
     newTransitTableTransitTimeRowTransitTimeValue,
+
+    -- ** UndeleteConversionSourceRequest
+    UndeleteConversionSourceRequest (..),
+    newUndeleteConversionSourceRequest,
 
     -- ** UnitInvoice
     UnitInvoice (..),

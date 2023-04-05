@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The cloud asset API manages the history and inventory of cloud resources.
+-- The Cloud Asset API manages the history and inventory of Google Cloud resources.
 --
 -- /See:/ <https://cloud.google.com/asset-inventory/docs/quickstart Cloud Asset API Reference>
 module Gogol.CloudAsset

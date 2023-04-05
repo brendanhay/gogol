@@ -116,6 +116,9 @@ module Gogol.Vault.Types
     DriveOptions (..),
     newDriveOptions,
 
+    -- ** DriveOptions_ClientSideEncryptedOption
+    DriveOptions_ClientSideEncryptedOption (..),
+
     -- ** Empty
     Empty (..),
     newEmpty,
@@ -314,6 +317,10 @@ module Gogol.Vault.Types
     -- ** SharedDriveInfo
     SharedDriveInfo (..),
     newSharedDriveInfo,
+
+    -- ** SitesUrlInfo
+    SitesUrlInfo (..),
+    newSitesUrlInfo,
 
     -- ** Status
     Status (..),

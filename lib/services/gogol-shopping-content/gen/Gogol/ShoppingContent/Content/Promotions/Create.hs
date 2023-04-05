@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Inserts a promotion for your Merchant Center account. If the promotion already exists, then it will update the promotion instead.
+-- Inserts a promotion for your Merchant Center account. If the promotion already exists, then it updates the promotion instead. To [end or delete] (https:\/\/developers.google.com\/shopping-content\/guides\/promotions#end/a/promotion) a promotion update the time period of the promotion to a time that has already passed.
 --
 -- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.promotions.create@.
 module Gogol.ShoppingContent.Content.Promotions.Create
@@ -58,7 +58,7 @@ type ContentPromotionsCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] Promotion
     Core.:> Core.Post '[Core.JSON] Promotion
 
--- | Inserts a promotion for your Merchant Center account. If the promotion already exists, then it will update the promotion instead.
+-- | Inserts a promotion for your Merchant Center account. If the promotion already exists, then it updates the promotion instead. To [end or delete] (https:\/\/developers.google.com\/shopping-content\/guides\/promotions#end/a/promotion) a promotion update the time period of the promotion to a time that has already passed.
 --
 -- /See:/ 'newContentPromotionsCreate' smart constructor.
 data ContentPromotionsCreate = ContentPromotionsCreate

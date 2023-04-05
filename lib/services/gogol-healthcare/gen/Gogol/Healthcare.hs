@@ -483,6 +483,11 @@ module Gogol.Healthcare
     HealthcareProjectsLocationsDatasetsFhirStoresGet (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresGet,
 
+    -- ** healthcare.projects.locations.datasets.fhirStores.getFHIRStoreMetrics
+    HealthcareProjectsLocationsDatasetsFhirStoresGetFHIRStoreMetricsResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresGetFHIRStoreMetrics (..),
+    newHealthcareProjectsLocationsDatasetsFhirStoresGetFHIRStoreMetrics,
+
     -- ** healthcare.projects.locations.datasets.fhirStores.getIamPolicy
     HealthcareProjectsLocationsDatasetsFhirStoresGetIamPolicyResource,
     HealthcareProjectsLocationsDatasetsFhirStoresGetIamPolicy (..),
@@ -788,6 +793,10 @@ module Gogol.Healthcare
     DateShiftConfig (..),
     newDateShiftConfig,
 
+    -- ** DeidentifiedStoreDestination
+    DeidentifiedStoreDestination (..),
+    newDeidentifiedStoreDestination,
+
     -- ** DeidentifyConfig
     DeidentifyConfig (..),
     newDeidentifyConfig,
@@ -906,12 +915,23 @@ module Gogol.Healthcare
     FhirStore (..),
     newFhirStore,
 
+    -- ** FhirStore_ComplexDataTypeReferenceParsing
+    FhirStore_ComplexDataTypeReferenceParsing (..),
+
     -- ** FhirStore_Labels
     FhirStore_Labels (..),
     newFhirStore_Labels,
 
     -- ** FhirStore_Version
     FhirStore_Version (..),
+
+    -- ** FhirStoreMetric
+    FhirStoreMetric (..),
+    newFhirStoreMetric,
+
+    -- ** FhirStoreMetrics
+    FhirStoreMetrics (..),
+    newFhirStoreMetrics,
 
     -- ** Field
     Field (..),
@@ -1069,6 +1089,10 @@ module Gogol.Healthcare
     -- ** IngestMessageResponse
     IngestMessageResponse (..),
     newIngestMessageResponse,
+
+    -- ** KmsWrappedCryptoKey
+    KmsWrappedCryptoKey (..),
+    newKmsWrappedCryptoKey,
 
     -- ** LinkedEntity
     LinkedEntity (..),
@@ -1318,6 +1342,13 @@ module Gogol.Healthcare
     TextSpan (..),
     newTextSpan,
 
+    -- ** TimePartitioning
+    TimePartitioning (..),
+    newTimePartitioning,
+
+    -- ** TimePartitioning_Type
+    TimePartitioning_Type (..),
+
     -- ** Type
     Type (..),
     newType,
@@ -1434,6 +1465,7 @@ import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Searchtype
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Update
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Vread
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Get
+import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.GetFHIRStoreMetrics
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.GetIamPolicy
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Import
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.List

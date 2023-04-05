@@ -141,6 +141,7 @@ module Gogol.BigtableAdmin.Internal.Sum
         ProjectsInstancesTablesGetView_SCHEMAVIEW,
         ProjectsInstancesTablesGetView_REPLICATIONVIEW,
         ProjectsInstancesTablesGetView_ENCRYPTIONVIEW,
+        ProjectsInstancesTablesGetView_STATSVIEW,
         ProjectsInstancesTablesGetView_Full,
         ..
       ),
@@ -152,6 +153,7 @@ module Gogol.BigtableAdmin.Internal.Sum
         ProjectsInstancesTablesListView_SCHEMAVIEW,
         ProjectsInstancesTablesListView_REPLICATIONVIEW,
         ProjectsInstancesTablesListView_ENCRYPTIONVIEW,
+        ProjectsInstancesTablesListView_STATSVIEW,
         ProjectsInstancesTablesListView_Full,
         ..
       ),
@@ -441,7 +443,7 @@ pattern Instance_State_Creating = Instance_State "CREATING"
   Instance_State
   #-}
 
--- | Required. The type of the instance. Defaults to @PRODUCTION@.
+-- | The type of the instance. Defaults to @PRODUCTION@.
 newtype Instance_Type = Instance_Type {fromInstance_Type :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -628,7 +630,11 @@ pattern ProjectsInstancesTablesGetView_REPLICATIONVIEW = ProjectsInstancesTables
 pattern ProjectsInstancesTablesGetView_ENCRYPTIONVIEW :: ProjectsInstancesTablesGetView
 pattern ProjectsInstancesTablesGetView_ENCRYPTIONVIEW = ProjectsInstancesTablesGetView "ENCRYPTION_VIEW"
 
--- | Populates all fields.
+-- | Only populates @name@ and fields related to the table\'s stats (e.g. TableStats and ColumnFamilyStats).
+pattern ProjectsInstancesTablesGetView_STATSVIEW :: ProjectsInstancesTablesGetView
+pattern ProjectsInstancesTablesGetView_STATSVIEW = ProjectsInstancesTablesGetView "STATS_VIEW"
+
+-- | Populates all fields except for stats. See STATS_VIEW to request stats.
 pattern ProjectsInstancesTablesGetView_Full :: ProjectsInstancesTablesGetView
 pattern ProjectsInstancesTablesGetView_Full = ProjectsInstancesTablesGetView "FULL"
 
@@ -638,6 +644,7 @@ pattern ProjectsInstancesTablesGetView_Full = ProjectsInstancesTablesGetView "FU
   ProjectsInstancesTablesGetView_SCHEMAVIEW,
   ProjectsInstancesTablesGetView_REPLICATIONVIEW,
   ProjectsInstancesTablesGetView_ENCRYPTIONVIEW,
+  ProjectsInstancesTablesGetView_STATSVIEW,
   ProjectsInstancesTablesGetView_Full,
   ProjectsInstancesTablesGetView
   #-}
@@ -675,7 +682,11 @@ pattern ProjectsInstancesTablesListView_REPLICATIONVIEW = ProjectsInstancesTable
 pattern ProjectsInstancesTablesListView_ENCRYPTIONVIEW :: ProjectsInstancesTablesListView
 pattern ProjectsInstancesTablesListView_ENCRYPTIONVIEW = ProjectsInstancesTablesListView "ENCRYPTION_VIEW"
 
--- | Populates all fields.
+-- | Only populates @name@ and fields related to the table\'s stats (e.g. TableStats and ColumnFamilyStats).
+pattern ProjectsInstancesTablesListView_STATSVIEW :: ProjectsInstancesTablesListView
+pattern ProjectsInstancesTablesListView_STATSVIEW = ProjectsInstancesTablesListView "STATS_VIEW"
+
+-- | Populates all fields except for stats. See STATS_VIEW to request stats.
 pattern ProjectsInstancesTablesListView_Full :: ProjectsInstancesTablesListView
 pattern ProjectsInstancesTablesListView_Full = ProjectsInstancesTablesListView "FULL"
 
@@ -685,6 +696,7 @@ pattern ProjectsInstancesTablesListView_Full = ProjectsInstancesTablesListView "
   ProjectsInstancesTablesListView_SCHEMAVIEW,
   ProjectsInstancesTablesListView_REPLICATIONVIEW,
   ProjectsInstancesTablesListView_ENCRYPTIONVIEW,
+  ProjectsInstancesTablesListView_STATSVIEW,
   ProjectsInstancesTablesListView_Full,
   ProjectsInstancesTablesListView
   #-}

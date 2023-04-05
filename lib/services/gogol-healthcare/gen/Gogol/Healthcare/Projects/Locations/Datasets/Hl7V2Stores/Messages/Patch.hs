@@ -67,7 +67,7 @@ data HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatch = HealthcarePro
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Resource name of the Message, of the form @projects\/{project_id}\/datasets\/{dataset_id}\/hl7V2Stores\/{hl7_v2_store_id}\/messages\/{message_id}@. Assigned by the server.
+    -- | Resource name of the Message, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/hl7V2Stores\/{hl7_v2_store_id}\/messages\/{message_id}@. Assigned by the server.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: Message,
@@ -82,7 +82,7 @@ data HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatch = HealthcarePro
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatch' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatch ::
-  -- |  Resource name of the Message, of the form @projects\/{project_id}\/datasets\/{dataset_id}\/hl7V2Stores\/{hl7_v2_store_id}\/messages\/{message_id}@. Assigned by the server. See 'name'.
+  -- |  Resource name of the Message, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/hl7V2Stores\/{hl7_v2_store_id}\/messages\/{message_id}@. Assigned by the server. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   Message ->

@@ -181,6 +181,61 @@ module Gogol.Gmail
     GmailUsersMessagesUntrash (..),
     newGmailUsersMessagesUntrash,
 
+    -- ** gmail.users.settings.cse.identities.create
+    GmailUsersSettingsCseIdentitiesCreateResource,
+    GmailUsersSettingsCseIdentitiesCreate (..),
+    newGmailUsersSettingsCseIdentitiesCreate,
+
+    -- ** gmail.users.settings.cse.identities.delete
+    GmailUsersSettingsCseIdentitiesDeleteResource,
+    GmailUsersSettingsCseIdentitiesDelete (..),
+    newGmailUsersSettingsCseIdentitiesDelete,
+
+    -- ** gmail.users.settings.cse.identities.get
+    GmailUsersSettingsCseIdentitiesGetResource,
+    GmailUsersSettingsCseIdentitiesGet (..),
+    newGmailUsersSettingsCseIdentitiesGet,
+
+    -- ** gmail.users.settings.cse.identities.list
+    GmailUsersSettingsCseIdentitiesListResource,
+    GmailUsersSettingsCseIdentitiesList (..),
+    newGmailUsersSettingsCseIdentitiesList,
+
+    -- ** gmail.users.settings.cse.identities.patch
+    GmailUsersSettingsCseIdentitiesPatchResource,
+    GmailUsersSettingsCseIdentitiesPatch (..),
+    newGmailUsersSettingsCseIdentitiesPatch,
+
+    -- ** gmail.users.settings.cse.keypairs.create
+    GmailUsersSettingsCseKeypairsCreateResource,
+    GmailUsersSettingsCseKeypairsCreate (..),
+    newGmailUsersSettingsCseKeypairsCreate,
+
+    -- ** gmail.users.settings.cse.keypairs.disable
+    GmailUsersSettingsCseKeypairsDisableResource,
+    GmailUsersSettingsCseKeypairsDisable (..),
+    newGmailUsersSettingsCseKeypairsDisable,
+
+    -- ** gmail.users.settings.cse.keypairs.enable
+    GmailUsersSettingsCseKeypairsEnableResource,
+    GmailUsersSettingsCseKeypairsEnable (..),
+    newGmailUsersSettingsCseKeypairsEnable,
+
+    -- ** gmail.users.settings.cse.keypairs.get
+    GmailUsersSettingsCseKeypairsGetResource,
+    GmailUsersSettingsCseKeypairsGet (..),
+    newGmailUsersSettingsCseKeypairsGet,
+
+    -- ** gmail.users.settings.cse.keypairs.list
+    GmailUsersSettingsCseKeypairsListResource,
+    GmailUsersSettingsCseKeypairsList (..),
+    newGmailUsersSettingsCseKeypairsList,
+
+    -- ** gmail.users.settings.cse.keypairs.obliterate
+    GmailUsersSettingsCseKeypairsObliterateResource,
+    GmailUsersSettingsCseKeypairsObliterate (..),
+    newGmailUsersSettingsCseKeypairsObliterate,
+
     -- ** gmail.users.settings.delegates.create
     GmailUsersSettingsDelegatesCreateResource,
     GmailUsersSettingsDelegatesCreate (..),
@@ -411,6 +466,21 @@ module Gogol.Gmail
     BatchModifyMessagesRequest (..),
     newBatchModifyMessagesRequest,
 
+    -- ** CseIdentity
+    CseIdentity (..),
+    newCseIdentity,
+
+    -- ** CseKeyPair
+    CseKeyPair (..),
+    newCseKeyPair,
+
+    -- ** CseKeyPair_EnablementState
+    CseKeyPair_EnablementState (..),
+
+    -- ** CsePrivateKeyMetadata
+    CsePrivateKeyMetadata (..),
+    newCsePrivateKeyMetadata,
+
     -- ** Delegate
     Delegate (..),
     newDelegate,
@@ -418,9 +488,17 @@ module Gogol.Gmail
     -- ** Delegate_VerificationStatus
     Delegate_VerificationStatus (..),
 
+    -- ** DisableCseKeyPairRequest
+    DisableCseKeyPairRequest (..),
+    newDisableCseKeyPairRequest,
+
     -- ** Draft
     Draft (..),
     newDraft,
+
+    -- ** EnableCseKeyPairRequest
+    EnableCseKeyPairRequest (..),
+    newEnableCseKeyPairRequest,
 
     -- ** Filter
     Filter (..),
@@ -471,6 +549,10 @@ module Gogol.Gmail
     -- ** ImapSettings_ExpungeBehavior
     ImapSettings_ExpungeBehavior (..),
 
+    -- ** KaclsKeyMetadata
+    KaclsKeyMetadata (..),
+    newKaclsKeyMetadata,
+
     -- ** Label
     Label (..),
     newLabel,
@@ -491,6 +573,14 @@ module Gogol.Gmail
     -- ** LanguageSettings
     LanguageSettings (..),
     newLanguageSettings,
+
+    -- ** ListCseIdentitiesResponse
+    ListCseIdentitiesResponse (..),
+    newListCseIdentitiesResponse,
+
+    -- ** ListCseKeyPairsResponse
+    ListCseKeyPairsResponse (..),
+    newListCseKeyPairsResponse,
 
     -- ** ListDelegatesResponse
     ListDelegatesResponse (..),
@@ -555,6 +645,10 @@ module Gogol.Gmail
     -- ** ModifyThreadRequest
     ModifyThreadRequest (..),
     newModifyThreadRequest,
+
+    -- ** ObliterateCseKeyPairRequest
+    ObliterateCseKeyPairRequest (..),
+    newObliterateCseKeyPairRequest,
 
     -- ** PopSettings
     PopSettings (..),
@@ -654,6 +748,17 @@ import Gogol.Gmail.Users.Messages.Modify
 import Gogol.Gmail.Users.Messages.Send
 import Gogol.Gmail.Users.Messages.Trash
 import Gogol.Gmail.Users.Messages.Untrash
+import Gogol.Gmail.Users.Settings.Cse.Identities.Create
+import Gogol.Gmail.Users.Settings.Cse.Identities.Delete
+import Gogol.Gmail.Users.Settings.Cse.Identities.Get
+import Gogol.Gmail.Users.Settings.Cse.Identities.List
+import Gogol.Gmail.Users.Settings.Cse.Identities.Patch
+import Gogol.Gmail.Users.Settings.Cse.Keypairs.Create
+import Gogol.Gmail.Users.Settings.Cse.Keypairs.Disable
+import Gogol.Gmail.Users.Settings.Cse.Keypairs.Enable
+import Gogol.Gmail.Users.Settings.Cse.Keypairs.Get
+import Gogol.Gmail.Users.Settings.Cse.Keypairs.List
+import Gogol.Gmail.Users.Settings.Cse.Keypairs.Obliterate
 import Gogol.Gmail.Users.Settings.Delegates.Create
 import Gogol.Gmail.Users.Settings.Delegates.Delete
 import Gogol.Gmail.Users.Settings.Delegates.Get

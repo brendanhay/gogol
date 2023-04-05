@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an alerting policy. You can either replace the entire policy with a new one or replace only certain fields in the current alerting policy by specifying the fields to be updated via updateMask. Returns the updated alerting policy.
+-- Updates an alerting policy. You can either replace the entire policy with a new one or replace only certain fields in the current alerting policy by specifying the fields to be updated via updateMask. Returns the updated alerting policy.Design your application to single-thread API calls that modify the state of alerting policies in a single project. This includes calls to CreateAlertPolicy, DeleteAlertPolicy and UpdateAlertPolicy.
 --
 -- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.alertPolicies.patch@.
 module Gogol.Monitoring.Projects.AlertPolicies.Patch
@@ -57,7 +57,7 @@ type MonitoringProjectsAlertPoliciesPatchResource =
     Core.:> Core.ReqBody '[Core.JSON] AlertPolicy
     Core.:> Core.Patch '[Core.JSON] AlertPolicy
 
--- | Updates an alerting policy. You can either replace the entire policy with a new one or replace only certain fields in the current alerting policy by specifying the fields to be updated via updateMask. Returns the updated alerting policy.
+-- | Updates an alerting policy. You can either replace the entire policy with a new one or replace only certain fields in the current alerting policy by specifying the fields to be updated via updateMask. Returns the updated alerting policy.Design your application to single-thread API calls that modify the state of alerting policies in a single project. This includes calls to CreateAlertPolicy, DeleteAlertPolicy and UpdateAlertPolicy.
 --
 -- /See:/ 'newMonitoringProjectsAlertPoliciesPatch' smart constructor.
 data MonitoringProjectsAlertPoliciesPatch = MonitoringProjectsAlertPoliciesPatch
@@ -67,7 +67,7 @@ data MonitoringProjectsAlertPoliciesPatch = MonitoringProjectsAlertPoliciesPatch
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required if the policy exists. The resource name for this policy. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/alertPolicies\/[ALERT/POLICY/ID] [ALERT/POLICY_ID] is assigned by Stackdriver Monitoring when the policy is created. When calling the alertPolicies.create method, do not include the name field in the alerting policy passed as part of the request.
+    -- | Required if the policy exists. The resource name for this policy. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/alertPolicies\/[ALERT/POLICY/ID] [ALERT/POLICY_ID] is assigned by Cloud Monitoring when the policy is created. When calling the alertPolicies.create method, do not include the name field in the alerting policy passed as part of the request.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: AlertPolicy,
@@ -83,7 +83,7 @@ data MonitoringProjectsAlertPoliciesPatch = MonitoringProjectsAlertPoliciesPatch
 
 -- | Creates a value of 'MonitoringProjectsAlertPoliciesPatch' with the minimum fields required to make a request.
 newMonitoringProjectsAlertPoliciesPatch ::
-  -- |  Required if the policy exists. The resource name for this policy. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/alertPolicies\/[ALERT/POLICY/ID] [ALERT/POLICY_ID] is assigned by Stackdriver Monitoring when the policy is created. When calling the alertPolicies.create method, do not include the name field in the alerting policy passed as part of the request. See 'name'.
+  -- |  Required if the policy exists. The resource name for this policy. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/alertPolicies\/[ALERT/POLICY/ID] [ALERT/POLICY_ID] is assigned by Cloud Monitoring when the policy is created. When calling the alertPolicies.create method, do not include the name field in the alerting policy passed as part of the request. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   AlertPolicy ->

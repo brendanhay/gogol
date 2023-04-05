@@ -53,7 +53,6 @@ type StorageBucketsListResource =
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "prefix" Core.Text
     Core.:> Core.QueryParam "projection" BucketsListProjection
-    Core.:> Core.QueryParam "provisionalUserProject" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "userProject" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -73,8 +72,6 @@ data StorageBucketsList = StorageBucketsList
     project :: Core.Text,
     -- | Set of properties to return. Defaults to noAcl.
     projection :: (Core.Maybe BucketsListProjection),
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
     uploadType :: (Core.Maybe Core.Text),
     -- | The project to be billed for this request.
@@ -94,7 +91,6 @@ newStorageBucketsList project =
       prefix = Core.Nothing,
       project = project,
       projection = Core.Nothing,
-      provisionalUserProject = Core.Nothing,
       uploadType = Core.Nothing,
       userProject = Core.Nothing
     }
@@ -116,7 +112,6 @@ instance Core.GoogleRequest StorageBucketsList where
       pageToken
       prefix
       projection
-      provisionalUserProject
       uploadType
       userProject
       (Core.Just Core.AltJSON)

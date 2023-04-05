@@ -29,6 +29,16 @@ module Gogol.Chat.Types
   ( -- * Configuration
     chatService,
 
+    -- * OAuth Scopes
+    Chat'Bot,
+    Chat'Memberships,
+    Chat'Memberships'Readonly,
+    Chat'Messages,
+    Chat'Messages'Create,
+    Chat'Messages'Readonly,
+    Chat'Spaces,
+    Chat'Spaces'Readonly,
+
     -- * Types
 
     -- ** Xgafv
@@ -89,6 +99,14 @@ module Gogol.Chat.Types
     -- ** CardHeader_ImageStyle
     CardHeader_ImageStyle (..),
 
+    -- ** CardWithId
+    CardWithId (..),
+    newCardWithId,
+
+    -- ** ChatAppLogEntry
+    ChatAppLogEntry (..),
+    newChatAppLogEntry,
+
     -- ** Color
     Color (..),
     newColor,
@@ -141,10 +159,6 @@ module Gogol.Chat.Types
     DriveDataRef (..),
     newDriveDataRef,
 
-    -- ** DynamiteIntegrationLogEntry
-    DynamiteIntegrationLogEntry (..),
-    newDynamiteIntegrationLogEntry,
-
     -- ** Empty
     Empty (..),
     newEmpty,
@@ -156,6 +170,9 @@ module Gogol.Chat.Types
     -- ** GoogleAppsCardV1Action
     GoogleAppsCardV1Action (..),
     newGoogleAppsCardV1Action,
+
+    -- ** GoogleAppsCardV1Action_Interaction
+    GoogleAppsCardV1Action_Interaction (..),
 
     -- ** GoogleAppsCardV1Action_LoadIndicator
     GoogleAppsCardV1Action_LoadIndicator (..),
@@ -226,9 +243,6 @@ module Gogol.Chat.Types
 
     -- ** GoogleAppsCardV1GridItem_Layout
     GoogleAppsCardV1GridItem_Layout (..),
-
-    -- ** GoogleAppsCardV1GridItem_TextAlignment
-    GoogleAppsCardV1GridItem_TextAlignment (..),
 
     -- ** GoogleAppsCardV1Icon
     GoogleAppsCardV1Icon (..),
@@ -311,9 +325,6 @@ module Gogol.Chat.Types
     GoogleAppsCardV1Widget (..),
     newGoogleAppsCardV1Widget,
 
-    -- ** GoogleAppsCardV1Widget_HorizontalAlignment
-    GoogleAppsCardV1Widget_HorizontalAlignment (..),
-
     -- ** Image
     Image (..),
     newImage,
@@ -356,6 +367,9 @@ module Gogol.Chat.Types
     Membership (..),
     newMembership,
 
+    -- ** Membership_Role
+    Membership_Role (..),
+
     -- ** Membership_State
     Membership_State (..),
 
@@ -390,8 +404,15 @@ module Gogol.Chat.Types
     Space (..),
     newSpace,
 
+    -- ** Space_SpaceThreadingState
+    Space_SpaceThreadingState (..),
+
     -- ** Space_Type
     Space_Type (..),
+
+    -- ** SpaceDetails
+    SpaceDetails (..),
+    newSpaceDetails,
 
     -- ** Status
     Status (..),
@@ -442,6 +463,9 @@ module Gogol.Chat.Types
     -- ** WidgetMarkup
     WidgetMarkup (..),
     newWidgetMarkup,
+
+    -- ** SpacesMessagesCreateMessageReplyOption
+    SpacesMessagesCreateMessageReplyOption (..),
   )
 where
 
@@ -455,3 +479,27 @@ chatService =
   Core.defaultService
     (Core.ServiceId "chat:v1")
     "chat.googleapis.com"
+
+-- | Private Service: https:\/\/www.googleapis.com\/auth\/chat.bot
+type Chat'Bot = "https://www.googleapis.com/auth/chat.bot"
+
+-- | View, add, and remove members from conversations in Google Chat
+type Chat'Memberships = "https://www.googleapis.com/auth/chat.memberships"
+
+-- | View members in Google Chat conversations.
+type Chat'Memberships'Readonly = "https://www.googleapis.com/auth/chat.memberships.readonly"
+
+-- | View, compose, send, update, and delete messages, and add, view, and delete reactions to messages.
+type Chat'Messages = "https://www.googleapis.com/auth/chat.messages"
+
+-- | Compose and send messages in Google Chat
+type Chat'Messages'Create = "https://www.googleapis.com/auth/chat.messages.create"
+
+-- | View messages and reactions in Google Chat
+type Chat'Messages'Readonly = "https://www.googleapis.com/auth/chat.messages.readonly"
+
+-- | Create conversations and spaces and view or update metadata (including history settings) in Google Chat
+type Chat'Spaces = "https://www.googleapis.com/auth/chat.spaces"
+
+-- | View chat and spaces in Google Chat
+type Chat'Spaces'Readonly = "https://www.googleapis.com/auth/chat.spaces.readonly"

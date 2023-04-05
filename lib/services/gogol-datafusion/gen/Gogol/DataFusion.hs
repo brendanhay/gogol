@@ -53,6 +53,21 @@ module Gogol.DataFusion
     DataFusionProjectsLocationsInstancesDelete (..),
     newDataFusionProjectsLocationsInstancesDelete,
 
+    -- ** datafusion.projects.locations.instances.dnsPeerings.create
+    DataFusionProjectsLocationsInstancesDnsPeeringsCreateResource,
+    DataFusionProjectsLocationsInstancesDnsPeeringsCreate (..),
+    newDataFusionProjectsLocationsInstancesDnsPeeringsCreate,
+
+    -- ** datafusion.projects.locations.instances.dnsPeerings.delete
+    DataFusionProjectsLocationsInstancesDnsPeeringsDeleteResource,
+    DataFusionProjectsLocationsInstancesDnsPeeringsDelete (..),
+    newDataFusionProjectsLocationsInstancesDnsPeeringsDelete,
+
+    -- ** datafusion.projects.locations.instances.dnsPeerings.list
+    DataFusionProjectsLocationsInstancesDnsPeeringsListResource,
+    DataFusionProjectsLocationsInstancesDnsPeeringsList (..),
+    newDataFusionProjectsLocationsInstancesDnsPeeringsList,
+
     -- ** datafusion.projects.locations.instances.get
     DataFusionProjectsLocationsInstancesGetResource,
     DataFusionProjectsLocationsInstancesGet (..),
@@ -156,9 +171,17 @@ module Gogol.DataFusion
     CryptoKeyConfig (..),
     newCryptoKeyConfig,
 
+    -- ** DnsPeering
+    DnsPeering (..),
+    newDnsPeering,
+
     -- ** Empty
     Empty (..),
     newEmpty,
+
+    -- ** EventPublishConfig
+    EventPublishConfig (..),
+    newEventPublishConfig,
 
     -- ** Expr
     Expr (..),
@@ -188,6 +211,10 @@ module Gogol.DataFusion
     -- ** ListAvailableVersionsResponse
     ListAvailableVersionsResponse (..),
     newListAvailableVersionsResponse,
+
+    -- ** ListDnsPeeringsResponse
+    ListDnsPeeringsResponse (..),
+    newListDnsPeeringsResponse,
 
     -- ** ListInstancesResponse
     ListInstancesResponse (..),
@@ -277,6 +304,9 @@ where
 import Gogol.DataFusion.Projects.Locations.Get
 import Gogol.DataFusion.Projects.Locations.Instances.Create
 import Gogol.DataFusion.Projects.Locations.Instances.Delete
+import Gogol.DataFusion.Projects.Locations.Instances.DnsPeerings.Create
+import Gogol.DataFusion.Projects.Locations.Instances.DnsPeerings.Delete
+import Gogol.DataFusion.Projects.Locations.Instances.DnsPeerings.List
 import Gogol.DataFusion.Projects.Locations.Instances.Get
 import Gogol.DataFusion.Projects.Locations.Instances.GetIamPolicy
 import Gogol.DataFusion.Projects.Locations.Instances.List

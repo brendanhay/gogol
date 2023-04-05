@@ -70,7 +70,7 @@ data TagManagerAccountsContainersWorkspacesTriggersList = TagManagerAccountsCont
     callback :: (Core.Maybe Core.Text),
     -- | Continuation token for fetching the next page of results.
     pageToken :: (Core.Maybe Core.Text),
-    -- | GTM Workspaces\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace_id}
+    -- | GTM Workspace\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace_id}
     parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -81,7 +81,7 @@ data TagManagerAccountsContainersWorkspacesTriggersList = TagManagerAccountsCont
 
 -- | Creates a value of 'TagManagerAccountsContainersWorkspacesTriggersList' with the minimum fields required to make a request.
 newTagManagerAccountsContainersWorkspacesTriggersList ::
-  -- |  GTM Workspaces\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace_id} See 'parent'.
+  -- |  GTM Workspace\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace_id} See 'parent'.
   Core.Text ->
   TagManagerAccountsContainersWorkspacesTriggersList
 newTagManagerAccountsContainersWorkspacesTriggersList parent =

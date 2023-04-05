@@ -70,7 +70,7 @@ data CloudbuildProjectsLocationsBitbucketServerConfigsReposList = CloudbuildProj
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The maximum number of configs to return. The service may return fewer than this value. If unspecified, at most 50 configs will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+    -- | The maximum number of configs to return. The service may return fewer than this value. The maximum value is 1000; values above 1000 will be coerced to 1000.
     pageSize :: (Core.Maybe Core.Int32),
     -- | A page token, received from a previous @ListBitbucketServerRepositoriesRequest@ call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to @ListBitbucketServerConfigsRequest@ must match the call that provided the page token.
     pageToken :: (Core.Maybe Core.Text),

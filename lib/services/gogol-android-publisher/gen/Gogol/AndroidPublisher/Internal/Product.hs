@@ -26,7 +26,19 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AndroidPublisher.Internal.Product
-  ( -- * Apk
+  ( -- * AcquisitionTargetingRule
+    AcquisitionTargetingRule (..),
+    newAcquisitionTargetingRule,
+
+    -- * ActivateBasePlanRequest
+    ActivateBasePlanRequest (..),
+    newActivateBasePlanRequest,
+
+    -- * ActivateSubscriptionOfferRequest
+    ActivateSubscriptionOfferRequest (..),
+    newActivateSubscriptionOfferRequest,
+
+    -- * Apk
     Apk (..),
     newApk,
 
@@ -54,6 +66,22 @@ module Gogol.AndroidPublisher.Internal.Product
     AppEdit (..),
     newAppEdit,
 
+    -- * ArchiveSubscriptionRequest
+    ArchiveSubscriptionRequest (..),
+    newArchiveSubscriptionRequest,
+
+    -- * AutoRenewingBasePlanType
+    AutoRenewingBasePlanType (..),
+    newAutoRenewingBasePlanType,
+
+    -- * AutoRenewingPlan
+    AutoRenewingPlan (..),
+    newAutoRenewingPlan,
+
+    -- * BasePlan
+    BasePlan (..),
+    newBasePlan,
+
     -- * Bundle
     Bundle (..),
     newBundle,
@@ -61,6 +89,14 @@ module Gogol.AndroidPublisher.Internal.Product
     -- * BundlesListResponse
     BundlesListResponse (..),
     newBundlesListResponse,
+
+    -- * CancelSurveyResult
+    CancelSurveyResult (..),
+    newCancelSurveyResult,
+
+    -- * CanceledStateContext
+    CanceledStateContext (..),
+    newCanceledStateContext,
 
     -- * Comment
     Comment (..),
@@ -90,6 +126,14 @@ module Gogol.AndroidPublisher.Internal.Product
     CountryTargeting (..),
     newCountryTargeting,
 
+    -- * DeactivateBasePlanRequest
+    DeactivateBasePlanRequest (..),
+    newDeactivateBasePlanRequest,
+
+    -- * DeactivateSubscriptionOfferRequest
+    DeactivateSubscriptionOfferRequest (..),
+    newDeactivateSubscriptionOfferRequest,
+
     -- * DeobfuscationFile
     DeobfuscationFile (..),
     newDeobfuscationFile,
@@ -102,13 +146,45 @@ module Gogol.AndroidPublisher.Internal.Product
     DeveloperComment (..),
     newDeveloperComment,
 
+    -- * DeveloperInitiatedCancellation
+    DeveloperInitiatedCancellation (..),
+    newDeveloperInitiatedCancellation,
+
+    -- * DeviceGroup
+    DeviceGroup (..),
+    newDeviceGroup,
+
+    -- * DeviceId
+    DeviceId (..),
+    newDeviceId,
+
     -- * DeviceMetadata
     DeviceMetadata (..),
     newDeviceMetadata,
 
+    -- * DeviceRam
+    DeviceRam (..),
+    newDeviceRam,
+
+    -- * DeviceSelector
+    DeviceSelector (..),
+    newDeviceSelector,
+
     -- * DeviceSpec
     DeviceSpec (..),
     newDeviceSpec,
+
+    -- * DeviceTier
+    DeviceTier (..),
+    newDeviceTier,
+
+    -- * DeviceTierConfig
+    DeviceTierConfig (..),
+    newDeviceTierConfig,
+
+    -- * DeviceTierSet
+    DeviceTierSet (..),
+    newDeviceTierSet,
 
     -- * ExpansionFile
     ExpansionFile (..),
@@ -117,6 +193,10 @@ module Gogol.AndroidPublisher.Internal.Product
     -- * ExpansionFilesUploadResponse
     ExpansionFilesUploadResponse (..),
     newExpansionFilesUploadResponse,
+
+    -- * ExternalAccountIdentifiers
+    ExternalAccountIdentifiers (..),
+    newExternalAccountIdentifiers,
 
     -- * ExternallyHostedApk
     ExternallyHostedApk (..),
@@ -194,6 +274,18 @@ module Gogol.AndroidPublisher.Internal.Product
     IntroductoryPriceInfo (..),
     newIntroductoryPriceInfo,
 
+    -- * ListDeviceTierConfigsResponse
+    ListDeviceTierConfigsResponse (..),
+    newListDeviceTierConfigsResponse,
+
+    -- * ListSubscriptionOffersResponse
+    ListSubscriptionOffersResponse (..),
+    newListSubscriptionOffersResponse,
+
+    -- * ListSubscriptionsResponse
+    ListSubscriptionsResponse (..),
+    newListSubscriptionsResponse,
+
     -- * ListUsersResponse
     ListUsersResponse (..),
     newListUsersResponse,
@@ -218,13 +310,57 @@ module Gogol.AndroidPublisher.Internal.Product
     ManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode (..),
     newManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode,
 
+    -- * MigrateBasePlanPricesRequest
+    MigrateBasePlanPricesRequest (..),
+    newMigrateBasePlanPricesRequest,
+
+    -- * MigrateBasePlanPricesResponse
+    MigrateBasePlanPricesResponse (..),
+    newMigrateBasePlanPricesResponse,
+
     -- * Money
     Money (..),
     newMoney,
 
+    -- * OfferDetails
+    OfferDetails (..),
+    newOfferDetails,
+
+    -- * OfferTag
+    OfferTag (..),
+    newOfferTag,
+
+    -- * OtherRegionsBasePlanConfig
+    OtherRegionsBasePlanConfig (..),
+    newOtherRegionsBasePlanConfig,
+
+    -- * OtherRegionsSubscriptionOfferConfig
+    OtherRegionsSubscriptionOfferConfig (..),
+    newOtherRegionsSubscriptionOfferConfig,
+
+    -- * OtherRegionsSubscriptionOfferPhaseConfig
+    OtherRegionsSubscriptionOfferPhaseConfig (..),
+    newOtherRegionsSubscriptionOfferPhaseConfig,
+
+    -- * OtherRegionsSubscriptionOfferPhasePrices
+    OtherRegionsSubscriptionOfferPhasePrices (..),
+    newOtherRegionsSubscriptionOfferPhasePrices,
+
     -- * PageInfo
     PageInfo (..),
     newPageInfo,
+
+    -- * PausedStateContext
+    PausedStateContext (..),
+    newPausedStateContext,
+
+    -- * PrepaidBasePlanType
+    PrepaidBasePlanType (..),
+    newPrepaidBasePlanType,
+
+    -- * PrepaidPlan
+    PrepaidPlan (..),
+    newPrepaidPlan,
 
     -- * Price
     Price (..),
@@ -238,9 +374,33 @@ module Gogol.AndroidPublisher.Internal.Product
     ProductPurchasesAcknowledgeRequest (..),
     newProductPurchasesAcknowledgeRequest,
 
+    -- * RegionalBasePlanConfig
+    RegionalBasePlanConfig (..),
+    newRegionalBasePlanConfig,
+
+    -- * RegionalPriceMigrationConfig
+    RegionalPriceMigrationConfig (..),
+    newRegionalPriceMigrationConfig,
+
+    -- * RegionalSubscriptionOfferConfig
+    RegionalSubscriptionOfferConfig (..),
+    newRegionalSubscriptionOfferConfig,
+
+    -- * RegionalSubscriptionOfferPhaseConfig
+    RegionalSubscriptionOfferPhaseConfig (..),
+    newRegionalSubscriptionOfferPhaseConfig,
+
     -- * RegionalTaxRateInfo
     RegionalTaxRateInfo (..),
     newRegionalTaxRateInfo,
+
+    -- * RegionsVersion
+    RegionsVersion (..),
+    newRegionsVersion,
+
+    -- * ReplacementCancellation
+    ReplacementCancellation (..),
+    newReplacementCancellation,
 
     -- * Review
     Review (..),
@@ -262,6 +422,14 @@ module Gogol.AndroidPublisher.Internal.Product
     ReviewsReplyResponse (..),
     newReviewsReplyResponse,
 
+    -- * SubscribeWithGoogleInfo
+    SubscribeWithGoogleInfo (..),
+    newSubscribeWithGoogleInfo,
+
+    -- * Subscription
+    Subscription (..),
+    newSubscription,
+
     -- * SubscriptionCancelSurveyResult
     SubscriptionCancelSurveyResult (..),
     newSubscriptionCancelSurveyResult,
@@ -270,6 +438,26 @@ module Gogol.AndroidPublisher.Internal.Product
     SubscriptionDeferralInfo (..),
     newSubscriptionDeferralInfo,
 
+    -- * SubscriptionItemPriceChangeDetails
+    SubscriptionItemPriceChangeDetails (..),
+    newSubscriptionItemPriceChangeDetails,
+
+    -- * SubscriptionListing
+    SubscriptionListing (..),
+    newSubscriptionListing,
+
+    -- * SubscriptionOffer
+    SubscriptionOffer (..),
+    newSubscriptionOffer,
+
+    -- * SubscriptionOfferPhase
+    SubscriptionOfferPhase (..),
+    newSubscriptionOfferPhase,
+
+    -- * SubscriptionOfferTargeting
+    SubscriptionOfferTargeting (..),
+    newSubscriptionOfferTargeting,
+
     -- * SubscriptionPriceChange
     SubscriptionPriceChange (..),
     newSubscriptionPriceChange,
@@ -277,6 +465,14 @@ module Gogol.AndroidPublisher.Internal.Product
     -- * SubscriptionPurchase
     SubscriptionPurchase (..),
     newSubscriptionPurchase,
+
+    -- * SubscriptionPurchaseLineItem
+    SubscriptionPurchaseLineItem (..),
+    newSubscriptionPurchaseLineItem,
+
+    -- * SubscriptionPurchaseV2
+    SubscriptionPurchaseV2 (..),
+    newSubscriptionPurchaseV2,
 
     -- * SubscriptionPurchasesAcknowledgeRequest
     SubscriptionPurchasesAcknowledgeRequest (..),
@@ -301,6 +497,22 @@ module Gogol.AndroidPublisher.Internal.Product
     -- * SystemApksListResponse
     SystemApksListResponse (..),
     newSystemApksListResponse,
+
+    -- * SystemFeature
+    SystemFeature (..),
+    newSystemFeature,
+
+    -- * SystemInitiatedCancellation
+    SystemInitiatedCancellation (..),
+    newSystemInitiatedCancellation,
+
+    -- * TargetingRuleScope
+    TargetingRuleScope (..),
+    newTargetingRuleScope,
+
+    -- * TestPurchase
+    TestPurchase (..),
+    newTestPurchase,
 
     -- * Testers
     Testers (..),
@@ -334,6 +546,10 @@ module Gogol.AndroidPublisher.Internal.Product
     TracksListResponse (..),
     newTracksListResponse,
 
+    -- * UpgradeTargetingRule
+    UpgradeTargetingRule (..),
+    newUpgradeTargetingRule,
+
     -- * User
     User (..),
     newUser,
@@ -341,6 +557,14 @@ module Gogol.AndroidPublisher.Internal.Product
     -- * UserComment
     UserComment (..),
     newUserComment,
+
+    -- * UserCountrySet
+    UserCountrySet (..),
+    newUserCountrySet,
+
+    -- * UserInitiatedCancellation
+    UserInitiatedCancellation (..),
+    newUserInitiatedCancellation,
 
     -- * UsesPermission
     UsesPermission (..),
@@ -362,6 +586,77 @@ where
 
 import Gogol.AndroidPublisher.Internal.Sum
 import qualified Gogol.Prelude as Core
+
+-- | Represents a targeting rule of the form: User never had {scope} before.
+--
+-- /See:/ 'newAcquisitionTargetingRule' smart constructor.
+newtype AcquisitionTargetingRule = AcquisitionTargetingRule
+  { -- | Required. The scope of subscriptions this rule considers. Only allows \"this subscription\" and \"any subscription in app\".
+    scope :: (Core.Maybe TargetingRuleScope)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AcquisitionTargetingRule' with the minimum fields required to make a request.
+newAcquisitionTargetingRule ::
+  AcquisitionTargetingRule
+newAcquisitionTargetingRule = AcquisitionTargetingRule {scope = Core.Nothing}
+
+instance Core.FromJSON AcquisitionTargetingRule where
+  parseJSON =
+    Core.withObject
+      "AcquisitionTargetingRule"
+      ( \o ->
+          AcquisitionTargetingRule
+            Core.<$> (o Core..:? "scope")
+      )
+
+instance Core.ToJSON AcquisitionTargetingRule where
+  toJSON AcquisitionTargetingRule {..} =
+    Core.object
+      (Core.catMaybes [("scope" Core..=) Core.<$> scope])
+
+-- | Request message for ActivateBasePlan.
+--
+-- /See:/ 'newActivateBasePlanRequest' smart constructor.
+data ActivateBasePlanRequest = ActivateBasePlanRequest
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ActivateBasePlanRequest' with the minimum fields required to make a request.
+newActivateBasePlanRequest ::
+  ActivateBasePlanRequest
+newActivateBasePlanRequest = ActivateBasePlanRequest
+
+instance Core.FromJSON ActivateBasePlanRequest where
+  parseJSON =
+    Core.withObject
+      "ActivateBasePlanRequest"
+      (\o -> Core.pure ActivateBasePlanRequest)
+
+instance Core.ToJSON ActivateBasePlanRequest where
+  toJSON = Core.const Core.emptyObject
+
+-- | Request message for ActivateSubscriptionOffer.
+--
+-- /See:/ 'newActivateSubscriptionOfferRequest' smart constructor.
+data ActivateSubscriptionOfferRequest = ActivateSubscriptionOfferRequest
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ActivateSubscriptionOfferRequest' with the minimum fields required to make a request.
+newActivateSubscriptionOfferRequest ::
+  ActivateSubscriptionOfferRequest
+newActivateSubscriptionOfferRequest = ActivateSubscriptionOfferRequest
+
+instance
+  Core.FromJSON
+    ActivateSubscriptionOfferRequest
+  where
+  parseJSON =
+    Core.withObject
+      "ActivateSubscriptionOfferRequest"
+      (\o -> Core.pure ActivateSubscriptionOfferRequest)
+
+instance Core.ToJSON ActivateSubscriptionOfferRequest where
+  toJSON = Core.const Core.emptyObject
 
 -- | Information about an APK. The resource for ApksService.
 --
@@ -622,6 +917,198 @@ instance Core.ToJSON AppEdit where
           ]
       )
 
+-- | Request message for ArchiveSubscription.
+--
+-- /See:/ 'newArchiveSubscriptionRequest' smart constructor.
+data ArchiveSubscriptionRequest = ArchiveSubscriptionRequest
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ArchiveSubscriptionRequest' with the minimum fields required to make a request.
+newArchiveSubscriptionRequest ::
+  ArchiveSubscriptionRequest
+newArchiveSubscriptionRequest = ArchiveSubscriptionRequest
+
+instance Core.FromJSON ArchiveSubscriptionRequest where
+  parseJSON =
+    Core.withObject
+      "ArchiveSubscriptionRequest"
+      (\o -> Core.pure ArchiveSubscriptionRequest)
+
+instance Core.ToJSON ArchiveSubscriptionRequest where
+  toJSON = Core.const Core.emptyObject
+
+-- | Represents a base plan that automatically renews at the end of its subscription period.
+--
+-- /See:/ 'newAutoRenewingBasePlanType' smart constructor.
+data AutoRenewingBasePlanType = AutoRenewingBasePlanType
+  { -- | Required. Subscription period, specified in ISO 8601 format. For a list of acceptable billing periods, refer to the help center.
+    billingPeriodDuration :: (Core.Maybe Core.Text),
+    -- | Grace period of the subscription, specified in ISO 8601 format. Acceptable values are P0D (zero days), P3D (3 days), P7D (7 days), P14D (14 days), and P30D (30 days). If not specified, a default value will be used based on the recurring period duration.
+    gracePeriodDuration :: (Core.Maybe Core.Text),
+    -- | Whether the renewing base plan is backward compatible. The backward compatible base plan is returned by the Google Play Billing Library deprecated method querySkuDetailsAsync(). Only one renewing base plan can be marked as legacy compatible for a given subscription.
+    legacyCompatible :: (Core.Maybe Core.Bool),
+    -- | Subscription offer id which is legacy compatible. The backward compatible subscription offer is returned by the Google Play Billing Library deprecated method querySkuDetailsAsync(). Only one subscription offer can be marked as legacy compatible for a given renewing base plan. To have no Subscription offer as legacy compatible set this field as empty string.
+    legacyCompatibleSubscriptionOfferId :: (Core.Maybe Core.Text),
+    -- | The proration mode for the base plan determines what happens when a user switches to this plan from another base plan. If unspecified, defaults to CHARGE/ON/NEXT/BILLING/DATE.
+    prorationMode :: (Core.Maybe AutoRenewingBasePlanType_ProrationMode),
+    -- | Whether users should be able to resubscribe to this base plan in Google Play surfaces. Defaults to RESUBSCRIBE/STATE/ACTIVE if not specified.
+    resubscribeState :: (Core.Maybe AutoRenewingBasePlanType_ResubscribeState)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AutoRenewingBasePlanType' with the minimum fields required to make a request.
+newAutoRenewingBasePlanType ::
+  AutoRenewingBasePlanType
+newAutoRenewingBasePlanType =
+  AutoRenewingBasePlanType
+    { billingPeriodDuration = Core.Nothing,
+      gracePeriodDuration = Core.Nothing,
+      legacyCompatible = Core.Nothing,
+      legacyCompatibleSubscriptionOfferId = Core.Nothing,
+      prorationMode = Core.Nothing,
+      resubscribeState = Core.Nothing
+    }
+
+instance Core.FromJSON AutoRenewingBasePlanType where
+  parseJSON =
+    Core.withObject
+      "AutoRenewingBasePlanType"
+      ( \o ->
+          AutoRenewingBasePlanType
+            Core.<$> (o Core..:? "billingPeriodDuration")
+            Core.<*> (o Core..:? "gracePeriodDuration")
+            Core.<*> (o Core..:? "legacyCompatible")
+            Core.<*> (o Core..:? "legacyCompatibleSubscriptionOfferId")
+            Core.<*> (o Core..:? "prorationMode")
+            Core.<*> (o Core..:? "resubscribeState")
+      )
+
+instance Core.ToJSON AutoRenewingBasePlanType where
+  toJSON AutoRenewingBasePlanType {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("billingPeriodDuration" Core..=)
+              Core.<$> billingPeriodDuration,
+            ("gracePeriodDuration" Core..=)
+              Core.<$> gracePeriodDuration,
+            ("legacyCompatible" Core..=)
+              Core.<$> legacyCompatible,
+            ("legacyCompatibleSubscriptionOfferId" Core..=)
+              Core.<$> legacyCompatibleSubscriptionOfferId,
+            ("prorationMode" Core..=) Core.<$> prorationMode,
+            ("resubscribeState" Core..=)
+              Core.<$> resubscribeState
+          ]
+      )
+
+-- | Information related to an auto renewing plan.
+--
+-- /See:/ 'newAutoRenewingPlan' smart constructor.
+data AutoRenewingPlan = AutoRenewingPlan
+  { -- | If the subscription is currently set to auto-renew, e.g. the user has not canceled the subscription
+    autoRenewEnabled :: (Core.Maybe Core.Bool),
+    -- | The information of the last price change for the item since subscription signup.
+    priceChangeDetails :: (Core.Maybe SubscriptionItemPriceChangeDetails)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AutoRenewingPlan' with the minimum fields required to make a request.
+newAutoRenewingPlan ::
+  AutoRenewingPlan
+newAutoRenewingPlan =
+  AutoRenewingPlan
+    { autoRenewEnabled = Core.Nothing,
+      priceChangeDetails = Core.Nothing
+    }
+
+instance Core.FromJSON AutoRenewingPlan where
+  parseJSON =
+    Core.withObject
+      "AutoRenewingPlan"
+      ( \o ->
+          AutoRenewingPlan
+            Core.<$> (o Core..:? "autoRenewEnabled")
+            Core.<*> (o Core..:? "priceChangeDetails")
+      )
+
+instance Core.ToJSON AutoRenewingPlan where
+  toJSON AutoRenewingPlan {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("autoRenewEnabled" Core..=)
+              Core.<$> autoRenewEnabled,
+            ("priceChangeDetails" Core..=)
+              Core.<$> priceChangeDetails
+          ]
+      )
+
+-- | A single base plan for a subscription.
+--
+-- /See:/ 'newBasePlan' smart constructor.
+data BasePlan = BasePlan
+  { -- | Set when the base plan automatically renews at a regular interval.
+    autoRenewingBasePlanType :: (Core.Maybe AutoRenewingBasePlanType),
+    -- | Required. Immutable. The unique identifier of this base plan. Must be unique within the subscription, and conform with RFC-1034. That is, this ID can only contain lower-case letters (a-z), numbers (0-9), and hyphens (-), and be at most 63 characters.
+    basePlanId :: (Core.Maybe Core.Text),
+    -- | List of up to 20 custom tags specified for this base plan, and returned to the app through the billing library. Subscription offers for this base plan will also receive these offer tags in the billing library.
+    offerTags :: (Core.Maybe [OfferTag]),
+    -- | Pricing information for any new locations Play may launch in the future. If omitted, the BasePlan will not be automatically available any new locations Play may launch in the future.
+    otherRegionsConfig :: (Core.Maybe OtherRegionsBasePlanConfig),
+    -- | Set when the base plan does not automatically renew at the end of the billing period.
+    prepaidBasePlanType :: (Core.Maybe PrepaidBasePlanType),
+    -- | Region-specific information for this base plan.
+    regionalConfigs :: (Core.Maybe [RegionalBasePlanConfig]),
+    -- | Output only. The state of the base plan, i.e. whether it\'s active. Draft and inactive base plans can be activated or deleted. Active base plans can be made inactive. Inactive base plans can be canceled. This field cannot be changed by updating the resource. Use the dedicated endpoints instead.
+    state :: (Core.Maybe BasePlan_State)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BasePlan' with the minimum fields required to make a request.
+newBasePlan ::
+  BasePlan
+newBasePlan =
+  BasePlan
+    { autoRenewingBasePlanType = Core.Nothing,
+      basePlanId = Core.Nothing,
+      offerTags = Core.Nothing,
+      otherRegionsConfig = Core.Nothing,
+      prepaidBasePlanType = Core.Nothing,
+      regionalConfigs = Core.Nothing,
+      state = Core.Nothing
+    }
+
+instance Core.FromJSON BasePlan where
+  parseJSON =
+    Core.withObject
+      "BasePlan"
+      ( \o ->
+          BasePlan
+            Core.<$> (o Core..:? "autoRenewingBasePlanType")
+            Core.<*> (o Core..:? "basePlanId")
+            Core.<*> (o Core..:? "offerTags")
+            Core.<*> (o Core..:? "otherRegionsConfig")
+            Core.<*> (o Core..:? "prepaidBasePlanType")
+            Core.<*> (o Core..:? "regionalConfigs")
+            Core.<*> (o Core..:? "state")
+      )
+
+instance Core.ToJSON BasePlan where
+  toJSON BasePlan {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("autoRenewingBasePlanType" Core..=)
+              Core.<$> autoRenewingBasePlanType,
+            ("basePlanId" Core..=) Core.<$> basePlanId,
+            ("offerTags" Core..=) Core.<$> offerTags,
+            ("otherRegionsConfig" Core..=)
+              Core.<$> otherRegionsConfig,
+            ("prepaidBasePlanType" Core..=)
+              Core.<$> prepaidBasePlanType,
+            ("regionalConfigs" Core..=) Core.<$> regionalConfigs,
+            ("state" Core..=) Core.<$> state
+          ]
+      )
+
 -- | Information about an app bundle. The resource for BundlesService.
 --
 -- /See:/ 'newBundle' smart constructor.
@@ -698,6 +1185,96 @@ instance Core.ToJSON BundlesListResponse where
       ( Core.catMaybes
           [ ("bundles" Core..=) Core.<$> bundles,
             ("kind" Core..=) Core.<$> kind
+          ]
+      )
+
+-- | Result of the cancel survey when the subscription was canceled by the user.
+--
+-- /See:/ 'newCancelSurveyResult' smart constructor.
+data CancelSurveyResult = CancelSurveyResult
+  { -- | The reason the user selected in the cancel survey.
+    reason :: (Core.Maybe CancelSurveyResult_Reason),
+    -- | Only set for CANCEL/SURVEY/REASON_OTHERS. This is the user\'s freeform response to the survey.
+    reasonUserInput :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CancelSurveyResult' with the minimum fields required to make a request.
+newCancelSurveyResult ::
+  CancelSurveyResult
+newCancelSurveyResult =
+  CancelSurveyResult {reason = Core.Nothing, reasonUserInput = Core.Nothing}
+
+instance Core.FromJSON CancelSurveyResult where
+  parseJSON =
+    Core.withObject
+      "CancelSurveyResult"
+      ( \o ->
+          CancelSurveyResult
+            Core.<$> (o Core..:? "reason")
+            Core.<*> (o Core..:? "reasonUserInput")
+      )
+
+instance Core.ToJSON CancelSurveyResult where
+  toJSON CancelSurveyResult {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("reason" Core..=) Core.<$> reason,
+            ("reasonUserInput" Core..=)
+              Core.<$> reasonUserInput
+          ]
+      )
+
+-- | Information specific to a subscription in canceled state.
+--
+-- /See:/ 'newCanceledStateContext' smart constructor.
+data CanceledStateContext = CanceledStateContext
+  { -- | Subscription was canceled by the developer.
+    developerInitiatedCancellation :: (Core.Maybe DeveloperInitiatedCancellation),
+    -- | Subscription was replaced by a new subscription.
+    replacementCancellation :: (Core.Maybe ReplacementCancellation),
+    -- | Subscription was canceled by the system, for example because of a billing problem.
+    systemInitiatedCancellation :: (Core.Maybe SystemInitiatedCancellation),
+    -- | Subscription was canceled by user.
+    userInitiatedCancellation :: (Core.Maybe UserInitiatedCancellation)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CanceledStateContext' with the minimum fields required to make a request.
+newCanceledStateContext ::
+  CanceledStateContext
+newCanceledStateContext =
+  CanceledStateContext
+    { developerInitiatedCancellation = Core.Nothing,
+      replacementCancellation = Core.Nothing,
+      systemInitiatedCancellation = Core.Nothing,
+      userInitiatedCancellation = Core.Nothing
+    }
+
+instance Core.FromJSON CanceledStateContext where
+  parseJSON =
+    Core.withObject
+      "CanceledStateContext"
+      ( \o ->
+          CanceledStateContext
+            Core.<$> (o Core..:? "developerInitiatedCancellation")
+            Core.<*> (o Core..:? "replacementCancellation")
+            Core.<*> (o Core..:? "systemInitiatedCancellation")
+            Core.<*> (o Core..:? "userInitiatedCancellation")
+      )
+
+instance Core.ToJSON CanceledStateContext where
+  toJSON CanceledStateContext {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("developerInitiatedCancellation" Core..=)
+              Core.<$> developerInitiatedCancellation,
+            ("replacementCancellation" Core..=)
+              Core.<$> replacementCancellation,
+            ("systemInitiatedCancellation" Core..=)
+              Core.<$> systemInitiatedCancellation,
+            ("userInitiatedCancellation" Core..=)
+              Core.<$> userInitiatedCancellation
           ]
       )
 
@@ -962,6 +1539,52 @@ instance Core.ToJSON CountryTargeting where
           ]
       )
 
+-- | Request message for DeactivateBasePlan.
+--
+-- /See:/ 'newDeactivateBasePlanRequest' smart constructor.
+data DeactivateBasePlanRequest = DeactivateBasePlanRequest
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DeactivateBasePlanRequest' with the minimum fields required to make a request.
+newDeactivateBasePlanRequest ::
+  DeactivateBasePlanRequest
+newDeactivateBasePlanRequest = DeactivateBasePlanRequest
+
+instance Core.FromJSON DeactivateBasePlanRequest where
+  parseJSON =
+    Core.withObject
+      "DeactivateBasePlanRequest"
+      (\o -> Core.pure DeactivateBasePlanRequest)
+
+instance Core.ToJSON DeactivateBasePlanRequest where
+  toJSON = Core.const Core.emptyObject
+
+-- | Request message for DeactivateSubscriptionOffer.
+--
+-- /See:/ 'newDeactivateSubscriptionOfferRequest' smart constructor.
+data DeactivateSubscriptionOfferRequest = DeactivateSubscriptionOfferRequest
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DeactivateSubscriptionOfferRequest' with the minimum fields required to make a request.
+newDeactivateSubscriptionOfferRequest ::
+  DeactivateSubscriptionOfferRequest
+newDeactivateSubscriptionOfferRequest = DeactivateSubscriptionOfferRequest
+
+instance
+  Core.FromJSON
+    DeactivateSubscriptionOfferRequest
+  where
+  parseJSON =
+    Core.withObject
+      "DeactivateSubscriptionOfferRequest"
+      (\o -> Core.pure DeactivateSubscriptionOfferRequest)
+
+instance
+  Core.ToJSON
+    DeactivateSubscriptionOfferRequest
+  where
+  toJSON = Core.const Core.emptyObject
+
 -- | Represents a deobfuscation file.
 --
 -- /See:/ 'newDeobfuscationFile' smart constructor.
@@ -1063,6 +1686,98 @@ instance Core.ToJSON DeveloperComment where
           ]
       )
 
+-- | Information specific to cancellations initiated by developers.
+--
+-- /See:/ 'newDeveloperInitiatedCancellation' smart constructor.
+data DeveloperInitiatedCancellation = DeveloperInitiatedCancellation
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DeveloperInitiatedCancellation' with the minimum fields required to make a request.
+newDeveloperInitiatedCancellation ::
+  DeveloperInitiatedCancellation
+newDeveloperInitiatedCancellation = DeveloperInitiatedCancellation
+
+instance Core.FromJSON DeveloperInitiatedCancellation where
+  parseJSON =
+    Core.withObject
+      "DeveloperInitiatedCancellation"
+      (\o -> Core.pure DeveloperInitiatedCancellation)
+
+instance Core.ToJSON DeveloperInitiatedCancellation where
+  toJSON = Core.const Core.emptyObject
+
+-- | A group of devices. A group is defined by a set of device selectors. A device belongs to the group if it matches any selector (logical OR).
+--
+-- /See:/ 'newDeviceGroup' smart constructor.
+data DeviceGroup = DeviceGroup
+  { -- | Device selectors for this group. A device matching any of the selectors is included in this group.
+    deviceSelectors :: (Core.Maybe [DeviceSelector]),
+    -- | The name of the group.
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DeviceGroup' with the minimum fields required to make a request.
+newDeviceGroup ::
+  DeviceGroup
+newDeviceGroup =
+  DeviceGroup {deviceSelectors = Core.Nothing, name = Core.Nothing}
+
+instance Core.FromJSON DeviceGroup where
+  parseJSON =
+    Core.withObject
+      "DeviceGroup"
+      ( \o ->
+          DeviceGroup
+            Core.<$> (o Core..:? "deviceSelectors")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON DeviceGroup where
+  toJSON DeviceGroup {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("deviceSelectors" Core..=)
+              Core.<$> deviceSelectors,
+            ("name" Core..=) Core.<$> name
+          ]
+      )
+
+-- | Identifier of a device.
+--
+-- /See:/ 'newDeviceId' smart constructor.
+data DeviceId = DeviceId
+  { -- | Value of Build.BRAND.
+    buildBrand :: (Core.Maybe Core.Text),
+    -- | Value of Build.DEVICE.
+    buildDevice :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DeviceId' with the minimum fields required to make a request.
+newDeviceId ::
+  DeviceId
+newDeviceId = DeviceId {buildBrand = Core.Nothing, buildDevice = Core.Nothing}
+
+instance Core.FromJSON DeviceId where
+  parseJSON =
+    Core.withObject
+      "DeviceId"
+      ( \o ->
+          DeviceId
+            Core.<$> (o Core..:? "buildBrand")
+            Core.<*> (o Core..:? "buildDevice")
+      )
+
+instance Core.ToJSON DeviceId where
+  toJSON DeviceId {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("buildBrand" Core..=) Core.<$> buildBrand,
+            ("buildDevice" Core..=) Core.<$> buildDevice
+          ]
+      )
+
 -- | Characteristics of the user\'s device.
 --
 -- /See:/ 'newDeviceMetadata' smart constructor.
@@ -1148,6 +1863,105 @@ instance Core.ToJSON DeviceMetadata where
           ]
       )
 
+-- | Conditions about a device\'s RAM capabilities.
+--
+-- /See:/ 'newDeviceRam' smart constructor.
+data DeviceRam = DeviceRam
+  { -- | Maximum RAM in bytes (bound excluded).
+    maxBytes :: (Core.Maybe Core.Int64),
+    -- | Minimum RAM in bytes (bound included).
+    minBytes :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DeviceRam' with the minimum fields required to make a request.
+newDeviceRam ::
+  DeviceRam
+newDeviceRam = DeviceRam {maxBytes = Core.Nothing, minBytes = Core.Nothing}
+
+instance Core.FromJSON DeviceRam where
+  parseJSON =
+    Core.withObject
+      "DeviceRam"
+      ( \o ->
+          DeviceRam
+            Core.<$> ( o Core..:? "maxBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "minBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+      )
+
+instance Core.ToJSON DeviceRam where
+  toJSON DeviceRam {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("maxBytes" Core..=) Core.. Core.AsText
+              Core.<$> maxBytes,
+            ("minBytes" Core..=) Core.. Core.AsText
+              Core.<$> minBytes
+          ]
+      )
+
+-- | Selector for a device group. A selector consists of a set of conditions on the device that should all match (logical AND) to determine a device group eligibility. For instance, if a selector specifies RAM conditions, device model inclusion and device model exclusion, a device is considered to match if: device matches RAM conditions AND device matches one of the included device models AND device doesn\'t match excluded device models
+--
+-- /See:/ 'newDeviceSelector' smart constructor.
+data DeviceSelector = DeviceSelector
+  { -- | Conditions on the device\'s RAM.
+    deviceRam :: (Core.Maybe DeviceRam),
+    -- | Device models excluded by this selector, even if they match all other conditions.
+    excludedDeviceIds :: (Core.Maybe [DeviceId]),
+    -- | A device that has any of these system features is excluded by this selector, even if it matches all other conditions.
+    forbiddenSystemFeatures :: (Core.Maybe [SystemFeature]),
+    -- | Device models included by this selector.
+    includedDeviceIds :: (Core.Maybe [DeviceId]),
+    -- | A device needs to have all these system features to be included by the selector.
+    requiredSystemFeatures :: (Core.Maybe [SystemFeature])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DeviceSelector' with the minimum fields required to make a request.
+newDeviceSelector ::
+  DeviceSelector
+newDeviceSelector =
+  DeviceSelector
+    { deviceRam = Core.Nothing,
+      excludedDeviceIds = Core.Nothing,
+      forbiddenSystemFeatures = Core.Nothing,
+      includedDeviceIds = Core.Nothing,
+      requiredSystemFeatures = Core.Nothing
+    }
+
+instance Core.FromJSON DeviceSelector where
+  parseJSON =
+    Core.withObject
+      "DeviceSelector"
+      ( \o ->
+          DeviceSelector
+            Core.<$> (o Core..:? "deviceRam")
+            Core.<*> (o Core..:? "excludedDeviceIds")
+            Core.<*> (o Core..:? "forbiddenSystemFeatures")
+            Core.<*> (o Core..:? "includedDeviceIds")
+            Core.<*> (o Core..:? "requiredSystemFeatures")
+      )
+
+instance Core.ToJSON DeviceSelector where
+  toJSON DeviceSelector {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("deviceRam" Core..=) Core.<$> deviceRam,
+            ("excludedDeviceIds" Core..=)
+              Core.<$> excludedDeviceIds,
+            ("forbiddenSystemFeatures" Core..=)
+              Core.<$> forbiddenSystemFeatures,
+            ("includedDeviceIds" Core..=)
+              Core.<$> includedDeviceIds,
+            ("requiredSystemFeatures" Core..=)
+              Core.<$> requiredSystemFeatures
+          ]
+      )
+
 -- | The device spec used to generate a system APK.
 --
 -- /See:/ 'newDeviceSpec' smart constructor.
@@ -1191,6 +2005,125 @@ instance Core.ToJSON DeviceSpec where
             ("supportedLocales" Core..=)
               Core.<$> supportedLocales
           ]
+      )
+
+-- | A single device tier. Devices matching any of the device groups in device/group/names are considered to match the tier.
+--
+-- /See:/ 'newDeviceTier' smart constructor.
+data DeviceTier = DeviceTier
+  { -- | Groups of devices included in this tier. These groups must be defined explicitly under device_groups in this configuration.
+    deviceGroupNames :: (Core.Maybe [Core.Text]),
+    -- | The priority level of the tier. Tiers are evaluated in descending order of level: the highest level tier has the highest priority. The highest tier matching a given device is selected for that device. You should use a contiguous range of levels for your tiers in a tier set; tier levels in a tier set must be unique. For instance, if your tier set has 4 tiers (including the global fallback), you should define tiers 1, 2 and 3 in this configuration. Note: tier 0 is implicitly defined as a global fallback and selected for devices that don\'t match any of the tiers explicitly defined here. You mustn\'t define level 0 explicitly in this configuration.
+    level :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DeviceTier' with the minimum fields required to make a request.
+newDeviceTier ::
+  DeviceTier
+newDeviceTier =
+  DeviceTier {deviceGroupNames = Core.Nothing, level = Core.Nothing}
+
+instance Core.FromJSON DeviceTier where
+  parseJSON =
+    Core.withObject
+      "DeviceTier"
+      ( \o ->
+          DeviceTier
+            Core.<$> (o Core..:? "deviceGroupNames")
+            Core.<*> (o Core..:? "level")
+      )
+
+instance Core.ToJSON DeviceTier where
+  toJSON DeviceTier {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("deviceGroupNames" Core..=)
+              Core.<$> deviceGroupNames,
+            ("level" Core..=) Core.<$> level
+          ]
+      )
+
+-- | Configuration describing device targeting criteria for the content of an app.
+--
+-- /See:/ 'newDeviceTierConfig' smart constructor.
+data DeviceTierConfig = DeviceTierConfig
+  { -- | Definition of device groups for the app.
+    deviceGroups :: (Core.Maybe [DeviceGroup]),
+    -- | Output only. The device tier config ID.
+    deviceTierConfigId :: (Core.Maybe Core.Int64),
+    -- | Definition of the set of device tiers for the app.
+    deviceTierSet :: (Core.Maybe DeviceTierSet),
+    -- | Definition of user country sets for the app.
+    userCountrySets :: (Core.Maybe [UserCountrySet])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DeviceTierConfig' with the minimum fields required to make a request.
+newDeviceTierConfig ::
+  DeviceTierConfig
+newDeviceTierConfig =
+  DeviceTierConfig
+    { deviceGroups = Core.Nothing,
+      deviceTierConfigId = Core.Nothing,
+      deviceTierSet = Core.Nothing,
+      userCountrySets = Core.Nothing
+    }
+
+instance Core.FromJSON DeviceTierConfig where
+  parseJSON =
+    Core.withObject
+      "DeviceTierConfig"
+      ( \o ->
+          DeviceTierConfig
+            Core.<$> (o Core..:? "deviceGroups")
+            Core.<*> ( o Core..:? "deviceTierConfigId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "deviceTierSet")
+            Core.<*> (o Core..:? "userCountrySets")
+      )
+
+instance Core.ToJSON DeviceTierConfig where
+  toJSON DeviceTierConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("deviceGroups" Core..=) Core.<$> deviceGroups,
+            ("deviceTierConfigId" Core..=) Core.. Core.AsText
+              Core.<$> deviceTierConfigId,
+            ("deviceTierSet" Core..=) Core.<$> deviceTierSet,
+            ("userCountrySets" Core..=)
+              Core.<$> userCountrySets
+          ]
+      )
+
+-- | A set of device tiers. A tier set determines what variation of app content gets served to a specific device, for device-targeted content. You should assign a priority level to each tier, which determines the ordering by which they are evaluated by Play. See the documentation of DeviceTier.level for more details.
+--
+-- /See:/ 'newDeviceTierSet' smart constructor.
+newtype DeviceTierSet = DeviceTierSet
+  { -- | Device tiers belonging to the set.
+    deviceTiers :: (Core.Maybe [DeviceTier])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DeviceTierSet' with the minimum fields required to make a request.
+newDeviceTierSet ::
+  DeviceTierSet
+newDeviceTierSet = DeviceTierSet {deviceTiers = Core.Nothing}
+
+instance Core.FromJSON DeviceTierSet where
+  parseJSON =
+    Core.withObject
+      "DeviceTierSet"
+      ( \o ->
+          DeviceTierSet Core.<$> (o Core..:? "deviceTiers")
+      )
+
+instance Core.ToJSON DeviceTierSet where
+  toJSON DeviceTierSet {..} =
+    Core.object
+      ( Core.catMaybes
+          [("deviceTiers" Core..=) Core.<$> deviceTiers]
       )
 
 -- | An expansion file. The resource for ExpansionFilesService.
@@ -1262,6 +2195,53 @@ instance Core.ToJSON ExpansionFilesUploadResponse where
     Core.object
       ( Core.catMaybes
           [("expansionFile" Core..=) Core.<$> expansionFile]
+      )
+
+-- | User account identifier in the third-party service.
+--
+-- /See:/ 'newExternalAccountIdentifiers' smart constructor.
+data ExternalAccountIdentifiers = ExternalAccountIdentifiers
+  { -- | User account identifier in the third-party service. Only present if account linking happened as part of the subscription purchase flow.
+    externalAccountId :: (Core.Maybe Core.Text),
+    -- | An obfuscated version of the id that is uniquely associated with the user\'s account in your app. Present for the following purchases: * If account linking happened as part of the subscription purchase flow. * It was specified using https:\/\/developer.android.com\/reference\/com\/android\/billingclient\/api\/BillingFlowParams.Builder#setobfuscatedaccountid when the purchase was made.
+    obfuscatedExternalAccountId :: (Core.Maybe Core.Text),
+    -- | An obfuscated version of the id that is uniquely associated with the user\'s profile in your app. Only present if specified using https:\/\/developer.android.com\/reference\/com\/android\/billingclient\/api\/BillingFlowParams.Builder#setobfuscatedprofileid when the purchase was made.
+    obfuscatedExternalProfileId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExternalAccountIdentifiers' with the minimum fields required to make a request.
+newExternalAccountIdentifiers ::
+  ExternalAccountIdentifiers
+newExternalAccountIdentifiers =
+  ExternalAccountIdentifiers
+    { externalAccountId = Core.Nothing,
+      obfuscatedExternalAccountId = Core.Nothing,
+      obfuscatedExternalProfileId = Core.Nothing
+    }
+
+instance Core.FromJSON ExternalAccountIdentifiers where
+  parseJSON =
+    Core.withObject
+      "ExternalAccountIdentifiers"
+      ( \o ->
+          ExternalAccountIdentifiers
+            Core.<$> (o Core..:? "externalAccountId")
+            Core.<*> (o Core..:? "obfuscatedExternalAccountId")
+            Core.<*> (o Core..:? "obfuscatedExternalProfileId")
+      )
+
+instance Core.ToJSON ExternalAccountIdentifiers where
+  toJSON ExternalAccountIdentifiers {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("externalAccountId" Core..=)
+              Core.<$> externalAccountId,
+            ("obfuscatedExternalAccountId" Core..=)
+              Core.<$> obfuscatedExternalAccountId,
+            ("obfuscatedExternalProfileId" Core..=)
+              Core.<$> obfuscatedExternalProfileId
+          ]
       )
 
 -- | Defines an APK available for this application that is hosted externally and not uploaded to Google Play. This function is only available to organizations using Managed Play whose application is configured to restrict distribution to the organizations.
@@ -1638,9 +2618,9 @@ instance Core.ToJSON GeneratedUniversalApk where
 data Grant = Grant
   { -- | The permissions granted to the user for this app.
     appLevelPermissions :: (Core.Maybe [Grant_AppLevelPermissionsItem]),
-    -- | Required. Resource name for this grant, following the pattern \"developers\/{developer}\/users\/{email}\/grants\/{package_name}\".
+    -- | Required. Resource name for this grant, following the pattern \"developers\/{developer}\/users\/{email}\/grants\/{package_name}\". If this grant is for a draft app, the app ID will be used in this resource name instead of the package name.
     name :: (Core.Maybe Core.Text),
-    -- | Immutable. The package name of the app.
+    -- | Immutable. The package name of the app. This will be empty for draft apps.
     packageName :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2165,6 +3145,125 @@ instance Core.ToJSON IntroductoryPriceInfo where
           ]
       )
 
+-- | Response listing existing device tier configs.
+--
+-- /See:/ 'newListDeviceTierConfigsResponse' smart constructor.
+data ListDeviceTierConfigsResponse = ListDeviceTierConfigsResponse
+  { -- | Device tier configs created by the developer.
+    deviceTierConfigs :: (Core.Maybe [DeviceTierConfig]),
+    -- | A token, which can be sent as @page_token@ to retrieve the next page. If this field is omitted, there are no subsequent pages.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListDeviceTierConfigsResponse' with the minimum fields required to make a request.
+newListDeviceTierConfigsResponse ::
+  ListDeviceTierConfigsResponse
+newListDeviceTierConfigsResponse =
+  ListDeviceTierConfigsResponse
+    { deviceTierConfigs = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON ListDeviceTierConfigsResponse where
+  parseJSON =
+    Core.withObject
+      "ListDeviceTierConfigsResponse"
+      ( \o ->
+          ListDeviceTierConfigsResponse
+            Core.<$> (o Core..:? "deviceTierConfigs")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON ListDeviceTierConfigsResponse where
+  toJSON ListDeviceTierConfigsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("deviceTierConfigs" Core..=)
+              Core.<$> deviceTierConfigs,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
+-- | Response message for ListSubscriptionOffers.
+--
+-- /See:/ 'newListSubscriptionOffersResponse' smart constructor.
+data ListSubscriptionOffersResponse = ListSubscriptionOffersResponse
+  { -- | A token, which can be sent as @page_token@ to retrieve the next page. If this field is omitted, there are no subsequent pages.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | The subscription offers from the specified subscription.
+    subscriptionOffers :: (Core.Maybe [SubscriptionOffer])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListSubscriptionOffersResponse' with the minimum fields required to make a request.
+newListSubscriptionOffersResponse ::
+  ListSubscriptionOffersResponse
+newListSubscriptionOffersResponse =
+  ListSubscriptionOffersResponse
+    { nextPageToken = Core.Nothing,
+      subscriptionOffers = Core.Nothing
+    }
+
+instance Core.FromJSON ListSubscriptionOffersResponse where
+  parseJSON =
+    Core.withObject
+      "ListSubscriptionOffersResponse"
+      ( \o ->
+          ListSubscriptionOffersResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "subscriptionOffers")
+      )
+
+instance Core.ToJSON ListSubscriptionOffersResponse where
+  toJSON ListSubscriptionOffersResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("subscriptionOffers" Core..=)
+              Core.<$> subscriptionOffers
+          ]
+      )
+
+-- | Response message for ListSubscriptions.
+--
+-- /See:/ 'newListSubscriptionsResponse' smart constructor.
+data ListSubscriptionsResponse = ListSubscriptionsResponse
+  { -- | A token, which can be sent as @page_token@ to retrieve the next page. If this field is omitted, there are no subsequent pages.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | The subscriptions from the specified app.
+    subscriptions :: (Core.Maybe [Subscription])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListSubscriptionsResponse' with the minimum fields required to make a request.
+newListSubscriptionsResponse ::
+  ListSubscriptionsResponse
+newListSubscriptionsResponse =
+  ListSubscriptionsResponse
+    { nextPageToken = Core.Nothing,
+      subscriptions = Core.Nothing
+    }
+
+instance Core.FromJSON ListSubscriptionsResponse where
+  parseJSON =
+    Core.withObject
+      "ListSubscriptionsResponse"
+      ( \o ->
+          ListSubscriptionsResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "subscriptions")
+      )
+
+instance Core.ToJSON ListSubscriptionsResponse where
+  toJSON ListSubscriptionsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("subscriptions" Core..=) Core.<$> subscriptions
+          ]
+      )
+
 -- | A response containing one or more users with access to an account.
 --
 -- /See:/ 'newListUsersResponse' smart constructor.
@@ -2418,6 +3517,66 @@ instance
     ManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode {..} =
       Core.toJSON additional
 
+-- | Request message for MigrateBasePlanPrices.
+--
+-- /See:/ 'newMigrateBasePlanPricesRequest' smart constructor.
+data MigrateBasePlanPricesRequest = MigrateBasePlanPricesRequest
+  { -- | Required. The regional prices to update.
+    regionalPriceMigrations :: (Core.Maybe [RegionalPriceMigrationConfig]),
+    -- | Required. The version of the available regions being used for the regional/price/migrations.
+    regionsVersion :: (Core.Maybe RegionsVersion)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MigrateBasePlanPricesRequest' with the minimum fields required to make a request.
+newMigrateBasePlanPricesRequest ::
+  MigrateBasePlanPricesRequest
+newMigrateBasePlanPricesRequest =
+  MigrateBasePlanPricesRequest
+    { regionalPriceMigrations = Core.Nothing,
+      regionsVersion = Core.Nothing
+    }
+
+instance Core.FromJSON MigrateBasePlanPricesRequest where
+  parseJSON =
+    Core.withObject
+      "MigrateBasePlanPricesRequest"
+      ( \o ->
+          MigrateBasePlanPricesRequest
+            Core.<$> (o Core..:? "regionalPriceMigrations")
+            Core.<*> (o Core..:? "regionsVersion")
+      )
+
+instance Core.ToJSON MigrateBasePlanPricesRequest where
+  toJSON MigrateBasePlanPricesRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("regionalPriceMigrations" Core..=)
+              Core.<$> regionalPriceMigrations,
+            ("regionsVersion" Core..=) Core.<$> regionsVersion
+          ]
+      )
+
+-- | Response message for MigrateBasePlanPrices.
+--
+-- /See:/ 'newMigrateBasePlanPricesResponse' smart constructor.
+data MigrateBasePlanPricesResponse = MigrateBasePlanPricesResponse
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MigrateBasePlanPricesResponse' with the minimum fields required to make a request.
+newMigrateBasePlanPricesResponse ::
+  MigrateBasePlanPricesResponse
+newMigrateBasePlanPricesResponse = MigrateBasePlanPricesResponse
+
+instance Core.FromJSON MigrateBasePlanPricesResponse where
+  parseJSON =
+    Core.withObject
+      "MigrateBasePlanPricesResponse"
+      (\o -> Core.pure MigrateBasePlanPricesResponse)
+
+instance Core.ToJSON MigrateBasePlanPricesResponse where
+  toJSON = Core.const Core.emptyObject
+
 -- | Represents an amount of money with its currency type.
 --
 -- /See:/ 'newMoney' smart constructor.
@@ -2464,6 +3623,259 @@ instance Core.ToJSON Money where
           ]
       )
 
+-- | Offer details information related to a purchase line item.
+--
+-- /See:/ 'newOfferDetails' smart constructor.
+data OfferDetails = OfferDetails
+  { -- | The base plan ID. Present for all base plan and offers.
+    basePlanId :: (Core.Maybe Core.Text),
+    -- | The offer ID. Only present for discounted offers.
+    offerId :: (Core.Maybe Core.Text),
+    -- | The latest offer tags associated with the offer. It includes tags inherited from the base plan.
+    offerTags :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'OfferDetails' with the minimum fields required to make a request.
+newOfferDetails ::
+  OfferDetails
+newOfferDetails =
+  OfferDetails
+    { basePlanId = Core.Nothing,
+      offerId = Core.Nothing,
+      offerTags = Core.Nothing
+    }
+
+instance Core.FromJSON OfferDetails where
+  parseJSON =
+    Core.withObject
+      "OfferDetails"
+      ( \o ->
+          OfferDetails
+            Core.<$> (o Core..:? "basePlanId")
+            Core.<*> (o Core..:? "offerId")
+            Core.<*> (o Core..:? "offerTags")
+      )
+
+instance Core.ToJSON OfferDetails where
+  toJSON OfferDetails {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("basePlanId" Core..=) Core.<$> basePlanId,
+            ("offerId" Core..=) Core.<$> offerId,
+            ("offerTags" Core..=) Core.<$> offerTags
+          ]
+      )
+
+-- | Represents a custom tag specified for base plans and subscription offers.
+--
+-- /See:/ 'newOfferTag' smart constructor.
+newtype OfferTag = OfferTag
+  { -- | Must conform with RFC-1034. That is, this string can only contain lower-case letters (a-z), numbers (0-9), and hyphens (-), and be at most 20 characters.
+    tag :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'OfferTag' with the minimum fields required to make a request.
+newOfferTag ::
+  OfferTag
+newOfferTag = OfferTag {tag = Core.Nothing}
+
+instance Core.FromJSON OfferTag where
+  parseJSON =
+    Core.withObject
+      "OfferTag"
+      (\o -> OfferTag Core.<$> (o Core..:? "tag"))
+
+instance Core.ToJSON OfferTag where
+  toJSON OfferTag {..} =
+    Core.object
+      (Core.catMaybes [("tag" Core..=) Core.<$> tag])
+
+-- | Pricing information for any new locations Play may launch in.
+--
+-- /See:/ 'newOtherRegionsBasePlanConfig' smart constructor.
+data OtherRegionsBasePlanConfig = OtherRegionsBasePlanConfig
+  { -- | Required. Price in EUR to use for any new locations Play may launch in.
+    eurPrice :: (Core.Maybe Money),
+    -- | Whether the base plan is available for new subscribers in any new locations Play may launch in. If not specified, this will default to false.
+    newSubscriberAvailability' :: (Core.Maybe Core.Bool),
+    -- | Required. Price in USD to use for any new locations Play may launch in.
+    usdPrice :: (Core.Maybe Money)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'OtherRegionsBasePlanConfig' with the minimum fields required to make a request.
+newOtherRegionsBasePlanConfig ::
+  OtherRegionsBasePlanConfig
+newOtherRegionsBasePlanConfig =
+  OtherRegionsBasePlanConfig
+    { eurPrice = Core.Nothing,
+      newSubscriberAvailability' = Core.Nothing,
+      usdPrice = Core.Nothing
+    }
+
+instance Core.FromJSON OtherRegionsBasePlanConfig where
+  parseJSON =
+    Core.withObject
+      "OtherRegionsBasePlanConfig"
+      ( \o ->
+          OtherRegionsBasePlanConfig
+            Core.<$> (o Core..:? "eurPrice")
+            Core.<*> (o Core..:? "newSubscriberAvailability")
+            Core.<*> (o Core..:? "usdPrice")
+      )
+
+instance Core.ToJSON OtherRegionsBasePlanConfig where
+  toJSON OtherRegionsBasePlanConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("eurPrice" Core..=) Core.<$> eurPrice,
+            ("newSubscriberAvailability" Core..=)
+              Core.<$> newSubscriberAvailability',
+            ("usdPrice" Core..=) Core.<$> usdPrice
+          ]
+      )
+
+-- | Configuration for any new locations Play may launch in specified on a subscription offer.
+--
+-- /See:/ 'newOtherRegionsSubscriptionOfferConfig' smart constructor.
+newtype OtherRegionsSubscriptionOfferConfig = OtherRegionsSubscriptionOfferConfig
+  { -- | Whether the subscription offer in any new locations Play may launch in the future. If not specified, this will default to false.
+    otherRegionsNewSubscriberAvailability :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'OtherRegionsSubscriptionOfferConfig' with the minimum fields required to make a request.
+newOtherRegionsSubscriptionOfferConfig ::
+  OtherRegionsSubscriptionOfferConfig
+newOtherRegionsSubscriptionOfferConfig =
+  OtherRegionsSubscriptionOfferConfig
+    { otherRegionsNewSubscriberAvailability = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    OtherRegionsSubscriptionOfferConfig
+  where
+  parseJSON =
+    Core.withObject
+      "OtherRegionsSubscriptionOfferConfig"
+      ( \o ->
+          OtherRegionsSubscriptionOfferConfig
+            Core.<$> (o Core..:? "otherRegionsNewSubscriberAvailability")
+      )
+
+instance
+  Core.ToJSON
+    OtherRegionsSubscriptionOfferConfig
+  where
+  toJSON OtherRegionsSubscriptionOfferConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("otherRegionsNewSubscriberAvailability" Core..=)
+              Core.<$> otherRegionsNewSubscriberAvailability
+          ]
+      )
+
+-- | Configuration for any new locations Play may launch in for a single offer phase.
+--
+-- /See:/ 'newOtherRegionsSubscriptionOfferPhaseConfig' smart constructor.
+data OtherRegionsSubscriptionOfferPhaseConfig = OtherRegionsSubscriptionOfferPhaseConfig
+  { -- | The absolute amount of money subtracted from the base plan price prorated over the phase duration that the user pays for this offer phase. For example, if the base plan price for this region is $12 for a period of 1 year, then a $1 absolute discount for a phase of a duration of 3 months would correspond to a price of $2. The resulting price may not be smaller than the minimum price allowed for any new locations Play may launch in.
+    absoluteDiscounts :: (Core.Maybe OtherRegionsSubscriptionOfferPhasePrices),
+    -- | The absolute price the user pays for this offer phase. The price must not be smaller than the minimum price allowed for any new locations Play may launch in.
+    otherRegionsPrices :: (Core.Maybe OtherRegionsSubscriptionOfferPhasePrices),
+    -- | The fraction of the base plan price prorated over the phase duration that the user pays for this offer phase. For example, if the base plan price for this region is $12 for a period of 1 year, then a 50% discount for a phase of a duration of 3 months would correspond to a price of $1.50. The discount must be specified as a fraction strictly larger than 0 and strictly smaller than 1. The resulting price will be rounded to the nearest billable unit (e.g. cents for USD). The relative discount is considered invalid if the discounted price ends up being smaller than the minimum price allowed in any new locations Play may launch in.
+    relativeDiscount :: (Core.Maybe Core.Double)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'OtherRegionsSubscriptionOfferPhaseConfig' with the minimum fields required to make a request.
+newOtherRegionsSubscriptionOfferPhaseConfig ::
+  OtherRegionsSubscriptionOfferPhaseConfig
+newOtherRegionsSubscriptionOfferPhaseConfig =
+  OtherRegionsSubscriptionOfferPhaseConfig
+    { absoluteDiscounts = Core.Nothing,
+      otherRegionsPrices = Core.Nothing,
+      relativeDiscount = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    OtherRegionsSubscriptionOfferPhaseConfig
+  where
+  parseJSON =
+    Core.withObject
+      "OtherRegionsSubscriptionOfferPhaseConfig"
+      ( \o ->
+          OtherRegionsSubscriptionOfferPhaseConfig
+            Core.<$> (o Core..:? "absoluteDiscounts")
+            Core.<*> (o Core..:? "otherRegionsPrices")
+            Core.<*> (o Core..:? "relativeDiscount")
+      )
+
+instance
+  Core.ToJSON
+    OtherRegionsSubscriptionOfferPhaseConfig
+  where
+  toJSON OtherRegionsSubscriptionOfferPhaseConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("absoluteDiscounts" Core..=)
+              Core.<$> absoluteDiscounts,
+            ("otherRegionsPrices" Core..=)
+              Core.<$> otherRegionsPrices,
+            ("relativeDiscount" Core..=)
+              Core.<$> relativeDiscount
+          ]
+      )
+
+-- | Pricing information for any new locations Play may launch in.
+--
+-- /See:/ 'newOtherRegionsSubscriptionOfferPhasePrices' smart constructor.
+data OtherRegionsSubscriptionOfferPhasePrices = OtherRegionsSubscriptionOfferPhasePrices
+  { -- | Required. Price in EUR to use for any new locations Play may launch in.
+    eurPrice :: (Core.Maybe Money),
+    -- | Required. Price in USD to use for any new locations Play may launch in.
+    usdPrice :: (Core.Maybe Money)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'OtherRegionsSubscriptionOfferPhasePrices' with the minimum fields required to make a request.
+newOtherRegionsSubscriptionOfferPhasePrices ::
+  OtherRegionsSubscriptionOfferPhasePrices
+newOtherRegionsSubscriptionOfferPhasePrices =
+  OtherRegionsSubscriptionOfferPhasePrices
+    { eurPrice = Core.Nothing,
+      usdPrice = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    OtherRegionsSubscriptionOfferPhasePrices
+  where
+  parseJSON =
+    Core.withObject
+      "OtherRegionsSubscriptionOfferPhasePrices"
+      ( \o ->
+          OtherRegionsSubscriptionOfferPhasePrices
+            Core.<$> (o Core..:? "eurPrice")
+            Core.<*> (o Core..:? "usdPrice")
+      )
+
+instance
+  Core.ToJSON
+    OtherRegionsSubscriptionOfferPhasePrices
+  where
+  toJSON OtherRegionsSubscriptionOfferPhasePrices {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("eurPrice" Core..=) Core.<$> eurPrice,
+            ("usdPrice" Core..=) Core.<$> usdPrice
+          ]
+      )
+
 -- | Information about the current page. List operations that supports paging return only one \"page\" of results. This protocol buffer message describes the page that has been returned.
 --
 -- /See:/ 'newPageInfo' smart constructor.
@@ -2505,6 +3917,108 @@ instance Core.ToJSON PageInfo where
           [ ("resultPerPage" Core..=) Core.<$> resultPerPage,
             ("startIndex" Core..=) Core.<$> startIndex,
             ("totalResults" Core..=) Core.<$> totalResults
+          ]
+      )
+
+-- | Information specific to a subscription in paused state.
+--
+-- /See:/ 'newPausedStateContext' smart constructor.
+newtype PausedStateContext = PausedStateContext
+  { -- | Time at which the subscription will be automatically resumed.
+    autoResumeTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PausedStateContext' with the minimum fields required to make a request.
+newPausedStateContext ::
+  PausedStateContext
+newPausedStateContext = PausedStateContext {autoResumeTime = Core.Nothing}
+
+instance Core.FromJSON PausedStateContext where
+  parseJSON =
+    Core.withObject
+      "PausedStateContext"
+      ( \o ->
+          PausedStateContext
+            Core.<$> (o Core..:? "autoResumeTime")
+      )
+
+instance Core.ToJSON PausedStateContext where
+  toJSON PausedStateContext {..} =
+    Core.object
+      ( Core.catMaybes
+          [("autoResumeTime" Core..=) Core.<$> autoResumeTime]
+      )
+
+-- | Represents a base plan that does not automatically renew at the end of the base plan, and must be manually renewed by the user.
+--
+-- /See:/ 'newPrepaidBasePlanType' smart constructor.
+data PrepaidBasePlanType = PrepaidBasePlanType
+  { -- | Required. Subscription period, specified in ISO 8601 format. For a list of acceptable billing periods, refer to the help center.
+    billingPeriodDuration :: (Core.Maybe Core.Text),
+    -- | Whether users should be able to extend this prepaid base plan in Google Play surfaces. Defaults to TIME/EXTENSION/ACTIVE if not specified.
+    timeExtension :: (Core.Maybe PrepaidBasePlanType_TimeExtension)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PrepaidBasePlanType' with the minimum fields required to make a request.
+newPrepaidBasePlanType ::
+  PrepaidBasePlanType
+newPrepaidBasePlanType =
+  PrepaidBasePlanType
+    { billingPeriodDuration = Core.Nothing,
+      timeExtension = Core.Nothing
+    }
+
+instance Core.FromJSON PrepaidBasePlanType where
+  parseJSON =
+    Core.withObject
+      "PrepaidBasePlanType"
+      ( \o ->
+          PrepaidBasePlanType
+            Core.<$> (o Core..:? "billingPeriodDuration")
+            Core.<*> (o Core..:? "timeExtension")
+      )
+
+instance Core.ToJSON PrepaidBasePlanType where
+  toJSON PrepaidBasePlanType {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("billingPeriodDuration" Core..=)
+              Core.<$> billingPeriodDuration,
+            ("timeExtension" Core..=) Core.<$> timeExtension
+          ]
+      )
+
+-- | Information related to a prepaid plan.
+--
+-- /See:/ 'newPrepaidPlan' smart constructor.
+newtype PrepaidPlan = PrepaidPlan
+  { -- | If present, this is the time after which top up purchases are allowed for the prepaid plan. Will not be present for expired prepaid plans.
+    allowExtendAfterTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PrepaidPlan' with the minimum fields required to make a request.
+newPrepaidPlan ::
+  PrepaidPlan
+newPrepaidPlan = PrepaidPlan {allowExtendAfterTime = Core.Nothing}
+
+instance Core.FromJSON PrepaidPlan where
+  parseJSON =
+    Core.withObject
+      "PrepaidPlan"
+      ( \o ->
+          PrepaidPlan
+            Core.<$> (o Core..:? "allowExtendAfterTime")
+      )
+
+instance Core.ToJSON PrepaidPlan where
+  toJSON PrepaidPlan {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("allowExtendAfterTime" Core..=)
+              Core.<$> allowExtendAfterTime
           ]
       )
 
@@ -2561,17 +4075,17 @@ data ProductPurchase = ProductPurchase
     obfuscatedExternalProfileId :: (Core.Maybe Core.Text),
     -- | The order id associated with the purchase of the inapp product.
     orderId :: (Core.Maybe Core.Text),
-    -- | The inapp product SKU.
+    -- | The inapp product SKU. May not be present.
     productId :: (Core.Maybe Core.Text),
     -- | The purchase state of the order. Possible values are: 0. Purchased 1. Canceled 2. Pending
     purchaseState :: (Core.Maybe Core.Int32),
     -- | The time the product was purchased, in milliseconds since the epoch (Jan 1, 1970).
     purchaseTimeMillis :: (Core.Maybe Core.Int64),
-    -- | The purchase token generated to identify this purchase.
+    -- | The purchase token generated to identify this purchase. May not be present.
     purchaseToken :: (Core.Maybe Core.Text),
     -- | The type of purchase of the inapp product. This field is only set if this purchase was not made using the standard in-app billing flow. Possible values are: 0. Test (i.e. purchased from a license testing account) 1. Promo (i.e. purchased using a promo code) 2. Rewarded (i.e. from watching a video ad instead of paying)
     purchaseType :: (Core.Maybe Core.Int32),
-    -- | The quantity associated with the purchase of the inapp product.
+    -- | The quantity associated with the purchase of the inapp product. If not present, the quantity is 1.
     quantity :: (Core.Maybe Core.Int32),
     -- | ISO 3166-1 alpha-2 billing region code of the user at the time the product was granted.
     regionCode :: (Core.Maybe Core.Text)
@@ -2689,12 +4203,199 @@ instance
           ]
       )
 
+-- | Configuration for a base plan specific to a region.
+--
+-- /See:/ 'newRegionalBasePlanConfig' smart constructor.
+data RegionalBasePlanConfig = RegionalBasePlanConfig
+  { -- | Whether the base plan in the specified region is available for new subscribers. Existing subscribers will not have their subscription canceled if this value is set to false. If not specified, this will default to false.
+    newSubscriberAvailability' :: (Core.Maybe Core.Bool),
+    -- | The price of the base plan in the specified region. Must be set if the base plan is available to new subscribers. Must be set in the currency that is linked to the specified region.
+    price :: (Core.Maybe Money),
+    -- | Required. Region code this configuration applies to, as defined by ISO 3166-2, e.g. \"US\".
+    regionCode :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RegionalBasePlanConfig' with the minimum fields required to make a request.
+newRegionalBasePlanConfig ::
+  RegionalBasePlanConfig
+newRegionalBasePlanConfig =
+  RegionalBasePlanConfig
+    { newSubscriberAvailability' = Core.Nothing,
+      price = Core.Nothing,
+      regionCode = Core.Nothing
+    }
+
+instance Core.FromJSON RegionalBasePlanConfig where
+  parseJSON =
+    Core.withObject
+      "RegionalBasePlanConfig"
+      ( \o ->
+          RegionalBasePlanConfig
+            Core.<$> (o Core..:? "newSubscriberAvailability")
+            Core.<*> (o Core..:? "price")
+            Core.<*> (o Core..:? "regionCode")
+      )
+
+instance Core.ToJSON RegionalBasePlanConfig where
+  toJSON RegionalBasePlanConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("newSubscriberAvailability" Core..=)
+              Core.<$> newSubscriberAvailability',
+            ("price" Core..=) Core.<$> price,
+            ("regionCode" Core..=) Core.<$> regionCode
+          ]
+      )
+
+-- | Configuration for a price migration.
+--
+-- /See:/ 'newRegionalPriceMigrationConfig' smart constructor.
+data RegionalPriceMigrationConfig = RegionalPriceMigrationConfig
+  { -- | Required. The cutoff time for historical prices that subscribers can remain paying. Subscribers who are on a price that was created before this cutoff time will be migrated to the currently-offered price. These subscribers will receive a notification that they will be paying a different price. Subscribers who do not agree to the new price will have their subscription ended at the next renewal.
+    oldestAllowedPriceVersionTime :: (Core.Maybe Core.DateTime),
+    -- | Required. Region code this configuration applies to, as defined by ISO 3166-2, e.g. \"US\".
+    regionCode :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RegionalPriceMigrationConfig' with the minimum fields required to make a request.
+newRegionalPriceMigrationConfig ::
+  RegionalPriceMigrationConfig
+newRegionalPriceMigrationConfig =
+  RegionalPriceMigrationConfig
+    { oldestAllowedPriceVersionTime = Core.Nothing,
+      regionCode = Core.Nothing
+    }
+
+instance Core.FromJSON RegionalPriceMigrationConfig where
+  parseJSON =
+    Core.withObject
+      "RegionalPriceMigrationConfig"
+      ( \o ->
+          RegionalPriceMigrationConfig
+            Core.<$> (o Core..:? "oldestAllowedPriceVersionTime")
+            Core.<*> (o Core..:? "regionCode")
+      )
+
+instance Core.ToJSON RegionalPriceMigrationConfig where
+  toJSON RegionalPriceMigrationConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("oldestAllowedPriceVersionTime" Core..=)
+              Core.<$> oldestAllowedPriceVersionTime,
+            ("regionCode" Core..=) Core.<$> regionCode
+          ]
+      )
+
+-- | Configuration for a subscription offer in a single region.
+--
+-- /See:/ 'newRegionalSubscriptionOfferConfig' smart constructor.
+data RegionalSubscriptionOfferConfig = RegionalSubscriptionOfferConfig
+  { -- | Whether the subscription offer in the specified region is available for new subscribers. Existing subscribers will not have their subscription cancelled if this value is set to false. If not specified, this will default to false.
+    newSubscriberAvailability' :: (Core.Maybe Core.Bool),
+    -- | Required. Immutable. Region code this configuration applies to, as defined by ISO 3166-2, e.g. \"US\".
+    regionCode :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RegionalSubscriptionOfferConfig' with the minimum fields required to make a request.
+newRegionalSubscriptionOfferConfig ::
+  RegionalSubscriptionOfferConfig
+newRegionalSubscriptionOfferConfig =
+  RegionalSubscriptionOfferConfig
+    { newSubscriberAvailability' = Core.Nothing,
+      regionCode = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    RegionalSubscriptionOfferConfig
+  where
+  parseJSON =
+    Core.withObject
+      "RegionalSubscriptionOfferConfig"
+      ( \o ->
+          RegionalSubscriptionOfferConfig
+            Core.<$> (o Core..:? "newSubscriberAvailability")
+            Core.<*> (o Core..:? "regionCode")
+      )
+
+instance Core.ToJSON RegionalSubscriptionOfferConfig where
+  toJSON RegionalSubscriptionOfferConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("newSubscriberAvailability" Core..=)
+              Core.<$> newSubscriberAvailability',
+            ("regionCode" Core..=) Core.<$> regionCode
+          ]
+      )
+
+-- | Configuration for a single phase of a subscription offer in a single region.
+--
+-- /See:/ 'newRegionalSubscriptionOfferPhaseConfig' smart constructor.
+data RegionalSubscriptionOfferPhaseConfig = RegionalSubscriptionOfferPhaseConfig
+  { -- | The absolute amount of money subtracted from the base plan price prorated over the phase duration that the user pays for this offer phase. For example, if the base plan price for this region is $12 for a period of 1 year, then a $1 absolute discount for a phase of a duration of 3 months would correspond to a price of $2. The resulting price may not be smaller than the minimum price allowed for this region.
+    absoluteDiscount :: (Core.Maybe Money),
+    -- | The absolute price the user pays for this offer phase. The price must not be smaller than the minimum price allowed for this region.
+    price :: (Core.Maybe Money),
+    -- | Required. Immutable. The region to which this config applies.
+    regionCode :: (Core.Maybe Core.Text),
+    -- | The fraction of the base plan price prorated over the phase duration that the user pays for this offer phase. For example, if the base plan price for this region is $12 for a period of 1 year, then a 50% discount for a phase of a duration of 3 months would correspond to a price of $1.50. The discount must be specified as a fraction strictly larger than 0 and strictly smaller than 1. The resulting price will be rounded to the nearest billable unit (e.g. cents for USD). The relative discount is considered invalid if the discounted price ends up being smaller than the minimum price allowed in this region.
+    relativeDiscount :: (Core.Maybe Core.Double)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RegionalSubscriptionOfferPhaseConfig' with the minimum fields required to make a request.
+newRegionalSubscriptionOfferPhaseConfig ::
+  RegionalSubscriptionOfferPhaseConfig
+newRegionalSubscriptionOfferPhaseConfig =
+  RegionalSubscriptionOfferPhaseConfig
+    { absoluteDiscount = Core.Nothing,
+      price = Core.Nothing,
+      regionCode = Core.Nothing,
+      relativeDiscount = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    RegionalSubscriptionOfferPhaseConfig
+  where
+  parseJSON =
+    Core.withObject
+      "RegionalSubscriptionOfferPhaseConfig"
+      ( \o ->
+          RegionalSubscriptionOfferPhaseConfig
+            Core.<$> (o Core..:? "absoluteDiscount")
+            Core.<*> (o Core..:? "price")
+            Core.<*> (o Core..:? "regionCode")
+            Core.<*> (o Core..:? "relativeDiscount")
+      )
+
+instance
+  Core.ToJSON
+    RegionalSubscriptionOfferPhaseConfig
+  where
+  toJSON RegionalSubscriptionOfferPhaseConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("absoluteDiscount" Core..=)
+              Core.<$> absoluteDiscount,
+            ("price" Core..=) Core.<$> price,
+            ("regionCode" Core..=) Core.<$> regionCode,
+            ("relativeDiscount" Core..=)
+              Core.<$> relativeDiscount
+          ]
+      )
+
 -- | Specified details about taxation in a given geographical region.
 --
 -- /See:/ 'newRegionalTaxRateInfo' smart constructor.
 data RegionalTaxRateInfo = RegionalTaxRateInfo
   { -- | You must tell us if your app contains streaming products to correctly charge US state and local sales tax. Field only supported in United States.
     eligibleForStreamingServiceTaxRate :: (Core.Maybe Core.Bool),
+    -- | To collect communications or amusement taxes in the United States, choose the appropriate tax category. <https://support.google.com/googleplay/android-developer/answer/10463498#streaming_tax Learn more>.
+    streamingTaxType :: (Core.Maybe RegionalTaxRateInfo_StreamingTaxType),
     -- | Tax tier to specify reduced tax rate. Developers who sell digital news, magazines, newspapers, books, or audiobooks in various regions may be eligible for reduced tax rates. <https://support.google.com/googleplay/android-developer/answer/10463498 Learn more>.
     taxTier :: (Core.Maybe RegionalTaxRateInfo_TaxTier)
   }
@@ -2706,6 +4407,7 @@ newRegionalTaxRateInfo ::
 newRegionalTaxRateInfo =
   RegionalTaxRateInfo
     { eligibleForStreamingServiceTaxRate = Core.Nothing,
+      streamingTaxType = Core.Nothing,
       taxTier = Core.Nothing
     }
 
@@ -2716,6 +4418,7 @@ instance Core.FromJSON RegionalTaxRateInfo where
       ( \o ->
           RegionalTaxRateInfo
             Core.<$> (o Core..:? "eligibleForStreamingServiceTaxRate")
+            Core.<*> (o Core..:? "streamingTaxType")
             Core.<*> (o Core..:? "taxTier")
       )
 
@@ -2725,9 +4428,60 @@ instance Core.ToJSON RegionalTaxRateInfo where
       ( Core.catMaybes
           [ ("eligibleForStreamingServiceTaxRate" Core..=)
               Core.<$> eligibleForStreamingServiceTaxRate,
+            ("streamingTaxType" Core..=)
+              Core.<$> streamingTaxType,
             ("taxTier" Core..=) Core.<$> taxTier
           ]
       )
+
+-- | The version of the available regions being used for the specified resource.
+--
+-- /See:/ 'newRegionsVersion' smart constructor.
+newtype RegionsVersion = RegionsVersion
+  { -- | Required. A string representing version of the available regions being used for the specified resource. The current version is 2022\/02.
+    version :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RegionsVersion' with the minimum fields required to make a request.
+newRegionsVersion ::
+  RegionsVersion
+newRegionsVersion = RegionsVersion {version = Core.Nothing}
+
+instance Core.FromJSON RegionsVersion where
+  parseJSON =
+    Core.withObject
+      "RegionsVersion"
+      ( \o ->
+          RegionsVersion Core.<$> (o Core..:? "version")
+      )
+
+instance Core.ToJSON RegionsVersion where
+  toJSON RegionsVersion {..} =
+    Core.object
+      ( Core.catMaybes
+          [("version" Core..=) Core.<$> version]
+      )
+
+-- | Information specific to cancellations caused by subscription replacement.
+--
+-- /See:/ 'newReplacementCancellation' smart constructor.
+data ReplacementCancellation = ReplacementCancellation
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ReplacementCancellation' with the minimum fields required to make a request.
+newReplacementCancellation ::
+  ReplacementCancellation
+newReplacementCancellation = ReplacementCancellation
+
+instance Core.FromJSON ReplacementCancellation where
+  parseJSON =
+    Core.withObject
+      "ReplacementCancellation"
+      (\o -> Core.pure ReplacementCancellation)
+
+instance Core.ToJSON ReplacementCancellation where
+  toJSON = Core.const Core.emptyObject
 
 -- | An Android app review.
 --
@@ -2911,6 +4665,120 @@ instance Core.ToJSON ReviewsReplyResponse where
     Core.object
       (Core.catMaybes [("result" Core..=) Core.<$> result])
 
+-- | Information associated with purchases made with \'Subscribe with Google\'.
+--
+-- /See:/ 'newSubscribeWithGoogleInfo' smart constructor.
+data SubscribeWithGoogleInfo = SubscribeWithGoogleInfo
+  { -- | The email address of the user when the subscription was purchased.
+    emailAddress :: (Core.Maybe Core.Text),
+    -- | The family name of the user when the subscription was purchased.
+    familyName :: (Core.Maybe Core.Text),
+    -- | The given name of the user when the subscription was purchased.
+    givenName :: (Core.Maybe Core.Text),
+    -- | The Google profile id of the user when the subscription was purchased.
+    profileId :: (Core.Maybe Core.Text),
+    -- | The profile name of the user when the subscription was purchased.
+    profileName :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SubscribeWithGoogleInfo' with the minimum fields required to make a request.
+newSubscribeWithGoogleInfo ::
+  SubscribeWithGoogleInfo
+newSubscribeWithGoogleInfo =
+  SubscribeWithGoogleInfo
+    { emailAddress = Core.Nothing,
+      familyName = Core.Nothing,
+      givenName = Core.Nothing,
+      profileId = Core.Nothing,
+      profileName = Core.Nothing
+    }
+
+instance Core.FromJSON SubscribeWithGoogleInfo where
+  parseJSON =
+    Core.withObject
+      "SubscribeWithGoogleInfo"
+      ( \o ->
+          SubscribeWithGoogleInfo
+            Core.<$> (o Core..:? "emailAddress")
+            Core.<*> (o Core..:? "familyName")
+            Core.<*> (o Core..:? "givenName")
+            Core.<*> (o Core..:? "profileId")
+            Core.<*> (o Core..:? "profileName")
+      )
+
+instance Core.ToJSON SubscribeWithGoogleInfo where
+  toJSON SubscribeWithGoogleInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("emailAddress" Core..=) Core.<$> emailAddress,
+            ("familyName" Core..=) Core.<$> familyName,
+            ("givenName" Core..=) Core.<$> givenName,
+            ("profileId" Core..=) Core.<$> profileId,
+            ("profileName" Core..=) Core.<$> profileName
+          ]
+      )
+
+-- | A single subscription for an app.
+--
+-- /See:/ 'newSubscription' smart constructor.
+data Subscription = Subscription
+  { -- | Output only. Whether this subscription is archived. Archived subscriptions are not available to any subscriber any longer, cannot be updated, and are not returned in list requests unless the show archived flag is passed in.
+    archived :: (Core.Maybe Core.Bool),
+    -- | The set of base plans for this subscription. Represents the prices and duration of the subscription if no other offers apply.
+    basePlans :: (Core.Maybe [BasePlan]),
+    -- | Required. List of localized listings for this subscription. Must contain at least an entry for the default language of the parent app.
+    listings :: (Core.Maybe [SubscriptionListing]),
+    -- | Immutable. Package name of the parent app.
+    packageName :: (Core.Maybe Core.Text),
+    -- | Immutable. Unique product ID of the product. Unique within the parent app. Product IDs must be composed of lower-case letters (a-z), numbers (0-9), underscores (_) and dots (.). It must start with a lower-case letter or number, and be between 1 and 40 (inclusive) characters in length.
+    productId :: (Core.Maybe Core.Text),
+    -- | Details about taxes and legal compliance.
+    taxAndComplianceSettings :: (Core.Maybe SubscriptionTaxAndComplianceSettings)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Subscription' with the minimum fields required to make a request.
+newSubscription ::
+  Subscription
+newSubscription =
+  Subscription
+    { archived = Core.Nothing,
+      basePlans = Core.Nothing,
+      listings = Core.Nothing,
+      packageName = Core.Nothing,
+      productId = Core.Nothing,
+      taxAndComplianceSettings = Core.Nothing
+    }
+
+instance Core.FromJSON Subscription where
+  parseJSON =
+    Core.withObject
+      "Subscription"
+      ( \o ->
+          Subscription
+            Core.<$> (o Core..:? "archived")
+            Core.<*> (o Core..:? "basePlans")
+            Core.<*> (o Core..:? "listings")
+            Core.<*> (o Core..:? "packageName")
+            Core.<*> (o Core..:? "productId")
+            Core.<*> (o Core..:? "taxAndComplianceSettings")
+      )
+
+instance Core.ToJSON Subscription where
+  toJSON Subscription {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("archived" Core..=) Core.<$> archived,
+            ("basePlans" Core..=) Core.<$> basePlans,
+            ("listings" Core..=) Core.<$> listings,
+            ("packageName" Core..=) Core.<$> packageName,
+            ("productId" Core..=) Core.<$> productId,
+            ("taxAndComplianceSettings" Core..=)
+              Core.<$> taxAndComplianceSettings
+          ]
+      )
+
 -- | Information provided by the user when they complete the subscription cancellation flow (cancellation reason survey).
 --
 -- /See:/ 'newSubscriptionCancelSurveyResult' smart constructor.
@@ -2996,6 +4864,283 @@ instance Core.ToJSON SubscriptionDeferralInfo where
             ("expectedExpiryTimeMillis" Core..=)
               Core.. Core.AsText
               Core.<$> expectedExpiryTimeMillis
+          ]
+      )
+
+-- | Price change related information of a subscription item.
+--
+-- /See:/ 'newSubscriptionItemPriceChangeDetails' smart constructor.
+data SubscriptionItemPriceChangeDetails = SubscriptionItemPriceChangeDetails
+  { -- | The renewal time at which the price change will become effective for the user. This is subject to change(to a future time) due to cases where the renewal time shifts like pause.
+    expectedNewPriceChargeTime :: (Core.Maybe Core.DateTime),
+    -- | New recurring price for the subscription item.
+    newPrice' :: (Core.Maybe Money),
+    -- | Price change mode specifies how the subscription item price is changing.
+    priceChangeMode :: (Core.Maybe SubscriptionItemPriceChangeDetails_PriceChangeMode),
+    -- | State the price change is currently in.
+    priceChangeState :: (Core.Maybe SubscriptionItemPriceChangeDetails_PriceChangeState)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SubscriptionItemPriceChangeDetails' with the minimum fields required to make a request.
+newSubscriptionItemPriceChangeDetails ::
+  SubscriptionItemPriceChangeDetails
+newSubscriptionItemPriceChangeDetails =
+  SubscriptionItemPriceChangeDetails
+    { expectedNewPriceChargeTime = Core.Nothing,
+      newPrice' = Core.Nothing,
+      priceChangeMode = Core.Nothing,
+      priceChangeState = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    SubscriptionItemPriceChangeDetails
+  where
+  parseJSON =
+    Core.withObject
+      "SubscriptionItemPriceChangeDetails"
+      ( \o ->
+          SubscriptionItemPriceChangeDetails
+            Core.<$> (o Core..:? "expectedNewPriceChargeTime")
+            Core.<*> (o Core..:? "newPrice")
+            Core.<*> (o Core..:? "priceChangeMode")
+            Core.<*> (o Core..:? "priceChangeState")
+      )
+
+instance
+  Core.ToJSON
+    SubscriptionItemPriceChangeDetails
+  where
+  toJSON SubscriptionItemPriceChangeDetails {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("expectedNewPriceChargeTime" Core..=)
+              Core.<$> expectedNewPriceChargeTime,
+            ("newPrice" Core..=) Core.<$> newPrice',
+            ("priceChangeMode" Core..=) Core.<$> priceChangeMode,
+            ("priceChangeState" Core..=)
+              Core.<$> priceChangeState
+          ]
+      )
+
+-- | The consumer-visible metadata of a subscription.
+--
+-- /See:/ 'newSubscriptionListing' smart constructor.
+data SubscriptionListing = SubscriptionListing
+  { -- | A list of benefits shown to the user on platforms such as the Play Store and in restoration flows in the language of this listing. Plain text. Ordered list of at most four benefits.
+    benefits :: (Core.Maybe [Core.Text]),
+    -- | The description of this subscription in the language of this listing. Maximum length - 80 characters. Plain text.
+    description :: (Core.Maybe Core.Text),
+    -- | Required. The language of this listing, as defined by BCP-47, e.g. \"en-US\".
+    languageCode :: (Core.Maybe Core.Text),
+    -- | Required. The title of this subscription in the language of this listing. Plain text.
+    title :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SubscriptionListing' with the minimum fields required to make a request.
+newSubscriptionListing ::
+  SubscriptionListing
+newSubscriptionListing =
+  SubscriptionListing
+    { benefits = Core.Nothing,
+      description = Core.Nothing,
+      languageCode = Core.Nothing,
+      title = Core.Nothing
+    }
+
+instance Core.FromJSON SubscriptionListing where
+  parseJSON =
+    Core.withObject
+      "SubscriptionListing"
+      ( \o ->
+          SubscriptionListing
+            Core.<$> (o Core..:? "benefits")
+            Core.<*> (o Core..:? "description")
+            Core.<*> (o Core..:? "languageCode")
+            Core.<*> (o Core..:? "title")
+      )
+
+instance Core.ToJSON SubscriptionListing where
+  toJSON SubscriptionListing {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("benefits" Core..=) Core.<$> benefits,
+            ("description" Core..=) Core.<$> description,
+            ("languageCode" Core..=) Core.<$> languageCode,
+            ("title" Core..=) Core.<$> title
+          ]
+      )
+
+-- | A single, temporary offer
+--
+-- /See:/ 'newSubscriptionOffer' smart constructor.
+data SubscriptionOffer = SubscriptionOffer
+  { -- | Required. Immutable. The ID of the base plan to which this offer is an extension.
+    basePlanId :: (Core.Maybe Core.Text),
+    -- | Required. Immutable. Unique ID of this subscription offer. Must be unique within the base plan.
+    offerId :: (Core.Maybe Core.Text),
+    -- | List of up to 20 custom tags specified for this offer, and returned to the app through the billing library.
+    offerTags :: (Core.Maybe [OfferTag]),
+    -- | The configuration for any new locations Play may launch in the future.
+    otherRegionsConfig :: (Core.Maybe OtherRegionsSubscriptionOfferConfig),
+    -- | Required. Immutable. The package name of the app the parent subscription belongs to.
+    packageName :: (Core.Maybe Core.Text),
+    -- | Required. The phases of this subscription offer. Must contain at least one entry, and may contain at most five. Users will always receive all these phases in the specified order. Phases may not be added, removed, or reordered after initial creation.
+    phases :: (Core.Maybe [SubscriptionOfferPhase]),
+    -- | Required. Immutable. The ID of the parent subscription this offer belongs to.
+    productId :: (Core.Maybe Core.Text),
+    -- | Required. The region-specific configuration of this offer. Must contain at least one entry.
+    regionalConfigs :: (Core.Maybe [RegionalSubscriptionOfferConfig]),
+    -- | Output only. The current state of this offer. Can be changed using Activate and Deactivate actions. NB: the base plan state supersedes this state, so an active offer may not be available if the base plan is not active.
+    state :: (Core.Maybe SubscriptionOffer_State),
+    -- | The requirements that users need to fulfil to be eligible for this offer. Represents the requirements that Play will evaluate to decide whether an offer should be returned. Developers may further filter these offers themselves.
+    targeting :: (Core.Maybe SubscriptionOfferTargeting)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SubscriptionOffer' with the minimum fields required to make a request.
+newSubscriptionOffer ::
+  SubscriptionOffer
+newSubscriptionOffer =
+  SubscriptionOffer
+    { basePlanId = Core.Nothing,
+      offerId = Core.Nothing,
+      offerTags = Core.Nothing,
+      otherRegionsConfig = Core.Nothing,
+      packageName = Core.Nothing,
+      phases = Core.Nothing,
+      productId = Core.Nothing,
+      regionalConfigs = Core.Nothing,
+      state = Core.Nothing,
+      targeting = Core.Nothing
+    }
+
+instance Core.FromJSON SubscriptionOffer where
+  parseJSON =
+    Core.withObject
+      "SubscriptionOffer"
+      ( \o ->
+          SubscriptionOffer
+            Core.<$> (o Core..:? "basePlanId")
+            Core.<*> (o Core..:? "offerId")
+            Core.<*> (o Core..:? "offerTags")
+            Core.<*> (o Core..:? "otherRegionsConfig")
+            Core.<*> (o Core..:? "packageName")
+            Core.<*> (o Core..:? "phases")
+            Core.<*> (o Core..:? "productId")
+            Core.<*> (o Core..:? "regionalConfigs")
+            Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "targeting")
+      )
+
+instance Core.ToJSON SubscriptionOffer where
+  toJSON SubscriptionOffer {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("basePlanId" Core..=) Core.<$> basePlanId,
+            ("offerId" Core..=) Core.<$> offerId,
+            ("offerTags" Core..=) Core.<$> offerTags,
+            ("otherRegionsConfig" Core..=)
+              Core.<$> otherRegionsConfig,
+            ("packageName" Core..=) Core.<$> packageName,
+            ("phases" Core..=) Core.<$> phases,
+            ("productId" Core..=) Core.<$> productId,
+            ("regionalConfigs" Core..=) Core.<$> regionalConfigs,
+            ("state" Core..=) Core.<$> state,
+            ("targeting" Core..=) Core.<$> targeting
+          ]
+      )
+
+-- | A single phase of a subscription offer.
+--
+-- /See:/ 'newSubscriptionOfferPhase' smart constructor.
+data SubscriptionOfferPhase = SubscriptionOfferPhase
+  { -- | Required. The duration of a single recurrence of this phase. Specified in ISO 8601 format.
+    duration :: (Core.Maybe Core.Text),
+    -- | Pricing information for any new locations Play may launch in.
+    otherRegionsConfig :: (Core.Maybe OtherRegionsSubscriptionOfferPhaseConfig),
+    -- | Required. The number of times this phase repeats. If this offer phase is not free, each recurrence charges the user the price of this offer phase.
+    recurrenceCount :: (Core.Maybe Core.Int32),
+    -- | Required. The region-specific configuration of this offer phase. This list must contain exactly one entry for each region for which the subscription offer has a regional config.
+    regionalConfigs :: (Core.Maybe [RegionalSubscriptionOfferPhaseConfig])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SubscriptionOfferPhase' with the minimum fields required to make a request.
+newSubscriptionOfferPhase ::
+  SubscriptionOfferPhase
+newSubscriptionOfferPhase =
+  SubscriptionOfferPhase
+    { duration = Core.Nothing,
+      otherRegionsConfig = Core.Nothing,
+      recurrenceCount = Core.Nothing,
+      regionalConfigs = Core.Nothing
+    }
+
+instance Core.FromJSON SubscriptionOfferPhase where
+  parseJSON =
+    Core.withObject
+      "SubscriptionOfferPhase"
+      ( \o ->
+          SubscriptionOfferPhase
+            Core.<$> (o Core..:? "duration")
+            Core.<*> (o Core..:? "otherRegionsConfig")
+            Core.<*> (o Core..:? "recurrenceCount")
+            Core.<*> (o Core..:? "regionalConfigs")
+      )
+
+instance Core.ToJSON SubscriptionOfferPhase where
+  toJSON SubscriptionOfferPhase {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("duration" Core..=) Core.<$> duration,
+            ("otherRegionsConfig" Core..=)
+              Core.<$> otherRegionsConfig,
+            ("recurrenceCount" Core..=) Core.<$> recurrenceCount,
+            ("regionalConfigs" Core..=)
+              Core.<$> regionalConfigs
+          ]
+      )
+
+-- | Defines the rule a user needs to satisfy to receive this offer.
+--
+-- /See:/ 'newSubscriptionOfferTargeting' smart constructor.
+data SubscriptionOfferTargeting = SubscriptionOfferTargeting
+  { -- | Offer targeting rule for new user acquisition.
+    acquisitionRule :: (Core.Maybe AcquisitionTargetingRule),
+    -- | Offer targeting rule for upgrading users\' existing plans.
+    upgradeRule :: (Core.Maybe UpgradeTargetingRule)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SubscriptionOfferTargeting' with the minimum fields required to make a request.
+newSubscriptionOfferTargeting ::
+  SubscriptionOfferTargeting
+newSubscriptionOfferTargeting =
+  SubscriptionOfferTargeting
+    { acquisitionRule = Core.Nothing,
+      upgradeRule = Core.Nothing
+    }
+
+instance Core.FromJSON SubscriptionOfferTargeting where
+  parseJSON =
+    Core.withObject
+      "SubscriptionOfferTargeting"
+      ( \o ->
+          SubscriptionOfferTargeting
+            Core.<$> (o Core..:? "acquisitionRule")
+            Core.<*> (o Core..:? "upgradeRule")
+      )
+
+instance Core.ToJSON SubscriptionOfferTargeting where
+  toJSON SubscriptionOfferTargeting {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("acquisitionRule" Core..=)
+              Core.<$> acquisitionRule,
+            ("upgradeRule" Core..=) Core.<$> upgradeRule
           ]
       )
 
@@ -3231,6 +5376,162 @@ instance Core.ToJSON SubscriptionPurchase where
             ("userCancellationTimeMillis" Core..=)
               Core.. Core.AsText
               Core.<$> userCancellationTimeMillis
+          ]
+      )
+
+-- | Item-level info for a subscription purchase.
+--
+-- /See:/ 'newSubscriptionPurchaseLineItem' smart constructor.
+data SubscriptionPurchaseLineItem = SubscriptionPurchaseLineItem
+  { -- | The item is auto renewing.
+    autoRenewingPlan :: (Core.Maybe AutoRenewingPlan),
+    -- | Time at which the subscription expired or will expire unless the access is extended (ex. renews).
+    expiryTime :: (Core.Maybe Core.DateTime),
+    -- | The offer details for this item.
+    offerDetails :: (Core.Maybe OfferDetails),
+    -- | The item is prepaid.
+    prepaidPlan :: (Core.Maybe PrepaidPlan),
+    -- | The purchased product ID (for example, \'monthly001\').
+    productId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SubscriptionPurchaseLineItem' with the minimum fields required to make a request.
+newSubscriptionPurchaseLineItem ::
+  SubscriptionPurchaseLineItem
+newSubscriptionPurchaseLineItem =
+  SubscriptionPurchaseLineItem
+    { autoRenewingPlan = Core.Nothing,
+      expiryTime = Core.Nothing,
+      offerDetails = Core.Nothing,
+      prepaidPlan = Core.Nothing,
+      productId = Core.Nothing
+    }
+
+instance Core.FromJSON SubscriptionPurchaseLineItem where
+  parseJSON =
+    Core.withObject
+      "SubscriptionPurchaseLineItem"
+      ( \o ->
+          SubscriptionPurchaseLineItem
+            Core.<$> (o Core..:? "autoRenewingPlan")
+            Core.<*> (o Core..:? "expiryTime")
+            Core.<*> (o Core..:? "offerDetails")
+            Core.<*> (o Core..:? "prepaidPlan")
+            Core.<*> (o Core..:? "productId")
+      )
+
+instance Core.ToJSON SubscriptionPurchaseLineItem where
+  toJSON SubscriptionPurchaseLineItem {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("autoRenewingPlan" Core..=)
+              Core.<$> autoRenewingPlan,
+            ("expiryTime" Core..=) Core.<$> expiryTime,
+            ("offerDetails" Core..=) Core.<$> offerDetails,
+            ("prepaidPlan" Core..=) Core.<$> prepaidPlan,
+            ("productId" Core..=) Core.<$> productId
+          ]
+      )
+
+-- | Indicates the status of a user\'s subscription purchase.
+--
+-- /See:/ 'newSubscriptionPurchaseV2' smart constructor.
+data SubscriptionPurchaseV2 = SubscriptionPurchaseV2
+  { -- | The acknowledgement state of the subscription.
+    acknowledgementState :: (Core.Maybe SubscriptionPurchaseV2_AcknowledgementState),
+    -- | Additional context around canceled subscriptions. Only present if the subscription currently has subscription/state SUBSCRIPTION/STATE_CANCELED.
+    canceledStateContext :: (Core.Maybe CanceledStateContext),
+    -- | User account identifier in the third-party service.
+    externalAccountIdentifiers :: (Core.Maybe ExternalAccountIdentifiers),
+    -- | This kind represents a SubscriptionPurchaseV2 object in the androidpublisher service.
+    kind :: (Core.Maybe Core.Text),
+    -- | The order id of the latest order associated with the purchase of the subscription. For autoRenewing subscription, this is the order id of signup order if it is not renewed yet, or the last recurring order id (success, pending, or declined order). For prepaid subscription, this is the order id associated with the queried purchase token.
+    latestOrderId :: (Core.Maybe Core.Text),
+    -- | Item-level info for a subscription purchase. The items in the same purchase should be either all with AutoRenewingPlan or all with PrepaidPlan.
+    lineItems :: (Core.Maybe [SubscriptionPurchaseLineItem]),
+    -- | The purchase token of the old subscription if this subscription is one of the following: * Re-signup of a canceled but non-lapsed subscription * Upgrade\/downgrade from a previous subscription. * Convert from prepaid to auto renewing subscription. * Convert from an auto renewing subscription to prepaid. * Topup a prepaid subscription.
+    linkedPurchaseToken :: (Core.Maybe Core.Text),
+    -- | Additional context around paused subscriptions. Only present if the subscription currently has subscription/state SUBSCRIPTION/STATE_PAUSED.
+    pausedStateContext :: (Core.Maybe PausedStateContext),
+    -- | ISO 3166-1 alpha-2 billing country\/region code of the user at the time the subscription was granted.
+    regionCode :: (Core.Maybe Core.Text),
+    -- | Time at which the subscription was granted. Not set for pending subscriptions (subscription was created but awaiting payment during signup).
+    startTime :: (Core.Maybe Core.DateTime),
+    -- | User profile associated with purchases made with \'Subscribe with Google\'.
+    subscribeWithGoogleInfo :: (Core.Maybe SubscribeWithGoogleInfo),
+    -- | The current state of the subscription.
+    subscriptionState :: (Core.Maybe SubscriptionPurchaseV2_SubscriptionState),
+    -- | Only present if this subscription purchase is a test purchase.
+    testPurchase :: (Core.Maybe TestPurchase)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SubscriptionPurchaseV2' with the minimum fields required to make a request.
+newSubscriptionPurchaseV2 ::
+  SubscriptionPurchaseV2
+newSubscriptionPurchaseV2 =
+  SubscriptionPurchaseV2
+    { acknowledgementState = Core.Nothing,
+      canceledStateContext = Core.Nothing,
+      externalAccountIdentifiers = Core.Nothing,
+      kind = Core.Nothing,
+      latestOrderId = Core.Nothing,
+      lineItems = Core.Nothing,
+      linkedPurchaseToken = Core.Nothing,
+      pausedStateContext = Core.Nothing,
+      regionCode = Core.Nothing,
+      startTime = Core.Nothing,
+      subscribeWithGoogleInfo = Core.Nothing,
+      subscriptionState = Core.Nothing,
+      testPurchase = Core.Nothing
+    }
+
+instance Core.FromJSON SubscriptionPurchaseV2 where
+  parseJSON =
+    Core.withObject
+      "SubscriptionPurchaseV2"
+      ( \o ->
+          SubscriptionPurchaseV2
+            Core.<$> (o Core..:? "acknowledgementState")
+            Core.<*> (o Core..:? "canceledStateContext")
+            Core.<*> (o Core..:? "externalAccountIdentifiers")
+            Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "latestOrderId")
+            Core.<*> (o Core..:? "lineItems")
+            Core.<*> (o Core..:? "linkedPurchaseToken")
+            Core.<*> (o Core..:? "pausedStateContext")
+            Core.<*> (o Core..:? "regionCode")
+            Core.<*> (o Core..:? "startTime")
+            Core.<*> (o Core..:? "subscribeWithGoogleInfo")
+            Core.<*> (o Core..:? "subscriptionState")
+            Core.<*> (o Core..:? "testPurchase")
+      )
+
+instance Core.ToJSON SubscriptionPurchaseV2 where
+  toJSON SubscriptionPurchaseV2 {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("acknowledgementState" Core..=)
+              Core.<$> acknowledgementState,
+            ("canceledStateContext" Core..=)
+              Core.<$> canceledStateContext,
+            ("externalAccountIdentifiers" Core..=)
+              Core.<$> externalAccountIdentifiers,
+            ("kind" Core..=) Core.<$> kind,
+            ("latestOrderId" Core..=) Core.<$> latestOrderId,
+            ("lineItems" Core..=) Core.<$> lineItems,
+            ("linkedPurchaseToken" Core..=)
+              Core.<$> linkedPurchaseToken,
+            ("pausedStateContext" Core..=)
+              Core.<$> pausedStateContext,
+            ("regionCode" Core..=) Core.<$> regionCode,
+            ("startTime" Core..=) Core.<$> startTime,
+            ("subscribeWithGoogleInfo" Core..=)
+              Core.<$> subscribeWithGoogleInfo,
+            ("subscriptionState" Core..=)
+              Core.<$> subscriptionState,
+            ("testPurchase" Core..=) Core.<$> testPurchase
           ]
       )
 
@@ -3473,7 +5774,105 @@ instance Core.ToJSON SystemApksListResponse where
           [("variants" Core..=) Core.<$> variants]
       )
 
--- | The testers of an app. The resource for TestersService.
+-- | Representation of a system feature.
+--
+-- /See:/ 'newSystemFeature' smart constructor.
+newtype SystemFeature = SystemFeature
+  { -- | The name of the feature.
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SystemFeature' with the minimum fields required to make a request.
+newSystemFeature ::
+  SystemFeature
+newSystemFeature = SystemFeature {name = Core.Nothing}
+
+instance Core.FromJSON SystemFeature where
+  parseJSON =
+    Core.withObject
+      "SystemFeature"
+      (\o -> SystemFeature Core.<$> (o Core..:? "name"))
+
+instance Core.ToJSON SystemFeature where
+  toJSON SystemFeature {..} =
+    Core.object
+      (Core.catMaybes [("name" Core..=) Core.<$> name])
+
+-- | Information specific to cancellations initiated by Google system.
+--
+-- /See:/ 'newSystemInitiatedCancellation' smart constructor.
+data SystemInitiatedCancellation = SystemInitiatedCancellation
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SystemInitiatedCancellation' with the minimum fields required to make a request.
+newSystemInitiatedCancellation ::
+  SystemInitiatedCancellation
+newSystemInitiatedCancellation = SystemInitiatedCancellation
+
+instance Core.FromJSON SystemInitiatedCancellation where
+  parseJSON =
+    Core.withObject
+      "SystemInitiatedCancellation"
+      (\o -> Core.pure SystemInitiatedCancellation)
+
+instance Core.ToJSON SystemInitiatedCancellation where
+  toJSON = Core.const Core.emptyObject
+
+-- | Defines the scope of subscriptions which a targeting rule can match to target offers to users based on past or current entitlement.
+--
+-- /See:/ 'newTargetingRuleScope' smart constructor.
+newtype TargetingRuleScope = TargetingRuleScope
+  { -- | The scope of the current targeting rule is the subscription with the specified subscription ID. Must be a subscription within the same parent app.
+    specificSubscriptionInApp :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TargetingRuleScope' with the minimum fields required to make a request.
+newTargetingRuleScope ::
+  TargetingRuleScope
+newTargetingRuleScope =
+  TargetingRuleScope {specificSubscriptionInApp = Core.Nothing}
+
+instance Core.FromJSON TargetingRuleScope where
+  parseJSON =
+    Core.withObject
+      "TargetingRuleScope"
+      ( \o ->
+          TargetingRuleScope
+            Core.<$> (o Core..:? "specificSubscriptionInApp")
+      )
+
+instance Core.ToJSON TargetingRuleScope where
+  toJSON TargetingRuleScope {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("specificSubscriptionInApp" Core..=)
+              Core.<$> specificSubscriptionInApp
+          ]
+      )
+
+-- | Whether this subscription purchase is a test purchase.
+--
+-- /See:/ 'newTestPurchase' smart constructor.
+data TestPurchase = TestPurchase
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TestPurchase' with the minimum fields required to make a request.
+newTestPurchase ::
+  TestPurchase
+newTestPurchase = TestPurchase
+
+instance Core.FromJSON TestPurchase where
+  parseJSON =
+    Core.withObject
+      "TestPurchase"
+      (\o -> Core.pure TestPurchase)
+
+instance Core.ToJSON TestPurchase where
+  toJSON = Core.const Core.emptyObject
+
+-- | The testers of an app. The resource for TestersService. Note: while it is possible in the Play Console UI to add testers via email lists, email lists are not supported by this resource.
 --
 -- /See:/ 'newTesters' smart constructor.
 newtype Testers = Testers
@@ -3584,7 +5983,7 @@ instance Core.ToJSON TokenPagination where
 data Track = Track
   { -- | In a read request, represents all active releases in the track. In an update request, represents desired changes.
     releases :: (Core.Maybe [TrackRelease]),
-    -- | Identifier of the track.
+    -- | Identifier of the track. Form factor tracks have a special prefix as an identifier, for example @wear:production@, @automotive:production@. <https://developers.google.com/android-publisher/tracks#ff-track-name More on track name>
     track :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3705,7 +6104,9 @@ instance Core.FromJSON TrackRelease where
             Core.<*> (o Core..:? "releaseNotes")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "userFraction")
-            Core.<*> (o Core..:? "versionCodes")
+            Core.<*> ( o Core..:? "versionCodes"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
       )
 
 instance Core.ToJSON TrackRelease where
@@ -3720,7 +6121,8 @@ instance Core.ToJSON TrackRelease where
             ("releaseNotes" Core..=) Core.<$> releaseNotes,
             ("status" Core..=) Core.<$> status,
             ("userFraction" Core..=) Core.<$> userFraction,
-            ("versionCodes" Core..=) Core.<$> versionCodes
+            ("versionCodes" Core..=) Core.. Core.fmap Core.AsText
+              Core.<$> versionCodes
           ]
       )
 
@@ -3789,6 +6191,51 @@ instance Core.ToJSON TracksListResponse where
           ]
       )
 
+-- | Represents a targeting rule of the form: User currently has {scope} [with billing period {billing_period}].
+--
+-- /See:/ 'newUpgradeTargetingRule' smart constructor.
+data UpgradeTargetingRule = UpgradeTargetingRule
+  { -- | The specific billing period duration, specified in ISO 8601 format, that a user must be currently subscribed to to be eligible for this rule. If not specified, users subscribed to any billing period are matched.
+    billingPeriodDuration :: (Core.Maybe Core.Text),
+    -- | Limit this offer to only once per user. If set to true, a user can never be eligible for this offer again if they ever subscribed to this offer.
+    oncePerUser :: (Core.Maybe Core.Bool),
+    -- | Required. The scope of subscriptions this rule considers. Only allows \"this subscription\" and \"specific subscription in app\".
+    scope :: (Core.Maybe TargetingRuleScope)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UpgradeTargetingRule' with the minimum fields required to make a request.
+newUpgradeTargetingRule ::
+  UpgradeTargetingRule
+newUpgradeTargetingRule =
+  UpgradeTargetingRule
+    { billingPeriodDuration = Core.Nothing,
+      oncePerUser = Core.Nothing,
+      scope = Core.Nothing
+    }
+
+instance Core.FromJSON UpgradeTargetingRule where
+  parseJSON =
+    Core.withObject
+      "UpgradeTargetingRule"
+      ( \o ->
+          UpgradeTargetingRule
+            Core.<$> (o Core..:? "billingPeriodDuration")
+            Core.<*> (o Core..:? "oncePerUser")
+            Core.<*> (o Core..:? "scope")
+      )
+
+instance Core.ToJSON UpgradeTargetingRule where
+  toJSON UpgradeTargetingRule {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("billingPeriodDuration" Core..=)
+              Core.<$> billingPeriodDuration,
+            ("oncePerUser" Core..=) Core.<$> oncePerUser,
+            ("scope" Core..=) Core.<$> scope
+          ]
+      )
+
 -- | A user resource.
 --
 -- /See:/ 'newUser' smart constructor.
@@ -3799,13 +6246,13 @@ data User = User
     developerAccountPermissions :: (Core.Maybe [User_DeveloperAccountPermissionsItem]),
     -- | Immutable. The user\'s email address.
     email :: (Core.Maybe Core.Text),
-    -- | The time at which the user\'s access expires, if set.
+    -- | The time at which the user\'s access expires, if set. When setting this value, it must always be in the future.
     expirationTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Per-app permissions for the user.
     grants :: (Core.Maybe [Grant]),
     -- | Required. Resource name for this user, following the pattern \"developers\/{developer}\/users\/{email}\".
     name :: (Core.Maybe Core.Text),
-    -- | Output only. Whether there are more permissions for the user that are not represented here.
+    -- | Output only. Whether there are more permissions for the user that are not represented here. This can happen if the caller does not have permission to manage all apps in the account. This is also @true@ if this user is the account owner. If this field is @true@, it should be taken as a signal that this user cannot be fully managed via the API. That is, the API caller is not be able to manage all of the permissions this user holds, either because it doesn\'t know about them or because the user is the account owner.
     partial :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3942,6 +6389,82 @@ instance Core.ToJSON UserComment where
             ("text" Core..=) Core.<$> text,
             ("thumbsDownCount" Core..=) Core.<$> thumbsDownCount,
             ("thumbsUpCount" Core..=) Core.<$> thumbsUpCount
+          ]
+      )
+
+-- | A set of user countries. A country set determines what variation of app content gets served to a specific location.
+--
+-- /See:/ 'newUserCountrySet' smart constructor.
+data UserCountrySet = UserCountrySet
+  { -- | List of country codes representing countries. A Country code is represented in ISO 3166 alpha-2 format. For Example:- \"IT\" for Italy, \"GE\" for Georgia.
+    countryCodes :: (Core.Maybe [Core.Text]),
+    -- | Country set name.
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UserCountrySet' with the minimum fields required to make a request.
+newUserCountrySet ::
+  UserCountrySet
+newUserCountrySet =
+  UserCountrySet {countryCodes = Core.Nothing, name = Core.Nothing}
+
+instance Core.FromJSON UserCountrySet where
+  parseJSON =
+    Core.withObject
+      "UserCountrySet"
+      ( \o ->
+          UserCountrySet
+            Core.<$> (o Core..:? "countryCodes")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON UserCountrySet where
+  toJSON UserCountrySet {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("countryCodes" Core..=) Core.<$> countryCodes,
+            ("name" Core..=) Core.<$> name
+          ]
+      )
+
+-- | Information specific to cancellations initiated by users.
+--
+-- /See:/ 'newUserInitiatedCancellation' smart constructor.
+data UserInitiatedCancellation = UserInitiatedCancellation
+  { -- | Information provided by the user when they complete the subscription cancellation flow (cancellation reason survey).
+    cancelSurveyResult :: (Core.Maybe CancelSurveyResult),
+    -- | The time at which the subscription was canceled by the user. The user might still have access to the subscription after this time. Use line/items.expiry/time to determine if a user still has access.
+    cancelTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UserInitiatedCancellation' with the minimum fields required to make a request.
+newUserInitiatedCancellation ::
+  UserInitiatedCancellation
+newUserInitiatedCancellation =
+  UserInitiatedCancellation
+    { cancelSurveyResult = Core.Nothing,
+      cancelTime = Core.Nothing
+    }
+
+instance Core.FromJSON UserInitiatedCancellation where
+  parseJSON =
+    Core.withObject
+      "UserInitiatedCancellation"
+      ( \o ->
+          UserInitiatedCancellation
+            Core.<$> (o Core..:? "cancelSurveyResult")
+            Core.<*> (o Core..:? "cancelTime")
+      )
+
+instance Core.ToJSON UserInitiatedCancellation where
+  toJSON UserInitiatedCancellation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("cancelSurveyResult" Core..=)
+              Core.<$> cancelSurveyResult,
+            ("cancelTime" Core..=) Core.<$> cancelTime
           ]
       )
 

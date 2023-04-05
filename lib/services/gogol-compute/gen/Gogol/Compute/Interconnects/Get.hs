@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified interconnect. Get a list of available interconnects by making a list() request.
+-- Returns the specified Interconnect. Get a list of available Interconnects by making a list() request.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.interconnects.get@.
 module Gogol.Compute.Interconnects.Get
@@ -60,7 +60,7 @@ type ComputeInterconnectsGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Interconnect
 
--- | Returns the specified interconnect. Get a list of available interconnects by making a list() request.
+-- | Returns the specified Interconnect. Get a list of available Interconnects by making a list() request.
 --
 -- /See:/ 'newComputeInterconnectsGet' smart constructor.
 data ComputeInterconnectsGet = ComputeInterconnectsGet

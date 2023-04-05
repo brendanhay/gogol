@@ -30,9 +30,17 @@ module Gogol.ContainerAnalysis.Internal.Product
     AliasContext (..),
     newAliasContext,
 
+    -- * AnalysisCompleted
+    AnalysisCompleted (..),
+    newAnalysisCompleted,
+
     -- * Artifact
     Artifact (..),
     newArtifact,
+
+    -- * Assessment
+    Assessment (..),
+    newAssessment,
 
     -- * AttestationNote
     AttestationNote (..),
@@ -81,6 +89,10 @@ module Gogol.ContainerAnalysis.Internal.Product
     -- * BuildProvenance_BuildOptions
     BuildProvenance_BuildOptions (..),
     newBuildProvenance_BuildOptions,
+
+    -- * BuildStep
+    BuildStep (..),
+    newBuildStep,
 
     -- * BuilderConfig
     BuilderConfig (..),
@@ -141,6 +153,14 @@ module Gogol.ContainerAnalysis.Internal.Product
     -- * ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsArtifactObjects
     ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsArtifactObjects (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsArtifactObjects,
+
+    -- * ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact,
+
+    -- * ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage,
 
     -- * ContaineranalysisGoogleDevtoolsCloudbuildV1Build
     ContaineranalysisGoogleDevtoolsCloudbuildV1Build (..),
@@ -250,6 +270,14 @@ module Gogol.ContainerAnalysis.Internal.Product
     ContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan,
 
+    -- * ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact
+    ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact,
+
+    -- * ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage
+    ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage,
+
     -- * ContaineranalysisGoogleDevtoolsCloudbuildV1Volume
     ContaineranalysisGoogleDevtoolsCloudbuildV1Volume (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1Volume,
@@ -277,6 +305,10 @@ module Gogol.ContainerAnalysis.Internal.Product
     -- * Detail
     Detail (..),
     newDetail,
+
+    -- * Digest
+    Digest (..),
+    newDigest,
 
     -- * DiscoveryNote
     DiscoveryNote (..),
@@ -318,6 +350,10 @@ module Gogol.ContainerAnalysis.Internal.Product
     FixableTotalByDigest (..),
     newFixableTotalByDigest,
 
+    -- * GeneratePackagesSummaryRequest
+    GeneratePackagesSummaryRequest (..),
+    newGeneratePackagesSummaryRequest,
+
     -- * GerritSourceContext
     GerritSourceContext (..),
     newGerritSourceContext,
@@ -337,6 +373,50 @@ module Gogol.ContainerAnalysis.Internal.Product
     -- * GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata
     GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata (..),
     newGoogleDevtoolsContaineranalysisV1alpha1OperationMetadata,
+
+    -- * GrafeasV1FileLocation
+    GrafeasV1FileLocation (..),
+    newGrafeasV1FileLocation,
+
+    -- * GrafeasV1SlsaProvenanceZeroTwoSlsaBuilder
+    GrafeasV1SlsaProvenanceZeroTwoSlsaBuilder (..),
+    newGrafeasV1SlsaProvenanceZeroTwoSlsaBuilder,
+
+    -- * GrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness
+    GrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness (..),
+    newGrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness,
+
+    -- * GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource
+    GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource (..),
+    newGrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource,
+
+    -- * GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource_Digest
+    GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource_Digest (..),
+    newGrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource_Digest,
+
+    -- * GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation
+    GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation (..),
+    newGrafeasV1SlsaProvenanceZeroTwoSlsaInvocation,
+
+    -- * GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Environment
+    GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Environment (..),
+    newGrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Environment,
+
+    -- * GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Parameters
+    GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Parameters (..),
+    newGrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Parameters,
+
+    -- * GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial
+    GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial (..),
+    newGrafeasV1SlsaProvenanceZeroTwoSlsaMaterial,
+
+    -- * GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial_Digest
+    GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial_Digest (..),
+    newGrafeasV1SlsaProvenanceZeroTwoSlsaMaterial_Digest,
+
+    -- * GrafeasV1SlsaProvenanceZeroTwoSlsaMetadata
+    GrafeasV1SlsaProvenanceZeroTwoSlsaMetadata (..),
+    newGrafeasV1SlsaProvenanceZeroTwoSlsaMetadata,
 
     -- * Hash
     Hash (..),
@@ -366,6 +446,10 @@ module Gogol.ContainerAnalysis.Internal.Product
     InTotoStatement (..),
     newInTotoStatement,
 
+    -- * Justification
+    Justification (..),
+    newJustification,
+
     -- * Jwt
     Jwt (..),
     newJwt,
@@ -377,6 +461,14 @@ module Gogol.ContainerAnalysis.Internal.Product
     -- * Layer
     Layer (..),
     newLayer,
+
+    -- * License
+    License (..),
+    newLicense,
+
+    -- * LicensesSummary
+    LicensesSummary (..),
+    newLicensesSummary,
 
     -- * ListNoteOccurrencesResponse
     ListNoteOccurrencesResponse (..),
@@ -430,13 +522,25 @@ module Gogol.ContainerAnalysis.Internal.Product
     PackageOccurrence (..),
     newPackageOccurrence,
 
+    -- * PackagesSummaryResponse
+    PackagesSummaryResponse (..),
+    newPackagesSummaryResponse,
+
     -- * Policy
     Policy (..),
     newPolicy,
 
+    -- * Product
+    Product (..),
+    newProduct,
+
     -- * ProjectRepoId
     ProjectRepoId (..),
     newProjectRepoId,
+
+    -- * Publisher
+    Publisher (..),
+    newPublisher,
 
     -- * Recipe
     Recipe (..),
@@ -453,6 +557,10 @@ module Gogol.ContainerAnalysis.Internal.Product
     -- * RelatedUrl
     RelatedUrl (..),
     newRelatedUrl,
+
+    -- * Remediation
+    Remediation (..),
+    newRemediation,
 
     -- * RepoId
     RepoId (..),
@@ -481,6 +589,14 @@ module Gogol.ContainerAnalysis.Internal.Product
     -- * SlsaProvenance
     SlsaProvenance (..),
     newSlsaProvenance,
+
+    -- * SlsaProvenanceZeroTwo
+    SlsaProvenanceZeroTwo (..),
+    newSlsaProvenanceZeroTwo,
+
+    -- * SlsaProvenanceZeroTwo_BuildConfig
+    SlsaProvenanceZeroTwo_BuildConfig (..),
+    newSlsaProvenanceZeroTwo_BuildConfig,
 
     -- * SlsaRecipe
     SlsaRecipe (..),
@@ -534,6 +650,10 @@ module Gogol.ContainerAnalysis.Internal.Product
     TestIamPermissionsResponse (..),
     newTestIamPermissionsResponse,
 
+    -- * TimeSpan
+    TimeSpan (..),
+    newTimeSpan,
+
     -- * UpgradeDistribution
     UpgradeDistribution (..),
     newUpgradeDistribution,
@@ -549,6 +669,18 @@ module Gogol.ContainerAnalysis.Internal.Product
     -- * Version
     Version (..),
     newVersion,
+
+    -- * VexAssessment
+    VexAssessment (..),
+    newVexAssessment,
+
+    -- * Volume
+    Volume (..),
+    newVolume,
+
+    -- * VulnerabilityAssessmentNote
+    VulnerabilityAssessmentNote (..),
+    newVulnerabilityAssessmentNote,
 
     -- * VulnerabilityNote
     VulnerabilityNote (..),
@@ -609,6 +741,36 @@ instance Core.ToJSON AliasContext where
           ]
       )
 
+-- | Indicates which analysis completed successfully. Multiple types of analysis can be performed on a single resource.
+--
+-- /See:/ 'newAnalysisCompleted' smart constructor.
+newtype AnalysisCompleted = AnalysisCompleted
+  { -- |
+    analysisType :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AnalysisCompleted' with the minimum fields required to make a request.
+newAnalysisCompleted ::
+  AnalysisCompleted
+newAnalysisCompleted = AnalysisCompleted {analysisType = Core.Nothing}
+
+instance Core.FromJSON AnalysisCompleted where
+  parseJSON =
+    Core.withObject
+      "AnalysisCompleted"
+      ( \o ->
+          AnalysisCompleted
+            Core.<$> (o Core..:? "analysisType")
+      )
+
+instance Core.ToJSON AnalysisCompleted where
+  toJSON AnalysisCompleted {..} =
+    Core.object
+      ( Core.catMaybes
+          [("analysisType" Core..=) Core.<$> analysisType]
+      )
+
 -- | Artifact describes a build product.
 --
 -- /See:/ 'newArtifact' smart constructor.
@@ -646,6 +808,76 @@ instance Core.ToJSON Artifact where
           [ ("checksum" Core..=) Core.<$> checksum,
             ("id" Core..=) Core.<$> id,
             ("names" Core..=) Core.<$> names
+          ]
+      )
+
+-- | Assessment provides all information that is related to a single vulnerability for this product.
+--
+-- /See:/ 'newAssessment' smart constructor.
+data Assessment = Assessment
+  { -- | Holds the MITRE standard Common Vulnerabilities and Exposures (CVE) tracking number for the vulnerability.
+    cve :: (Core.Maybe Core.Text),
+    -- | Contains information about the impact of this vulnerability, this will change with time.
+    impacts :: (Core.Maybe [Core.Text]),
+    -- | Justification provides the justification when the state of the assessment if NOT_AFFECTED.
+    justification :: (Core.Maybe Justification),
+    -- | A detailed description of this Vex.
+    longDescription :: (Core.Maybe Core.Text),
+    -- | Holds a list of references associated with this vulnerability item and assessment. These uris have additional information about the vulnerability and the assessment itself. E.g. Link to a document which details how this assessment concluded the state of this vulnerability.
+    relatedUris :: (Core.Maybe [RelatedUrl]),
+    -- | Specifies details on how to handle (and presumably, fix) a vulnerability.
+    remediations :: (Core.Maybe [Remediation]),
+    -- | A one sentence description of this Vex.
+    shortDescription :: (Core.Maybe Core.Text),
+    -- | Provides the state of this Vulnerability assessment.
+    state :: (Core.Maybe Assessment_State)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Assessment' with the minimum fields required to make a request.
+newAssessment ::
+  Assessment
+newAssessment =
+  Assessment
+    { cve = Core.Nothing,
+      impacts = Core.Nothing,
+      justification = Core.Nothing,
+      longDescription = Core.Nothing,
+      relatedUris = Core.Nothing,
+      remediations = Core.Nothing,
+      shortDescription = Core.Nothing,
+      state = Core.Nothing
+    }
+
+instance Core.FromJSON Assessment where
+  parseJSON =
+    Core.withObject
+      "Assessment"
+      ( \o ->
+          Assessment
+            Core.<$> (o Core..:? "cve")
+            Core.<*> (o Core..:? "impacts")
+            Core.<*> (o Core..:? "justification")
+            Core.<*> (o Core..:? "longDescription")
+            Core.<*> (o Core..:? "relatedUris")
+            Core.<*> (o Core..:? "remediations")
+            Core.<*> (o Core..:? "shortDescription")
+            Core.<*> (o Core..:? "state")
+      )
+
+instance Core.ToJSON Assessment where
+  toJSON Assessment {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("cve" Core..=) Core.<$> cve,
+            ("impacts" Core..=) Core.<$> impacts,
+            ("justification" Core..=) Core.<$> justification,
+            ("longDescription" Core..=) Core.<$> longDescription,
+            ("relatedUris" Core..=) Core.<$> relatedUris,
+            ("remediations" Core..=) Core.<$> remediations,
+            ("shortDescription" Core..=)
+              Core.<$> shortDescription,
+            ("state" Core..=) Core.<$> state
           ]
       )
 
@@ -873,8 +1105,9 @@ instance Core.ToJSON BatchCreateOccurrencesResponse where
 data Binding = Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe Expr),
-    -- | Specifies the principals requesting access for a Cloud Platform resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains
-    -- the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@.
+    -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
+    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
     members :: (Core.Maybe [Core.Text]),
     -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
     role' :: (Core.Maybe Core.Text)
@@ -1117,6 +1350,120 @@ instance Core.ToJSON BuildProvenance_BuildOptions where
   toJSON BuildProvenance_BuildOptions {..} =
     Core.toJSON additional
 
+-- | A step in the build pipeline. Next ID: 20
+--
+-- /See:/ 'newBuildStep' smart constructor.
+data BuildStep = BuildStep
+  { -- | Allow this build step to fail without failing the entire build if and only if the exit code is one of the specified codes. If allow_failure is also specified, this field will take precedence.
+    allowExitCodes :: (Core.Maybe [Core.Int32]),
+    -- | Allow this build step to fail without failing the entire build. If false, the entire build will fail if this step fails. Otherwise, the build will succeed, but this step will still have a failure status. Error information will be reported in the failure_detail field.
+    allowFailure :: (Core.Maybe Core.Bool),
+    -- | A list of arguments that will be presented to the step when it is started. If the image used to run the step\'s container has an entrypoint, the @args@ are used as arguments to that entrypoint. If the image does not define an entrypoint, the first element in args is used as the entrypoint, and the remainder will be used as arguments.
+    args :: (Core.Maybe [Core.Text]),
+    -- | Working directory to use when running this step\'s container. If this value is a relative path, it is relative to the build\'s working directory. If this value is absolute, it may be outside the build\'s working directory, in which case the contents of the path may not be persisted across build step executions, unless a @volume@ for that path is specified. If the build specifies a @RepoSource@ with @dir@ and a step with a @dir@, which specifies an absolute path, the @RepoSource@ @dir@ is ignored for the step\'s execution.
+    dir :: (Core.Maybe Core.Text),
+    -- | Entrypoint to be used instead of the build step image\'s default entrypoint. If unset, the image\'s default entrypoint is used.
+    entrypoint :: (Core.Maybe Core.Text),
+    -- | A list of environment variable definitions to be used when running a step. The elements are of the form \"KEY=VALUE\" for the environment variable \"KEY\" being given the value \"VALUE\".
+    env :: (Core.Maybe [Core.Text]),
+    -- | Output only. Return code from running the step.
+    exitCode :: (Core.Maybe Core.Int32),
+    -- | Unique identifier for this build step, used in @wait_for@ to reference this build step as a dependency.
+    id :: (Core.Maybe Core.Text),
+    -- | Required. The name of the container image that will run this particular build step. If the image is available in the host\'s Docker daemon\'s cache, it will be run directly. If not, the host will attempt to pull the image first, using the builder service account\'s credentials if necessary. The Docker daemon\'s cache will already have the latest versions of all of the officially supported build steps (<https://github.com/GoogleCloudPlatform/cloud-builders>). The Docker daemon will also have cached many of the layers for some popular images, like \"ubuntu\", \"debian\", but they will be refreshed at the time you attempt to use them. If you built an image in a previous build step, it will be stored in the host\'s Docker daemon\'s cache and is available to use as the name for a later build step.
+    name :: (Core.Maybe Core.Text),
+    -- | Output only. Stores timing information for pulling this build step\'s builder image only.
+    pullTiming :: (Core.Maybe TimeSpan),
+    -- | A shell script to be executed in the step. When script is provided, the user cannot specify the entrypoint or args.
+    script :: (Core.Maybe Core.Text),
+    -- | A list of environment variables which are encrypted using a Cloud Key Management Service crypto key. These values must be specified in the build\'s @Secret@.
+    secretEnv :: (Core.Maybe [Core.Text]),
+    -- | Output only. Status of the build step. At this time, build step status is only updated on build completion; step status is not updated in real-time as the build progresses.
+    status :: (Core.Maybe BuildStep_Status),
+    -- | Time limit for executing this build step. If not defined, the step has no time limit and will be allowed to continue to run until either it completes or the build itself times out.
+    timeout :: (Core.Maybe Core.Duration),
+    -- | Output only. Stores timing information for executing this build step.
+    timing :: (Core.Maybe TimeSpan),
+    -- | List of volumes to mount into the build step. Each volume is created as an empty volume prior to execution of the build step. Upon completion of the build, volumes and their contents are discarded. Using a named volume in only one step is not valid as it is indicative of a build request with an incorrect configuration.
+    volumes :: (Core.Maybe [Volume]),
+    -- | The ID(s) of the step(s) that this build step depends on. This build step will not start until all the build steps in @wait_for@ have completed successfully. If @wait_for@ is empty, this build step will start when all previous build steps in the @Build.Steps@ list have completed successfully.
+    waitFor :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BuildStep' with the minimum fields required to make a request.
+newBuildStep ::
+  BuildStep
+newBuildStep =
+  BuildStep
+    { allowExitCodes = Core.Nothing,
+      allowFailure = Core.Nothing,
+      args = Core.Nothing,
+      dir = Core.Nothing,
+      entrypoint = Core.Nothing,
+      env = Core.Nothing,
+      exitCode = Core.Nothing,
+      id = Core.Nothing,
+      name = Core.Nothing,
+      pullTiming = Core.Nothing,
+      script = Core.Nothing,
+      secretEnv = Core.Nothing,
+      status = Core.Nothing,
+      timeout = Core.Nothing,
+      timing = Core.Nothing,
+      volumes = Core.Nothing,
+      waitFor = Core.Nothing
+    }
+
+instance Core.FromJSON BuildStep where
+  parseJSON =
+    Core.withObject
+      "BuildStep"
+      ( \o ->
+          BuildStep
+            Core.<$> (o Core..:? "allowExitCodes")
+            Core.<*> (o Core..:? "allowFailure")
+            Core.<*> (o Core..:? "args")
+            Core.<*> (o Core..:? "dir")
+            Core.<*> (o Core..:? "entrypoint")
+            Core.<*> (o Core..:? "env")
+            Core.<*> (o Core..:? "exitCode")
+            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "pullTiming")
+            Core.<*> (o Core..:? "script")
+            Core.<*> (o Core..:? "secretEnv")
+            Core.<*> (o Core..:? "status")
+            Core.<*> (o Core..:? "timeout")
+            Core.<*> (o Core..:? "timing")
+            Core.<*> (o Core..:? "volumes")
+            Core.<*> (o Core..:? "waitFor")
+      )
+
+instance Core.ToJSON BuildStep where
+  toJSON BuildStep {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("allowExitCodes" Core..=) Core.<$> allowExitCodes,
+            ("allowFailure" Core..=) Core.<$> allowFailure,
+            ("args" Core..=) Core.<$> args,
+            ("dir" Core..=) Core.<$> dir,
+            ("entrypoint" Core..=) Core.<$> entrypoint,
+            ("env" Core..=) Core.<$> env,
+            ("exitCode" Core..=) Core.<$> exitCode,
+            ("id" Core..=) Core.<$> id,
+            ("name" Core..=) Core.<$> name,
+            ("pullTiming" Core..=) Core.<$> pullTiming,
+            ("script" Core..=) Core.<$> script,
+            ("secretEnv" Core..=) Core.<$> secretEnv,
+            ("status" Core..=) Core.<$> status,
+            ("timeout" Core..=) Core.<$> timeout,
+            ("timing" Core..=) Core.<$> timing,
+            ("volumes" Core..=) Core.<$> volumes,
+            ("waitFor" Core..=) Core.<$> waitFor
+          ]
+      )
+
 --
 -- /See:/ 'newBuilderConfig' smart constructor.
 newtype BuilderConfig = BuilderConfig
@@ -1141,7 +1488,7 @@ instance Core.ToJSON BuilderConfig where
     Core.object
       (Core.catMaybes [("id" Core..=) Core.<$> id])
 
--- | Common Vulnerability Scoring System. For details, see https:\/\/www.first.org\/cvss\/specification-document This is a message we will try to use for storing multiple versions of CVSS. The intention is that as new versions of CVSS scores get added, we will be able to modify this message rather than adding new protos for each new version of the score.
+-- | Common Vulnerability Scoring System. For details, see https:\/\/www.first.org\/cvss\/specification-document This is a message we will try to use for storing various versions of CVSS rather than making a separate proto for storing a specific version.
 --
 -- /See:/ 'newCVSS' smart constructor.
 data CVSS = CVSS
@@ -1653,7 +2000,9 @@ instance Core.ToJSON ComplianceOccurrence where
 --
 -- /See:/ 'newComplianceVersion' smart constructor.
 data ComplianceVersion = ComplianceVersion
-  { -- | The CPE URI (https:\/\/cpe.mitre.org\/specification\/) this benchmark is applicable to.
+  { -- | The name of the document that defines this benchmark, e.g. \"CIS Container-Optimized OS\".
+    benchmarkDocument :: (Core.Maybe Core.Text),
+    -- | The CPE URI (https:\/\/cpe.mitre.org\/specification\/) this benchmark is applicable to.
     cpeUri :: (Core.Maybe Core.Text),
     -- | The version of the benchmark. This is set to the version of the OS-specific CIS document the benchmark is defined in.
     version :: (Core.Maybe Core.Text)
@@ -1664,7 +2013,11 @@ data ComplianceVersion = ComplianceVersion
 newComplianceVersion ::
   ComplianceVersion
 newComplianceVersion =
-  ComplianceVersion {cpeUri = Core.Nothing, version = Core.Nothing}
+  ComplianceVersion
+    { benchmarkDocument = Core.Nothing,
+      cpeUri = Core.Nothing,
+      version = Core.Nothing
+    }
 
 instance Core.FromJSON ComplianceVersion where
   parseJSON =
@@ -1672,7 +2025,8 @@ instance Core.FromJSON ComplianceVersion where
       "ComplianceVersion"
       ( \o ->
           ComplianceVersion
-            Core.<$> (o Core..:? "cpeUri")
+            Core.<$> (o Core..:? "benchmarkDocument")
+            Core.<*> (o Core..:? "cpeUri")
             Core.<*> (o Core..:? "version")
       )
 
@@ -1680,7 +2034,9 @@ instance Core.ToJSON ComplianceVersion where
   toJSON ComplianceVersion {..} =
     Core.object
       ( Core.catMaybes
-          [ ("cpeUri" Core..=) Core.<$> cpeUri,
+          [ ("benchmarkDocument" Core..=)
+              Core.<$> benchmarkDocument,
+            ("cpeUri" Core..=) Core.<$> cpeUri,
             ("version" Core..=) Core.<$> version
           ]
       )
@@ -1797,10 +2153,20 @@ instance
 data ContaineranalysisGoogleDevtoolsCloudbuildV1Artifacts = ContaineranalysisGoogleDevtoolsCloudbuildV1Artifacts
   { -- | A list of images to be pushed upon the successful completion of all build steps. The images will be pushed using the builder service account\'s credentials. The digests of the pushed images will be stored in the Build resource\'s results field. If any of the images fail to be pushed, the build is marked FAILURE.
     images :: (Core.Maybe [Core.Text]),
+    -- | A list of Maven artifacts to be uploaded to Artifact Registry upon successful completion of all build steps. Artifacts in the workspace matching specified paths globs will be uploaded to the specified Artifact Registry repository using the builder service account\'s credentials. If any artifacts fail to be pushed, the build is marked FAILURE.
+    mavenArtifacts ::
+      ( Core.Maybe
+          [ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact]
+      ),
     -- | A list of objects to be uploaded to Cloud Storage upon successful completion of all build steps. Files in the workspace matching specified paths globs will be uploaded to the specified Cloud Storage location using the builder service account\'s credentials. The location and generation of the uploaded objects will be stored in the Build resource\'s results field. If any objects fail to be pushed, the build is marked FAILURE.
     objects ::
       ( Core.Maybe
           ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsArtifactObjects
+      ),
+    -- | A list of Python packages to be uploaded to Artifact Registry upon successful completion of all build steps. The build service account credentials will be used to perform the upload. If any objects fail to be pushed, the build is marked FAILURE.
+    pythonPackages ::
+      ( Core.Maybe
+          [ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage]
       )
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1811,7 +2177,9 @@ newContaineranalysisGoogleDevtoolsCloudbuildV1Artifacts ::
 newContaineranalysisGoogleDevtoolsCloudbuildV1Artifacts =
   ContaineranalysisGoogleDevtoolsCloudbuildV1Artifacts
     { images = Core.Nothing,
-      objects = Core.Nothing
+      mavenArtifacts = Core.Nothing,
+      objects = Core.Nothing,
+      pythonPackages = Core.Nothing
     }
 
 instance
@@ -1824,7 +2192,9 @@ instance
       ( \o ->
           ContaineranalysisGoogleDevtoolsCloudbuildV1Artifacts
             Core.<$> (o Core..:? "images")
+              Core.<*> (o Core..:? "mavenArtifacts")
               Core.<*> (o Core..:? "objects")
+              Core.<*> (o Core..:? "pythonPackages")
       )
 
 instance
@@ -1836,7 +2206,9 @@ instance
       Core.object
         ( Core.catMaybes
             [ ("images" Core..=) Core.<$> images,
-              ("objects" Core..=) Core.<$> objects
+              ("mavenArtifacts" Core..=) Core.<$> mavenArtifacts,
+              ("objects" Core..=) Core.<$> objects,
+              ("pythonPackages" Core..=) Core.<$> pythonPackages
             ]
         )
 
@@ -1887,6 +2259,113 @@ instance
             [ ("location" Core..=) Core.<$> location,
               ("paths" Core..=) Core.<$> paths,
               ("timing" Core..=) Core.<$> timing
+            ]
+        )
+
+-- | A Maven artifact to upload to Artifact Registry upon successful completion of all build steps.
+--
+-- /See:/ 'newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact' smart constructor.
+data ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact = ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact
+  { -- | Maven @artifactId@ value used when uploading the artifact to Artifact Registry.
+    artifactId :: (Core.Maybe Core.Text),
+    -- | Maven @groupId@ value used when uploading the artifact to Artifact Registry.
+    groupId :: (Core.Maybe Core.Text),
+    -- | Path to an artifact in the build\'s workspace to be uploaded to Artifact Registry. This can be either an absolute path, e.g. \/workspace\/my-app\/target\/my-app-1.0.SNAPSHOT.jar or a relative path from \/workspace, e.g. my-app\/target\/my-app-1.0.SNAPSHOT.jar.
+    path :: (Core.Maybe Core.Text),
+    -- | Artifact Registry repository, in the form \"https:\/\/$REGION-maven.pkg.dev\/$PROJECT\/$REPOSITORY\" Artifact in the workspace specified by path will be uploaded to Artifact Registry with this location as a prefix.
+    repository :: (Core.Maybe Core.Text),
+    -- | Maven @version@ value used when uploading the artifact to Artifact Registry.
+    version :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact' with the minimum fields required to make a request.
+newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact ::
+  ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact
+newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact =
+  ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact
+    { artifactId = Core.Nothing,
+      groupId = Core.Nothing,
+      path = Core.Nothing,
+      repository = Core.Nothing,
+      version = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact
+  where
+  parseJSON =
+    Core.withObject
+      "ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact"
+      ( \o ->
+          ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact
+            Core.<$> (o Core..:? "artifactId")
+              Core.<*> (o Core..:? "groupId")
+              Core.<*> (o Core..:? "path")
+              Core.<*> (o Core..:? "repository")
+              Core.<*> (o Core..:? "version")
+      )
+
+instance
+  Core.ToJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact
+  where
+  toJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("artifactId" Core..=) Core.<$> artifactId,
+              ("groupId" Core..=) Core.<$> groupId,
+              ("path" Core..=) Core.<$> path,
+              ("repository" Core..=) Core.<$> repository,
+              ("version" Core..=) Core.<$> version
+            ]
+        )
+
+-- | Python package to upload to Artifact Registry upon successful completion of all build steps. A package can encapsulate multiple objects to be uploaded to a single repository.
+--
+-- /See:/ 'newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage' smart constructor.
+data ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage = ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage
+  { -- | Path globs used to match files in the build\'s workspace. For Python\/ Twine, this is usually @dist\/*@, and sometimes additionally an @.asc@ file.
+    paths :: (Core.Maybe [Core.Text]),
+    -- | Artifact Registry repository, in the form \"https:\/\/$REGION-python.pkg.dev\/$PROJECT\/$REPOSITORY\" Files in the workspace matching any path pattern will be uploaded to Artifact Registry with this location as a prefix.
+    repository :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage' with the minimum fields required to make a request.
+newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage ::
+  ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage
+newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage =
+  ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage
+    { paths = Core.Nothing,
+      repository = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage
+  where
+  parseJSON =
+    Core.withObject
+      "ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage"
+      ( \o ->
+          ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage
+            Core.<$> (o Core..:? "paths")
+              Core.<*> (o Core..:? "repository")
+      )
+
+instance
+  Core.ToJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage
+  where
+  toJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("paths" Core..=) Core.<$> paths,
+              ("repository" Core..=) Core.<$> repository
             ]
         )
 
@@ -1964,9 +2443,9 @@ data ContaineranalysisGoogleDevtoolsCloudbuildV1Build = ContaineranalysisGoogleD
       ),
     -- | Tags for annotation of a @Build@. These are not docker tags.
     tags :: (Core.Maybe [Core.Text]),
-    -- | Amount of time that this build should be allowed to run, to second granularity. If this amount of time elapses, work on the build will cease and the build status will be @TIMEOUT@. @timeout@ starts ticking from @startTime@. Default time is ten minutes.
+    -- | Amount of time that this build should be allowed to run, to second granularity. If this amount of time elapses, work on the build will cease and the build status will be @TIMEOUT@. @timeout@ starts ticking from @startTime@. Default time is 60 minutes.
     timeout :: (Core.Maybe Core.Duration),
-    -- | Output only. Stores timing information for phases of the build. Valid keys are: * BUILD: time to execute all build steps. * PUSH: time to push all specified images. * FETCHSOURCE: time to fetch source. * SETUPBUILD: time to set up build. If the build does not specify source or images, these keys will not be included.
+    -- | Output only. Stores timing information for phases of the build. Valid keys are: * BUILD: time to execute all build steps. * PUSH: time to push all artifacts including docker images and non docker artifacts. * FETCHSOURCE: time to fetch source. * SETUPBUILD: time to set up build. If the build does not specify source or images, these keys will not be included.
     timing ::
       ( Core.Maybe
           ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Timing
@@ -2136,7 +2615,7 @@ instance
     ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Substitutions {..} =
       Core.toJSON additional
 
--- | Output only. Stores timing information for phases of the build. Valid keys are: * BUILD: time to execute all build steps. * PUSH: time to push all specified images. * FETCHSOURCE: time to fetch source. * SETUPBUILD: time to set up build. If the build does not specify source or images, these keys will not be included.
+-- | Output only. Stores timing information for phases of the build. Valid keys are: * BUILD: time to execute all build steps. * PUSH: time to push all artifacts including docker images and non docker artifacts. * FETCHSOURCE: time to fetch source. * SETUPBUILD: time to set up build. If the build does not specify source or images, these keys will not be included.
 --
 -- /See:/ 'newContaineranalysisGoogleDevtoolsCloudbuildV1Build_Timing' smart constructor.
 newtype ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Timing = ContaineranalysisGoogleDevtoolsCloudbuildV1Build_Timing
@@ -2290,7 +2769,12 @@ instance
 --
 -- /See:/ 'newContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions' smart constructor.
 data ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions
-  { -- | Requested disk size for the VM that runs the build. Note that this is /NOT/ \"disk free\"; some of the space will be used by the operating system and build utilities. Also note that this is the minimum disk size that will be allocated for the build -- the build may run with a larger disk than requested. At present, the maximum disk size is 1000GB; builds that request more than the maximum are rejected with an error.
+  { -- | Optional. Option to specify how default logs buckets are setup.
+    defaultLogsBucketBehavior ::
+      ( Core.Maybe
+          ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior
+      ),
+    -- | Requested disk size for the VM that runs the build. Note that this is /NOT/ \"disk free\"; some of the space will be used by the operating system and build utilities. Also note that this is the minimum disk size that will be allocated for the build -- the build may run with a larger disk than requested. At present, the maximum disk size is 2000GB; builds that request more than the maximum are rejected with an error.
     diskSizeGb :: (Core.Maybe Core.Int64),
     -- | Option to specify whether or not to apply bash style string operations to the substitutions. NOTE: this is always enabled for triggered builds and cannot be overridden in the build configuration file.
     dynamicSubstitutions :: (Core.Maybe Core.Bool),
@@ -2345,7 +2829,8 @@ newContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions ::
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions
 newContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions =
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions
-    { diskSizeGb = Core.Nothing,
+    { defaultLogsBucketBehavior = Core.Nothing,
+      diskSizeGb = Core.Nothing,
       dynamicSubstitutions = Core.Nothing,
       env = Core.Nothing,
       logStreamingOption = Core.Nothing,
@@ -2369,9 +2854,10 @@ instance
       "ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions"
       ( \o ->
           ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions
-            Core.<$> ( o Core..:? "diskSizeGb"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "defaultLogsBucketBehavior")
+              Core.<*> ( o Core..:? "diskSizeGb"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
               Core.<*> (o Core..:? "dynamicSubstitutions")
               Core.<*> (o Core..:? "env")
               Core.<*> (o Core..:? "logStreamingOption")
@@ -2394,7 +2880,9 @@ instance
     ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions {..} =
       Core.object
         ( Core.catMaybes
-            [ ("diskSizeGb" Core..=) Core.. Core.AsText
+            [ ("defaultLogsBucketBehavior" Core..=)
+                Core.<$> defaultLogsBucketBehavior,
+              ("diskSizeGb" Core..=) Core.. Core.AsText
                 Core.<$> diskSizeGb,
               ("dynamicSubstitutions" Core..=)
                 Core.<$> dynamicSubstitutions,
@@ -2458,7 +2946,11 @@ instance
 --
 -- /See:/ 'newContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep' smart constructor.
 data ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep
-  { -- | A list of arguments that will be presented to the step when it is started. If the image used to run the step\'s container has an entrypoint, the @args@ are used as arguments to that entrypoint. If the image does not define an entrypoint, the first element in args is used as the entrypoint, and the remainder will be used as arguments.
+  { -- | Allow this build step to fail without failing the entire build if and only if the exit code is one of the specified codes. If allow_failure is also specified, this field will take precedence.
+    allowExitCodes :: (Core.Maybe [Core.Int32]),
+    -- | Allow this build step to fail without failing the entire build. If false, the entire build will fail if this step fails. Otherwise, the build will succeed, but this step will still have a failure status. Error information will be reported in the failure_detail field.
+    allowFailure :: (Core.Maybe Core.Bool),
+    -- | A list of arguments that will be presented to the step when it is started. If the image used to run the step\'s container has an entrypoint, the @args@ are used as arguments to that entrypoint. If the image does not define an entrypoint, the first element in args is used as the entrypoint, and the remainder will be used as arguments.
     args :: (Core.Maybe [Core.Text]),
     -- | Working directory to use when running this step\'s container. If this value is a relative path, it is relative to the build\'s working directory. If this value is absolute, it may be outside the build\'s working directory, in which case the contents of the path may not be persisted across build step executions, unless a @volume@ for that path is specified. If the build specifies a @RepoSource@ with @dir@ and a step with a @dir@, which specifies an absolute path, the @RepoSource@ @dir@ is ignored for the step\'s execution.
     dir :: (Core.Maybe Core.Text),
@@ -2466,6 +2958,8 @@ data ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep = ContaineranalysisGoo
     entrypoint :: (Core.Maybe Core.Text),
     -- | A list of environment variable definitions to be used when running a step. The elements are of the form \"KEY=VALUE\" for the environment variable \"KEY\" being given the value \"VALUE\".
     env :: (Core.Maybe [Core.Text]),
+    -- | Output only. Return code from running the step.
+    exitCode :: (Core.Maybe Core.Int32),
     -- | Unique identifier for this build step, used in @wait_for@ to reference this build step as a dependency.
     id :: (Core.Maybe Core.Text),
     -- | Required. The name of the container image that will run this particular build step. If the image is available in the host\'s Docker daemon\'s cache, it will be run directly. If not, the host will attempt to pull the image first, using the builder service account\'s credentials if necessary. The Docker daemon\'s cache will already have the latest versions of all of the officially supported build steps (<https://github.com/GoogleCloudPlatform/cloud-builders>). The Docker daemon will also have cached many of the layers for some popular images, like \"ubuntu\", \"debian\", but they will be refreshed at the time you attempt to use them. If you built an image in a previous build step, it will be stored in the host\'s Docker daemon\'s cache and is available to use as the name for a later build step.
@@ -2497,10 +2991,13 @@ newContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep ::
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep
 newContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep =
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep
-    { args = Core.Nothing,
+    { allowExitCodes = Core.Nothing,
+      allowFailure = Core.Nothing,
+      args = Core.Nothing,
       dir = Core.Nothing,
       entrypoint = Core.Nothing,
       env = Core.Nothing,
+      exitCode = Core.Nothing,
       id = Core.Nothing,
       name = Core.Nothing,
       pullTiming = Core.Nothing,
@@ -2522,9 +3019,13 @@ instance
       "ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep"
       ( \o ->
           ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep
-            Core.<$> (o Core..:? "args") Core.<*> (o Core..:? "dir")
+            Core.<$> (o Core..:? "allowExitCodes")
+              Core.<*> (o Core..:? "allowFailure")
+              Core.<*> (o Core..:? "args")
+              Core.<*> (o Core..:? "dir")
               Core.<*> (o Core..:? "entrypoint")
               Core.<*> (o Core..:? "env")
+              Core.<*> (o Core..:? "exitCode")
               Core.<*> (o Core..:? "id")
               Core.<*> (o Core..:? "name")
               Core.<*> (o Core..:? "pullTiming")
@@ -2545,10 +3046,13 @@ instance
     ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep {..} =
       Core.object
         ( Core.catMaybes
-            [ ("args" Core..=) Core.<$> args,
+            [ ("allowExitCodes" Core..=) Core.<$> allowExitCodes,
+              ("allowFailure" Core..=) Core.<$> allowFailure,
+              ("args" Core..=) Core.<$> args,
               ("dir" Core..=) Core.<$> dir,
               ("entrypoint" Core..=) Core.<$> entrypoint,
               ("env" Core..=) Core.<$> env,
+              ("exitCode" Core..=) Core.<$> exitCode,
               ("id" Core..=) Core.<$> id,
               ("name" Core..=) Core.<$> name,
               ("pullTiming" Core..=) Core.<$> pullTiming,
@@ -2955,9 +3459,9 @@ instance
 --
 -- /See:/ 'newContaineranalysisGoogleDevtoolsCloudbuildV1Results' smart constructor.
 data ContaineranalysisGoogleDevtoolsCloudbuildV1Results = ContaineranalysisGoogleDevtoolsCloudbuildV1Results
-  { -- | Path to the artifact manifest. Only populated when artifacts are uploaded.
+  { -- | Path to the artifact manifest for non-container artifacts uploaded to Cloud Storage. Only populated when artifacts are uploaded to Cloud Storage.
     artifactManifest :: (Core.Maybe Core.Text),
-    -- | Time to push all non-container artifacts.
+    -- | Time to push all non-container artifacts to Cloud Storage.
     artifactTiming :: (Core.Maybe ContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan),
     -- | List of build step digests, in the order corresponding to build step indices.
     buildStepImages :: (Core.Maybe [Core.Text]),
@@ -2968,8 +3472,18 @@ data ContaineranalysisGoogleDevtoolsCloudbuildV1Results = ContaineranalysisGoogl
       ( Core.Maybe
           [ContaineranalysisGoogleDevtoolsCloudbuildV1BuiltImage]
       ),
-    -- | Number of artifacts uploaded. Only populated when artifacts are uploaded.
-    numArtifacts :: (Core.Maybe Core.Int64)
+    -- | Maven artifacts uploaded to Artifact Registry at the end of the build.
+    mavenArtifacts ::
+      ( Core.Maybe
+          [ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact]
+      ),
+    -- | Number of non-container artifacts uploaded to Cloud Storage. Only populated when artifacts are uploaded to Cloud Storage.
+    numArtifacts :: (Core.Maybe Core.Int64),
+    -- | Python artifacts uploaded to Artifact Registry at the end of the build.
+    pythonPackages ::
+      ( Core.Maybe
+          [ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage]
+      )
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2983,7 +3497,9 @@ newContaineranalysisGoogleDevtoolsCloudbuildV1Results =
       buildStepImages = Core.Nothing,
       buildStepOutputs = Core.Nothing,
       images = Core.Nothing,
-      numArtifacts = Core.Nothing
+      mavenArtifacts = Core.Nothing,
+      numArtifacts = Core.Nothing,
+      pythonPackages = Core.Nothing
     }
 
 instance
@@ -3000,9 +3516,11 @@ instance
               Core.<*> (o Core..:? "buildStepImages")
               Core.<*> (o Core..:? "buildStepOutputs")
               Core.<*> (o Core..:? "images")
+              Core.<*> (o Core..:? "mavenArtifacts")
               Core.<*> ( o Core..:? "numArtifacts"
                            Core.<&> Core.fmap Core.fromAsText
                        )
+              Core.<*> (o Core..:? "pythonPackages")
       )
 
 instance
@@ -3020,8 +3538,10 @@ instance
               ("buildStepOutputs" Core..=)
                 Core.<$> buildStepOutputs,
               ("images" Core..=) Core.<$> images,
+              ("mavenArtifacts" Core..=) Core.<$> mavenArtifacts,
               ("numArtifacts" Core..=) Core.. Core.AsText
-                Core.<$> numArtifacts
+                Core.<$> numArtifacts,
+              ("pythonPackages" Core..=) Core.<$> pythonPackages
             ]
         )
 
@@ -3534,6 +4054,108 @@ instance
             ]
         )
 
+-- | A Maven artifact uploaded using the MavenArtifact directive.
+--
+-- /See:/ 'newContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact' smart constructor.
+data ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact = ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact
+  { -- | Hash types and values of the Maven Artifact.
+    fileHashes :: (Core.Maybe ContaineranalysisGoogleDevtoolsCloudbuildV1FileHashes),
+    -- | Output only. Stores timing information for pushing the specified artifact.
+    pushTiming :: (Core.Maybe ContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan),
+    -- | URI of the uploaded artifact.
+    uri :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact' with the minimum fields required to make a request.
+newContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact ::
+  ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact
+newContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact =
+  ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact
+    { fileHashes = Core.Nothing,
+      pushTiming = Core.Nothing,
+      uri = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact
+  where
+  parseJSON =
+    Core.withObject
+      "ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact"
+      ( \o ->
+          ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact
+            Core.<$> (o Core..:? "fileHashes")
+              Core.<*> (o Core..:? "pushTiming")
+              Core.<*> (o Core..:? "uri")
+      )
+
+instance
+  Core.ToJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact
+  where
+  toJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("fileHashes" Core..=) Core.<$> fileHashes,
+              ("pushTiming" Core..=) Core.<$> pushTiming,
+              ("uri" Core..=) Core.<$> uri
+            ]
+        )
+
+-- | Artifact uploaded using the PythonPackage directive.
+--
+-- /See:/ 'newContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage' smart constructor.
+data ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage = ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage
+  { -- | Hash types and values of the Python Artifact.
+    fileHashes :: (Core.Maybe ContaineranalysisGoogleDevtoolsCloudbuildV1FileHashes),
+    -- | Output only. Stores timing information for pushing the specified artifact.
+    pushTiming :: (Core.Maybe ContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan),
+    -- | URI of the uploaded artifact.
+    uri :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage' with the minimum fields required to make a request.
+newContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage ::
+  ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage
+newContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage =
+  ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage
+    { fileHashes = Core.Nothing,
+      pushTiming = Core.Nothing,
+      uri = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage
+  where
+  parseJSON =
+    Core.withObject
+      "ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage"
+      ( \o ->
+          ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage
+            Core.<$> (o Core..:? "fileHashes")
+              Core.<*> (o Core..:? "pushTiming")
+              Core.<*> (o Core..:? "uri")
+      )
+
+instance
+  Core.ToJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage
+  where
+  toJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("fileHashes" Core..=) Core.<$> fileHashes,
+              ("pushTiming" Core..=) Core.<$> pushTiming,
+              ("uri" Core..=) Core.<$> uri
+            ]
+        )
+
 -- | Volume describes a Docker container volume which is mounted into build steps in order to persist files across build step execution.
 --
 -- /See:/ 'newContaineranalysisGoogleDevtoolsCloudbuildV1Volume' smart constructor.
@@ -3867,6 +4489,41 @@ instance Core.ToJSON Detail where
           ]
       )
 
+-- | Digest information.
+--
+-- /See:/ 'newDigest' smart constructor.
+data Digest = Digest
+  { -- | @SHA1@, @SHA512@ etc.
+    algo :: (Core.Maybe Core.Text),
+    -- | Value of the digest.
+    digestBytes :: (Core.Maybe Core.Base64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Digest' with the minimum fields required to make a request.
+newDigest ::
+  Digest
+newDigest = Digest {algo = Core.Nothing, digestBytes = Core.Nothing}
+
+instance Core.FromJSON Digest where
+  parseJSON =
+    Core.withObject
+      "Digest"
+      ( \o ->
+          Digest
+            Core.<$> (o Core..:? "algo")
+            Core.<*> (o Core..:? "digestBytes")
+      )
+
+instance Core.ToJSON Digest where
+  toJSON Digest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("algo" Core..=) Core.<$> algo,
+            ("digestBytes" Core..=) Core.<$> digestBytes
+          ]
+      )
+
 -- | A note that indicates a type of analysis a provider would perform. This note exists in a provider\'s project. A @Discovery@ occurrence is created in a consumer\'s project at the start of analysis.
 --
 -- /See:/ 'newDiscoveryNote' smart constructor.
@@ -3900,7 +4557,11 @@ instance Core.ToJSON DiscoveryNote where
 --
 -- /See:/ 'newDiscoveryOccurrence' smart constructor.
 data DiscoveryOccurrence = DiscoveryOccurrence
-  { -- | The status of discovery for the resource.
+  { -- |
+    analysisCompleted :: (Core.Maybe AnalysisCompleted),
+    -- | Indicates any errors encountered during analysis of a resource. There could be 0 or more of these errors.
+    analysisError :: (Core.Maybe [Status]),
+    -- | The status of discovery for the resource.
     analysisStatus :: (Core.Maybe DiscoveryOccurrence_AnalysisStatus),
     -- | When an error is encountered this will contain a LocalizedMessage under details to show to the user. The LocalizedMessage is output only and populated by the API.
     analysisStatusError :: (Core.Maybe Status),
@@ -3920,7 +4581,9 @@ newDiscoveryOccurrence ::
   DiscoveryOccurrence
 newDiscoveryOccurrence =
   DiscoveryOccurrence
-    { analysisStatus = Core.Nothing,
+    { analysisCompleted = Core.Nothing,
+      analysisError = Core.Nothing,
+      analysisStatus = Core.Nothing,
       analysisStatusError = Core.Nothing,
       archiveTime = Core.Nothing,
       continuousAnalysis = Core.Nothing,
@@ -3934,7 +4597,9 @@ instance Core.FromJSON DiscoveryOccurrence where
       "DiscoveryOccurrence"
       ( \o ->
           DiscoveryOccurrence
-            Core.<$> (o Core..:? "analysisStatus")
+            Core.<$> (o Core..:? "analysisCompleted")
+            Core.<*> (o Core..:? "analysisError")
+            Core.<*> (o Core..:? "analysisStatus")
             Core.<*> (o Core..:? "analysisStatusError")
             Core.<*> (o Core..:? "archiveTime")
             Core.<*> (o Core..:? "continuousAnalysis")
@@ -3946,7 +4611,10 @@ instance Core.ToJSON DiscoveryOccurrence where
   toJSON DiscoveryOccurrence {..} =
     Core.object
       ( Core.catMaybes
-          [ ("analysisStatus" Core..=) Core.<$> analysisStatus,
+          [ ("analysisCompleted" Core..=)
+              Core.<$> analysisCompleted,
+            ("analysisError" Core..=) Core.<$> analysisError,
+            ("analysisStatus" Core..=) Core.<$> analysisStatus,
             ("analysisStatusError" Core..=)
               Core.<$> analysisStatusError,
             ("archiveTime" Core..=) Core.<$> archiveTime,
@@ -4016,7 +4684,7 @@ instance Core.ToJSON Distribution where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -4288,6 +4956,26 @@ instance Core.ToJSON FixableTotalByDigest where
           ]
       )
 
+-- | GeneratePackagesSummaryRequest is the request body for the GeneratePackagesSummary API method. It just takes a single name argument, referring to the resource.
+--
+-- /See:/ 'newGeneratePackagesSummaryRequest' smart constructor.
+data GeneratePackagesSummaryRequest = GeneratePackagesSummaryRequest
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GeneratePackagesSummaryRequest' with the minimum fields required to make a request.
+newGeneratePackagesSummaryRequest ::
+  GeneratePackagesSummaryRequest
+newGeneratePackagesSummaryRequest = GeneratePackagesSummaryRequest
+
+instance Core.FromJSON GeneratePackagesSummaryRequest where
+  parseJSON =
+    Core.withObject
+      "GeneratePackagesSummaryRequest"
+      (\o -> Core.pure GeneratePackagesSummaryRequest)
+
+instance Core.ToJSON GeneratePackagesSummaryRequest where
+  toJSON = Core.const Core.emptyObject
+
 -- | A SourceContext referring to a Gerrit project.
 --
 -- /See:/ 'newGerritSourceContext' smart constructor.
@@ -4479,6 +5167,486 @@ instance
               ("endTime" Core..=) Core.<$> endTime
             ]
         )
+
+-- | Indicates the location at which a package was found.
+--
+-- /See:/ 'newGrafeasV1FileLocation' smart constructor.
+newtype GrafeasV1FileLocation = GrafeasV1FileLocation
+  { -- | For jars that are contained inside .war files, this filepath can indicate the path to war file combined with the path to jar file.
+    filePath :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GrafeasV1FileLocation' with the minimum fields required to make a request.
+newGrafeasV1FileLocation ::
+  GrafeasV1FileLocation
+newGrafeasV1FileLocation = GrafeasV1FileLocation {filePath = Core.Nothing}
+
+instance Core.FromJSON GrafeasV1FileLocation where
+  parseJSON =
+    Core.withObject
+      "GrafeasV1FileLocation"
+      ( \o ->
+          GrafeasV1FileLocation
+            Core.<$> (o Core..:? "filePath")
+      )
+
+instance Core.ToJSON GrafeasV1FileLocation where
+  toJSON GrafeasV1FileLocation {..} =
+    Core.object
+      ( Core.catMaybes
+          [("filePath" Core..=) Core.<$> filePath]
+      )
+
+-- | Identifies the entity that executed the recipe, which is trusted to have correctly performed the operation and populated this provenance.
+--
+-- /See:/ 'newGrafeasV1SlsaProvenanceZeroTwoSlsaBuilder' smart constructor.
+newtype GrafeasV1SlsaProvenanceZeroTwoSlsaBuilder = GrafeasV1SlsaProvenanceZeroTwoSlsaBuilder
+  { -- |
+    id :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GrafeasV1SlsaProvenanceZeroTwoSlsaBuilder' with the minimum fields required to make a request.
+newGrafeasV1SlsaProvenanceZeroTwoSlsaBuilder ::
+  GrafeasV1SlsaProvenanceZeroTwoSlsaBuilder
+newGrafeasV1SlsaProvenanceZeroTwoSlsaBuilder =
+  GrafeasV1SlsaProvenanceZeroTwoSlsaBuilder {id = Core.Nothing}
+
+instance
+  Core.FromJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaBuilder
+  where
+  parseJSON =
+    Core.withObject
+      "GrafeasV1SlsaProvenanceZeroTwoSlsaBuilder"
+      ( \o ->
+          GrafeasV1SlsaProvenanceZeroTwoSlsaBuilder
+            Core.<$> (o Core..:? "id")
+      )
+
+instance
+  Core.ToJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaBuilder
+  where
+  toJSON GrafeasV1SlsaProvenanceZeroTwoSlsaBuilder {..} =
+    Core.object
+      (Core.catMaybes [("id" Core..=) Core.<$> id])
+
+-- | Indicates that the builder claims certain fields in this message to be complete.
+--
+-- /See:/ 'newGrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness' smart constructor.
+data GrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness = GrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness
+  { -- |
+    environment :: (Core.Maybe Core.Bool),
+    -- |
+    materials :: (Core.Maybe Core.Bool),
+    -- |
+    parameters :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness' with the minimum fields required to make a request.
+newGrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness ::
+  GrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness
+newGrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness =
+  GrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness
+    { environment = Core.Nothing,
+      materials = Core.Nothing,
+      parameters = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness
+  where
+  parseJSON =
+    Core.withObject
+      "GrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness"
+      ( \o ->
+          GrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness
+            Core.<$> (o Core..:? "environment")
+              Core.<*> (o Core..:? "materials")
+              Core.<*> (o Core..:? "parameters")
+      )
+
+instance
+  Core.ToJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness
+  where
+  toJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("environment" Core..=) Core.<$> environment,
+              ("materials" Core..=) Core.<$> materials,
+              ("parameters" Core..=) Core.<$> parameters
+            ]
+        )
+
+-- | Describes where the config file that kicked off the build came from. This is effectively a pointer to the source where buildConfig came from.
+--
+-- /See:/ 'newGrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource' smart constructor.
+data GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource = GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource
+  { -- |
+    digest :: (Core.Maybe GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource_Digest),
+    -- |
+    entryPoint :: (Core.Maybe Core.Text),
+    -- |
+    uri :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource' with the minimum fields required to make a request.
+newGrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource ::
+  GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource
+newGrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource =
+  GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource
+    { digest = Core.Nothing,
+      entryPoint = Core.Nothing,
+      uri = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource
+  where
+  parseJSON =
+    Core.withObject
+      "GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource"
+      ( \o ->
+          GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource
+            Core.<$> (o Core..:? "digest")
+              Core.<*> (o Core..:? "entryPoint")
+              Core.<*> (o Core..:? "uri")
+      )
+
+instance
+  Core.ToJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource
+  where
+  toJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("digest" Core..=) Core.<$> digest,
+              ("entryPoint" Core..=) Core.<$> entryPoint,
+              ("uri" Core..=) Core.<$> uri
+            ]
+        )
+
+--
+-- /See:/ 'newGrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource_Digest' smart constructor.
+newtype GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource_Digest = GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource_Digest
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource_Digest' with the minimum fields required to make a request.
+newGrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource_Digest ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource_Digest
+newGrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource_Digest additional =
+  GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource_Digest
+    { additional = additional
+    }
+
+instance
+  Core.FromJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource_Digest
+  where
+  parseJSON =
+    Core.withObject
+      "GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource_Digest"
+      ( \o ->
+          GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource_Digest
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource_Digest
+  where
+  toJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource_Digest {..} =
+      Core.toJSON additional
+
+-- | Identifies the event that kicked off the build.
+--
+-- /See:/ 'newGrafeasV1SlsaProvenanceZeroTwoSlsaInvocation' smart constructor.
+data GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation = GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation
+  { -- |
+    configSource :: (Core.Maybe GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource),
+    -- |
+    environment ::
+      ( Core.Maybe
+          GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Environment
+      ),
+    -- |
+    parameters ::
+      ( Core.Maybe
+          GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Parameters
+      )
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation' with the minimum fields required to make a request.
+newGrafeasV1SlsaProvenanceZeroTwoSlsaInvocation ::
+  GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation
+newGrafeasV1SlsaProvenanceZeroTwoSlsaInvocation =
+  GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation
+    { configSource = Core.Nothing,
+      environment = Core.Nothing,
+      parameters = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation
+  where
+  parseJSON =
+    Core.withObject
+      "GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation"
+      ( \o ->
+          GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation
+            Core.<$> (o Core..:? "configSource")
+            Core.<*> (o Core..:? "environment")
+            Core.<*> (o Core..:? "parameters")
+      )
+
+instance
+  Core.ToJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation
+  where
+  toJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("configSource" Core..=) Core.<$> configSource,
+              ("environment" Core..=) Core.<$> environment,
+              ("parameters" Core..=) Core.<$> parameters
+            ]
+        )
+
+--
+-- /See:/ 'newGrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Environment' smart constructor.
+newtype GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Environment = GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Environment
+  { -- | Properties of the object.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Environment' with the minimum fields required to make a request.
+newGrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Environment ::
+  -- |  Properties of the object. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Environment
+newGrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Environment additional =
+  GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Environment
+    { additional = additional
+    }
+
+instance
+  Core.FromJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Environment
+  where
+  parseJSON =
+    Core.withObject
+      "GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Environment"
+      ( \o ->
+          GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Environment
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Environment
+  where
+  toJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Environment {..} =
+      Core.toJSON additional
+
+--
+-- /See:/ 'newGrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Parameters' smart constructor.
+newtype GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Parameters = GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Parameters
+  { -- | Properties of the object.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Parameters' with the minimum fields required to make a request.
+newGrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Parameters ::
+  -- |  Properties of the object. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Parameters
+newGrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Parameters additional =
+  GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Parameters
+    { additional = additional
+    }
+
+instance
+  Core.FromJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Parameters
+  where
+  parseJSON =
+    Core.withObject
+      "GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Parameters"
+      ( \o ->
+          GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Parameters
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Parameters
+  where
+  toJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Parameters {..} =
+      Core.toJSON additional
+
+-- | The collection of artifacts that influenced the build including sources, dependencies, build tools, base images, and so on.
+--
+-- /See:/ 'newGrafeasV1SlsaProvenanceZeroTwoSlsaMaterial' smart constructor.
+data GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial = GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial
+  { -- |
+    digest :: (Core.Maybe GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial_Digest),
+    -- |
+    uri :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial' with the minimum fields required to make a request.
+newGrafeasV1SlsaProvenanceZeroTwoSlsaMaterial ::
+  GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial
+newGrafeasV1SlsaProvenanceZeroTwoSlsaMaterial =
+  GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial
+    { digest = Core.Nothing,
+      uri = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial
+  where
+  parseJSON =
+    Core.withObject
+      "GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial"
+      ( \o ->
+          GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial
+            Core.<$> (o Core..:? "digest") Core.<*> (o Core..:? "uri")
+      )
+
+instance
+  Core.ToJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial
+  where
+  toJSON GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("digest" Core..=) Core.<$> digest,
+            ("uri" Core..=) Core.<$> uri
+          ]
+      )
+
+--
+-- /See:/ 'newGrafeasV1SlsaProvenanceZeroTwoSlsaMaterial_Digest' smart constructor.
+newtype GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial_Digest = GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial_Digest
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial_Digest' with the minimum fields required to make a request.
+newGrafeasV1SlsaProvenanceZeroTwoSlsaMaterial_Digest ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial_Digest
+newGrafeasV1SlsaProvenanceZeroTwoSlsaMaterial_Digest additional =
+  GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial_Digest {additional = additional}
+
+instance
+  Core.FromJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial_Digest
+  where
+  parseJSON =
+    Core.withObject
+      "GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial_Digest"
+      ( \o ->
+          GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial_Digest
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial_Digest
+  where
+  toJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial_Digest {..} =
+      Core.toJSON additional
+
+-- | Other properties of the build.
+--
+-- /See:/ 'newGrafeasV1SlsaProvenanceZeroTwoSlsaMetadata' smart constructor.
+data GrafeasV1SlsaProvenanceZeroTwoSlsaMetadata = GrafeasV1SlsaProvenanceZeroTwoSlsaMetadata
+  { -- |
+    buildFinishedOn :: (Core.Maybe Core.DateTime),
+    -- |
+    buildInvocationId :: (Core.Maybe Core.Text),
+    -- |
+    buildStartedOn :: (Core.Maybe Core.DateTime),
+    -- |
+    completeness :: (Core.Maybe GrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness),
+    -- |
+    reproducible :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GrafeasV1SlsaProvenanceZeroTwoSlsaMetadata' with the minimum fields required to make a request.
+newGrafeasV1SlsaProvenanceZeroTwoSlsaMetadata ::
+  GrafeasV1SlsaProvenanceZeroTwoSlsaMetadata
+newGrafeasV1SlsaProvenanceZeroTwoSlsaMetadata =
+  GrafeasV1SlsaProvenanceZeroTwoSlsaMetadata
+    { buildFinishedOn = Core.Nothing,
+      buildInvocationId = Core.Nothing,
+      buildStartedOn = Core.Nothing,
+      completeness = Core.Nothing,
+      reproducible = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaMetadata
+  where
+  parseJSON =
+    Core.withObject
+      "GrafeasV1SlsaProvenanceZeroTwoSlsaMetadata"
+      ( \o ->
+          GrafeasV1SlsaProvenanceZeroTwoSlsaMetadata
+            Core.<$> (o Core..:? "buildFinishedOn")
+            Core.<*> (o Core..:? "buildInvocationId")
+            Core.<*> (o Core..:? "buildStartedOn")
+            Core.<*> (o Core..:? "completeness")
+            Core.<*> (o Core..:? "reproducible")
+      )
+
+instance
+  Core.ToJSON
+    GrafeasV1SlsaProvenanceZeroTwoSlsaMetadata
+  where
+  toJSON GrafeasV1SlsaProvenanceZeroTwoSlsaMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("buildFinishedOn" Core..=)
+              Core.<$> buildFinishedOn,
+            ("buildInvocationId" Core..=)
+              Core.<$> buildInvocationId,
+            ("buildStartedOn" Core..=) Core.<$> buildStartedOn,
+            ("completeness" Core..=) Core.<$> completeness,
+            ("reproducible" Core..=) Core.<$> reproducible
+          ]
+      )
 
 -- | Container message for hash values.
 --
@@ -4727,6 +5895,8 @@ data InTotoStatement = InTotoStatement
     -- |
     slsaProvenance :: (Core.Maybe SlsaProvenance),
     -- |
+    slsaProvenanceZeroTwo :: (Core.Maybe SlsaProvenanceZeroTwo),
+    -- |
     subject :: (Core.Maybe [Subject])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4740,6 +5910,7 @@ newInTotoStatement =
       predicateType = Core.Nothing,
       provenance = Core.Nothing,
       slsaProvenance = Core.Nothing,
+      slsaProvenanceZeroTwo = Core.Nothing,
       subject = Core.Nothing
     }
 
@@ -4753,6 +5924,7 @@ instance Core.FromJSON InTotoStatement where
             Core.<*> (o Core..:? "predicateType")
             Core.<*> (o Core..:? "provenance")
             Core.<*> (o Core..:? "slsaProvenance")
+            Core.<*> (o Core..:? "slsaProvenanceZeroTwo")
             Core.<*> (o Core..:? "subject")
       )
 
@@ -4764,7 +5936,46 @@ instance Core.ToJSON InTotoStatement where
             ("predicateType" Core..=) Core.<$> predicateType,
             ("provenance" Core..=) Core.<$> provenance,
             ("slsaProvenance" Core..=) Core.<$> slsaProvenance,
+            ("slsaProvenanceZeroTwo" Core..=)
+              Core.<$> slsaProvenanceZeroTwo,
             ("subject" Core..=) Core.<$> subject
+          ]
+      )
+
+-- | Justification provides the justification when the state of the assessment if NOT_AFFECTED.
+--
+-- /See:/ 'newJustification' smart constructor.
+data Justification = Justification
+  { -- | Additional details on why this justification was chosen.
+    details :: (Core.Maybe Core.Text),
+    -- | The justification type for this vulnerability.
+    justificationType :: (Core.Maybe Justification_JustificationType)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Justification' with the minimum fields required to make a request.
+newJustification ::
+  Justification
+newJustification =
+  Justification {details = Core.Nothing, justificationType = Core.Nothing}
+
+instance Core.FromJSON Justification where
+  parseJSON =
+    Core.withObject
+      "Justification"
+      ( \o ->
+          Justification
+            Core.<$> (o Core..:? "details")
+            Core.<*> (o Core..:? "justificationType")
+      )
+
+instance Core.ToJSON Justification where
+  toJSON Justification {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("details" Core..=) Core.<$> details,
+            ("justificationType" Core..=)
+              Core.<$> justificationType
           ]
       )
 
@@ -4859,6 +6070,79 @@ instance Core.ToJSON Layer where
       ( Core.catMaybes
           [ ("arguments" Core..=) Core.<$> arguments,
             ("directive" Core..=) Core.<$> directive
+          ]
+      )
+
+-- | License information.
+--
+-- /See:/ 'newLicense' smart constructor.
+data License = License
+  { -- | Comments
+    comments :: (Core.Maybe Core.Text),
+    -- | Often a single license can be used to represent the licensing terms. Sometimes it is necessary to include a choice of one or more licenses or some combination of license identifiers. Examples: \"LGPL-2.1-only OR MIT\", \"LGPL-2.1-only AND MIT\", \"GPL-2.0-or-later WITH Bison-exception-2.2\".
+    expression :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'License' with the minimum fields required to make a request.
+newLicense ::
+  License
+newLicense = License {comments = Core.Nothing, expression = Core.Nothing}
+
+instance Core.FromJSON License where
+  parseJSON =
+    Core.withObject
+      "License"
+      ( \o ->
+          License
+            Core.<$> (o Core..:? "comments")
+            Core.<*> (o Core..:? "expression")
+      )
+
+instance Core.ToJSON License where
+  toJSON License {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("comments" Core..=) Core.<$> comments,
+            ("expression" Core..=) Core.<$> expression
+          ]
+      )
+
+-- | Per license count
+--
+-- /See:/ 'newLicensesSummary' smart constructor.
+data LicensesSummary = LicensesSummary
+  { -- | The number of fixable vulnerabilities associated with this resource.
+    count :: (Core.Maybe Core.Int64),
+    -- | The license of the package. Note that the format of this value is not guaranteed. It may be nil, an empty string, a boolean value (A | B), a differently formed boolean value (A OR B), etc...
+    license :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LicensesSummary' with the minimum fields required to make a request.
+newLicensesSummary ::
+  LicensesSummary
+newLicensesSummary =
+  LicensesSummary {count = Core.Nothing, license = Core.Nothing}
+
+instance Core.FromJSON LicensesSummary where
+  parseJSON =
+    Core.withObject
+      "LicensesSummary"
+      ( \o ->
+          LicensesSummary
+            Core.<$> ( o Core..:? "count"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "license")
+      )
+
+instance Core.ToJSON LicensesSummary where
+  toJSON LicensesSummary {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("count" Core..=) Core.. Core.AsText Core.<$> count,
+            ("license" Core..=) Core.<$> license
           ]
       )
 
@@ -4980,11 +6264,11 @@ instance Core.ToJSON ListOccurrencesResponse where
 --
 -- /See:/ 'newLocation' smart constructor.
 data Location = Location
-  { -- | Required. The CPE URI in <https://cpe.mitre.org/specification/ CPE format> denoting the package manager version distributing a package.
+  { -- | Deprecated. The CPE URI in <https://cpe.mitre.org/specification/ CPE format>
     cpeUri :: (Core.Maybe Core.Text),
     -- | The path from which we gathered that this package\/version is installed.
     path :: (Core.Maybe Core.Text),
-    -- | The version installed at this location.
+    -- | Deprecated. The version installed at this location.
     version :: (Core.Maybe Version)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5216,7 +6500,9 @@ data Note = Note
     -- | A note describing available package upgrades.
     upgrade :: (Core.Maybe UpgradeNote),
     -- | A note describing a package vulnerability.
-    vulnerability :: (Core.Maybe VulnerabilityNote)
+    vulnerability :: (Core.Maybe VulnerabilityNote),
+    -- | A note describing a vulnerability assessment.
+    vulnerabilityAssessment :: (Core.Maybe VulnerabilityAssessmentNote)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5243,7 +6529,8 @@ newNote =
       shortDescription = Core.Nothing,
       updateTime = Core.Nothing,
       upgrade = Core.Nothing,
-      vulnerability = Core.Nothing
+      vulnerability = Core.Nothing,
+      vulnerabilityAssessment = Core.Nothing
     }
 
 instance Core.FromJSON Note where
@@ -5271,6 +6558,7 @@ instance Core.FromJSON Note where
             Core.<*> (o Core..:? "updateTime")
             Core.<*> (o Core..:? "upgrade")
             Core.<*> (o Core..:? "vulnerability")
+            Core.<*> (o Core..:? "vulnerabilityAssessment")
       )
 
 instance Core.ToJSON Note where
@@ -5297,7 +6585,9 @@ instance Core.ToJSON Note where
               Core.<$> shortDescription,
             ("updateTime" Core..=) Core.<$> updateTime,
             ("upgrade" Core..=) Core.<$> upgrade,
-            ("vulnerability" Core..=) Core.<$> vulnerability
+            ("vulnerability" Core..=) Core.<$> vulnerability,
+            ("vulnerabilityAssessment" Core..=)
+              Core.<$> vulnerabilityAssessment
           ]
       )
 
@@ -5432,6 +6722,8 @@ data PackageIssue = PackageIssue
     affectedVersion :: (Core.Maybe Version),
     -- | Output only. The distro or language system assigned severity for this vulnerability when that is available and note provider assigned severity when it is not available.
     effectiveSeverity :: (Core.Maybe PackageIssue_EffectiveSeverity),
+    -- | The location at which this package was found.
+    fileLocation :: (Core.Maybe [GrafeasV1FileLocation]),
     -- | Output only. Whether a fix is available for this package.
     fixAvailable :: (Core.Maybe Core.Bool),
     -- | The <https://cpe.mitre.org/specification/ CPE URI> this vulnerability was fixed in. It is possible for this to be different from the affected/cpe/uri.
@@ -5454,6 +6746,7 @@ newPackageIssue =
       affectedPackage = Core.Nothing,
       affectedVersion = Core.Nothing,
       effectiveSeverity = Core.Nothing,
+      fileLocation = Core.Nothing,
       fixAvailable = Core.Nothing,
       fixedCpeUri = Core.Nothing,
       fixedPackage = Core.Nothing,
@@ -5471,6 +6764,7 @@ instance Core.FromJSON PackageIssue where
             Core.<*> (o Core..:? "affectedPackage")
             Core.<*> (o Core..:? "affectedVersion")
             Core.<*> (o Core..:? "effectiveSeverity")
+            Core.<*> (o Core..:? "fileLocation")
             Core.<*> (o Core..:? "fixAvailable")
             Core.<*> (o Core..:? "fixedCpeUri")
             Core.<*> (o Core..:? "fixedPackage")
@@ -5487,6 +6781,7 @@ instance Core.ToJSON PackageIssue where
             ("affectedVersion" Core..=) Core.<$> affectedVersion,
             ("effectiveSeverity" Core..=)
               Core.<$> effectiveSeverity,
+            ("fileLocation" Core..=) Core.<$> fileLocation,
             ("fixAvailable" Core..=) Core.<$> fixAvailable,
             ("fixedCpeUri" Core..=) Core.<$> fixedCpeUri,
             ("fixedPackage" Core..=) Core.<$> fixedPackage,
@@ -5495,21 +6790,52 @@ instance Core.ToJSON PackageIssue where
           ]
       )
 
--- | This represents a particular package that is distributed over various channels. E.g., glibc (aka libc6) is distributed by many, at various versions.
+-- | PackageNote represents a particular package version.
 --
 -- /See:/ 'newPackageNote' smart constructor.
 data PackageNote = PackageNote
-  { -- | The various channels by which a package is distributed.
+  { -- | The CPU architecture for which packages in this distribution channel were built. Architecture will be blank for language packages.
+    architecture :: (Core.Maybe PackageNote_Architecture),
+    -- | The cpe/uri in <https://cpe.mitre.org/specification/ CPE format> denoting the package manager version distributing a package. The cpe/uri will be blank for language packages.
+    cpeUri :: (Core.Maybe Core.Text),
+    -- | The description of this package.
+    description :: (Core.Maybe Core.Text),
+    -- | Hash value, typically a file digest, that allows unique identification a specific package.
+    digest :: (Core.Maybe [Digest]),
+    -- | Deprecated. The various channels by which a package is distributed.
     distribution :: (Core.Maybe [Distribution]),
+    -- | Licenses that have been declared by the authors of the package.
+    license :: (Core.Maybe License),
+    -- | A freeform text denoting the maintainer of this package.
+    maintainer :: (Core.Maybe Core.Text),
     -- | Required. Immutable. The name of the package.
-    name :: (Core.Maybe Core.Text)
+    name :: (Core.Maybe Core.Text),
+    -- | The type of package; whether native or non native (e.g., ruby gems, node.js packages, etc.).
+    packageType :: (Core.Maybe Core.Text),
+    -- | The homepage for this package.
+    url :: (Core.Maybe Core.Text),
+    -- | The version of the package.
+    version :: (Core.Maybe Version)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'PackageNote' with the minimum fields required to make a request.
 newPackageNote ::
   PackageNote
-newPackageNote = PackageNote {distribution = Core.Nothing, name = Core.Nothing}
+newPackageNote =
+  PackageNote
+    { architecture = Core.Nothing,
+      cpeUri = Core.Nothing,
+      description = Core.Nothing,
+      digest = Core.Nothing,
+      distribution = Core.Nothing,
+      license = Core.Nothing,
+      maintainer = Core.Nothing,
+      name = Core.Nothing,
+      packageType = Core.Nothing,
+      url = Core.Nothing,
+      version = Core.Nothing
+    }
 
 instance Core.FromJSON PackageNote where
   parseJSON =
@@ -5517,16 +6843,34 @@ instance Core.FromJSON PackageNote where
       "PackageNote"
       ( \o ->
           PackageNote
-            Core.<$> (o Core..:? "distribution")
+            Core.<$> (o Core..:? "architecture")
+            Core.<*> (o Core..:? "cpeUri")
+            Core.<*> (o Core..:? "description")
+            Core.<*> (o Core..:? "digest")
+            Core.<*> (o Core..:? "distribution")
+            Core.<*> (o Core..:? "license")
+            Core.<*> (o Core..:? "maintainer")
             Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "packageType")
+            Core.<*> (o Core..:? "url")
+            Core.<*> (o Core..:? "version")
       )
 
 instance Core.ToJSON PackageNote where
   toJSON PackageNote {..} =
     Core.object
       ( Core.catMaybes
-          [ ("distribution" Core..=) Core.<$> distribution,
-            ("name" Core..=) Core.<$> name
+          [ ("architecture" Core..=) Core.<$> architecture,
+            ("cpeUri" Core..=) Core.<$> cpeUri,
+            ("description" Core..=) Core.<$> description,
+            ("digest" Core..=) Core.<$> digest,
+            ("distribution" Core..=) Core.<$> distribution,
+            ("license" Core..=) Core.<$> license,
+            ("maintainer" Core..=) Core.<$> maintainer,
+            ("name" Core..=) Core.<$> name,
+            ("packageType" Core..=) Core.<$> packageType,
+            ("url" Core..=) Core.<$> url,
+            ("version" Core..=) Core.<$> version
           ]
       )
 
@@ -5534,10 +6878,20 @@ instance Core.ToJSON PackageNote where
 --
 -- /See:/ 'newPackageOccurrence' smart constructor.
 data PackageOccurrence = PackageOccurrence
-  { -- | Required. All of the places within the filesystem versions of this package have been found.
+  { -- | Output only. The CPU architecture for which packages in this distribution channel were built. Architecture will be blank for language packages.
+    architecture :: (Core.Maybe PackageOccurrence_Architecture),
+    -- | Output only. The cpe/uri in <https://cpe.mitre.org/specification/ CPE format> denoting the package manager version distributing a package. The cpe/uri will be blank for language packages.
+    cpeUri :: (Core.Maybe Core.Text),
+    -- | Licenses that have been declared by the authors of the package.
+    license :: (Core.Maybe License),
+    -- | All of the places within the filesystem versions of this package have been found.
     location :: (Core.Maybe [Location]),
-    -- | Output only. The name of the installed package.
-    name :: (Core.Maybe Core.Text)
+    -- | Required. Output only. The name of the installed package.
+    name :: (Core.Maybe Core.Text),
+    -- | Output only. The type of package; whether native or non native (e.g., ruby gems, node.js packages, etc.).
+    packageType :: (Core.Maybe Core.Text),
+    -- | Output only. The version of the package.
+    version :: (Core.Maybe Version)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5545,7 +6899,15 @@ data PackageOccurrence = PackageOccurrence
 newPackageOccurrence ::
   PackageOccurrence
 newPackageOccurrence =
-  PackageOccurrence {location = Core.Nothing, name = Core.Nothing}
+  PackageOccurrence
+    { architecture = Core.Nothing,
+      cpeUri = Core.Nothing,
+      license = Core.Nothing,
+      location = Core.Nothing,
+      name = Core.Nothing,
+      packageType = Core.Nothing,
+      version = Core.Nothing
+    }
 
 instance Core.FromJSON PackageOccurrence where
   parseJSON =
@@ -5553,15 +6915,66 @@ instance Core.FromJSON PackageOccurrence where
       "PackageOccurrence"
       ( \o ->
           PackageOccurrence
-            Core.<$> (o Core..:? "location") Core.<*> (o Core..:? "name")
+            Core.<$> (o Core..:? "architecture")
+            Core.<*> (o Core..:? "cpeUri")
+            Core.<*> (o Core..:? "license")
+            Core.<*> (o Core..:? "location")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "packageType")
+            Core.<*> (o Core..:? "version")
       )
 
 instance Core.ToJSON PackageOccurrence where
   toJSON PackageOccurrence {..} =
     Core.object
       ( Core.catMaybes
-          [ ("location" Core..=) Core.<$> location,
-            ("name" Core..=) Core.<$> name
+          [ ("architecture" Core..=) Core.<$> architecture,
+            ("cpeUri" Core..=) Core.<$> cpeUri,
+            ("license" Core..=) Core.<$> license,
+            ("location" Core..=) Core.<$> location,
+            ("name" Core..=) Core.<$> name,
+            ("packageType" Core..=) Core.<$> packageType,
+            ("version" Core..=) Core.<$> version
+          ]
+      )
+
+-- | A summary of the packages found within the given resource.
+--
+-- /See:/ 'newPackagesSummaryResponse' smart constructor.
+data PackagesSummaryResponse = PackagesSummaryResponse
+  { -- | A listing by license name of each of the licenses and their counts.
+    licensesSummary :: (Core.Maybe [LicensesSummary]),
+    -- | The unique URL of the image or the container for which this summary applies.
+    resourceUrl :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PackagesSummaryResponse' with the minimum fields required to make a request.
+newPackagesSummaryResponse ::
+  PackagesSummaryResponse
+newPackagesSummaryResponse =
+  PackagesSummaryResponse
+    { licensesSummary = Core.Nothing,
+      resourceUrl = Core.Nothing
+    }
+
+instance Core.FromJSON PackagesSummaryResponse where
+  parseJSON =
+    Core.withObject
+      "PackagesSummaryResponse"
+      ( \o ->
+          PackagesSummaryResponse
+            Core.<$> (o Core..:? "licensesSummary")
+            Core.<*> (o Core..:? "resourceUrl")
+      )
+
+instance Core.ToJSON PackagesSummaryResponse where
+  toJSON PackagesSummaryResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("licensesSummary" Core..=)
+              Core.<$> licensesSummary,
+            ("resourceUrl" Core..=) Core.<$> resourceUrl
           ]
       )
 
@@ -5608,6 +7021,46 @@ instance Core.ToJSON Policy where
           ]
       )
 
+-- | Product contains information about a product and how to uniquely identify it.
+--
+-- /See:/ 'newProduct' smart constructor.
+data Product = Product
+  { -- | Contains a URI which is vendor-specific. Example: The artifact repository URL of an image.
+    genericUri :: (Core.Maybe Core.Text),
+    -- | Token that identifies a product so that it can be referred to from other parts in the document. There is no predefined format as long as it uniquely identifies a group in the context of the current document.
+    id :: (Core.Maybe Core.Text),
+    -- | Name of the product.
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Product' with the minimum fields required to make a request.
+newProduct ::
+  Product
+newProduct =
+  Product {genericUri = Core.Nothing, id = Core.Nothing, name = Core.Nothing}
+
+instance Core.FromJSON Product where
+  parseJSON =
+    Core.withObject
+      "Product"
+      ( \o ->
+          Product
+            Core.<$> (o Core..:? "genericUri")
+            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON Product where
+  toJSON Product {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("genericUri" Core..=) Core.<$> genericUri,
+            ("id" Core..=) Core.<$> id,
+            ("name" Core..=) Core.<$> name
+          ]
+      )
+
 -- | Selects a repo using a Google Cloud Platform project ID (e.g., winged-cargo-31) and a repo name within that project.
 --
 -- /See:/ 'newProjectRepoId' smart constructor.
@@ -5641,6 +7094,52 @@ instance Core.ToJSON ProjectRepoId where
       ( Core.catMaybes
           [ ("projectId" Core..=) Core.<$> projectId,
             ("repoName" Core..=) Core.<$> repoName
+          ]
+      )
+
+-- | Publisher contains information about the publisher of this Note.
+--
+-- /See:/ 'newPublisher' smart constructor.
+data Publisher = Publisher
+  { -- | Provides information about the authority of the issuing party to release the document, in particular, the party\'s constituency and responsibilities or other obligations.
+    issuingAuthority :: (Core.Maybe Core.Text),
+    -- | Name of the publisher. Examples: \'Google\', \'Google Cloud Platform\'.
+    name :: (Core.Maybe Core.Text),
+    -- | The context or namespace. Contains a URL which is under control of the issuing party and can be used as a globally unique identifier for that issuing party. Example: https:\/\/csaf.io
+    publisherNamespace :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Publisher' with the minimum fields required to make a request.
+newPublisher ::
+  Publisher
+newPublisher =
+  Publisher
+    { issuingAuthority = Core.Nothing,
+      name = Core.Nothing,
+      publisherNamespace = Core.Nothing
+    }
+
+instance Core.FromJSON Publisher where
+  parseJSON =
+    Core.withObject
+      "Publisher"
+      ( \o ->
+          Publisher
+            Core.<$> (o Core..:? "issuingAuthority")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "publisherNamespace")
+      )
+
+instance Core.ToJSON Publisher where
+  toJSON Publisher {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("issuingAuthority" Core..=)
+              Core.<$> issuingAuthority,
+            ("name" Core..=) Core.<$> name,
+            ("publisherNamespace" Core..=)
+              Core.<$> publisherNamespace
           ]
       )
 
@@ -5793,6 +7292,50 @@ instance Core.ToJSON RelatedUrl where
           ]
       )
 
+-- | Specifies details on how to handle (and presumably, fix) a vulnerability.
+--
+-- /See:/ 'newRemediation' smart constructor.
+data Remediation = Remediation
+  { -- | Contains a comprehensive human-readable discussion of the remediation.
+    details :: (Core.Maybe Core.Text),
+    -- | The type of remediation that can be applied.
+    remediationType :: (Core.Maybe Remediation_RemediationType),
+    -- | Contains the URL where to obtain the remediation.
+    remediationUri :: (Core.Maybe RelatedUrl)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Remediation' with the minimum fields required to make a request.
+newRemediation ::
+  Remediation
+newRemediation =
+  Remediation
+    { details = Core.Nothing,
+      remediationType = Core.Nothing,
+      remediationUri = Core.Nothing
+    }
+
+instance Core.FromJSON Remediation where
+  parseJSON =
+    Core.withObject
+      "Remediation"
+      ( \o ->
+          Remediation
+            Core.<$> (o Core..:? "details")
+            Core.<*> (o Core..:? "remediationType")
+            Core.<*> (o Core..:? "remediationUri")
+      )
+
+instance Core.ToJSON Remediation where
+  toJSON Remediation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("details" Core..=) Core.<$> details,
+            ("remediationType" Core..=) Core.<$> remediationType,
+            ("remediationUri" Core..=) Core.<$> remediationUri
+          ]
+      )
+
 -- | A unique identifier for a Cloud Repo.
 --
 -- /See:/ 'newRepoId' smart constructor.
@@ -5832,7 +7375,7 @@ instance Core.ToJSON RepoId where
 --
 -- /See:/ 'newSetIamPolicyRequest' smart constructor.
 newtype SetIamPolicyRequest = SetIamPolicyRequest
-  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
+  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Google Cloud services (such as Projects) might reject them.
     policy :: (Core.Maybe Policy)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6062,6 +7605,100 @@ instance Core.ToJSON SlsaProvenance where
             ("recipe" Core..=) Core.<$> recipe
           ]
       )
+
+-- | See full explanation of fields at slsa.dev\/provenance\/v0.2.
+--
+-- /See:/ 'newSlsaProvenanceZeroTwo' smart constructor.
+data SlsaProvenanceZeroTwo = SlsaProvenanceZeroTwo
+  { -- |
+    buildConfig :: (Core.Maybe SlsaProvenanceZeroTwo_BuildConfig),
+    -- |
+    buildType :: (Core.Maybe Core.Text),
+    -- |
+    builder :: (Core.Maybe GrafeasV1SlsaProvenanceZeroTwoSlsaBuilder),
+    -- |
+    invocation :: (Core.Maybe GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation),
+    -- |
+    materials :: (Core.Maybe [GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial]),
+    -- |
+    metadata :: (Core.Maybe GrafeasV1SlsaProvenanceZeroTwoSlsaMetadata)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SlsaProvenanceZeroTwo' with the minimum fields required to make a request.
+newSlsaProvenanceZeroTwo ::
+  SlsaProvenanceZeroTwo
+newSlsaProvenanceZeroTwo =
+  SlsaProvenanceZeroTwo
+    { buildConfig = Core.Nothing,
+      buildType = Core.Nothing,
+      builder = Core.Nothing,
+      invocation = Core.Nothing,
+      materials = Core.Nothing,
+      metadata = Core.Nothing
+    }
+
+instance Core.FromJSON SlsaProvenanceZeroTwo where
+  parseJSON =
+    Core.withObject
+      "SlsaProvenanceZeroTwo"
+      ( \o ->
+          SlsaProvenanceZeroTwo
+            Core.<$> (o Core..:? "buildConfig")
+            Core.<*> (o Core..:? "buildType")
+            Core.<*> (o Core..:? "builder")
+            Core.<*> (o Core..:? "invocation")
+            Core.<*> (o Core..:? "materials")
+            Core.<*> (o Core..:? "metadata")
+      )
+
+instance Core.ToJSON SlsaProvenanceZeroTwo where
+  toJSON SlsaProvenanceZeroTwo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("buildConfig" Core..=) Core.<$> buildConfig,
+            ("buildType" Core..=) Core.<$> buildType,
+            ("builder" Core..=) Core.<$> builder,
+            ("invocation" Core..=) Core.<$> invocation,
+            ("materials" Core..=) Core.<$> materials,
+            ("metadata" Core..=) Core.<$> metadata
+          ]
+      )
+
+--
+-- /See:/ 'newSlsaProvenanceZeroTwo_BuildConfig' smart constructor.
+newtype SlsaProvenanceZeroTwo_BuildConfig = SlsaProvenanceZeroTwo_BuildConfig
+  { -- | Properties of the object.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SlsaProvenanceZeroTwo_BuildConfig' with the minimum fields required to make a request.
+newSlsaProvenanceZeroTwo_BuildConfig ::
+  -- |  Properties of the object. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  SlsaProvenanceZeroTwo_BuildConfig
+newSlsaProvenanceZeroTwo_BuildConfig additional =
+  SlsaProvenanceZeroTwo_BuildConfig {additional = additional}
+
+instance
+  Core.FromJSON
+    SlsaProvenanceZeroTwo_BuildConfig
+  where
+  parseJSON =
+    Core.withObject
+      "SlsaProvenanceZeroTwo_BuildConfig"
+      ( \o ->
+          SlsaProvenanceZeroTwo_BuildConfig
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    SlsaProvenanceZeroTwo_BuildConfig
+  where
+  toJSON SlsaProvenanceZeroTwo_BuildConfig {..} =
+    Core.toJSON additional
 
 -- | Steps taken to build the artifact. For a TaskRun, typically each container corresponds to one step in the recipe.
 --
@@ -6468,7 +8105,7 @@ instance Core.ToJSON Subject_Digest where
 --
 -- /See:/ 'newTestIamPermissionsRequest' smart constructor.
 newtype TestIamPermissionsRequest = TestIamPermissionsRequest
-  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as \'/\' or \'storage./\') are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
+  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as @*@ or @storage.*@) are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
     permissions :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6524,6 +8161,41 @@ instance Core.ToJSON TestIamPermissionsResponse where
     Core.object
       ( Core.catMaybes
           [("permissions" Core..=) Core.<$> permissions]
+      )
+
+-- | Start and end times for a build execution phase. Next ID: 3
+--
+-- /See:/ 'newTimeSpan' smart constructor.
+data TimeSpan = TimeSpan
+  { -- | End of time span.
+    endTime :: (Core.Maybe Core.DateTime),
+    -- | Start of time span.
+    startTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TimeSpan' with the minimum fields required to make a request.
+newTimeSpan ::
+  TimeSpan
+newTimeSpan = TimeSpan {endTime = Core.Nothing, startTime = Core.Nothing}
+
+instance Core.FromJSON TimeSpan where
+  parseJSON =
+    Core.withObject
+      "TimeSpan"
+      ( \o ->
+          TimeSpan
+            Core.<$> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "startTime")
+      )
+
+instance Core.ToJSON TimeSpan where
+  toJSON TimeSpan {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("endTime" Core..=) Core.<$> endTime,
+            ("startTime" Core..=) Core.<$> startTime
+          ]
       )
 
 -- | The Upgrade Distribution represents metadata about the Upgrade for each operating system (CPE). Some distributions have additional metadata around updates, classifying them into various categories and severities.
@@ -6732,14 +8404,181 @@ instance Core.ToJSON Version where
           ]
       )
 
+-- | VexAssessment provides all publisher provided Vex information that is related to this vulnerability.
+--
+-- /See:/ 'newVexAssessment' smart constructor.
+data VexAssessment = VexAssessment
+  { -- | Holds the MITRE standard Common Vulnerabilities and Exposures (CVE) tracking number for the vulnerability.
+    cve :: (Core.Maybe Core.Text),
+    -- | Contains information about the impact of this vulnerability, this will change with time.
+    impacts :: (Core.Maybe [Core.Text]),
+    -- | Justification provides the justification when the state of the assessment if NOT_AFFECTED.
+    justification :: (Core.Maybe Justification),
+    -- | The VulnerabilityAssessment note from which this VexAssessment was generated. This will be of the form: @projects\/[PROJECT_ID]\/notes\/[NOTE_ID]@.
+    noteName :: (Core.Maybe Core.Text),
+    -- | Holds a list of references associated with this vulnerability item and assessment.
+    relatedUris :: (Core.Maybe [RelatedUrl]),
+    -- | Specifies details on how to handle (and presumably, fix) a vulnerability.
+    remediations :: (Core.Maybe [Remediation]),
+    -- | Provides the state of this Vulnerability assessment.
+    state :: (Core.Maybe VexAssessment_State)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'VexAssessment' with the minimum fields required to make a request.
+newVexAssessment ::
+  VexAssessment
+newVexAssessment =
+  VexAssessment
+    { cve = Core.Nothing,
+      impacts = Core.Nothing,
+      justification = Core.Nothing,
+      noteName = Core.Nothing,
+      relatedUris = Core.Nothing,
+      remediations = Core.Nothing,
+      state = Core.Nothing
+    }
+
+instance Core.FromJSON VexAssessment where
+  parseJSON =
+    Core.withObject
+      "VexAssessment"
+      ( \o ->
+          VexAssessment
+            Core.<$> (o Core..:? "cve")
+            Core.<*> (o Core..:? "impacts")
+            Core.<*> (o Core..:? "justification")
+            Core.<*> (o Core..:? "noteName")
+            Core.<*> (o Core..:? "relatedUris")
+            Core.<*> (o Core..:? "remediations")
+            Core.<*> (o Core..:? "state")
+      )
+
+instance Core.ToJSON VexAssessment where
+  toJSON VexAssessment {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("cve" Core..=) Core.<$> cve,
+            ("impacts" Core..=) Core.<$> impacts,
+            ("justification" Core..=) Core.<$> justification,
+            ("noteName" Core..=) Core.<$> noteName,
+            ("relatedUris" Core..=) Core.<$> relatedUris,
+            ("remediations" Core..=) Core.<$> remediations,
+            ("state" Core..=) Core.<$> state
+          ]
+      )
+
+-- | Volume describes a Docker container volume which is mounted into build steps in order to persist files across build step execution. Next ID: 3
+--
+-- /See:/ 'newVolume' smart constructor.
+data Volume = Volume
+  { -- | Name of the volume to mount. Volume names must be unique per build step and must be valid names for Docker volumes. Each named volume must be used by at least two build steps.
+    name :: (Core.Maybe Core.Text),
+    -- | Path at which to mount the volume. Paths must be absolute and cannot conflict with other volume paths on the same build step or with certain reserved volume paths.
+    path :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Volume' with the minimum fields required to make a request.
+newVolume ::
+  Volume
+newVolume = Volume {name = Core.Nothing, path = Core.Nothing}
+
+instance Core.FromJSON Volume where
+  parseJSON =
+    Core.withObject
+      "Volume"
+      ( \o ->
+          Volume
+            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "path")
+      )
+
+instance Core.ToJSON Volume where
+  toJSON Volume {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("name" Core..=) Core.<$> name,
+            ("path" Core..=) Core.<$> path
+          ]
+      )
+
+-- | A single VulnerabilityAssessmentNote represents one particular product\'s vulnerability assessment for one CVE.
+--
+-- /See:/ 'newVulnerabilityAssessmentNote' smart constructor.
+data VulnerabilityAssessmentNote = VulnerabilityAssessmentNote
+  { -- | Represents a vulnerability assessment for the product.
+    assessment :: (Core.Maybe Assessment),
+    -- | Identifies the language used by this document, corresponding to IETF BCP 47 \/ RFC 5646.
+    languageCode :: (Core.Maybe Core.Text),
+    -- | A detailed description of this Vex.
+    longDescription :: (Core.Maybe Core.Text),
+    -- | The product affected by this vex.
+    product :: (Core.Maybe Product),
+    -- | Publisher details of this Note.
+    publisher :: (Core.Maybe Publisher),
+    -- | A one sentence description of this Vex.
+    shortDescription :: (Core.Maybe Core.Text),
+    -- | The title of the note. E.g. @Vex-Debian-11.4@
+    title :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'VulnerabilityAssessmentNote' with the minimum fields required to make a request.
+newVulnerabilityAssessmentNote ::
+  VulnerabilityAssessmentNote
+newVulnerabilityAssessmentNote =
+  VulnerabilityAssessmentNote
+    { assessment = Core.Nothing,
+      languageCode = Core.Nothing,
+      longDescription = Core.Nothing,
+      product = Core.Nothing,
+      publisher = Core.Nothing,
+      shortDescription = Core.Nothing,
+      title = Core.Nothing
+    }
+
+instance Core.FromJSON VulnerabilityAssessmentNote where
+  parseJSON =
+    Core.withObject
+      "VulnerabilityAssessmentNote"
+      ( \o ->
+          VulnerabilityAssessmentNote
+            Core.<$> (o Core..:? "assessment")
+            Core.<*> (o Core..:? "languageCode")
+            Core.<*> (o Core..:? "longDescription")
+            Core.<*> (o Core..:? "product")
+            Core.<*> (o Core..:? "publisher")
+            Core.<*> (o Core..:? "shortDescription")
+            Core.<*> (o Core..:? "title")
+      )
+
+instance Core.ToJSON VulnerabilityAssessmentNote where
+  toJSON VulnerabilityAssessmentNote {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("assessment" Core..=) Core.<$> assessment,
+            ("languageCode" Core..=) Core.<$> languageCode,
+            ("longDescription" Core..=) Core.<$> longDescription,
+            ("product" Core..=) Core.<$> product,
+            ("publisher" Core..=) Core.<$> publisher,
+            ("shortDescription" Core..=)
+              Core.<$> shortDescription,
+            ("title" Core..=) Core.<$> title
+          ]
+      )
+
 -- | A security vulnerability that can be found in resources.
 --
 -- /See:/ 'newVulnerabilityNote' smart constructor.
 data VulnerabilityNote = VulnerabilityNote
   { -- | The CVSS score of this vulnerability. CVSS score is on a scale of 0 - 10 where 0 indicates low severity and 10 indicates high severity.
     cvssScore :: (Core.Maybe Core.Double),
+    -- | The full description of the v2 CVSS for this vulnerability.
+    cvssV2 :: (Core.Maybe CVSS),
     -- | The full description of the CVSSv3 for this vulnerability.
     cvssV3 :: (Core.Maybe CVSSv3),
+    -- | CVSS version used to populate cvss_score and severity.
+    cvssVersion :: (Core.Maybe VulnerabilityNote_CvssVersion),
     -- | Details of all known distros and packages affected by this vulnerability.
     details :: (Core.Maybe [Detail]),
     -- | The note provider assigned severity of this vulnerability.
@@ -6757,7 +8596,9 @@ newVulnerabilityNote ::
 newVulnerabilityNote =
   VulnerabilityNote
     { cvssScore = Core.Nothing,
+      cvssV2 = Core.Nothing,
       cvssV3 = Core.Nothing,
+      cvssVersion = Core.Nothing,
       details = Core.Nothing,
       severity = Core.Nothing,
       sourceUpdateTime = Core.Nothing,
@@ -6771,7 +8612,9 @@ instance Core.FromJSON VulnerabilityNote where
       ( \o ->
           VulnerabilityNote
             Core.<$> (o Core..:? "cvssScore")
+            Core.<*> (o Core..:? "cvssV2")
             Core.<*> (o Core..:? "cvssV3")
+            Core.<*> (o Core..:? "cvssVersion")
             Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "severity")
             Core.<*> (o Core..:? "sourceUpdateTime")
@@ -6783,7 +8626,9 @@ instance Core.ToJSON VulnerabilityNote where
     Core.object
       ( Core.catMaybes
           [ ("cvssScore" Core..=) Core.<$> cvssScore,
+            ("cvssV2" Core..=) Core.<$> cvssV2,
             ("cvssV3" Core..=) Core.<$> cvssV3,
+            ("cvssVersion" Core..=) Core.<$> cvssVersion,
             ("details" Core..=) Core.<$> details,
             ("severity" Core..=) Core.<$> severity,
             ("sourceUpdateTime" Core..=)
@@ -6798,6 +8643,10 @@ instance Core.ToJSON VulnerabilityNote where
 data VulnerabilityOccurrence = VulnerabilityOccurrence
   { -- | Output only. The CVSS score of this vulnerability. CVSS score is on a scale of 0 - 10 where 0 indicates low severity and 10 indicates high severity.
     cvssScore :: (Core.Maybe Core.Double),
+    -- | The cvss v2 score for the vulnerability.
+    cvssV2 :: (Core.Maybe CVSS),
+    -- | Output only. CVSS version used to populate cvss_score and severity.
+    cvssVersion :: (Core.Maybe VulnerabilityOccurrence_CvssVersion),
     -- | The cvss v3 score for the vulnerability.
     cvssv3 :: (Core.Maybe CVSS),
     -- | The distro assigned severity for this vulnerability when it is available, otherwise this is the note provider assigned severity. When there are multiple PackageIssues for this vulnerability, they can have different effective severities because some might be provided by the distro while others are provided by the language ecosystem for a language pack. For this reason, it is advised to use the effective severity on the PackageIssue level. In the case where multiple PackageIssues have differing effective severities, this field should be the highest severity for any of the PackageIssues.
@@ -6815,7 +8664,9 @@ data VulnerabilityOccurrence = VulnerabilityOccurrence
     -- | Output only. A one sentence description of this vulnerability.
     shortDescription :: (Core.Maybe Core.Text),
     -- | The type of package; whether native or non native (e.g., ruby gems, node.js packages, etc.).
-    type' :: (Core.Maybe Core.Text)
+    type' :: (Core.Maybe Core.Text),
+    -- |
+    vexAssessment :: (Core.Maybe VexAssessment)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6825,6 +8676,8 @@ newVulnerabilityOccurrence ::
 newVulnerabilityOccurrence =
   VulnerabilityOccurrence
     { cvssScore = Core.Nothing,
+      cvssV2 = Core.Nothing,
+      cvssVersion = Core.Nothing,
       cvssv3 = Core.Nothing,
       effectiveSeverity = Core.Nothing,
       fixAvailable = Core.Nothing,
@@ -6833,7 +8686,8 @@ newVulnerabilityOccurrence =
       relatedUrls = Core.Nothing,
       severity = Core.Nothing,
       shortDescription = Core.Nothing,
-      type' = Core.Nothing
+      type' = Core.Nothing,
+      vexAssessment = Core.Nothing
     }
 
 instance Core.FromJSON VulnerabilityOccurrence where
@@ -6843,6 +8697,8 @@ instance Core.FromJSON VulnerabilityOccurrence where
       ( \o ->
           VulnerabilityOccurrence
             Core.<$> (o Core..:? "cvssScore")
+            Core.<*> (o Core..:? "cvssV2")
+            Core.<*> (o Core..:? "cvssVersion")
             Core.<*> (o Core..:? "cvssv3")
             Core.<*> (o Core..:? "effectiveSeverity")
             Core.<*> (o Core..:? "fixAvailable")
@@ -6852,6 +8708,7 @@ instance Core.FromJSON VulnerabilityOccurrence where
             Core.<*> (o Core..:? "severity")
             Core.<*> (o Core..:? "shortDescription")
             Core.<*> (o Core..:? "type")
+            Core.<*> (o Core..:? "vexAssessment")
       )
 
 instance Core.ToJSON VulnerabilityOccurrence where
@@ -6859,6 +8716,8 @@ instance Core.ToJSON VulnerabilityOccurrence where
     Core.object
       ( Core.catMaybes
           [ ("cvssScore" Core..=) Core.<$> cvssScore,
+            ("cvssV2" Core..=) Core.<$> cvssV2,
+            ("cvssVersion" Core..=) Core.<$> cvssVersion,
             ("cvssv3" Core..=) Core.<$> cvssv3,
             ("effectiveSeverity" Core..=)
               Core.<$> effectiveSeverity,
@@ -6869,7 +8728,8 @@ instance Core.ToJSON VulnerabilityOccurrence where
             ("severity" Core..=) Core.<$> severity,
             ("shortDescription" Core..=)
               Core.<$> shortDescription,
-            ("type" Core..=) Core.<$> type'
+            ("type" Core..=) Core.<$> type',
+            ("vexAssessment" Core..=) Core.<$> vexAssessment
           ]
       )
 

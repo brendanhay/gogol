@@ -197,6 +197,10 @@ module Gogol.BigQuery.Types
     CsvOptions (..),
     newCsvOptions,
 
+    -- ** DataMaskingStatistics
+    DataMaskingStatistics (..),
+    newDataMaskingStatistics,
+
     -- ** DataSplitResult
     DataSplitResult (..),
     newDataSplitResult,
@@ -347,6 +351,10 @@ module Gogol.BigQuery.Types
     -- ** HparamTuningTrial_Status
     HparamTuningTrial_Status (..),
 
+    -- ** IndexUnusedReason
+    IndexUnusedReason (..),
+    newIndexUnusedReason,
+
     -- ** IntArray
     IntArray (..),
     newIntArray,
@@ -442,6 +450,10 @@ module Gogol.BigQuery.Types
     -- ** JobStatistics4
     JobStatistics4 (..),
     newJobStatistics4,
+
+    -- ** JobStatistics5
+    JobStatistics5 (..),
+    newJobStatistics5,
 
     -- ** JobStatus
     JobStatus (..),
@@ -578,6 +590,14 @@ module Gogol.BigQuery.Types
     RegressionMetrics (..),
     newRegressionMetrics,
 
+    -- ** RemoteFunctionOptions
+    RemoteFunctionOptions (..),
+    newRemoteFunctionOptions,
+
+    -- ** RemoteFunctionOptions_UserDefinedContext
+    RemoteFunctionOptions_UserDefinedContext (..),
+    newRemoteFunctionOptions_UserDefinedContext,
+
     -- ** Routine
     Routine (..),
     newRoutine,
@@ -619,6 +639,10 @@ module Gogol.BigQuery.Types
     ScriptStatistics (..),
     newScriptStatistics,
 
+    -- ** SearchStatistics
+    SearchStatistics (..),
+    newSearchStatistics,
+
     -- ** SessionInfo
     SessionInfo (..),
     newSessionInfo,
@@ -630,6 +654,26 @@ module Gogol.BigQuery.Types
     -- ** SnapshotDefinition
     SnapshotDefinition (..),
     newSnapshotDefinition,
+
+    -- ** SparkLoggingInfo
+    SparkLoggingInfo (..),
+    newSparkLoggingInfo,
+
+    -- ** SparkOptions
+    SparkOptions (..),
+    newSparkOptions,
+
+    -- ** SparkOptions_Properties
+    SparkOptions_Properties (..),
+    newSparkOptions_Properties,
+
+    -- ** SparkStatistics
+    SparkStatistics (..),
+    newSparkStatistics,
+
+    -- ** SparkStatistics_Endpoints
+    SparkStatistics_Endpoints (..),
+    newSparkStatistics_Endpoints,
 
     -- ** StandardSqlDataType
     StandardSqlDataType (..),
@@ -749,6 +793,9 @@ module Gogol.BigQuery.Types
     -- ** TrainingOptions_BoosterType
     TrainingOptions_BoosterType (..),
 
+    -- ** TrainingOptions_ColorSpace
+    TrainingOptions_ColorSpace (..),
+
     -- ** TrainingOptions_DartNormalizeType
     TrainingOptions_DartNormalizeType (..),
 
@@ -810,6 +857,9 @@ module Gogol.BigQuery.Types
 
     -- ** JobsListStateFilter
     JobsListStateFilter (..),
+
+    -- ** TablesGetView
+    TablesGetView (..),
   )
 where
 

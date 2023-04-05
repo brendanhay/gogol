@@ -50,6 +50,10 @@ module Gogol.AccessContextManager.Internal.Product
     AuditLogConfig (..),
     newAuditLogConfig,
 
+    -- * AuthorizedOrgsDesc
+    AuthorizedOrgsDesc (..),
+    newAuthorizedOrgsDesc,
+
     -- * BasicLevel
     BasicLevel (..),
     newBasicLevel,
@@ -141,6 +145,10 @@ module Gogol.AccessContextManager.Internal.Product
     -- * ListAccessPoliciesResponse
     ListAccessPoliciesResponse (..),
     newListAccessPoliciesResponse,
+
+    -- * ListAuthorizedOrgsDescsResponse
+    ListAuthorizedOrgsDescsResponse (..),
+    newListAuthorizedOrgsDescsResponse,
 
     -- * ListGcpUserAccessBindingsResponse
     ListGcpUserAccessBindingsResponse (..),
@@ -269,7 +277,7 @@ data AccessLevel = AccessLevel
     custom :: (Core.Maybe CustomLevel),
     -- | Description of the @AccessLevel@ and its use. Does not affect behavior.
     description :: (Core.Maybe Core.Text),
-    -- | Required. Resource name for the Access Level. The @short_name@ component must begin with a letter and only include alphanumeric and \'_\'. Format: @accessPolicies\/{access_policy}\/accessLevels\/{access_level}@. The maximum length of the @access_level@ component is 50 characters.
+    -- | Resource name for the @AccessLevel@. Format: @accessPolicies\/{access_policy}\/accessLevels\/{access_level}@. The @access_level@ component must begin with a letter, followed by alphanumeric characters or @_@. Its maximum length is 50 characters. After you create an @AccessLevel@, you cannot change its @name@.
     name :: (Core.Maybe Core.Text),
     -- | Human readable title. Must be unique within the Policy.
     title :: (Core.Maybe Core.Text)
@@ -405,7 +413,7 @@ instance Core.ToJSON ApiOperation where
       )
 
 -- | Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs. If there are AuditConfigs for both @allServices@ and a specific service, the union of the two AuditConfigs is used for that service: the log/types specified in each AuditConfig are enabled, and the exempted/members in each AuditLogConfig are exempted. Example Policy with multiple AuditConfigs: { \"audit/configs\": [ { \"service\": \"allServices\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\", \"exempted/members\": [ \"user:jose\@example.com\" ] }, { \"log/type\": \"DATA/WRITE\" }, { \"log/type\": \"ADMIN/READ\" } ] }, { \"service\": \"sampleservice.googleapis.com\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\" }, { \"log/type\": \"DATA/WRITE\", \"exempted/members\": [ \"user:aliya\@example.com\" ] } ] } ] } For sampleservice, this policy enables DATA/READ, DATA/WRITE and
--- ADMIN/READ logging. It also exempts jose\@example.com from DATA/READ logging, and aliya\@example.com from DATA/WRITE logging.
+-- ADMIN/READ logging. It also exempts @jose\@example.com@ from DATA/READ logging, and @aliya\@example.com@ from DATA/WRITE logging.
 --
 -- /See:/ 'newAuditConfig' smart constructor.
 data AuditConfig = AuditConfig
@@ -479,6 +487,62 @@ instance Core.ToJSON AuditLogConfig where
           ]
       )
 
+-- | @AuthorizedOrgsDesc@ contains data for an organization\'s authorization policy.
+--
+-- /See:/ 'newAuthorizedOrgsDesc' smart constructor.
+data AuthorizedOrgsDesc = AuthorizedOrgsDesc
+  { -- | The asset type of this authorized orgs desc. Valid values are @ASSET_TYPE_DEVICE@, and @ASSET_TYPE_CREDENTIAL_STRENGTH@.
+    assetType :: (Core.Maybe AuthorizedOrgsDesc_AssetType),
+    -- | The direction of the authorization relationship between this organization and the organizations listed in the @orgs@ field. The valid values for this field include the following: @AUTHORIZATION_DIRECTION_FROM@: Allows this organization to evaluate traffic in the organizations listed in the @orgs@ field. @AUTHORIZATION_DIRECTION_TO@: Allows the organizations listed in the @orgs@ field to evaluate the traffic in this organization. For the authorization relationship to take effect, all of the organizations must authorize and specify the appropriate relationship direction. For example, if organization A authorized organization B and C to evaluate its traffic, by specifying @AUTHORIZATION_DIRECTION_TO@ as the authorization direction, organizations B and C must specify @AUTHORIZATION_DIRECTION_FROM@ as the authorization direction in their @AuthorizedOrgsDesc@ resource.
+    authorizationDirection :: (Core.Maybe AuthorizedOrgsDesc_AuthorizationDirection),
+    -- | A granular control type for authorization levels. Valid value is @AUTHORIZATION_TYPE_TRUST@.
+    authorizationType :: (Core.Maybe AuthorizedOrgsDesc_AuthorizationType),
+    -- | Resource name for the @AuthorizedOrgsDesc@. Format: @accessPolicies\/{access_policy}\/authorizedOrgsDescs\/{authorized_orgs_desc}@. The @authorized_orgs_desc@ component must begin with a letter, followed by alphanumeric characters or @_@. After you create an @AuthorizedOrgsDesc@, you cannot change its @name@.
+    name :: (Core.Maybe Core.Text),
+    -- | The list of organization ids in this AuthorizedOrgsDesc. Format: @organizations\/@ Example: @organizations\/123456@
+    orgs :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AuthorizedOrgsDesc' with the minimum fields required to make a request.
+newAuthorizedOrgsDesc ::
+  AuthorizedOrgsDesc
+newAuthorizedOrgsDesc =
+  AuthorizedOrgsDesc
+    { assetType = Core.Nothing,
+      authorizationDirection = Core.Nothing,
+      authorizationType = Core.Nothing,
+      name = Core.Nothing,
+      orgs = Core.Nothing
+    }
+
+instance Core.FromJSON AuthorizedOrgsDesc where
+  parseJSON =
+    Core.withObject
+      "AuthorizedOrgsDesc"
+      ( \o ->
+          AuthorizedOrgsDesc
+            Core.<$> (o Core..:? "assetType")
+            Core.<*> (o Core..:? "authorizationDirection")
+            Core.<*> (o Core..:? "authorizationType")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "orgs")
+      )
+
+instance Core.ToJSON AuthorizedOrgsDesc where
+  toJSON AuthorizedOrgsDesc {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("assetType" Core..=) Core.<$> assetType,
+            ("authorizationDirection" Core..=)
+              Core.<$> authorizationDirection,
+            ("authorizationType" Core..=)
+              Core.<$> authorizationType,
+            ("name" Core..=) Core.<$> name,
+            ("orgs" Core..=) Core.<$> orgs
+          ]
+      )
+
 -- | @BasicLevel@ is an @AccessLevel@ using a set of recommended features.
 --
 -- /See:/ 'newBasicLevel' smart constructor.
@@ -522,8 +586,9 @@ instance Core.ToJSON BasicLevel where
 data Binding = Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe Expr),
-    -- | Specifies the principals requesting access for a Cloud Platform resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains
-    -- the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@.
+    -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
+    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
     members :: (Core.Maybe [Core.Text]),
     -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
     role' :: (Core.Maybe Core.Text)
@@ -871,7 +936,9 @@ instance Core.ToJSON EgressPolicy where
 --
 -- /See:/ 'newEgressTo' smart constructor.
 data EgressTo = EgressTo
-  { -- | A list of ApiOperations allowed to be performed by the sources specified in the corresponding EgressFrom. A request matches if it uses an operation\/service in this list.
+  { -- | A list of external resources that are allowed to be accessed. Only AWS and Azure resources are supported. For Amazon S3, the supported format is s3:\/\/BUCKET/NAME. For Azure Storage, the supported format is azure:\/\/myaccount.blob.core.windows.net\/CONTAINER/NAME. A request matches if it contains an external resource in this list (Example: s3:\/\/bucket\/path). Currently \'*\' is not allowed.
+    externalResources :: (Core.Maybe [Core.Text]),
+    -- | A list of ApiOperations allowed to be performed by the sources specified in the corresponding EgressFrom. A request matches if it uses an operation\/service in this list.
     operations :: (Core.Maybe [ApiOperation]),
     -- | A list of resources, currently only projects in the form @projects\/@, that are allowed to be accessed by sources defined in the corresponding EgressFrom. A request matches if it contains a resource in this list. If @*@ is specified for @resources@, then this EgressTo rule will authorize access to all resources outside the perimeter.
     resources :: (Core.Maybe [Core.Text])
@@ -881,7 +948,12 @@ data EgressTo = EgressTo
 -- | Creates a value of 'EgressTo' with the minimum fields required to make a request.
 newEgressTo ::
   EgressTo
-newEgressTo = EgressTo {operations = Core.Nothing, resources = Core.Nothing}
+newEgressTo =
+  EgressTo
+    { externalResources = Core.Nothing,
+      operations = Core.Nothing,
+      resources = Core.Nothing
+    }
 
 instance Core.FromJSON EgressTo where
   parseJSON =
@@ -889,7 +961,8 @@ instance Core.FromJSON EgressTo where
       "EgressTo"
       ( \o ->
           EgressTo
-            Core.<$> (o Core..:? "operations")
+            Core.<$> (o Core..:? "externalResources")
+            Core.<*> (o Core..:? "operations")
             Core.<*> (o Core..:? "resources")
       )
 
@@ -897,12 +970,14 @@ instance Core.ToJSON EgressTo where
   toJSON EgressTo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("operations" Core..=) Core.<$> operations,
+          [ ("externalResources" Core..=)
+              Core.<$> externalResources,
+            ("operations" Core..=) Core.<$> operations,
             ("resources" Core..=) Core.<$> resources
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -974,8 +1049,10 @@ instance Core.ToJSON Expr where
 --
 -- /See:/ 'newGcpUserAccessBinding' smart constructor.
 data GcpUserAccessBinding = GcpUserAccessBinding
-  { -- | Required. Access level that a user must have to be granted access. Only one access level is supported, not multiple. This repeated field must have exactly one element. Example: \"accessPolicies\/9522\/accessLevels\/device_trusted\"
+  { -- | Optional. Access level that a user must have to be granted access. Only one access level is supported, not multiple. This repeated field must have exactly one element. Example: \"accessPolicies\/9522\/accessLevels\/device_trusted\"
     accessLevels :: (Core.Maybe [Core.Text]),
+    -- | Optional. Dry run access level that will be evaluated but will not be enforced. The access denial based on dry run policy will be logged. Only one access level is supported, not multiple. This list must have exactly one element. Example: \"accessPolicies\/9522\/accessLevels\/device_trusted\"
+    dryRunAccessLevels :: (Core.Maybe [Core.Text]),
     -- | Required. Immutable. Google Group id whose members are subject to this binding\'s restrictions. See \"id\" in the [G Suite Directory API\'s Groups resource] (https:\/\/developers.google.com\/admin-sdk\/directory\/v1\/reference\/groups#resource). If a group\'s email address\/alias is changed, this resource will continue to point at the changed group. This field does not accept group email addresses or aliases. Example: \"01d520gv4vjcrht\"
     groupKey :: (Core.Maybe Core.Text),
     -- | Immutable. Assigned by the server during creation. The last segment has an arbitrary length and has only URI unreserved characters (as defined by <https://tools.ietf.org/html/rfc3986#section-2.3 RFC 3986 Section 2.3>). Should not be specified by the client during creation. Example: \"organizations\/256\/gcpUserAccessBindings\/b3-BhcX_Ud5N\"
@@ -989,6 +1066,7 @@ newGcpUserAccessBinding ::
 newGcpUserAccessBinding =
   GcpUserAccessBinding
     { accessLevels = Core.Nothing,
+      dryRunAccessLevels = Core.Nothing,
       groupKey = Core.Nothing,
       name = Core.Nothing
     }
@@ -1000,6 +1078,7 @@ instance Core.FromJSON GcpUserAccessBinding where
       ( \o ->
           GcpUserAccessBinding
             Core.<$> (o Core..:? "accessLevels")
+            Core.<*> (o Core..:? "dryRunAccessLevels")
             Core.<*> (o Core..:? "groupKey")
             Core.<*> (o Core..:? "name")
       )
@@ -1009,6 +1088,8 @@ instance Core.ToJSON GcpUserAccessBinding where
     Core.object
       ( Core.catMaybes
           [ ("accessLevels" Core..=) Core.<$> accessLevels,
+            ("dryRunAccessLevels" Core..=)
+              Core.<$> dryRunAccessLevels,
             ("groupKey" Core..=) Core.<$> groupKey,
             ("name" Core..=) Core.<$> name
           ]
@@ -1189,7 +1270,7 @@ instance Core.ToJSON IngressPolicy where
 data IngressSource = IngressSource
   { -- | An AccessLevel resource name that allow resources within the ServicePerimeters to be accessed from the internet. AccessLevels listed must be in the same policy as this ServicePerimeter. Referencing a nonexistent AccessLevel will cause an error. If no AccessLevel names are listed, resources within the perimeter can only be accessed via Google Cloud calls with request origins within the perimeter. Example: @accessPolicies\/MY_POLICY\/accessLevels\/MY_LEVEL@. If a single @*@ is specified for @access_level@, then all IngressSources will be allowed.
     accessLevel :: (Core.Maybe Core.Text),
-    -- | A Google Cloud resource that is allowed to ingress the perimeter. Requests from these resources will be allowed to access perimeter data. Currently only projects are allowed. Format: @projects\/{project_number}@ The project may be in any Google Cloud organization, not just the organization that the perimeter is defined in. @*@ is not allowed, the case of allowing all Google Cloud resources only is not supported.
+    -- | A Google Cloud resource that is allowed to ingress the perimeter. Requests from these resources will be allowed to access perimeter data. Currently only projects and VPCs are allowed. Project format: @projects\/{project_number}@ VPC network format: @\/\/compute.googleapis.com\/projects\/{PROJECT_ID}\/global\/networks\/{NAME}@. The project may be in any Google Cloud organization, not just the organization that the perimeter is defined in. @*@ is not allowed, the case of allowing all Google Cloud resources only is not supported.
     resource :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1328,6 +1409,49 @@ instance Core.ToJSON ListAccessPoliciesResponse where
     Core.object
       ( Core.catMaybes
           [ ("accessPolicies" Core..=) Core.<$> accessPolicies,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
+-- | A response to @ListAuthorizedOrgsDescsRequest@.
+--
+-- /See:/ 'newListAuthorizedOrgsDescsResponse' smart constructor.
+data ListAuthorizedOrgsDescsResponse = ListAuthorizedOrgsDescsResponse
+  { -- | List of all the Authorized Orgs Desc instances.
+    authorizedOrgsDescs :: (Core.Maybe [AuthorizedOrgsDesc]),
+    -- | The pagination token to retrieve the next page of results. If the value is empty, no further results remain.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListAuthorizedOrgsDescsResponse' with the minimum fields required to make a request.
+newListAuthorizedOrgsDescsResponse ::
+  ListAuthorizedOrgsDescsResponse
+newListAuthorizedOrgsDescsResponse =
+  ListAuthorizedOrgsDescsResponse
+    { authorizedOrgsDescs = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    ListAuthorizedOrgsDescsResponse
+  where
+  parseJSON =
+    Core.withObject
+      "ListAuthorizedOrgsDescsResponse"
+      ( \o ->
+          ListAuthorizedOrgsDescsResponse
+            Core.<$> (o Core..:? "authorizedOrgsDescs")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON ListAuthorizedOrgsDescsResponse where
+  toJSON ListAuthorizedOrgsDescsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("authorizedOrgsDescs" Core..=)
+              Core.<$> authorizedOrgsDescs,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -1846,15 +1970,15 @@ instance Core.ToJSON ReplaceServicePerimetersResponse where
           ]
       )
 
--- | @ServicePerimeter@ describes a set of Google Cloud resources which can freely import and export data amongst themselves, but not export outside of the @ServicePerimeter@. If a request with a source within this @ServicePerimeter@ has a target outside of the @ServicePerimeter@, the request will be blocked. Otherwise the request is allowed. There are two types of Service Perimeter - Regular and Bridge. Regular Service Perimeters cannot overlap, a single Google Cloud project can only belong to a single regular Service Perimeter. Service Perimeter Bridges can contain only Google Cloud projects as members, a single Google Cloud project may belong to multiple Service Perimeter Bridges.
+-- | @ServicePerimeter@ describes a set of Google Cloud resources which can freely import and export data amongst themselves, but not export outside of the @ServicePerimeter@. If a request with a source within this @ServicePerimeter@ has a target outside of the @ServicePerimeter@, the request will be blocked. Otherwise the request is allowed. There are two types of Service Perimeter - Regular and Bridge. Regular Service Perimeters cannot overlap, a single Google Cloud project or VPC network can only belong to a single regular Service Perimeter. Service Perimeter Bridges can contain only Google Cloud projects as members, a single Google Cloud project may belong to multiple Service Perimeter Bridges.
 --
 -- /See:/ 'newServicePerimeter' smart constructor.
 data ServicePerimeter = ServicePerimeter
   { -- | Description of the @ServicePerimeter@ and its use. Does not affect behavior.
     description :: (Core.Maybe Core.Text),
-    -- | Required. Resource name for the ServicePerimeter. The @short_name@ component must begin with a letter and only include alphanumeric and \'_\'. Format: @accessPolicies\/{access_policy}\/servicePerimeters\/{service_perimeter}@
+    -- | Resource name for the @ServicePerimeter@. Format: @accessPolicies\/{access_policy}\/servicePerimeters\/{service_perimeter}@. The @service_perimeter@ component must begin with a letter, followed by alphanumeric characters or @_@. After you create a @ServicePerimeter@, you cannot change its @name@.
     name :: (Core.Maybe Core.Text),
-    -- | Perimeter type indicator. A single project is allowed to be a member of single regular perimeter, but multiple service perimeter bridges. A project cannot be a included in a perimeter bridge without being included in regular perimeter. For perimeter bridges, the restricted service list as well as access level lists must be empty.
+    -- | Perimeter type indicator. A single project or VPC network is allowed to be a member of single regular perimeter, but multiple service perimeter bridges. A project cannot be a included in a perimeter bridge without being included in regular perimeter. For perimeter bridges, the restricted service list as well as access level lists must be empty.
     perimeterType :: (Core.Maybe ServicePerimeter_PerimeterType),
     -- | Proposed (or dry run) ServicePerimeter configuration. This configuration allows to specify and test ServicePerimeter configuration without enforcing actual access restrictions. Only allowed to be set when the \"use/explicit/dry/run/spec\" flag is set.
     spec :: (Core.Maybe ServicePerimeterConfig),
@@ -1921,7 +2045,7 @@ data ServicePerimeterConfig = ServicePerimeterConfig
     egressPolicies :: (Core.Maybe [EgressPolicy]),
     -- | List of IngressPolicies to apply to the perimeter. A perimeter may have multiple IngressPolicies, each of which is evaluated separately. Access is granted if any Ingress Policy grants it. Must be empty for a perimeter bridge.
     ingressPolicies :: (Core.Maybe [IngressPolicy]),
-    -- | A list of Google Cloud resources that are inside of the service perimeter. Currently only projects are allowed. Format: @projects\/{project_number}@
+    -- | A list of Google Cloud resources that are inside of the service perimeter. Currently only projects and VPCs are allowed. Project format: @projects\/{project_number}@ VPC network format: @\/\/compute.googleapis.com\/projects\/{PROJECT_ID}\/global\/networks\/{NAME}@.
     resources :: (Core.Maybe [Core.Text]),
     -- | Google Cloud services that are subject to the Service Perimeter restrictions. For example, if @storage.googleapis.com@ is specified, access to the storage buckets inside the perimeter must meet the perimeter\'s access restrictions.
     restrictedServices :: (Core.Maybe [Core.Text]),
@@ -1976,7 +2100,7 @@ instance Core.ToJSON ServicePerimeterConfig where
 --
 -- /See:/ 'newSetIamPolicyRequest' smart constructor.
 data SetIamPolicyRequest = SetIamPolicyRequest
-  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
+  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Google Cloud services (such as Projects) might reject them.
     policy :: (Core.Maybe Policy),
     -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: @paths: \"bindings, etag\"@
     updateMask :: (Core.Maybe Core.FieldMask)
@@ -2079,7 +2203,7 @@ instance Core.ToJSON Status_DetailsItem where
 --
 -- /See:/ 'newTestIamPermissionsRequest' smart constructor.
 newtype TestIamPermissionsRequest = TestIamPermissionsRequest
-  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as \'/\' or \'storage./\') are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
+  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as @*@ or @storage.*@) are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
     permissions :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

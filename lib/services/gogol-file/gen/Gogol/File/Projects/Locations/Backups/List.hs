@@ -78,7 +78,7 @@ data FileProjectsLocationsBackupsList = FileProjectsLocationsBackupsList
     pageSize :: (Core.Maybe Core.Int32),
     -- | The next/page/token value to use if there are additional results to retrieve for this list request.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. The project and location for which to retrieve backup information, in the format @projects\/{project_number}\/locations\/{location}@. In Cloud Filestore, backup locations map to GCP regions, for example __us-west1__. To retrieve backup information for all locations, use \"-\" for the @{location}@ value.
+    -- | Required. The project and location for which to retrieve backup information, in the format @projects\/{project_number}\/locations\/{location}@. In Filestore, backup locations map to Google Cloud regions, for example __us-west1__. To retrieve backup information for all locations, use \"-\" for the @{location}@ value.
     parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -89,7 +89,7 @@ data FileProjectsLocationsBackupsList = FileProjectsLocationsBackupsList
 
 -- | Creates a value of 'FileProjectsLocationsBackupsList' with the minimum fields required to make a request.
 newFileProjectsLocationsBackupsList ::
-  -- |  Required. The project and location for which to retrieve backup information, in the format @projects\/{project_number}\/locations\/{location}@. In Cloud Filestore, backup locations map to GCP regions, for example __us-west1__. To retrieve backup information for all locations, use \"-\" for the @{location}@ value. See 'parent'.
+  -- |  Required. The project and location for which to retrieve backup information, in the format @projects\/{project_number}\/locations\/{location}@. In Filestore, backup locations map to Google Cloud regions, for example __us-west1__. To retrieve backup information for all locations, use \"-\" for the @{location}@ value. See 'parent'.
   Core.Text ->
   FileProjectsLocationsBackupsList
 newFileProjectsLocationsBackupsList parent =

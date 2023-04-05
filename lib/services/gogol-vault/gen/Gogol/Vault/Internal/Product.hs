@@ -258,6 +258,10 @@ module Gogol.Vault.Internal.Product
     SharedDriveInfo (..),
     newSharedDriveInfo,
 
+    -- * SitesUrlInfo
+    SitesUrlInfo (..),
+    newSitesUrlInfo,
+
     -- * Status
     Status (..),
     newStatus,
@@ -904,7 +908,9 @@ instance Core.ToJSON DriveExportOptions where
 --
 -- /See:/ 'newDriveOptions' smart constructor.
 data DriveOptions = DriveOptions
-  { -- | Set to __true__ to include shared drives.
+  { -- | Set whether the results include only content encrypted with <https://support.google.com/a?p=cse_ov Google Workspace Client-side encryption> content, only unencrypted content, or both. Defaults to both. Currently supported for Drive.
+    clientSideEncryptedOption :: (Core.Maybe DriveOptions_ClientSideEncryptedOption),
+    -- | Set to __true__ to include shared drives.
     includeSharedDrives :: (Core.Maybe Core.Bool),
     -- | Set to true to include Team Drive.
     includeTeamDrives :: (Core.Maybe Core.Bool),
@@ -918,7 +924,8 @@ newDriveOptions ::
   DriveOptions
 newDriveOptions =
   DriveOptions
-    { includeSharedDrives = Core.Nothing,
+    { clientSideEncryptedOption = Core.Nothing,
+      includeSharedDrives = Core.Nothing,
       includeTeamDrives = Core.Nothing,
       versionDate = Core.Nothing
     }
@@ -929,7 +936,8 @@ instance Core.FromJSON DriveOptions where
       "DriveOptions"
       ( \o ->
           DriveOptions
-            Core.<$> (o Core..:? "includeSharedDrives")
+            Core.<$> (o Core..:? "clientSideEncryptedOption")
+            Core.<*> (o Core..:? "includeSharedDrives")
             Core.<*> (o Core..:? "includeTeamDrives")
             Core.<*> (o Core..:? "versionDate")
       )
@@ -938,7 +946,9 @@ instance Core.ToJSON DriveOptions where
   toJSON DriveOptions {..} =
     Core.object
       ( Core.catMaybes
-          [ ("includeSharedDrives" Core..=)
+          [ ("clientSideEncryptedOption" Core..=)
+              Core.<$> clientSideEncryptedOption,
+            ("includeSharedDrives" Core..=)
               Core.<$> includeSharedDrives,
             ("includeTeamDrives" Core..=)
               Core.<$> includeTeamDrives,
@@ -946,7 +956,7 @@ instance Core.ToJSON DriveOptions where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -978,7 +988,7 @@ data Export = Export
     id :: (Core.Maybe Core.Text),
     -- | Output only. The matter ID.
     matterId :: (Core.Maybe Core.Text),
-    -- | The export name.
+    -- | The export name. Don\'t use special characters (~!$\'(),;\@:\/?) in the name, they can prevent you from downloading exports.
     name :: (Core.Maybe Core.Text),
     -- | The query parameters used to create the export.
     query :: (Core.Maybe Query),
@@ -1284,7 +1294,7 @@ instance Core.ToJSON HangoutsChatExportOptions where
 --
 -- /See:/ 'newHangoutsChatInfo' smart constructor.
 newtype HangoutsChatInfo = HangoutsChatInfo
-  { -- | A list of Chat spaces IDs, as provided by the <https://developers.google.com/hangouts/chat Chat API>.
+  { -- | A list of Chat spaces IDs, as provided by the <https://developers.google.com/chat Chat API>. There is a limit of exporting from 500 Chat spaces per request.
     roomId :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2288,6 +2298,8 @@ data Query = Query
     searchMethod :: (Core.Maybe Query_SearchMethod),
     -- | Required when __SearchMethod__ is **SHARED_DRIVE**.
     sharedDriveInfo :: (Core.Maybe SharedDriveInfo),
+    -- | Required when __SearchMethod__ is **SITES_URL**.
+    sitesUrlInfo :: (Core.Maybe SitesUrlInfo),
     -- | The start time for the search query. Specify in GMT. The value is rounded to 12 AM on the specified date.
     startTime :: (Core.Maybe Core.DateTime),
     -- | Required when __SearchMethod__ is **TEAM_DRIVE**.
@@ -2318,6 +2330,7 @@ newQuery =
       orgUnitInfo = Core.Nothing,
       searchMethod = Core.Nothing,
       sharedDriveInfo = Core.Nothing,
+      sitesUrlInfo = Core.Nothing,
       startTime = Core.Nothing,
       teamDriveInfo = Core.Nothing,
       terms = Core.Nothing,
@@ -2343,6 +2356,7 @@ instance Core.FromJSON Query where
             Core.<*> (o Core..:? "orgUnitInfo")
             Core.<*> (o Core..:? "searchMethod")
             Core.<*> (o Core..:? "sharedDriveInfo")
+            Core.<*> (o Core..:? "sitesUrlInfo")
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "teamDriveInfo")
             Core.<*> (o Core..:? "terms")
@@ -2368,6 +2382,7 @@ instance Core.ToJSON Query where
             ("orgUnitInfo" Core..=) Core.<$> orgUnitInfo,
             ("searchMethod" Core..=) Core.<$> searchMethod,
             ("sharedDriveInfo" Core..=) Core.<$> sharedDriveInfo,
+            ("sitesUrlInfo" Core..=) Core.<$> sitesUrlInfo,
             ("startTime" Core..=) Core.<$> startTime,
             ("teamDriveInfo" Core..=) Core.<$> teamDriveInfo,
             ("terms" Core..=) Core.<$> terms,
@@ -2599,6 +2614,31 @@ instance Core.ToJSON SharedDriveInfo where
       ( Core.catMaybes
           [("sharedDriveIds" Core..=) Core.<$> sharedDriveIds]
       )
+
+-- | The published site URLs of new Google Sites to search
+--
+-- /See:/ 'newSitesUrlInfo' smart constructor.
+newtype SitesUrlInfo = SitesUrlInfo
+  { -- | A list of published site URLs.
+    urls :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SitesUrlInfo' with the minimum fields required to make a request.
+newSitesUrlInfo ::
+  SitesUrlInfo
+newSitesUrlInfo = SitesUrlInfo {urls = Core.Nothing}
+
+instance Core.FromJSON SitesUrlInfo where
+  parseJSON =
+    Core.withObject
+      "SitesUrlInfo"
+      (\o -> SitesUrlInfo Core.<$> (o Core..:? "urls"))
+
+instance Core.ToJSON SitesUrlInfo where
+  toJSON SitesUrlInfo {..} =
+    Core.object
+      (Core.catMaybes [("urls" Core..=) Core.<$> urls])
 
 -- | The @Status@ type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by <https://github.com/grpc gRPC>. Each @Status@ message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the <https://cloud.google.com/apis/design/errors API Design Guide>.
 --

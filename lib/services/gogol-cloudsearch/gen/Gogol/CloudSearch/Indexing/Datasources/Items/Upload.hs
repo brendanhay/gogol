@@ -67,7 +67,7 @@ data CloudSearchIndexingDatasourcesItemsUpload = CloudSearchIndexingDatasourcesI
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Name of the Item to start a resumable upload. Format: datasources\/{source/id}\/items\/{item/id}. The maximum length is 1536 bytes.
+    -- | The name of the Item to start a resumable upload. Format: datasources\/{source/id}\/items\/{item/id}. The maximum length is 1536 bytes.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: StartUploadItemRequest,
@@ -80,7 +80,7 @@ data CloudSearchIndexingDatasourcesItemsUpload = CloudSearchIndexingDatasourcesI
 
 -- | Creates a value of 'CloudSearchIndexingDatasourcesItemsUpload' with the minimum fields required to make a request.
 newCloudSearchIndexingDatasourcesItemsUpload ::
-  -- |  Name of the Item to start a resumable upload. Format: datasources\/{source/id}\/items\/{item/id}. The maximum length is 1536 bytes. See 'name'.
+  -- |  The name of the Item to start a resumable upload. Format: datasources\/{source/id}\/items\/{item/id}. The maximum length is 1536 bytes. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   StartUploadItemRequest ->

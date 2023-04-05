@@ -44,9 +44,20 @@ module Gogol.ContainerAnalysis.Types
     -- ** AliasContext_Kind
     AliasContext_Kind (..),
 
+    -- ** AnalysisCompleted
+    AnalysisCompleted (..),
+    newAnalysisCompleted,
+
     -- ** Artifact
     Artifact (..),
     newArtifact,
+
+    -- ** Assessment
+    Assessment (..),
+    newAssessment,
+
+    -- ** Assessment_State
+    Assessment_State (..),
 
     -- ** AttestationNote
     AttestationNote (..),
@@ -95,6 +106,13 @@ module Gogol.ContainerAnalysis.Types
     -- ** BuildProvenance_BuildOptions
     BuildProvenance_BuildOptions (..),
     newBuildProvenance_BuildOptions,
+
+    -- ** BuildStep
+    BuildStep (..),
+    newBuildStep,
+
+    -- ** BuildStep_Status
+    BuildStep_Status (..),
 
     -- ** BuilderConfig
     BuilderConfig (..),
@@ -213,6 +231,14 @@ module Gogol.ContainerAnalysis.Types
     ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsArtifactObjects (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsArtifactObjects,
 
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage,
+
     -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1Build
     ContaineranalysisGoogleDevtoolsCloudbuildV1Build (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1Build,
@@ -245,6 +271,9 @@ module Gogol.ContainerAnalysis.Types
     -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions
     ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior
+    ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior (..),
 
     -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption
     ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption (..),
@@ -357,6 +386,14 @@ module Gogol.ContainerAnalysis.Types
     ContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan,
 
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact
+    ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage
+    ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage,
+
     -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1Volume
     ContaineranalysisGoogleDevtoolsCloudbuildV1Volume (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1Volume,
@@ -387,6 +424,10 @@ module Gogol.ContainerAnalysis.Types
     -- ** Detail
     Detail (..),
     newDetail,
+
+    -- ** Digest
+    Digest (..),
+    newDigest,
 
     -- ** DiscoveryNote
     DiscoveryNote (..),
@@ -443,6 +484,10 @@ module Gogol.ContainerAnalysis.Types
     -- ** FixableTotalByDigest_Severity
     FixableTotalByDigest_Severity (..),
 
+    -- ** GeneratePackagesSummaryRequest
+    GeneratePackagesSummaryRequest (..),
+    newGeneratePackagesSummaryRequest,
+
     -- ** GerritSourceContext
     GerritSourceContext (..),
     newGerritSourceContext,
@@ -462,6 +507,50 @@ module Gogol.ContainerAnalysis.Types
     -- ** GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata
     GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata (..),
     newGoogleDevtoolsContaineranalysisV1alpha1OperationMetadata,
+
+    -- ** GrafeasV1FileLocation
+    GrafeasV1FileLocation (..),
+    newGrafeasV1FileLocation,
+
+    -- ** GrafeasV1SlsaProvenanceZeroTwoSlsaBuilder
+    GrafeasV1SlsaProvenanceZeroTwoSlsaBuilder (..),
+    newGrafeasV1SlsaProvenanceZeroTwoSlsaBuilder,
+
+    -- ** GrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness
+    GrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness (..),
+    newGrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness,
+
+    -- ** GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource
+    GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource (..),
+    newGrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource,
+
+    -- ** GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource_Digest
+    GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource_Digest (..),
+    newGrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource_Digest,
+
+    -- ** GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation
+    GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation (..),
+    newGrafeasV1SlsaProvenanceZeroTwoSlsaInvocation,
+
+    -- ** GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Environment
+    GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Environment (..),
+    newGrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Environment,
+
+    -- ** GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Parameters
+    GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Parameters (..),
+    newGrafeasV1SlsaProvenanceZeroTwoSlsaInvocation_Parameters,
+
+    -- ** GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial
+    GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial (..),
+    newGrafeasV1SlsaProvenanceZeroTwoSlsaMaterial,
+
+    -- ** GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial_Digest
+    GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial_Digest (..),
+    newGrafeasV1SlsaProvenanceZeroTwoSlsaMaterial_Digest,
+
+    -- ** GrafeasV1SlsaProvenanceZeroTwoSlsaMetadata
+    GrafeasV1SlsaProvenanceZeroTwoSlsaMetadata (..),
+    newGrafeasV1SlsaProvenanceZeroTwoSlsaMetadata,
 
     -- ** Hash
     Hash (..),
@@ -491,6 +580,13 @@ module Gogol.ContainerAnalysis.Types
     InTotoStatement (..),
     newInTotoStatement,
 
+    -- ** Justification
+    Justification (..),
+    newJustification,
+
+    -- ** Justification_JustificationType
+    Justification_JustificationType (..),
+
     -- ** Jwt
     Jwt (..),
     newJwt,
@@ -502,6 +598,14 @@ module Gogol.ContainerAnalysis.Types
     -- ** Layer
     Layer (..),
     newLayer,
+
+    -- ** License
+    License (..),
+    newLicense,
+
+    -- ** LicensesSummary
+    LicensesSummary (..),
+    newLicensesSummary,
 
     -- ** ListNoteOccurrencesResponse
     ListNoteOccurrencesResponse (..),
@@ -560,17 +664,35 @@ module Gogol.ContainerAnalysis.Types
     PackageNote (..),
     newPackageNote,
 
+    -- ** PackageNote_Architecture
+    PackageNote_Architecture (..),
+
     -- ** PackageOccurrence
     PackageOccurrence (..),
     newPackageOccurrence,
+
+    -- ** PackageOccurrence_Architecture
+    PackageOccurrence_Architecture (..),
+
+    -- ** PackagesSummaryResponse
+    PackagesSummaryResponse (..),
+    newPackagesSummaryResponse,
 
     -- ** Policy
     Policy (..),
     newPolicy,
 
+    -- ** Product
+    Product (..),
+    newProduct,
+
     -- ** ProjectRepoId
     ProjectRepoId (..),
     newProjectRepoId,
+
+    -- ** Publisher
+    Publisher (..),
+    newPublisher,
 
     -- ** Recipe
     Recipe (..),
@@ -587,6 +709,13 @@ module Gogol.ContainerAnalysis.Types
     -- ** RelatedUrl
     RelatedUrl (..),
     newRelatedUrl,
+
+    -- ** Remediation
+    Remediation (..),
+    newRemediation,
+
+    -- ** Remediation_RemediationType
+    Remediation_RemediationType (..),
 
     -- ** RepoId
     RepoId (..),
@@ -615,6 +744,14 @@ module Gogol.ContainerAnalysis.Types
     -- ** SlsaProvenance
     SlsaProvenance (..),
     newSlsaProvenance,
+
+    -- ** SlsaProvenanceZeroTwo
+    SlsaProvenanceZeroTwo (..),
+    newSlsaProvenanceZeroTwo,
+
+    -- ** SlsaProvenanceZeroTwo_BuildConfig
+    SlsaProvenanceZeroTwo_BuildConfig (..),
+    newSlsaProvenanceZeroTwo_BuildConfig,
 
     -- ** SlsaRecipe
     SlsaRecipe (..),
@@ -668,6 +805,10 @@ module Gogol.ContainerAnalysis.Types
     TestIamPermissionsResponse (..),
     newTestIamPermissionsResponse,
 
+    -- ** TimeSpan
+    TimeSpan (..),
+    newTimeSpan,
+
     -- ** UpgradeDistribution
     UpgradeDistribution (..),
     newUpgradeDistribution,
@@ -687,9 +828,27 @@ module Gogol.ContainerAnalysis.Types
     -- ** Version_Kind
     Version_Kind (..),
 
+    -- ** VexAssessment
+    VexAssessment (..),
+    newVexAssessment,
+
+    -- ** VexAssessment_State
+    VexAssessment_State (..),
+
+    -- ** Volume
+    Volume (..),
+    newVolume,
+
+    -- ** VulnerabilityAssessmentNote
+    VulnerabilityAssessmentNote (..),
+    newVulnerabilityAssessmentNote,
+
     -- ** VulnerabilityNote
     VulnerabilityNote (..),
     newVulnerabilityNote,
+
+    -- ** VulnerabilityNote_CvssVersion
+    VulnerabilityNote_CvssVersion (..),
 
     -- ** VulnerabilityNote_Severity
     VulnerabilityNote_Severity (..),
@@ -697,6 +856,9 @@ module Gogol.ContainerAnalysis.Types
     -- ** VulnerabilityOccurrence
     VulnerabilityOccurrence (..),
     newVulnerabilityOccurrence,
+
+    -- ** VulnerabilityOccurrence_CvssVersion
+    VulnerabilityOccurrence_CvssVersion (..),
 
     -- ** VulnerabilityOccurrence_EffectiveSeverity
     VulnerabilityOccurrence_EffectiveSeverity (..),

@@ -66,7 +66,7 @@ data ServiceManagementServicesDelete = ServiceManagementServicesDelete
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The name of the service. See the </service-management/overview overview> for naming requirements. For example: @example.googleapis.com@.
+    -- | Required. The name of the service. See the <https://cloud.google.com/service-management/overview overview> for naming requirements. For example: @example.googleapis.com@.
     serviceName :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -77,7 +77,7 @@ data ServiceManagementServicesDelete = ServiceManagementServicesDelete
 
 -- | Creates a value of 'ServiceManagementServicesDelete' with the minimum fields required to make a request.
 newServiceManagementServicesDelete ::
-  -- |  Required. The name of the service. See the </service-management/overview overview> for naming requirements. For example: @example.googleapis.com@. See 'serviceName'.
+  -- |  Required. The name of the service. See the <https://cloud.google.com/service-management/overview overview> for naming requirements. For example: @example.googleapis.com@. See 'serviceName'.
   Core.Text ->
   ServiceManagementServicesDelete
 newServiceManagementServicesDelete serviceName =

@@ -68,7 +68,7 @@ data PubSubProjectsSnapshotsCreate = PubSubProjectsSnapshotsCreate
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. User-provided name for this snapshot. If the name is not provided in the request, the server will assign a random name for this snapshot on the same project as the subscription. Note that for REST API requests, you must specify a name. See the resource name rules. Format is @projects\/{project}\/snapshots\/{snap}@.
+    -- | Required. User-provided name for this snapshot. If the name is not provided in the request, the server will assign a random name for this snapshot on the same project as the subscription. Note that for REST API requests, you must specify a name. See the <https://cloud.google.com/pubsub/docs/admin#resource_names resource name rules>. Format is @projects\/{project}\/snapshots\/{snap}@.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: CreateSnapshotRequest,
@@ -81,7 +81,7 @@ data PubSubProjectsSnapshotsCreate = PubSubProjectsSnapshotsCreate
 
 -- | Creates a value of 'PubSubProjectsSnapshotsCreate' with the minimum fields required to make a request.
 newPubSubProjectsSnapshotsCreate ::
-  -- |  Required. User-provided name for this snapshot. If the name is not provided in the request, the server will assign a random name for this snapshot on the same project as the subscription. Note that for REST API requests, you must specify a name. See the resource name rules. Format is @projects\/{project}\/snapshots\/{snap}@. See 'name'.
+  -- |  Required. User-provided name for this snapshot. If the name is not provided in the request, the server will assign a random name for this snapshot on the same project as the subscription. Note that for REST API requests, you must specify a name. See the <https://cloud.google.com/pubsub/docs/admin#resource_names resource name rules>. Format is @projects\/{project}\/snapshots\/{snap}@. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   CreateSnapshotRequest ->

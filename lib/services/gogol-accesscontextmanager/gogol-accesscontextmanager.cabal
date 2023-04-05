@@ -16,7 +16,7 @@ extra-source-files:
   src/.gitkeep
 
 description:
-  An API for setting attribute based access control to requests to GCP services.
+  An API for setting attribute based access control to requests to Google Cloud services.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -56,6 +56,11 @@ library
     Gogol.AccessContextManager.AccessPolicies.AccessLevels.Patch
     Gogol.AccessContextManager.AccessPolicies.AccessLevels.ReplaceAll
     Gogol.AccessContextManager.AccessPolicies.AccessLevels.TestIamPermissions
+    Gogol.AccessContextManager.AccessPolicies.AuthorizedOrgsDescs.Create
+    Gogol.AccessContextManager.AccessPolicies.AuthorizedOrgsDescs.Delete
+    Gogol.AccessContextManager.AccessPolicies.AuthorizedOrgsDescs.Get
+    Gogol.AccessContextManager.AccessPolicies.AuthorizedOrgsDescs.List
+    Gogol.AccessContextManager.AccessPolicies.AuthorizedOrgsDescs.Patch
     Gogol.AccessContextManager.AccessPolicies.Create
     Gogol.AccessContextManager.AccessPolicies.Delete
     Gogol.AccessContextManager.AccessPolicies.Get
@@ -88,5 +93,5 @@ library
     Gogol.AccessContextManager.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

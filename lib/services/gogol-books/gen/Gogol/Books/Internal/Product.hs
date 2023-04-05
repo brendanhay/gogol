@@ -2520,7 +2520,7 @@ instance Core.ToJSON DownloadAccesses where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -3270,7 +3270,9 @@ instance Core.FromJSON Notification where
       ( \o ->
           Notification
             Core.<$> (o Core..:? "body")
-            Core.<*> (o Core..:? "crmExperimentIds")
+            Core.<*> ( o Core..:? "crmExperimentIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "doc_id")
             Core.<*> (o Core..:? "doc_type")
             Core.<*> (o Core..:? "dont_show_notification")
@@ -3295,6 +3297,7 @@ instance Core.ToJSON Notification where
       ( Core.catMaybes
           [ ("body" Core..=) Core.<$> body,
             ("crmExperimentIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> crmExperimentIds,
             ("doc_id" Core..=) Core.<$> docId,
             ("doc_type" Core..=) Core.<$> docType,

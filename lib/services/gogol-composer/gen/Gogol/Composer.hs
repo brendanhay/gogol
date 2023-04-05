@@ -58,10 +58,20 @@ module Gogol.Composer
     ComposerProjectsLocationsEnvironmentsList (..),
     newComposerProjectsLocationsEnvironmentsList,
 
+    -- ** composer.projects.locations.environments.loadSnapshot
+    ComposerProjectsLocationsEnvironmentsLoadSnapshotResource,
+    ComposerProjectsLocationsEnvironmentsLoadSnapshot (..),
+    newComposerProjectsLocationsEnvironmentsLoadSnapshot,
+
     -- ** composer.projects.locations.environments.patch
     ComposerProjectsLocationsEnvironmentsPatchResource,
     ComposerProjectsLocationsEnvironmentsPatch (..),
     newComposerProjectsLocationsEnvironmentsPatch,
+
+    -- ** composer.projects.locations.environments.saveSnapshot
+    ComposerProjectsLocationsEnvironmentsSaveSnapshotResource,
+    ComposerProjectsLocationsEnvironmentsSaveSnapshot (..),
+    newComposerProjectsLocationsEnvironmentsSaveSnapshot,
 
     -- ** composer.projects.locations.imageVersions.list
     ComposerProjectsLocationsImageVersionsListResource,
@@ -102,6 +112,10 @@ module Gogol.Composer
     -- ** CheckUpgradeResponse_PypiDependencies
     CheckUpgradeResponse_PypiDependencies (..),
     newCheckUpgradeResponse_PypiDependencies,
+
+    -- ** CidrBlock
+    CidrBlock (..),
+    newCidrBlock,
 
     -- ** DatabaseConfig
     DatabaseConfig (..),
@@ -157,9 +171,28 @@ module Gogol.Composer
     ListOperationsResponse (..),
     newListOperationsResponse,
 
+    -- ** LoadSnapshotRequest
+    LoadSnapshotRequest (..),
+    newLoadSnapshotRequest,
+
+    -- ** LoadSnapshotResponse
+    LoadSnapshotResponse (..),
+    newLoadSnapshotResponse,
+
     -- ** MaintenanceWindow
     MaintenanceWindow (..),
     newMaintenanceWindow,
+
+    -- ** MasterAuthorizedNetworksConfig
+    MasterAuthorizedNetworksConfig (..),
+    newMasterAuthorizedNetworksConfig,
+
+    -- ** NetworkingConfig
+    NetworkingConfig (..),
+    newNetworkingConfig,
+
+    -- ** NetworkingConfig_ConnectionType
+    NetworkingConfig_ConnectionType (..),
 
     -- ** NodeConfig
     NodeConfig (..),
@@ -194,6 +227,22 @@ module Gogol.Composer
     -- ** PrivateEnvironmentConfig
     PrivateEnvironmentConfig (..),
     newPrivateEnvironmentConfig,
+
+    -- ** RecoveryConfig
+    RecoveryConfig (..),
+    newRecoveryConfig,
+
+    -- ** SaveSnapshotRequest
+    SaveSnapshotRequest (..),
+    newSaveSnapshotRequest,
+
+    -- ** SaveSnapshotResponse
+    SaveSnapshotResponse (..),
+    newSaveSnapshotResponse,
+
+    -- ** ScheduledSnapshotsConfig
+    ScheduledSnapshotsConfig (..),
+    newScheduledSnapshotsConfig,
 
     -- ** SchedulerResource
     SchedulerResource (..),
@@ -249,7 +298,9 @@ import Gogol.Composer.Projects.Locations.Environments.Create
 import Gogol.Composer.Projects.Locations.Environments.Delete
 import Gogol.Composer.Projects.Locations.Environments.Get
 import Gogol.Composer.Projects.Locations.Environments.List
+import Gogol.Composer.Projects.Locations.Environments.LoadSnapshot
 import Gogol.Composer.Projects.Locations.Environments.Patch
+import Gogol.Composer.Projects.Locations.Environments.SaveSnapshot
 import Gogol.Composer.Projects.Locations.ImageVersions.List
 import Gogol.Composer.Projects.Locations.Operations.Delete
 import Gogol.Composer.Projects.Locations.Operations.Get

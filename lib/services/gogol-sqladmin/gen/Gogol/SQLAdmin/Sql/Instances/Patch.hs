@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates settings of a Cloud SQL instance. This method supports patch semantics.
+-- Partially updates settings of a Cloud SQL instance by merging the request with the current configuration. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/cloud-sql/ Cloud SQL Admin API Reference> for @sql.instances.patch@.
 module Gogol.SQLAdmin.Sql.Instances.Patch
@@ -59,7 +59,7 @@ type SqlInstancesPatchResource =
     Core.:> Core.ReqBody '[Core.JSON] DatabaseInstance
     Core.:> Core.Patch '[Core.JSON] Operation
 
--- | Updates settings of a Cloud SQL instance. This method supports patch semantics.
+-- | Partially updates settings of a Cloud SQL instance by merging the request with the current configuration. This method supports patch semantics.
 --
 -- /See:/ 'newSqlInstancesPatch' smart constructor.
 data SqlInstancesPatch = SqlInstancesPatch

@@ -144,7 +144,7 @@
               ],
               "parameters": {
                 "filter": {
-                  "description": "A filter to narrow down results to a preferred subset. The filtering language accepts strings like \"displayName=tokyo\", and is documented in more detail in [AIP-160](https://google.aip.dev/160).",
+                  "description": "A filter to narrow down results to a preferred subset. The filtering language accepts strings like `\"displayName=tokyo\"`, and is documented in more detail in [AIP-160](https://google.aip.dev/160).",
                   "location": "query",
                   "type": "string"
                 },
@@ -395,7 +395,7 @@
                   ],
                   "parameters": {
                     "filter": {
-                      "description": "Filter applied to resulting executions. Currently only supports filtering executions by a specified schedule_id. Format: `schedule_id=`",
+                      "description": "Filter applied to resulting executions. Currently only supports filtering executions by a specified `schedule_id`. Format: `schedule_id=`",
                       "location": "query",
                       "type": "string"
                     },
@@ -493,6 +493,34 @@
                     "https://www.googleapis.com/auth/cloud-platform"
                   ]
                 },
+                "diagnose": {
+                  "description": "Creates a Diagnostic File and runs Diagnostic Tool given an Instance.",
+                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/instances/{instancesId}:diagnose",
+                  "httpMethod": "POST",
+                  "id": "notebooks.projects.locations.instances.diagnose",
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "parameters": {
+                    "name": {
+                      "description": "Required. Format: `projects/{project_id}/locations/{location}/instances/{instance_id}`",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+/instances/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v1/{+name}:diagnose",
+                  "request": {
+                    "$ref": "DiagnoseInstanceRequest"
+                  },
+                  "response": {
+                    "$ref": "Operation"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
                 "get": {
                   "description": "Gets details of a single Instance.",
                   "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/instances/{instancesId}",
@@ -534,7 +562,7 @@
                       "type": "integer"
                     },
                     "resource": {
-                      "description": "REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.",
+                      "description": "REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field.",
                       "location": "path",
                       "pattern": "^projects/[^/]+/locations/[^/]+/instances/[^/]+$",
                       "required": true,
@@ -710,6 +738,34 @@
                     "https://www.googleapis.com/auth/cloud-platform"
                   ]
                 },
+                "reportEvent": {
+                  "description": "Reports and processes an instance event.",
+                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/instances/{instancesId}:reportEvent",
+                  "httpMethod": "POST",
+                  "id": "notebooks.projects.locations.instances.reportEvent",
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "parameters": {
+                    "name": {
+                      "description": "Required. Format: `projects/{project_id}/locations/{location}/instances/{instance_id}`",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+/instances/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v1/{+name}:reportEvent",
+                  "request": {
+                    "$ref": "ReportInstanceEventRequest"
+                  },
+                  "response": {
+                    "$ref": "Operation"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
                 "reset": {
                   "description": "Resets a notebook instance.",
                   "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/instances/{instancesId}:reset",
@@ -804,7 +860,7 @@
                   ],
                   "parameters": {
                     "resource": {
-                      "description": "REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.",
+                      "description": "REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field.",
                       "location": "path",
                       "pattern": "^projects/[^/]+/locations/[^/]+/instances/[^/]+$",
                       "required": true,
@@ -944,7 +1000,7 @@
                   ],
                   "parameters": {
                     "resource": {
-                      "description": "REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.",
+                      "description": "REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field.",
                       "location": "path",
                       "pattern": "^projects/[^/]+/locations/[^/]+/instances/[^/]+$",
                       "required": true,
@@ -1185,7 +1241,7 @@
                   ]
                 },
                 "list": {
-                  "description": "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id.",
+                  "description": "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.",
                   "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/operations",
                   "httpMethod": "GET",
                   "id": "notebooks.projects.locations.operations.list",
@@ -1297,6 +1353,34 @@
                     "https://www.googleapis.com/auth/cloud-platform"
                   ]
                 },
+                "diagnose": {
+                  "description": "Creates a Diagnostic File and runs Diagnostic Tool given a Runtime.",
+                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/runtimes/{runtimesId}:diagnose",
+                  "httpMethod": "POST",
+                  "id": "notebooks.projects.locations.runtimes.diagnose",
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "parameters": {
+                    "name": {
+                      "description": "Required. Format: `projects/{project_id}/locations/{location}/runtimes/{runtimes_id}`",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+/runtimes/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v1/{+name}:diagnose",
+                  "request": {
+                    "$ref": "DiagnoseRuntimeRequest"
+                  },
+                  "response": {
+                    "$ref": "Operation"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
                 "get": {
                   "description": "Gets details of a single Runtime. The location must be a regional endpoint rather than zonal.",
                   "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/runtimes/{runtimesId}",
@@ -1338,7 +1422,7 @@
                       "type": "integer"
                     },
                     "resource": {
-                      "description": "REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.",
+                      "description": "REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field.",
                       "location": "path",
                       "pattern": "^projects/[^/]+/locations/[^/]+/runtimes/[^/]+$",
                       "required": true,
@@ -1384,6 +1468,73 @@
                   "path": "v1/{+parent}/runtimes",
                   "response": {
                     "$ref": "ListRuntimesResponse"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
+                "patch": {
+                  "description": "Update Notebook Runtime configuration.",
+                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/runtimes/{runtimesId}",
+                  "httpMethod": "PATCH",
+                  "id": "notebooks.projects.locations.runtimes.patch",
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "parameters": {
+                    "name": {
+                      "description": "Output only. The resource name of the runtime. Format: `projects/{project}/locations/{location}/runtimes/{runtimeId}`",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+/runtimes/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "description": "Idempotent request UUID.",
+                      "location": "query",
+                      "type": "string"
+                    },
+                    "updateMask": {
+                      "description": "Required. Specifies the path, relative to `Runtime`, of the field to update. For example, to change the software configuration kernels, the `update_mask` parameter would be specified as `software_config.kernels`, and the `PATCH` request body would specify the new value, as follows: { \"software_config\":{ \"kernels\": [{ 'repository': 'gcr.io/deeplearning-platform-release/pytorch-gpu', 'tag': 'latest' }], } } Currently, only the following fields can be updated: - `software_config.kernels` - `software_config.post_startup_script` - `software_config.custom_gpu_driver_path` - `software_config.idle_shutdown` - `software_config.idle_shutdown_timeout` - `software_config.disable_terminal` - `labels`",
+                      "format": "google-fieldmask",
+                      "location": "query",
+                      "type": "string"
+                    }
+                  },
+                  "path": "v1/{+name}",
+                  "request": {
+                    "$ref": "Runtime"
+                  },
+                  "response": {
+                    "$ref": "Operation"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
+                "refreshRuntimeTokenInternal": {
+                  "description": "Gets an access token for the consumer service account that the customer attached to the runtime. Only accessible from the tenant instance.",
+                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/runtimes/{runtimesId}:refreshRuntimeTokenInternal",
+                  "httpMethod": "POST",
+                  "id": "notebooks.projects.locations.runtimes.refreshRuntimeTokenInternal",
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "parameters": {
+                    "name": {
+                      "description": "Required. Format: `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+/runtimes/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v1/{+name}:refreshRuntimeTokenInternal",
+                  "request": {
+                    "$ref": "RefreshRuntimeTokenInternalRequest"
+                  },
+                  "response": {
+                    "$ref": "RefreshRuntimeTokenInternalResponse"
                   },
                   "scopes": [
                     "https://www.googleapis.com/auth/cloud-platform"
@@ -1455,7 +1606,7 @@
                   ],
                   "parameters": {
                     "resource": {
-                      "description": "REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.",
+                      "description": "REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field.",
                       "location": "path",
                       "pattern": "^projects/[^/]+/locations/[^/]+/runtimes/[^/]+$",
                       "required": true,
@@ -1567,7 +1718,7 @@
                   ],
                   "parameters": {
                     "resource": {
-                      "description": "REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.",
+                      "description": "REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field.",
                       "location": "path",
                       "pattern": "^projects/[^/]+/locations/[^/]+/runtimes/[^/]+$",
                       "required": true,
@@ -1580,6 +1731,34 @@
                   },
                   "response": {
                     "$ref": "TestIamPermissionsResponse"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
+                "upgrade": {
+                  "description": "Upgrades a Managed Notebook Runtime to the latest version.",
+                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/runtimes/{runtimesId}:upgrade",
+                  "httpMethod": "POST",
+                  "id": "notebooks.projects.locations.runtimes.upgrade",
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "parameters": {
+                    "name": {
+                      "description": "Required. Format: `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+/runtimes/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v1/{+name}:upgrade",
+                  "request": {
+                    "$ref": "UpgradeRuntimeRequest"
+                  },
+                  "response": {
+                    "$ref": "Operation"
                   },
                   "scopes": [
                     "https://www.googleapis.com/auth/cloud-platform"
@@ -1753,11 +1932,11 @@
       }
     }
   },
-  "revision": "20220303",
+  "revision": "20230307",
   "rootUrl": "https://notebooks.googleapis.com/",
   "schemas": {
     "AcceleratorConfig": {
-      "description": "Definition of a hardware accelerator. Note that not all combinations of `type` and `core_count` are valid. Check [GPUs on Compute Engine](/compute/docs/gpus/#gpus-list) to find a valid combination. TPUs are not supported.",
+      "description": "Definition of a hardware accelerator. Note that not all combinations of `type` and `core_count` are valid. Check [GPUs on Compute Engine](https://cloud.google.com/compute/docs/gpus/#gpus-list) to find a valid combination. TPUs are not supported.",
       "id": "AcceleratorConfig",
       "properties": {
         "coreCount": {
@@ -1809,7 +1988,7 @@
           "description": "The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies)."
         },
         "members": {
-          "description": "Specifies the principals requesting access for a Cloud Platform resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. ",
+          "description": "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]`: An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts). For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding.",
           "items": {
             "type": "string"
           },
@@ -1860,6 +2039,55 @@
       },
       "type": "object"
     },
+    "DiagnoseInstanceRequest": {
+      "description": "Request for creating a notebook instance diagnostic file.",
+      "id": "DiagnoseInstanceRequest",
+      "properties": {
+        "diagnosticConfig": {
+          "$ref": "DiagnosticConfig",
+          "description": "Required. Defines flags that are used to run the diagnostic tool"
+        }
+      },
+      "type": "object"
+    },
+    "DiagnoseRuntimeRequest": {
+      "description": "Request for creating a notebook instance diagnostic file.",
+      "id": "DiagnoseRuntimeRequest",
+      "properties": {
+        "diagnosticConfig": {
+          "$ref": "DiagnosticConfig",
+          "description": "Required. Defines flags that are used to run the diagnostic tool"
+        }
+      },
+      "type": "object"
+    },
+    "DiagnosticConfig": {
+      "description": "Defines flags that are used to run the diagnostic tool",
+      "id": "DiagnosticConfig",
+      "properties": {
+        "copyHomeFilesFlagEnabled": {
+          "description": "Optional. Enables flag to copy all `/home/jupyter` folder contents",
+          "type": "boolean"
+        },
+        "gcsBucket": {
+          "description": "Required. User Cloud Storage bucket location (REQUIRED). Must be formatted with path prefix (`gs://$GCS_BUCKET`). Permissions: User Managed Notebooks: - storage.buckets.writer: Must be given to the project's service account attached to VM. Google Managed Notebooks: - storage.buckets.writer: Must be given to the project's service account or user credentials attached to VM depending on authentication mode. Cloud Storage bucket Log file will be written to `gs://$GCS_BUCKET/$RELATIVE_PATH/$VM_DATE_$TIME.tar.gz`",
+          "type": "string"
+        },
+        "packetCaptureFlagEnabled": {
+          "description": "Optional. Enables flag to capture packets from the instance for 30 seconds",
+          "type": "boolean"
+        },
+        "relativePath": {
+          "description": "Optional. Defines the relative storage path in the Cloud Storage bucket where the diagnostic logs will be written: Default path will be the root directory of the Cloud Storage bucket (`gs://$GCS_BUCKET/$DATE_$TIME.tar.gz`) Example of full path where Log file will be written: `gs://$GCS_BUCKET/$RELATIVE_PATH/`",
+          "type": "string"
+        },
+        "repairFlagEnabled": {
+          "description": "Optional. Enables flag to repair service for instance",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
     "Disk": {
       "description": "An instance-attached disk resource.",
       "id": "Disk",
@@ -1873,7 +2101,7 @@
           "type": "boolean"
         },
         "deviceName": {
-          "description": "Indicates a unique device name of your choice that is reflected into the /dev/disk/by-id/google-* tree of a Linux operating system running within the instance. This name can be used to reference the device for mounting, resizing, and so on, from within the instance. If not specified, the server chooses a default device name to apply to this disk, in the form persistent-disk-x, where x is a number assigned by Google Compute Engine.This field is only applicable for persistent disks.",
+          "description": "Indicates a unique device name of your choice that is reflected into the `/dev/disk/by-id/google-*` tree of a Linux operating system running within the instance. This name can be used to reference the device for mounting, resizing, and so on, from within the instance. If not specified, the server chooses a default device name to apply to this disk, in the form persistent-disk-x, where x is a number assigned by Google Compute Engine.This field is only applicable for persistent disks.",
           "type": "string"
         },
         "diskSizeGb": {
@@ -1894,7 +2122,7 @@
           "type": "string"
         },
         "interface": {
-          "description": "Indicates the disk interface to use for attaching this disk, which is either SCSI or NVME. The default is SCSI. Persistent disks must always use SCSI and the request will fail if you attempt to attach a persistent disk in any other format than SCSI. Local SSDs can use either NVME or SCSI. For performance characteristics of SCSI over NVMe, see Local SSD performance. Valid values: * NVME * SCSI",
+          "description": "Indicates the disk interface to use for attaching this disk, which is either SCSI or NVME. The default is SCSI. Persistent disks must always use SCSI and the request will fail if you attempt to attach a persistent disk in any other format than SCSI. Local SSDs can use either NVME or SCSI. For performance characteristics of SCSI over NVMe, see Local SSD performance. Valid values: * `NVME` * `SCSI`",
           "type": "string"
         },
         "kind": {
@@ -1909,7 +2137,7 @@
           "type": "array"
         },
         "mode": {
-          "description": "The mode in which to attach this disk, either READ_WRITE or READ_ONLY. If not specified, the default is to attach the disk in READ_WRITE mode. Valid values: * READ_ONLY * READ_WRITE",
+          "description": "The mode in which to attach this disk, either `READ_WRITE` or `READ_ONLY`. If not specified, the default is to attach the disk in `READ_WRITE` mode. Valid values: * `READ_ONLY` * `READ_WRITE`",
           "type": "string"
         },
         "source": {
@@ -1917,14 +2145,14 @@
           "type": "string"
         },
         "type": {
-          "description": "Indicates the type of the disk, either SCRATCH or PERSISTENT. Valid values: * PERSISTENT * SCRATCH",
+          "description": "Indicates the type of the disk, either `SCRATCH` or `PERSISTENT`. Valid values: * `PERSISTENT` * `SCRATCH`",
           "type": "string"
         }
       },
       "type": "object"
     },
     "Empty": {
-      "description": "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`.",
+      "description": "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }",
       "id": "Empty",
       "properties": {},
       "type": "object"
@@ -2250,7 +2478,7 @@
       "id": "GuestOsFeature",
       "properties": {
         "type": {
-          "description": "The ID of a supported feature. Read Enabling guest operating system features to see a list of available options. Valid values: * FEATURE_TYPE_UNSPECIFIED * MULTI_IP_SUBNET * SECURE_BOOT * UEFI_COMPATIBLE * VIRTIO_SCSI_MULTIQUEUE * WINDOWS",
+          "description": "The ID of a supported feature. Read Enabling guest operating system features to see a list of available options. Valid values: * `FEATURE_TYPE_UNSPECIFIED` * `MULTI_IP_SUBNET` * `SECURE_BOOT` * `UEFI_COMPATIBLE` * `VIRTIO_SCSI_MULTIQUEUE` * `WINDOWS`",
           "type": "string"
         }
       },
@@ -2262,7 +2490,7 @@
       "properties": {
         "acceleratorConfig": {
           "$ref": "AcceleratorConfig",
-          "description": "The hardware accelerator used on this instance. If you use accelerators, make sure that your configuration has [enough vCPUs and memory to support the `machine_type` you have selected](/compute/docs/gpus/#gpus-list)."
+          "description": "The hardware accelerator used on this instance. If you use accelerators, make sure that your configuration has [enough vCPUs and memory to support the `machine_type` you have selected](https://cloud.google.com/compute/docs/gpus/#gpus-list)."
         },
         "bootDiskSizeGb": {
           "description": "Input only. The size of the boot disk in GB attached to this instance, up to a maximum of 64000 GB (64 TB). The minimum recommended value is 100 GB. If not specified, this defaults to 100.",
@@ -2275,13 +2503,15 @@
             "DISK_TYPE_UNSPECIFIED",
             "PD_STANDARD",
             "PD_SSD",
-            "PD_BALANCED"
+            "PD_BALANCED",
+            "PD_EXTREME"
           ],
           "enumDescriptions": [
             "Disk type not set.",
             "Standard persistent disk type.",
             "SSD persistent disk type.",
-            "Balanced persistent disk type."
+            "Balanced persistent disk type.",
+            "Extreme persistent disk type."
           ],
           "type": "string"
         },
@@ -2319,13 +2549,15 @@
             "DISK_TYPE_UNSPECIFIED",
             "PD_STANDARD",
             "PD_SSD",
-            "PD_BALANCED"
+            "PD_BALANCED",
+            "PD_EXTREME"
           ],
           "enumDescriptions": [
             "Disk type not set.",
             "Standard persistent disk type.",
             "SSD persistent disk type.",
-            "Balanced persistent disk type."
+            "Balanced persistent disk type.",
+            "Extreme persistent disk type."
           ],
           "type": "string"
         },
@@ -2374,7 +2606,7 @@
           "type": "object"
         },
         "machineType": {
-          "description": "Required. The [Compute Engine machine type](/compute/docs/machine-types) of this instance.",
+          "description": "Required. The [Compute Engine machine type](https://cloud.google.com/compute/docs/machine-types) of this instance.",
           "type": "string"
         },
         "metadata": {
@@ -2615,7 +2847,7 @@
           "type": "string"
         },
         "unreachable": {
-          "description": "Locations that could not be reached. For example, ['us-west1-a', 'us-central1-b']. A ListInstancesResponse will only contain either instances or unreachables,",
+          "description": "Locations that could not be reached. For example, `['us-west1-a', 'us-central1-b']`. A ListInstancesResponse will only contain either instances or unreachables,",
           "items": {
             "type": "string"
           },
@@ -2676,7 +2908,7 @@
           "type": "array"
         },
         "unreachable": {
-          "description": "Locations that could not be reached. For example, ['us-west1', 'us-central1']. A ListRuntimesResponse will only contain either runtimes or unreachables,",
+          "description": "Locations that could not be reached. For example, `['us-west1', 'us-central1']`. A ListRuntimesResponse will only contain either runtimes or unreachables,",
           "items": {
             "type": "string"
           },
@@ -2725,7 +2957,7 @@
           "type": "boolean"
         },
         "deviceName": {
-          "description": "Optional. Output only. Specifies a unique device name of your choice that is reflected into the /dev/disk/by-id/google-* tree of a Linux operating system running within the instance. This name can be used to reference the device for mounting, resizing, and so on, from within the instance. If not specified, the server chooses a default device name to apply to this disk, in the form persistent-disk-x, where x is a number assigned by Google Compute Engine. This field is only applicable for persistent disks.",
+          "description": "Optional. Output only. Specifies a unique device name of your choice that is reflected into the `/dev/disk/by-id/google-*` tree of a Linux operating system running within the instance. This name can be used to reference the device for mounting, resizing, and so on, from within the instance. If not specified, the server chooses a default device name to apply to this disk, in the form persistent-disk-x, where x is a number assigned by Google Compute Engine. This field is only applicable for persistent disks.",
           "readOnly": true,
           "type": "string"
         },
@@ -2748,7 +2980,7 @@
           "description": "Input only. Specifies the parameters for a new disk that will be created alongside the new instance. Use initialization parameters to create boot disks or local SSDs attached to the new instance. This property is mutually exclusive with the source property; you can only define one or the other, but not both."
         },
         "interface": {
-          "description": "Specifies the disk interface to use for attaching this disk, which is either SCSI or NVME. The default is SCSI. Persistent disks must always use SCSI and the request will fail if you attempt to attach a persistent disk in any other format than SCSI. Local SSDs can use either NVME or SCSI. For performance characteristics of SCSI over NVMe, see Local SSD performance. Valid values: * NVME * SCSI",
+          "description": "Specifies the disk interface to use for attaching this disk, which is either SCSI or NVME. The default is SCSI. Persistent disks must always use SCSI and the request will fail if you attempt to attach a persistent disk in any other format than SCSI. Local SSDs can use either NVME or SCSI. For performance characteristics of SCSI over NVMe, see Local SSD performance. Valid values: * `NVME` * `SCSI`",
           "type": "string"
         },
         "kind": {
@@ -2765,7 +2997,7 @@
           "type": "array"
         },
         "mode": {
-          "description": "The mode in which to attach this disk, either READ_WRITE or READ_ONLY. If not specified, the default is to attach the disk in READ_WRITE mode. Valid values: * READ_ONLY * READ_WRITE",
+          "description": "The mode in which to attach this disk, either `READ_WRITE` or `READ_ONLY`. If not specified, the default is to attach the disk in `READ_WRITE` mode. Valid values: * `READ_ONLY` * `READ_WRITE`",
           "type": "string"
         },
         "source": {
@@ -2773,7 +3005,7 @@
           "type": "string"
         },
         "type": {
-          "description": "Specifies the type of the disk, either SCRATCH or PERSISTENT. If not specified, the default is PERSISTENT. Valid values: * PERSISTENT * SCRATCH",
+          "description": "Specifies the type of the disk, either `SCRATCH` or `PERSISTENT`. If not specified, the default is `PERSISTENT`. Valid values: * `PERSISTENT` * `SCRATCH`",
           "type": "string"
         }
       },
@@ -2802,13 +3034,15 @@
             "DISK_TYPE_UNSPECIFIED",
             "PD_STANDARD",
             "PD_SSD",
-            "PD_BALANCED"
+            "PD_BALANCED",
+            "PD_EXTREME"
           ],
           "enumDescriptions": [
             "Disk type not set.",
             "Standard persistent disk type.",
             "SSD persistent disk type.",
-            "Balanced persistent disk type."
+            "Balanced persistent disk type.",
+            "Extreme persistent disk type."
           ],
           "type": "string"
         },
@@ -2956,12 +3190,55 @@
       },
       "type": "object"
     },
+    "RefreshRuntimeTokenInternalRequest": {
+      "description": "Request for getting a new access token.",
+      "id": "RefreshRuntimeTokenInternalRequest",
+      "properties": {
+        "vmId": {
+          "description": "Required. The VM hardware token for authenticating the VM. https://cloud.google.com/compute/docs/instances/verifying-instance-identity",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RefreshRuntimeTokenInternalResponse": {
+      "description": "Response with a new access token.",
+      "id": "RefreshRuntimeTokenInternalResponse",
+      "properties": {
+        "accessToken": {
+          "description": "The OAuth 2.0 access token.",
+          "type": "string"
+        },
+        "expireTime": {
+          "description": "Output only. Token expiration time.",
+          "format": "google-datetime",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "RegisterInstanceRequest": {
       "description": "Request for registering a notebook instance.",
       "id": "RegisterInstanceRequest",
       "properties": {
         "instanceId": {
           "description": "Required. User defined unique ID of this instance. The `instance_id` must be 1 to 63 characters long and contain only lowercase letters, numeric characters, and dashes. The first character must be a lowercase letter and the last character cannot be a dash.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ReportInstanceEventRequest": {
+      "description": "Request for reporting a Managed Notebook Event.",
+      "id": "ReportInstanceEventRequest",
+      "properties": {
+        "event": {
+          "$ref": "Event",
+          "description": "Required. The Event to be reported."
+        },
+        "vmId": {
+          "description": "Required. The VM hardware token for authenticating the VM. https://cloud.google.com/compute/docs/instances/verifying-instance-identity",
           "type": "string"
         }
       },
@@ -3056,7 +3333,7 @@
       "id": "RollbackInstanceRequest",
       "properties": {
         "targetSnapshot": {
-          "description": "Required. The snapshot for rollback. Example: \"projects/test-project/global/snapshots/krwlzipynril\".",
+          "description": "Required. The snapshot for rollback. Example: `projects/test-project/global/snapshots/krwlzipynril`.",
           "type": "string"
         }
       },
@@ -3094,6 +3371,13 @@
           ],
           "readOnly": true,
           "type": "string"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Optional. The labels to associate with this Managed Notebook or Runtime. Label **keys** must contain 1 to 63 characters, and must conform to [RFC 1035](https://www.ietf.org/rfc/rfc1035.txt). Label **values** may be empty, but, if present, must contain 1 to 63 characters, and must conform to [RFC 1035](https://www.ietf.org/rfc/rfc1035.txt). No more than 32 labels can be associated with a cluster.",
+          "type": "object"
         },
         "metrics": {
           "$ref": "RuntimeMetrics",
@@ -3228,7 +3512,7 @@
       "id": "RuntimeGuestOsFeature",
       "properties": {
         "type": {
-          "description": "The ID of a supported feature. Read [Enabling guest operating system features](https://cloud.google.com/compute/docs/images/create-delete-deprecate-private-images#guest-os-features) to see a list of available options. Valid values: * FEATURE_TYPE_UNSPECIFIED * MULTI_IP_SUBNET * SECURE_BOOT * UEFI_COMPATIBLE * VIRTIO_SCSI_MULTIQUEUE * WINDOWS",
+          "description": "The ID of a supported feature. Read [Enabling guest operating system features](https://cloud.google.com/compute/docs/images/create-delete-deprecate-private-images#guest-os-features) to see a list of available options. Valid values: * `FEATURE_TYPE_UNSPECIFIED` * `MULTI_IP_SUBNET` * `SECURE_BOOT` * `UEFI_COMPATIBLE` * `VIRTIO_SCSI_MULTIQUEUE` * `WINDOWS`",
           "type": "string"
         }
       },
@@ -3276,6 +3560,10 @@
           "description": "Specify a custom Cloud Storage path where the GPU driver is stored. If not specified, we'll automatically choose from official GPU drivers.",
           "type": "string"
         },
+        "disableTerminal": {
+          "description": "Bool indicating whether JupyterLab terminal will be available or not. Default: False",
+          "type": "boolean"
+        },
         "enableHealthMonitoring": {
           "description": "Verifies core internal services are running. Default: True",
           "type": "boolean"
@@ -3300,6 +3588,10 @@
           },
           "type": "array"
         },
+        "mixerDisabled": {
+          "description": "Bool indicating whether mixer client should be disabled. Default: False",
+          "type": "boolean"
+        },
         "notebookUpgradeSchedule": {
           "description": "Cron expression in UTC timezone, used to schedule instance auto upgrade. Please follow the [cron format](https://en.wikipedia.org/wiki/Cron).",
           "type": "string"
@@ -3308,10 +3600,29 @@
           "description": "Path to a Bash script that automatically runs after a notebook instance fully boots up. The path must be a URL or Cloud Storage path (`gs://path-to-file/file-name`).",
           "type": "string"
         },
+        "postStartupScriptBehavior": {
+          "description": "Behavior for the post startup script.",
+          "enum": [
+            "POST_STARTUP_SCRIPT_BEHAVIOR_UNSPECIFIED",
+            "RUN_EVERY_START",
+            "DOWNLOAD_AND_RUN_EVERY_START"
+          ],
+          "enumDescriptions": [
+            "Unspecified post startup script behavior. Will run only once at creation.",
+            "Runs the post startup script provided during creation at every start.",
+            "Downloads and runs the provided post startup script at every start."
+          ],
+          "type": "string"
+        },
         "upgradeable": {
           "description": "Output only. Bool indicating whether an newer image is available in an image family.",
           "readOnly": true,
           "type": "boolean"
+        },
+        "version": {
+          "description": "Output only. version of boot image such as M100, from release label of the image.",
+          "readOnly": true,
+          "type": "string"
         }
       },
       "type": "object"
@@ -3327,7 +3638,7 @@
           "type": "string"
         },
         "cronSchedule": {
-          "description": "Cron-tab formatted schedule by which the job will execute. Format: minute, hour, day of month, month, day of week, e.g. 0 0 * * WED = every Wednesday More examples: https://crontab.guru/examples.html",
+          "description": "Cron-tab formatted schedule by which the job will execute. Format: minute, hour, day of month, month, day of week, e.g. `0 0 * * WED` = every Wednesday More examples: https://crontab.guru/examples.html",
           "type": "string"
         },
         "description": {
@@ -3335,7 +3646,7 @@
           "type": "string"
         },
         "displayName": {
-          "description": "Output only. Display name used for UI purposes. Name can only contain alphanumeric characters, hyphens '-', and underscores '_'.",
+          "description": "Output only. Display name used for UI purposes. Name can only contain alphanumeric characters, hyphens `-`, and underscores `_`.",
           "readOnly": true,
           "type": "string"
         },
@@ -3434,7 +3745,7 @@
       "properties": {
         "policy": {
           "$ref": "Policy",
-          "description": "REQUIRED: The complete policy to be applied to the `resource`. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them."
+          "description": "REQUIRED: The complete policy to be applied to the `resource`. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Google Cloud services (such as Projects) might reject them."
         }
       },
       "type": "object"
@@ -3509,7 +3820,7 @@
       "type": "object"
     },
     "ShieldedInstanceConfig": {
-      "description": "A set of Shielded Instance options. Check [Images using supported Shielded VM features] Not all combinations are valid.",
+      "description": "A set of Shielded Instance options. Check [Images using supported Shielded VM features](https://cloud.google.com/compute/docs/instances/modifying-shielded-vm). Not all combinations are valid.",
       "id": "ShieldedInstanceConfig",
       "properties": {
         "enableIntegrityMonitoring": {
@@ -3612,7 +3923,7 @@
       "id": "TestIamPermissionsRequest",
       "properties": {
         "permissions": {
-          "description": "The set of permissions to check for the `resource`. Permissions with wildcards (such as '*' or 'storage.*') are not allowed. For more information see [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).",
+          "description": "The set of permissions to check for the `resource`. Permissions with wildcards (such as `*` or `storage.*`) are not allowed. For more information see [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).",
           "items": {
             "type": "string"
           },
@@ -3743,7 +4054,7 @@
           "type": "string"
         },
         "targetImage": {
-          "description": "Target VM Image. Format: ainotebooks-vm/project/image-name/name.",
+          "description": "Target VM Image. Format: `ainotebooks-vm/project/image-name/name`.",
           "type": "string"
         },
         "targetVersion": {
@@ -3815,6 +4126,17 @@
       },
       "type": "object"
     },
+    "UpgradeRuntimeRequest": {
+      "description": "Request for upgrading a Managed Notebook Runtime to the latest version. option (google.api.message_visibility).restriction = \"TRUSTED_TESTER,SPECIAL_TESTER\";",
+      "id": "UpgradeRuntimeRequest",
+      "properties": {
+        "requestId": {
+          "description": "Idempotent request UUID.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "VertexAIParameters": {
       "description": "Parameters used in Vertex AI JobType executions.",
       "id": "VertexAIParameters",
@@ -3823,11 +4145,11 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Environment variables. At most 100 environment variables can be specified and unique. Example: GCP_BUCKET=gs://my-bucket/samples/",
+          "description": "Environment variables. At most 100 environment variables can be specified and unique. Example: `GCP_BUCKET=gs://my-bucket/samples/`",
           "type": "object"
         },
         "network": {
-          "description": "The full name of the Compute Engine [network](/compute/docs/networks-and-firewalls#networks) to which the Job should be peered. For example, `projects/12345/global/networks/myVPC`. [Format](https://cloud.google.com/compute/docs/reference/rest/v1/networks/insert) is of the form `projects/{project}/global/networks/{network}`. Where {project} is a project number, as in `12345`, and {network} is a network name. Private services access must already be configured for the network. If left unspecified, the job is not peered with any network.",
+          "description": "The full name of the Compute Engine [network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks) to which the Job should be peered. For example, `projects/12345/global/networks/myVPC`. [Format](https://cloud.google.com/compute/docs/reference/rest/v1/networks/insert) is of the form `projects/{project}/global/networks/{network}`. Where `{project}` is a project number, as in `12345`, and `{network}` is a network name. Private services access must already be configured for the network. If left unspecified, the job is not peered with any network.",
           "type": "string"
         }
       },
@@ -3912,7 +4234,7 @@
           "type": "object"
         },
         "network": {
-          "description": "Optional. The Compute Engine network to be used for machine communications. Cannot be specified with subnetwork. If neither `network` nor `subnet` is specified, the \"default\" network of the project is used, if it exists. A full URL or partial URI. Examples: * `https://www.googleapis.com/compute/v1/projects/[project_id]/regions/global/default` * `projects/[project_id]/regions/global/default` Runtimes are managed resources inside Google Infrastructure. Runtimes support the following network configurations: * Google Managed Network (Network \u0026 subnet are empty) * Consumer Project VPC (network \u0026 subnet are required). Requires configuring Private Service Access. * Shared VPC (network \u0026 subnet are required). Requires configuring Private Service Access.",
+          "description": "Optional. The Compute Engine network to be used for machine communications. Cannot be specified with subnetwork. If neither `network` nor `subnet` is specified, the \"default\" network of the project is used, if it exists. A full URL or partial URI. Examples: * `https://www.googleapis.com/compute/v1/projects/[project_id]/global/networks/default` * `projects/[project_id]/global/networks/default` Runtimes are managed resources inside Google Infrastructure. Runtimes support the following network configurations: * Google Managed Network (Network \u0026 subnet are empty) * Consumer Project VPC (network \u0026 subnet are required). Requires configuring Private Service Access. * Shared VPC (network \u0026 subnet are required). Requires configuring Private Service Access.",
           "type": "string"
         },
         "nicType": {
@@ -3969,7 +4291,7 @@
           "type": "string"
         },
         "project": {
-          "description": "Required. The name of the Google Cloud project that this VM image belongs to. Format: `projects/{project_id}`",
+          "description": "Required. The name of the Google Cloud project that this VM image belongs to. Format: `{project_id}`",
           "type": "string"
         }
       },

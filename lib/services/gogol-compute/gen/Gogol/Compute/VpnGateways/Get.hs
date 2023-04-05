@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified VPN gateway. Gets a list of available VPN gateways by making a list() request.
+-- Returns the specified VPN gateway.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.vpnGateways.get@.
 module Gogol.Compute.VpnGateways.Get
@@ -61,7 +61,7 @@ type ComputeVpnGatewaysGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] VpnGateway
 
--- | Returns the specified VPN gateway. Gets a list of available VPN gateways by making a list() request.
+-- | Returns the specified VPN gateway.
 --
 -- /See:/ 'newComputeVpnGatewaysGet' smart constructor.
 data ComputeVpnGatewaysGet = ComputeVpnGatewaysGet

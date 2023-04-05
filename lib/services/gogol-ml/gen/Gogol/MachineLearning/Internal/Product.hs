@@ -943,7 +943,9 @@ instance
       "GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentIntValueSpec"
       ( \o ->
           GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentIntValueSpec
-            Core.<$> (o Core..:? "values")
+            Core.<$> ( o Core..:? "values"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
       )
 
 instance
@@ -953,7 +955,11 @@ instance
   toJSON
     GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentIntValueSpec {..} =
       Core.object
-        (Core.catMaybes [("values" Core..=) Core.<$> values])
+        ( Core.catMaybes
+            [ ("values" Core..=) Core.. Core.fmap Core.AsText
+                Core.<$> values
+            ]
+        )
 
 -- | Represents a metric to optimize.
 --
@@ -2927,7 +2933,7 @@ data GoogleCloudMlV1__Model = GoogleCloudMlV1__Model
     description :: (Core.Maybe Core.Text),
     -- | @etag@ is used for optimistic concurrency control as a way to help prevent simultaneous updates of a model from overwriting each other. It is strongly suggested that systems make use of the @etag@ in the read-modify-write cycle to perform model updates in order to avoid race conditions: An @etag@ is returned in the response to @GetModel@, and systems are expected to put that etag in the request to @UpdateModel@ to ensure that their change will be applied to the model as intended.
     etag :: (Core.Maybe Core.Base64),
-    -- | Optional. One or more labels that you can add, to organize your models. Each label is a key-value pair, where both the key and the value are arbitrary strings that you supply. For more information, see the documentation on using labels.
+    -- | Optional. One or more labels that you can add, to organize your models. Each label is a key-value pair, where both the key and the value are arbitrary strings that you supply. For more information, see the documentation on using labels. Note that this field is not updatable for mls1* models.
     labels :: (Core.Maybe GoogleCloudMlV1__Model_Labels),
     -- | Required. The name specified for the model when it was created. The model name must be unique within the project it is created in.
     name :: (Core.Maybe Core.Text),
@@ -2988,7 +2994,7 @@ instance Core.ToJSON GoogleCloudMlV1__Model where
           ]
       )
 
--- | Optional. One or more labels that you can add, to organize your models. Each label is a key-value pair, where both the key and the value are arbitrary strings that you supply. For more information, see the documentation on using labels.
+-- | Optional. One or more labels that you can add, to organize your models. Each label is a key-value pair, where both the key and the value are arbitrary strings that you supply. For more information, see the documentation on using labels. Note that this field is not updatable for mls1* models.
 --
 -- /See:/ 'newGoogleCloudMlV1__Model_Labels' smart constructor.
 newtype GoogleCloudMlV1__Model_Labels = GoogleCloudMlV1__Model_Labels
@@ -4336,7 +4342,7 @@ data GoogleCloudMlV1__Version = GoogleCloudMlV1__Version
     framework :: (Core.Maybe GoogleCloudMlV1__Version_Framework),
     -- | Output only. If true, this version will be used to handle prediction requests that do not specify a version. You can change the default version by calling projects.methods.versions.setDefault.
     isDefault :: (Core.Maybe Core.Bool),
-    -- | Optional. One or more labels that you can add, to organize your model versions. Each label is a key-value pair, where both the key and the value are arbitrary strings that you supply. For more information, see the documentation on using labels.
+    -- | Optional. One or more labels that you can add, to organize your model versions. Each label is a key-value pair, where both the key and the value are arbitrary strings that you supply. For more information, see the documentation on using labels. Note that this field is not updatable for mls1* models.
     labels :: (Core.Maybe GoogleCloudMlV1__Version_Labels),
     -- | Output only. The <https://cloud.google.com/ai-platform-unified/docs/reference/rest/v1beta1/projects.locations.models AI Platform (Unified) Model> ID for the last <https://cloud.google.com/ai-platform-unified/docs/start/migrating-to-ai-platform-unified model migration>.
     lastMigrationModelId :: (Core.Maybe Core.Text),
@@ -4475,7 +4481,7 @@ instance Core.ToJSON GoogleCloudMlV1__Version where
           ]
       )
 
--- | Optional. One or more labels that you can add, to organize your model versions. Each label is a key-value pair, where both the key and the value are arbitrary strings that you supply. For more information, see the documentation on using labels.
+-- | Optional. One or more labels that you can add, to organize your model versions. Each label is a key-value pair, where both the key and the value are arbitrary strings that you supply. For more information, see the documentation on using labels. Note that this field is not updatable for mls1* models.
 --
 -- /See:/ 'newGoogleCloudMlV1__Version_Labels' smart constructor.
 newtype GoogleCloudMlV1__Version_Labels = GoogleCloudMlV1__Version_Labels
@@ -4545,7 +4551,7 @@ instance Core.ToJSON GoogleCloudMlV1__XraiAttribution where
       )
 
 -- | Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs. If there are AuditConfigs for both @allServices@ and a specific service, the union of the two AuditConfigs is used for that service: the log/types specified in each AuditConfig are enabled, and the exempted/members in each AuditLogConfig are exempted. Example Policy with multiple AuditConfigs: { \"audit/configs\": [ { \"service\": \"allServices\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\", \"exempted/members\": [ \"user:jose\@example.com\" ] }, { \"log/type\": \"DATA/WRITE\" }, { \"log/type\": \"ADMIN/READ\" } ] }, { \"service\": \"sampleservice.googleapis.com\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\" }, { \"log/type\": \"DATA/WRITE\", \"exempted/members\": [ \"user:aliya\@example.com\" ] } ] } ] } For sampleservice, this policy enables DATA/READ, DATA/WRITE and
--- ADMIN/READ logging. It also exempts jose\@example.com from DATA/READ logging, and aliya\@example.com from DATA/WRITE logging.
+-- ADMIN/READ logging. It also exempts @jose\@example.com@ from DATA/READ logging, and @aliya\@example.com@ from DATA/WRITE logging.
 --
 -- /See:/ 'newGoogleIamV1__AuditConfig' smart constructor.
 data GoogleIamV1__AuditConfig = GoogleIamV1__AuditConfig
@@ -4631,8 +4637,9 @@ instance Core.ToJSON GoogleIamV1__AuditLogConfig where
 data GoogleIamV1__Binding = GoogleIamV1__Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe GoogleType__Expr),
-    -- | Specifies the principals requesting access for a Cloud Platform resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains
-    -- the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@.
+    -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
+    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
     members :: (Core.Maybe [Core.Text]),
     -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
     role' :: (Core.Maybe Core.Text)
@@ -4726,7 +4733,7 @@ instance Core.ToJSON GoogleIamV1__Policy where
 --
 -- /See:/ 'newGoogleIamV1__SetIamPolicyRequest' smart constructor.
 data GoogleIamV1__SetIamPolicyRequest = GoogleIamV1__SetIamPolicyRequest
-  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
+  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Google Cloud services (such as Projects) might reject them.
     policy :: (Core.Maybe GoogleIamV1__Policy),
     -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: @paths: \"bindings, etag\"@
     updateMask :: (Core.Maybe Core.FieldMask)
@@ -4768,7 +4775,7 @@ instance Core.ToJSON GoogleIamV1__SetIamPolicyRequest where
 --
 -- /See:/ 'newGoogleIamV1__TestIamPermissionsRequest' smart constructor.
 newtype GoogleIamV1__TestIamPermissionsRequest = GoogleIamV1__TestIamPermissionsRequest
-  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as \'/\' or \'storage./\') are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
+  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as @*@ or @storage.*@) are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
     permissions :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5009,7 +5016,7 @@ instance
   toJSON GoogleLongrunning__Operation_Response {..} =
     Core.toJSON additional
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newGoogleProtobuf__Empty' smart constructor.
 data GoogleProtobuf__Empty = GoogleProtobuf__Empty

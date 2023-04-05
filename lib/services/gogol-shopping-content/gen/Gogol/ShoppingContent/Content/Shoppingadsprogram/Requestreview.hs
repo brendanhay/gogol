@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Requests a review for Shopping Ads program in the provided country.
+-- Requests a review of Shopping ads in a specific region. This method is only available to selected merchants.
 --
 -- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.shoppingadsprogram.requestreview@.
 module Gogol.ShoppingContent.Content.Shoppingadsprogram.Requestreview
@@ -61,7 +61,7 @@ type ContentShoppingadsprogramRequestreviewResource =
               RequestReviewShoppingAdsRequest
     Core.:> Core.Post '[Core.JSON] ()
 
--- | Requests a review for Shopping Ads program in the provided country.
+-- | Requests a review of Shopping ads in a specific region. This method is only available to selected merchants.
 --
 -- /See:/ 'newContentShoppingadsprogramRequestreview' smart constructor.
 data ContentShoppingadsprogramRequestreview = ContentShoppingadsprogramRequestreview

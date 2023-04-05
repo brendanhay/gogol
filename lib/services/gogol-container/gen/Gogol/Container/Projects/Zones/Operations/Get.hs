@@ -75,7 +75,7 @@ data ContainerProjectsZonesOperationsGet = ContainerProjectsZonesOperationsGet
     name :: (Core.Maybe Core.Text),
     -- | Deprecated. The server-assigned @name@ of the operation. This field has been deprecated and replaced by the name field.
     operationId :: Core.Text,
-    -- | Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the name field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the name field.
     projectId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -90,7 +90,7 @@ data ContainerProjectsZonesOperationsGet = ContainerProjectsZonesOperationsGet
 newContainerProjectsZonesOperationsGet ::
   -- |  Deprecated. The server-assigned @name@ of the operation. This field has been deprecated and replaced by the name field. See 'operationId'.
   Core.Text ->
-  -- |  Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the name field. See 'projectId'.
+  -- |  Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the name field. See 'projectId'.
   Core.Text ->
   -- |  Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides. This field has been deprecated and replaced by the name field. See 'zone'.
   Core.Text ->

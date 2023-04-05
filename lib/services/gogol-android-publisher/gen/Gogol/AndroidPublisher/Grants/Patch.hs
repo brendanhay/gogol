@@ -68,7 +68,7 @@ data AndroidPublisherGrantsPatch = AndroidPublisherGrantsPatch
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. Resource name for this grant, following the pattern \"developers\/{developer}\/users\/{email}\/grants\/{package_name}\".
+    -- | Required. Resource name for this grant, following the pattern \"developers\/{developer}\/users\/{email}\/grants\/{package_name}\". If this grant is for a draft app, the app ID will be used in this resource name instead of the package name.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: Grant,
@@ -83,7 +83,7 @@ data AndroidPublisherGrantsPatch = AndroidPublisherGrantsPatch
 
 -- | Creates a value of 'AndroidPublisherGrantsPatch' with the minimum fields required to make a request.
 newAndroidPublisherGrantsPatch ::
-  -- |  Required. Resource name for this grant, following the pattern \"developers\/{developer}\/users\/{email}\/grants\/{package_name}\". See 'name'.
+  -- |  Required. Resource name for this grant, following the pattern \"developers\/{developer}\/users\/{email}\/grants\/{package_name}\". If this grant is for a draft app, the app ID will be used in this resource name instead of the package name. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   Grant ->

@@ -50,6 +50,7 @@ type AppEngineAppsCreateResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "parent" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -66,6 +67,8 @@ data AppEngineAppsCreate = AppEngineAppsCreate
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | The project and location in which the application should be created, specified in the format projects\//\/locations\//
+    parent :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
     payload :: Application,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -85,6 +88,7 @@ newAppEngineAppsCreate payload =
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      parent = Core.Nothing,
       payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -100,6 +104,7 @@ instance Core.GoogleRequest AppEngineAppsCreate where
       xgafv
       accessToken
       callback
+      parent
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)

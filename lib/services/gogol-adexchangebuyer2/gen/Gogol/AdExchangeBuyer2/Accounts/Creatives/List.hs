@@ -72,7 +72,7 @@ data AdExchangeBuyer2AccountsCreativesList = AdExchangeBuyer2AccountsCreativesLi
     accountId :: Core.Text,
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Requested page size. The server may return fewer creatives than requested (due to timeout constraint) even if more are available via another call. If unspecified, server will pick an appropriate default. Acceptable values are 1 to 1000, inclusive.
+    -- | Requested page size. The server may return fewer creatives than requested (due to timeout constraint) even if more are available through another call. If unspecified, server will pick an appropriate default. Acceptable values are 1 to 1000, inclusive.
     pageSize :: (Core.Maybe Core.Int32),
     -- | A token identifying a page of results the server should return. Typically, this is the value of ListCreativesResponse.next/page/token returned from the previous call to \'ListCreatives\' method.
     pageToken :: (Core.Maybe Core.Text),

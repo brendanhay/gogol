@@ -44,13 +44,64 @@ module Gogol.TextToSpeech.Types
     -- ** AudioConfig_AudioEncoding
     AudioConfig_AudioEncoding (..),
 
+    -- ** CancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
+
+    -- ** CustomVoiceParams
+    CustomVoiceParams (..),
+    newCustomVoiceParams,
+
+    -- ** CustomVoiceParams_ReportedUsage
+    CustomVoiceParams_ReportedUsage (..),
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
+    -- ** GoogleCloudTexttospeechV1SynthesizeLongAudioMetadata
+    GoogleCloudTexttospeechV1SynthesizeLongAudioMetadata (..),
+    newGoogleCloudTexttospeechV1SynthesizeLongAudioMetadata,
+
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
+
     -- ** ListVoicesResponse
     ListVoicesResponse (..),
     newListVoicesResponse,
 
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
     -- ** SynthesisInput
     SynthesisInput (..),
     newSynthesisInput,
+
+    -- ** SynthesizeLongAudioMetadata
+    SynthesizeLongAudioMetadata (..),
+    newSynthesizeLongAudioMetadata,
+
+    -- ** SynthesizeLongAudioRequest
+    SynthesizeLongAudioRequest (..),
+    newSynthesizeLongAudioRequest,
 
     -- ** SynthesizeSpeechRequest
     SynthesizeSpeechRequest (..),

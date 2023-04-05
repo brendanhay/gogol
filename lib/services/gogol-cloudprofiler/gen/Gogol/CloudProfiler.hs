@@ -28,7 +28,7 @@
 --
 -- Manages continuous profiling information.
 --
--- /See:/ <https://cloud.google.com/profiler/ Stackdriver Profiler API Reference>
+-- /See:/ <https://cloud.google.com/profiler/ Cloud Profiler API Reference>
 module Gogol.CloudProfiler
   ( -- * Configuration
     cloudProfilerService,

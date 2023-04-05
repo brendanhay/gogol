@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Claims the website of a Merchant Center sub-account.
+-- Claims the website of a Merchant Center sub-account. Merchant accounts with approved third-party CSSs aren\'t required to claim a website.
 --
 -- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.accounts.claimwebsite@.
 module Gogol.ShoppingContent.Content.Accounts.Claimwebsite
@@ -62,7 +62,7 @@ type ContentAccountsClaimwebsiteResource =
               '[Core.JSON]
               AccountsClaimWebsiteResponse
 
--- | Claims the website of a Merchant Center sub-account.
+-- | Claims the website of a Merchant Center sub-account. Merchant accounts with approved third-party CSSs aren\'t required to claim a website.
 --
 -- /See:/ 'newContentAccountsClaimwebsite' smart constructor.
 data ContentAccountsClaimwebsite = ContentAccountsClaimwebsite

@@ -51,6 +51,8 @@ type DataprocProjectsLocationsBatchesListResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "filter" Core.Text
+    Core.:> Core.QueryParam "orderBy" Core.Text
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
@@ -68,6 +70,10 @@ data DataprocProjectsLocationsBatchesList = DataprocProjectsLocationsBatchesList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | Optional. A filter for the batches to return in the response.A filter is a logical expression constraining the values of various fields in each batch resource. Filters are case sensitive, and may contain multiple clauses combined with logical operators (AND\/OR). Supported fields are batch/id, batch/uuid, state, and create/time.e.g. state = RUNNING and create/time \< \"2023-01-01T00:00:00Z\" filters for batches in state RUNNING that were created before 2023-01-01See https:\/\/google.aip.dev\/assets\/misc\/ebnf-filtering.txt for a detailed description of the filter syntax and a list of supported comparisons.
+    filter :: (Core.Maybe Core.Text),
+    -- | Optional. Field(s) on which to sort the list of batches.Currently the only supported sort orders are unspecified (empty) and create_time desc to sort by most recently created batches first.See https:\/\/google.aip.dev\/132#ordering for more details.
+    orderBy :: (Core.Maybe Core.Text),
     -- | Optional. The maximum number of batches to return in each response. The service may return fewer than this value. The default page size is 20; the maximum page size is 1000.
     pageSize :: (Core.Maybe Core.Int32),
     -- | Optional. A page token received from a previous ListBatches call. Provide this token to retrieve the subsequent page.
@@ -91,6 +97,8 @@ newDataprocProjectsLocationsBatchesList parent =
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      filter = Core.Nothing,
+      orderBy = Core.Nothing,
       pageSize = Core.Nothing,
       pageToken = Core.Nothing,
       parent = parent,
@@ -115,6 +123,8 @@ instance
         xgafv
         accessToken
         callback
+        filter
+        orderBy
         pageSize
         pageToken
         uploadType

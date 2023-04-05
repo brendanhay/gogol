@@ -45,9 +45,20 @@ module Gogol.IAP.Types
     AccessSettings (..),
     newAccessSettings,
 
+    -- ** AllowedDomainsSettings
+    AllowedDomainsSettings (..),
+    newAllowedDomainsSettings,
+
     -- ** ApplicationSettings
     ApplicationSettings (..),
     newApplicationSettings,
+
+    -- ** AttributePropagationSettings
+    AttributePropagationSettings (..),
+    newAttributePropagationSettings,
+
+    -- ** AttributePropagationSettings_OutputCredentialsItem
+    AttributePropagationSettings_OutputCredentialsItem (..),
 
     -- ** Binding
     Binding (..),
@@ -101,6 +112,10 @@ module Gogol.IAP.Types
     ListIdentityAwareProxyClientsResponse (..),
     newListIdentityAwareProxyClientsResponse,
 
+    -- ** ListTunnelDestGroupsResponse
+    ListTunnelDestGroupsResponse (..),
+    newListTunnelDestGroupsResponse,
+
     -- ** OAuthSettings
     OAuthSettings (..),
     newOAuthSettings,
@@ -150,6 +165,10 @@ module Gogol.IAP.Types
     -- ** TestIamPermissionsResponse
     TestIamPermissionsResponse (..),
     newTestIamPermissionsResponse,
+
+    -- ** TunnelDestGroup
+    TunnelDestGroup (..),
+    newTunnelDestGroup,
   )
 where
 

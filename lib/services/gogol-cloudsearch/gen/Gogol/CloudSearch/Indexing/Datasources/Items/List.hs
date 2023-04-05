@@ -76,11 +76,11 @@ data CloudSearchIndexingDatasourcesItemsList = CloudSearchIndexingDatasourcesIte
     brief :: (Core.Maybe Core.Bool),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Name of connector making this call. Format: datasources\/{source_id}\/connectors\/{ID}
+    -- | The name of connector making this call. Format: datasources\/{source_id}\/connectors\/{ID}
     connectorName :: (Core.Maybe Core.Text),
     -- | If you are asked by Google to help with debugging, set this field. Otherwise, ignore this field.
     debugOptionsEnableDebugging :: (Core.Maybe Core.Bool),
-    -- | Name of the Data Source to list Items. Format: datasources\/{source_id}
+    -- | The name of the Data Source to list Items. Format: datasources\/{source_id}
     name :: Core.Text,
     -- | Maximum number of items to fetch in a request. The max value is 1000 when brief is true. The max value is 10 if brief is false. The default value is 10
     pageSize :: (Core.Maybe Core.Int32),
@@ -95,7 +95,7 @@ data CloudSearchIndexingDatasourcesItemsList = CloudSearchIndexingDatasourcesIte
 
 -- | Creates a value of 'CloudSearchIndexingDatasourcesItemsList' with the minimum fields required to make a request.
 newCloudSearchIndexingDatasourcesItemsList ::
-  -- |  Name of the Data Source to list Items. Format: datasources\/{source_id} See 'name'.
+  -- |  The name of the Data Source to list Items. Format: datasources\/{source_id} See 'name'.
   Core.Text ->
   CloudSearchIndexingDatasourcesItemsList
 newCloudSearchIndexingDatasourcesItemsList name =

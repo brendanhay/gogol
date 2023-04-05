@@ -73,6 +73,7 @@ module Gogol.MachineLearning.Internal.Sum
         GoogleCloudMlV1__AcceleratorConfig_Type_TPU_V3,
         GoogleCloudMlV1__AcceleratorConfig_Type_TPUV2POD,
         GoogleCloudMlV1__AcceleratorConfig_Type_TPUV3POD,
+        GoogleCloudMlV1__AcceleratorConfig_Type_TPUV4POD,
         ..
       ),
 
@@ -89,6 +90,7 @@ module Gogol.MachineLearning.Internal.Sum
         GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_TPU_V3,
         GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_TPUV2POD,
         GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_TPUV3POD,
+        GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_TPUV4POD,
         ..
       ),
 
@@ -480,6 +482,10 @@ pattern GoogleCloudMlV1__AcceleratorConfig_Type_TPUV2POD = GoogleCloudMlV1__Acce
 pattern GoogleCloudMlV1__AcceleratorConfig_Type_TPUV3POD :: GoogleCloudMlV1__AcceleratorConfig_Type
 pattern GoogleCloudMlV1__AcceleratorConfig_Type_TPUV3POD = GoogleCloudMlV1__AcceleratorConfig_Type "TPU_V3_POD"
 
+-- | TPU v4 POD.
+pattern GoogleCloudMlV1__AcceleratorConfig_Type_TPUV4POD :: GoogleCloudMlV1__AcceleratorConfig_Type
+pattern GoogleCloudMlV1__AcceleratorConfig_Type_TPUV4POD = GoogleCloudMlV1__AcceleratorConfig_Type "TPU_V4_POD"
+
 {-# COMPLETE
   GoogleCloudMlV1__AcceleratorConfig_Type_ACCELERATORTYPEUNSPECIFIED,
   GoogleCloudMlV1__AcceleratorConfig_Type_NVIDIA_TESLA_K80,
@@ -492,6 +498,7 @@ pattern GoogleCloudMlV1__AcceleratorConfig_Type_TPUV3POD = GoogleCloudMlV1__Acce
   GoogleCloudMlV1__AcceleratorConfig_Type_TPU_V3,
   GoogleCloudMlV1__AcceleratorConfig_Type_TPUV2POD,
   GoogleCloudMlV1__AcceleratorConfig_Type_TPUV3POD,
+  GoogleCloudMlV1__AcceleratorConfig_Type_TPUV4POD,
   GoogleCloudMlV1__AcceleratorConfig_Type
   #-}
 
@@ -551,6 +558,10 @@ pattern GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_TPUV2POD = GoogleC
 pattern GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_TPUV3POD :: GoogleCloudMlV1__Capability_AvailableAcceleratorsItem
 pattern GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_TPUV3POD = GoogleCloudMlV1__Capability_AvailableAcceleratorsItem "TPU_V3_POD"
 
+-- | TPU v4 POD.
+pattern GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_TPUV4POD :: GoogleCloudMlV1__Capability_AvailableAcceleratorsItem
+pattern GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_TPUV4POD = GoogleCloudMlV1__Capability_AvailableAcceleratorsItem "TPU_V4_POD"
+
 {-# COMPLETE
   GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_ACCELERATORTYPEUNSPECIFIED,
   GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_NVIDIA_TESLA_K80,
@@ -563,6 +574,7 @@ pattern GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_TPUV3POD = GoogleC
   GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_TPU_V3,
   GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_TPUV2POD,
   GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_TPUV3POD,
+  GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_TPUV4POD,
   GoogleCloudMlV1__Capability_AvailableAcceleratorsItem
   #-}
 

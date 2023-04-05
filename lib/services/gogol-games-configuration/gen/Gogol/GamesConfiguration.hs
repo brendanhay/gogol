@@ -63,11 +63,6 @@ module Gogol.GamesConfiguration
     GamesConfigurationAchievementConfigurationsUpdate (..),
     newGamesConfigurationAchievementConfigurationsUpdate,
 
-    -- ** gamesConfiguration.imageConfigurations.upload
-    GamesConfigurationImageConfigurationsUploadResource,
-    GamesConfigurationImageConfigurationsUpload (..),
-    newGamesConfigurationImageConfigurationsUpload,
-
     -- ** gamesConfiguration.leaderboardConfigurations.delete
     GamesConfigurationLeaderboardConfigurationsDeleteResource,
     GamesConfigurationLeaderboardConfigurationsDelete (..),
@@ -127,13 +122,6 @@ module Gogol.GamesConfiguration
     -- ** GamesNumberFormatConfiguration_NumberFormatType
     GamesNumberFormatConfiguration_NumberFormatType (..),
 
-    -- ** ImageConfiguration
-    ImageConfiguration (..),
-    newImageConfiguration,
-
-    -- ** ImageConfiguration_ImageType
-    ImageConfiguration_ImageType (..),
-
     -- ** LeaderboardConfiguration
     LeaderboardConfiguration (..),
     newLeaderboardConfiguration,
@@ -156,9 +144,6 @@ module Gogol.GamesConfiguration
     -- ** LocalizedStringBundle
     LocalizedStringBundle (..),
     newLocalizedStringBundle,
-
-    -- ** ImageConfigurationsUploadImageType
-    ImageConfigurationsUploadImageType (..),
   )
 where
 
@@ -167,7 +152,6 @@ import Gogol.GamesConfiguration.AchievementConfigurations.Get
 import Gogol.GamesConfiguration.AchievementConfigurations.Insert
 import Gogol.GamesConfiguration.AchievementConfigurations.List
 import Gogol.GamesConfiguration.AchievementConfigurations.Update
-import Gogol.GamesConfiguration.ImageConfigurations.Upload
 import Gogol.GamesConfiguration.LeaderboardConfigurations.Delete
 import Gogol.GamesConfiguration.LeaderboardConfigurations.Get
 import Gogol.GamesConfiguration.LeaderboardConfigurations.Insert

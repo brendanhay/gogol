@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an invitation. Only one invitation for a user and course may exist at a time. Delete and re-create an invitation to make changes. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting user is not permitted to create invitations for this course or for access errors. * @NOT_FOUND@ if the course or the user does not exist. * @FAILED_PRECONDITION@ if the requested user\'s account is disabled or if the user already has this role or a role with greater permissions. * @ALREADY_EXISTS@ if an invitation for the specified user and course already exists.
+-- Creates an invitation. Only one invitation for a user and course may exist at a time. Delete and re-create an invitation to make changes. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting user is not permitted to create invitations for this course or for access errors. * @NOT_FOUND@ if the course or the user does not exist. * @FAILED_PRECONDITION@: * if the requested user\'s account is disabled. * if the user already has this role or a role with greater permissions. * for the following request errors: * IneligibleOwner * @ALREADY_EXISTS@ if an invitation for the specified user and course already exists.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.invitations.create@.
 module Gogol.Classroom.Invitations.Create
@@ -56,7 +56,7 @@ type ClassroomInvitationsCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] Invitation
     Core.:> Core.Post '[Core.JSON] Invitation
 
--- | Creates an invitation. Only one invitation for a user and course may exist at a time. Delete and re-create an invitation to make changes. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting user is not permitted to create invitations for this course or for access errors. * @NOT_FOUND@ if the course or the user does not exist. * @FAILED_PRECONDITION@ if the requested user\'s account is disabled or if the user already has this role or a role with greater permissions. * @ALREADY_EXISTS@ if an invitation for the specified user and course already exists.
+-- | Creates an invitation. Only one invitation for a user and course may exist at a time. Delete and re-create an invitation to make changes. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting user is not permitted to create invitations for this course or for access errors. * @NOT_FOUND@ if the course or the user does not exist. * @FAILED_PRECONDITION@: * if the requested user\'s account is disabled. * if the user already has this role or a role with greater permissions. * for the following request errors: * IneligibleOwner * @ALREADY_EXISTS@ if an invitation for the specified user and course already exists.
 --
 -- /See:/ 'newClassroomInvitationsCreate' smart constructor.
 data ClassroomInvitationsCreate = ClassroomInvitationsCreate

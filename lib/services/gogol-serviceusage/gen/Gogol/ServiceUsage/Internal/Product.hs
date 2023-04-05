@@ -62,6 +62,10 @@ module Gogol.ServiceUsage.Internal.Product
     BackendRule (..),
     newBackendRule,
 
+    -- * BackendRule_OverridesByRequestProtocol
+    BackendRule_OverridesByRequestProtocol (..),
+    newBackendRule_OverridesByRequestProtocol,
+
     -- * BatchCreateAdminOverridesResponse
     BatchCreateAdminOverridesResponse (..),
     newBatchCreateAdminOverridesResponse,
@@ -94,6 +98,14 @@ module Gogol.ServiceUsage.Internal.Product
     CancelOperationRequest (..),
     newCancelOperationRequest,
 
+    -- * ClientLibrarySettings
+    ClientLibrarySettings (..),
+    newClientLibrarySettings,
+
+    -- * CommonLanguageSettings
+    CommonLanguageSettings (..),
+    newCommonLanguageSettings,
+
     -- * Context
     Context (..),
     newContext,
@@ -105,6 +117,10 @@ module Gogol.ServiceUsage.Internal.Product
     -- * Control
     Control (..),
     newControl,
+
+    -- * CppSettings
+    CppSettings (..),
+    newCppSettings,
 
     -- * CreateAdminQuotaPolicyMetadata
     CreateAdminQuotaPolicyMetadata (..),
@@ -141,6 +157,18 @@ module Gogol.ServiceUsage.Internal.Product
     -- * DocumentationRule
     DocumentationRule (..),
     newDocumentationRule,
+
+    -- * DotnetSettings
+    DotnetSettings (..),
+    newDotnetSettings,
+
+    -- * DotnetSettings_RenamedResources
+    DotnetSettings_RenamedResources (..),
+    newDotnetSettings_RenamedResources,
+
+    -- * DotnetSettings_RenamedServices
+    DotnetSettings_RenamedServices (..),
+    newDotnetSettings_RenamedServices,
 
     -- * Empty
     Empty (..),
@@ -181,6 +209,10 @@ module Gogol.ServiceUsage.Internal.Product
     -- * GetServiceIdentityResponse
     GetServiceIdentityResponse (..),
     newGetServiceIdentityResponse,
+
+    -- * GoSettings
+    GoSettings (..),
+    newGoSettings,
 
     -- * GoogleApiService
     GoogleApiService (..),
@@ -238,6 +270,14 @@ module Gogol.ServiceUsage.Internal.Product
     ImportConsumerOverridesResponse (..),
     newImportConsumerOverridesResponse,
 
+    -- * JavaSettings
+    JavaSettings (..),
+    newJavaSettings,
+
+    -- * JavaSettings_ServiceClassNames
+    JavaSettings_ServiceClassNames (..),
+    newJavaSettings_ServiceClassNames,
+
     -- * JwtLocation
     JwtLocation (..),
     newJwtLocation,
@@ -266,9 +306,17 @@ module Gogol.ServiceUsage.Internal.Product
     LoggingDestination (..),
     newLoggingDestination,
 
+    -- * LongRunning
+    LongRunning (..),
+    newLongRunning,
+
     -- * Method
     Method (..),
     newMethod,
+
+    -- * MethodSettings
+    MethodSettings (..),
+    newMethodSettings,
 
     -- * MetricDescriptor
     MetricDescriptor (..),
@@ -302,6 +350,10 @@ module Gogol.ServiceUsage.Internal.Product
     MonitoringDestination (..),
     newMonitoringDestination,
 
+    -- * NodeSettings
+    NodeSettings (..),
+    newNodeSettings,
+
     -- * OAuthRequirements
     OAuthRequirements (..),
     newOAuthRequirements,
@@ -334,6 +386,18 @@ module Gogol.ServiceUsage.Internal.Product
     Page (..),
     newPage,
 
+    -- * PhpSettings
+    PhpSettings (..),
+    newPhpSettings,
+
+    -- * Publishing
+    Publishing (..),
+    newPublishing,
+
+    -- * PythonSettings
+    PythonSettings (..),
+    newPythonSettings,
+
     -- * Quota
     Quota (..),
     newQuota,
@@ -353,6 +417,10 @@ module Gogol.ServiceUsage.Internal.Product
     -- * QuotaOverride_Dimensions
     QuotaOverride_Dimensions (..),
     newQuotaOverride_Dimensions,
+
+    -- * RubySettings
+    RubySettings (..),
+    newRubySettings,
 
     -- * ServiceIdentity
     ServiceIdentity (..),
@@ -581,7 +649,7 @@ data AuthProvider = AuthProvider
     issuer :: (Core.Maybe Core.Text),
     -- | URL of the provider\'s public key set to validate signature of the JWT. See <https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderMetadata OpenID Discovery>. Optional if the key set document: - can be retrieved from <https://openid.net/specs/openid-connect-discovery-1_0.html OpenID Discovery> of the issuer. - can be inferred from the email domain of the issuer (e.g. a Google service account). Example: https:\/\/www.googleapis.com\/oauth2\/v1\/certs
     jwksUri :: (Core.Maybe Core.Text),
-    -- | Defines the locations to extract the JWT. JWT locations can be either from HTTP headers or URL query parameters. The rule is that the first match wins. The checking order is: checking all headers first, then URL query parameters. If not specified, default to use following 3 locations: 1) Authorization: Bearer 2) x-goog-iap-jwt-assertion 3) access/token query parameter Default locations can be specified as followings: jwt/locations: - header: Authorization value/prefix: \"Bearer \" - header: x-goog-iap-jwt-assertion - query: access/token
+    -- | Defines the locations to extract the JWT. For now it is only used by the Cloud Endpoints to store the OpenAPI extension [x-google-jwt-locations] (https:\/\/cloud.google.com\/endpoints\/docs\/openapi\/openapi-extensions#x-google-jwt-locations) JWT locations can be one of HTTP headers, URL query parameters or cookies. The rule is that the first match wins. If not specified, default to use following 3 locations: 1) Authorization: Bearer 2) x-goog-iap-jwt-assertion 3) access/token query parameter Default locations can be specified as followings: jwt/locations: - header: Authorization value/prefix: \"Bearer \" - header: x-goog-iap-jwt-assertion - query: access/token
     jwtLocations :: (Core.Maybe [JwtLocation])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -786,8 +854,12 @@ data BackendRule = BackendRule
     disableAuth :: (Core.Maybe Core.Bool),
     -- | The JWT audience is used when generating a JWT ID token for the backend. This ID token will be added in the HTTP \"authorization\" header, and sent to the backend.
     jwtAudience :: (Core.Maybe Core.Text),
+    -- | Deprecated, do not use.
+    minDeadline :: (Core.Maybe Core.Double),
     -- | The number of seconds to wait for the completion of a long running operation. The default is no deadline.
     operationDeadline :: (Core.Maybe Core.Double),
+    -- | The map between request protocol and the backend address.
+    overridesByRequestProtocol :: (Core.Maybe BackendRule_OverridesByRequestProtocol),
     -- |
     pathTranslation :: (Core.Maybe BackendRule_PathTranslation),
     -- | The protocol used for sending a request to the backend. The supported values are \"http\/1.1\" and \"h2\". The default value is inferred from the scheme in the address field: SCHEME PROTOCOL http:\/\/ http\/1.1 https:\/\/ http\/1.1 grpc:\/\/ h2 grpcs:\/\/ h2 For secure HTTP backends (https:\/\/) that support HTTP\/2, set this field to \"h2\" for improved performance. Configuring this field to non-default values is only supported for secure HTTP backends. This field will be ignored for all other backends. See https:\/\/www.iana.org\/assignments\/tls-extensiontype-values\/tls-extensiontype-values.xhtml#alpn-protocol-ids for more details on the supported values.
@@ -806,7 +878,9 @@ newBackendRule =
       deadline = Core.Nothing,
       disableAuth = Core.Nothing,
       jwtAudience = Core.Nothing,
+      minDeadline = Core.Nothing,
       operationDeadline = Core.Nothing,
+      overridesByRequestProtocol = Core.Nothing,
       pathTranslation = Core.Nothing,
       protocol = Core.Nothing,
       selector = Core.Nothing
@@ -822,7 +896,9 @@ instance Core.FromJSON BackendRule where
             Core.<*> (o Core..:? "deadline")
             Core.<*> (o Core..:? "disableAuth")
             Core.<*> (o Core..:? "jwtAudience")
+            Core.<*> (o Core..:? "minDeadline")
             Core.<*> (o Core..:? "operationDeadline")
+            Core.<*> (o Core..:? "overridesByRequestProtocol")
             Core.<*> (o Core..:? "pathTranslation")
             Core.<*> (o Core..:? "protocol")
             Core.<*> (o Core..:? "selector")
@@ -836,13 +912,52 @@ instance Core.ToJSON BackendRule where
             ("deadline" Core..=) Core.<$> deadline,
             ("disableAuth" Core..=) Core.<$> disableAuth,
             ("jwtAudience" Core..=) Core.<$> jwtAudience,
+            ("minDeadline" Core..=) Core.<$> minDeadline,
             ("operationDeadline" Core..=)
               Core.<$> operationDeadline,
+            ("overridesByRequestProtocol" Core..=)
+              Core.<$> overridesByRequestProtocol,
             ("pathTranslation" Core..=) Core.<$> pathTranslation,
             ("protocol" Core..=) Core.<$> protocol,
             ("selector" Core..=) Core.<$> selector
           ]
       )
+
+-- | The map between request protocol and the backend address.
+--
+-- /See:/ 'newBackendRule_OverridesByRequestProtocol' smart constructor.
+newtype BackendRule_OverridesByRequestProtocol = BackendRule_OverridesByRequestProtocol
+  { -- |
+    additional :: (Core.HashMap Core.Text BackendRule)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BackendRule_OverridesByRequestProtocol' with the minimum fields required to make a request.
+newBackendRule_OverridesByRequestProtocol ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text BackendRule ->
+  BackendRule_OverridesByRequestProtocol
+newBackendRule_OverridesByRequestProtocol additional =
+  BackendRule_OverridesByRequestProtocol {additional = additional}
+
+instance
+  Core.FromJSON
+    BackendRule_OverridesByRequestProtocol
+  where
+  parseJSON =
+    Core.withObject
+      "BackendRule_OverridesByRequestProtocol"
+      ( \o ->
+          BackendRule_OverridesByRequestProtocol
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    BackendRule_OverridesByRequestProtocol
+  where
+  toJSON BackendRule_OverridesByRequestProtocol {..} =
+    Core.toJSON additional
 
 -- | Response message for BatchCreateAdminOverrides
 --
@@ -1104,6 +1219,131 @@ instance Core.FromJSON CancelOperationRequest where
 instance Core.ToJSON CancelOperationRequest where
   toJSON = Core.const Core.emptyObject
 
+-- | Details about how and where to publish client libraries.
+--
+-- /See:/ 'newClientLibrarySettings' smart constructor.
+data ClientLibrarySettings = ClientLibrarySettings
+  { -- | Settings for C++ client libraries.
+    cppSettings :: (Core.Maybe CppSettings),
+    -- | Settings for .NET client libraries.
+    dotnetSettings :: (Core.Maybe DotnetSettings),
+    -- | Settings for Go client libraries.
+    goSettings :: (Core.Maybe GoSettings),
+    -- | Settings for legacy Java features, supported in the Service YAML.
+    javaSettings :: (Core.Maybe JavaSettings),
+    -- | Launch stage of this version of the API.
+    launchStage :: (Core.Maybe ClientLibrarySettings_LaunchStage),
+    -- | Settings for Node client libraries.
+    nodeSettings :: (Core.Maybe NodeSettings),
+    -- | Settings for PHP client libraries.
+    phpSettings :: (Core.Maybe PhpSettings),
+    -- | Settings for Python client libraries.
+    pythonSettings :: (Core.Maybe PythonSettings),
+    -- | When using transport=rest, the client request will encode enums as numbers rather than strings.
+    restNumericEnums :: (Core.Maybe Core.Bool),
+    -- | Settings for Ruby client libraries.
+    rubySettings :: (Core.Maybe RubySettings),
+    -- | Version of the API to apply these settings to. This is the full protobuf package for the API, ending in the version element. Examples: \"google.cloud.speech.v1\" and \"google.spanner.admin.database.v1\".
+    version :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ClientLibrarySettings' with the minimum fields required to make a request.
+newClientLibrarySettings ::
+  ClientLibrarySettings
+newClientLibrarySettings =
+  ClientLibrarySettings
+    { cppSettings = Core.Nothing,
+      dotnetSettings = Core.Nothing,
+      goSettings = Core.Nothing,
+      javaSettings = Core.Nothing,
+      launchStage = Core.Nothing,
+      nodeSettings = Core.Nothing,
+      phpSettings = Core.Nothing,
+      pythonSettings = Core.Nothing,
+      restNumericEnums = Core.Nothing,
+      rubySettings = Core.Nothing,
+      version = Core.Nothing
+    }
+
+instance Core.FromJSON ClientLibrarySettings where
+  parseJSON =
+    Core.withObject
+      "ClientLibrarySettings"
+      ( \o ->
+          ClientLibrarySettings
+            Core.<$> (o Core..:? "cppSettings")
+            Core.<*> (o Core..:? "dotnetSettings")
+            Core.<*> (o Core..:? "goSettings")
+            Core.<*> (o Core..:? "javaSettings")
+            Core.<*> (o Core..:? "launchStage")
+            Core.<*> (o Core..:? "nodeSettings")
+            Core.<*> (o Core..:? "phpSettings")
+            Core.<*> (o Core..:? "pythonSettings")
+            Core.<*> (o Core..:? "restNumericEnums")
+            Core.<*> (o Core..:? "rubySettings")
+            Core.<*> (o Core..:? "version")
+      )
+
+instance Core.ToJSON ClientLibrarySettings where
+  toJSON ClientLibrarySettings {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("cppSettings" Core..=) Core.<$> cppSettings,
+            ("dotnetSettings" Core..=) Core.<$> dotnetSettings,
+            ("goSettings" Core..=) Core.<$> goSettings,
+            ("javaSettings" Core..=) Core.<$> javaSettings,
+            ("launchStage" Core..=) Core.<$> launchStage,
+            ("nodeSettings" Core..=) Core.<$> nodeSettings,
+            ("phpSettings" Core..=) Core.<$> phpSettings,
+            ("pythonSettings" Core..=) Core.<$> pythonSettings,
+            ("restNumericEnums" Core..=)
+              Core.<$> restNumericEnums,
+            ("rubySettings" Core..=) Core.<$> rubySettings,
+            ("version" Core..=) Core.<$> version
+          ]
+      )
+
+-- | Required information for every language.
+--
+-- /See:/ 'newCommonLanguageSettings' smart constructor.
+data CommonLanguageSettings = CommonLanguageSettings
+  { -- | The destination where API teams want this client library to be published.
+    destinations :: (Core.Maybe [CommonLanguageSettings_DestinationsItem]),
+    -- | Link to automatically generated reference documentation. Example: https:\/\/cloud.google.com\/nodejs\/docs\/reference\/asset\/latest
+    referenceDocsUri :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CommonLanguageSettings' with the minimum fields required to make a request.
+newCommonLanguageSettings ::
+  CommonLanguageSettings
+newCommonLanguageSettings =
+  CommonLanguageSettings
+    { destinations = Core.Nothing,
+      referenceDocsUri = Core.Nothing
+    }
+
+instance Core.FromJSON CommonLanguageSettings where
+  parseJSON =
+    Core.withObject
+      "CommonLanguageSettings"
+      ( \o ->
+          CommonLanguageSettings
+            Core.<$> (o Core..:? "destinations")
+            Core.<*> (o Core..:? "referenceDocsUri")
+      )
+
+instance Core.ToJSON CommonLanguageSettings where
+  toJSON CommonLanguageSettings {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("destinations" Core..=) Core.<$> destinations,
+            ("referenceDocsUri" Core..=)
+              Core.<$> referenceDocsUri
+          ]
+      )
+
 -- | @Context@ defines which contexts an API requests. Example: context: rules: - selector: \"*\" requested: - google.rpc.context.ProjectContext - google.rpc.context.OriginContext The above specifies that all methods in the API request @google.rpc.context.ProjectContext@ and @google.rpc.context.OriginContext@. Available context types are defined in package @google.rpc.context@. This also provides mechanism to allowlist any protobuf message extension that can be sent in grpc metadata using “x-goog-ext--bin” and “x-goog-ext--jspb” format. For example, list any service specific protobuf types that can appear in grpc metadata as follows in your yaml file: Example: context: rules: - selector: \"google.example.library.v1.LibraryService.CreateBook\" allowed/request/extensions: - google.foo.v1.NewExtension allowed/response/extensions: - google.foo.v1.NewExtension You can also specify extension ID instead of fully qualified extension name here.
 --
 -- /See:/ 'newContext' smart constructor.
@@ -1185,7 +1425,7 @@ instance Core.ToJSON ContextRule where
           ]
       )
 
--- | Selects and configures the service controller used by the service. The service controller handles two things: - __What is allowed:__ for each API request, Chemist checks the project status, activation status, abuse status, billing status, service status, location restrictions, VPC Service Controls, SuperQuota, and other policies. - __What has happened:__ for each API response, Chemist reports the telemetry data to analytics, auditing, billing, eventing, logging, monitoring, sawmill, and tracing. Chemist also accepts telemetry data not associated with API traffic, such as billing metrics. Example: control: environment: servicecontrol.googleapis.com
+-- | Selects and configures the service controller used by the service. Example: control: environment: servicecontrol.googleapis.com
 --
 -- /See:/ 'newControl' smart constructor.
 newtype Control = Control
@@ -1211,6 +1451,31 @@ instance Core.ToJSON Control where
       ( Core.catMaybes
           [("environment" Core..=) Core.<$> environment]
       )
+
+-- | Settings for C++ client libraries.
+--
+-- /See:/ 'newCppSettings' smart constructor.
+newtype CppSettings = CppSettings
+  { -- | Some settings.
+    common :: (Core.Maybe CommonLanguageSettings)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CppSettings' with the minimum fields required to make a request.
+newCppSettings ::
+  CppSettings
+newCppSettings = CppSettings {common = Core.Nothing}
+
+instance Core.FromJSON CppSettings where
+  parseJSON =
+    Core.withObject
+      "CppSettings"
+      (\o -> CppSettings Core.<$> (o Core..:? "common"))
+
+instance Core.ToJSON CppSettings where
+  toJSON CppSettings {..} =
+    Core.object
+      (Core.catMaybes [("common" Core..=) Core.<$> common])
 
 -- | Metadata message that provides information such as progress, partial failures, and similar information on each GetOperation call of LRO returned by CreateAdminQuotaPolicy.
 --
@@ -1534,7 +1799,134 @@ instance Core.ToJSON DocumentationRule where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | Settings for Dotnet client libraries.
+--
+-- /See:/ 'newDotnetSettings' smart constructor.
+data DotnetSettings = DotnetSettings
+  { -- | Some settings.
+    common :: (Core.Maybe CommonLanguageSettings),
+    -- | Namespaces which must be aliased in snippets due to a known (but non-generator-predictable) naming collision
+    forcedNamespaceAliases :: (Core.Maybe [Core.Text]),
+    -- | Method signatures (in the form \"service.method(signature)\") which are provided separately, so shouldn\'t be generated. Snippets /calling/ these methods are still generated, however.
+    handwrittenSignatures :: (Core.Maybe [Core.Text]),
+    -- | List of full resource types to ignore during generation. This is typically used for API-specific Location resources, which should be handled by the generator as if they were actually the common Location resources. Example entry: \"documentai.googleapis.com\/Location\"
+    ignoredResources :: (Core.Maybe [Core.Text]),
+    -- | Map from full resource types to the effective short name for the resource. This is used when otherwise resource named from different services would cause naming collisions. Example entry: \"datalabeling.googleapis.com\/Dataset\": \"DataLabelingDataset\"
+    renamedResources :: (Core.Maybe DotnetSettings_RenamedResources),
+    -- | Map from original service names to renamed versions. This is used when the default generated types would cause a naming conflict. (Neither name is fully-qualified.) Example: Subscriber to SubscriberServiceApi.
+    renamedServices :: (Core.Maybe DotnetSettings_RenamedServices)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DotnetSettings' with the minimum fields required to make a request.
+newDotnetSettings ::
+  DotnetSettings
+newDotnetSettings =
+  DotnetSettings
+    { common = Core.Nothing,
+      forcedNamespaceAliases = Core.Nothing,
+      handwrittenSignatures = Core.Nothing,
+      ignoredResources = Core.Nothing,
+      renamedResources = Core.Nothing,
+      renamedServices = Core.Nothing
+    }
+
+instance Core.FromJSON DotnetSettings where
+  parseJSON =
+    Core.withObject
+      "DotnetSettings"
+      ( \o ->
+          DotnetSettings
+            Core.<$> (o Core..:? "common")
+            Core.<*> (o Core..:? "forcedNamespaceAliases")
+            Core.<*> (o Core..:? "handwrittenSignatures")
+            Core.<*> (o Core..:? "ignoredResources")
+            Core.<*> (o Core..:? "renamedResources")
+            Core.<*> (o Core..:? "renamedServices")
+      )
+
+instance Core.ToJSON DotnetSettings where
+  toJSON DotnetSettings {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("common" Core..=) Core.<$> common,
+            ("forcedNamespaceAliases" Core..=)
+              Core.<$> forcedNamespaceAliases,
+            ("handwrittenSignatures" Core..=)
+              Core.<$> handwrittenSignatures,
+            ("ignoredResources" Core..=)
+              Core.<$> ignoredResources,
+            ("renamedResources" Core..=)
+              Core.<$> renamedResources,
+            ("renamedServices" Core..=)
+              Core.<$> renamedServices
+          ]
+      )
+
+-- | Map from full resource types to the effective short name for the resource. This is used when otherwise resource named from different services would cause naming collisions. Example entry: \"datalabeling.googleapis.com\/Dataset\": \"DataLabelingDataset\"
+--
+-- /See:/ 'newDotnetSettings_RenamedResources' smart constructor.
+newtype DotnetSettings_RenamedResources = DotnetSettings_RenamedResources
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DotnetSettings_RenamedResources' with the minimum fields required to make a request.
+newDotnetSettings_RenamedResources ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  DotnetSettings_RenamedResources
+newDotnetSettings_RenamedResources additional =
+  DotnetSettings_RenamedResources {additional = additional}
+
+instance
+  Core.FromJSON
+    DotnetSettings_RenamedResources
+  where
+  parseJSON =
+    Core.withObject
+      "DotnetSettings_RenamedResources"
+      ( \o ->
+          DotnetSettings_RenamedResources
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON DotnetSettings_RenamedResources where
+  toJSON DotnetSettings_RenamedResources {..} =
+    Core.toJSON additional
+
+-- | Map from original service names to renamed versions. This is used when the default generated types would cause a naming conflict. (Neither name is fully-qualified.) Example: Subscriber to SubscriberServiceApi.
+--
+-- /See:/ 'newDotnetSettings_RenamedServices' smart constructor.
+newtype DotnetSettings_RenamedServices = DotnetSettings_RenamedServices
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DotnetSettings_RenamedServices' with the minimum fields required to make a request.
+newDotnetSettings_RenamedServices ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  DotnetSettings_RenamedServices
+newDotnetSettings_RenamedServices additional =
+  DotnetSettings_RenamedServices {additional = additional}
+
+instance Core.FromJSON DotnetSettings_RenamedServices where
+  parseJSON =
+    Core.withObject
+      "DotnetSettings_RenamedServices"
+      ( \o ->
+          DotnetSettings_RenamedServices
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON DotnetSettings_RenamedServices where
+  toJSON DotnetSettings_RenamedServices {..} =
+    Core.toJSON additional
+
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -1642,7 +2034,9 @@ instance Core.ToJSON EnableServiceResponse where
 --
 -- /See:/ 'newEndpoint' smart constructor.
 data Endpoint = Endpoint
-  { -- | Allowing <https://en.wikipedia.org/wiki/Cross-origin_resource_sharing CORS>, aka cross-domain traffic, would allow the backends served from this endpoint to receive and respond to HTTP OPTIONS requests. The response will be used by the browser to determine whether the subsequent cross-origin request is allowed to proceed.
+  { -- | Unimplemented. Dot not use. DEPRECATED: This field is no longer supported. Instead of using aliases, please specify multiple google.api.Endpoint for each of the intended aliases. Additional names that this endpoint will be hosted on.
+    aliases :: (Core.Maybe [Core.Text]),
+    -- | Allowing <https://en.wikipedia.org/wiki/Cross-origin_resource_sharing CORS>, aka cross-domain traffic, would allow the backends served from this endpoint to receive and respond to HTTP OPTIONS requests. The response will be used by the browser to determine whether the subsequent cross-origin request is allowed to proceed.
     allowCors :: (Core.Maybe Core.Bool),
     -- | The canonical name of this endpoint.
     name :: (Core.Maybe Core.Text),
@@ -1656,7 +2050,8 @@ newEndpoint ::
   Endpoint
 newEndpoint =
   Endpoint
-    { allowCors = Core.Nothing,
+    { aliases = Core.Nothing,
+      allowCors = Core.Nothing,
       name = Core.Nothing,
       target = Core.Nothing
     }
@@ -1667,7 +2062,8 @@ instance Core.FromJSON Endpoint where
       "Endpoint"
       ( \o ->
           Endpoint
-            Core.<$> (o Core..:? "allowCors")
+            Core.<$> (o Core..:? "aliases")
+            Core.<*> (o Core..:? "allowCors")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "target")
       )
@@ -1676,7 +2072,8 @@ instance Core.ToJSON Endpoint where
   toJSON Endpoint {..} =
     Core.object
       ( Core.catMaybes
-          [ ("allowCors" Core..=) Core.<$> allowCors,
+          [ ("aliases" Core..=) Core.<$> aliases,
+            ("allowCors" Core..=) Core.<$> allowCors,
             ("name" Core..=) Core.<$> name,
             ("target" Core..=) Core.<$> target
           ]
@@ -1686,7 +2083,9 @@ instance Core.ToJSON Endpoint where
 --
 -- /See:/ 'newEnum' smart constructor.
 data Enum' = Enum'
-  { -- | Enum value definitions.
+  { -- | The source edition string, only valid when syntax is SYNTAX_EDITIONS.
+    edition :: (Core.Maybe Core.Text),
+    -- | Enum value definitions.
     enumvalue :: (Core.Maybe [EnumValue]),
     -- | Enum type name.
     name :: (Core.Maybe Core.Text),
@@ -1704,7 +2103,8 @@ newEnum ::
   Enum'
 newEnum =
   Enum'
-    { enumvalue = Core.Nothing,
+    { edition = Core.Nothing,
+      enumvalue = Core.Nothing,
       name = Core.Nothing,
       options = Core.Nothing,
       sourceContext = Core.Nothing,
@@ -1717,7 +2117,8 @@ instance Core.FromJSON Enum' where
       "Enum'"
       ( \o ->
           Enum'
-            Core.<$> (o Core..:? "enumvalue")
+            Core.<$> (o Core..:? "edition")
+            Core.<*> (o Core..:? "enumvalue")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "options")
             Core.<*> (o Core..:? "sourceContext")
@@ -1728,7 +2129,8 @@ instance Core.ToJSON Enum' where
   toJSON Enum' {..} =
     Core.object
       ( Core.catMaybes
-          [ ("enumvalue" Core..=) Core.<$> enumvalue,
+          [ ("edition" Core..=) Core.<$> edition,
+            ("enumvalue" Core..=) Core.<$> enumvalue,
             ("name" Core..=) Core.<$> name,
             ("options" Core..=) Core.<$> options,
             ("sourceContext" Core..=) Core.<$> sourceContext,
@@ -1911,6 +2313,31 @@ instance Core.ToJSON GetServiceIdentityResponse where
           ]
       )
 
+-- | Settings for Go client libraries.
+--
+-- /See:/ 'newGoSettings' smart constructor.
+newtype GoSettings = GoSettings
+  { -- | Some settings.
+    common :: (Core.Maybe CommonLanguageSettings)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoSettings' with the minimum fields required to make a request.
+newGoSettings ::
+  GoSettings
+newGoSettings = GoSettings {common = Core.Nothing}
+
+instance Core.FromJSON GoSettings where
+  parseJSON =
+    Core.withObject
+      "GoSettings"
+      (\o -> GoSettings Core.<$> (o Core..:? "common"))
+
+instance Core.ToJSON GoSettings where
+  toJSON GoSettings {..} =
+    Core.object
+      (Core.catMaybes [("common" Core..=) Core.<$> common])
+
 -- | @Service@ is the root object of Google API service configuration (service config). It describes the basic information about a logical service, such as the service name and the user-facing title, and delegates other aspects to sub-sections. Each sub-section is either a proto message or a repeated proto message that configures a specific aspect, such as auth. For more information, see each proto message definition. Example: type: google.api.Service name: calendar.googleapis.com title: Google Calendar API apis: - name: google.calendar.v3.Calendar visibility: rules: - selector: \"google.calendar.v3./\" restriction: PREVIEW backend: rules: - selector: \"google.calendar.v3./\" address: calendar.example.com authentication: providers: - id: google/calendar/auth jwks_uri: https:\/\/www.googleapis.com\/oauth2\/v1\/certs issuer: https:\/\/securetoken.google.com rules: - selector: \"*\" requirements: provider/id: google/calendar_auth
 --
 -- /See:/ 'newGoogleApiService' smart constructor.
@@ -1955,6 +2382,8 @@ data GoogleApiService = GoogleApiService
     name :: (Core.Maybe Core.Text),
     -- | The Google project that owns this service.
     producerProjectId :: (Core.Maybe Core.Text),
+    -- | Settings for <https://cloud.google.com/apis/docs/cloud-client-libraries Google Cloud Client libraries> generated from APIs defined as protocol buffers.
+    publishing :: (Core.Maybe Publishing),
     -- | Quota configuration.
     quota :: (Core.Maybe Quota),
     -- | Output only. The source information for this configuration if available.
@@ -1997,6 +2426,7 @@ newGoogleApiService =
       monitoring = Core.Nothing,
       name = Core.Nothing,
       producerProjectId = Core.Nothing,
+      publishing = Core.Nothing,
       quota = Core.Nothing,
       sourceInfo = Core.Nothing,
       systemParameters = Core.Nothing,
@@ -2032,6 +2462,7 @@ instance Core.FromJSON GoogleApiService where
             Core.<*> (o Core..:? "monitoring")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "producerProjectId")
+            Core.<*> (o Core..:? "publishing")
             Core.<*> (o Core..:? "quota")
             Core.<*> (o Core..:? "sourceInfo")
             Core.<*> (o Core..:? "systemParameters")
@@ -2067,6 +2498,7 @@ instance Core.ToJSON GoogleApiService where
             ("name" Core..=) Core.<$> name,
             ("producerProjectId" Core..=)
               Core.<$> producerProjectId,
+            ("publishing" Core..=) Core.<$> publishing,
             ("quota" Core..=) Core.<$> quota,
             ("sourceInfo" Core..=) Core.<$> sourceInfo,
             ("systemParameters" Core..=)
@@ -2627,11 +3059,88 @@ instance Core.ToJSON ImportConsumerOverridesResponse where
           [("overrides" Core..=) Core.<$> overrides]
       )
 
+-- | Settings for Java client libraries.
+--
+-- /See:/ 'newJavaSettings' smart constructor.
+data JavaSettings = JavaSettings
+  { -- | Some settings.
+    common :: (Core.Maybe CommonLanguageSettings),
+    -- | The package name to use in Java. Clobbers the java/package option set in the protobuf. This should be used __only__ by APIs who have already set the language/settings.java.package/name\" field in gapic.yaml. API teams should use the protobuf java/package option where possible. Example of a YAML configuration:: publishing: java/settings: library/package: com.google.cloud.pubsub.v1
+    libraryPackage :: (Core.Maybe Core.Text),
+    -- | Configure the Java class name to use instead of the service\'s for its corresponding generated GAPIC client. Keys are fully-qualified service names as they appear in the protobuf (including the full the language/settings.java.interface/names\" field in gapic.yaml. API teams should otherwise use the service name as it appears in the protobuf. Example of a YAML configuration:: publishing: java/settings: service/class_names: - google.pubsub.v1.Publisher: TopicAdmin - google.pubsub.v1.Subscriber: SubscriptionAdmin
+    serviceClassNames :: (Core.Maybe JavaSettings_ServiceClassNames)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'JavaSettings' with the minimum fields required to make a request.
+newJavaSettings ::
+  JavaSettings
+newJavaSettings =
+  JavaSettings
+    { common = Core.Nothing,
+      libraryPackage = Core.Nothing,
+      serviceClassNames = Core.Nothing
+    }
+
+instance Core.FromJSON JavaSettings where
+  parseJSON =
+    Core.withObject
+      "JavaSettings"
+      ( \o ->
+          JavaSettings
+            Core.<$> (o Core..:? "common")
+            Core.<*> (o Core..:? "libraryPackage")
+            Core.<*> (o Core..:? "serviceClassNames")
+      )
+
+instance Core.ToJSON JavaSettings where
+  toJSON JavaSettings {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("common" Core..=) Core.<$> common,
+            ("libraryPackage" Core..=) Core.<$> libraryPackage,
+            ("serviceClassNames" Core..=)
+              Core.<$> serviceClassNames
+          ]
+      )
+
+-- | Configure the Java class name to use instead of the service\'s for its corresponding generated GAPIC client. Keys are fully-qualified service names as they appear in the protobuf (including the full the language/settings.java.interface/names\" field in gapic.yaml. API teams should otherwise use the service name as it appears in the protobuf. Example of a YAML configuration:: publishing: java/settings: service/class_names: - google.pubsub.v1.Publisher: TopicAdmin - google.pubsub.v1.Subscriber: SubscriptionAdmin
+--
+-- /See:/ 'newJavaSettings_ServiceClassNames' smart constructor.
+newtype JavaSettings_ServiceClassNames = JavaSettings_ServiceClassNames
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'JavaSettings_ServiceClassNames' with the minimum fields required to make a request.
+newJavaSettings_ServiceClassNames ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  JavaSettings_ServiceClassNames
+newJavaSettings_ServiceClassNames additional =
+  JavaSettings_ServiceClassNames {additional = additional}
+
+instance Core.FromJSON JavaSettings_ServiceClassNames where
+  parseJSON =
+    Core.withObject
+      "JavaSettings_ServiceClassNames"
+      ( \o ->
+          JavaSettings_ServiceClassNames
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON JavaSettings_ServiceClassNames where
+  toJSON JavaSettings_ServiceClassNames {..} =
+    Core.toJSON additional
+
 -- | Specifies a location to extract JWT from an API request.
 --
 -- /See:/ 'newJwtLocation' smart constructor.
 data JwtLocation = JwtLocation
-  { -- | Specifies HTTP header name to extract JWT token.
+  { -- | Specifies cookie name to extract JWT token.
+    cookie :: (Core.Maybe Core.Text),
+    -- | Specifies HTTP header name to extract JWT token.
     header :: (Core.Maybe Core.Text),
     -- | Specifies URL query parameter name to extract JWT token.
     query :: (Core.Maybe Core.Text),
@@ -2645,7 +3154,8 @@ newJwtLocation ::
   JwtLocation
 newJwtLocation =
   JwtLocation
-    { header = Core.Nothing,
+    { cookie = Core.Nothing,
+      header = Core.Nothing,
       query = Core.Nothing,
       valuePrefix = Core.Nothing
     }
@@ -2656,7 +3166,8 @@ instance Core.FromJSON JwtLocation where
       "JwtLocation"
       ( \o ->
           JwtLocation
-            Core.<$> (o Core..:? "header")
+            Core.<$> (o Core..:? "cookie")
+            Core.<*> (o Core..:? "header")
             Core.<*> (o Core..:? "query")
             Core.<*> (o Core..:? "valuePrefix")
       )
@@ -2665,7 +3176,8 @@ instance Core.ToJSON JwtLocation where
   toJSON JwtLocation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("header" Core..=) Core.<$> header,
+          [ ("cookie" Core..=) Core.<$> cookie,
+            ("header" Core..=) Core.<$> header,
             ("query" Core..=) Core.<$> query,
             ("valuePrefix" Core..=) Core.<$> valuePrefix
           ]
@@ -2917,6 +3429,58 @@ instance Core.ToJSON LoggingDestination where
           ]
       )
 
+-- | Describes settings to use when generating API methods that use the long-running operation pattern. All default values below are from those used in the client library generators (e.g. <https://github.com/googleapis/gapic-generator-java/blob/04c2faa191a9b5a10b92392fe8482279c4404803/src/main/java/com/google/api/generator/gapic/composer/common/RetrySettingsComposer.java Java>).
+--
+-- /See:/ 'newLongRunning' smart constructor.
+data LongRunning = LongRunning
+  { -- | Initial delay after which the first poll request will be made. Default value: 5 seconds.
+    initialPollDelay :: (Core.Maybe Core.Duration),
+    -- | Maximum time between two subsequent poll requests. Default value: 45 seconds.
+    maxPollDelay :: (Core.Maybe Core.Duration),
+    -- | Multiplier to gradually increase delay between subsequent polls until it reaches max/poll/delay. Default value: 1.5.
+    pollDelayMultiplier :: (Core.Maybe Core.Double),
+    -- | Total polling timeout. Default value: 5 minutes.
+    totalPollTimeout :: (Core.Maybe Core.Duration)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LongRunning' with the minimum fields required to make a request.
+newLongRunning ::
+  LongRunning
+newLongRunning =
+  LongRunning
+    { initialPollDelay = Core.Nothing,
+      maxPollDelay = Core.Nothing,
+      pollDelayMultiplier = Core.Nothing,
+      totalPollTimeout = Core.Nothing
+    }
+
+instance Core.FromJSON LongRunning where
+  parseJSON =
+    Core.withObject
+      "LongRunning"
+      ( \o ->
+          LongRunning
+            Core.<$> (o Core..:? "initialPollDelay")
+            Core.<*> (o Core..:? "maxPollDelay")
+            Core.<*> (o Core..:? "pollDelayMultiplier")
+            Core.<*> (o Core..:? "totalPollTimeout")
+      )
+
+instance Core.ToJSON LongRunning where
+  toJSON LongRunning {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("initialPollDelay" Core..=)
+              Core.<$> initialPollDelay,
+            ("maxPollDelay" Core..=) Core.<$> maxPollDelay,
+            ("pollDelayMultiplier" Core..=)
+              Core.<$> pollDelayMultiplier,
+            ("totalPollTimeout" Core..=)
+              Core.<$> totalPollTimeout
+          ]
+      )
+
 -- | Method represents a method of an API interface.
 --
 -- /See:/ 'newMethod' smart constructor.
@@ -2980,6 +3544,42 @@ instance Core.ToJSON Method where
               Core.<$> responseStreaming,
             ("responseTypeUrl" Core..=) Core.<$> responseTypeUrl,
             ("syntax" Core..=) Core.<$> syntax
+          ]
+      )
+
+-- | Describes the generator configuration for a method.
+--
+-- /See:/ 'newMethodSettings' smart constructor.
+data MethodSettings = MethodSettings
+  { -- | Describes settings to use for long-running operations when generating API methods for RPCs. Complements RPCs that use the annotations in google\/longrunning\/operations.proto. Example of a YAML configuration:: publishing: method/settings: - selector: google.cloud.speech.v2.Speech.BatchRecognize long/running: initial/poll/delay: seconds: 60 # 1 minute poll/delay/multiplier: 1.5 max/poll/delay: seconds: 360 # 6 minutes total/poll/timeout: seconds: 54000 # 90 minutes
+    longRunning :: (Core.Maybe LongRunning),
+    -- | The fully qualified name of the method, for which the options below apply. This is used to find the method to apply the options.
+    selector :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MethodSettings' with the minimum fields required to make a request.
+newMethodSettings ::
+  MethodSettings
+newMethodSettings =
+  MethodSettings {longRunning = Core.Nothing, selector = Core.Nothing}
+
+instance Core.FromJSON MethodSettings where
+  parseJSON =
+    Core.withObject
+      "MethodSettings"
+      ( \o ->
+          MethodSettings
+            Core.<$> (o Core..:? "longRunning")
+            Core.<*> (o Core..:? "selector")
+      )
+
+instance Core.ToJSON MethodSettings where
+  toJSON MethodSettings {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("longRunning" Core..=) Core.<$> longRunning,
+            ("selector" Core..=) Core.<$> selector
           ]
       )
 
@@ -3181,7 +3781,7 @@ instance Core.ToJSON MetricRule_MetricCosts where
     Core.toJSON additional
 
 -- | Declares an API Interface to be included in this interface. The including interface must redeclare all the methods from the included interface, but documentation and options are inherited as follows: - If after comment and whitespace stripping, the documentation string of the redeclared method is empty, it will be inherited from the original method. - Each annotation belonging to the service config (http, visibility) which is not set in the redeclared method will be inherited. - If an http annotation is inherited, the path pattern will be modified as follows. Any version prefix will be replaced by the version of the including interface plus the root path if specified. Example of a simple mixin: package google.acl.v1; service AccessControl { \/\/ Get the underlying ACL object. rpc GetAcl(GetAclRequest) returns (Acl) { option (google.api.http).get = \"\/v1\/{resource=__}:getAcl\"; } } package google.storage.v2; service Storage { \/\/ rpc GetAcl(GetAclRequest) returns (Acl); \/\/ Get a data record. rpc
--- GetData(GetDataRequest) returns (Data) { option (google.api.http).get = \"\/v2\/{resource=__}\"; } } Example of a mixin configuration: apis: - name: google.storage.v2.Storage mixins: - name: google.acl.v1.AccessControl The mixin construct implies that all methods in @AccessControl@ are also declared with same name and request\/response types in @Storage@. A documentation generator or annotation processor will see the effective @Storage.GetAcl@ method after inheriting documentation and annotations as follows: service Storage { \/\/ Get the underlying ACL object. rpc GetAcl(GetAclRequest) returns (Acl) { option (google.api.http).get = \"\/v2\/{resource=__}:getAcl\"; } ... } Note how the version in the path pattern changed from @v1@ to @v2@. If the @root@ field in the mixin is specified, it should be a relative path under which inherited HTTP paths are placed. Example: apis: - name: google.storage.v2.Storage mixins: - name: google.acl.v1.AccessControl root: acls This implies the following inherited HTTP
+-- GetData(GetDataRequest) returns (Data) { option (google.api.http).get = \"\/v2\/{resource=__}\"; } } Example of a mixin configuration: apis: - name: google.storage.v2.Storage mixins: - name: google.acl.v1.AccessControl The mixin construct implies that all methods in @AccessControl@ are also declared with same name and request\/response types in @Storage@. A documentation generator or annotation processor will see the effective @Storage.GetAcl@ method after inherting documentation and annotations as follows: service Storage { \/\/ Get the underlying ACL object. rpc GetAcl(GetAclRequest) returns (Acl) { option (google.api.http).get = \"\/v2\/{resource=__}:getAcl\"; } ... } Note how the version in the path pattern changed from @v1@ to @v2@. If the @root@ field in the mixin is specified, it should be a relative path under which inherited HTTP paths are placed. Example: apis: - name: google.storage.v2.Storage mixins: - name: google.acl.v1.AccessControl root: acls This implies the following inherited HTTP
 -- annotation: service Storage { \/\/ Get the underlying ACL object. rpc GetAcl(GetAclRequest) returns (Acl) { option (google.api.http).get = \"\/v2\/acls\/{resource=__}:getAcl\"; } ... }
 --
 -- /See:/ 'newMixin' smart constructor.
@@ -3356,6 +3956,31 @@ instance Core.ToJSON MonitoringDestination where
               Core.<$> monitoredResource
           ]
       )
+
+-- | Settings for Node client libraries.
+--
+-- /See:/ 'newNodeSettings' smart constructor.
+newtype NodeSettings = NodeSettings
+  { -- | Some settings.
+    common :: (Core.Maybe CommonLanguageSettings)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NodeSettings' with the minimum fields required to make a request.
+newNodeSettings ::
+  NodeSettings
+newNodeSettings = NodeSettings {common = Core.Nothing}
+
+instance Core.FromJSON NodeSettings where
+  parseJSON =
+    Core.withObject
+      "NodeSettings"
+      (\o -> NodeSettings Core.<$> (o Core..:? "common"))
+
+instance Core.ToJSON NodeSettings where
+  toJSON NodeSettings {..} =
+    Core.object
+      (Core.catMaybes [("common" Core..=) Core.<$> common])
 
 -- | OAuth scopes are a way to define data and permissions on data. For example, there are scopes defined for \"Read-only access to Google Calendar\" and \"Access to Cloud Platform\". Users can consent to a scope for an application, giving it permission to access that data on their behalf. OAuth scope specifications should be fairly coarse grained; a user will need to see and understand the text description of what your scope means. In most cases: use one or at most two OAuth scopes for an entire family of products. If your product has multiple APIs, you should probably be sharing the OAuth scope across all of those APIs. When you need finer grained OAuth consent screens: talk with your product management about how developers will use them in practice. Please note that even though each of the canonical scopes is enough for a request to be accepted and passed to the backend, a request can still fail due to the backend requiring additional scopes or permissions.
 --
@@ -3630,14 +4255,148 @@ instance Core.ToJSON Page where
           ]
       )
 
--- | Quota configuration helps to achieve fairness and budgeting in service usage. The metric based quota configuration works this way: - The service configuration defines a set of metrics. - For API calls, the quota.metric/rules maps methods to metrics with corresponding costs. - The quota.limits defines limits on the metrics, which will be used for quota checks at runtime. An example quota configuration in yaml format: quota: limits: - name: apiWriteQpsPerProject metric: library.googleapis.com\/write/calls unit: \"1\/min\/{project}\" # rate limit for consumer projects values: STANDARD: 10000 # The metric rules bind all methods to the read/calls metric, # except for the UpdateBook and DeleteBook methods. These two methods # are mapped to the write/calls metric, with the UpdateBook method # consuming at twice rate as the DeleteBook method. metric_rules: - selector: \"*\" metric/costs: library.googleapis.com\/read/calls: 1 - selector: google.example.library.v1.LibraryService.UpdateBook metric/costs:
+-- | Settings for Php client libraries.
+--
+-- /See:/ 'newPhpSettings' smart constructor.
+newtype PhpSettings = PhpSettings
+  { -- | Some settings.
+    common :: (Core.Maybe CommonLanguageSettings)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PhpSettings' with the minimum fields required to make a request.
+newPhpSettings ::
+  PhpSettings
+newPhpSettings = PhpSettings {common = Core.Nothing}
+
+instance Core.FromJSON PhpSettings where
+  parseJSON =
+    Core.withObject
+      "PhpSettings"
+      (\o -> PhpSettings Core.<$> (o Core..:? "common"))
+
+instance Core.ToJSON PhpSettings where
+  toJSON PhpSettings {..} =
+    Core.object
+      (Core.catMaybes [("common" Core..=) Core.<$> common])
+
+-- | This message configures the settings for publishing <https://cloud.google.com/apis/docs/cloud-client-libraries Google Cloud Client libraries> generated from the service config.
+--
+-- /See:/ 'newPublishing' smart constructor.
+data Publishing = Publishing
+  { -- | Used as a tracking tag when collecting data about the APIs developer relations artifacts like docs, packages delivered to package managers, etc. Example: \"speech\".
+    apiShortName :: (Core.Maybe Core.Text),
+    -- | GitHub teams to be added to CODEOWNERS in the directory in GitHub containing source code for the client libraries for this API.
+    codeownerGithubTeams :: (Core.Maybe [Core.Text]),
+    -- | A prefix used in sample code when demarking regions to be included in documentation.
+    docTagPrefix :: (Core.Maybe Core.Text),
+    -- | Link to product home page. Example: https:\/\/cloud.google.com\/asset-inventory\/docs\/overview
+    documentationUri :: (Core.Maybe Core.Text),
+    -- | GitHub label to apply to issues and pull requests opened for this API.
+    githubLabel :: (Core.Maybe Core.Text),
+    -- | Client library settings. If the same version string appears multiple times in this list, then the last one wins. Settings from earlier settings with the same version string are discarded.
+    librarySettings :: (Core.Maybe [ClientLibrarySettings]),
+    -- | A list of API method settings, e.g. the behavior for methods that use the long-running operation pattern.
+    methodSettings :: (Core.Maybe [MethodSettings]),
+    -- | Link to a place that API users can report issues. Example: https:\/\/issuetracker.google.com\/issues\/new?component=190865&template=1161103
+    newIssueUri' :: (Core.Maybe Core.Text),
+    -- | For whom the client library is being published.
+    organization :: (Core.Maybe Publishing_Organization),
+    -- | Optional link to proto reference documentation. Example: https:\/\/cloud.google.com\/pubsub\/lite\/docs\/reference\/rpc
+    protoReferenceDocumentationUri :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Publishing' with the minimum fields required to make a request.
+newPublishing ::
+  Publishing
+newPublishing =
+  Publishing
+    { apiShortName = Core.Nothing,
+      codeownerGithubTeams = Core.Nothing,
+      docTagPrefix = Core.Nothing,
+      documentationUri = Core.Nothing,
+      githubLabel = Core.Nothing,
+      librarySettings = Core.Nothing,
+      methodSettings = Core.Nothing,
+      newIssueUri' = Core.Nothing,
+      organization = Core.Nothing,
+      protoReferenceDocumentationUri = Core.Nothing
+    }
+
+instance Core.FromJSON Publishing where
+  parseJSON =
+    Core.withObject
+      "Publishing"
+      ( \o ->
+          Publishing
+            Core.<$> (o Core..:? "apiShortName")
+            Core.<*> (o Core..:? "codeownerGithubTeams")
+            Core.<*> (o Core..:? "docTagPrefix")
+            Core.<*> (o Core..:? "documentationUri")
+            Core.<*> (o Core..:? "githubLabel")
+            Core.<*> (o Core..:? "librarySettings")
+            Core.<*> (o Core..:? "methodSettings")
+            Core.<*> (o Core..:? "newIssueUri")
+            Core.<*> (o Core..:? "organization")
+            Core.<*> (o Core..:? "protoReferenceDocumentationUri")
+      )
+
+instance Core.ToJSON Publishing where
+  toJSON Publishing {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("apiShortName" Core..=) Core.<$> apiShortName,
+            ("codeownerGithubTeams" Core..=)
+              Core.<$> codeownerGithubTeams,
+            ("docTagPrefix" Core..=) Core.<$> docTagPrefix,
+            ("documentationUri" Core..=)
+              Core.<$> documentationUri,
+            ("githubLabel" Core..=) Core.<$> githubLabel,
+            ("librarySettings" Core..=) Core.<$> librarySettings,
+            ("methodSettings" Core..=) Core.<$> methodSettings,
+            ("newIssueUri" Core..=) Core.<$> newIssueUri',
+            ("organization" Core..=) Core.<$> organization,
+            ("protoReferenceDocumentationUri" Core..=)
+              Core.<$> protoReferenceDocumentationUri
+          ]
+      )
+
+-- | Settings for Python client libraries.
+--
+-- /See:/ 'newPythonSettings' smart constructor.
+newtype PythonSettings = PythonSettings
+  { -- | Some settings.
+    common :: (Core.Maybe CommonLanguageSettings)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PythonSettings' with the minimum fields required to make a request.
+newPythonSettings ::
+  PythonSettings
+newPythonSettings = PythonSettings {common = Core.Nothing}
+
+instance Core.FromJSON PythonSettings where
+  parseJSON =
+    Core.withObject
+      "PythonSettings"
+      ( \o ->
+          PythonSettings Core.<$> (o Core..:? "common")
+      )
+
+instance Core.ToJSON PythonSettings where
+  toJSON PythonSettings {..} =
+    Core.object
+      (Core.catMaybes [("common" Core..=) Core.<$> common])
+
+-- | Quota configuration helps to achieve fairness and budgeting in service usage. The metric based quota configuration works this way: - The service configuration defines a set of metrics. - For API calls, the quota.metric/rules maps methods to metrics with corresponding costs. - The quota.limits defines limits on the metrics, which will be used for quota checks at runtime. An example quota configuration in yaml format: quota: limits: - name: apiWriteQpsPerProject metric: library.googleapis.com\/write/calls unit: \"1\/min\/{project}\" # rate limit for consumer projects values: STANDARD: 10000 (The metric rules bind all methods to the read/calls metric, except for the UpdateBook and DeleteBook methods. These two methods are mapped to the write/calls metric, with the UpdateBook method consuming at twice rate as the DeleteBook method.) metric_rules: - selector: \"*\" metric/costs: library.googleapis.com\/read/calls: 1 - selector: google.example.library.v1.LibraryService.UpdateBook metric/costs:
 -- library.googleapis.com\/write/calls: 2 - selector: google.example.library.v1.LibraryService.DeleteBook metric/costs: library.googleapis.com\/write/calls: 1 Corresponding Metric definition: metrics: - name: library.googleapis.com\/read/calls display/name: Read requests metric/kind: DELTA value/type: INT64 - name: library.googleapis.com\/write/calls display/name: Write requests metric/kind: DELTA value/type: INT64
 --
 -- /See:/ 'newQuota' smart constructor.
 data Quota = Quota
-  { -- | List of @QuotaLimit@ definitions for the service.
+  { -- | List of QuotaLimit definitions for the service.
     limits :: (Core.Maybe [QuotaLimit]),
-    -- | List of @MetricRule@ definitions, each one mapping a selected method to one or more metrics.
+    -- | List of MetricRule definitions, each one mapping a selected method to one or more metrics.
     metricRules :: (Core.Maybe [MetricRule])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3875,6 +4634,31 @@ instance Core.FromJSON QuotaOverride_Dimensions where
 instance Core.ToJSON QuotaOverride_Dimensions where
   toJSON QuotaOverride_Dimensions {..} =
     Core.toJSON additional
+
+-- | Settings for Ruby client libraries.
+--
+-- /See:/ 'newRubySettings' smart constructor.
+newtype RubySettings = RubySettings
+  { -- | Some settings.
+    common :: (Core.Maybe CommonLanguageSettings)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RubySettings' with the minimum fields required to make a request.
+newRubySettings ::
+  RubySettings
+newRubySettings = RubySettings {common = Core.Nothing}
+
+instance Core.FromJSON RubySettings where
+  parseJSON =
+    Core.withObject
+      "RubySettings"
+      (\o -> RubySettings Core.<$> (o Core..:? "common"))
+
+instance Core.ToJSON RubySettings where
+  toJSON RubySettings {..} =
+    Core.object
+      (Core.catMaybes [("common" Core..=) Core.<$> common])
 
 -- | Service identity for a service. This is the identity that service producer should use to access consumer resources.
 --
@@ -4178,7 +4962,9 @@ instance Core.ToJSON SystemParameters where
 --
 -- /See:/ 'newType' smart constructor.
 data Type = Type
-  { -- | The list of fields.
+  { -- | The source edition string, only valid when syntax is SYNTAX_EDITIONS.
+    edition :: (Core.Maybe Core.Text),
+    -- | The list of fields.
     fields :: (Core.Maybe [Field]),
     -- | The fully qualified message name.
     name :: (Core.Maybe Core.Text),
@@ -4198,7 +4984,8 @@ newType ::
   Type
 newType =
   Type
-    { fields = Core.Nothing,
+    { edition = Core.Nothing,
+      fields = Core.Nothing,
       name = Core.Nothing,
       oneofs = Core.Nothing,
       options = Core.Nothing,
@@ -4212,7 +4999,8 @@ instance Core.FromJSON Type where
       "Type"
       ( \o ->
           Type
-            Core.<$> (o Core..:? "fields")
+            Core.<$> (o Core..:? "edition")
+            Core.<*> (o Core..:? "fields")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "oneofs")
             Core.<*> (o Core..:? "options")
@@ -4224,7 +5012,8 @@ instance Core.ToJSON Type where
   toJSON Type {..} =
     Core.object
       ( Core.catMaybes
-          [ ("fields" Core..=) Core.<$> fields,
+          [ ("edition" Core..=) Core.<$> edition,
+            ("fields" Core..=) Core.<$> fields,
             ("name" Core..=) Core.<$> name,
             ("oneofs" Core..=) Core.<$> oneofs,
             ("options" Core..=) Core.<$> options,

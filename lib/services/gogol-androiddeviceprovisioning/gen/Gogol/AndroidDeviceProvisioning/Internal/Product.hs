@@ -134,6 +134,10 @@ module Gogol.AndroidDeviceProvisioning.Internal.Product
     FindDevicesByOwnerResponse (..),
     newFindDevicesByOwnerResponse,
 
+    -- * GoogleWorkspaceAccount
+    GoogleWorkspaceAccount (..),
+    newGoogleWorkspaceAccount,
+
     -- * ListCustomersResponse
     ListCustomersResponse (..),
     newListCustomersResponse,
@@ -211,14 +215,20 @@ import qualified Gogol.Prelude as Core
 --
 -- /See:/ 'newClaimDeviceRequest' smart constructor.
 data ClaimDeviceRequest = ClaimDeviceRequest
-  { -- | Required. The ID of the customer for whom the device is being claimed.
+  { -- | The ID of the customer for whom the device is being claimed.
     customerId :: (Core.Maybe Core.Int64),
     -- | Required. Required. The device identifier of the device to claim.
     deviceIdentifier :: (Core.Maybe DeviceIdentifier),
     -- | Optional. The metadata to attach to the device.
     deviceMetadata :: (Core.Maybe DeviceMetadata),
+    -- | The Google Workspace customer ID.
+    googleWorkspaceCustomerId :: (Core.Maybe Core.Text),
+    -- | Optional. Must and can only be set for Chrome OS devices.
+    preProvisioningToken :: (Core.Maybe Core.Text),
     -- | Required. The section type of the device\'s provisioning record.
-    sectionType :: (Core.Maybe ClaimDeviceRequest_SectionType)
+    sectionType :: (Core.Maybe ClaimDeviceRequest_SectionType),
+    -- | Optional. Must and can only be set when DeviceProvisioningSectionType is SECTION/TYPE/SIM_LOCK. The unique identifier of the SimLock profile.
+    simlockProfileId :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -230,7 +240,10 @@ newClaimDeviceRequest =
     { customerId = Core.Nothing,
       deviceIdentifier = Core.Nothing,
       deviceMetadata = Core.Nothing,
-      sectionType = Core.Nothing
+      googleWorkspaceCustomerId = Core.Nothing,
+      preProvisioningToken = Core.Nothing,
+      sectionType = Core.Nothing,
+      simlockProfileId = Core.Nothing
     }
 
 instance Core.FromJSON ClaimDeviceRequest where
@@ -244,7 +257,12 @@ instance Core.FromJSON ClaimDeviceRequest where
                      )
             Core.<*> (o Core..:? "deviceIdentifier")
             Core.<*> (o Core..:? "deviceMetadata")
+            Core.<*> (o Core..:? "googleWorkspaceCustomerId")
+            Core.<*> (o Core..:? "preProvisioningToken")
             Core.<*> (o Core..:? "sectionType")
+            Core.<*> ( o Core..:? "simlockProfileId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON ClaimDeviceRequest where
@@ -256,7 +274,13 @@ instance Core.ToJSON ClaimDeviceRequest where
             ("deviceIdentifier" Core..=)
               Core.<$> deviceIdentifier,
             ("deviceMetadata" Core..=) Core.<$> deviceMetadata,
-            ("sectionType" Core..=) Core.<$> sectionType
+            ("googleWorkspaceCustomerId" Core..=)
+              Core.<$> googleWorkspaceCustomerId,
+            ("preProvisioningToken" Core..=)
+              Core.<$> preProvisioningToken,
+            ("sectionType" Core..=) Core.<$> sectionType,
+            ("simlockProfileId" Core..=) Core.. Core.AsText
+              Core.<$> simlockProfileId
           ]
       )
 
@@ -336,6 +360,8 @@ data Company = Company
     companyId :: (Core.Maybe Core.Int64),
     -- | Required. The name of the company. For example /XYZ Corp/. Displayed to the company\'s employees in the zero-touch enrollment portal.
     companyName :: (Core.Maybe Core.Text),
+    -- | Output only. The Google Workspace account associated with this customer. Only used for customer Companies.
+    googleWorkspaceAccount :: (Core.Maybe GoogleWorkspaceAccount),
     -- | Input only. The preferred locale of the customer represented as a BCP47 language code. This field is validated on input and requests containing unsupported language codes will be rejected. Supported language codes: Arabic (ar) Chinese (Hong Kong) (zh-HK) Chinese (Simplified) (zh-CN) Chinese (Traditional) (zh-TW) Czech (cs) Danish (da) Dutch (nl) English (UK) (en-GB) English (US) (en-US) Filipino (fil) Finnish (fi) French (fr) German (de) Hebrew (iw) Hindi (hi) Hungarian (hu) Indonesian (id) Italian (it) Japanese (ja) Korean (ko) Norwegian (Bokmal) (no) Polish (pl) Portuguese (Brazil) (pt-BR) Portuguese (Portugal) (pt-PT) Russian (ru) Spanish (es) Spanish (Latin America) (es-419) Swedish (sv) Thai (th) Turkish (tr) Ukrainian (uk) Vietnamese (vi)
     languageCode :: (Core.Maybe Core.Text),
     -- | Output only. The API resource name of the company. The resource name is one of the following formats: * @partners\/[PARTNER_ID]\/customers\/[CUSTOMER_ID]@ * @partners\/[PARTNER_ID]\/vendors\/[VENDOR_ID]@ * @partners\/[PARTNER_ID]\/vendors\/[VENDOR_ID]\/customers\/[CUSTOMER_ID]@ Assigned by the server.
@@ -357,6 +383,7 @@ newCompany =
     { adminEmails = Core.Nothing,
       companyId = Core.Nothing,
       companyName = Core.Nothing,
+      googleWorkspaceAccount = Core.Nothing,
       languageCode = Core.Nothing,
       name = Core.Nothing,
       ownerEmails = Core.Nothing,
@@ -375,6 +402,7 @@ instance Core.FromJSON Company where
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "companyName")
+            Core.<*> (o Core..:? "googleWorkspaceAccount")
             Core.<*> (o Core..:? "languageCode")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "ownerEmails")
@@ -390,6 +418,8 @@ instance Core.ToJSON Company where
             ("companyId" Core..=) Core.. Core.AsText
               Core.<$> companyId,
             ("companyName" Core..=) Core.<$> companyName,
+            ("googleWorkspaceAccount" Core..=)
+              Core.<$> googleWorkspaceAccount,
             ("languageCode" Core..=) Core.<$> languageCode,
             ("name" Core..=) Core.<$> name,
             ("ownerEmails" Core..=) Core.<$> ownerEmails,
@@ -764,7 +794,7 @@ instance Core.ToJSON CustomerUnclaimDeviceRequest where
     Core.object
       (Core.catMaybes [("device" Core..=) Core.<$> device])
 
--- | An Android device registered for zero-touch enrollment.
+-- | An Android or Chrome OS device registered for zero-touch enrollment.
 --
 -- /See:/ 'newDevice' smart constructor.
 data Device = Device
@@ -833,6 +863,8 @@ instance Core.ToJSON Device where
 data DeviceClaim = DeviceClaim
   { -- | The Additional service registered for the device.
     additionalService :: (Core.Maybe DeviceClaim_AdditionalService),
+    -- | The ID of the Google Workspace account that owns the Chrome OS device.
+    googleWorkspaceCustomerId :: (Core.Maybe Core.Text),
     -- | The ID of the Customer that purchased the device.
     ownerCompanyId :: (Core.Maybe Core.Int64),
     -- | The ID of the reseller that claimed the device.
@@ -852,6 +884,7 @@ newDeviceClaim ::
 newDeviceClaim =
   DeviceClaim
     { additionalService = Core.Nothing,
+      googleWorkspaceCustomerId = Core.Nothing,
       ownerCompanyId = Core.Nothing,
       resellerId = Core.Nothing,
       sectionType = Core.Nothing,
@@ -866,6 +899,7 @@ instance Core.FromJSON DeviceClaim where
       ( \o ->
           DeviceClaim
             Core.<$> (o Core..:? "additionalService")
+            Core.<*> (o Core..:? "googleWorkspaceCustomerId")
             Core.<*> ( o Core..:? "ownerCompanyId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
@@ -883,6 +917,8 @@ instance Core.ToJSON DeviceClaim where
       ( Core.catMaybes
           [ ("additionalService" Core..=)
               Core.<$> additionalService,
+            ("googleWorkspaceCustomerId" Core..=)
+              Core.<$> googleWorkspaceCustomerId,
             ("ownerCompanyId" Core..=) Core.. Core.AsText
               Core.<$> ownerCompanyId,
             ("resellerId" Core..=) Core.. Core.AsText
@@ -899,13 +935,17 @@ instance Core.ToJSON DeviceClaim where
 --
 -- /See:/ 'newDeviceIdentifier' smart constructor.
 data DeviceIdentifier = DeviceIdentifier
-  { -- | The device’s IMEI number. Validated on input.
+  { -- | An identifier provided by OEMs, carried through the production and sales process. Only applicable to Chrome OS devices.
+    chromeOsAttestedDeviceId :: (Core.Maybe Core.Text),
+    -- | The type of the device
+    deviceType :: (Core.Maybe DeviceIdentifier_DeviceType),
+    -- | The device’s IMEI number. Validated on input.
     imei :: (Core.Maybe Core.Text),
-    -- | The device manufacturer’s name. Matches the device\'s built-in value returned from @android.os.Build.MANUFACTURER@. Allowed values are listed in </zero-touch/resources/manufacturer-names#manufacturers-names manufacturers>.
+    -- | The device manufacturer’s name. Matches the device\'s built-in value returned from @android.os.Build.MANUFACTURER@. Allowed values are listed in </zero-touch/resources/manufacturer-names#manufacturers-names Android manufacturers>.
     manufacturer :: (Core.Maybe Core.Text),
     -- | The device’s MEID number.
     meid :: (Core.Maybe Core.Text),
-    -- | The device model\'s name. Matches the device\'s built-in value returned from @android.os.Build.MODEL@. Allowed values are listed in </zero-touch/resources/manufacturer-names#model-names models>.
+    -- | The device model\'s name. Allowed values are listed in </zero-touch/resources/manufacturer-names#model-names Android models> and <https://support.google.com/chrome/a/answer/10130175#identify_compatible Chrome OS models>.
     model :: (Core.Maybe Core.Text),
     -- | The manufacturer\'s serial number for the device. This value might not be unique across different device models.
     serialNumber :: (Core.Maybe Core.Text)
@@ -917,7 +957,9 @@ newDeviceIdentifier ::
   DeviceIdentifier
 newDeviceIdentifier =
   DeviceIdentifier
-    { imei = Core.Nothing,
+    { chromeOsAttestedDeviceId = Core.Nothing,
+      deviceType = Core.Nothing,
+      imei = Core.Nothing,
       manufacturer = Core.Nothing,
       meid = Core.Nothing,
       model = Core.Nothing,
@@ -930,7 +972,9 @@ instance Core.FromJSON DeviceIdentifier where
       "DeviceIdentifier"
       ( \o ->
           DeviceIdentifier
-            Core.<$> (o Core..:? "imei")
+            Core.<$> (o Core..:? "chromeOsAttestedDeviceId")
+            Core.<*> (o Core..:? "deviceType")
+            Core.<*> (o Core..:? "imei")
             Core.<*> (o Core..:? "manufacturer")
             Core.<*> (o Core..:? "meid")
             Core.<*> (o Core..:? "model")
@@ -941,7 +985,10 @@ instance Core.ToJSON DeviceIdentifier where
   toJSON DeviceIdentifier {..} =
     Core.object
       ( Core.catMaybes
-          [ ("imei" Core..=) Core.<$> imei,
+          [ ("chromeOsAttestedDeviceId" Core..=)
+              Core.<$> chromeOsAttestedDeviceId,
+            ("deviceType" Core..=) Core.<$> deviceType,
+            ("imei" Core..=) Core.<$> imei,
             ("manufacturer" Core..=) Core.<$> manufacturer,
             ("meid" Core..=) Core.<$> meid,
             ("model" Core..=) Core.<$> model,
@@ -1056,7 +1103,7 @@ data DevicesLongRunningOperationMetadata = DevicesLongRunningOperationMetadata
     devicesCount :: (Core.Maybe Core.Int32),
     -- | The processing status of the operation.
     processingStatus :: (Core.Maybe DevicesLongRunningOperationMetadata_ProcessingStatus),
-    -- | The processing progress of the operation. Measured as a number from 0 to 100. A value of 10O doesnt always mean the operation completed—check for the inclusion of a @done@ field.
+    -- | The processing progress of the operation. Measured as a number from 0 to 100. A value of 10O doesn\'t always mean the operation completed—check for the inclusion of a @done@ field.
     progress :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1185,7 +1232,7 @@ instance Core.ToJSON Dpc where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -1310,8 +1357,10 @@ instance
 --
 -- /See:/ 'newFindDevicesByOwnerRequest' smart constructor.
 data FindDevicesByOwnerRequest = FindDevicesByOwnerRequest
-  { -- | Required. The list of customer IDs to search for.
+  { -- | The list of customer IDs to search for.
     customerId :: (Core.Maybe [Core.Int64]),
+    -- | The list of IDs of Google Workspace accounts to search for.
+    googleWorkspaceCustomerId :: (Core.Maybe [Core.Text]),
     -- | Required. The maximum number of devices to show in a page of results. Must be between 1 and 100 inclusive.
     limit :: (Core.Maybe Core.Int64),
     -- | A token specifying which result page to return.
@@ -1327,6 +1376,7 @@ newFindDevicesByOwnerRequest ::
 newFindDevicesByOwnerRequest =
   FindDevicesByOwnerRequest
     { customerId = Core.Nothing,
+      googleWorkspaceCustomerId = Core.Nothing,
       limit = Core.Nothing,
       pageToken = Core.Nothing,
       sectionType = Core.Nothing
@@ -1338,7 +1388,10 @@ instance Core.FromJSON FindDevicesByOwnerRequest where
       "FindDevicesByOwnerRequest"
       ( \o ->
           FindDevicesByOwnerRequest
-            Core.<$> (o Core..:? "customerId")
+            Core.<$> ( o Core..:? "customerId"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
+            Core.<*> (o Core..:? "googleWorkspaceCustomerId")
             Core.<*> ( o Core..:? "limit"
                          Core.<&> Core.fmap Core.fromAsText
                      )
@@ -1350,7 +1403,10 @@ instance Core.ToJSON FindDevicesByOwnerRequest where
   toJSON FindDevicesByOwnerRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("customerId" Core..=) Core.<$> customerId,
+          [ ("customerId" Core..=) Core.. Core.fmap Core.AsText
+              Core.<$> customerId,
+            ("googleWorkspaceCustomerId" Core..=)
+              Core.<$> googleWorkspaceCustomerId,
             ("limit" Core..=) Core.. Core.AsText Core.<$> limit,
             ("pageToken" Core..=) Core.<$> pageToken,
             ("sectionType" Core..=) Core.<$> sectionType
@@ -1398,6 +1454,46 @@ instance Core.ToJSON FindDevicesByOwnerResponse where
           [ ("devices" Core..=) Core.<$> devices,
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
             ("totalSize" Core..=) Core.<$> totalSize
+          ]
+      )
+
+-- | A Google Workspace customer.
+--
+-- /See:/ 'newGoogleWorkspaceAccount' smart constructor.
+data GoogleWorkspaceAccount = GoogleWorkspaceAccount
+  { -- | Required. The customer ID.
+    customerId :: (Core.Maybe Core.Text),
+    -- | Output only. The pre-provisioning tokens previously used to claim devices.
+    preProvisioningTokens :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleWorkspaceAccount' with the minimum fields required to make a request.
+newGoogleWorkspaceAccount ::
+  GoogleWorkspaceAccount
+newGoogleWorkspaceAccount =
+  GoogleWorkspaceAccount
+    { customerId = Core.Nothing,
+      preProvisioningTokens = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleWorkspaceAccount where
+  parseJSON =
+    Core.withObject
+      "GoogleWorkspaceAccount"
+      ( \o ->
+          GoogleWorkspaceAccount
+            Core.<$> (o Core..:? "customerId")
+            Core.<*> (o Core..:? "preProvisioningTokens")
+      )
+
+instance Core.ToJSON GoogleWorkspaceAccount where
+  toJSON GoogleWorkspaceAccount {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("customerId" Core..=) Core.<$> customerId,
+            ("preProvisioningTokens" Core..=)
+              Core.<$> preProvisioningTokens
           ]
       )
 
@@ -1696,14 +1792,20 @@ instance Core.ToJSON OperationPerDevice where
 --
 -- /See:/ 'newPartnerClaim' smart constructor.
 data PartnerClaim = PartnerClaim
-  { -- | Required. The ID of the customer for whom the device is being claimed.
+  { -- | The ID of the customer for whom the device is being claimed.
     customerId :: (Core.Maybe Core.Int64),
     -- | Required. Required. Device identifier of the device.
     deviceIdentifier :: (Core.Maybe DeviceIdentifier),
     -- | Required. The metadata to attach to the device at claim.
     deviceMetadata :: (Core.Maybe DeviceMetadata),
+    -- | The Google Workspace customer ID.
+    googleWorkspaceCustomerId :: (Core.Maybe Core.Text),
+    -- | Optional. Must and can only be set for Chrome OS devices.
+    preProvisioningToken :: (Core.Maybe Core.Text),
     -- | Required. The section type of the device\'s provisioning record.
-    sectionType :: (Core.Maybe PartnerClaim_SectionType)
+    sectionType :: (Core.Maybe PartnerClaim_SectionType),
+    -- | Optional. Must and can only be set when DeviceProvisioningSectionType is SECTION/TYPE/SIM_LOCK. The unique identifier of the SimLock profile.
+    simlockProfileId :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1715,7 +1817,10 @@ newPartnerClaim =
     { customerId = Core.Nothing,
       deviceIdentifier = Core.Nothing,
       deviceMetadata = Core.Nothing,
-      sectionType = Core.Nothing
+      googleWorkspaceCustomerId = Core.Nothing,
+      preProvisioningToken = Core.Nothing,
+      sectionType = Core.Nothing,
+      simlockProfileId = Core.Nothing
     }
 
 instance Core.FromJSON PartnerClaim where
@@ -1729,7 +1834,12 @@ instance Core.FromJSON PartnerClaim where
                      )
             Core.<*> (o Core..:? "deviceIdentifier")
             Core.<*> (o Core..:? "deviceMetadata")
+            Core.<*> (o Core..:? "googleWorkspaceCustomerId")
+            Core.<*> (o Core..:? "preProvisioningToken")
             Core.<*> (o Core..:? "sectionType")
+            Core.<*> ( o Core..:? "simlockProfileId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON PartnerClaim where
@@ -1741,7 +1851,13 @@ instance Core.ToJSON PartnerClaim where
             ("deviceIdentifier" Core..=)
               Core.<$> deviceIdentifier,
             ("deviceMetadata" Core..=) Core.<$> deviceMetadata,
-            ("sectionType" Core..=) Core.<$> sectionType
+            ("googleWorkspaceCustomerId" Core..=)
+              Core.<$> googleWorkspaceCustomerId,
+            ("preProvisioningToken" Core..=)
+              Core.<$> preProvisioningToken,
+            ("sectionType" Core..=) Core.<$> sectionType,
+            ("simlockProfileId" Core..=) Core.. Core.AsText
+              Core.<$> simlockProfileId
           ]
       )
 

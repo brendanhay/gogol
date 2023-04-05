@@ -142,6 +142,10 @@ module Gogol.Redis.Internal.Product
     PersistenceConfig (..),
     newPersistenceConfig,
 
+    -- * ReconciliationOperationMetadata
+    ReconciliationOperationMetadata (..),
+    newReconciliationOperationMetadata,
+
     -- * RescheduleMaintenanceRequest
     RescheduleMaintenanceRequest (..),
     newRescheduleMaintenanceRequest,
@@ -175,7 +179,7 @@ where
 import qualified Gogol.Prelude as Core
 import Gogol.Redis.Internal.Sum
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -539,12 +543,16 @@ data Instance = Instance
     authEnabled :: (Core.Maybe Core.Bool),
     -- | Optional. The full name of the Google Compute Engine <https://cloud.google.com/vpc/docs/vpc network> to which the instance is connected. If left unspecified, the @default@ network will be used.
     authorizedNetwork :: (Core.Maybe Core.Text),
+    -- | Optional. The available maintenance versions that an instance could update to.
+    availableMaintenanceVersions :: (Core.Maybe [Core.Text]),
     -- | Optional. The network connect mode of the Redis instance. If not provided, the connect mode defaults to DIRECT_PEERING.
     connectMode :: (Core.Maybe Instance_ConnectMode),
     -- | Output only. The time the instance was created.
     createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The current zone where the Redis primary node is located. In basic tier, this will always be the same as [location_id]. In standard tier, this can be the zone of any node in the instance.
     currentLocationId :: (Core.Maybe Core.Text),
+    -- | Optional. The KMS key reference that the customer provides when trying to create the instance.
+    customerManagedKey :: (Core.Maybe Core.Text),
     -- | An arbitrary and optional user-provided name for the instance.
     displayName :: (Core.Maybe Core.Text),
     -- | Output only. Hostname or IP address of the exposed Redis endpoint used by clients to connect to the service.
@@ -557,6 +565,8 @@ data Instance = Instance
     maintenancePolicy :: (Core.Maybe MaintenancePolicy),
     -- | Output only. Date and time of upcoming maintenance events which have been scheduled.
     maintenanceSchedule :: (Core.Maybe MaintenanceSchedule),
+    -- | Optional. The self service update maintenance version. The version is date based such as \"20210712/00/00\".
+    maintenanceVersion :: (Core.Maybe Core.Text),
     -- | Required. Redis memory size in GiB.
     memorySizeGb :: (Core.Maybe Core.Int32),
     -- | Required. Unique name of the resource in this scope including project and location using the form: @projects\/{project_id}\/locations\/{location_id}\/instances\/{instance_id}@ Note: Redis instances are managed and addressed at regional level so location/id here refers to a GCP region; however, users may choose which specific zone (or collection of zones for cross-zone instances) an instance should be provisioned in. Refer to location/id and alternative/location/id fields for more details.
@@ -591,6 +601,8 @@ data Instance = Instance
     state :: (Core.Maybe Instance_State),
     -- | Output only. Additional information about the current status of this instance, if available.
     statusMessage :: (Core.Maybe Core.Text),
+    -- | Optional. reasons that causes instance in \"SUSPENDED\" state.
+    suspensionReasons :: (Core.Maybe [Instance_SuspensionReasonsItem]),
     -- | Required. The service tier of the instance.
     tier :: (Core.Maybe Instance_Tier),
     -- | Optional. The TLS mode of the Redis instance. If not provided, TLS is disabled for the instance.
@@ -606,15 +618,18 @@ newInstance =
     { alternativeLocationId = Core.Nothing,
       authEnabled = Core.Nothing,
       authorizedNetwork = Core.Nothing,
+      availableMaintenanceVersions = Core.Nothing,
       connectMode = Core.Nothing,
       createTime = Core.Nothing,
       currentLocationId = Core.Nothing,
+      customerManagedKey = Core.Nothing,
       displayName = Core.Nothing,
       host = Core.Nothing,
       labels = Core.Nothing,
       locationId = Core.Nothing,
       maintenancePolicy = Core.Nothing,
       maintenanceSchedule = Core.Nothing,
+      maintenanceVersion = Core.Nothing,
       memorySizeGb = Core.Nothing,
       name = Core.Nothing,
       nodes = Core.Nothing,
@@ -632,6 +647,7 @@ newInstance =
       serverCaCerts = Core.Nothing,
       state = Core.Nothing,
       statusMessage = Core.Nothing,
+      suspensionReasons = Core.Nothing,
       tier = Core.Nothing,
       transitEncryptionMode = Core.Nothing
     }
@@ -645,15 +661,18 @@ instance Core.FromJSON Instance where
             Core.<$> (o Core..:? "alternativeLocationId")
             Core.<*> (o Core..:? "authEnabled")
             Core.<*> (o Core..:? "authorizedNetwork")
+            Core.<*> (o Core..:? "availableMaintenanceVersions")
             Core.<*> (o Core..:? "connectMode")
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "currentLocationId")
+            Core.<*> (o Core..:? "customerManagedKey")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "host")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "locationId")
             Core.<*> (o Core..:? "maintenancePolicy")
             Core.<*> (o Core..:? "maintenanceSchedule")
+            Core.<*> (o Core..:? "maintenanceVersion")
             Core.<*> (o Core..:? "memorySizeGb")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "nodes")
@@ -671,6 +690,7 @@ instance Core.FromJSON Instance where
             Core.<*> (o Core..:? "serverCaCerts")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "statusMessage")
+            Core.<*> (o Core..:? "suspensionReasons")
             Core.<*> (o Core..:? "tier")
             Core.<*> (o Core..:? "transitEncryptionMode")
       )
@@ -684,10 +704,14 @@ instance Core.ToJSON Instance where
             ("authEnabled" Core..=) Core.<$> authEnabled,
             ("authorizedNetwork" Core..=)
               Core.<$> authorizedNetwork,
+            ("availableMaintenanceVersions" Core..=)
+              Core.<$> availableMaintenanceVersions,
             ("connectMode" Core..=) Core.<$> connectMode,
             ("createTime" Core..=) Core.<$> createTime,
             ("currentLocationId" Core..=)
               Core.<$> currentLocationId,
+            ("customerManagedKey" Core..=)
+              Core.<$> customerManagedKey,
             ("displayName" Core..=) Core.<$> displayName,
             ("host" Core..=) Core.<$> host,
             ("labels" Core..=) Core.<$> labels,
@@ -696,6 +720,8 @@ instance Core.ToJSON Instance where
               Core.<$> maintenancePolicy,
             ("maintenanceSchedule" Core..=)
               Core.<$> maintenanceSchedule,
+            ("maintenanceVersion" Core..=)
+              Core.<$> maintenanceVersion,
             ("memorySizeGb" Core..=) Core.<$> memorySizeGb,
             ("name" Core..=) Core.<$> name,
             ("nodes" Core..=) Core.<$> nodes,
@@ -718,6 +744,8 @@ instance Core.ToJSON Instance where
             ("serverCaCerts" Core..=) Core.<$> serverCaCerts,
             ("state" Core..=) Core.<$> state,
             ("statusMessage" Core..=) Core.<$> statusMessage,
+            ("suspensionReasons" Core..=)
+              Core.<$> suspensionReasons,
             ("tier" Core..=) Core.<$> tier,
             ("transitEncryptionMode" Core..=)
               Core.<$> transitEncryptionMode
@@ -1361,6 +1389,49 @@ instance Core.ToJSON PersistenceConfig where
               Core.<$> rdbSnapshotPeriod,
             ("rdbSnapshotStartTime" Core..=)
               Core.<$> rdbSnapshotStartTime
+          ]
+      )
+
+-- | Operation metadata returned by the CLH during resource state reconciliation.
+--
+-- /See:/ 'newReconciliationOperationMetadata' smart constructor.
+data ReconciliationOperationMetadata = ReconciliationOperationMetadata
+  { -- | DEPRECATED. Use exclusive_action instead.
+    deleteResource :: (Core.Maybe Core.Bool),
+    -- | Excluisive action returned by the CLH.
+    exclusiveAction :: (Core.Maybe ReconciliationOperationMetadata_ExclusiveAction)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ReconciliationOperationMetadata' with the minimum fields required to make a request.
+newReconciliationOperationMetadata ::
+  ReconciliationOperationMetadata
+newReconciliationOperationMetadata =
+  ReconciliationOperationMetadata
+    { deleteResource = Core.Nothing,
+      exclusiveAction = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    ReconciliationOperationMetadata
+  where
+  parseJSON =
+    Core.withObject
+      "ReconciliationOperationMetadata"
+      ( \o ->
+          ReconciliationOperationMetadata
+            Core.<$> (o Core..:? "deleteResource")
+            Core.<*> (o Core..:? "exclusiveAction")
+      )
+
+instance Core.ToJSON ReconciliationOperationMetadata where
+  toJSON ReconciliationOperationMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("deleteResource" Core..=) Core.<$> deleteResource,
+            ("exclusiveAction" Core..=)
+              Core.<$> exclusiveAction
           ]
       )
 

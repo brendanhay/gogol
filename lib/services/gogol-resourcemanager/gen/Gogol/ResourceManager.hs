@@ -39,6 +39,11 @@ module Gogol.ResourceManager
 
     -- * Resources
 
+    -- ** cloudresourcemanager.effectiveTags.list
+    CloudresourcemanagerEffectiveTagsListResource,
+    CloudresourcemanagerEffectiveTagsList (..),
+    newCloudresourcemanagerEffectiveTagsList,
+
     -- ** cloudresourcemanager.folders.create
     CloudresourcemanagerFoldersCreateResource,
     CloudresourcemanagerFoldersCreate (..),
@@ -289,6 +294,21 @@ module Gogol.ResourceManager
     CloudresourcemanagerTagValuesSetIamPolicy (..),
     newCloudresourcemanagerTagValuesSetIamPolicy,
 
+    -- ** cloudresourcemanager.tagValues.tagHolds.create
+    CloudresourcemanagerTagValuesTagHoldsCreateResource,
+    CloudresourcemanagerTagValuesTagHoldsCreate (..),
+    newCloudresourcemanagerTagValuesTagHoldsCreate,
+
+    -- ** cloudresourcemanager.tagValues.tagHolds.delete
+    CloudresourcemanagerTagValuesTagHoldsDeleteResource,
+    CloudresourcemanagerTagValuesTagHoldsDelete (..),
+    newCloudresourcemanagerTagValuesTagHoldsDelete,
+
+    -- ** cloudresourcemanager.tagValues.tagHolds.list
+    CloudresourcemanagerTagValuesTagHoldsListResource,
+    CloudresourcemanagerTagValuesTagHoldsList (..),
+    newCloudresourcemanagerTagValuesTagHoldsList,
+
     -- ** cloudresourcemanager.tagValues.testIamPermissions
     CloudresourcemanagerTagValuesTestIamPermissionsResource,
     CloudresourcemanagerTagValuesTestIamPermissions (..),
@@ -372,6 +392,10 @@ module Gogol.ResourceManager
     DeleteTagValueMetadata (..),
     newDeleteTagValueMetadata,
 
+    -- ** EffectiveTag
+    EffectiveTag (..),
+    newEffectiveTag,
+
     -- ** Empty
     Empty (..),
     newEmpty,
@@ -413,6 +437,10 @@ module Gogol.ResourceManager
     Lien (..),
     newLien,
 
+    -- ** ListEffectiveTagsResponse
+    ListEffectiveTagsResponse (..),
+    newListEffectiveTagsResponse,
+
     -- ** ListFoldersResponse
     ListFoldersResponse (..),
     newListFoldersResponse,
@@ -428,6 +456,10 @@ module Gogol.ResourceManager
     -- ** ListTagBindingsResponse
     ListTagBindingsResponse (..),
     newListTagBindingsResponse,
+
+    -- ** ListTagHoldsResponse
+    ListTagHoldsResponse (..),
+    newListTagHoldsResponse,
 
     -- ** ListTagKeysResponse
     ListTagKeysResponse (..),
@@ -519,9 +551,20 @@ module Gogol.ResourceManager
     TagBinding (..),
     newTagBinding,
 
+    -- ** TagHold
+    TagHold (..),
+    newTagHold,
+
     -- ** TagKey
     TagKey (..),
     newTagKey,
+
+    -- ** TagKey_Purpose
+    TagKey_Purpose (..),
+
+    -- ** TagKey_PurposeData
+    TagKey_PurposeData (..),
+    newTagKey_PurposeData,
 
     -- ** TagValue
     TagValue (..),
@@ -573,6 +616,7 @@ module Gogol.ResourceManager
   )
 where
 
+import Gogol.ResourceManager.Cloudresourcemanager.EffectiveTags.List
 import Gogol.ResourceManager.Cloudresourcemanager.Folders.Create
 import Gogol.ResourceManager.Cloudresourcemanager.Folders.Delete
 import Gogol.ResourceManager.Cloudresourcemanager.Folders.Get
@@ -623,5 +667,8 @@ import Gogol.ResourceManager.Cloudresourcemanager.TagValues.GetIamPolicy
 import Gogol.ResourceManager.Cloudresourcemanager.TagValues.List
 import Gogol.ResourceManager.Cloudresourcemanager.TagValues.Patch
 import Gogol.ResourceManager.Cloudresourcemanager.TagValues.SetIamPolicy
+import Gogol.ResourceManager.Cloudresourcemanager.TagValues.TagHolds.Create
+import Gogol.ResourceManager.Cloudresourcemanager.TagValues.TagHolds.Delete
+import Gogol.ResourceManager.Cloudresourcemanager.TagValues.TagHolds.List
 import Gogol.ResourceManager.Cloudresourcemanager.TagValues.TestIamPermissions
 import Gogol.ResourceManager.Types

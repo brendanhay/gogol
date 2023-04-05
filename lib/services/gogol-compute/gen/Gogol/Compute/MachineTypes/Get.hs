@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified machine type. Gets a list of available machine types by making a list() request.
+-- Returns the specified machine type.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.machineTypes.get@.
 module Gogol.Compute.MachineTypes.Get
@@ -61,7 +61,7 @@ type ComputeMachineTypesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] MachineType
 
--- | Returns the specified machine type. Gets a list of available machine types by making a list() request.
+-- | Returns the specified machine type.
 --
 -- /See:/ 'newComputeMachineTypesGet' smart constructor.
 data ComputeMachineTypesGet = ComputeMachineTypesGet

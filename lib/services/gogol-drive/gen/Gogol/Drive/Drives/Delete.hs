@@ -49,15 +49,21 @@ type DriveDrivesDeleteResource =
     Core.:> "v3"
     Core.:> "drives"
     Core.:> Core.Capture "driveId" Core.Text
+    Core.:> Core.QueryParam "allowItemDeletion" Core.Bool
+    Core.:> Core.QueryParam "useDomainAdminAccess" Core.Bool
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] ()
 
 -- | Permanently deletes a shared drive for which the user is an organizer. The shared drive cannot contain any untrashed items.
 --
 -- /See:/ 'newDriveDrivesDelete' smart constructor.
-newtype DriveDrivesDelete = DriveDrivesDelete
-  { -- | The ID of the shared drive.
-    driveId :: Core.Text
+data DriveDrivesDelete = DriveDrivesDelete
+  { -- | Whether any items inside the shared drive should also be deleted. This option is only supported when useDomainAdminAccess is also set to true.
+    allowItemDeletion :: Core.Bool,
+    -- | The ID of the shared drive.
+    driveId :: Core.Text,
+    -- | Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the shared drive belongs.
+    useDomainAdminAccess :: Core.Bool
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -66,13 +72,23 @@ newDriveDrivesDelete ::
   -- |  The ID of the shared drive. See 'driveId'.
   Core.Text ->
   DriveDrivesDelete
-newDriveDrivesDelete driveId = DriveDrivesDelete {driveId = driveId}
+newDriveDrivesDelete driveId =
+  DriveDrivesDelete
+    { allowItemDeletion = Core.False,
+      driveId = driveId,
+      useDomainAdminAccess = Core.False
+    }
 
 instance Core.GoogleRequest DriveDrivesDelete where
   type Rs DriveDrivesDelete = ()
   type Scopes DriveDrivesDelete = '[Drive'FullControl]
   requestClient DriveDrivesDelete {..} =
-    go driveId (Core.Just Core.AltJSON) driveService
+    go
+      driveId
+      (Core.Just allowItemDeletion)
+      (Core.Just useDomainAdminAccess)
+      (Core.Just Core.AltJSON)
+      driveService
     where
       go =
         Core.buildClient

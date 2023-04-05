@@ -42,9 +42,20 @@ module Gogol.PubSub.Types
     AcknowledgeRequest (..),
     newAcknowledgeRequest,
 
+    -- ** BigQueryConfig
+    BigQueryConfig (..),
+    newBigQueryConfig,
+
+    -- ** BigQueryConfig_State
+    BigQueryConfig_State (..),
+
     -- ** Binding
     Binding (..),
     newBinding,
+
+    -- ** CommitSchemaRequest
+    CommitSchemaRequest (..),
+    newCommitSchemaRequest,
 
     -- ** CreateSnapshotRequest
     CreateSnapshotRequest (..),
@@ -73,6 +84,10 @@ module Gogol.PubSub.Types
     -- ** Expr
     Expr (..),
     newExpr,
+
+    -- ** ListSchemaRevisionsResponse
+    ListSchemaRevisionsResponse (..),
+    newListSchemaRevisionsResponse,
 
     -- ** ListSchemasResponse
     ListSchemasResponse (..),
@@ -157,6 +172,10 @@ module Gogol.PubSub.Types
     -- ** RetryPolicy
     RetryPolicy (..),
     newRetryPolicy,
+
+    -- ** RollbackSchemaRequest
+    RollbackSchemaRequest (..),
+    newRollbackSchemaRequest,
 
     -- ** Schema
     Schema (..),
@@ -255,6 +274,9 @@ module Gogol.PubSub.Types
 
     -- ** ProjectsSchemasListView
     ProjectsSchemasListView (..),
+
+    -- ** ProjectsSchemasListRevisionsView
+    ProjectsSchemasListRevisionsView (..),
   )
 where
 

@@ -67,7 +67,7 @@ data CloudSearchIndexingDatasourcesItemsPush = CloudSearchIndexingDatasourcesIte
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Name of the item to push into the indexing queue. Format: datasources\/{source_id}\/items\/{ID} This is a required field. The maximum length is 1536 characters.
+    -- | The name of the item to push into the indexing queue. Format: datasources\/{source_id}\/items\/{ID} This is a required field. The maximum length is 1536 characters.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: PushItemRequest,
@@ -80,7 +80,7 @@ data CloudSearchIndexingDatasourcesItemsPush = CloudSearchIndexingDatasourcesIte
 
 -- | Creates a value of 'CloudSearchIndexingDatasourcesItemsPush' with the minimum fields required to make a request.
 newCloudSearchIndexingDatasourcesItemsPush ::
-  -- |  Name of the item to push into the indexing queue. Format: datasources\/{source_id}\/items\/{ID} This is a required field. The maximum length is 1536 characters. See 'name'.
+  -- |  The name of the item to push into the indexing queue. Format: datasources\/{source_id}\/items\/{ID} This is a required field. The maximum length is 1536 characters. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   PushItemRequest ->

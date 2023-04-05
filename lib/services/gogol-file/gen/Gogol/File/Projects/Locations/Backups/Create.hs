@@ -70,7 +70,7 @@ data FileProjectsLocationsBackupsCreate = FileProjectsLocationsBackupsCreate
     backupId :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The backup\'s project and location, in the format @projects\/{project_number}\/locations\/{location}@. In Cloud Filestore, backup locations map to GCP regions, for example __us-west1__.
+    -- | Required. The backup\'s project and location, in the format @projects\/{project_number}\/locations\/{location}@. In Filestore, backup locations map to Google Cloud regions, for example __us-west1__.
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: Backup,
@@ -83,7 +83,7 @@ data FileProjectsLocationsBackupsCreate = FileProjectsLocationsBackupsCreate
 
 -- | Creates a value of 'FileProjectsLocationsBackupsCreate' with the minimum fields required to make a request.
 newFileProjectsLocationsBackupsCreate ::
-  -- |  Required. The backup\'s project and location, in the format @projects\/{project_number}\/locations\/{location}@. In Cloud Filestore, backup locations map to GCP regions, for example __us-west1__. See 'parent'.
+  -- |  Required. The backup\'s project and location, in the format @projects\/{project_number}\/locations\/{location}@. In Filestore, backup locations map to Google Cloud regions, for example __us-west1__. See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   Backup ->

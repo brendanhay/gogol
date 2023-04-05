@@ -55,13 +55,10 @@ type StorageObjectsTestIamPermissionsResource =
     Core.:> "testPermissions"
     Core.:> Core.QueryParams "permissions" Core.Text
     Core.:> Core.QueryParam "generation" Core.Int64
-    Core.:> Core.QueryParam "provisionalUserProject" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "userProject" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              TestIamPermissionsResponse
+    Core.:> Core.Get '[Core.JSON] TestIamPermissionsResponse
 
 -- | Tests a set of permissions on the given object to see which, if any, are held by the caller.
 --
@@ -75,8 +72,6 @@ data StorageObjectsTestIamPermissions = StorageObjectsTestIamPermissions
     object :: Core.Text,
     -- | Permissions to test.
     permissions :: [Core.Text],
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
     uploadType :: (Core.Maybe Core.Text),
     -- | The project to be billed for this request. Required for Requester Pays buckets.
@@ -99,7 +94,6 @@ newStorageObjectsTestIamPermissions bucket object permissions =
       generation = Core.Nothing,
       object = object,
       permissions = permissions,
-      provisionalUserProject = Core.Nothing,
       uploadType = Core.Nothing,
       userProject = Core.Nothing
     }
@@ -125,7 +119,6 @@ instance
       object
       permissions
       generation
-      provisionalUserProject
       uploadType
       userProject
       (Core.Just Core.AltJSON)

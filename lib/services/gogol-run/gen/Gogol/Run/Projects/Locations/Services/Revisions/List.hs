@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List Revisions from a given Service, or from a given location.
+-- Lists Revisions from a given Service, or from a given location.
 --
 -- /See:/ <https://cloud.google.com/run/ Cloud Run Admin API Reference> for @run.projects.locations.services.revisions.list@.
 module Gogol.Run.Projects.Locations.Services.Revisions.List
@@ -61,7 +61,7 @@ type RunProjectsLocationsServicesRevisionsListResource =
               '[Core.JSON]
               GoogleCloudRunV2ListRevisionsResponse
 
--- | List Revisions from a given Service, or from a given location.
+-- | Lists Revisions from a given Service, or from a given location.
 --
 -- /See:/ 'newRunProjectsLocationsServicesRevisionsList' smart constructor.
 data RunProjectsLocationsServicesRevisionsList = RunProjectsLocationsServicesRevisionsList

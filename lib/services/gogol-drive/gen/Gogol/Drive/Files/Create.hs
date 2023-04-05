@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new file.
+-- Creates a file.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.create@.
 module Gogol.Drive.Files.Create
@@ -50,6 +50,7 @@ type DriveFilesCreateResource =
     Core.:> "files"
     Core.:> Core.QueryParam "enforceSingleParent" Core.Bool
     Core.:> Core.QueryParam "ignoreDefaultVisibility" Core.Bool
+    Core.:> Core.QueryParam "includeLabels" Core.Text
     Core.:> Core.QueryParam "includePermissionsForView" Core.Text
     Core.:> Core.QueryParam "keepRevisionForever" Core.Bool
     Core.:> Core.QueryParam "ocrLanguage" Core.Text
@@ -65,6 +66,7 @@ type DriveFilesCreateResource =
       Core.:> "files"
       Core.:> Core.QueryParam "enforceSingleParent" Core.Bool
       Core.:> Core.QueryParam "ignoreDefaultVisibility" Core.Bool
+      Core.:> Core.QueryParam "includeLabels" Core.Text
       Core.:> Core.QueryParam "includePermissionsForView" Core.Text
       Core.:> Core.QueryParam "keepRevisionForever" Core.Bool
       Core.:> Core.QueryParam "ocrLanguage" Core.Text
@@ -78,7 +80,7 @@ type DriveFilesCreateResource =
       Core.:> Core.MultipartRelated '[Core.JSON] File
       Core.:> Core.Post '[Core.JSON] File
 
--- | Creates a new file.
+-- | Creates a file.
 --
 -- /See:/ 'newDriveFilesCreate' smart constructor.
 data DriveFilesCreate = DriveFilesCreate
@@ -86,6 +88,8 @@ data DriveFilesCreate = DriveFilesCreate
     enforceSingleParent :: Core.Bool,
     -- | Whether to ignore the domain\'s default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
     ignoreDefaultVisibility :: Core.Bool,
+    -- | A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    includeLabels :: (Core.Maybe Core.Text),
     -- | Specifies which additional view\'s permissions to include in the response. Only \'published\' is supported.
     includePermissionsForView :: (Core.Maybe Core.Text),
     -- | Whether to set the \'keepForever\' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
@@ -112,6 +116,7 @@ newDriveFilesCreate payload =
   DriveFilesCreate
     { enforceSingleParent = Core.False,
       ignoreDefaultVisibility = Core.False,
+      includeLabels = Core.Nothing,
       includePermissionsForView = Core.Nothing,
       keepRevisionForever = Core.False,
       ocrLanguage = Core.Nothing,
@@ -130,6 +135,7 @@ instance Core.GoogleRequest DriveFilesCreate where
     go
       (Core.Just enforceSingleParent)
       (Core.Just ignoreDefaultVisibility)
+      includeLabels
       includePermissionsForView
       (Core.Just keepRevisionForever)
       ocrLanguage
@@ -158,6 +164,7 @@ instance
       go
         (Core.Just enforceSingleParent)
         (Core.Just ignoreDefaultVisibility)
+        includeLabels
         includePermissionsForView
         (Core.Just keepRevisionForever)
         ocrLanguage

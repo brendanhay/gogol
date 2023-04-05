@@ -51,12 +51,15 @@ type CalendarEventsListResource =
     Core.:> Core.Capture "calendarId" Core.Text
     Core.:> "events"
     Core.:> Core.QueryParam "alwaysIncludeEmail" Core.Bool
+    Core.:> Core.QueryParams "eventTypes" Core.Text
     Core.:> Core.QueryParam "iCalUID" Core.Text
     Core.:> Core.QueryParam "maxAttendees" Core.Int32
     Core.:> Core.QueryParam "maxResults" Core.Int32
     Core.:> Core.QueryParam "orderBy" EventsListOrderBy
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParams "privateExtendedProperty" Core.Text
+    Core.:> Core.QueryParams
+              "privateExtendedProperty"
+              Core.Text
     Core.:> Core.QueryParam "q" Core.Text
     Core.:> Core.QueryParams
               "sharedExtendedProperty"
@@ -67,7 +70,9 @@ type CalendarEventsListResource =
               Core.Bool
     Core.:> Core.QueryParam "singleEvents" Core.Bool
     Core.:> Core.QueryParam "syncToken" Core.Text
-    Core.:> Core.QueryParam "timeMax" Core.DateTime
+    Core.:> Core.QueryParam
+              "timeMax"
+              Core.DateTime
     Core.:> Core.QueryParam
               "timeMin"
               Core.DateTime
@@ -80,7 +85,9 @@ type CalendarEventsListResource =
     Core.:> Core.QueryParam
               "alt"
               Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Events
+    Core.:> Core.Get
+              '[Core.JSON]
+              Events
 
 -- | Returns events on the specified calendar.
 --
@@ -90,7 +97,9 @@ data CalendarEventsList = CalendarEventsList
     alwaysIncludeEmail :: (Core.Maybe Core.Bool),
     -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword.
     calendarId :: Core.Text,
-    -- | Specifies event ID in the iCalendar format to be included in the response. Optional.
+    -- | Event types to return. Optional. The default is [\"default\", \"outOfOffice\", \"focusTime\"]. Only the default value is available, unless you\'re enrolled in the Working Locations developer preview. Developer Preview.
+    eventTypes :: (Core.Maybe [Core.Text]),
+    -- | Specifies an event ID in the iCalendar format to be provided in the response. Optional. Use this if you want to search for an event by its iCalendar ID.
     iCalUID :: (Core.Maybe Core.Text),
     -- | The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.
     maxAttendees :: (Core.Maybe Core.Int32),
@@ -102,7 +111,7 @@ data CalendarEventsList = CalendarEventsList
     pageToken :: (Core.Maybe Core.Text),
     -- | Extended properties constraint specified as propertyName=value. Matches only private properties. This parameter might be repeated multiple times to return events that match all given constraints.
     privateExtendedProperty :: (Core.Maybe [Core.Text]),
-    -- | Free text search terms to find events that match these terms in any field, except for extended properties. Optional.
+    -- | Free text search terms to find events that match these terms in the following fields: summary, description, location, attendee\'s displayName, attendee\'s email. Optional.
     q :: (Core.Maybe Core.Text),
     -- | Extended properties constraint specified as propertyName=value. Matches only shared properties. This parameter might be repeated multiple times to return events that match all given constraints.
     sharedExtendedProperty :: (Core.Maybe [Core.Text]),
@@ -136,6 +145,7 @@ newCalendarEventsList calendarId =
   CalendarEventsList
     { alwaysIncludeEmail = Core.Nothing,
       calendarId = calendarId,
+      eventTypes = Core.Nothing,
       iCalUID = Core.Nothing,
       maxAttendees = Core.Nothing,
       maxResults = 250,
@@ -167,6 +177,7 @@ instance Core.GoogleRequest CalendarEventsList where
     go
       calendarId
       alwaysIncludeEmail
+      (eventTypes Core.^. Core._Default)
       iCalUID
       maxAttendees
       (Core.Just maxResults)

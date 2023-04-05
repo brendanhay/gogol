@@ -170,6 +170,16 @@ module Gogol.Drive
     DriveFilesList (..),
     newDriveFilesList,
 
+    -- ** drive.files.listLabels
+    DriveFilesListLabelsResource,
+    DriveFilesListLabels (..),
+    newDriveFilesListLabels,
+
+    -- ** drive.files.modifyLabels
+    DriveFilesModifyLabelsResource,
+    DriveFilesModifyLabels (..),
+    newDriveFilesModifyLabels,
+
     -- ** drive.files.update
     DriveFilesUpdateResource,
     DriveFilesUpdate (..),
@@ -389,6 +399,10 @@ module Gogol.Drive
     File_ImageMediaMetadata_Location (..),
     newFile_ImageMediaMetadata_Location,
 
+    -- ** File_LabelInfo
+    File_LabelInfo (..),
+    newFile_LabelInfo,
+
     -- ** File_LinkShareMetadata
     File_LinkShareMetadata (..),
     newFile_LinkShareMetadata,
@@ -412,6 +426,38 @@ module Gogol.Drive
     -- ** GeneratedIds
     GeneratedIds (..),
     newGeneratedIds,
+
+    -- ** Label
+    Label (..),
+    newLabel,
+
+    -- ** Label_Fields
+    Label_Fields (..),
+    newLabel_Fields,
+
+    -- ** LabelField
+    LabelField (..),
+    newLabelField,
+
+    -- ** LabelFieldModification
+    LabelFieldModification (..),
+    newLabelFieldModification,
+
+    -- ** LabelList
+    LabelList (..),
+    newLabelList,
+
+    -- ** LabelModification
+    LabelModification (..),
+    newLabelModification,
+
+    -- ** ModifyLabelsRequest
+    ModifyLabelsRequest (..),
+    newModifyLabelsRequest,
+
+    -- ** ModifyLabelsResponse
+    ModifyLabelsResponse (..),
+    newModifyLabelsResponse,
 
     -- ** Permission
     Permission (..),
@@ -507,6 +553,8 @@ import Gogol.Drive.Files.Export
 import Gogol.Drive.Files.GenerateIds
 import Gogol.Drive.Files.Get
 import Gogol.Drive.Files.List
+import Gogol.Drive.Files.ListLabels
+import Gogol.Drive.Files.ModifyLabels
 import Gogol.Drive.Files.Update
 import Gogol.Drive.Files.Watch
 import Gogol.Drive.Permissions.Create

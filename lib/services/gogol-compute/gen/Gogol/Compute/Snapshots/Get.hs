@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified Snapshot resource. Gets a list of available snapshots by making a list() request.
+-- Returns the specified Snapshot resource.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.snapshots.get@.
 module Gogol.Compute.Snapshots.Get
@@ -60,7 +60,7 @@ type ComputeSnapshotsGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Snapshot
 
--- | Returns the specified Snapshot resource. Gets a list of available snapshots by making a list() request.
+-- | Returns the specified Snapshot resource.
 --
 -- /See:/ 'newComputeSnapshotsGet' smart constructor.
 data ComputeSnapshotsGet = ComputeSnapshotsGet

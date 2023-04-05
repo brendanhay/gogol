@@ -122,7 +122,6 @@ module Gogol.YouTube.Internal.Sum
         CdnSettings_IngestionType_Dash,
         CdnSettings_IngestionType_Webrtc,
         CdnSettings_IngestionType_Hls,
-        CdnSettings_IngestionType_Srt,
         ..
       ),
 
@@ -324,6 +323,9 @@ module Gogol.YouTube.Internal.Sum
       ( ContentRating_CbfcRating_CbfcUnspecified,
         ContentRating_CbfcRating_CbfcU,
         ContentRating_CbfcRating_CbfcUA,
+        ContentRating_CbfcRating_CbfcUA7plus,
+        ContentRating_CbfcRating_CbfcUA13plus,
+        ContentRating_CbfcRating_CbfcUA16plus,
         ContentRating_CbfcRating_CbfcA,
         ContentRating_CbfcRating_CbfcS,
         ContentRating_CbfcRating_CbfcUnrated,
@@ -853,6 +855,7 @@ module Gogol.YouTube.Internal.Sum
       ( ContentRating_MibacRating_MibacUnspecified,
         ContentRating_MibacRating_MibacT,
         ContentRating_MibacRating_MibacVap,
+        ContentRating_MibacRating_MIBACVM6,
         ContentRating_MibacRating_MIBACVM12,
         ContentRating_MibacRating_MIBACVM14,
         ContentRating_MibacRating_MIBACVM16,
@@ -1143,6 +1146,13 @@ module Gogol.YouTube.Internal.Sum
     ContentRating_YtRating
       ( ContentRating_YtRating_YtUnspecified,
         ContentRating_YtRating_YtAgeRestricted,
+        ..
+      ),
+
+    -- * Cuepoint_CueType
+    Cuepoint_CueType
+      ( Cuepoint_CueType_CueTypeUnspecified,
+        Cuepoint_CueType_CueTypeAd,
         ..
       ),
 
@@ -2216,16 +2226,11 @@ pattern CdnSettings_IngestionType_Webrtc = CdnSettings_IngestionType "webrtc"
 pattern CdnSettings_IngestionType_Hls :: CdnSettings_IngestionType
 pattern CdnSettings_IngestionType_Hls = CdnSettings_IngestionType "hls"
 
--- |
-pattern CdnSettings_IngestionType_Srt :: CdnSettings_IngestionType
-pattern CdnSettings_IngestionType_Srt = CdnSettings_IngestionType "srt"
-
 {-# COMPLETE
   CdnSettings_IngestionType_Rtmp,
   CdnSettings_IngestionType_Dash,
   CdnSettings_IngestionType_Webrtc,
   CdnSettings_IngestionType_Hls,
-  CdnSettings_IngestionType_Srt,
   CdnSettings_IngestionType
   #-}
 
@@ -3091,6 +3096,18 @@ pattern ContentRating_CbfcRating_CbfcU = ContentRating_CbfcRating "cbfcU"
 pattern ContentRating_CbfcRating_CbfcUA :: ContentRating_CbfcRating
 pattern ContentRating_CbfcRating_CbfcUA = ContentRating_CbfcRating "cbfcUA"
 
+-- | U\/A 7+
+pattern ContentRating_CbfcRating_CbfcUA7plus :: ContentRating_CbfcRating
+pattern ContentRating_CbfcRating_CbfcUA7plus = ContentRating_CbfcRating "cbfcUA7plus"
+
+-- | U\/A 13+
+pattern ContentRating_CbfcRating_CbfcUA13plus :: ContentRating_CbfcRating
+pattern ContentRating_CbfcRating_CbfcUA13plus = ContentRating_CbfcRating "cbfcUA13plus"
+
+-- | U\/A 16+
+pattern ContentRating_CbfcRating_CbfcUA16plus :: ContentRating_CbfcRating
+pattern ContentRating_CbfcRating_CbfcUA16plus = ContentRating_CbfcRating "cbfcUA16plus"
+
 -- | A
 pattern ContentRating_CbfcRating_CbfcA :: ContentRating_CbfcRating
 pattern ContentRating_CbfcRating_CbfcA = ContentRating_CbfcRating "cbfcA"
@@ -3107,6 +3124,9 @@ pattern ContentRating_CbfcRating_CbfcUnrated = ContentRating_CbfcRating "cbfcUnr
   ContentRating_CbfcRating_CbfcUnspecified,
   ContentRating_CbfcRating_CbfcU,
   ContentRating_CbfcRating_CbfcUA,
+  ContentRating_CbfcRating_CbfcUA7plus,
+  ContentRating_CbfcRating_CbfcUA13plus,
+  ContentRating_CbfcRating_CbfcUA16plus,
   ContentRating_CbfcRating_CbfcA,
   ContentRating_CbfcRating_CbfcS,
   ContentRating_CbfcRating_CbfcUnrated,
@@ -5423,6 +5443,10 @@ pattern ContentRating_MibacRating_MibacVap :: ContentRating_MibacRating
 pattern ContentRating_MibacRating_MibacVap = ContentRating_MibacRating "mibacVap"
 
 -- |
+pattern ContentRating_MibacRating_MIBACVM6 :: ContentRating_MibacRating
+pattern ContentRating_MibacRating_MIBACVM6 = ContentRating_MibacRating "mibacVm6"
+
+-- |
 pattern ContentRating_MibacRating_MIBACVM12 :: ContentRating_MibacRating
 pattern ContentRating_MibacRating_MIBACVM12 = ContentRating_MibacRating "mibacVm12"
 
@@ -5446,6 +5470,7 @@ pattern ContentRating_MibacRating_MibacUnrated = ContentRating_MibacRating "miba
   ContentRating_MibacRating_MibacUnspecified,
   ContentRating_MibacRating_MibacT,
   ContentRating_MibacRating_MibacVap,
+  ContentRating_MibacRating_MIBACVM6,
   ContentRating_MibacRating_MIBACVM12,
   ContentRating_MibacRating_MIBACVM14,
   ContentRating_MibacRating_MIBACVM16,
@@ -6693,6 +6718,32 @@ pattern ContentRating_YtRating_YtAgeRestricted = ContentRating_YtRating "ytAgeRe
   ContentRating_YtRating_YtUnspecified,
   ContentRating_YtRating_YtAgeRestricted,
   ContentRating_YtRating
+  #-}
+
+newtype Cuepoint_CueType = Cuepoint_CueType {fromCuepoint_CueType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern Cuepoint_CueType_CueTypeUnspecified :: Cuepoint_CueType
+pattern Cuepoint_CueType_CueTypeUnspecified = Cuepoint_CueType "cueTypeUnspecified"
+
+-- |
+pattern Cuepoint_CueType_CueTypeAd :: Cuepoint_CueType
+pattern Cuepoint_CueType_CueTypeAd = Cuepoint_CueType "cueTypeAd"
+
+{-# COMPLETE
+  Cuepoint_CueType_CueTypeUnspecified,
+  Cuepoint_CueType_CueTypeAd,
+  Cuepoint_CueType
   #-}
 
 -- | Describes in which corner of the video the visual widget will appear.

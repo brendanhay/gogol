@@ -71,7 +71,7 @@ import Gogol.CloudProfiler.Internal.Product
 import Gogol.CloudProfiler.Internal.Sum
 import qualified Gogol.Prelude as Core
 
--- | Default request referring to version @v2@ of the Stackdriver Profiler API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version @v2@ of the Cloud Profiler API. This contains the host and root path used as a starting point for constructing service requests.
 cloudProfilerService :: Core.ServiceConfig
 cloudProfilerService =
   Core.defaultService

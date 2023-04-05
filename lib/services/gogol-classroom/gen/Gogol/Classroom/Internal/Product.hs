@@ -1192,7 +1192,7 @@ instance Core.ToJSON DriveFolder where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -1262,7 +1262,7 @@ instance Core.ToJSON Feed where
 data Form = Form
   { -- | URL of the form.
     formUrl :: (Core.Maybe Core.Text),
-    -- | URL of the form responses document. Only set if respsonses have been recorded and only when the requesting user is an editor of the form. Read-only.
+    -- | URL of the form responses document. Only set if responses have been recorded and only when the requesting user is an editor of the form. Read-only.
     responseUrl :: (Core.Maybe Core.Text),
     -- | URL of a thumbnail image of the Form. Read-only.
     thumbnailUrl :: (Core.Maybe Core.Text),
@@ -3053,7 +3053,7 @@ instance Core.ToJSON TurnInStudentSubmissionRequest where
 --
 -- /See:/ 'newUserProfile' smart constructor.
 data UserProfile = UserProfile
-  { -- | Email address of the user. Read-only.
+  { -- | Email address of the user. Must request @https:\/\/www.googleapis.com\/auth\/classroom.profile.emails@ scope for this field to be populated in a response body. Read-only.
     emailAddress :: (Core.Maybe Core.Text),
     -- | Identifier of the user. Read-only.
     id :: (Core.Maybe Core.Text),
@@ -3061,9 +3061,9 @@ data UserProfile = UserProfile
     name :: (Core.Maybe Name),
     -- | Global permissions of the user. Read-only.
     permissions :: (Core.Maybe [GlobalPermission]),
-    -- | URL of user\'s profile photo. Read-only.
+    -- | URL of user\'s profile photo. Must request @https:\/\/www.googleapis.com\/auth\/classroom.profile.photos@ scope for this field to be populated in a response body. Read-only.
     photoUrl :: (Core.Maybe Core.Text),
-    -- | Represents whether a G Suite for Education user\'s domain administrator has explicitly verified them as being a teacher. If the user is not a member of a G Suite for Education domain, than this field is always false. Read-only
+    -- | Represents whether a Google Workspace for Education user\'s domain administrator has explicitly verified them as being a teacher. This field is always false if the user is not a member of a Google Workspace for Education domain. Read-only
     verifiedTeacher :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

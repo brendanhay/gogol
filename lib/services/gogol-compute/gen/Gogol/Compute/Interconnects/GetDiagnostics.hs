@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the interconnectDiagnostics for the specified interconnect.
+-- Returns the interconnectDiagnostics for the specified Interconnect.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.interconnects.getDiagnostics@.
 module Gogol.Compute.Interconnects.GetDiagnostics
@@ -63,7 +63,7 @@ type ComputeInterconnectsGetDiagnosticsResource =
               '[Core.JSON]
               InterconnectsGetDiagnosticsResponse
 
--- | Returns the interconnectDiagnostics for the specified interconnect.
+-- | Returns the interconnectDiagnostics for the specified Interconnect.
 --
 -- /See:/ 'newComputeInterconnectsGetDiagnostics' smart constructor.
 data ComputeInterconnectsGetDiagnostics = ComputeInterconnectsGetDiagnostics

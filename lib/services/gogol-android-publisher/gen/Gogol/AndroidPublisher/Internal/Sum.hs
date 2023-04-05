@@ -33,6 +33,42 @@ module Gogol.AndroidPublisher.Internal.Sum
         ..
       ),
 
+    -- * AutoRenewingBasePlanType_ProrationMode
+    AutoRenewingBasePlanType_ProrationMode
+      ( AutoRenewingBasePlanType_ProrationMode_SUBSCRIPTIONPRORATIONMODEUNSPECIFIED,
+        AutoRenewingBasePlanType_ProrationMode_SUBSCRIPTIONPRORATIONMODECHARGEONNEXTBILLINGDATE,
+        AutoRenewingBasePlanType_ProrationMode_SUBSCRIPTIONPRORATIONMODECHARGEFULLPRICEIMMEDIATELY,
+        ..
+      ),
+
+    -- * AutoRenewingBasePlanType_ResubscribeState
+    AutoRenewingBasePlanType_ResubscribeState
+      ( AutoRenewingBasePlanType_ResubscribeState_RESUBSCRIBESTATEUNSPECIFIED,
+        AutoRenewingBasePlanType_ResubscribeState_RESUBSCRIBESTATEACTIVE,
+        AutoRenewingBasePlanType_ResubscribeState_RESUBSCRIBESTATEINACTIVE,
+        ..
+      ),
+
+    -- * BasePlan_State
+    BasePlan_State
+      ( BasePlan_State_STATEUNSPECIFIED,
+        BasePlan_State_Draft,
+        BasePlan_State_Active,
+        BasePlan_State_Inactive,
+        ..
+      ),
+
+    -- * CancelSurveyResult_Reason
+    CancelSurveyResult_Reason
+      ( CancelSurveyResult_Reason_CANCELSURVEYREASONUNSPECIFIED,
+        CancelSurveyResult_Reason_CANCELSURVEYREASONNOTENOUGHUSAGE,
+        CancelSurveyResult_Reason_CANCELSURVEYREASONTECHNICALISSUES,
+        CancelSurveyResult_Reason_CANCELSURVEYREASONCOSTRELATED,
+        CancelSurveyResult_Reason_CANCELSURVEYREASONFOUNDBETTERAPP,
+        CancelSurveyResult_Reason_CANCELSURVEYREASONOTHERS,
+        ..
+      ),
+
     -- * DeobfuscationFile_SymbolType
     DeobfuscationFile_SymbolType
       ( DeobfuscationFile_SymbolType_DeobfuscationFileTypeUnspecified,
@@ -81,6 +117,26 @@ module Gogol.AndroidPublisher.Internal.Sum
         ..
       ),
 
+    -- * PrepaidBasePlanType_TimeExtension
+    PrepaidBasePlanType_TimeExtension
+      ( PrepaidBasePlanType_TimeExtension_TIMEEXTENSIONUNSPECIFIED,
+        PrepaidBasePlanType_TimeExtension_TIMEEXTENSIONACTIVE,
+        PrepaidBasePlanType_TimeExtension_TIMEEXTENSIONINACTIVE,
+        ..
+      ),
+
+    -- * RegionalTaxRateInfo_StreamingTaxType
+    RegionalTaxRateInfo_StreamingTaxType
+      ( RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPEUNSPECIFIED,
+        RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOVIDEORENTAL,
+        RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOVIDEOSALES,
+        RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOVIDEOMULTICHANNEL,
+        RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOAUDIORENTAL,
+        RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOAUDIOSALES,
+        RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOAUDIOMULTICHANNEL,
+        ..
+      ),
+
     -- * RegionalTaxRateInfo_TaxTier
     RegionalTaxRateInfo_TaxTier
       ( RegionalTaxRateInfo_TaxTier_TAXTIERUNSPECIFIED,
@@ -89,6 +145,53 @@ module Gogol.AndroidPublisher.Internal.Sum
         RegionalTaxRateInfo_TaxTier_TAX_TIER_NEWS_2,
         RegionalTaxRateInfo_TaxTier_TAX_TIER_MUSIC_OR_AUDIO_1,
         RegionalTaxRateInfo_TaxTier_TAX_TIER_LIVE_OR_BROADCAST_1,
+        ..
+      ),
+
+    -- * SubscriptionItemPriceChangeDetails_PriceChangeMode
+    SubscriptionItemPriceChangeDetails_PriceChangeMode
+      ( SubscriptionItemPriceChangeDetails_PriceChangeMode_PRICECHANGEMODEUNSPECIFIED,
+        SubscriptionItemPriceChangeDetails_PriceChangeMode_PRICEDECREASE,
+        SubscriptionItemPriceChangeDetails_PriceChangeMode_PRICEINCREASE,
+        ..
+      ),
+
+    -- * SubscriptionItemPriceChangeDetails_PriceChangeState
+    SubscriptionItemPriceChangeDetails_PriceChangeState
+      ( SubscriptionItemPriceChangeDetails_PriceChangeState_PRICECHANGESTATEUNSPECIFIED,
+        SubscriptionItemPriceChangeDetails_PriceChangeState_Outstanding,
+        SubscriptionItemPriceChangeDetails_PriceChangeState_Confirmed,
+        SubscriptionItemPriceChangeDetails_PriceChangeState_Applied,
+        ..
+      ),
+
+    -- * SubscriptionOffer_State
+    SubscriptionOffer_State
+      ( SubscriptionOffer_State_STATEUNSPECIFIED,
+        SubscriptionOffer_State_Draft,
+        SubscriptionOffer_State_Active,
+        SubscriptionOffer_State_Inactive,
+        ..
+      ),
+
+    -- * SubscriptionPurchaseV2_AcknowledgementState
+    SubscriptionPurchaseV2_AcknowledgementState
+      ( SubscriptionPurchaseV2_AcknowledgementState_ACKNOWLEDGEMENTSTATEUNSPECIFIED,
+        SubscriptionPurchaseV2_AcknowledgementState_ACKNOWLEDGEMENTSTATEPENDING,
+        SubscriptionPurchaseV2_AcknowledgementState_ACKNOWLEDGEMENTSTATEACKNOWLEDGED,
+        ..
+      ),
+
+    -- * SubscriptionPurchaseV2_SubscriptionState
+    SubscriptionPurchaseV2_SubscriptionState
+      ( SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEUNSPECIFIED,
+        SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEPENDING,
+        SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEACTIVE,
+        SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEPAUSED,
+        SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEINGRACEPERIOD,
+        SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEONHOLD,
+        SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATECANCELED,
+        SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEEXPIRED,
         ..
       ),
 
@@ -265,6 +368,154 @@ pattern Xgafv_2 = Xgafv "2"
   Xgafv_1,
   Xgafv_2,
   Xgafv
+  #-}
+
+-- | The proration mode for the base plan determines what happens when a user switches to this plan from another base plan. If unspecified, defaults to CHARGE/ON/NEXT/BILLING/DATE.
+newtype AutoRenewingBasePlanType_ProrationMode = AutoRenewingBasePlanType_ProrationMode {fromAutoRenewingBasePlanType_ProrationMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified mode.
+pattern AutoRenewingBasePlanType_ProrationMode_SUBSCRIPTIONPRORATIONMODEUNSPECIFIED :: AutoRenewingBasePlanType_ProrationMode
+pattern AutoRenewingBasePlanType_ProrationMode_SUBSCRIPTIONPRORATIONMODEUNSPECIFIED = AutoRenewingBasePlanType_ProrationMode "SUBSCRIPTION_PRORATION_MODE_UNSPECIFIED"
+
+-- | Users will be charged for their new base plan at the end of their current billing period.
+pattern AutoRenewingBasePlanType_ProrationMode_SUBSCRIPTIONPRORATIONMODECHARGEONNEXTBILLINGDATE :: AutoRenewingBasePlanType_ProrationMode
+pattern AutoRenewingBasePlanType_ProrationMode_SUBSCRIPTIONPRORATIONMODECHARGEONNEXTBILLINGDATE = AutoRenewingBasePlanType_ProrationMode "SUBSCRIPTION_PRORATION_MODE_CHARGE_ON_NEXT_BILLING_DATE"
+
+-- | Users will be charged for their new base plan immediately and in full. Any remaining period of their existing subscription will be used to extend the duration of the new billing plan.
+pattern AutoRenewingBasePlanType_ProrationMode_SUBSCRIPTIONPRORATIONMODECHARGEFULLPRICEIMMEDIATELY :: AutoRenewingBasePlanType_ProrationMode
+pattern AutoRenewingBasePlanType_ProrationMode_SUBSCRIPTIONPRORATIONMODECHARGEFULLPRICEIMMEDIATELY = AutoRenewingBasePlanType_ProrationMode "SUBSCRIPTION_PRORATION_MODE_CHARGE_FULL_PRICE_IMMEDIATELY"
+
+{-# COMPLETE
+  AutoRenewingBasePlanType_ProrationMode_SUBSCRIPTIONPRORATIONMODEUNSPECIFIED,
+  AutoRenewingBasePlanType_ProrationMode_SUBSCRIPTIONPRORATIONMODECHARGEONNEXTBILLINGDATE,
+  AutoRenewingBasePlanType_ProrationMode_SUBSCRIPTIONPRORATIONMODECHARGEFULLPRICEIMMEDIATELY,
+  AutoRenewingBasePlanType_ProrationMode
+  #-}
+
+-- | Whether users should be able to resubscribe to this base plan in Google Play surfaces. Defaults to RESUBSCRIBE/STATE/ACTIVE if not specified.
+newtype AutoRenewingBasePlanType_ResubscribeState = AutoRenewingBasePlanType_ResubscribeState {fromAutoRenewingBasePlanType_ResubscribeState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified state.
+pattern AutoRenewingBasePlanType_ResubscribeState_RESUBSCRIBESTATEUNSPECIFIED :: AutoRenewingBasePlanType_ResubscribeState
+pattern AutoRenewingBasePlanType_ResubscribeState_RESUBSCRIBESTATEUNSPECIFIED = AutoRenewingBasePlanType_ResubscribeState "RESUBSCRIBE_STATE_UNSPECIFIED"
+
+-- | Resubscribe is active.
+pattern AutoRenewingBasePlanType_ResubscribeState_RESUBSCRIBESTATEACTIVE :: AutoRenewingBasePlanType_ResubscribeState
+pattern AutoRenewingBasePlanType_ResubscribeState_RESUBSCRIBESTATEACTIVE = AutoRenewingBasePlanType_ResubscribeState "RESUBSCRIBE_STATE_ACTIVE"
+
+-- | Resubscribe is inactive.
+pattern AutoRenewingBasePlanType_ResubscribeState_RESUBSCRIBESTATEINACTIVE :: AutoRenewingBasePlanType_ResubscribeState
+pattern AutoRenewingBasePlanType_ResubscribeState_RESUBSCRIBESTATEINACTIVE = AutoRenewingBasePlanType_ResubscribeState "RESUBSCRIBE_STATE_INACTIVE"
+
+{-# COMPLETE
+  AutoRenewingBasePlanType_ResubscribeState_RESUBSCRIBESTATEUNSPECIFIED,
+  AutoRenewingBasePlanType_ResubscribeState_RESUBSCRIBESTATEACTIVE,
+  AutoRenewingBasePlanType_ResubscribeState_RESUBSCRIBESTATEINACTIVE,
+  AutoRenewingBasePlanType_ResubscribeState
+  #-}
+
+-- | Output only. The state of the base plan, i.e. whether it\'s active. Draft and inactive base plans can be activated or deleted. Active base plans can be made inactive. Inactive base plans can be canceled. This field cannot be changed by updating the resource. Use the dedicated endpoints instead.
+newtype BasePlan_State = BasePlan_State {fromBasePlan_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified state.
+pattern BasePlan_State_STATEUNSPECIFIED :: BasePlan_State
+pattern BasePlan_State_STATEUNSPECIFIED = BasePlan_State "STATE_UNSPECIFIED"
+
+-- | The base plan is currently in a draft state, and hasn\'t been activated. It can be safely deleted at this point.
+pattern BasePlan_State_Draft :: BasePlan_State
+pattern BasePlan_State_Draft = BasePlan_State "DRAFT"
+
+-- | The base plan is active and available for new subscribers.
+pattern BasePlan_State_Active :: BasePlan_State
+pattern BasePlan_State_Active = BasePlan_State "ACTIVE"
+
+-- | The base plan is inactive and only available for existing subscribers.
+pattern BasePlan_State_Inactive :: BasePlan_State
+pattern BasePlan_State_Inactive = BasePlan_State "INACTIVE"
+
+{-# COMPLETE
+  BasePlan_State_STATEUNSPECIFIED,
+  BasePlan_State_Draft,
+  BasePlan_State_Active,
+  BasePlan_State_Inactive,
+  BasePlan_State
+  #-}
+
+-- | The reason the user selected in the cancel survey.
+newtype CancelSurveyResult_Reason = CancelSurveyResult_Reason {fromCancelSurveyResult_Reason :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified cancel survey reason.
+pattern CancelSurveyResult_Reason_CANCELSURVEYREASONUNSPECIFIED :: CancelSurveyResult_Reason
+pattern CancelSurveyResult_Reason_CANCELSURVEYREASONUNSPECIFIED = CancelSurveyResult_Reason "CANCEL_SURVEY_REASON_UNSPECIFIED"
+
+-- | Not enough usage of the subscription.
+pattern CancelSurveyResult_Reason_CANCELSURVEYREASONNOTENOUGHUSAGE :: CancelSurveyResult_Reason
+pattern CancelSurveyResult_Reason_CANCELSURVEYREASONNOTENOUGHUSAGE = CancelSurveyResult_Reason "CANCEL_SURVEY_REASON_NOT_ENOUGH_USAGE"
+
+-- | Technical issues while using the app.
+pattern CancelSurveyResult_Reason_CANCELSURVEYREASONTECHNICALISSUES :: CancelSurveyResult_Reason
+pattern CancelSurveyResult_Reason_CANCELSURVEYREASONTECHNICALISSUES = CancelSurveyResult_Reason "CANCEL_SURVEY_REASON_TECHNICAL_ISSUES"
+
+-- | Cost related issues.
+pattern CancelSurveyResult_Reason_CANCELSURVEYREASONCOSTRELATED :: CancelSurveyResult_Reason
+pattern CancelSurveyResult_Reason_CANCELSURVEYREASONCOSTRELATED = CancelSurveyResult_Reason "CANCEL_SURVEY_REASON_COST_RELATED"
+
+-- | The user found a better app.
+pattern CancelSurveyResult_Reason_CANCELSURVEYREASONFOUNDBETTERAPP :: CancelSurveyResult_Reason
+pattern CancelSurveyResult_Reason_CANCELSURVEYREASONFOUNDBETTERAPP = CancelSurveyResult_Reason "CANCEL_SURVEY_REASON_FOUND_BETTER_APP"
+
+-- | Other reasons.
+pattern CancelSurveyResult_Reason_CANCELSURVEYREASONOTHERS :: CancelSurveyResult_Reason
+pattern CancelSurveyResult_Reason_CANCELSURVEYREASONOTHERS = CancelSurveyResult_Reason "CANCEL_SURVEY_REASON_OTHERS"
+
+{-# COMPLETE
+  CancelSurveyResult_Reason_CANCELSURVEYREASONUNSPECIFIED,
+  CancelSurveyResult_Reason_CANCELSURVEYREASONNOTENOUGHUSAGE,
+  CancelSurveyResult_Reason_CANCELSURVEYREASONTECHNICALISSUES,
+  CancelSurveyResult_Reason_CANCELSURVEYREASONCOSTRELATED,
+  CancelSurveyResult_Reason_CANCELSURVEYREASONFOUNDBETTERAPP,
+  CancelSurveyResult_Reason_CANCELSURVEYREASONOTHERS,
+  CancelSurveyResult_Reason
   #-}
 
 -- | The type of the deobfuscation file.
@@ -466,6 +717,90 @@ pattern ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType_WITHDRAWAL
   ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType
   #-}
 
+-- | Whether users should be able to extend this prepaid base plan in Google Play surfaces. Defaults to TIME/EXTENSION/ACTIVE if not specified.
+newtype PrepaidBasePlanType_TimeExtension = PrepaidBasePlanType_TimeExtension {fromPrepaidBasePlanType_TimeExtension :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified state.
+pattern PrepaidBasePlanType_TimeExtension_TIMEEXTENSIONUNSPECIFIED :: PrepaidBasePlanType_TimeExtension
+pattern PrepaidBasePlanType_TimeExtension_TIMEEXTENSIONUNSPECIFIED = PrepaidBasePlanType_TimeExtension "TIME_EXTENSION_UNSPECIFIED"
+
+-- | Time extension is active. Users are allowed to top-up or extend their prepaid plan.
+pattern PrepaidBasePlanType_TimeExtension_TIMEEXTENSIONACTIVE :: PrepaidBasePlanType_TimeExtension
+pattern PrepaidBasePlanType_TimeExtension_TIMEEXTENSIONACTIVE = PrepaidBasePlanType_TimeExtension "TIME_EXTENSION_ACTIVE"
+
+-- | Time extension is inactive. Users cannot top-up or extend their prepaid plan.
+pattern PrepaidBasePlanType_TimeExtension_TIMEEXTENSIONINACTIVE :: PrepaidBasePlanType_TimeExtension
+pattern PrepaidBasePlanType_TimeExtension_TIMEEXTENSIONINACTIVE = PrepaidBasePlanType_TimeExtension "TIME_EXTENSION_INACTIVE"
+
+{-# COMPLETE
+  PrepaidBasePlanType_TimeExtension_TIMEEXTENSIONUNSPECIFIED,
+  PrepaidBasePlanType_TimeExtension_TIMEEXTENSIONACTIVE,
+  PrepaidBasePlanType_TimeExtension_TIMEEXTENSIONINACTIVE,
+  PrepaidBasePlanType_TimeExtension
+  #-}
+
+-- | To collect communications or amusement taxes in the United States, choose the appropriate tax category. <https://support.google.com/googleplay/android-developer/answer/10463498#streaming_tax Learn more>.
+newtype RegionalTaxRateInfo_StreamingTaxType = RegionalTaxRateInfo_StreamingTaxType {fromRegionalTaxRateInfo_StreamingTaxType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | No telecommunications tax collected.
+pattern RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPEUNSPECIFIED :: RegionalTaxRateInfo_StreamingTaxType
+pattern RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPEUNSPECIFIED = RegionalTaxRateInfo_StreamingTaxType "STREAMING_TAX_TYPE_UNSPECIFIED"
+
+-- | US-specific telecommunications tax tier for video streaming, on demand, rentals \/ subscriptions \/ pay-per-view.
+pattern RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOVIDEORENTAL :: RegionalTaxRateInfo_StreamingTaxType
+pattern RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOVIDEORENTAL = RegionalTaxRateInfo_StreamingTaxType "STREAMING_TAX_TYPE_TELCO_VIDEO_RENTAL"
+
+-- | US-specific telecommunications tax tier for video streaming of pre-recorded content like movies, tv shows.
+pattern RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOVIDEOSALES :: RegionalTaxRateInfo_StreamingTaxType
+pattern RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOVIDEOSALES = RegionalTaxRateInfo_StreamingTaxType "STREAMING_TAX_TYPE_TELCO_VIDEO_SALES"
+
+-- | US-specific telecommunications tax tier for video streaming of multi-channel programming.
+pattern RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOVIDEOMULTICHANNEL :: RegionalTaxRateInfo_StreamingTaxType
+pattern RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOVIDEOMULTICHANNEL = RegionalTaxRateInfo_StreamingTaxType "STREAMING_TAX_TYPE_TELCO_VIDEO_MULTI_CHANNEL"
+
+-- | US-specific telecommunications tax tier for audio streaming, rental \/ subscription.
+pattern RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOAUDIORENTAL :: RegionalTaxRateInfo_StreamingTaxType
+pattern RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOAUDIORENTAL = RegionalTaxRateInfo_StreamingTaxType "STREAMING_TAX_TYPE_TELCO_AUDIO_RENTAL"
+
+-- | US-specific telecommunications tax tier for audio streaming, sale \/ permanent download.
+pattern RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOAUDIOSALES :: RegionalTaxRateInfo_StreamingTaxType
+pattern RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOAUDIOSALES = RegionalTaxRateInfo_StreamingTaxType "STREAMING_TAX_TYPE_TELCO_AUDIO_SALES"
+
+-- | US-specific telecommunications tax tier for multi channel audio streaming like radio.
+pattern RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOAUDIOMULTICHANNEL :: RegionalTaxRateInfo_StreamingTaxType
+pattern RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOAUDIOMULTICHANNEL = RegionalTaxRateInfo_StreamingTaxType "STREAMING_TAX_TYPE_TELCO_AUDIO_MULTI_CHANNEL"
+
+{-# COMPLETE
+  RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPEUNSPECIFIED,
+  RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOVIDEORENTAL,
+  RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOVIDEOSALES,
+  RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOVIDEOMULTICHANNEL,
+  RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOAUDIORENTAL,
+  RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOAUDIOSALES,
+  RegionalTaxRateInfo_StreamingTaxType_STREAMINGTAXTYPETELCOAUDIOMULTICHANNEL,
+  RegionalTaxRateInfo_StreamingTaxType
+  #-}
+
 -- | Tax tier to specify reduced tax rate. Developers who sell digital news, magazines, newspapers, books, or audiobooks in various regions may be eligible for reduced tax rates. <https://support.google.com/googleplay/android-developer/answer/10463498 Learn more>.
 newtype RegionalTaxRateInfo_TaxTier = RegionalTaxRateInfo_TaxTier {fromRegionalTaxRateInfo_TaxTier :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -511,6 +846,201 @@ pattern RegionalTaxRateInfo_TaxTier_TAX_TIER_LIVE_OR_BROADCAST_1 = RegionalTaxRa
   RegionalTaxRateInfo_TaxTier_TAX_TIER_MUSIC_OR_AUDIO_1,
   RegionalTaxRateInfo_TaxTier_TAX_TIER_LIVE_OR_BROADCAST_1,
   RegionalTaxRateInfo_TaxTier
+  #-}
+
+-- | Price change mode specifies how the subscription item price is changing.
+newtype SubscriptionItemPriceChangeDetails_PriceChangeMode = SubscriptionItemPriceChangeDetails_PriceChangeMode {fromSubscriptionItemPriceChangeDetails_PriceChangeMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Price change mode unspecified. This value should never be set.
+pattern SubscriptionItemPriceChangeDetails_PriceChangeMode_PRICECHANGEMODEUNSPECIFIED :: SubscriptionItemPriceChangeDetails_PriceChangeMode
+pattern SubscriptionItemPriceChangeDetails_PriceChangeMode_PRICECHANGEMODEUNSPECIFIED = SubscriptionItemPriceChangeDetails_PriceChangeMode "PRICE_CHANGE_MODE_UNSPECIFIED"
+
+-- | If the subscription price is decreasing.
+pattern SubscriptionItemPriceChangeDetails_PriceChangeMode_PRICEDECREASE :: SubscriptionItemPriceChangeDetails_PriceChangeMode
+pattern SubscriptionItemPriceChangeDetails_PriceChangeMode_PRICEDECREASE = SubscriptionItemPriceChangeDetails_PriceChangeMode "PRICE_DECREASE"
+
+-- | If the subscription price is increasing and the user needs to accept it.
+pattern SubscriptionItemPriceChangeDetails_PriceChangeMode_PRICEINCREASE :: SubscriptionItemPriceChangeDetails_PriceChangeMode
+pattern SubscriptionItemPriceChangeDetails_PriceChangeMode_PRICEINCREASE = SubscriptionItemPriceChangeDetails_PriceChangeMode "PRICE_INCREASE"
+
+{-# COMPLETE
+  SubscriptionItemPriceChangeDetails_PriceChangeMode_PRICECHANGEMODEUNSPECIFIED,
+  SubscriptionItemPriceChangeDetails_PriceChangeMode_PRICEDECREASE,
+  SubscriptionItemPriceChangeDetails_PriceChangeMode_PRICEINCREASE,
+  SubscriptionItemPriceChangeDetails_PriceChangeMode
+  #-}
+
+-- | State the price change is currently in.
+newtype SubscriptionItemPriceChangeDetails_PriceChangeState = SubscriptionItemPriceChangeDetails_PriceChangeState {fromSubscriptionItemPriceChangeDetails_PriceChangeState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Price change state unspecified. This value should not be used.
+pattern SubscriptionItemPriceChangeDetails_PriceChangeState_PRICECHANGESTATEUNSPECIFIED :: SubscriptionItemPriceChangeDetails_PriceChangeState
+pattern SubscriptionItemPriceChangeDetails_PriceChangeState_PRICECHANGESTATEUNSPECIFIED = SubscriptionItemPriceChangeDetails_PriceChangeState "PRICE_CHANGE_STATE_UNSPECIFIED"
+
+-- | Waiting for the user to agree for the price change.
+pattern SubscriptionItemPriceChangeDetails_PriceChangeState_Outstanding :: SubscriptionItemPriceChangeDetails_PriceChangeState
+pattern SubscriptionItemPriceChangeDetails_PriceChangeState_Outstanding = SubscriptionItemPriceChangeDetails_PriceChangeState "OUTSTANDING"
+
+-- | The price change is confirmed to happen for the user.
+pattern SubscriptionItemPriceChangeDetails_PriceChangeState_Confirmed :: SubscriptionItemPriceChangeDetails_PriceChangeState
+pattern SubscriptionItemPriceChangeDetails_PriceChangeState_Confirmed = SubscriptionItemPriceChangeDetails_PriceChangeState "CONFIRMED"
+
+-- | The price change is applied, i.e. the user has started being charged the new price.
+pattern SubscriptionItemPriceChangeDetails_PriceChangeState_Applied :: SubscriptionItemPriceChangeDetails_PriceChangeState
+pattern SubscriptionItemPriceChangeDetails_PriceChangeState_Applied = SubscriptionItemPriceChangeDetails_PriceChangeState "APPLIED"
+
+{-# COMPLETE
+  SubscriptionItemPriceChangeDetails_PriceChangeState_PRICECHANGESTATEUNSPECIFIED,
+  SubscriptionItemPriceChangeDetails_PriceChangeState_Outstanding,
+  SubscriptionItemPriceChangeDetails_PriceChangeState_Confirmed,
+  SubscriptionItemPriceChangeDetails_PriceChangeState_Applied,
+  SubscriptionItemPriceChangeDetails_PriceChangeState
+  #-}
+
+-- | Output only. The current state of this offer. Can be changed using Activate and Deactivate actions. NB: the base plan state supersedes this state, so an active offer may not be available if the base plan is not active.
+newtype SubscriptionOffer_State = SubscriptionOffer_State {fromSubscriptionOffer_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value, should never be used.
+pattern SubscriptionOffer_State_STATEUNSPECIFIED :: SubscriptionOffer_State
+pattern SubscriptionOffer_State_STATEUNSPECIFIED = SubscriptionOffer_State "STATE_UNSPECIFIED"
+
+-- | The subscription offer is not and has never been available to users.
+pattern SubscriptionOffer_State_Draft :: SubscriptionOffer_State
+pattern SubscriptionOffer_State_Draft = SubscriptionOffer_State "DRAFT"
+
+-- | The subscription offer is available to new and existing users.
+pattern SubscriptionOffer_State_Active :: SubscriptionOffer_State
+pattern SubscriptionOffer_State_Active = SubscriptionOffer_State "ACTIVE"
+
+-- | The subscription offer is not available to new users. Existing users retain access.
+pattern SubscriptionOffer_State_Inactive :: SubscriptionOffer_State
+pattern SubscriptionOffer_State_Inactive = SubscriptionOffer_State "INACTIVE"
+
+{-# COMPLETE
+  SubscriptionOffer_State_STATEUNSPECIFIED,
+  SubscriptionOffer_State_Draft,
+  SubscriptionOffer_State_Active,
+  SubscriptionOffer_State_Inactive,
+  SubscriptionOffer_State
+  #-}
+
+-- | The acknowledgement state of the subscription.
+newtype SubscriptionPurchaseV2_AcknowledgementState = SubscriptionPurchaseV2_AcknowledgementState {fromSubscriptionPurchaseV2_AcknowledgementState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified acknowledgement state.
+pattern SubscriptionPurchaseV2_AcknowledgementState_ACKNOWLEDGEMENTSTATEUNSPECIFIED :: SubscriptionPurchaseV2_AcknowledgementState
+pattern SubscriptionPurchaseV2_AcknowledgementState_ACKNOWLEDGEMENTSTATEUNSPECIFIED = SubscriptionPurchaseV2_AcknowledgementState "ACKNOWLEDGEMENT_STATE_UNSPECIFIED"
+
+-- | The subscription is not acknowledged yet.
+pattern SubscriptionPurchaseV2_AcknowledgementState_ACKNOWLEDGEMENTSTATEPENDING :: SubscriptionPurchaseV2_AcknowledgementState
+pattern SubscriptionPurchaseV2_AcknowledgementState_ACKNOWLEDGEMENTSTATEPENDING = SubscriptionPurchaseV2_AcknowledgementState "ACKNOWLEDGEMENT_STATE_PENDING"
+
+-- | The subscription is acknowledged.
+pattern SubscriptionPurchaseV2_AcknowledgementState_ACKNOWLEDGEMENTSTATEACKNOWLEDGED :: SubscriptionPurchaseV2_AcknowledgementState
+pattern SubscriptionPurchaseV2_AcknowledgementState_ACKNOWLEDGEMENTSTATEACKNOWLEDGED = SubscriptionPurchaseV2_AcknowledgementState "ACKNOWLEDGEMENT_STATE_ACKNOWLEDGED"
+
+{-# COMPLETE
+  SubscriptionPurchaseV2_AcknowledgementState_ACKNOWLEDGEMENTSTATEUNSPECIFIED,
+  SubscriptionPurchaseV2_AcknowledgementState_ACKNOWLEDGEMENTSTATEPENDING,
+  SubscriptionPurchaseV2_AcknowledgementState_ACKNOWLEDGEMENTSTATEACKNOWLEDGED,
+  SubscriptionPurchaseV2_AcknowledgementState
+  #-}
+
+-- | The current state of the subscription.
+newtype SubscriptionPurchaseV2_SubscriptionState = SubscriptionPurchaseV2_SubscriptionState {fromSubscriptionPurchaseV2_SubscriptionState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified subscription state.
+pattern SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEUNSPECIFIED :: SubscriptionPurchaseV2_SubscriptionState
+pattern SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEUNSPECIFIED = SubscriptionPurchaseV2_SubscriptionState "SUBSCRIPTION_STATE_UNSPECIFIED"
+
+-- | Subscription was created but awaiting payment during signup. In this state, all items are awaiting payment.
+pattern SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEPENDING :: SubscriptionPurchaseV2_SubscriptionState
+pattern SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEPENDING = SubscriptionPurchaseV2_SubscriptionState "SUBSCRIPTION_STATE_PENDING"
+
+-- | Subscription is active. - (1) If the subscription is an auto renewing plan, at least one item is auto/renew/enabled and not expired. - (2) If the subscription is a prepaid plan, at least one item is not expired.
+pattern SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEACTIVE :: SubscriptionPurchaseV2_SubscriptionState
+pattern SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEACTIVE = SubscriptionPurchaseV2_SubscriptionState "SUBSCRIPTION_STATE_ACTIVE"
+
+-- | Subscription is paused. The state is only available when the subscription is an auto renewing plan. In this state, all items are in paused state.
+pattern SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEPAUSED :: SubscriptionPurchaseV2_SubscriptionState
+pattern SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEPAUSED = SubscriptionPurchaseV2_SubscriptionState "SUBSCRIPTION_STATE_PAUSED"
+
+-- | Subscription is in grace period. The state is only available when the subscription is an auto renewing plan. In this state, all items are in grace period.
+pattern SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEINGRACEPERIOD :: SubscriptionPurchaseV2_SubscriptionState
+pattern SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEINGRACEPERIOD = SubscriptionPurchaseV2_SubscriptionState "SUBSCRIPTION_STATE_IN_GRACE_PERIOD"
+
+-- | Subscription is on hold (suspended). The state is only available when the subscription is an auto renewing plan. In this state, all items are on hold.
+pattern SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEONHOLD :: SubscriptionPurchaseV2_SubscriptionState
+pattern SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEONHOLD = SubscriptionPurchaseV2_SubscriptionState "SUBSCRIPTION_STATE_ON_HOLD"
+
+-- | Subscription is canceled but not expired yet. The state is only available when the subscription is an auto renewing plan. All items have auto/renew/enabled set to false.
+pattern SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATECANCELED :: SubscriptionPurchaseV2_SubscriptionState
+pattern SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATECANCELED = SubscriptionPurchaseV2_SubscriptionState "SUBSCRIPTION_STATE_CANCELED"
+
+-- | Subscription is expired. All items have expiry_time in the past.
+pattern SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEEXPIRED :: SubscriptionPurchaseV2_SubscriptionState
+pattern SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEEXPIRED = SubscriptionPurchaseV2_SubscriptionState "SUBSCRIPTION_STATE_EXPIRED"
+
+{-# COMPLETE
+  SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEUNSPECIFIED,
+  SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEPENDING,
+  SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEACTIVE,
+  SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEPAUSED,
+  SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEINGRACEPERIOD,
+  SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEONHOLD,
+  SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATECANCELED,
+  SubscriptionPurchaseV2_SubscriptionState_SUBSCRIPTIONSTATEEXPIRED,
+  SubscriptionPurchaseV2_SubscriptionState
   #-}
 
 -- | Digital content or service classification for products distributed to users in the European Economic Area (EEA). The withdrawal regime under EEA consumer laws depends on this classification. Refer to the <https://support.google.com/googleplay/android-developer/answer/10463498 Help Center article> for more information.

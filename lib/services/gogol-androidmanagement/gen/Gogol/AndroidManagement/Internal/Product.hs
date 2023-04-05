@@ -26,7 +26,15 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AndroidManagement.Internal.Product
-  ( -- * AdvancedSecurityOverrides
+  ( -- * AdbShellCommandEvent
+    AdbShellCommandEvent (..),
+    newAdbShellCommandEvent,
+
+    -- * AdbShellInteractiveEvent
+    AdbShellInteractiveEvent (..),
+    newAdbShellInteractiveEvent,
+
+    -- * AdvancedSecurityOverrides
     AdvancedSecurityOverrides (..),
     newAdvancedSecurityOverrides,
 
@@ -37,6 +45,14 @@ module Gogol.AndroidManagement.Internal.Product
     -- * ApiLevelCondition
     ApiLevelCondition (..),
     newApiLevelCondition,
+
+    -- * AppProcessInfo
+    AppProcessInfo (..),
+    newAppProcessInfo,
+
+    -- * AppProcessStartEvent
+    AppProcessStartEvent (..),
+    newAppProcessStartEvent,
 
     -- * AppTrackInfo
     AppTrackInfo (..),
@@ -74,13 +90,41 @@ module Gogol.AndroidManagement.Internal.Product
     ApplicationReportingSettings (..),
     newApplicationReportingSettings,
 
+    -- * BatchUsageLogEvents
+    BatchUsageLogEvents (..),
+    newBatchUsageLogEvents,
+
     -- * BlockAction
     BlockAction (..),
     newBlockAction,
 
+    -- * CertAuthorityInstalledEvent
+    CertAuthorityInstalledEvent (..),
+    newCertAuthorityInstalledEvent,
+
+    -- * CertAuthorityRemovedEvent
+    CertAuthorityRemovedEvent (..),
+    newCertAuthorityRemovedEvent,
+
+    -- * CertValidationFailureEvent
+    CertValidationFailureEvent (..),
+    newCertValidationFailureEvent,
+
     -- * ChoosePrivateKeyRule
     ChoosePrivateKeyRule (..),
     newChoosePrivateKeyRule,
+
+    -- * ClearAppsDataParams
+    ClearAppsDataParams (..),
+    newClearAppsDataParams,
+
+    -- * ClearAppsDataStatus
+    ClearAppsDataStatus (..),
+    newClearAppsDataStatus,
+
+    -- * ClearAppsDataStatus_Results
+    ClearAppsDataStatus_Results (..),
+    newClearAppsDataStatus_Results,
 
     -- * Command
     Command (..),
@@ -94,6 +138,10 @@ module Gogol.AndroidManagement.Internal.Product
     ComplianceRule (..),
     newComplianceRule,
 
+    -- * ConnectEvent
+    ConnectEvent (..),
+    newConnectEvent,
+
     -- * ContactInfo
     ContactInfo (..),
     newContactInfo,
@@ -105,6 +153,10 @@ module Gogol.AndroidManagement.Internal.Product
     -- * CrossProfilePolicies
     CrossProfilePolicies (..),
     newCrossProfilePolicies,
+
+    -- * CryptoSelfTestCompletedEvent
+    CryptoSelfTestCompletedEvent (..),
+    newCryptoSelfTestCompletedEvent,
 
     -- * Date
     Date (..),
@@ -126,6 +178,10 @@ module Gogol.AndroidManagement.Internal.Product
     Display (..),
     newDisplay,
 
+    -- * DnsEvent
+    DnsEvent (..),
+    newDnsEvent,
+
     -- * Empty
     Empty (..),
     newEmpty,
@@ -146,6 +202,14 @@ module Gogol.AndroidManagement.Internal.Product
     ExternalData (..),
     newExternalData,
 
+    -- * FilePulledEvent
+    FilePulledEvent (..),
+    newFilePulledEvent,
+
+    -- * FilePushedEvent
+    FilePushedEvent (..),
+    newFilePushedEvent,
+
     -- * FreezePeriod
     FreezePeriod (..),
     newFreezePeriod,
@@ -162,9 +226,37 @@ module Gogol.AndroidManagement.Internal.Product
     IssueCommandResponse (..),
     newIssueCommandResponse,
 
+    -- * KeyDestructionEvent
+    KeyDestructionEvent (..),
+    newKeyDestructionEvent,
+
+    -- * KeyGeneratedEvent
+    KeyGeneratedEvent (..),
+    newKeyGeneratedEvent,
+
+    -- * KeyImportEvent
+    KeyImportEvent (..),
+    newKeyImportEvent,
+
+    -- * KeyIntegrityViolationEvent
+    KeyIntegrityViolationEvent (..),
+    newKeyIntegrityViolationEvent,
+
     -- * KeyedAppState
     KeyedAppState (..),
     newKeyedAppState,
+
+    -- * KeyguardDismissAuthAttemptEvent
+    KeyguardDismissAuthAttemptEvent (..),
+    newKeyguardDismissAuthAttemptEvent,
+
+    -- * KeyguardDismissedEvent
+    KeyguardDismissedEvent (..),
+    newKeyguardDismissedEvent,
+
+    -- * KeyguardSecuredEvent
+    KeyguardSecuredEvent (..),
+    newKeyguardSecuredEvent,
 
     -- * KioskCustomization
     KioskCustomization (..),
@@ -177,6 +269,10 @@ module Gogol.AndroidManagement.Internal.Product
     -- * ListDevicesResponse
     ListDevicesResponse (..),
     newListDevicesResponse,
+
+    -- * ListEnrollmentTokensResponse
+    ListEnrollmentTokensResponse (..),
+    newListEnrollmentTokensResponse,
 
     -- * ListEnterprisesResponse
     ListEnterprisesResponse (..),
@@ -194,6 +290,18 @@ module Gogol.AndroidManagement.Internal.Product
     ListWebAppsResponse (..),
     newListWebAppsResponse,
 
+    -- * LogBufferSizeCriticalEvent
+    LogBufferSizeCriticalEvent (..),
+    newLogBufferSizeCriticalEvent,
+
+    -- * LoggingStartedEvent
+    LoggingStartedEvent (..),
+    newLoggingStartedEvent,
+
+    -- * LoggingStoppedEvent
+    LoggingStoppedEvent (..),
+    newLoggingStoppedEvent,
+
     -- * ManagedConfigurationTemplate
     ManagedConfigurationTemplate (..),
     newManagedConfigurationTemplate,
@@ -209,6 +317,14 @@ module Gogol.AndroidManagement.Internal.Product
     -- * ManagedPropertyEntry
     ManagedPropertyEntry (..),
     newManagedPropertyEntry,
+
+    -- * MediaMountEvent
+    MediaMountEvent (..),
+    newMediaMountEvent,
+
+    -- * MediaUnmountEvent
+    MediaUnmountEvent (..),
+    newMediaUnmountEvent,
 
     -- * MemoryEvent
     MemoryEvent (..),
@@ -234,6 +350,10 @@ module Gogol.AndroidManagement.Internal.Product
     OncCertificateProvider (..),
     newOncCertificateProvider,
 
+    -- * OncWifiContext
+    OncWifiContext (..),
+    newOncWifiContext,
+
     -- * Operation
     Operation (..),
     newOperation,
@@ -246,13 +366,29 @@ module Gogol.AndroidManagement.Internal.Product
     Operation_Response (..),
     newOperation_Response,
 
+    -- * OsShutdownEvent
+    OsShutdownEvent (..),
+    newOsShutdownEvent,
+
+    -- * OsStartupEvent
+    OsStartupEvent (..),
+    newOsStartupEvent,
+
     -- * PackageNameList
     PackageNameList (..),
     newPackageNameList,
 
+    -- * PasswordPoliciesContext
+    PasswordPoliciesContext (..),
+    newPasswordPoliciesContext,
+
     -- * PasswordRequirements
     PasswordRequirements (..),
     newPasswordRequirements,
+
+    -- * PerAppResult
+    PerAppResult (..),
+    newPerAppResult,
 
     -- * PermissionGrant
     PermissionGrant (..),
@@ -294,6 +430,10 @@ module Gogol.AndroidManagement.Internal.Product
     ProxyInfo (..),
     newProxyInfo,
 
+    -- * RemoteLockEvent
+    RemoteLockEvent (..),
+    newRemoteLockEvent,
+
     -- * SecurityPosture
     SecurityPosture (..),
     newSecurityPosture,
@@ -313,6 +453,10 @@ module Gogol.AndroidManagement.Internal.Product
     -- * SoftwareInfo
     SoftwareInfo (..),
     newSoftwareInfo,
+
+    -- * SpecificNonComplianceContext
+    SpecificNonComplianceContext (..),
+    newSpecificNonComplianceContext,
 
     -- * Status
     Status (..),
@@ -342,6 +486,14 @@ module Gogol.AndroidManagement.Internal.Product
     TermsAndConditions (..),
     newTermsAndConditions,
 
+    -- * UsageLog
+    UsageLog (..),
+    newUsageLog,
+
+    -- * UsageLogEvent
+    UsageLogEvent (..),
+    newUsageLogEvent,
+
     -- * User
     User (..),
     newUser,
@@ -369,11 +521,65 @@ module Gogol.AndroidManagement.Internal.Product
     -- * WipeAction
     WipeAction (..),
     newWipeAction,
+
+    -- * WipeFailureEvent
+    WipeFailureEvent (..),
+    newWipeFailureEvent,
   )
 where
 
 import Gogol.AndroidManagement.Internal.Sum
 import qualified Gogol.Prelude as Core
+
+-- | A shell command was issued over ADB via “adb shell command”.
+--
+-- /See:/ 'newAdbShellCommandEvent' smart constructor.
+newtype AdbShellCommandEvent = AdbShellCommandEvent
+  { -- | Shell command that was issued over ADB via \"adb shell command\". Redacted to empty string on organization-owned managed profile devices.
+    shellCmd :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AdbShellCommandEvent' with the minimum fields required to make a request.
+newAdbShellCommandEvent ::
+  AdbShellCommandEvent
+newAdbShellCommandEvent = AdbShellCommandEvent {shellCmd = Core.Nothing}
+
+instance Core.FromJSON AdbShellCommandEvent where
+  parseJSON =
+    Core.withObject
+      "AdbShellCommandEvent"
+      ( \o ->
+          AdbShellCommandEvent
+            Core.<$> (o Core..:? "shellCmd")
+      )
+
+instance Core.ToJSON AdbShellCommandEvent where
+  toJSON AdbShellCommandEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [("shellCmd" Core..=) Core.<$> shellCmd]
+      )
+
+-- | An ADB interactive shell was opened via “adb shell”. Intentionally empty.
+--
+-- /See:/ 'newAdbShellInteractiveEvent' smart constructor.
+data AdbShellInteractiveEvent = AdbShellInteractiveEvent
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AdbShellInteractiveEvent' with the minimum fields required to make a request.
+newAdbShellInteractiveEvent ::
+  AdbShellInteractiveEvent
+newAdbShellInteractiveEvent = AdbShellInteractiveEvent
+
+instance Core.FromJSON AdbShellInteractiveEvent where
+  parseJSON =
+    Core.withObject
+      "AdbShellInteractiveEvent"
+      (\o -> Core.pure AdbShellInteractiveEvent)
+
+instance Core.ToJSON AdbShellInteractiveEvent where
+  toJSON = Core.const Core.emptyObject
 
 -- | Security policies set to secure values by default. To maintain the security posture of a device, we don\'t recommend overriding any of the default values.
 --
@@ -506,6 +712,100 @@ instance Core.ToJSON ApiLevelCondition where
           [("minApiLevel" Core..=) Core.<$> minApiLevel]
       )
 
+-- | Information about a process. It contains process name, start time, app Uid, app Pid, seinfo tag, hash of the base APK.
+--
+-- /See:/ 'newAppProcessInfo' smart constructor.
+data AppProcessInfo = AppProcessInfo
+  { -- | SHA-256 hash of the base APK, in hexadecimal format.
+    apkSha256Hash :: (Core.Maybe Core.Text),
+    -- | Package names of all packages that are associated with the particular user ID. In most cases, this will be a single package name, the package that has been assigned that user ID. If multiple application share a UID then all packages sharing UID will be included.
+    packageNames :: (Core.Maybe [Core.Text]),
+    -- | Process ID.
+    pid :: (Core.Maybe Core.Int32),
+    -- | Process name.
+    processName :: (Core.Maybe Core.Text),
+    -- | SELinux policy info.
+    seinfo :: (Core.Maybe Core.Text),
+    -- | Process start time.
+    startTime :: (Core.Maybe Core.DateTime),
+    -- | UID of the package.
+    uid :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AppProcessInfo' with the minimum fields required to make a request.
+newAppProcessInfo ::
+  AppProcessInfo
+newAppProcessInfo =
+  AppProcessInfo
+    { apkSha256Hash = Core.Nothing,
+      packageNames = Core.Nothing,
+      pid = Core.Nothing,
+      processName = Core.Nothing,
+      seinfo = Core.Nothing,
+      startTime = Core.Nothing,
+      uid = Core.Nothing
+    }
+
+instance Core.FromJSON AppProcessInfo where
+  parseJSON =
+    Core.withObject
+      "AppProcessInfo"
+      ( \o ->
+          AppProcessInfo
+            Core.<$> (o Core..:? "apkSha256Hash")
+            Core.<*> (o Core..:? "packageNames")
+            Core.<*> (o Core..:? "pid")
+            Core.<*> (o Core..:? "processName")
+            Core.<*> (o Core..:? "seinfo")
+            Core.<*> (o Core..:? "startTime")
+            Core.<*> (o Core..:? "uid")
+      )
+
+instance Core.ToJSON AppProcessInfo where
+  toJSON AppProcessInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("apkSha256Hash" Core..=) Core.<$> apkSha256Hash,
+            ("packageNames" Core..=) Core.<$> packageNames,
+            ("pid" Core..=) Core.<$> pid,
+            ("processName" Core..=) Core.<$> processName,
+            ("seinfo" Core..=) Core.<$> seinfo,
+            ("startTime" Core..=) Core.<$> startTime,
+            ("uid" Core..=) Core.<$> uid
+          ]
+      )
+
+-- | An app process was started. This is available device-wide on fully managed devices and within the work profile on organization-owned devices with a work profile.
+--
+-- /See:/ 'newAppProcessStartEvent' smart constructor.
+newtype AppProcessStartEvent = AppProcessStartEvent
+  { -- | Information about a process.
+    processInfo :: (Core.Maybe AppProcessInfo)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AppProcessStartEvent' with the minimum fields required to make a request.
+newAppProcessStartEvent ::
+  AppProcessStartEvent
+newAppProcessStartEvent = AppProcessStartEvent {processInfo = Core.Nothing}
+
+instance Core.FromJSON AppProcessStartEvent where
+  parseJSON =
+    Core.withObject
+      "AppProcessStartEvent"
+      ( \o ->
+          AppProcessStartEvent
+            Core.<$> (o Core..:? "processInfo")
+      )
+
+instance Core.ToJSON AppProcessStartEvent where
+  toJSON AppProcessStartEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [("processInfo" Core..=) Core.<$> processInfo]
+      )
+
 -- | Id to name association of a app track.
 --
 -- /See:/ 'newAppTrackInfo' smart constructor.
@@ -546,9 +846,9 @@ instance Core.ToJSON AppTrackInfo where
 --
 -- /See:/ 'newAppVersion' smart constructor.
 data AppVersion = AppVersion
-  { -- | True if this version is a production track.
+  { -- | If the value is True, it indicates that this version is a production track.
     production :: (Core.Maybe Core.Bool),
-    -- | Track ids that the app version is published in. This doesn\'t include the production track (see production instead).
+    -- | Track identifiers that the app version is published in. This does not include the production track (see production instead).
     trackIds :: (Core.Maybe [Core.Text]),
     -- | Unique increasing identifier for the app version.
     versionCode :: (Core.Maybe Core.Int32),
@@ -617,7 +917,7 @@ data Application = Application
     features :: (Core.Maybe [Application_FeaturesItem]),
     -- | Full app description, if available.
     fullDescription :: (Core.Maybe Core.Text),
-    -- | A link to an image that can be used as an icon for the app. This image is suitable for use at up to 512px x 512px
+    -- | A link to an image that can be used as an icon for the app. This image is suitable for use up to a pixel size of 512 x 512.
     iconUrl :: (Core.Maybe Core.Text),
     -- | The set of managed properties available to be pre-configured for the app.
     managedProperties :: (Core.Maybe [ManagedProperty]),
@@ -633,7 +933,7 @@ data Application = Application
     recentChanges :: (Core.Maybe Core.Text),
     -- | A list of screenshot links representing the app.
     screenshotUrls :: (Core.Maybe [Core.Text]),
-    -- | A link to a smaller image that can be used as an icon for the app. This image is suitable for use at up to 128px x 128px.
+    -- | A link to a smaller image that can be used as an icon for the app. This image is suitable for use up to a pixel size of 128 x 128.
     smallIconUrl :: (Core.Maybe Core.Text),
     -- | The title of the app. Localized.
     title :: (Core.Maybe Core.Text),
@@ -820,6 +1120,8 @@ instance Core.ToJSON ApplicationPermission where
 data ApplicationPolicy = ApplicationPolicy
   { -- | List of the app’s track IDs that a device belonging to the enterprise can access. If the list contains multiple track IDs, devices receive the latest version among all accessible tracks. If the list contains no track IDs, devices only have access to the app’s production track. More details about each track are available in AppTrackInfo.
     accessibleTrackIds :: (Core.Maybe [Core.Text]),
+    -- | Specifies whether the app is allowed networking when the VPN is not connected and alwaysOnVpnPackage.lockdownEnabled is enabled. If set to VPN/LOCKDOWN/ENFORCED, the app is not allowed networking, and if set to VPN/LOCKDOWN/EXEMPTION, the app is allowed networking. Only supported on devices running Android 10 and above. If this is not supported by the device, the device will contain a NonComplianceDetail with non/compliance/reason set to API/LEVEL and a fieldPath. If this is not applicable to the app, the device will contain a NonComplianceDetail with non/compliance_reason set to UNSUPPORTED and a fieldPath. The fieldPath is set to applications[i].alwaysOnVpnLockdownExemption, where i is the index of the package in the applications policy.
+    alwaysOnVpnLockdownExemption :: (Core.Maybe ApplicationPolicy_AlwaysOnVpnLockdownExemption),
     -- | Controls the auto-update mode for the app.
     autoUpdateMode :: (Core.Maybe ApplicationPolicy_AutoUpdateMode),
     -- | Controls whether the app can communicate with itself across a device’s work and personal profiles, subject to user consent.
@@ -834,7 +1136,7 @@ data ApplicationPolicy = ApplicationPolicy
     extensionConfig :: (Core.Maybe ExtensionConfig),
     -- | The type of installation to perform.
     installType :: (Core.Maybe ApplicationPolicy_InstallType),
-    -- | Whether the app is allowed to lock itself in full-screen mode. DEPRECATED. Use InstallType KIOSK or kioskCustomLauncherEnabled to to configure a dedicated device.
+    -- | Whether the app is allowed to lock itself in full-screen mode. DEPRECATED. Use InstallType KIOSK or kioskCustomLauncherEnabled to configure a dedicated device.
     lockTaskAllowed :: (Core.Maybe Core.Bool),
     -- | Managed configuration applied to the app. The format for the configuration is dictated by the ManagedProperty values supported by the app. Each field name in the managed configuration must match the key field of the ManagedProperty. The field value must be compatible with the type of the ManagedProperty: /type/ /JSON value/ BOOL true or false STRING string INTEGER number CHOICE string MULTISELECT array of strings HIDDEN string BUNDLE_ARRAY array of objects
     managedConfiguration :: (Core.Maybe ApplicationPolicy_ManagedConfiguration),
@@ -845,7 +1147,9 @@ data ApplicationPolicy = ApplicationPolicy
     -- | The package name of the app. For example, com.google.android.youtube for the YouTube app.
     packageName :: (Core.Maybe Core.Text),
     -- | Explicit permission grants or denials for the app. These values override the default/permission/policy and permission_grants which apply to all apps.
-    permissionGrants :: (Core.Maybe [PermissionGrant])
+    permissionGrants :: (Core.Maybe [PermissionGrant]),
+    -- | Specifies whether the app installed in the work profile is allowed to add widgets to the home screen.
+    workProfileWidgets :: (Core.Maybe ApplicationPolicy_WorkProfileWidgets)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -855,6 +1159,7 @@ newApplicationPolicy ::
 newApplicationPolicy =
   ApplicationPolicy
     { accessibleTrackIds = Core.Nothing,
+      alwaysOnVpnLockdownExemption = Core.Nothing,
       autoUpdateMode = Core.Nothing,
       connectedWorkAndPersonalApp = Core.Nothing,
       defaultPermissionPolicy = Core.Nothing,
@@ -867,7 +1172,8 @@ newApplicationPolicy =
       managedConfigurationTemplate = Core.Nothing,
       minimumVersionCode = Core.Nothing,
       packageName = Core.Nothing,
-      permissionGrants = Core.Nothing
+      permissionGrants = Core.Nothing,
+      workProfileWidgets = Core.Nothing
     }
 
 instance Core.FromJSON ApplicationPolicy where
@@ -877,6 +1183,7 @@ instance Core.FromJSON ApplicationPolicy where
       ( \o ->
           ApplicationPolicy
             Core.<$> (o Core..:? "accessibleTrackIds")
+            Core.<*> (o Core..:? "alwaysOnVpnLockdownExemption")
             Core.<*> (o Core..:? "autoUpdateMode")
             Core.<*> (o Core..:? "connectedWorkAndPersonalApp")
             Core.<*> (o Core..:? "defaultPermissionPolicy")
@@ -890,6 +1197,7 @@ instance Core.FromJSON ApplicationPolicy where
             Core.<*> (o Core..:? "minimumVersionCode")
             Core.<*> (o Core..:? "packageName")
             Core.<*> (o Core..:? "permissionGrants")
+            Core.<*> (o Core..:? "workProfileWidgets")
       )
 
 instance Core.ToJSON ApplicationPolicy where
@@ -898,6 +1206,8 @@ instance Core.ToJSON ApplicationPolicy where
       ( Core.catMaybes
           [ ("accessibleTrackIds" Core..=)
               Core.<$> accessibleTrackIds,
+            ("alwaysOnVpnLockdownExemption" Core..=)
+              Core.<$> alwaysOnVpnLockdownExemption,
             ("autoUpdateMode" Core..=) Core.<$> autoUpdateMode,
             ("connectedWorkAndPersonalApp" Core..=)
               Core.<$> connectedWorkAndPersonalApp,
@@ -916,7 +1226,9 @@ instance Core.ToJSON ApplicationPolicy where
               Core.<$> minimumVersionCode,
             ("packageName" Core..=) Core.<$> packageName,
             ("permissionGrants" Core..=)
-              Core.<$> permissionGrants
+              Core.<$> permissionGrants,
+            ("workProfileWidgets" Core..=)
+              Core.<$> workProfileWidgets
           ]
       )
 
@@ -964,7 +1276,7 @@ data ApplicationReport = ApplicationReport
     applicationSource :: (Core.Maybe ApplicationReport_ApplicationSource),
     -- | The display name of the app.
     displayName :: (Core.Maybe Core.Text),
-    -- | List of app events. The most recent 20 events are stored in the list.
+    -- | The list of app events which have occurred in the last 30 hours.
     events :: (Core.Maybe [ApplicationEvent]),
     -- | The package name of the app that installed this app.
     installerPackageName :: (Core.Maybe Core.Text),
@@ -1077,6 +1389,55 @@ instance Core.ToJSON ApplicationReportingSettings where
           ]
       )
 
+-- | Batched event logs of events from the device.
+--
+-- /See:/ 'newBatchUsageLogEvents' smart constructor.
+data BatchUsageLogEvents = BatchUsageLogEvents
+  { -- | The name of the device in the form ‘enterprises\/{enterpriseId}\/devices\/{deviceId}’
+    device :: (Core.Maybe Core.Text),
+    -- | The device timestamp when the batch of events were collected from the device.
+    retrievalTime :: (Core.Maybe Core.DateTime),
+    -- | The list of UsageLogEvent that were reported by the device, sorted chronologically by the event time.
+    usageLogEvents :: (Core.Maybe [UsageLogEvent]),
+    -- | The resource name of the user that owns this device in the form ‘enterprises\/{enterpriseId}\/users\/{userId}’.
+    user :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BatchUsageLogEvents' with the minimum fields required to make a request.
+newBatchUsageLogEvents ::
+  BatchUsageLogEvents
+newBatchUsageLogEvents =
+  BatchUsageLogEvents
+    { device = Core.Nothing,
+      retrievalTime = Core.Nothing,
+      usageLogEvents = Core.Nothing,
+      user = Core.Nothing
+    }
+
+instance Core.FromJSON BatchUsageLogEvents where
+  parseJSON =
+    Core.withObject
+      "BatchUsageLogEvents"
+      ( \o ->
+          BatchUsageLogEvents
+            Core.<$> (o Core..:? "device")
+            Core.<*> (o Core..:? "retrievalTime")
+            Core.<*> (o Core..:? "usageLogEvents")
+            Core.<*> (o Core..:? "user")
+      )
+
+instance Core.ToJSON BatchUsageLogEvents where
+  toJSON BatchUsageLogEvents {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("device" Core..=) Core.<$> device,
+            ("retrievalTime" Core..=) Core.<$> retrievalTime,
+            ("usageLogEvents" Core..=) Core.<$> usageLogEvents,
+            ("user" Core..=) Core.<$> user
+          ]
+      )
+
 -- | An action to block access to apps and data on a fully managed device or in a work profile. This action also triggers a device or work profile to displays a user-facing notification with information (where possible) on how to correct the compliance issue. Note: wipeAction must also be specified.
 --
 -- /See:/ 'newBlockAction' smart constructor.
@@ -1111,6 +1472,125 @@ instance Core.ToJSON BlockAction where
           [ ("blockAfterDays" Core..=) Core.<$> blockAfterDays,
             ("blockScope" Core..=) Core.<$> blockScope
           ]
+      )
+
+-- | A new root certificate was installed into the system\'s trusted credential storage. This is available device-wide on fully managed devices and within the work profile on organization-owned devices with a work profile.
+--
+-- /See:/ 'newCertAuthorityInstalledEvent' smart constructor.
+data CertAuthorityInstalledEvent = CertAuthorityInstalledEvent
+  { -- | Subject of the certificate.
+    certificate :: (Core.Maybe Core.Text),
+    -- | Whether the installation event succeeded.
+    success :: (Core.Maybe Core.Bool),
+    -- | The user in which the certificate install event happened. Only available for devices running Android 11 and above.
+    userId :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CertAuthorityInstalledEvent' with the minimum fields required to make a request.
+newCertAuthorityInstalledEvent ::
+  CertAuthorityInstalledEvent
+newCertAuthorityInstalledEvent =
+  CertAuthorityInstalledEvent
+    { certificate = Core.Nothing,
+      success = Core.Nothing,
+      userId = Core.Nothing
+    }
+
+instance Core.FromJSON CertAuthorityInstalledEvent where
+  parseJSON =
+    Core.withObject
+      "CertAuthorityInstalledEvent"
+      ( \o ->
+          CertAuthorityInstalledEvent
+            Core.<$> (o Core..:? "certificate")
+            Core.<*> (o Core..:? "success")
+            Core.<*> (o Core..:? "userId")
+      )
+
+instance Core.ToJSON CertAuthorityInstalledEvent where
+  toJSON CertAuthorityInstalledEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("certificate" Core..=) Core.<$> certificate,
+            ("success" Core..=) Core.<$> success,
+            ("userId" Core..=) Core.<$> userId
+          ]
+      )
+
+-- | A root certificate was removed from the system\'s trusted credential storage. This is available device-wide on fully managed devices and within the work profile on organization-owned devices with a work profile.
+--
+-- /See:/ 'newCertAuthorityRemovedEvent' smart constructor.
+data CertAuthorityRemovedEvent = CertAuthorityRemovedEvent
+  { -- | Subject of the certificate.
+    certificate :: (Core.Maybe Core.Text),
+    -- | Whether the removal succeeded.
+    success :: (Core.Maybe Core.Bool),
+    -- | The user in which the certificate removal event occurred. Only available for devices running Android 11 and above.
+    userId :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CertAuthorityRemovedEvent' with the minimum fields required to make a request.
+newCertAuthorityRemovedEvent ::
+  CertAuthorityRemovedEvent
+newCertAuthorityRemovedEvent =
+  CertAuthorityRemovedEvent
+    { certificate = Core.Nothing,
+      success = Core.Nothing,
+      userId = Core.Nothing
+    }
+
+instance Core.FromJSON CertAuthorityRemovedEvent where
+  parseJSON =
+    Core.withObject
+      "CertAuthorityRemovedEvent"
+      ( \o ->
+          CertAuthorityRemovedEvent
+            Core.<$> (o Core..:? "certificate")
+            Core.<*> (o Core..:? "success")
+            Core.<*> (o Core..:? "userId")
+      )
+
+instance Core.ToJSON CertAuthorityRemovedEvent where
+  toJSON CertAuthorityRemovedEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("certificate" Core..=) Core.<$> certificate,
+            ("success" Core..=) Core.<$> success,
+            ("userId" Core..=) Core.<$> userId
+          ]
+      )
+
+-- | An X.509v3 certificate failed to validate, currently this validation is performed on the Wi-FI access point and failure may be due to a mismatch upon server certificate validation. However it may in the future include other validation events of an X.509v3 certificate.
+--
+-- /See:/ 'newCertValidationFailureEvent' smart constructor.
+newtype CertValidationFailureEvent = CertValidationFailureEvent
+  { -- | The reason why certification validation failed.
+    failureReason :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CertValidationFailureEvent' with the minimum fields required to make a request.
+newCertValidationFailureEvent ::
+  CertValidationFailureEvent
+newCertValidationFailureEvent =
+  CertValidationFailureEvent {failureReason = Core.Nothing}
+
+instance Core.FromJSON CertValidationFailureEvent where
+  parseJSON =
+    Core.withObject
+      "CertValidationFailureEvent"
+      ( \o ->
+          CertValidationFailureEvent
+            Core.<$> (o Core..:? "failureReason")
+      )
+
+instance Core.ToJSON CertValidationFailureEvent where
+  toJSON CertValidationFailureEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [("failureReason" Core..=) Core.<$> failureReason]
       )
 
 -- | Controls apps\' access to private keys. The rule determines which private key, if any, Android Device Policy grants to the specified app. Access is granted either when the app calls KeyChain.choosePrivateKeyAlias (https:\/\/developer.android.com\/reference\/android\/security\/KeyChain#choosePrivateKeyAlias%28android.app.Activity,%20android.security.KeyChainAliasCallback,%20java.lang.String[],%20java.security.Principal[],%20java.lang.String,%20int,%20java.lang.String%29) (or any overloads) to request a private key alias for a given URL, or for rules that are not URL-specific (that is, if urlPattern is not set, or set to the empty string or .*) on Android 11 and above, directly so that the app can call KeyChain.getPrivateKey (https:\/\/developer.android.com\/reference\/android\/security\/KeyChain#getPrivateKey%28android.content.Context,%20java.lang.String%29), without first having to call KeyChain.choosePrivateKeyAlias.When an app calls KeyChain.choosePrivateKeyAlias if more than one choosePrivateKeyRules
@@ -1158,11 +1638,104 @@ instance Core.ToJSON ChoosePrivateKeyRule where
           ]
       )
 
+-- | Parameters associated with the CLEAR/APP/DATA command to clear the data of specified apps from the device.
+--
+-- /See:/ 'newClearAppsDataParams' smart constructor.
+newtype ClearAppsDataParams = ClearAppsDataParams
+  { -- | The package names of the apps whose data will be cleared when the command is executed.
+    packageNames :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ClearAppsDataParams' with the minimum fields required to make a request.
+newClearAppsDataParams ::
+  ClearAppsDataParams
+newClearAppsDataParams = ClearAppsDataParams {packageNames = Core.Nothing}
+
+instance Core.FromJSON ClearAppsDataParams where
+  parseJSON =
+    Core.withObject
+      "ClearAppsDataParams"
+      ( \o ->
+          ClearAppsDataParams
+            Core.<$> (o Core..:? "packageNames")
+      )
+
+instance Core.ToJSON ClearAppsDataParams where
+  toJSON ClearAppsDataParams {..} =
+    Core.object
+      ( Core.catMaybes
+          [("packageNames" Core..=) Core.<$> packageNames]
+      )
+
+-- | Status of the CLEAR/APP/DATA command to clear the data of specified apps from the device.
+--
+-- /See:/ 'newClearAppsDataStatus' smart constructor.
+newtype ClearAppsDataStatus = ClearAppsDataStatus
+  { -- | The per-app results, a mapping from package names to the respective clearing result.
+    results :: (Core.Maybe ClearAppsDataStatus_Results)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ClearAppsDataStatus' with the minimum fields required to make a request.
+newClearAppsDataStatus ::
+  ClearAppsDataStatus
+newClearAppsDataStatus = ClearAppsDataStatus {results = Core.Nothing}
+
+instance Core.FromJSON ClearAppsDataStatus where
+  parseJSON =
+    Core.withObject
+      "ClearAppsDataStatus"
+      ( \o ->
+          ClearAppsDataStatus Core.<$> (o Core..:? "results")
+      )
+
+instance Core.ToJSON ClearAppsDataStatus where
+  toJSON ClearAppsDataStatus {..} =
+    Core.object
+      ( Core.catMaybes
+          [("results" Core..=) Core.<$> results]
+      )
+
+-- | The per-app results, a mapping from package names to the respective clearing result.
+--
+-- /See:/ 'newClearAppsDataStatus_Results' smart constructor.
+newtype ClearAppsDataStatus_Results = ClearAppsDataStatus_Results
+  { -- |
+    additional :: (Core.HashMap Core.Text PerAppResult)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ClearAppsDataStatus_Results' with the minimum fields required to make a request.
+newClearAppsDataStatus_Results ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text PerAppResult ->
+  ClearAppsDataStatus_Results
+newClearAppsDataStatus_Results additional =
+  ClearAppsDataStatus_Results {additional = additional}
+
+instance Core.FromJSON ClearAppsDataStatus_Results where
+  parseJSON =
+    Core.withObject
+      "ClearAppsDataStatus_Results"
+      ( \o ->
+          ClearAppsDataStatus_Results
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON ClearAppsDataStatus_Results where
+  toJSON ClearAppsDataStatus_Results {..} =
+    Core.toJSON additional
+
 -- | A command.
 --
 -- /See:/ 'newCommand' smart constructor.
 data Command = Command
-  { -- | The timestamp at which the command was created. The timestamp is automatically generated by the server.
+  { -- | Parameters for the CLEAR/APP/DATA command to clear the data of specified apps from the device. See ClearAppsDataParams. If this is set, then it is suggested that type should not be set. In this case, the server automatically sets it to CLEAR/APP/DATA. It is also acceptable to explicitly set type to CLEAR/APP/DATA.
+    clearAppsDataParams :: (Core.Maybe ClearAppsDataParams),
+    -- | Output only. Status of the CLEAR/APP/DATA command to clear the data of specified apps from the device. See ClearAppsDataStatus.
+    clearAppsDataStatus :: (Core.Maybe ClearAppsDataStatus),
+    -- | The timestamp at which the command was created. The timestamp is automatically generated by the server.
     createTime :: (Core.Maybe Core.DateTime),
     -- | The duration for which the command is valid. The command will expire if not executed by the device during this time. The default duration if unspecified is ten minutes. There is no maximum duration.
     duration :: (Core.Maybe Core.Duration),
@@ -1184,7 +1757,9 @@ newCommand ::
   Command
 newCommand =
   Command
-    { createTime = Core.Nothing,
+    { clearAppsDataParams = Core.Nothing,
+      clearAppsDataStatus = Core.Nothing,
+      createTime = Core.Nothing,
       duration = Core.Nothing,
       errorCode = Core.Nothing,
       newPassword' = Core.Nothing,
@@ -1199,7 +1774,9 @@ instance Core.FromJSON Command where
       "Command"
       ( \o ->
           Command
-            Core.<$> (o Core..:? "createTime")
+            Core.<$> (o Core..:? "clearAppsDataParams")
+            Core.<*> (o Core..:? "clearAppsDataStatus")
+            Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "duration")
             Core.<*> (o Core..:? "errorCode")
             Core.<*> (o Core..:? "newPassword")
@@ -1212,7 +1789,11 @@ instance Core.ToJSON Command where
   toJSON Command {..} =
     Core.object
       ( Core.catMaybes
-          [ ("createTime" Core..=) Core.<$> createTime,
+          [ ("clearAppsDataParams" Core..=)
+              Core.<$> clearAppsDataParams,
+            ("clearAppsDataStatus" Core..=)
+              Core.<$> clearAppsDataStatus,
+            ("createTime" Core..=) Core.<$> createTime,
             ("duration" Core..=) Core.<$> duration,
             ("errorCode" Core..=) Core.<$> errorCode,
             ("newPassword" Core..=) Core.<$> newPassword',
@@ -1305,6 +1886,51 @@ instance Core.ToJSON ComplianceRule where
               Core.<$> nonComplianceDetailCondition,
             ("packageNamesToDisable" Core..=)
               Core.<$> packageNamesToDisable
+          ]
+      )
+
+-- | A TCP connect event was initiated through the standard network stack.
+--
+-- /See:/ 'newConnectEvent' smart constructor.
+data ConnectEvent = ConnectEvent
+  { -- | The destination IP address of the connect call.
+    destinationIpAddress :: (Core.Maybe Core.Text),
+    -- | The destination port of the connect call.
+    destinationPort :: (Core.Maybe Core.Int32),
+    -- | The package name of the UID that performed the connect call.
+    packageName :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ConnectEvent' with the minimum fields required to make a request.
+newConnectEvent ::
+  ConnectEvent
+newConnectEvent =
+  ConnectEvent
+    { destinationIpAddress = Core.Nothing,
+      destinationPort = Core.Nothing,
+      packageName = Core.Nothing
+    }
+
+instance Core.FromJSON ConnectEvent where
+  parseJSON =
+    Core.withObject
+      "ConnectEvent"
+      ( \o ->
+          ConnectEvent
+            Core.<$> (o Core..:? "destinationIpAddress")
+            Core.<*> (o Core..:? "destinationPort")
+            Core.<*> (o Core..:? "packageName")
+      )
+
+instance Core.ToJSON ConnectEvent where
+  toJSON ConnectEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("destinationIpAddress" Core..=)
+              Core.<$> destinationIpAddress,
+            ("destinationPort" Core..=) Core.<$> destinationPort,
+            ("packageName" Core..=) Core.<$> packageName
           ]
       )
 
@@ -1432,7 +2058,9 @@ data CrossProfilePolicies = CrossProfilePolicies
     -- | Whether data from one profile (personal or work) can be shared with apps in the other profile. Specifically controls simple data sharing via intents. Management of other cross-profile communication channels, such as contact search, copy\/paste, or connected work & personal apps, are configured separately.
     crossProfileDataSharing :: (Core.Maybe CrossProfilePolicies_CrossProfileDataSharing),
     -- | Whether contacts stored in the work profile can be shown in personal profile contact searches and incoming calls.
-    showWorkContactsInPersonalProfile :: (Core.Maybe CrossProfilePolicies_ShowWorkContactsInPersonalProfile)
+    showWorkContactsInPersonalProfile :: (Core.Maybe CrossProfilePolicies_ShowWorkContactsInPersonalProfile),
+    -- | Specifies the default behaviour for work profile widgets. If the policy does not specify work/profile/widgets for a specific application, it will behave according to the value specified here.
+    workProfileWidgetsDefault :: (Core.Maybe CrossProfilePolicies_WorkProfileWidgetsDefault)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1443,7 +2071,8 @@ newCrossProfilePolicies =
   CrossProfilePolicies
     { crossProfileCopyPaste = Core.Nothing,
       crossProfileDataSharing = Core.Nothing,
-      showWorkContactsInPersonalProfile = Core.Nothing
+      showWorkContactsInPersonalProfile = Core.Nothing,
+      workProfileWidgetsDefault = Core.Nothing
     }
 
 instance Core.FromJSON CrossProfilePolicies where
@@ -1455,6 +2084,7 @@ instance Core.FromJSON CrossProfilePolicies where
             Core.<$> (o Core..:? "crossProfileCopyPaste")
             Core.<*> (o Core..:? "crossProfileDataSharing")
             Core.<*> (o Core..:? "showWorkContactsInPersonalProfile")
+            Core.<*> (o Core..:? "workProfileWidgetsDefault")
       )
 
 instance Core.ToJSON CrossProfilePolicies where
@@ -1466,8 +2096,41 @@ instance Core.ToJSON CrossProfilePolicies where
             ("crossProfileDataSharing" Core..=)
               Core.<$> crossProfileDataSharing,
             ("showWorkContactsInPersonalProfile" Core..=)
-              Core.<$> showWorkContactsInPersonalProfile
+              Core.<$> showWorkContactsInPersonalProfile,
+            ("workProfileWidgetsDefault" Core..=)
+              Core.<$> workProfileWidgetsDefault
           ]
+      )
+
+-- | Validates whether Android’s built-in cryptographic library (BoringSSL) is valid. Should always succeed on device boot, if it fails, the device should be considered untrusted.
+--
+-- /See:/ 'newCryptoSelfTestCompletedEvent' smart constructor.
+newtype CryptoSelfTestCompletedEvent = CryptoSelfTestCompletedEvent
+  { -- | Whether the test succeeded.
+    success :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CryptoSelfTestCompletedEvent' with the minimum fields required to make a request.
+newCryptoSelfTestCompletedEvent ::
+  CryptoSelfTestCompletedEvent
+newCryptoSelfTestCompletedEvent =
+  CryptoSelfTestCompletedEvent {success = Core.Nothing}
+
+instance Core.FromJSON CryptoSelfTestCompletedEvent where
+  parseJSON =
+    Core.withObject
+      "CryptoSelfTestCompletedEvent"
+      ( \o ->
+          CryptoSelfTestCompletedEvent
+            Core.<$> (o Core..:? "success")
+      )
+
+instance Core.ToJSON CryptoSelfTestCompletedEvent where
+  toJSON CryptoSelfTestCompletedEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [("success" Core..=) Core.<$> success]
       )
 
 -- | Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: A full date, with non-zero year, month, and day values. A month and day, with a zero year (for example, an anniversary). A year on its own, with a zero month and a zero day. A year and month, with a zero day (for example, a credit card expiration date).Related types: google.type.TimeOfDay google.type.DateTime google.protobuf.Timestamp
@@ -1892,7 +2555,60 @@ instance Core.ToJSON Display where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for Empty is empty JSON object {}.
+-- | A DNS lookup event was initiated through the standard network stack.
+--
+-- /See:/ 'newDnsEvent' smart constructor.
+data DnsEvent = DnsEvent
+  { -- | The hostname that was looked up.
+    hostname :: (Core.Maybe Core.Text),
+    -- | The (possibly truncated) list of the IP addresses returned for DNS lookup (max 10 IPv4 or IPv6 addresses).
+    ipAddresses :: (Core.Maybe [Core.Text]),
+    -- | The package name of the UID that performed the DNS lookup.
+    packageName :: (Core.Maybe Core.Text),
+    -- | The number of IP addresses returned from the DNS lookup event. May be higher than the amount of ip_addresses if there were too many addresses to log.
+    totalIpAddressesReturned :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DnsEvent' with the minimum fields required to make a request.
+newDnsEvent ::
+  DnsEvent
+newDnsEvent =
+  DnsEvent
+    { hostname = Core.Nothing,
+      ipAddresses = Core.Nothing,
+      packageName = Core.Nothing,
+      totalIpAddressesReturned = Core.Nothing
+    }
+
+instance Core.FromJSON DnsEvent where
+  parseJSON =
+    Core.withObject
+      "DnsEvent"
+      ( \o ->
+          DnsEvent
+            Core.<$> (o Core..:? "hostname")
+            Core.<*> (o Core..:? "ipAddresses")
+            Core.<*> (o Core..:? "packageName")
+            Core.<*> ( o Core..:? "totalIpAddressesReturned"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+      )
+
+instance Core.ToJSON DnsEvent where
+  toJSON DnsEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("hostname" Core..=) Core.<$> hostname,
+            ("ipAddresses" Core..=) Core.<$> ipAddresses,
+            ("packageName" Core..=) Core.<$> packageName,
+            ("totalIpAddressesReturned" Core..=)
+              Core.. Core.AsText
+              Core.<$> totalIpAddressesReturned
+          ]
+      )
+
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -1918,7 +2634,7 @@ data EnrollmentToken = EnrollmentToken
     additionalData :: (Core.Maybe Core.Text),
     -- | Controls whether personal usage is allowed on a device provisioned with this enrollment token.For company-owned devices: Enabling personal usage allows the user to set up a work profile on the device. Disabling personal usage requires the user provision the device as a fully managed device.For personally-owned devices: Enabling personal usage allows the user to set up a work profile on the device. Disabling personal usage will prevent the device from provisioning. Personal usage cannot be disabled on personally-owned device.
     allowPersonalUsage :: (Core.Maybe EnrollmentToken_AllowPersonalUsage),
-    -- | The length of time the enrollment token is valid, ranging from 1 minute to 90 days. If not specified, the default duration is 1 hour.
+    -- | The length of time the enrollment token is valid, ranging from 1 minute to Durations.MAX/VALUE (https:\/\/developers.google.com\/protocol-buffers\/docs\/reference\/java\/com\/google\/protobuf\/util\/Durations.html#MAX/VALUE), approximately 10,000 years. If not specified, the default duration is 1 hour. Please note that if requested duration causes the resulting expiration/timestamp to exceed Timestamps.MAX/VALUE (https:\/\/developers.google.com\/protocol-buffers\/docs\/reference\/java\/com\/google\/protobuf\/util\/Timestamps.html#MAX/VALUE), then expiration/timestamp is coerced to Timestamps.MAX_VALUE.
     duration :: (Core.Maybe Core.Duration),
     -- | The expiration time of the token. This is a read-only field generated by the server.
     expirationTimestamp :: (Core.Maybe Core.DateTime),
@@ -2001,7 +2717,7 @@ data Enterprise = Enterprise
     contactInfo :: (Core.Maybe ContactInfo),
     -- | The types of Google Pub\/Sub notifications enabled for the enterprise.
     enabledNotificationTypes :: (Core.Maybe [Enterprise_EnabledNotificationTypesItem]),
-    -- | The name of the enterprise displayed to users.
+    -- | The name of the enterprise displayed to users. This field has a maximum length of 100 characters.
     enterpriseDisplayName :: (Core.Maybe Core.Text),
     -- | An image displayed as a logo during device provisioning. Supported types are: image\/bmp, image\/gif, image\/x-ico, image\/jpeg, image\/png, image\/webp, image\/vnd.wap.wbmp, image\/x-adobe-dng.
     logo :: (Core.Maybe ExternalData),
@@ -2009,7 +2725,7 @@ data Enterprise = Enterprise
     name :: (Core.Maybe Core.Text),
     -- | A color in RGB format that indicates the predominant color to display in the device management app UI. The color components are stored as follows: (red \<\< 16) | (green \<\< 8) | blue, where the value of each component is between 0 and 255, inclusive.
     primaryColor :: (Core.Maybe Core.Int32),
-    -- | The topic that Cloud Pub\/Sub notifications are published to, in the form projects\/{project}\/topics\/{topic}. This field is only required if Pub\/Sub notifications are enabled.
+    -- | The topic which Pub\/Sub notifications are published to, in the form projects\/{project}\/topics\/{topic}. This field is only required if Pub\/Sub notifications are enabled.
     pubsubTopic :: (Core.Maybe Core.Text),
     -- | Sign-in details of the enterprise.
     signinDetails :: (Core.Maybe [SigninDetail]),
@@ -2074,13 +2790,13 @@ instance Core.ToJSON Enterprise where
           ]
       )
 
--- | Configuration to enable an app as an extension app, with the capability of interacting with Android Device Policy offline.
+-- | Configuration to enable an app as an extension app, with the capability of interacting with Android Device Policy offline. For Android versions 13 and above, extension apps are exempt from battery restrictions so will not be placed into the restricted App Standby Bucket (https:\/\/developer.android.com\/topic\/performance\/appstandby#restricted-bucket). Extensions apps are also protected against users clearing their data or force-closing the application, although admins can continue to use the clear app data command (https:\/\/developer.android.com\/management\/reference\/rest\/v1\/enterprises.devices\/issueCommand#CommandType) on extension apps if needed for Android 13 and above.
 --
 -- /See:/ 'newExtensionConfig' smart constructor.
 data ExtensionConfig = ExtensionConfig
   { -- | Fully qualified class name of the receiver service class for Android Device Policy to notify the extension app of any local command status updates.
     notificationReceiver :: (Core.Maybe Core.Text),
-    -- | Hex-encoded SHA256 hash of the signing certificate of the extension app. Only hexadecimal string representations of 64 characters are valid.If not specified, the signature for the corresponding package name is obtained from the Play Store instead.If this list is empty, the signature of the extension app on the device must match the signature obtained from the Play Store for the app to be able to communicate with Android Device Policy.If this list is not empty, the signature of the extension app on the device must match one of the entries in this list for the app to be able to communicate with Android Device Policy.In production use cases, it is recommended to leave this empty.
+    -- | Hex-encoded SHA-256 hash of the signing certificate of the extension app. Only hexadecimal string representations of 64 characters are valid.If not specified, the signature for the corresponding package name is obtained from the Play Store instead.If this list is empty, the signature of the extension app on the device must match the signature obtained from the Play Store for the app to be able to communicate with Android Device Policy.If this list is not empty, the signature of the extension app on the device must match one of the entries in this list for the app to be able to communicate with Android Device Policy.In production use cases, it is recommended to leave this empty.
     signingKeyFingerprintsSha256 :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2150,7 +2866,65 @@ instance Core.ToJSON ExternalData where
           ]
       )
 
--- | A system freeze period. When a device’s clock is within the freeze period, all incoming system updates (including security patches) are blocked and won’t be installed. When a device is outside the freeze period, normal update behavior applies. Leap years are ignored in freeze period calculations, in particular: * If Feb. 29th is set as the start or end date of a freeze period, the freeze period will start or end on Feb. 28th instead. * When a device’s system clock reads Feb. 29th, it’s treated as Feb. 28th. * When calculating the number of days in a freeze period or the time between two freeze periods, Feb. 29th is ignored and not counted as a day.
+-- | A file was downloaded from the device.
+--
+-- /See:/ 'newFilePulledEvent' smart constructor.
+newtype FilePulledEvent = FilePulledEvent
+  { -- | The path of the file being pulled.
+    filePath :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FilePulledEvent' with the minimum fields required to make a request.
+newFilePulledEvent ::
+  FilePulledEvent
+newFilePulledEvent = FilePulledEvent {filePath = Core.Nothing}
+
+instance Core.FromJSON FilePulledEvent where
+  parseJSON =
+    Core.withObject
+      "FilePulledEvent"
+      ( \o ->
+          FilePulledEvent Core.<$> (o Core..:? "filePath")
+      )
+
+instance Core.ToJSON FilePulledEvent where
+  toJSON FilePulledEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [("filePath" Core..=) Core.<$> filePath]
+      )
+
+-- | A file was uploaded onto the device.
+--
+-- /See:/ 'newFilePushedEvent' smart constructor.
+newtype FilePushedEvent = FilePushedEvent
+  { -- | The path of the file being pushed.
+    filePath :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FilePushedEvent' with the minimum fields required to make a request.
+newFilePushedEvent ::
+  FilePushedEvent
+newFilePushedEvent = FilePushedEvent {filePath = Core.Nothing}
+
+instance Core.FromJSON FilePushedEvent where
+  parseJSON =
+    Core.withObject
+      "FilePushedEvent"
+      ( \o ->
+          FilePushedEvent Core.<$> (o Core..:? "filePath")
+      )
+
+instance Core.ToJSON FilePushedEvent where
+  toJSON FilePushedEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [("filePath" Core..=) Core.<$> filePath]
+      )
+
+-- | A system freeze period. When a device’s clock is within the freeze period, all incoming system updates (including security patches) are blocked and won’t be installed. When a device is outside the freeze period, normal update behavior applies. Leap years are ignored in freeze period calculations, in particular: * If Feb. 29th is set as the start or end date of a freeze period, the freeze period will start or end on Feb. 28th instead. * When a device’s system clock reads Feb. 29th, it’s treated as Feb. 28th. * When calculating the number of days in a freeze period or the time between two freeze periods, Feb. 29th is ignored and not counted as a day.Note: For Freeze Periods to take effect, SystemUpdateType cannot be specified as SYSTEM/UPDATE/TYPE_UNSPECIFIED, because freeze periods require a defined policy to be specified.
 --
 -- /See:/ 'newFreezePeriod' smart constructor.
 data FreezePeriod = FreezePeriod
@@ -2386,6 +3160,177 @@ instance Core.FromJSON IssueCommandResponse where
 instance Core.ToJSON IssueCommandResponse where
   toJSON = Core.const Core.emptyObject
 
+-- | A cryptographic key including user installed, admin installed and system maintained private key is removed from the device either by the user or management. This is available device-wide on fully managed devices and within the work profile on organization-owned devices with a work profile.
+--
+-- /See:/ 'newKeyDestructionEvent' smart constructor.
+data KeyDestructionEvent = KeyDestructionEvent
+  { -- | UID of the application which owns the key.
+    applicationUid :: (Core.Maybe Core.Int32),
+    -- | Alias of the key.
+    keyAlias :: (Core.Maybe Core.Text),
+    -- | Whether the operation was successful.
+    success :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'KeyDestructionEvent' with the minimum fields required to make a request.
+newKeyDestructionEvent ::
+  KeyDestructionEvent
+newKeyDestructionEvent =
+  KeyDestructionEvent
+    { applicationUid = Core.Nothing,
+      keyAlias = Core.Nothing,
+      success = Core.Nothing
+    }
+
+instance Core.FromJSON KeyDestructionEvent where
+  parseJSON =
+    Core.withObject
+      "KeyDestructionEvent"
+      ( \o ->
+          KeyDestructionEvent
+            Core.<$> (o Core..:? "applicationUid")
+            Core.<*> (o Core..:? "keyAlias")
+            Core.<*> (o Core..:? "success")
+      )
+
+instance Core.ToJSON KeyDestructionEvent where
+  toJSON KeyDestructionEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("applicationUid" Core..=) Core.<$> applicationUid,
+            ("keyAlias" Core..=) Core.<$> keyAlias,
+            ("success" Core..=) Core.<$> success
+          ]
+      )
+
+-- | A cryptographic key including user installed, admin installed and system maintained private key is installed on the device either by the user or management.This is available device-wide on fully managed devices and within the work profile on organization-owned devices with a work profile.
+--
+-- /See:/ 'newKeyGeneratedEvent' smart constructor.
+data KeyGeneratedEvent = KeyGeneratedEvent
+  { -- | UID of the application which generated the key.
+    applicationUid :: (Core.Maybe Core.Int32),
+    -- | Alias of the key.
+    keyAlias :: (Core.Maybe Core.Text),
+    -- | Whether the operation was successful.
+    success :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'KeyGeneratedEvent' with the minimum fields required to make a request.
+newKeyGeneratedEvent ::
+  KeyGeneratedEvent
+newKeyGeneratedEvent =
+  KeyGeneratedEvent
+    { applicationUid = Core.Nothing,
+      keyAlias = Core.Nothing,
+      success = Core.Nothing
+    }
+
+instance Core.FromJSON KeyGeneratedEvent where
+  parseJSON =
+    Core.withObject
+      "KeyGeneratedEvent"
+      ( \o ->
+          KeyGeneratedEvent
+            Core.<$> (o Core..:? "applicationUid")
+            Core.<*> (o Core..:? "keyAlias")
+            Core.<*> (o Core..:? "success")
+      )
+
+instance Core.ToJSON KeyGeneratedEvent where
+  toJSON KeyGeneratedEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("applicationUid" Core..=) Core.<$> applicationUid,
+            ("keyAlias" Core..=) Core.<$> keyAlias,
+            ("success" Core..=) Core.<$> success
+          ]
+      )
+
+-- | A cryptographic key including user installed, admin installed and system maintained private key is imported on the device either by the user or management. This is available device-wide on fully managed devices and within the work profile on organization-owned devices with a work profile.
+--
+-- /See:/ 'newKeyImportEvent' smart constructor.
+data KeyImportEvent = KeyImportEvent
+  { -- | UID of the application which imported the key
+    applicationUid :: (Core.Maybe Core.Int32),
+    -- | Alias of the key.
+    keyAlias :: (Core.Maybe Core.Text),
+    -- | Whether the operation was successful.
+    success :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'KeyImportEvent' with the minimum fields required to make a request.
+newKeyImportEvent ::
+  KeyImportEvent
+newKeyImportEvent =
+  KeyImportEvent
+    { applicationUid = Core.Nothing,
+      keyAlias = Core.Nothing,
+      success = Core.Nothing
+    }
+
+instance Core.FromJSON KeyImportEvent where
+  parseJSON =
+    Core.withObject
+      "KeyImportEvent"
+      ( \o ->
+          KeyImportEvent
+            Core.<$> (o Core..:? "applicationUid")
+            Core.<*> (o Core..:? "keyAlias")
+            Core.<*> (o Core..:? "success")
+      )
+
+instance Core.ToJSON KeyImportEvent where
+  toJSON KeyImportEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("applicationUid" Core..=) Core.<$> applicationUid,
+            ("keyAlias" Core..=) Core.<$> keyAlias,
+            ("success" Core..=) Core.<$> success
+          ]
+      )
+
+-- | A cryptographic key including user installed, admin installed and system maintained private key is determined to be corrupted due to storage corruption, hardware failure or some OS issue. This is available device-wide on fully managed devices and within the work profile on organization-owned devices with a work profile.
+--
+-- /See:/ 'newKeyIntegrityViolationEvent' smart constructor.
+data KeyIntegrityViolationEvent = KeyIntegrityViolationEvent
+  { -- | UID of the application which owns the key
+    applicationUid :: (Core.Maybe Core.Int32),
+    -- | Alias of the key.
+    keyAlias :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'KeyIntegrityViolationEvent' with the minimum fields required to make a request.
+newKeyIntegrityViolationEvent ::
+  KeyIntegrityViolationEvent
+newKeyIntegrityViolationEvent =
+  KeyIntegrityViolationEvent
+    { applicationUid = Core.Nothing,
+      keyAlias = Core.Nothing
+    }
+
+instance Core.FromJSON KeyIntegrityViolationEvent where
+  parseJSON =
+    Core.withObject
+      "KeyIntegrityViolationEvent"
+      ( \o ->
+          KeyIntegrityViolationEvent
+            Core.<$> (o Core..:? "applicationUid")
+            Core.<*> (o Core..:? "keyAlias")
+      )
+
+instance Core.ToJSON KeyIntegrityViolationEvent where
+  toJSON KeyIntegrityViolationEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("applicationUid" Core..=) Core.<$> applicationUid,
+            ("keyAlias" Core..=) Core.<$> keyAlias
+          ]
+      )
+
 -- | Keyed app state reported by the app.
 --
 -- /See:/ 'newKeyedAppState' smart constructor.
@@ -2444,6 +3389,89 @@ instance Core.ToJSON KeyedAppState where
             ("severity" Core..=) Core.<$> severity
           ]
       )
+
+-- | An attempt was made to unlock the device.
+--
+-- /See:/ 'newKeyguardDismissAuthAttemptEvent' smart constructor.
+data KeyguardDismissAuthAttemptEvent = KeyguardDismissAuthAttemptEvent
+  { -- | Whether a strong form of authentication (password, PIN, or pattern) was used to unlock device.
+    strongAuthMethodUsed :: (Core.Maybe Core.Bool),
+    -- | Whether the unlock attempt was successful.
+    success :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'KeyguardDismissAuthAttemptEvent' with the minimum fields required to make a request.
+newKeyguardDismissAuthAttemptEvent ::
+  KeyguardDismissAuthAttemptEvent
+newKeyguardDismissAuthAttemptEvent =
+  KeyguardDismissAuthAttemptEvent
+    { strongAuthMethodUsed = Core.Nothing,
+      success = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    KeyguardDismissAuthAttemptEvent
+  where
+  parseJSON =
+    Core.withObject
+      "KeyguardDismissAuthAttemptEvent"
+      ( \o ->
+          KeyguardDismissAuthAttemptEvent
+            Core.<$> (o Core..:? "strongAuthMethodUsed")
+            Core.<*> (o Core..:? "success")
+      )
+
+instance Core.ToJSON KeyguardDismissAuthAttemptEvent where
+  toJSON KeyguardDismissAuthAttemptEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("strongAuthMethodUsed" Core..=)
+              Core.<$> strongAuthMethodUsed,
+            ("success" Core..=) Core.<$> success
+          ]
+      )
+
+-- | The keyguard was dismissed. Intentionally empty.
+--
+-- /See:/ 'newKeyguardDismissedEvent' smart constructor.
+data KeyguardDismissedEvent = KeyguardDismissedEvent
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'KeyguardDismissedEvent' with the minimum fields required to make a request.
+newKeyguardDismissedEvent ::
+  KeyguardDismissedEvent
+newKeyguardDismissedEvent = KeyguardDismissedEvent
+
+instance Core.FromJSON KeyguardDismissedEvent where
+  parseJSON =
+    Core.withObject
+      "KeyguardDismissedEvent"
+      (\o -> Core.pure KeyguardDismissedEvent)
+
+instance Core.ToJSON KeyguardDismissedEvent where
+  toJSON = Core.const Core.emptyObject
+
+-- | The device was locked either by user or timeout. Intentionally empty.
+--
+-- /See:/ 'newKeyguardSecuredEvent' smart constructor.
+data KeyguardSecuredEvent = KeyguardSecuredEvent
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'KeyguardSecuredEvent' with the minimum fields required to make a request.
+newKeyguardSecuredEvent ::
+  KeyguardSecuredEvent
+newKeyguardSecuredEvent = KeyguardSecuredEvent
+
+instance Core.FromJSON KeyguardSecuredEvent where
+  parseJSON =
+    Core.withObject
+      "KeyguardSecuredEvent"
+      (\o -> Core.pure KeyguardSecuredEvent)
+
+instance Core.ToJSON KeyguardSecuredEvent where
+  toJSON = Core.const Core.emptyObject
 
 -- | Settings controlling the behavior of a device in kiosk mode. To enable kiosk mode, set kioskCustomLauncherEnabled to true or specify an app in the policy with installType KIOSK.
 --
@@ -2563,6 +3591,46 @@ instance Core.ToJSON ListDevicesResponse where
     Core.object
       ( Core.catMaybes
           [ ("devices" Core..=) Core.<$> devices,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
+-- | Response to a request to list enrollment tokens for a given enterprise.
+--
+-- /See:/ 'newListEnrollmentTokensResponse' smart constructor.
+data ListEnrollmentTokensResponse = ListEnrollmentTokensResponse
+  { -- | The list of enrollment tokens.
+    enrollmentTokens :: (Core.Maybe [EnrollmentToken]),
+    -- | If there are more results, a token to retrieve next page of results.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListEnrollmentTokensResponse' with the minimum fields required to make a request.
+newListEnrollmentTokensResponse ::
+  ListEnrollmentTokensResponse
+newListEnrollmentTokensResponse =
+  ListEnrollmentTokensResponse
+    { enrollmentTokens = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON ListEnrollmentTokensResponse where
+  parseJSON =
+    Core.withObject
+      "ListEnrollmentTokensResponse"
+      ( \o ->
+          ListEnrollmentTokensResponse
+            Core.<$> (o Core..:? "enrollmentTokens")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON ListEnrollmentTokensResponse where
+  toJSON ListEnrollmentTokensResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("enrollmentTokens" Core..=)
+              Core.<$> enrollmentTokens,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -2716,6 +3784,66 @@ instance Core.ToJSON ListWebAppsResponse where
             ("webApps" Core..=) Core.<$> webApps
           ]
       )
+
+-- | The usageLog buffer on the device has reached 90% of its capacity, therefore older events may be dropped. Intentionally empty.
+--
+-- /See:/ 'newLogBufferSizeCriticalEvent' smart constructor.
+data LogBufferSizeCriticalEvent = LogBufferSizeCriticalEvent
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LogBufferSizeCriticalEvent' with the minimum fields required to make a request.
+newLogBufferSizeCriticalEvent ::
+  LogBufferSizeCriticalEvent
+newLogBufferSizeCriticalEvent = LogBufferSizeCriticalEvent
+
+instance Core.FromJSON LogBufferSizeCriticalEvent where
+  parseJSON =
+    Core.withObject
+      "LogBufferSizeCriticalEvent"
+      (\o -> Core.pure LogBufferSizeCriticalEvent)
+
+instance Core.ToJSON LogBufferSizeCriticalEvent where
+  toJSON = Core.const Core.emptyObject
+
+-- | usageLog policy has been enabled. Intentionally empty.
+--
+-- /See:/ 'newLoggingStartedEvent' smart constructor.
+data LoggingStartedEvent = LoggingStartedEvent
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LoggingStartedEvent' with the minimum fields required to make a request.
+newLoggingStartedEvent ::
+  LoggingStartedEvent
+newLoggingStartedEvent = LoggingStartedEvent
+
+instance Core.FromJSON LoggingStartedEvent where
+  parseJSON =
+    Core.withObject
+      "LoggingStartedEvent"
+      (\o -> Core.pure LoggingStartedEvent)
+
+instance Core.ToJSON LoggingStartedEvent where
+  toJSON = Core.const Core.emptyObject
+
+-- | usageLog policy has been disabled. Intentionally empty.
+--
+-- /See:/ 'newLoggingStoppedEvent' smart constructor.
+data LoggingStoppedEvent = LoggingStoppedEvent
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LoggingStoppedEvent' with the minimum fields required to make a request.
+newLoggingStoppedEvent ::
+  LoggingStoppedEvent
+newLoggingStoppedEvent = LoggingStoppedEvent
+
+instance Core.FromJSON LoggingStoppedEvent where
+  parseJSON =
+    Core.withObject
+      "LoggingStoppedEvent"
+      (\o -> Core.pure LoggingStoppedEvent)
+
+instance Core.ToJSON LoggingStoppedEvent where
+  toJSON = Core.const Core.emptyObject
 
 -- | The managed configurations template for the app, saved from the managed configurations iframe.
 --
@@ -2894,6 +4022,78 @@ instance Core.ToJSON ManagedPropertyEntry where
           ]
       )
 
+-- | Removable media was mounted.
+--
+-- /See:/ 'newMediaMountEvent' smart constructor.
+data MediaMountEvent = MediaMountEvent
+  { -- | Mount point.
+    mountPoint :: (Core.Maybe Core.Text),
+    -- | Volume label. Redacted to empty string on organization-owned managed profile devices.
+    volumeLabel :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MediaMountEvent' with the minimum fields required to make a request.
+newMediaMountEvent ::
+  MediaMountEvent
+newMediaMountEvent =
+  MediaMountEvent {mountPoint = Core.Nothing, volumeLabel = Core.Nothing}
+
+instance Core.FromJSON MediaMountEvent where
+  parseJSON =
+    Core.withObject
+      "MediaMountEvent"
+      ( \o ->
+          MediaMountEvent
+            Core.<$> (o Core..:? "mountPoint")
+            Core.<*> (o Core..:? "volumeLabel")
+      )
+
+instance Core.ToJSON MediaMountEvent where
+  toJSON MediaMountEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("mountPoint" Core..=) Core.<$> mountPoint,
+            ("volumeLabel" Core..=) Core.<$> volumeLabel
+          ]
+      )
+
+-- | Removable media was unmounted.
+--
+-- /See:/ 'newMediaUnmountEvent' smart constructor.
+data MediaUnmountEvent = MediaUnmountEvent
+  { -- | Mount point.
+    mountPoint :: (Core.Maybe Core.Text),
+    -- | Volume label. Redacted to empty string on organization-owned managed profile devices.
+    volumeLabel :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MediaUnmountEvent' with the minimum fields required to make a request.
+newMediaUnmountEvent ::
+  MediaUnmountEvent
+newMediaUnmountEvent =
+  MediaUnmountEvent {mountPoint = Core.Nothing, volumeLabel = Core.Nothing}
+
+instance Core.FromJSON MediaUnmountEvent where
+  parseJSON =
+    Core.withObject
+      "MediaUnmountEvent"
+      ( \o ->
+          MediaUnmountEvent
+            Core.<$> (o Core..:? "mountPoint")
+            Core.<*> (o Core..:? "volumeLabel")
+      )
+
+instance Core.ToJSON MediaUnmountEvent where
+  toJSON MediaUnmountEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("mountPoint" Core..=) Core.<$> mountPoint,
+            ("volumeLabel" Core..=) Core.<$> volumeLabel
+          ]
+      )
+
 -- | An event related to memory and storage measurements.
 --
 -- /See:/ 'newMemoryEvent' smart constructor.
@@ -3053,7 +4253,11 @@ data NonComplianceDetail = NonComplianceDetail
     -- | The package name indicating which app is out of compliance, if applicable.
     packageName :: (Core.Maybe Core.Text),
     -- | The name of the policy setting. This is the JSON field name of a top-level Policy field.
-    settingName :: (Core.Maybe Core.Text)
+    settingName :: (Core.Maybe Core.Text),
+    -- | Additional context for specific/non/compliance_reason.
+    specificNonComplianceContext :: (Core.Maybe SpecificNonComplianceContext),
+    -- | The policy-specific reason the device is not in compliance with the setting.
+    specificNonComplianceReason :: (Core.Maybe NonComplianceDetail_SpecificNonComplianceReason)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3067,7 +4271,9 @@ newNonComplianceDetail =
       installationFailureReason = Core.Nothing,
       nonComplianceReason = Core.Nothing,
       packageName = Core.Nothing,
-      settingName = Core.Nothing
+      settingName = Core.Nothing,
+      specificNonComplianceContext = Core.Nothing,
+      specificNonComplianceReason = Core.Nothing
     }
 
 instance Core.FromJSON NonComplianceDetail where
@@ -3082,6 +4288,8 @@ instance Core.FromJSON NonComplianceDetail where
             Core.<*> (o Core..:? "nonComplianceReason")
             Core.<*> (o Core..:? "packageName")
             Core.<*> (o Core..:? "settingName")
+            Core.<*> (o Core..:? "specificNonComplianceContext")
+            Core.<*> (o Core..:? "specificNonComplianceReason")
       )
 
 instance Core.ToJSON NonComplianceDetail where
@@ -3095,7 +4303,11 @@ instance Core.ToJSON NonComplianceDetail where
             ("nonComplianceReason" Core..=)
               Core.<$> nonComplianceReason,
             ("packageName" Core..=) Core.<$> packageName,
-            ("settingName" Core..=) Core.<$> settingName
+            ("settingName" Core..=) Core.<$> settingName,
+            ("specificNonComplianceContext" Core..=)
+              Core.<$> specificNonComplianceContext,
+            ("specificNonComplianceReason" Core..=)
+              Core.<$> specificNonComplianceReason
           ]
       )
 
@@ -3183,6 +4395,35 @@ instance Core.ToJSON OncCertificateProvider where
             ("contentProviderEndpoint" Core..=)
               Core.<$> contentProviderEndpoint
           ]
+      )
+
+-- | Additional context for non-compliance related to Wi-Fi configuration.
+--
+-- /See:/ 'newOncWifiContext' smart constructor.
+newtype OncWifiContext = OncWifiContext
+  { -- | The GUID of non-compliant Wi-Fi configuration.
+    wifiGuid :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'OncWifiContext' with the minimum fields required to make a request.
+newOncWifiContext ::
+  OncWifiContext
+newOncWifiContext = OncWifiContext {wifiGuid = Core.Nothing}
+
+instance Core.FromJSON OncWifiContext where
+  parseJSON =
+    Core.withObject
+      "OncWifiContext"
+      ( \o ->
+          OncWifiContext Core.<$> (o Core..:? "wifiGuid")
+      )
+
+instance Core.ToJSON OncWifiContext where
+  toJSON OncWifiContext {..} =
+    Core.object
+      ( Core.catMaybes
+          [("wifiGuid" Core..=) Core.<$> wifiGuid]
       )
 
 -- | This resource represents a long-running operation that is the result of a network API call.
@@ -3295,6 +4536,63 @@ instance Core.ToJSON Operation_Response where
   toJSON Operation_Response {..} =
     Core.toJSON additional
 
+-- | Device was shutdown. Intentionally empty.
+--
+-- /See:/ 'newOsShutdownEvent' smart constructor.
+data OsShutdownEvent = OsShutdownEvent
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'OsShutdownEvent' with the minimum fields required to make a request.
+newOsShutdownEvent ::
+  OsShutdownEvent
+newOsShutdownEvent = OsShutdownEvent
+
+instance Core.FromJSON OsShutdownEvent where
+  parseJSON =
+    Core.withObject
+      "OsShutdownEvent"
+      (\o -> Core.pure OsShutdownEvent)
+
+instance Core.ToJSON OsShutdownEvent where
+  toJSON = Core.const Core.emptyObject
+
+-- | Device was started.
+--
+-- /See:/ 'newOsStartupEvent' smart constructor.
+data OsStartupEvent = OsStartupEvent
+  { -- | Verified Boot state.
+    verifiedBootState :: (Core.Maybe OsStartupEvent_VerifiedBootState),
+    -- | dm-verity mode.
+    verityMode :: (Core.Maybe OsStartupEvent_VerityMode)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'OsStartupEvent' with the minimum fields required to make a request.
+newOsStartupEvent ::
+  OsStartupEvent
+newOsStartupEvent =
+  OsStartupEvent {verifiedBootState = Core.Nothing, verityMode = Core.Nothing}
+
+instance Core.FromJSON OsStartupEvent where
+  parseJSON =
+    Core.withObject
+      "OsStartupEvent"
+      ( \o ->
+          OsStartupEvent
+            Core.<$> (o Core..:? "verifiedBootState")
+            Core.<*> (o Core..:? "verityMode")
+      )
+
+instance Core.ToJSON OsStartupEvent where
+  toJSON OsStartupEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("verifiedBootState" Core..=)
+              Core.<$> verifiedBootState,
+            ("verityMode" Core..=) Core.<$> verityMode
+          ]
+      )
+
 -- | A list of package names.
 --
 -- /See:/ 'newPackageNameList' smart constructor.
@@ -3322,6 +4620,39 @@ instance Core.ToJSON PackageNameList where
     Core.object
       ( Core.catMaybes
           [("packageNames" Core..=) Core.<$> packageNames]
+      )
+
+-- | Additional context for non-compliance related to password policies.
+--
+-- /See:/ 'newPasswordPoliciesContext' smart constructor.
+newtype PasswordPoliciesContext = PasswordPoliciesContext
+  { -- | The scope of non-compliant password.
+    passwordPolicyScope :: (Core.Maybe PasswordPoliciesContext_PasswordPolicyScope)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PasswordPoliciesContext' with the minimum fields required to make a request.
+newPasswordPoliciesContext ::
+  PasswordPoliciesContext
+newPasswordPoliciesContext =
+  PasswordPoliciesContext {passwordPolicyScope = Core.Nothing}
+
+instance Core.FromJSON PasswordPoliciesContext where
+  parseJSON =
+    Core.withObject
+      "PasswordPoliciesContext"
+      ( \o ->
+          PasswordPoliciesContext
+            Core.<$> (o Core..:? "passwordPolicyScope")
+      )
+
+instance Core.ToJSON PasswordPoliciesContext where
+  toJSON PasswordPoliciesContext {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("passwordPolicyScope" Core..=)
+              Core.<$> passwordPolicyScope
+          ]
       )
 
 -- | Requirements for the password used to unlock a device.
@@ -3354,7 +4685,7 @@ data PasswordRequirements = PasswordRequirements
     passwordScope :: (Core.Maybe PasswordRequirements_PasswordScope),
     -- | The length of time after a device or work profile is unlocked using a strong form of authentication (password, PIN, pattern) that it can be unlocked using any other authentication method (e.g. fingerprint, trust agents, face). After the specified time period elapses, only strong forms of authentication can be used to unlock the device or work profile.
     requirePasswordUnlock :: (Core.Maybe PasswordRequirements_RequirePasswordUnlock),
-    -- | Controls whether a unified lock is allowed for the device and the work profile, on devices running Android 9 and above with a work profile. This has no effect on other devices. This can be set only if password/scope is set to SCOPE/PROFILE, the policy will be rejected otherwise. If user has not set a separate work lock and this field is set to REQUIRE/SEPARATE/WORK/LOCK, a NonComplianceDetail is reported with nonComplianceReason set to USER/ACTION.
+    -- | Controls whether a unified lock is allowed for the device and the work profile, on devices running Android 9 and above with a work profile. This can be set only if password/scope is set to SCOPE/PROFILE, the policy will be rejected otherwise. If user has not set a separate work lock and this field is set to REQUIRE/SEPARATE/WORK/LOCK, a NonComplianceDetail is reported with nonComplianceReason set to USER/ACTION.
     unifiedLockSettings :: (Core.Maybe PasswordRequirements_UnifiedLockSettings)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3433,6 +4764,35 @@ instance Core.ToJSON PasswordRequirements where
             ("unifiedLockSettings" Core..=)
               Core.<$> unifiedLockSettings
           ]
+      )
+
+-- | The result of an attempt to clear the data of a single app.
+--
+-- /See:/ 'newPerAppResult' smart constructor.
+newtype PerAppResult = PerAppResult
+  { -- | The result of an attempt to clear the data of a single app.
+    clearingResult :: (Core.Maybe PerAppResult_ClearingResult)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PerAppResult' with the minimum fields required to make a request.
+newPerAppResult ::
+  PerAppResult
+newPerAppResult = PerAppResult {clearingResult = Core.Nothing}
+
+instance Core.FromJSON PerAppResult where
+  parseJSON =
+    Core.withObject
+      "PerAppResult"
+      ( \o ->
+          PerAppResult Core.<$> (o Core..:? "clearingResult")
+      )
+
+instance Core.ToJSON PerAppResult where
+  toJSON PerAppResult {..} =
+    Core.object
+      ( Core.catMaybes
+          [("clearingResult" Core..=) Core.<$> clearingResult]
       )
 
 -- | Configuration for an Android permission and its grant state.
@@ -3561,7 +4921,7 @@ instance Core.ToJSON PersonalApplicationPolicy where
 data PersonalUsagePolicies = PersonalUsagePolicies
   { -- | Account types that can\'t be managed by the user.
     accountTypesWithManagementDisabled :: (Core.Maybe [Core.Text]),
-    -- | Whether camera is disabled.
+    -- | If true, the camera is disabled on the personal profile.
     cameraDisabled :: (Core.Maybe Core.Bool),
     -- | Controls how long the work profile can stay off. The duration must be at least 3 days.
     maxDaysWithWorkOff :: (Core.Maybe Core.Int32),
@@ -3569,7 +4929,7 @@ data PersonalUsagePolicies = PersonalUsagePolicies
     personalApplications :: (Core.Maybe [PersonalApplicationPolicy]),
     -- | Used together with personalApplications to control how apps in the personal profile are allowed or blocked.
     personalPlayStoreMode :: (Core.Maybe PersonalUsagePolicies_PersonalPlayStoreMode),
-    -- | Whether screen capture is disabled.
+    -- | If true, screen capture is disabled for all users.
     screenCaptureDisabled :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3689,7 +5049,7 @@ data Policy = Policy
     installAppsDisabled :: (Core.Maybe Core.Bool),
     -- | This field has no effect.
     installUnknownSourcesAllowed :: (Core.Maybe Core.Bool),
-    -- | Whether the keyguard is disabled.
+    -- | If true, this disables the Lock Screen (https:\/\/source.android.com\/docs\/core\/display\/multi_display\/lock-screen) for primary and\/or secondary displays.
     keyguardDisabled :: (Core.Maybe Core.Bool),
     -- | Disabled keyguard customizations, such as widgets.
     keyguardDisabledFeatures :: (Core.Maybe [Policy_KeyguardDisabledFeaturesItem]),
@@ -3729,11 +5089,11 @@ data Policy = Policy
     outgoingCallsDisabled :: (Core.Maybe Core.Bool),
     -- | Password requirement policies. Different policies can be set for work profile or fully managed devices by setting the password_scope field in the policy.
     passwordPolicies :: (Core.Maybe [PasswordRequirements]),
-    -- | Password requirements. The field password/requirements.require/password/unlock must not be set. DEPRECATED - Use passwordPolicies.Note:Complexity-based values of PasswordQuality, that is, COMPLEXITY/LOW, COMPLEXITY/MEDIUM, and COMPLEXITY/HIGH, cannot be used here. unified/lock/settings cannot be used here
+    -- | Password requirements. The field password/requirements.require/password/unlock must not be set. DEPRECATED - Use passwordPolicies.Note:Complexity-based values of PasswordQuality, that is, COMPLEXITY/LOW, COMPLEXITY/MEDIUM, and COMPLEXITY/HIGH, cannot be used here. unified/lock/settings cannot be used here.
     passwordRequirements :: (Core.Maybe PasswordRequirements),
     -- | Explicit permission or group grants or denials for all apps. These values override the default/permission/policy.
     permissionGrants :: (Core.Maybe [PermissionGrant]),
-    -- | Specifies permitted accessibility services. If the field is not set, any accessibility service can be used. If the field is set, only the accessibility services in this list and the system\'s built-in accessibility service can be used. In particular, if the field is set to empty, only the system\'s built-in accessibility servicess can be used.
+    -- | Specifies permitted accessibility services. If the field is not set, any accessibility service can be used. If the field is set, only the accessibility services in this list and the system\'s built-in accessibility service can be used. In particular, if the field is set to empty, only the system\'s built-in accessibility servicess can be used. This can be set on fully managed devices and on work profiles. When applied to a work profile, this affects both the personal profile and the work profile.
     permittedAccessibilityServices :: (Core.Maybe PackageNameList),
     -- | If present, only the input methods provided by packages in this list are permitted. If this field is present, but the list is empty, then only system input methods are permitted.
     permittedInputMethods :: (Core.Maybe PackageNameList),
@@ -3763,7 +5123,7 @@ data Policy = Policy
     setWallpaperDisabled :: (Core.Maybe Core.Bool),
     -- | Action to take during the setup process. At most one action may be specified.
     setupActions :: (Core.Maybe [SetupAction]),
-    -- | Whether location sharing is disabled.
+    -- | Whether location sharing is disabled. share/location/disabled is supported for both fully managed devices and personally owned work profiles.
     shareLocationDisabled :: (Core.Maybe Core.Bool),
     -- | A message displayed to the user in the settings screen wherever functionality has been disabled by the admin. If the message is longer than 200 characters it may be truncated.
     shortSupportMessage :: (Core.Maybe UserFacingMessage),
@@ -3781,11 +5141,13 @@ data Policy = Policy
     systemUpdate :: (Core.Maybe SystemUpdate),
     -- | Whether configuring tethering and portable hotspots is disabled.
     tetheringConfigDisabled :: (Core.Maybe Core.Bool),
-    -- | Whether user uninstallation of applications is disabled.
+    -- | Whether user uninstallation of applications is disabled. This prevents apps from being uninstalled, even those removed using applications
     uninstallAppsDisabled :: (Core.Maybe Core.Bool),
     -- | If microphone/access is set to any value other than MICROPHONE/ACCESS_UNSPECIFIED, this has no effect. Otherwise this field controls whether microphones are disabled: If true, all microphones are disabled, otherwise they are available. This is available only on fully managed devices.
     unmuteMicrophoneDisabled :: (Core.Maybe Core.Bool),
-    -- | Whether transferring files over USB is disabled.
+    -- | Configuration of device activity logging.
+    usageLog :: (Core.Maybe UsageLog),
+    -- | Whether transferring files over USB is disabled. This is supported only on company-owned devices.
     usbFileTransferDisabled :: (Core.Maybe Core.Bool),
     -- | Whether USB storage is enabled. Deprecated.
     usbMassStorageEnabled :: (Core.Maybe Core.Bool),
@@ -3793,7 +5155,7 @@ data Policy = Policy
     version :: (Core.Maybe Core.Int64),
     -- | Whether configuring VPN is disabled.
     vpnConfigDisabled :: (Core.Maybe Core.Bool),
-    -- | Whether configuring Wi-Fi access points is disabled.Note: If a network connection can\'t be made at boot time and configuring Wi-Fi is disabled then network escape hatch will be shown in order to refresh the device policy (see networkEscapeHatchEnabled).
+    -- | Whether configuring Wi-Fi access points is disabled. Note: If a network connection can\'t be made at boot time and configuring Wi-Fi is disabled then network escape hatch will be shown in order to refresh the device policy (see networkEscapeHatchEnabled).
     wifiConfigDisabled :: (Core.Maybe Core.Bool),
     -- | DEPRECATED - Use wifi/config/disabled.
     wifiConfigsLockdownEnabled :: (Core.Maybe Core.Bool)
@@ -3886,6 +5248,7 @@ newPolicy =
       tetheringConfigDisabled = Core.Nothing,
       uninstallAppsDisabled = Core.Nothing,
       unmuteMicrophoneDisabled = Core.Nothing,
+      usageLog = Core.Nothing,
       usbFileTransferDisabled = Core.Nothing,
       usbMassStorageEnabled = Core.Nothing,
       version = Core.Nothing,
@@ -3983,6 +5346,7 @@ instance Core.FromJSON Policy where
             Core.<*> (o Core..:? "tetheringConfigDisabled")
             Core.<*> (o Core..:? "uninstallAppsDisabled")
             Core.<*> (o Core..:? "unmuteMicrophoneDisabled")
+            Core.<*> (o Core..:? "usageLog")
             Core.<*> (o Core..:? "usbFileTransferDisabled")
             Core.<*> (o Core..:? "usbMassStorageEnabled")
             Core.<*> ( o Core..:? "version"
@@ -4145,6 +5509,7 @@ instance Core.ToJSON Policy where
               Core.<$> uninstallAppsDisabled,
             ("unmuteMicrophoneDisabled" Core..=)
               Core.<$> unmuteMicrophoneDisabled,
+            ("usageLog" Core..=) Core.<$> usageLog,
             ("usbFileTransferDisabled" Core..=)
               Core.<$> usbFileTransferDisabled,
             ("usbMassStorageEnabled" Core..=)
@@ -4197,11 +5562,11 @@ instance Core.ToJSON Policy_OpenNetworkConfiguration where
 --
 -- /See:/ 'newPolicyEnforcementRule' smart constructor.
 data PolicyEnforcementRule = PolicyEnforcementRule
-  { -- | An action to block access to apps and data on a fully managed device or in a work profile. This action also triggers a user-facing notification with information (where possible) on how to correct the compliance issue. Note: wipeAction must also be specified.
+  { -- | An action to block access to apps and data on a company owned device or in a work profile. This action also triggers a user-facing notification with information (where possible) on how to correct the compliance issue. Note: wipeAction must also be specified.
     blockAction :: (Core.Maybe BlockAction),
     -- | The top-level policy to enforce. For example, applications or passwordPolicies.
     settingName :: (Core.Maybe Core.Text),
-    -- | An action to reset a fully managed device or delete a work profile. Note: blockAction must also be specified.
+    -- | An action to reset a company owned device or delete a work profile. Note: blockAction must also be specified.
     wipeAction :: (Core.Maybe WipeAction)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4366,6 +5731,51 @@ instance Core.ToJSON ProxyInfo where
           ]
       )
 
+-- | The device or profile has been remotely locked via the LOCK command.
+--
+-- /See:/ 'newRemoteLockEvent' smart constructor.
+data RemoteLockEvent = RemoteLockEvent
+  { -- | Package name of the admin app requesting the change.
+    adminPackageName :: (Core.Maybe Core.Text),
+    -- | User ID of the admin app from the which the change was requested.
+    adminUserId :: (Core.Maybe Core.Int32),
+    -- | User ID in which the change was requested in.
+    targetUserId :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RemoteLockEvent' with the minimum fields required to make a request.
+newRemoteLockEvent ::
+  RemoteLockEvent
+newRemoteLockEvent =
+  RemoteLockEvent
+    { adminPackageName = Core.Nothing,
+      adminUserId = Core.Nothing,
+      targetUserId = Core.Nothing
+    }
+
+instance Core.FromJSON RemoteLockEvent where
+  parseJSON =
+    Core.withObject
+      "RemoteLockEvent"
+      ( \o ->
+          RemoteLockEvent
+            Core.<$> (o Core..:? "adminPackageName")
+            Core.<*> (o Core..:? "adminUserId")
+            Core.<*> (o Core..:? "targetUserId")
+      )
+
+instance Core.ToJSON RemoteLockEvent where
+  toJSON RemoteLockEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("adminPackageName" Core..=)
+              Core.<$> adminPackageName,
+            ("adminUserId" Core..=) Core.<$> adminUserId,
+            ("targetUserId" Core..=) Core.<$> targetUserId
+          ]
+      )
+
 -- | The security posture of the device, as determined by the current device state and the policies applied.
 --
 -- /See:/ 'newSecurityPosture' smart constructor.
@@ -4408,7 +5818,7 @@ instance Core.ToJSON SecurityPosture where
 data SetupAction = SetupAction
   { -- | Description of this action.
     description :: (Core.Maybe UserFacingMessage),
-    -- | An action to launch an app. The app will be launched with an intent containing an extra with key com.google.android.apps.work.clouddpc.EXTRA/LAUNCHED/AS/SETUP/ACTION set to the boolean value true to indicate that this is a setup action flow.
+    -- | An action to launch an app. The app will be launched with an intent containing an extra with key com.google.android.apps.work.clouddpc.EXTRA/LAUNCHED/AS/SETUP/ACTION set to the boolean value true to indicate that this is a setup action flow. If SetupAction references an app, the corresponding installType in the application policy must be set as REQUIRED/FOR/SETUP or said setup will fail.
     launchApp :: (Core.Maybe LaunchAppAction),
     -- | Title of this action.
     title :: (Core.Maybe UserFacingMessage)
@@ -4622,6 +6032,46 @@ instance Core.ToJSON SoftwareInfo where
               Core.<$> securityPatchLevel,
             ("systemUpdateInfo" Core..=)
               Core.<$> systemUpdateInfo
+          ]
+      )
+
+-- | Additional context for SpecificNonComplianceReason.
+--
+-- /See:/ 'newSpecificNonComplianceContext' smart constructor.
+data SpecificNonComplianceContext = SpecificNonComplianceContext
+  { -- | Additional context for non-compliance related to Wi-Fi configuration. See ONC/WIFI/INVALID/VALUE and ONC/WIFI/API/LEVEL
+    oncWifiContext :: (Core.Maybe OncWifiContext),
+    -- | Additional context for non-compliance related to password policies. See PASSWORD/POLICIES/PASSWORD/EXPIRED and PASSWORD/POLICIES/PASSWORD/NOT_SUFFICIENT.
+    passwordPoliciesContext :: (Core.Maybe PasswordPoliciesContext)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SpecificNonComplianceContext' with the minimum fields required to make a request.
+newSpecificNonComplianceContext ::
+  SpecificNonComplianceContext
+newSpecificNonComplianceContext =
+  SpecificNonComplianceContext
+    { oncWifiContext = Core.Nothing,
+      passwordPoliciesContext = Core.Nothing
+    }
+
+instance Core.FromJSON SpecificNonComplianceContext where
+  parseJSON =
+    Core.withObject
+      "SpecificNonComplianceContext"
+      ( \o ->
+          SpecificNonComplianceContext
+            Core.<$> (o Core..:? "oncWifiContext")
+            Core.<*> (o Core..:? "passwordPoliciesContext")
+      )
+
+instance Core.ToJSON SpecificNonComplianceContext where
+  toJSON SpecificNonComplianceContext {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("oncWifiContext" Core..=) Core.<$> oncWifiContext,
+            ("passwordPoliciesContext" Core..=)
+              Core.<$> passwordPoliciesContext
           ]
       )
 
@@ -4948,6 +6398,247 @@ instance Core.ToJSON TermsAndConditions where
           ]
       )
 
+-- | Controls types of device activity logs collected from the device and reported via Pub\/Sub notification (https:\/\/developers.google.com\/android\/management\/notifications).
+--
+-- /See:/ 'newUsageLog' smart constructor.
+data UsageLog = UsageLog
+  { -- | Specifies which log types are enabled. Note that users will receive on-device messaging when usage logging is enabled.
+    enabledLogTypes :: (Core.Maybe [UsageLog_EnabledLogTypesItem]),
+    -- | Specifies which of the enabled log types can be uploaded over mobile data. By default logs are queued for upload when the device connects to WiFi.
+    uploadOnCellularAllowed :: (Core.Maybe [UsageLog_UploadOnCellularAllowedItem])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UsageLog' with the minimum fields required to make a request.
+newUsageLog ::
+  UsageLog
+newUsageLog =
+  UsageLog
+    { enabledLogTypes = Core.Nothing,
+      uploadOnCellularAllowed = Core.Nothing
+    }
+
+instance Core.FromJSON UsageLog where
+  parseJSON =
+    Core.withObject
+      "UsageLog"
+      ( \o ->
+          UsageLog
+            Core.<$> (o Core..:? "enabledLogTypes")
+            Core.<*> (o Core..:? "uploadOnCellularAllowed")
+      )
+
+instance Core.ToJSON UsageLog where
+  toJSON UsageLog {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("enabledLogTypes" Core..=)
+              Core.<$> enabledLogTypes,
+            ("uploadOnCellularAllowed" Core..=)
+              Core.<$> uploadOnCellularAllowed
+          ]
+      )
+
+-- | An event logged on the device.
+--
+-- /See:/ 'newUsageLogEvent' smart constructor.
+data UsageLogEvent = UsageLogEvent
+  { -- | A shell command was issued over ADB via “adb shell command”. Part of SECURITY_LOGS.
+    adbShellCommandEvent :: (Core.Maybe AdbShellCommandEvent),
+    -- | An ADB interactive shell was opened via “adb shell”. Part of SECURITY_LOGS.
+    adbShellInteractiveEvent :: (Core.Maybe AdbShellInteractiveEvent),
+    -- | An app process was started. Part of SECURITY_LOGS.
+    appProcessStartEvent :: (Core.Maybe AppProcessStartEvent),
+    -- | A new root certificate was installed into the system\'s trusted credential storage. Part of SECURITY_LOGS.
+    certAuthorityInstalledEvent :: (Core.Maybe CertAuthorityInstalledEvent),
+    -- | A root certificate was removed from the system\'s trusted credential storage. Part of SECURITY_LOGS.
+    certAuthorityRemovedEvent :: (Core.Maybe CertAuthorityRemovedEvent),
+    -- | An X.509v3 certificate failed to validate, currently this validation is performed on the Wi-FI access point and failure may be due to a mismatch upon server certificate validation. However it may in the future include other validation events of an X.509v3 certificate. Part of SECURITY_LOGS.
+    certValidationFailureEvent :: (Core.Maybe CertValidationFailureEvent),
+    -- | A TCP connect event was initiated through the standard network stack. Part of NETWORK/ACTIVITY/LOGS.
+    connectEvent :: (Core.Maybe ConnectEvent),
+    -- | Validates whether Android’s built-in cryptographic library (BoringSSL) is valid. Should always succeed on device boot, if it fails, the device should be considered untrusted. Part of SECURITY_LOGS.
+    cryptoSelfTestCompletedEvent :: (Core.Maybe CryptoSelfTestCompletedEvent),
+    -- | A DNS lookup event was initiated through the standard network stack. Part of NETWORK/ACTIVITY/LOGS.
+    dnsEvent :: (Core.Maybe DnsEvent),
+    -- | Unique id of the event.
+    eventId :: (Core.Maybe Core.Int64),
+    -- | Device timestamp when the event was logged.
+    eventTime :: (Core.Maybe Core.DateTime),
+    -- | The particular usage log event type that was reported on the device. Use this to determine which event field to access.
+    eventType :: (Core.Maybe UsageLogEvent_EventType),
+    -- | A file was downloaded from the device. Part of SECURITY_LOGS.
+    filePulledEvent :: (Core.Maybe FilePulledEvent),
+    -- | A file was uploaded onto the device. Part of SECURITY_LOGS.
+    filePushedEvent :: (Core.Maybe FilePushedEvent),
+    -- | A cryptographic key including user installed, admin installed and system maintained private key is removed from the device either by the user or management. Part of SECURITY_LOGS.
+    keyDestructionEvent :: (Core.Maybe KeyDestructionEvent),
+    -- | A cryptographic key including user installed, admin installed and system maintained private key is installed on the device either by the user or management. Part of SECURITY_LOGS.
+    keyGeneratedEvent :: (Core.Maybe KeyGeneratedEvent),
+    -- | A cryptographic key including user installed, admin installed and system maintained private key is imported on the device either by the user or management. Part of SECURITY_LOGS.
+    keyImportEvent :: (Core.Maybe KeyImportEvent),
+    -- | A cryptographic key including user installed, admin installed and system maintained private key is determined to be corrupted due to storage corruption, hardware failure or some OS issue. Part of SECURITY_LOGS.
+    keyIntegrityViolationEvent :: (Core.Maybe KeyIntegrityViolationEvent),
+    -- | An attempt was made to unlock the device. Part of SECURITY_LOGS.
+    keyguardDismissAuthAttemptEvent :: (Core.Maybe KeyguardDismissAuthAttemptEvent),
+    -- | The keyguard was dismissed. Part of SECURITY_LOGS.
+    keyguardDismissedEvent :: (Core.Maybe KeyguardDismissedEvent),
+    -- | The device was locked either by user or timeout. Part of SECURITY_LOGS.
+    keyguardSecuredEvent :: (Core.Maybe KeyguardSecuredEvent),
+    -- | The audit log buffer has reached 90% of its capacity, therefore older events may be dropped. Part of SECURITY_LOGS.
+    logBufferSizeCriticalEvent :: (Core.Maybe LogBufferSizeCriticalEvent),
+    -- | usageLog policy has been enabled. Part of SECURITY_LOGS.
+    loggingStartedEvent :: (Core.Maybe LoggingStartedEvent),
+    -- | usageLog policy has been disabled. Part of SECURITY_LOGS.
+    loggingStoppedEvent :: (Core.Maybe LoggingStoppedEvent),
+    -- | Removable media was mounted. Part of SECURITY_LOGS.
+    mediaMountEvent :: (Core.Maybe MediaMountEvent),
+    -- | Removable media was unmounted. Part of SECURITY_LOGS.
+    mediaUnmountEvent :: (Core.Maybe MediaUnmountEvent),
+    -- | Device was shutdown. Part of SECURITY_LOGS.
+    osShutdownEvent :: (Core.Maybe OsShutdownEvent),
+    -- | Device was started. Part of SECURITY_LOGS.
+    osStartupEvent :: (Core.Maybe OsStartupEvent),
+    -- | The device or profile has been remotely locked via the LOCK command. Part of SECURITY_LOGS.
+    remoteLockEvent :: (Core.Maybe RemoteLockEvent),
+    -- | The work profile or company-owned device failed to wipe when requested. This could be user initiated or admin initiated e.g. delete was received. Part of SECURITY_LOGS.
+    wipeFailureEvent :: (Core.Maybe WipeFailureEvent)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UsageLogEvent' with the minimum fields required to make a request.
+newUsageLogEvent ::
+  UsageLogEvent
+newUsageLogEvent =
+  UsageLogEvent
+    { adbShellCommandEvent = Core.Nothing,
+      adbShellInteractiveEvent = Core.Nothing,
+      appProcessStartEvent = Core.Nothing,
+      certAuthorityInstalledEvent = Core.Nothing,
+      certAuthorityRemovedEvent = Core.Nothing,
+      certValidationFailureEvent = Core.Nothing,
+      connectEvent = Core.Nothing,
+      cryptoSelfTestCompletedEvent = Core.Nothing,
+      dnsEvent = Core.Nothing,
+      eventId = Core.Nothing,
+      eventTime = Core.Nothing,
+      eventType = Core.Nothing,
+      filePulledEvent = Core.Nothing,
+      filePushedEvent = Core.Nothing,
+      keyDestructionEvent = Core.Nothing,
+      keyGeneratedEvent = Core.Nothing,
+      keyImportEvent = Core.Nothing,
+      keyIntegrityViolationEvent = Core.Nothing,
+      keyguardDismissAuthAttemptEvent = Core.Nothing,
+      keyguardDismissedEvent = Core.Nothing,
+      keyguardSecuredEvent = Core.Nothing,
+      logBufferSizeCriticalEvent = Core.Nothing,
+      loggingStartedEvent = Core.Nothing,
+      loggingStoppedEvent = Core.Nothing,
+      mediaMountEvent = Core.Nothing,
+      mediaUnmountEvent = Core.Nothing,
+      osShutdownEvent = Core.Nothing,
+      osStartupEvent = Core.Nothing,
+      remoteLockEvent = Core.Nothing,
+      wipeFailureEvent = Core.Nothing
+    }
+
+instance Core.FromJSON UsageLogEvent where
+  parseJSON =
+    Core.withObject
+      "UsageLogEvent"
+      ( \o ->
+          UsageLogEvent
+            Core.<$> (o Core..:? "adbShellCommandEvent")
+            Core.<*> (o Core..:? "adbShellInteractiveEvent")
+            Core.<*> (o Core..:? "appProcessStartEvent")
+            Core.<*> (o Core..:? "certAuthorityInstalledEvent")
+            Core.<*> (o Core..:? "certAuthorityRemovedEvent")
+            Core.<*> (o Core..:? "certValidationFailureEvent")
+            Core.<*> (o Core..:? "connectEvent")
+            Core.<*> (o Core..:? "cryptoSelfTestCompletedEvent")
+            Core.<*> (o Core..:? "dnsEvent")
+            Core.<*> ( o Core..:? "eventId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "eventTime")
+            Core.<*> (o Core..:? "eventType")
+            Core.<*> (o Core..:? "filePulledEvent")
+            Core.<*> (o Core..:? "filePushedEvent")
+            Core.<*> (o Core..:? "keyDestructionEvent")
+            Core.<*> (o Core..:? "keyGeneratedEvent")
+            Core.<*> (o Core..:? "keyImportEvent")
+            Core.<*> (o Core..:? "keyIntegrityViolationEvent")
+            Core.<*> (o Core..:? "keyguardDismissAuthAttemptEvent")
+            Core.<*> (o Core..:? "keyguardDismissedEvent")
+            Core.<*> (o Core..:? "keyguardSecuredEvent")
+            Core.<*> (o Core..:? "logBufferSizeCriticalEvent")
+            Core.<*> (o Core..:? "loggingStartedEvent")
+            Core.<*> (o Core..:? "loggingStoppedEvent")
+            Core.<*> (o Core..:? "mediaMountEvent")
+            Core.<*> (o Core..:? "mediaUnmountEvent")
+            Core.<*> (o Core..:? "osShutdownEvent")
+            Core.<*> (o Core..:? "osStartupEvent")
+            Core.<*> (o Core..:? "remoteLockEvent")
+            Core.<*> (o Core..:? "wipeFailureEvent")
+      )
+
+instance Core.ToJSON UsageLogEvent where
+  toJSON UsageLogEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("adbShellCommandEvent" Core..=)
+              Core.<$> adbShellCommandEvent,
+            ("adbShellInteractiveEvent" Core..=)
+              Core.<$> adbShellInteractiveEvent,
+            ("appProcessStartEvent" Core..=)
+              Core.<$> appProcessStartEvent,
+            ("certAuthorityInstalledEvent" Core..=)
+              Core.<$> certAuthorityInstalledEvent,
+            ("certAuthorityRemovedEvent" Core..=)
+              Core.<$> certAuthorityRemovedEvent,
+            ("certValidationFailureEvent" Core..=)
+              Core.<$> certValidationFailureEvent,
+            ("connectEvent" Core..=) Core.<$> connectEvent,
+            ("cryptoSelfTestCompletedEvent" Core..=)
+              Core.<$> cryptoSelfTestCompletedEvent,
+            ("dnsEvent" Core..=) Core.<$> dnsEvent,
+            ("eventId" Core..=) Core.. Core.AsText
+              Core.<$> eventId,
+            ("eventTime" Core..=) Core.<$> eventTime,
+            ("eventType" Core..=) Core.<$> eventType,
+            ("filePulledEvent" Core..=) Core.<$> filePulledEvent,
+            ("filePushedEvent" Core..=) Core.<$> filePushedEvent,
+            ("keyDestructionEvent" Core..=)
+              Core.<$> keyDestructionEvent,
+            ("keyGeneratedEvent" Core..=)
+              Core.<$> keyGeneratedEvent,
+            ("keyImportEvent" Core..=) Core.<$> keyImportEvent,
+            ("keyIntegrityViolationEvent" Core..=)
+              Core.<$> keyIntegrityViolationEvent,
+            ("keyguardDismissAuthAttemptEvent" Core..=)
+              Core.<$> keyguardDismissAuthAttemptEvent,
+            ("keyguardDismissedEvent" Core..=)
+              Core.<$> keyguardDismissedEvent,
+            ("keyguardSecuredEvent" Core..=)
+              Core.<$> keyguardSecuredEvent,
+            ("logBufferSizeCriticalEvent" Core..=)
+              Core.<$> logBufferSizeCriticalEvent,
+            ("loggingStartedEvent" Core..=)
+              Core.<$> loggingStartedEvent,
+            ("loggingStoppedEvent" Core..=)
+              Core.<$> loggingStoppedEvent,
+            ("mediaMountEvent" Core..=) Core.<$> mediaMountEvent,
+            ("mediaUnmountEvent" Core..=)
+              Core.<$> mediaUnmountEvent,
+            ("osShutdownEvent" Core..=) Core.<$> osShutdownEvent,
+            ("osStartupEvent" Core..=) Core.<$> osStartupEvent,
+            ("remoteLockEvent" Core..=) Core.<$> remoteLockEvent,
+            ("wipeFailureEvent" Core..=)
+              Core.<$> wipeFailureEvent
+          ]
+      )
+
 -- | A user belonging to an enterprise.
 --
 -- /See:/ 'newUser' smart constructor.
@@ -5199,7 +6890,7 @@ instance Core.ToJSON WebToken where
           ]
       )
 
--- | An action to reset a fully managed device or delete a work profile. Note: blockAction must also be specified.
+-- | An action to reset a company owned device or delete a work profile. Note: blockAction must also be specified.
 --
 -- /See:/ 'newWipeAction' smart constructor.
 data WipeAction = WipeAction
@@ -5234,3 +6925,23 @@ instance Core.ToJSON WipeAction where
             ("wipeAfterDays" Core..=) Core.<$> wipeAfterDays
           ]
       )
+
+-- | The work profile or company-owned device failed to wipe when requested. This could be user initiated or admin initiated e.g. delete was received. Intentionally empty.
+--
+-- /See:/ 'newWipeFailureEvent' smart constructor.
+data WipeFailureEvent = WipeFailureEvent
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'WipeFailureEvent' with the minimum fields required to make a request.
+newWipeFailureEvent ::
+  WipeFailureEvent
+newWipeFailureEvent = WipeFailureEvent
+
+instance Core.FromJSON WipeFailureEvent where
+  parseJSON =
+    Core.withObject
+      "WipeFailureEvent"
+      (\o -> Core.pure WipeFailureEvent)
+
+instance Core.ToJSON WipeFailureEvent where
+  toJSON = Core.const Core.emptyObject

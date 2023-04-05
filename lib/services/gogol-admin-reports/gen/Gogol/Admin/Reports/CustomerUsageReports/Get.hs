@@ -74,7 +74,7 @@ data ReportsCustomerUsageReportsGet = ReportsCustomerUsageReportsGet
     callback :: (Core.Maybe Core.Text),
     -- | The unique ID of the customer to retrieve data for.
     customerId :: (Core.Maybe Core.Text),
-    -- | Represents the date the usage occurred. The timestamp is in the ISO 8601 format, yyyy-mm-dd. We recommend you use your account\'s time zone for this.
+    -- | Represents the date the usage occurred, based on PST time zone. The timestamp is in the <https://en.wikipedia.org/wiki/ISO_8601 ISO 8601 format>, @yyyy-mm-dd@.
     date :: Core.Text,
     -- | Token to specify next page. A report with multiple pages has a @nextPageToken@ property in the response. For your follow-on requests getting all of the report\'s pages, enter the @nextPageToken@ value in the @pageToken@ query string.
     pageToken :: (Core.Maybe Core.Text),
@@ -89,7 +89,7 @@ data ReportsCustomerUsageReportsGet = ReportsCustomerUsageReportsGet
 
 -- | Creates a value of 'ReportsCustomerUsageReportsGet' with the minimum fields required to make a request.
 newReportsCustomerUsageReportsGet ::
-  -- |  Represents the date the usage occurred. The timestamp is in the ISO 8601 format, yyyy-mm-dd. We recommend you use your account\'s time zone for this. See 'date'.
+  -- |  Represents the date the usage occurred, based on PST time zone. The timestamp is in the <https://en.wikipedia.org/wiki/ISO_8601 ISO 8601 format>, @yyyy-mm-dd@. See 'date'.
   Core.Text ->
   ReportsCustomerUsageReportsGet
 newReportsCustomerUsageReportsGet date =

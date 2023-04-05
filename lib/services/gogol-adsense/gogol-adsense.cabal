@@ -49,23 +49,32 @@ library
 
   exposed-modules:
     Gogol.AdSense
+    Gogol.AdSense.Accounts.Adclients.Adunits.Create
     Gogol.AdSense.Accounts.Adclients.Adunits.Get
     Gogol.AdSense.Accounts.Adclients.Adunits.GetAdcode
     Gogol.AdSense.Accounts.Adclients.Adunits.List
     Gogol.AdSense.Accounts.Adclients.Adunits.ListLinkedCustomChannels
+    Gogol.AdSense.Accounts.Adclients.Adunits.Patch
+    Gogol.AdSense.Accounts.Adclients.Customchannels.Create
+    Gogol.AdSense.Accounts.Adclients.Customchannels.Delete
     Gogol.AdSense.Accounts.Adclients.Customchannels.Get
     Gogol.AdSense.Accounts.Adclients.Customchannels.List
     Gogol.AdSense.Accounts.Adclients.Customchannels.ListLinkedAdUnits
+    Gogol.AdSense.Accounts.Adclients.Customchannels.Patch
+    Gogol.AdSense.Accounts.Adclients.Get
     Gogol.AdSense.Accounts.Adclients.GetAdcode
     Gogol.AdSense.Accounts.Adclients.List
+    Gogol.AdSense.Accounts.Adclients.Urlchannels.Get
     Gogol.AdSense.Accounts.Adclients.Urlchannels.List
     Gogol.AdSense.Accounts.Alerts.List
     Gogol.AdSense.Accounts.Get
+    Gogol.AdSense.Accounts.GetAdBlockingRecoveryTag
     Gogol.AdSense.Accounts.List
     Gogol.AdSense.Accounts.ListChildAccounts
     Gogol.AdSense.Accounts.Payments.List
     Gogol.AdSense.Accounts.Reports.Generate
     Gogol.AdSense.Accounts.Reports.GenerateCsv
+    Gogol.AdSense.Accounts.Reports.GetSaved
     Gogol.AdSense.Accounts.Reports.Saved.Generate
     Gogol.AdSense.Accounts.Reports.Saved.GenerateCsv
     Gogol.AdSense.Accounts.Reports.Saved.List
@@ -78,5 +87,5 @@ library
     Gogol.AdSense.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

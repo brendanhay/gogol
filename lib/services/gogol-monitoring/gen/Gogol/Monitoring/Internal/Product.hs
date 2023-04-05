@@ -54,6 +54,14 @@ module Gogol.Monitoring.Internal.Product
     BasicAuthentication (..),
     newBasicAuthentication,
 
+    -- * BasicService
+    BasicService (..),
+    newBasicService,
+
+    -- * BasicService_ServiceLabels
+    BasicService_ServiceLabels (..),
+    newBasicService_ServiceLabels,
+
     -- * BasicSli
     BasicSli (..),
     newBasicSli,
@@ -65,6 +73,10 @@ module Gogol.Monitoring.Internal.Product
     -- * CloudEndpoints
     CloudEndpoints (..),
     newCloudEndpoints,
+
+    -- * CloudRun
+    CloudRun (..),
+    newCloudRun,
 
     -- * ClusterIstio
     ClusterIstio (..),
@@ -113,6 +125,10 @@ module Gogol.Monitoring.Internal.Product
     -- * CreateTimeSeriesSummary
     CreateTimeSeriesSummary (..),
     newCreateTimeSeriesSummary,
+
+    -- * Criteria
+    Criteria (..),
+    newCriteria,
 
     -- * Custom
     Custom (..),
@@ -166,6 +182,10 @@ module Gogol.Monitoring.Internal.Product
     Field (..),
     newField,
 
+    -- * ForecastOptions
+    ForecastOptions (..),
+    newForecastOptions,
+
     -- * GetNotificationChannelVerificationCodeRequest
     GetNotificationChannelVerificationCodeRequest (..),
     newGetNotificationChannelVerificationCodeRequest,
@@ -173,6 +193,18 @@ module Gogol.Monitoring.Internal.Product
     -- * GetNotificationChannelVerificationCodeResponse
     GetNotificationChannelVerificationCodeResponse (..),
     newGetNotificationChannelVerificationCodeResponse,
+
+    -- * GkeNamespace
+    GkeNamespace (..),
+    newGkeNamespace,
+
+    -- * GkeService
+    GkeService (..),
+    newGkeService,
+
+    -- * GkeWorkload
+    GkeWorkload (..),
+    newGkeWorkload,
 
     -- * GoogleMonitoringV3Range
     GoogleMonitoringV3Range (..),
@@ -197,6 +229,10 @@ module Gogol.Monitoring.Internal.Product
     -- * IstioCanonicalService
     IstioCanonicalService (..),
     newIstioCanonicalService,
+
+    -- * JsonPathMatcher
+    JsonPathMatcher (..),
+    newJsonPathMatcher,
 
     -- * LabelDescriptor
     LabelDescriptor (..),
@@ -249,6 +285,10 @@ module Gogol.Monitoring.Internal.Product
     -- * ListServicesResponse
     ListServicesResponse (..),
     newListServicesResponse,
+
+    -- * ListSnoozesResponse
+    ListSnoozesResponse (..),
+    newListSnoozesResponse,
 
     -- * ListTimeSeriesResponse
     ListTimeSeriesResponse (..),
@@ -350,6 +390,10 @@ module Gogol.Monitoring.Internal.Product
     NotificationChannelDescriptor (..),
     newNotificationChannelDescriptor,
 
+    -- * NotificationChannelStrategy
+    NotificationChannelStrategy (..),
+    newNotificationChannelStrategy,
+
     -- * NotificationRateLimit
     NotificationRateLimit (..),
     newNotificationRateLimit,
@@ -369,6 +413,10 @@ module Gogol.Monitoring.Internal.Product
     -- * PerformanceThreshold
     PerformanceThreshold (..),
     newPerformanceThreshold,
+
+    -- * PingConfig
+    PingConfig (..),
+    newPingConfig,
 
     -- * Point
     Point (..),
@@ -398,6 +446,10 @@ module Gogol.Monitoring.Internal.Product
     ResourceGroup (..),
     newResourceGroup,
 
+    -- * ResponseStatusCode
+    ResponseStatusCode (..),
+    newResponseStatusCode,
+
     -- * SendNotificationChannelVerificationCodeRequest
     SendNotificationChannelVerificationCodeRequest (..),
     newSendNotificationChannelVerificationCodeRequest,
@@ -421,6 +473,10 @@ module Gogol.Monitoring.Internal.Product
     -- * ServiceLevelObjective_UserLabels
     ServiceLevelObjective_UserLabels (..),
     newServiceLevelObjective_UserLabels,
+
+    -- * Snooze
+    Snooze (..),
+    newSnooze,
 
     -- * SourceContext
     SourceContext (..),
@@ -481,6 +537,10 @@ module Gogol.Monitoring.Internal.Product
     -- * UptimeCheckConfig
     UptimeCheckConfig (..),
     newUptimeCheckConfig,
+
+    -- * UptimeCheckConfig_UserLabels
+    UptimeCheckConfig_UserLabels (..),
+    newUptimeCheckConfig_UserLabels,
 
     -- * UptimeCheckIp
     UptimeCheckIp (..),
@@ -576,7 +636,7 @@ data AlertPolicy = AlertPolicy
     enabled :: (Core.Maybe Core.Bool),
     -- | A read-only record of the most recent change to the alerting policy. If provided in a call to create or update, this field will be ignored.
     mutationRecord :: (Core.Maybe MutationRecord),
-    -- | Required if the policy exists. The resource name for this policy. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/alertPolicies\/[ALERT/POLICY/ID] [ALERT/POLICY_ID] is assigned by Stackdriver Monitoring when the policy is created. When calling the alertPolicies.create method, do not include the name field in the alerting policy passed as part of the request.
+    -- | Required if the policy exists. The resource name for this policy. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/alertPolicies\/[ALERT/POLICY/ID] [ALERT/POLICY_ID] is assigned by Cloud Monitoring when the policy is created. When calling the alertPolicies.create method, do not include the name field in the alerting policy passed as part of the request.
     name :: (Core.Maybe Core.Text),
     -- | Identifies the notification channels to which notifications should be sent when incidents are opened or closed or when new violations occur on an already opened incident. Each element of this array corresponds to the name field in each of the NotificationChannel objects that are returned from the ListNotificationChannels method. The format of the entries in this field is: projects\/[PROJECT/ID/OR/NUMBER]\/notificationChannels\/[CHANNEL/ID]
     notificationChannels :: (Core.Maybe [Core.Text]),
@@ -682,6 +742,8 @@ instance Core.ToJSON AlertPolicy_UserLabels where
 data AlertStrategy = AlertStrategy
   { -- | If an alert policy that was active has no data for this long, any open incidents will close
     autoClose :: (Core.Maybe Core.Duration),
+    -- | Control how notifications will be sent out, on a per-channel basis.
+    notificationChannelStrategy :: (Core.Maybe [NotificationChannelStrategy]),
     -- | Required for alert policies with a LogMatch condition.This limit is not implemented for alert policies that are not log-based.
     notificationRateLimit :: (Core.Maybe NotificationRateLimit)
   }
@@ -691,7 +753,11 @@ data AlertStrategy = AlertStrategy
 newAlertStrategy ::
   AlertStrategy
 newAlertStrategy =
-  AlertStrategy {autoClose = Core.Nothing, notificationRateLimit = Core.Nothing}
+  AlertStrategy
+    { autoClose = Core.Nothing,
+      notificationChannelStrategy = Core.Nothing,
+      notificationRateLimit = Core.Nothing
+    }
 
 instance Core.FromJSON AlertStrategy where
   parseJSON =
@@ -700,6 +766,7 @@ instance Core.FromJSON AlertStrategy where
       ( \o ->
           AlertStrategy
             Core.<$> (o Core..:? "autoClose")
+            Core.<*> (o Core..:? "notificationChannelStrategy")
             Core.<*> (o Core..:? "notificationRateLimit")
       )
 
@@ -708,6 +775,8 @@ instance Core.ToJSON AlertStrategy where
     Core.object
       ( Core.catMaybes
           [ ("autoClose" Core..=) Core.<$> autoClose,
+            ("notificationChannelStrategy" Core..=)
+              Core.<$> notificationChannelStrategy,
             ("notificationRateLimit" Core..=)
               Core.<$> notificationRateLimit
           ]
@@ -717,7 +786,7 @@ instance Core.ToJSON AlertStrategy where
 --
 -- /See:/ 'newAppEngine' smart constructor.
 newtype AppEngine = AppEngine
-  { -- | The ID of the App Engine module underlying this service. Corresponds to the module/id resource label in the gae/app monitored resource: https:\/\/cloud.google.com\/monitoring\/api\/resources#tag/gae/app
+  { -- | The ID of the App Engine module underlying this service. Corresponds to the module/id resource label in the gae/app monitored resource (https:\/\/cloud.google.com\/monitoring\/api\/resources#tag/gae/app).
     moduleId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -795,6 +864,72 @@ instance Core.ToJSON BasicAuthentication where
             ("username" Core..=) Core.<$> username
           ]
       )
+
+-- | A well-known service type, defined by its service type and service labels. Documentation and examples here (https:\/\/cloud.google.com\/stackdriver\/docs\/solutions\/slo-monitoring\/api\/api-structures#basic-svc-w-basic-sli).
+--
+-- /See:/ 'newBasicService' smart constructor.
+data BasicService = BasicService
+  { -- | Labels that specify the resource that emits the monitoring data which is used for SLO reporting of this Service. Documentation and valid values for given service types here (https:\/\/cloud.google.com\/stackdriver\/docs\/solutions\/slo-monitoring\/api\/api-structures#basic-svc-w-basic-sli).
+    serviceLabels :: (Core.Maybe BasicService_ServiceLabels),
+    -- | The type of service that this basic service defines, e.g. APP_ENGINE service type. Documentation and valid values here (https:\/\/cloud.google.com\/stackdriver\/docs\/solutions\/slo-monitoring\/api\/api-structures#basic-svc-w-basic-sli).
+    serviceType :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BasicService' with the minimum fields required to make a request.
+newBasicService ::
+  BasicService
+newBasicService =
+  BasicService {serviceLabels = Core.Nothing, serviceType = Core.Nothing}
+
+instance Core.FromJSON BasicService where
+  parseJSON =
+    Core.withObject
+      "BasicService"
+      ( \o ->
+          BasicService
+            Core.<$> (o Core..:? "serviceLabels")
+            Core.<*> (o Core..:? "serviceType")
+      )
+
+instance Core.ToJSON BasicService where
+  toJSON BasicService {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("serviceLabels" Core..=) Core.<$> serviceLabels,
+            ("serviceType" Core..=) Core.<$> serviceType
+          ]
+      )
+
+-- | Labels that specify the resource that emits the monitoring data which is used for SLO reporting of this Service. Documentation and valid values for given service types here (https:\/\/cloud.google.com\/stackdriver\/docs\/solutions\/slo-monitoring\/api\/api-structures#basic-svc-w-basic-sli).
+--
+-- /See:/ 'newBasicService_ServiceLabels' smart constructor.
+newtype BasicService_ServiceLabels = BasicService_ServiceLabels
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BasicService_ServiceLabels' with the minimum fields required to make a request.
+newBasicService_ServiceLabels ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  BasicService_ServiceLabels
+newBasicService_ServiceLabels additional =
+  BasicService_ServiceLabels {additional = additional}
+
+instance Core.FromJSON BasicService_ServiceLabels where
+  parseJSON =
+    Core.withObject
+      "BasicService_ServiceLabels"
+      ( \o ->
+          BasicService_ServiceLabels
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON BasicService_ServiceLabels where
+  toJSON BasicService_ServiceLabels {..} =
+    Core.toJSON additional
 
 -- | An SLI measuring performance on a well-known service type. Performance will be computed on the basis of pre-defined metrics. The type of the service/resource determines the metrics to use and the service/resource.labels and metric_labels are used to construct a monitoring filter to filter that metric down to just the data relevant to this service.
 --
@@ -900,7 +1035,7 @@ instance Core.ToJSON BucketOptions where
 --
 -- /See:/ 'newCloudEndpoints' smart constructor.
 newtype CloudEndpoints = CloudEndpoints
-  { -- | The name of the Cloud Endpoints service underlying this service. Corresponds to the service resource label in the api monitored resource: https:\/\/cloud.google.com\/monitoring\/api\/resources#tag_api
+  { -- | The name of the Cloud Endpoints service underlying this service. Corresponds to the service resource label in the api monitored resource (https:\/\/cloud.google.com\/monitoring\/api\/resources#tag_api).
     service :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -923,6 +1058,41 @@ instance Core.ToJSON CloudEndpoints where
     Core.object
       ( Core.catMaybes
           [("service" Core..=) Core.<$> service]
+      )
+
+-- | Cloud Run service. Learn more at https:\/\/cloud.google.com\/run.
+--
+-- /See:/ 'newCloudRun' smart constructor.
+data CloudRun = CloudRun
+  { -- | The location the service is run. Corresponds to the location resource label in the cloud/run/revision monitored resource (https:\/\/cloud.google.com\/monitoring\/api\/resources#tag/cloud/run_revision).
+    location :: (Core.Maybe Core.Text),
+    -- | The name of the Cloud Run service. Corresponds to the service/name resource label in the cloud/run/revision monitored resource (https:\/\/cloud.google.com\/monitoring\/api\/resources#tag/cloud/run/revision).
+    serviceName :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CloudRun' with the minimum fields required to make a request.
+newCloudRun ::
+  CloudRun
+newCloudRun = CloudRun {location = Core.Nothing, serviceName = Core.Nothing}
+
+instance Core.FromJSON CloudRun where
+  parseJSON =
+    Core.withObject
+      "CloudRun"
+      ( \o ->
+          CloudRun
+            Core.<$> (o Core..:? "location")
+            Core.<*> (o Core..:? "serviceName")
+      )
+
+instance Core.ToJSON CloudRun where
+  toJSON CloudRun {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("location" Core..=) Core.<$> location,
+            ("serviceName" Core..=) Core.<$> serviceName
+          ]
       )
 
 -- | Istio service scoped to a single Kubernetes cluster. Learn more at https:\/\/istio.io. Clusters running OSS Istio will have their services ingested as this type.
@@ -1211,7 +1381,7 @@ data Condition = Condition
     conditionThreshold :: (Core.Maybe MetricThreshold),
     -- | A short name or phrase used to identify the condition in dashboards, notifications, and incidents. To avoid confusion, don\'t use the same display name for multiple conditions in the same policy.
     displayName :: (Core.Maybe Core.Text),
-    -- | Required if the condition exists. The unique resource name for this condition. Its format is: projects\/[PROJECT/ID/OR/NUMBER]\/alertPolicies\/[POLICY/ID]\/conditions\/[CONDITION/ID] [CONDITION/ID] is assigned by Stackdriver Monitoring when the condition is created as part of a new or updated alerting policy.When calling the alertPolicies.create method, do not include the name field in the conditions of the requested alerting policy. Stackdriver Monitoring creates the condition identifiers and includes them in the new policy.When calling the alertPolicies.update method to update a policy, including a condition name causes the existing condition to be updated. Conditions without names are added to the updated policy. Existing conditions are deleted if they are not updated.Best practice is to preserve [CONDITION_ID] if you make only small changes, such as those to condition thresholds, durations, or trigger values. Otherwise, treat the change as a new condition and let the existing condition be deleted.
+    -- | Required if the condition exists. The unique resource name for this condition. Its format is: projects\/[PROJECT/ID/OR/NUMBER]\/alertPolicies\/[POLICY/ID]\/conditions\/[CONDITION/ID] [CONDITION/ID] is assigned by Cloud Monitoring when the condition is created as part of a new or updated alerting policy.When calling the alertPolicies.create method, do not include the name field in the conditions of the requested alerting policy. Cloud Monitoring creates the condition identifiers and includes them in the new policy.When calling the alertPolicies.update method to update a policy, including a condition name causes the existing condition to be updated. Conditions without names are added to the updated policy. Existing conditions are deleted if they are not updated.Best practice is to preserve [CONDITION_ID] if you make only small changes, such as those to condition thresholds, durations, or trigger values. Otherwise, treat the change as a new condition and let the existing condition be deleted.
     name :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1266,6 +1436,8 @@ instance Core.ToJSON Condition where
 data ContentMatcher = ContentMatcher
   { -- | String, regex or JSON content to match. Maximum 1024 bytes. An empty content string indicates no content matching is to be performed.
     content :: (Core.Maybe Core.Text),
+    -- | Matcher information for MATCHES/JSON/PATH and NOT/MATCHES/JSON_PATH
+    jsonPathMatcher :: (Core.Maybe JsonPathMatcher),
     -- | The type of content matcher that will be applied to the server output, compared to the content string when the check is run.
     matcher :: (Core.Maybe ContentMatcher_Matcher)
   }
@@ -1275,7 +1447,11 @@ data ContentMatcher = ContentMatcher
 newContentMatcher ::
   ContentMatcher
 newContentMatcher =
-  ContentMatcher {content = Core.Nothing, matcher = Core.Nothing}
+  ContentMatcher
+    { content = Core.Nothing,
+      jsonPathMatcher = Core.Nothing,
+      matcher = Core.Nothing
+    }
 
 instance Core.FromJSON ContentMatcher where
   parseJSON =
@@ -1284,6 +1460,7 @@ instance Core.FromJSON ContentMatcher where
       ( \o ->
           ContentMatcher
             Core.<$> (o Core..:? "content")
+            Core.<*> (o Core..:? "jsonPathMatcher")
             Core.<*> (o Core..:? "matcher")
       )
 
@@ -1292,6 +1469,7 @@ instance Core.ToJSON ContentMatcher where
     Core.object
       ( Core.catMaybes
           [ ("content" Core..=) Core.<$> content,
+            ("jsonPathMatcher" Core..=) Core.<$> jsonPathMatcher,
             ("matcher" Core..=) Core.<$> matcher
           ]
       )
@@ -1462,7 +1640,34 @@ instance Core.ToJSON CreateTimeSeriesSummary where
           ]
       )
 
--- | Custom view of service telemetry. Currently a place-holder pending final design.
+-- | Criteria specific to the AlertPolicys that this Snooze applies to. The Snooze will suppress alerts that come from one of the AlertPolicys whose names are supplied.
+--
+-- /See:/ 'newCriteria' smart constructor.
+newtype Criteria = Criteria
+  { -- | The specific AlertPolicy names for the alert that should be snoozed. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/alertPolicies\/[POLICY/ID] There is a limit of 16 policies per snooze. This limit is checked during snooze creation.
+    policies :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Criteria' with the minimum fields required to make a request.
+newCriteria ::
+  Criteria
+newCriteria = Criteria {policies = Core.Nothing}
+
+instance Core.FromJSON Criteria where
+  parseJSON =
+    Core.withObject
+      "Criteria"
+      (\o -> Criteria Core.<$> (o Core..:? "policies"))
+
+instance Core.ToJSON Criteria where
+  toJSON Criteria {..} =
+    Core.object
+      ( Core.catMaybes
+          [("policies" Core..=) Core.<$> policies]
+      )
+
+-- | Use a custom service to designate a service that you want to monitor when none of the other service types (like App Engine, Cloud Run, or a GKE type) matches your intended service.
 --
 -- /See:/ 'newCustom' smart constructor.
 data Custom = Custom
@@ -1521,7 +1726,9 @@ instance Core.FromJSON Distribution where
       "Distribution"
       ( \o ->
           Distribution
-            Core.<$> (o Core..:? "bucketCounts")
+            Core.<$> ( o Core..:? "bucketCounts"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "bucketOptions")
             Core.<*> ( o Core..:? "count"
                          Core.<&> Core.fmap Core.fromAsText
@@ -1536,7 +1743,9 @@ instance Core.ToJSON Distribution where
   toJSON Distribution {..} =
     Core.object
       ( Core.catMaybes
-          [ ("bucketCounts" Core..=) Core.<$> bucketCounts,
+          [ ("bucketCounts" Core..=)
+              Core.. Core.fmap Core.AsText
+              Core.<$> bucketCounts,
             ("bucketOptions" Core..=) Core.<$> bucketOptions,
             ("count" Core..=) Core.. Core.AsText Core.<$> count,
             ("exemplars" Core..=) Core.<$> exemplars,
@@ -1588,7 +1797,7 @@ instance Core.ToJSON DistributionCut where
 --
 -- /See:/ 'newDocumentation' smart constructor.
 data Documentation = Documentation
-  { -- | The text of the documentation, interpreted according to mime_type. The content may not exceed 8,192 Unicode characters and may not exceed more than 10,240 bytes when encoded in UTF-8 format, whichever is smaller. This text can be templatized by using variables (https:\/\/cloud.google.com\/monitoring\/alerts\/doc-variables).
+  { -- | The body of the documentation, interpreted according to mime_type. The content may not exceed 8,192 Unicode characters and may not exceed more than 10,240 bytes when encoded in UTF-8 format, whichever is smaller. This text can be templatized by using variables (https:\/\/cloud.google.com\/monitoring\/alerts\/doc-variables).
     content :: (Core.Maybe Core.Text),
     -- | The format of the content field. Presently, only the value \"text\/markdown\" is supported. See Markdown (https:\/\/en.wikipedia.org\/wiki\/Markdown) for more information.
     mimeType :: (Core.Maybe Core.Text)
@@ -1675,7 +1884,7 @@ instance Core.ToJSON DroppedLabels_Label where
   toJSON DroppedLabels_Label {..} =
     Core.toJSON additional
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for Empty is empty JSON object {}.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -1826,7 +2035,7 @@ instance Core.ToJSON Explicit where
     Core.object
       (Core.catMaybes [("bounds" Core..=) Core.<$> bounds])
 
--- | Specifies an exponential sequence of buckets that have a width that is proportional to the value of the lower bound. Each bucket represents a constant relative uncertainty on a specific value in the bucket.There are num/finite/buckets + 2 (= N) buckets. Bucket i has the following boundaries:Upper bound (0 \<= i \< N-1): scale * (growth/factor ^ i). Lower bound (1 \<= i \< N): scale * (growth/factor ^ (i - 1)).
+-- | Specifies an exponential sequence of buckets that have a width that is proportional to the value of the lower bound. Each bucket represents a constant relative uncertainty on a specific value in the bucket.There are num/finite/buckets + 2 (= N) buckets. Bucket i has the following boundaries:Upper bound (0 \<= i \< N-1): scale * (growth/factor ^ i).Lower bound (1 \<= i \< N): scale * (growth/factor ^ (i - 1)).
 --
 -- /See:/ 'newExponential' smart constructor.
 data Exponential = Exponential
@@ -1950,6 +2159,38 @@ instance Core.ToJSON Field where
           ]
       )
 
+-- | Options used when forecasting the time series and testing the predicted value against the threshold.
+--
+-- /See:/ 'newForecastOptions' smart constructor.
+newtype ForecastOptions = ForecastOptions
+  { -- | Required. The length of time into the future to forecast whether a time series will violate the threshold. If the predicted value is found to violate the threshold, and the violation is observed in all forecasts made for the configured duration, then the time series is considered to be failing.
+    forecastHorizon :: (Core.Maybe Core.Duration)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ForecastOptions' with the minimum fields required to make a request.
+newForecastOptions ::
+  ForecastOptions
+newForecastOptions = ForecastOptions {forecastHorizon = Core.Nothing}
+
+instance Core.FromJSON ForecastOptions where
+  parseJSON =
+    Core.withObject
+      "ForecastOptions"
+      ( \o ->
+          ForecastOptions
+            Core.<$> (o Core..:? "forecastHorizon")
+      )
+
+instance Core.ToJSON ForecastOptions where
+  toJSON ForecastOptions {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("forecastHorizon" Core..=)
+              Core.<$> forecastHorizon
+          ]
+      )
+
 -- | The GetNotificationChannelVerificationCode request.
 --
 -- /See:/ 'newGetNotificationChannelVerificationCodeRequest' smart constructor.
@@ -2033,6 +2274,170 @@ instance
               ("expireTime" Core..=) Core.<$> expireTime
             ]
         )
+
+-- | GKE Namespace. The field names correspond to the resource metadata labels on monitored resources that fall under a namespace (for example, k8s/container or k8s/pod).
+--
+-- /See:/ 'newGkeNamespace' smart constructor.
+data GkeNamespace = GkeNamespace
+  { -- | The name of the parent cluster.
+    clusterName :: (Core.Maybe Core.Text),
+    -- | The location of the parent cluster. This may be a zone or region.
+    location :: (Core.Maybe Core.Text),
+    -- | The name of this namespace.
+    namespaceName :: (Core.Maybe Core.Text),
+    -- | Output only. The project this resource lives in. For legacy services migrated from the Custom type, this may be a distinct project from the one parenting the service itself.
+    projectId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GkeNamespace' with the minimum fields required to make a request.
+newGkeNamespace ::
+  GkeNamespace
+newGkeNamespace =
+  GkeNamespace
+    { clusterName = Core.Nothing,
+      location = Core.Nothing,
+      namespaceName = Core.Nothing,
+      projectId = Core.Nothing
+    }
+
+instance Core.FromJSON GkeNamespace where
+  parseJSON =
+    Core.withObject
+      "GkeNamespace"
+      ( \o ->
+          GkeNamespace
+            Core.<$> (o Core..:? "clusterName")
+            Core.<*> (o Core..:? "location")
+            Core.<*> (o Core..:? "namespaceName")
+            Core.<*> (o Core..:? "projectId")
+      )
+
+instance Core.ToJSON GkeNamespace where
+  toJSON GkeNamespace {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("clusterName" Core..=) Core.<$> clusterName,
+            ("location" Core..=) Core.<$> location,
+            ("namespaceName" Core..=) Core.<$> namespaceName,
+            ("projectId" Core..=) Core.<$> projectId
+          ]
+      )
+
+-- | GKE Service. The \"service\" here represents a Kubernetes service object (https:\/\/kubernetes.io\/docs\/concepts\/services-networking\/service). The field names correspond to the resource labels on k8s/service monitored resources (https:\/\/cloud.google.com\/monitoring\/api\/resources#tag/k8s_service).
+--
+-- /See:/ 'newGkeService' smart constructor.
+data GkeService = GkeService
+  { -- | The name of the parent cluster.
+    clusterName :: (Core.Maybe Core.Text),
+    -- | The location of the parent cluster. This may be a zone or region.
+    location :: (Core.Maybe Core.Text),
+    -- | The name of the parent namespace.
+    namespaceName :: (Core.Maybe Core.Text),
+    -- | Output only. The project this resource lives in. For legacy services migrated from the Custom type, this may be a distinct project from the one parenting the service itself.
+    projectId :: (Core.Maybe Core.Text),
+    -- | The name of this service.
+    serviceName :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GkeService' with the minimum fields required to make a request.
+newGkeService ::
+  GkeService
+newGkeService =
+  GkeService
+    { clusterName = Core.Nothing,
+      location = Core.Nothing,
+      namespaceName = Core.Nothing,
+      projectId = Core.Nothing,
+      serviceName = Core.Nothing
+    }
+
+instance Core.FromJSON GkeService where
+  parseJSON =
+    Core.withObject
+      "GkeService"
+      ( \o ->
+          GkeService
+            Core.<$> (o Core..:? "clusterName")
+            Core.<*> (o Core..:? "location")
+            Core.<*> (o Core..:? "namespaceName")
+            Core.<*> (o Core..:? "projectId")
+            Core.<*> (o Core..:? "serviceName")
+      )
+
+instance Core.ToJSON GkeService where
+  toJSON GkeService {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("clusterName" Core..=) Core.<$> clusterName,
+            ("location" Core..=) Core.<$> location,
+            ("namespaceName" Core..=) Core.<$> namespaceName,
+            ("projectId" Core..=) Core.<$> projectId,
+            ("serviceName" Core..=) Core.<$> serviceName
+          ]
+      )
+
+-- | A GKE Workload (Deployment, StatefulSet, etc). The field names correspond to the metadata labels on monitored resources that fall under a workload (for example, k8s/container or k8s/pod).
+--
+-- /See:/ 'newGkeWorkload' smart constructor.
+data GkeWorkload = GkeWorkload
+  { -- | The name of the parent cluster.
+    clusterName :: (Core.Maybe Core.Text),
+    -- | The location of the parent cluster. This may be a zone or region.
+    location :: (Core.Maybe Core.Text),
+    -- | The name of the parent namespace.
+    namespaceName :: (Core.Maybe Core.Text),
+    -- | Output only. The project this resource lives in. For legacy services migrated from the Custom type, this may be a distinct project from the one parenting the service itself.
+    projectId :: (Core.Maybe Core.Text),
+    -- | The name of this workload.
+    topLevelControllerName :: (Core.Maybe Core.Text),
+    -- | The type of this workload (for example, \"Deployment\" or \"DaemonSet\")
+    topLevelControllerType :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GkeWorkload' with the minimum fields required to make a request.
+newGkeWorkload ::
+  GkeWorkload
+newGkeWorkload =
+  GkeWorkload
+    { clusterName = Core.Nothing,
+      location = Core.Nothing,
+      namespaceName = Core.Nothing,
+      projectId = Core.Nothing,
+      topLevelControllerName = Core.Nothing,
+      topLevelControllerType = Core.Nothing
+    }
+
+instance Core.FromJSON GkeWorkload where
+  parseJSON =
+    Core.withObject
+      "GkeWorkload"
+      ( \o ->
+          GkeWorkload
+            Core.<$> (o Core..:? "clusterName")
+            Core.<*> (o Core..:? "location")
+            Core.<*> (o Core..:? "namespaceName")
+            Core.<*> (o Core..:? "projectId")
+            Core.<*> (o Core..:? "topLevelControllerName")
+            Core.<*> (o Core..:? "topLevelControllerType")
+      )
+
+instance Core.ToJSON GkeWorkload where
+  toJSON GkeWorkload {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("clusterName" Core..=) Core.<$> clusterName,
+            ("location" Core..=) Core.<$> location,
+            ("namespaceName" Core..=) Core.<$> namespaceName,
+            ("projectId" Core..=) Core.<$> projectId,
+            ("topLevelControllerName" Core..=)
+              Core.<$> topLevelControllerName,
+            ("topLevelControllerType" Core..=)
+              Core.<$> topLevelControllerType
+          ]
+      )
 
 -- | Range of numerical values within min and max.
 --
@@ -2128,18 +2533,24 @@ instance Core.ToJSON Group where
 --
 -- /See:/ 'newHttpCheck' smart constructor.
 data HttpCheck = HttpCheck
-  { -- | The authentication information. Optional when creating an HTTP check; defaults to empty.
+  { -- | If present, the check will only pass if the HTTP response status code is in this set of status codes. If empty, the HTTP status code will only pass if the HTTP status code is 200-299.
+    acceptedResponseStatusCodes :: (Core.Maybe [ResponseStatusCode]),
+    -- | The authentication information. Optional when creating an HTTP check; defaults to empty.
     authInfo :: (Core.Maybe BasicAuthentication),
     -- | The request body associated with the HTTP POST request. If content/type is URL/ENCODED, the body passed in must be URL-encoded. Users can provide a Content-Length header via the headers field or the API will do so. If the request_method is GET and body is not empty, the API will return an error. The maximum byte size is 1 megabyte.Note: If client libraries aren\'t used (which performs the conversion automatically) base64 encode your body data since the field is of bytes type.
     body :: (Core.Maybe Core.Base64),
     -- | The content type header to use for the check. The following configurations result in errors: 1. Content type is specified in both the headers field and the content/type field. 2. Request method is GET and content/type is not TYPE/UNSPECIFIED 3. Request method is POST and content/type is TYPE/UNSPECIFIED. 4. Request method is POST and a \"Content-Type\" header is provided via headers field. The content/type field should be used instead.
     contentType :: (Core.Maybe HttpCheck_ContentType),
+    -- | A user provided content type header to use for the check. The invalid configurations outlined in the content/type field apply to custom/content/type, as well as the following: 1. content/type is URL/ENCODED and custom/content/type is set. 2. content/type is USER/PROVIDED and custom/content_type is not set.
+    customContentType :: (Core.Maybe Core.Text),
     -- | The list of headers to send as part of the Uptime check request. If two headers have the same key and different values, they should be entered as a single header, with the value being a comma-separated list of all the desired values as described at https:\/\/www.w3.org\/Protocols\/rfc2616\/rfc2616.txt (page 31). Entering two separate headers with the same key in a Create call will cause the first to be overwritten by the second. The maximum number of headers allowed is 100.
     headers :: (Core.Maybe HttpCheck_Headers),
     -- | Boolean specifying whether to encrypt the header information. Encryption should be specified for any headers related to authentication that you do not wish to be seen when retrieving the configuration. The server will be responsible for encrypting the headers. On Get\/List calls, if mask_headers is set to true then the headers will be obscured with ******.
     maskHeaders :: (Core.Maybe Core.Bool),
     -- | Optional (defaults to \"\/\"). The path to the page against which to run the check. Will be combined with the host (specified within the monitored_resource) and port to construct the full URL. If the provided path does not begin with \"\/\", a \"\/\" will be prepended automatically.
     path :: (Core.Maybe Core.Text),
+    -- | Contains information needed to add pings to an HTTP check.
+    pingConfig :: (Core.Maybe PingConfig),
     -- | Optional (defaults to 80 when use/ssl is false, and 443 when use/ssl is true). The TCP port on the HTTP server against which to run the check. Will be combined with host (specified within the monitored_resource) and path to construct the full URL.
     port :: (Core.Maybe Core.Int32),
     -- | The HTTP request method to use for the check. If set to METHOD/UNSPECIFIED then request/method defaults to GET.
@@ -2156,12 +2567,15 @@ newHttpCheck ::
   HttpCheck
 newHttpCheck =
   HttpCheck
-    { authInfo = Core.Nothing,
+    { acceptedResponseStatusCodes = Core.Nothing,
+      authInfo = Core.Nothing,
       body = Core.Nothing,
       contentType = Core.Nothing,
+      customContentType = Core.Nothing,
       headers = Core.Nothing,
       maskHeaders = Core.Nothing,
       path = Core.Nothing,
+      pingConfig = Core.Nothing,
       port = Core.Nothing,
       requestMethod = Core.Nothing,
       useSsl = Core.Nothing,
@@ -2174,12 +2588,15 @@ instance Core.FromJSON HttpCheck where
       "HttpCheck"
       ( \o ->
           HttpCheck
-            Core.<$> (o Core..:? "authInfo")
+            Core.<$> (o Core..:? "acceptedResponseStatusCodes")
+            Core.<*> (o Core..:? "authInfo")
             Core.<*> (o Core..:? "body")
             Core.<*> (o Core..:? "contentType")
+            Core.<*> (o Core..:? "customContentType")
             Core.<*> (o Core..:? "headers")
             Core.<*> (o Core..:? "maskHeaders")
             Core.<*> (o Core..:? "path")
+            Core.<*> (o Core..:? "pingConfig")
             Core.<*> (o Core..:? "port")
             Core.<*> (o Core..:? "requestMethod")
             Core.<*> (o Core..:? "useSsl")
@@ -2190,12 +2607,17 @@ instance Core.ToJSON HttpCheck where
   toJSON HttpCheck {..} =
     Core.object
       ( Core.catMaybes
-          [ ("authInfo" Core..=) Core.<$> authInfo,
+          [ ("acceptedResponseStatusCodes" Core..=)
+              Core.<$> acceptedResponseStatusCodes,
+            ("authInfo" Core..=) Core.<$> authInfo,
             ("body" Core..=) Core.<$> body,
             ("contentType" Core..=) Core.<$> contentType,
+            ("customContentType" Core..=)
+              Core.<$> customContentType,
             ("headers" Core..=) Core.<$> headers,
             ("maskHeaders" Core..=) Core.<$> maskHeaders,
             ("path" Core..=) Core.<$> path,
+            ("pingConfig" Core..=) Core.<$> pingConfig,
             ("port" Core..=) Core.<$> port,
             ("requestMethod" Core..=) Core.<$> requestMethod,
             ("useSsl" Core..=) Core.<$> useSsl,
@@ -2234,15 +2656,15 @@ instance Core.ToJSON HttpCheck_Headers where
 --
 -- /See:/ 'newInternalChecker' smart constructor.
 data InternalChecker = InternalChecker
-  { -- | The checker\'s human-readable name. The display name should be unique within a Stackdriver Workspace in order to make it easier to identify; however, uniqueness is not enforced.
+  { -- | The checker\'s human-readable name. The display name should be unique within a Cloud Monitoring Metrics Scope in order to make it easier to identify; however, uniqueness is not enforced.
     displayName :: (Core.Maybe Core.Text),
     -- | The GCP zone the Uptime check should egress from. Only respected for internal Uptime checks, where internal_network is specified.
     gcpZone :: (Core.Maybe Core.Text),
-    -- | A unique resource name for this InternalChecker. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/internalCheckers\/[INTERNAL/CHECKER/ID] [PROJECT/ID/OR/NUMBER] is the Stackdriver Workspace project for the Uptime check config associated with the internal checker.
+    -- | A unique resource name for this InternalChecker. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/internalCheckers\/[INTERNAL/CHECKER/ID] [PROJECT/ID/OR/NUMBER] is the Cloud Monitoring Metrics Scope project for the Uptime check config associated with the internal checker.
     name :: (Core.Maybe Core.Text),
     -- | The GCP VPC network (https:\/\/cloud.google.com\/vpc\/docs\/vpc) where the internal resource lives (ex: \"default\").
     network :: (Core.Maybe Core.Text),
-    -- | The GCP project ID where the internal checker lives. Not necessary the same as the Workspace project.
+    -- | The GCP project ID where the internal checker lives. Not necessary the same as the Metrics Scope project.
     peerProjectId :: (Core.Maybe Core.Text),
     -- | The current operational state of the internal checker.
     state :: (Core.Maybe InternalChecker_State)
@@ -2332,6 +2754,42 @@ instance Core.ToJSON IstioCanonicalService where
             ("canonicalServiceNamespace" Core..=)
               Core.<$> canonicalServiceNamespace,
             ("meshUid" Core..=) Core.<$> meshUid
+          ]
+      )
+
+-- | Information needed to perform a JSONPath content match. Used for ContentMatcherOption::MATCHES/JSON/PATH and ContentMatcherOption::NOT/MATCHES/JSON_PATH.
+--
+-- /See:/ 'newJsonPathMatcher' smart constructor.
+data JsonPathMatcher = JsonPathMatcher
+  { -- | The type of JSONPath match that will be applied to the JSON output (ContentMatcher.content)
+    jsonMatcher :: (Core.Maybe JsonPathMatcher_JsonMatcher),
+    -- | JSONPath within the response output pointing to the expected ContentMatcher::content to match against.
+    jsonPath :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'JsonPathMatcher' with the minimum fields required to make a request.
+newJsonPathMatcher ::
+  JsonPathMatcher
+newJsonPathMatcher =
+  JsonPathMatcher {jsonMatcher = Core.Nothing, jsonPath = Core.Nothing}
+
+instance Core.FromJSON JsonPathMatcher where
+  parseJSON =
+    Core.withObject
+      "JsonPathMatcher"
+      ( \o ->
+          JsonPathMatcher
+            Core.<$> (o Core..:? "jsonMatcher")
+            Core.<*> (o Core..:? "jsonPath")
+      )
+
+instance Core.ToJSON JsonPathMatcher where
+  toJSON JsonPathMatcher {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("jsonMatcher" Core..=) Core.<$> jsonMatcher,
+            ("jsonPath" Core..=) Core.<$> jsonPath
           ]
       )
 
@@ -2455,7 +2913,7 @@ instance Core.ToJSON LatencyCriteria where
           [("threshold" Core..=) Core.<$> threshold]
       )
 
--- | Specifies a linear sequence of buckets that all have the same width (except overflow and underflow). Each bucket represents a constant absolute uncertainty on the specific value in the bucket.There are num/finite/buckets + 2 (= N) buckets. Bucket i has the following boundaries:Upper bound (0 \<= i \< N-1): offset + (width * i). Lower bound (1 \<= i \< N): offset + (width * (i - 1)).
+-- | Specifies a linear sequence of buckets that all have the same width (except overflow and underflow). Each bucket represents a constant absolute uncertainty on the specific value in the bucket.There are num/finite/buckets + 2 (= N) buckets. Bucket i has the following boundaries:Upper bound (0 \<= i \< N-1): offset + (width * i).Lower bound (1 \<= i \< N): offset + (width * (i - 1)).
 --
 -- /See:/ 'newLinear' smart constructor.
 data Linear = Linear
@@ -2883,6 +3341,42 @@ instance Core.ToJSON ListServicesResponse where
       ( Core.catMaybes
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
             ("services" Core..=) Core.<$> services
+          ]
+      )
+
+-- | The results of a successful ListSnoozes call, containing the matching Snoozes.
+--
+-- /See:/ 'newListSnoozesResponse' smart constructor.
+data ListSnoozesResponse = ListSnoozesResponse
+  { -- | Page token for repeated calls to ListSnoozes, to fetch additional pages of results. If this is empty or missing, there are no more pages.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | Snoozes matching this list call.
+    snoozes :: (Core.Maybe [Snooze])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListSnoozesResponse' with the minimum fields required to make a request.
+newListSnoozesResponse ::
+  ListSnoozesResponse
+newListSnoozesResponse =
+  ListSnoozesResponse {nextPageToken = Core.Nothing, snoozes = Core.Nothing}
+
+instance Core.FromJSON ListSnoozesResponse where
+  parseJSON =
+    Core.withObject
+      "ListSnoozesResponse"
+      ( \o ->
+          ListSnoozesResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "snoozes")
+      )
+
+instance Core.ToJSON ListSnoozesResponse where
+  toJSON ListSnoozesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("snoozes" Core..=) Core.<$> snoozes
           ]
       )
 
@@ -3426,6 +3920,8 @@ data MetricThreshold = MetricThreshold
     evaluationMissingData :: (Core.Maybe MetricThreshold_EvaluationMissingData),
     -- | Required. A filter (https:\/\/cloud.google.com\/monitoring\/api\/v3\/filters) that identifies which time series should be compared with the threshold.The filter is similar to the one that is specified in the ListTimeSeries request (https:\/\/cloud.google.com\/monitoring\/api\/ref_v3\/rest\/v3\/projects.timeSeries\/list) (that call is useful to verify the time series that will be retrieved \/ processed). The filter must specify the metric type and the resource type. Optionally, it can specify resource labels and metric labels. This field must not exceed 2048 Unicode characters in length.
     filter :: (Core.Maybe Core.Text),
+    -- | When this field is present, the MetricThreshold condition forecasts whether the time series is predicted to violate the threshold within the forecast_horizon. When this field is not set, the MetricThreshold tests the current value of the timeseries against the threshold.
+    forecastOptions :: (Core.Maybe ForecastOptions),
     -- | A value against which to compare the time series.
     thresholdValue :: (Core.Maybe Core.Double),
     -- | The number\/percent of time series for which the comparison must hold in order for the condition to trigger. If unspecified, then the condition will trigger if the comparison is true for any of the time series that have been identified by filter and aggregations, or by the ratio, if denominator/filter and denominator/aggregations are specified.
@@ -3445,6 +3941,7 @@ newMetricThreshold =
       duration = Core.Nothing,
       evaluationMissingData = Core.Nothing,
       filter = Core.Nothing,
+      forecastOptions = Core.Nothing,
       thresholdValue = Core.Nothing,
       trigger = Core.Nothing
     }
@@ -3462,6 +3959,7 @@ instance Core.FromJSON MetricThreshold where
             Core.<*> (o Core..:? "duration")
             Core.<*> (o Core..:? "evaluationMissingData")
             Core.<*> (o Core..:? "filter")
+            Core.<*> (o Core..:? "forecastOptions")
             Core.<*> (o Core..:? "thresholdValue")
             Core.<*> (o Core..:? "trigger")
       )
@@ -3480,6 +3978,7 @@ instance Core.ToJSON MetricThreshold where
             ("evaluationMissingData" Core..=)
               Core.<$> evaluationMissingData,
             ("filter" Core..=) Core.<$> filter,
+            ("forecastOptions" Core..=) Core.<$> forecastOptions,
             ("thresholdValue" Core..=) Core.<$> thresholdValue,
             ("trigger" Core..=) Core.<$> trigger
           ]
@@ -4013,6 +4512,47 @@ instance Core.ToJSON NotificationChannelDescriptor where
           ]
       )
 
+-- | Control over how the notification channels in notification_channels are notified when this alert fires, on a per-channel basis.
+--
+-- /See:/ 'newNotificationChannelStrategy' smart constructor.
+data NotificationChannelStrategy = NotificationChannelStrategy
+  { -- | The full REST resource name for the notification channels that these settings apply to. Each of these correspond to the name field in one of the NotificationChannel objects referenced in the notification/channels field of this AlertPolicy. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/notificationChannels\/[CHANNEL_ID]
+    notificationChannelNames :: (Core.Maybe [Core.Text]),
+    -- | The frequency at which to send reminder notifications for open incidents.
+    renotifyInterval :: (Core.Maybe Core.Duration)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NotificationChannelStrategy' with the minimum fields required to make a request.
+newNotificationChannelStrategy ::
+  NotificationChannelStrategy
+newNotificationChannelStrategy =
+  NotificationChannelStrategy
+    { notificationChannelNames = Core.Nothing,
+      renotifyInterval = Core.Nothing
+    }
+
+instance Core.FromJSON NotificationChannelStrategy where
+  parseJSON =
+    Core.withObject
+      "NotificationChannelStrategy"
+      ( \o ->
+          NotificationChannelStrategy
+            Core.<$> (o Core..:? "notificationChannelNames")
+            Core.<*> (o Core..:? "renotifyInterval")
+      )
+
+instance Core.ToJSON NotificationChannelStrategy where
+  toJSON NotificationChannelStrategy {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("notificationChannelNames" Core..=)
+              Core.<$> notificationChannelNames,
+            ("renotifyInterval" Core..=)
+              Core.<$> renotifyInterval
+          ]
+      )
+
 -- | Control over the rate of notifications sent to this alert policy\'s notification channels.
 --
 -- /See:/ 'newNotificationRateLimit' smart constructor.
@@ -4188,6 +4728,35 @@ instance Core.ToJSON PerformanceThreshold where
             ("performance" Core..=) Core.<$> performance,
             ("threshold" Core..=) Core.<$> threshold
           ]
+      )
+
+-- | Information involved in sending ICMP pings alongside public HTTP\/TCP checks. For HTTP, the pings are performed for each part of the redirect chain.
+--
+-- /See:/ 'newPingConfig' smart constructor.
+newtype PingConfig = PingConfig
+  { -- | Number of ICMP pings. A maximum of 3 ICMP pings is currently supported.
+    pingsCount :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PingConfig' with the minimum fields required to make a request.
+newPingConfig ::
+  PingConfig
+newPingConfig = PingConfig {pingsCount = Core.Nothing}
+
+instance Core.FromJSON PingConfig where
+  parseJSON =
+    Core.withObject
+      "PingConfig"
+      ( \o ->
+          PingConfig Core.<$> (o Core..:? "pingsCount")
+      )
+
+instance Core.ToJSON PingConfig where
+  toJSON PingConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [("pingsCount" Core..=) Core.<$> pingsCount]
       )
 
 -- | A single data point in a time series.
@@ -4464,6 +5033,42 @@ instance Core.ToJSON ResourceGroup where
           ]
       )
 
+-- | A status to accept. Either a status code class like \"2xx\", or an integer status code like \"200\".
+--
+-- /See:/ 'newResponseStatusCode' smart constructor.
+data ResponseStatusCode = ResponseStatusCode
+  { -- | A class of status codes to accept.
+    statusClass :: (Core.Maybe ResponseStatusCode_StatusClass),
+    -- | A status code to accept.
+    statusValue :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ResponseStatusCode' with the minimum fields required to make a request.
+newResponseStatusCode ::
+  ResponseStatusCode
+newResponseStatusCode =
+  ResponseStatusCode {statusClass = Core.Nothing, statusValue = Core.Nothing}
+
+instance Core.FromJSON ResponseStatusCode where
+  parseJSON =
+    Core.withObject
+      "ResponseStatusCode"
+      ( \o ->
+          ResponseStatusCode
+            Core.<$> (o Core..:? "statusClass")
+            Core.<*> (o Core..:? "statusValue")
+      )
+
+instance Core.ToJSON ResponseStatusCode where
+  toJSON ResponseStatusCode {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("statusClass" Core..=) Core.<$> statusClass,
+            ("statusValue" Core..=) Core.<$> statusValue
+          ]
+      )
+
 -- | The SendNotificationChannelVerificationCode request.
 --
 -- /See:/ 'newSendNotificationChannelVerificationCodeRequest' smart constructor.
@@ -4500,14 +5105,24 @@ instance
 data Service = Service
   { -- | Type used for App Engine services.
     appEngine :: (Core.Maybe AppEngine),
+    -- | Message that contains the service type and service labels of this service if it is a basic service. Documentation and examples here (https:\/\/cloud.google.com\/stackdriver\/docs\/solutions\/slo-monitoring\/api\/api-structures#basic-svc-w-basic-sli).
+    basicService :: (Core.Maybe BasicService),
     -- | Type used for Cloud Endpoints services.
     cloudEndpoints :: (Core.Maybe CloudEndpoints),
+    -- | Type used for Cloud Run services.
+    cloudRun :: (Core.Maybe CloudRun),
     -- | Type used for Istio services that live in a Kubernetes cluster.
     clusterIstio :: (Core.Maybe ClusterIstio),
     -- | Custom service type.
     custom :: (Core.Maybe Custom),
     -- | Name used for UI elements listing this Service.
     displayName :: (Core.Maybe Core.Text),
+    -- | Type used for GKE Namespaces.
+    gkeNamespace :: (Core.Maybe GkeNamespace),
+    -- | Type used for GKE Services (the Kubernetes concept of a service).
+    gkeService :: (Core.Maybe GkeService),
+    -- | Type used for GKE Workloads.
+    gkeWorkload :: (Core.Maybe GkeWorkload),
     -- | Type used for canonical services scoped to an Istio mesh. Metrics for Istio are documented here (https:\/\/istio.io\/latest\/docs\/reference\/config\/metrics\/)
     istioCanonicalService :: (Core.Maybe IstioCanonicalService),
     -- | Type used for Istio services scoped to an Istio mesh.
@@ -4527,10 +5142,15 @@ newService ::
 newService =
   Service
     { appEngine = Core.Nothing,
+      basicService = Core.Nothing,
       cloudEndpoints = Core.Nothing,
+      cloudRun = Core.Nothing,
       clusterIstio = Core.Nothing,
       custom = Core.Nothing,
       displayName = Core.Nothing,
+      gkeNamespace = Core.Nothing,
+      gkeService = Core.Nothing,
+      gkeWorkload = Core.Nothing,
       istioCanonicalService = Core.Nothing,
       meshIstio = Core.Nothing,
       name = Core.Nothing,
@@ -4545,10 +5165,15 @@ instance Core.FromJSON Service where
       ( \o ->
           Service
             Core.<$> (o Core..:? "appEngine")
+            Core.<*> (o Core..:? "basicService")
             Core.<*> (o Core..:? "cloudEndpoints")
+            Core.<*> (o Core..:? "cloudRun")
             Core.<*> (o Core..:? "clusterIstio")
             Core.<*> (o Core..:? "custom")
             Core.<*> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "gkeNamespace")
+            Core.<*> (o Core..:? "gkeService")
+            Core.<*> (o Core..:? "gkeWorkload")
             Core.<*> (o Core..:? "istioCanonicalService")
             Core.<*> (o Core..:? "meshIstio")
             Core.<*> (o Core..:? "name")
@@ -4561,10 +5186,15 @@ instance Core.ToJSON Service where
     Core.object
       ( Core.catMaybes
           [ ("appEngine" Core..=) Core.<$> appEngine,
+            ("basicService" Core..=) Core.<$> basicService,
             ("cloudEndpoints" Core..=) Core.<$> cloudEndpoints,
+            ("cloudRun" Core..=) Core.<$> cloudRun,
             ("clusterIstio" Core..=) Core.<$> clusterIstio,
             ("custom" Core..=) Core.<$> custom,
             ("displayName" Core..=) Core.<$> displayName,
+            ("gkeNamespace" Core..=) Core.<$> gkeNamespace,
+            ("gkeService" Core..=) Core.<$> gkeService,
+            ("gkeWorkload" Core..=) Core.<$> gkeWorkload,
             ("istioCanonicalService" Core..=)
               Core.<$> istioCanonicalService,
             ("meshIstio" Core..=) Core.<$> meshIstio,
@@ -4744,6 +5374,55 @@ instance Core.ToJSON ServiceLevelObjective_UserLabels where
   toJSON ServiceLevelObjective_UserLabels {..} =
     Core.toJSON additional
 
+-- | A Snooze will prevent any alerts from being opened, and close any that are already open. The Snooze will work on alerts that match the criteria defined in the Snooze. The Snooze will be active from interval.start/time through interval.end/time.
+--
+-- /See:/ 'newSnooze' smart constructor.
+data Snooze = Snooze
+  { -- | Required. This defines the criteria for applying the Snooze. See Criteria for more information.
+    criteria :: (Core.Maybe Criteria),
+    -- | Required. A display name for the Snooze. This can be, at most, 512 unicode characters.
+    displayName :: (Core.Maybe Core.Text),
+    -- | Required. The Snooze will be active from interval.start/time through interval.end/time. interval.start_time cannot be in the past. There is a 15 second clock skew to account for the time it takes for a request to reach the API from the UI.
+    interval :: (Core.Maybe TimeInterval),
+    -- | Required. The name of the Snooze. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/snoozes\/[SNOOZE/ID] The ID of the Snooze will be generated by the system.
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Snooze' with the minimum fields required to make a request.
+newSnooze ::
+  Snooze
+newSnooze =
+  Snooze
+    { criteria = Core.Nothing,
+      displayName = Core.Nothing,
+      interval = Core.Nothing,
+      name = Core.Nothing
+    }
+
+instance Core.FromJSON Snooze where
+  parseJSON =
+    Core.withObject
+      "Snooze"
+      ( \o ->
+          Snooze
+            Core.<$> (o Core..:? "criteria")
+            Core.<*> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "interval")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON Snooze where
+  toJSON Snooze {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("criteria" Core..=) Core.<$> criteria,
+            ("displayName" Core..=) Core.<$> displayName,
+            ("interval" Core..=) Core.<$> interval,
+            ("name" Core..=) Core.<$> name
+          ]
+      )
+
 -- | SourceContext represents information about the source of a protobuf element, like the file in which it is defined.
 --
 -- /See:/ 'newSourceContext' smart constructor.
@@ -4870,8 +5549,10 @@ instance Core.ToJSON Status_DetailsItem where
 -- | Information required for a TCP Uptime check request.
 --
 -- /See:/ 'newTcpCheck' smart constructor.
-newtype TcpCheck = TcpCheck
-  { -- | The TCP port on the server against which to run the check. Will be combined with host (specified within the monitored_resource) to construct the full URL. Required.
+data TcpCheck = TcpCheck
+  { -- | Contains information needed to add pings to a TCP check.
+    pingConfig :: (Core.Maybe PingConfig),
+    -- | The TCP port on the server against which to run the check. Will be combined with host (specified within the monitored_resource) to construct the full URL. Required.
     port :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4879,18 +5560,26 @@ newtype TcpCheck = TcpCheck
 -- | Creates a value of 'TcpCheck' with the minimum fields required to make a request.
 newTcpCheck ::
   TcpCheck
-newTcpCheck = TcpCheck {port = Core.Nothing}
+newTcpCheck = TcpCheck {pingConfig = Core.Nothing, port = Core.Nothing}
 
 instance Core.FromJSON TcpCheck where
   parseJSON =
     Core.withObject
       "TcpCheck"
-      (\o -> TcpCheck Core.<$> (o Core..:? "port"))
+      ( \o ->
+          TcpCheck
+            Core.<$> (o Core..:? "pingConfig")
+            Core.<*> (o Core..:? "port")
+      )
 
 instance Core.ToJSON TcpCheck where
   toJSON TcpCheck {..} =
     Core.object
-      (Core.catMaybes [("port" Core..=) Core.<$> port])
+      ( Core.catMaybes
+          [ ("pingConfig" Core..=) Core.<$> pingConfig,
+            ("port" Core..=) Core.<$> port
+          ]
+      )
 
 -- | Configuration for how to query telemetry on a Service.
 --
@@ -5185,7 +5874,9 @@ instance Core.ToJSON Trigger where
 --
 -- /See:/ 'newType' smart constructor.
 data Type = Type
-  { -- | The list of fields.
+  { -- | The source edition string, only valid when syntax is SYNTAX_EDITIONS.
+    edition :: (Core.Maybe Core.Text),
+    -- | The list of fields.
     fields :: (Core.Maybe [Field]),
     -- | The fully qualified message name.
     name :: (Core.Maybe Core.Text),
@@ -5205,7 +5896,8 @@ newType ::
   Type
 newType =
   Type
-    { fields = Core.Nothing,
+    { edition = Core.Nothing,
+      fields = Core.Nothing,
       name = Core.Nothing,
       oneofs = Core.Nothing,
       options = Core.Nothing,
@@ -5219,7 +5911,8 @@ instance Core.FromJSON Type where
       "Type"
       ( \o ->
           Type
-            Core.<$> (o Core..:? "fields")
+            Core.<$> (o Core..:? "edition")
+            Core.<*> (o Core..:? "fields")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "oneofs")
             Core.<*> (o Core..:? "options")
@@ -5231,7 +5924,8 @@ instance Core.ToJSON Type where
   toJSON Type {..} =
     Core.object
       ( Core.catMaybes
-          [ ("fields" Core..=) Core.<$> fields,
+          [ ("edition" Core..=) Core.<$> edition,
+            ("fields" Core..=) Core.<$> fields,
             ("name" Core..=) Core.<$> name,
             ("oneofs" Core..=) Core.<$> oneofs,
             ("options" Core..=) Core.<$> options,
@@ -5306,7 +6000,7 @@ data UptimeCheckConfig = UptimeCheckConfig
     checkerType :: (Core.Maybe UptimeCheckConfig_CheckerType),
     -- | The content that is expected to appear in the data returned by the target server against which the check is run. Currently, only the first entry in the content_matchers list is supported, and additional entries will be ignored. This field is optional and should only be specified if a content match is required as part of the\/ Uptime check.
     contentMatchers :: (Core.Maybe [ContentMatcher]),
-    -- | A human-friendly name for the Uptime check configuration. The display name should be unique within a Stackdriver Workspace in order to make it easier to identify; however, uniqueness is not enforced. Required.
+    -- | A human-friendly name for the Uptime check configuration. The display name should be unique within a Cloud Monitoring Workspace in order to make it easier to identify; however, uniqueness is not enforced. Required.
     displayName :: (Core.Maybe Core.Text),
     -- | Contains information needed to make an HTTP or HTTPS check.
     httpCheck :: (Core.Maybe HttpCheck),
@@ -5314,7 +6008,7 @@ data UptimeCheckConfig = UptimeCheckConfig
     internalCheckers :: (Core.Maybe [InternalChecker]),
     -- | If this is true, then checks are made only from the \'internal/checkers\'. If it is false, then checks are made only from the \'selected/regions\'. It is an error to provide \'selected/regions\' when is/internal is true, or to provide \'internal/checkers\' when is/internal is false.
     isInternal :: (Core.Maybe Core.Bool),
-    -- | The monitored resource (https:\/\/cloud.google.com\/monitoring\/api\/resources) associated with the configuration. The following monitored resource types are valid for this field: uptime/url, gce/instance, gae/app, aws/ec2/instance, aws/elb/load/balancer k8s/service servicedirectory/service
+    -- | The monitored resource (https:\/\/cloud.google.com\/monitoring\/api\/resources) associated with the configuration. The following monitored resource types are valid for this field: uptime/url, gce/instance, gae/app, aws/ec2/instance, aws/elb/load/balancer k8s/service servicedirectory/service cloud/run/revision
     monitoredResource :: (Core.Maybe MonitoredResource),
     -- | A unique resource name for this Uptime check configuration. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/uptimeCheckConfigs\/[UPTIME/CHECK/ID] [PROJECT/ID/OR/NUMBER] is the Workspace host project associated with the Uptime check.This field should be omitted when creating the Uptime check configuration; on create, the resource name is assigned by the server and included in the response.
     name :: (Core.Maybe Core.Text),
@@ -5327,7 +6021,9 @@ data UptimeCheckConfig = UptimeCheckConfig
     -- | Contains information needed to make a TCP check.
     tcpCheck :: (Core.Maybe TcpCheck),
     -- | The maximum amount of time to wait for the request to complete (must be between 1 and 60 seconds). Required.
-    timeout :: (Core.Maybe Core.Duration)
+    timeout :: (Core.Maybe Core.Duration),
+    -- | User-supplied key\/value data to be used for organizing and identifying the UptimeCheckConfig objects.The field can contain up to 64 entries. Each key and value is limited to 63 Unicode characters or 128 bytes, whichever is smaller. Labels and values can contain only lowercase letters, numerals, underscores, and dashes. Keys must begin with a letter.
+    userLabels :: (Core.Maybe UptimeCheckConfig_UserLabels)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5348,7 +6044,8 @@ newUptimeCheckConfig =
       resourceGroup = Core.Nothing,
       selectedRegions = Core.Nothing,
       tcpCheck = Core.Nothing,
-      timeout = Core.Nothing
+      timeout = Core.Nothing,
+      userLabels = Core.Nothing
     }
 
 instance Core.FromJSON UptimeCheckConfig where
@@ -5370,6 +6067,7 @@ instance Core.FromJSON UptimeCheckConfig where
             Core.<*> (o Core..:? "selectedRegions")
             Core.<*> (o Core..:? "tcpCheck")
             Core.<*> (o Core..:? "timeout")
+            Core.<*> (o Core..:? "userLabels")
       )
 
 instance Core.ToJSON UptimeCheckConfig where
@@ -5390,9 +6088,40 @@ instance Core.ToJSON UptimeCheckConfig where
             ("resourceGroup" Core..=) Core.<$> resourceGroup,
             ("selectedRegions" Core..=) Core.<$> selectedRegions,
             ("tcpCheck" Core..=) Core.<$> tcpCheck,
-            ("timeout" Core..=) Core.<$> timeout
+            ("timeout" Core..=) Core.<$> timeout,
+            ("userLabels" Core..=) Core.<$> userLabels
           ]
       )
+
+-- | User-supplied key\/value data to be used for organizing and identifying the UptimeCheckConfig objects.The field can contain up to 64 entries. Each key and value is limited to 63 Unicode characters or 128 bytes, whichever is smaller. Labels and values can contain only lowercase letters, numerals, underscores, and dashes. Keys must begin with a letter.
+--
+-- /See:/ 'newUptimeCheckConfig_UserLabels' smart constructor.
+newtype UptimeCheckConfig_UserLabels = UptimeCheckConfig_UserLabels
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UptimeCheckConfig_UserLabels' with the minimum fields required to make a request.
+newUptimeCheckConfig_UserLabels ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  UptimeCheckConfig_UserLabels
+newUptimeCheckConfig_UserLabels additional =
+  UptimeCheckConfig_UserLabels {additional = additional}
+
+instance Core.FromJSON UptimeCheckConfig_UserLabels where
+  parseJSON =
+    Core.withObject
+      "UptimeCheckConfig_UserLabels"
+      ( \o ->
+          UptimeCheckConfig_UserLabels
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON UptimeCheckConfig_UserLabels where
+  toJSON UptimeCheckConfig_UserLabels {..} =
+    Core.toJSON additional
 
 -- | Contains the region, location, and list of IP addresses where checkers in the location run from.
 --

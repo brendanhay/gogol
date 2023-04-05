@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves IDs of all products for which the enterprise has a group license.
+-- Retrieves IDs of all products for which the enterprise has a group license. __Note:__ This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.grouplicenses.list@.
 module Gogol.AndroidEnterprise.Grouplicenses.List
@@ -58,7 +58,7 @@ type AndroidEnterpriseGrouplicensesListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] GroupLicensesListResponse
 
--- | Retrieves IDs of all products for which the enterprise has a group license.
+-- | Retrieves IDs of all products for which the enterprise has a group license. __Note:__ This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
 --
 -- /See:/ 'newAndroidEnterpriseGrouplicensesList' smart constructor.
 data AndroidEnterpriseGrouplicensesList = AndroidEnterpriseGrouplicensesList

@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns all of the details about the specified managed instance group. Gets a list of available managed instance groups by making a list() request.
+-- Returns all of the details about the specified managed instance group.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.instanceGroupManagers.get@.
 module Gogol.Compute.InstanceGroupManagers.Get
@@ -61,7 +61,7 @@ type ComputeInstanceGroupManagersGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] InstanceGroupManager
 
--- | Returns all of the details about the specified managed instance group. Gets a list of available managed instance groups by making a list() request.
+-- | Returns all of the details about the specified managed instance group.
 --
 -- /See:/ 'newComputeInstanceGroupManagersGet' smart constructor.
 data ComputeInstanceGroupManagersGet = ComputeInstanceGroupManagersGet

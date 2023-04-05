@@ -28,7 +28,7 @@
 --
 -- Gets page views by blog id.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.pageViews.get@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.pageViews.get@.
 module Gogol.Blogger.PageViews.Get
   ( -- * Resource
     BloggerPageViewsGetResource,

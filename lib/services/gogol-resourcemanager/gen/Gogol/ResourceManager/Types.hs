@@ -111,6 +111,10 @@ module Gogol.ResourceManager.Types
     DeleteTagValueMetadata (..),
     newDeleteTagValueMetadata,
 
+    -- ** EffectiveTag
+    EffectiveTag (..),
+    newEffectiveTag,
+
     -- ** Empty
     Empty (..),
     newEmpty,
@@ -152,6 +156,10 @@ module Gogol.ResourceManager.Types
     Lien (..),
     newLien,
 
+    -- ** ListEffectiveTagsResponse
+    ListEffectiveTagsResponse (..),
+    newListEffectiveTagsResponse,
+
     -- ** ListFoldersResponse
     ListFoldersResponse (..),
     newListFoldersResponse,
@@ -167,6 +175,10 @@ module Gogol.ResourceManager.Types
     -- ** ListTagBindingsResponse
     ListTagBindingsResponse (..),
     newListTagBindingsResponse,
+
+    -- ** ListTagHoldsResponse
+    ListTagHoldsResponse (..),
+    newListTagHoldsResponse,
 
     -- ** ListTagKeysResponse
     ListTagKeysResponse (..),
@@ -258,9 +270,20 @@ module Gogol.ResourceManager.Types
     TagBinding (..),
     newTagBinding,
 
+    -- ** TagHold
+    TagHold (..),
+    newTagHold,
+
     -- ** TagKey
     TagKey (..),
     newTagKey,
+
+    -- ** TagKey_Purpose
+    TagKey_Purpose (..),
+
+    -- ** TagKey_PurposeData
+    TagKey_PurposeData (..),
+    newTagKey_PurposeData,
 
     -- ** TagValue
     TagValue (..),

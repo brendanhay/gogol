@@ -83,6 +83,11 @@ module Gogol.Compute
     ComputeAddressesList (..),
     newComputeAddressesList,
 
+    -- ** compute.addresses.setLabels
+    ComputeAddressesSetLabelsResource,
+    ComputeAddressesSetLabels (..),
+    newComputeAddressesSetLabels,
+
     -- ** compute.autoscalers.aggregatedList
     ComputeAutoscalersAggregatedListResource,
     ComputeAutoscalersAggregatedList (..),
@@ -193,6 +198,11 @@ module Gogol.Compute
     ComputeBackendServicesGetHealth (..),
     newComputeBackendServicesGetHealth,
 
+    -- ** compute.backendServices.getIamPolicy
+    ComputeBackendServicesGetIamPolicyResource,
+    ComputeBackendServicesGetIamPolicy (..),
+    newComputeBackendServicesGetIamPolicy,
+
     -- ** compute.backendServices.insert
     ComputeBackendServicesInsertResource,
     ComputeBackendServicesInsert (..),
@@ -212,6 +222,11 @@ module Gogol.Compute
     ComputeBackendServicesSetEdgeSecurityPolicyResource,
     ComputeBackendServicesSetEdgeSecurityPolicy (..),
     newComputeBackendServicesSetEdgeSecurityPolicy,
+
+    -- ** compute.backendServices.setIamPolicy
+    ComputeBackendServicesSetIamPolicyResource,
+    ComputeBackendServicesSetIamPolicy (..),
+    newComputeBackendServicesSetIamPolicy,
 
     -- ** compute.backendServices.setSecurityPolicy
     ComputeBackendServicesSetSecurityPolicyResource,
@@ -302,6 +317,11 @@ module Gogol.Compute
     ComputeDisksTestIamPermissionsResource,
     ComputeDisksTestIamPermissions (..),
     newComputeDisksTestIamPermissions,
+
+    -- ** compute.disks.update
+    ComputeDisksUpdateResource,
+    ComputeDisksUpdate (..),
+    newComputeDisksUpdate,
 
     -- ** compute.externalVpnGateways.delete
     ComputeExternalVpnGatewaysDeleteResource,
@@ -512,6 +532,11 @@ module Gogol.Compute
     ComputeGlobalAddressesListResource,
     ComputeGlobalAddressesList (..),
     newComputeGlobalAddressesList,
+
+    -- ** compute.globalAddresses.setLabels
+    ComputeGlobalAddressesSetLabelsResource,
+    ComputeGlobalAddressesSetLabels (..),
+    newComputeGlobalAddressesSetLabels,
 
     -- ** compute.globalForwardingRules.delete
     ComputeGlobalForwardingRulesDeleteResource,
@@ -948,6 +973,11 @@ module Gogol.Compute
     ComputeInstanceGroupsSetNamedPorts (..),
     newComputeInstanceGroupsSetNamedPorts,
 
+    -- ** compute.instanceTemplates.aggregatedList
+    ComputeInstanceTemplatesAggregatedListResource,
+    ComputeInstanceTemplatesAggregatedList (..),
+    newComputeInstanceTemplatesAggregatedList,
+
     -- ** compute.instanceTemplates.delete
     ComputeInstanceTemplatesDeleteResource,
     ComputeInstanceTemplatesDelete (..),
@@ -1133,6 +1163,11 @@ module Gogol.Compute
     ComputeInstancesSetMinCpuPlatform (..),
     newComputeInstancesSetMinCpuPlatform,
 
+    -- ** compute.instances.setName
+    ComputeInstancesSetNameResource,
+    ComputeInstancesSetName (..),
+    newComputeInstancesSetName,
+
     -- ** compute.instances.setScheduling
     ComputeInstancesSetSchedulingResource,
     ComputeInstancesSetScheduling (..),
@@ -1238,6 +1273,11 @@ module Gogol.Compute
     ComputeInterconnectAttachmentsPatch (..),
     newComputeInterconnectAttachmentsPatch,
 
+    -- ** compute.interconnectAttachments.setLabels
+    ComputeInterconnectAttachmentsSetLabelsResource,
+    ComputeInterconnectAttachmentsSetLabels (..),
+    newComputeInterconnectAttachmentsSetLabels,
+
     -- ** compute.interconnectLocations.get
     ComputeInterconnectLocationsGetResource,
     ComputeInterconnectLocationsGet (..),
@@ -1277,6 +1317,11 @@ module Gogol.Compute
     ComputeInterconnectsPatchResource,
     ComputeInterconnectsPatch (..),
     newComputeInterconnectsPatch,
+
+    -- ** compute.interconnects.setLabels
+    ComputeInterconnectsSetLabelsResource,
+    ComputeInterconnectsSetLabels (..),
+    newComputeInterconnectsSetLabels,
 
     -- ** compute.licenseCodes.get
     ComputeLicenseCodesGetResource,
@@ -1372,6 +1417,71 @@ module Gogol.Compute
     ComputeMachineTypesListResource,
     ComputeMachineTypesList (..),
     newComputeMachineTypesList,
+
+    -- ** compute.networkAttachments.aggregatedList
+    ComputeNetworkAttachmentsAggregatedListResource,
+    ComputeNetworkAttachmentsAggregatedList (..),
+    newComputeNetworkAttachmentsAggregatedList,
+
+    -- ** compute.networkAttachments.delete
+    ComputeNetworkAttachmentsDeleteResource,
+    ComputeNetworkAttachmentsDelete (..),
+    newComputeNetworkAttachmentsDelete,
+
+    -- ** compute.networkAttachments.get
+    ComputeNetworkAttachmentsGetResource,
+    ComputeNetworkAttachmentsGet (..),
+    newComputeNetworkAttachmentsGet,
+
+    -- ** compute.networkAttachments.getIamPolicy
+    ComputeNetworkAttachmentsGetIamPolicyResource,
+    ComputeNetworkAttachmentsGetIamPolicy (..),
+    newComputeNetworkAttachmentsGetIamPolicy,
+
+    -- ** compute.networkAttachments.insert
+    ComputeNetworkAttachmentsInsertResource,
+    ComputeNetworkAttachmentsInsert (..),
+    newComputeNetworkAttachmentsInsert,
+
+    -- ** compute.networkAttachments.list
+    ComputeNetworkAttachmentsListResource,
+    ComputeNetworkAttachmentsList (..),
+    newComputeNetworkAttachmentsList,
+
+    -- ** compute.networkAttachments.setIamPolicy
+    ComputeNetworkAttachmentsSetIamPolicyResource,
+    ComputeNetworkAttachmentsSetIamPolicy (..),
+    newComputeNetworkAttachmentsSetIamPolicy,
+
+    -- ** compute.networkAttachments.testIamPermissions
+    ComputeNetworkAttachmentsTestIamPermissionsResource,
+    ComputeNetworkAttachmentsTestIamPermissions (..),
+    newComputeNetworkAttachmentsTestIamPermissions,
+
+    -- ** compute.networkEdgeSecurityServices.aggregatedList
+    ComputeNetworkEdgeSecurityServicesAggregatedListResource,
+    ComputeNetworkEdgeSecurityServicesAggregatedList (..),
+    newComputeNetworkEdgeSecurityServicesAggregatedList,
+
+    -- ** compute.networkEdgeSecurityServices.delete
+    ComputeNetworkEdgeSecurityServicesDeleteResource,
+    ComputeNetworkEdgeSecurityServicesDelete (..),
+    newComputeNetworkEdgeSecurityServicesDelete,
+
+    -- ** compute.networkEdgeSecurityServices.get
+    ComputeNetworkEdgeSecurityServicesGetResource,
+    ComputeNetworkEdgeSecurityServicesGet (..),
+    newComputeNetworkEdgeSecurityServicesGet,
+
+    -- ** compute.networkEdgeSecurityServices.insert
+    ComputeNetworkEdgeSecurityServicesInsertResource,
+    ComputeNetworkEdgeSecurityServicesInsert (..),
+    newComputeNetworkEdgeSecurityServicesInsert,
+
+    -- ** compute.networkEdgeSecurityServices.patch
+    ComputeNetworkEdgeSecurityServicesPatchResource,
+    ComputeNetworkEdgeSecurityServicesPatch (..),
+    newComputeNetworkEdgeSecurityServicesPatch,
 
     -- ** compute.networkEndpointGroups.aggregatedList
     ComputeNetworkEndpointGroupsAggregatedListResource,
@@ -1612,6 +1722,11 @@ module Gogol.Compute
     ComputeNodeGroupsSetNodeTemplateResource,
     ComputeNodeGroupsSetNodeTemplate (..),
     newComputeNodeGroupsSetNodeTemplate,
+
+    -- ** compute.nodeGroups.simulateMaintenanceEvent
+    ComputeNodeGroupsSimulateMaintenanceEventResource,
+    ComputeNodeGroupsSimulateMaintenanceEvent (..),
+    newComputeNodeGroupsSimulateMaintenanceEvent,
 
     -- ** compute.nodeGroups.testIamPermissions
     ComputeNodeGroupsTestIamPermissionsResource,
@@ -1873,6 +1988,11 @@ module Gogol.Compute
     ComputeRegionBackendServicesGetHealth (..),
     newComputeRegionBackendServicesGetHealth,
 
+    -- ** compute.regionBackendServices.getIamPolicy
+    ComputeRegionBackendServicesGetIamPolicyResource,
+    ComputeRegionBackendServicesGetIamPolicy (..),
+    newComputeRegionBackendServicesGetIamPolicy,
+
     -- ** compute.regionBackendServices.insert
     ComputeRegionBackendServicesInsertResource,
     ComputeRegionBackendServicesInsert (..),
@@ -1887,6 +2007,11 @@ module Gogol.Compute
     ComputeRegionBackendServicesPatchResource,
     ComputeRegionBackendServicesPatch (..),
     newComputeRegionBackendServicesPatch,
+
+    -- ** compute.regionBackendServices.setIamPolicy
+    ComputeRegionBackendServicesSetIamPolicyResource,
+    ComputeRegionBackendServicesSetIamPolicy (..),
+    newComputeRegionBackendServicesSetIamPolicy,
 
     -- ** compute.regionBackendServices.update
     ComputeRegionBackendServicesUpdateResource,
@@ -1987,6 +2112,11 @@ module Gogol.Compute
     ComputeRegionDisksTestIamPermissionsResource,
     ComputeRegionDisksTestIamPermissions (..),
     newComputeRegionDisksTestIamPermissions,
+
+    -- ** compute.regionDisks.update
+    ComputeRegionDisksUpdateResource,
+    ComputeRegionDisksUpdate (..),
+    newComputeRegionDisksUpdate,
 
     -- ** compute.regionHealthCheckServices.delete
     ComputeRegionHealthCheckServicesDeleteResource,
@@ -2308,6 +2438,31 @@ module Gogol.Compute
     ComputeRegionOperationsWait (..),
     newComputeRegionOperationsWait,
 
+    -- ** compute.regionSecurityPolicies.delete
+    ComputeRegionSecurityPoliciesDeleteResource,
+    ComputeRegionSecurityPoliciesDelete (..),
+    newComputeRegionSecurityPoliciesDelete,
+
+    -- ** compute.regionSecurityPolicies.get
+    ComputeRegionSecurityPoliciesGetResource,
+    ComputeRegionSecurityPoliciesGet (..),
+    newComputeRegionSecurityPoliciesGet,
+
+    -- ** compute.regionSecurityPolicies.insert
+    ComputeRegionSecurityPoliciesInsertResource,
+    ComputeRegionSecurityPoliciesInsert (..),
+    newComputeRegionSecurityPoliciesInsert,
+
+    -- ** compute.regionSecurityPolicies.list
+    ComputeRegionSecurityPoliciesListResource,
+    ComputeRegionSecurityPoliciesList (..),
+    newComputeRegionSecurityPoliciesList,
+
+    -- ** compute.regionSecurityPolicies.patch
+    ComputeRegionSecurityPoliciesPatchResource,
+    ComputeRegionSecurityPoliciesPatch (..),
+    newComputeRegionSecurityPoliciesPatch,
+
     -- ** compute.regionSslCertificates.delete
     ComputeRegionSslCertificatesDeleteResource,
     ComputeRegionSslCertificatesDelete (..),
@@ -2327,6 +2482,36 @@ module Gogol.Compute
     ComputeRegionSslCertificatesListResource,
     ComputeRegionSslCertificatesList (..),
     newComputeRegionSslCertificatesList,
+
+    -- ** compute.regionSslPolicies.delete
+    ComputeRegionSslPoliciesDeleteResource,
+    ComputeRegionSslPoliciesDelete (..),
+    newComputeRegionSslPoliciesDelete,
+
+    -- ** compute.regionSslPolicies.get
+    ComputeRegionSslPoliciesGetResource,
+    ComputeRegionSslPoliciesGet (..),
+    newComputeRegionSslPoliciesGet,
+
+    -- ** compute.regionSslPolicies.insert
+    ComputeRegionSslPoliciesInsertResource,
+    ComputeRegionSslPoliciesInsert (..),
+    newComputeRegionSslPoliciesInsert,
+
+    -- ** compute.regionSslPolicies.list
+    ComputeRegionSslPoliciesListResource,
+    ComputeRegionSslPoliciesList (..),
+    newComputeRegionSslPoliciesList,
+
+    -- ** compute.regionSslPolicies.listAvailableFeatures
+    ComputeRegionSslPoliciesListAvailableFeaturesResource,
+    ComputeRegionSslPoliciesListAvailableFeatures (..),
+    newComputeRegionSslPoliciesListAvailableFeatures,
+
+    -- ** compute.regionSslPolicies.patch
+    ComputeRegionSslPoliciesPatchResource,
+    ComputeRegionSslPoliciesPatch (..),
+    newComputeRegionSslPoliciesPatch,
 
     -- ** compute.regionTargetHttpProxies.delete
     ComputeRegionTargetHttpProxiesDeleteResource,
@@ -2387,6 +2572,26 @@ module Gogol.Compute
     ComputeRegionTargetHttpsProxiesSetUrlMapResource,
     ComputeRegionTargetHttpsProxiesSetUrlMap (..),
     newComputeRegionTargetHttpsProxiesSetUrlMap,
+
+    -- ** compute.regionTargetTcpProxies.delete
+    ComputeRegionTargetTcpProxiesDeleteResource,
+    ComputeRegionTargetTcpProxiesDelete (..),
+    newComputeRegionTargetTcpProxiesDelete,
+
+    -- ** compute.regionTargetTcpProxies.get
+    ComputeRegionTargetTcpProxiesGetResource,
+    ComputeRegionTargetTcpProxiesGet (..),
+    newComputeRegionTargetTcpProxiesGet,
+
+    -- ** compute.regionTargetTcpProxies.insert
+    ComputeRegionTargetTcpProxiesInsertResource,
+    ComputeRegionTargetTcpProxiesInsert (..),
+    newComputeRegionTargetTcpProxiesInsert,
+
+    -- ** compute.regionTargetTcpProxies.list
+    ComputeRegionTargetTcpProxiesListResource,
+    ComputeRegionTargetTcpProxiesList (..),
+    newComputeRegionTargetTcpProxiesList,
 
     -- ** compute.regionUrlMaps.delete
     ComputeRegionUrlMapsDeleteResource,
@@ -2598,6 +2803,11 @@ module Gogol.Compute
     ComputeSecurityPoliciesAddRule (..),
     newComputeSecurityPoliciesAddRule,
 
+    -- ** compute.securityPolicies.aggregatedList
+    ComputeSecurityPoliciesAggregatedListResource,
+    ComputeSecurityPoliciesAggregatedList (..),
+    newComputeSecurityPoliciesAggregatedList,
+
     -- ** compute.securityPolicies.delete
     ComputeSecurityPoliciesDeleteResource,
     ComputeSecurityPoliciesDelete (..),
@@ -2642,6 +2852,11 @@ module Gogol.Compute
     ComputeSecurityPoliciesRemoveRuleResource,
     ComputeSecurityPoliciesRemoveRule (..),
     newComputeSecurityPoliciesRemoveRule,
+
+    -- ** compute.securityPolicies.setLabels
+    ComputeSecurityPoliciesSetLabelsResource,
+    ComputeSecurityPoliciesSetLabels (..),
+    newComputeSecurityPoliciesSetLabels,
 
     -- ** compute.serviceAttachments.aggregatedList
     ComputeServiceAttachmentsAggregatedListResource,
@@ -2752,6 +2967,11 @@ module Gogol.Compute
     ComputeSslCertificatesListResource,
     ComputeSslCertificatesList (..),
     newComputeSslCertificatesList,
+
+    -- ** compute.sslPolicies.aggregatedList
+    ComputeSslPoliciesAggregatedListResource,
+    ComputeSslPoliciesAggregatedList (..),
+    newComputeSslPoliciesAggregatedList,
 
     -- ** compute.sslPolicies.delete
     ComputeSslPoliciesDeleteResource,
@@ -2933,6 +3153,11 @@ module Gogol.Compute
     ComputeTargetHttpsProxiesPatch (..),
     newComputeTargetHttpsProxiesPatch,
 
+    -- ** compute.targetHttpsProxies.setCertificateMap
+    ComputeTargetHttpsProxiesSetCertificateMapResource,
+    ComputeTargetHttpsProxiesSetCertificateMap (..),
+    newComputeTargetHttpsProxiesSetCertificateMap,
+
     -- ** compute.targetHttpsProxies.setQuicOverride
     ComputeTargetHttpsProxiesSetQuicOverrideResource,
     ComputeTargetHttpsProxiesSetQuicOverride (..),
@@ -3058,6 +3283,11 @@ module Gogol.Compute
     ComputeTargetSslProxiesSetBackendService (..),
     newComputeTargetSslProxiesSetBackendService,
 
+    -- ** compute.targetSslProxies.setCertificateMap
+    ComputeTargetSslProxiesSetCertificateMapResource,
+    ComputeTargetSslProxiesSetCertificateMap (..),
+    newComputeTargetSslProxiesSetCertificateMap,
+
     -- ** compute.targetSslProxies.setProxyHeader
     ComputeTargetSslProxiesSetProxyHeaderResource,
     ComputeTargetSslProxiesSetProxyHeader (..),
@@ -3072,6 +3302,11 @@ module Gogol.Compute
     ComputeTargetSslProxiesSetSslPolicyResource,
     ComputeTargetSslProxiesSetSslPolicy (..),
     newComputeTargetSslProxiesSetSslPolicy,
+
+    -- ** compute.targetTcpProxies.aggregatedList
+    ComputeTargetTcpProxiesAggregatedListResource,
+    ComputeTargetTcpProxiesAggregatedList (..),
+    newComputeTargetTcpProxiesAggregatedList,
 
     -- ** compute.targetTcpProxies.delete
     ComputeTargetTcpProxiesDeleteResource,
@@ -3127,6 +3362,11 @@ module Gogol.Compute
     ComputeTargetVpnGatewaysListResource,
     ComputeTargetVpnGatewaysList (..),
     newComputeTargetVpnGatewaysList,
+
+    -- ** compute.targetVpnGateways.setLabels
+    ComputeTargetVpnGatewaysSetLabelsResource,
+    ComputeTargetVpnGatewaysSetLabels (..),
+    newComputeTargetVpnGatewaysSetLabels,
 
     -- ** compute.urlMaps.aggregatedList
     ComputeUrlMapsAggregatedListResource,
@@ -3237,6 +3477,11 @@ module Gogol.Compute
     ComputeVpnTunnelsListResource,
     ComputeVpnTunnelsList (..),
     newComputeVpnTunnelsList,
+
+    -- ** compute.vpnTunnels.setLabels
+    ComputeVpnTunnelsSetLabelsResource,
+    ComputeVpnTunnelsSetLabels (..),
+    newComputeVpnTunnelsSetLabels,
 
     -- ** compute.zoneOperations.delete
     ComputeZoneOperationsDeleteResource,
@@ -3350,6 +3595,9 @@ module Gogol.Compute
     -- ** Address_IpVersion
     Address_IpVersion (..),
 
+    -- ** Address_Ipv6EndpointType
+    Address_Ipv6EndpointType (..),
+
     -- ** Address_NetworkTier
     Address_NetworkTier (..),
 
@@ -3416,6 +3664,14 @@ module Gogol.Compute
     AliasIpRange (..),
     newAliasIpRange,
 
+    -- ** AllocationResourceStatus
+    AllocationResourceStatus (..),
+    newAllocationResourceStatus,
+
+    -- ** AllocationResourceStatusSpecificSKUAllocation
+    AllocationResourceStatusSpecificSKUAllocation (..),
+    newAllocationResourceStatusSpecificSKUAllocation,
+
     -- ** AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk
     AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk (..),
     newAllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk,
@@ -3435,6 +3691,9 @@ module Gogol.Compute
     AttachedDisk (..),
     newAttachedDisk,
 
+    -- ** AttachedDisk_Architecture
+    AttachedDisk_Architecture (..),
+
     -- ** AttachedDisk_Interface
     AttachedDisk_Interface (..),
 
@@ -3448,12 +3707,19 @@ module Gogol.Compute
     AttachedDiskInitializeParams (..),
     newAttachedDiskInitializeParams,
 
+    -- ** AttachedDiskInitializeParams_Architecture
+    AttachedDiskInitializeParams_Architecture (..),
+
     -- ** AttachedDiskInitializeParams_Labels
     AttachedDiskInitializeParams_Labels (..),
     newAttachedDiskInitializeParams_Labels,
 
     -- ** AttachedDiskInitializeParams_OnUpdateAction
     AttachedDiskInitializeParams_OnUpdateAction (..),
+
+    -- ** AttachedDiskInitializeParams_ResourceManagerTags
+    AttachedDiskInitializeParams_ResourceManagerTags (..),
+    newAttachedDiskInitializeParams_ResourceManagerTags,
 
     -- ** AuditConfig
     AuditConfig (..),
@@ -3588,6 +3854,9 @@ module Gogol.Compute
     BackendBucket (..),
     newBackendBucket,
 
+    -- ** BackendBucket_CompressionMode
+    BackendBucket_CompressionMode (..),
+
     -- ** BackendBucketCdnPolicy
     BackendBucketCdnPolicy (..),
     newBackendBucketCdnPolicy,
@@ -3625,6 +3894,9 @@ module Gogol.Compute
     -- ** BackendService
     BackendService (..),
     newBackendService,
+
+    -- ** BackendService_CompressionMode
+    BackendService_CompressionMode (..),
 
     -- ** BackendService_LoadBalancingScheme
     BackendService_LoadBalancingScheme (..),
@@ -3713,9 +3985,27 @@ module Gogol.Compute
     BackendServiceList_Warning_DataItem (..),
     newBackendServiceList_Warning_DataItem,
 
+    -- ** BackendServiceLocalityLoadBalancingPolicyConfig
+    BackendServiceLocalityLoadBalancingPolicyConfig (..),
+    newBackendServiceLocalityLoadBalancingPolicyConfig,
+
+    -- ** BackendServiceLocalityLoadBalancingPolicyConfigCustomPolicy
+    BackendServiceLocalityLoadBalancingPolicyConfigCustomPolicy (..),
+    newBackendServiceLocalityLoadBalancingPolicyConfigCustomPolicy,
+
+    -- ** BackendServiceLocalityLoadBalancingPolicyConfigPolicy
+    BackendServiceLocalityLoadBalancingPolicyConfigPolicy (..),
+    newBackendServiceLocalityLoadBalancingPolicyConfigPolicy,
+
+    -- ** BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name
+    BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name (..),
+
     -- ** BackendServiceLogConfig
     BackendServiceLogConfig (..),
     newBackendServiceLogConfig,
+
+    -- ** BackendServiceLogConfig_OptionalMode
+    BackendServiceLogConfig_OptionalMode (..),
 
     -- ** BackendServiceReference
     BackendServiceReference (..),
@@ -3908,6 +4198,9 @@ module Gogol.Compute
     Disk (..),
     newDisk,
 
+    -- ** Disk_Architecture
+    Disk_Architecture (..),
+
     -- ** Disk_Labels
     Disk_Labels (..),
     newDisk_Labels,
@@ -3959,6 +4252,14 @@ module Gogol.Compute
     -- ** DiskMoveRequest
     DiskMoveRequest (..),
     newDiskMoveRequest,
+
+    -- ** DiskParams
+    DiskParams (..),
+    newDiskParams,
+
+    -- ** DiskParams_ResourceManagerTags
+    DiskParams_ResourceManagerTags (..),
+    newDiskParams_ResourceManagerTags,
 
     -- ** DiskType
     DiskType (..),
@@ -4058,6 +4359,14 @@ module Gogol.Compute
     -- ** Duration
     Duration (..),
     newDuration,
+
+    -- ** ErrorInfo
+    ErrorInfo (..),
+    newErrorInfo,
+
+    -- ** ErrorInfo_Metadatas
+    ErrorInfo_Metadatas (..),
+    newErrorInfo_Metadatas,
 
     -- ** ExchangedPeeringRoute
     ExchangedPeeringRoute (..),
@@ -4483,6 +4792,14 @@ module Gogol.Compute
     -- ** HealthStatusForNetworkEndpoint_HealthState
     HealthStatusForNetworkEndpoint_HealthState (..),
 
+    -- ** Help
+    Help (..),
+    newHelp,
+
+    -- ** HelpLink
+    HelpLink (..),
+    newHelpLink,
+
     -- ** HostRule
     HostRule (..),
     newHostRule,
@@ -4580,6 +4897,9 @@ module Gogol.Compute
     Image (..),
     newImage,
 
+    -- ** Image_Architecture
+    Image_Architecture (..),
+
     -- ** Image_Labels
     Image_Labels (..),
     newImage_Labels,
@@ -4624,6 +4944,9 @@ module Gogol.Compute
     Instance (..),
     newInstance,
 
+    -- ** Instance_KeyRevocationActionType
+    Instance_KeyRevocationActionType (..),
+
     -- ** Instance_Labels
     Instance_Labels (..),
     newInstance_Labels,
@@ -4652,6 +4975,14 @@ module Gogol.Compute
     -- ** InstanceAggregatedList_Warning_DataItem
     InstanceAggregatedList_Warning_DataItem (..),
     newInstanceAggregatedList_Warning_DataItem,
+
+    -- ** InstanceConsumptionData
+    InstanceConsumptionData (..),
+    newInstanceConsumptionData,
+
+    -- ** InstanceConsumptionInfo
+    InstanceConsumptionInfo (..),
+    newInstanceConsumptionInfo,
 
     -- ** InstanceGroup
     InstanceGroup (..),
@@ -4694,6 +5025,9 @@ module Gogol.Compute
     -- ** InstanceGroupManager
     InstanceGroupManager (..),
     newInstanceGroupManager,
+
+    -- ** InstanceGroupManager_ListManagedInstancesResults
+    InstanceGroupManager_ListManagedInstancesResults (..),
 
     -- ** InstanceGroupManagerActionsSummary
     InstanceGroupManagerActionsSummary (..),
@@ -4970,6 +5304,9 @@ module Gogol.Compute
     InstanceProperties (..),
     newInstanceProperties,
 
+    -- ** InstanceProperties_KeyRevocationActionType
+    InstanceProperties_KeyRevocationActionType (..),
+
     -- ** InstanceProperties_Labels
     InstanceProperties_Labels (..),
     newInstanceProperties_Labels,
@@ -4989,6 +5326,25 @@ module Gogol.Compute
     InstanceTemplate (..),
     newInstanceTemplate,
 
+    -- ** InstanceTemplateAggregatedList
+    InstanceTemplateAggregatedList (..),
+    newInstanceTemplateAggregatedList,
+
+    -- ** InstanceTemplateAggregatedList_Items
+    InstanceTemplateAggregatedList_Items (..),
+    newInstanceTemplateAggregatedList_Items,
+
+    -- ** InstanceTemplateAggregatedList_Warning
+    InstanceTemplateAggregatedList_Warning (..),
+    newInstanceTemplateAggregatedList_Warning,
+
+    -- ** InstanceTemplateAggregatedList_Warning_Code
+    InstanceTemplateAggregatedList_Warning_Code (..),
+
+    -- ** InstanceTemplateAggregatedList_Warning_DataItem
+    InstanceTemplateAggregatedList_Warning_DataItem (..),
+    newInstanceTemplateAggregatedList_Warning_DataItem,
+
     -- ** InstanceTemplateList
     InstanceTemplateList (..),
     newInstanceTemplateList,
@@ -5003,6 +5359,21 @@ module Gogol.Compute
     -- ** InstanceTemplateList_Warning_DataItem
     InstanceTemplateList_Warning_DataItem (..),
     newInstanceTemplateList_Warning_DataItem,
+
+    -- ** InstanceTemplatesScopedList
+    InstanceTemplatesScopedList (..),
+    newInstanceTemplatesScopedList,
+
+    -- ** InstanceTemplatesScopedList_Warning
+    InstanceTemplatesScopedList_Warning (..),
+    newInstanceTemplatesScopedList_Warning,
+
+    -- ** InstanceTemplatesScopedList_Warning_Code
+    InstanceTemplatesScopedList_Warning_Code (..),
+
+    -- ** InstanceTemplatesScopedList_Warning_DataItem
+    InstanceTemplatesScopedList_Warning_DataItem (..),
+    newInstanceTemplatesScopedList_Warning_DataItem,
 
     -- ** InstanceWithNamedPorts
     InstanceWithNamedPorts (..),
@@ -5064,6 +5435,10 @@ module Gogol.Compute
     -- ** InstancesSetMinCpuPlatformRequest
     InstancesSetMinCpuPlatformRequest (..),
     newInstancesSetMinCpuPlatformRequest,
+
+    -- ** InstancesSetNameRequest
+    InstancesSetNameRequest (..),
+    newInstancesSetNameRequest,
 
     -- ** InstancesSetServiceAccountRequest
     InstancesSetServiceAccountRequest (..),
@@ -5183,6 +5558,12 @@ module Gogol.Compute
     InterconnectDiagnostics (..),
     newInterconnectDiagnostics,
 
+    -- ** InterconnectDiagnostics_BundleAggregationType
+    InterconnectDiagnostics_BundleAggregationType (..),
+
+    -- ** InterconnectDiagnostics_BundleOperationalStatus
+    InterconnectDiagnostics_BundleOperationalStatus (..),
+
     -- ** InterconnectDiagnosticsARPEntry
     InterconnectDiagnosticsARPEntry (..),
     newInterconnectDiagnosticsARPEntry,
@@ -5204,6 +5585,9 @@ module Gogol.Compute
     -- ** InterconnectDiagnosticsLinkStatus
     InterconnectDiagnosticsLinkStatus (..),
     newInterconnectDiagnosticsLinkStatus,
+
+    -- ** InterconnectDiagnosticsLinkStatus_OperationalStatus
+    InterconnectDiagnosticsLinkStatus_OperationalStatus (..),
 
     -- ** InterconnectList
     InterconnectList (..),
@@ -5311,6 +5695,10 @@ module Gogol.Compute
     LocalDisk (..),
     newLocalDisk,
 
+    -- ** LocalizedMessage
+    LocalizedMessage (..),
+    newLocalizedMessage,
+
     -- ** LocationPolicy
     LocationPolicy (..),
     newLocationPolicy,
@@ -5319,12 +5707,19 @@ module Gogol.Compute
     LocationPolicy_Locations (..),
     newLocationPolicy_Locations,
 
+    -- ** LocationPolicy_TargetShape
+    LocationPolicy_TargetShape (..),
+
     -- ** LocationPolicyLocation
     LocationPolicyLocation (..),
     newLocationPolicyLocation,
 
     -- ** LocationPolicyLocation_Preference
     LocationPolicyLocation_Preference (..),
+
+    -- ** LocationPolicyLocationConstraints
+    LocationPolicyLocationConstraints (..),
+    newLocationPolicyLocationConstraints,
 
     -- ** LogConfig
     LogConfig (..),
@@ -5464,6 +5859,10 @@ module Gogol.Compute
     ManagedInstanceLastAttempt_Errors_ErrorsItem (..),
     newManagedInstanceLastAttempt_Errors_ErrorsItem,
 
+    -- ** ManagedInstanceLastAttempt_Errors_ErrorsItem_ErrorDetailsItem
+    ManagedInstanceLastAttempt_Errors_ErrorsItem_ErrorDetailsItem (..),
+    newManagedInstanceLastAttempt_Errors_ErrorsItem_ErrorDetailsItem,
+
     -- ** ManagedInstanceVersion
     ManagedInstanceVersion (..),
     newManagedInstanceVersion,
@@ -5497,6 +5896,107 @@ module Gogol.Compute
 
     -- ** Network_NetworkFirewallPolicyEnforcementOrder
     Network_NetworkFirewallPolicyEnforcementOrder (..),
+
+    -- ** NetworkAttachment
+    NetworkAttachment (..),
+    newNetworkAttachment,
+
+    -- ** NetworkAttachment_ConnectionPreference
+    NetworkAttachment_ConnectionPreference (..),
+
+    -- ** NetworkAttachmentAggregatedList
+    NetworkAttachmentAggregatedList (..),
+    newNetworkAttachmentAggregatedList,
+
+    -- ** NetworkAttachmentAggregatedList_Items
+    NetworkAttachmentAggregatedList_Items (..),
+    newNetworkAttachmentAggregatedList_Items,
+
+    -- ** NetworkAttachmentAggregatedList_Warning
+    NetworkAttachmentAggregatedList_Warning (..),
+    newNetworkAttachmentAggregatedList_Warning,
+
+    -- ** NetworkAttachmentAggregatedList_Warning_Code
+    NetworkAttachmentAggregatedList_Warning_Code (..),
+
+    -- ** NetworkAttachmentAggregatedList_Warning_DataItem
+    NetworkAttachmentAggregatedList_Warning_DataItem (..),
+    newNetworkAttachmentAggregatedList_Warning_DataItem,
+
+    -- ** NetworkAttachmentConnectedEndpoint
+    NetworkAttachmentConnectedEndpoint (..),
+    newNetworkAttachmentConnectedEndpoint,
+
+    -- ** NetworkAttachmentConnectedEndpoint_Status
+    NetworkAttachmentConnectedEndpoint_Status (..),
+
+    -- ** NetworkAttachmentList
+    NetworkAttachmentList (..),
+    newNetworkAttachmentList,
+
+    -- ** NetworkAttachmentList_Warning
+    NetworkAttachmentList_Warning (..),
+    newNetworkAttachmentList_Warning,
+
+    -- ** NetworkAttachmentList_Warning_Code
+    NetworkAttachmentList_Warning_Code (..),
+
+    -- ** NetworkAttachmentList_Warning_DataItem
+    NetworkAttachmentList_Warning_DataItem (..),
+    newNetworkAttachmentList_Warning_DataItem,
+
+    -- ** NetworkAttachmentsScopedList
+    NetworkAttachmentsScopedList (..),
+    newNetworkAttachmentsScopedList,
+
+    -- ** NetworkAttachmentsScopedList_Warning
+    NetworkAttachmentsScopedList_Warning (..),
+    newNetworkAttachmentsScopedList_Warning,
+
+    -- ** NetworkAttachmentsScopedList_Warning_Code
+    NetworkAttachmentsScopedList_Warning_Code (..),
+
+    -- ** NetworkAttachmentsScopedList_Warning_DataItem
+    NetworkAttachmentsScopedList_Warning_DataItem (..),
+    newNetworkAttachmentsScopedList_Warning_DataItem,
+
+    -- ** NetworkEdgeSecurityService
+    NetworkEdgeSecurityService (..),
+    newNetworkEdgeSecurityService,
+
+    -- ** NetworkEdgeSecurityServiceAggregatedList
+    NetworkEdgeSecurityServiceAggregatedList (..),
+    newNetworkEdgeSecurityServiceAggregatedList,
+
+    -- ** NetworkEdgeSecurityServiceAggregatedList_Items
+    NetworkEdgeSecurityServiceAggregatedList_Items (..),
+    newNetworkEdgeSecurityServiceAggregatedList_Items,
+
+    -- ** NetworkEdgeSecurityServiceAggregatedList_Warning
+    NetworkEdgeSecurityServiceAggregatedList_Warning (..),
+    newNetworkEdgeSecurityServiceAggregatedList_Warning,
+
+    -- ** NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+    NetworkEdgeSecurityServiceAggregatedList_Warning_Code (..),
+
+    -- ** NetworkEdgeSecurityServiceAggregatedList_Warning_DataItem
+    NetworkEdgeSecurityServiceAggregatedList_Warning_DataItem (..),
+    newNetworkEdgeSecurityServiceAggregatedList_Warning_DataItem,
+
+    -- ** NetworkEdgeSecurityServicesScopedList
+    NetworkEdgeSecurityServicesScopedList (..),
+    newNetworkEdgeSecurityServicesScopedList,
+
+    -- ** NetworkEdgeSecurityServicesScopedList_Warning
+    NetworkEdgeSecurityServicesScopedList_Warning (..),
+    newNetworkEdgeSecurityServicesScopedList_Warning,
+
+    -- ** NetworkEdgeSecurityServicesScopedList_Warning_Code
+    NetworkEdgeSecurityServicesScopedList_Warning_Code (..),
+
+    -- ** NetworkEdgeSecurityServicesScopedList_Warning_DataItem
+    NetworkEdgeSecurityServicesScopedList_Warning_DataItem (..),
+    newNetworkEdgeSecurityServicesScopedList_Warning_DataItem,
 
     -- ** NetworkEndpoint
     NetworkEndpoint (..),
@@ -5562,6 +6062,13 @@ module Gogol.Compute
     -- ** NetworkEndpointGroupList_Warning_DataItem
     NetworkEndpointGroupList_Warning_DataItem (..),
     newNetworkEndpointGroupList_Warning_DataItem,
+
+    -- ** NetworkEndpointGroupPscData
+    NetworkEndpointGroupPscData (..),
+    newNetworkEndpointGroupPscData,
+
+    -- ** NetworkEndpointGroupPscData_PscConnectionStatus
+    NetworkEndpointGroupPscData_PscConnectionStatus (..),
 
     -- ** NetworkEndpointGroupsAttachEndpointsRequest
     NetworkEndpointGroupsAttachEndpointsRequest (..),
@@ -5643,6 +6150,9 @@ module Gogol.Compute
     -- ** NetworkPeering
     NetworkPeering (..),
     newNetworkPeering,
+
+    -- ** NetworkPeering_StackType
+    NetworkPeering_StackType (..),
 
     -- ** NetworkPeering_State
     NetworkPeering_State (..),
@@ -5790,6 +6300,10 @@ module Gogol.Compute
     -- ** NodeGroupsSetNodeTemplateRequest
     NodeGroupsSetNodeTemplateRequest (..),
     newNodeGroupsSetNodeTemplateRequest,
+
+    -- ** NodeGroupsSimulateMaintenanceEventRequest
+    NodeGroupsSimulateMaintenanceEventRequest (..),
+    newNodeGroupsSimulateMaintenanceEventRequest,
 
     -- ** NodeTemplate
     NodeTemplate (..),
@@ -5945,6 +6459,10 @@ module Gogol.Compute
     -- ** Operation_Error_ErrorsItem
     Operation_Error_ErrorsItem (..),
     newOperation_Error_ErrorsItem,
+
+    -- ** Operation_Error_ErrorsItem_ErrorDetailsItem
+    Operation_Error_ErrorsItem_ErrorDetailsItem (..),
+    newOperation_Error_ErrorsItem_ErrorDetailsItem,
 
     -- ** Operation_Status
     Operation_Status (..),
@@ -6158,6 +6676,9 @@ module Gogol.Compute
     -- ** Project_DefaultNetworkTier
     Project_DefaultNetworkTier (..),
 
+    -- ** Project_VmDnsSetting
+    Project_VmDnsSetting (..),
+
     -- ** Project_XpnProjectStatus
     Project_XpnProjectStatus (..),
 
@@ -6279,6 +6800,14 @@ module Gogol.Compute
 
     -- ** Quota_Metric
     Quota_Metric (..),
+
+    -- ** QuotaExceededInfo
+    QuotaExceededInfo (..),
+    newQuotaExceededInfo,
+
+    -- ** QuotaExceededInfo_Dimensions
+    QuotaExceededInfo_Dimensions (..),
+    newQuotaExceededInfo_Dimensions,
 
     -- ** Reference
     Reference (..),
@@ -6512,6 +7041,10 @@ module Gogol.Compute
     Reservation (..),
     newReservation,
 
+    -- ** Reservation_ResourcePolicies
+    Reservation_ResourcePolicies (..),
+    newReservation_ResourcePolicies,
+
     -- ** Reservation_Status
     Reservation_Status (..),
 
@@ -6707,9 +7240,16 @@ module Gogol.Compute
     -- ** ResourcePolicyWeeklyCycleDayOfWeek_Day
     ResourcePolicyWeeklyCycleDayOfWeek_Day (..),
 
+    -- ** ResourceStatus
+    ResourceStatus (..),
+    newResourceStatus,
+
     -- ** Route
     Route (..),
     newRoute,
+
+    -- ** Route_RouteStatus
+    Route_RouteStatus (..),
 
     -- ** Route_RouteType
     Route_RouteType (..),
@@ -6829,9 +7369,16 @@ module Gogol.Compute
     RouterList_Warning_DataItem (..),
     newRouterList_Warning_DataItem,
 
+    -- ** RouterMd5AuthenticationKey
+    RouterMd5AuthenticationKey (..),
+    newRouterMd5AuthenticationKey,
+
     -- ** RouterNat
     RouterNat (..),
     newRouterNat,
+
+    -- ** RouterNat_EndpointTypesItem
+    RouterNat_EndpointTypesItem (..),
 
     -- ** RouterNat_NatIpAllocateOption
     RouterNat_NatIpAllocateOption (..),
@@ -6871,6 +7418,9 @@ module Gogol.Compute
 
     -- ** RouterStatusBgpPeerStatus_Status
     RouterStatusBgpPeerStatus_Status (..),
+
+    -- ** RouterStatusBgpPeerStatus_StatusReason
+    RouterStatusBgpPeerStatus_StatusReason (..),
 
     -- ** RouterStatusNatStatus
     RouterStatusNatStatus (..),
@@ -6940,6 +7490,9 @@ module Gogol.Compute
     SavedDisk (..),
     newSavedDisk,
 
+    -- ** SavedDisk_Architecture
+    SavedDisk_Architecture (..),
+
     -- ** SavedDisk_StorageBytesStatus
     SavedDisk_StorageBytesStatus (..),
 
@@ -6974,9 +7527,43 @@ module Gogol.Compute
     Screenshot (..),
     newScreenshot,
 
+    -- ** SecurityPoliciesAggregatedList
+    SecurityPoliciesAggregatedList (..),
+    newSecurityPoliciesAggregatedList,
+
+    -- ** SecurityPoliciesAggregatedList_Items
+    SecurityPoliciesAggregatedList_Items (..),
+    newSecurityPoliciesAggregatedList_Items,
+
+    -- ** SecurityPoliciesAggregatedList_Warning
+    SecurityPoliciesAggregatedList_Warning (..),
+    newSecurityPoliciesAggregatedList_Warning,
+
+    -- ** SecurityPoliciesAggregatedList_Warning_Code
+    SecurityPoliciesAggregatedList_Warning_Code (..),
+
+    -- ** SecurityPoliciesAggregatedList_Warning_DataItem
+    SecurityPoliciesAggregatedList_Warning_DataItem (..),
+    newSecurityPoliciesAggregatedList_Warning_DataItem,
+
     -- ** SecurityPoliciesListPreconfiguredExpressionSetsResponse
     SecurityPoliciesListPreconfiguredExpressionSetsResponse (..),
     newSecurityPoliciesListPreconfiguredExpressionSetsResponse,
+
+    -- ** SecurityPoliciesScopedList
+    SecurityPoliciesScopedList (..),
+    newSecurityPoliciesScopedList,
+
+    -- ** SecurityPoliciesScopedList_Warning
+    SecurityPoliciesScopedList_Warning (..),
+    newSecurityPoliciesScopedList_Warning,
+
+    -- ** SecurityPoliciesScopedList_Warning_Code
+    SecurityPoliciesScopedList_Warning_Code (..),
+
+    -- ** SecurityPoliciesScopedList_Warning_DataItem
+    SecurityPoliciesScopedList_Warning_DataItem (..),
+    newSecurityPoliciesScopedList_Warning_DataItem,
 
     -- ** SecurityPoliciesWafConfig
     SecurityPoliciesWafConfig (..),
@@ -7009,6 +7596,17 @@ module Gogol.Compute
 
     -- ** SecurityPolicyAdvancedOptionsConfig_LogLevel
     SecurityPolicyAdvancedOptionsConfig_LogLevel (..),
+
+    -- ** SecurityPolicyAdvancedOptionsConfigJsonCustomConfig
+    SecurityPolicyAdvancedOptionsConfigJsonCustomConfig (..),
+    newSecurityPolicyAdvancedOptionsConfigJsonCustomConfig,
+
+    -- ** SecurityPolicyDdosProtectionConfig
+    SecurityPolicyDdosProtectionConfig (..),
+    newSecurityPolicyDdosProtectionConfig,
+
+    -- ** SecurityPolicyDdosProtectionConfig_DdosProtection
+    SecurityPolicyDdosProtectionConfig_DdosProtection (..),
 
     -- ** SecurityPolicyList
     SecurityPolicyList (..),
@@ -7055,6 +7653,21 @@ module Gogol.Compute
     -- ** SecurityPolicyRuleMatcherConfig
     SecurityPolicyRuleMatcherConfig (..),
     newSecurityPolicyRuleMatcherConfig,
+
+    -- ** SecurityPolicyRulePreconfiguredWafConfig
+    SecurityPolicyRulePreconfiguredWafConfig (..),
+    newSecurityPolicyRulePreconfiguredWafConfig,
+
+    -- ** SecurityPolicyRulePreconfiguredWafConfigExclusion
+    SecurityPolicyRulePreconfiguredWafConfigExclusion (..),
+    newSecurityPolicyRulePreconfiguredWafConfigExclusion,
+
+    -- ** SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams
+    SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams (..),
+    newSecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams,
+
+    -- ** SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op
+    SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op (..),
 
     -- ** SecurityPolicyRuleRateLimitOptions
     SecurityPolicyRuleRateLimitOptions (..),
@@ -7199,9 +7812,15 @@ module Gogol.Compute
     Snapshot (..),
     newSnapshot,
 
+    -- ** Snapshot_Architecture
+    Snapshot_Architecture (..),
+
     -- ** Snapshot_Labels
     Snapshot_Labels (..),
     newSnapshot_Labels,
+
+    -- ** Snapshot_SnapshotType
+    Snapshot_SnapshotType (..),
 
     -- ** Snapshot_Status
     Snapshot_Status (..),
@@ -7235,6 +7854,9 @@ module Gogol.Compute
     -- ** SourceInstanceProperties
     SourceInstanceProperties (..),
     newSourceInstanceProperties,
+
+    -- ** SourceInstanceProperties_KeyRevocationActionType
+    SourceInstanceProperties_KeyRevocationActionType (..),
 
     -- ** SourceInstanceProperties_Labels
     SourceInstanceProperties_Labels (..),
@@ -7314,6 +7936,25 @@ module Gogol.Compute
     SslCertificatesScopedList_Warning_DataItem (..),
     newSslCertificatesScopedList_Warning_DataItem,
 
+    -- ** SslPoliciesAggregatedList
+    SslPoliciesAggregatedList (..),
+    newSslPoliciesAggregatedList,
+
+    -- ** SslPoliciesAggregatedList_Items
+    SslPoliciesAggregatedList_Items (..),
+    newSslPoliciesAggregatedList_Items,
+
+    -- ** SslPoliciesAggregatedList_Warning
+    SslPoliciesAggregatedList_Warning (..),
+    newSslPoliciesAggregatedList_Warning,
+
+    -- ** SslPoliciesAggregatedList_Warning_Code
+    SslPoliciesAggregatedList_Warning_Code (..),
+
+    -- ** SslPoliciesAggregatedList_Warning_DataItem
+    SslPoliciesAggregatedList_Warning_DataItem (..),
+    newSslPoliciesAggregatedList_Warning_DataItem,
+
     -- ** SslPoliciesList
     SslPoliciesList (..),
     newSslPoliciesList,
@@ -7332,6 +7973,21 @@ module Gogol.Compute
     -- ** SslPoliciesListAvailableFeaturesResponse
     SslPoliciesListAvailableFeaturesResponse (..),
     newSslPoliciesListAvailableFeaturesResponse,
+
+    -- ** SslPoliciesScopedList
+    SslPoliciesScopedList (..),
+    newSslPoliciesScopedList,
+
+    -- ** SslPoliciesScopedList_Warning
+    SslPoliciesScopedList_Warning (..),
+    newSslPoliciesScopedList_Warning,
+
+    -- ** SslPoliciesScopedList_Warning_Code
+    SslPoliciesScopedList_Warning_Code (..),
+
+    -- ** SslPoliciesScopedList_Warning_DataItem
+    SslPoliciesScopedList_Warning_DataItem (..),
+    newSslPoliciesScopedList_Warning_DataItem,
 
     -- ** SslPolicy
     SslPolicy (..),
@@ -7567,6 +8223,10 @@ module Gogol.Compute
     TargetHttpsProxiesScopedList_Warning_DataItem (..),
     newTargetHttpsProxiesScopedList_Warning_DataItem,
 
+    -- ** TargetHttpsProxiesSetCertificateMapRequest
+    TargetHttpsProxiesSetCertificateMapRequest (..),
+    newTargetHttpsProxiesSetCertificateMapRequest,
+
     -- ** TargetHttpsProxiesSetQuicOverrideRequest
     TargetHttpsProxiesSetQuicOverrideRequest (..),
     newTargetHttpsProxiesSetQuicOverrideRequest,
@@ -7759,6 +8419,10 @@ module Gogol.Compute
     TargetSslProxiesSetBackendServiceRequest (..),
     newTargetSslProxiesSetBackendServiceRequest,
 
+    -- ** TargetSslProxiesSetCertificateMapRequest
+    TargetSslProxiesSetCertificateMapRequest (..),
+    newTargetSslProxiesSetCertificateMapRequest,
+
     -- ** TargetSslProxiesSetProxyHeaderRequest
     TargetSslProxiesSetProxyHeaderRequest (..),
     newTargetSslProxiesSetProxyHeaderRequest,
@@ -7792,6 +8456,21 @@ module Gogol.Compute
     TargetSslProxyList_Warning_DataItem (..),
     newTargetSslProxyList_Warning_DataItem,
 
+    -- ** TargetTcpProxiesScopedList
+    TargetTcpProxiesScopedList (..),
+    newTargetTcpProxiesScopedList,
+
+    -- ** TargetTcpProxiesScopedList_Warning
+    TargetTcpProxiesScopedList_Warning (..),
+    newTargetTcpProxiesScopedList_Warning,
+
+    -- ** TargetTcpProxiesScopedList_Warning_Code
+    TargetTcpProxiesScopedList_Warning_Code (..),
+
+    -- ** TargetTcpProxiesScopedList_Warning_DataItem
+    TargetTcpProxiesScopedList_Warning_DataItem (..),
+    newTargetTcpProxiesScopedList_Warning_DataItem,
+
     -- ** TargetTcpProxiesSetBackendServiceRequest
     TargetTcpProxiesSetBackendServiceRequest (..),
     newTargetTcpProxiesSetBackendServiceRequest,
@@ -7809,6 +8488,25 @@ module Gogol.Compute
 
     -- ** TargetTcpProxy_ProxyHeader
     TargetTcpProxy_ProxyHeader (..),
+
+    -- ** TargetTcpProxyAggregatedList
+    TargetTcpProxyAggregatedList (..),
+    newTargetTcpProxyAggregatedList,
+
+    -- ** TargetTcpProxyAggregatedList_Items
+    TargetTcpProxyAggregatedList_Items (..),
+    newTargetTcpProxyAggregatedList_Items,
+
+    -- ** TargetTcpProxyAggregatedList_Warning
+    TargetTcpProxyAggregatedList_Warning (..),
+    newTargetTcpProxyAggregatedList_Warning,
+
+    -- ** TargetTcpProxyAggregatedList_Warning_Code
+    TargetTcpProxyAggregatedList_Warning_Code (..),
+
+    -- ** TargetTcpProxyAggregatedList_Warning_DataItem
+    TargetTcpProxyAggregatedList_Warning_DataItem (..),
+    newTargetTcpProxyAggregatedList_Warning_DataItem,
 
     -- ** TargetTcpProxyList
     TargetTcpProxyList (..),
@@ -7985,6 +8683,18 @@ module Gogol.Compute
     UsableSubnetwork (..),
     newUsableSubnetwork,
 
+    -- ** UsableSubnetwork_Ipv6AccessType
+    UsableSubnetwork_Ipv6AccessType (..),
+
+    -- ** UsableSubnetwork_Purpose
+    UsableSubnetwork_Purpose (..),
+
+    -- ** UsableSubnetwork_Role
+    UsableSubnetwork_Role (..),
+
+    -- ** UsableSubnetwork_StackType
+    UsableSubnetwork_StackType (..),
+
     -- ** UsableSubnetworkSecondaryRange
     UsableSubnetworkSecondaryRange (..),
     newUsableSubnetworkSecondaryRange,
@@ -8015,6 +8725,10 @@ module Gogol.Compute
     -- ** VmEndpointNatMappingsInterfaceNatMappings
     VmEndpointNatMappingsInterfaceNatMappings (..),
     newVmEndpointNatMappingsInterfaceNatMappings,
+
+    -- ** VmEndpointNatMappingsInterfaceNatMappingsNatRuleMappings
+    VmEndpointNatMappingsInterfaceNatMappingsNatRuleMappings (..),
+    newVmEndpointNatMappingsInterfaceNatMappingsNatRuleMappings,
 
     -- ** VmEndpointNatMappingsList
     VmEndpointNatMappingsList (..),
@@ -8264,6 +8978,7 @@ import Gogol.Compute.Addresses.Delete
 import Gogol.Compute.Addresses.Get
 import Gogol.Compute.Addresses.Insert
 import Gogol.Compute.Addresses.List
+import Gogol.Compute.Addresses.SetLabels
 import Gogol.Compute.Autoscalers.AggregatedList
 import Gogol.Compute.Autoscalers.Delete
 import Gogol.Compute.Autoscalers.Get
@@ -8286,10 +9001,12 @@ import Gogol.Compute.BackendServices.Delete
 import Gogol.Compute.BackendServices.DeleteSignedUrlKey
 import Gogol.Compute.BackendServices.Get
 import Gogol.Compute.BackendServices.GetHealth
+import Gogol.Compute.BackendServices.GetIamPolicy
 import Gogol.Compute.BackendServices.Insert
 import Gogol.Compute.BackendServices.List
 import Gogol.Compute.BackendServices.Patch
 import Gogol.Compute.BackendServices.SetEdgeSecurityPolicy
+import Gogol.Compute.BackendServices.SetIamPolicy
 import Gogol.Compute.BackendServices.SetSecurityPolicy
 import Gogol.Compute.BackendServices.Update
 import Gogol.Compute.DiskTypes.AggregatedList
@@ -8308,6 +9025,7 @@ import Gogol.Compute.Disks.Resize
 import Gogol.Compute.Disks.SetIamPolicy
 import Gogol.Compute.Disks.SetLabels
 import Gogol.Compute.Disks.TestIamPermissions
+import Gogol.Compute.Disks.Update
 import Gogol.Compute.ExternalVpnGateways.Delete
 import Gogol.Compute.ExternalVpnGateways.Get
 import Gogol.Compute.ExternalVpnGateways.Insert
@@ -8350,6 +9068,7 @@ import Gogol.Compute.GlobalAddresses.Delete
 import Gogol.Compute.GlobalAddresses.Get
 import Gogol.Compute.GlobalAddresses.Insert
 import Gogol.Compute.GlobalAddresses.List
+import Gogol.Compute.GlobalAddresses.SetLabels
 import Gogol.Compute.GlobalForwardingRules.Delete
 import Gogol.Compute.GlobalForwardingRules.Get
 import Gogol.Compute.GlobalForwardingRules.Insert
@@ -8437,6 +9156,7 @@ import Gogol.Compute.InstanceGroups.List
 import Gogol.Compute.InstanceGroups.ListInstances
 import Gogol.Compute.InstanceGroups.RemoveInstances
 import Gogol.Compute.InstanceGroups.SetNamedPorts
+import Gogol.Compute.InstanceTemplates.AggregatedList
 import Gogol.Compute.InstanceTemplates.Delete
 import Gogol.Compute.InstanceTemplates.Get
 import Gogol.Compute.InstanceTemplates.GetIamPolicy
@@ -8474,6 +9194,7 @@ import Gogol.Compute.Instances.SetMachineResources
 import Gogol.Compute.Instances.SetMachineType
 import Gogol.Compute.Instances.SetMetadata
 import Gogol.Compute.Instances.SetMinCpuPlatform
+import Gogol.Compute.Instances.SetName
 import Gogol.Compute.Instances.SetScheduling
 import Gogol.Compute.Instances.SetServiceAccount
 import Gogol.Compute.Instances.SetShieldedInstanceIntegrityPolicy
@@ -8495,6 +9216,7 @@ import Gogol.Compute.InterconnectAttachments.Get
 import Gogol.Compute.InterconnectAttachments.Insert
 import Gogol.Compute.InterconnectAttachments.List
 import Gogol.Compute.InterconnectAttachments.Patch
+import Gogol.Compute.InterconnectAttachments.SetLabels
 import Gogol.Compute.InterconnectLocations.Get
 import Gogol.Compute.InterconnectLocations.List
 import Gogol.Compute.Interconnects.Delete
@@ -8503,6 +9225,7 @@ import Gogol.Compute.Interconnects.GetDiagnostics
 import Gogol.Compute.Interconnects.Insert
 import Gogol.Compute.Interconnects.List
 import Gogol.Compute.Interconnects.Patch
+import Gogol.Compute.Interconnects.SetLabels
 import Gogol.Compute.LicenseCodes.Get
 import Gogol.Compute.LicenseCodes.TestIamPermissions
 import Gogol.Compute.Licenses.Delete
@@ -8522,6 +9245,19 @@ import Gogol.Compute.MachineImages.TestIamPermissions
 import Gogol.Compute.MachineTypes.AggregatedList
 import Gogol.Compute.MachineTypes.Get
 import Gogol.Compute.MachineTypes.List
+import Gogol.Compute.NetworkAttachments.AggregatedList
+import Gogol.Compute.NetworkAttachments.Delete
+import Gogol.Compute.NetworkAttachments.Get
+import Gogol.Compute.NetworkAttachments.GetIamPolicy
+import Gogol.Compute.NetworkAttachments.Insert
+import Gogol.Compute.NetworkAttachments.List
+import Gogol.Compute.NetworkAttachments.SetIamPolicy
+import Gogol.Compute.NetworkAttachments.TestIamPermissions
+import Gogol.Compute.NetworkEdgeSecurityServices.AggregatedList
+import Gogol.Compute.NetworkEdgeSecurityServices.Delete
+import Gogol.Compute.NetworkEdgeSecurityServices.Get
+import Gogol.Compute.NetworkEdgeSecurityServices.Insert
+import Gogol.Compute.NetworkEdgeSecurityServices.Patch
 import Gogol.Compute.NetworkEndpointGroups.AggregatedList
 import Gogol.Compute.NetworkEndpointGroups.AttachNetworkEndpoints
 import Gogol.Compute.NetworkEndpointGroups.Delete
@@ -8570,6 +9306,7 @@ import Gogol.Compute.NodeGroups.ListNodes
 import Gogol.Compute.NodeGroups.Patch
 import Gogol.Compute.NodeGroups.SetIamPolicy
 import Gogol.Compute.NodeGroups.SetNodeTemplate
+import Gogol.Compute.NodeGroups.SimulateMaintenanceEvent
 import Gogol.Compute.NodeGroups.TestIamPermissions
 import Gogol.Compute.NodeTemplates.AggregatedList
 import Gogol.Compute.NodeTemplates.Delete
@@ -8622,9 +9359,11 @@ import Gogol.Compute.RegionAutoscalers.Update
 import Gogol.Compute.RegionBackendServices.Delete
 import Gogol.Compute.RegionBackendServices.Get
 import Gogol.Compute.RegionBackendServices.GetHealth
+import Gogol.Compute.RegionBackendServices.GetIamPolicy
 import Gogol.Compute.RegionBackendServices.Insert
 import Gogol.Compute.RegionBackendServices.List
 import Gogol.Compute.RegionBackendServices.Patch
+import Gogol.Compute.RegionBackendServices.SetIamPolicy
 import Gogol.Compute.RegionBackendServices.Update
 import Gogol.Compute.RegionCommitments.AggregatedList
 import Gogol.Compute.RegionCommitments.Get
@@ -8645,6 +9384,7 @@ import Gogol.Compute.RegionDisks.Resize
 import Gogol.Compute.RegionDisks.SetIamPolicy
 import Gogol.Compute.RegionDisks.SetLabels
 import Gogol.Compute.RegionDisks.TestIamPermissions
+import Gogol.Compute.RegionDisks.Update
 import Gogol.Compute.RegionHealthCheckServices.Delete
 import Gogol.Compute.RegionHealthCheckServices.Get
 import Gogol.Compute.RegionHealthCheckServices.Insert
@@ -8709,10 +9449,21 @@ import Gogol.Compute.RegionOperations.Delete
 import Gogol.Compute.RegionOperations.Get
 import Gogol.Compute.RegionOperations.List
 import Gogol.Compute.RegionOperations.Wait
+import Gogol.Compute.RegionSecurityPolicies.Delete
+import Gogol.Compute.RegionSecurityPolicies.Get
+import Gogol.Compute.RegionSecurityPolicies.Insert
+import Gogol.Compute.RegionSecurityPolicies.List
+import Gogol.Compute.RegionSecurityPolicies.Patch
 import Gogol.Compute.RegionSslCertificates.Delete
 import Gogol.Compute.RegionSslCertificates.Get
 import Gogol.Compute.RegionSslCertificates.Insert
 import Gogol.Compute.RegionSslCertificates.List
+import Gogol.Compute.RegionSslPolicies.Delete
+import Gogol.Compute.RegionSslPolicies.Get
+import Gogol.Compute.RegionSslPolicies.Insert
+import Gogol.Compute.RegionSslPolicies.List
+import Gogol.Compute.RegionSslPolicies.ListAvailableFeatures
+import Gogol.Compute.RegionSslPolicies.Patch
 import Gogol.Compute.RegionTargetHttpProxies.Delete
 import Gogol.Compute.RegionTargetHttpProxies.Get
 import Gogol.Compute.RegionTargetHttpProxies.Insert
@@ -8725,6 +9476,10 @@ import Gogol.Compute.RegionTargetHttpsProxies.List
 import Gogol.Compute.RegionTargetHttpsProxies.Patch
 import Gogol.Compute.RegionTargetHttpsProxies.SetSslCertificates
 import Gogol.Compute.RegionTargetHttpsProxies.SetUrlMap
+import Gogol.Compute.RegionTargetTcpProxies.Delete
+import Gogol.Compute.RegionTargetTcpProxies.Get
+import Gogol.Compute.RegionTargetTcpProxies.Insert
+import Gogol.Compute.RegionTargetTcpProxies.List
 import Gogol.Compute.RegionUrlMaps.Delete
 import Gogol.Compute.RegionUrlMaps.Get
 import Gogol.Compute.RegionUrlMaps.Insert
@@ -8767,6 +9522,7 @@ import Gogol.Compute.Routes.Get
 import Gogol.Compute.Routes.Insert
 import Gogol.Compute.Routes.List
 import Gogol.Compute.SecurityPolicies.AddRule
+import Gogol.Compute.SecurityPolicies.AggregatedList
 import Gogol.Compute.SecurityPolicies.Delete
 import Gogol.Compute.SecurityPolicies.Get
 import Gogol.Compute.SecurityPolicies.GetRule
@@ -8776,6 +9532,7 @@ import Gogol.Compute.SecurityPolicies.ListPreconfiguredExpressionSets
 import Gogol.Compute.SecurityPolicies.Patch
 import Gogol.Compute.SecurityPolicies.PatchRule
 import Gogol.Compute.SecurityPolicies.RemoveRule
+import Gogol.Compute.SecurityPolicies.SetLabels
 import Gogol.Compute.ServiceAttachments.AggregatedList
 import Gogol.Compute.ServiceAttachments.Delete
 import Gogol.Compute.ServiceAttachments.Get
@@ -8798,6 +9555,7 @@ import Gogol.Compute.SslCertificates.Delete
 import Gogol.Compute.SslCertificates.Get
 import Gogol.Compute.SslCertificates.Insert
 import Gogol.Compute.SslCertificates.List
+import Gogol.Compute.SslPolicies.AggregatedList
 import Gogol.Compute.SslPolicies.Delete
 import Gogol.Compute.SslPolicies.Get
 import Gogol.Compute.SslPolicies.Insert
@@ -8834,6 +9592,7 @@ import Gogol.Compute.TargetHttpsProxies.Get
 import Gogol.Compute.TargetHttpsProxies.Insert
 import Gogol.Compute.TargetHttpsProxies.List
 import Gogol.Compute.TargetHttpsProxies.Patch
+import Gogol.Compute.TargetHttpsProxies.SetCertificateMap
 import Gogol.Compute.TargetHttpsProxies.SetQuicOverride
 import Gogol.Compute.TargetHttpsProxies.SetSslCertificates
 import Gogol.Compute.TargetHttpsProxies.SetSslPolicy
@@ -8859,9 +9618,11 @@ import Gogol.Compute.TargetSslProxies.Get
 import Gogol.Compute.TargetSslProxies.Insert
 import Gogol.Compute.TargetSslProxies.List
 import Gogol.Compute.TargetSslProxies.SetBackendService
+import Gogol.Compute.TargetSslProxies.SetCertificateMap
 import Gogol.Compute.TargetSslProxies.SetProxyHeader
 import Gogol.Compute.TargetSslProxies.SetSslCertificates
 import Gogol.Compute.TargetSslProxies.SetSslPolicy
+import Gogol.Compute.TargetTcpProxies.AggregatedList
 import Gogol.Compute.TargetTcpProxies.Delete
 import Gogol.Compute.TargetTcpProxies.Get
 import Gogol.Compute.TargetTcpProxies.Insert
@@ -8873,6 +9634,7 @@ import Gogol.Compute.TargetVpnGateways.Delete
 import Gogol.Compute.TargetVpnGateways.Get
 import Gogol.Compute.TargetVpnGateways.Insert
 import Gogol.Compute.TargetVpnGateways.List
+import Gogol.Compute.TargetVpnGateways.SetLabels
 import Gogol.Compute.Types
 import Gogol.Compute.UrlMaps.AggregatedList
 import Gogol.Compute.UrlMaps.Delete
@@ -8896,6 +9658,7 @@ import Gogol.Compute.VpnTunnels.Delete
 import Gogol.Compute.VpnTunnels.Get
 import Gogol.Compute.VpnTunnels.Insert
 import Gogol.Compute.VpnTunnels.List
+import Gogol.Compute.VpnTunnels.SetLabels
 import Gogol.Compute.ZoneOperations.Delete
 import Gogol.Compute.ZoneOperations.Get
 import Gogol.Compute.ZoneOperations.List

@@ -70,13 +70,13 @@ data ServiceManagementServicesRolloutsList = ServiceManagementServicesRolloutsLi
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. Use @filter@ to return subset of rollouts. The following filters are supported: -- To limit the results to only those in <google.api.servicemanagement.v1.RolloutStatus status> \'SUCCESS\', use filter=\'status=SUCCESS\' -- To limit the results to those in <google.api.servicemanagement.v1.RolloutStatus status> \'CANCELLED\' or \'FAILED\', use filter=\'status=CANCELLED OR status=FAILED\'
+    -- | Required. Use @filter@ to return subset of rollouts. The following filters are supported: -- By status. For example, @filter=\'status=SUCCESS\'@ -- By strategy. For example, @filter=\'strategy=TrafficPercentStrategy\'@
     filter :: (Core.Maybe Core.Text),
     -- | The max number of items to include in the response list. Page size is 50 if not specified. Maximum value is 100.
     pageSize :: (Core.Maybe Core.Int32),
     -- | The token of the page to retrieve.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. The name of the service. See the </service-management/overview overview> for naming requirements. For example: @example.googleapis.com@.
+    -- | Required. The name of the service. See the <https://cloud.google.com/service-management/overview overview> for naming requirements. For example: @example.googleapis.com@.
     serviceName :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -87,7 +87,7 @@ data ServiceManagementServicesRolloutsList = ServiceManagementServicesRolloutsLi
 
 -- | Creates a value of 'ServiceManagementServicesRolloutsList' with the minimum fields required to make a request.
 newServiceManagementServicesRolloutsList ::
-  -- |  Required. The name of the service. See the </service-management/overview overview> for naming requirements. For example: @example.googleapis.com@. See 'serviceName'.
+  -- |  Required. The name of the service. See the <https://cloud.google.com/service-management/overview overview> for naming requirements. For example: @example.googleapis.com@. See 'serviceName'.
   Core.Text ->
   ServiceManagementServicesRolloutsList
 newServiceManagementServicesRolloutsList serviceName =

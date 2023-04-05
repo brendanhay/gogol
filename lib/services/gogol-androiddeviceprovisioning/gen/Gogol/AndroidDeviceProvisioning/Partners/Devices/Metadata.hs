@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates reseller metadata associated with the device.
+-- Updates reseller metadata associated with the device. Android devices only.
 --
 -- /See:/ <https://developers.google.com/zero-touch/ Android Device Provisioning Partner API Reference> for @androiddeviceprovisioning.partners.devices.metadata@.
 module Gogol.AndroidDeviceProvisioning.Partners.Devices.Metadata
@@ -62,7 +62,7 @@ type AndroidDeviceProvisioningPartnersDevicesMetadataResource =
               UpdateDeviceMetadataRequest
     Core.:> Core.Post '[Core.JSON] DeviceMetadata
 
--- | Updates reseller metadata associated with the device.
+-- | Updates reseller metadata associated with the device. Android devices only.
 --
 -- /See:/ 'newAndroidDeviceProvisioningPartnersDevicesMetadata' smart constructor.
 data AndroidDeviceProvisioningPartnersDevicesMetadata = AndroidDeviceProvisioningPartnersDevicesMetadata

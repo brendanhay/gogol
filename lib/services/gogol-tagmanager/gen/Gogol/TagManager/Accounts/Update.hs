@@ -70,7 +70,7 @@ data TagManagerAccountsUpdate = TagManagerAccountsUpdate
     callback :: (Core.Maybe Core.Text),
     -- | When provided, this fingerprint must match the fingerprint of the account in storage.
     fingerprint :: (Core.Maybe Core.Text),
-    -- | GTM Accounts\'s API relative path. Example: accounts\/{account_id}
+    -- | GTM Account\'s API relative path. Example: accounts\/{account_id}
     path :: Core.Text,
     -- | Multipart request metadata.
     payload :: Account,
@@ -83,7 +83,7 @@ data TagManagerAccountsUpdate = TagManagerAccountsUpdate
 
 -- | Creates a value of 'TagManagerAccountsUpdate' with the minimum fields required to make a request.
 newTagManagerAccountsUpdate ::
-  -- |  GTM Accounts\'s API relative path. Example: accounts\/{account_id} See 'path'.
+  -- |  GTM Account\'s API relative path. Example: accounts\/{account_id} See 'path'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   Account ->

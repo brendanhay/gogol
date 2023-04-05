@@ -53,14 +53,31 @@ library
     Gogol.Translate.Projects.GetSupportedLanguages
     Gogol.Translate.Projects.Locations.BatchTranslateDocument
     Gogol.Translate.Projects.Locations.BatchTranslateText
+    Gogol.Translate.Projects.Locations.Datasets.Create
+    Gogol.Translate.Projects.Locations.Datasets.Delete
+    Gogol.Translate.Projects.Locations.Datasets.Examples.List
+    Gogol.Translate.Projects.Locations.Datasets.ExportData
+    Gogol.Translate.Projects.Locations.Datasets.Get
+    Gogol.Translate.Projects.Locations.Datasets.ImportData
+    Gogol.Translate.Projects.Locations.Datasets.List
     Gogol.Translate.Projects.Locations.DetectLanguage
     Gogol.Translate.Projects.Locations.Get
     Gogol.Translate.Projects.Locations.GetSupportedLanguages
     Gogol.Translate.Projects.Locations.Glossaries.Create
     Gogol.Translate.Projects.Locations.Glossaries.Delete
     Gogol.Translate.Projects.Locations.Glossaries.Get
+    Gogol.Translate.Projects.Locations.Glossaries.GlossaryEntries.Create
+    Gogol.Translate.Projects.Locations.Glossaries.GlossaryEntries.Delete
+    Gogol.Translate.Projects.Locations.Glossaries.GlossaryEntries.Get
+    Gogol.Translate.Projects.Locations.Glossaries.GlossaryEntries.List
+    Gogol.Translate.Projects.Locations.Glossaries.GlossaryEntries.Patch
     Gogol.Translate.Projects.Locations.Glossaries.List
+    Gogol.Translate.Projects.Locations.Glossaries.Patch
     Gogol.Translate.Projects.Locations.List
+    Gogol.Translate.Projects.Locations.Models.Create
+    Gogol.Translate.Projects.Locations.Models.Delete
+    Gogol.Translate.Projects.Locations.Models.Get
+    Gogol.Translate.Projects.Locations.Models.List
     Gogol.Translate.Projects.Locations.Operations.Cancel
     Gogol.Translate.Projects.Locations.Operations.Delete
     Gogol.Translate.Projects.Locations.Operations.Get
@@ -76,5 +93,5 @@ library
     Gogol.Translate.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

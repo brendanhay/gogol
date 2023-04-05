@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a message.
+-- Updates a message. For example usage, see <https://developers.google.com/chat/api/guides/crudl/messages#update_a_message Update a message>. Requires <https://developers.google.com/chat/api/guides/auth/ authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.messages@ authorization scope.
 --
 -- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference> for @chat.spaces.messages.update@.
 module Gogol.Chat.Spaces.Messages.Update
@@ -49,6 +49,7 @@ type ChatSpacesMessagesUpdateResource =
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "allowMissing" Core.Bool
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
@@ -57,7 +58,7 @@ type ChatSpacesMessagesUpdateResource =
     Core.:> Core.ReqBody '[Core.JSON] Message
     Core.:> Core.Put '[Core.JSON] Message
 
--- | Updates a message.
+-- | Updates a message. For example usage, see <https://developers.google.com/chat/api/guides/crudl/messages#update_a_message Update a message>. Requires <https://developers.google.com/chat/api/guides/auth/ authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.messages@ authorization scope.
 --
 -- /See:/ 'newChatSpacesMessagesUpdate' smart constructor.
 data ChatSpacesMessagesUpdate = ChatSpacesMessagesUpdate
@@ -65,13 +66,15 @@ data ChatSpacesMessagesUpdate = ChatSpacesMessagesUpdate
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
+    -- | Optional. If @true@ and the message is not found, a new message is created and @updateMask@ is ignored. The specified message ID must be <https://developers.google.com/chat/api/guides/crudl/messages#name_a_created_message client-assigned> or the request fails.
+    allowMissing :: (Core.Maybe Core.Bool),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Resource name in the form @spaces\/*\/messages\/*@. Example: @spaces\/AAAAAAAAAAA\/messages\/BBBBBBBBBBB.BBBBBBBBBBB@
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: Message,
-    -- | Required. The field paths to be updated, comma separated if there are multiple. Currently supported field paths: * text * cards * attachment
+    -- | Required. The field paths to update. Separate multiple values with commas. Currently supported field paths: - text - cards (Requires </chat/api/guides/auth/service-accounts service account authentication>.) - cards_v2
     updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -91,6 +94,7 @@ newChatSpacesMessagesUpdate name payload =
   ChatSpacesMessagesUpdate
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
+      allowMissing = Core.Nothing,
       callback = Core.Nothing,
       name = name,
       payload = payload,
@@ -101,12 +105,15 @@ newChatSpacesMessagesUpdate name payload =
 
 instance Core.GoogleRequest ChatSpacesMessagesUpdate where
   type Rs ChatSpacesMessagesUpdate = Message
-  type Scopes ChatSpacesMessagesUpdate = '[]
+  type
+    Scopes ChatSpacesMessagesUpdate =
+      '[Chat'Bot, Chat'Messages]
   requestClient ChatSpacesMessagesUpdate {..} =
     go
       name
       xgafv
       accessToken
+      allowMissing
       callback
       updateMask
       uploadType

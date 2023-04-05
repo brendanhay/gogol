@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new notification channel, representing a single notification endpoint such as an email address, SMS number, or PagerDuty service.
+-- Creates a new notification channel, representing a single notification endpoint such as an email address, SMS number, or PagerDuty service.Design your application to single-thread API calls that modify the state of notification channels in a single project. This includes calls to CreateNotificationChannel, DeleteNotificationChannel and UpdateNotificationChannel.
 --
 -- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.notificationChannels.create@.
 module Gogol.Monitoring.Projects.NotificationChannels.Create
@@ -57,7 +57,7 @@ type MonitoringProjectsNotificationChannelsCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] NotificationChannel
     Core.:> Core.Post '[Core.JSON] NotificationChannel
 
--- | Creates a new notification channel, representing a single notification endpoint such as an email address, SMS number, or PagerDuty service.
+-- | Creates a new notification channel, representing a single notification endpoint such as an email address, SMS number, or PagerDuty service.Design your application to single-thread API calls that modify the state of notification channels in a single project. This includes calls to CreateNotificationChannel, DeleteNotificationChannel and UpdateNotificationChannel.
 --
 -- /See:/ 'newMonitoringProjectsNotificationChannelsCreate' smart constructor.
 data MonitoringProjectsNotificationChannelsCreate = MonitoringProjectsNotificationChannelsCreate

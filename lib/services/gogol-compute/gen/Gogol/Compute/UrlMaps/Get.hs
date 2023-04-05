@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified UrlMap resource. Gets a list of available URL maps by making a list() request.
+-- Returns the specified UrlMap resource.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.urlMaps.get@.
 module Gogol.Compute.UrlMaps.Get
@@ -60,7 +60,7 @@ type ComputeUrlMapsGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] UrlMap
 
--- | Returns the specified UrlMap resource. Gets a list of available URL maps by making a list() request.
+-- | Returns the specified UrlMap resource.
 --
 -- /See:/ 'newComputeUrlMapsGet' smart constructor.
 data ComputeUrlMapsGet = ComputeUrlMapsGet

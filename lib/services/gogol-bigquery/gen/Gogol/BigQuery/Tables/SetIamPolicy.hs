@@ -58,7 +58,7 @@ type BigQueryTablesSetIamPolicyResource =
 data BigQueryTablesSetIamPolicy = BigQueryTablesSetIamPolicy
   { -- | Multipart request metadata.
     payload :: SetIamPolicyRequest,
-    -- | REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
+    -- | REQUIRED: The resource for which the policy is being specified. See <https://cloud.google.com/apis/design/resource_names Resource names> for the appropriate value for this field.
     resource :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -67,7 +67,7 @@ data BigQueryTablesSetIamPolicy = BigQueryTablesSetIamPolicy
 newBigQueryTablesSetIamPolicy ::
   -- |  Multipart request metadata. See 'payload'.
   SetIamPolicyRequest ->
-  -- |  REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field. See 'resource'.
+  -- |  REQUIRED: The resource for which the policy is being specified. See <https://cloud.google.com/apis/design/resource_names Resource names> for the appropriate value for this field. See 'resource'.
   Core.Text ->
   BigQueryTablesSetIamPolicy
 newBigQueryTablesSetIamPolicy payload resource =

@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Pauses the BoG program in your Merchant Center account. Important: This method is only whitelisted for selected merchants.
+-- Pauses the BoG program in your Merchant Center account. This method is only available to selected merchants.
 --
 -- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.buyongoogleprograms.pause@.
 module Gogol.ShoppingContent.Content.Buyongoogleprograms.Pause
@@ -62,7 +62,7 @@ type ContentBuyongoogleprogramsPauseResource =
               PauseBuyOnGoogleProgramRequest
     Core.:> Core.Post '[Core.JSON] ()
 
--- | Pauses the BoG program in your Merchant Center account. Important: This method is only whitelisted for selected merchants.
+-- | Pauses the BoG program in your Merchant Center account. This method is only available to selected merchants.
 --
 -- /See:/ 'newContentBuyongoogleprogramsPause' smart constructor.
 data ContentBuyongoogleprogramsPause = ContentBuyongoogleprogramsPause

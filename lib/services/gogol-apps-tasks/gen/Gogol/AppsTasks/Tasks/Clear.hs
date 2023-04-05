@@ -28,7 +28,7 @@
 --
 -- Clears all completed tasks from the specified task list. The affected tasks will be marked as \'hidden\' and no longer be returned by default when retrieving all tasks for a task list.
 --
--- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasks.clear@.
+-- /See:/ <https://developers.google.com/tasks/ Google Tasks API Reference> for @tasks.tasks.clear@.
 module Gogol.AppsTasks.Tasks.Clear
   ( -- * Resource
     TasksTasksClearResource,

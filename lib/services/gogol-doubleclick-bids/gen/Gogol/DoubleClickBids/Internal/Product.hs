@@ -30,6 +30,14 @@ module Gogol.DoubleClickBids.Internal.Product
     ChannelGrouping (..),
     newChannelGrouping,
 
+    -- * DataRange
+    DataRange (..),
+    newDataRange,
+
+    -- * Date
+    Date (..),
+    newDate,
+
     -- * DisjunctiveMatchStatement
     DisjunctiveMatchStatement (..),
     newDisjunctiveMatchStatement,
@@ -85,10 +93,6 @@ module Gogol.DoubleClickBids.Internal.Product
     -- * Report
     Report (..),
     newReport,
-
-    -- * ReportFailure
-    ReportFailure (..),
-    newReportFailure,
 
     -- * ReportKey
     ReportKey (..),
@@ -159,6 +163,89 @@ instance Core.ToJSON ChannelGrouping where
           ]
       )
 
+-- | Report data range.
+--
+-- /See:/ 'newDataRange' smart constructor.
+data DataRange = DataRange
+  { -- | The ending date for the data that is shown in the report. Note, @customEndDate@ is required if @range@ is @CUSTOM_DATES@ and ignored otherwise.
+    customEndDate :: (Core.Maybe Date),
+    -- | The starting data for the data that is shown in the report. Note, @customStartDate@ is required if @range@ is @CUSTOM_DATES@ and ignored otherwise.
+    customStartDate :: (Core.Maybe Date),
+    -- | Report data range used to generate the report.
+    range :: (Core.Maybe DataRange_Range)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DataRange' with the minimum fields required to make a request.
+newDataRange ::
+  DataRange
+newDataRange =
+  DataRange
+    { customEndDate = Core.Nothing,
+      customStartDate = Core.Nothing,
+      range = Core.Nothing
+    }
+
+instance Core.FromJSON DataRange where
+  parseJSON =
+    Core.withObject
+      "DataRange"
+      ( \o ->
+          DataRange
+            Core.<$> (o Core..:? "customEndDate")
+            Core.<*> (o Core..:? "customStartDate")
+            Core.<*> (o Core..:? "range")
+      )
+
+instance Core.ToJSON DataRange where
+  toJSON DataRange {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("customEndDate" Core..=) Core.<$> customEndDate,
+            ("customStartDate" Core..=) Core.<$> customStartDate,
+            ("range" Core..=) Core.<$> range
+          ]
+      )
+
+-- | Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values. * A month and day, with a zero year (for example, an anniversary). * A year on its own, with a zero month and a zero day. * A year and month, with a zero day (for example, a credit card expiration date). Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp
+--
+-- /See:/ 'newDate' smart constructor.
+data Date = Date
+  { -- | Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn\'t significant.
+    day :: (Core.Maybe Core.Int32),
+    -- | Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+    month :: (Core.Maybe Core.Int32),
+    -- | Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+    year :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Date' with the minimum fields required to make a request.
+newDate ::
+  Date
+newDate = Date {day = Core.Nothing, month = Core.Nothing, year = Core.Nothing}
+
+instance Core.FromJSON Date where
+  parseJSON =
+    Core.withObject
+      "Date"
+      ( \o ->
+          Date
+            Core.<$> (o Core..:? "day")
+            Core.<*> (o Core..:? "month")
+            Core.<*> (o Core..:? "year")
+      )
+
+instance Core.ToJSON Date where
+  toJSON Date {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("day" Core..=) Core.<$> day,
+            ("month" Core..=) Core.<$> month,
+            ("year" Core..=) Core.<$> year
+          ]
+      )
+
 -- | DisjunctiveMatchStatement that OR\'s all contained filters.
 --
 -- /See:/ 'newDisjunctiveMatchStatement' smart constructor.
@@ -226,7 +313,7 @@ instance Core.ToJSON EventFilter where
 -- /See:/ 'newFilterPair' smart constructor.
 data FilterPair = FilterPair
   { -- | Filter type.
-    type' :: (Core.Maybe FilterPair_Type),
+    type' :: (Core.Maybe Core.Text),
     -- | Filter value.
     value :: (Core.Maybe Core.Text)
   }
@@ -255,15 +342,12 @@ instance Core.ToJSON FilterPair where
           ]
       )
 
--- | List queries response.
 --
 -- /See:/ 'newListQueriesResponse' smart constructor.
 data ListQueriesResponse = ListQueriesResponse
-  { -- | Identifies what kind of resource this is. Value: the fixed string \"doubleclickbidmanager#listQueriesResponse\".
-    kind :: (Core.Maybe Core.Text),
-    -- | Next page\'s pagination token if one exists.
+  { -- | A token, which can be sent as page_token to retrieve the next page of queries. If this field is omitted, there are no subsequent pages.
     nextPageToken :: (Core.Maybe Core.Text),
-    -- | Retrieved queries.
+    -- | The list of queries.
     queries :: (Core.Maybe [Query])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -272,11 +356,7 @@ data ListQueriesResponse = ListQueriesResponse
 newListQueriesResponse ::
   ListQueriesResponse
 newListQueriesResponse =
-  ListQueriesResponse
-    { kind = Core.Nothing,
-      nextPageToken = Core.Nothing,
-      queries = Core.Nothing
-    }
+  ListQueriesResponse {nextPageToken = Core.Nothing, queries = Core.Nothing}
 
 instance Core.FromJSON ListQueriesResponse where
   parseJSON =
@@ -284,8 +364,7 @@ instance Core.FromJSON ListQueriesResponse where
       "ListQueriesResponse"
       ( \o ->
           ListQueriesResponse
-            Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "nextPageToken")
+            Core.<$> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "queries")
       )
 
@@ -293,19 +372,15 @@ instance Core.ToJSON ListQueriesResponse where
   toJSON ListQueriesResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("kind" Core..=) Core.<$> kind,
-            ("nextPageToken" Core..=) Core.<$> nextPageToken,
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
             ("queries" Core..=) Core.<$> queries
           ]
       )
 
--- | List reports response.
 --
 -- /See:/ 'newListReportsResponse' smart constructor.
 data ListReportsResponse = ListReportsResponse
-  { -- | Identifies what kind of resource this is. Value: the fixed string \"doubleclickbidmanager#listReportsResponse\".
-    kind :: (Core.Maybe Core.Text),
-    -- | Next page\'s pagination token if one exists.
+  { -- | A token, which can be sent as page_token to retrieve the next page of reports. If this field is omitted, there are no subsequent pages.
     nextPageToken :: (Core.Maybe Core.Text),
     -- | Retrieved reports.
     reports :: (Core.Maybe [Report])
@@ -316,11 +391,7 @@ data ListReportsResponse = ListReportsResponse
 newListReportsResponse ::
   ListReportsResponse
 newListReportsResponse =
-  ListReportsResponse
-    { kind = Core.Nothing,
-      nextPageToken = Core.Nothing,
-      reports = Core.Nothing
-    }
+  ListReportsResponse {nextPageToken = Core.Nothing, reports = Core.Nothing}
 
 instance Core.FromJSON ListReportsResponse where
   parseJSON =
@@ -328,8 +399,7 @@ instance Core.FromJSON ListReportsResponse where
       "ListReportsResponse"
       ( \o ->
           ListReportsResponse
-            Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "nextPageToken")
+            Core.<$> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "reports")
       )
 
@@ -337,8 +407,7 @@ instance Core.ToJSON ListReportsResponse where
   toJSON ListReportsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("kind" Core..=) Core.<$> kind,
-            ("nextPageToken" Core..=) Core.<$> nextPageToken,
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
             ("reports" Core..=) Core.<$> reports
           ]
       )
@@ -391,14 +460,12 @@ data Parameters = Parameters
   { -- | Filters used to match traffic data in your report.
     filters :: (Core.Maybe [FilterPair]),
     -- | Data is grouped by the filters listed in this field.
-    groupBys :: (Core.Maybe [Parameters_GroupBysItem]),
-    -- | Deprecated. This field is no longer in use.
-    includeInviteData :: (Core.Maybe Core.Bool),
+    groupBys :: (Core.Maybe [Core.Text]),
     -- | Metrics to include as columns in your report.
-    metrics :: (Core.Maybe [Parameters_MetricsItem]),
+    metrics :: (Core.Maybe [Core.Text]),
     -- | Additional query options.
     options :: (Core.Maybe Options),
-    -- | Report type.
+    -- | The type of the report. The type of the report will dictate what dimesions, filters, and metrics can be used.
     type' :: (Core.Maybe Parameters_Type)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -410,7 +477,6 @@ newParameters =
   Parameters
     { filters = Core.Nothing,
       groupBys = Core.Nothing,
-      includeInviteData = Core.Nothing,
       metrics = Core.Nothing,
       options = Core.Nothing,
       type' = Core.Nothing
@@ -424,7 +490,6 @@ instance Core.FromJSON Parameters where
           Parameters
             Core.<$> (o Core..:? "filters")
             Core.<*> (o Core..:? "groupBys")
-            Core.<*> (o Core..:? "includeInviteData")
             Core.<*> (o Core..:? "metrics")
             Core.<*> (o Core..:? "options")
             Core.<*> (o Core..:? "type")
@@ -436,8 +501,6 @@ instance Core.ToJSON Parameters where
       ( Core.catMaybes
           [ ("filters" Core..=) Core.<$> filters,
             ("groupBys" Core..=) Core.<$> groupBys,
-            ("includeInviteData" Core..=)
-              Core.<$> includeInviteData,
             ("metrics" Core..=) Core.<$> metrics,
             ("options" Core..=) Core.<$> options,
             ("type" Core..=) Core.<$> type'
@@ -450,7 +513,7 @@ instance Core.ToJSON Parameters where
 data PathFilter = PathFilter
   { -- | Filter on an event to be applied to some part of the path.
     eventFilters :: (Core.Maybe [EventFilter]),
-    -- | Indicates the position of the path the filter should match to (first, last, or any event in path).
+    -- | The position of the path the filter should match to (first, last, or any event in path).
     pathMatchPosition :: (Core.Maybe PathFilter_PathMatchPosition)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -518,15 +581,15 @@ instance Core.ToJSON PathQueryOptions where
           ]
       )
 
--- | Dimension Filter on path events.
+-- | Dimension filter on path events.
 --
 -- /See:/ 'newPathQueryOptionsFilter' smart constructor.
 data PathQueryOptionsFilter = PathQueryOptionsFilter
   { -- | Dimension the filter is applied to.
-    filter :: (Core.Maybe PathQueryOptionsFilter_Filter),
-    -- | Indicates how the filter should be matched to the value.
+    filter :: (Core.Maybe Core.Text),
+    -- | Match logic of the filter.
     match :: (Core.Maybe PathQueryOptionsFilter_Match),
-    -- | Value to filter on.
+    -- | Values to filter on.
     values :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -566,22 +629,14 @@ instance Core.ToJSON PathQueryOptionsFilter where
 --
 -- /See:/ 'newQuery' smart constructor.
 data Query = Query
-  { -- | Identifies what kind of resource this is. Value: the fixed string \"doubleclickbidmanager#query\".
-    kind :: (Core.Maybe Core.Text),
-    -- | Query metadata.
+  { -- | Query metadata.
     metadata :: (Core.Maybe QueryMetadata),
     -- | Query parameters.
     params :: (Core.Maybe Parameters),
-    -- | Query ID.
+    -- | Output only. Query ID.
     queryId :: (Core.Maybe Core.Int64),
-    -- | The ending time for the data that is shown in the report. Note, reportDataEndTimeMs is required if metadata.dataRange is CUSTOM_DATES and ignored otherwise.
-    reportDataEndTimeMs :: (Core.Maybe Core.Int64),
-    -- | The starting time for the data that is shown in the report. Note, reportDataStartTimeMs is required if metadata.dataRange is CUSTOM_DATES and ignored otherwise.
-    reportDataStartTimeMs :: (Core.Maybe Core.Int64),
-    -- | Information on how often and when to run a query.
-    schedule :: (Core.Maybe QuerySchedule),
-    -- | Canonical timezone code for report data time. Defaults to America\/New_York.
-    timezoneCode :: (Core.Maybe Core.Text)
+    -- | Information on how often and when to run a query. If @ONE_TIME@ is set to the frequency field, the query will only be run at the time of creation.
+    schedule :: (Core.Maybe QuerySchedule)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -590,14 +645,10 @@ newQuery ::
   Query
 newQuery =
   Query
-    { kind = Core.Nothing,
-      metadata = Core.Nothing,
+    { metadata = Core.Nothing,
       params = Core.Nothing,
       queryId = Core.Nothing,
-      reportDataEndTimeMs = Core.Nothing,
-      reportDataStartTimeMs = Core.Nothing,
-      schedule = Core.Nothing,
-      timezoneCode = Core.Nothing
+      schedule = Core.Nothing
     }
 
 instance Core.FromJSON Query where
@@ -606,37 +657,23 @@ instance Core.FromJSON Query where
       "Query"
       ( \o ->
           Query
-            Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "metadata")
+            Core.<$> (o Core..:? "metadata")
             Core.<*> (o Core..:? "params")
             Core.<*> ( o Core..:? "queryId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "reportDataEndTimeMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "reportDataStartTimeMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
             Core.<*> (o Core..:? "schedule")
-            Core.<*> (o Core..:? "timezoneCode")
       )
 
 instance Core.ToJSON Query where
   toJSON Query {..} =
     Core.object
       ( Core.catMaybes
-          [ ("kind" Core..=) Core.<$> kind,
-            ("metadata" Core..=) Core.<$> metadata,
+          [ ("metadata" Core..=) Core.<$> metadata,
             ("params" Core..=) Core.<$> params,
             ("queryId" Core..=) Core.. Core.AsText
               Core.<$> queryId,
-            ("reportDataEndTimeMs" Core..=) Core.. Core.AsText
-              Core.<$> reportDataEndTimeMs,
-            ("reportDataStartTimeMs" Core..=) Core.. Core.AsText
-              Core.<$> reportDataStartTimeMs,
-            ("schedule" Core..=) Core.<$> schedule,
-            ("timezoneCode" Core..=) Core.<$> timezoneCode
+            ("schedule" Core..=) Core.<$> schedule
           ]
       )
 
@@ -644,25 +681,13 @@ instance Core.ToJSON Query where
 --
 -- /See:/ 'newQueryMetadata' smart constructor.
 data QueryMetadata = QueryMetadata
-  { -- | Range of report data.
-    dataRange :: (Core.Maybe QueryMetadata_DataRange),
+  { -- | Range of report data. All reports will be based on the same time zone as used by the advertiser.
+    dataRange :: (Core.Maybe DataRange),
     -- | Format of the generated report.
     format :: (Core.Maybe QueryMetadata_Format),
-    -- | The path to the location in Google Cloud Storage where the latest report is stored.
-    googleCloudStoragePathForLatestReport :: (Core.Maybe Core.Text),
-    -- | The path in Google Drive for the latest report.
-    googleDrivePathForLatestReport :: (Core.Maybe Core.Text),
-    -- | The time when the latest report started to run.
-    latestReportRunTimeMs :: (Core.Maybe Core.Int64),
-    -- | Locale of the generated reports. Valid values are cs CZECH de GERMAN en ENGLISH es SPANISH fr FRENCH it ITALIAN ja JAPANESE ko KOREAN pl POLISH pt-BR BRAZILIAN/PORTUGUESE ru RUSSIAN tr TURKISH uk UKRAINIAN zh-CN CHINA/CHINESE zh-TW TAIWAN_CHINESE An locale string not in the list above will generate reports in English.
-    locale :: (Core.Maybe Core.Text),
-    -- | Number of reports that have been generated for the query.
-    reportCount :: (Core.Maybe Core.Int32),
-    -- | Whether the latest report is currently running.
-    running :: (Core.Maybe Core.Bool),
-    -- | Whether to send an email notification when a report is ready. Default to false.
+    -- | Whether to send an email notification when a report is ready. Defaults to false.
     sendNotification :: (Core.Maybe Core.Bool),
-    -- | List of email addresses which are sent email notifications when the report is finished. Separate from sendNotification.
+    -- | List of email addresses which are sent email notifications when the report is finished. Separate from send_notification.
     shareEmailAddress :: (Core.Maybe [Core.Text]),
     -- | Query title. It is used to name the reports generated from this query.
     title :: (Core.Maybe Core.Text)
@@ -676,12 +701,6 @@ newQueryMetadata =
   QueryMetadata
     { dataRange = Core.Nothing,
       format = Core.Nothing,
-      googleCloudStoragePathForLatestReport = Core.Nothing,
-      googleDrivePathForLatestReport = Core.Nothing,
-      latestReportRunTimeMs = Core.Nothing,
-      locale = Core.Nothing,
-      reportCount = Core.Nothing,
-      running = Core.Nothing,
       sendNotification = Core.Nothing,
       shareEmailAddress = Core.Nothing,
       title = Core.Nothing
@@ -695,14 +714,6 @@ instance Core.FromJSON QueryMetadata where
           QueryMetadata
             Core.<$> (o Core..:? "dataRange")
             Core.<*> (o Core..:? "format")
-            Core.<*> (o Core..:? "googleCloudStoragePathForLatestReport")
-            Core.<*> (o Core..:? "googleDrivePathForLatestReport")
-            Core.<*> ( o Core..:? "latestReportRunTimeMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> (o Core..:? "locale")
-            Core.<*> (o Core..:? "reportCount")
-            Core.<*> (o Core..:? "running")
             Core.<*> (o Core..:? "sendNotification")
             Core.<*> (o Core..:? "shareEmailAddress")
             Core.<*> (o Core..:? "title")
@@ -714,15 +725,6 @@ instance Core.ToJSON QueryMetadata where
       ( Core.catMaybes
           [ ("dataRange" Core..=) Core.<$> dataRange,
             ("format" Core..=) Core.<$> format,
-            ("googleCloudStoragePathForLatestReport" Core..=)
-              Core.<$> googleCloudStoragePathForLatestReport,
-            ("googleDrivePathForLatestReport" Core..=)
-              Core.<$> googleDrivePathForLatestReport,
-            ("latestReportRunTimeMs" Core..=) Core.. Core.AsText
-              Core.<$> latestReportRunTimeMs,
-            ("locale" Core..=) Core.<$> locale,
-            ("reportCount" Core..=) Core.<$> reportCount,
-            ("running" Core..=) Core.<$> running,
             ("sendNotification" Core..=)
               Core.<$> sendNotification,
             ("shareEmailAddress" Core..=)
@@ -731,20 +733,18 @@ instance Core.ToJSON QueryMetadata where
           ]
       )
 
--- | Information on how frequently and when to run a query.
+-- | Information on when and how frequently to run a query.
 --
 -- /See:/ 'newQuerySchedule' smart constructor.
 data QuerySchedule = QuerySchedule
-  { -- | Datetime to periodically run the query until.
-    endTimeMs :: (Core.Maybe Core.Int64),
+  { -- | Date to periodically run the query until. Not applicable to @ONE_TIME@ frequency.
+    endDate :: (Core.Maybe Date),
     -- | How often the query is run.
     frequency :: (Core.Maybe QuerySchedule_Frequency),
-    -- | Time of day at which a new report will be generated, represented as minutes past midnight. Range is 0 to 1439. Only applies to scheduled reports.
-    nextRunMinuteOfDay :: (Core.Maybe Core.Int32),
-    -- | Canonical timezone code for report generation time. Defaults to America\/New_York.
+    -- | Canonical timezone code for report generation time. Defaults to @America\/New_York@.
     nextRunTimezoneCode :: (Core.Maybe Core.Text),
     -- | When to start running the query. Not applicable to @ONE_TIME@ frequency.
-    startTimeMs :: (Core.Maybe Core.Int64)
+    startDate :: (Core.Maybe Date)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -753,11 +753,10 @@ newQuerySchedule ::
   QuerySchedule
 newQuerySchedule =
   QuerySchedule
-    { endTimeMs = Core.Nothing,
+    { endDate = Core.Nothing,
       frequency = Core.Nothing,
-      nextRunMinuteOfDay = Core.Nothing,
       nextRunTimezoneCode = Core.Nothing,
-      startTimeMs = Core.Nothing
+      startDate = Core.Nothing
     }
 
 instance Core.FromJSON QuerySchedule where
@@ -766,30 +765,21 @@ instance Core.FromJSON QuerySchedule where
       "QuerySchedule"
       ( \o ->
           QuerySchedule
-            Core.<$> ( o Core..:? "endTimeMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "endDate")
             Core.<*> (o Core..:? "frequency")
-            Core.<*> (o Core..:? "nextRunMinuteOfDay")
             Core.<*> (o Core..:? "nextRunTimezoneCode")
-            Core.<*> ( o Core..:? "startTimeMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "startDate")
       )
 
 instance Core.ToJSON QuerySchedule where
   toJSON QuerySchedule {..} =
     Core.object
       ( Core.catMaybes
-          [ ("endTimeMs" Core..=) Core.. Core.AsText
-              Core.<$> endTimeMs,
+          [ ("endDate" Core..=) Core.<$> endDate,
             ("frequency" Core..=) Core.<$> frequency,
-            ("nextRunMinuteOfDay" Core..=)
-              Core.<$> nextRunMinuteOfDay,
             ("nextRunTimezoneCode" Core..=)
               Core.<$> nextRunTimezoneCode,
-            ("startTimeMs" Core..=) Core.. Core.AsText
-              Core.<$> startTimeMs
+            ("startDate" Core..=) Core.<$> startDate
           ]
       )
 
@@ -833,42 +823,13 @@ instance Core.ToJSON Report where
           ]
       )
 
--- | An explanation of a report failure.
---
--- /See:/ 'newReportFailure' smart constructor.
-newtype ReportFailure = ReportFailure
-  { -- | Error code that shows why the report was not created.
-    errorCode :: (Core.Maybe ReportFailure_ErrorCode)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ReportFailure' with the minimum fields required to make a request.
-newReportFailure ::
-  ReportFailure
-newReportFailure = ReportFailure {errorCode = Core.Nothing}
-
-instance Core.FromJSON ReportFailure where
-  parseJSON =
-    Core.withObject
-      "ReportFailure"
-      ( \o ->
-          ReportFailure Core.<$> (o Core..:? "errorCode")
-      )
-
-instance Core.ToJSON ReportFailure where
-  toJSON ReportFailure {..} =
-    Core.object
-      ( Core.catMaybes
-          [("errorCode" Core..=) Core.<$> errorCode]
-      )
-
 -- | Key used to identify a report.
 --
 -- /See:/ 'newReportKey' smart constructor.
 data ReportKey = ReportKey
-  { -- | Query ID.
+  { -- | Output only. Query ID.
     queryId :: (Core.Maybe Core.Int64),
-    -- | Report ID.
+    -- | Output only. Report ID.
     reportId :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -907,12 +868,12 @@ instance Core.ToJSON ReportKey where
 --
 -- /See:/ 'newReportMetadata' smart constructor.
 data ReportMetadata = ReportMetadata
-  { -- | The path to the location in Google Cloud Storage where the report is stored.
+  { -- | Output only. The path to the location in Google Cloud Storage where the report is stored.
     googleCloudStoragePath :: (Core.Maybe Core.Text),
     -- | The ending time for the data that is shown in the report.
-    reportDataEndTimeMs :: (Core.Maybe Core.Int64),
+    reportDataEndDate :: (Core.Maybe Date),
     -- | The starting time for the data that is shown in the report.
-    reportDataStartTimeMs :: (Core.Maybe Core.Int64),
+    reportDataStartDate :: (Core.Maybe Date),
     -- | Report status.
     status :: (Core.Maybe ReportStatus)
   }
@@ -924,8 +885,8 @@ newReportMetadata ::
 newReportMetadata =
   ReportMetadata
     { googleCloudStoragePath = Core.Nothing,
-      reportDataEndTimeMs = Core.Nothing,
-      reportDataStartTimeMs = Core.Nothing,
+      reportDataEndDate = Core.Nothing,
+      reportDataStartDate = Core.Nothing,
       status = Core.Nothing
     }
 
@@ -936,12 +897,8 @@ instance Core.FromJSON ReportMetadata where
       ( \o ->
           ReportMetadata
             Core.<$> (o Core..:? "googleCloudStoragePath")
-            Core.<*> ( o Core..:? "reportDataEndTimeMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "reportDataStartTimeMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "reportDataEndDate")
+            Core.<*> (o Core..:? "reportDataStartDate")
             Core.<*> (o Core..:? "status")
       )
 
@@ -951,10 +908,10 @@ instance Core.ToJSON ReportMetadata where
       ( Core.catMaybes
           [ ("googleCloudStoragePath" Core..=)
               Core.<$> googleCloudStoragePath,
-            ("reportDataEndTimeMs" Core..=) Core.. Core.AsText
-              Core.<$> reportDataEndTimeMs,
-            ("reportDataStartTimeMs" Core..=) Core.. Core.AsText
-              Core.<$> reportDataStartTimeMs,
+            ("reportDataEndDate" Core..=)
+              Core.<$> reportDataEndDate,
+            ("reportDataStartDate" Core..=)
+              Core.<$> reportDataStartDate,
             ("status" Core..=) Core.<$> status
           ]
       )
@@ -963,13 +920,11 @@ instance Core.ToJSON ReportMetadata where
 --
 -- /See:/ 'newReportStatus' smart constructor.
 data ReportStatus = ReportStatus
-  { -- | If the report failed, this records the cause.
-    failure :: (Core.Maybe ReportFailure),
-    -- | The time when this report either completed successfully or failed.
-    finishTimeMs :: (Core.Maybe Core.Int64),
+  { -- | Output only. The time when this report either completed successfully or failed.
+    finishTime :: (Core.Maybe Core.DateTime),
     -- | The file type of the report.
     format :: (Core.Maybe ReportStatus_Format),
-    -- | The state of the report.
+    -- | Output only. The state of the report.
     state :: (Core.Maybe ReportStatus_State)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -979,8 +934,7 @@ newReportStatus ::
   ReportStatus
 newReportStatus =
   ReportStatus
-    { failure = Core.Nothing,
-      finishTimeMs = Core.Nothing,
+    { finishTime = Core.Nothing,
       format = Core.Nothing,
       state = Core.Nothing
     }
@@ -991,10 +945,7 @@ instance Core.FromJSON ReportStatus where
       "ReportStatus"
       ( \o ->
           ReportStatus
-            Core.<$> (o Core..:? "failure")
-            Core.<*> ( o Core..:? "finishTimeMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "finishTime")
             Core.<*> (o Core..:? "format")
             Core.<*> (o Core..:? "state")
       )
@@ -1003,19 +954,17 @@ instance Core.ToJSON ReportStatus where
   toJSON ReportStatus {..} =
     Core.object
       ( Core.catMaybes
-          [ ("failure" Core..=) Core.<$> failure,
-            ("finishTimeMs" Core..=) Core.. Core.AsText
-              Core.<$> finishTimeMs,
+          [ ("finishTime" Core..=) Core.<$> finishTime,
             ("format" Core..=) Core.<$> format,
             ("state" Core..=) Core.<$> state
           ]
       )
 
--- | A Rule defines a name, and a boolean expression in <http:%20//mathworld.wolfram.com/ConjunctiveNormalForm.html conjunctive normal form>{.external} that can be \/\/ applied to a path event to determine if that name should be applied.
+-- | A Rule defines a name, and a boolean expression in [conjunctive normal form] (http:\/\/mathworld.wolfram.com\/ConjunctiveNormalForm.html){.external} that can be applied to a path event to determine if that name should be applied.
 --
 -- /See:/ 'newRule' smart constructor.
 data Rule = Rule
-  { -- |
+  { -- | DisjunctiveMatchStatements within a Rule. DisjunctiveMatchStatement OR\'s all contained filters.
     disjunctiveMatchStatements :: (Core.Maybe [DisjunctiveMatchStatement]),
     -- | Rule name.
     name :: (Core.Maybe Core.Text)
@@ -1050,54 +999,28 @@ instance Core.ToJSON Rule where
 -- | Request to run a stored query to generate a report.
 --
 -- /See:/ 'newRunQueryRequest' smart constructor.
-data RunQueryRequest = RunQueryRequest
-  { -- | Report data range used to generate the report.
-    dataRange :: (Core.Maybe RunQueryRequest_DataRange),
-    -- | The ending time for the data that is shown in the report. Note, reportDataEndTimeMs is required if dataRange is CUSTOM_DATES and ignored otherwise.
-    reportDataEndTimeMs :: (Core.Maybe Core.Int64),
-    -- | The starting time for the data that is shown in the report. Note, reportDataStartTimeMs is required if dataRange is CUSTOM_DATES and ignored otherwise.
-    reportDataStartTimeMs :: (Core.Maybe Core.Int64),
-    -- | Canonical timezone code for report data time. Defaults to America\/New_York.
-    timezoneCode :: (Core.Maybe Core.Text)
+newtype RunQueryRequest = RunQueryRequest
+  { -- | Report data range used to generate the report. If unspecified, the original parent query\'s data range is used.
+    dataRange :: (Core.Maybe DataRange)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'RunQueryRequest' with the minimum fields required to make a request.
 newRunQueryRequest ::
   RunQueryRequest
-newRunQueryRequest =
-  RunQueryRequest
-    { dataRange = Core.Nothing,
-      reportDataEndTimeMs = Core.Nothing,
-      reportDataStartTimeMs = Core.Nothing,
-      timezoneCode = Core.Nothing
-    }
+newRunQueryRequest = RunQueryRequest {dataRange = Core.Nothing}
 
 instance Core.FromJSON RunQueryRequest where
   parseJSON =
     Core.withObject
       "RunQueryRequest"
       ( \o ->
-          RunQueryRequest
-            Core.<$> (o Core..:? "dataRange")
-            Core.<*> ( o Core..:? "reportDataEndTimeMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "reportDataStartTimeMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> (o Core..:? "timezoneCode")
+          RunQueryRequest Core.<$> (o Core..:? "dataRange")
       )
 
 instance Core.ToJSON RunQueryRequest where
   toJSON RunQueryRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dataRange" Core..=) Core.<$> dataRange,
-            ("reportDataEndTimeMs" Core..=) Core.. Core.AsText
-              Core.<$> reportDataEndTimeMs,
-            ("reportDataStartTimeMs" Core..=) Core.. Core.AsText
-              Core.<$> reportDataStartTimeMs,
-            ("timezoneCode" Core..=) Core.<$> timezoneCode
-          ]
+          [("dataRange" Core..=) Core.<$> dataRange]
       )

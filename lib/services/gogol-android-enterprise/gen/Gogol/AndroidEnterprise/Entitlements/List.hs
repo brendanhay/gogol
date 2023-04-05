@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists all entitlements for the specified user. Only the ID is set.
+-- Lists all entitlements for the specified user. Only the ID is set. __Note:__ This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.entitlements.list@.
 module Gogol.AndroidEnterprise.Entitlements.List
@@ -60,7 +60,7 @@ type AndroidEnterpriseEntitlementsListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] EntitlementsListResponse
 
--- | Lists all entitlements for the specified user. Only the ID is set.
+-- | Lists all entitlements for the specified user. Only the ID is set. __Note:__ This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
 --
 -- /See:/ 'newAndroidEnterpriseEntitlementsList' smart constructor.
 data AndroidEnterpriseEntitlementsList = AndroidEnterpriseEntitlementsList

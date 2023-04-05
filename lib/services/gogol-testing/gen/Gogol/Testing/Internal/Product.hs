@@ -202,6 +202,10 @@ module Gogol.Testing.Internal.Product
     ManualSharding (..),
     newManualSharding,
 
+    -- * Metadata
+    Metadata (..),
+    newMetadata,
+
     -- * NetworkConfiguration
     NetworkConfiguration (..),
     newNetworkConfiguration,
@@ -217,6 +221,14 @@ module Gogol.Testing.Internal.Product
     -- * Orientation
     Orientation (..),
     newOrientation,
+
+    -- * PerAndroidVersionInfo
+    PerAndroidVersionInfo (..),
+    newPerAndroidVersionInfo,
+
+    -- * PerIosVersionInfo
+    PerIosVersionInfo (..),
+    newPerIosVersionInfo,
 
     -- * ProvidedSoftwareCatalog
     ProvidedSoftwareCatalog (..),
@@ -301,6 +313,10 @@ module Gogol.Testing.Internal.Product
     -- * UniformSharding
     UniformSharding (..),
     newUniformSharding,
+
+    -- * UsesFeature
+    UsesFeature (..),
+    newUsesFeature,
 
     -- * XcodeVersion
     XcodeVersion (..),
@@ -609,6 +625,8 @@ data AndroidModel = AndroidModel
     manufacturer :: (Core.Maybe Core.Text),
     -- | The human-readable marketing name for this device model. Examples: \"Nexus 5\", \"Galaxy S5\".
     name :: (Core.Maybe Core.Text),
+    -- | Version-specific information of an Android model.
+    perVersionInfo :: (Core.Maybe [PerAndroidVersionInfo]),
     -- | Screen density in DPI. This corresponds to ro.sf.lcd_density
     screenDensity :: (Core.Maybe Core.Int32),
     -- | Screen size in the horizontal (X) dimension measured in pixels.
@@ -621,7 +639,7 @@ data AndroidModel = AndroidModel
     supportedVersionIds :: (Core.Maybe [Core.Text]),
     -- | Tags for this dimension. Examples: \"default\", \"preview\", \"deprecated\".
     tags :: (Core.Maybe [Core.Text]),
-    -- | URL of a thumbnail image (photo) of the device. e.g. https:\/\/lh3.googleusercontent.com\/90WcauuJiCYABEl8U0lcZeuS5STUbf2yW...
+    -- | URL of a thumbnail image (photo) of the device.
     thumbnailUrl :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -639,6 +657,7 @@ newAndroidModel =
       lowFpsVideoRecording = Core.Nothing,
       manufacturer = Core.Nothing,
       name = Core.Nothing,
+      perVersionInfo = Core.Nothing,
       screenDensity = Core.Nothing,
       screenX = Core.Nothing,
       screenY = Core.Nothing,
@@ -662,6 +681,7 @@ instance Core.FromJSON AndroidModel where
             Core.<*> (o Core..:? "lowFpsVideoRecording")
             Core.<*> (o Core..:? "manufacturer")
             Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "perVersionInfo")
             Core.<*> (o Core..:? "screenDensity")
             Core.<*> (o Core..:? "screenX")
             Core.<*> (o Core..:? "screenY")
@@ -684,6 +704,7 @@ instance Core.ToJSON AndroidModel where
               Core.<$> lowFpsVideoRecording,
             ("manufacturer" Core..=) Core.<$> manufacturer,
             ("name" Core..=) Core.<$> name,
+            ("perVersionInfo" Core..=) Core.<$> perVersionInfo,
             ("screenDensity" Core..=) Core.<$> screenDensity,
             ("screenX" Core..=) Core.<$> screenX,
             ("screenY" Core..=) Core.<$> screenY,
@@ -1007,14 +1028,22 @@ data ApkManifest = ApkManifest
     intentFilters :: (Core.Maybe [IntentFilter]),
     -- | Maximum API level on which the application is designed to run.
     maxSdkVersion :: (Core.Maybe Core.Int32),
+    -- | Meta-data tags defined in the manifest.
+    metadata :: (Core.Maybe [Metadata]),
     -- | Minimum API level required for the application to run.
     minSdkVersion :: (Core.Maybe Core.Int32),
     -- | Full Java-style package name for this application, e.g. \"com.example.foo\".
     packageName :: (Core.Maybe Core.Text),
     -- | Specifies the API Level on which the application is designed to run.
     targetSdkVersion :: (Core.Maybe Core.Int32),
+    -- | Feature usage tags defined in the manifest.
+    usesFeature :: (Core.Maybe [UsesFeature]),
     -- | Permissions declared to be used by the application
-    usesPermission :: (Core.Maybe [Core.Text])
+    usesPermission :: (Core.Maybe [Core.Text]),
+    -- | Version number used internally by the app.
+    versionCode :: (Core.Maybe Core.Int64),
+    -- | Version number shown to users.
+    versionName :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1026,10 +1055,14 @@ newApkManifest =
     { applicationLabel = Core.Nothing,
       intentFilters = Core.Nothing,
       maxSdkVersion = Core.Nothing,
+      metadata = Core.Nothing,
       minSdkVersion = Core.Nothing,
       packageName = Core.Nothing,
       targetSdkVersion = Core.Nothing,
-      usesPermission = Core.Nothing
+      usesFeature = Core.Nothing,
+      usesPermission = Core.Nothing,
+      versionCode = Core.Nothing,
+      versionName = Core.Nothing
     }
 
 instance Core.FromJSON ApkManifest where
@@ -1041,10 +1074,16 @@ instance Core.FromJSON ApkManifest where
             Core.<$> (o Core..:? "applicationLabel")
             Core.<*> (o Core..:? "intentFilters")
             Core.<*> (o Core..:? "maxSdkVersion")
+            Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "minSdkVersion")
             Core.<*> (o Core..:? "packageName")
             Core.<*> (o Core..:? "targetSdkVersion")
+            Core.<*> (o Core..:? "usesFeature")
             Core.<*> (o Core..:? "usesPermission")
+            Core.<*> ( o Core..:? "versionCode"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "versionName")
       )
 
 instance Core.ToJSON ApkManifest where
@@ -1055,11 +1094,16 @@ instance Core.ToJSON ApkManifest where
               Core.<$> applicationLabel,
             ("intentFilters" Core..=) Core.<$> intentFilters,
             ("maxSdkVersion" Core..=) Core.<$> maxSdkVersion,
+            ("metadata" Core..=) Core.<$> metadata,
             ("minSdkVersion" Core..=) Core.<$> minSdkVersion,
             ("packageName" Core..=) Core.<$> packageName,
             ("targetSdkVersion" Core..=)
               Core.<$> targetSdkVersion,
-            ("usesPermission" Core..=) Core.<$> usesPermission
+            ("usesFeature" Core..=) Core.<$> usesFeature,
+            ("usesPermission" Core..=) Core.<$> usesPermission,
+            ("versionCode" Core..=) Core.. Core.AsText
+              Core.<$> versionCode,
+            ("versionName" Core..=) Core.<$> versionName
           ]
       )
 
@@ -1832,6 +1876,8 @@ data IosModel = IosModel
     id :: (Core.Maybe Core.Text),
     -- | The human-readable name for this device model. Examples: \"iPhone 4s\", \"iPad Mini 2\".
     name :: (Core.Maybe Core.Text),
+    -- | Version-specific information of an iOS model.
+    perVersionInfo :: (Core.Maybe [PerIosVersionInfo]),
     -- | Screen density in DPI.
     screenDensity :: (Core.Maybe Core.Int32),
     -- | Screen size in the horizontal (X) dimension measured in pixels.
@@ -1854,6 +1900,7 @@ newIosModel =
       formFactor = Core.Nothing,
       id = Core.Nothing,
       name = Core.Nothing,
+      perVersionInfo = Core.Nothing,
       screenDensity = Core.Nothing,
       screenX = Core.Nothing,
       screenY = Core.Nothing,
@@ -1871,6 +1918,7 @@ instance Core.FromJSON IosModel where
             Core.<*> (o Core..:? "formFactor")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "perVersionInfo")
             Core.<*> (o Core..:? "screenDensity")
             Core.<*> (o Core..:? "screenX")
             Core.<*> (o Core..:? "screenY")
@@ -1887,6 +1935,7 @@ instance Core.ToJSON IosModel where
             ("formFactor" Core..=) Core.<$> formFactor,
             ("id" Core..=) Core.<$> id,
             ("name" Core..=) Core.<$> name,
+            ("perVersionInfo" Core..=) Core.<$> perVersionInfo,
             ("screenDensity" Core..=) Core.<$> screenDensity,
             ("screenX" Core..=) Core.<$> screenX,
             ("screenY" Core..=) Core.<$> screenY,
@@ -2208,7 +2257,7 @@ instance Core.ToJSON Locale where
 --
 -- /See:/ 'newManualSharding' smart constructor.
 newtype ManualSharding = ManualSharding
-  { -- | Required. Group of packages, classes, and\/or test methods to be run for each shard. When any physical devices are selected, the number of test/targets/for_shard must be >= 1 and \<= 50. When no physical devices are selected, the number must be >= 1 and \<= 500.
+  { -- | Required. Group of packages, classes, and\/or test methods to be run for each manually-created shard. You must specify at least one shard if this field is present. When you select one or more physical devices, the number of repeated test/targets/for_shard must be \<= 50. When you select one or more ARM virtual devices, it must be \<= 100. When you select only x86 virtual devices, it must be \<= 500.
     testTargetsForShard :: (Core.Maybe [TestTargetsForShard])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2233,6 +2282,40 @@ instance Core.ToJSON ManualSharding where
       ( Core.catMaybes
           [ ("testTargetsForShard" Core..=)
               Core.<$> testTargetsForShard
+          ]
+      )
+
+-- | A tag within a manifest. https:\/\/developer.android.com\/guide\/topics\/manifest\/meta-data-element.html
+--
+-- /See:/ 'newMetadata' smart constructor.
+data Metadata = Metadata
+  { -- | The android:name value
+    name :: (Core.Maybe Core.Text),
+    -- | The android:value value
+    value :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Metadata' with the minimum fields required to make a request.
+newMetadata ::
+  Metadata
+newMetadata = Metadata {name = Core.Nothing, value = Core.Nothing}
+
+instance Core.FromJSON Metadata where
+  parseJSON =
+    Core.withObject
+      "Metadata"
+      ( \o ->
+          Metadata
+            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
+      )
+
+instance Core.ToJSON Metadata where
+  toJSON Metadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("name" Core..=) Core.<$> name,
+            ("value" Core..=) Core.<$> value
           ]
       )
 
@@ -2381,6 +2464,81 @@ instance Core.ToJSON Orientation where
           [ ("id" Core..=) Core.<$> id,
             ("name" Core..=) Core.<$> name,
             ("tags" Core..=) Core.<$> tags
+          ]
+      )
+
+-- | A version-specific information of an Android model.
+--
+-- /See:/ 'newPerAndroidVersionInfo' smart constructor.
+data PerAndroidVersionInfo = PerAndroidVersionInfo
+  { -- | The number of online devices for an Android version.
+    deviceCapacity :: (Core.Maybe PerAndroidVersionInfo_DeviceCapacity),
+    -- | An Android version.
+    versionId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PerAndroidVersionInfo' with the minimum fields required to make a request.
+newPerAndroidVersionInfo ::
+  PerAndroidVersionInfo
+newPerAndroidVersionInfo =
+  PerAndroidVersionInfo
+    { deviceCapacity = Core.Nothing,
+      versionId = Core.Nothing
+    }
+
+instance Core.FromJSON PerAndroidVersionInfo where
+  parseJSON =
+    Core.withObject
+      "PerAndroidVersionInfo"
+      ( \o ->
+          PerAndroidVersionInfo
+            Core.<$> (o Core..:? "deviceCapacity")
+            Core.<*> (o Core..:? "versionId")
+      )
+
+instance Core.ToJSON PerAndroidVersionInfo where
+  toJSON PerAndroidVersionInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("deviceCapacity" Core..=) Core.<$> deviceCapacity,
+            ("versionId" Core..=) Core.<$> versionId
+          ]
+      )
+
+-- | A version-specific information of an iOS model.
+--
+-- /See:/ 'newPerIosVersionInfo' smart constructor.
+data PerIosVersionInfo = PerIosVersionInfo
+  { -- | The number of online devices for an iOS version.
+    deviceCapacity :: (Core.Maybe PerIosVersionInfo_DeviceCapacity),
+    -- | An iOS version.
+    versionId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PerIosVersionInfo' with the minimum fields required to make a request.
+newPerIosVersionInfo ::
+  PerIosVersionInfo
+newPerIosVersionInfo =
+  PerIosVersionInfo {deviceCapacity = Core.Nothing, versionId = Core.Nothing}
+
+instance Core.FromJSON PerIosVersionInfo where
+  parseJSON =
+    Core.withObject
+      "PerIosVersionInfo"
+      ( \o ->
+          PerIosVersionInfo
+            Core.<$> (o Core..:? "deviceCapacity")
+            Core.<*> (o Core..:? "versionId")
+      )
+
+instance Core.ToJSON PerIosVersionInfo where
+  toJSON PerIosVersionInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("deviceCapacity" Core..=) Core.<$> deviceCapacity,
+            ("versionId" Core..=) Core.<$> versionId
           ]
       )
 
@@ -2609,7 +2767,7 @@ data Shard = Shard
     numShards :: (Core.Maybe Core.Int32),
     -- | Output only. The index of the shard among all the shards.
     shardIndex :: (Core.Maybe Core.Int32),
-    -- | Output only. Test targets for each shard.
+    -- | Output only. Test targets for each shard. Only set for manual sharding.
     testTargetsForShard :: (Core.Maybe TestTargetsForShard)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3191,7 +3349,7 @@ instance Core.ToJSON TestSpecification where
 --
 -- /See:/ 'newTestTargetsForShard' smart constructor.
 newtype TestTargetsForShard = TestTargetsForShard
-  { -- | Group of packages, classes, and\/or test methods to be run for each shard. The targets need to be specified in AndroidJUnitRunner argument format. For example, \"package com.my.packages\" \"class com.my.package.MyClass\". The number of shard/test/targets must be greater than 0.
+  { -- | Group of packages, classes, and\/or test methods to be run for each shard. The targets need to be specified in AndroidJUnitRunner argument format. For example, \"package com.my.packages\" \"class com.my.package.MyClass\". The number of test_targets must be greater than 0.
     testTargets :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3402,11 +3560,11 @@ instance Core.ToJSON TrafficRule where
           ]
       )
 
--- | Uniformly shards test cases given a total number of shards. For Instrumentation test, it will be translated to \"-e numShard\" \"-e shardIndex\" AndroidJUnitRunner arguments. Based on the sharding mechanism AndroidJUnitRunner uses, there is no guarantee that test cases will be distributed uniformly across all shards. With uniform sharding enabled, specifying these sharding arguments via environment_variables is invalid.
+-- | Uniformly shards test cases given a total number of shards. For instrumentation tests, it will be translated to \"-e numShard\" and \"-e shardIndex\" AndroidJUnitRunner arguments. With uniform sharding enabled, specifying either of these sharding arguments via @environment_variables@ is invalid. Based on the sharding mechanism AndroidJUnitRunner uses, there is no guarantee that test cases will be distributed uniformly across all shards.
 --
 -- /See:/ 'newUniformSharding' smart constructor.
 newtype UniformSharding = UniformSharding
-  { -- | Required. Total number of shards. When any physical devices are selected, the number must be >= 1 and \<= 50. When no physical devices are selected, the number must be >= 1 and \<= 500.
+  { -- | Required. The total number of shards to create. This must always be a positive number that is no greater than the total number of test cases. When you select one or more physical devices, the number of shards must be \<= 50. When you select one or more ARM virtual devices, it must be \<= 100. When you select only x86 virtual devices, it must be \<= 500.
     numShards :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3429,6 +3587,41 @@ instance Core.ToJSON UniformSharding where
     Core.object
       ( Core.catMaybes
           [("numShards" Core..=) Core.<$> numShards]
+      )
+
+-- | A tag within a manifest. https:\/\/developer.android.com\/guide\/topics\/manifest\/uses-feature-element.html
+--
+-- /See:/ 'newUsesFeature' smart constructor.
+data UsesFeature = UsesFeature
+  { -- | The android:required value
+    isRequired :: (Core.Maybe Core.Bool),
+    -- | The android:name value
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UsesFeature' with the minimum fields required to make a request.
+newUsesFeature ::
+  UsesFeature
+newUsesFeature = UsesFeature {isRequired = Core.Nothing, name = Core.Nothing}
+
+instance Core.FromJSON UsesFeature where
+  parseJSON =
+    Core.withObject
+      "UsesFeature"
+      ( \o ->
+          UsesFeature
+            Core.<$> (o Core..:? "isRequired")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON UsesFeature where
+  toJSON UsesFeature {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("isRequired" Core..=) Core.<$> isRequired,
+            ("name" Core..=) Core.<$> name
+          ]
       )
 
 -- | An Xcode version that an iOS version is compatible with.

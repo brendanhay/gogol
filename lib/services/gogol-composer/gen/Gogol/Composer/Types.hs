@@ -52,6 +52,10 @@ module Gogol.Composer.Types
     CheckUpgradeResponse_PypiDependencies (..),
     newCheckUpgradeResponse_PypiDependencies,
 
+    -- ** CidrBlock
+    CidrBlock (..),
+    newCidrBlock,
+
     -- ** DatabaseConfig
     DatabaseConfig (..),
     newDatabaseConfig,
@@ -106,9 +110,28 @@ module Gogol.Composer.Types
     ListOperationsResponse (..),
     newListOperationsResponse,
 
+    -- ** LoadSnapshotRequest
+    LoadSnapshotRequest (..),
+    newLoadSnapshotRequest,
+
+    -- ** LoadSnapshotResponse
+    LoadSnapshotResponse (..),
+    newLoadSnapshotResponse,
+
     -- ** MaintenanceWindow
     MaintenanceWindow (..),
     newMaintenanceWindow,
+
+    -- ** MasterAuthorizedNetworksConfig
+    MasterAuthorizedNetworksConfig (..),
+    newMasterAuthorizedNetworksConfig,
+
+    -- ** NetworkingConfig
+    NetworkingConfig (..),
+    newNetworkingConfig,
+
+    -- ** NetworkingConfig_ConnectionType
+    NetworkingConfig_ConnectionType (..),
 
     -- ** NodeConfig
     NodeConfig (..),
@@ -143,6 +166,22 @@ module Gogol.Composer.Types
     -- ** PrivateEnvironmentConfig
     PrivateEnvironmentConfig (..),
     newPrivateEnvironmentConfig,
+
+    -- ** RecoveryConfig
+    RecoveryConfig (..),
+    newRecoveryConfig,
+
+    -- ** SaveSnapshotRequest
+    SaveSnapshotRequest (..),
+    newSaveSnapshotRequest,
+
+    -- ** SaveSnapshotResponse
+    SaveSnapshotResponse (..),
+    newSaveSnapshotResponse,
+
+    -- ** ScheduledSnapshotsConfig
+    ScheduledSnapshotsConfig (..),
+    newScheduledSnapshotsConfig,
 
     -- ** SchedulerResource
     SchedulerResource (..),

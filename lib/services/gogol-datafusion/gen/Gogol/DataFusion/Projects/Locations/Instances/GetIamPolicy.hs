@@ -68,9 +68,9 @@ data DataFusionProjectsLocationsInstancesGetIamPolicy = DataFusionProjectsLocati
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Optional. The policy format version to be returned. Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected. Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
+    -- | Optional. The maximum policy version that will be used to format the policy. Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected. Requests for policies with any conditional role bindings must specify version 3. Policies with no conditional role bindings may specify any valid value or leave the field unset. The policy in the response might use the policy version that you specified, or it might use a lower policy version. For example, if you specify version 3, but the policy has no conditional role bindings, the response uses version 1. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     optionsRequestedPolicyVersion :: (Core.Maybe Core.Int32),
-    -- | REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
+    -- | REQUIRED: The resource for which the policy is being requested. See <https://cloud.google.com/apis/design/resource_names Resource names> for the appropriate value for this field.
     resource :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -81,7 +81,7 @@ data DataFusionProjectsLocationsInstancesGetIamPolicy = DataFusionProjectsLocati
 
 -- | Creates a value of 'DataFusionProjectsLocationsInstancesGetIamPolicy' with the minimum fields required to make a request.
 newDataFusionProjectsLocationsInstancesGetIamPolicy ::
-  -- |  REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field. See 'resource'.
+  -- |  REQUIRED: The resource for which the policy is being requested. See <https://cloud.google.com/apis/design/resource_names Resource names> for the appropriate value for this field. See 'resource'.
   Core.Text ->
   DataFusionProjectsLocationsInstancesGetIamPolicy
 newDataFusionProjectsLocationsInstancesGetIamPolicy resource =

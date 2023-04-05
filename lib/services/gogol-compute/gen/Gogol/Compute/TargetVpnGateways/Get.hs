@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified target VPN gateway. Gets a list of available target VPN gateways by making a list() request.
+-- Returns the specified target VPN gateway.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.targetVpnGateways.get@.
 module Gogol.Compute.TargetVpnGateways.Get
@@ -61,7 +61,7 @@ type ComputeTargetVpnGatewaysGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] TargetVpnGateway
 
--- | Returns the specified target VPN gateway. Gets a list of available target VPN gateways by making a list() request.
+-- | Returns the specified target VPN gateway.
 --
 -- /See:/ 'newComputeTargetVpnGatewaysGet' smart constructor.
 data ComputeTargetVpnGatewaysGet = ComputeTargetVpnGatewaysGet

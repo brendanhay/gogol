@@ -28,7 +28,7 @@
 --
 -- Patches a post.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.posts.patch@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.posts.patch@.
 module Gogol.Blogger.Posts.Patch
   ( -- * Resource
     BloggerPostsPatchResource,

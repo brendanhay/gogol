@@ -130,6 +130,18 @@ module Gogol.ServiceControl
     FirstPartyPrincipal_ServiceMetadata (..),
     newFirstPartyPrincipal_ServiceMetadata,
 
+    -- ** OrgPolicyViolationInfo
+    OrgPolicyViolationInfo (..),
+    newOrgPolicyViolationInfo,
+
+    -- ** OrgPolicyViolationInfo_Payload
+    OrgPolicyViolationInfo_Payload (..),
+    newOrgPolicyViolationInfo_Payload,
+
+    -- ** OrgPolicyViolationInfo_ResourceTags
+    OrgPolicyViolationInfo_ResourceTags (..),
+    newOrgPolicyViolationInfo_ResourceTags,
+
     -- ** Peer
     Peer (..),
     newPeer,
@@ -137,6 +149,10 @@ module Gogol.ServiceControl
     -- ** Peer_Labels
     Peer_Labels (..),
     newPeer_Labels,
+
+    -- ** PolicyViolationInfo
+    PolicyViolationInfo (..),
+    newPolicyViolationInfo,
 
     -- ** ReportRequest
     ReportRequest (..),
@@ -244,6 +260,13 @@ module Gogol.ServiceControl
     -- ** V2LogEntrySourceLocation
     V2LogEntrySourceLocation (..),
     newV2LogEntrySourceLocation,
+
+    -- ** ViolationInfo
+    ViolationInfo (..),
+    newViolationInfo,
+
+    -- ** ViolationInfo_PolicyType
+    ViolationInfo_PolicyType (..),
   )
 where
 

@@ -41,6 +41,17 @@ module Gogol.DoubleClickBids.Types
     ChannelGrouping (..),
     newChannelGrouping,
 
+    -- ** DataRange
+    DataRange (..),
+    newDataRange,
+
+    -- ** DataRange_Range
+    DataRange_Range (..),
+
+    -- ** Date
+    Date (..),
+    newDate,
+
     -- ** DisjunctiveMatchStatement
     DisjunctiveMatchStatement (..),
     newDisjunctiveMatchStatement,
@@ -52,9 +63,6 @@ module Gogol.DoubleClickBids.Types
     -- ** FilterPair
     FilterPair (..),
     newFilterPair,
-
-    -- ** FilterPair_Type
-    FilterPair_Type (..),
 
     -- ** ListQueriesResponse
     ListQueriesResponse (..),
@@ -71,12 +79,6 @@ module Gogol.DoubleClickBids.Types
     -- ** Parameters
     Parameters (..),
     newParameters,
-
-    -- ** Parameters_GroupBysItem
-    Parameters_GroupBysItem (..),
-
-    -- ** Parameters_MetricsItem
-    Parameters_MetricsItem (..),
 
     -- ** Parameters_Type
     Parameters_Type (..),
@@ -96,9 +98,6 @@ module Gogol.DoubleClickBids.Types
     PathQueryOptionsFilter (..),
     newPathQueryOptionsFilter,
 
-    -- ** PathQueryOptionsFilter_Filter
-    PathQueryOptionsFilter_Filter (..),
-
     -- ** PathQueryOptionsFilter_Match
     PathQueryOptionsFilter_Match (..),
 
@@ -109,9 +108,6 @@ module Gogol.DoubleClickBids.Types
     -- ** QueryMetadata
     QueryMetadata (..),
     newQueryMetadata,
-
-    -- ** QueryMetadata_DataRange
-    QueryMetadata_DataRange (..),
 
     -- ** QueryMetadata_Format
     QueryMetadata_Format (..),
@@ -126,13 +122,6 @@ module Gogol.DoubleClickBids.Types
     -- ** Report
     Report (..),
     newReport,
-
-    -- ** ReportFailure
-    ReportFailure (..),
-    newReportFailure,
-
-    -- ** ReportFailure_ErrorCode
-    ReportFailure_ErrorCode (..),
 
     -- ** ReportKey
     ReportKey (..),
@@ -159,9 +148,6 @@ module Gogol.DoubleClickBids.Types
     -- ** RunQueryRequest
     RunQueryRequest (..),
     newRunQueryRequest,
-
-    -- ** RunQueryRequest_DataRange
-    RunQueryRequest_DataRange (..),
   )
 where
 
@@ -169,11 +155,11 @@ import Gogol.DoubleClickBids.Internal.Product
 import Gogol.DoubleClickBids.Internal.Sum
 import qualified Gogol.Prelude as Core
 
--- | Default request referring to version @v1.1@ of the DoubleClick Bid Manager API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version @v2@ of the DoubleClick Bid Manager API. This contains the host and root path used as a starting point for constructing service requests.
 doubleClickBidsService :: Core.ServiceConfig
 doubleClickBidsService =
   Core.defaultService
-    (Core.ServiceId "doubleclickbidmanager:v1.1")
+    (Core.ServiceId "doubleclickbidmanager:v2")
     "doubleclickbidmanager.googleapis.com"
 
 -- | View and manage your reports in DoubleClick Bid Manager

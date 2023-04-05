@@ -60,9 +60,6 @@ type StorageObjectsWatchAllResource =
     Core.:> Core.QueryParam
               "projection"
               ObjectsWatchAllProjection
-    Core.:> Core.QueryParam
-              "provisionalUserProject"
-              Core.Text
     Core.:> Core.QueryParam "startOffset" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "userProject" Core.Text
@@ -93,8 +90,6 @@ data StorageObjectsWatchAll = StorageObjectsWatchAll
     prefix :: (Core.Maybe Core.Text),
     -- | Set of properties to return. Defaults to noAcl.
     projection :: (Core.Maybe ObjectsWatchAllProjection),
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
     -- | Filter results to objects whose names are lexicographically equal to or after startOffset. If endOffset is also set, the objects listed will have names between startOffset (inclusive) and endOffset (exclusive).
     startOffset :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
@@ -124,7 +119,6 @@ newStorageObjectsWatchAll bucket payload =
       payload = payload,
       prefix = Core.Nothing,
       projection = Core.Nothing,
-      provisionalUserProject = Core.Nothing,
       startOffset = Core.Nothing,
       uploadType = Core.Nothing,
       userProject = Core.Nothing,
@@ -151,7 +145,6 @@ instance Core.GoogleRequest StorageObjectsWatchAll where
       pageToken
       prefix
       projection
-      provisionalUserProject
       startOffset
       uploadType
       userProject

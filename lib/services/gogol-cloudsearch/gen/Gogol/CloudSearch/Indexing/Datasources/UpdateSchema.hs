@@ -68,7 +68,7 @@ data CloudSearchIndexingDatasourcesUpdateSchema = CloudSearchIndexingDatasources
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Name of the data source to update Schema. Format: datasources\/{source_id}
+    -- | The name of the data source to update Schema. Format: datasources\/{source_id}
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: UpdateSchemaRequest,
@@ -81,7 +81,7 @@ data CloudSearchIndexingDatasourcesUpdateSchema = CloudSearchIndexingDatasources
 
 -- | Creates a value of 'CloudSearchIndexingDatasourcesUpdateSchema' with the minimum fields required to make a request.
 newCloudSearchIndexingDatasourcesUpdateSchema ::
-  -- |  Name of the data source to update Schema. Format: datasources\/{source_id} See 'name'.
+  -- |  The name of the data source to update Schema. Format: datasources\/{source_id} See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   UpdateSchemaRequest ->

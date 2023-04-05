@@ -88,6 +88,14 @@ module Gogol.Admin.Directory.Types
     -- ** AuxiliaryMessage_Severity
     AuxiliaryMessage_Severity (..),
 
+    -- ** BatchCreatePrintServersRequest
+    BatchCreatePrintServersRequest (..),
+    newBatchCreatePrintServersRequest,
+
+    -- ** BatchCreatePrintServersResponse
+    BatchCreatePrintServersResponse (..),
+    newBatchCreatePrintServersResponse,
+
     -- ** BatchCreatePrintersRequest
     BatchCreatePrintersRequest (..),
     newBatchCreatePrintersRequest,
@@ -95,6 +103,14 @@ module Gogol.Admin.Directory.Types
     -- ** BatchCreatePrintersResponse
     BatchCreatePrintersResponse (..),
     newBatchCreatePrintersResponse,
+
+    -- ** BatchDeletePrintServersRequest
+    BatchDeletePrintServersRequest (..),
+    newBatchDeletePrintServersRequest,
+
+    -- ** BatchDeletePrintServersResponse
+    BatchDeletePrintServersResponse (..),
+    newBatchDeletePrintServersResponse,
 
     -- ** BatchDeletePrintersRequest
     BatchDeletePrintersRequest (..),
@@ -164,6 +180,9 @@ module Gogol.Admin.Directory.Types
     ChromeOsDevice_CpuStatusReportsItem_CpuTemperatureInfoItem (..),
     newChromeOsDevice_CpuStatusReportsItem_CpuTemperatureInfoItem,
 
+    -- ** ChromeOsDevice_DeprovisionReason
+    ChromeOsDevice_DeprovisionReason (..),
+
     -- ** ChromeOsDevice_DeviceFilesItem
     ChromeOsDevice_DeviceFilesItem (..),
     newChromeOsDevice_DeviceFilesItem,
@@ -207,6 +226,10 @@ module Gogol.Admin.Directory.Types
     -- ** ChromeOsMoveDevicesToOu
     ChromeOsMoveDevicesToOu (..),
     newChromeOsMoveDevicesToOu,
+
+    -- ** CreatePrintServerRequest
+    CreatePrintServerRequest (..),
+    newCreatePrintServerRequest,
 
     -- ** CreatePrinterRequest
     CreatePrinterRequest (..),
@@ -295,9 +318,17 @@ module Gogol.Admin.Directory.Types
     Group (..),
     newGroup,
 
+    -- ** GroupAlias
+    GroupAlias (..),
+    newGroupAlias,
+
     -- ** Groups
     Groups (..),
     newGroups,
+
+    -- ** ListPrintServersResponse
+    ListPrintServersResponse (..),
+    newListPrintServersResponse,
 
     -- ** ListPrinterModelsResponse
     ListPrinterModelsResponse (..),
@@ -343,6 +374,24 @@ module Gogol.Admin.Directory.Types
     OrgUnits (..),
     newOrgUnits,
 
+    -- ** OsUpdateStatus
+    OsUpdateStatus (..),
+    newOsUpdateStatus,
+
+    -- ** OsUpdateStatus_State
+    OsUpdateStatus_State (..),
+
+    -- ** PrintServer
+    PrintServer (..),
+    newPrintServer,
+
+    -- ** PrintServerFailureInfo
+    PrintServerFailureInfo (..),
+    newPrintServerFailureInfo,
+
+    -- ** PrintServerFailureInfo_ErrorCode
+    PrintServerFailureInfo_ErrorCode (..),
+
     -- ** Printer
     Printer (..),
     newPrinter,
@@ -370,6 +419,9 @@ module Gogol.Admin.Directory.Types
     -- ** RoleAssignment
     RoleAssignment (..),
     newRoleAssignment,
+
+    -- ** RoleAssignment_AssigneeType
+    RoleAssignment_AssigneeType (..),
 
     -- ** RoleAssignments
     RoleAssignments (..),
@@ -418,6 +470,10 @@ module Gogol.Admin.Directory.Types
     -- ** UserAddress
     UserAddress (..),
     newUserAddress,
+
+    -- ** UserAlias
+    UserAlias (..),
+    newUserAlias,
 
     -- ** UserCustomProperties
     UserCustomProperties (..),

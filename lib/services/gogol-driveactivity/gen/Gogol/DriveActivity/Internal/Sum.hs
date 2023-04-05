@@ -41,6 +41,16 @@ module Gogol.DriveActivity.Internal.Sum
         ..
       ),
 
+    -- * AppliedLabelChangeDetail_TypesItem
+    AppliedLabelChangeDetail_TypesItem
+      ( AppliedLabelChangeDetail_TypesItem_TYPEUNSPECIFIED,
+        AppliedLabelChangeDetail_TypesItem_LABELADDED,
+        AppliedLabelChangeDetail_TypesItem_LABELREMOVED,
+        AppliedLabelChangeDetail_TypesItem_LABELFIELDVALUECHANGED,
+        AppliedLabelChangeDetail_TypesItem_LABELAPPLIEDBYITEMCREATE,
+        ..
+      ),
+
     -- * Assignment_Subtype
     Assignment_Subtype
       ( Assignment_Subtype_SUBTYPEUNSPECIFIED,
@@ -127,6 +137,7 @@ module Gogol.DriveActivity.Internal.Sum
         RestrictionChange_Feature_DIRECTSHARING,
         RestrictionChange_Feature_ITEMDUPLICATION,
         RestrictionChange_Feature_DRIVEFILESTREAM,
+        RestrictionChange_Feature_FILEORGANIZERCANSHAREFOLDERS,
         ..
       ),
 
@@ -221,6 +232,47 @@ pattern ApplicationReference_Type_Discuss = ApplicationReference_Type "DISCUSS"
   ApplicationReference_Type_Link,
   ApplicationReference_Type_Discuss,
   ApplicationReference_Type
+  #-}
+
+newtype AppliedLabelChangeDetail_TypesItem = AppliedLabelChangeDetail_TypesItem {fromAppliedLabelChangeDetail_TypesItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The type of change to this Label is not available.
+pattern AppliedLabelChangeDetail_TypesItem_TYPEUNSPECIFIED :: AppliedLabelChangeDetail_TypesItem
+pattern AppliedLabelChangeDetail_TypesItem_TYPEUNSPECIFIED = AppliedLabelChangeDetail_TypesItem "TYPE_UNSPECIFIED"
+
+-- | The identified Label was added to the Target.
+pattern AppliedLabelChangeDetail_TypesItem_LABELADDED :: AppliedLabelChangeDetail_TypesItem
+pattern AppliedLabelChangeDetail_TypesItem_LABELADDED = AppliedLabelChangeDetail_TypesItem "LABEL_ADDED"
+
+-- | The identified Label was removed from the Target.
+pattern AppliedLabelChangeDetail_TypesItem_LABELREMOVED :: AppliedLabelChangeDetail_TypesItem
+pattern AppliedLabelChangeDetail_TypesItem_LABELREMOVED = AppliedLabelChangeDetail_TypesItem "LABEL_REMOVED"
+
+-- | Field values were changed on the Target.
+pattern AppliedLabelChangeDetail_TypesItem_LABELFIELDVALUECHANGED :: AppliedLabelChangeDetail_TypesItem
+pattern AppliedLabelChangeDetail_TypesItem_LABELFIELDVALUECHANGED = AppliedLabelChangeDetail_TypesItem "LABEL_FIELD_VALUE_CHANGED"
+
+-- | The Label was applied as a side-effect of Drive item creation.
+pattern AppliedLabelChangeDetail_TypesItem_LABELAPPLIEDBYITEMCREATE :: AppliedLabelChangeDetail_TypesItem
+pattern AppliedLabelChangeDetail_TypesItem_LABELAPPLIEDBYITEMCREATE = AppliedLabelChangeDetail_TypesItem "LABEL_APPLIED_BY_ITEM_CREATE"
+
+{-# COMPLETE
+  AppliedLabelChangeDetail_TypesItem_TYPEUNSPECIFIED,
+  AppliedLabelChangeDetail_TypesItem_LABELADDED,
+  AppliedLabelChangeDetail_TypesItem_LABELREMOVED,
+  AppliedLabelChangeDetail_TypesItem_LABELFIELDVALUECHANGED,
+  AppliedLabelChangeDetail_TypesItem_LABELAPPLIEDBYITEMCREATE,
+  AppliedLabelChangeDetail_TypesItem
   #-}
 
 -- | The sub-type of this event.
@@ -587,12 +639,17 @@ pattern RestrictionChange_Feature_ITEMDUPLICATION = RestrictionChange_Feature "I
 pattern RestrictionChange_Feature_DRIVEFILESTREAM :: RestrictionChange_Feature
 pattern RestrictionChange_Feature_DRIVEFILESTREAM = RestrictionChange_Feature "DRIVE_FILE_STREAM"
 
+-- | When restricted, this limits sharing of folders to managers only.
+pattern RestrictionChange_Feature_FILEORGANIZERCANSHAREFOLDERS :: RestrictionChange_Feature
+pattern RestrictionChange_Feature_FILEORGANIZERCANSHAREFOLDERS = RestrictionChange_Feature "FILE_ORGANIZER_CAN_SHARE_FOLDERS"
+
 {-# COMPLETE
   RestrictionChange_Feature_FEATUREUNSPECIFIED,
   RestrictionChange_Feature_SHARINGOUTSIDEDOMAIN,
   RestrictionChange_Feature_DIRECTSHARING,
   RestrictionChange_Feature_ITEMDUPLICATION,
   RestrictionChange_Feature_DRIVEFILESTREAM,
+  RestrictionChange_Feature_FILEORGANIZERCANSHAREFOLDERS,
   RestrictionChange_Feature
   #-}
 

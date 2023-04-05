@@ -538,6 +538,13 @@ module Gogol.YouTube.Types
     -- ** ContentRating_YtRating
     ContentRating_YtRating (..),
 
+    -- ** Cuepoint
+    Cuepoint (..),
+    newCuepoint,
+
+    -- ** Cuepoint_CueType
+    Cuepoint_CueType (..),
+
     -- ** Entity
     Entity (..),
     newEntity,
@@ -971,6 +978,10 @@ module Gogol.YouTube.Types
     -- ** ThirdPartyLink
     ThirdPartyLink (..),
     newThirdPartyLink,
+
+    -- ** ThirdPartyLinkListResponse
+    ThirdPartyLinkListResponse (..),
+    newThirdPartyLinkListResponse,
 
     -- ** ThirdPartyLinkSnippet
     ThirdPartyLinkSnippet (..),

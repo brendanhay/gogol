@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds or updates an entitlement to an app for a user.
+-- Adds or updates an entitlement to an app for a user. __Note:__ This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.entitlements.update@.
 module Gogol.AndroidEnterprise.Entitlements.Update
@@ -63,7 +63,7 @@ type AndroidEnterpriseEntitlementsUpdateResource =
     Core.:> Core.ReqBody '[Core.JSON] Entitlement
     Core.:> Core.Put '[Core.JSON] Entitlement
 
--- | Adds or updates an entitlement to an app for a user.
+-- | Adds or updates an entitlement to an app for a user. __Note:__ This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
 --
 -- /See:/ 'newAndroidEnterpriseEntitlementsUpdate' smart constructor.
 data AndroidEnterpriseEntitlementsUpdate = AndroidEnterpriseEntitlementsUpdate

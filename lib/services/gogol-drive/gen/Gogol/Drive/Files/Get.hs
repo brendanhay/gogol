@@ -50,6 +50,7 @@ type DriveFilesGetResource =
     Core.:> "files"
     Core.:> Core.Capture "fileId" Core.Text
     Core.:> Core.QueryParam "acknowledgeAbuse" Core.Bool
+    Core.:> Core.QueryParam "includeLabels" Core.Text
     Core.:> Core.QueryParam "includePermissionsForView" Core.Text
     Core.:> Core.QueryParam "supportsAllDrives" Core.Bool
     Core.:> Core.QueryParam "supportsTeamDrives" Core.Bool
@@ -60,6 +61,7 @@ type DriveFilesGetResource =
       Core.:> "files"
       Core.:> Core.Capture "fileId" Core.Text
       Core.:> Core.QueryParam "acknowledgeAbuse" Core.Bool
+      Core.:> Core.QueryParam "includeLabels" Core.Text
       Core.:> Core.QueryParam "includePermissionsForView" Core.Text
       Core.:> Core.QueryParam "supportsAllDrives" Core.Bool
       Core.:> Core.QueryParam "supportsTeamDrives" Core.Bool
@@ -74,6 +76,8 @@ data DriveFilesGet = DriveFilesGet
     acknowledgeAbuse :: Core.Bool,
     -- | The ID of the file.
     fileId :: Core.Text,
+    -- | A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    includeLabels :: (Core.Maybe Core.Text),
     -- | Specifies which additional view\'s permissions to include in the response. Only \'published\' is supported.
     includePermissionsForView :: (Core.Maybe Core.Text),
     -- | Whether the requesting application supports both My Drives and shared drives.
@@ -92,6 +96,7 @@ newDriveFilesGet fileId =
   DriveFilesGet
     { acknowledgeAbuse = Core.False,
       fileId = fileId,
+      includeLabels = Core.Nothing,
       includePermissionsForView = Core.Nothing,
       supportsAllDrives = Core.False,
       supportsTeamDrives = Core.False
@@ -113,6 +118,7 @@ instance Core.GoogleRequest DriveFilesGet where
     go
       fileId
       (Core.Just acknowledgeAbuse)
+      includeLabels
       includePermissionsForView
       (Core.Just supportsAllDrives)
       (Core.Just supportsTeamDrives)
@@ -138,6 +144,7 @@ instance
     go
       fileId
       (Core.Just acknowledgeAbuse)
+      includeLabels
       includePermissionsForView
       (Core.Just supportsAllDrives)
       (Core.Just supportsTeamDrives)

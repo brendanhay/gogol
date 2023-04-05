@@ -104,6 +104,7 @@ module Gogol.BigQuery.Internal.Sum
     DatasetAccessEntry_TargetTypesItem
       ( DatasetAccessEntry_TargetTypesItem_TARGETTYPEUNSPECIFIED,
         DatasetAccessEntry_TargetTypesItem_Views,
+        DatasetAccessEntry_TargetTypesItem_Routines,
         ..
       ),
 
@@ -135,8 +136,12 @@ module Gogol.BigQuery.Internal.Sum
         Model_ModelType_AUTOMLREGRESSOR,
         Model_ModelType_AUTOMLCLASSIFIER,
         Model_ModelType_Pca,
+        Model_ModelType_DNNLINEARCOMBINEDCLASSIFIER,
+        Model_ModelType_DNNLINEARCOMBINEDREGRESSOR,
         Model_ModelType_Autoencoder,
         Model_ModelType_ARIMAPLUS,
+        Model_ModelType_RANDOMFORESTREGRESSOR,
+        Model_ModelType_RANDOMFORESTCLASSIFIER,
         ..
       ),
 
@@ -153,6 +158,9 @@ module Gogol.BigQuery.Internal.Sum
       ( Routine_Language_LANGUAGEUNSPECIFIED,
         Routine_Language_Sql,
         Routine_Language_Javascript,
+        Routine_Language_Python,
+        Routine_Language_Java,
+        Routine_Language_Scala,
         ..
       ),
 
@@ -192,6 +200,17 @@ module Gogol.BigQuery.Internal.Sum
       ( TrainingOptions_BoosterType_BOOSTERTYPEUNSPECIFIED,
         TrainingOptions_BoosterType_Gbtree,
         TrainingOptions_BoosterType_Dart,
+        ..
+      ),
+
+    -- * TrainingOptions_ColorSpace
+    TrainingOptions_ColorSpace
+      ( TrainingOptions_ColorSpace_COLORSPACEUNSPECIFIED,
+        TrainingOptions_ColorSpace_Rgb,
+        TrainingOptions_ColorSpace_Hsv,
+        TrainingOptions_ColorSpace_Yiq,
+        TrainingOptions_ColorSpace_Yuv,
+        TrainingOptions_ColorSpace_Grayscale,
         ..
       ),
 
@@ -395,6 +414,15 @@ module Gogol.BigQuery.Internal.Sum
       ( JobsListStateFilter_Done,
         JobsListStateFilter_Pending,
         JobsListStateFilter_Running,
+        ..
+      ),
+
+    -- * TablesGetView
+    TablesGetView
+      ( TablesGetView_Basic,
+        TablesGetView_Full,
+        TablesGetView_STORAGESTATS,
+        TablesGetView_TABLEMETADATAVIEWUNSPECIFIED,
         ..
       ),
   )
@@ -732,9 +760,14 @@ pattern DatasetAccessEntry_TargetTypesItem_TARGETTYPEUNSPECIFIED = DatasetAccess
 pattern DatasetAccessEntry_TargetTypesItem_Views :: DatasetAccessEntry_TargetTypesItem
 pattern DatasetAccessEntry_TargetTypesItem_Views = DatasetAccessEntry_TargetTypesItem "VIEWS"
 
+-- | This entry applies to routines in the dataset.
+pattern DatasetAccessEntry_TargetTypesItem_Routines :: DatasetAccessEntry_TargetTypesItem
+pattern DatasetAccessEntry_TargetTypesItem_Routines = DatasetAccessEntry_TargetTypesItem "ROUTINES"
+
 {-# COMPLETE
   DatasetAccessEntry_TargetTypesItem_TARGETTYPEUNSPECIFIED,
   DatasetAccessEntry_TargetTypesItem_Views,
+  DatasetAccessEntry_TargetTypesItem_Routines,
   DatasetAccessEntry_TargetTypesItem
   #-}
 
@@ -859,6 +892,14 @@ pattern Model_ModelType_AUTOMLCLASSIFIER = Model_ModelType "AUTOML_CLASSIFIER"
 pattern Model_ModelType_Pca :: Model_ModelType
 pattern Model_ModelType_Pca = Model_ModelType "PCA"
 
+-- | Wide-and-deep classifier model.
+pattern Model_ModelType_DNNLINEARCOMBINEDCLASSIFIER :: Model_ModelType
+pattern Model_ModelType_DNNLINEARCOMBINEDCLASSIFIER = Model_ModelType "DNN_LINEAR_COMBINED_CLASSIFIER"
+
+-- | Wide-and-deep regressor model.
+pattern Model_ModelType_DNNLINEARCOMBINEDREGRESSOR :: Model_ModelType
+pattern Model_ModelType_DNNLINEARCOMBINEDREGRESSOR = Model_ModelType "DNN_LINEAR_COMBINED_REGRESSOR"
+
 -- | Autoencoder model.
 pattern Model_ModelType_Autoencoder :: Model_ModelType
 pattern Model_ModelType_Autoencoder = Model_ModelType "AUTOENCODER"
@@ -866,6 +907,14 @@ pattern Model_ModelType_Autoencoder = Model_ModelType "AUTOENCODER"
 -- | New name for the ARIMA model.
 pattern Model_ModelType_ARIMAPLUS :: Model_ModelType
 pattern Model_ModelType_ARIMAPLUS = Model_ModelType "ARIMA_PLUS"
+
+-- | Random Forest regressor model.
+pattern Model_ModelType_RANDOMFORESTREGRESSOR :: Model_ModelType
+pattern Model_ModelType_RANDOMFORESTREGRESSOR = Model_ModelType "RANDOM_FOREST_REGRESSOR"
+
+-- | Random Forest classifier model.
+pattern Model_ModelType_RANDOMFORESTCLASSIFIER :: Model_ModelType
+pattern Model_ModelType_RANDOMFORESTCLASSIFIER = Model_ModelType "RANDOM_FOREST_CLASSIFIER"
 
 {-# COMPLETE
   Model_ModelType_MODELTYPEUNSPECIFIED,
@@ -882,8 +931,12 @@ pattern Model_ModelType_ARIMAPLUS = Model_ModelType "ARIMA_PLUS"
   Model_ModelType_AUTOMLREGRESSOR,
   Model_ModelType_AUTOMLCLASSIFIER,
   Model_ModelType_Pca,
+  Model_ModelType_DNNLINEARCOMBINEDCLASSIFIER,
+  Model_ModelType_DNNLINEARCOMBINEDREGRESSOR,
   Model_ModelType_Autoencoder,
   Model_ModelType_ARIMAPLUS,
+  Model_ModelType_RANDOMFORESTREGRESSOR,
+  Model_ModelType_RANDOMFORESTCLASSIFIER,
   Model_ModelType
   #-}
 
@@ -919,7 +972,7 @@ pattern Routine_DeterminismLevel_NOTDETERMINISTIC = Routine_DeterminismLevel "NO
   Routine_DeterminismLevel
   #-}
 
--- | Optional. Defaults to \"SQL\".
+-- | Optional. Defaults to \"SQL\" if remote/function/options field is absent, not set otherwise.
 newtype Routine_Language = Routine_Language {fromRoutine_Language :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -944,10 +997,25 @@ pattern Routine_Language_Sql = Routine_Language "SQL"
 pattern Routine_Language_Javascript :: Routine_Language
 pattern Routine_Language_Javascript = Routine_Language "JAVASCRIPT"
 
+-- | Python language.
+pattern Routine_Language_Python :: Routine_Language
+pattern Routine_Language_Python = Routine_Language "PYTHON"
+
+-- | Java language.
+pattern Routine_Language_Java :: Routine_Language
+pattern Routine_Language_Java = Routine_Language "JAVA"
+
+-- | Scala language.
+pattern Routine_Language_Scala :: Routine_Language
+pattern Routine_Language_Scala = Routine_Language "SCALA"
+
 {-# COMPLETE
   Routine_Language_LANGUAGEUNSPECIFIED,
   Routine_Language_Sql,
   Routine_Language_Javascript,
+  Routine_Language_Python,
+  Routine_Language_Java,
+  Routine_Language_Scala,
   Routine_Language
   #-}
 
@@ -988,7 +1056,7 @@ pattern Routine_RoutineType_TABLEVALUEDFUNCTION = Routine_RoutineType "TABLE_VAL
   Routine_RoutineType
   #-}
 
--- | Required. The top level type of this field. Can be any standard SQL data type (e.g., \"INT64\", \"DATE\", \"ARRAY\").
+-- | Required. The top level type of this field. Can be any GoogleSQL data type (e.g., \"INT64\", \"DATE\", \"ARRAY\").
 newtype StandardSqlDataType_TypeKind = StandardSqlDataType_TypeKind {fromStandardSqlDataType_TypeKind :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1120,6 +1188,53 @@ pattern TrainingOptions_BoosterType_Dart = TrainingOptions_BoosterType "DART"
   TrainingOptions_BoosterType_Gbtree,
   TrainingOptions_BoosterType_Dart,
   TrainingOptions_BoosterType
+  #-}
+
+-- | Enums for color space, used for processing images in Object Table. See more details at https:\/\/www.tensorflow.org\/io\/tutorials\/colorspace.
+newtype TrainingOptions_ColorSpace = TrainingOptions_ColorSpace {fromTrainingOptions_ColorSpace :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified color space
+pattern TrainingOptions_ColorSpace_COLORSPACEUNSPECIFIED :: TrainingOptions_ColorSpace
+pattern TrainingOptions_ColorSpace_COLORSPACEUNSPECIFIED = TrainingOptions_ColorSpace "COLOR_SPACE_UNSPECIFIED"
+
+-- | RGB
+pattern TrainingOptions_ColorSpace_Rgb :: TrainingOptions_ColorSpace
+pattern TrainingOptions_ColorSpace_Rgb = TrainingOptions_ColorSpace "RGB"
+
+-- | HSV
+pattern TrainingOptions_ColorSpace_Hsv :: TrainingOptions_ColorSpace
+pattern TrainingOptions_ColorSpace_Hsv = TrainingOptions_ColorSpace "HSV"
+
+-- | YIQ
+pattern TrainingOptions_ColorSpace_Yiq :: TrainingOptions_ColorSpace
+pattern TrainingOptions_ColorSpace_Yiq = TrainingOptions_ColorSpace "YIQ"
+
+-- | YUV
+pattern TrainingOptions_ColorSpace_Yuv :: TrainingOptions_ColorSpace
+pattern TrainingOptions_ColorSpace_Yuv = TrainingOptions_ColorSpace "YUV"
+
+-- | GRAYSCALE
+pattern TrainingOptions_ColorSpace_Grayscale :: TrainingOptions_ColorSpace
+pattern TrainingOptions_ColorSpace_Grayscale = TrainingOptions_ColorSpace "GRAYSCALE"
+
+{-# COMPLETE
+  TrainingOptions_ColorSpace_COLORSPACEUNSPECIFIED,
+  TrainingOptions_ColorSpace_Rgb,
+  TrainingOptions_ColorSpace_Hsv,
+  TrainingOptions_ColorSpace_Yiq,
+  TrainingOptions_ColorSpace_Yuv,
+  TrainingOptions_ColorSpace_Grayscale,
+  TrainingOptions_ColorSpace
   #-}
 
 -- | Type of normalization algorithm for boosted tree models using dart booster.
@@ -2022,4 +2137,41 @@ pattern JobsListStateFilter_Running = JobsListStateFilter "running"
   JobsListStateFilter_Pending,
   JobsListStateFilter_Running,
   JobsListStateFilter
+  #-}
+
+-- | Specifies the view that determines which table information is returned. By default, basic table information and storage statistics (STORAGE_STATS) are returned.
+newtype TablesGetView = TablesGetView {fromTablesGetView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Includes basic table information including schema and partitioning specification. This view does not include storage statistics such as numRows or numBytes. This view is significantly more efficient and should be used to support high query rates.
+pattern TablesGetView_Basic :: TablesGetView
+pattern TablesGetView_Basic = TablesGetView "BASIC"
+
+-- | Includes all table information, including storage statistics. It returns same information as STORAGE_STATS view, but may contain additional information in the future.
+pattern TablesGetView_Full :: TablesGetView
+pattern TablesGetView_Full = TablesGetView "FULL"
+
+-- | Includes all information in the BASIC view as well as storage statistics (numBytes, numLongTermBytes, numRows and lastModifiedTime).
+pattern TablesGetView_STORAGESTATS :: TablesGetView
+pattern TablesGetView_STORAGESTATS = TablesGetView "STORAGE_STATS"
+
+-- | The default value. Default to the STORAGE_STATS view.
+pattern TablesGetView_TABLEMETADATAVIEWUNSPECIFIED :: TablesGetView
+pattern TablesGetView_TABLEMETADATAVIEWUNSPECIFIED = TablesGetView "TABLE_METADATA_VIEW_UNSPECIFIED"
+
+{-# COMPLETE
+  TablesGetView_Basic,
+  TablesGetView_Full,
+  TablesGetView_STORAGESTATS,
+  TablesGetView_TABLEMETADATAVIEWUNSPECIFIED,
+  TablesGetView
   #-}

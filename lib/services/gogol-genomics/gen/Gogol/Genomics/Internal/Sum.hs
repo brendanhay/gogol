@@ -174,7 +174,7 @@ newtype FailedEvent_Code = FailedEvent_Code {fromFailedEvent_Code :: Core.Text}
       Core.FromJSONKey
     )
 
--- | Not an error; returned on success HTTP Mapping: 200 OK
+-- | Not an error; returned on success. HTTP Mapping: 200 OK
 pattern FailedEvent_Code_OK :: FailedEvent_Code
 pattern FailedEvent_Code_OK = FailedEvent_Code "OK"
 

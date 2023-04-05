@@ -39,6 +39,21 @@ module Gogol.CloudKMS
 
     -- * Resources
 
+    -- ** cloudkms.projects.locations.ekmConfig.getIamPolicy
+    CloudKMSProjectsLocationsEkmConfigGetIamPolicyResource,
+    CloudKMSProjectsLocationsEkmConfigGetIamPolicy (..),
+    newCloudKMSProjectsLocationsEkmConfigGetIamPolicy,
+
+    -- ** cloudkms.projects.locations.ekmConfig.setIamPolicy
+    CloudKMSProjectsLocationsEkmConfigSetIamPolicyResource,
+    CloudKMSProjectsLocationsEkmConfigSetIamPolicy (..),
+    newCloudKMSProjectsLocationsEkmConfigSetIamPolicy,
+
+    -- ** cloudkms.projects.locations.ekmConfig.testIamPermissions
+    CloudKMSProjectsLocationsEkmConfigTestIamPermissionsResource,
+    CloudKMSProjectsLocationsEkmConfigTestIamPermissions (..),
+    newCloudKMSProjectsLocationsEkmConfigTestIamPermissions,
+
     -- ** cloudkms.projects.locations.ekmConnections.create
     CloudKMSProjectsLocationsEkmConnectionsCreateResource,
     CloudKMSProjectsLocationsEkmConnectionsCreate (..),
@@ -83,6 +98,11 @@ module Gogol.CloudKMS
     CloudKMSProjectsLocationsGetResource,
     CloudKMSProjectsLocationsGet (..),
     newCloudKMSProjectsLocationsGet,
+
+    -- ** cloudkms.projects.locations.getEkmConfig
+    CloudKMSProjectsLocationsGetEkmConfigResource,
+    CloudKMSProjectsLocationsGetEkmConfig (..),
+    newCloudKMSProjectsLocationsGetEkmConfig,
 
     -- ** cloudkms.projects.locations.keyRings.create
     CloudKMSProjectsLocationsKeyRingsCreateResource,
@@ -259,6 +279,11 @@ module Gogol.CloudKMS
     CloudKMSProjectsLocationsList (..),
     newCloudKMSProjectsLocationsList,
 
+    -- ** cloudkms.projects.locations.updateEkmConfig
+    CloudKMSProjectsLocationsUpdateEkmConfigResource,
+    CloudKMSProjectsLocationsUpdateEkmConfig (..),
+    newCloudKMSProjectsLocationsUpdateEkmConfig,
+
     -- * Types
 
     -- ** Xgafv
@@ -362,9 +387,16 @@ module Gogol.CloudKMS
     Digest (..),
     newDigest,
 
+    -- ** EkmConfig
+    EkmConfig (..),
+    newEkmConfig,
+
     -- ** EkmConnection
     EkmConnection (..),
     newEkmConnection,
+
+    -- ** EkmConnection_KeyManagementMode
+    EkmConnection_KeyManagementMode (..),
 
     -- ** EncryptRequest
     EncryptRequest (..),
@@ -539,6 +571,9 @@ module Gogol.CloudKMS
   )
 where
 
+import Gogol.CloudKMS.Projects.Locations.EkmConfig.GetIamPolicy
+import Gogol.CloudKMS.Projects.Locations.EkmConfig.SetIamPolicy
+import Gogol.CloudKMS.Projects.Locations.EkmConfig.TestIamPermissions
 import Gogol.CloudKMS.Projects.Locations.EkmConnections.Create
 import Gogol.CloudKMS.Projects.Locations.EkmConnections.Get
 import Gogol.CloudKMS.Projects.Locations.EkmConnections.GetIamPolicy
@@ -548,6 +583,7 @@ import Gogol.CloudKMS.Projects.Locations.EkmConnections.SetIamPolicy
 import Gogol.CloudKMS.Projects.Locations.EkmConnections.TestIamPermissions
 import Gogol.CloudKMS.Projects.Locations.GenerateRandomBytes
 import Gogol.CloudKMS.Projects.Locations.Get
+import Gogol.CloudKMS.Projects.Locations.GetEkmConfig
 import Gogol.CloudKMS.Projects.Locations.KeyRings.Create
 import Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Create
 import Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.AsymmetricDecrypt
@@ -583,4 +619,5 @@ import Gogol.CloudKMS.Projects.Locations.KeyRings.List
 import Gogol.CloudKMS.Projects.Locations.KeyRings.SetIamPolicy
 import Gogol.CloudKMS.Projects.Locations.KeyRings.TestIamPermissions
 import Gogol.CloudKMS.Projects.Locations.List
+import Gogol.CloudKMS.Projects.Locations.UpdateEkmConfig
 import Gogol.CloudKMS.Types

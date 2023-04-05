@@ -75,11 +75,11 @@ data AdminCustomerDevicesChromeosCommandsGet = AdminCustomerDevicesChromeosComma
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Immutable. Immutable ID of Chrome OS Device Command.
+    -- | Immutable. ID of Chrome OS Device Command.
     commandId :: Core.Int64,
-    -- | Immutable. Immutable ID of the Google Workspace account.
+    -- | Immutable. ID of the Google Workspace account.
     customerId :: Core.Text,
-    -- | Immutable. Immutable ID of Chrome OS Device.
+    -- | Immutable. ID of Chrome OS Device.
     deviceId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -90,11 +90,11 @@ data AdminCustomerDevicesChromeosCommandsGet = AdminCustomerDevicesChromeosComma
 
 -- | Creates a value of 'AdminCustomerDevicesChromeosCommandsGet' with the minimum fields required to make a request.
 newAdminCustomerDevicesChromeosCommandsGet ::
-  -- |  Immutable. Immutable ID of Chrome OS Device Command. See 'commandId'.
+  -- |  Immutable. ID of Chrome OS Device Command. See 'commandId'.
   Core.Int64 ->
-  -- |  Immutable. Immutable ID of the Google Workspace account. See 'customerId'.
+  -- |  Immutable. ID of the Google Workspace account. See 'customerId'.
   Core.Text ->
-  -- |  Immutable. Immutable ID of Chrome OS Device. See 'deviceId'.
+  -- |  Immutable. ID of Chrome OS Device. See 'deviceId'.
   Core.Text ->
   AdminCustomerDevicesChromeosCommandsGet
 newAdminCustomerDevicesChromeosCommandsGet commandId customerId deviceId =
