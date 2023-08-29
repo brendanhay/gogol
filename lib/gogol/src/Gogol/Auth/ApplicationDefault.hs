@@ -18,7 +18,6 @@
 -- /See:/ <https://developers.google.com/identity/protocols/application-default-credentials Application Default Documentation>.
 module Gogol.Auth.ApplicationDefault where
 
-import Control.Applicative
 import Control.Exception.Lens (catching, throwingM)
 import Control.Monad (unless, when)
 import Control.Monad.Catch
@@ -169,7 +168,8 @@ fromJSONCredentials bs = do
         "Failed parsing service_account: " ++ xe
           ++ ", Failed parsing authorized_user: "
           ++ ye
-    _ -> x <|> y
+    (Right a, _) -> Right a
+    (_, Right u) -> Right u
 
 getConfigDirectory :: MonadIO m => m FilePath
 getConfigDirectory = do
