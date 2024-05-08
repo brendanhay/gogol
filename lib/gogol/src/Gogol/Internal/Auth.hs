@@ -8,6 +8,7 @@
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE PackageImports #-}
 
 -- |
 -- Module      : Gogol.Internal.Auth
@@ -24,7 +25,7 @@ import Control.Exception (Exception, SomeException, catch, throwIO)
 import Control.Exception.Lens (exception)
 import Control.Lens (Prism', prism)
 import Control.Monad.IO.Class (MonadIO (..))
-import Crypto.PubKey.RSA.Types (PrivateKey)
+import "crypton" Crypto.PubKey.RSA.Types (PrivateKey)
 import Data.Aeson
 import Data.Aeson.Types (Pair)
 import Data.ByteArray (ByteArray)
