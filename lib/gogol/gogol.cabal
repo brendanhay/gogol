@@ -67,7 +67,7 @@ library
     , bytestring        >=0.9
     , case-insensitive  >=1.2
     , conduit-extra     >=1.1
-    , cryptonite        >=0.6
+    , crypton           >=0.34
     , directory         >=1.2
     , exceptions        >=0.6
     , filepath          >=1.2
@@ -83,5 +83,5 @@ library
     , resourcet         >=1.1
     , text              >=1.1
     , time              >=1.2
-    , x509              >=1.5
-    , x509-store        >=1.5
+    , crypton-x509              >=1.5
+    , crypton-x509-store        >=1.5

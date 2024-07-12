@@ -18,6 +18,7 @@ import Control.Lens (Iso', iso)
 import Data.Aeson (FromJSON (..), ToJSON (..))
 import Data.ByteString (ByteString)
 import qualified Data.ByteString.Base64 as Base64
+import qualified Data.Base64.Types as Base64
 import Data.Hashable
 import qualified Data.Text.Encoding as Text
 import GHC.Generics (Generic)
@@ -33,14 +34,14 @@ _Base64 :: Iso' Base64 ByteString
 _Base64 = iso fromBase64 Base64
 
 instance ToHttpApiData Base64 where
-  toUrlPiece = Base64.encodeBase64 . fromBase64
-  toQueryParam = Base64.encodeBase64 . fromBase64
-  toHeader = Base64.encodeBase64' . fromBase64
+  toUrlPiece = Base64.extractBase64 . Base64.encodeBase64 . fromBase64
+  toQueryParam =  Base64.extractBase64 . Base64.encodeBase64 . fromBase64
+  toHeader =  Base64.extractBase64 . Base64.encodeBase64' . fromBase64
 
 instance FromHttpApiData Base64 where
-  parseUrlPiece = fmap Base64 . Base64.decodeBase64 . Text.encodeUtf8
-  parseQueryParam = fmap Base64 . Base64.decodeBase64 . Text.encodeUtf8
-  parseHeader = fmap Base64 . Base64.decodeBase64
+  parseUrlPiece = fmap Base64 . Base64.decodeBase64Untyped . Text.encodeUtf8
+  parseQueryParam = fmap Base64 . Base64.decodeBase64Untyped . Text.encodeUtf8
+  parseHeader = fmap Base64 . Base64.decodeBase64Untyped
 
 instance FromJSON Base64 where
   parseJSON = parseJSONText "Base64"
