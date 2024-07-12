@@ -8,7 +8,7 @@ import Control.Lens ((.~), (<&>))
 import Data.Aeson.Types
 import Data.Text (Text)
 import Gogol
-import Gogol.Resource.Sheets.Spreadsheets.Get
+import Gogol.Sheets.Spreadsheets.Get
 import Gogol.Sheets
 import System.IO (stdout)
 
