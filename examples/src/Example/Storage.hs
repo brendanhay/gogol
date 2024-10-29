@@ -1,7 +1,7 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE OverloadedLabels #-}
 {-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE TypeApplications #-}
 
 -- |
 -- Module      : Example.Storage
@@ -17,7 +17,7 @@ import Control.Monad.Trans.Resource (liftResourceT)
 import Data.Conduit (runConduit, (.|))
 import qualified Data.Conduit.Binary as Conduit
 import Data.Function ((&))
-import Data.Generics.Product.Fields (field)
+import Data.Generics.Labels ()
 import Data.Proxy
 import Data.Text
 import qualified Data.Text as Text
@@ -55,7 +55,7 @@ example bucket input output = do
   runResourceT $ do
     -- Upload the 'input' file contents to the specified bucket, using
     -- the file path as the key:
-    _ <- upload env (Storage.newStorageObjectsInsert bucket (Storage.newObject & field @"name" ?~ key)) body
+    _ <- upload env (Storage.newStorageObjectsInsert bucket (Storage.newObject & #name ?~ key)) body
 
     -- Download from the bucket/key and create a source of the HTTP stream:
     stream <- download env (Storage.newStorageObjectsGet bucket key)

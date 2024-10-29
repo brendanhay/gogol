@@ -1,7 +1,7 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE OverloadedLabels #-}
 {-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE TypeApplications #-}
 
 module Example.Sheets where
 
@@ -10,7 +10,7 @@ module Example.Sheets where
 import Control.Lens ((.~), (<&>), (?~))
 import Data.Aeson.Types
 import Data.Function
-import Data.Generics.Product.Fields (field)
+import Data.Generics.Labels ()
 import Data.Proxy
 import Data.Text (Text)
 import Gogol
@@ -55,4 +55,4 @@ exampleAppendValue sheetID range values = do
   lgr <- newLogger Debug stdout
   env <- newEnv <&> (envLogger .~ lgr) . (envScopes .~ spreadsheetsScope)
   runResourceT $
-    send env (newSheetsSpreadsheetsValuesAppend (Sheets.newValueRange & field @"values" ?~ values) range sheetID)
+    send env (newSheetsSpreadsheetsValuesAppend (Sheets.newValueRange & #values ?~ values) range sheetID)
