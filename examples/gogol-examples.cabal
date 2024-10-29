@@ -25,10 +25,11 @@ library
     , bytestring
     , conduit
     , conduit-extra
-    , gogol          >=0.5.0 && <0.5.1
+    , gogol          >=1.0.0.0
     , gogol-core
     , gogol-sheets
     , gogol-storage
     , lens
+    , generic-lens
     , resourcet
     , text
