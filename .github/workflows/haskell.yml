@@ -97,7 +97,8 @@ jobs:
         env:
           MANUAL_RESET: ${{ env.MANUAL_CACHE_RESET_PRODUCTS }}
         with:
-          path: .stack-work
+          #-- I wasn't able to find the non absolute path and I decided to set the full path. This is britle
+          path: /home/runner/work/gogol/gogol/.stack-work
           key: CI-builddir-${{ env.MANUAL_RESET }}--${{ matrix.versions.ghc }}--${{ github.head_ref }}
 
       - name: Install dependencies
