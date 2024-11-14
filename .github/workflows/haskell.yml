@@ -277,9 +277,6 @@ jobs:
 
           key: CI-builddir-${{ env.MANUAL_RESET }}--${{ matrix.versions.ghc }}--${{ github.head_ref }}
 
-      - name: Debug cache contents pre compilation
-        run: du -sh ${{ github.workspace }}/.stack-work && ls -R ${{ github.workspace }}/.stack-work
-
       - name: Install dependencies
         run: stack build --system-ghc --stack-yaml stack-${{ matrix.versions.ghc }}.yaml --only-dependencies
 
@@ -288,7 +285,3 @@ jobs:
 
       - name: Build
         run: stack build --system-ghc --stack-yaml stack-${{ matrix.versions.ghc }}.yaml
-
-      - name: Debug cache contents post compilation
-        run: du -sh ${{ github.workspace }}/.stack-work && ls -R ${{ github.workspace }}/.stack-work
-
