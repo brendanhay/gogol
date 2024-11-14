@@ -13,7 +13,7 @@ concurrency:
   group: build-${{ github.ref }}
   cancel-in-progress: true
 
-# INFO: The caching strategy was created following this post https://github.com/commercialhaskell/stack/issues/5754#issuecomment-1696156869
+# INFO: The caching strategy was created following this post https://github.com/commercialhaskell/stack/issues/5754#issuecomment-1696156869.
 env:
   #-- increment this if you think cache of GHC installation needs cold rebuild
   MANUAL_CACHE_RESET_COMPILER: v0
