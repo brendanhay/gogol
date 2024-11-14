@@ -89,6 +89,9 @@ jobs:
             CI-testdeps-${{ env.MANUAL_RESET }}--${{ matrix.versions.lts }}--
             CI-testdeps-${{ env.MANUAL_RESET }}--
 
+      - name: Clone project
+        uses: actions/checkout@v2
+
       - name: Cache per-branch Haskell project buildstate
         uses: actions/cache@v4
         env:
@@ -96,9 +99,6 @@ jobs:
         with:
           path: .stack-work
           key: CI-builddir-${{ env.MANUAL_RESET }}--${{ matrix.versions.ghc }}--${{ github.head_ref }}
-
-      - name: Clone project
-        uses: actions/checkout@v2
 
       - name: Install dependencies
         run: stack build --system-ghc --stack-yaml stack-${{ matrix.versions.ghc }}.yaml --only-dependencies
