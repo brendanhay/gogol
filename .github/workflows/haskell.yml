@@ -13,8 +13,7 @@ concurrency:
   group: build-${{ github.ref }}
   cancel-in-progress: true
 
-# INFO: The caching strategy was created following this post 
-#   https://github.com/commercialhaskell/stack/issues/5754#issuecomment-1696156869
+# INFO: The caching strategy was created following this post https://github.com/commercialhaskell/stack/issues/5754#issuecomment-1696156869
 env:
   #-- increment this if you think cache of GHC installation needs cold rebuild
   MANUAL_CACHE_RESET_COMPILER: v0
@@ -99,8 +98,187 @@ jobs:
           MANUAL_RESET: ${{ env.MANUAL_CACHE_RESET_PRODUCTS }}
         with:
           #-- I wasn't able to find the non absolute path and I decided to set the full path. This is britle
-          path: /home/runner/work/gogol/gogol/.stack-work
+          #-- The list of .stack-work folders needs to be recreated periodically with: find . -name .stack-work 
+          path: |
+            ${{ github.workspace }}/.stack-work
+            ${{ github.workspace }}/examples/.stack-work
+            ${{ github.workspace }}/gen/.stack-work
+            ${{ github.workspace }}/lib/gogol/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-abusiveexperiencereport/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-analytics/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-speech/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-videointelligence/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-androidmanagement/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-bigquerydatatransfer/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-slides/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-webmaster-tools/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-play-moviespartner/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-youtube-reporting/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-urlshortener/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-compute/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-replicapool-updater/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-storage-transfer/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-servicenetworking/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-deploymentmanager/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-groups-migration/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-streetviewpublish/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-adexchange-seller/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-serviceuser/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-poly/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-apps-calendar/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-adexchange-buyer/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-games-configuration/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-android-publisher/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-resourcemanager/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-analyticsreporting/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-file/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-dlp/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-storage/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-plus/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-fonts/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-vision/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-siteverification/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-firebase-rules/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-youtube-analytics/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-firebasehosting/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-ml/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-cloudprofiler/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-clouderrorreporting/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-composer/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-replicapool/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-healthcare/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-cloudasset/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-accessapproval/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-appstate/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-cloudidentity/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-partners/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-cloudsearch/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-qpxexpress/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-servicecontrol/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-indexing/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-spectrum/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-apps-tasks/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-doubleclick-bids/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-language/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-adexchangebuyer2/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-cloudtrace/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-sourcerepo/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-tracing/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-discovery/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-servicemanagement/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-dataproc/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-firebaseremoteconfig/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-firebase-dynamiclinks/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-apps-licensing/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-admin-datatransfer/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-iamcredentials/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-billing/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-script/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-run/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-translate/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-datafusion/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-dfareporting/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-serviceconsumermanagement/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-bigquery/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-cloudfunctions/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-searchconsole/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-monitoring/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-oslogin/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-testing/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-customsearch/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-binaryauthorization/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-drive/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-proximitybeacon/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-gmail/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-plus-domains/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-securitycenter/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-cloudprivatecatalog/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-cloudiot/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-android-enterprise/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-jobs/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-identity-toolkit/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-apps-activity/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-groups-settings/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-blogger/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-pubsub/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-cloudprivatecatalogproducer/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-books/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-adsense-host/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-dialogflow/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-civicinfo/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-youtube/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-fitness/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-servicebroker/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-alertcenter/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-fusiontables/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-mirror/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-adsense/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-consumersurveys/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-acceleratedmobilepageurl/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-firestore/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-websecurityscanner/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-commentanalyzer/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-sheets/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-logging/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-safebrowsing/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-digitalassetlinks/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-cloudkms/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-apps-reseller/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-adexperiencereport/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-oauth2/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-dns/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-docs/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-serviceusage/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-iap/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-doubleclick-search/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-admin-reports/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-toolresults/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-factchecktools/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-playcustomapp/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-driveactivity/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-containeranalysis/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-cloudshell/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-manufacturers/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-people/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-texttospeech/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-admin-directory/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-games-management/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-bigtableadmin/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-debugger/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-libraryagent/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-redis/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-remotebuildexecution/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-container/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-pagespeed/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-shopping-content/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-datastore/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-iam/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-appengine/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-spanner/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-kgsearch/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-surveys/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-vault/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-runtimeconfig/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-sqladmin/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-androiddeviceprovisioning/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-containerbuilder/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-cloudscheduler/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-cloudtasks/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-accesscontextmanager/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-games/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-classroom/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-tpu/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-genomics/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-chat/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-dataflow/.stack-work
+            ${{ github.workspace }}/lib/services/gogol-tagmanager/.stack-work
+            ${{ github.workspace }}/lib/gogol-core/.stack-work
+            ${{ github.workspace }}/.stack-work
+
           key: CI-builddir-${{ env.MANUAL_RESET }}--${{ matrix.versions.ghc }}--${{ github.head_ref }}
+
+      - name: Debug cache contents pre compilation
+        run: du -sh ${{ github.workspace }}/.stack-work && ls -R ${{ github.workspace }}/.stack-work
 
       - name: Install dependencies
         run: stack build --system-ghc --stack-yaml stack-${{ matrix.versions.ghc }}.yaml --only-dependencies
@@ -110,4 +288,7 @@ jobs:
 
       - name: Build
         run: stack build --system-ghc --stack-yaml stack-${{ matrix.versions.ghc }}.yaml
+
+      - name: Debug cache contents post compilation
+        run: du -sh ${{ github.workspace }}/.stack-work && ls -R ${{ github.workspace }}/.stack-work
 
