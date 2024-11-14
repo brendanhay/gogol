@@ -6,38 +6,51 @@ on:
   pull_request:
     branches: [main]
 
+# INFO: The following configuration block ensures that only one build runs per branch,
+# which may be desirable for projects with a costly build process.
+# Remove this block from the CI workflow to let each CI job run to completion.
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-haskell:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ghc: ["9.6"]
+        versions:
+          - { lts: "22.27", ghc: "9.6.5" }
 
-    name: Haskell GHC ${{ matrix.ghc }} build
     steps:
-      - uses: actions/checkout@v2
-      - uses: haskell/actions/setup@v2
+      - name: Clone project
+        uses: actions/checkout@v2
+      - name: Setup Haskell
+        id: setup-haskell-stack
+        uses: haskell-actions/setup@v2
         with:
-          ghc-version: ${{ matrix.ghc }}
+          ghc-version: ${{ matrix.versions.ghc }}
           enable-stack: true
           stack-version: 'latest'
-          
+          cabal-update: false
       - name: Cache
-        uses: actions/cache@v1
-        env:
-          cache-name: cache-cabal
+        uses: actions/cache@v4
         with:
-          path: ~/.cabal
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/stack-*.yaml') }}
+          key: ${{ matrix.versions.lts }}-${{ github.head_ref }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+            ${{ matrix.versions.lts }}-build-${{ github.head_ref }}-
+            ${{ matrix.versions.lts }}-build-
+            ${{ matrix.versions.lts }}-
+          path: |
+            ${{ steps.setup-haskell-stack.outputs.stack-root }}
+            .stack-work
+            */.stack-work
+
+      - name: Run tests
+        run: stack test --fast --system-ghc --stack-yaml stack-${{ matrix.versions.ghc }}.yaml
 
       - name: Install dependencies
-        run: |
-          stack build --stack-yaml stack-${{ matrix.ghx}}.yaml --only-dependencies
+        run: stack build --system-ghc --stack-yaml stack-${{ matrix.versions.ghc }}.yaml --only-dependencies
+
       - name: Build
-        run: stack build --stack-yaml stack-${{ matrix.ghx}}.yaml
-      - name: Run tests
-        run: stack test --stack-yaml stack-${{ matrix.ghx}}.yaml
+        run: stack build --system-ghc --stack-yaml stack-${{ matrix.versions.ghc }}.yaml
+
