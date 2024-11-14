@@ -100,11 +100,11 @@ jobs:
       - name: Clone project
         uses: actions/checkout@v2
 
-      - name: Run tests
-        run: stack test --system-ghc --stack-yaml stack-${{ matrix.versions.ghc }}.yaml
-
       - name: Install dependencies
         run: stack build --system-ghc --stack-yaml stack-${{ matrix.versions.ghc }}.yaml --only-dependencies
+
+      - name: Run tests
+        run: stack test --system-ghc --stack-yaml stack-${{ matrix.versions.ghc }}.yaml
 
       - name: Build
         run: stack build --system-ghc --stack-yaml stack-${{ matrix.versions.ghc }}.yaml
