@@ -1,0 +1,43 @@
+name: Haskell CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-haskell:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ghc: ["9.6"]
+
+    name: Haskell GHC ${{ matrix.ghc }} build
+    steps:
+      - uses: actions/checkout@v2
+      - uses: haskell/actions/setup@v2
+        with:
+          ghc-version: ${{ matrix.ghc }}
+          enable-stack: true
+          stack-version: 'latest'
+          
+      - name: Cache
+        uses: actions/cache@v1
+        env:
+          cache-name: cache-cabal
+        with:
+          path: ~/.cabal
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/stack-*.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Install dependencies
+        run: |
+          stack build --stack-yaml stack-${{ matrix.ghx}}.yaml --only-dependencies
+      - name: Build
+        run: stack build --stack-yaml stack-${{ matrix.ghx}}.yaml
+      - name: Run tests
+        run: stack test --stack-yaml stack-${{ matrix.ghx}}.yaml
