@@ -13,6 +13,17 @@ concurrency:
   group: build-${{ github.ref }}
   cancel-in-progress: true
 
+# INFO: The caching strategy was created following this post https://github.com/commercialhaskell/stack/issues/5754#issuecomment-1696156869
+env:
+  #-- increment this if you think cache of GHC installation needs cold rebuild
+  MANUAL_CACHE_RESET_COMPILER: v0
+  #-- increment this if you think cache of .stack-work needs cold rebuild
+  MANUAL_CACHE_RESET_PRODUCTS: v0
+  #-- increment this to force-rebuild the cache of dependency packages
+  MANUAL_CACHE_RESET_TESTDEPS: v0
+  #-- should never be needed, as stackage snapshots are immutable
+  # MANUAL_CACHE_RESET_SNAPSHOT: v0
+
 jobs:
   build-haskell:
     runs-on: ubuntu-latest
@@ -22,28 +33,72 @@ jobs:
           - { lts: "22.27", ghc: "9.6.5" }
 
     steps:
-      - name: Clone project
-        uses: actions/checkout@v2
-      - name: Setup Haskell
-        id: setup-haskell-stack
-        uses: haskell-actions/setup@v2
+      - name: Cache GHC installation
+        uses: actions/cache@v4
+        id: ghcup
+        env:
+          MANUAL_RESET: ${{ env.MANUAL_CACHE_RESET_COMPILER }}
+        with:
+          path: |
+            ~/.ghcup/bin/*
+            ~/.ghcup/cache/*
+            ~/.ghcup/config.yaml
+            ~/.ghcup/ghc/${{ matrix.versions.ghc }}
+          key: CI-ghcup-${{ env.MANUAL_RESET }}--${{ matrix.versions.ghc }}
+
+      - uses: haskell-actions/setup@v2
+        if: steps.ghcup.outputs.cache-hit != 'true'
         with:
           ghc-version: ${{ matrix.versions.ghc }}
           enable-stack: true
           stack-version: 'latest'
           cabal-update: false
-      - name: Cache
+
+      - name: Cache Pantry (Stackage package index)
+        id: pantry
         uses: actions/cache@v4
         with:
-          key: ${{ matrix.versions.lts }}-${{ github.head_ref }}
-          restore-keys: |
-            ${{ matrix.versions.lts }}-build-${{ github.head_ref }}-
-            ${{ matrix.versions.lts }}-build-
-            ${{ matrix.versions.lts }}-
+          path: ~/.stack/pantry
+          key: CI-pantry-${{ matrix.versions.lts }}
+  
+      - name: Recompute Stackage package index
+        if: steps.pantry.outputs.cache-hit != 'true'
+        run: stack update # populates ~/.stack/pantry
+
+      - name: Cache Haskell dependencies
+        uses: actions/cache@v4
+        env:
+          MANUAL_RESET: ${{ env.MANUAL_CACHE_RESET_TESTDEPS }}
+        with:
+          #-- NOTE no, shouldn't cache the entire ~/.stack -- that'd be bad. just these 2:
           path: |
-            ${{ steps.setup-haskell-stack.outputs.stack-root }}
-            .stack-work
-            */.stack-work
+            ~/.stack/stack.sqlite3
+            ~/.stack/snapshots
+          #-- NOTE the caching key structure:
+          #--   * fixed ID string -- to indicate scope & purpose, descriptive;
+          #--   * manual reset -- on top level, stupid simple manual override;
+          #--   * resolver version -- helps maintain sleek size of the cache;
+          #--   * lockfile hashsum -- as invalidation trigger of the correct granularity.
+          #-- Since this cache only stores built *dependency packages* (not project code!),
+          #-- we should invalidate/reupload it on each change to the dependency forest (≈lockfile).
+          #--
+          #-- All this decides when cache gets REBUILT (invalidated & recreated):
+          key: CI-testdeps-${{ env.MANUAL_RESET }}--${{ matrix.versions.lts }}--${{ hashFiles('stack-${{ matrix.versions.ghc }}.yaml.lock') }}
+          #-- All this adds fallbacks to UNPACK stale cache copies, prefix-matched:
+          restore-keys: |
+            CI-testdeps-${{ env.MANUAL_RESET }}--${{ matrix.versions.lts }}--
+            CI-testdeps-${{ env.MANUAL_RESET }}--
+
+      - name: Cache per-branch Haskell project buildstate
+        uses: actions/cache@v4
+        env:
+          MANUAL_RESET: ${{ env.MANUAL_CACHE_RESET_PRODUCTS }}
+        with:
+          path: .stack-work
+          key: CI-builddir-${{ env.MANUAL_RESET }}--${{ matrix.versions.ghc }}--${{ github.head_ref }}
+
+      - name: Clone project
+        uses: actions/checkout@v2
 
       - name: Run tests
         run: stack test --system-ghc --stack-yaml stack-${{ matrix.versions.ghc }}.yaml
