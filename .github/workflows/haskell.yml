@@ -46,7 +46,7 @@ jobs:
             */.stack-work
 
       - name: Run tests
-        run: stack test --fast --system-ghc --stack-yaml stack-${{ matrix.versions.ghc }}.yaml
+        run: stack test --system-ghc --stack-yaml stack-${{ matrix.versions.ghc }}.yaml
 
       - name: Install dependencies
         run: stack build --system-ghc --stack-yaml stack-${{ matrix.versions.ghc }}.yaml --only-dependencies
