@@ -67,7 +67,7 @@ library
     , bytestring              >=0.9
     , case-insensitive        >=1.2
     , conduit-extra           >=1.1
-    , crypton                 >=1.0
+    , crypton                 >=0.34
     , directory               >=1.2
     , exceptions              >=0.6
     , filepath                >=1.2
