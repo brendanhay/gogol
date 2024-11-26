@@ -43,7 +43,7 @@ library
     , aeson                 >=0.8
     , attoparsec            >=0.11.3
     , base                  >=4.12   && <5
-    , base64                >=0.4
+    , base64                >=1.0
     , bytestring            >=0.9
     , case-insensitive      >=1.2
     , conduit               >=1.3
