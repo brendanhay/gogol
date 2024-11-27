@@ -103,6 +103,7 @@ jobs:
           #-- I wasn't able to find the non absolute path and I decided to set the full path. This is britle
           #-- The list of .stack-work folders needs to be recreated periodically with: find . -name .stack-work | sort
           path: |
+            ${{ github.workspace }}/.stack-work
             ${{ github.workspace }}/examples/.stack-work
             ${{ github.workspace }}/gen/.stack-work
             ${{ github.workspace }}/lib/gogol-core/.stack-work
@@ -275,8 +276,6 @@ jobs:
             ${{ github.workspace }}/lib/services/gogol-youtube-analytics/.stack-work
             ${{ github.workspace }}/lib/services/gogol-youtube-reporting/.stack-work
             ${{ github.workspace }}/lib/services/gogol-youtube/.stack-work
-            ${{ github.workspace }}/.stack-work
-            ${{ github.workspace }}/.stack-work
 
       - name: Install dependencies
         run: stack build --system-ghc --stack-yaml stack-${{ matrix.versions.ghc }}.yaml --only-dependencies
