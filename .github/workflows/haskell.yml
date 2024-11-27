@@ -100,6 +100,10 @@ jobs:
           MANUAL_RESET: ${{ env.MANUAL_CACHE_RESET_PRODUCTS }}
         with:
           key: CI-builddir-${{ env.MANUAL_RESET }}--${{ matrix.versions.ghc }}--${{ github.head_ref }}
+          #-- All this adds fallbacks to UNPACK stale cache copies, prefix-matched:
+          restore-keys: |
+            CI-testdeps-${{ env.MANUAL_RESET }}--${{ matrix.versions.ghc }}--
+            CI-testdeps-${{ env.MANUAL_RESET }}--
           #-- I wasn't able to find the non absolute path and I decided to set the full path. This is britle
           #-- The list of .stack-work folders needs to be recreated periodically with: find . -name .stack-work | sort
           path: |
@@ -282,6 +286,3 @@ jobs:
 
       - name: Run tests
         run: stack test --system-ghc --stack-yaml stack-${{ matrix.versions.ghc }}.yaml
-
-      - name: Build
-        run: stack build --system-ghc --stack-yaml stack-${{ matrix.versions.ghc }}.yaml
