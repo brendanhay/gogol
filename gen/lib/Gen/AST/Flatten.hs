@@ -6,6 +6,7 @@ where
 import Control.Applicative
 import Control.Error
 import Control.Lens hiding (lens)
+import Control.Monad
 import Control.Monad.Except
 import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
@@ -55,7 +56,7 @@ localSchema g l = schema g (Just l)
 --     then schema g (Just l) s
 --     else schema r Nothing  s
 
-schema :: HasCallStack => Global -> Maybe Local -> Fix Schema -> AST Global
+schema :: (HasCallStack) => Global -> Maybe Local -> Fix Schema -> AST Global
 schema g ml (Fix f) = go (maybe g (reference g) ml) f >>= uncurry insert
   where
     go p = \case
@@ -81,26 +82,26 @@ schema g ml (Fix f) = go (maybe g (reference g) ml) f >>= uncurry insert
     name i p xs
       | Just x <- i ^. iId = pure x
       | otherwise = do
-        r <- uses reserve (Set.member p)
-        e <- uses schemas (Map.lookup p)
-        case (r, e, xs) of
-          (False, Nothing, _) -> pure p
-          (_, _, z : zs) -> name i (reference g z) zs
-          (_, Just x, []) ->
-            throwError $
-              format
-                ("Unable to generate name for: " % gid % ", " % shown % ", " % gid % "\n" % shown)
-                g
-                ml
-                p
-                x
-          (True, _, []) ->
-            throwError $
-              format
-                ("Unable to generate name for reserved schema: " % gid % ", " % shown % ", " % gid)
-                g
-                ml
-                p
+          r <- uses reserve (Set.member p)
+          e <- uses schemas (Map.lookup p)
+          case (r, e, xs) of
+            (False, Nothing, _) -> pure p
+            (_, _, z : zs) -> name i (reference g z) zs
+            (_, Just x, []) ->
+              throwError $
+                format
+                  ("Unable to generate name for: " % gid % ", " % shown % ", " % gid % "\n" % shown)
+                  g
+                  ml
+                  p
+                  x
+            (True, _, []) ->
+              throwError $
+                format
+                  ("Unable to generate name for reserved schema: " % gid % ", " % shown % ", " % gid)
+                  g
+                  ml
+                  p
 
 globalParam :: Local -> Param (Fix Schema) -> AST (Maybe (Param Global))
 globalParam l p = case l of
@@ -125,7 +126,7 @@ localParam g l p = do
   pure $! p {_pParam = x}
 
 resource ::
-  HasCallStack =>
+  (HasCallStack) =>
   Text ->
   Map Local (Param Global) ->
   Suffix ->
@@ -135,14 +136,14 @@ resource ::
 resource canonical qs suf g r@Resource {..} = do
   rs <- Map.traverseWithKey (resource canonical qs suf . reference g) _rResources
   ms <- traverse (method canonical qs suf) _rMethods
-  pure
-    $! r
+  pure $!
+    r
       { _rResources = rs,
         _rMethods = ms
       }
 
 method ::
-  HasCallStack =>
+  (HasCallStack) =>
   Text ->
   Map Local (Param Global) ->
   Suffix ->
@@ -191,7 +192,10 @@ insert g s = do
   where
     exists n s' =
       format
-        ( "Schema exists: " % stext % " - " % gid
+        ( "Schema exists: "
+            % stext
+            % " - "
+            % gid
             % "\n\n[Current]\n"
             % shown
             % "\n\n[Tried]\n"

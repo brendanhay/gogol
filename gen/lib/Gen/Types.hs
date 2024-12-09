@@ -13,6 +13,7 @@ where
 
 import Control.Applicative
 import Control.Lens hiding ((.=))
+import Control.Monad (forM_, void)
 import Control.Monad.Except
 import Control.Monad.State.Strict
 import Data.Aeson hiding (Array, Bool, String)
@@ -140,7 +141,7 @@ instance Ord Model where
     on compare modelPrefix a b
       <> on compare (Down . modelVersion) a b
 
-modelFromPath :: HasCallStack => Path -> Model
+modelFromPath :: (HasCallStack) => Path -> Model
 modelFromPath x = Model n p v x
   where
     n =
@@ -171,7 +172,7 @@ data Imports = Imports
     actionImports :: Set NS
   }
 
-serviceImports :: HasService a b => a -> Imports
+serviceImports :: (HasService a b) => a -> Imports
 serviceImports s =
   Imports
     { tocImports = Set.empty,
@@ -181,22 +182,11 @@ serviceImports s =
       actionImports = Set.fromList [typesNS s]
     }
 
-tocNS, typesNS, prodNS, sumNS :: HasService a b => a -> NS
+tocNS, typesNS, prodNS, sumNS :: (HasService a b) => a -> NS
 tocNS = mappend "Gogol" . mkNS . view sCanonicalName
 typesNS = (<> "Types") . tocNS
 prodNS = (<> "Internal.Product") . tocNS
 sumNS = (<> "Internal.Sum") . tocNS
-
-exposedModules :: Library -> [NS]
-exposedModules l =
-  sort $
-    tocNS l :
-    typesNS l :
-    map _actNamespace (_apiResources (_lAPI l))
-      ++ map _actNamespace (_apiMethods (_lAPI l))
-
-otherModules :: Library -> [NS]
-otherModules s = sort [prodNS s, sumNS s]
 
 toTextIgnore :: Path -> Text
 toTextIgnore = either id id . Path.toText
@@ -241,6 +231,17 @@ instance ToJSON Library where
         -- Schemas
         "schemas" .= (l ^. lSchemas)
       ]
+
+exposedModules :: Library -> [NS]
+exposedModules l =
+  sort $
+    tocNS l
+      : typesNS l
+      : map _actNamespace (_apiResources (_lAPI l))
+      ++ map _actNamespace (_apiMethods (_lAPI l))
+
+otherModules :: Library -> [NS]
+otherModules s = sort [prodNS s, sumNS s]
 
 data TType
   = TType Global
@@ -331,8 +332,8 @@ reserveType :: Global -> AST Global
 reserveType g = do
   p <- uses reserve (Set.member g)
 
-  pure
-    $! if p
+  pure $!
+    if p
       then reference g "'"
       else g
 
