@@ -35,7 +35,7 @@ clean:
 	rm -r $(MODEL_DIR)
 
 full-clean: clean
-	rm -r ../vendor ../configs/models
+	rm -r ./vendor ./configs/models
 
 $(MODEL_DIR): ./vendor/google-api-go-client
 	@./scripts/copy-models $< $@

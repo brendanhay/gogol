@@ -3,6 +3,7 @@
 module Main where
 
 import Control.Error
+import Control.Monad
 import Control.Lens hiding ((<.>))
 import Control.Monad.State
 import qualified Data.IORef as IORef

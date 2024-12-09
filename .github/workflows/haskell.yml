@@ -31,7 +31,7 @@ jobs:
     strategy:
       matrix:
         versions:
-          - { lts: "22.27", ghc: "9.6.5" }
+          - { lts: "22.43", ghc: "9.6.6" }
           - { lts: "nightly-2024-11-21", ghc: "9.10.1" }
 
     steps:

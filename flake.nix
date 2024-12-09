@@ -45,6 +45,7 @@
       packages = p: [ p.gogol ];
       nativeBuildInputs = with pkgs; [
         cabal-install
+        pkg-config
       ];
     });
     packages = builtins.listToAttrs (map mkPackage allPackages);
