@@ -5,7 +5,6 @@ local-bin-path: bin
 nix:
   enable: false
   packages: [zlib, icu]
-  add-gc-roots: true
 
 extra-deps:
   - base64-1.0
