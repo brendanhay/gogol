@@ -4,14 +4,13 @@ import Control.Error
 import Control.Monad
 import Control.Monad.IO.Class (MonadIO)
 import Data.Aeson hiding (decode)
-import Data.Aeson.KeyMap (fromHashMapText, toHashMapText)
+import Data.Aeson.KeyMap (unionWith)
 import Data.Aeson.Types
 import Data.Bifunctor
 import Data.ByteString (ByteString)
 import qualified Data.ByteString.Lazy as LBS
 import Data.HashMap.Strict (HashMap)
-import qualified Data.HashMap.Strict as HashMap
-import Data.List
+import Data.List (foldl')
 import Data.Text (Text)
 import qualified Data.Text.Lazy as LText
 import Gen.Formatting
@@ -35,4 +34,13 @@ parse :: (FromJSON a) => Object -> Either Error a
 parse = first LText.pack . parseEither parseJSON . Object
 
 merge :: [Object] -> Object
-merge obs = fromHashMapText $ foldl' HashMap.union mempty (map toHashMapText obs)
+merge = foldl' go mempty
+  where
+    go :: Object -> Object -> Object
+    go = unionWith value
+
+    value :: Value -> Value -> Value
+    value l r =
+      case (l, r) of
+        (Object x, Object y) -> Object (x `go` y)
+        (_, _) -> l
