@@ -2,7 +2,10 @@ resolver: lts-22.43
 
 nix:
   enable: false
-  packages: [zlib, icu67]
+  packages: 
+    - zlib
+    - icu67
+    - pkg-config
 
 extra-deps:
   - ede-0.3.4.0
