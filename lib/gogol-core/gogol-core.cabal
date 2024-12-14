@@ -57,7 +57,7 @@ library
     , lens                  >=4.4
     , resourcet             >=1.1
     , scientific            >=0.3
-    , servant               >=0.14.1
+    , servant               >=0.20.1
     , text                  >=1.1
     , time                  >=1.5
     , unordered-containers  >=0.2.5
