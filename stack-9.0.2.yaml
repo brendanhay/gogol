@@ -1,14 +1,12 @@
-resolver: lts-22.27
+resolver: nightly-2022-03-17
 
 local-bin-path: bin
 
 nix:
   enable: false
   packages: [zlib, icu]
-  add-gc-roots: true
 
-extra-deps:
-  - base64-1.0
+extra-deps: []
 
 packages:
   - examples

@@ -9,7 +9,6 @@ maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
 copyright:          Copyright (c) 2013-2022 Brendan Hay
 category:           Google
 build-type:         Simple
-extra-source-files: README.md
 description:        Code generator for Gogol related Google SDKs
 
 common base
@@ -73,18 +72,16 @@ library
   build-depends:
     , aeson                 >=1
     , attoparsec
-    , bifunctors
     , bytestring
     , case-insensitive
     , containers
     , directory-tree
-    , doclayout
     , ede
     , errors                >=2.1.2
     , formatting
     , hashable
     , haskell-src-exts      ==1.23.1
-    , hindent               ==5.3.2
+    , hindent
     , lens
     , mtl
     , pandoc

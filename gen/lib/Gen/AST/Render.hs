@@ -6,8 +6,8 @@ where
 import Control.Applicative
 import Control.Error
 import Control.Lens hiding (enum, lens)
-import qualified Data.ByteString.Builder as BB
 import qualified Data.ByteString.Char8 as C8
+import qualified Data.ByteString.Lazy as BL
 import Data.Char (isSpace)
 import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
@@ -20,7 +20,6 @@ import Gen.Formatting
 import Gen.Syntax
 import Gen.Types
 import qualified HIndent
-import qualified HIndent.Types as HIndent
 import Language.Haskell.Exts.Build (name)
 import Language.Haskell.Exts.Pretty as PP
 import Prelude hiding (sum)
@@ -75,7 +74,8 @@ renderSchema s = go (_schema s)
         help =
           rawHelpText $
             sformat
-              ( "Creates a value of '" % gid
+              ( "Creates a value of '"
+                  % gid
                   % "' with the minimum fields required to make a request.\n"
               )
               k
@@ -102,7 +102,8 @@ renderAPI s = do
       where
         h =
           sformat
-            ( "Default request referring to version @" % stext
+            ( "Default request referring to version @"
+                % stext
                 % "@ of the "
                 % stext
                 % ". This contains the host and root path used as a starting point for constructing service requests."
@@ -169,10 +170,10 @@ data PP
 
 pp :: (Pretty a, Show a) => PP -> a -> AST Rendered
 pp i x
-  | i == Indent = result (HIndent.reformat HIndent.defaultConfig Nothing Nothing p)
+  | i == Indent = result (HIndent.reformat HIndent.defaultConfig [] Nothing p)
   | otherwise = pure (LText.pack (C8.unpack p))
   where
-    result = hoistEither . bimap (e . LText.pack) (LText.decodeUtf8 . BB.toLazyByteString)
+    result = hoistEither . bimap (e . LText.pack . HIndent.prettyParseError) (LText.decodeUtf8 . BL.fromStrict)
 
     e = flip mappend ("\nSyntax:\n" <> LText.pack (C8.unpack p) <> "\nAST:\n" <> LText.pack (show x))
 
@@ -192,10 +193,10 @@ pp i x
       | i == Print = defaultMode
       | i == Indent = defaultMode
       | otherwise =
-        defaultMode
-          { layout = PPNoLayout,
-            spacing = False
-          }
+          defaultMode
+            { layout = PPNoLayout,
+              spacing = False
+            }
 
 -- FIXME: dirty hack to render smart ctor parameter comments.
 comments :: Map Local Solved -> Rendered -> Rendered
@@ -211,7 +212,8 @@ comments (Map.toList -> rs) =
 
     rel Nothing t = t
     rel (Just (l, s)) t =
-      t <> "\n       -- ^ "
+      t
+        <> "\n       -- ^ "
         <> maybe mempty (LText.drop 11 . renderHelp . Nest 7) (s ^. iDescription)
         <> " See '"
         <> fromString (PP.prettyPrint (fname l))

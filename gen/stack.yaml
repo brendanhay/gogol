@@ -1,13 +1,19 @@
-resolver: lts-18.27
+resolver: lts-22.43
 
 nix:
   enable: false
-  packages: [zlib, icu67]
-  add-gc-roots: true
+  packages: 
+    - zlib
+    - icu67
+    - pkg-config
 
 extra-deps:
-  - ede-0.3.2.0@sha256:6ac62b2a9fccaf66a121f79e569d39286ad969fb9758eede46766f98c9919eda,3935
-  - hindent-5.3.2@sha256:070a3622d13e6f0c44d8d189df8f780f61d0b813435a902925ef6d9386b42260,3610
+  - ede-0.3.4.0
+  - aeson-2.2.3.0
+  - attoparsec-aeson-2.2.2.0
+  - character-ps-0.1
+  - hashable-1.4.6.0
+  - hindent-6.2.1
 
 packages:
   - '.'
