@@ -138,6 +138,7 @@ packages:
   - lib/services/gogol-proximitybeacon
   - lib/services/gogol-pubsub
   - lib/services/gogol-qpxexpress
+  - lib/services/gogol-recaptcha-enterprise
   - lib/services/gogol-redis
   - lib/services/gogol-remotebuildexecution
   - lib/services/gogol-replicapool
