@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,110 +31,102 @@
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.backendServices.getIamPolicy@.
 module Gogol.Compute.BackendServices.GetIamPolicy
-  ( -- * Resource
-    ComputeBackendServicesGetIamPolicyResource,
+    (
+    -- * Resource
+      ComputeBackendServicesGetIamPolicyResource
 
     -- ** Constructing a Request
-    ComputeBackendServicesGetIamPolicy (..),
-    newComputeBackendServicesGetIamPolicy,
-  )
-where
+    , ComputeBackendServicesGetIamPolicy (..)
+    , newComputeBackendServicesGetIamPolicy
+    ) where
 
-import Gogol.Compute.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Compute.Types
 
 -- | A resource alias for @compute.backendServices.getIamPolicy@ method which the
 -- 'ComputeBackendServicesGetIamPolicy' request conforms to.
 type ComputeBackendServicesGetIamPolicyResource =
-  "compute"
-    Core.:> "v1"
-    Core.:> "projects"
-    Core.:> Core.Capture "project" Core.Text
-    Core.:> "global"
-    Core.:> "backendServices"
-    Core.:> Core.Capture "resource" Core.Text
-    Core.:> "getIamPolicy"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "optionsRequestedPolicyVersion"
-              Core.Int32
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Policy
+     "compute" Core.:>
+       "v1" Core.:>
+         "projects" Core.:>
+           Core.Capture "project" Core.Text Core.:>
+             "global" Core.:>
+               "backendServices" Core.:>
+                 Core.Capture "resource" Core.Text Core.:>
+                   "getIamPolicy" Core.:>
+                     Core.QueryParam "$.xgafv" Xgafv Core.:>
+                       Core.QueryParam "access_token" Core.Text Core.:>
+                         Core.QueryParam "callback" Core.Text Core.:>
+                           Core.QueryParam "optionsRequestedPolicyVersion"
+                             Core.Int32
+                             Core.:>
+                             Core.QueryParam "uploadType" Core.Text Core.:>
+                               Core.QueryParam "upload_protocol" Core.Text
+                                 Core.:>
+                                 Core.QueryParam "alt" Core.AltJSON Core.:>
+                                   Core.Get '[Core.JSON] Policy
 
 -- | Gets the access control policy for a resource. May be empty if no such policy or resource exists.
 --
 -- /See:/ 'newComputeBackendServicesGetIamPolicy' smart constructor.
 data ComputeBackendServicesGetIamPolicy = ComputeBackendServicesGetIamPolicy
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Requested IAM Policy version.
-    optionsRequestedPolicyVersion :: (Core.Maybe Core.Int32),
-    -- | Project ID for this request.
-    project :: Core.Text,
-    -- | Name or id of the resource for this request.
-    resource :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Requested IAM Policy version.
+    , optionsRequestedPolicyVersion :: (Core.Maybe Core.Int32)
+      -- | Project ID for this request.
+    , project :: Core.Text
+      -- | Name or id of the resource for this request.
+    , resource :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ComputeBackendServicesGetIamPolicy' with the minimum fields required to make a request.
-newComputeBackendServicesGetIamPolicy ::
-  -- |  Project ID for this request. See 'project'.
-  Core.Text ->
-  -- |  Name or id of the resource for this request. See 'resource'.
-  Core.Text ->
-  ComputeBackendServicesGetIamPolicy
+newComputeBackendServicesGetIamPolicy 
+    ::  Core.Text
+       -- ^  Project ID for this request. See 'project'.
+    -> Core.Text
+       -- ^  Name or id of the resource for this request. See 'resource'.
+    -> ComputeBackendServicesGetIamPolicy
 newComputeBackendServicesGetIamPolicy project resource =
   ComputeBackendServicesGetIamPolicy
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      optionsRequestedPolicyVersion = Core.Nothing,
-      project = project,
-      resource = resource,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , optionsRequestedPolicyVersion = Core.Nothing
+    , project = project
+    , resource = resource
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ComputeBackendServicesGetIamPolicy
-  where
-  type Rs ComputeBackendServicesGetIamPolicy = Policy
-  type
-    Scopes ComputeBackendServicesGetIamPolicy =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly
-       ]
-  requestClient ComputeBackendServicesGetIamPolicy {..} =
-    go
-      project
-      resource
-      xgafv
-      accessToken
-      callback
-      optionsRequestedPolicyVersion
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      computeService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy
-                ComputeBackendServicesGetIamPolicyResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           ComputeBackendServicesGetIamPolicy
+         where
+        type Rs ComputeBackendServicesGetIamPolicy = Policy
+        type Scopes ComputeBackendServicesGetIamPolicy =
+             '[CloudPlatform'FullControl, Compute'FullControl,
+               Compute'Readonly]
+        requestClient ComputeBackendServicesGetIamPolicy{..}
+          = go project resource xgafv accessToken callback
+              optionsRequestedPolicyVersion
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              computeService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           ComputeBackendServicesGetIamPolicyResource)
+                      Core.mempty
+

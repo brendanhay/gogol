@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,116 +31,116 @@
 --
 -- /See:/ <https://cloud.google.com/trace Cloud Trace API Reference>
 module Gogol.CloudTrace
-  ( -- * Configuration
-    cloudTraceService,
+    (
+    -- * Configuration
+      cloudTraceService
 
     -- * OAuth Scopes
-    CloudPlatform'FullControl,
-    Trace'Append,
+    , CloudPlatform'FullControl
+    , Trace'Append
 
     -- * Resources
 
     -- ** cloudtrace.projects.traces.batchWrite
-    CloudTraceProjectsTracesBatchWriteResource,
-    CloudTraceProjectsTracesBatchWrite (..),
-    newCloudTraceProjectsTracesBatchWrite,
+    , CloudTraceProjectsTracesBatchWriteResource
+    , CloudTraceProjectsTracesBatchWrite (..)
+    , newCloudTraceProjectsTracesBatchWrite
 
     -- ** cloudtrace.projects.traces.spans.createSpan
-    CloudTraceProjectsTracesSpansCreateSpanResource,
-    CloudTraceProjectsTracesSpansCreateSpan (..),
-    newCloudTraceProjectsTracesSpansCreateSpan,
+    , CloudTraceProjectsTracesSpansCreateSpanResource
+    , CloudTraceProjectsTracesSpansCreateSpan (..)
+    , newCloudTraceProjectsTracesSpansCreateSpan
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Annotation
-    Annotation (..),
-    newAnnotation,
+    , Annotation (..)
+    , newAnnotation
 
     -- ** AttributeValue
-    AttributeValue (..),
-    newAttributeValue,
+    , AttributeValue (..)
+    , newAttributeValue
 
     -- ** Attributes
-    Attributes (..),
-    newAttributes,
+    , Attributes (..)
+    , newAttributes
 
     -- ** Attributes_AttributeMap
-    Attributes_AttributeMap (..),
-    newAttributes_AttributeMap,
+    , Attributes_AttributeMap (..)
+    , newAttributes_AttributeMap
 
     -- ** BatchWriteSpansRequest
-    BatchWriteSpansRequest (..),
-    newBatchWriteSpansRequest,
+    , BatchWriteSpansRequest (..)
+    , newBatchWriteSpansRequest
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** Link
-    Link (..),
-    newLink,
+    , Link (..)
+    , newLink
 
     -- ** Link_Type
-    Link_Type (..),
+    , Link_Type (..)
 
     -- ** Links
-    Links (..),
-    newLinks,
+    , Links (..)
+    , newLinks
 
     -- ** MessageEvent
-    MessageEvent (..),
-    newMessageEvent,
+    , MessageEvent (..)
+    , newMessageEvent
 
     -- ** MessageEvent_Type
-    MessageEvent_Type (..),
+    , MessageEvent_Type (..)
 
     -- ** Module
-    Module (..),
-    newModule,
+    , Module (..)
+    , newModule
 
     -- ** Span
-    Span (..),
-    newSpan,
+    , Span (..)
+    , newSpan
 
     -- ** Span_SpanKind
-    Span_SpanKind (..),
+    , Span_SpanKind (..)
 
     -- ** StackFrame
-    StackFrame (..),
-    newStackFrame,
+    , StackFrame (..)
+    , newStackFrame
 
     -- ** StackFrames
-    StackFrames (..),
-    newStackFrames,
+    , StackFrames (..)
+    , newStackFrames
 
     -- ** StackTrace
-    StackTrace (..),
-    newStackTrace,
+    , StackTrace (..)
+    , newStackTrace
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** TimeEvent
-    TimeEvent (..),
-    newTimeEvent,
+    , TimeEvent (..)
+    , newTimeEvent
 
     -- ** TimeEvents
-    TimeEvents (..),
-    newTimeEvents,
+    , TimeEvents (..)
+    , newTimeEvents
 
     -- ** TruncatableString
-    TruncatableString (..),
-    newTruncatableString,
-  )
-where
+    , TruncatableString (..)
+    , newTruncatableString
+    ) where
 
 import Gogol.CloudTrace.Projects.Traces.BatchWrite
 import Gogol.CloudTrace.Projects.Traces.Spans.CreateSpan

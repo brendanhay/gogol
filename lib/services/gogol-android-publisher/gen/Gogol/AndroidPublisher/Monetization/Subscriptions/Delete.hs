@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,103 +31,96 @@
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.monetization.subscriptions.delete@.
 module Gogol.AndroidPublisher.Monetization.Subscriptions.Delete
-  ( -- * Resource
-    AndroidPublisherMonetizationSubscriptionsDeleteResource,
+    (
+    -- * Resource
+      AndroidPublisherMonetizationSubscriptionsDeleteResource
 
     -- ** Constructing a Request
-    AndroidPublisherMonetizationSubscriptionsDelete (..),
-    newAndroidPublisherMonetizationSubscriptionsDelete,
-  )
-where
+    , AndroidPublisherMonetizationSubscriptionsDelete (..)
+    , newAndroidPublisherMonetizationSubscriptionsDelete
+    ) where
 
-import Gogol.AndroidPublisher.Types
 import qualified Gogol.Prelude as Core
+import Gogol.AndroidPublisher.Types
 
 -- | A resource alias for @androidpublisher.monetization.subscriptions.delete@ method which the
 -- 'AndroidPublisherMonetizationSubscriptionsDelete' request conforms to.
-type AndroidPublisherMonetizationSubscriptionsDeleteResource =
-  "androidpublisher"
-    Core.:> "v3"
-    Core.:> "applications"
-    Core.:> Core.Capture "packageName" Core.Text
-    Core.:> "subscriptions"
-    Core.:> Core.Capture "productId" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] ()
+type AndroidPublisherMonetizationSubscriptionsDeleteResource
+     =
+     "androidpublisher" Core.:>
+       "v3" Core.:>
+         "applications" Core.:>
+           Core.Capture "packageName" Core.Text Core.:>
+             "subscriptions" Core.:>
+               Core.Capture "productId" Core.Text Core.:>
+                 Core.QueryParam "$.xgafv" Xgafv Core.:>
+                   Core.QueryParam "access_token" Core.Text Core.:>
+                     Core.QueryParam "callback" Core.Text Core.:>
+                       Core.QueryParam "uploadType" Core.Text Core.:>
+                         Core.QueryParam "upload_protocol" Core.Text Core.:>
+                           Core.QueryParam "alt" Core.AltJSON Core.:>
+                             Core.Delete '[Core.JSON] ()
 
 -- | Deletes a subscription. A subscription can only be deleted if it has never had a base plan published.
 --
 -- /See:/ 'newAndroidPublisherMonetizationSubscriptionsDelete' smart constructor.
 data AndroidPublisherMonetizationSubscriptionsDelete = AndroidPublisherMonetizationSubscriptionsDelete
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. The parent app (package name) of the app of the subscription to delete.
-    packageName :: Core.Text,
-    -- | Required. The unique product ID of the subscription to delete.
-    productId :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The parent app (package name) of the app of the subscription to delete.
+    , packageName :: Core.Text
+      -- | Required. The unique product ID of the subscription to delete.
+    , productId :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AndroidPublisherMonetizationSubscriptionsDelete' with the minimum fields required to make a request.
-newAndroidPublisherMonetizationSubscriptionsDelete ::
-  -- |  Required. The parent app (package name) of the app of the subscription to delete. See 'packageName'.
-  Core.Text ->
-  -- |  Required. The unique product ID of the subscription to delete. See 'productId'.
-  Core.Text ->
-  AndroidPublisherMonetizationSubscriptionsDelete
+newAndroidPublisherMonetizationSubscriptionsDelete 
+    ::  Core.Text
+       -- ^  Required. The parent app (package name) of the app of the subscription to delete. See 'packageName'.
+    -> Core.Text
+       -- ^  Required. The unique product ID of the subscription to delete. See 'productId'.
+    -> AndroidPublisherMonetizationSubscriptionsDelete
 newAndroidPublisherMonetizationSubscriptionsDelete packageName productId =
   AndroidPublisherMonetizationSubscriptionsDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      packageName = packageName,
-      productId = productId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , packageName = packageName
+    , productId = productId
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AndroidPublisherMonetizationSubscriptionsDelete
-  where
-  type
-    Rs
-      AndroidPublisherMonetizationSubscriptionsDelete =
-      ()
-  type
-    Scopes
-      AndroidPublisherMonetizationSubscriptionsDelete =
-      '[Androidpublisher'FullControl]
-  requestClient
-    AndroidPublisherMonetizationSubscriptionsDelete {..} =
-      go
-        packageName
-        productId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        androidPublisherService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidPublisherMonetizationSubscriptionsDeleteResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           AndroidPublisherMonetizationSubscriptionsDelete
+         where
+        type Rs
+               AndroidPublisherMonetizationSubscriptionsDelete
+             = ()
+        type Scopes
+               AndroidPublisherMonetizationSubscriptionsDelete
+             = '[Androidpublisher'FullControl]
+        requestClient
+          AndroidPublisherMonetizationSubscriptionsDelete{..}
+          = go packageName productId xgafv accessToken callback
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              androidPublisherService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           AndroidPublisherMonetizationSubscriptionsDeleteResource)
+                      Core.mempty
+

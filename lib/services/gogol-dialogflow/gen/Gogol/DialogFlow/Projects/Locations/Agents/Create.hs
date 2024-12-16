@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,101 +31,94 @@
 --
 -- /See:/ <https://cloud.google.com/dialogflow/ Dialogflow API Reference> for @dialogflow.projects.locations.agents.create@.
 module Gogol.DialogFlow.Projects.Locations.Agents.Create
-  ( -- * Resource
-    DialogFlowProjectsLocationsAgentsCreateResource,
+    (
+    -- * Resource
+      DialogFlowProjectsLocationsAgentsCreateResource
 
     -- ** Constructing a Request
-    DialogFlowProjectsLocationsAgentsCreate (..),
-    newDialogFlowProjectsLocationsAgentsCreate,
-  )
-where
+    , DialogFlowProjectsLocationsAgentsCreate (..)
+    , newDialogFlowProjectsLocationsAgentsCreate
+    ) where
 
-import Gogol.DialogFlow.Types
 import qualified Gogol.Prelude as Core
+import Gogol.DialogFlow.Types
 
 -- | A resource alias for @dialogflow.projects.locations.agents.create@ method which the
 -- 'DialogFlowProjectsLocationsAgentsCreate' request conforms to.
-type DialogFlowProjectsLocationsAgentsCreateResource =
-  "v3"
-    Core.:> Core.Capture "parent" Core.Text
-    Core.:> "agents"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleCloudDialogflowCxV3Agent
-    Core.:> Core.Post '[Core.JSON] GoogleCloudDialogflowCxV3Agent
+type DialogFlowProjectsLocationsAgentsCreateResource
+     =
+     "v3" Core.:>
+       Core.Capture "parent" Core.Text Core.:>
+         "agents" Core.:>
+           Core.QueryParam "$.xgafv" Xgafv Core.:>
+             Core.QueryParam "access_token" Core.Text Core.:>
+               Core.QueryParam "callback" Core.Text Core.:>
+                 Core.QueryParam "uploadType" Core.Text Core.:>
+                   Core.QueryParam "upload_protocol" Core.Text Core.:>
+                     Core.QueryParam "alt" Core.AltJSON Core.:>
+                       Core.ReqBody '[Core.JSON]
+                         GoogleCloudDialogflowCxV3Agent
+                         Core.:>
+                         Core.Post '[Core.JSON] GoogleCloudDialogflowCxV3Agent
 
 -- | Creates an agent in the specified location. Note: You should always train flows prior to sending them queries. See the <https://cloud.google.com/dialogflow/cx/docs/concept/training training documentation>.
 --
 -- /See:/ 'newDialogFlowProjectsLocationsAgentsCreate' smart constructor.
 data DialogFlowProjectsLocationsAgentsCreate = DialogFlowProjectsLocationsAgentsCreate
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. The location to create a agent for. Format: @projects\/\/locations\/@.
-    parent :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: GoogleCloudDialogflowCxV3Agent,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The location to create a agent for. Format: @projects\/\/locations\/@.
+    , parent :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: GoogleCloudDialogflowCxV3Agent
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DialogFlowProjectsLocationsAgentsCreate' with the minimum fields required to make a request.
-newDialogFlowProjectsLocationsAgentsCreate ::
-  -- |  Required. The location to create a agent for. Format: @projects\/\/locations\/@. See 'parent'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  GoogleCloudDialogflowCxV3Agent ->
-  DialogFlowProjectsLocationsAgentsCreate
+newDialogFlowProjectsLocationsAgentsCreate 
+    ::  Core.Text
+       -- ^  Required. The location to create a agent for. Format: @projects\/\/locations\/@. See 'parent'.
+    -> GoogleCloudDialogflowCxV3Agent
+       -- ^  Multipart request metadata. See 'payload'.
+    -> DialogFlowProjectsLocationsAgentsCreate
 newDialogFlowProjectsLocationsAgentsCreate parent payload =
   DialogFlowProjectsLocationsAgentsCreate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , parent = parent
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DialogFlowProjectsLocationsAgentsCreate
-  where
-  type
-    Rs DialogFlowProjectsLocationsAgentsCreate =
-      GoogleCloudDialogflowCxV3Agent
-  type
-    Scopes DialogFlowProjectsLocationsAgentsCreate =
-      '[CloudPlatform'FullControl, Dialogflow'FullControl]
-  requestClient
-    DialogFlowProjectsLocationsAgentsCreate {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dialogFlowService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DialogFlowProjectsLocationsAgentsCreateResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           DialogFlowProjectsLocationsAgentsCreate
+         where
+        type Rs DialogFlowProjectsLocationsAgentsCreate =
+             GoogleCloudDialogflowCxV3Agent
+        type Scopes DialogFlowProjectsLocationsAgentsCreate =
+             '[CloudPlatform'FullControl, Dialogflow'FullControl]
+        requestClient
+          DialogFlowProjectsLocationsAgentsCreate{..}
+          = go parent xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              dialogFlowService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           DialogFlowProjectsLocationsAgentsCreateResource)
+                      Core.mempty
+

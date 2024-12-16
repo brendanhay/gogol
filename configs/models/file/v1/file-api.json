@@ -502,7 +502,7 @@
                       "type": "string"
                     },
                     "updateMask": {
-                      "description": "Mask of fields to update. At least one path must be supplied in this field. The elements of the repeated paths field may only include these fields: * \"description\" * \"file_shares\" * \"labels\"",
+                      "description": "Mask of fields to update. At least one path must be supplied in this field. The elements of the repeated paths field may only include these fields: * \"description\" * \"file_shares\" * \"labels\" * \"performance_config\" * \"deletion_protection_enabled\" * \"deletion_protection_reason\"",
                       "format": "google-fieldmask",
                       "location": "query",
                       "type": "string"
@@ -511,6 +511,34 @@
                   "path": "v1/{+name}",
                   "request": {
                     "$ref": "Instance"
+                  },
+                  "response": {
+                    "$ref": "Operation"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
+                "promoteReplica": {
+                  "description": "Promote the standby instance (replica).",
+                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/instances/{instancesId}:promoteReplica",
+                  "httpMethod": "POST",
+                  "id": "file.projects.locations.instances.promoteReplica",
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "parameters": {
+                    "name": {
+                      "description": "Required. The resource name of the instance, in the format `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+/instances/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v1/{+name}:promoteReplica",
+                  "request": {
+                    "$ref": "PromoteReplicaRequest"
                   },
                   "response": {
                     "$ref": "Operation"
@@ -539,6 +567,34 @@
                   "path": "v1/{+name}:restore",
                   "request": {
                     "$ref": "RestoreInstanceRequest"
+                  },
+                  "response": {
+                    "$ref": "Operation"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
+                "revert": {
+                  "description": "Revert an existing instance's file system to a specified snapshot.",
+                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/instances/{instancesId}:revert",
+                  "httpMethod": "POST",
+                  "id": "file.projects.locations.instances.revert",
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "parameters": {
+                    "name": {
+                      "description": "Required. The resource name of the instance, in the format `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+/instances/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v1/{+name}:revert",
+                  "request": {
+                    "$ref": "RevertInstanceRequest"
                   },
                   "response": {
                     "$ref": "Operation"
@@ -670,6 +726,11 @@
                           "pattern": "^projects/[^/]+/locations/[^/]+/instances/[^/]+$",
                           "required": true,
                           "type": "string"
+                        },
+                        "returnPartialSuccess": {
+                          "description": "Optional. If true, allow partial responses for multi-regional Aggregated List requests.",
+                          "location": "query",
+                          "type": "boolean"
                         }
                       },
                       "path": "v1/{+parent}/snapshots",
@@ -721,7 +782,7 @@
             "operations": {
               "methods": {
                 "cancel": {
-                  "description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.",
+                  "description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of `1`, corresponding to `Code.CANCELLED`.",
                   "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/operations/{operationsId}:cancel",
                   "httpMethod": "POST",
                   "id": "file.projects.locations.operations.cancel",
@@ -846,7 +907,7 @@
       }
     }
   },
-  "revision": "20230312",
+  "revision": "20241204",
   "rootUrl": "https://file.googleapis.com/",
   "schemas": {
     "Backup": {
@@ -875,6 +936,21 @@
           "readOnly": true,
           "type": "string"
         },
+        "fileSystemProtocol": {
+          "description": "Output only. The file system protocol of the source Filestore instance that this backup is created from.",
+          "enum": [
+            "FILE_PROTOCOL_UNSPECIFIED",
+            "NFS_V3",
+            "NFS_V4_1"
+          ],
+          "enumDescriptions": [
+            "FILE_PROTOCOL_UNSPECIFIED serves a \"not set\" default value when a FileProtocol is a separate field in a message.",
+            "NFS 3.0.",
+            "NFS 4.1."
+          ],
+          "readOnly": true,
+          "type": "string"
+        },
         "kmsKey": {
           "description": "Immutable. KMS key name used for data encryption.",
           "type": "string"
@@ -890,6 +966,11 @@
           "description": "Output only. The resource name of the backup, in the format `projects/{project_number}/locations/{location_id}/backups/{backup_id}`.",
           "readOnly": true,
           "type": "string"
+        },
+        "satisfiesPzi": {
+          "description": "Output only. Reserved for future use.",
+          "readOnly": true,
+          "type": "boolean"
         },
         "satisfiesPzs": {
           "description": "Output only. Reserved for future use.",
@@ -913,7 +994,9 @@
             "BASIC_HDD",
             "BASIC_SSD",
             "HIGH_SCALE_SSD",
-            "ENTERPRISE"
+            "ENTERPRISE",
+            "ZONAL",
+            "REGIONAL"
           ],
           "enumDescriptions": [
             "Not set.",
@@ -922,7 +1005,9 @@
             "BASIC instances offer a maximum capacity of 63.9 TB. BASIC_HDD is an alias for STANDARD Tier, offering economical performance backed by HDD.",
             "BASIC instances offer a maximum capacity of 63.9 TB. BASIC_SSD is an alias for PREMIUM Tier, and offers improved performance backed by SSD.",
             "HIGH_SCALE instances offer expanded capacity and performance scaling capabilities.",
-            "ENTERPRISE instances offer the features and availability needed for mission-critical workloads."
+            "ENTERPRISE instances offer the features and availability needed for mission-critical workloads.",
+            "ZONAL instances offer expanded capacity and performance scaling capabilities.",
+            "REGIONAL instances offer the features and availability needed for mission-critical workloads."
           ],
           "readOnly": true,
           "type": "string"
@@ -934,14 +1019,16 @@
             "CREATING",
             "FINALIZING",
             "READY",
-            "DELETING"
+            "DELETING",
+            "INVALID"
           ],
           "enumDescriptions": [
             "State not set.",
             "Backup is being created.",
             "Backup has been taken and the operation is being finalized. At this point, changes to the file share will not be reflected in the backup.",
             "Backup is available for use.",
-            "Backup is being deleted."
+            "Backup is being deleted.",
+            "Backup is not valid and cannot be used for creating new instances or restoring existing instances."
           ],
           "readOnly": true,
           "type": "string"
@@ -951,6 +1038,13 @@
           "format": "int64",
           "readOnly": true,
           "type": "string"
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Optional. Input only. Immutable. Tag key-value pairs bound to this resource. Each key must be a namespaced name and each value a short name. Example: \"123456789012/environment\" : \"production\", \"123456789013/costCenter\" : \"marketing\" See the documentation for more information: - Namespaced name: https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing#retrieving_tag_key - Short name: https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing#retrieving_tag_value",
+          "type": "object"
         }
       },
       "type": "object"
@@ -1034,7 +1128,7 @@
           "type": "string"
         },
         "name": {
-          "description": "The name of the file share (must be 16 characters or less).",
+          "description": "Required. The name of the file share. Must use 1-16 characters for the basic service tier and 1-63 characters for all other service tiers. Must use lowercase letters, numbers, or underscores `[a-z0-9_]`. Must start with a letter. Immutable.",
           "type": "string"
         },
         "nfsExportOptions": {
@@ -1046,6 +1140,18 @@
         },
         "sourceBackup": {
           "description": "The resource name of the backup, in the format `projects/{project_number}/locations/{location_id}/backups/{backup_id}`, that this file share has been restored from.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "FixedIOPS": {
+      "description": "Fixed IOPS (input/output operations per second) parameters.",
+      "id": "FixedIOPS",
+      "properties": {
+        "maxIops": {
+          "description": "Required. Maximum IOPS.",
+          "format": "int64",
           "type": "string"
         }
       },
@@ -1080,7 +1186,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Optional. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the referenced policy must define the same policy type. For details, please refer to go/cloud-saas-mw-ug. Should not be set if maintenance_settings.maintenance_policies is set.",
+          "description": "Optional. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the referenced policy must define the same policy type. For details, please refer to go/mr-user-guide. Should not be set if maintenance_settings.maintenance_policies is set.",
           "type": "object"
         },
         "maintenanceSchedules": {
@@ -1179,6 +1285,7 @@
       "id": "GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule",
       "properties": {
         "canReschedule": {
+          "deprecated": true,
           "description": "This field is deprecated, and will be always set to true since reschedule can happen multiple times now. This field should not be removed until all service producers remove this for their customers.",
           "type": "boolean"
         },
@@ -1220,7 +1327,7 @@
           "additionalProperties": {
             "$ref": "MaintenancePolicy"
           },
-          "description": "Optional. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the embedded policy must define the same policy type. For details, please refer to go/cloud-saas-mw-ug. Should not be set if maintenance_policy_names is set. If only the name is needed, then only populate MaintenancePolicy.name.",
+          "description": "Optional. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the embedded policy must define the same policy type. For details, please refer to go/mr-user-guide. Should not be set if maintenance_policy_names is set. If only the name is needed, then only populate MaintenancePolicy.name.",
           "type": "object"
         }
       },
@@ -1325,14 +1432,39 @@
       },
       "type": "object"
     },
+    "IOPSPerTB": {
+      "description": "IOPS per TB. Filestore defines TB as 1024^4 bytes (TiB).",
+      "id": "IOPSPerTB",
+      "properties": {
+        "maxIopsPerTb": {
+          "description": "Required. Maximum IOPS per TiB.",
+          "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Instance": {
       "description": "A Filestore instance.",
       "id": "Instance",
       "properties": {
+        "configurablePerformanceEnabled": {
+          "description": "Output only. Indicates whether this instance's performance is configurable. If enabled, adjust it using the 'performance_config' field.",
+          "readOnly": true,
+          "type": "boolean"
+        },
         "createTime": {
           "description": "Output only. The time when the instance was created.",
           "format": "google-datetime",
           "readOnly": true,
+          "type": "string"
+        },
+        "deletionProtectionEnabled": {
+          "description": "Optional. Indicates whether the instance is protected against deletion.",
+          "type": "boolean"
+        },
+        "deletionProtectionReason": {
+          "description": "Optional. The reason for enabling deletion protection.",
           "type": "string"
         },
         "description": {
@@ -1373,6 +1505,38 @@
           },
           "type": "array"
         },
+        "performanceConfig": {
+          "$ref": "PerformanceConfig",
+          "description": "Optional. Used to configure performance."
+        },
+        "performanceLimits": {
+          "$ref": "PerformanceLimits",
+          "description": "Output only. Used for getting performance limits.",
+          "readOnly": true
+        },
+        "protocol": {
+          "description": "Immutable. The protocol indicates the access protocol for all shares in the instance. This field is immutable and it cannot be changed after the instance has been created. Default value: `NFS_V3`.",
+          "enum": [
+            "FILE_PROTOCOL_UNSPECIFIED",
+            "NFS_V3",
+            "NFS_V4_1"
+          ],
+          "enumDescriptions": [
+            "FILE_PROTOCOL_UNSPECIFIED serves a \"not set\" default value when a FileProtocol is a separate field in a message.",
+            "NFS 3.0.",
+            "NFS 4.1."
+          ],
+          "type": "string"
+        },
+        "replication": {
+          "$ref": "Replication",
+          "description": "Optional. Replication configuration."
+        },
+        "satisfiesPzi": {
+          "description": "Output only. Reserved for future use.",
+          "readOnly": true,
+          "type": "boolean"
+        },
         "satisfiesPzs": {
           "description": "Output only. Reserved for future use.",
           "readOnly": true,
@@ -1390,7 +1554,9 @@
             "RESTORING",
             "SUSPENDED",
             "SUSPENDING",
-            "RESUMING"
+            "RESUMING",
+            "REVERTING",
+            "PROMOTING"
           ],
           "enumDescriptions": [
             "State not set.",
@@ -1402,7 +1568,9 @@
             "The instance is restoring a backup to an existing file share and may be unusable during this time.",
             "The instance is suspended. You can get further details from the `suspension_reasons` field of the `Instance` resource.",
             "The instance is in the process of becoming suspended.",
-            "The instance is in the process of becoming active."
+            "The instance is in the process of becoming active.",
+            "The instance is reverting to a snapshot.",
+            "The replica instance is being promoted."
           ],
           "readOnly": true,
           "type": "string"
@@ -1428,6 +1596,13 @@
           "readOnly": true,
           "type": "array"
         },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Optional. Input only. Immutable. Tag key-value pairs bound to this resource. Each key must be a namespaced name and each value a short name. Example: \"123456789012/environment\" : \"production\", \"123456789013/costCenter\" : \"marketing\" See the documentation for more information: - Namespaced name: https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing#retrieving_tag_key - Short name: https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing#retrieving_tag_value",
+          "type": "object"
+        },
         "tier": {
           "description": "The service tier of the instance.",
           "enum": [
@@ -1437,7 +1612,9 @@
             "BASIC_HDD",
             "BASIC_SSD",
             "HIGH_SCALE_SSD",
-            "ENTERPRISE"
+            "ENTERPRISE",
+            "ZONAL",
+            "REGIONAL"
           ],
           "enumDescriptions": [
             "Not set.",
@@ -1446,7 +1623,9 @@
             "BASIC instances offer a maximum capacity of 63.9 TB. BASIC_HDD is an alias for STANDARD Tier, offering economical performance backed by HDD.",
             "BASIC instances offer a maximum capacity of 63.9 TB. BASIC_SSD is an alias for PREMIUM Tier, and offers improved performance backed by SSD.",
             "HIGH_SCALE instances offer expanded capacity and performance scaling capabilities.",
-            "ENTERPRISE instances offer the features and availability needed for mission-critical workloads."
+            "ENTERPRISE instances offer the features and availability needed for mission-critical workloads.",
+            "ZONAL instances offer expanded capacity and performance scaling capabilities.",
+            "REGIONAL instances offer the features and availability needed for mission-critical workloads."
           ],
           "type": "string"
         }
@@ -1469,7 +1648,7 @@
           "type": "string"
         },
         "unreachable": {
-          "description": "Locations that could not be reached.",
+          "description": "Unordered list. Locations that could not be reached.",
           "items": {
             "type": "string"
           },
@@ -1494,7 +1673,7 @@
           "type": "string"
         },
         "unreachable": {
-          "description": "Locations that could not be reached.",
+          "description": "Unordered list. Locations that could not be reached.",
           "items": {
             "type": "string"
           },
@@ -1553,12 +1732,19 @@
             "$ref": "Snapshot"
           },
           "type": "array"
+        },
+        "unreachable": {
+          "description": "Unordered list. Locations that could not be reached.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "type": "object"
     },
     "Location": {
-      "description": "A resource that represents Google Cloud Platform location.",
+      "description": "A resource that represents a Google Cloud location.",
       "id": "Location",
       "properties": {
         "displayName": {
@@ -1592,7 +1778,7 @@
       "type": "object"
     },
     "MaintenancePolicy": {
-      "description": "LINT.IfChange Defines policies to service maintenance events.",
+      "description": "Defines policies to service maintenance events.",
       "id": "MaintenancePolicy",
       "properties": {
         "createTime": {
@@ -1789,7 +1975,7 @@
             "description": "Properties of the object. Contains field @type with type URL.",
             "type": "any"
           },
-          "description": "The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.",
+          "description": "The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.",
           "type": "object"
         }
       },
@@ -1805,7 +1991,7 @@
           "type": "string"
         },
         "cancelRequested": {
-          "description": "Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.",
+          "description": "Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have google.longrunning.Operation.error value with a google.rpc.Status.code of `1`, corresponding to `Code.CANCELLED`.",
           "readOnly": true,
           "type": "boolean"
         },
@@ -1839,6 +2025,138 @@
       },
       "type": "object"
     },
+    "PerformanceConfig": {
+      "description": "Used for setting the performance configuration. If the user doesn't specify PerformanceConfig, automatically provision the default performance settings as described in https://cloud.google.com/filestore/docs/performance. Larger instances will be linearly set to more IOPS. If the instance's capacity is increased or decreased, its performance will be automatically adjusted upwards or downwards accordingly (respectively).",
+      "id": "PerformanceConfig",
+      "properties": {
+        "fixedIops": {
+          "$ref": "FixedIOPS",
+          "description": "Choose a fixed provisioned IOPS value for the instance, which will remain constant regardless of instance capacity. Value must be a multiple of 1000. If the chosen value is outside the supported range for the instance's capacity during instance creation, instance creation will fail with an `InvalidArgument` error. Similarly, if an instance capacity update would result in a value outside the supported range, the update will fail with an `InvalidArgument` error."
+        },
+        "iopsPerTb": {
+          "$ref": "IOPSPerTB",
+          "description": "Provision IOPS dynamically based on the capacity of the instance. Provisioned read IOPS will be calculated by multiplying the capacity of the instance in TiB by the `iops_per_tb` value. For example, for a 2 TiB instance with an `iops_per_tb` value of 17000 the provisioned read IOPS will be 34000. If the calculated value is outside the supported range for the instance's capacity during instance creation, instance creation will fail with an `InvalidArgument` error. Similarly, if an instance capacity update would result in a value outside the supported range, the update will fail with an `InvalidArgument` error."
+        }
+      },
+      "type": "object"
+    },
+    "PerformanceLimits": {
+      "description": "The enforced performance limits, calculated from the instance's performance configuration.",
+      "id": "PerformanceLimits",
+      "properties": {
+        "maxReadIops": {
+          "description": "Output only. The max read IOPS.",
+          "format": "int64",
+          "readOnly": true,
+          "type": "string"
+        },
+        "maxReadThroughputBps": {
+          "description": "Output only. The max read throughput in bytes per second.",
+          "format": "int64",
+          "readOnly": true,
+          "type": "string"
+        },
+        "maxWriteIops": {
+          "description": "Output only. The max write IOPS.",
+          "format": "int64",
+          "readOnly": true,
+          "type": "string"
+        },
+        "maxWriteThroughputBps": {
+          "description": "Output only. The max write throughput in bytes per second.",
+          "format": "int64",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PromoteReplicaRequest": {
+      "description": "PromoteReplicaRequest promotes a Filestore standby instance (replica).",
+      "id": "PromoteReplicaRequest",
+      "properties": {},
+      "type": "object"
+    },
+    "ReplicaConfig": {
+      "description": "Replica configuration for the instance.",
+      "id": "ReplicaConfig",
+      "properties": {
+        "lastActiveSyncTime": {
+          "description": "Output only. The timestamp of the latest replication snapshot taken on the active instance and is already replicated safely.",
+          "format": "google-datetime",
+          "readOnly": true,
+          "type": "string"
+        },
+        "peerInstance": {
+          "description": "Optional. The peer instance.",
+          "type": "string"
+        },
+        "state": {
+          "description": "Output only. The replica state.",
+          "enum": [
+            "STATE_UNSPECIFIED",
+            "CREATING",
+            "READY",
+            "REMOVING",
+            "FAILED"
+          ],
+          "enumDescriptions": [
+            "State not set.",
+            "The replica is being created.",
+            "The replica is ready.",
+            "The replica is being removed.",
+            "The replica is experiencing an issue and might be unusable. You can get further details from the `stateReasons` field of the `ReplicaConfig` object."
+          ],
+          "readOnly": true,
+          "type": "string"
+        },
+        "stateReasons": {
+          "description": "Output only. Additional information about the replication state, if available.",
+          "items": {
+            "enum": [
+              "STATE_REASON_UNSPECIFIED",
+              "PEER_INSTANCE_UNREACHABLE"
+            ],
+            "enumDescriptions": [
+              "Reason not specified.",
+              "The peer instance is unreachable."
+            ],
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "Replication": {
+      "description": "Replication specifications.",
+      "id": "Replication",
+      "properties": {
+        "replicas": {
+          "description": "Optional. Replication configuration for the replica instance associated with this instance. Only a single replica is supported.",
+          "items": {
+            "$ref": "ReplicaConfig"
+          },
+          "type": "array"
+        },
+        "role": {
+          "description": "Optional. The replication role.",
+          "enum": [
+            "ROLE_UNSPECIFIED",
+            "ACTIVE",
+            "STANDBY"
+          ],
+          "enumDescriptions": [
+            "Role not set.",
+            "The instance is the `ACTIVE` replication member, functions as the replication source instance.",
+            "The instance is the `STANDBY` replication member, functions as the replication destination instance."
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "RestoreInstanceRequest": {
       "description": "RestoreInstanceRequest restores an existing instance's file share from a backup.",
       "id": "RestoreInstanceRequest",
@@ -1849,6 +2167,17 @@
         },
         "sourceBackup": {
           "description": "The resource name of the backup, in the format `projects/{project_number}/locations/{location_id}/backups/{backup_id}`.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RevertInstanceRequest": {
+      "description": "RevertInstanceRequest reverts the given instance's file share to the specified snapshot.",
+      "id": "RevertInstanceRequest",
+      "properties": {
+        "targetSnapshotId": {
+          "description": "Required. The snapshot resource ID, in the format 'my-snapshot', where the specified ID is the {snapshot_id} of the fully qualified name like `projects/{project_id}/locations/{location_id}/instances/{instance_id}/snapshots/{snapshot_id}`",
           "type": "string"
         }
       },
@@ -1942,6 +2271,13 @@
           ],
           "readOnly": true,
           "type": "string"
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Optional. Input only. Immutable. Tag key-value pairs bound to this resource. Each key must be a namespaced name and each value a short name. Example: \"123456789012/environment\" : \"production\", \"123456789013/costCenter\" : \"marketing\" See the documentation for more information: - Namespaced name: https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing#retrieving_tag_key - Short name: https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing#retrieving_tag_value",
+          "type": "object"
         }
       },
       "type": "object"
@@ -1978,22 +2314,22 @@
       "id": "TimeOfDay",
       "properties": {
         "hours": {
-          "description": "Hours of day in 24 hour format. Should be from 0 to 23. An API may choose to allow the value \"24:00:00\" for scenarios like business closing time.",
+          "description": "Hours of a day in 24 hour format. Must be greater than or equal to 0 and typically must be less than or equal to 23. An API may choose to allow the value \"24:00:00\" for scenarios like business closing time.",
           "format": "int32",
           "type": "integer"
         },
         "minutes": {
-          "description": "Minutes of hour of day. Must be from 0 to 59.",
+          "description": "Minutes of an hour. Must be greater than or equal to 0 and less than or equal to 59.",
           "format": "int32",
           "type": "integer"
         },
         "nanos": {
-          "description": "Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.",
+          "description": "Fractions of seconds, in nanoseconds. Must be greater than or equal to 0 and less than or equal to 999,999,999.",
           "format": "int32",
           "type": "integer"
         },
         "seconds": {
-          "description": "Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds.",
+          "description": "Seconds of a minute. Must be greater than or equal to 0 and typically must be less than or equal to 59. An API may allow the value 60 if it allows leap-seconds.",
           "format": "int32",
           "type": "integer"
         }
@@ -2025,7 +2361,7 @@
           "type": "string"
         },
         "denyMaintenancePeriods": {
-          "description": "Deny Maintenance Period that is applied to resource to indicate when maintenance is forbidden. User can specify zero or more non-overlapping deny periods. Maximum number of deny_maintenance_periods expected is one.",
+          "description": "Deny Maintenance Period that is applied to resource to indicate when maintenance is forbidden. The protocol supports zero-to-many such periods, but the current SLM Rollout implementation only supports zero-to-one.",
           "items": {
             "$ref": "DenyMaintenancePeriod"
           },

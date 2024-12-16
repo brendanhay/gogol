@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-container
-version:            1.0.0.0
-synopsis:           Google Kubernetes Engine SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-container
+version:               1.0.0
+synopsis:              Google Kubernetes Engine SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  Builds and manages container-based applications, powered by the open source Kubernetes technology.
+    Builds and manages container-based applications, powered by the open source Kubernetes technology.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -30,95 +27,97 @@ source-repository head
   subdir:   gogol-container
 
 flag field-selectors
-  description:
-    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-
-  default:     False
-  manual:      True
+  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+  default: False
+  manual: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -Werror
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (!flag(field-selectors) && impl(ghc >=9.2))
+  if !flag(field-selectors) && impl(ghc >= 9.2)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.Container
-    Gogol.Container.Projects.Aggregated.UsableSubnetworks.List
-    Gogol.Container.Projects.Locations.Clusters.CompleteIpRotation
-    Gogol.Container.Projects.Locations.Clusters.Create
-    Gogol.Container.Projects.Locations.Clusters.Delete
-    Gogol.Container.Projects.Locations.Clusters.Get
-    Gogol.Container.Projects.Locations.Clusters.GetJwks
-    Gogol.Container.Projects.Locations.Clusters.List
-    Gogol.Container.Projects.Locations.Clusters.NodePools.CompleteUpgrade
-    Gogol.Container.Projects.Locations.Clusters.NodePools.Create
-    Gogol.Container.Projects.Locations.Clusters.NodePools.Delete
-    Gogol.Container.Projects.Locations.Clusters.NodePools.Get
-    Gogol.Container.Projects.Locations.Clusters.NodePools.List
-    Gogol.Container.Projects.Locations.Clusters.NodePools.Rollback
-    Gogol.Container.Projects.Locations.Clusters.NodePools.SetAutoscaling
-    Gogol.Container.Projects.Locations.Clusters.NodePools.SetManagement
-    Gogol.Container.Projects.Locations.Clusters.NodePools.SetSize
-    Gogol.Container.Projects.Locations.Clusters.NodePools.Update
-    Gogol.Container.Projects.Locations.Clusters.SetAddons
-    Gogol.Container.Projects.Locations.Clusters.SetLegacyAbac
-    Gogol.Container.Projects.Locations.Clusters.SetLocations
-    Gogol.Container.Projects.Locations.Clusters.SetLogging
-    Gogol.Container.Projects.Locations.Clusters.SetMaintenancePolicy
-    Gogol.Container.Projects.Locations.Clusters.SetMasterAuth
-    Gogol.Container.Projects.Locations.Clusters.SetMonitoring
-    Gogol.Container.Projects.Locations.Clusters.SetNetworkPolicy
-    Gogol.Container.Projects.Locations.Clusters.SetResourceLabels
-    Gogol.Container.Projects.Locations.Clusters.StartIpRotation
-    Gogol.Container.Projects.Locations.Clusters.Update
-    Gogol.Container.Projects.Locations.Clusters.UpdateMaster
-    Gogol.Container.Projects.Locations.Clusters.Wellknown.GetOpenidconfiguration
-    Gogol.Container.Projects.Locations.GetServerConfig
-    Gogol.Container.Projects.Locations.Operations.Cancel
-    Gogol.Container.Projects.Locations.Operations.Get
-    Gogol.Container.Projects.Locations.Operations.List
-    Gogol.Container.Projects.Zones.Clusters.Addons
-    Gogol.Container.Projects.Zones.Clusters.CompleteIpRotation
-    Gogol.Container.Projects.Zones.Clusters.Create
-    Gogol.Container.Projects.Zones.Clusters.Delete
-    Gogol.Container.Projects.Zones.Clusters.Get
-    Gogol.Container.Projects.Zones.Clusters.LegacyAbac
-    Gogol.Container.Projects.Zones.Clusters.List
-    Gogol.Container.Projects.Zones.Clusters.Locations
-    Gogol.Container.Projects.Zones.Clusters.Logging
-    Gogol.Container.Projects.Zones.Clusters.Master
-    Gogol.Container.Projects.Zones.Clusters.Monitoring
-    Gogol.Container.Projects.Zones.Clusters.NodePools.Autoscaling
-    Gogol.Container.Projects.Zones.Clusters.NodePools.Create
-    Gogol.Container.Projects.Zones.Clusters.NodePools.Delete
-    Gogol.Container.Projects.Zones.Clusters.NodePools.Get
-    Gogol.Container.Projects.Zones.Clusters.NodePools.List
-    Gogol.Container.Projects.Zones.Clusters.NodePools.Rollback
-    Gogol.Container.Projects.Zones.Clusters.NodePools.SetManagement
-    Gogol.Container.Projects.Zones.Clusters.NodePools.SetSize
-    Gogol.Container.Projects.Zones.Clusters.NodePools.Update
-    Gogol.Container.Projects.Zones.Clusters.ResourceLabels
-    Gogol.Container.Projects.Zones.Clusters.SetMaintenancePolicy
-    Gogol.Container.Projects.Zones.Clusters.SetMasterAuth
-    Gogol.Container.Projects.Zones.Clusters.SetNetworkPolicy
-    Gogol.Container.Projects.Zones.Clusters.StartIpRotation
-    Gogol.Container.Projects.Zones.Clusters.Update
-    Gogol.Container.Projects.Zones.GetServerconfig
-    Gogol.Container.Projects.Zones.Operations.Cancel
-    Gogol.Container.Projects.Zones.Operations.Get
-    Gogol.Container.Projects.Zones.Operations.List
-    Gogol.Container.Types
+      Gogol.Container
+    , Gogol.Container.Projects.Aggregated.UsableSubnetworks.List
+    , Gogol.Container.Projects.Locations.Clusters.CheckAutopilotCompatibility
+    , Gogol.Container.Projects.Locations.Clusters.CompleteIpRotation
+    , Gogol.Container.Projects.Locations.Clusters.Create
+    , Gogol.Container.Projects.Locations.Clusters.Delete
+    , Gogol.Container.Projects.Locations.Clusters.Get
+    , Gogol.Container.Projects.Locations.Clusters.GetJwks
+    , Gogol.Container.Projects.Locations.Clusters.List
+    , Gogol.Container.Projects.Locations.Clusters.NodePools.CompleteUpgrade
+    , Gogol.Container.Projects.Locations.Clusters.NodePools.Create
+    , Gogol.Container.Projects.Locations.Clusters.NodePools.Delete
+    , Gogol.Container.Projects.Locations.Clusters.NodePools.Get
+    , Gogol.Container.Projects.Locations.Clusters.NodePools.List
+    , Gogol.Container.Projects.Locations.Clusters.NodePools.Rollback
+    , Gogol.Container.Projects.Locations.Clusters.NodePools.SetAutoscaling
+    , Gogol.Container.Projects.Locations.Clusters.NodePools.SetManagement
+    , Gogol.Container.Projects.Locations.Clusters.NodePools.SetSize
+    , Gogol.Container.Projects.Locations.Clusters.NodePools.Update
+    , Gogol.Container.Projects.Locations.Clusters.SetAddons
+    , Gogol.Container.Projects.Locations.Clusters.SetLegacyAbac
+    , Gogol.Container.Projects.Locations.Clusters.SetLocations
+    , Gogol.Container.Projects.Locations.Clusters.SetLogging
+    , Gogol.Container.Projects.Locations.Clusters.SetMaintenancePolicy
+    , Gogol.Container.Projects.Locations.Clusters.SetMasterAuth
+    , Gogol.Container.Projects.Locations.Clusters.SetMonitoring
+    , Gogol.Container.Projects.Locations.Clusters.SetNetworkPolicy
+    , Gogol.Container.Projects.Locations.Clusters.SetResourceLabels
+    , Gogol.Container.Projects.Locations.Clusters.StartIpRotation
+    , Gogol.Container.Projects.Locations.Clusters.Update
+    , Gogol.Container.Projects.Locations.Clusters.UpdateMaster
+    , Gogol.Container.Projects.Locations.Clusters.Wellknown.GetOpenidconfiguration
+    , Gogol.Container.Projects.Locations.GetServerConfig
+    , Gogol.Container.Projects.Locations.Operations.Cancel
+    , Gogol.Container.Projects.Locations.Operations.Get
+    , Gogol.Container.Projects.Locations.Operations.List
+    , Gogol.Container.Projects.Zones.Clusters.Addons
+    , Gogol.Container.Projects.Zones.Clusters.CompleteIpRotation
+    , Gogol.Container.Projects.Zones.Clusters.Create
+    , Gogol.Container.Projects.Zones.Clusters.Delete
+    , Gogol.Container.Projects.Zones.Clusters.Get
+    , Gogol.Container.Projects.Zones.Clusters.LegacyAbac
+    , Gogol.Container.Projects.Zones.Clusters.List
+    , Gogol.Container.Projects.Zones.Clusters.Locations
+    , Gogol.Container.Projects.Zones.Clusters.Logging
+    , Gogol.Container.Projects.Zones.Clusters.Master
+    , Gogol.Container.Projects.Zones.Clusters.Monitoring
+    , Gogol.Container.Projects.Zones.Clusters.NodePools.Autoscaling
+    , Gogol.Container.Projects.Zones.Clusters.NodePools.Create
+    , Gogol.Container.Projects.Zones.Clusters.NodePools.Delete
+    , Gogol.Container.Projects.Zones.Clusters.NodePools.Get
+    , Gogol.Container.Projects.Zones.Clusters.NodePools.List
+    , Gogol.Container.Projects.Zones.Clusters.NodePools.Rollback
+    , Gogol.Container.Projects.Zones.Clusters.NodePools.SetManagement
+    , Gogol.Container.Projects.Zones.Clusters.NodePools.SetSize
+    , Gogol.Container.Projects.Zones.Clusters.NodePools.Update
+    , Gogol.Container.Projects.Zones.Clusters.ResourceLabels
+    , Gogol.Container.Projects.Zones.Clusters.SetMaintenancePolicy
+    , Gogol.Container.Projects.Zones.Clusters.SetMasterAuth
+    , Gogol.Container.Projects.Zones.Clusters.SetNetworkPolicy
+    , Gogol.Container.Projects.Zones.Clusters.StartIpRotation
+    , Gogol.Container.Projects.Zones.Clusters.Update
+    , Gogol.Container.Projects.Zones.GetServerconfig
+    , Gogol.Container.Projects.Zones.Operations.Cancel
+    , Gogol.Container.Projects.Zones.Operations.Get
+    , Gogol.Container.Projects.Zones.Operations.List
+    , Gogol.Container.Types
 
   other-modules:
-    Gogol.Container.Internal.Product
-    Gogol.Container.Internal.Sum
+      Gogol.Container.Internal.Product
+    , Gogol.Container.Internal.Sum
 
   build-depends:
-    , base        >=4.12   && <5
-    , gogol-core  ^>=1.0.0
+      gogol-core ^>= 1.0.0

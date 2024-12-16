@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,630 +26,631 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.AdExchangeBuyer2.Types
-  ( -- * Configuration
-    adExchangeBuyer2Service,
+    (
+    -- * Configuration
+      adExchangeBuyer2Service
 
     -- * OAuth Scopes
-    Adexchange'Buyer,
+    , Adexchange'Buyer
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AbsoluteDateRange
-    AbsoluteDateRange (..),
-    newAbsoluteDateRange,
+    , AbsoluteDateRange (..)
+    , newAbsoluteDateRange
 
     -- ** AcceptProposalRequest
-    AcceptProposalRequest (..),
-    newAcceptProposalRequest,
+    , AcceptProposalRequest (..)
+    , newAcceptProposalRequest
 
     -- ** AdSize
-    AdSize (..),
-    newAdSize,
+    , AdSize (..)
+    , newAdSize
 
     -- ** AdSize_SizeType
-    AdSize_SizeType (..),
+    , AdSize_SizeType (..)
 
     -- ** AdTechnologyProviders
-    AdTechnologyProviders (..),
-    newAdTechnologyProviders,
+    , AdTechnologyProviders (..)
+    , newAdTechnologyProviders
 
     -- ** AddDealAssociationRequest
-    AddDealAssociationRequest (..),
-    newAddDealAssociationRequest,
+    , AddDealAssociationRequest (..)
+    , newAddDealAssociationRequest
 
     -- ** AddNoteRequest
-    AddNoteRequest (..),
-    newAddNoteRequest,
+    , AddNoteRequest (..)
+    , newAddNoteRequest
 
     -- ** AppContext
-    AppContext (..),
-    newAppContext,
+    , AppContext (..)
+    , newAppContext
 
     -- ** AppContext_AppTypesItem
-    AppContext_AppTypesItem (..),
+    , AppContext_AppTypesItem (..)
 
     -- ** AuctionContext
-    AuctionContext (..),
-    newAuctionContext,
+    , AuctionContext (..)
+    , newAuctionContext
 
     -- ** AuctionContext_AuctionTypesItem
-    AuctionContext_AuctionTypesItem (..),
+    , AuctionContext_AuctionTypesItem (..)
 
     -- ** BidMetricsRow
-    BidMetricsRow (..),
-    newBidMetricsRow,
+    , BidMetricsRow (..)
+    , newBidMetricsRow
 
     -- ** BidResponseWithoutBidsStatusRow
-    BidResponseWithoutBidsStatusRow (..),
-    newBidResponseWithoutBidsStatusRow,
+    , BidResponseWithoutBidsStatusRow (..)
+    , newBidResponseWithoutBidsStatusRow
 
     -- ** BidResponseWithoutBidsStatusRow_Status
-    BidResponseWithoutBidsStatusRow_Status (..),
+    , BidResponseWithoutBidsStatusRow_Status (..)
 
     -- ** Buyer
-    Buyer (..),
-    newBuyer,
+    , Buyer (..)
+    , newBuyer
 
     -- ** CalloutStatusRow
-    CalloutStatusRow (..),
-    newCalloutStatusRow,
+    , CalloutStatusRow (..)
+    , newCalloutStatusRow
 
     -- ** CancelNegotiationRequest
-    CancelNegotiationRequest (..),
-    newCancelNegotiationRequest,
+    , CancelNegotiationRequest (..)
+    , newCancelNegotiationRequest
 
     -- ** Client
-    Client (..),
-    newClient,
+    , Client (..)
+    , newClient
 
     -- ** Client_EntityType
-    Client_EntityType (..),
+    , Client_EntityType (..)
 
     -- ** Client_Role
-    Client_Role (..),
+    , Client_Role (..)
 
     -- ** Client_Status
-    Client_Status (..),
+    , Client_Status (..)
 
     -- ** ClientUser
-    ClientUser (..),
-    newClientUser,
+    , ClientUser (..)
+    , newClientUser
 
     -- ** ClientUser_Status
-    ClientUser_Status (..),
+    , ClientUser_Status (..)
 
     -- ** ClientUserInvitation
-    ClientUserInvitation (..),
-    newClientUserInvitation,
+    , ClientUserInvitation (..)
+    , newClientUserInvitation
 
     -- ** CompleteSetupRequest
-    CompleteSetupRequest (..),
-    newCompleteSetupRequest,
+    , CompleteSetupRequest (..)
+    , newCompleteSetupRequest
 
     -- ** ContactInformation
-    ContactInformation (..),
-    newContactInformation,
+    , ContactInformation (..)
+    , newContactInformation
 
     -- ** Correction
-    Correction (..),
-    newCorrection,
+    , Correction (..)
+    , newCorrection
 
     -- ** Correction_Type
-    Correction_Type (..),
+    , Correction_Type (..)
 
     -- ** Creative
-    Creative (..),
-    newCreative,
+    , Creative (..)
+    , newCreative
 
     -- ** Creative_AttributesItem
-    Creative_AttributesItem (..),
+    , Creative_AttributesItem (..)
 
     -- ** Creative_DealsStatus
-    Creative_DealsStatus (..),
+    , Creative_DealsStatus (..)
 
     -- ** Creative_OpenAuctionStatus
-    Creative_OpenAuctionStatus (..),
+    , Creative_OpenAuctionStatus (..)
 
     -- ** Creative_RestrictedCategoriesItem
-    Creative_RestrictedCategoriesItem (..),
+    , Creative_RestrictedCategoriesItem (..)
 
     -- ** CreativeDealAssociation
-    CreativeDealAssociation (..),
-    newCreativeDealAssociation,
+    , CreativeDealAssociation (..)
+    , newCreativeDealAssociation
 
     -- ** CreativeRestrictions
-    CreativeRestrictions (..),
-    newCreativeRestrictions,
+    , CreativeRestrictions (..)
+    , newCreativeRestrictions
 
     -- ** CreativeRestrictions_CreativeFormat
-    CreativeRestrictions_CreativeFormat (..),
+    , CreativeRestrictions_CreativeFormat (..)
 
     -- ** CreativeRestrictions_SkippableAdType
-    CreativeRestrictions_SkippableAdType (..),
+    , CreativeRestrictions_SkippableAdType (..)
 
     -- ** CreativeSize
-    CreativeSize (..),
-    newCreativeSize,
+    , CreativeSize (..)
+    , newCreativeSize
 
     -- ** CreativeSize_AllowedFormatsItem
-    CreativeSize_AllowedFormatsItem (..),
+    , CreativeSize_AllowedFormatsItem (..)
 
     -- ** CreativeSize_CreativeSizeType
-    CreativeSize_CreativeSizeType (..),
+    , CreativeSize_CreativeSizeType (..)
 
     -- ** CreativeSize_NativeTemplate
-    CreativeSize_NativeTemplate (..),
+    , CreativeSize_NativeTemplate (..)
 
     -- ** CreativeSize_SkippableAdType
-    CreativeSize_SkippableAdType (..),
+    , CreativeSize_SkippableAdType (..)
 
     -- ** CreativeSpecification
-    CreativeSpecification (..),
-    newCreativeSpecification,
+    , CreativeSpecification (..)
+    , newCreativeSpecification
 
     -- ** CreativeStatusRow
-    CreativeStatusRow (..),
-    newCreativeStatusRow,
+    , CreativeStatusRow (..)
+    , newCreativeStatusRow
 
     -- ** CriteriaTargeting
-    CriteriaTargeting (..),
-    newCriteriaTargeting,
+    , CriteriaTargeting (..)
+    , newCriteriaTargeting
 
     -- ** Date
-    Date (..),
-    newDate,
+    , Date (..)
+    , newDate
 
     -- ** DayPart
-    DayPart (..),
-    newDayPart,
+    , DayPart (..)
+    , newDayPart
 
     -- ** DayPart_DayOfWeek
-    DayPart_DayOfWeek (..),
+    , DayPart_DayOfWeek (..)
 
     -- ** DayPartTargeting
-    DayPartTargeting (..),
-    newDayPartTargeting,
+    , DayPartTargeting (..)
+    , newDayPartTargeting
 
     -- ** DayPartTargeting_TimeZoneType
-    DayPartTargeting_TimeZoneType (..),
+    , DayPartTargeting_TimeZoneType (..)
 
     -- ** Deal
-    Deal (..),
-    newDeal,
+    , Deal (..)
+    , newDeal
 
     -- ** Deal_CreativePreApprovalPolicy
-    Deal_CreativePreApprovalPolicy (..),
+    , Deal_CreativePreApprovalPolicy (..)
 
     -- ** Deal_CreativeSafeFrameCompatibility
-    Deal_CreativeSafeFrameCompatibility (..),
+    , Deal_CreativeSafeFrameCompatibility (..)
 
     -- ** Deal_ProgrammaticCreativeSource
-    Deal_ProgrammaticCreativeSource (..),
+    , Deal_ProgrammaticCreativeSource (..)
 
     -- ** Deal_SyndicationProduct
-    Deal_SyndicationProduct (..),
+    , Deal_SyndicationProduct (..)
 
     -- ** DealPauseStatus
-    DealPauseStatus (..),
-    newDealPauseStatus,
+    , DealPauseStatus (..)
+    , newDealPauseStatus
 
     -- ** DealPauseStatus_FirstPausedBy
-    DealPauseStatus_FirstPausedBy (..),
+    , DealPauseStatus_FirstPausedBy (..)
 
     -- ** DealServingMetadata
-    DealServingMetadata (..),
-    newDealServingMetadata,
+    , DealServingMetadata (..)
+    , newDealServingMetadata
 
     -- ** DealTerms
-    DealTerms (..),
-    newDealTerms,
+    , DealTerms (..)
+    , newDealTerms
 
     -- ** DealTerms_BrandingType
-    DealTerms_BrandingType (..),
+    , DealTerms_BrandingType (..)
 
     -- ** DeliveryControl
-    DeliveryControl (..),
-    newDeliveryControl,
+    , DeliveryControl (..)
+    , newDeliveryControl
 
     -- ** DeliveryControl_CreativeBlockingLevel
-    DeliveryControl_CreativeBlockingLevel (..),
+    , DeliveryControl_CreativeBlockingLevel (..)
 
     -- ** DeliveryControl_DeliveryRateType
-    DeliveryControl_DeliveryRateType (..),
+    , DeliveryControl_DeliveryRateType (..)
 
     -- ** Disapproval
-    Disapproval (..),
-    newDisapproval,
+    , Disapproval (..)
+    , newDisapproval
 
     -- ** Disapproval_Reason
-    Disapproval_Reason (..),
+    , Disapproval_Reason (..)
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** FilterSet
-    FilterSet (..),
-    newFilterSet,
+    , FilterSet (..)
+    , newFilterSet
 
     -- ** FilterSet_BreakdownDimensionsItem
-    FilterSet_BreakdownDimensionsItem (..),
+    , FilterSet_BreakdownDimensionsItem (..)
 
     -- ** FilterSet_Environment
-    FilterSet_Environment (..),
+    , FilterSet_Environment (..)
 
     -- ** FilterSet_Format
-    FilterSet_Format (..),
+    , FilterSet_Format (..)
 
     -- ** FilterSet_FormatsItem
-    FilterSet_FormatsItem (..),
+    , FilterSet_FormatsItem (..)
 
     -- ** FilterSet_PlatformsItem
-    FilterSet_PlatformsItem (..),
+    , FilterSet_PlatformsItem (..)
 
     -- ** FilterSet_TimeSeriesGranularity
-    FilterSet_TimeSeriesGranularity (..),
+    , FilterSet_TimeSeriesGranularity (..)
 
     -- ** FilteredBidCreativeRow
-    FilteredBidCreativeRow (..),
-    newFilteredBidCreativeRow,
+    , FilteredBidCreativeRow (..)
+    , newFilteredBidCreativeRow
 
     -- ** FilteredBidDetailRow
-    FilteredBidDetailRow (..),
-    newFilteredBidDetailRow,
+    , FilteredBidDetailRow (..)
+    , newFilteredBidDetailRow
 
     -- ** FirstPartyMobileApplicationTargeting
-    FirstPartyMobileApplicationTargeting (..),
-    newFirstPartyMobileApplicationTargeting,
+    , FirstPartyMobileApplicationTargeting (..)
+    , newFirstPartyMobileApplicationTargeting
 
     -- ** FrequencyCap
-    FrequencyCap (..),
-    newFrequencyCap,
+    , FrequencyCap (..)
+    , newFrequencyCap
 
     -- ** FrequencyCap_TimeUnitType
-    FrequencyCap_TimeUnitType (..),
+    , FrequencyCap_TimeUnitType (..)
 
     -- ** GuaranteedFixedPriceTerms
-    GuaranteedFixedPriceTerms (..),
-    newGuaranteedFixedPriceTerms,
+    , GuaranteedFixedPriceTerms (..)
+    , newGuaranteedFixedPriceTerms
 
     -- ** GuaranteedFixedPriceTerms_ReservationType
-    GuaranteedFixedPriceTerms_ReservationType (..),
+    , GuaranteedFixedPriceTerms_ReservationType (..)
 
     -- ** HtmlContent
-    HtmlContent (..),
-    newHtmlContent,
+    , HtmlContent (..)
+    , newHtmlContent
 
     -- ** Image
-    Image (..),
-    newImage,
+    , Image (..)
+    , newImage
 
     -- ** ImpressionMetricsRow
-    ImpressionMetricsRow (..),
-    newImpressionMetricsRow,
+    , ImpressionMetricsRow (..)
+    , newImpressionMetricsRow
 
     -- ** InventorySizeTargeting
-    InventorySizeTargeting (..),
-    newInventorySizeTargeting,
+    , InventorySizeTargeting (..)
+    , newInventorySizeTargeting
 
     -- ** ListBidMetricsResponse
-    ListBidMetricsResponse (..),
-    newListBidMetricsResponse,
+    , ListBidMetricsResponse (..)
+    , newListBidMetricsResponse
 
     -- ** ListBidResponseErrorsResponse
-    ListBidResponseErrorsResponse (..),
-    newListBidResponseErrorsResponse,
+    , ListBidResponseErrorsResponse (..)
+    , newListBidResponseErrorsResponse
 
     -- ** ListBidResponsesWithoutBidsResponse
-    ListBidResponsesWithoutBidsResponse (..),
-    newListBidResponsesWithoutBidsResponse,
+    , ListBidResponsesWithoutBidsResponse (..)
+    , newListBidResponsesWithoutBidsResponse
 
     -- ** ListClientUserInvitationsResponse
-    ListClientUserInvitationsResponse (..),
-    newListClientUserInvitationsResponse,
+    , ListClientUserInvitationsResponse (..)
+    , newListClientUserInvitationsResponse
 
     -- ** ListClientUsersResponse
-    ListClientUsersResponse (..),
-    newListClientUsersResponse,
+    , ListClientUsersResponse (..)
+    , newListClientUsersResponse
 
     -- ** ListClientsResponse
-    ListClientsResponse (..),
-    newListClientsResponse,
+    , ListClientsResponse (..)
+    , newListClientsResponse
 
     -- ** ListCreativeStatusBreakdownByCreativeResponse
-    ListCreativeStatusBreakdownByCreativeResponse (..),
-    newListCreativeStatusBreakdownByCreativeResponse,
+    , ListCreativeStatusBreakdownByCreativeResponse (..)
+    , newListCreativeStatusBreakdownByCreativeResponse
 
     -- ** ListCreativeStatusBreakdownByDetailResponse
-    ListCreativeStatusBreakdownByDetailResponse (..),
-    newListCreativeStatusBreakdownByDetailResponse,
+    , ListCreativeStatusBreakdownByDetailResponse (..)
+    , newListCreativeStatusBreakdownByDetailResponse
 
     -- ** ListCreativeStatusBreakdownByDetailResponse_DetailType
-    ListCreativeStatusBreakdownByDetailResponse_DetailType (..),
+    , ListCreativeStatusBreakdownByDetailResponse_DetailType (..)
 
     -- ** ListCreativesResponse
-    ListCreativesResponse (..),
-    newListCreativesResponse,
+    , ListCreativesResponse (..)
+    , newListCreativesResponse
 
     -- ** ListDealAssociationsResponse
-    ListDealAssociationsResponse (..),
-    newListDealAssociationsResponse,
+    , ListDealAssociationsResponse (..)
+    , newListDealAssociationsResponse
 
     -- ** ListFilterSetsResponse
-    ListFilterSetsResponse (..),
-    newListFilterSetsResponse,
+    , ListFilterSetsResponse (..)
+    , newListFilterSetsResponse
 
     -- ** ListFilteredBidRequestsResponse
-    ListFilteredBidRequestsResponse (..),
-    newListFilteredBidRequestsResponse,
+    , ListFilteredBidRequestsResponse (..)
+    , newListFilteredBidRequestsResponse
 
     -- ** ListFilteredBidsResponse
-    ListFilteredBidsResponse (..),
-    newListFilteredBidsResponse,
+    , ListFilteredBidsResponse (..)
+    , newListFilteredBidsResponse
 
     -- ** ListImpressionMetricsResponse
-    ListImpressionMetricsResponse (..),
-    newListImpressionMetricsResponse,
+    , ListImpressionMetricsResponse (..)
+    , newListImpressionMetricsResponse
 
     -- ** ListLosingBidsResponse
-    ListLosingBidsResponse (..),
-    newListLosingBidsResponse,
+    , ListLosingBidsResponse (..)
+    , newListLosingBidsResponse
 
     -- ** ListNonBillableWinningBidsResponse
-    ListNonBillableWinningBidsResponse (..),
-    newListNonBillableWinningBidsResponse,
+    , ListNonBillableWinningBidsResponse (..)
+    , newListNonBillableWinningBidsResponse
 
     -- ** ListProductsResponse
-    ListProductsResponse (..),
-    newListProductsResponse,
+    , ListProductsResponse (..)
+    , newListProductsResponse
 
     -- ** ListProposalsResponse
-    ListProposalsResponse (..),
-    newListProposalsResponse,
+    , ListProposalsResponse (..)
+    , newListProposalsResponse
 
     -- ** ListPublisherProfilesResponse
-    ListPublisherProfilesResponse (..),
-    newListPublisherProfilesResponse,
+    , ListPublisherProfilesResponse (..)
+    , newListPublisherProfilesResponse
 
     -- ** LocationContext
-    LocationContext (..),
-    newLocationContext,
+    , LocationContext (..)
+    , newLocationContext
 
     -- ** MarketplaceTargeting
-    MarketplaceTargeting (..),
-    newMarketplaceTargeting,
+    , MarketplaceTargeting (..)
+    , newMarketplaceTargeting
 
     -- ** MetricValue
-    MetricValue (..),
-    newMetricValue,
+    , MetricValue (..)
+    , newMetricValue
 
     -- ** MobileApplicationTargeting
-    MobileApplicationTargeting (..),
-    newMobileApplicationTargeting,
+    , MobileApplicationTargeting (..)
+    , newMobileApplicationTargeting
 
     -- ** Money
-    Money (..),
-    newMoney,
+    , Money (..)
+    , newMoney
 
     -- ** NativeContent
-    NativeContent (..),
-    newNativeContent,
+    , NativeContent (..)
+    , newNativeContent
 
     -- ** NonBillableWinningBidStatusRow
-    NonBillableWinningBidStatusRow (..),
-    newNonBillableWinningBidStatusRow,
+    , NonBillableWinningBidStatusRow (..)
+    , newNonBillableWinningBidStatusRow
 
     -- ** NonBillableWinningBidStatusRow_Status
-    NonBillableWinningBidStatusRow_Status (..),
+    , NonBillableWinningBidStatusRow_Status (..)
 
     -- ** NonGuaranteedAuctionTerms
-    NonGuaranteedAuctionTerms (..),
-    newNonGuaranteedAuctionTerms,
+    , NonGuaranteedAuctionTerms (..)
+    , newNonGuaranteedAuctionTerms
 
     -- ** NonGuaranteedFixedPriceTerms
-    NonGuaranteedFixedPriceTerms (..),
-    newNonGuaranteedFixedPriceTerms,
+    , NonGuaranteedFixedPriceTerms (..)
+    , newNonGuaranteedFixedPriceTerms
 
     -- ** Note
-    Note (..),
-    newNote,
+    , Note (..)
+    , newNote
 
     -- ** Note_CreatorRole
-    Note_CreatorRole (..),
+    , Note_CreatorRole (..)
 
     -- ** OperatingSystemTargeting
-    OperatingSystemTargeting (..),
-    newOperatingSystemTargeting,
+    , OperatingSystemTargeting (..)
+    , newOperatingSystemTargeting
 
     -- ** PauseProposalDealsRequest
-    PauseProposalDealsRequest (..),
-    newPauseProposalDealsRequest,
+    , PauseProposalDealsRequest (..)
+    , newPauseProposalDealsRequest
 
     -- ** PauseProposalRequest
-    PauseProposalRequest (..),
-    newPauseProposalRequest,
+    , PauseProposalRequest (..)
+    , newPauseProposalRequest
 
     -- ** PlacementTargeting
-    PlacementTargeting (..),
-    newPlacementTargeting,
+    , PlacementTargeting (..)
+    , newPlacementTargeting
 
     -- ** PlatformContext
-    PlatformContext (..),
-    newPlatformContext,
+    , PlatformContext (..)
+    , newPlatformContext
 
     -- ** PlatformContext_PlatformsItem
-    PlatformContext_PlatformsItem (..),
+    , PlatformContext_PlatformsItem (..)
 
     -- ** Price
-    Price (..),
-    newPrice,
+    , Price (..)
+    , newPrice
 
     -- ** Price_PricingType
-    Price_PricingType (..),
+    , Price_PricingType (..)
 
     -- ** PricePerBuyer
-    PricePerBuyer (..),
-    newPricePerBuyer,
+    , PricePerBuyer (..)
+    , newPricePerBuyer
 
     -- ** PrivateData
-    PrivateData (..),
-    newPrivateData,
+    , PrivateData (..)
+    , newPrivateData
 
     -- ** Product
-    Product (..),
-    newProduct,
+    , Product (..)
+    , newProduct
 
     -- ** Product_SyndicationProduct
-    Product_SyndicationProduct (..),
+    , Product_SyndicationProduct (..)
 
     -- ** Proposal
-    Proposal (..),
-    newProposal,
+    , Proposal (..)
+    , newProposal
 
     -- ** Proposal_LastUpdaterOrCommentorRole
-    Proposal_LastUpdaterOrCommentorRole (..),
+    , Proposal_LastUpdaterOrCommentorRole (..)
 
     -- ** Proposal_OriginatorRole
-    Proposal_OriginatorRole (..),
+    , Proposal_OriginatorRole (..)
 
     -- ** Proposal_ProposalState
-    Proposal_ProposalState (..),
+    , Proposal_ProposalState (..)
 
     -- ** PublisherProfile
-    PublisherProfile (..),
-    newPublisherProfile,
+    , PublisherProfile (..)
+    , newPublisherProfile
 
     -- ** PublisherProfileMobileApplication
-    PublisherProfileMobileApplication (..),
-    newPublisherProfileMobileApplication,
+    , PublisherProfileMobileApplication (..)
+    , newPublisherProfileMobileApplication
 
     -- ** PublisherProfileMobileApplication_AppStore
-    PublisherProfileMobileApplication_AppStore (..),
+    , PublisherProfileMobileApplication_AppStore (..)
 
     -- ** RealtimeTimeRange
-    RealtimeTimeRange (..),
-    newRealtimeTimeRange,
+    , RealtimeTimeRange (..)
+    , newRealtimeTimeRange
 
     -- ** RelativeDateRange
-    RelativeDateRange (..),
-    newRelativeDateRange,
+    , RelativeDateRange (..)
+    , newRelativeDateRange
 
     -- ** RemoveDealAssociationRequest
-    RemoveDealAssociationRequest (..),
-    newRemoveDealAssociationRequest,
+    , RemoveDealAssociationRequest (..)
+    , newRemoveDealAssociationRequest
 
     -- ** ResumeProposalDealsRequest
-    ResumeProposalDealsRequest (..),
-    newResumeProposalDealsRequest,
+    , ResumeProposalDealsRequest (..)
+    , newResumeProposalDealsRequest
 
     -- ** ResumeProposalRequest
-    ResumeProposalRequest (..),
-    newResumeProposalRequest,
+    , ResumeProposalRequest (..)
+    , newResumeProposalRequest
 
     -- ** RowDimensions
-    RowDimensions (..),
-    newRowDimensions,
+    , RowDimensions (..)
+    , newRowDimensions
 
     -- ** SecurityContext
-    SecurityContext (..),
-    newSecurityContext,
+    , SecurityContext (..)
+    , newSecurityContext
 
     -- ** SecurityContext_SecuritiesItem
-    SecurityContext_SecuritiesItem (..),
+    , SecurityContext_SecuritiesItem (..)
 
     -- ** Seller
-    Seller (..),
-    newSeller,
+    , Seller (..)
+    , newSeller
 
     -- ** ServingContext
-    ServingContext (..),
-    newServingContext,
+    , ServingContext (..)
+    , newServingContext
 
     -- ** ServingContext_All
-    ServingContext_All (..),
+    , ServingContext_All (..)
 
     -- ** ServingRestriction
-    ServingRestriction (..),
-    newServingRestriction,
+    , ServingRestriction (..)
+    , newServingRestriction
 
     -- ** ServingRestriction_Status
-    ServingRestriction_Status (..),
+    , ServingRestriction_Status (..)
 
     -- ** Size
-    Size (..),
-    newSize,
+    , Size (..)
+    , newSize
 
     -- ** StopWatchingCreativeRequest
-    StopWatchingCreativeRequest (..),
-    newStopWatchingCreativeRequest,
+    , StopWatchingCreativeRequest (..)
+    , newStopWatchingCreativeRequest
 
     -- ** TargetingCriteria
-    TargetingCriteria (..),
-    newTargetingCriteria,
+    , TargetingCriteria (..)
+    , newTargetingCriteria
 
     -- ** TargetingValue
-    TargetingValue (..),
-    newTargetingValue,
+    , TargetingValue (..)
+    , newTargetingValue
 
     -- ** TechnologyTargeting
-    TechnologyTargeting (..),
-    newTechnologyTargeting,
+    , TechnologyTargeting (..)
+    , newTechnologyTargeting
 
     -- ** TimeInterval
-    TimeInterval (..),
-    newTimeInterval,
+    , TimeInterval (..)
+    , newTimeInterval
 
     -- ** TimeOfDay'
-    TimeOfDay' (..),
-    newTimeOfDay,
+    , TimeOfDay' (..)
+    , newTimeOfDay
 
     -- ** UrlTargeting
-    UrlTargeting (..),
-    newUrlTargeting,
+    , UrlTargeting (..)
+    , newUrlTargeting
 
     -- ** VideoContent
-    VideoContent (..),
-    newVideoContent,
+    , VideoContent (..)
+    , newVideoContent
 
     -- ** VideoTargeting
-    VideoTargeting (..),
-    newVideoTargeting,
+    , VideoTargeting (..)
+    , newVideoTargeting
 
     -- ** VideoTargeting_ExcludedPositionTypesItem
-    VideoTargeting_ExcludedPositionTypesItem (..),
+    , VideoTargeting_ExcludedPositionTypesItem (..)
 
     -- ** VideoTargeting_TargetedPositionTypesItem
-    VideoTargeting_TargetedPositionTypesItem (..),
+    , VideoTargeting_TargetedPositionTypesItem (..)
 
     -- ** WatchCreativeRequest
-    WatchCreativeRequest (..),
-    newWatchCreativeRequest,
+    , WatchCreativeRequest (..)
+    , newWatchCreativeRequest
 
     -- ** AccountsCreativesCreateDuplicateIdMode
-    AccountsCreativesCreateDuplicateIdMode (..),
+    , AccountsCreativesCreateDuplicateIdMode (..)
 
     -- ** AccountsFinalizedProposalsListFilterSyntax
-    AccountsFinalizedProposalsListFilterSyntax (..),
+    , AccountsFinalizedProposalsListFilterSyntax (..)
 
     -- ** AccountsProposalsListFilterSyntax
-    AccountsProposalsListFilterSyntax (..),
-  )
-where
+    , AccountsProposalsListFilterSyntax (..)
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.AdExchangeBuyer2.Internal.Product
 import Gogol.AdExchangeBuyer2.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v2beta1@ of the Ad Exchange Buyer API II. This contains the host and root path used as a starting point for constructing service requests.
 adExchangeBuyer2Service :: Core.ServiceConfig
-adExchangeBuyer2Service =
-  Core.defaultService
-    (Core.ServiceId "adexchangebuyer2:v2beta1")
-    "adexchangebuyer.googleapis.com"
+adExchangeBuyer2Service
+  = Core.defaultService
+      (Core.ServiceId "adexchangebuyer2:v2beta1")
+      "adexchangebuyer.googleapis.com"
 
 -- | Manage your Ad Exchange buyer account configuration
 type Adexchange'Buyer = "https://www.googleapis.com/auth/adexchange.buyer"

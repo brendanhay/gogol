@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,100 +31,92 @@
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.accountUserProfiles.get@.
 module Gogol.DFAReporting.AccountUserProfiles.Get
-  ( -- * Resource
-    DFAReportingAccountUserProfilesGetResource,
+    (
+    -- * Resource
+      DFAReportingAccountUserProfilesGetResource
 
     -- ** Constructing a Request
-    DFAReportingAccountUserProfilesGet (..),
-    newDFAReportingAccountUserProfilesGet,
-  )
-where
+    , DFAReportingAccountUserProfilesGet (..)
+    , newDFAReportingAccountUserProfilesGet
+    ) where
 
-import Gogol.DFAReporting.Types
 import qualified Gogol.Prelude as Core
+import Gogol.DFAReporting.Types
 
 -- | A resource alias for @dfareporting.accountUserProfiles.get@ method which the
 -- 'DFAReportingAccountUserProfilesGet' request conforms to.
 type DFAReportingAccountUserProfilesGetResource =
-  "dfareporting"
-    Core.:> "v4"
-    Core.:> "userprofiles"
-    Core.:> Core.Capture "profileId" Core.Int64
-    Core.:> "accountUserProfiles"
-    Core.:> Core.Capture "id" Core.Int64
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] AccountUserProfile
+     "dfareporting" Core.:>
+       "v4" Core.:>
+         "userprofiles" Core.:>
+           Core.Capture "profileId" Core.Int64 Core.:>
+             "accountUserProfiles" Core.:>
+               Core.Capture "id" Core.Int64 Core.:>
+                 Core.QueryParam "$.xgafv" Xgafv Core.:>
+                   Core.QueryParam "access_token" Core.Text Core.:>
+                     Core.QueryParam "callback" Core.Text Core.:>
+                       Core.QueryParam "uploadType" Core.Text Core.:>
+                         Core.QueryParam "upload_protocol" Core.Text Core.:>
+                           Core.QueryParam "alt" Core.AltJSON Core.:>
+                             Core.Get '[Core.JSON] AccountUserProfile
 
 -- | Gets one account user profile by ID.
 --
 -- /See:/ 'newDFAReportingAccountUserProfilesGet' smart constructor.
 data DFAReportingAccountUserProfilesGet = DFAReportingAccountUserProfilesGet
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | User profile ID.
-    id :: Core.Int64,
-    -- | User profile ID associated with this request.
-    profileId :: Core.Int64,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | User profile ID.
+    , id :: Core.Int64
+      -- | User profile ID associated with this request.
+    , profileId :: Core.Int64
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DFAReportingAccountUserProfilesGet' with the minimum fields required to make a request.
-newDFAReportingAccountUserProfilesGet ::
-  -- |  User profile ID. See 'id'.
-  Core.Int64 ->
-  -- |  User profile ID associated with this request. See 'profileId'.
-  Core.Int64 ->
-  DFAReportingAccountUserProfilesGet
+newDFAReportingAccountUserProfilesGet 
+    ::  Core.Int64
+       -- ^  User profile ID. See 'id'.
+    -> Core.Int64
+       -- ^  User profile ID associated with this request. See 'profileId'.
+    -> DFAReportingAccountUserProfilesGet
 newDFAReportingAccountUserProfilesGet id profileId =
   DFAReportingAccountUserProfilesGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      id = id,
-      profileId = profileId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , id = id
+    , profileId = profileId
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingAccountUserProfilesGet
-  where
-  type
-    Rs DFAReportingAccountUserProfilesGet =
-      AccountUserProfile
-  type
-    Scopes DFAReportingAccountUserProfilesGet =
-      '[Dfatrafficking'FullControl]
-  requestClient DFAReportingAccountUserProfilesGet {..} =
-    go
-      profileId
-      id
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      dFAReportingService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy
-                DFAReportingAccountUserProfilesGetResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           DFAReportingAccountUserProfilesGet
+         where
+        type Rs DFAReportingAccountUserProfilesGet =
+             AccountUserProfile
+        type Scopes DFAReportingAccountUserProfilesGet =
+             '[Dfatrafficking'FullControl]
+        requestClient DFAReportingAccountUserProfilesGet{..}
+          = go profileId id xgafv accessToken callback
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              dFAReportingService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           DFAReportingAccountUserProfilesGetResource)
+                      Core.mempty
+

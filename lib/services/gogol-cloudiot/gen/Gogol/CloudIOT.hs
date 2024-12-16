@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,314 +31,314 @@
 --
 -- /See:/ <https://cloud.google.com/iot Cloud IoT API Reference>
 module Gogol.CloudIOT
-  ( -- * Configuration
-    cloudIOTService,
+    (
+    -- * Configuration
+      cloudIOTService
 
     -- * OAuth Scopes
-    CloudPlatform'FullControl,
-    Cloudiot'FullControl,
+    , CloudPlatform'FullControl
+    , Cloudiot'FullControl
 
     -- * Resources
 
     -- ** cloudiot.projects.locations.registries.bindDeviceToGateway
-    CloudIOTProjectsLocationsRegistriesBindDeviceToGatewayResource,
-    CloudIOTProjectsLocationsRegistriesBindDeviceToGateway (..),
-    newCloudIOTProjectsLocationsRegistriesBindDeviceToGateway,
+    , CloudIOTProjectsLocationsRegistriesBindDeviceToGatewayResource
+    , CloudIOTProjectsLocationsRegistriesBindDeviceToGateway (..)
+    , newCloudIOTProjectsLocationsRegistriesBindDeviceToGateway
 
     -- ** cloudiot.projects.locations.registries.create
-    CloudIOTProjectsLocationsRegistriesCreateResource,
-    CloudIOTProjectsLocationsRegistriesCreate (..),
-    newCloudIOTProjectsLocationsRegistriesCreate,
+    , CloudIOTProjectsLocationsRegistriesCreateResource
+    , CloudIOTProjectsLocationsRegistriesCreate (..)
+    , newCloudIOTProjectsLocationsRegistriesCreate
 
     -- ** cloudiot.projects.locations.registries.delete
-    CloudIOTProjectsLocationsRegistriesDeleteResource,
-    CloudIOTProjectsLocationsRegistriesDelete (..),
-    newCloudIOTProjectsLocationsRegistriesDelete,
+    , CloudIOTProjectsLocationsRegistriesDeleteResource
+    , CloudIOTProjectsLocationsRegistriesDelete (..)
+    , newCloudIOTProjectsLocationsRegistriesDelete
 
     -- ** cloudiot.projects.locations.registries.devices.configVersions.list
-    CloudIOTProjectsLocationsRegistriesDevicesConfigVersionsListResource,
-    CloudIOTProjectsLocationsRegistriesDevicesConfigVersionsList (..),
-    newCloudIOTProjectsLocationsRegistriesDevicesConfigVersionsList,
+    , CloudIOTProjectsLocationsRegistriesDevicesConfigVersionsListResource
+    , CloudIOTProjectsLocationsRegistriesDevicesConfigVersionsList (..)
+    , newCloudIOTProjectsLocationsRegistriesDevicesConfigVersionsList
 
     -- ** cloudiot.projects.locations.registries.devices.create
-    CloudIOTProjectsLocationsRegistriesDevicesCreateResource,
-    CloudIOTProjectsLocationsRegistriesDevicesCreate (..),
-    newCloudIOTProjectsLocationsRegistriesDevicesCreate,
+    , CloudIOTProjectsLocationsRegistriesDevicesCreateResource
+    , CloudIOTProjectsLocationsRegistriesDevicesCreate (..)
+    , newCloudIOTProjectsLocationsRegistriesDevicesCreate
 
     -- ** cloudiot.projects.locations.registries.devices.delete
-    CloudIOTProjectsLocationsRegistriesDevicesDeleteResource,
-    CloudIOTProjectsLocationsRegistriesDevicesDelete (..),
-    newCloudIOTProjectsLocationsRegistriesDevicesDelete,
+    , CloudIOTProjectsLocationsRegistriesDevicesDeleteResource
+    , CloudIOTProjectsLocationsRegistriesDevicesDelete (..)
+    , newCloudIOTProjectsLocationsRegistriesDevicesDelete
 
     -- ** cloudiot.projects.locations.registries.devices.get
-    CloudIOTProjectsLocationsRegistriesDevicesGetResource,
-    CloudIOTProjectsLocationsRegistriesDevicesGet (..),
-    newCloudIOTProjectsLocationsRegistriesDevicesGet,
+    , CloudIOTProjectsLocationsRegistriesDevicesGetResource
+    , CloudIOTProjectsLocationsRegistriesDevicesGet (..)
+    , newCloudIOTProjectsLocationsRegistriesDevicesGet
 
     -- ** cloudiot.projects.locations.registries.devices.list
-    CloudIOTProjectsLocationsRegistriesDevicesListResource,
-    CloudIOTProjectsLocationsRegistriesDevicesList (..),
-    newCloudIOTProjectsLocationsRegistriesDevicesList,
+    , CloudIOTProjectsLocationsRegistriesDevicesListResource
+    , CloudIOTProjectsLocationsRegistriesDevicesList (..)
+    , newCloudIOTProjectsLocationsRegistriesDevicesList
 
     -- ** cloudiot.projects.locations.registries.devices.modifyCloudToDeviceConfig
-    CloudIOTProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfigResource,
-    CloudIOTProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig (..),
-    newCloudIOTProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig,
+    , CloudIOTProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfigResource
+    , CloudIOTProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig (..)
+    , newCloudIOTProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig
 
     -- ** cloudiot.projects.locations.registries.devices.patch
-    CloudIOTProjectsLocationsRegistriesDevicesPatchResource,
-    CloudIOTProjectsLocationsRegistriesDevicesPatch (..),
-    newCloudIOTProjectsLocationsRegistriesDevicesPatch,
+    , CloudIOTProjectsLocationsRegistriesDevicesPatchResource
+    , CloudIOTProjectsLocationsRegistriesDevicesPatch (..)
+    , newCloudIOTProjectsLocationsRegistriesDevicesPatch
 
     -- ** cloudiot.projects.locations.registries.devices.sendCommandToDevice
-    CloudIOTProjectsLocationsRegistriesDevicesSendCommandToDeviceResource,
-    CloudIOTProjectsLocationsRegistriesDevicesSendCommandToDevice (..),
-    newCloudIOTProjectsLocationsRegistriesDevicesSendCommandToDevice,
+    , CloudIOTProjectsLocationsRegistriesDevicesSendCommandToDeviceResource
+    , CloudIOTProjectsLocationsRegistriesDevicesSendCommandToDevice (..)
+    , newCloudIOTProjectsLocationsRegistriesDevicesSendCommandToDevice
 
     -- ** cloudiot.projects.locations.registries.devices.states.list
-    CloudIOTProjectsLocationsRegistriesDevicesStatesListResource,
-    CloudIOTProjectsLocationsRegistriesDevicesStatesList (..),
-    newCloudIOTProjectsLocationsRegistriesDevicesStatesList,
+    , CloudIOTProjectsLocationsRegistriesDevicesStatesListResource
+    , CloudIOTProjectsLocationsRegistriesDevicesStatesList (..)
+    , newCloudIOTProjectsLocationsRegistriesDevicesStatesList
 
     -- ** cloudiot.projects.locations.registries.get
-    CloudIOTProjectsLocationsRegistriesGetResource,
-    CloudIOTProjectsLocationsRegistriesGet (..),
-    newCloudIOTProjectsLocationsRegistriesGet,
+    , CloudIOTProjectsLocationsRegistriesGetResource
+    , CloudIOTProjectsLocationsRegistriesGet (..)
+    , newCloudIOTProjectsLocationsRegistriesGet
 
     -- ** cloudiot.projects.locations.registries.getIamPolicy
-    CloudIOTProjectsLocationsRegistriesGetIamPolicyResource,
-    CloudIOTProjectsLocationsRegistriesGetIamPolicy (..),
-    newCloudIOTProjectsLocationsRegistriesGetIamPolicy,
+    , CloudIOTProjectsLocationsRegistriesGetIamPolicyResource
+    , CloudIOTProjectsLocationsRegistriesGetIamPolicy (..)
+    , newCloudIOTProjectsLocationsRegistriesGetIamPolicy
 
     -- ** cloudiot.projects.locations.registries.groups.devices.list
-    CloudIOTProjectsLocationsRegistriesGroupsDevicesListResource,
-    CloudIOTProjectsLocationsRegistriesGroupsDevicesList (..),
-    newCloudIOTProjectsLocationsRegistriesGroupsDevicesList,
+    , CloudIOTProjectsLocationsRegistriesGroupsDevicesListResource
+    , CloudIOTProjectsLocationsRegistriesGroupsDevicesList (..)
+    , newCloudIOTProjectsLocationsRegistriesGroupsDevicesList
 
     -- ** cloudiot.projects.locations.registries.groups.getIamPolicy
-    CloudIOTProjectsLocationsRegistriesGroupsGetIamPolicyResource,
-    CloudIOTProjectsLocationsRegistriesGroupsGetIamPolicy (..),
-    newCloudIOTProjectsLocationsRegistriesGroupsGetIamPolicy,
+    , CloudIOTProjectsLocationsRegistriesGroupsGetIamPolicyResource
+    , CloudIOTProjectsLocationsRegistriesGroupsGetIamPolicy (..)
+    , newCloudIOTProjectsLocationsRegistriesGroupsGetIamPolicy
 
     -- ** cloudiot.projects.locations.registries.groups.setIamPolicy
-    CloudIOTProjectsLocationsRegistriesGroupsSetIamPolicyResource,
-    CloudIOTProjectsLocationsRegistriesGroupsSetIamPolicy (..),
-    newCloudIOTProjectsLocationsRegistriesGroupsSetIamPolicy,
+    , CloudIOTProjectsLocationsRegistriesGroupsSetIamPolicyResource
+    , CloudIOTProjectsLocationsRegistriesGroupsSetIamPolicy (..)
+    , newCloudIOTProjectsLocationsRegistriesGroupsSetIamPolicy
 
     -- ** cloudiot.projects.locations.registries.groups.testIamPermissions
-    CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissionsResource,
-    CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions (..),
-    newCloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions,
+    , CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissionsResource
+    , CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions (..)
+    , newCloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions
 
     -- ** cloudiot.projects.locations.registries.list
-    CloudIOTProjectsLocationsRegistriesListResource,
-    CloudIOTProjectsLocationsRegistriesList (..),
-    newCloudIOTProjectsLocationsRegistriesList,
+    , CloudIOTProjectsLocationsRegistriesListResource
+    , CloudIOTProjectsLocationsRegistriesList (..)
+    , newCloudIOTProjectsLocationsRegistriesList
 
     -- ** cloudiot.projects.locations.registries.patch
-    CloudIOTProjectsLocationsRegistriesPatchResource,
-    CloudIOTProjectsLocationsRegistriesPatch (..),
-    newCloudIOTProjectsLocationsRegistriesPatch,
+    , CloudIOTProjectsLocationsRegistriesPatchResource
+    , CloudIOTProjectsLocationsRegistriesPatch (..)
+    , newCloudIOTProjectsLocationsRegistriesPatch
 
     -- ** cloudiot.projects.locations.registries.setIamPolicy
-    CloudIOTProjectsLocationsRegistriesSetIamPolicyResource,
-    CloudIOTProjectsLocationsRegistriesSetIamPolicy (..),
-    newCloudIOTProjectsLocationsRegistriesSetIamPolicy,
+    , CloudIOTProjectsLocationsRegistriesSetIamPolicyResource
+    , CloudIOTProjectsLocationsRegistriesSetIamPolicy (..)
+    , newCloudIOTProjectsLocationsRegistriesSetIamPolicy
 
     -- ** cloudiot.projects.locations.registries.testIamPermissions
-    CloudIOTProjectsLocationsRegistriesTestIamPermissionsResource,
-    CloudIOTProjectsLocationsRegistriesTestIamPermissions (..),
-    newCloudIOTProjectsLocationsRegistriesTestIamPermissions,
+    , CloudIOTProjectsLocationsRegistriesTestIamPermissionsResource
+    , CloudIOTProjectsLocationsRegistriesTestIamPermissions (..)
+    , newCloudIOTProjectsLocationsRegistriesTestIamPermissions
 
     -- ** cloudiot.projects.locations.registries.unbindDeviceFromGateway
-    CloudIOTProjectsLocationsRegistriesUnbindDeviceFromGatewayResource,
-    CloudIOTProjectsLocationsRegistriesUnbindDeviceFromGateway (..),
-    newCloudIOTProjectsLocationsRegistriesUnbindDeviceFromGateway,
+    , CloudIOTProjectsLocationsRegistriesUnbindDeviceFromGatewayResource
+    , CloudIOTProjectsLocationsRegistriesUnbindDeviceFromGateway (..)
+    , newCloudIOTProjectsLocationsRegistriesUnbindDeviceFromGateway
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** BindDeviceToGatewayRequest
-    BindDeviceToGatewayRequest (..),
-    newBindDeviceToGatewayRequest,
+    , BindDeviceToGatewayRequest (..)
+    , newBindDeviceToGatewayRequest
 
     -- ** BindDeviceToGatewayResponse
-    BindDeviceToGatewayResponse (..),
-    newBindDeviceToGatewayResponse,
+    , BindDeviceToGatewayResponse (..)
+    , newBindDeviceToGatewayResponse
 
     -- ** Binding
-    Binding (..),
-    newBinding,
+    , Binding (..)
+    , newBinding
 
     -- ** Device
-    Device (..),
-    newDevice,
+    , Device (..)
+    , newDevice
 
     -- ** Device_LogLevel
-    Device_LogLevel (..),
+    , Device_LogLevel (..)
 
     -- ** Device_Metadata
-    Device_Metadata (..),
-    newDevice_Metadata,
+    , Device_Metadata (..)
+    , newDevice_Metadata
 
     -- ** DeviceConfig
-    DeviceConfig (..),
-    newDeviceConfig,
+    , DeviceConfig (..)
+    , newDeviceConfig
 
     -- ** DeviceCredential
-    DeviceCredential (..),
-    newDeviceCredential,
+    , DeviceCredential (..)
+    , newDeviceCredential
 
     -- ** DeviceRegistry
-    DeviceRegistry (..),
-    newDeviceRegistry,
+    , DeviceRegistry (..)
+    , newDeviceRegistry
 
     -- ** DeviceRegistry_LogLevel
-    DeviceRegistry_LogLevel (..),
+    , DeviceRegistry_LogLevel (..)
 
     -- ** DeviceState
-    DeviceState (..),
-    newDeviceState,
+    , DeviceState (..)
+    , newDeviceState
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** EventNotificationConfig
-    EventNotificationConfig (..),
-    newEventNotificationConfig,
+    , EventNotificationConfig (..)
+    , newEventNotificationConfig
 
     -- ** Expr
-    Expr (..),
-    newExpr,
+    , Expr (..)
+    , newExpr
 
     -- ** GatewayConfig
-    GatewayConfig (..),
-    newGatewayConfig,
+    , GatewayConfig (..)
+    , newGatewayConfig
 
     -- ** GatewayConfig_GatewayAuthMethod
-    GatewayConfig_GatewayAuthMethod (..),
+    , GatewayConfig_GatewayAuthMethod (..)
 
     -- ** GatewayConfig_GatewayType
-    GatewayConfig_GatewayType (..),
+    , GatewayConfig_GatewayType (..)
 
     -- ** GetIamPolicyRequest
-    GetIamPolicyRequest (..),
-    newGetIamPolicyRequest,
+    , GetIamPolicyRequest (..)
+    , newGetIamPolicyRequest
 
     -- ** GetPolicyOptions
-    GetPolicyOptions (..),
-    newGetPolicyOptions,
+    , GetPolicyOptions (..)
+    , newGetPolicyOptions
 
     -- ** HttpConfig
-    HttpConfig (..),
-    newHttpConfig,
+    , HttpConfig (..)
+    , newHttpConfig
 
     -- ** HttpConfig_HttpEnabledState
-    HttpConfig_HttpEnabledState (..),
+    , HttpConfig_HttpEnabledState (..)
 
     -- ** ListDeviceConfigVersionsResponse
-    ListDeviceConfigVersionsResponse (..),
-    newListDeviceConfigVersionsResponse,
+    , ListDeviceConfigVersionsResponse (..)
+    , newListDeviceConfigVersionsResponse
 
     -- ** ListDeviceRegistriesResponse
-    ListDeviceRegistriesResponse (..),
-    newListDeviceRegistriesResponse,
+    , ListDeviceRegistriesResponse (..)
+    , newListDeviceRegistriesResponse
 
     -- ** ListDeviceStatesResponse
-    ListDeviceStatesResponse (..),
-    newListDeviceStatesResponse,
+    , ListDeviceStatesResponse (..)
+    , newListDeviceStatesResponse
 
     -- ** ListDevicesResponse
-    ListDevicesResponse (..),
-    newListDevicesResponse,
+    , ListDevicesResponse (..)
+    , newListDevicesResponse
 
     -- ** ModifyCloudToDeviceConfigRequest
-    ModifyCloudToDeviceConfigRequest (..),
-    newModifyCloudToDeviceConfigRequest,
+    , ModifyCloudToDeviceConfigRequest (..)
+    , newModifyCloudToDeviceConfigRequest
 
     -- ** MqttConfig
-    MqttConfig (..),
-    newMqttConfig,
+    , MqttConfig (..)
+    , newMqttConfig
 
     -- ** MqttConfig_MqttEnabledState
-    MqttConfig_MqttEnabledState (..),
+    , MqttConfig_MqttEnabledState (..)
 
     -- ** Policy
-    Policy (..),
-    newPolicy,
+    , Policy (..)
+    , newPolicy
 
     -- ** PublicKeyCertificate
-    PublicKeyCertificate (..),
-    newPublicKeyCertificate,
+    , PublicKeyCertificate (..)
+    , newPublicKeyCertificate
 
     -- ** PublicKeyCertificate_Format
-    PublicKeyCertificate_Format (..),
+    , PublicKeyCertificate_Format (..)
 
     -- ** PublicKeyCredential
-    PublicKeyCredential (..),
-    newPublicKeyCredential,
+    , PublicKeyCredential (..)
+    , newPublicKeyCredential
 
     -- ** PublicKeyCredential_Format
-    PublicKeyCredential_Format (..),
+    , PublicKeyCredential_Format (..)
 
     -- ** RegistryCredential
-    RegistryCredential (..),
-    newRegistryCredential,
+    , RegistryCredential (..)
+    , newRegistryCredential
 
     -- ** SendCommandToDeviceRequest
-    SendCommandToDeviceRequest (..),
-    newSendCommandToDeviceRequest,
+    , SendCommandToDeviceRequest (..)
+    , newSendCommandToDeviceRequest
 
     -- ** SendCommandToDeviceResponse
-    SendCommandToDeviceResponse (..),
-    newSendCommandToDeviceResponse,
+    , SendCommandToDeviceResponse (..)
+    , newSendCommandToDeviceResponse
 
     -- ** SetIamPolicyRequest
-    SetIamPolicyRequest (..),
-    newSetIamPolicyRequest,
+    , SetIamPolicyRequest (..)
+    , newSetIamPolicyRequest
 
     -- ** StateNotificationConfig
-    StateNotificationConfig (..),
-    newStateNotificationConfig,
+    , StateNotificationConfig (..)
+    , newStateNotificationConfig
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** TestIamPermissionsRequest
-    TestIamPermissionsRequest (..),
-    newTestIamPermissionsRequest,
+    , TestIamPermissionsRequest (..)
+    , newTestIamPermissionsRequest
 
     -- ** TestIamPermissionsResponse
-    TestIamPermissionsResponse (..),
-    newTestIamPermissionsResponse,
+    , TestIamPermissionsResponse (..)
+    , newTestIamPermissionsResponse
 
     -- ** UnbindDeviceFromGatewayRequest
-    UnbindDeviceFromGatewayRequest (..),
-    newUnbindDeviceFromGatewayRequest,
+    , UnbindDeviceFromGatewayRequest (..)
+    , newUnbindDeviceFromGatewayRequest
 
     -- ** UnbindDeviceFromGatewayResponse
-    UnbindDeviceFromGatewayResponse (..),
-    newUnbindDeviceFromGatewayResponse,
+    , UnbindDeviceFromGatewayResponse (..)
+    , newUnbindDeviceFromGatewayResponse
 
     -- ** X509CertificateDetails
-    X509CertificateDetails (..),
-    newX509CertificateDetails,
+    , X509CertificateDetails (..)
+    , newX509CertificateDetails
 
     -- ** ProjectsLocationsRegistriesDevicesListGatewayListOptionsGatewayType
-    ProjectsLocationsRegistriesDevicesListGatewayListOptionsGatewayType (..),
+    , ProjectsLocationsRegistriesDevicesListGatewayListOptionsGatewayType (..)
 
     -- ** ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType
-    ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType (..),
-  )
-where
+    , ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType (..)
+    ) where
 
 import Gogol.CloudIOT.Projects.Locations.Registries.BindDeviceToGateway
 import Gogol.CloudIOT.Projects.Locations.Registries.Create

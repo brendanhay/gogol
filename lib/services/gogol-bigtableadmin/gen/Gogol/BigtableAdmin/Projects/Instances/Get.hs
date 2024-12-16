@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,94 +31,83 @@
 --
 -- /See:/ <https://cloud.google.com/bigtable/ Cloud Bigtable Admin API Reference> for @bigtableadmin.projects.instances.get@.
 module Gogol.BigtableAdmin.Projects.Instances.Get
-  ( -- * Resource
-    BigtableAdminProjectsInstancesGetResource,
+    (
+    -- * Resource
+      BigtableAdminProjectsInstancesGetResource
 
     -- ** Constructing a Request
-    BigtableAdminProjectsInstancesGet (..),
-    newBigtableAdminProjectsInstancesGet,
-  )
-where
+    , BigtableAdminProjectsInstancesGet (..)
+    , newBigtableAdminProjectsInstancesGet
+    ) where
 
-import Gogol.BigtableAdmin.Types
 import qualified Gogol.Prelude as Core
+import Gogol.BigtableAdmin.Types
 
 -- | A resource alias for @bigtableadmin.projects.instances.get@ method which the
 -- 'BigtableAdminProjectsInstancesGet' request conforms to.
 type BigtableAdminProjectsInstancesGetResource =
-  "v2"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Instance
+     "v2" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Get '[Core.JSON] Instance
 
 -- | Gets information about an instance.
 --
 -- /See:/ 'newBigtableAdminProjectsInstancesGet' smart constructor.
 data BigtableAdminProjectsInstancesGet = BigtableAdminProjectsInstancesGet
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. The unique name of the requested instance. Values are of the form @projects\/{project}\/instances\/{instance}@.
-    name :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The unique name of the requested instance. Values are of the form @projects\/{project}\/instances\/{instance}@.
+    , name :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'BigtableAdminProjectsInstancesGet' with the minimum fields required to make a request.
-newBigtableAdminProjectsInstancesGet ::
-  -- |  Required. The unique name of the requested instance. Values are of the form @projects\/{project}\/instances\/{instance}@. See 'name'.
-  Core.Text ->
-  BigtableAdminProjectsInstancesGet
+newBigtableAdminProjectsInstancesGet 
+    ::  Core.Text
+       -- ^  Required. The unique name of the requested instance. Values are of the form @projects\/{project}\/instances\/{instance}@. See 'name'.
+    -> BigtableAdminProjectsInstancesGet
 newBigtableAdminProjectsInstancesGet name =
   BigtableAdminProjectsInstancesGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    BigtableAdminProjectsInstancesGet
-  where
-  type Rs BigtableAdminProjectsInstancesGet = Instance
-  type
-    Scopes BigtableAdminProjectsInstancesGet =
-      '[ Bigtable'Admin,
-         Bigtable'Admin'Cluster,
-         Bigtable'Admin'Instance,
-         CloudBigtable'Admin,
-         CloudBigtable'Admin'Cluster,
-         CloudPlatform'FullControl,
-         CloudPlatform'ReadOnly
-       ]
-  requestClient BigtableAdminProjectsInstancesGet {..} =
-    go
-      name
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      bigtableAdminService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy BigtableAdminProjectsInstancesGetResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           BigtableAdminProjectsInstancesGet
+         where
+        type Rs BigtableAdminProjectsInstancesGet = Instance
+        type Scopes BigtableAdminProjectsInstancesGet =
+             '[Bigtable'Admin, Bigtable'Admin'Cluster,
+               Bigtable'Admin'Instance, CloudBigtable'Admin,
+               CloudBigtable'Admin'Cluster,
+               CloudPlatform'FullControl, CloudPlatform'ReadOnly]
+        requestClient BigtableAdminProjectsInstancesGet{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              bigtableAdminService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy BigtableAdminProjectsInstancesGetResource)
+                      Core.mempty
+

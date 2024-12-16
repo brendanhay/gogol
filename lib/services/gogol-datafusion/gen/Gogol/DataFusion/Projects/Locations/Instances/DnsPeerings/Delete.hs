@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,93 +31,86 @@
 --
 -- /See:/ <https://cloud.google.com/data-fusion/docs Cloud Data Fusion API Reference> for @datafusion.projects.locations.instances.dnsPeerings.delete@.
 module Gogol.DataFusion.Projects.Locations.Instances.DnsPeerings.Delete
-  ( -- * Resource
-    DataFusionProjectsLocationsInstancesDnsPeeringsDeleteResource,
+    (
+    -- * Resource
+      DataFusionProjectsLocationsInstancesDnsPeeringsDeleteResource
 
     -- ** Constructing a Request
-    DataFusionProjectsLocationsInstancesDnsPeeringsDelete (..),
-    newDataFusionProjectsLocationsInstancesDnsPeeringsDelete,
-  )
-where
+    , DataFusionProjectsLocationsInstancesDnsPeeringsDelete (..)
+    , newDataFusionProjectsLocationsInstancesDnsPeeringsDelete
+    ) where
 
-import Gogol.DataFusion.Types
 import qualified Gogol.Prelude as Core
+import Gogol.DataFusion.Types
 
 -- | A resource alias for @datafusion.projects.locations.instances.dnsPeerings.delete@ method which the
 -- 'DataFusionProjectsLocationsInstancesDnsPeeringsDelete' request conforms to.
-type DataFusionProjectsLocationsInstancesDnsPeeringsDeleteResource =
-  "v1"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] Empty
+type DataFusionProjectsLocationsInstancesDnsPeeringsDeleteResource
+     =
+     "v1" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Delete '[Core.JSON] Empty
 
 -- | Deletes DNS peering on the given resource.
 --
 -- /See:/ 'newDataFusionProjectsLocationsInstancesDnsPeeringsDelete' smart constructor.
 data DataFusionProjectsLocationsInstancesDnsPeeringsDelete = DataFusionProjectsLocationsInstancesDnsPeeringsDelete
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. The name of the DNS peering zone to delete. Format: projects\/{project}\/locations\/{location}\/instances\/{instance}\/dnsPeerings\/{dns_peering}
-    name :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The name of the DNS peering zone to delete. Format: projects\/{project}\/locations\/{location}\/instances\/{instance}\/dnsPeerings\/{dns_peering}
+    , name :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DataFusionProjectsLocationsInstancesDnsPeeringsDelete' with the minimum fields required to make a request.
-newDataFusionProjectsLocationsInstancesDnsPeeringsDelete ::
-  -- |  Required. The name of the DNS peering zone to delete. Format: projects\/{project}\/locations\/{location}\/instances\/{instance}\/dnsPeerings\/{dns_peering} See 'name'.
-  Core.Text ->
-  DataFusionProjectsLocationsInstancesDnsPeeringsDelete
+newDataFusionProjectsLocationsInstancesDnsPeeringsDelete 
+    ::  Core.Text
+       -- ^  Required. The name of the DNS peering zone to delete. Format: projects\/{project}\/locations\/{location}\/instances\/{instance}\/dnsPeerings\/{dns_peering} See 'name'.
+    -> DataFusionProjectsLocationsInstancesDnsPeeringsDelete
 newDataFusionProjectsLocationsInstancesDnsPeeringsDelete name =
   DataFusionProjectsLocationsInstancesDnsPeeringsDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DataFusionProjectsLocationsInstancesDnsPeeringsDelete
-  where
-  type
-    Rs
-      DataFusionProjectsLocationsInstancesDnsPeeringsDelete =
-      Empty
-  type
-    Scopes
-      DataFusionProjectsLocationsInstancesDnsPeeringsDelete =
-      '[CloudPlatform'FullControl]
-  requestClient
-    DataFusionProjectsLocationsInstancesDnsPeeringsDelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dataFusionService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DataFusionProjectsLocationsInstancesDnsPeeringsDeleteResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           DataFusionProjectsLocationsInstancesDnsPeeringsDelete
+         where
+        type Rs
+               DataFusionProjectsLocationsInstancesDnsPeeringsDelete
+             = Empty
+        type Scopes
+               DataFusionProjectsLocationsInstancesDnsPeeringsDelete
+             = '[CloudPlatform'FullControl]
+        requestClient
+          DataFusionProjectsLocationsInstancesDnsPeeringsDelete{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              dataFusionService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           DataFusionProjectsLocationsInstancesDnsPeeringsDeleteResource)
+                      Core.mempty
+

@@ -137,12 +137,22 @@
           "parameterOrder": [],
           "parameters": {
             "fullyQualifiedName": {
-              "description": "Fully qualified name (FQN) of the resource. FQNs take two forms: * For non-regionalized resources: `{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}` * For regionalized resources: `{SYSTEM}:{PROJECT}.{LOCATION_ID}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}` Example for a DPMS table: `dataproc_metastore:{PROJECT_ID}.{LOCATION_ID}.{INSTANCE_ID}.{DATABASE_ID}.{TABLE_ID}`",
+              "description": "[Fully Qualified Name (FQN)](https://cloud.google.com//data-catalog/docs/fully-qualified-names) of the resource. FQNs take two forms: * For non-regionalized resources: `{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}` * For regionalized resources: `{SYSTEM}:{PROJECT}.{LOCATION_ID}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}` Example for a DPMS table: `dataproc_metastore:{PROJECT_ID}.{LOCATION_ID}.{INSTANCE_ID}.{DATABASE_ID}.{TABLE_ID}`",
               "location": "query",
               "type": "string"
             },
             "linkedResource": {
               "description": "The full name of the Google Cloud Platform resource the Data Catalog entry represents. For more information, see [Full Resource Name] (https://cloud.google.com/apis/design/resource_names#full_resource_name). Full names are case-sensitive. For example: * `//bigquery.googleapis.com/projects/{PROJECT_ID}/datasets/{DATASET_ID}/tables/{TABLE_ID}` * `//pubsub.googleapis.com/projects/{PROJECT_ID}/topics/{TOPIC_ID}`",
+              "location": "query",
+              "type": "string"
+            },
+            "location": {
+              "description": "Location where the lookup should be performed. Required to lookup entry that is not a part of `DPMS` or `DATAPLEX` `integrated_system` using its `fully_qualified_name`. Ignored in other cases.",
+              "location": "query",
+              "type": "string"
+            },
+            "project": {
+              "description": "Project where the lookup should be performed. Required to lookup entry that is not a part of `DPMS` or `DATAPLEX` `integrated_system` using its `fully_qualified_name`. Ignored in other cases.",
               "location": "query",
               "type": "string"
             },
@@ -162,9 +172,150 @@
         }
       }
     },
+    "organizations": {
+      "resources": {
+        "locations": {
+          "methods": {
+            "retrieveConfig": {
+              "description": "Retrieves the configuration related to the migration from Data Catalog to Dataplex for a specific organization, including all the projects under it which have a separate configuration set.",
+              "flatPath": "v1/organizations/{organizationsId}/locations/{locationsId}:retrieveConfig",
+              "httpMethod": "GET",
+              "id": "datacatalog.organizations.locations.retrieveConfig",
+              "parameterOrder": [
+                "name"
+              ],
+              "parameters": {
+                "name": {
+                  "description": "Required. The organization whose config is being retrieved.",
+                  "location": "path",
+                  "pattern": "^organizations/[^/]+/locations/[^/]+$",
+                  "required": true,
+                  "type": "string"
+                }
+              },
+              "path": "v1/{+name}:retrieveConfig",
+              "response": {
+                "$ref": "GoogleCloudDatacatalogV1OrganizationConfig"
+              },
+              "scopes": [
+                "https://www.googleapis.com/auth/cloud-platform"
+              ]
+            },
+            "retrieveEffectiveConfig": {
+              "description": "Retrieves the effective configuration related to the migration from Data Catalog to Dataplex for a specific organization or project. If there is no specific configuration set for the resource, the setting is checked hierarchicahlly through the ancestors of the resource, starting from the resource itself.",
+              "flatPath": "v1/organizations/{organizationsId}/locations/{locationsId}:retrieveEffectiveConfig",
+              "httpMethod": "GET",
+              "id": "datacatalog.organizations.locations.retrieveEffectiveConfig",
+              "parameterOrder": [
+                "name"
+              ],
+              "parameters": {
+                "name": {
+                  "description": "Required. The resource whose effective config is being retrieved.",
+                  "location": "path",
+                  "pattern": "^organizations/[^/]+/locations/[^/]+$",
+                  "required": true,
+                  "type": "string"
+                }
+              },
+              "path": "v1/{+name}:retrieveEffectiveConfig",
+              "response": {
+                "$ref": "GoogleCloudDatacatalogV1MigrationConfig"
+              },
+              "scopes": [
+                "https://www.googleapis.com/auth/cloud-platform"
+              ]
+            },
+            "setConfig": {
+              "description": "Sets the configuration related to the migration to Dataplex for an organization or project.",
+              "flatPath": "v1/organizations/{organizationsId}/locations/{locationsId}:setConfig",
+              "httpMethod": "POST",
+              "id": "datacatalog.organizations.locations.setConfig",
+              "parameterOrder": [
+                "name"
+              ],
+              "parameters": {
+                "name": {
+                  "description": "Required. The organization or project whose config is being specified.",
+                  "location": "path",
+                  "pattern": "^organizations/[^/]+/locations/[^/]+$",
+                  "required": true,
+                  "type": "string"
+                }
+              },
+              "path": "v1/{+name}:setConfig",
+              "request": {
+                "$ref": "GoogleCloudDatacatalogV1SetConfigRequest"
+              },
+              "response": {
+                "$ref": "GoogleCloudDatacatalogV1MigrationConfig"
+              },
+              "scopes": [
+                "https://www.googleapis.com/auth/cloud-platform"
+              ]
+            }
+          }
+        }
+      }
+    },
     "projects": {
       "resources": {
         "locations": {
+          "methods": {
+            "retrieveEffectiveConfig": {
+              "description": "Retrieves the effective configuration related to the migration from Data Catalog to Dataplex for a specific organization or project. If there is no specific configuration set for the resource, the setting is checked hierarchicahlly through the ancestors of the resource, starting from the resource itself.",
+              "flatPath": "v1/projects/{projectsId}/locations/{locationsId}:retrieveEffectiveConfig",
+              "httpMethod": "GET",
+              "id": "datacatalog.projects.locations.retrieveEffectiveConfig",
+              "parameterOrder": [
+                "name"
+              ],
+              "parameters": {
+                "name": {
+                  "description": "Required. The resource whose effective config is being retrieved.",
+                  "location": "path",
+                  "pattern": "^projects/[^/]+/locations/[^/]+$",
+                  "required": true,
+                  "type": "string"
+                }
+              },
+              "path": "v1/{+name}:retrieveEffectiveConfig",
+              "response": {
+                "$ref": "GoogleCloudDatacatalogV1MigrationConfig"
+              },
+              "scopes": [
+                "https://www.googleapis.com/auth/cloud-platform"
+              ]
+            },
+            "setConfig": {
+              "description": "Sets the configuration related to the migration to Dataplex for an organization or project.",
+              "flatPath": "v1/projects/{projectsId}/locations/{locationsId}:setConfig",
+              "httpMethod": "POST",
+              "id": "datacatalog.projects.locations.setConfig",
+              "parameterOrder": [
+                "name"
+              ],
+              "parameters": {
+                "name": {
+                  "description": "Required. The organization or project whose config is being specified.",
+                  "location": "path",
+                  "pattern": "^projects/[^/]+/locations/[^/]+$",
+                  "required": true,
+                  "type": "string"
+                }
+              },
+              "path": "v1/{+name}:setConfig",
+              "request": {
+                "$ref": "GoogleCloudDatacatalogV1SetConfigRequest"
+              },
+              "response": {
+                "$ref": "GoogleCloudDatacatalogV1MigrationConfig"
+              },
+              "scopes": [
+                "https://www.googleapis.com/auth/cloud-platform"
+              ]
+            }
+          },
           "resources": {
             "entryGroups": {
               "methods": {
@@ -336,7 +487,7 @@
                   ],
                   "parameters": {
                     "name": {
-                      "description": "The resource name of the entry group in URL format. Note: The entry group itself and its child resources might not be stored in the location specified in its name.",
+                      "description": "Identifier. The resource name of the entry group in URL format. Note: The entry group itself and its child resources might not be stored in the location specified in its name.",
                       "location": "path",
                       "pattern": "^projects/[^/]+/locations/[^/]+/entryGroups/[^/]+$",
                       "required": true,
@@ -667,7 +818,7 @@
                       ],
                       "parameters": {
                         "name": {
-                          "description": "Output only. The resource name of an entry in URL format. Note: The entry itself and its child resources might not be stored in the location specified in its name.",
+                          "description": "Output only. Identifier. The resource name of an entry in URL format. Note: The entry itself and its child resources might not be stored in the location specified in its name.",
                           "location": "path",
                           "pattern": "^projects/[^/]+/locations/[^/]+/entryGroups/[^/]+/entries/[^/]+$",
                           "required": true,
@@ -878,7 +1029,7 @@
                           ],
                           "parameters": {
                             "name": {
-                              "description": "The resource name of the tag in URL format where tag ID is a system-generated identifier. Note: The tag itself might not be stored in the location specified in its name.",
+                              "description": "Identifier. The resource name of the tag in URL format where tag ID is a system-generated identifier. Note: The tag itself might not be stored in the location specified in its name.",
                               "location": "path",
                               "pattern": "^projects/[^/]+/locations/[^/]+/entryGroups/[^/]+/entries/[^/]+/tags/[^/]+$",
                               "required": true,
@@ -1035,7 +1186,7 @@
                       ],
                       "parameters": {
                         "name": {
-                          "description": "The resource name of the tag in URL format where tag ID is a system-generated identifier. Note: The tag itself might not be stored in the location specified in its name.",
+                          "description": "Identifier. The resource name of the tag in URL format where tag ID is a system-generated identifier. Note: The tag itself might not be stored in the location specified in its name.",
                           "location": "path",
                           "pattern": "^projects/[^/]+/locations/[^/]+/entryGroups/[^/]+/tags/[^/]+$",
                           "required": true,
@@ -1066,7 +1217,7 @@
             "operations": {
               "methods": {
                 "cancel": {
-                  "description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.",
+                  "description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of `1`, corresponding to `Code.CANCELLED`.",
                   "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/operations/{operationsId}:cancel",
                   "httpMethod": "POST",
                   "id": "datacatalog.projects.locations.operations.cancel",
@@ -1311,7 +1462,7 @@
                   ],
                   "parameters": {
                     "name": {
-                      "description": "The resource name of the tag template in URL format. Note: The tag template itself and its child resources might not be stored in the location specified in its name.",
+                      "description": "Identifier. The resource name of the tag template in URL format. Note: The tag template itself and its child resources might not be stored in the location specified in its name.",
                       "location": "path",
                       "pattern": "^projects/[^/]+/locations/[^/]+/tagTemplates/[^/]+$",
                       "required": true,
@@ -1781,7 +1932,7 @@
                   ],
                   "parameters": {
                     "name": {
-                      "description": "Output only. Resource name of this taxonomy in URL format. Note: Policy tag manager generates unique taxonomy IDs.",
+                      "description": "Identifier. Resource name of this taxonomy in URL format. Note: Policy tag manager generates unique taxonomy IDs.",
                       "location": "path",
                       "pattern": "^projects/[^/]+/locations/[^/]+/taxonomies/[^/]+$",
                       "required": true,
@@ -2045,7 +2196,7 @@
                       ],
                       "parameters": {
                         "name": {
-                          "description": "Output only. Resource name of this policy tag in the URL format. The policy tag manager generates unique taxonomy IDs and policy tag IDs.",
+                          "description": "Identifier. Resource name of this policy tag in the URL format. The policy tag manager generates unique taxonomy IDs and policy tag IDs.",
                           "location": "path",
                           "pattern": "^projects/[^/]+/locations/[^/]+/taxonomies/[^/]+/policyTags/[^/]+$",
                           "required": true,
@@ -2134,7 +2285,7 @@
       }
     }
   },
-  "revision": "20230317",
+  "revision": "20241202",
   "rootUrl": "https://datacatalog.googleapis.com/",
   "schemas": {
     "Binding": {
@@ -2146,14 +2297,14 @@
           "description": "The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies)."
         },
         "members": {
-          "description": "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]`: An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts). For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding.",
+          "description": "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]`: An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts). For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. * `principal://iam.googleapis.com/locations/global/workforcePools/{pool_id}/subject/{subject_attribute_value}`: A single identity in a workforce identity pool. * `principalSet://iam.googleapis.com/locations/global/workforcePools/{pool_id}/group/{group_id}`: All workforce identities in a group. * `principalSet://iam.googleapis.com/locations/global/workforcePools/{pool_id}/attribute.{attribute_name}/{attribute_value}`: All workforce identities with a specific attribute value. * `principalSet://iam.googleapis.com/locations/global/workforcePools/{pool_id}/*`: All identities in a workforce identity pool. * `principal://iam.googleapis.com/projects/{project_number}/locations/global/workloadIdentityPools/{pool_id}/subject/{subject_attribute_value}`: A single identity in a workload identity pool. * `principalSet://iam.googleapis.com/projects/{project_number}/locations/global/workloadIdentityPools/{pool_id}/group/{group_id}`: A workload identity pool group. * `principalSet://iam.googleapis.com/projects/{project_number}/locations/global/workloadIdentityPools/{pool_id}/attribute.{attribute_name}/{attribute_value}`: All identities in a workload identity pool with a certain attribute. * `principalSet://iam.googleapis.com/projects/{project_number}/locations/global/workloadIdentityPools/{pool_id}/*`: All identities in a workload identity pool. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. * `deleted:principal://iam.googleapis.com/locations/global/workforcePools/{pool_id}/subject/{subject_attribute_value}`: Deleted single identity in a workforce identity pool. For example, `deleted:principal://iam.googleapis.com/locations/global/workforcePools/my-pool-id/subject/my-subject-attribute-value`.",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "role": {
-          "description": "Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.",
+          "description": "Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`. For an overview of the IAM roles and permissions, see the [IAM documentation](https://cloud.google.com/iam/docs/roles-overview). For a list of the available pre-defined roles, see [here](https://cloud.google.com/iam/docs/understanding-roles).",
           "type": "string"
         }
       },
@@ -2455,6 +2606,10 @@
           "format": "int32",
           "type": "integer"
         },
+        "rangeElementType": {
+          "$ref": "GoogleCloudDatacatalogV1ColumnSchemaFieldElementType",
+          "description": "Optional. The subtype of the RANGE, if the type of this field is RANGE. If the type is RANGE, this field is required. Possible values for the field element type of a RANGE include: * DATE * DATETIME * TIMESTAMP"
+        },
         "subcolumns": {
           "description": "Optional. Schema of sub-columns. A column can have zero or more sub-columns.",
           "items": {
@@ -2464,6 +2619,17 @@
         },
         "type": {
           "description": "Required. Type of the column. Must be a UTF-8 string with the maximum size of 128 bytes.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudDatacatalogV1ColumnSchemaFieldElementType": {
+      "description": "Represents the type of a field element.",
+      "id": "GoogleCloudDatacatalogV1ColumnSchemaFieldElementType",
+      "properties": {
+        "type": {
+          "description": "Required. The type of a field element. See ColumnSchema.type.",
           "type": "string"
         }
       },
@@ -2679,7 +2845,8 @@
             "CLOUD_SPANNER",
             "CLOUD_BIGTABLE",
             "CLOUD_SQL",
-            "LOOKER"
+            "LOOKER",
+            "VERTEX_AI"
           ],
           "enumDescriptions": [
             "Default unknown system.",
@@ -2690,7 +2857,8 @@
             "Cloud Spanner",
             "Cloud Bigtable",
             "Cloud Sql",
-            "Looker"
+            "Looker",
+            "Vertex AI"
           ],
           "type": "string"
         }
@@ -2753,6 +2921,17 @@
       },
       "type": "object"
     },
+    "GoogleCloudDatacatalogV1DatasetSpec": {
+      "description": "Specification that applies to a dataset. Valid only for entries with the `DATASET` type.",
+      "id": "GoogleCloudDatacatalogV1DatasetSpec",
+      "properties": {
+        "vertexDatasetSpec": {
+          "$ref": "GoogleCloudDatacatalogV1VertexDatasetSpec",
+          "description": "Vertex AI Dataset specific fields"
+        }
+      },
+      "type": "object"
+    },
     "GoogleCloudDatacatalogV1DumpItem": {
       "description": "Wrapper for any item that can be contained in the dump.",
       "id": "GoogleCloudDatacatalogV1DumpItem",
@@ -2799,6 +2978,10 @@
           "$ref": "GoogleCloudDatacatalogV1DatabaseTableSpec",
           "description": "Specification that applies to a table resource. Valid only for entries with the `TABLE` or `EXPLORE` type."
         },
+        "datasetSpec": {
+          "$ref": "GoogleCloudDatacatalogV1DatasetSpec",
+          "description": "Specification that applies to a dataset."
+        },
         "description": {
           "description": "Entry description that can consist of several sentences or paragraphs that describe entry contents. The description must not contain Unicode non-characters as well as C0 and C1 control codes except tabs (HT), new lines (LF), carriage returns (CR), and page breaks (FF). The maximum size is 2000 bytes when encoded in UTF-8. Default value is an empty string.",
           "type": "string"
@@ -2807,12 +2990,16 @@
           "description": "Display name of an entry. The maximum size is 500 bytes when encoded in UTF-8. Default value is an empty string.",
           "type": "string"
         },
+        "featureOnlineStoreSpec": {
+          "$ref": "GoogleCloudDatacatalogV1FeatureOnlineStoreSpec",
+          "description": "FeatureonlineStore spec for Vertex AI Feature Store."
+        },
         "filesetSpec": {
           "$ref": "GoogleCloudDatacatalogV1FilesetSpec",
           "description": "Specification that applies to a fileset resource. Valid only for entries with the `FILESET` type."
         },
         "fullyQualifiedName": {
-          "description": "Fully qualified name (FQN) of the resource. Set automatically for entries representing resources from synced systems. Settable only during creation and read-only afterwards. Can be used for search and lookup of the entries. FQNs take two forms: * For non-regionalized resources: `{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}` * For regionalized resources: `{SYSTEM}:{PROJECT}.{LOCATION_ID}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}` Example for a DPMS table: `dataproc_metastore:{PROJECT_ID}.{LOCATION_ID}.{INSTANCE_ID}.{DATABASE_ID}.{TABLE_ID}`",
+          "description": "[Fully Qualified Name (FQN)](https://cloud.google.com//data-catalog/docs/fully-qualified-names) of the resource. Set automatically for entries representing resources from synced systems. Settable only during creation, and read-only later. Can be used for search and lookup of the entries. ",
           "type": "string"
         },
         "gcsFilesetSpec": {
@@ -2830,7 +3017,8 @@
             "CLOUD_SPANNER",
             "CLOUD_BIGTABLE",
             "CLOUD_SQL",
-            "LOOKER"
+            "LOOKER",
+            "VERTEX_AI"
           ],
           "enumDescriptions": [
             "Default unknown system.",
@@ -2841,7 +3029,8 @@
             "Cloud Spanner",
             "Cloud Bigtable",
             "Cloud Sql",
-            "Looker"
+            "Looker",
+            "Vertex AI"
           ],
           "readOnly": true,
           "type": "string"
@@ -2861,8 +3050,12 @@
           "$ref": "GoogleCloudDatacatalogV1LookerSystemSpec",
           "description": "Specification that applies to Looker sysstem. Only settable when `user_specified_system` is equal to `LOOKER`"
         },
+        "modelSpec": {
+          "$ref": "GoogleCloudDatacatalogV1ModelSpec",
+          "description": "Model specification."
+        },
         "name": {
-          "description": "Output only. The resource name of an entry in URL format. Note: The entry itself and its child resources might not be stored in the location specified in its name.",
+          "description": "Output only. Identifier. The resource name of an entry in URL format. Note: The entry itself and its child resources might not be stored in the location specified in its name.",
           "readOnly": true,
           "type": "string"
         },
@@ -2892,7 +3085,7 @@
           "description": "Specification that applies to a relational database system. Only settable when `user_specified_system` is equal to `SQL_DATABASE`"
         },
         "type": {
-          "description": "The type of the entry. Only used for entries with types listed in the `EntryType` enum. Currently, only `FILESET` enum value is allowed. All other entries created in Data Catalog must use the `user_specified_type`.",
+          "description": "The type of the entry. For details, see [`EntryType`](#entrytype).",
           "enum": [
             "ENTRY_TYPE_UNSPECIFIED",
             "TABLE",
@@ -2909,25 +3102,31 @@
             "DATABASE_SCHEMA",
             "DASHBOARD",
             "EXPLORE",
-            "LOOK"
+            "LOOK",
+            "FEATURE_ONLINE_STORE",
+            "FEATURE_VIEW",
+            "FEATURE_GROUP"
           ],
           "enumDescriptions": [
             "Default unknown type.",
             "The entry type that has a GoogleSQL schema, including logical views.",
-            "Output only. The type of models. For more information, see [Supported models in BigQuery ML] (https://cloud.google.com/bigquery-ml/docs/introduction#supported_models_in).",
+            "The type of models. For more information, see [Supported models in BigQuery ML](/bigquery/docs/bqml-introduction#supported_models).",
             "An entry type for streaming entries. For example, a Pub/Sub topic.",
             "An entry type for a set of files or objects. For example, a Cloud Storage fileset.",
             "A group of servers that work together. For example, a Kafka cluster.",
             "A database.",
-            "Output only. Connection to a data source. For example, a BigQuery connection.",
-            "Output only. Routine, for example, a BigQuery routine.",
+            "Connection to a data source. For example, a BigQuery connection.",
+            "Routine, for example, a BigQuery routine.",
             "A Dataplex lake.",
             "A Dataplex zone.",
             "A service, for example, a Dataproc Metastore service.",
             "Schema within a relational database.",
             "A Dashboard, for example from Looker.",
             "A Looker Explore. For more information, see [Looker Explore API] (https://developers.looker.com/api/explorer/4.0/methods/LookmlModel/lookml_model_explore).",
-            "A Looker Look. For more information, see [Looker Look API] (https://developers.looker.com/api/explorer/4.0/methods/Look)."
+            "A Looker Look. For more information, see [Looker Look API] (https://developers.looker.com/api/explorer/4.0/methods/Look).",
+            "Feature Online Store resource in Vertex AI Feature Store.",
+            "Feature View resource in Vertex AI Feature Store.",
+            "Feature Group resource in Vertex AI Feature Store."
           ],
           "type": "string"
         },
@@ -2964,8 +3163,12 @@
           "type": "string"
         },
         "name": {
-          "description": "The resource name of the entry group in URL format. Note: The entry group itself and its child resources might not be stored in the location specified in its name.",
+          "description": "Identifier. The resource name of the entry group in URL format. Note: The entry group itself and its child resources might not be stored in the location specified in its name.",
           "type": "string"
+        },
+        "transferredToDataplex": {
+          "description": "Optional. When set to [true], it means DataCatalog EntryGroup was transferred to Dataplex Catalog Service. It makes EntryGroup and its Entries to be read-only in DataCatalog. However, new Tags on EntryGroup and its Entries can be created. After setting the flag to [true] it cannot be unset.",
+          "type": "boolean"
         }
       },
       "type": "object"
@@ -2991,6 +3194,28 @@
             "$ref": "GoogleCloudDatacatalogV1SerializedTaxonomy"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudDatacatalogV1FeatureOnlineStoreSpec": {
+      "description": "Detail description of the source information of a Vertex Feature Online Store.",
+      "id": "GoogleCloudDatacatalogV1FeatureOnlineStoreSpec",
+      "properties": {
+        "storageType": {
+          "description": "Output only. Type of underelaying storage for the FeatureOnlineStore.",
+          "enum": [
+            "STORAGE_TYPE_UNSPECIFIED",
+            "BIGTABLE",
+            "OPTIMIZED"
+          ],
+          "enumDescriptions": [
+            "Should not be used.",
+            "Underlsying storgae is Bigtable.",
+            "Underlaying is optimized online server (Lightning)."
+          ],
+          "readOnly": true,
+          "type": "string"
         }
       },
       "type": "object"
@@ -3141,6 +3366,10 @@
       "properties": {
         "gcsBucketPath": {
           "description": "Path to a Cloud Storage bucket that contains a dump ready for ingestion.",
+          "type": "string"
+        },
+        "jobId": {
+          "description": "Optional. (Optional) Dataplex task job id, if specified will be used as part of ImportEntries LRO ID",
           "type": "string"
         }
       },
@@ -3327,6 +3556,52 @@
       },
       "type": "object"
     },
+    "GoogleCloudDatacatalogV1MigrationConfig": {
+      "description": "The configuration related to the migration to Dataplex applied to an organization or project. It is the response message for SetConfig and RetrieveEffectiveConfig.",
+      "id": "GoogleCloudDatacatalogV1MigrationConfig",
+      "properties": {
+        "catalogUiExperience": {
+          "description": "Opt-in status for the UI switch to Dataplex.",
+          "enum": [
+            "CATALOG_UI_EXPERIENCE_UNSPECIFIED",
+            "CATALOG_UI_EXPERIENCE_ENABLED",
+            "CATALOG_UI_EXPERIENCE_DISABLED"
+          ],
+          "enumDescriptions": [
+            "Default value. The default UI is Dataplex.",
+            "The UI is Dataplex.",
+            "The UI is Data Catalog."
+          ],
+          "type": "string"
+        },
+        "tagTemplateMigration": {
+          "description": "Opt-in status for the migration of Tag Templates to Dataplex.",
+          "enum": [
+            "TAG_TEMPLATE_MIGRATION_UNSPECIFIED",
+            "TAG_TEMPLATE_MIGRATION_ENABLED",
+            "TAG_TEMPLATE_MIGRATION_DISABLED"
+          ],
+          "enumDescriptions": [
+            "Default value. Migration of Tag Templates from Data Catalog to Dataplex is not performed.",
+            "Migration of Tag Templates from Data Catalog to Dataplex is enabled.",
+            "Migration of Tag Templates from Data Catalog to Dataplex is disabled."
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudDatacatalogV1ModelSpec": {
+      "description": "Specification that applies to a model. Valid only for entries with the `MODEL` type.",
+      "id": "GoogleCloudDatacatalogV1ModelSpec",
+      "properties": {
+        "vertexModelSpec": {
+          "$ref": "GoogleCloudDatacatalogV1VertexModelSpec",
+          "description": "Specification for vertex model resources."
+        }
+      },
+      "type": "object"
+    },
     "GoogleCloudDatacatalogV1ModifyEntryContactsRequest": {
       "description": "Request message for ModifyEntryContacts.",
       "id": "GoogleCloudDatacatalogV1ModifyEntryContactsRequest",
@@ -3345,6 +3620,20 @@
         "entryOverview": {
           "$ref": "GoogleCloudDatacatalogV1EntryOverview",
           "description": "Required. The new value for the Entry Overview."
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudDatacatalogV1OrganizationConfig": {
+      "description": "The configuration related to the migration from Data Catalog to Dataplex that has been applied to an organization and any projects under it. It is the response message for RetrieveConfig.",
+      "id": "GoogleCloudDatacatalogV1OrganizationConfig",
+      "properties": {
+        "config": {
+          "additionalProperties": {
+            "$ref": "GoogleCloudDatacatalogV1MigrationConfig"
+          },
+          "description": "Map of organizations and project resource names and their configuration. The format for the map keys is `organizations/{organizationId}` or `projects/{projectId}`.",
+          "type": "object"
         }
       },
       "type": "object"
@@ -3468,8 +3757,7 @@
           "type": "string"
         },
         "name": {
-          "description": "Output only. Resource name of this policy tag in the URL format. The policy tag manager generates unique taxonomy IDs and policy tag IDs.",
-          "readOnly": true,
+          "description": "Identifier. Resource name of this policy tag in the URL format. The policy tag manager generates unique taxonomy IDs and policy tag IDs.",
           "type": "string"
         },
         "parentPolicyTag": {
@@ -3679,12 +3967,16 @@
       "description": "Request message for SearchCatalog.",
       "id": "GoogleCloudDatacatalogV1SearchCatalogRequest",
       "properties": {
+        "adminSearch": {
+          "description": "Optional. If set, use searchAll permission granted on organizations from `include_org_ids` and projects from `include_project_ids` instead of the fine grained per resource permissions when filtering the search results. The only allowed `order_by` criteria for admin_search mode is `default`. Using this flags guarantees a full recall of the search results.",
+          "type": "boolean"
+        },
         "orderBy": {
-          "description": "Specifies the order of results. Currently supported case-sensitive values are: * `relevance` that can only be descending * `last_modified_timestamp [asc|desc]` with descending (`desc`) as default * `default` that can only be descending If this parameter is omitted, it defaults to the descending `relevance`.",
+          "description": "Specifies the order of results. Currently supported case-sensitive values are: * `relevance` that can only be descending * `last_modified_timestamp [asc|desc]` with descending (`desc`) as default * `default` that can only be descending Search queries don't guarantee full recall. Results that match your query might not be returned, even in subsequent result pages. Additionally, returned (and not returned) results can vary if you repeat search queries. If you are experiencing recall issues and you don't have to fetch the results in any specific order, consider setting this parameter to `default`. If this parameter is omitted, it defaults to the descending `relevance`.",
           "type": "string"
         },
         "pageSize": {
-          "description": "Number of results to return in a single search page. Can't be negative or 0, defaults to 10 in this case. The maximum number is 1000. If exceeded, throws an \"invalid argument\" exception.",
+          "description": "Upper bound on the number of results you can get in a single response. Can't be negative or 0, defaults to 10 in this case. The maximum number is 1000. If exceeded, throws an \"invalid argument\" exception.",
           "format": "int32",
           "type": "integer"
         },
@@ -3726,6 +4018,7 @@
           "type": "array"
         },
         "includePublicTagTemplates": {
+          "deprecated": true,
           "description": "Optional. This field is deprecated. The search mechanism for public and private tag templates is the same.",
           "type": "boolean"
         },
@@ -3757,6 +4050,11 @@
             "$ref": "GoogleCloudDatacatalogV1SearchCatalogResult"
           },
           "type": "array"
+        },
+        "totalSize": {
+          "description": "The approximate total number of entries matched by the query.",
+          "format": "int32",
+          "type": "integer"
         },
         "unreachable": {
           "description": "Unreachable locations. Search results don't include data from those locations. To get additional information on an error, repeat the search request and restrict it to specific locations by setting the `SearchCatalogRequest.scope.restricted_locations` parameter.",
@@ -3795,7 +4093,8 @@
             "CLOUD_SPANNER",
             "CLOUD_BIGTABLE",
             "CLOUD_SQL",
-            "LOOKER"
+            "LOOKER",
+            "VERTEX_AI"
           ],
           "enumDescriptions": [
             "Default unknown system.",
@@ -3806,7 +4105,8 @@
             "Cloud Spanner",
             "Cloud Bigtable",
             "Cloud Sql",
-            "Looker"
+            "Looker",
+            "Vertex AI"
           ],
           "readOnly": true,
           "type": "string"
@@ -3925,6 +4225,41 @@
       },
       "type": "object"
     },
+    "GoogleCloudDatacatalogV1SetConfigRequest": {
+      "description": "Request message for SetConfig.",
+      "id": "GoogleCloudDatacatalogV1SetConfigRequest",
+      "properties": {
+        "catalogUiExperience": {
+          "description": "Opt-in status for the UI switch to Dataplex.",
+          "enum": [
+            "CATALOG_UI_EXPERIENCE_UNSPECIFIED",
+            "CATALOG_UI_EXPERIENCE_ENABLED",
+            "CATALOG_UI_EXPERIENCE_DISABLED"
+          ],
+          "enumDescriptions": [
+            "Default value. The default UI is Dataplex.",
+            "The UI is Dataplex.",
+            "The UI is Data Catalog."
+          ],
+          "type": "string"
+        },
+        "tagTemplateMigration": {
+          "description": "Opt-in status for the migration of Tag Templates to Dataplex.",
+          "enum": [
+            "TAG_TEMPLATE_MIGRATION_UNSPECIFIED",
+            "TAG_TEMPLATE_MIGRATION_ENABLED",
+            "TAG_TEMPLATE_MIGRATION_DISABLED"
+          ],
+          "enumDescriptions": [
+            "Default value. Migration of Tag Templates from Data Catalog to Dataplex is not performed.",
+            "Migration of Tag Templates from Data Catalog to Dataplex is enabled.",
+            "Migration of Tag Templates from Data Catalog to Dataplex is disabled."
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "GoogleCloudDatacatalogV1SqlDatabaseSystemSpec": {
       "description": "Specification that applies to entries that are part `SQL_DATABASE` system (user_specified_type)",
       "id": "GoogleCloudDatacatalogV1SqlDatabaseSystemSpec",
@@ -4017,6 +4352,26 @@
           "description": "Resources like entry can have schemas associated with them. This scope allows you to attach tags to an individual column based on that schema. To attach a tag to a nested column, separate column names with a dot (`.`). Example: `column.nested_column`.",
           "type": "string"
         },
+        "dataplexTransferStatus": {
+          "description": "Output only. Denotes the transfer status of the Tag Template.",
+          "enum": [
+            "DATAPLEX_TRANSFER_STATUS_UNSPECIFIED",
+            "MIGRATED",
+            "TRANSFERRED"
+          ],
+          "enumDeprecated": [
+            false,
+            true,
+            false
+          ],
+          "enumDescriptions": [
+            "Default value. TagTemplate and its tags are only visible and editable in DataCatalog.",
+            "TagTemplate and its tags are auto-copied to Dataplex service. Visible in both services. Editable in DataCatalog, read-only in Dataplex. Deprecated: Individual TagTemplate migration is deprecated in favor of organization or project wide TagTemplate migration opt-in.",
+            "TagTemplate and its tags are auto-copied to Dataplex service. Visible in both services. Editable in Dataplex, read-only in DataCatalog."
+          ],
+          "readOnly": true,
+          "type": "string"
+        },
         "fields": {
           "additionalProperties": {
             "$ref": "GoogleCloudDatacatalogV1TagField"
@@ -4025,7 +4380,7 @@
           "type": "object"
         },
         "name": {
-          "description": "The resource name of the tag in URL format where tag ID is a system-generated identifier. Note: The tag itself might not be stored in the location specified in its name.",
+          "description": "Identifier. The resource name of the tag in URL format where tag ID is a system-generated identifier. Note: The tag itself might not be stored in the location specified in its name.",
           "type": "string"
         },
         "template": {
@@ -4099,6 +4454,25 @@
       "description": "A tag template defines a tag that can have one or more typed fields. The template is used to create tags that are attached to Google Cloud resources. [Tag template roles] (https://cloud.google.com/iam/docs/understanding-roles#data-catalog-roles) provide permissions to create, edit, and use the template. For example, see the [TagTemplate User] (https://cloud.google.com/data-catalog/docs/how-to/template-user) role that includes a permission to use the tag template to tag resources.",
       "id": "GoogleCloudDatacatalogV1TagTemplate",
       "properties": {
+        "dataplexTransferStatus": {
+          "description": "Optional. Transfer status of the TagTemplate",
+          "enum": [
+            "DATAPLEX_TRANSFER_STATUS_UNSPECIFIED",
+            "MIGRATED",
+            "TRANSFERRED"
+          ],
+          "enumDeprecated": [
+            false,
+            true,
+            false
+          ],
+          "enumDescriptions": [
+            "Default value. TagTemplate and its tags are only visible and editable in DataCatalog.",
+            "TagTemplate and its tags are auto-copied to Dataplex service. Visible in both services. Editable in DataCatalog, read-only in Dataplex. Deprecated: Individual TagTemplate migration is deprecated in favor of organization or project wide TagTemplate migration opt-in.",
+            "TagTemplate and its tags are auto-copied to Dataplex service. Visible in both services. Editable in Dataplex, read-only in DataCatalog."
+          ],
+          "type": "string"
+        },
         "displayName": {
           "description": "Display name for this template. Defaults to an empty string. The name must contain only Unicode letters, numbers (0-9), underscores (_), dashes (-), spaces ( ), and can't start or end with spaces. The maximum length is 200 characters.",
           "type": "string"
@@ -4115,7 +4489,7 @@
           "type": "boolean"
         },
         "name": {
-          "description": "The resource name of the tag template in URL format. Note: The tag template itself and its child resources might not be stored in the location specified in its name.",
+          "description": "Identifier. The resource name of the tag template in URL format. Note: The tag template itself and its child resources might not be stored in the location specified in its name.",
           "type": "string"
         }
       },
@@ -4138,8 +4512,7 @@
           "type": "boolean"
         },
         "name": {
-          "description": "Output only. The resource name of the tag template field in URL format. Example: `projects/{PROJECT_ID}/locations/{LOCATION}/tagTemplates/{TAG_TEMPLATE}/fields/{FIELD}` Note: The tag template field itself might not be stored in the location specified in its name. The name must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_), and must start with a letter or underscore. The maximum length is 64 characters.",
-          "readOnly": true,
+          "description": "Identifier. The resource name of the tag template field in URL format. Example: `projects/{PROJECT_ID}/locations/{LOCATION}/tagTemplates/{TAG_TEMPLATE}/fields/{FIELD}` Note: The tag template field itself might not be stored in the location specified in its name. The name must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_), and must start with a letter or underscore. The maximum length is 64 characters.",
           "type": "string"
         },
         "order": {
@@ -4159,14 +4532,14 @@
       "id": "GoogleCloudDatacatalogV1TaggedEntry",
       "properties": {
         "absentTags": {
-          "description": "Tags that should be deleted from the Data Catalog. Caller should populate template name and column only.",
+          "description": "Optional. Tags that should be deleted from the Data Catalog. Caller should populate template name and column only.",
           "items": {
             "$ref": "GoogleCloudDatacatalogV1Tag"
           },
           "type": "array"
         },
         "presentTags": {
-          "description": "Tags that should be ingested into the Data Catalog. Caller should populate template name, column and fields.",
+          "description": "Optional. Tags that should be ingested into the Data Catalog. Caller should populate template name, column and fields.",
           "items": {
             "$ref": "GoogleCloudDatacatalogV1Tag"
           },
@@ -4207,8 +4580,7 @@
           "type": "string"
         },
         "name": {
-          "description": "Output only. Resource name of this taxonomy in URL format. Note: Policy tag manager generates unique taxonomy IDs.",
-          "readOnly": true,
+          "description": "Identifier. Resource name of this taxonomy in URL format. Note: Policy tag manager generates unique taxonomy IDs.",
           "type": "string"
         },
         "policyTagCount": {
@@ -4235,7 +4607,7 @@
       "id": "GoogleCloudDatacatalogV1TaxonomyService",
       "properties": {
         "identity": {
-          "description": "P4SA Identity of the service.",
+          "description": "The service agent for the service.",
           "type": "string"
         },
         "name": {
@@ -4326,6 +4698,117 @@
       },
       "type": "object"
     },
+    "GoogleCloudDatacatalogV1VertexDatasetSpec": {
+      "description": "Specification for vertex dataset resources.",
+      "id": "GoogleCloudDatacatalogV1VertexDatasetSpec",
+      "properties": {
+        "dataItemCount": {
+          "description": "The number of DataItems in this Dataset. Only apply for non-structured Dataset.",
+          "format": "int64",
+          "type": "string"
+        },
+        "dataType": {
+          "description": "Type of the dataset.",
+          "enum": [
+            "DATA_TYPE_UNSPECIFIED",
+            "TABLE",
+            "IMAGE",
+            "TEXT",
+            "VIDEO",
+            "CONVERSATION",
+            "TIME_SERIES",
+            "DOCUMENT",
+            "TEXT_TO_SPEECH",
+            "TRANSLATION",
+            "STORE_VISION",
+            "ENTERPRISE_KNOWLEDGE_GRAPH",
+            "TEXT_PROMPT"
+          ],
+          "enumDescriptions": [
+            "Should not be used.",
+            "Structured data dataset.",
+            "Image dataset which supports ImageClassification, ImageObjectDetection and ImageSegmentation problems.",
+            "Document dataset which supports TextClassification, TextExtraction and TextSentiment problems.",
+            "Video dataset which supports VideoClassification, VideoObjectTracking and VideoActionRecognition problems.",
+            "Conversation dataset which supports conversation problems.",
+            "TimeSeries dataset.",
+            "Document dataset which supports DocumentAnnotation problems.",
+            "TextToSpeech dataset which supports TextToSpeech problems.",
+            "Translation dataset which supports Translation problems.",
+            "Store Vision dataset which is used for HITL integration.",
+            "Enterprise Knowledge Graph dataset which is used for HITL labeling integration.",
+            "Text prompt dataset which supports Large Language Models."
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudDatacatalogV1VertexModelSourceInfo": {
+      "description": "Detail description of the source information of a Vertex model.",
+      "id": "GoogleCloudDatacatalogV1VertexModelSourceInfo",
+      "properties": {
+        "copy": {
+          "description": "If this Model is copy of another Model. If true then source_type pertains to the original.",
+          "type": "boolean"
+        },
+        "sourceType": {
+          "description": "Type of the model source.",
+          "enum": [
+            "MODEL_SOURCE_TYPE_UNSPECIFIED",
+            "AUTOML",
+            "CUSTOM",
+            "BQML",
+            "MODEL_GARDEN",
+            "GENIE",
+            "CUSTOM_TEXT_EMBEDDING",
+            "MARKETPLACE"
+          ],
+          "enumDescriptions": [
+            "Should not be used.",
+            "The Model is uploaded by automl training pipeline.",
+            "The Model is uploaded by user or custom training pipeline.",
+            "The Model is registered and sync'ed from BigQuery ML.",
+            "The Model is saved or tuned from Model Garden.",
+            "The Model is saved or tuned from Genie.",
+            "The Model is uploaded by text embedding finetuning pipeline.",
+            "The Model is saved or tuned from Marketplace."
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudDatacatalogV1VertexModelSpec": {
+      "description": "Specification for vertex model resources.",
+      "id": "GoogleCloudDatacatalogV1VertexModelSpec",
+      "properties": {
+        "containerImageUri": {
+          "description": "URI of the Docker image to be used as the custom container for serving predictions.",
+          "type": "string"
+        },
+        "versionAliases": {
+          "description": "User provided version aliases so that a model version can be referenced via alias",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "versionDescription": {
+          "description": "The description of this version.",
+          "type": "string"
+        },
+        "versionId": {
+          "description": "The version ID of the model.",
+          "type": "string"
+        },
+        "vertexModelSourceInfo": {
+          "$ref": "GoogleCloudDatacatalogV1VertexModelSourceInfo",
+          "description": "Source of a Vertex model."
+        }
+      },
+      "type": "object"
+    },
     "GoogleCloudDatacatalogV1ViewSpec": {
       "description": "Table view specification.",
       "id": "GoogleCloudDatacatalogV1ViewSpec",
@@ -4385,14 +4868,14 @@
             "description": "Properties of the object. Contains field @type with type URL.",
             "type": "any"
           },
-          "description": "The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.",
+          "description": "The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.",
           "type": "object"
         }
       },
       "type": "object"
     },
     "Policy": {
-      "description": "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \u003c timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \u003c timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/).",
+      "description": "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** ``` { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \u003c timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } ``` **YAML example:** ``` bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \u003c timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 ``` For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/).",
       "id": "Policy",
       "properties": {
         "bindings": {

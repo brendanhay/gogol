@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-youtube
-version:            1.0.0.0
-synopsis:           Google YouTube Data API v3 SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-youtube
+version:               1.0.0
+synopsis:              Google YouTube Data API v3 SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  The YouTube Data API v3 is an API that provides access to YouTube data, such as videos, playlists, and channels.
+    The YouTube Data API v3 is an API that provides access to YouTube data, such as videos, playlists, and channels.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -30,107 +27,113 @@ source-repository head
   subdir:   gogol-youtube
 
 flag field-selectors
-  description:
-    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-
-  default:     False
-  manual:      True
+  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+  default: False
+  manual: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -Werror
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (!flag(field-selectors) && impl(ghc >=9.2))
+  if !flag(field-selectors) && impl(ghc >= 9.2)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.YouTube
-    Gogol.YouTube.AbuseReports.Insert
-    Gogol.YouTube.Activities.List
-    Gogol.YouTube.Captions.Delete
-    Gogol.YouTube.Captions.Download
-    Gogol.YouTube.Captions.Insert
-    Gogol.YouTube.Captions.List
-    Gogol.YouTube.Captions.Update
-    Gogol.YouTube.ChannelBanners.Insert
-    Gogol.YouTube.Channels.List
-    Gogol.YouTube.Channels.Update
-    Gogol.YouTube.ChannelSections.Delete
-    Gogol.YouTube.ChannelSections.Insert
-    Gogol.YouTube.ChannelSections.List
-    Gogol.YouTube.ChannelSections.Update
-    Gogol.YouTube.Comments.Delete
-    Gogol.YouTube.Comments.Insert
-    Gogol.YouTube.Comments.List
-    Gogol.YouTube.Comments.MarkAsSpam
-    Gogol.YouTube.Comments.SetModerationStatus
-    Gogol.YouTube.Comments.Update
-    Gogol.YouTube.CommentThreads.Insert
-    Gogol.YouTube.CommentThreads.List
-    Gogol.YouTube.I18nLanguages.List
-    Gogol.YouTube.I18nRegions.List
-    Gogol.YouTube.LiveBroadcasts.Bind
-    Gogol.YouTube.LiveBroadcasts.Delete
-    Gogol.YouTube.LiveBroadcasts.Insert
-    Gogol.YouTube.LiveBroadcasts.InsertCuepoint
-    Gogol.YouTube.LiveBroadcasts.List
-    Gogol.YouTube.LiveBroadcasts.Transition
-    Gogol.YouTube.LiveBroadcasts.Update
-    Gogol.YouTube.LiveChatBans.Delete
-    Gogol.YouTube.LiveChatBans.Insert
-    Gogol.YouTube.LiveChatMessages.Delete
-    Gogol.YouTube.LiveChatMessages.Insert
-    Gogol.YouTube.LiveChatMessages.List
-    Gogol.YouTube.LiveChatModerators.Delete
-    Gogol.YouTube.LiveChatModerators.Insert
-    Gogol.YouTube.LiveChatModerators.List
-    Gogol.YouTube.LiveStreams.Delete
-    Gogol.YouTube.LiveStreams.Insert
-    Gogol.YouTube.LiveStreams.List
-    Gogol.YouTube.LiveStreams.Update
-    Gogol.YouTube.Members.List
-    Gogol.YouTube.MembershipsLevels.List
-    Gogol.YouTube.PlaylistItems.Delete
-    Gogol.YouTube.PlaylistItems.Insert
-    Gogol.YouTube.PlaylistItems.List
-    Gogol.YouTube.PlaylistItems.Update
-    Gogol.YouTube.Playlists.Delete
-    Gogol.YouTube.Playlists.Insert
-    Gogol.YouTube.Playlists.List
-    Gogol.YouTube.Playlists.Update
-    Gogol.YouTube.Search.List
-    Gogol.YouTube.Subscriptions.Delete
-    Gogol.YouTube.Subscriptions.Insert
-    Gogol.YouTube.Subscriptions.List
-    Gogol.YouTube.SuperChatEvents.List
-    Gogol.YouTube.Tests.Insert
-    Gogol.YouTube.ThirdPartyLinks.Delete
-    Gogol.YouTube.ThirdPartyLinks.Insert
-    Gogol.YouTube.ThirdPartyLinks.List
-    Gogol.YouTube.ThirdPartyLinks.Update
-    Gogol.YouTube.Thumbnails.Set
-    Gogol.YouTube.Types
-    Gogol.YouTube.V3.UpdateCommentThreads
-    Gogol.YouTube.VideoAbuseReportReasons.List
-    Gogol.YouTube.VideoCategories.List
-    Gogol.YouTube.Videos.Delete
-    Gogol.YouTube.Videos.GetRating
-    Gogol.YouTube.Videos.Insert
-    Gogol.YouTube.Videos.List
-    Gogol.YouTube.Videos.Rate
-    Gogol.YouTube.Videos.ReportAbuse
-    Gogol.YouTube.Videos.Update
-    Gogol.YouTube.Watermarks.Set
-    Gogol.YouTube.Watermarks.Unset
+      Gogol.YouTube
+    , Gogol.YouTube.AbuseReports.Insert
+    , Gogol.YouTube.Activities.List
+    , Gogol.YouTube.Captions.Delete
+    , Gogol.YouTube.Captions.Download
+    , Gogol.YouTube.Captions.Insert
+    , Gogol.YouTube.Captions.List
+    , Gogol.YouTube.Captions.Update
+    , Gogol.YouTube.ChannelBanners.Insert
+    , Gogol.YouTube.ChannelSections.Delete
+    , Gogol.YouTube.ChannelSections.Insert
+    , Gogol.YouTube.ChannelSections.List
+    , Gogol.YouTube.ChannelSections.Update
+    , Gogol.YouTube.Channels.List
+    , Gogol.YouTube.Channels.Update
+    , Gogol.YouTube.CommentThreads.Insert
+    , Gogol.YouTube.CommentThreads.List
+    , Gogol.YouTube.Comments.Delete
+    , Gogol.YouTube.Comments.Insert
+    , Gogol.YouTube.Comments.List
+    , Gogol.YouTube.Comments.MarkAsSpam
+    , Gogol.YouTube.Comments.SetModerationStatus
+    , Gogol.YouTube.Comments.Update
+    , Gogol.YouTube.I18nLanguages.List
+    , Gogol.YouTube.I18nRegions.List
+    , Gogol.YouTube.LiveBroadcasts.Bind
+    , Gogol.YouTube.LiveBroadcasts.Delete
+    , Gogol.YouTube.LiveBroadcasts.Insert
+    , Gogol.YouTube.LiveBroadcasts.InsertCuepoint
+    , Gogol.YouTube.LiveBroadcasts.List
+    , Gogol.YouTube.LiveBroadcasts.Transition
+    , Gogol.YouTube.LiveBroadcasts.Update
+    , Gogol.YouTube.LiveChatBans.Delete
+    , Gogol.YouTube.LiveChatBans.Insert
+    , Gogol.YouTube.LiveChatMessages.Delete
+    , Gogol.YouTube.LiveChatMessages.Insert
+    , Gogol.YouTube.LiveChatMessages.List
+    , Gogol.YouTube.LiveChatMessages.Transition
+    , Gogol.YouTube.LiveChatModerators.Delete
+    , Gogol.YouTube.LiveChatModerators.Insert
+    , Gogol.YouTube.LiveChatModerators.List
+    , Gogol.YouTube.LiveStreams.Delete
+    , Gogol.YouTube.LiveStreams.Insert
+    , Gogol.YouTube.LiveStreams.List
+    , Gogol.YouTube.LiveStreams.Update
+    , Gogol.YouTube.Members.List
+    , Gogol.YouTube.MembershipsLevels.List
+    , Gogol.YouTube.PlaylistImages.Delete
+    , Gogol.YouTube.PlaylistImages.Insert
+    , Gogol.YouTube.PlaylistImages.List
+    , Gogol.YouTube.PlaylistImages.Update
+    , Gogol.YouTube.PlaylistItems.Delete
+    , Gogol.YouTube.PlaylistItems.Insert
+    , Gogol.YouTube.PlaylistItems.List
+    , Gogol.YouTube.PlaylistItems.Update
+    , Gogol.YouTube.Playlists.Delete
+    , Gogol.YouTube.Playlists.Insert
+    , Gogol.YouTube.Playlists.List
+    , Gogol.YouTube.Playlists.Update
+    , Gogol.YouTube.Search.List
+    , Gogol.YouTube.Subscriptions.Delete
+    , Gogol.YouTube.Subscriptions.Insert
+    , Gogol.YouTube.Subscriptions.List
+    , Gogol.YouTube.SuperChatEvents.List
+    , Gogol.YouTube.Tests.Insert
+    , Gogol.YouTube.ThirdPartyLinks.Delete
+    , Gogol.YouTube.ThirdPartyLinks.Insert
+    , Gogol.YouTube.ThirdPartyLinks.List
+    , Gogol.YouTube.ThirdPartyLinks.Update
+    , Gogol.YouTube.Thumbnails.Set
+    , Gogol.YouTube.Types
+    , Gogol.YouTube.V3.UpdateCommentThreads
+    , Gogol.YouTube.VideoAbuseReportReasons.List
+    , Gogol.YouTube.VideoCategories.List
+    , Gogol.YouTube.Videos.Delete
+    , Gogol.YouTube.Videos.GetRating
+    , Gogol.YouTube.Videos.Insert
+    , Gogol.YouTube.Videos.List
+    , Gogol.YouTube.Videos.Rate
+    , Gogol.YouTube.Videos.ReportAbuse
+    , Gogol.YouTube.Videos.Update
+    , Gogol.YouTube.Watermarks.Set
+    , Gogol.YouTube.Watermarks.Unset
 
   other-modules:
-    Gogol.YouTube.Internal.Product
-    Gogol.YouTube.Internal.Sum
+      Gogol.YouTube.Internal.Product
+    , Gogol.YouTube.Internal.Sum
 
   build-depends:
-    , base        >=4.12   && <5
-    , gogol-core  ^>=1.0.0
+      gogol-core ^>= 1.0.0

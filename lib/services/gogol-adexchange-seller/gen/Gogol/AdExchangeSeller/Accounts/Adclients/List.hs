@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,79 +31,70 @@
 --
 -- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @adexchangeseller.accounts.adclients.list@.
 module Gogol.AdExchangeSeller.Accounts.Adclients.List
-  ( -- * Resource
-    AdExchangeSellerAccountsAdclientsListResource,
+    (
+    -- * Resource
+      AdExchangeSellerAccountsAdclientsListResource
 
     -- ** Constructing a Request
-    AdExchangeSellerAccountsAdclientsList (..),
-    newAdExchangeSellerAccountsAdclientsList,
-  )
-where
+    , AdExchangeSellerAccountsAdclientsList (..)
+    , newAdExchangeSellerAccountsAdclientsList
+    ) where
 
-import Gogol.AdExchangeSeller.Types
 import qualified Gogol.Prelude as Core
+import Gogol.AdExchangeSeller.Types
 
 -- | A resource alias for @adexchangeseller.accounts.adclients.list@ method which the
 -- 'AdExchangeSellerAccountsAdclientsList' request conforms to.
 type AdExchangeSellerAccountsAdclientsListResource =
-  "adexchangeseller"
-    Core.:> "v2.0"
-    Core.:> "accounts"
-    Core.:> Core.Capture "accountId" Core.Text
-    Core.:> "adclients"
-    Core.:> Core.QueryParam "maxResults" Core.Word32
-    Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] AdClients
+     "adexchangeseller" Core.:>
+       "v2.0" Core.:>
+         "accounts" Core.:>
+           Core.Capture "accountId" Core.Text Core.:>
+             "adclients" Core.:>
+               Core.QueryParam "maxResults" Core.Word32 Core.:>
+                 Core.QueryParam "pageToken" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Get '[Core.JSON] AdClients
 
 -- | List all ad clients in this Ad Exchange account.
 --
 -- /See:/ 'newAdExchangeSellerAccountsAdclientsList' smart constructor.
 data AdExchangeSellerAccountsAdclientsList = AdExchangeSellerAccountsAdclientsList
-  { -- | Account to which the ad client belongs.
-    accountId :: Core.Text,
-    -- | The maximum number of ad clients to include in the response, used for paging.
-    maxResults :: (Core.Maybe Core.Word32),
-    -- | A continuation token, used to page through ad clients. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.
-    pageToken :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Account to which the ad client belongs.
+      accountId :: Core.Text
+      -- | The maximum number of ad clients to include in the response, used for paging.
+    , maxResults :: (Core.Maybe Core.Word32)
+      -- | A continuation token, used to page through ad clients. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.
+    , pageToken :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AdExchangeSellerAccountsAdclientsList' with the minimum fields required to make a request.
-newAdExchangeSellerAccountsAdclientsList ::
-  -- |  Account to which the ad client belongs. See 'accountId'.
-  Core.Text ->
-  AdExchangeSellerAccountsAdclientsList
+newAdExchangeSellerAccountsAdclientsList 
+    ::  Core.Text
+       -- ^  Account to which the ad client belongs. See 'accountId'.
+    -> AdExchangeSellerAccountsAdclientsList
 newAdExchangeSellerAccountsAdclientsList accountId =
   AdExchangeSellerAccountsAdclientsList
-    { accountId = accountId,
-      maxResults = Core.Nothing,
-      pageToken = Core.Nothing
-    }
+    {accountId = accountId, maxResults = Core.Nothing, pageToken = Core.Nothing}
 
-instance
-  Core.GoogleRequest
-    AdExchangeSellerAccountsAdclientsList
-  where
-  type
-    Rs AdExchangeSellerAccountsAdclientsList =
-      AdClients
-  type
-    Scopes AdExchangeSellerAccountsAdclientsList =
-      '[Adexchange'Seller, Adexchange'Seller'Readonly]
-  requestClient
-    AdExchangeSellerAccountsAdclientsList {..} =
-      go
-        accountId
-        maxResults
-        pageToken
-        (Core.Just Core.AltJSON)
-        adExchangeSellerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AdExchangeSellerAccountsAdclientsListResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           AdExchangeSellerAccountsAdclientsList
+         where
+        type Rs AdExchangeSellerAccountsAdclientsList =
+             AdClients
+        type Scopes AdExchangeSellerAccountsAdclientsList =
+             '[Adexchange'Seller, Adexchange'Seller'Readonly]
+        requestClient
+          AdExchangeSellerAccountsAdclientsList{..}
+          = go accountId maxResults pageToken
+              (Core.Just Core.AltJSON)
+              adExchangeSellerService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           AdExchangeSellerAccountsAdclientsListResource)
+                      Core.mempty
+

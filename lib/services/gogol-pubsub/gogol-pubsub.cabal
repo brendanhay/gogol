@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-pubsub
-version:            1.0.0.0
-synopsis:           Google Cloud Pub/Sub SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-pubsub
+version:               1.0.0
+synopsis:              Google Cloud Pub/Sub SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  Provides reliable, many-to-many, asynchronous messaging between applications.
+    Provides reliable, many-to-many, asynchronous messaging between applications.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -30,77 +27,78 @@ source-repository head
   subdir:   gogol-pubsub
 
 flag field-selectors
-  description:
-    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-
-  default:     False
-  manual:      True
+  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+  default: False
+  manual: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -Werror
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (!flag(field-selectors) && impl(ghc >=9.2))
+  if !flag(field-selectors) && impl(ghc >= 9.2)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.PubSub
-    Gogol.PubSub.Projects.Schemas.Commit
-    Gogol.PubSub.Projects.Schemas.Create
-    Gogol.PubSub.Projects.Schemas.Delete
-    Gogol.PubSub.Projects.Schemas.DeleteRevision
-    Gogol.PubSub.Projects.Schemas.Get
-    Gogol.PubSub.Projects.Schemas.GetIamPolicy
-    Gogol.PubSub.Projects.Schemas.List
-    Gogol.PubSub.Projects.Schemas.ListRevisions
-    Gogol.PubSub.Projects.Schemas.Rollback
-    Gogol.PubSub.Projects.Schemas.SetIamPolicy
-    Gogol.PubSub.Projects.Schemas.TestIamPermissions
-    Gogol.PubSub.Projects.Schemas.Validate
-    Gogol.PubSub.Projects.Schemas.ValidateMessage
-    Gogol.PubSub.Projects.Snapshots.Create
-    Gogol.PubSub.Projects.Snapshots.Delete
-    Gogol.PubSub.Projects.Snapshots.Get
-    Gogol.PubSub.Projects.Snapshots.GetIamPolicy
-    Gogol.PubSub.Projects.Snapshots.List
-    Gogol.PubSub.Projects.Snapshots.Patch
-    Gogol.PubSub.Projects.Snapshots.SetIamPolicy
-    Gogol.PubSub.Projects.Snapshots.TestIamPermissions
-    Gogol.PubSub.Projects.Subscriptions.Acknowledge
-    Gogol.PubSub.Projects.Subscriptions.Create
-    Gogol.PubSub.Projects.Subscriptions.Delete
-    Gogol.PubSub.Projects.Subscriptions.Detach
-    Gogol.PubSub.Projects.Subscriptions.Get
-    Gogol.PubSub.Projects.Subscriptions.GetIamPolicy
-    Gogol.PubSub.Projects.Subscriptions.List
-    Gogol.PubSub.Projects.Subscriptions.ModifyAckDeadline
-    Gogol.PubSub.Projects.Subscriptions.ModifyPushConfig
-    Gogol.PubSub.Projects.Subscriptions.Patch
-    Gogol.PubSub.Projects.Subscriptions.Pull
-    Gogol.PubSub.Projects.Subscriptions.Seek
-    Gogol.PubSub.Projects.Subscriptions.SetIamPolicy
-    Gogol.PubSub.Projects.Subscriptions.TestIamPermissions
-    Gogol.PubSub.Projects.Topics.Create
-    Gogol.PubSub.Projects.Topics.Delete
-    Gogol.PubSub.Projects.Topics.Get
-    Gogol.PubSub.Projects.Topics.GetIamPolicy
-    Gogol.PubSub.Projects.Topics.List
-    Gogol.PubSub.Projects.Topics.Patch
-    Gogol.PubSub.Projects.Topics.Publish
-    Gogol.PubSub.Projects.Topics.SetIamPolicy
-    Gogol.PubSub.Projects.Topics.Snapshots.List
-    Gogol.PubSub.Projects.Topics.Subscriptions.List
-    Gogol.PubSub.Projects.Topics.TestIamPermissions
-    Gogol.PubSub.Types
+      Gogol.PubSub
+    , Gogol.PubSub.Projects.Schemas.Commit
+    , Gogol.PubSub.Projects.Schemas.Create
+    , Gogol.PubSub.Projects.Schemas.Delete
+    , Gogol.PubSub.Projects.Schemas.DeleteRevision
+    , Gogol.PubSub.Projects.Schemas.Get
+    , Gogol.PubSub.Projects.Schemas.GetIamPolicy
+    , Gogol.PubSub.Projects.Schemas.List
+    , Gogol.PubSub.Projects.Schemas.ListRevisions
+    , Gogol.PubSub.Projects.Schemas.Rollback
+    , Gogol.PubSub.Projects.Schemas.SetIamPolicy
+    , Gogol.PubSub.Projects.Schemas.TestIamPermissions
+    , Gogol.PubSub.Projects.Schemas.Validate
+    , Gogol.PubSub.Projects.Schemas.ValidateMessage
+    , Gogol.PubSub.Projects.Snapshots.Create
+    , Gogol.PubSub.Projects.Snapshots.Delete
+    , Gogol.PubSub.Projects.Snapshots.Get
+    , Gogol.PubSub.Projects.Snapshots.GetIamPolicy
+    , Gogol.PubSub.Projects.Snapshots.List
+    , Gogol.PubSub.Projects.Snapshots.Patch
+    , Gogol.PubSub.Projects.Snapshots.SetIamPolicy
+    , Gogol.PubSub.Projects.Snapshots.TestIamPermissions
+    , Gogol.PubSub.Projects.Subscriptions.Acknowledge
+    , Gogol.PubSub.Projects.Subscriptions.Create
+    , Gogol.PubSub.Projects.Subscriptions.Delete
+    , Gogol.PubSub.Projects.Subscriptions.Detach
+    , Gogol.PubSub.Projects.Subscriptions.Get
+    , Gogol.PubSub.Projects.Subscriptions.GetIamPolicy
+    , Gogol.PubSub.Projects.Subscriptions.List
+    , Gogol.PubSub.Projects.Subscriptions.ModifyAckDeadline
+    , Gogol.PubSub.Projects.Subscriptions.ModifyPushConfig
+    , Gogol.PubSub.Projects.Subscriptions.Patch
+    , Gogol.PubSub.Projects.Subscriptions.Pull
+    , Gogol.PubSub.Projects.Subscriptions.Seek
+    , Gogol.PubSub.Projects.Subscriptions.SetIamPolicy
+    , Gogol.PubSub.Projects.Subscriptions.TestIamPermissions
+    , Gogol.PubSub.Projects.Topics.Create
+    , Gogol.PubSub.Projects.Topics.Delete
+    , Gogol.PubSub.Projects.Topics.Get
+    , Gogol.PubSub.Projects.Topics.GetIamPolicy
+    , Gogol.PubSub.Projects.Topics.List
+    , Gogol.PubSub.Projects.Topics.Patch
+    , Gogol.PubSub.Projects.Topics.Publish
+    , Gogol.PubSub.Projects.Topics.SetIamPolicy
+    , Gogol.PubSub.Projects.Topics.Snapshots.List
+    , Gogol.PubSub.Projects.Topics.Subscriptions.List
+    , Gogol.PubSub.Projects.Topics.TestIamPermissions
+    , Gogol.PubSub.Types
 
   other-modules:
-    Gogol.PubSub.Internal.Product
-    Gogol.PubSub.Internal.Sum
+      Gogol.PubSub.Internal.Product
+    , Gogol.PubSub.Internal.Sum
 
   build-depends:
-    , base        >=4.12   && <5
-    , gogol-core  ^>=1.0.0
+      gogol-core ^>= 1.0.0

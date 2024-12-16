@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,103 +31,96 @@
 --
 -- /See:/ <https://cloud.google.com/firestore Cloud Firestore API Reference> for @firestore.projects.databases.documents.listCollectionIds@.
 module Gogol.FireStore.Projects.Databases.Documents.ListCollectionIds
-  ( -- * Resource
-    FireStoreProjectsDatabasesDocumentsListCollectionIdsResource,
+    (
+    -- * Resource
+      FireStoreProjectsDatabasesDocumentsListCollectionIdsResource
 
     -- ** Constructing a Request
-    FireStoreProjectsDatabasesDocumentsListCollectionIds (..),
-    newFireStoreProjectsDatabasesDocumentsListCollectionIds,
-  )
-where
+    , FireStoreProjectsDatabasesDocumentsListCollectionIds (..)
+    , newFireStoreProjectsDatabasesDocumentsListCollectionIds
+    ) where
 
-import Gogol.FireStore.Types
 import qualified Gogol.Prelude as Core
+import Gogol.FireStore.Types
 
 -- | A resource alias for @firestore.projects.databases.documents.listCollectionIds@ method which the
 -- 'FireStoreProjectsDatabasesDocumentsListCollectionIds' request conforms to.
-type FireStoreProjectsDatabasesDocumentsListCollectionIdsResource =
-  "v1"
-    Core.:> Core.CaptureMode
-              "parent"
-              "listCollectionIds"
-              Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] ListCollectionIdsRequest
-    Core.:> Core.Post '[Core.JSON] ListCollectionIdsResponse
+type FireStoreProjectsDatabasesDocumentsListCollectionIdsResource
+     =
+     "v1" Core.:>
+       Core.CaptureMode "parent" "listCollectionIds"
+         Core.Text
+         Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.ReqBody '[Core.JSON] ListCollectionIdsRequest
+                       Core.:>
+                       Core.Post '[Core.JSON] ListCollectionIdsResponse
 
 -- | Lists all the collection IDs underneath a document.
 --
 -- /See:/ 'newFireStoreProjectsDatabasesDocumentsListCollectionIds' smart constructor.
 data FireStoreProjectsDatabasesDocumentsListCollectionIds = FireStoreProjectsDatabasesDocumentsListCollectionIds
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. The parent document. In the format: @projects\/{project_id}\/databases\/{database_id}\/documents\/{document_path}@. For example: @projects\/my-project\/databases\/my-database\/documents\/chatrooms\/my-chatroom@
-    parent :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: ListCollectionIdsRequest,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The parent document. In the format: @projects\/{project_id}\/databases\/{database_id}\/documents\/{document_path}@. For example: @projects\/my-project\/databases\/my-database\/documents\/chatrooms\/my-chatroom@
+    , parent :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: ListCollectionIdsRequest
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'FireStoreProjectsDatabasesDocumentsListCollectionIds' with the minimum fields required to make a request.
-newFireStoreProjectsDatabasesDocumentsListCollectionIds ::
-  -- |  Required. The parent document. In the format: @projects\/{project_id}\/databases\/{database_id}\/documents\/{document_path}@. For example: @projects\/my-project\/databases\/my-database\/documents\/chatrooms\/my-chatroom@ See 'parent'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  ListCollectionIdsRequest ->
-  FireStoreProjectsDatabasesDocumentsListCollectionIds
+newFireStoreProjectsDatabasesDocumentsListCollectionIds 
+    ::  Core.Text
+       -- ^  Required. The parent document. In the format: @projects\/{project_id}\/databases\/{database_id}\/documents\/{document_path}@. For example: @projects\/my-project\/databases\/my-database\/documents\/chatrooms\/my-chatroom@ See 'parent'.
+    -> ListCollectionIdsRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> FireStoreProjectsDatabasesDocumentsListCollectionIds
 newFireStoreProjectsDatabasesDocumentsListCollectionIds parent payload =
   FireStoreProjectsDatabasesDocumentsListCollectionIds
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , parent = parent
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    FireStoreProjectsDatabasesDocumentsListCollectionIds
-  where
-  type
-    Rs
-      FireStoreProjectsDatabasesDocumentsListCollectionIds =
-      ListCollectionIdsResponse
-  type
-    Scopes
-      FireStoreProjectsDatabasesDocumentsListCollectionIds =
-      '[CloudPlatform'FullControl, Datastore'FullControl]
-  requestClient
-    FireStoreProjectsDatabasesDocumentsListCollectionIds {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        fireStoreService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  FireStoreProjectsDatabasesDocumentsListCollectionIdsResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           FireStoreProjectsDatabasesDocumentsListCollectionIds
+         where
+        type Rs
+               FireStoreProjectsDatabasesDocumentsListCollectionIds
+             = ListCollectionIdsResponse
+        type Scopes
+               FireStoreProjectsDatabasesDocumentsListCollectionIds
+             = '[CloudPlatform'FullControl, Datastore'FullControl]
+        requestClient
+          FireStoreProjectsDatabasesDocumentsListCollectionIds{..}
+          = go parent xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              fireStoreService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           FireStoreProjectsDatabasesDocumentsListCollectionIdsResource)
+                      Core.mempty
+

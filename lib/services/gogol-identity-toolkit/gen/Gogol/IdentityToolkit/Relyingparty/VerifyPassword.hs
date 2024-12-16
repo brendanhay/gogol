@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,69 +31,64 @@
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.verifyPassword@.
 module Gogol.IdentityToolkit.Relyingparty.VerifyPassword
-  ( -- * Resource
-    IdentityToolkitRelyingpartyVerifyPasswordResource,
+    (
+    -- * Resource
+      IdentityToolkitRelyingpartyVerifyPasswordResource
 
     -- ** Constructing a Request
-    IdentityToolkitRelyingpartyVerifyPassword (..),
-    newIdentityToolkitRelyingpartyVerifyPassword,
-  )
-where
+    , IdentityToolkitRelyingpartyVerifyPassword (..)
+    , newIdentityToolkitRelyingpartyVerifyPassword
+    ) where
 
-import Gogol.IdentityToolkit.Types
 import qualified Gogol.Prelude as Core
+import Gogol.IdentityToolkit.Types
 
 -- | A resource alias for @identitytoolkit.relyingparty.verifyPassword@ method which the
 -- 'IdentityToolkitRelyingpartyVerifyPassword' request conforms to.
-type IdentityToolkitRelyingpartyVerifyPasswordResource =
-  "identitytoolkit"
-    Core.:> "v3"
-    Core.:> "relyingparty"
-    Core.:> "verifyPassword"
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              IdentitytoolkitRelyingpartyVerifyPasswordRequest
-    Core.:> Core.Post '[Core.JSON] VerifyPasswordResponse
+type IdentityToolkitRelyingpartyVerifyPasswordResource
+     =
+     "identitytoolkit" Core.:>
+       "v3" Core.:>
+         "relyingparty" Core.:>
+           "verifyPassword" Core.:>
+             Core.QueryParam "alt" Core.AltJSON Core.:>
+               Core.ReqBody '[Core.JSON]
+                 IdentitytoolkitRelyingpartyVerifyPasswordRequest
+                 Core.:> Core.Post '[Core.JSON] VerifyPasswordResponse
 
 -- | Verifies the user entered password.
 --
 -- /See:/ 'newIdentityToolkitRelyingpartyVerifyPassword' smart constructor.
 newtype IdentityToolkitRelyingpartyVerifyPassword = IdentityToolkitRelyingpartyVerifyPassword
-  { -- | Multipart request metadata.
-    payload :: IdentitytoolkitRelyingpartyVerifyPasswordRequest
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Multipart request metadata.
+      payload :: IdentitytoolkitRelyingpartyVerifyPasswordRequest
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'IdentityToolkitRelyingpartyVerifyPassword' with the minimum fields required to make a request.
-newIdentityToolkitRelyingpartyVerifyPassword ::
-  -- |  Multipart request metadata. See 'payload'.
-  IdentitytoolkitRelyingpartyVerifyPasswordRequest ->
-  IdentityToolkitRelyingpartyVerifyPassword
+newIdentityToolkitRelyingpartyVerifyPassword 
+    ::  IdentitytoolkitRelyingpartyVerifyPasswordRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> IdentityToolkitRelyingpartyVerifyPassword
 newIdentityToolkitRelyingpartyVerifyPassword payload =
   IdentityToolkitRelyingpartyVerifyPassword {payload = payload}
 
-instance
-  Core.GoogleRequest
-    IdentityToolkitRelyingpartyVerifyPassword
-  where
-  type
-    Rs IdentityToolkitRelyingpartyVerifyPassword =
-      VerifyPasswordResponse
-  type
-    Scopes IdentityToolkitRelyingpartyVerifyPassword =
-      '[CloudPlatform'FullControl]
-  requestClient
-    IdentityToolkitRelyingpartyVerifyPassword {..} =
-      go
-        (Core.Just Core.AltJSON)
-        payload
-        identityToolkitService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  IdentityToolkitRelyingpartyVerifyPasswordResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           IdentityToolkitRelyingpartyVerifyPassword
+         where
+        type Rs IdentityToolkitRelyingpartyVerifyPassword =
+             VerifyPasswordResponse
+        type Scopes IdentityToolkitRelyingpartyVerifyPassword
+             = '[CloudPlatform'FullControl]
+        requestClient
+          IdentityToolkitRelyingpartyVerifyPassword{..}
+          = go (Core.Just Core.AltJSON) payload
+              identityToolkitService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           IdentityToolkitRelyingpartyVerifyPasswordResource)
+                      Core.mempty
+

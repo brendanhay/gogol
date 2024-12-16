@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,66 +31,66 @@
 --
 -- /See:/ <https://cloud.google.com/docs/quota Library Agent API Reference>
 module Gogol.LibraryAgent
-  ( -- * Configuration
-    libraryAgentService,
+    (
+    -- * Configuration
+      libraryAgentService
 
     -- * OAuth Scopes
-    CloudPlatform'FullControl,
+    , CloudPlatform'FullControl
 
     -- * Resources
 
     -- ** libraryagent.shelves.books.borrow
-    LibraryAgentShelvesBooksBorrowResource,
-    LibraryAgentShelvesBooksBorrow (..),
-    newLibraryAgentShelvesBooksBorrow,
+    , LibraryAgentShelvesBooksBorrowResource
+    , LibraryAgentShelvesBooksBorrow (..)
+    , newLibraryAgentShelvesBooksBorrow
 
     -- ** libraryagent.shelves.books.get
-    LibraryAgentShelvesBooksGetResource,
-    LibraryAgentShelvesBooksGet (..),
-    newLibraryAgentShelvesBooksGet,
+    , LibraryAgentShelvesBooksGetResource
+    , LibraryAgentShelvesBooksGet (..)
+    , newLibraryAgentShelvesBooksGet
 
     -- ** libraryagent.shelves.books.list
-    LibraryAgentShelvesBooksListResource,
-    LibraryAgentShelvesBooksList (..),
-    newLibraryAgentShelvesBooksList,
+    , LibraryAgentShelvesBooksListResource
+    , LibraryAgentShelvesBooksList (..)
+    , newLibraryAgentShelvesBooksList
 
     -- ** libraryagent.shelves.books.return
-    LibraryAgentShelvesBooksReturnResource,
-    LibraryAgentShelvesBooksReturn (..),
-    newLibraryAgentShelvesBooksReturn,
+    , LibraryAgentShelvesBooksReturnResource
+    , LibraryAgentShelvesBooksReturn (..)
+    , newLibraryAgentShelvesBooksReturn
 
     -- ** libraryagent.shelves.get
-    LibraryAgentShelvesGetResource,
-    LibraryAgentShelvesGet (..),
-    newLibraryAgentShelvesGet,
+    , LibraryAgentShelvesGetResource
+    , LibraryAgentShelvesGet (..)
+    , newLibraryAgentShelvesGet
 
     -- ** libraryagent.shelves.list
-    LibraryAgentShelvesListResource,
-    LibraryAgentShelvesList (..),
-    newLibraryAgentShelvesList,
+    , LibraryAgentShelvesListResource
+    , LibraryAgentShelvesList (..)
+    , newLibraryAgentShelvesList
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** GoogleExampleLibraryagentV1Book
-    GoogleExampleLibraryagentV1Book (..),
-    newGoogleExampleLibraryagentV1Book,
+    , GoogleExampleLibraryagentV1Book (..)
+    , newGoogleExampleLibraryagentV1Book
 
     -- ** GoogleExampleLibraryagentV1ListBooksResponse
-    GoogleExampleLibraryagentV1ListBooksResponse (..),
-    newGoogleExampleLibraryagentV1ListBooksResponse,
+    , GoogleExampleLibraryagentV1ListBooksResponse (..)
+    , newGoogleExampleLibraryagentV1ListBooksResponse
 
     -- ** GoogleExampleLibraryagentV1ListShelvesResponse
-    GoogleExampleLibraryagentV1ListShelvesResponse (..),
-    newGoogleExampleLibraryagentV1ListShelvesResponse,
+    , GoogleExampleLibraryagentV1ListShelvesResponse (..)
+    , newGoogleExampleLibraryagentV1ListShelvesResponse
 
     -- ** GoogleExampleLibraryagentV1Shelf
-    GoogleExampleLibraryagentV1Shelf (..),
-    newGoogleExampleLibraryagentV1Shelf,
-  )
-where
+    , GoogleExampleLibraryagentV1Shelf (..)
+    , newGoogleExampleLibraryagentV1Shelf
+    ) where
 
 import Gogol.LibraryAgent.Shelves.Books.Borrow
 import Gogol.LibraryAgent.Shelves.Books.Get

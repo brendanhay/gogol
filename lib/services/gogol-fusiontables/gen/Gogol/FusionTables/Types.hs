@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,124 +26,125 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.FusionTables.Types
-  ( -- * Configuration
-    fusionTablesService,
+    (
+    -- * Configuration
+      fusionTablesService
 
     -- * OAuth Scopes
-    Fusiontables'FullControl,
-    Fusiontables'Readonly,
+    , Fusiontables'FullControl
+    , Fusiontables'Readonly
 
     -- * Types
 
     -- ** Bucket
-    Bucket (..),
-    newBucket,
+    , Bucket (..)
+    , newBucket
 
     -- ** Column
-    Column (..),
-    newColumn,
+    , Column (..)
+    , newColumn
 
     -- ** Column_BaseColumn
-    Column_BaseColumn (..),
-    newColumn_BaseColumn,
+    , Column_BaseColumn (..)
+    , newColumn_BaseColumn
 
     -- ** ColumnList
-    ColumnList (..),
-    newColumnList,
+    , ColumnList (..)
+    , newColumnList
 
     -- ** Geometry
-    Geometry (..),
-    newGeometry,
+    , Geometry (..)
+    , newGeometry
 
     -- ** Import
-    Import (..),
-    newImport,
+    , Import (..)
+    , newImport
 
     -- ** Line
-    Line (..),
-    newLine,
+    , Line (..)
+    , newLine
 
     -- ** LineStyle
-    LineStyle (..),
-    newLineStyle,
+    , LineStyle (..)
+    , newLineStyle
 
     -- ** Point
-    Point (..),
-    newPoint,
+    , Point (..)
+    , newPoint
 
     -- ** PointStyle
-    PointStyle (..),
-    newPointStyle,
+    , PointStyle (..)
+    , newPointStyle
 
     -- ** Polygon
-    Polygon (..),
-    newPolygon,
+    , Polygon (..)
+    , newPolygon
 
     -- ** PolygonStyle
-    PolygonStyle (..),
-    newPolygonStyle,
+    , PolygonStyle (..)
+    , newPolygonStyle
 
     -- ** Sqlresponse
-    Sqlresponse (..),
-    newSqlresponse,
+    , Sqlresponse (..)
+    , newSqlresponse
 
     -- ** StyleFunction
-    StyleFunction (..),
-    newStyleFunction,
+    , StyleFunction (..)
+    , newStyleFunction
 
     -- ** StyleFunction_Gradient
-    StyleFunction_Gradient (..),
-    newStyleFunction_Gradient,
+    , StyleFunction_Gradient (..)
+    , newStyleFunction_Gradient
 
     -- ** StyleFunction_Gradient_ColorsItem
-    StyleFunction_Gradient_ColorsItem (..),
-    newStyleFunction_Gradient_ColorsItem,
+    , StyleFunction_Gradient_ColorsItem (..)
+    , newStyleFunction_Gradient_ColorsItem
 
     -- ** StyleSetting
-    StyleSetting (..),
-    newStyleSetting,
+    , StyleSetting (..)
+    , newStyleSetting
 
     -- ** StyleSettingList
-    StyleSettingList (..),
-    newStyleSettingList,
+    , StyleSettingList (..)
+    , newStyleSettingList
 
     -- ** Table
-    Table (..),
-    newTable,
+    , Table (..)
+    , newTable
 
     -- ** TableList
-    TableList (..),
-    newTableList,
+    , TableList (..)
+    , newTableList
 
     -- ** Task
-    Task (..),
-    newTask,
+    , Task (..)
+    , newTask
 
     -- ** TaskList
-    TaskList (..),
-    newTaskList,
+    , TaskList (..)
+    , newTaskList
 
     -- ** Template
-    Template (..),
-    newTemplate,
+    , Template (..)
+    , newTemplate
 
     -- ** TemplateList
-    TemplateList (..),
-    newTemplateList,
-  )
-where
+    , TemplateList (..)
+    , newTemplateList
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.FusionTables.Internal.Product
 import Gogol.FusionTables.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v2@ of the Fusion Tables API. This contains the host and root path used as a starting point for constructing service requests.
 fusionTablesService :: Core.ServiceConfig
-fusionTablesService =
-  Core.defaultService
-    (Core.ServiceId "fusiontables:v2")
-    "www.googleapis.com"
+fusionTablesService
+  = Core.defaultService
+      (Core.ServiceId "fusiontables:v2")
+      "www.googleapis.com"
 
 -- | Manage your Fusion Tables
 type Fusiontables'FullControl = "https://www.googleapis.com/auth/fusiontables"

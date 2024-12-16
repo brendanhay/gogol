@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,104 +31,95 @@
 --
 -- /See:/ <https://cloud.google.com/bigtable/ Cloud Bigtable Admin API Reference> for @bigtableadmin.projects.instances.tables.undelete@.
 module Gogol.BigtableAdmin.Projects.Instances.Tables.Undelete
-  ( -- * Resource
-    BigtableAdminProjectsInstancesTablesUndeleteResource,
+    (
+    -- * Resource
+      BigtableAdminProjectsInstancesTablesUndeleteResource
 
     -- ** Constructing a Request
-    BigtableAdminProjectsInstancesTablesUndelete (..),
-    newBigtableAdminProjectsInstancesTablesUndelete,
-  )
-where
+    , BigtableAdminProjectsInstancesTablesUndelete (..)
+    , newBigtableAdminProjectsInstancesTablesUndelete
+    ) where
 
-import Gogol.BigtableAdmin.Types
 import qualified Gogol.Prelude as Core
+import Gogol.BigtableAdmin.Types
 
 -- | A resource alias for @bigtableadmin.projects.instances.tables.undelete@ method which the
 -- 'BigtableAdminProjectsInstancesTablesUndelete' request conforms to.
-type BigtableAdminProjectsInstancesTablesUndeleteResource =
-  "v2"
-    Core.:> Core.CaptureMode "name" "undelete" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] UndeleteTableRequest
-    Core.:> Core.Post '[Core.JSON] Operation
+type BigtableAdminProjectsInstancesTablesUndeleteResource
+     =
+     "v2" Core.:>
+       Core.CaptureMode "name" "undelete" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.ReqBody '[Core.JSON] UndeleteTableRequest
+                       Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Restores a specified table which was accidentally deleted.
 --
 -- /See:/ 'newBigtableAdminProjectsInstancesTablesUndelete' smart constructor.
 data BigtableAdminProjectsInstancesTablesUndelete = BigtableAdminProjectsInstancesTablesUndelete
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. The unique name of the table to be restored. Values are of the form @projects\/{project}\/instances\/{instance}\/tables\/{table}@.
-    name :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: UndeleteTableRequest,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The unique name of the table to be restored. Values are of the form @projects\/{project}\/instances\/{instance}\/tables\/{table}@.
+    , name :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: UndeleteTableRequest
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'BigtableAdminProjectsInstancesTablesUndelete' with the minimum fields required to make a request.
-newBigtableAdminProjectsInstancesTablesUndelete ::
-  -- |  Required. The unique name of the table to be restored. Values are of the form @projects\/{project}\/instances\/{instance}\/tables\/{table}@. See 'name'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  UndeleteTableRequest ->
-  BigtableAdminProjectsInstancesTablesUndelete
+newBigtableAdminProjectsInstancesTablesUndelete 
+    ::  Core.Text
+       -- ^  Required. The unique name of the table to be restored. Values are of the form @projects\/{project}\/instances\/{instance}\/tables\/{table}@. See 'name'.
+    -> UndeleteTableRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> BigtableAdminProjectsInstancesTablesUndelete
 newBigtableAdminProjectsInstancesTablesUndelete name payload =
   BigtableAdminProjectsInstancesTablesUndelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    BigtableAdminProjectsInstancesTablesUndelete
-  where
-  type
-    Rs BigtableAdminProjectsInstancesTablesUndelete =
-      Operation
-  type
-    Scopes
-      BigtableAdminProjectsInstancesTablesUndelete =
-      '[ Bigtable'Admin,
-         Bigtable'Admin'Table,
-         CloudBigtable'Admin,
-         CloudBigtable'Admin'Table,
-         CloudPlatform'FullControl
-       ]
-  requestClient
-    BigtableAdminProjectsInstancesTablesUndelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        bigtableAdminService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  BigtableAdminProjectsInstancesTablesUndeleteResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           BigtableAdminProjectsInstancesTablesUndelete
+         where
+        type Rs BigtableAdminProjectsInstancesTablesUndelete
+             = Operation
+        type Scopes
+               BigtableAdminProjectsInstancesTablesUndelete
+             =
+             '[Bigtable'Admin, Bigtable'Admin'Table,
+               CloudBigtable'Admin, CloudBigtable'Admin'Table,
+               CloudPlatform'FullControl]
+        requestClient
+          BigtableAdminProjectsInstancesTablesUndelete{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              bigtableAdminService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           BigtableAdminProjectsInstancesTablesUndeleteResource)
+                      Core.mempty
+

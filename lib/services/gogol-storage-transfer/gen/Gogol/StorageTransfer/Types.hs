@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,253 +26,262 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.StorageTransfer.Types
-  ( -- * Configuration
-    storageTransferService,
+    (
+    -- * Configuration
+      storageTransferService
 
     -- * OAuth Scopes
-    CloudPlatform'FullControl,
+    , CloudPlatform'FullControl
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AgentPool
-    AgentPool (..),
-    newAgentPool,
+    , AgentPool (..)
+    , newAgentPool
 
     -- ** AgentPool_State
-    AgentPool_State (..),
+    , AgentPool_State (..)
 
     -- ** AwsAccessKey
-    AwsAccessKey (..),
-    newAwsAccessKey,
+    , AwsAccessKey (..)
+    , newAwsAccessKey
 
     -- ** AwsS3CompatibleData
-    AwsS3CompatibleData (..),
-    newAwsS3CompatibleData,
+    , AwsS3CompatibleData (..)
+    , newAwsS3CompatibleData
 
     -- ** AwsS3Data
-    AwsS3Data (..),
-    newAwsS3Data,
+    , AwsS3Data (..)
+    , newAwsS3Data
 
     -- ** AzureBlobStorageData
-    AzureBlobStorageData (..),
-    newAzureBlobStorageData,
+    , AzureBlobStorageData (..)
+    , newAzureBlobStorageData
 
     -- ** AzureCredentials
-    AzureCredentials (..),
-    newAzureCredentials,
+    , AzureCredentials (..)
+    , newAzureCredentials
 
     -- ** BandwidthLimit
-    BandwidthLimit (..),
-    newBandwidthLimit,
+    , BandwidthLimit (..)
+    , newBandwidthLimit
 
     -- ** CancelOperationRequest
-    CancelOperationRequest (..),
-    newCancelOperationRequest,
+    , CancelOperationRequest (..)
+    , newCancelOperationRequest
 
     -- ** Date
-    Date (..),
-    newDate,
+    , Date (..)
+    , newDate
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** ErrorLogEntry
-    ErrorLogEntry (..),
-    newErrorLogEntry,
+    , ErrorLogEntry (..)
+    , newErrorLogEntry
 
     -- ** ErrorSummary
-    ErrorSummary (..),
-    newErrorSummary,
+    , ErrorSummary (..)
+    , newErrorSummary
 
     -- ** ErrorSummary_ErrorCode
-    ErrorSummary_ErrorCode (..),
+    , ErrorSummary_ErrorCode (..)
 
     -- ** EventStream
-    EventStream (..),
-    newEventStream,
+    , EventStream (..)
+    , newEventStream
 
     -- ** GcsData
-    GcsData (..),
-    newGcsData,
+    , GcsData (..)
+    , newGcsData
 
     -- ** GoogleServiceAccount
-    GoogleServiceAccount (..),
-    newGoogleServiceAccount,
+    , GoogleServiceAccount (..)
+    , newGoogleServiceAccount
+
+    -- ** HdfsData
+    , HdfsData (..)
+    , newHdfsData
 
     -- ** HttpData
-    HttpData (..),
-    newHttpData,
+    , HttpData (..)
+    , newHttpData
 
     -- ** ListAgentPoolsResponse
-    ListAgentPoolsResponse (..),
-    newListAgentPoolsResponse,
+    , ListAgentPoolsResponse (..)
+    , newListAgentPoolsResponse
 
     -- ** ListOperationsResponse
-    ListOperationsResponse (..),
-    newListOperationsResponse,
+    , ListOperationsResponse (..)
+    , newListOperationsResponse
 
     -- ** ListTransferJobsResponse
-    ListTransferJobsResponse (..),
-    newListTransferJobsResponse,
+    , ListTransferJobsResponse (..)
+    , newListTransferJobsResponse
 
     -- ** LoggingConfig
-    LoggingConfig (..),
-    newLoggingConfig,
+    , LoggingConfig (..)
+    , newLoggingConfig
 
     -- ** LoggingConfig_LogActionStatesItem
-    LoggingConfig_LogActionStatesItem (..),
+    , LoggingConfig_LogActionStatesItem (..)
 
     -- ** LoggingConfig_LogActionsItem
-    LoggingConfig_LogActionsItem (..),
+    , LoggingConfig_LogActionsItem (..)
 
     -- ** MetadataOptions
-    MetadataOptions (..),
-    newMetadataOptions,
+    , MetadataOptions (..)
+    , newMetadataOptions
 
     -- ** MetadataOptions_Acl
-    MetadataOptions_Acl (..),
+    , MetadataOptions_Acl (..)
 
     -- ** MetadataOptions_Gid
-    MetadataOptions_Gid (..),
+    , MetadataOptions_Gid (..)
 
     -- ** MetadataOptions_KmsKey
-    MetadataOptions_KmsKey (..),
+    , MetadataOptions_KmsKey (..)
 
     -- ** MetadataOptions_Mode
-    MetadataOptions_Mode (..),
+    , MetadataOptions_Mode (..)
 
     -- ** MetadataOptions_StorageClass
-    MetadataOptions_StorageClass (..),
+    , MetadataOptions_StorageClass (..)
 
     -- ** MetadataOptions_Symlink
-    MetadataOptions_Symlink (..),
+    , MetadataOptions_Symlink (..)
 
     -- ** MetadataOptions_TemporaryHold
-    MetadataOptions_TemporaryHold (..),
+    , MetadataOptions_TemporaryHold (..)
 
     -- ** MetadataOptions_TimeCreated
-    MetadataOptions_TimeCreated (..),
+    , MetadataOptions_TimeCreated (..)
 
     -- ** MetadataOptions_Uid
-    MetadataOptions_Uid (..),
+    , MetadataOptions_Uid (..)
 
     -- ** NotificationConfig
-    NotificationConfig (..),
-    newNotificationConfig,
+    , NotificationConfig (..)
+    , newNotificationConfig
 
     -- ** NotificationConfig_EventTypesItem
-    NotificationConfig_EventTypesItem (..),
+    , NotificationConfig_EventTypesItem (..)
 
     -- ** NotificationConfig_PayloadFormat
-    NotificationConfig_PayloadFormat (..),
+    , NotificationConfig_PayloadFormat (..)
 
     -- ** ObjectConditions
-    ObjectConditions (..),
-    newObjectConditions,
+    , ObjectConditions (..)
+    , newObjectConditions
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** PauseTransferOperationRequest
-    PauseTransferOperationRequest (..),
-    newPauseTransferOperationRequest,
+    , PauseTransferOperationRequest (..)
+    , newPauseTransferOperationRequest
 
     -- ** PosixFilesystem
-    PosixFilesystem (..),
-    newPosixFilesystem,
+    , PosixFilesystem (..)
+    , newPosixFilesystem
+
+    -- ** ReplicationSpec
+    , ReplicationSpec (..)
+    , newReplicationSpec
 
     -- ** ResumeTransferOperationRequest
-    ResumeTransferOperationRequest (..),
-    newResumeTransferOperationRequest,
+    , ResumeTransferOperationRequest (..)
+    , newResumeTransferOperationRequest
 
     -- ** RunTransferJobRequest
-    RunTransferJobRequest (..),
-    newRunTransferJobRequest,
+    , RunTransferJobRequest (..)
+    , newRunTransferJobRequest
 
     -- ** S3CompatibleMetadata
-    S3CompatibleMetadata (..),
-    newS3CompatibleMetadata,
+    , S3CompatibleMetadata (..)
+    , newS3CompatibleMetadata
 
     -- ** S3CompatibleMetadata_AuthMethod
-    S3CompatibleMetadata_AuthMethod (..),
+    , S3CompatibleMetadata_AuthMethod (..)
 
     -- ** S3CompatibleMetadata_ListApi
-    S3CompatibleMetadata_ListApi (..),
+    , S3CompatibleMetadata_ListApi (..)
 
     -- ** S3CompatibleMetadata_Protocol
-    S3CompatibleMetadata_Protocol (..),
+    , S3CompatibleMetadata_Protocol (..)
 
     -- ** S3CompatibleMetadata_RequestModel
-    S3CompatibleMetadata_RequestModel (..),
+    , S3CompatibleMetadata_RequestModel (..)
 
     -- ** Schedule
-    Schedule (..),
-    newSchedule,
+    , Schedule (..)
+    , newSchedule
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** TimeOfDay'
-    TimeOfDay' (..),
-    newTimeOfDay,
+    , TimeOfDay' (..)
+    , newTimeOfDay
 
     -- ** TransferCounters
-    TransferCounters (..),
-    newTransferCounters,
+    , TransferCounters (..)
+    , newTransferCounters
 
     -- ** TransferJob
-    TransferJob (..),
-    newTransferJob,
+    , TransferJob (..)
+    , newTransferJob
 
     -- ** TransferJob_Status
-    TransferJob_Status (..),
+    , TransferJob_Status (..)
 
     -- ** TransferManifest
-    TransferManifest (..),
-    newTransferManifest,
+    , TransferManifest (..)
+    , newTransferManifest
 
     -- ** TransferOperation
-    TransferOperation (..),
-    newTransferOperation,
+    , TransferOperation (..)
+    , newTransferOperation
 
     -- ** TransferOperation_Status
-    TransferOperation_Status (..),
+    , TransferOperation_Status (..)
 
     -- ** TransferOptions
-    TransferOptions (..),
-    newTransferOptions,
+    , TransferOptions (..)
+    , newTransferOptions
 
     -- ** TransferOptions_OverwriteWhen
-    TransferOptions_OverwriteWhen (..),
+    , TransferOptions_OverwriteWhen (..)
 
     -- ** TransferSpec
-    TransferSpec (..),
-    newTransferSpec,
+    , TransferSpec (..)
+    , newTransferSpec
 
     -- ** UpdateTransferJobRequest
-    UpdateTransferJobRequest (..),
-    newUpdateTransferJobRequest,
-  )
-where
+    , UpdateTransferJobRequest (..)
+    , newUpdateTransferJobRequest
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.StorageTransfer.Internal.Product
@@ -279,10 +289,10 @@ import Gogol.StorageTransfer.Internal.Sum
 
 -- | Default request referring to version @v1@ of the Storage Transfer API. This contains the host and root path used as a starting point for constructing service requests.
 storageTransferService :: Core.ServiceConfig
-storageTransferService =
-  Core.defaultService
-    (Core.ServiceId "storagetransfer:v1")
-    "storagetransfer.googleapis.com"
+storageTransferService
+  = Core.defaultService
+      (Core.ServiceId "storagetransfer:v1")
+      "storagetransfer.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"

@@ -115,6 +115,7 @@
           "parameterOrder": [],
           "parameters": {
             "agreementAccepted": {
+              "deprecated": true,
               "description": "Whether the enterprise admin has seen and agreed to the managed Google Play Agreement (https://www.android.com/enterprise/terms/). Do not set this field for any customer-managed enterprise (https://developers.google.com/android/management/create-enterprise#customer-managed_enterprises). Set this to field to true for all EMM-managed enterprises (https://developers.google.com/android/management/create-enterprise#emm-managed_enterprises).",
               "location": "query",
               "type": "boolean"
@@ -147,7 +148,7 @@
           ]
         },
         "delete": {
-          "description": "Deletes an enterprise. Only available for EMM-managed enterprises.",
+          "description": "Permanently deletes an enterprise and all accounts and data associated with it. Warning: this will result in a cascaded deletion of all AM API devices associated with the deleted enterprise. Only available for EMM-managed enterprises.",
           "flatPath": "v1/enterprises/{enterprisesId}",
           "httpMethod": "DELETE",
           "id": "androidmanagement.enterprises.delete",
@@ -511,31 +512,6 @@
                     "https://www.googleapis.com/auth/androidmanagement"
                   ]
                 },
-                "delete": {
-                  "description": "Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns google.rpc.Code.UNIMPLEMENTED.",
-                  "flatPath": "v1/enterprises/{enterprisesId}/devices/{devicesId}/operations/{operationsId}",
-                  "httpMethod": "DELETE",
-                  "id": "androidmanagement.enterprises.devices.operations.delete",
-                  "parameterOrder": [
-                    "name"
-                  ],
-                  "parameters": {
-                    "name": {
-                      "description": "The name of the operation resource to be deleted.",
-                      "location": "path",
-                      "pattern": "^enterprises/[^/]+/devices/[^/]+/operations/[^/]+$",
-                      "required": true,
-                      "type": "string"
-                    }
-                  },
-                  "path": "v1/{+name}",
-                  "response": {
-                    "$ref": "Empty"
-                  },
-                  "scopes": [
-                    "https://www.googleapis.com/auth/androidmanagement"
-                  ]
-                },
                 "get": {
                   "description": "Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.",
                   "flatPath": "v1/enterprises/{enterprisesId}/devices/{devicesId}/operations/{operationsId}",
@@ -609,7 +585,7 @@
         "enrollmentTokens": {
           "methods": {
             "create": {
-              "description": "Creates an enrollment token for a given enterprise. It's up to the caller's responsibility to manage the lifecycle of newly created tokens and deleting them when they're not intended to be used anymore. Once an enrollment token has been created, it's not possible to retrieve the token's content anymore using AM API. It is recommended for EMMs to securely store the token if it's intended to be reused.",
+              "description": "Creates an enrollment token for a given enterprise. It's up to the caller's responsibility to manage the lifecycle of newly created tokens and deleting them when they're not intended to be used anymore.",
               "flatPath": "v1/enterprises/{enterprisesId}/enrollmentTokens",
               "httpMethod": "POST",
               "id": "androidmanagement.enterprises.enrollmentTokens.create",
@@ -662,7 +638,7 @@
               ]
             },
             "get": {
-              "description": "Gets an active, unexpired enrollment token. Only a partial view of EnrollmentToken is returned: all the fields but name and expiration_timestamp are empty. This method is meant to help manage active enrollment tokens lifecycle. For security reasons, it's recommended to delete active enrollment tokens as soon as they're not intended to be used anymore.",
+              "description": "Gets an active, unexpired enrollment token. A partial view of the enrollment token is returned. Only the following fields are populated: name, expirationTimestamp, allowPersonalUsage, value, qrCode. This method is meant to help manage active enrollment tokens lifecycle. For security reasons, it's recommended to delete active enrollment tokens as soon as they're not intended to be used anymore.",
               "flatPath": "v1/enterprises/{enterprisesId}/enrollmentTokens/{enrollmentTokensId}",
               "httpMethod": "GET",
               "id": "androidmanagement.enterprises.enrollmentTokens.get",
@@ -687,7 +663,7 @@
               ]
             },
             "list": {
-              "description": "Lists active, unexpired enrollment tokens for a given enterprise. The list items contain only a partial view of EnrollmentToken: all the fields but name and expiration_timestamp are empty. This method is meant to help manage active enrollment tokens lifecycle. For security reasons, it's recommended to delete active enrollment tokens as soon as they're not intended to be used anymore.",
+              "description": "Lists active, unexpired enrollment tokens for a given enterprise. The list items contain only a partial view of EnrollmentToken object. Only the following fields are populated: name, expirationTimestamp, allowPersonalUsage, value, qrCode. This method is meant to help manage active enrollment tokens lifecycle. For security reasons, it's recommended to delete active enrollment tokens as soon as they're not intended to be used anymore.",
               "flatPath": "v1/enterprises/{enterprisesId}/enrollmentTokens",
               "httpMethod": "GET",
               "id": "androidmanagement.enterprises.enrollmentTokens.list",
@@ -717,6 +693,99 @@
               "path": "v1/{+parent}/enrollmentTokens",
               "response": {
                 "$ref": "ListEnrollmentTokensResponse"
+              },
+              "scopes": [
+                "https://www.googleapis.com/auth/androidmanagement"
+              ]
+            }
+          }
+        },
+        "migrationTokens": {
+          "methods": {
+            "create": {
+              "description": "Creates a migration token, to migrate an existing device from being managed by the EMM's Device Policy Controller (DPC) to being managed by the Android Management API. See the guide (https://developers.google.com/android/management/dpc-migration) for more details.",
+              "flatPath": "v1/enterprises/{enterprisesId}/migrationTokens",
+              "httpMethod": "POST",
+              "id": "androidmanagement.enterprises.migrationTokens.create",
+              "parameterOrder": [
+                "parent"
+              ],
+              "parameters": {
+                "parent": {
+                  "description": "Required. The enterprise in which this migration token is created. This must be the same enterprise which already manages the device in the Play EMM API. Format: enterprises/{enterprise}",
+                  "location": "path",
+                  "pattern": "^enterprises/[^/]+$",
+                  "required": true,
+                  "type": "string"
+                }
+              },
+              "path": "v1/{+parent}/migrationTokens",
+              "request": {
+                "$ref": "MigrationToken"
+              },
+              "response": {
+                "$ref": "MigrationToken"
+              },
+              "scopes": [
+                "https://www.googleapis.com/auth/androidmanagement"
+              ]
+            },
+            "get": {
+              "description": "Gets a migration token.",
+              "flatPath": "v1/enterprises/{enterprisesId}/migrationTokens/{migrationTokensId}",
+              "httpMethod": "GET",
+              "id": "androidmanagement.enterprises.migrationTokens.get",
+              "parameterOrder": [
+                "name"
+              ],
+              "parameters": {
+                "name": {
+                  "description": "Required. The name of the migration token to retrieve. Format: enterprises/{enterprise}/migrationTokens/{migration_token}",
+                  "location": "path",
+                  "pattern": "^enterprises/[^/]+/migrationTokens/[^/]+$",
+                  "required": true,
+                  "type": "string"
+                }
+              },
+              "path": "v1/{+name}",
+              "response": {
+                "$ref": "MigrationToken"
+              },
+              "scopes": [
+                "https://www.googleapis.com/auth/androidmanagement"
+              ]
+            },
+            "list": {
+              "description": "Lists migration tokens.",
+              "flatPath": "v1/enterprises/{enterprisesId}/migrationTokens",
+              "httpMethod": "GET",
+              "id": "androidmanagement.enterprises.migrationTokens.list",
+              "parameterOrder": [
+                "parent"
+              ],
+              "parameters": {
+                "pageSize": {
+                  "description": "The maximum number of migration tokens to return. Fewer migration tokens may be returned. If unspecified, at most 100 migration tokens will be returned. The maximum value is 100; values above 100 will be coerced to 100.",
+                  "format": "int32",
+                  "location": "query",
+                  "type": "integer"
+                },
+                "pageToken": {
+                  "description": "A page token, received from a previous ListMigrationTokens call. Provide this to retrieve the subsequent page.When paginating, all other parameters provided to ListMigrationTokens must match the call that provided the page token.",
+                  "location": "query",
+                  "type": "string"
+                },
+                "parent": {
+                  "description": "Required. The enterprise which the migration tokens belong to. Format: enterprises/{enterprise}",
+                  "location": "path",
+                  "pattern": "^enterprises/[^/]+$",
+                  "required": true,
+                  "type": "string"
+                }
+              },
+              "path": "v1/{+parent}/migrationTokens",
+              "response": {
+                "$ref": "ListMigrationTokensResponse"
               },
               "scopes": [
                 "https://www.googleapis.com/auth/androidmanagement"
@@ -1034,6 +1103,35 @@
         }
       }
     },
+    "provisioningInfo": {
+      "methods": {
+        "get": {
+          "description": "Get the device provisioning information by the identifier provided in the sign-in url.",
+          "flatPath": "v1/provisioningInfo/{provisioningInfoId}",
+          "httpMethod": "GET",
+          "id": "androidmanagement.provisioningInfo.get",
+          "parameterOrder": [
+            "name"
+          ],
+          "parameters": {
+            "name": {
+              "description": "Required. The identifier that Android Device Policy passes to the 3P sign-in page in the form of provisioningInfo/{provisioning_info}.",
+              "location": "path",
+              "pattern": "^provisioningInfo/[^/]+$",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "v1/{+name}",
+          "response": {
+            "$ref": "ProvisioningInfo"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/androidmanagement"
+          ]
+        }
+      }
+    },
     "signupUrls": {
       "methods": {
         "create": {
@@ -1043,6 +1141,11 @@
           "id": "androidmanagement.signupUrls.create",
           "parameterOrder": [],
           "parameters": {
+            "adminEmail": {
+              "description": "Optional. Email address used to prefill the admin field of the enterprise signup form. This value is a hint only and can be altered by the user.",
+              "location": "query",
+              "type": "string"
+            },
             "callbackUrl": {
               "description": "The callback URL that the admin will be redirected to after successfully creating an enterprise. Before redirecting there the system will add a query parameter to this URL named enterpriseToken which will contain an opaque token to be used for the create enterprise request. The URL will be parsed then reformatted in order to add the enterpriseToken parameter, so there may be some minor formatting changes.",
               "location": "query",
@@ -1065,7 +1168,7 @@
       }
     }
   },
-  "revision": "20230308",
+  "revision": "20241204",
   "rootUrl": "https://androidmanagement.googleapis.com/",
   "schemas": {
     "AdbShellCommandEvent": {
@@ -1086,11 +1189,11 @@
       "type": "object"
     },
     "AdvancedSecurityOverrides": {
-      "description": "Security policies set to secure values by default. To maintain the security posture of a device, we don't recommend overriding any of the default values.",
+      "description": "Advanced security settings. In most cases, setting these is not needed.",
       "id": "AdvancedSecurityOverrides",
       "properties": {
         "commonCriteriaMode": {
-          "description": "Controls Common Criteria Mode—security standards defined in the Common Criteria for Information Technology Security Evaluation (https://www.commoncriteriaportal.org/) (CC). Enabling Common Criteria Mode increases certain security components on a device, including AES-GCM encryption of Bluetooth Long Term Keys, and Wi-Fi configuration stores.Warning: Common Criteria Mode enforces a strict security model typically only required for IT products used in national security systems and other highly sensitive organizations. Standard device use may be affected. Only enabled if required.",
+          "description": "Controls Common Criteria Mode—security standards defined in the Common Criteria for Information Technology Security Evaluation (https://www.commoncriteriaportal.org/) (CC). Enabling Common Criteria Mode increases certain security components on a device, see CommonCriteriaMode for details.Warning: Common Criteria Mode enforces a strict security model typically only required for IT products used in national security systems and other highly sensitive organizations. Standard device use may be affected. Only enabled if required. If Common Criteria Mode is turned off after being enabled previously, all user-configured Wi-Fi networks may be lost and any enterprise-configured Wi-Fi networks that require user input may need to be reconfigured.",
           "enum": [
             "COMMON_CRITERIA_MODE_UNSPECIFIED",
             "COMMON_CRITERIA_MODE_DISABLED",
@@ -1100,6 +1203,22 @@
             "Unspecified. Defaults to COMMON_CRITERIA_MODE_DISABLED.",
             "Default. Disables Common Criteria Mode.",
             "Enables Common Criteria Mode."
+          ],
+          "type": "string"
+        },
+        "contentProtectionPolicy": {
+          "description": "Optional. Controls whether content protection, which scans for deceptive apps, is enabled. This is supported on Android 15 and above.",
+          "enum": [
+            "CONTENT_PROTECTION_POLICY_UNSPECIFIED",
+            "CONTENT_PROTECTION_DISABLED",
+            "CONTENT_PROTECTION_ENFORCED",
+            "CONTENT_PROTECTION_USER_CHOICE"
+          ],
+          "enumDescriptions": [
+            "Unspecified. Defaults to CONTENT_PROTECTION_DISABLED.",
+            "Content protection is disabled and the user cannot change this.",
+            "Content protection is enabled and the user cannot change this.Supported on Android 15 and above. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 15.",
+            "Content protection is not controlled by the policy. The user is allowed to choose the behavior of content protection.Supported on Android 15 and above. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 15."
           ],
           "type": "string"
         },
@@ -1128,6 +1247,22 @@
             "Unspecified. Defaults to VERIFY_APPS_ENFORCED.",
             "Default. Force-enables app verification.",
             "Allows the user to choose whether to enable app verification."
+          ],
+          "type": "string"
+        },
+        "mtePolicy": {
+          "description": "Optional. Controls Memory Tagging Extension (MTE) (https://source.android.com/docs/security/test/memory-safety/arm-mte) on the device. The device needs to be rebooted to apply changes to the MTE policy.",
+          "enum": [
+            "MTE_POLICY_UNSPECIFIED",
+            "MTE_USER_CHOICE",
+            "MTE_ENFORCED",
+            "MTE_DISABLED"
+          ],
+          "enumDescriptions": [
+            "Unspecified. Defaults to MTE_USER_CHOICE.",
+            "The user can choose to enable or disable MTE on the device if the device supports this.",
+            "MTE is enabled on the device and the user is not allowed to change this setting. This can be set on fully managed devices and work profiles on company-owned devices. A nonComplianceDetail with MANAGEMENT_MODE is reported for other management modes. A nonComplianceDetail with DEVICE_INCOMPATIBLE is reported if the device does not support MTE.Supported on Android 14 and above. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 14.",
+            "MTE is disabled on the device and the user is not allowed to change this setting. This applies only on fully managed devices. In other cases, a nonComplianceDetail with MANAGEMENT_MODE is reported. A nonComplianceDetail with DEVICE_INCOMPATIBLE is reported if the device does not support MTE.Supported on Android 14 and above. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 14."
           ],
           "type": "string"
         },
@@ -1173,6 +1308,7 @@
       "type": "object"
     },
     "ApiLevelCondition": {
+      "deprecated": true,
       "description": "A compliance rule condition which is satisfied if the Android Framework API level on the device doesn't meet a minimum requirement. There can only be one rule with this type of condition per policy.",
       "id": "ApiLevelCondition",
       "properties": {
@@ -1503,7 +1639,7 @@
       "type": "object"
     },
     "ApplicationPolicy": {
-      "description": "Policy for an individual app.",
+      "description": "Policy for an individual app. Note: Application availability on a given device cannot be changed using this policy if installAppsDisabled is enabled. The maximum number of applications that you can specify per policy is 3,000.",
       "id": "ApplicationPolicy",
       "properties": {
         "accessibleTrackIds": {
@@ -1537,9 +1673,9 @@
           ],
           "enumDescriptions": [
             "Unspecified. Defaults to AUTO_UPDATE_DEFAULT.",
-            "The app is automatically updated with low priority to minimize the impact on the user.The app is updated when all of the following constraints are met: The device is not actively used. The device is connected to an unmetered network. The device is charging.The device is notified about a new update within 24 hours after it is published by the developer, after which the app is updated the next time the constraints above are met.",
+            "The default update mode.The app is automatically updated with low priority to minimize the impact on the user.The app is updated when all of the following constraints are met: The device is not actively used. The device is connected to an unmetered network. The device is charging. The app to be updated is not running in the foreground.The device is notified about a new update within 24 hours after it is published by the developer, after which the app is updated the next time the constraints above are met.",
             "The app is not automatically updated for a maximum of 90 days after the app becomes out of date.90 days after the app becomes out of date, the latest available version is installed automatically with low priority (see AUTO_UPDATE_DEFAULT). After the app is updated it is not automatically updated again until 90 days after it becomes out of date again.The user can still manually update the app from the Play Store at any time.",
-            "The app is updated as soon as possible. No constraints are applied.The device is notified immediately about a new update after it becomes available."
+            "The app is updated as soon as possible. No constraints are applied.The device is notified as soon as possible about a new update after it becomes available.*NOTE:* Updates to apps with larger deployments across Android's ecosystem can take up to 24h."
           ],
           "type": "string"
         },
@@ -1557,6 +1693,18 @@
           ],
           "type": "string"
         },
+        "credentialProviderPolicy": {
+          "description": "Optional. Whether the app is allowed to act as a credential provider on Android 14 and above.",
+          "enum": [
+            "CREDENTIAL_PROVIDER_POLICY_UNSPECIFIED",
+            "CREDENTIAL_PROVIDER_ALLOWED"
+          ],
+          "enumDescriptions": [
+            "Unspecified. The behaviour is governed by credentialProviderPolicyDefault.",
+            "App is allowed to act as a credential provider."
+          ],
+          "type": "string"
+        },
         "defaultPermissionPolicy": {
           "description": "The default policy for all permissions requested by the app. If specified, this overrides the policy-level default_permission_policy which applies to all apps. It does not override the permission_grants which applies to all apps.",
           "enum": [
@@ -1568,13 +1716,13 @@
           "enumDescriptions": [
             "Policy not specified. If no policy is specified for a permission at any level, then the PROMPT behavior is used by default.",
             "Prompt the user to grant a permission.",
-            "Automatically grant a permission.",
+            "Automatically grant a permission.On Android 12 and above, READ_SMS (https://developer.android.com/reference/android/Manifest.permission#READ_SMS) and following sensor-related permissions can only be granted on fully managed devices: ACCESS_FINE_LOCATION (https://developer.android.com/reference/android/Manifest.permission#ACCESS_FINE_LOCATION) ACCESS_BACKGROUND_LOCATION (https://developer.android.com/reference/android/Manifest.permission#ACCESS_BACKGROUND_LOCATION) ACCESS_COARSE_LOCATION (https://developer.android.com/reference/android/Manifest.permission#ACCESS_COARSE_LOCATION) CAMERA (https://developer.android.com/reference/android/Manifest.permission#CAMERA) RECORD_AUDIO (https://developer.android.com/reference/android/Manifest.permission#RECORD_AUDIO) ACTIVITY_RECOGNITION (https://developer.android.com/reference/android/Manifest.permission#ACTIVITY_RECOGNITION) BODY_SENSORS (https://developer.android.com/reference/android/Manifest.permission#BODY_SENSORS)",
             "Automatically deny a permission."
           ],
           "type": "string"
         },
         "delegatedScopes": {
-          "description": "The scopes delegated to the app from Android Device Policy.",
+          "description": "The scopes delegated to the app from Android Device Policy. These provide additional privileges for the applications they are applied to.",
           "items": {
             "enum": [
               "DELEGATED_SCOPE_UNSPECIFIED",
@@ -1585,18 +1733,20 @@
               "PACKAGE_ACCESS",
               "ENABLE_SYSTEM_APP",
               "NETWORK_ACTIVITY_LOGS",
-              "SECURITY_LOGS"
+              "SECURITY_LOGS",
+              "CERT_SELECTION"
             ],
             "enumDescriptions": [
               "No delegation scope specified.",
-              "Grants access to certificate installation and management.",
-              "Grants access to managed configurations management.",
-              "Grants access to blocking uninstallation.",
-              "Grants access to permission policy and permission grant state.",
-              "Grants access to package access state.",
-              "Grants access for enabling system apps.",
+              "Grants access to certificate installation and management. This scope can be delegated to multiple applications.",
+              "Grants access to managed configurations management. This scope can be delegated to multiple applications.",
+              "Grants access to blocking uninstallation. This scope can be delegated to multiple applications.",
+              "Grants access to permission policy and permission grant state. This scope can be delegated to multiple applications.",
+              "Grants access to package access state. This scope can be delegated to multiple applications.",
+              "Grants access for enabling system apps. This scope can be delegated to multiple applications.",
               "Grants access to network activity logs. Allows the delegated application to call setNetworkLoggingEnabled (https://developer.android.com/reference/android/app/admin/DevicePolicyManager#setNetworkLoggingEnabled%28android.content.ComponentName,%20boolean%29), isNetworkLoggingEnabled (https://developer.android.com/reference/android/app/admin/DevicePolicyManager#isNetworkLoggingEnabled%28android.content.ComponentName%29) and retrieveNetworkLogs (https://developer.android.com/reference/android/app/admin/DevicePolicyManager#retrieveNetworkLogs%28android.content.ComponentName,%20long%29) methods. This scope can be delegated to at most one application. Supported for fully managed devices on Android 10 and above. Supported for a work profile on Android 12 and above. When delegation is supported and set, NETWORK_ACTIVITY_LOGS is ignored.",
-              "Grants access to security logs. Allows the delegated application to call setSecurityLoggingEnabled (https://developer.android.com/reference/android/app/admin/DevicePolicyManager#setSecurityLoggingEnabled%28android.content.ComponentName,%20boolean%29), isSecurityLoggingEnabled (https://developer.android.com/reference/android/app/admin/DevicePolicyManager#isSecurityLoggingEnabled%28android.content.ComponentName%29), retrieveSecurityLogs (https://developer.android.com/reference/android/app/admin/DevicePolicyManager#retrieveSecurityLogs%28android.content.ComponentName%29) and retrievePreRebootSecurityLogs (https://developer.android.com/reference/android/app/admin/DevicePolicyManager#retrievePreRebootSecurityLogs%28android.content.ComponentName%29) methods. This scope can be delegated to at most one application. Supported for fully managed devices and company-owned devices with a work profile on Android 12 and above. When delegation is supported and set, SECURITY_LOGS is ignored."
+              "Grants access to security logs. Allows the delegated application to call setSecurityLoggingEnabled (https://developer.android.com/reference/android/app/admin/DevicePolicyManager#setSecurityLoggingEnabled%28android.content.ComponentName,%20boolean%29), isSecurityLoggingEnabled (https://developer.android.com/reference/android/app/admin/DevicePolicyManager#isSecurityLoggingEnabled%28android.content.ComponentName%29), retrieveSecurityLogs (https://developer.android.com/reference/android/app/admin/DevicePolicyManager#retrieveSecurityLogs%28android.content.ComponentName%29) and retrievePreRebootSecurityLogs (https://developer.android.com/reference/android/app/admin/DevicePolicyManager#retrievePreRebootSecurityLogs%28android.content.ComponentName%29) methods. This scope can be delegated to at most one application. Supported for fully managed devices and company-owned devices with a work profile on Android 12 and above. When delegation is supported and set, SECURITY_LOGS is ignored.",
+              "Grants access to selection of KeyChain certificates on behalf of requesting apps. Once granted, the delegated application will start receiving DelegatedAdminReceiver#onChoosePrivateKeyAlias (https://developer.android.com/reference/android/app/admin/DelegatedAdminReceiver#onChoosePrivateKeyAlias%28android.content.Context,%20android.content.Intent,%20int,%20android.net.Uri,%20java.lang.String%29). Allows the delegated application to call grantKeyPairToApp (https://developer.android.com/reference/android/app/admin/DevicePolicyManager#grantKeyPairToApp%28android.content.ComponentName,%20java.lang.String,%20java.lang.String%29) and revokeKeyPairFromApp (https://developer.android.com/reference/android/app/admin/DevicePolicyManager#revokeKeyPairFromApp%28android.content.ComponentName,%20java.lang.String,%20java.lang.String%29) methods. This scope can be delegated to at most one application. choosePrivateKeyRules must be empty and privateKeySelectionEnabled has no effect if certificate selection is delegated to an application."
             ],
             "type": "string"
           },
@@ -1609,6 +1759,18 @@
         "extensionConfig": {
           "$ref": "ExtensionConfig",
           "description": "Configuration to enable this app as an extension app, with the capability of interacting with Android Device Policy offline.This field can be set for at most one app."
+        },
+        "installConstraint": {
+          "description": "Optional. The constraints for installing the app. You can specify a maximum of one InstallConstraint. Multiple constraints are rejected.",
+          "items": {
+            "$ref": "InstallConstraint"
+          },
+          "type": "array"
+        },
+        "installPriority": {
+          "description": "Optional. Amongst apps with installType set to: FORCE_INSTALLED PREINSTALLEDthis controls the relative priority of installation. A value of 0 (default) means this app has no priority over other apps. For values between 1 and 10,000, a lower value means a higher priority. Values outside of the range 0 to 10,000 inclusive are rejected.",
+          "format": "int32",
+          "type": "integer"
         },
         "installType": {
           "description": "The type of installation to perform.",
@@ -1624,8 +1786,8 @@
           "enumDescriptions": [
             "Unspecified. Defaults to AVAILABLE.",
             "The app is automatically installed and can be removed by the user.",
-            "The app is automatically installed and can't be removed by the user.",
-            "The app is blocked and can't be installed. If the app was installed under a previous policy, it will be uninstalled.",
+            "The app is automatically installed regardless of a set maintenance window and can't be removed by the user.",
+            "The app is blocked and can't be installed. If the app was installed under a previous policy, it will be uninstalled. This also blocks its instant app functionality.",
             "The app is available to install.",
             "The app is automatically installed and can't be removed by the user and will prevent setup from completion until installation is complete.",
             "The app is automatically installed in kiosk mode: it's set as the preferred home intent and whitelisted for lock task mode. Device setup won't complete until the app is installed. After installation, users won't be able to remove the app. You can only set this installType for one app per policy. When this is present in the policy, status bar will be automatically disabled."
@@ -1633,6 +1795,7 @@
           "type": "string"
         },
         "lockTaskAllowed": {
+          "deprecated": true,
           "description": "Whether the app is allowed to lock itself in full-screen mode. DEPRECATED. Use InstallType KIOSK or kioskCustomLauncherEnabled to configure a dedicated device.",
           "type": "boolean"
         },
@@ -1663,6 +1826,20 @@
             "$ref": "PermissionGrant"
           },
           "type": "array"
+        },
+        "userControlSettings": {
+          "description": "Optional. Specifies whether user control is permitted for the app. User control includes user actions like force-stopping and clearing app data. Supported on Android 11 and above.",
+          "enum": [
+            "USER_CONTROL_SETTINGS_UNSPECIFIED",
+            "USER_CONTROL_ALLOWED",
+            "USER_CONTROL_DISALLOWED"
+          ],
+          "enumDescriptions": [
+            "Uses the default behaviour of the app to determine if user control is allowed or disallowed. For most apps, user control is allowed by default, but for some critical apps such as companion apps (extensionConfig set to true), kiosk apps and other critical system apps, user control is disallowed.",
+            "User control is allowed for the app. Kiosk apps can use this to allow user control.",
+            "User control is disallowed for the app. API_LEVEL is reported if the Android version is less than 11."
+          ],
+          "type": "string"
         },
         "workProfileWidgets": {
           "description": "Specifies whether the app installed in the work profile is allowed to add widgets to the home screen.",
@@ -1752,6 +1929,20 @@
           ],
           "type": "string"
         },
+        "userFacingType": {
+          "description": "Whether the app is user facing.",
+          "enum": [
+            "USER_FACING_TYPE_UNSPECIFIED",
+            "NOT_USER_FACING",
+            "USER_FACING"
+          ],
+          "enumDescriptions": [
+            "App user facing type is unspecified.",
+            "App is not user facing.",
+            "App is user facing."
+          ],
+          "type": "string"
+        },
         "versionCode": {
           "description": "The app version code, which can be used to determine whether one version is more recent than another.",
           "format": "int32",
@@ -1780,7 +1971,7 @@
       "id": "BatchUsageLogEvents",
       "properties": {
         "device": {
-          "description": "The name of the device in the form ‘enterprises/{enterpriseId}/devices/{deviceId}’",
+          "description": "If present, the name of the device in the form ‘enterprises/{enterpriseId}/devices/{deviceId}’",
           "type": "string"
         },
         "retrievalTime": {
@@ -1796,7 +1987,7 @@
           "type": "array"
         },
         "user": {
-          "description": "The resource name of the user that owns this device in the form ‘enterprises/{enterpriseId}/users/{userId}’.",
+          "description": "If present, the resource name of the user that owns this device in the form ‘enterprises/{enterpriseId}/users/{userId}’.",
           "type": "string"
         }
       },
@@ -1973,7 +2164,7 @@
           "type": "string"
         },
         "newPassword": {
-          "description": "For commands of type RESET_PASSWORD, optionally specifies the new password.",
+          "description": "For commands of type RESET_PASSWORD, optionally specifies the new password. Note: The new password must be at least 6 characters long if it is numeric in case of Android 14 devices. Else the command will fail with INVALID_VALUE.",
           "type": "string"
         },
         "resetPasswordFlags": {
@@ -1995,6 +2186,24 @@
           },
           "type": "array"
         },
+        "startLostModeParams": {
+          "$ref": "StartLostModeParams",
+          "description": "Parameters for the START_LOST_MODE command to put the device into lost mode. See StartLostModeParams. If this is set, then it is suggested that type should not be set. In this case, the server automatically sets it to START_LOST_MODE. It is also acceptable to explicitly set type to START_LOST_MODE."
+        },
+        "startLostModeStatus": {
+          "$ref": "StartLostModeStatus",
+          "description": "Output only. Status of the START_LOST_MODE command to put the device into lost mode. See StartLostModeStatus.",
+          "readOnly": true
+        },
+        "stopLostModeParams": {
+          "$ref": "StopLostModeParams",
+          "description": "Parameters for the STOP_LOST_MODE command to take the device out of lost mode. See StopLostModeParams. If this is set, then it is suggested that type should not be set. In this case, the server automatically sets it to STOP_LOST_MODE. It is also acceptable to explicitly set type to STOP_LOST_MODE."
+        },
+        "stopLostModeStatus": {
+          "$ref": "StopLostModeStatus",
+          "description": "Output only. Status of the STOP_LOST_MODE command to take the device out of lost mode. See StopLostModeStatus.",
+          "readOnly": true
+        },
         "type": {
           "description": "The type of the command.",
           "enum": [
@@ -2003,7 +2212,9 @@
             "RESET_PASSWORD",
             "REBOOT",
             "RELINQUISH_OWNERSHIP",
-            "CLEAR_APP_DATA"
+            "CLEAR_APP_DATA",
+            "START_LOST_MODE",
+            "STOP_LOST_MODE"
           ],
           "enumDescriptions": [
             "This value is disallowed.",
@@ -2011,7 +2222,9 @@
             "Reset the user's password.",
             "Reboot the device. Only supported on fully managed devices running Android 7.0 (API level 24) or higher.",
             "Removes the work profile and all policies from a company-owned Android 8.0+ device, relinquishing the device for personal use. Apps and data associated with the personal profile(s) are preserved. The device will be deleted from the server after it acknowledges the command.",
-            "Clears the application data of specified apps. This is supported on Android 9 and above. Note that an application can store data outside of its application data, for example in external storage or in a user dictionary. See also clear_apps_data_params."
+            "Clears the application data of specified apps. This is supported on Android 9 and above. Note that an application can store data outside of its application data, for example in external storage or in a user dictionary. See also clear_apps_data_params.",
+            "Puts the device into lost mode. Only supported on fully managed devices or organization-owned devices with a managed profile. See also start_lost_mode_params.",
+            "Takes the device out of lost mode. Only supported on fully managed devices or organization-owned devices with a managed profile. See also stop_lost_mode_params."
           ],
           "type": "string"
         },
@@ -2039,11 +2252,31 @@
             "Common Criteria Mode is currently enabled."
           ],
           "type": "string"
+        },
+        "policySignatureVerificationStatus": {
+          "description": "Output only. The status of policy signature verification.",
+          "enum": [
+            "POLICY_SIGNATURE_VERIFICATION_STATUS_UNSPECIFIED",
+            "POLICY_SIGNATURE_VERIFICATION_DISABLED",
+            "POLICY_SIGNATURE_VERIFICATION_SUCCEEDED",
+            "POLICY_SIGNATURE_VERIFICATION_NOT_SUPPORTED",
+            "POLICY_SIGNATURE_VERIFICATION_FAILED"
+          ],
+          "enumDescriptions": [
+            "Unspecified. The verification status has not been reported. This is set only if statusReportingSettings.commonCriteriaModeEnabled is false.",
+            "Policy signature verification is disabled on the device as common_criteria_mode is set to false.",
+            "Policy signature verification succeeded.",
+            "Policy signature verification is not supported, e.g. because the device has been enrolled with a CloudDPC version that does not support the policy signature verification.",
+            "The policy signature verification failed. The policy has not been applied."
+          ],
+          "readOnly": true,
+          "type": "string"
         }
       },
       "type": "object"
     },
     "ComplianceRule": {
+      "deprecated": true,
       "description": "A rule declaring which mitigating actions to take when a device is not compliant with its policy. For every rule, there is always an implicit mitigating action to set policy_compliant to false for the Device resource, and display a message on the device indicating that the device is not compliant with its policy. Other mitigating actions may optionally be taken as well, depending on the field values in the rule.",
       "id": "ComplianceRule",
       "properties": {
@@ -2147,7 +2380,7 @@
       "type": "object"
     },
     "CrossProfilePolicies": {
-      "description": "Cross-profile policies applied on the device.",
+      "description": "Controls the data from the work profile that can be accessed from the personal profile and vice versa. A nonComplianceDetail with MANAGEMENT_MODE is reported if the device does not have a work profile.",
       "id": "CrossProfilePolicies",
       "properties": {
         "crossProfileCopyPaste": {
@@ -2180,17 +2413,23 @@
           ],
           "type": "string"
         },
+        "exemptionsToShowWorkContactsInPersonalProfile": {
+          "$ref": "PackageNameList",
+          "description": "List of apps which are excluded from the ShowWorkContactsInPersonalProfile setting. For this to be set, ShowWorkContactsInPersonalProfile must be set to one of the following values: SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_ALLOWED. In this case, these exemptions act as a blocklist. SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_DISALLOWED. In this case, these exemptions act as an allowlist. SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_DISALLOWED_EXCEPT_SYSTEM. In this case, these exemptions act as an allowlist, in addition to the already allowlisted system apps.Supported on Android 14 and above. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 14."
+        },
         "showWorkContactsInPersonalProfile": {
-          "description": "Whether contacts stored in the work profile can be shown in personal profile contact searches and incoming calls.",
+          "description": "Whether personal apps can access contacts stored in the work profile.See also exemptions_to_show_work_contacts_in_personal_profile.",
           "enum": [
             "SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_UNSPECIFIED",
             "SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_DISALLOWED",
-            "SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_ALLOWED"
+            "SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_ALLOWED",
+            "SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_DISALLOWED_EXCEPT_SYSTEM"
           ],
           "enumDescriptions": [
-            "Unspecified. Defaults to SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_ALLOWED.",
-            "Prevents work profile contacts from appearing in personal profile contact searches and incoming calls",
-            "Default. Allows work profile contacts to appear in personal profile contact searches and incoming calls"
+            "Unspecified. Defaults to SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_ALLOWED.When this is set, exemptions_to_show_work_contacts_in_personal_profile must not be set.",
+            "Prevents personal apps from accessing work profile contacts and looking up work contacts.When this is set, personal apps specified in exemptions_to_show_work_contacts_in_personal_profile are allowlisted and can access work profile contacts directly.Supported on Android 7.0 and above. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 7.0.",
+            "Default. Allows apps in the personal profile to access work profile contacts including contact searches and incoming calls.When this is set, personal apps specified in exemptions_to_show_work_contacts_in_personal_profile are blocklisted and can not access work profile contacts directly.Supported on Android 7.0 and above. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 7.0.",
+            "Prevents most personal apps from accessing work profile contacts including contact searches and incoming calls, except for the OEM default Dialer, Messages, and Contacts apps. Neither user-configured Dialer, Messages, and Contacts apps, nor any other system or play installed apps, will be able to query work contacts directly.When this is set, personal apps specified in exemptions_to_show_work_contacts_in_personal_profile are allowlisted and can access work profile contacts.Supported on Android 14 and above. If this is set on a device with Android version less than 14, the behaviour falls back to SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_DISALLOWED and a nonComplianceDetail with API_LEVEL is reported."
           ],
           "type": "string"
         },
@@ -2283,20 +2522,26 @@
             "ACTIVE",
             "DISABLED",
             "DELETED",
-            "PROVISIONING"
+            "PROVISIONING",
+            "LOST",
+            "PREPARING_FOR_MIGRATION",
+            "DEACTIVATED_BY_DEVICE_FINANCE"
           ],
           "enumDescriptions": [
             "This value is disallowed.",
             "The device is active.",
             "The device is disabled.",
             "The device was deleted. This state is never returned by an API call, but is used in the final status report when the device acknowledges the deletion. If the device is deleted via the API call, this state is published to Pub/Sub. If the user deletes the work profile or resets the device, the device state will remain unknown to the server.",
-            "The device is being provisioned. Newly enrolled devices are in this state until they have a policy applied."
+            "The device is being provisioned. Newly enrolled devices are in this state until they have a policy applied.",
+            "The device is lost. This state is only possible on organization-owned devices.",
+            "The device is preparing for migrating to Android Management API. No further action is needed for the migration to continue.",
+            "This is a financed device that has been \"locked\" by the financing agent. This means certain policy settings have been applied which limit device functionality until the device has been \"unlocked\" by the financing agent. The device will continue to apply policy settings excluding those overridden by the financing agent. When the device is \"locked\", the state is reported in appliedState as DEACTIVATED_BY_DEVICE_FINANCE."
           ],
           "type": "string"
         },
         "commonCriteriaModeInfo": {
           "$ref": "CommonCriteriaModeInfo",
-          "description": "Information about Common Criteria Mode—security standards defined in the Common Criteria for Information Technology Security Evaluation (https://www.commoncriteriaportal.org/) (CC).This information is only available if statusReportingSettings.commonCriteriaModeEnabled is true in the device's policy."
+          "description": "Information about Common Criteria Mode—security standards defined in the Common Criteria for Information Technology Security Evaluation (https://www.commoncriteriaportal.org/) (CC).This information is only available if statusReportingSettings.commonCriteriaModeEnabled is true in the device's policy the device is company-owned."
         },
         "deviceSettings": {
           "$ref": "DeviceSettings",
@@ -2312,6 +2557,11 @@
             "$ref": "Display"
           },
           "type": "array"
+        },
+        "dpcMigrationInfo": {
+          "$ref": "DpcMigrationInfo",
+          "description": "Output only. Information related to whether this device was migrated from being managed by another Device Policy Controller (DPC).",
+          "readOnly": true
         },
         "enrollmentTime": {
           "description": "The time of device enrollment.",
@@ -2338,6 +2588,7 @@
           "type": "array"
         },
         "lastPolicyComplianceReportTime": {
+          "deprecated": true,
           "description": "Deprecated.",
           "format": "google-datetime",
           "type": "string"
@@ -2367,7 +2618,7 @@
           "type": "string"
         },
         "memoryEvents": {
-          "description": "Events related to memory and storage measurements in chronological order. This information is only available if memoryInfoEnabled is true in the device's policy.",
+          "description": "Events related to memory and storage measurements in chronological order. This information is only available if memoryInfoEnabled is true in the device's policy.Events are retained for a certain period of time and old events are deleted.",
           "items": {
             "$ref": "MemoryEvent"
           },
@@ -2443,14 +2694,20 @@
             "ACTIVE",
             "DISABLED",
             "DELETED",
-            "PROVISIONING"
+            "PROVISIONING",
+            "LOST",
+            "PREPARING_FOR_MIGRATION",
+            "DEACTIVATED_BY_DEVICE_FINANCE"
           ],
           "enumDescriptions": [
             "This value is disallowed.",
             "The device is active.",
             "The device is disabled.",
             "The device was deleted. This state is never returned by an API call, but is used in the final status report when the device acknowledges the deletion. If the device is deleted via the API call, this state is published to Pub/Sub. If the user deletes the work profile or resets the device, the device state will remain unknown to the server.",
-            "The device is being provisioned. Newly enrolled devices are in this state until they have a policy applied."
+            "The device is being provisioned. Newly enrolled devices are in this state until they have a policy applied.",
+            "The device is lost. This state is only possible on organization-owned devices.",
+            "The device is preparing for migrating to Android Management API. No further action is needed for the migration to continue.",
+            "This is a financed device that has been \"locked\" by the financing agent. This means certain policy settings have been applied which limit device functionality until the device has been \"unlocked\" by the financing agent. The device will continue to apply policy settings excluding those overridden by the financing agent. When the device is \"locked\", the state is reported in appliedState as DEACTIVATED_BY_DEVICE_FINANCE."
           ],
           "type": "string"
         },
@@ -2467,6 +2724,166 @@
         },
         "userName": {
           "description": "The resource name of the user that owns this device in the form enterprises/{enterpriseId}/users/{userId}.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DeviceConnectivityManagement": {
+      "description": "Covers controls for device connectivity such as Wi-Fi, USB data access, keyboard/mouse connections, and more.",
+      "id": "DeviceConnectivityManagement",
+      "properties": {
+        "configureWifi": {
+          "description": "Controls Wi-Fi configuring privileges. Based on the option set, user will have either full or limited or no control in configuring Wi-Fi networks.",
+          "enum": [
+            "CONFIGURE_WIFI_UNSPECIFIED",
+            "ALLOW_CONFIGURING_WIFI",
+            "DISALLOW_ADD_WIFI_CONFIG",
+            "DISALLOW_CONFIGURING_WIFI"
+          ],
+          "enumDescriptions": [
+            "Unspecified. Defaults to ALLOW_CONFIGURING_WIFI unless wifiConfigDisabled is set to true. If wifiConfigDisabled is set to true, this is equivalent to DISALLOW_CONFIGURING_WIFI.",
+            "The user is allowed to configure Wi-Fi. wifiConfigDisabled is ignored.",
+            "Adding new Wi-Fi configurations is disallowed. The user is only able to switch between already configured networks. Supported on Android 13 and above, on fully managed devices and work profiles on company-owned devices. If the setting is not supported, ALLOW_CONFIGURING_WIFI is set. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 13. wifiConfigDisabled is ignored.",
+            "Disallows configuring Wi-Fi networks. The setting wifiConfigDisabled is ignored when this value is set. Supported on fully managed devices and work profile on company-owned devices, on all supported API levels. For fully managed devices, setting this removes all configured networks and retains only the networks configured using openNetworkConfiguration policy. For work profiles on company-owned devices, existing configured networks are not affected and the user is not allowed to add, remove, or modify Wi-Fi networks. Note: If a network connection can't be made at boot time and configuring Wi-Fi is disabled then network escape hatch will be shown in order to refresh the device policy (see networkEscapeHatchEnabled)."
+          ],
+          "type": "string"
+        },
+        "tetheringSettings": {
+          "description": "Controls tethering settings. Based on the value set, the user is partially or fully disallowed from using different forms of tethering.",
+          "enum": [
+            "TETHERING_SETTINGS_UNSPECIFIED",
+            "ALLOW_ALL_TETHERING",
+            "DISALLOW_WIFI_TETHERING",
+            "DISALLOW_ALL_TETHERING"
+          ],
+          "enumDescriptions": [
+            "Unspecified. Defaults to ALLOW_ALL_TETHERING unless tetheringConfigDisabled is set to true. If tetheringConfigDisabled is set to true, this is equivalent to DISALLOW_ALL_TETHERING.",
+            "Allows configuration and use of all forms of tethering. tetheringConfigDisabled is ignored.",
+            "Disallows the user from using Wi-Fi tethering. Supported on company owned devices running Android 13 and above. If the setting is not supported, ALLOW_ALL_TETHERING will be set. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 13. tetheringConfigDisabled is ignored.",
+            "Disallows all forms of tethering. Supported on fully managed devices and work profile on company-owned devices, on all supported android versions. The setting tetheringConfigDisabled is ignored."
+          ],
+          "type": "string"
+        },
+        "usbDataAccess": {
+          "description": "Controls what files and/or data can be transferred via USB. Supported only on company-owned devices.",
+          "enum": [
+            "USB_DATA_ACCESS_UNSPECIFIED",
+            "ALLOW_USB_DATA_TRANSFER",
+            "DISALLOW_USB_FILE_TRANSFER",
+            "DISALLOW_USB_DATA_TRANSFER"
+          ],
+          "enumDescriptions": [
+            "Unspecified. Defaults to DISALLOW_USB_FILE_TRANSFER.",
+            "All types of USB data transfers are allowed. usbFileTransferDisabled is ignored.",
+            "Transferring files over USB is disallowed. Other types of USB data connections, such as mouse and keyboard connection, are allowed. usbFileTransferDisabled is ignored.",
+            "When set, all types of USB data transfers are prohibited. Supported for devices running Android 12 or above with USB HAL 1.3 or above. If the setting is not supported, DISALLOW_USB_FILE_TRANSFER will be set. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 12. A nonComplianceDetail with DEVICE_INCOMPATIBLE is reported if the device does not have USB HAL 1.3 or above. usbFileTransferDisabled is ignored."
+          ],
+          "type": "string"
+        },
+        "wifiDirectSettings": {
+          "description": "Controls configuring and using Wi-Fi direct settings. Supported on company-owned devices running Android 13 and above.",
+          "enum": [
+            "WIFI_DIRECT_SETTINGS_UNSPECIFIED",
+            "ALLOW_WIFI_DIRECT",
+            "DISALLOW_WIFI_DIRECT"
+          ],
+          "enumDescriptions": [
+            "Unspecified. Defaults to ALLOW_WIFI_DIRECT",
+            "The user is allowed to use Wi-Fi direct.",
+            "The user is not allowed to use Wi-Fi direct. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 13."
+          ],
+          "type": "string"
+        },
+        "wifiRoamingPolicy": {
+          "$ref": "WifiRoamingPolicy",
+          "description": "Optional. Wi-Fi roaming policy."
+        },
+        "wifiSsidPolicy": {
+          "$ref": "WifiSsidPolicy",
+          "description": "Restrictions on which Wi-Fi SSIDs the device can connect to. Note that this does not affect which networks can be configured on the device. Supported on company-owned devices running Android 13 and above."
+        }
+      },
+      "type": "object"
+    },
+    "DeviceRadioState": {
+      "description": "Controls for device radio settings.",
+      "id": "DeviceRadioState",
+      "properties": {
+        "airplaneModeState": {
+          "description": "Controls whether airplane mode can be toggled by the user or not.",
+          "enum": [
+            "AIRPLANE_MODE_STATE_UNSPECIFIED",
+            "AIRPLANE_MODE_USER_CHOICE",
+            "AIRPLANE_MODE_DISABLED"
+          ],
+          "enumDescriptions": [
+            "Unspecified. Defaults to AIRPLANE_MODE_USER_CHOICE.",
+            "The user is allowed to toggle airplane mode on or off.",
+            "Airplane mode is disabled. The user is not allowed to toggle airplane mode on. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 9."
+          ],
+          "type": "string"
+        },
+        "cellularTwoGState": {
+          "description": "Controls whether cellular 2G setting can be toggled by the user or not.",
+          "enum": [
+            "CELLULAR_TWO_G_STATE_UNSPECIFIED",
+            "CELLULAR_TWO_G_USER_CHOICE",
+            "CELLULAR_TWO_G_DISABLED"
+          ],
+          "enumDescriptions": [
+            "Unspecified. Defaults to CELLULAR_TWO_G_USER_CHOICE.",
+            "The user is allowed to toggle cellular 2G on or off.",
+            "Cellular 2G is disabled. The user is not allowed to toggle cellular 2G on via settings. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 14."
+          ],
+          "type": "string"
+        },
+        "minimumWifiSecurityLevel": {
+          "description": "The minimum required security level of Wi-Fi networks that the device can connect to.",
+          "enum": [
+            "MINIMUM_WIFI_SECURITY_LEVEL_UNSPECIFIED",
+            "OPEN_NETWORK_SECURITY",
+            "PERSONAL_NETWORK_SECURITY",
+            "ENTERPRISE_NETWORK_SECURITY",
+            "ENTERPRISE_BIT192_NETWORK_SECURITY"
+          ],
+          "enumDescriptions": [
+            "Defaults to OPEN_NETWORK_SECURITY, which means the device will be able to connect to all types of Wi-Fi networks.",
+            "The device will be able to connect to all types of Wi-Fi networks.",
+            "A personal network such as WEP, WPA2-PSK is the minimum required security. The device will not be able to connect to open wifi networks. This is stricter than OPEN_NETWORK_SECURITY. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 13.",
+            "An enterprise EAP network is the minimum required security level. The device will not be able to connect to Wi-Fi network below this security level. This is stricter than PERSONAL_NETWORK_SECURITY. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 13.",
+            "A 192-bit enterprise network is the minimum required security level. The device will not be able to connect to Wi-Fi network below this security level. This is stricter than ENTERPRISE_NETWORK_SECURITY. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 13."
+          ],
+          "type": "string"
+        },
+        "ultraWidebandState": {
+          "description": "Controls the state of the ultra wideband setting and whether the user can toggle it on or off.",
+          "enum": [
+            "ULTRA_WIDEBAND_STATE_UNSPECIFIED",
+            "ULTRA_WIDEBAND_USER_CHOICE",
+            "ULTRA_WIDEBAND_DISABLED"
+          ],
+          "enumDescriptions": [
+            "Unspecified. Defaults to ULTRA_WIDEBAND_USER_CHOICE.",
+            "The user is allowed to toggle ultra wideband on or off.",
+            "Ultra wideband is disabled. The user is not allowed to toggle ultra wideband on via settings. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 14."
+          ],
+          "type": "string"
+        },
+        "wifiState": {
+          "description": "Controls current state of Wi-Fi and if user can change its state.",
+          "enum": [
+            "WIFI_STATE_UNSPECIFIED",
+            "WIFI_STATE_USER_CHOICE",
+            "WIFI_ENABLED",
+            "WIFI_DISABLED"
+          ],
+          "enumDescriptions": [
+            "Unspecified. Defaults to WIFI_STATE_USER_CHOICE",
+            "User is allowed to enable/disable Wi-Fi.",
+            "Wi-Fi is on and the user is not allowed to turn it off. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 13.",
+            "Wi-Fi is off and the user is not allowed to turn it on. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 13."
+          ],
           "type": "string"
         }
       },
@@ -2579,6 +2996,21 @@
       },
       "type": "object"
     },
+    "DisplaySettings": {
+      "description": "Controls for the display settings.",
+      "id": "DisplaySettings",
+      "properties": {
+        "screenBrightnessSettings": {
+          "$ref": "ScreenBrightnessSettings",
+          "description": "Optional. Controls the screen brightness settings."
+        },
+        "screenTimeoutSettings": {
+          "$ref": "ScreenTimeoutSettings",
+          "description": "Optional. Controls the screen timeout settings."
+        }
+      },
+      "type": "object"
+    },
     "DnsEvent": {
       "description": "A DNS lookup event was initiated through the standard network stack.",
       "id": "DnsEvent",
@@ -2606,9 +3038,32 @@
       },
       "type": "object"
     },
+    "DpcMigrationInfo": {
+      "description": "Information related to whether this device was migrated from being managed by another Device Policy Controller (DPC).",
+      "id": "DpcMigrationInfo",
+      "properties": {
+        "additionalData": {
+          "description": "Output only. If this device was migrated from another DPC, the additionalData field of the migration token is populated here.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "previousDpc": {
+          "description": "Output only. If this device was migrated from another DPC, this is its package name. Not populated otherwise.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Empty": {
       "description": "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } ",
       "id": "Empty",
+      "properties": {},
+      "type": "object"
+    },
+    "EnrollmentCompleteEvent": {
+      "description": "Represents that the device has completed enrollment. User should be in the launcher at this point, device at this point will be compliant and all setup steps have been completed. Intentionally empty.",
+      "id": "EnrollmentCompleteEvent",
       "properties": {},
       "type": "object"
     },
@@ -2625,12 +3080,14 @@
           "enum": [
             "ALLOW_PERSONAL_USAGE_UNSPECIFIED",
             "PERSONAL_USAGE_ALLOWED",
-            "PERSONAL_USAGE_DISALLOWED"
+            "PERSONAL_USAGE_DISALLOWED",
+            "PERSONAL_USAGE_DISALLOWED_USERLESS"
           ],
           "enumDescriptions": [
             "Personal usage restriction is not specified",
             "Personal usage is allowed",
-            "Personal usage is disallowed"
+            "Personal usage is disallowed",
+            "Device is not associated with a single user, and thus both personal usage and corporate identity authentication are not expected. Important: This setting is mandatory for dedicated device enrollment and it is a breaking change. This change needs to be implemented before January 2025.For additional details see the dedicated device provisioning guide (https://developers.google.com/android/management/provision-device#company-owned_devices_for_work_use_only). "
           ],
           "type": "string"
         },
@@ -2662,7 +3119,8 @@
         },
         "user": {
           "$ref": "User",
-          "description": "The user associated with this enrollment token. If it's specified when the enrollment token is created and the user does not exist, the user will be created. This field must not contain personally identifiable information. Only the account_identifier field needs to be set."
+          "deprecated": true,
+          "description": "This field is deprecated and the value is ignored."
         },
         "value": {
           "description": "The token value that's passed to the device and authorizes the device to enroll. This is a read-only field generated by the server.",
@@ -2676,6 +3134,7 @@
       "id": "Enterprise",
       "properties": {
         "appAutoApprovalEnabled": {
+          "deprecated": true,
           "description": "Deprecated and unused.",
           "type": "boolean"
         },
@@ -2694,6 +3153,14 @@
               "COMMAND",
               "USAGE_LOGS"
             ],
+            "enumDeprecated": [
+              false,
+              false,
+              true,
+              false,
+              false,
+              false
+            ],
             "enumDescriptions": [
               "This value is ignored.",
               "A notification sent when a device enrolls.",
@@ -2709,6 +3176,10 @@
         "enterpriseDisplayName": {
           "description": "The name of the enterprise displayed to users. This field has a maximum length of 100 characters.",
           "type": "string"
+        },
+        "googleAuthenticationSettings": {
+          "$ref": "GoogleAuthenticationSettings",
+          "description": "Settings for Google-provided user authentication."
         },
         "logo": {
           "$ref": "ExternalData",
@@ -2745,7 +3216,7 @@
       "type": "object"
     },
     "ExtensionConfig": {
-      "description": "Configuration to enable an app as an extension app, with the capability of interacting with Android Device Policy offline. For Android versions 13 and above, extension apps are exempt from battery restrictions so will not be placed into the restricted App Standby Bucket (https://developer.android.com/topic/performance/appstandby#restricted-bucket). Extensions apps are also protected against users clearing their data or force-closing the application, although admins can continue to use the clear app data command (https://developer.android.com/management/reference/rest/v1/enterprises.devices/issueCommand#CommandType) on extension apps if needed for Android 13 and above.",
+      "description": "Configuration to enable an app as an extension app, with the capability of interacting with Android Device Policy offline. For Android versions 11 and above, extension apps are exempt from battery restrictions so will not be placed into the restricted App Standby Bucket (https://developer.android.com/topic/performance/appstandby#restricted-bucket). Extensions apps are also protected against users clearing their data or force-closing the application, although admins can continue to use the clear app data command on extension apps if needed for Android 11 and above.",
       "id": "ExtensionConfig",
       "properties": {
         "notificationReceiver": {
@@ -2800,7 +3271,7 @@
       "type": "object"
     },
     "FreezePeriod": {
-      "description": "A system freeze period. When a device’s clock is within the freeze period, all incoming system updates (including security patches) are blocked and won’t be installed. When a device is outside the freeze period, normal update behavior applies. Leap years are ignored in freeze period calculations, in particular: * If Feb. 29th is set as the start or end date of a freeze period, the freeze period will start or end on Feb. 28th instead. * When a device’s system clock reads Feb. 29th, it’s treated as Feb. 28th. * When calculating the number of days in a freeze period or the time between two freeze periods, Feb. 29th is ignored and not counted as a day.Note: For Freeze Periods to take effect, SystemUpdateType cannot be specified as SYSTEM_UPDATE_TYPE_UNSPECIFIED, because freeze periods require a defined policy to be specified.",
+      "description": "A system freeze period. When a device’s clock is within the freeze period, all incoming system updates (including security patches) are blocked and won’t be installed.When the device is outside any set freeze periods, the normal policy behavior (automatic, windowed, or postponed) applies.Leap years are ignored in freeze period calculations, in particular: If Feb. 29th is set as the start or end date of a freeze period, the freeze period will start or end on Feb. 28th instead. When a device’s system clock reads Feb. 29th, it’s treated as Feb. 28th. When calculating the number of days in a freeze period or the time between two freeze periods, Feb. 29th is ignored and not counted as a day.Note: For Freeze Periods to take effect, SystemUpdateType cannot be specified as SYSTEM_UPDATE_TYPE_UNSPECIFIED, because freeze periods require a defined policy to be specified.",
       "id": "FreezePeriod",
       "properties": {
         "endDate": {
@@ -2810,6 +3281,28 @@
         "startDate": {
           "$ref": "Date",
           "description": "The start date (inclusive) of the freeze period. Note: year must not be set. For example, {\"month\": 1,\"date\": 30}."
+        }
+      },
+      "type": "object"
+    },
+    "GoogleAuthenticationSettings": {
+      "description": "Contains settings for Google-provided user authentication.",
+      "id": "GoogleAuthenticationSettings",
+      "properties": {
+        "googleAuthenticationRequired": {
+          "description": "Output only. Whether users need to be authenticated by Google during the enrollment process. IT admin can specify if Google authentication is enabled for the enterprise for knowledge worker devices. This value can be set only via the Google Admin Console. Google authentication can be used with signin_url In the case where Google authentication is required and a signin_url is specified, Google authentication will be launched before signin_url.",
+          "enum": [
+            "GOOGLE_AUTHENTICATION_REQUIRED_UNSPECIFIED",
+            "NOT_REQUIRED",
+            "REQUIRED"
+          ],
+          "enumDescriptions": [
+            "This value is not used.",
+            "Google authentication is not required.",
+            "User is required to be successfully authenticated by Google."
+          ],
+          "readOnly": true,
+          "type": "string"
         }
       },
       "type": "object"
@@ -2970,6 +3463,55 @@
             "type": "number"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "InstallConstraint": {
+      "description": "Amongst apps with InstallType set to: FORCE_INSTALLED PREINSTALLEDthis defines a set of restrictions for the app installation. At least one of the fields must be set. When multiple fields are set, then all the constraints need to be satisfied for the app to be installed.",
+      "id": "InstallConstraint",
+      "properties": {
+        "chargingConstraint": {
+          "description": "Optional. Charging constraint.",
+          "enum": [
+            "CHARGING_CONSTRAINT_UNSPECIFIED",
+            "CHARGING_NOT_REQUIRED",
+            "INSTALL_ONLY_WHEN_CHARGING"
+          ],
+          "enumDescriptions": [
+            "Unspecified. Default to CHARGING_NOT_REQUIRED.",
+            "Device doesn't have to be charging.",
+            "Device has to be charging."
+          ],
+          "type": "string"
+        },
+        "deviceIdleConstraint": {
+          "description": "Optional. Device idle constraint.",
+          "enum": [
+            "DEVICE_IDLE_CONSTRAINT_UNSPECIFIED",
+            "DEVICE_IDLE_NOT_REQUIRED",
+            "INSTALL_ONLY_WHEN_DEVICE_IDLE"
+          ],
+          "enumDescriptions": [
+            "Unspecified. Default to DEVICE_IDLE_NOT_REQUIRED.",
+            "Device doesn't have to be idle, app can be installed while the user is interacting with the device.",
+            "Device has to be idle."
+          ],
+          "type": "string"
+        },
+        "networkTypeConstraint": {
+          "description": "Optional. Network type constraint.",
+          "enum": [
+            "NETWORK_TYPE_CONSTRAINT_UNSPECIFIED",
+            "INSTALL_ON_ANY_NETWORK",
+            "INSTALL_ONLY_ON_UNMETERED_NETWORK"
+          ],
+          "enumDescriptions": [
+            "Unspecified. Default to INSTALL_ON_ANY_NETWORK.",
+            "Any active networks (Wi-Fi, cellular, etc.).",
+            "Any unmetered network (e.g. Wi-FI)."
+          ],
+          "type": "string"
         }
       },
       "type": "object"
@@ -3272,6 +3814,24 @@
       },
       "type": "object"
     },
+    "ListMigrationTokensResponse": {
+      "description": "Response to a request to list migration tokens for a given enterprise.",
+      "id": "ListMigrationTokensResponse",
+      "properties": {
+        "migrationTokens": {
+          "description": "The migration tokens from the specified enterprise.",
+          "items": {
+            "$ref": "MigrationToken"
+          },
+          "type": "array"
+        },
+        "nextPageToken": {
+          "description": "A token, which can be sent as page_token to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "ListOperationsResponse": {
       "description": "The response message for Operations.ListOperations.",
       "id": "ListOperationsResponse",
@@ -3326,6 +3886,23 @@
       },
       "type": "object"
     },
+    "Location": {
+      "description": "The device location containing the latitude and longitude.",
+      "id": "Location",
+      "properties": {
+        "latitude": {
+          "description": "The latitude position of the location",
+          "format": "double",
+          "type": "number"
+        },
+        "longitude": {
+          "description": "The longitude position of the location",
+          "format": "double",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
     "LogBufferSizeCriticalEvent": {
       "description": "The usageLog buffer on the device has reached 90% of its capacity, therefore older events may be dropped. Intentionally empty.",
       "id": "LogBufferSizeCriticalEvent",
@@ -3341,6 +3918,28 @@
     "LoggingStoppedEvent": {
       "description": "usageLog policy has been disabled. Intentionally empty.",
       "id": "LoggingStoppedEvent",
+      "properties": {},
+      "type": "object"
+    },
+    "LostModeLocationEvent": {
+      "description": "A lost mode event containing the device location and battery level as a percentage.",
+      "id": "LostModeLocationEvent",
+      "properties": {
+        "batteryLevel": {
+          "description": "The battery level as a number between 0 and 100 inclusive",
+          "format": "int32",
+          "type": "integer"
+        },
+        "location": {
+          "$ref": "Location",
+          "description": "The device location"
+        }
+      },
+      "type": "object"
+    },
+    "LostModeOutgoingPhoneCallEvent": {
+      "description": "An event indicating an outgoing phone call has been made when a device is in lost mode. Intentionally empty.",
+      "id": "LostModeOutgoingPhoneCallEvent",
       "properties": {},
       "type": "object"
     },
@@ -3471,7 +4070,7 @@
       "type": "object"
     },
     "MemoryEvent": {
-      "description": "An event related to memory and storage measurements.",
+      "description": "An event related to memory and storage measurements.To distinguish between new and old events, we recommend using the createTime field.",
       "id": "MemoryEvent",
       "properties": {
         "byteCount": {
@@ -3524,6 +4123,76 @@
       },
       "type": "object"
     },
+    "MigrationToken": {
+      "description": "A token to initiate the migration of a device from being managed by a third-party DPC to being managed by Android Management API. A migration token is valid only for a single device. See the guide (https://developers.google.com/android/management/dpc-migration) for more details.",
+      "id": "MigrationToken",
+      "properties": {
+        "additionalData": {
+          "description": "Immutable. Optional EMM-specified additional data. Once the device is migrated this will be populated in the migrationAdditionalData field of the Device resource. This must be at most 1024 characters.",
+          "type": "string"
+        },
+        "createTime": {
+          "description": "Output only. Time when this migration token was created.",
+          "format": "google-datetime",
+          "readOnly": true,
+          "type": "string"
+        },
+        "device": {
+          "description": "Output only. Once this migration token is used to migrate a device, the name of the resulting Device resource will be populated here, in the form enterprises/{enterprise}/devices/{device}.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "deviceId": {
+          "description": "Required. Immutable. The id of the device, as in the Play EMM API. This corresponds to the deviceId parameter in Play EMM API's Devices.get (https://developers.google.com/android/work/play/emm-api/v1/devices/get#parameters) call.",
+          "type": "string"
+        },
+        "expireTime": {
+          "description": "Immutable. The time when this migration token expires. This can be at most seven days from the time of creation. The migration token is deleted seven days after it expires.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "managementMode": {
+          "description": "Required. Immutable. The management mode of the device or profile being migrated.",
+          "enum": [
+            "MANAGEMENT_MODE_UNSPECIFIED",
+            "WORK_PROFILE_PERSONALLY_OWNED",
+            "WORK_PROFILE_COMPANY_OWNED",
+            "FULLY_MANAGED"
+          ],
+          "enumDescriptions": [
+            "This value must not be used.",
+            "A work profile on a personally owned device. Supported only on devices running Android 9 and above.",
+            "A work profile on a company-owned device. Supported only on devices running Android 11 and above.",
+            "A fully-managed device. Supported only on devices running Android 9 and above."
+          ],
+          "type": "string"
+        },
+        "name": {
+          "description": "Output only. The name of the migration token, which is generated by the server during creation, in the form enterprises/{enterprise}/migrationTokens/{migration_token}.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "policy": {
+          "description": "Required. Immutable. The name of the policy initially applied to the enrolled device, in the form enterprises/{enterprise}/policies/{policy}.",
+          "type": "string"
+        },
+        "ttl": {
+          "description": "Input only. The time that this migration token is valid for. This is input-only, and for returning a migration token the server will populate the expireTime field. This can be at most seven days. The default is seven days.",
+          "format": "google-duration",
+          "type": "string"
+        },
+        "userId": {
+          "description": "Required. Immutable. The user id of the Managed Google Play account on the device, as in the Play EMM API. This corresponds to the userId parameter in Play EMM API's Devices.get (https://developers.google.com/android/work/play/emm-api/v1/devices/get#parameters) call.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Output only. The value of the migration token.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "NetworkInfo": {
       "description": "Device network info.",
       "id": "NetworkInfo",
@@ -3537,6 +4206,7 @@
           "type": "string"
         },
         "networkOperatorName": {
+          "deprecated": true,
           "description": "Alphabetic name of current registered operator. For example, Vodafone.",
           "type": "string"
         },
@@ -3579,7 +4249,9 @@
             "NOT_AVAILABLE_IN_COUNTRY",
             "NO_LICENSES_REMAINING",
             "NOT_ENROLLED",
-            "USER_INVALID"
+            "USER_INVALID",
+            "NETWORK_ERROR_UNRELIABLE_CONNECTION",
+            "INSUFFICIENT_STORAGE"
           ],
           "enumDescriptions": [
             "This value is disallowed.",
@@ -3592,7 +4264,9 @@
             "The app is not available in the user's country.",
             "There are no licenses available to assign to the user.",
             "The enterprise is no longer enrolled with Managed Google Play or the admin has not accepted the latest Managed Google Play Terms of Service.",
-            "The user is no longer valid. The user may have been deleted or disabled."
+            "The user is no longer valid. The user may have been deleted or disabled.",
+            "A network error on the user's device has prevented the install from succeeding. This usually happens when the device's internet connectivity is degraded, unavailable or there's a network configuration issue. Please ensure the device has access to full internet connectivity on a network that meets Android Enterprise Network Requirements (https://support.google.com/work/android/answer/10513641). App install or update will automatically resume once this is the case.",
+            "The user's device does not have sufficient storage space to install the app. This can be resolved by clearing up storage space on the device. App install or update will automatically resume once the device has sufficient storage."
           ],
           "type": "string"
         },
@@ -3609,12 +4283,13 @@
             "APP_INSTALLED",
             "PENDING",
             "APP_INCOMPATIBLE",
-            "APP_NOT_UPDATED"
+            "APP_NOT_UPDATED",
+            "DEVICE_INCOMPATIBLE"
           ],
           "enumDescriptions": [
-            "This value is disallowed.",
+            "This value is not used.",
             "The setting is not supported in the API level of the Android version running on the device.",
-            "The management mode (profile owner, device owner, etc.) doesn't support the setting.",
+            "The management mode (such as fully managed or work profile) doesn't support the setting.",
             "The user has not taken required action to comply with the setting.",
             "The setting has an invalid value.",
             "The app required to implement the policy is not installed.",
@@ -3622,7 +4297,8 @@
             "A blocked app is installed.",
             "The setting hasn't been applied at the time of the report, but is expected to be applied shortly.",
             "The setting can't be applied to the app because the app doesn't support it, for example because its target SDK version is not high enough.",
-            "The app is installed, but it hasn't been updated to the minimum version code specified by policy."
+            "The app is installed, but it hasn't been updated to the minimum version code specified by policy.",
+            "The device is incompatible with the policy requirements."
           ],
           "type": "string"
         },
@@ -3646,7 +4322,10 @@
             "PASSWORD_POLICIES_PASSWORD_EXPIRED",
             "PASSWORD_POLICIES_PASSWORD_NOT_SUFFICIENT",
             "ONC_WIFI_INVALID_VALUE",
-            "ONC_WIFI_API_LEVEL"
+            "ONC_WIFI_API_LEVEL",
+            "ONC_WIFI_INVALID_ENTERPRISE_CONFIG",
+            "ONC_WIFI_USER_SHOULD_REMOVE_NETWORK",
+            "ONC_WIFI_KEY_PAIR_ALIAS_NOT_CORRESPONDING_TO_EXISTING_KEY"
           ],
           "enumDescriptions": [
             "Specific non-compliance reason is not specified. Fields in specific_non_compliance_context are not set.",
@@ -3654,7 +4333,10 @@
             "The device or profile password has expired. passwordPoliciesContext is set. nonComplianceReason is set to USER_ACTION.",
             "The device password does not satisfy password requirements. passwordPoliciesContext is set. nonComplianceReason is set to USER_ACTION.",
             "There is an incorrect value in ONC Wi-Fi configuration. fieldPath specifies which field value is incorrect. oncWifiContext is set. nonComplianceReason is set to INVALID_VALUE.",
-            "The ONC Wi-Fi setting is not supported in the API level of the Android version running on the device. fieldPath specifies which field value is not supported. oncWifiContext is set. nonComplianceReason is set to API_LEVEL."
+            "The ONC Wi-Fi setting is not supported in the API level of the Android version running on the device. fieldPath specifies which field value is not supported. oncWifiContext is set. nonComplianceReason is set to API_LEVEL.",
+            "The enterprise Wi-Fi network is missing either the root CA or domain name. nonComplianceReason is set to INVALID_VALUE.",
+            "User needs to remove the configured Wi-Fi network manually. This is applicable only on work profiles on personally-owned devices. nonComplianceReason is set to USER_ACTION.",
+            "Key pair alias specified via ClientCertKeyPairAlias (https://chromium.googlesource.com/chromium/src/+/main/components/onc/docs/onc_spec.md#eap-type) field in openNetworkConfiguration does not correspond to an existing key installed on the device. nonComplianceReason is set to INVALID_VALUE."
           ],
           "type": "string"
         }
@@ -3662,6 +4344,7 @@
       "type": "object"
     },
     "NonComplianceDetailCondition": {
+      "deprecated": true,
       "description": "A compliance rule condition which is satisfied if there exists any matching NonComplianceDetail for the device. A NonComplianceDetail matches a NonComplianceDetailCondition if all the fields which are set within the NonComplianceDetailCondition match the corresponding NonComplianceDetail fields.",
       "id": "NonComplianceDetailCondition",
       "properties": {
@@ -3678,12 +4361,13 @@
             "APP_INSTALLED",
             "PENDING",
             "APP_INCOMPATIBLE",
-            "APP_NOT_UPDATED"
+            "APP_NOT_UPDATED",
+            "DEVICE_INCOMPATIBLE"
           ],
           "enumDescriptions": [
-            "This value is disallowed.",
+            "This value is not used.",
             "The setting is not supported in the API level of the Android version running on the device.",
-            "The management mode (profile owner, device owner, etc.) doesn't support the setting.",
+            "The management mode (such as fully managed or work profile) doesn't support the setting.",
             "The user has not taken required action to comply with the setting.",
             "The setting has an invalid value.",
             "The app required to implement the policy is not installed.",
@@ -3691,7 +4375,8 @@
             "A blocked app is installed.",
             "The setting hasn't been applied at the time of the report, but is expected to be applied shortly.",
             "The setting can't be applied to the app because the app doesn't support it, for example because its target SDK version is not high enough.",
-            "The app is installed, but it hasn't been updated to the minimum version code specified by policy."
+            "The app is installed, but it hasn't been updated to the minimum version code specified by policy.",
+            "The device is incompatible with the policy requirements."
           ],
           "type": "string"
         },
@@ -3764,7 +4449,7 @@
             "description": "Properties of the object. Contains field @type with type URL.",
             "type": "any"
           },
-          "description": "The normal response of the operation in case of success. If the original method returns no data on success, such as Delete, the response is google.protobuf.Empty. If the original method is standard Get/Create/Update, the response should be the resource. For other methods, the response should have the type XxxResponse, where Xxx is the original method name. For example, if the original method name is TakeSnapshot(), the inferred response type is TakeSnapshotResponse.",
+          "description": "The normal, successful response of the operation. If the original method returns no data on success, such as Delete, the response is google.protobuf.Empty. If the original method is standard Get/Create/Update, the response should be the resource. For other methods, the response should have the type XxxResponse, where Xxx is the original method name. For example, if the original method name is TakeSnapshot(), the inferred response type is TakeSnapshotResponse.",
           "type": "object"
         }
       },
@@ -4023,7 +4708,7 @@
           "enumDescriptions": [
             "Policy not specified. If no policy is specified for a permission at any level, then the PROMPT behavior is used by default.",
             "Prompt the user to grant a permission.",
-            "Automatically grant a permission.",
+            "Automatically grant a permission.On Android 12 and above, READ_SMS (https://developer.android.com/reference/android/Manifest.permission#READ_SMS) and following sensor-related permissions can only be granted on fully managed devices: ACCESS_FINE_LOCATION (https://developer.android.com/reference/android/Manifest.permission#ACCESS_FINE_LOCATION) ACCESS_BACKGROUND_LOCATION (https://developer.android.com/reference/android/Manifest.permission#ACCESS_BACKGROUND_LOCATION) ACCESS_COARSE_LOCATION (https://developer.android.com/reference/android/Manifest.permission#ACCESS_COARSE_LOCATION) CAMERA (https://developer.android.com/reference/android/Manifest.permission#CAMERA) RECORD_AUDIO (https://developer.android.com/reference/android/Manifest.permission#RECORD_AUDIO) ACTIVITY_RECOGNITION (https://developer.android.com/reference/android/Manifest.permission#ACTIVITY_RECOGNITION) BODY_SENSORS (https://developer.android.com/reference/android/Manifest.permission#BODY_SENSORS)",
             "Automatically deny a permission."
           ],
           "type": "string"
@@ -4069,7 +4754,7 @@
           ],
           "enumDescriptions": [
             "Unspecified. Defaults to AVAILABLE.",
-            "The app is blocked and can't be installed in the personal profile.",
+            "The app is blocked and can't be installed in the personal profile. If the app was previously installed in the device, it will be uninstalled.",
             "The app is available to install in the personal profile."
           ],
           "type": "string"
@@ -4097,7 +4782,7 @@
           "type": "boolean"
         },
         "maxDaysWithWorkOff": {
-          "description": "Controls how long the work profile can stay off. The duration must be at least 3 days.",
+          "description": "Controls how long the work profile can stay off. The minimum duration must be at least 3 days. Other details are as follows: - If the duration is set to 0, the feature is turned off. - If the duration is set to a value smaller than the minimum duration, the feature returns an error. *Note:* If you want to avoid personal profiles being suspended during long periods of off-time, you can temporarily set a large value for this parameter.",
           "format": "int32",
           "type": "integer"
         },
@@ -4116,11 +4801,31 @@
             "BLOCKLIST",
             "ALLOWLIST"
           ],
+          "enumDeprecated": [
+            false,
+            true,
+            false,
+            false
+          ],
           "enumDescriptions": [
             "Unspecified. Defaults to BLOCKLIST.",
             "All Play Store apps are available for installation in the personal profile, except those whose installType is BLOCKED in personalApplications.",
             "All Play Store apps are available for installation in the personal profile, except those whose installType is BLOCKED in personalApplications.",
             "Only apps explicitly specified in personalApplications with installType set to AVAILABLE are allowed to be installed in the personal profile."
+          ],
+          "type": "string"
+        },
+        "privateSpacePolicy": {
+          "description": "Optional. Controls whether a private space is allowed on the device.",
+          "enum": [
+            "PRIVATE_SPACE_POLICY_UNSPECIFIED",
+            "PRIVATE_SPACE_ALLOWED",
+            "PRIVATE_SPACE_DISALLOWED"
+          ],
+          "enumDescriptions": [
+            "Unspecified. Defaults to PRIVATE_SPACE_ALLOWED.",
+            "Users can create a private space profile.",
+            "Users cannot create a private space profile. Supported only for company-owned devices with a work profile. Caution: Any existing private space will be removed."
           ],
           "type": "string"
         },
@@ -4143,7 +4848,7 @@
           "type": "array"
         },
         "addUserDisabled": {
-          "description": "Whether adding new users and profiles is disabled.",
+          "description": "Whether adding new users and profiles is disabled. For devices where managementMode is DEVICE_OWNER this field is ignored and the user is never allowed to add or remove users.",
           "type": "boolean"
         },
         "adjustVolumeDisabled": {
@@ -4152,14 +4857,15 @@
         },
         "advancedSecurityOverrides": {
           "$ref": "AdvancedSecurityOverrides",
-          "description": "Security policies set to secure values by default. To maintain the security posture of a device, we don't recommend overriding any of the default values."
+          "description": "Advanced security settings. In most cases, setting these is not needed."
         },
         "alwaysOnVpnPackage": {
           "$ref": "AlwaysOnVpnPackage",
           "description": "Configuration for an always-on VPN connection. Use with vpn_config_disabled to prevent modification of this setting."
         },
         "androidDevicePolicyTracks": {
-          "description": "The app tracks for Android Device Policy the device can access. The device receives the latest version among all accessible tracks. If no tracks are specified, then the device only uses the production track.",
+          "deprecated": true,
+          "description": "This setting is not supported. Any value is ignored.",
           "items": {
             "enum": [
               "APP_TRACK_UNSPECIFIED",
@@ -4176,7 +4882,7 @@
           "type": "array"
         },
         "appAutoUpdatePolicy": {
-          "description": "Deprecated. Use autoUpdateMode instead.When autoUpdateMode is set to AUTO_UPDATE_POSTPONED or AUTO_UPDATE_HIGH_PRIORITY, this field has no effect.The app auto update policy, which controls when automatic app updates can be applied.",
+          "description": "Recommended alternative: autoUpdateMode which is set per app, provides greater flexibility around update frequency.When autoUpdateMode is set to AUTO_UPDATE_POSTPONED or AUTO_UPDATE_HIGH_PRIORITY, this field has no effect.The app auto update policy, which controls when automatic app updates can be applied.",
           "enum": [
             "APP_AUTO_UPDATE_POLICY_UNSPECIFIED",
             "CHOICE_TO_THE_USER",
@@ -4194,11 +4900,25 @@
           "type": "string"
         },
         "applications": {
-          "description": "Policy applied to apps.",
+          "description": "Policy applied to apps. This can have at most 3,000 elements.",
           "items": {
             "$ref": "ApplicationPolicy"
           },
           "type": "array"
+        },
+        "assistContentPolicy": {
+          "description": "Optional. Controls whether AssistContent (https://developer.android.com/reference/android/app/assist/AssistContent) is allowed to be sent to a privileged app such as an assistant app. AssistContent includes screenshots and information about an app, such as package name. This is supported on Android 15 and above.",
+          "enum": [
+            "ASSIST_CONTENT_POLICY_UNSPECIFIED",
+            "ASSIST_CONTENT_DISALLOWED",
+            "ASSIST_CONTENT_ALLOWED"
+          ],
+          "enumDescriptions": [
+            "Unspecified. Defaults to ASSIST_CONTENT_ALLOWED.",
+            "Assist content is blocked from being sent to a privileged app.Supported on Android 15 and above. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 15.",
+            "Assist content is allowed to be sent to a privileged app.Supported on Android 15 and above."
+          ],
+          "type": "string"
         },
         "autoDateAndTimeZone": {
           "description": "Whether auto date, time, and time zone are enabled on a company-owned device. If this is set, then autoTimeRequired is ignored.",
@@ -4215,10 +4935,12 @@
           "type": "string"
         },
         "autoTimeRequired": {
+          "deprecated": true,
           "description": "Whether auto time is required, which prevents the user from manually setting the date and time. If autoDateAndTimeZone is set, this field is ignored.",
           "type": "boolean"
         },
         "blockApplicationsEnabled": {
+          "deprecated": true,
           "description": "Whether applications other than the ones configured in applications are blocked from being installed. When set, applications that were installed under a previous policy but no longer appear in the policy are automatically uninstalled.",
           "type": "boolean"
         },
@@ -4251,6 +4973,7 @@
           "type": "string"
         },
         "cameraDisabled": {
+          "deprecated": true,
           "description": "If camera_access is set to any value other than CAMERA_ACCESS_UNSPECIFIED, this has no effect. Otherwise this field controls whether cameras are disabled: If true, all cameras are disabled, otherwise they are available. For fully managed devices this field applies for all apps on the device. For work profiles, this field applies only to apps in the work profile, and the camera access of apps outside the work profile is unaffected.",
           "type": "boolean"
         },
@@ -4259,13 +4982,14 @@
           "type": "boolean"
         },
         "choosePrivateKeyRules": {
-          "description": "Rules for determining apps' access to private keys. See ChoosePrivateKeyRule for details.",
+          "description": "Rules for determining apps' access to private keys. See ChoosePrivateKeyRule for details. This must be empty if any application has CERT_SELECTION delegation scope.",
           "items": {
             "$ref": "ChoosePrivateKeyRule"
           },
           "type": "array"
         },
         "complianceRules": {
+          "deprecated": true,
           "description": "Rules declaring which mitigating actions to take when a device is not compliant with its policy. When the conditions for multiple rules are satisfied, all of the mitigating actions for the rules are taken. There is a maximum limit of 100 rules. Use policy enforcement rules instead.",
           "items": {
             "$ref": "ComplianceRule"
@@ -4275,6 +4999,20 @@
         "createWindowsDisabled": {
           "description": "Whether creating windows besides app windows is disabled.",
           "type": "boolean"
+        },
+        "credentialProviderPolicyDefault": {
+          "description": "Controls which apps are allowed to act as credential providers on Android 14 and above. These apps store credentials, see this (https://developer.android.com/training/sign-in/passkeys) and this (https://developer.android.com/reference/androidx/credentials/CredentialManager) for details. See also credentialProviderPolicy.",
+          "enum": [
+            "CREDENTIAL_PROVIDER_POLICY_DEFAULT_UNSPECIFIED",
+            "CREDENTIAL_PROVIDER_DEFAULT_DISALLOWED",
+            "CREDENTIAL_PROVIDER_DEFAULT_DISALLOWED_EXCEPT_SYSTEM"
+          ],
+          "enumDescriptions": [
+            "Unspecified. Defaults to CREDENTIAL_PROVIDER_DEFAULT_DISALLOWED.",
+            "Apps with credentialProviderPolicy unspecified are not allowed to act as a credential provider.",
+            "Apps with credentialProviderPolicy unspecified are not allowed to act as a credential provider except for the OEM default credential providers. OEM default credential providers are always allowed to act as credential providers."
+          ],
+          "type": "string"
         },
         "credentialsConfigDisabled": {
           "description": "Whether configuring user credentials is disabled.",
@@ -4289,6 +5027,7 @@
           "type": "boolean"
         },
         "debuggingFeaturesAllowed": {
+          "deprecated": true,
           "description": "Whether the user is allowed to enable debugging features.",
           "type": "boolean"
         },
@@ -4303,14 +5042,26 @@
           "enumDescriptions": [
             "Policy not specified. If no policy is specified for a permission at any level, then the PROMPT behavior is used by default.",
             "Prompt the user to grant a permission.",
-            "Automatically grant a permission.",
+            "Automatically grant a permission.On Android 12 and above, READ_SMS (https://developer.android.com/reference/android/Manifest.permission#READ_SMS) and following sensor-related permissions can only be granted on fully managed devices: ACCESS_FINE_LOCATION (https://developer.android.com/reference/android/Manifest.permission#ACCESS_FINE_LOCATION) ACCESS_BACKGROUND_LOCATION (https://developer.android.com/reference/android/Manifest.permission#ACCESS_BACKGROUND_LOCATION) ACCESS_COARSE_LOCATION (https://developer.android.com/reference/android/Manifest.permission#ACCESS_COARSE_LOCATION) CAMERA (https://developer.android.com/reference/android/Manifest.permission#CAMERA) RECORD_AUDIO (https://developer.android.com/reference/android/Manifest.permission#RECORD_AUDIO) ACTIVITY_RECOGNITION (https://developer.android.com/reference/android/Manifest.permission#ACTIVITY_RECOGNITION) BODY_SENSORS (https://developer.android.com/reference/android/Manifest.permission#BODY_SENSORS)",
             "Automatically deny a permission."
           ],
           "type": "string"
         },
+        "deviceConnectivityManagement": {
+          "$ref": "DeviceConnectivityManagement",
+          "description": "Covers controls for device connectivity such as Wi-Fi, USB data access, keyboard/mouse connections, and more."
+        },
         "deviceOwnerLockScreenInfo": {
           "$ref": "UserFacingMessage",
           "description": "The device owner information to be shown on the lock screen."
+        },
+        "deviceRadioState": {
+          "$ref": "DeviceRadioState",
+          "description": "Covers controls for radio state such as Wi-Fi, bluetooth, and more."
+        },
+        "displaySettings": {
+          "$ref": "DisplaySettings",
+          "description": "Optional. Controls for the display settings."
         },
         "encryptionPolicy": {
           "description": "Whether encryption is enabled",
@@ -4327,6 +5078,7 @@
           "type": "string"
         },
         "ensureVerifyAppsEnabled": {
+          "deprecated": true,
           "description": "Whether app verification is force-enabled.",
           "type": "boolean"
         },
@@ -4350,11 +5102,12 @@
           "type": "boolean"
         },
         "installUnknownSourcesAllowed": {
+          "deprecated": true,
           "description": "This field has no effect.",
           "type": "boolean"
         },
         "keyguardDisabled": {
-          "description": "If true, this disables the Lock Screen (https://source.android.com/docs/core/display/multi_display/lock-screen) for primary and/or secondary displays.",
+          "description": "If true, this disables the Lock Screen (https://source.android.com/docs/core/display/multi_display/lock-screen) for primary and/or secondary displays. This policy is supported only in dedicated device management mode.",
           "type": "boolean"
         },
         "keyguardDisabledFeatures": {
@@ -4371,6 +5124,7 @@
               "FACE",
               "IRIS",
               "BIOMETRICS",
+              "SHORTCUTS",
               "ALL_FEATURES"
             ],
             "enumDescriptions": [
@@ -4384,6 +5138,7 @@
               "Disable face authentication on secure keyguard screens.",
               "Disable iris authentication on secure keyguard screens.",
               "Disable all biometric authentication on secure keyguard screens.",
+              "Disable all shortcuts on secure keyguard screen on Android 14 and above.",
               "Disable all current and future keyguard customizations."
             ],
             "type": "string"
@@ -4409,6 +5164,16 @@
             "LOCATION_USER_CHOICE",
             "LOCATION_ENFORCED",
             "LOCATION_DISABLED"
+          ],
+          "enumDeprecated": [
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false
           ],
           "enumDescriptions": [
             "Defaults to LOCATION_USER_CHOICE.",
@@ -4469,7 +5234,7 @@
           "type": "string"
         },
         "networkEscapeHatchEnabled": {
-          "description": "Whether the network escape hatch is enabled. If a network connection can't be made at boot time, the escape hatch prompts the user to temporarily connect to a network in order to refresh the device policy. After applying policy, the temporary network will be forgotten and the device will continue booting. This prevents being unable to connect to a network if there is no suitable network in the last policy and the device boots into an app in lock task mode, or the user is otherwise unable to reach device settings.Note: Setting wifiConfigDisabled to true will override this setting under specific circumstances. Please see wifiConfigDisabled for further details.",
+          "description": "Whether the network escape hatch is enabled. If a network connection can't be made at boot time, the escape hatch prompts the user to temporarily connect to a network in order to refresh the device policy. After applying policy, the temporary network will be forgotten and the device will continue booting. This prevents being unable to connect to a network if there is no suitable network in the last policy and the device boots into an app in lock task mode, or the user is otherwise unable to reach device settings.Note: Setting wifiConfigDisabled to true will override this setting under specific circumstances. Please see wifiConfigDisabled for further details. Setting configureWifi to DISALLOW_CONFIGURING_WIFI will override this setting under specific circumstances. Please see DISALLOW_CONFIGURING_WIFI for further details.",
           "type": "boolean"
         },
         "networkResetDisabled": {
@@ -4508,6 +5273,7 @@
         },
         "passwordRequirements": {
           "$ref": "PasswordRequirements",
+          "deprecated": true,
           "description": "Password requirements. The field password_requirements.require_password_unlock must not be set. DEPRECATED - Use passwordPolicies.Note:Complexity-based values of PasswordQuality, that is, COMPLEXITY_LOW, COMPLEXITY_MEDIUM, and COMPLEXITY_HIGH, cannot be used here. unified_lock_settings cannot be used here."
         },
         "permissionGrants": {
@@ -4571,8 +5337,22 @@
           ],
           "type": "string"
         },
+        "printingPolicy": {
+          "description": "Optional. Controls whether printing is allowed. This is supported on devices running Android 9 and above. .",
+          "enum": [
+            "PRINTING_POLICY_UNSPECIFIED",
+            "PRINTING_DISALLOWED",
+            "PRINTING_ALLOWED"
+          ],
+          "enumDescriptions": [
+            "Unspecified. Defaults to PRINTING_ALLOWED.",
+            "Printing is disallowed. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 9.",
+            "Printing is allowed."
+          ],
+          "type": "string"
+        },
         "privateKeySelectionEnabled": {
-          "description": "Allows showing UI on a device for a user to choose a private key alias if there are no matching rules in ChoosePrivateKeyRules. For devices below Android P, setting this may leave enterprise keys vulnerable.",
+          "description": "Allows showing UI on a device for a user to choose a private key alias if there are no matching rules in ChoosePrivateKeyRules. For devices below Android P, setting this may leave enterprise keys vulnerable. This value will have no effect if any application has CERT_SELECTION delegation scope.",
           "type": "boolean"
         },
         "recommendedGlobalProxy": {
@@ -4584,6 +5364,7 @@
           "type": "boolean"
         },
         "safeBootDisabled": {
+          "deprecated": true,
           "description": "Whether rebooting the device into safe boot is disabled.",
           "type": "boolean"
         },
@@ -4623,6 +5404,7 @@
           "type": "boolean"
         },
         "statusBarDisabled": {
+          "deprecated": true,
           "description": "Whether the status bar is disabled. This disables notifications, quick settings, and other screen overlays that allow escape from full-screen mode. DEPRECATED. To disable the status bar on a kiosk device, use InstallType KIOSK or kioskCustomLauncherEnabled.",
           "type": "boolean"
         },
@@ -4651,10 +5433,11 @@
         },
         "systemUpdate": {
           "$ref": "SystemUpdate",
-          "description": "The system update policy, which controls how OS updates are applied. If the update type is WINDOWED, the update window will automatically apply to Play app updates as well."
+          "description": "The system update policy, which controls how OS updates are applied. If the update type is WINDOWED, the update window will automatically apply to Play app updates as well.Note: Google Play system updates (https://source.android.com/docs/core/ota/modular-system) (also called Mainline updates) are automatically downloaded and require a device reboot to be installed. Refer to the mainline section in Manage system updates (https://developer.android.com/work/dpc/system-updates#mainline) for further details."
         },
         "tetheringConfigDisabled": {
-          "description": "Whether configuring tethering and portable hotspots is disabled.",
+          "deprecated": true,
+          "description": "Whether configuring tethering and portable hotspots is disabled. If tetheringSettings is set to anything other than TETHERING_SETTINGS_UNSPECIFIED, this setting is ignored.",
           "type": "boolean"
         },
         "uninstallAppsDisabled": {
@@ -4662,6 +5445,7 @@
           "type": "boolean"
         },
         "unmuteMicrophoneDisabled": {
+          "deprecated": true,
           "description": "If microphone_access is set to any value other than MICROPHONE_ACCESS_UNSPECIFIED, this has no effect. Otherwise this field controls whether microphones are disabled: If true, all microphones are disabled, otherwise they are available. This is available only on fully managed devices.",
           "type": "boolean"
         },
@@ -4670,10 +5454,12 @@
           "description": "Configuration of device activity logging."
         },
         "usbFileTransferDisabled": {
+          "deprecated": true,
           "description": "Whether transferring files over USB is disabled. This is supported only on company-owned devices.",
           "type": "boolean"
         },
         "usbMassStorageEnabled": {
+          "deprecated": true,
           "description": "Whether USB storage is enabled. Deprecated.",
           "type": "boolean"
         },
@@ -4687,18 +5473,20 @@
           "type": "boolean"
         },
         "wifiConfigDisabled": {
-          "description": "Whether configuring Wi-Fi access points is disabled. Note: If a network connection can't be made at boot time and configuring Wi-Fi is disabled then network escape hatch will be shown in order to refresh the device policy (see networkEscapeHatchEnabled).",
+          "deprecated": true,
+          "description": "Whether configuring Wi-Fi networks is disabled. Supported on fully managed devices and work profiles on company-owned devices. For fully managed devices, setting this to true removes all configured networks and retains only the networks configured using openNetworkConfiguration. For work profiles on company-owned devices, existing configured networks are not affected and the user is not allowed to add, remove, or modify Wi-Fi networks. If configureWifi is set to anything other than CONFIGURE_WIFI_UNSPECIFIED, this setting is ignored. Note: If a network connection can't be made at boot time and configuring Wi-Fi is disabled then network escape hatch will be shown in order to refresh the device policy (see networkEscapeHatchEnabled).",
           "type": "boolean"
         },
         "wifiConfigsLockdownEnabled": {
-          "description": "DEPRECATED - Use wifi_config_disabled.",
+          "deprecated": true,
+          "description": "This is deprecated.",
           "type": "boolean"
         }
       },
       "type": "object"
     },
     "PolicyEnforcementRule": {
-      "description": "A rule that defines the actions to take if a device or work profile is not compliant with the policy specified in settingName.",
+      "description": "A rule that defines the actions to take if a device or work profile is not compliant with the policy specified in settingName. In the case of multiple matching or multiple triggered enforcement rules, a merge will occur with the most severe action being taken. However, all triggered rules are still kept track of: this includes initial trigger time and all associated non-compliance details. In the situation where the most severe enforcement rule is satisfied, the next most appropriate action is applied.",
       "id": "PolicyEnforcementRule",
       "properties": {
         "blockAction": {
@@ -4737,9 +5525,9 @@
           ],
           "enumDescriptions": [
             "Unspecified.",
-            "SafetyNet detects that the device is running an unknown OS (basicIntegrity check succeeds but ctsProfileMatch fails).",
-            "SafetyNet detects that the device is running a compromised OS (basicIntegrity check fails).",
-            "SafetyNet detects that the device does not have a strong guarantee of system integrity, such as a hardware-backed keystore (https://developer.android.com/training/articles/security-key-attestation)."
+            "Play Integrity API detects that the device is running an unknown OS (basicIntegrity check succeeds but ctsProfileMatch fails).",
+            "Play Integrity API detects that the device is running a compromised OS (basicIntegrity check fails).",
+            "Play Integrity API detects that the device does not have a strong guarantee of system integrity, if the MEETS_STRONG_INTEGRITY label doesn't show in the device integrity field (https://developer.android.com/google/play/integrity/verdicts#device-integrity-field)."
           ],
           "type": "string"
         }
@@ -4782,6 +5570,78 @@
             "The device booted.",
             "The device shut down."
           ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ProvisioningInfo": {
+      "description": "Information about a device that is available during setup.",
+      "id": "ProvisioningInfo",
+      "properties": {
+        "apiLevel": {
+          "description": "The API level of the Android platform version running on the device.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "authenticatedUserEmail": {
+          "description": "The email address of the authenticated user (only present for Google Account provisioning method).",
+          "type": "string"
+        },
+        "brand": {
+          "description": "The brand of the device. For example, Google.",
+          "type": "string"
+        },
+        "enterprise": {
+          "description": "The name of the enterprise in the form enterprises/{enterprise}.",
+          "type": "string"
+        },
+        "imei": {
+          "description": "For corporate-owned devices, IMEI number of the GSM device. For example, A1000031212.",
+          "type": "string"
+        },
+        "managementMode": {
+          "description": "The management mode of the device or profile.",
+          "enum": [
+            "MANAGEMENT_MODE_UNSPECIFIED",
+            "DEVICE_OWNER",
+            "PROFILE_OWNER"
+          ],
+          "enumDescriptions": [
+            "This value is disallowed.",
+            "Device owner. Android Device Policy has full control over the device.",
+            "Profile owner. Android Device Policy has control over a managed profile on the device."
+          ],
+          "type": "string"
+        },
+        "meid": {
+          "description": "For corporate-owned devices, MEID number of the CDMA device. For example, A00000292788E1.",
+          "type": "string"
+        },
+        "model": {
+          "description": "The model of the device. For example, Asus Nexus 7.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of this resource in the form provisioningInfo/{provisioning_info}.",
+          "type": "string"
+        },
+        "ownership": {
+          "description": "Ownership of the managed device.",
+          "enum": [
+            "OWNERSHIP_UNSPECIFIED",
+            "COMPANY_OWNED",
+            "PERSONALLY_OWNED"
+          ],
+          "enumDescriptions": [
+            "Ownership is unspecified.",
+            "Device is company-owned.",
+            "Device is personally-owned."
+          ],
+          "type": "string"
+        },
+        "serialNumber": {
+          "description": "For corporate-owned devices, The device serial number.",
           "type": "string"
         }
       },
@@ -4831,6 +5691,60 @@
           "description": "User ID in which the change was requested in.",
           "format": "int32",
           "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ScreenBrightnessSettings": {
+      "description": "Controls for the screen brightness settings.",
+      "id": "ScreenBrightnessSettings",
+      "properties": {
+        "screenBrightness": {
+          "description": "Optional. The screen brightness between 1 and 255 where 1 is the lowest and 255 is the highest brightness. A value of 0 (default) means no screen brightness set. Any other value is rejected. screenBrightnessMode must be either BRIGHTNESS_AUTOMATIC or BRIGHTNESS_FIXED to set this. Supported on Android 9 and above on fully managed devices. A NonComplianceDetail with API_LEVEL is reported if the Android version is less than 9. Supported on work profiles on company-owned devices on Android 15 and above.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "screenBrightnessMode": {
+          "description": "Optional. Controls the screen brightness mode.",
+          "enum": [
+            "SCREEN_BRIGHTNESS_MODE_UNSPECIFIED",
+            "BRIGHTNESS_USER_CHOICE",
+            "BRIGHTNESS_AUTOMATIC",
+            "BRIGHTNESS_FIXED"
+          ],
+          "enumDescriptions": [
+            "Unspecified. Defaults to BRIGHTNESS_USER_CHOICE.",
+            "The user is allowed to configure the screen brightness. screenBrightness must not be set.",
+            "The screen brightness mode is automatic in which the brightness is automatically adjusted and the user is not allowed to configure the screen brightness. screenBrightness can still be set and it is taken into account while the brightness is automatically adjusted. Supported on Android 9 and above on fully managed devices. A NonComplianceDetail with API_LEVEL is reported if the Android version is less than 9. Supported on work profiles on company-owned devices on Android 15 and above.",
+            "The screen brightness mode is fixed in which the brightness is set to screenBrightness and the user is not allowed to configure the screen brightness. screenBrightness must be set. Supported on Android 9 and above on fully managed devices. A NonComplianceDetail with API_LEVEL is reported if the Android version is less than 9. Supported on work profiles on company-owned devices on Android 15 and above."
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ScreenTimeoutSettings": {
+      "description": "Controls the screen timeout settings.",
+      "id": "ScreenTimeoutSettings",
+      "properties": {
+        "screenTimeout": {
+          "description": "Optional. Controls the screen timeout duration. The screen timeout duration must be greater than 0, otherwise it is rejected. Additionally, it should not be greater than maximumTimeToLock, otherwise the screen timeout is set to maximumTimeToLock and a NonComplianceDetail with INVALID_VALUE reason and SCREEN_TIMEOUT_GREATER_THAN_MAXIMUM_TIME_TO_LOCK specific reason is reported. If the screen timeout is less than a certain lower bound, it is set to the lower bound. The lower bound may vary across devices. If this is set, screenTimeoutMode must be SCREEN_TIMEOUT_ENFORCED. Supported on Android 9 and above on fully managed devices. A NonComplianceDetail with API_LEVEL is reported if the Android version is less than 9. Supported on work profiles on company-owned devices on Android 15 and above.",
+          "format": "google-duration",
+          "type": "string"
+        },
+        "screenTimeoutMode": {
+          "description": "Optional. Controls whether the user is allowed to configure the screen timeout.",
+          "enum": [
+            "SCREEN_TIMEOUT_MODE_UNSPECIFIED",
+            "SCREEN_TIMEOUT_USER_CHOICE",
+            "SCREEN_TIMEOUT_ENFORCED"
+          ],
+          "enumDescriptions": [
+            "Unspecified. Defaults to SCREEN_TIMEOUT_USER_CHOICE.",
+            "The user is allowed to configure the screen timeout. screenTimeout must not be set.",
+            "The screen timeout is set to screenTimeout and the user is not allowed to configure the timeout. screenTimeout must be set. Supported on Android 9 and above on fully managed devices. A NonComplianceDetail with API_LEVEL is reported if the Android version is less than 9. Supported on work profiles on company-owned devices on Android 15 and above."
+          ],
+          "type": "string"
         }
       },
       "type": "object"
@@ -4885,7 +5799,7 @@
       "type": "object"
     },
     "SigninDetail": {
-      "description": "A resource containing sign in details for an enterprise.",
+      "description": "A resource containing sign in details for an enterprise. Use enterprises to manage SigninDetails for a given enterprise.For an enterprise, we can have any number of SigninDetails that is uniquely identified by combination of the following three fields (signin_url, allow_personal_usage, token_tag). One cannot create two SigninDetails with the same (signin_url, allow_personal_usage, token_tag). (token_tag is an optional field).Patch: The operation updates the current list of SigninDetails with the new list of SigninDetails. If the stored SigninDetail configuration is passed, it returns the same signin_enrollment_token and qr_code. If we pass multiple identical SigninDetail configurations that are not stored, it will store the first one amongst those SigninDetail configurations. if the configuration already exists we cannot request it more than once in a particular patch API call, otherwise it will give a duplicate key error and the whole operation will fail. If we remove certain SigninDetail configuration from the request then it will get removed from the storage. We can then request another signin_enrollment_token and qr_code for the same SigninDetail configuration.",
       "id": "SigninDetail",
       "properties": {
         "allowPersonalUsage": {
@@ -4893,12 +5807,28 @@
           "enum": [
             "ALLOW_PERSONAL_USAGE_UNSPECIFIED",
             "PERSONAL_USAGE_ALLOWED",
-            "PERSONAL_USAGE_DISALLOWED"
+            "PERSONAL_USAGE_DISALLOWED",
+            "PERSONAL_USAGE_DISALLOWED_USERLESS"
           ],
           "enumDescriptions": [
             "Personal usage restriction is not specified",
             "Personal usage is allowed",
-            "Personal usage is disallowed"
+            "Personal usage is disallowed",
+            "Device is not associated with a single user, and thus both personal usage and corporate identity authentication are not expected. Important: This setting is mandatory for dedicated device enrollment and it is a breaking change. This change needs to be implemented before January 2025.For additional details see the dedicated device provisioning guide (https://developers.google.com/android/management/provision-device#company-owned_devices_for_work_use_only). "
+          ],
+          "type": "string"
+        },
+        "defaultStatus": {
+          "description": "Optional. Whether the sign-in URL should be used by default for the enterprise. The SigninDetail with defaultStatus set to SIGNIN_DETAIL_IS_DEFAULT is used for Google account enrollment method. Only one of an enterprise's signinDetails can have defaultStatus set to SIGNIN_DETAIL_IS_DEFAULT. If an Enterprise has at least one signinDetails and none of them have defaultStatus set to SIGNIN_DETAIL_IS_DEFAULT then the first one from the list is selected and has set defaultStatus to SIGNIN_DETAIL_IS_DEFAULT. If no signinDetails specified for the Enterprise then the Google Account device enrollment will fail.",
+          "enum": [
+            "SIGNIN_DETAIL_DEFAULT_STATUS_UNSPECIFIED",
+            "SIGNIN_DETAIL_IS_DEFAULT",
+            "SIGNIN_DETAIL_IS_NOT_DEFAULT"
+          ],
+          "enumDescriptions": [
+            "Equivalent to SIGNIN_DETAIL_IS_NOT_DEFAULT.",
+            "The sign-in URL will be used by default for the enterprise.",
+            "The sign-in URL will not be used by default for the enterprise."
           ],
           "type": "string"
         },
@@ -4912,6 +5842,10 @@
         },
         "signinUrl": {
           "description": "Sign-in URL for authentication when device is provisioned with a sign-in enrollment token. The sign-in endpoint should finish authentication flow with a URL in the form of https://enterprise.google.com/android/enroll?et= for a successful login, or https://enterprise.google.com/android/enroll/invalid for a failed login.",
+          "type": "string"
+        },
+        "tokenTag": {
+          "description": "An EMM-specified metadata to distinguish between instances of SigninDetail.",
           "type": "string"
         }
       },
@@ -5000,6 +5934,58 @@
       },
       "type": "object"
     },
+    "StartLostModeParams": {
+      "description": "Parameters associated with the START_LOST_MODE command to put the device into lost mode. At least one of the parameters, not including the organization name, must be provided in order for the device to be put into lost mode.",
+      "id": "StartLostModeParams",
+      "properties": {
+        "lostEmailAddress": {
+          "description": "The email address displayed to the user when the device is in lost mode.",
+          "type": "string"
+        },
+        "lostMessage": {
+          "$ref": "UserFacingMessage",
+          "description": "The message displayed to the user when the device is in lost mode."
+        },
+        "lostOrganization": {
+          "$ref": "UserFacingMessage",
+          "description": "The organization name displayed to the user when the device is in lost mode."
+        },
+        "lostPhoneNumber": {
+          "$ref": "UserFacingMessage",
+          "description": "The phone number that will be called when the device is in lost mode and the call owner button is tapped."
+        },
+        "lostStreetAddress": {
+          "$ref": "UserFacingMessage",
+          "description": "The street address displayed to the user when the device is in lost mode."
+        }
+      },
+      "type": "object"
+    },
+    "StartLostModeStatus": {
+      "description": "Status of the START_LOST_MODE command to put the device into lost mode.",
+      "id": "StartLostModeStatus",
+      "properties": {
+        "status": {
+          "description": "The status. See StartLostModeStatus.",
+          "enum": [
+            "STATUS_UNSPECIFIED",
+            "SUCCESS",
+            "RESET_PASSWORD_RECENTLY",
+            "USER_EXIT_LOST_MODE_RECENTLY",
+            "ALREADY_IN_LOST_MODE"
+          ],
+          "enumDescriptions": [
+            "Unspecified. This value is not used.",
+            "The device was put into lost mode.",
+            "The device could not be put into lost mode because the admin reset the device's password recently.",
+            "The device could not be put into lost mode because the user exited lost mode recently.",
+            "The device is already in lost mode."
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Status": {
       "description": "The Status type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by gRPC (https://github.com/grpc). Each Status message contains three pieces of data: error code, error message, and error details.You can find out more about this error model and how to work with it in the API Design Guide (https://cloud.google.com/apis/design/errors).",
       "id": "Status",
@@ -5040,7 +6026,7 @@
           "type": "boolean"
         },
         "commonCriteriaModeEnabled": {
-          "description": "Whether Common Criteria Mode reporting is enabled.",
+          "description": "Whether Common Criteria Mode reporting is enabled. This is supported only on company-owned devices.",
           "type": "boolean"
         },
         "deviceSettingsEnabled": {
@@ -5078,8 +6064,56 @@
       },
       "type": "object"
     },
+    "StopLostModeParams": {
+      "description": "Parameters associated with the STOP_LOST_MODE command to take the device out of lost mode.",
+      "id": "StopLostModeParams",
+      "properties": {},
+      "type": "object"
+    },
+    "StopLostModeStatus": {
+      "description": "Status of the STOP_LOST_MODE command to take the device out of lost mode.",
+      "id": "StopLostModeStatus",
+      "properties": {
+        "status": {
+          "description": "The status. See StopLostModeStatus.",
+          "enum": [
+            "STATUS_UNSPECIFIED",
+            "SUCCESS",
+            "NOT_IN_LOST_MODE"
+          ],
+          "enumDescriptions": [
+            "Unspecified. This value is not used.",
+            "The device was taken out of lost mode.",
+            "The device is not in lost mode."
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "StopLostModeUserAttemptEvent": {
+      "description": "A lost mode event indicating the user has attempted to stop lost mode.",
+      "id": "StopLostModeUserAttemptEvent",
+      "properties": {
+        "status": {
+          "description": "The status of the attempt to stop lost mode.",
+          "enum": [
+            "STATUS_UNSPECIFIED",
+            "ATTEMPT_SUCCEEDED",
+            "ATTEMPT_FAILED"
+          ],
+          "enumDescriptions": [
+            "This value is not used.",
+            "Indicates that the user successfully stopped lost mode.",
+            "Indicates that the user's attempt to stop lost mode failed."
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "SystemUpdate": {
-      "description": "Configuration for managing system updates",
+      "description": "Configuration for managing system updatesNote: Google Play system updates (https://source.android.com/docs/core/ota/modular-system) (also called Mainline updates) are automatically downloaded but require a device reboot to be installed. Refer to the mainline section in Manage system updates (https://developer.android.com/work/dpc/system-updates#mainline) for further details.",
       "id": "SystemUpdate",
       "properties": {
         "endMinutes": {
@@ -5111,7 +6145,7 @@
             "Follow the default update behavior for the device, which typically requires the user to accept system updates.",
             "Install automatically as soon as an update is available.",
             "Install automatically within a daily maintenance window. This also configures Play apps to be updated within the window. This is strongly recommended for kiosk devices because this is the only way apps persistently pinned to the foreground can be updated by Play.If autoUpdateMode is set to AUTO_UPDATE_HIGH_PRIORITY for an app, then the maintenance window is ignored for that app and it is updated as soon as possible even outside of the maintenance window.",
-            "Postpone automatic install up to a maximum of 30 days."
+            "Postpone automatic install up to a maximum of 30 days. This policy does not affect security updates (e.g. monthly security patches)."
           ],
           "type": "string"
         }
@@ -5154,6 +6188,11 @@
       "properties": {
         "carrierName": {
           "description": "The carrier name associated with this SIM card.",
+          "type": "string"
+        },
+        "iccId": {
+          "description": "Output only. The ICCID associated with this SIM card.",
+          "readOnly": true,
           "type": "string"
         },
         "phoneNumber": {
@@ -5259,6 +6298,10 @@
           "$ref": "DnsEvent",
           "description": "A DNS lookup event was initiated through the standard network stack. Part of NETWORK_ACTIVITY_LOGS."
         },
+        "enrollmentCompleteEvent": {
+          "$ref": "EnrollmentCompleteEvent",
+          "description": "Device has completed enrollment. Part of AMAPI_LOGS."
+        },
         "eventId": {
           "description": "Unique id of the event.",
           "format": "int64",
@@ -5299,7 +6342,11 @@
             "REMOTE_LOCK",
             "WIPE_FAILURE",
             "CONNECT",
-            "DNS"
+            "DNS",
+            "STOP_LOST_MODE_USER_ATTEMPT",
+            "LOST_MODE_OUTGOING_PHONE_CALL",
+            "LOST_MODE_LOCATION",
+            "ENROLLMENT_COMPLETE"
           ],
           "enumDescriptions": [
             "This value is not used",
@@ -5329,7 +6376,11 @@
             "Indicates remote_lock_event has been set.",
             "Indicates wipe_failure_event has been set.",
             "Indicates connect_event has been set.",
-            "Indicates dns_event has been set."
+            "Indicates dns_event has been set.",
+            "Indicates stopLostModeUserAttemptEvent has been set.",
+            "Indicates lostModeOutgoingPhoneCallEvent has been set.",
+            "Indicates lostModeLocationEvent has been set.",
+            "Indicates enrollment_complete_event has been set."
           ],
           "type": "string"
         },
@@ -5381,6 +6432,14 @@
           "$ref": "LoggingStoppedEvent",
           "description": "usageLog policy has been disabled. Part of SECURITY_LOGS."
         },
+        "lostModeLocationEvent": {
+          "$ref": "LostModeLocationEvent",
+          "description": "A lost mode location update when a device in lost mode."
+        },
+        "lostModeOutgoingPhoneCallEvent": {
+          "$ref": "LostModeOutgoingPhoneCallEvent",
+          "description": "An outgoing phone call has been made when a device in lost mode."
+        },
         "mediaMountEvent": {
           "$ref": "MediaMountEvent",
           "description": "Removable media was mounted. Part of SECURITY_LOGS."
@@ -5400,6 +6459,10 @@
         "remoteLockEvent": {
           "$ref": "RemoteLockEvent",
           "description": "The device or profile has been remotely locked via the LOCK command. Part of SECURITY_LOGS."
+        },
+        "stopLostModeUserAttemptEvent": {
+          "$ref": "StopLostModeUserAttemptEvent",
+          "description": "An attempt to take a device out of lost mode."
         },
         "wipeFailureEvent": {
           "$ref": "WipeFailureEvent",
@@ -5533,6 +6596,7 @@
           "type": "string"
         },
         "permissions": {
+          "deprecated": true,
           "description": "Permissions available to an admin in the embedded UI. An admin must have all of these permissions in order to view the UI. This field is deprecated.",
           "items": {
             "enum": [
@@ -5550,6 +6614,86 @@
         "value": {
           "description": "The token value which is used in the hosting page to generate the iframe with the embedded UI. This is a read-only field generated by the server.",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WifiRoamingPolicy": {
+      "description": "Wi-Fi roaming policy.",
+      "id": "WifiRoamingPolicy",
+      "properties": {
+        "wifiRoamingSettings": {
+          "description": "Optional. Wi-Fi roaming settings. SSIDs provided in this list must be unique, the policy will be rejected otherwise.",
+          "items": {
+            "$ref": "WifiRoamingSetting"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "WifiRoamingSetting": {
+      "description": "Wi-Fi roaming setting.",
+      "id": "WifiRoamingSetting",
+      "properties": {
+        "wifiRoamingMode": {
+          "description": "Required. Wi-Fi roaming mode for the specified SSID.",
+          "enum": [
+            "WIFI_ROAMING_MODE_UNSPECIFIED",
+            "WIFI_ROAMING_DISABLED",
+            "WIFI_ROAMING_DEFAULT",
+            "WIFI_ROAMING_AGGRESSIVE"
+          ],
+          "enumDescriptions": [
+            "Unspecified. Defaults to WIFI_ROAMING_DEFAULT.",
+            "Wi-Fi roaming is disabled. Supported on Android 15 and above on fully managed devices and work profiles on company-owned devices. A nonComplianceDetail with MANAGEMENT_MODE is reported for other management modes. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 15.",
+            "Default Wi-Fi roaming mode of the device.",
+            "Aggressive roaming mode which allows quicker Wi-Fi roaming. Supported on Android 15 and above on fully managed devices and work profiles on company-owned devices. A nonComplianceDetail with MANAGEMENT_MODE is reported for other management modes. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 15. A nonComplianceDetail with DEVICE_INCOMPATIBLE is reported if the device does not support aggressive roaming mode."
+          ],
+          "type": "string"
+        },
+        "wifiSsid": {
+          "description": "Required. SSID of the Wi-Fi network.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WifiSsid": {
+      "description": "Represents a Wi-Fi SSID.",
+      "id": "WifiSsid",
+      "properties": {
+        "wifiSsid": {
+          "description": "Required. Wi-Fi SSID represented as a string.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WifiSsidPolicy": {
+      "description": "Restrictions on which Wi-Fi SSIDs the device can connect to. Note that this does not affect which networks can be configured on the device. Supported on company-owned devices running Android 13 and above.",
+      "id": "WifiSsidPolicy",
+      "properties": {
+        "wifiSsidPolicyType": {
+          "description": "Type of the Wi-Fi SSID policy to be applied.",
+          "enum": [
+            "WIFI_SSID_POLICY_TYPE_UNSPECIFIED",
+            "WIFI_SSID_DENYLIST",
+            "WIFI_SSID_ALLOWLIST"
+          ],
+          "enumDescriptions": [
+            "Defaults to WIFI_SSID_DENYLIST. wifiSsids must not be set. There are no restrictions on which SSID the device can connect to.",
+            "The device cannot connect to any Wi-Fi network whose SSID is in wifiSsids, but can connect to other networks.",
+            "The device can make Wi-Fi connections only to the SSIDs in wifiSsids. wifiSsids must not be empty. The device will not be able to connect to any other Wi-Fi network."
+          ],
+          "type": "string"
+        },
+        "wifiSsids": {
+          "description": "Optional. List of Wi-Fi SSIDs that should be applied in the policy. This field must be non-empty when WifiSsidPolicyType is set to WIFI_SSID_ALLOWLIST. If this is set to a non-empty list, then a nonComplianceDetail detail with API_LEVEL is reported if the Android version is less than 13 and a nonComplianceDetail with MANAGEMENT_MODE is reported for non-company-owned devices.",
+          "items": {
+            "$ref": "WifiSsid"
+          },
+          "type": "array"
         }
       },
       "type": "object"

@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,58 +26,63 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.CloudProfiler.Types
-  ( -- * Configuration
-    cloudProfilerService,
+    (
+    -- * Configuration
+      cloudProfilerService
 
     -- * OAuth Scopes
-    CloudPlatform'FullControl,
-    Monitoring'FullControl,
-    Monitoring'Write,
+    , CloudPlatform'FullControl
+    , Monitoring'FullControl
+    , Monitoring'Write
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** CreateProfileRequest
-    CreateProfileRequest (..),
-    newCreateProfileRequest,
+    , CreateProfileRequest (..)
+    , newCreateProfileRequest
 
     -- ** CreateProfileRequest_ProfileTypeItem
-    CreateProfileRequest_ProfileTypeItem (..),
+    , CreateProfileRequest_ProfileTypeItem (..)
 
     -- ** Deployment
-    Deployment (..),
-    newDeployment,
+    , Deployment (..)
+    , newDeployment
 
     -- ** Deployment_Labels
-    Deployment_Labels (..),
-    newDeployment_Labels,
+    , Deployment_Labels (..)
+    , newDeployment_Labels
+
+    -- ** ListProfilesResponse
+    , ListProfilesResponse (..)
+    , newListProfilesResponse
 
     -- ** Profile
-    Profile (..),
-    newProfile,
+    , Profile (..)
+    , newProfile
 
     -- ** Profile_Labels
-    Profile_Labels (..),
-    newProfile_Labels,
+    , Profile_Labels (..)
+    , newProfile_Labels
 
     -- ** Profile_ProfileType
-    Profile_ProfileType (..),
-  )
-where
+    , Profile_ProfileType (..)
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.CloudProfiler.Internal.Product
 import Gogol.CloudProfiler.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v2@ of the Cloud Profiler API. This contains the host and root path used as a starting point for constructing service requests.
 cloudProfilerService :: Core.ServiceConfig
-cloudProfilerService =
-  Core.defaultService
-    (Core.ServiceId "cloudprofiler:v2")
-    "cloudprofiler.googleapis.com"
+cloudProfilerService
+  = Core.defaultService
+      (Core.ServiceId "cloudprofiler:v2")
+      "cloudprofiler.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"

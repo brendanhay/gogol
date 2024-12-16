@@ -756,7 +756,7 @@
               ],
               "parameters": {
                 "filter": {
-                  "description": "If provided, this field specifies the criteria that must be met by alert policies to be included in the response.For more details, see sorting and filtering (https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).",
+                  "description": "Optional. If provided, this field specifies the criteria that must be met by alert policies to be included in the response.For more details, see sorting and filtering (https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).",
                   "location": "query",
                   "type": "string"
                 },
@@ -768,18 +768,18 @@
                   "type": "string"
                 },
                 "orderBy": {
-                  "description": "A comma-separated list of fields by which to sort the result. Supports the same set of field references as the filter field. Entries can be prefixed with a minus sign to sort by the field in descending order.For more details, see sorting and filtering (https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).",
+                  "description": "Optional. A comma-separated list of fields by which to sort the result. Supports the same set of field references as the filter field. Entries can be prefixed with a minus sign to sort by the field in descending order.For more details, see sorting and filtering (https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).",
                   "location": "query",
                   "type": "string"
                 },
                 "pageSize": {
-                  "description": "The maximum number of results to return in a single response.",
+                  "description": "Optional. The maximum number of results to return in a single response.",
                   "format": "int32",
                   "location": "query",
                   "type": "integer"
                 },
                 "pageToken": {
-                  "description": "If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return more results from the previous method call.",
+                  "description": "Optional. If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return more results from the previous method call.",
                   "location": "query",
                   "type": "string"
                 }
@@ -804,7 +804,7 @@
               ],
               "parameters": {
                 "name": {
-                  "description": "Required if the policy exists. The resource name for this policy. The format is: projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID] [ALERT_POLICY_ID] is assigned by Cloud Monitoring when the policy is created. When calling the alertPolicies.create method, do not include the name field in the alerting policy passed as part of the request.",
+                  "description": "Identifier. Required if the policy exists. The resource name for this policy. The format is: projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID] [ALERT_POLICY_ID] is assigned by Cloud Monitoring when the policy is created. When calling the alertPolicies.create method, do not include the name field in the alerting policy passed as part of the request.",
                   "location": "path",
                   "pattern": "^projects/[^/]+/alertPolicies/[^/]+$",
                   "required": true,
@@ -1205,7 +1205,7 @@
               ],
               "parameters": {
                 "filter": {
-                  "description": "If this field is empty, all custom and system-defined metric descriptors are returned. Otherwise, the filter (https://cloud.google.com/monitoring/api/v3/filters) specifies which metric descriptors are to be returned. For example, the following filter matches all custom metrics (https://cloud.google.com/monitoring/custom-metrics): metric.type = starts_with(\"custom.googleapis.com/\") ",
+                  "description": "Optional. If this field is empty, all custom and system-defined metric descriptors are returned. Otherwise, the filter (https://cloud.google.com/monitoring/api/v3/filters) specifies which metric descriptors are to be returned. For example, the following filter matches all custom metrics (https://cloud.google.com/monitoring/custom-metrics): metric.type = starts_with(\"custom.googleapis.com/\") ",
                   "location": "query",
                   "type": "string"
                 },
@@ -1217,13 +1217,13 @@
                   "type": "string"
                 },
                 "pageSize": {
-                  "description": "A positive number that is the maximum number of results to return.",
+                  "description": "Optional. A positive number that is the maximum number of results to return. The default and maximum value is 10,000. If a page_size \u003c= 0 or \u003e 10,000 is submitted, will instead return a maximum of 10,000 results.",
                   "format": "int32",
                   "location": "query",
                   "type": "integer"
                 },
                 "pageToken": {
-                  "description": "If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.",
+                  "description": "Optional. If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.",
                   "location": "query",
                   "type": "string"
                 }
@@ -1427,7 +1427,7 @@
               ],
               "parameters": {
                 "force": {
-                  "description": "If true, the notification channel will be deleted regardless of its use in alert policies (the policies will be updated to remove the channel). If false, channels that are still referenced by an existing alerting policy will fail to be deleted in a delete operation.",
+                  "description": "If true, the notification channel will be deleted regardless of its use in alert policies (the policies will be updated to remove the channel). If false, this operation will fail if the notification channel is referenced by existing alerting policies.",
                   "location": "query",
                   "type": "boolean"
                 },
@@ -1505,7 +1505,7 @@
               ]
             },
             "list": {
-              "description": "Lists the notification channels that have been created for the project.",
+              "description": "Lists the notification channels that have been created for the project. To list the types of notification channels that are supported, use the ListNotificationChannelDescriptors method.",
               "flatPath": "v3/projects/{projectsId}/notificationChannels",
               "httpMethod": "GET",
               "id": "monitoring.projects.notificationChannels.list",
@@ -1514,7 +1514,7 @@
               ],
               "parameters": {
                 "filter": {
-                  "description": "If provided, this field specifies the criteria that must be met by notification channels to be included in the response.For more details, see sorting and filtering (https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).",
+                  "description": "Optional. If provided, this field specifies the criteria that must be met by notification channels to be included in the response.For more details, see sorting and filtering (https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).",
                   "location": "query",
                   "type": "string"
                 },
@@ -1526,18 +1526,18 @@
                   "type": "string"
                 },
                 "orderBy": {
-                  "description": "A comma-separated list of fields by which to sort the result. Supports the same set of fields as in filter. Entries can be prefixed with a minus sign to sort in descending rather than ascending order.For more details, see sorting and filtering (https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).",
+                  "description": "Optional. A comma-separated list of fields by which to sort the result. Supports the same set of fields as in filter. Entries can be prefixed with a minus sign to sort in descending rather than ascending order.For more details, see sorting and filtering (https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).",
                   "location": "query",
                   "type": "string"
                 },
                 "pageSize": {
-                  "description": "The maximum number of results to return in a single response. If not set to a positive number, a reasonable value will be chosen by the service.",
+                  "description": "Optional. The maximum number of results to return in a single response. If not set to a positive number, a reasonable value will be chosen by the service.",
                   "format": "int32",
                   "location": "query",
                   "type": "integer"
                 },
                 "pageToken": {
-                  "description": "If non-empty, page_token must contain a value returned as the next_page_token in a previous response to request the next set of results.",
+                  "description": "Optional. If non-empty, page_token must contain a value returned as the next_page_token in a previous response to request the next set of results.",
                   "location": "query",
                   "type": "string"
                 }
@@ -1562,14 +1562,14 @@
               ],
               "parameters": {
                 "name": {
-                  "description": "The full REST resource name for this channel. The format is: projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID] The [CHANNEL_ID] is automatically assigned by the server on creation.",
+                  "description": "Identifier. The full REST resource name for this channel. The format is: projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID] The [CHANNEL_ID] is automatically assigned by the server on creation.",
                   "location": "path",
                   "pattern": "^projects/[^/]+/notificationChannels/[^/]+$",
                   "required": true,
                   "type": "string"
                 },
                 "updateMask": {
-                  "description": "The fields to update.",
+                  "description": "Optional. The fields to update.",
                   "format": "google-fieldmask",
                   "location": "query",
                   "type": "string"
@@ -1758,7 +1758,7 @@
               ],
               "parameters": {
                 "name": {
-                  "description": "Required. The name of the Snooze. The format is: projects/[PROJECT_ID_OR_NUMBER]/snoozes/[SNOOZE_ID] The ID of the Snooze will be generated by the system.",
+                  "description": "Required. Identifier. The name of the Snooze. The format is: projects/[PROJECT_ID_OR_NUMBER]/snoozes/[SNOOZE_ID] The ID of the Snooze will be generated by the system.",
                   "location": "path",
                   "pattern": "^projects/[^/]+/snoozes/[^/]+$",
                   "required": true,
@@ -1788,7 +1788,7 @@
         "timeSeries": {
           "methods": {
             "create": {
-              "description": "Creates or adds data to one or more time series. The response is empty if all time series in the request were written. If any time series could not be written, a corresponding failure message is included in the error response.",
+              "description": "Creates or adds data to one or more time series. The response is empty if all time series in the request were written. If any time series could not be written, a corresponding failure message is included in the error response. This method does not support resource locations constraint of an organization policy (https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations#setting_the_organization_policy).",
               "flatPath": "v3/projects/{projectsId}/timeSeries",
               "httpMethod": "POST",
               "id": "monitoring.projects.timeSeries.create",
@@ -2113,7 +2113,8 @@
               ]
             },
             "query": {
-              "description": "Queries time series using Monitoring Query Language.",
+              "deprecated": true,
+              "description": "Queries time series by using Monitoring Query Language (MQL). We recommend using PromQL instead of MQL. For more information about the status of MQL, see the MQL deprecation notice (https://cloud.google.com/stackdriver/docs/deprecations/mql).",
               "flatPath": "v3/projects/{projectsId}/timeSeries:query",
               "httpMethod": "POST",
               "id": "monitoring.projects.timeSeries.query",
@@ -2281,7 +2282,7 @@
               ],
               "parameters": {
                 "name": {
-                  "description": "A unique resource name for this Uptime check configuration. The format is: projects/[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID] [PROJECT_ID_OR_NUMBER] is the Workspace host project associated with the Uptime check.This field should be omitted when creating the Uptime check configuration; on create, the resource name is assigned by the server and included in the response.",
+                  "description": "Identifier. A unique resource name for this Uptime check configuration. The format is: projects/[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID] [PROJECT_ID_OR_NUMBER] is the Workspace host project associated with the Uptime check.This field should be omitted when creating the Uptime check configuration; on create, the resource name is assigned by the server and included in the response.",
                   "location": "path",
                   "pattern": "^projects/[^/]+/uptimeCheckConfigs/[^/]+$",
                   "required": true,
@@ -2452,7 +2453,7 @@
           ],
           "parameters": {
             "name": {
-              "description": "Resource name for this Service. The format is: projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID] ",
+              "description": "Identifier. Resource name for this Service. The format is: projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID] ",
               "location": "path",
               "pattern": "^[^/]+/[^/]+/services/[^/]+$",
               "required": true,
@@ -2498,7 +2499,7 @@
                   "type": "string"
                 },
                 "serviceLevelObjectiveId": {
-                  "description": "Optional. The ServiceLevelObjective id to use for this ServiceLevelObjective. If omitted, an id will be generated instead. Must match the pattern [a-z0-9\\-]+",
+                  "description": "Optional. The ServiceLevelObjective id to use for this ServiceLevelObjective. If omitted, an id will be generated instead. Must match the pattern ^[a-zA-Z0-9-_:.]+$",
                   "location": "query",
                   "type": "string"
                 }
@@ -2651,7 +2652,7 @@
               ],
               "parameters": {
                 "name": {
-                  "description": "Resource name for this ServiceLevelObjective. The format is: projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME] ",
+                  "description": "Identifier. Resource name for this ServiceLevelObjective. The format is: projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME] ",
                   "location": "path",
                   "pattern": "^[^/]+/[^/]+/services/[^/]+/serviceLevelObjectives/[^/]+$",
                   "required": true,
@@ -2683,7 +2684,7 @@
     "uptimeCheckIps": {
       "methods": {
         "list": {
-          "description": "Returns the list of IP addresses that checkers run from",
+          "description": "Returns the list of IP addresses that checkers run from.",
           "flatPath": "v3/uptimeCheckIps",
           "httpMethod": "GET",
           "id": "monitoring.uptimeCheckIps.list",
@@ -2714,7 +2715,7 @@
       }
     }
   },
-  "revision": "20230326",
+  "revision": "20241114",
   "rootUrl": "https://monitoring.googleapis.com/",
   "schemas": {
     "Aggregation": {
@@ -2819,12 +2820,12 @@
       "type": "object"
     },
     "AlertPolicy": {
-      "description": "A description of the conditions under which some aspect of your system is considered to be \"unhealthy\" and the ways to notify people or services about this state. For an overview of alert policies, see Introduction to Alerting (https://cloud.google.com/monitoring/alerts/).",
+      "description": "A description of the conditions under which some aspect of your system is considered to be \"unhealthy\" and the ways to notify people or services about this state. For an overview of alerting policies, see Introduction to Alerting (https://cloud.google.com/monitoring/alerts/).",
       "id": "AlertPolicy",
       "properties": {
         "alertStrategy": {
           "$ref": "AlertStrategy",
-          "description": "Control over how this alert policy's notification channels are notified."
+          "description": "Control over how this alerting policy's notification channels are notified."
         },
         "combiner": {
           "description": "How to combine the results of multiple conditions to determine if an incident should be opened. If condition_time_series_query_language is present, this must be COMBINE_UNSPECIFIED.",
@@ -2843,7 +2844,7 @@
           "type": "string"
         },
         "conditions": {
-          "description": "A list of conditions for the policy. The conditions are combined by AND or OR according to the combiner field. If the combined conditions evaluate to true, then an incident is created. A policy can have from one to six conditions. If condition_time_series_query_language is present, it must be the only condition.",
+          "description": "A list of conditions for the policy. The conditions are combined by AND or OR according to the combiner field. If the combined conditions evaluate to true, then an incident is created. A policy can have from one to six conditions. If condition_time_series_query_language is present, it must be the only condition. If condition_monitoring_query_language is present, it must be the only condition.",
           "items": {
             "$ref": "Condition"
           },
@@ -2854,7 +2855,7 @@
           "description": "A read-only record of the creation of the alerting policy. If provided in a call to create or update, this field will be ignored."
         },
         "displayName": {
-          "description": "A short name or phrase used to identify the policy in dashboards, notifications, and incidents. To avoid confusion, don't use the same display name for multiple policies in the same project. The name is limited to 512 Unicode characters.",
+          "description": "A short name or phrase used to identify the policy in dashboards, notifications, and incidents. To avoid confusion, don't use the same display name for multiple policies in the same project. The name is limited to 512 Unicode characters.The convention for the display_name of a PrometheusQueryLanguageCondition is \"{rule group name}/{alert name}\", where the {rule group name} and {alert name} should be taken from the corresponding Prometheus configuration file. This convention is not enforced. In any case the display_name is not a unique key of the AlertPolicy.",
           "type": "string"
         },
         "documentation": {
@@ -2870,7 +2871,7 @@
           "description": "A read-only record of the most recent change to the alerting policy. If provided in a call to create or update, this field will be ignored."
         },
         "name": {
-          "description": "Required if the policy exists. The resource name for this policy. The format is: projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID] [ALERT_POLICY_ID] is assigned by Cloud Monitoring when the policy is created. When calling the alertPolicies.create method, do not include the name field in the alerting policy passed as part of the request.",
+          "description": "Identifier. Required if the policy exists. The resource name for this policy. The format is: projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID] [ALERT_POLICY_ID] is assigned by Cloud Monitoring when the policy is created. When calling the alertPolicies.create method, do not include the name field in the alerting policy passed as part of the request.",
           "type": "string"
         },
         "notificationChannels": {
@@ -2880,16 +2881,32 @@
           },
           "type": "array"
         },
+        "severity": {
+          "description": "Optional. The severity of an alerting policy indicates how important incidents generated by that policy are. The severity level will be displayed on the Incident detail page and in notifications.",
+          "enum": [
+            "SEVERITY_UNSPECIFIED",
+            "CRITICAL",
+            "ERROR",
+            "WARNING"
+          ],
+          "enumDescriptions": [
+            "No severity is specified. This is the default value.",
+            "This is the highest severity level. Use this if the problem could cause significant damage or downtime.",
+            "This is the medium severity level. Use this if the problem could cause minor damage or downtime.",
+            "This is the lowest severity level. Use this if the problem is not causing any damage or downtime, but could potentially lead to a problem in the future."
+          ],
+          "type": "string"
+        },
         "userLabels": {
           "additionalProperties": {
             "type": "string"
           },
-          "description": "User-supplied key/value data to be used for organizing and identifying the AlertPolicy objects.The field can contain up to 64 entries. Each key and value is limited to 63 Unicode characters or 128 bytes, whichever is smaller. Labels and values can contain only lowercase letters, numerals, underscores, and dashes. Keys must begin with a letter.",
+          "description": "User-supplied key/value data to be used for organizing and identifying the AlertPolicy objects.The field can contain up to 64 entries. Each key and value is limited to 63 Unicode characters or 128 bytes, whichever is smaller. Labels and values can contain only lowercase letters, numerals, underscores, and dashes. Keys must begin with a letter.Note that Prometheus {alert name} is a valid Prometheus label names (https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels), whereas Prometheus {rule group} is an unrestricted UTF-8 string. This means that they cannot be stored as-is in user labels, because they may contain characters that are not allowed in user-label values.",
           "type": "object"
         },
         "validity": {
           "$ref": "Status",
-          "description": "Read-only description of how the alert policy is invalid. OK if the alert policy is valid. If not OK, the alert policy will not generate incidents."
+          "description": "Read-only description of how the alerting policy is invalid. This field is only set when the alerting policy is invalid. An invalid alerting policy will not generate incidents."
         }
       },
       "type": "object"
@@ -2899,7 +2916,7 @@
       "id": "AlertStrategy",
       "properties": {
         "autoClose": {
-          "description": "If an alert policy that was active has no data for this long, any open incidents will close",
+          "description": "If an alerting policy that was active has no data for this long, any open incidents will close",
           "format": "google-duration",
           "type": "string"
         },
@@ -2910,9 +2927,26 @@
           },
           "type": "array"
         },
+        "notificationPrompts": {
+          "description": "For log-based alert policies, the notification prompts is always OPENED. For non log-based alert policies, the notification prompts can be OPENED or OPENED, CLOSED.",
+          "items": {
+            "enum": [
+              "NOTIFICATION_PROMPT_UNSPECIFIED",
+              "OPENED",
+              "CLOSED"
+            ],
+            "enumDescriptions": [
+              "No strategy specified. Treated as error.",
+              "Notify when an incident is opened.",
+              "Notify when an incident is closed."
+            ],
+            "type": "string"
+          },
+          "type": "array"
+        },
         "notificationRateLimit": {
           "$ref": "NotificationRateLimit",
-          "description": "Required for alert policies with a LogMatch condition.This limit is not implemented for alert policies that are not log-based."
+          "description": "Required for log-based alerting policies, i.e. policies with a LogMatch condition.This limit is not implemented for alerting policies that do not have a LogMatch condition."
         }
       },
       "type": "object"
@@ -3003,6 +3037,17 @@
       },
       "type": "object"
     },
+    "BooleanTest": {
+      "description": "A test that uses an alerting result in a boolean column produced by the SQL query.",
+      "id": "BooleanTest",
+      "properties": {
+        "column": {
+          "description": "Required. The name of the column containing the boolean value. If the value in a row is NULL, that row is ignored.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "BucketOptions": {
       "description": "BucketOptions describes the bucket boundaries used to create a histogram for the distribution. The buckets can be in a linear sequence, an exponential sequence, or each bucket can be specified explicitly. BucketOptions does not include the number of values in each bucket.A bucket has an inclusive lower bound and exclusive upper bound for the values that are counted for that bucket. The upper bound of a bucket must be strictly greater than the lower bound. The sequence of N buckets for a distribution consists of an underflow bucket (number 0), zero or more finite buckets (number 1 through N - 2) and an overflow bucket (number N - 1). The buckets are contiguous: the lower bound of bucket i (i \u003e 0) is the same as the upper bound of bucket i - 1. The buckets span the whole range of finite values: lower bound of the underflow bucket is -infinity and the upper bound of the overflow bucket is +infinity. The finite buckets are so-called because both bounds are finite.",
       "id": "BucketOptions",
@@ -3028,6 +3073,22 @@
       "properties": {
         "service": {
           "description": "The name of the Cloud Endpoints service underlying this service. Corresponds to the service resource label in the api monitored resource (https://cloud.google.com/monitoring/api/resources#tag_api).",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CloudFunctionV2Target": {
+      "description": "A Synthetic Monitor deployed to a Cloud Functions V2 instance.",
+      "id": "CloudFunctionV2Target",
+      "properties": {
+        "cloudRunRevision": {
+          "$ref": "MonitoredResource",
+          "description": "Output only. The cloud_run_revision Monitored Resource associated with the GCFv2. The Synthetic Monitor execution results (metrics, logs, and spans) are reported against this Monitored Resource. This field is output only.",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Required. Fully qualified GCFv2 resource name i.e. projects/{project}/locations/{location}/functions/{function} Required.",
           "type": "string"
         }
       },
@@ -3206,6 +3267,14 @@
           "$ref": "MonitoringQueryLanguageCondition",
           "description": "A condition that uses the Monitoring Query Language to define alerts."
         },
+        "conditionPrometheusQueryLanguage": {
+          "$ref": "PrometheusQueryLanguageCondition",
+          "description": "A condition that uses the Prometheus query language to define alerts."
+        },
+        "conditionSql": {
+          "$ref": "SqlCondition",
+          "description": "A condition that periodically evaluates a SQL query result."
+        },
         "conditionThreshold": {
           "$ref": "MetricThreshold",
           "description": "A condition that compares a time series against a threshold."
@@ -3356,6 +3425,22 @@
       "properties": {},
       "type": "object"
     },
+    "Daily": {
+      "description": "Used to schedule the query to run every so many days.",
+      "id": "Daily",
+      "properties": {
+        "executionTime": {
+          "$ref": "TimeOfDay",
+          "description": "Optional. The time of day (in UTC) at which the query should run. If left unspecified, the server picks an arbitrary time of day and runs the query at the same time each day."
+        },
+        "periodicity": {
+          "description": "Required. The number of days between runs. Must be greater than or equal to 1 day and less than or equal to 31 days.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
     "Distribution": {
       "description": "Distribution contains summary statistics for a population of values. It optionally contains a histogram representing the distribution of those values across a set of buckets.The summary statistics are the count, mean, sum of the squared deviation from the mean, the minimum, and the maximum of the set of population of values. The histogram is based on a sequence of buckets and gives a count of values that fall into each bucket. The boundaries of the buckets are given either explicitly or by formulas for buckets of fixed or exponentially increasing widths.Although it is not forbidden, it is generally a bad idea to include non-finite values (infinities or NaNs) in the population of values, as this will render the mean and sum_of_squared_deviation fields meaningless.",
       "id": "Distribution",
@@ -3417,15 +3502,26 @@
       "type": "object"
     },
     "Documentation": {
-      "description": "A content string and a MIME type that describes the content string's format.",
+      "description": "Documentation that is included in the notifications and incidents pertaining to this policy.",
       "id": "Documentation",
       "properties": {
         "content": {
-          "description": "The body of the documentation, interpreted according to mime_type. The content may not exceed 8,192 Unicode characters and may not exceed more than 10,240 bytes when encoded in UTF-8 format, whichever is smaller. This text can be templatized by using variables (https://cloud.google.com/monitoring/alerts/doc-variables).",
+          "description": "The body of the documentation, interpreted according to mime_type. The content may not exceed 8,192 Unicode characters and may not exceed more than 10,240 bytes when encoded in UTF-8 format, whichever is smaller. This text can be templatized by using variables (https://cloud.google.com/monitoring/alerts/doc-variables#doc-vars).",
           "type": "string"
+        },
+        "links": {
+          "description": "Optional. Links to content such as playbooks, repositories, and other resources. This field can contain up to 3 entries.",
+          "items": {
+            "$ref": "Link"
+          },
+          "type": "array"
         },
         "mimeType": {
           "description": "The format of the content field. Presently, only the value \"text/markdown\" is supported. See Markdown (https://en.wikipedia.org/wiki/Markdown) for more information.",
+          "type": "string"
+        },
+        "subject": {
+          "description": "Optional. The subject line of the notification. The subject line may not exceed 10,240 bytes. In notifications generated by this policy, the contents of the subject line after variable expansion will be truncated to 255 bytes or shorter at the latest UTF-8 character boundary. The 255-byte limit is recommended by this thread (https://stackoverflow.com/questions/1592291/what-is-the-email-subject-length-limit). It is both the limit imposed by some third-party ticketing products and it is common to define textual fields in databases as VARCHAR(255).The contents of the subject line can be templatized by using variables (https://cloud.google.com/monitoring/alerts/doc-variables#doc-vars). If this field is missing or empty, a default subject line will be generated.",
           "type": "string"
         }
       },
@@ -3643,7 +3739,7 @@
       "id": "ForecastOptions",
       "properties": {
         "forecastHorizon": {
-          "description": "Required. The length of time into the future to forecast whether a time series will violate the threshold. If the predicted value is found to violate the threshold, and the violation is observed in all forecasts made for the configured duration, then the time series is considered to be failing.",
+          "description": "Required. The length of time into the future to forecast whether a time series will violate the threshold. If the predicted value is found to violate the threshold, and the violation is observed in all forecasts made for the configured duration, then the time series is considered to be failing. The forecast horizon can range from 1 hour to 60 hours.",
           "format": "google-duration",
           "type": "string"
         }
@@ -3806,6 +3902,23 @@
       },
       "type": "object"
     },
+    "Hourly": {
+      "description": "Used to schedule the query to run every so many hours.",
+      "id": "Hourly",
+      "properties": {
+        "minuteOffset": {
+          "description": "Optional. The number of minutes after the hour (in UTC) to run the query. Must be greater than or equal to 0 minutes and less than or equal to 59 minutes. If left unspecified, then an arbitrary offset is used.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "periodicity": {
+          "description": "Required. The number of hours between runs. Must be greater than or equal to 1 hour and less than or equal to 48 hours.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
     "HttpCheck": {
       "description": "Information involved in an HTTP/HTTPS Uptime check request.",
       "id": "HttpCheck",
@@ -3819,7 +3932,7 @@
         },
         "authInfo": {
           "$ref": "BasicAuthentication",
-          "description": "The authentication information. Optional when creating an HTTP check; defaults to empty."
+          "description": "The authentication information. Optional when creating an HTTP check; defaults to empty. Do not set both auth_method and auth_info."
         },
         "body": {
           "description": "The request body associated with the HTTP POST request. If content_type is URL_ENCODED, the body passed in must be URL-encoded. Users can provide a Content-Length header via the headers field or the API will do so. If the request_method is GET and body is not empty, the API will return an error. The maximum byte size is 1 megabyte.Note: If client libraries aren't used (which performs the conversion automatically) base64 encode your body data since the field is of bytes type.",
@@ -3882,6 +3995,10 @@
           ],
           "type": "string"
         },
+        "serviceAgentAuthentication": {
+          "$ref": "ServiceAgentAuthentication",
+          "description": "If specified, Uptime will generate and attach an OIDC JWT token for the Monitoring service agent service account as an Authorization header in the HTTP request when probing."
+        },
         "useSsl": {
           "description": "If true, use HTTPS instead of HTTP to run the check.",
           "type": "boolean"
@@ -3894,6 +4011,7 @@
       "type": "object"
     },
     "InternalChecker": {
+      "deprecated": true,
       "description": "An internal checker allows Uptime checks to run on private/internal GCP resources.",
       "id": "InternalChecker",
       "properties": {
@@ -4057,6 +4175,21 @@
           "description": "Must be greater than 0.",
           "format": "double",
           "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "Link": {
+      "description": "Links to content such as playbooks, repositories, and other resources.",
+      "id": "Link",
+      "properties": {
+        "displayName": {
+          "description": "A short display name for the link. The display name must not be empty or exceed 63 characters. Example: \"playbook\".",
+          "type": "string"
+        },
+        "url": {
+          "description": "The url of a webpage. A url can be templatized by using variables in the path or the query parameters. The total length of a URL should not exceed 2083 characters before and after variable expansion. Example: \"https://my_domain.com/playbook?name=${resource.name}\"",
+          "type": "string"
         }
       },
       "type": "object"
@@ -4525,6 +4658,7 @@
           "type": "string"
         },
         "launchStage": {
+          "deprecated": true,
           "description": "Deprecated. Must use the MetricDescriptor.launch_stage instead.",
           "enum": [
             "LAUNCH_STAGE_UNSPECIFIED",
@@ -4552,6 +4686,25 @@
           "description": "The sampling period of metric data points. For metrics which are written periodically, consecutive data points are stored at this time interval, excluding data loss due to errors. Metrics with a higher granularity have a smaller sampling period.",
           "format": "google-duration",
           "type": "string"
+        },
+        "timeSeriesResourceHierarchyLevel": {
+          "description": "The scope of the timeseries data of the metric.",
+          "items": {
+            "enum": [
+              "TIME_SERIES_RESOURCE_HIERARCHY_LEVEL_UNSPECIFIED",
+              "PROJECT",
+              "ORGANIZATION",
+              "FOLDER"
+            ],
+            "enumDescriptions": [
+              "Do not use this default value.",
+              "Scopes a metric to a project.",
+              "Scopes a metric to an organization.",
+              "Scopes a metric to a folder."
+            ],
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -4621,7 +4774,7 @@
           "type": "string"
         },
         "evaluationMissingData": {
-          "description": "A condition control that determines how metric-threshold conditions are evaluated when data stops arriving.",
+          "description": "A condition control that determines how metric-threshold conditions are evaluated when data stops arriving. To use this control, the value of the duration field must be greater than or equal to 60 seconds.",
           "enum": [
             "EVALUATION_MISSING_DATA_UNSPECIFIED",
             "EVALUATION_MISSING_DATA_INACTIVE",
@@ -4652,6 +4805,18 @@
         "trigger": {
           "$ref": "Trigger",
           "description": "The number/percent of time series for which the comparison must hold in order for the condition to trigger. If unspecified, then the condition will trigger if the comparison is true for any of the time series that have been identified by filter and aggregations, or by the ratio, if denominator_filter and denominator_aggregations are specified."
+        }
+      },
+      "type": "object"
+    },
+    "Minutes": {
+      "description": "Used to schedule the query to run every so many minutes.",
+      "id": "Minutes",
+      "properties": {
+        "periodicity": {
+          "description": "Required. Number of minutes between runs. The interval must be greater than or equal to 5 minutes and less than or equal to 1440 minutes.",
+          "format": "int32",
+          "type": "integer"
         }
       },
       "type": "object"
@@ -4722,7 +4887,7 @@
           "type": "string"
         },
         "type": {
-          "description": "Required. The monitored resource type. For example, the type \"cloudsql_database\" represents databases in Google Cloud SQL. For a list of types, see Monitoring resource types (https://cloud.google.com/monitoring/api/resources) and Logging resource types (https://cloud.google.com/logging/docs/api/v2/resource-list).",
+          "description": "Required. The monitored resource type. For example, the type \"cloudsql_database\" represents databases in Google Cloud SQL. For a list of types, see Monitored resource types (https://cloud.google.com/monitoring/api/resources) and Logging resource types (https://cloud.google.com/logging/docs/api/v2/resource-list).",
           "type": "string"
         }
       },
@@ -4751,7 +4916,7 @@
       "type": "object"
     },
     "MonitoringQueryLanguageCondition": {
-      "description": "A condition type that allows alert policies to be defined using Monitoring Query Language (https://cloud.google.com/monitoring/mql).",
+      "description": "A condition type that allows alerting policies to be defined using Monitoring Query Language (https://cloud.google.com/monitoring/mql).",
       "id": "MonitoringQueryLanguageCondition",
       "properties": {
         "duration": {
@@ -4837,7 +5002,7 @@
           "type": "array"
         },
         "name": {
-          "description": "The full REST resource name for this channel. The format is: projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID] The [CHANNEL_ID] is automatically assigned by the server on creation.",
+          "description": "Identifier. The full REST resource name for this channel. The format is: projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID] The [CHANNEL_ID] is automatically assigned by the server on creation.",
           "type": "string"
         },
         "type": {
@@ -4916,6 +5081,7 @@
           "type": "string"
         },
         "supportedTiers": {
+          "deprecated": true,
           "description": "The tiers that support this notification channel; the project service tier must be one of the supported_tiers.",
           "items": {
             "enum": [
@@ -4959,7 +5125,7 @@
       "type": "object"
     },
     "NotificationRateLimit": {
-      "description": "Control over the rate of notifications sent to this alert policy's notification channels.",
+      "description": "Control over the rate of notifications sent to this alerting policy's notification channels.",
       "id": "NotificationRateLimit",
       "properties": {
         "period": {
@@ -5089,8 +5255,49 @@
       },
       "type": "object"
     },
+    "PrometheusQueryLanguageCondition": {
+      "description": "A condition type that allows alerting policies to be defined using Prometheus Query Language (PromQL) (https://prometheus.io/docs/prometheus/latest/querying/basics/).The PrometheusQueryLanguageCondition message contains information from a Prometheus alerting rule and its associated rule group.A Prometheus alerting rule is described here (https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/). The semantics of a Prometheus alerting rule is described here (https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/#rule).A Prometheus rule group is described here (https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/). The semantics of a Prometheus rule group is described here (https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/#rule_group).Because Cloud Alerting has no representation of a Prometheus rule group resource, we must embed the information of the parent rule group inside each of the conditions that refer to it. We must also update the contents of all Prometheus alerts in case the information of their rule group changes.The PrometheusQueryLanguageCondition protocol buffer combines the information of the corresponding rule group and alerting rule. The structure of the PrometheusQueryLanguageCondition protocol buffer does NOT mimic the structure of the Prometheus rule group and alerting rule YAML declarations. The PrometheusQueryLanguageCondition protocol buffer may change in the future to support future rule group and/or alerting rule features. There are no new such features at the present time (2023-06-26).",
+      "id": "PrometheusQueryLanguageCondition",
+      "properties": {
+        "alertRule": {
+          "description": "Optional. The alerting rule name of this alert in the corresponding Prometheus configuration file.Some external tools may require this field to be populated correctly in order to refer to the original Prometheus configuration file. The rule group name and the alert name are necessary to update the relevant AlertPolicies in case the definition of the rule group changes in the future.This field is optional. If this field is not empty, then it must be a valid Prometheus label name (https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels). This field may not exceed 2048 Unicode characters in length.",
+          "type": "string"
+        },
+        "disableMetricValidation": {
+          "description": "Optional. Whether to disable metric existence validation for this condition.This allows alerting policies to be defined on metrics that do not yet exist, improving advanced customer workflows such as configuring alerting policies using Terraform.Users with the monitoring.alertPolicyViewer role are able to see the name of the non-existent metric in the alerting policy condition.",
+          "type": "boolean"
+        },
+        "duration": {
+          "description": "Optional. Alerts are considered firing once their PromQL expression was evaluated to be \"true\" for this long. Alerts whose PromQL expression was not evaluated to be \"true\" for long enough are considered pending. Must be a non-negative duration or missing. This field is optional. Its default value is zero.",
+          "format": "google-duration",
+          "type": "string"
+        },
+        "evaluationInterval": {
+          "description": "Optional. How often this rule should be evaluated. Must be a positive multiple of 30 seconds or missing. This field is optional. Its default value is 30 seconds. If this PrometheusQueryLanguageCondition was generated from a Prometheus alerting rule, then this value should be taken from the enclosing rule group.",
+          "format": "google-duration",
+          "type": "string"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Optional. Labels to add to or overwrite in the PromQL query result. Label names must be valid (https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels). Label values can be templatized by using variables (https://cloud.google.com/monitoring/alerts/doc-variables#doc-vars). The only available variable names are the names of the labels in the PromQL result, including \"__name__\" and \"value\". \"labels\" may be empty.",
+          "type": "object"
+        },
+        "query": {
+          "description": "Required. The PromQL expression to evaluate. Every evaluation cycle this expression is evaluated at the current time, and all resultant time series become pending/firing alerts. This field must not be empty.",
+          "type": "string"
+        },
+        "ruleGroup": {
+          "description": "Optional. The rule group name of this alert in the corresponding Prometheus configuration file.Some external tools may require this field to be populated correctly in order to refer to the original Prometheus configuration file. The rule group name and the alert name are necessary to update the relevant AlertPolicies in case the definition of the rule group changes in the future.This field is optional. If this field is not empty, then it must contain a valid UTF-8 string. This field may not exceed 2048 Unicode characters in length.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "QueryTimeSeriesRequest": {
-      "description": "The QueryTimeSeries request.",
+      "deprecated": true,
+      "description": "The QueryTimeSeries request. For information about the status of Monitoring Query Language (MQL), see the MQL deprecation notice (https://cloud.google.com/stackdriver/docs/deprecations/mql).",
       "id": "QueryTimeSeriesRequest",
       "properties": {
         "pageSize": {
@@ -5110,7 +5317,8 @@
       "type": "object"
     },
     "QueryTimeSeriesResponse": {
-      "description": "The QueryTimeSeries response.",
+      "deprecated": true,
+      "description": "The QueryTimeSeries response. For information about the status of Monitoring Query Language (MQL), see the MQL deprecation notice (https://cloud.google.com/stackdriver/docs/deprecations/mql).",
       "id": "QueryTimeSeriesResponse",
       "properties": {
         "nextPageToken": {
@@ -5229,6 +5437,40 @@
       },
       "type": "object"
     },
+    "RowCountTest": {
+      "description": "A test that checks if the number of rows in the result set violates some threshold.",
+      "id": "RowCountTest",
+      "properties": {
+        "comparison": {
+          "description": "Required. The comparison to apply between the number of rows returned by the query and the threshold.",
+          "enum": [
+            "COMPARISON_UNSPECIFIED",
+            "COMPARISON_GT",
+            "COMPARISON_GE",
+            "COMPARISON_LT",
+            "COMPARISON_LE",
+            "COMPARISON_EQ",
+            "COMPARISON_NE"
+          ],
+          "enumDescriptions": [
+            "No ordering relationship is specified.",
+            "True if the left argument is greater than the right argument.",
+            "True if the left argument is greater than or equal to the right argument.",
+            "True if the left argument is less than the right argument.",
+            "True if the left argument is less than or equal to the right argument.",
+            "True if the left argument is equal to the right argument.",
+            "True if the left argument is not equal to the right argument."
+          ],
+          "type": "string"
+        },
+        "threshold": {
+          "description": "Required. The value against which to compare the row count.",
+          "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "SendNotificationChannelVerificationCodeRequest": {
       "description": "The SendNotificationChannelVerificationCode request.",
       "id": "SendNotificationChannelVerificationCodeRequest",
@@ -5288,7 +5530,7 @@
           "description": "Type used for Istio services scoped to an Istio mesh."
         },
         "name": {
-          "description": "Resource name for this Service. The format is: projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID] ",
+          "description": "Identifier. Resource name for this Service. The format is: projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID] ",
           "type": "string"
         },
         "telemetry": {
@@ -5301,6 +5543,25 @@
           },
           "description": "Labels which have been used to annotate the service. Label keys must start with a letter. Label keys and values may contain lowercase letters, numbers, underscores, and dashes. Label keys and values have a maximum length of 63 characters, and must be less than 128 bytes in size. Up to 64 label entries may be stored. For labels which do not have a semantic value, the empty string may be supplied for the label value.",
           "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "ServiceAgentAuthentication": {
+      "description": "Contains information needed for generating either an OpenID Connect token (https://developers.google.com/identity/protocols/OpenIDConnect) or OAuth token (https://developers.google.com/identity/protocols/oauth2). The token will be generated for the Monitoring service agent service account.",
+      "id": "ServiceAgentAuthentication",
+      "properties": {
+        "type": {
+          "description": "Type of authentication.",
+          "enum": [
+            "SERVICE_AGENT_AUTHENTICATION_TYPE_UNSPECIFIED",
+            "OIDC_TOKEN"
+          ],
+          "enumDescriptions": [
+            "Default value, will result in OIDC Authentication.",
+            "OIDC Authentication"
+          ],
+          "type": "string"
         }
       },
       "type": "object"
@@ -5357,12 +5618,12 @@
           "type": "string"
         },
         "goal": {
-          "description": "The fraction of service that must be good in order for this objective to be met. 0 \u003c goal \u003c= 0.999.",
+          "description": "The fraction of service that must be good in order for this objective to be met. 0 \u003c goal \u003c= 0.9999.",
           "format": "double",
           "type": "number"
         },
         "name": {
-          "description": "Resource name for this ServiceLevelObjective. The format is: projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME] ",
+          "description": "Identifier. Resource name for this ServiceLevelObjective. The format is: projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME] ",
           "type": "string"
         },
         "rollingPeriod": {
@@ -5401,7 +5662,7 @@
           "description": "Required. The Snooze will be active from interval.start_time through interval.end_time. interval.start_time cannot be in the past. There is a 15 second clock skew to account for the time it takes for a request to reach the API from the UI."
         },
         "name": {
-          "description": "Required. The name of the Snooze. The format is: projects/[PROJECT_ID_OR_NUMBER]/snoozes/[SNOOZE_ID] The ID of the Snooze will be generated by the system.",
+          "description": "Required. Identifier. The name of the Snooze. The format is: projects/[PROJECT_ID_OR_NUMBER]/snoozes/[SNOOZE_ID] The ID of the Snooze will be generated by the system.",
           "type": "string"
         }
       },
@@ -5429,6 +5690,37 @@
       },
       "type": "object"
     },
+    "SqlCondition": {
+      "description": "A condition that allows alerting policies to be defined using GoogleSQL. SQL conditions examine a sliding window of logs using GoogleSQL. Alert policies with SQL conditions may incur additional billing.",
+      "id": "SqlCondition",
+      "properties": {
+        "booleanTest": {
+          "$ref": "BooleanTest",
+          "description": "Test the boolean value in the indicated column."
+        },
+        "daily": {
+          "$ref": "Daily",
+          "description": "Schedule the query to execute every so many days."
+        },
+        "hourly": {
+          "$ref": "Hourly",
+          "description": "Schedule the query to execute every so many hours."
+        },
+        "minutes": {
+          "$ref": "Minutes",
+          "description": "Schedule the query to execute every so many minutes."
+        },
+        "query": {
+          "description": "Required. The Log Analytics SQL query to run, as a string. The query must conform to the required shape. Specifically, the query must not try to filter the input by time. A filter will automatically be applied to filter the input so that the query receives all rows received since the last time the query was run.For example, the following query extracts all log entries containing an HTTP request:SELECT timestamp, log_name, severity, http_request, resource, labels FROM my-project.global._Default._AllLogs WHERE http_request IS NOT NULL",
+          "type": "string"
+        },
+        "rowCountTest": {
+          "$ref": "RowCountTest",
+          "description": "Test the row count against a threshold."
+        }
+      },
+      "type": "object"
+    },
     "Status": {
       "description": "The Status type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by gRPC (https://github.com/grpc). Each Status message contains three pieces of data: error code, error message, and error details.You can find out more about this error model and how to work with it in the API Design Guide (https://cloud.google.com/apis/design/errors).",
       "id": "Status",
@@ -5452,6 +5744,17 @@
         "message": {
           "description": "A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SyntheticMonitorTarget": {
+      "description": "Describes a Synthetic Monitor to be invoked by Uptime.",
+      "id": "SyntheticMonitorTarget",
+      "properties": {
+        "cloudFunctionV2": {
+          "$ref": "CloudFunctionV2Target",
+          "description": "Target a Synthetic Monitor GCFv2 instance."
         }
       },
       "type": "object"
@@ -5500,10 +5803,41 @@
       },
       "type": "object"
     },
+    "TimeOfDay": {
+      "description": "Represents a time of day. The date and time zone are either not significant or are specified elsewhere. An API may choose to allow leap seconds. Related types are google.type.Date and google.protobuf.Timestamp.",
+      "id": "TimeOfDay",
+      "properties": {
+        "hours": {
+          "description": "Hours of a day in 24 hour format. Must be greater than or equal to 0 and typically must be less than or equal to 23. An API may choose to allow the value \"24:00:00\" for scenarios like business closing time.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "minutes": {
+          "description": "Minutes of an hour. Must be greater than or equal to 0 and less than or equal to 59.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "nanos": {
+          "description": "Fractions of seconds, in nanoseconds. Must be greater than or equal to 0 and less than or equal to 999,999,999.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "seconds": {
+          "description": "Seconds of a minute. Must be greater than or equal to 0 and typically must be less than or equal to 59. An API may allow the value 60 if it allows leap-seconds.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
     "TimeSeries": {
       "description": "A collection of data points that describes the time-varying values of a metric. A time series is identified by a combination of a fully-specified monitored resource and a fully-specified metric. This type is used for both listing and creating time series.",
       "id": "TimeSeries",
       "properties": {
+        "description": {
+          "description": "Input only. A detailed description of the time series that will be associated with the google.api.MetricDescriptor for the metric. Once set, this field cannot be changed through CreateTimeSeries.",
+          "type": "string"
+        },
         "metadata": {
           "$ref": "MonitoredResourceMetadata",
           "description": "Output only. The associated monitored resource metadata. When reading a time series, this field will include metadata labels that are explicitly named in the reduction. When creating a time series, this field is ignored."
@@ -5540,7 +5874,7 @@
           "description": "The associated monitored resource. Custom metrics can use only certain monitored resource types in their time series data. For more information, see Monitored resources for custom metrics (https://cloud.google.com/monitoring/custom-metrics/creating-metrics#custom-metric-resources)."
         },
         "unit": {
-          "description": "The units in which the metric value is reported. It is only applicable if the value_type is INT64, DOUBLE, or DISTRIBUTION. The unit defines the representation of the stored metric values.",
+          "description": "The units in which the metric value is reported. It is only applicable if the value_type is INT64, DOUBLE, or DISTRIBUTION. The unit defines the representation of the stored metric values. This field can only be changed through CreateTimeSeries when it is empty.",
           "type": "string"
         },
         "valueType": {
@@ -5763,6 +6097,7 @@
           "description": "Contains information needed to make an HTTP or HTTPS check."
         },
         "internalCheckers": {
+          "deprecated": true,
           "description": "The internal checkers that this check will egress from. If is_internal is true and this list is empty, the check will egress from all the InternalCheckers configured for the project that owns this UptimeCheckConfig.",
           "items": {
             "$ref": "InternalChecker"
@@ -5770,6 +6105,7 @@
           "type": "array"
         },
         "isInternal": {
+          "deprecated": true,
           "description": "If this is true, then checks are made only from the 'internal_checkers'. If it is false, then checks are made only from the 'selected_regions'. It is an error to provide 'selected_regions' when is_internal is true, or to provide 'internal_checkers' when is_internal is false.",
           "type": "boolean"
         },
@@ -5778,7 +6114,7 @@
           "description": "The monitored resource (https://cloud.google.com/monitoring/api/resources) associated with the configuration. The following monitored resource types are valid for this field: uptime_url, gce_instance, gae_app, aws_ec2_instance, aws_elb_load_balancer k8s_service servicedirectory_service cloud_run_revision"
         },
         "name": {
-          "description": "A unique resource name for this Uptime check configuration. The format is: projects/[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID] [PROJECT_ID_OR_NUMBER] is the Workspace host project associated with the Uptime check.This field should be omitted when creating the Uptime check configuration; on create, the resource name is assigned by the server and included in the response.",
+          "description": "Identifier. A unique resource name for this Uptime check configuration. The format is: projects/[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID] [PROJECT_ID_OR_NUMBER] is the Workspace host project associated with the Uptime check.This field should be omitted when creating the Uptime check configuration; on create, the resource name is assigned by the server and included in the response.",
           "type": "string"
         },
         "period": {
@@ -5816,6 +6152,10 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "syntheticMonitor": {
+          "$ref": "SyntheticMonitorTarget",
+          "description": "Specifies a Synthetic Monitor to invoke."
         },
         "tcpCheck": {
           "$ref": "TcpCheck",

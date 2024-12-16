@@ -1,21 +1,19 @@
-cabal-version:      2.2
-name:               gogol-dns
-version:            1.0.0.0
-synopsis:           Google Cloud DNS SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-dns
+version:               1.0.0
+synopsis:              Google Cloud DNS SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
+
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -29,68 +27,69 @@ source-repository head
   subdir:   gogol-dns
 
 flag field-selectors
-  description:
-    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-
-  default:     False
-  manual:      True
+  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+  default: False
+  manual: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -Werror
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (!flag(field-selectors) && impl(ghc >=9.2))
+  if !flag(field-selectors) && impl(ghc >= 9.2)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.DNS
-    Gogol.DNS.Changes.Create
-    Gogol.DNS.Changes.Get
-    Gogol.DNS.Changes.List
-    Gogol.DNS.DnsKeys.Get
-    Gogol.DNS.DnsKeys.List
-    Gogol.DNS.ManagedZoneOperations.Get
-    Gogol.DNS.ManagedZoneOperations.List
-    Gogol.DNS.ManagedZones.Create
-    Gogol.DNS.ManagedZones.Delete
-    Gogol.DNS.ManagedZones.Get
-    Gogol.DNS.ManagedZones.List
-    Gogol.DNS.ManagedZones.Patch
-    Gogol.DNS.ManagedZones.Update
-    Gogol.DNS.Policies.Create
-    Gogol.DNS.Policies.Delete
-    Gogol.DNS.Policies.Get
-    Gogol.DNS.Policies.List
-    Gogol.DNS.Policies.Patch
-    Gogol.DNS.Policies.Update
-    Gogol.DNS.Projects.Get
-    Gogol.DNS.ResourceRecordSets.Create
-    Gogol.DNS.ResourceRecordSets.Delete
-    Gogol.DNS.ResourceRecordSets.Get
-    Gogol.DNS.ResourceRecordSets.List
-    Gogol.DNS.ResourceRecordSets.Patch
-    Gogol.DNS.ResponsePolicies.Create
-    Gogol.DNS.ResponsePolicies.Delete
-    Gogol.DNS.ResponsePolicies.Get
-    Gogol.DNS.ResponsePolicies.List
-    Gogol.DNS.ResponsePolicies.Patch
-    Gogol.DNS.ResponsePolicies.Update
-    Gogol.DNS.ResponsePolicyRules.Create
-    Gogol.DNS.ResponsePolicyRules.Delete
-    Gogol.DNS.ResponsePolicyRules.Get
-    Gogol.DNS.ResponsePolicyRules.List
-    Gogol.DNS.ResponsePolicyRules.Patch
-    Gogol.DNS.ResponsePolicyRules.Update
-    Gogol.DNS.Types
+      Gogol.DNS
+    , Gogol.DNS.Changes.Create
+    , Gogol.DNS.Changes.Get
+    , Gogol.DNS.Changes.List
+    , Gogol.DNS.DnsKeys.Get
+    , Gogol.DNS.DnsKeys.List
+    , Gogol.DNS.ManagedZoneOperations.Get
+    , Gogol.DNS.ManagedZoneOperations.List
+    , Gogol.DNS.ManagedZones.Create
+    , Gogol.DNS.ManagedZones.Delete
+    , Gogol.DNS.ManagedZones.Get
+    , Gogol.DNS.ManagedZones.List
+    , Gogol.DNS.ManagedZones.Patch
+    , Gogol.DNS.ManagedZones.Update
+    , Gogol.DNS.Policies.Create
+    , Gogol.DNS.Policies.Delete
+    , Gogol.DNS.Policies.Get
+    , Gogol.DNS.Policies.List
+    , Gogol.DNS.Policies.Patch
+    , Gogol.DNS.Policies.Update
+    , Gogol.DNS.Projects.Get
+    , Gogol.DNS.ResourceRecordSets.Create
+    , Gogol.DNS.ResourceRecordSets.Delete
+    , Gogol.DNS.ResourceRecordSets.Get
+    , Gogol.DNS.ResourceRecordSets.List
+    , Gogol.DNS.ResourceRecordSets.Patch
+    , Gogol.DNS.ResponsePolicies.Create
+    , Gogol.DNS.ResponsePolicies.Delete
+    , Gogol.DNS.ResponsePolicies.Get
+    , Gogol.DNS.ResponsePolicies.List
+    , Gogol.DNS.ResponsePolicies.Patch
+    , Gogol.DNS.ResponsePolicies.Update
+    , Gogol.DNS.ResponsePolicyRules.Create
+    , Gogol.DNS.ResponsePolicyRules.Delete
+    , Gogol.DNS.ResponsePolicyRules.Get
+    , Gogol.DNS.ResponsePolicyRules.List
+    , Gogol.DNS.ResponsePolicyRules.Patch
+    , Gogol.DNS.ResponsePolicyRules.Update
+    , Gogol.DNS.Types
 
   other-modules:
-    Gogol.DNS.Internal.Product
-    Gogol.DNS.Internal.Sum
+      Gogol.DNS.Internal.Product
+    , Gogol.DNS.Internal.Sum
 
   build-depends:
-    , base        >=4.12   && <5
-    , gogol-core  ^>=1.0.0
+      gogol-core ^>= 1.0.0

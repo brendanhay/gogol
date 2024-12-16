@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,163 +26,210 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.IAP.Types
-  ( -- * Configuration
-    iAPService,
+    (
+    -- * Configuration
+      iAPService
 
     -- * OAuth Scopes
-    CloudPlatform'FullControl,
+    , CloudPlatform'FullControl
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AccessDeniedPageSettings
-    AccessDeniedPageSettings (..),
-    newAccessDeniedPageSettings,
+    , AccessDeniedPageSettings (..)
+    , newAccessDeniedPageSettings
 
     -- ** AccessSettings
-    AccessSettings (..),
-    newAccessSettings,
+    , AccessSettings (..)
+    , newAccessSettings
+
+    -- ** AccessSettings_IdentitySourcesItem
+    , AccessSettings_IdentitySourcesItem (..)
 
     -- ** AllowedDomainsSettings
-    AllowedDomainsSettings (..),
-    newAllowedDomainsSettings,
+    , AllowedDomainsSettings (..)
+    , newAllowedDomainsSettings
 
     -- ** ApplicationSettings
-    ApplicationSettings (..),
-    newApplicationSettings,
+    , ApplicationSettings (..)
+    , newApplicationSettings
 
     -- ** AttributePropagationSettings
-    AttributePropagationSettings (..),
-    newAttributePropagationSettings,
+    , AttributePropagationSettings (..)
+    , newAttributePropagationSettings
 
     -- ** AttributePropagationSettings_OutputCredentialsItem
-    AttributePropagationSettings_OutputCredentialsItem (..),
+    , AttributePropagationSettings_OutputCredentialsItem (..)
 
     -- ** Binding
-    Binding (..),
-    newBinding,
+    , Binding (..)
+    , newBinding
 
     -- ** Brand
-    Brand (..),
-    newBrand,
+    , Brand (..)
+    , newBrand
 
     -- ** CorsSettings
-    CorsSettings (..),
-    newCorsSettings,
+    , CorsSettings (..)
+    , newCorsSettings
 
     -- ** CsmSettings
-    CsmSettings (..),
-    newCsmSettings,
+    , CsmSettings (..)
+    , newCsmSettings
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** Expr
-    Expr (..),
-    newExpr,
+    , Expr (..)
+    , newExpr
 
     -- ** GcipSettings
-    GcipSettings (..),
-    newGcipSettings,
+    , GcipSettings (..)
+    , newGcipSettings
 
     -- ** GetIamPolicyRequest
-    GetIamPolicyRequest (..),
-    newGetIamPolicyRequest,
+    , GetIamPolicyRequest (..)
+    , newGetIamPolicyRequest
 
     -- ** GetPolicyOptions
-    GetPolicyOptions (..),
-    newGetPolicyOptions,
+    , GetPolicyOptions (..)
+    , newGetPolicyOptions
 
     -- ** IapSettings
-    IapSettings (..),
-    newIapSettings,
+    , IapSettings (..)
+    , newIapSettings
 
     -- ** IdentityAwareProxyClient
-    IdentityAwareProxyClient (..),
-    newIdentityAwareProxyClient,
+    , IdentityAwareProxyClient (..)
+    , newIdentityAwareProxyClient
 
     -- ** ListBrandsResponse
-    ListBrandsResponse (..),
-    newListBrandsResponse,
+    , ListBrandsResponse (..)
+    , newListBrandsResponse
 
     -- ** ListIdentityAwareProxyClientsResponse
-    ListIdentityAwareProxyClientsResponse (..),
-    newListIdentityAwareProxyClientsResponse,
+    , ListIdentityAwareProxyClientsResponse (..)
+    , newListIdentityAwareProxyClientsResponse
 
     -- ** ListTunnelDestGroupsResponse
-    ListTunnelDestGroupsResponse (..),
-    newListTunnelDestGroupsResponse,
+    , ListTunnelDestGroupsResponse (..)
+    , newListTunnelDestGroupsResponse
+
+    -- ** NextStateOfTags
+    , NextStateOfTags (..)
+    , newNextStateOfTags
+
+    -- ** OAuth2
+    , OAuth2 (..)
+    , newOAuth2
 
     -- ** OAuthSettings
-    OAuthSettings (..),
-    newOAuthSettings,
+    , OAuthSettings (..)
+    , newOAuthSettings
 
     -- ** Policy
-    Policy (..),
-    newPolicy,
+    , Policy (..)
+    , newPolicy
 
     -- ** PolicyDelegationSettings
-    PolicyDelegationSettings (..),
-    newPolicyDelegationSettings,
+    , PolicyDelegationSettings (..)
+    , newPolicyDelegationSettings
 
     -- ** PolicyName
-    PolicyName (..),
-    newPolicyName,
+    , PolicyName (..)
+    , newPolicyName
 
     -- ** ReauthSettings
-    ReauthSettings (..),
-    newReauthSettings,
+    , ReauthSettings (..)
+    , newReauthSettings
 
     -- ** ReauthSettings_Method
-    ReauthSettings_Method (..),
+    , ReauthSettings_Method (..)
 
     -- ** ReauthSettings_PolicyType
-    ReauthSettings_PolicyType (..),
+    , ReauthSettings_PolicyType (..)
 
     -- ** ResetIdentityAwareProxyClientSecretRequest
-    ResetIdentityAwareProxyClientSecretRequest (..),
-    newResetIdentityAwareProxyClientSecretRequest,
+    , ResetIdentityAwareProxyClientSecretRequest (..)
+    , newResetIdentityAwareProxyClientSecretRequest
 
     -- ** Resource
-    Resource (..),
-    newResource,
+    , Resource (..)
+    , newResource
+
+    -- ** Resource_ExpectedNextState
+    , Resource_ExpectedNextState (..)
+    , newResource_ExpectedNextState
 
     -- ** Resource_Labels
-    Resource_Labels (..),
-    newResource_Labels,
+    , Resource_Labels (..)
+    , newResource_Labels
 
     -- ** SetIamPolicyRequest
-    SetIamPolicyRequest (..),
-    newSetIamPolicyRequest,
+    , SetIamPolicyRequest (..)
+    , newSetIamPolicyRequest
+
+    -- ** TagsFullState
+    , TagsFullState (..)
+    , newTagsFullState
+
+    -- ** TagsFullState_Tags
+    , TagsFullState_Tags (..)
+    , newTagsFullState_Tags
+
+    -- ** TagsFullStateForChildResource
+    , TagsFullStateForChildResource (..)
+    , newTagsFullStateForChildResource
+
+    -- ** TagsFullStateForChildResource_Tags
+    , TagsFullStateForChildResource_Tags (..)
+    , newTagsFullStateForChildResource_Tags
+
+    -- ** TagsPartialState
+    , TagsPartialState (..)
+    , newTagsPartialState
+
+    -- ** TagsPartialState_TagsToUpsert
+    , TagsPartialState_TagsToUpsert (..)
+    , newTagsPartialState_TagsToUpsert
 
     -- ** TestIamPermissionsRequest
-    TestIamPermissionsRequest (..),
-    newTestIamPermissionsRequest,
+    , TestIamPermissionsRequest (..)
+    , newTestIamPermissionsRequest
 
     -- ** TestIamPermissionsResponse
-    TestIamPermissionsResponse (..),
-    newTestIamPermissionsResponse,
+    , TestIamPermissionsResponse (..)
+    , newTestIamPermissionsResponse
 
     -- ** TunnelDestGroup
-    TunnelDestGroup (..),
-    newTunnelDestGroup,
-  )
-where
+    , TunnelDestGroup (..)
+    , newTunnelDestGroup
 
+    -- ** ValidateIapAttributeExpressionResponse
+    , ValidateIapAttributeExpressionResponse (..)
+    , newValidateIapAttributeExpressionResponse
+
+    -- ** WorkforceIdentitySettings
+    , WorkforceIdentitySettings (..)
+    , newWorkforceIdentitySettings
+    ) where
+
+import qualified Gogol.Prelude as Core
 import Gogol.IAP.Internal.Product
 import Gogol.IAP.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Cloud Identity-Aware Proxy API. This contains the host and root path used as a starting point for constructing service requests.
 iAPService :: Core.ServiceConfig
-iAPService =
-  Core.defaultService
-    (Core.ServiceId "iap:v1")
-    "iap.googleapis.com"
+iAPService
+  = Core.defaultService (Core.ServiceId "iap:v1")
+      "iap.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"

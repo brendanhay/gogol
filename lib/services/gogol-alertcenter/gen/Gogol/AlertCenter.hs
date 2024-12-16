@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,393 +31,426 @@
 --
 -- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ Google Workspace Alert Center API Reference>
 module Gogol.AlertCenter
-  ( -- * Configuration
-    alertCenterService,
+    (
+    -- * Configuration
+      alertCenterService
 
     -- * OAuth Scopes
-    Apps'Alerts,
+    , Apps'Alerts
 
     -- * Resources
 
     -- ** alertcenter.alerts.batchDelete
-    AlertCenterAlertsBatchDeleteResource,
-    AlertCenterAlertsBatchDelete (..),
-    newAlertCenterAlertsBatchDelete,
+    , AlertCenterAlertsBatchDeleteResource
+    , AlertCenterAlertsBatchDelete (..)
+    , newAlertCenterAlertsBatchDelete
 
     -- ** alertcenter.alerts.batchUndelete
-    AlertCenterAlertsBatchUndeleteResource,
-    AlertCenterAlertsBatchUndelete (..),
-    newAlertCenterAlertsBatchUndelete,
+    , AlertCenterAlertsBatchUndeleteResource
+    , AlertCenterAlertsBatchUndelete (..)
+    , newAlertCenterAlertsBatchUndelete
 
     -- ** alertcenter.alerts.delete
-    AlertCenterAlertsDeleteResource,
-    AlertCenterAlertsDelete (..),
-    newAlertCenterAlertsDelete,
+    , AlertCenterAlertsDeleteResource
+    , AlertCenterAlertsDelete (..)
+    , newAlertCenterAlertsDelete
 
     -- ** alertcenter.alerts.feedback.create
-    AlertCenterAlertsFeedbackCreateResource,
-    AlertCenterAlertsFeedbackCreate (..),
-    newAlertCenterAlertsFeedbackCreate,
+    , AlertCenterAlertsFeedbackCreateResource
+    , AlertCenterAlertsFeedbackCreate (..)
+    , newAlertCenterAlertsFeedbackCreate
 
     -- ** alertcenter.alerts.feedback.list
-    AlertCenterAlertsFeedbackListResource,
-    AlertCenterAlertsFeedbackList (..),
-    newAlertCenterAlertsFeedbackList,
+    , AlertCenterAlertsFeedbackListResource
+    , AlertCenterAlertsFeedbackList (..)
+    , newAlertCenterAlertsFeedbackList
 
     -- ** alertcenter.alerts.get
-    AlertCenterAlertsGetResource,
-    AlertCenterAlertsGet (..),
-    newAlertCenterAlertsGet,
+    , AlertCenterAlertsGetResource
+    , AlertCenterAlertsGet (..)
+    , newAlertCenterAlertsGet
 
     -- ** alertcenter.alerts.getMetadata
-    AlertCenterAlertsGetMetadataResource,
-    AlertCenterAlertsGetMetadata (..),
-    newAlertCenterAlertsGetMetadata,
+    , AlertCenterAlertsGetMetadataResource
+    , AlertCenterAlertsGetMetadata (..)
+    , newAlertCenterAlertsGetMetadata
 
     -- ** alertcenter.alerts.list
-    AlertCenterAlertsListResource,
-    AlertCenterAlertsList (..),
-    newAlertCenterAlertsList,
+    , AlertCenterAlertsListResource
+    , AlertCenterAlertsList (..)
+    , newAlertCenterAlertsList
 
     -- ** alertcenter.alerts.undelete
-    AlertCenterAlertsUndeleteResource,
-    AlertCenterAlertsUndelete (..),
-    newAlertCenterAlertsUndelete,
+    , AlertCenterAlertsUndeleteResource
+    , AlertCenterAlertsUndelete (..)
+    , newAlertCenterAlertsUndelete
 
     -- ** alertcenter.getSettings
-    AlertCenterGetSettingsResource,
-    AlertCenterGetSettings (..),
-    newAlertCenterGetSettings,
+    , AlertCenterGetSettingsResource
+    , AlertCenterGetSettings (..)
+    , newAlertCenterGetSettings
 
     -- ** alertcenter.updateSettings
-    AlertCenterUpdateSettingsResource,
-    AlertCenterUpdateSettings (..),
-    newAlertCenterUpdateSettings,
+    , AlertCenterUpdateSettingsResource
+    , AlertCenterUpdateSettings (..)
+    , newAlertCenterUpdateSettings
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
+
+    -- ** AbuseDetected
+    , AbuseDetected (..)
+    , newAbuseDetected
+
+    -- ** AbuseDetected_VariationType
+    , AbuseDetected_VariationType (..)
+
+    -- ** AccessApproval
+    , AccessApproval (..)
+    , newAccessApproval
+
+    -- ** AccessApproval_JustificationReasonItem
+    , AccessApproval_JustificationReasonItem (..)
 
     -- ** AccountSuspensionDetails
-    AccountSuspensionDetails (..),
-    newAccountSuspensionDetails,
+    , AccountSuspensionDetails (..)
+    , newAccountSuspensionDetails
 
     -- ** AccountSuspensionDetails_AbuseReason
-    AccountSuspensionDetails_AbuseReason (..),
+    , AccountSuspensionDetails_AbuseReason (..)
 
     -- ** AccountSuspensionWarning
-    AccountSuspensionWarning (..),
-    newAccountSuspensionWarning,
+    , AccountSuspensionWarning (..)
+    , newAccountSuspensionWarning
 
     -- ** AccountSuspensionWarning_State
-    AccountSuspensionWarning_State (..),
+    , AccountSuspensionWarning_State (..)
 
     -- ** AccountWarning
-    AccountWarning (..),
-    newAccountWarning,
+    , AccountWarning (..)
+    , newAccountWarning
 
     -- ** ActionInfo
-    ActionInfo (..),
-    newActionInfo,
+    , ActionInfo (..)
+    , newActionInfo
 
     -- ** ActivityRule
-    ActivityRule (..),
-    newActivityRule,
+    , ActivityRule (..)
+    , newActivityRule
 
     -- ** Alert
-    Alert (..),
-    newAlert,
+    , Alert (..)
+    , newAlert
 
     -- ** Alert_Data
-    Alert_Data (..),
-    newAlert_Data,
+    , Alert_Data (..)
+    , newAlert_Data
 
     -- ** AlertFeedback
-    AlertFeedback (..),
-    newAlertFeedback,
+    , AlertFeedback (..)
+    , newAlertFeedback
 
     -- ** AlertFeedback_Type
-    AlertFeedback_Type (..),
+    , AlertFeedback_Type (..)
 
     -- ** AlertMetadata
-    AlertMetadata (..),
-    newAlertMetadata,
+    , AlertMetadata (..)
+    , newAlertMetadata
 
     -- ** ApnsCertificateExpirationInfo
-    ApnsCertificateExpirationInfo (..),
-    newApnsCertificateExpirationInfo,
+    , ApnsCertificateExpirationInfo (..)
+    , newApnsCertificateExpirationInfo
 
     -- ** AppMakerSqlSetupNotification
-    AppMakerSqlSetupNotification (..),
-    newAppMakerSqlSetupNotification,
+    , AppMakerSqlSetupNotification (..)
+    , newAppMakerSqlSetupNotification
 
     -- ** AppSettingsChanged
-    AppSettingsChanged (..),
-    newAppSettingsChanged,
+    , AppSettingsChanged (..)
+    , newAppSettingsChanged
 
     -- ** AppsOutage
-    AppsOutage (..),
-    newAppsOutage,
+    , AppsOutage (..)
+    , newAppsOutage
 
     -- ** AppsOutage_Status
-    AppsOutage_Status (..),
+    , AppsOutage_Status (..)
 
     -- ** Attachment
-    Attachment (..),
-    newAttachment,
+    , Attachment (..)
+    , newAttachment
 
     -- ** BadWhitelist
-    BadWhitelist (..),
-    newBadWhitelist,
+    , BadWhitelist (..)
+    , newBadWhitelist
 
     -- ** BatchDeleteAlertsRequest
-    BatchDeleteAlertsRequest (..),
-    newBatchDeleteAlertsRequest,
+    , BatchDeleteAlertsRequest (..)
+    , newBatchDeleteAlertsRequest
 
     -- ** BatchDeleteAlertsResponse
-    BatchDeleteAlertsResponse (..),
-    newBatchDeleteAlertsResponse,
+    , BatchDeleteAlertsResponse (..)
+    , newBatchDeleteAlertsResponse
 
     -- ** BatchDeleteAlertsResponse_FailedAlertStatus
-    BatchDeleteAlertsResponse_FailedAlertStatus (..),
-    newBatchDeleteAlertsResponse_FailedAlertStatus,
+    , BatchDeleteAlertsResponse_FailedAlertStatus (..)
+    , newBatchDeleteAlertsResponse_FailedAlertStatus
 
     -- ** BatchUndeleteAlertsRequest
-    BatchUndeleteAlertsRequest (..),
-    newBatchUndeleteAlertsRequest,
+    , BatchUndeleteAlertsRequest (..)
+    , newBatchUndeleteAlertsRequest
 
     -- ** BatchUndeleteAlertsResponse
-    BatchUndeleteAlertsResponse (..),
-    newBatchUndeleteAlertsResponse,
+    , BatchUndeleteAlertsResponse (..)
+    , newBatchUndeleteAlertsResponse
 
     -- ** BatchUndeleteAlertsResponse_FailedAlertStatus
-    BatchUndeleteAlertsResponse_FailedAlertStatus (..),
-    newBatchUndeleteAlertsResponse_FailedAlertStatus,
+    , BatchUndeleteAlertsResponse_FailedAlertStatus (..)
+    , newBatchUndeleteAlertsResponse_FailedAlertStatus
 
     -- ** CloudPubsubTopic
-    CloudPubsubTopic (..),
-    newCloudPubsubTopic,
+    , CloudPubsubTopic (..)
+    , newCloudPubsubTopic
 
     -- ** CloudPubsubTopic_PayloadFormat
-    CloudPubsubTopic_PayloadFormat (..),
+    , CloudPubsubTopic_PayloadFormat (..)
 
     -- ** Csv
-    Csv (..),
-    newCsv,
+    , Csv (..)
+    , newCsv
 
     -- ** CsvRow
-    CsvRow (..),
-    newCsvRow,
+    , CsvRow (..)
+    , newCsvRow
 
     -- ** DeviceCompromised
-    DeviceCompromised (..),
-    newDeviceCompromised,
+    , DeviceCompromised (..)
+    , newDeviceCompromised
 
     -- ** DeviceCompromisedSecurityDetail
-    DeviceCompromisedSecurityDetail (..),
-    newDeviceCompromisedSecurityDetail,
+    , DeviceCompromisedSecurityDetail (..)
+    , newDeviceCompromisedSecurityDetail
+
+    -- ** DeviceManagementRule
+    , DeviceManagementRule (..)
+    , newDeviceManagementRule
 
     -- ** DlpRuleViolation
-    DlpRuleViolation (..),
-    newDlpRuleViolation,
+    , DlpRuleViolation (..)
+    , newDlpRuleViolation
 
     -- ** DomainId
-    DomainId (..),
-    newDomainId,
+    , DomainId (..)
+    , newDomainId
 
     -- ** DomainWideTakeoutInitiated
-    DomainWideTakeoutInitiated (..),
-    newDomainWideTakeoutInitiated,
+    , DomainWideTakeoutInitiated (..)
+    , newDomainWideTakeoutInitiated
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
+
+    -- ** Entity
+    , Entity (..)
+    , newEntity
+
+    -- ** EntityList
+    , EntityList (..)
+    , newEntityList
 
     -- ** GmailMessageInfo
-    GmailMessageInfo (..),
-    newGmailMessageInfo,
+    , GmailMessageInfo (..)
+    , newGmailMessageInfo
 
     -- ** GoogleOperations
-    GoogleOperations (..),
-    newGoogleOperations,
+    , GoogleOperations (..)
+    , newGoogleOperations
 
     -- ** ListAlertFeedbackResponse
-    ListAlertFeedbackResponse (..),
-    newListAlertFeedbackResponse,
+    , ListAlertFeedbackResponse (..)
+    , newListAlertFeedbackResponse
 
     -- ** ListAlertsResponse
-    ListAlertsResponse (..),
-    newListAlertsResponse,
+    , ListAlertsResponse (..)
+    , newListAlertsResponse
 
     -- ** LoginDetails
-    LoginDetails (..),
-    newLoginDetails,
+    , LoginDetails (..)
+    , newLoginDetails
 
     -- ** MailPhishing
-    MailPhishing (..),
-    newMailPhishing,
+    , MailPhishing (..)
+    , newMailPhishing
 
     -- ** MailPhishing_SystemActionType
-    MailPhishing_SystemActionType (..),
+    , MailPhishing_SystemActionType (..)
 
     -- ** MaliciousEntity
-    MaliciousEntity (..),
-    newMaliciousEntity,
+    , MaliciousEntity (..)
+    , newMaliciousEntity
 
     -- ** MandatoryServiceAnnouncement
-    MandatoryServiceAnnouncement (..),
-    newMandatoryServiceAnnouncement,
+    , MandatoryServiceAnnouncement (..)
+    , newMandatoryServiceAnnouncement
 
     -- ** MatchInfo
-    MatchInfo (..),
-    newMatchInfo,
+    , MatchInfo (..)
+    , newMatchInfo
 
     -- ** MergeInfo
-    MergeInfo (..),
-    newMergeInfo,
+    , MergeInfo (..)
+    , newMergeInfo
 
     -- ** Notification
-    Notification (..),
-    newNotification,
+    , Notification (..)
+    , newNotification
 
     -- ** PhishingSpike
-    PhishingSpike (..),
-    newPhishingSpike,
+    , PhishingSpike (..)
+    , newPhishingSpike
 
     -- ** PredefinedDetectorInfo
-    PredefinedDetectorInfo (..),
-    newPredefinedDetectorInfo,
+    , PredefinedDetectorInfo (..)
+    , newPredefinedDetectorInfo
 
     -- ** PrimaryAdminChangedEvent
-    PrimaryAdminChangedEvent (..),
-    newPrimaryAdminChangedEvent,
+    , PrimaryAdminChangedEvent (..)
+    , newPrimaryAdminChangedEvent
 
     -- ** ReportingRule
-    ReportingRule (..),
-    newReportingRule,
+    , ReportingRule (..)
+    , newReportingRule
 
     -- ** RequestInfo
-    RequestInfo (..),
-    newRequestInfo,
+    , RequestInfo (..)
+    , newRequestInfo
 
     -- ** ResourceInfo
-    ResourceInfo (..),
-    newResourceInfo,
+    , ResourceInfo (..)
+    , newResourceInfo
 
     -- ** RuleInfo
-    RuleInfo (..),
-    newRuleInfo,
+    , RuleInfo (..)
+    , newRuleInfo
 
     -- ** RuleViolationInfo
-    RuleViolationInfo (..),
-    newRuleViolationInfo,
+    , RuleViolationInfo (..)
+    , newRuleViolationInfo
 
     -- ** RuleViolationInfo_DataSource
-    RuleViolationInfo_DataSource (..),
+    , RuleViolationInfo_DataSource (..)
+
+    -- ** RuleViolationInfo_EventType
+    , RuleViolationInfo_EventType (..)
 
     -- ** RuleViolationInfo_SuppressedActionTypesItem
-    RuleViolationInfo_SuppressedActionTypesItem (..),
+    , RuleViolationInfo_SuppressedActionTypesItem (..)
 
     -- ** RuleViolationInfo_Trigger
-    RuleViolationInfo_Trigger (..),
+    , RuleViolationInfo_Trigger (..)
 
     -- ** RuleViolationInfo_TriggeredActionTypesItem
-    RuleViolationInfo_TriggeredActionTypesItem (..),
+    , RuleViolationInfo_TriggeredActionTypesItem (..)
 
     -- ** SSOProfileCreatedEvent
-    SSOProfileCreatedEvent (..),
-    newSSOProfileCreatedEvent,
+    , SSOProfileCreatedEvent (..)
+    , newSSOProfileCreatedEvent
 
     -- ** SSOProfileDeletedEvent
-    SSOProfileDeletedEvent (..),
-    newSSOProfileDeletedEvent,
+    , SSOProfileDeletedEvent (..)
+    , newSSOProfileDeletedEvent
 
     -- ** SSOProfileUpdatedEvent
-    SSOProfileUpdatedEvent (..),
-    newSSOProfileUpdatedEvent,
+    , SSOProfileUpdatedEvent (..)
+    , newSSOProfileUpdatedEvent
 
     -- ** SensitiveAdminAction
-    SensitiveAdminAction (..),
-    newSensitiveAdminAction,
+    , SensitiveAdminAction (..)
+    , newSensitiveAdminAction
 
     -- ** Settings
-    Settings (..),
-    newSettings,
+    , Settings (..)
+    , newSettings
 
     -- ** StateSponsoredAttack
-    StateSponsoredAttack (..),
-    newStateSponsoredAttack,
+    , StateSponsoredAttack (..)
+    , newStateSponsoredAttack
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** SuperAdminPasswordResetEvent
-    SuperAdminPasswordResetEvent (..),
-    newSuperAdminPasswordResetEvent,
+    , SuperAdminPasswordResetEvent (..)
+    , newSuperAdminPasswordResetEvent
+
+    -- ** SupportTicket
+    , SupportTicket (..)
+    , newSupportTicket
 
     -- ** SuspiciousActivity
-    SuspiciousActivity (..),
-    newSuspiciousActivity,
+    , SuspiciousActivity (..)
+    , newSuspiciousActivity
 
     -- ** SuspiciousActivitySecurityDetail
-    SuspiciousActivitySecurityDetail (..),
-    newSuspiciousActivitySecurityDetail,
+    , SuspiciousActivitySecurityDetail (..)
+    , newSuspiciousActivitySecurityDetail
 
     -- ** TransferError
-    TransferError (..),
-    newTransferError,
+    , TransferError (..)
+    , newTransferError
 
     -- ** TransferError_EntityType
-    TransferError_EntityType (..),
+    , TransferError_EntityType (..)
 
     -- ** TransferError_InvalidReason
-    TransferError_InvalidReason (..),
+    , TransferError_InvalidReason (..)
 
     -- ** TransferMisconfiguration
-    TransferMisconfiguration (..),
-    newTransferMisconfiguration,
+    , TransferMisconfiguration (..)
+    , newTransferMisconfiguration
 
     -- ** UndeleteAlertRequest
-    UndeleteAlertRequest (..),
-    newUndeleteAlertRequest,
+    , UndeleteAlertRequest (..)
+    , newUndeleteAlertRequest
 
     -- ** User
-    User (..),
-    newUser,
+    , User (..)
+    , newUser
 
     -- ** UserChanges
-    UserChanges (..),
-    newUserChanges,
+    , UserChanges (..)
+    , newUserChanges
 
     -- ** UserDefinedDetectorInfo
-    UserDefinedDetectorInfo (..),
-    newUserDefinedDetectorInfo,
+    , UserDefinedDetectorInfo (..)
+    , newUserDefinedDetectorInfo
 
     -- ** VoiceMisconfiguration
-    VoiceMisconfiguration (..),
-    newVoiceMisconfiguration,
+    , VoiceMisconfiguration (..)
+    , newVoiceMisconfiguration
 
     -- ** VoiceMisconfiguration_EntityType
-    VoiceMisconfiguration_EntityType (..),
+    , VoiceMisconfiguration_EntityType (..)
 
     -- ** VoicemailMisconfiguration
-    VoicemailMisconfiguration (..),
-    newVoicemailMisconfiguration,
+    , VoicemailMisconfiguration (..)
+    , newVoicemailMisconfiguration
 
     -- ** VoicemailRecipientError
-    VoicemailRecipientError (..),
-    newVoicemailRecipientError,
+    , VoicemailRecipientError (..)
+    , newVoicemailRecipientError
 
     -- ** VoicemailRecipientError_InvalidReason
-    VoicemailRecipientError_InvalidReason (..),
-  )
-where
+    , VoicemailRecipientError_InvalidReason (..)
+    ) where
 
 import Gogol.AlertCenter.Alerts.BatchDelete
 import Gogol.AlertCenter.Alerts.BatchUndelete

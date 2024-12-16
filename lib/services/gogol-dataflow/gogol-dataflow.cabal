@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-dataflow
-version:            1.0.0.0
-synopsis:           Google Dataflow SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-dataflow
+version:               1.0.0
+synopsis:              Google Dataflow SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  Manages Google Cloud Dataflow projects on Google Cloud Platform.
+    Manages Google Cloud Dataflow projects on Google Cloud Platform.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -30,72 +27,73 @@ source-repository head
   subdir:   gogol-dataflow
 
 flag field-selectors
-  description:
-    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-
-  default:     False
-  manual:      True
+  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+  default: False
+  manual: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -Werror
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (!flag(field-selectors) && impl(ghc >=9.2))
+  if !flag(field-selectors) && impl(ghc >= 9.2)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.Dataflow
-    Gogol.Dataflow.Projects.DeleteSnapshots
-    Gogol.Dataflow.Projects.Jobs.Aggregated
-    Gogol.Dataflow.Projects.Jobs.Create
-    Gogol.Dataflow.Projects.Jobs.Debug.GetConfig
-    Gogol.Dataflow.Projects.Jobs.Debug.SendCapture
-    Gogol.Dataflow.Projects.Jobs.Get
-    Gogol.Dataflow.Projects.Jobs.GetMetrics
-    Gogol.Dataflow.Projects.Jobs.List
-    Gogol.Dataflow.Projects.Jobs.Messages.List
-    Gogol.Dataflow.Projects.Jobs.Snapshot
-    Gogol.Dataflow.Projects.Jobs.Update
-    Gogol.Dataflow.Projects.Jobs.WorkItems.Lease
-    Gogol.Dataflow.Projects.Jobs.WorkItems.ReportStatus
-    Gogol.Dataflow.Projects.Locations.FlexTemplates.Launch
-    Gogol.Dataflow.Projects.Locations.Jobs.Create
-    Gogol.Dataflow.Projects.Locations.Jobs.Debug.GetConfig
-    Gogol.Dataflow.Projects.Locations.Jobs.Debug.SendCapture
-    Gogol.Dataflow.Projects.Locations.Jobs.Get
-    Gogol.Dataflow.Projects.Locations.Jobs.GetExecutionDetails
-    Gogol.Dataflow.Projects.Locations.Jobs.GetMetrics
-    Gogol.Dataflow.Projects.Locations.Jobs.List
-    Gogol.Dataflow.Projects.Locations.Jobs.Messages.List
-    Gogol.Dataflow.Projects.Locations.Jobs.Snapshot
-    Gogol.Dataflow.Projects.Locations.Jobs.Snapshots.List
-    Gogol.Dataflow.Projects.Locations.Jobs.Stages.GetExecutionDetails
-    Gogol.Dataflow.Projects.Locations.Jobs.Update
-    Gogol.Dataflow.Projects.Locations.Jobs.WorkItems.Lease
-    Gogol.Dataflow.Projects.Locations.Jobs.WorkItems.ReportStatus
-    Gogol.Dataflow.Projects.Locations.Snapshots.Delete
-    Gogol.Dataflow.Projects.Locations.Snapshots.Get
-    Gogol.Dataflow.Projects.Locations.Snapshots.List
-    Gogol.Dataflow.Projects.Locations.Templates.Create
-    Gogol.Dataflow.Projects.Locations.Templates.Get
-    Gogol.Dataflow.Projects.Locations.Templates.Launch
-    Gogol.Dataflow.Projects.Locations.WorkerMessages
-    Gogol.Dataflow.Projects.Snapshots.Get
-    Gogol.Dataflow.Projects.Snapshots.List
-    Gogol.Dataflow.Projects.Templates.Create
-    Gogol.Dataflow.Projects.Templates.Get
-    Gogol.Dataflow.Projects.Templates.Launch
-    Gogol.Dataflow.Projects.WorkerMessages
-    Gogol.Dataflow.Types
+      Gogol.Dataflow
+    , Gogol.Dataflow.Projects.DeleteSnapshots
+    , Gogol.Dataflow.Projects.Jobs.Aggregated
+    , Gogol.Dataflow.Projects.Jobs.Create
+    , Gogol.Dataflow.Projects.Jobs.Debug.GetConfig
+    , Gogol.Dataflow.Projects.Jobs.Debug.SendCapture
+    , Gogol.Dataflow.Projects.Jobs.Get
+    , Gogol.Dataflow.Projects.Jobs.GetMetrics
+    , Gogol.Dataflow.Projects.Jobs.List
+    , Gogol.Dataflow.Projects.Jobs.Messages.List
+    , Gogol.Dataflow.Projects.Jobs.Snapshot
+    , Gogol.Dataflow.Projects.Jobs.Update
+    , Gogol.Dataflow.Projects.Jobs.WorkItems.Lease
+    , Gogol.Dataflow.Projects.Jobs.WorkItems.ReportStatus
+    , Gogol.Dataflow.Projects.Locations.FlexTemplates.Launch
+    , Gogol.Dataflow.Projects.Locations.Jobs.Create
+    , Gogol.Dataflow.Projects.Locations.Jobs.Debug.GetConfig
+    , Gogol.Dataflow.Projects.Locations.Jobs.Debug.SendCapture
+    , Gogol.Dataflow.Projects.Locations.Jobs.Get
+    , Gogol.Dataflow.Projects.Locations.Jobs.GetExecutionDetails
+    , Gogol.Dataflow.Projects.Locations.Jobs.GetMetrics
+    , Gogol.Dataflow.Projects.Locations.Jobs.List
+    , Gogol.Dataflow.Projects.Locations.Jobs.Messages.List
+    , Gogol.Dataflow.Projects.Locations.Jobs.Snapshot
+    , Gogol.Dataflow.Projects.Locations.Jobs.Snapshots.List
+    , Gogol.Dataflow.Projects.Locations.Jobs.Stages.GetExecutionDetails
+    , Gogol.Dataflow.Projects.Locations.Jobs.Update
+    , Gogol.Dataflow.Projects.Locations.Jobs.WorkItems.Lease
+    , Gogol.Dataflow.Projects.Locations.Jobs.WorkItems.ReportStatus
+    , Gogol.Dataflow.Projects.Locations.Snapshots.Delete
+    , Gogol.Dataflow.Projects.Locations.Snapshots.Get
+    , Gogol.Dataflow.Projects.Locations.Snapshots.List
+    , Gogol.Dataflow.Projects.Locations.Templates.Create
+    , Gogol.Dataflow.Projects.Locations.Templates.Get
+    , Gogol.Dataflow.Projects.Locations.Templates.Launch
+    , Gogol.Dataflow.Projects.Locations.WorkerMessages
+    , Gogol.Dataflow.Projects.Snapshots.Get
+    , Gogol.Dataflow.Projects.Snapshots.List
+    , Gogol.Dataflow.Projects.Templates.Create
+    , Gogol.Dataflow.Projects.Templates.Get
+    , Gogol.Dataflow.Projects.Templates.Launch
+    , Gogol.Dataflow.Projects.WorkerMessages
+    , Gogol.Dataflow.Types
 
   other-modules:
-    Gogol.Dataflow.Internal.Product
-    Gogol.Dataflow.Internal.Sum
+      Gogol.Dataflow.Internal.Product
+    , Gogol.Dataflow.Internal.Sum
 
   build-depends:
-    , base        >=4.12   && <5
-    , gogol-core  ^>=1.0.0
+      gogol-core ^>= 1.0.0

@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,139 +31,139 @@
 --
 -- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference>
 module Gogol.YouTubeReporting
-  ( -- * Configuration
-    youTubeReportingService,
+    (
+    -- * Configuration
+      youTubeReportingService
 
     -- * OAuth Scopes
-    YtAnalyticsMonetary'Readonly,
-    YtAnalytics'Readonly,
+    , YtAnalyticsMonetary'Readonly
+    , YtAnalytics'Readonly
 
     -- * Resources
 
     -- ** youtubereporting.jobs.create
-    YouTubeReportingJobsCreateResource,
-    YouTubeReportingJobsCreate (..),
-    newYouTubeReportingJobsCreate,
+    , YouTubeReportingJobsCreateResource
+    , YouTubeReportingJobsCreate (..)
+    , newYouTubeReportingJobsCreate
 
     -- ** youtubereporting.jobs.delete
-    YouTubeReportingJobsDeleteResource,
-    YouTubeReportingJobsDelete (..),
-    newYouTubeReportingJobsDelete,
+    , YouTubeReportingJobsDeleteResource
+    , YouTubeReportingJobsDelete (..)
+    , newYouTubeReportingJobsDelete
 
     -- ** youtubereporting.jobs.get
-    YouTubeReportingJobsGetResource,
-    YouTubeReportingJobsGet (..),
-    newYouTubeReportingJobsGet,
+    , YouTubeReportingJobsGetResource
+    , YouTubeReportingJobsGet (..)
+    , newYouTubeReportingJobsGet
 
     -- ** youtubereporting.jobs.list
-    YouTubeReportingJobsListResource,
-    YouTubeReportingJobsList (..),
-    newYouTubeReportingJobsList,
+    , YouTubeReportingJobsListResource
+    , YouTubeReportingJobsList (..)
+    , newYouTubeReportingJobsList
 
     -- ** youtubereporting.jobs.reports.get
-    YouTubeReportingJobsReportsGetResource,
-    YouTubeReportingJobsReportsGet (..),
-    newYouTubeReportingJobsReportsGet,
+    , YouTubeReportingJobsReportsGetResource
+    , YouTubeReportingJobsReportsGet (..)
+    , newYouTubeReportingJobsReportsGet
 
     -- ** youtubereporting.jobs.reports.list
-    YouTubeReportingJobsReportsListResource,
-    YouTubeReportingJobsReportsList (..),
-    newYouTubeReportingJobsReportsList,
+    , YouTubeReportingJobsReportsListResource
+    , YouTubeReportingJobsReportsList (..)
+    , newYouTubeReportingJobsReportsList
 
     -- ** youtubereporting.media.download
-    YouTubeReportingMediaDownloadResource,
-    YouTubeReportingMediaDownload (..),
-    newYouTubeReportingMediaDownload,
+    , YouTubeReportingMediaDownloadResource
+    , YouTubeReportingMediaDownload (..)
+    , newYouTubeReportingMediaDownload
 
     -- ** youtubereporting.reportTypes.list
-    YouTubeReportingReportTypesListResource,
-    YouTubeReportingReportTypesList (..),
-    newYouTubeReportingReportTypesList,
+    , YouTubeReportingReportTypesListResource
+    , YouTubeReportingReportTypesList (..)
+    , newYouTubeReportingReportTypesList
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** GdataBlobstore2Info
-    GdataBlobstore2Info (..),
-    newGdataBlobstore2Info,
+    , GdataBlobstore2Info (..)
+    , newGdataBlobstore2Info
 
     -- ** GdataCompositeMedia
-    GdataCompositeMedia (..),
-    newGdataCompositeMedia,
+    , GdataCompositeMedia (..)
+    , newGdataCompositeMedia
 
     -- ** GdataCompositeMedia_ReferenceType
-    GdataCompositeMedia_ReferenceType (..),
+    , GdataCompositeMedia_ReferenceType (..)
 
     -- ** GdataContentTypeInfo
-    GdataContentTypeInfo (..),
-    newGdataContentTypeInfo,
+    , GdataContentTypeInfo (..)
+    , newGdataContentTypeInfo
 
     -- ** GdataDiffChecksumsResponse
-    GdataDiffChecksumsResponse (..),
-    newGdataDiffChecksumsResponse,
+    , GdataDiffChecksumsResponse (..)
+    , newGdataDiffChecksumsResponse
 
     -- ** GdataDiffDownloadResponse
-    GdataDiffDownloadResponse (..),
-    newGdataDiffDownloadResponse,
+    , GdataDiffDownloadResponse (..)
+    , newGdataDiffDownloadResponse
 
     -- ** GdataDiffUploadRequest
-    GdataDiffUploadRequest (..),
-    newGdataDiffUploadRequest,
+    , GdataDiffUploadRequest (..)
+    , newGdataDiffUploadRequest
 
     -- ** GdataDiffUploadResponse
-    GdataDiffUploadResponse (..),
-    newGdataDiffUploadResponse,
+    , GdataDiffUploadResponse (..)
+    , newGdataDiffUploadResponse
 
     -- ** GdataDiffVersionResponse
-    GdataDiffVersionResponse (..),
-    newGdataDiffVersionResponse,
+    , GdataDiffVersionResponse (..)
+    , newGdataDiffVersionResponse
 
     -- ** GdataDownloadParameters
-    GdataDownloadParameters (..),
-    newGdataDownloadParameters,
+    , GdataDownloadParameters (..)
+    , newGdataDownloadParameters
 
     -- ** GdataMedia
-    GdataMedia (..),
-    newGdataMedia,
+    , GdataMedia (..)
+    , newGdataMedia
 
     -- ** GdataMedia_ReferenceType
-    GdataMedia_ReferenceType (..),
+    , GdataMedia_ReferenceType (..)
 
     -- ** GdataObjectId
-    GdataObjectId (..),
-    newGdataObjectId,
+    , GdataObjectId (..)
+    , newGdataObjectId
 
     -- ** Job
-    Job (..),
-    newJob,
+    , Job (..)
+    , newJob
 
     -- ** ListJobsResponse
-    ListJobsResponse (..),
-    newListJobsResponse,
+    , ListJobsResponse (..)
+    , newListJobsResponse
 
     -- ** ListReportTypesResponse
-    ListReportTypesResponse (..),
-    newListReportTypesResponse,
+    , ListReportTypesResponse (..)
+    , newListReportTypesResponse
 
     -- ** ListReportsResponse
-    ListReportsResponse (..),
-    newListReportsResponse,
+    , ListReportsResponse (..)
+    , newListReportsResponse
 
     -- ** Report
-    Report (..),
-    newReport,
+    , Report (..)
+    , newReport
 
     -- ** ReportType
-    ReportType (..),
-    newReportType,
-  )
-where
+    , ReportType (..)
+    , newReportType
+    ) where
 
 import Gogol.YouTubeReporting.Jobs.Create
 import Gogol.YouTubeReporting.Jobs.Delete

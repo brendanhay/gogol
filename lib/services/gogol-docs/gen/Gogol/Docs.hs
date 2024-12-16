@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,834 +31,894 @@
 --
 -- /See:/ <https://developers.google.com/docs/ Google Docs API Reference>
 module Gogol.Docs
-  ( -- * Configuration
-    docsService,
+    (
+    -- * Configuration
+      docsService
 
     -- * OAuth Scopes
-    Documents'FullControl,
-    Documents'Readonly,
-    Drive'FullControl,
-    Drive'File,
-    Drive'Readonly,
+    , Documents'FullControl
+    , Documents'Readonly
+    , Drive'FullControl
+    , Drive'File
+    , Drive'Readonly
 
     -- * Resources
 
     -- ** docs.documents.batchUpdate
-    DocsDocumentsBatchUpdateResource,
-    DocsDocumentsBatchUpdate (..),
-    newDocsDocumentsBatchUpdate,
+    , DocsDocumentsBatchUpdateResource
+    , DocsDocumentsBatchUpdate (..)
+    , newDocsDocumentsBatchUpdate
 
     -- ** docs.documents.create
-    DocsDocumentsCreateResource,
-    DocsDocumentsCreate (..),
-    newDocsDocumentsCreate,
+    , DocsDocumentsCreateResource
+    , DocsDocumentsCreate (..)
+    , newDocsDocumentsCreate
 
     -- ** docs.documents.get
-    DocsDocumentsGetResource,
-    DocsDocumentsGet (..),
-    newDocsDocumentsGet,
+    , DocsDocumentsGetResource
+    , DocsDocumentsGet (..)
+    , newDocsDocumentsGet
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AutoText
-    AutoText (..),
-    newAutoText,
+    , AutoText (..)
+    , newAutoText
 
     -- ** AutoText_SuggestedTextStyleChanges
-    AutoText_SuggestedTextStyleChanges (..),
-    newAutoText_SuggestedTextStyleChanges,
+    , AutoText_SuggestedTextStyleChanges (..)
+    , newAutoText_SuggestedTextStyleChanges
 
     -- ** AutoText_Type
-    AutoText_Type (..),
+    , AutoText_Type (..)
 
     -- ** Background
-    Background (..),
-    newBackground,
+    , Background (..)
+    , newBackground
 
     -- ** BackgroundSuggestionState
-    BackgroundSuggestionState (..),
-    newBackgroundSuggestionState,
+    , BackgroundSuggestionState (..)
+    , newBackgroundSuggestionState
 
     -- ** BatchUpdateDocumentRequest
-    BatchUpdateDocumentRequest (..),
-    newBatchUpdateDocumentRequest,
+    , BatchUpdateDocumentRequest (..)
+    , newBatchUpdateDocumentRequest
 
     -- ** BatchUpdateDocumentResponse
-    BatchUpdateDocumentResponse (..),
-    newBatchUpdateDocumentResponse,
+    , BatchUpdateDocumentResponse (..)
+    , newBatchUpdateDocumentResponse
 
     -- ** Body
-    Body (..),
-    newBody,
+    , Body (..)
+    , newBody
+
+    -- ** BookmarkLink
+    , BookmarkLink (..)
+    , newBookmarkLink
 
     -- ** Bullet
-    Bullet (..),
-    newBullet,
+    , Bullet (..)
+    , newBullet
 
     -- ** BulletSuggestionState
-    BulletSuggestionState (..),
-    newBulletSuggestionState,
+    , BulletSuggestionState (..)
+    , newBulletSuggestionState
 
     -- ** Color
-    Color (..),
-    newColor,
+    , Color (..)
+    , newColor
 
     -- ** ColumnBreak
-    ColumnBreak (..),
-    newColumnBreak,
+    , ColumnBreak (..)
+    , newColumnBreak
 
     -- ** ColumnBreak_SuggestedTextStyleChanges
-    ColumnBreak_SuggestedTextStyleChanges (..),
-    newColumnBreak_SuggestedTextStyleChanges,
+    , ColumnBreak_SuggestedTextStyleChanges (..)
+    , newColumnBreak_SuggestedTextStyleChanges
 
     -- ** CreateFooterRequest
-    CreateFooterRequest (..),
-    newCreateFooterRequest,
+    , CreateFooterRequest (..)
+    , newCreateFooterRequest
 
     -- ** CreateFooterRequest_Type
-    CreateFooterRequest_Type (..),
+    , CreateFooterRequest_Type (..)
 
     -- ** CreateFooterResponse
-    CreateFooterResponse (..),
-    newCreateFooterResponse,
+    , CreateFooterResponse (..)
+    , newCreateFooterResponse
 
     -- ** CreateFootnoteRequest
-    CreateFootnoteRequest (..),
-    newCreateFootnoteRequest,
+    , CreateFootnoteRequest (..)
+    , newCreateFootnoteRequest
 
     -- ** CreateFootnoteResponse
-    CreateFootnoteResponse (..),
-    newCreateFootnoteResponse,
+    , CreateFootnoteResponse (..)
+    , newCreateFootnoteResponse
 
     -- ** CreateHeaderRequest
-    CreateHeaderRequest (..),
-    newCreateHeaderRequest,
+    , CreateHeaderRequest (..)
+    , newCreateHeaderRequest
 
     -- ** CreateHeaderRequest_Type
-    CreateHeaderRequest_Type (..),
+    , CreateHeaderRequest_Type (..)
 
     -- ** CreateHeaderResponse
-    CreateHeaderResponse (..),
-    newCreateHeaderResponse,
+    , CreateHeaderResponse (..)
+    , newCreateHeaderResponse
 
     -- ** CreateNamedRangeRequest
-    CreateNamedRangeRequest (..),
-    newCreateNamedRangeRequest,
+    , CreateNamedRangeRequest (..)
+    , newCreateNamedRangeRequest
 
     -- ** CreateNamedRangeResponse
-    CreateNamedRangeResponse (..),
-    newCreateNamedRangeResponse,
+    , CreateNamedRangeResponse (..)
+    , newCreateNamedRangeResponse
 
     -- ** CreateParagraphBulletsRequest
-    CreateParagraphBulletsRequest (..),
-    newCreateParagraphBulletsRequest,
+    , CreateParagraphBulletsRequest (..)
+    , newCreateParagraphBulletsRequest
 
     -- ** CreateParagraphBulletsRequest_BulletPreset
-    CreateParagraphBulletsRequest_BulletPreset (..),
+    , CreateParagraphBulletsRequest_BulletPreset (..)
 
     -- ** CropProperties
-    CropProperties (..),
-    newCropProperties,
+    , CropProperties (..)
+    , newCropProperties
 
     -- ** CropPropertiesSuggestionState
-    CropPropertiesSuggestionState (..),
-    newCropPropertiesSuggestionState,
+    , CropPropertiesSuggestionState (..)
+    , newCropPropertiesSuggestionState
 
     -- ** DeleteContentRangeRequest
-    DeleteContentRangeRequest (..),
-    newDeleteContentRangeRequest,
+    , DeleteContentRangeRequest (..)
+    , newDeleteContentRangeRequest
 
     -- ** DeleteFooterRequest
-    DeleteFooterRequest (..),
-    newDeleteFooterRequest,
+    , DeleteFooterRequest (..)
+    , newDeleteFooterRequest
 
     -- ** DeleteHeaderRequest
-    DeleteHeaderRequest (..),
-    newDeleteHeaderRequest,
+    , DeleteHeaderRequest (..)
+    , newDeleteHeaderRequest
 
     -- ** DeleteNamedRangeRequest
-    DeleteNamedRangeRequest (..),
-    newDeleteNamedRangeRequest,
+    , DeleteNamedRangeRequest (..)
+    , newDeleteNamedRangeRequest
 
     -- ** DeleteParagraphBulletsRequest
-    DeleteParagraphBulletsRequest (..),
-    newDeleteParagraphBulletsRequest,
+    , DeleteParagraphBulletsRequest (..)
+    , newDeleteParagraphBulletsRequest
 
     -- ** DeletePositionedObjectRequest
-    DeletePositionedObjectRequest (..),
-    newDeletePositionedObjectRequest,
+    , DeletePositionedObjectRequest (..)
+    , newDeletePositionedObjectRequest
 
     -- ** DeleteTableColumnRequest
-    DeleteTableColumnRequest (..),
-    newDeleteTableColumnRequest,
+    , DeleteTableColumnRequest (..)
+    , newDeleteTableColumnRequest
 
     -- ** DeleteTableRowRequest
-    DeleteTableRowRequest (..),
-    newDeleteTableRowRequest,
+    , DeleteTableRowRequest (..)
+    , newDeleteTableRowRequest
 
     -- ** Dimension
-    Dimension (..),
-    newDimension,
+    , Dimension (..)
+    , newDimension
 
     -- ** Dimension_Unit
-    Dimension_Unit (..),
+    , Dimension_Unit (..)
 
     -- ** Document
-    Document (..),
-    newDocument,
+    , Document (..)
+    , newDocument
 
     -- ** Document_Footers
-    Document_Footers (..),
-    newDocument_Footers,
+    , Document_Footers (..)
+    , newDocument_Footers
 
     -- ** Document_Footnotes
-    Document_Footnotes (..),
-    newDocument_Footnotes,
+    , Document_Footnotes (..)
+    , newDocument_Footnotes
 
     -- ** Document_Headers
-    Document_Headers (..),
-    newDocument_Headers,
+    , Document_Headers (..)
+    , newDocument_Headers
 
     -- ** Document_InlineObjects
-    Document_InlineObjects (..),
-    newDocument_InlineObjects,
+    , Document_InlineObjects (..)
+    , newDocument_InlineObjects
 
     -- ** Document_Lists
-    Document_Lists (..),
-    newDocument_Lists,
+    , Document_Lists (..)
+    , newDocument_Lists
 
     -- ** Document_NamedRanges
-    Document_NamedRanges (..),
-    newDocument_NamedRanges,
+    , Document_NamedRanges (..)
+    , newDocument_NamedRanges
 
     -- ** Document_PositionedObjects
-    Document_PositionedObjects (..),
-    newDocument_PositionedObjects,
+    , Document_PositionedObjects (..)
+    , newDocument_PositionedObjects
 
     -- ** Document_SuggestedDocumentStyleChanges
-    Document_SuggestedDocumentStyleChanges (..),
-    newDocument_SuggestedDocumentStyleChanges,
+    , Document_SuggestedDocumentStyleChanges (..)
+    , newDocument_SuggestedDocumentStyleChanges
 
     -- ** Document_SuggestedNamedStylesChanges
-    Document_SuggestedNamedStylesChanges (..),
-    newDocument_SuggestedNamedStylesChanges,
+    , Document_SuggestedNamedStylesChanges (..)
+    , newDocument_SuggestedNamedStylesChanges
 
     -- ** Document_SuggestionsViewMode
-    Document_SuggestionsViewMode (..),
+    , Document_SuggestionsViewMode (..)
 
     -- ** DocumentStyle
-    DocumentStyle (..),
-    newDocumentStyle,
+    , DocumentStyle (..)
+    , newDocumentStyle
 
     -- ** DocumentStyleSuggestionState
-    DocumentStyleSuggestionState (..),
-    newDocumentStyleSuggestionState,
+    , DocumentStyleSuggestionState (..)
+    , newDocumentStyleSuggestionState
+
+    -- ** DocumentTab
+    , DocumentTab (..)
+    , newDocumentTab
+
+    -- ** DocumentTab_Footers
+    , DocumentTab_Footers (..)
+    , newDocumentTab_Footers
+
+    -- ** DocumentTab_Footnotes
+    , DocumentTab_Footnotes (..)
+    , newDocumentTab_Footnotes
+
+    -- ** DocumentTab_Headers
+    , DocumentTab_Headers (..)
+    , newDocumentTab_Headers
+
+    -- ** DocumentTab_InlineObjects
+    , DocumentTab_InlineObjects (..)
+    , newDocumentTab_InlineObjects
+
+    -- ** DocumentTab_Lists
+    , DocumentTab_Lists (..)
+    , newDocumentTab_Lists
+
+    -- ** DocumentTab_NamedRanges
+    , DocumentTab_NamedRanges (..)
+    , newDocumentTab_NamedRanges
+
+    -- ** DocumentTab_PositionedObjects
+    , DocumentTab_PositionedObjects (..)
+    , newDocumentTab_PositionedObjects
+
+    -- ** DocumentTab_SuggestedDocumentStyleChanges
+    , DocumentTab_SuggestedDocumentStyleChanges (..)
+    , newDocumentTab_SuggestedDocumentStyleChanges
+
+    -- ** DocumentTab_SuggestedNamedStylesChanges
+    , DocumentTab_SuggestedNamedStylesChanges (..)
+    , newDocumentTab_SuggestedNamedStylesChanges
 
     -- ** EmbeddedDrawingProperties
-    EmbeddedDrawingProperties (..),
-    newEmbeddedDrawingProperties,
+    , EmbeddedDrawingProperties (..)
+    , newEmbeddedDrawingProperties
 
     -- ** EmbeddedDrawingPropertiesSuggestionState
-    EmbeddedDrawingPropertiesSuggestionState (..),
-    newEmbeddedDrawingPropertiesSuggestionState,
+    , EmbeddedDrawingPropertiesSuggestionState (..)
+    , newEmbeddedDrawingPropertiesSuggestionState
 
     -- ** EmbeddedObject
-    EmbeddedObject (..),
-    newEmbeddedObject,
+    , EmbeddedObject (..)
+    , newEmbeddedObject
 
     -- ** EmbeddedObjectBorder
-    EmbeddedObjectBorder (..),
-    newEmbeddedObjectBorder,
+    , EmbeddedObjectBorder (..)
+    , newEmbeddedObjectBorder
 
     -- ** EmbeddedObjectBorder_DashStyle
-    EmbeddedObjectBorder_DashStyle (..),
+    , EmbeddedObjectBorder_DashStyle (..)
 
     -- ** EmbeddedObjectBorder_PropertyState
-    EmbeddedObjectBorder_PropertyState (..),
+    , EmbeddedObjectBorder_PropertyState (..)
 
     -- ** EmbeddedObjectBorderSuggestionState
-    EmbeddedObjectBorderSuggestionState (..),
-    newEmbeddedObjectBorderSuggestionState,
+    , EmbeddedObjectBorderSuggestionState (..)
+    , newEmbeddedObjectBorderSuggestionState
 
     -- ** EmbeddedObjectSuggestionState
-    EmbeddedObjectSuggestionState (..),
-    newEmbeddedObjectSuggestionState,
+    , EmbeddedObjectSuggestionState (..)
+    , newEmbeddedObjectSuggestionState
 
     -- ** EndOfSegmentLocation
-    EndOfSegmentLocation (..),
-    newEndOfSegmentLocation,
+    , EndOfSegmentLocation (..)
+    , newEndOfSegmentLocation
 
     -- ** Equation
-    Equation (..),
-    newEquation,
+    , Equation (..)
+    , newEquation
 
     -- ** Footer
-    Footer (..),
-    newFooter,
+    , Footer (..)
+    , newFooter
 
     -- ** Footnote
-    Footnote (..),
-    newFootnote,
+    , Footnote (..)
+    , newFootnote
 
     -- ** FootnoteReference
-    FootnoteReference (..),
-    newFootnoteReference,
+    , FootnoteReference (..)
+    , newFootnoteReference
 
     -- ** FootnoteReference_SuggestedTextStyleChanges
-    FootnoteReference_SuggestedTextStyleChanges (..),
-    newFootnoteReference_SuggestedTextStyleChanges,
+    , FootnoteReference_SuggestedTextStyleChanges (..)
+    , newFootnoteReference_SuggestedTextStyleChanges
 
     -- ** Header
-    Header (..),
-    newHeader,
+    , Header (..)
+    , newHeader
+
+    -- ** HeadingLink
+    , HeadingLink (..)
+    , newHeadingLink
 
     -- ** HorizontalRule
-    HorizontalRule (..),
-    newHorizontalRule,
+    , HorizontalRule (..)
+    , newHorizontalRule
 
     -- ** HorizontalRule_SuggestedTextStyleChanges
-    HorizontalRule_SuggestedTextStyleChanges (..),
-    newHorizontalRule_SuggestedTextStyleChanges,
+    , HorizontalRule_SuggestedTextStyleChanges (..)
+    , newHorizontalRule_SuggestedTextStyleChanges
 
     -- ** ImageProperties
-    ImageProperties (..),
-    newImageProperties,
+    , ImageProperties (..)
+    , newImageProperties
 
     -- ** ImagePropertiesSuggestionState
-    ImagePropertiesSuggestionState (..),
-    newImagePropertiesSuggestionState,
+    , ImagePropertiesSuggestionState (..)
+    , newImagePropertiesSuggestionState
 
     -- ** InlineObject
-    InlineObject (..),
-    newInlineObject,
+    , InlineObject (..)
+    , newInlineObject
 
     -- ** InlineObject_SuggestedInlineObjectPropertiesChanges
-    InlineObject_SuggestedInlineObjectPropertiesChanges (..),
-    newInlineObject_SuggestedInlineObjectPropertiesChanges,
+    , InlineObject_SuggestedInlineObjectPropertiesChanges (..)
+    , newInlineObject_SuggestedInlineObjectPropertiesChanges
 
     -- ** InlineObjectElement
-    InlineObjectElement (..),
-    newInlineObjectElement,
+    , InlineObjectElement (..)
+    , newInlineObjectElement
 
     -- ** InlineObjectElement_SuggestedTextStyleChanges
-    InlineObjectElement_SuggestedTextStyleChanges (..),
-    newInlineObjectElement_SuggestedTextStyleChanges,
+    , InlineObjectElement_SuggestedTextStyleChanges (..)
+    , newInlineObjectElement_SuggestedTextStyleChanges
 
     -- ** InlineObjectProperties
-    InlineObjectProperties (..),
-    newInlineObjectProperties,
+    , InlineObjectProperties (..)
+    , newInlineObjectProperties
 
     -- ** InlineObjectPropertiesSuggestionState
-    InlineObjectPropertiesSuggestionState (..),
-    newInlineObjectPropertiesSuggestionState,
+    , InlineObjectPropertiesSuggestionState (..)
+    , newInlineObjectPropertiesSuggestionState
 
     -- ** InsertInlineImageRequest
-    InsertInlineImageRequest (..),
-    newInsertInlineImageRequest,
+    , InsertInlineImageRequest (..)
+    , newInsertInlineImageRequest
 
     -- ** InsertInlineImageResponse
-    InsertInlineImageResponse (..),
-    newInsertInlineImageResponse,
+    , InsertInlineImageResponse (..)
+    , newInsertInlineImageResponse
 
     -- ** InsertInlineSheetsChartResponse
-    InsertInlineSheetsChartResponse (..),
-    newInsertInlineSheetsChartResponse,
+    , InsertInlineSheetsChartResponse (..)
+    , newInsertInlineSheetsChartResponse
 
     -- ** InsertPageBreakRequest
-    InsertPageBreakRequest (..),
-    newInsertPageBreakRequest,
+    , InsertPageBreakRequest (..)
+    , newInsertPageBreakRequest
 
     -- ** InsertSectionBreakRequest
-    InsertSectionBreakRequest (..),
-    newInsertSectionBreakRequest,
+    , InsertSectionBreakRequest (..)
+    , newInsertSectionBreakRequest
 
     -- ** InsertSectionBreakRequest_SectionType
-    InsertSectionBreakRequest_SectionType (..),
+    , InsertSectionBreakRequest_SectionType (..)
 
     -- ** InsertTableColumnRequest
-    InsertTableColumnRequest (..),
-    newInsertTableColumnRequest,
+    , InsertTableColumnRequest (..)
+    , newInsertTableColumnRequest
 
     -- ** InsertTableRequest
-    InsertTableRequest (..),
-    newInsertTableRequest,
+    , InsertTableRequest (..)
+    , newInsertTableRequest
 
     -- ** InsertTableRowRequest
-    InsertTableRowRequest (..),
-    newInsertTableRowRequest,
+    , InsertTableRowRequest (..)
+    , newInsertTableRowRequest
 
     -- ** InsertTextRequest
-    InsertTextRequest (..),
-    newInsertTextRequest,
+    , InsertTextRequest (..)
+    , newInsertTextRequest
 
     -- ** Link
-    Link (..),
-    newLink,
+    , Link (..)
+    , newLink
 
     -- ** LinkedContentReference
-    LinkedContentReference (..),
-    newLinkedContentReference,
+    , LinkedContentReference (..)
+    , newLinkedContentReference
 
     -- ** LinkedContentReferenceSuggestionState
-    LinkedContentReferenceSuggestionState (..),
-    newLinkedContentReferenceSuggestionState,
+    , LinkedContentReferenceSuggestionState (..)
+    , newLinkedContentReferenceSuggestionState
 
     -- ** List
-    List (..),
-    newList,
+    , List (..)
+    , newList
 
     -- ** List_SuggestedListPropertiesChanges
-    List_SuggestedListPropertiesChanges (..),
-    newList_SuggestedListPropertiesChanges,
+    , List_SuggestedListPropertiesChanges (..)
+    , newList_SuggestedListPropertiesChanges
 
     -- ** ListProperties
-    ListProperties (..),
-    newListProperties,
+    , ListProperties (..)
+    , newListProperties
 
     -- ** ListPropertiesSuggestionState
-    ListPropertiesSuggestionState (..),
-    newListPropertiesSuggestionState,
+    , ListPropertiesSuggestionState (..)
+    , newListPropertiesSuggestionState
 
     -- ** Location
-    Location (..),
-    newLocation,
+    , Location (..)
+    , newLocation
 
     -- ** MergeTableCellsRequest
-    MergeTableCellsRequest (..),
-    newMergeTableCellsRequest,
+    , MergeTableCellsRequest (..)
+    , newMergeTableCellsRequest
 
     -- ** NamedRange
-    NamedRange (..),
-    newNamedRange,
+    , NamedRange (..)
+    , newNamedRange
 
     -- ** NamedRanges
-    NamedRanges (..),
-    newNamedRanges,
+    , NamedRanges (..)
+    , newNamedRanges
 
     -- ** NamedStyle
-    NamedStyle (..),
-    newNamedStyle,
+    , NamedStyle (..)
+    , newNamedStyle
 
     -- ** NamedStyle_NamedStyleType
-    NamedStyle_NamedStyleType (..),
+    , NamedStyle_NamedStyleType (..)
 
     -- ** NamedStyleSuggestionState
-    NamedStyleSuggestionState (..),
-    newNamedStyleSuggestionState,
+    , NamedStyleSuggestionState (..)
+    , newNamedStyleSuggestionState
 
     -- ** NamedStyleSuggestionState_NamedStyleType
-    NamedStyleSuggestionState_NamedStyleType (..),
+    , NamedStyleSuggestionState_NamedStyleType (..)
 
     -- ** NamedStyles
-    NamedStyles (..),
-    newNamedStyles,
+    , NamedStyles (..)
+    , newNamedStyles
 
     -- ** NamedStylesSuggestionState
-    NamedStylesSuggestionState (..),
-    newNamedStylesSuggestionState,
+    , NamedStylesSuggestionState (..)
+    , newNamedStylesSuggestionState
 
     -- ** NestingLevel
-    NestingLevel (..),
-    newNestingLevel,
+    , NestingLevel (..)
+    , newNestingLevel
 
     -- ** NestingLevel_BulletAlignment
-    NestingLevel_BulletAlignment (..),
+    , NestingLevel_BulletAlignment (..)
 
     -- ** NestingLevel_GlyphType
-    NestingLevel_GlyphType (..),
+    , NestingLevel_GlyphType (..)
 
     -- ** NestingLevelSuggestionState
-    NestingLevelSuggestionState (..),
-    newNestingLevelSuggestionState,
+    , NestingLevelSuggestionState (..)
+    , newNestingLevelSuggestionState
 
     -- ** ObjectReferences
-    ObjectReferences (..),
-    newObjectReferences,
+    , ObjectReferences (..)
+    , newObjectReferences
 
     -- ** OptionalColor
-    OptionalColor (..),
-    newOptionalColor,
+    , OptionalColor (..)
+    , newOptionalColor
 
     -- ** PageBreak
-    PageBreak (..),
-    newPageBreak,
+    , PageBreak (..)
+    , newPageBreak
 
     -- ** PageBreak_SuggestedTextStyleChanges
-    PageBreak_SuggestedTextStyleChanges (..),
-    newPageBreak_SuggestedTextStyleChanges,
+    , PageBreak_SuggestedTextStyleChanges (..)
+    , newPageBreak_SuggestedTextStyleChanges
 
     -- ** Paragraph
-    Paragraph (..),
-    newParagraph,
+    , Paragraph (..)
+    , newParagraph
 
     -- ** Paragraph_SuggestedBulletChanges
-    Paragraph_SuggestedBulletChanges (..),
-    newParagraph_SuggestedBulletChanges,
+    , Paragraph_SuggestedBulletChanges (..)
+    , newParagraph_SuggestedBulletChanges
 
     -- ** Paragraph_SuggestedParagraphStyleChanges
-    Paragraph_SuggestedParagraphStyleChanges (..),
-    newParagraph_SuggestedParagraphStyleChanges,
+    , Paragraph_SuggestedParagraphStyleChanges (..)
+    , newParagraph_SuggestedParagraphStyleChanges
 
     -- ** Paragraph_SuggestedPositionedObjectIds
-    Paragraph_SuggestedPositionedObjectIds (..),
-    newParagraph_SuggestedPositionedObjectIds,
+    , Paragraph_SuggestedPositionedObjectIds (..)
+    , newParagraph_SuggestedPositionedObjectIds
 
     -- ** ParagraphBorder
-    ParagraphBorder (..),
-    newParagraphBorder,
+    , ParagraphBorder (..)
+    , newParagraphBorder
 
     -- ** ParagraphBorder_DashStyle
-    ParagraphBorder_DashStyle (..),
+    , ParagraphBorder_DashStyle (..)
 
     -- ** ParagraphElement
-    ParagraphElement (..),
-    newParagraphElement,
+    , ParagraphElement (..)
+    , newParagraphElement
 
     -- ** ParagraphStyle
-    ParagraphStyle (..),
-    newParagraphStyle,
+    , ParagraphStyle (..)
+    , newParagraphStyle
 
     -- ** ParagraphStyle_Alignment
-    ParagraphStyle_Alignment (..),
+    , ParagraphStyle_Alignment (..)
 
     -- ** ParagraphStyle_Direction
-    ParagraphStyle_Direction (..),
+    , ParagraphStyle_Direction (..)
 
     -- ** ParagraphStyle_NamedStyleType
-    ParagraphStyle_NamedStyleType (..),
+    , ParagraphStyle_NamedStyleType (..)
 
     -- ** ParagraphStyle_SpacingMode
-    ParagraphStyle_SpacingMode (..),
+    , ParagraphStyle_SpacingMode (..)
 
     -- ** ParagraphStyleSuggestionState
-    ParagraphStyleSuggestionState (..),
-    newParagraphStyleSuggestionState,
+    , ParagraphStyleSuggestionState (..)
+    , newParagraphStyleSuggestionState
 
     -- ** Person
-    Person (..),
-    newPerson,
+    , Person (..)
+    , newPerson
 
     -- ** Person_SuggestedTextStyleChanges
-    Person_SuggestedTextStyleChanges (..),
-    newPerson_SuggestedTextStyleChanges,
+    , Person_SuggestedTextStyleChanges (..)
+    , newPerson_SuggestedTextStyleChanges
 
     -- ** PersonProperties
-    PersonProperties (..),
-    newPersonProperties,
+    , PersonProperties (..)
+    , newPersonProperties
 
     -- ** PinTableHeaderRowsRequest
-    PinTableHeaderRowsRequest (..),
-    newPinTableHeaderRowsRequest,
+    , PinTableHeaderRowsRequest (..)
+    , newPinTableHeaderRowsRequest
 
     -- ** PositionedObject
-    PositionedObject (..),
-    newPositionedObject,
+    , PositionedObject (..)
+    , newPositionedObject
 
     -- ** PositionedObject_SuggestedPositionedObjectPropertiesChanges
-    PositionedObject_SuggestedPositionedObjectPropertiesChanges (..),
-    newPositionedObject_SuggestedPositionedObjectPropertiesChanges,
+    , PositionedObject_SuggestedPositionedObjectPropertiesChanges (..)
+    , newPositionedObject_SuggestedPositionedObjectPropertiesChanges
 
     -- ** PositionedObjectPositioning
-    PositionedObjectPositioning (..),
-    newPositionedObjectPositioning,
+    , PositionedObjectPositioning (..)
+    , newPositionedObjectPositioning
 
     -- ** PositionedObjectPositioning_Layout
-    PositionedObjectPositioning_Layout (..),
+    , PositionedObjectPositioning_Layout (..)
 
     -- ** PositionedObjectPositioningSuggestionState
-    PositionedObjectPositioningSuggestionState (..),
-    newPositionedObjectPositioningSuggestionState,
+    , PositionedObjectPositioningSuggestionState (..)
+    , newPositionedObjectPositioningSuggestionState
 
     -- ** PositionedObjectProperties
-    PositionedObjectProperties (..),
-    newPositionedObjectProperties,
+    , PositionedObjectProperties (..)
+    , newPositionedObjectProperties
 
     -- ** PositionedObjectPropertiesSuggestionState
-    PositionedObjectPropertiesSuggestionState (..),
-    newPositionedObjectPropertiesSuggestionState,
+    , PositionedObjectPropertiesSuggestionState (..)
+    , newPositionedObjectPropertiesSuggestionState
 
     -- ** Range
-    Range (..),
-    newRange,
+    , Range (..)
+    , newRange
 
     -- ** ReplaceAllTextRequest
-    ReplaceAllTextRequest (..),
-    newReplaceAllTextRequest,
+    , ReplaceAllTextRequest (..)
+    , newReplaceAllTextRequest
 
     -- ** ReplaceAllTextResponse
-    ReplaceAllTextResponse (..),
-    newReplaceAllTextResponse,
+    , ReplaceAllTextResponse (..)
+    , newReplaceAllTextResponse
 
     -- ** ReplaceImageRequest
-    ReplaceImageRequest (..),
-    newReplaceImageRequest,
+    , ReplaceImageRequest (..)
+    , newReplaceImageRequest
 
     -- ** ReplaceImageRequest_ImageReplaceMethod
-    ReplaceImageRequest_ImageReplaceMethod (..),
+    , ReplaceImageRequest_ImageReplaceMethod (..)
 
     -- ** ReplaceNamedRangeContentRequest
-    ReplaceNamedRangeContentRequest (..),
-    newReplaceNamedRangeContentRequest,
+    , ReplaceNamedRangeContentRequest (..)
+    , newReplaceNamedRangeContentRequest
 
     -- ** Request'
-    Request' (..),
-    newRequest,
+    , Request' (..)
+    , newRequest
 
     -- ** Response
-    Response (..),
-    newResponse,
+    , Response (..)
+    , newResponse
 
     -- ** RgbColor
-    RgbColor (..),
-    newRgbColor,
+    , RgbColor (..)
+    , newRgbColor
 
     -- ** RichLink
-    RichLink (..),
-    newRichLink,
+    , RichLink (..)
+    , newRichLink
 
     -- ** RichLink_SuggestedTextStyleChanges
-    RichLink_SuggestedTextStyleChanges (..),
-    newRichLink_SuggestedTextStyleChanges,
+    , RichLink_SuggestedTextStyleChanges (..)
+    , newRichLink_SuggestedTextStyleChanges
 
     -- ** RichLinkProperties
-    RichLinkProperties (..),
-    newRichLinkProperties,
+    , RichLinkProperties (..)
+    , newRichLinkProperties
 
     -- ** SectionBreak
-    SectionBreak (..),
-    newSectionBreak,
+    , SectionBreak (..)
+    , newSectionBreak
 
     -- ** SectionColumnProperties
-    SectionColumnProperties (..),
-    newSectionColumnProperties,
+    , SectionColumnProperties (..)
+    , newSectionColumnProperties
 
     -- ** SectionStyle
-    SectionStyle (..),
-    newSectionStyle,
+    , SectionStyle (..)
+    , newSectionStyle
 
     -- ** SectionStyle_ColumnSeparatorStyle
-    SectionStyle_ColumnSeparatorStyle (..),
+    , SectionStyle_ColumnSeparatorStyle (..)
 
     -- ** SectionStyle_ContentDirection
-    SectionStyle_ContentDirection (..),
+    , SectionStyle_ContentDirection (..)
 
     -- ** SectionStyle_SectionType
-    SectionStyle_SectionType (..),
+    , SectionStyle_SectionType (..)
 
     -- ** Shading
-    Shading (..),
-    newShading,
+    , Shading (..)
+    , newShading
 
     -- ** ShadingSuggestionState
-    ShadingSuggestionState (..),
-    newShadingSuggestionState,
+    , ShadingSuggestionState (..)
+    , newShadingSuggestionState
 
     -- ** SheetsChartReference
-    SheetsChartReference (..),
-    newSheetsChartReference,
+    , SheetsChartReference (..)
+    , newSheetsChartReference
 
     -- ** SheetsChartReferenceSuggestionState
-    SheetsChartReferenceSuggestionState (..),
-    newSheetsChartReferenceSuggestionState,
+    , SheetsChartReferenceSuggestionState (..)
+    , newSheetsChartReferenceSuggestionState
 
     -- ** Size
-    Size (..),
-    newSize,
+    , Size (..)
+    , newSize
 
     -- ** SizeSuggestionState
-    SizeSuggestionState (..),
-    newSizeSuggestionState,
+    , SizeSuggestionState (..)
+    , newSizeSuggestionState
 
     -- ** StructuralElement
-    StructuralElement (..),
-    newStructuralElement,
+    , StructuralElement (..)
+    , newStructuralElement
 
     -- ** SubstringMatchCriteria
-    SubstringMatchCriteria (..),
-    newSubstringMatchCriteria,
+    , SubstringMatchCriteria (..)
+    , newSubstringMatchCriteria
 
     -- ** SuggestedBullet
-    SuggestedBullet (..),
-    newSuggestedBullet,
+    , SuggestedBullet (..)
+    , newSuggestedBullet
 
     -- ** SuggestedDocumentStyle
-    SuggestedDocumentStyle (..),
-    newSuggestedDocumentStyle,
+    , SuggestedDocumentStyle (..)
+    , newSuggestedDocumentStyle
 
     -- ** SuggestedInlineObjectProperties
-    SuggestedInlineObjectProperties (..),
-    newSuggestedInlineObjectProperties,
+    , SuggestedInlineObjectProperties (..)
+    , newSuggestedInlineObjectProperties
 
     -- ** SuggestedListProperties
-    SuggestedListProperties (..),
-    newSuggestedListProperties,
+    , SuggestedListProperties (..)
+    , newSuggestedListProperties
 
     -- ** SuggestedNamedStyles
-    SuggestedNamedStyles (..),
-    newSuggestedNamedStyles,
+    , SuggestedNamedStyles (..)
+    , newSuggestedNamedStyles
 
     -- ** SuggestedParagraphStyle
-    SuggestedParagraphStyle (..),
-    newSuggestedParagraphStyle,
+    , SuggestedParagraphStyle (..)
+    , newSuggestedParagraphStyle
 
     -- ** SuggestedPositionedObjectProperties
-    SuggestedPositionedObjectProperties (..),
-    newSuggestedPositionedObjectProperties,
+    , SuggestedPositionedObjectProperties (..)
+    , newSuggestedPositionedObjectProperties
 
     -- ** SuggestedTableCellStyle
-    SuggestedTableCellStyle (..),
-    newSuggestedTableCellStyle,
+    , SuggestedTableCellStyle (..)
+    , newSuggestedTableCellStyle
 
     -- ** SuggestedTableRowStyle
-    SuggestedTableRowStyle (..),
-    newSuggestedTableRowStyle,
+    , SuggestedTableRowStyle (..)
+    , newSuggestedTableRowStyle
 
     -- ** SuggestedTextStyle
-    SuggestedTextStyle (..),
-    newSuggestedTextStyle,
+    , SuggestedTextStyle (..)
+    , newSuggestedTextStyle
+
+    -- ** Tab
+    , Tab (..)
+    , newTab
+
+    -- ** TabProperties
+    , TabProperties (..)
+    , newTabProperties
 
     -- ** TabStop
-    TabStop (..),
-    newTabStop,
+    , TabStop (..)
+    , newTabStop
 
     -- ** TabStop_Alignment
-    TabStop_Alignment (..),
+    , TabStop_Alignment (..)
 
     -- ** Table
-    Table (..),
-    newTable,
+    , Table (..)
+    , newTable
 
     -- ** TableCell
-    TableCell (..),
-    newTableCell,
+    , TableCell (..)
+    , newTableCell
 
     -- ** TableCell_SuggestedTableCellStyleChanges
-    TableCell_SuggestedTableCellStyleChanges (..),
-    newTableCell_SuggestedTableCellStyleChanges,
+    , TableCell_SuggestedTableCellStyleChanges (..)
+    , newTableCell_SuggestedTableCellStyleChanges
 
     -- ** TableCellBorder
-    TableCellBorder (..),
-    newTableCellBorder,
+    , TableCellBorder (..)
+    , newTableCellBorder
 
     -- ** TableCellBorder_DashStyle
-    TableCellBorder_DashStyle (..),
+    , TableCellBorder_DashStyle (..)
 
     -- ** TableCellLocation
-    TableCellLocation (..),
-    newTableCellLocation,
+    , TableCellLocation (..)
+    , newTableCellLocation
 
     -- ** TableCellStyle
-    TableCellStyle (..),
-    newTableCellStyle,
+    , TableCellStyle (..)
+    , newTableCellStyle
 
     -- ** TableCellStyle_ContentAlignment
-    TableCellStyle_ContentAlignment (..),
+    , TableCellStyle_ContentAlignment (..)
 
     -- ** TableCellStyleSuggestionState
-    TableCellStyleSuggestionState (..),
-    newTableCellStyleSuggestionState,
+    , TableCellStyleSuggestionState (..)
+    , newTableCellStyleSuggestionState
 
     -- ** TableColumnProperties
-    TableColumnProperties (..),
-    newTableColumnProperties,
+    , TableColumnProperties (..)
+    , newTableColumnProperties
 
     -- ** TableColumnProperties_WidthType
-    TableColumnProperties_WidthType (..),
+    , TableColumnProperties_WidthType (..)
 
     -- ** TableOfContents
-    TableOfContents (..),
-    newTableOfContents,
+    , TableOfContents (..)
+    , newTableOfContents
 
     -- ** TableRange
-    TableRange (..),
-    newTableRange,
+    , TableRange (..)
+    , newTableRange
 
     -- ** TableRow
-    TableRow (..),
-    newTableRow,
+    , TableRow (..)
+    , newTableRow
 
     -- ** TableRow_SuggestedTableRowStyleChanges
-    TableRow_SuggestedTableRowStyleChanges (..),
-    newTableRow_SuggestedTableRowStyleChanges,
+    , TableRow_SuggestedTableRowStyleChanges (..)
+    , newTableRow_SuggestedTableRowStyleChanges
 
     -- ** TableRowStyle
-    TableRowStyle (..),
-    newTableRowStyle,
+    , TableRowStyle (..)
+    , newTableRowStyle
 
     -- ** TableRowStyleSuggestionState
-    TableRowStyleSuggestionState (..),
-    newTableRowStyleSuggestionState,
+    , TableRowStyleSuggestionState (..)
+    , newTableRowStyleSuggestionState
 
     -- ** TableStyle
-    TableStyle (..),
-    newTableStyle,
+    , TableStyle (..)
+    , newTableStyle
+
+    -- ** TabsCriteria
+    , TabsCriteria (..)
+    , newTabsCriteria
 
     -- ** TextRun
-    TextRun (..),
-    newTextRun,
+    , TextRun (..)
+    , newTextRun
 
     -- ** TextRun_SuggestedTextStyleChanges
-    TextRun_SuggestedTextStyleChanges (..),
-    newTextRun_SuggestedTextStyleChanges,
+    , TextRun_SuggestedTextStyleChanges (..)
+    , newTextRun_SuggestedTextStyleChanges
 
     -- ** TextStyle
-    TextStyle (..),
-    newTextStyle,
+    , TextStyle (..)
+    , newTextStyle
 
     -- ** TextStyle_BaselineOffset
-    TextStyle_BaselineOffset (..),
+    , TextStyle_BaselineOffset (..)
 
     -- ** TextStyleSuggestionState
-    TextStyleSuggestionState (..),
-    newTextStyleSuggestionState,
+    , TextStyleSuggestionState (..)
+    , newTextStyleSuggestionState
 
     -- ** UnmergeTableCellsRequest
-    UnmergeTableCellsRequest (..),
-    newUnmergeTableCellsRequest,
+    , UnmergeTableCellsRequest (..)
+    , newUnmergeTableCellsRequest
 
     -- ** UpdateDocumentStyleRequest
-    UpdateDocumentStyleRequest (..),
-    newUpdateDocumentStyleRequest,
+    , UpdateDocumentStyleRequest (..)
+    , newUpdateDocumentStyleRequest
 
     -- ** UpdateParagraphStyleRequest
-    UpdateParagraphStyleRequest (..),
-    newUpdateParagraphStyleRequest,
+    , UpdateParagraphStyleRequest (..)
+    , newUpdateParagraphStyleRequest
 
     -- ** UpdateSectionStyleRequest
-    UpdateSectionStyleRequest (..),
-    newUpdateSectionStyleRequest,
+    , UpdateSectionStyleRequest (..)
+    , newUpdateSectionStyleRequest
 
     -- ** UpdateTableCellStyleRequest
-    UpdateTableCellStyleRequest (..),
-    newUpdateTableCellStyleRequest,
+    , UpdateTableCellStyleRequest (..)
+    , newUpdateTableCellStyleRequest
 
     -- ** UpdateTableColumnPropertiesRequest
-    UpdateTableColumnPropertiesRequest (..),
-    newUpdateTableColumnPropertiesRequest,
+    , UpdateTableColumnPropertiesRequest (..)
+    , newUpdateTableColumnPropertiesRequest
 
     -- ** UpdateTableRowStyleRequest
-    UpdateTableRowStyleRequest (..),
-    newUpdateTableRowStyleRequest,
+    , UpdateTableRowStyleRequest (..)
+    , newUpdateTableRowStyleRequest
 
     -- ** UpdateTextStyleRequest
-    UpdateTextStyleRequest (..),
-    newUpdateTextStyleRequest,
+    , UpdateTextStyleRequest (..)
+    , newUpdateTextStyleRequest
 
     -- ** WeightedFontFamily
-    WeightedFontFamily (..),
-    newWeightedFontFamily,
+    , WeightedFontFamily (..)
+    , newWeightedFontFamily
 
     -- ** WriteControl
-    WriteControl (..),
-    newWriteControl,
+    , WriteControl (..)
+    , newWriteControl
 
     -- ** DocumentsGetSuggestionsViewMode
-    DocumentsGetSuggestionsViewMode (..),
-  )
-where
+    , DocumentsGetSuggestionsViewMode (..)
+    ) where
 
 import Gogol.Docs.Documents.BatchUpdate
 import Gogol.Docs.Documents.Create

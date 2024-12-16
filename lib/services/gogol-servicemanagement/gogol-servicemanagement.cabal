@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-servicemanagement
-version:            1.0.0.0
-synopsis:           Google Service Management SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-servicemanagement
+version:               1.0.0
+synopsis:              Google Service Management SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  Google Service Management allows service producers to publish their services on Google Cloud Platform so that they can be discovered and used by service consumers.
+    Google Service Management allows service producers to publish their services on Google Cloud Platform so that they can be discovered and used by service consumers.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -30,53 +27,54 @@ source-repository head
   subdir:   gogol-servicemanagement
 
 flag field-selectors
-  description:
-    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-
-  default:     False
-  manual:      True
+  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+  default: False
+  manual: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -Werror
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (!flag(field-selectors) && impl(ghc >=9.2))
+  if !flag(field-selectors) && impl(ghc >= 9.2)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.ServiceManagement
-    Gogol.ServiceManagement.Operations.Get
-    Gogol.ServiceManagement.Operations.List
-    Gogol.ServiceManagement.Services.Configs.Create
-    Gogol.ServiceManagement.Services.Configs.Get
-    Gogol.ServiceManagement.Services.Configs.List
-    Gogol.ServiceManagement.Services.Configs.Submit
-    Gogol.ServiceManagement.Services.Consumers.GetIamPolicy
-    Gogol.ServiceManagement.Services.Consumers.SetIamPolicy
-    Gogol.ServiceManagement.Services.Consumers.TestIamPermissions
-    Gogol.ServiceManagement.Services.Create
-    Gogol.ServiceManagement.Services.Delete
-    Gogol.ServiceManagement.Services.GenerateConfigReport
-    Gogol.ServiceManagement.Services.Get
-    Gogol.ServiceManagement.Services.GetConfig
-    Gogol.ServiceManagement.Services.GetIamPolicy
-    Gogol.ServiceManagement.Services.List
-    Gogol.ServiceManagement.Services.Rollouts.Create
-    Gogol.ServiceManagement.Services.Rollouts.Get
-    Gogol.ServiceManagement.Services.Rollouts.List
-    Gogol.ServiceManagement.Services.SetIamPolicy
-    Gogol.ServiceManagement.Services.TestIamPermissions
-    Gogol.ServiceManagement.Services.Undelete
-    Gogol.ServiceManagement.Types
+      Gogol.ServiceManagement
+    , Gogol.ServiceManagement.Operations.Get
+    , Gogol.ServiceManagement.Operations.List
+    , Gogol.ServiceManagement.Services.Configs.Create
+    , Gogol.ServiceManagement.Services.Configs.Get
+    , Gogol.ServiceManagement.Services.Configs.List
+    , Gogol.ServiceManagement.Services.Configs.Submit
+    , Gogol.ServiceManagement.Services.Consumers.GetIamPolicy
+    , Gogol.ServiceManagement.Services.Consumers.SetIamPolicy
+    , Gogol.ServiceManagement.Services.Consumers.TestIamPermissions
+    , Gogol.ServiceManagement.Services.Create
+    , Gogol.ServiceManagement.Services.Delete
+    , Gogol.ServiceManagement.Services.GenerateConfigReport
+    , Gogol.ServiceManagement.Services.Get
+    , Gogol.ServiceManagement.Services.GetConfig
+    , Gogol.ServiceManagement.Services.GetIamPolicy
+    , Gogol.ServiceManagement.Services.List
+    , Gogol.ServiceManagement.Services.Rollouts.Create
+    , Gogol.ServiceManagement.Services.Rollouts.Get
+    , Gogol.ServiceManagement.Services.Rollouts.List
+    , Gogol.ServiceManagement.Services.SetIamPolicy
+    , Gogol.ServiceManagement.Services.TestIamPermissions
+    , Gogol.ServiceManagement.Services.Undelete
+    , Gogol.ServiceManagement.Types
 
   other-modules:
-    Gogol.ServiceManagement.Internal.Product
-    Gogol.ServiceManagement.Internal.Sum
+      Gogol.ServiceManagement.Internal.Product
+    , Gogol.ServiceManagement.Internal.Sum
 
   build-depends:
-    , base        >=4.12   && <5
-    , gogol-core  ^>=1.0.0
+      gogol-core ^>= 1.0.0

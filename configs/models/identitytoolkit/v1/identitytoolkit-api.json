@@ -219,7 +219,7 @@
           ]
         },
         "sendVerificationCode": {
-          "description": "Sends a SMS verification code for phone number sign-in. An [API key](https://cloud.google.com/docs/authentication/api-keys) is required in the request in order to identify the Google Cloud project.",
+          "description": "Sends a SMS verification code for phone number sign-in. To localize the text of the SMS sent to the user, set the HTTP header `X-Firebase-Locale` to the language code that corresponds with the user's locale. An [API key](https://cloud.google.com/docs/authentication/api-keys) is required in the request in order to identify the Google Cloud project.",
           "flatPath": "v1/accounts:sendVerificationCode",
           "httpMethod": "POST",
           "id": "identitytoolkit.accounts.sendVerificationCode",
@@ -327,7 +327,7 @@
           ]
         },
         "signInWithPhoneNumber": {
-          "description": "Completes a phone number authentication attempt. If a user already exists with the given phone number, an ID token is minted for that user. Otherwise, a new user is created and associated with the phone number. This method may also be used to link a phone number to an existing user. An [API key](https://cloud.google.com/docs/authentication/api-keys) is required in the request in order to identify the Google Cloud project.",
+          "description": "Completes a phone number authentication attempt. If a user already exists with the given phone number, an ID token is minted for that user. Otherwise, a new user is created and associated with the phone number. This method may also be used to link a phone number to an existing user. To localize the text of the SMS sent to the user, set the HTTP header `X-Firebase-Locale` to the language code that corresponds with the user's locale. An [API key](https://cloud.google.com/docs/authentication/api-keys) is required in the request in order to identify the Google Cloud project.",
           "flatPath": "v1/accounts:signInWithPhoneNumber",
           "httpMethod": "POST",
           "id": "identitytoolkit.accounts.signInWithPhoneNumber",
@@ -559,6 +559,7 @@
               ],
               "parameters": {
                 "delegatedProjectNumber": {
+                  "deprecated": true,
                   "format": "int64",
                   "location": "query",
                   "type": "string"
@@ -872,7 +873,7 @@
                       "type": "string"
                     },
                     "tenantId": {
-                      "description": "If the accounts belong to an Identity Platform tenant, the ID of the tenant. If the accounts belong to an default Identity Platform project, the field is not needed.",
+                      "description": "If the accounts belong to an Identity Platform tenant, the ID of the tenant. If the accounts belong to a default Identity Platform project, the field is not needed.",
                       "location": "path",
                       "pattern": "^[^/]+$",
                       "required": true,
@@ -902,6 +903,7 @@
                   ],
                   "parameters": {
                     "delegatedProjectNumber": {
+                      "deprecated": true,
                       "format": "int64",
                       "location": "query",
                       "type": "string"
@@ -1237,7 +1239,7 @@
       }
     }
   },
-  "revision": "20230327",
+  "revision": "20241205",
   "rootUrl": "https://identitytoolkit.googleapis.com/",
   "schemas": {
     "GoogleCloudIdentitytoolkitV1Argon2Parameters": {
@@ -1329,7 +1331,7 @@
           "type": "array"
         },
         "tenantId": {
-          "description": "If the accounts belong to an Identity Platform tenant, the ID of the tenant. If the accounts belong to an default Identity Platform project, the field is not needed.",
+          "description": "If the accounts belong to an Identity Platform tenant, the ID of the tenant. If the accounts belong to a default Identity Platform project, the field is not needed.",
           "type": "string"
         }
       },
@@ -1374,6 +1376,7 @@
       "id": "GoogleCloudIdentitytoolkitV1CreateAuthUriRequest",
       "properties": {
         "appId": {
+          "deprecated": true,
           "type": "string"
         },
         "authFlowType": {
@@ -1404,6 +1407,7 @@
           "type": "string"
         },
         "oauthConsumerKey": {
+          "deprecated": true,
           "type": "string"
         },
         "oauthScope": {
@@ -1411,9 +1415,11 @@
           "type": "string"
         },
         "openidRealm": {
+          "deprecated": true,
           "type": "string"
         },
         "otaApp": {
+          "deprecated": true,
           "type": "string"
         },
         "providerId": {
@@ -1436,6 +1442,7 @@
       "id": "GoogleCloudIdentitytoolkitV1CreateAuthUriResponse",
       "properties": {
         "allProviders": {
+          "deprecated": true,
           "items": {
             "type": "string"
           },
@@ -1454,6 +1461,7 @@
           "type": "boolean"
         },
         "kind": {
+          "deprecated": true,
           "type": "string"
         },
         "providerId": {
@@ -1469,7 +1477,7 @@
           "type": "string"
         },
         "signinMethods": {
-          "description": "The list of sign-in methods that the user has previously used. Each element is one of `password`, `emailLink`, or the provider ID of an IdP. Present only when a registered email identifier is set in the request.",
+          "description": "The list of sign-in methods that the user has previously used. Each element is one of `password`, `emailLink`, or the provider ID of an IdP. Present only when a registered email identifier is set in the request. If [email enumeration protection](https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection) is enabled, this method returns an empty list.",
           "items": {
             "type": "string"
           },
@@ -1514,6 +1522,7 @@
       "id": "GoogleCloudIdentitytoolkitV1DeleteAccountRequest",
       "properties": {
         "delegatedProjectNumber": {
+          "deprecated": true,
           "format": "int64",
           "type": "string"
         },
@@ -1541,6 +1550,7 @@
       "id": "GoogleCloudIdentitytoolkitV1DeleteAccountResponse",
       "properties": {
         "kind": {
+          "deprecated": true,
           "type": "string"
         }
       },
@@ -1551,6 +1561,7 @@
       "id": "GoogleCloudIdentitytoolkitV1DownloadAccountResponse",
       "properties": {
         "kind": {
+          "deprecated": true,
           "type": "string"
         },
         "nextPageToken": {
@@ -1563,6 +1574,17 @@
             "$ref": "GoogleCloudIdentitytoolkitV1UserInfo"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudIdentitytoolkitV1EmailInfo": {
+      "description": "Information about email MFA.",
+      "id": "GoogleCloudIdentitytoolkitV1EmailInfo",
+      "properties": {
+        "emailAddress": {
+          "description": "Email address that a MFA verification should be sent to.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -1660,6 +1682,7 @@
       "id": "GoogleCloudIdentitytoolkitV1GetAccountInfoRequest",
       "properties": {
         "delegatedProjectNumber": {
+          "deprecated": true,
           "format": "int64",
           "type": "string"
         },
@@ -1718,6 +1741,7 @@
       "id": "GoogleCloudIdentitytoolkitV1GetAccountInfoResponse",
       "properties": {
         "kind": {
+          "deprecated": true,
           "type": "string"
         },
         "users": {
@@ -1755,6 +1779,23 @@
           "type": "string"
         },
         "challenge": {
+          "deprecated": true,
+          "type": "string"
+        },
+        "clientType": {
+          "description": "The client type: web, Android or iOS. Required when reCAPTCHA Enterprise protection is enabled.",
+          "enum": [
+            "CLIENT_TYPE_UNSPECIFIED",
+            "CLIENT_TYPE_WEB",
+            "CLIENT_TYPE_ANDROID",
+            "CLIENT_TYPE_IOS"
+          ],
+          "enumDescriptions": [
+            "Client type is not specified.",
+            "Client type is web.",
+            "Client type is android.",
+            "Client type is ios."
+          ],
           "type": "string"
         },
         "continueUrl": {
@@ -1785,6 +1826,18 @@
           "description": "The email address the account is being updated to. Required only for VERIFY_AND_CHANGE_EMAIL requests.",
           "type": "string"
         },
+        "recaptchaVersion": {
+          "description": "The reCAPTCHA version of the reCAPTCHA token in the captcha_response.",
+          "enum": [
+            "RECAPTCHA_VERSION_UNSPECIFIED",
+            "RECAPTCHA_ENTERPRISE"
+          ],
+          "enumDescriptions": [
+            "The reCAPTCHA version is not specified.",
+            "The reCAPTCHA enterprise."
+          ],
+          "type": "string"
+        },
         "requestType": {
           "description": "Required. The type of out-of-band (OOB) code to send. Depending on this value, other fields in this request will be required and/or have different meanings. There are 4 different OOB codes that can be sent: * PASSWORD_RESET * EMAIL_SIGNIN * VERIFY_EMAIL * VERIFY_AND_CHANGE_EMAIL",
           "enum": [
@@ -1797,6 +1850,17 @@
             "EMAIL_SIGNIN",
             "VERIFY_AND_CHANGE_EMAIL",
             "REVERT_SECOND_FACTOR_ADDITION"
+          ],
+          "enumDeprecated": [
+            false,
+            false,
+            true,
+            true,
+            false,
+            true,
+            false,
+            false,
+            true
           ],
           "enumDescriptions": [
             "Oob code type is not specified.",
@@ -1839,6 +1903,7 @@
           "type": "string"
         },
         "kind": {
+          "deprecated": true,
           "type": "string"
         },
         "oobCode": {
@@ -1922,6 +1987,7 @@
       "id": "GoogleCloudIdentitytoolkitV1GetRecaptchaParamResponse",
       "properties": {
         "kind": {
+          "deprecated": true,
           "type": "string"
         },
         "producerProjectNumber": {
@@ -1933,6 +1999,7 @@
           "type": "string"
         },
         "recaptchaStoken": {
+          "deprecated": true,
           "type": "string"
         }
       },
@@ -2076,6 +2143,10 @@
         "displayName": {
           "description": "Display name for this mfa option e.g. \"corp cell phone\".",
           "type": "string"
+        },
+        "emailInfo": {
+          "$ref": "GoogleCloudIdentitytoolkitV1EmailInfo",
+          "description": "Contains information specific to email MFA."
         },
         "enrolledAt": {
           "description": "Timestamp when the account enrolled this second factor.",
@@ -2290,7 +2361,7 @@
       "id": "GoogleCloudIdentitytoolkitV1ResetPasswordRequest",
       "properties": {
         "email": {
-          "description": "The email of the account to be modified. Specify this and the old password in order to change an account's password without using an out-of-band code.",
+          "description": "Optional. The email of the account to be modified. Specify this and the old password in order to change an account's password without using an out-of-band code.",
           "type": "string"
         },
         "newPassword": {
@@ -2306,7 +2377,7 @@
           "type": "string"
         },
         "tenantId": {
-          "description": "The tenant ID of the Identity Platform tenant the account belongs to.",
+          "description": "Optional. The tenant ID of the Identity Platform tenant the account belongs to.",
           "type": "string"
         }
       },
@@ -2321,6 +2392,7 @@
           "type": "string"
         },
         "kind": {
+          "deprecated": true,
           "type": "string"
         },
         "mfaInfo": {
@@ -2341,6 +2413,17 @@
             "VERIFY_AND_CHANGE_EMAIL",
             "REVERT_SECOND_FACTOR_ADDITION"
           ],
+          "enumDeprecated": [
+            false,
+            false,
+            true,
+            true,
+            false,
+            true,
+            false,
+            false,
+            true
+          ],
           "enumDescriptions": [
             "Oob code type is not specified.",
             "reset password",
@@ -2358,15 +2441,35 @@
       "type": "object"
     },
     "GoogleCloudIdentitytoolkitV1SendVerificationCodeRequest": {
-      "description": "Request message for SendVerificationCode. At least one of (`ios_receipt` and `ios_secret`), `recaptcha_token`, or `safety_net_token` must be specified to verify the verification code is being sent on behalf of a real app and not an emulator.",
+      "description": "Request message for SendVerificationCode. 'captcha_response' is required when reCAPTCHA enterprise is enabled, or otherwise at least one of (`ios_receipt` and `ios_secret`), `recaptcha_token`, or `safety_net_token` must be specified to verify the verification code is being sent on behalf of a real app and not an emulator.",
       "id": "GoogleCloudIdentitytoolkitV1SendVerificationCodeRequest",
       "properties": {
         "autoRetrievalInfo": {
           "$ref": "GoogleCloudIdentitytoolkitV1AutoRetrievalInfo",
           "description": "Android only. Used by Google Play Services to identify the app for auto-retrieval."
         },
+        "captchaResponse": {
+          "description": "Optional. The reCAPTCHA Enterprise token provided by the reCAPTCHA client-side integration. Required when reCAPTCHA enterprise is enabled.",
+          "type": "string"
+        },
+        "clientType": {
+          "description": "Optional. The client type, web, android or ios. Required when reCAPTCHA Enterprise is enabled.",
+          "enum": [
+            "CLIENT_TYPE_UNSPECIFIED",
+            "CLIENT_TYPE_WEB",
+            "CLIENT_TYPE_ANDROID",
+            "CLIENT_TYPE_IOS"
+          ],
+          "enumDescriptions": [
+            "Client type is not specified.",
+            "Client type is web.",
+            "Client type is android.",
+            "Client type is ios."
+          ],
+          "type": "string"
+        },
         "iosReceipt": {
-          "description": "Receipt of successful iOS app token validation. At least one of (`ios_receipt` and `ios_secret`), `recaptcha_token`, or `safety_net_token` must be specified to verify the verification code is being sent on behalf of a real app and not an emulator. This should come from the response of verifyIosClient. If present, the caller should also provide the `ios_secret`, as well as a bundle ID in the `x-ios-bundle-identifier` header, which must match the bundle ID from the verifyIosClient request.",
+          "description": "Receipt of successful iOS app token validation. At least one of (`ios_receipt` and `ios_secret`), `recaptcha_token`, or `safety_net_token` must be specified to verify the verification code is being sent on behalf of a real app and not an emulator, if 'captcha_response' is not used (reCAPTCHA enterprise is not enabled). This should come from the response of verifyIosClient. If present, the caller should also provide the `ios_secret`, as well as a bundle ID in the `x-ios-bundle-identifier` header, which must match the bundle ID from the verifyIosClient request.",
           "type": "string"
         },
         "iosSecret": {
@@ -2378,15 +2481,27 @@
           "type": "string"
         },
         "playIntegrityToken": {
-          "description": "Android only. Used to assert application identity in place of a recaptcha token (and safety_net_token). At least one of (`ios_receipt` and `ios_secret`), `recaptcha_token`, , or `play_integrity_token` must be specified to verify the verification code is being sent on behalf of a real app and not an emulator. A Play Integrity Token can be generated via the [PlayIntegrity API](https://developer.android.com/google/play/integrity) with applying SHA256 to the `phone_number` field as the nonce.",
+          "description": "Android only. Used to assert application identity in place of a recaptcha token (and safety_net_token). At least one of (`ios_receipt` and `ios_secret`), `recaptcha_token`, , or `play_integrity_token` must be specified to verify the verification code is being sent on behalf of a real app and not an emulator, if 'captcha_response' is not used (reCAPTCHA enterprise is not enabled). A Play Integrity Token can be generated via the [PlayIntegrity API](https://developer.android.com/google/play/integrity) with applying SHA256 to the `phone_number` field as the nonce.",
           "type": "string"
         },
         "recaptchaToken": {
-          "description": "Recaptcha token for app verification. At least one of (`ios_receipt` and `ios_secret`), `recaptcha_token`, or `safety_net_token` must be specified to verify the verification code is being sent on behalf of a real app and not an emulator. The recaptcha should be generated by calling getRecaptchaParams and the recaptcha token will be generated on user completion of the recaptcha challenge.",
+          "description": "Recaptcha token for app verification. At least one of (`ios_receipt` and `ios_secret`), `recaptcha_token`, or `safety_net_token` must be specified to verify the verification code is being sent on behalf of a real app and not an emulator, if 'captcha_response' is not used (reCAPTCHA enterprise is not enabled). The recaptcha should be generated by calling getRecaptchaParams and the recaptcha token will be generated on user completion of the recaptcha challenge.",
+          "type": "string"
+        },
+        "recaptchaVersion": {
+          "description": "Optional. The reCAPTCHA version of the reCAPTCHA token in the captcha_response. Required when reCAPTCHA Enterprise is enabled.",
+          "enum": [
+            "RECAPTCHA_VERSION_UNSPECIFIED",
+            "RECAPTCHA_ENTERPRISE"
+          ],
+          "enumDescriptions": [
+            "The reCAPTCHA version is not specified.",
+            "The reCAPTCHA enterprise."
+          ],
           "type": "string"
         },
         "safetyNetToken": {
-          "description": "Android only. Used to assert application identity in place of a recaptcha token. At least one of (`ios_receipt` and `ios_secret`), `recaptcha_token`, or `safety_net_token` must be specified to verify the verification code is being sent on behalf of a real app and not an emulator. A SafetyNet Token can be generated via the [SafetyNet Android Attestation API](https://developer.android.com/training/safetynet/attestation.html), with the Base64 encoding of the `phone_number` field as the nonce.",
+          "description": "Android only. Used to assert application identity in place of a recaptcha token. At least one of (`ios_receipt` and `ios_secret`), `recaptcha_token`, or `safety_net_token` must be specified to verify the verification code is being sent on behalf of a real app and not an emulator, if 'captcha_response' is not used (reCAPTCHA enterprise is not enabled). A SafetyNet Token can be generated via the [SafetyNet Android Attestation API](https://developer.android.com/training/safetynet/attestation.html), with the Base64 encoding of the `phone_number` field as the nonce.",
           "type": "string"
         },
         "tenantId": {
@@ -2412,6 +2527,7 @@
       "id": "GoogleCloudIdentitytoolkitV1SetAccountInfoRequest",
       "properties": {
         "captchaChallenge": {
+          "deprecated": true,
           "type": "string"
         },
         "captchaResponse": {
@@ -2428,6 +2544,7 @@
           "type": "string"
         },
         "delegatedProjectNumber": {
+          "deprecated": true,
           "format": "int64",
           "type": "string"
         },
@@ -2472,7 +2589,7 @@
           "type": "string"
         },
         "email": {
-          "description": "The user's new email to be updated in the account's attributes. The length of email should be less than 256 characters and in the format of `name@domain.tld`. The email should also match the [RFC 822](https://tools.ietf.org/html/rfc822) addr-spec production.",
+          "description": "The user's new email to be updated in the account's attributes. The length of email should be less than 256 characters and in the format of `name@domain.tld`. The email should also match the [RFC 822](https://tools.ietf.org/html/rfc822) addr-spec production. If [email enumeration protection](https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection) is enabled, the email cannot be changed by the user without verifying the email first, but it can be changed by an administrator.",
           "type": "string"
         },
         "emailVerified": {
@@ -2484,6 +2601,7 @@
           "type": "string"
         },
         "instanceId": {
+          "deprecated": true,
           "type": "string"
         },
         "lastLoginAt": {
@@ -2555,10 +2673,12 @@
       "id": "GoogleCloudIdentitytoolkitV1SetAccountInfoResponse",
       "properties": {
         "displayName": {
+          "deprecated": true,
           "description": "The account's display name.",
           "type": "string"
         },
         "email": {
+          "deprecated": true,
           "description": "The account's email address.",
           "type": "string"
         },
@@ -2576,6 +2696,7 @@
           "type": "string"
         },
         "kind": {
+          "deprecated": true,
           "type": "string"
         },
         "localId": {
@@ -2587,10 +2708,12 @@
           "type": "string"
         },
         "passwordHash": {
+          "deprecated": true,
           "description": "Deprecated. No actual password hash is currently returned.",
           "type": "string"
         },
         "photoUrl": {
+          "deprecated": true,
           "description": "The user's photo URL for the account's profile photo.",
           "type": "string"
         },
@@ -2613,10 +2736,12 @@
       "id": "GoogleCloudIdentitytoolkitV1SignInWithCustomTokenRequest",
       "properties": {
         "delegatedProjectNumber": {
+          "deprecated": true,
           "format": "int64",
           "type": "string"
         },
         "instanceId": {
+          "deprecated": true,
           "type": "string"
         },
         "returnSecureToken": {
@@ -2652,6 +2777,7 @@
           "type": "boolean"
         },
         "kind": {
+          "deprecated": true,
           "type": "string"
         },
         "refreshToken": {
@@ -2706,6 +2832,7 @@
           "type": "boolean"
         },
         "kind": {
+          "deprecated": true,
           "type": "string"
         },
         "localId": {
@@ -2827,9 +2954,11 @@
       "id": "GoogleCloudIdentitytoolkitV1SignInWithIdpRequest",
       "properties": {
         "autoCreate": {
+          "deprecated": true,
           "type": "boolean"
         },
         "delegatedProjectNumber": {
+          "deprecated": true,
           "format": "int64",
           "type": "string"
         },
@@ -2838,6 +2967,7 @@
           "type": "string"
         },
         "pendingIdToken": {
+          "deprecated": true,
           "type": "string"
         },
         "pendingToken": {
@@ -2845,7 +2975,7 @@
           "type": "string"
         },
         "postBody": {
-          "description": "If the user is signing in with an authorization response obtained via a previous CreateAuthUri authorization request, this is the body of the HTTP POST callback from the IdP, if present. Otherwise, if the user is signing in with a manually provided IdP credential, this should be a URL-encoded form that contains the credential (e.g. an ID token or access token for OAuth 2.0 IdPs) and the provider ID of the IdP that issued the credential. For example, if the user is signing in to the Google provider using a Google ID token, this should be set to `id_token=[GOOGLE_ID_TOKEN]\u0026providerId=google.com`, where `[GOOGLE_ID_TOKEN]` should be replaced with the Google ID token. If the user is signing in to the Facebook provider using a Facebook authentication token, this should be set to `id_token=[FACEBOOK_AUTHENTICATION_TOKEN]\u0026providerId=facebook.com\u0026nonce= [NONCE]`, where `[FACEBOOK_AUTHENTICATION_TOKEN]` should be replaced with the Facebook authentication token. Nonce is required for validating the token. The request will fail if no nonce is provided. If the user is signing in to the Facebook provider using a Facebook access token, this should be set to `access_token=[FACEBOOK_ACCESS_TOKEN]\u0026providerId=facebook.com`, where `[FACEBOOK_ACCESS_TOKEN]` should be replaced with the Facebook access token. If the user is signing in to the Twitter provider using a Twitter OAuth 1.0 credential, this should be set to `access_token=[TWITTER_ACCESS_TOKEN]\u0026oauth_token_secret=[TWITTER_TOKEN_SECRET]\u0026providerId=twitter.com`, where `[TWITTER_ACCESS_TOKEN]` and `[TWITTER_TOKEN_SECRET]` should be replaced with the Twitter OAuth access token and Twitter OAuth token secret respectively.",
+          "description": "If the user is signing in with an authorization response obtained via a previous CreateAuthUri authorization request, this is the body of the HTTP POST callback from the IdP, if present. Otherwise, if the user is signing in with a manually provided IdP credential, this should be a URL-encoded form that contains the credential (e.g. an ID token or access token for OAuth 2.0 IdPs) and the provider ID of the IdP that issued the credential. For example, if the user is signing in to the Google provider using a Google ID token, this should be set to id_token`=[GOOGLE_ID_TOKEN]\u0026providerId=google.com`, where `[GOOGLE_ID_TOKEN]` should be replaced with the Google ID token. If the user is signing in to the Facebook provider using a Facebook authentication token, this should be set to id_token`=[FACEBOOK_AUTHENTICATION_TOKEN]\u0026providerId=facebook. com\u0026nonce= [NONCE]`, where `[FACEBOOK_AUTHENTICATION_TOKEN]` should be replaced with the Facebook authentication token. Nonce is required for validating the token. The request will fail if no nonce is provided. If the user is signing in to the Facebook provider using a Facebook access token, this should be set to access_token`=[FACEBOOK_ACCESS_TOKEN]\u0026providerId=facebook. com`, where `[FACEBOOK_ACCESS_TOKEN]` should be replaced with the Facebook access token. If the user is signing in to the Twitter provider using a Twitter OAuth 1.0 credential, this should be set to access_token`=[TWITTER_ACCESS_TOKEN]\u0026oauth_token_secret= [TWITTER_TOKEN_SECRET]\u0026providerId=twitter.com`, where `[TWITTER_ACCESS_TOKEN]` and `[TWITTER_TOKEN_SECRET]` should be replaced with the Twitter OAuth access token and Twitter OAuth token secret respectively.",
           "type": "string"
         },
         "requestUri": {
@@ -2929,6 +3059,7 @@
           "type": "string"
         },
         "inputEmail": {
+          "deprecated": true,
           "type": "string"
         },
         "isNewUser": {
@@ -2936,6 +3067,7 @@
           "type": "boolean"
         },
         "kind": {
+          "deprecated": true,
           "type": "string"
         },
         "language": {
@@ -2962,10 +3094,11 @@
           "type": "string"
         },
         "needConfirmation": {
-          "description": "Whether or not there is an existing Identity Platform user account with the same email address as the current account signed in at the IdP, and the account's email addresss is not verified at the IdP. The user will need to sign in to the existing Identity Platform account and then link the current credential from the IdP to it. Only present if the \"One account per email address\" setting is enabled.",
+          "description": "Whether or not there is an existing Identity Platform user account with the same email address as the current account signed in at the IdP, and the account's email address is not verified at the IdP. The user will need to sign in to the existing Identity Platform account and then link the current credential from the IdP to it. Only present if the \"One account per email address\" setting is enabled.",
           "type": "boolean"
         },
         "needEmail": {
+          "deprecated": true,
           "type": "boolean"
         },
         "nickName": {
@@ -3048,13 +3181,31 @@
       "id": "GoogleCloudIdentitytoolkitV1SignInWithPasswordRequest",
       "properties": {
         "captchaChallenge": {
+          "deprecated": true,
           "type": "string"
         },
         "captchaResponse": {
           "description": "The reCAPTCHA token provided by the reCAPTCHA client-side integration. reCAPTCHA Enterprise uses it for risk assessment. Required when reCAPTCHA Enterprise is enabled.",
           "type": "string"
         },
+        "clientType": {
+          "description": "The client type, web, android or ios. Required when reCAPTCHA Enterprise is enabled.",
+          "enum": [
+            "CLIENT_TYPE_UNSPECIFIED",
+            "CLIENT_TYPE_WEB",
+            "CLIENT_TYPE_ANDROID",
+            "CLIENT_TYPE_IOS"
+          ],
+          "enumDescriptions": [
+            "Client type is not specified.",
+            "Client type is web.",
+            "Client type is android.",
+            "Client type is ios."
+          ],
+          "type": "string"
+        },
         "delegatedProjectNumber": {
+          "deprecated": true,
           "format": "int64",
           "type": "string"
         },
@@ -3063,9 +3214,11 @@
           "type": "string"
         },
         "idToken": {
+          "deprecated": true,
           "type": "string"
         },
         "instanceId": {
+          "deprecated": true,
           "type": "string"
         },
         "password": {
@@ -3073,6 +3226,19 @@
           "type": "string"
         },
         "pendingIdToken": {
+          "deprecated": true,
+          "type": "string"
+        },
+        "recaptchaVersion": {
+          "description": "The reCAPTCHA version of the reCAPTCHA token in the captcha_response.",
+          "enum": [
+            "RECAPTCHA_VERSION_UNSPECIFIED",
+            "RECAPTCHA_ENTERPRISE"
+          ],
+          "enumDescriptions": [
+            "The reCAPTCHA version is not specified.",
+            "The reCAPTCHA enterprise."
+          ],
           "type": "string"
         },
         "returnSecureToken": {
@@ -3108,6 +3274,7 @@
           "type": "string"
         },
         "kind": {
+          "deprecated": true,
           "type": "string"
         },
         "localId": {
@@ -3126,13 +3293,16 @@
           "type": "string"
         },
         "oauthAccessToken": {
+          "deprecated": true,
           "description": "The OAuth2 access token.",
           "type": "string"
         },
         "oauthAuthorizationCode": {
+          "deprecated": true,
           "type": "string"
         },
         "oauthExpireIn": {
+          "deprecated": true,
           "description": "The access token expiration time in seconds.",
           "format": "int32",
           "type": "integer"
@@ -3146,8 +3316,16 @@
           "type": "string"
         },
         "registered": {
+          "deprecated": true,
           "description": "Whether the email is for an existing account. Always true.",
           "type": "boolean"
+        },
+        "userNotifications": {
+          "description": "Warning notifications for the user.",
+          "items": {
+            "$ref": "GoogleCloudIdentitytoolkitV1UserNotification"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -3165,6 +3343,7 @@
           "type": "string"
         },
         "operation": {
+          "deprecated": true,
           "enum": [
             "VERIFY_OP_UNSPECIFIED",
             "SIGN_UP_OR_IN",
@@ -3259,10 +3438,27 @@
       "id": "GoogleCloudIdentitytoolkitV1SignUpRequest",
       "properties": {
         "captchaChallenge": {
+          "deprecated": true,
           "type": "string"
         },
         "captchaResponse": {
           "description": "The reCAPTCHA token provided by the reCAPTCHA client-side integration. reCAPTCHA Enterprise uses it for assessment. Required when reCAPTCHA enterprise is enabled.",
+          "type": "string"
+        },
+        "clientType": {
+          "description": "The client type: web, Android or iOS. Required when enabling reCAPTCHA enterprise protection.",
+          "enum": [
+            "CLIENT_TYPE_UNSPECIFIED",
+            "CLIENT_TYPE_WEB",
+            "CLIENT_TYPE_ANDROID",
+            "CLIENT_TYPE_IOS"
+          ],
+          "enumDescriptions": [
+            "Client type is not specified.",
+            "Client type is web.",
+            "Client type is android.",
+            "Client type is ios."
+          ],
           "type": "string"
         },
         "disabled": {
@@ -3286,6 +3482,7 @@
           "type": "string"
         },
         "instanceId": {
+          "deprecated": true,
           "type": "string"
         },
         "localId": {
@@ -3309,6 +3506,18 @@
         },
         "photoUrl": {
           "description": "The profile photo url of the user to create.",
+          "type": "string"
+        },
+        "recaptchaVersion": {
+          "description": "The reCAPTCHA version of the reCAPTCHA token in the captcha_response.",
+          "enum": [
+            "RECAPTCHA_VERSION_UNSPECIFIED",
+            "RECAPTCHA_ENTERPRISE"
+          ],
+          "enumDescriptions": [
+            "The reCAPTCHA version is not specified.",
+            "The reCAPTCHA enterprise."
+          ],
           "type": "string"
         },
         "targetProjectId": {
@@ -3405,6 +3614,7 @@
           "type": "integer"
         },
         "delegatedProjectNumber": {
+          "deprecated": true,
           "format": "int64",
           "type": "string"
         },
@@ -3486,6 +3696,7 @@
           "type": "array"
         },
         "kind": {
+          "deprecated": true,
           "type": "string"
         }
       },
@@ -3622,6 +3833,39 @@
           "description": "The version of the account's password. Only accessible by requests bearing a Google OAuth2 credential with proper permissions.",
           "format": "int32",
           "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudIdentitytoolkitV1UserNotification": {
+      "description": "Warning notifications for the user.",
+      "id": "GoogleCloudIdentitytoolkitV1UserNotification",
+      "properties": {
+        "notificationCode": {
+          "description": "Warning notification enum. Can be used for localization.",
+          "enum": [
+            "NOTIFICATION_CODE_UNSPECIFIED",
+            "MISSING_LOWERCASE_CHARACTER",
+            "MISSING_UPPERCASE_CHARACTER",
+            "MISSING_NUMERIC_CHARACTER",
+            "MISSING_NON_ALPHANUMERIC_CHARACTER",
+            "MINIMUM_PASSWORD_LENGTH",
+            "MAXIMUM_PASSWORD_LENGTH"
+          ],
+          "enumDescriptions": [
+            "No notification specified.",
+            "Password missing lowercase character.",
+            "Password missing uppercase character.",
+            "Password missing numeric character.",
+            "Password missing non alphanumeric character.",
+            "Password less than minimum required length.",
+            "Password greater than maximum required length."
+          ],
+          "type": "string"
+        },
+        "notificationMessage": {
+          "description": "Warning notification string. Can be used as fallback.",
+          "type": "string"
         }
       },
       "type": "object"

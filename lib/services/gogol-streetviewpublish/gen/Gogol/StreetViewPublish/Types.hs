@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,181 +26,182 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.StreetViewPublish.Types
-  ( -- * Configuration
-    streetViewPublishService,
+    (
+    -- * Configuration
+      streetViewPublishService
 
     -- * OAuth Scopes
-    Streetviewpublish'FullControl,
+    , Streetviewpublish'FullControl
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** BatchDeletePhotosRequest
-    BatchDeletePhotosRequest (..),
-    newBatchDeletePhotosRequest,
+    , BatchDeletePhotosRequest (..)
+    , newBatchDeletePhotosRequest
 
     -- ** BatchDeletePhotosResponse
-    BatchDeletePhotosResponse (..),
-    newBatchDeletePhotosResponse,
+    , BatchDeletePhotosResponse (..)
+    , newBatchDeletePhotosResponse
 
     -- ** BatchGetPhotosResponse
-    BatchGetPhotosResponse (..),
-    newBatchGetPhotosResponse,
+    , BatchGetPhotosResponse (..)
+    , newBatchGetPhotosResponse
 
     -- ** BatchUpdatePhotosRequest
-    BatchUpdatePhotosRequest (..),
-    newBatchUpdatePhotosRequest,
+    , BatchUpdatePhotosRequest (..)
+    , newBatchUpdatePhotosRequest
 
     -- ** BatchUpdatePhotosResponse
-    BatchUpdatePhotosResponse (..),
-    newBatchUpdatePhotosResponse,
+    , BatchUpdatePhotosResponse (..)
+    , newBatchUpdatePhotosResponse
 
     -- ** Connection
-    Connection (..),
-    newConnection,
+    , Connection (..)
+    , newConnection
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** GpsDataGapFailureDetails
-    GpsDataGapFailureDetails (..),
-    newGpsDataGapFailureDetails,
+    , GpsDataGapFailureDetails (..)
+    , newGpsDataGapFailureDetails
 
     -- ** Imu
-    Imu (..),
-    newImu,
+    , Imu (..)
+    , newImu
 
     -- ** ImuDataGapFailureDetails
-    ImuDataGapFailureDetails (..),
-    newImuDataGapFailureDetails,
+    , ImuDataGapFailureDetails (..)
+    , newImuDataGapFailureDetails
 
     -- ** InsufficientGpsFailureDetails
-    InsufficientGpsFailureDetails (..),
-    newInsufficientGpsFailureDetails,
+    , InsufficientGpsFailureDetails (..)
+    , newInsufficientGpsFailureDetails
 
     -- ** LatLng
-    LatLng (..),
-    newLatLng,
+    , LatLng (..)
+    , newLatLng
 
     -- ** LatLngBounds
-    LatLngBounds (..),
-    newLatLngBounds,
+    , LatLngBounds (..)
+    , newLatLngBounds
 
     -- ** Level
-    Level (..),
-    newLevel,
+    , Level (..)
+    , newLevel
 
     -- ** ListPhotoSequencesResponse
-    ListPhotoSequencesResponse (..),
-    newListPhotoSequencesResponse,
+    , ListPhotoSequencesResponse (..)
+    , newListPhotoSequencesResponse
 
     -- ** ListPhotosResponse
-    ListPhotosResponse (..),
-    newListPhotosResponse,
+    , ListPhotosResponse (..)
+    , newListPhotosResponse
 
     -- ** Measurement3d
-    Measurement3d (..),
-    newMeasurement3d,
+    , Measurement3d (..)
+    , newMeasurement3d
 
     -- ** NoOverlapGpsFailureDetails
-    NoOverlapGpsFailureDetails (..),
-    newNoOverlapGpsFailureDetails,
+    , NoOverlapGpsFailureDetails (..)
+    , newNoOverlapGpsFailureDetails
 
     -- ** NotOutdoorsFailureDetails
-    NotOutdoorsFailureDetails (..),
-    newNotOutdoorsFailureDetails,
+    , NotOutdoorsFailureDetails (..)
+    , newNotOutdoorsFailureDetails
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** Photo
-    Photo (..),
-    newPhoto,
+    , Photo (..)
+    , newPhoto
 
     -- ** Photo_MapsPublishStatus
-    Photo_MapsPublishStatus (..),
+    , Photo_MapsPublishStatus (..)
 
     -- ** Photo_TransferStatus
-    Photo_TransferStatus (..),
+    , Photo_TransferStatus (..)
 
     -- ** PhotoId
-    PhotoId (..),
-    newPhotoId,
+    , PhotoId (..)
+    , newPhotoId
 
     -- ** PhotoResponse
-    PhotoResponse (..),
-    newPhotoResponse,
+    , PhotoResponse (..)
+    , newPhotoResponse
 
     -- ** PhotoSequence
-    PhotoSequence (..),
-    newPhotoSequence,
+    , PhotoSequence (..)
+    , newPhotoSequence
 
     -- ** PhotoSequence_FailureReason
-    PhotoSequence_FailureReason (..),
+    , PhotoSequence_FailureReason (..)
 
     -- ** PhotoSequence_GpsSource
-    PhotoSequence_GpsSource (..),
+    , PhotoSequence_GpsSource (..)
 
     -- ** PhotoSequence_ProcessingState
-    PhotoSequence_ProcessingState (..),
+    , PhotoSequence_ProcessingState (..)
 
     -- ** Place
-    Place (..),
-    newPlace,
+    , Place (..)
+    , newPlace
 
     -- ** Pose
-    Pose (..),
-    newPose,
+    , Pose (..)
+    , newPose
 
     -- ** ProcessingFailureDetails
-    ProcessingFailureDetails (..),
-    newProcessingFailureDetails,
+    , ProcessingFailureDetails (..)
+    , newProcessingFailureDetails
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** UpdatePhotoRequest
-    UpdatePhotoRequest (..),
-    newUpdatePhotoRequest,
+    , UpdatePhotoRequest (..)
+    , newUpdatePhotoRequest
 
     -- ** UploadRef
-    UploadRef (..),
-    newUploadRef,
+    , UploadRef (..)
+    , newUploadRef
 
     -- ** PhotoGetView
-    PhotoGetView (..),
+    , PhotoGetView (..)
 
     -- ** PhotoSequenceCreateInputType
-    PhotoSequenceCreateInputType (..),
+    , PhotoSequenceCreateInputType (..)
 
     -- ** PhotoSequenceGetView
-    PhotoSequenceGetView (..),
+    , PhotoSequenceGetView (..)
 
     -- ** PhotosBatchGetView
-    PhotosBatchGetView (..),
+    , PhotosBatchGetView (..)
 
     -- ** PhotosListView
-    PhotosListView (..),
-  )
-where
+    , PhotosListView (..)
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.StreetViewPublish.Internal.Product
@@ -207,10 +209,10 @@ import Gogol.StreetViewPublish.Internal.Sum
 
 -- | Default request referring to version @v1@ of the Street View Publish API. This contains the host and root path used as a starting point for constructing service requests.
 streetViewPublishService :: Core.ServiceConfig
-streetViewPublishService =
-  Core.defaultService
-    (Core.ServiceId "streetviewpublish:v1")
-    "streetviewpublish.googleapis.com"
+streetViewPublishService
+  = Core.defaultService
+      (Core.ServiceId "streetviewpublish:v1")
+      "streetviewpublish.googleapis.com"
 
 -- | Publish and manage your 360 photos on Google Street View
 type Streetviewpublish'FullControl = "https://www.googleapis.com/auth/streetviewpublish"

@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,33 +26,36 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.AdSenseHost.Internal.Sum
-  ( -- * AssociationsessionsStartProductCode
+  (
+
+    -- * AssociationsessionsStartProductCode
     AssociationsessionsStartProductCode
-      ( AssociationsessionsStartProductCode_Afc,
+      (
+        AssociationsessionsStartProductCode_Afc,
         AssociationsessionsStartProductCode_Afg,
         AssociationsessionsStartProductCode_Afmc,
         AssociationsessionsStartProductCode_Afs,
         AssociationsessionsStartProductCode_Afv,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | Products to associate with the user.
-newtype AssociationsessionsStartProductCode = AssociationsessionsStartProductCode {fromAssociationsessionsStartProductCode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AssociationsessionsStartProductCode = AssociationsessionsStartProductCode { fromAssociationsessionsStartProductCode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | AdSense For Content
 pattern AssociationsessionsStartProductCode_Afc :: AssociationsessionsStartProductCode
@@ -79,5 +83,4 @@ pattern AssociationsessionsStartProductCode_Afv = AssociationsessionsStartProduc
   AssociationsessionsStartProductCode_Afmc,
   AssociationsessionsStartProductCode_Afs,
   AssociationsessionsStartProductCode_Afv,
-  AssociationsessionsStartProductCode
-  #-}
+  AssociationsessionsStartProductCode #-}

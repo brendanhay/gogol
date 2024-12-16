@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-spanner
-version:            1.0.0.0
-synopsis:           Google Cloud Spanner SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-spanner
+version:               1.0.0
+synopsis:              Google Cloud Spanner SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  Cloud Spanner is a managed, mission-critical, globally consistent and scalable relational database service.
+    Cloud Spanner is a managed, mission-critical, globally consistent and scalable relational database service.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -30,101 +27,128 @@ source-repository head
   subdir:   gogol-spanner
 
 flag field-selectors
-  description:
-    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-
-  default:     False
-  manual:      True
+  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+  default: False
+  manual: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -Werror
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (!flag(field-selectors) && impl(ghc >=9.2))
+  if !flag(field-selectors) && impl(ghc >= 9.2)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.Spanner
-    Gogol.Spanner.Projects.InstanceConfigOperations.List
-    Gogol.Spanner.Projects.InstanceConfigs.Create
-    Gogol.Spanner.Projects.InstanceConfigs.Delete
-    Gogol.Spanner.Projects.InstanceConfigs.Get
-    Gogol.Spanner.Projects.InstanceConfigs.List
-    Gogol.Spanner.Projects.InstanceConfigs.Operations.Cancel
-    Gogol.Spanner.Projects.InstanceConfigs.Operations.Delete
-    Gogol.Spanner.Projects.InstanceConfigs.Operations.Get
-    Gogol.Spanner.Projects.InstanceConfigs.Operations.List
-    Gogol.Spanner.Projects.InstanceConfigs.Patch
-    Gogol.Spanner.Projects.Instances.BackupOperations.List
-    Gogol.Spanner.Projects.Instances.Backups.Copy
-    Gogol.Spanner.Projects.Instances.Backups.Create
-    Gogol.Spanner.Projects.Instances.Backups.Delete
-    Gogol.Spanner.Projects.Instances.Backups.Get
-    Gogol.Spanner.Projects.Instances.Backups.GetIamPolicy
-    Gogol.Spanner.Projects.Instances.Backups.List
-    Gogol.Spanner.Projects.Instances.Backups.Operations.Cancel
-    Gogol.Spanner.Projects.Instances.Backups.Operations.Delete
-    Gogol.Spanner.Projects.Instances.Backups.Operations.Get
-    Gogol.Spanner.Projects.Instances.Backups.Operations.List
-    Gogol.Spanner.Projects.Instances.Backups.Patch
-    Gogol.Spanner.Projects.Instances.Backups.SetIamPolicy
-    Gogol.Spanner.Projects.Instances.Backups.TestIamPermissions
-    Gogol.Spanner.Projects.Instances.Create
-    Gogol.Spanner.Projects.Instances.DatabaseOperations.List
-    Gogol.Spanner.Projects.Instances.Databases.Create
-    Gogol.Spanner.Projects.Instances.Databases.DatabaseRoles.List
-    Gogol.Spanner.Projects.Instances.Databases.DatabaseRoles.TestIamPermissions
-    Gogol.Spanner.Projects.Instances.Databases.DropDatabase
-    Gogol.Spanner.Projects.Instances.Databases.Get
-    Gogol.Spanner.Projects.Instances.Databases.GetDdl
-    Gogol.Spanner.Projects.Instances.Databases.GetIamPolicy
-    Gogol.Spanner.Projects.Instances.Databases.GetScans
-    Gogol.Spanner.Projects.Instances.Databases.List
-    Gogol.Spanner.Projects.Instances.Databases.Operations.Cancel
-    Gogol.Spanner.Projects.Instances.Databases.Operations.Delete
-    Gogol.Spanner.Projects.Instances.Databases.Operations.Get
-    Gogol.Spanner.Projects.Instances.Databases.Operations.List
-    Gogol.Spanner.Projects.Instances.Databases.Restore
-    Gogol.Spanner.Projects.Instances.Databases.Sessions.BatchCreate
-    Gogol.Spanner.Projects.Instances.Databases.Sessions.BeginTransaction
-    Gogol.Spanner.Projects.Instances.Databases.Sessions.Commit
-    Gogol.Spanner.Projects.Instances.Databases.Sessions.Create
-    Gogol.Spanner.Projects.Instances.Databases.Sessions.Delete
-    Gogol.Spanner.Projects.Instances.Databases.Sessions.ExecuteBatchDml
-    Gogol.Spanner.Projects.Instances.Databases.Sessions.ExecuteSql
-    Gogol.Spanner.Projects.Instances.Databases.Sessions.ExecuteStreamingSql
-    Gogol.Spanner.Projects.Instances.Databases.Sessions.Get
-    Gogol.Spanner.Projects.Instances.Databases.Sessions.List
-    Gogol.Spanner.Projects.Instances.Databases.Sessions.PartitionQuery
-    Gogol.Spanner.Projects.Instances.Databases.Sessions.PartitionRead
-    Gogol.Spanner.Projects.Instances.Databases.Sessions.Read
-    Gogol.Spanner.Projects.Instances.Databases.Sessions.Rollback
-    Gogol.Spanner.Projects.Instances.Databases.Sessions.StreamingRead
-    Gogol.Spanner.Projects.Instances.Databases.SetIamPolicy
-    Gogol.Spanner.Projects.Instances.Databases.TestIamPermissions
-    Gogol.Spanner.Projects.Instances.Databases.UpdateDdl
-    Gogol.Spanner.Projects.Instances.Delete
-    Gogol.Spanner.Projects.Instances.Get
-    Gogol.Spanner.Projects.Instances.GetIamPolicy
-    Gogol.Spanner.Projects.Instances.List
-    Gogol.Spanner.Projects.Instances.Operations.Cancel
-    Gogol.Spanner.Projects.Instances.Operations.Delete
-    Gogol.Spanner.Projects.Instances.Operations.Get
-    Gogol.Spanner.Projects.Instances.Operations.List
-    Gogol.Spanner.Projects.Instances.Patch
-    Gogol.Spanner.Projects.Instances.SetIamPolicy
-    Gogol.Spanner.Projects.Instances.TestIamPermissions
-    Gogol.Spanner.Scans.List
-    Gogol.Spanner.Types
+      Gogol.Spanner
+    , Gogol.Spanner.Projects.InstanceConfigOperations.List
+    , Gogol.Spanner.Projects.InstanceConfigs.Create
+    , Gogol.Spanner.Projects.InstanceConfigs.Delete
+    , Gogol.Spanner.Projects.InstanceConfigs.Get
+    , Gogol.Spanner.Projects.InstanceConfigs.List
+    , Gogol.Spanner.Projects.InstanceConfigs.Operations.Cancel
+    , Gogol.Spanner.Projects.InstanceConfigs.Operations.Delete
+    , Gogol.Spanner.Projects.InstanceConfigs.Operations.Get
+    , Gogol.Spanner.Projects.InstanceConfigs.Operations.List
+    , Gogol.Spanner.Projects.InstanceConfigs.Patch
+    , Gogol.Spanner.Projects.InstanceConfigs.SsdCaches.Operations.Cancel
+    , Gogol.Spanner.Projects.InstanceConfigs.SsdCaches.Operations.Delete
+    , Gogol.Spanner.Projects.InstanceConfigs.SsdCaches.Operations.Get
+    , Gogol.Spanner.Projects.InstanceConfigs.SsdCaches.Operations.List
+    , Gogol.Spanner.Projects.Instances.BackupOperations.List
+    , Gogol.Spanner.Projects.Instances.Backups.Copy
+    , Gogol.Spanner.Projects.Instances.Backups.Create
+    , Gogol.Spanner.Projects.Instances.Backups.Delete
+    , Gogol.Spanner.Projects.Instances.Backups.Get
+    , Gogol.Spanner.Projects.Instances.Backups.GetIamPolicy
+    , Gogol.Spanner.Projects.Instances.Backups.List
+    , Gogol.Spanner.Projects.Instances.Backups.Operations.Cancel
+    , Gogol.Spanner.Projects.Instances.Backups.Operations.Delete
+    , Gogol.Spanner.Projects.Instances.Backups.Operations.Get
+    , Gogol.Spanner.Projects.Instances.Backups.Operations.List
+    , Gogol.Spanner.Projects.Instances.Backups.Patch
+    , Gogol.Spanner.Projects.Instances.Backups.SetIamPolicy
+    , Gogol.Spanner.Projects.Instances.Backups.TestIamPermissions
+    , Gogol.Spanner.Projects.Instances.Create
+    , Gogol.Spanner.Projects.Instances.DatabaseOperations.List
+    , Gogol.Spanner.Projects.Instances.Databases.BackupSchedules.Create
+    , Gogol.Spanner.Projects.Instances.Databases.BackupSchedules.Delete
+    , Gogol.Spanner.Projects.Instances.Databases.BackupSchedules.Get
+    , Gogol.Spanner.Projects.Instances.Databases.BackupSchedules.GetIamPolicy
+    , Gogol.Spanner.Projects.Instances.Databases.BackupSchedules.List
+    , Gogol.Spanner.Projects.Instances.Databases.BackupSchedules.Patch
+    , Gogol.Spanner.Projects.Instances.Databases.BackupSchedules.SetIamPolicy
+    , Gogol.Spanner.Projects.Instances.Databases.BackupSchedules.TestIamPermissions
+    , Gogol.Spanner.Projects.Instances.Databases.Changequorum
+    , Gogol.Spanner.Projects.Instances.Databases.Create
+    , Gogol.Spanner.Projects.Instances.Databases.DatabaseRoles.List
+    , Gogol.Spanner.Projects.Instances.Databases.DatabaseRoles.TestIamPermissions
+    , Gogol.Spanner.Projects.Instances.Databases.DropDatabase
+    , Gogol.Spanner.Projects.Instances.Databases.Get
+    , Gogol.Spanner.Projects.Instances.Databases.GetDdl
+    , Gogol.Spanner.Projects.Instances.Databases.GetIamPolicy
+    , Gogol.Spanner.Projects.Instances.Databases.GetScans
+    , Gogol.Spanner.Projects.Instances.Databases.List
+    , Gogol.Spanner.Projects.Instances.Databases.Operations.Cancel
+    , Gogol.Spanner.Projects.Instances.Databases.Operations.Delete
+    , Gogol.Spanner.Projects.Instances.Databases.Operations.Get
+    , Gogol.Spanner.Projects.Instances.Databases.Operations.List
+    , Gogol.Spanner.Projects.Instances.Databases.Patch
+    , Gogol.Spanner.Projects.Instances.Databases.Restore
+    , Gogol.Spanner.Projects.Instances.Databases.Sessions.BatchCreate
+    , Gogol.Spanner.Projects.Instances.Databases.Sessions.BatchWrite
+    , Gogol.Spanner.Projects.Instances.Databases.Sessions.BeginTransaction
+    , Gogol.Spanner.Projects.Instances.Databases.Sessions.Commit
+    , Gogol.Spanner.Projects.Instances.Databases.Sessions.Create
+    , Gogol.Spanner.Projects.Instances.Databases.Sessions.Delete
+    , Gogol.Spanner.Projects.Instances.Databases.Sessions.ExecuteBatchDml
+    , Gogol.Spanner.Projects.Instances.Databases.Sessions.ExecuteSql
+    , Gogol.Spanner.Projects.Instances.Databases.Sessions.ExecuteStreamingSql
+    , Gogol.Spanner.Projects.Instances.Databases.Sessions.Get
+    , Gogol.Spanner.Projects.Instances.Databases.Sessions.List
+    , Gogol.Spanner.Projects.Instances.Databases.Sessions.PartitionQuery
+    , Gogol.Spanner.Projects.Instances.Databases.Sessions.PartitionRead
+    , Gogol.Spanner.Projects.Instances.Databases.Sessions.Read
+    , Gogol.Spanner.Projects.Instances.Databases.Sessions.Rollback
+    , Gogol.Spanner.Projects.Instances.Databases.Sessions.StreamingRead
+    , Gogol.Spanner.Projects.Instances.Databases.SetIamPolicy
+    , Gogol.Spanner.Projects.Instances.Databases.TestIamPermissions
+    , Gogol.Spanner.Projects.Instances.Databases.UpdateDdl
+    , Gogol.Spanner.Projects.Instances.Delete
+    , Gogol.Spanner.Projects.Instances.Get
+    , Gogol.Spanner.Projects.Instances.GetIamPolicy
+    , Gogol.Spanner.Projects.Instances.InstancePartitionOperations.List
+    , Gogol.Spanner.Projects.Instances.InstancePartitions.Create
+    , Gogol.Spanner.Projects.Instances.InstancePartitions.Delete
+    , Gogol.Spanner.Projects.Instances.InstancePartitions.Get
+    , Gogol.Spanner.Projects.Instances.InstancePartitions.List
+    , Gogol.Spanner.Projects.Instances.InstancePartitions.Operations.Cancel
+    , Gogol.Spanner.Projects.Instances.InstancePartitions.Operations.Delete
+    , Gogol.Spanner.Projects.Instances.InstancePartitions.Operations.Get
+    , Gogol.Spanner.Projects.Instances.InstancePartitions.Operations.List
+    , Gogol.Spanner.Projects.Instances.InstancePartitions.Patch
+    , Gogol.Spanner.Projects.Instances.List
+    , Gogol.Spanner.Projects.Instances.Move
+    , Gogol.Spanner.Projects.Instances.Operations.Cancel
+    , Gogol.Spanner.Projects.Instances.Operations.Delete
+    , Gogol.Spanner.Projects.Instances.Operations.Get
+    , Gogol.Spanner.Projects.Instances.Operations.List
+    , Gogol.Spanner.Projects.Instances.Patch
+    , Gogol.Spanner.Projects.Instances.SetIamPolicy
+    , Gogol.Spanner.Projects.Instances.TestIamPermissions
+    , Gogol.Spanner.Scans.List
+    , Gogol.Spanner.Types
 
   other-modules:
-    Gogol.Spanner.Internal.Product
-    Gogol.Spanner.Internal.Sum
+      Gogol.Spanner.Internal.Product
+    , Gogol.Spanner.Internal.Sum
 
   build-depends:
-    , base        >=4.12   && <5
-    , gogol-core  ^>=1.0.0
+      gogol-core ^>= 1.0.0

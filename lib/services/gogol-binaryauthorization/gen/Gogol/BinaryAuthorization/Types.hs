@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,141 +26,283 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.BinaryAuthorization.Types
-  ( -- * Configuration
-    binaryAuthorizationService,
+    (
+    -- * Configuration
+      binaryAuthorizationService
 
     -- * OAuth Scopes
-    CloudPlatform'FullControl,
+    , CloudPlatform'FullControl
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AdmissionRule
-    AdmissionRule (..),
-    newAdmissionRule,
+    , AdmissionRule (..)
+    , newAdmissionRule
 
     -- ** AdmissionRule_EnforcementMode
-    AdmissionRule_EnforcementMode (..),
+    , AdmissionRule_EnforcementMode (..)
 
     -- ** AdmissionRule_EvaluationMode
-    AdmissionRule_EvaluationMode (..),
+    , AdmissionRule_EvaluationMode (..)
 
     -- ** AdmissionWhitelistPattern
-    AdmissionWhitelistPattern (..),
-    newAdmissionWhitelistPattern,
+    , AdmissionWhitelistPattern (..)
+    , newAdmissionWhitelistPattern
+
+    -- ** AllowlistResult
+    , AllowlistResult (..)
+    , newAllowlistResult
+
+    -- ** AttestationAuthenticator
+    , AttestationAuthenticator (..)
+    , newAttestationAuthenticator
 
     -- ** AttestationOccurrence
-    AttestationOccurrence (..),
-    newAttestationOccurrence,
+    , AttestationOccurrence (..)
+    , newAttestationOccurrence
+
+    -- ** AttestationSource
+    , AttestationSource (..)
+    , newAttestationSource
 
     -- ** Attestor
-    Attestor (..),
-    newAttestor,
+    , Attestor (..)
+    , newAttestor
 
     -- ** AttestorPublicKey
-    AttestorPublicKey (..),
-    newAttestorPublicKey,
+    , AttestorPublicKey (..)
+    , newAttestorPublicKey
 
     -- ** Binding
-    Binding (..),
-    newBinding,
+    , Binding (..)
+    , newBinding
+
+    -- ** Check
+    , Check (..)
+    , newCheck
+
+    -- ** CheckResult
+    , CheckResult (..)
+    , newCheckResult
+
+    -- ** CheckResults
+    , CheckResults (..)
+    , newCheckResults
+
+    -- ** CheckSet
+    , CheckSet (..)
+    , newCheckSet
+
+    -- ** CheckSetResult
+    , CheckSetResult (..)
+    , newCheckSetResult
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
+
+    -- ** EvaluateGkePolicyRequest
+    , EvaluateGkePolicyRequest (..)
+    , newEvaluateGkePolicyRequest
+
+    -- ** EvaluateGkePolicyRequest_Resource
+    , EvaluateGkePolicyRequest_Resource (..)
+    , newEvaluateGkePolicyRequest_Resource
+
+    -- ** EvaluateGkePolicyResponse
+    , EvaluateGkePolicyResponse (..)
+    , newEvaluateGkePolicyResponse
+
+    -- ** EvaluateGkePolicyResponse_Verdict
+    , EvaluateGkePolicyResponse_Verdict (..)
+
+    -- ** EvaluationResult
+    , EvaluationResult (..)
+    , newEvaluationResult
+
+    -- ** EvaluationResult_Verdict
+    , EvaluationResult_Verdict (..)
 
     -- ** Expr
-    Expr (..),
-    newExpr,
+    , Expr (..)
+    , newExpr
+
+    -- ** GkePolicy
+    , GkePolicy (..)
+    , newGkePolicy
 
     -- ** IamPolicy
-    IamPolicy (..),
-    newIamPolicy,
+    , IamPolicy (..)
+    , newIamPolicy
+
+    -- ** ImageAllowlist
+    , ImageAllowlist (..)
+    , newImageAllowlist
+
+    -- ** ImageFreshnessCheck
+    , ImageFreshnessCheck (..)
+    , newImageFreshnessCheck
+
+    -- ** ImageResult
+    , ImageResult (..)
+    , newImageResult
+
+    -- ** ImageResult_Verdict
+    , ImageResult_Verdict (..)
 
     -- ** Jwt
-    Jwt (..),
-    newJwt,
+    , Jwt (..)
+    , newJwt
 
     -- ** ListAttestorsResponse
-    ListAttestorsResponse (..),
-    newListAttestorsResponse,
+    , ListAttestorsResponse (..)
+    , newListAttestorsResponse
+
+    -- ** ListPlatformPoliciesResponse
+    , ListPlatformPoliciesResponse (..)
+    , newListPlatformPoliciesResponse
 
     -- ** PkixPublicKey
-    PkixPublicKey (..),
-    newPkixPublicKey,
+    , PkixPublicKey (..)
+    , newPkixPublicKey
 
     -- ** PkixPublicKey_SignatureAlgorithm
-    PkixPublicKey_SignatureAlgorithm (..),
+    , PkixPublicKey_SignatureAlgorithm (..)
+
+    -- ** PkixPublicKeySet
+    , PkixPublicKeySet (..)
+    , newPkixPublicKeySet
+
+    -- ** PlatformPolicy
+    , PlatformPolicy (..)
+    , newPlatformPolicy
+
+    -- ** PodResult
+    , PodResult (..)
+    , newPodResult
+
+    -- ** PodResult_Verdict
+    , PodResult_Verdict (..)
 
     -- ** Policy
-    Policy (..),
-    newPolicy,
+    , Policy (..)
+    , newPolicy
 
     -- ** Policy_ClusterAdmissionRules
-    Policy_ClusterAdmissionRules (..),
-    newPolicy_ClusterAdmissionRules,
+    , Policy_ClusterAdmissionRules (..)
+    , newPolicy_ClusterAdmissionRules
 
     -- ** Policy_GlobalPolicyEvaluationMode
-    Policy_GlobalPolicyEvaluationMode (..),
+    , Policy_GlobalPolicyEvaluationMode (..)
 
     -- ** Policy_IstioServiceIdentityAdmissionRules
-    Policy_IstioServiceIdentityAdmissionRules (..),
-    newPolicy_IstioServiceIdentityAdmissionRules,
+    , Policy_IstioServiceIdentityAdmissionRules (..)
+    , newPolicy_IstioServiceIdentityAdmissionRules
 
     -- ** Policy_KubernetesNamespaceAdmissionRules
-    Policy_KubernetesNamespaceAdmissionRules (..),
-    newPolicy_KubernetesNamespaceAdmissionRules,
+    , Policy_KubernetesNamespaceAdmissionRules (..)
+    , newPolicy_KubernetesNamespaceAdmissionRules
 
     -- ** Policy_KubernetesServiceAccountAdmissionRules
-    Policy_KubernetesServiceAccountAdmissionRules (..),
-    newPolicy_KubernetesServiceAccountAdmissionRules,
+    , Policy_KubernetesServiceAccountAdmissionRules (..)
+    , newPolicy_KubernetesServiceAccountAdmissionRules
+
+    -- ** Scope
+    , Scope (..)
+    , newScope
 
     -- ** SetIamPolicyRequest
-    SetIamPolicyRequest (..),
-    newSetIamPolicyRequest,
+    , SetIamPolicyRequest (..)
+    , newSetIamPolicyRequest
 
     -- ** Signature
-    Signature (..),
-    newSignature,
+    , Signature (..)
+    , newSignature
+
+    -- ** SigstoreAuthority
+    , SigstoreAuthority (..)
+    , newSigstoreAuthority
+
+    -- ** SigstorePublicKey
+    , SigstorePublicKey (..)
+    , newSigstorePublicKey
+
+    -- ** SigstorePublicKeySet
+    , SigstorePublicKeySet (..)
+    , newSigstorePublicKeySet
+
+    -- ** SigstoreSignatureCheck
+    , SigstoreSignatureCheck (..)
+    , newSigstoreSignatureCheck
+
+    -- ** SimpleSigningAttestationCheck
+    , SimpleSigningAttestationCheck (..)
+    , newSimpleSigningAttestationCheck
+
+    -- ** SlsaCheck
+    , SlsaCheck (..)
+    , newSlsaCheck
 
     -- ** TestIamPermissionsRequest
-    TestIamPermissionsRequest (..),
-    newTestIamPermissionsRequest,
+    , TestIamPermissionsRequest (..)
+    , newTestIamPermissionsRequest
 
     -- ** TestIamPermissionsResponse
-    TestIamPermissionsResponse (..),
-    newTestIamPermissionsResponse,
+    , TestIamPermissionsResponse (..)
+    , newTestIamPermissionsResponse
+
+    -- ** TrustedDirectoryCheck
+    , TrustedDirectoryCheck (..)
+    , newTrustedDirectoryCheck
 
     -- ** UserOwnedGrafeasNote
-    UserOwnedGrafeasNote (..),
-    newUserOwnedGrafeasNote,
+    , UserOwnedGrafeasNote (..)
+    , newUserOwnedGrafeasNote
 
     -- ** ValidateAttestationOccurrenceRequest
-    ValidateAttestationOccurrenceRequest (..),
-    newValidateAttestationOccurrenceRequest,
+    , ValidateAttestationOccurrenceRequest (..)
+    , newValidateAttestationOccurrenceRequest
 
     -- ** ValidateAttestationOccurrenceResponse
-    ValidateAttestationOccurrenceResponse (..),
-    newValidateAttestationOccurrenceResponse,
+    , ValidateAttestationOccurrenceResponse (..)
+    , newValidateAttestationOccurrenceResponse
 
     -- ** ValidateAttestationOccurrenceResponse_Result
-    ValidateAttestationOccurrenceResponse_Result (..),
-  )
-where
+    , ValidateAttestationOccurrenceResponse_Result (..)
 
+    -- ** VerificationRule
+    , VerificationRule (..)
+    , newVerificationRule
+
+    -- ** VerificationRule_TrustedBuilder
+    , VerificationRule_TrustedBuilder (..)
+
+    -- ** VulnerabilityCheck
+    , VulnerabilityCheck (..)
+    , newVulnerabilityCheck
+
+    -- ** VulnerabilityCheck_MaximumFixableSeverity
+    , VulnerabilityCheck_MaximumFixableSeverity (..)
+
+    -- ** VulnerabilityCheck_MaximumUnfixableSeverity
+    , VulnerabilityCheck_MaximumUnfixableSeverity (..)
+    ) where
+
+import qualified Gogol.Prelude as Core
 import Gogol.BinaryAuthorization.Internal.Product
 import Gogol.BinaryAuthorization.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Binary Authorization API. This contains the host and root path used as a starting point for constructing service requests.
 binaryAuthorizationService :: Core.ServiceConfig
-binaryAuthorizationService =
-  Core.defaultService
-    (Core.ServiceId "binaryauthorization:v1")
-    "binaryauthorization.googleapis.com"
+binaryAuthorizationService
+  = Core.defaultService
+      (Core.ServiceId "binaryauthorization:v1")
+      "binaryauthorization.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"

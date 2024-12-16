@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Cloud Data Loss Prevention (DLP).
+A client library for the Google Sensitive Data Protection (DLP).
 
 
 ## Contribute

@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,14 +31,14 @@
 --
 -- /See:/ <https://cloud.google.com/resource-manager Cloud Resource Manager API Reference> for @cloudresourcemanager.projects.list@.
 module Gogol.ResourceManager.Cloudresourcemanager.Projects.List
-  ( -- * Resource
-    CloudresourcemanagerProjectsListResource,
+    (
+    -- * Resource
+      CloudresourcemanagerProjectsListResource
 
     -- ** Constructing a Request
-    CloudresourcemanagerProjectsList (..),
-    newCloudresourcemanagerProjectsList,
-  )
-where
+    , CloudresourcemanagerProjectsList (..)
+    , newCloudresourcemanagerProjectsList
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.ResourceManager.Types
@@ -45,88 +46,80 @@ import Gogol.ResourceManager.Types
 -- | A resource alias for @cloudresourcemanager.projects.list@ method which the
 -- 'CloudresourcemanagerProjectsList' request conforms to.
 type CloudresourcemanagerProjectsListResource =
-  "v3"
-    Core.:> "projects"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "pageSize" Core.Int32
-    Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam "parent" Core.Text
-    Core.:> Core.QueryParam "showDeleted" Core.Bool
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] ListProjectsResponse
+     "v3" Core.:>
+       "projects" Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "pageSize" Core.Int32 Core.:>
+                 Core.QueryParam "pageToken" Core.Text Core.:>
+                   Core.QueryParam "parent" Core.Text Core.:>
+                     Core.QueryParam "showDeleted" Core.Bool Core.:>
+                       Core.QueryParam "uploadType" Core.Text Core.:>
+                         Core.QueryParam "upload_protocol" Core.Text Core.:>
+                           Core.QueryParam "alt" Core.AltJSON Core.:>
+                             Core.Get '[Core.JSON] ListProjectsResponse
 
 -- | Lists projects that are direct children of the specified folder or organization resource. @list()@ provides a strongly consistent view of the projects underneath the specified parent resource. @list()@ returns projects sorted based upon the (ascending) lexical ordering of their @display_name@. The caller must have @resourcemanager.projects.list@ permission on the identified parent.
 --
 -- /See:/ 'newCloudresourcemanagerProjectsList' smart constructor.
 data CloudresourcemanagerProjectsList = CloudresourcemanagerProjectsList
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Optional. The maximum number of projects to return in the response. The server can return fewer projects than requested. If unspecified, server picks an appropriate default.
-    pageSize :: (Core.Maybe Core.Int32),
-    -- | Optional. A pagination token returned from a previous call to ListProjects that indicates from where listing should continue.
-    pageToken :: (Core.Maybe Core.Text),
-    -- | Required. The name of the parent resource whose projects are being listed. Only children of this parent resource are listed; descendants are not listed. If the parent is a folder, use the value @folders\/{folder_id}@. If the parent is an organization, use the value @organizations\/{org_id}@.
-    parent :: (Core.Maybe Core.Text),
-    -- | Optional. Indicate that projects in the @DELETE_REQUESTED@ state should also be returned. Normally only @ACTIVE@ projects are returned.
-    showDeleted :: (Core.Maybe Core.Bool),
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Optional. The maximum number of projects to return in the response. The server can return fewer projects than requested. If unspecified, server picks an appropriate default.
+    , pageSize :: (Core.Maybe Core.Int32)
+      -- | Optional. A pagination token returned from a previous call to ListProjects that indicates from where listing should continue.
+    , pageToken :: (Core.Maybe Core.Text)
+      -- | Required. The name of the parent resource whose projects are being listed. Only children of this parent resource are listed; descendants are not listed. If the parent is a folder, use the value @folders\/{folder_id}@. If the parent is an organization, use the value @organizations\/{org_id}@.
+    , parent :: (Core.Maybe Core.Text)
+      -- | Optional. Indicate that projects in the @DELETE_REQUESTED@ state should also be returned. Normally only @ACTIVE@ projects are returned.
+    , showDeleted :: (Core.Maybe Core.Bool)
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'CloudresourcemanagerProjectsList' with the minimum fields required to make a request.
-newCloudresourcemanagerProjectsList ::
-  CloudresourcemanagerProjectsList
+newCloudresourcemanagerProjectsList 
+    ::  CloudresourcemanagerProjectsList
 newCloudresourcemanagerProjectsList =
   CloudresourcemanagerProjectsList
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      pageSize = Core.Nothing,
-      pageToken = Core.Nothing,
-      parent = Core.Nothing,
-      showDeleted = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , pageSize = Core.Nothing
+    , pageToken = Core.Nothing
+    , parent = Core.Nothing
+    , showDeleted = Core.Nothing
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudresourcemanagerProjectsList
-  where
-  type
-    Rs CloudresourcemanagerProjectsList =
-      ListProjectsResponse
-  type
-    Scopes CloudresourcemanagerProjectsList =
-      '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
-  requestClient CloudresourcemanagerProjectsList {..} =
-    go
-      xgafv
-      accessToken
-      callback
-      pageSize
-      pageToken
-      parent
-      showDeleted
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      resourceManagerService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy CloudresourcemanagerProjectsListResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           CloudresourcemanagerProjectsList
+         where
+        type Rs CloudresourcemanagerProjectsList =
+             ListProjectsResponse
+        type Scopes CloudresourcemanagerProjectsList =
+             '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
+        requestClient CloudresourcemanagerProjectsList{..}
+          = go xgafv accessToken callback pageSize pageToken
+              parent
+              showDeleted
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              resourceManagerService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy CloudresourcemanagerProjectsListResource)
+                      Core.mempty
+

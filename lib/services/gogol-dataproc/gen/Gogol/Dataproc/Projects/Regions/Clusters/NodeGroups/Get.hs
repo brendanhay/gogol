@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,92 +31,85 @@
 --
 -- /See:/ <https://cloud.google.com/dataproc/ Cloud Dataproc API Reference> for @dataproc.projects.regions.clusters.nodeGroups.get@.
 module Gogol.Dataproc.Projects.Regions.Clusters.NodeGroups.Get
-  ( -- * Resource
-    DataprocProjectsRegionsClustersNodeGroupsGetResource,
+    (
+    -- * Resource
+      DataprocProjectsRegionsClustersNodeGroupsGetResource
 
     -- ** Constructing a Request
-    DataprocProjectsRegionsClustersNodeGroupsGet (..),
-    newDataprocProjectsRegionsClustersNodeGroupsGet,
-  )
-where
+    , DataprocProjectsRegionsClustersNodeGroupsGet (..)
+    , newDataprocProjectsRegionsClustersNodeGroupsGet
+    ) where
 
-import Gogol.Dataproc.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Dataproc.Types
 
 -- | A resource alias for @dataproc.projects.regions.clusters.nodeGroups.get@ method which the
 -- 'DataprocProjectsRegionsClustersNodeGroupsGet' request conforms to.
-type DataprocProjectsRegionsClustersNodeGroupsGetResource =
-  "v1"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] NodeGroup
+type DataprocProjectsRegionsClustersNodeGroupsGetResource
+     =
+     "v1" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Get '[Core.JSON] NodeGroup
 
 -- | Gets the resource representation for a node group in a cluster.
 --
 -- /See:/ 'newDataprocProjectsRegionsClustersNodeGroupsGet' smart constructor.
 data DataprocProjectsRegionsClustersNodeGroupsGet = DataprocProjectsRegionsClustersNodeGroupsGet
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. The name of the node group to retrieve. Format: projects\/{project}\/regions\/{region}\/clusters\/{cluster}\/nodeGroups\/{nodeGroup}
-    name :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The name of the node group to retrieve. Format: projects\/{project}\/regions\/{region}\/clusters\/{cluster}\/nodeGroups\/{nodeGroup}
+    , name :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DataprocProjectsRegionsClustersNodeGroupsGet' with the minimum fields required to make a request.
-newDataprocProjectsRegionsClustersNodeGroupsGet ::
-  -- |  Required. The name of the node group to retrieve. Format: projects\/{project}\/regions\/{region}\/clusters\/{cluster}\/nodeGroups\/{nodeGroup} See 'name'.
-  Core.Text ->
-  DataprocProjectsRegionsClustersNodeGroupsGet
+newDataprocProjectsRegionsClustersNodeGroupsGet 
+    ::  Core.Text
+       -- ^  Required. The name of the node group to retrieve. Format: projects\/{project}\/regions\/{region}\/clusters\/{cluster}\/nodeGroups\/{nodeGroup} See 'name'.
+    -> DataprocProjectsRegionsClustersNodeGroupsGet
 newDataprocProjectsRegionsClustersNodeGroupsGet name =
   DataprocProjectsRegionsClustersNodeGroupsGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DataprocProjectsRegionsClustersNodeGroupsGet
-  where
-  type
-    Rs DataprocProjectsRegionsClustersNodeGroupsGet =
-      NodeGroup
-  type
-    Scopes
-      DataprocProjectsRegionsClustersNodeGroupsGet =
-      '[CloudPlatform'FullControl]
-  requestClient
-    DataprocProjectsRegionsClustersNodeGroupsGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dataprocService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DataprocProjectsRegionsClustersNodeGroupsGetResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           DataprocProjectsRegionsClustersNodeGroupsGet
+         where
+        type Rs DataprocProjectsRegionsClustersNodeGroupsGet
+             = NodeGroup
+        type Scopes
+               DataprocProjectsRegionsClustersNodeGroupsGet
+             = '[CloudPlatform'FullControl]
+        requestClient
+          DataprocProjectsRegionsClustersNodeGroupsGet{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              dataprocService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           DataprocProjectsRegionsClustersNodeGroupsGetResource)
+                      Core.mempty
+

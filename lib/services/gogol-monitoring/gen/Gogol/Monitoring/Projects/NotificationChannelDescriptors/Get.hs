@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,96 +31,88 @@
 --
 -- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.notificationChannelDescriptors.get@.
 module Gogol.Monitoring.Projects.NotificationChannelDescriptors.Get
-  ( -- * Resource
-    MonitoringProjectsNotificationChannelDescriptorsGetResource,
+    (
+    -- * Resource
+      MonitoringProjectsNotificationChannelDescriptorsGetResource
 
     -- ** Constructing a Request
-    MonitoringProjectsNotificationChannelDescriptorsGet (..),
-    newMonitoringProjectsNotificationChannelDescriptorsGet,
-  )
-where
+    , MonitoringProjectsNotificationChannelDescriptorsGet (..)
+    , newMonitoringProjectsNotificationChannelDescriptorsGet
+    ) where
 
-import Gogol.Monitoring.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Monitoring.Types
 
 -- | A resource alias for @monitoring.projects.notificationChannelDescriptors.get@ method which the
 -- 'MonitoringProjectsNotificationChannelDescriptorsGet' request conforms to.
-type MonitoringProjectsNotificationChannelDescriptorsGetResource =
-  "v3"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] NotificationChannelDescriptor
+type MonitoringProjectsNotificationChannelDescriptorsGetResource
+     =
+     "v3" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Get '[Core.JSON] NotificationChannelDescriptor
 
 -- | Gets a single channel descriptor. The descriptor indicates which fields are expected \/ permitted for a notification channel of the given type.
 --
 -- /See:/ 'newMonitoringProjectsNotificationChannelDescriptorsGet' smart constructor.
 data MonitoringProjectsNotificationChannelDescriptorsGet = MonitoringProjectsNotificationChannelDescriptorsGet
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. The channel type for which to execute the request. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/notificationChannelDescriptors\/[CHANNEL/TYPE]
-    name :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The channel type for which to execute the request. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/notificationChannelDescriptors\/[CHANNEL/TYPE]
+    , name :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'MonitoringProjectsNotificationChannelDescriptorsGet' with the minimum fields required to make a request.
-newMonitoringProjectsNotificationChannelDescriptorsGet ::
-  -- |  Required. The channel type for which to execute the request. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/notificationChannelDescriptors\/[CHANNEL/TYPE] See 'name'.
-  Core.Text ->
-  MonitoringProjectsNotificationChannelDescriptorsGet
+newMonitoringProjectsNotificationChannelDescriptorsGet 
+    ::  Core.Text
+       -- ^  Required. The channel type for which to execute the request. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/notificationChannelDescriptors\/[CHANNEL/TYPE] See 'name'.
+    -> MonitoringProjectsNotificationChannelDescriptorsGet
 newMonitoringProjectsNotificationChannelDescriptorsGet name =
   MonitoringProjectsNotificationChannelDescriptorsGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    MonitoringProjectsNotificationChannelDescriptorsGet
-  where
-  type
-    Rs
-      MonitoringProjectsNotificationChannelDescriptorsGet =
-      NotificationChannelDescriptor
-  type
-    Scopes
-      MonitoringProjectsNotificationChannelDescriptorsGet =
-      '[ CloudPlatform'FullControl,
-         Monitoring'FullControl,
-         Monitoring'Read
-       ]
-  requestClient
-    MonitoringProjectsNotificationChannelDescriptorsGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        monitoringService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  MonitoringProjectsNotificationChannelDescriptorsGetResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           MonitoringProjectsNotificationChannelDescriptorsGet
+         where
+        type Rs
+               MonitoringProjectsNotificationChannelDescriptorsGet
+             = NotificationChannelDescriptor
+        type Scopes
+               MonitoringProjectsNotificationChannelDescriptorsGet
+             =
+             '[CloudPlatform'FullControl, Monitoring'FullControl,
+               Monitoring'Read]
+        requestClient
+          MonitoringProjectsNotificationChannelDescriptorsGet{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              monitoringService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           MonitoringProjectsNotificationChannelDescriptorsGetResource)
+                      Core.mempty
+

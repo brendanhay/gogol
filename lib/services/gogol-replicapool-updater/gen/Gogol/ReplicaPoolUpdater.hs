@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,130 +31,130 @@
 --
 -- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference>
 module Gogol.ReplicaPoolUpdater
-  ( -- * Configuration
-    replicaPoolUpdaterService,
+    (
+    -- * Configuration
+      replicaPoolUpdaterService
 
     -- * OAuth Scopes
-    CloudPlatform'FullControl,
-    CloudPlatform'ReadOnly,
-    Replicapool'FullControl,
-    Replicapool'Readonly,
+    , CloudPlatform'FullControl
+    , CloudPlatform'ReadOnly
+    , Replicapool'FullControl
+    , Replicapool'Readonly
 
     -- * Resources
 
     -- ** replicapoolupdater.rollingUpdates.cancel
-    ReplicaPoolUpdaterRollingUpdatesCancelResource,
-    ReplicaPoolUpdaterRollingUpdatesCancel (..),
-    newReplicaPoolUpdaterRollingUpdatesCancel,
+    , ReplicaPoolUpdaterRollingUpdatesCancelResource
+    , ReplicaPoolUpdaterRollingUpdatesCancel (..)
+    , newReplicaPoolUpdaterRollingUpdatesCancel
 
     -- ** replicapoolupdater.rollingUpdates.get
-    ReplicaPoolUpdaterRollingUpdatesGetResource,
-    ReplicaPoolUpdaterRollingUpdatesGet (..),
-    newReplicaPoolUpdaterRollingUpdatesGet,
+    , ReplicaPoolUpdaterRollingUpdatesGetResource
+    , ReplicaPoolUpdaterRollingUpdatesGet (..)
+    , newReplicaPoolUpdaterRollingUpdatesGet
 
     -- ** replicapoolupdater.rollingUpdates.insert
-    ReplicaPoolUpdaterRollingUpdatesInsertResource,
-    ReplicaPoolUpdaterRollingUpdatesInsert (..),
-    newReplicaPoolUpdaterRollingUpdatesInsert,
+    , ReplicaPoolUpdaterRollingUpdatesInsertResource
+    , ReplicaPoolUpdaterRollingUpdatesInsert (..)
+    , newReplicaPoolUpdaterRollingUpdatesInsert
 
     -- ** replicapoolupdater.rollingUpdates.list
-    ReplicaPoolUpdaterRollingUpdatesListResource,
-    ReplicaPoolUpdaterRollingUpdatesList (..),
-    newReplicaPoolUpdaterRollingUpdatesList,
+    , ReplicaPoolUpdaterRollingUpdatesListResource
+    , ReplicaPoolUpdaterRollingUpdatesList (..)
+    , newReplicaPoolUpdaterRollingUpdatesList
 
     -- ** replicapoolupdater.rollingUpdates.listInstanceUpdates
-    ReplicaPoolUpdaterRollingUpdatesListInstanceUpdatesResource,
-    ReplicaPoolUpdaterRollingUpdatesListInstanceUpdates (..),
-    newReplicaPoolUpdaterRollingUpdatesListInstanceUpdates,
+    , ReplicaPoolUpdaterRollingUpdatesListInstanceUpdatesResource
+    , ReplicaPoolUpdaterRollingUpdatesListInstanceUpdates (..)
+    , newReplicaPoolUpdaterRollingUpdatesListInstanceUpdates
 
     -- ** replicapoolupdater.rollingUpdates.pause
-    ReplicaPoolUpdaterRollingUpdatesPauseResource,
-    ReplicaPoolUpdaterRollingUpdatesPause (..),
-    newReplicaPoolUpdaterRollingUpdatesPause,
+    , ReplicaPoolUpdaterRollingUpdatesPauseResource
+    , ReplicaPoolUpdaterRollingUpdatesPause (..)
+    , newReplicaPoolUpdaterRollingUpdatesPause
 
     -- ** replicapoolupdater.rollingUpdates.resume
-    ReplicaPoolUpdaterRollingUpdatesResumeResource,
-    ReplicaPoolUpdaterRollingUpdatesResume (..),
-    newReplicaPoolUpdaterRollingUpdatesResume,
+    , ReplicaPoolUpdaterRollingUpdatesResumeResource
+    , ReplicaPoolUpdaterRollingUpdatesResume (..)
+    , newReplicaPoolUpdaterRollingUpdatesResume
 
     -- ** replicapoolupdater.rollingUpdates.rollback
-    ReplicaPoolUpdaterRollingUpdatesRollbackResource,
-    ReplicaPoolUpdaterRollingUpdatesRollback (..),
-    newReplicaPoolUpdaterRollingUpdatesRollback,
+    , ReplicaPoolUpdaterRollingUpdatesRollbackResource
+    , ReplicaPoolUpdaterRollingUpdatesRollback (..)
+    , newReplicaPoolUpdaterRollingUpdatesRollback
 
     -- ** replicapoolupdater.zoneOperations.get
-    ReplicaPoolUpdaterZoneOperationsGetResource,
-    ReplicaPoolUpdaterZoneOperationsGet (..),
-    newReplicaPoolUpdaterZoneOperationsGet,
+    , ReplicaPoolUpdaterZoneOperationsGetResource
+    , ReplicaPoolUpdaterZoneOperationsGet (..)
+    , newReplicaPoolUpdaterZoneOperationsGet
 
     -- ** replicapoolupdater.zoneOperations.list
-    ReplicaPoolUpdaterZoneOperationsListResource,
-    ReplicaPoolUpdaterZoneOperationsList (..),
-    newReplicaPoolUpdaterZoneOperationsList,
+    , ReplicaPoolUpdaterZoneOperationsListResource
+    , ReplicaPoolUpdaterZoneOperationsList (..)
+    , newReplicaPoolUpdaterZoneOperationsList
 
     -- * Types
 
     -- ** InstanceUpdate
-    InstanceUpdate (..),
-    newInstanceUpdate,
+    , InstanceUpdate (..)
+    , newInstanceUpdate
 
     -- ** InstanceUpdate_Error
-    InstanceUpdate_Error (..),
-    newInstanceUpdate_Error,
+    , InstanceUpdate_Error (..)
+    , newInstanceUpdate_Error
 
     -- ** InstanceUpdate_Error_ErrorsItem
-    InstanceUpdate_Error_ErrorsItem (..),
-    newInstanceUpdate_Error_ErrorsItem,
+    , InstanceUpdate_Error_ErrorsItem (..)
+    , newInstanceUpdate_Error_ErrorsItem
 
     -- ** InstanceUpdateList
-    InstanceUpdateList (..),
-    newInstanceUpdateList,
+    , InstanceUpdateList (..)
+    , newInstanceUpdateList
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Error
-    Operation_Error (..),
-    newOperation_Error,
+    , Operation_Error (..)
+    , newOperation_Error
 
     -- ** Operation_Error_ErrorsItem
-    Operation_Error_ErrorsItem (..),
-    newOperation_Error_ErrorsItem,
+    , Operation_Error_ErrorsItem (..)
+    , newOperation_Error_ErrorsItem
 
     -- ** Operation_WarningsItem
-    Operation_WarningsItem (..),
-    newOperation_WarningsItem,
+    , Operation_WarningsItem (..)
+    , newOperation_WarningsItem
 
     -- ** Operation_WarningsItem_DataItem
-    Operation_WarningsItem_DataItem (..),
-    newOperation_WarningsItem_DataItem,
+    , Operation_WarningsItem_DataItem (..)
+    , newOperation_WarningsItem_DataItem
 
     -- ** OperationList
-    OperationList (..),
-    newOperationList,
+    , OperationList (..)
+    , newOperationList
 
     -- ** RollingUpdate
-    RollingUpdate (..),
-    newRollingUpdate,
+    , RollingUpdate (..)
+    , newRollingUpdate
 
     -- ** RollingUpdate_Error
-    RollingUpdate_Error (..),
-    newRollingUpdate_Error,
+    , RollingUpdate_Error (..)
+    , newRollingUpdate_Error
 
     -- ** RollingUpdate_Error_ErrorsItem
-    RollingUpdate_Error_ErrorsItem (..),
-    newRollingUpdate_Error_ErrorsItem,
+    , RollingUpdate_Error_ErrorsItem (..)
+    , newRollingUpdate_Error_ErrorsItem
 
     -- ** RollingUpdate_Policy
-    RollingUpdate_Policy (..),
-    newRollingUpdate_Policy,
+    , RollingUpdate_Policy (..)
+    , newRollingUpdate_Policy
 
     -- ** RollingUpdateList
-    RollingUpdateList (..),
-    newRollingUpdateList,
-  )
-where
+    , RollingUpdateList (..)
+    , newRollingUpdateList
+    ) where
 
 import Gogol.ReplicaPoolUpdater.RollingUpdates.Cancel
 import Gogol.ReplicaPoolUpdater.RollingUpdates.Get

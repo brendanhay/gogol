@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,44 +31,44 @@
 --
 -- /See:/ <https://developers.google.com/amp/cache/ Accelerated Mobile Pages (AMP) URL API Reference>
 module Gogol.AcceleratedMobilePageUrl
-  ( -- * Configuration
-    acceleratedMobilePageUrlService,
+    (
+    -- * Configuration
+      acceleratedMobilePageUrlService
 
     -- * Resources
 
     -- ** acceleratedmobilepageurl.ampUrls.batchGet
-    AcceleratedMobilePageUrlAmpUrlsBatchGetResource,
-    AcceleratedMobilePageUrlAmpUrlsBatchGet (..),
-    newAcceleratedMobilePageUrlAmpUrlsBatchGet,
+    , AcceleratedMobilePageUrlAmpUrlsBatchGetResource
+    , AcceleratedMobilePageUrlAmpUrlsBatchGet (..)
+    , newAcceleratedMobilePageUrlAmpUrlsBatchGet
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AmpUrl
-    AmpUrl (..),
-    newAmpUrl,
+    , AmpUrl (..)
+    , newAmpUrl
 
     -- ** AmpUrlError
-    AmpUrlError (..),
-    newAmpUrlError,
+    , AmpUrlError (..)
+    , newAmpUrlError
 
     -- ** AmpUrlError_ErrorCode
-    AmpUrlError_ErrorCode (..),
+    , AmpUrlError_ErrorCode (..)
 
     -- ** BatchGetAmpUrlsRequest
-    BatchGetAmpUrlsRequest (..),
-    newBatchGetAmpUrlsRequest,
+    , BatchGetAmpUrlsRequest (..)
+    , newBatchGetAmpUrlsRequest
 
     -- ** BatchGetAmpUrlsRequest_LookupStrategy
-    BatchGetAmpUrlsRequest_LookupStrategy (..),
+    , BatchGetAmpUrlsRequest_LookupStrategy (..)
 
     -- ** BatchGetAmpUrlsResponse
-    BatchGetAmpUrlsResponse (..),
-    newBatchGetAmpUrlsResponse,
-  )
-where
+    , BatchGetAmpUrlsResponse (..)
+    , newBatchGetAmpUrlsResponse
+    ) where
 
 import Gogol.AcceleratedMobilePageUrl.AmpUrls.BatchGet
 import Gogol.AcceleratedMobilePageUrl.Types

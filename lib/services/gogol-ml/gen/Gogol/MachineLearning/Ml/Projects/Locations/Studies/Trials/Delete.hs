@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,91 +31,83 @@
 --
 -- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.locations.studies.trials.delete@.
 module Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.Delete
-  ( -- * Resource
-    MlProjectsLocationsStudiesTrialsDeleteResource,
+    (
+    -- * Resource
+      MlProjectsLocationsStudiesTrialsDeleteResource
 
     -- ** Constructing a Request
-    MlProjectsLocationsStudiesTrialsDelete (..),
-    newMlProjectsLocationsStudiesTrialsDelete,
-  )
-where
+    , MlProjectsLocationsStudiesTrialsDelete (..)
+    , newMlProjectsLocationsStudiesTrialsDelete
+    ) where
 
-import Gogol.MachineLearning.Types
 import qualified Gogol.Prelude as Core
+import Gogol.MachineLearning.Types
 
 -- | A resource alias for @ml.projects.locations.studies.trials.delete@ method which the
 -- 'MlProjectsLocationsStudiesTrialsDelete' request conforms to.
 type MlProjectsLocationsStudiesTrialsDeleteResource =
-  "v1"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] GoogleProtobuf__Empty
+     "v1" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Delete '[Core.JSON] GoogleProtobuf__Empty
 
 -- | Deletes a trial.
 --
 -- /See:/ 'newMlProjectsLocationsStudiesTrialsDelete' smart constructor.
 data MlProjectsLocationsStudiesTrialsDelete = MlProjectsLocationsStudiesTrialsDelete
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. The trial name.
-    name :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The trial name.
+    , name :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'MlProjectsLocationsStudiesTrialsDelete' with the minimum fields required to make a request.
-newMlProjectsLocationsStudiesTrialsDelete ::
-  -- |  Required. The trial name. See 'name'.
-  Core.Text ->
-  MlProjectsLocationsStudiesTrialsDelete
+newMlProjectsLocationsStudiesTrialsDelete 
+    ::  Core.Text
+       -- ^  Required. The trial name. See 'name'.
+    -> MlProjectsLocationsStudiesTrialsDelete
 newMlProjectsLocationsStudiesTrialsDelete name =
   MlProjectsLocationsStudiesTrialsDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    MlProjectsLocationsStudiesTrialsDelete
-  where
-  type
-    Rs MlProjectsLocationsStudiesTrialsDelete =
-      GoogleProtobuf__Empty
-  type
-    Scopes MlProjectsLocationsStudiesTrialsDelete =
-      '[CloudPlatform'FullControl]
-  requestClient
-    MlProjectsLocationsStudiesTrialsDelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        machineLearningService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  MlProjectsLocationsStudiesTrialsDeleteResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           MlProjectsLocationsStudiesTrialsDelete
+         where
+        type Rs MlProjectsLocationsStudiesTrialsDelete =
+             GoogleProtobuf__Empty
+        type Scopes MlProjectsLocationsStudiesTrialsDelete =
+             '[CloudPlatform'FullControl]
+        requestClient
+          MlProjectsLocationsStudiesTrialsDelete{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              machineLearningService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           MlProjectsLocationsStudiesTrialsDeleteResource)
+                      Core.mempty
+

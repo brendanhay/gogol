@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,311 +26,322 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Gmail.Types
-  ( -- * Configuration
-    gmailService,
+    (
+    -- * Configuration
+      gmailService
 
     -- * OAuth Scopes
-    Gmail'FullControl,
-    Gmail'Addons'Current'Action'Compose,
-    Gmail'Addons'Current'Message'Action,
-    Gmail'Addons'Current'Message'Metadata,
-    Gmail'Addons'Current'Message'Readonly,
-    Gmail'Compose,
-    Gmail'Insert,
-    Gmail'Labels,
-    Gmail'Metadata,
-    Gmail'Modify,
-    Gmail'Readonly,
-    Gmail'Send,
-    Gmail'Settings'Basic,
-    Gmail'Settings'Sharing,
+    , Gmail'FullControl
+    , Gmail'Addons'Current'Action'Compose
+    , Gmail'Addons'Current'Message'Action
+    , Gmail'Addons'Current'Message'Metadata
+    , Gmail'Addons'Current'Message'Readonly
+    , Gmail'Compose
+    , Gmail'Insert
+    , Gmail'Labels
+    , Gmail'Metadata
+    , Gmail'Modify
+    , Gmail'Readonly
+    , Gmail'Send
+    , Gmail'Settings'Basic
+    , Gmail'Settings'Sharing
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AutoForwarding
-    AutoForwarding (..),
-    newAutoForwarding,
+    , AutoForwarding (..)
+    , newAutoForwarding
 
     -- ** AutoForwarding_Disposition
-    AutoForwarding_Disposition (..),
+    , AutoForwarding_Disposition (..)
 
     -- ** BatchDeleteMessagesRequest
-    BatchDeleteMessagesRequest (..),
-    newBatchDeleteMessagesRequest,
+    , BatchDeleteMessagesRequest (..)
+    , newBatchDeleteMessagesRequest
 
     -- ** BatchModifyMessagesRequest
-    BatchModifyMessagesRequest (..),
-    newBatchModifyMessagesRequest,
+    , BatchModifyMessagesRequest (..)
+    , newBatchModifyMessagesRequest
 
     -- ** CseIdentity
-    CseIdentity (..),
-    newCseIdentity,
+    , CseIdentity (..)
+    , newCseIdentity
 
     -- ** CseKeyPair
-    CseKeyPair (..),
-    newCseKeyPair,
+    , CseKeyPair (..)
+    , newCseKeyPair
 
     -- ** CseKeyPair_EnablementState
-    CseKeyPair_EnablementState (..),
+    , CseKeyPair_EnablementState (..)
 
     -- ** CsePrivateKeyMetadata
-    CsePrivateKeyMetadata (..),
-    newCsePrivateKeyMetadata,
+    , CsePrivateKeyMetadata (..)
+    , newCsePrivateKeyMetadata
 
     -- ** Delegate
-    Delegate (..),
-    newDelegate,
+    , Delegate (..)
+    , newDelegate
 
     -- ** Delegate_VerificationStatus
-    Delegate_VerificationStatus (..),
+    , Delegate_VerificationStatus (..)
 
     -- ** DisableCseKeyPairRequest
-    DisableCseKeyPairRequest (..),
-    newDisableCseKeyPairRequest,
+    , DisableCseKeyPairRequest (..)
+    , newDisableCseKeyPairRequest
 
     -- ** Draft
-    Draft (..),
-    newDraft,
+    , Draft (..)
+    , newDraft
 
     -- ** EnableCseKeyPairRequest
-    EnableCseKeyPairRequest (..),
-    newEnableCseKeyPairRequest,
+    , EnableCseKeyPairRequest (..)
+    , newEnableCseKeyPairRequest
 
     -- ** Filter
-    Filter (..),
-    newFilter,
+    , Filter (..)
+    , newFilter
 
     -- ** FilterAction
-    FilterAction (..),
-    newFilterAction,
+    , FilterAction (..)
+    , newFilterAction
 
     -- ** FilterCriteria
-    FilterCriteria (..),
-    newFilterCriteria,
+    , FilterCriteria (..)
+    , newFilterCriteria
 
     -- ** FilterCriteria_SizeComparison
-    FilterCriteria_SizeComparison (..),
+    , FilterCriteria_SizeComparison (..)
 
     -- ** ForwardingAddress
-    ForwardingAddress (..),
-    newForwardingAddress,
+    , ForwardingAddress (..)
+    , newForwardingAddress
 
     -- ** ForwardingAddress_VerificationStatus
-    ForwardingAddress_VerificationStatus (..),
+    , ForwardingAddress_VerificationStatus (..)
+
+    -- ** HardwareKeyMetadata
+    , HardwareKeyMetadata (..)
+    , newHardwareKeyMetadata
 
     -- ** History
-    History (..),
-    newHistory,
+    , History (..)
+    , newHistory
 
     -- ** HistoryLabelAdded
-    HistoryLabelAdded (..),
-    newHistoryLabelAdded,
+    , HistoryLabelAdded (..)
+    , newHistoryLabelAdded
 
     -- ** HistoryLabelRemoved
-    HistoryLabelRemoved (..),
-    newHistoryLabelRemoved,
+    , HistoryLabelRemoved (..)
+    , newHistoryLabelRemoved
 
     -- ** HistoryMessageAdded
-    HistoryMessageAdded (..),
-    newHistoryMessageAdded,
+    , HistoryMessageAdded (..)
+    , newHistoryMessageAdded
 
     -- ** HistoryMessageDeleted
-    HistoryMessageDeleted (..),
-    newHistoryMessageDeleted,
+    , HistoryMessageDeleted (..)
+    , newHistoryMessageDeleted
 
     -- ** ImapSettings
-    ImapSettings (..),
-    newImapSettings,
+    , ImapSettings (..)
+    , newImapSettings
 
     -- ** ImapSettings_ExpungeBehavior
-    ImapSettings_ExpungeBehavior (..),
+    , ImapSettings_ExpungeBehavior (..)
 
     -- ** KaclsKeyMetadata
-    KaclsKeyMetadata (..),
-    newKaclsKeyMetadata,
+    , KaclsKeyMetadata (..)
+    , newKaclsKeyMetadata
 
     -- ** Label
-    Label (..),
-    newLabel,
+    , Label (..)
+    , newLabel
 
     -- ** Label_LabelListVisibility
-    Label_LabelListVisibility (..),
+    , Label_LabelListVisibility (..)
 
     -- ** Label_MessageListVisibility
-    Label_MessageListVisibility (..),
+    , Label_MessageListVisibility (..)
 
     -- ** Label_Type
-    Label_Type (..),
+    , Label_Type (..)
 
     -- ** LabelColor
-    LabelColor (..),
-    newLabelColor,
+    , LabelColor (..)
+    , newLabelColor
 
     -- ** LanguageSettings
-    LanguageSettings (..),
-    newLanguageSettings,
+    , LanguageSettings (..)
+    , newLanguageSettings
 
     -- ** ListCseIdentitiesResponse
-    ListCseIdentitiesResponse (..),
-    newListCseIdentitiesResponse,
+    , ListCseIdentitiesResponse (..)
+    , newListCseIdentitiesResponse
 
     -- ** ListCseKeyPairsResponse
-    ListCseKeyPairsResponse (..),
-    newListCseKeyPairsResponse,
+    , ListCseKeyPairsResponse (..)
+    , newListCseKeyPairsResponse
 
     -- ** ListDelegatesResponse
-    ListDelegatesResponse (..),
-    newListDelegatesResponse,
+    , ListDelegatesResponse (..)
+    , newListDelegatesResponse
 
     -- ** ListDraftsResponse
-    ListDraftsResponse (..),
-    newListDraftsResponse,
+    , ListDraftsResponse (..)
+    , newListDraftsResponse
 
     -- ** ListFiltersResponse
-    ListFiltersResponse (..),
-    newListFiltersResponse,
+    , ListFiltersResponse (..)
+    , newListFiltersResponse
 
     -- ** ListForwardingAddressesResponse
-    ListForwardingAddressesResponse (..),
-    newListForwardingAddressesResponse,
+    , ListForwardingAddressesResponse (..)
+    , newListForwardingAddressesResponse
 
     -- ** ListHistoryResponse
-    ListHistoryResponse (..),
-    newListHistoryResponse,
+    , ListHistoryResponse (..)
+    , newListHistoryResponse
 
     -- ** ListLabelsResponse
-    ListLabelsResponse (..),
-    newListLabelsResponse,
+    , ListLabelsResponse (..)
+    , newListLabelsResponse
 
     -- ** ListMessagesResponse
-    ListMessagesResponse (..),
-    newListMessagesResponse,
+    , ListMessagesResponse (..)
+    , newListMessagesResponse
 
     -- ** ListSendAsResponse
-    ListSendAsResponse (..),
-    newListSendAsResponse,
+    , ListSendAsResponse (..)
+    , newListSendAsResponse
 
     -- ** ListSmimeInfoResponse
-    ListSmimeInfoResponse (..),
-    newListSmimeInfoResponse,
+    , ListSmimeInfoResponse (..)
+    , newListSmimeInfoResponse
 
     -- ** ListThreadsResponse
-    ListThreadsResponse (..),
-    newListThreadsResponse,
+    , ListThreadsResponse (..)
+    , newListThreadsResponse
 
     -- ** Message
-    Message (..),
-    newMessage,
+    , Message (..)
+    , newMessage
 
     -- ** MessagePart
-    MessagePart (..),
-    newMessagePart,
+    , MessagePart (..)
+    , newMessagePart
 
     -- ** MessagePartBody
-    MessagePartBody (..),
-    newMessagePartBody,
+    , MessagePartBody (..)
+    , newMessagePartBody
 
     -- ** MessagePartHeader
-    MessagePartHeader (..),
-    newMessagePartHeader,
+    , MessagePartHeader (..)
+    , newMessagePartHeader
 
     -- ** ModifyMessageRequest
-    ModifyMessageRequest (..),
-    newModifyMessageRequest,
+    , ModifyMessageRequest (..)
+    , newModifyMessageRequest
 
     -- ** ModifyThreadRequest
-    ModifyThreadRequest (..),
-    newModifyThreadRequest,
+    , ModifyThreadRequest (..)
+    , newModifyThreadRequest
 
     -- ** ObliterateCseKeyPairRequest
-    ObliterateCseKeyPairRequest (..),
-    newObliterateCseKeyPairRequest,
+    , ObliterateCseKeyPairRequest (..)
+    , newObliterateCseKeyPairRequest
 
     -- ** PopSettings
-    PopSettings (..),
-    newPopSettings,
+    , PopSettings (..)
+    , newPopSettings
 
     -- ** PopSettings_AccessWindow
-    PopSettings_AccessWindow (..),
+    , PopSettings_AccessWindow (..)
 
     -- ** PopSettings_Disposition
-    PopSettings_Disposition (..),
+    , PopSettings_Disposition (..)
 
     -- ** Profile
-    Profile (..),
-    newProfile,
+    , Profile (..)
+    , newProfile
 
     -- ** SendAs
-    SendAs (..),
-    newSendAs,
+    , SendAs (..)
+    , newSendAs
 
     -- ** SendAs_VerificationStatus
-    SendAs_VerificationStatus (..),
+    , SendAs_VerificationStatus (..)
+
+    -- ** SignAndEncryptKeyPairs
+    , SignAndEncryptKeyPairs (..)
+    , newSignAndEncryptKeyPairs
 
     -- ** SmimeInfo
-    SmimeInfo (..),
-    newSmimeInfo,
+    , SmimeInfo (..)
+    , newSmimeInfo
 
     -- ** SmtpMsa
-    SmtpMsa (..),
-    newSmtpMsa,
+    , SmtpMsa (..)
+    , newSmtpMsa
 
     -- ** SmtpMsa_SecurityMode
-    SmtpMsa_SecurityMode (..),
+    , SmtpMsa_SecurityMode (..)
 
     -- ** Thread
-    Thread (..),
-    newThread,
+    , Thread (..)
+    , newThread
 
     -- ** VacationSettings
-    VacationSettings (..),
-    newVacationSettings,
+    , VacationSettings (..)
+    , newVacationSettings
 
     -- ** WatchRequest
-    WatchRequest (..),
-    newWatchRequest,
+    , WatchRequest (..)
+    , newWatchRequest
 
     -- ** WatchRequest_LabelFilterAction
-    WatchRequest_LabelFilterAction (..),
+    , WatchRequest_LabelFilterAction (..)
+
+    -- ** WatchRequest_LabelFilterBehavior
+    , WatchRequest_LabelFilterBehavior (..)
 
     -- ** WatchResponse
-    WatchResponse (..),
-    newWatchResponse,
+    , WatchResponse (..)
+    , newWatchResponse
 
     -- ** UsersDraftsGetFormat
-    UsersDraftsGetFormat (..),
+    , UsersDraftsGetFormat (..)
 
     -- ** UsersHistoryListHistoryTypes
-    UsersHistoryListHistoryTypes (..),
+    , UsersHistoryListHistoryTypes (..)
 
     -- ** UsersMessagesGetFormat
-    UsersMessagesGetFormat (..),
+    , UsersMessagesGetFormat (..)
 
     -- ** UsersMessagesImportInternalDateSource
-    UsersMessagesImportInternalDateSource (..),
+    , UsersMessagesImportInternalDateSource (..)
 
     -- ** UsersMessagesInsertInternalDateSource
-    UsersMessagesInsertInternalDateSource (..),
+    , UsersMessagesInsertInternalDateSource (..)
 
     -- ** UsersThreadsGetFormat
-    UsersThreadsGetFormat (..),
-  )
-where
+    , UsersThreadsGetFormat (..)
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.Gmail.Internal.Product
 import Gogol.Gmail.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Gmail API. This contains the host and root path used as a starting point for constructing service requests.
 gmailService :: Core.ServiceConfig
-gmailService =
-  Core.defaultService
-    (Core.ServiceId "gmail:v1")
-    "gmail.googleapis.com"
+gmailService
+  = Core.defaultService (Core.ServiceId "gmail:v1")
+      "gmail.googleapis.com"
 
 -- | Read, compose, send, and permanently delete all your email from Gmail
 type Gmail'FullControl = "https://mail.google.com/"

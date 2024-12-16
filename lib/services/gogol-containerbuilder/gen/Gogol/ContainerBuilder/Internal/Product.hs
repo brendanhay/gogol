@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,230 +26,137 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.ContainerBuilder.Internal.Product
-  ( -- * ApprovalConfig
-    ApprovalConfig (..),
-    newApprovalConfig,
+  (
 
-    -- * ApprovalResult
-    ApprovalResult (..),
-    newApprovalResult,
+    -- * AuditConfig
+    AuditConfig (..),
+    newAuditConfig,
 
-    -- * ApproveBuildRequest
-    ApproveBuildRequest (..),
-    newApproveBuildRequest,
+    -- * AuditLogConfig
+    AuditLogConfig (..),
+    newAuditLogConfig,
 
-    -- * ArtifactObjects
-    ArtifactObjects (..),
-    newArtifactObjects,
+    -- * BatchCreateRepositoriesRequest
+    BatchCreateRepositoriesRequest (..),
+    newBatchCreateRepositoriesRequest,
 
-    -- * ArtifactResult
-    ArtifactResult (..),
-    newArtifactResult,
+    -- * BatchCreateRepositoriesResponse
+    BatchCreateRepositoriesResponse (..),
+    newBatchCreateRepositoriesResponse,
 
-    -- * Artifacts
-    Artifacts (..),
-    newArtifacts,
+    -- * Binding
+    Binding (..),
+    newBinding,
 
-    -- * BatchCreateBitbucketServerConnectedRepositoriesRequest
-    BatchCreateBitbucketServerConnectedRepositoriesRequest (..),
-    newBatchCreateBitbucketServerConnectedRepositoriesRequest,
+    -- * BitbucketCloudConfig
+    BitbucketCloudConfig (..),
+    newBitbucketCloudConfig,
 
-    -- * BatchCreateBitbucketServerConnectedRepositoriesResponse
-    BatchCreateBitbucketServerConnectedRepositoriesResponse (..),
-    newBatchCreateBitbucketServerConnectedRepositoriesResponse,
-
-    -- * BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata
-    BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata (..),
-    newBatchCreateBitbucketServerConnectedRepositoriesResponseMetadata,
-
-    -- * BatchCreateGitLabConnectedRepositoriesRequest
-    BatchCreateGitLabConnectedRepositoriesRequest (..),
-    newBatchCreateGitLabConnectedRepositoriesRequest,
-
-    -- * BatchCreateGitLabConnectedRepositoriesResponse
-    BatchCreateGitLabConnectedRepositoriesResponse (..),
-    newBatchCreateGitLabConnectedRepositoriesResponse,
-
-    -- * BatchCreateGitLabConnectedRepositoriesResponseMetadata
-    BatchCreateGitLabConnectedRepositoriesResponseMetadata (..),
-    newBatchCreateGitLabConnectedRepositoriesResponseMetadata,
-
-    -- * BitbucketServerConfig
-    BitbucketServerConfig (..),
-    newBitbucketServerConfig,
-
-    -- * BitbucketServerConnectedRepository
-    BitbucketServerConnectedRepository (..),
-    newBitbucketServerConnectedRepository,
-
-    -- * BitbucketServerRepository
-    BitbucketServerRepository (..),
-    newBitbucketServerRepository,
-
-    -- * BitbucketServerRepositoryId
-    BitbucketServerRepositoryId (..),
-    newBitbucketServerRepositoryId,
-
-    -- * BitbucketServerSecrets
-    BitbucketServerSecrets (..),
-    newBitbucketServerSecrets,
-
-    -- * BitbucketServerTriggerConfig
-    BitbucketServerTriggerConfig (..),
-    newBitbucketServerTriggerConfig,
-
-    -- * Build
-    Build (..),
-    newBuild,
-
-    -- * Build_Substitutions
-    Build_Substitutions (..),
-    newBuild_Substitutions,
-
-    -- * Build_Timing
-    Build_Timing (..),
-    newBuild_Timing,
-
-    -- * BuildApproval
-    BuildApproval (..),
-    newBuildApproval,
-
-    -- * BuildOperationMetadata
-    BuildOperationMetadata (..),
-    newBuildOperationMetadata,
-
-    -- * BuildOptions
-    BuildOptions (..),
-    newBuildOptions,
-
-    -- * BuildStep
-    BuildStep (..),
-    newBuildStep,
-
-    -- * BuildTrigger
-    BuildTrigger (..),
-    newBuildTrigger,
-
-    -- * BuildTrigger_Substitutions
-    BuildTrigger_Substitutions (..),
-    newBuildTrigger_Substitutions,
-
-    -- * BuiltImage
-    BuiltImage (..),
-    newBuiltImage,
-
-    -- * CancelBuildRequest
-    CancelBuildRequest (..),
-    newCancelBuildRequest,
+    -- * BitbucketDataCenterConfig
+    BitbucketDataCenterConfig (..),
+    newBitbucketDataCenterConfig,
 
     -- * CancelOperationRequest
     CancelOperationRequest (..),
     newCancelOperationRequest,
 
-    -- * CreateBitbucketServerConfigOperationMetadata
-    CreateBitbucketServerConfigOperationMetadata (..),
-    newCreateBitbucketServerConfigOperationMetadata,
+    -- * Capabilities
+    Capabilities (..),
+    newCapabilities,
 
-    -- * CreateBitbucketServerConnectedRepositoryRequest
-    CreateBitbucketServerConnectedRepositoryRequest (..),
-    newCreateBitbucketServerConnectedRepositoryRequest,
+    -- * ChildStatusReference
+    ChildStatusReference (..),
+    newChildStatusReference,
 
-    -- * CreateGitHubEnterpriseConfigOperationMetadata
-    CreateGitHubEnterpriseConfigOperationMetadata (..),
-    newCreateGitHubEnterpriseConfigOperationMetadata,
+    -- * Connection
+    Connection (..),
+    newConnection,
 
-    -- * CreateGitLabConfigOperationMetadata
-    CreateGitLabConfigOperationMetadata (..),
-    newCreateGitLabConfigOperationMetadata,
+    -- * Connection_Annotations
+    Connection_Annotations (..),
+    newConnection_Annotations,
 
-    -- * CreateGitLabConnectedRepositoryRequest
-    CreateGitLabConnectedRepositoryRequest (..),
-    newCreateGitLabConnectedRepositoryRequest,
+    -- * CreateRepositoryRequest
+    CreateRepositoryRequest (..),
+    newCreateRepositoryRequest,
 
-    -- * CreateWorkerPoolOperationMetadata
-    CreateWorkerPoolOperationMetadata (..),
-    newCreateWorkerPoolOperationMetadata,
+    -- * EmbeddedTask
+    EmbeddedTask (..),
+    newEmbeddedTask,
 
-    -- * DeleteBitbucketServerConfigOperationMetadata
-    DeleteBitbucketServerConfigOperationMetadata (..),
-    newDeleteBitbucketServerConfigOperationMetadata,
-
-    -- * DeleteGitHubEnterpriseConfigOperationMetadata
-    DeleteGitHubEnterpriseConfigOperationMetadata (..),
-    newDeleteGitHubEnterpriseConfigOperationMetadata,
-
-    -- * DeleteGitLabConfigOperationMetadata
-    DeleteGitLabConfigOperationMetadata (..),
-    newDeleteGitLabConfigOperationMetadata,
-
-    -- * DeleteWorkerPoolOperationMetadata
-    DeleteWorkerPoolOperationMetadata (..),
-    newDeleteWorkerPoolOperationMetadata,
+    -- * EmbeddedTask_Annotations
+    EmbeddedTask_Annotations (..),
+    newEmbeddedTask_Annotations,
 
     -- * Empty
     Empty (..),
     newEmpty,
 
-    -- * FailureInfo
-    FailureInfo (..),
-    newFailureInfo,
+    -- * EmptyDirVolumeSource
+    EmptyDirVolumeSource (..),
+    newEmptyDirVolumeSource,
 
-    -- * FileHashes
-    FileHashes (..),
-    newFileHashes,
+    -- * EnvVar
+    EnvVar (..),
+    newEnvVar,
 
-    -- * GitFileSource
-    GitFileSource (..),
-    newGitFileSource,
+    -- * ExecAction
+    ExecAction (..),
+    newExecAction,
 
-    -- * GitHubEnterpriseConfig
-    GitHubEnterpriseConfig (..),
-    newGitHubEnterpriseConfig,
+    -- * Expr
+    Expr (..),
+    newExpr,
 
-    -- * GitHubEnterpriseSecrets
-    GitHubEnterpriseSecrets (..),
-    newGitHubEnterpriseSecrets,
+    -- * FetchGitRefsResponse
+    FetchGitRefsResponse (..),
+    newFetchGitRefsResponse,
 
-    -- * GitHubEventsConfig
-    GitHubEventsConfig (..),
-    newGitHubEventsConfig,
+    -- * FetchLinkableRepositoriesResponse
+    FetchLinkableRepositoriesResponse (..),
+    newFetchLinkableRepositoriesResponse,
 
-    -- * GitLabConfig
-    GitLabConfig (..),
-    newGitLabConfig,
+    -- * FetchReadTokenRequest
+    FetchReadTokenRequest (..),
+    newFetchReadTokenRequest,
 
-    -- * GitLabConnectedRepository
-    GitLabConnectedRepository (..),
-    newGitLabConnectedRepository,
+    -- * FetchReadTokenResponse
+    FetchReadTokenResponse (..),
+    newFetchReadTokenResponse,
 
-    -- * GitLabEnterpriseConfig
-    GitLabEnterpriseConfig (..),
-    newGitLabEnterpriseConfig,
+    -- * FetchReadWriteTokenRequest
+    FetchReadWriteTokenRequest (..),
+    newFetchReadWriteTokenRequest,
 
-    -- * GitLabEventsConfig
-    GitLabEventsConfig (..),
-    newGitLabEventsConfig,
+    -- * FetchReadWriteTokenResponse
+    FetchReadWriteTokenResponse (..),
+    newFetchReadWriteTokenResponse,
 
-    -- * GitLabRepository
-    GitLabRepository (..),
-    newGitLabRepository,
+    -- * GitHubConfig
+    GitHubConfig (..),
+    newGitHubConfig,
 
-    -- * GitLabRepositoryId
-    GitLabRepositoryId (..),
-    newGitLabRepositoryId,
+    -- * GoogleDevtoolsCloudbuildV2Condition
+    GoogleDevtoolsCloudbuildV2Condition (..),
+    newGoogleDevtoolsCloudbuildV2Condition,
 
-    -- * GitLabSecrets
-    GitLabSecrets (..),
-    newGitLabSecrets,
+    -- * GoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig
+    GoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig (..),
+    newGoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig,
 
-    -- * GitRepoSource
-    GitRepoSource (..),
-    newGitRepoSource,
+    -- * GoogleDevtoolsCloudbuildV2GitLabConfig
+    GoogleDevtoolsCloudbuildV2GitLabConfig (..),
+    newGoogleDevtoolsCloudbuildV2GitLabConfig,
 
-    -- * Hash
-    Hash (..),
-    newHash,
+    -- * GoogleDevtoolsCloudbuildV2OperationMetadata
+    GoogleDevtoolsCloudbuildV2OperationMetadata (..),
+    newGoogleDevtoolsCloudbuildV2OperationMetadata,
+
+    -- * GoogleDevtoolsCloudbuildV2ServiceDirectoryConfig
+    GoogleDevtoolsCloudbuildV2ServiceDirectoryConfig (..),
+    newGoogleDevtoolsCloudbuildV2ServiceDirectoryConfig,
 
     -- * HttpBody
     HttpBody (..),
@@ -258,53 +166,37 @@ module Gogol.ContainerBuilder.Internal.Product
     HttpBody_ExtensionsItem (..),
     newHttpBody_ExtensionsItem,
 
-    -- * InlineSecret
-    InlineSecret (..),
-    newInlineSecret,
+    -- * InstallationState
+    InstallationState (..),
+    newInstallationState,
 
-    -- * InlineSecret_EnvMap
-    InlineSecret_EnvMap (..),
-    newInlineSecret_EnvMap,
+    -- * ListConnectionsResponse
+    ListConnectionsResponse (..),
+    newListConnectionsResponse,
 
-    -- * ListBitbucketServerConfigsResponse
-    ListBitbucketServerConfigsResponse (..),
-    newListBitbucketServerConfigsResponse,
+    -- * ListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
 
-    -- * ListBitbucketServerRepositoriesResponse
-    ListBitbucketServerRepositoriesResponse (..),
-    newListBitbucketServerRepositoriesResponse,
+    -- * ListRepositoriesResponse
+    ListRepositoriesResponse (..),
+    newListRepositoriesResponse,
 
-    -- * ListBuildTriggersResponse
-    ListBuildTriggersResponse (..),
-    newListBuildTriggersResponse,
+    -- * Location
+    Location (..),
+    newLocation,
 
-    -- * ListBuildsResponse
-    ListBuildsResponse (..),
-    newListBuildsResponse,
+    -- * Location_Labels
+    Location_Labels (..),
+    newLocation_Labels,
 
-    -- * ListGitLabConfigsResponse
-    ListGitLabConfigsResponse (..),
-    newListGitLabConfigsResponse,
+    -- * Location_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
 
-    -- * ListGitLabRepositoriesResponse
-    ListGitLabRepositoriesResponse (..),
-    newListGitLabRepositoriesResponse,
-
-    -- * ListGithubEnterpriseConfigsResponse
-    ListGithubEnterpriseConfigsResponse (..),
-    newListGithubEnterpriseConfigsResponse,
-
-    -- * ListWorkerPoolsResponse
-    ListWorkerPoolsResponse (..),
-    newListWorkerPoolsResponse,
-
-    -- * MavenArtifact
-    MavenArtifact (..),
-    newMavenArtifact,
-
-    -- * NetworkConfig
-    NetworkConfig (..),
-    newNetworkConfig,
+    -- * OAuthCredential
+    OAuthCredential (..),
+    newOAuthCredential,
 
     -- * Operation
     Operation (..),
@@ -322,101 +214,117 @@ module Gogol.ContainerBuilder.Internal.Product
     OperationMetadata (..),
     newOperationMetadata,
 
-    -- * PoolOption
-    PoolOption (..),
-    newPoolOption,
+    -- * Param
+    Param (..),
+    newParam,
 
-    -- * PrivatePoolV1Config
-    PrivatePoolV1Config (..),
-    newPrivatePoolV1Config,
+    -- * ParamSpec
+    ParamSpec (..),
+    newParamSpec,
 
-    -- * ProcessAppManifestCallbackOperationMetadata
-    ProcessAppManifestCallbackOperationMetadata (..),
-    newProcessAppManifestCallbackOperationMetadata,
+    -- * ParamValue
+    ParamValue (..),
+    newParamValue,
 
-    -- * PubsubConfig
-    PubsubConfig (..),
-    newPubsubConfig,
+    -- * ParamValue_ObjectVal
+    ParamValue_ObjectVal (..),
+    newParamValue_ObjectVal,
 
-    -- * PullRequestFilter
-    PullRequestFilter (..),
-    newPullRequestFilter,
+    -- * PipelineRef
+    PipelineRef (..),
+    newPipelineRef,
 
-    -- * PushFilter
-    PushFilter (..),
-    newPushFilter,
+    -- * PipelineResult
+    PipelineResult (..),
+    newPipelineResult,
 
-    -- * PythonPackage
-    PythonPackage (..),
-    newPythonPackage,
+    -- * PipelineRun
+    PipelineRun (..),
+    newPipelineRun,
 
-    -- * ReceiveTriggerWebhookResponse
-    ReceiveTriggerWebhookResponse (..),
-    newReceiveTriggerWebhookResponse,
+    -- * PipelineRun_Annotations
+    PipelineRun_Annotations (..),
+    newPipelineRun_Annotations,
 
-    -- * RemoveBitbucketServerConnectedRepositoryRequest
-    RemoveBitbucketServerConnectedRepositoryRequest (..),
-    newRemoveBitbucketServerConnectedRepositoryRequest,
+    -- * PipelineRun_GcbParams
+    PipelineRun_GcbParams (..),
+    newPipelineRun_GcbParams,
 
-    -- * RemoveGitLabConnectedRepositoryRequest
-    RemoveGitLabConnectedRepositoryRequest (..),
-    newRemoveGitLabConnectedRepositoryRequest,
+    -- * PipelineRunResult
+    PipelineRunResult (..),
+    newPipelineRunResult,
 
-    -- * RepoSource
-    RepoSource (..),
-    newRepoSource,
+    -- * PipelineSpec
+    PipelineSpec (..),
+    newPipelineSpec,
 
-    -- * RepoSource_Substitutions
-    RepoSource_Substitutions (..),
-    newRepoSource_Substitutions,
+    -- * PipelineTask
+    PipelineTask (..),
+    newPipelineTask,
 
-    -- * RepositoryEventConfig
-    RepositoryEventConfig (..),
-    newRepositoryEventConfig,
+    -- * PipelineWorkspaceDeclaration
+    PipelineWorkspaceDeclaration (..),
+    newPipelineWorkspaceDeclaration,
 
-    -- * Results
-    Results (..),
-    newResults,
+    -- * Policy
+    Policy (..),
+    newPolicy,
 
-    -- * RetryBuildRequest
-    RetryBuildRequest (..),
-    newRetryBuildRequest,
+    -- * Probe
+    Probe (..),
+    newProbe,
 
-    -- * RunBuildTriggerRequest
-    RunBuildTriggerRequest (..),
-    newRunBuildTriggerRequest,
+    -- * PropertySpec
+    PropertySpec (..),
+    newPropertySpec,
 
-    -- * Secret
-    Secret (..),
-    newSecret,
+    -- * Provenance
+    Provenance (..),
+    newProvenance,
 
-    -- * Secret_SecretEnv
-    Secret_SecretEnv (..),
-    newSecret_SecretEnv,
+    -- * Repository
+    Repository (..),
+    newRepository,
 
-    -- * SecretManagerSecret
-    SecretManagerSecret (..),
-    newSecretManagerSecret,
+    -- * Repository_Annotations
+    Repository_Annotations (..),
+    newRepository_Annotations,
 
-    -- * Secrets
-    Secrets (..),
-    newSecrets,
+    -- * ResultValue
+    ResultValue (..),
+    newResultValue,
 
-    -- * ServiceDirectoryConfig
-    ServiceDirectoryConfig (..),
-    newServiceDirectoryConfig,
+    -- * ResultValue_ObjectVal
+    ResultValue_ObjectVal (..),
+    newResultValue_ObjectVal,
 
-    -- * Source
-    Source (..),
-    newSource,
+    -- * RunWorkflowCustomOperationMetadata
+    RunWorkflowCustomOperationMetadata (..),
+    newRunWorkflowCustomOperationMetadata,
 
-    -- * SourceProvenance
-    SourceProvenance (..),
-    newSourceProvenance,
+    -- * SecretVolumeSource
+    SecretVolumeSource (..),
+    newSecretVolumeSource,
 
-    -- * SourceProvenance_FileHashes
-    SourceProvenance_FileHashes (..),
-    newSourceProvenance_FileHashes,
+    -- * Security
+    Security (..),
+    newSecurity,
+
+    -- * SecurityContext
+    SecurityContext (..),
+    newSecurityContext,
+
+    -- * SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
+
+    -- * Sidecar
+    Sidecar (..),
+    newSidecar,
+
+    -- * SkippedTask
+    SkippedTask (..),
+    newSkippedTask,
 
     -- * Status
     Status (..),
@@ -426,5506 +334,4112 @@ module Gogol.ContainerBuilder.Internal.Product
     Status_DetailsItem (..),
     newStatus_DetailsItem,
 
-    -- * StorageSource
-    StorageSource (..),
-    newStorageSource,
+    -- * Step
+    Step (..),
+    newStep,
 
-    -- * StorageSourceManifest
-    StorageSourceManifest (..),
-    newStorageSourceManifest,
+    -- * StepRef
+    StepRef (..),
+    newStepRef,
 
-    -- * TimeSpan
-    TimeSpan (..),
-    newTimeSpan,
+    -- * StepTemplate
+    StepTemplate (..),
+    newStepTemplate,
 
-    -- * UpdateBitbucketServerConfigOperationMetadata
-    UpdateBitbucketServerConfigOperationMetadata (..),
-    newUpdateBitbucketServerConfigOperationMetadata,
+    -- * TaskRef
+    TaskRef (..),
+    newTaskRef,
 
-    -- * UpdateGitHubEnterpriseConfigOperationMetadata
-    UpdateGitHubEnterpriseConfigOperationMetadata (..),
-    newUpdateGitHubEnterpriseConfigOperationMetadata,
+    -- * TaskResult
+    TaskResult (..),
+    newTaskResult,
 
-    -- * UpdateGitLabConfigOperationMetadata
-    UpdateGitLabConfigOperationMetadata (..),
-    newUpdateGitLabConfigOperationMetadata,
+    -- * TaskResult_Properties
+    TaskResult_Properties (..),
+    newTaskResult_Properties,
 
-    -- * UpdateWorkerPoolOperationMetadata
-    UpdateWorkerPoolOperationMetadata (..),
-    newUpdateWorkerPoolOperationMetadata,
+    -- * TaskSpec
+    TaskSpec (..),
+    newTaskSpec,
 
-    -- * UploadedMavenArtifact
-    UploadedMavenArtifact (..),
-    newUploadedMavenArtifact,
+    -- * TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
 
-    -- * UploadedPythonPackage
-    UploadedPythonPackage (..),
-    newUploadedPythonPackage,
+    -- * TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
 
-    -- * Volume
-    Volume (..),
-    newVolume,
+    -- * TimeoutFields
+    TimeoutFields (..),
+    newTimeoutFields,
 
-    -- * Warning
-    Warning (..),
-    newWarning,
+    -- * UserCredential
+    UserCredential (..),
+    newUserCredential,
 
-    -- * WebhookConfig
-    WebhookConfig (..),
-    newWebhookConfig,
+    -- * VolumeMount
+    VolumeMount (..),
+    newVolumeMount,
 
-    -- * WorkerConfig
-    WorkerConfig (..),
-    newWorkerConfig,
+    -- * VolumeSource
+    VolumeSource (..),
+    newVolumeSource,
 
-    -- * WorkerPool
-    WorkerPool (..),
-    newWorkerPool,
+    -- * WhenExpression
+    WhenExpression (..),
+    newWhenExpression,
 
-    -- * WorkerPool_Annotations
-    WorkerPool_Annotations (..),
-    newWorkerPool_Annotations,
-  )
-where
+    -- * Worker
+    Worker (..),
+    newWorker,
 
-import Gogol.ContainerBuilder.Internal.Sum
+    -- * WorkspaceBinding
+    WorkspaceBinding (..),
+    newWorkspaceBinding,
+
+    -- * WorkspaceDeclaration
+    WorkspaceDeclaration (..),
+    newWorkspaceDeclaration,
+
+    -- * WorkspacePipelineTaskBinding
+    WorkspacePipelineTaskBinding (..),
+    newWorkspacePipelineTaskBinding,
+  ) where
+
 import qualified Gogol.Prelude as Core
+import Gogol.ContainerBuilder.Internal.Sum
 
--- | ApprovalConfig describes configuration for manual approval of a build.
+-- | Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs. If there are AuditConfigs for both @allServices@ and a specific service, the union of the two AuditConfigs is used for that service: the log/types specified in each AuditConfig are enabled, and the exempted/members in each AuditLogConfig are exempted. Example Policy with multiple AuditConfigs: { \"audit/configs\": [ { \"service\": \"allServices\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\", \"exempted/members\": [ \"user:jose\@example.com\" ] }, { \"log/type\": \"DATA/WRITE\" }, { \"log/type\": \"ADMIN/READ\" } ] }, { \"service\": \"sampleservice.googleapis.com\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\" }, { \"log/type\": \"DATA/WRITE\", \"exempted/members\": [ \"user:aliya\@example.com\" ] } ] } ] } For sampleservice, this policy enables DATA/READ, DATA/WRITE and
+-- ADMIN/READ logging. It also exempts @jose\@example.com@ from DATA/READ logging, and @aliya\@example.com@ from DATA/WRITE logging.
 --
--- /See:/ 'newApprovalConfig' smart constructor.
-newtype ApprovalConfig = ApprovalConfig
-  { -- | Whether or not approval is needed. If this is set on a build, it will become pending when created, and will need to be explicitly approved to start.
-    approvalRequired :: (Core.Maybe Core.Bool)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newAuditConfig' smart constructor.
+data AuditConfig = AuditConfig
+    {
+      -- | The configuration for logging of each type of permission.
+      auditLogConfigs :: (Core.Maybe [AuditLogConfig])
+      -- | Specifies a service that will be enabled for audit logging. For example, @storage.googleapis.com@, @cloudsql.googleapis.com@. @allServices@ is a special value that covers all services.
+    , service :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ApprovalConfig' with the minimum fields required to make a request.
-newApprovalConfig ::
-  ApprovalConfig
-newApprovalConfig = ApprovalConfig {approvalRequired = Core.Nothing}
+-- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
+newAuditConfig 
+    ::  AuditConfig
+newAuditConfig =
+  AuditConfig {auditLogConfigs = Core.Nothing, service = Core.Nothing}
 
-instance Core.FromJSON ApprovalConfig where
-  parseJSON =
-    Core.withObject
-      "ApprovalConfig"
-      ( \o ->
-          ApprovalConfig
-            Core.<$> (o Core..:? "approvalRequired")
-      )
+instance Core.FromJSON AuditConfig where
+        parseJSON
+          = Core.withObject "AuditConfig"
+              (\ o ->
+                 AuditConfig Core.<$>
+                   (o Core..:? "auditLogConfigs") Core.<*>
+                     (o Core..:? "service"))
 
-instance Core.ToJSON ApprovalConfig where
-  toJSON ApprovalConfig {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("approvalRequired" Core..=)
-              Core.<$> approvalRequired
-          ]
-      )
+instance Core.ToJSON AuditConfig where
+        toJSON AuditConfig{..}
+          = Core.object
+              (Core.catMaybes
+                 [("auditLogConfigs" Core..=) Core.<$>
+                    auditLogConfigs,
+                  ("service" Core..=) Core.<$> service])
 
--- | ApprovalResult describes the decision and associated metadata of a manual approval of a build.
+
+-- | Provides the configuration for logging a type of permissions. Example: { \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\", \"exempted/members\": [ \"user:jose\@example.com\" ] }, { \"log/type\": \"DATA/WRITE\" } ] } This enables \'DATA/READ\' and \'DATA/WRITE\' logging, while exempting jose\@example.com from DATA/READ logging.
 --
--- /See:/ 'newApprovalResult' smart constructor.
-data ApprovalResult = ApprovalResult
-  { -- | Output only. The time when the approval decision was made.
-    approvalTime :: (Core.Maybe Core.DateTime),
-    -- | Output only. Email of the user that called the ApproveBuild API to approve or reject a build at the time that the API was called.
-    approverAccount :: (Core.Maybe Core.Text),
-    -- | Optional. An optional comment for this manual approval result.
-    comment :: (Core.Maybe Core.Text),
-    -- | Required. The decision of this manual approval.
-    decision :: (Core.Maybe ApprovalResult_Decision),
-    -- | Optional. An optional URL tied to this manual approval result. This field is essentially the same as comment, except that it will be rendered by the UI differently. An example use case is a link to an external job that approved this Build.
-    url :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newAuditLogConfig' smart constructor.
+data AuditLogConfig = AuditLogConfig
+    {
+      -- | Specifies the identities that do not cause logging for this type of permission. Follows the same format of Binding.members.
+      exemptedMembers :: (Core.Maybe [Core.Text])
+      -- | The log type that this config enables.
+    , logType :: (Core.Maybe AuditLogConfig_LogType)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ApprovalResult' with the minimum fields required to make a request.
-newApprovalResult ::
-  ApprovalResult
-newApprovalResult =
-  ApprovalResult
-    { approvalTime = Core.Nothing,
-      approverAccount = Core.Nothing,
-      comment = Core.Nothing,
-      decision = Core.Nothing,
-      url = Core.Nothing
+-- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
+newAuditLogConfig 
+    ::  AuditLogConfig
+newAuditLogConfig =
+  AuditLogConfig {exemptedMembers = Core.Nothing, logType = Core.Nothing}
+
+instance Core.FromJSON AuditLogConfig where
+        parseJSON
+          = Core.withObject "AuditLogConfig"
+              (\ o ->
+                 AuditLogConfig Core.<$>
+                   (o Core..:? "exemptedMembers") Core.<*>
+                     (o Core..:? "logType"))
+
+instance Core.ToJSON AuditLogConfig where
+        toJSON AuditLogConfig{..}
+          = Core.object
+              (Core.catMaybes
+                 [("exemptedMembers" Core..=) Core.<$>
+                    exemptedMembers,
+                  ("logType" Core..=) Core.<$> logType])
+
+
+-- | Message for creating repositoritories in batch.
+--
+-- /See:/ 'newBatchCreateRepositoriesRequest' smart constructor.
+newtype BatchCreateRepositoriesRequest = BatchCreateRepositoriesRequest
+    {
+      -- | Required. The request messages specifying the repositories to create.
+      requests :: (Core.Maybe [CreateRepositoryRequest])
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BatchCreateRepositoriesRequest' with the minimum fields required to make a request.
+newBatchCreateRepositoriesRequest 
+    ::  BatchCreateRepositoriesRequest
+newBatchCreateRepositoriesRequest =
+  BatchCreateRepositoriesRequest {requests = Core.Nothing}
+
+instance Core.FromJSON BatchCreateRepositoriesRequest
+         where
+        parseJSON
+          = Core.withObject "BatchCreateRepositoriesRequest"
+              (\ o ->
+                 BatchCreateRepositoriesRequest Core.<$>
+                   (o Core..:? "requests"))
+
+instance Core.ToJSON BatchCreateRepositoriesRequest
+         where
+        toJSON BatchCreateRepositoriesRequest{..}
+          = Core.object
+              (Core.catMaybes
+                 [("requests" Core..=) Core.<$> requests])
+
+
+-- | Message for response of creating repositories in batch.
+--
+-- /See:/ 'newBatchCreateRepositoriesResponse' smart constructor.
+newtype BatchCreateRepositoriesResponse = BatchCreateRepositoriesResponse
+    {
+      -- | Repository resources created.
+      repositories :: (Core.Maybe [Repository])
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BatchCreateRepositoriesResponse' with the minimum fields required to make a request.
+newBatchCreateRepositoriesResponse 
+    ::  BatchCreateRepositoriesResponse
+newBatchCreateRepositoriesResponse =
+  BatchCreateRepositoriesResponse {repositories = Core.Nothing}
+
+instance Core.FromJSON
+           BatchCreateRepositoriesResponse
+         where
+        parseJSON
+          = Core.withObject "BatchCreateRepositoriesResponse"
+              (\ o ->
+                 BatchCreateRepositoriesResponse Core.<$>
+                   (o Core..:? "repositories"))
+
+instance Core.ToJSON BatchCreateRepositoriesResponse
+         where
+        toJSON BatchCreateRepositoriesResponse{..}
+          = Core.object
+              (Core.catMaybes
+                 [("repositories" Core..=) Core.<$> repositories])
+
+
+-- | Associates @members@, or principals, with a @role@.
+--
+-- /See:/ 'newBinding' smart constructor.
+data Binding = Binding
+    {
+      -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
+      condition :: (Core.Maybe Expr)
+      -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
+      -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workforce identity pool. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/group\/{group_id}@: All workforce identities in a group. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All workforce identities with a specific attribute value. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/*@: All identities in a workforce identity pool. *
+      -- @principal:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workload identity pool. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/group\/{group_id}@: A workload identity pool group. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All identities in a workload identity pool with a certain attribute. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/*@: All identities in a workload identity pool. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts
+      -- to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: Deleted single identity in a workforce identity pool. For example,
+      -- @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/my-pool-id\/subject\/my-subject-attribute-value@.
+    , members :: (Core.Maybe [Core.Text])
+      -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@. For an overview of the IAM roles and permissions, see the <https://cloud.google.com/iam/docs/roles-overview IAM documentation>. For a list of the available pre-defined roles, see <https://cloud.google.com/iam/docs/understanding-roles here>.
+    , role' :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Binding' with the minimum fields required to make a request.
+newBinding 
+    ::  Binding
+newBinding =
+  Binding
+    {condition = Core.Nothing, members = Core.Nothing, role' = Core.Nothing}
+
+instance Core.FromJSON Binding where
+        parseJSON
+          = Core.withObject "Binding"
+              (\ o ->
+                 Binding Core.<$>
+                   (o Core..:? "condition") Core.<*>
+                     (o Core..:? "members")
+                     Core.<*> (o Core..:? "role"))
+
+instance Core.ToJSON Binding where
+        toJSON Binding{..}
+          = Core.object
+              (Core.catMaybes
+                 [("condition" Core..=) Core.<$> condition,
+                  ("members" Core..=) Core.<$> members,
+                  ("role" Core..=) Core.<$> role'])
+
+
+-- | Configuration for connections to Bitbucket Cloud.
+--
+-- /See:/ 'newBitbucketCloudConfig' smart constructor.
+data BitbucketCloudConfig = BitbucketCloudConfig
+    {
+      -- | Required. An access token with the @webhook@, @repository@, @repository:admin@ and @pullrequest@ scope access. It can be either a workspace, project or repository access token. It\'s recommended to use a system account to generate these credentials.
+      authorizerCredential :: (Core.Maybe UserCredential)
+      -- | Required. An access token with the @repository@ access. It can be either a workspace, project or repository access token. It\'s recommended to use a system account to generate the credentials.
+    , readAuthorizerCredential :: (Core.Maybe UserCredential)
+      -- | Required. SecretManager resource containing the webhook secret used to verify webhook events, formatted as @projects\/*\/secrets\/*\/versions\/*@.
+    , webhookSecretSecretVersion :: (Core.Maybe Core.Text)
+      -- | Required. The Bitbucket Cloud Workspace ID to be connected to Google Cloud Platform.
+    , workspace :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BitbucketCloudConfig' with the minimum fields required to make a request.
+newBitbucketCloudConfig 
+    ::  BitbucketCloudConfig
+newBitbucketCloudConfig =
+  BitbucketCloudConfig
+    { authorizerCredential = Core.Nothing
+    , readAuthorizerCredential = Core.Nothing
+    , webhookSecretSecretVersion = Core.Nothing
+    , workspace = Core.Nothing
     }
 
-instance Core.FromJSON ApprovalResult where
-  parseJSON =
-    Core.withObject
-      "ApprovalResult"
-      ( \o ->
-          ApprovalResult
-            Core.<$> (o Core..:? "approvalTime")
-            Core.<*> (o Core..:? "approverAccount")
-            Core.<*> (o Core..:? "comment")
-            Core.<*> (o Core..:? "decision")
-            Core.<*> (o Core..:? "url")
-      )
+instance Core.FromJSON BitbucketCloudConfig where
+        parseJSON
+          = Core.withObject "BitbucketCloudConfig"
+              (\ o ->
+                 BitbucketCloudConfig Core.<$>
+                   (o Core..:? "authorizerCredential") Core.<*>
+                     (o Core..:? "readAuthorizerCredential")
+                     Core.<*> (o Core..:? "webhookSecretSecretVersion")
+                     Core.<*> (o Core..:? "workspace"))
 
-instance Core.ToJSON ApprovalResult where
-  toJSON ApprovalResult {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("approvalTime" Core..=) Core.<$> approvalTime,
-            ("approverAccount" Core..=) Core.<$> approverAccount,
-            ("comment" Core..=) Core.<$> comment,
-            ("decision" Core..=) Core.<$> decision,
-            ("url" Core..=) Core.<$> url
-          ]
-      )
+instance Core.ToJSON BitbucketCloudConfig where
+        toJSON BitbucketCloudConfig{..}
+          = Core.object
+              (Core.catMaybes
+                 [("authorizerCredential" Core..=) Core.<$>
+                    authorizerCredential,
+                  ("readAuthorizerCredential" Core..=) Core.<$>
+                    readAuthorizerCredential,
+                  ("webhookSecretSecretVersion" Core..=) Core.<$>
+                    webhookSecretSecretVersion,
+                  ("workspace" Core..=) Core.<$> workspace])
 
--- | Request to approve or reject a pending build.
+
+-- | Configuration for connections to Bitbucket Data Center.
 --
--- /See:/ 'newApproveBuildRequest' smart constructor.
-newtype ApproveBuildRequest = ApproveBuildRequest
-  { -- | Approval decision and metadata.
-    approvalResult :: (Core.Maybe ApprovalResult)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newBitbucketDataCenterConfig' smart constructor.
+data BitbucketDataCenterConfig = BitbucketDataCenterConfig
+    {
+      -- | Required. A http access token with the @REPO_ADMIN@ scope access.
+      authorizerCredential :: (Core.Maybe UserCredential)
+      -- | Required. The URI of the Bitbucket Data Center instance or cluster this connection is for.
+    , hostUri :: (Core.Maybe Core.Text)
+      -- | Required. A http access token with the @REPO_READ@ access.
+    , readAuthorizerCredential :: (Core.Maybe UserCredential)
+      -- | Output only. Version of the Bitbucket Data Center running on the @host_uri@.
+    , serverVersion :: (Core.Maybe Core.Text)
+      -- | Optional. Configuration for using Service Directory to privately connect to a Bitbucket Data Center. This should only be set if the Bitbucket Data Center is hosted on-premises and not reachable by public internet. If this field is left empty, calls to the Bitbucket Data Center will be made over the public internet.
+    , serviceDirectoryConfig :: (Core.Maybe GoogleDevtoolsCloudbuildV2ServiceDirectoryConfig)
+      -- | Optional. SSL certificate to use for requests to the Bitbucket Data Center.
+    , sslCa :: (Core.Maybe Core.Text)
+      -- | Required. Immutable. SecretManager resource containing the webhook secret used to verify webhook events, formatted as @projects\/*\/secrets\/*\/versions\/*@.
+    , webhookSecretSecretVersion :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ApproveBuildRequest' with the minimum fields required to make a request.
-newApproveBuildRequest ::
-  ApproveBuildRequest
-newApproveBuildRequest = ApproveBuildRequest {approvalResult = Core.Nothing}
-
-instance Core.FromJSON ApproveBuildRequest where
-  parseJSON =
-    Core.withObject
-      "ApproveBuildRequest"
-      ( \o ->
-          ApproveBuildRequest
-            Core.<$> (o Core..:? "approvalResult")
-      )
-
-instance Core.ToJSON ApproveBuildRequest where
-  toJSON ApproveBuildRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [("approvalResult" Core..=) Core.<$> approvalResult]
-      )
-
--- | Files in the workspace to upload to Cloud Storage upon successful completion of all build steps.
---
--- /See:/ 'newArtifactObjects' smart constructor.
-data ArtifactObjects = ArtifactObjects
-  { -- | Cloud Storage bucket and optional object path, in the form \"gs:\/\/bucket\/path\/to\/somewhere\/\". (see <https://cloud.google.com/storage/docs/bucket-naming#requirements Bucket Name Requirements>). Files in the workspace matching any path pattern will be uploaded to Cloud Storage with this location as a prefix.
-    location :: (Core.Maybe Core.Text),
-    -- | Path globs used to match files in the build\'s workspace.
-    paths :: (Core.Maybe [Core.Text]),
-    -- | Output only. Stores timing information for pushing all artifact objects.
-    timing :: (Core.Maybe TimeSpan)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ArtifactObjects' with the minimum fields required to make a request.
-newArtifactObjects ::
-  ArtifactObjects
-newArtifactObjects =
-  ArtifactObjects
-    { location = Core.Nothing,
-      paths = Core.Nothing,
-      timing = Core.Nothing
+-- | Creates a value of 'BitbucketDataCenterConfig' with the minimum fields required to make a request.
+newBitbucketDataCenterConfig 
+    ::  BitbucketDataCenterConfig
+newBitbucketDataCenterConfig =
+  BitbucketDataCenterConfig
+    { authorizerCredential = Core.Nothing
+    , hostUri = Core.Nothing
+    , readAuthorizerCredential = Core.Nothing
+    , serverVersion = Core.Nothing
+    , serviceDirectoryConfig = Core.Nothing
+    , sslCa = Core.Nothing
+    , webhookSecretSecretVersion = Core.Nothing
     }
 
-instance Core.FromJSON ArtifactObjects where
-  parseJSON =
-    Core.withObject
-      "ArtifactObjects"
-      ( \o ->
-          ArtifactObjects
-            Core.<$> (o Core..:? "location")
-            Core.<*> (o Core..:? "paths")
-            Core.<*> (o Core..:? "timing")
-      )
+instance Core.FromJSON BitbucketDataCenterConfig
+         where
+        parseJSON
+          = Core.withObject "BitbucketDataCenterConfig"
+              (\ o ->
+                 BitbucketDataCenterConfig Core.<$>
+                   (o Core..:? "authorizerCredential") Core.<*>
+                     (o Core..:? "hostUri")
+                     Core.<*> (o Core..:? "readAuthorizerCredential")
+                     Core.<*> (o Core..:? "serverVersion")
+                     Core.<*> (o Core..:? "serviceDirectoryConfig")
+                     Core.<*> (o Core..:? "sslCa")
+                     Core.<*> (o Core..:? "webhookSecretSecretVersion"))
+
+instance Core.ToJSON BitbucketDataCenterConfig where
+        toJSON BitbucketDataCenterConfig{..}
+          = Core.object
+              (Core.catMaybes
+                 [("authorizerCredential" Core..=) Core.<$>
+                    authorizerCredential,
+                  ("hostUri" Core..=) Core.<$> hostUri,
+                  ("readAuthorizerCredential" Core..=) Core.<$>
+                    readAuthorizerCredential,
+                  ("serverVersion" Core..=) Core.<$> serverVersion,
+                  ("serviceDirectoryConfig" Core..=) Core.<$>
+                    serviceDirectoryConfig,
+                  ("sslCa" Core..=) Core.<$> sslCa,
+                  ("webhookSecretSecretVersion" Core..=) Core.<$>
+                    webhookSecretSecretVersion])
 
-instance Core.ToJSON ArtifactObjects where
-  toJSON ArtifactObjects {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("location" Core..=) Core.<$> location,
-            ("paths" Core..=) Core.<$> paths,
-            ("timing" Core..=) Core.<$> timing
-          ]
-      )
-
--- | An artifact that was uploaded during a build. This is a single record in the artifact manifest JSON file.
---
--- /See:/ 'newArtifactResult' smart constructor.
-data ArtifactResult = ArtifactResult
-  { -- | The file hash of the artifact.
-    fileHash :: (Core.Maybe [FileHashes]),
-    -- | The path of an artifact in a Google Cloud Storage bucket, with the generation number. For example, @gs:\/\/mybucket\/path\/to\/output.jar#generation@.
-    location :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ArtifactResult' with the minimum fields required to make a request.
-newArtifactResult ::
-  ArtifactResult
-newArtifactResult =
-  ArtifactResult {fileHash = Core.Nothing, location = Core.Nothing}
-
-instance Core.FromJSON ArtifactResult where
-  parseJSON =
-    Core.withObject
-      "ArtifactResult"
-      ( \o ->
-          ArtifactResult
-            Core.<$> (o Core..:? "fileHash")
-            Core.<*> (o Core..:? "location")
-      )
-
-instance Core.ToJSON ArtifactResult where
-  toJSON ArtifactResult {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("fileHash" Core..=) Core.<$> fileHash,
-            ("location" Core..=) Core.<$> location
-          ]
-      )
-
--- | Artifacts produced by a build that should be uploaded upon successful completion of all build steps.
---
--- /See:/ 'newArtifacts' smart constructor.
-data Artifacts = Artifacts
-  { -- | A list of images to be pushed upon the successful completion of all build steps. The images will be pushed using the builder service account\'s credentials. The digests of the pushed images will be stored in the Build resource\'s results field. If any of the images fail to be pushed, the build is marked FAILURE.
-    images :: (Core.Maybe [Core.Text]),
-    -- | A list of Maven artifacts to be uploaded to Artifact Registry upon successful completion of all build steps. Artifacts in the workspace matching specified paths globs will be uploaded to the specified Artifact Registry repository using the builder service account\'s credentials. If any artifacts fail to be pushed, the build is marked FAILURE.
-    mavenArtifacts :: (Core.Maybe [MavenArtifact]),
-    -- | A list of objects to be uploaded to Cloud Storage upon successful completion of all build steps. Files in the workspace matching specified paths globs will be uploaded to the specified Cloud Storage location using the builder service account\'s credentials. The location and generation of the uploaded objects will be stored in the Build resource\'s results field. If any objects fail to be pushed, the build is marked FAILURE.
-    objects :: (Core.Maybe ArtifactObjects),
-    -- | A list of Python packages to be uploaded to Artifact Registry upon successful completion of all build steps. The build service account credentials will be used to perform the upload. If any objects fail to be pushed, the build is marked FAILURE.
-    pythonPackages :: (Core.Maybe [PythonPackage])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'Artifacts' with the minimum fields required to make a request.
-newArtifacts ::
-  Artifacts
-newArtifacts =
-  Artifacts
-    { images = Core.Nothing,
-      mavenArtifacts = Core.Nothing,
-      objects = Core.Nothing,
-      pythonPackages = Core.Nothing
-    }
-
-instance Core.FromJSON Artifacts where
-  parseJSON =
-    Core.withObject
-      "Artifacts"
-      ( \o ->
-          Artifacts
-            Core.<$> (o Core..:? "images")
-            Core.<*> (o Core..:? "mavenArtifacts")
-            Core.<*> (o Core..:? "objects")
-            Core.<*> (o Core..:? "pythonPackages")
-      )
-
-instance Core.ToJSON Artifacts where
-  toJSON Artifacts {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("images" Core..=) Core.<$> images,
-            ("mavenArtifacts" Core..=) Core.<$> mavenArtifacts,
-            ("objects" Core..=) Core.<$> objects,
-            ("pythonPackages" Core..=) Core.<$> pythonPackages
-          ]
-      )
-
--- | RPC request object accepted by BatchCreateBitbucketServerConnectedRepositories RPC method.
---
--- /See:/ 'newBatchCreateBitbucketServerConnectedRepositoriesRequest' smart constructor.
-newtype BatchCreateBitbucketServerConnectedRepositoriesRequest = BatchCreateBitbucketServerConnectedRepositoriesRequest
-  { -- | Required. Requests to connect Bitbucket Server repositories.
-    requests :: (Core.Maybe [CreateBitbucketServerConnectedRepositoryRequest])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'BatchCreateBitbucketServerConnectedRepositoriesRequest' with the minimum fields required to make a request.
-newBatchCreateBitbucketServerConnectedRepositoriesRequest ::
-  BatchCreateBitbucketServerConnectedRepositoriesRequest
-newBatchCreateBitbucketServerConnectedRepositoriesRequest =
-  BatchCreateBitbucketServerConnectedRepositoriesRequest
-    { requests = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    BatchCreateBitbucketServerConnectedRepositoriesRequest
-  where
-  parseJSON =
-    Core.withObject
-      "BatchCreateBitbucketServerConnectedRepositoriesRequest"
-      ( \o ->
-          BatchCreateBitbucketServerConnectedRepositoriesRequest
-            Core.<$> (o Core..:? "requests")
-      )
-
-instance
-  Core.ToJSON
-    BatchCreateBitbucketServerConnectedRepositoriesRequest
-  where
-  toJSON
-    BatchCreateBitbucketServerConnectedRepositoriesRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [("requests" Core..=) Core.<$> requests]
-        )
-
--- | Response of BatchCreateBitbucketServerConnectedRepositories RPC method including all successfully connected Bitbucket Server repositories.
---
--- /See:/ 'newBatchCreateBitbucketServerConnectedRepositoriesResponse' smart constructor.
-newtype BatchCreateBitbucketServerConnectedRepositoriesResponse = BatchCreateBitbucketServerConnectedRepositoriesResponse
-  { -- | The connected Bitbucket Server repositories.
-    bitbucketServerConnectedRepositories :: (Core.Maybe [BitbucketServerConnectedRepository])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'BatchCreateBitbucketServerConnectedRepositoriesResponse' with the minimum fields required to make a request.
-newBatchCreateBitbucketServerConnectedRepositoriesResponse ::
-  BatchCreateBitbucketServerConnectedRepositoriesResponse
-newBatchCreateBitbucketServerConnectedRepositoriesResponse =
-  BatchCreateBitbucketServerConnectedRepositoriesResponse
-    { bitbucketServerConnectedRepositories = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    BatchCreateBitbucketServerConnectedRepositoriesResponse
-  where
-  parseJSON =
-    Core.withObject
-      "BatchCreateBitbucketServerConnectedRepositoriesResponse"
-      ( \o ->
-          BatchCreateBitbucketServerConnectedRepositoriesResponse
-            Core.<$> (o Core..:? "bitbucketServerConnectedRepositories")
-      )
-
-instance
-  Core.ToJSON
-    BatchCreateBitbucketServerConnectedRepositoriesResponse
-  where
-  toJSON
-    BatchCreateBitbucketServerConnectedRepositoriesResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("bitbucketServerConnectedRepositories" Core..=)
-                Core.<$> bitbucketServerConnectedRepositories
-            ]
-        )
-
--- | Metadata for @BatchCreateBitbucketServerConnectedRepositories@ operation.
---
--- /See:/ 'newBatchCreateBitbucketServerConnectedRepositoriesResponseMetadata' smart constructor.
-data BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata = BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata
-  { -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime),
-    -- | The name of the @BitbucketServerConfig@ that added connected repositories. Format: @projects\/{project}\/locations\/{location}\/bitbucketServerConfigs\/{config}@
-    config :: (Core.Maybe Core.Text),
-    -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata' with the minimum fields required to make a request.
-newBatchCreateBitbucketServerConnectedRepositoriesResponseMetadata ::
-  BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata
-newBatchCreateBitbucketServerConnectedRepositoriesResponseMetadata =
-  BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata
-    { completeTime = Core.Nothing,
-      config = Core.Nothing,
-      createTime = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata
-  where
-  parseJSON =
-    Core.withObject
-      "BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata"
-      ( \o ->
-          BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata
-            Core.<$> (o Core..:? "completeTime")
-              Core.<*> (o Core..:? "config")
-              Core.<*> (o Core..:? "createTime")
-      )
-
-instance
-  Core.ToJSON
-    BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata
-  where
-  toJSON
-    BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("completeTime" Core..=) Core.<$> completeTime,
-              ("config" Core..=) Core.<$> config,
-              ("createTime" Core..=) Core.<$> createTime
-            ]
-        )
-
--- | RPC request object accepted by BatchCreateGitLabConnectedRepositories RPC method.
---
--- /See:/ 'newBatchCreateGitLabConnectedRepositoriesRequest' smart constructor.
-newtype BatchCreateGitLabConnectedRepositoriesRequest = BatchCreateGitLabConnectedRepositoriesRequest
-  { -- | Required. Requests to connect GitLab repositories.
-    requests :: (Core.Maybe [CreateGitLabConnectedRepositoryRequest])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'BatchCreateGitLabConnectedRepositoriesRequest' with the minimum fields required to make a request.
-newBatchCreateGitLabConnectedRepositoriesRequest ::
-  BatchCreateGitLabConnectedRepositoriesRequest
-newBatchCreateGitLabConnectedRepositoriesRequest =
-  BatchCreateGitLabConnectedRepositoriesRequest {requests = Core.Nothing}
-
-instance
-  Core.FromJSON
-    BatchCreateGitLabConnectedRepositoriesRequest
-  where
-  parseJSON =
-    Core.withObject
-      "BatchCreateGitLabConnectedRepositoriesRequest"
-      ( \o ->
-          BatchCreateGitLabConnectedRepositoriesRequest
-            Core.<$> (o Core..:? "requests")
-      )
-
-instance
-  Core.ToJSON
-    BatchCreateGitLabConnectedRepositoriesRequest
-  where
-  toJSON
-    BatchCreateGitLabConnectedRepositoriesRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [("requests" Core..=) Core.<$> requests]
-        )
-
--- | Response of BatchCreateGitLabConnectedRepositories RPC method.
---
--- /See:/ 'newBatchCreateGitLabConnectedRepositoriesResponse' smart constructor.
-newtype BatchCreateGitLabConnectedRepositoriesResponse = BatchCreateGitLabConnectedRepositoriesResponse
-  { -- | The GitLab connected repository requests\' responses.
-    gitlabConnectedRepositories :: (Core.Maybe [GitLabConnectedRepository])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'BatchCreateGitLabConnectedRepositoriesResponse' with the minimum fields required to make a request.
-newBatchCreateGitLabConnectedRepositoriesResponse ::
-  BatchCreateGitLabConnectedRepositoriesResponse
-newBatchCreateGitLabConnectedRepositoriesResponse =
-  BatchCreateGitLabConnectedRepositoriesResponse
-    { gitlabConnectedRepositories = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    BatchCreateGitLabConnectedRepositoriesResponse
-  where
-  parseJSON =
-    Core.withObject
-      "BatchCreateGitLabConnectedRepositoriesResponse"
-      ( \o ->
-          BatchCreateGitLabConnectedRepositoriesResponse
-            Core.<$> (o Core..:? "gitlabConnectedRepositories")
-      )
-
-instance
-  Core.ToJSON
-    BatchCreateGitLabConnectedRepositoriesResponse
-  where
-  toJSON
-    BatchCreateGitLabConnectedRepositoriesResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("gitlabConnectedRepositories" Core..=)
-                Core.<$> gitlabConnectedRepositories
-            ]
-        )
-
--- | Metadata for @BatchCreateGitLabConnectedRepositories@ operation.
---
--- /See:/ 'newBatchCreateGitLabConnectedRepositoriesResponseMetadata' smart constructor.
-data BatchCreateGitLabConnectedRepositoriesResponseMetadata = BatchCreateGitLabConnectedRepositoriesResponseMetadata
-  { -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime),
-    -- | The name of the @GitLabConfig@ that added connected repositories. Format: @projects\/{project}\/locations\/{location}\/gitLabConfigs\/{config}@
-    config :: (Core.Maybe Core.Text),
-    -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'BatchCreateGitLabConnectedRepositoriesResponseMetadata' with the minimum fields required to make a request.
-newBatchCreateGitLabConnectedRepositoriesResponseMetadata ::
-  BatchCreateGitLabConnectedRepositoriesResponseMetadata
-newBatchCreateGitLabConnectedRepositoriesResponseMetadata =
-  BatchCreateGitLabConnectedRepositoriesResponseMetadata
-    { completeTime = Core.Nothing,
-      config = Core.Nothing,
-      createTime = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    BatchCreateGitLabConnectedRepositoriesResponseMetadata
-  where
-  parseJSON =
-    Core.withObject
-      "BatchCreateGitLabConnectedRepositoriesResponseMetadata"
-      ( \o ->
-          BatchCreateGitLabConnectedRepositoriesResponseMetadata
-            Core.<$> (o Core..:? "completeTime")
-              Core.<*> (o Core..:? "config")
-              Core.<*> (o Core..:? "createTime")
-      )
-
-instance
-  Core.ToJSON
-    BatchCreateGitLabConnectedRepositoriesResponseMetadata
-  where
-  toJSON
-    BatchCreateGitLabConnectedRepositoriesResponseMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("completeTime" Core..=) Core.<$> completeTime,
-              ("config" Core..=) Core.<$> config,
-              ("createTime" Core..=) Core.<$> createTime
-            ]
-        )
-
--- | BitbucketServerConfig represents the configuration for a Bitbucket Server.
---
--- /See:/ 'newBitbucketServerConfig' smart constructor.
-data BitbucketServerConfig = BitbucketServerConfig
-  { -- | Required. Immutable. API Key that will be attached to webhook. Once this field has been set, it cannot be changed. If you need to change it, please create another BitbucketServerConfig.
-    apiKey :: (Core.Maybe Core.Text),
-    -- | Output only. Connected Bitbucket Server repositories for this config.
-    connectedRepositories :: (Core.Maybe [BitbucketServerRepositoryId]),
-    -- | Time when the config was created.
-    createTime :: (Core.Maybe Core.DateTime),
-    -- | Required. Immutable. The URI of the Bitbucket Server host. Once this field has been set, it cannot be changed. If you need to change it, please create another BitbucketServerConfig.
-    hostUri :: (Core.Maybe Core.Text),
-    -- | The resource name for the config.
-    name :: (Core.Maybe Core.Text),
-    -- | Optional. The network to be used when reaching out to the Bitbucket Server instance. The VPC network must be enabled for private service connection. This should be set if the Bitbucket Server instance is hosted on-premises and not reachable by public internet. If this field is left empty, no network peering will occur and calls to the Bitbucket Server instance will be made over the public internet. Must be in the format @projects\/{project}\/global\/networks\/{network}@, where {project} is a project number or id and {network} is the name of a VPC network in the project.
-    peeredNetwork :: (Core.Maybe Core.Text),
-    -- | Required. Secret Manager secrets needed by the config.
-    secrets :: (Core.Maybe BitbucketServerSecrets),
-    -- | Optional. SSL certificate to use for requests to Bitbucket Server. The format should be PEM format but the extension can be one of .pem, .cer, or .crt.
-    sslCa :: (Core.Maybe Core.Text),
-    -- | Username of the account Cloud Build will use on Bitbucket Server.
-    username :: (Core.Maybe Core.Text),
-    -- | Output only. UUID included in webhook requests. The UUID is used to look up the corresponding config.
-    webhookKey :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'BitbucketServerConfig' with the minimum fields required to make a request.
-newBitbucketServerConfig ::
-  BitbucketServerConfig
-newBitbucketServerConfig =
-  BitbucketServerConfig
-    { apiKey = Core.Nothing,
-      connectedRepositories = Core.Nothing,
-      createTime = Core.Nothing,
-      hostUri = Core.Nothing,
-      name = Core.Nothing,
-      peeredNetwork = Core.Nothing,
-      secrets = Core.Nothing,
-      sslCa = Core.Nothing,
-      username = Core.Nothing,
-      webhookKey = Core.Nothing
-    }
-
-instance Core.FromJSON BitbucketServerConfig where
-  parseJSON =
-    Core.withObject
-      "BitbucketServerConfig"
-      ( \o ->
-          BitbucketServerConfig
-            Core.<$> (o Core..:? "apiKey")
-            Core.<*> (o Core..:? "connectedRepositories")
-            Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "hostUri")
-            Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "peeredNetwork")
-            Core.<*> (o Core..:? "secrets")
-            Core.<*> (o Core..:? "sslCa")
-            Core.<*> (o Core..:? "username")
-            Core.<*> (o Core..:? "webhookKey")
-      )
-
-instance Core.ToJSON BitbucketServerConfig where
-  toJSON BitbucketServerConfig {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("apiKey" Core..=) Core.<$> apiKey,
-            ("connectedRepositories" Core..=)
-              Core.<$> connectedRepositories,
-            ("createTime" Core..=) Core.<$> createTime,
-            ("hostUri" Core..=) Core.<$> hostUri,
-            ("name" Core..=) Core.<$> name,
-            ("peeredNetwork" Core..=) Core.<$> peeredNetwork,
-            ("secrets" Core..=) Core.<$> secrets,
-            ("sslCa" Core..=) Core.<$> sslCa,
-            ("username" Core..=) Core.<$> username,
-            ("webhookKey" Core..=) Core.<$> webhookKey
-          ]
-      )
-
--- | \/ BitbucketServerConnectedRepository represents a connected Bitbucket Server \/ repository.
---
--- /See:/ 'newBitbucketServerConnectedRepository' smart constructor.
-data BitbucketServerConnectedRepository = BitbucketServerConnectedRepository
-  { -- | The name of the @BitbucketServerConfig@ that added connected repository. Format: @projects\/{project}\/locations\/{location}\/bitbucketServerConfigs\/{config}@
-    parent :: (Core.Maybe Core.Text),
-    -- | The Bitbucket Server repositories to connect.
-    repo :: (Core.Maybe BitbucketServerRepositoryId),
-    -- | Output only. The status of the repo connection request.
-    status :: (Core.Maybe Status)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'BitbucketServerConnectedRepository' with the minimum fields required to make a request.
-newBitbucketServerConnectedRepository ::
-  BitbucketServerConnectedRepository
-newBitbucketServerConnectedRepository =
-  BitbucketServerConnectedRepository
-    { parent = Core.Nothing,
-      repo = Core.Nothing,
-      status = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    BitbucketServerConnectedRepository
-  where
-  parseJSON =
-    Core.withObject
-      "BitbucketServerConnectedRepository"
-      ( \o ->
-          BitbucketServerConnectedRepository
-            Core.<$> (o Core..:? "parent")
-            Core.<*> (o Core..:? "repo")
-            Core.<*> (o Core..:? "status")
-      )
-
-instance
-  Core.ToJSON
-    BitbucketServerConnectedRepository
-  where
-  toJSON BitbucketServerConnectedRepository {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("parent" Core..=) Core.<$> parent,
-            ("repo" Core..=) Core.<$> repo,
-            ("status" Core..=) Core.<$> status
-          ]
-      )
-
--- | BitbucketServerRepository represents a repository hosted on a Bitbucket Server.
---
--- /See:/ 'newBitbucketServerRepository' smart constructor.
-data BitbucketServerRepository = BitbucketServerRepository
-  { -- | Link to the browse repo page on the Bitbucket Server instance.
-    browseUri :: (Core.Maybe Core.Text),
-    -- | Description of the repository.
-    description :: (Core.Maybe Core.Text),
-    -- | Display name of the repository.
-    displayName :: (Core.Maybe Core.Text),
-    -- | The resource name of the repository.
-    name :: (Core.Maybe Core.Text),
-    -- | Identifier for a repository hosted on a Bitbucket Server.
-    repoId :: (Core.Maybe BitbucketServerRepositoryId)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'BitbucketServerRepository' with the minimum fields required to make a request.
-newBitbucketServerRepository ::
-  BitbucketServerRepository
-newBitbucketServerRepository =
-  BitbucketServerRepository
-    { browseUri = Core.Nothing,
-      description = Core.Nothing,
-      displayName = Core.Nothing,
-      name = Core.Nothing,
-      repoId = Core.Nothing
-    }
-
-instance Core.FromJSON BitbucketServerRepository where
-  parseJSON =
-    Core.withObject
-      "BitbucketServerRepository"
-      ( \o ->
-          BitbucketServerRepository
-            Core.<$> (o Core..:? "browseUri")
-            Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "displayName")
-            Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "repoId")
-      )
-
-instance Core.ToJSON BitbucketServerRepository where
-  toJSON BitbucketServerRepository {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("browseUri" Core..=) Core.<$> browseUri,
-            ("description" Core..=) Core.<$> description,
-            ("displayName" Core..=) Core.<$> displayName,
-            ("name" Core..=) Core.<$> name,
-            ("repoId" Core..=) Core.<$> repoId
-          ]
-      )
-
--- | BitbucketServerRepositoryId identifies a specific repository hosted on a Bitbucket Server.
---
--- /See:/ 'newBitbucketServerRepositoryId' smart constructor.
-data BitbucketServerRepositoryId = BitbucketServerRepositoryId
-  { -- | Required. Identifier for the project storing the repository.
-    projectKey :: (Core.Maybe Core.Text),
-    -- | Required. Identifier for the repository.
-    repoSlug :: (Core.Maybe Core.Text),
-    -- | Output only. The ID of the webhook that was created for receiving events from this repo. We only create and manage a single webhook for each repo.
-    webhookId :: (Core.Maybe Core.Int32)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'BitbucketServerRepositoryId' with the minimum fields required to make a request.
-newBitbucketServerRepositoryId ::
-  BitbucketServerRepositoryId
-newBitbucketServerRepositoryId =
-  BitbucketServerRepositoryId
-    { projectKey = Core.Nothing,
-      repoSlug = Core.Nothing,
-      webhookId = Core.Nothing
-    }
-
-instance Core.FromJSON BitbucketServerRepositoryId where
-  parseJSON =
-    Core.withObject
-      "BitbucketServerRepositoryId"
-      ( \o ->
-          BitbucketServerRepositoryId
-            Core.<$> (o Core..:? "projectKey")
-            Core.<*> (o Core..:? "repoSlug")
-            Core.<*> (o Core..:? "webhookId")
-      )
-
-instance Core.ToJSON BitbucketServerRepositoryId where
-  toJSON BitbucketServerRepositoryId {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("projectKey" Core..=) Core.<$> projectKey,
-            ("repoSlug" Core..=) Core.<$> repoSlug,
-            ("webhookId" Core..=) Core.<$> webhookId
-          ]
-      )
-
--- | BitbucketServerSecrets represents the secrets in Secret Manager for a Bitbucket Server.
---
--- /See:/ 'newBitbucketServerSecrets' smart constructor.
-data BitbucketServerSecrets = BitbucketServerSecrets
-  { -- | Required. The resource name for the admin access token\'s secret version.
-    adminAccessTokenVersionName :: (Core.Maybe Core.Text),
-    -- | Required. The resource name for the read access token\'s secret version.
-    readAccessTokenVersionName :: (Core.Maybe Core.Text),
-    -- | Required. Immutable. The resource name for the webhook secret\'s secret version. Once this field has been set, it cannot be changed. If you need to change it, please create another BitbucketServerConfig.
-    webhookSecretVersionName :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'BitbucketServerSecrets' with the minimum fields required to make a request.
-newBitbucketServerSecrets ::
-  BitbucketServerSecrets
-newBitbucketServerSecrets =
-  BitbucketServerSecrets
-    { adminAccessTokenVersionName = Core.Nothing,
-      readAccessTokenVersionName = Core.Nothing,
-      webhookSecretVersionName = Core.Nothing
-    }
-
-instance Core.FromJSON BitbucketServerSecrets where
-  parseJSON =
-    Core.withObject
-      "BitbucketServerSecrets"
-      ( \o ->
-          BitbucketServerSecrets
-            Core.<$> (o Core..:? "adminAccessTokenVersionName")
-            Core.<*> (o Core..:? "readAccessTokenVersionName")
-            Core.<*> (o Core..:? "webhookSecretVersionName")
-      )
-
-instance Core.ToJSON BitbucketServerSecrets where
-  toJSON BitbucketServerSecrets {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("adminAccessTokenVersionName" Core..=)
-              Core.<$> adminAccessTokenVersionName,
-            ("readAccessTokenVersionName" Core..=)
-              Core.<$> readAccessTokenVersionName,
-            ("webhookSecretVersionName" Core..=)
-              Core.<$> webhookSecretVersionName
-          ]
-      )
-
--- | BitbucketServerTriggerConfig describes the configuration of a trigger that creates a build whenever a Bitbucket Server event is received.
---
--- /See:/ 'newBitbucketServerTriggerConfig' smart constructor.
-data BitbucketServerTriggerConfig = BitbucketServerTriggerConfig
-  { -- | Output only. The BitbucketServerConfig specified in the bitbucket/server/config_resource field.
-    bitbucketServerConfig :: (Core.Maybe BitbucketServerConfig),
-    -- | Required. The Bitbucket server config resource that this trigger config maps to.
-    bitbucketServerConfigResource :: (Core.Maybe Core.Text),
-    -- | Required. Key of the project that the repo is in. For example: The key for https:\/\/mybitbucket.server\/projects\/TEST\/repos\/test-repo is \"TEST\".
-    projectKey :: (Core.Maybe Core.Text),
-    -- | Filter to match changes in pull requests.
-    pullRequest :: (Core.Maybe PullRequestFilter),
-    -- | Filter to match changes in refs like branches, tags.
-    push :: (Core.Maybe PushFilter),
-    -- | Required. Slug of the repository. A repository slug is a URL-friendly version of a repository name, automatically generated by Bitbucket for use in the URL. For example, if the repository name is \'test repo\', in the URL it would become \'test-repo\' as in https:\/\/mybitbucket.server\/projects\/TEST\/repos\/test-repo.
-    repoSlug :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'BitbucketServerTriggerConfig' with the minimum fields required to make a request.
-newBitbucketServerTriggerConfig ::
-  BitbucketServerTriggerConfig
-newBitbucketServerTriggerConfig =
-  BitbucketServerTriggerConfig
-    { bitbucketServerConfig = Core.Nothing,
-      bitbucketServerConfigResource = Core.Nothing,
-      projectKey = Core.Nothing,
-      pullRequest = Core.Nothing,
-      push = Core.Nothing,
-      repoSlug = Core.Nothing
-    }
-
-instance Core.FromJSON BitbucketServerTriggerConfig where
-  parseJSON =
-    Core.withObject
-      "BitbucketServerTriggerConfig"
-      ( \o ->
-          BitbucketServerTriggerConfig
-            Core.<$> (o Core..:? "bitbucketServerConfig")
-            Core.<*> (o Core..:? "bitbucketServerConfigResource")
-            Core.<*> (o Core..:? "projectKey")
-            Core.<*> (o Core..:? "pullRequest")
-            Core.<*> (o Core..:? "push")
-            Core.<*> (o Core..:? "repoSlug")
-      )
-
-instance Core.ToJSON BitbucketServerTriggerConfig where
-  toJSON BitbucketServerTriggerConfig {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("bitbucketServerConfig" Core..=)
-              Core.<$> bitbucketServerConfig,
-            ("bitbucketServerConfigResource" Core..=)
-              Core.<$> bitbucketServerConfigResource,
-            ("projectKey" Core..=) Core.<$> projectKey,
-            ("pullRequest" Core..=) Core.<$> pullRequest,
-            ("push" Core..=) Core.<$> push,
-            ("repoSlug" Core..=) Core.<$> repoSlug
-          ]
-      )
-
--- | A build resource in the Cloud Build API. At a high level, a @Build@ describes where to find source code, how to build it (for example, the builder image to run on the source), and where to store the built artifacts. Fields can include the following variables, which will be expanded when the build is created: - $PROJECT/ID: the project ID of the build. - $PROJECT/NUMBER: the project number of the build. - $LOCATION: the location\/region of the build. - $BUILD/ID: the autogenerated ID of the build. - $REPO/NAME: the source repository name specified by RepoSource. - $BRANCH/NAME: the branch name specified by RepoSource. - $TAG/NAME: the tag name specified by RepoSource. - $REVISION/ID or $COMMIT/SHA: the commit SHA specified by RepoSource or resolved from the specified branch or tag. - $SHORT/SHA: first 7 characters of $REVISION/ID or $COMMIT_SHA.
---
--- /See:/ 'newBuild' smart constructor.
-data Build = Build
-  { -- | Output only. Describes this build\'s approval configuration, status, and result.
-    approval :: (Core.Maybe BuildApproval),
-    -- | Artifacts produced by the build that should be uploaded upon successful completion of all build steps.
-    artifacts :: (Core.Maybe Artifacts),
-    -- | Secrets and secret environment variables.
-    availableSecrets :: (Core.Maybe Secrets),
-    -- | Output only. The ID of the @BuildTrigger@ that triggered this build, if it was triggered automatically.
-    buildTriggerId :: (Core.Maybe Core.Text),
-    -- | Output only. Time at which the request to create the build was received.
-    createTime :: (Core.Maybe Core.DateTime),
-    -- | Output only. Contains information about the build when status=FAILURE.
-    failureInfo :: (Core.Maybe FailureInfo),
-    -- | Output only. Time at which execution of the build was finished. The difference between finish/time and start/time is the duration of the build\'s execution.
-    finishTime :: (Core.Maybe Core.DateTime),
-    -- | Output only. Unique identifier of the build.
-    id :: (Core.Maybe Core.Text),
-    -- | A list of images to be pushed upon the successful completion of all build steps. The images are pushed using the builder service account\'s credentials. The digests of the pushed images will be stored in the @Build@ resource\'s results field. If any of the images fail to be pushed, the build status is marked @FAILURE@.
-    images :: (Core.Maybe [Core.Text]),
-    -- | Output only. URL to logs for this build in Google Cloud Console.
-    logUrl :: (Core.Maybe Core.Text),
-    -- | Google Cloud Storage bucket where logs should be written (see <https://cloud.google.com/storage/docs/bucket-naming#requirements Bucket Name Requirements>). Logs file names will be of the format @${logs_bucket}\/log-${build_id}.txt@.
-    logsBucket :: (Core.Maybe Core.Text),
-    -- | Output only. The \'Build\' name with format: @projects\/{project}\/locations\/{location}\/builds\/{build}@, where {build} is a unique identifier generated by the service.
-    name :: (Core.Maybe Core.Text),
-    -- | Special options for this build.
-    options :: (Core.Maybe BuildOptions),
-    -- | Output only. ID of the project.
-    projectId :: (Core.Maybe Core.Text),
-    -- | TTL in queue for this build. If provided and the build is enqueued longer than this value, the build will expire and the build status will be @EXPIRED@. The TTL starts ticking from create_time.
-    queueTtl :: (Core.Maybe Core.Duration),
-    -- | Output only. Results of the build.
-    results :: (Core.Maybe Results),
-    -- | Secrets to decrypt using Cloud Key Management Service. Note: Secret Manager is the recommended technique for managing sensitive data with Cloud Build. Use @available_secrets@ to configure builds to access secrets from Secret Manager. For instructions, see: https:\/\/cloud.google.com\/cloud-build\/docs\/securing-builds\/use-secrets
-    secrets :: (Core.Maybe [Secret]),
-    -- | IAM service account whose credentials will be used at build runtime. Must be of the format @projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}@. ACCOUNT can be email address or uniqueId of the service account.
-    serviceAccount :: (Core.Maybe Core.Text),
-    -- | The location of the source files to build.
-    source :: (Core.Maybe Source),
-    -- | Output only. A permanent fixed identifier for source.
-    sourceProvenance :: (Core.Maybe SourceProvenance),
-    -- | Output only. Time at which execution of the build was started.
-    startTime :: (Core.Maybe Core.DateTime),
-    -- | Output only. Status of the build.
-    status :: (Core.Maybe Build_Status),
-    -- | Output only. Customer-readable message about the current status.
-    statusDetail :: (Core.Maybe Core.Text),
-    -- | Required. The operations to be performed on the workspace.
-    steps :: (Core.Maybe [BuildStep]),
-    -- | Substitutions data for @Build@ resource.
-    substitutions :: (Core.Maybe Build_Substitutions),
-    -- | Tags for annotation of a @Build@. These are not docker tags.
-    tags :: (Core.Maybe [Core.Text]),
-    -- | Amount of time that this build should be allowed to run, to second granularity. If this amount of time elapses, work on the build will cease and the build status will be @TIMEOUT@. @timeout@ starts ticking from @startTime@. Default time is 60 minutes.
-    timeout :: (Core.Maybe Core.Duration),
-    -- | Output only. Stores timing information for phases of the build. Valid keys are: * BUILD: time to execute all build steps. * PUSH: time to push all artifacts including docker images and non docker artifacts. * FETCHSOURCE: time to fetch source. * SETUPBUILD: time to set up build. If the build does not specify source or images, these keys will not be included.
-    timing :: (Core.Maybe Build_Timing),
-    -- | Output only. Non-fatal problems encountered during the execution of the build.
-    warnings :: (Core.Maybe [Warning])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'Build' with the minimum fields required to make a request.
-newBuild ::
-  Build
-newBuild =
-  Build
-    { approval = Core.Nothing,
-      artifacts = Core.Nothing,
-      availableSecrets = Core.Nothing,
-      buildTriggerId = Core.Nothing,
-      createTime = Core.Nothing,
-      failureInfo = Core.Nothing,
-      finishTime = Core.Nothing,
-      id = Core.Nothing,
-      images = Core.Nothing,
-      logUrl = Core.Nothing,
-      logsBucket = Core.Nothing,
-      name = Core.Nothing,
-      options = Core.Nothing,
-      projectId = Core.Nothing,
-      queueTtl = Core.Nothing,
-      results = Core.Nothing,
-      secrets = Core.Nothing,
-      serviceAccount = Core.Nothing,
-      source = Core.Nothing,
-      sourceProvenance = Core.Nothing,
-      startTime = Core.Nothing,
-      status = Core.Nothing,
-      statusDetail = Core.Nothing,
-      steps = Core.Nothing,
-      substitutions = Core.Nothing,
-      tags = Core.Nothing,
-      timeout = Core.Nothing,
-      timing = Core.Nothing,
-      warnings = Core.Nothing
-    }
-
-instance Core.FromJSON Build where
-  parseJSON =
-    Core.withObject
-      "Build"
-      ( \o ->
-          Build
-            Core.<$> (o Core..:? "approval")
-            Core.<*> (o Core..:? "artifacts")
-            Core.<*> (o Core..:? "availableSecrets")
-            Core.<*> (o Core..:? "buildTriggerId")
-            Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "failureInfo")
-            Core.<*> (o Core..:? "finishTime")
-            Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "images")
-            Core.<*> (o Core..:? "logUrl")
-            Core.<*> (o Core..:? "logsBucket")
-            Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "options")
-            Core.<*> (o Core..:? "projectId")
-            Core.<*> (o Core..:? "queueTtl")
-            Core.<*> (o Core..:? "results")
-            Core.<*> (o Core..:? "secrets")
-            Core.<*> (o Core..:? "serviceAccount")
-            Core.<*> (o Core..:? "source")
-            Core.<*> (o Core..:? "sourceProvenance")
-            Core.<*> (o Core..:? "startTime")
-            Core.<*> (o Core..:? "status")
-            Core.<*> (o Core..:? "statusDetail")
-            Core.<*> (o Core..:? "steps")
-            Core.<*> (o Core..:? "substitutions")
-            Core.<*> (o Core..:? "tags")
-            Core.<*> (o Core..:? "timeout")
-            Core.<*> (o Core..:? "timing")
-            Core.<*> (o Core..:? "warnings")
-      )
-
-instance Core.ToJSON Build where
-  toJSON Build {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("approval" Core..=) Core.<$> approval,
-            ("artifacts" Core..=) Core.<$> artifacts,
-            ("availableSecrets" Core..=)
-              Core.<$> availableSecrets,
-            ("buildTriggerId" Core..=) Core.<$> buildTriggerId,
-            ("createTime" Core..=) Core.<$> createTime,
-            ("failureInfo" Core..=) Core.<$> failureInfo,
-            ("finishTime" Core..=) Core.<$> finishTime,
-            ("id" Core..=) Core.<$> id,
-            ("images" Core..=) Core.<$> images,
-            ("logUrl" Core..=) Core.<$> logUrl,
-            ("logsBucket" Core..=) Core.<$> logsBucket,
-            ("name" Core..=) Core.<$> name,
-            ("options" Core..=) Core.<$> options,
-            ("projectId" Core..=) Core.<$> projectId,
-            ("queueTtl" Core..=) Core.<$> queueTtl,
-            ("results" Core..=) Core.<$> results,
-            ("secrets" Core..=) Core.<$> secrets,
-            ("serviceAccount" Core..=) Core.<$> serviceAccount,
-            ("source" Core..=) Core.<$> source,
-            ("sourceProvenance" Core..=)
-              Core.<$> sourceProvenance,
-            ("startTime" Core..=) Core.<$> startTime,
-            ("status" Core..=) Core.<$> status,
-            ("statusDetail" Core..=) Core.<$> statusDetail,
-            ("steps" Core..=) Core.<$> steps,
-            ("substitutions" Core..=) Core.<$> substitutions,
-            ("tags" Core..=) Core.<$> tags,
-            ("timeout" Core..=) Core.<$> timeout,
-            ("timing" Core..=) Core.<$> timing,
-            ("warnings" Core..=) Core.<$> warnings
-          ]
-      )
-
--- | Substitutions data for @Build@ resource.
---
--- /See:/ 'newBuild_Substitutions' smart constructor.
-newtype Build_Substitutions = Build_Substitutions
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'Build_Substitutions' with the minimum fields required to make a request.
-newBuild_Substitutions ::
-  -- |  See 'additional'.
-  Core.HashMap Core.Text Core.Text ->
-  Build_Substitutions
-newBuild_Substitutions additional =
-  Build_Substitutions {additional = additional}
-
-instance Core.FromJSON Build_Substitutions where
-  parseJSON =
-    Core.withObject
-      "Build_Substitutions"
-      ( \o ->
-          Build_Substitutions
-            Core.<$> (Core.parseJSONObject o)
-      )
-
-instance Core.ToJSON Build_Substitutions where
-  toJSON Build_Substitutions {..} =
-    Core.toJSON additional
-
--- | Output only. Stores timing information for phases of the build. Valid keys are: * BUILD: time to execute all build steps. * PUSH: time to push all artifacts including docker images and non docker artifacts. * FETCHSOURCE: time to fetch source. * SETUPBUILD: time to set up build. If the build does not specify source or images, these keys will not be included.
---
--- /See:/ 'newBuild_Timing' smart constructor.
-newtype Build_Timing = Build_Timing
-  { -- |
-    additional :: (Core.HashMap Core.Text TimeSpan)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'Build_Timing' with the minimum fields required to make a request.
-newBuild_Timing ::
-  -- |  See 'additional'.
-  Core.HashMap Core.Text TimeSpan ->
-  Build_Timing
-newBuild_Timing additional = Build_Timing {additional = additional}
-
-instance Core.FromJSON Build_Timing where
-  parseJSON =
-    Core.withObject
-      "Build_Timing"
-      ( \o ->
-          Build_Timing Core.<$> (Core.parseJSONObject o)
-      )
-
-instance Core.ToJSON Build_Timing where
-  toJSON Build_Timing {..} = Core.toJSON additional
-
--- | BuildApproval describes a build\'s approval configuration, state, and result.
---
--- /See:/ 'newBuildApproval' smart constructor.
-data BuildApproval = BuildApproval
-  { -- | Output only. Configuration for manual approval of this build.
-    config :: (Core.Maybe ApprovalConfig),
-    -- | Output only. Result of manual approval for this Build.
-    result :: (Core.Maybe ApprovalResult),
-    -- | Output only. The state of this build\'s approval.
-    state :: (Core.Maybe BuildApproval_State)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'BuildApproval' with the minimum fields required to make a request.
-newBuildApproval ::
-  BuildApproval
-newBuildApproval =
-  BuildApproval
-    { config = Core.Nothing,
-      result = Core.Nothing,
-      state = Core.Nothing
-    }
-
-instance Core.FromJSON BuildApproval where
-  parseJSON =
-    Core.withObject
-      "BuildApproval"
-      ( \o ->
-          BuildApproval
-            Core.<$> (o Core..:? "config")
-            Core.<*> (o Core..:? "result")
-            Core.<*> (o Core..:? "state")
-      )
-
-instance Core.ToJSON BuildApproval where
-  toJSON BuildApproval {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("config" Core..=) Core.<$> config,
-            ("result" Core..=) Core.<$> result,
-            ("state" Core..=) Core.<$> state
-          ]
-      )
-
--- | Metadata for build operations.
---
--- /See:/ 'newBuildOperationMetadata' smart constructor.
-newtype BuildOperationMetadata = BuildOperationMetadata
-  { -- | The build that the operation is tracking.
-    build :: (Core.Maybe Build)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'BuildOperationMetadata' with the minimum fields required to make a request.
-newBuildOperationMetadata ::
-  BuildOperationMetadata
-newBuildOperationMetadata = BuildOperationMetadata {build = Core.Nothing}
-
-instance Core.FromJSON BuildOperationMetadata where
-  parseJSON =
-    Core.withObject
-      "BuildOperationMetadata"
-      ( \o ->
-          BuildOperationMetadata Core.<$> (o Core..:? "build")
-      )
-
-instance Core.ToJSON BuildOperationMetadata where
-  toJSON BuildOperationMetadata {..} =
-    Core.object
-      (Core.catMaybes [("build" Core..=) Core.<$> build])
-
--- | Optional arguments to enable specific features of builds.
---
--- /See:/ 'newBuildOptions' smart constructor.
-data BuildOptions = BuildOptions
-  { -- | Optional. Option to specify how default logs buckets are setup.
-    defaultLogsBucketBehavior :: (Core.Maybe BuildOptions_DefaultLogsBucketBehavior),
-    -- | Requested disk size for the VM that runs the build. Note that this is /NOT/ \"disk free\"; some of the space will be used by the operating system and build utilities. Also note that this is the minimum disk size that will be allocated for the build -- the build may run with a larger disk than requested. At present, the maximum disk size is 2000GB; builds that request more than the maximum are rejected with an error.
-    diskSizeGb :: (Core.Maybe Core.Int64),
-    -- | Option to specify whether or not to apply bash style string operations to the substitutions. NOTE: this is always enabled for triggered builds and cannot be overridden in the build configuration file.
-    dynamicSubstitutions :: (Core.Maybe Core.Bool),
-    -- | A list of global environment variable definitions that will exist for all build steps in this build. If a variable is defined in both globally and in a build step, the variable will use the build step value. The elements are of the form \"KEY=VALUE\" for the environment variable \"KEY\" being given the value \"VALUE\".
-    env :: (Core.Maybe [Core.Text]),
-    -- | Option to define build log streaming behavior to Google Cloud Storage.
-    logStreamingOption :: (Core.Maybe BuildOptions_LogStreamingOption),
-    -- | Option to specify the logging mode, which determines if and where build logs are stored.
-    logging :: (Core.Maybe BuildOptions_Logging),
-    -- | Compute Engine machine type on which to run the build.
-    machineType :: (Core.Maybe BuildOptions_MachineType),
-    -- | Optional. Specification for execution on a @WorkerPool@. See <https://cloud.google.com/build/docs/private-pools/run-builds-in-private-pool running builds in a private pool> for more information.
-    pool :: (Core.Maybe PoolOption),
-    -- | Requested verifiability options.
-    requestedVerifyOption :: (Core.Maybe BuildOptions_RequestedVerifyOption),
-    -- | A list of global environment variables, which are encrypted using a Cloud Key Management Service crypto key. These values must be specified in the build\'s @Secret@. These variables will be available to all build steps in this build.
-    secretEnv :: (Core.Maybe [Core.Text]),
-    -- | Requested hash for SourceProvenance.
-    sourceProvenanceHash :: (Core.Maybe [BuildOptions_SourceProvenanceHashItem]),
-    -- | Option to specify behavior when there is an error in the substitution checks. NOTE: this is always set to ALLOW_LOOSE for triggered builds and cannot be overridden in the build configuration file.
-    substitutionOption :: (Core.Maybe BuildOptions_SubstitutionOption),
-    -- | Global list of volumes to mount for ALL build steps Each volume is created as an empty volume prior to starting the build process. Upon completion of the build, volumes and their contents are discarded. Global volume names and paths cannot conflict with the volumes defined a build step. Using a global volume in a build with only one step is not valid as it is indicative of a build request with an incorrect configuration.
-    volumes :: (Core.Maybe [Volume]),
-    -- | This field deprecated; please use @pool.name@ instead.
-    workerPool :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'BuildOptions' with the minimum fields required to make a request.
-newBuildOptions ::
-  BuildOptions
-newBuildOptions =
-  BuildOptions
-    { defaultLogsBucketBehavior = Core.Nothing,
-      diskSizeGb = Core.Nothing,
-      dynamicSubstitutions = Core.Nothing,
-      env = Core.Nothing,
-      logStreamingOption = Core.Nothing,
-      logging = Core.Nothing,
-      machineType = Core.Nothing,
-      pool = Core.Nothing,
-      requestedVerifyOption = Core.Nothing,
-      secretEnv = Core.Nothing,
-      sourceProvenanceHash = Core.Nothing,
-      substitutionOption = Core.Nothing,
-      volumes = Core.Nothing,
-      workerPool = Core.Nothing
-    }
-
-instance Core.FromJSON BuildOptions where
-  parseJSON =
-    Core.withObject
-      "BuildOptions"
-      ( \o ->
-          BuildOptions
-            Core.<$> (o Core..:? "defaultLogsBucketBehavior")
-            Core.<*> ( o Core..:? "diskSizeGb"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> (o Core..:? "dynamicSubstitutions")
-            Core.<*> (o Core..:? "env")
-            Core.<*> (o Core..:? "logStreamingOption")
-            Core.<*> (o Core..:? "logging")
-            Core.<*> (o Core..:? "machineType")
-            Core.<*> (o Core..:? "pool")
-            Core.<*> (o Core..:? "requestedVerifyOption")
-            Core.<*> (o Core..:? "secretEnv")
-            Core.<*> (o Core..:? "sourceProvenanceHash")
-            Core.<*> (o Core..:? "substitutionOption")
-            Core.<*> (o Core..:? "volumes")
-            Core.<*> (o Core..:? "workerPool")
-      )
-
-instance Core.ToJSON BuildOptions where
-  toJSON BuildOptions {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("defaultLogsBucketBehavior" Core..=)
-              Core.<$> defaultLogsBucketBehavior,
-            ("diskSizeGb" Core..=) Core.. Core.AsText
-              Core.<$> diskSizeGb,
-            ("dynamicSubstitutions" Core..=)
-              Core.<$> dynamicSubstitutions,
-            ("env" Core..=) Core.<$> env,
-            ("logStreamingOption" Core..=)
-              Core.<$> logStreamingOption,
-            ("logging" Core..=) Core.<$> logging,
-            ("machineType" Core..=) Core.<$> machineType,
-            ("pool" Core..=) Core.<$> pool,
-            ("requestedVerifyOption" Core..=)
-              Core.<$> requestedVerifyOption,
-            ("secretEnv" Core..=) Core.<$> secretEnv,
-            ("sourceProvenanceHash" Core..=)
-              Core.<$> sourceProvenanceHash,
-            ("substitutionOption" Core..=)
-              Core.<$> substitutionOption,
-            ("volumes" Core..=) Core.<$> volumes,
-            ("workerPool" Core..=) Core.<$> workerPool
-          ]
-      )
-
--- | A step in the build pipeline.
---
--- /See:/ 'newBuildStep' smart constructor.
-data BuildStep = BuildStep
-  { -- | Allow this build step to fail without failing the entire build if and only if the exit code is one of the specified codes. If allow_failure is also specified, this field will take precedence.
-    allowExitCodes :: (Core.Maybe [Core.Int32]),
-    -- | Allow this build step to fail without failing the entire build. If false, the entire build will fail if this step fails. Otherwise, the build will succeed, but this step will still have a failure status. Error information will be reported in the failure_detail field.
-    allowFailure :: (Core.Maybe Core.Bool),
-    -- | A list of arguments that will be presented to the step when it is started. If the image used to run the step\'s container has an entrypoint, the @args@ are used as arguments to that entrypoint. If the image does not define an entrypoint, the first element in args is used as the entrypoint, and the remainder will be used as arguments.
-    args :: (Core.Maybe [Core.Text]),
-    -- | Working directory to use when running this step\'s container. If this value is a relative path, it is relative to the build\'s working directory. If this value is absolute, it may be outside the build\'s working directory, in which case the contents of the path may not be persisted across build step executions, unless a @volume@ for that path is specified. If the build specifies a @RepoSource@ with @dir@ and a step with a @dir@, which specifies an absolute path, the @RepoSource@ @dir@ is ignored for the step\'s execution.
-    dir :: (Core.Maybe Core.Text),
-    -- | Entrypoint to be used instead of the build step image\'s default entrypoint. If unset, the image\'s default entrypoint is used.
-    entrypoint :: (Core.Maybe Core.Text),
-    -- | A list of environment variable definitions to be used when running a step. The elements are of the form \"KEY=VALUE\" for the environment variable \"KEY\" being given the value \"VALUE\".
-    env :: (Core.Maybe [Core.Text]),
-    -- | Output only. Return code from running the step.
-    exitCode :: (Core.Maybe Core.Int32),
-    -- | Unique identifier for this build step, used in @wait_for@ to reference this build step as a dependency.
-    id :: (Core.Maybe Core.Text),
-    -- | Required. The name of the container image that will run this particular build step. If the image is available in the host\'s Docker daemon\'s cache, it will be run directly. If not, the host will attempt to pull the image first, using the builder service account\'s credentials if necessary. The Docker daemon\'s cache will already have the latest versions of all of the officially supported build steps (<https://github.com/GoogleCloudPlatform/cloud-builders>). The Docker daemon will also have cached many of the layers for some popular images, like \"ubuntu\", \"debian\", but they will be refreshed at the time you attempt to use them. If you built an image in a previous build step, it will be stored in the host\'s Docker daemon\'s cache and is available to use as the name for a later build step.
-    name :: (Core.Maybe Core.Text),
-    -- | Output only. Stores timing information for pulling this build step\'s builder image only.
-    pullTiming :: (Core.Maybe TimeSpan),
-    -- | A shell script to be executed in the step. When script is provided, the user cannot specify the entrypoint or args.
-    script :: (Core.Maybe Core.Text),
-    -- | A list of environment variables which are encrypted using a Cloud Key Management Service crypto key. These values must be specified in the build\'s @Secret@.
-    secretEnv :: (Core.Maybe [Core.Text]),
-    -- | Output only. Status of the build step. At this time, build step status is only updated on build completion; step status is not updated in real-time as the build progresses.
-    status :: (Core.Maybe BuildStep_Status),
-    -- | Time limit for executing this build step. If not defined, the step has no time limit and will be allowed to continue to run until either it completes or the build itself times out.
-    timeout :: (Core.Maybe Core.Duration),
-    -- | Output only. Stores timing information for executing this build step.
-    timing :: (Core.Maybe TimeSpan),
-    -- | List of volumes to mount into the build step. Each volume is created as an empty volume prior to execution of the build step. Upon completion of the build, volumes and their contents are discarded. Using a named volume in only one step is not valid as it is indicative of a build request with an incorrect configuration.
-    volumes :: (Core.Maybe [Volume]),
-    -- | The ID(s) of the step(s) that this build step depends on. This build step will not start until all the build steps in @wait_for@ have completed successfully. If @wait_for@ is empty, this build step will start when all previous build steps in the @Build.Steps@ list have completed successfully.
-    waitFor :: (Core.Maybe [Core.Text])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'BuildStep' with the minimum fields required to make a request.
-newBuildStep ::
-  BuildStep
-newBuildStep =
-  BuildStep
-    { allowExitCodes = Core.Nothing,
-      allowFailure = Core.Nothing,
-      args = Core.Nothing,
-      dir = Core.Nothing,
-      entrypoint = Core.Nothing,
-      env = Core.Nothing,
-      exitCode = Core.Nothing,
-      id = Core.Nothing,
-      name = Core.Nothing,
-      pullTiming = Core.Nothing,
-      script = Core.Nothing,
-      secretEnv = Core.Nothing,
-      status = Core.Nothing,
-      timeout = Core.Nothing,
-      timing = Core.Nothing,
-      volumes = Core.Nothing,
-      waitFor = Core.Nothing
-    }
-
-instance Core.FromJSON BuildStep where
-  parseJSON =
-    Core.withObject
-      "BuildStep"
-      ( \o ->
-          BuildStep
-            Core.<$> (o Core..:? "allowExitCodes")
-            Core.<*> (o Core..:? "allowFailure")
-            Core.<*> (o Core..:? "args")
-            Core.<*> (o Core..:? "dir")
-            Core.<*> (o Core..:? "entrypoint")
-            Core.<*> (o Core..:? "env")
-            Core.<*> (o Core..:? "exitCode")
-            Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "pullTiming")
-            Core.<*> (o Core..:? "script")
-            Core.<*> (o Core..:? "secretEnv")
-            Core.<*> (o Core..:? "status")
-            Core.<*> (o Core..:? "timeout")
-            Core.<*> (o Core..:? "timing")
-            Core.<*> (o Core..:? "volumes")
-            Core.<*> (o Core..:? "waitFor")
-      )
-
-instance Core.ToJSON BuildStep where
-  toJSON BuildStep {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("allowExitCodes" Core..=) Core.<$> allowExitCodes,
-            ("allowFailure" Core..=) Core.<$> allowFailure,
-            ("args" Core..=) Core.<$> args,
-            ("dir" Core..=) Core.<$> dir,
-            ("entrypoint" Core..=) Core.<$> entrypoint,
-            ("env" Core..=) Core.<$> env,
-            ("exitCode" Core..=) Core.<$> exitCode,
-            ("id" Core..=) Core.<$> id,
-            ("name" Core..=) Core.<$> name,
-            ("pullTiming" Core..=) Core.<$> pullTiming,
-            ("script" Core..=) Core.<$> script,
-            ("secretEnv" Core..=) Core.<$> secretEnv,
-            ("status" Core..=) Core.<$> status,
-            ("timeout" Core..=) Core.<$> timeout,
-            ("timing" Core..=) Core.<$> timing,
-            ("volumes" Core..=) Core.<$> volumes,
-            ("waitFor" Core..=) Core.<$> waitFor
-          ]
-      )
-
--- | Configuration for an automated build in response to source repository changes.
---
--- /See:/ 'newBuildTrigger' smart constructor.
-data BuildTrigger = BuildTrigger
-  { -- | Configuration for manual approval to start a build invocation of this BuildTrigger.
-    approvalConfig :: (Core.Maybe ApprovalConfig),
-    -- | Autodetect build configuration. The following precedence is used (case insensitive): 1. cloudbuild.yaml 2. cloudbuild.yml 3. cloudbuild.json 4. Dockerfile Currently only available for GitHub App Triggers.
-    autodetect :: (Core.Maybe Core.Bool),
-    -- | BitbucketServerTriggerConfig describes the configuration of a trigger that creates a build whenever a Bitbucket Server event is received.
-    bitbucketServerTriggerConfig :: (Core.Maybe BitbucketServerTriggerConfig),
-    -- | Contents of the build template.
-    build :: (Core.Maybe Build),
-    -- | Output only. Time when the trigger was created.
-    createTime :: (Core.Maybe Core.DateTime),
-    -- | Human-readable description of this trigger.
-    description :: (Core.Maybe Core.Text),
-    -- | If true, the trigger will never automatically execute a build.
-    disabled :: (Core.Maybe Core.Bool),
-    -- | EventType allows the user to explicitly set the type of event to which this BuildTrigger should respond. This field will be validated against the rest of the configuration if it is set.
-    eventType :: (Core.Maybe BuildTrigger_EventType),
-    -- | Path, from the source root, to the build configuration file (i.e. cloudbuild.yaml).
-    filename :: (Core.Maybe Core.Text),
-    -- | A Common Expression Language string.
-    filter :: (Core.Maybe Core.Text),
-    -- | The file source describing the local or remote Build template.
-    gitFileSource :: (Core.Maybe GitFileSource),
-    -- | GitHubEventsConfig describes the configuration of a trigger that creates a build whenever a GitHub event is received. Mutually exclusive with @trigger_template@.
-    github :: (Core.Maybe GitHubEventsConfig),
-    -- | GitLabEnterpriseEventsConfig describes the configuration of a trigger that creates a build whenever a GitLab Enterprise event is received.
-    gitlabEnterpriseEventsConfig :: (Core.Maybe GitLabEventsConfig),
-    -- | Output only. Unique identifier of the trigger.
-    id :: (Core.Maybe Core.Text),
-    -- | ignored/files and included/files are file glob matches using https:\/\/golang.org\/pkg\/path\/filepath\/#Match extended with support for \"**\". If ignored/files and changed files are both empty, then they are not used to determine whether or not to trigger a build. If ignored/files is not empty, then we ignore any files that match any of the ignored/file globs. If the change has no files that are outside of the ignored/files globs, then we do not trigger a build.
-    ignoredFiles :: (Core.Maybe [Core.Text]),
-    -- | If set to INCLUDE/BUILD/LOGS/WITH/STATUS, log url will be shown on GitHub page when build status is final. Setting this field to INCLUDE/BUILD/LOGS/WITH/STATUS for non GitHub triggers results in INVALID_ARGUMENT error.
-    includeBuildLogs :: (Core.Maybe BuildTrigger_IncludeBuildLogs),
-    -- | If any of the files altered in the commit pass the ignored/files filter and included/files is empty, then as far as this filter is concerned, we should trigger the build. If any of the files altered in the commit pass the ignored/files filter and included/files is not empty, then we make sure that at least one of those files matches a included_files glob. If not, then we do not trigger a build.
-    includedFiles :: (Core.Maybe [Core.Text]),
-    -- | User-assigned name of the trigger. Must be unique within the project. Trigger names must meet the following requirements: + They must contain only alphanumeric characters and dashes. + They can be 1-64 characters long. + They must begin and end with an alphanumeric character.
-    name :: (Core.Maybe Core.Text),
-    -- | PubsubConfig describes the configuration of a trigger that creates a build whenever a Pub\/Sub message is published.
-    pubsubConfig :: (Core.Maybe PubsubConfig),
-    -- | The configuration of a trigger that creates a build whenever an event from Repo API is received.
-    repositoryEventConfig :: (Core.Maybe RepositoryEventConfig),
-    -- | The @Trigger@ name with format: @projects\/{project}\/locations\/{location}\/triggers\/{trigger}@, where {trigger} is a unique identifier generated by the service.
-    resourceName :: (Core.Maybe Core.Text),
-    -- | The service account used for all user-controlled operations including UpdateBuildTrigger, RunBuildTrigger, CreateBuild, and CancelBuild. If no service account is set, then the standard Cloud Build service account ([PROJECT_NUM]\@system.gserviceaccount.com) will be used instead. Format: @projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT_ID_OR_EMAIL}@
-    serviceAccount :: (Core.Maybe Core.Text),
-    -- | The repo and ref of the repository from which to build. This field is used only for those triggers that do not respond to SCM events. Triggers that respond to such events build source at whatever commit caused the event. This field is currently only used by Webhook, Pub\/Sub, Manual, and Cron triggers.
-    sourceToBuild :: (Core.Maybe GitRepoSource),
-    -- | Substitutions for Build resource. The keys must match the following regular expression: @^_[A-Z0-9_]+$@.
-    substitutions :: (Core.Maybe BuildTrigger_Substitutions),
-    -- | Tags for annotation of a @BuildTrigger@
-    tags :: (Core.Maybe [Core.Text]),
-    -- | Template describing the types of source changes to trigger a build. Branch and tag names in trigger templates are interpreted as regular expressions. Any branch or tag change that matches that regular expression will trigger a build. Mutually exclusive with @github@.
-    triggerTemplate :: (Core.Maybe RepoSource),
-    -- | WebhookConfig describes the configuration of a trigger that creates a build whenever a webhook is sent to a trigger\'s webhook URL.
-    webhookConfig :: (Core.Maybe WebhookConfig)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'BuildTrigger' with the minimum fields required to make a request.
-newBuildTrigger ::
-  BuildTrigger
-newBuildTrigger =
-  BuildTrigger
-    { approvalConfig = Core.Nothing,
-      autodetect = Core.Nothing,
-      bitbucketServerTriggerConfig = Core.Nothing,
-      build = Core.Nothing,
-      createTime = Core.Nothing,
-      description = Core.Nothing,
-      disabled = Core.Nothing,
-      eventType = Core.Nothing,
-      filename = Core.Nothing,
-      filter = Core.Nothing,
-      gitFileSource = Core.Nothing,
-      github = Core.Nothing,
-      gitlabEnterpriseEventsConfig = Core.Nothing,
-      id = Core.Nothing,
-      ignoredFiles = Core.Nothing,
-      includeBuildLogs = Core.Nothing,
-      includedFiles = Core.Nothing,
-      name = Core.Nothing,
-      pubsubConfig = Core.Nothing,
-      repositoryEventConfig = Core.Nothing,
-      resourceName = Core.Nothing,
-      serviceAccount = Core.Nothing,
-      sourceToBuild = Core.Nothing,
-      substitutions = Core.Nothing,
-      tags = Core.Nothing,
-      triggerTemplate = Core.Nothing,
-      webhookConfig = Core.Nothing
-    }
-
-instance Core.FromJSON BuildTrigger where
-  parseJSON =
-    Core.withObject
-      "BuildTrigger"
-      ( \o ->
-          BuildTrigger
-            Core.<$> (o Core..:? "approvalConfig")
-            Core.<*> (o Core..:? "autodetect")
-            Core.<*> (o Core..:? "bitbucketServerTriggerConfig")
-            Core.<*> (o Core..:? "build")
-            Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "disabled")
-            Core.<*> (o Core..:? "eventType")
-            Core.<*> (o Core..:? "filename")
-            Core.<*> (o Core..:? "filter")
-            Core.<*> (o Core..:? "gitFileSource")
-            Core.<*> (o Core..:? "github")
-            Core.<*> (o Core..:? "gitlabEnterpriseEventsConfig")
-            Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "ignoredFiles")
-            Core.<*> (o Core..:? "includeBuildLogs")
-            Core.<*> (o Core..:? "includedFiles")
-            Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "pubsubConfig")
-            Core.<*> (o Core..:? "repositoryEventConfig")
-            Core.<*> (o Core..:? "resourceName")
-            Core.<*> (o Core..:? "serviceAccount")
-            Core.<*> (o Core..:? "sourceToBuild")
-            Core.<*> (o Core..:? "substitutions")
-            Core.<*> (o Core..:? "tags")
-            Core.<*> (o Core..:? "triggerTemplate")
-            Core.<*> (o Core..:? "webhookConfig")
-      )
-
-instance Core.ToJSON BuildTrigger where
-  toJSON BuildTrigger {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("approvalConfig" Core..=) Core.<$> approvalConfig,
-            ("autodetect" Core..=) Core.<$> autodetect,
-            ("bitbucketServerTriggerConfig" Core..=)
-              Core.<$> bitbucketServerTriggerConfig,
-            ("build" Core..=) Core.<$> build,
-            ("createTime" Core..=) Core.<$> createTime,
-            ("description" Core..=) Core.<$> description,
-            ("disabled" Core..=) Core.<$> disabled,
-            ("eventType" Core..=) Core.<$> eventType,
-            ("filename" Core..=) Core.<$> filename,
-            ("filter" Core..=) Core.<$> filter,
-            ("gitFileSource" Core..=) Core.<$> gitFileSource,
-            ("github" Core..=) Core.<$> github,
-            ("gitlabEnterpriseEventsConfig" Core..=)
-              Core.<$> gitlabEnterpriseEventsConfig,
-            ("id" Core..=) Core.<$> id,
-            ("ignoredFiles" Core..=) Core.<$> ignoredFiles,
-            ("includeBuildLogs" Core..=)
-              Core.<$> includeBuildLogs,
-            ("includedFiles" Core..=) Core.<$> includedFiles,
-            ("name" Core..=) Core.<$> name,
-            ("pubsubConfig" Core..=) Core.<$> pubsubConfig,
-            ("repositoryEventConfig" Core..=)
-              Core.<$> repositoryEventConfig,
-            ("resourceName" Core..=) Core.<$> resourceName,
-            ("serviceAccount" Core..=) Core.<$> serviceAccount,
-            ("sourceToBuild" Core..=) Core.<$> sourceToBuild,
-            ("substitutions" Core..=) Core.<$> substitutions,
-            ("tags" Core..=) Core.<$> tags,
-            ("triggerTemplate" Core..=) Core.<$> triggerTemplate,
-            ("webhookConfig" Core..=) Core.<$> webhookConfig
-          ]
-      )
-
--- | Substitutions for Build resource. The keys must match the following regular expression: @^_[A-Z0-9_]+$@.
---
--- /See:/ 'newBuildTrigger_Substitutions' smart constructor.
-newtype BuildTrigger_Substitutions = BuildTrigger_Substitutions
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'BuildTrigger_Substitutions' with the minimum fields required to make a request.
-newBuildTrigger_Substitutions ::
-  -- |  See 'additional'.
-  Core.HashMap Core.Text Core.Text ->
-  BuildTrigger_Substitutions
-newBuildTrigger_Substitutions additional =
-  BuildTrigger_Substitutions {additional = additional}
-
-instance Core.FromJSON BuildTrigger_Substitutions where
-  parseJSON =
-    Core.withObject
-      "BuildTrigger_Substitutions"
-      ( \o ->
-          BuildTrigger_Substitutions
-            Core.<$> (Core.parseJSONObject o)
-      )
-
-instance Core.ToJSON BuildTrigger_Substitutions where
-  toJSON BuildTrigger_Substitutions {..} =
-    Core.toJSON additional
-
--- | An image built by the pipeline.
---
--- /See:/ 'newBuiltImage' smart constructor.
-data BuiltImage = BuiltImage
-  { -- | Docker Registry 2.0 digest.
-    digest :: (Core.Maybe Core.Text),
-    -- | Name used to push the container image to Google Container Registry, as presented to @docker push@.
-    name :: (Core.Maybe Core.Text),
-    -- | Output only. Stores timing information for pushing the specified image.
-    pushTiming :: (Core.Maybe TimeSpan)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'BuiltImage' with the minimum fields required to make a request.
-newBuiltImage ::
-  BuiltImage
-newBuiltImage =
-  BuiltImage
-    { digest = Core.Nothing,
-      name = Core.Nothing,
-      pushTiming = Core.Nothing
-    }
-
-instance Core.FromJSON BuiltImage where
-  parseJSON =
-    Core.withObject
-      "BuiltImage"
-      ( \o ->
-          BuiltImage
-            Core.<$> (o Core..:? "digest")
-            Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "pushTiming")
-      )
-
-instance Core.ToJSON BuiltImage where
-  toJSON BuiltImage {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("digest" Core..=) Core.<$> digest,
-            ("name" Core..=) Core.<$> name,
-            ("pushTiming" Core..=) Core.<$> pushTiming
-          ]
-      )
-
--- | Request to cancel an ongoing build.
---
--- /See:/ 'newCancelBuildRequest' smart constructor.
-data CancelBuildRequest = CancelBuildRequest
-  { -- | Required. ID of the build.
-    id :: (Core.Maybe Core.Text),
-    -- | The name of the @Build@ to cancel. Format: @projects\/{project}\/locations\/{location}\/builds\/{build}@
-    name :: (Core.Maybe Core.Text),
-    -- | Required. ID of the project.
-    projectId :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'CancelBuildRequest' with the minimum fields required to make a request.
-newCancelBuildRequest ::
-  CancelBuildRequest
-newCancelBuildRequest =
-  CancelBuildRequest
-    { id = Core.Nothing,
-      name = Core.Nothing,
-      projectId = Core.Nothing
-    }
-
-instance Core.FromJSON CancelBuildRequest where
-  parseJSON =
-    Core.withObject
-      "CancelBuildRequest"
-      ( \o ->
-          CancelBuildRequest
-            Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "projectId")
-      )
-
-instance Core.ToJSON CancelBuildRequest where
-  toJSON CancelBuildRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("id" Core..=) Core.<$> id,
-            ("name" Core..=) Core.<$> name,
-            ("projectId" Core..=) Core.<$> projectId
-          ]
-      )
 
 -- | The request message for Operations.CancelOperation.
 --
 -- /See:/ 'newCancelOperationRequest' smart constructor.
 data CancelOperationRequest = CancelOperationRequest
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'CancelOperationRequest' with the minimum fields required to make a request.
-newCancelOperationRequest ::
-  CancelOperationRequest
+newCancelOperationRequest 
+    ::  CancelOperationRequest
 newCancelOperationRequest = CancelOperationRequest
 
 instance Core.FromJSON CancelOperationRequest where
-  parseJSON =
-    Core.withObject
-      "CancelOperationRequest"
-      (\o -> Core.pure CancelOperationRequest)
+        parseJSON
+          = Core.withObject "CancelOperationRequest"
+              (\ o -> Core.pure CancelOperationRequest)
 
 instance Core.ToJSON CancelOperationRequest where
-  toJSON = Core.const Core.emptyObject
+        toJSON = Core.const Core.emptyObject
 
--- | Metadata for @CreateBitbucketServerConfig@ operation.
+
+-- | Capabilities adds and removes POSIX capabilities from running containers.
 --
--- /See:/ 'newCreateBitbucketServerConfigOperationMetadata' smart constructor.
-data CreateBitbucketServerConfigOperationMetadata = CreateBitbucketServerConfigOperationMetadata
-  { -- | The resource name of the BitbucketServerConfig to be created. Format: @projects\/{project}\/locations\/{location}\/bitbucketServerConfigs\/{id}@.
-    bitbucketServerConfig :: (Core.Maybe Core.Text),
-    -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime),
-    -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newCapabilities' smart constructor.
+data Capabilities = Capabilities
+    {
+      -- | Optional. Added capabilities +optional
+      add :: (Core.Maybe [Core.Text])
+      -- | Optional. Removed capabilities +optional
+    , drop :: (Core.Maybe [Core.Text])
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'CreateBitbucketServerConfigOperationMetadata' with the minimum fields required to make a request.
-newCreateBitbucketServerConfigOperationMetadata ::
-  CreateBitbucketServerConfigOperationMetadata
-newCreateBitbucketServerConfigOperationMetadata =
-  CreateBitbucketServerConfigOperationMetadata
-    { bitbucketServerConfig = Core.Nothing,
-      completeTime = Core.Nothing,
-      createTime = Core.Nothing
+-- | Creates a value of 'Capabilities' with the minimum fields required to make a request.
+newCapabilities 
+    ::  Capabilities
+newCapabilities = Capabilities {add = Core.Nothing, drop = Core.Nothing}
+
+instance Core.FromJSON Capabilities where
+        parseJSON
+          = Core.withObject "Capabilities"
+              (\ o ->
+                 Capabilities Core.<$>
+                   (o Core..:? "add") Core.<*> (o Core..:? "drop"))
+
+instance Core.ToJSON Capabilities where
+        toJSON Capabilities{..}
+          = Core.object
+              (Core.catMaybes
+                 [("add" Core..=) Core.<$> add,
+                  ("drop" Core..=) Core.<$> drop])
+
+
+-- | ChildStatusReference is used to point to the statuses of individual TaskRuns and Runs within this PipelineRun.
+--
+-- /See:/ 'newChildStatusReference' smart constructor.
+data ChildStatusReference = ChildStatusReference
+    {
+      -- | Name is the name of the TaskRun or Run this is referencing.
+      name :: (Core.Maybe Core.Text)
+      -- | PipelineTaskName is the name of the PipelineTask this is referencing.
+    , pipelineTaskName :: (Core.Maybe Core.Text)
+      -- | Output only. Type of the child reference.
+    , type' :: (Core.Maybe ChildStatusReference_Type)
+      -- | WhenExpressions is the list of checks guarding the execution of the PipelineTask
+    , whenExpressions :: (Core.Maybe [WhenExpression])
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ChildStatusReference' with the minimum fields required to make a request.
+newChildStatusReference 
+    ::  ChildStatusReference
+newChildStatusReference =
+  ChildStatusReference
+    { name = Core.Nothing
+    , pipelineTaskName = Core.Nothing
+    , type' = Core.Nothing
+    , whenExpressions = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    CreateBitbucketServerConfigOperationMetadata
-  where
-  parseJSON =
-    Core.withObject
-      "CreateBitbucketServerConfigOperationMetadata"
-      ( \o ->
-          CreateBitbucketServerConfigOperationMetadata
-            Core.<$> (o Core..:? "bitbucketServerConfig")
-            Core.<*> (o Core..:? "completeTime")
-            Core.<*> (o Core..:? "createTime")
-      )
+instance Core.FromJSON ChildStatusReference where
+        parseJSON
+          = Core.withObject "ChildStatusReference"
+              (\ o ->
+                 ChildStatusReference Core.<$>
+                   (o Core..:? "name") Core.<*>
+                     (o Core..:? "pipelineTaskName")
+                     Core.<*> (o Core..:? "type")
+                     Core.<*> (o Core..:? "whenExpressions"))
 
-instance
-  Core.ToJSON
-    CreateBitbucketServerConfigOperationMetadata
-  where
-  toJSON
-    CreateBitbucketServerConfigOperationMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("bitbucketServerConfig" Core..=)
-                Core.<$> bitbucketServerConfig,
-              ("completeTime" Core..=) Core.<$> completeTime,
-              ("createTime" Core..=) Core.<$> createTime
-            ]
-        )
+instance Core.ToJSON ChildStatusReference where
+        toJSON ChildStatusReference{..}
+          = Core.object
+              (Core.catMaybes
+                 [("name" Core..=) Core.<$> name,
+                  ("pipelineTaskName" Core..=) Core.<$>
+                    pipelineTaskName,
+                  ("type" Core..=) Core.<$> type',
+                  ("whenExpressions" Core..=) Core.<$>
+                    whenExpressions])
 
--- | Request to connect a repository from a connected Bitbucket Server host.
+
+-- | A connection to a SCM like GitHub, GitHub Enterprise, Bitbucket Data Center, Bitbucket Cloud or GitLab.
 --
--- /See:/ 'newCreateBitbucketServerConnectedRepositoryRequest' smart constructor.
-data CreateBitbucketServerConnectedRepositoryRequest = CreateBitbucketServerConnectedRepositoryRequest
-  { -- | Required. The Bitbucket Server repository to connect.
-    bitbucketServerConnectedRepository :: (Core.Maybe BitbucketServerConnectedRepository),
-    -- | Required. The name of the @BitbucketServerConfig@ that added connected repository. Format: @projects\/{project}\/locations\/{location}\/bitbucketServerConfigs\/{config}@
-    parent :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newConnection' smart constructor.
+data Connection = Connection
+    {
+      -- | Optional. Allows clients to store small amounts of arbitrary data.
+      annotations :: (Core.Maybe Connection_Annotations)
+      -- | Configuration for connections to Bitbucket Cloud.
+    , bitbucketCloudConfig :: (Core.Maybe BitbucketCloudConfig)
+      -- | Configuration for connections to Bitbucket Data Center.
+    , bitbucketDataCenterConfig :: (Core.Maybe BitbucketDataCenterConfig)
+      -- | Output only. Server assigned timestamp for when the connection was created.
+    , createTime :: (Core.Maybe Core.DateTime)
+      -- | Optional. If disabled is set to true, functionality is disabled for this connection. Repository based API methods and webhooks processing for repositories in this connection will be disabled.
+    , disabled :: (Core.Maybe Core.Bool)
+      -- | This checksum is computed by the server based on the value of other fields, and may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding.
+    , etag :: (Core.Maybe Core.Text)
+      -- | Configuration for connections to github.com.
+    , githubConfig :: (Core.Maybe GitHubConfig)
+      -- | Configuration for connections to an instance of GitHub Enterprise.
+    , githubEnterpriseConfig :: (Core.Maybe GoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig)
+      -- | Configuration for connections to gitlab.com or an instance of GitLab Enterprise.
+    , gitlabConfig :: (Core.Maybe GoogleDevtoolsCloudbuildV2GitLabConfig)
+      -- | Output only. Installation state of the Connection.
+    , installationState :: (Core.Maybe InstallationState)
+      -- | Immutable. The resource name of the connection, in the format @projects\/{project}\/locations\/{location}\/connections\/{connection_id}@.
+    , name :: (Core.Maybe Core.Text)
+      -- | Output only. Set to true when the connection is being set up or updated in the background.
+    , reconciling :: (Core.Maybe Core.Bool)
+      -- | Output only. Server assigned timestamp for when the connection was updated.
+    , updateTime :: (Core.Maybe Core.DateTime)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'CreateBitbucketServerConnectedRepositoryRequest' with the minimum fields required to make a request.
-newCreateBitbucketServerConnectedRepositoryRequest ::
-  CreateBitbucketServerConnectedRepositoryRequest
-newCreateBitbucketServerConnectedRepositoryRequest =
-  CreateBitbucketServerConnectedRepositoryRequest
-    { bitbucketServerConnectedRepository = Core.Nothing,
-      parent = Core.Nothing
+-- | Creates a value of 'Connection' with the minimum fields required to make a request.
+newConnection 
+    ::  Connection
+newConnection =
+  Connection
+    { annotations = Core.Nothing
+    , bitbucketCloudConfig = Core.Nothing
+    , bitbucketDataCenterConfig = Core.Nothing
+    , createTime = Core.Nothing
+    , disabled = Core.Nothing
+    , etag = Core.Nothing
+    , githubConfig = Core.Nothing
+    , githubEnterpriseConfig = Core.Nothing
+    , gitlabConfig = Core.Nothing
+    , installationState = Core.Nothing
+    , name = Core.Nothing
+    , reconciling = Core.Nothing
+    , updateTime = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    CreateBitbucketServerConnectedRepositoryRequest
-  where
-  parseJSON =
-    Core.withObject
-      "CreateBitbucketServerConnectedRepositoryRequest"
-      ( \o ->
-          CreateBitbucketServerConnectedRepositoryRequest
-            Core.<$> (o Core..:? "bitbucketServerConnectedRepository")
-              Core.<*> (o Core..:? "parent")
-      )
+instance Core.FromJSON Connection where
+        parseJSON
+          = Core.withObject "Connection"
+              (\ o ->
+                 Connection Core.<$>
+                   (o Core..:? "annotations") Core.<*>
+                     (o Core..:? "bitbucketCloudConfig")
+                     Core.<*> (o Core..:? "bitbucketDataCenterConfig")
+                     Core.<*> (o Core..:? "createTime")
+                     Core.<*> (o Core..:? "disabled")
+                     Core.<*> (o Core..:? "etag")
+                     Core.<*> (o Core..:? "githubConfig")
+                     Core.<*> (o Core..:? "githubEnterpriseConfig")
+                     Core.<*> (o Core..:? "gitlabConfig")
+                     Core.<*> (o Core..:? "installationState")
+                     Core.<*> (o Core..:? "name")
+                     Core.<*> (o Core..:? "reconciling")
+                     Core.<*> (o Core..:? "updateTime"))
 
-instance
-  Core.ToJSON
-    CreateBitbucketServerConnectedRepositoryRequest
-  where
-  toJSON
-    CreateBitbucketServerConnectedRepositoryRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("bitbucketServerConnectedRepository" Core..=)
-                Core.<$> bitbucketServerConnectedRepository,
-              ("parent" Core..=) Core.<$> parent
-            ]
-        )
+instance Core.ToJSON Connection where
+        toJSON Connection{..}
+          = Core.object
+              (Core.catMaybes
+                 [("annotations" Core..=) Core.<$> annotations,
+                  ("bitbucketCloudConfig" Core..=) Core.<$>
+                    bitbucketCloudConfig,
+                  ("bitbucketDataCenterConfig" Core..=) Core.<$>
+                    bitbucketDataCenterConfig,
+                  ("createTime" Core..=) Core.<$> createTime,
+                  ("disabled" Core..=) Core.<$> disabled,
+                  ("etag" Core..=) Core.<$> etag,
+                  ("githubConfig" Core..=) Core.<$> githubConfig,
+                  ("githubEnterpriseConfig" Core..=) Core.<$>
+                    githubEnterpriseConfig,
+                  ("gitlabConfig" Core..=) Core.<$> gitlabConfig,
+                  ("installationState" Core..=) Core.<$>
+                    installationState,
+                  ("name" Core..=) Core.<$> name,
+                  ("reconciling" Core..=) Core.<$> reconciling,
+                  ("updateTime" Core..=) Core.<$> updateTime])
 
--- | Metadata for @CreateGithubEnterpriseConfig@ operation.
+
+-- | Optional. Allows clients to store small amounts of arbitrary data.
 --
--- /See:/ 'newCreateGitHubEnterpriseConfigOperationMetadata' smart constructor.
-data CreateGitHubEnterpriseConfigOperationMetadata = CreateGitHubEnterpriseConfigOperationMetadata
-  { -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime),
-    -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime),
-    -- | The resource name of the GitHubEnterprise to be created. Format: @projects\/{project}\/locations\/{location}\/githubEnterpriseConfigs\/{id}@.
-    githubEnterpriseConfig :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newConnection_Annotations' smart constructor.
+newtype Connection_Annotations = Connection_Annotations
+    {
+      -- | 
+      additional :: (Core.HashMap Core.Text Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'CreateGitHubEnterpriseConfigOperationMetadata' with the minimum fields required to make a request.
-newCreateGitHubEnterpriseConfigOperationMetadata ::
-  CreateGitHubEnterpriseConfigOperationMetadata
-newCreateGitHubEnterpriseConfigOperationMetadata =
-  CreateGitHubEnterpriseConfigOperationMetadata
-    { completeTime = Core.Nothing,
-      createTime = Core.Nothing,
-      githubEnterpriseConfig = Core.Nothing
+-- | Creates a value of 'Connection_Annotations' with the minimum fields required to make a request.
+newConnection_Annotations 
+    ::  Core.HashMap Core.Text Core.Text
+       -- ^  See 'additional'.
+    -> Connection_Annotations
+newConnection_Annotations additional =
+  Connection_Annotations {additional = additional}
+
+instance Core.FromJSON Connection_Annotations where
+        parseJSON
+          = Core.withObject "Connection_Annotations"
+              (\ o ->
+                 Connection_Annotations Core.<$>
+                   (Core.parseJSONObject o))
+
+instance Core.ToJSON Connection_Annotations where
+        toJSON Connection_Annotations{..}
+          = Core.toJSON additional
+
+
+-- | Message for creating a Repository.
+--
+-- /See:/ 'newCreateRepositoryRequest' smart constructor.
+data CreateRepositoryRequest = CreateRepositoryRequest
+    {
+      -- | Required. The connection to contain the repository. If the request is part of a BatchCreateRepositoriesRequest, this field should be empty or match the parent specified there.
+      parent :: (Core.Maybe Core.Text)
+      -- | Required. The repository to create.
+    , repository :: (Core.Maybe Repository)
+      -- | Required. The ID to use for the repository, which will become the final component of the repository\'s resource name. This ID should be unique in the connection. Allows alphanumeric characters and any of -._~%!$&\'()*+,;=\@.
+    , repositoryId :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CreateRepositoryRequest' with the minimum fields required to make a request.
+newCreateRepositoryRequest 
+    ::  CreateRepositoryRequest
+newCreateRepositoryRequest =
+  CreateRepositoryRequest
+    { parent = Core.Nothing
+    , repository = Core.Nothing
+    , repositoryId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    CreateGitHubEnterpriseConfigOperationMetadata
-  where
-  parseJSON =
-    Core.withObject
-      "CreateGitHubEnterpriseConfigOperationMetadata"
-      ( \o ->
-          CreateGitHubEnterpriseConfigOperationMetadata
-            Core.<$> (o Core..:? "completeTime")
-              Core.<*> (o Core..:? "createTime")
-              Core.<*> (o Core..:? "githubEnterpriseConfig")
-      )
+instance Core.FromJSON CreateRepositoryRequest where
+        parseJSON
+          = Core.withObject "CreateRepositoryRequest"
+              (\ o ->
+                 CreateRepositoryRequest Core.<$>
+                   (o Core..:? "parent") Core.<*>
+                     (o Core..:? "repository")
+                     Core.<*> (o Core..:? "repositoryId"))
 
-instance
-  Core.ToJSON
-    CreateGitHubEnterpriseConfigOperationMetadata
-  where
-  toJSON
-    CreateGitHubEnterpriseConfigOperationMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("completeTime" Core..=) Core.<$> completeTime,
-              ("createTime" Core..=) Core.<$> createTime,
-              ("githubEnterpriseConfig" Core..=)
-                Core.<$> githubEnterpriseConfig
-            ]
-        )
+instance Core.ToJSON CreateRepositoryRequest where
+        toJSON CreateRepositoryRequest{..}
+          = Core.object
+              (Core.catMaybes
+                 [("parent" Core..=) Core.<$> parent,
+                  ("repository" Core..=) Core.<$> repository,
+                  ("repositoryId" Core..=) Core.<$> repositoryId])
 
--- | Metadata for @CreateGitLabConfig@ operation.
+
+-- | EmbeddedTask defines a Task that is embedded in a Pipeline.
 --
--- /See:/ 'newCreateGitLabConfigOperationMetadata' smart constructor.
-data CreateGitLabConfigOperationMetadata = CreateGitLabConfigOperationMetadata
-  { -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime),
-    -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime),
-    -- | The resource name of the GitLabConfig to be created. Format: @projects\/{project}\/locations\/{location}\/gitlabConfigs\/{id}@.
-    gitlabConfig :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'CreateGitLabConfigOperationMetadata' with the minimum fields required to make a request.
-newCreateGitLabConfigOperationMetadata ::
-  CreateGitLabConfigOperationMetadata
-newCreateGitLabConfigOperationMetadata =
-  CreateGitLabConfigOperationMetadata
-    { completeTime = Core.Nothing,
-      createTime = Core.Nothing,
-      gitlabConfig = Core.Nothing
+-- /See:/ 'newEmbeddedTask' smart constructor.
+data EmbeddedTask = EmbeddedTask
+    {
+      -- | User annotations. See https:\/\/google.aip.dev\/128#annotations
+      annotations :: (Core.Maybe EmbeddedTask_Annotations)
+      -- | Spec to instantiate this TaskRun.
+    , taskSpec :: (Core.Maybe TaskSpec)
     }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
-instance
-  Core.FromJSON
-    CreateGitLabConfigOperationMetadata
-  where
-  parseJSON =
-    Core.withObject
-      "CreateGitLabConfigOperationMetadata"
-      ( \o ->
-          CreateGitLabConfigOperationMetadata
-            Core.<$> (o Core..:? "completeTime")
-            Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "gitlabConfig")
-      )
+-- | Creates a value of 'EmbeddedTask' with the minimum fields required to make a request.
+newEmbeddedTask 
+    ::  EmbeddedTask
+newEmbeddedTask =
+  EmbeddedTask {annotations = Core.Nothing, taskSpec = Core.Nothing}
 
-instance
-  Core.ToJSON
-    CreateGitLabConfigOperationMetadata
-  where
-  toJSON CreateGitLabConfigOperationMetadata {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("completeTime" Core..=) Core.<$> completeTime,
-            ("createTime" Core..=) Core.<$> createTime,
-            ("gitlabConfig" Core..=) Core.<$> gitlabConfig
-          ]
-      )
+instance Core.FromJSON EmbeddedTask where
+        parseJSON
+          = Core.withObject "EmbeddedTask"
+              (\ o ->
+                 EmbeddedTask Core.<$>
+                   (o Core..:? "annotations") Core.<*>
+                     (o Core..:? "taskSpec"))
 
--- | Request to connect a repository from a connected GitLab host.
+instance Core.ToJSON EmbeddedTask where
+        toJSON EmbeddedTask{..}
+          = Core.object
+              (Core.catMaybes
+                 [("annotations" Core..=) Core.<$> annotations,
+                  ("taskSpec" Core..=) Core.<$> taskSpec])
+
+
+-- | User annotations. See https:\/\/google.aip.dev\/128#annotations
 --
--- /See:/ 'newCreateGitLabConnectedRepositoryRequest' smart constructor.
-data CreateGitLabConnectedRepositoryRequest = CreateGitLabConnectedRepositoryRequest
-  { -- | Required. The GitLab repository to connect.
-    gitlabConnectedRepository :: (Core.Maybe GitLabConnectedRepository),
-    -- | Required. The name of the @GitLabConfig@ that adds connected repository. Format: @projects\/{project}\/locations\/{location}\/gitLabConfigs\/{config}@
-    parent :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'CreateGitLabConnectedRepositoryRequest' with the minimum fields required to make a request.
-newCreateGitLabConnectedRepositoryRequest ::
-  CreateGitLabConnectedRepositoryRequest
-newCreateGitLabConnectedRepositoryRequest =
-  CreateGitLabConnectedRepositoryRequest
-    { gitlabConnectedRepository = Core.Nothing,
-      parent = Core.Nothing
+-- /See:/ 'newEmbeddedTask_Annotations' smart constructor.
+newtype EmbeddedTask_Annotations = EmbeddedTask_Annotations
+    {
+      -- | 
+      additional :: (Core.HashMap Core.Text Core.Text)
     }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
-instance
-  Core.FromJSON
-    CreateGitLabConnectedRepositoryRequest
-  where
-  parseJSON =
-    Core.withObject
-      "CreateGitLabConnectedRepositoryRequest"
-      ( \o ->
-          CreateGitLabConnectedRepositoryRequest
-            Core.<$> (o Core..:? "gitlabConnectedRepository")
-            Core.<*> (o Core..:? "parent")
-      )
+-- | Creates a value of 'EmbeddedTask_Annotations' with the minimum fields required to make a request.
+newEmbeddedTask_Annotations 
+    ::  Core.HashMap Core.Text Core.Text
+       -- ^  See 'additional'.
+    -> EmbeddedTask_Annotations
+newEmbeddedTask_Annotations additional =
+  EmbeddedTask_Annotations {additional = additional}
 
-instance
-  Core.ToJSON
-    CreateGitLabConnectedRepositoryRequest
-  where
-  toJSON CreateGitLabConnectedRepositoryRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("gitlabConnectedRepository" Core..=)
-              Core.<$> gitlabConnectedRepository,
-            ("parent" Core..=) Core.<$> parent
-          ]
-      )
+instance Core.FromJSON EmbeddedTask_Annotations where
+        parseJSON
+          = Core.withObject "EmbeddedTask_Annotations"
+              (\ o ->
+                 EmbeddedTask_Annotations Core.<$>
+                   (Core.parseJSONObject o))
 
--- | Metadata for the @CreateWorkerPool@ operation.
---
--- /See:/ 'newCreateWorkerPoolOperationMetadata' smart constructor.
-data CreateWorkerPoolOperationMetadata = CreateWorkerPoolOperationMetadata
-  { -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime),
-    -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime),
-    -- | The resource name of the @WorkerPool@ to create. Format: @projects\/{project}\/locations\/{location}\/workerPools\/{worker_pool}@.
-    workerPool :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+instance Core.ToJSON EmbeddedTask_Annotations where
+        toJSON EmbeddedTask_Annotations{..}
+          = Core.toJSON additional
 
--- | Creates a value of 'CreateWorkerPoolOperationMetadata' with the minimum fields required to make a request.
-newCreateWorkerPoolOperationMetadata ::
-  CreateWorkerPoolOperationMetadata
-newCreateWorkerPoolOperationMetadata =
-  CreateWorkerPoolOperationMetadata
-    { completeTime = Core.Nothing,
-      createTime = Core.Nothing,
-      workerPool = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    CreateWorkerPoolOperationMetadata
-  where
-  parseJSON =
-    Core.withObject
-      "CreateWorkerPoolOperationMetadata"
-      ( \o ->
-          CreateWorkerPoolOperationMetadata
-            Core.<$> (o Core..:? "completeTime")
-            Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "workerPool")
-      )
-
-instance
-  Core.ToJSON
-    CreateWorkerPoolOperationMetadata
-  where
-  toJSON CreateWorkerPoolOperationMetadata {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("completeTime" Core..=) Core.<$> completeTime,
-            ("createTime" Core..=) Core.<$> createTime,
-            ("workerPool" Core..=) Core.<$> workerPool
-          ]
-      )
-
--- | Metadata for @DeleteBitbucketServerConfig@ operation.
---
--- /See:/ 'newDeleteBitbucketServerConfigOperationMetadata' smart constructor.
-data DeleteBitbucketServerConfigOperationMetadata = DeleteBitbucketServerConfigOperationMetadata
-  { -- | The resource name of the BitbucketServerConfig to be deleted. Format: @projects\/{project}\/locations\/{location}\/bitbucketServerConfigs\/{id}@.
-    bitbucketServerConfig :: (Core.Maybe Core.Text),
-    -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime),
-    -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'DeleteBitbucketServerConfigOperationMetadata' with the minimum fields required to make a request.
-newDeleteBitbucketServerConfigOperationMetadata ::
-  DeleteBitbucketServerConfigOperationMetadata
-newDeleteBitbucketServerConfigOperationMetadata =
-  DeleteBitbucketServerConfigOperationMetadata
-    { bitbucketServerConfig = Core.Nothing,
-      completeTime = Core.Nothing,
-      createTime = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    DeleteBitbucketServerConfigOperationMetadata
-  where
-  parseJSON =
-    Core.withObject
-      "DeleteBitbucketServerConfigOperationMetadata"
-      ( \o ->
-          DeleteBitbucketServerConfigOperationMetadata
-            Core.<$> (o Core..:? "bitbucketServerConfig")
-            Core.<*> (o Core..:? "completeTime")
-            Core.<*> (o Core..:? "createTime")
-      )
-
-instance
-  Core.ToJSON
-    DeleteBitbucketServerConfigOperationMetadata
-  where
-  toJSON
-    DeleteBitbucketServerConfigOperationMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("bitbucketServerConfig" Core..=)
-                Core.<$> bitbucketServerConfig,
-              ("completeTime" Core..=) Core.<$> completeTime,
-              ("createTime" Core..=) Core.<$> createTime
-            ]
-        )
-
--- | Metadata for @DeleteGitHubEnterpriseConfig@ operation.
---
--- /See:/ 'newDeleteGitHubEnterpriseConfigOperationMetadata' smart constructor.
-data DeleteGitHubEnterpriseConfigOperationMetadata = DeleteGitHubEnterpriseConfigOperationMetadata
-  { -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime),
-    -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime),
-    -- | The resource name of the GitHubEnterprise to be deleted. Format: @projects\/{project}\/locations\/{location}\/githubEnterpriseConfigs\/{id}@.
-    githubEnterpriseConfig :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'DeleteGitHubEnterpriseConfigOperationMetadata' with the minimum fields required to make a request.
-newDeleteGitHubEnterpriseConfigOperationMetadata ::
-  DeleteGitHubEnterpriseConfigOperationMetadata
-newDeleteGitHubEnterpriseConfigOperationMetadata =
-  DeleteGitHubEnterpriseConfigOperationMetadata
-    { completeTime = Core.Nothing,
-      createTime = Core.Nothing,
-      githubEnterpriseConfig = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    DeleteGitHubEnterpriseConfigOperationMetadata
-  where
-  parseJSON =
-    Core.withObject
-      "DeleteGitHubEnterpriseConfigOperationMetadata"
-      ( \o ->
-          DeleteGitHubEnterpriseConfigOperationMetadata
-            Core.<$> (o Core..:? "completeTime")
-              Core.<*> (o Core..:? "createTime")
-              Core.<*> (o Core..:? "githubEnterpriseConfig")
-      )
-
-instance
-  Core.ToJSON
-    DeleteGitHubEnterpriseConfigOperationMetadata
-  where
-  toJSON
-    DeleteGitHubEnterpriseConfigOperationMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("completeTime" Core..=) Core.<$> completeTime,
-              ("createTime" Core..=) Core.<$> createTime,
-              ("githubEnterpriseConfig" Core..=)
-                Core.<$> githubEnterpriseConfig
-            ]
-        )
-
--- | Metadata for @DeleteGitLabConfig@ operation.
---
--- /See:/ 'newDeleteGitLabConfigOperationMetadata' smart constructor.
-data DeleteGitLabConfigOperationMetadata = DeleteGitLabConfigOperationMetadata
-  { -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime),
-    -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime),
-    -- | The resource name of the GitLabConfig to be created. Format: @projects\/{project}\/locations\/{location}\/gitlabConfigs\/{id}@.
-    gitlabConfig :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'DeleteGitLabConfigOperationMetadata' with the minimum fields required to make a request.
-newDeleteGitLabConfigOperationMetadata ::
-  DeleteGitLabConfigOperationMetadata
-newDeleteGitLabConfigOperationMetadata =
-  DeleteGitLabConfigOperationMetadata
-    { completeTime = Core.Nothing,
-      createTime = Core.Nothing,
-      gitlabConfig = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    DeleteGitLabConfigOperationMetadata
-  where
-  parseJSON =
-    Core.withObject
-      "DeleteGitLabConfigOperationMetadata"
-      ( \o ->
-          DeleteGitLabConfigOperationMetadata
-            Core.<$> (o Core..:? "completeTime")
-            Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "gitlabConfig")
-      )
-
-instance
-  Core.ToJSON
-    DeleteGitLabConfigOperationMetadata
-  where
-  toJSON DeleteGitLabConfigOperationMetadata {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("completeTime" Core..=) Core.<$> completeTime,
-            ("createTime" Core..=) Core.<$> createTime,
-            ("gitlabConfig" Core..=) Core.<$> gitlabConfig
-          ]
-      )
-
--- | Metadata for the @DeleteWorkerPool@ operation.
---
--- /See:/ 'newDeleteWorkerPoolOperationMetadata' smart constructor.
-data DeleteWorkerPoolOperationMetadata = DeleteWorkerPoolOperationMetadata
-  { -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime),
-    -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime),
-    -- | The resource name of the @WorkerPool@ being deleted. Format: @projects\/{project}\/locations\/{location}\/workerPools\/{worker_pool}@.
-    workerPool :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'DeleteWorkerPoolOperationMetadata' with the minimum fields required to make a request.
-newDeleteWorkerPoolOperationMetadata ::
-  DeleteWorkerPoolOperationMetadata
-newDeleteWorkerPoolOperationMetadata =
-  DeleteWorkerPoolOperationMetadata
-    { completeTime = Core.Nothing,
-      createTime = Core.Nothing,
-      workerPool = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    DeleteWorkerPoolOperationMetadata
-  where
-  parseJSON =
-    Core.withObject
-      "DeleteWorkerPoolOperationMetadata"
-      ( \o ->
-          DeleteWorkerPoolOperationMetadata
-            Core.<$> (o Core..:? "completeTime")
-            Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "workerPool")
-      )
-
-instance
-  Core.ToJSON
-    DeleteWorkerPoolOperationMetadata
-  where
-  toJSON DeleteWorkerPoolOperationMetadata {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("completeTime" Core..=) Core.<$> completeTime,
-            ("createTime" Core..=) Core.<$> createTime,
-            ("workerPool" Core..=) Core.<$> workerPool
-          ]
-      )
 
 -- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
-newEmpty ::
-  Empty
+newEmpty 
+    ::  Empty
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+        parseJSON
+          = Core.withObject "Empty" (\ o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
-  toJSON = Core.const Core.emptyObject
+        toJSON = Core.const Core.emptyObject
 
--- | A fatal problem encountered during the execution of the build.
+
+-- | Represents an empty Volume source.
 --
--- /See:/ 'newFailureInfo' smart constructor.
-data FailureInfo = FailureInfo
-  { -- | Explains the failure issue in more detail using hard-coded text.
-    detail :: (Core.Maybe Core.Text),
-    -- | The name of the failure.
-    type' :: (Core.Maybe FailureInfo_Type)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newEmptyDirVolumeSource' smart constructor.
+data EmptyDirVolumeSource = EmptyDirVolumeSource
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'FailureInfo' with the minimum fields required to make a request.
-newFailureInfo ::
-  FailureInfo
-newFailureInfo = FailureInfo {detail = Core.Nothing, type' = Core.Nothing}
+-- | Creates a value of 'EmptyDirVolumeSource' with the minimum fields required to make a request.
+newEmptyDirVolumeSource 
+    ::  EmptyDirVolumeSource
+newEmptyDirVolumeSource = EmptyDirVolumeSource
 
-instance Core.FromJSON FailureInfo where
-  parseJSON =
-    Core.withObject
-      "FailureInfo"
-      ( \o ->
-          FailureInfo
-            Core.<$> (o Core..:? "detail") Core.<*> (o Core..:? "type")
-      )
+instance Core.FromJSON EmptyDirVolumeSource where
+        parseJSON
+          = Core.withObject "EmptyDirVolumeSource"
+              (\ o -> Core.pure EmptyDirVolumeSource)
 
-instance Core.ToJSON FailureInfo where
-  toJSON FailureInfo {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("detail" Core..=) Core.<$> detail,
-            ("type" Core..=) Core.<$> type'
-          ]
-      )
+instance Core.ToJSON EmptyDirVolumeSource where
+        toJSON = Core.const Core.emptyObject
 
--- | Container message for hashes of byte content of files, used in SourceProvenance messages to verify integrity of source input to the build.
+
+-- | Environment variable.
 --
--- /See:/ 'newFileHashes' smart constructor.
-newtype FileHashes = FileHashes
-  { -- | Collection of file hashes.
-    fileHash :: (Core.Maybe [Hash])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newEnvVar' smart constructor.
+data EnvVar = EnvVar
+    {
+      -- | Name of the environment variable.
+      name :: (Core.Maybe Core.Text)
+      -- | Value of the environment variable.
+    , value :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'FileHashes' with the minimum fields required to make a request.
-newFileHashes ::
-  FileHashes
-newFileHashes = FileHashes {fileHash = Core.Nothing}
+-- | Creates a value of 'EnvVar' with the minimum fields required to make a request.
+newEnvVar 
+    ::  EnvVar
+newEnvVar = EnvVar {name = Core.Nothing, value = Core.Nothing}
 
-instance Core.FromJSON FileHashes where
-  parseJSON =
-    Core.withObject
-      "FileHashes"
-      (\o -> FileHashes Core.<$> (o Core..:? "fileHash"))
+instance Core.FromJSON EnvVar where
+        parseJSON
+          = Core.withObject "EnvVar"
+              (\ o ->
+                 EnvVar Core.<$>
+                   (o Core..:? "name") Core.<*> (o Core..:? "value"))
 
-instance Core.ToJSON FileHashes where
-  toJSON FileHashes {..} =
-    Core.object
-      ( Core.catMaybes
-          [("fileHash" Core..=) Core.<$> fileHash]
-      )
+instance Core.ToJSON EnvVar where
+        toJSON EnvVar{..}
+          = Core.object
+              (Core.catMaybes
+                 [("name" Core..=) Core.<$> name,
+                  ("value" Core..=) Core.<$> value])
 
--- | GitFileSource describes a file within a (possibly remote) code repository.
+
+-- | ExecAction describes a \"run in container\" action.
 --
--- /See:/ 'newGitFileSource' smart constructor.
-data GitFileSource = GitFileSource
-  { -- | The full resource name of the bitbucket server config. Format: @projects\/{project}\/locations\/{location}\/bitbucketServerConfigs\/{id}@.
-    bitbucketServerConfig :: (Core.Maybe Core.Text),
-    -- | The full resource name of the github enterprise config. Format: @projects\/{project}\/locations\/{location}\/githubEnterpriseConfigs\/{id}@. @projects\/{project}\/githubEnterpriseConfigs\/{id}@.
-    githubEnterpriseConfig :: (Core.Maybe Core.Text),
-    -- | The path of the file, with the repo root as the root of the path.
-    path :: (Core.Maybe Core.Text),
-    -- | See RepoType above.
-    repoType :: (Core.Maybe GitFileSource_RepoType),
-    -- | The branch, tag, arbitrary ref, or SHA version of the repo to use when resolving the filename (optional). This field respects the same syntax\/resolution as described here: https:\/\/git-scm.com\/docs\/gitrevisions If unspecified, the revision from which the trigger invocation originated is assumed to be the revision from which to read the specified path.
-    revision :: (Core.Maybe Core.Text),
-    -- | The URI of the repo. Either uri or repository can be specified. If unspecified, the repo from which the trigger invocation originated is assumed to be the repo from which to read the specified path.
-    uri :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newExecAction' smart constructor.
+newtype ExecAction = ExecAction
+    {
+      -- | Optional. Command is the command line to execute inside the container, the working directory for the command is root (\'\/\') in the container\'s filesystem. The command is simply exec\'d, it is not run inside a shell, so traditional shell instructions (\'|\', etc) won\'t work. To use a shell, you need to explicitly call out to that shell. Exit status of 0 is treated as live\/healthy and non-zero is unhealthy. +optional
+      command :: (Core.Maybe [Core.Text])
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'GitFileSource' with the minimum fields required to make a request.
-newGitFileSource ::
-  GitFileSource
-newGitFileSource =
-  GitFileSource
-    { bitbucketServerConfig = Core.Nothing,
-      githubEnterpriseConfig = Core.Nothing,
-      path = Core.Nothing,
-      repoType = Core.Nothing,
-      revision = Core.Nothing,
-      uri = Core.Nothing
+-- | Creates a value of 'ExecAction' with the minimum fields required to make a request.
+newExecAction 
+    ::  ExecAction
+newExecAction = ExecAction {command = Core.Nothing}
+
+instance Core.FromJSON ExecAction where
+        parseJSON
+          = Core.withObject "ExecAction"
+              (\ o -> ExecAction Core.<$> (o Core..:? "command"))
+
+instance Core.ToJSON ExecAction where
+        toJSON ExecAction{..}
+          = Core.object
+              (Core.catMaybes
+                 [("command" Core..=) Core.<$> command])
+
+
+-- | Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https:\/\/github.com\/google\/cel-spec. Example (Comparison): title: \"Summary size limit\" description: \"Determines if a summary is less than 100 chars\" expression: \"document.summary.size() \< 100\" Example (Equality): title: \"Requestor is owner\" description: \"Determines if requestor is the document owner\" expression: \"document.owner == request.auth.claims.email\" Example (Logic): title: \"Public documents\" description: \"Determine whether the document should be publicly visible\" expression: \"document.type != \'private\' && document.type != \'internal\'\" Example (Data Manipulation): title: \"Notification string\" description: \"Create a notification string with a timestamp.\" expression: \"\'New message received at \' + string(document.create_time)\" The exact variables and functions that may be referenced within an expression are
+-- determined by the service that evaluates it. See the service documentation for additional information.
+--
+-- /See:/ 'newExpr' smart constructor.
+data Expr = Expr
+    {
+      -- | Optional. Description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.
+      description :: (Core.Maybe Core.Text)
+      -- | Textual representation of an expression in Common Expression Language syntax.
+    , expression :: (Core.Maybe Core.Text)
+      -- | Optional. String indicating the location of the expression for error reporting, e.g. a file name and a position in the file.
+    , location :: (Core.Maybe Core.Text)
+      -- | Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
+    , title :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Expr' with the minimum fields required to make a request.
+newExpr 
+    ::  Expr
+newExpr =
+  Expr
+    { description = Core.Nothing
+    , expression = Core.Nothing
+    , location = Core.Nothing
+    , title = Core.Nothing
     }
 
-instance Core.FromJSON GitFileSource where
-  parseJSON =
-    Core.withObject
-      "GitFileSource"
-      ( \o ->
-          GitFileSource
-            Core.<$> (o Core..:? "bitbucketServerConfig")
-            Core.<*> (o Core..:? "githubEnterpriseConfig")
-            Core.<*> (o Core..:? "path")
-            Core.<*> (o Core..:? "repoType")
-            Core.<*> (o Core..:? "revision")
-            Core.<*> (o Core..:? "uri")
-      )
+instance Core.FromJSON Expr where
+        parseJSON
+          = Core.withObject "Expr"
+              (\ o ->
+                 Expr Core.<$>
+                   (o Core..:? "description") Core.<*>
+                     (o Core..:? "expression")
+                     Core.<*> (o Core..:? "location")
+                     Core.<*> (o Core..:? "title"))
 
-instance Core.ToJSON GitFileSource where
-  toJSON GitFileSource {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("bitbucketServerConfig" Core..=)
-              Core.<$> bitbucketServerConfig,
-            ("githubEnterpriseConfig" Core..=)
-              Core.<$> githubEnterpriseConfig,
-            ("path" Core..=) Core.<$> path,
-            ("repoType" Core..=) Core.<$> repoType,
-            ("revision" Core..=) Core.<$> revision,
-            ("uri" Core..=) Core.<$> uri
-          ]
-      )
+instance Core.ToJSON Expr where
+        toJSON Expr{..}
+          = Core.object
+              (Core.catMaybes
+                 [("description" Core..=) Core.<$> description,
+                  ("expression" Core..=) Core.<$> expression,
+                  ("location" Core..=) Core.<$> location,
+                  ("title" Core..=) Core.<$> title])
 
--- | GitHubEnterpriseConfig represents a configuration for a GitHub Enterprise server.
+
+-- | Response for fetching git refs
 --
--- /See:/ 'newGitHubEnterpriseConfig' smart constructor.
-data GitHubEnterpriseConfig = GitHubEnterpriseConfig
-  { -- | Required. The GitHub app id of the Cloud Build app on the GitHub Enterprise server.
-    appId :: (Core.Maybe Core.Int64),
-    -- | Output only. Time when the installation was associated with the project.
-    createTime :: (Core.Maybe Core.DateTime),
-    -- | Name to display for this config.
-    displayName :: (Core.Maybe Core.Text),
-    -- | The URL of the github enterprise host the configuration is for.
-    hostUrl :: (Core.Maybe Core.Text),
-    -- | Optional. The full resource name for the GitHubEnterpriseConfig For example: \"projects\/{$project/id}\/locations\/{$location/id}\/githubEnterpriseConfigs\/{$config_id}\"
-    name :: (Core.Maybe Core.Text),
-    -- | Optional. The network to be used when reaching out to the GitHub Enterprise server. The VPC network must be enabled for private service connection. This should be set if the GitHub Enterprise server is hosted on-premises and not reachable by public internet. If this field is left empty, no network peering will occur and calls to the GitHub Enterprise server will be made over the public internet. Must be in the format @projects\/{project}\/global\/networks\/{network}@, where {project} is a project number or id and {network} is the name of a VPC network in the project.
-    peeredNetwork :: (Core.Maybe Core.Text),
-    -- | Names of secrets in Secret Manager.
-    secrets :: (Core.Maybe GitHubEnterpriseSecrets),
-    -- | Optional. SSL certificate to use for requests to GitHub Enterprise.
-    sslCa :: (Core.Maybe Core.Text),
-    -- | The key that should be attached to webhook calls to the ReceiveWebhook endpoint.
-    webhookKey :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newFetchGitRefsResponse' smart constructor.
+data FetchGitRefsResponse = FetchGitRefsResponse
+    {
+      -- | A token identifying a page of results the server should return.
+      nextPageToken :: (Core.Maybe Core.Text)
+      -- | Name of the refs fetched.
+    , refNames :: (Core.Maybe [Core.Text])
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'GitHubEnterpriseConfig' with the minimum fields required to make a request.
-newGitHubEnterpriseConfig ::
-  GitHubEnterpriseConfig
-newGitHubEnterpriseConfig =
-  GitHubEnterpriseConfig
-    { appId = Core.Nothing,
-      createTime = Core.Nothing,
-      displayName = Core.Nothing,
-      hostUrl = Core.Nothing,
-      name = Core.Nothing,
-      peeredNetwork = Core.Nothing,
-      secrets = Core.Nothing,
-      sslCa = Core.Nothing,
-      webhookKey = Core.Nothing
+-- | Creates a value of 'FetchGitRefsResponse' with the minimum fields required to make a request.
+newFetchGitRefsResponse 
+    ::  FetchGitRefsResponse
+newFetchGitRefsResponse =
+  FetchGitRefsResponse {nextPageToken = Core.Nothing, refNames = Core.Nothing}
+
+instance Core.FromJSON FetchGitRefsResponse where
+        parseJSON
+          = Core.withObject "FetchGitRefsResponse"
+              (\ o ->
+                 FetchGitRefsResponse Core.<$>
+                   (o Core..:? "nextPageToken") Core.<*>
+                     (o Core..:? "refNames"))
+
+instance Core.ToJSON FetchGitRefsResponse where
+        toJSON FetchGitRefsResponse{..}
+          = Core.object
+              (Core.catMaybes
+                 [("nextPageToken" Core..=) Core.<$> nextPageToken,
+                  ("refNames" Core..=) Core.<$> refNames])
+
+
+-- | Response message for FetchLinkableRepositories.
+--
+-- /See:/ 'newFetchLinkableRepositoriesResponse' smart constructor.
+data FetchLinkableRepositoriesResponse = FetchLinkableRepositoriesResponse
+    {
+      -- | A token identifying a page of results the server should return.
+      nextPageToken :: (Core.Maybe Core.Text)
+      -- | repositories ready to be created.
+    , repositories :: (Core.Maybe [Repository])
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FetchLinkableRepositoriesResponse' with the minimum fields required to make a request.
+newFetchLinkableRepositoriesResponse 
+    ::  FetchLinkableRepositoriesResponse
+newFetchLinkableRepositoriesResponse =
+  FetchLinkableRepositoriesResponse
+    {nextPageToken = Core.Nothing, repositories = Core.Nothing}
+
+instance Core.FromJSON
+           FetchLinkableRepositoriesResponse
+         where
+        parseJSON
+          = Core.withObject "FetchLinkableRepositoriesResponse"
+              (\ o ->
+                 FetchLinkableRepositoriesResponse Core.<$>
+                   (o Core..:? "nextPageToken") Core.<*>
+                     (o Core..:? "repositories"))
+
+instance Core.ToJSON
+           FetchLinkableRepositoriesResponse
+         where
+        toJSON FetchLinkableRepositoriesResponse{..}
+          = Core.object
+              (Core.catMaybes
+                 [("nextPageToken" Core..=) Core.<$> nextPageToken,
+                  ("repositories" Core..=) Core.<$> repositories])
+
+
+-- | Message for fetching SCM read token.
+--
+-- /See:/ 'newFetchReadTokenRequest' smart constructor.
+data FetchReadTokenRequest = FetchReadTokenRequest
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FetchReadTokenRequest' with the minimum fields required to make a request.
+newFetchReadTokenRequest 
+    ::  FetchReadTokenRequest
+newFetchReadTokenRequest = FetchReadTokenRequest
+
+instance Core.FromJSON FetchReadTokenRequest where
+        parseJSON
+          = Core.withObject "FetchReadTokenRequest"
+              (\ o -> Core.pure FetchReadTokenRequest)
+
+instance Core.ToJSON FetchReadTokenRequest where
+        toJSON = Core.const Core.emptyObject
+
+
+-- | Message for responding to get read token.
+--
+-- /See:/ 'newFetchReadTokenResponse' smart constructor.
+data FetchReadTokenResponse = FetchReadTokenResponse
+    {
+      -- | Expiration timestamp. Can be empty if unknown or non-expiring.
+      expirationTime :: (Core.Maybe Core.DateTime)
+      -- | The token content.
+    , token :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FetchReadTokenResponse' with the minimum fields required to make a request.
+newFetchReadTokenResponse 
+    ::  FetchReadTokenResponse
+newFetchReadTokenResponse =
+  FetchReadTokenResponse {expirationTime = Core.Nothing, token = Core.Nothing}
+
+instance Core.FromJSON FetchReadTokenResponse where
+        parseJSON
+          = Core.withObject "FetchReadTokenResponse"
+              (\ o ->
+                 FetchReadTokenResponse Core.<$>
+                   (o Core..:? "expirationTime") Core.<*>
+                     (o Core..:? "token"))
+
+instance Core.ToJSON FetchReadTokenResponse where
+        toJSON FetchReadTokenResponse{..}
+          = Core.object
+              (Core.catMaybes
+                 [("expirationTime" Core..=) Core.<$> expirationTime,
+                  ("token" Core..=) Core.<$> token])
+
+
+-- | Message for fetching SCM read\/write token.
+--
+-- /See:/ 'newFetchReadWriteTokenRequest' smart constructor.
+data FetchReadWriteTokenRequest = FetchReadWriteTokenRequest
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FetchReadWriteTokenRequest' with the minimum fields required to make a request.
+newFetchReadWriteTokenRequest 
+    ::  FetchReadWriteTokenRequest
+newFetchReadWriteTokenRequest = FetchReadWriteTokenRequest
+
+instance Core.FromJSON FetchReadWriteTokenRequest
+         where
+        parseJSON
+          = Core.withObject "FetchReadWriteTokenRequest"
+              (\ o -> Core.pure FetchReadWriteTokenRequest)
+
+instance Core.ToJSON FetchReadWriteTokenRequest where
+        toJSON = Core.const Core.emptyObject
+
+
+-- | Message for responding to get read\/write token.
+--
+-- /See:/ 'newFetchReadWriteTokenResponse' smart constructor.
+data FetchReadWriteTokenResponse = FetchReadWriteTokenResponse
+    {
+      -- | Expiration timestamp. Can be empty if unknown or non-expiring.
+      expirationTime :: (Core.Maybe Core.DateTime)
+      -- | The token content.
+    , token :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FetchReadWriteTokenResponse' with the minimum fields required to make a request.
+newFetchReadWriteTokenResponse 
+    ::  FetchReadWriteTokenResponse
+newFetchReadWriteTokenResponse =
+  FetchReadWriteTokenResponse
+    {expirationTime = Core.Nothing, token = Core.Nothing}
+
+instance Core.FromJSON FetchReadWriteTokenResponse
+         where
+        parseJSON
+          = Core.withObject "FetchReadWriteTokenResponse"
+              (\ o ->
+                 FetchReadWriteTokenResponse Core.<$>
+                   (o Core..:? "expirationTime") Core.<*>
+                     (o Core..:? "token"))
+
+instance Core.ToJSON FetchReadWriteTokenResponse
+         where
+        toJSON FetchReadWriteTokenResponse{..}
+          = Core.object
+              (Core.catMaybes
+                 [("expirationTime" Core..=) Core.<$> expirationTime,
+                  ("token" Core..=) Core.<$> token])
+
+
+-- | Configuration for connections to github.com.
+--
+-- /See:/ 'newGitHubConfig' smart constructor.
+data GitHubConfig = GitHubConfig
+    {
+      -- | Optional. GitHub App installation id.
+      appInstallationId :: (Core.Maybe Core.Int64)
+      -- | Optional. OAuth credential of the account that authorized the Cloud Build GitHub App. It is recommended to use a robot account instead of a human user account. The OAuth token must be tied to the Cloud Build GitHub App.
+    , authorizerCredential :: (Core.Maybe OAuthCredential)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GitHubConfig' with the minimum fields required to make a request.
+newGitHubConfig 
+    ::  GitHubConfig
+newGitHubConfig =
+  GitHubConfig
+    {appInstallationId = Core.Nothing, authorizerCredential = Core.Nothing}
+
+instance Core.FromJSON GitHubConfig where
+        parseJSON
+          = Core.withObject "GitHubConfig"
+              (\ o ->
+                 GitHubConfig Core.<$>
+                   (o Core..:? "appInstallationId" Core.<&>
+                      Core.fmap Core.fromAsText)
+                     Core.<*> (o Core..:? "authorizerCredential"))
+
+instance Core.ToJSON GitHubConfig where
+        toJSON GitHubConfig{..}
+          = Core.object
+              (Core.catMaybes
+                 [("appInstallationId" Core..=) Core.. Core.AsText
+                    Core.<$> appInstallationId,
+                  ("authorizerCredential" Core..=) Core.<$>
+                    authorizerCredential])
+
+
+-- | Conditions defines a readiness condition for a Knative resource.
+--
+-- /See:/ 'newGoogleDevtoolsCloudbuildV2Condition' smart constructor.
+data GoogleDevtoolsCloudbuildV2Condition = GoogleDevtoolsCloudbuildV2Condition
+    {
+      -- | LastTransitionTime is the last time the condition transitioned from one status to another.
+      lastTransitionTime :: (Core.Maybe Core.DateTime)
+      -- | A human readable message indicating details about the transition.
+    , message :: (Core.Maybe Core.Text)
+      -- | The reason for the condition\'s last transition.
+    , reason :: (Core.Maybe Core.Text)
+      -- | Severity with which to treat failures of this type of condition.
+    , severity :: (Core.Maybe GoogleDevtoolsCloudbuildV2Condition_Severity)
+      -- | Status of the condition.
+    , status :: (Core.Maybe GoogleDevtoolsCloudbuildV2Condition_Status)
+      -- | Type of condition.
+    , type' :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleDevtoolsCloudbuildV2Condition' with the minimum fields required to make a request.
+newGoogleDevtoolsCloudbuildV2Condition 
+    ::  GoogleDevtoolsCloudbuildV2Condition
+newGoogleDevtoolsCloudbuildV2Condition =
+  GoogleDevtoolsCloudbuildV2Condition
+    { lastTransitionTime = Core.Nothing
+    , message = Core.Nothing
+    , reason = Core.Nothing
+    , severity = Core.Nothing
+    , status = Core.Nothing
+    , type' = Core.Nothing
     }
 
-instance Core.FromJSON GitHubEnterpriseConfig where
-  parseJSON =
-    Core.withObject
-      "GitHubEnterpriseConfig"
-      ( \o ->
-          GitHubEnterpriseConfig
-            Core.<$> ( o Core..:? "appId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "displayName")
-            Core.<*> (o Core..:? "hostUrl")
-            Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "peeredNetwork")
-            Core.<*> (o Core..:? "secrets")
-            Core.<*> (o Core..:? "sslCa")
-            Core.<*> (o Core..:? "webhookKey")
-      )
+instance Core.FromJSON
+           GoogleDevtoolsCloudbuildV2Condition
+         where
+        parseJSON
+          = Core.withObject
+              "GoogleDevtoolsCloudbuildV2Condition"
+              (\ o ->
+                 GoogleDevtoolsCloudbuildV2Condition Core.<$>
+                   (o Core..:? "lastTransitionTime") Core.<*>
+                     (o Core..:? "message")
+                     Core.<*> (o Core..:? "reason")
+                     Core.<*> (o Core..:? "severity")
+                     Core.<*> (o Core..:? "status")
+                     Core.<*> (o Core..:? "type"))
 
-instance Core.ToJSON GitHubEnterpriseConfig where
-  toJSON GitHubEnterpriseConfig {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("appId" Core..=) Core.. Core.AsText Core.<$> appId,
-            ("createTime" Core..=) Core.<$> createTime,
-            ("displayName" Core..=) Core.<$> displayName,
-            ("hostUrl" Core..=) Core.<$> hostUrl,
-            ("name" Core..=) Core.<$> name,
-            ("peeredNetwork" Core..=) Core.<$> peeredNetwork,
-            ("secrets" Core..=) Core.<$> secrets,
-            ("sslCa" Core..=) Core.<$> sslCa,
-            ("webhookKey" Core..=) Core.<$> webhookKey
-          ]
-      )
+instance Core.ToJSON
+           GoogleDevtoolsCloudbuildV2Condition
+         where
+        toJSON GoogleDevtoolsCloudbuildV2Condition{..}
+          = Core.object
+              (Core.catMaybes
+                 [("lastTransitionTime" Core..=) Core.<$>
+                    lastTransitionTime,
+                  ("message" Core..=) Core.<$> message,
+                  ("reason" Core..=) Core.<$> reason,
+                  ("severity" Core..=) Core.<$> severity,
+                  ("status" Core..=) Core.<$> status,
+                  ("type" Core..=) Core.<$> type'])
 
--- | GitHubEnterpriseSecrets represents the names of all necessary secrets in Secret Manager for a GitHub Enterprise server. Format is: projects\/\/secrets\/.
+
+-- | Configuration for connections to an instance of GitHub Enterprise.
 --
--- /See:/ 'newGitHubEnterpriseSecrets' smart constructor.
-data GitHubEnterpriseSecrets = GitHubEnterpriseSecrets
-  { -- | The resource name for the OAuth client ID secret in Secret Manager.
-    oauthClientIdName :: (Core.Maybe Core.Text),
-    -- | The resource name for the OAuth client ID secret version in Secret Manager.
-    oauthClientIdVersionName :: (Core.Maybe Core.Text),
-    -- | The resource name for the OAuth secret in Secret Manager.
-    oauthSecretName :: (Core.Maybe Core.Text),
-    -- | The resource name for the OAuth secret secret version in Secret Manager.
-    oauthSecretVersionName :: (Core.Maybe Core.Text),
-    -- | The resource name for the private key secret.
-    privateKeyName :: (Core.Maybe Core.Text),
-    -- | The resource name for the private key secret version.
-    privateKeyVersionName :: (Core.Maybe Core.Text),
-    -- | The resource name for the webhook secret in Secret Manager.
-    webhookSecretName :: (Core.Maybe Core.Text),
-    -- | The resource name for the webhook secret secret version in Secret Manager.
-    webhookSecretVersionName :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newGoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig' smart constructor.
+data GoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig = GoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig
+    {
+      -- | Required. API Key used for authentication of webhook events.
+      apiKey :: (Core.Maybe Core.Text)
+      -- | Optional. Id of the GitHub App created from the manifest.
+    , appId :: (Core.Maybe Core.Int64)
+      -- | Optional. ID of the installation of the GitHub App.
+    , appInstallationId :: (Core.Maybe Core.Int64)
+      -- | Optional. The URL-friendly name of the GitHub App.
+    , appSlug :: (Core.Maybe Core.Text)
+      -- | Required. The URI of the GitHub Enterprise host this connection is for.
+    , hostUri :: (Core.Maybe Core.Text)
+      -- | Optional. SecretManager resource containing the private key of the GitHub App, formatted as @projects\/*\/secrets\/*\/versions\/*@.
+    , privateKeySecretVersion :: (Core.Maybe Core.Text)
+      -- | Output only. GitHub Enterprise version installed at the host_uri.
+    , serverVersion :: (Core.Maybe Core.Text)
+      -- | Optional. Configuration for using Service Directory to privately connect to a GitHub Enterprise server. This should only be set if the GitHub Enterprise server is hosted on-premises and not reachable by public internet. If this field is left empty, calls to the GitHub Enterprise server will be made over the public internet.
+    , serviceDirectoryConfig :: (Core.Maybe GoogleDevtoolsCloudbuildV2ServiceDirectoryConfig)
+      -- | Optional. SSL certificate to use for requests to GitHub Enterprise.
+    , sslCa :: (Core.Maybe Core.Text)
+      -- | Optional. SecretManager resource containing the webhook secret of the GitHub App, formatted as @projects\/*\/secrets\/*\/versions\/*@.
+    , webhookSecretSecretVersion :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'GitHubEnterpriseSecrets' with the minimum fields required to make a request.
-newGitHubEnterpriseSecrets ::
-  GitHubEnterpriseSecrets
-newGitHubEnterpriseSecrets =
-  GitHubEnterpriseSecrets
-    { oauthClientIdName = Core.Nothing,
-      oauthClientIdVersionName = Core.Nothing,
-      oauthSecretName = Core.Nothing,
-      oauthSecretVersionName = Core.Nothing,
-      privateKeyName = Core.Nothing,
-      privateKeyVersionName = Core.Nothing,
-      webhookSecretName = Core.Nothing,
-      webhookSecretVersionName = Core.Nothing
+-- | Creates a value of 'GoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig' with the minimum fields required to make a request.
+newGoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig 
+    ::  GoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig
+newGoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig =
+  GoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig
+    { apiKey = Core.Nothing
+    , appId = Core.Nothing
+    , appInstallationId = Core.Nothing
+    , appSlug = Core.Nothing
+    , hostUri = Core.Nothing
+    , privateKeySecretVersion = Core.Nothing
+    , serverVersion = Core.Nothing
+    , serviceDirectoryConfig = Core.Nothing
+    , sslCa = Core.Nothing
+    , webhookSecretSecretVersion = Core.Nothing
     }
 
-instance Core.FromJSON GitHubEnterpriseSecrets where
-  parseJSON =
-    Core.withObject
-      "GitHubEnterpriseSecrets"
-      ( \o ->
-          GitHubEnterpriseSecrets
-            Core.<$> (o Core..:? "oauthClientIdName")
-            Core.<*> (o Core..:? "oauthClientIdVersionName")
-            Core.<*> (o Core..:? "oauthSecretName")
-            Core.<*> (o Core..:? "oauthSecretVersionName")
-            Core.<*> (o Core..:? "privateKeyName")
-            Core.<*> (o Core..:? "privateKeyVersionName")
-            Core.<*> (o Core..:? "webhookSecretName")
-            Core.<*> (o Core..:? "webhookSecretVersionName")
-      )
+instance Core.FromJSON
+           GoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig
+         where
+        parseJSON
+          = Core.withObject
+              "GoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig"
+              (\ o ->
+                 GoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig
+                   Core.<$>
+                   (o Core..:? "apiKey") Core.<*>
+                     (o Core..:? "appId" Core.<&>
+                        Core.fmap Core.fromAsText)
+                     Core.<*>
+                     (o Core..:? "appInstallationId" Core.<&>
+                        Core.fmap Core.fromAsText)
+                     Core.<*> (o Core..:? "appSlug")
+                     Core.<*> (o Core..:? "hostUri")
+                     Core.<*> (o Core..:? "privateKeySecretVersion")
+                     Core.<*> (o Core..:? "serverVersion")
+                     Core.<*> (o Core..:? "serviceDirectoryConfig")
+                     Core.<*> (o Core..:? "sslCa")
+                     Core.<*> (o Core..:? "webhookSecretSecretVersion"))
 
-instance Core.ToJSON GitHubEnterpriseSecrets where
-  toJSON GitHubEnterpriseSecrets {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("oauthClientIdName" Core..=)
-              Core.<$> oauthClientIdName,
-            ("oauthClientIdVersionName" Core..=)
-              Core.<$> oauthClientIdVersionName,
-            ("oauthSecretName" Core..=) Core.<$> oauthSecretName,
-            ("oauthSecretVersionName" Core..=)
-              Core.<$> oauthSecretVersionName,
-            ("privateKeyName" Core..=) Core.<$> privateKeyName,
-            ("privateKeyVersionName" Core..=)
-              Core.<$> privateKeyVersionName,
-            ("webhookSecretName" Core..=)
-              Core.<$> webhookSecretName,
-            ("webhookSecretVersionName" Core..=)
-              Core.<$> webhookSecretVersionName
-          ]
-      )
+instance Core.ToJSON
+           GoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig
+         where
+        toJSON
+          GoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig{..}
+          = Core.object
+              (Core.catMaybes
+                 [("apiKey" Core..=) Core.<$> apiKey,
+                  ("appId" Core..=) Core.. Core.AsText Core.<$> appId,
+                  ("appInstallationId" Core..=) Core.. Core.AsText
+                    Core.<$> appInstallationId,
+                  ("appSlug" Core..=) Core.<$> appSlug,
+                  ("hostUri" Core..=) Core.<$> hostUri,
+                  ("privateKeySecretVersion" Core..=) Core.<$>
+                    privateKeySecretVersion,
+                  ("serverVersion" Core..=) Core.<$> serverVersion,
+                  ("serviceDirectoryConfig" Core..=) Core.<$>
+                    serviceDirectoryConfig,
+                  ("sslCa" Core..=) Core.<$> sslCa,
+                  ("webhookSecretSecretVersion" Core..=) Core.<$>
+                    webhookSecretSecretVersion])
 
--- | GitHubEventsConfig describes the configuration of a trigger that creates a build whenever a GitHub event is received.
+
+-- | Configuration for connections to gitlab.com or an instance of GitLab Enterprise.
 --
--- /See:/ 'newGitHubEventsConfig' smart constructor.
-data GitHubEventsConfig = GitHubEventsConfig
-  { -- | Optional. The resource name of the github enterprise config that should be applied to this installation. For example: \"projects\/{$project/id}\/locations\/{$location/id}\/githubEnterpriseConfigs\/{$config_id}\"
-    enterpriseConfigResourceName :: (Core.Maybe Core.Text),
-    -- | The installationID that emits the GitHub event.
-    installationId :: (Core.Maybe Core.Int64),
-    -- | Name of the repository. For example: The name for https:\/\/github.com\/googlecloudplatform\/cloud-builders is \"cloud-builders\".
-    name :: (Core.Maybe Core.Text),
-    -- | Owner of the repository. For example: The owner for https:\/\/github.com\/googlecloudplatform\/cloud-builders is \"googlecloudplatform\".
-    owner :: (Core.Maybe Core.Text),
-    -- | filter to match changes in pull requests.
-    pullRequest :: (Core.Maybe PullRequestFilter),
-    -- | filter to match changes in refs like branches, tags.
-    push :: (Core.Maybe PushFilter)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newGoogleDevtoolsCloudbuildV2GitLabConfig' smart constructor.
+data GoogleDevtoolsCloudbuildV2GitLabConfig = GoogleDevtoolsCloudbuildV2GitLabConfig
+    {
+      -- | Required. A GitLab personal access token with the @api@ scope access.
+      authorizerCredential :: (Core.Maybe UserCredential)
+      -- | Optional. The URI of the GitLab Enterprise host this connection is for. If not specified, the default value is https:\/\/gitlab.com.
+    , hostUri :: (Core.Maybe Core.Text)
+      -- | Required. A GitLab personal access token with the minimum @read_api@ scope access.
+    , readAuthorizerCredential :: (Core.Maybe UserCredential)
+      -- | Output only. Version of the GitLab Enterprise server running on the @host_uri@.
+    , serverVersion :: (Core.Maybe Core.Text)
+      -- | Optional. Configuration for using Service Directory to privately connect to a GitLab Enterprise server. This should only be set if the GitLab Enterprise server is hosted on-premises and not reachable by public internet. If this field is left empty, calls to the GitLab Enterprise server will be made over the public internet.
+    , serviceDirectoryConfig :: (Core.Maybe GoogleDevtoolsCloudbuildV2ServiceDirectoryConfig)
+      -- | Optional. SSL certificate to use for requests to GitLab Enterprise.
+    , sslCa :: (Core.Maybe Core.Text)
+      -- | Required. Immutable. SecretManager resource containing the webhook secret of a GitLab Enterprise project, formatted as @projects\/*\/secrets\/*\/versions\/*@.
+    , webhookSecretSecretVersion :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'GitHubEventsConfig' with the minimum fields required to make a request.
-newGitHubEventsConfig ::
-  GitHubEventsConfig
-newGitHubEventsConfig =
-  GitHubEventsConfig
-    { enterpriseConfigResourceName = Core.Nothing,
-      installationId = Core.Nothing,
-      name = Core.Nothing,
-      owner = Core.Nothing,
-      pullRequest = Core.Nothing,
-      push = Core.Nothing
+-- | Creates a value of 'GoogleDevtoolsCloudbuildV2GitLabConfig' with the minimum fields required to make a request.
+newGoogleDevtoolsCloudbuildV2GitLabConfig 
+    ::  GoogleDevtoolsCloudbuildV2GitLabConfig
+newGoogleDevtoolsCloudbuildV2GitLabConfig =
+  GoogleDevtoolsCloudbuildV2GitLabConfig
+    { authorizerCredential = Core.Nothing
+    , hostUri = Core.Nothing
+    , readAuthorizerCredential = Core.Nothing
+    , serverVersion = Core.Nothing
+    , serviceDirectoryConfig = Core.Nothing
+    , sslCa = Core.Nothing
+    , webhookSecretSecretVersion = Core.Nothing
     }
 
-instance Core.FromJSON GitHubEventsConfig where
-  parseJSON =
-    Core.withObject
-      "GitHubEventsConfig"
-      ( \o ->
-          GitHubEventsConfig
-            Core.<$> (o Core..:? "enterpriseConfigResourceName")
-            Core.<*> ( o Core..:? "installationId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "owner")
-            Core.<*> (o Core..:? "pullRequest")
-            Core.<*> (o Core..:? "push")
-      )
+instance Core.FromJSON
+           GoogleDevtoolsCloudbuildV2GitLabConfig
+         where
+        parseJSON
+          = Core.withObject
+              "GoogleDevtoolsCloudbuildV2GitLabConfig"
+              (\ o ->
+                 GoogleDevtoolsCloudbuildV2GitLabConfig Core.<$>
+                   (o Core..:? "authorizerCredential") Core.<*>
+                     (o Core..:? "hostUri")
+                     Core.<*> (o Core..:? "readAuthorizerCredential")
+                     Core.<*> (o Core..:? "serverVersion")
+                     Core.<*> (o Core..:? "serviceDirectoryConfig")
+                     Core.<*> (o Core..:? "sslCa")
+                     Core.<*> (o Core..:? "webhookSecretSecretVersion"))
 
-instance Core.ToJSON GitHubEventsConfig where
-  toJSON GitHubEventsConfig {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("enterpriseConfigResourceName" Core..=)
-              Core.<$> enterpriseConfigResourceName,
-            ("installationId" Core..=) Core.. Core.AsText
-              Core.<$> installationId,
-            ("name" Core..=) Core.<$> name,
-            ("owner" Core..=) Core.<$> owner,
-            ("pullRequest" Core..=) Core.<$> pullRequest,
-            ("push" Core..=) Core.<$> push
-          ]
-      )
+instance Core.ToJSON
+           GoogleDevtoolsCloudbuildV2GitLabConfig
+         where
+        toJSON GoogleDevtoolsCloudbuildV2GitLabConfig{..}
+          = Core.object
+              (Core.catMaybes
+                 [("authorizerCredential" Core..=) Core.<$>
+                    authorizerCredential,
+                  ("hostUri" Core..=) Core.<$> hostUri,
+                  ("readAuthorizerCredential" Core..=) Core.<$>
+                    readAuthorizerCredential,
+                  ("serverVersion" Core..=) Core.<$> serverVersion,
+                  ("serviceDirectoryConfig" Core..=) Core.<$>
+                    serviceDirectoryConfig,
+                  ("sslCa" Core..=) Core.<$> sslCa,
+                  ("webhookSecretSecretVersion" Core..=) Core.<$>
+                    webhookSecretSecretVersion])
 
--- | GitLabConfig represents the configuration for a GitLab integration.
+
+-- | Represents the metadata of the long-running operation.
 --
--- /See:/ 'newGitLabConfig' smart constructor.
-data GitLabConfig = GitLabConfig
-  { -- | Connected GitLab.com or GitLabEnterprise repositories for this config.
-    connectedRepositories :: (Core.Maybe [GitLabRepositoryId]),
-    -- | Output only. Time when the config was created.
-    createTime :: (Core.Maybe Core.DateTime),
-    -- | Optional. GitLabEnterprise config.
-    enterpriseConfig :: (Core.Maybe GitLabEnterpriseConfig),
-    -- | The resource name for the config.
-    name :: (Core.Maybe Core.Text),
-    -- | Required. Secret Manager secrets needed by the config.
-    secrets :: (Core.Maybe GitLabSecrets),
-    -- | Username of the GitLab.com or GitLab Enterprise account Cloud Build will use.
-    username :: (Core.Maybe Core.Text),
-    -- | Output only. UUID included in webhook requests. The UUID is used to look up the corresponding config.
-    webhookKey :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newGoogleDevtoolsCloudbuildV2OperationMetadata' smart constructor.
+data GoogleDevtoolsCloudbuildV2OperationMetadata = GoogleDevtoolsCloudbuildV2OperationMetadata
+    {
+      -- | Output only. API version used to start the operation.
+      apiVersion :: (Core.Maybe Core.Text)
+      -- | Output only. The time the operation was created.
+    , createTime :: (Core.Maybe Core.DateTime)
+      -- | Output only. The time the operation finished running.
+    , endTime :: (Core.Maybe Core.DateTime)
+      -- | Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
+    , requestedCancellation :: (Core.Maybe Core.Bool)
+      -- | Output only. Human-readable status of the operation, if any.
+    , statusMessage :: (Core.Maybe Core.Text)
+      -- | Output only. Server-defined resource path for the target of the operation.
+    , target :: (Core.Maybe Core.Text)
+      -- | Output only. Name of the verb executed by the operation.
+    , verb :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'GitLabConfig' with the minimum fields required to make a request.
-newGitLabConfig ::
-  GitLabConfig
-newGitLabConfig =
-  GitLabConfig
-    { connectedRepositories = Core.Nothing,
-      createTime = Core.Nothing,
-      enterpriseConfig = Core.Nothing,
-      name = Core.Nothing,
-      secrets = Core.Nothing,
-      username = Core.Nothing,
-      webhookKey = Core.Nothing
+-- | Creates a value of 'GoogleDevtoolsCloudbuildV2OperationMetadata' with the minimum fields required to make a request.
+newGoogleDevtoolsCloudbuildV2OperationMetadata 
+    ::  GoogleDevtoolsCloudbuildV2OperationMetadata
+newGoogleDevtoolsCloudbuildV2OperationMetadata =
+  GoogleDevtoolsCloudbuildV2OperationMetadata
+    { apiVersion = Core.Nothing
+    , createTime = Core.Nothing
+    , endTime = Core.Nothing
+    , requestedCancellation = Core.Nothing
+    , statusMessage = Core.Nothing
+    , target = Core.Nothing
+    , verb = Core.Nothing
     }
 
-instance Core.FromJSON GitLabConfig where
-  parseJSON =
-    Core.withObject
-      "GitLabConfig"
-      ( \o ->
-          GitLabConfig
-            Core.<$> (o Core..:? "connectedRepositories")
-            Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "enterpriseConfig")
-            Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "secrets")
-            Core.<*> (o Core..:? "username")
-            Core.<*> (o Core..:? "webhookKey")
-      )
+instance Core.FromJSON
+           GoogleDevtoolsCloudbuildV2OperationMetadata
+         where
+        parseJSON
+          = Core.withObject
+              "GoogleDevtoolsCloudbuildV2OperationMetadata"
+              (\ o ->
+                 GoogleDevtoolsCloudbuildV2OperationMetadata Core.<$>
+                   (o Core..:? "apiVersion") Core.<*>
+                     (o Core..:? "createTime")
+                     Core.<*> (o Core..:? "endTime")
+                     Core.<*> (o Core..:? "requestedCancellation")
+                     Core.<*> (o Core..:? "statusMessage")
+                     Core.<*> (o Core..:? "target")
+                     Core.<*> (o Core..:? "verb"))
 
-instance Core.ToJSON GitLabConfig where
-  toJSON GitLabConfig {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("connectedRepositories" Core..=)
-              Core.<$> connectedRepositories,
-            ("createTime" Core..=) Core.<$> createTime,
-            ("enterpriseConfig" Core..=)
-              Core.<$> enterpriseConfig,
-            ("name" Core..=) Core.<$> name,
-            ("secrets" Core..=) Core.<$> secrets,
-            ("username" Core..=) Core.<$> username,
-            ("webhookKey" Core..=) Core.<$> webhookKey
-          ]
-      )
+instance Core.ToJSON
+           GoogleDevtoolsCloudbuildV2OperationMetadata
+         where
+        toJSON
+          GoogleDevtoolsCloudbuildV2OperationMetadata{..}
+          = Core.object
+              (Core.catMaybes
+                 [("apiVersion" Core..=) Core.<$> apiVersion,
+                  ("createTime" Core..=) Core.<$> createTime,
+                  ("endTime" Core..=) Core.<$> endTime,
+                  ("requestedCancellation" Core..=) Core.<$>
+                    requestedCancellation,
+                  ("statusMessage" Core..=) Core.<$> statusMessage,
+                  ("target" Core..=) Core.<$> target,
+                  ("verb" Core..=) Core.<$> verb])
 
--- | GitLabConnectedRepository represents a GitLab connected repository request response.
+
+-- | ServiceDirectoryConfig represents Service Directory configuration for a connection.
 --
--- /See:/ 'newGitLabConnectedRepository' smart constructor.
-data GitLabConnectedRepository = GitLabConnectedRepository
-  { -- | The name of the @GitLabConfig@ that added connected repository. Format: @projects\/{project}\/locations\/{location}\/gitLabConfigs\/{config}@
-    parent :: (Core.Maybe Core.Text),
-    -- | The GitLab repositories to connect.
-    repo :: (Core.Maybe GitLabRepositoryId),
-    -- | Output only. The status of the repo connection request.
-    status :: (Core.Maybe Status)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'GitLabConnectedRepository' with the minimum fields required to make a request.
-newGitLabConnectedRepository ::
-  GitLabConnectedRepository
-newGitLabConnectedRepository =
-  GitLabConnectedRepository
-    { parent = Core.Nothing,
-      repo = Core.Nothing,
-      status = Core.Nothing
+-- /See:/ 'newGoogleDevtoolsCloudbuildV2ServiceDirectoryConfig' smart constructor.
+newtype GoogleDevtoolsCloudbuildV2ServiceDirectoryConfig = GoogleDevtoolsCloudbuildV2ServiceDirectoryConfig
+    {
+      -- | Required. The Service Directory service name. Format: projects\/{project}\/locations\/{location}\/namespaces\/{namespace}\/services\/{service}.
+      service :: (Core.Maybe Core.Text)
     }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
-instance Core.FromJSON GitLabConnectedRepository where
-  parseJSON =
-    Core.withObject
-      "GitLabConnectedRepository"
-      ( \o ->
-          GitLabConnectedRepository
-            Core.<$> (o Core..:? "parent")
-            Core.<*> (o Core..:? "repo")
-            Core.<*> (o Core..:? "status")
-      )
+-- | Creates a value of 'GoogleDevtoolsCloudbuildV2ServiceDirectoryConfig' with the minimum fields required to make a request.
+newGoogleDevtoolsCloudbuildV2ServiceDirectoryConfig 
+    ::  GoogleDevtoolsCloudbuildV2ServiceDirectoryConfig
+newGoogleDevtoolsCloudbuildV2ServiceDirectoryConfig =
+  GoogleDevtoolsCloudbuildV2ServiceDirectoryConfig {service = Core.Nothing}
 
-instance Core.ToJSON GitLabConnectedRepository where
-  toJSON GitLabConnectedRepository {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("parent" Core..=) Core.<$> parent,
-            ("repo" Core..=) Core.<$> repo,
-            ("status" Core..=) Core.<$> status
-          ]
-      )
+instance Core.FromJSON
+           GoogleDevtoolsCloudbuildV2ServiceDirectoryConfig
+         where
+        parseJSON
+          = Core.withObject
+              "GoogleDevtoolsCloudbuildV2ServiceDirectoryConfig"
+              (\ o ->
+                 GoogleDevtoolsCloudbuildV2ServiceDirectoryConfig
+                   Core.<$> (o Core..:? "service"))
 
--- | GitLabEnterpriseConfig represents the configuration for a GitLabEnterprise integration.
---
--- /See:/ 'newGitLabEnterpriseConfig' smart constructor.
-data GitLabEnterpriseConfig = GitLabEnterpriseConfig
-  { -- | Immutable. The URI of the GitlabEnterprise host.
-    hostUri :: (Core.Maybe Core.Text),
-    -- | The Service Directory configuration to be used when reaching out to the GitLab Enterprise instance.
-    serviceDirectoryConfig :: (Core.Maybe ServiceDirectoryConfig),
-    -- | The SSL certificate to use in requests to GitLab Enterprise instances.
-    sslCa :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+instance Core.ToJSON
+           GoogleDevtoolsCloudbuildV2ServiceDirectoryConfig
+         where
+        toJSON
+          GoogleDevtoolsCloudbuildV2ServiceDirectoryConfig{..}
+          = Core.object
+              (Core.catMaybes
+                 [("service" Core..=) Core.<$> service])
 
--- | Creates a value of 'GitLabEnterpriseConfig' with the minimum fields required to make a request.
-newGitLabEnterpriseConfig ::
-  GitLabEnterpriseConfig
-newGitLabEnterpriseConfig =
-  GitLabEnterpriseConfig
-    { hostUri = Core.Nothing,
-      serviceDirectoryConfig = Core.Nothing,
-      sslCa = Core.Nothing
-    }
-
-instance Core.FromJSON GitLabEnterpriseConfig where
-  parseJSON =
-    Core.withObject
-      "GitLabEnterpriseConfig"
-      ( \o ->
-          GitLabEnterpriseConfig
-            Core.<$> (o Core..:? "hostUri")
-            Core.<*> (o Core..:? "serviceDirectoryConfig")
-            Core.<*> (o Core..:? "sslCa")
-      )
-
-instance Core.ToJSON GitLabEnterpriseConfig where
-  toJSON GitLabEnterpriseConfig {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("hostUri" Core..=) Core.<$> hostUri,
-            ("serviceDirectoryConfig" Core..=)
-              Core.<$> serviceDirectoryConfig,
-            ("sslCa" Core..=) Core.<$> sslCa
-          ]
-      )
-
--- | GitLabEventsConfig describes the configuration of a trigger that creates a build whenever a GitLab event is received.
---
--- /See:/ 'newGitLabEventsConfig' smart constructor.
-data GitLabEventsConfig = GitLabEventsConfig
-  { -- | Output only. The GitLabConfig specified in the gitlab/config/resource field.
-    gitlabConfig :: (Core.Maybe GitLabConfig),
-    -- | The GitLab config resource that this trigger config maps to.
-    gitlabConfigResource :: (Core.Maybe Core.Text),
-    -- | Namespace of the GitLab project.
-    projectNamespace :: (Core.Maybe Core.Text),
-    -- | Filter to match changes in pull requests.
-    pullRequest :: (Core.Maybe PullRequestFilter),
-    -- | Filter to match changes in refs like branches, tags.
-    push :: (Core.Maybe PushFilter)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'GitLabEventsConfig' with the minimum fields required to make a request.
-newGitLabEventsConfig ::
-  GitLabEventsConfig
-newGitLabEventsConfig =
-  GitLabEventsConfig
-    { gitlabConfig = Core.Nothing,
-      gitlabConfigResource = Core.Nothing,
-      projectNamespace = Core.Nothing,
-      pullRequest = Core.Nothing,
-      push = Core.Nothing
-    }
-
-instance Core.FromJSON GitLabEventsConfig where
-  parseJSON =
-    Core.withObject
-      "GitLabEventsConfig"
-      ( \o ->
-          GitLabEventsConfig
-            Core.<$> (o Core..:? "gitlabConfig")
-            Core.<*> (o Core..:? "gitlabConfigResource")
-            Core.<*> (o Core..:? "projectNamespace")
-            Core.<*> (o Core..:? "pullRequest")
-            Core.<*> (o Core..:? "push")
-      )
-
-instance Core.ToJSON GitLabEventsConfig where
-  toJSON GitLabEventsConfig {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("gitlabConfig" Core..=) Core.<$> gitlabConfig,
-            ("gitlabConfigResource" Core..=)
-              Core.<$> gitlabConfigResource,
-            ("projectNamespace" Core..=)
-              Core.<$> projectNamespace,
-            ("pullRequest" Core..=) Core.<$> pullRequest,
-            ("push" Core..=) Core.<$> push
-          ]
-      )
-
--- | Proto Representing a GitLabRepository
---
--- /See:/ 'newGitLabRepository' smart constructor.
-data GitLabRepository = GitLabRepository
-  { -- | Link to the browse repo page on the GitLab instance
-    browseUri :: (Core.Maybe Core.Text),
-    -- | Description of the repository
-    description :: (Core.Maybe Core.Text),
-    -- | Display name of the repository
-    displayName :: (Core.Maybe Core.Text),
-    -- | The resource name of the repository
-    name :: (Core.Maybe Core.Text),
-    -- | Identifier for a repository
-    repositoryId :: (Core.Maybe GitLabRepositoryId)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'GitLabRepository' with the minimum fields required to make a request.
-newGitLabRepository ::
-  GitLabRepository
-newGitLabRepository =
-  GitLabRepository
-    { browseUri = Core.Nothing,
-      description = Core.Nothing,
-      displayName = Core.Nothing,
-      name = Core.Nothing,
-      repositoryId = Core.Nothing
-    }
-
-instance Core.FromJSON GitLabRepository where
-  parseJSON =
-    Core.withObject
-      "GitLabRepository"
-      ( \o ->
-          GitLabRepository
-            Core.<$> (o Core..:? "browseUri")
-            Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "displayName")
-            Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "repositoryId")
-      )
-
-instance Core.ToJSON GitLabRepository where
-  toJSON GitLabRepository {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("browseUri" Core..=) Core.<$> browseUri,
-            ("description" Core..=) Core.<$> description,
-            ("displayName" Core..=) Core.<$> displayName,
-            ("name" Core..=) Core.<$> name,
-            ("repositoryId" Core..=) Core.<$> repositoryId
-          ]
-      )
-
--- | GitLabRepositoryId identifies a specific repository hosted on GitLab.com or GitLabEnterprise
---
--- /See:/ 'newGitLabRepositoryId' smart constructor.
-data GitLabRepositoryId = GitLabRepositoryId
-  { -- | Required. Identifier for the repository. example: \"namespace\/project-slug\", namespace is usually the username or group ID
-    id :: (Core.Maybe Core.Text),
-    -- | Output only. The ID of the webhook that was created for receiving events from this repo. We only create and manage a single webhook for each repo.
-    webhookId :: (Core.Maybe Core.Int32)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'GitLabRepositoryId' with the minimum fields required to make a request.
-newGitLabRepositoryId ::
-  GitLabRepositoryId
-newGitLabRepositoryId =
-  GitLabRepositoryId {id = Core.Nothing, webhookId = Core.Nothing}
-
-instance Core.FromJSON GitLabRepositoryId where
-  parseJSON =
-    Core.withObject
-      "GitLabRepositoryId"
-      ( \o ->
-          GitLabRepositoryId
-            Core.<$> (o Core..:? "id") Core.<*> (o Core..:? "webhookId")
-      )
-
-instance Core.ToJSON GitLabRepositoryId where
-  toJSON GitLabRepositoryId {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("id" Core..=) Core.<$> id,
-            ("webhookId" Core..=) Core.<$> webhookId
-          ]
-      )
-
--- | GitLabSecrets represents the secrets in Secret Manager for a GitLab integration.
---
--- /See:/ 'newGitLabSecrets' smart constructor.
-data GitLabSecrets = GitLabSecrets
-  { -- | Required. The resource name for the api access token’s secret version
-    apiAccessTokenVersion :: (Core.Maybe Core.Text),
-    -- | Required. Immutable. API Key that will be attached to webhook requests from GitLab to Cloud Build.
-    apiKeyVersion :: (Core.Maybe Core.Text),
-    -- | Required. The resource name for the read access token’s secret version
-    readAccessTokenVersion :: (Core.Maybe Core.Text),
-    -- | Required. Immutable. The resource name for the webhook secret’s secret version. Once this field has been set, it cannot be changed. If you need to change it, please create another GitLabConfig.
-    webhookSecretVersion :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'GitLabSecrets' with the minimum fields required to make a request.
-newGitLabSecrets ::
-  GitLabSecrets
-newGitLabSecrets =
-  GitLabSecrets
-    { apiAccessTokenVersion = Core.Nothing,
-      apiKeyVersion = Core.Nothing,
-      readAccessTokenVersion = Core.Nothing,
-      webhookSecretVersion = Core.Nothing
-    }
-
-instance Core.FromJSON GitLabSecrets where
-  parseJSON =
-    Core.withObject
-      "GitLabSecrets"
-      ( \o ->
-          GitLabSecrets
-            Core.<$> (o Core..:? "apiAccessTokenVersion")
-            Core.<*> (o Core..:? "apiKeyVersion")
-            Core.<*> (o Core..:? "readAccessTokenVersion")
-            Core.<*> (o Core..:? "webhookSecretVersion")
-      )
-
-instance Core.ToJSON GitLabSecrets where
-  toJSON GitLabSecrets {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("apiAccessTokenVersion" Core..=)
-              Core.<$> apiAccessTokenVersion,
-            ("apiKeyVersion" Core..=) Core.<$> apiKeyVersion,
-            ("readAccessTokenVersion" Core..=)
-              Core.<$> readAccessTokenVersion,
-            ("webhookSecretVersion" Core..=)
-              Core.<$> webhookSecretVersion
-          ]
-      )
-
--- | GitRepoSource describes a repo and ref of a code repository.
---
--- /See:/ 'newGitRepoSource' smart constructor.
-data GitRepoSource = GitRepoSource
-  { -- | The full resource name of the bitbucket server config. Format: @projects\/{project}\/locations\/{location}\/bitbucketServerConfigs\/{id}@.
-    bitbucketServerConfig :: (Core.Maybe Core.Text),
-    -- | The full resource name of the github enterprise config. Format: @projects\/{project}\/locations\/{location}\/githubEnterpriseConfigs\/{id}@. @projects\/{project}\/githubEnterpriseConfigs\/{id}@.
-    githubEnterpriseConfig :: (Core.Maybe Core.Text),
-    -- | The branch or tag to use. Must start with \"refs\/\" (required).
-    ref :: (Core.Maybe Core.Text),
-    -- | See RepoType below.
-    repoType :: (Core.Maybe GitRepoSource_RepoType),
-    -- | The URI of the repo. Either uri or repository can be specified and is required.
-    uri :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'GitRepoSource' with the minimum fields required to make a request.
-newGitRepoSource ::
-  GitRepoSource
-newGitRepoSource =
-  GitRepoSource
-    { bitbucketServerConfig = Core.Nothing,
-      githubEnterpriseConfig = Core.Nothing,
-      ref = Core.Nothing,
-      repoType = Core.Nothing,
-      uri = Core.Nothing
-    }
-
-instance Core.FromJSON GitRepoSource where
-  parseJSON =
-    Core.withObject
-      "GitRepoSource"
-      ( \o ->
-          GitRepoSource
-            Core.<$> (o Core..:? "bitbucketServerConfig")
-            Core.<*> (o Core..:? "githubEnterpriseConfig")
-            Core.<*> (o Core..:? "ref")
-            Core.<*> (o Core..:? "repoType")
-            Core.<*> (o Core..:? "uri")
-      )
-
-instance Core.ToJSON GitRepoSource where
-  toJSON GitRepoSource {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("bitbucketServerConfig" Core..=)
-              Core.<$> bitbucketServerConfig,
-            ("githubEnterpriseConfig" Core..=)
-              Core.<$> githubEnterpriseConfig,
-            ("ref" Core..=) Core.<$> ref,
-            ("repoType" Core..=) Core.<$> repoType,
-            ("uri" Core..=) Core.<$> uri
-          ]
-      )
-
--- | Container message for hash values.
---
--- /See:/ 'newHash' smart constructor.
-data Hash = Hash
-  { -- | The type of hash that was performed.
-    type' :: (Core.Maybe Hash_Type),
-    -- | The hash value.
-    value :: (Core.Maybe Core.Base64)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'Hash' with the minimum fields required to make a request.
-newHash ::
-  Hash
-newHash = Hash {type' = Core.Nothing, value = Core.Nothing}
-
-instance Core.FromJSON Hash where
-  parseJSON =
-    Core.withObject
-      "Hash"
-      ( \o ->
-          Hash
-            Core.<$> (o Core..:? "type") Core.<*> (o Core..:? "value")
-      )
-
-instance Core.ToJSON Hash where
-  toJSON Hash {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("type" Core..=) Core.<$> type',
-            ("value" Core..=) Core.<$> value
-          ]
-      )
 
 -- | Message that represents an arbitrary HTTP body. It should only be used for payload formats that can\'t be represented as JSON, such as raw binary or an HTML page. This message can be used both in streaming and non-streaming API methods in the request as well as the response. It can be used as a top-level request field, which is convenient if one wants to extract parameters from either the URL or HTTP template into the request fields and also want access to the raw HTTP body. Example: message GetResourceRequest { \/\/ A unique request id. string request/id = 1; \/\/ The raw HTTP body is bound to this field. google.api.HttpBody http/body = 2; } service ResourceService { rpc GetResource(GetResourceRequest) returns (google.api.HttpBody); rpc UpdateResource(google.api.HttpBody) returns (google.protobuf.Empty); } Example with streaming methods: service CaldavService { rpc GetCalendar(stream google.api.HttpBody) returns (stream google.api.HttpBody); rpc UpdateCalendar(stream google.api.HttpBody) returns (stream
 -- google.api.HttpBody); } Use of this type only changes how the request and response bodies are handled, all other features will continue to work unchanged.
 --
 -- /See:/ 'newHttpBody' smart constructor.
 data HttpBody = HttpBody
-  { -- | The HTTP Content-Type header value specifying the content type of the body.
-    contentType :: (Core.Maybe Core.Text),
-    -- | The HTTP request\/response body as raw binary.
-    data' :: (Core.Maybe Core.Base64),
-    -- | Application specific response metadata. Must be set in the first response for streaming APIs.
-    extensions :: (Core.Maybe [HttpBody_ExtensionsItem])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | The HTTP Content-Type header value specifying the content type of the body.
+      contentType :: (Core.Maybe Core.Text)
+      -- | The HTTP request\/response body as raw binary.
+    , data' :: (Core.Maybe Core.Base64)
+      -- | Application specific response metadata. Must be set in the first response for streaming APIs.
+    , extensions :: (Core.Maybe [HttpBody_ExtensionsItem])
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'HttpBody' with the minimum fields required to make a request.
-newHttpBody ::
-  HttpBody
+newHttpBody 
+    ::  HttpBody
 newHttpBody =
   HttpBody
-    { contentType = Core.Nothing,
-      data' = Core.Nothing,
-      extensions = Core.Nothing
+    { contentType = Core.Nothing
+    , data' = Core.Nothing
+    , extensions = Core.Nothing
     }
 
 instance Core.FromJSON HttpBody where
-  parseJSON =
-    Core.withObject
-      "HttpBody"
-      ( \o ->
-          HttpBody
-            Core.<$> (o Core..:? "contentType")
-            Core.<*> (o Core..:? "data")
-            Core.<*> (o Core..:? "extensions")
-      )
+        parseJSON
+          = Core.withObject "HttpBody"
+              (\ o ->
+                 HttpBody Core.<$>
+                   (o Core..:? "contentType") Core.<*>
+                     (o Core..:? "data")
+                     Core.<*> (o Core..:? "extensions"))
 
 instance Core.ToJSON HttpBody where
-  toJSON HttpBody {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("contentType" Core..=) Core.<$> contentType,
-            ("data" Core..=) Core.<$> data',
-            ("extensions" Core..=) Core.<$> extensions
-          ]
-      )
+        toJSON HttpBody{..}
+          = Core.object
+              (Core.catMaybes
+                 [("contentType" Core..=) Core.<$> contentType,
+                  ("data" Core..=) Core.<$> data',
+                  ("extensions" Core..=) Core.<$> extensions])
+
 
 --
 -- /See:/ 'newHttpBody_ExtensionsItem' smart constructor.
 newtype HttpBody_ExtensionsItem = HttpBody_ExtensionsItem
-  { -- | Properties of the object. Contains field \@type with type URL.
-    additional :: (Core.HashMap Core.Text Core.Value)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Properties of the object. Contains field \@type with type URL.
+      additional :: (Core.HashMap Core.Text Core.Value)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'HttpBody_ExtensionsItem' with the minimum fields required to make a request.
-newHttpBody_ExtensionsItem ::
-  -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
-  Core.HashMap Core.Text Core.Value ->
-  HttpBody_ExtensionsItem
+newHttpBody_ExtensionsItem 
+    ::  Core.HashMap Core.Text Core.Value
+       -- ^  Properties of the object. Contains field \@type with type URL. See 'additional'.
+    -> HttpBody_ExtensionsItem
 newHttpBody_ExtensionsItem additional =
   HttpBody_ExtensionsItem {additional = additional}
 
 instance Core.FromJSON HttpBody_ExtensionsItem where
-  parseJSON =
-    Core.withObject
-      "HttpBody_ExtensionsItem"
-      ( \o ->
-          HttpBody_ExtensionsItem
-            Core.<$> (Core.parseJSONObject o)
-      )
+        parseJSON
+          = Core.withObject "HttpBody_ExtensionsItem"
+              (\ o ->
+                 HttpBody_ExtensionsItem Core.<$>
+                   (Core.parseJSONObject o))
 
 instance Core.ToJSON HttpBody_ExtensionsItem where
-  toJSON HttpBody_ExtensionsItem {..} =
-    Core.toJSON additional
+        toJSON HttpBody_ExtensionsItem{..}
+          = Core.toJSON additional
 
--- | Pairs a set of secret environment variables mapped to encrypted values with the Cloud KMS key to use to decrypt the value.
+
+-- | Describes stage and necessary actions to be taken by the user to complete the installation. Used for GitHub and GitHub Enterprise based connections.
 --
--- /See:/ 'newInlineSecret' smart constructor.
-data InlineSecret = InlineSecret
-  { -- | Map of environment variable name to its encrypted value. Secret environment variables must be unique across all of a build\'s secrets, and must be used by at least one build step. Values can be at most 64 KB in size. There can be at most 100 secret values across all of a build\'s secrets.
-    envMap :: (Core.Maybe InlineSecret_EnvMap),
-    -- | Resource name of Cloud KMS crypto key to decrypt the encrypted value. In format: projects\//\/locations\//\/keyRings\//\/cryptoKeys\//
-    kmsKeyName :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newInstallationState' smart constructor.
+data InstallationState = InstallationState
+    {
+      -- | Output only. Link to follow for next action. Empty string if the installation is already complete.
+      actionUri :: (Core.Maybe Core.Text)
+      -- | Output only. Message of what the user should do next to continue the installation. Empty string if the installation is already complete.
+    , message :: (Core.Maybe Core.Text)
+      -- | Output only. Current step of the installation process.
+    , stage :: (Core.Maybe InstallationState_Stage)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'InlineSecret' with the minimum fields required to make a request.
-newInlineSecret ::
-  InlineSecret
-newInlineSecret =
-  InlineSecret {envMap = Core.Nothing, kmsKeyName = Core.Nothing}
+-- | Creates a value of 'InstallationState' with the minimum fields required to make a request.
+newInstallationState 
+    ::  InstallationState
+newInstallationState =
+  InstallationState
+    {actionUri = Core.Nothing, message = Core.Nothing, stage = Core.Nothing}
 
-instance Core.FromJSON InlineSecret where
-  parseJSON =
-    Core.withObject
-      "InlineSecret"
-      ( \o ->
-          InlineSecret
-            Core.<$> (o Core..:? "envMap")
-            Core.<*> (o Core..:? "kmsKeyName")
-      )
+instance Core.FromJSON InstallationState where
+        parseJSON
+          = Core.withObject "InstallationState"
+              (\ o ->
+                 InstallationState Core.<$>
+                   (o Core..:? "actionUri") Core.<*>
+                     (o Core..:? "message")
+                     Core.<*> (o Core..:? "stage"))
 
-instance Core.ToJSON InlineSecret where
-  toJSON InlineSecret {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("envMap" Core..=) Core.<$> envMap,
-            ("kmsKeyName" Core..=) Core.<$> kmsKeyName
-          ]
-      )
+instance Core.ToJSON InstallationState where
+        toJSON InstallationState{..}
+          = Core.object
+              (Core.catMaybes
+                 [("actionUri" Core..=) Core.<$> actionUri,
+                  ("message" Core..=) Core.<$> message,
+                  ("stage" Core..=) Core.<$> stage])
 
--- | Map of environment variable name to its encrypted value. Secret environment variables must be unique across all of a build\'s secrets, and must be used by at least one build step. Values can be at most 64 KB in size. There can be at most 100 secret values across all of a build\'s secrets.
+
+-- | Message for response to listing Connections.
 --
--- /See:/ 'newInlineSecret_EnvMap' smart constructor.
-newtype InlineSecret_EnvMap = InlineSecret_EnvMap
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Base64)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newListConnectionsResponse' smart constructor.
+data ListConnectionsResponse = ListConnectionsResponse
+    {
+      -- | The list of Connections.
+      connections :: (Core.Maybe [Connection])
+      -- | A token identifying a page of results the server should return.
+    , nextPageToken :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'InlineSecret_EnvMap' with the minimum fields required to make a request.
-newInlineSecret_EnvMap ::
-  -- |  See 'additional'.
-  Core.HashMap Core.Text Core.Base64 ->
-  InlineSecret_EnvMap
-newInlineSecret_EnvMap additional =
-  InlineSecret_EnvMap {additional = additional}
+-- | Creates a value of 'ListConnectionsResponse' with the minimum fields required to make a request.
+newListConnectionsResponse 
+    ::  ListConnectionsResponse
+newListConnectionsResponse =
+  ListConnectionsResponse
+    {connections = Core.Nothing, nextPageToken = Core.Nothing}
 
-instance Core.FromJSON InlineSecret_EnvMap where
-  parseJSON =
-    Core.withObject
-      "InlineSecret_EnvMap"
-      ( \o ->
-          InlineSecret_EnvMap
-            Core.<$> (Core.parseJSONObject o)
-      )
+instance Core.FromJSON ListConnectionsResponse where
+        parseJSON
+          = Core.withObject "ListConnectionsResponse"
+              (\ o ->
+                 ListConnectionsResponse Core.<$>
+                   (o Core..:? "connections") Core.<*>
+                     (o Core..:? "nextPageToken"))
 
-instance Core.ToJSON InlineSecret_EnvMap where
-  toJSON InlineSecret_EnvMap {..} =
-    Core.toJSON additional
+instance Core.ToJSON ListConnectionsResponse where
+        toJSON ListConnectionsResponse{..}
+          = Core.object
+              (Core.catMaybes
+                 [("connections" Core..=) Core.<$> connections,
+                  ("nextPageToken" Core..=) Core.<$> nextPageToken])
 
--- | RPC response object returned by ListBitbucketServerConfigs RPC method.
+
+-- | The response message for Locations.ListLocations.
 --
--- /See:/ 'newListBitbucketServerConfigsResponse' smart constructor.
-data ListBitbucketServerConfigsResponse = ListBitbucketServerConfigsResponse
-  { -- | A list of BitbucketServerConfigs
-    bitbucketServerConfigs :: (Core.Maybe [BitbucketServerConfig]),
-    -- | A token that can be sent as @page_token@ to retrieve the next page. If this field is omitted, there are no subsequent pages.
-    nextPageToken :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newListLocationsResponse' smart constructor.
+data ListLocationsResponse = ListLocationsResponse
+    {
+      -- | A list of locations that matches the specified filter in the request.
+      locations :: (Core.Maybe [Location])
+      -- | The standard List next-page token.
+    , nextPageToken :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ListBitbucketServerConfigsResponse' with the minimum fields required to make a request.
-newListBitbucketServerConfigsResponse ::
-  ListBitbucketServerConfigsResponse
-newListBitbucketServerConfigsResponse =
-  ListBitbucketServerConfigsResponse
-    { bitbucketServerConfigs = Core.Nothing,
-      nextPageToken = Core.Nothing
+-- | Creates a value of 'ListLocationsResponse' with the minimum fields required to make a request.
+newListLocationsResponse 
+    ::  ListLocationsResponse
+newListLocationsResponse =
+  ListLocationsResponse {locations = Core.Nothing, nextPageToken = Core.Nothing}
+
+instance Core.FromJSON ListLocationsResponse where
+        parseJSON
+          = Core.withObject "ListLocationsResponse"
+              (\ o ->
+                 ListLocationsResponse Core.<$>
+                   (o Core..:? "locations") Core.<*>
+                     (o Core..:? "nextPageToken"))
+
+instance Core.ToJSON ListLocationsResponse where
+        toJSON ListLocationsResponse{..}
+          = Core.object
+              (Core.catMaybes
+                 [("locations" Core..=) Core.<$> locations,
+                  ("nextPageToken" Core..=) Core.<$> nextPageToken])
+
+
+-- | Message for response to listing Repositories.
+--
+-- /See:/ 'newListRepositoriesResponse' smart constructor.
+data ListRepositoriesResponse = ListRepositoriesResponse
+    {
+      -- | A token identifying a page of results the server should return.
+      nextPageToken :: (Core.Maybe Core.Text)
+      -- | The list of Repositories.
+    , repositories :: (Core.Maybe [Repository])
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListRepositoriesResponse' with the minimum fields required to make a request.
+newListRepositoriesResponse 
+    ::  ListRepositoriesResponse
+newListRepositoriesResponse =
+  ListRepositoriesResponse
+    {nextPageToken = Core.Nothing, repositories = Core.Nothing}
+
+instance Core.FromJSON ListRepositoriesResponse where
+        parseJSON
+          = Core.withObject "ListRepositoriesResponse"
+              (\ o ->
+                 ListRepositoriesResponse Core.<$>
+                   (o Core..:? "nextPageToken") Core.<*>
+                     (o Core..:? "repositories"))
+
+instance Core.ToJSON ListRepositoriesResponse where
+        toJSON ListRepositoriesResponse{..}
+          = Core.object
+              (Core.catMaybes
+                 [("nextPageToken" Core..=) Core.<$> nextPageToken,
+                  ("repositories" Core..=) Core.<$> repositories])
+
+
+-- | A resource that represents a Google Cloud location.
+--
+-- /See:/ 'newLocation' smart constructor.
+data Location = Location
+    {
+      -- | The friendly name for this location, typically a nearby city name. For example, \"Tokyo\".
+      displayName :: (Core.Maybe Core.Text)
+      -- | Cross-service attributes for the location. For example {\"cloud.googleapis.com\/region\": \"us-east1\"}
+    , labels :: (Core.Maybe Location_Labels)
+      -- | The canonical id for this location. For example: @\"us-east1\"@.
+    , locationId :: (Core.Maybe Core.Text)
+      -- | Service-specific metadata. For example the available capacity at the given location.
+    , metadata :: (Core.Maybe Location_Metadata)
+      -- | Resource name for the location, which may vary between implementations. For example: @\"projects\/example-project\/locations\/us-east1\"@
+    , name :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Location' with the minimum fields required to make a request.
+newLocation 
+    ::  Location
+newLocation =
+  Location
+    { displayName = Core.Nothing
+    , labels = Core.Nothing
+    , locationId = Core.Nothing
+    , metadata = Core.Nothing
+    , name = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ListBitbucketServerConfigsResponse
-  where
-  parseJSON =
-    Core.withObject
-      "ListBitbucketServerConfigsResponse"
-      ( \o ->
-          ListBitbucketServerConfigsResponse
-            Core.<$> (o Core..:? "bitbucketServerConfigs")
-            Core.<*> (o Core..:? "nextPageToken")
-      )
+instance Core.FromJSON Location where
+        parseJSON
+          = Core.withObject "Location"
+              (\ o ->
+                 Location Core.<$>
+                   (o Core..:? "displayName") Core.<*>
+                     (o Core..:? "labels")
+                     Core.<*> (o Core..:? "locationId")
+                     Core.<*> (o Core..:? "metadata")
+                     Core.<*> (o Core..:? "name"))
 
-instance
-  Core.ToJSON
-    ListBitbucketServerConfigsResponse
-  where
-  toJSON ListBitbucketServerConfigsResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("bitbucketServerConfigs" Core..=)
-              Core.<$> bitbucketServerConfigs,
-            ("nextPageToken" Core..=) Core.<$> nextPageToken
-          ]
-      )
+instance Core.ToJSON Location where
+        toJSON Location{..}
+          = Core.object
+              (Core.catMaybes
+                 [("displayName" Core..=) Core.<$> displayName,
+                  ("labels" Core..=) Core.<$> labels,
+                  ("locationId" Core..=) Core.<$> locationId,
+                  ("metadata" Core..=) Core.<$> metadata,
+                  ("name" Core..=) Core.<$> name])
 
--- | RPC response object returned by the ListBitbucketServerRepositories RPC method.
+
+-- | Cross-service attributes for the location. For example {\"cloud.googleapis.com\/region\": \"us-east1\"}
 --
--- /See:/ 'newListBitbucketServerRepositoriesResponse' smart constructor.
-data ListBitbucketServerRepositoriesResponse = ListBitbucketServerRepositoriesResponse
-  { -- | List of Bitbucket Server repositories.
-    bitbucketServerRepositories :: (Core.Maybe [BitbucketServerRepository]),
-    -- | A token that can be sent as @page_token@ to retrieve the next page. If this field is omitted, there are no subsequent pages.
-    nextPageToken :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ListBitbucketServerRepositoriesResponse' with the minimum fields required to make a request.
-newListBitbucketServerRepositoriesResponse ::
-  ListBitbucketServerRepositoriesResponse
-newListBitbucketServerRepositoriesResponse =
-  ListBitbucketServerRepositoriesResponse
-    { bitbucketServerRepositories = Core.Nothing,
-      nextPageToken = Core.Nothing
+-- /See:/ 'newLocation_Labels' smart constructor.
+newtype Location_Labels = Location_Labels
+    {
+      -- | 
+      additional :: (Core.HashMap Core.Text Core.Text)
     }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
-instance
-  Core.FromJSON
-    ListBitbucketServerRepositoriesResponse
-  where
-  parseJSON =
-    Core.withObject
-      "ListBitbucketServerRepositoriesResponse"
-      ( \o ->
-          ListBitbucketServerRepositoriesResponse
-            Core.<$> (o Core..:? "bitbucketServerRepositories")
-            Core.<*> (o Core..:? "nextPageToken")
-      )
+-- | Creates a value of 'Location_Labels' with the minimum fields required to make a request.
+newLocation_Labels 
+    ::  Core.HashMap Core.Text Core.Text
+       -- ^  See 'additional'.
+    -> Location_Labels
+newLocation_Labels additional = Location_Labels {additional = additional}
 
-instance
-  Core.ToJSON
-    ListBitbucketServerRepositoriesResponse
-  where
-  toJSON ListBitbucketServerRepositoriesResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("bitbucketServerRepositories" Core..=)
-              Core.<$> bitbucketServerRepositories,
-            ("nextPageToken" Core..=) Core.<$> nextPageToken
-          ]
-      )
+instance Core.FromJSON Location_Labels where
+        parseJSON
+          = Core.withObject "Location_Labels"
+              (\ o ->
+                 Location_Labels Core.<$> (Core.parseJSONObject o))
 
--- | Response containing existing @BuildTriggers@.
+instance Core.ToJSON Location_Labels where
+        toJSON Location_Labels{..} = Core.toJSON additional
+
+
+-- | Service-specific metadata. For example the available capacity at the given location.
 --
--- /See:/ 'newListBuildTriggersResponse' smart constructor.
-data ListBuildTriggersResponse = ListBuildTriggersResponse
-  { -- | Token to receive the next page of results.
-    nextPageToken :: (Core.Maybe Core.Text),
-    -- | @BuildTriggers@ for the project, sorted by @create_time@ descending.
-    triggers :: (Core.Maybe [BuildTrigger])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ListBuildTriggersResponse' with the minimum fields required to make a request.
-newListBuildTriggersResponse ::
-  ListBuildTriggersResponse
-newListBuildTriggersResponse =
-  ListBuildTriggersResponse
-    { nextPageToken = Core.Nothing,
-      triggers = Core.Nothing
+-- /See:/ 'newLocation_Metadata' smart constructor.
+newtype Location_Metadata = Location_Metadata
+    {
+      -- | Properties of the object. Contains field \@type with type URL.
+      additional :: (Core.HashMap Core.Text Core.Value)
     }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
-instance Core.FromJSON ListBuildTriggersResponse where
-  parseJSON =
-    Core.withObject
-      "ListBuildTriggersResponse"
-      ( \o ->
-          ListBuildTriggersResponse
-            Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "triggers")
-      )
+-- | Creates a value of 'Location_Metadata' with the minimum fields required to make a request.
+newLocation_Metadata 
+    ::  Core.HashMap Core.Text Core.Value
+       -- ^  Properties of the object. Contains field \@type with type URL. See 'additional'.
+    -> Location_Metadata
+newLocation_Metadata additional = Location_Metadata {additional = additional}
 
-instance Core.ToJSON ListBuildTriggersResponse where
-  toJSON ListBuildTriggersResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("triggers" Core..=) Core.<$> triggers
-          ]
-      )
+instance Core.FromJSON Location_Metadata where
+        parseJSON
+          = Core.withObject "Location_Metadata"
+              (\ o ->
+                 Location_Metadata Core.<$> (Core.parseJSONObject o))
 
--- | Response including listed builds.
+instance Core.ToJSON Location_Metadata where
+        toJSON Location_Metadata{..} = Core.toJSON additional
+
+
+-- | Represents an OAuth token of the account that authorized the Connection, and associated metadata.
 --
--- /See:/ 'newListBuildsResponse' smart constructor.
-data ListBuildsResponse = ListBuildsResponse
-  { -- | Builds will be sorted by @create_time@, descending.
-    builds :: (Core.Maybe [Build]),
-    -- | Token to receive the next page of results. This will be absent if the end of the response list has been reached.
-    nextPageToken :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ListBuildsResponse' with the minimum fields required to make a request.
-newListBuildsResponse ::
-  ListBuildsResponse
-newListBuildsResponse =
-  ListBuildsResponse {builds = Core.Nothing, nextPageToken = Core.Nothing}
-
-instance Core.FromJSON ListBuildsResponse where
-  parseJSON =
-    Core.withObject
-      "ListBuildsResponse"
-      ( \o ->
-          ListBuildsResponse
-            Core.<$> (o Core..:? "builds")
-            Core.<*> (o Core..:? "nextPageToken")
-      )
-
-instance Core.ToJSON ListBuildsResponse where
-  toJSON ListBuildsResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("builds" Core..=) Core.<$> builds,
-            ("nextPageToken" Core..=) Core.<$> nextPageToken
-          ]
-      )
-
--- | RPC response object returned by ListGitLabConfigs RPC method.
---
--- /See:/ 'newListGitLabConfigsResponse' smart constructor.
-data ListGitLabConfigsResponse = ListGitLabConfigsResponse
-  { -- | A list of GitLabConfigs
-    gitlabConfigs :: (Core.Maybe [GitLabConfig]),
-    -- | A token that can be sent as @page_token@ to retrieve the next page If this field is omitted, there are no subsequent pages.
-    nextPageToken :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ListGitLabConfigsResponse' with the minimum fields required to make a request.
-newListGitLabConfigsResponse ::
-  ListGitLabConfigsResponse
-newListGitLabConfigsResponse =
-  ListGitLabConfigsResponse
-    { gitlabConfigs = Core.Nothing,
-      nextPageToken = Core.Nothing
+-- /See:/ 'newOAuthCredential' smart constructor.
+data OAuthCredential = OAuthCredential
+    {
+      -- | Optional. A SecretManager resource containing the OAuth token that authorizes the Cloud Build connection. Format: @projects\/*\/secrets\/*\/versions\/*@.
+      oauthTokenSecretVersion :: (Core.Maybe Core.Text)
+      -- | Output only. The username associated to this token.
+    , username :: (Core.Maybe Core.Text)
     }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
-instance Core.FromJSON ListGitLabConfigsResponse where
-  parseJSON =
-    Core.withObject
-      "ListGitLabConfigsResponse"
-      ( \o ->
-          ListGitLabConfigsResponse
-            Core.<$> (o Core..:? "gitlabConfigs")
-            Core.<*> (o Core..:? "nextPageToken")
-      )
+-- | Creates a value of 'OAuthCredential' with the minimum fields required to make a request.
+newOAuthCredential 
+    ::  OAuthCredential
+newOAuthCredential =
+  OAuthCredential
+    {oauthTokenSecretVersion = Core.Nothing, username = Core.Nothing}
 
-instance Core.ToJSON ListGitLabConfigsResponse where
-  toJSON ListGitLabConfigsResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("gitlabConfigs" Core..=) Core.<$> gitlabConfigs,
-            ("nextPageToken" Core..=) Core.<$> nextPageToken
-          ]
-      )
+instance Core.FromJSON OAuthCredential where
+        parseJSON
+          = Core.withObject "OAuthCredential"
+              (\ o ->
+                 OAuthCredential Core.<$>
+                   (o Core..:? "oauthTokenSecretVersion") Core.<*>
+                     (o Core..:? "username"))
 
--- | RPC response object returned by the ListGitLabRepositories RPC method.
---
--- /See:/ 'newListGitLabRepositoriesResponse' smart constructor.
-data ListGitLabRepositoriesResponse = ListGitLabRepositoriesResponse
-  { -- | List of GitLab repositories
-    gitlabRepositories :: (Core.Maybe [GitLabRepository]),
-    -- | A token that can be sent as @page_token@ to retrieve the next page. If this field is omitted, there are no subsequent pages.
-    nextPageToken :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+instance Core.ToJSON OAuthCredential where
+        toJSON OAuthCredential{..}
+          = Core.object
+              (Core.catMaybes
+                 [("oauthTokenSecretVersion" Core..=) Core.<$>
+                    oauthTokenSecretVersion,
+                  ("username" Core..=) Core.<$> username])
 
--- | Creates a value of 'ListGitLabRepositoriesResponse' with the minimum fields required to make a request.
-newListGitLabRepositoriesResponse ::
-  ListGitLabRepositoriesResponse
-newListGitLabRepositoriesResponse =
-  ListGitLabRepositoriesResponse
-    { gitlabRepositories = Core.Nothing,
-      nextPageToken = Core.Nothing
-    }
-
-instance Core.FromJSON ListGitLabRepositoriesResponse where
-  parseJSON =
-    Core.withObject
-      "ListGitLabRepositoriesResponse"
-      ( \o ->
-          ListGitLabRepositoriesResponse
-            Core.<$> (o Core..:? "gitlabRepositories")
-            Core.<*> (o Core..:? "nextPageToken")
-      )
-
-instance Core.ToJSON ListGitLabRepositoriesResponse where
-  toJSON ListGitLabRepositoriesResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("gitlabRepositories" Core..=)
-              Core.<$> gitlabRepositories,
-            ("nextPageToken" Core..=) Core.<$> nextPageToken
-          ]
-      )
-
--- | RPC response object returned by ListGithubEnterpriseConfigs RPC method.
---
--- /See:/ 'newListGithubEnterpriseConfigsResponse' smart constructor.
-newtype ListGithubEnterpriseConfigsResponse = ListGithubEnterpriseConfigsResponse
-  { -- | A list of GitHubEnterpriseConfigs
-    configs :: (Core.Maybe [GitHubEnterpriseConfig])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ListGithubEnterpriseConfigsResponse' with the minimum fields required to make a request.
-newListGithubEnterpriseConfigsResponse ::
-  ListGithubEnterpriseConfigsResponse
-newListGithubEnterpriseConfigsResponse =
-  ListGithubEnterpriseConfigsResponse {configs = Core.Nothing}
-
-instance
-  Core.FromJSON
-    ListGithubEnterpriseConfigsResponse
-  where
-  parseJSON =
-    Core.withObject
-      "ListGithubEnterpriseConfigsResponse"
-      ( \o ->
-          ListGithubEnterpriseConfigsResponse
-            Core.<$> (o Core..:? "configs")
-      )
-
-instance
-  Core.ToJSON
-    ListGithubEnterpriseConfigsResponse
-  where
-  toJSON ListGithubEnterpriseConfigsResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [("configs" Core..=) Core.<$> configs]
-      )
-
--- | Response containing existing @WorkerPools@.
---
--- /See:/ 'newListWorkerPoolsResponse' smart constructor.
-data ListWorkerPoolsResponse = ListWorkerPoolsResponse
-  { -- | Continuation token used to page through large result sets. Provide this value in a subsequent ListWorkerPoolsRequest to return the next page of results.
-    nextPageToken :: (Core.Maybe Core.Text),
-    -- | @WorkerPools@ for the specified project.
-    workerPools :: (Core.Maybe [WorkerPool])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ListWorkerPoolsResponse' with the minimum fields required to make a request.
-newListWorkerPoolsResponse ::
-  ListWorkerPoolsResponse
-newListWorkerPoolsResponse =
-  ListWorkerPoolsResponse
-    { nextPageToken = Core.Nothing,
-      workerPools = Core.Nothing
-    }
-
-instance Core.FromJSON ListWorkerPoolsResponse where
-  parseJSON =
-    Core.withObject
-      "ListWorkerPoolsResponse"
-      ( \o ->
-          ListWorkerPoolsResponse
-            Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "workerPools")
-      )
-
-instance Core.ToJSON ListWorkerPoolsResponse where
-  toJSON ListWorkerPoolsResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("workerPools" Core..=) Core.<$> workerPools
-          ]
-      )
-
--- | A Maven artifact to upload to Artifact Registry upon successful completion of all build steps.
---
--- /See:/ 'newMavenArtifact' smart constructor.
-data MavenArtifact = MavenArtifact
-  { -- | Maven @artifactId@ value used when uploading the artifact to Artifact Registry.
-    artifactId :: (Core.Maybe Core.Text),
-    -- | Maven @groupId@ value used when uploading the artifact to Artifact Registry.
-    groupId :: (Core.Maybe Core.Text),
-    -- | Path to an artifact in the build\'s workspace to be uploaded to Artifact Registry. This can be either an absolute path, e.g. \/workspace\/my-app\/target\/my-app-1.0.SNAPSHOT.jar or a relative path from \/workspace, e.g. my-app\/target\/my-app-1.0.SNAPSHOT.jar.
-    path :: (Core.Maybe Core.Text),
-    -- | Artifact Registry repository, in the form \"https:\/\/$REGION-maven.pkg.dev\/$PROJECT\/$REPOSITORY\" Artifact in the workspace specified by path will be uploaded to Artifact Registry with this location as a prefix.
-    repository :: (Core.Maybe Core.Text),
-    -- | Maven @version@ value used when uploading the artifact to Artifact Registry.
-    version :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'MavenArtifact' with the minimum fields required to make a request.
-newMavenArtifact ::
-  MavenArtifact
-newMavenArtifact =
-  MavenArtifact
-    { artifactId = Core.Nothing,
-      groupId = Core.Nothing,
-      path = Core.Nothing,
-      repository = Core.Nothing,
-      version = Core.Nothing
-    }
-
-instance Core.FromJSON MavenArtifact where
-  parseJSON =
-    Core.withObject
-      "MavenArtifact"
-      ( \o ->
-          MavenArtifact
-            Core.<$> (o Core..:? "artifactId")
-            Core.<*> (o Core..:? "groupId")
-            Core.<*> (o Core..:? "path")
-            Core.<*> (o Core..:? "repository")
-            Core.<*> (o Core..:? "version")
-      )
-
-instance Core.ToJSON MavenArtifact where
-  toJSON MavenArtifact {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("artifactId" Core..=) Core.<$> artifactId,
-            ("groupId" Core..=) Core.<$> groupId,
-            ("path" Core..=) Core.<$> path,
-            ("repository" Core..=) Core.<$> repository,
-            ("version" Core..=) Core.<$> version
-          ]
-      )
-
--- | Defines the network configuration for the pool.
---
--- /See:/ 'newNetworkConfig' smart constructor.
-data NetworkConfig = NetworkConfig
-  { -- | Option to configure network egress for the workers.
-    egressOption :: (Core.Maybe NetworkConfig_EgressOption),
-    -- | Required. Immutable. The network definition that the workers are peered to. If this section is left empty, the workers will be peered to @WorkerPool.project_id@ on the service producer network. Must be in the format @projects\/{project}\/global\/networks\/{network}@, where @{project}@ is a project number, such as @12345@, and @{network}@ is the name of a VPC network in the project. See <https://cloud.google.com/build/docs/private-pools/set-up-private-pool-environment Understanding network configuration options>
-    peeredNetwork :: (Core.Maybe Core.Text),
-    -- | Immutable. Subnet IP range within the peered network. This is specified in CIDR notation with a slash and the subnet prefix size. You can optionally specify an IP address before the subnet prefix value. e.g. @192.168.0.0\/29@ would specify an IP range starting at 192.168.0.0 with a prefix size of 29 bits. @\/16@ would specify a prefix size of 16 bits, with an automatically determined IP within the peered VPC. If unspecified, a value of @\/24@ will be used.
-    peeredNetworkIpRange :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'NetworkConfig' with the minimum fields required to make a request.
-newNetworkConfig ::
-  NetworkConfig
-newNetworkConfig =
-  NetworkConfig
-    { egressOption = Core.Nothing,
-      peeredNetwork = Core.Nothing,
-      peeredNetworkIpRange = Core.Nothing
-    }
-
-instance Core.FromJSON NetworkConfig where
-  parseJSON =
-    Core.withObject
-      "NetworkConfig"
-      ( \o ->
-          NetworkConfig
-            Core.<$> (o Core..:? "egressOption")
-            Core.<*> (o Core..:? "peeredNetwork")
-            Core.<*> (o Core..:? "peeredNetworkIpRange")
-      )
-
-instance Core.ToJSON NetworkConfig where
-  toJSON NetworkConfig {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("egressOption" Core..=) Core.<$> egressOption,
-            ("peeredNetwork" Core..=) Core.<$> peeredNetwork,
-            ("peeredNetworkIpRange" Core..=)
-              Core.<$> peeredNetworkIpRange
-          ]
-      )
 
 -- | This resource represents a long-running operation that is the result of a network API call.
 --
 -- /See:/ 'newOperation' smart constructor.
 data Operation = Operation
-  { -- | If the value is @false@, it means the operation is still in progress. If @true@, the operation is completed, and either @error@ or @response@ is available.
-    done :: (Core.Maybe Core.Bool),
-    -- | The error result of the operation in case of failure or cancellation.
-    error :: (Core.Maybe Status),
-    -- | Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
-    metadata :: (Core.Maybe Operation_Metadata),
-    -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
-    name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
-    response :: (Core.Maybe Operation_Response)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | If the value is @false@, it means the operation is still in progress. If @true@, the operation is completed, and either @error@ or @response@ is available.
+      done :: (Core.Maybe Core.Bool)
+      -- | The error result of the operation in case of failure or cancellation.
+    , error :: (Core.Maybe Status)
+      -- | Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
+    , metadata :: (Core.Maybe Operation_Metadata)
+      -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
+    , name :: (Core.Maybe Core.Text)
+      -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    , response :: (Core.Maybe Operation_Response)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
-newOperation ::
-  Operation
+newOperation 
+    ::  Operation
 newOperation =
   Operation
-    { done = Core.Nothing,
-      error = Core.Nothing,
-      metadata = Core.Nothing,
-      name = Core.Nothing,
-      response = Core.Nothing
+    { done = Core.Nothing
+    , error = Core.Nothing
+    , metadata = Core.Nothing
+    , name = Core.Nothing
+    , response = Core.Nothing
     }
 
 instance Core.FromJSON Operation where
-  parseJSON =
-    Core.withObject
-      "Operation"
-      ( \o ->
-          Operation
-            Core.<$> (o Core..:? "done")
-            Core.<*> (o Core..:? "error")
-            Core.<*> (o Core..:? "metadata")
-            Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "response")
-      )
+        parseJSON
+          = Core.withObject "Operation"
+              (\ o ->
+                 Operation Core.<$>
+                   (o Core..:? "done") Core.<*> (o Core..:? "error")
+                     Core.<*> (o Core..:? "metadata")
+                     Core.<*> (o Core..:? "name")
+                     Core.<*> (o Core..:? "response"))
 
 instance Core.ToJSON Operation where
-  toJSON Operation {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("done" Core..=) Core.<$> done,
-            ("error" Core..=) Core.<$> error,
-            ("metadata" Core..=) Core.<$> metadata,
-            ("name" Core..=) Core.<$> name,
-            ("response" Core..=) Core.<$> response
-          ]
-      )
+        toJSON Operation{..}
+          = Core.object
+              (Core.catMaybes
+                 [("done" Core..=) Core.<$> done,
+                  ("error" Core..=) Core.<$> error,
+                  ("metadata" Core..=) Core.<$> metadata,
+                  ("name" Core..=) Core.<$> name,
+                  ("response" Core..=) Core.<$> response])
+
 
 -- | Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'newOperation_Metadata' smart constructor.
 newtype Operation_Metadata = Operation_Metadata
-  { -- | Properties of the object. Contains field \@type with type URL.
-    additional :: (Core.HashMap Core.Text Core.Value)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Properties of the object. Contains field \@type with type URL.
+      additional :: (Core.HashMap Core.Text Core.Value)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'Operation_Metadata' with the minimum fields required to make a request.
-newOperation_Metadata ::
-  -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
-  Core.HashMap Core.Text Core.Value ->
-  Operation_Metadata
+newOperation_Metadata 
+    ::  Core.HashMap Core.Text Core.Value
+       -- ^  Properties of the object. Contains field \@type with type URL. See 'additional'.
+    -> Operation_Metadata
 newOperation_Metadata additional = Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
-  parseJSON =
-    Core.withObject
-      "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+        parseJSON
+          = Core.withObject "Operation_Metadata"
+              (\ o ->
+                 Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+        toJSON Operation_Metadata{..}
+          = Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
 -- /See:/ 'newOperation_Response' smart constructor.
 newtype Operation_Response = Operation_Response
-  { -- | Properties of the object. Contains field \@type with type URL.
-    additional :: (Core.HashMap Core.Text Core.Value)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Properties of the object. Contains field \@type with type URL.
+      additional :: (Core.HashMap Core.Text Core.Value)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'Operation_Response' with the minimum fields required to make a request.
-newOperation_Response ::
-  -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
-  Core.HashMap Core.Text Core.Value ->
-  Operation_Response
+newOperation_Response 
+    ::  Core.HashMap Core.Text Core.Value
+       -- ^  Properties of the object. Contains field \@type with type URL. See 'additional'.
+    -> Operation_Response
 newOperation_Response additional = Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
-  parseJSON =
-    Core.withObject
-      "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+        parseJSON
+          = Core.withObject "Operation_Response"
+              (\ o ->
+                 Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+        toJSON Operation_Response{..}
+          = Core.toJSON additional
+
 
 -- | Represents the metadata of the long-running operation.
 --
 -- /See:/ 'newOperationMetadata' smart constructor.
 data OperationMetadata = OperationMetadata
-  { -- | Output only. API version used to start the operation.
-    apiVersion :: (Core.Maybe Core.Text),
-    -- | Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
-    cancelRequested :: (Core.Maybe Core.Bool),
-    -- | Output only. The time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime),
-    -- | Output only. The time the operation finished running.
-    endTime :: (Core.Maybe Core.DateTime),
-    -- | Output only. Human-readable status of the operation, if any.
-    statusDetail :: (Core.Maybe Core.Text),
-    -- | Output only. Server-defined resource path for the target of the operation.
-    target :: (Core.Maybe Core.Text),
-    -- | Output only. Name of the verb executed by the operation.
-    verb :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Output only. API version used to start the operation.
+      apiVersion :: (Core.Maybe Core.Text)
+      -- | Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have google.longrunning.Operation.error value with a google.rpc.Status.code of @1@, corresponding to @Code.CANCELLED@.
+    , cancelRequested :: (Core.Maybe Core.Bool)
+      -- | Output only. The time the operation was created.
+    , createTime :: (Core.Maybe Core.DateTime)
+      -- | Output only. The time the operation finished running.
+    , endTime :: (Core.Maybe Core.DateTime)
+      -- | Output only. Human-readable status of the operation, if any.
+    , statusDetail :: (Core.Maybe Core.Text)
+      -- | Output only. Server-defined resource path for the target of the operation.
+    , target :: (Core.Maybe Core.Text)
+      -- | Output only. Name of the verb executed by the operation.
+    , verb :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
-newOperationMetadata ::
-  OperationMetadata
+newOperationMetadata 
+    ::  OperationMetadata
 newOperationMetadata =
   OperationMetadata
-    { apiVersion = Core.Nothing,
-      cancelRequested = Core.Nothing,
-      createTime = Core.Nothing,
-      endTime = Core.Nothing,
-      statusDetail = Core.Nothing,
-      target = Core.Nothing,
-      verb = Core.Nothing
+    { apiVersion = Core.Nothing
+    , cancelRequested = Core.Nothing
+    , createTime = Core.Nothing
+    , endTime = Core.Nothing
+    , statusDetail = Core.Nothing
+    , target = Core.Nothing
+    , verb = Core.Nothing
     }
 
 instance Core.FromJSON OperationMetadata where
-  parseJSON =
-    Core.withObject
-      "OperationMetadata"
-      ( \o ->
-          OperationMetadata
-            Core.<$> (o Core..:? "apiVersion")
-            Core.<*> (o Core..:? "cancelRequested")
-            Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "endTime")
-            Core.<*> (o Core..:? "statusDetail")
-            Core.<*> (o Core..:? "target")
-            Core.<*> (o Core..:? "verb")
-      )
+        parseJSON
+          = Core.withObject "OperationMetadata"
+              (\ o ->
+                 OperationMetadata Core.<$>
+                   (o Core..:? "apiVersion") Core.<*>
+                     (o Core..:? "cancelRequested")
+                     Core.<*> (o Core..:? "createTime")
+                     Core.<*> (o Core..:? "endTime")
+                     Core.<*> (o Core..:? "statusDetail")
+                     Core.<*> (o Core..:? "target")
+                     Core.<*> (o Core..:? "verb"))
 
 instance Core.ToJSON OperationMetadata where
-  toJSON OperationMetadata {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("apiVersion" Core..=) Core.<$> apiVersion,
-            ("cancelRequested" Core..=) Core.<$> cancelRequested,
-            ("createTime" Core..=) Core.<$> createTime,
-            ("endTime" Core..=) Core.<$> endTime,
-            ("statusDetail" Core..=) Core.<$> statusDetail,
-            ("target" Core..=) Core.<$> target,
-            ("verb" Core..=) Core.<$> verb
-          ]
-      )
+        toJSON OperationMetadata{..}
+          = Core.object
+              (Core.catMaybes
+                 [("apiVersion" Core..=) Core.<$> apiVersion,
+                  ("cancelRequested" Core..=) Core.<$> cancelRequested,
+                  ("createTime" Core..=) Core.<$> createTime,
+                  ("endTime" Core..=) Core.<$> endTime,
+                  ("statusDetail" Core..=) Core.<$> statusDetail,
+                  ("target" Core..=) Core.<$> target,
+                  ("verb" Core..=) Core.<$> verb])
 
--- | Details about how a build should be executed on a @WorkerPool@. See <https://cloud.google.com/build/docs/private-pools/run-builds-in-private-pool running builds in a private pool> for more information.
+
+-- | Param defined with name and value. PipelineRef can be used to refer to a specific instance of a Pipeline.
 --
--- /See:/ 'newPoolOption' smart constructor.
-newtype PoolOption = PoolOption
-  { -- | The @WorkerPool@ resource to execute the build on. You must have @cloudbuild.workerpools.use@ on the project hosting the WorkerPool. Format projects\/{project}\/locations\/{location}\/workerPools\/{workerPoolId}
-    name :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newParam' smart constructor.
+data Param = Param
+    {
+      -- | Name of the parameter.
+      name :: (Core.Maybe Core.Text)
+      -- | Value of the parameter.
+    , value :: (Core.Maybe ParamValue)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'PoolOption' with the minimum fields required to make a request.
-newPoolOption ::
-  PoolOption
-newPoolOption = PoolOption {name = Core.Nothing}
+-- | Creates a value of 'Param' with the minimum fields required to make a request.
+newParam 
+    ::  Param
+newParam = Param {name = Core.Nothing, value = Core.Nothing}
 
-instance Core.FromJSON PoolOption where
-  parseJSON =
-    Core.withObject
-      "PoolOption"
-      (\o -> PoolOption Core.<$> (o Core..:? "name"))
+instance Core.FromJSON Param where
+        parseJSON
+          = Core.withObject "Param"
+              (\ o ->
+                 Param Core.<$>
+                   (o Core..:? "name") Core.<*> (o Core..:? "value"))
 
-instance Core.ToJSON PoolOption where
-  toJSON PoolOption {..} =
-    Core.object
-      (Core.catMaybes [("name" Core..=) Core.<$> name])
+instance Core.ToJSON Param where
+        toJSON Param{..}
+          = Core.object
+              (Core.catMaybes
+                 [("name" Core..=) Core.<$> name,
+                  ("value" Core..=) Core.<$> value])
 
--- | Configuration for a V1 @PrivatePool@.
+
+-- | ParamSpec defines parameters needed beyond typed inputs (such as resources). Parameter values are provided by users as inputs on a TaskRun or PipelineRun.
 --
--- /See:/ 'newPrivatePoolV1Config' smart constructor.
-data PrivatePoolV1Config = PrivatePoolV1Config
-  { -- | Network configuration for the pool.
-    networkConfig :: (Core.Maybe NetworkConfig),
-    -- | Machine configuration for the workers in the pool.
-    workerConfig :: (Core.Maybe WorkerConfig)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newParamSpec' smart constructor.
+data ParamSpec = ParamSpec
+    {
+      -- | The default value a parameter takes if no input value is supplied
+      default' :: (Core.Maybe ParamValue)
+      -- | Description of the ParamSpec
+    , description :: (Core.Maybe Core.Text)
+      -- | Name of the ParamSpec
+    , name :: (Core.Maybe Core.Text)
+      -- | Type of ParamSpec
+    , type' :: (Core.Maybe ParamSpec_Type)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'PrivatePoolV1Config' with the minimum fields required to make a request.
-newPrivatePoolV1Config ::
-  PrivatePoolV1Config
-newPrivatePoolV1Config =
-  PrivatePoolV1Config
-    { networkConfig = Core.Nothing,
-      workerConfig = Core.Nothing
+-- | Creates a value of 'ParamSpec' with the minimum fields required to make a request.
+newParamSpec 
+    ::  ParamSpec
+newParamSpec =
+  ParamSpec
+    { default' = Core.Nothing
+    , description = Core.Nothing
+    , name = Core.Nothing
+    , type' = Core.Nothing
     }
 
-instance Core.FromJSON PrivatePoolV1Config where
-  parseJSON =
-    Core.withObject
-      "PrivatePoolV1Config"
-      ( \o ->
-          PrivatePoolV1Config
-            Core.<$> (o Core..:? "networkConfig")
-            Core.<*> (o Core..:? "workerConfig")
-      )
+instance Core.FromJSON ParamSpec where
+        parseJSON
+          = Core.withObject "ParamSpec"
+              (\ o ->
+                 ParamSpec Core.<$>
+                   (o Core..:? "default") Core.<*>
+                     (o Core..:? "description")
+                     Core.<*> (o Core..:? "name")
+                     Core.<*> (o Core..:? "type"))
 
-instance Core.ToJSON PrivatePoolV1Config where
-  toJSON PrivatePoolV1Config {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("networkConfig" Core..=) Core.<$> networkConfig,
-            ("workerConfig" Core..=) Core.<$> workerConfig
-          ]
-      )
+instance Core.ToJSON ParamSpec where
+        toJSON ParamSpec{..}
+          = Core.object
+              (Core.catMaybes
+                 [("default" Core..=) Core.<$> default',
+                  ("description" Core..=) Core.<$> description,
+                  ("name" Core..=) Core.<$> name,
+                  ("type" Core..=) Core.<$> type'])
 
--- | Metadata for @ProcessAppManifestCallback@ operation.
+
+-- | Parameter value.
 --
--- /See:/ 'newProcessAppManifestCallbackOperationMetadata' smart constructor.
-data ProcessAppManifestCallbackOperationMetadata = ProcessAppManifestCallbackOperationMetadata
-  { -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime),
-    -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime),
-    -- | The resource name of the GitHubEnterprise to be created. Format: @projects\/{project}\/locations\/{location}\/githubEnterpriseConfigs\/{id}@.
-    githubEnterpriseConfig :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newParamValue' smart constructor.
+data ParamValue = ParamValue
+    {
+      -- | Value of the parameter if type is array.
+      arrayVal :: (Core.Maybe [Core.Text])
+      -- | Optional. Value of the parameter if type is object.
+    , objectVal :: (Core.Maybe ParamValue_ObjectVal)
+      -- | Value of the parameter if type is string.
+    , stringVal :: (Core.Maybe Core.Text)
+      -- | Type of parameter.
+    , type' :: (Core.Maybe ParamValue_Type)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ProcessAppManifestCallbackOperationMetadata' with the minimum fields required to make a request.
-newProcessAppManifestCallbackOperationMetadata ::
-  ProcessAppManifestCallbackOperationMetadata
-newProcessAppManifestCallbackOperationMetadata =
-  ProcessAppManifestCallbackOperationMetadata
-    { completeTime = Core.Nothing,
-      createTime = Core.Nothing,
-      githubEnterpriseConfig = Core.Nothing
+-- | Creates a value of 'ParamValue' with the minimum fields required to make a request.
+newParamValue 
+    ::  ParamValue
+newParamValue =
+  ParamValue
+    { arrayVal = Core.Nothing
+    , objectVal = Core.Nothing
+    , stringVal = Core.Nothing
+    , type' = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ProcessAppManifestCallbackOperationMetadata
-  where
-  parseJSON =
-    Core.withObject
-      "ProcessAppManifestCallbackOperationMetadata"
-      ( \o ->
-          ProcessAppManifestCallbackOperationMetadata
-            Core.<$> (o Core..:? "completeTime")
-            Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "githubEnterpriseConfig")
-      )
+instance Core.FromJSON ParamValue where
+        parseJSON
+          = Core.withObject "ParamValue"
+              (\ o ->
+                 ParamValue Core.<$>
+                   (o Core..:? "arrayVal") Core.<*>
+                     (o Core..:? "objectVal")
+                     Core.<*> (o Core..:? "stringVal")
+                     Core.<*> (o Core..:? "type"))
 
-instance
-  Core.ToJSON
-    ProcessAppManifestCallbackOperationMetadata
-  where
-  toJSON
-    ProcessAppManifestCallbackOperationMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("completeTime" Core..=) Core.<$> completeTime,
-              ("createTime" Core..=) Core.<$> createTime,
-              ("githubEnterpriseConfig" Core..=)
-                Core.<$> githubEnterpriseConfig
-            ]
-        )
+instance Core.ToJSON ParamValue where
+        toJSON ParamValue{..}
+          = Core.object
+              (Core.catMaybes
+                 [("arrayVal" Core..=) Core.<$> arrayVal,
+                  ("objectVal" Core..=) Core.<$> objectVal,
+                  ("stringVal" Core..=) Core.<$> stringVal,
+                  ("type" Core..=) Core.<$> type'])
 
--- | PubsubConfig describes the configuration of a trigger that creates a build whenever a Pub\/Sub message is published.
+
+-- | Optional. Value of the parameter if type is object.
 --
--- /See:/ 'newPubsubConfig' smart constructor.
-data PubsubConfig = PubsubConfig
-  { -- | Service account that will make the push request.
-    serviceAccountEmail :: (Core.Maybe Core.Text),
-    -- | Potential issues with the underlying Pub\/Sub subscription configuration. Only populated on get requests.
-    state :: (Core.Maybe PubsubConfig_State),
-    -- | Output only. Name of the subscription. Format is @projects\/{project}\/subscriptions\/{subscription}@.
-    subscription :: (Core.Maybe Core.Text),
-    -- | The name of the topic from which this subscription is receiving messages. Format is @projects\/{project}\/topics\/{topic}@.
-    topic :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newParamValue_ObjectVal' smart constructor.
+newtype ParamValue_ObjectVal = ParamValue_ObjectVal
+    {
+      -- | 
+      additional :: (Core.HashMap Core.Text Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'PubsubConfig' with the minimum fields required to make a request.
-newPubsubConfig ::
-  PubsubConfig
-newPubsubConfig =
-  PubsubConfig
-    { serviceAccountEmail = Core.Nothing,
-      state = Core.Nothing,
-      subscription = Core.Nothing,
-      topic = Core.Nothing
+-- | Creates a value of 'ParamValue_ObjectVal' with the minimum fields required to make a request.
+newParamValue_ObjectVal 
+    ::  Core.HashMap Core.Text Core.Text
+       -- ^  See 'additional'.
+    -> ParamValue_ObjectVal
+newParamValue_ObjectVal additional =
+  ParamValue_ObjectVal {additional = additional}
+
+instance Core.FromJSON ParamValue_ObjectVal where
+        parseJSON
+          = Core.withObject "ParamValue_ObjectVal"
+              (\ o ->
+                 ParamValue_ObjectVal Core.<$>
+                   (Core.parseJSONObject o))
+
+instance Core.ToJSON ParamValue_ObjectVal where
+        toJSON ParamValue_ObjectVal{..}
+          = Core.toJSON additional
+
+
+-- | PipelineRef can be used to refer to a specific instance of a Pipeline.
+--
+-- /See:/ 'newPipelineRef' smart constructor.
+data PipelineRef = PipelineRef
+    {
+      -- | Optional. Name of the Pipeline.
+      name :: (Core.Maybe Core.Text)
+      -- | Params contains the parameters used to identify the referenced Tekton resource. Example entries might include \"repo\" or \"path\" but the set of params ultimately depends on the chosen resolver.
+    , params :: (Core.Maybe [Param])
+      -- | Resolver is the name of the resolver that should perform resolution of the referenced Tekton resource.
+    , resolver :: (Core.Maybe PipelineRef_Resolver)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PipelineRef' with the minimum fields required to make a request.
+newPipelineRef 
+    ::  PipelineRef
+newPipelineRef =
+  PipelineRef
+    {name = Core.Nothing, params = Core.Nothing, resolver = Core.Nothing}
+
+instance Core.FromJSON PipelineRef where
+        parseJSON
+          = Core.withObject "PipelineRef"
+              (\ o ->
+                 PipelineRef Core.<$>
+                   (o Core..:? "name") Core.<*> (o Core..:? "params")
+                     Core.<*> (o Core..:? "resolver"))
+
+instance Core.ToJSON PipelineRef where
+        toJSON PipelineRef{..}
+          = Core.object
+              (Core.catMaybes
+                 [("name" Core..=) Core.<$> name,
+                  ("params" Core..=) Core.<$> params,
+                  ("resolver" Core..=) Core.<$> resolver])
+
+
+-- | A value produced by a Pipeline.
+--
+-- /See:/ 'newPipelineResult' smart constructor.
+data PipelineResult = PipelineResult
+    {
+      -- | Output only. Description of the result.
+      description :: (Core.Maybe Core.Text)
+      -- | Output only. Name of the result.
+    , name :: (Core.Maybe Core.Text)
+      -- | Output only. The type of data that the result holds.
+    , type' :: (Core.Maybe PipelineResult_Type)
+      -- | Output only. Value of the result.
+    , value :: (Core.Maybe ResultValue)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PipelineResult' with the minimum fields required to make a request.
+newPipelineResult 
+    ::  PipelineResult
+newPipelineResult =
+  PipelineResult
+    { description = Core.Nothing
+    , name = Core.Nothing
+    , type' = Core.Nothing
+    , value = Core.Nothing
     }
 
-instance Core.FromJSON PubsubConfig where
-  parseJSON =
-    Core.withObject
-      "PubsubConfig"
-      ( \o ->
-          PubsubConfig
-            Core.<$> (o Core..:? "serviceAccountEmail")
-            Core.<*> (o Core..:? "state")
-            Core.<*> (o Core..:? "subscription")
-            Core.<*> (o Core..:? "topic")
-      )
+instance Core.FromJSON PipelineResult where
+        parseJSON
+          = Core.withObject "PipelineResult"
+              (\ o ->
+                 PipelineResult Core.<$>
+                   (o Core..:? "description") Core.<*>
+                     (o Core..:? "name")
+                     Core.<*> (o Core..:? "type")
+                     Core.<*> (o Core..:? "value"))
 
-instance Core.ToJSON PubsubConfig where
-  toJSON PubsubConfig {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("serviceAccountEmail" Core..=)
-              Core.<$> serviceAccountEmail,
-            ("state" Core..=) Core.<$> state,
-            ("subscription" Core..=) Core.<$> subscription,
-            ("topic" Core..=) Core.<$> topic
-          ]
-      )
+instance Core.ToJSON PipelineResult where
+        toJSON PipelineResult{..}
+          = Core.object
+              (Core.catMaybes
+                 [("description" Core..=) Core.<$> description,
+                  ("name" Core..=) Core.<$> name,
+                  ("type" Core..=) Core.<$> type',
+                  ("value" Core..=) Core.<$> value])
 
--- | PullRequestFilter contains filter properties for matching GitHub Pull Requests.
+
+-- | Message describing PipelineRun object
 --
--- /See:/ 'newPullRequestFilter' smart constructor.
-data PullRequestFilter = PullRequestFilter
-  { -- | Regex of branches to match. The syntax of the regular expressions accepted is the syntax accepted by RE2 and described at https:\/\/github.com\/google\/re2\/wiki\/Syntax
-    branch :: (Core.Maybe Core.Text),
-    -- | Configure builds to run whether a repository owner or collaborator need to comment @\/gcbrun@.
-    commentControl :: (Core.Maybe PullRequestFilter_CommentControl),
-    -- | If true, branches that do NOT match the git_ref will trigger a build.
-    invertRegex :: (Core.Maybe Core.Bool)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newPipelineRun' smart constructor.
+data PipelineRun = PipelineRun
+    {
+      -- | User annotations. See https:\/\/google.aip.dev\/128#annotations
+      annotations :: (Core.Maybe PipelineRun_Annotations)
+      -- | Output only. List of TaskRun and Run names and PipelineTask names for children of this PipelineRun.
+    , childReferences :: (Core.Maybe [ChildStatusReference])
+      -- | Output only. Time the pipeline completed.
+    , completionTime :: (Core.Maybe Core.DateTime)
+      -- | Output only. Kubernetes Conditions convention for PipelineRun status and error.
+    , conditions :: (Core.Maybe [GoogleDevtoolsCloudbuildV2Condition])
+      -- | Output only. Time at which the request to create the @PipelineRun@ was received.
+    , createTime :: (Core.Maybe Core.DateTime)
+      -- | Needed for declarative-friendly resources.
+    , etag :: (Core.Maybe Core.Text)
+      -- | Output only. FinallyStartTime is when all non-finally tasks have been completed and only finally tasks are being executed. +optional
+    , finallyStartTime :: (Core.Maybe Core.DateTime)
+      -- | Output only. GCB default params.
+    , gcbParams :: (Core.Maybe PipelineRun_GcbParams)
+      -- | Output only. The @PipelineRun@ name with format @projects\/{project}\/locations\/{location}\/pipelineRuns\/{pipeline_run}@
+    , name :: (Core.Maybe Core.Text)
+      -- | Params is a list of parameter names and values.
+    , params :: (Core.Maybe [Param])
+      -- | PipelineRef refer to a specific instance of a Pipeline.
+    , pipelineRef :: (Core.Maybe PipelineRef)
+      -- | Pipelinerun status the user can provide. Used for cancellation.
+    , pipelineRunStatus :: (Core.Maybe PipelineRun_PipelineRunStatus)
+      -- | PipelineSpec defines the desired state of Pipeline.
+    , pipelineSpec :: (Core.Maybe PipelineSpec)
+      -- | Output only. Inline pipelineSpec yaml string, used by workflow run requests.
+    , pipelineSpecYaml :: (Core.Maybe Core.Text)
+      -- | Optional. Provenance configuration.
+    , provenance :: (Core.Maybe Provenance)
+      -- | Output only. The @Record@ of this @PipelineRun@. Format: @projects\/{project}\/locations\/{location}\/results\/{result_id}\/records\/{record_id}@
+    , record :: (Core.Maybe Core.Text)
+      -- | Output only. The exact PipelineSpec used to instantiate the run.
+    , resolvedPipelineSpec :: (Core.Maybe PipelineSpec)
+      -- | Optional. Output only. List of results written out by the pipeline\'s containers
+    , results :: (Core.Maybe [PipelineRunResult])
+      -- | Optional. Security configuration.
+    , security :: (Core.Maybe Security)
+      -- | Service account used in the Pipeline. Deprecated; please use security.service_account instead.
+    , serviceAccount :: (Core.Maybe Core.Text)
+      -- | Output only. List of tasks that were skipped due to when expressions evaluating to false.
+    , skippedTasks :: (Core.Maybe [SkippedTask])
+      -- | Output only. Time the pipeline is actually started.
+    , startTime :: (Core.Maybe Core.DateTime)
+      -- | Time after which the Pipeline times out. Currently three keys are accepted in the map pipeline, tasks and finally with Timeouts.pipeline >= Timeouts.tasks + Timeouts.finally
+    , timeouts :: (Core.Maybe TimeoutFields)
+      -- | Output only. A unique identifier for the @PipelineRun@.
+    , uid :: (Core.Maybe Core.Text)
+      -- | Output only. Time at which the request to update the @PipelineRun@ was received.
+    , updateTime :: (Core.Maybe Core.DateTime)
+      -- | Optional. Worker configuration.
+    , worker :: (Core.Maybe Worker)
+      -- | Output only. The WorkerPool used to run this PipelineRun.
+    , workerPool :: (Core.Maybe Core.Text)
+      -- | Output only. The Workflow used to create this PipelineRun.
+    , workflow :: (Core.Maybe Core.Text)
+      -- | Workspaces is a list of WorkspaceBindings from volumes to workspaces.
+    , workspaces :: (Core.Maybe [WorkspaceBinding])
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'PullRequestFilter' with the minimum fields required to make a request.
-newPullRequestFilter ::
-  PullRequestFilter
-newPullRequestFilter =
-  PullRequestFilter
-    { branch = Core.Nothing,
-      commentControl = Core.Nothing,
-      invertRegex = Core.Nothing
+-- | Creates a value of 'PipelineRun' with the minimum fields required to make a request.
+newPipelineRun 
+    ::  PipelineRun
+newPipelineRun =
+  PipelineRun
+    { annotations = Core.Nothing
+    , childReferences = Core.Nothing
+    , completionTime = Core.Nothing
+    , conditions = Core.Nothing
+    , createTime = Core.Nothing
+    , etag = Core.Nothing
+    , finallyStartTime = Core.Nothing
+    , gcbParams = Core.Nothing
+    , name = Core.Nothing
+    , params = Core.Nothing
+    , pipelineRef = Core.Nothing
+    , pipelineRunStatus = Core.Nothing
+    , pipelineSpec = Core.Nothing
+    , pipelineSpecYaml = Core.Nothing
+    , provenance = Core.Nothing
+    , record = Core.Nothing
+    , resolvedPipelineSpec = Core.Nothing
+    , results = Core.Nothing
+    , security = Core.Nothing
+    , serviceAccount = Core.Nothing
+    , skippedTasks = Core.Nothing
+    , startTime = Core.Nothing
+    , timeouts = Core.Nothing
+    , uid = Core.Nothing
+    , updateTime = Core.Nothing
+    , worker = Core.Nothing
+    , workerPool = Core.Nothing
+    , workflow = Core.Nothing
+    , workspaces = Core.Nothing
     }
 
-instance Core.FromJSON PullRequestFilter where
-  parseJSON =
-    Core.withObject
-      "PullRequestFilter"
-      ( \o ->
-          PullRequestFilter
-            Core.<$> (o Core..:? "branch")
-            Core.<*> (o Core..:? "commentControl")
-            Core.<*> (o Core..:? "invertRegex")
-      )
+instance Core.FromJSON PipelineRun where
+        parseJSON
+          = Core.withObject "PipelineRun"
+              (\ o ->
+                 PipelineRun Core.<$>
+                   (o Core..:? "annotations") Core.<*>
+                     (o Core..:? "childReferences")
+                     Core.<*> (o Core..:? "completionTime")
+                     Core.<*> (o Core..:? "conditions")
+                     Core.<*> (o Core..:? "createTime")
+                     Core.<*> (o Core..:? "etag")
+                     Core.<*> (o Core..:? "finallyStartTime")
+                     Core.<*> (o Core..:? "gcbParams")
+                     Core.<*> (o Core..:? "name")
+                     Core.<*> (o Core..:? "params")
+                     Core.<*> (o Core..:? "pipelineRef")
+                     Core.<*> (o Core..:? "pipelineRunStatus")
+                     Core.<*> (o Core..:? "pipelineSpec")
+                     Core.<*> (o Core..:? "pipelineSpecYaml")
+                     Core.<*> (o Core..:? "provenance")
+                     Core.<*> (o Core..:? "record")
+                     Core.<*> (o Core..:? "resolvedPipelineSpec")
+                     Core.<*> (o Core..:? "results")
+                     Core.<*> (o Core..:? "security")
+                     Core.<*> (o Core..:? "serviceAccount")
+                     Core.<*> (o Core..:? "skippedTasks")
+                     Core.<*> (o Core..:? "startTime")
+                     Core.<*> (o Core..:? "timeouts")
+                     Core.<*> (o Core..:? "uid")
+                     Core.<*> (o Core..:? "updateTime")
+                     Core.<*> (o Core..:? "worker")
+                     Core.<*> (o Core..:? "workerPool")
+                     Core.<*> (o Core..:? "workflow")
+                     Core.<*> (o Core..:? "workspaces"))
 
-instance Core.ToJSON PullRequestFilter where
-  toJSON PullRequestFilter {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("branch" Core..=) Core.<$> branch,
-            ("commentControl" Core..=) Core.<$> commentControl,
-            ("invertRegex" Core..=) Core.<$> invertRegex
-          ]
-      )
+instance Core.ToJSON PipelineRun where
+        toJSON PipelineRun{..}
+          = Core.object
+              (Core.catMaybes
+                 [("annotations" Core..=) Core.<$> annotations,
+                  ("childReferences" Core..=) Core.<$> childReferences,
+                  ("completionTime" Core..=) Core.<$> completionTime,
+                  ("conditions" Core..=) Core.<$> conditions,
+                  ("createTime" Core..=) Core.<$> createTime,
+                  ("etag" Core..=) Core.<$> etag,
+                  ("finallyStartTime" Core..=) Core.<$>
+                    finallyStartTime,
+                  ("gcbParams" Core..=) Core.<$> gcbParams,
+                  ("name" Core..=) Core.<$> name,
+                  ("params" Core..=) Core.<$> params,
+                  ("pipelineRef" Core..=) Core.<$> pipelineRef,
+                  ("pipelineRunStatus" Core..=) Core.<$>
+                    pipelineRunStatus,
+                  ("pipelineSpec" Core..=) Core.<$> pipelineSpec,
+                  ("pipelineSpecYaml" Core..=) Core.<$>
+                    pipelineSpecYaml,
+                  ("provenance" Core..=) Core.<$> provenance,
+                  ("record" Core..=) Core.<$> record,
+                  ("resolvedPipelineSpec" Core..=) Core.<$>
+                    resolvedPipelineSpec,
+                  ("results" Core..=) Core.<$> results,
+                  ("security" Core..=) Core.<$> security,
+                  ("serviceAccount" Core..=) Core.<$> serviceAccount,
+                  ("skippedTasks" Core..=) Core.<$> skippedTasks,
+                  ("startTime" Core..=) Core.<$> startTime,
+                  ("timeouts" Core..=) Core.<$> timeouts,
+                  ("uid" Core..=) Core.<$> uid,
+                  ("updateTime" Core..=) Core.<$> updateTime,
+                  ("worker" Core..=) Core.<$> worker,
+                  ("workerPool" Core..=) Core.<$> workerPool,
+                  ("workflow" Core..=) Core.<$> workflow,
+                  ("workspaces" Core..=) Core.<$> workspaces])
 
--- | Push contains filter properties for matching GitHub git pushes.
+
+-- | User annotations. See https:\/\/google.aip.dev\/128#annotations
 --
--- /See:/ 'newPushFilter' smart constructor.
-data PushFilter = PushFilter
-  { -- | Regexes matching branches to build. The syntax of the regular expressions accepted is the syntax accepted by RE2 and described at https:\/\/github.com\/google\/re2\/wiki\/Syntax
-    branch :: (Core.Maybe Core.Text),
-    -- | When true, only trigger a build if the revision regex does NOT match the git_ref regex.
-    invertRegex :: (Core.Maybe Core.Bool),
-    -- | Regexes matching tags to build. The syntax of the regular expressions accepted is the syntax accepted by RE2 and described at https:\/\/github.com\/google\/re2\/wiki\/Syntax
-    tag :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newPipelineRun_Annotations' smart constructor.
+newtype PipelineRun_Annotations = PipelineRun_Annotations
+    {
+      -- | 
+      additional :: (Core.HashMap Core.Text Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'PushFilter' with the minimum fields required to make a request.
-newPushFilter ::
-  PushFilter
-newPushFilter =
-  PushFilter
-    { branch = Core.Nothing,
-      invertRegex = Core.Nothing,
-      tag = Core.Nothing
+-- | Creates a value of 'PipelineRun_Annotations' with the minimum fields required to make a request.
+newPipelineRun_Annotations 
+    ::  Core.HashMap Core.Text Core.Text
+       -- ^  See 'additional'.
+    -> PipelineRun_Annotations
+newPipelineRun_Annotations additional =
+  PipelineRun_Annotations {additional = additional}
+
+instance Core.FromJSON PipelineRun_Annotations where
+        parseJSON
+          = Core.withObject "PipelineRun_Annotations"
+              (\ o ->
+                 PipelineRun_Annotations Core.<$>
+                   (Core.parseJSONObject o))
+
+instance Core.ToJSON PipelineRun_Annotations where
+        toJSON PipelineRun_Annotations{..}
+          = Core.toJSON additional
+
+
+-- | Output only. GCB default params.
+--
+-- /See:/ 'newPipelineRun_GcbParams' smart constructor.
+newtype PipelineRun_GcbParams = PipelineRun_GcbParams
+    {
+      -- | 
+      additional :: (Core.HashMap Core.Text Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PipelineRun_GcbParams' with the minimum fields required to make a request.
+newPipelineRun_GcbParams 
+    ::  Core.HashMap Core.Text Core.Text
+       -- ^  See 'additional'.
+    -> PipelineRun_GcbParams
+newPipelineRun_GcbParams additional =
+  PipelineRun_GcbParams {additional = additional}
+
+instance Core.FromJSON PipelineRun_GcbParams where
+        parseJSON
+          = Core.withObject "PipelineRun_GcbParams"
+              (\ o ->
+                 PipelineRun_GcbParams Core.<$>
+                   (Core.parseJSONObject o))
+
+instance Core.ToJSON PipelineRun_GcbParams where
+        toJSON PipelineRun_GcbParams{..}
+          = Core.toJSON additional
+
+
+-- | PipelineRunResult used to describe the results of a pipeline
+--
+-- /See:/ 'newPipelineRunResult' smart constructor.
+data PipelineRunResult = PipelineRunResult
+    {
+      -- | Output only. Name of the TaskRun
+      name :: (Core.Maybe Core.Text)
+      -- | Output only. Value of the result.
+    , value :: (Core.Maybe ResultValue)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PipelineRunResult' with the minimum fields required to make a request.
+newPipelineRunResult 
+    ::  PipelineRunResult
+newPipelineRunResult =
+  PipelineRunResult {name = Core.Nothing, value = Core.Nothing}
+
+instance Core.FromJSON PipelineRunResult where
+        parseJSON
+          = Core.withObject "PipelineRunResult"
+              (\ o ->
+                 PipelineRunResult Core.<$>
+                   (o Core..:? "name") Core.<*> (o Core..:? "value"))
+
+instance Core.ToJSON PipelineRunResult where
+        toJSON PipelineRunResult{..}
+          = Core.object
+              (Core.catMaybes
+                 [("name" Core..=) Core.<$> name,
+                  ("value" Core..=) Core.<$> value])
+
+
+-- | PipelineSpec defines the desired state of Pipeline.
+--
+-- /See:/ 'newPipelineSpec' smart constructor.
+data PipelineSpec = PipelineSpec
+    {
+      -- | List of Tasks that execute just before leaving the Pipeline i.e. either after all Tasks are finished executing successfully or after a failure which would result in ending the Pipeline.
+      finallyTasks :: (Core.Maybe [PipelineTask])
+      -- | Output only. auto-generated yaml that is output only for display purpose for workflows using pipeline_spec, used by UI\/gcloud cli for Workflows.
+    , generatedYaml :: (Core.Maybe Core.Text)
+      -- | List of parameters.
+    , params :: (Core.Maybe [ParamSpec])
+      -- | Optional. Output only. List of results written out by the pipeline\'s containers
+    , results :: (Core.Maybe [PipelineResult])
+      -- | List of Tasks that execute when this Pipeline is run.
+    , tasks :: (Core.Maybe [PipelineTask])
+      -- | Workspaces declares a set of named workspaces that are expected to be provided by a PipelineRun.
+    , workspaces :: (Core.Maybe [PipelineWorkspaceDeclaration])
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PipelineSpec' with the minimum fields required to make a request.
+newPipelineSpec 
+    ::  PipelineSpec
+newPipelineSpec =
+  PipelineSpec
+    { finallyTasks = Core.Nothing
+    , generatedYaml = Core.Nothing
+    , params = Core.Nothing
+    , results = Core.Nothing
+    , tasks = Core.Nothing
+    , workspaces = Core.Nothing
     }
 
-instance Core.FromJSON PushFilter where
-  parseJSON =
-    Core.withObject
-      "PushFilter"
-      ( \o ->
-          PushFilter
-            Core.<$> (o Core..:? "branch")
-            Core.<*> (o Core..:? "invertRegex")
-            Core.<*> (o Core..:? "tag")
-      )
+instance Core.FromJSON PipelineSpec where
+        parseJSON
+          = Core.withObject "PipelineSpec"
+              (\ o ->
+                 PipelineSpec Core.<$>
+                   (o Core..:? "finallyTasks") Core.<*>
+                     (o Core..:? "generatedYaml")
+                     Core.<*> (o Core..:? "params")
+                     Core.<*> (o Core..:? "results")
+                     Core.<*> (o Core..:? "tasks")
+                     Core.<*> (o Core..:? "workspaces"))
 
-instance Core.ToJSON PushFilter where
-  toJSON PushFilter {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("branch" Core..=) Core.<$> branch,
-            ("invertRegex" Core..=) Core.<$> invertRegex,
-            ("tag" Core..=) Core.<$> tag
-          ]
-      )
+instance Core.ToJSON PipelineSpec where
+        toJSON PipelineSpec{..}
+          = Core.object
+              (Core.catMaybes
+                 [("finallyTasks" Core..=) Core.<$> finallyTasks,
+                  ("generatedYaml" Core..=) Core.<$> generatedYaml,
+                  ("params" Core..=) Core.<$> params,
+                  ("results" Core..=) Core.<$> results,
+                  ("tasks" Core..=) Core.<$> tasks,
+                  ("workspaces" Core..=) Core.<$> workspaces])
 
--- | Python package to upload to Artifact Registry upon successful completion of all build steps. A package can encapsulate multiple objects to be uploaded to a single repository.
+
+-- | PipelineTask defines a task in a Pipeline.
 --
--- /See:/ 'newPythonPackage' smart constructor.
-data PythonPackage = PythonPackage
-  { -- | Path globs used to match files in the build\'s workspace. For Python\/ Twine, this is usually @dist\/*@, and sometimes additionally an @.asc@ file.
-    paths :: (Core.Maybe [Core.Text]),
-    -- | Artifact Registry repository, in the form \"https:\/\/$REGION-python.pkg.dev\/$PROJECT\/$REPOSITORY\" Files in the workspace matching any path pattern will be uploaded to Artifact Registry with this location as a prefix.
-    repository :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newPipelineTask' smart constructor.
+data PipelineTask = PipelineTask
+    {
+      -- | Name of the task.
+      name :: (Core.Maybe Core.Text)
+      -- | Params is a list of parameter names and values.
+    , params :: (Core.Maybe [Param])
+      -- | Retries represents how many times this task should be retried in case of task failure.
+    , retries :: (Core.Maybe Core.Int32)
+      -- | RunAfter is the list of PipelineTask names that should be executed before this Task executes. (Used to force a specific ordering in graph execution.)
+    , runAfter :: (Core.Maybe [Core.Text])
+      -- | Reference to a specific instance of a task.
+    , taskRef :: (Core.Maybe TaskRef)
+      -- | Spec to instantiate this TaskRun.
+    , taskSpec :: (Core.Maybe EmbeddedTask)
+      -- | Time after which the TaskRun times out. Defaults to 1 hour. Specified TaskRun timeout should be less than 24h.
+    , timeout :: (Core.Maybe Core.Duration)
+      -- | Conditions that need to be true for the task to run.
+    , whenExpressions :: (Core.Maybe [WhenExpression])
+      -- | Workspaces maps workspaces from the pipeline spec to the workspaces declared in the Task.
+    , workspaces :: (Core.Maybe [WorkspacePipelineTaskBinding])
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'PythonPackage' with the minimum fields required to make a request.
-newPythonPackage ::
-  PythonPackage
-newPythonPackage =
-  PythonPackage {paths = Core.Nothing, repository = Core.Nothing}
-
-instance Core.FromJSON PythonPackage where
-  parseJSON =
-    Core.withObject
-      "PythonPackage"
-      ( \o ->
-          PythonPackage
-            Core.<$> (o Core..:? "paths")
-            Core.<*> (o Core..:? "repository")
-      )
-
-instance Core.ToJSON PythonPackage where
-  toJSON PythonPackage {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("paths" Core..=) Core.<$> paths,
-            ("repository" Core..=) Core.<$> repository
-          ]
-      )
-
--- | ReceiveTriggerWebhookResponse [Experimental] is the response object for the ReceiveTriggerWebhook method.
---
--- /See:/ 'newReceiveTriggerWebhookResponse' smart constructor.
-data ReceiveTriggerWebhookResponse = ReceiveTriggerWebhookResponse
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ReceiveTriggerWebhookResponse' with the minimum fields required to make a request.
-newReceiveTriggerWebhookResponse ::
-  ReceiveTriggerWebhookResponse
-newReceiveTriggerWebhookResponse = ReceiveTriggerWebhookResponse
-
-instance Core.FromJSON ReceiveTriggerWebhookResponse where
-  parseJSON =
-    Core.withObject
-      "ReceiveTriggerWebhookResponse"
-      (\o -> Core.pure ReceiveTriggerWebhookResponse)
-
-instance Core.ToJSON ReceiveTriggerWebhookResponse where
-  toJSON = Core.const Core.emptyObject
-
--- | RPC request object accepted by RemoveBitbucketServerConnectedRepository RPC method.
---
--- /See:/ 'newRemoveBitbucketServerConnectedRepositoryRequest' smart constructor.
-newtype RemoveBitbucketServerConnectedRepositoryRequest = RemoveBitbucketServerConnectedRepositoryRequest
-  { -- | The connected repository to remove.
-    connectedRepository :: (Core.Maybe BitbucketServerRepositoryId)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'RemoveBitbucketServerConnectedRepositoryRequest' with the minimum fields required to make a request.
-newRemoveBitbucketServerConnectedRepositoryRequest ::
-  RemoveBitbucketServerConnectedRepositoryRequest
-newRemoveBitbucketServerConnectedRepositoryRequest =
-  RemoveBitbucketServerConnectedRepositoryRequest
-    { connectedRepository = Core.Nothing
+-- | Creates a value of 'PipelineTask' with the minimum fields required to make a request.
+newPipelineTask 
+    ::  PipelineTask
+newPipelineTask =
+  PipelineTask
+    { name = Core.Nothing
+    , params = Core.Nothing
+    , retries = Core.Nothing
+    , runAfter = Core.Nothing
+    , taskRef = Core.Nothing
+    , taskSpec = Core.Nothing
+    , timeout = Core.Nothing
+    , whenExpressions = Core.Nothing
+    , workspaces = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    RemoveBitbucketServerConnectedRepositoryRequest
-  where
-  parseJSON =
-    Core.withObject
-      "RemoveBitbucketServerConnectedRepositoryRequest"
-      ( \o ->
-          RemoveBitbucketServerConnectedRepositoryRequest
-            Core.<$> (o Core..:? "connectedRepository")
-      )
+instance Core.FromJSON PipelineTask where
+        parseJSON
+          = Core.withObject "PipelineTask"
+              (\ o ->
+                 PipelineTask Core.<$>
+                   (o Core..:? "name") Core.<*> (o Core..:? "params")
+                     Core.<*> (o Core..:? "retries")
+                     Core.<*> (o Core..:? "runAfter")
+                     Core.<*> (o Core..:? "taskRef")
+                     Core.<*> (o Core..:? "taskSpec")
+                     Core.<*> (o Core..:? "timeout")
+                     Core.<*> (o Core..:? "whenExpressions")
+                     Core.<*> (o Core..:? "workspaces"))
 
-instance
-  Core.ToJSON
-    RemoveBitbucketServerConnectedRepositoryRequest
-  where
-  toJSON
-    RemoveBitbucketServerConnectedRepositoryRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("connectedRepository" Core..=)
-                Core.<$> connectedRepository
-            ]
-        )
+instance Core.ToJSON PipelineTask where
+        toJSON PipelineTask{..}
+          = Core.object
+              (Core.catMaybes
+                 [("name" Core..=) Core.<$> name,
+                  ("params" Core..=) Core.<$> params,
+                  ("retries" Core..=) Core.<$> retries,
+                  ("runAfter" Core..=) Core.<$> runAfter,
+                  ("taskRef" Core..=) Core.<$> taskRef,
+                  ("taskSpec" Core..=) Core.<$> taskSpec,
+                  ("timeout" Core..=) Core.<$> timeout,
+                  ("whenExpressions" Core..=) Core.<$> whenExpressions,
+                  ("workspaces" Core..=) Core.<$> workspaces])
 
--- | RPC request object accepted by RemoveGitLabConnectedRepository RPC method.
+
+-- | Workspaces declares a set of named workspaces that are expected to be provided by a PipelineRun.
 --
--- /See:/ 'newRemoveGitLabConnectedRepositoryRequest' smart constructor.
-newtype RemoveGitLabConnectedRepositoryRequest = RemoveGitLabConnectedRepositoryRequest
-  { -- | The connected repository to remove.
-    connectedRepository :: (Core.Maybe GitLabRepositoryId)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newPipelineWorkspaceDeclaration' smart constructor.
+data PipelineWorkspaceDeclaration = PipelineWorkspaceDeclaration
+    {
+      -- | Description is a human readable string describing how the workspace will be used in the Pipeline.
+      description :: (Core.Maybe Core.Text)
+      -- | Name is the name of a workspace to be provided by a PipelineRun.
+    , name :: (Core.Maybe Core.Text)
+      -- | Optional marks a Workspace as not being required in PipelineRuns. By default this field is false and so declared workspaces are required.
+    , optional :: (Core.Maybe Core.Bool)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'RemoveGitLabConnectedRepositoryRequest' with the minimum fields required to make a request.
-newRemoveGitLabConnectedRepositoryRequest ::
-  RemoveGitLabConnectedRepositoryRequest
-newRemoveGitLabConnectedRepositoryRequest =
-  RemoveGitLabConnectedRepositoryRequest {connectedRepository = Core.Nothing}
+-- | Creates a value of 'PipelineWorkspaceDeclaration' with the minimum fields required to make a request.
+newPipelineWorkspaceDeclaration 
+    ::  PipelineWorkspaceDeclaration
+newPipelineWorkspaceDeclaration =
+  PipelineWorkspaceDeclaration
+    {description = Core.Nothing, name = Core.Nothing, optional = Core.Nothing}
 
-instance
-  Core.FromJSON
-    RemoveGitLabConnectedRepositoryRequest
-  where
-  parseJSON =
-    Core.withObject
-      "RemoveGitLabConnectedRepositoryRequest"
-      ( \o ->
-          RemoveGitLabConnectedRepositoryRequest
-            Core.<$> (o Core..:? "connectedRepository")
-      )
+instance Core.FromJSON PipelineWorkspaceDeclaration
+         where
+        parseJSON
+          = Core.withObject "PipelineWorkspaceDeclaration"
+              (\ o ->
+                 PipelineWorkspaceDeclaration Core.<$>
+                   (o Core..:? "description") Core.<*>
+                     (o Core..:? "name")
+                     Core.<*> (o Core..:? "optional"))
 
-instance
-  Core.ToJSON
-    RemoveGitLabConnectedRepositoryRequest
-  where
-  toJSON RemoveGitLabConnectedRepositoryRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("connectedRepository" Core..=)
-              Core.<$> connectedRepository
-          ]
-      )
+instance Core.ToJSON PipelineWorkspaceDeclaration
+         where
+        toJSON PipelineWorkspaceDeclaration{..}
+          = Core.object
+              (Core.catMaybes
+                 [("description" Core..=) Core.<$> description,
+                  ("name" Core..=) Core.<$> name,
+                  ("optional" Core..=) Core.<$> optional])
 
--- | Location of the source in a Google Cloud Source Repository.
+
+-- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__
+-- @{ \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\", \"group:admins\@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id\@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [ \"user:eve\@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \< timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 }@ __YAML example:__
+-- @bindings: - members: - user:mike\@example.com - group:admins\@example.com - domain:google.com - serviceAccount:my-project-id\@appspot.gserviceaccount.com role: roles\/resourcemanager.organizationAdmin - members: - user:eve\@example.com role: roles\/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \< timestamp(\'2020-10-01T00:00:00.000Z\') etag: BwWWja0YfJA= version: 3@ For a description of IAM and its features, see the <https://cloud.google.com/iam/docs/ IAM documentation>.
 --
--- /See:/ 'newRepoSource' smart constructor.
-data RepoSource = RepoSource
-  { -- | Regex matching branches to build. The syntax of the regular expressions accepted is the syntax accepted by RE2 and described at https:\/\/github.com\/google\/re2\/wiki\/Syntax
-    branchName :: (Core.Maybe Core.Text),
-    -- | Explicit commit SHA to build.
-    commitSha :: (Core.Maybe Core.Text),
-    -- | Directory, relative to the source root, in which to run the build. This must be a relative path. If a step\'s @dir@ is specified and is an absolute path, this value is ignored for that step\'s execution.
-    dir :: (Core.Maybe Core.Text),
-    -- | Only trigger a build if the revision regex does NOT match the revision regex.
-    invertRegex :: (Core.Maybe Core.Bool),
-    -- | ID of the project that owns the Cloud Source Repository. If omitted, the project ID requesting the build is assumed.
-    projectId :: (Core.Maybe Core.Text),
-    -- | Name of the Cloud Source Repository.
-    repoName :: (Core.Maybe Core.Text),
-    -- | Substitutions to use in a triggered build. Should only be used with RunBuildTrigger
-    substitutions :: (Core.Maybe RepoSource_Substitutions),
-    -- | Regex matching tags to build. The syntax of the regular expressions accepted is the syntax accepted by RE2 and described at https:\/\/github.com\/google\/re2\/wiki\/Syntax
-    tagName :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newPolicy' smart constructor.
+data Policy = Policy
+    {
+      -- | Specifies cloud audit logging configuration for this policy.
+      auditConfigs :: (Core.Maybe [AuditConfig])
+      -- | Associates a list of @members@, or principals, with a @role@. Optionally, may specify a @condition@ that determines how and when the @bindings@ are applied. Each of the @bindings@ must contain at least one principal. The @bindings@ in a @Policy@ can refer to up to 1,500 principals; up to 250 of these principals can be Google groups. Each occurrence of a principal counts towards these limits. For example, if the @bindings@ grant 50 different roles to @user:alice\@example.com@, and not to any other principal, then you can add another 1,450 principals to the @bindings@ in the @Policy@.
+    , bindings :: (Core.Maybe [Binding])
+      -- | @etag@ is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the @etag@ in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An @etag@ is returned in the response to @getIamPolicy@, and systems are expected to put that etag in the request to @setIamPolicy@ to ensure that their change will be applied to the same version of the policy. __Important:__ If you use IAM Conditions, you must include the @etag@ field whenever you call @setIamPolicy@. If you omit this field, then IAM allows you to overwrite a version @3@ policy with a version @1@ policy, and all of the conditions in the version @3@ policy are lost.
+    , etag :: (Core.Maybe Core.Base64)
+      -- | Specifies the format of the policy. Valid values are @0@, @1@, and @3@. Requests that specify an invalid value are rejected. Any operation that affects conditional role bindings must specify version @3@. This requirement applies to the following operations: * Getting a policy that includes a conditional role binding * Adding a conditional role binding to a policy * Changing a conditional role binding in a policy * Removing any role binding, with or without a condition, from a policy that includes conditions __Important:__ If you use IAM Conditions, you must include the @etag@ field whenever you call @setIamPolicy@. If you omit this field, then IAM allows you to overwrite a version @3@ policy with a version @1@ policy, and all of the conditions in the version @3@ policy are lost. If a policy does not include any conditions, operations on that policy may specify any valid version or leave the field unset. To learn which resources support conditions in their IAM policies, see the
+      -- <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
+    , version :: (Core.Maybe Core.Int32)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'RepoSource' with the minimum fields required to make a request.
-newRepoSource ::
-  RepoSource
-newRepoSource =
-  RepoSource
-    { branchName = Core.Nothing,
-      commitSha = Core.Nothing,
-      dir = Core.Nothing,
-      invertRegex = Core.Nothing,
-      projectId = Core.Nothing,
-      repoName = Core.Nothing,
-      substitutions = Core.Nothing,
-      tagName = Core.Nothing
+-- | Creates a value of 'Policy' with the minimum fields required to make a request.
+newPolicy 
+    ::  Policy
+newPolicy =
+  Policy
+    { auditConfigs = Core.Nothing
+    , bindings = Core.Nothing
+    , etag = Core.Nothing
+    , version = Core.Nothing
     }
 
-instance Core.FromJSON RepoSource where
-  parseJSON =
-    Core.withObject
-      "RepoSource"
-      ( \o ->
-          RepoSource
-            Core.<$> (o Core..:? "branchName")
-            Core.<*> (o Core..:? "commitSha")
-            Core.<*> (o Core..:? "dir")
-            Core.<*> (o Core..:? "invertRegex")
-            Core.<*> (o Core..:? "projectId")
-            Core.<*> (o Core..:? "repoName")
-            Core.<*> (o Core..:? "substitutions")
-            Core.<*> (o Core..:? "tagName")
-      )
+instance Core.FromJSON Policy where
+        parseJSON
+          = Core.withObject "Policy"
+              (\ o ->
+                 Policy Core.<$>
+                   (o Core..:? "auditConfigs") Core.<*>
+                     (o Core..:? "bindings")
+                     Core.<*> (o Core..:? "etag")
+                     Core.<*> (o Core..:? "version"))
 
-instance Core.ToJSON RepoSource where
-  toJSON RepoSource {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("branchName" Core..=) Core.<$> branchName,
-            ("commitSha" Core..=) Core.<$> commitSha,
-            ("dir" Core..=) Core.<$> dir,
-            ("invertRegex" Core..=) Core.<$> invertRegex,
-            ("projectId" Core..=) Core.<$> projectId,
-            ("repoName" Core..=) Core.<$> repoName,
-            ("substitutions" Core..=) Core.<$> substitutions,
-            ("tagName" Core..=) Core.<$> tagName
-          ]
-      )
+instance Core.ToJSON Policy where
+        toJSON Policy{..}
+          = Core.object
+              (Core.catMaybes
+                 [("auditConfigs" Core..=) Core.<$> auditConfigs,
+                  ("bindings" Core..=) Core.<$> bindings,
+                  ("etag" Core..=) Core.<$> etag,
+                  ("version" Core..=) Core.<$> version])
 
--- | Substitutions to use in a triggered build. Should only be used with RunBuildTrigger
+
+-- | Probe describes a health check to be performed against a container to determine whether it is alive or ready to receive traffic.
 --
--- /See:/ 'newRepoSource_Substitutions' smart constructor.
-newtype RepoSource_Substitutions = RepoSource_Substitutions
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newProbe' smart constructor.
+data Probe = Probe
+    {
+      -- | Optional. Exec specifies the action to take. +optional
+      exec :: (Core.Maybe ExecAction)
+      -- | Optional. How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1. +optional
+    , periodSeconds :: (Core.Maybe Core.Int32)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'RepoSource_Substitutions' with the minimum fields required to make a request.
-newRepoSource_Substitutions ::
-  -- |  See 'additional'.
-  Core.HashMap Core.Text Core.Text ->
-  RepoSource_Substitutions
-newRepoSource_Substitutions additional =
-  RepoSource_Substitutions {additional = additional}
+-- | Creates a value of 'Probe' with the minimum fields required to make a request.
+newProbe 
+    ::  Probe
+newProbe = Probe {exec = Core.Nothing, periodSeconds = Core.Nothing}
 
-instance Core.FromJSON RepoSource_Substitutions where
-  parseJSON =
-    Core.withObject
-      "RepoSource_Substitutions"
-      ( \o ->
-          RepoSource_Substitutions
-            Core.<$> (Core.parseJSONObject o)
-      )
+instance Core.FromJSON Probe where
+        parseJSON
+          = Core.withObject "Probe"
+              (\ o ->
+                 Probe Core.<$>
+                   (o Core..:? "exec") Core.<*>
+                     (o Core..:? "periodSeconds"))
 
-instance Core.ToJSON RepoSource_Substitutions where
-  toJSON RepoSource_Substitutions {..} =
-    Core.toJSON additional
+instance Core.ToJSON Probe where
+        toJSON Probe{..}
+          = Core.object
+              (Core.catMaybes
+                 [("exec" Core..=) Core.<$> exec,
+                  ("periodSeconds" Core..=) Core.<$> periodSeconds])
 
--- | The configuration of a trigger that creates a build whenever an event from Repo API is received.
+
+-- | PropertySpec holds information about a property in an object.
 --
--- /See:/ 'newRepositoryEventConfig' smart constructor.
-data RepositoryEventConfig = RepositoryEventConfig
-  { -- | Filter to match changes in pull requests.
-    pullRequest :: (Core.Maybe PullRequestFilter),
-    -- | Filter to match changes in refs like branches, tags.
-    push :: (Core.Maybe PushFilter),
-    -- | The resource name of the Repo API resource.
-    repository :: (Core.Maybe Core.Text),
-    -- | Output only. The type of the SCM vendor the repository points to.
-    repositoryType :: (Core.Maybe RepositoryEventConfig_RepositoryType)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newPropertySpec' smart constructor.
+newtype PropertySpec = PropertySpec
+    {
+      -- | A type for the object.
+      type' :: (Core.Maybe PropertySpec_Type)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'RepositoryEventConfig' with the minimum fields required to make a request.
-newRepositoryEventConfig ::
-  RepositoryEventConfig
-newRepositoryEventConfig =
-  RepositoryEventConfig
-    { pullRequest = Core.Nothing,
-      push = Core.Nothing,
-      repository = Core.Nothing,
-      repositoryType = Core.Nothing
+-- | Creates a value of 'PropertySpec' with the minimum fields required to make a request.
+newPropertySpec 
+    ::  PropertySpec
+newPropertySpec = PropertySpec {type' = Core.Nothing}
+
+instance Core.FromJSON PropertySpec where
+        parseJSON
+          = Core.withObject "PropertySpec"
+              (\ o -> PropertySpec Core.<$> (o Core..:? "type"))
+
+instance Core.ToJSON PropertySpec where
+        toJSON PropertySpec{..}
+          = Core.object
+              (Core.catMaybes [("type" Core..=) Core.<$> type'])
+
+
+-- | Provenance configuration.
+--
+-- /See:/ 'newProvenance' smart constructor.
+data Provenance = Provenance
+    {
+      -- | Optional. Provenance push mode.
+      enabled :: (Core.Maybe Provenance_Enabled)
+      -- | Optional. Provenance region.
+    , region :: (Core.Maybe Provenance_Region)
+      -- | Optional. Where provenance is stored.
+    , storage :: (Core.Maybe Provenance_Storage)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Provenance' with the minimum fields required to make a request.
+newProvenance 
+    ::  Provenance
+newProvenance =
+  Provenance
+    {enabled = Core.Nothing, region = Core.Nothing, storage = Core.Nothing}
+
+instance Core.FromJSON Provenance where
+        parseJSON
+          = Core.withObject "Provenance"
+              (\ o ->
+                 Provenance Core.<$>
+                   (o Core..:? "enabled") Core.<*> (o Core..:? "region")
+                     Core.<*> (o Core..:? "storage"))
+
+instance Core.ToJSON Provenance where
+        toJSON Provenance{..}
+          = Core.object
+              (Core.catMaybes
+                 [("enabled" Core..=) Core.<$> enabled,
+                  ("region" Core..=) Core.<$> region,
+                  ("storage" Core..=) Core.<$> storage])
+
+
+-- | A repository associated to a parent connection.
+--
+-- /See:/ 'newRepository' smart constructor.
+data Repository = Repository
+    {
+      -- | Optional. Allows clients to store small amounts of arbitrary data.
+      annotations :: (Core.Maybe Repository_Annotations)
+      -- | Output only. Server assigned timestamp for when the connection was created.
+    , createTime :: (Core.Maybe Core.DateTime)
+      -- | This checksum is computed by the server based on the value of other fields, and may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding.
+    , etag :: (Core.Maybe Core.Text)
+      -- | Immutable. Resource name of the repository, in the format @projects\/*\/locations\/*\/connections\/*\/repositories\/*@.
+    , name :: (Core.Maybe Core.Text)
+      -- | Required. Git Clone HTTPS URI.
+    , remoteUri :: (Core.Maybe Core.Text)
+      -- | Output only. Server assigned timestamp for when the connection was updated.
+    , updateTime :: (Core.Maybe Core.DateTime)
+      -- | Output only. External ID of the webhook created for the repository.
+    , webhookId :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Repository' with the minimum fields required to make a request.
+newRepository 
+    ::  Repository
+newRepository =
+  Repository
+    { annotations = Core.Nothing
+    , createTime = Core.Nothing
+    , etag = Core.Nothing
+    , name = Core.Nothing
+    , remoteUri = Core.Nothing
+    , updateTime = Core.Nothing
+    , webhookId = Core.Nothing
     }
 
-instance Core.FromJSON RepositoryEventConfig where
-  parseJSON =
-    Core.withObject
-      "RepositoryEventConfig"
-      ( \o ->
-          RepositoryEventConfig
-            Core.<$> (o Core..:? "pullRequest")
-            Core.<*> (o Core..:? "push")
-            Core.<*> (o Core..:? "repository")
-            Core.<*> (o Core..:? "repositoryType")
-      )
+instance Core.FromJSON Repository where
+        parseJSON
+          = Core.withObject "Repository"
+              (\ o ->
+                 Repository Core.<$>
+                   (o Core..:? "annotations") Core.<*>
+                     (o Core..:? "createTime")
+                     Core.<*> (o Core..:? "etag")
+                     Core.<*> (o Core..:? "name")
+                     Core.<*> (o Core..:? "remoteUri")
+                     Core.<*> (o Core..:? "updateTime")
+                     Core.<*> (o Core..:? "webhookId"))
 
-instance Core.ToJSON RepositoryEventConfig where
-  toJSON RepositoryEventConfig {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("pullRequest" Core..=) Core.<$> pullRequest,
-            ("push" Core..=) Core.<$> push,
-            ("repository" Core..=) Core.<$> repository,
-            ("repositoryType" Core..=) Core.<$> repositoryType
-          ]
-      )
+instance Core.ToJSON Repository where
+        toJSON Repository{..}
+          = Core.object
+              (Core.catMaybes
+                 [("annotations" Core..=) Core.<$> annotations,
+                  ("createTime" Core..=) Core.<$> createTime,
+                  ("etag" Core..=) Core.<$> etag,
+                  ("name" Core..=) Core.<$> name,
+                  ("remoteUri" Core..=) Core.<$> remoteUri,
+                  ("updateTime" Core..=) Core.<$> updateTime,
+                  ("webhookId" Core..=) Core.<$> webhookId])
 
--- | Artifacts created by the build pipeline.
+
+-- | Optional. Allows clients to store small amounts of arbitrary data.
 --
--- /See:/ 'newResults' smart constructor.
-data Results = Results
-  { -- | Path to the artifact manifest for non-container artifacts uploaded to Cloud Storage. Only populated when artifacts are uploaded to Cloud Storage.
-    artifactManifest :: (Core.Maybe Core.Text),
-    -- | Time to push all non-container artifacts to Cloud Storage.
-    artifactTiming :: (Core.Maybe TimeSpan),
-    -- | List of build step digests, in the order corresponding to build step indices.
-    buildStepImages :: (Core.Maybe [Core.Text]),
-    -- | List of build step outputs, produced by builder images, in the order corresponding to build step indices. <https://cloud.google.com/cloud-build/docs/cloud-builders Cloud Builders> can produce this output by writing to @$BUILDER_OUTPUT\/output@. Only the first 4KB of data is stored.
-    buildStepOutputs :: (Core.Maybe [Core.Base64]),
-    -- | Container images that were built as a part of the build.
-    images :: (Core.Maybe [BuiltImage]),
-    -- | Maven artifacts uploaded to Artifact Registry at the end of the build.
-    mavenArtifacts :: (Core.Maybe [UploadedMavenArtifact]),
-    -- | Number of non-container artifacts uploaded to Cloud Storage. Only populated when artifacts are uploaded to Cloud Storage.
-    numArtifacts :: (Core.Maybe Core.Int64),
-    -- | Python artifacts uploaded to Artifact Registry at the end of the build.
-    pythonPackages :: (Core.Maybe [UploadedPythonPackage])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newRepository_Annotations' smart constructor.
+newtype Repository_Annotations = Repository_Annotations
+    {
+      -- | 
+      additional :: (Core.HashMap Core.Text Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'Results' with the minimum fields required to make a request.
-newResults ::
-  Results
-newResults =
-  Results
-    { artifactManifest = Core.Nothing,
-      artifactTiming = Core.Nothing,
-      buildStepImages = Core.Nothing,
-      buildStepOutputs = Core.Nothing,
-      images = Core.Nothing,
-      mavenArtifacts = Core.Nothing,
-      numArtifacts = Core.Nothing,
-      pythonPackages = Core.Nothing
+-- | Creates a value of 'Repository_Annotations' with the minimum fields required to make a request.
+newRepository_Annotations 
+    ::  Core.HashMap Core.Text Core.Text
+       -- ^  See 'additional'.
+    -> Repository_Annotations
+newRepository_Annotations additional =
+  Repository_Annotations {additional = additional}
+
+instance Core.FromJSON Repository_Annotations where
+        parseJSON
+          = Core.withObject "Repository_Annotations"
+              (\ o ->
+                 Repository_Annotations Core.<$>
+                   (Core.parseJSONObject o))
+
+instance Core.ToJSON Repository_Annotations where
+        toJSON Repository_Annotations{..}
+          = Core.toJSON additional
+
+
+-- | ResultValue holds different types of data for a single result.
+--
+-- /See:/ 'newResultValue' smart constructor.
+data ResultValue = ResultValue
+    {
+      -- | Value of the result if type is array.
+      arrayVal :: (Core.Maybe [Core.Text])
+      -- | Value of the result if type is object.
+    , objectVal :: (Core.Maybe ResultValue_ObjectVal)
+      -- | Value of the result if type is string.
+    , stringVal :: (Core.Maybe Core.Text)
+      -- | Output only. The type of data that the result holds.
+    , type' :: (Core.Maybe ResultValue_Type)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ResultValue' with the minimum fields required to make a request.
+newResultValue 
+    ::  ResultValue
+newResultValue =
+  ResultValue
+    { arrayVal = Core.Nothing
+    , objectVal = Core.Nothing
+    , stringVal = Core.Nothing
+    , type' = Core.Nothing
     }
 
-instance Core.FromJSON Results where
-  parseJSON =
-    Core.withObject
-      "Results"
-      ( \o ->
-          Results
-            Core.<$> (o Core..:? "artifactManifest")
-            Core.<*> (o Core..:? "artifactTiming")
-            Core.<*> (o Core..:? "buildStepImages")
-            Core.<*> (o Core..:? "buildStepOutputs")
-            Core.<*> (o Core..:? "images")
-            Core.<*> (o Core..:? "mavenArtifacts")
-            Core.<*> ( o Core..:? "numArtifacts"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> (o Core..:? "pythonPackages")
-      )
+instance Core.FromJSON ResultValue where
+        parseJSON
+          = Core.withObject "ResultValue"
+              (\ o ->
+                 ResultValue Core.<$>
+                   (o Core..:? "arrayVal") Core.<*>
+                     (o Core..:? "objectVal")
+                     Core.<*> (o Core..:? "stringVal")
+                     Core.<*> (o Core..:? "type"))
 
-instance Core.ToJSON Results where
-  toJSON Results {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("artifactManifest" Core..=)
-              Core.<$> artifactManifest,
-            ("artifactTiming" Core..=) Core.<$> artifactTiming,
-            ("buildStepImages" Core..=) Core.<$> buildStepImages,
-            ("buildStepOutputs" Core..=)
-              Core.<$> buildStepOutputs,
-            ("images" Core..=) Core.<$> images,
-            ("mavenArtifacts" Core..=) Core.<$> mavenArtifacts,
-            ("numArtifacts" Core..=) Core.. Core.AsText
-              Core.<$> numArtifacts,
-            ("pythonPackages" Core..=) Core.<$> pythonPackages
-          ]
-      )
+instance Core.ToJSON ResultValue where
+        toJSON ResultValue{..}
+          = Core.object
+              (Core.catMaybes
+                 [("arrayVal" Core..=) Core.<$> arrayVal,
+                  ("objectVal" Core..=) Core.<$> objectVal,
+                  ("stringVal" Core..=) Core.<$> stringVal,
+                  ("type" Core..=) Core.<$> type'])
 
--- | Specifies a build to retry.
+
+-- | Value of the result if type is object.
 --
--- /See:/ 'newRetryBuildRequest' smart constructor.
-data RetryBuildRequest = RetryBuildRequest
-  { -- | Required. Build ID of the original build.
-    id :: (Core.Maybe Core.Text),
-    -- | The name of the @Build@ to retry. Format: @projects\/{project}\/locations\/{location}\/builds\/{build}@
-    name :: (Core.Maybe Core.Text),
-    -- | Required. ID of the project.
-    projectId :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newResultValue_ObjectVal' smart constructor.
+newtype ResultValue_ObjectVal = ResultValue_ObjectVal
+    {
+      -- | 
+      additional :: (Core.HashMap Core.Text Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'RetryBuildRequest' with the minimum fields required to make a request.
-newRetryBuildRequest ::
-  RetryBuildRequest
-newRetryBuildRequest =
-  RetryBuildRequest
-    { id = Core.Nothing,
-      name = Core.Nothing,
-      projectId = Core.Nothing
+-- | Creates a value of 'ResultValue_ObjectVal' with the minimum fields required to make a request.
+newResultValue_ObjectVal 
+    ::  Core.HashMap Core.Text Core.Text
+       -- ^  See 'additional'.
+    -> ResultValue_ObjectVal
+newResultValue_ObjectVal additional =
+  ResultValue_ObjectVal {additional = additional}
+
+instance Core.FromJSON ResultValue_ObjectVal where
+        parseJSON
+          = Core.withObject "ResultValue_ObjectVal"
+              (\ o ->
+                 ResultValue_ObjectVal Core.<$>
+                   (Core.parseJSONObject o))
+
+instance Core.ToJSON ResultValue_ObjectVal where
+        toJSON ResultValue_ObjectVal{..}
+          = Core.toJSON additional
+
+
+-- | Represents the custom metadata of the RunWorkflow long-running operation.
+--
+-- /See:/ 'newRunWorkflowCustomOperationMetadata' smart constructor.
+data RunWorkflowCustomOperationMetadata = RunWorkflowCustomOperationMetadata
+    {
+      -- | Output only. API version used to start the operation.
+      apiVersion :: (Core.Maybe Core.Text)
+      -- | Output only. The time the operation was created.
+    , createTime :: (Core.Maybe Core.DateTime)
+      -- | Output only. The time the operation finished running.
+    , endTime :: (Core.Maybe Core.DateTime)
+      -- | Output only. ID of the pipeline run created by RunWorkflow.
+    , pipelineRunId :: (Core.Maybe Core.Text)
+      -- | Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
+    , requestedCancellation :: (Core.Maybe Core.Bool)
+      -- | Output only. Server-defined resource path for the target of the operation.
+    , target :: (Core.Maybe Core.Text)
+      -- | Output only. Name of the verb executed by the operation.
+    , verb :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RunWorkflowCustomOperationMetadata' with the minimum fields required to make a request.
+newRunWorkflowCustomOperationMetadata 
+    ::  RunWorkflowCustomOperationMetadata
+newRunWorkflowCustomOperationMetadata =
+  RunWorkflowCustomOperationMetadata
+    { apiVersion = Core.Nothing
+    , createTime = Core.Nothing
+    , endTime = Core.Nothing
+    , pipelineRunId = Core.Nothing
+    , requestedCancellation = Core.Nothing
+    , target = Core.Nothing
+    , verb = Core.Nothing
     }
 
-instance Core.FromJSON RetryBuildRequest where
-  parseJSON =
-    Core.withObject
-      "RetryBuildRequest"
-      ( \o ->
-          RetryBuildRequest
-            Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "projectId")
-      )
+instance Core.FromJSON
+           RunWorkflowCustomOperationMetadata
+         where
+        parseJSON
+          = Core.withObject
+              "RunWorkflowCustomOperationMetadata"
+              (\ o ->
+                 RunWorkflowCustomOperationMetadata Core.<$>
+                   (o Core..:? "apiVersion") Core.<*>
+                     (o Core..:? "createTime")
+                     Core.<*> (o Core..:? "endTime")
+                     Core.<*> (o Core..:? "pipelineRunId")
+                     Core.<*> (o Core..:? "requestedCancellation")
+                     Core.<*> (o Core..:? "target")
+                     Core.<*> (o Core..:? "verb"))
 
-instance Core.ToJSON RetryBuildRequest where
-  toJSON RetryBuildRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("id" Core..=) Core.<$> id,
-            ("name" Core..=) Core.<$> name,
-            ("projectId" Core..=) Core.<$> projectId
-          ]
-      )
+instance Core.ToJSON
+           RunWorkflowCustomOperationMetadata
+         where
+        toJSON RunWorkflowCustomOperationMetadata{..}
+          = Core.object
+              (Core.catMaybes
+                 [("apiVersion" Core..=) Core.<$> apiVersion,
+                  ("createTime" Core..=) Core.<$> createTime,
+                  ("endTime" Core..=) Core.<$> endTime,
+                  ("pipelineRunId" Core..=) Core.<$> pipelineRunId,
+                  ("requestedCancellation" Core..=) Core.<$>
+                    requestedCancellation,
+                  ("target" Core..=) Core.<$> target,
+                  ("verb" Core..=) Core.<$> verb])
 
--- | Specifies a build trigger to run and the source to use.
+
+-- | Secret Volume Source.
 --
--- /See:/ 'newRunBuildTriggerRequest' smart constructor.
-data RunBuildTriggerRequest = RunBuildTriggerRequest
-  { -- | Required. ID of the project.
-    projectId :: (Core.Maybe Core.Text),
-    -- | Source to build against this trigger. Branch and tag names cannot consist of regular expressions.
-    source :: (Core.Maybe RepoSource),
-    -- | Required. ID of the trigger.
-    triggerId :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newSecretVolumeSource' smart constructor.
+data SecretVolumeSource = SecretVolumeSource
+    {
+      -- | Name of the secret referenced by the WorkspaceBinding.
+      secretName :: (Core.Maybe Core.Text)
+      -- | Optional. Resource name of the SecretVersion. In format: projects\//\/secrets\//\/versions\/*
+    , secretVersion :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'RunBuildTriggerRequest' with the minimum fields required to make a request.
-newRunBuildTriggerRequest ::
-  RunBuildTriggerRequest
-newRunBuildTriggerRequest =
-  RunBuildTriggerRequest
-    { projectId = Core.Nothing,
-      source = Core.Nothing,
-      triggerId = Core.Nothing
+-- | Creates a value of 'SecretVolumeSource' with the minimum fields required to make a request.
+newSecretVolumeSource 
+    ::  SecretVolumeSource
+newSecretVolumeSource =
+  SecretVolumeSource {secretName = Core.Nothing, secretVersion = Core.Nothing}
+
+instance Core.FromJSON SecretVolumeSource where
+        parseJSON
+          = Core.withObject "SecretVolumeSource"
+              (\ o ->
+                 SecretVolumeSource Core.<$>
+                   (o Core..:? "secretName") Core.<*>
+                     (o Core..:? "secretVersion"))
+
+instance Core.ToJSON SecretVolumeSource where
+        toJSON SecretVolumeSource{..}
+          = Core.object
+              (Core.catMaybes
+                 [("secretName" Core..=) Core.<$> secretName,
+                  ("secretVersion" Core..=) Core.<$> secretVersion])
+
+
+-- | Security configuration.
+--
+-- /See:/ 'newSecurity' smart constructor.
+data Security = Security
+    {
+      -- | Optional. Privilege mode.
+      privilegeMode :: (Core.Maybe Security_PrivilegeMode)
+      -- | IAM service account whose credentials will be used at runtime.
+    , serviceAccount :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Security' with the minimum fields required to make a request.
+newSecurity 
+    ::  Security
+newSecurity =
+  Security {privilegeMode = Core.Nothing, serviceAccount = Core.Nothing}
+
+instance Core.FromJSON Security where
+        parseJSON
+          = Core.withObject "Security"
+              (\ o ->
+                 Security Core.<$>
+                   (o Core..:? "privilegeMode") Core.<*>
+                     (o Core..:? "serviceAccount"))
+
+instance Core.ToJSON Security where
+        toJSON Security{..}
+          = Core.object
+              (Core.catMaybes
+                 [("privilegeMode" Core..=) Core.<$> privilegeMode,
+                  ("serviceAccount" Core..=) Core.<$> serviceAccount])
+
+
+-- | Security options the container should be run with.
+--
+-- /See:/ 'newSecurityContext' smart constructor.
+data SecurityContext = SecurityContext
+    {
+      -- | Optional. AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process. This bool directly controls if the no/new/privs flag will be set on the container process. AllowPrivilegeEscalation is true always when the container is: 1) run as Privileged 2) has CAP/SYS/ADMIN Note that this field cannot be set when spec.os.name is windows. +optional
+      allowPrivilegeEscalation :: (Core.Maybe Core.Bool)
+      -- | Optional. Adds and removes POSIX capabilities from running containers.
+    , capabilities :: (Core.Maybe Capabilities)
+      -- | Run container in privileged mode.
+    , privileged :: (Core.Maybe Core.Bool)
+      -- | Optional. The GID to run the entrypoint of the container process. Uses runtime default if unset. May also be set in PodSecurityContext. If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. Note that this field cannot be set when spec.os.name is windows. +optional
+    , runAsGroup :: (Core.Maybe Core.Int64)
+      -- | Optional. Indicates that the container must run as a non-root user. If true, the Kubelet will validate the image at runtime to ensure that it does not run as UID 0 (root) and fail to start the container if it does. If unset or false, no such validation will be performed. May also be set in PodSecurityContext. If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. +optional
+    , runAsNonRoot :: (Core.Maybe Core.Bool)
+      -- | Optional. The UID to run the entrypoint of the container process. Defaults to user specified in image metadata if unspecified. May also be set in PodSecurityContext. If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. Note that this field cannot be set when spec.os.name is windows. +optional
+    , runAsUser :: (Core.Maybe Core.Int64)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SecurityContext' with the minimum fields required to make a request.
+newSecurityContext 
+    ::  SecurityContext
+newSecurityContext =
+  SecurityContext
+    { allowPrivilegeEscalation = Core.Nothing
+    , capabilities = Core.Nothing
+    , privileged = Core.Nothing
+    , runAsGroup = Core.Nothing
+    , runAsNonRoot = Core.Nothing
+    , runAsUser = Core.Nothing
     }
 
-instance Core.FromJSON RunBuildTriggerRequest where
-  parseJSON =
-    Core.withObject
-      "RunBuildTriggerRequest"
-      ( \o ->
-          RunBuildTriggerRequest
-            Core.<$> (o Core..:? "projectId")
-            Core.<*> (o Core..:? "source")
-            Core.<*> (o Core..:? "triggerId")
-      )
+instance Core.FromJSON SecurityContext where
+        parseJSON
+          = Core.withObject "SecurityContext"
+              (\ o ->
+                 SecurityContext Core.<$>
+                   (o Core..:? "allowPrivilegeEscalation") Core.<*>
+                     (o Core..:? "capabilities")
+                     Core.<*> (o Core..:? "privileged")
+                     Core.<*>
+                     (o Core..:? "runAsGroup" Core.<&>
+                        Core.fmap Core.fromAsText)
+                     Core.<*> (o Core..:? "runAsNonRoot")
+                     Core.<*>
+                     (o Core..:? "runAsUser" Core.<&>
+                        Core.fmap Core.fromAsText))
 
-instance Core.ToJSON RunBuildTriggerRequest where
-  toJSON RunBuildTriggerRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("projectId" Core..=) Core.<$> projectId,
-            ("source" Core..=) Core.<$> source,
-            ("triggerId" Core..=) Core.<$> triggerId
-          ]
-      )
+instance Core.ToJSON SecurityContext where
+        toJSON SecurityContext{..}
+          = Core.object
+              (Core.catMaybes
+                 [("allowPrivilegeEscalation" Core..=) Core.<$>
+                    allowPrivilegeEscalation,
+                  ("capabilities" Core..=) Core.<$> capabilities,
+                  ("privileged" Core..=) Core.<$> privileged,
+                  ("runAsGroup" Core..=) Core.. Core.AsText Core.<$>
+                    runAsGroup,
+                  ("runAsNonRoot" Core..=) Core.<$> runAsNonRoot,
+                  ("runAsUser" Core..=) Core.. Core.AsText Core.<$>
+                    runAsUser])
 
--- | Pairs a set of secret environment variables containing encrypted values with the Cloud KMS key to use to decrypt the value. Note: Use @kmsKeyName@ with @available_secrets@ instead of using @kmsKeyName@ with @secret@. For instructions see: https:\/\/cloud.google.com\/cloud-build\/docs\/securing-builds\/use-encrypted-credentials.
+
+-- | Request message for @SetIamPolicy@ method.
 --
--- /See:/ 'newSecret' smart constructor.
-data Secret = Secret
-  { -- | Cloud KMS key name to use to decrypt these envs.
-    kmsKeyName :: (Core.Maybe Core.Text),
-    -- | Map of environment variable name to its encrypted value. Secret environment variables must be unique across all of a build\'s secrets, and must be used by at least one build step. Values can be at most 64 KB in size. There can be at most 100 secret values across all of a build\'s secrets.
-    secretEnv :: (Core.Maybe Secret_SecretEnv)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newSetIamPolicyRequest' smart constructor.
+data SetIamPolicyRequest = SetIamPolicyRequest
+    {
+      -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Google Cloud services (such as Projects) might reject them.
+      policy :: (Core.Maybe Policy)
+      -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: @paths: \"bindings, etag\"@
+    , updateMask :: (Core.Maybe Core.FieldMask)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'Secret' with the minimum fields required to make a request.
-newSecret ::
-  Secret
-newSecret = Secret {kmsKeyName = Core.Nothing, secretEnv = Core.Nothing}
+-- | Creates a value of 'SetIamPolicyRequest' with the minimum fields required to make a request.
+newSetIamPolicyRequest 
+    ::  SetIamPolicyRequest
+newSetIamPolicyRequest =
+  SetIamPolicyRequest {policy = Core.Nothing, updateMask = Core.Nothing}
 
-instance Core.FromJSON Secret where
-  parseJSON =
-    Core.withObject
-      "Secret"
-      ( \o ->
-          Secret
-            Core.<$> (o Core..:? "kmsKeyName")
-            Core.<*> (o Core..:? "secretEnv")
-      )
+instance Core.FromJSON SetIamPolicyRequest where
+        parseJSON
+          = Core.withObject "SetIamPolicyRequest"
+              (\ o ->
+                 SetIamPolicyRequest Core.<$>
+                   (o Core..:? "policy") Core.<*>
+                     (o Core..:? "updateMask"))
 
-instance Core.ToJSON Secret where
-  toJSON Secret {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("kmsKeyName" Core..=) Core.<$> kmsKeyName,
-            ("secretEnv" Core..=) Core.<$> secretEnv
-          ]
-      )
+instance Core.ToJSON SetIamPolicyRequest where
+        toJSON SetIamPolicyRequest{..}
+          = Core.object
+              (Core.catMaybes
+                 [("policy" Core..=) Core.<$> policy,
+                  ("updateMask" Core..=) Core.<$> updateMask])
 
--- | Map of environment variable name to its encrypted value. Secret environment variables must be unique across all of a build\'s secrets, and must be used by at least one build step. Values can be at most 64 KB in size. There can be at most 100 secret values across all of a build\'s secrets.
+
+-- | Sidecars run alongside the Task\'s step containers.
 --
--- /See:/ 'newSecret_SecretEnv' smart constructor.
-newtype Secret_SecretEnv = Secret_SecretEnv
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Base64)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newSidecar' smart constructor.
+data Sidecar = Sidecar
+    {
+      -- | Arguments to the entrypoint.
+      args :: (Core.Maybe [Core.Text])
+      -- | Entrypoint array.
+    , command :: (Core.Maybe [Core.Text])
+      -- | List of environment variables to set in the container.
+    , env :: (Core.Maybe [EnvVar])
+      -- | Docker image name.
+    , image :: (Core.Maybe Core.Text)
+      -- | Name of the Sidecar.
+    , name :: (Core.Maybe Core.Text)
+      -- | Optional. Periodic probe of Sidecar service readiness. Container will be removed from service endpoints if the probe fails. Cannot be updated. More info: https:\/\/kubernetes.io\/docs\/concepts\/workloads\/pods\/pod-lifecycle#container-probes +optional
+    , readinessProbe :: (Core.Maybe Probe)
+      -- | The contents of an executable file to execute.
+    , script :: (Core.Maybe Core.Text)
+      -- | Optional. Security options the container should be run with.
+    , securityContext :: (Core.Maybe SecurityContext)
+      -- | Pod volumes to mount into the container\'s filesystem.
+    , volumeMounts :: (Core.Maybe [VolumeMount])
+      -- | Container\'s working directory.
+    , workingDir :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'Secret_SecretEnv' with the minimum fields required to make a request.
-newSecret_SecretEnv ::
-  -- |  See 'additional'.
-  Core.HashMap Core.Text Core.Base64 ->
-  Secret_SecretEnv
-newSecret_SecretEnv additional = Secret_SecretEnv {additional = additional}
-
-instance Core.FromJSON Secret_SecretEnv where
-  parseJSON =
-    Core.withObject
-      "Secret_SecretEnv"
-      ( \o ->
-          Secret_SecretEnv Core.<$> (Core.parseJSONObject o)
-      )
-
-instance Core.ToJSON Secret_SecretEnv where
-  toJSON Secret_SecretEnv {..} = Core.toJSON additional
-
--- | Pairs a secret environment variable with a SecretVersion in Secret Manager.
---
--- /See:/ 'newSecretManagerSecret' smart constructor.
-data SecretManagerSecret = SecretManagerSecret
-  { -- | Environment variable name to associate with the secret. Secret environment variables must be unique across all of a build\'s secrets, and must be used by at least one build step.
-    env :: (Core.Maybe Core.Text),
-    -- | Resource name of the SecretVersion. In format: projects\//\/secrets\//\/versions\/*
-    versionName :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'SecretManagerSecret' with the minimum fields required to make a request.
-newSecretManagerSecret ::
-  SecretManagerSecret
-newSecretManagerSecret =
-  SecretManagerSecret {env = Core.Nothing, versionName = Core.Nothing}
-
-instance Core.FromJSON SecretManagerSecret where
-  parseJSON =
-    Core.withObject
-      "SecretManagerSecret"
-      ( \o ->
-          SecretManagerSecret
-            Core.<$> (o Core..:? "env")
-            Core.<*> (o Core..:? "versionName")
-      )
-
-instance Core.ToJSON SecretManagerSecret where
-  toJSON SecretManagerSecret {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("env" Core..=) Core.<$> env,
-            ("versionName" Core..=) Core.<$> versionName
-          ]
-      )
-
--- | Secrets and secret environment variables.
---
--- /See:/ 'newSecrets' smart constructor.
-data Secrets = Secrets
-  { -- | Secrets encrypted with KMS key and the associated secret environment variable.
-    inline :: (Core.Maybe [InlineSecret]),
-    -- | Secrets in Secret Manager and associated secret environment variable.
-    secretManager :: (Core.Maybe [SecretManagerSecret])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'Secrets' with the minimum fields required to make a request.
-newSecrets ::
-  Secrets
-newSecrets = Secrets {inline = Core.Nothing, secretManager = Core.Nothing}
-
-instance Core.FromJSON Secrets where
-  parseJSON =
-    Core.withObject
-      "Secrets"
-      ( \o ->
-          Secrets
-            Core.<$> (o Core..:? "inline")
-            Core.<*> (o Core..:? "secretManager")
-      )
-
-instance Core.ToJSON Secrets where
-  toJSON Secrets {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("inline" Core..=) Core.<$> inline,
-            ("secretManager" Core..=) Core.<$> secretManager
-          ]
-      )
-
--- | ServiceDirectoryConfig represents Service Directory configuration for a SCM host connection.
---
--- /See:/ 'newServiceDirectoryConfig' smart constructor.
-newtype ServiceDirectoryConfig = ServiceDirectoryConfig
-  { -- | The Service Directory service name. Format: projects\/{project}\/locations\/{location}\/namespaces\/{namespace}\/services\/{service}.
-    service :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ServiceDirectoryConfig' with the minimum fields required to make a request.
-newServiceDirectoryConfig ::
-  ServiceDirectoryConfig
-newServiceDirectoryConfig = ServiceDirectoryConfig {service = Core.Nothing}
-
-instance Core.FromJSON ServiceDirectoryConfig where
-  parseJSON =
-    Core.withObject
-      "ServiceDirectoryConfig"
-      ( \o ->
-          ServiceDirectoryConfig
-            Core.<$> (o Core..:? "service")
-      )
-
-instance Core.ToJSON ServiceDirectoryConfig where
-  toJSON ServiceDirectoryConfig {..} =
-    Core.object
-      ( Core.catMaybes
-          [("service" Core..=) Core.<$> service]
-      )
-
--- | Location of the source in a supported storage service.
---
--- /See:/ 'newSource' smart constructor.
-data Source = Source
-  { -- | If provided, get the source from this location in a Cloud Source Repository.
-    repoSource :: (Core.Maybe RepoSource),
-    -- | If provided, get the source from this location in Google Cloud Storage.
-    storageSource :: (Core.Maybe StorageSource),
-    -- | If provided, get the source from this manifest in Google Cloud Storage. This feature is in Preview; see description <https://github.com/GoogleCloudPlatform/cloud-builders/tree/master/gcs-fetcher here>.
-    storageSourceManifest :: (Core.Maybe StorageSourceManifest)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'Source' with the minimum fields required to make a request.
-newSource ::
-  Source
-newSource =
-  Source
-    { repoSource = Core.Nothing,
-      storageSource = Core.Nothing,
-      storageSourceManifest = Core.Nothing
+-- | Creates a value of 'Sidecar' with the minimum fields required to make a request.
+newSidecar 
+    ::  Sidecar
+newSidecar =
+  Sidecar
+    { args = Core.Nothing
+    , command = Core.Nothing
+    , env = Core.Nothing
+    , image = Core.Nothing
+    , name = Core.Nothing
+    , readinessProbe = Core.Nothing
+    , script = Core.Nothing
+    , securityContext = Core.Nothing
+    , volumeMounts = Core.Nothing
+    , workingDir = Core.Nothing
     }
 
-instance Core.FromJSON Source where
-  parseJSON =
-    Core.withObject
-      "Source"
-      ( \o ->
-          Source
-            Core.<$> (o Core..:? "repoSource")
-            Core.<*> (o Core..:? "storageSource")
-            Core.<*> (o Core..:? "storageSourceManifest")
-      )
+instance Core.FromJSON Sidecar where
+        parseJSON
+          = Core.withObject "Sidecar"
+              (\ o ->
+                 Sidecar Core.<$>
+                   (o Core..:? "args") Core.<*> (o Core..:? "command")
+                     Core.<*> (o Core..:? "env")
+                     Core.<*> (o Core..:? "image")
+                     Core.<*> (o Core..:? "name")
+                     Core.<*> (o Core..:? "readinessProbe")
+                     Core.<*> (o Core..:? "script")
+                     Core.<*> (o Core..:? "securityContext")
+                     Core.<*> (o Core..:? "volumeMounts")
+                     Core.<*> (o Core..:? "workingDir"))
 
-instance Core.ToJSON Source where
-  toJSON Source {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("repoSource" Core..=) Core.<$> repoSource,
-            ("storageSource" Core..=) Core.<$> storageSource,
-            ("storageSourceManifest" Core..=)
-              Core.<$> storageSourceManifest
-          ]
-      )
+instance Core.ToJSON Sidecar where
+        toJSON Sidecar{..}
+          = Core.object
+              (Core.catMaybes
+                 [("args" Core..=) Core.<$> args,
+                  ("command" Core..=) Core.<$> command,
+                  ("env" Core..=) Core.<$> env,
+                  ("image" Core..=) Core.<$> image,
+                  ("name" Core..=) Core.<$> name,
+                  ("readinessProbe" Core..=) Core.<$> readinessProbe,
+                  ("script" Core..=) Core.<$> script,
+                  ("securityContext" Core..=) Core.<$> securityContext,
+                  ("volumeMounts" Core..=) Core.<$> volumeMounts,
+                  ("workingDir" Core..=) Core.<$> workingDir])
 
--- | Provenance of the source. Ways to find the original source, or verify that some source was used for this build.
+
+-- | SkippedTask is used to describe the Tasks that were skipped due to their When Expressions evaluating to False.
 --
--- /See:/ 'newSourceProvenance' smart constructor.
-data SourceProvenance = SourceProvenance
-  { -- | Output only. Hash(es) of the build source, which can be used to verify that the original source integrity was maintained in the build. Note that @FileHashes@ will only be populated if @BuildOptions@ has requested a @SourceProvenanceHash@. The keys to this map are file paths used as build source and the values contain the hash values for those files. If the build source came in a single package such as a gzipped tarfile (@.tar.gz@), the @FileHash@ will be for the single path to that file.
-    fileHashes :: (Core.Maybe SourceProvenance_FileHashes),
-    -- | A copy of the build\'s @source.repo_source@, if exists, with any revisions resolved.
-    resolvedRepoSource :: (Core.Maybe RepoSource),
-    -- | A copy of the build\'s @source.storage_source@, if exists, with any generations resolved.
-    resolvedStorageSource :: (Core.Maybe StorageSource),
-    -- | A copy of the build\'s @source.storage_source_manifest@, if exists, with any revisions resolved. This feature is in Preview.
-    resolvedStorageSourceManifest :: (Core.Maybe StorageSourceManifest)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'SourceProvenance' with the minimum fields required to make a request.
-newSourceProvenance ::
-  SourceProvenance
-newSourceProvenance =
-  SourceProvenance
-    { fileHashes = Core.Nothing,
-      resolvedRepoSource = Core.Nothing,
-      resolvedStorageSource = Core.Nothing,
-      resolvedStorageSourceManifest = Core.Nothing
+-- /See:/ 'newSkippedTask' smart constructor.
+data SkippedTask = SkippedTask
+    {
+      -- | Name is the Pipeline Task name
+      name :: (Core.Maybe Core.Text)
+      -- | Output only. Reason is the cause of the PipelineTask being skipped.
+    , reason :: (Core.Maybe Core.Text)
+      -- | WhenExpressions is the list of checks guarding the execution of the PipelineTask
+    , whenExpressions :: (Core.Maybe [WhenExpression])
     }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
-instance Core.FromJSON SourceProvenance where
-  parseJSON =
-    Core.withObject
-      "SourceProvenance"
-      ( \o ->
-          SourceProvenance
-            Core.<$> (o Core..:? "fileHashes")
-            Core.<*> (o Core..:? "resolvedRepoSource")
-            Core.<*> (o Core..:? "resolvedStorageSource")
-            Core.<*> (o Core..:? "resolvedStorageSourceManifest")
-      )
+-- | Creates a value of 'SkippedTask' with the minimum fields required to make a request.
+newSkippedTask 
+    ::  SkippedTask
+newSkippedTask =
+  SkippedTask
+    {name = Core.Nothing, reason = Core.Nothing, whenExpressions = Core.Nothing}
 
-instance Core.ToJSON SourceProvenance where
-  toJSON SourceProvenance {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("fileHashes" Core..=) Core.<$> fileHashes,
-            ("resolvedRepoSource" Core..=)
-              Core.<$> resolvedRepoSource,
-            ("resolvedStorageSource" Core..=)
-              Core.<$> resolvedStorageSource,
-            ("resolvedStorageSourceManifest" Core..=)
-              Core.<$> resolvedStorageSourceManifest
-          ]
-      )
+instance Core.FromJSON SkippedTask where
+        parseJSON
+          = Core.withObject "SkippedTask"
+              (\ o ->
+                 SkippedTask Core.<$>
+                   (o Core..:? "name") Core.<*> (o Core..:? "reason")
+                     Core.<*> (o Core..:? "whenExpressions"))
 
--- | Output only. Hash(es) of the build source, which can be used to verify that the original source integrity was maintained in the build. Note that @FileHashes@ will only be populated if @BuildOptions@ has requested a @SourceProvenanceHash@. The keys to this map are file paths used as build source and the values contain the hash values for those files. If the build source came in a single package such as a gzipped tarfile (@.tar.gz@), the @FileHash@ will be for the single path to that file.
---
--- /See:/ 'newSourceProvenance_FileHashes' smart constructor.
-newtype SourceProvenance_FileHashes = SourceProvenance_FileHashes
-  { -- |
-    additional :: (Core.HashMap Core.Text FileHashes)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+instance Core.ToJSON SkippedTask where
+        toJSON SkippedTask{..}
+          = Core.object
+              (Core.catMaybes
+                 [("name" Core..=) Core.<$> name,
+                  ("reason" Core..=) Core.<$> reason,
+                  ("whenExpressions" Core..=) Core.<$>
+                    whenExpressions])
 
--- | Creates a value of 'SourceProvenance_FileHashes' with the minimum fields required to make a request.
-newSourceProvenance_FileHashes ::
-  -- |  See 'additional'.
-  Core.HashMap Core.Text FileHashes ->
-  SourceProvenance_FileHashes
-newSourceProvenance_FileHashes additional =
-  SourceProvenance_FileHashes {additional = additional}
-
-instance Core.FromJSON SourceProvenance_FileHashes where
-  parseJSON =
-    Core.withObject
-      "SourceProvenance_FileHashes"
-      ( \o ->
-          SourceProvenance_FileHashes
-            Core.<$> (Core.parseJSONObject o)
-      )
-
-instance Core.ToJSON SourceProvenance_FileHashes where
-  toJSON SourceProvenance_FileHashes {..} =
-    Core.toJSON additional
 
 -- | The @Status@ type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by <https://github.com/grpc gRPC>. Each @Status@ message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the <https://cloud.google.com/apis/design/errors API Design Guide>.
 --
 -- /See:/ 'newStatus' smart constructor.
 data Status = Status
-  { -- | The status code, which should be an enum value of google.rpc.Code.
-    code :: (Core.Maybe Core.Int32),
-    -- | A list of messages that carry the error details. There is a common set of message types for APIs to use.
-    details :: (Core.Maybe [Status_DetailsItem]),
-    -- | A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
-    message :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | The status code, which should be an enum value of google.rpc.Code.
+      code :: (Core.Maybe Core.Int32)
+      -- | A list of messages that carry the error details. There is a common set of message types for APIs to use.
+    , details :: (Core.Maybe [Status_DetailsItem])
+      -- | A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+    , message :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
-newStatus ::
-  Status
+newStatus 
+    ::  Status
 newStatus =
   Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
 
 instance Core.FromJSON Status where
-  parseJSON =
-    Core.withObject
-      "Status"
-      ( \o ->
-          Status
-            Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details")
-            Core.<*> (o Core..:? "message")
-      )
+        parseJSON
+          = Core.withObject "Status"
+              (\ o ->
+                 Status Core.<$>
+                   (o Core..:? "code") Core.<*> (o Core..:? "details")
+                     Core.<*> (o Core..:? "message"))
 
 instance Core.ToJSON Status where
-  toJSON Status {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("code" Core..=) Core.<$> code,
-            ("details" Core..=) Core.<$> details,
-            ("message" Core..=) Core.<$> message
-          ]
-      )
+        toJSON Status{..}
+          = Core.object
+              (Core.catMaybes
+                 [("code" Core..=) Core.<$> code,
+                  ("details" Core..=) Core.<$> details,
+                  ("message" Core..=) Core.<$> message])
+
 
 --
 -- /See:/ 'newStatus_DetailsItem' smart constructor.
 newtype Status_DetailsItem = Status_DetailsItem
-  { -- | Properties of the object. Contains field \@type with type URL.
-    additional :: (Core.HashMap Core.Text Core.Value)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Properties of the object. Contains field \@type with type URL.
+      additional :: (Core.HashMap Core.Text Core.Value)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'Status_DetailsItem' with the minimum fields required to make a request.
-newStatus_DetailsItem ::
-  -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
-  Core.HashMap Core.Text Core.Value ->
-  Status_DetailsItem
+newStatus_DetailsItem 
+    ::  Core.HashMap Core.Text Core.Value
+       -- ^  Properties of the object. Contains field \@type with type URL. See 'additional'.
+    -> Status_DetailsItem
 newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
-  parseJSON =
-    Core.withObject
-      "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+        parseJSON
+          = Core.withObject "Status_DetailsItem"
+              (\ o ->
+                 Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+        toJSON Status_DetailsItem{..}
+          = Core.toJSON additional
 
--- | Location of the source in an archive file in Google Cloud Storage.
+
+-- | Step embeds the Container type, which allows it to include fields not provided by Container.
 --
--- /See:/ 'newStorageSource' smart constructor.
-data StorageSource = StorageSource
-  { -- | Google Cloud Storage bucket containing the source (see <https://cloud.google.com/storage/docs/bucket-naming#requirements Bucket Name Requirements>).
-    bucket :: (Core.Maybe Core.Text),
-    -- | Google Cloud Storage generation for the object. If the generation is omitted, the latest generation will be used.
-    generation :: (Core.Maybe Core.Int64),
-    -- | Google Cloud Storage object containing the source. This object must be a zipped (@.zip@) or gzipped archive file (@.tar.gz@) containing source to build.
-    object :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newStep' smart constructor.
+data Step = Step
+    {
+      -- | Arguments to the entrypoint.
+      args :: (Core.Maybe [Core.Text])
+      -- | Entrypoint array.
+    , command :: (Core.Maybe [Core.Text])
+      -- | List of environment variables to set in the container.
+    , env :: (Core.Maybe [EnvVar])
+      -- | Docker image name.
+    , image :: (Core.Maybe Core.Text)
+      -- | Name of the container specified as a DNS_LABEL.
+    , name :: (Core.Maybe Core.Text)
+      -- | Optional. OnError defines the exiting behavior on error can be set to [ continue | stopAndFail ]
+    , onError :: (Core.Maybe Step_OnError)
+      -- | Optional. Optional parameters passed to the StepAction.
+    , params :: (Core.Maybe [Param])
+      -- | Optional. Optional reference to a remote StepAction.
+    , ref :: (Core.Maybe StepRef)
+      -- | The contents of an executable file to execute.
+    , script :: (Core.Maybe Core.Text)
+      -- | Optional. SecurityContext defines the security options the Step should be run with. If set, the fields of SecurityContext override the equivalent fields of PodSecurityContext. More info: https:\/\/kubernetes.io\/docs\/tasks\/configure-pod-container\/security-context\/ +optional
+    , securityContext :: (Core.Maybe SecurityContext)
+      -- | Time after which the Step times out. Defaults to never.
+    , timeout :: (Core.Maybe Core.Duration)
+      -- | Pod volumes to mount into the container\'s filesystem.
+    , volumeMounts :: (Core.Maybe [VolumeMount])
+      -- | Container\'s working directory.
+    , workingDir :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'StorageSource' with the minimum fields required to make a request.
-newStorageSource ::
-  StorageSource
-newStorageSource =
-  StorageSource
-    { bucket = Core.Nothing,
-      generation = Core.Nothing,
-      object = Core.Nothing
+-- | Creates a value of 'Step' with the minimum fields required to make a request.
+newStep 
+    ::  Step
+newStep =
+  Step
+    { args = Core.Nothing
+    , command = Core.Nothing
+    , env = Core.Nothing
+    , image = Core.Nothing
+    , name = Core.Nothing
+    , onError = Core.Nothing
+    , params = Core.Nothing
+    , ref = Core.Nothing
+    , script = Core.Nothing
+    , securityContext = Core.Nothing
+    , timeout = Core.Nothing
+    , volumeMounts = Core.Nothing
+    , workingDir = Core.Nothing
     }
 
-instance Core.FromJSON StorageSource where
-  parseJSON =
-    Core.withObject
-      "StorageSource"
-      ( \o ->
-          StorageSource
-            Core.<$> (o Core..:? "bucket")
-            Core.<*> ( o Core..:? "generation"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> (o Core..:? "object")
-      )
+instance Core.FromJSON Step where
+        parseJSON
+          = Core.withObject "Step"
+              (\ o ->
+                 Step Core.<$>
+                   (o Core..:? "args") Core.<*> (o Core..:? "command")
+                     Core.<*> (o Core..:? "env")
+                     Core.<*> (o Core..:? "image")
+                     Core.<*> (o Core..:? "name")
+                     Core.<*> (o Core..:? "onError")
+                     Core.<*> (o Core..:? "params")
+                     Core.<*> (o Core..:? "ref")
+                     Core.<*> (o Core..:? "script")
+                     Core.<*> (o Core..:? "securityContext")
+                     Core.<*> (o Core..:? "timeout")
+                     Core.<*> (o Core..:? "volumeMounts")
+                     Core.<*> (o Core..:? "workingDir"))
 
-instance Core.ToJSON StorageSource where
-  toJSON StorageSource {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("bucket" Core..=) Core.<$> bucket,
-            ("generation" Core..=) Core.. Core.AsText
-              Core.<$> generation,
-            ("object" Core..=) Core.<$> object
-          ]
-      )
+instance Core.ToJSON Step where
+        toJSON Step{..}
+          = Core.object
+              (Core.catMaybes
+                 [("args" Core..=) Core.<$> args,
+                  ("command" Core..=) Core.<$> command,
+                  ("env" Core..=) Core.<$> env,
+                  ("image" Core..=) Core.<$> image,
+                  ("name" Core..=) Core.<$> name,
+                  ("onError" Core..=) Core.<$> onError,
+                  ("params" Core..=) Core.<$> params,
+                  ("ref" Core..=) Core.<$> ref,
+                  ("script" Core..=) Core.<$> script,
+                  ("securityContext" Core..=) Core.<$> securityContext,
+                  ("timeout" Core..=) Core.<$> timeout,
+                  ("volumeMounts" Core..=) Core.<$> volumeMounts,
+                  ("workingDir" Core..=) Core.<$> workingDir])
 
--- | Location of the source manifest in Google Cloud Storage. This feature is in Preview; see description <https://github.com/GoogleCloudPlatform/cloud-builders/tree/master/gcs-fetcher here>.
+
+-- | A reference to a remote Step, i.e. a StepAction.
 --
--- /See:/ 'newStorageSourceManifest' smart constructor.
-data StorageSourceManifest = StorageSourceManifest
-  { -- | Google Cloud Storage bucket containing the source manifest (see <https://cloud.google.com/storage/docs/bucket-naming#requirements Bucket Name Requirements>).
-    bucket :: (Core.Maybe Core.Text),
-    -- | Google Cloud Storage generation for the object. If the generation is omitted, the latest generation will be used.
-    generation :: (Core.Maybe Core.Int64),
-    -- | Google Cloud Storage object containing the source manifest. This object must be a JSON file.
-    object :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newStepRef' smart constructor.
+data StepRef = StepRef
+    {
+      -- | Optional. Name of the step.
+      name :: (Core.Maybe Core.Text)
+      -- | Optional. Parameters used to control the resolution.
+    , params :: (Core.Maybe [Param])
+      -- | Optional. Type of the resolver.
+    , resolver :: (Core.Maybe StepRef_Resolver)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'StorageSourceManifest' with the minimum fields required to make a request.
-newStorageSourceManifest ::
-  StorageSourceManifest
-newStorageSourceManifest =
-  StorageSourceManifest
-    { bucket = Core.Nothing,
-      generation = Core.Nothing,
-      object = Core.Nothing
+-- | Creates a value of 'StepRef' with the minimum fields required to make a request.
+newStepRef 
+    ::  StepRef
+newStepRef =
+  StepRef {name = Core.Nothing, params = Core.Nothing, resolver = Core.Nothing}
+
+instance Core.FromJSON StepRef where
+        parseJSON
+          = Core.withObject "StepRef"
+              (\ o ->
+                 StepRef Core.<$>
+                   (o Core..:? "name") Core.<*> (o Core..:? "params")
+                     Core.<*> (o Core..:? "resolver"))
+
+instance Core.ToJSON StepRef where
+        toJSON StepRef{..}
+          = Core.object
+              (Core.catMaybes
+                 [("name" Core..=) Core.<$> name,
+                  ("params" Core..=) Core.<$> params,
+                  ("resolver" Core..=) Core.<$> resolver])
+
+
+-- | StepTemplate can be used as the basis for all step containers within the Task, so that the steps inherit settings on the base container.
+--
+-- /See:/ 'newStepTemplate' smart constructor.
+data StepTemplate = StepTemplate
+    {
+      -- | Optional. List of environment variables to set in the Step. Cannot be updated.
+      env :: (Core.Maybe [EnvVar])
+      -- | Optional. Pod volumes to mount into the container\'s filesystem.
+    , volumeMounts :: (Core.Maybe [VolumeMount])
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'StepTemplate' with the minimum fields required to make a request.
+newStepTemplate 
+    ::  StepTemplate
+newStepTemplate = StepTemplate {env = Core.Nothing, volumeMounts = Core.Nothing}
+
+instance Core.FromJSON StepTemplate where
+        parseJSON
+          = Core.withObject "StepTemplate"
+              (\ o ->
+                 StepTemplate Core.<$>
+                   (o Core..:? "env") Core.<*>
+                     (o Core..:? "volumeMounts"))
+
+instance Core.ToJSON StepTemplate where
+        toJSON StepTemplate{..}
+          = Core.object
+              (Core.catMaybes
+                 [("env" Core..=) Core.<$> env,
+                  ("volumeMounts" Core..=) Core.<$> volumeMounts])
+
+
+-- | TaskRef can be used to refer to a specific instance of a task. PipelineRef can be used to refer to a specific instance of a Pipeline.
+--
+-- /See:/ 'newTaskRef' smart constructor.
+data TaskRef = TaskRef
+    {
+      -- | Optional. Name of the task.
+      name :: (Core.Maybe Core.Text)
+      -- | Params contains the parameters used to identify the referenced Tekton resource. Example entries might include \"repo\" or \"path\" but the set of params ultimately depends on the chosen resolver.
+    , params :: (Core.Maybe [Param])
+      -- | Resolver is the name of the resolver that should perform resolution of the referenced Tekton resource.
+    , resolver :: (Core.Maybe TaskRef_Resolver)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TaskRef' with the minimum fields required to make a request.
+newTaskRef 
+    ::  TaskRef
+newTaskRef =
+  TaskRef {name = Core.Nothing, params = Core.Nothing, resolver = Core.Nothing}
+
+instance Core.FromJSON TaskRef where
+        parseJSON
+          = Core.withObject "TaskRef"
+              (\ o ->
+                 TaskRef Core.<$>
+                   (o Core..:? "name") Core.<*> (o Core..:? "params")
+                     Core.<*> (o Core..:? "resolver"))
+
+instance Core.ToJSON TaskRef where
+        toJSON TaskRef{..}
+          = Core.object
+              (Core.catMaybes
+                 [("name" Core..=) Core.<$> name,
+                  ("params" Core..=) Core.<$> params,
+                  ("resolver" Core..=) Core.<$> resolver])
+
+
+-- | TaskResult is used to describe the results of a task.
+--
+-- /See:/ 'newTaskResult' smart constructor.
+data TaskResult = TaskResult
+    {
+      -- | Description of the result.
+      description :: (Core.Maybe Core.Text)
+      -- | Name of the result.
+    , name :: (Core.Maybe Core.Text)
+      -- | When type is OBJECT, this map holds the names of fields inside that object along with the type of data each field holds.
+    , properties :: (Core.Maybe TaskResult_Properties)
+      -- | The type of data that the result holds.
+    , type' :: (Core.Maybe TaskResult_Type)
+      -- | Optional. Optionally used to initialize a Task\'s result with a Step\'s result.
+    , value :: (Core.Maybe ParamValue)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TaskResult' with the minimum fields required to make a request.
+newTaskResult 
+    ::  TaskResult
+newTaskResult =
+  TaskResult
+    { description = Core.Nothing
+    , name = Core.Nothing
+    , properties = Core.Nothing
+    , type' = Core.Nothing
+    , value = Core.Nothing
     }
 
-instance Core.FromJSON StorageSourceManifest where
-  parseJSON =
-    Core.withObject
-      "StorageSourceManifest"
-      ( \o ->
-          StorageSourceManifest
-            Core.<$> (o Core..:? "bucket")
-            Core.<*> ( o Core..:? "generation"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> (o Core..:? "object")
-      )
+instance Core.FromJSON TaskResult where
+        parseJSON
+          = Core.withObject "TaskResult"
+              (\ o ->
+                 TaskResult Core.<$>
+                   (o Core..:? "description") Core.<*>
+                     (o Core..:? "name")
+                     Core.<*> (o Core..:? "properties")
+                     Core.<*> (o Core..:? "type")
+                     Core.<*> (o Core..:? "value"))
 
-instance Core.ToJSON StorageSourceManifest where
-  toJSON StorageSourceManifest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("bucket" Core..=) Core.<$> bucket,
-            ("generation" Core..=) Core.. Core.AsText
-              Core.<$> generation,
-            ("object" Core..=) Core.<$> object
-          ]
-      )
+instance Core.ToJSON TaskResult where
+        toJSON TaskResult{..}
+          = Core.object
+              (Core.catMaybes
+                 [("description" Core..=) Core.<$> description,
+                  ("name" Core..=) Core.<$> name,
+                  ("properties" Core..=) Core.<$> properties,
+                  ("type" Core..=) Core.<$> type',
+                  ("value" Core..=) Core.<$> value])
 
--- | Start and end times for a build execution phase.
+
+-- | When type is OBJECT, this map holds the names of fields inside that object along with the type of data each field holds.
 --
--- /See:/ 'newTimeSpan' smart constructor.
-data TimeSpan = TimeSpan
-  { -- | End of time span.
-    endTime :: (Core.Maybe Core.DateTime),
-    -- | Start of time span.
-    startTime :: (Core.Maybe Core.DateTime)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newTaskResult_Properties' smart constructor.
+newtype TaskResult_Properties = TaskResult_Properties
+    {
+      -- | 
+      additional :: (Core.HashMap Core.Text PropertySpec)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'TimeSpan' with the minimum fields required to make a request.
-newTimeSpan ::
-  TimeSpan
-newTimeSpan = TimeSpan {endTime = Core.Nothing, startTime = Core.Nothing}
+-- | Creates a value of 'TaskResult_Properties' with the minimum fields required to make a request.
+newTaskResult_Properties 
+    ::  Core.HashMap Core.Text PropertySpec
+       -- ^  See 'additional'.
+    -> TaskResult_Properties
+newTaskResult_Properties additional =
+  TaskResult_Properties {additional = additional}
 
-instance Core.FromJSON TimeSpan where
-  parseJSON =
-    Core.withObject
-      "TimeSpan"
-      ( \o ->
-          TimeSpan
-            Core.<$> (o Core..:? "endTime")
-            Core.<*> (o Core..:? "startTime")
-      )
+instance Core.FromJSON TaskResult_Properties where
+        parseJSON
+          = Core.withObject "TaskResult_Properties"
+              (\ o ->
+                 TaskResult_Properties Core.<$>
+                   (Core.parseJSONObject o))
 
-instance Core.ToJSON TimeSpan where
-  toJSON TimeSpan {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("endTime" Core..=) Core.<$> endTime,
-            ("startTime" Core..=) Core.<$> startTime
-          ]
-      )
+instance Core.ToJSON TaskResult_Properties where
+        toJSON TaskResult_Properties{..}
+          = Core.toJSON additional
 
--- | Metadata for @UpdateBitbucketServerConfig@ operation.
+
+-- | TaskSpec contains the Spec to instantiate a TaskRun.
 --
--- /See:/ 'newUpdateBitbucketServerConfigOperationMetadata' smart constructor.
-data UpdateBitbucketServerConfigOperationMetadata = UpdateBitbucketServerConfigOperationMetadata
-  { -- | The resource name of the BitbucketServerConfig to be updated. Format: @projects\/{project}\/locations\/{location}\/bitbucketServerConfigs\/{id}@.
-    bitbucketServerConfig :: (Core.Maybe Core.Text),
-    -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime),
-    -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newTaskSpec' smart constructor.
+data TaskSpec = TaskSpec
+    {
+      -- | Description of the task.
+      description :: (Core.Maybe Core.Text)
+      -- | Sidecars that run alongside the Task’s step containers that should be added to this Task.
+    , managedSidecars :: (Core.Maybe [TaskSpec_ManagedSidecarsItem])
+      -- | List of parameters.
+    , params :: (Core.Maybe [ParamSpec])
+      -- | Values that this Task can output.
+    , results :: (Core.Maybe [TaskResult])
+      -- | Sidecars that run alongside the Task\'s step containers.
+    , sidecars :: (Core.Maybe [Sidecar])
+      -- | Optional. StepTemplate can be used as the basis for all step containers within the Task, so that the steps inherit settings on the base container.
+    , stepTemplate :: (Core.Maybe StepTemplate)
+      -- | Steps of the task.
+    , steps :: (Core.Maybe [Step])
+      -- | A collection of volumes that are available to mount into steps.
+    , volumes :: (Core.Maybe [VolumeSource])
+      -- | The volumes that this Task requires.
+    , workspaces :: (Core.Maybe [WorkspaceDeclaration])
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'UpdateBitbucketServerConfigOperationMetadata' with the minimum fields required to make a request.
-newUpdateBitbucketServerConfigOperationMetadata ::
-  UpdateBitbucketServerConfigOperationMetadata
-newUpdateBitbucketServerConfigOperationMetadata =
-  UpdateBitbucketServerConfigOperationMetadata
-    { bitbucketServerConfig = Core.Nothing,
-      completeTime = Core.Nothing,
-      createTime = Core.Nothing
+-- | Creates a value of 'TaskSpec' with the minimum fields required to make a request.
+newTaskSpec 
+    ::  TaskSpec
+newTaskSpec =
+  TaskSpec
+    { description = Core.Nothing
+    , managedSidecars = Core.Nothing
+    , params = Core.Nothing
+    , results = Core.Nothing
+    , sidecars = Core.Nothing
+    , stepTemplate = Core.Nothing
+    , steps = Core.Nothing
+    , volumes = Core.Nothing
+    , workspaces = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    UpdateBitbucketServerConfigOperationMetadata
-  where
-  parseJSON =
-    Core.withObject
-      "UpdateBitbucketServerConfigOperationMetadata"
-      ( \o ->
-          UpdateBitbucketServerConfigOperationMetadata
-            Core.<$> (o Core..:? "bitbucketServerConfig")
-            Core.<*> (o Core..:? "completeTime")
-            Core.<*> (o Core..:? "createTime")
-      )
+instance Core.FromJSON TaskSpec where
+        parseJSON
+          = Core.withObject "TaskSpec"
+              (\ o ->
+                 TaskSpec Core.<$>
+                   (o Core..:? "description") Core.<*>
+                     (o Core..:? "managedSidecars")
+                     Core.<*> (o Core..:? "params")
+                     Core.<*> (o Core..:? "results")
+                     Core.<*> (o Core..:? "sidecars")
+                     Core.<*> (o Core..:? "stepTemplate")
+                     Core.<*> (o Core..:? "steps")
+                     Core.<*> (o Core..:? "volumes")
+                     Core.<*> (o Core..:? "workspaces"))
 
-instance
-  Core.ToJSON
-    UpdateBitbucketServerConfigOperationMetadata
-  where
-  toJSON
-    UpdateBitbucketServerConfigOperationMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("bitbucketServerConfig" Core..=)
-                Core.<$> bitbucketServerConfig,
-              ("completeTime" Core..=) Core.<$> completeTime,
-              ("createTime" Core..=) Core.<$> createTime
-            ]
-        )
+instance Core.ToJSON TaskSpec where
+        toJSON TaskSpec{..}
+          = Core.object
+              (Core.catMaybes
+                 [("description" Core..=) Core.<$> description,
+                  ("managedSidecars" Core..=) Core.<$> managedSidecars,
+                  ("params" Core..=) Core.<$> params,
+                  ("results" Core..=) Core.<$> results,
+                  ("sidecars" Core..=) Core.<$> sidecars,
+                  ("stepTemplate" Core..=) Core.<$> stepTemplate,
+                  ("steps" Core..=) Core.<$> steps,
+                  ("volumes" Core..=) Core.<$> volumes,
+                  ("workspaces" Core..=) Core.<$> workspaces])
 
--- | Metadata for @UpdateGitHubEnterpriseConfig@ operation.
+
+-- | Request message for @TestIamPermissions@ method.
 --
--- /See:/ 'newUpdateGitHubEnterpriseConfigOperationMetadata' smart constructor.
-data UpdateGitHubEnterpriseConfigOperationMetadata = UpdateGitHubEnterpriseConfigOperationMetadata
-  { -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime),
-    -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime),
-    -- | The resource name of the GitHubEnterprise to be updated. Format: @projects\/{project}\/locations\/{location}\/githubEnterpriseConfigs\/{id}@.
-    githubEnterpriseConfig :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newTestIamPermissionsRequest' smart constructor.
+newtype TestIamPermissionsRequest = TestIamPermissionsRequest
+    {
+      -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as @*@ or @storage.*@) are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
+      permissions :: (Core.Maybe [Core.Text])
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'UpdateGitHubEnterpriseConfigOperationMetadata' with the minimum fields required to make a request.
-newUpdateGitHubEnterpriseConfigOperationMetadata ::
-  UpdateGitHubEnterpriseConfigOperationMetadata
-newUpdateGitHubEnterpriseConfigOperationMetadata =
-  UpdateGitHubEnterpriseConfigOperationMetadata
-    { completeTime = Core.Nothing,
-      createTime = Core.Nothing,
-      githubEnterpriseConfig = Core.Nothing
+-- | Creates a value of 'TestIamPermissionsRequest' with the minimum fields required to make a request.
+newTestIamPermissionsRequest 
+    ::  TestIamPermissionsRequest
+newTestIamPermissionsRequest =
+  TestIamPermissionsRequest {permissions = Core.Nothing}
+
+instance Core.FromJSON TestIamPermissionsRequest
+         where
+        parseJSON
+          = Core.withObject "TestIamPermissionsRequest"
+              (\ o ->
+                 TestIamPermissionsRequest Core.<$>
+                   (o Core..:? "permissions"))
+
+instance Core.ToJSON TestIamPermissionsRequest where
+        toJSON TestIamPermissionsRequest{..}
+          = Core.object
+              (Core.catMaybes
+                 [("permissions" Core..=) Core.<$> permissions])
+
+
+-- | Response message for @TestIamPermissions@ method.
+--
+-- /See:/ 'newTestIamPermissionsResponse' smart constructor.
+newtype TestIamPermissionsResponse = TestIamPermissionsResponse
+    {
+      -- | A subset of @TestPermissionsRequest.permissions@ that the caller is allowed.
+      permissions :: (Core.Maybe [Core.Text])
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TestIamPermissionsResponse' with the minimum fields required to make a request.
+newTestIamPermissionsResponse 
+    ::  TestIamPermissionsResponse
+newTestIamPermissionsResponse =
+  TestIamPermissionsResponse {permissions = Core.Nothing}
+
+instance Core.FromJSON TestIamPermissionsResponse
+         where
+        parseJSON
+          = Core.withObject "TestIamPermissionsResponse"
+              (\ o ->
+                 TestIamPermissionsResponse Core.<$>
+                   (o Core..:? "permissions"))
+
+instance Core.ToJSON TestIamPermissionsResponse where
+        toJSON TestIamPermissionsResponse{..}
+          = Core.object
+              (Core.catMaybes
+                 [("permissions" Core..=) Core.<$> permissions])
+
+
+-- | TimeoutFields allows granular specification of pipeline, task, and finally timeouts
+--
+-- /See:/ 'newTimeoutFields' smart constructor.
+data TimeoutFields = TimeoutFields
+    {
+      -- | Finally sets the maximum allowed duration of this pipeline\'s finally
+      finally :: (Core.Maybe Core.Duration)
+      -- | Pipeline sets the maximum allowed duration for execution of the entire pipeline. The sum of individual timeouts for tasks and finally must not exceed this value.
+    , pipeline :: (Core.Maybe Core.Duration)
+      -- | Tasks sets the maximum allowed duration of this pipeline\'s tasks
+    , tasks :: (Core.Maybe Core.Duration)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TimeoutFields' with the minimum fields required to make a request.
+newTimeoutFields 
+    ::  TimeoutFields
+newTimeoutFields =
+  TimeoutFields
+    {finally = Core.Nothing, pipeline = Core.Nothing, tasks = Core.Nothing}
+
+instance Core.FromJSON TimeoutFields where
+        parseJSON
+          = Core.withObject "TimeoutFields"
+              (\ o ->
+                 TimeoutFields Core.<$>
+                   (o Core..:? "finally") Core.<*>
+                     (o Core..:? "pipeline")
+                     Core.<*> (o Core..:? "tasks"))
+
+instance Core.ToJSON TimeoutFields where
+        toJSON TimeoutFields{..}
+          = Core.object
+              (Core.catMaybes
+                 [("finally" Core..=) Core.<$> finally,
+                  ("pipeline" Core..=) Core.<$> pipeline,
+                  ("tasks" Core..=) Core.<$> tasks])
+
+
+-- | Represents a personal access token that authorized the Connection, and associated metadata.
+--
+-- /See:/ 'newUserCredential' smart constructor.
+data UserCredential = UserCredential
+    {
+      -- | Required. A SecretManager resource containing the user token that authorizes the Cloud Build connection. Format: @projects\/*\/secrets\/*\/versions\/*@.
+      userTokenSecretVersion :: (Core.Maybe Core.Text)
+      -- | Output only. The username associated to this token.
+    , username :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UserCredential' with the minimum fields required to make a request.
+newUserCredential 
+    ::  UserCredential
+newUserCredential =
+  UserCredential
+    {userTokenSecretVersion = Core.Nothing, username = Core.Nothing}
+
+instance Core.FromJSON UserCredential where
+        parseJSON
+          = Core.withObject "UserCredential"
+              (\ o ->
+                 UserCredential Core.<$>
+                   (o Core..:? "userTokenSecretVersion") Core.<*>
+                     (o Core..:? "username"))
+
+instance Core.ToJSON UserCredential where
+        toJSON UserCredential{..}
+          = Core.object
+              (Core.catMaybes
+                 [("userTokenSecretVersion" Core..=) Core.<$>
+                    userTokenSecretVersion,
+                  ("username" Core..=) Core.<$> username])
+
+
+-- | Pod volumes to mount into the container\'s filesystem.
+--
+-- /See:/ 'newVolumeMount' smart constructor.
+data VolumeMount = VolumeMount
+    {
+      -- | Path within the container at which the volume should be mounted. Must not contain \':\'.
+      mountPath :: (Core.Maybe Core.Text)
+      -- | Name of the volume.
+    , name :: (Core.Maybe Core.Text)
+      -- | Mounted read-only if true, read-write otherwise (false or unspecified).
+    , readOnly :: (Core.Maybe Core.Bool)
+      -- | Path within the volume from which the container\'s volume should be mounted. Defaults to \"\" (volume\'s root).
+    , subPath :: (Core.Maybe Core.Text)
+      -- | Expanded path within the volume from which the container\'s volume should be mounted. Behaves similarly to SubPath but environment variable references $(VAR_NAME) are expanded using the container\'s environment. Defaults to \"\" (volume\'s root).
+    , subPathExpr :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'VolumeMount' with the minimum fields required to make a request.
+newVolumeMount 
+    ::  VolumeMount
+newVolumeMount =
+  VolumeMount
+    { mountPath = Core.Nothing
+    , name = Core.Nothing
+    , readOnly = Core.Nothing
+    , subPath = Core.Nothing
+    , subPathExpr = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    UpdateGitHubEnterpriseConfigOperationMetadata
-  where
-  parseJSON =
-    Core.withObject
-      "UpdateGitHubEnterpriseConfigOperationMetadata"
-      ( \o ->
-          UpdateGitHubEnterpriseConfigOperationMetadata
-            Core.<$> (o Core..:? "completeTime")
-              Core.<*> (o Core..:? "createTime")
-              Core.<*> (o Core..:? "githubEnterpriseConfig")
-      )
+instance Core.FromJSON VolumeMount where
+        parseJSON
+          = Core.withObject "VolumeMount"
+              (\ o ->
+                 VolumeMount Core.<$>
+                   (o Core..:? "mountPath") Core.<*> (o Core..:? "name")
+                     Core.<*> (o Core..:? "readOnly")
+                     Core.<*> (o Core..:? "subPath")
+                     Core.<*> (o Core..:? "subPathExpr"))
 
-instance
-  Core.ToJSON
-    UpdateGitHubEnterpriseConfigOperationMetadata
-  where
-  toJSON
-    UpdateGitHubEnterpriseConfigOperationMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("completeTime" Core..=) Core.<$> completeTime,
-              ("createTime" Core..=) Core.<$> createTime,
-              ("githubEnterpriseConfig" Core..=)
-                Core.<$> githubEnterpriseConfig
-            ]
-        )
+instance Core.ToJSON VolumeMount where
+        toJSON VolumeMount{..}
+          = Core.object
+              (Core.catMaybes
+                 [("mountPath" Core..=) Core.<$> mountPath,
+                  ("name" Core..=) Core.<$> name,
+                  ("readOnly" Core..=) Core.<$> readOnly,
+                  ("subPath" Core..=) Core.<$> subPath,
+                  ("subPathExpr" Core..=) Core.<$> subPathExpr])
 
--- | Metadata for @UpdateGitLabConfig@ operation.
+
+-- | Volumes available to mount.
 --
--- /See:/ 'newUpdateGitLabConfigOperationMetadata' smart constructor.
-data UpdateGitLabConfigOperationMetadata = UpdateGitLabConfigOperationMetadata
-  { -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime),
-    -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime),
-    -- | The resource name of the GitLabConfig to be created. Format: @projects\/{project}\/locations\/{location}\/gitlabConfigs\/{id}@.
-    gitlabConfig :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newVolumeSource' smart constructor.
+data VolumeSource = VolumeSource
+    {
+      -- | A temporary directory that shares a pod\'s lifetime.
+      emptyDir :: (Core.Maybe EmptyDirVolumeSource)
+      -- | Name of the Volume. Must be a DNS_LABEL and unique within the pod. More info: https:\/\/kubernetes.io\/docs\/concepts\/overview\/working-with-objects\/names\/#names
+    , name :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'UpdateGitLabConfigOperationMetadata' with the minimum fields required to make a request.
-newUpdateGitLabConfigOperationMetadata ::
-  UpdateGitLabConfigOperationMetadata
-newUpdateGitLabConfigOperationMetadata =
-  UpdateGitLabConfigOperationMetadata
-    { completeTime = Core.Nothing,
-      createTime = Core.Nothing,
-      gitlabConfig = Core.Nothing
+-- | Creates a value of 'VolumeSource' with the minimum fields required to make a request.
+newVolumeSource 
+    ::  VolumeSource
+newVolumeSource = VolumeSource {emptyDir = Core.Nothing, name = Core.Nothing}
+
+instance Core.FromJSON VolumeSource where
+        parseJSON
+          = Core.withObject "VolumeSource"
+              (\ o ->
+                 VolumeSource Core.<$>
+                   (o Core..:? "emptyDir") Core.<*> (o Core..:? "name"))
+
+instance Core.ToJSON VolumeSource where
+        toJSON VolumeSource{..}
+          = Core.object
+              (Core.catMaybes
+                 [("emptyDir" Core..=) Core.<$> emptyDir,
+                  ("name" Core..=) Core.<$> name])
+
+
+-- | Conditions that need to be true for the task to run.
+--
+-- /See:/ 'newWhenExpression' smart constructor.
+data WhenExpression = WhenExpression
+    {
+      -- | Operator that represents an Input\'s relationship to the values
+      expressionOperator :: (Core.Maybe WhenExpression_ExpressionOperator)
+      -- | Input is the string for guard checking which can be a static input or an output from a parent Task.
+    , input :: (Core.Maybe Core.Text)
+      -- | Values is an array of strings, which is compared against the input, for guard checking.
+    , values :: (Core.Maybe [Core.Text])
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'WhenExpression' with the minimum fields required to make a request.
+newWhenExpression 
+    ::  WhenExpression
+newWhenExpression =
+  WhenExpression
+    { expressionOperator = Core.Nothing
+    , input = Core.Nothing
+    , values = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    UpdateGitLabConfigOperationMetadata
-  where
-  parseJSON =
-    Core.withObject
-      "UpdateGitLabConfigOperationMetadata"
-      ( \o ->
-          UpdateGitLabConfigOperationMetadata
-            Core.<$> (o Core..:? "completeTime")
-            Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "gitlabConfig")
-      )
+instance Core.FromJSON WhenExpression where
+        parseJSON
+          = Core.withObject "WhenExpression"
+              (\ o ->
+                 WhenExpression Core.<$>
+                   (o Core..:? "expressionOperator") Core.<*>
+                     (o Core..:? "input")
+                     Core.<*> (o Core..:? "values"))
 
-instance
-  Core.ToJSON
-    UpdateGitLabConfigOperationMetadata
-  where
-  toJSON UpdateGitLabConfigOperationMetadata {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("completeTime" Core..=) Core.<$> completeTime,
-            ("createTime" Core..=) Core.<$> createTime,
-            ("gitlabConfig" Core..=) Core.<$> gitlabConfig
-          ]
-      )
+instance Core.ToJSON WhenExpression where
+        toJSON WhenExpression{..}
+          = Core.object
+              (Core.catMaybes
+                 [("expressionOperator" Core..=) Core.<$>
+                    expressionOperator,
+                  ("input" Core..=) Core.<$> input,
+                  ("values" Core..=) Core.<$> values])
 
--- | Metadata for the @UpdateWorkerPool@ operation.
+
+-- | Configuration for the worker.
 --
--- /See:/ 'newUpdateWorkerPoolOperationMetadata' smart constructor.
-data UpdateWorkerPoolOperationMetadata = UpdateWorkerPoolOperationMetadata
-  { -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime),
-    -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime),
-    -- | The resource name of the @WorkerPool@ being updated. Format: @projects\/{project}\/locations\/{location}\/workerPools\/{worker_pool}@.
-    workerPool :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+-- /See:/ 'newWorker' smart constructor.
+newtype Worker = Worker
+    {
+      -- | Optional. Machine type of a worker, default is \"e2-standard-2\".
+      machineType :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'UpdateWorkerPoolOperationMetadata' with the minimum fields required to make a request.
-newUpdateWorkerPoolOperationMetadata ::
-  UpdateWorkerPoolOperationMetadata
-newUpdateWorkerPoolOperationMetadata =
-  UpdateWorkerPoolOperationMetadata
-    { completeTime = Core.Nothing,
-      createTime = Core.Nothing,
-      workerPool = Core.Nothing
+-- | Creates a value of 'Worker' with the minimum fields required to make a request.
+newWorker 
+    ::  Worker
+newWorker = Worker {machineType = Core.Nothing}
+
+instance Core.FromJSON Worker where
+        parseJSON
+          = Core.withObject "Worker"
+              (\ o -> Worker Core.<$> (o Core..:? "machineType"))
+
+instance Core.ToJSON Worker where
+        toJSON Worker{..}
+          = Core.object
+              (Core.catMaybes
+                 [("machineType" Core..=) Core.<$> machineType])
+
+
+-- | WorkspaceBinding maps a workspace to a Volume. PipelineRef can be used to refer to a specific instance of a Pipeline.
+--
+-- /See:/ 'newWorkspaceBinding' smart constructor.
+data WorkspaceBinding = WorkspaceBinding
+    {
+      -- | Name of the workspace.
+      name :: (Core.Maybe Core.Text)
+      -- | Secret Volume Source.
+    , secret :: (Core.Maybe SecretVolumeSource)
+      -- | Optional. SubPath is optionally a directory on the volume which should be used for this binding (i.e. the volume will be mounted at this sub directory). +optional
+    , subPath :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'WorkspaceBinding' with the minimum fields required to make a request.
+newWorkspaceBinding 
+    ::  WorkspaceBinding
+newWorkspaceBinding =
+  WorkspaceBinding
+    {name = Core.Nothing, secret = Core.Nothing, subPath = Core.Nothing}
+
+instance Core.FromJSON WorkspaceBinding where
+        parseJSON
+          = Core.withObject "WorkspaceBinding"
+              (\ o ->
+                 WorkspaceBinding Core.<$>
+                   (o Core..:? "name") Core.<*> (o Core..:? "secret")
+                     Core.<*> (o Core..:? "subPath"))
+
+instance Core.ToJSON WorkspaceBinding where
+        toJSON WorkspaceBinding{..}
+          = Core.object
+              (Core.catMaybes
+                 [("name" Core..=) Core.<$> name,
+                  ("secret" Core..=) Core.<$> secret,
+                  ("subPath" Core..=) Core.<$> subPath])
+
+
+-- | WorkspaceDeclaration is a declaration of a volume that a Task requires.
+--
+-- /See:/ 'newWorkspaceDeclaration' smart constructor.
+data WorkspaceDeclaration = WorkspaceDeclaration
+    {
+      -- | Description is a human readable description of this volume.
+      description :: (Core.Maybe Core.Text)
+      -- | MountPath overrides the directory that the volume will be made available at.
+    , mountPath :: (Core.Maybe Core.Text)
+      -- | Name is the name by which you can bind the volume at runtime.
+    , name :: (Core.Maybe Core.Text)
+      -- | Optional. Optional marks a Workspace as not being required in TaskRuns. By default this field is false and so declared workspaces are required.
+    , optional :: (Core.Maybe Core.Bool)
+      -- | ReadOnly dictates whether a mounted volume is writable.
+    , readOnly :: (Core.Maybe Core.Bool)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'WorkspaceDeclaration' with the minimum fields required to make a request.
+newWorkspaceDeclaration 
+    ::  WorkspaceDeclaration
+newWorkspaceDeclaration =
+  WorkspaceDeclaration
+    { description = Core.Nothing
+    , mountPath = Core.Nothing
+    , name = Core.Nothing
+    , optional = Core.Nothing
+    , readOnly = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    UpdateWorkerPoolOperationMetadata
-  where
-  parseJSON =
-    Core.withObject
-      "UpdateWorkerPoolOperationMetadata"
-      ( \o ->
-          UpdateWorkerPoolOperationMetadata
-            Core.<$> (o Core..:? "completeTime")
-            Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "workerPool")
-      )
+instance Core.FromJSON WorkspaceDeclaration where
+        parseJSON
+          = Core.withObject "WorkspaceDeclaration"
+              (\ o ->
+                 WorkspaceDeclaration Core.<$>
+                   (o Core..:? "description") Core.<*>
+                     (o Core..:? "mountPath")
+                     Core.<*> (o Core..:? "name")
+                     Core.<*> (o Core..:? "optional")
+                     Core.<*> (o Core..:? "readOnly"))
 
-instance
-  Core.ToJSON
-    UpdateWorkerPoolOperationMetadata
-  where
-  toJSON UpdateWorkerPoolOperationMetadata {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("completeTime" Core..=) Core.<$> completeTime,
-            ("createTime" Core..=) Core.<$> createTime,
-            ("workerPool" Core..=) Core.<$> workerPool
-          ]
-      )
+instance Core.ToJSON WorkspaceDeclaration where
+        toJSON WorkspaceDeclaration{..}
+          = Core.object
+              (Core.catMaybes
+                 [("description" Core..=) Core.<$> description,
+                  ("mountPath" Core..=) Core.<$> mountPath,
+                  ("name" Core..=) Core.<$> name,
+                  ("optional" Core..=) Core.<$> optional,
+                  ("readOnly" Core..=) Core.<$> readOnly])
 
--- | A Maven artifact uploaded using the MavenArtifact directive.
+
+-- | WorkspacePipelineTaskBinding maps workspaces from the PipelineSpec to the workspaces declared in the Task.
 --
--- /See:/ 'newUploadedMavenArtifact' smart constructor.
-data UploadedMavenArtifact = UploadedMavenArtifact
-  { -- | Hash types and values of the Maven Artifact.
-    fileHashes :: (Core.Maybe FileHashes),
-    -- | Output only. Stores timing information for pushing the specified artifact.
-    pushTiming :: (Core.Maybe TimeSpan),
-    -- | URI of the uploaded artifact.
-    uri :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'UploadedMavenArtifact' with the minimum fields required to make a request.
-newUploadedMavenArtifact ::
-  UploadedMavenArtifact
-newUploadedMavenArtifact =
-  UploadedMavenArtifact
-    { fileHashes = Core.Nothing,
-      pushTiming = Core.Nothing,
-      uri = Core.Nothing
+-- /See:/ 'newWorkspacePipelineTaskBinding' smart constructor.
+data WorkspacePipelineTaskBinding = WorkspacePipelineTaskBinding
+    {
+      -- | Name of the workspace as declared by the task.
+      name :: (Core.Maybe Core.Text)
+      -- | Optional. SubPath is optionally a directory on the volume which should be used for this binding (i.e. the volume will be mounted at this sub directory). +optional
+    , subPath :: (Core.Maybe Core.Text)
+      -- | Name of the workspace declared by the pipeline.
+    , workspace :: (Core.Maybe Core.Text)
     }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
-instance Core.FromJSON UploadedMavenArtifact where
-  parseJSON =
-    Core.withObject
-      "UploadedMavenArtifact"
-      ( \o ->
-          UploadedMavenArtifact
-            Core.<$> (o Core..:? "fileHashes")
-            Core.<*> (o Core..:? "pushTiming")
-            Core.<*> (o Core..:? "uri")
-      )
+-- | Creates a value of 'WorkspacePipelineTaskBinding' with the minimum fields required to make a request.
+newWorkspacePipelineTaskBinding 
+    ::  WorkspacePipelineTaskBinding
+newWorkspacePipelineTaskBinding =
+  WorkspacePipelineTaskBinding
+    {name = Core.Nothing, subPath = Core.Nothing, workspace = Core.Nothing}
 
-instance Core.ToJSON UploadedMavenArtifact where
-  toJSON UploadedMavenArtifact {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("fileHashes" Core..=) Core.<$> fileHashes,
-            ("pushTiming" Core..=) Core.<$> pushTiming,
-            ("uri" Core..=) Core.<$> uri
-          ]
-      )
+instance Core.FromJSON WorkspacePipelineTaskBinding
+         where
+        parseJSON
+          = Core.withObject "WorkspacePipelineTaskBinding"
+              (\ o ->
+                 WorkspacePipelineTaskBinding Core.<$>
+                   (o Core..:? "name") Core.<*> (o Core..:? "subPath")
+                     Core.<*> (o Core..:? "workspace"))
 
--- | Artifact uploaded using the PythonPackage directive.
---
--- /See:/ 'newUploadedPythonPackage' smart constructor.
-data UploadedPythonPackage = UploadedPythonPackage
-  { -- | Hash types and values of the Python Artifact.
-    fileHashes :: (Core.Maybe FileHashes),
-    -- | Output only. Stores timing information for pushing the specified artifact.
-    pushTiming :: (Core.Maybe TimeSpan),
-    -- | URI of the uploaded artifact.
-    uri :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+instance Core.ToJSON WorkspacePipelineTaskBinding
+         where
+        toJSON WorkspacePipelineTaskBinding{..}
+          = Core.object
+              (Core.catMaybes
+                 [("name" Core..=) Core.<$> name,
+                  ("subPath" Core..=) Core.<$> subPath,
+                  ("workspace" Core..=) Core.<$> workspace])
 
--- | Creates a value of 'UploadedPythonPackage' with the minimum fields required to make a request.
-newUploadedPythonPackage ::
-  UploadedPythonPackage
-newUploadedPythonPackage =
-  UploadedPythonPackage
-    { fileHashes = Core.Nothing,
-      pushTiming = Core.Nothing,
-      uri = Core.Nothing
-    }
-
-instance Core.FromJSON UploadedPythonPackage where
-  parseJSON =
-    Core.withObject
-      "UploadedPythonPackage"
-      ( \o ->
-          UploadedPythonPackage
-            Core.<$> (o Core..:? "fileHashes")
-            Core.<*> (o Core..:? "pushTiming")
-            Core.<*> (o Core..:? "uri")
-      )
-
-instance Core.ToJSON UploadedPythonPackage where
-  toJSON UploadedPythonPackage {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("fileHashes" Core..=) Core.<$> fileHashes,
-            ("pushTiming" Core..=) Core.<$> pushTiming,
-            ("uri" Core..=) Core.<$> uri
-          ]
-      )
-
--- | Volume describes a Docker container volume which is mounted into build steps in order to persist files across build step execution.
---
--- /See:/ 'newVolume' smart constructor.
-data Volume = Volume
-  { -- | Name of the volume to mount. Volume names must be unique per build step and must be valid names for Docker volumes. Each named volume must be used by at least two build steps.
-    name :: (Core.Maybe Core.Text),
-    -- | Path at which to mount the volume. Paths must be absolute and cannot conflict with other volume paths on the same build step or with certain reserved volume paths.
-    path :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'Volume' with the minimum fields required to make a request.
-newVolume ::
-  Volume
-newVolume = Volume {name = Core.Nothing, path = Core.Nothing}
-
-instance Core.FromJSON Volume where
-  parseJSON =
-    Core.withObject
-      "Volume"
-      ( \o ->
-          Volume
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "path")
-      )
-
-instance Core.ToJSON Volume where
-  toJSON Volume {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("path" Core..=) Core.<$> path
-          ]
-      )
-
--- | A non-fatal problem encountered during the execution of the build.
---
--- /See:/ 'newWarning' smart constructor.
-data Warning = Warning
-  { -- | The priority for this warning.
-    priority :: (Core.Maybe Warning_Priority),
-    -- | Explanation of the warning generated.
-    text :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'Warning' with the minimum fields required to make a request.
-newWarning ::
-  Warning
-newWarning = Warning {priority = Core.Nothing, text = Core.Nothing}
-
-instance Core.FromJSON Warning where
-  parseJSON =
-    Core.withObject
-      "Warning"
-      ( \o ->
-          Warning
-            Core.<$> (o Core..:? "priority") Core.<*> (o Core..:? "text")
-      )
-
-instance Core.ToJSON Warning where
-  toJSON Warning {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("priority" Core..=) Core.<$> priority,
-            ("text" Core..=) Core.<$> text
-          ]
-      )
-
--- | WebhookConfig describes the configuration of a trigger that creates a build whenever a webhook is sent to a trigger\'s webhook URL.
---
--- /See:/ 'newWebhookConfig' smart constructor.
-data WebhookConfig = WebhookConfig
-  { -- | Required. Resource name for the secret required as a URL parameter.
-    secret :: (Core.Maybe Core.Text),
-    -- | Potential issues with the underlying Pub\/Sub subscription configuration. Only populated on get requests.
-    state :: (Core.Maybe WebhookConfig_State)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'WebhookConfig' with the minimum fields required to make a request.
-newWebhookConfig ::
-  WebhookConfig
-newWebhookConfig = WebhookConfig {secret = Core.Nothing, state = Core.Nothing}
-
-instance Core.FromJSON WebhookConfig where
-  parseJSON =
-    Core.withObject
-      "WebhookConfig"
-      ( \o ->
-          WebhookConfig
-            Core.<$> (o Core..:? "secret") Core.<*> (o Core..:? "state")
-      )
-
-instance Core.ToJSON WebhookConfig where
-  toJSON WebhookConfig {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("secret" Core..=) Core.<$> secret,
-            ("state" Core..=) Core.<$> state
-          ]
-      )
-
--- | Defines the configuration to be used for creating workers in the pool.
---
--- /See:/ 'newWorkerConfig' smart constructor.
-data WorkerConfig = WorkerConfig
-  { -- | Size of the disk attached to the worker, in GB. See <https://cloud.google.com/build/docs/private-pools/worker-pool-config-file-schema Worker pool config file>. Specify a value of up to 2000. If @0@ is specified, Cloud Build will use a standard disk size.
-    diskSizeGb :: (Core.Maybe Core.Int64),
-    -- | Machine type of a worker, such as @e2-medium@. See <https://cloud.google.com/build/docs/private-pools/worker-pool-config-file-schema Worker pool config file>. If left blank, Cloud Build will use a sensible default.
-    machineType :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'WorkerConfig' with the minimum fields required to make a request.
-newWorkerConfig ::
-  WorkerConfig
-newWorkerConfig =
-  WorkerConfig {diskSizeGb = Core.Nothing, machineType = Core.Nothing}
-
-instance Core.FromJSON WorkerConfig where
-  parseJSON =
-    Core.withObject
-      "WorkerConfig"
-      ( \o ->
-          WorkerConfig
-            Core.<$> ( o Core..:? "diskSizeGb"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> (o Core..:? "machineType")
-      )
-
-instance Core.ToJSON WorkerConfig where
-  toJSON WorkerConfig {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("diskSizeGb" Core..=) Core.. Core.AsText
-              Core.<$> diskSizeGb,
-            ("machineType" Core..=) Core.<$> machineType
-          ]
-      )
-
--- | Configuration for a @WorkerPool@. Cloud Build owns and maintains a pool of workers for general use and have no access to a project\'s private network. By default, builds submitted to Cloud Build will use a worker from this pool. If your build needs access to resources on a private network, create and use a @WorkerPool@ to run your builds. Private @WorkerPool@s give your builds access to any single VPC network that you administer, including any on-prem resources connected to that VPC network. For an overview of private pools, see <https://cloud.google.com/build/docs/private-pools/private-pools-overview Private pools overview>.
---
--- /See:/ 'newWorkerPool' smart constructor.
-data WorkerPool = WorkerPool
-  { -- | User specified annotations. See https:\/\/google.aip.dev\/128#annotations for more details such as format and size limitations.
-    annotations :: (Core.Maybe WorkerPool_Annotations),
-    -- | Output only. Time at which the request to create the @WorkerPool@ was received.
-    createTime :: (Core.Maybe Core.DateTime),
-    -- | Output only. Time at which the request to delete the @WorkerPool@ was received.
-    deleteTime :: (Core.Maybe Core.DateTime),
-    -- | A user-specified, human-readable name for the @WorkerPool@. If provided, this value must be 1-63 characters.
-    displayName :: (Core.Maybe Core.Text),
-    -- | Output only. Checksum computed by the server. May be sent on update and delete requests to ensure that the client has an up-to-date value before proceeding.
-    etag :: (Core.Maybe Core.Text),
-    -- | Output only. The resource name of the @WorkerPool@, with format @projects\/{project}\/locations\/{location}\/workerPools\/{worker_pool}@. The value of @{worker_pool}@ is provided by @worker_pool_id@ in @CreateWorkerPool@ request and the value of @{location}@ is determined by the endpoint accessed.
-    name :: (Core.Maybe Core.Text),
-    -- | Legacy Private Pool configuration.
-    privatePoolV1Config :: (Core.Maybe PrivatePoolV1Config),
-    -- | Output only. @WorkerPool@ state.
-    state :: (Core.Maybe WorkerPool_State),
-    -- | Output only. A unique identifier for the @WorkerPool@.
-    uid :: (Core.Maybe Core.Text),
-    -- | Output only. Time at which the request to update the @WorkerPool@ was received.
-    updateTime :: (Core.Maybe Core.DateTime)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'WorkerPool' with the minimum fields required to make a request.
-newWorkerPool ::
-  WorkerPool
-newWorkerPool =
-  WorkerPool
-    { annotations = Core.Nothing,
-      createTime = Core.Nothing,
-      deleteTime = Core.Nothing,
-      displayName = Core.Nothing,
-      etag = Core.Nothing,
-      name = Core.Nothing,
-      privatePoolV1Config = Core.Nothing,
-      state = Core.Nothing,
-      uid = Core.Nothing,
-      updateTime = Core.Nothing
-    }
-
-instance Core.FromJSON WorkerPool where
-  parseJSON =
-    Core.withObject
-      "WorkerPool"
-      ( \o ->
-          WorkerPool
-            Core.<$> (o Core..:? "annotations")
-            Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "deleteTime")
-            Core.<*> (o Core..:? "displayName")
-            Core.<*> (o Core..:? "etag")
-            Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "privatePoolV1Config")
-            Core.<*> (o Core..:? "state")
-            Core.<*> (o Core..:? "uid")
-            Core.<*> (o Core..:? "updateTime")
-      )
-
-instance Core.ToJSON WorkerPool where
-  toJSON WorkerPool {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("annotations" Core..=) Core.<$> annotations,
-            ("createTime" Core..=) Core.<$> createTime,
-            ("deleteTime" Core..=) Core.<$> deleteTime,
-            ("displayName" Core..=) Core.<$> displayName,
-            ("etag" Core..=) Core.<$> etag,
-            ("name" Core..=) Core.<$> name,
-            ("privatePoolV1Config" Core..=)
-              Core.<$> privatePoolV1Config,
-            ("state" Core..=) Core.<$> state,
-            ("uid" Core..=) Core.<$> uid,
-            ("updateTime" Core..=) Core.<$> updateTime
-          ]
-      )
-
--- | User specified annotations. See https:\/\/google.aip.dev\/128#annotations for more details such as format and size limitations.
---
--- /See:/ 'newWorkerPool_Annotations' smart constructor.
-newtype WorkerPool_Annotations = WorkerPool_Annotations
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'WorkerPool_Annotations' with the minimum fields required to make a request.
-newWorkerPool_Annotations ::
-  -- |  See 'additional'.
-  Core.HashMap Core.Text Core.Text ->
-  WorkerPool_Annotations
-newWorkerPool_Annotations additional =
-  WorkerPool_Annotations {additional = additional}
-
-instance Core.FromJSON WorkerPool_Annotations where
-  parseJSON =
-    Core.withObject
-      "WorkerPool_Annotations"
-      ( \o ->
-          WorkerPool_Annotations
-            Core.<$> (Core.parseJSONObject o)
-      )
-
-instance Core.ToJSON WorkerPool_Annotations where
-  toJSON WorkerPool_Annotations {..} =
-    Core.toJSON additional

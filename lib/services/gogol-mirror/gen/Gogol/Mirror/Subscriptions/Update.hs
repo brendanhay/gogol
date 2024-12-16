@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,65 +31,62 @@
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.subscriptions.update@.
 module Gogol.Mirror.Subscriptions.Update
-  ( -- * Resource
-    MirrorSubscriptionsUpdateResource,
+    (
+    -- * Resource
+      MirrorSubscriptionsUpdateResource
 
     -- ** Constructing a Request
-    MirrorSubscriptionsUpdate (..),
-    newMirrorSubscriptionsUpdate,
-  )
-where
+    , MirrorSubscriptionsUpdate (..)
+    , newMirrorSubscriptionsUpdate
+    ) where
 
-import Gogol.Mirror.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Mirror.Types
 
 -- | A resource alias for @mirror.subscriptions.update@ method which the
 -- 'MirrorSubscriptionsUpdate' request conforms to.
 type MirrorSubscriptionsUpdateResource =
-  "mirror"
-    Core.:> "v1"
-    Core.:> "subscriptions"
-    Core.:> Core.Capture "id" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Subscription
-    Core.:> Core.Put '[Core.JSON] Subscription
+     "mirror" Core.:>
+       "v1" Core.:>
+         "subscriptions" Core.:>
+           Core.Capture "id" Core.Text Core.:>
+             Core.QueryParam "alt" Core.AltJSON Core.:>
+               Core.ReqBody '[Core.JSON] Subscription Core.:>
+                 Core.Put '[Core.JSON] Subscription
 
 -- | Updates an existing subscription in place.
 --
 -- /See:/ 'newMirrorSubscriptionsUpdate' smart constructor.
 data MirrorSubscriptionsUpdate = MirrorSubscriptionsUpdate
-  { -- | The ID of the subscription.
-    id :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: Subscription
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | The ID of the subscription.
+      id :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: Subscription
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'MirrorSubscriptionsUpdate' with the minimum fields required to make a request.
-newMirrorSubscriptionsUpdate ::
-  -- |  The ID of the subscription. See 'id'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  Subscription ->
-  MirrorSubscriptionsUpdate
+newMirrorSubscriptionsUpdate 
+    ::  Core.Text
+       -- ^  The ID of the subscription. See 'id'.
+    -> Subscription
+       -- ^  Multipart request metadata. See 'payload'.
+    -> MirrorSubscriptionsUpdate
 newMirrorSubscriptionsUpdate id payload =
   MirrorSubscriptionsUpdate {id = id, payload = payload}
 
-instance Core.GoogleRequest MirrorSubscriptionsUpdate where
-  type Rs MirrorSubscriptionsUpdate = Subscription
-  type
-    Scopes MirrorSubscriptionsUpdate =
-      '[Glass'Timeline]
-  requestClient MirrorSubscriptionsUpdate {..} =
-    go
-      id
-      (Core.Just Core.AltJSON)
-      payload
-      mirrorService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy MirrorSubscriptionsUpdateResource
-          )
-          Core.mempty
+instance Core.GoogleRequest MirrorSubscriptionsUpdate
+         where
+        type Rs MirrorSubscriptionsUpdate = Subscription
+        type Scopes MirrorSubscriptionsUpdate =
+             '[Glass'Timeline]
+        requestClient MirrorSubscriptionsUpdate{..}
+          = go id (Core.Just Core.AltJSON) payload
+              mirrorService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy MirrorSubscriptionsUpdateResource)
+                      Core.mempty
+

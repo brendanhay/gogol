@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,66 +31,128 @@
 --
 -- /See:/ <https://firebase.google.com/docs/hosting/ Firebase Hosting API Reference>
 module Gogol.FirebaseHosting
-  ( -- * Configuration
-    firebaseHostingService,
+    (
+    -- * Configuration
+      firebaseHostingService
+
+    -- * OAuth Scopes
+    , CloudPlatform'FullControl
+    , Firebase'FullControl
 
     -- * Resources
 
     -- ** firebasehosting.operations.cancel
-    FirebaseHostingOperationsCancelResource,
-    FirebaseHostingOperationsCancel (..),
-    newFirebaseHostingOperationsCancel,
+    , FirebaseHostingOperationsCancelResource
+    , FirebaseHostingOperationsCancel (..)
+    , newFirebaseHostingOperationsCancel
 
     -- ** firebasehosting.operations.delete
-    FirebaseHostingOperationsDeleteResource,
-    FirebaseHostingOperationsDelete (..),
-    newFirebaseHostingOperationsDelete,
+    , FirebaseHostingOperationsDeleteResource
+    , FirebaseHostingOperationsDelete (..)
+    , newFirebaseHostingOperationsDelete
 
     -- ** firebasehosting.operations.list
-    FirebaseHostingOperationsListResource,
-    FirebaseHostingOperationsList (..),
-    newFirebaseHostingOperationsList,
+    , FirebaseHostingOperationsListResource
+    , FirebaseHostingOperationsList (..)
+    , newFirebaseHostingOperationsList
+
+    -- ** firebasehosting.projects.sites.customDomains.operations.cancel
+    , FirebaseHostingProjectsSitesCustomDomainsOperationsCancelResource
+    , FirebaseHostingProjectsSitesCustomDomainsOperationsCancel (..)
+    , newFirebaseHostingProjectsSitesCustomDomainsOperationsCancel
+
+    -- ** firebasehosting.projects.sites.customDomains.operations.delete
+    , FirebaseHostingProjectsSitesCustomDomainsOperationsDeleteResource
+    , FirebaseHostingProjectsSitesCustomDomainsOperationsDelete (..)
+    , newFirebaseHostingProjectsSitesCustomDomainsOperationsDelete
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** CancelOperationRequest
-    CancelOperationRequest (..),
-    newCancelOperationRequest,
+    , CancelOperationRequest (..)
+    , newCancelOperationRequest
+
+    -- ** CertVerification
+    , CertVerification (..)
+    , newCertVerification
+
+    -- ** CustomDomainMetadata
+    , CustomDomainMetadata (..)
+    , newCustomDomainMetadata
+
+    -- ** CustomDomainMetadata_CertState
+    , CustomDomainMetadata_CertState (..)
+
+    -- ** CustomDomainMetadata_HostState
+    , CustomDomainMetadata_HostState (..)
+
+    -- ** CustomDomainMetadata_OwnershipState
+    , CustomDomainMetadata_OwnershipState (..)
+
+    -- ** DnsRecord
+    , DnsRecord (..)
+    , newDnsRecord
+
+    -- ** DnsRecord_RequiredAction
+    , DnsRecord_RequiredAction (..)
+
+    -- ** DnsRecord_Type
+    , DnsRecord_Type (..)
+
+    -- ** DnsRecordSet
+    , DnsRecordSet (..)
+    , newDnsRecordSet
+
+    -- ** DnsUpdates
+    , DnsUpdates (..)
+    , newDnsUpdates
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
+
+    -- ** HttpUpdate
+    , HttpUpdate (..)
+    , newHttpUpdate
 
     -- ** ListOperationsResponse
-    ListOperationsResponse (..),
-    newListOperationsResponse,
+    , ListOperationsResponse (..)
+    , newListOperationsResponse
+
+    -- ** LiveMigrationStep
+    , LiveMigrationStep (..)
+    , newLiveMigrationStep
+
+    -- ** LiveMigrationStep_State
+    , LiveMigrationStep_State (..)
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
-  )
-where
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
+    ) where
 
 import Gogol.FirebaseHosting.Operations.Cancel
 import Gogol.FirebaseHosting.Operations.Delete
 import Gogol.FirebaseHosting.Operations.List
+import Gogol.FirebaseHosting.Projects.Sites.CustomDomains.Operations.Cancel
+import Gogol.FirebaseHosting.Projects.Sites.CustomDomains.Operations.Delete
 import Gogol.FirebaseHosting.Types

@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +26,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.AdSense.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * Account_State
     Account_State
-      ( Account_State_STATEUNSPECIFIED,
+      (
+        Account_State_STATEUNSPECIFIED,
         Account_State_Ready,
         Account_State_NEEDSATTENTION,
         Account_State_Closed,
@@ -44,7 +50,8 @@ module Gogol.AdSense.Internal.Sum
 
     -- * AdClient_State
     AdClient_State
-      ( AdClient_State_STATEUNSPECIFIED,
+      (
+        AdClient_State_STATEUNSPECIFIED,
         AdClient_State_Ready,
         AdClient_State_GETTINGREADY,
         AdClient_State_REQUIRESREVIEW,
@@ -53,7 +60,8 @@ module Gogol.AdSense.Internal.Sum
 
     -- * AdUnit_State
     AdUnit_State
-      ( AdUnit_State_STATEUNSPECIFIED,
+      (
+        AdUnit_State_STATEUNSPECIFIED,
         AdUnit_State_Active,
         AdUnit_State_Archived,
         ..
@@ -61,7 +69,8 @@ module Gogol.AdSense.Internal.Sum
 
     -- * Alert_Severity
     Alert_Severity
-      ( Alert_Severity_SEVERITYUNSPECIFIED,
+      (
+        Alert_Severity_SEVERITYUNSPECIFIED,
         Alert_Severity_Info,
         Alert_Severity_Warning,
         Alert_Severity_Severe,
@@ -70,7 +79,8 @@ module Gogol.AdSense.Internal.Sum
 
     -- * ContentAdsSettings_Type
     ContentAdsSettings_Type
-      ( ContentAdsSettings_Type_TYPEUNSPECIFIED,
+      (
+        ContentAdsSettings_Type_TYPEUNSPECIFIED,
         ContentAdsSettings_Type_Display,
         ContentAdsSettings_Type_Feed,
         ContentAdsSettings_Type_Article,
@@ -81,7 +91,8 @@ module Gogol.AdSense.Internal.Sum
 
     -- * Header_Type
     Header_Type
-      ( Header_Type_HEADERTYPEUNSPECIFIED,
+      (
+        Header_Type_HEADERTYPEUNSPECIFIED,
         Header_Type_Dimension,
         Header_Type_METRICTALLY,
         Header_Type_METRICRATIO,
@@ -91,9 +102,32 @@ module Gogol.AdSense.Internal.Sum
         ..
       ),
 
+    -- * PolicyIssue_Action
+    PolicyIssue_Action
+      (
+        PolicyIssue_Action_ENFORCEMENTACTIONUNSPECIFIED,
+        PolicyIssue_Action_Warned,
+        PolicyIssue_Action_ADSERVINGRESTRICTED,
+        PolicyIssue_Action_ADSERVINGDISABLED,
+        PolicyIssue_Action_ADSERVEDWITHCLICKCONFIRMATION,
+        PolicyIssue_Action_ADPERSONALIZATIONRESTRICTED,
+        ..
+      ),
+
+    -- * PolicyIssue_EntityType
+    PolicyIssue_EntityType
+      (
+        PolicyIssue_EntityType_ENTITYTYPEUNSPECIFIED,
+        PolicyIssue_EntityType_Site,
+        PolicyIssue_EntityType_SITESECTION,
+        PolicyIssue_EntityType_Page,
+        ..
+      ),
+
     -- * Site_State
     Site_State
-      ( Site_State_STATEUNSPECIFIED,
+      (
+        Site_State_STATEUNSPECIFIED,
         Site_State_REQUIRESREVIEW,
         Site_State_GETTINGREADY,
         Site_State_Ready,
@@ -103,7 +137,8 @@ module Gogol.AdSense.Internal.Sum
 
     -- * AccountsReportsGenerateDateRange
     AccountsReportsGenerateDateRange
-      ( AccountsReportsGenerateDateRange_REPORTINGDATERANGEUNSPECIFIED,
+      (
+        AccountsReportsGenerateDateRange_REPORTINGDATERANGEUNSPECIFIED,
         AccountsReportsGenerateDateRange_Custom,
         AccountsReportsGenerateDateRange_Today,
         AccountsReportsGenerateDateRange_Yesterday,
@@ -116,7 +151,8 @@ module Gogol.AdSense.Internal.Sum
 
     -- * AccountsReportsGenerateDimensions
     AccountsReportsGenerateDimensions
-      ( AccountsReportsGenerateDimensions_DIMENSIONUNSPECIFIED,
+      (
+        AccountsReportsGenerateDimensions_DIMENSIONUNSPECIFIED,
         AccountsReportsGenerateDimensions_Date,
         AccountsReportsGenerateDimensions_Week,
         AccountsReportsGenerateDimensions_Month,
@@ -131,6 +167,7 @@ module Gogol.AdSense.Internal.Sum
         AccountsReportsGenerateDimensions_ADUNITSIZECODE,
         AccountsReportsGenerateDimensions_CUSTOMCHANNELNAME,
         AccountsReportsGenerateDimensions_CUSTOMCHANNELID,
+        AccountsReportsGenerateDimensions_HOSTEDCUSTOMCHANNELID,
         AccountsReportsGenerateDimensions_OWNEDSITEDOMAINNAME,
         AccountsReportsGenerateDimensions_OWNEDSITEID,
         AccountsReportsGenerateDimensions_PAGEURL,
@@ -169,7 +206,8 @@ module Gogol.AdSense.Internal.Sum
 
     -- * AccountsReportsGenerateMetrics
     AccountsReportsGenerateMetrics
-      ( AccountsReportsGenerateMetrics_METRICUNSPECIFIED,
+      (
+        AccountsReportsGenerateMetrics_METRICUNSPECIFIED,
         AccountsReportsGenerateMetrics_PAGEVIEWS,
         AccountsReportsGenerateMetrics_ADREQUESTS,
         AccountsReportsGenerateMetrics_MATCHEDADREQUESTS,
@@ -202,12 +240,17 @@ module Gogol.AdSense.Internal.Sum
         AccountsReportsGenerateMetrics_ADSPERIMPRESSION,
         AccountsReportsGenerateMetrics_TOTALEARNINGS,
         AccountsReportsGenerateMetrics_WEBSEARCHRESULTPAGES,
+        AccountsReportsGenerateMetrics_FUNNELREQUESTS,
+        AccountsReportsGenerateMetrics_FUNNELIMPRESSIONS,
+        AccountsReportsGenerateMetrics_FUNNELCLICKS,
+        AccountsReportsGenerateMetrics_FUNNELRPM,
         ..
       ),
 
     -- * AccountsReportsGenerateReportingTimeZone
     AccountsReportsGenerateReportingTimeZone
-      ( AccountsReportsGenerateReportingTimeZone_REPORTINGTIMEZONEUNSPECIFIED,
+      (
+        AccountsReportsGenerateReportingTimeZone_REPORTINGTIMEZONEUNSPECIFIED,
         AccountsReportsGenerateReportingTimeZone_ACCOUNTTIMEZONE,
         AccountsReportsGenerateReportingTimeZone_GOOGLETIMEZONE,
         ..
@@ -215,7 +258,8 @@ module Gogol.AdSense.Internal.Sum
 
     -- * AccountsReportsGenerateCsvDateRange
     AccountsReportsGenerateCsvDateRange
-      ( AccountsReportsGenerateCsvDateRange_REPORTINGDATERANGEUNSPECIFIED,
+      (
+        AccountsReportsGenerateCsvDateRange_REPORTINGDATERANGEUNSPECIFIED,
         AccountsReportsGenerateCsvDateRange_Custom,
         AccountsReportsGenerateCsvDateRange_Today,
         AccountsReportsGenerateCsvDateRange_Yesterday,
@@ -228,7 +272,8 @@ module Gogol.AdSense.Internal.Sum
 
     -- * AccountsReportsGenerateCsvDimensions
     AccountsReportsGenerateCsvDimensions
-      ( AccountsReportsGenerateCsvDimensions_DIMENSIONUNSPECIFIED,
+      (
+        AccountsReportsGenerateCsvDimensions_DIMENSIONUNSPECIFIED,
         AccountsReportsGenerateCsvDimensions_Date,
         AccountsReportsGenerateCsvDimensions_Week,
         AccountsReportsGenerateCsvDimensions_Month,
@@ -243,6 +288,7 @@ module Gogol.AdSense.Internal.Sum
         AccountsReportsGenerateCsvDimensions_ADUNITSIZECODE,
         AccountsReportsGenerateCsvDimensions_CUSTOMCHANNELNAME,
         AccountsReportsGenerateCsvDimensions_CUSTOMCHANNELID,
+        AccountsReportsGenerateCsvDimensions_HOSTEDCUSTOMCHANNELID,
         AccountsReportsGenerateCsvDimensions_OWNEDSITEDOMAINNAME,
         AccountsReportsGenerateCsvDimensions_OWNEDSITEID,
         AccountsReportsGenerateCsvDimensions_PAGEURL,
@@ -281,7 +327,8 @@ module Gogol.AdSense.Internal.Sum
 
     -- * AccountsReportsGenerateCsvMetrics
     AccountsReportsGenerateCsvMetrics
-      ( AccountsReportsGenerateCsvMetrics_METRICUNSPECIFIED,
+      (
+        AccountsReportsGenerateCsvMetrics_METRICUNSPECIFIED,
         AccountsReportsGenerateCsvMetrics_PAGEVIEWS,
         AccountsReportsGenerateCsvMetrics_ADREQUESTS,
         AccountsReportsGenerateCsvMetrics_MATCHEDADREQUESTS,
@@ -314,12 +361,17 @@ module Gogol.AdSense.Internal.Sum
         AccountsReportsGenerateCsvMetrics_ADSPERIMPRESSION,
         AccountsReportsGenerateCsvMetrics_TOTALEARNINGS,
         AccountsReportsGenerateCsvMetrics_WEBSEARCHRESULTPAGES,
+        AccountsReportsGenerateCsvMetrics_FUNNELREQUESTS,
+        AccountsReportsGenerateCsvMetrics_FUNNELIMPRESSIONS,
+        AccountsReportsGenerateCsvMetrics_FUNNELCLICKS,
+        AccountsReportsGenerateCsvMetrics_FUNNELRPM,
         ..
       ),
 
     -- * AccountsReportsGenerateCsvReportingTimeZone
     AccountsReportsGenerateCsvReportingTimeZone
-      ( AccountsReportsGenerateCsvReportingTimeZone_REPORTINGTIMEZONEUNSPECIFIED,
+      (
+        AccountsReportsGenerateCsvReportingTimeZone_REPORTINGTIMEZONEUNSPECIFIED,
         AccountsReportsGenerateCsvReportingTimeZone_ACCOUNTTIMEZONE,
         AccountsReportsGenerateCsvReportingTimeZone_GOOGLETIMEZONE,
         ..
@@ -327,7 +379,8 @@ module Gogol.AdSense.Internal.Sum
 
     -- * AccountsReportsSavedGenerateDateRange
     AccountsReportsSavedGenerateDateRange
-      ( AccountsReportsSavedGenerateDateRange_REPORTINGDATERANGEUNSPECIFIED,
+      (
+        AccountsReportsSavedGenerateDateRange_REPORTINGDATERANGEUNSPECIFIED,
         AccountsReportsSavedGenerateDateRange_Custom,
         AccountsReportsSavedGenerateDateRange_Today,
         AccountsReportsSavedGenerateDateRange_Yesterday,
@@ -340,7 +393,8 @@ module Gogol.AdSense.Internal.Sum
 
     -- * AccountsReportsSavedGenerateReportingTimeZone
     AccountsReportsSavedGenerateReportingTimeZone
-      ( AccountsReportsSavedGenerateReportingTimeZone_REPORTINGTIMEZONEUNSPECIFIED,
+      (
+        AccountsReportsSavedGenerateReportingTimeZone_REPORTINGTIMEZONEUNSPECIFIED,
         AccountsReportsSavedGenerateReportingTimeZone_ACCOUNTTIMEZONE,
         AccountsReportsSavedGenerateReportingTimeZone_GOOGLETIMEZONE,
         ..
@@ -348,7 +402,8 @@ module Gogol.AdSense.Internal.Sum
 
     -- * AccountsReportsSavedGenerateCsvDateRange
     AccountsReportsSavedGenerateCsvDateRange
-      ( AccountsReportsSavedGenerateCsvDateRange_REPORTINGDATERANGEUNSPECIFIED,
+      (
+        AccountsReportsSavedGenerateCsvDateRange_REPORTINGDATERANGEUNSPECIFIED,
         AccountsReportsSavedGenerateCsvDateRange_Custom,
         AccountsReportsSavedGenerateCsvDateRange_Today,
         AccountsReportsSavedGenerateCsvDateRange_Yesterday,
@@ -361,28 +416,28 @@ module Gogol.AdSense.Internal.Sum
 
     -- * AccountsReportsSavedGenerateCsvReportingTimeZone
     AccountsReportsSavedGenerateCsvReportingTimeZone
-      ( AccountsReportsSavedGenerateCsvReportingTimeZone_REPORTINGTIMEZONEUNSPECIFIED,
+      (
+        AccountsReportsSavedGenerateCsvReportingTimeZone_REPORTINGTIMEZONEUNSPECIFIED,
         AccountsReportsSavedGenerateCsvReportingTimeZone_ACCOUNTTIMEZONE,
         AccountsReportsSavedGenerateCsvReportingTimeZone_GOOGLETIMEZONE,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -395,21 +450,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | Output only. State of the account.
-newtype Account_State = Account_State {fromAccount_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Account_State = Account_State { fromAccount_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | State unspecified.
 pattern Account_State_STATEUNSPECIFIED :: Account_State
@@ -432,21 +486,20 @@ pattern Account_State_Closed = Account_State "CLOSED"
   Account_State_Ready,
   Account_State_NEEDSATTENTION,
   Account_State_Closed,
-  Account_State
-  #-}
+  Account_State #-}
 
 -- | Output only. State of the ad client.
-newtype AdClient_State = AdClient_State {fromAdClient_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AdClient_State = AdClient_State { fromAdClient_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | State unspecified.
 pattern AdClient_State_STATEUNSPECIFIED :: AdClient_State
@@ -469,21 +522,20 @@ pattern AdClient_State_REQUIRESREVIEW = AdClient_State "REQUIRES_REVIEW"
   AdClient_State_Ready,
   AdClient_State_GETTINGREADY,
   AdClient_State_REQUIRESREVIEW,
-  AdClient_State
-  #-}
+  AdClient_State #-}
 
--- | State of the ad unit.
-newtype AdUnit_State = AdUnit_State {fromAdUnit_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Required. State of the ad unit.
+newtype AdUnit_State = AdUnit_State { fromAdUnit_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | State unspecified.
 pattern AdUnit_State_STATEUNSPECIFIED :: AdUnit_State
@@ -501,21 +553,20 @@ pattern AdUnit_State_Archived = AdUnit_State "ARCHIVED"
   AdUnit_State_STATEUNSPECIFIED,
   AdUnit_State_Active,
   AdUnit_State_Archived,
-  AdUnit_State
-  #-}
+  AdUnit_State #-}
 
 -- | Output only. Severity of this alert.
-newtype Alert_Severity = Alert_Severity {fromAlert_Severity :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Alert_Severity = Alert_Severity { fromAlert_Severity :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified severity.
 pattern Alert_Severity_SEVERITYUNSPECIFIED :: Alert_Severity
@@ -538,21 +589,20 @@ pattern Alert_Severity_Severe = Alert_Severity "SEVERE"
   Alert_Severity_Info,
   Alert_Severity_Warning,
   Alert_Severity_Severe,
-  Alert_Severity
-  #-}
+  Alert_Severity #-}
 
 -- | Required. Type of the ad unit.
-newtype ContentAdsSettings_Type = ContentAdsSettings_Type {fromContentAdsSettings_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ContentAdsSettings_Type = ContentAdsSettings_Type { fromContentAdsSettings_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified ad unit type.
 pattern ContentAdsSettings_Type_TYPEUNSPECIFIED :: ContentAdsSettings_Type
@@ -585,21 +635,20 @@ pattern ContentAdsSettings_Type_Link = ContentAdsSettings_Type "LINK"
   ContentAdsSettings_Type_Article,
   ContentAdsSettings_Type_MATCHEDCONTENT,
   ContentAdsSettings_Type_Link,
-  ContentAdsSettings_Type
-  #-}
+  ContentAdsSettings_Type #-}
 
 -- | Required. Type of the header.
-newtype Header_Type = Header_Type {fromHeader_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Header_Type = Header_Type { fromHeader_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified header.
 pattern Header_Type_HEADERTYPEUNSPECIFIED :: Header_Type
@@ -637,21 +686,102 @@ pattern Header_Type_METRICDECIMAL = Header_Type "METRIC_DECIMAL"
   Header_Type_METRICCURRENCY,
   Header_Type_METRICMILLISECONDS,
   Header_Type_METRICDECIMAL,
-  Header_Type
-  #-}
+  Header_Type #-}
+
+-- | Required. The most severe action taken on the entity over the past seven days.
+newtype PolicyIssue_Action = PolicyIssue_Action { fromPolicyIssue_Action :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | The action is unspecified.
+pattern PolicyIssue_Action_ENFORCEMENTACTIONUNSPECIFIED :: PolicyIssue_Action
+pattern PolicyIssue_Action_ENFORCEMENTACTIONUNSPECIFIED = PolicyIssue_Action "ENFORCEMENT_ACTION_UNSPECIFIED"
+
+-- | No ad serving enforcement is currently present, but enforcement will start on the @warning_escalation_date@ if the issue is not resolved.
+pattern PolicyIssue_Action_Warned :: PolicyIssue_Action
+pattern PolicyIssue_Action_Warned = PolicyIssue_Action "WARNED"
+
+-- | Ad serving demand has been restricted on the entity.
+pattern PolicyIssue_Action_ADSERVINGRESTRICTED :: PolicyIssue_Action
+pattern PolicyIssue_Action_ADSERVINGRESTRICTED = PolicyIssue_Action "AD_SERVING_RESTRICTED"
+
+-- | Ad serving has been disabled on the entity.
+pattern PolicyIssue_Action_ADSERVINGDISABLED :: PolicyIssue_Action
+pattern PolicyIssue_Action_ADSERVINGDISABLED = PolicyIssue_Action "AD_SERVING_DISABLED"
+
+-- | Ads are being served for the entity but Confirmed Click is being applied to the ads. See https:\/\/support.google.com\/adsense\/answer\/10025624.
+pattern PolicyIssue_Action_ADSERVEDWITHCLICKCONFIRMATION :: PolicyIssue_Action
+pattern PolicyIssue_Action_ADSERVEDWITHCLICKCONFIRMATION = PolicyIssue_Action "AD_SERVED_WITH_CLICK_CONFIRMATION"
+
+-- | Ad personalization is restricted because the ad requests coming from the EEA and UK do not have a TCF string or the Consent Management Platform (CMP) indicated by the TCF string is not Google certified. As a result, basic\/limited ads will be served. See https:\/\/support.google.com\/adsense\/answer\/13554116
+pattern PolicyIssue_Action_ADPERSONALIZATIONRESTRICTED :: PolicyIssue_Action
+pattern PolicyIssue_Action_ADPERSONALIZATIONRESTRICTED = PolicyIssue_Action "AD_PERSONALIZATION_RESTRICTED"
+
+{-# COMPLETE
+  PolicyIssue_Action_ENFORCEMENTACTIONUNSPECIFIED,
+  PolicyIssue_Action_Warned,
+  PolicyIssue_Action_ADSERVINGRESTRICTED,
+  PolicyIssue_Action_ADSERVINGDISABLED,
+  PolicyIssue_Action_ADSERVEDWITHCLICKCONFIRMATION,
+  PolicyIssue_Action_ADPERSONALIZATIONRESTRICTED,
+  PolicyIssue_Action #-}
+
+-- | Required. Type of the entity indicating if the entity is a site, site-section, or page.
+newtype PolicyIssue_EntityType = PolicyIssue_EntityType { fromPolicyIssue_EntityType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | The entity type is unspecified.
+pattern PolicyIssue_EntityType_ENTITYTYPEUNSPECIFIED :: PolicyIssue_EntityType
+pattern PolicyIssue_EntityType_ENTITYTYPEUNSPECIFIED = PolicyIssue_EntityType "ENTITY_TYPE_UNSPECIFIED"
+
+-- | The enforced entity is an entire website.
+pattern PolicyIssue_EntityType_Site :: PolicyIssue_EntityType
+pattern PolicyIssue_EntityType_Site = PolicyIssue_EntityType "SITE"
+
+-- | The enforced entity is a particular section of a website. All the pages with this prefix are enforced.
+pattern PolicyIssue_EntityType_SITESECTION :: PolicyIssue_EntityType
+pattern PolicyIssue_EntityType_SITESECTION = PolicyIssue_EntityType "SITE_SECTION"
+
+-- | The enforced entity is a single web page.
+pattern PolicyIssue_EntityType_Page :: PolicyIssue_EntityType
+pattern PolicyIssue_EntityType_Page = PolicyIssue_EntityType "PAGE"
+
+{-# COMPLETE
+  PolicyIssue_EntityType_ENTITYTYPEUNSPECIFIED,
+  PolicyIssue_EntityType_Site,
+  PolicyIssue_EntityType_SITESECTION,
+  PolicyIssue_EntityType_Page,
+  PolicyIssue_EntityType #-}
 
 -- | Output only. State of a site.
-newtype Site_State = Site_State {fromSite_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Site_State = Site_State { fromSite_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | State unspecified.
 pattern Site_State_STATEUNSPECIFIED :: Site_State
@@ -679,21 +809,20 @@ pattern Site_State_NEEDSATTENTION = Site_State "NEEDS_ATTENTION"
   Site_State_GETTINGREADY,
   Site_State_Ready,
   Site_State_NEEDSATTENTION,
-  Site_State
-  #-}
+  Site_State #-}
 
 -- | Date range of the report, if unset the range will be considered CUSTOM.
-newtype AccountsReportsGenerateDateRange = AccountsReportsGenerateDateRange {fromAccountsReportsGenerateDateRange :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AccountsReportsGenerateDateRange = AccountsReportsGenerateDateRange { fromAccountsReportsGenerateDateRange :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified date range.
 pattern AccountsReportsGenerateDateRange_REPORTINGDATERANGEUNSPECIFIED :: AccountsReportsGenerateDateRange
@@ -736,21 +865,20 @@ pattern AccountsReportsGenerateDateRange_LAST30DAYS = AccountsReportsGenerateDat
   AccountsReportsGenerateDateRange_YEARTODATE,
   AccountsReportsGenerateDateRange_LAST7DAYS,
   AccountsReportsGenerateDateRange_LAST30DAYS,
-  AccountsReportsGenerateDateRange
-  #-}
+  AccountsReportsGenerateDateRange #-}
 
 -- | Dimensions to base the report on.
-newtype AccountsReportsGenerateDimensions = AccountsReportsGenerateDimensions {fromAccountsReportsGenerateDimensions :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AccountsReportsGenerateDimensions = AccountsReportsGenerateDimensions { fromAccountsReportsGenerateDimensions :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified dimension.
 pattern AccountsReportsGenerateDimensions_DIMENSIONUNSPECIFIED :: AccountsReportsGenerateDimensions
@@ -811,6 +939,10 @@ pattern AccountsReportsGenerateDimensions_CUSTOMCHANNELNAME = AccountsReportsGen
 -- | Unique ID of a custom channel. The members of this dimension match the values from CustomChannel.reporting/dimension/id.
 pattern AccountsReportsGenerateDimensions_CUSTOMCHANNELID :: AccountsReportsGenerateDimensions
 pattern AccountsReportsGenerateDimensions_CUSTOMCHANNELID = AccountsReportsGenerateDimensions "CUSTOM_CHANNEL_ID"
+
+-- | Unique ID of a hosted client\'s custom channel.
+pattern AccountsReportsGenerateDimensions_HOSTEDCUSTOMCHANNELID :: AccountsReportsGenerateDimensions
+pattern AccountsReportsGenerateDimensions_HOSTEDCUSTOMCHANNELID = AccountsReportsGenerateDimensions "HOSTED_CUSTOM_CHANNEL_ID"
 
 -- | Domain name of a verified site (e.g. \"example.com\"). The members of this dimension match the values from Site.domain.
 pattern AccountsReportsGenerateDimensions_OWNEDSITEDOMAINNAME :: AccountsReportsGenerateDimensions
@@ -960,6 +1092,7 @@ pattern AccountsReportsGenerateDimensions_WEBSEARCHQUERYSTRING = AccountsReports
   AccountsReportsGenerateDimensions_ADUNITSIZECODE,
   AccountsReportsGenerateDimensions_CUSTOMCHANNELNAME,
   AccountsReportsGenerateDimensions_CUSTOMCHANNELID,
+  AccountsReportsGenerateDimensions_HOSTEDCUSTOMCHANNELID,
   AccountsReportsGenerateDimensions_OWNEDSITEDOMAINNAME,
   AccountsReportsGenerateDimensions_OWNEDSITEID,
   AccountsReportsGenerateDimensions_PAGEURL,
@@ -993,21 +1126,20 @@ pattern AccountsReportsGenerateDimensions_WEBSEARCHQUERYSTRING = AccountsReports
   AccountsReportsGenerateDimensions_CUSTOMSEARCHSTYLEID,
   AccountsReportsGenerateDimensions_DOMAINREGISTRANT,
   AccountsReportsGenerateDimensions_WEBSEARCHQUERYSTRING,
-  AccountsReportsGenerateDimensions
-  #-}
+  AccountsReportsGenerateDimensions #-}
 
 -- | Required. Reporting metrics.
-newtype AccountsReportsGenerateMetrics = AccountsReportsGenerateMetrics {fromAccountsReportsGenerateMetrics :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AccountsReportsGenerateMetrics = AccountsReportsGenerateMetrics { fromAccountsReportsGenerateMetrics :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified metric.
 pattern AccountsReportsGenerateMetrics_METRICUNSPECIFIED :: AccountsReportsGenerateMetrics
@@ -1141,6 +1273,22 @@ pattern AccountsReportsGenerateMetrics_TOTALEARNINGS = AccountsReportsGenerateMe
 pattern AccountsReportsGenerateMetrics_WEBSEARCHRESULTPAGES :: AccountsReportsGenerateMetrics
 pattern AccountsReportsGenerateMetrics_WEBSEARCHRESULTPAGES = AccountsReportsGenerateMetrics "WEBSEARCH_RESULT_PAGES"
 
+-- | Number of requests for non-ad units (for example a related search unit). For more information, see <https://support.google.com/adsense/answer/11586959 Funnel requests>.
+pattern AccountsReportsGenerateMetrics_FUNNELREQUESTS :: AccountsReportsGenerateMetrics
+pattern AccountsReportsGenerateMetrics_FUNNELREQUESTS = AccountsReportsGenerateMetrics "FUNNEL_REQUESTS"
+
+-- | Number of requests for non-ad units ads that returned content that was shown to the user. For more information, see <https://support.google.com/adsense/answer/11585767 Funnel impressions>.
+pattern AccountsReportsGenerateMetrics_FUNNELIMPRESSIONS :: AccountsReportsGenerateMetrics
+pattern AccountsReportsGenerateMetrics_FUNNELIMPRESSIONS = AccountsReportsGenerateMetrics "FUNNEL_IMPRESSIONS"
+
+-- | Number of times a user clicked on a non-ad unit, triggering further ad requests. For more information, see <https://support.google.com/adsense/answer/11586382 Funnel clicks>.
+pattern AccountsReportsGenerateMetrics_FUNNELCLICKS :: AccountsReportsGenerateMetrics
+pattern AccountsReportsGenerateMetrics_FUNNELCLICKS = AccountsReportsGenerateMetrics "FUNNEL_CLICKS"
+
+-- | Revenue per thousand funnel impressions. This is calculated by dividing estimated revenue by the number of funnel impressions multiplied by 1000. For more information, see <https://support.google.com/adsense/answer/11585979 Funnel RPM>.
+pattern AccountsReportsGenerateMetrics_FUNNELRPM :: AccountsReportsGenerateMetrics
+pattern AccountsReportsGenerateMetrics_FUNNELRPM = AccountsReportsGenerateMetrics "FUNNEL_RPM"
+
 {-# COMPLETE
   AccountsReportsGenerateMetrics_METRICUNSPECIFIED,
   AccountsReportsGenerateMetrics_PAGEVIEWS,
@@ -1175,21 +1323,24 @@ pattern AccountsReportsGenerateMetrics_WEBSEARCHRESULTPAGES = AccountsReportsGen
   AccountsReportsGenerateMetrics_ADSPERIMPRESSION,
   AccountsReportsGenerateMetrics_TOTALEARNINGS,
   AccountsReportsGenerateMetrics_WEBSEARCHRESULTPAGES,
-  AccountsReportsGenerateMetrics
-  #-}
+  AccountsReportsGenerateMetrics_FUNNELREQUESTS,
+  AccountsReportsGenerateMetrics_FUNNELIMPRESSIONS,
+  AccountsReportsGenerateMetrics_FUNNELCLICKS,
+  AccountsReportsGenerateMetrics_FUNNELRPM,
+  AccountsReportsGenerateMetrics #-}
 
 -- | Timezone in which to generate the report. If unspecified, this defaults to the account timezone. For more information, see <https://support.google.com/adsense/answer/9830725 changing the time zone of your reports>.
-newtype AccountsReportsGenerateReportingTimeZone = AccountsReportsGenerateReportingTimeZone {fromAccountsReportsGenerateReportingTimeZone :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AccountsReportsGenerateReportingTimeZone = AccountsReportsGenerateReportingTimeZone { fromAccountsReportsGenerateReportingTimeZone :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified timezone.
 pattern AccountsReportsGenerateReportingTimeZone_REPORTINGTIMEZONEUNSPECIFIED :: AccountsReportsGenerateReportingTimeZone
@@ -1207,21 +1358,20 @@ pattern AccountsReportsGenerateReportingTimeZone_GOOGLETIMEZONE = AccountsReport
   AccountsReportsGenerateReportingTimeZone_REPORTINGTIMEZONEUNSPECIFIED,
   AccountsReportsGenerateReportingTimeZone_ACCOUNTTIMEZONE,
   AccountsReportsGenerateReportingTimeZone_GOOGLETIMEZONE,
-  AccountsReportsGenerateReportingTimeZone
-  #-}
+  AccountsReportsGenerateReportingTimeZone #-}
 
 -- | Date range of the report, if unset the range will be considered CUSTOM.
-newtype AccountsReportsGenerateCsvDateRange = AccountsReportsGenerateCsvDateRange {fromAccountsReportsGenerateCsvDateRange :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AccountsReportsGenerateCsvDateRange = AccountsReportsGenerateCsvDateRange { fromAccountsReportsGenerateCsvDateRange :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified date range.
 pattern AccountsReportsGenerateCsvDateRange_REPORTINGDATERANGEUNSPECIFIED :: AccountsReportsGenerateCsvDateRange
@@ -1264,21 +1414,20 @@ pattern AccountsReportsGenerateCsvDateRange_LAST30DAYS = AccountsReportsGenerate
   AccountsReportsGenerateCsvDateRange_YEARTODATE,
   AccountsReportsGenerateCsvDateRange_LAST7DAYS,
   AccountsReportsGenerateCsvDateRange_LAST30DAYS,
-  AccountsReportsGenerateCsvDateRange
-  #-}
+  AccountsReportsGenerateCsvDateRange #-}
 
 -- | Dimensions to base the report on.
-newtype AccountsReportsGenerateCsvDimensions = AccountsReportsGenerateCsvDimensions {fromAccountsReportsGenerateCsvDimensions :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AccountsReportsGenerateCsvDimensions = AccountsReportsGenerateCsvDimensions { fromAccountsReportsGenerateCsvDimensions :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified dimension.
 pattern AccountsReportsGenerateCsvDimensions_DIMENSIONUNSPECIFIED :: AccountsReportsGenerateCsvDimensions
@@ -1339,6 +1488,10 @@ pattern AccountsReportsGenerateCsvDimensions_CUSTOMCHANNELNAME = AccountsReports
 -- | Unique ID of a custom channel. The members of this dimension match the values from CustomChannel.reporting/dimension/id.
 pattern AccountsReportsGenerateCsvDimensions_CUSTOMCHANNELID :: AccountsReportsGenerateCsvDimensions
 pattern AccountsReportsGenerateCsvDimensions_CUSTOMCHANNELID = AccountsReportsGenerateCsvDimensions "CUSTOM_CHANNEL_ID"
+
+-- | Unique ID of a hosted client\'s custom channel.
+pattern AccountsReportsGenerateCsvDimensions_HOSTEDCUSTOMCHANNELID :: AccountsReportsGenerateCsvDimensions
+pattern AccountsReportsGenerateCsvDimensions_HOSTEDCUSTOMCHANNELID = AccountsReportsGenerateCsvDimensions "HOSTED_CUSTOM_CHANNEL_ID"
 
 -- | Domain name of a verified site (e.g. \"example.com\"). The members of this dimension match the values from Site.domain.
 pattern AccountsReportsGenerateCsvDimensions_OWNEDSITEDOMAINNAME :: AccountsReportsGenerateCsvDimensions
@@ -1488,6 +1641,7 @@ pattern AccountsReportsGenerateCsvDimensions_WEBSEARCHQUERYSTRING = AccountsRepo
   AccountsReportsGenerateCsvDimensions_ADUNITSIZECODE,
   AccountsReportsGenerateCsvDimensions_CUSTOMCHANNELNAME,
   AccountsReportsGenerateCsvDimensions_CUSTOMCHANNELID,
+  AccountsReportsGenerateCsvDimensions_HOSTEDCUSTOMCHANNELID,
   AccountsReportsGenerateCsvDimensions_OWNEDSITEDOMAINNAME,
   AccountsReportsGenerateCsvDimensions_OWNEDSITEID,
   AccountsReportsGenerateCsvDimensions_PAGEURL,
@@ -1521,21 +1675,20 @@ pattern AccountsReportsGenerateCsvDimensions_WEBSEARCHQUERYSTRING = AccountsRepo
   AccountsReportsGenerateCsvDimensions_CUSTOMSEARCHSTYLEID,
   AccountsReportsGenerateCsvDimensions_DOMAINREGISTRANT,
   AccountsReportsGenerateCsvDimensions_WEBSEARCHQUERYSTRING,
-  AccountsReportsGenerateCsvDimensions
-  #-}
+  AccountsReportsGenerateCsvDimensions #-}
 
 -- | Required. Reporting metrics.
-newtype AccountsReportsGenerateCsvMetrics = AccountsReportsGenerateCsvMetrics {fromAccountsReportsGenerateCsvMetrics :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AccountsReportsGenerateCsvMetrics = AccountsReportsGenerateCsvMetrics { fromAccountsReportsGenerateCsvMetrics :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified metric.
 pattern AccountsReportsGenerateCsvMetrics_METRICUNSPECIFIED :: AccountsReportsGenerateCsvMetrics
@@ -1669,6 +1822,22 @@ pattern AccountsReportsGenerateCsvMetrics_TOTALEARNINGS = AccountsReportsGenerat
 pattern AccountsReportsGenerateCsvMetrics_WEBSEARCHRESULTPAGES :: AccountsReportsGenerateCsvMetrics
 pattern AccountsReportsGenerateCsvMetrics_WEBSEARCHRESULTPAGES = AccountsReportsGenerateCsvMetrics "WEBSEARCH_RESULT_PAGES"
 
+-- | Number of requests for non-ad units (for example a related search unit). For more information, see <https://support.google.com/adsense/answer/11586959 Funnel requests>.
+pattern AccountsReportsGenerateCsvMetrics_FUNNELREQUESTS :: AccountsReportsGenerateCsvMetrics
+pattern AccountsReportsGenerateCsvMetrics_FUNNELREQUESTS = AccountsReportsGenerateCsvMetrics "FUNNEL_REQUESTS"
+
+-- | Number of requests for non-ad units ads that returned content that was shown to the user. For more information, see <https://support.google.com/adsense/answer/11585767 Funnel impressions>.
+pattern AccountsReportsGenerateCsvMetrics_FUNNELIMPRESSIONS :: AccountsReportsGenerateCsvMetrics
+pattern AccountsReportsGenerateCsvMetrics_FUNNELIMPRESSIONS = AccountsReportsGenerateCsvMetrics "FUNNEL_IMPRESSIONS"
+
+-- | Number of times a user clicked on a non-ad unit, triggering further ad requests. For more information, see <https://support.google.com/adsense/answer/11586382 Funnel clicks>.
+pattern AccountsReportsGenerateCsvMetrics_FUNNELCLICKS :: AccountsReportsGenerateCsvMetrics
+pattern AccountsReportsGenerateCsvMetrics_FUNNELCLICKS = AccountsReportsGenerateCsvMetrics "FUNNEL_CLICKS"
+
+-- | Revenue per thousand funnel impressions. This is calculated by dividing estimated revenue by the number of funnel impressions multiplied by 1000. For more information, see <https://support.google.com/adsense/answer/11585979 Funnel RPM>.
+pattern AccountsReportsGenerateCsvMetrics_FUNNELRPM :: AccountsReportsGenerateCsvMetrics
+pattern AccountsReportsGenerateCsvMetrics_FUNNELRPM = AccountsReportsGenerateCsvMetrics "FUNNEL_RPM"
+
 {-# COMPLETE
   AccountsReportsGenerateCsvMetrics_METRICUNSPECIFIED,
   AccountsReportsGenerateCsvMetrics_PAGEVIEWS,
@@ -1703,21 +1872,24 @@ pattern AccountsReportsGenerateCsvMetrics_WEBSEARCHRESULTPAGES = AccountsReports
   AccountsReportsGenerateCsvMetrics_ADSPERIMPRESSION,
   AccountsReportsGenerateCsvMetrics_TOTALEARNINGS,
   AccountsReportsGenerateCsvMetrics_WEBSEARCHRESULTPAGES,
-  AccountsReportsGenerateCsvMetrics
-  #-}
+  AccountsReportsGenerateCsvMetrics_FUNNELREQUESTS,
+  AccountsReportsGenerateCsvMetrics_FUNNELIMPRESSIONS,
+  AccountsReportsGenerateCsvMetrics_FUNNELCLICKS,
+  AccountsReportsGenerateCsvMetrics_FUNNELRPM,
+  AccountsReportsGenerateCsvMetrics #-}
 
 -- | Timezone in which to generate the report. If unspecified, this defaults to the account timezone. For more information, see <https://support.google.com/adsense/answer/9830725 changing the time zone of your reports>.
-newtype AccountsReportsGenerateCsvReportingTimeZone = AccountsReportsGenerateCsvReportingTimeZone {fromAccountsReportsGenerateCsvReportingTimeZone :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AccountsReportsGenerateCsvReportingTimeZone = AccountsReportsGenerateCsvReportingTimeZone { fromAccountsReportsGenerateCsvReportingTimeZone :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified timezone.
 pattern AccountsReportsGenerateCsvReportingTimeZone_REPORTINGTIMEZONEUNSPECIFIED :: AccountsReportsGenerateCsvReportingTimeZone
@@ -1735,21 +1907,20 @@ pattern AccountsReportsGenerateCsvReportingTimeZone_GOOGLETIMEZONE = AccountsRep
   AccountsReportsGenerateCsvReportingTimeZone_REPORTINGTIMEZONEUNSPECIFIED,
   AccountsReportsGenerateCsvReportingTimeZone_ACCOUNTTIMEZONE,
   AccountsReportsGenerateCsvReportingTimeZone_GOOGLETIMEZONE,
-  AccountsReportsGenerateCsvReportingTimeZone
-  #-}
+  AccountsReportsGenerateCsvReportingTimeZone #-}
 
 -- | Date range of the report, if unset the range will be considered CUSTOM.
-newtype AccountsReportsSavedGenerateDateRange = AccountsReportsSavedGenerateDateRange {fromAccountsReportsSavedGenerateDateRange :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AccountsReportsSavedGenerateDateRange = AccountsReportsSavedGenerateDateRange { fromAccountsReportsSavedGenerateDateRange :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified date range.
 pattern AccountsReportsSavedGenerateDateRange_REPORTINGDATERANGEUNSPECIFIED :: AccountsReportsSavedGenerateDateRange
@@ -1792,21 +1963,20 @@ pattern AccountsReportsSavedGenerateDateRange_LAST30DAYS = AccountsReportsSavedG
   AccountsReportsSavedGenerateDateRange_YEARTODATE,
   AccountsReportsSavedGenerateDateRange_LAST7DAYS,
   AccountsReportsSavedGenerateDateRange_LAST30DAYS,
-  AccountsReportsSavedGenerateDateRange
-  #-}
+  AccountsReportsSavedGenerateDateRange #-}
 
 -- | Timezone in which to generate the report. If unspecified, this defaults to the account timezone. For more information, see <https://support.google.com/adsense/answer/9830725 changing the time zone of your reports>.
-newtype AccountsReportsSavedGenerateReportingTimeZone = AccountsReportsSavedGenerateReportingTimeZone {fromAccountsReportsSavedGenerateReportingTimeZone :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AccountsReportsSavedGenerateReportingTimeZone = AccountsReportsSavedGenerateReportingTimeZone { fromAccountsReportsSavedGenerateReportingTimeZone :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified timezone.
 pattern AccountsReportsSavedGenerateReportingTimeZone_REPORTINGTIMEZONEUNSPECIFIED :: AccountsReportsSavedGenerateReportingTimeZone
@@ -1824,21 +1994,20 @@ pattern AccountsReportsSavedGenerateReportingTimeZone_GOOGLETIMEZONE = AccountsR
   AccountsReportsSavedGenerateReportingTimeZone_REPORTINGTIMEZONEUNSPECIFIED,
   AccountsReportsSavedGenerateReportingTimeZone_ACCOUNTTIMEZONE,
   AccountsReportsSavedGenerateReportingTimeZone_GOOGLETIMEZONE,
-  AccountsReportsSavedGenerateReportingTimeZone
-  #-}
+  AccountsReportsSavedGenerateReportingTimeZone #-}
 
 -- | Date range of the report, if unset the range will be considered CUSTOM.
-newtype AccountsReportsSavedGenerateCsvDateRange = AccountsReportsSavedGenerateCsvDateRange {fromAccountsReportsSavedGenerateCsvDateRange :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AccountsReportsSavedGenerateCsvDateRange = AccountsReportsSavedGenerateCsvDateRange { fromAccountsReportsSavedGenerateCsvDateRange :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified date range.
 pattern AccountsReportsSavedGenerateCsvDateRange_REPORTINGDATERANGEUNSPECIFIED :: AccountsReportsSavedGenerateCsvDateRange
@@ -1881,21 +2050,20 @@ pattern AccountsReportsSavedGenerateCsvDateRange_LAST30DAYS = AccountsReportsSav
   AccountsReportsSavedGenerateCsvDateRange_YEARTODATE,
   AccountsReportsSavedGenerateCsvDateRange_LAST7DAYS,
   AccountsReportsSavedGenerateCsvDateRange_LAST30DAYS,
-  AccountsReportsSavedGenerateCsvDateRange
-  #-}
+  AccountsReportsSavedGenerateCsvDateRange #-}
 
 -- | Timezone in which to generate the report. If unspecified, this defaults to the account timezone. For more information, see <https://support.google.com/adsense/answer/9830725 changing the time zone of your reports>.
-newtype AccountsReportsSavedGenerateCsvReportingTimeZone = AccountsReportsSavedGenerateCsvReportingTimeZone {fromAccountsReportsSavedGenerateCsvReportingTimeZone :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AccountsReportsSavedGenerateCsvReportingTimeZone = AccountsReportsSavedGenerateCsvReportingTimeZone { fromAccountsReportsSavedGenerateCsvReportingTimeZone :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified timezone.
 pattern AccountsReportsSavedGenerateCsvReportingTimeZone_REPORTINGTIMEZONEUNSPECIFIED :: AccountsReportsSavedGenerateCsvReportingTimeZone
@@ -1913,5 +2081,4 @@ pattern AccountsReportsSavedGenerateCsvReportingTimeZone_GOOGLETIMEZONE = Accoun
   AccountsReportsSavedGenerateCsvReportingTimeZone_REPORTINGTIMEZONEUNSPECIFIED,
   AccountsReportsSavedGenerateCsvReportingTimeZone_ACCOUNTTIMEZONE,
   AccountsReportsSavedGenerateCsvReportingTimeZone_GOOGLETIMEZONE,
-  AccountsReportsSavedGenerateCsvReportingTimeZone
-  #-}
+  AccountsReportsSavedGenerateCsvReportingTimeZone #-}

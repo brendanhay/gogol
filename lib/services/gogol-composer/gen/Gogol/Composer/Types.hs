@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,224 +26,354 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Composer.Types
-  ( -- * Configuration
-    composerService,
+    (
+    -- * Configuration
+      composerService
 
     -- * OAuth Scopes
-    CloudPlatform'FullControl,
+    , CloudPlatform'FullControl
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
+
+    -- ** AirflowMetadataRetentionPolicyConfig
+    , AirflowMetadataRetentionPolicyConfig (..)
+    , newAirflowMetadataRetentionPolicyConfig
+
+    -- ** AirflowMetadataRetentionPolicyConfig_RetentionMode
+    , AirflowMetadataRetentionPolicyConfig_RetentionMode (..)
 
     -- ** AllowedIpRange
-    AllowedIpRange (..),
-    newAllowedIpRange,
+    , AllowedIpRange (..)
+    , newAllowedIpRange
+
+    -- ** CheckUpgradeRequest
+    , CheckUpgradeRequest (..)
+    , newCheckUpgradeRequest
 
     -- ** CheckUpgradeResponse
-    CheckUpgradeResponse (..),
-    newCheckUpgradeResponse,
+    , CheckUpgradeResponse (..)
+    , newCheckUpgradeResponse
 
     -- ** CheckUpgradeResponse_ContainsPypiModulesConflict
-    CheckUpgradeResponse_ContainsPypiModulesConflict (..),
+    , CheckUpgradeResponse_ContainsPypiModulesConflict (..)
 
     -- ** CheckUpgradeResponse_PypiDependencies
-    CheckUpgradeResponse_PypiDependencies (..),
-    newCheckUpgradeResponse_PypiDependencies,
+    , CheckUpgradeResponse_PypiDependencies (..)
+    , newCheckUpgradeResponse_PypiDependencies
 
     -- ** CidrBlock
-    CidrBlock (..),
-    newCidrBlock,
+    , CidrBlock (..)
+    , newCidrBlock
+
+    -- ** CloudDataLineageIntegration
+    , CloudDataLineageIntegration (..)
+    , newCloudDataLineageIntegration
+
+    -- ** ComposerWorkload
+    , ComposerWorkload (..)
+    , newComposerWorkload
+
+    -- ** ComposerWorkload_Type
+    , ComposerWorkload_Type (..)
+
+    -- ** ComposerWorkloadStatus
+    , ComposerWorkloadStatus (..)
+    , newComposerWorkloadStatus
+
+    -- ** ComposerWorkloadStatus_State
+    , ComposerWorkloadStatus_State (..)
+
+    -- ** DagProcessorResource
+    , DagProcessorResource (..)
+    , newDagProcessorResource
+
+    -- ** DataRetentionConfig
+    , DataRetentionConfig (..)
+    , newDataRetentionConfig
 
     -- ** DatabaseConfig
-    DatabaseConfig (..),
-    newDatabaseConfig,
+    , DatabaseConfig (..)
+    , newDatabaseConfig
+
+    -- ** DatabaseFailoverRequest
+    , DatabaseFailoverRequest (..)
+    , newDatabaseFailoverRequest
+
+    -- ** DatabaseFailoverResponse
+    , DatabaseFailoverResponse (..)
+    , newDatabaseFailoverResponse
 
     -- ** Date
-    Date (..),
-    newDate,
+    , Date (..)
+    , newDate
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** EncryptionConfig
-    EncryptionConfig (..),
-    newEncryptionConfig,
+    , EncryptionConfig (..)
+    , newEncryptionConfig
 
     -- ** Environment
-    Environment (..),
-    newEnvironment,
+    , Environment (..)
+    , newEnvironment
 
     -- ** Environment_Labels
-    Environment_Labels (..),
-    newEnvironment_Labels,
+    , Environment_Labels (..)
+    , newEnvironment_Labels
 
     -- ** Environment_State
-    Environment_State (..),
+    , Environment_State (..)
 
     -- ** EnvironmentConfig
-    EnvironmentConfig (..),
-    newEnvironmentConfig,
+    , EnvironmentConfig (..)
+    , newEnvironmentConfig
 
     -- ** EnvironmentConfig_EnvironmentSize
-    EnvironmentConfig_EnvironmentSize (..),
+    , EnvironmentConfig_EnvironmentSize (..)
+
+    -- ** EnvironmentConfig_ResilienceMode
+    , EnvironmentConfig_ResilienceMode (..)
+
+    -- ** ExecuteAirflowCommandRequest
+    , ExecuteAirflowCommandRequest (..)
+    , newExecuteAirflowCommandRequest
+
+    -- ** ExecuteAirflowCommandResponse
+    , ExecuteAirflowCommandResponse (..)
+    , newExecuteAirflowCommandResponse
+
+    -- ** ExitInfo
+    , ExitInfo (..)
+    , newExitInfo
+
+    -- ** FetchDatabasePropertiesResponse
+    , FetchDatabasePropertiesResponse (..)
+    , newFetchDatabasePropertiesResponse
 
     -- ** IPAllocationPolicy
-    IPAllocationPolicy (..),
-    newIPAllocationPolicy,
+    , IPAllocationPolicy (..)
+    , newIPAllocationPolicy
 
     -- ** ImageVersion
-    ImageVersion (..),
-    newImageVersion,
+    , ImageVersion (..)
+    , newImageVersion
+
+    -- ** Line
+    , Line (..)
+    , newLine
 
     -- ** ListEnvironmentsResponse
-    ListEnvironmentsResponse (..),
-    newListEnvironmentsResponse,
+    , ListEnvironmentsResponse (..)
+    , newListEnvironmentsResponse
 
     -- ** ListImageVersionsResponse
-    ListImageVersionsResponse (..),
-    newListImageVersionsResponse,
+    , ListImageVersionsResponse (..)
+    , newListImageVersionsResponse
 
     -- ** ListOperationsResponse
-    ListOperationsResponse (..),
-    newListOperationsResponse,
+    , ListOperationsResponse (..)
+    , newListOperationsResponse
+
+    -- ** ListUserWorkloadsConfigMapsResponse
+    , ListUserWorkloadsConfigMapsResponse (..)
+    , newListUserWorkloadsConfigMapsResponse
+
+    -- ** ListUserWorkloadsSecretsResponse
+    , ListUserWorkloadsSecretsResponse (..)
+    , newListUserWorkloadsSecretsResponse
+
+    -- ** ListWorkloadsResponse
+    , ListWorkloadsResponse (..)
+    , newListWorkloadsResponse
 
     -- ** LoadSnapshotRequest
-    LoadSnapshotRequest (..),
-    newLoadSnapshotRequest,
+    , LoadSnapshotRequest (..)
+    , newLoadSnapshotRequest
 
     -- ** LoadSnapshotResponse
-    LoadSnapshotResponse (..),
-    newLoadSnapshotResponse,
+    , LoadSnapshotResponse (..)
+    , newLoadSnapshotResponse
 
     -- ** MaintenanceWindow
-    MaintenanceWindow (..),
-    newMaintenanceWindow,
+    , MaintenanceWindow (..)
+    , newMaintenanceWindow
 
     -- ** MasterAuthorizedNetworksConfig
-    MasterAuthorizedNetworksConfig (..),
-    newMasterAuthorizedNetworksConfig,
+    , MasterAuthorizedNetworksConfig (..)
+    , newMasterAuthorizedNetworksConfig
 
     -- ** NetworkingConfig
-    NetworkingConfig (..),
-    newNetworkingConfig,
+    , NetworkingConfig (..)
+    , newNetworkingConfig
 
     -- ** NetworkingConfig_ConnectionType
-    NetworkingConfig_ConnectionType (..),
+    , NetworkingConfig_ConnectionType (..)
 
     -- ** NodeConfig
-    NodeConfig (..),
-    newNodeConfig,
+    , NodeConfig (..)
+    , newNodeConfig
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** OperationMetadata
-    OperationMetadata (..),
-    newOperationMetadata,
+    , OperationMetadata (..)
+    , newOperationMetadata
 
     -- ** OperationMetadata_OperationType
-    OperationMetadata_OperationType (..),
+    , OperationMetadata_OperationType (..)
 
     -- ** OperationMetadata_State
-    OperationMetadata_State (..),
+    , OperationMetadata_State (..)
+
+    -- ** PollAirflowCommandRequest
+    , PollAirflowCommandRequest (..)
+    , newPollAirflowCommandRequest
+
+    -- ** PollAirflowCommandResponse
+    , PollAirflowCommandResponse (..)
+    , newPollAirflowCommandResponse
 
     -- ** PrivateClusterConfig
-    PrivateClusterConfig (..),
-    newPrivateClusterConfig,
+    , PrivateClusterConfig (..)
+    , newPrivateClusterConfig
 
     -- ** PrivateEnvironmentConfig
-    PrivateEnvironmentConfig (..),
-    newPrivateEnvironmentConfig,
+    , PrivateEnvironmentConfig (..)
+    , newPrivateEnvironmentConfig
 
     -- ** RecoveryConfig
-    RecoveryConfig (..),
-    newRecoveryConfig,
+    , RecoveryConfig (..)
+    , newRecoveryConfig
 
     -- ** SaveSnapshotRequest
-    SaveSnapshotRequest (..),
-    newSaveSnapshotRequest,
+    , SaveSnapshotRequest (..)
+    , newSaveSnapshotRequest
 
     -- ** SaveSnapshotResponse
-    SaveSnapshotResponse (..),
-    newSaveSnapshotResponse,
+    , SaveSnapshotResponse (..)
+    , newSaveSnapshotResponse
 
     -- ** ScheduledSnapshotsConfig
-    ScheduledSnapshotsConfig (..),
-    newScheduledSnapshotsConfig,
+    , ScheduledSnapshotsConfig (..)
+    , newScheduledSnapshotsConfig
 
     -- ** SchedulerResource
-    SchedulerResource (..),
-    newSchedulerResource,
+    , SchedulerResource (..)
+    , newSchedulerResource
 
     -- ** SoftwareConfig
-    SoftwareConfig (..),
-    newSoftwareConfig,
+    , SoftwareConfig (..)
+    , newSoftwareConfig
 
     -- ** SoftwareConfig_AirflowConfigOverrides
-    SoftwareConfig_AirflowConfigOverrides (..),
-    newSoftwareConfig_AirflowConfigOverrides,
+    , SoftwareConfig_AirflowConfigOverrides (..)
+    , newSoftwareConfig_AirflowConfigOverrides
 
     -- ** SoftwareConfig_EnvVariables
-    SoftwareConfig_EnvVariables (..),
-    newSoftwareConfig_EnvVariables,
+    , SoftwareConfig_EnvVariables (..)
+    , newSoftwareConfig_EnvVariables
 
     -- ** SoftwareConfig_PypiPackages
-    SoftwareConfig_PypiPackages (..),
-    newSoftwareConfig_PypiPackages,
+    , SoftwareConfig_PypiPackages (..)
+    , newSoftwareConfig_PypiPackages
+
+    -- ** SoftwareConfig_WebServerPluginsMode
+    , SoftwareConfig_WebServerPluginsMode (..)
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
+
+    -- ** StopAirflowCommandRequest
+    , StopAirflowCommandRequest (..)
+    , newStopAirflowCommandRequest
+
+    -- ** StopAirflowCommandResponse
+    , StopAirflowCommandResponse (..)
+    , newStopAirflowCommandResponse
+
+    -- ** StorageConfig
+    , StorageConfig (..)
+    , newStorageConfig
+
+    -- ** TaskLogsRetentionConfig
+    , TaskLogsRetentionConfig (..)
+    , newTaskLogsRetentionConfig
+
+    -- ** TaskLogsRetentionConfig_StorageMode
+    , TaskLogsRetentionConfig_StorageMode (..)
+
+    -- ** TriggererResource
+    , TriggererResource (..)
+    , newTriggererResource
+
+    -- ** UserWorkloadsConfigMap
+    , UserWorkloadsConfigMap (..)
+    , newUserWorkloadsConfigMap
+
+    -- ** UserWorkloadsConfigMap_Data
+    , UserWorkloadsConfigMap_Data (..)
+    , newUserWorkloadsConfigMap_Data
+
+    -- ** UserWorkloadsSecret
+    , UserWorkloadsSecret (..)
+    , newUserWorkloadsSecret
+
+    -- ** UserWorkloadsSecret_Data
+    , UserWorkloadsSecret_Data (..)
+    , newUserWorkloadsSecret_Data
 
     -- ** WebServerConfig
-    WebServerConfig (..),
-    newWebServerConfig,
+    , WebServerConfig (..)
+    , newWebServerConfig
 
     -- ** WebServerNetworkAccessControl
-    WebServerNetworkAccessControl (..),
-    newWebServerNetworkAccessControl,
+    , WebServerNetworkAccessControl (..)
+    , newWebServerNetworkAccessControl
 
     -- ** WebServerResource
-    WebServerResource (..),
-    newWebServerResource,
+    , WebServerResource (..)
+    , newWebServerResource
 
     -- ** WorkerResource
-    WorkerResource (..),
-    newWorkerResource,
+    , WorkerResource (..)
+    , newWorkerResource
 
     -- ** WorkloadsConfig
-    WorkloadsConfig (..),
-    newWorkloadsConfig,
-  )
-where
+    , WorkloadsConfig (..)
+    , newWorkloadsConfig
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.Composer.Internal.Product
 import Gogol.Composer.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Cloud Composer API. This contains the host and root path used as a starting point for constructing service requests.
 composerService :: Core.ServiceConfig
-composerService =
-  Core.defaultService
-    (Core.ServiceId "composer:v1")
-    "composer.googleapis.com"
+composerService
+  = Core.defaultService (Core.ServiceId "composer:v1")
+      "composer.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"

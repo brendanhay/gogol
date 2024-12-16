@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,103 +31,94 @@
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.instanceTemplates.get@.
 module Gogol.Compute.InstanceTemplates.Get
-  ( -- * Resource
-    ComputeInstanceTemplatesGetResource,
+    (
+    -- * Resource
+      ComputeInstanceTemplatesGetResource
 
     -- ** Constructing a Request
-    ComputeInstanceTemplatesGet (..),
-    newComputeInstanceTemplatesGet,
-  )
-where
+    , ComputeInstanceTemplatesGet (..)
+    , newComputeInstanceTemplatesGet
+    ) where
 
-import Gogol.Compute.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Compute.Types
 
 -- | A resource alias for @compute.instanceTemplates.get@ method which the
 -- 'ComputeInstanceTemplatesGet' request conforms to.
 type ComputeInstanceTemplatesGetResource =
-  "compute"
-    Core.:> "v1"
-    Core.:> "projects"
-    Core.:> Core.Capture "project" Core.Text
-    Core.:> "global"
-    Core.:> "instanceTemplates"
-    Core.:> Core.Capture "instanceTemplate" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] InstanceTemplate
+     "compute" Core.:>
+       "v1" Core.:>
+         "projects" Core.:>
+           Core.Capture "project" Core.Text Core.:>
+             "global" Core.:>
+               "instanceTemplates" Core.:>
+                 Core.Capture "instanceTemplate" Core.Text Core.:>
+                   Core.QueryParam "$.xgafv" Xgafv Core.:>
+                     Core.QueryParam "access_token" Core.Text Core.:>
+                       Core.QueryParam "callback" Core.Text Core.:>
+                         Core.QueryParam "uploadType" Core.Text Core.:>
+                           Core.QueryParam "upload_protocol" Core.Text Core.:>
+                             Core.QueryParam "alt" Core.AltJSON Core.:>
+                               Core.Get '[Core.JSON] InstanceTemplate
 
 -- | Returns the specified instance template.
 --
 -- /See:/ 'newComputeInstanceTemplatesGet' smart constructor.
 data ComputeInstanceTemplatesGet = ComputeInstanceTemplatesGet
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | The name of the instance template.
-    instanceTemplate :: Core.Text,
-    -- | Project ID for this request.
-    project :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | The name of the instance template.
+    , instanceTemplate :: Core.Text
+      -- | Project ID for this request.
+    , project :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ComputeInstanceTemplatesGet' with the minimum fields required to make a request.
-newComputeInstanceTemplatesGet ::
-  -- |  The name of the instance template. See 'instanceTemplate'.
-  Core.Text ->
-  -- |  Project ID for this request. See 'project'.
-  Core.Text ->
-  ComputeInstanceTemplatesGet
+newComputeInstanceTemplatesGet 
+    ::  Core.Text
+       -- ^  The name of the instance template. See 'instanceTemplate'.
+    -> Core.Text
+       -- ^  Project ID for this request. See 'project'.
+    -> ComputeInstanceTemplatesGet
 newComputeInstanceTemplatesGet instanceTemplate project =
   ComputeInstanceTemplatesGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      instanceTemplate = instanceTemplate,
-      project = project,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , instanceTemplate = instanceTemplate
+    , project = project
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ComputeInstanceTemplatesGet
-  where
-  type
-    Rs ComputeInstanceTemplatesGet =
-      InstanceTemplate
-  type
-    Scopes ComputeInstanceTemplatesGet =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly
-       ]
-  requestClient ComputeInstanceTemplatesGet {..} =
-    go
-      project
-      instanceTemplate
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      computeService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ComputeInstanceTemplatesGetResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           ComputeInstanceTemplatesGet
+         where
+        type Rs ComputeInstanceTemplatesGet =
+             InstanceTemplate
+        type Scopes ComputeInstanceTemplatesGet =
+             '[CloudPlatform'FullControl, Compute'FullControl,
+               Compute'Readonly]
+        requestClient ComputeInstanceTemplatesGet{..}
+          = go project instanceTemplate xgafv accessToken
+              callback
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              computeService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy ComputeInstanceTemplatesGetResource)
+                      Core.mempty
+

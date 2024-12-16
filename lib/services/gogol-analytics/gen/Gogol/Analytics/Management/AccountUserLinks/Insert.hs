@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,77 +31,70 @@
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.accountUserLinks.insert@.
 module Gogol.Analytics.Management.AccountUserLinks.Insert
-  ( -- * Resource
-    AnalyticsManagementAccountUserLinksInsertResource,
+    (
+    -- * Resource
+      AnalyticsManagementAccountUserLinksInsertResource
 
     -- ** Constructing a Request
-    AnalyticsManagementAccountUserLinksInsert (..),
-    newAnalyticsManagementAccountUserLinksInsert,
-  )
-where
+    , AnalyticsManagementAccountUserLinksInsert (..)
+    , newAnalyticsManagementAccountUserLinksInsert
+    ) where
 
-import Gogol.Analytics.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Analytics.Types
 
 -- | A resource alias for @analytics.management.accountUserLinks.insert@ method which the
 -- 'AnalyticsManagementAccountUserLinksInsert' request conforms to.
-type AnalyticsManagementAccountUserLinksInsertResource =
-  "analytics"
-    Core.:> "v3"
-    Core.:> "management"
-    Core.:> "accounts"
-    Core.:> Core.Capture "accountId" Core.Text
-    Core.:> "entityUserLinks"
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] EntityUserLink
-    Core.:> Core.Post '[Core.JSON] EntityUserLink
+type AnalyticsManagementAccountUserLinksInsertResource
+     =
+     "analytics" Core.:>
+       "v3" Core.:>
+         "management" Core.:>
+           "accounts" Core.:>
+             Core.Capture "accountId" Core.Text Core.:>
+               "entityUserLinks" Core.:>
+                 Core.QueryParam "alt" Core.AltJSON Core.:>
+                   Core.ReqBody '[Core.JSON] EntityUserLink Core.:>
+                     Core.Post '[Core.JSON] EntityUserLink
 
 -- | Adds a new user to the given account.
 --
 -- /See:/ 'newAnalyticsManagementAccountUserLinksInsert' smart constructor.
 data AnalyticsManagementAccountUserLinksInsert = AnalyticsManagementAccountUserLinksInsert
-  { -- | Account ID to create the user link for.
-    accountId :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: EntityUserLink
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Account ID to create the user link for.
+      accountId :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: EntityUserLink
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AnalyticsManagementAccountUserLinksInsert' with the minimum fields required to make a request.
-newAnalyticsManagementAccountUserLinksInsert ::
-  -- |  Account ID to create the user link for. See 'accountId'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  EntityUserLink ->
-  AnalyticsManagementAccountUserLinksInsert
+newAnalyticsManagementAccountUserLinksInsert 
+    ::  Core.Text
+       -- ^  Account ID to create the user link for. See 'accountId'.
+    -> EntityUserLink
+       -- ^  Multipart request metadata. See 'payload'.
+    -> AnalyticsManagementAccountUserLinksInsert
 newAnalyticsManagementAccountUserLinksInsert accountId payload =
   AnalyticsManagementAccountUserLinksInsert
-    { accountId = accountId,
-      payload = payload
-    }
+    {accountId = accountId, payload = payload}
 
-instance
-  Core.GoogleRequest
-    AnalyticsManagementAccountUserLinksInsert
-  where
-  type
-    Rs AnalyticsManagementAccountUserLinksInsert =
-      EntityUserLink
-  type
-    Scopes AnalyticsManagementAccountUserLinksInsert =
-      '[Analytics'Manage'Users]
-  requestClient
-    AnalyticsManagementAccountUserLinksInsert {..} =
-      go
-        accountId
-        (Core.Just Core.AltJSON)
-        payload
-        analyticsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AnalyticsManagementAccountUserLinksInsertResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           AnalyticsManagementAccountUserLinksInsert
+         where
+        type Rs AnalyticsManagementAccountUserLinksInsert =
+             EntityUserLink
+        type Scopes AnalyticsManagementAccountUserLinksInsert
+             = '[Analytics'Manage'Users]
+        requestClient
+          AnalyticsManagementAccountUserLinksInsert{..}
+          = go accountId (Core.Just Core.AltJSON) payload
+              analyticsService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           AnalyticsManagementAccountUserLinksInsertResource)
+                      Core.mempty
+

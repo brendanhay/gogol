@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Indexing.
+A client library for the Google Web Search Indexing.
 
 
 ## Contribute

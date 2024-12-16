@@ -15,6 +15,7 @@
   "description": "Programmatically creates and manages Firebase Dynamic Links.",
   "discoveryVersion": "v1",
   "documentationLink": "https://firebase.google.com/docs/dynamic-links/",
+  "fullyEncodeReservedExpansion": true,
   "icons": {
     "x16": "http://www.google.com/images/icons/product/search-16.gif",
     "x32": "http://www.google.com/images/icons/product/search-32.gif"
@@ -224,7 +225,7 @@
       }
     }
   },
-  "revision": "20211112",
+  "revision": "20241125",
   "rootUrl": "https://firebasedynamiclinks.googleapis.com/",
   "schemas": {
     "AnalyticsInfo": {
@@ -379,6 +380,7 @@
           "type": "string"
         },
         "languageCode": {
+          "deprecated": true,
           "description": "Device language code setting.",
           "type": "string"
         },
@@ -387,6 +389,7 @@
           "type": "string"
         },
         "languageCodeRaw": {
+          "deprecated": true,
           "description": "Device language code raw setting. iOS does returns language code in different format than iOS WebView. For example WebView returns en_US, but iOS returns en-US. Field below will return raw value returned by iOS.",
           "type": "string"
         },
@@ -445,6 +448,13 @@
             "DESKTOP",
             "OTHER"
           ],
+          "enumDeprecated": [
+            false,
+            false,
+            false,
+            true,
+            false
+          ],
           "enumDescriptions": [
             "Unspecified platform.",
             "Represents Android platform. All apps and browsers on Android are classfied in this category.",
@@ -478,6 +488,7 @@
           "type": "string"
         },
         "dynamicLinkDomain": {
+          "deprecated": true,
           "description": "Dynamic Links domain that the project owns, e.g. abcd.app.goo.gl [Learn more](https://firebase.google.com/docs/dynamic-links/android/receive) on how to set up Dynamic Link domain associated with your Firebase project. Required if missing domain_uri_prefix.",
           "type": "string"
         },
@@ -508,6 +519,13 @@
           "description": "Dynamic Link event stats.",
           "items": {
             "$ref": "DynamicLinkEventStat"
+          },
+          "type": "array"
+        },
+        "warnings": {
+          "description": "Optional warnings associated this API request.",
+          "items": {
+            "$ref": "DynamicLinkWarning"
           },
           "type": "array"
         }
@@ -549,7 +567,8 @@
             "BAD_URI_SCHEME_SOCIAL_URL",
             "LINK_LENGTH_TOO_LONG",
             "LINK_WITH_FRAGMENTS",
-            "NOT_MATCHING_IOS_BUNDLE_ID_AND_STORE_ID"
+            "NOT_MATCHING_IOS_BUNDLE_ID_AND_STORE_ID",
+            "API_DEPRECATED"
           ],
           "enumDescriptions": [
             "Unknown code.",
@@ -572,15 +591,16 @@
             "Debug param format is incorrect.",
             "isAd param format is incorrect.",
             "Indicates a certain param is deprecated.",
-            "Indicates certain paramater is not recognized.",
-            "Indicates certain paramater is too long.",
+            "Indicates certain parameter is not recognized.",
+            "Indicates certain parameter is too long.",
             "Social meta tag image link is not a valid URI.",
             "Social meta tag image link has an invalid (non http/https) URI scheme.",
             "",
             "",
             "Dynamic Link URL length is too long.",
             "Dynamic Link URL contains fragments.",
-            "The iOS bundle ID does not match with the given iOS store ID."
+            "The iOS bundle ID does not match with the given iOS store ID.",
+            "The API is deprecated."
           ],
           "type": "string"
         },
@@ -626,8 +646,8 @@
           ],
           "enumDescriptions": [
             "Unknown method.",
-            "iSDK performs a server lookup by device fingerprint in the background when app is first-opened; no API called by developer.",
-            "iSDK performs a server lookup by device fingerprint upon a dev API call.",
+            "iSDK performs a server lookup by device heuristics in the background when app is first-opened; no API called by developer.",
+            "iSDK performs a server lookup by device heuristics upon a dev API call.",
             "iSDK performs a strong match only if weak match is found upon a dev API call."
           ],
           "type": "string"
@@ -637,7 +657,7 @@
           "type": "string"
         },
         "uniqueMatchLinkToCheck": {
-          "description": "Possible unique matched link that server need to check before performing fingerprint match. If passed link is short server need to expand the link. If link is long server need to vslidate the link.",
+          "description": "Possible unique matched link that server need to check before performing device heuristics match. If passed link is short server need to expand the link. If link is long server need to vslidate the link.",
           "type": "string"
         },
         "visualStyle": {
@@ -658,7 +678,7 @@
       "type": "object"
     },
     "GetIosPostInstallAttributionResponse": {
-      "description": "Response for iSDK to execute strong match flow for post-install attribution.",
+      "description": "Response for iSDK to execute strong match flow for post-install attribution. Information of the resolved FDL link.",
       "id": "GetIosPostInstallAttributionResponse",
       "properties": {
         "appMinimumVersion": {
@@ -675,14 +695,14 @@
           ],
           "enumDescriptions": [
             "Unset.",
-            "Weak confidence, more than one matching link found or link suspected to be false positive",
-            "Default confidence, match based on fingerprint",
-            "Unique confidence, match based on \"unique match link to check\" or other means"
+            "Weak confidence, more than one matching link found or link suspected to be false positive.",
+            "Default confidence, match based on device heuristics.",
+            "Unique confidence, match based on \"unique match link to check\" or other means."
           ],
           "type": "string"
         },
         "deepLink": {
-          "description": "The deep-link attributed post-install via one of several techniques (fingerprint, copy unique).",
+          "description": "The deep-link attributed post-install via one of several techniques (device heuristics, copy unique).",
           "type": "string"
         },
         "externalBrowserDestinationLink": {
@@ -694,7 +714,7 @@
           "type": "string"
         },
         "invitationId": {
-          "description": "Invitation ID attributed post-install via one of several techniques (fingerprint, copy unique).",
+          "description": "Invitation ID attributed post-install via one of several techniques (device heuristics, copy unique).",
           "type": "string"
         },
         "isStrongMatchExecutable": {
@@ -720,7 +740,7 @@
           "type": "string"
         },
         "requestedLink": {
-          "description": "Entire FDL (short or long) attributed post-install via one of several techniques (fingerprint, copy unique).",
+          "description": "Entire FDL (short or long) attributed post-install via one of several techniques (device heuristics, copy unique).",
           "type": "string"
         },
         "resolvedLink": {
@@ -808,6 +828,13 @@
         "utmTerm": {
           "description": "Scion term value to be propagated by iSDK to Scion at app-reopen.",
           "type": "string"
+        },
+        "warning": {
+          "description": "Optional warnings associated this API request.",
+          "items": {
+            "$ref": "DynamicLinkWarning"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -817,6 +844,7 @@
       "id": "GooglePlayAnalytics",
       "properties": {
         "gclid": {
+          "deprecated": true,
           "description": "Deprecated; FDL SDK does not process nor log it.",
           "type": "string"
         },
@@ -919,7 +947,7 @@
             ],
             "enumDescriptions": [
               "Indicates that no attributes were found for this short url.",
-              "Indicates that short url has been flagged by AbuseIAm team as spam."
+              "Indicates that short url has been flagged as spam."
             ],
             "type": "string"
           },

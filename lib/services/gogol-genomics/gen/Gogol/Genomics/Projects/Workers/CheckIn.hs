@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,96 +31,88 @@
 --
 -- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.projects.workers.checkIn@.
 module Gogol.Genomics.Projects.Workers.CheckIn
-  ( -- * Resource
-    GenomicsProjectsWorkersCheckInResource,
+    (
+    -- * Resource
+      GenomicsProjectsWorkersCheckInResource
 
     -- ** Constructing a Request
-    GenomicsProjectsWorkersCheckIn (..),
-    newGenomicsProjectsWorkersCheckIn,
-  )
-where
+    , GenomicsProjectsWorkersCheckIn (..)
+    , newGenomicsProjectsWorkersCheckIn
+    ) where
 
-import Gogol.Genomics.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Genomics.Types
 
 -- | A resource alias for @genomics.projects.workers.checkIn@ method which the
 -- 'GenomicsProjectsWorkersCheckIn' request conforms to.
 type GenomicsProjectsWorkersCheckInResource =
-  "v2alpha1"
-    Core.:> Core.CaptureMode "id" "checkIn" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] CheckInRequest
-    Core.:> Core.Post '[Core.JSON] CheckInResponse
+     "v2alpha1" Core.:>
+       Core.CaptureMode "id" "checkIn" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.ReqBody '[Core.JSON] CheckInRequest Core.:>
+                       Core.Post '[Core.JSON] CheckInResponse
 
 -- | The worker uses this method to retrieve the assigned operation and provide periodic status updates.
 --
 -- /See:/ 'newGenomicsProjectsWorkersCheckIn' smart constructor.
 data GenomicsProjectsWorkersCheckIn = GenomicsProjectsWorkersCheckIn
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | The VM identity token for authenticating the VM instance. https:\/\/cloud.google.com\/compute\/docs\/instances\/verifying-instance-identity
-    id :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: CheckInRequest,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | The VM identity token for authenticating the VM instance. https:\/\/cloud.google.com\/compute\/docs\/instances\/verifying-instance-identity
+    , id :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: CheckInRequest
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'GenomicsProjectsWorkersCheckIn' with the minimum fields required to make a request.
-newGenomicsProjectsWorkersCheckIn ::
-  -- |  The VM identity token for authenticating the VM instance. https:\/\/cloud.google.com\/compute\/docs\/instances\/verifying-instance-identity See 'id'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  CheckInRequest ->
-  GenomicsProjectsWorkersCheckIn
+newGenomicsProjectsWorkersCheckIn 
+    ::  Core.Text
+       -- ^  The VM identity token for authenticating the VM instance. https:\/\/cloud.google.com\/compute\/docs\/instances\/verifying-instance-identity See 'id'.
+    -> CheckInRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> GenomicsProjectsWorkersCheckIn
 newGenomicsProjectsWorkersCheckIn id payload =
   GenomicsProjectsWorkersCheckIn
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      id = id,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , id = id
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    GenomicsProjectsWorkersCheckIn
-  where
-  type
-    Rs GenomicsProjectsWorkersCheckIn =
-      CheckInResponse
-  type
-    Scopes GenomicsProjectsWorkersCheckIn =
-      '[CloudPlatform'FullControl, Genomics'FullControl]
-  requestClient GenomicsProjectsWorkersCheckIn {..} =
-    go
-      id
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      payload
-      genomicsService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy GenomicsProjectsWorkersCheckInResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           GenomicsProjectsWorkersCheckIn
+         where
+        type Rs GenomicsProjectsWorkersCheckIn =
+             CheckInResponse
+        type Scopes GenomicsProjectsWorkersCheckIn =
+             '[CloudPlatform'FullControl, Genomics'FullControl]
+        requestClient GenomicsProjectsWorkersCheckIn{..}
+          = go id xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              genomicsService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy GenomicsProjectsWorkersCheckInResource)
+                      Core.mempty
+

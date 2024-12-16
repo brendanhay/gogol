@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,142 +26,109 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.DoubleClickBids.Types
-  ( -- * Configuration
-    doubleClickBidsService,
+    (
+    -- * Configuration
+      doubleClickBidsService
 
     -- * OAuth Scopes
-    Doubleclickbidmanager'FullControl,
+    , Doubleclickbidmanager'FullControl
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
-
-    -- ** ChannelGrouping
-    ChannelGrouping (..),
-    newChannelGrouping,
+    , Xgafv (..)
 
     -- ** DataRange
-    DataRange (..),
-    newDataRange,
+    , DataRange (..)
+    , newDataRange
 
     -- ** DataRange_Range
-    DataRange_Range (..),
+    , DataRange_Range (..)
 
     -- ** Date
-    Date (..),
-    newDate,
-
-    -- ** DisjunctiveMatchStatement
-    DisjunctiveMatchStatement (..),
-    newDisjunctiveMatchStatement,
-
-    -- ** EventFilter
-    EventFilter (..),
-    newEventFilter,
+    , Date (..)
+    , newDate
 
     -- ** FilterPair
-    FilterPair (..),
-    newFilterPair,
+    , FilterPair (..)
+    , newFilterPair
 
     -- ** ListQueriesResponse
-    ListQueriesResponse (..),
-    newListQueriesResponse,
+    , ListQueriesResponse (..)
+    , newListQueriesResponse
 
     -- ** ListReportsResponse
-    ListReportsResponse (..),
-    newListReportsResponse,
+    , ListReportsResponse (..)
+    , newListReportsResponse
 
     -- ** Options
-    Options (..),
-    newOptions,
+    , Options (..)
+    , newOptions
 
     -- ** Parameters
-    Parameters (..),
-    newParameters,
+    , Parameters (..)
+    , newParameters
 
     -- ** Parameters_Type
-    Parameters_Type (..),
-
-    -- ** PathFilter
-    PathFilter (..),
-    newPathFilter,
-
-    -- ** PathFilter_PathMatchPosition
-    PathFilter_PathMatchPosition (..),
-
-    -- ** PathQueryOptions
-    PathQueryOptions (..),
-    newPathQueryOptions,
-
-    -- ** PathQueryOptionsFilter
-    PathQueryOptionsFilter (..),
-    newPathQueryOptionsFilter,
-
-    -- ** PathQueryOptionsFilter_Match
-    PathQueryOptionsFilter_Match (..),
+    , Parameters_Type (..)
 
     -- ** Query
-    Query (..),
-    newQuery,
+    , Query (..)
+    , newQuery
 
     -- ** QueryMetadata
-    QueryMetadata (..),
-    newQueryMetadata,
+    , QueryMetadata (..)
+    , newQueryMetadata
 
     -- ** QueryMetadata_Format
-    QueryMetadata_Format (..),
+    , QueryMetadata_Format (..)
 
     -- ** QuerySchedule
-    QuerySchedule (..),
-    newQuerySchedule,
+    , QuerySchedule (..)
+    , newQuerySchedule
 
     -- ** QuerySchedule_Frequency
-    QuerySchedule_Frequency (..),
+    , QuerySchedule_Frequency (..)
 
     -- ** Report
-    Report (..),
-    newReport,
+    , Report (..)
+    , newReport
 
     -- ** ReportKey
-    ReportKey (..),
-    newReportKey,
+    , ReportKey (..)
+    , newReportKey
 
     -- ** ReportMetadata
-    ReportMetadata (..),
-    newReportMetadata,
+    , ReportMetadata (..)
+    , newReportMetadata
 
     -- ** ReportStatus
-    ReportStatus (..),
-    newReportStatus,
+    , ReportStatus (..)
+    , newReportStatus
 
     -- ** ReportStatus_Format
-    ReportStatus_Format (..),
+    , ReportStatus_Format (..)
 
     -- ** ReportStatus_State
-    ReportStatus_State (..),
-
-    -- ** Rule
-    Rule (..),
-    newRule,
+    , ReportStatus_State (..)
 
     -- ** RunQueryRequest
-    RunQueryRequest (..),
-    newRunQueryRequest,
-  )
-where
+    , RunQueryRequest (..)
+    , newRunQueryRequest
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.DoubleClickBids.Internal.Product
 import Gogol.DoubleClickBids.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v2@ of the DoubleClick Bid Manager API. This contains the host and root path used as a starting point for constructing service requests.
 doubleClickBidsService :: Core.ServiceConfig
-doubleClickBidsService =
-  Core.defaultService
-    (Core.ServiceId "doubleclickbidmanager:v2")
-    "doubleclickbidmanager.googleapis.com"
+doubleClickBidsService
+  = Core.defaultService
+      (Core.ServiceId "doubleclickbidmanager:v2")
+      "doubleclickbidmanager.googleapis.com"
 
 -- | View and manage your reports in DoubleClick Bid Manager
 type Doubleclickbidmanager'FullControl = "https://www.googleapis.com/auth/doubleclickbidmanager"

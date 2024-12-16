@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,93 +31,89 @@
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.remarketingAudience.patch@.
 module Gogol.Analytics.Management.RemarketingAudience.Patch
-  ( -- * Resource
-    AnalyticsManagementRemarketingAudiencePatchResource,
+    (
+    -- * Resource
+      AnalyticsManagementRemarketingAudiencePatchResource
 
     -- ** Constructing a Request
-    AnalyticsManagementRemarketingAudiencePatch (..),
-    newAnalyticsManagementRemarketingAudiencePatch,
-  )
-where
+    , AnalyticsManagementRemarketingAudiencePatch (..)
+    , newAnalyticsManagementRemarketingAudiencePatch
+    ) where
 
-import Gogol.Analytics.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Analytics.Types
 
 -- | A resource alias for @analytics.management.remarketingAudience.patch@ method which the
 -- 'AnalyticsManagementRemarketingAudiencePatch' request conforms to.
-type AnalyticsManagementRemarketingAudiencePatchResource =
-  "analytics"
-    Core.:> "v3"
-    Core.:> "management"
-    Core.:> "accounts"
-    Core.:> Core.Capture "accountId" Core.Text
-    Core.:> "webproperties"
-    Core.:> Core.Capture "webPropertyId" Core.Text
-    Core.:> "remarketingAudiences"
-    Core.:> Core.Capture "remarketingAudienceId" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] RemarketingAudience
-    Core.:> Core.Patch '[Core.JSON] RemarketingAudience
+type AnalyticsManagementRemarketingAudiencePatchResource
+     =
+     "analytics" Core.:>
+       "v3" Core.:>
+         "management" Core.:>
+           "accounts" Core.:>
+             Core.Capture "accountId" Core.Text Core.:>
+               "webproperties" Core.:>
+                 Core.Capture "webPropertyId" Core.Text Core.:>
+                   "remarketingAudiences" Core.:>
+                     Core.Capture "remarketingAudienceId" Core.Text
+                       Core.:>
+                       Core.QueryParam "alt" Core.AltJSON Core.:>
+                         Core.ReqBody '[Core.JSON] RemarketingAudience Core.:>
+                           Core.Patch '[Core.JSON] RemarketingAudience
 
 -- | Updates an existing remarketing audience. This method supports patch semantics.
 --
 -- /See:/ 'newAnalyticsManagementRemarketingAudiencePatch' smart constructor.
 data AnalyticsManagementRemarketingAudiencePatch = AnalyticsManagementRemarketingAudiencePatch
-  { -- | The account ID of the remarketing audience to update.
-    accountId :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: RemarketingAudience,
-    -- | The ID of the remarketing audience to update.
-    remarketingAudienceId :: Core.Text,
-    -- | The web property ID of the remarketing audience to update.
-    webPropertyId :: Core.Text
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | The account ID of the remarketing audience to update.
+      accountId :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: RemarketingAudience
+      -- | The ID of the remarketing audience to update.
+    , remarketingAudienceId :: Core.Text
+      -- | The web property ID of the remarketing audience to update.
+    , webPropertyId :: Core.Text
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AnalyticsManagementRemarketingAudiencePatch' with the minimum fields required to make a request.
-newAnalyticsManagementRemarketingAudiencePatch ::
-  -- |  The account ID of the remarketing audience to update. See 'accountId'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  RemarketingAudience ->
-  -- |  The ID of the remarketing audience to update. See 'remarketingAudienceId'.
-  Core.Text ->
-  -- |  The web property ID of the remarketing audience to update. See 'webPropertyId'.
-  Core.Text ->
-  AnalyticsManagementRemarketingAudiencePatch
+newAnalyticsManagementRemarketingAudiencePatch 
+    ::  Core.Text
+       -- ^  The account ID of the remarketing audience to update. See 'accountId'.
+    -> RemarketingAudience
+       -- ^  Multipart request metadata. See 'payload'.
+    -> Core.Text
+       -- ^  The ID of the remarketing audience to update. See 'remarketingAudienceId'.
+    -> Core.Text
+       -- ^  The web property ID of the remarketing audience to update. See 'webPropertyId'.
+    -> AnalyticsManagementRemarketingAudiencePatch
 newAnalyticsManagementRemarketingAudiencePatch accountId payload remarketingAudienceId webPropertyId =
   AnalyticsManagementRemarketingAudiencePatch
-    { accountId = accountId,
-      payload = payload,
-      remarketingAudienceId = remarketingAudienceId,
-      webPropertyId = webPropertyId
+    { accountId = accountId
+    , payload = payload
+    , remarketingAudienceId = remarketingAudienceId
+    , webPropertyId = webPropertyId
     }
 
-instance
-  Core.GoogleRequest
-    AnalyticsManagementRemarketingAudiencePatch
-  where
-  type
-    Rs AnalyticsManagementRemarketingAudiencePatch =
-      RemarketingAudience
-  type
-    Scopes
-      AnalyticsManagementRemarketingAudiencePatch =
-      '[Analytics'Edit]
-  requestClient
-    AnalyticsManagementRemarketingAudiencePatch {..} =
-      go
-        accountId
-        webPropertyId
-        remarketingAudienceId
-        (Core.Just Core.AltJSON)
-        payload
-        analyticsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AnalyticsManagementRemarketingAudiencePatchResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           AnalyticsManagementRemarketingAudiencePatch
+         where
+        type Rs AnalyticsManagementRemarketingAudiencePatch =
+             RemarketingAudience
+        type Scopes
+               AnalyticsManagementRemarketingAudiencePatch
+             = '[Analytics'Edit]
+        requestClient
+          AnalyticsManagementRemarketingAudiencePatch{..}
+          = go accountId webPropertyId remarketingAudienceId
+              (Core.Just Core.AltJSON)
+              payload
+              analyticsService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           AnalyticsManagementRemarketingAudiencePatchResource)
+                      Core.mempty
+

@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +26,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Testing.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AndroidInstrumentationTest_OrchestratorOption
     AndroidInstrumentationTest_OrchestratorOption
-      ( AndroidInstrumentationTest_OrchestratorOption_ORCHESTRATOROPTIONUNSPECIFIED,
+      (
+        AndroidInstrumentationTest_OrchestratorOption_ORCHESTRATOROPTIONUNSPECIFIED,
         AndroidInstrumentationTest_OrchestratorOption_USEORCHESTRATOR,
         AndroidInstrumentationTest_OrchestratorOption_DONOTUSEORCHESTRATOR,
         ..
@@ -43,7 +49,8 @@ module Gogol.Testing.Internal.Sum
 
     -- * AndroidModel_Form
     AndroidModel_Form
-      ( AndroidModel_Form_DEVICEFORMUNSPECIFIED,
+      (
+        AndroidModel_Form_DEVICEFORMUNSPECIFIED,
         AndroidModel_Form_Virtual,
         AndroidModel_Form_Physical,
         AndroidModel_Form_Emulator,
@@ -52,7 +59,8 @@ module Gogol.Testing.Internal.Sum
 
     -- * AndroidModel_FormFactor
     AndroidModel_FormFactor
-      ( AndroidModel_FormFactor_DEVICEFORMFACTORUNSPECIFIED,
+      (
+        AndroidModel_FormFactor_DEVICEFORMFACTORUNSPECIFIED,
         AndroidModel_FormFactor_Phone,
         AndroidModel_FormFactor_Tablet,
         AndroidModel_FormFactor_Wearable,
@@ -61,7 +69,8 @@ module Gogol.Testing.Internal.Sum
 
     -- * AndroidRoboTest_RoboMode
     AndroidRoboTest_RoboMode
-      ( AndroidRoboTest_RoboMode_ROBOMODEUNSPECIFIED,
+      (
+        AndroidRoboTest_RoboMode_ROBOMODEUNSPECIFIED,
         AndroidRoboTest_RoboMode_ROBO_VERSION_1,
         AndroidRoboTest_RoboMode_ROBO_VERSION_2,
         ..
@@ -69,7 +78,8 @@ module Gogol.Testing.Internal.Sum
 
     -- * CancelTestMatrixResponse_TestState
     CancelTestMatrixResponse_TestState
-      ( CancelTestMatrixResponse_TestState_TESTSTATEUNSPECIFIED,
+      (
+        CancelTestMatrixResponse_TestState_TESTSTATEUNSPECIFIED,
         CancelTestMatrixResponse_TestState_Validating,
         CancelTestMatrixResponse_TestState_Pending,
         CancelTestMatrixResponse_TestState_Running,
@@ -85,16 +95,32 @@ module Gogol.Testing.Internal.Sum
 
     -- * DeviceIpBlock_Form
     DeviceIpBlock_Form
-      ( DeviceIpBlock_Form_DEVICEFORMUNSPECIFIED,
+      (
+        DeviceIpBlock_Form_DEVICEFORMUNSPECIFIED,
         DeviceIpBlock_Form_Virtual,
         DeviceIpBlock_Form_Physical,
         DeviceIpBlock_Form_Emulator,
         ..
       ),
 
+    -- * DeviceSession_State
+    DeviceSession_State
+      (
+        DeviceSession_State_SESSIONSTATEUNSPECIFIED,
+        DeviceSession_State_Requested,
+        DeviceSession_State_Pending,
+        DeviceSession_State_Active,
+        DeviceSession_State_Expired,
+        DeviceSession_State_Finished,
+        DeviceSession_State_Unavailable,
+        DeviceSession_State_Error',
+        ..
+      ),
+
     -- * IosModel_FormFactor
     IosModel_FormFactor
-      ( IosModel_FormFactor_DEVICEFORMFACTORUNSPECIFIED,
+      (
+        IosModel_FormFactor_DEVICEFORMFACTORUNSPECIFIED,
         IosModel_FormFactor_Phone,
         IosModel_FormFactor_Tablet,
         IosModel_FormFactor_Wearable,
@@ -103,7 +129,8 @@ module Gogol.Testing.Internal.Sum
 
     -- * PerAndroidVersionInfo_DeviceCapacity
     PerAndroidVersionInfo_DeviceCapacity
-      ( PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYUNSPECIFIED,
+      (
+        PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYUNSPECIFIED,
         PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYHIGH,
         PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYMEDIUM,
         PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYLOW,
@@ -113,7 +140,8 @@ module Gogol.Testing.Internal.Sum
 
     -- * PerIosVersionInfo_DeviceCapacity
     PerIosVersionInfo_DeviceCapacity
-      ( PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYUNSPECIFIED,
+      (
+        PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYUNSPECIFIED,
         PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYHIGH,
         PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYMEDIUM,
         PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYLOW,
@@ -123,16 +151,32 @@ module Gogol.Testing.Internal.Sum
 
     -- * RoboDirective_ActionType
     RoboDirective_ActionType
-      ( RoboDirective_ActionType_ACTIONTYPEUNSPECIFIED,
+      (
+        RoboDirective_ActionType_ACTIONTYPEUNSPECIFIED,
         RoboDirective_ActionType_SINGLECLICK,
         RoboDirective_ActionType_ENTERTEXT,
         RoboDirective_ActionType_Ignore,
         ..
       ),
 
+    -- * SessionStateEvent_SessionState
+    SessionStateEvent_SessionState
+      (
+        SessionStateEvent_SessionState_SESSIONSTATEUNSPECIFIED,
+        SessionStateEvent_SessionState_Requested,
+        SessionStateEvent_SessionState_Pending,
+        SessionStateEvent_SessionState_Active,
+        SessionStateEvent_SessionState_Expired,
+        SessionStateEvent_SessionState_Finished,
+        SessionStateEvent_SessionState_Unavailable,
+        SessionStateEvent_SessionState_Error',
+        ..
+      ),
+
     -- * TestExecution_State
     TestExecution_State
-      ( TestExecution_State_TESTSTATEUNSPECIFIED,
+      (
+        TestExecution_State_TESTSTATEUNSPECIFIED,
         TestExecution_State_Validating,
         TestExecution_State_Pending,
         TestExecution_State_Running,
@@ -148,7 +192,8 @@ module Gogol.Testing.Internal.Sum
 
     -- * TestMatrix_InvalidMatrixDetails
     TestMatrix_InvalidMatrixDetails
-      ( TestMatrix_InvalidMatrixDetails_INVALIDMATRIXDETAILSUNSPECIFIED,
+      (
+        TestMatrix_InvalidMatrixDetails_INVALIDMATRIXDETAILSUNSPECIFIED,
         TestMatrix_InvalidMatrixDetails_DETAILSUNAVAILABLE,
         TestMatrix_InvalidMatrixDetails_MALFORMEDAPK,
         TestMatrix_InvalidMatrixDetails_MALFORMEDTESTAPK,
@@ -192,7 +237,8 @@ module Gogol.Testing.Internal.Sum
 
     -- * TestMatrix_OutcomeSummary
     TestMatrix_OutcomeSummary
-      ( TestMatrix_OutcomeSummary_OUTCOMESUMMARYUNSPECIFIED,
+      (
+        TestMatrix_OutcomeSummary_OUTCOMESUMMARYUNSPECIFIED,
         TestMatrix_OutcomeSummary_Success,
         TestMatrix_OutcomeSummary_Failure,
         TestMatrix_OutcomeSummary_Inconclusive,
@@ -202,7 +248,8 @@ module Gogol.Testing.Internal.Sum
 
     -- * TestMatrix_State
     TestMatrix_State
-      ( TestMatrix_State_TESTSTATEUNSPECIFIED,
+      (
+        TestMatrix_State_TESTSTATEUNSPECIFIED,
         TestMatrix_State_Validating,
         TestMatrix_State_Pending,
         TestMatrix_State_Running,
@@ -218,7 +265,8 @@ module Gogol.Testing.Internal.Sum
 
     -- * TestEnvironmentCatalogGetEnvironmentType
     TestEnvironmentCatalogGetEnvironmentType
-      ( TestEnvironmentCatalogGetEnvironmentType_ENVIRONMENTTYPEUNSPECIFIED,
+      (
+        TestEnvironmentCatalogGetEnvironmentType_ENVIRONMENTTYPEUNSPECIFIED,
         TestEnvironmentCatalogGetEnvironmentType_Android,
         TestEnvironmentCatalogGetEnvironmentType_Ios,
         TestEnvironmentCatalogGetEnvironmentType_NETWORKCONFIGURATION,
@@ -226,23 +274,22 @@ module Gogol.Testing.Internal.Sum
         TestEnvironmentCatalogGetEnvironmentType_DEVICEIPBLOCKS,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -255,21 +302,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | The option of whether running each test within its own invocation of instrumentation with Android Test Orchestrator or not. ** Orchestrator is only compatible with AndroidJUnitRunner version 1.1 or higher! ** Orchestrator offers the following benefits: - No shared state - Crashes are isolated - Logs are scoped per test See for more information about Android Test Orchestrator. If not set, the test will be run without the orchestrator.
-newtype AndroidInstrumentationTest_OrchestratorOption = AndroidInstrumentationTest_OrchestratorOption {fromAndroidInstrumentationTest_OrchestratorOption :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AndroidInstrumentationTest_OrchestratorOption = AndroidInstrumentationTest_OrchestratorOption { fromAndroidInstrumentationTest_OrchestratorOption :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value: the server will choose the mode. Currently implies that the test will run without the orchestrator. In the future, all instrumentation tests will be run with the orchestrator. Using the orchestrator is highly encouraged because of all the benefits it offers.
 pattern AndroidInstrumentationTest_OrchestratorOption_ORCHESTRATOROPTIONUNSPECIFIED :: AndroidInstrumentationTest_OrchestratorOption
@@ -287,21 +333,20 @@ pattern AndroidInstrumentationTest_OrchestratorOption_DONOTUSEORCHESTRATOR = And
   AndroidInstrumentationTest_OrchestratorOption_ORCHESTRATOROPTIONUNSPECIFIED,
   AndroidInstrumentationTest_OrchestratorOption_USEORCHESTRATOR,
   AndroidInstrumentationTest_OrchestratorOption_DONOTUSEORCHESTRATOR,
-  AndroidInstrumentationTest_OrchestratorOption
-  #-}
+  AndroidInstrumentationTest_OrchestratorOption #-}
 
 -- | Whether this device is virtual or physical.
-newtype AndroidModel_Form = AndroidModel_Form {fromAndroidModel_Form :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AndroidModel_Form = AndroidModel_Form { fromAndroidModel_Form :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use. For proto versioning only.
 pattern AndroidModel_Form_DEVICEFORMUNSPECIFIED :: AndroidModel_Form
@@ -324,21 +369,20 @@ pattern AndroidModel_Form_Emulator = AndroidModel_Form "EMULATOR"
   AndroidModel_Form_Virtual,
   AndroidModel_Form_Physical,
   AndroidModel_Form_Emulator,
-  AndroidModel_Form
-  #-}
+  AndroidModel_Form #-}
 
 -- | Whether this device is a phone, tablet, wearable, etc.
-newtype AndroidModel_FormFactor = AndroidModel_FormFactor {fromAndroidModel_FormFactor :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AndroidModel_FormFactor = AndroidModel_FormFactor { fromAndroidModel_FormFactor :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use. For proto versioning only.
 pattern AndroidModel_FormFactor_DEVICEFORMFACTORUNSPECIFIED :: AndroidModel_FormFactor
@@ -361,21 +405,20 @@ pattern AndroidModel_FormFactor_Wearable = AndroidModel_FormFactor "WEARABLE"
   AndroidModel_FormFactor_Phone,
   AndroidModel_FormFactor_Tablet,
   AndroidModel_FormFactor_Wearable,
-  AndroidModel_FormFactor
-  #-}
+  AndroidModel_FormFactor #-}
 
 -- | The mode in which Robo should run. Most clients should allow the server to populate this field automatically.
-newtype AndroidRoboTest_RoboMode = AndroidRoboTest_RoboMode {fromAndroidRoboTest_RoboMode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AndroidRoboTest_RoboMode = AndroidRoboTest_RoboMode { fromAndroidRoboTest_RoboMode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | This means that the server should choose the mode. Recommended.
 pattern AndroidRoboTest_RoboMode_ROBOMODEUNSPECIFIED :: AndroidRoboTest_RoboMode
@@ -393,21 +436,20 @@ pattern AndroidRoboTest_RoboMode_ROBO_VERSION_2 = AndroidRoboTest_RoboMode "ROBO
   AndroidRoboTest_RoboMode_ROBOMODEUNSPECIFIED,
   AndroidRoboTest_RoboMode_ROBO_VERSION_1,
   AndroidRoboTest_RoboMode_ROBO_VERSION_2,
-  AndroidRoboTest_RoboMode
-  #-}
+  AndroidRoboTest_RoboMode #-}
 
 -- | The current rolled-up state of the test matrix. If this state is already final, then the cancelation request will have no effect.
-newtype CancelTestMatrixResponse_TestState = CancelTestMatrixResponse_TestState {fromCancelTestMatrixResponse_TestState :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CancelTestMatrixResponse_TestState = CancelTestMatrixResponse_TestState { fromCancelTestMatrixResponse_TestState :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use. For proto versioning only.
 pattern CancelTestMatrixResponse_TestState_TESTSTATEUNSPECIFIED :: CancelTestMatrixResponse_TestState
@@ -465,21 +507,20 @@ pattern CancelTestMatrixResponse_TestState_Invalid = CancelTestMatrixResponse_Te
   CancelTestMatrixResponse_TestState_INCOMPATIBLEARCHITECTURE,
   CancelTestMatrixResponse_TestState_Cancelled,
   CancelTestMatrixResponse_TestState_Invalid,
-  CancelTestMatrixResponse_TestState
-  #-}
+  CancelTestMatrixResponse_TestState #-}
 
 -- | Whether this block is used by physical or virtual devices
-newtype DeviceIpBlock_Form = DeviceIpBlock_Form {fromDeviceIpBlock_Form :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DeviceIpBlock_Form = DeviceIpBlock_Form { fromDeviceIpBlock_Form :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use. For proto versioning only.
 pattern DeviceIpBlock_Form_DEVICEFORMUNSPECIFIED :: DeviceIpBlock_Form
@@ -502,21 +543,76 @@ pattern DeviceIpBlock_Form_Emulator = DeviceIpBlock_Form "EMULATOR"
   DeviceIpBlock_Form_Virtual,
   DeviceIpBlock_Form_Physical,
   DeviceIpBlock_Form_Emulator,
-  DeviceIpBlock_Form
-  #-}
+  DeviceIpBlock_Form #-}
+
+-- | Output only. Current state of the DeviceSession.
+newtype DeviceSession_State = DeviceSession_State { fromDeviceSession_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Default value. This value is unused.
+pattern DeviceSession_State_SESSIONSTATEUNSPECIFIED :: DeviceSession_State
+pattern DeviceSession_State_SESSIONSTATEUNSPECIFIED = DeviceSession_State "SESSION_STATE_UNSPECIFIED"
+
+-- | Initial state of a session request. The session is being validated for correctness and a device is not yet requested.
+pattern DeviceSession_State_Requested :: DeviceSession_State
+pattern DeviceSession_State_Requested = DeviceSession_State "REQUESTED"
+
+-- | The session has been validated and is in the queue for a device.
+pattern DeviceSession_State_Pending :: DeviceSession_State
+pattern DeviceSession_State_Pending = DeviceSession_State "PENDING"
+
+-- | The session has been granted and the device is accepting connections.
+pattern DeviceSession_State_Active :: DeviceSession_State
+pattern DeviceSession_State_Active = DeviceSession_State "ACTIVE"
+
+-- | The session duration exceeded the device’s reservation time period and timed out automatically.
+pattern DeviceSession_State_Expired :: DeviceSession_State
+pattern DeviceSession_State_Expired = DeviceSession_State "EXPIRED"
+
+-- | The user is finished with the session and it was canceled by the user while the request was still getting allocated or after allocation and during device usage period.
+pattern DeviceSession_State_Finished :: DeviceSession_State
+pattern DeviceSession_State_Finished = DeviceSession_State "FINISHED"
+
+-- | Unable to complete the session because the device was unavailable and it failed to allocate through the scheduler. For example, a device not in the catalog was requested or the request expired in the allocation queue.
+pattern DeviceSession_State_Unavailable :: DeviceSession_State
+pattern DeviceSession_State_Unavailable = DeviceSession_State "UNAVAILABLE"
+
+-- | Unable to complete the session for an internal reason, such as an infrastructure failure.
+pattern DeviceSession_State_Error' :: DeviceSession_State
+pattern DeviceSession_State_Error' = DeviceSession_State "ERROR"
+
+{-# COMPLETE
+  DeviceSession_State_SESSIONSTATEUNSPECIFIED,
+  DeviceSession_State_Requested,
+  DeviceSession_State_Pending,
+  DeviceSession_State_Active,
+  DeviceSession_State_Expired,
+  DeviceSession_State_Finished,
+  DeviceSession_State_Unavailable,
+  DeviceSession_State_Error',
+  DeviceSession_State #-}
 
 -- | Whether this device is a phone, tablet, wearable, etc.
-newtype IosModel_FormFactor = IosModel_FormFactor {fromIosModel_FormFactor :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype IosModel_FormFactor = IosModel_FormFactor { fromIosModel_FormFactor :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use. For proto versioning only.
 pattern IosModel_FormFactor_DEVICEFORMFACTORUNSPECIFIED :: IosModel_FormFactor
@@ -539,21 +635,20 @@ pattern IosModel_FormFactor_Wearable = IosModel_FormFactor "WEARABLE"
   IosModel_FormFactor_Phone,
   IosModel_FormFactor_Tablet,
   IosModel_FormFactor_Wearable,
-  IosModel_FormFactor
-  #-}
+  IosModel_FormFactor #-}
 
 -- | The number of online devices for an Android version.
-newtype PerAndroidVersionInfo_DeviceCapacity = PerAndroidVersionInfo_DeviceCapacity {fromPerAndroidVersionInfo_DeviceCapacity :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype PerAndroidVersionInfo_DeviceCapacity = PerAndroidVersionInfo_DeviceCapacity { fromPerAndroidVersionInfo_DeviceCapacity :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The value of device capacity is unknown or unset.
 pattern PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYUNSPECIFIED :: PerAndroidVersionInfo_DeviceCapacity
@@ -581,21 +676,20 @@ pattern PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYNONE = PerAndroidVers
   PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYMEDIUM,
   PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYLOW,
   PerAndroidVersionInfo_DeviceCapacity_DEVICECAPACITYNONE,
-  PerAndroidVersionInfo_DeviceCapacity
-  #-}
+  PerAndroidVersionInfo_DeviceCapacity #-}
 
 -- | The number of online devices for an iOS version.
-newtype PerIosVersionInfo_DeviceCapacity = PerIosVersionInfo_DeviceCapacity {fromPerIosVersionInfo_DeviceCapacity :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype PerIosVersionInfo_DeviceCapacity = PerIosVersionInfo_DeviceCapacity { fromPerIosVersionInfo_DeviceCapacity :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The value of device capacity is unknown or unset.
 pattern PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYUNSPECIFIED :: PerIosVersionInfo_DeviceCapacity
@@ -623,21 +717,20 @@ pattern PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYNONE = PerIosVersionInfo_
   PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYMEDIUM,
   PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYLOW,
   PerIosVersionInfo_DeviceCapacity_DEVICECAPACITYNONE,
-  PerIosVersionInfo_DeviceCapacity
-  #-}
+  PerIosVersionInfo_DeviceCapacity #-}
 
 -- | Required. The type of action that Robo should perform on the specified element.
-newtype RoboDirective_ActionType = RoboDirective_ActionType {fromRoboDirective_ActionType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype RoboDirective_ActionType = RoboDirective_ActionType { fromRoboDirective_ActionType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | DO NOT USE. For proto versioning only.
 pattern RoboDirective_ActionType_ACTIONTYPEUNSPECIFIED :: RoboDirective_ActionType
@@ -660,21 +753,76 @@ pattern RoboDirective_ActionType_Ignore = RoboDirective_ActionType "IGNORE"
   RoboDirective_ActionType_SINGLECLICK,
   RoboDirective_ActionType_ENTERTEXT,
   RoboDirective_ActionType_Ignore,
-  RoboDirective_ActionType
-  #-}
+  RoboDirective_ActionType #-}
+
+-- | Output only. The session_state tracked by this event
+newtype SessionStateEvent_SessionState = SessionStateEvent_SessionState { fromSessionStateEvent_SessionState :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Default value. This value is unused.
+pattern SessionStateEvent_SessionState_SESSIONSTATEUNSPECIFIED :: SessionStateEvent_SessionState
+pattern SessionStateEvent_SessionState_SESSIONSTATEUNSPECIFIED = SessionStateEvent_SessionState "SESSION_STATE_UNSPECIFIED"
+
+-- | Initial state of a session request. The session is being validated for correctness and a device is not yet requested.
+pattern SessionStateEvent_SessionState_Requested :: SessionStateEvent_SessionState
+pattern SessionStateEvent_SessionState_Requested = SessionStateEvent_SessionState "REQUESTED"
+
+-- | The session has been validated and is in the queue for a device.
+pattern SessionStateEvent_SessionState_Pending :: SessionStateEvent_SessionState
+pattern SessionStateEvent_SessionState_Pending = SessionStateEvent_SessionState "PENDING"
+
+-- | The session has been granted and the device is accepting connections.
+pattern SessionStateEvent_SessionState_Active :: SessionStateEvent_SessionState
+pattern SessionStateEvent_SessionState_Active = SessionStateEvent_SessionState "ACTIVE"
+
+-- | The session duration exceeded the device’s reservation time period and timed out automatically.
+pattern SessionStateEvent_SessionState_Expired :: SessionStateEvent_SessionState
+pattern SessionStateEvent_SessionState_Expired = SessionStateEvent_SessionState "EXPIRED"
+
+-- | The user is finished with the session and it was canceled by the user while the request was still getting allocated or after allocation and during device usage period.
+pattern SessionStateEvent_SessionState_Finished :: SessionStateEvent_SessionState
+pattern SessionStateEvent_SessionState_Finished = SessionStateEvent_SessionState "FINISHED"
+
+-- | Unable to complete the session because the device was unavailable and it failed to allocate through the scheduler. For example, a device not in the catalog was requested or the request expired in the allocation queue.
+pattern SessionStateEvent_SessionState_Unavailable :: SessionStateEvent_SessionState
+pattern SessionStateEvent_SessionState_Unavailable = SessionStateEvent_SessionState "UNAVAILABLE"
+
+-- | Unable to complete the session for an internal reason, such as an infrastructure failure.
+pattern SessionStateEvent_SessionState_Error' :: SessionStateEvent_SessionState
+pattern SessionStateEvent_SessionState_Error' = SessionStateEvent_SessionState "ERROR"
+
+{-# COMPLETE
+  SessionStateEvent_SessionState_SESSIONSTATEUNSPECIFIED,
+  SessionStateEvent_SessionState_Requested,
+  SessionStateEvent_SessionState_Pending,
+  SessionStateEvent_SessionState_Active,
+  SessionStateEvent_SessionState_Expired,
+  SessionStateEvent_SessionState_Finished,
+  SessionStateEvent_SessionState_Unavailable,
+  SessionStateEvent_SessionState_Error',
+  SessionStateEvent_SessionState #-}
 
 -- | Output only. Indicates the current progress of the test execution (e.g., FINISHED).
-newtype TestExecution_State = TestExecution_State {fromTestExecution_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TestExecution_State = TestExecution_State { fromTestExecution_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use. For proto versioning only.
 pattern TestExecution_State_TESTSTATEUNSPECIFIED :: TestExecution_State
@@ -732,21 +880,20 @@ pattern TestExecution_State_Invalid = TestExecution_State "INVALID"
   TestExecution_State_INCOMPATIBLEARCHITECTURE,
   TestExecution_State_Cancelled,
   TestExecution_State_Invalid,
-  TestExecution_State
-  #-}
+  TestExecution_State #-}
 
 -- | Output only. Describes why the matrix is considered invalid. Only useful for matrices in the INVALID state.
-newtype TestMatrix_InvalidMatrixDetails = TestMatrix_InvalidMatrixDetails {fromTestMatrix_InvalidMatrixDetails :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TestMatrix_InvalidMatrixDetails = TestMatrix_InvalidMatrixDetails { fromTestMatrix_InvalidMatrixDetails :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use. For proto versioning only.
 pattern TestMatrix_InvalidMatrixDetails_INVALIDMATRIXDETAILSUNSPECIFIED :: TestMatrix_InvalidMatrixDetails
@@ -792,7 +939,7 @@ pattern TestMatrix_InvalidMatrixDetails_NOSIGNATURE = TestMatrix_InvalidMatrixDe
 pattern TestMatrix_InvalidMatrixDetails_INSTRUMENTATIONORCHESTRATORINCOMPATIBLE :: TestMatrix_InvalidMatrixDetails
 pattern TestMatrix_InvalidMatrixDetails_INSTRUMENTATIONORCHESTRATORINCOMPATIBLE = TestMatrix_InvalidMatrixDetails "INSTRUMENTATION_ORCHESTRATOR_INCOMPATIBLE"
 
--- | The test APK does not contain the test runner class specified by user or in the manifest file. This can be caused by either of the following reasons: - the user provided a runner class name that\'s incorrect, or - the test runner isn\'t built into the test APK (might be in the app APK instead).
+-- | The test APK does not contain the test runner class specified by the user or in the manifest file. This can be caused by one of the following reasons: - the user provided a runner class name that\'s incorrect, or - the test runner isn\'t built into the test APK (might be in the app APK instead).
 pattern TestMatrix_InvalidMatrixDetails_NOTESTRUNNERCLASS :: TestMatrix_InvalidMatrixDetails
 pattern TestMatrix_InvalidMatrixDetails_NOTESTRUNNERCLASS = TestMatrix_InvalidMatrixDetails "NO_TEST_RUNNER_CLASS"
 
@@ -944,21 +1091,20 @@ pattern TestMatrix_InvalidMatrixDetails_UNKNOWNPERMISSIONERROR = TestMatrix_Inva
   TestMatrix_InvalidMatrixDetails_TESTQUOTAEXCEEDED,
   TestMatrix_InvalidMatrixDetails_SERVICENOTACTIVATED,
   TestMatrix_InvalidMatrixDetails_UNKNOWNPERMISSIONERROR,
-  TestMatrix_InvalidMatrixDetails
-  #-}
+  TestMatrix_InvalidMatrixDetails #-}
 
 -- | Output Only. The overall outcome of the test. Only set when the test matrix state is FINISHED.
-newtype TestMatrix_OutcomeSummary = TestMatrix_OutcomeSummary {fromTestMatrix_OutcomeSummary :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TestMatrix_OutcomeSummary = TestMatrix_OutcomeSummary { fromTestMatrix_OutcomeSummary :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use. For proto versioning only.
 pattern TestMatrix_OutcomeSummary_OUTCOMESUMMARYUNSPECIFIED :: TestMatrix_OutcomeSummary
@@ -968,7 +1114,7 @@ pattern TestMatrix_OutcomeSummary_OUTCOMESUMMARYUNSPECIFIED = TestMatrix_Outcome
 pattern TestMatrix_OutcomeSummary_Success :: TestMatrix_OutcomeSummary
 pattern TestMatrix_OutcomeSummary_Success = TestMatrix_OutcomeSummary "SUCCESS"
 
--- | A run failed, for instance: - One or more test case failed. - A test timed out. - The application under test crashed.
+-- | A run failed, for instance: - One or more test cases failed. - A test timed out. - The application under test crashed.
 pattern TestMatrix_OutcomeSummary_Failure :: TestMatrix_OutcomeSummary
 pattern TestMatrix_OutcomeSummary_Failure = TestMatrix_OutcomeSummary "FAILURE"
 
@@ -986,21 +1132,20 @@ pattern TestMatrix_OutcomeSummary_Skipped = TestMatrix_OutcomeSummary "SKIPPED"
   TestMatrix_OutcomeSummary_Failure,
   TestMatrix_OutcomeSummary_Inconclusive,
   TestMatrix_OutcomeSummary_Skipped,
-  TestMatrix_OutcomeSummary
-  #-}
+  TestMatrix_OutcomeSummary #-}
 
 -- | Output only. Indicates the current progress of the test matrix.
-newtype TestMatrix_State = TestMatrix_State {fromTestMatrix_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TestMatrix_State = TestMatrix_State { fromTestMatrix_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use. For proto versioning only.
 pattern TestMatrix_State_TESTSTATEUNSPECIFIED :: TestMatrix_State
@@ -1058,21 +1203,20 @@ pattern TestMatrix_State_Invalid = TestMatrix_State "INVALID"
   TestMatrix_State_INCOMPATIBLEARCHITECTURE,
   TestMatrix_State_Cancelled,
   TestMatrix_State_Invalid,
-  TestMatrix_State
-  #-}
+  TestMatrix_State #-}
 
 -- | Required. The type of environment that should be listed.
-newtype TestEnvironmentCatalogGetEnvironmentType = TestEnvironmentCatalogGetEnvironmentType {fromTestEnvironmentCatalogGetEnvironmentType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TestEnvironmentCatalogGetEnvironmentType = TestEnvironmentCatalogGetEnvironmentType { fromTestEnvironmentCatalogGetEnvironmentType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use. For proto versioning only.
 pattern TestEnvironmentCatalogGetEnvironmentType_ENVIRONMENTTYPEUNSPECIFIED :: TestEnvironmentCatalogGetEnvironmentType
@@ -1105,5 +1249,4 @@ pattern TestEnvironmentCatalogGetEnvironmentType_DEVICEIPBLOCKS = TestEnvironmen
   TestEnvironmentCatalogGetEnvironmentType_NETWORKCONFIGURATION,
   TestEnvironmentCatalogGetEnvironmentType_PROVIDEDSOFTWARE,
   TestEnvironmentCatalogGetEnvironmentType_DEVICEIPBLOCKS,
-  TestEnvironmentCatalogGetEnvironmentType
-  #-}
+  TestEnvironmentCatalogGetEnvironmentType #-}

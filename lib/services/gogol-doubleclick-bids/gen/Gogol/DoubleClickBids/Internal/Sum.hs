@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +26,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.DoubleClickBids.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * DataRange_Range
     DataRange_Range
-      ( DataRange_Range_RANGEUNSPECIFIED,
+      (
+        DataRange_Range_RANGEUNSPECIFIED,
         DataRange_Range_CUSTOMDATES,
         DataRange_Range_CURRENTDAY,
         DataRange_Range_PREVIOUSDAY,
@@ -59,7 +65,8 @@ module Gogol.DoubleClickBids.Internal.Sum
 
     -- * Parameters_Type
     Parameters_Type
-      ( Parameters_Type_REPORTTYPEUNSPECIFIED,
+      (
+        Parameters_Type_REPORTTYPEUNSPECIFIED,
         Parameters_Type_Standard,
         Parameters_Type_INVENTORYAVAILABILITY,
         Parameters_Type_AUDIENCECOMPOSITION,
@@ -74,28 +81,10 @@ module Gogol.DoubleClickBids.Internal.Sum
         ..
       ),
 
-    -- * PathFilter_PathMatchPosition
-    PathFilter_PathMatchPosition
-      ( PathFilter_PathMatchPosition_PATHMATCHPOSITIONUNSPECIFIED,
-        PathFilter_PathMatchPosition_Any,
-        PathFilter_PathMatchPosition_First,
-        PathFilter_PathMatchPosition_Last,
-        ..
-      ),
-
-    -- * PathQueryOptionsFilter_Match
-    PathQueryOptionsFilter_Match
-      ( PathQueryOptionsFilter_Match_Unknown,
-        PathQueryOptionsFilter_Match_Exact,
-        PathQueryOptionsFilter_Match_Partial,
-        PathQueryOptionsFilter_Match_BEGINSWITH,
-        PathQueryOptionsFilter_Match_WILDCARDEXPRESSION,
-        ..
-      ),
-
     -- * QueryMetadata_Format
     QueryMetadata_Format
-      ( QueryMetadata_Format_FORMATUNSPECIFIED,
+      (
+        QueryMetadata_Format_FORMATUNSPECIFIED,
         QueryMetadata_Format_Csv,
         QueryMetadata_Format_Xlsx,
         ..
@@ -103,7 +92,8 @@ module Gogol.DoubleClickBids.Internal.Sum
 
     -- * QuerySchedule_Frequency
     QuerySchedule_Frequency
-      ( QuerySchedule_Frequency_FREQUENCYUNSPECIFIED,
+      (
+        QuerySchedule_Frequency_FREQUENCYUNSPECIFIED,
         QuerySchedule_Frequency_ONETIME,
         QuerySchedule_Frequency_Daily,
         QuerySchedule_Frequency_Weekly,
@@ -116,7 +106,8 @@ module Gogol.DoubleClickBids.Internal.Sum
 
     -- * ReportStatus_Format
     ReportStatus_Format
-      ( ReportStatus_Format_FORMATUNSPECIFIED,
+      (
+        ReportStatus_Format_FORMATUNSPECIFIED,
         ReportStatus_Format_Csv,
         ReportStatus_Format_Xlsx,
         ..
@@ -124,30 +115,30 @@ module Gogol.DoubleClickBids.Internal.Sum
 
     -- * ReportStatus_State
     ReportStatus_State
-      ( ReportStatus_State_STATEUNSPECIFIED,
+      (
+        ReportStatus_State_STATEUNSPECIFIED,
         ReportStatus_State_Queued,
         ReportStatus_State_Running,
         ReportStatus_State_Done,
         ReportStatus_State_Failed,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -160,27 +151,26 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
--- | Report data range used to generate the report.
-newtype DataRange_Range = DataRange_Range {fromDataRange_Range :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | The preset date range to be reported on. If @CUSTOM_DATES@ is assigned to this field, fields custom/start/date and custom/end/date must be set to specify the custom date range.
+newtype DataRange_Range = DataRange_Range { fromDataRange_Range :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value when range is not specified or is unknown in this version.
 pattern DataRange_Range_RANGEUNSPECIFIED :: DataRange_Range
 pattern DataRange_Range_RANGEUNSPECIFIED = DataRange_Range "RANGE_UNSPECIFIED"
 
--- | Custom range specified by custom/start/date and custom/end/date fields.
+-- | Custom date range.
 pattern DataRange_Range_CUSTOMDATES :: DataRange_Range
 pattern DataRange_Range_CUSTOMDATES = DataRange_Range "CUSTOM_DATES"
 
@@ -272,21 +262,20 @@ pattern DataRange_Range_LAST60DAYS = DataRange_Range "LAST_60_DAYS"
   DataRange_Range_ALLTIME,
   DataRange_Range_LAST14DAYS,
   DataRange_Range_LAST60DAYS,
-  DataRange_Range
-  #-}
+  DataRange_Range #-}
 
--- | The type of the report. The type of the report will dictate what dimesions, filters, and metrics can be used.
-newtype Parameters_Type = Parameters_Type {fromParameters_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | The type of the report. The type of the report determines the dimesions, filters, and metrics that can be used.
+newtype Parameters_Type = Parameters_Type { fromParameters_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value when report type is not specified or is unknown in this version.
 pattern Parameters_Type_REPORTTYPEUNSPECIFIED :: Parameters_Type
@@ -349,100 +338,20 @@ pattern Parameters_Type_PATHATTRIBUTION = Parameters_Type "PATH_ATTRIBUTION"
   Parameters_Type_UNIQUEREACHAUDIENCE,
   Parameters_Type_FULLPATH,
   Parameters_Type_PATHATTRIBUTION,
-  Parameters_Type
-  #-}
+  Parameters_Type #-}
 
--- | The position of the path the filter should match to (first, last, or any event in path).
-newtype PathFilter_PathMatchPosition = PathFilter_PathMatchPosition {fromPathFilter_PathMatchPosition :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Default value when path match position is not specified or is unknown in this version.
-pattern PathFilter_PathMatchPosition_PATHMATCHPOSITIONUNSPECIFIED :: PathFilter_PathMatchPosition
-pattern PathFilter_PathMatchPosition_PATHMATCHPOSITIONUNSPECIFIED = PathFilter_PathMatchPosition "PATH_MATCH_POSITION_UNSPECIFIED"
-
--- | Any position in the path.
-pattern PathFilter_PathMatchPosition_Any :: PathFilter_PathMatchPosition
-pattern PathFilter_PathMatchPosition_Any = PathFilter_PathMatchPosition "ANY"
-
--- | The first position in the path.
-pattern PathFilter_PathMatchPosition_First :: PathFilter_PathMatchPosition
-pattern PathFilter_PathMatchPosition_First = PathFilter_PathMatchPosition "FIRST"
-
--- | The last position in the path.
-pattern PathFilter_PathMatchPosition_Last :: PathFilter_PathMatchPosition
-pattern PathFilter_PathMatchPosition_Last = PathFilter_PathMatchPosition "LAST"
-
-{-# COMPLETE
-  PathFilter_PathMatchPosition_PATHMATCHPOSITIONUNSPECIFIED,
-  PathFilter_PathMatchPosition_Any,
-  PathFilter_PathMatchPosition_First,
-  PathFilter_PathMatchPosition_Last,
-  PathFilter_PathMatchPosition
-  #-}
-
--- | Match logic of the filter.
-newtype PathQueryOptionsFilter_Match = PathQueryOptionsFilter_Match {fromPathQueryOptionsFilter_Match :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Default value when match is not specified or is unknown in this version.
-pattern PathQueryOptionsFilter_Match_Unknown :: PathQueryOptionsFilter_Match
-pattern PathQueryOptionsFilter_Match_Unknown = PathQueryOptionsFilter_Match "UNKNOWN"
-
--- | Matches a value exactly.
-pattern PathQueryOptionsFilter_Match_Exact :: PathQueryOptionsFilter_Match
-pattern PathQueryOptionsFilter_Match_Exact = PathQueryOptionsFilter_Match "EXACT"
-
--- | Matches a value partially.
-pattern PathQueryOptionsFilter_Match_Partial :: PathQueryOptionsFilter_Match
-pattern PathQueryOptionsFilter_Match_Partial = PathQueryOptionsFilter_Match "PARTIAL"
-
--- | Begins with a value.
-pattern PathQueryOptionsFilter_Match_BEGINSWITH :: PathQueryOptionsFilter_Match
-pattern PathQueryOptionsFilter_Match_BEGINSWITH = PathQueryOptionsFilter_Match "BEGINS_WITH"
-
--- | Matches a value, utilizing wildcard character logic in the value.
-pattern PathQueryOptionsFilter_Match_WILDCARDEXPRESSION :: PathQueryOptionsFilter_Match
-pattern PathQueryOptionsFilter_Match_WILDCARDEXPRESSION = PathQueryOptionsFilter_Match "WILDCARD_EXPRESSION"
-
-{-# COMPLETE
-  PathQueryOptionsFilter_Match_Unknown,
-  PathQueryOptionsFilter_Match_Exact,
-  PathQueryOptionsFilter_Match_Partial,
-  PathQueryOptionsFilter_Match_BEGINSWITH,
-  PathQueryOptionsFilter_Match_WILDCARDEXPRESSION,
-  PathQueryOptionsFilter_Match
-  #-}
-
--- | Format of the generated report.
-newtype QueryMetadata_Format = QueryMetadata_Format {fromQueryMetadata_Format :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | The format of the report generated by the query.
+newtype QueryMetadata_Format = QueryMetadata_Format { fromQueryMetadata_Format :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value when format is not specified or is unknown in this version.
 pattern QueryMetadata_Format_FORMATUNSPECIFIED :: QueryMetadata_Format
@@ -460,27 +369,26 @@ pattern QueryMetadata_Format_Xlsx = QueryMetadata_Format "XLSX"
   QueryMetadata_Format_FORMATUNSPECIFIED,
   QueryMetadata_Format_Csv,
   QueryMetadata_Format_Xlsx,
-  QueryMetadata_Format
-  #-}
+  QueryMetadata_Format #-}
 
--- | How often the query is run.
-newtype QuerySchedule_Frequency = QuerySchedule_Frequency {fromQuerySchedule_Frequency :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | How frequently to run the query. If set to @ONE_TIME@, the query will only be run when queries.run is called.
+newtype QuerySchedule_Frequency = QuerySchedule_Frequency { fromQuerySchedule_Frequency :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value when frequency is not specified or is unknown in this version.
 pattern QuerySchedule_Frequency_FREQUENCYUNSPECIFIED :: QuerySchedule_Frequency
 pattern QuerySchedule_Frequency_FREQUENCYUNSPECIFIED = QuerySchedule_Frequency "FREQUENCY_UNSPECIFIED"
 
--- | Only once.
+-- | Only when the query is run manually.
 pattern QuerySchedule_Frequency_ONETIME :: QuerySchedule_Frequency
 pattern QuerySchedule_Frequency_ONETIME = QuerySchedule_Frequency "ONE_TIME"
 
@@ -500,7 +408,7 @@ pattern QuerySchedule_Frequency_SEMIMONTHLY = QuerySchedule_Frequency "SEMI_MONT
 pattern QuerySchedule_Frequency_Monthly :: QuerySchedule_Frequency
 pattern QuerySchedule_Frequency_Monthly = QuerySchedule_Frequency "MONTHLY"
 
--- | Once a quarter
+-- | Once a quarter.
 pattern QuerySchedule_Frequency_Quarterly :: QuerySchedule_Frequency
 pattern QuerySchedule_Frequency_Quarterly = QuerySchedule_Frequency "QUARTERLY"
 
@@ -517,21 +425,20 @@ pattern QuerySchedule_Frequency_Yearly = QuerySchedule_Frequency "YEARLY"
   QuerySchedule_Frequency_Monthly,
   QuerySchedule_Frequency_Quarterly,
   QuerySchedule_Frequency_Yearly,
-  QuerySchedule_Frequency
-  #-}
+  QuerySchedule_Frequency #-}
 
--- | The file type of the report.
-newtype ReportStatus_Format = ReportStatus_Format {fromReportStatus_Format :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | The format of the generated report file.
+newtype ReportStatus_Format = ReportStatus_Format { fromReportStatus_Format :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value when format is not specified or is unknown in this version.
 pattern ReportStatus_Format_FORMATUNSPECIFIED :: ReportStatus_Format
@@ -549,21 +456,20 @@ pattern ReportStatus_Format_Xlsx = ReportStatus_Format "XLSX"
   ReportStatus_Format_FORMATUNSPECIFIED,
   ReportStatus_Format_Csv,
   ReportStatus_Format_Xlsx,
-  ReportStatus_Format
-  #-}
+  ReportStatus_Format #-}
 
--- | Output only. The state of the report.
-newtype ReportStatus_State = ReportStatus_State {fromReportStatus_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Output only. The state of the report generation.
+newtype ReportStatus_State = ReportStatus_State { fromReportStatus_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value when state is not specified or is unknown in this version.
 pattern ReportStatus_State_STATEUNSPECIFIED :: ReportStatus_State
@@ -591,5 +497,4 @@ pattern ReportStatus_State_Failed = ReportStatus_State "FAILED"
   ReportStatus_State_Running,
   ReportStatus_State_Done,
   ReportStatus_State_Failed,
-  ReportStatus_State
-  #-}
+  ReportStatus_State #-}

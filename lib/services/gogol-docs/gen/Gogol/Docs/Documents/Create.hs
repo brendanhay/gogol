@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,88 +31,81 @@
 --
 -- /See:/ <https://developers.google.com/docs/ Google Docs API Reference> for @docs.documents.create@.
 module Gogol.Docs.Documents.Create
-  ( -- * Resource
-    DocsDocumentsCreateResource,
+    (
+    -- * Resource
+      DocsDocumentsCreateResource
 
     -- ** Constructing a Request
-    DocsDocumentsCreate (..),
-    newDocsDocumentsCreate,
-  )
-where
+    , DocsDocumentsCreate (..)
+    , newDocsDocumentsCreate
+    ) where
 
-import Gogol.Docs.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Docs.Types
 
 -- | A resource alias for @docs.documents.create@ method which the
 -- 'DocsDocumentsCreate' request conforms to.
 type DocsDocumentsCreateResource =
-  "v1"
-    Core.:> "documents"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Document
-    Core.:> Core.Post '[Core.JSON] Document
+     "v1" Core.:>
+       "documents" Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.ReqBody '[Core.JSON] Document Core.:>
+                       Core.Post '[Core.JSON] Document
 
 -- | Creates a blank document using the title given in the request. Other fields in the request, including any provided content, are ignored. Returns the created document.
 --
 -- /See:/ 'newDocsDocumentsCreate' smart constructor.
 data DocsDocumentsCreate = DocsDocumentsCreate
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: Document,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Multipart request metadata.
+    , payload :: Document
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DocsDocumentsCreate' with the minimum fields required to make a request.
-newDocsDocumentsCreate ::
-  -- |  Multipart request metadata. See 'payload'.
-  Document ->
-  DocsDocumentsCreate
+newDocsDocumentsCreate 
+    ::  Document
+       -- ^  Multipart request metadata. See 'payload'.
+    -> DocsDocumentsCreate
 newDocsDocumentsCreate payload =
   DocsDocumentsCreate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
 instance Core.GoogleRequest DocsDocumentsCreate where
-  type Rs DocsDocumentsCreate = Document
-  type
-    Scopes DocsDocumentsCreate =
-      '[ Documents'FullControl,
-         Drive'FullControl,
-         Drive'File
-       ]
-  requestClient DocsDocumentsCreate {..} =
-    go
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      payload
-      docsService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DocsDocumentsCreateResource
-          )
-          Core.mempty
+        type Rs DocsDocumentsCreate = Document
+        type Scopes DocsDocumentsCreate =
+             '[Documents'FullControl, Drive'FullControl,
+               Drive'File]
+        requestClient DocsDocumentsCreate{..}
+          = go xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              docsService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy DocsDocumentsCreateResource)
+                      Core.mempty
+

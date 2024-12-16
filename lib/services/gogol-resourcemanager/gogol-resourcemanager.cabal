@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-resourcemanager
-version:            1.0.0.0
-synopsis:           Google Cloud Resource Manager SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-resourcemanager
+version:               1.0.0
+synopsis:              Google Cloud Resource Manager SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  Creates, reads, and updates metadata for Google Cloud Platform resource containers.
+    Creates, reads, and updates metadata for Google Cloud Platform resource containers.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -30,86 +27,89 @@ source-repository head
   subdir:   gogol-resourcemanager
 
 flag field-selectors
-  description:
-    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-
-  default:     False
-  manual:      True
+  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+  default: False
+  manual: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -Werror
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (!flag(field-selectors) && impl(ghc >=9.2))
+  if !flag(field-selectors) && impl(ghc >= 9.2)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.ResourceManager
-    Gogol.ResourceManager.Cloudresourcemanager.EffectiveTags.List
-    Gogol.ResourceManager.Cloudresourcemanager.Folders.Create
-    Gogol.ResourceManager.Cloudresourcemanager.Folders.Delete
-    Gogol.ResourceManager.Cloudresourcemanager.Folders.Get
-    Gogol.ResourceManager.Cloudresourcemanager.Folders.GetIamPolicy
-    Gogol.ResourceManager.Cloudresourcemanager.Folders.List
-    Gogol.ResourceManager.Cloudresourcemanager.Folders.Move
-    Gogol.ResourceManager.Cloudresourcemanager.Folders.Patch
-    Gogol.ResourceManager.Cloudresourcemanager.Folders.Search
-    Gogol.ResourceManager.Cloudresourcemanager.Folders.SetIamPolicy
-    Gogol.ResourceManager.Cloudresourcemanager.Folders.TestIamPermissions
-    Gogol.ResourceManager.Cloudresourcemanager.Folders.Undelete
-    Gogol.ResourceManager.Cloudresourcemanager.Liens.Create
-    Gogol.ResourceManager.Cloudresourcemanager.Liens.Delete
-    Gogol.ResourceManager.Cloudresourcemanager.Liens.Get
-    Gogol.ResourceManager.Cloudresourcemanager.Liens.List
-    Gogol.ResourceManager.Cloudresourcemanager.Operations.Get
-    Gogol.ResourceManager.Cloudresourcemanager.Organizations.Get
-    Gogol.ResourceManager.Cloudresourcemanager.Organizations.GetIamPolicy
-    Gogol.ResourceManager.Cloudresourcemanager.Organizations.Search
-    Gogol.ResourceManager.Cloudresourcemanager.Organizations.SetIamPolicy
-    Gogol.ResourceManager.Cloudresourcemanager.Organizations.TestIamPermissions
-    Gogol.ResourceManager.Cloudresourcemanager.Projects.Create
-    Gogol.ResourceManager.Cloudresourcemanager.Projects.Delete
-    Gogol.ResourceManager.Cloudresourcemanager.Projects.Get
-    Gogol.ResourceManager.Cloudresourcemanager.Projects.GetIamPolicy
-    Gogol.ResourceManager.Cloudresourcemanager.Projects.List
-    Gogol.ResourceManager.Cloudresourcemanager.Projects.Move
-    Gogol.ResourceManager.Cloudresourcemanager.Projects.Patch
-    Gogol.ResourceManager.Cloudresourcemanager.Projects.Search
-    Gogol.ResourceManager.Cloudresourcemanager.Projects.SetIamPolicy
-    Gogol.ResourceManager.Cloudresourcemanager.Projects.TestIamPermissions
-    Gogol.ResourceManager.Cloudresourcemanager.Projects.Undelete
-    Gogol.ResourceManager.Cloudresourcemanager.TagBindings.Create
-    Gogol.ResourceManager.Cloudresourcemanager.TagBindings.Delete
-    Gogol.ResourceManager.Cloudresourcemanager.TagBindings.List
-    Gogol.ResourceManager.Cloudresourcemanager.TagKeys.Create
-    Gogol.ResourceManager.Cloudresourcemanager.TagKeys.Delete
-    Gogol.ResourceManager.Cloudresourcemanager.TagKeys.Get
-    Gogol.ResourceManager.Cloudresourcemanager.TagKeys.GetIamPolicy
-    Gogol.ResourceManager.Cloudresourcemanager.TagKeys.List
-    Gogol.ResourceManager.Cloudresourcemanager.TagKeys.Patch
-    Gogol.ResourceManager.Cloudresourcemanager.TagKeys.SetIamPolicy
-    Gogol.ResourceManager.Cloudresourcemanager.TagKeys.TestIamPermissions
-    Gogol.ResourceManager.Cloudresourcemanager.TagValues.Create
-    Gogol.ResourceManager.Cloudresourcemanager.TagValues.Delete
-    Gogol.ResourceManager.Cloudresourcemanager.TagValues.Get
-    Gogol.ResourceManager.Cloudresourcemanager.TagValues.GetIamPolicy
-    Gogol.ResourceManager.Cloudresourcemanager.TagValues.List
-    Gogol.ResourceManager.Cloudresourcemanager.TagValues.Patch
-    Gogol.ResourceManager.Cloudresourcemanager.TagValues.SetIamPolicy
-    Gogol.ResourceManager.Cloudresourcemanager.TagValues.TagHolds.Create
-    Gogol.ResourceManager.Cloudresourcemanager.TagValues.TagHolds.Delete
-    Gogol.ResourceManager.Cloudresourcemanager.TagValues.TagHolds.List
-    Gogol.ResourceManager.Cloudresourcemanager.TagValues.TestIamPermissions
-    Gogol.ResourceManager.Types
+      Gogol.ResourceManager
+    , Gogol.ResourceManager.Cloudresourcemanager.EffectiveTags.List
+    , Gogol.ResourceManager.Cloudresourcemanager.Folders.Create
+    , Gogol.ResourceManager.Cloudresourcemanager.Folders.Delete
+    , Gogol.ResourceManager.Cloudresourcemanager.Folders.Get
+    , Gogol.ResourceManager.Cloudresourcemanager.Folders.GetIamPolicy
+    , Gogol.ResourceManager.Cloudresourcemanager.Folders.List
+    , Gogol.ResourceManager.Cloudresourcemanager.Folders.Move
+    , Gogol.ResourceManager.Cloudresourcemanager.Folders.Patch
+    , Gogol.ResourceManager.Cloudresourcemanager.Folders.Search
+    , Gogol.ResourceManager.Cloudresourcemanager.Folders.SetIamPolicy
+    , Gogol.ResourceManager.Cloudresourcemanager.Folders.TestIamPermissions
+    , Gogol.ResourceManager.Cloudresourcemanager.Folders.Undelete
+    , Gogol.ResourceManager.Cloudresourcemanager.Liens.Create
+    , Gogol.ResourceManager.Cloudresourcemanager.Liens.Delete
+    , Gogol.ResourceManager.Cloudresourcemanager.Liens.Get
+    , Gogol.ResourceManager.Cloudresourcemanager.Liens.List
+    , Gogol.ResourceManager.Cloudresourcemanager.Operations.Get
+    , Gogol.ResourceManager.Cloudresourcemanager.Organizations.Get
+    , Gogol.ResourceManager.Cloudresourcemanager.Organizations.GetIamPolicy
+    , Gogol.ResourceManager.Cloudresourcemanager.Organizations.Search
+    , Gogol.ResourceManager.Cloudresourcemanager.Organizations.SetIamPolicy
+    , Gogol.ResourceManager.Cloudresourcemanager.Organizations.TestIamPermissions
+    , Gogol.ResourceManager.Cloudresourcemanager.Projects.Create
+    , Gogol.ResourceManager.Cloudresourcemanager.Projects.Delete
+    , Gogol.ResourceManager.Cloudresourcemanager.Projects.Get
+    , Gogol.ResourceManager.Cloudresourcemanager.Projects.GetIamPolicy
+    , Gogol.ResourceManager.Cloudresourcemanager.Projects.List
+    , Gogol.ResourceManager.Cloudresourcemanager.Projects.Move
+    , Gogol.ResourceManager.Cloudresourcemanager.Projects.Patch
+    , Gogol.ResourceManager.Cloudresourcemanager.Projects.Search
+    , Gogol.ResourceManager.Cloudresourcemanager.Projects.SetIamPolicy
+    , Gogol.ResourceManager.Cloudresourcemanager.Projects.TestIamPermissions
+    , Gogol.ResourceManager.Cloudresourcemanager.Projects.Undelete
+    , Gogol.ResourceManager.Cloudresourcemanager.TagBindings.Create
+    , Gogol.ResourceManager.Cloudresourcemanager.TagBindings.Delete
+    , Gogol.ResourceManager.Cloudresourcemanager.TagBindings.List
+    , Gogol.ResourceManager.Cloudresourcemanager.TagKeys.Create
+    , Gogol.ResourceManager.Cloudresourcemanager.TagKeys.Delete
+    , Gogol.ResourceManager.Cloudresourcemanager.TagKeys.Get
+    , Gogol.ResourceManager.Cloudresourcemanager.TagKeys.GetIamPolicy
+    , Gogol.ResourceManager.Cloudresourcemanager.TagKeys.GetNamespaced
+    , Gogol.ResourceManager.Cloudresourcemanager.TagKeys.List
+    , Gogol.ResourceManager.Cloudresourcemanager.TagKeys.Patch
+    , Gogol.ResourceManager.Cloudresourcemanager.TagKeys.SetIamPolicy
+    , Gogol.ResourceManager.Cloudresourcemanager.TagKeys.TestIamPermissions
+    , Gogol.ResourceManager.Cloudresourcemanager.TagValues.Create
+    , Gogol.ResourceManager.Cloudresourcemanager.TagValues.Delete
+    , Gogol.ResourceManager.Cloudresourcemanager.TagValues.Get
+    , Gogol.ResourceManager.Cloudresourcemanager.TagValues.GetIamPolicy
+    , Gogol.ResourceManager.Cloudresourcemanager.TagValues.GetNamespaced
+    , Gogol.ResourceManager.Cloudresourcemanager.TagValues.List
+    , Gogol.ResourceManager.Cloudresourcemanager.TagValues.Patch
+    , Gogol.ResourceManager.Cloudresourcemanager.TagValues.SetIamPolicy
+    , Gogol.ResourceManager.Cloudresourcemanager.TagValues.TagHolds.Create
+    , Gogol.ResourceManager.Cloudresourcemanager.TagValues.TagHolds.Delete
+    , Gogol.ResourceManager.Cloudresourcemanager.TagValues.TagHolds.List
+    , Gogol.ResourceManager.Cloudresourcemanager.TagValues.TestIamPermissions
+    , Gogol.ResourceManager.Types
 
   other-modules:
-    Gogol.ResourceManager.Internal.Product
-    Gogol.ResourceManager.Internal.Sum
+      Gogol.ResourceManager.Internal.Product
+    , Gogol.ResourceManager.Internal.Sum
 
   build-depends:
-    , base        >=4.12   && <5
-    , gogol-core  ^>=1.0.0
+      gogol-core ^>= 1.0.0

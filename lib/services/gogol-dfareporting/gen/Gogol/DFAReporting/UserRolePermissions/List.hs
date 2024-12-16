@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,100 +31,92 @@
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.userRolePermissions.list@.
 module Gogol.DFAReporting.UserRolePermissions.List
-  ( -- * Resource
-    DFAReportingUserRolePermissionsListResource,
+    (
+    -- * Resource
+      DFAReportingUserRolePermissionsListResource
 
     -- ** Constructing a Request
-    DFAReportingUserRolePermissionsList (..),
-    newDFAReportingUserRolePermissionsList,
-  )
-where
+    , DFAReportingUserRolePermissionsList (..)
+    , newDFAReportingUserRolePermissionsList
+    ) where
 
-import Gogol.DFAReporting.Types
 import qualified Gogol.Prelude as Core
+import Gogol.DFAReporting.Types
 
 -- | A resource alias for @dfareporting.userRolePermissions.list@ method which the
 -- 'DFAReportingUserRolePermissionsList' request conforms to.
 type DFAReportingUserRolePermissionsListResource =
-  "dfareporting"
-    Core.:> "v4"
-    Core.:> "userprofiles"
-    Core.:> Core.Capture "profileId" Core.Int64
-    Core.:> "userRolePermissions"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParams "ids" Core.Int64
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              UserRolePermissionsListResponse
+     "dfareporting" Core.:>
+       "v4" Core.:>
+         "userprofiles" Core.:>
+           Core.Capture "profileId" Core.Int64 Core.:>
+             "userRolePermissions" Core.:>
+               Core.QueryParam "$.xgafv" Xgafv Core.:>
+                 Core.QueryParam "access_token" Core.Text Core.:>
+                   Core.QueryParam "callback" Core.Text Core.:>
+                     Core.QueryParams "ids" Core.Int64 Core.:>
+                       Core.QueryParam "uploadType" Core.Text Core.:>
+                         Core.QueryParam "upload_protocol" Core.Text Core.:>
+                           Core.QueryParam "alt" Core.AltJSON Core.:>
+                             Core.Get '[Core.JSON]
+                               UserRolePermissionsListResponse
 
 -- | Gets a list of user role permissions, possibly filtered.
 --
 -- /See:/ 'newDFAReportingUserRolePermissionsList' smart constructor.
 data DFAReportingUserRolePermissionsList = DFAReportingUserRolePermissionsList
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Select only user role permissions with these IDs.
-    ids :: (Core.Maybe [Core.Int64]),
-    -- | User profile ID associated with this request.
-    profileId :: Core.Int64,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Select only user role permissions with these IDs.
+    , ids :: (Core.Maybe [Core.Int64])
+      -- | User profile ID associated with this request.
+    , profileId :: Core.Int64
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DFAReportingUserRolePermissionsList' with the minimum fields required to make a request.
-newDFAReportingUserRolePermissionsList ::
-  -- |  User profile ID associated with this request. See 'profileId'.
-  Core.Int64 ->
-  DFAReportingUserRolePermissionsList
+newDFAReportingUserRolePermissionsList 
+    ::  Core.Int64
+       -- ^  User profile ID associated with this request. See 'profileId'.
+    -> DFAReportingUserRolePermissionsList
 newDFAReportingUserRolePermissionsList profileId =
   DFAReportingUserRolePermissionsList
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      ids = Core.Nothing,
-      profileId = profileId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , ids = Core.Nothing
+    , profileId = profileId
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingUserRolePermissionsList
-  where
-  type
-    Rs DFAReportingUserRolePermissionsList =
-      UserRolePermissionsListResponse
-  type
-    Scopes DFAReportingUserRolePermissionsList =
-      '[Dfatrafficking'FullControl]
-  requestClient DFAReportingUserRolePermissionsList {..} =
-    go
-      profileId
-      xgafv
-      accessToken
-      callback
-      (ids Core.^. Core._Default)
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      dFAReportingService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy
-                DFAReportingUserRolePermissionsListResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           DFAReportingUserRolePermissionsList
+         where
+        type Rs DFAReportingUserRolePermissionsList =
+             UserRolePermissionsListResponse
+        type Scopes DFAReportingUserRolePermissionsList =
+             '[Dfatrafficking'FullControl]
+        requestClient DFAReportingUserRolePermissionsList{..}
+          = go profileId xgafv accessToken callback
+              (ids Core.^. Core._Default)
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              dFAReportingService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           DFAReportingUserRolePermissionsListResource)
+                      Core.mempty
+

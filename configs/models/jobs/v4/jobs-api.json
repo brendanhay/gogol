@@ -903,7 +903,7 @@
       }
     }
   },
-  "revision": "20221219",
+  "revision": "20240614",
   "rootUrl": "https://jobs.googleapis.com/",
   "schemas": {
     "ApplicationInfo": {
@@ -1223,6 +1223,7 @@
           "type": "string"
         },
         "keywordSearchableJobCustomAttributes": {
+          "deprecated": true,
           "description": "This field is deprecated. Please set the searchability of the custom attribute in the Job.custom_attributes going forward. A list of keys of filterable Job.custom_attributes, whose corresponding `string_values` are used in keyword searches. Jobs with `string_values` under these specified field keys are returned if any of the values match the search keyword. Custom field values with parenthesis, brackets and special symbols are not searchable as-is, and those keyword queries must be surrounded by quotes.",
           "items": {
             "type": "string"
@@ -1885,6 +1886,7 @@
           "type": "string"
         },
         "visibility": {
+          "deprecated": true,
           "description": "Deprecated. The job is only visible to the owner. The visibility of the job. Defaults to Visibility.ACCOUNT_ONLY if not specified.",
           "enum": [
             "VISIBILITY_UNSPECIFIED",
@@ -2397,6 +2399,12 @@
             "TELECOMMUTE_ALLOWED",
             "TELECOMMUTE_JOBS_EXCLUDED"
           ],
+          "enumDeprecated": [
+            false,
+            true,
+            false,
+            false
+          ],
           "enumDescriptions": [
             "Default value if the telecommute preference isn't specified.",
             "Deprecated: Ignore telecommute status of jobs. Use TELECOMMUTE_JOBS_EXCLUDED if want to exclude telecommute jobs.",
@@ -2435,20 +2443,6 @@
       },
       "type": "object"
     },
-    "MendelDebugInput": {
-      "description": "Message representing input to a Mendel server for debug forcing. See go/mendel-debug-forcing for more details. Next ID: 2",
-      "id": "MendelDebugInput",
-      "properties": {
-        "namespacedDebugInput": {
-          "additionalProperties": {
-            "$ref": "NamespacedDebugInput"
-          },
-          "description": "When a request spans multiple servers, a MendelDebugInput may travel with the request and take effect in all the servers. This field is a map of namespaces to NamespacedMendelDebugInput protos. In a single server, up to two NamespacedMendelDebugInput protos are applied: 1. NamespacedMendelDebugInput with the global namespace (key == \"\"). 2. NamespacedMendelDebugInput with the server's namespace. When both NamespacedMendelDebugInput protos are present, they are merged. See go/mendel-debug-forcing for more details.",
-          "type": "object"
-        }
-      },
-      "type": "object"
-    },
     "Money": {
       "description": "Represents an amount of money with its currency type.",
       "id": "Money",
@@ -2465,119 +2459,6 @@
         "units": {
           "description": "The whole units of the amount. For example if `currencyCode` is `\"USD\"`, then 1 unit is one US dollar.",
           "format": "int64",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "NamespacedDebugInput": {
-      "description": "Next ID: 16",
-      "id": "NamespacedDebugInput",
-      "properties": {
-        "absolutelyForcedExpNames": {
-          "description": "Set of experiment names to be absolutely forced. These experiments will be forced without evaluating the conditions.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "absolutelyForcedExpTags": {
-          "description": "Set of experiment tags to be absolutely forced. The experiments with these tags will be forced without evaluating the conditions.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "absolutelyForcedExps": {
-          "description": "Set of experiment ids to be absolutely forced. These ids will be forced without evaluating the conditions.",
-          "items": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "type": "array"
-        },
-        "conditionallyForcedExpNames": {
-          "description": "Set of experiment names to be conditionally forced. These experiments will be forced only if their conditions and their parent domain's conditions are true.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "conditionallyForcedExpTags": {
-          "description": "Set of experiment tags to be conditionally forced. The experiments with these tags will be forced only if their conditions and their parent domain's conditions are true.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "conditionallyForcedExps": {
-          "description": "Set of experiment ids to be conditionally forced. These ids will be forced only if their conditions and their parent domain's conditions are true.",
-          "items": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "type": "array"
-        },
-        "disableAutomaticEnrollmentSelection": {
-          "description": "If true, disable automatic enrollment selection (at all diversion points). Automatic enrollment selection means experiment selection process based on the experiment's automatic enrollment condition. This does not disable selection of forced experiments. Setting this field to false does not change anything in the experiment selection process.",
-          "type": "boolean"
-        },
-        "disableExpNames": {
-          "description": "Set of experiment names to be disabled. If an experiment is disabled, it is never selected nor forced. If an aggregate experiment is disabled, its partitions are disabled together. If an experiment with an enrollment is disabled, the enrollment is disabled together. If a name corresponds to a domain, the domain itself and all descendant experiments and domains are disabled together.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "disableExpTags": {
-          "description": "Set of experiment tags to be disabled. All experiments that are tagged with one or more of these tags are disabled. If an experiment is disabled, it is never selected nor forced. If an aggregate experiment is disabled, its partitions are disabled together. If an experiment with an enrollment is disabled, the enrollment is disabled together.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "disableExps": {
-          "description": "Set of experiment ids to be disabled. If an experiment is disabled, it is never selected nor forced. If an aggregate experiment is disabled, its partitions are disabled together. If an experiment with an enrollment is disabled, the enrollment is disabled together. If an ID corresponds to a domain, the domain itself and all descendant experiments and domains are disabled together.",
-          "items": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "type": "array"
-        },
-        "disableManualEnrollmentSelection": {
-          "description": "If true, disable manual enrollment selection (at all diversion points). Manual enrollment selection means experiment selection process based on the request's manual enrollment states (a.k.a. opt-in experiments). This does not disable selection of forced experiments. Setting this field to false does not change anything in the experiment selection process.",
-          "type": "boolean"
-        },
-        "disableOrganicSelection": {
-          "description": "If true, disable organic experiment selection (at all diversion points). Organic selection means experiment selection process based on traffic allocation and diversion condition evaluation. This does not disable selection of forced experiments. This is useful in cases when it is not known whether experiment selection behavior is responsible for a error or breakage. Disabling organic selection may help to isolate the cause of a given problem. Setting this field to false does not change anything in the experiment selection process.",
-          "type": "boolean"
-        },
-        "forcedFlags": {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Flags to force in a particular experiment state. Map from flag name to flag value.",
-          "type": "object"
-        },
-        "forcedRollouts": {
-          "additionalProperties": {
-            "type": "boolean"
-          },
-          "description": "Rollouts to force in a particular experiment state. Map from rollout name to rollout value.",
-          "type": "object"
-        },
-        "testingMode": {
-          "description": "Sets different testing modes. See the documentation in the TestingMode message for more information.",
-          "enum": [
-            "TESTING_MODE_UNSPECIFIED",
-            "TESTING_MODE_ALL_OFF",
-            "TESTING_MODE_ALL_ON"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
-          ],
           "type": "string"
         }
       },
@@ -2612,7 +2493,7 @@
             "description": "Properties of the object. Contains field @type with type URL.",
             "type": "any"
           },
-          "description": "The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.",
+          "description": "The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.",
           "type": "object"
         }
       },
@@ -2748,6 +2629,7 @@
           "description": "Controls over how job documents get ranked on top of existing relevance score (determined by API algorithm)."
         },
         "disableKeywordMatch": {
+          "deprecated": true,
           "description": "This field is deprecated. Please use SearchJobsRequest.keyword_match_mode going forward. To migrate, disable_keyword_match set to false maps to KeywordMatchMode.KEYWORD_MATCH_ALL, and disable_keyword_match set to true maps to KeywordMatchMode.KEYWORD_MATCH_DISABLED. If SearchJobsRequest.keyword_match_mode is set, this field is ignored. Controls whether to disable exact keyword match on Job.title, Job.description, Job.company_display_name, Job.addresses, Job.qualifications. When disable keyword match is turned off, a keyword match returns jobs that do not match given category filters when there are matching keywords. For example, for the query \"program manager,\" a result is returned even if the job posting has the title \"software developer,\" which doesn't fall into \"program manager\" ontology, but does have \"program manager\" appearing in its description. For queries like \"cloud\" that don't contain title or location specific ontology, jobs with \"cloud\" keyword matches are returned regardless of this flag's value. Use Company.keyword_searchable_job_custom_attributes if company-specific globally matched custom field/attribute string values are needed. Enabling keyword match improves recall of subsequent search requests. Defaults to false.",
           "type": "boolean"
         },
@@ -2759,6 +2641,7 @@
             "SIMPLE",
             "ONE_PER_COMPANY",
             "TWO_PER_COMPANY",
+            "MAX_THREE_PER_COMPANY",
             "DIVERSIFY_BY_LOOSER_SIMILARITY"
           ],
           "enumDescriptions": [
@@ -2767,6 +2650,7 @@
             "Default diversifying behavior. The result list is ordered so that highly similar results are pushed to the end of the last page of search results.",
             "Only one job from the same company will be shown at once, other jobs under same company are pushed to the end of the last page of search result.",
             "Similar to ONE_PER_COMPANY, but it allows at most two jobs in the same company to be shown at once, the other jobs under same company are pushed to the end of the last page of search result.",
+            "Similar to ONE_PER_COMPANY, but it allows at most three jobs in the same company to be shown at once, the other jobs under same company are dropped.",
             "The result list is ordered such that somewhat similar results are pushed to the end of the last page of the search results. This option is recommended if SIMPLE diversification does not diversify enough."
           ],
           "type": "string"

@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,96 +31,89 @@
 --
 -- /See:/ <https://cloud.google.com/identity/ Cloud Identity API Reference> for @cloudidentity.devices.cancelWipe@.
 module Gogol.CloudIdentity.Devices.CancelWipe
-  ( -- * Resource
-    CloudIdentityDevicesCancelWipeResource,
+    (
+    -- * Resource
+      CloudIdentityDevicesCancelWipeResource
 
     -- ** Constructing a Request
-    CloudIdentityDevicesCancelWipe (..),
-    newCloudIdentityDevicesCancelWipe,
-  )
-where
+    , CloudIdentityDevicesCancelWipe (..)
+    , newCloudIdentityDevicesCancelWipe
+    ) where
 
-import Gogol.CloudIdentity.Types
 import qualified Gogol.Prelude as Core
+import Gogol.CloudIdentity.Types
 
 -- | A resource alias for @cloudidentity.devices.cancelWipe@ method which the
 -- 'CloudIdentityDevicesCancelWipe' request conforms to.
 type CloudIdentityDevicesCancelWipeResource =
-  "v1"
-    Core.:> Core.CaptureMode "name" "cancelWipe" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleAppsCloudidentityDevicesV1CancelWipeDeviceRequest
-    Core.:> Core.Post '[Core.JSON] Operation
+     "v1" Core.:>
+       Core.CaptureMode "name" "cancelWipe" Core.Text
+         Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.ReqBody '[Core.JSON]
+                       GoogleAppsCloudidentityDevicesV1CancelWipeDeviceRequest
+                       Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Cancels an unfinished device wipe. This operation can be used to cancel device wipe in the gap between the wipe operation returning success and the device being wiped. This operation is possible when the device is in a \"pending wipe\" state. The device enters the \"pending wipe\" state when a wipe device command is issued, but has not yet been sent to the device. The cancel wipe will fail if the wipe command has already been issued to the device.
 --
 -- /See:/ 'newCloudIdentityDevicesCancelWipe' smart constructor.
 data CloudIdentityDevicesCancelWipe = CloudIdentityDevicesCancelWipe
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. <https://cloud.google.com/apis/design/resource_names Resource name> of the Device in format: @devices\/{device}@, where device is the unique ID assigned to the Device.
-    name :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: GoogleAppsCloudidentityDevicesV1CancelWipeDeviceRequest,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. <https://cloud.google.com/apis/design/resource_names Resource name> of the Device in format: @devices\/{device}@, where device is the unique ID assigned to the Device.
+    , name :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: GoogleAppsCloudidentityDevicesV1CancelWipeDeviceRequest
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'CloudIdentityDevicesCancelWipe' with the minimum fields required to make a request.
-newCloudIdentityDevicesCancelWipe ::
-  -- |  Required. <https://cloud.google.com/apis/design/resource_names Resource name> of the Device in format: @devices\/{device}@, where device is the unique ID assigned to the Device. See 'name'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  GoogleAppsCloudidentityDevicesV1CancelWipeDeviceRequest ->
-  CloudIdentityDevicesCancelWipe
+newCloudIdentityDevicesCancelWipe 
+    ::  Core.Text
+       -- ^  Required. <https://cloud.google.com/apis/design/resource_names Resource name> of the Device in format: @devices\/{device}@, where device is the unique ID assigned to the Device. See 'name'.
+    -> GoogleAppsCloudidentityDevicesV1CancelWipeDeviceRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> CloudIdentityDevicesCancelWipe
 newCloudIdentityDevicesCancelWipe name payload =
   CloudIdentityDevicesCancelWipe
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudIdentityDevicesCancelWipe
-  where
-  type Rs CloudIdentityDevicesCancelWipe = Operation
-  type
-    Scopes CloudIdentityDevicesCancelWipe =
-      '[CloudIdentity'Devices]
-  requestClient CloudIdentityDevicesCancelWipe {..} =
-    go
-      name
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      payload
-      cloudIdentityService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy CloudIdentityDevicesCancelWipeResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           CloudIdentityDevicesCancelWipe
+         where
+        type Rs CloudIdentityDevicesCancelWipe = Operation
+        type Scopes CloudIdentityDevicesCancelWipe =
+             '[CloudIdentity'Devices]
+        requestClient CloudIdentityDevicesCancelWipe{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              cloudIdentityService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy CloudIdentityDevicesCancelWipeResource)
+                      Core.mempty
+

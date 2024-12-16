@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,58 +31,56 @@
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.calendars.insert@.
 module Gogol.AppsCalendar.Calendar.Calendars.Insert
-  ( -- * Resource
-    CalendarCalendarsInsertResource,
+    (
+    -- * Resource
+      CalendarCalendarsInsertResource
 
     -- ** Constructing a Request
-    CalendarCalendarsInsert (..),
-    newCalendarCalendarsInsert,
-  )
-where
+    , CalendarCalendarsInsert (..)
+    , newCalendarCalendarsInsert
+    ) where
 
-import Gogol.AppsCalendar.Types
 import qualified Gogol.Prelude as Core
+import Gogol.AppsCalendar.Types
 
 -- | A resource alias for @calendar.calendars.insert@ method which the
 -- 'CalendarCalendarsInsert' request conforms to.
 type CalendarCalendarsInsertResource =
-  "calendar"
-    Core.:> "v3"
-    Core.:> "calendars"
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Calendar
-    Core.:> Core.Post '[Core.JSON] Calendar
+     "calendar" Core.:>
+       "v3" Core.:>
+         "calendars" Core.:>
+           Core.QueryParam "alt" Core.AltJSON Core.:>
+             Core.ReqBody '[Core.JSON] Calendar Core.:>
+               Core.Post '[Core.JSON] Calendar
 
 -- | Creates a secondary calendar.
 --
 -- /See:/ 'newCalendarCalendarsInsert' smart constructor.
 newtype CalendarCalendarsInsert = CalendarCalendarsInsert
-  { -- | Multipart request metadata.
-    payload :: Calendar
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Multipart request metadata.
+      payload :: Calendar
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'CalendarCalendarsInsert' with the minimum fields required to make a request.
-newCalendarCalendarsInsert ::
-  -- |  Multipart request metadata. See 'payload'.
-  Calendar ->
-  CalendarCalendarsInsert
+newCalendarCalendarsInsert 
+    ::  Calendar
+       -- ^  Multipart request metadata. See 'payload'.
+    -> CalendarCalendarsInsert
 newCalendarCalendarsInsert payload = CalendarCalendarsInsert {payload = payload}
 
-instance Core.GoogleRequest CalendarCalendarsInsert where
-  type Rs CalendarCalendarsInsert = Calendar
-  type
-    Scopes CalendarCalendarsInsert =
-      '[Calendar'FullControl]
-  requestClient CalendarCalendarsInsert {..} =
-    go
-      (Core.Just Core.AltJSON)
-      payload
-      appsCalendarService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy CalendarCalendarsInsertResource
-          )
-          Core.mempty
+instance Core.GoogleRequest CalendarCalendarsInsert
+         where
+        type Rs CalendarCalendarsInsert = Calendar
+        type Scopes CalendarCalendarsInsert =
+             '[Calendar'FullControl]
+        requestClient CalendarCalendarsInsert{..}
+          = go (Core.Just Core.AltJSON) payload
+              appsCalendarService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy CalendarCalendarsInsertResource)
+                      Core.mempty
+

@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,41 +26,42 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.SiteVerification.Types
-  ( -- * Configuration
-    siteVerificationService,
+    (
+    -- * Configuration
+      siteVerificationService
 
     -- * OAuth Scopes
-    Siteverification'FullControl,
-    Siteverification'VerifyOnly,
+    , Siteverification'FullControl
+    , Siteverification'VerifyOnly
 
     -- * Types
 
     -- ** SiteVerificationWebResourceGettokenRequest
-    SiteVerificationWebResourceGettokenRequest (..),
-    newSiteVerificationWebResourceGettokenRequest,
+    , SiteVerificationWebResourceGettokenRequest (..)
+    , newSiteVerificationWebResourceGettokenRequest
 
     -- ** SiteVerificationWebResourceGettokenRequest_Site
-    SiteVerificationWebResourceGettokenRequest_Site (..),
-    newSiteVerificationWebResourceGettokenRequest_Site,
+    , SiteVerificationWebResourceGettokenRequest_Site (..)
+    , newSiteVerificationWebResourceGettokenRequest_Site
 
     -- ** SiteVerificationWebResourceGettokenResponse
-    SiteVerificationWebResourceGettokenResponse (..),
-    newSiteVerificationWebResourceGettokenResponse,
+    , SiteVerificationWebResourceGettokenResponse (..)
+    , newSiteVerificationWebResourceGettokenResponse
 
     -- ** SiteVerificationWebResourceListResponse
-    SiteVerificationWebResourceListResponse (..),
-    newSiteVerificationWebResourceListResponse,
+    , SiteVerificationWebResourceListResponse (..)
+    , newSiteVerificationWebResourceListResponse
 
     -- ** SiteVerificationWebResourceResource
-    SiteVerificationWebResourceResource (..),
-    newSiteVerificationWebResourceResource,
+    , SiteVerificationWebResourceResource (..)
+    , newSiteVerificationWebResourceResource
 
     -- ** SiteVerificationWebResourceResource_Site
-    SiteVerificationWebResourceResource_Site (..),
-    newSiteVerificationWebResourceResource_Site,
-  )
-where
+    , SiteVerificationWebResourceResource_Site (..)
+    , newSiteVerificationWebResourceResource_Site
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.SiteVerification.Internal.Product
@@ -67,10 +69,10 @@ import Gogol.SiteVerification.Internal.Sum
 
 -- | Default request referring to version @v1@ of the Google Site Verification API. This contains the host and root path used as a starting point for constructing service requests.
 siteVerificationService :: Core.ServiceConfig
-siteVerificationService =
-  Core.defaultService
-    (Core.ServiceId "siteVerification:v1")
-    "www.googleapis.com"
+siteVerificationService
+  = Core.defaultService
+      (Core.ServiceId "siteVerification:v1")
+      "www.googleapis.com"
 
 -- | Manage the list of sites and domains you control
 type Siteverification'FullControl = "https://www.googleapis.com/auth/siteverification"

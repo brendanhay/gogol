@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,369 +31,397 @@
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference>
 module Gogol.AdSense
-  ( -- * Configuration
-    adSenseService,
+    (
+    -- * Configuration
+      adSenseService
 
     -- * OAuth Scopes
-    Adsense'FullControl,
-    Adsense'Readonly,
+    , Adsense'FullControl
+    , Adsense'Readonly
 
     -- * Resources
 
     -- ** adsense.accounts.adclients.adunits.create
-    AdSenseAccountsAdclientsAdunitsCreateResource,
-    AdSenseAccountsAdclientsAdunitsCreate (..),
-    newAdSenseAccountsAdclientsAdunitsCreate,
+    , AdSenseAccountsAdclientsAdunitsCreateResource
+    , AdSenseAccountsAdclientsAdunitsCreate (..)
+    , newAdSenseAccountsAdclientsAdunitsCreate
 
     -- ** adsense.accounts.adclients.adunits.get
-    AdSenseAccountsAdclientsAdunitsGetResource,
-    AdSenseAccountsAdclientsAdunitsGet (..),
-    newAdSenseAccountsAdclientsAdunitsGet,
+    , AdSenseAccountsAdclientsAdunitsGetResource
+    , AdSenseAccountsAdclientsAdunitsGet (..)
+    , newAdSenseAccountsAdclientsAdunitsGet
 
     -- ** adsense.accounts.adclients.adunits.getAdcode
-    AdSenseAccountsAdclientsAdunitsGetAdcodeResource,
-    AdSenseAccountsAdclientsAdunitsGetAdcode (..),
-    newAdSenseAccountsAdclientsAdunitsGetAdcode,
+    , AdSenseAccountsAdclientsAdunitsGetAdcodeResource
+    , AdSenseAccountsAdclientsAdunitsGetAdcode (..)
+    , newAdSenseAccountsAdclientsAdunitsGetAdcode
 
     -- ** adsense.accounts.adclients.adunits.list
-    AdSenseAccountsAdclientsAdunitsListResource,
-    AdSenseAccountsAdclientsAdunitsList (..),
-    newAdSenseAccountsAdclientsAdunitsList,
+    , AdSenseAccountsAdclientsAdunitsListResource
+    , AdSenseAccountsAdclientsAdunitsList (..)
+    , newAdSenseAccountsAdclientsAdunitsList
 
     -- ** adsense.accounts.adclients.adunits.listLinkedCustomChannels
-    AdSenseAccountsAdclientsAdunitsListLinkedCustomChannelsResource,
-    AdSenseAccountsAdclientsAdunitsListLinkedCustomChannels (..),
-    newAdSenseAccountsAdclientsAdunitsListLinkedCustomChannels,
+    , AdSenseAccountsAdclientsAdunitsListLinkedCustomChannelsResource
+    , AdSenseAccountsAdclientsAdunitsListLinkedCustomChannels (..)
+    , newAdSenseAccountsAdclientsAdunitsListLinkedCustomChannels
 
     -- ** adsense.accounts.adclients.adunits.patch
-    AdSenseAccountsAdclientsAdunitsPatchResource,
-    AdSenseAccountsAdclientsAdunitsPatch (..),
-    newAdSenseAccountsAdclientsAdunitsPatch,
+    , AdSenseAccountsAdclientsAdunitsPatchResource
+    , AdSenseAccountsAdclientsAdunitsPatch (..)
+    , newAdSenseAccountsAdclientsAdunitsPatch
 
     -- ** adsense.accounts.adclients.customchannels.create
-    AdSenseAccountsAdclientsCustomchannelsCreateResource,
-    AdSenseAccountsAdclientsCustomchannelsCreate (..),
-    newAdSenseAccountsAdclientsCustomchannelsCreate,
+    , AdSenseAccountsAdclientsCustomchannelsCreateResource
+    , AdSenseAccountsAdclientsCustomchannelsCreate (..)
+    , newAdSenseAccountsAdclientsCustomchannelsCreate
 
     -- ** adsense.accounts.adclients.customchannels.delete
-    AdSenseAccountsAdclientsCustomchannelsDeleteResource,
-    AdSenseAccountsAdclientsCustomchannelsDelete (..),
-    newAdSenseAccountsAdclientsCustomchannelsDelete,
+    , AdSenseAccountsAdclientsCustomchannelsDeleteResource
+    , AdSenseAccountsAdclientsCustomchannelsDelete (..)
+    , newAdSenseAccountsAdclientsCustomchannelsDelete
 
     -- ** adsense.accounts.adclients.customchannels.get
-    AdSenseAccountsAdclientsCustomchannelsGetResource,
-    AdSenseAccountsAdclientsCustomchannelsGet (..),
-    newAdSenseAccountsAdclientsCustomchannelsGet,
+    , AdSenseAccountsAdclientsCustomchannelsGetResource
+    , AdSenseAccountsAdclientsCustomchannelsGet (..)
+    , newAdSenseAccountsAdclientsCustomchannelsGet
 
     -- ** adsense.accounts.adclients.customchannels.list
-    AdSenseAccountsAdclientsCustomchannelsListResource,
-    AdSenseAccountsAdclientsCustomchannelsList (..),
-    newAdSenseAccountsAdclientsCustomchannelsList,
+    , AdSenseAccountsAdclientsCustomchannelsListResource
+    , AdSenseAccountsAdclientsCustomchannelsList (..)
+    , newAdSenseAccountsAdclientsCustomchannelsList
 
     -- ** adsense.accounts.adclients.customchannels.listLinkedAdUnits
-    AdSenseAccountsAdclientsCustomchannelsListLinkedAdUnitsResource,
-    AdSenseAccountsAdclientsCustomchannelsListLinkedAdUnits (..),
-    newAdSenseAccountsAdclientsCustomchannelsListLinkedAdUnits,
+    , AdSenseAccountsAdclientsCustomchannelsListLinkedAdUnitsResource
+    , AdSenseAccountsAdclientsCustomchannelsListLinkedAdUnits (..)
+    , newAdSenseAccountsAdclientsCustomchannelsListLinkedAdUnits
 
     -- ** adsense.accounts.adclients.customchannels.patch
-    AdSenseAccountsAdclientsCustomchannelsPatchResource,
-    AdSenseAccountsAdclientsCustomchannelsPatch (..),
-    newAdSenseAccountsAdclientsCustomchannelsPatch,
+    , AdSenseAccountsAdclientsCustomchannelsPatchResource
+    , AdSenseAccountsAdclientsCustomchannelsPatch (..)
+    , newAdSenseAccountsAdclientsCustomchannelsPatch
 
     -- ** adsense.accounts.adclients.get
-    AdSenseAccountsAdclientsGetResource,
-    AdSenseAccountsAdclientsGet (..),
-    newAdSenseAccountsAdclientsGet,
+    , AdSenseAccountsAdclientsGetResource
+    , AdSenseAccountsAdclientsGet (..)
+    , newAdSenseAccountsAdclientsGet
 
     -- ** adsense.accounts.adclients.getAdcode
-    AdSenseAccountsAdclientsGetAdcodeResource,
-    AdSenseAccountsAdclientsGetAdcode (..),
-    newAdSenseAccountsAdclientsGetAdcode,
+    , AdSenseAccountsAdclientsGetAdcodeResource
+    , AdSenseAccountsAdclientsGetAdcode (..)
+    , newAdSenseAccountsAdclientsGetAdcode
 
     -- ** adsense.accounts.adclients.list
-    AdSenseAccountsAdclientsListResource,
-    AdSenseAccountsAdclientsList (..),
-    newAdSenseAccountsAdclientsList,
+    , AdSenseAccountsAdclientsListResource
+    , AdSenseAccountsAdclientsList (..)
+    , newAdSenseAccountsAdclientsList
 
     -- ** adsense.accounts.adclients.urlchannels.get
-    AdSenseAccountsAdclientsUrlchannelsGetResource,
-    AdSenseAccountsAdclientsUrlchannelsGet (..),
-    newAdSenseAccountsAdclientsUrlchannelsGet,
+    , AdSenseAccountsAdclientsUrlchannelsGetResource
+    , AdSenseAccountsAdclientsUrlchannelsGet (..)
+    , newAdSenseAccountsAdclientsUrlchannelsGet
 
     -- ** adsense.accounts.adclients.urlchannels.list
-    AdSenseAccountsAdclientsUrlchannelsListResource,
-    AdSenseAccountsAdclientsUrlchannelsList (..),
-    newAdSenseAccountsAdclientsUrlchannelsList,
+    , AdSenseAccountsAdclientsUrlchannelsListResource
+    , AdSenseAccountsAdclientsUrlchannelsList (..)
+    , newAdSenseAccountsAdclientsUrlchannelsList
 
     -- ** adsense.accounts.alerts.list
-    AdSenseAccountsAlertsListResource,
-    AdSenseAccountsAlertsList (..),
-    newAdSenseAccountsAlertsList,
+    , AdSenseAccountsAlertsListResource
+    , AdSenseAccountsAlertsList (..)
+    , newAdSenseAccountsAlertsList
 
     -- ** adsense.accounts.get
-    AdSenseAccountsGetResource,
-    AdSenseAccountsGet (..),
-    newAdSenseAccountsGet,
+    , AdSenseAccountsGetResource
+    , AdSenseAccountsGet (..)
+    , newAdSenseAccountsGet
 
     -- ** adsense.accounts.getAdBlockingRecoveryTag
-    AdSenseAccountsGetAdBlockingRecoveryTagResource,
-    AdSenseAccountsGetAdBlockingRecoveryTag (..),
-    newAdSenseAccountsGetAdBlockingRecoveryTag,
+    , AdSenseAccountsGetAdBlockingRecoveryTagResource
+    , AdSenseAccountsGetAdBlockingRecoveryTag (..)
+    , newAdSenseAccountsGetAdBlockingRecoveryTag
 
     -- ** adsense.accounts.list
-    AdSenseAccountsListResource,
-    AdSenseAccountsList (..),
-    newAdSenseAccountsList,
+    , AdSenseAccountsListResource
+    , AdSenseAccountsList (..)
+    , newAdSenseAccountsList
 
     -- ** adsense.accounts.listChildAccounts
-    AdSenseAccountsListChildAccountsResource,
-    AdSenseAccountsListChildAccounts (..),
-    newAdSenseAccountsListChildAccounts,
+    , AdSenseAccountsListChildAccountsResource
+    , AdSenseAccountsListChildAccounts (..)
+    , newAdSenseAccountsListChildAccounts
 
     -- ** adsense.accounts.payments.list
-    AdSenseAccountsPaymentsListResource,
-    AdSenseAccountsPaymentsList (..),
-    newAdSenseAccountsPaymentsList,
+    , AdSenseAccountsPaymentsListResource
+    , AdSenseAccountsPaymentsList (..)
+    , newAdSenseAccountsPaymentsList
+
+    -- ** adsense.accounts.policyIssues.get
+    , AdSenseAccountsPolicyIssuesGetResource
+    , AdSenseAccountsPolicyIssuesGet (..)
+    , newAdSenseAccountsPolicyIssuesGet
+
+    -- ** adsense.accounts.policyIssues.list
+    , AdSenseAccountsPolicyIssuesListResource
+    , AdSenseAccountsPolicyIssuesList (..)
+    , newAdSenseAccountsPolicyIssuesList
 
     -- ** adsense.accounts.reports.generate
-    AdSenseAccountsReportsGenerateResource,
-    AdSenseAccountsReportsGenerate (..),
-    newAdSenseAccountsReportsGenerate,
+    , AdSenseAccountsReportsGenerateResource
+    , AdSenseAccountsReportsGenerate (..)
+    , newAdSenseAccountsReportsGenerate
 
     -- ** adsense.accounts.reports.generateCsv
-    AdSenseAccountsReportsGenerateCsvResource,
-    AdSenseAccountsReportsGenerateCsv (..),
-    newAdSenseAccountsReportsGenerateCsv,
+    , AdSenseAccountsReportsGenerateCsvResource
+    , AdSenseAccountsReportsGenerateCsv (..)
+    , newAdSenseAccountsReportsGenerateCsv
 
     -- ** adsense.accounts.reports.getSaved
-    AdSenseAccountsReportsGetSavedResource,
-    AdSenseAccountsReportsGetSaved (..),
-    newAdSenseAccountsReportsGetSaved,
+    , AdSenseAccountsReportsGetSavedResource
+    , AdSenseAccountsReportsGetSaved (..)
+    , newAdSenseAccountsReportsGetSaved
 
     -- ** adsense.accounts.reports.saved.generate
-    AdSenseAccountsReportsSavedGenerateResource,
-    AdSenseAccountsReportsSavedGenerate (..),
-    newAdSenseAccountsReportsSavedGenerate,
+    , AdSenseAccountsReportsSavedGenerateResource
+    , AdSenseAccountsReportsSavedGenerate (..)
+    , newAdSenseAccountsReportsSavedGenerate
 
     -- ** adsense.accounts.reports.saved.generateCsv
-    AdSenseAccountsReportsSavedGenerateCsvResource,
-    AdSenseAccountsReportsSavedGenerateCsv (..),
-    newAdSenseAccountsReportsSavedGenerateCsv,
+    , AdSenseAccountsReportsSavedGenerateCsvResource
+    , AdSenseAccountsReportsSavedGenerateCsv (..)
+    , newAdSenseAccountsReportsSavedGenerateCsv
 
     -- ** adsense.accounts.reports.saved.list
-    AdSenseAccountsReportsSavedListResource,
-    AdSenseAccountsReportsSavedList (..),
-    newAdSenseAccountsReportsSavedList,
+    , AdSenseAccountsReportsSavedListResource
+    , AdSenseAccountsReportsSavedList (..)
+    , newAdSenseAccountsReportsSavedList
 
     -- ** adsense.accounts.sites.get
-    AdSenseAccountsSitesGetResource,
-    AdSenseAccountsSitesGet (..),
-    newAdSenseAccountsSitesGet,
+    , AdSenseAccountsSitesGetResource
+    , AdSenseAccountsSitesGet (..)
+    , newAdSenseAccountsSitesGet
 
     -- ** adsense.accounts.sites.list
-    AdSenseAccountsSitesListResource,
-    AdSenseAccountsSitesList (..),
-    newAdSenseAccountsSitesList,
+    , AdSenseAccountsSitesListResource
+    , AdSenseAccountsSitesList (..)
+    , newAdSenseAccountsSitesList
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Account
-    Account (..),
-    newAccount,
+    , Account (..)
+    , newAccount
 
     -- ** Account_State
-    Account_State (..),
+    , Account_State (..)
 
     -- ** AdBlockingRecoveryTag
-    AdBlockingRecoveryTag (..),
-    newAdBlockingRecoveryTag,
+    , AdBlockingRecoveryTag (..)
+    , newAdBlockingRecoveryTag
 
     -- ** AdClient
-    AdClient (..),
-    newAdClient,
+    , AdClient (..)
+    , newAdClient
 
     -- ** AdClient_State
-    AdClient_State (..),
+    , AdClient_State (..)
 
     -- ** AdClientAdCode
-    AdClientAdCode (..),
-    newAdClientAdCode,
+    , AdClientAdCode (..)
+    , newAdClientAdCode
 
     -- ** AdUnit
-    AdUnit (..),
-    newAdUnit,
+    , AdUnit (..)
+    , newAdUnit
 
     -- ** AdUnit_State
-    AdUnit_State (..),
+    , AdUnit_State (..)
 
     -- ** AdUnitAdCode
-    AdUnitAdCode (..),
-    newAdUnitAdCode,
+    , AdUnitAdCode (..)
+    , newAdUnitAdCode
 
     -- ** Alert
-    Alert (..),
-    newAlert,
+    , Alert (..)
+    , newAlert
 
     -- ** Alert_Severity
-    Alert_Severity (..),
+    , Alert_Severity (..)
 
     -- ** Cell
-    Cell (..),
-    newCell,
+    , Cell (..)
+    , newCell
 
     -- ** ContentAdsSettings
-    ContentAdsSettings (..),
-    newContentAdsSettings,
+    , ContentAdsSettings (..)
+    , newContentAdsSettings
 
     -- ** ContentAdsSettings_Type
-    ContentAdsSettings_Type (..),
+    , ContentAdsSettings_Type (..)
 
     -- ** CustomChannel
-    CustomChannel (..),
-    newCustomChannel,
+    , CustomChannel (..)
+    , newCustomChannel
 
     -- ** Date
-    Date (..),
-    newDate,
+    , Date (..)
+    , newDate
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** Header
-    Header (..),
-    newHeader,
+    , Header (..)
+    , newHeader
 
     -- ** Header_Type
-    Header_Type (..),
+    , Header_Type (..)
 
     -- ** HttpBody
-    HttpBody (..),
-    newHttpBody,
+    , HttpBody (..)
+    , newHttpBody
 
     -- ** HttpBody_ExtensionsItem
-    HttpBody_ExtensionsItem (..),
-    newHttpBody_ExtensionsItem,
+    , HttpBody_ExtensionsItem (..)
+    , newHttpBody_ExtensionsItem
 
     -- ** ListAccountsResponse
-    ListAccountsResponse (..),
-    newListAccountsResponse,
+    , ListAccountsResponse (..)
+    , newListAccountsResponse
 
     -- ** ListAdClientsResponse
-    ListAdClientsResponse (..),
-    newListAdClientsResponse,
+    , ListAdClientsResponse (..)
+    , newListAdClientsResponse
 
     -- ** ListAdUnitsResponse
-    ListAdUnitsResponse (..),
-    newListAdUnitsResponse,
+    , ListAdUnitsResponse (..)
+    , newListAdUnitsResponse
 
     -- ** ListAlertsResponse
-    ListAlertsResponse (..),
-    newListAlertsResponse,
+    , ListAlertsResponse (..)
+    , newListAlertsResponse
 
     -- ** ListChildAccountsResponse
-    ListChildAccountsResponse (..),
-    newListChildAccountsResponse,
+    , ListChildAccountsResponse (..)
+    , newListChildAccountsResponse
 
     -- ** ListCustomChannelsResponse
-    ListCustomChannelsResponse (..),
-    newListCustomChannelsResponse,
+    , ListCustomChannelsResponse (..)
+    , newListCustomChannelsResponse
 
     -- ** ListLinkedAdUnitsResponse
-    ListLinkedAdUnitsResponse (..),
-    newListLinkedAdUnitsResponse,
+    , ListLinkedAdUnitsResponse (..)
+    , newListLinkedAdUnitsResponse
 
     -- ** ListLinkedCustomChannelsResponse
-    ListLinkedCustomChannelsResponse (..),
-    newListLinkedCustomChannelsResponse,
+    , ListLinkedCustomChannelsResponse (..)
+    , newListLinkedCustomChannelsResponse
 
     -- ** ListPaymentsResponse
-    ListPaymentsResponse (..),
-    newListPaymentsResponse,
+    , ListPaymentsResponse (..)
+    , newListPaymentsResponse
+
+    -- ** ListPolicyIssuesResponse
+    , ListPolicyIssuesResponse (..)
+    , newListPolicyIssuesResponse
 
     -- ** ListSavedReportsResponse
-    ListSavedReportsResponse (..),
-    newListSavedReportsResponse,
+    , ListSavedReportsResponse (..)
+    , newListSavedReportsResponse
 
     -- ** ListSitesResponse
-    ListSitesResponse (..),
-    newListSitesResponse,
+    , ListSitesResponse (..)
+    , newListSitesResponse
 
     -- ** ListUrlChannelsResponse
-    ListUrlChannelsResponse (..),
-    newListUrlChannelsResponse,
+    , ListUrlChannelsResponse (..)
+    , newListUrlChannelsResponse
 
     -- ** Payment
-    Payment (..),
-    newPayment,
+    , Payment (..)
+    , newPayment
+
+    -- ** PolicyIssue
+    , PolicyIssue (..)
+    , newPolicyIssue
+
+    -- ** PolicyIssue_Action
+    , PolicyIssue_Action (..)
+
+    -- ** PolicyIssue_EntityType
+    , PolicyIssue_EntityType (..)
+
+    -- ** PolicyTopic
+    , PolicyTopic (..)
+    , newPolicyTopic
 
     -- ** ReportResult
-    ReportResult (..),
-    newReportResult,
+    , ReportResult (..)
+    , newReportResult
 
     -- ** Row
-    Row (..),
-    newRow,
+    , Row (..)
+    , newRow
 
     -- ** SavedReport
-    SavedReport (..),
-    newSavedReport,
+    , SavedReport (..)
+    , newSavedReport
 
     -- ** Site
-    Site (..),
-    newSite,
+    , Site (..)
+    , newSite
 
     -- ** Site_State
-    Site_State (..),
+    , Site_State (..)
 
     -- ** TimeZone
-    TimeZone (..),
-    newTimeZone,
+    , TimeZone (..)
+    , newTimeZone
 
     -- ** UrlChannel
-    UrlChannel (..),
-    newUrlChannel,
+    , UrlChannel (..)
+    , newUrlChannel
 
     -- ** AccountsReportsGenerateDateRange
-    AccountsReportsGenerateDateRange (..),
+    , AccountsReportsGenerateDateRange (..)
 
     -- ** AccountsReportsGenerateDimensions
-    AccountsReportsGenerateDimensions (..),
+    , AccountsReportsGenerateDimensions (..)
 
     -- ** AccountsReportsGenerateMetrics
-    AccountsReportsGenerateMetrics (..),
+    , AccountsReportsGenerateMetrics (..)
 
     -- ** AccountsReportsGenerateReportingTimeZone
-    AccountsReportsGenerateReportingTimeZone (..),
+    , AccountsReportsGenerateReportingTimeZone (..)
 
     -- ** AccountsReportsGenerateCsvDateRange
-    AccountsReportsGenerateCsvDateRange (..),
+    , AccountsReportsGenerateCsvDateRange (..)
 
     -- ** AccountsReportsGenerateCsvDimensions
-    AccountsReportsGenerateCsvDimensions (..),
+    , AccountsReportsGenerateCsvDimensions (..)
 
     -- ** AccountsReportsGenerateCsvMetrics
-    AccountsReportsGenerateCsvMetrics (..),
+    , AccountsReportsGenerateCsvMetrics (..)
 
     -- ** AccountsReportsGenerateCsvReportingTimeZone
-    AccountsReportsGenerateCsvReportingTimeZone (..),
+    , AccountsReportsGenerateCsvReportingTimeZone (..)
 
     -- ** AccountsReportsSavedGenerateDateRange
-    AccountsReportsSavedGenerateDateRange (..),
+    , AccountsReportsSavedGenerateDateRange (..)
 
     -- ** AccountsReportsSavedGenerateReportingTimeZone
-    AccountsReportsSavedGenerateReportingTimeZone (..),
+    , AccountsReportsSavedGenerateReportingTimeZone (..)
 
     -- ** AccountsReportsSavedGenerateCsvDateRange
-    AccountsReportsSavedGenerateCsvDateRange (..),
+    , AccountsReportsSavedGenerateCsvDateRange (..)
 
     -- ** AccountsReportsSavedGenerateCsvReportingTimeZone
-    AccountsReportsSavedGenerateCsvReportingTimeZone (..),
-  )
-where
+    , AccountsReportsSavedGenerateCsvReportingTimeZone (..)
+    ) where
 
 import Gogol.AdSense.Accounts.Adclients.Adunits.Create
 import Gogol.AdSense.Accounts.Adclients.Adunits.Get
@@ -417,6 +446,8 @@ import Gogol.AdSense.Accounts.GetAdBlockingRecoveryTag
 import Gogol.AdSense.Accounts.List
 import Gogol.AdSense.Accounts.ListChildAccounts
 import Gogol.AdSense.Accounts.Payments.List
+import Gogol.AdSense.Accounts.PolicyIssues.Get
+import Gogol.AdSense.Accounts.PolicyIssues.List
 import Gogol.AdSense.Accounts.Reports.Generate
 import Gogol.AdSense.Accounts.Reports.GenerateCsv
 import Gogol.AdSense.Accounts.Reports.GetSaved

@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,86 +31,80 @@
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.policies.operations.get@.
 module Gogol.IAM.Policies.Operations.Get
-  ( -- * Resource
-    IAMPoliciesOperationsGetResource,
+    (
+    -- * Resource
+      IAMPoliciesOperationsGetResource
 
     -- ** Constructing a Request
-    IAMPoliciesOperationsGet (..),
-    newIAMPoliciesOperationsGet,
-  )
-where
+    , IAMPoliciesOperationsGet (..)
+    , newIAMPoliciesOperationsGet
+    ) where
 
-import Gogol.IAM.Types
 import qualified Gogol.Prelude as Core
+import Gogol.IAM.Types
 
 -- | A resource alias for @iam.policies.operations.get@ method which the
 -- 'IAMPoliciesOperationsGet' request conforms to.
 type IAMPoliciesOperationsGetResource =
-  "v2"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] GoogleLongrunningOperation
+     "v2" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Get '[Core.JSON] GoogleLongrunningOperation
 
 -- | Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
 --
 -- /See:/ 'newIAMPoliciesOperationsGet' smart constructor.
 data IAMPoliciesOperationsGet = IAMPoliciesOperationsGet
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | The name of the operation resource.
-    name :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | The name of the operation resource.
+    , name :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'IAMPoliciesOperationsGet' with the minimum fields required to make a request.
-newIAMPoliciesOperationsGet ::
-  -- |  The name of the operation resource. See 'name'.
-  Core.Text ->
-  IAMPoliciesOperationsGet
+newIAMPoliciesOperationsGet 
+    ::  Core.Text
+       -- ^  The name of the operation resource. See 'name'.
+    -> IAMPoliciesOperationsGet
 newIAMPoliciesOperationsGet name =
   IAMPoliciesOperationsGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest IAMPoliciesOperationsGet where
-  type
-    Rs IAMPoliciesOperationsGet =
-      GoogleLongrunningOperation
-  type
-    Scopes IAMPoliciesOperationsGet =
-      '[CloudPlatform'FullControl]
-  requestClient IAMPoliciesOperationsGet {..} =
-    go
-      name
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      iAMService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy IAMPoliciesOperationsGetResource
-          )
-          Core.mempty
+instance Core.GoogleRequest IAMPoliciesOperationsGet
+         where
+        type Rs IAMPoliciesOperationsGet =
+             GoogleLongrunningOperation
+        type Scopes IAMPoliciesOperationsGet =
+             '[CloudPlatform'FullControl]
+        requestClient IAMPoliciesOperationsGet{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              iAMService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy IAMPoliciesOperationsGetResource)
+                      Core.mempty
+

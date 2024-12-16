@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,97 +31,90 @@
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.advertisers.get@.
 module Gogol.DFAReporting.Advertisers.Get
-  ( -- * Resource
-    DFAReportingAdvertisersGetResource,
+    (
+    -- * Resource
+      DFAReportingAdvertisersGetResource
 
     -- ** Constructing a Request
-    DFAReportingAdvertisersGet (..),
-    newDFAReportingAdvertisersGet,
-  )
-where
+    , DFAReportingAdvertisersGet (..)
+    , newDFAReportingAdvertisersGet
+    ) where
 
-import Gogol.DFAReporting.Types
 import qualified Gogol.Prelude as Core
+import Gogol.DFAReporting.Types
 
 -- | A resource alias for @dfareporting.advertisers.get@ method which the
 -- 'DFAReportingAdvertisersGet' request conforms to.
 type DFAReportingAdvertisersGetResource =
-  "dfareporting"
-    Core.:> "v4"
-    Core.:> "userprofiles"
-    Core.:> Core.Capture "profileId" Core.Int64
-    Core.:> "advertisers"
-    Core.:> Core.Capture "id" Core.Int64
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Advertiser
+     "dfareporting" Core.:>
+       "v4" Core.:>
+         "userprofiles" Core.:>
+           Core.Capture "profileId" Core.Int64 Core.:>
+             "advertisers" Core.:>
+               Core.Capture "id" Core.Int64 Core.:>
+                 Core.QueryParam "$.xgafv" Xgafv Core.:>
+                   Core.QueryParam "access_token" Core.Text Core.:>
+                     Core.QueryParam "callback" Core.Text Core.:>
+                       Core.QueryParam "uploadType" Core.Text Core.:>
+                         Core.QueryParam "upload_protocol" Core.Text Core.:>
+                           Core.QueryParam "alt" Core.AltJSON Core.:>
+                             Core.Get '[Core.JSON] Advertiser
 
 -- | Gets one advertiser by ID.
 --
 -- /See:/ 'newDFAReportingAdvertisersGet' smart constructor.
 data DFAReportingAdvertisersGet = DFAReportingAdvertisersGet
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Advertiser ID.
-    id :: Core.Int64,
-    -- | User profile ID associated with this request.
-    profileId :: Core.Int64,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Advertiser ID.
+    , id :: Core.Int64
+      -- | User profile ID associated with this request.
+    , profileId :: Core.Int64
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DFAReportingAdvertisersGet' with the minimum fields required to make a request.
-newDFAReportingAdvertisersGet ::
-  -- |  Advertiser ID. See 'id'.
-  Core.Int64 ->
-  -- |  User profile ID associated with this request. See 'profileId'.
-  Core.Int64 ->
-  DFAReportingAdvertisersGet
+newDFAReportingAdvertisersGet 
+    ::  Core.Int64
+       -- ^  Advertiser ID. See 'id'.
+    -> Core.Int64
+       -- ^  User profile ID associated with this request. See 'profileId'.
+    -> DFAReportingAdvertisersGet
 newDFAReportingAdvertisersGet id profileId =
   DFAReportingAdvertisersGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      id = id,
-      profileId = profileId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , id = id
+    , profileId = profileId
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingAdvertisersGet
-  where
-  type Rs DFAReportingAdvertisersGet = Advertiser
-  type
-    Scopes DFAReportingAdvertisersGet =
-      '[Dfatrafficking'FullControl]
-  requestClient DFAReportingAdvertisersGet {..} =
-    go
-      profileId
-      id
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      dFAReportingService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingAdvertisersGetResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           DFAReportingAdvertisersGet
+         where
+        type Rs DFAReportingAdvertisersGet = Advertiser
+        type Scopes DFAReportingAdvertisersGet =
+             '[Dfatrafficking'FullControl]
+        requestClient DFAReportingAdvertisersGet{..}
+          = go profileId id xgafv accessToken callback
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              dFAReportingService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy DFAReportingAdvertisersGetResource)
+                      Core.mempty
+

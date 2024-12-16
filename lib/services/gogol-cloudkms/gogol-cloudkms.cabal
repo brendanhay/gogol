@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-cloudkms
-version:            1.0.0.0
-synopsis:           Google Cloud Key Management Service (KMS) SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-cloudkms
+version:               1.0.0
+synopsis:              Google Cloud Key Management Service (KMS) SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  Manages keys and performs cryptographic operations in a central cloud service, for direct use by other cloud resources and applications.
+    Manages keys and performs cryptographic operations in a central cloud service, for direct use by other cloud resources and applications.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -30,80 +27,91 @@ source-repository head
   subdir:   gogol-cloudkms
 
 flag field-selectors
-  description:
-    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-
-  default:     False
-  manual:      True
+  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+  default: False
+  manual: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -Werror
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (!flag(field-selectors) && impl(ghc >=9.2))
+  if !flag(field-selectors) && impl(ghc >= 9.2)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.CloudKMS
-    Gogol.CloudKMS.Projects.Locations.EkmConfig.GetIamPolicy
-    Gogol.CloudKMS.Projects.Locations.EkmConfig.SetIamPolicy
-    Gogol.CloudKMS.Projects.Locations.EkmConfig.TestIamPermissions
-    Gogol.CloudKMS.Projects.Locations.EkmConnections.Create
-    Gogol.CloudKMS.Projects.Locations.EkmConnections.Get
-    Gogol.CloudKMS.Projects.Locations.EkmConnections.GetIamPolicy
-    Gogol.CloudKMS.Projects.Locations.EkmConnections.List
-    Gogol.CloudKMS.Projects.Locations.EkmConnections.Patch
-    Gogol.CloudKMS.Projects.Locations.EkmConnections.SetIamPolicy
-    Gogol.CloudKMS.Projects.Locations.EkmConnections.TestIamPermissions
-    Gogol.CloudKMS.Projects.Locations.GenerateRandomBytes
-    Gogol.CloudKMS.Projects.Locations.Get
-    Gogol.CloudKMS.Projects.Locations.GetEkmConfig
-    Gogol.CloudKMS.Projects.Locations.KeyRings.Create
-    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Create
-    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.AsymmetricDecrypt
-    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.AsymmetricSign
-    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Create
-    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Destroy
-    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Get
-    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.GetPublicKey
-    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Import
-    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.List
-    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.MacSign
-    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.MacVerify
-    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Patch
-    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Restore
-    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Decrypt
-    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Encrypt
-    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Get
-    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.GetIamPolicy
-    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.List
-    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Patch
-    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.SetIamPolicy
-    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.TestIamPermissions
-    Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.UpdatePrimaryVersion
-    Gogol.CloudKMS.Projects.Locations.KeyRings.Get
-    Gogol.CloudKMS.Projects.Locations.KeyRings.GetIamPolicy
-    Gogol.CloudKMS.Projects.Locations.KeyRings.ImportJobs.Create
-    Gogol.CloudKMS.Projects.Locations.KeyRings.ImportJobs.Get
-    Gogol.CloudKMS.Projects.Locations.KeyRings.ImportJobs.GetIamPolicy
-    Gogol.CloudKMS.Projects.Locations.KeyRings.ImportJobs.List
-    Gogol.CloudKMS.Projects.Locations.KeyRings.ImportJobs.SetIamPolicy
-    Gogol.CloudKMS.Projects.Locations.KeyRings.ImportJobs.TestIamPermissions
-    Gogol.CloudKMS.Projects.Locations.KeyRings.List
-    Gogol.CloudKMS.Projects.Locations.KeyRings.SetIamPolicy
-    Gogol.CloudKMS.Projects.Locations.KeyRings.TestIamPermissions
-    Gogol.CloudKMS.Projects.Locations.List
-    Gogol.CloudKMS.Projects.Locations.UpdateEkmConfig
-    Gogol.CloudKMS.Types
+      Gogol.CloudKMS
+    , Gogol.CloudKMS.Folders.GetAutokeyConfig
+    , Gogol.CloudKMS.Folders.UpdateAutokeyConfig
+    , Gogol.CloudKMS.Projects.Locations.EkmConfig.GetIamPolicy
+    , Gogol.CloudKMS.Projects.Locations.EkmConfig.SetIamPolicy
+    , Gogol.CloudKMS.Projects.Locations.EkmConfig.TestIamPermissions
+    , Gogol.CloudKMS.Projects.Locations.EkmConnections.Create
+    , Gogol.CloudKMS.Projects.Locations.EkmConnections.Get
+    , Gogol.CloudKMS.Projects.Locations.EkmConnections.GetIamPolicy
+    , Gogol.CloudKMS.Projects.Locations.EkmConnections.List
+    , Gogol.CloudKMS.Projects.Locations.EkmConnections.Patch
+    , Gogol.CloudKMS.Projects.Locations.EkmConnections.SetIamPolicy
+    , Gogol.CloudKMS.Projects.Locations.EkmConnections.TestIamPermissions
+    , Gogol.CloudKMS.Projects.Locations.EkmConnections.VerifyConnectivity
+    , Gogol.CloudKMS.Projects.Locations.GenerateRandomBytes
+    , Gogol.CloudKMS.Projects.Locations.Get
+    , Gogol.CloudKMS.Projects.Locations.GetEkmConfig
+    , Gogol.CloudKMS.Projects.Locations.KeyHandles.Create
+    , Gogol.CloudKMS.Projects.Locations.KeyHandles.Get
+    , Gogol.CloudKMS.Projects.Locations.KeyHandles.List
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.Create
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Create
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.AsymmetricDecrypt
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.AsymmetricSign
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Create
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Destroy
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Get
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.GetPublicKey
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Import
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.List
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.MacSign
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.MacVerify
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Patch
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.RawDecrypt
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.RawEncrypt
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Restore
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Decrypt
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Encrypt
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Get
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.GetIamPolicy
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.List
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Patch
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.SetIamPolicy
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.TestIamPermissions
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.UpdatePrimaryVersion
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.Get
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.GetIamPolicy
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.ImportJobs.Create
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.ImportJobs.Get
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.ImportJobs.GetIamPolicy
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.ImportJobs.List
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.ImportJobs.SetIamPolicy
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.ImportJobs.TestIamPermissions
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.List
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.SetIamPolicy
+    , Gogol.CloudKMS.Projects.Locations.KeyRings.TestIamPermissions
+    , Gogol.CloudKMS.Projects.Locations.List
+    , Gogol.CloudKMS.Projects.Locations.Operations.Get
+    , Gogol.CloudKMS.Projects.Locations.UpdateEkmConfig
+    , Gogol.CloudKMS.Projects.ShowEffectiveAutokeyConfig
+    , Gogol.CloudKMS.Types
 
   other-modules:
-    Gogol.CloudKMS.Internal.Product
-    Gogol.CloudKMS.Internal.Sum
+      Gogol.CloudKMS.Internal.Product
+    , Gogol.CloudKMS.Internal.Sum
 
   build-depends:
-    , base        >=4.12   && <5
-    , gogol-core  ^>=1.0.0
+      gogol-core ^>= 1.0.0

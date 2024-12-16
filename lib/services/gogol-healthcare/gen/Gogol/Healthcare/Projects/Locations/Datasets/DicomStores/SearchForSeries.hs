@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -26,105 +27,100 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- SearchForSeries returns a list of matching series. See [Search Transaction] (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.6). For details on the implementation of SearchForSeries, see <https://cloud.google.com/healthcare/docs/dicom#search_transaction Search transaction> in the Cloud Healthcare API conformance statement. For samples that show how to call SearchForSeries, see <https://cloud.google.com/healthcare/docs/how-tos/dicomweb#searching_for_studies_series_instances_and_frames Searching for studies, series, instances, and frames>.
+-- SearchForSeries returns a list of matching series. See [Search Transaction] (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.6). For details on the implementation of SearchForSeries, see <https://cloud.google.com/healthcare/docs/dicom#search_transaction Search transaction> in the Cloud Healthcare API conformance statement. For samples that show how to call SearchForSeries, see <https://cloud.google.com/healthcare/docs/how-tos/dicomweb#search-dicom Search for DICOM data>.
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.dicomStores.searchForSeries@.
 module Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.SearchForSeries
-  ( -- * Resource
-    HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeriesResource,
+    (
+    -- * Resource
+      HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeriesResource
 
     -- ** Constructing a Request
-    HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries (..),
-    newHealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries,
-  )
-where
+    , HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries (..)
+    , newHealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries
+    ) where
 
-import Gogol.Healthcare.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Healthcare.Types
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.searchForSeries@ method which the
 -- 'HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries' request conforms to.
-type HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeriesResource =
-  "v1"
-    Core.:> Core.Capture "parent" Core.Text
-    Core.:> "dicomWeb"
-    Core.:> Core.Capture "dicomWebPath" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] HttpBody
+type HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeriesResource
+     =
+     "v1" Core.:>
+       Core.Capture "parent" Core.Text Core.:>
+         "dicomWeb" Core.:>
+           Core.Capture "dicomWebPath" Core.Text Core.:>
+             Core.QueryParam "$.xgafv" Xgafv Core.:>
+               Core.QueryParam "access_token" Core.Text Core.:>
+                 Core.QueryParam "callback" Core.Text Core.:>
+                   Core.QueryParam "uploadType" Core.Text Core.:>
+                     Core.QueryParam "upload_protocol" Core.Text Core.:>
+                       Core.QueryParam "alt" Core.AltJSON Core.:>
+                         Core.Get '[Core.JSON] HttpBody
 
--- | SearchForSeries returns a list of matching series. See [Search Transaction] (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.6). For details on the implementation of SearchForSeries, see <https://cloud.google.com/healthcare/docs/dicom#search_transaction Search transaction> in the Cloud Healthcare API conformance statement. For samples that show how to call SearchForSeries, see <https://cloud.google.com/healthcare/docs/how-tos/dicomweb#searching_for_studies_series_instances_and_frames Searching for studies, series, instances, and frames>.
+-- | SearchForSeries returns a list of matching series. See [Search Transaction] (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.6). For details on the implementation of SearchForSeries, see <https://cloud.google.com/healthcare/docs/dicom#search_transaction Search transaction> in the Cloud Healthcare API conformance statement. For samples that show how to call SearchForSeries, see <https://cloud.google.com/healthcare/docs/how-tos/dicomweb#search-dicom Search for DICOM data>.
 --
 -- /See:/ 'newHealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries' smart constructor.
 data HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries = HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | The path of the SearchForSeries DICOMweb request. For example, @series@ or @studies\/{study_uid}\/series@.
-    dicomWebPath :: Core.Text,
-    -- | The name of the DICOM store that is being accessed. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@.
-    parent :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The path of the SearchForSeries DICOMweb request. For example, @series@ or @studies\/{study_uid}\/series@.
+    , dicomWebPath :: Core.Text
+      -- | Required. The name of the DICOM store that is being accessed. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@.
+    , parent :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries' with the minimum fields required to make a request.
-newHealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries ::
-  -- |  The path of the SearchForSeries DICOMweb request. For example, @series@ or @studies\/{study_uid}\/series@. See 'dicomWebPath'.
-  Core.Text ->
-  -- |  The name of the DICOM store that is being accessed. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@. See 'parent'.
-  Core.Text ->
-  HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries
+newHealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries 
+    ::  Core.Text
+       -- ^  Required. The path of the SearchForSeries DICOMweb request. For example, @series@ or @studies\/{study_uid}\/series@. See 'dicomWebPath'.
+    -> Core.Text
+       -- ^  Required. The name of the DICOM store that is being accessed. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@. See 'parent'.
+    -> HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries
 newHealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries dicomWebPath parent =
   HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      dicomWebPath = dicomWebPath,
-      parent = parent,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , dicomWebPath = dicomWebPath
+    , parent = parent
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries
-  where
-  type
-    Rs
-      HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries =
-      HttpBody
-  type
-    Scopes
-      HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries =
-      '[CloudPlatform'FullControl]
-  requestClient
-    HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries {..} =
-      go
-        parent
-        dicomWebPath
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        healthcareService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeriesResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries
+         where
+        type Rs
+               HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries
+             = HttpBody
+        type Scopes
+               HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries
+             =
+             '[CloudHealthcare'FullControl,
+               CloudPlatform'FullControl]
+        requestClient
+          HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries{..}
+          = go parent dicomWebPath xgafv accessToken callback
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              healthcareService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeriesResource)
+                      Core.mempty
+

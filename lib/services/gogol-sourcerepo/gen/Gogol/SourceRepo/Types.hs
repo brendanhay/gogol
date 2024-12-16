@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,128 +26,129 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.SourceRepo.Types
-  ( -- * Configuration
-    sourceRepoService,
+    (
+    -- * Configuration
+      sourceRepoService
 
     -- * OAuth Scopes
-    CloudPlatform'FullControl,
-    Source'FullControl,
-    Source'ReadOnly,
-    Source'ReadWrite,
+    , CloudPlatform'FullControl
+    , Source'FullControl
+    , Source'ReadOnly
+    , Source'ReadWrite
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AuditConfig
-    AuditConfig (..),
-    newAuditConfig,
+    , AuditConfig (..)
+    , newAuditConfig
 
     -- ** AuditLogConfig
-    AuditLogConfig (..),
-    newAuditLogConfig,
+    , AuditLogConfig (..)
+    , newAuditLogConfig
 
     -- ** AuditLogConfig_LogType
-    AuditLogConfig_LogType (..),
+    , AuditLogConfig_LogType (..)
 
     -- ** Binding
-    Binding (..),
-    newBinding,
+    , Binding (..)
+    , newBinding
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** Expr
-    Expr (..),
-    newExpr,
+    , Expr (..)
+    , newExpr
 
     -- ** ListReposResponse
-    ListReposResponse (..),
-    newListReposResponse,
+    , ListReposResponse (..)
+    , newListReposResponse
 
     -- ** MirrorConfig
-    MirrorConfig (..),
-    newMirrorConfig,
+    , MirrorConfig (..)
+    , newMirrorConfig
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** Policy
-    Policy (..),
-    newPolicy,
+    , Policy (..)
+    , newPolicy
 
     -- ** ProjectConfig
-    ProjectConfig (..),
-    newProjectConfig,
+    , ProjectConfig (..)
+    , newProjectConfig
 
     -- ** ProjectConfig_PubsubConfigs
-    ProjectConfig_PubsubConfigs (..),
-    newProjectConfig_PubsubConfigs,
+    , ProjectConfig_PubsubConfigs (..)
+    , newProjectConfig_PubsubConfigs
 
     -- ** PubsubConfig
-    PubsubConfig (..),
-    newPubsubConfig,
+    , PubsubConfig (..)
+    , newPubsubConfig
 
     -- ** PubsubConfig_MessageFormat
-    PubsubConfig_MessageFormat (..),
+    , PubsubConfig_MessageFormat (..)
 
     -- ** Repo
-    Repo (..),
-    newRepo,
+    , Repo (..)
+    , newRepo
 
     -- ** Repo_PubsubConfigs
-    Repo_PubsubConfigs (..),
-    newRepo_PubsubConfigs,
+    , Repo_PubsubConfigs (..)
+    , newRepo_PubsubConfigs
 
     -- ** SetIamPolicyRequest
-    SetIamPolicyRequest (..),
-    newSetIamPolicyRequest,
+    , SetIamPolicyRequest (..)
+    , newSetIamPolicyRequest
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** SyncRepoMetadata
-    SyncRepoMetadata (..),
-    newSyncRepoMetadata,
+    , SyncRepoMetadata (..)
+    , newSyncRepoMetadata
 
     -- ** SyncRepoRequest
-    SyncRepoRequest (..),
-    newSyncRepoRequest,
+    , SyncRepoRequest (..)
+    , newSyncRepoRequest
 
     -- ** TestIamPermissionsRequest
-    TestIamPermissionsRequest (..),
-    newTestIamPermissionsRequest,
+    , TestIamPermissionsRequest (..)
+    , newTestIamPermissionsRequest
 
     -- ** TestIamPermissionsResponse
-    TestIamPermissionsResponse (..),
-    newTestIamPermissionsResponse,
+    , TestIamPermissionsResponse (..)
+    , newTestIamPermissionsResponse
 
     -- ** UpdateProjectConfigRequest
-    UpdateProjectConfigRequest (..),
-    newUpdateProjectConfigRequest,
+    , UpdateProjectConfigRequest (..)
+    , newUpdateProjectConfigRequest
 
     -- ** UpdateRepoRequest
-    UpdateRepoRequest (..),
-    newUpdateRepoRequest,
-  )
-where
+    , UpdateRepoRequest (..)
+    , newUpdateRepoRequest
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.SourceRepo.Internal.Product
@@ -154,10 +156,10 @@ import Gogol.SourceRepo.Internal.Sum
 
 -- | Default request referring to version @v1@ of the Cloud Source Repositories API. This contains the host and root path used as a starting point for constructing service requests.
 sourceRepoService :: Core.ServiceConfig
-sourceRepoService =
-  Core.defaultService
-    (Core.ServiceId "sourcerepo:v1")
-    "sourcerepo.googleapis.com"
+sourceRepoService
+  = Core.defaultService
+      (Core.ServiceId "sourcerepo:v1")
+      "sourcerepo.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"

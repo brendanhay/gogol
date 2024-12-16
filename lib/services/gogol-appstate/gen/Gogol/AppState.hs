@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,58 +31,58 @@
 --
 -- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference>
 module Gogol.AppState
-  ( -- * Configuration
-    appStateService,
+    (
+    -- * Configuration
+      appStateService
 
     -- * OAuth Scopes
-    Appstate'FullControl,
+    , Appstate'FullControl
 
     -- * Resources
 
     -- ** appstate.states.clear
-    AppStateStatesClearResource,
-    AppStateStatesClear (..),
-    newAppStateStatesClear,
+    , AppStateStatesClearResource
+    , AppStateStatesClear (..)
+    , newAppStateStatesClear
 
     -- ** appstate.states.delete
-    AppStateStatesDeleteResource,
-    AppStateStatesDelete (..),
-    newAppStateStatesDelete,
+    , AppStateStatesDeleteResource
+    , AppStateStatesDelete (..)
+    , newAppStateStatesDelete
 
     -- ** appstate.states.get
-    AppStateStatesGetResource,
-    AppStateStatesGet (..),
-    newAppStateStatesGet,
+    , AppStateStatesGetResource
+    , AppStateStatesGet (..)
+    , newAppStateStatesGet
 
     -- ** appstate.states.list
-    AppStateStatesListResource,
-    AppStateStatesList (..),
-    newAppStateStatesList,
+    , AppStateStatesListResource
+    , AppStateStatesList (..)
+    , newAppStateStatesList
 
     -- ** appstate.states.update
-    AppStateStatesUpdateResource,
-    AppStateStatesUpdate (..),
-    newAppStateStatesUpdate,
+    , AppStateStatesUpdateResource
+    , AppStateStatesUpdate (..)
+    , newAppStateStatesUpdate
 
     -- * Types
 
     -- ** GetResponse
-    GetResponse (..),
-    newGetResponse,
+    , GetResponse (..)
+    , newGetResponse
 
     -- ** ListResponse
-    ListResponse (..),
-    newListResponse,
+    , ListResponse (..)
+    , newListResponse
 
     -- ** UpdateRequest
-    UpdateRequest (..),
-    newUpdateRequest,
+    , UpdateRequest (..)
+    , newUpdateRequest
 
     -- ** WriteResult
-    WriteResult (..),
-    newWriteResult,
-  )
-where
+    , WriteResult (..)
+    , newWriteResult
+    ) where
 
 import Gogol.AppState.States.Clear
 import Gogol.AppState.States.Delete

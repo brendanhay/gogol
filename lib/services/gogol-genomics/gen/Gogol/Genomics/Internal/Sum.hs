@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +26,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Genomics.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * Action_FlagsItem
     Action_FlagsItem
-      ( Action_FlagsItem_FLAGUNSPECIFIED,
+      (
+        Action_FlagsItem_FLAGUNSPECIFIED,
         Action_FlagsItem_IGNOREEXITSTATUS,
         Action_FlagsItem_RUNINBACKGROUND,
         Action_FlagsItem_ALWAYSRUN,
@@ -49,7 +55,8 @@ module Gogol.Genomics.Internal.Sum
 
     -- * FailedEvent_Code
     FailedEvent_Code
-      ( FailedEvent_Code_OK,
+      (
+        FailedEvent_Code_OK,
         FailedEvent_Code_Cancelled,
         FailedEvent_Code_Unknown,
         FailedEvent_Code_INVALIDARGUMENT,
@@ -68,23 +75,22 @@ module Gogol.Genomics.Internal.Sum
         FailedEvent_Code_DATALOSS,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -97,20 +103,19 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
-newtype Action_FlagsItem = Action_FlagsItem {fromAction_FlagsItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Action_FlagsItem = Action_FlagsItem { fromAction_FlagsItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified flag.
 pattern Action_FlagsItem_FLAGUNSPECIFIED :: Action_FlagsItem
@@ -158,21 +163,20 @@ pattern Action_FlagsItem_BLOCKEXTERNALNETWORK = Action_FlagsItem "BLOCK_EXTERNAL
   Action_FlagsItem_DISABLEIMAGEPREFETCH,
   Action_FlagsItem_DISABLESTANDARDERRORCAPTURE,
   Action_FlagsItem_BLOCKEXTERNALNETWORK,
-  Action_FlagsItem
-  #-}
+  Action_FlagsItem #-}
 
 -- | The Google standard error code that best describes this failure.
-newtype FailedEvent_Code = FailedEvent_Code {fromFailedEvent_Code :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FailedEvent_Code = FailedEvent_Code { fromFailedEvent_Code :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not an error; returned on success. HTTP Mapping: 200 OK
 pattern FailedEvent_Code_OK :: FailedEvent_Code
@@ -260,5 +264,4 @@ pattern FailedEvent_Code_DATALOSS = FailedEvent_Code "DATA_LOSS"
   FailedEvent_Code_Internal,
   FailedEvent_Code_Unavailable,
   FailedEvent_Code_DATALOSS,
-  FailedEvent_Code
-  #-}
+  FailedEvent_Code #-}

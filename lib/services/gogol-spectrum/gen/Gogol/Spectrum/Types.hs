@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,145 +26,146 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Spectrum.Types
-  ( -- * Configuration
-    spectrumService,
+    (
+    -- * Configuration
+      spectrumService
 
     -- * Types
 
     -- ** AntennaCharacteristics
-    AntennaCharacteristics (..),
-    newAntennaCharacteristics,
+    , AntennaCharacteristics (..)
+    , newAntennaCharacteristics
 
     -- ** DatabaseSpec
-    DatabaseSpec (..),
-    newDatabaseSpec,
+    , DatabaseSpec (..)
+    , newDatabaseSpec
 
     -- ** DbUpdateSpec
-    DbUpdateSpec (..),
-    newDbUpdateSpec,
+    , DbUpdateSpec (..)
+    , newDbUpdateSpec
 
     -- ** DeviceCapabilities
-    DeviceCapabilities (..),
-    newDeviceCapabilities,
+    , DeviceCapabilities (..)
+    , newDeviceCapabilities
 
     -- ** DeviceDescriptor
-    DeviceDescriptor (..),
-    newDeviceDescriptor,
+    , DeviceDescriptor (..)
+    , newDeviceDescriptor
 
     -- ** DeviceOwner
-    DeviceOwner (..),
-    newDeviceOwner,
+    , DeviceOwner (..)
+    , newDeviceOwner
 
     -- ** DeviceValidity
-    DeviceValidity (..),
-    newDeviceValidity,
+    , DeviceValidity (..)
+    , newDeviceValidity
 
     -- ** EventTime
-    EventTime (..),
-    newEventTime,
+    , EventTime (..)
+    , newEventTime
 
     -- ** FrequencyRange
-    FrequencyRange (..),
-    newFrequencyRange,
+    , FrequencyRange (..)
+    , newFrequencyRange
 
     -- ** GeoLocation
-    GeoLocation (..),
-    newGeoLocation,
+    , GeoLocation (..)
+    , newGeoLocation
 
     -- ** GeoLocationEllipse
-    GeoLocationEllipse (..),
-    newGeoLocationEllipse,
+    , GeoLocationEllipse (..)
+    , newGeoLocationEllipse
 
     -- ** GeoLocationPoint
-    GeoLocationPoint (..),
-    newGeoLocationPoint,
+    , GeoLocationPoint (..)
+    , newGeoLocationPoint
 
     -- ** GeoLocationPolygon
-    GeoLocationPolygon (..),
-    newGeoLocationPolygon,
+    , GeoLocationPolygon (..)
+    , newGeoLocationPolygon
 
     -- ** GeoSpectrumSchedule
-    GeoSpectrumSchedule (..),
-    newGeoSpectrumSchedule,
+    , GeoSpectrumSchedule (..)
+    , newGeoSpectrumSchedule
 
     -- ** PawsGetSpectrumBatchRequest
-    PawsGetSpectrumBatchRequest (..),
-    newPawsGetSpectrumBatchRequest,
+    , PawsGetSpectrumBatchRequest (..)
+    , newPawsGetSpectrumBatchRequest
 
     -- ** PawsGetSpectrumBatchResponse
-    PawsGetSpectrumBatchResponse (..),
-    newPawsGetSpectrumBatchResponse,
+    , PawsGetSpectrumBatchResponse (..)
+    , newPawsGetSpectrumBatchResponse
 
     -- ** PawsGetSpectrumRequest
-    PawsGetSpectrumRequest (..),
-    newPawsGetSpectrumRequest,
+    , PawsGetSpectrumRequest (..)
+    , newPawsGetSpectrumRequest
 
     -- ** PawsGetSpectrumResponse
-    PawsGetSpectrumResponse (..),
-    newPawsGetSpectrumResponse,
+    , PawsGetSpectrumResponse (..)
+    , newPawsGetSpectrumResponse
 
     -- ** PawsInitRequest
-    PawsInitRequest (..),
-    newPawsInitRequest,
+    , PawsInitRequest (..)
+    , newPawsInitRequest
 
     -- ** PawsInitResponse
-    PawsInitResponse (..),
-    newPawsInitResponse,
+    , PawsInitResponse (..)
+    , newPawsInitResponse
 
     -- ** PawsNotifySpectrumUseRequest
-    PawsNotifySpectrumUseRequest (..),
-    newPawsNotifySpectrumUseRequest,
+    , PawsNotifySpectrumUseRequest (..)
+    , newPawsNotifySpectrumUseRequest
 
     -- ** PawsNotifySpectrumUseResponse
-    PawsNotifySpectrumUseResponse (..),
-    newPawsNotifySpectrumUseResponse,
+    , PawsNotifySpectrumUseResponse (..)
+    , newPawsNotifySpectrumUseResponse
 
     -- ** PawsRegisterRequest
-    PawsRegisterRequest (..),
-    newPawsRegisterRequest,
+    , PawsRegisterRequest (..)
+    , newPawsRegisterRequest
 
     -- ** PawsRegisterResponse
-    PawsRegisterResponse (..),
-    newPawsRegisterResponse,
+    , PawsRegisterResponse (..)
+    , newPawsRegisterResponse
 
     -- ** PawsVerifyDeviceRequest
-    PawsVerifyDeviceRequest (..),
-    newPawsVerifyDeviceRequest,
+    , PawsVerifyDeviceRequest (..)
+    , newPawsVerifyDeviceRequest
 
     -- ** PawsVerifyDeviceResponse
-    PawsVerifyDeviceResponse (..),
-    newPawsVerifyDeviceResponse,
+    , PawsVerifyDeviceResponse (..)
+    , newPawsVerifyDeviceResponse
 
     -- ** RulesetInfo
-    RulesetInfo (..),
-    newRulesetInfo,
+    , RulesetInfo (..)
+    , newRulesetInfo
 
     -- ** SpectrumMessage
-    SpectrumMessage (..),
-    newSpectrumMessage,
+    , SpectrumMessage (..)
+    , newSpectrumMessage
 
     -- ** SpectrumSchedule
-    SpectrumSchedule (..),
-    newSpectrumSchedule,
+    , SpectrumSchedule (..)
+    , newSpectrumSchedule
 
     -- ** Vcard
-    Vcard (..),
-    newVcard,
+    , Vcard (..)
+    , newVcard
 
     -- ** VcardAddress
-    VcardAddress (..),
-    newVcardAddress,
+    , VcardAddress (..)
+    , newVcardAddress
 
     -- ** VcardTelephone
-    VcardTelephone (..),
-    newVcardTelephone,
+    , VcardTelephone (..)
+    , newVcardTelephone
 
     -- ** VcardTypedText
-    VcardTypedText (..),
-    newVcardTypedText,
-  )
-where
+    , VcardTypedText (..)
+    , newVcardTypedText
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Spectrum.Internal.Product
@@ -171,7 +173,7 @@ import Gogol.Spectrum.Internal.Sum
 
 -- | Default request referring to version @v1explorer@ of the Google Spectrum Database API. This contains the host and root path used as a starting point for constructing service requests.
 spectrumService :: Core.ServiceConfig
-spectrumService =
-  Core.defaultService
-    (Core.ServiceId "spectrum:v1explorer")
-    "www.googleapis.com"
+spectrumService
+  = Core.defaultService
+      (Core.ServiceId "spectrum:v1explorer")
+      "www.googleapis.com"

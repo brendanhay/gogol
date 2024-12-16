@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,41 +31,41 @@
 --
 -- /See:/ <https://developers.google.com/abusive-experience-report/ Abusive Experience Report API Reference>
 module Gogol.AbusiveExperienceReport
-  ( -- * Configuration
-    abusiveExperienceReportService,
+    (
+    -- * Configuration
+      abusiveExperienceReportService
 
     -- * Resources
 
     -- ** abusiveexperiencereport.sites.get
-    AbusiveExperienceReportSitesGetResource,
-    AbusiveExperienceReportSitesGet (..),
-    newAbusiveExperienceReportSitesGet,
+    , AbusiveExperienceReportSitesGetResource
+    , AbusiveExperienceReportSitesGet (..)
+    , newAbusiveExperienceReportSitesGet
 
     -- ** abusiveexperiencereport.violatingSites.list
-    AbusiveExperienceReportViolatingSitesListResource,
-    AbusiveExperienceReportViolatingSitesList (..),
-    newAbusiveExperienceReportViolatingSitesList,
+    , AbusiveExperienceReportViolatingSitesListResource
+    , AbusiveExperienceReportViolatingSitesList (..)
+    , newAbusiveExperienceReportViolatingSitesList
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** SiteSummaryResponse
-    SiteSummaryResponse (..),
-    newSiteSummaryResponse,
+    , SiteSummaryResponse (..)
+    , newSiteSummaryResponse
 
     -- ** SiteSummaryResponse_AbusiveStatus
-    SiteSummaryResponse_AbusiveStatus (..),
+    , SiteSummaryResponse_AbusiveStatus (..)
 
     -- ** SiteSummaryResponse_FilterStatus
-    SiteSummaryResponse_FilterStatus (..),
+    , SiteSummaryResponse_FilterStatus (..)
 
     -- ** ViolatingSitesResponse
-    ViolatingSitesResponse (..),
-    newViolatingSitesResponse,
-  )
-where
+    , ViolatingSitesResponse (..)
+    , newViolatingSitesResponse
+    ) where
 
 import Gogol.AbusiveExperienceReport.Sites.Get
 import Gogol.AbusiveExperienceReport.Types

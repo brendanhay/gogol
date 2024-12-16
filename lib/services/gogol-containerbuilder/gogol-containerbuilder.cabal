@@ -1,27 +1,24 @@
-cabal-version:      2.2
-name:               gogol-containerbuilder
-version:            1.0.0.0
-synopsis:           Google Cloud Build SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-containerbuilder
+version:               1.0.0
+synopsis:              Google Cloud Build SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  Creates and manages builds on Google Cloud Platform.
+    Creates and manages builds on Google Cloud Platform.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
   .
-  This library is compatible with version @v1@
+  This library is compatible with version @v2@
   of the API.
 
 source-repository head
@@ -30,95 +27,54 @@ source-repository head
   subdir:   gogol-containerbuilder
 
 flag field-selectors
-  description:
-    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-
-  default:     False
-  manual:      True
+  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+  default: False
+  manual: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -Werror
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (!flag(field-selectors) && impl(ghc >=9.2))
+  if !flag(field-selectors) && impl(ghc >= 9.2)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.ContainerBuilder
-    Gogol.ContainerBuilder.Cloudbuild.GithubDotComWebhook.Receive
-    Gogol.ContainerBuilder.Cloudbuild.Locations.RegionalWebhook
-    Gogol.ContainerBuilder.Cloudbuild.Operations.Cancel
-    Gogol.ContainerBuilder.Cloudbuild.Operations.Get
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Builds.Approve
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Builds.Cancel
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Builds.Create
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Builds.Get
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Builds.List
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Builds.Retry
-    Gogol.ContainerBuilder.Cloudbuild.Projects.GithubEnterpriseConfigs.Create
-    Gogol.ContainerBuilder.Cloudbuild.Projects.GithubEnterpriseConfigs.Delete
-    Gogol.ContainerBuilder.Cloudbuild.Projects.GithubEnterpriseConfigs.Get
-    Gogol.ContainerBuilder.Cloudbuild.Projects.GithubEnterpriseConfigs.List
-    Gogol.ContainerBuilder.Cloudbuild.Projects.GithubEnterpriseConfigs.Patch
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.BitbucketServerConfigs.ConnectedRepositories.BatchCreate
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.BitbucketServerConfigs.Create
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.BitbucketServerConfigs.Delete
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.BitbucketServerConfigs.Get
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.BitbucketServerConfigs.List
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.BitbucketServerConfigs.Patch
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.BitbucketServerConfigs.RemoveBitbucketServerConnectedRepository
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.BitbucketServerConfigs.Repos.List
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Builds.Approve
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Builds.Cancel
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Builds.Create
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Builds.Get
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Builds.List
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Builds.Retry
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GithubEnterpriseConfigs.Create
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GithubEnterpriseConfigs.Delete
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GithubEnterpriseConfigs.Get
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GithubEnterpriseConfigs.List
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GithubEnterpriseConfigs.Patch
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GitLabConfigs.ConnectedRepositories.BatchCreate
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GitLabConfigs.Create
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GitLabConfigs.Delete
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GitLabConfigs.Get
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GitLabConfigs.List
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GitLabConfigs.Patch
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GitLabConfigs.RemoveGitLabConnectedRepository
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GitLabConfigs.Repos.List
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Operations.Cancel
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Operations.Get
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Triggers.Create
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Triggers.Delete
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Triggers.Get
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Triggers.List
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Triggers.Patch
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Triggers.Run
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Triggers.Webhook
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.WorkerPools.Create
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.WorkerPools.Delete
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.WorkerPools.Get
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.WorkerPools.List
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.WorkerPools.Patch
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Triggers.Create
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Triggers.Delete
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Triggers.Get
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Triggers.List
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Triggers.Patch
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Triggers.Run
-    Gogol.ContainerBuilder.Cloudbuild.Projects.Triggers.Webhook
-    Gogol.ContainerBuilder.Cloudbuild.Webhook
-    Gogol.ContainerBuilder.Types
+      Gogol.ContainerBuilder
+    , Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Connections.Create
+    , Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Connections.Delete
+    , Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Connections.FetchLinkableRepositories
+    , Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Connections.Get
+    , Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Connections.GetIamPolicy
+    , Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Connections.List
+    , Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Connections.Patch
+    , Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Connections.ProcessWebhook
+    , Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Connections.Repositories.AccessReadToken
+    , Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Connections.Repositories.AccessReadWriteToken
+    , Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Connections.Repositories.BatchCreate
+    , Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Connections.Repositories.Create
+    , Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Connections.Repositories.Delete
+    , Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Connections.Repositories.FetchGitRefs
+    , Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Connections.Repositories.Get
+    , Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Connections.Repositories.List
+    , Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Connections.SetIamPolicy
+    , Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Connections.TestIamPermissions
+    , Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Get
+    , Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.List
+    , Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Operations.Cancel
+    , Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Operations.Get
+    , Gogol.ContainerBuilder.Types
 
   other-modules:
-    Gogol.ContainerBuilder.Internal.Product
-    Gogol.ContainerBuilder.Internal.Sum
+      Gogol.ContainerBuilder.Internal.Product
+    , Gogol.ContainerBuilder.Internal.Sum
 
   build-depends:
-    , base        >=4.12   && <5
-    , gogol-core  ^>=1.0.0
+      gogol-core ^>= 1.0.0

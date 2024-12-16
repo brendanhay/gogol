@@ -17,6 +17,7 @@
   "description": "The AdSense Management API allows publishers to access their inventory and run earnings and performance reports.",
   "discoveryVersion": "v1",
   "documentationLink": "https://developers.google.com/adsense/management/",
+  "fullyEncodeReservedExpansion": true,
   "icons": {
     "x16": "http://www.google.com/images/icons/product/search-16.gif",
     "x32": "http://www.google.com/images/icons/product/search-32.gif"
@@ -323,7 +324,7 @@
             "adunits": {
               "methods": {
                 "create": {
-                  "description": "Creates an ad unit. This method can only be used by projects enabled for the [AdSense for Platforms](https://developers.google.com/adsense/platforms/) product. Note that ad units can only be created for ad clients with an \"AFC\" product code. For more info see the [AdClient resource](/adsense/management/reference/rest/v2/accounts.adclients). For now, this method can only be used to create `DISPLAY` ad units. See: https://support.google.com/adsense/answer/9183566",
+                  "description": "Creates an ad unit. This method can be called only by a restricted set of projects, which are usually owned by [AdSense for Platforms](https://developers.google.com/adsense/platforms/) publishers. Contact your account manager if you need to use this method. Note that ad units can only be created for ad clients with an \"AFC\" product code. For more info see the [AdClient resource](/adsense/management/reference/rest/v2/accounts.adclients). For now, this method can only be used to create `DISPLAY` ad units. See: https://support.google.com/adsense/answer/9183566",
                   "flatPath": "v2/accounts/{accountsId}/adclients/{adclientsId}/adunits",
                   "httpMethod": "POST",
                   "id": "adsense.accounts.adclients.adunits.create",
@@ -477,7 +478,7 @@
                   ]
                 },
                 "patch": {
-                  "description": "Updates an ad unit. This method can only be used by projects enabled for the [AdSense for Platforms](https://developers.google.com/adsense/platforms/) product. For now, this method can only be used to update `DISPLAY` ad units. See: https://support.google.com/adsense/answer/9183566",
+                  "description": "Updates an ad unit. This method can be called only by a restricted set of projects, which are usually owned by [AdSense for Platforms](https://developers.google.com/adsense/platforms/) publishers. Contact your account manager if you need to use this method. For now, this method can only be used to update `DISPLAY` ad units. See: https://support.google.com/adsense/answer/9183566",
                   "flatPath": "v2/accounts/{accountsId}/adclients/{adclientsId}/adunits/{adunitsId}",
                   "httpMethod": "PATCH",
                   "id": "adsense.accounts.adclients.adunits.patch",
@@ -515,7 +516,7 @@
             "customchannels": {
               "methods": {
                 "create": {
-                  "description": "Creates a custom channel. This method can only be used by projects enabled for the [AdSense for Platforms](https://developers.google.com/adsense/platforms/) product.",
+                  "description": "Creates a custom channel. This method can be called only by a restricted set of projects, which are usually owned by [AdSense for Platforms](https://developers.google.com/adsense/platforms/) publishers. Contact your account manager if you need to use this method.",
                   "flatPath": "v2/accounts/{accountsId}/adclients/{adclientsId}/customchannels",
                   "httpMethod": "POST",
                   "id": "adsense.accounts.adclients.customchannels.create",
@@ -543,7 +544,7 @@
                   ]
                 },
                 "delete": {
-                  "description": "Deletes a custom channel. This method can only be used by projects enabled for the [AdSense for Platforms](https://developers.google.com/adsense/platforms/) product.",
+                  "description": "Deletes a custom channel. This method can be called only by a restricted set of projects, which are usually owned by [AdSense for Platforms](https://developers.google.com/adsense/platforms/) publishers. Contact your account manager if you need to use this method.",
                   "flatPath": "v2/accounts/{accountsId}/adclients/{adclientsId}/customchannels/{customchannelsId}",
                   "httpMethod": "DELETE",
                   "id": "adsense.accounts.adclients.customchannels.delete",
@@ -668,7 +669,7 @@
                   ]
                 },
                 "patch": {
-                  "description": "Updates a custom channel. This method can only be used by projects enabled for the [AdSense for Platforms](https://developers.google.com/adsense/platforms/) product.",
+                  "description": "Updates a custom channel. This method can be called only by a restricted set of projects, which are usually owned by [AdSense for Platforms](https://developers.google.com/adsense/platforms/) publishers. Contact your account manager if you need to use this method.",
                   "flatPath": "v2/accounts/{accountsId}/adclients/{adclientsId}/customchannels/{customchannelsId}",
                   "httpMethod": "PATCH",
                   "id": "adsense.accounts.adclients.customchannels.patch",
@@ -837,6 +838,73 @@
             }
           }
         },
+        "policyIssues": {
+          "methods": {
+            "get": {
+              "description": "Gets information about the selected policy issue.",
+              "flatPath": "v2/accounts/{accountsId}/policyIssues/{policyIssuesId}",
+              "httpMethod": "GET",
+              "id": "adsense.accounts.policyIssues.get",
+              "parameterOrder": [
+                "name"
+              ],
+              "parameters": {
+                "name": {
+                  "description": "Required. Name of the policy issue. Format: accounts/{account}/policyIssues/{policy_issue}",
+                  "location": "path",
+                  "pattern": "^accounts/[^/]+/policyIssues/[^/]+$",
+                  "required": true,
+                  "type": "string"
+                }
+              },
+              "path": "v2/{+name}",
+              "response": {
+                "$ref": "PolicyIssue"
+              },
+              "scopes": [
+                "https://www.googleapis.com/auth/adsense",
+                "https://www.googleapis.com/auth/adsense.readonly"
+              ]
+            },
+            "list": {
+              "description": "Lists all the policy issues where the specified account is involved, both directly and through any AFP child accounts.",
+              "flatPath": "v2/accounts/{accountsId}/policyIssues",
+              "httpMethod": "GET",
+              "id": "adsense.accounts.policyIssues.list",
+              "parameterOrder": [
+                "parent"
+              ],
+              "parameters": {
+                "pageSize": {
+                  "description": "The maximum number of policy issues to include in the response, used for paging. If unspecified, at most 10000 policy issues will be returned. The maximum value is 10000; values above 10000 will be coerced to 10000.",
+                  "format": "int32",
+                  "location": "query",
+                  "type": "integer"
+                },
+                "pageToken": {
+                  "description": "A page token, received from a previous `ListPolicyIssues` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListPolicyIssues` must match the call that provided the page token.",
+                  "location": "query",
+                  "type": "string"
+                },
+                "parent": {
+                  "description": "Required. The account for which policy issues are being retrieved. Format: accounts/{account}",
+                  "location": "path",
+                  "pattern": "^accounts/[^/]+$",
+                  "required": true,
+                  "type": "string"
+                }
+              },
+              "path": "v2/{+parent}/policyIssues",
+              "response": {
+                "$ref": "ListPolicyIssuesResponse"
+              },
+              "scopes": [
+                "https://www.googleapis.com/auth/adsense",
+                "https://www.googleapis.com/auth/adsense.readonly"
+              ]
+            }
+          }
+        },
         "reports": {
           "methods": {
             "generate": {
@@ -903,6 +971,7 @@
                     "AD_UNIT_SIZE_CODE",
                     "CUSTOM_CHANNEL_NAME",
                     "CUSTOM_CHANNEL_ID",
+                    "HOSTED_CUSTOM_CHANNEL_ID",
                     "OWNED_SITE_DOMAIN_NAME",
                     "OWNED_SITE_ID",
                     "PAGE_URL",
@@ -953,6 +1022,7 @@
                     "The size code of an ad unit (e.g. \"728x90\", \"responsive\").",
                     "Custom channel name. The members of this dimension match the values from CustomChannel.display_name.",
                     "Unique ID of a custom channel. The members of this dimension match the values from CustomChannel.reporting_dimension_id.",
+                    "Unique ID of a hosted client's custom channel.",
                     "Domain name of a verified site (e.g. \"example.com\"). The members of this dimension match the values from Site.domain.",
                     "Unique ID of a verified site. The members of this dimension match the values from Site.reporting_dimension_id.",
                     "URL of the page upon which the ad was served. This is a complete URL including scheme and query parameters. Note that the URL that appears in this dimension may be a canonicalized version of the one that was used in the original request, and so may not exactly match the URL that a user might have seen. Note that there are also some caveats to be aware of when using this dimension. For more information, see [Page URL breakdown](https://support.google.com/adsense/answer/11988478).",
@@ -1061,7 +1131,11 @@
                     "COST_PER_CLICK",
                     "ADS_PER_IMPRESSION",
                     "TOTAL_EARNINGS",
-                    "WEBSEARCH_RESULT_PAGES"
+                    "WEBSEARCH_RESULT_PAGES",
+                    "FUNNEL_REQUESTS",
+                    "FUNNEL_IMPRESSIONS",
+                    "FUNNEL_CLICKS",
+                    "FUNNEL_RPM"
                   ],
                   "enumDescriptions": [
                     "Unspecified metric.",
@@ -1096,7 +1170,11 @@
                     "Amount the publisher earns each time a user clicks on an ad. CPC is calculated by dividing the estimated revenue by the number of clicks received.",
                     "Number of ad views per impression.",
                     "Total earnings are the gross estimated earnings from revenue shared traffic before any parent and child account revenue share is applied.",
-                    "Number of results pages."
+                    "Number of results pages.",
+                    "Number of requests for non-ad units (for example a related search unit). For more information, see [Funnel requests](https://support.google.com/adsense/answer/11586959).",
+                    "Number of requests for non-ad units ads that returned content that was shown to the user. For more information, see [Funnel impressions](https://support.google.com/adsense/answer/11585767).",
+                    "Number of times a user clicked on a non-ad unit, triggering further ad requests. For more information, see [Funnel clicks](https://support.google.com/adsense/answer/11586382).",
+                    "Revenue per thousand funnel impressions. This is calculated by dividing estimated revenue by the number of funnel impressions multiplied by 1000. For more information, see [Funnel RPM](https://support.google.com/adsense/answer/11585979)."
                   ],
                   "location": "query",
                   "repeated": true,
@@ -1215,6 +1293,7 @@
                     "AD_UNIT_SIZE_CODE",
                     "CUSTOM_CHANNEL_NAME",
                     "CUSTOM_CHANNEL_ID",
+                    "HOSTED_CUSTOM_CHANNEL_ID",
                     "OWNED_SITE_DOMAIN_NAME",
                     "OWNED_SITE_ID",
                     "PAGE_URL",
@@ -1265,6 +1344,7 @@
                     "The size code of an ad unit (e.g. \"728x90\", \"responsive\").",
                     "Custom channel name. The members of this dimension match the values from CustomChannel.display_name.",
                     "Unique ID of a custom channel. The members of this dimension match the values from CustomChannel.reporting_dimension_id.",
+                    "Unique ID of a hosted client's custom channel.",
                     "Domain name of a verified site (e.g. \"example.com\"). The members of this dimension match the values from Site.domain.",
                     "Unique ID of a verified site. The members of this dimension match the values from Site.reporting_dimension_id.",
                     "URL of the page upon which the ad was served. This is a complete URL including scheme and query parameters. Note that the URL that appears in this dimension may be a canonicalized version of the one that was used in the original request, and so may not exactly match the URL that a user might have seen. Note that there are also some caveats to be aware of when using this dimension. For more information, see [Page URL breakdown](https://support.google.com/adsense/answer/11988478).",
@@ -1373,7 +1453,11 @@
                     "COST_PER_CLICK",
                     "ADS_PER_IMPRESSION",
                     "TOTAL_EARNINGS",
-                    "WEBSEARCH_RESULT_PAGES"
+                    "WEBSEARCH_RESULT_PAGES",
+                    "FUNNEL_REQUESTS",
+                    "FUNNEL_IMPRESSIONS",
+                    "FUNNEL_CLICKS",
+                    "FUNNEL_RPM"
                   ],
                   "enumDescriptions": [
                     "Unspecified metric.",
@@ -1408,7 +1492,11 @@
                     "Amount the publisher earns each time a user clicks on an ad. CPC is calculated by dividing the estimated revenue by the number of clicks received.",
                     "Number of ad views per impression.",
                     "Total earnings are the gross estimated earnings from revenue shared traffic before any parent and child account revenue share is applied.",
-                    "Number of results pages."
+                    "Number of results pages.",
+                    "Number of requests for non-ad units (for example a related search unit). For more information, see [Funnel requests](https://support.google.com/adsense/answer/11586959).",
+                    "Number of requests for non-ad units ads that returned content that was shown to the user. For more information, see [Funnel impressions](https://support.google.com/adsense/answer/11585767).",
+                    "Number of times a user clicked on a non-ad unit, triggering further ad requests. For more information, see [Funnel clicks](https://support.google.com/adsense/answer/11586382).",
+                    "Revenue per thousand funnel impressions. This is calculated by dividing estimated revenue by the number of funnel impressions multiplied by 1000. For more information, see [Funnel RPM](https://support.google.com/adsense/answer/11585979)."
                   ],
                   "location": "query",
                   "repeated": true,
@@ -1828,7 +1916,7 @@
       }
     }
   },
-  "revision": "20230403",
+  "revision": "20241211",
   "rootUrl": "https://adsense.googleapis.com/",
   "schemas": {
     "Account": {
@@ -1987,7 +2075,7 @@
           "type": "string"
         },
         "state": {
-          "description": "State of the ad unit.",
+          "description": "Required. State of the ad unit.",
           "enum": [
             "STATE_UNSPECIFIED",
             "ACTIVE",
@@ -2082,6 +2170,14 @@
             "ARTICLE",
             "MATCHED_CONTENT",
             "LINK"
+          ],
+          "enumDeprecated": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            true
           ],
           "enumDescriptions": [
             "Unspecified ad unit type.",
@@ -2367,6 +2463,24 @@
       },
       "type": "object"
     },
+    "ListPolicyIssuesResponse": {
+      "description": "Response definition for the policy issues list rpc. Policy issues are reported only if the publisher has at least one AFC ad client in READY or GETTING_READY state. If the publisher has no such AFC ad client, the response will be an empty list.",
+      "id": "ListPolicyIssuesResponse",
+      "properties": {
+        "nextPageToken": {
+          "description": "Continuation token used to page through policy issues. To retrieve the next page of the results, set the next request's \"page_token\" value to this.",
+          "type": "string"
+        },
+        "policyIssues": {
+          "description": "The policy issues returned in the list response.",
+          "items": {
+            "$ref": "PolicyIssue"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "ListSavedReportsResponse": {
       "description": "Response definition for the saved reports list rpc.",
       "id": "ListSavedReportsResponse",
@@ -2438,6 +2552,111 @@
         "name": {
           "description": "Output only. Resource name of the payment. Format: - accounts/{account}/payments/unpaid for unpaid (current) AdSense earnings. - accounts/{account}/payments/youtube-unpaid for unpaid (current) YouTube earnings. - accounts/{account}/payments/yyyy-MM-dd for paid AdSense earnings. - accounts/{account}/payments/youtube-yyyy-MM-dd for paid YouTube earnings.",
           "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PolicyIssue": {
+      "description": "Representation of a policy issue for a single entity (site, site-section, or page). All issues for a single entity are represented by a single PolicyIssue resource, though that PolicyIssue can have multiple causes (or \"topics\") that can change over time. Policy issues are removed if there are no issues detected recently or if there's a recent successful appeal for the entity.",
+      "id": "PolicyIssue",
+      "properties": {
+        "action": {
+          "description": "Required. The most severe action taken on the entity over the past seven days.",
+          "enum": [
+            "ENFORCEMENT_ACTION_UNSPECIFIED",
+            "WARNED",
+            "AD_SERVING_RESTRICTED",
+            "AD_SERVING_DISABLED",
+            "AD_SERVED_WITH_CLICK_CONFIRMATION",
+            "AD_PERSONALIZATION_RESTRICTED"
+          ],
+          "enumDescriptions": [
+            "The action is unspecified.",
+            "No ad serving enforcement is currently present, but enforcement will start on the `warning_escalation_date` if the issue is not resolved.",
+            "Ad serving demand has been restricted on the entity.",
+            "Ad serving has been disabled on the entity.",
+            "Ads are being served for the entity but Confirmed Click is being applied to the ads. See https://support.google.com/adsense/answer/10025624.",
+            "Ad personalization is restricted because the ad requests coming from the EEA and UK do not have a TCF string or the Consent Management Platform (CMP) indicated by the TCF string is not Google certified. As a result, basic/limited ads will be served. See https://support.google.com/adsense/answer/13554116"
+          ],
+          "type": "string"
+        },
+        "adClients": {
+          "description": "Optional. List of ad clients associated with the policy issue (either as the primary ad client or an associated host/secondary ad client). In the latter case, this will be an ad client that is not owned by the current account.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "adRequestCount": {
+          "description": "Required. Total number of ad requests affected by the policy violations over the past seven days.",
+          "format": "int64",
+          "type": "string"
+        },
+        "entityType": {
+          "description": "Required. Type of the entity indicating if the entity is a site, site-section, or page.",
+          "enum": [
+            "ENTITY_TYPE_UNSPECIFIED",
+            "SITE",
+            "SITE_SECTION",
+            "PAGE"
+          ],
+          "enumDescriptions": [
+            "The entity type is unspecified.",
+            "The enforced entity is an entire website.",
+            "The enforced entity is a particular section of a website. All the pages with this prefix are enforced.",
+            "The enforced entity is a single web page."
+          ],
+          "type": "string"
+        },
+        "firstDetectedDate": {
+          "$ref": "Date",
+          "description": "Required. The date (in the America/Los_Angeles timezone) when policy violations were first detected on the entity."
+        },
+        "lastDetectedDate": {
+          "$ref": "Date",
+          "description": "Required. The date (in the America/Los_Angeles timezone) when policy violations were last detected on the entity."
+        },
+        "name": {
+          "description": "Required. Resource name of the entity with policy issues. Format: accounts/{account}/policyIssues/{policy_issue}",
+          "type": "string"
+        },
+        "policyTopics": {
+          "description": "Required. Unordered list. The policy topics that this entity was found to violate over the past seven days.",
+          "items": {
+            "$ref": "PolicyTopic"
+          },
+          "type": "array"
+        },
+        "site": {
+          "description": "Required. Hostname/domain of the entity (for example \"foo.com\" or \"www.foo.com\"). This _should_ be a bare domain/host name without any protocol. This will be present for all policy issues.",
+          "type": "string"
+        },
+        "siteSection": {
+          "description": "Optional. Prefix of the site-section having policy issues (For example \"foo.com/bar-section\"). This will be present if the `entity_type` is `SITE_SECTION` and will be absent for other entity types.",
+          "type": "string"
+        },
+        "uri": {
+          "description": "Optional. URI of the page having policy violations (for example \"foo.com/bar\" or \"www.foo.com/bar\"). This will be present if the `entity_type` is `PAGE` and will be absent for other entity types.",
+          "type": "string"
+        },
+        "warningEscalationDate": {
+          "$ref": "Date",
+          "description": "Optional. The date (in the America/Los_Angeles timezone) when the entity will have ad serving demand restricted or ad serving disabled. This is present only for issues with a `WARNED` enforcement action. See https://support.google.com/adsense/answer/11066888."
+        }
+      },
+      "type": "object"
+    },
+    "PolicyTopic": {
+      "description": "Information about a particular policy topic. A policy topic represents a single class of policy issue that can impact ad serving for your site. For example, sexual content or having ads that obscure your content. A single policy issue can have multiple policy topics for a single entity.",
+      "id": "PolicyTopic",
+      "properties": {
+        "mustFix": {
+          "description": "Required. Indicates if this is a policy violation or not. When the value is true, issues that are instances of this topic must be addressed to remain in compliance with the partner's agreements with Google. A false value indicates that it's not mandatory to fix the issues but advertising demand might be restricted.",
+          "type": "boolean"
+        },
+        "topic": {
+          "description": "Required. The policy topic. For example, \"sexual-content\" or \"ads-obscuring-content\".\"",
           "type": "string"
         }
       },
@@ -2571,11 +2790,11 @@
       "id": "TimeZone",
       "properties": {
         "id": {
-          "description": "IANA Time Zone Database time zone, e.g. \"America/New_York\".",
+          "description": "IANA Time Zone Database time zone. For example \"America/New_York\".",
           "type": "string"
         },
         "version": {
-          "description": "Optional. IANA Time Zone Database version number, e.g. \"2019a\".",
+          "description": "Optional. IANA Time Zone Database version number. For example \"2019a\".",
           "type": "string"
         }
       },

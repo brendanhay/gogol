@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,14 +31,14 @@
 --
 -- /See:/ <https://developers.google.com/youtube/analytics YouTube Analytics API Reference> for @youtubeAnalytics.groups.update@.
 module Gogol.YouTubeAnalytics.Groups.Update
-  ( -- * Resource
-    YouTubeAnalyticsGroupsUpdateResource,
+    (
+    -- * Resource
+      YouTubeAnalyticsGroupsUpdateResource
 
     -- ** Constructing a Request
-    YouTubeAnalyticsGroupsUpdate (..),
-    newYouTubeAnalyticsGroupsUpdate,
-  )
-where
+    , YouTubeAnalyticsGroupsUpdate (..)
+    , newYouTubeAnalyticsGroupsUpdate
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.YouTubeAnalytics.Types
@@ -45,83 +46,76 @@ import Gogol.YouTubeAnalytics.Types
 -- | A resource alias for @youtubeAnalytics.groups.update@ method which the
 -- 'YouTubeAnalyticsGroupsUpdate' request conforms to.
 type YouTubeAnalyticsGroupsUpdateResource =
-  "v2"
-    Core.:> "groups"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "onBehalfOfContentOwner" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Group
-    Core.:> Core.Put '[Core.JSON] Group
+     "v2" Core.:>
+       "groups" Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "onBehalfOfContentOwner" Core.Text
+                 Core.:>
+                 Core.QueryParam "uploadType" Core.Text Core.:>
+                   Core.QueryParam "upload_protocol" Core.Text Core.:>
+                     Core.QueryParam "alt" Core.AltJSON Core.:>
+                       Core.ReqBody '[Core.JSON] Group Core.:>
+                         Core.Put '[Core.JSON] Group
 
 -- | Modifies a group. For example, you could change a group\'s title.
 --
 -- /See:/ 'newYouTubeAnalyticsGroupsUpdate' smart constructor.
 data YouTubeAnalyticsGroupsUpdate = YouTubeAnalyticsGroupsUpdate
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | This parameter can only be used in a properly authorized request. __Note:__ This parameter is intended exclusively for YouTube content partners that own and manage many different YouTube channels. The @onBehalfOfContentOwner@ parameter indicates that the request\'s authorization credentials identify a YouTube user who is acting on behalf of the content owner specified in the parameter value. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The account that the user authenticates with must be linked to the specified YouTube content owner.
-    onBehalfOfContentOwner :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: Group,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | This parameter can only be used in a properly authorized request. __Note:__ This parameter is intended exclusively for YouTube content partners that own and manage many different YouTube channels. The @onBehalfOfContentOwner@ parameter indicates that the request\'s authorization credentials identify a YouTube user who is acting on behalf of the content owner specified in the parameter value. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The account that the user authenticates with must be linked to the specified YouTube content owner.
+    , onBehalfOfContentOwner :: (Core.Maybe Core.Text)
+      -- | Multipart request metadata.
+    , payload :: Group
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'YouTubeAnalyticsGroupsUpdate' with the minimum fields required to make a request.
-newYouTubeAnalyticsGroupsUpdate ::
-  -- |  Multipart request metadata. See 'payload'.
-  Group ->
-  YouTubeAnalyticsGroupsUpdate
+newYouTubeAnalyticsGroupsUpdate 
+    ::  Group
+       -- ^  Multipart request metadata. See 'payload'.
+    -> YouTubeAnalyticsGroupsUpdate
 newYouTubeAnalyticsGroupsUpdate payload =
   YouTubeAnalyticsGroupsUpdate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      onBehalfOfContentOwner = Core.Nothing,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , onBehalfOfContentOwner = Core.Nothing
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    YouTubeAnalyticsGroupsUpdate
-  where
-  type Rs YouTubeAnalyticsGroupsUpdate = Group
-  type
-    Scopes YouTubeAnalyticsGroupsUpdate =
-      '[ Youtube'FullControl,
-         Youtube'Readonly,
-         Youtubepartner'FullControl,
-         YtAnalyticsMonetary'Readonly,
-         YtAnalytics'Readonly
-       ]
-  requestClient YouTubeAnalyticsGroupsUpdate {..} =
-    go
-      xgafv
-      accessToken
-      callback
-      onBehalfOfContentOwner
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      payload
-      youTubeAnalyticsService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy YouTubeAnalyticsGroupsUpdateResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           YouTubeAnalyticsGroupsUpdate
+         where
+        type Rs YouTubeAnalyticsGroupsUpdate = Group
+        type Scopes YouTubeAnalyticsGroupsUpdate =
+             '[Youtube'FullControl, Youtube'Readonly,
+               Youtubepartner'FullControl,
+               YtAnalyticsMonetary'Readonly, YtAnalytics'Readonly]
+        requestClient YouTubeAnalyticsGroupsUpdate{..}
+          = go xgafv accessToken callback
+              onBehalfOfContentOwner
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              youTubeAnalyticsService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy YouTubeAnalyticsGroupsUpdateResource)
+                      Core.mempty
+

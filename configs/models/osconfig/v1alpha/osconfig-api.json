@@ -110,8 +110,10 @@
         "locations": {
           "resources": {
             "instanceOSPoliciesCompliances": {
+              "deprecated": true,
               "methods": {
                 "get": {
+                  "deprecated": true,
                   "description": "Get OS policies compliance data for the specified Compute Engine VM instance.",
                   "flatPath": "v1alpha/projects/{projectsId}/locations/{locationsId}/instanceOSPoliciesCompliances/{instanceOSPoliciesCompliancesId}",
                   "httpMethod": "GET",
@@ -137,6 +139,7 @@
                   ]
                 },
                 "list": {
+                  "deprecated": true,
                   "description": "List OS policies compliance data for all Compute Engine VM instances in the specified zone.",
                   "flatPath": "v1alpha/projects/{projectsId}/locations/{locationsId}/instanceOSPoliciesCompliances",
                   "httpMethod": "GET",
@@ -286,7 +289,7 @@
                     "reports": {
                       "methods": {
                         "get": {
-                          "description": "Get the OS policy asssignment report for the specified Compute Engine VM instance.",
+                          "description": "Get the OS policy assignment report for the specified Compute Engine VM instance.",
                           "flatPath": "v1alpha/projects/{projectsId}/locations/{locationsId}/instances/{instancesId}/osPolicyAssignments/{osPolicyAssignmentsId}/report",
                           "httpMethod": "GET",
                           "id": "osconfig.projects.locations.instances.osPolicyAssignments.reports.get",
@@ -311,7 +314,7 @@
                           ]
                         },
                         "list": {
-                          "description": "List OS policy asssignment reports for all Compute Engine VM instances in the specified zone.",
+                          "description": "List OS policy assignment reports for all Compute Engine VM instances in the specified zone.",
                           "flatPath": "v1alpha/projects/{projectsId}/locations/{locationsId}/instances/{instancesId}/osPolicyAssignments/{osPolicyAssignmentsId}/reports",
                           "httpMethod": "GET",
                           "id": "osconfig.projects.locations.instances.osPolicyAssignments.reports.list",
@@ -449,6 +452,11 @@
                       "pattern": "^projects/[^/]+/locations/[^/]+$",
                       "required": true,
                       "type": "string"
+                    },
+                    "requestId": {
+                      "description": "Optional. A unique identifier for this request. Restricted to 36 ASCII characters. A random UUID is recommended. This request is only idempotent if a `request_id` is provided.",
+                      "location": "query",
+                      "type": "string"
                     }
                   },
                   "path": "v1alpha/{+parent}/osPolicyAssignments",
@@ -476,6 +484,11 @@
                       "location": "path",
                       "pattern": "^projects/[^/]+/locations/[^/]+/osPolicyAssignments/[^/]+$",
                       "required": true,
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "description": "Optional. A unique identifier for this request. Restricted to 36 ASCII characters. A random UUID is recommended. This request is only idempotent if a `request_id` is provided.",
+                      "location": "query",
                       "type": "string"
                     }
                   },
@@ -593,11 +606,21 @@
                     "name"
                   ],
                   "parameters": {
+                    "allowMissing": {
+                      "description": "Optional. If set to true, and the OS policy assignment is not found, a new OS policy assignment will be created. In this situation, `update_mask` is ignored.",
+                      "location": "query",
+                      "type": "boolean"
+                    },
                     "name": {
                       "description": "Resource name. Format: `projects/{project_number}/locations/{location}/osPolicyAssignments/{os_policy_assignment_id}` This field is ignored when you create an OS policy assignment.",
                       "location": "path",
                       "pattern": "^projects/[^/]+/locations/[^/]+/osPolicyAssignments/[^/]+$",
                       "required": true,
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "description": "Optional. A unique identifier for this request. Restricted to 36 ASCII characters. A random UUID is recommended. This request is only idempotent if a `request_id` is provided.",
+                      "location": "query",
                       "type": "string"
                     },
                     "updateMask": {
@@ -623,7 +646,7 @@
                 "operations": {
                   "methods": {
                     "cancel": {
-                      "description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.",
+                      "description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of `1`, corresponding to `Code.CANCELLED`.",
                       "flatPath": "v1alpha/projects/{projectsId}/locations/{locationsId}/osPolicyAssignments/{osPolicyAssignmentsId}/operations/{operationsId}:cancel",
                       "httpMethod": "POST",
                       "id": "osconfig.projects.locations.osPolicyAssignments.operations.cancel",
@@ -684,7 +707,7 @@
       }
     }
   },
-  "revision": "20221218",
+  "revision": "20241117",
   "rootUrl": "https://osconfig.googleapis.com/",
   "schemas": {
     "CVSSv3": {
@@ -939,7 +962,52 @@
       },
       "type": "object"
     },
+    "GoogleCloudOsconfigV2beta__OperationMetadata": {
+      "description": "Represents the metadata of the long-running operation.",
+      "id": "GoogleCloudOsconfigV2beta__OperationMetadata",
+      "properties": {
+        "apiVersion": {
+          "description": "Output only. API version used to start the operation.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "createTime": {
+          "description": "Output only. The time the operation was created.",
+          "format": "google-datetime",
+          "readOnly": true,
+          "type": "string"
+        },
+        "endTime": {
+          "description": "Output only. The time the operation finished running.",
+          "format": "google-datetime",
+          "readOnly": true,
+          "type": "string"
+        },
+        "requestedCancellation": {
+          "description": "Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "statusMessage": {
+          "description": "Output only. Human-readable status of the operation, if any.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "target": {
+          "description": "Output only. Server-defined resource path for the target of the operation.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "verb": {
+          "description": "Output only. Name of the verb executed by the operation.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "InstanceOSPoliciesCompliance": {
+      "deprecated": true,
       "description": "This API resource represents the OS policies compliance data for a Compute Engine virtual machine (VM) instance at a given point in time. A Compute Engine VM can have multiple OS policy assignments, and each assignment can have multiple OS policies. As a result, multiple OS policies could be applied to a single VM. You can use this API resource to determine both the compliance state of your VM as well as the compliance state of an individual OS policy. For more information, see [View compliance](https://cloud.google.com/compute/docs/os-configuration-management/view-compliance).",
       "id": "InstanceOSPoliciesCompliance",
       "properties": {
@@ -1005,6 +1073,7 @@
       "type": "object"
     },
     "InstanceOSPoliciesComplianceOSPolicyCompliance": {
+      "deprecated": true,
       "description": "Compliance data for an OS policy",
       "id": "InstanceOSPoliciesComplianceOSPolicyCompliance",
       "properties": {
@@ -1116,7 +1185,7 @@
             "AVAILABLE_PACKAGE"
           ],
           "enumDescriptions": [
-            "Invalid. An type must be specified.",
+            "Invalid. A type must be specified.",
             "This represents a package that is installed on the VM.",
             "This represents an update that is available for a package."
           ],
@@ -1375,6 +1444,7 @@
       "type": "object"
     },
     "ListInstanceOSPoliciesCompliancesResponse": {
+      "deprecated": true,
       "description": "A response message for listing OS policies compliance data for all Compute Engine VMs in the given location.",
       "id": "ListInstanceOSPoliciesCompliancesResponse",
       "properties": {
@@ -1636,6 +1706,7 @@
           "type": "array"
         },
         "osShortNames": {
+          "deprecated": true,
           "description": "Deprecated. Use the `inventories` field instead. A VM is selected if it's OS short name matches with any of the values provided in this list.",
           "items": {
             "type": "string"
@@ -1783,7 +1854,7 @@
           "type": "string"
         },
         "complianceStateReason": {
-          "description": "The reason for the OS policy to be in an unknown compliance state. This field is always populated when `compliance_state` is `UNKNOWN`. If populated, the field can contain one of the following values: * `vm-not-running`: The VM was not running. * `os-policies-not-supported-by-agent`: The version of the OS Config agent running on the VM does not support running OS policies. * `no-agent-detected`: The OS Config agent is not detected for the VM. * `resource-execution-errors`: The OS Config agent encountered errors while executing one or more resources in the policy. See `os_policy_resource_compliances` for details. * `task-timeout`: The task sent to the agent to apply the policy timed out. * `unexpected-agent-state`: The OS Config agent did not report the final status of the task that attempted to apply the policy. Instead, the agent unexpectedly started working on a different task. This mostly happens when the agent or VM unexpectedly restarts while applying OS policies. * `internal-service-errors`: Internal service errors were encountered while attempting to apply the policy.",
+          "description": "The reason for the OS policy to be in an unknown compliance state. This field is always populated when `compliance_state` is `UNKNOWN`. If populated, the field can contain one of the following values: * `vm-not-running`: The VM was not running. * `os-policies-not-supported-by-agent`: The version of the OS Config agent running on the VM does not support running OS policies. * `no-agent-detected`: The OS Config agent is not detected for the VM. * `resource-execution-errors`: The OS Config agent encountered errors while executing one or more resources in the policy. See `os_policy_resource_compliances` for details. * `task-timeout`: The task sent to the agent to apply the policy timed out. * `unexpected-agent-state`: The OS Config agent did not report the final status of the task that attempted to apply the policy. Instead, the agent unexpectedly started working on a different task. This mostly happens when the agent or VM unexpectedly restarts while applying OS policies. * `internal-service-errors`: Internal service errors were encountered while attempting to apply the policy. * `os-policy-execution-pending`: OS policy was assigned to the given VM, but was not executed yet. Typically this is a transient condition that will go away after the next policy execution cycle.",
           "type": "string"
         },
         "osPolicyId": {
@@ -1819,7 +1890,7 @@
           "type": "string"
         },
         "complianceStateReason": {
-          "description": "A reason for the resource to be in the given compliance state. This field is always populated when `compliance_state` is `UNKNOWN`. The following values are supported when `compliance_state == UNKNOWN` * `execution-errors`: Errors were encountered by the agent while executing the resource and the compliance state couldn't be determined. * `execution-skipped-by-agent`: Resource execution was skipped by the agent because errors were encountered while executing prior resources in the OS policy. * `os-policy-execution-attempt-failed`: The execution of the OS policy containing this resource failed and the compliance state couldn't be determined.",
+          "description": "A reason for the resource to be in the given compliance state. This field is always populated when `compliance_state` is `UNKNOWN`. The following values are supported when `compliance_state == UNKNOWN` * `execution-errors`: Errors were encountered by the agent while executing the resource and the compliance state couldn't be determined. * `execution-skipped-by-agent`: Resource execution was skipped by the agent because errors were encountered while executing prior resources in the OS policy. * `os-policy-execution-attempt-failed`: The execution of the OS policy containing this resource failed and the compliance state couldn't be determined. * `os-policy-execution-pending`: OS policy that owns this resource was assigned to the given VM, but was not executed yet.",
           "type": "string"
         },
         "configSteps": {
@@ -1955,6 +2026,7 @@
       "type": "object"
     },
     "OSPolicyResourceCompliance": {
+      "deprecated": true,
       "description": "Compliance data for an OS policy resource.",
       "id": "OSPolicyResourceCompliance",
       "properties": {
@@ -1995,6 +2067,7 @@
       "type": "object"
     },
     "OSPolicyResourceComplianceExecResourceOutput": {
+      "deprecated": true,
       "description": "ExecResource specific output.",
       "id": "OSPolicyResourceComplianceExecResourceOutput",
       "properties": {
@@ -2007,6 +2080,7 @@
       "type": "object"
     },
     "OSPolicyResourceConfigStep": {
+      "deprecated": true,
       "description": "Step performed by the OS Config agent for configuring an `OSPolicyResource` to its desired state.",
       "id": "OSPolicyResourceConfigStep",
       "properties": {
@@ -2216,6 +2290,7 @@
         },
         "osFilter": {
           "$ref": "OSPolicyOSFilter",
+          "deprecated": true,
           "description": "Deprecated. Use the `inventory_filters` field instead. Used to specify the OS filter for a resource group"
         },
         "resources": {
@@ -2528,7 +2603,7 @@
             "description": "Properties of the object. Contains field @type with type URL.",
             "type": "any"
           },
-          "description": "The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.",
+          "description": "The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.",
           "type": "object"
         }
       },
@@ -2592,6 +2667,7 @@
       "id": "VulnerabilityReportVulnerability",
       "properties": {
         "availableInventoryItemIds": {
+          "deprecated": true,
           "description": "Corresponds to the `AVAILABLE_PACKAGE` inventory item on the VM. If the vulnerability report was not updated after the VM inventory update, these values might not display in VM inventory. If there is no available fix, the field is empty. The `inventory_item` value specifies the latest `SoftwarePackage` available to the VM that fixes the vulnerability.",
           "items": {
             "type": "string"
@@ -2608,6 +2684,7 @@
           "description": "Contains metadata as per the upstream feed of the operating system and NVD."
         },
         "installedInventoryItemIds": {
+          "deprecated": true,
           "description": "Corresponds to the `INSTALLED_PACKAGE` inventory item on the VM. This field displays the inventory items affected by this vulnerability. If the vulnerability report was not updated after the VM inventory update, these values might not display in VM inventory. For some distros, this field may be empty.",
           "items": {
             "type": "string"

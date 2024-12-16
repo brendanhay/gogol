@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,311 +26,383 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.CloudKMS.Types
-  ( -- * Configuration
-    cloudKMSService,
+    (
+    -- * Configuration
+      cloudKMSService
 
     -- * OAuth Scopes
-    CloudPlatform'FullControl,
-    Cloudkms'FullControl,
+    , CloudPlatform'FullControl
+    , Cloudkms'FullControl
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AsymmetricDecryptRequest
-    AsymmetricDecryptRequest (..),
-    newAsymmetricDecryptRequest,
+    , AsymmetricDecryptRequest (..)
+    , newAsymmetricDecryptRequest
 
     -- ** AsymmetricDecryptResponse
-    AsymmetricDecryptResponse (..),
-    newAsymmetricDecryptResponse,
+    , AsymmetricDecryptResponse (..)
+    , newAsymmetricDecryptResponse
 
     -- ** AsymmetricDecryptResponse_ProtectionLevel
-    AsymmetricDecryptResponse_ProtectionLevel (..),
+    , AsymmetricDecryptResponse_ProtectionLevel (..)
 
     -- ** AsymmetricSignRequest
-    AsymmetricSignRequest (..),
-    newAsymmetricSignRequest,
+    , AsymmetricSignRequest (..)
+    , newAsymmetricSignRequest
 
     -- ** AsymmetricSignResponse
-    AsymmetricSignResponse (..),
-    newAsymmetricSignResponse,
+    , AsymmetricSignResponse (..)
+    , newAsymmetricSignResponse
 
     -- ** AsymmetricSignResponse_ProtectionLevel
-    AsymmetricSignResponse_ProtectionLevel (..),
+    , AsymmetricSignResponse_ProtectionLevel (..)
 
     -- ** AuditConfig
-    AuditConfig (..),
-    newAuditConfig,
+    , AuditConfig (..)
+    , newAuditConfig
 
     -- ** AuditLogConfig
-    AuditLogConfig (..),
-    newAuditLogConfig,
+    , AuditLogConfig (..)
+    , newAuditLogConfig
 
     -- ** AuditLogConfig_LogType
-    AuditLogConfig_LogType (..),
+    , AuditLogConfig_LogType (..)
+
+    -- ** AutokeyConfig
+    , AutokeyConfig (..)
+    , newAutokeyConfig
+
+    -- ** AutokeyConfig_State
+    , AutokeyConfig_State (..)
 
     -- ** Binding
-    Binding (..),
-    newBinding,
+    , Binding (..)
+    , newBinding
 
     -- ** Certificate
-    Certificate (..),
-    newCertificate,
+    , Certificate (..)
+    , newCertificate
 
     -- ** CertificateChains
-    CertificateChains (..),
-    newCertificateChains,
+    , CertificateChains (..)
+    , newCertificateChains
 
     -- ** CryptoKey
-    CryptoKey (..),
-    newCryptoKey,
+    , CryptoKey (..)
+    , newCryptoKey
 
     -- ** CryptoKey_Labels
-    CryptoKey_Labels (..),
-    newCryptoKey_Labels,
+    , CryptoKey_Labels (..)
+    , newCryptoKey_Labels
 
     -- ** CryptoKey_Purpose
-    CryptoKey_Purpose (..),
+    , CryptoKey_Purpose (..)
 
     -- ** CryptoKeyVersion
-    CryptoKeyVersion (..),
-    newCryptoKeyVersion,
+    , CryptoKeyVersion (..)
+    , newCryptoKeyVersion
 
     -- ** CryptoKeyVersion_Algorithm
-    CryptoKeyVersion_Algorithm (..),
+    , CryptoKeyVersion_Algorithm (..)
 
     -- ** CryptoKeyVersion_ProtectionLevel
-    CryptoKeyVersion_ProtectionLevel (..),
+    , CryptoKeyVersion_ProtectionLevel (..)
 
     -- ** CryptoKeyVersion_State
-    CryptoKeyVersion_State (..),
+    , CryptoKeyVersion_State (..)
 
     -- ** CryptoKeyVersionTemplate
-    CryptoKeyVersionTemplate (..),
-    newCryptoKeyVersionTemplate,
+    , CryptoKeyVersionTemplate (..)
+    , newCryptoKeyVersionTemplate
 
     -- ** CryptoKeyVersionTemplate_Algorithm
-    CryptoKeyVersionTemplate_Algorithm (..),
+    , CryptoKeyVersionTemplate_Algorithm (..)
 
     -- ** CryptoKeyVersionTemplate_ProtectionLevel
-    CryptoKeyVersionTemplate_ProtectionLevel (..),
+    , CryptoKeyVersionTemplate_ProtectionLevel (..)
 
     -- ** DecryptRequest
-    DecryptRequest (..),
-    newDecryptRequest,
+    , DecryptRequest (..)
+    , newDecryptRequest
 
     -- ** DecryptResponse
-    DecryptResponse (..),
-    newDecryptResponse,
+    , DecryptResponse (..)
+    , newDecryptResponse
 
     -- ** DecryptResponse_ProtectionLevel
-    DecryptResponse_ProtectionLevel (..),
+    , DecryptResponse_ProtectionLevel (..)
 
     -- ** DestroyCryptoKeyVersionRequest
-    DestroyCryptoKeyVersionRequest (..),
-    newDestroyCryptoKeyVersionRequest,
+    , DestroyCryptoKeyVersionRequest (..)
+    , newDestroyCryptoKeyVersionRequest
 
     -- ** Digest
-    Digest (..),
-    newDigest,
+    , Digest (..)
+    , newDigest
 
     -- ** EkmConfig
-    EkmConfig (..),
-    newEkmConfig,
+    , EkmConfig (..)
+    , newEkmConfig
 
     -- ** EkmConnection
-    EkmConnection (..),
-    newEkmConnection,
+    , EkmConnection (..)
+    , newEkmConnection
 
     -- ** EkmConnection_KeyManagementMode
-    EkmConnection_KeyManagementMode (..),
+    , EkmConnection_KeyManagementMode (..)
 
     -- ** EncryptRequest
-    EncryptRequest (..),
-    newEncryptRequest,
+    , EncryptRequest (..)
+    , newEncryptRequest
 
     -- ** EncryptResponse
-    EncryptResponse (..),
-    newEncryptResponse,
+    , EncryptResponse (..)
+    , newEncryptResponse
 
     -- ** EncryptResponse_ProtectionLevel
-    EncryptResponse_ProtectionLevel (..),
+    , EncryptResponse_ProtectionLevel (..)
 
     -- ** Expr
-    Expr (..),
-    newExpr,
+    , Expr (..)
+    , newExpr
 
     -- ** ExternalProtectionLevelOptions
-    ExternalProtectionLevelOptions (..),
-    newExternalProtectionLevelOptions,
+    , ExternalProtectionLevelOptions (..)
+    , newExternalProtectionLevelOptions
 
     -- ** GenerateRandomBytesRequest
-    GenerateRandomBytesRequest (..),
-    newGenerateRandomBytesRequest,
+    , GenerateRandomBytesRequest (..)
+    , newGenerateRandomBytesRequest
 
     -- ** GenerateRandomBytesRequest_ProtectionLevel
-    GenerateRandomBytesRequest_ProtectionLevel (..),
+    , GenerateRandomBytesRequest_ProtectionLevel (..)
 
     -- ** GenerateRandomBytesResponse
-    GenerateRandomBytesResponse (..),
-    newGenerateRandomBytesResponse,
+    , GenerateRandomBytesResponse (..)
+    , newGenerateRandomBytesResponse
 
     -- ** ImportCryptoKeyVersionRequest
-    ImportCryptoKeyVersionRequest (..),
-    newImportCryptoKeyVersionRequest,
+    , ImportCryptoKeyVersionRequest (..)
+    , newImportCryptoKeyVersionRequest
 
     -- ** ImportCryptoKeyVersionRequest_Algorithm
-    ImportCryptoKeyVersionRequest_Algorithm (..),
+    , ImportCryptoKeyVersionRequest_Algorithm (..)
 
     -- ** ImportJob
-    ImportJob (..),
-    newImportJob,
+    , ImportJob (..)
+    , newImportJob
 
     -- ** ImportJob_ImportMethod
-    ImportJob_ImportMethod (..),
+    , ImportJob_ImportMethod (..)
 
     -- ** ImportJob_ProtectionLevel
-    ImportJob_ProtectionLevel (..),
+    , ImportJob_ProtectionLevel (..)
 
     -- ** ImportJob_State
-    ImportJob_State (..),
+    , ImportJob_State (..)
+
+    -- ** KeyAccessJustificationsPolicy
+    , KeyAccessJustificationsPolicy (..)
+    , newKeyAccessJustificationsPolicy
+
+    -- ** KeyAccessJustificationsPolicy_AllowedAccessReasonsItem
+    , KeyAccessJustificationsPolicy_AllowedAccessReasonsItem (..)
+
+    -- ** KeyHandle
+    , KeyHandle (..)
+    , newKeyHandle
 
     -- ** KeyOperationAttestation
-    KeyOperationAttestation (..),
-    newKeyOperationAttestation,
+    , KeyOperationAttestation (..)
+    , newKeyOperationAttestation
 
     -- ** KeyOperationAttestation_Format
-    KeyOperationAttestation_Format (..),
+    , KeyOperationAttestation_Format (..)
 
     -- ** KeyRing
-    KeyRing (..),
-    newKeyRing,
+    , KeyRing (..)
+    , newKeyRing
 
     -- ** ListCryptoKeyVersionsResponse
-    ListCryptoKeyVersionsResponse (..),
-    newListCryptoKeyVersionsResponse,
+    , ListCryptoKeyVersionsResponse (..)
+    , newListCryptoKeyVersionsResponse
 
     -- ** ListCryptoKeysResponse
-    ListCryptoKeysResponse (..),
-    newListCryptoKeysResponse,
+    , ListCryptoKeysResponse (..)
+    , newListCryptoKeysResponse
 
     -- ** ListEkmConnectionsResponse
-    ListEkmConnectionsResponse (..),
-    newListEkmConnectionsResponse,
+    , ListEkmConnectionsResponse (..)
+    , newListEkmConnectionsResponse
 
     -- ** ListImportJobsResponse
-    ListImportJobsResponse (..),
-    newListImportJobsResponse,
+    , ListImportJobsResponse (..)
+    , newListImportJobsResponse
+
+    -- ** ListKeyHandlesResponse
+    , ListKeyHandlesResponse (..)
+    , newListKeyHandlesResponse
 
     -- ** ListKeyRingsResponse
-    ListKeyRingsResponse (..),
-    newListKeyRingsResponse,
+    , ListKeyRingsResponse (..)
+    , newListKeyRingsResponse
 
     -- ** ListLocationsResponse
-    ListLocationsResponse (..),
-    newListLocationsResponse,
+    , ListLocationsResponse (..)
+    , newListLocationsResponse
 
     -- ** Location
-    Location (..),
-    newLocation,
+    , Location (..)
+    , newLocation
 
     -- ** Location_Labels
-    Location_Labels (..),
-    newLocation_Labels,
+    , Location_Labels (..)
+    , newLocation_Labels
 
     -- ** Location_Metadata
-    Location_Metadata (..),
-    newLocation_Metadata,
+    , Location_Metadata (..)
+    , newLocation_Metadata
 
     -- ** LocationMetadata
-    LocationMetadata (..),
-    newLocationMetadata,
+    , LocationMetadata (..)
+    , newLocationMetadata
 
     -- ** MacSignRequest
-    MacSignRequest (..),
-    newMacSignRequest,
+    , MacSignRequest (..)
+    , newMacSignRequest
 
     -- ** MacSignResponse
-    MacSignResponse (..),
-    newMacSignResponse,
+    , MacSignResponse (..)
+    , newMacSignResponse
 
     -- ** MacSignResponse_ProtectionLevel
-    MacSignResponse_ProtectionLevel (..),
+    , MacSignResponse_ProtectionLevel (..)
 
     -- ** MacVerifyRequest
-    MacVerifyRequest (..),
-    newMacVerifyRequest,
+    , MacVerifyRequest (..)
+    , newMacVerifyRequest
 
     -- ** MacVerifyResponse
-    MacVerifyResponse (..),
-    newMacVerifyResponse,
+    , MacVerifyResponse (..)
+    , newMacVerifyResponse
 
     -- ** MacVerifyResponse_ProtectionLevel
-    MacVerifyResponse_ProtectionLevel (..),
+    , MacVerifyResponse_ProtectionLevel (..)
+
+    -- ** Operation
+    , Operation (..)
+    , newOperation
+
+    -- ** Operation_Metadata
+    , Operation_Metadata (..)
+    , newOperation_Metadata
+
+    -- ** Operation_Response
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** Policy
-    Policy (..),
-    newPolicy,
+    , Policy (..)
+    , newPolicy
 
     -- ** PublicKey
-    PublicKey (..),
-    newPublicKey,
+    , PublicKey (..)
+    , newPublicKey
 
     -- ** PublicKey_Algorithm
-    PublicKey_Algorithm (..),
+    , PublicKey_Algorithm (..)
 
     -- ** PublicKey_ProtectionLevel
-    PublicKey_ProtectionLevel (..),
+    , PublicKey_ProtectionLevel (..)
+
+    -- ** RawDecryptRequest
+    , RawDecryptRequest (..)
+    , newRawDecryptRequest
+
+    -- ** RawDecryptResponse
+    , RawDecryptResponse (..)
+    , newRawDecryptResponse
+
+    -- ** RawDecryptResponse_ProtectionLevel
+    , RawDecryptResponse_ProtectionLevel (..)
+
+    -- ** RawEncryptRequest
+    , RawEncryptRequest (..)
+    , newRawEncryptRequest
+
+    -- ** RawEncryptResponse
+    , RawEncryptResponse (..)
+    , newRawEncryptResponse
+
+    -- ** RawEncryptResponse_ProtectionLevel
+    , RawEncryptResponse_ProtectionLevel (..)
 
     -- ** RestoreCryptoKeyVersionRequest
-    RestoreCryptoKeyVersionRequest (..),
-    newRestoreCryptoKeyVersionRequest,
+    , RestoreCryptoKeyVersionRequest (..)
+    , newRestoreCryptoKeyVersionRequest
 
     -- ** ServiceResolver
-    ServiceResolver (..),
-    newServiceResolver,
+    , ServiceResolver (..)
+    , newServiceResolver
 
     -- ** SetIamPolicyRequest
-    SetIamPolicyRequest (..),
-    newSetIamPolicyRequest,
+    , SetIamPolicyRequest (..)
+    , newSetIamPolicyRequest
+
+    -- ** ShowEffectiveAutokeyConfigResponse
+    , ShowEffectiveAutokeyConfigResponse (..)
+    , newShowEffectiveAutokeyConfigResponse
+
+    -- ** Status
+    , Status (..)
+    , newStatus
+
+    -- ** Status_DetailsItem
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** TestIamPermissionsRequest
-    TestIamPermissionsRequest (..),
-    newTestIamPermissionsRequest,
+    , TestIamPermissionsRequest (..)
+    , newTestIamPermissionsRequest
 
     -- ** TestIamPermissionsResponse
-    TestIamPermissionsResponse (..),
-    newTestIamPermissionsResponse,
+    , TestIamPermissionsResponse (..)
+    , newTestIamPermissionsResponse
 
     -- ** UpdateCryptoKeyPrimaryVersionRequest
-    UpdateCryptoKeyPrimaryVersionRequest (..),
-    newUpdateCryptoKeyPrimaryVersionRequest,
+    , UpdateCryptoKeyPrimaryVersionRequest (..)
+    , newUpdateCryptoKeyPrimaryVersionRequest
+
+    -- ** VerifyConnectivityResponse
+    , VerifyConnectivityResponse (..)
+    , newVerifyConnectivityResponse
 
     -- ** WrappingPublicKey
-    WrappingPublicKey (..),
-    newWrappingPublicKey,
+    , WrappingPublicKey (..)
+    , newWrappingPublicKey
 
     -- ** ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView
-    ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView (..),
+    , ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView (..)
 
     -- ** ProjectsLocationsKeyRingsCryptoKeysListVersionView
-    ProjectsLocationsKeyRingsCryptoKeysListVersionView (..),
-  )
-where
+    , ProjectsLocationsKeyRingsCryptoKeysListVersionView (..)
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.CloudKMS.Internal.Product
 import Gogol.CloudKMS.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Cloud Key Management Service (KMS) API. This contains the host and root path used as a starting point for constructing service requests.
 cloudKMSService :: Core.ServiceConfig
-cloudKMSService =
-  Core.defaultService
-    (Core.ServiceId "cloudkms:v1")
-    "cloudkms.googleapis.com"
+cloudKMSService
+  = Core.defaultService (Core.ServiceId "cloudkms:v1")
+      "cloudkms.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"

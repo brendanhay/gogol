@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,136 +31,136 @@
 --
 -- /See:/ <https://cloud.google.com/trace Google Tracing API Reference>
 module Gogol.Tracing
-  ( -- * Configuration
-    tracingService,
+    (
+    -- * Configuration
+      tracingService
 
     -- * OAuth Scopes
-    CloudPlatform'FullControl,
-    Trace'Append,
-    Trace'Readonly,
+    , CloudPlatform'FullControl
+    , Trace'Append
+    , Trace'Readonly
 
     -- * Resources
 
     -- ** tracing.projects.traces.batchWrite
-    TracingProjectsTracesBatchWriteResource,
-    TracingProjectsTracesBatchWrite (..),
-    newTracingProjectsTracesBatchWrite,
+    , TracingProjectsTracesBatchWriteResource
+    , TracingProjectsTracesBatchWrite (..)
+    , newTracingProjectsTracesBatchWrite
 
     -- ** tracing.projects.traces.list
-    TracingProjectsTracesListResource,
-    TracingProjectsTracesList (..),
-    newTracingProjectsTracesList,
+    , TracingProjectsTracesListResource
+    , TracingProjectsTracesList (..)
+    , newTracingProjectsTracesList
 
     -- ** tracing.projects.traces.listSpans
-    TracingProjectsTracesListSpansResource,
-    TracingProjectsTracesListSpans (..),
-    newTracingProjectsTracesListSpans,
+    , TracingProjectsTracesListSpansResource
+    , TracingProjectsTracesListSpans (..)
+    , newTracingProjectsTracesListSpans
 
     -- ** tracing.projects.traces.spans.create
-    TracingProjectsTracesSpansCreateResource,
-    TracingProjectsTracesSpansCreate (..),
-    newTracingProjectsTracesSpansCreate,
+    , TracingProjectsTracesSpansCreateResource
+    , TracingProjectsTracesSpansCreate (..)
+    , newTracingProjectsTracesSpansCreate
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Annotation
-    Annotation (..),
-    newAnnotation,
+    , Annotation (..)
+    , newAnnotation
 
     -- ** AttributeValue
-    AttributeValue (..),
-    newAttributeValue,
+    , AttributeValue (..)
+    , newAttributeValue
 
     -- ** Attributes
-    Attributes (..),
-    newAttributes,
+    , Attributes (..)
+    , newAttributes
 
     -- ** Attributes_AttributeMap
-    Attributes_AttributeMap (..),
-    newAttributes_AttributeMap,
+    , Attributes_AttributeMap (..)
+    , newAttributes_AttributeMap
 
     -- ** BatchWriteSpansRequest
-    BatchWriteSpansRequest (..),
-    newBatchWriteSpansRequest,
+    , BatchWriteSpansRequest (..)
+    , newBatchWriteSpansRequest
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** Link
-    Link (..),
-    newLink,
+    , Link (..)
+    , newLink
 
     -- ** Link_Type
-    Link_Type (..),
+    , Link_Type (..)
 
     -- ** Links
-    Links (..),
-    newLinks,
+    , Links (..)
+    , newLinks
 
     -- ** ListSpansResponse
-    ListSpansResponse (..),
-    newListSpansResponse,
+    , ListSpansResponse (..)
+    , newListSpansResponse
 
     -- ** ListTracesResponse
-    ListTracesResponse (..),
-    newListTracesResponse,
+    , ListTracesResponse (..)
+    , newListTracesResponse
 
     -- ** Module
-    Module (..),
-    newModule,
+    , Module (..)
+    , newModule
 
     -- ** NetworkEvent
-    NetworkEvent (..),
-    newNetworkEvent,
+    , NetworkEvent (..)
+    , newNetworkEvent
 
     -- ** NetworkEvent_Type
-    NetworkEvent_Type (..),
+    , NetworkEvent_Type (..)
 
     -- ** Span
-    Span (..),
-    newSpan,
+    , Span (..)
+    , newSpan
 
     -- ** StackFrame
-    StackFrame (..),
-    newStackFrame,
+    , StackFrame (..)
+    , newStackFrame
 
     -- ** StackFrames
-    StackFrames (..),
-    newStackFrames,
+    , StackFrames (..)
+    , newStackFrames
 
     -- ** StackTrace
-    StackTrace (..),
-    newStackTrace,
+    , StackTrace (..)
+    , newStackTrace
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** TimeEvent
-    TimeEvent (..),
-    newTimeEvent,
+    , TimeEvent (..)
+    , newTimeEvent
 
     -- ** TimeEvents
-    TimeEvents (..),
-    newTimeEvents,
+    , TimeEvents (..)
+    , newTimeEvents
 
     -- ** Trace
-    Trace (..),
-    newTrace,
+    , Trace (..)
+    , newTrace
 
     -- ** TruncatableString
-    TruncatableString (..),
-    newTruncatableString,
-  )
-where
+    , TruncatableString (..)
+    , newTruncatableString
+    ) where
 
 import Gogol.Tracing.Projects.Traces.BatchWrite
 import Gogol.Tracing.Projects.Traces.List

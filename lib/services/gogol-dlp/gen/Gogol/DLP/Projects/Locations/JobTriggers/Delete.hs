@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -26,95 +27,87 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a job trigger. See https:\/\/cloud.google.com\/dlp\/docs\/creating-job-triggers to learn more.
+-- Deletes a job trigger. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-job-triggers to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.projects.locations.jobTriggers.delete@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.projects.locations.jobTriggers.delete@.
 module Gogol.DLP.Projects.Locations.JobTriggers.Delete
-  ( -- * Resource
-    DLPProjectsLocationsJobTriggersDeleteResource,
+    (
+    -- * Resource
+      DLPProjectsLocationsJobTriggersDeleteResource
 
     -- ** Constructing a Request
-    DLPProjectsLocationsJobTriggersDelete (..),
-    newDLPProjectsLocationsJobTriggersDelete,
-  )
-where
+    , DLPProjectsLocationsJobTriggersDelete (..)
+    , newDLPProjectsLocationsJobTriggersDelete
+    ) where
 
-import Gogol.DLP.Types
 import qualified Gogol.Prelude as Core
+import Gogol.DLP.Types
 
 -- | A resource alias for @dlp.projects.locations.jobTriggers.delete@ method which the
 -- 'DLPProjectsLocationsJobTriggersDelete' request conforms to.
 type DLPProjectsLocationsJobTriggersDeleteResource =
-  "v2"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] GoogleProtobufEmpty
+     "v2" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Delete '[Core.JSON] GoogleProtobufEmpty
 
--- | Deletes a job trigger. See https:\/\/cloud.google.com\/dlp\/docs\/creating-job-triggers to learn more.
+-- | Deletes a job trigger. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-job-triggers to learn more.
 --
 -- /See:/ 'newDLPProjectsLocationsJobTriggersDelete' smart constructor.
 data DLPProjectsLocationsJobTriggersDelete = DLPProjectsLocationsJobTriggersDelete
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. Resource name of the project and the triggeredJob, for example @projects\/dlp-test-project\/jobTriggers\/53234423@.
-    name :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. Resource name of the project and the triggeredJob, for example @projects\/dlp-test-project\/jobTriggers\/53234423@.
+    , name :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DLPProjectsLocationsJobTriggersDelete' with the minimum fields required to make a request.
-newDLPProjectsLocationsJobTriggersDelete ::
-  -- |  Required. Resource name of the project and the triggeredJob, for example @projects\/dlp-test-project\/jobTriggers\/53234423@. See 'name'.
-  Core.Text ->
-  DLPProjectsLocationsJobTriggersDelete
+newDLPProjectsLocationsJobTriggersDelete 
+    ::  Core.Text
+       -- ^  Required. Resource name of the project and the triggeredJob, for example @projects\/dlp-test-project\/jobTriggers\/53234423@. See 'name'.
+    -> DLPProjectsLocationsJobTriggersDelete
 newDLPProjectsLocationsJobTriggersDelete name =
   DLPProjectsLocationsJobTriggersDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DLPProjectsLocationsJobTriggersDelete
-  where
-  type
-    Rs DLPProjectsLocationsJobTriggersDelete =
-      GoogleProtobufEmpty
-  type
-    Scopes DLPProjectsLocationsJobTriggersDelete =
-      '[CloudPlatform'FullControl]
-  requestClient
-    DLPProjectsLocationsJobTriggersDelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dLPService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DLPProjectsLocationsJobTriggersDeleteResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           DLPProjectsLocationsJobTriggersDelete
+         where
+        type Rs DLPProjectsLocationsJobTriggersDelete =
+             GoogleProtobufEmpty
+        type Scopes DLPProjectsLocationsJobTriggersDelete =
+             '[CloudPlatform'FullControl]
+        requestClient
+          DLPProjectsLocationsJobTriggersDelete{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              dLPService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           DLPProjectsLocationsJobTriggersDeleteResource)
+                      Core.mempty
+

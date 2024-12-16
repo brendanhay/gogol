@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -26,95 +27,86 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a stored infoType. See https:\/\/cloud.google.com\/dlp\/docs\/creating-stored-infotypes to learn more.
+-- Gets a stored infoType. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-stored-infotypes to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.projects.storedInfoTypes.get@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.projects.storedInfoTypes.get@.
 module Gogol.DLP.Projects.StoredInfoTypes.Get
-  ( -- * Resource
-    DLPProjectsStoredInfoTypesGetResource,
+    (
+    -- * Resource
+      DLPProjectsStoredInfoTypesGetResource
 
     -- ** Constructing a Request
-    DLPProjectsStoredInfoTypesGet (..),
-    newDLPProjectsStoredInfoTypesGet,
-  )
-where
+    , DLPProjectsStoredInfoTypesGet (..)
+    , newDLPProjectsStoredInfoTypesGet
+    ) where
 
-import Gogol.DLP.Types
 import qualified Gogol.Prelude as Core
+import Gogol.DLP.Types
 
 -- | A resource alias for @dlp.projects.storedInfoTypes.get@ method which the
 -- 'DLPProjectsStoredInfoTypesGet' request conforms to.
 type DLPProjectsStoredInfoTypesGetResource =
-  "v2"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GooglePrivacyDlpV2StoredInfoType
+     "v2" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Get '[Core.JSON]
+                       GooglePrivacyDlpV2StoredInfoType
 
--- | Gets a stored infoType. See https:\/\/cloud.google.com\/dlp\/docs\/creating-stored-infotypes to learn more.
+-- | Gets a stored infoType. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-stored-infotypes to learn more.
 --
 -- /See:/ 'newDLPProjectsStoredInfoTypesGet' smart constructor.
 data DLPProjectsStoredInfoTypesGet = DLPProjectsStoredInfoTypesGet
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. Resource name of the organization and storedInfoType to be read, for example @organizations\/433245324\/storedInfoTypes\/432452342@ or projects\/project-id\/storedInfoTypes\/432452342.
-    name :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. Resource name of the organization and storedInfoType to be read, for example @organizations\/433245324\/storedInfoTypes\/432452342@ or projects\/project-id\/storedInfoTypes\/432452342.
+    , name :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DLPProjectsStoredInfoTypesGet' with the minimum fields required to make a request.
-newDLPProjectsStoredInfoTypesGet ::
-  -- |  Required. Resource name of the organization and storedInfoType to be read, for example @organizations\/433245324\/storedInfoTypes\/432452342@ or projects\/project-id\/storedInfoTypes\/432452342. See 'name'.
-  Core.Text ->
-  DLPProjectsStoredInfoTypesGet
+newDLPProjectsStoredInfoTypesGet 
+    ::  Core.Text
+       -- ^  Required. Resource name of the organization and storedInfoType to be read, for example @organizations\/433245324\/storedInfoTypes\/432452342@ or projects\/project-id\/storedInfoTypes\/432452342. See 'name'.
+    -> DLPProjectsStoredInfoTypesGet
 newDLPProjectsStoredInfoTypesGet name =
   DLPProjectsStoredInfoTypesGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DLPProjectsStoredInfoTypesGet
-  where
-  type
-    Rs DLPProjectsStoredInfoTypesGet =
-      GooglePrivacyDlpV2StoredInfoType
-  type
-    Scopes DLPProjectsStoredInfoTypesGet =
-      '[CloudPlatform'FullControl]
-  requestClient DLPProjectsStoredInfoTypesGet {..} =
-    go
-      name
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      dLPService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DLPProjectsStoredInfoTypesGetResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           DLPProjectsStoredInfoTypesGet
+         where
+        type Rs DLPProjectsStoredInfoTypesGet =
+             GooglePrivacyDlpV2StoredInfoType
+        type Scopes DLPProjectsStoredInfoTypesGet =
+             '[CloudPlatform'FullControl]
+        requestClient DLPProjectsStoredInfoTypesGet{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              dLPService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy DLPProjectsStoredInfoTypesGetResource)
+                      Core.mempty
+

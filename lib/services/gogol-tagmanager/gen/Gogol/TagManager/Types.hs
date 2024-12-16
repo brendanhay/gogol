@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,341 +26,354 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.TagManager.Types
-  ( -- * Configuration
-    tagManagerService,
+    (
+    -- * Configuration
+      tagManagerService
 
     -- * OAuth Scopes
-    Tagmanager'Delete'Containers,
-    Tagmanager'Edit'Containers,
-    Tagmanager'Edit'Containerversions,
-    Tagmanager'Manage'Accounts,
-    Tagmanager'Manage'Users,
-    Tagmanager'Publish,
-    Tagmanager'Readonly,
+    , Tagmanager'Delete'Containers
+    , Tagmanager'Edit'Containers
+    , Tagmanager'Edit'Containerversions
+    , Tagmanager'Manage'Accounts
+    , Tagmanager'Manage'Users
+    , Tagmanager'Publish
+    , Tagmanager'Readonly
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Account
-    Account (..),
-    newAccount,
+    , Account (..)
+    , newAccount
 
     -- ** AccountAccess
-    AccountAccess (..),
-    newAccountAccess,
+    , AccountAccess (..)
+    , newAccountAccess
 
     -- ** AccountAccess_Permission
-    AccountAccess_Permission (..),
+    , AccountAccess_Permission (..)
 
     -- ** AccountFeatures
-    AccountFeatures (..),
-    newAccountFeatures,
+    , AccountFeatures (..)
+    , newAccountFeatures
 
     -- ** BuiltInVariable
-    BuiltInVariable (..),
-    newBuiltInVariable,
+    , BuiltInVariable (..)
+    , newBuiltInVariable
 
     -- ** BuiltInVariable_Type
-    BuiltInVariable_Type (..),
+    , BuiltInVariable_Type (..)
 
     -- ** Client
-    Client (..),
-    newClient,
+    , Client (..)
+    , newClient
 
     -- ** Condition
-    Condition (..),
-    newCondition,
+    , Condition (..)
+    , newCondition
 
     -- ** Condition_Type
-    Condition_Type (..),
+    , Condition_Type (..)
 
     -- ** Container
-    Container (..),
-    newContainer,
+    , Container (..)
+    , newContainer
 
     -- ** Container_UsageContextItem
-    Container_UsageContextItem (..),
+    , Container_UsageContextItem (..)
 
     -- ** ContainerAccess
-    ContainerAccess (..),
-    newContainerAccess,
+    , ContainerAccess (..)
+    , newContainerAccess
 
     -- ** ContainerAccess_Permission
-    ContainerAccess_Permission (..),
+    , ContainerAccess_Permission (..)
 
     -- ** ContainerFeatures
-    ContainerFeatures (..),
-    newContainerFeatures,
+    , ContainerFeatures (..)
+    , newContainerFeatures
 
     -- ** ContainerVersion
-    ContainerVersion (..),
-    newContainerVersion,
+    , ContainerVersion (..)
+    , newContainerVersion
 
     -- ** ContainerVersionHeader
-    ContainerVersionHeader (..),
-    newContainerVersionHeader,
+    , ContainerVersionHeader (..)
+    , newContainerVersionHeader
 
     -- ** CreateBuiltInVariableResponse
-    CreateBuiltInVariableResponse (..),
-    newCreateBuiltInVariableResponse,
+    , CreateBuiltInVariableResponse (..)
+    , newCreateBuiltInVariableResponse
 
     -- ** CreateContainerVersionRequestVersionOptions
-    CreateContainerVersionRequestVersionOptions (..),
-    newCreateContainerVersionRequestVersionOptions,
+    , CreateContainerVersionRequestVersionOptions (..)
+    , newCreateContainerVersionRequestVersionOptions
 
     -- ** CreateContainerVersionResponse
-    CreateContainerVersionResponse (..),
-    newCreateContainerVersionResponse,
+    , CreateContainerVersionResponse (..)
+    , newCreateContainerVersionResponse
 
     -- ** CustomTemplate
-    CustomTemplate (..),
-    newCustomTemplate,
+    , CustomTemplate (..)
+    , newCustomTemplate
 
     -- ** Destination
-    Destination (..),
-    newDestination,
+    , Destination (..)
+    , newDestination
 
     -- ** Entity
-    Entity (..),
-    newEntity,
+    , Entity (..)
+    , newEntity
 
     -- ** Entity_ChangeStatus
-    Entity_ChangeStatus (..),
+    , Entity_ChangeStatus (..)
 
     -- ** Environment
-    Environment (..),
-    newEnvironment,
+    , Environment (..)
+    , newEnvironment
 
     -- ** Environment_Type
-    Environment_Type (..),
+    , Environment_Type (..)
 
     -- ** Folder
-    Folder (..),
-    newFolder,
+    , Folder (..)
+    , newFolder
 
     -- ** FolderEntities
-    FolderEntities (..),
-    newFolderEntities,
+    , FolderEntities (..)
+    , newFolderEntities
 
     -- ** GalleryReference
-    GalleryReference (..),
-    newGalleryReference,
+    , GalleryReference (..)
+    , newGalleryReference
 
     -- ** GetContainerSnippetResponse
-    GetContainerSnippetResponse (..),
-    newGetContainerSnippetResponse,
+    , GetContainerSnippetResponse (..)
+    , newGetContainerSnippetResponse
 
     -- ** GetWorkspaceStatusResponse
-    GetWorkspaceStatusResponse (..),
-    newGetWorkspaceStatusResponse,
+    , GetWorkspaceStatusResponse (..)
+    , newGetWorkspaceStatusResponse
 
     -- ** GtagConfig
-    GtagConfig (..),
-    newGtagConfig,
+    , GtagConfig (..)
+    , newGtagConfig
 
     -- ** ListAccountsResponse
-    ListAccountsResponse (..),
-    newListAccountsResponse,
+    , ListAccountsResponse (..)
+    , newListAccountsResponse
 
     -- ** ListClientsResponse
-    ListClientsResponse (..),
-    newListClientsResponse,
+    , ListClientsResponse (..)
+    , newListClientsResponse
 
     -- ** ListContainerVersionsResponse
-    ListContainerVersionsResponse (..),
-    newListContainerVersionsResponse,
+    , ListContainerVersionsResponse (..)
+    , newListContainerVersionsResponse
 
     -- ** ListContainersResponse
-    ListContainersResponse (..),
-    newListContainersResponse,
+    , ListContainersResponse (..)
+    , newListContainersResponse
 
     -- ** ListDestinationsResponse
-    ListDestinationsResponse (..),
-    newListDestinationsResponse,
+    , ListDestinationsResponse (..)
+    , newListDestinationsResponse
 
     -- ** ListEnabledBuiltInVariablesResponse
-    ListEnabledBuiltInVariablesResponse (..),
-    newListEnabledBuiltInVariablesResponse,
+    , ListEnabledBuiltInVariablesResponse (..)
+    , newListEnabledBuiltInVariablesResponse
 
     -- ** ListEnvironmentsResponse
-    ListEnvironmentsResponse (..),
-    newListEnvironmentsResponse,
+    , ListEnvironmentsResponse (..)
+    , newListEnvironmentsResponse
 
     -- ** ListFoldersResponse
-    ListFoldersResponse (..),
-    newListFoldersResponse,
+    , ListFoldersResponse (..)
+    , newListFoldersResponse
 
     -- ** ListGtagConfigResponse
-    ListGtagConfigResponse (..),
-    newListGtagConfigResponse,
+    , ListGtagConfigResponse (..)
+    , newListGtagConfigResponse
 
     -- ** ListTagsResponse
-    ListTagsResponse (..),
-    newListTagsResponse,
+    , ListTagsResponse (..)
+    , newListTagsResponse
 
     -- ** ListTemplatesResponse
-    ListTemplatesResponse (..),
-    newListTemplatesResponse,
+    , ListTemplatesResponse (..)
+    , newListTemplatesResponse
+
+    -- ** ListTransformationsResponse
+    , ListTransformationsResponse (..)
+    , newListTransformationsResponse
 
     -- ** ListTriggersResponse
-    ListTriggersResponse (..),
-    newListTriggersResponse,
+    , ListTriggersResponse (..)
+    , newListTriggersResponse
 
     -- ** ListUserPermissionsResponse
-    ListUserPermissionsResponse (..),
-    newListUserPermissionsResponse,
+    , ListUserPermissionsResponse (..)
+    , newListUserPermissionsResponse
 
     -- ** ListVariablesResponse
-    ListVariablesResponse (..),
-    newListVariablesResponse,
+    , ListVariablesResponse (..)
+    , newListVariablesResponse
 
     -- ** ListWorkspacesResponse
-    ListWorkspacesResponse (..),
-    newListWorkspacesResponse,
+    , ListWorkspacesResponse (..)
+    , newListWorkspacesResponse
 
     -- ** ListZonesResponse
-    ListZonesResponse (..),
-    newListZonesResponse,
+    , ListZonesResponse (..)
+    , newListZonesResponse
 
     -- ** MergeConflict
-    MergeConflict (..),
-    newMergeConflict,
+    , MergeConflict (..)
+    , newMergeConflict
 
     -- ** Parameter
-    Parameter (..),
-    newParameter,
+    , Parameter (..)
+    , newParameter
 
     -- ** Parameter_Type
-    Parameter_Type (..),
+    , Parameter_Type (..)
 
     -- ** PublishContainerVersionResponse
-    PublishContainerVersionResponse (..),
-    newPublishContainerVersionResponse,
+    , PublishContainerVersionResponse (..)
+    , newPublishContainerVersionResponse
 
     -- ** QuickPreviewResponse
-    QuickPreviewResponse (..),
-    newQuickPreviewResponse,
+    , QuickPreviewResponse (..)
+    , newQuickPreviewResponse
 
     -- ** RevertBuiltInVariableResponse
-    RevertBuiltInVariableResponse (..),
-    newRevertBuiltInVariableResponse,
+    , RevertBuiltInVariableResponse (..)
+    , newRevertBuiltInVariableResponse
 
     -- ** RevertClientResponse
-    RevertClientResponse (..),
-    newRevertClientResponse,
+    , RevertClientResponse (..)
+    , newRevertClientResponse
 
     -- ** RevertFolderResponse
-    RevertFolderResponse (..),
-    newRevertFolderResponse,
+    , RevertFolderResponse (..)
+    , newRevertFolderResponse
 
     -- ** RevertTagResponse
-    RevertTagResponse (..),
-    newRevertTagResponse,
+    , RevertTagResponse (..)
+    , newRevertTagResponse
 
     -- ** RevertTemplateResponse
-    RevertTemplateResponse (..),
-    newRevertTemplateResponse,
+    , RevertTemplateResponse (..)
+    , newRevertTemplateResponse
+
+    -- ** RevertTransformationResponse
+    , RevertTransformationResponse (..)
+    , newRevertTransformationResponse
 
     -- ** RevertTriggerResponse
-    RevertTriggerResponse (..),
-    newRevertTriggerResponse,
+    , RevertTriggerResponse (..)
+    , newRevertTriggerResponse
 
     -- ** RevertVariableResponse
-    RevertVariableResponse (..),
-    newRevertVariableResponse,
+    , RevertVariableResponse (..)
+    , newRevertVariableResponse
 
     -- ** RevertZoneResponse
-    RevertZoneResponse (..),
-    newRevertZoneResponse,
+    , RevertZoneResponse (..)
+    , newRevertZoneResponse
 
     -- ** SetupTag
-    SetupTag (..),
-    newSetupTag,
+    , SetupTag (..)
+    , newSetupTag
 
     -- ** SyncStatus
-    SyncStatus (..),
-    newSyncStatus,
+    , SyncStatus (..)
+    , newSyncStatus
 
     -- ** SyncWorkspaceResponse
-    SyncWorkspaceResponse (..),
-    newSyncWorkspaceResponse,
+    , SyncWorkspaceResponse (..)
+    , newSyncWorkspaceResponse
 
     -- ** Tag
-    Tag (..),
-    newTag,
+    , Tag (..)
+    , newTag
 
     -- ** Tag_TagFiringOption
-    Tag_TagFiringOption (..),
+    , Tag_TagFiringOption (..)
 
     -- ** TagConsentSetting
-    TagConsentSetting (..),
-    newTagConsentSetting,
+    , TagConsentSetting (..)
+    , newTagConsentSetting
 
     -- ** TagConsentSetting_ConsentStatus
-    TagConsentSetting_ConsentStatus (..),
+    , TagConsentSetting_ConsentStatus (..)
 
     -- ** TeardownTag
-    TeardownTag (..),
-    newTeardownTag,
+    , TeardownTag (..)
+    , newTeardownTag
+
+    -- ** Transformation
+    , Transformation (..)
+    , newTransformation
 
     -- ** Trigger
-    Trigger (..),
-    newTrigger,
+    , Trigger (..)
+    , newTrigger
 
     -- ** Trigger_Type
-    Trigger_Type (..),
+    , Trigger_Type (..)
 
     -- ** UserPermission
-    UserPermission (..),
-    newUserPermission,
+    , UserPermission (..)
+    , newUserPermission
 
     -- ** Variable
-    Variable (..),
-    newVariable,
+    , Variable (..)
+    , newVariable
 
     -- ** VariableFormatValue
-    VariableFormatValue (..),
-    newVariableFormatValue,
+    , VariableFormatValue (..)
+    , newVariableFormatValue
 
     -- ** VariableFormatValue_CaseConversionType
-    VariableFormatValue_CaseConversionType (..),
+    , VariableFormatValue_CaseConversionType (..)
 
     -- ** Workspace
-    Workspace (..),
-    newWorkspace,
+    , Workspace (..)
+    , newWorkspace
 
     -- ** Zone
-    Zone (..),
-    newZone,
+    , Zone (..)
+    , newZone
 
     -- ** ZoneBoundary
-    ZoneBoundary (..),
-    newZoneBoundary,
+    , ZoneBoundary (..)
+    , newZoneBoundary
 
     -- ** ZoneChildContainer
-    ZoneChildContainer (..),
-    newZoneChildContainer,
+    , ZoneChildContainer (..)
+    , newZoneChildContainer
 
     -- ** ZoneTypeRestriction
-    ZoneTypeRestriction (..),
-    newZoneTypeRestriction,
+    , ZoneTypeRestriction (..)
+    , newZoneTypeRestriction
 
     -- ** AccountsContainersCombineSettingSource
-    AccountsContainersCombineSettingSource (..),
+    , AccountsContainersCombineSettingSource (..)
 
     -- ** AccountsContainersWorkspacesBuilt_in_variablesCreateType
-    AccountsContainersWorkspacesBuilt_in_variablesCreateType (..),
+    , AccountsContainersWorkspacesBuilt_in_variablesCreateType (..)
 
     -- ** AccountsContainersWorkspacesBuilt_in_variablesDeleteType
-    AccountsContainersWorkspacesBuilt_in_variablesDeleteType (..),
+    , AccountsContainersWorkspacesBuilt_in_variablesDeleteType (..)
 
     -- ** AccountsContainersWorkspacesBuilt_in_variablesRevertType
-    AccountsContainersWorkspacesBuilt_in_variablesRevertType (..),
-  )
-where
+    , AccountsContainersWorkspacesBuilt_in_variablesRevertType (..)
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.TagManager.Internal.Product
@@ -367,10 +381,10 @@ import Gogol.TagManager.Internal.Sum
 
 -- | Default request referring to version @v2@ of the Tag Manager API. This contains the host and root path used as a starting point for constructing service requests.
 tagManagerService :: Core.ServiceConfig
-tagManagerService =
-  Core.defaultService
-    (Core.ServiceId "tagmanager:v2")
-    "tagmanager.googleapis.com"
+tagManagerService
+  = Core.defaultService
+      (Core.ServiceId "tagmanager:v2")
+      "tagmanager.googleapis.com"
 
 -- | Delete your Google Tag Manager containers
 type Tagmanager'Delete'Containers = "https://www.googleapis.com/auth/tagmanager.delete.containers"

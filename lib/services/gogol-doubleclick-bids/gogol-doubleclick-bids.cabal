@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-doubleclick-bids
-version:            1.0.0.0
-synopsis:           Google DoubleClick Bid Manager SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-doubleclick-bids
+version:               1.0.0
+synopsis:              Google DoubleClick Bid Manager SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  DoubleClick Bid Manager API allows users to manage and create campaigns and reports.
+    DoubleClick Bid Manager API allows users to manage and create campaigns and reports.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -30,38 +27,39 @@ source-repository head
   subdir:   gogol-doubleclick-bids
 
 flag field-selectors
-  description:
-    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-
-  default:     False
-  manual:      True
+  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+  default: False
+  manual: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -Werror
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (!flag(field-selectors) && impl(ghc >=9.2))
+  if !flag(field-selectors) && impl(ghc >= 9.2)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.DoubleClickBids
-    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Create
-    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Delete
-    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Get
-    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.List
-    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Reports.Get
-    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Reports.List
-    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Run
-    Gogol.DoubleClickBids.Types
+      Gogol.DoubleClickBids
+    , Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Create
+    , Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Delete
+    , Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Get
+    , Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.List
+    , Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Reports.Get
+    , Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Reports.List
+    , Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Run
+    , Gogol.DoubleClickBids.Types
 
   other-modules:
-    Gogol.DoubleClickBids.Internal.Product
-    Gogol.DoubleClickBids.Internal.Sum
+      Gogol.DoubleClickBids.Internal.Product
+    , Gogol.DoubleClickBids.Internal.Sum
 
   build-depends:
-    , base        >=4.12   && <5
-    , gogol-core  ^>=1.0.0
+      gogol-core ^>= 1.0.0

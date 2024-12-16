@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-script
-version:            1.0.0.0
-synopsis:           Google Apps Script SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-script
+version:               1.0.0
+synopsis:              Google Apps Script SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  Manages and executes Google Apps Script projects.
+    Manages and executes Google Apps Script projects.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -30,47 +27,48 @@ source-repository head
   subdir:   gogol-script
 
 flag field-selectors
-  description:
-    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-
-  default:     False
-  manual:      True
+  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+  default: False
+  manual: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -Werror
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (!flag(field-selectors) && impl(ghc >=9.2))
+  if !flag(field-selectors) && impl(ghc >= 9.2)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.Script
-    Gogol.Script.Processes.List
-    Gogol.Script.Processes.ListScriptProcesses
-    Gogol.Script.Projects.Create
-    Gogol.Script.Projects.Deployments.Create
-    Gogol.Script.Projects.Deployments.Delete
-    Gogol.Script.Projects.Deployments.Get
-    Gogol.Script.Projects.Deployments.List
-    Gogol.Script.Projects.Deployments.Update
-    Gogol.Script.Projects.Get
-    Gogol.Script.Projects.GetContent
-    Gogol.Script.Projects.GetMetrics
-    Gogol.Script.Projects.UpdateContent
-    Gogol.Script.Projects.Versions.Create
-    Gogol.Script.Projects.Versions.Get
-    Gogol.Script.Projects.Versions.List
-    Gogol.Script.Scripts.Run
-    Gogol.Script.Types
+      Gogol.Script
+    , Gogol.Script.Processes.List
+    , Gogol.Script.Processes.ListScriptProcesses
+    , Gogol.Script.Projects.Create
+    , Gogol.Script.Projects.Deployments.Create
+    , Gogol.Script.Projects.Deployments.Delete
+    , Gogol.Script.Projects.Deployments.Get
+    , Gogol.Script.Projects.Deployments.List
+    , Gogol.Script.Projects.Deployments.Update
+    , Gogol.Script.Projects.Get
+    , Gogol.Script.Projects.GetContent
+    , Gogol.Script.Projects.GetMetrics
+    , Gogol.Script.Projects.UpdateContent
+    , Gogol.Script.Projects.Versions.Create
+    , Gogol.Script.Projects.Versions.Get
+    , Gogol.Script.Projects.Versions.List
+    , Gogol.Script.Scripts.Run
+    , Gogol.Script.Types
 
   other-modules:
-    Gogol.Script.Internal.Product
-    Gogol.Script.Internal.Sum
+      Gogol.Script.Internal.Product
+    , Gogol.Script.Internal.Sum
 
   build-depends:
-    , base        >=4.12   && <5
-    , gogol-core  ^>=1.0.0
+      gogol-core ^>= 1.0.0

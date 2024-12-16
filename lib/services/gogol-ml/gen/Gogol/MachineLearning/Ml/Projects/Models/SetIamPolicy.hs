@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,98 +31,90 @@
 --
 -- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.models.setIamPolicy@.
 module Gogol.MachineLearning.Ml.Projects.Models.SetIamPolicy
-  ( -- * Resource
-    MlProjectsModelsSetIamPolicyResource,
+    (
+    -- * Resource
+      MlProjectsModelsSetIamPolicyResource
 
     -- ** Constructing a Request
-    MlProjectsModelsSetIamPolicy (..),
-    newMlProjectsModelsSetIamPolicy,
-  )
-where
+    , MlProjectsModelsSetIamPolicy (..)
+    , newMlProjectsModelsSetIamPolicy
+    ) where
 
-import Gogol.MachineLearning.Types
 import qualified Gogol.Prelude as Core
+import Gogol.MachineLearning.Types
 
 -- | A resource alias for @ml.projects.models.setIamPolicy@ method which the
 -- 'MlProjectsModelsSetIamPolicy' request conforms to.
 type MlProjectsModelsSetIamPolicyResource =
-  "v1"
-    Core.:> Core.CaptureMode "resource" "setIamPolicy" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleIamV1__SetIamPolicyRequest
-    Core.:> Core.Post '[Core.JSON] GoogleIamV1__Policy
+     "v1" Core.:>
+       Core.CaptureMode "resource" "setIamPolicy" Core.Text
+         Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.ReqBody '[Core.JSON]
+                       GoogleIamV1__SetIamPolicyRequest
+                       Core.:> Core.Post '[Core.JSON] GoogleIamV1__Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any existing policy. Can return @NOT_FOUND@, @INVALID_ARGUMENT@, and @PERMISSION_DENIED@ errors.
 --
 -- /See:/ 'newMlProjectsModelsSetIamPolicy' smart constructor.
 data MlProjectsModelsSetIamPolicy = MlProjectsModelsSetIamPolicy
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: GoogleIamV1__SetIamPolicyRequest,
-    -- | REQUIRED: The resource for which the policy is being specified. See <https://cloud.google.com/apis/design/resource_names Resource names> for the appropriate value for this field.
-    resource :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Multipart request metadata.
+    , payload :: GoogleIamV1__SetIamPolicyRequest
+      -- | REQUIRED: The resource for which the policy is being specified. See <https://cloud.google.com/apis/design/resource_names Resource names> for the appropriate value for this field.
+    , resource :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'MlProjectsModelsSetIamPolicy' with the minimum fields required to make a request.
-newMlProjectsModelsSetIamPolicy ::
-  -- |  Multipart request metadata. See 'payload'.
-  GoogleIamV1__SetIamPolicyRequest ->
-  -- |  REQUIRED: The resource for which the policy is being specified. See <https://cloud.google.com/apis/design/resource_names Resource names> for the appropriate value for this field. See 'resource'.
-  Core.Text ->
-  MlProjectsModelsSetIamPolicy
+newMlProjectsModelsSetIamPolicy 
+    ::  GoogleIamV1__SetIamPolicyRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> Core.Text
+       -- ^  REQUIRED: The resource for which the policy is being specified. See <https://cloud.google.com/apis/design/resource_names Resource names> for the appropriate value for this field. See 'resource'.
+    -> MlProjectsModelsSetIamPolicy
 newMlProjectsModelsSetIamPolicy payload resource =
   MlProjectsModelsSetIamPolicy
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      resource = resource,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , payload = payload
+    , resource = resource
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    MlProjectsModelsSetIamPolicy
-  where
-  type
-    Rs MlProjectsModelsSetIamPolicy =
-      GoogleIamV1__Policy
-  type
-    Scopes MlProjectsModelsSetIamPolicy =
-      '[CloudPlatform'FullControl]
-  requestClient MlProjectsModelsSetIamPolicy {..} =
-    go
-      resource
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      payload
-      machineLearningService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy MlProjectsModelsSetIamPolicyResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           MlProjectsModelsSetIamPolicy
+         where
+        type Rs MlProjectsModelsSetIamPolicy =
+             GoogleIamV1__Policy
+        type Scopes MlProjectsModelsSetIamPolicy =
+             '[CloudPlatform'FullControl]
+        requestClient MlProjectsModelsSetIamPolicy{..}
+          = go resource xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              machineLearningService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy MlProjectsModelsSetIamPolicyResource)
+                      Core.mempty
+

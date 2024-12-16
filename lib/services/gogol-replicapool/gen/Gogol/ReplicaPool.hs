@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,164 +31,164 @@
 --
 -- /See:/ <https://developers.google.com/compute/docs/replica-pool/ Replica Pool API Reference>
 module Gogol.ReplicaPool
-  ( -- * Configuration
-    replicaPoolService,
+    (
+    -- * Configuration
+      replicaPoolService
 
     -- * OAuth Scopes
-    CloudPlatform'FullControl,
-    CloudPlatform'ReadOnly,
-    Ndev'Cloudman,
-    Ndev'Cloudman'Readonly,
-    Replicapool'FullControl,
-    Replicapool'Readonly,
+    , CloudPlatform'FullControl
+    , CloudPlatform'ReadOnly
+    , Ndev'Cloudman
+    , Ndev'Cloudman'Readonly
+    , Replicapool'FullControl
+    , Replicapool'Readonly
 
     -- * Resources
 
     -- ** replicapool.pools.delete
-    ReplicaPoolPoolsDeleteResource,
-    ReplicaPoolPoolsDelete (..),
-    newReplicaPoolPoolsDelete,
+    , ReplicaPoolPoolsDeleteResource
+    , ReplicaPoolPoolsDelete (..)
+    , newReplicaPoolPoolsDelete
 
     -- ** replicapool.pools.get
-    ReplicaPoolPoolsGetResource,
-    ReplicaPoolPoolsGet (..),
-    newReplicaPoolPoolsGet,
+    , ReplicaPoolPoolsGetResource
+    , ReplicaPoolPoolsGet (..)
+    , newReplicaPoolPoolsGet
 
     -- ** replicapool.pools.insert
-    ReplicaPoolPoolsInsertResource,
-    ReplicaPoolPoolsInsert (..),
-    newReplicaPoolPoolsInsert,
+    , ReplicaPoolPoolsInsertResource
+    , ReplicaPoolPoolsInsert (..)
+    , newReplicaPoolPoolsInsert
 
     -- ** replicapool.pools.list
-    ReplicaPoolPoolsListResource,
-    ReplicaPoolPoolsList (..),
-    newReplicaPoolPoolsList,
+    , ReplicaPoolPoolsListResource
+    , ReplicaPoolPoolsList (..)
+    , newReplicaPoolPoolsList
 
     -- ** replicapool.pools.resize
-    ReplicaPoolPoolsResizeResource,
-    ReplicaPoolPoolsResize (..),
-    newReplicaPoolPoolsResize,
+    , ReplicaPoolPoolsResizeResource
+    , ReplicaPoolPoolsResize (..)
+    , newReplicaPoolPoolsResize
 
     -- ** replicapool.pools.updatetemplate
-    ReplicaPoolPoolsUpdatetemplateResource,
-    ReplicaPoolPoolsUpdatetemplate (..),
-    newReplicaPoolPoolsUpdatetemplate,
+    , ReplicaPoolPoolsUpdatetemplateResource
+    , ReplicaPoolPoolsUpdatetemplate (..)
+    , newReplicaPoolPoolsUpdatetemplate
 
     -- ** replicapool.replicas.delete
-    ReplicaPoolReplicasDeleteResource,
-    ReplicaPoolReplicasDelete (..),
-    newReplicaPoolReplicasDelete,
+    , ReplicaPoolReplicasDeleteResource
+    , ReplicaPoolReplicasDelete (..)
+    , newReplicaPoolReplicasDelete
 
     -- ** replicapool.replicas.get
-    ReplicaPoolReplicasGetResource,
-    ReplicaPoolReplicasGet (..),
-    newReplicaPoolReplicasGet,
+    , ReplicaPoolReplicasGetResource
+    , ReplicaPoolReplicasGet (..)
+    , newReplicaPoolReplicasGet
 
     -- ** replicapool.replicas.list
-    ReplicaPoolReplicasListResource,
-    ReplicaPoolReplicasList (..),
-    newReplicaPoolReplicasList,
+    , ReplicaPoolReplicasListResource
+    , ReplicaPoolReplicasList (..)
+    , newReplicaPoolReplicasList
 
     -- ** replicapool.replicas.restart
-    ReplicaPoolReplicasRestartResource,
-    ReplicaPoolReplicasRestart (..),
-    newReplicaPoolReplicasRestart,
+    , ReplicaPoolReplicasRestartResource
+    , ReplicaPoolReplicasRestart (..)
+    , newReplicaPoolReplicasRestart
 
     -- * Types
 
     -- ** AccessConfig
-    AccessConfig (..),
-    newAccessConfig,
+    , AccessConfig (..)
+    , newAccessConfig
 
     -- ** Action
-    Action (..),
-    newAction,
+    , Action (..)
+    , newAction
 
     -- ** DiskAttachment
-    DiskAttachment (..),
-    newDiskAttachment,
+    , DiskAttachment (..)
+    , newDiskAttachment
 
     -- ** EnvVariable
-    EnvVariable (..),
-    newEnvVariable,
+    , EnvVariable (..)
+    , newEnvVariable
 
     -- ** ExistingDisk
-    ExistingDisk (..),
-    newExistingDisk,
+    , ExistingDisk (..)
+    , newExistingDisk
 
     -- ** HealthCheck
-    HealthCheck (..),
-    newHealthCheck,
+    , HealthCheck (..)
+    , newHealthCheck
 
     -- ** Label
-    Label (..),
-    newLabel,
+    , Label (..)
+    , newLabel
 
     -- ** Metadata
-    Metadata (..),
-    newMetadata,
+    , Metadata (..)
+    , newMetadata
 
     -- ** MetadataItem
-    MetadataItem (..),
-    newMetadataItem,
+    , MetadataItem (..)
+    , newMetadataItem
 
     -- ** NetworkInterface
-    NetworkInterface (..),
-    newNetworkInterface,
+    , NetworkInterface (..)
+    , newNetworkInterface
 
     -- ** NewDisk
-    NewDisk (..),
-    newNewDisk,
+    , NewDisk (..)
+    , newNewDisk
 
     -- ** NewDiskInitializeParams
-    NewDiskInitializeParams (..),
-    newNewDiskInitializeParams,
+    , NewDiskInitializeParams (..)
+    , newNewDiskInitializeParams
 
     -- ** Pool
-    Pool (..),
-    newPool,
+    , Pool (..)
+    , newPool
 
     -- ** PoolsDeleteRequest
-    PoolsDeleteRequest (..),
-    newPoolsDeleteRequest,
+    , PoolsDeleteRequest (..)
+    , newPoolsDeleteRequest
 
     -- ** PoolsListResponse
-    PoolsListResponse (..),
-    newPoolsListResponse,
+    , PoolsListResponse (..)
+    , newPoolsListResponse
 
     -- ** Replica
-    Replica (..),
-    newReplica,
+    , Replica (..)
+    , newReplica
 
     -- ** ReplicaStatus
-    ReplicaStatus (..),
-    newReplicaStatus,
+    , ReplicaStatus (..)
+    , newReplicaStatus
 
     -- ** ReplicasDeleteRequest
-    ReplicasDeleteRequest (..),
-    newReplicasDeleteRequest,
+    , ReplicasDeleteRequest (..)
+    , newReplicasDeleteRequest
 
     -- ** ReplicasListResponse
-    ReplicasListResponse (..),
-    newReplicasListResponse,
+    , ReplicasListResponse (..)
+    , newReplicasListResponse
 
     -- ** ServiceAccount
-    ServiceAccount (..),
-    newServiceAccount,
+    , ServiceAccount (..)
+    , newServiceAccount
 
     -- ** Tag
-    Tag (..),
-    newTag,
+    , Tag (..)
+    , newTag
 
     -- ** Template
-    Template (..),
-    newTemplate,
+    , Template (..)
+    , newTemplate
 
     -- ** VmParams
-    VmParams (..),
-    newVmParams,
-  )
-where
+    , VmParams (..)
+    , newVmParams
+    ) where
 
 import Gogol.ReplicaPool.Pools.Delete
 import Gogol.ReplicaPool.Pools.Get

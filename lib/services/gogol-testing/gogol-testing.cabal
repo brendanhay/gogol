@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-testing
-version:            1.0.0.0
-synopsis:           Google Cloud Testing SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-testing
+version:               1.0.0
+synopsis:              Google Cloud Testing SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  Allows developers to run automated tests for their mobile applications on Google infrastructure.
+    Allows developers to run automated tests for their mobile applications on Google infrastructure.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -30,36 +27,42 @@ source-repository head
   subdir:   gogol-testing
 
 flag field-selectors
-  description:
-    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-
-  default:     False
-  manual:      True
+  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+  default: False
+  manual: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -Werror
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (!flag(field-selectors) && impl(ghc >=9.2))
+  if !flag(field-selectors) && impl(ghc >= 9.2)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.Testing
-    Gogol.Testing.ApplicationDetailService.GetApkDetails
-    Gogol.Testing.Projects.TestMatrices.Cancel
-    Gogol.Testing.Projects.TestMatrices.Create
-    Gogol.Testing.Projects.TestMatrices.Get
-    Gogol.Testing.TestEnvironmentCatalog.Get
-    Gogol.Testing.Types
+      Gogol.Testing
+    , Gogol.Testing.ApplicationDetailService.GetApkDetails
+    , Gogol.Testing.Projects.DeviceSessions.Cancel
+    , Gogol.Testing.Projects.DeviceSessions.Create
+    , Gogol.Testing.Projects.DeviceSessions.Get
+    , Gogol.Testing.Projects.DeviceSessions.List
+    , Gogol.Testing.Projects.DeviceSessions.Patch
+    , Gogol.Testing.Projects.TestMatrices.Cancel
+    , Gogol.Testing.Projects.TestMatrices.Create
+    , Gogol.Testing.Projects.TestMatrices.Get
+    , Gogol.Testing.TestEnvironmentCatalog.Get
+    , Gogol.Testing.Types
 
   other-modules:
-    Gogol.Testing.Internal.Product
-    Gogol.Testing.Internal.Sum
+      Gogol.Testing.Internal.Product
+    , Gogol.Testing.Internal.Sum
 
   build-depends:
-    , base        >=4.12   && <5
-    , gogol-core  ^>=1.0.0
+      gogol-core ^>= 1.0.0

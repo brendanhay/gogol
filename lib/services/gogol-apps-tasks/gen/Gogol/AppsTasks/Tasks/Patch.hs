@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,97 +31,93 @@
 --
 -- /See:/ <https://developers.google.com/tasks/ Google Tasks API Reference> for @tasks.tasks.patch@.
 module Gogol.AppsTasks.Tasks.Patch
-  ( -- * Resource
-    TasksTasksPatchResource,
+    (
+    -- * Resource
+      TasksTasksPatchResource
 
     -- ** Constructing a Request
-    TasksTasksPatch (..),
-    newTasksTasksPatch,
-  )
-where
+    , TasksTasksPatch (..)
+    , newTasksTasksPatch
+    ) where
 
-import Gogol.AppsTasks.Types
 import qualified Gogol.Prelude as Core
+import Gogol.AppsTasks.Types
 
 -- | A resource alias for @tasks.tasks.patch@ method which the
 -- 'TasksTasksPatch' request conforms to.
 type TasksTasksPatchResource =
-  "tasks"
-    Core.:> "v1"
-    Core.:> "lists"
-    Core.:> Core.Capture "tasklist" Core.Text
-    Core.:> "tasks"
-    Core.:> Core.Capture "task" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Task
-    Core.:> Core.Patch '[Core.JSON] Task
+     "tasks" Core.:>
+       "v1" Core.:>
+         "lists" Core.:>
+           Core.Capture "tasklist" Core.Text Core.:>
+             "tasks" Core.:>
+               Core.Capture "task" Core.Text Core.:>
+                 Core.QueryParam "$.xgafv" Xgafv Core.:>
+                   Core.QueryParam "access_token" Core.Text Core.:>
+                     Core.QueryParam "callback" Core.Text Core.:>
+                       Core.QueryParam "uploadType" Core.Text Core.:>
+                         Core.QueryParam "upload_protocol" Core.Text Core.:>
+                           Core.QueryParam "alt" Core.AltJSON Core.:>
+                             Core.ReqBody '[Core.JSON] Task Core.:>
+                               Core.Patch '[Core.JSON] Task
 
 -- | Updates the specified task. This method supports patch semantics.
 --
 -- /See:/ 'newTasksTasksPatch' smart constructor.
 data TasksTasksPatch = TasksTasksPatch
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: Task,
-    -- | Task identifier.
-    task :: Core.Text,
-    -- | Task list identifier.
-    tasklist :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Multipart request metadata.
+    , payload :: Task
+      -- | Task identifier.
+    , task :: Core.Text
+      -- | Task list identifier.
+    , tasklist :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'TasksTasksPatch' with the minimum fields required to make a request.
-newTasksTasksPatch ::
-  -- |  Multipart request metadata. See 'payload'.
-  Task ->
-  -- |  Task identifier. See 'task'.
-  Core.Text ->
-  -- |  Task list identifier. See 'tasklist'.
-  Core.Text ->
-  TasksTasksPatch
+newTasksTasksPatch 
+    ::  Task
+       -- ^  Multipart request metadata. See 'payload'.
+    -> Core.Text
+       -- ^  Task identifier. See 'task'.
+    -> Core.Text
+       -- ^  Task list identifier. See 'tasklist'.
+    -> TasksTasksPatch
 newTasksTasksPatch payload task tasklist =
   TasksTasksPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      task = task,
-      tasklist = tasklist,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , payload = payload
+    , task = task
+    , tasklist = tasklist
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
 instance Core.GoogleRequest TasksTasksPatch where
-  type Rs TasksTasksPatch = Task
-  type Scopes TasksTasksPatch = '[Tasks'FullControl]
-  requestClient TasksTasksPatch {..} =
-    go
-      tasklist
-      task
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      payload
-      appsTasksService
-    where
-      go =
-        Core.buildClient
-          (Core.Proxy :: Core.Proxy TasksTasksPatchResource)
-          Core.mempty
+        type Rs TasksTasksPatch = Task
+        type Scopes TasksTasksPatch = '[Tasks'FullControl]
+        requestClient TasksTasksPatch{..}
+          = go tasklist task xgafv accessToken callback
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              appsTasksService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy :: Core.Proxy TasksTasksPatchResource)
+                      Core.mempty
+

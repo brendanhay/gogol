@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,63 +31,58 @@
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.settings.get@.
 module Gogol.AppsCalendar.Calendar.Settings.Get
-  ( -- * Resource
-    CalendarSettingsGetResource,
+    (
+    -- * Resource
+      CalendarSettingsGetResource
 
     -- ** Constructing a Request
-    CalendarSettingsGet (..),
-    newCalendarSettingsGet,
-  )
-where
+    , CalendarSettingsGet (..)
+    , newCalendarSettingsGet
+    ) where
 
-import Gogol.AppsCalendar.Types
 import qualified Gogol.Prelude as Core
+import Gogol.AppsCalendar.Types
 
 -- | A resource alias for @calendar.settings.get@ method which the
 -- 'CalendarSettingsGet' request conforms to.
 type CalendarSettingsGetResource =
-  "calendar"
-    Core.:> "v3"
-    Core.:> "users"
-    Core.:> "me"
-    Core.:> "settings"
-    Core.:> Core.Capture "setting" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Setting
+     "calendar" Core.:>
+       "v3" Core.:>
+         "users" Core.:>
+           "me" Core.:>
+             "settings" Core.:>
+               Core.Capture "setting" Core.Text Core.:>
+                 Core.QueryParam "alt" Core.AltJSON Core.:>
+                   Core.Get '[Core.JSON] Setting
 
 -- | Returns a single user setting.
 --
 -- /See:/ 'newCalendarSettingsGet' smart constructor.
 newtype CalendarSettingsGet = CalendarSettingsGet
-  { -- | The id of the user setting.
-    setting :: Core.Text
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | The id of the user setting.
+      setting :: Core.Text
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'CalendarSettingsGet' with the minimum fields required to make a request.
-newCalendarSettingsGet ::
-  -- |  The id of the user setting. See 'setting'.
-  Core.Text ->
-  CalendarSettingsGet
+newCalendarSettingsGet 
+    ::  Core.Text
+       -- ^  The id of the user setting. See 'setting'.
+    -> CalendarSettingsGet
 newCalendarSettingsGet setting = CalendarSettingsGet {setting = setting}
 
 instance Core.GoogleRequest CalendarSettingsGet where
-  type Rs CalendarSettingsGet = Setting
-  type
-    Scopes CalendarSettingsGet =
-      '[ Calendar'FullControl,
-         Calendar'Readonly,
-         Calendar'Settings'Readonly
-       ]
-  requestClient CalendarSettingsGet {..} =
-    go
-      setting
-      (Core.Just Core.AltJSON)
-      appsCalendarService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy CalendarSettingsGetResource
-          )
-          Core.mempty
+        type Rs CalendarSettingsGet = Setting
+        type Scopes CalendarSettingsGet =
+             '[Calendar'FullControl, Calendar'Readonly,
+               Calendar'Settings'Readonly]
+        requestClient CalendarSettingsGet{..}
+          = go setting (Core.Just Core.AltJSON)
+              appsCalendarService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy CalendarSettingsGetResource)
+                      Core.mempty
+

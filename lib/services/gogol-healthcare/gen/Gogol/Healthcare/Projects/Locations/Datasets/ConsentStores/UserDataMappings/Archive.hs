@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,102 +31,97 @@
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.consentStores.userDataMappings.archive@.
 module Gogol.Healthcare.Projects.Locations.Datasets.ConsentStores.UserDataMappings.Archive
-  ( -- * Resource
-    HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchiveResource,
+    (
+    -- * Resource
+      HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchiveResource
 
     -- ** Constructing a Request
-    HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive (..),
-    newHealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive,
-  )
-where
+    , HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive (..)
+    , newHealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive
+    ) where
 
-import Gogol.Healthcare.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Healthcare.Types
 
 -- | A resource alias for @healthcare.projects.locations.datasets.consentStores.userDataMappings.archive@ method which the
 -- 'HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive' request conforms to.
-type HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchiveResource =
-  "v1"
-    Core.:> Core.CaptureMode "name" "archive" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              ArchiveUserDataMappingRequest
-    Core.:> Core.Post '[Core.JSON] ArchiveUserDataMappingResponse
+type HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchiveResource
+     =
+     "v1" Core.:>
+       Core.CaptureMode "name" "archive" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.ReqBody '[Core.JSON]
+                       ArchiveUserDataMappingRequest
+                       Core.:>
+                       Core.Post '[Core.JSON] ArchiveUserDataMappingResponse
 
 -- | Archives the specified User data mapping.
 --
 -- /See:/ 'newHealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive' smart constructor.
 data HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive = HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. The resource name of the User data mapping to archive.
-    name :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: ArchiveUserDataMappingRequest,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The resource name of the User data mapping to archive.
+    , name :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: ArchiveUserDataMappingRequest
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive' with the minimum fields required to make a request.
-newHealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive ::
-  -- |  Required. The resource name of the User data mapping to archive. See 'name'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  ArchiveUserDataMappingRequest ->
-  HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive
+newHealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive 
+    ::  Core.Text
+       -- ^  Required. The resource name of the User data mapping to archive. See 'name'.
+    -> ArchiveUserDataMappingRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive
 newHealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive name payload =
   HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive
-  where
-  type
-    Rs
-      HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive =
-      ArchiveUserDataMappingResponse
-  type
-    Scopes
-      HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive =
-      '[CloudPlatform'FullControl]
-  requestClient
-    HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        healthcareService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchiveResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive
+         where
+        type Rs
+               HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive
+             = ArchiveUserDataMappingResponse
+        type Scopes
+               HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive
+             =
+             '[CloudHealthcare'FullControl,
+               CloudPlatform'FullControl]
+        requestClient
+          HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              healthcareService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchiveResource)
+                      Core.mempty
+

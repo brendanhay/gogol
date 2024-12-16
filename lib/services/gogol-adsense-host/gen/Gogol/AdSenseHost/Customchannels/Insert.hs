@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,71 +31,65 @@
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.customchannels.insert@.
 module Gogol.AdSenseHost.Customchannels.Insert
-  ( -- * Resource
-    AdSenseHostCustomchannelsInsertResource,
+    (
+    -- * Resource
+      AdSenseHostCustomchannelsInsertResource
 
     -- ** Constructing a Request
-    AdSenseHostCustomchannelsInsert (..),
-    newAdSenseHostCustomchannelsInsert,
-  )
-where
+    , AdSenseHostCustomchannelsInsert (..)
+    , newAdSenseHostCustomchannelsInsert
+    ) where
 
-import Gogol.AdSenseHost.Types
 import qualified Gogol.Prelude as Core
+import Gogol.AdSenseHost.Types
 
 -- | A resource alias for @adsensehost.customchannels.insert@ method which the
 -- 'AdSenseHostCustomchannelsInsert' request conforms to.
 type AdSenseHostCustomchannelsInsertResource =
-  "adsensehost"
-    Core.:> "v4.1"
-    Core.:> "adclients"
-    Core.:> Core.Capture "adClientId" Core.Text
-    Core.:> "customchannels"
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] CustomChannel
-    Core.:> Core.Post '[Core.JSON] CustomChannel
+     "adsensehost" Core.:>
+       "v4.1" Core.:>
+         "adclients" Core.:>
+           Core.Capture "adClientId" Core.Text Core.:>
+             "customchannels" Core.:>
+               Core.QueryParam "alt" Core.AltJSON Core.:>
+                 Core.ReqBody '[Core.JSON] CustomChannel Core.:>
+                   Core.Post '[Core.JSON] CustomChannel
 
 -- | Add a new custom channel to the host AdSense account.
 --
 -- /See:/ 'newAdSenseHostCustomchannelsInsert' smart constructor.
 data AdSenseHostCustomchannelsInsert = AdSenseHostCustomchannelsInsert
-  { -- | Ad client to which the new custom channel will be added.
-    adClientId :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: CustomChannel
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Ad client to which the new custom channel will be added.
+      adClientId :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: CustomChannel
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AdSenseHostCustomchannelsInsert' with the minimum fields required to make a request.
-newAdSenseHostCustomchannelsInsert ::
-  -- |  Ad client to which the new custom channel will be added. See 'adClientId'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  CustomChannel ->
-  AdSenseHostCustomchannelsInsert
+newAdSenseHostCustomchannelsInsert 
+    ::  Core.Text
+       -- ^  Ad client to which the new custom channel will be added. See 'adClientId'.
+    -> CustomChannel
+       -- ^  Multipart request metadata. See 'payload'.
+    -> AdSenseHostCustomchannelsInsert
 newAdSenseHostCustomchannelsInsert adClientId payload =
   AdSenseHostCustomchannelsInsert {adClientId = adClientId, payload = payload}
 
-instance
-  Core.GoogleRequest
-    AdSenseHostCustomchannelsInsert
-  where
-  type
-    Rs AdSenseHostCustomchannelsInsert =
-      CustomChannel
-  type
-    Scopes AdSenseHostCustomchannelsInsert =
-      '[Adsensehost'FullControl]
-  requestClient AdSenseHostCustomchannelsInsert {..} =
-    go
-      adClientId
-      (Core.Just Core.AltJSON)
-      payload
-      adSenseHostService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AdSenseHostCustomchannelsInsertResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           AdSenseHostCustomchannelsInsert
+         where
+        type Rs AdSenseHostCustomchannelsInsert =
+             CustomChannel
+        type Scopes AdSenseHostCustomchannelsInsert =
+             '[Adsensehost'FullControl]
+        requestClient AdSenseHostCustomchannelsInsert{..}
+          = go adClientId (Core.Just Core.AltJSON) payload
+              adSenseHostService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy AdSenseHostCustomchannelsInsertResource)
+                      Core.mempty
+

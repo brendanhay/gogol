@@ -423,9 +423,98 @@
       }
     }
   },
-  "revision": "20230313",
+  "revision": "20241028",
   "rootUrl": "https://alertcenter.googleapis.com/",
   "schemas": {
+    "AbuseDetected": {
+      "description": "A generic alert for abusive user activity occurring with a customer.",
+      "id": "AbuseDetected",
+      "properties": {
+        "additionalDetails": {
+          "$ref": "EntityList",
+          "description": "List of abusive users/entities to be displayed in a table in the alert."
+        },
+        "product": {
+          "description": "Product that the abuse is originating from.",
+          "type": "string"
+        },
+        "subAlertId": {
+          "description": "Unique identifier of each sub alert that is onboarded.",
+          "type": "string"
+        },
+        "variationType": {
+          "description": "Variation of AbuseDetected alerts. The variation_type determines the texts displayed the alert details. This differs from sub_alert_id because each sub alert can have multiple variation_types, representing different stages of the alert.",
+          "enum": [
+            "ABUSE_DETECTED_VARIATION_TYPE_UNSPECIFIED",
+            "DRIVE_ABUSIVE_CONTENT",
+            "LIMITED_DISABLE"
+          ],
+          "enumDescriptions": [
+            "AbuseDetected alert variation type unspecified. No alert should be unspecified.",
+            "Variation displayed for Drive abusive content alerts.",
+            "Variation displayed for Limited Disable alerts, when a Google service is disabled for a user, totally or partially, due to the user's abusive behavior."
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AccessApproval": {
+      "description": "Alert that is triggered when Google support requests to access customer data.",
+      "id": "AccessApproval",
+      "properties": {
+        "justificationReason": {
+          "description": "Justification for data access based on justification enums.",
+          "items": {
+            "enum": [
+              "JUSTIFICATION_UNSPECIFIED",
+              "CUSTOMER_INITIATED_SUPPORT",
+              "GOOGLE_INITIATED_REVIEW",
+              "GOOGLE_INITIATED_SERVICE",
+              "THIRD_PARTY_DATA_REQUEST",
+              "GOOGLE_RESPONSE_TO_PRODUCTION_ALERT"
+            ],
+            "enumDescriptions": [
+              "Justification unspecified",
+              "Customer Initiated Support",
+              "Google Initiated Review",
+              "Google Initiated Service",
+              "Third Party Data Request",
+              "Google Response to Production Alert"
+            ],
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "officeLocation": {
+          "description": "Office location of Google staff requesting access such as \"US\".",
+          "type": "string"
+        },
+        "products": {
+          "description": "Products within scope of the Access Approvals request.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "requestId": {
+          "description": "ID of the Access Approvals request. This is a helpful field when requesting support from Google.",
+          "type": "string"
+        },
+        "scope": {
+          "description": "Scope of access, also known as a resource. This is further narrowed down by the product field.",
+          "type": "string"
+        },
+        "tickets": {
+          "description": "Support tickets related to this Access Approvals request. Populated if there is an associated case number.",
+          "items": {
+            "$ref": "SupportTicket"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "AccountSuspensionDetails": {
       "description": "Details about why an account is receiving an account suspension warning.",
       "id": "AccountSuspensionDetails",
@@ -733,20 +822,20 @@
       "type": "object"
     },
     "ApnsCertificateExpirationInfo": {
-      "description": "The explanation message associated with ApnsCertificationExpiring and ApnsCertificationExpired alerts.",
+      "description": "The explanation message associated with \"APNS certificate is expiring soon\" and \"APNS certificate has expired\" alerts.",
       "id": "ApnsCertificateExpirationInfo",
       "properties": {
         "appleId": {
-          "description": "The Apple ID used for the certificate may be blank if admins didn't enter it.",
+          "description": "The Apple ID used to create the certificate. It may be blank if admins didn't enter it.",
           "type": "string"
         },
         "expirationTime": {
-          "description": "The expiration date of the APNS Certificate.",
+          "description": "The expiration date of the APNS certificate.",
           "format": "google-datetime",
           "type": "string"
         },
         "uid": {
-          "description": "The UID for the certificate.",
+          "description": "The UID of the certificate.",
           "type": "string"
         }
       },
@@ -767,7 +856,7 @@
       "type": "object"
     },
     "AppSettingsChanged": {
-      "description": "Alerts from AppSettingsChanged bucket Rules configured by Admin which contain the below rules. Calendar settings changed Drive settings changed Email settings changed Mobile settings changed",
+      "description": "* Alerts from AppSettingsChanged bucket Rules configured by Admin which contain the below rules. Calendar settings changed Drive settings changed Email settings changed Mobile settings changed",
       "id": "AppSettingsChanged",
       "properties": {
         "alertDetails": {
@@ -1068,6 +1157,53 @@
       },
       "type": "object"
     },
+    "DeviceManagementRule": {
+      "description": "Alerts from Device Management Rules configured by Admin.",
+      "id": "DeviceManagementRule",
+      "properties": {
+        "deviceId": {
+          "description": "Required. The device ID.",
+          "type": "string"
+        },
+        "deviceModel": {
+          "description": "The model of the device.",
+          "type": "string"
+        },
+        "deviceType": {
+          "description": "The type of the device.",
+          "type": "string"
+        },
+        "email": {
+          "description": "The email of the user this alert was created for.",
+          "type": "string"
+        },
+        "id": {
+          "description": "ID of the rule that triggered the alert",
+          "type": "string"
+        },
+        "iosVendorId": {
+          "description": "Required for iOS, empty for others.",
+          "type": "string"
+        },
+        "ownerId": {
+          "description": "Obfuscated ID of the owner of the device",
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "The device resource ID.",
+          "type": "string"
+        },
+        "ruleAction": {
+          "description": "Action taken as result of the rule",
+          "type": "string"
+        },
+        "serialNumber": {
+          "description": "The serial number of the device.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "DlpRuleViolation": {
       "description": "Alerts that get triggered on violations of Data Loss Prevention (DLP) rules.",
       "id": "DlpRuleViolation",
@@ -1109,6 +1245,53 @@
       "description": "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }",
       "id": "Empty",
       "properties": {},
+      "type": "object"
+    },
+    "Entity": {
+      "description": "Individual entity affected by, or related to, an alert.",
+      "id": "Entity",
+      "properties": {
+        "link": {
+          "description": "Link to a Security Investigation Tool search based on this entity, if available.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Human-readable name of this entity, such as an email address, file ID, or device name.",
+          "type": "string"
+        },
+        "values": {
+          "description": "Extra values beyond name. The order of values should align with headers in EntityList.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "EntityList": {
+      "description": "EntityList stores entities in a format that can be translated to a table in the Alert Center UI.",
+      "id": "EntityList",
+      "properties": {
+        "entities": {
+          "description": "List of entities affected by the alert.",
+          "items": {
+            "$ref": "Entity"
+          },
+          "type": "array"
+        },
+        "headers": {
+          "description": "Headers of the values in entities. If no value is defined in Entity, this field should be empty.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "Name of the key detail used to display this entity list.",
+          "type": "string"
+        }
+      },
       "type": "object"
     },
     "GmailMessageInfo": {
@@ -1394,7 +1577,7 @@
       "type": "object"
     },
     "PrimaryAdminChangedEvent": {
-      "description": "Event occurred when primary admin changed in customer's account. The event are being received from insight forwarder",
+      "description": "* Event occurred when primary admin changed in customer's account. The event are being received from insight forwarder",
       "id": "PrimaryAdminChangedEvent",
       "properties": {
         "domain": {
@@ -1460,6 +1643,18 @@
       "description": "Proto that contains resource information.",
       "id": "ResourceInfo",
       "properties": {
+        "chatAttachmentId": {
+          "description": "Chat attachment ID.",
+          "type": "string"
+        },
+        "chatMessageId": {
+          "description": "Chat message ID.",
+          "type": "string"
+        },
+        "deviceId": {
+          "description": "Id to identify a device. For example, for Android devices, this is the \"Android Device Id\" and for Chrome OS devices, it's the \"Device Virtual Id\".",
+          "type": "string"
+        },
         "documentId": {
           "description": "Drive file ID.",
           "type": "string"
@@ -1494,11 +1689,29 @@
           "description": "Source of the data.",
           "enum": [
             "DATA_SOURCE_UNSPECIFIED",
-            "DRIVE"
+            "DRIVE",
+            "CHROME",
+            "CHAT"
           ],
           "enumDescriptions": [
             "Data source is unspecified.",
-            "Drive data source."
+            "Drive data source.",
+            "Chrome data source.",
+            "Chat data source."
+          ],
+          "type": "string"
+        },
+        "eventType": {
+          "description": "Event associated with this alert after applying the rule.",
+          "enum": [
+            "EVENT_TYPE_UNSPECIFIED",
+            "ACCESS_BLOCKED",
+            "SHARING_BLOCKED"
+          ],
+          "enumDescriptions": [
+            "Event type wasn't set.",
+            "An access attempt was blocked.",
+            "A sharing attempt was blocked."
           ],
           "type": "string"
         },
@@ -1531,7 +1744,22 @@
               "ACTION_TYPE_UNSPECIFIED",
               "DRIVE_BLOCK_EXTERNAL_SHARING",
               "DRIVE_WARN_ON_EXTERNAL_SHARING",
+              "DRIVE_RESTRICT_DOWNLOAD_PRINT_COPY",
+              "DRIVE_APPLY_DRIVE_LABELS",
+              "CHROME_BLOCK_FILE_DOWNLOAD",
+              "CHROME_WARN_FILE_DOWNLOAD",
+              "CHROME_BLOCK_FILE_UPLOAD",
+              "CHROME_WARN_FILE_UPLOAD",
+              "CHROME_BLOCK_WEB_CONTENT_UPLOAD",
+              "CHROME_WARN_WEB_CONTENT_UPLOAD",
+              "CHROME_BLOCK_PAGE_PRINT",
+              "CHROME_WARN_PAGE_PRINT",
+              "CHROME_BLOCK_URL_VISITED",
+              "CHROME_WARN_URL_VISITED",
+              "CHROME_STORE_CONTENT",
               "DELETE_WEBPROTECT_EVIDENCE",
+              "CHAT_BLOCK_CONTENT",
+              "CHAT_WARN_USER",
               "ALERT",
               "RULE_ACTIVATE",
               "RULE_DEACTIVATE"
@@ -1540,7 +1768,22 @@
               "Action type is unspecified.",
               "Block sharing a file externally.",
               "Show a warning message when sharing a file externally.",
+              "Disable download, print, and copy for commenters and viewers in drive.",
+              "Apply customer specified Drive labels to the file.",
+              "Chrome actions. Block file download.",
+              "Warn user about downloaded file.",
+              "Block file upload.",
+              "Warn user about uploaded file.",
+              "Block web content upload.",
+              "Warn user about uploaded web content.",
+              "Block page print.",
+              "Warn user about printed page.",
+              "Block Chrome URL visit.",
+              "Warn user about Chrome URL visited.",
+              "Store the content that violated the rule.",
               "Delete web protect evidence file",
+              "Chat actions. Block Chat content to be sent out.",
+              "Warn end user about Chat content.",
               "Send alert.",
               "Activate Rule Action",
               "Deactivate Rule Action"
@@ -1553,11 +1796,25 @@
           "description": "Trigger of the rule.",
           "enum": [
             "TRIGGER_UNSPECIFIED",
-            "DRIVE_SHARE"
+            "DRIVE_SHARE",
+            "CHROME_FILE_DOWNLOAD",
+            "CHROME_FILE_UPLOAD",
+            "CHROME_WEB_CONTENT_UPLOAD",
+            "CHAT_MESSAGE_SENT",
+            "CHAT_ATTACHMENT_UPLOADED",
+            "CHROME_PAGE_PRINT",
+            "CHROME_URL_VISITED"
           ],
           "enumDescriptions": [
             "Trigger is unspecified.",
-            "A Drive file is shared."
+            "A Drive file is shared.",
+            "A file being downloaded in a Chrome browser.",
+            "A file being uploaded from a Chrome browser.",
+            "Web content being uploaded from a Chrome browser.",
+            "A Chat message is sent.",
+            "A Chat attachment is uploaded.",
+            "A page is being printed by Chrome.",
+            "A URL is visited within Chrome."
           ],
           "type": "string"
         },
@@ -1575,7 +1832,22 @@
               "ACTION_TYPE_UNSPECIFIED",
               "DRIVE_BLOCK_EXTERNAL_SHARING",
               "DRIVE_WARN_ON_EXTERNAL_SHARING",
+              "DRIVE_RESTRICT_DOWNLOAD_PRINT_COPY",
+              "DRIVE_APPLY_DRIVE_LABELS",
+              "CHROME_BLOCK_FILE_DOWNLOAD",
+              "CHROME_WARN_FILE_DOWNLOAD",
+              "CHROME_BLOCK_FILE_UPLOAD",
+              "CHROME_WARN_FILE_UPLOAD",
+              "CHROME_BLOCK_WEB_CONTENT_UPLOAD",
+              "CHROME_WARN_WEB_CONTENT_UPLOAD",
+              "CHROME_BLOCK_PAGE_PRINT",
+              "CHROME_WARN_PAGE_PRINT",
+              "CHROME_BLOCK_URL_VISITED",
+              "CHROME_WARN_URL_VISITED",
+              "CHROME_STORE_CONTENT",
               "DELETE_WEBPROTECT_EVIDENCE",
+              "CHAT_BLOCK_CONTENT",
+              "CHAT_WARN_USER",
               "ALERT",
               "RULE_ACTIVATE",
               "RULE_DEACTIVATE"
@@ -1584,7 +1856,22 @@
               "Action type is unspecified.",
               "Block sharing a file externally.",
               "Show a warning message when sharing a file externally.",
+              "Disable download, print, and copy for commenters and viewers in drive.",
+              "Apply customer specified Drive labels to the file.",
+              "Chrome actions. Block file download.",
+              "Warn user about downloaded file.",
+              "Block file upload.",
+              "Warn user about uploaded file.",
+              "Block web content upload.",
+              "Warn user about uploaded web content.",
+              "Block page print.",
+              "Warn user about printed page.",
+              "Block Chrome URL visit.",
+              "Warn user about Chrome URL visited.",
+              "Store the content that violated the rule.",
               "Delete web protect evidence file",
+              "Chat actions. Block Chat content to be sent out.",
+              "Warn end user about Chat content.",
               "Send alert.",
               "Activate Rule Action",
               "Deactivate Rule Action"
@@ -1601,7 +1888,7 @@
       "type": "object"
     },
     "SSOProfileCreatedEvent": {
-      "description": "Event occurred when SSO Profile created in customer's account. The event are being received from insight forwarder",
+      "description": "* Event occurred when SSO Profile created in customer's account. The event are being received from insight forwarder",
       "id": "SSOProfileCreatedEvent",
       "properties": {
         "inboundSsoProfileName": {
@@ -1612,7 +1899,7 @@
       "type": "object"
     },
     "SSOProfileDeletedEvent": {
-      "description": "Event occurred when SSO Profile deleted in customer's account. The event are being received from insight forwarder",
+      "description": "* Event occurred when SSO Profile deleted in customer's account. The event are being received from insight forwarder",
       "id": "SSOProfileDeletedEvent",
       "properties": {
         "inboundSsoProfileName": {
@@ -1623,7 +1910,7 @@
       "type": "object"
     },
     "SSOProfileUpdatedEvent": {
-      "description": "Event occurred when SSO Profile updated in customer's account. The event are being received from insight forwarder",
+      "description": "* Event occurred when SSO Profile updated in customer's account. The event are being received from insight forwarder",
       "id": "SSOProfileUpdatedEvent",
       "properties": {
         "inboundSsoProfileChanges": {
@@ -1726,11 +2013,26 @@
       "type": "object"
     },
     "SuperAdminPasswordResetEvent": {
-      "description": "Event occurred when password was reset for super admin in customer's account. The event are being received from insight forwarder",
+      "description": "* Event occurred when password was reset for super admin in customer's account. The event are being received from insight forwarder",
       "id": "SuperAdminPasswordResetEvent",
       "properties": {
         "userEmail": {
           "description": "email of person whose password was reset",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SupportTicket": {
+      "description": "Support ticket related to Access Approvals request",
+      "id": "SupportTicket",
+      "properties": {
+        "ticketId": {
+          "description": "Support ticket ID",
+          "type": "string"
+        },
+        "ticketUrl": {
+          "description": "Link to support ticket",
           "type": "string"
         }
       },
@@ -1891,7 +2193,7 @@
       "type": "object"
     },
     "UserChanges": {
-      "description": "Alerts from UserChanges bucket Rules for predefined rules which contain the below rules. Suspended user made active New user Added User suspended (by admin) User granted admin privileges User admin privileges revoked User deleted Users password changed",
+      "description": "* Alerts from UserChanges bucket Rules for predefined rules which contain the below rules. Suspended user made active New user Added User suspended (by admin) User granted admin privileges User admin privileges revoked User deleted Users password changed",
       "id": "UserChanges",
       "properties": {
         "name": {

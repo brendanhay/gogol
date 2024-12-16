@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,107 +26,135 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.TextToSpeech.Types
-  ( -- * Configuration
-    textToSpeechService,
+    (
+    -- * Configuration
+      textToSpeechService
 
     -- * OAuth Scopes
-    CloudPlatform'FullControl,
+    , CloudPlatform'FullControl
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
+
+    -- ** AdvancedVoiceOptions
+    , AdvancedVoiceOptions (..)
+    , newAdvancedVoiceOptions
 
     -- ** AudioConfig
-    AudioConfig (..),
-    newAudioConfig,
+    , AudioConfig (..)
+    , newAudioConfig
 
     -- ** AudioConfig_AudioEncoding
-    AudioConfig_AudioEncoding (..),
+    , AudioConfig_AudioEncoding (..)
 
     -- ** CancelOperationRequest
-    CancelOperationRequest (..),
-    newCancelOperationRequest,
+    , CancelOperationRequest (..)
+    , newCancelOperationRequest
+
+    -- ** CustomPronunciationParams
+    , CustomPronunciationParams (..)
+    , newCustomPronunciationParams
+
+    -- ** CustomPronunciationParams_PhoneticEncoding
+    , CustomPronunciationParams_PhoneticEncoding (..)
+
+    -- ** CustomPronunciations
+    , CustomPronunciations (..)
+    , newCustomPronunciations
 
     -- ** CustomVoiceParams
-    CustomVoiceParams (..),
-    newCustomVoiceParams,
+    , CustomVoiceParams (..)
+    , newCustomVoiceParams
 
     -- ** CustomVoiceParams_ReportedUsage
-    CustomVoiceParams_ReportedUsage (..),
+    , CustomVoiceParams_ReportedUsage (..)
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** GoogleCloudTexttospeechV1SynthesizeLongAudioMetadata
-    GoogleCloudTexttospeechV1SynthesizeLongAudioMetadata (..),
-    newGoogleCloudTexttospeechV1SynthesizeLongAudioMetadata,
+    , GoogleCloudTexttospeechV1SynthesizeLongAudioMetadata (..)
+    , newGoogleCloudTexttospeechV1SynthesizeLongAudioMetadata
 
     -- ** ListOperationsResponse
-    ListOperationsResponse (..),
-    newListOperationsResponse,
+    , ListOperationsResponse (..)
+    , newListOperationsResponse
 
     -- ** ListVoicesResponse
-    ListVoicesResponse (..),
-    newListVoicesResponse,
+    , ListVoicesResponse (..)
+    , newListVoicesResponse
+
+    -- ** MultiSpeakerMarkup
+    , MultiSpeakerMarkup (..)
+    , newMultiSpeakerMarkup
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** SynthesisInput
-    SynthesisInput (..),
-    newSynthesisInput,
+    , SynthesisInput (..)
+    , newSynthesisInput
 
     -- ** SynthesizeLongAudioMetadata
-    SynthesizeLongAudioMetadata (..),
-    newSynthesizeLongAudioMetadata,
+    , SynthesizeLongAudioMetadata (..)
+    , newSynthesizeLongAudioMetadata
 
     -- ** SynthesizeLongAudioRequest
-    SynthesizeLongAudioRequest (..),
-    newSynthesizeLongAudioRequest,
+    , SynthesizeLongAudioRequest (..)
+    , newSynthesizeLongAudioRequest
 
     -- ** SynthesizeSpeechRequest
-    SynthesizeSpeechRequest (..),
-    newSynthesizeSpeechRequest,
+    , SynthesizeSpeechRequest (..)
+    , newSynthesizeSpeechRequest
 
     -- ** SynthesizeSpeechResponse
-    SynthesizeSpeechResponse (..),
-    newSynthesizeSpeechResponse,
+    , SynthesizeSpeechResponse (..)
+    , newSynthesizeSpeechResponse
+
+    -- ** Turn
+    , Turn (..)
+    , newTurn
 
     -- ** Voice
-    Voice (..),
-    newVoice,
+    , Voice (..)
+    , newVoice
 
     -- ** Voice_SsmlGender
-    Voice_SsmlGender (..),
+    , Voice_SsmlGender (..)
+
+    -- ** VoiceCloneParams
+    , VoiceCloneParams (..)
+    , newVoiceCloneParams
 
     -- ** VoiceSelectionParams
-    VoiceSelectionParams (..),
-    newVoiceSelectionParams,
+    , VoiceSelectionParams (..)
+    , newVoiceSelectionParams
 
     -- ** VoiceSelectionParams_SsmlGender
-    VoiceSelectionParams_SsmlGender (..),
-  )
-where
+    , VoiceSelectionParams_SsmlGender (..)
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.TextToSpeech.Internal.Product
@@ -133,10 +162,10 @@ import Gogol.TextToSpeech.Internal.Sum
 
 -- | Default request referring to version @v1@ of the Cloud Text-to-Speech API. This contains the host and root path used as a starting point for constructing service requests.
 textToSpeechService :: Core.ServiceConfig
-textToSpeechService =
-  Core.defaultService
-    (Core.ServiceId "texttospeech:v1")
-    "texttospeech.googleapis.com"
+textToSpeechService
+  = Core.defaultService
+      (Core.ServiceId "texttospeech:v1")
+      "texttospeech.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"

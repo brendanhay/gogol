@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,105 +31,96 @@
 --
 -- /See:/ <https://cloud.google.com/bigtable/ Cloud Bigtable Admin API Reference> for @bigtableadmin.projects.instances.tables.create@.
 module Gogol.BigtableAdmin.Projects.Instances.Tables.Create
-  ( -- * Resource
-    BigtableAdminProjectsInstancesTablesCreateResource,
+    (
+    -- * Resource
+      BigtableAdminProjectsInstancesTablesCreateResource
 
     -- ** Constructing a Request
-    BigtableAdminProjectsInstancesTablesCreate (..),
-    newBigtableAdminProjectsInstancesTablesCreate,
-  )
-where
+    , BigtableAdminProjectsInstancesTablesCreate (..)
+    , newBigtableAdminProjectsInstancesTablesCreate
+    ) where
 
-import Gogol.BigtableAdmin.Types
 import qualified Gogol.Prelude as Core
+import Gogol.BigtableAdmin.Types
 
 -- | A resource alias for @bigtableadmin.projects.instances.tables.create@ method which the
 -- 'BigtableAdminProjectsInstancesTablesCreate' request conforms to.
-type BigtableAdminProjectsInstancesTablesCreateResource =
-  "v2"
-    Core.:> Core.Capture "parent" Core.Text
-    Core.:> "tables"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] CreateTableRequest
-    Core.:> Core.Post '[Core.JSON] Table
+type BigtableAdminProjectsInstancesTablesCreateResource
+     =
+     "v2" Core.:>
+       Core.Capture "parent" Core.Text Core.:>
+         "tables" Core.:>
+           Core.QueryParam "$.xgafv" Xgafv Core.:>
+             Core.QueryParam "access_token" Core.Text Core.:>
+               Core.QueryParam "callback" Core.Text Core.:>
+                 Core.QueryParam "uploadType" Core.Text Core.:>
+                   Core.QueryParam "upload_protocol" Core.Text Core.:>
+                     Core.QueryParam "alt" Core.AltJSON Core.:>
+                       Core.ReqBody '[Core.JSON] CreateTableRequest Core.:>
+                         Core.Post '[Core.JSON] Table
 
 -- | Creates a new table in the specified instance. The table can be created with a full set of initial column families, specified in the request.
 --
 -- /See:/ 'newBigtableAdminProjectsInstancesTablesCreate' smart constructor.
 data BigtableAdminProjectsInstancesTablesCreate = BigtableAdminProjectsInstancesTablesCreate
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. The unique name of the instance in which to create the table. Values are of the form @projects\/{project}\/instances\/{instance}@.
-    parent :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: CreateTableRequest,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The unique name of the instance in which to create the table. Values are of the form @projects\/{project}\/instances\/{instance}@.
+    , parent :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: CreateTableRequest
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'BigtableAdminProjectsInstancesTablesCreate' with the minimum fields required to make a request.
-newBigtableAdminProjectsInstancesTablesCreate ::
-  -- |  Required. The unique name of the instance in which to create the table. Values are of the form @projects\/{project}\/instances\/{instance}@. See 'parent'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  CreateTableRequest ->
-  BigtableAdminProjectsInstancesTablesCreate
+newBigtableAdminProjectsInstancesTablesCreate 
+    ::  Core.Text
+       -- ^  Required. The unique name of the instance in which to create the table. Values are of the form @projects\/{project}\/instances\/{instance}@. See 'parent'.
+    -> CreateTableRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> BigtableAdminProjectsInstancesTablesCreate
 newBigtableAdminProjectsInstancesTablesCreate parent payload =
   BigtableAdminProjectsInstancesTablesCreate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , parent = parent
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    BigtableAdminProjectsInstancesTablesCreate
-  where
-  type
-    Rs BigtableAdminProjectsInstancesTablesCreate =
-      Table
-  type
-    Scopes
-      BigtableAdminProjectsInstancesTablesCreate =
-      '[ Bigtable'Admin,
-         Bigtable'Admin'Table,
-         CloudBigtable'Admin,
-         CloudBigtable'Admin'Table,
-         CloudPlatform'FullControl
-       ]
-  requestClient
-    BigtableAdminProjectsInstancesTablesCreate {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        bigtableAdminService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  BigtableAdminProjectsInstancesTablesCreateResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           BigtableAdminProjectsInstancesTablesCreate
+         where
+        type Rs BigtableAdminProjectsInstancesTablesCreate =
+             Table
+        type Scopes
+               BigtableAdminProjectsInstancesTablesCreate
+             =
+             '[Bigtable'Admin, Bigtable'Admin'Table,
+               CloudBigtable'Admin, CloudBigtable'Admin'Table,
+               CloudPlatform'FullControl]
+        requestClient
+          BigtableAdminProjectsInstancesTablesCreate{..}
+          = go parent xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              bigtableAdminService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           BigtableAdminProjectsInstancesTablesCreateResource)
+                      Core.mempty
+

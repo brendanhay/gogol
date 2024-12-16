@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,205 +31,205 @@
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Proximity Beacon API Reference>
 module Gogol.ProximityBeacon
-  ( -- * Configuration
-    proximityBeaconService,
+    (
+    -- * Configuration
+      proximityBeaconService
 
     -- * OAuth Scopes
-    Userlocation'Beacon'Registry,
+    , Userlocation'Beacon'Registry
 
     -- * Resources
 
     -- ** proximitybeacon.beaconinfo.getforobserved
-    ProximityBeaconBeaconinfoGetforobservedResource,
-    ProximityBeaconBeaconinfoGetforobserved (..),
-    newProximityBeaconBeaconinfoGetforobserved,
+    , ProximityBeaconBeaconinfoGetforobservedResource
+    , ProximityBeaconBeaconinfoGetforobserved (..)
+    , newProximityBeaconBeaconinfoGetforobserved
 
     -- ** proximitybeacon.beacons.activate
-    ProximityBeaconBeaconsActivateResource,
-    ProximityBeaconBeaconsActivate (..),
-    newProximityBeaconBeaconsActivate,
+    , ProximityBeaconBeaconsActivateResource
+    , ProximityBeaconBeaconsActivate (..)
+    , newProximityBeaconBeaconsActivate
 
     -- ** proximitybeacon.beacons.attachments.batchDelete
-    ProximityBeaconBeaconsAttachmentsBatchDeleteResource,
-    ProximityBeaconBeaconsAttachmentsBatchDelete (..),
-    newProximityBeaconBeaconsAttachmentsBatchDelete,
+    , ProximityBeaconBeaconsAttachmentsBatchDeleteResource
+    , ProximityBeaconBeaconsAttachmentsBatchDelete (..)
+    , newProximityBeaconBeaconsAttachmentsBatchDelete
 
     -- ** proximitybeacon.beacons.attachments.create
-    ProximityBeaconBeaconsAttachmentsCreateResource,
-    ProximityBeaconBeaconsAttachmentsCreate (..),
-    newProximityBeaconBeaconsAttachmentsCreate,
+    , ProximityBeaconBeaconsAttachmentsCreateResource
+    , ProximityBeaconBeaconsAttachmentsCreate (..)
+    , newProximityBeaconBeaconsAttachmentsCreate
 
     -- ** proximitybeacon.beacons.attachments.delete
-    ProximityBeaconBeaconsAttachmentsDeleteResource,
-    ProximityBeaconBeaconsAttachmentsDelete (..),
-    newProximityBeaconBeaconsAttachmentsDelete,
+    , ProximityBeaconBeaconsAttachmentsDeleteResource
+    , ProximityBeaconBeaconsAttachmentsDelete (..)
+    , newProximityBeaconBeaconsAttachmentsDelete
 
     -- ** proximitybeacon.beacons.attachments.list
-    ProximityBeaconBeaconsAttachmentsListResource,
-    ProximityBeaconBeaconsAttachmentsList (..),
-    newProximityBeaconBeaconsAttachmentsList,
+    , ProximityBeaconBeaconsAttachmentsListResource
+    , ProximityBeaconBeaconsAttachmentsList (..)
+    , newProximityBeaconBeaconsAttachmentsList
 
     -- ** proximitybeacon.beacons.deactivate
-    ProximityBeaconBeaconsDeactivateResource,
-    ProximityBeaconBeaconsDeactivate (..),
-    newProximityBeaconBeaconsDeactivate,
+    , ProximityBeaconBeaconsDeactivateResource
+    , ProximityBeaconBeaconsDeactivate (..)
+    , newProximityBeaconBeaconsDeactivate
 
     -- ** proximitybeacon.beacons.decommission
-    ProximityBeaconBeaconsDecommissionResource,
-    ProximityBeaconBeaconsDecommission (..),
-    newProximityBeaconBeaconsDecommission,
+    , ProximityBeaconBeaconsDecommissionResource
+    , ProximityBeaconBeaconsDecommission (..)
+    , newProximityBeaconBeaconsDecommission
 
     -- ** proximitybeacon.beacons.delete
-    ProximityBeaconBeaconsDeleteResource,
-    ProximityBeaconBeaconsDelete (..),
-    newProximityBeaconBeaconsDelete,
+    , ProximityBeaconBeaconsDeleteResource
+    , ProximityBeaconBeaconsDelete (..)
+    , newProximityBeaconBeaconsDelete
 
     -- ** proximitybeacon.beacons.diagnostics.list
-    ProximityBeaconBeaconsDiagnosticsListResource,
-    ProximityBeaconBeaconsDiagnosticsList (..),
-    newProximityBeaconBeaconsDiagnosticsList,
+    , ProximityBeaconBeaconsDiagnosticsListResource
+    , ProximityBeaconBeaconsDiagnosticsList (..)
+    , newProximityBeaconBeaconsDiagnosticsList
 
     -- ** proximitybeacon.beacons.get
-    ProximityBeaconBeaconsGetResource,
-    ProximityBeaconBeaconsGet (..),
-    newProximityBeaconBeaconsGet,
+    , ProximityBeaconBeaconsGetResource
+    , ProximityBeaconBeaconsGet (..)
+    , newProximityBeaconBeaconsGet
 
     -- ** proximitybeacon.beacons.list
-    ProximityBeaconBeaconsListResource,
-    ProximityBeaconBeaconsList (..),
-    newProximityBeaconBeaconsList,
+    , ProximityBeaconBeaconsListResource
+    , ProximityBeaconBeaconsList (..)
+    , newProximityBeaconBeaconsList
 
     -- ** proximitybeacon.beacons.register
-    ProximityBeaconBeaconsRegisterResource,
-    ProximityBeaconBeaconsRegister (..),
-    newProximityBeaconBeaconsRegister,
+    , ProximityBeaconBeaconsRegisterResource
+    , ProximityBeaconBeaconsRegister (..)
+    , newProximityBeaconBeaconsRegister
 
     -- ** proximitybeacon.beacons.update
-    ProximityBeaconBeaconsUpdateResource,
-    ProximityBeaconBeaconsUpdate (..),
-    newProximityBeaconBeaconsUpdate,
+    , ProximityBeaconBeaconsUpdateResource
+    , ProximityBeaconBeaconsUpdate (..)
+    , newProximityBeaconBeaconsUpdate
 
     -- ** proximitybeacon.getEidparams
-    ProximityBeaconGetEidparamsResource,
-    ProximityBeaconGetEidparams (..),
-    newProximityBeaconGetEidparams,
+    , ProximityBeaconGetEidparamsResource
+    , ProximityBeaconGetEidparams (..)
+    , newProximityBeaconGetEidparams
 
     -- ** proximitybeacon.namespaces.list
-    ProximityBeaconNamespacesListResource,
-    ProximityBeaconNamespacesList (..),
-    newProximityBeaconNamespacesList,
+    , ProximityBeaconNamespacesListResource
+    , ProximityBeaconNamespacesList (..)
+    , newProximityBeaconNamespacesList
 
     -- ** proximitybeacon.namespaces.update
-    ProximityBeaconNamespacesUpdateResource,
-    ProximityBeaconNamespacesUpdate (..),
-    newProximityBeaconNamespacesUpdate,
+    , ProximityBeaconNamespacesUpdateResource
+    , ProximityBeaconNamespacesUpdate (..)
+    , newProximityBeaconNamespacesUpdate
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AdvertisedId
-    AdvertisedId (..),
-    newAdvertisedId,
+    , AdvertisedId (..)
+    , newAdvertisedId
 
     -- ** AdvertisedId_Type
-    AdvertisedId_Type (..),
+    , AdvertisedId_Type (..)
 
     -- ** AttachmentInfo
-    AttachmentInfo (..),
-    newAttachmentInfo,
+    , AttachmentInfo (..)
+    , newAttachmentInfo
 
     -- ** Beacon
-    Beacon (..),
-    newBeacon,
+    , Beacon (..)
+    , newBeacon
 
     -- ** Beacon_ExpectedStability
-    Beacon_ExpectedStability (..),
+    , Beacon_ExpectedStability (..)
 
     -- ** Beacon_Properties
-    Beacon_Properties (..),
-    newBeacon_Properties,
+    , Beacon_Properties (..)
+    , newBeacon_Properties
 
     -- ** Beacon_Status
-    Beacon_Status (..),
+    , Beacon_Status (..)
 
     -- ** BeaconAttachment
-    BeaconAttachment (..),
-    newBeaconAttachment,
+    , BeaconAttachment (..)
+    , newBeaconAttachment
 
     -- ** BeaconInfo
-    BeaconInfo (..),
-    newBeaconInfo,
+    , BeaconInfo (..)
+    , newBeaconInfo
 
     -- ** Date
-    Date (..),
-    newDate,
+    , Date (..)
+    , newDate
 
     -- ** DeleteAttachmentsResponse
-    DeleteAttachmentsResponse (..),
-    newDeleteAttachmentsResponse,
+    , DeleteAttachmentsResponse (..)
+    , newDeleteAttachmentsResponse
 
     -- ** Diagnostics
-    Diagnostics (..),
-    newDiagnostics,
+    , Diagnostics (..)
+    , newDiagnostics
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** EphemeralIdRegistration
-    EphemeralIdRegistration (..),
-    newEphemeralIdRegistration,
+    , EphemeralIdRegistration (..)
+    , newEphemeralIdRegistration
 
     -- ** EphemeralIdRegistrationParams
-    EphemeralIdRegistrationParams (..),
-    newEphemeralIdRegistrationParams,
+    , EphemeralIdRegistrationParams (..)
+    , newEphemeralIdRegistrationParams
 
     -- ** GetInfoForObservedBeaconsRequest
-    GetInfoForObservedBeaconsRequest (..),
-    newGetInfoForObservedBeaconsRequest,
+    , GetInfoForObservedBeaconsRequest (..)
+    , newGetInfoForObservedBeaconsRequest
 
     -- ** GetInfoForObservedBeaconsResponse
-    GetInfoForObservedBeaconsResponse (..),
-    newGetInfoForObservedBeaconsResponse,
+    , GetInfoForObservedBeaconsResponse (..)
+    , newGetInfoForObservedBeaconsResponse
 
     -- ** IndoorLevel
-    IndoorLevel (..),
-    newIndoorLevel,
+    , IndoorLevel (..)
+    , newIndoorLevel
 
     -- ** LatLng
-    LatLng (..),
-    newLatLng,
+    , LatLng (..)
+    , newLatLng
 
     -- ** ListBeaconAttachmentsResponse
-    ListBeaconAttachmentsResponse (..),
-    newListBeaconAttachmentsResponse,
+    , ListBeaconAttachmentsResponse (..)
+    , newListBeaconAttachmentsResponse
 
     -- ** ListBeaconsResponse
-    ListBeaconsResponse (..),
-    newListBeaconsResponse,
+    , ListBeaconsResponse (..)
+    , newListBeaconsResponse
 
     -- ** ListDiagnosticsResponse
-    ListDiagnosticsResponse (..),
-    newListDiagnosticsResponse,
+    , ListDiagnosticsResponse (..)
+    , newListDiagnosticsResponse
 
     -- ** ListNamespacesResponse
-    ListNamespacesResponse (..),
-    newListNamespacesResponse,
+    , ListNamespacesResponse (..)
+    , newListNamespacesResponse
 
     -- ** Namespace
-    Namespace (..),
-    newNamespace,
+    , Namespace (..)
+    , newNamespace
 
     -- ** Namespace_ServingVisibility
-    Namespace_ServingVisibility (..),
+    , Namespace_ServingVisibility (..)
 
     -- ** Observation
-    Observation (..),
-    newObservation,
-  )
-where
+    , Observation (..)
+    , newObservation
+    ) where
 
 import Gogol.ProximityBeacon.Beaconinfo.Getforobserved
 import Gogol.ProximityBeacon.Beacons.Activate

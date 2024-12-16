@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-partners
-version:            1.0.0.0
-synopsis:           Google Partners SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-partners
+version:               1.0.0
+synopsis:              Google Partners SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  Searches certified companies and creates contact leads with them, and also audits the usage of clients.
+    Searches certified companies and creates contact leads with them, and also audits the usage of clients.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -30,48 +27,49 @@ source-repository head
   subdir:   gogol-partners
 
 flag field-selectors
-  description:
-    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-
-  default:     False
-  manual:      True
+  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+  default: False
+  manual: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -Werror
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (!flag(field-selectors) && impl(ghc >=9.2))
+  if !flag(field-selectors) && impl(ghc >= 9.2)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.Partners
-    Gogol.Partners.Analytics.List
-    Gogol.Partners.ClientMessages.Log
-    Gogol.Partners.Companies.Get
-    Gogol.Partners.Companies.Leads.Create
-    Gogol.Partners.Companies.List
-    Gogol.Partners.GetPartnersstatus
-    Gogol.Partners.Leads.List
-    Gogol.Partners.Offers.History.List
-    Gogol.Partners.Offers.List
-    Gogol.Partners.Types
-    Gogol.Partners.UpdateCompanies
-    Gogol.Partners.UpdateLeads
-    Gogol.Partners.UserEvents.Log
-    Gogol.Partners.Users.CreateCompanyRelation
-    Gogol.Partners.Users.DeleteCompanyRelation
-    Gogol.Partners.Users.Get
-    Gogol.Partners.Users.UpdateProfile
-    Gogol.Partners.UserStates.List
+      Gogol.Partners
+    , Gogol.Partners.Analytics.List
+    , Gogol.Partners.ClientMessages.Log
+    , Gogol.Partners.Companies.Get
+    , Gogol.Partners.Companies.Leads.Create
+    , Gogol.Partners.Companies.List
+    , Gogol.Partners.GetPartnersstatus
+    , Gogol.Partners.Leads.List
+    , Gogol.Partners.Offers.History.List
+    , Gogol.Partners.Offers.List
+    , Gogol.Partners.Types
+    , Gogol.Partners.UpdateCompanies
+    , Gogol.Partners.UpdateLeads
+    , Gogol.Partners.UserEvents.Log
+    , Gogol.Partners.UserStates.List
+    , Gogol.Partners.Users.CreateCompanyRelation
+    , Gogol.Partners.Users.DeleteCompanyRelation
+    , Gogol.Partners.Users.Get
+    , Gogol.Partners.Users.UpdateProfile
 
   other-modules:
-    Gogol.Partners.Internal.Product
-    Gogol.Partners.Internal.Sum
+      Gogol.Partners.Internal.Product
+    , Gogol.Partners.Internal.Sum
 
   build-depends:
-    , base        >=4.12   && <5
-    , gogol-core  ^>=1.0.0
+      gogol-core ^>= 1.0.0

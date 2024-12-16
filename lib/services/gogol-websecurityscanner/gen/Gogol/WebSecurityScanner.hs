@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,238 +31,238 @@
 --
 -- /See:/ <https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/ Web Security Scanner API Reference>
 module Gogol.WebSecurityScanner
-  ( -- * Configuration
-    webSecurityScannerService,
+    (
+    -- * Configuration
+      webSecurityScannerService
 
     -- * OAuth Scopes
-    CloudPlatform'FullControl,
+    , CloudPlatform'FullControl
 
     -- * Resources
 
     -- ** websecurityscanner.projects.scanConfigs.create
-    WebSecurityScannerProjectsScanConfigsCreateResource,
-    WebSecurityScannerProjectsScanConfigsCreate (..),
-    newWebSecurityScannerProjectsScanConfigsCreate,
+    , WebSecurityScannerProjectsScanConfigsCreateResource
+    , WebSecurityScannerProjectsScanConfigsCreate (..)
+    , newWebSecurityScannerProjectsScanConfigsCreate
 
     -- ** websecurityscanner.projects.scanConfigs.delete
-    WebSecurityScannerProjectsScanConfigsDeleteResource,
-    WebSecurityScannerProjectsScanConfigsDelete (..),
-    newWebSecurityScannerProjectsScanConfigsDelete,
+    , WebSecurityScannerProjectsScanConfigsDeleteResource
+    , WebSecurityScannerProjectsScanConfigsDelete (..)
+    , newWebSecurityScannerProjectsScanConfigsDelete
 
     -- ** websecurityscanner.projects.scanConfigs.get
-    WebSecurityScannerProjectsScanConfigsGetResource,
-    WebSecurityScannerProjectsScanConfigsGet (..),
-    newWebSecurityScannerProjectsScanConfigsGet,
+    , WebSecurityScannerProjectsScanConfigsGetResource
+    , WebSecurityScannerProjectsScanConfigsGet (..)
+    , newWebSecurityScannerProjectsScanConfigsGet
 
     -- ** websecurityscanner.projects.scanConfigs.list
-    WebSecurityScannerProjectsScanConfigsListResource,
-    WebSecurityScannerProjectsScanConfigsList (..),
-    newWebSecurityScannerProjectsScanConfigsList,
+    , WebSecurityScannerProjectsScanConfigsListResource
+    , WebSecurityScannerProjectsScanConfigsList (..)
+    , newWebSecurityScannerProjectsScanConfigsList
 
     -- ** websecurityscanner.projects.scanConfigs.patch
-    WebSecurityScannerProjectsScanConfigsPatchResource,
-    WebSecurityScannerProjectsScanConfigsPatch (..),
-    newWebSecurityScannerProjectsScanConfigsPatch,
+    , WebSecurityScannerProjectsScanConfigsPatchResource
+    , WebSecurityScannerProjectsScanConfigsPatch (..)
+    , newWebSecurityScannerProjectsScanConfigsPatch
 
     -- ** websecurityscanner.projects.scanConfigs.scanRuns.crawledUrls.list
-    WebSecurityScannerProjectsScanConfigsScanRunsCrawledUrlsListResource,
-    WebSecurityScannerProjectsScanConfigsScanRunsCrawledUrlsList (..),
-    newWebSecurityScannerProjectsScanConfigsScanRunsCrawledUrlsList,
+    , WebSecurityScannerProjectsScanConfigsScanRunsCrawledUrlsListResource
+    , WebSecurityScannerProjectsScanConfigsScanRunsCrawledUrlsList (..)
+    , newWebSecurityScannerProjectsScanConfigsScanRunsCrawledUrlsList
 
     -- ** websecurityscanner.projects.scanConfigs.scanRuns.findingTypeStats.list
-    WebSecurityScannerProjectsScanConfigsScanRunsFindingTypeStatsListResource,
-    WebSecurityScannerProjectsScanConfigsScanRunsFindingTypeStatsList (..),
-    newWebSecurityScannerProjectsScanConfigsScanRunsFindingTypeStatsList,
+    , WebSecurityScannerProjectsScanConfigsScanRunsFindingTypeStatsListResource
+    , WebSecurityScannerProjectsScanConfigsScanRunsFindingTypeStatsList (..)
+    , newWebSecurityScannerProjectsScanConfigsScanRunsFindingTypeStatsList
 
     -- ** websecurityscanner.projects.scanConfigs.scanRuns.findings.get
-    WebSecurityScannerProjectsScanConfigsScanRunsFindingsGetResource,
-    WebSecurityScannerProjectsScanConfigsScanRunsFindingsGet (..),
-    newWebSecurityScannerProjectsScanConfigsScanRunsFindingsGet,
+    , WebSecurityScannerProjectsScanConfigsScanRunsFindingsGetResource
+    , WebSecurityScannerProjectsScanConfigsScanRunsFindingsGet (..)
+    , newWebSecurityScannerProjectsScanConfigsScanRunsFindingsGet
 
     -- ** websecurityscanner.projects.scanConfigs.scanRuns.findings.list
-    WebSecurityScannerProjectsScanConfigsScanRunsFindingsListResource,
-    WebSecurityScannerProjectsScanConfigsScanRunsFindingsList (..),
-    newWebSecurityScannerProjectsScanConfigsScanRunsFindingsList,
+    , WebSecurityScannerProjectsScanConfigsScanRunsFindingsListResource
+    , WebSecurityScannerProjectsScanConfigsScanRunsFindingsList (..)
+    , newWebSecurityScannerProjectsScanConfigsScanRunsFindingsList
 
     -- ** websecurityscanner.projects.scanConfigs.scanRuns.get
-    WebSecurityScannerProjectsScanConfigsScanRunsGetResource,
-    WebSecurityScannerProjectsScanConfigsScanRunsGet (..),
-    newWebSecurityScannerProjectsScanConfigsScanRunsGet,
+    , WebSecurityScannerProjectsScanConfigsScanRunsGetResource
+    , WebSecurityScannerProjectsScanConfigsScanRunsGet (..)
+    , newWebSecurityScannerProjectsScanConfigsScanRunsGet
 
     -- ** websecurityscanner.projects.scanConfigs.scanRuns.list
-    WebSecurityScannerProjectsScanConfigsScanRunsListResource,
-    WebSecurityScannerProjectsScanConfigsScanRunsList (..),
-    newWebSecurityScannerProjectsScanConfigsScanRunsList,
+    , WebSecurityScannerProjectsScanConfigsScanRunsListResource
+    , WebSecurityScannerProjectsScanConfigsScanRunsList (..)
+    , newWebSecurityScannerProjectsScanConfigsScanRunsList
 
     -- ** websecurityscanner.projects.scanConfigs.scanRuns.stop
-    WebSecurityScannerProjectsScanConfigsScanRunsStopResource,
-    WebSecurityScannerProjectsScanConfigsScanRunsStop (..),
-    newWebSecurityScannerProjectsScanConfigsScanRunsStop,
+    , WebSecurityScannerProjectsScanConfigsScanRunsStopResource
+    , WebSecurityScannerProjectsScanConfigsScanRunsStop (..)
+    , newWebSecurityScannerProjectsScanConfigsScanRunsStop
 
     -- ** websecurityscanner.projects.scanConfigs.start
-    WebSecurityScannerProjectsScanConfigsStartResource,
-    WebSecurityScannerProjectsScanConfigsStart (..),
-    newWebSecurityScannerProjectsScanConfigsStart,
+    , WebSecurityScannerProjectsScanConfigsStartResource
+    , WebSecurityScannerProjectsScanConfigsStart (..)
+    , newWebSecurityScannerProjectsScanConfigsStart
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Authentication
-    Authentication (..),
-    newAuthentication,
+    , Authentication (..)
+    , newAuthentication
 
     -- ** CrawledUrl
-    CrawledUrl (..),
-    newCrawledUrl,
+    , CrawledUrl (..)
+    , newCrawledUrl
 
     -- ** CustomAccount
-    CustomAccount (..),
-    newCustomAccount,
+    , CustomAccount (..)
+    , newCustomAccount
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** Finding
-    Finding (..),
-    newFinding,
+    , Finding (..)
+    , newFinding
 
     -- ** Finding_Severity
-    Finding_Severity (..),
+    , Finding_Severity (..)
 
     -- ** FindingTypeStats
-    FindingTypeStats (..),
-    newFindingTypeStats,
+    , FindingTypeStats (..)
+    , newFindingTypeStats
 
     -- ** Form
-    Form (..),
-    newForm,
+    , Form (..)
+    , newForm
 
     -- ** GoogleAccount
-    GoogleAccount (..),
-    newGoogleAccount,
+    , GoogleAccount (..)
+    , newGoogleAccount
 
     -- ** Header
-    Header (..),
-    newHeader,
+    , Header (..)
+    , newHeader
 
     -- ** IapCredential
-    IapCredential (..),
-    newIapCredential,
+    , IapCredential (..)
+    , newIapCredential
 
     -- ** IapTestServiceAccountInfo
-    IapTestServiceAccountInfo (..),
-    newIapTestServiceAccountInfo,
+    , IapTestServiceAccountInfo (..)
+    , newIapTestServiceAccountInfo
 
     -- ** ListCrawledUrlsResponse
-    ListCrawledUrlsResponse (..),
-    newListCrawledUrlsResponse,
+    , ListCrawledUrlsResponse (..)
+    , newListCrawledUrlsResponse
 
     -- ** ListFindingTypeStatsResponse
-    ListFindingTypeStatsResponse (..),
-    newListFindingTypeStatsResponse,
+    , ListFindingTypeStatsResponse (..)
+    , newListFindingTypeStatsResponse
 
     -- ** ListFindingsResponse
-    ListFindingsResponse (..),
-    newListFindingsResponse,
+    , ListFindingsResponse (..)
+    , newListFindingsResponse
 
     -- ** ListScanConfigsResponse
-    ListScanConfigsResponse (..),
-    newListScanConfigsResponse,
+    , ListScanConfigsResponse (..)
+    , newListScanConfigsResponse
 
     -- ** ListScanRunsResponse
-    ListScanRunsResponse (..),
-    newListScanRunsResponse,
+    , ListScanRunsResponse (..)
+    , newListScanRunsResponse
 
     -- ** OutdatedLibrary
-    OutdatedLibrary (..),
-    newOutdatedLibrary,
+    , OutdatedLibrary (..)
+    , newOutdatedLibrary
 
     -- ** ScanConfig
-    ScanConfig (..),
-    newScanConfig,
+    , ScanConfig (..)
+    , newScanConfig
 
     -- ** ScanConfig_ExportToSecurityCommandCenter
-    ScanConfig_ExportToSecurityCommandCenter (..),
+    , ScanConfig_ExportToSecurityCommandCenter (..)
 
     -- ** ScanConfig_RiskLevel
-    ScanConfig_RiskLevel (..),
+    , ScanConfig_RiskLevel (..)
 
     -- ** ScanConfig_UserAgent
-    ScanConfig_UserAgent (..),
+    , ScanConfig_UserAgent (..)
 
     -- ** ScanConfigError
-    ScanConfigError (..),
-    newScanConfigError,
+    , ScanConfigError (..)
+    , newScanConfigError
 
     -- ** ScanConfigError_Code
-    ScanConfigError_Code (..),
+    , ScanConfigError_Code (..)
 
     -- ** ScanRun
-    ScanRun (..),
-    newScanRun,
+    , ScanRun (..)
+    , newScanRun
 
     -- ** ScanRun_ExecutionState
-    ScanRun_ExecutionState (..),
+    , ScanRun_ExecutionState (..)
 
     -- ** ScanRun_ResultState
-    ScanRun_ResultState (..),
+    , ScanRun_ResultState (..)
 
     -- ** ScanRunErrorTrace
-    ScanRunErrorTrace (..),
-    newScanRunErrorTrace,
+    , ScanRunErrorTrace (..)
+    , newScanRunErrorTrace
 
     -- ** ScanRunErrorTrace_Code
-    ScanRunErrorTrace_Code (..),
+    , ScanRunErrorTrace_Code (..)
 
     -- ** ScanRunWarningTrace
-    ScanRunWarningTrace (..),
-    newScanRunWarningTrace,
+    , ScanRunWarningTrace (..)
+    , newScanRunWarningTrace
 
     -- ** ScanRunWarningTrace_Code
-    ScanRunWarningTrace_Code (..),
+    , ScanRunWarningTrace_Code (..)
 
     -- ** Schedule
-    Schedule (..),
-    newSchedule,
+    , Schedule (..)
+    , newSchedule
 
     -- ** StartScanRunRequest
-    StartScanRunRequest (..),
-    newStartScanRunRequest,
+    , StartScanRunRequest (..)
+    , newStartScanRunRequest
 
     -- ** StopScanRunRequest
-    StopScanRunRequest (..),
-    newStopScanRunRequest,
+    , StopScanRunRequest (..)
+    , newStopScanRunRequest
 
     -- ** ViolatingResource
-    ViolatingResource (..),
-    newViolatingResource,
+    , ViolatingResource (..)
+    , newViolatingResource
 
     -- ** VulnerableHeaders
-    VulnerableHeaders (..),
-    newVulnerableHeaders,
+    , VulnerableHeaders (..)
+    , newVulnerableHeaders
 
     -- ** VulnerableParameters
-    VulnerableParameters (..),
-    newVulnerableParameters,
+    , VulnerableParameters (..)
+    , newVulnerableParameters
 
     -- ** Xss
-    Xss (..),
-    newXss,
+    , Xss (..)
+    , newXss
 
     -- ** Xss_AttackVector
-    Xss_AttackVector (..),
+    , Xss_AttackVector (..)
 
     -- ** Xxe
-    Xxe (..),
-    newXxe,
+    , Xxe (..)
+    , newXxe
 
     -- ** Xxe_PayloadLocation
-    Xxe_PayloadLocation (..),
-  )
-where
+    , Xxe_PayloadLocation (..)
+    ) where
 
 import Gogol.WebSecurityScanner.Projects.ScanConfigs.Create
 import Gogol.WebSecurityScanner.Projects.ScanConfigs.Delete

@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-monitoring
-version:            1.0.0.0
-synopsis:           Google Cloud Monitoring SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-monitoring
+version:               1.0.0
+synopsis:              Google Cloud Monitoring SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  Manages your Cloud Monitoring data and configurations.
+    Manages your Cloud Monitoring data and configurations.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -30,85 +27,86 @@ source-repository head
   subdir:   gogol-monitoring
 
 flag field-selectors
-  description:
-    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-
-  default:     False
-  manual:      True
+  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+  default: False
+  manual: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -Werror
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (!flag(field-selectors) && impl(ghc >=9.2))
+  if !flag(field-selectors) && impl(ghc >= 9.2)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.Monitoring
-    Gogol.Monitoring.Folders.TimeSeries.List
-    Gogol.Monitoring.Organizations.TimeSeries.List
-    Gogol.Monitoring.Projects.AlertPolicies.Create
-    Gogol.Monitoring.Projects.AlertPolicies.Delete
-    Gogol.Monitoring.Projects.AlertPolicies.Get
-    Gogol.Monitoring.Projects.AlertPolicies.List
-    Gogol.Monitoring.Projects.AlertPolicies.Patch
-    Gogol.Monitoring.Projects.CollectdTimeSeries.Create
-    Gogol.Monitoring.Projects.Groups.Create
-    Gogol.Monitoring.Projects.Groups.Delete
-    Gogol.Monitoring.Projects.Groups.Get
-    Gogol.Monitoring.Projects.Groups.List
-    Gogol.Monitoring.Projects.Groups.Members.List
-    Gogol.Monitoring.Projects.Groups.Update
-    Gogol.Monitoring.Projects.MetricDescriptors.Create
-    Gogol.Monitoring.Projects.MetricDescriptors.Delete
-    Gogol.Monitoring.Projects.MetricDescriptors.Get
-    Gogol.Monitoring.Projects.MetricDescriptors.List
-    Gogol.Monitoring.Projects.MonitoredResourceDescriptors.Get
-    Gogol.Monitoring.Projects.MonitoredResourceDescriptors.List
-    Gogol.Monitoring.Projects.NotificationChannelDescriptors.Get
-    Gogol.Monitoring.Projects.NotificationChannelDescriptors.List
-    Gogol.Monitoring.Projects.NotificationChannels.Create
-    Gogol.Monitoring.Projects.NotificationChannels.Delete
-    Gogol.Monitoring.Projects.NotificationChannels.Get
-    Gogol.Monitoring.Projects.NotificationChannels.GetVerificationCode
-    Gogol.Monitoring.Projects.NotificationChannels.List
-    Gogol.Monitoring.Projects.NotificationChannels.Patch
-    Gogol.Monitoring.Projects.NotificationChannels.SendVerificationCode
-    Gogol.Monitoring.Projects.NotificationChannels.Verify
-    Gogol.Monitoring.Projects.Snoozes.Create
-    Gogol.Monitoring.Projects.Snoozes.Get
-    Gogol.Monitoring.Projects.Snoozes.List
-    Gogol.Monitoring.Projects.Snoozes.Patch
-    Gogol.Monitoring.Projects.TimeSeries.Create
-    Gogol.Monitoring.Projects.TimeSeries.CreateService
-    Gogol.Monitoring.Projects.TimeSeries.List
-    Gogol.Monitoring.Projects.TimeSeries.Query
-    Gogol.Monitoring.Projects.UptimeCheckConfigs.Create
-    Gogol.Monitoring.Projects.UptimeCheckConfigs.Delete
-    Gogol.Monitoring.Projects.UptimeCheckConfigs.Get
-    Gogol.Monitoring.Projects.UptimeCheckConfigs.List
-    Gogol.Monitoring.Projects.UptimeCheckConfigs.Patch
-    Gogol.Monitoring.Services.Create
-    Gogol.Monitoring.Services.Delete
-    Gogol.Monitoring.Services.Get
-    Gogol.Monitoring.Services.List
-    Gogol.Monitoring.Services.Patch
-    Gogol.Monitoring.Services.ServiceLevelObjectives.Create
-    Gogol.Monitoring.Services.ServiceLevelObjectives.Delete
-    Gogol.Monitoring.Services.ServiceLevelObjectives.Get
-    Gogol.Monitoring.Services.ServiceLevelObjectives.List
-    Gogol.Monitoring.Services.ServiceLevelObjectives.Patch
-    Gogol.Monitoring.Types
-    Gogol.Monitoring.UptimeCheckIps.List
+      Gogol.Monitoring
+    , Gogol.Monitoring.Folders.TimeSeries.List
+    , Gogol.Monitoring.Organizations.TimeSeries.List
+    , Gogol.Monitoring.Projects.AlertPolicies.Create
+    , Gogol.Monitoring.Projects.AlertPolicies.Delete
+    , Gogol.Monitoring.Projects.AlertPolicies.Get
+    , Gogol.Monitoring.Projects.AlertPolicies.List
+    , Gogol.Monitoring.Projects.AlertPolicies.Patch
+    , Gogol.Monitoring.Projects.CollectdTimeSeries.Create
+    , Gogol.Monitoring.Projects.Groups.Create
+    , Gogol.Monitoring.Projects.Groups.Delete
+    , Gogol.Monitoring.Projects.Groups.Get
+    , Gogol.Monitoring.Projects.Groups.List
+    , Gogol.Monitoring.Projects.Groups.Members.List
+    , Gogol.Monitoring.Projects.Groups.Update
+    , Gogol.Monitoring.Projects.MetricDescriptors.Create
+    , Gogol.Monitoring.Projects.MetricDescriptors.Delete
+    , Gogol.Monitoring.Projects.MetricDescriptors.Get
+    , Gogol.Monitoring.Projects.MetricDescriptors.List
+    , Gogol.Monitoring.Projects.MonitoredResourceDescriptors.Get
+    , Gogol.Monitoring.Projects.MonitoredResourceDescriptors.List
+    , Gogol.Monitoring.Projects.NotificationChannelDescriptors.Get
+    , Gogol.Monitoring.Projects.NotificationChannelDescriptors.List
+    , Gogol.Monitoring.Projects.NotificationChannels.Create
+    , Gogol.Monitoring.Projects.NotificationChannels.Delete
+    , Gogol.Monitoring.Projects.NotificationChannels.Get
+    , Gogol.Monitoring.Projects.NotificationChannels.GetVerificationCode
+    , Gogol.Monitoring.Projects.NotificationChannels.List
+    , Gogol.Monitoring.Projects.NotificationChannels.Patch
+    , Gogol.Monitoring.Projects.NotificationChannels.SendVerificationCode
+    , Gogol.Monitoring.Projects.NotificationChannels.Verify
+    , Gogol.Monitoring.Projects.Snoozes.Create
+    , Gogol.Monitoring.Projects.Snoozes.Get
+    , Gogol.Monitoring.Projects.Snoozes.List
+    , Gogol.Monitoring.Projects.Snoozes.Patch
+    , Gogol.Monitoring.Projects.TimeSeries.Create
+    , Gogol.Monitoring.Projects.TimeSeries.CreateService
+    , Gogol.Monitoring.Projects.TimeSeries.List
+    , Gogol.Monitoring.Projects.TimeSeries.Query
+    , Gogol.Monitoring.Projects.UptimeCheckConfigs.Create
+    , Gogol.Monitoring.Projects.UptimeCheckConfigs.Delete
+    , Gogol.Monitoring.Projects.UptimeCheckConfigs.Get
+    , Gogol.Monitoring.Projects.UptimeCheckConfigs.List
+    , Gogol.Monitoring.Projects.UptimeCheckConfigs.Patch
+    , Gogol.Monitoring.Services.Create
+    , Gogol.Monitoring.Services.Delete
+    , Gogol.Monitoring.Services.Get
+    , Gogol.Monitoring.Services.List
+    , Gogol.Monitoring.Services.Patch
+    , Gogol.Monitoring.Services.ServiceLevelObjectives.Create
+    , Gogol.Monitoring.Services.ServiceLevelObjectives.Delete
+    , Gogol.Monitoring.Services.ServiceLevelObjectives.Get
+    , Gogol.Monitoring.Services.ServiceLevelObjectives.List
+    , Gogol.Monitoring.Services.ServiceLevelObjectives.Patch
+    , Gogol.Monitoring.Types
+    , Gogol.Monitoring.UptimeCheckIps.List
 
   other-modules:
-    Gogol.Monitoring.Internal.Product
-    Gogol.Monitoring.Internal.Sum
+      Gogol.Monitoring.Internal.Product
+    , Gogol.Monitoring.Internal.Sum
 
   build-depends:
-    , base        >=4.12   && <5
-    , gogol-core  ^>=1.0.0
+      gogol-core ^>= 1.0.0

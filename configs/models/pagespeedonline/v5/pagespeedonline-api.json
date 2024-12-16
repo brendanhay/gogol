@@ -131,12 +131,20 @@
                 "PWA",
                 "SEO"
               ],
+              "enumDeprecated": [
+                false,
+                false,
+                false,
+                false,
+                true,
+                false
+              ],
               "enumDescriptions": [
                 "Default UNDEFINED category.",
                 "Accessibility (a11y), category pertaining to a website's capacity to be accessible to all users.",
                 "Best Practices, category pertaining to a website's conformance to web best practice.",
                 "Performance, category pertaining to a website's performance.",
-                "Progressive Web App (PWA), category pertaining to a website's ability to be run as a PWA.",
+                "Progressive Web App (PWA), category pertaining to a website's ability to be run as a PWA. This is deprecated in Lighthouse's 12.0 release.",
                 "Search Engine Optimization (SEO), category pertaining to a website's ability to be indexed by search engines."
               ],
               "location": "query",
@@ -193,7 +201,7 @@
       }
     }
   },
-  "revision": "20230316",
+  "revision": "20240829",
   "rootUrl": "https://pagespeedonline.googleapis.com/",
   "schemas": {
     "AuditRefs": {
@@ -267,7 +275,8 @@
         },
         "pwa": {
           "$ref": "LighthouseCategoryV5",
-          "description": "The Progressive-Web-App (PWA) category, containing all pwa related audits."
+          "deprecated": true,
+          "description": "The Progressive-Web-App (PWA) category, containing all pwa related audits. This is deprecated in Lighthouse's 12.0 release."
         },
         "seo": {
           "$ref": "LighthouseCategoryV5",
@@ -300,6 +309,7 @@
           "type": "string"
         },
         "emulatedFormFactor": {
+          "deprecated": true,
           "description": "The form factor the emulation should use. This field is deprecated, form_factor should be used instead.",
           "type": "string"
         },
@@ -421,6 +431,10 @@
         "id": {
           "description": "The audit's id.",
           "type": "string"
+        },
+        "metricSavings": {
+          "$ref": "MetricSavings",
+          "description": "The metric savings of the audit."
         },
         "numericUnit": {
           "description": "The unit of the numeric_value field. Used to format the numeric value for display.",
@@ -578,6 +592,38 @@
         "userAgent": {
           "description": "The user agent that was used to run this LHR.",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MetricSavings": {
+      "description": "The metric savings of the audit.",
+      "id": "MetricSavings",
+      "properties": {
+        "CLS": {
+          "description": "Optional. Optional numeric value representing the audit's savings for the CLS metric.",
+          "format": "double",
+          "type": "number"
+        },
+        "FCP": {
+          "description": "Optional. Optional numeric value representing the audit's savings for the FCP metric.",
+          "format": "double",
+          "type": "number"
+        },
+        "INP": {
+          "description": "Optional. Optional numeric value representing the audit's savings for the INP metric.",
+          "format": "double",
+          "type": "number"
+        },
+        "LCP": {
+          "description": "Optional. Optional numeric value representing the audit's savings for the LCP metric.",
+          "format": "double",
+          "type": "number"
+        },
+        "TBT": {
+          "description": "Optional. Optional numeric value representing the audit's savings for the TBT metric.",
+          "format": "double",
+          "type": "number"
         }
       },
       "type": "object"

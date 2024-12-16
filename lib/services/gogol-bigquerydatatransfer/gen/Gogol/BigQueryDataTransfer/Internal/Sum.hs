@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +26,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.BigQueryDataTransfer.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * DataSource_AuthorizationType
     DataSource_AuthorizationType
-      ( DataSource_AuthorizationType_AUTHORIZATIONTYPEUNSPECIFIED,
+      (
+        DataSource_AuthorizationType_AUTHORIZATIONTYPEUNSPECIFIED,
         DataSource_AuthorizationType_AUTHORIZATIONCODE,
         DataSource_AuthorizationType_GOOGLEPLUSAUTHORIZATIONCODE,
         DataSource_AuthorizationType_FIRSTPARTYOAUTH,
@@ -44,7 +50,8 @@ module Gogol.BigQueryDataTransfer.Internal.Sum
 
     -- * DataSource_DataRefreshType
     DataSource_DataRefreshType
-      ( DataSource_DataRefreshType_DATAREFRESHTYPEUNSPECIFIED,
+      (
+        DataSource_DataRefreshType_DATAREFRESHTYPEUNSPECIFIED,
         DataSource_DataRefreshType_SLIDINGWINDOW,
         DataSource_DataRefreshType_CUSTOMSLIDINGWINDOW,
         ..
@@ -52,7 +59,8 @@ module Gogol.BigQueryDataTransfer.Internal.Sum
 
     -- * DataSource_TransferType
     DataSource_TransferType
-      ( DataSource_TransferType_TRANSFERTYPEUNSPECIFIED,
+      (
+        DataSource_TransferType_TRANSFERTYPEUNSPECIFIED,
         DataSource_TransferType_Batch,
         DataSource_TransferType_Streaming,
         ..
@@ -60,19 +68,22 @@ module Gogol.BigQueryDataTransfer.Internal.Sum
 
     -- * DataSourceParameter_Type
     DataSourceParameter_Type
-      ( DataSourceParameter_Type_TYPEUNSPECIFIED,
+      (
+        DataSourceParameter_Type_TYPEUNSPECIFIED,
         DataSourceParameter_Type_String,
         DataSourceParameter_Type_Integer,
         DataSourceParameter_Type_Double,
         DataSourceParameter_Type_Boolean,
         DataSourceParameter_Type_Record,
         DataSourceParameter_Type_PLUSPAGE,
+        DataSourceParameter_Type_List,
         ..
       ),
 
     -- * TransferConfig_State
     TransferConfig_State
-      ( TransferConfig_State_TRANSFERSTATEUNSPECIFIED,
+      (
+        TransferConfig_State_TRANSFERSTATEUNSPECIFIED,
         TransferConfig_State_Pending,
         TransferConfig_State_Running,
         TransferConfig_State_Succeeded,
@@ -83,7 +94,8 @@ module Gogol.BigQueryDataTransfer.Internal.Sum
 
     -- * TransferMessage_Severity
     TransferMessage_Severity
-      ( TransferMessage_Severity_MESSAGESEVERITYUNSPECIFIED,
+      (
+        TransferMessage_Severity_MESSAGESEVERITYUNSPECIFIED,
         TransferMessage_Severity_Info,
         TransferMessage_Severity_Warning,
         TransferMessage_Severity_Error',
@@ -92,7 +104,8 @@ module Gogol.BigQueryDataTransfer.Internal.Sum
 
     -- * TransferRun_State
     TransferRun_State
-      ( TransferRun_State_TRANSFERSTATEUNSPECIFIED,
+      (
+        TransferRun_State_TRANSFERSTATEUNSPECIFIED,
         TransferRun_State_Pending,
         TransferRun_State_Running,
         TransferRun_State_Succeeded,
@@ -103,14 +116,16 @@ module Gogol.BigQueryDataTransfer.Internal.Sum
 
     -- * ProjectsLocationsTransferConfigsRunsListRunAttempt
     ProjectsLocationsTransferConfigsRunsListRunAttempt
-      ( ProjectsLocationsTransferConfigsRunsListRunAttempt_RUNATTEMPTUNSPECIFIED,
+      (
+        ProjectsLocationsTransferConfigsRunsListRunAttempt_RUNATTEMPTUNSPECIFIED,
         ProjectsLocationsTransferConfigsRunsListRunAttempt_Latest,
         ..
       ),
 
     -- * ProjectsLocationsTransferConfigsRunsListStates
     ProjectsLocationsTransferConfigsRunsListStates
-      ( ProjectsLocationsTransferConfigsRunsListStates_TRANSFERSTATEUNSPECIFIED,
+      (
+        ProjectsLocationsTransferConfigsRunsListStates_TRANSFERSTATEUNSPECIFIED,
         ProjectsLocationsTransferConfigsRunsListStates_Pending,
         ProjectsLocationsTransferConfigsRunsListStates_Running,
         ProjectsLocationsTransferConfigsRunsListStates_Succeeded,
@@ -121,7 +136,8 @@ module Gogol.BigQueryDataTransfer.Internal.Sum
 
     -- * ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes
     ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes
-      ( ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes_MESSAGESEVERITYUNSPECIFIED,
+      (
+        ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes_MESSAGESEVERITYUNSPECIFIED,
         ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes_Info,
         ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes_Warning,
         ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes_Error',
@@ -130,14 +146,16 @@ module Gogol.BigQueryDataTransfer.Internal.Sum
 
     -- * ProjectsTransferConfigsRunsListRunAttempt
     ProjectsTransferConfigsRunsListRunAttempt
-      ( ProjectsTransferConfigsRunsListRunAttempt_RUNATTEMPTUNSPECIFIED,
+      (
+        ProjectsTransferConfigsRunsListRunAttempt_RUNATTEMPTUNSPECIFIED,
         ProjectsTransferConfigsRunsListRunAttempt_Latest,
         ..
       ),
 
     -- * ProjectsTransferConfigsRunsListStates
     ProjectsTransferConfigsRunsListStates
-      ( ProjectsTransferConfigsRunsListStates_TRANSFERSTATEUNSPECIFIED,
+      (
+        ProjectsTransferConfigsRunsListStates_TRANSFERSTATEUNSPECIFIED,
         ProjectsTransferConfigsRunsListStates_Pending,
         ProjectsTransferConfigsRunsListStates_Running,
         ProjectsTransferConfigsRunsListStates_Succeeded,
@@ -148,29 +166,29 @@ module Gogol.BigQueryDataTransfer.Internal.Sum
 
     -- * ProjectsTransferConfigsRunsTransferLogsListMessageTypes
     ProjectsTransferConfigsRunsTransferLogsListMessageTypes
-      ( ProjectsTransferConfigsRunsTransferLogsListMessageTypes_MESSAGESEVERITYUNSPECIFIED,
+      (
+        ProjectsTransferConfigsRunsTransferLogsListMessageTypes_MESSAGESEVERITYUNSPECIFIED,
         ProjectsTransferConfigsRunsTransferLogsListMessageTypes_Info,
         ProjectsTransferConfigsRunsTransferLogsListMessageTypes_Warning,
         ProjectsTransferConfigsRunsTransferLogsListMessageTypes_Error',
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -183,21 +201,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | Indicates the type of authorization.
-newtype DataSource_AuthorizationType = DataSource_AuthorizationType {fromDataSource_AuthorizationType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DataSource_AuthorizationType = DataSource_AuthorizationType { fromDataSource_AuthorizationType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Type unspecified.
 pattern DataSource_AuthorizationType_AUTHORIZATIONTYPEUNSPECIFIED :: DataSource_AuthorizationType
@@ -220,21 +237,20 @@ pattern DataSource_AuthorizationType_FIRSTPARTYOAUTH = DataSource_AuthorizationT
   DataSource_AuthorizationType_AUTHORIZATIONCODE,
   DataSource_AuthorizationType_GOOGLEPLUSAUTHORIZATIONCODE,
   DataSource_AuthorizationType_FIRSTPARTYOAUTH,
-  DataSource_AuthorizationType
-  #-}
+  DataSource_AuthorizationType #-}
 
 -- | Specifies whether the data source supports automatic data refresh for the past few days, and how it\'s supported. For some data sources, data might not be complete until a few days later, so it\'s useful to refresh data automatically.
-newtype DataSource_DataRefreshType = DataSource_DataRefreshType {fromDataSource_DataRefreshType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DataSource_DataRefreshType = DataSource_DataRefreshType { fromDataSource_DataRefreshType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The data source won\'t support data auto refresh, which is default value.
 pattern DataSource_DataRefreshType_DATAREFRESHTYPEUNSPECIFIED :: DataSource_DataRefreshType
@@ -252,21 +268,20 @@ pattern DataSource_DataRefreshType_CUSTOMSLIDINGWINDOW = DataSource_DataRefreshT
   DataSource_DataRefreshType_DATAREFRESHTYPEUNSPECIFIED,
   DataSource_DataRefreshType_SLIDINGWINDOW,
   DataSource_DataRefreshType_CUSTOMSLIDINGWINDOW,
-  DataSource_DataRefreshType
-  #-}
+  DataSource_DataRefreshType #-}
 
 -- | Deprecated. This field has no effect.
-newtype DataSource_TransferType = DataSource_TransferType {fromDataSource_TransferType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DataSource_TransferType = DataSource_TransferType { fromDataSource_TransferType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Invalid or Unknown transfer type placeholder.
 pattern DataSource_TransferType_TRANSFERTYPEUNSPECIFIED :: DataSource_TransferType
@@ -284,21 +299,20 @@ pattern DataSource_TransferType_Streaming = DataSource_TransferType "STREAMING"
   DataSource_TransferType_TRANSFERTYPEUNSPECIFIED,
   DataSource_TransferType_Batch,
   DataSource_TransferType_Streaming,
-  DataSource_TransferType
-  #-}
+  DataSource_TransferType #-}
 
 -- | Parameter type.
-newtype DataSourceParameter_Type = DataSourceParameter_Type {fromDataSourceParameter_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DataSourceParameter_Type = DataSourceParameter_Type { fromDataSourceParameter_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Type unspecified.
 pattern DataSourceParameter_Type_TYPEUNSPECIFIED :: DataSourceParameter_Type
@@ -328,6 +342,10 @@ pattern DataSourceParameter_Type_Record = DataSourceParameter_Type "RECORD"
 pattern DataSourceParameter_Type_PLUSPAGE :: DataSourceParameter_Type
 pattern DataSourceParameter_Type_PLUSPAGE = DataSourceParameter_Type "PLUS_PAGE"
 
+-- | List of strings parameter.
+pattern DataSourceParameter_Type_List :: DataSourceParameter_Type
+pattern DataSourceParameter_Type_List = DataSourceParameter_Type "LIST"
+
 {-# COMPLETE
   DataSourceParameter_Type_TYPEUNSPECIFIED,
   DataSourceParameter_Type_String,
@@ -336,21 +354,21 @@ pattern DataSourceParameter_Type_PLUSPAGE = DataSourceParameter_Type "PLUS_PAGE"
   DataSourceParameter_Type_Boolean,
   DataSourceParameter_Type_Record,
   DataSourceParameter_Type_PLUSPAGE,
-  DataSourceParameter_Type
-  #-}
+  DataSourceParameter_Type_List,
+  DataSourceParameter_Type #-}
 
 -- | Output only. State of the most recently updated transfer run.
-newtype TransferConfig_State = TransferConfig_State {fromTransferConfig_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TransferConfig_State = TransferConfig_State { fromTransferConfig_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | State placeholder (0).
 pattern TransferConfig_State_TRANSFERSTATEUNSPECIFIED :: TransferConfig_State
@@ -383,21 +401,20 @@ pattern TransferConfig_State_Cancelled = TransferConfig_State "CANCELLED"
   TransferConfig_State_Succeeded,
   TransferConfig_State_Failed,
   TransferConfig_State_Cancelled,
-  TransferConfig_State
-  #-}
+  TransferConfig_State #-}
 
 -- | Message severity.
-newtype TransferMessage_Severity = TransferMessage_Severity {fromTransferMessage_Severity :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TransferMessage_Severity = TransferMessage_Severity { fromTransferMessage_Severity :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No severity specified.
 pattern TransferMessage_Severity_MESSAGESEVERITYUNSPECIFIED :: TransferMessage_Severity
@@ -420,21 +437,20 @@ pattern TransferMessage_Severity_Error' = TransferMessage_Severity "ERROR"
   TransferMessage_Severity_Info,
   TransferMessage_Severity_Warning,
   TransferMessage_Severity_Error',
-  TransferMessage_Severity
-  #-}
+  TransferMessage_Severity #-}
 
 -- | Data transfer run state. Ignored for input requests.
-newtype TransferRun_State = TransferRun_State {fromTransferRun_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype TransferRun_State = TransferRun_State { fromTransferRun_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | State placeholder (0).
 pattern TransferRun_State_TRANSFERSTATEUNSPECIFIED :: TransferRun_State
@@ -467,21 +483,20 @@ pattern TransferRun_State_Cancelled = TransferRun_State "CANCELLED"
   TransferRun_State_Succeeded,
   TransferRun_State_Failed,
   TransferRun_State_Cancelled,
-  TransferRun_State
-  #-}
+  TransferRun_State #-}
 
 -- | Indicates how run attempts are to be pulled.
-newtype ProjectsLocationsTransferConfigsRunsListRunAttempt = ProjectsLocationsTransferConfigsRunsListRunAttempt {fromProjectsLocationsTransferConfigsRunsListRunAttempt :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsLocationsTransferConfigsRunsListRunAttempt = ProjectsLocationsTransferConfigsRunsListRunAttempt { fromProjectsLocationsTransferConfigsRunsListRunAttempt :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | All runs should be returned.
 pattern ProjectsLocationsTransferConfigsRunsListRunAttempt_RUNATTEMPTUNSPECIFIED :: ProjectsLocationsTransferConfigsRunsListRunAttempt
@@ -494,21 +509,20 @@ pattern ProjectsLocationsTransferConfigsRunsListRunAttempt_Latest = ProjectsLoca
 {-# COMPLETE
   ProjectsLocationsTransferConfigsRunsListRunAttempt_RUNATTEMPTUNSPECIFIED,
   ProjectsLocationsTransferConfigsRunsListRunAttempt_Latest,
-  ProjectsLocationsTransferConfigsRunsListRunAttempt
-  #-}
+  ProjectsLocationsTransferConfigsRunsListRunAttempt #-}
 
 -- | When specified, only transfer runs with requested states are returned.
-newtype ProjectsLocationsTransferConfigsRunsListStates = ProjectsLocationsTransferConfigsRunsListStates {fromProjectsLocationsTransferConfigsRunsListStates :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsLocationsTransferConfigsRunsListStates = ProjectsLocationsTransferConfigsRunsListStates { fromProjectsLocationsTransferConfigsRunsListStates :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | State placeholder (0).
 pattern ProjectsLocationsTransferConfigsRunsListStates_TRANSFERSTATEUNSPECIFIED :: ProjectsLocationsTransferConfigsRunsListStates
@@ -541,21 +555,20 @@ pattern ProjectsLocationsTransferConfigsRunsListStates_Cancelled = ProjectsLocat
   ProjectsLocationsTransferConfigsRunsListStates_Succeeded,
   ProjectsLocationsTransferConfigsRunsListStates_Failed,
   ProjectsLocationsTransferConfigsRunsListStates_Cancelled,
-  ProjectsLocationsTransferConfigsRunsListStates
-  #-}
+  ProjectsLocationsTransferConfigsRunsListStates #-}
 
 -- | Message types to return. If not populated - INFO, WARNING and ERROR messages are returned.
-newtype ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes = ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes {fromProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes = ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes { fromProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No severity specified.
 pattern ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes_MESSAGESEVERITYUNSPECIFIED :: ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes
@@ -578,21 +591,20 @@ pattern ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes_Error' 
   ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes_Info,
   ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes_Warning,
   ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes_Error',
-  ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes
-  #-}
+  ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes #-}
 
 -- | Indicates how run attempts are to be pulled.
-newtype ProjectsTransferConfigsRunsListRunAttempt = ProjectsTransferConfigsRunsListRunAttempt {fromProjectsTransferConfigsRunsListRunAttempt :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsTransferConfigsRunsListRunAttempt = ProjectsTransferConfigsRunsListRunAttempt { fromProjectsTransferConfigsRunsListRunAttempt :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | All runs should be returned.
 pattern ProjectsTransferConfigsRunsListRunAttempt_RUNATTEMPTUNSPECIFIED :: ProjectsTransferConfigsRunsListRunAttempt
@@ -605,21 +617,20 @@ pattern ProjectsTransferConfigsRunsListRunAttempt_Latest = ProjectsTransferConfi
 {-# COMPLETE
   ProjectsTransferConfigsRunsListRunAttempt_RUNATTEMPTUNSPECIFIED,
   ProjectsTransferConfigsRunsListRunAttempt_Latest,
-  ProjectsTransferConfigsRunsListRunAttempt
-  #-}
+  ProjectsTransferConfigsRunsListRunAttempt #-}
 
 -- | When specified, only transfer runs with requested states are returned.
-newtype ProjectsTransferConfigsRunsListStates = ProjectsTransferConfigsRunsListStates {fromProjectsTransferConfigsRunsListStates :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsTransferConfigsRunsListStates = ProjectsTransferConfigsRunsListStates { fromProjectsTransferConfigsRunsListStates :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | State placeholder (0).
 pattern ProjectsTransferConfigsRunsListStates_TRANSFERSTATEUNSPECIFIED :: ProjectsTransferConfigsRunsListStates
@@ -652,21 +663,20 @@ pattern ProjectsTransferConfigsRunsListStates_Cancelled = ProjectsTransferConfig
   ProjectsTransferConfigsRunsListStates_Succeeded,
   ProjectsTransferConfigsRunsListStates_Failed,
   ProjectsTransferConfigsRunsListStates_Cancelled,
-  ProjectsTransferConfigsRunsListStates
-  #-}
+  ProjectsTransferConfigsRunsListStates #-}
 
 -- | Message types to return. If not populated - INFO, WARNING and ERROR messages are returned.
-newtype ProjectsTransferConfigsRunsTransferLogsListMessageTypes = ProjectsTransferConfigsRunsTransferLogsListMessageTypes {fromProjectsTransferConfigsRunsTransferLogsListMessageTypes :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ProjectsTransferConfigsRunsTransferLogsListMessageTypes = ProjectsTransferConfigsRunsTransferLogsListMessageTypes { fromProjectsTransferConfigsRunsTransferLogsListMessageTypes :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No severity specified.
 pattern ProjectsTransferConfigsRunsTransferLogsListMessageTypes_MESSAGESEVERITYUNSPECIFIED :: ProjectsTransferConfigsRunsTransferLogsListMessageTypes
@@ -689,5 +699,4 @@ pattern ProjectsTransferConfigsRunsTransferLogsListMessageTypes_Error' = Project
   ProjectsTransferConfigsRunsTransferLogsListMessageTypes_Info,
   ProjectsTransferConfigsRunsTransferLogsListMessageTypes_Warning,
   ProjectsTransferConfigsRunsTransferLogsListMessageTypes_Error',
-  ProjectsTransferConfigsRunsTransferLogsListMessageTypes
-  #-}
+  ProjectsTransferConfigsRunsTransferLogsListMessageTypes #-}

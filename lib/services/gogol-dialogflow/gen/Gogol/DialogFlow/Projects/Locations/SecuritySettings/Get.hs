@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,95 +31,88 @@
 --
 -- /See:/ <https://cloud.google.com/dialogflow/ Dialogflow API Reference> for @dialogflow.projects.locations.securitySettings.get@.
 module Gogol.DialogFlow.Projects.Locations.SecuritySettings.Get
-  ( -- * Resource
-    DialogFlowProjectsLocationsSecuritySettingsGetResource,
+    (
+    -- * Resource
+      DialogFlowProjectsLocationsSecuritySettingsGetResource
 
     -- ** Constructing a Request
-    DialogFlowProjectsLocationsSecuritySettingsGet (..),
-    newDialogFlowProjectsLocationsSecuritySettingsGet,
-  )
-where
+    , DialogFlowProjectsLocationsSecuritySettingsGet (..)
+    , newDialogFlowProjectsLocationsSecuritySettingsGet
+    ) where
 
-import Gogol.DialogFlow.Types
 import qualified Gogol.Prelude as Core
+import Gogol.DialogFlow.Types
 
 -- | A resource alias for @dialogflow.projects.locations.securitySettings.get@ method which the
 -- 'DialogFlowProjectsLocationsSecuritySettingsGet' request conforms to.
-type DialogFlowProjectsLocationsSecuritySettingsGetResource =
-  "v3"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GoogleCloudDialogflowCxV3SecuritySettings
+type DialogFlowProjectsLocationsSecuritySettingsGetResource
+     =
+     "v3" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Get '[Core.JSON]
+                       GoogleCloudDialogflowCxV3SecuritySettings
 
 -- | Retrieves the specified SecuritySettings. The returned settings may be stale by up to 1 minute.
 --
 -- /See:/ 'newDialogFlowProjectsLocationsSecuritySettingsGet' smart constructor.
 data DialogFlowProjectsLocationsSecuritySettingsGet = DialogFlowProjectsLocationsSecuritySettingsGet
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. Resource name of the settings. Format: @projects\/\/locations\/\/securitySettings\/@.
-    name :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. Resource name of the settings. Format: @projects\/\/locations\/\/securitySettings\/@.
+    , name :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DialogFlowProjectsLocationsSecuritySettingsGet' with the minimum fields required to make a request.
-newDialogFlowProjectsLocationsSecuritySettingsGet ::
-  -- |  Required. Resource name of the settings. Format: @projects\/\/locations\/\/securitySettings\/@. See 'name'.
-  Core.Text ->
-  DialogFlowProjectsLocationsSecuritySettingsGet
+newDialogFlowProjectsLocationsSecuritySettingsGet 
+    ::  Core.Text
+       -- ^  Required. Resource name of the settings. Format: @projects\/\/locations\/\/securitySettings\/@. See 'name'.
+    -> DialogFlowProjectsLocationsSecuritySettingsGet
 newDialogFlowProjectsLocationsSecuritySettingsGet name =
   DialogFlowProjectsLocationsSecuritySettingsGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DialogFlowProjectsLocationsSecuritySettingsGet
-  where
-  type
-    Rs
-      DialogFlowProjectsLocationsSecuritySettingsGet =
-      GoogleCloudDialogflowCxV3SecuritySettings
-  type
-    Scopes
-      DialogFlowProjectsLocationsSecuritySettingsGet =
-      '[CloudPlatform'FullControl, Dialogflow'FullControl]
-  requestClient
-    DialogFlowProjectsLocationsSecuritySettingsGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dialogFlowService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DialogFlowProjectsLocationsSecuritySettingsGetResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           DialogFlowProjectsLocationsSecuritySettingsGet
+         where
+        type Rs
+               DialogFlowProjectsLocationsSecuritySettingsGet
+             = GoogleCloudDialogflowCxV3SecuritySettings
+        type Scopes
+               DialogFlowProjectsLocationsSecuritySettingsGet
+             =
+             '[CloudPlatform'FullControl, Dialogflow'FullControl]
+        requestClient
+          DialogFlowProjectsLocationsSecuritySettingsGet{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              dialogFlowService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           DialogFlowProjectsLocationsSecuritySettingsGetResource)
+                      Core.mempty
+

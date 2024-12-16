@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,48 +31,48 @@
 --
 -- /See:/ <https://developers.google.com/ad-experience-report/ Ad Experience Report API Reference>
 module Gogol.AdExperienceReport
-  ( -- * Configuration
-    adExperienceReportService,
+    (
+    -- * Configuration
+      adExperienceReportService
 
     -- * Resources
 
     -- ** adexperiencereport.sites.get
-    AdExperienceReportSitesGetResource,
-    AdExperienceReportSitesGet (..),
-    newAdExperienceReportSitesGet,
+    , AdExperienceReportSitesGetResource
+    , AdExperienceReportSitesGet (..)
+    , newAdExperienceReportSitesGet
 
     -- ** adexperiencereport.violatingSites.list
-    AdExperienceReportViolatingSitesListResource,
-    AdExperienceReportViolatingSitesList (..),
-    newAdExperienceReportViolatingSitesList,
+    , AdExperienceReportViolatingSitesListResource
+    , AdExperienceReportViolatingSitesList (..)
+    , newAdExperienceReportViolatingSitesList
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** PlatformSummary
-    PlatformSummary (..),
-    newPlatformSummary,
+    , PlatformSummary (..)
+    , newPlatformSummary
 
     -- ** PlatformSummary_BetterAdsStatus
-    PlatformSummary_BetterAdsStatus (..),
+    , PlatformSummary_BetterAdsStatus (..)
 
     -- ** PlatformSummary_FilterStatus
-    PlatformSummary_FilterStatus (..),
+    , PlatformSummary_FilterStatus (..)
 
     -- ** PlatformSummary_RegionItem
-    PlatformSummary_RegionItem (..),
+    , PlatformSummary_RegionItem (..)
 
     -- ** SiteSummaryResponse
-    SiteSummaryResponse (..),
-    newSiteSummaryResponse,
+    , SiteSummaryResponse (..)
+    , newSiteSummaryResponse
 
     -- ** ViolatingSitesResponse
-    ViolatingSitesResponse (..),
-    newViolatingSitesResponse,
-  )
-where
+    , ViolatingSitesResponse (..)
+    , newViolatingSitesResponse
+    ) where
 
 import Gogol.AdExperienceReport.Sites.Get
 import Gogol.AdExperienceReport.Types

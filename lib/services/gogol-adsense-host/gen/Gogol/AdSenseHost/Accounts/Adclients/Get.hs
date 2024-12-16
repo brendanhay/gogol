@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,72 +31,65 @@
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.accounts.adclients.get@.
 module Gogol.AdSenseHost.Accounts.Adclients.Get
-  ( -- * Resource
-    AdSenseHostAccountsAdclientsGetResource,
+    (
+    -- * Resource
+      AdSenseHostAccountsAdclientsGetResource
 
     -- ** Constructing a Request
-    AdSenseHostAccountsAdclientsGet (..),
-    newAdSenseHostAccountsAdclientsGet,
-  )
-where
+    , AdSenseHostAccountsAdclientsGet (..)
+    , newAdSenseHostAccountsAdclientsGet
+    ) where
 
-import Gogol.AdSenseHost.Types
 import qualified Gogol.Prelude as Core
+import Gogol.AdSenseHost.Types
 
 -- | A resource alias for @adsensehost.accounts.adclients.get@ method which the
 -- 'AdSenseHostAccountsAdclientsGet' request conforms to.
 type AdSenseHostAccountsAdclientsGetResource =
-  "adsensehost"
-    Core.:> "v4.1"
-    Core.:> "accounts"
-    Core.:> Core.Capture "accountId" Core.Text
-    Core.:> "adclients"
-    Core.:> Core.Capture "adClientId" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] AdClient
+     "adsensehost" Core.:>
+       "v4.1" Core.:>
+         "accounts" Core.:>
+           Core.Capture "accountId" Core.Text Core.:>
+             "adclients" Core.:>
+               Core.Capture "adClientId" Core.Text Core.:>
+                 Core.QueryParam "alt" Core.AltJSON Core.:>
+                   Core.Get '[Core.JSON] AdClient
 
 -- | Get information about one of the ad clients in the specified publisher\'s AdSense account.
 --
 -- /See:/ 'newAdSenseHostAccountsAdclientsGet' smart constructor.
 data AdSenseHostAccountsAdclientsGet = AdSenseHostAccountsAdclientsGet
-  { -- | Account which contains the ad client.
-    accountId :: Core.Text,
-    -- | Ad client to get.
-    adClientId :: Core.Text
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Account which contains the ad client.
+      accountId :: Core.Text
+      -- | Ad client to get.
+    , adClientId :: Core.Text
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AdSenseHostAccountsAdclientsGet' with the minimum fields required to make a request.
-newAdSenseHostAccountsAdclientsGet ::
-  -- |  Account which contains the ad client. See 'accountId'.
-  Core.Text ->
-  -- |  Ad client to get. See 'adClientId'.
-  Core.Text ->
-  AdSenseHostAccountsAdclientsGet
+newAdSenseHostAccountsAdclientsGet 
+    ::  Core.Text
+       -- ^  Account which contains the ad client. See 'accountId'.
+    -> Core.Text
+       -- ^  Ad client to get. See 'adClientId'.
+    -> AdSenseHostAccountsAdclientsGet
 newAdSenseHostAccountsAdclientsGet accountId adClientId =
   AdSenseHostAccountsAdclientsGet
-    { accountId = accountId,
-      adClientId = adClientId
-    }
+    {accountId = accountId, adClientId = adClientId}
 
-instance
-  Core.GoogleRequest
-    AdSenseHostAccountsAdclientsGet
-  where
-  type Rs AdSenseHostAccountsAdclientsGet = AdClient
-  type
-    Scopes AdSenseHostAccountsAdclientsGet =
-      '[Adsensehost'FullControl]
-  requestClient AdSenseHostAccountsAdclientsGet {..} =
-    go
-      accountId
-      adClientId
-      (Core.Just Core.AltJSON)
-      adSenseHostService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AdSenseHostAccountsAdclientsGetResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           AdSenseHostAccountsAdclientsGet
+         where
+        type Rs AdSenseHostAccountsAdclientsGet = AdClient
+        type Scopes AdSenseHostAccountsAdclientsGet =
+             '[Adsensehost'FullControl]
+        requestClient AdSenseHostAccountsAdclientsGet{..}
+          = go accountId adClientId (Core.Just Core.AltJSON)
+              adSenseHostService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy AdSenseHostAccountsAdclientsGetResource)
+                      Core.mempty
+

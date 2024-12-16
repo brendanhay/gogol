@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,98 +31,98 @@
 --
 -- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference>
 module Gogol.PlayMoviesPartner
-  ( -- * Configuration
-    playMoviesPartnerService,
+    (
+    -- * Configuration
+      playMoviesPartnerService
 
     -- * OAuth Scopes
-    PlaymoviesPartner'Readonly,
+    , PlaymoviesPartner'Readonly
 
     -- * Resources
 
     -- ** playmoviespartner.accounts.avails.get
-    PlayMoviesPartnerAccountsAvailsGetResource,
-    PlayMoviesPartnerAccountsAvailsGet (..),
-    newPlayMoviesPartnerAccountsAvailsGet,
+    , PlayMoviesPartnerAccountsAvailsGetResource
+    , PlayMoviesPartnerAccountsAvailsGet (..)
+    , newPlayMoviesPartnerAccountsAvailsGet
 
     -- ** playmoviespartner.accounts.avails.list
-    PlayMoviesPartnerAccountsAvailsListResource,
-    PlayMoviesPartnerAccountsAvailsList (..),
-    newPlayMoviesPartnerAccountsAvailsList,
+    , PlayMoviesPartnerAccountsAvailsListResource
+    , PlayMoviesPartnerAccountsAvailsList (..)
+    , newPlayMoviesPartnerAccountsAvailsList
 
     -- ** playmoviespartner.accounts.orders.get
-    PlayMoviesPartnerAccountsOrdersGetResource,
-    PlayMoviesPartnerAccountsOrdersGet (..),
-    newPlayMoviesPartnerAccountsOrdersGet,
+    , PlayMoviesPartnerAccountsOrdersGetResource
+    , PlayMoviesPartnerAccountsOrdersGet (..)
+    , newPlayMoviesPartnerAccountsOrdersGet
 
     -- ** playmoviespartner.accounts.orders.list
-    PlayMoviesPartnerAccountsOrdersListResource,
-    PlayMoviesPartnerAccountsOrdersList (..),
-    newPlayMoviesPartnerAccountsOrdersList,
+    , PlayMoviesPartnerAccountsOrdersListResource
+    , PlayMoviesPartnerAccountsOrdersList (..)
+    , newPlayMoviesPartnerAccountsOrdersList
 
     -- ** playmoviespartner.accounts.storeInfos.country.get
-    PlayMoviesPartnerAccountsStoreInfosCountryGetResource,
-    PlayMoviesPartnerAccountsStoreInfosCountryGet (..),
-    newPlayMoviesPartnerAccountsStoreInfosCountryGet,
+    , PlayMoviesPartnerAccountsStoreInfosCountryGetResource
+    , PlayMoviesPartnerAccountsStoreInfosCountryGet (..)
+    , newPlayMoviesPartnerAccountsStoreInfosCountryGet
 
     -- ** playmoviespartner.accounts.storeInfos.list
-    PlayMoviesPartnerAccountsStoreInfosListResource,
-    PlayMoviesPartnerAccountsStoreInfosList (..),
-    newPlayMoviesPartnerAccountsStoreInfosList,
+    , PlayMoviesPartnerAccountsStoreInfosListResource
+    , PlayMoviesPartnerAccountsStoreInfosList (..)
+    , newPlayMoviesPartnerAccountsStoreInfosList
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Avail
-    Avail (..),
-    newAvail,
+    , Avail (..)
+    , newAvail
 
     -- ** Avail_FormatProfile
-    Avail_FormatProfile (..),
+    , Avail_FormatProfile (..)
 
     -- ** Avail_LicenseType
-    Avail_LicenseType (..),
+    , Avail_LicenseType (..)
 
     -- ** Avail_WorkType
-    Avail_WorkType (..),
+    , Avail_WorkType (..)
 
     -- ** ListAvailsResponse
-    ListAvailsResponse (..),
-    newListAvailsResponse,
+    , ListAvailsResponse (..)
+    , newListAvailsResponse
 
     -- ** ListOrdersResponse
-    ListOrdersResponse (..),
-    newListOrdersResponse,
+    , ListOrdersResponse (..)
+    , newListOrdersResponse
 
     -- ** ListStoreInfosResponse
-    ListStoreInfosResponse (..),
-    newListStoreInfosResponse,
+    , ListStoreInfosResponse (..)
+    , newListStoreInfosResponse
 
     -- ** Order
-    Order (..),
-    newOrder,
+    , Order (..)
+    , newOrder
 
     -- ** Order_NormalizedPriority
-    Order_NormalizedPriority (..),
+    , Order_NormalizedPriority (..)
 
     -- ** Order_Status
-    Order_Status (..),
+    , Order_Status (..)
 
     -- ** Order_StatusDetail
-    Order_StatusDetail (..),
+    , Order_StatusDetail (..)
 
     -- ** Order_Type
-    Order_Type (..),
+    , Order_Type (..)
 
     -- ** StoreInfo
-    StoreInfo (..),
-    newStoreInfo,
+    , StoreInfo (..)
+    , newStoreInfo
 
     -- ** StoreInfo_Type
-    StoreInfo_Type (..),
-  )
-where
+    , StoreInfo_Type (..)
+    ) where
 
 import Gogol.PlayMoviesPartner.Accounts.Avails.Get
 import Gogol.PlayMoviesPartner.Accounts.Avails.List

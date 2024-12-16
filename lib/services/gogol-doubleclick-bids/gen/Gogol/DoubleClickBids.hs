@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,167 +31,133 @@
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference>
 module Gogol.DoubleClickBids
-  ( -- * Configuration
-    doubleClickBidsService,
+    (
+    -- * Configuration
+      doubleClickBidsService
 
     -- * OAuth Scopes
-    Doubleclickbidmanager'FullControl,
+    , Doubleclickbidmanager'FullControl
 
     -- * Resources
 
     -- ** doubleclickbidmanager.queries.create
-    DoubleclickbidmanagerQueriesCreateResource,
-    DoubleclickbidmanagerQueriesCreate (..),
-    newDoubleclickbidmanagerQueriesCreate,
+    , DoubleclickbidmanagerQueriesCreateResource
+    , DoubleclickbidmanagerQueriesCreate (..)
+    , newDoubleclickbidmanagerQueriesCreate
 
     -- ** doubleclickbidmanager.queries.delete
-    DoubleclickbidmanagerQueriesDeleteResource,
-    DoubleclickbidmanagerQueriesDelete (..),
-    newDoubleclickbidmanagerQueriesDelete,
+    , DoubleclickbidmanagerQueriesDeleteResource
+    , DoubleclickbidmanagerQueriesDelete (..)
+    , newDoubleclickbidmanagerQueriesDelete
 
     -- ** doubleclickbidmanager.queries.get
-    DoubleclickbidmanagerQueriesGetResource,
-    DoubleclickbidmanagerQueriesGet (..),
-    newDoubleclickbidmanagerQueriesGet,
+    , DoubleclickbidmanagerQueriesGetResource
+    , DoubleclickbidmanagerQueriesGet (..)
+    , newDoubleclickbidmanagerQueriesGet
 
     -- ** doubleclickbidmanager.queries.list
-    DoubleclickbidmanagerQueriesListResource,
-    DoubleclickbidmanagerQueriesList (..),
-    newDoubleclickbidmanagerQueriesList,
+    , DoubleclickbidmanagerQueriesListResource
+    , DoubleclickbidmanagerQueriesList (..)
+    , newDoubleclickbidmanagerQueriesList
 
     -- ** doubleclickbidmanager.queries.reports.get
-    DoubleclickbidmanagerQueriesReportsGetResource,
-    DoubleclickbidmanagerQueriesReportsGet (..),
-    newDoubleclickbidmanagerQueriesReportsGet,
+    , DoubleclickbidmanagerQueriesReportsGetResource
+    , DoubleclickbidmanagerQueriesReportsGet (..)
+    , newDoubleclickbidmanagerQueriesReportsGet
 
     -- ** doubleclickbidmanager.queries.reports.list
-    DoubleclickbidmanagerQueriesReportsListResource,
-    DoubleclickbidmanagerQueriesReportsList (..),
-    newDoubleclickbidmanagerQueriesReportsList,
+    , DoubleclickbidmanagerQueriesReportsListResource
+    , DoubleclickbidmanagerQueriesReportsList (..)
+    , newDoubleclickbidmanagerQueriesReportsList
 
     -- ** doubleclickbidmanager.queries.run
-    DoubleclickbidmanagerQueriesRunResource,
-    DoubleclickbidmanagerQueriesRun (..),
-    newDoubleclickbidmanagerQueriesRun,
+    , DoubleclickbidmanagerQueriesRunResource
+    , DoubleclickbidmanagerQueriesRun (..)
+    , newDoubleclickbidmanagerQueriesRun
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
-
-    -- ** ChannelGrouping
-    ChannelGrouping (..),
-    newChannelGrouping,
+    , Xgafv (..)
 
     -- ** DataRange
-    DataRange (..),
-    newDataRange,
+    , DataRange (..)
+    , newDataRange
 
     -- ** DataRange_Range
-    DataRange_Range (..),
+    , DataRange_Range (..)
 
     -- ** Date
-    Date (..),
-    newDate,
-
-    -- ** DisjunctiveMatchStatement
-    DisjunctiveMatchStatement (..),
-    newDisjunctiveMatchStatement,
-
-    -- ** EventFilter
-    EventFilter (..),
-    newEventFilter,
+    , Date (..)
+    , newDate
 
     -- ** FilterPair
-    FilterPair (..),
-    newFilterPair,
+    , FilterPair (..)
+    , newFilterPair
 
     -- ** ListQueriesResponse
-    ListQueriesResponse (..),
-    newListQueriesResponse,
+    , ListQueriesResponse (..)
+    , newListQueriesResponse
 
     -- ** ListReportsResponse
-    ListReportsResponse (..),
-    newListReportsResponse,
+    , ListReportsResponse (..)
+    , newListReportsResponse
 
     -- ** Options
-    Options (..),
-    newOptions,
+    , Options (..)
+    , newOptions
 
     -- ** Parameters
-    Parameters (..),
-    newParameters,
+    , Parameters (..)
+    , newParameters
 
     -- ** Parameters_Type
-    Parameters_Type (..),
-
-    -- ** PathFilter
-    PathFilter (..),
-    newPathFilter,
-
-    -- ** PathFilter_PathMatchPosition
-    PathFilter_PathMatchPosition (..),
-
-    -- ** PathQueryOptions
-    PathQueryOptions (..),
-    newPathQueryOptions,
-
-    -- ** PathQueryOptionsFilter
-    PathQueryOptionsFilter (..),
-    newPathQueryOptionsFilter,
-
-    -- ** PathQueryOptionsFilter_Match
-    PathQueryOptionsFilter_Match (..),
+    , Parameters_Type (..)
 
     -- ** Query
-    Query (..),
-    newQuery,
+    , Query (..)
+    , newQuery
 
     -- ** QueryMetadata
-    QueryMetadata (..),
-    newQueryMetadata,
+    , QueryMetadata (..)
+    , newQueryMetadata
 
     -- ** QueryMetadata_Format
-    QueryMetadata_Format (..),
+    , QueryMetadata_Format (..)
 
     -- ** QuerySchedule
-    QuerySchedule (..),
-    newQuerySchedule,
+    , QuerySchedule (..)
+    , newQuerySchedule
 
     -- ** QuerySchedule_Frequency
-    QuerySchedule_Frequency (..),
+    , QuerySchedule_Frequency (..)
 
     -- ** Report
-    Report (..),
-    newReport,
+    , Report (..)
+    , newReport
 
     -- ** ReportKey
-    ReportKey (..),
-    newReportKey,
+    , ReportKey (..)
+    , newReportKey
 
     -- ** ReportMetadata
-    ReportMetadata (..),
-    newReportMetadata,
+    , ReportMetadata (..)
+    , newReportMetadata
 
     -- ** ReportStatus
-    ReportStatus (..),
-    newReportStatus,
+    , ReportStatus (..)
+    , newReportStatus
 
     -- ** ReportStatus_Format
-    ReportStatus_Format (..),
+    , ReportStatus_Format (..)
 
     -- ** ReportStatus_State
-    ReportStatus_State (..),
-
-    -- ** Rule
-    Rule (..),
-    newRule,
+    , ReportStatus_State (..)
 
     -- ** RunQueryRequest
-    RunQueryRequest (..),
-    newRunQueryRequest,
-  )
-where
+    , RunQueryRequest (..)
+    , newRunQueryRequest
+    ) where
 
 import Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Create
 import Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Delete

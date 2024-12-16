@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,107 +31,100 @@
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.creativeFieldValues.delete@.
 module Gogol.DFAReporting.CreativeFieldValues.Delete
-  ( -- * Resource
-    DFAReportingCreativeFieldValuesDeleteResource,
+    (
+    -- * Resource
+      DFAReportingCreativeFieldValuesDeleteResource
 
     -- ** Constructing a Request
-    DFAReportingCreativeFieldValuesDelete (..),
-    newDFAReportingCreativeFieldValuesDelete,
-  )
-where
+    , DFAReportingCreativeFieldValuesDelete (..)
+    , newDFAReportingCreativeFieldValuesDelete
+    ) where
 
-import Gogol.DFAReporting.Types
 import qualified Gogol.Prelude as Core
+import Gogol.DFAReporting.Types
 
 -- | A resource alias for @dfareporting.creativeFieldValues.delete@ method which the
 -- 'DFAReportingCreativeFieldValuesDelete' request conforms to.
 type DFAReportingCreativeFieldValuesDeleteResource =
-  "dfareporting"
-    Core.:> "v4"
-    Core.:> "userprofiles"
-    Core.:> Core.Capture "profileId" Core.Int64
-    Core.:> "creativeFields"
-    Core.:> Core.Capture "creativeFieldId" Core.Int64
-    Core.:> "creativeFieldValues"
-    Core.:> Core.Capture "id" Core.Int64
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete '[Core.JSON] ()
+     "dfareporting" Core.:>
+       "v4" Core.:>
+         "userprofiles" Core.:>
+           Core.Capture "profileId" Core.Int64 Core.:>
+             "creativeFields" Core.:>
+               Core.Capture "creativeFieldId" Core.Int64 Core.:>
+                 "creativeFieldValues" Core.:>
+                   Core.Capture "id" Core.Int64 Core.:>
+                     Core.QueryParam "$.xgafv" Xgafv Core.:>
+                       Core.QueryParam "access_token" Core.Text Core.:>
+                         Core.QueryParam "callback" Core.Text Core.:>
+                           Core.QueryParam "uploadType" Core.Text Core.:>
+                             Core.QueryParam "upload_protocol" Core.Text Core.:>
+                               Core.QueryParam "alt" Core.AltJSON Core.:>
+                                 Core.Delete '[Core.JSON] ()
 
 -- | Deletes an existing creative field value.
 --
 -- /See:/ 'newDFAReportingCreativeFieldValuesDelete' smart constructor.
 data DFAReportingCreativeFieldValuesDelete = DFAReportingCreativeFieldValuesDelete
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Creative field ID for this creative field value.
-    creativeFieldId :: Core.Int64,
-    -- | Creative Field Value ID
-    id :: Core.Int64,
-    -- | User profile ID associated with this request.
-    profileId :: Core.Int64,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Creative field ID for this creative field value.
+    , creativeFieldId :: Core.Int64
+      -- | Creative Field Value ID
+    , id :: Core.Int64
+      -- | User profile ID associated with this request.
+    , profileId :: Core.Int64
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DFAReportingCreativeFieldValuesDelete' with the minimum fields required to make a request.
-newDFAReportingCreativeFieldValuesDelete ::
-  -- |  Creative field ID for this creative field value. See 'creativeFieldId'.
-  Core.Int64 ->
-  -- |  Creative Field Value ID See 'id'.
-  Core.Int64 ->
-  -- |  User profile ID associated with this request. See 'profileId'.
-  Core.Int64 ->
-  DFAReportingCreativeFieldValuesDelete
+newDFAReportingCreativeFieldValuesDelete 
+    ::  Core.Int64
+       -- ^  Creative field ID for this creative field value. See 'creativeFieldId'.
+    -> Core.Int64
+       -- ^  Creative Field Value ID See 'id'.
+    -> Core.Int64
+       -- ^  User profile ID associated with this request. See 'profileId'.
+    -> DFAReportingCreativeFieldValuesDelete
 newDFAReportingCreativeFieldValuesDelete creativeFieldId id profileId =
   DFAReportingCreativeFieldValuesDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      creativeFieldId = creativeFieldId,
-      id = id,
-      profileId = profileId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , creativeFieldId = creativeFieldId
+    , id = id
+    , profileId = profileId
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingCreativeFieldValuesDelete
-  where
-  type Rs DFAReportingCreativeFieldValuesDelete = ()
-  type
-    Scopes DFAReportingCreativeFieldValuesDelete =
-      '[Dfatrafficking'FullControl]
-  requestClient
-    DFAReportingCreativeFieldValuesDelete {..} =
-      go
-        profileId
-        creativeFieldId
-        id
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dFAReportingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DFAReportingCreativeFieldValuesDeleteResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           DFAReportingCreativeFieldValuesDelete
+         where
+        type Rs DFAReportingCreativeFieldValuesDelete = ()
+        type Scopes DFAReportingCreativeFieldValuesDelete =
+             '[Dfatrafficking'FullControl]
+        requestClient
+          DFAReportingCreativeFieldValuesDelete{..}
+          = go profileId creativeFieldId id xgafv accessToken
+              callback
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              dFAReportingService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           DFAReportingCreativeFieldValuesDeleteResource)
+                      Core.mempty
+

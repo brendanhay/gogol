@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,97 +31,90 @@
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.userRoles.update@.
 module Gogol.DFAReporting.UserRoles.Update
-  ( -- * Resource
-    DFAReportingUserRolesUpdateResource,
+    (
+    -- * Resource
+      DFAReportingUserRolesUpdateResource
 
     -- ** Constructing a Request
-    DFAReportingUserRolesUpdate (..),
-    newDFAReportingUserRolesUpdate,
-  )
-where
+    , DFAReportingUserRolesUpdate (..)
+    , newDFAReportingUserRolesUpdate
+    ) where
 
-import Gogol.DFAReporting.Types
 import qualified Gogol.Prelude as Core
+import Gogol.DFAReporting.Types
 
 -- | A resource alias for @dfareporting.userRoles.update@ method which the
 -- 'DFAReportingUserRolesUpdate' request conforms to.
 type DFAReportingUserRolesUpdateResource =
-  "dfareporting"
-    Core.:> "v4"
-    Core.:> "userprofiles"
-    Core.:> Core.Capture "profileId" Core.Int64
-    Core.:> "userRoles"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] UserRole
-    Core.:> Core.Put '[Core.JSON] UserRole
+     "dfareporting" Core.:>
+       "v4" Core.:>
+         "userprofiles" Core.:>
+           Core.Capture "profileId" Core.Int64 Core.:>
+             "userRoles" Core.:>
+               Core.QueryParam "$.xgafv" Xgafv Core.:>
+                 Core.QueryParam "access_token" Core.Text Core.:>
+                   Core.QueryParam "callback" Core.Text Core.:>
+                     Core.QueryParam "uploadType" Core.Text Core.:>
+                       Core.QueryParam "upload_protocol" Core.Text Core.:>
+                         Core.QueryParam "alt" Core.AltJSON Core.:>
+                           Core.ReqBody '[Core.JSON] UserRole Core.:>
+                             Core.Put '[Core.JSON] UserRole
 
 -- | Updates an existing user role.
 --
 -- /See:/ 'newDFAReportingUserRolesUpdate' smart constructor.
 data DFAReportingUserRolesUpdate = DFAReportingUserRolesUpdate
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Multipart request metadata.
-    payload :: UserRole,
-    -- | User profile ID associated with this request.
-    profileId :: Core.Int64,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Multipart request metadata.
+    , payload :: UserRole
+      -- | User profile ID associated with this request.
+    , profileId :: Core.Int64
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DFAReportingUserRolesUpdate' with the minimum fields required to make a request.
-newDFAReportingUserRolesUpdate ::
-  -- |  Multipart request metadata. See 'payload'.
-  UserRole ->
-  -- |  User profile ID associated with this request. See 'profileId'.
-  Core.Int64 ->
-  DFAReportingUserRolesUpdate
+newDFAReportingUserRolesUpdate 
+    ::  UserRole
+       -- ^  Multipart request metadata. See 'payload'.
+    -> Core.Int64
+       -- ^  User profile ID associated with this request. See 'profileId'.
+    -> DFAReportingUserRolesUpdate
 newDFAReportingUserRolesUpdate payload profileId =
   DFAReportingUserRolesUpdate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      profileId = profileId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , payload = payload
+    , profileId = profileId
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingUserRolesUpdate
-  where
-  type Rs DFAReportingUserRolesUpdate = UserRole
-  type
-    Scopes DFAReportingUserRolesUpdate =
-      '[Dfatrafficking'FullControl]
-  requestClient DFAReportingUserRolesUpdate {..} =
-    go
-      profileId
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      payload
-      dFAReportingService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingUserRolesUpdateResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           DFAReportingUserRolesUpdate
+         where
+        type Rs DFAReportingUserRolesUpdate = UserRole
+        type Scopes DFAReportingUserRolesUpdate =
+             '[Dfatrafficking'FullControl]
+        requestClient DFAReportingUserRolesUpdate{..}
+          = go profileId xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              dFAReportingService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy DFAReportingUserRolesUpdateResource)
+                      Core.mempty
+

@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,83 +31,62 @@
 --
 -- /See:/ <https://developers.google.com/digital-asset-links/ Digital Asset Links API Reference>
 module Gogol.DigitalAssetLinks
-  ( -- * Configuration
-    digitalAssetLinksService,
+    (
+    -- * Configuration
+      digitalAssetLinksService
 
     -- * Resources
 
-    -- ** digitalassetlinks.assetlinks.bulkCheck
-    DigitalAssetLinksAssetlinksBulkCheckResource,
-    DigitalAssetLinksAssetlinksBulkCheck (..),
-    newDigitalAssetLinksAssetlinksBulkCheck,
-
     -- ** digitalassetlinks.assetlinks.check
-    DigitalAssetLinksAssetlinksCheckResource,
-    DigitalAssetLinksAssetlinksCheck (..),
-    newDigitalAssetLinksAssetlinksCheck,
+    , DigitalAssetLinksAssetlinksCheckResource
+    , DigitalAssetLinksAssetlinksCheck (..)
+    , newDigitalAssetLinksAssetlinksCheck
 
     -- ** digitalassetlinks.statements.list
-    DigitalAssetLinksStatementsListResource,
-    DigitalAssetLinksStatementsList (..),
-    newDigitalAssetLinksStatementsList,
+    , DigitalAssetLinksStatementsListResource
+    , DigitalAssetLinksStatementsList (..)
+    , newDigitalAssetLinksStatementsList
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AndroidAppAsset
-    AndroidAppAsset (..),
-    newAndroidAppAsset,
+    , AndroidAppAsset (..)
+    , newAndroidAppAsset
 
     -- ** Asset
-    Asset (..),
-    newAsset,
-
-    -- ** BulkCheckRequest
-    BulkCheckRequest (..),
-    newBulkCheckRequest,
-
-    -- ** BulkCheckResponse
-    BulkCheckResponse (..),
-    newBulkCheckResponse,
-
-    -- ** BulkCheckResponse_BulkErrorCode
-    BulkCheckResponse_BulkErrorCode (..),
+    , Asset (..)
+    , newAsset
 
     -- ** CertificateInfo
-    CertificateInfo (..),
-    newCertificateInfo,
+    , CertificateInfo (..)
+    , newCertificateInfo
 
     -- ** CheckResponse
-    CheckResponse (..),
-    newCheckResponse,
+    , CheckResponse (..)
+    , newCheckResponse
 
     -- ** CheckResponse_ErrorCodeItem
-    CheckResponse_ErrorCodeItem (..),
+    , CheckResponse_ErrorCodeItem (..)
 
     -- ** ListResponse
-    ListResponse (..),
-    newListResponse,
+    , ListResponse (..)
+    , newListResponse
 
     -- ** ListResponse_ErrorCodeItem
-    ListResponse_ErrorCodeItem (..),
+    , ListResponse_ErrorCodeItem (..)
 
     -- ** Statement
-    Statement (..),
-    newStatement,
-
-    -- ** StatementTemplate
-    StatementTemplate (..),
-    newStatementTemplate,
+    , Statement (..)
+    , newStatement
 
     -- ** WebAsset
-    WebAsset (..),
-    newWebAsset,
-  )
-where
+    , WebAsset (..)
+    , newWebAsset
+    ) where
 
-import Gogol.DigitalAssetLinks.Assetlinks.BulkCheck
 import Gogol.DigitalAssetLinks.Assetlinks.Check
 import Gogol.DigitalAssetLinks.Statements.List
 import Gogol.DigitalAssetLinks.Types

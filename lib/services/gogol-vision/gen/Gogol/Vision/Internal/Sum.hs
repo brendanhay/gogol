@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +26,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Vision.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * BatchOperationMetadata_State
     BatchOperationMetadata_State
-      ( BatchOperationMetadata_State_STATEUNSPECIFIED,
+      (
+        BatchOperationMetadata_State_STATEUNSPECIFIED,
         BatchOperationMetadata_State_Processing,
         BatchOperationMetadata_State_Successful,
         BatchOperationMetadata_State_Failed,
@@ -45,7 +51,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * Block_BlockType
     Block_BlockType
-      ( Block_BlockType_Unknown,
+      (
+        Block_BlockType_Unknown,
         Block_BlockType_Text,
         Block_BlockType_Table,
         Block_BlockType_Picture,
@@ -56,7 +63,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * DetectedBreak_Type
     DetectedBreak_Type
-      ( DetectedBreak_Type_Unknown,
+      (
+        DetectedBreak_Type_Unknown,
         DetectedBreak_Type_Space,
         DetectedBreak_Type_SURESPACE,
         DetectedBreak_Type_EOLSURESPACE,
@@ -67,7 +75,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * FaceAnnotation_AngerLikelihood
     FaceAnnotation_AngerLikelihood
-      ( FaceAnnotation_AngerLikelihood_Unknown,
+      (
+        FaceAnnotation_AngerLikelihood_Unknown,
         FaceAnnotation_AngerLikelihood_VERYUNLIKELY,
         FaceAnnotation_AngerLikelihood_Unlikely,
         FaceAnnotation_AngerLikelihood_Possible,
@@ -78,7 +87,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * FaceAnnotation_BlurredLikelihood
     FaceAnnotation_BlurredLikelihood
-      ( FaceAnnotation_BlurredLikelihood_Unknown,
+      (
+        FaceAnnotation_BlurredLikelihood_Unknown,
         FaceAnnotation_BlurredLikelihood_VERYUNLIKELY,
         FaceAnnotation_BlurredLikelihood_Unlikely,
         FaceAnnotation_BlurredLikelihood_Possible,
@@ -89,7 +99,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * FaceAnnotation_HeadwearLikelihood
     FaceAnnotation_HeadwearLikelihood
-      ( FaceAnnotation_HeadwearLikelihood_Unknown,
+      (
+        FaceAnnotation_HeadwearLikelihood_Unknown,
         FaceAnnotation_HeadwearLikelihood_VERYUNLIKELY,
         FaceAnnotation_HeadwearLikelihood_Unlikely,
         FaceAnnotation_HeadwearLikelihood_Possible,
@@ -100,7 +111,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * FaceAnnotation_JoyLikelihood
     FaceAnnotation_JoyLikelihood
-      ( FaceAnnotation_JoyLikelihood_Unknown,
+      (
+        FaceAnnotation_JoyLikelihood_Unknown,
         FaceAnnotation_JoyLikelihood_VERYUNLIKELY,
         FaceAnnotation_JoyLikelihood_Unlikely,
         FaceAnnotation_JoyLikelihood_Possible,
@@ -111,7 +123,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * FaceAnnotation_SorrowLikelihood
     FaceAnnotation_SorrowLikelihood
-      ( FaceAnnotation_SorrowLikelihood_Unknown,
+      (
+        FaceAnnotation_SorrowLikelihood_Unknown,
         FaceAnnotation_SorrowLikelihood_VERYUNLIKELY,
         FaceAnnotation_SorrowLikelihood_Unlikely,
         FaceAnnotation_SorrowLikelihood_Possible,
@@ -122,7 +135,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * FaceAnnotation_SurpriseLikelihood
     FaceAnnotation_SurpriseLikelihood
-      ( FaceAnnotation_SurpriseLikelihood_Unknown,
+      (
+        FaceAnnotation_SurpriseLikelihood_Unknown,
         FaceAnnotation_SurpriseLikelihood_VERYUNLIKELY,
         FaceAnnotation_SurpriseLikelihood_Unlikely,
         FaceAnnotation_SurpriseLikelihood_Possible,
@@ -133,7 +147,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * FaceAnnotation_UnderExposedLikelihood
     FaceAnnotation_UnderExposedLikelihood
-      ( FaceAnnotation_UnderExposedLikelihood_Unknown,
+      (
+        FaceAnnotation_UnderExposedLikelihood_Unknown,
         FaceAnnotation_UnderExposedLikelihood_VERYUNLIKELY,
         FaceAnnotation_UnderExposedLikelihood_Unlikely,
         FaceAnnotation_UnderExposedLikelihood_Possible,
@@ -144,7 +159,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p1beta1Block_BlockType
     GoogleCloudVisionV1p1beta1Block_BlockType
-      ( GoogleCloudVisionV1p1beta1Block_BlockType_Unknown,
+      (
+        GoogleCloudVisionV1p1beta1Block_BlockType_Unknown,
         GoogleCloudVisionV1p1beta1Block_BlockType_Text,
         GoogleCloudVisionV1p1beta1Block_BlockType_Table,
         GoogleCloudVisionV1p1beta1Block_BlockType_Picture,
@@ -155,7 +171,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p1beta1FaceAnnotation_AngerLikelihood
     GoogleCloudVisionV1p1beta1FaceAnnotation_AngerLikelihood
-      ( GoogleCloudVisionV1p1beta1FaceAnnotation_AngerLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p1beta1FaceAnnotation_AngerLikelihood_Unknown,
         GoogleCloudVisionV1p1beta1FaceAnnotation_AngerLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p1beta1FaceAnnotation_AngerLikelihood_Unlikely,
         GoogleCloudVisionV1p1beta1FaceAnnotation_AngerLikelihood_Possible,
@@ -166,7 +183,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p1beta1FaceAnnotation_BlurredLikelihood
     GoogleCloudVisionV1p1beta1FaceAnnotation_BlurredLikelihood
-      ( GoogleCloudVisionV1p1beta1FaceAnnotation_BlurredLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p1beta1FaceAnnotation_BlurredLikelihood_Unknown,
         GoogleCloudVisionV1p1beta1FaceAnnotation_BlurredLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p1beta1FaceAnnotation_BlurredLikelihood_Unlikely,
         GoogleCloudVisionV1p1beta1FaceAnnotation_BlurredLikelihood_Possible,
@@ -177,7 +195,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p1beta1FaceAnnotation_HeadwearLikelihood
     GoogleCloudVisionV1p1beta1FaceAnnotation_HeadwearLikelihood
-      ( GoogleCloudVisionV1p1beta1FaceAnnotation_HeadwearLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p1beta1FaceAnnotation_HeadwearLikelihood_Unknown,
         GoogleCloudVisionV1p1beta1FaceAnnotation_HeadwearLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p1beta1FaceAnnotation_HeadwearLikelihood_Unlikely,
         GoogleCloudVisionV1p1beta1FaceAnnotation_HeadwearLikelihood_Possible,
@@ -188,7 +207,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p1beta1FaceAnnotation_JoyLikelihood
     GoogleCloudVisionV1p1beta1FaceAnnotation_JoyLikelihood
-      ( GoogleCloudVisionV1p1beta1FaceAnnotation_JoyLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p1beta1FaceAnnotation_JoyLikelihood_Unknown,
         GoogleCloudVisionV1p1beta1FaceAnnotation_JoyLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p1beta1FaceAnnotation_JoyLikelihood_Unlikely,
         GoogleCloudVisionV1p1beta1FaceAnnotation_JoyLikelihood_Possible,
@@ -199,7 +219,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p1beta1FaceAnnotation_SorrowLikelihood
     GoogleCloudVisionV1p1beta1FaceAnnotation_SorrowLikelihood
-      ( GoogleCloudVisionV1p1beta1FaceAnnotation_SorrowLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p1beta1FaceAnnotation_SorrowLikelihood_Unknown,
         GoogleCloudVisionV1p1beta1FaceAnnotation_SorrowLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p1beta1FaceAnnotation_SorrowLikelihood_Unlikely,
         GoogleCloudVisionV1p1beta1FaceAnnotation_SorrowLikelihood_Possible,
@@ -210,7 +231,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p1beta1FaceAnnotation_SurpriseLikelihood
     GoogleCloudVisionV1p1beta1FaceAnnotation_SurpriseLikelihood
-      ( GoogleCloudVisionV1p1beta1FaceAnnotation_SurpriseLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p1beta1FaceAnnotation_SurpriseLikelihood_Unknown,
         GoogleCloudVisionV1p1beta1FaceAnnotation_SurpriseLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p1beta1FaceAnnotation_SurpriseLikelihood_Unlikely,
         GoogleCloudVisionV1p1beta1FaceAnnotation_SurpriseLikelihood_Possible,
@@ -221,7 +243,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p1beta1FaceAnnotation_UnderExposedLikelihood
     GoogleCloudVisionV1p1beta1FaceAnnotation_UnderExposedLikelihood
-      ( GoogleCloudVisionV1p1beta1FaceAnnotation_UnderExposedLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p1beta1FaceAnnotation_UnderExposedLikelihood_Unknown,
         GoogleCloudVisionV1p1beta1FaceAnnotation_UnderExposedLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p1beta1FaceAnnotation_UnderExposedLikelihood_Unlikely,
         GoogleCloudVisionV1p1beta1FaceAnnotation_UnderExposedLikelihood_Possible,
@@ -232,7 +255,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p1beta1FaceAnnotationLandmark_Type
     GoogleCloudVisionV1p1beta1FaceAnnotationLandmark_Type
-      ( GoogleCloudVisionV1p1beta1FaceAnnotationLandmark_Type_UNKNOWNLANDMARK,
+      (
+        GoogleCloudVisionV1p1beta1FaceAnnotationLandmark_Type_UNKNOWNLANDMARK,
         GoogleCloudVisionV1p1beta1FaceAnnotationLandmark_Type_LEFTEYE,
         GoogleCloudVisionV1p1beta1FaceAnnotationLandmark_Type_RIGHTEYE,
         GoogleCloudVisionV1p1beta1FaceAnnotationLandmark_Type_LEFTOFLEFTEYEBROW,
@@ -274,7 +298,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p1beta1OperationMetadata_State
     GoogleCloudVisionV1p1beta1OperationMetadata_State
-      ( GoogleCloudVisionV1p1beta1OperationMetadata_State_STATEUNSPECIFIED,
+      (
+        GoogleCloudVisionV1p1beta1OperationMetadata_State_STATEUNSPECIFIED,
         GoogleCloudVisionV1p1beta1OperationMetadata_State_Created,
         GoogleCloudVisionV1p1beta1OperationMetadata_State_Running,
         GoogleCloudVisionV1p1beta1OperationMetadata_State_Done,
@@ -284,7 +309,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Adult
     GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Adult
-      ( GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Adult_Unknown,
+      (
+        GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Adult_Unknown,
         GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Adult_VERYUNLIKELY,
         GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Adult_Unlikely,
         GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Adult_Possible,
@@ -295,7 +321,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Medical
     GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Medical
-      ( GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Medical_Unknown,
+      (
+        GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Medical_Unknown,
         GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Medical_VERYUNLIKELY,
         GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Medical_Unlikely,
         GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Medical_Possible,
@@ -306,7 +333,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Racy
     GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Racy
-      ( GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Racy_Unknown,
+      (
+        GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Racy_Unknown,
         GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Racy_VERYUNLIKELY,
         GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Racy_Unlikely,
         GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Racy_Possible,
@@ -317,7 +345,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof
     GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof
-      ( GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof_Unknown,
+      (
+        GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof_Unknown,
         GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof_VERYUNLIKELY,
         GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof_Unlikely,
         GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof_Possible,
@@ -328,7 +357,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence
     GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence
-      ( GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence_Unknown,
+      (
+        GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence_Unknown,
         GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence_VERYUNLIKELY,
         GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence_Unlikely,
         GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence_Possible,
@@ -339,7 +369,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak_Type
     GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak_Type
-      ( GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak_Type_Unknown,
+      (
+        GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak_Type_Unknown,
         GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak_Type_Space,
         GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak_Type_SURESPACE,
         GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak_Type_EOLSURESPACE,
@@ -350,7 +381,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p2beta1Block_BlockType
     GoogleCloudVisionV1p2beta1Block_BlockType
-      ( GoogleCloudVisionV1p2beta1Block_BlockType_Unknown,
+      (
+        GoogleCloudVisionV1p2beta1Block_BlockType_Unknown,
         GoogleCloudVisionV1p2beta1Block_BlockType_Text,
         GoogleCloudVisionV1p2beta1Block_BlockType_Table,
         GoogleCloudVisionV1p2beta1Block_BlockType_Picture,
@@ -361,7 +393,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p2beta1FaceAnnotation_AngerLikelihood
     GoogleCloudVisionV1p2beta1FaceAnnotation_AngerLikelihood
-      ( GoogleCloudVisionV1p2beta1FaceAnnotation_AngerLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p2beta1FaceAnnotation_AngerLikelihood_Unknown,
         GoogleCloudVisionV1p2beta1FaceAnnotation_AngerLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p2beta1FaceAnnotation_AngerLikelihood_Unlikely,
         GoogleCloudVisionV1p2beta1FaceAnnotation_AngerLikelihood_Possible,
@@ -372,7 +405,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p2beta1FaceAnnotation_BlurredLikelihood
     GoogleCloudVisionV1p2beta1FaceAnnotation_BlurredLikelihood
-      ( GoogleCloudVisionV1p2beta1FaceAnnotation_BlurredLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p2beta1FaceAnnotation_BlurredLikelihood_Unknown,
         GoogleCloudVisionV1p2beta1FaceAnnotation_BlurredLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p2beta1FaceAnnotation_BlurredLikelihood_Unlikely,
         GoogleCloudVisionV1p2beta1FaceAnnotation_BlurredLikelihood_Possible,
@@ -383,7 +417,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p2beta1FaceAnnotation_HeadwearLikelihood
     GoogleCloudVisionV1p2beta1FaceAnnotation_HeadwearLikelihood
-      ( GoogleCloudVisionV1p2beta1FaceAnnotation_HeadwearLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p2beta1FaceAnnotation_HeadwearLikelihood_Unknown,
         GoogleCloudVisionV1p2beta1FaceAnnotation_HeadwearLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p2beta1FaceAnnotation_HeadwearLikelihood_Unlikely,
         GoogleCloudVisionV1p2beta1FaceAnnotation_HeadwearLikelihood_Possible,
@@ -394,7 +429,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p2beta1FaceAnnotation_JoyLikelihood
     GoogleCloudVisionV1p2beta1FaceAnnotation_JoyLikelihood
-      ( GoogleCloudVisionV1p2beta1FaceAnnotation_JoyLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p2beta1FaceAnnotation_JoyLikelihood_Unknown,
         GoogleCloudVisionV1p2beta1FaceAnnotation_JoyLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p2beta1FaceAnnotation_JoyLikelihood_Unlikely,
         GoogleCloudVisionV1p2beta1FaceAnnotation_JoyLikelihood_Possible,
@@ -405,7 +441,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p2beta1FaceAnnotation_SorrowLikelihood
     GoogleCloudVisionV1p2beta1FaceAnnotation_SorrowLikelihood
-      ( GoogleCloudVisionV1p2beta1FaceAnnotation_SorrowLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p2beta1FaceAnnotation_SorrowLikelihood_Unknown,
         GoogleCloudVisionV1p2beta1FaceAnnotation_SorrowLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p2beta1FaceAnnotation_SorrowLikelihood_Unlikely,
         GoogleCloudVisionV1p2beta1FaceAnnotation_SorrowLikelihood_Possible,
@@ -416,7 +453,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p2beta1FaceAnnotation_SurpriseLikelihood
     GoogleCloudVisionV1p2beta1FaceAnnotation_SurpriseLikelihood
-      ( GoogleCloudVisionV1p2beta1FaceAnnotation_SurpriseLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p2beta1FaceAnnotation_SurpriseLikelihood_Unknown,
         GoogleCloudVisionV1p2beta1FaceAnnotation_SurpriseLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p2beta1FaceAnnotation_SurpriseLikelihood_Unlikely,
         GoogleCloudVisionV1p2beta1FaceAnnotation_SurpriseLikelihood_Possible,
@@ -427,7 +465,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p2beta1FaceAnnotation_UnderExposedLikelihood
     GoogleCloudVisionV1p2beta1FaceAnnotation_UnderExposedLikelihood
-      ( GoogleCloudVisionV1p2beta1FaceAnnotation_UnderExposedLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p2beta1FaceAnnotation_UnderExposedLikelihood_Unknown,
         GoogleCloudVisionV1p2beta1FaceAnnotation_UnderExposedLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p2beta1FaceAnnotation_UnderExposedLikelihood_Unlikely,
         GoogleCloudVisionV1p2beta1FaceAnnotation_UnderExposedLikelihood_Possible,
@@ -438,7 +477,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p2beta1FaceAnnotationLandmark_Type
     GoogleCloudVisionV1p2beta1FaceAnnotationLandmark_Type
-      ( GoogleCloudVisionV1p2beta1FaceAnnotationLandmark_Type_UNKNOWNLANDMARK,
+      (
+        GoogleCloudVisionV1p2beta1FaceAnnotationLandmark_Type_UNKNOWNLANDMARK,
         GoogleCloudVisionV1p2beta1FaceAnnotationLandmark_Type_LEFTEYE,
         GoogleCloudVisionV1p2beta1FaceAnnotationLandmark_Type_RIGHTEYE,
         GoogleCloudVisionV1p2beta1FaceAnnotationLandmark_Type_LEFTOFLEFTEYEBROW,
@@ -480,7 +520,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p2beta1Feature_Type
     GoogleCloudVisionV1p2beta1Feature_Type
-      ( GoogleCloudVisionV1p2beta1Feature_Type_TYPEUNSPECIFIED,
+      (
+        GoogleCloudVisionV1p2beta1Feature_Type_TYPEUNSPECIFIED,
         GoogleCloudVisionV1p2beta1Feature_Type_FACEDETECTION,
         GoogleCloudVisionV1p2beta1Feature_Type_LANDMARKDETECTION,
         GoogleCloudVisionV1p2beta1Feature_Type_LOGODETECTION,
@@ -498,7 +539,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p2beta1OperationMetadata_State
     GoogleCloudVisionV1p2beta1OperationMetadata_State
-      ( GoogleCloudVisionV1p2beta1OperationMetadata_State_STATEUNSPECIFIED,
+      (
+        GoogleCloudVisionV1p2beta1OperationMetadata_State_STATEUNSPECIFIED,
         GoogleCloudVisionV1p2beta1OperationMetadata_State_Created,
         GoogleCloudVisionV1p2beta1OperationMetadata_State_Running,
         GoogleCloudVisionV1p2beta1OperationMetadata_State_Done,
@@ -508,7 +550,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Adult
     GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Adult
-      ( GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Adult_Unknown,
+      (
+        GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Adult_Unknown,
         GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Adult_VERYUNLIKELY,
         GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Adult_Unlikely,
         GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Adult_Possible,
@@ -519,7 +562,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Medical
     GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Medical
-      ( GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Medical_Unknown,
+      (
+        GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Medical_Unknown,
         GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Medical_VERYUNLIKELY,
         GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Medical_Unlikely,
         GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Medical_Possible,
@@ -530,7 +574,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Racy
     GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Racy
-      ( GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Racy_Unknown,
+      (
+        GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Racy_Unknown,
         GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Racy_VERYUNLIKELY,
         GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Racy_Unlikely,
         GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Racy_Possible,
@@ -541,7 +586,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof
     GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof
-      ( GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof_Unknown,
+      (
+        GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof_Unknown,
         GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof_VERYUNLIKELY,
         GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof_Unlikely,
         GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof_Possible,
@@ -552,7 +598,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence
     GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence
-      ( GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence_Unknown,
+      (
+        GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence_Unknown,
         GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence_VERYUNLIKELY,
         GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence_Unlikely,
         GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence_Possible,
@@ -563,7 +610,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak_Type
     GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak_Type
-      ( GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak_Type_Unknown,
+      (
+        GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak_Type_Unknown,
         GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak_Type_Space,
         GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak_Type_SURESPACE,
         GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak_Type_EOLSURESPACE,
@@ -574,7 +622,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p3beta1BatchOperationMetadata_State
     GoogleCloudVisionV1p3beta1BatchOperationMetadata_State
-      ( GoogleCloudVisionV1p3beta1BatchOperationMetadata_State_STATEUNSPECIFIED,
+      (
+        GoogleCloudVisionV1p3beta1BatchOperationMetadata_State_STATEUNSPECIFIED,
         GoogleCloudVisionV1p3beta1BatchOperationMetadata_State_Processing,
         GoogleCloudVisionV1p3beta1BatchOperationMetadata_State_Successful,
         GoogleCloudVisionV1p3beta1BatchOperationMetadata_State_Failed,
@@ -584,7 +633,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p3beta1Block_BlockType
     GoogleCloudVisionV1p3beta1Block_BlockType
-      ( GoogleCloudVisionV1p3beta1Block_BlockType_Unknown,
+      (
+        GoogleCloudVisionV1p3beta1Block_BlockType_Unknown,
         GoogleCloudVisionV1p3beta1Block_BlockType_Text,
         GoogleCloudVisionV1p3beta1Block_BlockType_Table,
         GoogleCloudVisionV1p3beta1Block_BlockType_Picture,
@@ -595,7 +645,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p3beta1FaceAnnotation_AngerLikelihood
     GoogleCloudVisionV1p3beta1FaceAnnotation_AngerLikelihood
-      ( GoogleCloudVisionV1p3beta1FaceAnnotation_AngerLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p3beta1FaceAnnotation_AngerLikelihood_Unknown,
         GoogleCloudVisionV1p3beta1FaceAnnotation_AngerLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p3beta1FaceAnnotation_AngerLikelihood_Unlikely,
         GoogleCloudVisionV1p3beta1FaceAnnotation_AngerLikelihood_Possible,
@@ -606,7 +657,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p3beta1FaceAnnotation_BlurredLikelihood
     GoogleCloudVisionV1p3beta1FaceAnnotation_BlurredLikelihood
-      ( GoogleCloudVisionV1p3beta1FaceAnnotation_BlurredLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p3beta1FaceAnnotation_BlurredLikelihood_Unknown,
         GoogleCloudVisionV1p3beta1FaceAnnotation_BlurredLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p3beta1FaceAnnotation_BlurredLikelihood_Unlikely,
         GoogleCloudVisionV1p3beta1FaceAnnotation_BlurredLikelihood_Possible,
@@ -617,7 +669,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p3beta1FaceAnnotation_HeadwearLikelihood
     GoogleCloudVisionV1p3beta1FaceAnnotation_HeadwearLikelihood
-      ( GoogleCloudVisionV1p3beta1FaceAnnotation_HeadwearLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p3beta1FaceAnnotation_HeadwearLikelihood_Unknown,
         GoogleCloudVisionV1p3beta1FaceAnnotation_HeadwearLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p3beta1FaceAnnotation_HeadwearLikelihood_Unlikely,
         GoogleCloudVisionV1p3beta1FaceAnnotation_HeadwearLikelihood_Possible,
@@ -628,7 +681,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p3beta1FaceAnnotation_JoyLikelihood
     GoogleCloudVisionV1p3beta1FaceAnnotation_JoyLikelihood
-      ( GoogleCloudVisionV1p3beta1FaceAnnotation_JoyLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p3beta1FaceAnnotation_JoyLikelihood_Unknown,
         GoogleCloudVisionV1p3beta1FaceAnnotation_JoyLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p3beta1FaceAnnotation_JoyLikelihood_Unlikely,
         GoogleCloudVisionV1p3beta1FaceAnnotation_JoyLikelihood_Possible,
@@ -639,7 +693,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p3beta1FaceAnnotation_SorrowLikelihood
     GoogleCloudVisionV1p3beta1FaceAnnotation_SorrowLikelihood
-      ( GoogleCloudVisionV1p3beta1FaceAnnotation_SorrowLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p3beta1FaceAnnotation_SorrowLikelihood_Unknown,
         GoogleCloudVisionV1p3beta1FaceAnnotation_SorrowLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p3beta1FaceAnnotation_SorrowLikelihood_Unlikely,
         GoogleCloudVisionV1p3beta1FaceAnnotation_SorrowLikelihood_Possible,
@@ -650,7 +705,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p3beta1FaceAnnotation_SurpriseLikelihood
     GoogleCloudVisionV1p3beta1FaceAnnotation_SurpriseLikelihood
-      ( GoogleCloudVisionV1p3beta1FaceAnnotation_SurpriseLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p3beta1FaceAnnotation_SurpriseLikelihood_Unknown,
         GoogleCloudVisionV1p3beta1FaceAnnotation_SurpriseLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p3beta1FaceAnnotation_SurpriseLikelihood_Unlikely,
         GoogleCloudVisionV1p3beta1FaceAnnotation_SurpriseLikelihood_Possible,
@@ -661,7 +717,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p3beta1FaceAnnotation_UnderExposedLikelihood
     GoogleCloudVisionV1p3beta1FaceAnnotation_UnderExposedLikelihood
-      ( GoogleCloudVisionV1p3beta1FaceAnnotation_UnderExposedLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p3beta1FaceAnnotation_UnderExposedLikelihood_Unknown,
         GoogleCloudVisionV1p3beta1FaceAnnotation_UnderExposedLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p3beta1FaceAnnotation_UnderExposedLikelihood_Unlikely,
         GoogleCloudVisionV1p3beta1FaceAnnotation_UnderExposedLikelihood_Possible,
@@ -672,7 +729,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p3beta1FaceAnnotationLandmark_Type
     GoogleCloudVisionV1p3beta1FaceAnnotationLandmark_Type
-      ( GoogleCloudVisionV1p3beta1FaceAnnotationLandmark_Type_UNKNOWNLANDMARK,
+      (
+        GoogleCloudVisionV1p3beta1FaceAnnotationLandmark_Type_UNKNOWNLANDMARK,
         GoogleCloudVisionV1p3beta1FaceAnnotationLandmark_Type_LEFTEYE,
         GoogleCloudVisionV1p3beta1FaceAnnotationLandmark_Type_RIGHTEYE,
         GoogleCloudVisionV1p3beta1FaceAnnotationLandmark_Type_LEFTOFLEFTEYEBROW,
@@ -714,7 +772,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p3beta1OperationMetadata_State
     GoogleCloudVisionV1p3beta1OperationMetadata_State
-      ( GoogleCloudVisionV1p3beta1OperationMetadata_State_STATEUNSPECIFIED,
+      (
+        GoogleCloudVisionV1p3beta1OperationMetadata_State_STATEUNSPECIFIED,
         GoogleCloudVisionV1p3beta1OperationMetadata_State_Created,
         GoogleCloudVisionV1p3beta1OperationMetadata_State_Running,
         GoogleCloudVisionV1p3beta1OperationMetadata_State_Done,
@@ -724,7 +783,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Adult
     GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Adult
-      ( GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Adult_Unknown,
+      (
+        GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Adult_Unknown,
         GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Adult_VERYUNLIKELY,
         GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Adult_Unlikely,
         GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Adult_Possible,
@@ -735,7 +795,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Medical
     GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Medical
-      ( GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Medical_Unknown,
+      (
+        GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Medical_Unknown,
         GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Medical_VERYUNLIKELY,
         GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Medical_Unlikely,
         GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Medical_Possible,
@@ -746,7 +807,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Racy
     GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Racy
-      ( GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Racy_Unknown,
+      (
+        GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Racy_Unknown,
         GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Racy_VERYUNLIKELY,
         GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Racy_Unlikely,
         GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Racy_Possible,
@@ -757,7 +819,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof
     GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof
-      ( GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof_Unknown,
+      (
+        GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof_Unknown,
         GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof_VERYUNLIKELY,
         GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof_Unlikely,
         GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof_Possible,
@@ -768,7 +831,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence
     GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence
-      ( GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence_Unknown,
+      (
+        GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence_Unknown,
         GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence_VERYUNLIKELY,
         GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence_Unlikely,
         GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence_Possible,
@@ -779,7 +843,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak_Type
     GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak_Type
-      ( GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak_Type_Unknown,
+      (
+        GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak_Type_Unknown,
         GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak_Type_Space,
         GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak_Type_SURESPACE,
         GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak_Type_EOLSURESPACE,
@@ -790,7 +855,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p4beta1BatchOperationMetadata_State
     GoogleCloudVisionV1p4beta1BatchOperationMetadata_State
-      ( GoogleCloudVisionV1p4beta1BatchOperationMetadata_State_STATEUNSPECIFIED,
+      (
+        GoogleCloudVisionV1p4beta1BatchOperationMetadata_State_STATEUNSPECIFIED,
         GoogleCloudVisionV1p4beta1BatchOperationMetadata_State_Processing,
         GoogleCloudVisionV1p4beta1BatchOperationMetadata_State_Successful,
         GoogleCloudVisionV1p4beta1BatchOperationMetadata_State_Failed,
@@ -800,7 +866,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p4beta1Block_BlockType
     GoogleCloudVisionV1p4beta1Block_BlockType
-      ( GoogleCloudVisionV1p4beta1Block_BlockType_Unknown,
+      (
+        GoogleCloudVisionV1p4beta1Block_BlockType_Unknown,
         GoogleCloudVisionV1p4beta1Block_BlockType_Text,
         GoogleCloudVisionV1p4beta1Block_BlockType_Table,
         GoogleCloudVisionV1p4beta1Block_BlockType_Picture,
@@ -811,7 +878,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p4beta1FaceAnnotation_AngerLikelihood
     GoogleCloudVisionV1p4beta1FaceAnnotation_AngerLikelihood
-      ( GoogleCloudVisionV1p4beta1FaceAnnotation_AngerLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p4beta1FaceAnnotation_AngerLikelihood_Unknown,
         GoogleCloudVisionV1p4beta1FaceAnnotation_AngerLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p4beta1FaceAnnotation_AngerLikelihood_Unlikely,
         GoogleCloudVisionV1p4beta1FaceAnnotation_AngerLikelihood_Possible,
@@ -822,7 +890,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p4beta1FaceAnnotation_BlurredLikelihood
     GoogleCloudVisionV1p4beta1FaceAnnotation_BlurredLikelihood
-      ( GoogleCloudVisionV1p4beta1FaceAnnotation_BlurredLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p4beta1FaceAnnotation_BlurredLikelihood_Unknown,
         GoogleCloudVisionV1p4beta1FaceAnnotation_BlurredLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p4beta1FaceAnnotation_BlurredLikelihood_Unlikely,
         GoogleCloudVisionV1p4beta1FaceAnnotation_BlurredLikelihood_Possible,
@@ -833,7 +902,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p4beta1FaceAnnotation_HeadwearLikelihood
     GoogleCloudVisionV1p4beta1FaceAnnotation_HeadwearLikelihood
-      ( GoogleCloudVisionV1p4beta1FaceAnnotation_HeadwearLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p4beta1FaceAnnotation_HeadwearLikelihood_Unknown,
         GoogleCloudVisionV1p4beta1FaceAnnotation_HeadwearLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p4beta1FaceAnnotation_HeadwearLikelihood_Unlikely,
         GoogleCloudVisionV1p4beta1FaceAnnotation_HeadwearLikelihood_Possible,
@@ -844,7 +914,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p4beta1FaceAnnotation_JoyLikelihood
     GoogleCloudVisionV1p4beta1FaceAnnotation_JoyLikelihood
-      ( GoogleCloudVisionV1p4beta1FaceAnnotation_JoyLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p4beta1FaceAnnotation_JoyLikelihood_Unknown,
         GoogleCloudVisionV1p4beta1FaceAnnotation_JoyLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p4beta1FaceAnnotation_JoyLikelihood_Unlikely,
         GoogleCloudVisionV1p4beta1FaceAnnotation_JoyLikelihood_Possible,
@@ -855,7 +926,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p4beta1FaceAnnotation_SorrowLikelihood
     GoogleCloudVisionV1p4beta1FaceAnnotation_SorrowLikelihood
-      ( GoogleCloudVisionV1p4beta1FaceAnnotation_SorrowLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p4beta1FaceAnnotation_SorrowLikelihood_Unknown,
         GoogleCloudVisionV1p4beta1FaceAnnotation_SorrowLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p4beta1FaceAnnotation_SorrowLikelihood_Unlikely,
         GoogleCloudVisionV1p4beta1FaceAnnotation_SorrowLikelihood_Possible,
@@ -866,7 +938,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p4beta1FaceAnnotation_SurpriseLikelihood
     GoogleCloudVisionV1p4beta1FaceAnnotation_SurpriseLikelihood
-      ( GoogleCloudVisionV1p4beta1FaceAnnotation_SurpriseLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p4beta1FaceAnnotation_SurpriseLikelihood_Unknown,
         GoogleCloudVisionV1p4beta1FaceAnnotation_SurpriseLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p4beta1FaceAnnotation_SurpriseLikelihood_Unlikely,
         GoogleCloudVisionV1p4beta1FaceAnnotation_SurpriseLikelihood_Possible,
@@ -877,7 +950,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p4beta1FaceAnnotation_UnderExposedLikelihood
     GoogleCloudVisionV1p4beta1FaceAnnotation_UnderExposedLikelihood
-      ( GoogleCloudVisionV1p4beta1FaceAnnotation_UnderExposedLikelihood_Unknown,
+      (
+        GoogleCloudVisionV1p4beta1FaceAnnotation_UnderExposedLikelihood_Unknown,
         GoogleCloudVisionV1p4beta1FaceAnnotation_UnderExposedLikelihood_VERYUNLIKELY,
         GoogleCloudVisionV1p4beta1FaceAnnotation_UnderExposedLikelihood_Unlikely,
         GoogleCloudVisionV1p4beta1FaceAnnotation_UnderExposedLikelihood_Possible,
@@ -888,7 +962,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p4beta1FaceAnnotationLandmark_Type
     GoogleCloudVisionV1p4beta1FaceAnnotationLandmark_Type
-      ( GoogleCloudVisionV1p4beta1FaceAnnotationLandmark_Type_UNKNOWNLANDMARK,
+      (
+        GoogleCloudVisionV1p4beta1FaceAnnotationLandmark_Type_UNKNOWNLANDMARK,
         GoogleCloudVisionV1p4beta1FaceAnnotationLandmark_Type_LEFTEYE,
         GoogleCloudVisionV1p4beta1FaceAnnotationLandmark_Type_RIGHTEYE,
         GoogleCloudVisionV1p4beta1FaceAnnotationLandmark_Type_LEFTOFLEFTEYEBROW,
@@ -930,7 +1005,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p4beta1OperationMetadata_State
     GoogleCloudVisionV1p4beta1OperationMetadata_State
-      ( GoogleCloudVisionV1p4beta1OperationMetadata_State_STATEUNSPECIFIED,
+      (
+        GoogleCloudVisionV1p4beta1OperationMetadata_State_STATEUNSPECIFIED,
         GoogleCloudVisionV1p4beta1OperationMetadata_State_Created,
         GoogleCloudVisionV1p4beta1OperationMetadata_State_Running,
         GoogleCloudVisionV1p4beta1OperationMetadata_State_Done,
@@ -940,7 +1016,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Adult
     GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Adult
-      ( GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Adult_Unknown,
+      (
+        GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Adult_Unknown,
         GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Adult_VERYUNLIKELY,
         GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Adult_Unlikely,
         GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Adult_Possible,
@@ -951,7 +1028,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Medical
     GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Medical
-      ( GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Medical_Unknown,
+      (
+        GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Medical_Unknown,
         GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Medical_VERYUNLIKELY,
         GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Medical_Unlikely,
         GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Medical_Possible,
@@ -962,7 +1040,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Racy
     GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Racy
-      ( GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Racy_Unknown,
+      (
+        GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Racy_Unknown,
         GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Racy_VERYUNLIKELY,
         GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Racy_Unlikely,
         GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Racy_Possible,
@@ -973,7 +1052,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof
     GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof
-      ( GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof_Unknown,
+      (
+        GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof_Unknown,
         GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof_VERYUNLIKELY,
         GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof_Unlikely,
         GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof_Possible,
@@ -984,7 +1064,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence
     GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence
-      ( GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence_Unknown,
+      (
+        GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence_Unknown,
         GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence_VERYUNLIKELY,
         GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence_Unlikely,
         GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence_Possible,
@@ -995,7 +1076,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak_Type
     GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak_Type
-      ( GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak_Type_Unknown,
+      (
+        GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak_Type_Unknown,
         GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak_Type_Space,
         GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak_Type_SURESPACE,
         GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak_Type_EOLSURESPACE,
@@ -1006,7 +1088,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * Landmark_Type
     Landmark_Type
-      ( Landmark_Type_UNKNOWNLANDMARK,
+      (
+        Landmark_Type_UNKNOWNLANDMARK,
         Landmark_Type_LEFTEYE,
         Landmark_Type_RIGHTEYE,
         Landmark_Type_LEFTOFLEFTEYEBROW,
@@ -1048,7 +1131,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * OperationMetadata_State
     OperationMetadata_State
-      ( OperationMetadata_State_STATEUNSPECIFIED,
+      (
+        OperationMetadata_State_STATEUNSPECIFIED,
         OperationMetadata_State_Created,
         OperationMetadata_State_Running,
         OperationMetadata_State_Done,
@@ -1058,7 +1142,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * SafeSearchAnnotation_Adult
     SafeSearchAnnotation_Adult
-      ( SafeSearchAnnotation_Adult_Unknown,
+      (
+        SafeSearchAnnotation_Adult_Unknown,
         SafeSearchAnnotation_Adult_VERYUNLIKELY,
         SafeSearchAnnotation_Adult_Unlikely,
         SafeSearchAnnotation_Adult_Possible,
@@ -1069,7 +1154,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * SafeSearchAnnotation_Medical
     SafeSearchAnnotation_Medical
-      ( SafeSearchAnnotation_Medical_Unknown,
+      (
+        SafeSearchAnnotation_Medical_Unknown,
         SafeSearchAnnotation_Medical_VERYUNLIKELY,
         SafeSearchAnnotation_Medical_Unlikely,
         SafeSearchAnnotation_Medical_Possible,
@@ -1080,7 +1166,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * SafeSearchAnnotation_Racy
     SafeSearchAnnotation_Racy
-      ( SafeSearchAnnotation_Racy_Unknown,
+      (
+        SafeSearchAnnotation_Racy_Unknown,
         SafeSearchAnnotation_Racy_VERYUNLIKELY,
         SafeSearchAnnotation_Racy_Unlikely,
         SafeSearchAnnotation_Racy_Possible,
@@ -1091,7 +1178,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * SafeSearchAnnotation_Spoof
     SafeSearchAnnotation_Spoof
-      ( SafeSearchAnnotation_Spoof_Unknown,
+      (
+        SafeSearchAnnotation_Spoof_Unknown,
         SafeSearchAnnotation_Spoof_VERYUNLIKELY,
         SafeSearchAnnotation_Spoof_Unlikely,
         SafeSearchAnnotation_Spoof_Possible,
@@ -1102,7 +1190,8 @@ module Gogol.Vision.Internal.Sum
 
     -- * SafeSearchAnnotation_Violence
     SafeSearchAnnotation_Violence
-      ( SafeSearchAnnotation_Violence_Unknown,
+      (
+        SafeSearchAnnotation_Violence_Unknown,
         SafeSearchAnnotation_Violence_VERYUNLIKELY,
         SafeSearchAnnotation_Violence_Unlikely,
         SafeSearchAnnotation_Violence_Possible,
@@ -1110,23 +1199,22 @@ module Gogol.Vision.Internal.Sum
         SafeSearchAnnotation_Violence_VERYLIKELY,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -1139,21 +1227,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | The current state of the batch operation.
-newtype BatchOperationMetadata_State = BatchOperationMetadata_State {fromBatchOperationMetadata_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype BatchOperationMetadata_State = BatchOperationMetadata_State { fromBatchOperationMetadata_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Invalid.
 pattern BatchOperationMetadata_State_STATEUNSPECIFIED :: BatchOperationMetadata_State
@@ -1181,21 +1268,20 @@ pattern BatchOperationMetadata_State_Cancelled = BatchOperationMetadata_State "C
   BatchOperationMetadata_State_Successful,
   BatchOperationMetadata_State_Failed,
   BatchOperationMetadata_State_Cancelled,
-  BatchOperationMetadata_State
-  #-}
+  BatchOperationMetadata_State #-}
 
 -- | Detected block type (text, image etc) for this block.
-newtype Block_BlockType = Block_BlockType {fromBlock_BlockType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Block_BlockType = Block_BlockType { fromBlock_BlockType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown block type.
 pattern Block_BlockType_Unknown :: Block_BlockType
@@ -1228,21 +1314,20 @@ pattern Block_BlockType_Barcode = Block_BlockType "BARCODE"
   Block_BlockType_Picture,
   Block_BlockType_Ruler,
   Block_BlockType_Barcode,
-  Block_BlockType
-  #-}
+  Block_BlockType #-}
 
 -- | Detected break type.
-newtype DetectedBreak_Type = DetectedBreak_Type {fromDetectedBreak_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DetectedBreak_Type = DetectedBreak_Type { fromDetectedBreak_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown break label type.
 pattern DetectedBreak_Type_Unknown :: DetectedBreak_Type
@@ -1275,21 +1360,20 @@ pattern DetectedBreak_Type_LINEBREAK = DetectedBreak_Type "LINE_BREAK"
   DetectedBreak_Type_EOLSURESPACE,
   DetectedBreak_Type_Hyphen,
   DetectedBreak_Type_LINEBREAK,
-  DetectedBreak_Type
-  #-}
+  DetectedBreak_Type #-}
 
 -- | Anger likelihood.
-newtype FaceAnnotation_AngerLikelihood = FaceAnnotation_AngerLikelihood {fromFaceAnnotation_AngerLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FaceAnnotation_AngerLikelihood = FaceAnnotation_AngerLikelihood { fromFaceAnnotation_AngerLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern FaceAnnotation_AngerLikelihood_Unknown :: FaceAnnotation_AngerLikelihood
@@ -1322,21 +1406,20 @@ pattern FaceAnnotation_AngerLikelihood_VERYLIKELY = FaceAnnotation_AngerLikeliho
   FaceAnnotation_AngerLikelihood_Possible,
   FaceAnnotation_AngerLikelihood_Likely,
   FaceAnnotation_AngerLikelihood_VERYLIKELY,
-  FaceAnnotation_AngerLikelihood
-  #-}
+  FaceAnnotation_AngerLikelihood #-}
 
 -- | Blurred likelihood.
-newtype FaceAnnotation_BlurredLikelihood = FaceAnnotation_BlurredLikelihood {fromFaceAnnotation_BlurredLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FaceAnnotation_BlurredLikelihood = FaceAnnotation_BlurredLikelihood { fromFaceAnnotation_BlurredLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern FaceAnnotation_BlurredLikelihood_Unknown :: FaceAnnotation_BlurredLikelihood
@@ -1369,21 +1452,20 @@ pattern FaceAnnotation_BlurredLikelihood_VERYLIKELY = FaceAnnotation_BlurredLike
   FaceAnnotation_BlurredLikelihood_Possible,
   FaceAnnotation_BlurredLikelihood_Likely,
   FaceAnnotation_BlurredLikelihood_VERYLIKELY,
-  FaceAnnotation_BlurredLikelihood
-  #-}
+  FaceAnnotation_BlurredLikelihood #-}
 
 -- | Headwear likelihood.
-newtype FaceAnnotation_HeadwearLikelihood = FaceAnnotation_HeadwearLikelihood {fromFaceAnnotation_HeadwearLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FaceAnnotation_HeadwearLikelihood = FaceAnnotation_HeadwearLikelihood { fromFaceAnnotation_HeadwearLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern FaceAnnotation_HeadwearLikelihood_Unknown :: FaceAnnotation_HeadwearLikelihood
@@ -1416,21 +1498,20 @@ pattern FaceAnnotation_HeadwearLikelihood_VERYLIKELY = FaceAnnotation_HeadwearLi
   FaceAnnotation_HeadwearLikelihood_Possible,
   FaceAnnotation_HeadwearLikelihood_Likely,
   FaceAnnotation_HeadwearLikelihood_VERYLIKELY,
-  FaceAnnotation_HeadwearLikelihood
-  #-}
+  FaceAnnotation_HeadwearLikelihood #-}
 
 -- | Joy likelihood.
-newtype FaceAnnotation_JoyLikelihood = FaceAnnotation_JoyLikelihood {fromFaceAnnotation_JoyLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FaceAnnotation_JoyLikelihood = FaceAnnotation_JoyLikelihood { fromFaceAnnotation_JoyLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern FaceAnnotation_JoyLikelihood_Unknown :: FaceAnnotation_JoyLikelihood
@@ -1463,21 +1544,20 @@ pattern FaceAnnotation_JoyLikelihood_VERYLIKELY = FaceAnnotation_JoyLikelihood "
   FaceAnnotation_JoyLikelihood_Possible,
   FaceAnnotation_JoyLikelihood_Likely,
   FaceAnnotation_JoyLikelihood_VERYLIKELY,
-  FaceAnnotation_JoyLikelihood
-  #-}
+  FaceAnnotation_JoyLikelihood #-}
 
 -- | Sorrow likelihood.
-newtype FaceAnnotation_SorrowLikelihood = FaceAnnotation_SorrowLikelihood {fromFaceAnnotation_SorrowLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FaceAnnotation_SorrowLikelihood = FaceAnnotation_SorrowLikelihood { fromFaceAnnotation_SorrowLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern FaceAnnotation_SorrowLikelihood_Unknown :: FaceAnnotation_SorrowLikelihood
@@ -1510,21 +1590,20 @@ pattern FaceAnnotation_SorrowLikelihood_VERYLIKELY = FaceAnnotation_SorrowLikeli
   FaceAnnotation_SorrowLikelihood_Possible,
   FaceAnnotation_SorrowLikelihood_Likely,
   FaceAnnotation_SorrowLikelihood_VERYLIKELY,
-  FaceAnnotation_SorrowLikelihood
-  #-}
+  FaceAnnotation_SorrowLikelihood #-}
 
 -- | Surprise likelihood.
-newtype FaceAnnotation_SurpriseLikelihood = FaceAnnotation_SurpriseLikelihood {fromFaceAnnotation_SurpriseLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FaceAnnotation_SurpriseLikelihood = FaceAnnotation_SurpriseLikelihood { fromFaceAnnotation_SurpriseLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern FaceAnnotation_SurpriseLikelihood_Unknown :: FaceAnnotation_SurpriseLikelihood
@@ -1557,21 +1636,20 @@ pattern FaceAnnotation_SurpriseLikelihood_VERYLIKELY = FaceAnnotation_SurpriseLi
   FaceAnnotation_SurpriseLikelihood_Possible,
   FaceAnnotation_SurpriseLikelihood_Likely,
   FaceAnnotation_SurpriseLikelihood_VERYLIKELY,
-  FaceAnnotation_SurpriseLikelihood
-  #-}
+  FaceAnnotation_SurpriseLikelihood #-}
 
 -- | Under-exposed likelihood.
-newtype FaceAnnotation_UnderExposedLikelihood = FaceAnnotation_UnderExposedLikelihood {fromFaceAnnotation_UnderExposedLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FaceAnnotation_UnderExposedLikelihood = FaceAnnotation_UnderExposedLikelihood { fromFaceAnnotation_UnderExposedLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern FaceAnnotation_UnderExposedLikelihood_Unknown :: FaceAnnotation_UnderExposedLikelihood
@@ -1604,21 +1682,20 @@ pattern FaceAnnotation_UnderExposedLikelihood_VERYLIKELY = FaceAnnotation_UnderE
   FaceAnnotation_UnderExposedLikelihood_Possible,
   FaceAnnotation_UnderExposedLikelihood_Likely,
   FaceAnnotation_UnderExposedLikelihood_VERYLIKELY,
-  FaceAnnotation_UnderExposedLikelihood
-  #-}
+  FaceAnnotation_UnderExposedLikelihood #-}
 
 -- | Detected block type (text, image etc) for this block.
-newtype GoogleCloudVisionV1p1beta1Block_BlockType = GoogleCloudVisionV1p1beta1Block_BlockType {fromGoogleCloudVisionV1p1beta1Block_BlockType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p1beta1Block_BlockType = GoogleCloudVisionV1p1beta1Block_BlockType { fromGoogleCloudVisionV1p1beta1Block_BlockType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown block type.
 pattern GoogleCloudVisionV1p1beta1Block_BlockType_Unknown :: GoogleCloudVisionV1p1beta1Block_BlockType
@@ -1651,21 +1728,20 @@ pattern GoogleCloudVisionV1p1beta1Block_BlockType_Barcode = GoogleCloudVisionV1p
   GoogleCloudVisionV1p1beta1Block_BlockType_Picture,
   GoogleCloudVisionV1p1beta1Block_BlockType_Ruler,
   GoogleCloudVisionV1p1beta1Block_BlockType_Barcode,
-  GoogleCloudVisionV1p1beta1Block_BlockType
-  #-}
+  GoogleCloudVisionV1p1beta1Block_BlockType #-}
 
 -- | Anger likelihood.
-newtype GoogleCloudVisionV1p1beta1FaceAnnotation_AngerLikelihood = GoogleCloudVisionV1p1beta1FaceAnnotation_AngerLikelihood {fromGoogleCloudVisionV1p1beta1FaceAnnotation_AngerLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p1beta1FaceAnnotation_AngerLikelihood = GoogleCloudVisionV1p1beta1FaceAnnotation_AngerLikelihood { fromGoogleCloudVisionV1p1beta1FaceAnnotation_AngerLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p1beta1FaceAnnotation_AngerLikelihood_Unknown :: GoogleCloudVisionV1p1beta1FaceAnnotation_AngerLikelihood
@@ -1698,21 +1774,20 @@ pattern GoogleCloudVisionV1p1beta1FaceAnnotation_AngerLikelihood_VERYLIKELY = Go
   GoogleCloudVisionV1p1beta1FaceAnnotation_AngerLikelihood_Possible,
   GoogleCloudVisionV1p1beta1FaceAnnotation_AngerLikelihood_Likely,
   GoogleCloudVisionV1p1beta1FaceAnnotation_AngerLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p1beta1FaceAnnotation_AngerLikelihood
-  #-}
+  GoogleCloudVisionV1p1beta1FaceAnnotation_AngerLikelihood #-}
 
 -- | Blurred likelihood.
-newtype GoogleCloudVisionV1p1beta1FaceAnnotation_BlurredLikelihood = GoogleCloudVisionV1p1beta1FaceAnnotation_BlurredLikelihood {fromGoogleCloudVisionV1p1beta1FaceAnnotation_BlurredLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p1beta1FaceAnnotation_BlurredLikelihood = GoogleCloudVisionV1p1beta1FaceAnnotation_BlurredLikelihood { fromGoogleCloudVisionV1p1beta1FaceAnnotation_BlurredLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p1beta1FaceAnnotation_BlurredLikelihood_Unknown :: GoogleCloudVisionV1p1beta1FaceAnnotation_BlurredLikelihood
@@ -1745,21 +1820,20 @@ pattern GoogleCloudVisionV1p1beta1FaceAnnotation_BlurredLikelihood_VERYLIKELY = 
   GoogleCloudVisionV1p1beta1FaceAnnotation_BlurredLikelihood_Possible,
   GoogleCloudVisionV1p1beta1FaceAnnotation_BlurredLikelihood_Likely,
   GoogleCloudVisionV1p1beta1FaceAnnotation_BlurredLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p1beta1FaceAnnotation_BlurredLikelihood
-  #-}
+  GoogleCloudVisionV1p1beta1FaceAnnotation_BlurredLikelihood #-}
 
 -- | Headwear likelihood.
-newtype GoogleCloudVisionV1p1beta1FaceAnnotation_HeadwearLikelihood = GoogleCloudVisionV1p1beta1FaceAnnotation_HeadwearLikelihood {fromGoogleCloudVisionV1p1beta1FaceAnnotation_HeadwearLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p1beta1FaceAnnotation_HeadwearLikelihood = GoogleCloudVisionV1p1beta1FaceAnnotation_HeadwearLikelihood { fromGoogleCloudVisionV1p1beta1FaceAnnotation_HeadwearLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p1beta1FaceAnnotation_HeadwearLikelihood_Unknown :: GoogleCloudVisionV1p1beta1FaceAnnotation_HeadwearLikelihood
@@ -1792,21 +1866,20 @@ pattern GoogleCloudVisionV1p1beta1FaceAnnotation_HeadwearLikelihood_VERYLIKELY =
   GoogleCloudVisionV1p1beta1FaceAnnotation_HeadwearLikelihood_Possible,
   GoogleCloudVisionV1p1beta1FaceAnnotation_HeadwearLikelihood_Likely,
   GoogleCloudVisionV1p1beta1FaceAnnotation_HeadwearLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p1beta1FaceAnnotation_HeadwearLikelihood
-  #-}
+  GoogleCloudVisionV1p1beta1FaceAnnotation_HeadwearLikelihood #-}
 
 -- | Joy likelihood.
-newtype GoogleCloudVisionV1p1beta1FaceAnnotation_JoyLikelihood = GoogleCloudVisionV1p1beta1FaceAnnotation_JoyLikelihood {fromGoogleCloudVisionV1p1beta1FaceAnnotation_JoyLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p1beta1FaceAnnotation_JoyLikelihood = GoogleCloudVisionV1p1beta1FaceAnnotation_JoyLikelihood { fromGoogleCloudVisionV1p1beta1FaceAnnotation_JoyLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p1beta1FaceAnnotation_JoyLikelihood_Unknown :: GoogleCloudVisionV1p1beta1FaceAnnotation_JoyLikelihood
@@ -1839,21 +1912,20 @@ pattern GoogleCloudVisionV1p1beta1FaceAnnotation_JoyLikelihood_VERYLIKELY = Goog
   GoogleCloudVisionV1p1beta1FaceAnnotation_JoyLikelihood_Possible,
   GoogleCloudVisionV1p1beta1FaceAnnotation_JoyLikelihood_Likely,
   GoogleCloudVisionV1p1beta1FaceAnnotation_JoyLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p1beta1FaceAnnotation_JoyLikelihood
-  #-}
+  GoogleCloudVisionV1p1beta1FaceAnnotation_JoyLikelihood #-}
 
 -- | Sorrow likelihood.
-newtype GoogleCloudVisionV1p1beta1FaceAnnotation_SorrowLikelihood = GoogleCloudVisionV1p1beta1FaceAnnotation_SorrowLikelihood {fromGoogleCloudVisionV1p1beta1FaceAnnotation_SorrowLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p1beta1FaceAnnotation_SorrowLikelihood = GoogleCloudVisionV1p1beta1FaceAnnotation_SorrowLikelihood { fromGoogleCloudVisionV1p1beta1FaceAnnotation_SorrowLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p1beta1FaceAnnotation_SorrowLikelihood_Unknown :: GoogleCloudVisionV1p1beta1FaceAnnotation_SorrowLikelihood
@@ -1886,21 +1958,20 @@ pattern GoogleCloudVisionV1p1beta1FaceAnnotation_SorrowLikelihood_VERYLIKELY = G
   GoogleCloudVisionV1p1beta1FaceAnnotation_SorrowLikelihood_Possible,
   GoogleCloudVisionV1p1beta1FaceAnnotation_SorrowLikelihood_Likely,
   GoogleCloudVisionV1p1beta1FaceAnnotation_SorrowLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p1beta1FaceAnnotation_SorrowLikelihood
-  #-}
+  GoogleCloudVisionV1p1beta1FaceAnnotation_SorrowLikelihood #-}
 
 -- | Surprise likelihood.
-newtype GoogleCloudVisionV1p1beta1FaceAnnotation_SurpriseLikelihood = GoogleCloudVisionV1p1beta1FaceAnnotation_SurpriseLikelihood {fromGoogleCloudVisionV1p1beta1FaceAnnotation_SurpriseLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p1beta1FaceAnnotation_SurpriseLikelihood = GoogleCloudVisionV1p1beta1FaceAnnotation_SurpriseLikelihood { fromGoogleCloudVisionV1p1beta1FaceAnnotation_SurpriseLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p1beta1FaceAnnotation_SurpriseLikelihood_Unknown :: GoogleCloudVisionV1p1beta1FaceAnnotation_SurpriseLikelihood
@@ -1933,21 +2004,20 @@ pattern GoogleCloudVisionV1p1beta1FaceAnnotation_SurpriseLikelihood_VERYLIKELY =
   GoogleCloudVisionV1p1beta1FaceAnnotation_SurpriseLikelihood_Possible,
   GoogleCloudVisionV1p1beta1FaceAnnotation_SurpriseLikelihood_Likely,
   GoogleCloudVisionV1p1beta1FaceAnnotation_SurpriseLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p1beta1FaceAnnotation_SurpriseLikelihood
-  #-}
+  GoogleCloudVisionV1p1beta1FaceAnnotation_SurpriseLikelihood #-}
 
 -- | Under-exposed likelihood.
-newtype GoogleCloudVisionV1p1beta1FaceAnnotation_UnderExposedLikelihood = GoogleCloudVisionV1p1beta1FaceAnnotation_UnderExposedLikelihood {fromGoogleCloudVisionV1p1beta1FaceAnnotation_UnderExposedLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p1beta1FaceAnnotation_UnderExposedLikelihood = GoogleCloudVisionV1p1beta1FaceAnnotation_UnderExposedLikelihood { fromGoogleCloudVisionV1p1beta1FaceAnnotation_UnderExposedLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p1beta1FaceAnnotation_UnderExposedLikelihood_Unknown :: GoogleCloudVisionV1p1beta1FaceAnnotation_UnderExposedLikelihood
@@ -1980,21 +2050,20 @@ pattern GoogleCloudVisionV1p1beta1FaceAnnotation_UnderExposedLikelihood_VERYLIKE
   GoogleCloudVisionV1p1beta1FaceAnnotation_UnderExposedLikelihood_Possible,
   GoogleCloudVisionV1p1beta1FaceAnnotation_UnderExposedLikelihood_Likely,
   GoogleCloudVisionV1p1beta1FaceAnnotation_UnderExposedLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p1beta1FaceAnnotation_UnderExposedLikelihood
-  #-}
+  GoogleCloudVisionV1p1beta1FaceAnnotation_UnderExposedLikelihood #-}
 
 -- | Face landmark type.
-newtype GoogleCloudVisionV1p1beta1FaceAnnotationLandmark_Type = GoogleCloudVisionV1p1beta1FaceAnnotationLandmark_Type {fromGoogleCloudVisionV1p1beta1FaceAnnotationLandmark_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p1beta1FaceAnnotationLandmark_Type = GoogleCloudVisionV1p1beta1FaceAnnotationLandmark_Type { fromGoogleCloudVisionV1p1beta1FaceAnnotationLandmark_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown face landmark detected. Should not be filled.
 pattern GoogleCloudVisionV1p1beta1FaceAnnotationLandmark_Type_UNKNOWNLANDMARK :: GoogleCloudVisionV1p1beta1FaceAnnotationLandmark_Type
@@ -2182,21 +2251,20 @@ pattern GoogleCloudVisionV1p1beta1FaceAnnotationLandmark_Type_RIGHTCHEEKCENTER =
   GoogleCloudVisionV1p1beta1FaceAnnotationLandmark_Type_CHINRIGHTGONION,
   GoogleCloudVisionV1p1beta1FaceAnnotationLandmark_Type_LEFTCHEEKCENTER,
   GoogleCloudVisionV1p1beta1FaceAnnotationLandmark_Type_RIGHTCHEEKCENTER,
-  GoogleCloudVisionV1p1beta1FaceAnnotationLandmark_Type
-  #-}
+  GoogleCloudVisionV1p1beta1FaceAnnotationLandmark_Type #-}
 
 -- | Current state of the batch operation.
-newtype GoogleCloudVisionV1p1beta1OperationMetadata_State = GoogleCloudVisionV1p1beta1OperationMetadata_State {fromGoogleCloudVisionV1p1beta1OperationMetadata_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p1beta1OperationMetadata_State = GoogleCloudVisionV1p1beta1OperationMetadata_State { fromGoogleCloudVisionV1p1beta1OperationMetadata_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Invalid.
 pattern GoogleCloudVisionV1p1beta1OperationMetadata_State_STATEUNSPECIFIED :: GoogleCloudVisionV1p1beta1OperationMetadata_State
@@ -2224,21 +2292,20 @@ pattern GoogleCloudVisionV1p1beta1OperationMetadata_State_Cancelled = GoogleClou
   GoogleCloudVisionV1p1beta1OperationMetadata_State_Running,
   GoogleCloudVisionV1p1beta1OperationMetadata_State_Done,
   GoogleCloudVisionV1p1beta1OperationMetadata_State_Cancelled,
-  GoogleCloudVisionV1p1beta1OperationMetadata_State
-  #-}
+  GoogleCloudVisionV1p1beta1OperationMetadata_State #-}
 
 -- | Represents the adult content likelihood for the image. Adult content may contain elements such as nudity, pornographic images or cartoons, or sexual activities.
-newtype GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Adult = GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Adult {fromGoogleCloudVisionV1p1beta1SafeSearchAnnotation_Adult :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Adult = GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Adult { fromGoogleCloudVisionV1p1beta1SafeSearchAnnotation_Adult :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Adult_Unknown :: GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Adult
@@ -2271,21 +2338,20 @@ pattern GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Adult_VERYLIKELY = Google
   GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Adult_Possible,
   GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Adult_Likely,
   GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Adult_VERYLIKELY,
-  GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Adult
-  #-}
+  GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Adult #-}
 
 -- | Likelihood that this is a medical image.
-newtype GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Medical = GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Medical {fromGoogleCloudVisionV1p1beta1SafeSearchAnnotation_Medical :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Medical = GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Medical { fromGoogleCloudVisionV1p1beta1SafeSearchAnnotation_Medical :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Medical_Unknown :: GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Medical
@@ -2318,21 +2384,20 @@ pattern GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Medical_VERYLIKELY = Goog
   GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Medical_Possible,
   GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Medical_Likely,
   GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Medical_VERYLIKELY,
-  GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Medical
-  #-}
+  GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Medical #-}
 
 -- | Likelihood that the request image contains racy content. Racy content may include (but is not limited to) skimpy or sheer clothing, strategically covered nudity, lewd or provocative poses, or close-ups of sensitive body areas.
-newtype GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Racy = GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Racy {fromGoogleCloudVisionV1p1beta1SafeSearchAnnotation_Racy :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Racy = GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Racy { fromGoogleCloudVisionV1p1beta1SafeSearchAnnotation_Racy :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Racy_Unknown :: GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Racy
@@ -2365,21 +2430,20 @@ pattern GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Racy_VERYLIKELY = GoogleC
   GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Racy_Possible,
   GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Racy_Likely,
   GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Racy_VERYLIKELY,
-  GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Racy
-  #-}
+  GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Racy #-}
 
 -- | Spoof likelihood. The likelihood that an modification was made to the image\'s canonical version to make it appear funny or offensive.
-newtype GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof = GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof {fromGoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof = GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof { fromGoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof_Unknown :: GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof
@@ -2412,21 +2476,20 @@ pattern GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof_VERYLIKELY = Google
   GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof_Possible,
   GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof_Likely,
   GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof_VERYLIKELY,
-  GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof
-  #-}
+  GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof #-}
 
--- | Likelihood that this image contains violent content.
-newtype GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence = GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence {fromGoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Likelihood that this image contains violent content. Violent content may include death, serious harm, or injury to individuals or groups of individuals.
+newtype GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence = GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence { fromGoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence_Unknown :: GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence
@@ -2459,21 +2522,20 @@ pattern GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence_VERYLIKELY = Goo
   GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence_Possible,
   GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence_Likely,
   GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence_VERYLIKELY,
-  GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence
-  #-}
+  GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence #-}
 
 -- | Detected break type.
-newtype GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak_Type = GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak_Type {fromGoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak_Type = GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak_Type { fromGoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown break label type.
 pattern GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak_Type_Unknown :: GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak_Type
@@ -2506,21 +2568,20 @@ pattern GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak_Type_LINEBREAK = G
   GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak_Type_EOLSURESPACE,
   GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak_Type_Hyphen,
   GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak_Type_LINEBREAK,
-  GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak_Type
-  #-}
+  GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak_Type #-}
 
 -- | Detected block type (text, image etc) for this block.
-newtype GoogleCloudVisionV1p2beta1Block_BlockType = GoogleCloudVisionV1p2beta1Block_BlockType {fromGoogleCloudVisionV1p2beta1Block_BlockType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p2beta1Block_BlockType = GoogleCloudVisionV1p2beta1Block_BlockType { fromGoogleCloudVisionV1p2beta1Block_BlockType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown block type.
 pattern GoogleCloudVisionV1p2beta1Block_BlockType_Unknown :: GoogleCloudVisionV1p2beta1Block_BlockType
@@ -2553,21 +2614,20 @@ pattern GoogleCloudVisionV1p2beta1Block_BlockType_Barcode = GoogleCloudVisionV1p
   GoogleCloudVisionV1p2beta1Block_BlockType_Picture,
   GoogleCloudVisionV1p2beta1Block_BlockType_Ruler,
   GoogleCloudVisionV1p2beta1Block_BlockType_Barcode,
-  GoogleCloudVisionV1p2beta1Block_BlockType
-  #-}
+  GoogleCloudVisionV1p2beta1Block_BlockType #-}
 
 -- | Anger likelihood.
-newtype GoogleCloudVisionV1p2beta1FaceAnnotation_AngerLikelihood = GoogleCloudVisionV1p2beta1FaceAnnotation_AngerLikelihood {fromGoogleCloudVisionV1p2beta1FaceAnnotation_AngerLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p2beta1FaceAnnotation_AngerLikelihood = GoogleCloudVisionV1p2beta1FaceAnnotation_AngerLikelihood { fromGoogleCloudVisionV1p2beta1FaceAnnotation_AngerLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p2beta1FaceAnnotation_AngerLikelihood_Unknown :: GoogleCloudVisionV1p2beta1FaceAnnotation_AngerLikelihood
@@ -2600,21 +2660,20 @@ pattern GoogleCloudVisionV1p2beta1FaceAnnotation_AngerLikelihood_VERYLIKELY = Go
   GoogleCloudVisionV1p2beta1FaceAnnotation_AngerLikelihood_Possible,
   GoogleCloudVisionV1p2beta1FaceAnnotation_AngerLikelihood_Likely,
   GoogleCloudVisionV1p2beta1FaceAnnotation_AngerLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p2beta1FaceAnnotation_AngerLikelihood
-  #-}
+  GoogleCloudVisionV1p2beta1FaceAnnotation_AngerLikelihood #-}
 
 -- | Blurred likelihood.
-newtype GoogleCloudVisionV1p2beta1FaceAnnotation_BlurredLikelihood = GoogleCloudVisionV1p2beta1FaceAnnotation_BlurredLikelihood {fromGoogleCloudVisionV1p2beta1FaceAnnotation_BlurredLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p2beta1FaceAnnotation_BlurredLikelihood = GoogleCloudVisionV1p2beta1FaceAnnotation_BlurredLikelihood { fromGoogleCloudVisionV1p2beta1FaceAnnotation_BlurredLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p2beta1FaceAnnotation_BlurredLikelihood_Unknown :: GoogleCloudVisionV1p2beta1FaceAnnotation_BlurredLikelihood
@@ -2647,21 +2706,20 @@ pattern GoogleCloudVisionV1p2beta1FaceAnnotation_BlurredLikelihood_VERYLIKELY = 
   GoogleCloudVisionV1p2beta1FaceAnnotation_BlurredLikelihood_Possible,
   GoogleCloudVisionV1p2beta1FaceAnnotation_BlurredLikelihood_Likely,
   GoogleCloudVisionV1p2beta1FaceAnnotation_BlurredLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p2beta1FaceAnnotation_BlurredLikelihood
-  #-}
+  GoogleCloudVisionV1p2beta1FaceAnnotation_BlurredLikelihood #-}
 
 -- | Headwear likelihood.
-newtype GoogleCloudVisionV1p2beta1FaceAnnotation_HeadwearLikelihood = GoogleCloudVisionV1p2beta1FaceAnnotation_HeadwearLikelihood {fromGoogleCloudVisionV1p2beta1FaceAnnotation_HeadwearLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p2beta1FaceAnnotation_HeadwearLikelihood = GoogleCloudVisionV1p2beta1FaceAnnotation_HeadwearLikelihood { fromGoogleCloudVisionV1p2beta1FaceAnnotation_HeadwearLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p2beta1FaceAnnotation_HeadwearLikelihood_Unknown :: GoogleCloudVisionV1p2beta1FaceAnnotation_HeadwearLikelihood
@@ -2694,21 +2752,20 @@ pattern GoogleCloudVisionV1p2beta1FaceAnnotation_HeadwearLikelihood_VERYLIKELY =
   GoogleCloudVisionV1p2beta1FaceAnnotation_HeadwearLikelihood_Possible,
   GoogleCloudVisionV1p2beta1FaceAnnotation_HeadwearLikelihood_Likely,
   GoogleCloudVisionV1p2beta1FaceAnnotation_HeadwearLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p2beta1FaceAnnotation_HeadwearLikelihood
-  #-}
+  GoogleCloudVisionV1p2beta1FaceAnnotation_HeadwearLikelihood #-}
 
 -- | Joy likelihood.
-newtype GoogleCloudVisionV1p2beta1FaceAnnotation_JoyLikelihood = GoogleCloudVisionV1p2beta1FaceAnnotation_JoyLikelihood {fromGoogleCloudVisionV1p2beta1FaceAnnotation_JoyLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p2beta1FaceAnnotation_JoyLikelihood = GoogleCloudVisionV1p2beta1FaceAnnotation_JoyLikelihood { fromGoogleCloudVisionV1p2beta1FaceAnnotation_JoyLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p2beta1FaceAnnotation_JoyLikelihood_Unknown :: GoogleCloudVisionV1p2beta1FaceAnnotation_JoyLikelihood
@@ -2741,21 +2798,20 @@ pattern GoogleCloudVisionV1p2beta1FaceAnnotation_JoyLikelihood_VERYLIKELY = Goog
   GoogleCloudVisionV1p2beta1FaceAnnotation_JoyLikelihood_Possible,
   GoogleCloudVisionV1p2beta1FaceAnnotation_JoyLikelihood_Likely,
   GoogleCloudVisionV1p2beta1FaceAnnotation_JoyLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p2beta1FaceAnnotation_JoyLikelihood
-  #-}
+  GoogleCloudVisionV1p2beta1FaceAnnotation_JoyLikelihood #-}
 
 -- | Sorrow likelihood.
-newtype GoogleCloudVisionV1p2beta1FaceAnnotation_SorrowLikelihood = GoogleCloudVisionV1p2beta1FaceAnnotation_SorrowLikelihood {fromGoogleCloudVisionV1p2beta1FaceAnnotation_SorrowLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p2beta1FaceAnnotation_SorrowLikelihood = GoogleCloudVisionV1p2beta1FaceAnnotation_SorrowLikelihood { fromGoogleCloudVisionV1p2beta1FaceAnnotation_SorrowLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p2beta1FaceAnnotation_SorrowLikelihood_Unknown :: GoogleCloudVisionV1p2beta1FaceAnnotation_SorrowLikelihood
@@ -2788,21 +2844,20 @@ pattern GoogleCloudVisionV1p2beta1FaceAnnotation_SorrowLikelihood_VERYLIKELY = G
   GoogleCloudVisionV1p2beta1FaceAnnotation_SorrowLikelihood_Possible,
   GoogleCloudVisionV1p2beta1FaceAnnotation_SorrowLikelihood_Likely,
   GoogleCloudVisionV1p2beta1FaceAnnotation_SorrowLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p2beta1FaceAnnotation_SorrowLikelihood
-  #-}
+  GoogleCloudVisionV1p2beta1FaceAnnotation_SorrowLikelihood #-}
 
 -- | Surprise likelihood.
-newtype GoogleCloudVisionV1p2beta1FaceAnnotation_SurpriseLikelihood = GoogleCloudVisionV1p2beta1FaceAnnotation_SurpriseLikelihood {fromGoogleCloudVisionV1p2beta1FaceAnnotation_SurpriseLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p2beta1FaceAnnotation_SurpriseLikelihood = GoogleCloudVisionV1p2beta1FaceAnnotation_SurpriseLikelihood { fromGoogleCloudVisionV1p2beta1FaceAnnotation_SurpriseLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p2beta1FaceAnnotation_SurpriseLikelihood_Unknown :: GoogleCloudVisionV1p2beta1FaceAnnotation_SurpriseLikelihood
@@ -2835,21 +2890,20 @@ pattern GoogleCloudVisionV1p2beta1FaceAnnotation_SurpriseLikelihood_VERYLIKELY =
   GoogleCloudVisionV1p2beta1FaceAnnotation_SurpriseLikelihood_Possible,
   GoogleCloudVisionV1p2beta1FaceAnnotation_SurpriseLikelihood_Likely,
   GoogleCloudVisionV1p2beta1FaceAnnotation_SurpriseLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p2beta1FaceAnnotation_SurpriseLikelihood
-  #-}
+  GoogleCloudVisionV1p2beta1FaceAnnotation_SurpriseLikelihood #-}
 
 -- | Under-exposed likelihood.
-newtype GoogleCloudVisionV1p2beta1FaceAnnotation_UnderExposedLikelihood = GoogleCloudVisionV1p2beta1FaceAnnotation_UnderExposedLikelihood {fromGoogleCloudVisionV1p2beta1FaceAnnotation_UnderExposedLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p2beta1FaceAnnotation_UnderExposedLikelihood = GoogleCloudVisionV1p2beta1FaceAnnotation_UnderExposedLikelihood { fromGoogleCloudVisionV1p2beta1FaceAnnotation_UnderExposedLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p2beta1FaceAnnotation_UnderExposedLikelihood_Unknown :: GoogleCloudVisionV1p2beta1FaceAnnotation_UnderExposedLikelihood
@@ -2882,21 +2936,20 @@ pattern GoogleCloudVisionV1p2beta1FaceAnnotation_UnderExposedLikelihood_VERYLIKE
   GoogleCloudVisionV1p2beta1FaceAnnotation_UnderExposedLikelihood_Possible,
   GoogleCloudVisionV1p2beta1FaceAnnotation_UnderExposedLikelihood_Likely,
   GoogleCloudVisionV1p2beta1FaceAnnotation_UnderExposedLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p2beta1FaceAnnotation_UnderExposedLikelihood
-  #-}
+  GoogleCloudVisionV1p2beta1FaceAnnotation_UnderExposedLikelihood #-}
 
 -- | Face landmark type.
-newtype GoogleCloudVisionV1p2beta1FaceAnnotationLandmark_Type = GoogleCloudVisionV1p2beta1FaceAnnotationLandmark_Type {fromGoogleCloudVisionV1p2beta1FaceAnnotationLandmark_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p2beta1FaceAnnotationLandmark_Type = GoogleCloudVisionV1p2beta1FaceAnnotationLandmark_Type { fromGoogleCloudVisionV1p2beta1FaceAnnotationLandmark_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown face landmark detected. Should not be filled.
 pattern GoogleCloudVisionV1p2beta1FaceAnnotationLandmark_Type_UNKNOWNLANDMARK :: GoogleCloudVisionV1p2beta1FaceAnnotationLandmark_Type
@@ -3084,21 +3137,20 @@ pattern GoogleCloudVisionV1p2beta1FaceAnnotationLandmark_Type_RIGHTCHEEKCENTER =
   GoogleCloudVisionV1p2beta1FaceAnnotationLandmark_Type_CHINRIGHTGONION,
   GoogleCloudVisionV1p2beta1FaceAnnotationLandmark_Type_LEFTCHEEKCENTER,
   GoogleCloudVisionV1p2beta1FaceAnnotationLandmark_Type_RIGHTCHEEKCENTER,
-  GoogleCloudVisionV1p2beta1FaceAnnotationLandmark_Type
-  #-}
+  GoogleCloudVisionV1p2beta1FaceAnnotationLandmark_Type #-}
 
 -- | The feature type.
-newtype GoogleCloudVisionV1p2beta1Feature_Type = GoogleCloudVisionV1p2beta1Feature_Type {fromGoogleCloudVisionV1p2beta1Feature_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p2beta1Feature_Type = GoogleCloudVisionV1p2beta1Feature_Type { fromGoogleCloudVisionV1p2beta1Feature_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified feature type.
 pattern GoogleCloudVisionV1p2beta1Feature_Type_TYPEUNSPECIFIED :: GoogleCloudVisionV1p2beta1Feature_Type
@@ -3166,21 +3218,20 @@ pattern GoogleCloudVisionV1p2beta1Feature_Type_OBJECTLOCALIZATION = GoogleCloudV
   GoogleCloudVisionV1p2beta1Feature_Type_WEBDETECTION,
   GoogleCloudVisionV1p2beta1Feature_Type_PRODUCTSEARCH,
   GoogleCloudVisionV1p2beta1Feature_Type_OBJECTLOCALIZATION,
-  GoogleCloudVisionV1p2beta1Feature_Type
-  #-}
+  GoogleCloudVisionV1p2beta1Feature_Type #-}
 
 -- | Current state of the batch operation.
-newtype GoogleCloudVisionV1p2beta1OperationMetadata_State = GoogleCloudVisionV1p2beta1OperationMetadata_State {fromGoogleCloudVisionV1p2beta1OperationMetadata_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p2beta1OperationMetadata_State = GoogleCloudVisionV1p2beta1OperationMetadata_State { fromGoogleCloudVisionV1p2beta1OperationMetadata_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Invalid.
 pattern GoogleCloudVisionV1p2beta1OperationMetadata_State_STATEUNSPECIFIED :: GoogleCloudVisionV1p2beta1OperationMetadata_State
@@ -3208,21 +3259,20 @@ pattern GoogleCloudVisionV1p2beta1OperationMetadata_State_Cancelled = GoogleClou
   GoogleCloudVisionV1p2beta1OperationMetadata_State_Running,
   GoogleCloudVisionV1p2beta1OperationMetadata_State_Done,
   GoogleCloudVisionV1p2beta1OperationMetadata_State_Cancelled,
-  GoogleCloudVisionV1p2beta1OperationMetadata_State
-  #-}
+  GoogleCloudVisionV1p2beta1OperationMetadata_State #-}
 
 -- | Represents the adult content likelihood for the image. Adult content may contain elements such as nudity, pornographic images or cartoons, or sexual activities.
-newtype GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Adult = GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Adult {fromGoogleCloudVisionV1p2beta1SafeSearchAnnotation_Adult :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Adult = GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Adult { fromGoogleCloudVisionV1p2beta1SafeSearchAnnotation_Adult :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Adult_Unknown :: GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Adult
@@ -3255,21 +3305,20 @@ pattern GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Adult_VERYLIKELY = Google
   GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Adult_Possible,
   GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Adult_Likely,
   GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Adult_VERYLIKELY,
-  GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Adult
-  #-}
+  GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Adult #-}
 
 -- | Likelihood that this is a medical image.
-newtype GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Medical = GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Medical {fromGoogleCloudVisionV1p2beta1SafeSearchAnnotation_Medical :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Medical = GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Medical { fromGoogleCloudVisionV1p2beta1SafeSearchAnnotation_Medical :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Medical_Unknown :: GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Medical
@@ -3302,21 +3351,20 @@ pattern GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Medical_VERYLIKELY = Goog
   GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Medical_Possible,
   GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Medical_Likely,
   GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Medical_VERYLIKELY,
-  GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Medical
-  #-}
+  GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Medical #-}
 
 -- | Likelihood that the request image contains racy content. Racy content may include (but is not limited to) skimpy or sheer clothing, strategically covered nudity, lewd or provocative poses, or close-ups of sensitive body areas.
-newtype GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Racy = GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Racy {fromGoogleCloudVisionV1p2beta1SafeSearchAnnotation_Racy :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Racy = GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Racy { fromGoogleCloudVisionV1p2beta1SafeSearchAnnotation_Racy :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Racy_Unknown :: GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Racy
@@ -3349,21 +3397,20 @@ pattern GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Racy_VERYLIKELY = GoogleC
   GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Racy_Possible,
   GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Racy_Likely,
   GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Racy_VERYLIKELY,
-  GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Racy
-  #-}
+  GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Racy #-}
 
 -- | Spoof likelihood. The likelihood that an modification was made to the image\'s canonical version to make it appear funny or offensive.
-newtype GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof = GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof {fromGoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof = GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof { fromGoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof_Unknown :: GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof
@@ -3396,21 +3443,20 @@ pattern GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof_VERYLIKELY = Google
   GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof_Possible,
   GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof_Likely,
   GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof_VERYLIKELY,
-  GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof
-  #-}
+  GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof #-}
 
--- | Likelihood that this image contains violent content.
-newtype GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence = GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence {fromGoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Likelihood that this image contains violent content. Violent content may include death, serious harm, or injury to individuals or groups of individuals.
+newtype GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence = GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence { fromGoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence_Unknown :: GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence
@@ -3443,21 +3489,20 @@ pattern GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence_VERYLIKELY = Goo
   GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence_Possible,
   GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence_Likely,
   GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence_VERYLIKELY,
-  GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence
-  #-}
+  GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence #-}
 
 -- | Detected break type.
-newtype GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak_Type = GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak_Type {fromGoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak_Type = GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak_Type { fromGoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown break label type.
 pattern GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak_Type_Unknown :: GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak_Type
@@ -3490,21 +3535,20 @@ pattern GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak_Type_LINEBREAK = G
   GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak_Type_EOLSURESPACE,
   GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak_Type_Hyphen,
   GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak_Type_LINEBREAK,
-  GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak_Type
-  #-}
+  GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak_Type #-}
 
 -- | The current state of the batch operation.
-newtype GoogleCloudVisionV1p3beta1BatchOperationMetadata_State = GoogleCloudVisionV1p3beta1BatchOperationMetadata_State {fromGoogleCloudVisionV1p3beta1BatchOperationMetadata_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p3beta1BatchOperationMetadata_State = GoogleCloudVisionV1p3beta1BatchOperationMetadata_State { fromGoogleCloudVisionV1p3beta1BatchOperationMetadata_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Invalid.
 pattern GoogleCloudVisionV1p3beta1BatchOperationMetadata_State_STATEUNSPECIFIED :: GoogleCloudVisionV1p3beta1BatchOperationMetadata_State
@@ -3532,21 +3576,20 @@ pattern GoogleCloudVisionV1p3beta1BatchOperationMetadata_State_Cancelled = Googl
   GoogleCloudVisionV1p3beta1BatchOperationMetadata_State_Successful,
   GoogleCloudVisionV1p3beta1BatchOperationMetadata_State_Failed,
   GoogleCloudVisionV1p3beta1BatchOperationMetadata_State_Cancelled,
-  GoogleCloudVisionV1p3beta1BatchOperationMetadata_State
-  #-}
+  GoogleCloudVisionV1p3beta1BatchOperationMetadata_State #-}
 
 -- | Detected block type (text, image etc) for this block.
-newtype GoogleCloudVisionV1p3beta1Block_BlockType = GoogleCloudVisionV1p3beta1Block_BlockType {fromGoogleCloudVisionV1p3beta1Block_BlockType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p3beta1Block_BlockType = GoogleCloudVisionV1p3beta1Block_BlockType { fromGoogleCloudVisionV1p3beta1Block_BlockType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown block type.
 pattern GoogleCloudVisionV1p3beta1Block_BlockType_Unknown :: GoogleCloudVisionV1p3beta1Block_BlockType
@@ -3579,21 +3622,20 @@ pattern GoogleCloudVisionV1p3beta1Block_BlockType_Barcode = GoogleCloudVisionV1p
   GoogleCloudVisionV1p3beta1Block_BlockType_Picture,
   GoogleCloudVisionV1p3beta1Block_BlockType_Ruler,
   GoogleCloudVisionV1p3beta1Block_BlockType_Barcode,
-  GoogleCloudVisionV1p3beta1Block_BlockType
-  #-}
+  GoogleCloudVisionV1p3beta1Block_BlockType #-}
 
 -- | Anger likelihood.
-newtype GoogleCloudVisionV1p3beta1FaceAnnotation_AngerLikelihood = GoogleCloudVisionV1p3beta1FaceAnnotation_AngerLikelihood {fromGoogleCloudVisionV1p3beta1FaceAnnotation_AngerLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p3beta1FaceAnnotation_AngerLikelihood = GoogleCloudVisionV1p3beta1FaceAnnotation_AngerLikelihood { fromGoogleCloudVisionV1p3beta1FaceAnnotation_AngerLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p3beta1FaceAnnotation_AngerLikelihood_Unknown :: GoogleCloudVisionV1p3beta1FaceAnnotation_AngerLikelihood
@@ -3626,21 +3668,20 @@ pattern GoogleCloudVisionV1p3beta1FaceAnnotation_AngerLikelihood_VERYLIKELY = Go
   GoogleCloudVisionV1p3beta1FaceAnnotation_AngerLikelihood_Possible,
   GoogleCloudVisionV1p3beta1FaceAnnotation_AngerLikelihood_Likely,
   GoogleCloudVisionV1p3beta1FaceAnnotation_AngerLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p3beta1FaceAnnotation_AngerLikelihood
-  #-}
+  GoogleCloudVisionV1p3beta1FaceAnnotation_AngerLikelihood #-}
 
 -- | Blurred likelihood.
-newtype GoogleCloudVisionV1p3beta1FaceAnnotation_BlurredLikelihood = GoogleCloudVisionV1p3beta1FaceAnnotation_BlurredLikelihood {fromGoogleCloudVisionV1p3beta1FaceAnnotation_BlurredLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p3beta1FaceAnnotation_BlurredLikelihood = GoogleCloudVisionV1p3beta1FaceAnnotation_BlurredLikelihood { fromGoogleCloudVisionV1p3beta1FaceAnnotation_BlurredLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p3beta1FaceAnnotation_BlurredLikelihood_Unknown :: GoogleCloudVisionV1p3beta1FaceAnnotation_BlurredLikelihood
@@ -3673,21 +3714,20 @@ pattern GoogleCloudVisionV1p3beta1FaceAnnotation_BlurredLikelihood_VERYLIKELY = 
   GoogleCloudVisionV1p3beta1FaceAnnotation_BlurredLikelihood_Possible,
   GoogleCloudVisionV1p3beta1FaceAnnotation_BlurredLikelihood_Likely,
   GoogleCloudVisionV1p3beta1FaceAnnotation_BlurredLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p3beta1FaceAnnotation_BlurredLikelihood
-  #-}
+  GoogleCloudVisionV1p3beta1FaceAnnotation_BlurredLikelihood #-}
 
 -- | Headwear likelihood.
-newtype GoogleCloudVisionV1p3beta1FaceAnnotation_HeadwearLikelihood = GoogleCloudVisionV1p3beta1FaceAnnotation_HeadwearLikelihood {fromGoogleCloudVisionV1p3beta1FaceAnnotation_HeadwearLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p3beta1FaceAnnotation_HeadwearLikelihood = GoogleCloudVisionV1p3beta1FaceAnnotation_HeadwearLikelihood { fromGoogleCloudVisionV1p3beta1FaceAnnotation_HeadwearLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p3beta1FaceAnnotation_HeadwearLikelihood_Unknown :: GoogleCloudVisionV1p3beta1FaceAnnotation_HeadwearLikelihood
@@ -3720,21 +3760,20 @@ pattern GoogleCloudVisionV1p3beta1FaceAnnotation_HeadwearLikelihood_VERYLIKELY =
   GoogleCloudVisionV1p3beta1FaceAnnotation_HeadwearLikelihood_Possible,
   GoogleCloudVisionV1p3beta1FaceAnnotation_HeadwearLikelihood_Likely,
   GoogleCloudVisionV1p3beta1FaceAnnotation_HeadwearLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p3beta1FaceAnnotation_HeadwearLikelihood
-  #-}
+  GoogleCloudVisionV1p3beta1FaceAnnotation_HeadwearLikelihood #-}
 
 -- | Joy likelihood.
-newtype GoogleCloudVisionV1p3beta1FaceAnnotation_JoyLikelihood = GoogleCloudVisionV1p3beta1FaceAnnotation_JoyLikelihood {fromGoogleCloudVisionV1p3beta1FaceAnnotation_JoyLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p3beta1FaceAnnotation_JoyLikelihood = GoogleCloudVisionV1p3beta1FaceAnnotation_JoyLikelihood { fromGoogleCloudVisionV1p3beta1FaceAnnotation_JoyLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p3beta1FaceAnnotation_JoyLikelihood_Unknown :: GoogleCloudVisionV1p3beta1FaceAnnotation_JoyLikelihood
@@ -3767,21 +3806,20 @@ pattern GoogleCloudVisionV1p3beta1FaceAnnotation_JoyLikelihood_VERYLIKELY = Goog
   GoogleCloudVisionV1p3beta1FaceAnnotation_JoyLikelihood_Possible,
   GoogleCloudVisionV1p3beta1FaceAnnotation_JoyLikelihood_Likely,
   GoogleCloudVisionV1p3beta1FaceAnnotation_JoyLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p3beta1FaceAnnotation_JoyLikelihood
-  #-}
+  GoogleCloudVisionV1p3beta1FaceAnnotation_JoyLikelihood #-}
 
 -- | Sorrow likelihood.
-newtype GoogleCloudVisionV1p3beta1FaceAnnotation_SorrowLikelihood = GoogleCloudVisionV1p3beta1FaceAnnotation_SorrowLikelihood {fromGoogleCloudVisionV1p3beta1FaceAnnotation_SorrowLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p3beta1FaceAnnotation_SorrowLikelihood = GoogleCloudVisionV1p3beta1FaceAnnotation_SorrowLikelihood { fromGoogleCloudVisionV1p3beta1FaceAnnotation_SorrowLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p3beta1FaceAnnotation_SorrowLikelihood_Unknown :: GoogleCloudVisionV1p3beta1FaceAnnotation_SorrowLikelihood
@@ -3814,21 +3852,20 @@ pattern GoogleCloudVisionV1p3beta1FaceAnnotation_SorrowLikelihood_VERYLIKELY = G
   GoogleCloudVisionV1p3beta1FaceAnnotation_SorrowLikelihood_Possible,
   GoogleCloudVisionV1p3beta1FaceAnnotation_SorrowLikelihood_Likely,
   GoogleCloudVisionV1p3beta1FaceAnnotation_SorrowLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p3beta1FaceAnnotation_SorrowLikelihood
-  #-}
+  GoogleCloudVisionV1p3beta1FaceAnnotation_SorrowLikelihood #-}
 
 -- | Surprise likelihood.
-newtype GoogleCloudVisionV1p3beta1FaceAnnotation_SurpriseLikelihood = GoogleCloudVisionV1p3beta1FaceAnnotation_SurpriseLikelihood {fromGoogleCloudVisionV1p3beta1FaceAnnotation_SurpriseLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p3beta1FaceAnnotation_SurpriseLikelihood = GoogleCloudVisionV1p3beta1FaceAnnotation_SurpriseLikelihood { fromGoogleCloudVisionV1p3beta1FaceAnnotation_SurpriseLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p3beta1FaceAnnotation_SurpriseLikelihood_Unknown :: GoogleCloudVisionV1p3beta1FaceAnnotation_SurpriseLikelihood
@@ -3861,21 +3898,20 @@ pattern GoogleCloudVisionV1p3beta1FaceAnnotation_SurpriseLikelihood_VERYLIKELY =
   GoogleCloudVisionV1p3beta1FaceAnnotation_SurpriseLikelihood_Possible,
   GoogleCloudVisionV1p3beta1FaceAnnotation_SurpriseLikelihood_Likely,
   GoogleCloudVisionV1p3beta1FaceAnnotation_SurpriseLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p3beta1FaceAnnotation_SurpriseLikelihood
-  #-}
+  GoogleCloudVisionV1p3beta1FaceAnnotation_SurpriseLikelihood #-}
 
 -- | Under-exposed likelihood.
-newtype GoogleCloudVisionV1p3beta1FaceAnnotation_UnderExposedLikelihood = GoogleCloudVisionV1p3beta1FaceAnnotation_UnderExposedLikelihood {fromGoogleCloudVisionV1p3beta1FaceAnnotation_UnderExposedLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p3beta1FaceAnnotation_UnderExposedLikelihood = GoogleCloudVisionV1p3beta1FaceAnnotation_UnderExposedLikelihood { fromGoogleCloudVisionV1p3beta1FaceAnnotation_UnderExposedLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p3beta1FaceAnnotation_UnderExposedLikelihood_Unknown :: GoogleCloudVisionV1p3beta1FaceAnnotation_UnderExposedLikelihood
@@ -3908,21 +3944,20 @@ pattern GoogleCloudVisionV1p3beta1FaceAnnotation_UnderExposedLikelihood_VERYLIKE
   GoogleCloudVisionV1p3beta1FaceAnnotation_UnderExposedLikelihood_Possible,
   GoogleCloudVisionV1p3beta1FaceAnnotation_UnderExposedLikelihood_Likely,
   GoogleCloudVisionV1p3beta1FaceAnnotation_UnderExposedLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p3beta1FaceAnnotation_UnderExposedLikelihood
-  #-}
+  GoogleCloudVisionV1p3beta1FaceAnnotation_UnderExposedLikelihood #-}
 
 -- | Face landmark type.
-newtype GoogleCloudVisionV1p3beta1FaceAnnotationLandmark_Type = GoogleCloudVisionV1p3beta1FaceAnnotationLandmark_Type {fromGoogleCloudVisionV1p3beta1FaceAnnotationLandmark_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p3beta1FaceAnnotationLandmark_Type = GoogleCloudVisionV1p3beta1FaceAnnotationLandmark_Type { fromGoogleCloudVisionV1p3beta1FaceAnnotationLandmark_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown face landmark detected. Should not be filled.
 pattern GoogleCloudVisionV1p3beta1FaceAnnotationLandmark_Type_UNKNOWNLANDMARK :: GoogleCloudVisionV1p3beta1FaceAnnotationLandmark_Type
@@ -4110,21 +4145,20 @@ pattern GoogleCloudVisionV1p3beta1FaceAnnotationLandmark_Type_RIGHTCHEEKCENTER =
   GoogleCloudVisionV1p3beta1FaceAnnotationLandmark_Type_CHINRIGHTGONION,
   GoogleCloudVisionV1p3beta1FaceAnnotationLandmark_Type_LEFTCHEEKCENTER,
   GoogleCloudVisionV1p3beta1FaceAnnotationLandmark_Type_RIGHTCHEEKCENTER,
-  GoogleCloudVisionV1p3beta1FaceAnnotationLandmark_Type
-  #-}
+  GoogleCloudVisionV1p3beta1FaceAnnotationLandmark_Type #-}
 
 -- | Current state of the batch operation.
-newtype GoogleCloudVisionV1p3beta1OperationMetadata_State = GoogleCloudVisionV1p3beta1OperationMetadata_State {fromGoogleCloudVisionV1p3beta1OperationMetadata_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p3beta1OperationMetadata_State = GoogleCloudVisionV1p3beta1OperationMetadata_State { fromGoogleCloudVisionV1p3beta1OperationMetadata_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Invalid.
 pattern GoogleCloudVisionV1p3beta1OperationMetadata_State_STATEUNSPECIFIED :: GoogleCloudVisionV1p3beta1OperationMetadata_State
@@ -4152,21 +4186,20 @@ pattern GoogleCloudVisionV1p3beta1OperationMetadata_State_Cancelled = GoogleClou
   GoogleCloudVisionV1p3beta1OperationMetadata_State_Running,
   GoogleCloudVisionV1p3beta1OperationMetadata_State_Done,
   GoogleCloudVisionV1p3beta1OperationMetadata_State_Cancelled,
-  GoogleCloudVisionV1p3beta1OperationMetadata_State
-  #-}
+  GoogleCloudVisionV1p3beta1OperationMetadata_State #-}
 
 -- | Represents the adult content likelihood for the image. Adult content may contain elements such as nudity, pornographic images or cartoons, or sexual activities.
-newtype GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Adult = GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Adult {fromGoogleCloudVisionV1p3beta1SafeSearchAnnotation_Adult :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Adult = GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Adult { fromGoogleCloudVisionV1p3beta1SafeSearchAnnotation_Adult :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Adult_Unknown :: GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Adult
@@ -4199,21 +4232,20 @@ pattern GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Adult_VERYLIKELY = Google
   GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Adult_Possible,
   GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Adult_Likely,
   GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Adult_VERYLIKELY,
-  GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Adult
-  #-}
+  GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Adult #-}
 
 -- | Likelihood that this is a medical image.
-newtype GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Medical = GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Medical {fromGoogleCloudVisionV1p3beta1SafeSearchAnnotation_Medical :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Medical = GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Medical { fromGoogleCloudVisionV1p3beta1SafeSearchAnnotation_Medical :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Medical_Unknown :: GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Medical
@@ -4246,21 +4278,20 @@ pattern GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Medical_VERYLIKELY = Goog
   GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Medical_Possible,
   GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Medical_Likely,
   GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Medical_VERYLIKELY,
-  GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Medical
-  #-}
+  GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Medical #-}
 
 -- | Likelihood that the request image contains racy content. Racy content may include (but is not limited to) skimpy or sheer clothing, strategically covered nudity, lewd or provocative poses, or close-ups of sensitive body areas.
-newtype GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Racy = GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Racy {fromGoogleCloudVisionV1p3beta1SafeSearchAnnotation_Racy :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Racy = GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Racy { fromGoogleCloudVisionV1p3beta1SafeSearchAnnotation_Racy :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Racy_Unknown :: GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Racy
@@ -4293,21 +4324,20 @@ pattern GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Racy_VERYLIKELY = GoogleC
   GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Racy_Possible,
   GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Racy_Likely,
   GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Racy_VERYLIKELY,
-  GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Racy
-  #-}
+  GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Racy #-}
 
 -- | Spoof likelihood. The likelihood that an modification was made to the image\'s canonical version to make it appear funny or offensive.
-newtype GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof = GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof {fromGoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof = GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof { fromGoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof_Unknown :: GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof
@@ -4340,21 +4370,20 @@ pattern GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof_VERYLIKELY = Google
   GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof_Possible,
   GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof_Likely,
   GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof_VERYLIKELY,
-  GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof
-  #-}
+  GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof #-}
 
--- | Likelihood that this image contains violent content.
-newtype GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence = GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence {fromGoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Likelihood that this image contains violent content. Violent content may include death, serious harm, or injury to individuals or groups of individuals.
+newtype GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence = GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence { fromGoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence_Unknown :: GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence
@@ -4387,21 +4416,20 @@ pattern GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence_VERYLIKELY = Goo
   GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence_Possible,
   GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence_Likely,
   GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence_VERYLIKELY,
-  GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence
-  #-}
+  GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence #-}
 
 -- | Detected break type.
-newtype GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak_Type = GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak_Type {fromGoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak_Type = GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak_Type { fromGoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown break label type.
 pattern GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak_Type_Unknown :: GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak_Type
@@ -4434,21 +4462,20 @@ pattern GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak_Type_LINEBREAK = G
   GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak_Type_EOLSURESPACE,
   GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak_Type_Hyphen,
   GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak_Type_LINEBREAK,
-  GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak_Type
-  #-}
+  GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak_Type #-}
 
 -- | The current state of the batch operation.
-newtype GoogleCloudVisionV1p4beta1BatchOperationMetadata_State = GoogleCloudVisionV1p4beta1BatchOperationMetadata_State {fromGoogleCloudVisionV1p4beta1BatchOperationMetadata_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p4beta1BatchOperationMetadata_State = GoogleCloudVisionV1p4beta1BatchOperationMetadata_State { fromGoogleCloudVisionV1p4beta1BatchOperationMetadata_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Invalid.
 pattern GoogleCloudVisionV1p4beta1BatchOperationMetadata_State_STATEUNSPECIFIED :: GoogleCloudVisionV1p4beta1BatchOperationMetadata_State
@@ -4476,21 +4503,20 @@ pattern GoogleCloudVisionV1p4beta1BatchOperationMetadata_State_Cancelled = Googl
   GoogleCloudVisionV1p4beta1BatchOperationMetadata_State_Successful,
   GoogleCloudVisionV1p4beta1BatchOperationMetadata_State_Failed,
   GoogleCloudVisionV1p4beta1BatchOperationMetadata_State_Cancelled,
-  GoogleCloudVisionV1p4beta1BatchOperationMetadata_State
-  #-}
+  GoogleCloudVisionV1p4beta1BatchOperationMetadata_State #-}
 
 -- | Detected block type (text, image etc) for this block.
-newtype GoogleCloudVisionV1p4beta1Block_BlockType = GoogleCloudVisionV1p4beta1Block_BlockType {fromGoogleCloudVisionV1p4beta1Block_BlockType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p4beta1Block_BlockType = GoogleCloudVisionV1p4beta1Block_BlockType { fromGoogleCloudVisionV1p4beta1Block_BlockType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown block type.
 pattern GoogleCloudVisionV1p4beta1Block_BlockType_Unknown :: GoogleCloudVisionV1p4beta1Block_BlockType
@@ -4523,21 +4549,20 @@ pattern GoogleCloudVisionV1p4beta1Block_BlockType_Barcode = GoogleCloudVisionV1p
   GoogleCloudVisionV1p4beta1Block_BlockType_Picture,
   GoogleCloudVisionV1p4beta1Block_BlockType_Ruler,
   GoogleCloudVisionV1p4beta1Block_BlockType_Barcode,
-  GoogleCloudVisionV1p4beta1Block_BlockType
-  #-}
+  GoogleCloudVisionV1p4beta1Block_BlockType #-}
 
 -- | Anger likelihood.
-newtype GoogleCloudVisionV1p4beta1FaceAnnotation_AngerLikelihood = GoogleCloudVisionV1p4beta1FaceAnnotation_AngerLikelihood {fromGoogleCloudVisionV1p4beta1FaceAnnotation_AngerLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p4beta1FaceAnnotation_AngerLikelihood = GoogleCloudVisionV1p4beta1FaceAnnotation_AngerLikelihood { fromGoogleCloudVisionV1p4beta1FaceAnnotation_AngerLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p4beta1FaceAnnotation_AngerLikelihood_Unknown :: GoogleCloudVisionV1p4beta1FaceAnnotation_AngerLikelihood
@@ -4570,21 +4595,20 @@ pattern GoogleCloudVisionV1p4beta1FaceAnnotation_AngerLikelihood_VERYLIKELY = Go
   GoogleCloudVisionV1p4beta1FaceAnnotation_AngerLikelihood_Possible,
   GoogleCloudVisionV1p4beta1FaceAnnotation_AngerLikelihood_Likely,
   GoogleCloudVisionV1p4beta1FaceAnnotation_AngerLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p4beta1FaceAnnotation_AngerLikelihood
-  #-}
+  GoogleCloudVisionV1p4beta1FaceAnnotation_AngerLikelihood #-}
 
 -- | Blurred likelihood.
-newtype GoogleCloudVisionV1p4beta1FaceAnnotation_BlurredLikelihood = GoogleCloudVisionV1p4beta1FaceAnnotation_BlurredLikelihood {fromGoogleCloudVisionV1p4beta1FaceAnnotation_BlurredLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p4beta1FaceAnnotation_BlurredLikelihood = GoogleCloudVisionV1p4beta1FaceAnnotation_BlurredLikelihood { fromGoogleCloudVisionV1p4beta1FaceAnnotation_BlurredLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p4beta1FaceAnnotation_BlurredLikelihood_Unknown :: GoogleCloudVisionV1p4beta1FaceAnnotation_BlurredLikelihood
@@ -4617,21 +4641,20 @@ pattern GoogleCloudVisionV1p4beta1FaceAnnotation_BlurredLikelihood_VERYLIKELY = 
   GoogleCloudVisionV1p4beta1FaceAnnotation_BlurredLikelihood_Possible,
   GoogleCloudVisionV1p4beta1FaceAnnotation_BlurredLikelihood_Likely,
   GoogleCloudVisionV1p4beta1FaceAnnotation_BlurredLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p4beta1FaceAnnotation_BlurredLikelihood
-  #-}
+  GoogleCloudVisionV1p4beta1FaceAnnotation_BlurredLikelihood #-}
 
 -- | Headwear likelihood.
-newtype GoogleCloudVisionV1p4beta1FaceAnnotation_HeadwearLikelihood = GoogleCloudVisionV1p4beta1FaceAnnotation_HeadwearLikelihood {fromGoogleCloudVisionV1p4beta1FaceAnnotation_HeadwearLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p4beta1FaceAnnotation_HeadwearLikelihood = GoogleCloudVisionV1p4beta1FaceAnnotation_HeadwearLikelihood { fromGoogleCloudVisionV1p4beta1FaceAnnotation_HeadwearLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p4beta1FaceAnnotation_HeadwearLikelihood_Unknown :: GoogleCloudVisionV1p4beta1FaceAnnotation_HeadwearLikelihood
@@ -4664,21 +4687,20 @@ pattern GoogleCloudVisionV1p4beta1FaceAnnotation_HeadwearLikelihood_VERYLIKELY =
   GoogleCloudVisionV1p4beta1FaceAnnotation_HeadwearLikelihood_Possible,
   GoogleCloudVisionV1p4beta1FaceAnnotation_HeadwearLikelihood_Likely,
   GoogleCloudVisionV1p4beta1FaceAnnotation_HeadwearLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p4beta1FaceAnnotation_HeadwearLikelihood
-  #-}
+  GoogleCloudVisionV1p4beta1FaceAnnotation_HeadwearLikelihood #-}
 
 -- | Joy likelihood.
-newtype GoogleCloudVisionV1p4beta1FaceAnnotation_JoyLikelihood = GoogleCloudVisionV1p4beta1FaceAnnotation_JoyLikelihood {fromGoogleCloudVisionV1p4beta1FaceAnnotation_JoyLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p4beta1FaceAnnotation_JoyLikelihood = GoogleCloudVisionV1p4beta1FaceAnnotation_JoyLikelihood { fromGoogleCloudVisionV1p4beta1FaceAnnotation_JoyLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p4beta1FaceAnnotation_JoyLikelihood_Unknown :: GoogleCloudVisionV1p4beta1FaceAnnotation_JoyLikelihood
@@ -4711,21 +4733,20 @@ pattern GoogleCloudVisionV1p4beta1FaceAnnotation_JoyLikelihood_VERYLIKELY = Goog
   GoogleCloudVisionV1p4beta1FaceAnnotation_JoyLikelihood_Possible,
   GoogleCloudVisionV1p4beta1FaceAnnotation_JoyLikelihood_Likely,
   GoogleCloudVisionV1p4beta1FaceAnnotation_JoyLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p4beta1FaceAnnotation_JoyLikelihood
-  #-}
+  GoogleCloudVisionV1p4beta1FaceAnnotation_JoyLikelihood #-}
 
 -- | Sorrow likelihood.
-newtype GoogleCloudVisionV1p4beta1FaceAnnotation_SorrowLikelihood = GoogleCloudVisionV1p4beta1FaceAnnotation_SorrowLikelihood {fromGoogleCloudVisionV1p4beta1FaceAnnotation_SorrowLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p4beta1FaceAnnotation_SorrowLikelihood = GoogleCloudVisionV1p4beta1FaceAnnotation_SorrowLikelihood { fromGoogleCloudVisionV1p4beta1FaceAnnotation_SorrowLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p4beta1FaceAnnotation_SorrowLikelihood_Unknown :: GoogleCloudVisionV1p4beta1FaceAnnotation_SorrowLikelihood
@@ -4758,21 +4779,20 @@ pattern GoogleCloudVisionV1p4beta1FaceAnnotation_SorrowLikelihood_VERYLIKELY = G
   GoogleCloudVisionV1p4beta1FaceAnnotation_SorrowLikelihood_Possible,
   GoogleCloudVisionV1p4beta1FaceAnnotation_SorrowLikelihood_Likely,
   GoogleCloudVisionV1p4beta1FaceAnnotation_SorrowLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p4beta1FaceAnnotation_SorrowLikelihood
-  #-}
+  GoogleCloudVisionV1p4beta1FaceAnnotation_SorrowLikelihood #-}
 
 -- | Surprise likelihood.
-newtype GoogleCloudVisionV1p4beta1FaceAnnotation_SurpriseLikelihood = GoogleCloudVisionV1p4beta1FaceAnnotation_SurpriseLikelihood {fromGoogleCloudVisionV1p4beta1FaceAnnotation_SurpriseLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p4beta1FaceAnnotation_SurpriseLikelihood = GoogleCloudVisionV1p4beta1FaceAnnotation_SurpriseLikelihood { fromGoogleCloudVisionV1p4beta1FaceAnnotation_SurpriseLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p4beta1FaceAnnotation_SurpriseLikelihood_Unknown :: GoogleCloudVisionV1p4beta1FaceAnnotation_SurpriseLikelihood
@@ -4805,21 +4825,20 @@ pattern GoogleCloudVisionV1p4beta1FaceAnnotation_SurpriseLikelihood_VERYLIKELY =
   GoogleCloudVisionV1p4beta1FaceAnnotation_SurpriseLikelihood_Possible,
   GoogleCloudVisionV1p4beta1FaceAnnotation_SurpriseLikelihood_Likely,
   GoogleCloudVisionV1p4beta1FaceAnnotation_SurpriseLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p4beta1FaceAnnotation_SurpriseLikelihood
-  #-}
+  GoogleCloudVisionV1p4beta1FaceAnnotation_SurpriseLikelihood #-}
 
 -- | Under-exposed likelihood.
-newtype GoogleCloudVisionV1p4beta1FaceAnnotation_UnderExposedLikelihood = GoogleCloudVisionV1p4beta1FaceAnnotation_UnderExposedLikelihood {fromGoogleCloudVisionV1p4beta1FaceAnnotation_UnderExposedLikelihood :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p4beta1FaceAnnotation_UnderExposedLikelihood = GoogleCloudVisionV1p4beta1FaceAnnotation_UnderExposedLikelihood { fromGoogleCloudVisionV1p4beta1FaceAnnotation_UnderExposedLikelihood :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p4beta1FaceAnnotation_UnderExposedLikelihood_Unknown :: GoogleCloudVisionV1p4beta1FaceAnnotation_UnderExposedLikelihood
@@ -4852,21 +4871,20 @@ pattern GoogleCloudVisionV1p4beta1FaceAnnotation_UnderExposedLikelihood_VERYLIKE
   GoogleCloudVisionV1p4beta1FaceAnnotation_UnderExposedLikelihood_Possible,
   GoogleCloudVisionV1p4beta1FaceAnnotation_UnderExposedLikelihood_Likely,
   GoogleCloudVisionV1p4beta1FaceAnnotation_UnderExposedLikelihood_VERYLIKELY,
-  GoogleCloudVisionV1p4beta1FaceAnnotation_UnderExposedLikelihood
-  #-}
+  GoogleCloudVisionV1p4beta1FaceAnnotation_UnderExposedLikelihood #-}
 
 -- | Face landmark type.
-newtype GoogleCloudVisionV1p4beta1FaceAnnotationLandmark_Type = GoogleCloudVisionV1p4beta1FaceAnnotationLandmark_Type {fromGoogleCloudVisionV1p4beta1FaceAnnotationLandmark_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p4beta1FaceAnnotationLandmark_Type = GoogleCloudVisionV1p4beta1FaceAnnotationLandmark_Type { fromGoogleCloudVisionV1p4beta1FaceAnnotationLandmark_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown face landmark detected. Should not be filled.
 pattern GoogleCloudVisionV1p4beta1FaceAnnotationLandmark_Type_UNKNOWNLANDMARK :: GoogleCloudVisionV1p4beta1FaceAnnotationLandmark_Type
@@ -5054,21 +5072,20 @@ pattern GoogleCloudVisionV1p4beta1FaceAnnotationLandmark_Type_RIGHTCHEEKCENTER =
   GoogleCloudVisionV1p4beta1FaceAnnotationLandmark_Type_CHINRIGHTGONION,
   GoogleCloudVisionV1p4beta1FaceAnnotationLandmark_Type_LEFTCHEEKCENTER,
   GoogleCloudVisionV1p4beta1FaceAnnotationLandmark_Type_RIGHTCHEEKCENTER,
-  GoogleCloudVisionV1p4beta1FaceAnnotationLandmark_Type
-  #-}
+  GoogleCloudVisionV1p4beta1FaceAnnotationLandmark_Type #-}
 
 -- | Current state of the batch operation.
-newtype GoogleCloudVisionV1p4beta1OperationMetadata_State = GoogleCloudVisionV1p4beta1OperationMetadata_State {fromGoogleCloudVisionV1p4beta1OperationMetadata_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p4beta1OperationMetadata_State = GoogleCloudVisionV1p4beta1OperationMetadata_State { fromGoogleCloudVisionV1p4beta1OperationMetadata_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Invalid.
 pattern GoogleCloudVisionV1p4beta1OperationMetadata_State_STATEUNSPECIFIED :: GoogleCloudVisionV1p4beta1OperationMetadata_State
@@ -5096,21 +5113,20 @@ pattern GoogleCloudVisionV1p4beta1OperationMetadata_State_Cancelled = GoogleClou
   GoogleCloudVisionV1p4beta1OperationMetadata_State_Running,
   GoogleCloudVisionV1p4beta1OperationMetadata_State_Done,
   GoogleCloudVisionV1p4beta1OperationMetadata_State_Cancelled,
-  GoogleCloudVisionV1p4beta1OperationMetadata_State
-  #-}
+  GoogleCloudVisionV1p4beta1OperationMetadata_State #-}
 
 -- | Represents the adult content likelihood for the image. Adult content may contain elements such as nudity, pornographic images or cartoons, or sexual activities.
-newtype GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Adult = GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Adult {fromGoogleCloudVisionV1p4beta1SafeSearchAnnotation_Adult :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Adult = GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Adult { fromGoogleCloudVisionV1p4beta1SafeSearchAnnotation_Adult :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Adult_Unknown :: GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Adult
@@ -5143,21 +5159,20 @@ pattern GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Adult_VERYLIKELY = Google
   GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Adult_Possible,
   GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Adult_Likely,
   GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Adult_VERYLIKELY,
-  GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Adult
-  #-}
+  GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Adult #-}
 
 -- | Likelihood that this is a medical image.
-newtype GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Medical = GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Medical {fromGoogleCloudVisionV1p4beta1SafeSearchAnnotation_Medical :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Medical = GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Medical { fromGoogleCloudVisionV1p4beta1SafeSearchAnnotation_Medical :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Medical_Unknown :: GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Medical
@@ -5190,21 +5205,20 @@ pattern GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Medical_VERYLIKELY = Goog
   GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Medical_Possible,
   GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Medical_Likely,
   GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Medical_VERYLIKELY,
-  GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Medical
-  #-}
+  GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Medical #-}
 
 -- | Likelihood that the request image contains racy content. Racy content may include (but is not limited to) skimpy or sheer clothing, strategically covered nudity, lewd or provocative poses, or close-ups of sensitive body areas.
-newtype GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Racy = GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Racy {fromGoogleCloudVisionV1p4beta1SafeSearchAnnotation_Racy :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Racy = GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Racy { fromGoogleCloudVisionV1p4beta1SafeSearchAnnotation_Racy :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Racy_Unknown :: GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Racy
@@ -5237,21 +5251,20 @@ pattern GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Racy_VERYLIKELY = GoogleC
   GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Racy_Possible,
   GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Racy_Likely,
   GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Racy_VERYLIKELY,
-  GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Racy
-  #-}
+  GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Racy #-}
 
 -- | Spoof likelihood. The likelihood that an modification was made to the image\'s canonical version to make it appear funny or offensive.
-newtype GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof = GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof {fromGoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof = GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof { fromGoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof_Unknown :: GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof
@@ -5284,21 +5297,20 @@ pattern GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof_VERYLIKELY = Google
   GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof_Possible,
   GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof_Likely,
   GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof_VERYLIKELY,
-  GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof
-  #-}
+  GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof #-}
 
--- | Likelihood that this image contains violent content.
-newtype GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence = GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence {fromGoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Likelihood that this image contains violent content. Violent content may include death, serious harm, or injury to individuals or groups of individuals.
+newtype GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence = GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence { fromGoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence_Unknown :: GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence
@@ -5331,21 +5343,20 @@ pattern GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence_VERYLIKELY = Goo
   GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence_Possible,
   GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence_Likely,
   GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence_VERYLIKELY,
-  GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence
-  #-}
+  GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence #-}
 
 -- | Detected break type.
-newtype GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak_Type = GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak_Type {fromGoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak_Type = GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak_Type { fromGoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown break label type.
 pattern GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak_Type_Unknown :: GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak_Type
@@ -5378,21 +5389,20 @@ pattern GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak_Type_LINEBREAK = G
   GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak_Type_EOLSURESPACE,
   GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak_Type_Hyphen,
   GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak_Type_LINEBREAK,
-  GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak_Type
-  #-}
+  GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak_Type #-}
 
 -- | Face landmark type.
-newtype Landmark_Type = Landmark_Type {fromLandmark_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Landmark_Type = Landmark_Type { fromLandmark_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown face landmark detected. Should not be filled.
 pattern Landmark_Type_UNKNOWNLANDMARK :: Landmark_Type
@@ -5580,21 +5590,20 @@ pattern Landmark_Type_RIGHTCHEEKCENTER = Landmark_Type "RIGHT_CHEEK_CENTER"
   Landmark_Type_CHINRIGHTGONION,
   Landmark_Type_LEFTCHEEKCENTER,
   Landmark_Type_RIGHTCHEEKCENTER,
-  Landmark_Type
-  #-}
+  Landmark_Type #-}
 
 -- | Current state of the batch operation.
-newtype OperationMetadata_State = OperationMetadata_State {fromOperationMetadata_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype OperationMetadata_State = OperationMetadata_State { fromOperationMetadata_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Invalid.
 pattern OperationMetadata_State_STATEUNSPECIFIED :: OperationMetadata_State
@@ -5622,21 +5631,20 @@ pattern OperationMetadata_State_Cancelled = OperationMetadata_State "CANCELLED"
   OperationMetadata_State_Running,
   OperationMetadata_State_Done,
   OperationMetadata_State_Cancelled,
-  OperationMetadata_State
-  #-}
+  OperationMetadata_State #-}
 
 -- | Represents the adult content likelihood for the image. Adult content may contain elements such as nudity, pornographic images or cartoons, or sexual activities.
-newtype SafeSearchAnnotation_Adult = SafeSearchAnnotation_Adult {fromSafeSearchAnnotation_Adult :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype SafeSearchAnnotation_Adult = SafeSearchAnnotation_Adult { fromSafeSearchAnnotation_Adult :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern SafeSearchAnnotation_Adult_Unknown :: SafeSearchAnnotation_Adult
@@ -5669,21 +5677,20 @@ pattern SafeSearchAnnotation_Adult_VERYLIKELY = SafeSearchAnnotation_Adult "VERY
   SafeSearchAnnotation_Adult_Possible,
   SafeSearchAnnotation_Adult_Likely,
   SafeSearchAnnotation_Adult_VERYLIKELY,
-  SafeSearchAnnotation_Adult
-  #-}
+  SafeSearchAnnotation_Adult #-}
 
 -- | Likelihood that this is a medical image.
-newtype SafeSearchAnnotation_Medical = SafeSearchAnnotation_Medical {fromSafeSearchAnnotation_Medical :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype SafeSearchAnnotation_Medical = SafeSearchAnnotation_Medical { fromSafeSearchAnnotation_Medical :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern SafeSearchAnnotation_Medical_Unknown :: SafeSearchAnnotation_Medical
@@ -5716,21 +5723,20 @@ pattern SafeSearchAnnotation_Medical_VERYLIKELY = SafeSearchAnnotation_Medical "
   SafeSearchAnnotation_Medical_Possible,
   SafeSearchAnnotation_Medical_Likely,
   SafeSearchAnnotation_Medical_VERYLIKELY,
-  SafeSearchAnnotation_Medical
-  #-}
+  SafeSearchAnnotation_Medical #-}
 
 -- | Likelihood that the request image contains racy content. Racy content may include (but is not limited to) skimpy or sheer clothing, strategically covered nudity, lewd or provocative poses, or close-ups of sensitive body areas.
-newtype SafeSearchAnnotation_Racy = SafeSearchAnnotation_Racy {fromSafeSearchAnnotation_Racy :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype SafeSearchAnnotation_Racy = SafeSearchAnnotation_Racy { fromSafeSearchAnnotation_Racy :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern SafeSearchAnnotation_Racy_Unknown :: SafeSearchAnnotation_Racy
@@ -5763,21 +5769,20 @@ pattern SafeSearchAnnotation_Racy_VERYLIKELY = SafeSearchAnnotation_Racy "VERY_L
   SafeSearchAnnotation_Racy_Possible,
   SafeSearchAnnotation_Racy_Likely,
   SafeSearchAnnotation_Racy_VERYLIKELY,
-  SafeSearchAnnotation_Racy
-  #-}
+  SafeSearchAnnotation_Racy #-}
 
 -- | Spoof likelihood. The likelihood that an modification was made to the image\'s canonical version to make it appear funny or offensive.
-newtype SafeSearchAnnotation_Spoof = SafeSearchAnnotation_Spoof {fromSafeSearchAnnotation_Spoof :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype SafeSearchAnnotation_Spoof = SafeSearchAnnotation_Spoof { fromSafeSearchAnnotation_Spoof :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern SafeSearchAnnotation_Spoof_Unknown :: SafeSearchAnnotation_Spoof
@@ -5810,21 +5815,20 @@ pattern SafeSearchAnnotation_Spoof_VERYLIKELY = SafeSearchAnnotation_Spoof "VERY
   SafeSearchAnnotation_Spoof_Possible,
   SafeSearchAnnotation_Spoof_Likely,
   SafeSearchAnnotation_Spoof_VERYLIKELY,
-  SafeSearchAnnotation_Spoof
-  #-}
+  SafeSearchAnnotation_Spoof #-}
 
--- | Likelihood that this image contains violent content.
-newtype SafeSearchAnnotation_Violence = SafeSearchAnnotation_Violence {fromSafeSearchAnnotation_Violence :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Likelihood that this image contains violent content. Violent content may include death, serious harm, or injury to individuals or groups of individuals.
+newtype SafeSearchAnnotation_Violence = SafeSearchAnnotation_Violence { fromSafeSearchAnnotation_Violence :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unknown likelihood.
 pattern SafeSearchAnnotation_Violence_Unknown :: SafeSearchAnnotation_Violence
@@ -5857,5 +5861,4 @@ pattern SafeSearchAnnotation_Violence_VERYLIKELY = SafeSearchAnnotation_Violence
   SafeSearchAnnotation_Violence_Possible,
   SafeSearchAnnotation_Violence_Likely,
   SafeSearchAnnotation_Violence_VERYLIKELY,
-  SafeSearchAnnotation_Violence
-  #-}
+  SafeSearchAnnotation_Violence #-}

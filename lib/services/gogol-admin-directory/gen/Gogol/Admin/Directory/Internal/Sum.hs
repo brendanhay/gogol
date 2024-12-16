@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,42 +26,97 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Admin.Directory.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AuxiliaryMessage_Severity
     AuxiliaryMessage_Severity
-      ( AuxiliaryMessage_Severity_SEVERITYUNSPECIFIED,
+      (
+        AuxiliaryMessage_Severity_SEVERITYUNSPECIFIED,
         AuxiliaryMessage_Severity_SEVERITYINFO,
         AuxiliaryMessage_Severity_SEVERITYWARNING,
         AuxiliaryMessage_Severity_SEVERITYERROR,
         ..
       ),
 
+    -- * BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction
+    BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction
+      (
+        BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONUNSPECIFIED,
+        BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONDEPROVISION,
+        BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONDISABLE,
+        BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONREENABLE,
+        ..
+      ),
+
+    -- * BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+    BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+      (
+        BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUNSPECIFIED,
+        BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONSAMEMODELREPLACEMENT,
+        BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUPGRADE,
+        BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONDOMAINMOVE,
+        BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONSERVICEEXPIRATION,
+        BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONOTHER,
+        BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONDIFFERENTMODELREPLACEMENT,
+        BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONRETIRINGDEVICE,
+        BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUPGRADETRANSFER,
+        BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONNOTREQUIRED,
+        BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONREPAIRCENTER,
+        ..
+      ),
+
+    -- * ChromeOsDevice_ChromeOsType
+    ChromeOsDevice_ChromeOsType
+      (
+        ChromeOsDevice_ChromeOsType_ChromeOsTypeUnspecified,
+        ChromeOsDevice_ChromeOsType_ChromeOsFlex,
+        ChromeOsDevice_ChromeOsType_ChromeOs,
+        ..
+      ),
+
     -- * ChromeOsDevice_DeprovisionReason
     ChromeOsDevice_DeprovisionReason
-      ( ChromeOsDevice_DeprovisionReason_DeprovisionReasonUnspecified,
-        ChromeOsDevice_DeprovisionReason_DeprovisionReasonSameModelReplacement,
-        ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgrade,
-        ChromeOsDevice_DeprovisionReason_DeprovisionReasonDomainMove,
-        ChromeOsDevice_DeprovisionReason_DeprovisionReasonServiceExpiration,
-        ChromeOsDevice_DeprovisionReason_DeprovisionReasonOther,
-        ChromeOsDevice_DeprovisionReason_DeprovisionReasonDifferentModelReplacement,
-        ChromeOsDevice_DeprovisionReason_DeprovisionReasonRetiringDevice,
-        ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgradeTransfer,
-        ChromeOsDevice_DeprovisionReason_DeprovisionReasonNotRequired,
-        ChromeOsDevice_DeprovisionReason_DeprovisionReasonRepairCenter,
+      (
+        ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUNSPECIFIED,
+        ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONSAMEMODELREPLACEMENT,
+        ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUPGRADE,
+        ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONDOMAINMOVE,
+        ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONSERVICEEXPIRATION,
+        ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONOTHER,
+        ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONDIFFERENTMODELREPLACEMENT,
+        ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONRETIRINGDEVICE,
+        ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUPGRADETRANSFER,
+        ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONNOTREQUIRED,
+        ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONREPAIRCENTER,
+        ..
+      ),
+
+    -- * ChromeOsDevice_DeviceLicenseType
+    ChromeOsDevice_DeviceLicenseType
+      (
+        ChromeOsDevice_DeviceLicenseType_DeviceLicenseTypeUnspecified,
+        ChromeOsDevice_DeviceLicenseType_Enterprise,
+        ChromeOsDevice_DeviceLicenseType_EnterpriseUpgrade,
+        ChromeOsDevice_DeviceLicenseType_EducationUpgrade,
+        ChromeOsDevice_DeviceLicenseType_Education,
+        ChromeOsDevice_DeviceLicenseType_KioskUpgrade,
         ..
       ),
 
     -- * DirectoryChromeosdevicesCommand_State
     DirectoryChromeosdevicesCommand_State
-      ( DirectoryChromeosdevicesCommand_State_STATEUNSPECIFIED,
+      (
+        DirectoryChromeosdevicesCommand_State_STATEUNSPECIFIED,
         DirectoryChromeosdevicesCommand_State_Pending,
         DirectoryChromeosdevicesCommand_State_Expired,
         DirectoryChromeosdevicesCommand_State_Cancelled,
@@ -72,7 +128,8 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * DirectoryChromeosdevicesCommand_Type
     DirectoryChromeosdevicesCommand_Type
-      ( DirectoryChromeosdevicesCommand_Type_COMMANDTYPEUNSPECIFIED,
+      (
+        DirectoryChromeosdevicesCommand_Type_COMMANDTYPEUNSPECIFIED,
         DirectoryChromeosdevicesCommand_Type_Reboot,
         DirectoryChromeosdevicesCommand_Type_TAKEASCREENSHOT,
         DirectoryChromeosdevicesCommand_Type_SETVOLUME,
@@ -80,12 +137,14 @@ module Gogol.Admin.Directory.Internal.Sum
         DirectoryChromeosdevicesCommand_Type_REMOTEPOWERWASH,
         DirectoryChromeosdevicesCommand_Type_DEVICESTARTCRDSESSION,
         DirectoryChromeosdevicesCommand_Type_CAPTURELOGS,
+        DirectoryChromeosdevicesCommand_Type_FETCHSUPPORTPACKET,
         ..
       ),
 
     -- * DirectoryChromeosdevicesCommandResult_Result
     DirectoryChromeosdevicesCommandResult_Result
-      ( DirectoryChromeosdevicesCommandResult_Result_COMMANDRESULTTYPEUNSPECIFIED,
+      (
+        DirectoryChromeosdevicesCommandResult_Result_COMMANDRESULTTYPEUNSPECIFIED,
         DirectoryChromeosdevicesCommandResult_Result_Ignored,
         DirectoryChromeosdevicesCommandResult_Result_Failure,
         DirectoryChromeosdevicesCommandResult_Result_Success,
@@ -94,7 +153,8 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * DirectoryChromeosdevicesIssueCommandRequest_CommandType
     DirectoryChromeosdevicesIssueCommandRequest_CommandType
-      ( DirectoryChromeosdevicesIssueCommandRequest_CommandType_COMMANDTYPEUNSPECIFIED,
+      (
+        DirectoryChromeosdevicesIssueCommandRequest_CommandType_COMMANDTYPEUNSPECIFIED,
         DirectoryChromeosdevicesIssueCommandRequest_CommandType_Reboot,
         DirectoryChromeosdevicesIssueCommandRequest_CommandType_TAKEASCREENSHOT,
         DirectoryChromeosdevicesIssueCommandRequest_CommandType_SETVOLUME,
@@ -102,12 +162,14 @@ module Gogol.Admin.Directory.Internal.Sum
         DirectoryChromeosdevicesIssueCommandRequest_CommandType_REMOTEPOWERWASH,
         DirectoryChromeosdevicesIssueCommandRequest_CommandType_DEVICESTARTCRDSESSION,
         DirectoryChromeosdevicesIssueCommandRequest_CommandType_CAPTURELOGS,
+        DirectoryChromeosdevicesIssueCommandRequest_CommandType_FETCHSUPPORTPACKET,
         ..
       ),
 
     -- * FailureInfo_ErrorCode
     FailureInfo_ErrorCode
-      ( FailureInfo_ErrorCode_OK,
+      (
+        FailureInfo_ErrorCode_OK,
         FailureInfo_ErrorCode_Cancelled,
         FailureInfo_ErrorCode_Unknown,
         FailureInfo_ErrorCode_INVALIDARGUMENT,
@@ -129,7 +191,8 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * OsUpdateStatus_State
     OsUpdateStatus_State
-      ( OsUpdateStatus_State_UpdateStateUnspecified,
+      (
+        OsUpdateStatus_State_UpdateStateUnspecified,
         OsUpdateStatus_State_UpdateStateNotStarted,
         OsUpdateStatus_State_UpdateStateDownloadInProgress,
         OsUpdateStatus_State_UpdateStateNeedReboot,
@@ -138,7 +201,8 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * PrintServerFailureInfo_ErrorCode
     PrintServerFailureInfo_ErrorCode
-      ( PrintServerFailureInfo_ErrorCode_OK,
+      (
+        PrintServerFailureInfo_ErrorCode_OK,
         PrintServerFailureInfo_ErrorCode_Cancelled,
         PrintServerFailureInfo_ErrorCode_Unknown,
         PrintServerFailureInfo_ErrorCode_INVALIDARGUMENT,
@@ -160,21 +224,24 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * RoleAssignment_AssigneeType
     RoleAssignment_AssigneeType
-      ( RoleAssignment_AssigneeType_User,
+      (
+        RoleAssignment_AssigneeType_User,
         RoleAssignment_AssigneeType_Group,
         ..
       ),
 
     -- * ChromeosdevicesGetProjection
     ChromeosdevicesGetProjection
-      ( ChromeosdevicesGetProjection_Basic,
+      (
+        ChromeosdevicesGetProjection_Basic,
         ChromeosdevicesGetProjection_Full,
         ..
       ),
 
     -- * ChromeosdevicesListOrderBy
     ChromeosdevicesListOrderBy
-      ( ChromeosdevicesListOrderBy_AnnotatedLocation,
+      (
+        ChromeosdevicesListOrderBy_AnnotatedLocation,
         ChromeosdevicesListOrderBy_AnnotatedUser,
         ChromeosdevicesListOrderBy_LastSync,
         ChromeosdevicesListOrderBy_Notes,
@@ -185,55 +252,63 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * ChromeosdevicesListProjection
     ChromeosdevicesListProjection
-      ( ChromeosdevicesListProjection_Basic,
+      (
+        ChromeosdevicesListProjection_Basic,
         ChromeosdevicesListProjection_Full,
         ..
       ),
 
     -- * ChromeosdevicesListSortOrder
     ChromeosdevicesListSortOrder
-      ( ChromeosdevicesListSortOrder_Ascending,
+      (
+        ChromeosdevicesListSortOrder_Ascending,
         ChromeosdevicesListSortOrder_Descending,
         ..
       ),
 
     -- * ChromeosdevicesPatchProjection
     ChromeosdevicesPatchProjection
-      ( ChromeosdevicesPatchProjection_Basic,
+      (
+        ChromeosdevicesPatchProjection_Basic,
         ChromeosdevicesPatchProjection_Full,
         ..
       ),
 
     -- * ChromeosdevicesUpdateProjection
     ChromeosdevicesUpdateProjection
-      ( ChromeosdevicesUpdateProjection_Basic,
+      (
+        ChromeosdevicesUpdateProjection_Basic,
         ChromeosdevicesUpdateProjection_Full,
         ..
       ),
 
     -- * GroupsListOrderBy
     GroupsListOrderBy
-      ( GroupsListOrderBy_Email,
+      (
+        GroupsListOrderBy_Email,
         ..
       ),
 
     -- * GroupsListSortOrder
     GroupsListSortOrder
-      ( GroupsListSortOrder_Ascending,
+      (
+        GroupsListSortOrder_Ascending,
         GroupsListSortOrder_Descending,
         ..
       ),
 
     -- * MobiledevicesGetProjection
     MobiledevicesGetProjection
-      ( MobiledevicesGetProjection_Basic,
+      (
+        MobiledevicesGetProjection_Basic,
         MobiledevicesGetProjection_Full,
         ..
       ),
 
     -- * MobiledevicesListOrderBy
     MobiledevicesListOrderBy
-      ( MobiledevicesListOrderBy_DeviceId,
+      (
+        MobiledevicesListOrderBy_DeviceId,
         MobiledevicesListOrderBy_Email,
         MobiledevicesListOrderBy_LastSync,
         MobiledevicesListOrderBy_Model,
@@ -246,28 +321,33 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * MobiledevicesListProjection
     MobiledevicesListProjection
-      ( MobiledevicesListProjection_Basic,
+      (
+        MobiledevicesListProjection_Basic,
         MobiledevicesListProjection_Full,
         ..
       ),
 
     -- * MobiledevicesListSortOrder
     MobiledevicesListSortOrder
-      ( MobiledevicesListSortOrder_Ascending,
+      (
+        MobiledevicesListSortOrder_Ascending,
         MobiledevicesListSortOrder_Descending,
         ..
       ),
 
     -- * OrgunitsListType
     OrgunitsListType
-      ( OrgunitsListType_All,
+      (
+        OrgunitsListType_All,
         OrgunitsListType_Children,
+        OrgunitsListType_AllIncludingParent,
         ..
       ),
 
     -- * ResourcesBuildingsInsertCoordinatesSource
     ResourcesBuildingsInsertCoordinatesSource
-      ( ResourcesBuildingsInsertCoordinatesSource_CLIENTSPECIFIED,
+      (
+        ResourcesBuildingsInsertCoordinatesSource_CLIENTSPECIFIED,
         ResourcesBuildingsInsertCoordinatesSource_RESOLVEDFROMADDRESS,
         ResourcesBuildingsInsertCoordinatesSource_SOURCEUNSPECIFIED,
         ..
@@ -275,7 +355,8 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * ResourcesBuildingsPatchCoordinatesSource
     ResourcesBuildingsPatchCoordinatesSource
-      ( ResourcesBuildingsPatchCoordinatesSource_CLIENTSPECIFIED,
+      (
+        ResourcesBuildingsPatchCoordinatesSource_CLIENTSPECIFIED,
         ResourcesBuildingsPatchCoordinatesSource_RESOLVEDFROMADDRESS,
         ResourcesBuildingsPatchCoordinatesSource_SOURCEUNSPECIFIED,
         ..
@@ -283,7 +364,8 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * ResourcesBuildingsUpdateCoordinatesSource
     ResourcesBuildingsUpdateCoordinatesSource
-      ( ResourcesBuildingsUpdateCoordinatesSource_CLIENTSPECIFIED,
+      (
+        ResourcesBuildingsUpdateCoordinatesSource_CLIENTSPECIFIED,
         ResourcesBuildingsUpdateCoordinatesSource_RESOLVEDFROMADDRESS,
         ResourcesBuildingsUpdateCoordinatesSource_SOURCEUNSPECIFIED,
         ..
@@ -291,21 +373,24 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * UsersAliasesListEvent
     UsersAliasesListEvent
-      ( UsersAliasesListEvent_Add,
+      (
+        UsersAliasesListEvent_Add,
         UsersAliasesListEvent_Delete',
         ..
       ),
 
     -- * UsersAliasesWatchEvent
     UsersAliasesWatchEvent
-      ( UsersAliasesWatchEvent_Add,
+      (
+        UsersAliasesWatchEvent_Add,
         UsersAliasesWatchEvent_Delete',
         ..
       ),
 
     -- * UsersGetProjection
     UsersGetProjection
-      ( UsersGetProjection_Basic,
+      (
+        UsersGetProjection_Basic,
         UsersGetProjection_Custom,
         UsersGetProjection_Full,
         ..
@@ -313,14 +398,16 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * UsersGetViewType
     UsersGetViewType
-      ( UsersGetViewType_AdminView,
+      (
+        UsersGetViewType_AdminView,
         UsersGetViewType_DomainPublic,
         ..
       ),
 
     -- * UsersListEvent
     UsersListEvent
-      ( UsersListEvent_Add,
+      (
+        UsersListEvent_Add,
         UsersListEvent_Delete',
         UsersListEvent_MakeAdmin,
         UsersListEvent_Undelete,
@@ -330,7 +417,8 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * UsersListOrderBy
     UsersListOrderBy
-      ( UsersListOrderBy_Email,
+      (
+        UsersListOrderBy_Email,
         UsersListOrderBy_FamilyName,
         UsersListOrderBy_GivenName,
         ..
@@ -338,7 +426,8 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * UsersListProjection
     UsersListProjection
-      ( UsersListProjection_Basic,
+      (
+        UsersListProjection_Basic,
         UsersListProjection_Custom,
         UsersListProjection_Full,
         ..
@@ -346,21 +435,24 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * UsersListSortOrder
     UsersListSortOrder
-      ( UsersListSortOrder_Ascending,
+      (
+        UsersListSortOrder_Ascending,
         UsersListSortOrder_Descending,
         ..
       ),
 
     -- * UsersListViewType
     UsersListViewType
-      ( UsersListViewType_AdminView,
+      (
+        UsersListViewType_AdminView,
         UsersListViewType_DomainPublic,
         ..
       ),
 
     -- * UsersWatchEvent
     UsersWatchEvent
-      ( UsersWatchEvent_Add,
+      (
+        UsersWatchEvent_Add,
         UsersWatchEvent_Delete',
         UsersWatchEvent_MakeAdmin,
         UsersWatchEvent_Undelete,
@@ -370,7 +462,8 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * UsersWatchOrderBy
     UsersWatchOrderBy
-      ( UsersWatchOrderBy_Email,
+      (
+        UsersWatchOrderBy_Email,
         UsersWatchOrderBy_FamilyName,
         UsersWatchOrderBy_GivenName,
         ..
@@ -378,7 +471,8 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * UsersWatchProjection
     UsersWatchProjection
-      ( UsersWatchProjection_Basic,
+      (
+        UsersWatchProjection_Basic,
         UsersWatchProjection_Custom,
         UsersWatchProjection_Full,
         ..
@@ -386,34 +480,35 @@ module Gogol.Admin.Directory.Internal.Sum
 
     -- * UsersWatchSortOrder
     UsersWatchSortOrder
-      ( UsersWatchSortOrder_Ascending,
+      (
+        UsersWatchSortOrder_Ascending,
         UsersWatchSortOrder_Descending,
         ..
       ),
 
     -- * UsersWatchViewType
     UsersWatchViewType
-      ( UsersWatchViewType_AdminView,
+      (
+        UsersWatchViewType_AdminView,
         UsersWatchViewType_DomainPublic,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -426,21 +521,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | Message severity
-newtype AuxiliaryMessage_Severity = AuxiliaryMessage_Severity {fromAuxiliaryMessage_Severity :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AuxiliaryMessage_Severity = AuxiliaryMessage_Severity { fromAuxiliaryMessage_Severity :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Message type unspecified.
 pattern AuxiliaryMessage_Severity_SEVERITYUNSPECIFIED :: AuxiliaryMessage_Severity
@@ -463,93 +557,275 @@ pattern AuxiliaryMessage_Severity_SEVERITYERROR = AuxiliaryMessage_Severity "SEV
   AuxiliaryMessage_Severity_SEVERITYINFO,
   AuxiliaryMessage_Severity_SEVERITYWARNING,
   AuxiliaryMessage_Severity_SEVERITYERROR,
-  AuxiliaryMessage_Severity
-  #-}
+  AuxiliaryMessage_Severity #-}
 
--- | (Read-only) Deprovision reason.
-newtype ChromeOsDevice_DeprovisionReason = ChromeOsDevice_DeprovisionReason {fromChromeOsDevice_DeprovisionReason :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Required. The action to take on the ChromeOS device in order to change its status.
+newtype BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction = BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction { fromBatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- | The deprovision reason is unknown.
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonUnspecified :: ChromeOsDevice_DeprovisionReason
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonUnspecified = ChromeOsDevice_DeprovisionReason "deprovisionReasonUnspecified"
+-- | Default value. Value is unused.
+pattern BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONUNSPECIFIED :: BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction
+pattern BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONUNSPECIFIED = BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction "CHANGE_CHROME_OS_DEVICE_STATUS_ACTION_UNSPECIFIED"
 
--- | The device was replaced by a device with the same model.
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonSameModelReplacement :: ChromeOsDevice_DeprovisionReason
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonSameModelReplacement = ChromeOsDevice_DeprovisionReason "deprovisionReasonSameModelReplacement"
+-- | Deprovisions a ChromeOS device. If you have ChromeOS devices that are no longer being used in your organization, you should deprovision them so that you’re no longer managing them. Deprovisioning the device removes all policies that were on the device as well as device-level printers and the ability to use the device as a kiosk. Depending on the upgrade that’s associated with the device this action might release the license back into the license pool; which allows you to use the license on a different device.
+pattern BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONDEPROVISION :: BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction
+pattern BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONDEPROVISION = BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction "CHANGE_CHROME_OS_DEVICE_STATUS_ACTION_DEPROVISION"
 
--- | The device was upgraded.
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgrade :: ChromeOsDevice_DeprovisionReason
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgrade = ChromeOsDevice_DeprovisionReason "deprovisionReasonUpgrade"
+-- | Disables a ChromeOS device. Use this action if a user loses their device or it’s stolen, this makes it such that the device is still managed, so it will still receive policies, but no one can use it. Depending on the upgrade that’s associated with the device this action might release the license back into the license pool; which allows you to use the license on a different device.
+pattern BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONDISABLE :: BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction
+pattern BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONDISABLE = BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction "CHANGE_CHROME_OS_DEVICE_STATUS_ACTION_DISABLE"
 
--- | The device\'s domain was changed.
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonDomainMove :: ChromeOsDevice_DeprovisionReason
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonDomainMove = ChromeOsDevice_DeprovisionReason "deprovisionReasonDomainMove"
-
--- | Service expired for the device.
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonServiceExpiration :: ChromeOsDevice_DeprovisionReason
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonServiceExpiration = ChromeOsDevice_DeprovisionReason "deprovisionReasonServiceExpiration"
-
--- | The device was deprovisioned for a legacy reason that is no longer supported.
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonOther :: ChromeOsDevice_DeprovisionReason
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonOther = ChromeOsDevice_DeprovisionReason "deprovisionReasonOther"
-
--- | The device was replaced by a device with a different model.
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonDifferentModelReplacement :: ChromeOsDevice_DeprovisionReason
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonDifferentModelReplacement = ChromeOsDevice_DeprovisionReason "deprovisionReasonDifferentModelReplacement"
-
--- | The device was retired.
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonRetiringDevice :: ChromeOsDevice_DeprovisionReason
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonRetiringDevice = ChromeOsDevice_DeprovisionReason "deprovisionReasonRetiringDevice"
-
--- | The device\'s perpetual upgrade was transferred to a new device.
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgradeTransfer :: ChromeOsDevice_DeprovisionReason
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgradeTransfer = ChromeOsDevice_DeprovisionReason "deprovisionReasonUpgradeTransfer"
-
--- | A reason was not required. For example, the licenses were returned to the customer\'s license pool.
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonNotRequired :: ChromeOsDevice_DeprovisionReason
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonNotRequired = ChromeOsDevice_DeprovisionReason "deprovisionReasonNotRequired"
-
--- | The device was deprovisioned by a repair service center.
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonRepairCenter :: ChromeOsDevice_DeprovisionReason
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonRepairCenter = ChromeOsDevice_DeprovisionReason "deprovisionReasonRepairCenter"
+-- | Reenables a ChromeOS device to be used after being disabled. Reenables the device once it\'s no longer lost or it\'s been recovered. This allows the device to be used again. Depending on the upgrade associated with the device this might consume one license from the license pool, meaning that if there aren\'t enough licenses available the operation will fail.
+pattern BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONREENABLE :: BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction
+pattern BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONREENABLE = BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction "CHANGE_CHROME_OS_DEVICE_STATUS_ACTION_REENABLE"
 
 {-# COMPLETE
-  ChromeOsDevice_DeprovisionReason_DeprovisionReasonUnspecified,
-  ChromeOsDevice_DeprovisionReason_DeprovisionReasonSameModelReplacement,
-  ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgrade,
-  ChromeOsDevice_DeprovisionReason_DeprovisionReasonDomainMove,
-  ChromeOsDevice_DeprovisionReason_DeprovisionReasonServiceExpiration,
-  ChromeOsDevice_DeprovisionReason_DeprovisionReasonOther,
-  ChromeOsDevice_DeprovisionReason_DeprovisionReasonDifferentModelReplacement,
-  ChromeOsDevice_DeprovisionReason_DeprovisionReasonRetiringDevice,
-  ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgradeTransfer,
-  ChromeOsDevice_DeprovisionReason_DeprovisionReasonNotRequired,
-  ChromeOsDevice_DeprovisionReason_DeprovisionReasonRepairCenter,
-  ChromeOsDevice_DeprovisionReason
-  #-}
+  BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONUNSPECIFIED,
+  BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONDEPROVISION,
+  BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONDISABLE,
+  BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONREENABLE,
+  BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction #-}
+
+-- | Optional. The reason behind a device deprovision. Must be provided if \'changeChromeOsDeviceStatusAction\' is set to \'CHANGE/CHROME/OS/DEVICE/STATUS/ACTION/DEPROVISION\'. Otherwise, omit this field.
+newtype BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason { fromBatchChangeChromeOsDeviceStatusRequest_DeprovisionReason :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | The deprovision reason is unknown.
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUNSPECIFIED :: BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUNSPECIFIED = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason "DEPROVISION_REASON_UNSPECIFIED"
+
+-- | Same model replacement. You have return materials authorization (RMA) or you are replacing a malfunctioning device under warranty with the same device model.
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONSAMEMODELREPLACEMENT :: BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONSAMEMODELREPLACEMENT = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason "DEPROVISION_REASON_SAME_MODEL_REPLACEMENT"
+
+-- | The device was upgraded.
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUPGRADE :: BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUPGRADE = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason "DEPROVISION_REASON_UPGRADE"
+
+-- | The device\'s domain was changed.
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONDOMAINMOVE :: BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONDOMAINMOVE = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason "DEPROVISION_REASON_DOMAIN_MOVE"
+
+-- | Service expired for the device.
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONSERVICEEXPIRATION :: BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONSERVICEEXPIRATION = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason "DEPROVISION_REASON_SERVICE_EXPIRATION"
+
+-- | The device was deprovisioned for a legacy reason that is no longer supported.
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONOTHER :: BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONOTHER = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason "DEPROVISION_REASON_OTHER"
+
+-- | Different model replacement. You are replacing this device with an upgraded or newer device model.
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONDIFFERENTMODELREPLACEMENT :: BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONDIFFERENTMODELREPLACEMENT = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason "DEPROVISION_REASON_DIFFERENT_MODEL_REPLACEMENT"
+
+-- | Retiring from fleet. You are donating, discarding, or otherwise removing the device from use.
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONRETIRINGDEVICE :: BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONRETIRINGDEVICE = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason "DEPROVISION_REASON_RETIRING_DEVICE"
+
+-- | ChromeOS Flex upgrade transfer. This is a ChromeOS Flex device that you are replacing with a Chromebook within a year.
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUPGRADETRANSFER :: BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUPGRADETRANSFER = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason "DEPROVISION_REASON_UPGRADE_TRANSFER"
+
+-- | A reason was not required. For example, the licenses were returned to the customer\'s license pool.
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONNOTREQUIRED :: BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONNOTREQUIRED = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason "DEPROVISION_REASON_NOT_REQUIRED"
+
+-- | The device was deprovisioned by the Repair Service Center. Can only be set by Repair Service Center during RMA.
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONREPAIRCENTER :: BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONREPAIRCENTER = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason "DEPROVISION_REASON_REPAIR_CENTER"
+
+{-# COMPLETE
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUNSPECIFIED,
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONSAMEMODELREPLACEMENT,
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUPGRADE,
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONDOMAINMOVE,
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONSERVICEEXPIRATION,
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONOTHER,
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONDIFFERENTMODELREPLACEMENT,
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONRETIRINGDEVICE,
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUPGRADETRANSFER,
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONNOTREQUIRED,
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONREPAIRCENTER,
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason #-}
+
+-- | Output only. Chrome OS type of the device.
+newtype ChromeOsDevice_ChromeOsType = ChromeOsDevice_ChromeOsType { fromChromeOsDevice_ChromeOsType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Chrome OS Type unspecified.
+pattern ChromeOsDevice_ChromeOsType_ChromeOsTypeUnspecified :: ChromeOsDevice_ChromeOsType
+pattern ChromeOsDevice_ChromeOsType_ChromeOsTypeUnspecified = ChromeOsDevice_ChromeOsType "chromeOsTypeUnspecified"
+
+-- | Chrome OS Type Chrome OS Flex.
+pattern ChromeOsDevice_ChromeOsType_ChromeOsFlex :: ChromeOsDevice_ChromeOsType
+pattern ChromeOsDevice_ChromeOsType_ChromeOsFlex = ChromeOsDevice_ChromeOsType "chromeOsFlex"
+
+-- | Chrome OS Type Chrome OS.
+pattern ChromeOsDevice_ChromeOsType_ChromeOs :: ChromeOsDevice_ChromeOsType
+pattern ChromeOsDevice_ChromeOsType_ChromeOs = ChromeOsDevice_ChromeOsType "chromeOs"
+
+{-# COMPLETE
+  ChromeOsDevice_ChromeOsType_ChromeOsTypeUnspecified,
+  ChromeOsDevice_ChromeOsType_ChromeOsFlex,
+  ChromeOsDevice_ChromeOsType_ChromeOs,
+  ChromeOsDevice_ChromeOsType #-}
+
+-- | (Read-only) Deprovision reason.
+newtype ChromeOsDevice_DeprovisionReason = ChromeOsDevice_DeprovisionReason { fromChromeOsDevice_DeprovisionReason :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | The deprovision reason is unknown.
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUNSPECIFIED :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUNSPECIFIED = ChromeOsDevice_DeprovisionReason "DEPROVISION_REASON_UNSPECIFIED"
+
+-- | Same model replacement. You have return materials authorization (RMA) or you are replacing a malfunctioning device under warranty with the same device model.
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONSAMEMODELREPLACEMENT :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONSAMEMODELREPLACEMENT = ChromeOsDevice_DeprovisionReason "DEPROVISION_REASON_SAME_MODEL_REPLACEMENT"
+
+-- | The device was upgraded.
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUPGRADE :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUPGRADE = ChromeOsDevice_DeprovisionReason "DEPROVISION_REASON_UPGRADE"
+
+-- | The device\'s domain was changed.
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONDOMAINMOVE :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONDOMAINMOVE = ChromeOsDevice_DeprovisionReason "DEPROVISION_REASON_DOMAIN_MOVE"
+
+-- | Service expired for the device.
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONSERVICEEXPIRATION :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONSERVICEEXPIRATION = ChromeOsDevice_DeprovisionReason "DEPROVISION_REASON_SERVICE_EXPIRATION"
+
+-- | The device was deprovisioned for a legacy reason that is no longer supported.
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONOTHER :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONOTHER = ChromeOsDevice_DeprovisionReason "DEPROVISION_REASON_OTHER"
+
+-- | Different model replacement. You are replacing this device with an upgraded or newer device model.
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONDIFFERENTMODELREPLACEMENT :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONDIFFERENTMODELREPLACEMENT = ChromeOsDevice_DeprovisionReason "DEPROVISION_REASON_DIFFERENT_MODEL_REPLACEMENT"
+
+-- | Retiring from fleet. You are donating, discarding, or otherwise removing the device from use.
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONRETIRINGDEVICE :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONRETIRINGDEVICE = ChromeOsDevice_DeprovisionReason "DEPROVISION_REASON_RETIRING_DEVICE"
+
+-- | ChromeOS Flex upgrade transfer. This is a ChromeOS Flex device that you are replacing with a Chromebook within a year.
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUPGRADETRANSFER :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUPGRADETRANSFER = ChromeOsDevice_DeprovisionReason "DEPROVISION_REASON_UPGRADE_TRANSFER"
+
+-- | A reason was not required. For example, the licenses were returned to the customer\'s license pool.
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONNOTREQUIRED :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONNOTREQUIRED = ChromeOsDevice_DeprovisionReason "DEPROVISION_REASON_NOT_REQUIRED"
+
+-- | The device was deprovisioned by the Repair Service Center. Can only be set by Repair Service Center during RMA.
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONREPAIRCENTER :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONREPAIRCENTER = ChromeOsDevice_DeprovisionReason "DEPROVISION_REASON_REPAIR_CENTER"
+
+{-# COMPLETE
+  ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUNSPECIFIED,
+  ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONSAMEMODELREPLACEMENT,
+  ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUPGRADE,
+  ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONDOMAINMOVE,
+  ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONSERVICEEXPIRATION,
+  ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONOTHER,
+  ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONDIFFERENTMODELREPLACEMENT,
+  ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONRETIRINGDEVICE,
+  ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUPGRADETRANSFER,
+  ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONNOTREQUIRED,
+  ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONREPAIRCENTER,
+  ChromeOsDevice_DeprovisionReason #-}
+
+-- | Output only. Device license type.
+newtype ChromeOsDevice_DeviceLicenseType = ChromeOsDevice_DeviceLicenseType { fromChromeOsDevice_DeviceLicenseType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | The license type is unknown.
+pattern ChromeOsDevice_DeviceLicenseType_DeviceLicenseTypeUnspecified :: ChromeOsDevice_DeviceLicenseType
+pattern ChromeOsDevice_DeviceLicenseType_DeviceLicenseTypeUnspecified = ChromeOsDevice_DeviceLicenseType "deviceLicenseTypeUnspecified"
+
+-- | The device is bundled with a perpetual Chrome Enterprise Upgrade.
+pattern ChromeOsDevice_DeviceLicenseType_Enterprise :: ChromeOsDevice_DeviceLicenseType
+pattern ChromeOsDevice_DeviceLicenseType_Enterprise = ChromeOsDevice_DeviceLicenseType "enterprise"
+
+-- | The device has an annual standalone Chrome Enterprise Upgrade.
+pattern ChromeOsDevice_DeviceLicenseType_EnterpriseUpgrade :: ChromeOsDevice_DeviceLicenseType
+pattern ChromeOsDevice_DeviceLicenseType_EnterpriseUpgrade = ChromeOsDevice_DeviceLicenseType "enterpriseUpgrade"
+
+-- | The device has a perpetual standalone Chrome Education Upgrade.
+pattern ChromeOsDevice_DeviceLicenseType_EducationUpgrade :: ChromeOsDevice_DeviceLicenseType
+pattern ChromeOsDevice_DeviceLicenseType_EducationUpgrade = ChromeOsDevice_DeviceLicenseType "educationUpgrade"
+
+-- | The device is bundled with a perpetual Chrome Education Upgrade.
+pattern ChromeOsDevice_DeviceLicenseType_Education :: ChromeOsDevice_DeviceLicenseType
+pattern ChromeOsDevice_DeviceLicenseType_Education = ChromeOsDevice_DeviceLicenseType "education"
+
+-- | The device has an annual Kiosk Upgrade.
+pattern ChromeOsDevice_DeviceLicenseType_KioskUpgrade :: ChromeOsDevice_DeviceLicenseType
+pattern ChromeOsDevice_DeviceLicenseType_KioskUpgrade = ChromeOsDevice_DeviceLicenseType "kioskUpgrade"
+
+{-# COMPLETE
+  ChromeOsDevice_DeviceLicenseType_DeviceLicenseTypeUnspecified,
+  ChromeOsDevice_DeviceLicenseType_Enterprise,
+  ChromeOsDevice_DeviceLicenseType_EnterpriseUpgrade,
+  ChromeOsDevice_DeviceLicenseType_EducationUpgrade,
+  ChromeOsDevice_DeviceLicenseType_Education,
+  ChromeOsDevice_DeviceLicenseType_KioskUpgrade,
+  ChromeOsDevice_DeviceLicenseType #-}
 
 -- | Indicates the command state.
-newtype DirectoryChromeosdevicesCommand_State = DirectoryChromeosdevicesCommand_State {fromDirectoryChromeosdevicesCommand_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DirectoryChromeosdevicesCommand_State = DirectoryChromeosdevicesCommand_State { fromDirectoryChromeosdevicesCommand_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The command status was unspecified.
 pattern DirectoryChromeosdevicesCommand_State_STATEUNSPECIFIED :: DirectoryChromeosdevicesCommand_State
@@ -587,27 +863,26 @@ pattern DirectoryChromeosdevicesCommand_State_EXECUTEDBYCLIENT = DirectoryChrome
   DirectoryChromeosdevicesCommand_State_SENTTOCLIENT,
   DirectoryChromeosdevicesCommand_State_ACKEDBYCLIENT,
   DirectoryChromeosdevicesCommand_State_EXECUTEDBYCLIENT,
-  DirectoryChromeosdevicesCommand_State
-  #-}
+  DirectoryChromeosdevicesCommand_State #-}
 
 -- | The type of the command.
-newtype DirectoryChromeosdevicesCommand_Type = DirectoryChromeosdevicesCommand_Type {fromDirectoryChromeosdevicesCommand_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DirectoryChromeosdevicesCommand_Type = DirectoryChromeosdevicesCommand_Type { fromDirectoryChromeosdevicesCommand_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The command type was unspecified.
 pattern DirectoryChromeosdevicesCommand_Type_COMMANDTYPEUNSPECIFIED :: DirectoryChromeosdevicesCommand_Type
 pattern DirectoryChromeosdevicesCommand_Type_COMMANDTYPEUNSPECIFIED = DirectoryChromeosdevicesCommand_Type "COMMAND_TYPE_UNSPECIFIED"
 
--- | Reboot the device. Can only be issued to Kiosk and managed guest session devices.
+-- | Reboot the device. Can be issued to Kiosk and managed guest session devices, and regular devices running ChromeOS version 113 or later.
 pattern DirectoryChromeosdevicesCommand_Type_Reboot :: DirectoryChromeosdevicesCommand_Type
 pattern DirectoryChromeosdevicesCommand_Type_Reboot = DirectoryChromeosdevicesCommand_Type "REBOOT"
 
@@ -631,9 +906,13 @@ pattern DirectoryChromeosdevicesCommand_Type_REMOTEPOWERWASH = DirectoryChromeos
 pattern DirectoryChromeosdevicesCommand_Type_DEVICESTARTCRDSESSION :: DirectoryChromeosdevicesCommand_Type
 pattern DirectoryChromeosdevicesCommand_Type_DEVICESTARTCRDSESSION = DirectoryChromeosdevicesCommand_Type "DEVICE_START_CRD_SESSION"
 
--- | Capture the system logs of a kiosk device. The logs can be downloaded from the downloadUrl link present in deviceFiles field of <https://developers.google.com/admin-sdk/directory/reference/rest/v1/chromeosdevices chromeosdevices>
+-- | Capture the system logs of a kiosk device. The logs can be downloaded from the downloadUrl link present in @deviceFiles@ field of <https://developers.google.com/admin-sdk/directory/reference/rest/v1/chromeosdevices chromeosdevices>
 pattern DirectoryChromeosdevicesCommand_Type_CAPTURELOGS :: DirectoryChromeosdevicesCommand_Type
 pattern DirectoryChromeosdevicesCommand_Type_CAPTURELOGS = DirectoryChromeosdevicesCommand_Type "CAPTURE_LOGS"
+
+-- | Fetch support packet from a device remotely. Support packet is a zip archive that contains various system logs and debug data from a ChromeOS device. The support packet can be downloaded from the downloadURL link present in the @deviceFiles@ field of <https://developers.google.com/admin-sdk/directory/reference/rest/v1/chromeosdevices chromeosdevices>
+pattern DirectoryChromeosdevicesCommand_Type_FETCHSUPPORTPACKET :: DirectoryChromeosdevicesCommand_Type
+pattern DirectoryChromeosdevicesCommand_Type_FETCHSUPPORTPACKET = DirectoryChromeosdevicesCommand_Type "FETCH_SUPPORT_PACKET"
 
 {-# COMPLETE
   DirectoryChromeosdevicesCommand_Type_COMMANDTYPEUNSPECIFIED,
@@ -644,21 +923,21 @@ pattern DirectoryChromeosdevicesCommand_Type_CAPTURELOGS = DirectoryChromeosdevi
   DirectoryChromeosdevicesCommand_Type_REMOTEPOWERWASH,
   DirectoryChromeosdevicesCommand_Type_DEVICESTARTCRDSESSION,
   DirectoryChromeosdevicesCommand_Type_CAPTURELOGS,
-  DirectoryChromeosdevicesCommand_Type
-  #-}
+  DirectoryChromeosdevicesCommand_Type_FETCHSUPPORTPACKET,
+  DirectoryChromeosdevicesCommand_Type #-}
 
 -- | The result of the command.
-newtype DirectoryChromeosdevicesCommandResult_Result = DirectoryChromeosdevicesCommandResult_Result {fromDirectoryChromeosdevicesCommandResult_Result :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DirectoryChromeosdevicesCommandResult_Result = DirectoryChromeosdevicesCommandResult_Result { fromDirectoryChromeosdevicesCommandResult_Result :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The command result was unspecified.
 pattern DirectoryChromeosdevicesCommandResult_Result_COMMANDRESULTTYPEUNSPECIFIED :: DirectoryChromeosdevicesCommandResult_Result
@@ -681,27 +960,26 @@ pattern DirectoryChromeosdevicesCommandResult_Result_Success = DirectoryChromeos
   DirectoryChromeosdevicesCommandResult_Result_Ignored,
   DirectoryChromeosdevicesCommandResult_Result_Failure,
   DirectoryChromeosdevicesCommandResult_Result_Success,
-  DirectoryChromeosdevicesCommandResult_Result
-  #-}
+  DirectoryChromeosdevicesCommandResult_Result #-}
 
 -- | The type of command.
-newtype DirectoryChromeosdevicesIssueCommandRequest_CommandType = DirectoryChromeosdevicesIssueCommandRequest_CommandType {fromDirectoryChromeosdevicesIssueCommandRequest_CommandType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DirectoryChromeosdevicesIssueCommandRequest_CommandType = DirectoryChromeosdevicesIssueCommandRequest_CommandType { fromDirectoryChromeosdevicesIssueCommandRequest_CommandType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The command type was unspecified.
 pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_COMMANDTYPEUNSPECIFIED :: DirectoryChromeosdevicesIssueCommandRequest_CommandType
 pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_COMMANDTYPEUNSPECIFIED = DirectoryChromeosdevicesIssueCommandRequest_CommandType "COMMAND_TYPE_UNSPECIFIED"
 
--- | Reboot the device. Can only be issued to Kiosk and managed guest session devices.
+-- | Reboot the device. Can be issued to Kiosk and managed guest session devices, and regular devices running ChromeOS version 113 or later.
 pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_Reboot :: DirectoryChromeosdevicesIssueCommandRequest_CommandType
 pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_Reboot = DirectoryChromeosdevicesIssueCommandRequest_CommandType "REBOOT"
 
@@ -725,9 +1003,13 @@ pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_REMOTEPOWERWASH 
 pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_DEVICESTARTCRDSESSION :: DirectoryChromeosdevicesIssueCommandRequest_CommandType
 pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_DEVICESTARTCRDSESSION = DirectoryChromeosdevicesIssueCommandRequest_CommandType "DEVICE_START_CRD_SESSION"
 
--- | Capture the system logs of a kiosk device. The logs can be downloaded from the downloadUrl link present in deviceFiles field of <https://developers.google.com/admin-sdk/directory/reference/rest/v1/chromeosdevices chromeosdevices>
+-- | Capture the system logs of a kiosk device. The logs can be downloaded from the downloadUrl link present in @deviceFiles@ field of <https://developers.google.com/admin-sdk/directory/reference/rest/v1/chromeosdevices chromeosdevices>
 pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_CAPTURELOGS :: DirectoryChromeosdevicesIssueCommandRequest_CommandType
 pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_CAPTURELOGS = DirectoryChromeosdevicesIssueCommandRequest_CommandType "CAPTURE_LOGS"
+
+-- | Fetch support packet from a device remotely. Support packet is a zip archive that contains various system logs and debug data from a ChromeOS device. The support packet can be downloaded from the downloadURL link present in the @deviceFiles@ field of <https://developers.google.com/admin-sdk/directory/reference/rest/v1/chromeosdevices chromeosdevices>
+pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_FETCHSUPPORTPACKET :: DirectoryChromeosdevicesIssueCommandRequest_CommandType
+pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_FETCHSUPPORTPACKET = DirectoryChromeosdevicesIssueCommandRequest_CommandType "FETCH_SUPPORT_PACKET"
 
 {-# COMPLETE
   DirectoryChromeosdevicesIssueCommandRequest_CommandType_COMMANDTYPEUNSPECIFIED,
@@ -738,21 +1020,21 @@ pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_CAPTURELOGS = Di
   DirectoryChromeosdevicesIssueCommandRequest_CommandType_REMOTEPOWERWASH,
   DirectoryChromeosdevicesIssueCommandRequest_CommandType_DEVICESTARTCRDSESSION,
   DirectoryChromeosdevicesIssueCommandRequest_CommandType_CAPTURELOGS,
-  DirectoryChromeosdevicesIssueCommandRequest_CommandType
-  #-}
+  DirectoryChromeosdevicesIssueCommandRequest_CommandType_FETCHSUPPORTPACKET,
+  DirectoryChromeosdevicesIssueCommandRequest_CommandType #-}
 
 -- | Canonical code for why the update failed to apply.
-newtype FailureInfo_ErrorCode = FailureInfo_ErrorCode {fromFailureInfo_ErrorCode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype FailureInfo_ErrorCode = FailureInfo_ErrorCode { fromFailureInfo_ErrorCode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not an error; returned on success. HTTP Mapping: 200 OK
 pattern FailureInfo_ErrorCode_OK :: FailureInfo_ErrorCode
@@ -840,21 +1122,20 @@ pattern FailureInfo_ErrorCode_DATALOSS = FailureInfo_ErrorCode "DATA_LOSS"
   FailureInfo_ErrorCode_Internal,
   FailureInfo_ErrorCode_Unavailable,
   FailureInfo_ErrorCode_DATALOSS,
-  FailureInfo_ErrorCode
-  #-}
+  FailureInfo_ErrorCode #-}
 
 -- | The update state of an OS update.
-newtype OsUpdateStatus_State = OsUpdateStatus_State {fromOsUpdateStatus_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype OsUpdateStatus_State = OsUpdateStatus_State { fromOsUpdateStatus_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The update state is unspecified.
 pattern OsUpdateStatus_State_UpdateStateUnspecified :: OsUpdateStatus_State
@@ -877,21 +1158,20 @@ pattern OsUpdateStatus_State_UpdateStateNeedReboot = OsUpdateStatus_State "updat
   OsUpdateStatus_State_UpdateStateNotStarted,
   OsUpdateStatus_State_UpdateStateDownloadInProgress,
   OsUpdateStatus_State_UpdateStateNeedReboot,
-  OsUpdateStatus_State
-  #-}
+  OsUpdateStatus_State #-}
 
 -- | Canonical code for why the update failed to apply.
-newtype PrintServerFailureInfo_ErrorCode = PrintServerFailureInfo_ErrorCode {fromPrintServerFailureInfo_ErrorCode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype PrintServerFailureInfo_ErrorCode = PrintServerFailureInfo_ErrorCode { fromPrintServerFailureInfo_ErrorCode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not an error; returned on success. HTTP Mapping: 200 OK
 pattern PrintServerFailureInfo_ErrorCode_OK :: PrintServerFailureInfo_ErrorCode
@@ -979,21 +1259,20 @@ pattern PrintServerFailureInfo_ErrorCode_DATALOSS = PrintServerFailureInfo_Error
   PrintServerFailureInfo_ErrorCode_Internal,
   PrintServerFailureInfo_ErrorCode_Unavailable,
   PrintServerFailureInfo_ErrorCode_DATALOSS,
-  PrintServerFailureInfo_ErrorCode
-  #-}
+  PrintServerFailureInfo_ErrorCode #-}
 
 -- | Output only. The type of the assignee (@USER@ or @GROUP@).
-newtype RoleAssignment_AssigneeType = RoleAssignment_AssigneeType {fromRoleAssignment_AssigneeType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype RoleAssignment_AssigneeType = RoleAssignment_AssigneeType { fromRoleAssignment_AssigneeType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | An individual user within the domain.
 pattern RoleAssignment_AssigneeType_User :: RoleAssignment_AssigneeType
@@ -1006,21 +1285,20 @@ pattern RoleAssignment_AssigneeType_Group = RoleAssignment_AssigneeType "group"
 {-# COMPLETE
   RoleAssignment_AssigneeType_User,
   RoleAssignment_AssigneeType_Group,
-  RoleAssignment_AssigneeType
-  #-}
+  RoleAssignment_AssigneeType #-}
 
 -- | Determines whether the response contains the full list of properties or only a subset.
-newtype ChromeosdevicesGetProjection = ChromeosdevicesGetProjection {fromChromeosdevicesGetProjection :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ChromeosdevicesGetProjection = ChromeosdevicesGetProjection { fromChromeosdevicesGetProjection :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Includes only the basic metadata fields (e.g., deviceId, serialNumber, status, and user)
 pattern ChromeosdevicesGetProjection_Basic :: ChromeosdevicesGetProjection
@@ -1033,21 +1311,20 @@ pattern ChromeosdevicesGetProjection_Full = ChromeosdevicesGetProjection "FULL"
 {-# COMPLETE
   ChromeosdevicesGetProjection_Basic,
   ChromeosdevicesGetProjection_Full,
-  ChromeosdevicesGetProjection
-  #-}
+  ChromeosdevicesGetProjection #-}
 
 -- | Device property to use for sorting results.
-newtype ChromeosdevicesListOrderBy = ChromeosdevicesListOrderBy {fromChromeosdevicesListOrderBy :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ChromeosdevicesListOrderBy = ChromeosdevicesListOrderBy { fromChromeosdevicesListOrderBy :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Chrome device location as annotated by the administrator.
 pattern ChromeosdevicesListOrderBy_AnnotatedLocation :: ChromeosdevicesListOrderBy
@@ -1080,21 +1357,20 @@ pattern ChromeosdevicesListOrderBy_Status = ChromeosdevicesListOrderBy "status"
   ChromeosdevicesListOrderBy_Notes,
   ChromeosdevicesListOrderBy_SerialNumber,
   ChromeosdevicesListOrderBy_Status,
-  ChromeosdevicesListOrderBy
-  #-}
+  ChromeosdevicesListOrderBy #-}
 
--- | Restrict information returned to a set of selected fields.
-newtype ChromeosdevicesListProjection = ChromeosdevicesListProjection {fromChromeosdevicesListProjection :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Determines whether the response contains the full list of properties or only a subset.
+newtype ChromeosdevicesListProjection = ChromeosdevicesListProjection { fromChromeosdevicesListProjection :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Includes only the basic metadata fields (e.g., deviceId, serialNumber, status, and user)
 pattern ChromeosdevicesListProjection_Basic :: ChromeosdevicesListProjection
@@ -1107,21 +1383,20 @@ pattern ChromeosdevicesListProjection_Full = ChromeosdevicesListProjection "FULL
 {-# COMPLETE
   ChromeosdevicesListProjection_Basic,
   ChromeosdevicesListProjection_Full,
-  ChromeosdevicesListProjection
-  #-}
+  ChromeosdevicesListProjection #-}
 
 -- | Whether to return results in ascending or descending order. Must be used with the @orderBy@ parameter.
-newtype ChromeosdevicesListSortOrder = ChromeosdevicesListSortOrder {fromChromeosdevicesListSortOrder :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ChromeosdevicesListSortOrder = ChromeosdevicesListSortOrder { fromChromeosdevicesListSortOrder :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Ascending order.
 pattern ChromeosdevicesListSortOrder_Ascending :: ChromeosdevicesListSortOrder
@@ -1134,21 +1409,20 @@ pattern ChromeosdevicesListSortOrder_Descending = ChromeosdevicesListSortOrder "
 {-# COMPLETE
   ChromeosdevicesListSortOrder_Ascending,
   ChromeosdevicesListSortOrder_Descending,
-  ChromeosdevicesListSortOrder
-  #-}
+  ChromeosdevicesListSortOrder #-}
 
--- | Restrict information returned to a set of selected fields.
-newtype ChromeosdevicesPatchProjection = ChromeosdevicesPatchProjection {fromChromeosdevicesPatchProjection :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Determines whether the response contains the full list of properties or only a subset.
+newtype ChromeosdevicesPatchProjection = ChromeosdevicesPatchProjection { fromChromeosdevicesPatchProjection :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Includes only the basic metadata fields (e.g., deviceId, serialNumber, status, and user)
 pattern ChromeosdevicesPatchProjection_Basic :: ChromeosdevicesPatchProjection
@@ -1161,21 +1435,20 @@ pattern ChromeosdevicesPatchProjection_Full = ChromeosdevicesPatchProjection "FU
 {-# COMPLETE
   ChromeosdevicesPatchProjection_Basic,
   ChromeosdevicesPatchProjection_Full,
-  ChromeosdevicesPatchProjection
-  #-}
+  ChromeosdevicesPatchProjection #-}
 
--- | Restrict information returned to a set of selected fields.
-newtype ChromeosdevicesUpdateProjection = ChromeosdevicesUpdateProjection {fromChromeosdevicesUpdateProjection :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Determines whether the response contains the full list of properties or only a subset.
+newtype ChromeosdevicesUpdateProjection = ChromeosdevicesUpdateProjection { fromChromeosdevicesUpdateProjection :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Includes only the basic metadata fields (e.g., deviceId, serialNumber, status, and user)
 pattern ChromeosdevicesUpdateProjection_Basic :: ChromeosdevicesUpdateProjection
@@ -1188,21 +1461,20 @@ pattern ChromeosdevicesUpdateProjection_Full = ChromeosdevicesUpdateProjection "
 {-# COMPLETE
   ChromeosdevicesUpdateProjection_Basic,
   ChromeosdevicesUpdateProjection_Full,
-  ChromeosdevicesUpdateProjection
-  #-}
+  ChromeosdevicesUpdateProjection #-}
 
 -- | Column to use for sorting results
-newtype GroupsListOrderBy = GroupsListOrderBy {fromGroupsListOrderBy :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GroupsListOrderBy = GroupsListOrderBy { fromGroupsListOrderBy :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Email of the group.
 pattern GroupsListOrderBy_Email :: GroupsListOrderBy
@@ -1210,21 +1482,20 @@ pattern GroupsListOrderBy_Email = GroupsListOrderBy "email"
 
 {-# COMPLETE
   GroupsListOrderBy_Email,
-  GroupsListOrderBy
-  #-}
+  GroupsListOrderBy #-}
 
 -- | Whether to return results in ascending or descending order. Only of use when orderBy is also used
-newtype GroupsListSortOrder = GroupsListSortOrder {fromGroupsListSortOrder :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GroupsListSortOrder = GroupsListSortOrder { fromGroupsListSortOrder :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Ascending order.
 pattern GroupsListSortOrder_Ascending :: GroupsListSortOrder
@@ -1237,21 +1508,20 @@ pattern GroupsListSortOrder_Descending = GroupsListSortOrder "DESCENDING"
 {-# COMPLETE
   GroupsListSortOrder_Ascending,
   GroupsListSortOrder_Descending,
-  GroupsListSortOrder
-  #-}
+  GroupsListSortOrder #-}
 
 -- | Restrict information returned to a set of selected fields.
-newtype MobiledevicesGetProjection = MobiledevicesGetProjection {fromMobiledevicesGetProjection :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MobiledevicesGetProjection = MobiledevicesGetProjection { fromMobiledevicesGetProjection :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Includes only the basic metadata fields (e.g., deviceId, model, status, type, and status)
 pattern MobiledevicesGetProjection_Basic :: MobiledevicesGetProjection
@@ -1264,21 +1534,20 @@ pattern MobiledevicesGetProjection_Full = MobiledevicesGetProjection "FULL"
 {-# COMPLETE
   MobiledevicesGetProjection_Basic,
   MobiledevicesGetProjection_Full,
-  MobiledevicesGetProjection
-  #-}
+  MobiledevicesGetProjection #-}
 
 -- | Device property to use for sorting results.
-newtype MobiledevicesListOrderBy = MobiledevicesListOrderBy {fromMobiledevicesListOrderBy :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MobiledevicesListOrderBy = MobiledevicesListOrderBy { fromMobiledevicesListOrderBy :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The serial number for a Google Sync mobile device. For Android devices, this is a software generated unique identifier.
 pattern MobiledevicesListOrderBy_DeviceId :: MobiledevicesListOrderBy
@@ -1321,21 +1590,20 @@ pattern MobiledevicesListOrderBy_Type = MobiledevicesListOrderBy "type"
   MobiledevicesListOrderBy_OS,
   MobiledevicesListOrderBy_Status,
   MobiledevicesListOrderBy_Type,
-  MobiledevicesListOrderBy
-  #-}
+  MobiledevicesListOrderBy #-}
 
 -- | Restrict information returned to a set of selected fields.
-newtype MobiledevicesListProjection = MobiledevicesListProjection {fromMobiledevicesListProjection :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MobiledevicesListProjection = MobiledevicesListProjection { fromMobiledevicesListProjection :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Includes only the basic metadata fields (e.g., deviceId, model, status, type, and status)
 pattern MobiledevicesListProjection_Basic :: MobiledevicesListProjection
@@ -1348,21 +1616,20 @@ pattern MobiledevicesListProjection_Full = MobiledevicesListProjection "FULL"
 {-# COMPLETE
   MobiledevicesListProjection_Basic,
   MobiledevicesListProjection_Full,
-  MobiledevicesListProjection
-  #-}
+  MobiledevicesListProjection #-}
 
 -- | Whether to return results in ascending or descending order. Must be used with the @orderBy@ parameter.
-newtype MobiledevicesListSortOrder = MobiledevicesListSortOrder {fromMobiledevicesListSortOrder :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MobiledevicesListSortOrder = MobiledevicesListSortOrder { fromMobiledevicesListSortOrder :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Ascending order.
 pattern MobiledevicesListSortOrder_Ascending :: MobiledevicesListSortOrder
@@ -1375,21 +1642,20 @@ pattern MobiledevicesListSortOrder_Descending = MobiledevicesListSortOrder "DESC
 {-# COMPLETE
   MobiledevicesListSortOrder_Ascending,
   MobiledevicesListSortOrder_Descending,
-  MobiledevicesListSortOrder
-  #-}
+  MobiledevicesListSortOrder #-}
 
 -- | Whether to return all sub-organizations or just immediate children.
-newtype OrgunitsListType = OrgunitsListType {fromOrgunitsListType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype OrgunitsListType = OrgunitsListType { fromOrgunitsListType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | All sub-organizational units.
 pattern OrgunitsListType_All :: OrgunitsListType
@@ -1399,24 +1665,28 @@ pattern OrgunitsListType_All = OrgunitsListType "all"
 pattern OrgunitsListType_Children :: OrgunitsListType
 pattern OrgunitsListType_Children = OrgunitsListType "children"
 
+-- | All sub-organizational units and the specified organizational unit (root if not specified).
+pattern OrgunitsListType_AllIncludingParent :: OrgunitsListType
+pattern OrgunitsListType_AllIncludingParent = OrgunitsListType "allIncludingParent"
+
 {-# COMPLETE
   OrgunitsListType_All,
   OrgunitsListType_Children,
-  OrgunitsListType
-  #-}
+  OrgunitsListType_AllIncludingParent,
+  OrgunitsListType #-}
 
 -- | Source from which Building.coordinates are derived.
-newtype ResourcesBuildingsInsertCoordinatesSource = ResourcesBuildingsInsertCoordinatesSource {fromResourcesBuildingsInsertCoordinatesSource :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ResourcesBuildingsInsertCoordinatesSource = ResourcesBuildingsInsertCoordinatesSource { fromResourcesBuildingsInsertCoordinatesSource :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Building.coordinates are set to the coordinates included in the request.
 pattern ResourcesBuildingsInsertCoordinatesSource_CLIENTSPECIFIED :: ResourcesBuildingsInsertCoordinatesSource
@@ -1434,21 +1704,20 @@ pattern ResourcesBuildingsInsertCoordinatesSource_SOURCEUNSPECIFIED = ResourcesB
   ResourcesBuildingsInsertCoordinatesSource_CLIENTSPECIFIED,
   ResourcesBuildingsInsertCoordinatesSource_RESOLVEDFROMADDRESS,
   ResourcesBuildingsInsertCoordinatesSource_SOURCEUNSPECIFIED,
-  ResourcesBuildingsInsertCoordinatesSource
-  #-}
+  ResourcesBuildingsInsertCoordinatesSource #-}
 
 -- | Source from which Building.coordinates are derived.
-newtype ResourcesBuildingsPatchCoordinatesSource = ResourcesBuildingsPatchCoordinatesSource {fromResourcesBuildingsPatchCoordinatesSource :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ResourcesBuildingsPatchCoordinatesSource = ResourcesBuildingsPatchCoordinatesSource { fromResourcesBuildingsPatchCoordinatesSource :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Building.coordinates are set to the coordinates included in the request.
 pattern ResourcesBuildingsPatchCoordinatesSource_CLIENTSPECIFIED :: ResourcesBuildingsPatchCoordinatesSource
@@ -1466,21 +1735,20 @@ pattern ResourcesBuildingsPatchCoordinatesSource_SOURCEUNSPECIFIED = ResourcesBu
   ResourcesBuildingsPatchCoordinatesSource_CLIENTSPECIFIED,
   ResourcesBuildingsPatchCoordinatesSource_RESOLVEDFROMADDRESS,
   ResourcesBuildingsPatchCoordinatesSource_SOURCEUNSPECIFIED,
-  ResourcesBuildingsPatchCoordinatesSource
-  #-}
+  ResourcesBuildingsPatchCoordinatesSource #-}
 
 -- | Source from which Building.coordinates are derived.
-newtype ResourcesBuildingsUpdateCoordinatesSource = ResourcesBuildingsUpdateCoordinatesSource {fromResourcesBuildingsUpdateCoordinatesSource :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ResourcesBuildingsUpdateCoordinatesSource = ResourcesBuildingsUpdateCoordinatesSource { fromResourcesBuildingsUpdateCoordinatesSource :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Building.coordinates are set to the coordinates included in the request.
 pattern ResourcesBuildingsUpdateCoordinatesSource_CLIENTSPECIFIED :: ResourcesBuildingsUpdateCoordinatesSource
@@ -1498,21 +1766,20 @@ pattern ResourcesBuildingsUpdateCoordinatesSource_SOURCEUNSPECIFIED = ResourcesB
   ResourcesBuildingsUpdateCoordinatesSource_CLIENTSPECIFIED,
   ResourcesBuildingsUpdateCoordinatesSource_RESOLVEDFROMADDRESS,
   ResourcesBuildingsUpdateCoordinatesSource_SOURCEUNSPECIFIED,
-  ResourcesBuildingsUpdateCoordinatesSource
-  #-}
+  ResourcesBuildingsUpdateCoordinatesSource #-}
 
 -- | Events to watch for.
-newtype UsersAliasesListEvent = UsersAliasesListEvent {fromUsersAliasesListEvent :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UsersAliasesListEvent = UsersAliasesListEvent { fromUsersAliasesListEvent :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Alias Created Event
 pattern UsersAliasesListEvent_Add :: UsersAliasesListEvent
@@ -1525,21 +1792,20 @@ pattern UsersAliasesListEvent_Delete' = UsersAliasesListEvent "delete"
 {-# COMPLETE
   UsersAliasesListEvent_Add,
   UsersAliasesListEvent_Delete',
-  UsersAliasesListEvent
-  #-}
+  UsersAliasesListEvent #-}
 
 -- | Events to watch for.
-newtype UsersAliasesWatchEvent = UsersAliasesWatchEvent {fromUsersAliasesWatchEvent :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UsersAliasesWatchEvent = UsersAliasesWatchEvent { fromUsersAliasesWatchEvent :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Alias Created Event
 pattern UsersAliasesWatchEvent_Add :: UsersAliasesWatchEvent
@@ -1552,21 +1818,20 @@ pattern UsersAliasesWatchEvent_Delete' = UsersAliasesWatchEvent "delete"
 {-# COMPLETE
   UsersAliasesWatchEvent_Add,
   UsersAliasesWatchEvent_Delete',
-  UsersAliasesWatchEvent
-  #-}
+  UsersAliasesWatchEvent #-}
 
 -- | What subset of fields to fetch for this user.
-newtype UsersGetProjection = UsersGetProjection {fromUsersGetProjection :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UsersGetProjection = UsersGetProjection { fromUsersGetProjection :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not include any custom fields for the user.
 pattern UsersGetProjection_Basic :: UsersGetProjection
@@ -1584,21 +1849,20 @@ pattern UsersGetProjection_Full = UsersGetProjection "full"
   UsersGetProjection_Basic,
   UsersGetProjection_Custom,
   UsersGetProjection_Full,
-  UsersGetProjection
-  #-}
+  UsersGetProjection #-}
 
 -- | Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see </admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin Retrieve a user as a non-administrator>.
-newtype UsersGetViewType = UsersGetViewType {fromUsersGetViewType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UsersGetViewType = UsersGetViewType { fromUsersGetViewType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Results include both administrator-only and domain-public fields for the user.
 pattern UsersGetViewType_AdminView :: UsersGetViewType
@@ -1611,21 +1875,20 @@ pattern UsersGetViewType_DomainPublic = UsersGetViewType "domain_public"
 {-# COMPLETE
   UsersGetViewType_AdminView,
   UsersGetViewType_DomainPublic,
-  UsersGetViewType
-  #-}
+  UsersGetViewType #-}
 
 -- | Event on which subscription is intended (if subscribing)
-newtype UsersListEvent = UsersListEvent {fromUsersListEvent :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UsersListEvent = UsersListEvent { fromUsersListEvent :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | User Created Event
 pattern UsersListEvent_Add :: UsersListEvent
@@ -1653,21 +1916,20 @@ pattern UsersListEvent_Update = UsersListEvent "update"
   UsersListEvent_MakeAdmin,
   UsersListEvent_Undelete,
   UsersListEvent_Update,
-  UsersListEvent
-  #-}
+  UsersListEvent #-}
 
 -- | Property to use for sorting results.
-newtype UsersListOrderBy = UsersListOrderBy {fromUsersListOrderBy :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UsersListOrderBy = UsersListOrderBy { fromUsersListOrderBy :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Primary email of the user.
 pattern UsersListOrderBy_Email :: UsersListOrderBy
@@ -1685,21 +1947,20 @@ pattern UsersListOrderBy_GivenName = UsersListOrderBy "givenName"
   UsersListOrderBy_Email,
   UsersListOrderBy_FamilyName,
   UsersListOrderBy_GivenName,
-  UsersListOrderBy
-  #-}
+  UsersListOrderBy #-}
 
 -- | What subset of fields to fetch for this user.
-newtype UsersListProjection = UsersListProjection {fromUsersListProjection :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UsersListProjection = UsersListProjection { fromUsersListProjection :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not include any custom fields for the user.
 pattern UsersListProjection_Basic :: UsersListProjection
@@ -1717,21 +1978,20 @@ pattern UsersListProjection_Full = UsersListProjection "full"
   UsersListProjection_Basic,
   UsersListProjection_Custom,
   UsersListProjection_Full,
-  UsersListProjection
-  #-}
+  UsersListProjection #-}
 
 -- | Whether to return results in ascending or descending order, ignoring case.
-newtype UsersListSortOrder = UsersListSortOrder {fromUsersListSortOrder :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UsersListSortOrder = UsersListSortOrder { fromUsersListSortOrder :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Ascending order.
 pattern UsersListSortOrder_Ascending :: UsersListSortOrder
@@ -1744,21 +2004,20 @@ pattern UsersListSortOrder_Descending = UsersListSortOrder "DESCENDING"
 {-# COMPLETE
   UsersListSortOrder_Ascending,
   UsersListSortOrder_Descending,
-  UsersListSortOrder
-  #-}
+  UsersListSortOrder #-}
 
 -- | Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see </admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin Retrieve a user as a non-administrator>.
-newtype UsersListViewType = UsersListViewType {fromUsersListViewType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UsersListViewType = UsersListViewType { fromUsersListViewType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Results include both administrator-only and domain-public fields for the user.
 pattern UsersListViewType_AdminView :: UsersListViewType
@@ -1771,21 +2030,20 @@ pattern UsersListViewType_DomainPublic = UsersListViewType "domain_public"
 {-# COMPLETE
   UsersListViewType_AdminView,
   UsersListViewType_DomainPublic,
-  UsersListViewType
-  #-}
+  UsersListViewType #-}
 
 -- | Events to watch for.
-newtype UsersWatchEvent = UsersWatchEvent {fromUsersWatchEvent :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UsersWatchEvent = UsersWatchEvent { fromUsersWatchEvent :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | User Created Event
 pattern UsersWatchEvent_Add :: UsersWatchEvent
@@ -1813,21 +2071,20 @@ pattern UsersWatchEvent_Update = UsersWatchEvent "update"
   UsersWatchEvent_MakeAdmin,
   UsersWatchEvent_Undelete,
   UsersWatchEvent_Update,
-  UsersWatchEvent
-  #-}
+  UsersWatchEvent #-}
 
 -- | Column to use for sorting results
-newtype UsersWatchOrderBy = UsersWatchOrderBy {fromUsersWatchOrderBy :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UsersWatchOrderBy = UsersWatchOrderBy { fromUsersWatchOrderBy :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Primary email of the user.
 pattern UsersWatchOrderBy_Email :: UsersWatchOrderBy
@@ -1845,21 +2102,20 @@ pattern UsersWatchOrderBy_GivenName = UsersWatchOrderBy "givenName"
   UsersWatchOrderBy_Email,
   UsersWatchOrderBy_FamilyName,
   UsersWatchOrderBy_GivenName,
-  UsersWatchOrderBy
-  #-}
+  UsersWatchOrderBy #-}
 
 -- | What subset of fields to fetch for this user.
-newtype UsersWatchProjection = UsersWatchProjection {fromUsersWatchProjection :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UsersWatchProjection = UsersWatchProjection { fromUsersWatchProjection :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not include any custom fields for the user.
 pattern UsersWatchProjection_Basic :: UsersWatchProjection
@@ -1877,21 +2133,20 @@ pattern UsersWatchProjection_Full = UsersWatchProjection "full"
   UsersWatchProjection_Basic,
   UsersWatchProjection_Custom,
   UsersWatchProjection_Full,
-  UsersWatchProjection
-  #-}
+  UsersWatchProjection #-}
 
 -- | Whether to return results in ascending or descending order.
-newtype UsersWatchSortOrder = UsersWatchSortOrder {fromUsersWatchSortOrder :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UsersWatchSortOrder = UsersWatchSortOrder { fromUsersWatchSortOrder :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Ascending order.
 pattern UsersWatchSortOrder_Ascending :: UsersWatchSortOrder
@@ -1904,21 +2159,20 @@ pattern UsersWatchSortOrder_Descending = UsersWatchSortOrder "DESCENDING"
 {-# COMPLETE
   UsersWatchSortOrder_Ascending,
   UsersWatchSortOrder_Descending,
-  UsersWatchSortOrder
-  #-}
+  UsersWatchSortOrder #-}
 
 -- | Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see </admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin Retrieve a user as a non-administrator>.
-newtype UsersWatchViewType = UsersWatchViewType {fromUsersWatchViewType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UsersWatchViewType = UsersWatchViewType { fromUsersWatchViewType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Results include both administrator-only and domain-public fields.
 pattern UsersWatchViewType_AdminView :: UsersWatchViewType
@@ -1931,5 +2185,4 @@ pattern UsersWatchViewType_DomainPublic = UsersWatchViewType "domain_public"
 {-# COMPLETE
   UsersWatchViewType_AdminView,
   UsersWatchViewType_DomainPublic,
-  UsersWatchViewType
-  #-}
+  UsersWatchViewType #-}

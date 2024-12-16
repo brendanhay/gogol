@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,749 +31,757 @@
 --
 -- /See:/ <https://developers.google.com/slides/ Google Slides API Reference>
 module Gogol.Slides
-  ( -- * Configuration
-    slidesService,
+    (
+    -- * Configuration
+      slidesService
 
     -- * OAuth Scopes
-    Drive'FullControl,
-    Drive'File,
-    Drive'Readonly,
-    Presentations'FullControl,
-    Presentations'Readonly,
-    Spreadsheets'FullControl,
-    Spreadsheets'Readonly,
+    , Drive'FullControl
+    , Drive'File
+    , Drive'Readonly
+    , Presentations'FullControl
+    , Presentations'Readonly
+    , Spreadsheets'FullControl
+    , Spreadsheets'Readonly
 
     -- * Resources
 
     -- ** slides.presentations.batchUpdate
-    SlidesPresentationsBatchUpdateResource,
-    SlidesPresentationsBatchUpdate (..),
-    newSlidesPresentationsBatchUpdate,
+    , SlidesPresentationsBatchUpdateResource
+    , SlidesPresentationsBatchUpdate (..)
+    , newSlidesPresentationsBatchUpdate
 
     -- ** slides.presentations.create
-    SlidesPresentationsCreateResource,
-    SlidesPresentationsCreate (..),
-    newSlidesPresentationsCreate,
+    , SlidesPresentationsCreateResource
+    , SlidesPresentationsCreate (..)
+    , newSlidesPresentationsCreate
 
     -- ** slides.presentations.get
-    SlidesPresentationsGetResource,
-    SlidesPresentationsGet (..),
-    newSlidesPresentationsGet,
+    , SlidesPresentationsGetResource
+    , SlidesPresentationsGet (..)
+    , newSlidesPresentationsGet
 
     -- ** slides.presentations.pages.get
-    SlidesPresentationsPagesGetResource,
-    SlidesPresentationsPagesGet (..),
-    newSlidesPresentationsPagesGet,
+    , SlidesPresentationsPagesGetResource
+    , SlidesPresentationsPagesGet (..)
+    , newSlidesPresentationsPagesGet
 
     -- ** slides.presentations.pages.getThumbnail
-    SlidesPresentationsPagesGetThumbnailResource,
-    SlidesPresentationsPagesGetThumbnail (..),
-    newSlidesPresentationsPagesGetThumbnail,
+    , SlidesPresentationsPagesGetThumbnailResource
+    , SlidesPresentationsPagesGetThumbnail (..)
+    , newSlidesPresentationsPagesGetThumbnail
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AffineTransform
-    AffineTransform (..),
-    newAffineTransform,
+    , AffineTransform (..)
+    , newAffineTransform
 
     -- ** AffineTransform_Unit
-    AffineTransform_Unit (..),
+    , AffineTransform_Unit (..)
 
     -- ** AutoText
-    AutoText (..),
-    newAutoText,
+    , AutoText (..)
+    , newAutoText
 
     -- ** AutoText_Type
-    AutoText_Type (..),
+    , AutoText_Type (..)
 
     -- ** Autofit
-    Autofit (..),
-    newAutofit,
+    , Autofit (..)
+    , newAutofit
 
     -- ** Autofit_AutofitType
-    Autofit_AutofitType (..),
+    , Autofit_AutofitType (..)
 
     -- ** BatchUpdatePresentationRequest
-    BatchUpdatePresentationRequest (..),
-    newBatchUpdatePresentationRequest,
+    , BatchUpdatePresentationRequest (..)
+    , newBatchUpdatePresentationRequest
 
     -- ** BatchUpdatePresentationResponse
-    BatchUpdatePresentationResponse (..),
-    newBatchUpdatePresentationResponse,
+    , BatchUpdatePresentationResponse (..)
+    , newBatchUpdatePresentationResponse
 
     -- ** Bullet
-    Bullet (..),
-    newBullet,
+    , Bullet (..)
+    , newBullet
 
     -- ** ColorScheme
-    ColorScheme (..),
-    newColorScheme,
+    , ColorScheme (..)
+    , newColorScheme
 
     -- ** ColorStop
-    ColorStop (..),
-    newColorStop,
+    , ColorStop (..)
+    , newColorStop
 
     -- ** CreateImageRequest
-    CreateImageRequest (..),
-    newCreateImageRequest,
+    , CreateImageRequest (..)
+    , newCreateImageRequest
 
     -- ** CreateImageResponse
-    CreateImageResponse (..),
-    newCreateImageResponse,
+    , CreateImageResponse (..)
+    , newCreateImageResponse
 
     -- ** CreateLineRequest
-    CreateLineRequest (..),
-    newCreateLineRequest,
+    , CreateLineRequest (..)
+    , newCreateLineRequest
 
     -- ** CreateLineRequest_Category
-    CreateLineRequest_Category (..),
+    , CreateLineRequest_Category (..)
 
     -- ** CreateLineRequest_LineCategory
-    CreateLineRequest_LineCategory (..),
+    , CreateLineRequest_LineCategory (..)
 
     -- ** CreateLineResponse
-    CreateLineResponse (..),
-    newCreateLineResponse,
+    , CreateLineResponse (..)
+    , newCreateLineResponse
 
     -- ** CreateParagraphBulletsRequest
-    CreateParagraphBulletsRequest (..),
-    newCreateParagraphBulletsRequest,
+    , CreateParagraphBulletsRequest (..)
+    , newCreateParagraphBulletsRequest
 
     -- ** CreateParagraphBulletsRequest_BulletPreset
-    CreateParagraphBulletsRequest_BulletPreset (..),
+    , CreateParagraphBulletsRequest_BulletPreset (..)
 
     -- ** CreateShapeRequest
-    CreateShapeRequest (..),
-    newCreateShapeRequest,
+    , CreateShapeRequest (..)
+    , newCreateShapeRequest
 
     -- ** CreateShapeRequest_ShapeType
-    CreateShapeRequest_ShapeType (..),
+    , CreateShapeRequest_ShapeType (..)
 
     -- ** CreateShapeResponse
-    CreateShapeResponse (..),
-    newCreateShapeResponse,
+    , CreateShapeResponse (..)
+    , newCreateShapeResponse
 
     -- ** CreateSheetsChartRequest
-    CreateSheetsChartRequest (..),
-    newCreateSheetsChartRequest,
+    , CreateSheetsChartRequest (..)
+    , newCreateSheetsChartRequest
 
     -- ** CreateSheetsChartRequest_LinkingMode
-    CreateSheetsChartRequest_LinkingMode (..),
+    , CreateSheetsChartRequest_LinkingMode (..)
 
     -- ** CreateSheetsChartResponse
-    CreateSheetsChartResponse (..),
-    newCreateSheetsChartResponse,
+    , CreateSheetsChartResponse (..)
+    , newCreateSheetsChartResponse
 
     -- ** CreateSlideRequest
-    CreateSlideRequest (..),
-    newCreateSlideRequest,
+    , CreateSlideRequest (..)
+    , newCreateSlideRequest
 
     -- ** CreateSlideResponse
-    CreateSlideResponse (..),
-    newCreateSlideResponse,
+    , CreateSlideResponse (..)
+    , newCreateSlideResponse
 
     -- ** CreateTableRequest
-    CreateTableRequest (..),
-    newCreateTableRequest,
+    , CreateTableRequest (..)
+    , newCreateTableRequest
 
     -- ** CreateTableResponse
-    CreateTableResponse (..),
-    newCreateTableResponse,
+    , CreateTableResponse (..)
+    , newCreateTableResponse
 
     -- ** CreateVideoRequest
-    CreateVideoRequest (..),
-    newCreateVideoRequest,
+    , CreateVideoRequest (..)
+    , newCreateVideoRequest
 
     -- ** CreateVideoRequest_Source
-    CreateVideoRequest_Source (..),
+    , CreateVideoRequest_Source (..)
 
     -- ** CreateVideoResponse
-    CreateVideoResponse (..),
-    newCreateVideoResponse,
+    , CreateVideoResponse (..)
+    , newCreateVideoResponse
 
     -- ** CropProperties
-    CropProperties (..),
-    newCropProperties,
+    , CropProperties (..)
+    , newCropProperties
 
     -- ** DeleteObjectRequest
-    DeleteObjectRequest (..),
-    newDeleteObjectRequest,
+    , DeleteObjectRequest (..)
+    , newDeleteObjectRequest
 
     -- ** DeleteParagraphBulletsRequest
-    DeleteParagraphBulletsRequest (..),
-    newDeleteParagraphBulletsRequest,
+    , DeleteParagraphBulletsRequest (..)
+    , newDeleteParagraphBulletsRequest
 
     -- ** DeleteTableColumnRequest
-    DeleteTableColumnRequest (..),
-    newDeleteTableColumnRequest,
+    , DeleteTableColumnRequest (..)
+    , newDeleteTableColumnRequest
 
     -- ** DeleteTableRowRequest
-    DeleteTableRowRequest (..),
-    newDeleteTableRowRequest,
+    , DeleteTableRowRequest (..)
+    , newDeleteTableRowRequest
 
     -- ** DeleteTextRequest
-    DeleteTextRequest (..),
-    newDeleteTextRequest,
+    , DeleteTextRequest (..)
+    , newDeleteTextRequest
 
     -- ** Dimension
-    Dimension (..),
-    newDimension,
+    , Dimension (..)
+    , newDimension
 
     -- ** Dimension_Unit
-    Dimension_Unit (..),
+    , Dimension_Unit (..)
 
     -- ** DuplicateObjectRequest
-    DuplicateObjectRequest (..),
-    newDuplicateObjectRequest,
+    , DuplicateObjectRequest (..)
+    , newDuplicateObjectRequest
 
     -- ** DuplicateObjectRequest_ObjectIds
-    DuplicateObjectRequest_ObjectIds (..),
-    newDuplicateObjectRequest_ObjectIds,
+    , DuplicateObjectRequest_ObjectIds (..)
+    , newDuplicateObjectRequest_ObjectIds
 
     -- ** DuplicateObjectResponse
-    DuplicateObjectResponse (..),
-    newDuplicateObjectResponse,
+    , DuplicateObjectResponse (..)
+    , newDuplicateObjectResponse
 
     -- ** Group
-    Group (..),
-    newGroup,
+    , Group (..)
+    , newGroup
 
     -- ** GroupObjectsRequest
-    GroupObjectsRequest (..),
-    newGroupObjectsRequest,
+    , GroupObjectsRequest (..)
+    , newGroupObjectsRequest
 
     -- ** GroupObjectsResponse
-    GroupObjectsResponse (..),
-    newGroupObjectsResponse,
+    , GroupObjectsResponse (..)
+    , newGroupObjectsResponse
 
     -- ** Image
-    Image (..),
-    newImage,
+    , Image (..)
+    , newImage
 
     -- ** ImageProperties
-    ImageProperties (..),
-    newImageProperties,
+    , ImageProperties (..)
+    , newImageProperties
 
     -- ** InsertTableColumnsRequest
-    InsertTableColumnsRequest (..),
-    newInsertTableColumnsRequest,
+    , InsertTableColumnsRequest (..)
+    , newInsertTableColumnsRequest
 
     -- ** InsertTableRowsRequest
-    InsertTableRowsRequest (..),
-    newInsertTableRowsRequest,
+    , InsertTableRowsRequest (..)
+    , newInsertTableRowsRequest
 
     -- ** InsertTextRequest
-    InsertTextRequest (..),
-    newInsertTextRequest,
+    , InsertTextRequest (..)
+    , newInsertTextRequest
 
     -- ** LayoutPlaceholderIdMapping
-    LayoutPlaceholderIdMapping (..),
-    newLayoutPlaceholderIdMapping,
+    , LayoutPlaceholderIdMapping (..)
+    , newLayoutPlaceholderIdMapping
 
     -- ** LayoutProperties
-    LayoutProperties (..),
-    newLayoutProperties,
+    , LayoutProperties (..)
+    , newLayoutProperties
 
     -- ** LayoutReference
-    LayoutReference (..),
-    newLayoutReference,
+    , LayoutReference (..)
+    , newLayoutReference
 
     -- ** LayoutReference_PredefinedLayout
-    LayoutReference_PredefinedLayout (..),
+    , LayoutReference_PredefinedLayout (..)
 
     -- ** Line
-    Line (..),
-    newLine,
+    , Line (..)
+    , newLine
 
     -- ** Line_LineCategory
-    Line_LineCategory (..),
+    , Line_LineCategory (..)
 
     -- ** Line_LineType
-    Line_LineType (..),
+    , Line_LineType (..)
 
     -- ** LineConnection
-    LineConnection (..),
-    newLineConnection,
+    , LineConnection (..)
+    , newLineConnection
 
     -- ** LineFill
-    LineFill (..),
-    newLineFill,
+    , LineFill (..)
+    , newLineFill
 
     -- ** LineProperties
-    LineProperties (..),
-    newLineProperties,
+    , LineProperties (..)
+    , newLineProperties
 
     -- ** LineProperties_DashStyle
-    LineProperties_DashStyle (..),
+    , LineProperties_DashStyle (..)
 
     -- ** LineProperties_EndArrow
-    LineProperties_EndArrow (..),
+    , LineProperties_EndArrow (..)
 
     -- ** LineProperties_StartArrow
-    LineProperties_StartArrow (..),
+    , LineProperties_StartArrow (..)
 
     -- ** Link
-    Link (..),
-    newLink,
+    , Link (..)
+    , newLink
 
     -- ** Link_RelativeLink
-    Link_RelativeLink (..),
+    , Link_RelativeLink (..)
 
     -- ** List
-    List (..),
-    newList,
+    , List (..)
+    , newList
 
     -- ** List_NestingLevel
-    List_NestingLevel (..),
-    newList_NestingLevel,
+    , List_NestingLevel (..)
+    , newList_NestingLevel
 
     -- ** MasterProperties
-    MasterProperties (..),
-    newMasterProperties,
+    , MasterProperties (..)
+    , newMasterProperties
 
     -- ** MergeTableCellsRequest
-    MergeTableCellsRequest (..),
-    newMergeTableCellsRequest,
+    , MergeTableCellsRequest (..)
+    , newMergeTableCellsRequest
 
     -- ** NestingLevel
-    NestingLevel (..),
-    newNestingLevel,
+    , NestingLevel (..)
+    , newNestingLevel
 
     -- ** NotesProperties
-    NotesProperties (..),
-    newNotesProperties,
+    , NotesProperties (..)
+    , newNotesProperties
 
     -- ** OpaqueColor
-    OpaqueColor (..),
-    newOpaqueColor,
+    , OpaqueColor (..)
+    , newOpaqueColor
 
     -- ** OpaqueColor_ThemeColor
-    OpaqueColor_ThemeColor (..),
+    , OpaqueColor_ThemeColor (..)
 
     -- ** OptionalColor
-    OptionalColor (..),
-    newOptionalColor,
+    , OptionalColor (..)
+    , newOptionalColor
 
     -- ** Outline
-    Outline (..),
-    newOutline,
+    , Outline (..)
+    , newOutline
 
     -- ** Outline_DashStyle
-    Outline_DashStyle (..),
+    , Outline_DashStyle (..)
 
     -- ** Outline_PropertyState
-    Outline_PropertyState (..),
+    , Outline_PropertyState (..)
 
     -- ** OutlineFill
-    OutlineFill (..),
-    newOutlineFill,
+    , OutlineFill (..)
+    , newOutlineFill
 
     -- ** Page
-    Page (..),
-    newPage,
+    , Page (..)
+    , newPage
 
     -- ** Page_PageType
-    Page_PageType (..),
+    , Page_PageType (..)
 
     -- ** PageBackgroundFill
-    PageBackgroundFill (..),
-    newPageBackgroundFill,
+    , PageBackgroundFill (..)
+    , newPageBackgroundFill
 
     -- ** PageBackgroundFill_PropertyState
-    PageBackgroundFill_PropertyState (..),
+    , PageBackgroundFill_PropertyState (..)
 
     -- ** PageElement
-    PageElement (..),
-    newPageElement,
+    , PageElement (..)
+    , newPageElement
 
     -- ** PageElementProperties
-    PageElementProperties (..),
-    newPageElementProperties,
+    , PageElementProperties (..)
+    , newPageElementProperties
 
     -- ** PageProperties
-    PageProperties (..),
-    newPageProperties,
+    , PageProperties (..)
+    , newPageProperties
 
     -- ** ParagraphMarker
-    ParagraphMarker (..),
-    newParagraphMarker,
+    , ParagraphMarker (..)
+    , newParagraphMarker
 
     -- ** ParagraphStyle
-    ParagraphStyle (..),
-    newParagraphStyle,
+    , ParagraphStyle (..)
+    , newParagraphStyle
 
     -- ** ParagraphStyle_Alignment
-    ParagraphStyle_Alignment (..),
+    , ParagraphStyle_Alignment (..)
 
     -- ** ParagraphStyle_Direction
-    ParagraphStyle_Direction (..),
+    , ParagraphStyle_Direction (..)
 
     -- ** ParagraphStyle_SpacingMode
-    ParagraphStyle_SpacingMode (..),
+    , ParagraphStyle_SpacingMode (..)
 
     -- ** Placeholder
-    Placeholder (..),
-    newPlaceholder,
+    , Placeholder (..)
+    , newPlaceholder
 
     -- ** Placeholder_Type
-    Placeholder_Type (..),
+    , Placeholder_Type (..)
 
     -- ** Presentation
-    Presentation (..),
-    newPresentation,
+    , Presentation (..)
+    , newPresentation
 
     -- ** Range
-    Range (..),
-    newRange,
+    , Range (..)
+    , newRange
 
     -- ** Range_Type
-    Range_Type (..),
+    , Range_Type (..)
 
     -- ** Recolor
-    Recolor (..),
-    newRecolor,
+    , Recolor (..)
+    , newRecolor
 
     -- ** Recolor_Name
-    Recolor_Name (..),
+    , Recolor_Name (..)
 
     -- ** RefreshSheetsChartRequest
-    RefreshSheetsChartRequest (..),
-    newRefreshSheetsChartRequest,
+    , RefreshSheetsChartRequest (..)
+    , newRefreshSheetsChartRequest
 
     -- ** ReplaceAllShapesWithImageRequest
-    ReplaceAllShapesWithImageRequest (..),
-    newReplaceAllShapesWithImageRequest,
+    , ReplaceAllShapesWithImageRequest (..)
+    , newReplaceAllShapesWithImageRequest
 
     -- ** ReplaceAllShapesWithImageRequest_ImageReplaceMethod
-    ReplaceAllShapesWithImageRequest_ImageReplaceMethod (..),
+    , ReplaceAllShapesWithImageRequest_ImageReplaceMethod (..)
 
     -- ** ReplaceAllShapesWithImageRequest_ReplaceMethod
-    ReplaceAllShapesWithImageRequest_ReplaceMethod (..),
+    , ReplaceAllShapesWithImageRequest_ReplaceMethod (..)
 
     -- ** ReplaceAllShapesWithImageResponse
-    ReplaceAllShapesWithImageResponse (..),
-    newReplaceAllShapesWithImageResponse,
+    , ReplaceAllShapesWithImageResponse (..)
+    , newReplaceAllShapesWithImageResponse
 
     -- ** ReplaceAllShapesWithSheetsChartRequest
-    ReplaceAllShapesWithSheetsChartRequest (..),
-    newReplaceAllShapesWithSheetsChartRequest,
+    , ReplaceAllShapesWithSheetsChartRequest (..)
+    , newReplaceAllShapesWithSheetsChartRequest
 
     -- ** ReplaceAllShapesWithSheetsChartRequest_LinkingMode
-    ReplaceAllShapesWithSheetsChartRequest_LinkingMode (..),
+    , ReplaceAllShapesWithSheetsChartRequest_LinkingMode (..)
 
     -- ** ReplaceAllShapesWithSheetsChartResponse
-    ReplaceAllShapesWithSheetsChartResponse (..),
-    newReplaceAllShapesWithSheetsChartResponse,
+    , ReplaceAllShapesWithSheetsChartResponse (..)
+    , newReplaceAllShapesWithSheetsChartResponse
 
     -- ** ReplaceAllTextRequest
-    ReplaceAllTextRequest (..),
-    newReplaceAllTextRequest,
+    , ReplaceAllTextRequest (..)
+    , newReplaceAllTextRequest
 
     -- ** ReplaceAllTextResponse
-    ReplaceAllTextResponse (..),
-    newReplaceAllTextResponse,
+    , ReplaceAllTextResponse (..)
+    , newReplaceAllTextResponse
 
     -- ** ReplaceImageRequest
-    ReplaceImageRequest (..),
-    newReplaceImageRequest,
+    , ReplaceImageRequest (..)
+    , newReplaceImageRequest
 
     -- ** ReplaceImageRequest_ImageReplaceMethod
-    ReplaceImageRequest_ImageReplaceMethod (..),
+    , ReplaceImageRequest_ImageReplaceMethod (..)
 
     -- ** Request'
-    Request' (..),
-    newRequest,
+    , Request' (..)
+    , newRequest
 
     -- ** RerouteLineRequest
-    RerouteLineRequest (..),
-    newRerouteLineRequest,
+    , RerouteLineRequest (..)
+    , newRerouteLineRequest
 
     -- ** Response
-    Response (..),
-    newResponse,
+    , Response (..)
+    , newResponse
 
     -- ** RgbColor
-    RgbColor (..),
-    newRgbColor,
+    , RgbColor (..)
+    , newRgbColor
 
     -- ** Shadow
-    Shadow (..),
-    newShadow,
+    , Shadow (..)
+    , newShadow
 
     -- ** Shadow_Alignment
-    Shadow_Alignment (..),
+    , Shadow_Alignment (..)
 
     -- ** Shadow_PropertyState
-    Shadow_PropertyState (..),
+    , Shadow_PropertyState (..)
 
     -- ** Shadow_Type
-    Shadow_Type (..),
+    , Shadow_Type (..)
 
     -- ** Shape
-    Shape (..),
-    newShape,
+    , Shape (..)
+    , newShape
 
     -- ** Shape_ShapeType
-    Shape_ShapeType (..),
+    , Shape_ShapeType (..)
 
     -- ** ShapeBackgroundFill
-    ShapeBackgroundFill (..),
-    newShapeBackgroundFill,
+    , ShapeBackgroundFill (..)
+    , newShapeBackgroundFill
 
     -- ** ShapeBackgroundFill_PropertyState
-    ShapeBackgroundFill_PropertyState (..),
+    , ShapeBackgroundFill_PropertyState (..)
 
     -- ** ShapeProperties
-    ShapeProperties (..),
-    newShapeProperties,
+    , ShapeProperties (..)
+    , newShapeProperties
 
     -- ** ShapeProperties_ContentAlignment
-    ShapeProperties_ContentAlignment (..),
+    , ShapeProperties_ContentAlignment (..)
 
     -- ** SheetsChart
-    SheetsChart (..),
-    newSheetsChart,
+    , SheetsChart (..)
+    , newSheetsChart
 
     -- ** SheetsChartProperties
-    SheetsChartProperties (..),
-    newSheetsChartProperties,
+    , SheetsChartProperties (..)
+    , newSheetsChartProperties
 
     -- ** Size
-    Size (..),
-    newSize,
+    , Size (..)
+    , newSize
 
     -- ** SlideProperties
-    SlideProperties (..),
-    newSlideProperties,
+    , SlideProperties (..)
+    , newSlideProperties
 
     -- ** SolidFill
-    SolidFill (..),
-    newSolidFill,
+    , SolidFill (..)
+    , newSolidFill
+
+    -- ** SpeakerSpotlight
+    , SpeakerSpotlight (..)
+    , newSpeakerSpotlight
+
+    -- ** SpeakerSpotlightProperties
+    , SpeakerSpotlightProperties (..)
+    , newSpeakerSpotlightProperties
 
     -- ** StretchedPictureFill
-    StretchedPictureFill (..),
-    newStretchedPictureFill,
+    , StretchedPictureFill (..)
+    , newStretchedPictureFill
 
     -- ** SubstringMatchCriteria
-    SubstringMatchCriteria (..),
-    newSubstringMatchCriteria,
+    , SubstringMatchCriteria (..)
+    , newSubstringMatchCriteria
 
     -- ** Table
-    Table (..),
-    newTable,
+    , Table (..)
+    , newTable
 
     -- ** TableBorderCell
-    TableBorderCell (..),
-    newTableBorderCell,
+    , TableBorderCell (..)
+    , newTableBorderCell
 
     -- ** TableBorderFill
-    TableBorderFill (..),
-    newTableBorderFill,
+    , TableBorderFill (..)
+    , newTableBorderFill
 
     -- ** TableBorderProperties
-    TableBorderProperties (..),
-    newTableBorderProperties,
+    , TableBorderProperties (..)
+    , newTableBorderProperties
 
     -- ** TableBorderProperties_DashStyle
-    TableBorderProperties_DashStyle (..),
+    , TableBorderProperties_DashStyle (..)
 
     -- ** TableBorderRow
-    TableBorderRow (..),
-    newTableBorderRow,
+    , TableBorderRow (..)
+    , newTableBorderRow
 
     -- ** TableCell
-    TableCell (..),
-    newTableCell,
+    , TableCell (..)
+    , newTableCell
 
     -- ** TableCellBackgroundFill
-    TableCellBackgroundFill (..),
-    newTableCellBackgroundFill,
+    , TableCellBackgroundFill (..)
+    , newTableCellBackgroundFill
 
     -- ** TableCellBackgroundFill_PropertyState
-    TableCellBackgroundFill_PropertyState (..),
+    , TableCellBackgroundFill_PropertyState (..)
 
     -- ** TableCellLocation
-    TableCellLocation (..),
-    newTableCellLocation,
+    , TableCellLocation (..)
+    , newTableCellLocation
 
     -- ** TableCellProperties
-    TableCellProperties (..),
-    newTableCellProperties,
+    , TableCellProperties (..)
+    , newTableCellProperties
 
     -- ** TableCellProperties_ContentAlignment
-    TableCellProperties_ContentAlignment (..),
+    , TableCellProperties_ContentAlignment (..)
 
     -- ** TableColumnProperties
-    TableColumnProperties (..),
-    newTableColumnProperties,
+    , TableColumnProperties (..)
+    , newTableColumnProperties
 
     -- ** TableRange
-    TableRange (..),
-    newTableRange,
+    , TableRange (..)
+    , newTableRange
 
     -- ** TableRow
-    TableRow (..),
-    newTableRow,
+    , TableRow (..)
+    , newTableRow
 
     -- ** TableRowProperties
-    TableRowProperties (..),
-    newTableRowProperties,
+    , TableRowProperties (..)
+    , newTableRowProperties
 
     -- ** TextContent
-    TextContent (..),
-    newTextContent,
+    , TextContent (..)
+    , newTextContent
 
     -- ** TextContent_Lists
-    TextContent_Lists (..),
-    newTextContent_Lists,
+    , TextContent_Lists (..)
+    , newTextContent_Lists
 
     -- ** TextElement
-    TextElement (..),
-    newTextElement,
+    , TextElement (..)
+    , newTextElement
 
     -- ** TextRun
-    TextRun (..),
-    newTextRun,
+    , TextRun (..)
+    , newTextRun
 
     -- ** TextStyle
-    TextStyle (..),
-    newTextStyle,
+    , TextStyle (..)
+    , newTextStyle
 
     -- ** TextStyle_BaselineOffset
-    TextStyle_BaselineOffset (..),
+    , TextStyle_BaselineOffset (..)
 
     -- ** ThemeColorPair
-    ThemeColorPair (..),
-    newThemeColorPair,
+    , ThemeColorPair (..)
+    , newThemeColorPair
 
     -- ** ThemeColorPair_Type
-    ThemeColorPair_Type (..),
+    , ThemeColorPair_Type (..)
 
     -- ** Thumbnail
-    Thumbnail (..),
-    newThumbnail,
+    , Thumbnail (..)
+    , newThumbnail
 
     -- ** UngroupObjectsRequest
-    UngroupObjectsRequest (..),
-    newUngroupObjectsRequest,
+    , UngroupObjectsRequest (..)
+    , newUngroupObjectsRequest
 
     -- ** UnmergeTableCellsRequest
-    UnmergeTableCellsRequest (..),
-    newUnmergeTableCellsRequest,
+    , UnmergeTableCellsRequest (..)
+    , newUnmergeTableCellsRequest
 
     -- ** UpdateImagePropertiesRequest
-    UpdateImagePropertiesRequest (..),
-    newUpdateImagePropertiesRequest,
+    , UpdateImagePropertiesRequest (..)
+    , newUpdateImagePropertiesRequest
 
     -- ** UpdateLineCategoryRequest
-    UpdateLineCategoryRequest (..),
-    newUpdateLineCategoryRequest,
+    , UpdateLineCategoryRequest (..)
+    , newUpdateLineCategoryRequest
 
     -- ** UpdateLineCategoryRequest_LineCategory
-    UpdateLineCategoryRequest_LineCategory (..),
+    , UpdateLineCategoryRequest_LineCategory (..)
 
     -- ** UpdateLinePropertiesRequest
-    UpdateLinePropertiesRequest (..),
-    newUpdateLinePropertiesRequest,
+    , UpdateLinePropertiesRequest (..)
+    , newUpdateLinePropertiesRequest
 
     -- ** UpdatePageElementAltTextRequest
-    UpdatePageElementAltTextRequest (..),
-    newUpdatePageElementAltTextRequest,
+    , UpdatePageElementAltTextRequest (..)
+    , newUpdatePageElementAltTextRequest
 
     -- ** UpdatePageElementTransformRequest
-    UpdatePageElementTransformRequest (..),
-    newUpdatePageElementTransformRequest,
+    , UpdatePageElementTransformRequest (..)
+    , newUpdatePageElementTransformRequest
 
     -- ** UpdatePageElementTransformRequest_ApplyMode
-    UpdatePageElementTransformRequest_ApplyMode (..),
+    , UpdatePageElementTransformRequest_ApplyMode (..)
 
     -- ** UpdatePageElementsZOrderRequest
-    UpdatePageElementsZOrderRequest (..),
-    newUpdatePageElementsZOrderRequest,
+    , UpdatePageElementsZOrderRequest (..)
+    , newUpdatePageElementsZOrderRequest
 
     -- ** UpdatePageElementsZOrderRequest_Operation
-    UpdatePageElementsZOrderRequest_Operation (..),
+    , UpdatePageElementsZOrderRequest_Operation (..)
 
     -- ** UpdatePagePropertiesRequest
-    UpdatePagePropertiesRequest (..),
-    newUpdatePagePropertiesRequest,
+    , UpdatePagePropertiesRequest (..)
+    , newUpdatePagePropertiesRequest
 
     -- ** UpdateParagraphStyleRequest
-    UpdateParagraphStyleRequest (..),
-    newUpdateParagraphStyleRequest,
+    , UpdateParagraphStyleRequest (..)
+    , newUpdateParagraphStyleRequest
 
     -- ** UpdateShapePropertiesRequest
-    UpdateShapePropertiesRequest (..),
-    newUpdateShapePropertiesRequest,
+    , UpdateShapePropertiesRequest (..)
+    , newUpdateShapePropertiesRequest
 
     -- ** UpdateSlidePropertiesRequest
-    UpdateSlidePropertiesRequest (..),
-    newUpdateSlidePropertiesRequest,
+    , UpdateSlidePropertiesRequest (..)
+    , newUpdateSlidePropertiesRequest
 
     -- ** UpdateSlidesPositionRequest
-    UpdateSlidesPositionRequest (..),
-    newUpdateSlidesPositionRequest,
+    , UpdateSlidesPositionRequest (..)
+    , newUpdateSlidesPositionRequest
 
     -- ** UpdateTableBorderPropertiesRequest
-    UpdateTableBorderPropertiesRequest (..),
-    newUpdateTableBorderPropertiesRequest,
+    , UpdateTableBorderPropertiesRequest (..)
+    , newUpdateTableBorderPropertiesRequest
 
     -- ** UpdateTableBorderPropertiesRequest_BorderPosition
-    UpdateTableBorderPropertiesRequest_BorderPosition (..),
+    , UpdateTableBorderPropertiesRequest_BorderPosition (..)
 
     -- ** UpdateTableCellPropertiesRequest
-    UpdateTableCellPropertiesRequest (..),
-    newUpdateTableCellPropertiesRequest,
+    , UpdateTableCellPropertiesRequest (..)
+    , newUpdateTableCellPropertiesRequest
 
     -- ** UpdateTableColumnPropertiesRequest
-    UpdateTableColumnPropertiesRequest (..),
-    newUpdateTableColumnPropertiesRequest,
+    , UpdateTableColumnPropertiesRequest (..)
+    , newUpdateTableColumnPropertiesRequest
 
     -- ** UpdateTableRowPropertiesRequest
-    UpdateTableRowPropertiesRequest (..),
-    newUpdateTableRowPropertiesRequest,
+    , UpdateTableRowPropertiesRequest (..)
+    , newUpdateTableRowPropertiesRequest
 
     -- ** UpdateTextStyleRequest
-    UpdateTextStyleRequest (..),
-    newUpdateTextStyleRequest,
+    , UpdateTextStyleRequest (..)
+    , newUpdateTextStyleRequest
 
     -- ** UpdateVideoPropertiesRequest
-    UpdateVideoPropertiesRequest (..),
-    newUpdateVideoPropertiesRequest,
+    , UpdateVideoPropertiesRequest (..)
+    , newUpdateVideoPropertiesRequest
 
     -- ** Video
-    Video (..),
-    newVideo,
+    , Video (..)
+    , newVideo
 
     -- ** Video_Source
-    Video_Source (..),
+    , Video_Source (..)
 
     -- ** VideoProperties
-    VideoProperties (..),
-    newVideoProperties,
+    , VideoProperties (..)
+    , newVideoProperties
 
     -- ** WeightedFontFamily
-    WeightedFontFamily (..),
-    newWeightedFontFamily,
+    , WeightedFontFamily (..)
+    , newWeightedFontFamily
 
     -- ** WordArt
-    WordArt (..),
-    newWordArt,
+    , WordArt (..)
+    , newWordArt
 
     -- ** WriteControl
-    WriteControl (..),
-    newWriteControl,
+    , WriteControl (..)
+    , newWriteControl
 
     -- ** PresentationsPagesGetThumbnailThumbnailPropertiesMimeType
-    PresentationsPagesGetThumbnailThumbnailPropertiesMimeType (..),
+    , PresentationsPagesGetThumbnailThumbnailPropertiesMimeType (..)
 
     -- ** PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize
-    PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize (..),
-  )
-where
+    , PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize (..)
+    ) where
 
 import Gogol.Slides.Presentations.BatchUpdate
 import Gogol.Slides.Presentations.Create

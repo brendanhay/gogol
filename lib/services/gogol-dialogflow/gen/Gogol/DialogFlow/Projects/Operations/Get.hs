@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,89 +31,81 @@
 --
 -- /See:/ <https://cloud.google.com/dialogflow/ Dialogflow API Reference> for @dialogflow.projects.operations.get@.
 module Gogol.DialogFlow.Projects.Operations.Get
-  ( -- * Resource
-    DialogFlowProjectsOperationsGetResource,
+    (
+    -- * Resource
+      DialogFlowProjectsOperationsGetResource
 
     -- ** Constructing a Request
-    DialogFlowProjectsOperationsGet (..),
-    newDialogFlowProjectsOperationsGet,
-  )
-where
+    , DialogFlowProjectsOperationsGet (..)
+    , newDialogFlowProjectsOperationsGet
+    ) where
 
-import Gogol.DialogFlow.Types
 import qualified Gogol.Prelude as Core
+import Gogol.DialogFlow.Types
 
 -- | A resource alias for @dialogflow.projects.operations.get@ method which the
 -- 'DialogFlowProjectsOperationsGet' request conforms to.
 type DialogFlowProjectsOperationsGetResource =
-  "v3"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] GoogleLongrunningOperation
+     "v3" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Get '[Core.JSON] GoogleLongrunningOperation
 
 -- | Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
 --
 -- /See:/ 'newDialogFlowProjectsOperationsGet' smart constructor.
 data DialogFlowProjectsOperationsGet = DialogFlowProjectsOperationsGet
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | The name of the operation resource.
-    name :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | The name of the operation resource.
+    , name :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DialogFlowProjectsOperationsGet' with the minimum fields required to make a request.
-newDialogFlowProjectsOperationsGet ::
-  -- |  The name of the operation resource. See 'name'.
-  Core.Text ->
-  DialogFlowProjectsOperationsGet
+newDialogFlowProjectsOperationsGet 
+    ::  Core.Text
+       -- ^  The name of the operation resource. See 'name'.
+    -> DialogFlowProjectsOperationsGet
 newDialogFlowProjectsOperationsGet name =
   DialogFlowProjectsOperationsGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DialogFlowProjectsOperationsGet
-  where
-  type
-    Rs DialogFlowProjectsOperationsGet =
-      GoogleLongrunningOperation
-  type
-    Scopes DialogFlowProjectsOperationsGet =
-      '[CloudPlatform'FullControl, Dialogflow'FullControl]
-  requestClient DialogFlowProjectsOperationsGet {..} =
-    go
-      name
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      dialogFlowService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DialogFlowProjectsOperationsGetResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           DialogFlowProjectsOperationsGet
+         where
+        type Rs DialogFlowProjectsOperationsGet =
+             GoogleLongrunningOperation
+        type Scopes DialogFlowProjectsOperationsGet =
+             '[CloudPlatform'FullControl, Dialogflow'FullControl]
+        requestClient DialogFlowProjectsOperationsGet{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              dialogFlowService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy DialogFlowProjectsOperationsGetResource)
+                      Core.mempty
+

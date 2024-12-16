@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,71 +31,71 @@
 --
 -- /See:/ <https://developers.google.com/admin-sdk/licensing/ Enterprise License Manager API Reference>
 module Gogol.AppsLicensing
-  ( -- * Configuration
-    appsLicensingService,
+    (
+    -- * Configuration
+      appsLicensingService
 
     -- * OAuth Scopes
-    Apps'Licensing,
+    , Apps'Licensing
 
     -- * Resources
 
     -- ** licensing.licenseAssignments.delete
-    LicensingLicenseAssignmentsDeleteResource,
-    LicensingLicenseAssignmentsDelete (..),
-    newLicensingLicenseAssignmentsDelete,
+    , LicensingLicenseAssignmentsDeleteResource
+    , LicensingLicenseAssignmentsDelete (..)
+    , newLicensingLicenseAssignmentsDelete
 
     -- ** licensing.licenseAssignments.get
-    LicensingLicenseAssignmentsGetResource,
-    LicensingLicenseAssignmentsGet (..),
-    newLicensingLicenseAssignmentsGet,
+    , LicensingLicenseAssignmentsGetResource
+    , LicensingLicenseAssignmentsGet (..)
+    , newLicensingLicenseAssignmentsGet
 
     -- ** licensing.licenseAssignments.insert
-    LicensingLicenseAssignmentsInsertResource,
-    LicensingLicenseAssignmentsInsert (..),
-    newLicensingLicenseAssignmentsInsert,
+    , LicensingLicenseAssignmentsInsertResource
+    , LicensingLicenseAssignmentsInsert (..)
+    , newLicensingLicenseAssignmentsInsert
 
     -- ** licensing.licenseAssignments.listForProduct
-    LicensingLicenseAssignmentsListForProductResource,
-    LicensingLicenseAssignmentsListForProduct (..),
-    newLicensingLicenseAssignmentsListForProduct,
+    , LicensingLicenseAssignmentsListForProductResource
+    , LicensingLicenseAssignmentsListForProduct (..)
+    , newLicensingLicenseAssignmentsListForProduct
 
     -- ** licensing.licenseAssignments.listForProductAndSku
-    LicensingLicenseAssignmentsListForProductAndSkuResource,
-    LicensingLicenseAssignmentsListForProductAndSku (..),
-    newLicensingLicenseAssignmentsListForProductAndSku,
+    , LicensingLicenseAssignmentsListForProductAndSkuResource
+    , LicensingLicenseAssignmentsListForProductAndSku (..)
+    , newLicensingLicenseAssignmentsListForProductAndSku
 
     -- ** licensing.licenseAssignments.patch
-    LicensingLicenseAssignmentsPatchResource,
-    LicensingLicenseAssignmentsPatch (..),
-    newLicensingLicenseAssignmentsPatch,
+    , LicensingLicenseAssignmentsPatchResource
+    , LicensingLicenseAssignmentsPatch (..)
+    , newLicensingLicenseAssignmentsPatch
 
     -- ** licensing.licenseAssignments.update
-    LicensingLicenseAssignmentsUpdateResource,
-    LicensingLicenseAssignmentsUpdate (..),
-    newLicensingLicenseAssignmentsUpdate,
+    , LicensingLicenseAssignmentsUpdateResource
+    , LicensingLicenseAssignmentsUpdate (..)
+    , newLicensingLicenseAssignmentsUpdate
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** LicenseAssignment
-    LicenseAssignment (..),
-    newLicenseAssignment,
+    , LicenseAssignment (..)
+    , newLicenseAssignment
 
     -- ** LicenseAssignmentInsert
-    LicenseAssignmentInsert (..),
-    newLicenseAssignmentInsert,
+    , LicenseAssignmentInsert (..)
+    , newLicenseAssignmentInsert
 
     -- ** LicenseAssignmentList
-    LicenseAssignmentList (..),
-    newLicenseAssignmentList,
-  )
-where
+    , LicenseAssignmentList (..)
+    , newLicenseAssignmentList
+    ) where
 
 import Gogol.AppsLicensing.Licensing.LicenseAssignments.Delete
 import Gogol.AppsLicensing.Licensing.LicenseAssignments.Get

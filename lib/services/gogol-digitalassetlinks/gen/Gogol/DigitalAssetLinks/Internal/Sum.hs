@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,33 +26,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.DigitalAssetLinks.Internal.Sum
-  ( -- * Xgafv
-    Xgafv
-      ( Xgafv_1,
-        Xgafv_2,
-        ..
-      ),
+  (
 
-    -- * BulkCheckResponse_BulkErrorCode
-    BulkCheckResponse_BulkErrorCode
-      ( BulkCheckResponse_BulkErrorCode_ERRORCODEUNSPECIFIED,
-        BulkCheckResponse_BulkErrorCode_ERRORCODEINVALIDQUERY,
-        BulkCheckResponse_BulkErrorCode_ERRORCODEFETCHERROR,
-        BulkCheckResponse_BulkErrorCode_ERRORCODEFAILEDSSLVALIDATION,
-        BulkCheckResponse_BulkErrorCode_ERRORCODEREDIRECT,
-        BulkCheckResponse_BulkErrorCode_ERRORCODETOOLARGE,
-        BulkCheckResponse_BulkErrorCode_ERRORCODEMALFORMEDHTTPRESPONSE,
-        BulkCheckResponse_BulkErrorCode_ERRORCODEWRONGCONTENTTYPE,
-        BulkCheckResponse_BulkErrorCode_ERRORCODEMALFORMEDCONTENT,
-        BulkCheckResponse_BulkErrorCode_ERRORCODESECUREASSETINCLUDESINSECURE,
-        BulkCheckResponse_BulkErrorCode_ERRORCODEFETCHBUDGETEXHAUSTED,
+    -- * Xgafv
+    Xgafv
+      (
+        Xgafv_1,
+        Xgafv_2,
         ..
       ),
 
     -- * CheckResponse_ErrorCodeItem
     CheckResponse_ErrorCodeItem
-      ( CheckResponse_ErrorCodeItem_ERRORCODEUNSPECIFIED,
+      (
+        CheckResponse_ErrorCodeItem_ERRORCODEUNSPECIFIED,
         CheckResponse_ErrorCodeItem_ERRORCODEINVALIDQUERY,
         CheckResponse_ErrorCodeItem_ERRORCODEFETCHERROR,
         CheckResponse_ErrorCodeItem_ERRORCODEFAILEDSSLVALIDATION,
@@ -67,7 +57,8 @@ module Gogol.DigitalAssetLinks.Internal.Sum
 
     -- * ListResponse_ErrorCodeItem
     ListResponse_ErrorCodeItem
-      ( ListResponse_ErrorCodeItem_ERRORCODEUNSPECIFIED,
+      (
+        ListResponse_ErrorCodeItem_ERRORCODEUNSPECIFIED,
         ListResponse_ErrorCodeItem_ERRORCODEINVALIDQUERY,
         ListResponse_ErrorCodeItem_ERRORCODEFETCHERROR,
         ListResponse_ErrorCodeItem_ERRORCODEFAILEDSSLVALIDATION,
@@ -80,23 +71,22 @@ module Gogol.DigitalAssetLinks.Internal.Sum
         ListResponse_ErrorCodeItem_ERRORCODEFETCHBUDGETEXHAUSTED,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -109,94 +99,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
--- | Error code for the entire request. Present only if the entire request failed. Individual check errors will not trigger the presence of this field.
-newtype BulkCheckResponse_BulkErrorCode = BulkCheckResponse_BulkErrorCode {fromBulkCheckResponse_BulkErrorCode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CheckResponse_ErrorCodeItem = CheckResponse_ErrorCodeItem { fromCheckResponse_ErrorCodeItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
-pattern BulkCheckResponse_BulkErrorCode_ERRORCODEUNSPECIFIED :: BulkCheckResponse_BulkErrorCode
-pattern BulkCheckResponse_BulkErrorCode_ERRORCODEUNSPECIFIED = BulkCheckResponse_BulkErrorCode "ERROR_CODE_UNSPECIFIED"
-
--- | Unable to parse query.
-pattern BulkCheckResponse_BulkErrorCode_ERRORCODEINVALIDQUERY :: BulkCheckResponse_BulkErrorCode
-pattern BulkCheckResponse_BulkErrorCode_ERRORCODEINVALIDQUERY = BulkCheckResponse_BulkErrorCode "ERROR_CODE_INVALID_QUERY"
-
--- | Unable to fetch the asset links data.
-pattern BulkCheckResponse_BulkErrorCode_ERRORCODEFETCHERROR :: BulkCheckResponse_BulkErrorCode
-pattern BulkCheckResponse_BulkErrorCode_ERRORCODEFETCHERROR = BulkCheckResponse_BulkErrorCode "ERROR_CODE_FETCH_ERROR"
-
--- | Invalid HTTPS certificate .
-pattern BulkCheckResponse_BulkErrorCode_ERRORCODEFAILEDSSLVALIDATION :: BulkCheckResponse_BulkErrorCode
-pattern BulkCheckResponse_BulkErrorCode_ERRORCODEFAILEDSSLVALIDATION = BulkCheckResponse_BulkErrorCode "ERROR_CODE_FAILED_SSL_VALIDATION"
-
--- | HTTP redirects (e.g, 301) are not allowed.
-pattern BulkCheckResponse_BulkErrorCode_ERRORCODEREDIRECT :: BulkCheckResponse_BulkErrorCode
-pattern BulkCheckResponse_BulkErrorCode_ERRORCODEREDIRECT = BulkCheckResponse_BulkErrorCode "ERROR_CODE_REDIRECT"
-
--- | Asset links data exceeds maximum size.
-pattern BulkCheckResponse_BulkErrorCode_ERRORCODETOOLARGE :: BulkCheckResponse_BulkErrorCode
-pattern BulkCheckResponse_BulkErrorCode_ERRORCODETOOLARGE = BulkCheckResponse_BulkErrorCode "ERROR_CODE_TOO_LARGE"
-
--- | Can\'t parse HTTP response.
-pattern BulkCheckResponse_BulkErrorCode_ERRORCODEMALFORMEDHTTPRESPONSE :: BulkCheckResponse_BulkErrorCode
-pattern BulkCheckResponse_BulkErrorCode_ERRORCODEMALFORMEDHTTPRESPONSE = BulkCheckResponse_BulkErrorCode "ERROR_CODE_MALFORMED_HTTP_RESPONSE"
-
--- | HTTP Content-type should be application\/json.
-pattern BulkCheckResponse_BulkErrorCode_ERRORCODEWRONGCONTENTTYPE :: BulkCheckResponse_BulkErrorCode
-pattern BulkCheckResponse_BulkErrorCode_ERRORCODEWRONGCONTENTTYPE = BulkCheckResponse_BulkErrorCode "ERROR_CODE_WRONG_CONTENT_TYPE"
-
--- | JSON content is malformed.
-pattern BulkCheckResponse_BulkErrorCode_ERRORCODEMALFORMEDCONTENT :: BulkCheckResponse_BulkErrorCode
-pattern BulkCheckResponse_BulkErrorCode_ERRORCODEMALFORMEDCONTENT = BulkCheckResponse_BulkErrorCode "ERROR_CODE_MALFORMED_CONTENT"
-
--- | A secure asset includes an insecure asset (security downgrade).
-pattern BulkCheckResponse_BulkErrorCode_ERRORCODESECUREASSETINCLUDESINSECURE :: BulkCheckResponse_BulkErrorCode
-pattern BulkCheckResponse_BulkErrorCode_ERRORCODESECUREASSETINCLUDESINSECURE = BulkCheckResponse_BulkErrorCode "ERROR_CODE_SECURE_ASSET_INCLUDES_INSECURE"
-
--- | Too many includes (maybe a loop).
-pattern BulkCheckResponse_BulkErrorCode_ERRORCODEFETCHBUDGETEXHAUSTED :: BulkCheckResponse_BulkErrorCode
-pattern BulkCheckResponse_BulkErrorCode_ERRORCODEFETCHBUDGETEXHAUSTED = BulkCheckResponse_BulkErrorCode "ERROR_CODE_FETCH_BUDGET_EXHAUSTED"
-
-{-# COMPLETE
-  BulkCheckResponse_BulkErrorCode_ERRORCODEUNSPECIFIED,
-  BulkCheckResponse_BulkErrorCode_ERRORCODEINVALIDQUERY,
-  BulkCheckResponse_BulkErrorCode_ERRORCODEFETCHERROR,
-  BulkCheckResponse_BulkErrorCode_ERRORCODEFAILEDSSLVALIDATION,
-  BulkCheckResponse_BulkErrorCode_ERRORCODEREDIRECT,
-  BulkCheckResponse_BulkErrorCode_ERRORCODETOOLARGE,
-  BulkCheckResponse_BulkErrorCode_ERRORCODEMALFORMEDHTTPRESPONSE,
-  BulkCheckResponse_BulkErrorCode_ERRORCODEWRONGCONTENTTYPE,
-  BulkCheckResponse_BulkErrorCode_ERRORCODEMALFORMEDCONTENT,
-  BulkCheckResponse_BulkErrorCode_ERRORCODESECUREASSETINCLUDESINSECURE,
-  BulkCheckResponse_BulkErrorCode_ERRORCODEFETCHBUDGETEXHAUSTED,
-  BulkCheckResponse_BulkErrorCode
-  #-}
-
-newtype CheckResponse_ErrorCodeItem = CheckResponse_ErrorCodeItem {fromCheckResponse_ErrorCodeItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- |
+-- | Default value, otherwise unused.
 pattern CheckResponse_ErrorCodeItem_ERRORCODEUNSPECIFIED :: CheckResponse_ErrorCodeItem
 pattern CheckResponse_ErrorCodeItem_ERRORCODEUNSPECIFIED = CheckResponse_ErrorCodeItem "ERROR_CODE_UNSPECIFIED"
 
@@ -252,22 +169,21 @@ pattern CheckResponse_ErrorCodeItem_ERRORCODEFETCHBUDGETEXHAUSTED = CheckRespons
   CheckResponse_ErrorCodeItem_ERRORCODEMALFORMEDCONTENT,
   CheckResponse_ErrorCodeItem_ERRORCODESECUREASSETINCLUDESINSECURE,
   CheckResponse_ErrorCodeItem_ERRORCODEFETCHBUDGETEXHAUSTED,
-  CheckResponse_ErrorCodeItem
-  #-}
+  CheckResponse_ErrorCodeItem #-}
 
-newtype ListResponse_ErrorCodeItem = ListResponse_ErrorCodeItem {fromListResponse_ErrorCodeItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ListResponse_ErrorCodeItem = ListResponse_ErrorCodeItem { fromListResponse_ErrorCodeItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | Default value, otherwise unused.
 pattern ListResponse_ErrorCodeItem_ERRORCODEUNSPECIFIED :: ListResponse_ErrorCodeItem
 pattern ListResponse_ErrorCodeItem_ERRORCODEUNSPECIFIED = ListResponse_ErrorCodeItem "ERROR_CODE_UNSPECIFIED"
 
@@ -323,5 +239,4 @@ pattern ListResponse_ErrorCodeItem_ERRORCODEFETCHBUDGETEXHAUSTED = ListResponse_
   ListResponse_ErrorCodeItem_ERRORCODEMALFORMEDCONTENT,
   ListResponse_ErrorCodeItem_ERRORCODESECUREASSETINCLUDESINSECURE,
   ListResponse_ErrorCodeItem_ERRORCODEFETCHBUDGETEXHAUSTED,
-  ListResponse_ErrorCodeItem
-  #-}
+  ListResponse_ErrorCodeItem #-}

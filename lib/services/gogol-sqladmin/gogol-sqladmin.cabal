@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-sqladmin
-version:            1.0.0.0
-synopsis:           Google Cloud SQL Admin SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-sqladmin
+version:               1.0.0
+synopsis:              Google Cloud SQL Admin SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  API for Cloud SQL database instance management
+    API for Cloud SQL database instance management
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -30,84 +27,95 @@ source-repository head
   subdir:   gogol-sqladmin
 
 flag field-selectors
-  description:
-    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-
-  default:     False
-  manual:      True
+  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+  default: False
+  manual: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -Werror
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (!flag(field-selectors) && impl(ghc >=9.2))
+  if !flag(field-selectors) && impl(ghc >= 9.2)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.SQLAdmin
-    Gogol.SQLAdmin.Sql.BackupRuns.Delete
-    Gogol.SQLAdmin.Sql.BackupRuns.Get
-    Gogol.SQLAdmin.Sql.BackupRuns.Insert
-    Gogol.SQLAdmin.Sql.BackupRuns.List
-    Gogol.SQLAdmin.Sql.Connect.GenerateEphemeral
-    Gogol.SQLAdmin.Sql.Connect.Get
-    Gogol.SQLAdmin.Sql.Databases.Delete
-    Gogol.SQLAdmin.Sql.Databases.Get
-    Gogol.SQLAdmin.Sql.Databases.Insert
-    Gogol.SQLAdmin.Sql.Databases.List
-    Gogol.SQLAdmin.Sql.Databases.Patch
-    Gogol.SQLAdmin.Sql.Databases.Update
-    Gogol.SQLAdmin.Sql.Flags.List
-    Gogol.SQLAdmin.Sql.Instances.AddServerCa
-    Gogol.SQLAdmin.Sql.Instances.Clone
-    Gogol.SQLAdmin.Sql.Instances.Delete
-    Gogol.SQLAdmin.Sql.Instances.DemoteMaster
-    Gogol.SQLAdmin.Sql.Instances.Export
-    Gogol.SQLAdmin.Sql.Instances.Failover
-    Gogol.SQLAdmin.Sql.Instances.Get
-    Gogol.SQLAdmin.Sql.Instances.Import
-    Gogol.SQLAdmin.Sql.Instances.Insert
-    Gogol.SQLAdmin.Sql.Instances.List
-    Gogol.SQLAdmin.Sql.Instances.ListServerCas
-    Gogol.SQLAdmin.Sql.Instances.Patch
-    Gogol.SQLAdmin.Sql.Instances.PromoteReplica
-    Gogol.SQLAdmin.Sql.Instances.ResetSslConfig
-    Gogol.SQLAdmin.Sql.Instances.Restart
-    Gogol.SQLAdmin.Sql.Instances.RestoreBackup
-    Gogol.SQLAdmin.Sql.Instances.RotateServerCa
-    Gogol.SQLAdmin.Sql.Instances.StartReplica
-    Gogol.SQLAdmin.Sql.Instances.StopReplica
-    Gogol.SQLAdmin.Sql.Instances.TruncateLog
-    Gogol.SQLAdmin.Sql.Instances.Update
-    Gogol.SQLAdmin.Sql.Operations.Get
-    Gogol.SQLAdmin.Sql.Operations.List
-    Gogol.SQLAdmin.Sql.Projects.Instances.GetDiskShrinkConfig
-    Gogol.SQLAdmin.Sql.Projects.Instances.PerformDiskShrink
-    Gogol.SQLAdmin.Sql.Projects.Instances.RescheduleMaintenance
-    Gogol.SQLAdmin.Sql.Projects.Instances.ResetReplicaSize
-    Gogol.SQLAdmin.Sql.Projects.Instances.StartExternalSync
-    Gogol.SQLAdmin.Sql.Projects.Instances.VerifyExternalSyncSettings
-    Gogol.SQLAdmin.Sql.SslCerts.CreateEphemeral
-    Gogol.SQLAdmin.Sql.SslCerts.Delete
-    Gogol.SQLAdmin.Sql.SslCerts.Get
-    Gogol.SQLAdmin.Sql.SslCerts.Insert
-    Gogol.SQLAdmin.Sql.SslCerts.List
-    Gogol.SQLAdmin.Sql.Tiers.List
-    Gogol.SQLAdmin.Sql.Users.Delete
-    Gogol.SQLAdmin.Sql.Users.Get
-    Gogol.SQLAdmin.Sql.Users.Insert
-    Gogol.SQLAdmin.Sql.Users.List
-    Gogol.SQLAdmin.Sql.Users.Update
-    Gogol.SQLAdmin.Types
+      Gogol.SQLAdmin
+    , Gogol.SQLAdmin.Sql.BackupRuns.Delete
+    , Gogol.SQLAdmin.Sql.BackupRuns.Get
+    , Gogol.SQLAdmin.Sql.BackupRuns.Insert
+    , Gogol.SQLAdmin.Sql.BackupRuns.List
+    , Gogol.SQLAdmin.Sql.Connect.GenerateEphemeral
+    , Gogol.SQLAdmin.Sql.Connect.Get
+    , Gogol.SQLAdmin.Sql.Databases.Delete
+    , Gogol.SQLAdmin.Sql.Databases.Get
+    , Gogol.SQLAdmin.Sql.Databases.Insert
+    , Gogol.SQLAdmin.Sql.Databases.List
+    , Gogol.SQLAdmin.Sql.Databases.Patch
+    , Gogol.SQLAdmin.Sql.Databases.Update
+    , Gogol.SQLAdmin.Sql.Flags.List
+    , Gogol.SQLAdmin.Sql.Instances.AcquireSsrsLease
+    , Gogol.SQLAdmin.Sql.Instances.AddServerCa
+    , Gogol.SQLAdmin.Sql.Instances.AddServerCertificate
+    , Gogol.SQLAdmin.Sql.Instances.Clone
+    , Gogol.SQLAdmin.Sql.Instances.Delete
+    , Gogol.SQLAdmin.Sql.Instances.Demote
+    , Gogol.SQLAdmin.Sql.Instances.DemoteMaster
+    , Gogol.SQLAdmin.Sql.Instances.Export
+    , Gogol.SQLAdmin.Sql.Instances.Failover
+    , Gogol.SQLAdmin.Sql.Instances.Get
+    , Gogol.SQLAdmin.Sql.Instances.Import
+    , Gogol.SQLAdmin.Sql.Instances.Insert
+    , Gogol.SQLAdmin.Sql.Instances.List
+    , Gogol.SQLAdmin.Sql.Instances.ListServerCas
+    , Gogol.SQLAdmin.Sql.Instances.ListServerCertificates
+    , Gogol.SQLAdmin.Sql.Instances.Patch
+    , Gogol.SQLAdmin.Sql.Instances.PromoteReplica
+    , Gogol.SQLAdmin.Sql.Instances.Reencrypt
+    , Gogol.SQLAdmin.Sql.Instances.ReleaseSsrsLease
+    , Gogol.SQLAdmin.Sql.Instances.ResetSslConfig
+    , Gogol.SQLAdmin.Sql.Instances.Restart
+    , Gogol.SQLAdmin.Sql.Instances.RestoreBackup
+    , Gogol.SQLAdmin.Sql.Instances.RotateServerCa
+    , Gogol.SQLAdmin.Sql.Instances.RotateServerCertificate
+    , Gogol.SQLAdmin.Sql.Instances.StartReplica
+    , Gogol.SQLAdmin.Sql.Instances.StopReplica
+    , Gogol.SQLAdmin.Sql.Instances.Switchover
+    , Gogol.SQLAdmin.Sql.Instances.TruncateLog
+    , Gogol.SQLAdmin.Sql.Instances.Update
+    , Gogol.SQLAdmin.Sql.Operations.Cancel
+    , Gogol.SQLAdmin.Sql.Operations.Get
+    , Gogol.SQLAdmin.Sql.Operations.List
+    , Gogol.SQLAdmin.Sql.Projects.Instances.GetDiskShrinkConfig
+    , Gogol.SQLAdmin.Sql.Projects.Instances.GetLatestRecoveryTime
+    , Gogol.SQLAdmin.Sql.Projects.Instances.PerformDiskShrink
+    , Gogol.SQLAdmin.Sql.Projects.Instances.RescheduleMaintenance
+    , Gogol.SQLAdmin.Sql.Projects.Instances.ResetReplicaSize
+    , Gogol.SQLAdmin.Sql.Projects.Instances.StartExternalSync
+    , Gogol.SQLAdmin.Sql.Projects.Instances.VerifyExternalSyncSettings
+    , Gogol.SQLAdmin.Sql.SslCerts.CreateEphemeral
+    , Gogol.SQLAdmin.Sql.SslCerts.Delete
+    , Gogol.SQLAdmin.Sql.SslCerts.Get
+    , Gogol.SQLAdmin.Sql.SslCerts.Insert
+    , Gogol.SQLAdmin.Sql.SslCerts.List
+    , Gogol.SQLAdmin.Sql.Tiers.List
+    , Gogol.SQLAdmin.Sql.Users.Delete
+    , Gogol.SQLAdmin.Sql.Users.Get
+    , Gogol.SQLAdmin.Sql.Users.Insert
+    , Gogol.SQLAdmin.Sql.Users.List
+    , Gogol.SQLAdmin.Sql.Users.Update
+    , Gogol.SQLAdmin.Types
 
   other-modules:
-    Gogol.SQLAdmin.Internal.Product
-    Gogol.SQLAdmin.Internal.Sum
+      Gogol.SQLAdmin.Internal.Product
+    , Gogol.SQLAdmin.Internal.Sum
 
   build-depends:
-    , base        >=4.12   && <5
-    , gogol-core  ^>=1.0.0
+      gogol-core ^>= 1.0.0

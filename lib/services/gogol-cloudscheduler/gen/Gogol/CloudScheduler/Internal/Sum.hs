@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +26,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.CloudScheduler.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AppEngineHttpTarget_HttpMethod
     AppEngineHttpTarget_HttpMethod
-      ( AppEngineHttpTarget_HttpMethod_HTTPMETHODUNSPECIFIED,
+      (
+        AppEngineHttpTarget_HttpMethod_HTTPMETHODUNSPECIFIED,
         AppEngineHttpTarget_HttpMethod_Post',
         AppEngineHttpTarget_HttpMethod_Get',
         AppEngineHttpTarget_HttpMethod_Head',
@@ -48,7 +54,8 @@ module Gogol.CloudScheduler.Internal.Sum
 
     -- * HttpTarget_HttpMethod
     HttpTarget_HttpMethod
-      ( HttpTarget_HttpMethod_HTTPMETHODUNSPECIFIED,
+      (
+        HttpTarget_HttpMethod_HTTPMETHODUNSPECIFIED,
         HttpTarget_HttpMethod_Post',
         HttpTarget_HttpMethod_Get',
         HttpTarget_HttpMethod_Head',
@@ -61,30 +68,30 @@ module Gogol.CloudScheduler.Internal.Sum
 
     -- * Job_State
     Job_State
-      ( Job_State_STATEUNSPECIFIED,
+      (
+        Job_State_STATEUNSPECIFIED,
         Job_State_Enabled,
         Job_State_Paused,
         Job_State_Disabled,
         Job_State_UPDATEFAILED,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -97,21 +104,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | The HTTP method to use for the request. PATCH and OPTIONS are not permitted.
-newtype AppEngineHttpTarget_HttpMethod = AppEngineHttpTarget_HttpMethod {fromAppEngineHttpTarget_HttpMethod :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AppEngineHttpTarget_HttpMethod = AppEngineHttpTarget_HttpMethod { fromAppEngineHttpTarget_HttpMethod :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | HTTP method unspecified. Defaults to POST.
 pattern AppEngineHttpTarget_HttpMethod_HTTPMETHODUNSPECIFIED :: AppEngineHttpTarget_HttpMethod
@@ -154,21 +160,20 @@ pattern AppEngineHttpTarget_HttpMethod_Options = AppEngineHttpTarget_HttpMethod 
   AppEngineHttpTarget_HttpMethod_Delete',
   AppEngineHttpTarget_HttpMethod_Patch',
   AppEngineHttpTarget_HttpMethod_Options,
-  AppEngineHttpTarget_HttpMethod
-  #-}
+  AppEngineHttpTarget_HttpMethod #-}
 
 -- | Which HTTP method to use for the request.
-newtype HttpTarget_HttpMethod = HttpTarget_HttpMethod {fromHttpTarget_HttpMethod :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype HttpTarget_HttpMethod = HttpTarget_HttpMethod { fromHttpTarget_HttpMethod :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | HTTP method unspecified. Defaults to POST.
 pattern HttpTarget_HttpMethod_HTTPMETHODUNSPECIFIED :: HttpTarget_HttpMethod
@@ -211,21 +216,20 @@ pattern HttpTarget_HttpMethod_Options = HttpTarget_HttpMethod "OPTIONS"
   HttpTarget_HttpMethod_Delete',
   HttpTarget_HttpMethod_Patch',
   HttpTarget_HttpMethod_Options,
-  HttpTarget_HttpMethod
-  #-}
+  HttpTarget_HttpMethod #-}
 
 -- | Output only. State of the job.
-newtype Job_State = Job_State {fromJob_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Job_State = Job_State { fromJob_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified state.
 pattern Job_State_STATEUNSPECIFIED :: Job_State
@@ -253,5 +257,4 @@ pattern Job_State_UPDATEFAILED = Job_State "UPDATE_FAILED"
   Job_State_Paused,
   Job_State_Disabled,
   Job_State_UPDATEFAILED,
-  Job_State
-  #-}
+  Job_State #-}

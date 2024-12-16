@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,112 +31,105 @@
 --
 -- /See:/ <https://developers.google.com/zero-touch/ Android Device Provisioning Partner API Reference> for @androiddeviceprovisioning.partners.devices.metadata@.
 module Gogol.AndroidDeviceProvisioning.Partners.Devices.Metadata
-  ( -- * Resource
-    AndroidDeviceProvisioningPartnersDevicesMetadataResource,
+    (
+    -- * Resource
+      AndroidDeviceProvisioningPartnersDevicesMetadataResource
 
     -- ** Constructing a Request
-    AndroidDeviceProvisioningPartnersDevicesMetadata (..),
-    newAndroidDeviceProvisioningPartnersDevicesMetadata,
-  )
-where
+    , AndroidDeviceProvisioningPartnersDevicesMetadata (..)
+    , newAndroidDeviceProvisioningPartnersDevicesMetadata
+    ) where
 
-import Gogol.AndroidDeviceProvisioning.Types
 import qualified Gogol.Prelude as Core
+import Gogol.AndroidDeviceProvisioning.Types
 
 -- | A resource alias for @androiddeviceprovisioning.partners.devices.metadata@ method which the
 -- 'AndroidDeviceProvisioningPartnersDevicesMetadata' request conforms to.
-type AndroidDeviceProvisioningPartnersDevicesMetadataResource =
-  "v1"
-    Core.:> "partners"
-    Core.:> Core.Capture "metadataOwnerId" Core.Int64
-    Core.:> "devices"
-    Core.:> Core.Capture "deviceId" Core.Int64
-    Core.:> "metadata"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              UpdateDeviceMetadataRequest
-    Core.:> Core.Post '[Core.JSON] DeviceMetadata
+type AndroidDeviceProvisioningPartnersDevicesMetadataResource
+     =
+     "v1" Core.:>
+       "partners" Core.:>
+         Core.Capture "metadataOwnerId" Core.Int64 Core.:>
+           "devices" Core.:>
+             Core.Capture "deviceId" Core.Int64 Core.:>
+               "metadata" Core.:>
+                 Core.QueryParam "$.xgafv" Xgafv Core.:>
+                   Core.QueryParam "access_token" Core.Text Core.:>
+                     Core.QueryParam "callback" Core.Text Core.:>
+                       Core.QueryParam "uploadType" Core.Text Core.:>
+                         Core.QueryParam "upload_protocol" Core.Text Core.:>
+                           Core.QueryParam "alt" Core.AltJSON Core.:>
+                             Core.ReqBody '[Core.JSON]
+                               UpdateDeviceMetadataRequest
+                               Core.:> Core.Post '[Core.JSON] DeviceMetadata
 
 -- | Updates reseller metadata associated with the device. Android devices only.
 --
 -- /See:/ 'newAndroidDeviceProvisioningPartnersDevicesMetadata' smart constructor.
 data AndroidDeviceProvisioningPartnersDevicesMetadata = AndroidDeviceProvisioningPartnersDevicesMetadata
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. The ID of the device.
-    deviceId :: Core.Int64,
-    -- | Required. The owner of the newly set metadata. Set this to the partner ID.
-    metadataOwnerId :: Core.Int64,
-    -- | Multipart request metadata.
-    payload :: UpdateDeviceMetadataRequest,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The ID of the device.
+    , deviceId :: Core.Int64
+      -- | Required. The owner of the newly set metadata. Set this to the partner ID.
+    , metadataOwnerId :: Core.Int64
+      -- | Multipart request metadata.
+    , payload :: UpdateDeviceMetadataRequest
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AndroidDeviceProvisioningPartnersDevicesMetadata' with the minimum fields required to make a request.
-newAndroidDeviceProvisioningPartnersDevicesMetadata ::
-  -- |  Required. The ID of the device. See 'deviceId'.
-  Core.Int64 ->
-  -- |  Required. The owner of the newly set metadata. Set this to the partner ID. See 'metadataOwnerId'.
-  Core.Int64 ->
-  -- |  Multipart request metadata. See 'payload'.
-  UpdateDeviceMetadataRequest ->
-  AndroidDeviceProvisioningPartnersDevicesMetadata
+newAndroidDeviceProvisioningPartnersDevicesMetadata 
+    ::  Core.Int64
+       -- ^  Required. The ID of the device. See 'deviceId'.
+    -> Core.Int64
+       -- ^  Required. The owner of the newly set metadata. Set this to the partner ID. See 'metadataOwnerId'.
+    -> UpdateDeviceMetadataRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> AndroidDeviceProvisioningPartnersDevicesMetadata
 newAndroidDeviceProvisioningPartnersDevicesMetadata deviceId metadataOwnerId payload =
   AndroidDeviceProvisioningPartnersDevicesMetadata
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      deviceId = deviceId,
-      metadataOwnerId = metadataOwnerId,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , deviceId = deviceId
+    , metadataOwnerId = metadataOwnerId
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AndroidDeviceProvisioningPartnersDevicesMetadata
-  where
-  type
-    Rs
-      AndroidDeviceProvisioningPartnersDevicesMetadata =
-      DeviceMetadata
-  type
-    Scopes
-      AndroidDeviceProvisioningPartnersDevicesMetadata =
-      '[]
-  requestClient
-    AndroidDeviceProvisioningPartnersDevicesMetadata {..} =
-      go
-        metadataOwnerId
-        deviceId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        androidDeviceProvisioningService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidDeviceProvisioningPartnersDevicesMetadataResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           AndroidDeviceProvisioningPartnersDevicesMetadata
+         where
+        type Rs
+               AndroidDeviceProvisioningPartnersDevicesMetadata
+             = DeviceMetadata
+        type Scopes
+               AndroidDeviceProvisioningPartnersDevicesMetadata
+             = '[]
+        requestClient
+          AndroidDeviceProvisioningPartnersDevicesMetadata{..}
+          = go metadataOwnerId deviceId xgafv accessToken
+              callback
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              androidDeviceProvisioningService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           AndroidDeviceProvisioningPartnersDevicesMetadataResource)
+                      Core.mempty
+

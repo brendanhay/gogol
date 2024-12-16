@@ -119,7 +119,7 @@
               ],
               "parameters": {
                 "parent": {
-                  "description": "The resource states of the request in the form of `projects/*/locations/*/voices/*`.",
+                  "description": "The resource states of the request in the form of `projects/*/locations/*`.",
                   "location": "path",
                   "pattern": "^projects/[^/]+/locations/[^/]+$",
                   "required": true,
@@ -261,9 +261,20 @@
       }
     }
   },
-  "revision": "20230306",
+  "revision": "20241026",
   "rootUrl": "https://texttospeech.googleapis.com/",
   "schemas": {
+    "AdvancedVoiceOptions": {
+      "description": "Used for advanced voice options.",
+      "id": "AdvancedVoiceOptions",
+      "properties": {
+        "lowLatencyJourneySynthesis": {
+          "description": "Only for Journey voices. If false, the synthesis will be context aware and have higher latency.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
     "AudioConfig": {
       "description": "Description of audio data to be synthesized.",
       "id": "AudioConfig",
@@ -320,6 +331,49 @@
       },
       "type": "object"
     },
+    "CustomPronunciationParams": {
+      "description": "Pronunciation customization for a phrase.",
+      "id": "CustomPronunciationParams",
+      "properties": {
+        "phoneticEncoding": {
+          "description": "The phonetic encoding of the phrase.",
+          "enum": [
+            "PHONETIC_ENCODING_UNSPECIFIED",
+            "PHONETIC_ENCODING_IPA",
+            "PHONETIC_ENCODING_X_SAMPA"
+          ],
+          "enumDescriptions": [
+            "Not specified.",
+            "IPA. (e.g. apple -\u003e ˈæpəl ) https://en.wikipedia.org/wiki/International_Phonetic_Alphabet",
+            "X-SAMPA (e.g. apple -\u003e \"{p@l\" ) https://en.wikipedia.org/wiki/X-SAMPA"
+          ],
+          "type": "string"
+        },
+        "phrase": {
+          "description": "The phrase to which the customization will be applied. The phrase can be multiple words (in the case of proper nouns etc), but should not span to a whole sentence.",
+          "type": "string"
+        },
+        "pronunciation": {
+          "description": "The pronunciation of the phrase. This must be in the phonetic encoding specified above.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CustomPronunciations": {
+      "description": "A collection of pronunciation customizations.",
+      "id": "CustomPronunciations",
+      "properties": {
+        "pronunciations": {
+          "description": "The pronunciation customizations to be applied.",
+          "items": {
+            "$ref": "CustomPronunciationParams"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "CustomVoiceParams": {
       "description": "Description of the custom voice to be synthesized.",
       "id": "CustomVoiceParams",
@@ -329,7 +383,8 @@
           "type": "string"
         },
         "reportedUsage": {
-          "description": "Optional. The usage of the synthesized audio to be reported.",
+          "deprecated": true,
+          "description": "Optional. Deprecated. The usage of the synthesized audio to be reported.",
           "enum": [
             "REPORTED_USAGE_UNSPECIFIED",
             "REALTIME",
@@ -349,6 +404,12 @@
       "description": "Metadata for response returned by the `SynthesizeLongAudio` method.",
       "id": "GoogleCloudTexttospeechV1beta1SynthesizeLongAudioMetadata",
       "properties": {
+        "lastUpdateTime": {
+          "deprecated": true,
+          "description": "Deprecated. Do not use.",
+          "format": "google-datetime",
+          "type": "string"
+        },
         "progressPercentage": {
           "description": "The progress of the most recent processing update in percentage, ie. 70.0%.",
           "format": "double",
@@ -394,6 +455,20 @@
       },
       "type": "object"
     },
+    "MultiSpeakerMarkup": {
+      "description": "A collection of turns for multi-speaker synthesis.",
+      "id": "MultiSpeakerMarkup",
+      "properties": {
+        "turns": {
+          "description": "Required. Speaker turns.",
+          "items": {
+            "$ref": "Turn"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "Operation": {
       "description": "This resource represents a long-running operation that is the result of a network API call.",
       "id": "Operation",
@@ -423,7 +498,7 @@
             "description": "Properties of the object. Contains field @type with type URL.",
             "type": "any"
           },
-          "description": "The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.",
+          "description": "The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.",
           "type": "object"
         }
       },
@@ -460,6 +535,14 @@
       "description": "Contains text input to be synthesized. Either `text` or `ssml` must be supplied. Supplying both or neither returns google.rpc.Code.INVALID_ARGUMENT. The input size is limited to 5000 bytes.",
       "id": "SynthesisInput",
       "properties": {
+        "customPronunciations": {
+          "$ref": "CustomPronunciations",
+          "description": "Optional. The pronunciation customizations to be applied to the input. If this is set, the input will be synthesized using the given pronunciation customizations. The initial support will be for EFIGS (English, French, Italian, German, Spanish) languages, as provided in VoiceSelectionParams. Journey and Instant Clone voices are not supported yet. In order to customize the pronunciation of a phrase, there must be an exact match of the phrase in the input types. If using SSML, the phrase must not be inside a phoneme tag (entirely or partially)."
+        },
+        "multiSpeakerMarkup": {
+          "$ref": "MultiSpeakerMarkup",
+          "description": "The multi-speaker input to be synthesized. Only applicable for multi-speaker synthesis."
+        },
         "ssml": {
           "description": "The SSML document to be synthesized. The SSML document must be valid and well-formed. Otherwise the RPC will fail and return google.rpc.Code.INVALID_ARGUMENT. For more information, see [SSML](https://cloud.google.com/text-to-speech/docs/ssml).",
           "type": "string"
@@ -475,6 +558,12 @@
       "description": "Metadata for response returned by the `SynthesizeLongAudio` method.",
       "id": "SynthesizeLongAudioMetadata",
       "properties": {
+        "lastUpdateTime": {
+          "deprecated": true,
+          "description": "Deprecated. Do not use.",
+          "format": "google-datetime",
+          "type": "string"
+        },
         "progressPercentage": {
           "description": "The progress of the most recent processing update in percentage, ie. 70.0%.",
           "format": "double",
@@ -501,12 +590,12 @@
           "description": "Required. The Synthesizer requires either plain text or SSML as input."
         },
         "outputGcsUri": {
-          "description": "Specifies a Cloud Storage URI for the synthesis results. Must be specified in the format: `gs://bucket_name/object_name`, and the bucket must already exist.",
+          "description": "Required. Specifies a Cloud Storage URI for the synthesis results. Must be specified in the format: `gs://bucket_name/object_name`, and the bucket must already exist.",
           "type": "string"
         },
         "voice": {
           "$ref": "VoiceSelectionParams",
-          "description": "The desired voice of the synthesized audio."
+          "description": "Required. The desired voice of the synthesized audio."
         }
       },
       "type": "object"
@@ -515,6 +604,10 @@
       "description": "The top-level message sent by the client for the `SynthesizeSpeech` method.",
       "id": "SynthesizeSpeechRequest",
       "properties": {
+        "advancedVoiceOptions": {
+          "$ref": "AdvancedVoiceOptions",
+          "description": "Advanced voice options."
+        },
         "audioConfig": {
           "$ref": "AudioConfig",
           "description": "Required. The configuration of the synthesized audio."
@@ -584,6 +677,21 @@
       },
       "type": "object"
     },
+    "Turn": {
+      "description": "A Multi-speaker turn.",
+      "id": "Turn",
+      "properties": {
+        "speaker": {
+          "description": "Required. The speaker of the turn, for example, 'O' or 'Q'. Please refer to documentation for available speakers.",
+          "type": "string"
+        },
+        "text": {
+          "description": "Required. The text to speak.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Voice": {
       "description": "Description of a voice supported by the TTS service.",
       "id": "Voice",
@@ -623,6 +731,17 @@
       },
       "type": "object"
     },
+    "VoiceCloneParams": {
+      "description": "The configuration of Voice Clone feature.",
+      "id": "VoiceCloneParams",
+      "properties": {
+        "voiceCloningKey": {
+          "description": "Required. Created by GenerateVoiceCloningKey.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "VoiceSelectionParams": {
       "description": "Description of which voice to use for a synthesis request.",
       "id": "VoiceSelectionParams",
@@ -636,7 +755,7 @@
           "type": "string"
         },
         "name": {
-          "description": "The name of the voice. If not set, the service will choose a voice based on the other parameters such as language_code and gender.",
+          "description": "The name of the voice. If both the name and the gender are not set, the service will choose a voice based on the other parameters such as language_code.",
           "type": "string"
         },
         "ssmlGender": {
@@ -654,6 +773,10 @@
             "A gender-neutral voice. This voice is not yet supported."
           ],
           "type": "string"
+        },
+        "voiceClone": {
+          "$ref": "VoiceCloneParams",
+          "description": "Optional. The configuration for a voice clone. If [VoiceCloneParams.voice_clone_key] is set, the service will choose the voice clone matching the specified configuration."
         }
       },
       "type": "object"

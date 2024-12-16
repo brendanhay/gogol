@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,1135 +31,1747 @@
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference>
 module Gogol.AndroidPublisher
-  ( -- * Configuration
-    androidPublisherService,
+    (
+    -- * Configuration
+      androidPublisherService
 
     -- * OAuth Scopes
-    Androidpublisher'FullControl,
+    , Androidpublisher'FullControl
 
     -- * Resources
 
+    -- ** androidpublisher.applications.dataSafety
+    , AndroidPublisherApplicationsDataSafetyResource
+    , AndroidPublisherApplicationsDataSafety (..)
+    , newAndroidPublisherApplicationsDataSafety
+
     -- ** androidpublisher.applications.deviceTierConfigs.create
-    AndroidPublisherApplicationsDeviceTierConfigsCreateResource,
-    AndroidPublisherApplicationsDeviceTierConfigsCreate (..),
-    newAndroidPublisherApplicationsDeviceTierConfigsCreate,
+    , AndroidPublisherApplicationsDeviceTierConfigsCreateResource
+    , AndroidPublisherApplicationsDeviceTierConfigsCreate (..)
+    , newAndroidPublisherApplicationsDeviceTierConfigsCreate
 
     -- ** androidpublisher.applications.deviceTierConfigs.get
-    AndroidPublisherApplicationsDeviceTierConfigsGetResource,
-    AndroidPublisherApplicationsDeviceTierConfigsGet (..),
-    newAndroidPublisherApplicationsDeviceTierConfigsGet,
+    , AndroidPublisherApplicationsDeviceTierConfigsGetResource
+    , AndroidPublisherApplicationsDeviceTierConfigsGet (..)
+    , newAndroidPublisherApplicationsDeviceTierConfigsGet
 
     -- ** androidpublisher.applications.deviceTierConfigs.list
-    AndroidPublisherApplicationsDeviceTierConfigsListResource,
-    AndroidPublisherApplicationsDeviceTierConfigsList (..),
-    newAndroidPublisherApplicationsDeviceTierConfigsList,
+    , AndroidPublisherApplicationsDeviceTierConfigsListResource
+    , AndroidPublisherApplicationsDeviceTierConfigsList (..)
+    , newAndroidPublisherApplicationsDeviceTierConfigsList
+
+    -- ** androidpublisher.apprecovery.addTargeting
+    , AndroidPublisherApprecoveryAddTargetingResource
+    , AndroidPublisherApprecoveryAddTargeting (..)
+    , newAndroidPublisherApprecoveryAddTargeting
+
+    -- ** androidpublisher.apprecovery.cancel
+    , AndroidPublisherApprecoveryCancelResource
+    , AndroidPublisherApprecoveryCancel (..)
+    , newAndroidPublisherApprecoveryCancel
+
+    -- ** androidpublisher.apprecovery.create
+    , AndroidPublisherApprecoveryCreateResource
+    , AndroidPublisherApprecoveryCreate (..)
+    , newAndroidPublisherApprecoveryCreate
+
+    -- ** androidpublisher.apprecovery.deploy
+    , AndroidPublisherApprecoveryDeployResource
+    , AndroidPublisherApprecoveryDeploy (..)
+    , newAndroidPublisherApprecoveryDeploy
+
+    -- ** androidpublisher.apprecovery.list
+    , AndroidPublisherApprecoveryListResource
+    , AndroidPublisherApprecoveryList (..)
+    , newAndroidPublisherApprecoveryList
 
     -- ** androidpublisher.edits.apks.addexternallyhosted
-    AndroidPublisherEditsApksAddexternallyhostedResource,
-    AndroidPublisherEditsApksAddexternallyhosted (..),
-    newAndroidPublisherEditsApksAddexternallyhosted,
+    , AndroidPublisherEditsApksAddexternallyhostedResource
+    , AndroidPublisherEditsApksAddexternallyhosted (..)
+    , newAndroidPublisherEditsApksAddexternallyhosted
 
     -- ** androidpublisher.edits.apks.list
-    AndroidPublisherEditsApksListResource,
-    AndroidPublisherEditsApksList (..),
-    newAndroidPublisherEditsApksList,
+    , AndroidPublisherEditsApksListResource
+    , AndroidPublisherEditsApksList (..)
+    , newAndroidPublisherEditsApksList
 
     -- ** androidpublisher.edits.apks.upload
-    AndroidPublisherEditsApksUploadResource,
-    AndroidPublisherEditsApksUpload (..),
-    newAndroidPublisherEditsApksUpload,
+    , AndroidPublisherEditsApksUploadResource
+    , AndroidPublisherEditsApksUpload (..)
+    , newAndroidPublisherEditsApksUpload
 
     -- ** androidpublisher.edits.bundles.list
-    AndroidPublisherEditsBundlesListResource,
-    AndroidPublisherEditsBundlesList (..),
-    newAndroidPublisherEditsBundlesList,
+    , AndroidPublisherEditsBundlesListResource
+    , AndroidPublisherEditsBundlesList (..)
+    , newAndroidPublisherEditsBundlesList
 
     -- ** androidpublisher.edits.bundles.upload
-    AndroidPublisherEditsBundlesUploadResource,
-    AndroidPublisherEditsBundlesUpload (..),
-    newAndroidPublisherEditsBundlesUpload,
+    , AndroidPublisherEditsBundlesUploadResource
+    , AndroidPublisherEditsBundlesUpload (..)
+    , newAndroidPublisherEditsBundlesUpload
 
     -- ** androidpublisher.edits.commit
-    AndroidPublisherEditsCommitResource,
-    AndroidPublisherEditsCommit (..),
-    newAndroidPublisherEditsCommit,
+    , AndroidPublisherEditsCommitResource
+    , AndroidPublisherEditsCommit (..)
+    , newAndroidPublisherEditsCommit
 
     -- ** androidpublisher.edits.countryavailability.get
-    AndroidPublisherEditsCountryavailabilityGetResource,
-    AndroidPublisherEditsCountryavailabilityGet (..),
-    newAndroidPublisherEditsCountryavailabilityGet,
+    , AndroidPublisherEditsCountryavailabilityGetResource
+    , AndroidPublisherEditsCountryavailabilityGet (..)
+    , newAndroidPublisherEditsCountryavailabilityGet
 
     -- ** androidpublisher.edits.delete
-    AndroidPublisherEditsDeleteResource,
-    AndroidPublisherEditsDelete (..),
-    newAndroidPublisherEditsDelete,
+    , AndroidPublisherEditsDeleteResource
+    , AndroidPublisherEditsDelete (..)
+    , newAndroidPublisherEditsDelete
 
     -- ** androidpublisher.edits.deobfuscationfiles.upload
-    AndroidPublisherEditsDeobfuscationfilesUploadResource,
-    AndroidPublisherEditsDeobfuscationfilesUpload (..),
-    newAndroidPublisherEditsDeobfuscationfilesUpload,
+    , AndroidPublisherEditsDeobfuscationfilesUploadResource
+    , AndroidPublisherEditsDeobfuscationfilesUpload (..)
+    , newAndroidPublisherEditsDeobfuscationfilesUpload
 
     -- ** androidpublisher.edits.details.get
-    AndroidPublisherEditsDetailsGetResource,
-    AndroidPublisherEditsDetailsGet (..),
-    newAndroidPublisherEditsDetailsGet,
+    , AndroidPublisherEditsDetailsGetResource
+    , AndroidPublisherEditsDetailsGet (..)
+    , newAndroidPublisherEditsDetailsGet
 
     -- ** androidpublisher.edits.details.patch
-    AndroidPublisherEditsDetailsPatchResource,
-    AndroidPublisherEditsDetailsPatch (..),
-    newAndroidPublisherEditsDetailsPatch,
+    , AndroidPublisherEditsDetailsPatchResource
+    , AndroidPublisherEditsDetailsPatch (..)
+    , newAndroidPublisherEditsDetailsPatch
 
     -- ** androidpublisher.edits.details.update
-    AndroidPublisherEditsDetailsUpdateResource,
-    AndroidPublisherEditsDetailsUpdate (..),
-    newAndroidPublisherEditsDetailsUpdate,
+    , AndroidPublisherEditsDetailsUpdateResource
+    , AndroidPublisherEditsDetailsUpdate (..)
+    , newAndroidPublisherEditsDetailsUpdate
 
     -- ** androidpublisher.edits.expansionfiles.get
-    AndroidPublisherEditsExpansionfilesGetResource,
-    AndroidPublisherEditsExpansionfilesGet (..),
-    newAndroidPublisherEditsExpansionfilesGet,
+    , AndroidPublisherEditsExpansionfilesGetResource
+    , AndroidPublisherEditsExpansionfilesGet (..)
+    , newAndroidPublisherEditsExpansionfilesGet
 
     -- ** androidpublisher.edits.expansionfiles.patch
-    AndroidPublisherEditsExpansionfilesPatchResource,
-    AndroidPublisherEditsExpansionfilesPatch (..),
-    newAndroidPublisherEditsExpansionfilesPatch,
+    , AndroidPublisherEditsExpansionfilesPatchResource
+    , AndroidPublisherEditsExpansionfilesPatch (..)
+    , newAndroidPublisherEditsExpansionfilesPatch
 
     -- ** androidpublisher.edits.expansionfiles.update
-    AndroidPublisherEditsExpansionfilesUpdateResource,
-    AndroidPublisherEditsExpansionfilesUpdate (..),
-    newAndroidPublisherEditsExpansionfilesUpdate,
+    , AndroidPublisherEditsExpansionfilesUpdateResource
+    , AndroidPublisherEditsExpansionfilesUpdate (..)
+    , newAndroidPublisherEditsExpansionfilesUpdate
 
     -- ** androidpublisher.edits.expansionfiles.upload
-    AndroidPublisherEditsExpansionfilesUploadResource,
-    AndroidPublisherEditsExpansionfilesUpload (..),
-    newAndroidPublisherEditsExpansionfilesUpload,
+    , AndroidPublisherEditsExpansionfilesUploadResource
+    , AndroidPublisherEditsExpansionfilesUpload (..)
+    , newAndroidPublisherEditsExpansionfilesUpload
 
     -- ** androidpublisher.edits.get
-    AndroidPublisherEditsGetResource,
-    AndroidPublisherEditsGet (..),
-    newAndroidPublisherEditsGet,
+    , AndroidPublisherEditsGetResource
+    , AndroidPublisherEditsGet (..)
+    , newAndroidPublisherEditsGet
 
     -- ** androidpublisher.edits.images.delete
-    AndroidPublisherEditsImagesDeleteResource,
-    AndroidPublisherEditsImagesDelete (..),
-    newAndroidPublisherEditsImagesDelete,
+    , AndroidPublisherEditsImagesDeleteResource
+    , AndroidPublisherEditsImagesDelete (..)
+    , newAndroidPublisherEditsImagesDelete
 
     -- ** androidpublisher.edits.images.deleteall
-    AndroidPublisherEditsImagesDeleteallResource,
-    AndroidPublisherEditsImagesDeleteall (..),
-    newAndroidPublisherEditsImagesDeleteall,
+    , AndroidPublisherEditsImagesDeleteallResource
+    , AndroidPublisherEditsImagesDeleteall (..)
+    , newAndroidPublisherEditsImagesDeleteall
 
     -- ** androidpublisher.edits.images.list
-    AndroidPublisherEditsImagesListResource,
-    AndroidPublisherEditsImagesList (..),
-    newAndroidPublisherEditsImagesList,
+    , AndroidPublisherEditsImagesListResource
+    , AndroidPublisherEditsImagesList (..)
+    , newAndroidPublisherEditsImagesList
 
     -- ** androidpublisher.edits.images.upload
-    AndroidPublisherEditsImagesUploadResource,
-    AndroidPublisherEditsImagesUpload (..),
-    newAndroidPublisherEditsImagesUpload,
+    , AndroidPublisherEditsImagesUploadResource
+    , AndroidPublisherEditsImagesUpload (..)
+    , newAndroidPublisherEditsImagesUpload
 
     -- ** androidpublisher.edits.insert
-    AndroidPublisherEditsInsertResource,
-    AndroidPublisherEditsInsert (..),
-    newAndroidPublisherEditsInsert,
+    , AndroidPublisherEditsInsertResource
+    , AndroidPublisherEditsInsert (..)
+    , newAndroidPublisherEditsInsert
 
     -- ** androidpublisher.edits.listings.delete
-    AndroidPublisherEditsListingsDeleteResource,
-    AndroidPublisherEditsListingsDelete (..),
-    newAndroidPublisherEditsListingsDelete,
+    , AndroidPublisherEditsListingsDeleteResource
+    , AndroidPublisherEditsListingsDelete (..)
+    , newAndroidPublisherEditsListingsDelete
 
     -- ** androidpublisher.edits.listings.deleteall
-    AndroidPublisherEditsListingsDeleteallResource,
-    AndroidPublisherEditsListingsDeleteall (..),
-    newAndroidPublisherEditsListingsDeleteall,
+    , AndroidPublisherEditsListingsDeleteallResource
+    , AndroidPublisherEditsListingsDeleteall (..)
+    , newAndroidPublisherEditsListingsDeleteall
 
     -- ** androidpublisher.edits.listings.get
-    AndroidPublisherEditsListingsGetResource,
-    AndroidPublisherEditsListingsGet (..),
-    newAndroidPublisherEditsListingsGet,
+    , AndroidPublisherEditsListingsGetResource
+    , AndroidPublisherEditsListingsGet (..)
+    , newAndroidPublisherEditsListingsGet
 
     -- ** androidpublisher.edits.listings.list
-    AndroidPublisherEditsListingsListResource,
-    AndroidPublisherEditsListingsList (..),
-    newAndroidPublisherEditsListingsList,
+    , AndroidPublisherEditsListingsListResource
+    , AndroidPublisherEditsListingsList (..)
+    , newAndroidPublisherEditsListingsList
 
     -- ** androidpublisher.edits.listings.patch
-    AndroidPublisherEditsListingsPatchResource,
-    AndroidPublisherEditsListingsPatch (..),
-    newAndroidPublisherEditsListingsPatch,
+    , AndroidPublisherEditsListingsPatchResource
+    , AndroidPublisherEditsListingsPatch (..)
+    , newAndroidPublisherEditsListingsPatch
 
     -- ** androidpublisher.edits.listings.update
-    AndroidPublisherEditsListingsUpdateResource,
-    AndroidPublisherEditsListingsUpdate (..),
-    newAndroidPublisherEditsListingsUpdate,
+    , AndroidPublisherEditsListingsUpdateResource
+    , AndroidPublisherEditsListingsUpdate (..)
+    , newAndroidPublisherEditsListingsUpdate
 
     -- ** androidpublisher.edits.testers.get
-    AndroidPublisherEditsTestersGetResource,
-    AndroidPublisherEditsTestersGet (..),
-    newAndroidPublisherEditsTestersGet,
+    , AndroidPublisherEditsTestersGetResource
+    , AndroidPublisherEditsTestersGet (..)
+    , newAndroidPublisherEditsTestersGet
 
     -- ** androidpublisher.edits.testers.patch
-    AndroidPublisherEditsTestersPatchResource,
-    AndroidPublisherEditsTestersPatch (..),
-    newAndroidPublisherEditsTestersPatch,
+    , AndroidPublisherEditsTestersPatchResource
+    , AndroidPublisherEditsTestersPatch (..)
+    , newAndroidPublisherEditsTestersPatch
 
     -- ** androidpublisher.edits.testers.update
-    AndroidPublisherEditsTestersUpdateResource,
-    AndroidPublisherEditsTestersUpdate (..),
-    newAndroidPublisherEditsTestersUpdate,
+    , AndroidPublisherEditsTestersUpdateResource
+    , AndroidPublisherEditsTestersUpdate (..)
+    , newAndroidPublisherEditsTestersUpdate
+
+    -- ** androidpublisher.edits.tracks.create
+    , AndroidPublisherEditsTracksCreateResource
+    , AndroidPublisherEditsTracksCreate (..)
+    , newAndroidPublisherEditsTracksCreate
 
     -- ** androidpublisher.edits.tracks.get
-    AndroidPublisherEditsTracksGetResource,
-    AndroidPublisherEditsTracksGet (..),
-    newAndroidPublisherEditsTracksGet,
+    , AndroidPublisherEditsTracksGetResource
+    , AndroidPublisherEditsTracksGet (..)
+    , newAndroidPublisherEditsTracksGet
 
     -- ** androidpublisher.edits.tracks.list
-    AndroidPublisherEditsTracksListResource,
-    AndroidPublisherEditsTracksList (..),
-    newAndroidPublisherEditsTracksList,
+    , AndroidPublisherEditsTracksListResource
+    , AndroidPublisherEditsTracksList (..)
+    , newAndroidPublisherEditsTracksList
 
     -- ** androidpublisher.edits.tracks.patch
-    AndroidPublisherEditsTracksPatchResource,
-    AndroidPublisherEditsTracksPatch (..),
-    newAndroidPublisherEditsTracksPatch,
+    , AndroidPublisherEditsTracksPatchResource
+    , AndroidPublisherEditsTracksPatch (..)
+    , newAndroidPublisherEditsTracksPatch
 
     -- ** androidpublisher.edits.tracks.update
-    AndroidPublisherEditsTracksUpdateResource,
-    AndroidPublisherEditsTracksUpdate (..),
-    newAndroidPublisherEditsTracksUpdate,
+    , AndroidPublisherEditsTracksUpdateResource
+    , AndroidPublisherEditsTracksUpdate (..)
+    , newAndroidPublisherEditsTracksUpdate
 
     -- ** androidpublisher.edits.validate
-    AndroidPublisherEditsValidateResource,
-    AndroidPublisherEditsValidate (..),
-    newAndroidPublisherEditsValidate,
+    , AndroidPublisherEditsValidateResource
+    , AndroidPublisherEditsValidate (..)
+    , newAndroidPublisherEditsValidate
+
+    -- ** androidpublisher.externaltransactions.createexternaltransaction
+    , AndroidPublisherExternaltransactionsCreateexternaltransactionResource
+    , AndroidPublisherExternaltransactionsCreateexternaltransaction (..)
+    , newAndroidPublisherExternaltransactionsCreateexternaltransaction
+
+    -- ** androidpublisher.externaltransactions.getexternaltransaction
+    , AndroidPublisherExternaltransactionsGetexternaltransactionResource
+    , AndroidPublisherExternaltransactionsGetexternaltransaction (..)
+    , newAndroidPublisherExternaltransactionsGetexternaltransaction
+
+    -- ** androidpublisher.externaltransactions.refundexternaltransaction
+    , AndroidPublisherExternaltransactionsRefundexternaltransactionResource
+    , AndroidPublisherExternaltransactionsRefundexternaltransaction (..)
+    , newAndroidPublisherExternaltransactionsRefundexternaltransaction
 
     -- ** androidpublisher.generatedapks.download
-    AndroidPublisherGeneratedapksDownloadResource,
-    AndroidPublisherGeneratedapksDownload (..),
-    newAndroidPublisherGeneratedapksDownload,
+    , AndroidPublisherGeneratedapksDownloadResource
+    , AndroidPublisherGeneratedapksDownload (..)
+    , newAndroidPublisherGeneratedapksDownload
 
     -- ** androidpublisher.generatedapks.list
-    AndroidPublisherGeneratedapksListResource,
-    AndroidPublisherGeneratedapksList (..),
-    newAndroidPublisherGeneratedapksList,
+    , AndroidPublisherGeneratedapksListResource
+    , AndroidPublisherGeneratedapksList (..)
+    , newAndroidPublisherGeneratedapksList
 
     -- ** androidpublisher.grants.create
-    AndroidPublisherGrantsCreateResource,
-    AndroidPublisherGrantsCreate (..),
-    newAndroidPublisherGrantsCreate,
+    , AndroidPublisherGrantsCreateResource
+    , AndroidPublisherGrantsCreate (..)
+    , newAndroidPublisherGrantsCreate
 
     -- ** androidpublisher.grants.delete
-    AndroidPublisherGrantsDeleteResource,
-    AndroidPublisherGrantsDelete (..),
-    newAndroidPublisherGrantsDelete,
+    , AndroidPublisherGrantsDeleteResource
+    , AndroidPublisherGrantsDelete (..)
+    , newAndroidPublisherGrantsDelete
 
     -- ** androidpublisher.grants.patch
-    AndroidPublisherGrantsPatchResource,
-    AndroidPublisherGrantsPatch (..),
-    newAndroidPublisherGrantsPatch,
+    , AndroidPublisherGrantsPatchResource
+    , AndroidPublisherGrantsPatch (..)
+    , newAndroidPublisherGrantsPatch
+
+    -- ** androidpublisher.inappproducts.batchDelete
+    , AndroidPublisherInappproductsBatchDeleteResource
+    , AndroidPublisherInappproductsBatchDelete (..)
+    , newAndroidPublisherInappproductsBatchDelete
+
+    -- ** androidpublisher.inappproducts.batchGet
+    , AndroidPublisherInappproductsBatchGetResource
+    , AndroidPublisherInappproductsBatchGet (..)
+    , newAndroidPublisherInappproductsBatchGet
+
+    -- ** androidpublisher.inappproducts.batchUpdate
+    , AndroidPublisherInappproductsBatchUpdateResource
+    , AndroidPublisherInappproductsBatchUpdate (..)
+    , newAndroidPublisherInappproductsBatchUpdate
 
     -- ** androidpublisher.inappproducts.delete
-    AndroidPublisherInappproductsDeleteResource,
-    AndroidPublisherInappproductsDelete (..),
-    newAndroidPublisherInappproductsDelete,
+    , AndroidPublisherInappproductsDeleteResource
+    , AndroidPublisherInappproductsDelete (..)
+    , newAndroidPublisherInappproductsDelete
 
     -- ** androidpublisher.inappproducts.get
-    AndroidPublisherInappproductsGetResource,
-    AndroidPublisherInappproductsGet (..),
-    newAndroidPublisherInappproductsGet,
+    , AndroidPublisherInappproductsGetResource
+    , AndroidPublisherInappproductsGet (..)
+    , newAndroidPublisherInappproductsGet
 
     -- ** androidpublisher.inappproducts.insert
-    AndroidPublisherInappproductsInsertResource,
-    AndroidPublisherInappproductsInsert (..),
-    newAndroidPublisherInappproductsInsert,
+    , AndroidPublisherInappproductsInsertResource
+    , AndroidPublisherInappproductsInsert (..)
+    , newAndroidPublisherInappproductsInsert
 
     -- ** androidpublisher.inappproducts.list
-    AndroidPublisherInappproductsListResource,
-    AndroidPublisherInappproductsList (..),
-    newAndroidPublisherInappproductsList,
+    , AndroidPublisherInappproductsListResource
+    , AndroidPublisherInappproductsList (..)
+    , newAndroidPublisherInappproductsList
 
     -- ** androidpublisher.inappproducts.patch
-    AndroidPublisherInappproductsPatchResource,
-    AndroidPublisherInappproductsPatch (..),
-    newAndroidPublisherInappproductsPatch,
+    , AndroidPublisherInappproductsPatchResource
+    , AndroidPublisherInappproductsPatch (..)
+    , newAndroidPublisherInappproductsPatch
 
     -- ** androidpublisher.inappproducts.update
-    AndroidPublisherInappproductsUpdateResource,
-    AndroidPublisherInappproductsUpdate (..),
-    newAndroidPublisherInappproductsUpdate,
+    , AndroidPublisherInappproductsUpdateResource
+    , AndroidPublisherInappproductsUpdate (..)
+    , newAndroidPublisherInappproductsUpdate
 
     -- ** androidpublisher.internalappsharingartifacts.uploadapk
-    AndroidPublisherInternalappsharingartifactsUploadapkResource,
-    AndroidPublisherInternalappsharingartifactsUploadapk (..),
-    newAndroidPublisherInternalappsharingartifactsUploadapk,
+    , AndroidPublisherInternalappsharingartifactsUploadapkResource
+    , AndroidPublisherInternalappsharingartifactsUploadapk (..)
+    , newAndroidPublisherInternalappsharingartifactsUploadapk
 
     -- ** androidpublisher.internalappsharingartifacts.uploadbundle
-    AndroidPublisherInternalappsharingartifactsUploadbundleResource,
-    AndroidPublisherInternalappsharingartifactsUploadbundle (..),
-    newAndroidPublisherInternalappsharingartifactsUploadbundle,
+    , AndroidPublisherInternalappsharingartifactsUploadbundleResource
+    , AndroidPublisherInternalappsharingartifactsUploadbundle (..)
+    , newAndroidPublisherInternalappsharingartifactsUploadbundle
 
     -- ** androidpublisher.monetization.convertRegionPrices
-    AndroidPublisherMonetizationConvertRegionPricesResource,
-    AndroidPublisherMonetizationConvertRegionPrices (..),
-    newAndroidPublisherMonetizationConvertRegionPrices,
+    , AndroidPublisherMonetizationConvertRegionPricesResource
+    , AndroidPublisherMonetizationConvertRegionPrices (..)
+    , newAndroidPublisherMonetizationConvertRegionPrices
 
     -- ** androidpublisher.monetization.subscriptions.archive
-    AndroidPublisherMonetizationSubscriptionsArchiveResource,
-    AndroidPublisherMonetizationSubscriptionsArchive (..),
-    newAndroidPublisherMonetizationSubscriptionsArchive,
+    , AndroidPublisherMonetizationSubscriptionsArchiveResource
+    , AndroidPublisherMonetizationSubscriptionsArchive (..)
+    , newAndroidPublisherMonetizationSubscriptionsArchive
 
     -- ** androidpublisher.monetization.subscriptions.basePlans.activate
-    AndroidPublisherMonetizationSubscriptionsBasePlansActivateResource,
-    AndroidPublisherMonetizationSubscriptionsBasePlansActivate (..),
-    newAndroidPublisherMonetizationSubscriptionsBasePlansActivate,
+    , AndroidPublisherMonetizationSubscriptionsBasePlansActivateResource
+    , AndroidPublisherMonetizationSubscriptionsBasePlansActivate (..)
+    , newAndroidPublisherMonetizationSubscriptionsBasePlansActivate
+
+    -- ** androidpublisher.monetization.subscriptions.basePlans.batchMigratePrices
+    , AndroidPublisherMonetizationSubscriptionsBasePlansBatchMigratePricesResource
+    , AndroidPublisherMonetizationSubscriptionsBasePlansBatchMigratePrices (..)
+    , newAndroidPublisherMonetizationSubscriptionsBasePlansBatchMigratePrices
+
+    -- ** androidpublisher.monetization.subscriptions.basePlans.batchUpdateStates
+    , AndroidPublisherMonetizationSubscriptionsBasePlansBatchUpdateStatesResource
+    , AndroidPublisherMonetizationSubscriptionsBasePlansBatchUpdateStates (..)
+    , newAndroidPublisherMonetizationSubscriptionsBasePlansBatchUpdateStates
 
     -- ** androidpublisher.monetization.subscriptions.basePlans.deactivate
-    AndroidPublisherMonetizationSubscriptionsBasePlansDeactivateResource,
-    AndroidPublisherMonetizationSubscriptionsBasePlansDeactivate (..),
-    newAndroidPublisherMonetizationSubscriptionsBasePlansDeactivate,
+    , AndroidPublisherMonetizationSubscriptionsBasePlansDeactivateResource
+    , AndroidPublisherMonetizationSubscriptionsBasePlansDeactivate (..)
+    , newAndroidPublisherMonetizationSubscriptionsBasePlansDeactivate
 
     -- ** androidpublisher.monetization.subscriptions.basePlans.delete
-    AndroidPublisherMonetizationSubscriptionsBasePlansDeleteResource,
-    AndroidPublisherMonetizationSubscriptionsBasePlansDelete (..),
-    newAndroidPublisherMonetizationSubscriptionsBasePlansDelete,
+    , AndroidPublisherMonetizationSubscriptionsBasePlansDeleteResource
+    , AndroidPublisherMonetizationSubscriptionsBasePlansDelete (..)
+    , newAndroidPublisherMonetizationSubscriptionsBasePlansDelete
 
     -- ** androidpublisher.monetization.subscriptions.basePlans.migratePrices
-    AndroidPublisherMonetizationSubscriptionsBasePlansMigratePricesResource,
-    AndroidPublisherMonetizationSubscriptionsBasePlansMigratePrices (..),
-    newAndroidPublisherMonetizationSubscriptionsBasePlansMigratePrices,
+    , AndroidPublisherMonetizationSubscriptionsBasePlansMigratePricesResource
+    , AndroidPublisherMonetizationSubscriptionsBasePlansMigratePrices (..)
+    , newAndroidPublisherMonetizationSubscriptionsBasePlansMigratePrices
 
     -- ** androidpublisher.monetization.subscriptions.basePlans.offers.activate
-    AndroidPublisherMonetizationSubscriptionsBasePlansOffersActivateResource,
-    AndroidPublisherMonetizationSubscriptionsBasePlansOffersActivate (..),
-    newAndroidPublisherMonetizationSubscriptionsBasePlansOffersActivate,
+    , AndroidPublisherMonetizationSubscriptionsBasePlansOffersActivateResource
+    , AndroidPublisherMonetizationSubscriptionsBasePlansOffersActivate (..)
+    , newAndroidPublisherMonetizationSubscriptionsBasePlansOffersActivate
+
+    -- ** androidpublisher.monetization.subscriptions.basePlans.offers.batchGet
+    , AndroidPublisherMonetizationSubscriptionsBasePlansOffersBatchGetResource
+    , AndroidPublisherMonetizationSubscriptionsBasePlansOffersBatchGet (..)
+    , newAndroidPublisherMonetizationSubscriptionsBasePlansOffersBatchGet
+
+    -- ** androidpublisher.monetization.subscriptions.basePlans.offers.batchUpdate
+    , AndroidPublisherMonetizationSubscriptionsBasePlansOffersBatchUpdateResource
+    , AndroidPublisherMonetizationSubscriptionsBasePlansOffersBatchUpdate (..)
+    , newAndroidPublisherMonetizationSubscriptionsBasePlansOffersBatchUpdate
+
+    -- ** androidpublisher.monetization.subscriptions.basePlans.offers.batchUpdateStates
+    , AndroidPublisherMonetizationSubscriptionsBasePlansOffersBatchUpdateStatesResource
+    , AndroidPublisherMonetizationSubscriptionsBasePlansOffersBatchUpdateStates (..)
+    , newAndroidPublisherMonetizationSubscriptionsBasePlansOffersBatchUpdateStates
 
     -- ** androidpublisher.monetization.subscriptions.basePlans.offers.create
-    AndroidPublisherMonetizationSubscriptionsBasePlansOffersCreateResource,
-    AndroidPublisherMonetizationSubscriptionsBasePlansOffersCreate (..),
-    newAndroidPublisherMonetizationSubscriptionsBasePlansOffersCreate,
+    , AndroidPublisherMonetizationSubscriptionsBasePlansOffersCreateResource
+    , AndroidPublisherMonetizationSubscriptionsBasePlansOffersCreate (..)
+    , newAndroidPublisherMonetizationSubscriptionsBasePlansOffersCreate
 
     -- ** androidpublisher.monetization.subscriptions.basePlans.offers.deactivate
-    AndroidPublisherMonetizationSubscriptionsBasePlansOffersDeactivateResource,
-    AndroidPublisherMonetizationSubscriptionsBasePlansOffersDeactivate (..),
-    newAndroidPublisherMonetizationSubscriptionsBasePlansOffersDeactivate,
+    , AndroidPublisherMonetizationSubscriptionsBasePlansOffersDeactivateResource
+    , AndroidPublisherMonetizationSubscriptionsBasePlansOffersDeactivate (..)
+    , newAndroidPublisherMonetizationSubscriptionsBasePlansOffersDeactivate
 
     -- ** androidpublisher.monetization.subscriptions.basePlans.offers.delete
-    AndroidPublisherMonetizationSubscriptionsBasePlansOffersDeleteResource,
-    AndroidPublisherMonetizationSubscriptionsBasePlansOffersDelete (..),
-    newAndroidPublisherMonetizationSubscriptionsBasePlansOffersDelete,
+    , AndroidPublisherMonetizationSubscriptionsBasePlansOffersDeleteResource
+    , AndroidPublisherMonetizationSubscriptionsBasePlansOffersDelete (..)
+    , newAndroidPublisherMonetizationSubscriptionsBasePlansOffersDelete
 
     -- ** androidpublisher.monetization.subscriptions.basePlans.offers.get
-    AndroidPublisherMonetizationSubscriptionsBasePlansOffersGetResource,
-    AndroidPublisherMonetizationSubscriptionsBasePlansOffersGet (..),
-    newAndroidPublisherMonetizationSubscriptionsBasePlansOffersGet,
+    , AndroidPublisherMonetizationSubscriptionsBasePlansOffersGetResource
+    , AndroidPublisherMonetizationSubscriptionsBasePlansOffersGet (..)
+    , newAndroidPublisherMonetizationSubscriptionsBasePlansOffersGet
 
     -- ** androidpublisher.monetization.subscriptions.basePlans.offers.list
-    AndroidPublisherMonetizationSubscriptionsBasePlansOffersListResource,
-    AndroidPublisherMonetizationSubscriptionsBasePlansOffersList (..),
-    newAndroidPublisherMonetizationSubscriptionsBasePlansOffersList,
+    , AndroidPublisherMonetizationSubscriptionsBasePlansOffersListResource
+    , AndroidPublisherMonetizationSubscriptionsBasePlansOffersList (..)
+    , newAndroidPublisherMonetizationSubscriptionsBasePlansOffersList
 
     -- ** androidpublisher.monetization.subscriptions.basePlans.offers.patch
-    AndroidPublisherMonetizationSubscriptionsBasePlansOffersPatchResource,
-    AndroidPublisherMonetizationSubscriptionsBasePlansOffersPatch (..),
-    newAndroidPublisherMonetizationSubscriptionsBasePlansOffersPatch,
+    , AndroidPublisherMonetizationSubscriptionsBasePlansOffersPatchResource
+    , AndroidPublisherMonetizationSubscriptionsBasePlansOffersPatch (..)
+    , newAndroidPublisherMonetizationSubscriptionsBasePlansOffersPatch
+
+    -- ** androidpublisher.monetization.subscriptions.batchGet
+    , AndroidPublisherMonetizationSubscriptionsBatchGetResource
+    , AndroidPublisherMonetizationSubscriptionsBatchGet (..)
+    , newAndroidPublisherMonetizationSubscriptionsBatchGet
+
+    -- ** androidpublisher.monetization.subscriptions.batchUpdate
+    , AndroidPublisherMonetizationSubscriptionsBatchUpdateResource
+    , AndroidPublisherMonetizationSubscriptionsBatchUpdate (..)
+    , newAndroidPublisherMonetizationSubscriptionsBatchUpdate
 
     -- ** androidpublisher.monetization.subscriptions.create
-    AndroidPublisherMonetizationSubscriptionsCreateResource,
-    AndroidPublisherMonetizationSubscriptionsCreate (..),
-    newAndroidPublisherMonetizationSubscriptionsCreate,
+    , AndroidPublisherMonetizationSubscriptionsCreateResource
+    , AndroidPublisherMonetizationSubscriptionsCreate (..)
+    , newAndroidPublisherMonetizationSubscriptionsCreate
 
     -- ** androidpublisher.monetization.subscriptions.delete
-    AndroidPublisherMonetizationSubscriptionsDeleteResource,
-    AndroidPublisherMonetizationSubscriptionsDelete (..),
-    newAndroidPublisherMonetizationSubscriptionsDelete,
+    , AndroidPublisherMonetizationSubscriptionsDeleteResource
+    , AndroidPublisherMonetizationSubscriptionsDelete (..)
+    , newAndroidPublisherMonetizationSubscriptionsDelete
 
     -- ** androidpublisher.monetization.subscriptions.get
-    AndroidPublisherMonetizationSubscriptionsGetResource,
-    AndroidPublisherMonetizationSubscriptionsGet (..),
-    newAndroidPublisherMonetizationSubscriptionsGet,
+    , AndroidPublisherMonetizationSubscriptionsGetResource
+    , AndroidPublisherMonetizationSubscriptionsGet (..)
+    , newAndroidPublisherMonetizationSubscriptionsGet
 
     -- ** androidpublisher.monetization.subscriptions.list
-    AndroidPublisherMonetizationSubscriptionsListResource,
-    AndroidPublisherMonetizationSubscriptionsList (..),
-    newAndroidPublisherMonetizationSubscriptionsList,
+    , AndroidPublisherMonetizationSubscriptionsListResource
+    , AndroidPublisherMonetizationSubscriptionsList (..)
+    , newAndroidPublisherMonetizationSubscriptionsList
 
     -- ** androidpublisher.monetization.subscriptions.patch
-    AndroidPublisherMonetizationSubscriptionsPatchResource,
-    AndroidPublisherMonetizationSubscriptionsPatch (..),
-    newAndroidPublisherMonetizationSubscriptionsPatch,
+    , AndroidPublisherMonetizationSubscriptionsPatchResource
+    , AndroidPublisherMonetizationSubscriptionsPatch (..)
+    , newAndroidPublisherMonetizationSubscriptionsPatch
 
     -- ** androidpublisher.orders.refund
-    AndroidPublisherOrdersRefundResource,
-    AndroidPublisherOrdersRefund (..),
-    newAndroidPublisherOrdersRefund,
+    , AndroidPublisherOrdersRefundResource
+    , AndroidPublisherOrdersRefund (..)
+    , newAndroidPublisherOrdersRefund
 
     -- ** androidpublisher.purchases.products.acknowledge
-    AndroidPublisherPurchasesProductsAcknowledgeResource,
-    AndroidPublisherPurchasesProductsAcknowledge (..),
-    newAndroidPublisherPurchasesProductsAcknowledge,
+    , AndroidPublisherPurchasesProductsAcknowledgeResource
+    , AndroidPublisherPurchasesProductsAcknowledge (..)
+    , newAndroidPublisherPurchasesProductsAcknowledge
 
     -- ** androidpublisher.purchases.products.consume
-    AndroidPublisherPurchasesProductsConsumeResource,
-    AndroidPublisherPurchasesProductsConsume (..),
-    newAndroidPublisherPurchasesProductsConsume,
+    , AndroidPublisherPurchasesProductsConsumeResource
+    , AndroidPublisherPurchasesProductsConsume (..)
+    , newAndroidPublisherPurchasesProductsConsume
 
     -- ** androidpublisher.purchases.products.get
-    AndroidPublisherPurchasesProductsGetResource,
-    AndroidPublisherPurchasesProductsGet (..),
-    newAndroidPublisherPurchasesProductsGet,
+    , AndroidPublisherPurchasesProductsGetResource
+    , AndroidPublisherPurchasesProductsGet (..)
+    , newAndroidPublisherPurchasesProductsGet
 
     -- ** androidpublisher.purchases.subscriptions.acknowledge
-    AndroidPublisherPurchasesSubscriptionsAcknowledgeResource,
-    AndroidPublisherPurchasesSubscriptionsAcknowledge (..),
-    newAndroidPublisherPurchasesSubscriptionsAcknowledge,
+    , AndroidPublisherPurchasesSubscriptionsAcknowledgeResource
+    , AndroidPublisherPurchasesSubscriptionsAcknowledge (..)
+    , newAndroidPublisherPurchasesSubscriptionsAcknowledge
 
     -- ** androidpublisher.purchases.subscriptions.cancel
-    AndroidPublisherPurchasesSubscriptionsCancelResource,
-    AndroidPublisherPurchasesSubscriptionsCancel (..),
-    newAndroidPublisherPurchasesSubscriptionsCancel,
+    , AndroidPublisherPurchasesSubscriptionsCancelResource
+    , AndroidPublisherPurchasesSubscriptionsCancel (..)
+    , newAndroidPublisherPurchasesSubscriptionsCancel
 
     -- ** androidpublisher.purchases.subscriptions.defer
-    AndroidPublisherPurchasesSubscriptionsDeferResource,
-    AndroidPublisherPurchasesSubscriptionsDefer (..),
-    newAndroidPublisherPurchasesSubscriptionsDefer,
+    , AndroidPublisherPurchasesSubscriptionsDeferResource
+    , AndroidPublisherPurchasesSubscriptionsDefer (..)
+    , newAndroidPublisherPurchasesSubscriptionsDefer
 
     -- ** androidpublisher.purchases.subscriptions.get
-    AndroidPublisherPurchasesSubscriptionsGetResource,
-    AndroidPublisherPurchasesSubscriptionsGet (..),
-    newAndroidPublisherPurchasesSubscriptionsGet,
+    , AndroidPublisherPurchasesSubscriptionsGetResource
+    , AndroidPublisherPurchasesSubscriptionsGet (..)
+    , newAndroidPublisherPurchasesSubscriptionsGet
 
     -- ** androidpublisher.purchases.subscriptions.refund
-    AndroidPublisherPurchasesSubscriptionsRefundResource,
-    AndroidPublisherPurchasesSubscriptionsRefund (..),
-    newAndroidPublisherPurchasesSubscriptionsRefund,
+    , AndroidPublisherPurchasesSubscriptionsRefundResource
+    , AndroidPublisherPurchasesSubscriptionsRefund (..)
+    , newAndroidPublisherPurchasesSubscriptionsRefund
 
     -- ** androidpublisher.purchases.subscriptions.revoke
-    AndroidPublisherPurchasesSubscriptionsRevokeResource,
-    AndroidPublisherPurchasesSubscriptionsRevoke (..),
-    newAndroidPublisherPurchasesSubscriptionsRevoke,
+    , AndroidPublisherPurchasesSubscriptionsRevokeResource
+    , AndroidPublisherPurchasesSubscriptionsRevoke (..)
+    , newAndroidPublisherPurchasesSubscriptionsRevoke
 
     -- ** androidpublisher.purchases.subscriptionsv2.get
-    AndroidPublisherPurchasesSubscriptionsv2GetResource,
-    AndroidPublisherPurchasesSubscriptionsv2Get (..),
-    newAndroidPublisherPurchasesSubscriptionsv2Get,
+    , AndroidPublisherPurchasesSubscriptionsv2GetResource
+    , AndroidPublisherPurchasesSubscriptionsv2Get (..)
+    , newAndroidPublisherPurchasesSubscriptionsv2Get
+
+    -- ** androidpublisher.purchases.subscriptionsv2.revoke
+    , AndroidPublisherPurchasesSubscriptionsv2RevokeResource
+    , AndroidPublisherPurchasesSubscriptionsv2Revoke (..)
+    , newAndroidPublisherPurchasesSubscriptionsv2Revoke
 
     -- ** androidpublisher.purchases.voidedpurchases.list
-    AndroidPublisherPurchasesVoidedpurchasesListResource,
-    AndroidPublisherPurchasesVoidedpurchasesList (..),
-    newAndroidPublisherPurchasesVoidedpurchasesList,
+    , AndroidPublisherPurchasesVoidedpurchasesListResource
+    , AndroidPublisherPurchasesVoidedpurchasesList (..)
+    , newAndroidPublisherPurchasesVoidedpurchasesList
 
     -- ** androidpublisher.reviews.get
-    AndroidPublisherReviewsGetResource,
-    AndroidPublisherReviewsGet (..),
-    newAndroidPublisherReviewsGet,
+    , AndroidPublisherReviewsGetResource
+    , AndroidPublisherReviewsGet (..)
+    , newAndroidPublisherReviewsGet
 
     -- ** androidpublisher.reviews.list
-    AndroidPublisherReviewsListResource,
-    AndroidPublisherReviewsList (..),
-    newAndroidPublisherReviewsList,
+    , AndroidPublisherReviewsListResource
+    , AndroidPublisherReviewsList (..)
+    , newAndroidPublisherReviewsList
 
     -- ** androidpublisher.reviews.reply
-    AndroidPublisherReviewsReplyResource,
-    AndroidPublisherReviewsReply (..),
-    newAndroidPublisherReviewsReply,
+    , AndroidPublisherReviewsReplyResource
+    , AndroidPublisherReviewsReply (..)
+    , newAndroidPublisherReviewsReply
 
     -- ** androidpublisher.systemapks.variants.create
-    AndroidPublisherSystemapksVariantsCreateResource,
-    AndroidPublisherSystemapksVariantsCreate (..),
-    newAndroidPublisherSystemapksVariantsCreate,
+    , AndroidPublisherSystemapksVariantsCreateResource
+    , AndroidPublisherSystemapksVariantsCreate (..)
+    , newAndroidPublisherSystemapksVariantsCreate
 
     -- ** androidpublisher.systemapks.variants.download
-    AndroidPublisherSystemapksVariantsDownloadResource,
-    AndroidPublisherSystemapksVariantsDownload (..),
-    newAndroidPublisherSystemapksVariantsDownload,
+    , AndroidPublisherSystemapksVariantsDownloadResource
+    , AndroidPublisherSystemapksVariantsDownload (..)
+    , newAndroidPublisherSystemapksVariantsDownload
 
     -- ** androidpublisher.systemapks.variants.get
-    AndroidPublisherSystemapksVariantsGetResource,
-    AndroidPublisherSystemapksVariantsGet (..),
-    newAndroidPublisherSystemapksVariantsGet,
+    , AndroidPublisherSystemapksVariantsGetResource
+    , AndroidPublisherSystemapksVariantsGet (..)
+    , newAndroidPublisherSystemapksVariantsGet
 
     -- ** androidpublisher.systemapks.variants.list
-    AndroidPublisherSystemapksVariantsListResource,
-    AndroidPublisherSystemapksVariantsList (..),
-    newAndroidPublisherSystemapksVariantsList,
+    , AndroidPublisherSystemapksVariantsListResource
+    , AndroidPublisherSystemapksVariantsList (..)
+    , newAndroidPublisherSystemapksVariantsList
 
     -- ** androidpublisher.users.create
-    AndroidPublisherUsersCreateResource,
-    AndroidPublisherUsersCreate (..),
-    newAndroidPublisherUsersCreate,
+    , AndroidPublisherUsersCreateResource
+    , AndroidPublisherUsersCreate (..)
+    , newAndroidPublisherUsersCreate
 
     -- ** androidpublisher.users.delete
-    AndroidPublisherUsersDeleteResource,
-    AndroidPublisherUsersDelete (..),
-    newAndroidPublisherUsersDelete,
+    , AndroidPublisherUsersDeleteResource
+    , AndroidPublisherUsersDelete (..)
+    , newAndroidPublisherUsersDelete
 
     -- ** androidpublisher.users.list
-    AndroidPublisherUsersListResource,
-    AndroidPublisherUsersList (..),
-    newAndroidPublisherUsersList,
+    , AndroidPublisherUsersListResource
+    , AndroidPublisherUsersList (..)
+    , newAndroidPublisherUsersList
 
     -- ** androidpublisher.users.patch
-    AndroidPublisherUsersPatchResource,
-    AndroidPublisherUsersPatch (..),
-    newAndroidPublisherUsersPatch,
+    , AndroidPublisherUsersPatchResource
+    , AndroidPublisherUsersPatch (..)
+    , newAndroidPublisherUsersPatch
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
+
+    -- ** Abi
+    , Abi (..)
+    , newAbi
+
+    -- ** Abi_Alias
+    , Abi_Alias (..)
+
+    -- ** AbiTargeting
+    , AbiTargeting (..)
+    , newAbiTargeting
 
     -- ** AcquisitionTargetingRule
-    AcquisitionTargetingRule (..),
-    newAcquisitionTargetingRule,
+    , AcquisitionTargetingRule (..)
+    , newAcquisitionTargetingRule
 
     -- ** ActivateBasePlanRequest
-    ActivateBasePlanRequest (..),
-    newActivateBasePlanRequest,
+    , ActivateBasePlanRequest (..)
+    , newActivateBasePlanRequest
+
+    -- ** ActivateBasePlanRequest_LatencyTolerance
+    , ActivateBasePlanRequest_LatencyTolerance (..)
 
     -- ** ActivateSubscriptionOfferRequest
-    ActivateSubscriptionOfferRequest (..),
-    newActivateSubscriptionOfferRequest,
+    , ActivateSubscriptionOfferRequest (..)
+    , newActivateSubscriptionOfferRequest
+
+    -- ** ActivateSubscriptionOfferRequest_LatencyTolerance
+    , ActivateSubscriptionOfferRequest_LatencyTolerance (..)
+
+    -- ** AddTargetingRequest
+    , AddTargetingRequest (..)
+    , newAddTargetingRequest
+
+    -- ** AddTargetingResponse
+    , AddTargetingResponse (..)
+    , newAddTargetingResponse
+
+    -- ** AllUsers
+    , AllUsers (..)
+    , newAllUsers
+
+    -- ** AndroidSdks
+    , AndroidSdks (..)
+    , newAndroidSdks
 
     -- ** Apk
-    Apk (..),
-    newApk,
+    , Apk (..)
+    , newApk
 
     -- ** ApkBinary
-    ApkBinary (..),
-    newApkBinary,
+    , ApkBinary (..)
+    , newApkBinary
+
+    -- ** ApkDescription
+    , ApkDescription (..)
+    , newApkDescription
+
+    -- ** ApkSet
+    , ApkSet (..)
+    , newApkSet
+
+    -- ** ApkTargeting
+    , ApkTargeting (..)
+    , newApkTargeting
 
     -- ** ApksAddExternallyHostedRequest
-    ApksAddExternallyHostedRequest (..),
-    newApksAddExternallyHostedRequest,
+    , ApksAddExternallyHostedRequest (..)
+    , newApksAddExternallyHostedRequest
 
     -- ** ApksAddExternallyHostedResponse
-    ApksAddExternallyHostedResponse (..),
-    newApksAddExternallyHostedResponse,
+    , ApksAddExternallyHostedResponse (..)
+    , newApksAddExternallyHostedResponse
 
     -- ** ApksListResponse
-    ApksListResponse (..),
-    newApksListResponse,
+    , ApksListResponse (..)
+    , newApksListResponse
 
     -- ** AppDetails
-    AppDetails (..),
-    newAppDetails,
+    , AppDetails (..)
+    , newAppDetails
 
     -- ** AppEdit
-    AppEdit (..),
-    newAppEdit,
+    , AppEdit (..)
+    , newAppEdit
+
+    -- ** AppRecoveryAction
+    , AppRecoveryAction (..)
+    , newAppRecoveryAction
+
+    -- ** AppRecoveryAction_Status
+    , AppRecoveryAction_Status (..)
+
+    -- ** AppVersionList
+    , AppVersionList (..)
+    , newAppVersionList
+
+    -- ** AppVersionRange
+    , AppVersionRange (..)
+    , newAppVersionRange
 
     -- ** ArchiveSubscriptionRequest
-    ArchiveSubscriptionRequest (..),
-    newArchiveSubscriptionRequest,
+    , ArchiveSubscriptionRequest (..)
+    , newArchiveSubscriptionRequest
+
+    -- ** AssetModuleMetadata
+    , AssetModuleMetadata (..)
+    , newAssetModuleMetadata
+
+    -- ** AssetModuleMetadata_DeliveryType
+    , AssetModuleMetadata_DeliveryType (..)
+
+    -- ** AssetSliceSet
+    , AssetSliceSet (..)
+    , newAssetSliceSet
 
     -- ** AutoRenewingBasePlanType
-    AutoRenewingBasePlanType (..),
-    newAutoRenewingBasePlanType,
+    , AutoRenewingBasePlanType (..)
+    , newAutoRenewingBasePlanType
 
     -- ** AutoRenewingBasePlanType_ProrationMode
-    AutoRenewingBasePlanType_ProrationMode (..),
+    , AutoRenewingBasePlanType_ProrationMode (..)
 
     -- ** AutoRenewingBasePlanType_ResubscribeState
-    AutoRenewingBasePlanType_ResubscribeState (..),
+    , AutoRenewingBasePlanType_ResubscribeState (..)
 
     -- ** AutoRenewingPlan
-    AutoRenewingPlan (..),
-    newAutoRenewingPlan,
+    , AutoRenewingPlan (..)
+    , newAutoRenewingPlan
 
     -- ** BasePlan
-    BasePlan (..),
-    newBasePlan,
+    , BasePlan (..)
+    , newBasePlan
 
     -- ** BasePlan_State
-    BasePlan_State (..),
+    , BasePlan_State (..)
+
+    -- ** BatchGetSubscriptionOffersRequest
+    , BatchGetSubscriptionOffersRequest (..)
+    , newBatchGetSubscriptionOffersRequest
+
+    -- ** BatchGetSubscriptionOffersResponse
+    , BatchGetSubscriptionOffersResponse (..)
+    , newBatchGetSubscriptionOffersResponse
+
+    -- ** BatchGetSubscriptionsResponse
+    , BatchGetSubscriptionsResponse (..)
+    , newBatchGetSubscriptionsResponse
+
+    -- ** BatchMigrateBasePlanPricesRequest
+    , BatchMigrateBasePlanPricesRequest (..)
+    , newBatchMigrateBasePlanPricesRequest
+
+    -- ** BatchMigrateBasePlanPricesResponse
+    , BatchMigrateBasePlanPricesResponse (..)
+    , newBatchMigrateBasePlanPricesResponse
+
+    -- ** BatchUpdateBasePlanStatesRequest
+    , BatchUpdateBasePlanStatesRequest (..)
+    , newBatchUpdateBasePlanStatesRequest
+
+    -- ** BatchUpdateBasePlanStatesResponse
+    , BatchUpdateBasePlanStatesResponse (..)
+    , newBatchUpdateBasePlanStatesResponse
+
+    -- ** BatchUpdateSubscriptionOfferStatesRequest
+    , BatchUpdateSubscriptionOfferStatesRequest (..)
+    , newBatchUpdateSubscriptionOfferStatesRequest
+
+    -- ** BatchUpdateSubscriptionOfferStatesResponse
+    , BatchUpdateSubscriptionOfferStatesResponse (..)
+    , newBatchUpdateSubscriptionOfferStatesResponse
+
+    -- ** BatchUpdateSubscriptionOffersRequest
+    , BatchUpdateSubscriptionOffersRequest (..)
+    , newBatchUpdateSubscriptionOffersRequest
+
+    -- ** BatchUpdateSubscriptionOffersResponse
+    , BatchUpdateSubscriptionOffersResponse (..)
+    , newBatchUpdateSubscriptionOffersResponse
+
+    -- ** BatchUpdateSubscriptionsRequest
+    , BatchUpdateSubscriptionsRequest (..)
+    , newBatchUpdateSubscriptionsRequest
+
+    -- ** BatchUpdateSubscriptionsResponse
+    , BatchUpdateSubscriptionsResponse (..)
+    , newBatchUpdateSubscriptionsResponse
 
     -- ** Bundle
-    Bundle (..),
-    newBundle,
+    , Bundle (..)
+    , newBundle
 
     -- ** BundlesListResponse
-    BundlesListResponse (..),
-    newBundlesListResponse,
+    , BundlesListResponse (..)
+    , newBundlesListResponse
+
+    -- ** CancelAppRecoveryRequest
+    , CancelAppRecoveryRequest (..)
+    , newCancelAppRecoveryRequest
+
+    -- ** CancelAppRecoveryResponse
+    , CancelAppRecoveryResponse (..)
+    , newCancelAppRecoveryResponse
 
     -- ** CancelSurveyResult
-    CancelSurveyResult (..),
-    newCancelSurveyResult,
+    , CancelSurveyResult (..)
+    , newCancelSurveyResult
 
     -- ** CancelSurveyResult_Reason
-    CancelSurveyResult_Reason (..),
+    , CancelSurveyResult_Reason (..)
 
     -- ** CanceledStateContext
-    CanceledStateContext (..),
-    newCanceledStateContext,
+    , CanceledStateContext (..)
+    , newCanceledStateContext
 
     -- ** Comment
-    Comment (..),
-    newComment,
+    , Comment (..)
+    , newComment
 
     -- ** ConvertRegionPricesRequest
-    ConvertRegionPricesRequest (..),
-    newConvertRegionPricesRequest,
+    , ConvertRegionPricesRequest (..)
+    , newConvertRegionPricesRequest
 
     -- ** ConvertRegionPricesResponse
-    ConvertRegionPricesResponse (..),
-    newConvertRegionPricesResponse,
+    , ConvertRegionPricesResponse (..)
+    , newConvertRegionPricesResponse
 
     -- ** ConvertRegionPricesResponse_ConvertedRegionPrices
-    ConvertRegionPricesResponse_ConvertedRegionPrices (..),
-    newConvertRegionPricesResponse_ConvertedRegionPrices,
+    , ConvertRegionPricesResponse_ConvertedRegionPrices (..)
+    , newConvertRegionPricesResponse_ConvertedRegionPrices
 
     -- ** ConvertedOtherRegionsPrice
-    ConvertedOtherRegionsPrice (..),
-    newConvertedOtherRegionsPrice,
+    , ConvertedOtherRegionsPrice (..)
+    , newConvertedOtherRegionsPrice
 
     -- ** ConvertedRegionPrice
-    ConvertedRegionPrice (..),
-    newConvertedRegionPrice,
+    , ConvertedRegionPrice (..)
+    , newConvertedRegionPrice
 
     -- ** CountryTargeting
-    CountryTargeting (..),
-    newCountryTargeting,
+    , CountryTargeting (..)
+    , newCountryTargeting
+
+    -- ** CreateDraftAppRecoveryRequest
+    , CreateDraftAppRecoveryRequest (..)
+    , newCreateDraftAppRecoveryRequest
 
     -- ** DeactivateBasePlanRequest
-    DeactivateBasePlanRequest (..),
-    newDeactivateBasePlanRequest,
+    , DeactivateBasePlanRequest (..)
+    , newDeactivateBasePlanRequest
+
+    -- ** DeactivateBasePlanRequest_LatencyTolerance
+    , DeactivateBasePlanRequest_LatencyTolerance (..)
 
     -- ** DeactivateSubscriptionOfferRequest
-    DeactivateSubscriptionOfferRequest (..),
-    newDeactivateSubscriptionOfferRequest,
+    , DeactivateSubscriptionOfferRequest (..)
+    , newDeactivateSubscriptionOfferRequest
+
+    -- ** DeactivateSubscriptionOfferRequest_LatencyTolerance
+    , DeactivateSubscriptionOfferRequest_LatencyTolerance (..)
+
+    -- ** DeferredItemReplacement
+    , DeferredItemReplacement (..)
+    , newDeferredItemReplacement
 
     -- ** DeobfuscationFile
-    DeobfuscationFile (..),
-    newDeobfuscationFile,
+    , DeobfuscationFile (..)
+    , newDeobfuscationFile
 
     -- ** DeobfuscationFile_SymbolType
-    DeobfuscationFile_SymbolType (..),
+    , DeobfuscationFile_SymbolType (..)
 
     -- ** DeobfuscationFilesUploadResponse
-    DeobfuscationFilesUploadResponse (..),
-    newDeobfuscationFilesUploadResponse,
+    , DeobfuscationFilesUploadResponse (..)
+    , newDeobfuscationFilesUploadResponse
+
+    -- ** DeployAppRecoveryRequest
+    , DeployAppRecoveryRequest (..)
+    , newDeployAppRecoveryRequest
+
+    -- ** DeployAppRecoveryResponse
+    , DeployAppRecoveryResponse (..)
+    , newDeployAppRecoveryResponse
 
     -- ** DeveloperComment
-    DeveloperComment (..),
-    newDeveloperComment,
+    , DeveloperComment (..)
+    , newDeveloperComment
 
     -- ** DeveloperInitiatedCancellation
-    DeveloperInitiatedCancellation (..),
-    newDeveloperInitiatedCancellation,
+    , DeveloperInitiatedCancellation (..)
+    , newDeveloperInitiatedCancellation
+
+    -- ** DeviceFeature
+    , DeviceFeature (..)
+    , newDeviceFeature
+
+    -- ** DeviceFeatureTargeting
+    , DeviceFeatureTargeting (..)
+    , newDeviceFeatureTargeting
 
     -- ** DeviceGroup
-    DeviceGroup (..),
-    newDeviceGroup,
+    , DeviceGroup (..)
+    , newDeviceGroup
 
     -- ** DeviceId
-    DeviceId (..),
-    newDeviceId,
+    , DeviceId (..)
+    , newDeviceId
 
     -- ** DeviceMetadata
-    DeviceMetadata (..),
-    newDeviceMetadata,
+    , DeviceMetadata (..)
+    , newDeviceMetadata
 
     -- ** DeviceRam
-    DeviceRam (..),
-    newDeviceRam,
+    , DeviceRam (..)
+    , newDeviceRam
 
     -- ** DeviceSelector
-    DeviceSelector (..),
-    newDeviceSelector,
+    , DeviceSelector (..)
+    , newDeviceSelector
 
     -- ** DeviceSpec
-    DeviceSpec (..),
-    newDeviceSpec,
+    , DeviceSpec (..)
+    , newDeviceSpec
 
     -- ** DeviceTier
-    DeviceTier (..),
-    newDeviceTier,
+    , DeviceTier (..)
+    , newDeviceTier
 
     -- ** DeviceTierConfig
-    DeviceTierConfig (..),
-    newDeviceTierConfig,
+    , DeviceTierConfig (..)
+    , newDeviceTierConfig
 
     -- ** DeviceTierSet
-    DeviceTierSet (..),
-    newDeviceTierSet,
+    , DeviceTierSet (..)
+    , newDeviceTierSet
 
     -- ** ExpansionFile
-    ExpansionFile (..),
-    newExpansionFile,
+    , ExpansionFile (..)
+    , newExpansionFile
 
     -- ** ExpansionFilesUploadResponse
-    ExpansionFilesUploadResponse (..),
-    newExpansionFilesUploadResponse,
+    , ExpansionFilesUploadResponse (..)
+    , newExpansionFilesUploadResponse
 
     -- ** ExternalAccountIdentifiers
-    ExternalAccountIdentifiers (..),
-    newExternalAccountIdentifiers,
+    , ExternalAccountIdentifiers (..)
+    , newExternalAccountIdentifiers
+
+    -- ** ExternalSubscription
+    , ExternalSubscription (..)
+    , newExternalSubscription
+
+    -- ** ExternalSubscription_SubscriptionType
+    , ExternalSubscription_SubscriptionType (..)
+
+    -- ** ExternalTransaction
+    , ExternalTransaction (..)
+    , newExternalTransaction
+
+    -- ** ExternalTransaction_TransactionState
+    , ExternalTransaction_TransactionState (..)
+
+    -- ** ExternalTransactionAddress
+    , ExternalTransactionAddress (..)
+    , newExternalTransactionAddress
+
+    -- ** ExternalTransactionTestPurchase
+    , ExternalTransactionTestPurchase (..)
+    , newExternalTransactionTestPurchase
 
     -- ** ExternallyHostedApk
-    ExternallyHostedApk (..),
-    newExternallyHostedApk,
+    , ExternallyHostedApk (..)
+    , newExternallyHostedApk
+
+    -- ** FullRefund
+    , FullRefund (..)
+    , newFullRefund
 
     -- ** GeneratedApksListResponse
-    GeneratedApksListResponse (..),
-    newGeneratedApksListResponse,
+    , GeneratedApksListResponse (..)
+    , newGeneratedApksListResponse
 
     -- ** GeneratedApksPerSigningKey
-    GeneratedApksPerSigningKey (..),
-    newGeneratedApksPerSigningKey,
+    , GeneratedApksPerSigningKey (..)
+    , newGeneratedApksPerSigningKey
 
     -- ** GeneratedAssetPackSlice
-    GeneratedAssetPackSlice (..),
-    newGeneratedAssetPackSlice,
+    , GeneratedAssetPackSlice (..)
+    , newGeneratedAssetPackSlice
+
+    -- ** GeneratedRecoveryApk
+    , GeneratedRecoveryApk (..)
+    , newGeneratedRecoveryApk
+
+    -- ** GeneratedRecoveryApk_RecoveryStatus
+    , GeneratedRecoveryApk_RecoveryStatus (..)
 
     -- ** GeneratedSplitApk
-    GeneratedSplitApk (..),
-    newGeneratedSplitApk,
+    , GeneratedSplitApk (..)
+    , newGeneratedSplitApk
 
     -- ** GeneratedStandaloneApk
-    GeneratedStandaloneApk (..),
-    newGeneratedStandaloneApk,
+    , GeneratedStandaloneApk (..)
+    , newGeneratedStandaloneApk
 
     -- ** GeneratedUniversalApk
-    GeneratedUniversalApk (..),
-    newGeneratedUniversalApk,
+    , GeneratedUniversalApk (..)
+    , newGeneratedUniversalApk
+
+    -- ** GetSubscriptionOfferRequest
+    , GetSubscriptionOfferRequest (..)
+    , newGetSubscriptionOfferRequest
 
     -- ** Grant
-    Grant (..),
-    newGrant,
+    , Grant (..)
+    , newGrant
 
     -- ** Grant_AppLevelPermissionsItem
-    Grant_AppLevelPermissionsItem (..),
+    , Grant_AppLevelPermissionsItem (..)
 
     -- ** Image
-    Image (..),
-    newImage,
+    , Image (..)
+    , newImage
 
     -- ** ImagesDeleteAllResponse
-    ImagesDeleteAllResponse (..),
-    newImagesDeleteAllResponse,
+    , ImagesDeleteAllResponse (..)
+    , newImagesDeleteAllResponse
 
     -- ** ImagesListResponse
-    ImagesListResponse (..),
-    newImagesListResponse,
+    , ImagesListResponse (..)
+    , newImagesListResponse
 
     -- ** ImagesUploadResponse
-    ImagesUploadResponse (..),
-    newImagesUploadResponse,
+    , ImagesUploadResponse (..)
+    , newImagesUploadResponse
 
     -- ** InAppProduct
-    InAppProduct (..),
-    newInAppProduct,
+    , InAppProduct (..)
+    , newInAppProduct
 
     -- ** InAppProduct_Listings
-    InAppProduct_Listings (..),
-    newInAppProduct_Listings,
+    , InAppProduct_Listings (..)
+    , newInAppProduct_Listings
 
     -- ** InAppProduct_Prices
-    InAppProduct_Prices (..),
-    newInAppProduct_Prices,
+    , InAppProduct_Prices (..)
+    , newInAppProduct_Prices
 
     -- ** InAppProduct_PurchaseType
-    InAppProduct_PurchaseType (..),
+    , InAppProduct_PurchaseType (..)
 
     -- ** InAppProduct_Status
-    InAppProduct_Status (..),
+    , InAppProduct_Status (..)
 
     -- ** InAppProductListing
-    InAppProductListing (..),
-    newInAppProductListing,
+    , InAppProductListing (..)
+    , newInAppProductListing
+
+    -- ** InappproductsBatchDeleteRequest
+    , InappproductsBatchDeleteRequest (..)
+    , newInappproductsBatchDeleteRequest
+
+    -- ** InappproductsBatchGetResponse
+    , InappproductsBatchGetResponse (..)
+    , newInappproductsBatchGetResponse
+
+    -- ** InappproductsBatchUpdateRequest
+    , InappproductsBatchUpdateRequest (..)
+    , newInappproductsBatchUpdateRequest
+
+    -- ** InappproductsBatchUpdateResponse
+    , InappproductsBatchUpdateResponse (..)
+    , newInappproductsBatchUpdateResponse
+
+    -- ** InappproductsDeleteRequest
+    , InappproductsDeleteRequest (..)
+    , newInappproductsDeleteRequest
+
+    -- ** InappproductsDeleteRequest_LatencyTolerance
+    , InappproductsDeleteRequest_LatencyTolerance (..)
 
     -- ** InappproductsListResponse
-    InappproductsListResponse (..),
-    newInappproductsListResponse,
+    , InappproductsListResponse (..)
+    , newInappproductsListResponse
+
+    -- ** InappproductsUpdateRequest
+    , InappproductsUpdateRequest (..)
+    , newInappproductsUpdateRequest
+
+    -- ** InappproductsUpdateRequest_LatencyTolerance
+    , InappproductsUpdateRequest_LatencyTolerance (..)
+
+    -- ** InstallmentPlan
+    , InstallmentPlan (..)
+    , newInstallmentPlan
+
+    -- ** InstallmentsBasePlanType
+    , InstallmentsBasePlanType (..)
+    , newInstallmentsBasePlanType
+
+    -- ** InstallmentsBasePlanType_ProrationMode
+    , InstallmentsBasePlanType_ProrationMode (..)
+
+    -- ** InstallmentsBasePlanType_RenewalType
+    , InstallmentsBasePlanType_RenewalType (..)
+
+    -- ** InstallmentsBasePlanType_ResubscribeState
+    , InstallmentsBasePlanType_ResubscribeState (..)
 
     -- ** InternalAppSharingArtifact
-    InternalAppSharingArtifact (..),
-    newInternalAppSharingArtifact,
+    , InternalAppSharingArtifact (..)
+    , newInternalAppSharingArtifact
 
     -- ** IntroductoryPriceInfo
-    IntroductoryPriceInfo (..),
-    newIntroductoryPriceInfo,
+    , IntroductoryPriceInfo (..)
+    , newIntroductoryPriceInfo
+
+    -- ** LanguageTargeting
+    , LanguageTargeting (..)
+    , newLanguageTargeting
+
+    -- ** ListAppRecoveriesResponse
+    , ListAppRecoveriesResponse (..)
+    , newListAppRecoveriesResponse
 
     -- ** ListDeviceTierConfigsResponse
-    ListDeviceTierConfigsResponse (..),
-    newListDeviceTierConfigsResponse,
+    , ListDeviceTierConfigsResponse (..)
+    , newListDeviceTierConfigsResponse
 
     -- ** ListSubscriptionOffersResponse
-    ListSubscriptionOffersResponse (..),
-    newListSubscriptionOffersResponse,
+    , ListSubscriptionOffersResponse (..)
+    , newListSubscriptionOffersResponse
 
     -- ** ListSubscriptionsResponse
-    ListSubscriptionsResponse (..),
-    newListSubscriptionsResponse,
+    , ListSubscriptionsResponse (..)
+    , newListSubscriptionsResponse
 
     -- ** ListUsersResponse
-    ListUsersResponse (..),
-    newListUsersResponse,
+    , ListUsersResponse (..)
+    , newListUsersResponse
 
     -- ** Listing
-    Listing (..),
-    newListing,
+    , Listing (..)
+    , newListing
 
     -- ** ListingsListResponse
-    ListingsListResponse (..),
-    newListingsListResponse,
+    , ListingsListResponse (..)
+    , newListingsListResponse
 
     -- ** LocalizedText
-    LocalizedText (..),
-    newLocalizedText,
+    , LocalizedText (..)
+    , newLocalizedText
 
     -- ** ManagedProductTaxAndComplianceSettings
-    ManagedProductTaxAndComplianceSettings (..),
-    newManagedProductTaxAndComplianceSettings,
+    , ManagedProductTaxAndComplianceSettings (..)
+    , newManagedProductTaxAndComplianceSettings
 
     -- ** ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType
-    ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType (..),
+    , ManagedProductTaxAndComplianceSettings_EeaWithdrawalRightType (..)
 
     -- ** ManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode
-    ManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode (..),
-    newManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode,
+    , ManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode (..)
+    , newManagedProductTaxAndComplianceSettings_TaxRateInfoByRegionCode
 
     -- ** MigrateBasePlanPricesRequest
-    MigrateBasePlanPricesRequest (..),
-    newMigrateBasePlanPricesRequest,
+    , MigrateBasePlanPricesRequest (..)
+    , newMigrateBasePlanPricesRequest
+
+    -- ** MigrateBasePlanPricesRequest_LatencyTolerance
+    , MigrateBasePlanPricesRequest_LatencyTolerance (..)
 
     -- ** MigrateBasePlanPricesResponse
-    MigrateBasePlanPricesResponse (..),
-    newMigrateBasePlanPricesResponse,
+    , MigrateBasePlanPricesResponse (..)
+    , newMigrateBasePlanPricesResponse
+
+    -- ** ModuleMetadata
+    , ModuleMetadata (..)
+    , newModuleMetadata
+
+    -- ** ModuleMetadata_DeliveryType
+    , ModuleMetadata_DeliveryType (..)
+
+    -- ** ModuleMetadata_ModuleType
+    , ModuleMetadata_ModuleType (..)
+
+    -- ** ModuleTargeting
+    , ModuleTargeting (..)
+    , newModuleTargeting
 
     -- ** Money
-    Money (..),
-    newMoney,
+    , Money (..)
+    , newMoney
+
+    -- ** MultiAbi
+    , MultiAbi (..)
+    , newMultiAbi
+
+    -- ** MultiAbiTargeting
+    , MultiAbiTargeting (..)
+    , newMultiAbiTargeting
 
     -- ** OfferDetails
-    OfferDetails (..),
-    newOfferDetails,
+    , OfferDetails (..)
+    , newOfferDetails
 
     -- ** OfferTag
-    OfferTag (..),
-    newOfferTag,
+    , OfferTag (..)
+    , newOfferTag
+
+    -- ** OneTimeCode
+    , OneTimeCode (..)
+    , newOneTimeCode
+
+    -- ** OneTimeExternalTransaction
+    , OneTimeExternalTransaction (..)
+    , newOneTimeExternalTransaction
+
+    -- ** OtherRecurringProduct
+    , OtherRecurringProduct (..)
+    , newOtherRecurringProduct
 
     -- ** OtherRegionsBasePlanConfig
-    OtherRegionsBasePlanConfig (..),
-    newOtherRegionsBasePlanConfig,
+    , OtherRegionsBasePlanConfig (..)
+    , newOtherRegionsBasePlanConfig
 
     -- ** OtherRegionsSubscriptionOfferConfig
-    OtherRegionsSubscriptionOfferConfig (..),
-    newOtherRegionsSubscriptionOfferConfig,
+    , OtherRegionsSubscriptionOfferConfig (..)
+    , newOtherRegionsSubscriptionOfferConfig
 
     -- ** OtherRegionsSubscriptionOfferPhaseConfig
-    OtherRegionsSubscriptionOfferPhaseConfig (..),
-    newOtherRegionsSubscriptionOfferPhaseConfig,
+    , OtherRegionsSubscriptionOfferPhaseConfig (..)
+    , newOtherRegionsSubscriptionOfferPhaseConfig
+
+    -- ** OtherRegionsSubscriptionOfferPhaseFreePriceOverride
+    , OtherRegionsSubscriptionOfferPhaseFreePriceOverride (..)
+    , newOtherRegionsSubscriptionOfferPhaseFreePriceOverride
 
     -- ** OtherRegionsSubscriptionOfferPhasePrices
-    OtherRegionsSubscriptionOfferPhasePrices (..),
-    newOtherRegionsSubscriptionOfferPhasePrices,
+    , OtherRegionsSubscriptionOfferPhasePrices (..)
+    , newOtherRegionsSubscriptionOfferPhasePrices
 
     -- ** PageInfo
-    PageInfo (..),
-    newPageInfo,
+    , PageInfo (..)
+    , newPageInfo
+
+    -- ** PartialRefund
+    , PartialRefund (..)
+    , newPartialRefund
 
     -- ** PausedStateContext
-    PausedStateContext (..),
-    newPausedStateContext,
+    , PausedStateContext (..)
+    , newPausedStateContext
+
+    -- ** PendingCancellation
+    , PendingCancellation (..)
+    , newPendingCancellation
 
     -- ** PrepaidBasePlanType
-    PrepaidBasePlanType (..),
-    newPrepaidBasePlanType,
+    , PrepaidBasePlanType (..)
+    , newPrepaidBasePlanType
 
     -- ** PrepaidBasePlanType_TimeExtension
-    PrepaidBasePlanType_TimeExtension (..),
+    , PrepaidBasePlanType_TimeExtension (..)
 
     -- ** PrepaidPlan
-    PrepaidPlan (..),
-    newPrepaidPlan,
+    , PrepaidPlan (..)
+    , newPrepaidPlan
 
     -- ** Price
-    Price (..),
-    newPrice,
+    , Price (..)
+    , newPrice
 
     -- ** ProductPurchase
-    ProductPurchase (..),
-    newProductPurchase,
+    , ProductPurchase (..)
+    , newProductPurchase
 
     -- ** ProductPurchasesAcknowledgeRequest
-    ProductPurchasesAcknowledgeRequest (..),
-    newProductPurchasesAcknowledgeRequest,
+    , ProductPurchasesAcknowledgeRequest (..)
+    , newProductPurchasesAcknowledgeRequest
+
+    -- ** RecurringExternalTransaction
+    , RecurringExternalTransaction (..)
+    , newRecurringExternalTransaction
+
+    -- ** RecurringExternalTransaction_MigratedTransactionProgram
+    , RecurringExternalTransaction_MigratedTransactionProgram (..)
+
+    -- ** RefundExternalTransactionRequest
+    , RefundExternalTransactionRequest (..)
+    , newRefundExternalTransactionRequest
 
     -- ** RegionalBasePlanConfig
-    RegionalBasePlanConfig (..),
-    newRegionalBasePlanConfig,
+    , RegionalBasePlanConfig (..)
+    , newRegionalBasePlanConfig
 
     -- ** RegionalPriceMigrationConfig
-    RegionalPriceMigrationConfig (..),
-    newRegionalPriceMigrationConfig,
+    , RegionalPriceMigrationConfig (..)
+    , newRegionalPriceMigrationConfig
+
+    -- ** RegionalPriceMigrationConfig_PriceIncreaseType
+    , RegionalPriceMigrationConfig_PriceIncreaseType (..)
 
     -- ** RegionalSubscriptionOfferConfig
-    RegionalSubscriptionOfferConfig (..),
-    newRegionalSubscriptionOfferConfig,
+    , RegionalSubscriptionOfferConfig (..)
+    , newRegionalSubscriptionOfferConfig
 
     -- ** RegionalSubscriptionOfferPhaseConfig
-    RegionalSubscriptionOfferPhaseConfig (..),
-    newRegionalSubscriptionOfferPhaseConfig,
+    , RegionalSubscriptionOfferPhaseConfig (..)
+    , newRegionalSubscriptionOfferPhaseConfig
+
+    -- ** RegionalSubscriptionOfferPhaseFreePriceOverride
+    , RegionalSubscriptionOfferPhaseFreePriceOverride (..)
+    , newRegionalSubscriptionOfferPhaseFreePriceOverride
 
     -- ** RegionalTaxRateInfo
-    RegionalTaxRateInfo (..),
-    newRegionalTaxRateInfo,
+    , RegionalTaxRateInfo (..)
+    , newRegionalTaxRateInfo
 
     -- ** RegionalTaxRateInfo_StreamingTaxType
-    RegionalTaxRateInfo_StreamingTaxType (..),
+    , RegionalTaxRateInfo_StreamingTaxType (..)
 
     -- ** RegionalTaxRateInfo_TaxTier
-    RegionalTaxRateInfo_TaxTier (..),
+    , RegionalTaxRateInfo_TaxTier (..)
+
+    -- ** Regions
+    , Regions (..)
+    , newRegions
 
     -- ** RegionsVersion
-    RegionsVersion (..),
-    newRegionsVersion,
+    , RegionsVersion (..)
+    , newRegionsVersion
+
+    -- ** RemoteInAppUpdate
+    , RemoteInAppUpdate (..)
+    , newRemoteInAppUpdate
+
+    -- ** RemoteInAppUpdateData
+    , RemoteInAppUpdateData (..)
+    , newRemoteInAppUpdateData
+
+    -- ** RemoteInAppUpdateDataPerBundle
+    , RemoteInAppUpdateDataPerBundle (..)
+    , newRemoteInAppUpdateDataPerBundle
 
     -- ** ReplacementCancellation
-    ReplacementCancellation (..),
-    newReplacementCancellation,
+    , ReplacementCancellation (..)
+    , newReplacementCancellation
+
+    -- ** RestrictedPaymentCountries
+    , RestrictedPaymentCountries (..)
+    , newRestrictedPaymentCountries
 
     -- ** Review
-    Review (..),
-    newReview,
+    , Review (..)
+    , newReview
 
     -- ** ReviewReplyResult
-    ReviewReplyResult (..),
-    newReviewReplyResult,
+    , ReviewReplyResult (..)
+    , newReviewReplyResult
 
     -- ** ReviewsListResponse
-    ReviewsListResponse (..),
-    newReviewsListResponse,
+    , ReviewsListResponse (..)
+    , newReviewsListResponse
 
     -- ** ReviewsReplyRequest
-    ReviewsReplyRequest (..),
-    newReviewsReplyRequest,
+    , ReviewsReplyRequest (..)
+    , newReviewsReplyRequest
 
     -- ** ReviewsReplyResponse
-    ReviewsReplyResponse (..),
-    newReviewsReplyResponse,
+    , ReviewsReplyResponse (..)
+    , newReviewsReplyResponse
+
+    -- ** RevocationContext
+    , RevocationContext (..)
+    , newRevocationContext
+
+    -- ** RevocationContextFullRefund
+    , RevocationContextFullRefund (..)
+    , newRevocationContextFullRefund
+
+    -- ** RevocationContextProratedRefund
+    , RevocationContextProratedRefund (..)
+    , newRevocationContextProratedRefund
+
+    -- ** RevokeSubscriptionPurchaseRequest
+    , RevokeSubscriptionPurchaseRequest (..)
+    , newRevokeSubscriptionPurchaseRequest
+
+    -- ** RevokeSubscriptionPurchaseResponse
+    , RevokeSubscriptionPurchaseResponse (..)
+    , newRevokeSubscriptionPurchaseResponse
+
+    -- ** SafetyLabelsUpdateRequest
+    , SafetyLabelsUpdateRequest (..)
+    , newSafetyLabelsUpdateRequest
+
+    -- ** SafetyLabelsUpdateResponse
+    , SafetyLabelsUpdateResponse (..)
+    , newSafetyLabelsUpdateResponse
+
+    -- ** ScreenDensity
+    , ScreenDensity (..)
+    , newScreenDensity
+
+    -- ** ScreenDensity_DensityAlias
+    , ScreenDensity_DensityAlias (..)
+
+    -- ** ScreenDensityTargeting
+    , ScreenDensityTargeting (..)
+    , newScreenDensityTargeting
+
+    -- ** SdkVersion
+    , SdkVersion (..)
+    , newSdkVersion
+
+    -- ** SdkVersionTargeting
+    , SdkVersionTargeting (..)
+    , newSdkVersionTargeting
+
+    -- ** SignupPromotion
+    , SignupPromotion (..)
+    , newSignupPromotion
+
+    -- ** SplitApkMetadata
+    , SplitApkMetadata (..)
+    , newSplitApkMetadata
+
+    -- ** SplitApkVariant
+    , SplitApkVariant (..)
+    , newSplitApkVariant
+
+    -- ** StandaloneApkMetadata
+    , StandaloneApkMetadata (..)
+    , newStandaloneApkMetadata
 
     -- ** SubscribeWithGoogleInfo
-    SubscribeWithGoogleInfo (..),
-    newSubscribeWithGoogleInfo,
+    , SubscribeWithGoogleInfo (..)
+    , newSubscribeWithGoogleInfo
 
     -- ** Subscription
-    Subscription (..),
-    newSubscription,
+    , Subscription (..)
+    , newSubscription
 
     -- ** SubscriptionCancelSurveyResult
-    SubscriptionCancelSurveyResult (..),
-    newSubscriptionCancelSurveyResult,
+    , SubscriptionCancelSurveyResult (..)
+    , newSubscriptionCancelSurveyResult
 
     -- ** SubscriptionDeferralInfo
-    SubscriptionDeferralInfo (..),
-    newSubscriptionDeferralInfo,
+    , SubscriptionDeferralInfo (..)
+    , newSubscriptionDeferralInfo
 
     -- ** SubscriptionItemPriceChangeDetails
-    SubscriptionItemPriceChangeDetails (..),
-    newSubscriptionItemPriceChangeDetails,
+    , SubscriptionItemPriceChangeDetails (..)
+    , newSubscriptionItemPriceChangeDetails
 
     -- ** SubscriptionItemPriceChangeDetails_PriceChangeMode
-    SubscriptionItemPriceChangeDetails_PriceChangeMode (..),
+    , SubscriptionItemPriceChangeDetails_PriceChangeMode (..)
 
     -- ** SubscriptionItemPriceChangeDetails_PriceChangeState
-    SubscriptionItemPriceChangeDetails_PriceChangeState (..),
+    , SubscriptionItemPriceChangeDetails_PriceChangeState (..)
 
     -- ** SubscriptionListing
-    SubscriptionListing (..),
-    newSubscriptionListing,
+    , SubscriptionListing (..)
+    , newSubscriptionListing
 
     -- ** SubscriptionOffer
-    SubscriptionOffer (..),
-    newSubscriptionOffer,
+    , SubscriptionOffer (..)
+    , newSubscriptionOffer
 
     -- ** SubscriptionOffer_State
-    SubscriptionOffer_State (..),
+    , SubscriptionOffer_State (..)
 
     -- ** SubscriptionOfferPhase
-    SubscriptionOfferPhase (..),
-    newSubscriptionOfferPhase,
+    , SubscriptionOfferPhase (..)
+    , newSubscriptionOfferPhase
 
     -- ** SubscriptionOfferTargeting
-    SubscriptionOfferTargeting (..),
-    newSubscriptionOfferTargeting,
+    , SubscriptionOfferTargeting (..)
+    , newSubscriptionOfferTargeting
 
     -- ** SubscriptionPriceChange
-    SubscriptionPriceChange (..),
-    newSubscriptionPriceChange,
+    , SubscriptionPriceChange (..)
+    , newSubscriptionPriceChange
 
     -- ** SubscriptionPurchase
-    SubscriptionPurchase (..),
-    newSubscriptionPurchase,
+    , SubscriptionPurchase (..)
+    , newSubscriptionPurchase
 
     -- ** SubscriptionPurchaseLineItem
-    SubscriptionPurchaseLineItem (..),
-    newSubscriptionPurchaseLineItem,
+    , SubscriptionPurchaseLineItem (..)
+    , newSubscriptionPurchaseLineItem
 
     -- ** SubscriptionPurchaseV2
-    SubscriptionPurchaseV2 (..),
-    newSubscriptionPurchaseV2,
+    , SubscriptionPurchaseV2 (..)
+    , newSubscriptionPurchaseV2
 
     -- ** SubscriptionPurchaseV2_AcknowledgementState
-    SubscriptionPurchaseV2_AcknowledgementState (..),
+    , SubscriptionPurchaseV2_AcknowledgementState (..)
 
     -- ** SubscriptionPurchaseV2_SubscriptionState
-    SubscriptionPurchaseV2_SubscriptionState (..),
+    , SubscriptionPurchaseV2_SubscriptionState (..)
 
     -- ** SubscriptionPurchasesAcknowledgeRequest
-    SubscriptionPurchasesAcknowledgeRequest (..),
-    newSubscriptionPurchasesAcknowledgeRequest,
+    , SubscriptionPurchasesAcknowledgeRequest (..)
+    , newSubscriptionPurchasesAcknowledgeRequest
 
     -- ** SubscriptionPurchasesDeferRequest
-    SubscriptionPurchasesDeferRequest (..),
-    newSubscriptionPurchasesDeferRequest,
+    , SubscriptionPurchasesDeferRequest (..)
+    , newSubscriptionPurchasesDeferRequest
 
     -- ** SubscriptionPurchasesDeferResponse
-    SubscriptionPurchasesDeferResponse (..),
-    newSubscriptionPurchasesDeferResponse,
+    , SubscriptionPurchasesDeferResponse (..)
+    , newSubscriptionPurchasesDeferResponse
 
     -- ** SubscriptionTaxAndComplianceSettings
-    SubscriptionTaxAndComplianceSettings (..),
-    newSubscriptionTaxAndComplianceSettings,
+    , SubscriptionTaxAndComplianceSettings (..)
+    , newSubscriptionTaxAndComplianceSettings
 
     -- ** SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType
-    SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType (..),
+    , SubscriptionTaxAndComplianceSettings_EeaWithdrawalRightType (..)
 
     -- ** SubscriptionTaxAndComplianceSettings_TaxRateInfoByRegionCode
-    SubscriptionTaxAndComplianceSettings_TaxRateInfoByRegionCode (..),
-    newSubscriptionTaxAndComplianceSettings_TaxRateInfoByRegionCode,
+    , SubscriptionTaxAndComplianceSettings_TaxRateInfoByRegionCode (..)
+    , newSubscriptionTaxAndComplianceSettings_TaxRateInfoByRegionCode
+
+    -- ** SystemApkOptions
+    , SystemApkOptions (..)
+    , newSystemApkOptions
 
     -- ** SystemApksListResponse
-    SystemApksListResponse (..),
-    newSystemApksListResponse,
+    , SystemApksListResponse (..)
+    , newSystemApksListResponse
 
     -- ** SystemFeature
-    SystemFeature (..),
-    newSystemFeature,
+    , SystemFeature (..)
+    , newSystemFeature
 
     -- ** SystemInitiatedCancellation
-    SystemInitiatedCancellation (..),
-    newSystemInitiatedCancellation,
+    , SystemInitiatedCancellation (..)
+    , newSystemInitiatedCancellation
+
+    -- ** SystemOnChip
+    , SystemOnChip (..)
+    , newSystemOnChip
+
+    -- ** Targeting
+    , Targeting (..)
+    , newTargeting
+
+    -- ** TargetingInfo
+    , TargetingInfo (..)
+    , newTargetingInfo
 
     -- ** TargetingRuleScope
-    TargetingRuleScope (..),
-    newTargetingRuleScope,
+    , TargetingRuleScope (..)
+    , newTargetingRuleScope
+
+    -- ** TargetingRuleScopeAnySubscriptionInApp
+    , TargetingRuleScopeAnySubscriptionInApp (..)
+    , newTargetingRuleScopeAnySubscriptionInApp
+
+    -- ** TargetingRuleScopeThisSubscription
+    , TargetingRuleScopeThisSubscription (..)
+    , newTargetingRuleScopeThisSubscription
+
+    -- ** TargetingUpdate
+    , TargetingUpdate (..)
+    , newTargetingUpdate
 
     -- ** TestPurchase
-    TestPurchase (..),
-    newTestPurchase,
+    , TestPurchase (..)
+    , newTestPurchase
 
     -- ** Testers
-    Testers (..),
-    newTesters,
+    , Testers (..)
+    , newTesters
+
+    -- ** TextureCompressionFormat
+    , TextureCompressionFormat (..)
+    , newTextureCompressionFormat
+
+    -- ** TextureCompressionFormat_Alias
+    , TextureCompressionFormat_Alias (..)
+
+    -- ** TextureCompressionFormatTargeting
+    , TextureCompressionFormatTargeting (..)
+    , newTextureCompressionFormatTargeting
 
     -- ** Timestamp
-    Timestamp (..),
-    newTimestamp,
+    , Timestamp (..)
+    , newTimestamp
 
     -- ** TokenPagination
-    TokenPagination (..),
-    newTokenPagination,
+    , TokenPagination (..)
+    , newTokenPagination
 
     -- ** Track
-    Track (..),
-    newTrack,
+    , Track (..)
+    , newTrack
+
+    -- ** TrackConfig
+    , TrackConfig (..)
+    , newTrackConfig
+
+    -- ** TrackConfig_FormFactor
+    , TrackConfig_FormFactor (..)
+
+    -- ** TrackConfig_Type
+    , TrackConfig_Type (..)
 
     -- ** TrackCountryAvailability
-    TrackCountryAvailability (..),
-    newTrackCountryAvailability,
+    , TrackCountryAvailability (..)
+    , newTrackCountryAvailability
 
     -- ** TrackRelease
-    TrackRelease (..),
-    newTrackRelease,
+    , TrackRelease (..)
+    , newTrackRelease
 
     -- ** TrackRelease_Status
-    TrackRelease_Status (..),
+    , TrackRelease_Status (..)
 
     -- ** TrackTargetedCountry
-    TrackTargetedCountry (..),
-    newTrackTargetedCountry,
+    , TrackTargetedCountry (..)
+    , newTrackTargetedCountry
 
     -- ** TracksListResponse
-    TracksListResponse (..),
-    newTracksListResponse,
+    , TracksListResponse (..)
+    , newTracksListResponse
+
+    -- ** UpdateBasePlanStateRequest
+    , UpdateBasePlanStateRequest (..)
+    , newUpdateBasePlanStateRequest
+
+    -- ** UpdateSubscriptionOfferRequest
+    , UpdateSubscriptionOfferRequest (..)
+    , newUpdateSubscriptionOfferRequest
+
+    -- ** UpdateSubscriptionOfferRequest_LatencyTolerance
+    , UpdateSubscriptionOfferRequest_LatencyTolerance (..)
+
+    -- ** UpdateSubscriptionOfferStateRequest
+    , UpdateSubscriptionOfferStateRequest (..)
+    , newUpdateSubscriptionOfferStateRequest
+
+    -- ** UpdateSubscriptionRequest
+    , UpdateSubscriptionRequest (..)
+    , newUpdateSubscriptionRequest
+
+    -- ** UpdateSubscriptionRequest_LatencyTolerance
+    , UpdateSubscriptionRequest_LatencyTolerance (..)
 
     -- ** UpgradeTargetingRule
-    UpgradeTargetingRule (..),
-    newUpgradeTargetingRule,
+    , UpgradeTargetingRule (..)
+    , newUpgradeTargetingRule
 
     -- ** User
-    User (..),
-    newUser,
+    , User (..)
+    , newUser
 
     -- ** User_AccessState
-    User_AccessState (..),
+    , User_AccessState (..)
 
     -- ** User_DeveloperAccountPermissionsItem
-    User_DeveloperAccountPermissionsItem (..),
+    , User_DeveloperAccountPermissionsItem (..)
 
     -- ** UserComment
-    UserComment (..),
-    newUserComment,
+    , UserComment (..)
+    , newUserComment
+
+    -- ** UserCountriesTargeting
+    , UserCountriesTargeting (..)
+    , newUserCountriesTargeting
 
     -- ** UserCountrySet
-    UserCountrySet (..),
-    newUserCountrySet,
+    , UserCountrySet (..)
+    , newUserCountrySet
 
     -- ** UserInitiatedCancellation
-    UserInitiatedCancellation (..),
-    newUserInitiatedCancellation,
+    , UserInitiatedCancellation (..)
+    , newUserInitiatedCancellation
 
     -- ** UsesPermission
-    UsesPermission (..),
-    newUsesPermission,
+    , UsesPermission (..)
+    , newUsesPermission
+
+    -- ** VanityCode
+    , VanityCode (..)
+    , newVanityCode
 
     -- ** Variant
-    Variant (..),
-    newVariant,
+    , Variant (..)
+    , newVariant
+
+    -- ** VariantTargeting
+    , VariantTargeting (..)
+    , newVariantTargeting
 
     -- ** VoidedPurchase
-    VoidedPurchase (..),
-    newVoidedPurchase,
+    , VoidedPurchase (..)
+    , newVoidedPurchase
 
     -- ** VoidedPurchasesListResponse
-    VoidedPurchasesListResponse (..),
-    newVoidedPurchasesListResponse,
+    , VoidedPurchasesListResponse (..)
+    , newVoidedPurchasesListResponse
 
     -- ** EditsDeobfuscationfilesUploadDeobfuscationFileType
-    EditsDeobfuscationfilesUploadDeobfuscationFileType (..),
+    , EditsDeobfuscationfilesUploadDeobfuscationFileType (..)
 
     -- ** EditsExpansionfilesGetExpansionFileType
-    EditsExpansionfilesGetExpansionFileType (..),
+    , EditsExpansionfilesGetExpansionFileType (..)
 
     -- ** EditsExpansionfilesPatchExpansionFileType
-    EditsExpansionfilesPatchExpansionFileType (..),
+    , EditsExpansionfilesPatchExpansionFileType (..)
 
     -- ** EditsExpansionfilesUpdateExpansionFileType
-    EditsExpansionfilesUpdateExpansionFileType (..),
+    , EditsExpansionfilesUpdateExpansionFileType (..)
 
     -- ** EditsExpansionfilesUploadExpansionFileType
-    EditsExpansionfilesUploadExpansionFileType (..),
+    , EditsExpansionfilesUploadExpansionFileType (..)
 
     -- ** EditsImagesDeleteImageType
-    EditsImagesDeleteImageType (..),
+    , EditsImagesDeleteImageType (..)
 
     -- ** EditsImagesDeleteallImageType
-    EditsImagesDeleteallImageType (..),
+    , EditsImagesDeleteallImageType (..)
 
     -- ** EditsImagesListImageType
-    EditsImagesListImageType (..),
+    , EditsImagesListImageType (..)
 
     -- ** EditsImagesUploadImageType
-    EditsImagesUploadImageType (..),
-  )
-where
+    , EditsImagesUploadImageType (..)
 
+    -- ** InappproductsDeleteLatencyTolerance
+    , InappproductsDeleteLatencyTolerance (..)
+
+    -- ** InappproductsPatchLatencyTolerance
+    , InappproductsPatchLatencyTolerance (..)
+
+    -- ** InappproductsUpdateLatencyTolerance
+    , InappproductsUpdateLatencyTolerance (..)
+
+    -- ** MonetizationSubscriptionsBasePlansOffersPatchLatencyTolerance
+    , MonetizationSubscriptionsBasePlansOffersPatchLatencyTolerance (..)
+
+    -- ** MonetizationSubscriptionsPatchLatencyTolerance
+    , MonetizationSubscriptionsPatchLatencyTolerance (..)
+    ) where
+
+import Gogol.AndroidPublisher.Applications.DataSafety
 import Gogol.AndroidPublisher.Applications.DeviceTierConfigs.Create
 import Gogol.AndroidPublisher.Applications.DeviceTierConfigs.Get
 import Gogol.AndroidPublisher.Applications.DeviceTierConfigs.List
+import Gogol.AndroidPublisher.Apprecovery.AddTargeting
+import Gogol.AndroidPublisher.Apprecovery.Cancel
+import Gogol.AndroidPublisher.Apprecovery.Create
+import Gogol.AndroidPublisher.Apprecovery.Deploy
+import Gogol.AndroidPublisher.Apprecovery.List
 import Gogol.AndroidPublisher.Edits.Apks.Addexternallyhosted
 import Gogol.AndroidPublisher.Edits.Apks.List
 import Gogol.AndroidPublisher.Edits.Apks.Upload
@@ -1190,16 +1803,23 @@ import Gogol.AndroidPublisher.Edits.Listings.Update
 import Gogol.AndroidPublisher.Edits.Testers.Get
 import Gogol.AndroidPublisher.Edits.Testers.Patch
 import Gogol.AndroidPublisher.Edits.Testers.Update
+import Gogol.AndroidPublisher.Edits.Tracks.Create
 import Gogol.AndroidPublisher.Edits.Tracks.Get
 import Gogol.AndroidPublisher.Edits.Tracks.List
 import Gogol.AndroidPublisher.Edits.Tracks.Patch
 import Gogol.AndroidPublisher.Edits.Tracks.Update
 import Gogol.AndroidPublisher.Edits.Validate
+import Gogol.AndroidPublisher.Externaltransactions.Createexternaltransaction
+import Gogol.AndroidPublisher.Externaltransactions.Getexternaltransaction
+import Gogol.AndroidPublisher.Externaltransactions.Refundexternaltransaction
 import Gogol.AndroidPublisher.Generatedapks.Download
 import Gogol.AndroidPublisher.Generatedapks.List
 import Gogol.AndroidPublisher.Grants.Create
 import Gogol.AndroidPublisher.Grants.Delete
 import Gogol.AndroidPublisher.Grants.Patch
+import Gogol.AndroidPublisher.Inappproducts.BatchDelete
+import Gogol.AndroidPublisher.Inappproducts.BatchGet
+import Gogol.AndroidPublisher.Inappproducts.BatchUpdate
 import Gogol.AndroidPublisher.Inappproducts.Delete
 import Gogol.AndroidPublisher.Inappproducts.Get
 import Gogol.AndroidPublisher.Inappproducts.Insert
@@ -1211,16 +1831,23 @@ import Gogol.AndroidPublisher.Internalappsharingartifacts.Uploadbundle
 import Gogol.AndroidPublisher.Monetization.ConvertRegionPrices
 import Gogol.AndroidPublisher.Monetization.Subscriptions.Archive
 import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Activate
+import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.BatchMigratePrices
+import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.BatchUpdateStates
 import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Deactivate
 import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Delete
 import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.MigratePrices
 import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Activate
+import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.BatchGet
+import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.BatchUpdate
+import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.BatchUpdateStates
 import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Create
 import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Deactivate
 import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Delete
 import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Get
 import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.List
 import Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Patch
+import Gogol.AndroidPublisher.Monetization.Subscriptions.BatchGet
+import Gogol.AndroidPublisher.Monetization.Subscriptions.BatchUpdate
 import Gogol.AndroidPublisher.Monetization.Subscriptions.Create
 import Gogol.AndroidPublisher.Monetization.Subscriptions.Delete
 import Gogol.AndroidPublisher.Monetization.Subscriptions.Get
@@ -1237,6 +1864,7 @@ import Gogol.AndroidPublisher.Purchases.Subscriptions.Get
 import Gogol.AndroidPublisher.Purchases.Subscriptions.Refund
 import Gogol.AndroidPublisher.Purchases.Subscriptions.Revoke
 import Gogol.AndroidPublisher.Purchases.Subscriptionsv2.Get
+import Gogol.AndroidPublisher.Purchases.Subscriptionsv2.Revoke
 import Gogol.AndroidPublisher.Purchases.Voidedpurchases.List
 import Gogol.AndroidPublisher.Reviews.Get
 import Gogol.AndroidPublisher.Reviews.List

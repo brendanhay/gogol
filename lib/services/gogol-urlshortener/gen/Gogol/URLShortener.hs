@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,58 +31,58 @@
 --
 -- /See:/ <https://developers.google.com/url-shortener/v1/getting_started URL Shortener API Reference>
 module Gogol.URLShortener
-  ( -- * Configuration
-    uRLShortenerService,
+    (
+    -- * Configuration
+      uRLShortenerService
 
     -- * OAuth Scopes
-    Urlshortener'FullControl,
+    , Urlshortener'FullControl
 
     -- * Resources
 
     -- ** urlshortener.url.get
-    URLShortenerUrlGetResource,
-    URLShortenerUrlGet (..),
-    newURLShortenerUrlGet,
+    , URLShortenerUrlGetResource
+    , URLShortenerUrlGet (..)
+    , newURLShortenerUrlGet
 
     -- ** urlshortener.url.insert
-    URLShortenerUrlInsertResource,
-    URLShortenerUrlInsert (..),
-    newURLShortenerUrlInsert,
+    , URLShortenerUrlInsertResource
+    , URLShortenerUrlInsert (..)
+    , newURLShortenerUrlInsert
 
     -- ** urlshortener.url.list
-    URLShortenerUrlListResource,
-    URLShortenerUrlList (..),
-    newURLShortenerUrlList,
+    , URLShortenerUrlListResource
+    , URLShortenerUrlList (..)
+    , newURLShortenerUrlList
 
     -- * Types
 
     -- ** AnalyticsSnapshot
-    AnalyticsSnapshot (..),
-    newAnalyticsSnapshot,
+    , AnalyticsSnapshot (..)
+    , newAnalyticsSnapshot
 
     -- ** AnalyticsSummary
-    AnalyticsSummary (..),
-    newAnalyticsSummary,
+    , AnalyticsSummary (..)
+    , newAnalyticsSummary
 
     -- ** StringCount
-    StringCount (..),
-    newStringCount,
+    , StringCount (..)
+    , newStringCount
 
     -- ** Url
-    Url (..),
-    newUrl,
+    , Url (..)
+    , newUrl
 
     -- ** UrlHistory
-    UrlHistory (..),
-    newUrlHistory,
+    , UrlHistory (..)
+    , newUrlHistory
 
     -- ** UrlGetProjection
-    UrlGetProjection (..),
+    , UrlGetProjection (..)
 
     -- ** UrlListProjection
-    UrlListProjection (..),
-  )
-where
+    , UrlListProjection (..)
+    ) where
 
 import Gogol.URLShortener.Types
 import Gogol.URLShortener.Url.Get

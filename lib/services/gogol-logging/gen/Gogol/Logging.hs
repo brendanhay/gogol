@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,1394 +31,1745 @@
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference>
 module Gogol.Logging
-  ( -- * Configuration
-    loggingService,
+    (
+    -- * Configuration
+      loggingService
 
     -- * OAuth Scopes
-    CloudPlatform'FullControl,
-    CloudPlatform'ReadOnly,
-    Logging'Admin,
-    Logging'Read,
-    Logging'Write,
+    , CloudPlatform'FullControl
+    , CloudPlatform'ReadOnly
+    , Logging'Admin
+    , Logging'Read
+    , Logging'Write
 
     -- * Resources
 
     -- ** logging.billingAccounts.exclusions.create
-    LoggingBillingAccountsExclusionsCreateResource,
-    LoggingBillingAccountsExclusionsCreate (..),
-    newLoggingBillingAccountsExclusionsCreate,
+    , LoggingBillingAccountsExclusionsCreateResource
+    , LoggingBillingAccountsExclusionsCreate (..)
+    , newLoggingBillingAccountsExclusionsCreate
 
     -- ** logging.billingAccounts.exclusions.delete
-    LoggingBillingAccountsExclusionsDeleteResource,
-    LoggingBillingAccountsExclusionsDelete (..),
-    newLoggingBillingAccountsExclusionsDelete,
+    , LoggingBillingAccountsExclusionsDeleteResource
+    , LoggingBillingAccountsExclusionsDelete (..)
+    , newLoggingBillingAccountsExclusionsDelete
 
     -- ** logging.billingAccounts.exclusions.get
-    LoggingBillingAccountsExclusionsGetResource,
-    LoggingBillingAccountsExclusionsGet (..),
-    newLoggingBillingAccountsExclusionsGet,
+    , LoggingBillingAccountsExclusionsGetResource
+    , LoggingBillingAccountsExclusionsGet (..)
+    , newLoggingBillingAccountsExclusionsGet
 
     -- ** logging.billingAccounts.exclusions.list
-    LoggingBillingAccountsExclusionsListResource,
-    LoggingBillingAccountsExclusionsList (..),
-    newLoggingBillingAccountsExclusionsList,
+    , LoggingBillingAccountsExclusionsListResource
+    , LoggingBillingAccountsExclusionsList (..)
+    , newLoggingBillingAccountsExclusionsList
 
     -- ** logging.billingAccounts.exclusions.patch
-    LoggingBillingAccountsExclusionsPatchResource,
-    LoggingBillingAccountsExclusionsPatch (..),
-    newLoggingBillingAccountsExclusionsPatch,
+    , LoggingBillingAccountsExclusionsPatchResource
+    , LoggingBillingAccountsExclusionsPatch (..)
+    , newLoggingBillingAccountsExclusionsPatch
 
     -- ** logging.billingAccounts.getCmekSettings
-    LoggingBillingAccountsGetCmekSettingsResource,
-    LoggingBillingAccountsGetCmekSettings (..),
-    newLoggingBillingAccountsGetCmekSettings,
+    , LoggingBillingAccountsGetCmekSettingsResource
+    , LoggingBillingAccountsGetCmekSettings (..)
+    , newLoggingBillingAccountsGetCmekSettings
 
     -- ** logging.billingAccounts.getSettings
-    LoggingBillingAccountsGetSettingsResource,
-    LoggingBillingAccountsGetSettings (..),
-    newLoggingBillingAccountsGetSettings,
+    , LoggingBillingAccountsGetSettingsResource
+    , LoggingBillingAccountsGetSettings (..)
+    , newLoggingBillingAccountsGetSettings
 
     -- ** logging.billingAccounts.locations.buckets.create
-    LoggingBillingAccountsLocationsBucketsCreateResource,
-    LoggingBillingAccountsLocationsBucketsCreate (..),
-    newLoggingBillingAccountsLocationsBucketsCreate,
+    , LoggingBillingAccountsLocationsBucketsCreateResource
+    , LoggingBillingAccountsLocationsBucketsCreate (..)
+    , newLoggingBillingAccountsLocationsBucketsCreate
 
     -- ** logging.billingAccounts.locations.buckets.createAsync
-    LoggingBillingAccountsLocationsBucketsCreateAsyncResource,
-    LoggingBillingAccountsLocationsBucketsCreateAsync (..),
-    newLoggingBillingAccountsLocationsBucketsCreateAsync,
+    , LoggingBillingAccountsLocationsBucketsCreateAsyncResource
+    , LoggingBillingAccountsLocationsBucketsCreateAsync (..)
+    , newLoggingBillingAccountsLocationsBucketsCreateAsync
 
     -- ** logging.billingAccounts.locations.buckets.delete
-    LoggingBillingAccountsLocationsBucketsDeleteResource,
-    LoggingBillingAccountsLocationsBucketsDelete (..),
-    newLoggingBillingAccountsLocationsBucketsDelete,
+    , LoggingBillingAccountsLocationsBucketsDeleteResource
+    , LoggingBillingAccountsLocationsBucketsDelete (..)
+    , newLoggingBillingAccountsLocationsBucketsDelete
 
     -- ** logging.billingAccounts.locations.buckets.get
-    LoggingBillingAccountsLocationsBucketsGetResource,
-    LoggingBillingAccountsLocationsBucketsGet (..),
-    newLoggingBillingAccountsLocationsBucketsGet,
+    , LoggingBillingAccountsLocationsBucketsGetResource
+    , LoggingBillingAccountsLocationsBucketsGet (..)
+    , newLoggingBillingAccountsLocationsBucketsGet
 
     -- ** logging.billingAccounts.locations.buckets.links.create
-    LoggingBillingAccountsLocationsBucketsLinksCreateResource,
-    LoggingBillingAccountsLocationsBucketsLinksCreate (..),
-    newLoggingBillingAccountsLocationsBucketsLinksCreate,
+    , LoggingBillingAccountsLocationsBucketsLinksCreateResource
+    , LoggingBillingAccountsLocationsBucketsLinksCreate (..)
+    , newLoggingBillingAccountsLocationsBucketsLinksCreate
 
     -- ** logging.billingAccounts.locations.buckets.links.delete
-    LoggingBillingAccountsLocationsBucketsLinksDeleteResource,
-    LoggingBillingAccountsLocationsBucketsLinksDelete (..),
-    newLoggingBillingAccountsLocationsBucketsLinksDelete,
+    , LoggingBillingAccountsLocationsBucketsLinksDeleteResource
+    , LoggingBillingAccountsLocationsBucketsLinksDelete (..)
+    , newLoggingBillingAccountsLocationsBucketsLinksDelete
 
     -- ** logging.billingAccounts.locations.buckets.links.get
-    LoggingBillingAccountsLocationsBucketsLinksGetResource,
-    LoggingBillingAccountsLocationsBucketsLinksGet (..),
-    newLoggingBillingAccountsLocationsBucketsLinksGet,
+    , LoggingBillingAccountsLocationsBucketsLinksGetResource
+    , LoggingBillingAccountsLocationsBucketsLinksGet (..)
+    , newLoggingBillingAccountsLocationsBucketsLinksGet
 
     -- ** logging.billingAccounts.locations.buckets.links.list
-    LoggingBillingAccountsLocationsBucketsLinksListResource,
-    LoggingBillingAccountsLocationsBucketsLinksList (..),
-    newLoggingBillingAccountsLocationsBucketsLinksList,
+    , LoggingBillingAccountsLocationsBucketsLinksListResource
+    , LoggingBillingAccountsLocationsBucketsLinksList (..)
+    , newLoggingBillingAccountsLocationsBucketsLinksList
 
     -- ** logging.billingAccounts.locations.buckets.list
-    LoggingBillingAccountsLocationsBucketsListResource,
-    LoggingBillingAccountsLocationsBucketsList (..),
-    newLoggingBillingAccountsLocationsBucketsList,
+    , LoggingBillingAccountsLocationsBucketsListResource
+    , LoggingBillingAccountsLocationsBucketsList (..)
+    , newLoggingBillingAccountsLocationsBucketsList
 
     -- ** logging.billingAccounts.locations.buckets.patch
-    LoggingBillingAccountsLocationsBucketsPatchResource,
-    LoggingBillingAccountsLocationsBucketsPatch (..),
-    newLoggingBillingAccountsLocationsBucketsPatch,
+    , LoggingBillingAccountsLocationsBucketsPatchResource
+    , LoggingBillingAccountsLocationsBucketsPatch (..)
+    , newLoggingBillingAccountsLocationsBucketsPatch
 
     -- ** logging.billingAccounts.locations.buckets.undelete
-    LoggingBillingAccountsLocationsBucketsUndeleteResource,
-    LoggingBillingAccountsLocationsBucketsUndelete (..),
-    newLoggingBillingAccountsLocationsBucketsUndelete,
+    , LoggingBillingAccountsLocationsBucketsUndeleteResource
+    , LoggingBillingAccountsLocationsBucketsUndelete (..)
+    , newLoggingBillingAccountsLocationsBucketsUndelete
 
     -- ** logging.billingAccounts.locations.buckets.updateAsync
-    LoggingBillingAccountsLocationsBucketsUpdateAsyncResource,
-    LoggingBillingAccountsLocationsBucketsUpdateAsync (..),
-    newLoggingBillingAccountsLocationsBucketsUpdateAsync,
+    , LoggingBillingAccountsLocationsBucketsUpdateAsyncResource
+    , LoggingBillingAccountsLocationsBucketsUpdateAsync (..)
+    , newLoggingBillingAccountsLocationsBucketsUpdateAsync
 
     -- ** logging.billingAccounts.locations.buckets.views.create
-    LoggingBillingAccountsLocationsBucketsViewsCreateResource,
-    LoggingBillingAccountsLocationsBucketsViewsCreate (..),
-    newLoggingBillingAccountsLocationsBucketsViewsCreate,
+    , LoggingBillingAccountsLocationsBucketsViewsCreateResource
+    , LoggingBillingAccountsLocationsBucketsViewsCreate (..)
+    , newLoggingBillingAccountsLocationsBucketsViewsCreate
 
     -- ** logging.billingAccounts.locations.buckets.views.delete
-    LoggingBillingAccountsLocationsBucketsViewsDeleteResource,
-    LoggingBillingAccountsLocationsBucketsViewsDelete (..),
-    newLoggingBillingAccountsLocationsBucketsViewsDelete,
+    , LoggingBillingAccountsLocationsBucketsViewsDeleteResource
+    , LoggingBillingAccountsLocationsBucketsViewsDelete (..)
+    , newLoggingBillingAccountsLocationsBucketsViewsDelete
 
     -- ** logging.billingAccounts.locations.buckets.views.get
-    LoggingBillingAccountsLocationsBucketsViewsGetResource,
-    LoggingBillingAccountsLocationsBucketsViewsGet (..),
-    newLoggingBillingAccountsLocationsBucketsViewsGet,
+    , LoggingBillingAccountsLocationsBucketsViewsGetResource
+    , LoggingBillingAccountsLocationsBucketsViewsGet (..)
+    , newLoggingBillingAccountsLocationsBucketsViewsGet
 
     -- ** logging.billingAccounts.locations.buckets.views.list
-    LoggingBillingAccountsLocationsBucketsViewsListResource,
-    LoggingBillingAccountsLocationsBucketsViewsList (..),
-    newLoggingBillingAccountsLocationsBucketsViewsList,
+    , LoggingBillingAccountsLocationsBucketsViewsListResource
+    , LoggingBillingAccountsLocationsBucketsViewsList (..)
+    , newLoggingBillingAccountsLocationsBucketsViewsList
 
     -- ** logging.billingAccounts.locations.buckets.views.logs.list
-    LoggingBillingAccountsLocationsBucketsViewsLogsListResource,
-    LoggingBillingAccountsLocationsBucketsViewsLogsList (..),
-    newLoggingBillingAccountsLocationsBucketsViewsLogsList,
+    , LoggingBillingAccountsLocationsBucketsViewsLogsListResource
+    , LoggingBillingAccountsLocationsBucketsViewsLogsList (..)
+    , newLoggingBillingAccountsLocationsBucketsViewsLogsList
 
     -- ** logging.billingAccounts.locations.buckets.views.patch
-    LoggingBillingAccountsLocationsBucketsViewsPatchResource,
-    LoggingBillingAccountsLocationsBucketsViewsPatch (..),
-    newLoggingBillingAccountsLocationsBucketsViewsPatch,
+    , LoggingBillingAccountsLocationsBucketsViewsPatchResource
+    , LoggingBillingAccountsLocationsBucketsViewsPatch (..)
+    , newLoggingBillingAccountsLocationsBucketsViewsPatch
 
     -- ** logging.billingAccounts.locations.get
-    LoggingBillingAccountsLocationsGetResource,
-    LoggingBillingAccountsLocationsGet (..),
-    newLoggingBillingAccountsLocationsGet,
+    , LoggingBillingAccountsLocationsGetResource
+    , LoggingBillingAccountsLocationsGet (..)
+    , newLoggingBillingAccountsLocationsGet
 
     -- ** logging.billingAccounts.locations.list
-    LoggingBillingAccountsLocationsListResource,
-    LoggingBillingAccountsLocationsList (..),
-    newLoggingBillingAccountsLocationsList,
+    , LoggingBillingAccountsLocationsListResource
+    , LoggingBillingAccountsLocationsList (..)
+    , newLoggingBillingAccountsLocationsList
 
     -- ** logging.billingAccounts.locations.operations.cancel
-    LoggingBillingAccountsLocationsOperationsCancelResource,
-    LoggingBillingAccountsLocationsOperationsCancel (..),
-    newLoggingBillingAccountsLocationsOperationsCancel,
+    , LoggingBillingAccountsLocationsOperationsCancelResource
+    , LoggingBillingAccountsLocationsOperationsCancel (..)
+    , newLoggingBillingAccountsLocationsOperationsCancel
 
     -- ** logging.billingAccounts.locations.operations.get
-    LoggingBillingAccountsLocationsOperationsGetResource,
-    LoggingBillingAccountsLocationsOperationsGet (..),
-    newLoggingBillingAccountsLocationsOperationsGet,
+    , LoggingBillingAccountsLocationsOperationsGetResource
+    , LoggingBillingAccountsLocationsOperationsGet (..)
+    , newLoggingBillingAccountsLocationsOperationsGet
 
     -- ** logging.billingAccounts.locations.operations.list
-    LoggingBillingAccountsLocationsOperationsListResource,
-    LoggingBillingAccountsLocationsOperationsList (..),
-    newLoggingBillingAccountsLocationsOperationsList,
+    , LoggingBillingAccountsLocationsOperationsListResource
+    , LoggingBillingAccountsLocationsOperationsList (..)
+    , newLoggingBillingAccountsLocationsOperationsList
+
+    -- ** logging.billingAccounts.locations.recentQueries.list
+    , LoggingBillingAccountsLocationsRecentQueriesListResource
+    , LoggingBillingAccountsLocationsRecentQueriesList (..)
+    , newLoggingBillingAccountsLocationsRecentQueriesList
+
+    -- ** logging.billingAccounts.locations.savedQueries.create
+    , LoggingBillingAccountsLocationsSavedQueriesCreateResource
+    , LoggingBillingAccountsLocationsSavedQueriesCreate (..)
+    , newLoggingBillingAccountsLocationsSavedQueriesCreate
+
+    -- ** logging.billingAccounts.locations.savedQueries.delete
+    , LoggingBillingAccountsLocationsSavedQueriesDeleteResource
+    , LoggingBillingAccountsLocationsSavedQueriesDelete (..)
+    , newLoggingBillingAccountsLocationsSavedQueriesDelete
+
+    -- ** logging.billingAccounts.locations.savedQueries.get
+    , LoggingBillingAccountsLocationsSavedQueriesGetResource
+    , LoggingBillingAccountsLocationsSavedQueriesGet (..)
+    , newLoggingBillingAccountsLocationsSavedQueriesGet
+
+    -- ** logging.billingAccounts.locations.savedQueries.list
+    , LoggingBillingAccountsLocationsSavedQueriesListResource
+    , LoggingBillingAccountsLocationsSavedQueriesList (..)
+    , newLoggingBillingAccountsLocationsSavedQueriesList
+
+    -- ** logging.billingAccounts.locations.savedQueries.patch
+    , LoggingBillingAccountsLocationsSavedQueriesPatchResource
+    , LoggingBillingAccountsLocationsSavedQueriesPatch (..)
+    , newLoggingBillingAccountsLocationsSavedQueriesPatch
 
     -- ** logging.billingAccounts.logs.delete
-    LoggingBillingAccountsLogsDeleteResource,
-    LoggingBillingAccountsLogsDelete (..),
-    newLoggingBillingAccountsLogsDelete,
+    , LoggingBillingAccountsLogsDeleteResource
+    , LoggingBillingAccountsLogsDelete (..)
+    , newLoggingBillingAccountsLogsDelete
 
     -- ** logging.billingAccounts.logs.list
-    LoggingBillingAccountsLogsListResource,
-    LoggingBillingAccountsLogsList (..),
-    newLoggingBillingAccountsLogsList,
+    , LoggingBillingAccountsLogsListResource
+    , LoggingBillingAccountsLogsList (..)
+    , newLoggingBillingAccountsLogsList
 
     -- ** logging.billingAccounts.sinks.create
-    LoggingBillingAccountsSinksCreateResource,
-    LoggingBillingAccountsSinksCreate (..),
-    newLoggingBillingAccountsSinksCreate,
+    , LoggingBillingAccountsSinksCreateResource
+    , LoggingBillingAccountsSinksCreate (..)
+    , newLoggingBillingAccountsSinksCreate
 
     -- ** logging.billingAccounts.sinks.delete
-    LoggingBillingAccountsSinksDeleteResource,
-    LoggingBillingAccountsSinksDelete (..),
-    newLoggingBillingAccountsSinksDelete,
+    , LoggingBillingAccountsSinksDeleteResource
+    , LoggingBillingAccountsSinksDelete (..)
+    , newLoggingBillingAccountsSinksDelete
 
     -- ** logging.billingAccounts.sinks.get
-    LoggingBillingAccountsSinksGetResource,
-    LoggingBillingAccountsSinksGet (..),
-    newLoggingBillingAccountsSinksGet,
+    , LoggingBillingAccountsSinksGetResource
+    , LoggingBillingAccountsSinksGet (..)
+    , newLoggingBillingAccountsSinksGet
 
     -- ** logging.billingAccounts.sinks.list
-    LoggingBillingAccountsSinksListResource,
-    LoggingBillingAccountsSinksList (..),
-    newLoggingBillingAccountsSinksList,
+    , LoggingBillingAccountsSinksListResource
+    , LoggingBillingAccountsSinksList (..)
+    , newLoggingBillingAccountsSinksList
 
     -- ** logging.billingAccounts.sinks.patch
-    LoggingBillingAccountsSinksPatchResource,
-    LoggingBillingAccountsSinksPatch (..),
-    newLoggingBillingAccountsSinksPatch,
+    , LoggingBillingAccountsSinksPatchResource
+    , LoggingBillingAccountsSinksPatch (..)
+    , newLoggingBillingAccountsSinksPatch
 
     -- ** logging.billingAccounts.sinks.update
-    LoggingBillingAccountsSinksUpdateResource,
-    LoggingBillingAccountsSinksUpdate (..),
-    newLoggingBillingAccountsSinksUpdate,
+    , LoggingBillingAccountsSinksUpdateResource
+    , LoggingBillingAccountsSinksUpdate (..)
+    , newLoggingBillingAccountsSinksUpdate
 
     -- ** logging.entries.copy
-    LoggingEntriesCopyResource,
-    LoggingEntriesCopy (..),
-    newLoggingEntriesCopy,
+    , LoggingEntriesCopyResource
+    , LoggingEntriesCopy (..)
+    , newLoggingEntriesCopy
 
     -- ** logging.entries.list
-    LoggingEntriesListResource,
-    LoggingEntriesList (..),
-    newLoggingEntriesList,
+    , LoggingEntriesListResource
+    , LoggingEntriesList (..)
+    , newLoggingEntriesList
 
     -- ** logging.entries.tail
-    LoggingEntriesTailResource,
-    LoggingEntriesTail (..),
-    newLoggingEntriesTail,
+    , LoggingEntriesTailResource
+    , LoggingEntriesTail (..)
+    , newLoggingEntriesTail
 
     -- ** logging.entries.write
-    LoggingEntriesWriteResource,
-    LoggingEntriesWrite (..),
-    newLoggingEntriesWrite,
+    , LoggingEntriesWriteResource
+    , LoggingEntriesWrite (..)
+    , newLoggingEntriesWrite
 
     -- ** logging.exclusions.create
-    LoggingExclusionsCreateResource,
-    LoggingExclusionsCreate (..),
-    newLoggingExclusionsCreate,
+    , LoggingExclusionsCreateResource
+    , LoggingExclusionsCreate (..)
+    , newLoggingExclusionsCreate
 
     -- ** logging.exclusions.delete
-    LoggingExclusionsDeleteResource,
-    LoggingExclusionsDelete (..),
-    newLoggingExclusionsDelete,
+    , LoggingExclusionsDeleteResource
+    , LoggingExclusionsDelete (..)
+    , newLoggingExclusionsDelete
 
     -- ** logging.exclusions.get
-    LoggingExclusionsGetResource,
-    LoggingExclusionsGet (..),
-    newLoggingExclusionsGet,
+    , LoggingExclusionsGetResource
+    , LoggingExclusionsGet (..)
+    , newLoggingExclusionsGet
 
     -- ** logging.exclusions.list
-    LoggingExclusionsListResource,
-    LoggingExclusionsList (..),
-    newLoggingExclusionsList,
+    , LoggingExclusionsListResource
+    , LoggingExclusionsList (..)
+    , newLoggingExclusionsList
 
     -- ** logging.exclusions.patch
-    LoggingExclusionsPatchResource,
-    LoggingExclusionsPatch (..),
-    newLoggingExclusionsPatch,
+    , LoggingExclusionsPatchResource
+    , LoggingExclusionsPatch (..)
+    , newLoggingExclusionsPatch
 
     -- ** logging.folders.exclusions.create
-    LoggingFoldersExclusionsCreateResource,
-    LoggingFoldersExclusionsCreate (..),
-    newLoggingFoldersExclusionsCreate,
+    , LoggingFoldersExclusionsCreateResource
+    , LoggingFoldersExclusionsCreate (..)
+    , newLoggingFoldersExclusionsCreate
 
     -- ** logging.folders.exclusions.delete
-    LoggingFoldersExclusionsDeleteResource,
-    LoggingFoldersExclusionsDelete (..),
-    newLoggingFoldersExclusionsDelete,
+    , LoggingFoldersExclusionsDeleteResource
+    , LoggingFoldersExclusionsDelete (..)
+    , newLoggingFoldersExclusionsDelete
 
     -- ** logging.folders.exclusions.get
-    LoggingFoldersExclusionsGetResource,
-    LoggingFoldersExclusionsGet (..),
-    newLoggingFoldersExclusionsGet,
+    , LoggingFoldersExclusionsGetResource
+    , LoggingFoldersExclusionsGet (..)
+    , newLoggingFoldersExclusionsGet
 
     -- ** logging.folders.exclusions.list
-    LoggingFoldersExclusionsListResource,
-    LoggingFoldersExclusionsList (..),
-    newLoggingFoldersExclusionsList,
+    , LoggingFoldersExclusionsListResource
+    , LoggingFoldersExclusionsList (..)
+    , newLoggingFoldersExclusionsList
 
     -- ** logging.folders.exclusions.patch
-    LoggingFoldersExclusionsPatchResource,
-    LoggingFoldersExclusionsPatch (..),
-    newLoggingFoldersExclusionsPatch,
+    , LoggingFoldersExclusionsPatchResource
+    , LoggingFoldersExclusionsPatch (..)
+    , newLoggingFoldersExclusionsPatch
 
     -- ** logging.folders.getCmekSettings
-    LoggingFoldersGetCmekSettingsResource,
-    LoggingFoldersGetCmekSettings (..),
-    newLoggingFoldersGetCmekSettings,
+    , LoggingFoldersGetCmekSettingsResource
+    , LoggingFoldersGetCmekSettings (..)
+    , newLoggingFoldersGetCmekSettings
 
     -- ** logging.folders.getSettings
-    LoggingFoldersGetSettingsResource,
-    LoggingFoldersGetSettings (..),
-    newLoggingFoldersGetSettings,
+    , LoggingFoldersGetSettingsResource
+    , LoggingFoldersGetSettings (..)
+    , newLoggingFoldersGetSettings
 
     -- ** logging.folders.locations.buckets.create
-    LoggingFoldersLocationsBucketsCreateResource,
-    LoggingFoldersLocationsBucketsCreate (..),
-    newLoggingFoldersLocationsBucketsCreate,
+    , LoggingFoldersLocationsBucketsCreateResource
+    , LoggingFoldersLocationsBucketsCreate (..)
+    , newLoggingFoldersLocationsBucketsCreate
 
     -- ** logging.folders.locations.buckets.createAsync
-    LoggingFoldersLocationsBucketsCreateAsyncResource,
-    LoggingFoldersLocationsBucketsCreateAsync (..),
-    newLoggingFoldersLocationsBucketsCreateAsync,
+    , LoggingFoldersLocationsBucketsCreateAsyncResource
+    , LoggingFoldersLocationsBucketsCreateAsync (..)
+    , newLoggingFoldersLocationsBucketsCreateAsync
 
     -- ** logging.folders.locations.buckets.delete
-    LoggingFoldersLocationsBucketsDeleteResource,
-    LoggingFoldersLocationsBucketsDelete (..),
-    newLoggingFoldersLocationsBucketsDelete,
+    , LoggingFoldersLocationsBucketsDeleteResource
+    , LoggingFoldersLocationsBucketsDelete (..)
+    , newLoggingFoldersLocationsBucketsDelete
 
     -- ** logging.folders.locations.buckets.get
-    LoggingFoldersLocationsBucketsGetResource,
-    LoggingFoldersLocationsBucketsGet (..),
-    newLoggingFoldersLocationsBucketsGet,
+    , LoggingFoldersLocationsBucketsGetResource
+    , LoggingFoldersLocationsBucketsGet (..)
+    , newLoggingFoldersLocationsBucketsGet
 
     -- ** logging.folders.locations.buckets.links.create
-    LoggingFoldersLocationsBucketsLinksCreateResource,
-    LoggingFoldersLocationsBucketsLinksCreate (..),
-    newLoggingFoldersLocationsBucketsLinksCreate,
+    , LoggingFoldersLocationsBucketsLinksCreateResource
+    , LoggingFoldersLocationsBucketsLinksCreate (..)
+    , newLoggingFoldersLocationsBucketsLinksCreate
 
     -- ** logging.folders.locations.buckets.links.delete
-    LoggingFoldersLocationsBucketsLinksDeleteResource,
-    LoggingFoldersLocationsBucketsLinksDelete (..),
-    newLoggingFoldersLocationsBucketsLinksDelete,
+    , LoggingFoldersLocationsBucketsLinksDeleteResource
+    , LoggingFoldersLocationsBucketsLinksDelete (..)
+    , newLoggingFoldersLocationsBucketsLinksDelete
 
     -- ** logging.folders.locations.buckets.links.get
-    LoggingFoldersLocationsBucketsLinksGetResource,
-    LoggingFoldersLocationsBucketsLinksGet (..),
-    newLoggingFoldersLocationsBucketsLinksGet,
+    , LoggingFoldersLocationsBucketsLinksGetResource
+    , LoggingFoldersLocationsBucketsLinksGet (..)
+    , newLoggingFoldersLocationsBucketsLinksGet
 
     -- ** logging.folders.locations.buckets.links.list
-    LoggingFoldersLocationsBucketsLinksListResource,
-    LoggingFoldersLocationsBucketsLinksList (..),
-    newLoggingFoldersLocationsBucketsLinksList,
+    , LoggingFoldersLocationsBucketsLinksListResource
+    , LoggingFoldersLocationsBucketsLinksList (..)
+    , newLoggingFoldersLocationsBucketsLinksList
 
     -- ** logging.folders.locations.buckets.list
-    LoggingFoldersLocationsBucketsListResource,
-    LoggingFoldersLocationsBucketsList (..),
-    newLoggingFoldersLocationsBucketsList,
+    , LoggingFoldersLocationsBucketsListResource
+    , LoggingFoldersLocationsBucketsList (..)
+    , newLoggingFoldersLocationsBucketsList
 
     -- ** logging.folders.locations.buckets.patch
-    LoggingFoldersLocationsBucketsPatchResource,
-    LoggingFoldersLocationsBucketsPatch (..),
-    newLoggingFoldersLocationsBucketsPatch,
+    , LoggingFoldersLocationsBucketsPatchResource
+    , LoggingFoldersLocationsBucketsPatch (..)
+    , newLoggingFoldersLocationsBucketsPatch
 
     -- ** logging.folders.locations.buckets.undelete
-    LoggingFoldersLocationsBucketsUndeleteResource,
-    LoggingFoldersLocationsBucketsUndelete (..),
-    newLoggingFoldersLocationsBucketsUndelete,
+    , LoggingFoldersLocationsBucketsUndeleteResource
+    , LoggingFoldersLocationsBucketsUndelete (..)
+    , newLoggingFoldersLocationsBucketsUndelete
 
     -- ** logging.folders.locations.buckets.updateAsync
-    LoggingFoldersLocationsBucketsUpdateAsyncResource,
-    LoggingFoldersLocationsBucketsUpdateAsync (..),
-    newLoggingFoldersLocationsBucketsUpdateAsync,
+    , LoggingFoldersLocationsBucketsUpdateAsyncResource
+    , LoggingFoldersLocationsBucketsUpdateAsync (..)
+    , newLoggingFoldersLocationsBucketsUpdateAsync
 
     -- ** logging.folders.locations.buckets.views.create
-    LoggingFoldersLocationsBucketsViewsCreateResource,
-    LoggingFoldersLocationsBucketsViewsCreate (..),
-    newLoggingFoldersLocationsBucketsViewsCreate,
+    , LoggingFoldersLocationsBucketsViewsCreateResource
+    , LoggingFoldersLocationsBucketsViewsCreate (..)
+    , newLoggingFoldersLocationsBucketsViewsCreate
 
     -- ** logging.folders.locations.buckets.views.delete
-    LoggingFoldersLocationsBucketsViewsDeleteResource,
-    LoggingFoldersLocationsBucketsViewsDelete (..),
-    newLoggingFoldersLocationsBucketsViewsDelete,
+    , LoggingFoldersLocationsBucketsViewsDeleteResource
+    , LoggingFoldersLocationsBucketsViewsDelete (..)
+    , newLoggingFoldersLocationsBucketsViewsDelete
 
     -- ** logging.folders.locations.buckets.views.get
-    LoggingFoldersLocationsBucketsViewsGetResource,
-    LoggingFoldersLocationsBucketsViewsGet (..),
-    newLoggingFoldersLocationsBucketsViewsGet,
+    , LoggingFoldersLocationsBucketsViewsGetResource
+    , LoggingFoldersLocationsBucketsViewsGet (..)
+    , newLoggingFoldersLocationsBucketsViewsGet
+
+    -- ** logging.folders.locations.buckets.views.getIamPolicy
+    , LoggingFoldersLocationsBucketsViewsGetIamPolicyResource
+    , LoggingFoldersLocationsBucketsViewsGetIamPolicy (..)
+    , newLoggingFoldersLocationsBucketsViewsGetIamPolicy
 
     -- ** logging.folders.locations.buckets.views.list
-    LoggingFoldersLocationsBucketsViewsListResource,
-    LoggingFoldersLocationsBucketsViewsList (..),
-    newLoggingFoldersLocationsBucketsViewsList,
+    , LoggingFoldersLocationsBucketsViewsListResource
+    , LoggingFoldersLocationsBucketsViewsList (..)
+    , newLoggingFoldersLocationsBucketsViewsList
 
     -- ** logging.folders.locations.buckets.views.logs.list
-    LoggingFoldersLocationsBucketsViewsLogsListResource,
-    LoggingFoldersLocationsBucketsViewsLogsList (..),
-    newLoggingFoldersLocationsBucketsViewsLogsList,
+    , LoggingFoldersLocationsBucketsViewsLogsListResource
+    , LoggingFoldersLocationsBucketsViewsLogsList (..)
+    , newLoggingFoldersLocationsBucketsViewsLogsList
 
     -- ** logging.folders.locations.buckets.views.patch
-    LoggingFoldersLocationsBucketsViewsPatchResource,
-    LoggingFoldersLocationsBucketsViewsPatch (..),
-    newLoggingFoldersLocationsBucketsViewsPatch,
+    , LoggingFoldersLocationsBucketsViewsPatchResource
+    , LoggingFoldersLocationsBucketsViewsPatch (..)
+    , newLoggingFoldersLocationsBucketsViewsPatch
+
+    -- ** logging.folders.locations.buckets.views.setIamPolicy
+    , LoggingFoldersLocationsBucketsViewsSetIamPolicyResource
+    , LoggingFoldersLocationsBucketsViewsSetIamPolicy (..)
+    , newLoggingFoldersLocationsBucketsViewsSetIamPolicy
+
+    -- ** logging.folders.locations.buckets.views.testIamPermissions
+    , LoggingFoldersLocationsBucketsViewsTestIamPermissionsResource
+    , LoggingFoldersLocationsBucketsViewsTestIamPermissions (..)
+    , newLoggingFoldersLocationsBucketsViewsTestIamPermissions
 
     -- ** logging.folders.locations.get
-    LoggingFoldersLocationsGetResource,
-    LoggingFoldersLocationsGet (..),
-    newLoggingFoldersLocationsGet,
+    , LoggingFoldersLocationsGetResource
+    , LoggingFoldersLocationsGet (..)
+    , newLoggingFoldersLocationsGet
 
     -- ** logging.folders.locations.list
-    LoggingFoldersLocationsListResource,
-    LoggingFoldersLocationsList (..),
-    newLoggingFoldersLocationsList,
+    , LoggingFoldersLocationsListResource
+    , LoggingFoldersLocationsList (..)
+    , newLoggingFoldersLocationsList
+
+    -- ** logging.folders.locations.logScopes.create
+    , LoggingFoldersLocationsLogScopesCreateResource
+    , LoggingFoldersLocationsLogScopesCreate (..)
+    , newLoggingFoldersLocationsLogScopesCreate
+
+    -- ** logging.folders.locations.logScopes.delete
+    , LoggingFoldersLocationsLogScopesDeleteResource
+    , LoggingFoldersLocationsLogScopesDelete (..)
+    , newLoggingFoldersLocationsLogScopesDelete
+
+    -- ** logging.folders.locations.logScopes.get
+    , LoggingFoldersLocationsLogScopesGetResource
+    , LoggingFoldersLocationsLogScopesGet (..)
+    , newLoggingFoldersLocationsLogScopesGet
+
+    -- ** logging.folders.locations.logScopes.list
+    , LoggingFoldersLocationsLogScopesListResource
+    , LoggingFoldersLocationsLogScopesList (..)
+    , newLoggingFoldersLocationsLogScopesList
+
+    -- ** logging.folders.locations.logScopes.patch
+    , LoggingFoldersLocationsLogScopesPatchResource
+    , LoggingFoldersLocationsLogScopesPatch (..)
+    , newLoggingFoldersLocationsLogScopesPatch
 
     -- ** logging.folders.locations.operations.cancel
-    LoggingFoldersLocationsOperationsCancelResource,
-    LoggingFoldersLocationsOperationsCancel (..),
-    newLoggingFoldersLocationsOperationsCancel,
+    , LoggingFoldersLocationsOperationsCancelResource
+    , LoggingFoldersLocationsOperationsCancel (..)
+    , newLoggingFoldersLocationsOperationsCancel
 
     -- ** logging.folders.locations.operations.get
-    LoggingFoldersLocationsOperationsGetResource,
-    LoggingFoldersLocationsOperationsGet (..),
-    newLoggingFoldersLocationsOperationsGet,
+    , LoggingFoldersLocationsOperationsGetResource
+    , LoggingFoldersLocationsOperationsGet (..)
+    , newLoggingFoldersLocationsOperationsGet
 
     -- ** logging.folders.locations.operations.list
-    LoggingFoldersLocationsOperationsListResource,
-    LoggingFoldersLocationsOperationsList (..),
-    newLoggingFoldersLocationsOperationsList,
+    , LoggingFoldersLocationsOperationsListResource
+    , LoggingFoldersLocationsOperationsList (..)
+    , newLoggingFoldersLocationsOperationsList
+
+    -- ** logging.folders.locations.recentQueries.list
+    , LoggingFoldersLocationsRecentQueriesListResource
+    , LoggingFoldersLocationsRecentQueriesList (..)
+    , newLoggingFoldersLocationsRecentQueriesList
+
+    -- ** logging.folders.locations.savedQueries.create
+    , LoggingFoldersLocationsSavedQueriesCreateResource
+    , LoggingFoldersLocationsSavedQueriesCreate (..)
+    , newLoggingFoldersLocationsSavedQueriesCreate
+
+    -- ** logging.folders.locations.savedQueries.delete
+    , LoggingFoldersLocationsSavedQueriesDeleteResource
+    , LoggingFoldersLocationsSavedQueriesDelete (..)
+    , newLoggingFoldersLocationsSavedQueriesDelete
+
+    -- ** logging.folders.locations.savedQueries.get
+    , LoggingFoldersLocationsSavedQueriesGetResource
+    , LoggingFoldersLocationsSavedQueriesGet (..)
+    , newLoggingFoldersLocationsSavedQueriesGet
+
+    -- ** logging.folders.locations.savedQueries.list
+    , LoggingFoldersLocationsSavedQueriesListResource
+    , LoggingFoldersLocationsSavedQueriesList (..)
+    , newLoggingFoldersLocationsSavedQueriesList
+
+    -- ** logging.folders.locations.savedQueries.patch
+    , LoggingFoldersLocationsSavedQueriesPatchResource
+    , LoggingFoldersLocationsSavedQueriesPatch (..)
+    , newLoggingFoldersLocationsSavedQueriesPatch
 
     -- ** logging.folders.logs.delete
-    LoggingFoldersLogsDeleteResource,
-    LoggingFoldersLogsDelete (..),
-    newLoggingFoldersLogsDelete,
+    , LoggingFoldersLogsDeleteResource
+    , LoggingFoldersLogsDelete (..)
+    , newLoggingFoldersLogsDelete
 
     -- ** logging.folders.logs.list
-    LoggingFoldersLogsListResource,
-    LoggingFoldersLogsList (..),
-    newLoggingFoldersLogsList,
+    , LoggingFoldersLogsListResource
+    , LoggingFoldersLogsList (..)
+    , newLoggingFoldersLogsList
 
     -- ** logging.folders.sinks.create
-    LoggingFoldersSinksCreateResource,
-    LoggingFoldersSinksCreate (..),
-    newLoggingFoldersSinksCreate,
+    , LoggingFoldersSinksCreateResource
+    , LoggingFoldersSinksCreate (..)
+    , newLoggingFoldersSinksCreate
 
     -- ** logging.folders.sinks.delete
-    LoggingFoldersSinksDeleteResource,
-    LoggingFoldersSinksDelete (..),
-    newLoggingFoldersSinksDelete,
+    , LoggingFoldersSinksDeleteResource
+    , LoggingFoldersSinksDelete (..)
+    , newLoggingFoldersSinksDelete
 
     -- ** logging.folders.sinks.get
-    LoggingFoldersSinksGetResource,
-    LoggingFoldersSinksGet (..),
-    newLoggingFoldersSinksGet,
+    , LoggingFoldersSinksGetResource
+    , LoggingFoldersSinksGet (..)
+    , newLoggingFoldersSinksGet
 
     -- ** logging.folders.sinks.list
-    LoggingFoldersSinksListResource,
-    LoggingFoldersSinksList (..),
-    newLoggingFoldersSinksList,
+    , LoggingFoldersSinksListResource
+    , LoggingFoldersSinksList (..)
+    , newLoggingFoldersSinksList
 
     -- ** logging.folders.sinks.patch
-    LoggingFoldersSinksPatchResource,
-    LoggingFoldersSinksPatch (..),
-    newLoggingFoldersSinksPatch,
+    , LoggingFoldersSinksPatchResource
+    , LoggingFoldersSinksPatch (..)
+    , newLoggingFoldersSinksPatch
 
     -- ** logging.folders.sinks.update
-    LoggingFoldersSinksUpdateResource,
-    LoggingFoldersSinksUpdate (..),
-    newLoggingFoldersSinksUpdate,
+    , LoggingFoldersSinksUpdateResource
+    , LoggingFoldersSinksUpdate (..)
+    , newLoggingFoldersSinksUpdate
 
     -- ** logging.folders.updateSettings
-    LoggingFoldersUpdateSettingsResource,
-    LoggingFoldersUpdateSettings (..),
-    newLoggingFoldersUpdateSettings,
+    , LoggingFoldersUpdateSettingsResource
+    , LoggingFoldersUpdateSettings (..)
+    , newLoggingFoldersUpdateSettings
 
     -- ** logging.getCmekSettings
-    LoggingGetCmekSettingsResource,
-    LoggingGetCmekSettings (..),
-    newLoggingGetCmekSettings,
+    , LoggingGetCmekSettingsResource
+    , LoggingGetCmekSettings (..)
+    , newLoggingGetCmekSettings
 
     -- ** logging.getSettings
-    LoggingGetSettingsResource,
-    LoggingGetSettings (..),
-    newLoggingGetSettings,
+    , LoggingGetSettingsResource
+    , LoggingGetSettings (..)
+    , newLoggingGetSettings
 
     -- ** logging.locations.buckets.create
-    LoggingLocationsBucketsCreateResource,
-    LoggingLocationsBucketsCreate (..),
-    newLoggingLocationsBucketsCreate,
+    , LoggingLocationsBucketsCreateResource
+    , LoggingLocationsBucketsCreate (..)
+    , newLoggingLocationsBucketsCreate
 
     -- ** logging.locations.buckets.createAsync
-    LoggingLocationsBucketsCreateAsyncResource,
-    LoggingLocationsBucketsCreateAsync (..),
-    newLoggingLocationsBucketsCreateAsync,
+    , LoggingLocationsBucketsCreateAsyncResource
+    , LoggingLocationsBucketsCreateAsync (..)
+    , newLoggingLocationsBucketsCreateAsync
 
     -- ** logging.locations.buckets.delete
-    LoggingLocationsBucketsDeleteResource,
-    LoggingLocationsBucketsDelete (..),
-    newLoggingLocationsBucketsDelete,
+    , LoggingLocationsBucketsDeleteResource
+    , LoggingLocationsBucketsDelete (..)
+    , newLoggingLocationsBucketsDelete
 
     -- ** logging.locations.buckets.get
-    LoggingLocationsBucketsGetResource,
-    LoggingLocationsBucketsGet (..),
-    newLoggingLocationsBucketsGet,
+    , LoggingLocationsBucketsGetResource
+    , LoggingLocationsBucketsGet (..)
+    , newLoggingLocationsBucketsGet
 
     -- ** logging.locations.buckets.links.create
-    LoggingLocationsBucketsLinksCreateResource,
-    LoggingLocationsBucketsLinksCreate (..),
-    newLoggingLocationsBucketsLinksCreate,
+    , LoggingLocationsBucketsLinksCreateResource
+    , LoggingLocationsBucketsLinksCreate (..)
+    , newLoggingLocationsBucketsLinksCreate
 
     -- ** logging.locations.buckets.links.delete
-    LoggingLocationsBucketsLinksDeleteResource,
-    LoggingLocationsBucketsLinksDelete (..),
-    newLoggingLocationsBucketsLinksDelete,
+    , LoggingLocationsBucketsLinksDeleteResource
+    , LoggingLocationsBucketsLinksDelete (..)
+    , newLoggingLocationsBucketsLinksDelete
 
     -- ** logging.locations.buckets.links.get
-    LoggingLocationsBucketsLinksGetResource,
-    LoggingLocationsBucketsLinksGet (..),
-    newLoggingLocationsBucketsLinksGet,
+    , LoggingLocationsBucketsLinksGetResource
+    , LoggingLocationsBucketsLinksGet (..)
+    , newLoggingLocationsBucketsLinksGet
 
     -- ** logging.locations.buckets.links.list
-    LoggingLocationsBucketsLinksListResource,
-    LoggingLocationsBucketsLinksList (..),
-    newLoggingLocationsBucketsLinksList,
+    , LoggingLocationsBucketsLinksListResource
+    , LoggingLocationsBucketsLinksList (..)
+    , newLoggingLocationsBucketsLinksList
 
     -- ** logging.locations.buckets.list
-    LoggingLocationsBucketsListResource,
-    LoggingLocationsBucketsList (..),
-    newLoggingLocationsBucketsList,
+    , LoggingLocationsBucketsListResource
+    , LoggingLocationsBucketsList (..)
+    , newLoggingLocationsBucketsList
 
     -- ** logging.locations.buckets.patch
-    LoggingLocationsBucketsPatchResource,
-    LoggingLocationsBucketsPatch (..),
-    newLoggingLocationsBucketsPatch,
+    , LoggingLocationsBucketsPatchResource
+    , LoggingLocationsBucketsPatch (..)
+    , newLoggingLocationsBucketsPatch
 
     -- ** logging.locations.buckets.undelete
-    LoggingLocationsBucketsUndeleteResource,
-    LoggingLocationsBucketsUndelete (..),
-    newLoggingLocationsBucketsUndelete,
+    , LoggingLocationsBucketsUndeleteResource
+    , LoggingLocationsBucketsUndelete (..)
+    , newLoggingLocationsBucketsUndelete
 
     -- ** logging.locations.buckets.updateAsync
-    LoggingLocationsBucketsUpdateAsyncResource,
-    LoggingLocationsBucketsUpdateAsync (..),
-    newLoggingLocationsBucketsUpdateAsync,
+    , LoggingLocationsBucketsUpdateAsyncResource
+    , LoggingLocationsBucketsUpdateAsync (..)
+    , newLoggingLocationsBucketsUpdateAsync
 
     -- ** logging.locations.buckets.views.create
-    LoggingLocationsBucketsViewsCreateResource,
-    LoggingLocationsBucketsViewsCreate (..),
-    newLoggingLocationsBucketsViewsCreate,
+    , LoggingLocationsBucketsViewsCreateResource
+    , LoggingLocationsBucketsViewsCreate (..)
+    , newLoggingLocationsBucketsViewsCreate
 
     -- ** logging.locations.buckets.views.delete
-    LoggingLocationsBucketsViewsDeleteResource,
-    LoggingLocationsBucketsViewsDelete (..),
-    newLoggingLocationsBucketsViewsDelete,
+    , LoggingLocationsBucketsViewsDeleteResource
+    , LoggingLocationsBucketsViewsDelete (..)
+    , newLoggingLocationsBucketsViewsDelete
 
     -- ** logging.locations.buckets.views.get
-    LoggingLocationsBucketsViewsGetResource,
-    LoggingLocationsBucketsViewsGet (..),
-    newLoggingLocationsBucketsViewsGet,
+    , LoggingLocationsBucketsViewsGetResource
+    , LoggingLocationsBucketsViewsGet (..)
+    , newLoggingLocationsBucketsViewsGet
+
+    -- ** logging.locations.buckets.views.getIamPolicy
+    , LoggingLocationsBucketsViewsGetIamPolicyResource
+    , LoggingLocationsBucketsViewsGetIamPolicy (..)
+    , newLoggingLocationsBucketsViewsGetIamPolicy
 
     -- ** logging.locations.buckets.views.list
-    LoggingLocationsBucketsViewsListResource,
-    LoggingLocationsBucketsViewsList (..),
-    newLoggingLocationsBucketsViewsList,
+    , LoggingLocationsBucketsViewsListResource
+    , LoggingLocationsBucketsViewsList (..)
+    , newLoggingLocationsBucketsViewsList
 
     -- ** logging.locations.buckets.views.patch
-    LoggingLocationsBucketsViewsPatchResource,
-    LoggingLocationsBucketsViewsPatch (..),
-    newLoggingLocationsBucketsViewsPatch,
+    , LoggingLocationsBucketsViewsPatchResource
+    , LoggingLocationsBucketsViewsPatch (..)
+    , newLoggingLocationsBucketsViewsPatch
+
+    -- ** logging.locations.buckets.views.setIamPolicy
+    , LoggingLocationsBucketsViewsSetIamPolicyResource
+    , LoggingLocationsBucketsViewsSetIamPolicy (..)
+    , newLoggingLocationsBucketsViewsSetIamPolicy
+
+    -- ** logging.locations.buckets.views.testIamPermissions
+    , LoggingLocationsBucketsViewsTestIamPermissionsResource
+    , LoggingLocationsBucketsViewsTestIamPermissions (..)
+    , newLoggingLocationsBucketsViewsTestIamPermissions
 
     -- ** logging.locations.get
-    LoggingLocationsGetResource,
-    LoggingLocationsGet (..),
-    newLoggingLocationsGet,
+    , LoggingLocationsGetResource
+    , LoggingLocationsGet (..)
+    , newLoggingLocationsGet
 
     -- ** logging.locations.list
-    LoggingLocationsListResource,
-    LoggingLocationsList (..),
-    newLoggingLocationsList,
+    , LoggingLocationsListResource
+    , LoggingLocationsList (..)
+    , newLoggingLocationsList
 
     -- ** logging.locations.operations.cancel
-    LoggingLocationsOperationsCancelResource,
-    LoggingLocationsOperationsCancel (..),
-    newLoggingLocationsOperationsCancel,
+    , LoggingLocationsOperationsCancelResource
+    , LoggingLocationsOperationsCancel (..)
+    , newLoggingLocationsOperationsCancel
 
     -- ** logging.locations.operations.get
-    LoggingLocationsOperationsGetResource,
-    LoggingLocationsOperationsGet (..),
-    newLoggingLocationsOperationsGet,
+    , LoggingLocationsOperationsGetResource
+    , LoggingLocationsOperationsGet (..)
+    , newLoggingLocationsOperationsGet
 
     -- ** logging.locations.operations.list
-    LoggingLocationsOperationsListResource,
-    LoggingLocationsOperationsList (..),
-    newLoggingLocationsOperationsList,
+    , LoggingLocationsOperationsListResource
+    , LoggingLocationsOperationsList (..)
+    , newLoggingLocationsOperationsList
 
     -- ** logging.logs.delete
-    LoggingLogsDeleteResource,
-    LoggingLogsDelete (..),
-    newLoggingLogsDelete,
+    , LoggingLogsDeleteResource
+    , LoggingLogsDelete (..)
+    , newLoggingLogsDelete
 
     -- ** logging.logs.list
-    LoggingLogsListResource,
-    LoggingLogsList (..),
-    newLoggingLogsList,
+    , LoggingLogsListResource
+    , LoggingLogsList (..)
+    , newLoggingLogsList
 
     -- ** logging.monitoredResourceDescriptors.list
-    LoggingMonitoredResourceDescriptorsListResource,
-    LoggingMonitoredResourceDescriptorsList (..),
-    newLoggingMonitoredResourceDescriptorsList,
+    , LoggingMonitoredResourceDescriptorsListResource
+    , LoggingMonitoredResourceDescriptorsList (..)
+    , newLoggingMonitoredResourceDescriptorsList
 
     -- ** logging.organizations.exclusions.create
-    LoggingOrganizationsExclusionsCreateResource,
-    LoggingOrganizationsExclusionsCreate (..),
-    newLoggingOrganizationsExclusionsCreate,
+    , LoggingOrganizationsExclusionsCreateResource
+    , LoggingOrganizationsExclusionsCreate (..)
+    , newLoggingOrganizationsExclusionsCreate
 
     -- ** logging.organizations.exclusions.delete
-    LoggingOrganizationsExclusionsDeleteResource,
-    LoggingOrganizationsExclusionsDelete (..),
-    newLoggingOrganizationsExclusionsDelete,
+    , LoggingOrganizationsExclusionsDeleteResource
+    , LoggingOrganizationsExclusionsDelete (..)
+    , newLoggingOrganizationsExclusionsDelete
 
     -- ** logging.organizations.exclusions.get
-    LoggingOrganizationsExclusionsGetResource,
-    LoggingOrganizationsExclusionsGet (..),
-    newLoggingOrganizationsExclusionsGet,
+    , LoggingOrganizationsExclusionsGetResource
+    , LoggingOrganizationsExclusionsGet (..)
+    , newLoggingOrganizationsExclusionsGet
 
     -- ** logging.organizations.exclusions.list
-    LoggingOrganizationsExclusionsListResource,
-    LoggingOrganizationsExclusionsList (..),
-    newLoggingOrganizationsExclusionsList,
+    , LoggingOrganizationsExclusionsListResource
+    , LoggingOrganizationsExclusionsList (..)
+    , newLoggingOrganizationsExclusionsList
 
     -- ** logging.organizations.exclusions.patch
-    LoggingOrganizationsExclusionsPatchResource,
-    LoggingOrganizationsExclusionsPatch (..),
-    newLoggingOrganizationsExclusionsPatch,
+    , LoggingOrganizationsExclusionsPatchResource
+    , LoggingOrganizationsExclusionsPatch (..)
+    , newLoggingOrganizationsExclusionsPatch
 
     -- ** logging.organizations.getCmekSettings
-    LoggingOrganizationsGetCmekSettingsResource,
-    LoggingOrganizationsGetCmekSettings (..),
-    newLoggingOrganizationsGetCmekSettings,
+    , LoggingOrganizationsGetCmekSettingsResource
+    , LoggingOrganizationsGetCmekSettings (..)
+    , newLoggingOrganizationsGetCmekSettings
 
     -- ** logging.organizations.getSettings
-    LoggingOrganizationsGetSettingsResource,
-    LoggingOrganizationsGetSettings (..),
-    newLoggingOrganizationsGetSettings,
+    , LoggingOrganizationsGetSettingsResource
+    , LoggingOrganizationsGetSettings (..)
+    , newLoggingOrganizationsGetSettings
 
     -- ** logging.organizations.locations.buckets.create
-    LoggingOrganizationsLocationsBucketsCreateResource,
-    LoggingOrganizationsLocationsBucketsCreate (..),
-    newLoggingOrganizationsLocationsBucketsCreate,
+    , LoggingOrganizationsLocationsBucketsCreateResource
+    , LoggingOrganizationsLocationsBucketsCreate (..)
+    , newLoggingOrganizationsLocationsBucketsCreate
 
     -- ** logging.organizations.locations.buckets.createAsync
-    LoggingOrganizationsLocationsBucketsCreateAsyncResource,
-    LoggingOrganizationsLocationsBucketsCreateAsync (..),
-    newLoggingOrganizationsLocationsBucketsCreateAsync,
+    , LoggingOrganizationsLocationsBucketsCreateAsyncResource
+    , LoggingOrganizationsLocationsBucketsCreateAsync (..)
+    , newLoggingOrganizationsLocationsBucketsCreateAsync
 
     -- ** logging.organizations.locations.buckets.delete
-    LoggingOrganizationsLocationsBucketsDeleteResource,
-    LoggingOrganizationsLocationsBucketsDelete (..),
-    newLoggingOrganizationsLocationsBucketsDelete,
+    , LoggingOrganizationsLocationsBucketsDeleteResource
+    , LoggingOrganizationsLocationsBucketsDelete (..)
+    , newLoggingOrganizationsLocationsBucketsDelete
 
     -- ** logging.organizations.locations.buckets.get
-    LoggingOrganizationsLocationsBucketsGetResource,
-    LoggingOrganizationsLocationsBucketsGet (..),
-    newLoggingOrganizationsLocationsBucketsGet,
+    , LoggingOrganizationsLocationsBucketsGetResource
+    , LoggingOrganizationsLocationsBucketsGet (..)
+    , newLoggingOrganizationsLocationsBucketsGet
 
     -- ** logging.organizations.locations.buckets.links.create
-    LoggingOrganizationsLocationsBucketsLinksCreateResource,
-    LoggingOrganizationsLocationsBucketsLinksCreate (..),
-    newLoggingOrganizationsLocationsBucketsLinksCreate,
+    , LoggingOrganizationsLocationsBucketsLinksCreateResource
+    , LoggingOrganizationsLocationsBucketsLinksCreate (..)
+    , newLoggingOrganizationsLocationsBucketsLinksCreate
 
     -- ** logging.organizations.locations.buckets.links.delete
-    LoggingOrganizationsLocationsBucketsLinksDeleteResource,
-    LoggingOrganizationsLocationsBucketsLinksDelete (..),
-    newLoggingOrganizationsLocationsBucketsLinksDelete,
+    , LoggingOrganizationsLocationsBucketsLinksDeleteResource
+    , LoggingOrganizationsLocationsBucketsLinksDelete (..)
+    , newLoggingOrganizationsLocationsBucketsLinksDelete
 
     -- ** logging.organizations.locations.buckets.links.get
-    LoggingOrganizationsLocationsBucketsLinksGetResource,
-    LoggingOrganizationsLocationsBucketsLinksGet (..),
-    newLoggingOrganizationsLocationsBucketsLinksGet,
+    , LoggingOrganizationsLocationsBucketsLinksGetResource
+    , LoggingOrganizationsLocationsBucketsLinksGet (..)
+    , newLoggingOrganizationsLocationsBucketsLinksGet
 
     -- ** logging.organizations.locations.buckets.links.list
-    LoggingOrganizationsLocationsBucketsLinksListResource,
-    LoggingOrganizationsLocationsBucketsLinksList (..),
-    newLoggingOrganizationsLocationsBucketsLinksList,
+    , LoggingOrganizationsLocationsBucketsLinksListResource
+    , LoggingOrganizationsLocationsBucketsLinksList (..)
+    , newLoggingOrganizationsLocationsBucketsLinksList
 
     -- ** logging.organizations.locations.buckets.list
-    LoggingOrganizationsLocationsBucketsListResource,
-    LoggingOrganizationsLocationsBucketsList (..),
-    newLoggingOrganizationsLocationsBucketsList,
+    , LoggingOrganizationsLocationsBucketsListResource
+    , LoggingOrganizationsLocationsBucketsList (..)
+    , newLoggingOrganizationsLocationsBucketsList
 
     -- ** logging.organizations.locations.buckets.patch
-    LoggingOrganizationsLocationsBucketsPatchResource,
-    LoggingOrganizationsLocationsBucketsPatch (..),
-    newLoggingOrganizationsLocationsBucketsPatch,
+    , LoggingOrganizationsLocationsBucketsPatchResource
+    , LoggingOrganizationsLocationsBucketsPatch (..)
+    , newLoggingOrganizationsLocationsBucketsPatch
 
     -- ** logging.organizations.locations.buckets.undelete
-    LoggingOrganizationsLocationsBucketsUndeleteResource,
-    LoggingOrganizationsLocationsBucketsUndelete (..),
-    newLoggingOrganizationsLocationsBucketsUndelete,
+    , LoggingOrganizationsLocationsBucketsUndeleteResource
+    , LoggingOrganizationsLocationsBucketsUndelete (..)
+    , newLoggingOrganizationsLocationsBucketsUndelete
 
     -- ** logging.organizations.locations.buckets.updateAsync
-    LoggingOrganizationsLocationsBucketsUpdateAsyncResource,
-    LoggingOrganizationsLocationsBucketsUpdateAsync (..),
-    newLoggingOrganizationsLocationsBucketsUpdateAsync,
+    , LoggingOrganizationsLocationsBucketsUpdateAsyncResource
+    , LoggingOrganizationsLocationsBucketsUpdateAsync (..)
+    , newLoggingOrganizationsLocationsBucketsUpdateAsync
 
     -- ** logging.organizations.locations.buckets.views.create
-    LoggingOrganizationsLocationsBucketsViewsCreateResource,
-    LoggingOrganizationsLocationsBucketsViewsCreate (..),
-    newLoggingOrganizationsLocationsBucketsViewsCreate,
+    , LoggingOrganizationsLocationsBucketsViewsCreateResource
+    , LoggingOrganizationsLocationsBucketsViewsCreate (..)
+    , newLoggingOrganizationsLocationsBucketsViewsCreate
 
     -- ** logging.organizations.locations.buckets.views.delete
-    LoggingOrganizationsLocationsBucketsViewsDeleteResource,
-    LoggingOrganizationsLocationsBucketsViewsDelete (..),
-    newLoggingOrganizationsLocationsBucketsViewsDelete,
+    , LoggingOrganizationsLocationsBucketsViewsDeleteResource
+    , LoggingOrganizationsLocationsBucketsViewsDelete (..)
+    , newLoggingOrganizationsLocationsBucketsViewsDelete
 
     -- ** logging.organizations.locations.buckets.views.get
-    LoggingOrganizationsLocationsBucketsViewsGetResource,
-    LoggingOrganizationsLocationsBucketsViewsGet (..),
-    newLoggingOrganizationsLocationsBucketsViewsGet,
+    , LoggingOrganizationsLocationsBucketsViewsGetResource
+    , LoggingOrganizationsLocationsBucketsViewsGet (..)
+    , newLoggingOrganizationsLocationsBucketsViewsGet
+
+    -- ** logging.organizations.locations.buckets.views.getIamPolicy
+    , LoggingOrganizationsLocationsBucketsViewsGetIamPolicyResource
+    , LoggingOrganizationsLocationsBucketsViewsGetIamPolicy (..)
+    , newLoggingOrganizationsLocationsBucketsViewsGetIamPolicy
 
     -- ** logging.organizations.locations.buckets.views.list
-    LoggingOrganizationsLocationsBucketsViewsListResource,
-    LoggingOrganizationsLocationsBucketsViewsList (..),
-    newLoggingOrganizationsLocationsBucketsViewsList,
+    , LoggingOrganizationsLocationsBucketsViewsListResource
+    , LoggingOrganizationsLocationsBucketsViewsList (..)
+    , newLoggingOrganizationsLocationsBucketsViewsList
 
     -- ** logging.organizations.locations.buckets.views.logs.list
-    LoggingOrganizationsLocationsBucketsViewsLogsListResource,
-    LoggingOrganizationsLocationsBucketsViewsLogsList (..),
-    newLoggingOrganizationsLocationsBucketsViewsLogsList,
+    , LoggingOrganizationsLocationsBucketsViewsLogsListResource
+    , LoggingOrganizationsLocationsBucketsViewsLogsList (..)
+    , newLoggingOrganizationsLocationsBucketsViewsLogsList
 
     -- ** logging.organizations.locations.buckets.views.patch
-    LoggingOrganizationsLocationsBucketsViewsPatchResource,
-    LoggingOrganizationsLocationsBucketsViewsPatch (..),
-    newLoggingOrganizationsLocationsBucketsViewsPatch,
+    , LoggingOrganizationsLocationsBucketsViewsPatchResource
+    , LoggingOrganizationsLocationsBucketsViewsPatch (..)
+    , newLoggingOrganizationsLocationsBucketsViewsPatch
+
+    -- ** logging.organizations.locations.buckets.views.setIamPolicy
+    , LoggingOrganizationsLocationsBucketsViewsSetIamPolicyResource
+    , LoggingOrganizationsLocationsBucketsViewsSetIamPolicy (..)
+    , newLoggingOrganizationsLocationsBucketsViewsSetIamPolicy
+
+    -- ** logging.organizations.locations.buckets.views.testIamPermissions
+    , LoggingOrganizationsLocationsBucketsViewsTestIamPermissionsResource
+    , LoggingOrganizationsLocationsBucketsViewsTestIamPermissions (..)
+    , newLoggingOrganizationsLocationsBucketsViewsTestIamPermissions
 
     -- ** logging.organizations.locations.get
-    LoggingOrganizationsLocationsGetResource,
-    LoggingOrganizationsLocationsGet (..),
-    newLoggingOrganizationsLocationsGet,
+    , LoggingOrganizationsLocationsGetResource
+    , LoggingOrganizationsLocationsGet (..)
+    , newLoggingOrganizationsLocationsGet
 
     -- ** logging.organizations.locations.list
-    LoggingOrganizationsLocationsListResource,
-    LoggingOrganizationsLocationsList (..),
-    newLoggingOrganizationsLocationsList,
+    , LoggingOrganizationsLocationsListResource
+    , LoggingOrganizationsLocationsList (..)
+    , newLoggingOrganizationsLocationsList
+
+    -- ** logging.organizations.locations.logScopes.create
+    , LoggingOrganizationsLocationsLogScopesCreateResource
+    , LoggingOrganizationsLocationsLogScopesCreate (..)
+    , newLoggingOrganizationsLocationsLogScopesCreate
+
+    -- ** logging.organizations.locations.logScopes.delete
+    , LoggingOrganizationsLocationsLogScopesDeleteResource
+    , LoggingOrganizationsLocationsLogScopesDelete (..)
+    , newLoggingOrganizationsLocationsLogScopesDelete
+
+    -- ** logging.organizations.locations.logScopes.get
+    , LoggingOrganizationsLocationsLogScopesGetResource
+    , LoggingOrganizationsLocationsLogScopesGet (..)
+    , newLoggingOrganizationsLocationsLogScopesGet
+
+    -- ** logging.organizations.locations.logScopes.list
+    , LoggingOrganizationsLocationsLogScopesListResource
+    , LoggingOrganizationsLocationsLogScopesList (..)
+    , newLoggingOrganizationsLocationsLogScopesList
+
+    -- ** logging.organizations.locations.logScopes.patch
+    , LoggingOrganizationsLocationsLogScopesPatchResource
+    , LoggingOrganizationsLocationsLogScopesPatch (..)
+    , newLoggingOrganizationsLocationsLogScopesPatch
 
     -- ** logging.organizations.locations.operations.cancel
-    LoggingOrganizationsLocationsOperationsCancelResource,
-    LoggingOrganizationsLocationsOperationsCancel (..),
-    newLoggingOrganizationsLocationsOperationsCancel,
+    , LoggingOrganizationsLocationsOperationsCancelResource
+    , LoggingOrganizationsLocationsOperationsCancel (..)
+    , newLoggingOrganizationsLocationsOperationsCancel
 
     -- ** logging.organizations.locations.operations.get
-    LoggingOrganizationsLocationsOperationsGetResource,
-    LoggingOrganizationsLocationsOperationsGet (..),
-    newLoggingOrganizationsLocationsOperationsGet,
+    , LoggingOrganizationsLocationsOperationsGetResource
+    , LoggingOrganizationsLocationsOperationsGet (..)
+    , newLoggingOrganizationsLocationsOperationsGet
 
     -- ** logging.organizations.locations.operations.list
-    LoggingOrganizationsLocationsOperationsListResource,
-    LoggingOrganizationsLocationsOperationsList (..),
-    newLoggingOrganizationsLocationsOperationsList,
+    , LoggingOrganizationsLocationsOperationsListResource
+    , LoggingOrganizationsLocationsOperationsList (..)
+    , newLoggingOrganizationsLocationsOperationsList
+
+    -- ** logging.organizations.locations.recentQueries.list
+    , LoggingOrganizationsLocationsRecentQueriesListResource
+    , LoggingOrganizationsLocationsRecentQueriesList (..)
+    , newLoggingOrganizationsLocationsRecentQueriesList
+
+    -- ** logging.organizations.locations.savedQueries.create
+    , LoggingOrganizationsLocationsSavedQueriesCreateResource
+    , LoggingOrganizationsLocationsSavedQueriesCreate (..)
+    , newLoggingOrganizationsLocationsSavedQueriesCreate
+
+    -- ** logging.organizations.locations.savedQueries.delete
+    , LoggingOrganizationsLocationsSavedQueriesDeleteResource
+    , LoggingOrganizationsLocationsSavedQueriesDelete (..)
+    , newLoggingOrganizationsLocationsSavedQueriesDelete
+
+    -- ** logging.organizations.locations.savedQueries.get
+    , LoggingOrganizationsLocationsSavedQueriesGetResource
+    , LoggingOrganizationsLocationsSavedQueriesGet (..)
+    , newLoggingOrganizationsLocationsSavedQueriesGet
+
+    -- ** logging.organizations.locations.savedQueries.list
+    , LoggingOrganizationsLocationsSavedQueriesListResource
+    , LoggingOrganizationsLocationsSavedQueriesList (..)
+    , newLoggingOrganizationsLocationsSavedQueriesList
+
+    -- ** logging.organizations.locations.savedQueries.patch
+    , LoggingOrganizationsLocationsSavedQueriesPatchResource
+    , LoggingOrganizationsLocationsSavedQueriesPatch (..)
+    , newLoggingOrganizationsLocationsSavedQueriesPatch
 
     -- ** logging.organizations.logs.delete
-    LoggingOrganizationsLogsDeleteResource,
-    LoggingOrganizationsLogsDelete (..),
-    newLoggingOrganizationsLogsDelete,
+    , LoggingOrganizationsLogsDeleteResource
+    , LoggingOrganizationsLogsDelete (..)
+    , newLoggingOrganizationsLogsDelete
 
     -- ** logging.organizations.logs.list
-    LoggingOrganizationsLogsListResource,
-    LoggingOrganizationsLogsList (..),
-    newLoggingOrganizationsLogsList,
+    , LoggingOrganizationsLogsListResource
+    , LoggingOrganizationsLogsList (..)
+    , newLoggingOrganizationsLogsList
 
     -- ** logging.organizations.sinks.create
-    LoggingOrganizationsSinksCreateResource,
-    LoggingOrganizationsSinksCreate (..),
-    newLoggingOrganizationsSinksCreate,
+    , LoggingOrganizationsSinksCreateResource
+    , LoggingOrganizationsSinksCreate (..)
+    , newLoggingOrganizationsSinksCreate
 
     -- ** logging.organizations.sinks.delete
-    LoggingOrganizationsSinksDeleteResource,
-    LoggingOrganizationsSinksDelete (..),
-    newLoggingOrganizationsSinksDelete,
+    , LoggingOrganizationsSinksDeleteResource
+    , LoggingOrganizationsSinksDelete (..)
+    , newLoggingOrganizationsSinksDelete
 
     -- ** logging.organizations.sinks.get
-    LoggingOrganizationsSinksGetResource,
-    LoggingOrganizationsSinksGet (..),
-    newLoggingOrganizationsSinksGet,
+    , LoggingOrganizationsSinksGetResource
+    , LoggingOrganizationsSinksGet (..)
+    , newLoggingOrganizationsSinksGet
 
     -- ** logging.organizations.sinks.list
-    LoggingOrganizationsSinksListResource,
-    LoggingOrganizationsSinksList (..),
-    newLoggingOrganizationsSinksList,
+    , LoggingOrganizationsSinksListResource
+    , LoggingOrganizationsSinksList (..)
+    , newLoggingOrganizationsSinksList
 
     -- ** logging.organizations.sinks.patch
-    LoggingOrganizationsSinksPatchResource,
-    LoggingOrganizationsSinksPatch (..),
-    newLoggingOrganizationsSinksPatch,
+    , LoggingOrganizationsSinksPatchResource
+    , LoggingOrganizationsSinksPatch (..)
+    , newLoggingOrganizationsSinksPatch
 
     -- ** logging.organizations.sinks.update
-    LoggingOrganizationsSinksUpdateResource,
-    LoggingOrganizationsSinksUpdate (..),
-    newLoggingOrganizationsSinksUpdate,
+    , LoggingOrganizationsSinksUpdateResource
+    , LoggingOrganizationsSinksUpdate (..)
+    , newLoggingOrganizationsSinksUpdate
 
     -- ** logging.organizations.updateCmekSettings
-    LoggingOrganizationsUpdateCmekSettingsResource,
-    LoggingOrganizationsUpdateCmekSettings (..),
-    newLoggingOrganizationsUpdateCmekSettings,
+    , LoggingOrganizationsUpdateCmekSettingsResource
+    , LoggingOrganizationsUpdateCmekSettings (..)
+    , newLoggingOrganizationsUpdateCmekSettings
 
     -- ** logging.organizations.updateSettings
-    LoggingOrganizationsUpdateSettingsResource,
-    LoggingOrganizationsUpdateSettings (..),
-    newLoggingOrganizationsUpdateSettings,
+    , LoggingOrganizationsUpdateSettingsResource
+    , LoggingOrganizationsUpdateSettings (..)
+    , newLoggingOrganizationsUpdateSettings
 
     -- ** logging.projects.exclusions.create
-    LoggingProjectsExclusionsCreateResource,
-    LoggingProjectsExclusionsCreate (..),
-    newLoggingProjectsExclusionsCreate,
+    , LoggingProjectsExclusionsCreateResource
+    , LoggingProjectsExclusionsCreate (..)
+    , newLoggingProjectsExclusionsCreate
 
     -- ** logging.projects.exclusions.delete
-    LoggingProjectsExclusionsDeleteResource,
-    LoggingProjectsExclusionsDelete (..),
-    newLoggingProjectsExclusionsDelete,
+    , LoggingProjectsExclusionsDeleteResource
+    , LoggingProjectsExclusionsDelete (..)
+    , newLoggingProjectsExclusionsDelete
 
     -- ** logging.projects.exclusions.get
-    LoggingProjectsExclusionsGetResource,
-    LoggingProjectsExclusionsGet (..),
-    newLoggingProjectsExclusionsGet,
+    , LoggingProjectsExclusionsGetResource
+    , LoggingProjectsExclusionsGet (..)
+    , newLoggingProjectsExclusionsGet
 
     -- ** logging.projects.exclusions.list
-    LoggingProjectsExclusionsListResource,
-    LoggingProjectsExclusionsList (..),
-    newLoggingProjectsExclusionsList,
+    , LoggingProjectsExclusionsListResource
+    , LoggingProjectsExclusionsList (..)
+    , newLoggingProjectsExclusionsList
 
     -- ** logging.projects.exclusions.patch
-    LoggingProjectsExclusionsPatchResource,
-    LoggingProjectsExclusionsPatch (..),
-    newLoggingProjectsExclusionsPatch,
+    , LoggingProjectsExclusionsPatchResource
+    , LoggingProjectsExclusionsPatch (..)
+    , newLoggingProjectsExclusionsPatch
 
     -- ** logging.projects.getCmekSettings
-    LoggingProjectsGetCmekSettingsResource,
-    LoggingProjectsGetCmekSettings (..),
-    newLoggingProjectsGetCmekSettings,
+    , LoggingProjectsGetCmekSettingsResource
+    , LoggingProjectsGetCmekSettings (..)
+    , newLoggingProjectsGetCmekSettings
 
     -- ** logging.projects.getSettings
-    LoggingProjectsGetSettingsResource,
-    LoggingProjectsGetSettings (..),
-    newLoggingProjectsGetSettings,
+    , LoggingProjectsGetSettingsResource
+    , LoggingProjectsGetSettings (..)
+    , newLoggingProjectsGetSettings
 
     -- ** logging.projects.locations.buckets.create
-    LoggingProjectsLocationsBucketsCreateResource,
-    LoggingProjectsLocationsBucketsCreate (..),
-    newLoggingProjectsLocationsBucketsCreate,
+    , LoggingProjectsLocationsBucketsCreateResource
+    , LoggingProjectsLocationsBucketsCreate (..)
+    , newLoggingProjectsLocationsBucketsCreate
 
     -- ** logging.projects.locations.buckets.createAsync
-    LoggingProjectsLocationsBucketsCreateAsyncResource,
-    LoggingProjectsLocationsBucketsCreateAsync (..),
-    newLoggingProjectsLocationsBucketsCreateAsync,
+    , LoggingProjectsLocationsBucketsCreateAsyncResource
+    , LoggingProjectsLocationsBucketsCreateAsync (..)
+    , newLoggingProjectsLocationsBucketsCreateAsync
 
     -- ** logging.projects.locations.buckets.delete
-    LoggingProjectsLocationsBucketsDeleteResource,
-    LoggingProjectsLocationsBucketsDelete (..),
-    newLoggingProjectsLocationsBucketsDelete,
+    , LoggingProjectsLocationsBucketsDeleteResource
+    , LoggingProjectsLocationsBucketsDelete (..)
+    , newLoggingProjectsLocationsBucketsDelete
 
     -- ** logging.projects.locations.buckets.get
-    LoggingProjectsLocationsBucketsGetResource,
-    LoggingProjectsLocationsBucketsGet (..),
-    newLoggingProjectsLocationsBucketsGet,
+    , LoggingProjectsLocationsBucketsGetResource
+    , LoggingProjectsLocationsBucketsGet (..)
+    , newLoggingProjectsLocationsBucketsGet
 
     -- ** logging.projects.locations.buckets.links.create
-    LoggingProjectsLocationsBucketsLinksCreateResource,
-    LoggingProjectsLocationsBucketsLinksCreate (..),
-    newLoggingProjectsLocationsBucketsLinksCreate,
+    , LoggingProjectsLocationsBucketsLinksCreateResource
+    , LoggingProjectsLocationsBucketsLinksCreate (..)
+    , newLoggingProjectsLocationsBucketsLinksCreate
 
     -- ** logging.projects.locations.buckets.links.delete
-    LoggingProjectsLocationsBucketsLinksDeleteResource,
-    LoggingProjectsLocationsBucketsLinksDelete (..),
-    newLoggingProjectsLocationsBucketsLinksDelete,
+    , LoggingProjectsLocationsBucketsLinksDeleteResource
+    , LoggingProjectsLocationsBucketsLinksDelete (..)
+    , newLoggingProjectsLocationsBucketsLinksDelete
 
     -- ** logging.projects.locations.buckets.links.get
-    LoggingProjectsLocationsBucketsLinksGetResource,
-    LoggingProjectsLocationsBucketsLinksGet (..),
-    newLoggingProjectsLocationsBucketsLinksGet,
+    , LoggingProjectsLocationsBucketsLinksGetResource
+    , LoggingProjectsLocationsBucketsLinksGet (..)
+    , newLoggingProjectsLocationsBucketsLinksGet
 
     -- ** logging.projects.locations.buckets.links.list
-    LoggingProjectsLocationsBucketsLinksListResource,
-    LoggingProjectsLocationsBucketsLinksList (..),
-    newLoggingProjectsLocationsBucketsLinksList,
+    , LoggingProjectsLocationsBucketsLinksListResource
+    , LoggingProjectsLocationsBucketsLinksList (..)
+    , newLoggingProjectsLocationsBucketsLinksList
 
     -- ** logging.projects.locations.buckets.list
-    LoggingProjectsLocationsBucketsListResource,
-    LoggingProjectsLocationsBucketsList (..),
-    newLoggingProjectsLocationsBucketsList,
+    , LoggingProjectsLocationsBucketsListResource
+    , LoggingProjectsLocationsBucketsList (..)
+    , newLoggingProjectsLocationsBucketsList
 
     -- ** logging.projects.locations.buckets.patch
-    LoggingProjectsLocationsBucketsPatchResource,
-    LoggingProjectsLocationsBucketsPatch (..),
-    newLoggingProjectsLocationsBucketsPatch,
+    , LoggingProjectsLocationsBucketsPatchResource
+    , LoggingProjectsLocationsBucketsPatch (..)
+    , newLoggingProjectsLocationsBucketsPatch
 
     -- ** logging.projects.locations.buckets.undelete
-    LoggingProjectsLocationsBucketsUndeleteResource,
-    LoggingProjectsLocationsBucketsUndelete (..),
-    newLoggingProjectsLocationsBucketsUndelete,
+    , LoggingProjectsLocationsBucketsUndeleteResource
+    , LoggingProjectsLocationsBucketsUndelete (..)
+    , newLoggingProjectsLocationsBucketsUndelete
 
     -- ** logging.projects.locations.buckets.updateAsync
-    LoggingProjectsLocationsBucketsUpdateAsyncResource,
-    LoggingProjectsLocationsBucketsUpdateAsync (..),
-    newLoggingProjectsLocationsBucketsUpdateAsync,
+    , LoggingProjectsLocationsBucketsUpdateAsyncResource
+    , LoggingProjectsLocationsBucketsUpdateAsync (..)
+    , newLoggingProjectsLocationsBucketsUpdateAsync
 
     -- ** logging.projects.locations.buckets.views.create
-    LoggingProjectsLocationsBucketsViewsCreateResource,
-    LoggingProjectsLocationsBucketsViewsCreate (..),
-    newLoggingProjectsLocationsBucketsViewsCreate,
+    , LoggingProjectsLocationsBucketsViewsCreateResource
+    , LoggingProjectsLocationsBucketsViewsCreate (..)
+    , newLoggingProjectsLocationsBucketsViewsCreate
 
     -- ** logging.projects.locations.buckets.views.delete
-    LoggingProjectsLocationsBucketsViewsDeleteResource,
-    LoggingProjectsLocationsBucketsViewsDelete (..),
-    newLoggingProjectsLocationsBucketsViewsDelete,
+    , LoggingProjectsLocationsBucketsViewsDeleteResource
+    , LoggingProjectsLocationsBucketsViewsDelete (..)
+    , newLoggingProjectsLocationsBucketsViewsDelete
 
     -- ** logging.projects.locations.buckets.views.get
-    LoggingProjectsLocationsBucketsViewsGetResource,
-    LoggingProjectsLocationsBucketsViewsGet (..),
-    newLoggingProjectsLocationsBucketsViewsGet,
+    , LoggingProjectsLocationsBucketsViewsGetResource
+    , LoggingProjectsLocationsBucketsViewsGet (..)
+    , newLoggingProjectsLocationsBucketsViewsGet
+
+    -- ** logging.projects.locations.buckets.views.getIamPolicy
+    , LoggingProjectsLocationsBucketsViewsGetIamPolicyResource
+    , LoggingProjectsLocationsBucketsViewsGetIamPolicy (..)
+    , newLoggingProjectsLocationsBucketsViewsGetIamPolicy
 
     -- ** logging.projects.locations.buckets.views.list
-    LoggingProjectsLocationsBucketsViewsListResource,
-    LoggingProjectsLocationsBucketsViewsList (..),
-    newLoggingProjectsLocationsBucketsViewsList,
+    , LoggingProjectsLocationsBucketsViewsListResource
+    , LoggingProjectsLocationsBucketsViewsList (..)
+    , newLoggingProjectsLocationsBucketsViewsList
 
     -- ** logging.projects.locations.buckets.views.logs.list
-    LoggingProjectsLocationsBucketsViewsLogsListResource,
-    LoggingProjectsLocationsBucketsViewsLogsList (..),
-    newLoggingProjectsLocationsBucketsViewsLogsList,
+    , LoggingProjectsLocationsBucketsViewsLogsListResource
+    , LoggingProjectsLocationsBucketsViewsLogsList (..)
+    , newLoggingProjectsLocationsBucketsViewsLogsList
 
     -- ** logging.projects.locations.buckets.views.patch
-    LoggingProjectsLocationsBucketsViewsPatchResource,
-    LoggingProjectsLocationsBucketsViewsPatch (..),
-    newLoggingProjectsLocationsBucketsViewsPatch,
+    , LoggingProjectsLocationsBucketsViewsPatchResource
+    , LoggingProjectsLocationsBucketsViewsPatch (..)
+    , newLoggingProjectsLocationsBucketsViewsPatch
+
+    -- ** logging.projects.locations.buckets.views.setIamPolicy
+    , LoggingProjectsLocationsBucketsViewsSetIamPolicyResource
+    , LoggingProjectsLocationsBucketsViewsSetIamPolicy (..)
+    , newLoggingProjectsLocationsBucketsViewsSetIamPolicy
+
+    -- ** logging.projects.locations.buckets.views.testIamPermissions
+    , LoggingProjectsLocationsBucketsViewsTestIamPermissionsResource
+    , LoggingProjectsLocationsBucketsViewsTestIamPermissions (..)
+    , newLoggingProjectsLocationsBucketsViewsTestIamPermissions
 
     -- ** logging.projects.locations.get
-    LoggingProjectsLocationsGetResource,
-    LoggingProjectsLocationsGet (..),
-    newLoggingProjectsLocationsGet,
+    , LoggingProjectsLocationsGetResource
+    , LoggingProjectsLocationsGet (..)
+    , newLoggingProjectsLocationsGet
 
     -- ** logging.projects.locations.list
-    LoggingProjectsLocationsListResource,
-    LoggingProjectsLocationsList (..),
-    newLoggingProjectsLocationsList,
+    , LoggingProjectsLocationsListResource
+    , LoggingProjectsLocationsList (..)
+    , newLoggingProjectsLocationsList
+
+    -- ** logging.projects.locations.logScopes.create
+    , LoggingProjectsLocationsLogScopesCreateResource
+    , LoggingProjectsLocationsLogScopesCreate (..)
+    , newLoggingProjectsLocationsLogScopesCreate
+
+    -- ** logging.projects.locations.logScopes.delete
+    , LoggingProjectsLocationsLogScopesDeleteResource
+    , LoggingProjectsLocationsLogScopesDelete (..)
+    , newLoggingProjectsLocationsLogScopesDelete
+
+    -- ** logging.projects.locations.logScopes.get
+    , LoggingProjectsLocationsLogScopesGetResource
+    , LoggingProjectsLocationsLogScopesGet (..)
+    , newLoggingProjectsLocationsLogScopesGet
+
+    -- ** logging.projects.locations.logScopes.list
+    , LoggingProjectsLocationsLogScopesListResource
+    , LoggingProjectsLocationsLogScopesList (..)
+    , newLoggingProjectsLocationsLogScopesList
+
+    -- ** logging.projects.locations.logScopes.patch
+    , LoggingProjectsLocationsLogScopesPatchResource
+    , LoggingProjectsLocationsLogScopesPatch (..)
+    , newLoggingProjectsLocationsLogScopesPatch
 
     -- ** logging.projects.locations.operations.cancel
-    LoggingProjectsLocationsOperationsCancelResource,
-    LoggingProjectsLocationsOperationsCancel (..),
-    newLoggingProjectsLocationsOperationsCancel,
+    , LoggingProjectsLocationsOperationsCancelResource
+    , LoggingProjectsLocationsOperationsCancel (..)
+    , newLoggingProjectsLocationsOperationsCancel
 
     -- ** logging.projects.locations.operations.get
-    LoggingProjectsLocationsOperationsGetResource,
-    LoggingProjectsLocationsOperationsGet (..),
-    newLoggingProjectsLocationsOperationsGet,
+    , LoggingProjectsLocationsOperationsGetResource
+    , LoggingProjectsLocationsOperationsGet (..)
+    , newLoggingProjectsLocationsOperationsGet
 
     -- ** logging.projects.locations.operations.list
-    LoggingProjectsLocationsOperationsListResource,
-    LoggingProjectsLocationsOperationsList (..),
-    newLoggingProjectsLocationsOperationsList,
+    , LoggingProjectsLocationsOperationsListResource
+    , LoggingProjectsLocationsOperationsList (..)
+    , newLoggingProjectsLocationsOperationsList
+
+    -- ** logging.projects.locations.recentQueries.list
+    , LoggingProjectsLocationsRecentQueriesListResource
+    , LoggingProjectsLocationsRecentQueriesList (..)
+    , newLoggingProjectsLocationsRecentQueriesList
+
+    -- ** logging.projects.locations.savedQueries.create
+    , LoggingProjectsLocationsSavedQueriesCreateResource
+    , LoggingProjectsLocationsSavedQueriesCreate (..)
+    , newLoggingProjectsLocationsSavedQueriesCreate
+
+    -- ** logging.projects.locations.savedQueries.delete
+    , LoggingProjectsLocationsSavedQueriesDeleteResource
+    , LoggingProjectsLocationsSavedQueriesDelete (..)
+    , newLoggingProjectsLocationsSavedQueriesDelete
+
+    -- ** logging.projects.locations.savedQueries.get
+    , LoggingProjectsLocationsSavedQueriesGetResource
+    , LoggingProjectsLocationsSavedQueriesGet (..)
+    , newLoggingProjectsLocationsSavedQueriesGet
+
+    -- ** logging.projects.locations.savedQueries.list
+    , LoggingProjectsLocationsSavedQueriesListResource
+    , LoggingProjectsLocationsSavedQueriesList (..)
+    , newLoggingProjectsLocationsSavedQueriesList
+
+    -- ** logging.projects.locations.savedQueries.patch
+    , LoggingProjectsLocationsSavedQueriesPatchResource
+    , LoggingProjectsLocationsSavedQueriesPatch (..)
+    , newLoggingProjectsLocationsSavedQueriesPatch
 
     -- ** logging.projects.logs.delete
-    LoggingProjectsLogsDeleteResource,
-    LoggingProjectsLogsDelete (..),
-    newLoggingProjectsLogsDelete,
+    , LoggingProjectsLogsDeleteResource
+    , LoggingProjectsLogsDelete (..)
+    , newLoggingProjectsLogsDelete
 
     -- ** logging.projects.logs.list
-    LoggingProjectsLogsListResource,
-    LoggingProjectsLogsList (..),
-    newLoggingProjectsLogsList,
+    , LoggingProjectsLogsListResource
+    , LoggingProjectsLogsList (..)
+    , newLoggingProjectsLogsList
 
     -- ** logging.projects.metrics.create
-    LoggingProjectsMetricsCreateResource,
-    LoggingProjectsMetricsCreate (..),
-    newLoggingProjectsMetricsCreate,
+    , LoggingProjectsMetricsCreateResource
+    , LoggingProjectsMetricsCreate (..)
+    , newLoggingProjectsMetricsCreate
 
     -- ** logging.projects.metrics.delete
-    LoggingProjectsMetricsDeleteResource,
-    LoggingProjectsMetricsDelete (..),
-    newLoggingProjectsMetricsDelete,
+    , LoggingProjectsMetricsDeleteResource
+    , LoggingProjectsMetricsDelete (..)
+    , newLoggingProjectsMetricsDelete
 
     -- ** logging.projects.metrics.get
-    LoggingProjectsMetricsGetResource,
-    LoggingProjectsMetricsGet (..),
-    newLoggingProjectsMetricsGet,
+    , LoggingProjectsMetricsGetResource
+    , LoggingProjectsMetricsGet (..)
+    , newLoggingProjectsMetricsGet
 
     -- ** logging.projects.metrics.list
-    LoggingProjectsMetricsListResource,
-    LoggingProjectsMetricsList (..),
-    newLoggingProjectsMetricsList,
+    , LoggingProjectsMetricsListResource
+    , LoggingProjectsMetricsList (..)
+    , newLoggingProjectsMetricsList
 
     -- ** logging.projects.metrics.update
-    LoggingProjectsMetricsUpdateResource,
-    LoggingProjectsMetricsUpdate (..),
-    newLoggingProjectsMetricsUpdate,
+    , LoggingProjectsMetricsUpdateResource
+    , LoggingProjectsMetricsUpdate (..)
+    , newLoggingProjectsMetricsUpdate
 
     -- ** logging.projects.sinks.create
-    LoggingProjectsSinksCreateResource,
-    LoggingProjectsSinksCreate (..),
-    newLoggingProjectsSinksCreate,
+    , LoggingProjectsSinksCreateResource
+    , LoggingProjectsSinksCreate (..)
+    , newLoggingProjectsSinksCreate
 
     -- ** logging.projects.sinks.delete
-    LoggingProjectsSinksDeleteResource,
-    LoggingProjectsSinksDelete (..),
-    newLoggingProjectsSinksDelete,
+    , LoggingProjectsSinksDeleteResource
+    , LoggingProjectsSinksDelete (..)
+    , newLoggingProjectsSinksDelete
 
     -- ** logging.projects.sinks.get
-    LoggingProjectsSinksGetResource,
-    LoggingProjectsSinksGet (..),
-    newLoggingProjectsSinksGet,
+    , LoggingProjectsSinksGetResource
+    , LoggingProjectsSinksGet (..)
+    , newLoggingProjectsSinksGet
 
     -- ** logging.projects.sinks.list
-    LoggingProjectsSinksListResource,
-    LoggingProjectsSinksList (..),
-    newLoggingProjectsSinksList,
+    , LoggingProjectsSinksListResource
+    , LoggingProjectsSinksList (..)
+    , newLoggingProjectsSinksList
 
     -- ** logging.projects.sinks.patch
-    LoggingProjectsSinksPatchResource,
-    LoggingProjectsSinksPatch (..),
-    newLoggingProjectsSinksPatch,
+    , LoggingProjectsSinksPatchResource
+    , LoggingProjectsSinksPatch (..)
+    , newLoggingProjectsSinksPatch
 
     -- ** logging.projects.sinks.update
-    LoggingProjectsSinksUpdateResource,
-    LoggingProjectsSinksUpdate (..),
-    newLoggingProjectsSinksUpdate,
+    , LoggingProjectsSinksUpdateResource
+    , LoggingProjectsSinksUpdate (..)
+    , newLoggingProjectsSinksUpdate
 
     -- ** logging.sinks.create
-    LoggingSinksCreateResource,
-    LoggingSinksCreate (..),
-    newLoggingSinksCreate,
+    , LoggingSinksCreateResource
+    , LoggingSinksCreate (..)
+    , newLoggingSinksCreate
 
     -- ** logging.sinks.delete
-    LoggingSinksDeleteResource,
-    LoggingSinksDelete (..),
-    newLoggingSinksDelete,
+    , LoggingSinksDeleteResource
+    , LoggingSinksDelete (..)
+    , newLoggingSinksDelete
 
     -- ** logging.sinks.get
-    LoggingSinksGetResource,
-    LoggingSinksGet (..),
-    newLoggingSinksGet,
+    , LoggingSinksGetResource
+    , LoggingSinksGet (..)
+    , newLoggingSinksGet
 
     -- ** logging.sinks.list
-    LoggingSinksListResource,
-    LoggingSinksList (..),
-    newLoggingSinksList,
+    , LoggingSinksListResource
+    , LoggingSinksList (..)
+    , newLoggingSinksList
 
     -- ** logging.sinks.update
-    LoggingSinksUpdateResource,
-    LoggingSinksUpdate (..),
-    newLoggingSinksUpdate,
+    , LoggingSinksUpdateResource
+    , LoggingSinksUpdate (..)
+    , newLoggingSinksUpdate
 
     -- ** logging.updateCmekSettings
-    LoggingUpdateCmekSettingsResource,
-    LoggingUpdateCmekSettings (..),
-    newLoggingUpdateCmekSettings,
+    , LoggingUpdateCmekSettingsResource
+    , LoggingUpdateCmekSettings (..)
+    , newLoggingUpdateCmekSettings
 
     -- ** logging.updateSettings
-    LoggingUpdateSettingsResource,
-    LoggingUpdateSettings (..),
-    newLoggingUpdateSettings,
+    , LoggingUpdateSettingsResource
+    , LoggingUpdateSettings (..)
+    , newLoggingUpdateSettings
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
+
+    -- ** AuditConfig
+    , AuditConfig (..)
+    , newAuditConfig
+
+    -- ** AuditLogConfig
+    , AuditLogConfig (..)
+    , newAuditLogConfig
+
+    -- ** AuditLogConfig_LogType
+    , AuditLogConfig_LogType (..)
 
     -- ** BigQueryDataset
-    BigQueryDataset (..),
-    newBigQueryDataset,
+    , BigQueryDataset (..)
+    , newBigQueryDataset
 
     -- ** BigQueryOptions
-    BigQueryOptions (..),
-    newBigQueryOptions,
+    , BigQueryOptions (..)
+    , newBigQueryOptions
+
+    -- ** Binding
+    , Binding (..)
+    , newBinding
 
     -- ** BucketMetadata
-    BucketMetadata (..),
-    newBucketMetadata,
+    , BucketMetadata (..)
+    , newBucketMetadata
 
     -- ** BucketMetadata_State
-    BucketMetadata_State (..),
+    , BucketMetadata_State (..)
 
     -- ** BucketOptions
-    BucketOptions (..),
-    newBucketOptions,
+    , BucketOptions (..)
+    , newBucketOptions
 
     -- ** CancelOperationRequest
-    CancelOperationRequest (..),
-    newCancelOperationRequest,
+    , CancelOperationRequest (..)
+    , newCancelOperationRequest
 
     -- ** CmekSettings
-    CmekSettings (..),
-    newCmekSettings,
+    , CmekSettings (..)
+    , newCmekSettings
 
     -- ** CopyLogEntriesMetadata
-    CopyLogEntriesMetadata (..),
-    newCopyLogEntriesMetadata,
+    , CopyLogEntriesMetadata (..)
+    , newCopyLogEntriesMetadata
 
     -- ** CopyLogEntriesMetadata_State
-    CopyLogEntriesMetadata_State (..),
+    , CopyLogEntriesMetadata_State (..)
 
     -- ** CopyLogEntriesRequest
-    CopyLogEntriesRequest (..),
-    newCopyLogEntriesRequest,
+    , CopyLogEntriesRequest (..)
+    , newCopyLogEntriesRequest
 
     -- ** CopyLogEntriesResponse
-    CopyLogEntriesResponse (..),
-    newCopyLogEntriesResponse,
+    , CopyLogEntriesResponse (..)
+    , newCopyLogEntriesResponse
 
     -- ** CreateBucketRequest
-    CreateBucketRequest (..),
-    newCreateBucketRequest,
+    , CreateBucketRequest (..)
+    , newCreateBucketRequest
 
     -- ** CreateLinkRequest
-    CreateLinkRequest (..),
-    newCreateLinkRequest,
+    , CreateLinkRequest (..)
+    , newCreateLinkRequest
+
+    -- ** DefaultSinkConfig
+    , DefaultSinkConfig (..)
+    , newDefaultSinkConfig
+
+    -- ** DefaultSinkConfig_Mode
+    , DefaultSinkConfig_Mode (..)
 
     -- ** DeleteLinkRequest
-    DeleteLinkRequest (..),
-    newDeleteLinkRequest,
+    , DeleteLinkRequest (..)
+    , newDeleteLinkRequest
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** Explicit
-    Explicit (..),
-    newExplicit,
+    , Explicit (..)
+    , newExplicit
 
     -- ** Exponential
-    Exponential (..),
-    newExponential,
+    , Exponential (..)
+    , newExponential
+
+    -- ** Expr
+    , Expr (..)
+    , newExpr
+
+    -- ** GetIamPolicyRequest
+    , GetIamPolicyRequest (..)
+    , newGetIamPolicyRequest
+
+    -- ** GetPolicyOptions
+    , GetPolicyOptions (..)
+    , newGetPolicyOptions
 
     -- ** HttpRequest
-    HttpRequest (..),
-    newHttpRequest,
+    , HttpRequest (..)
+    , newHttpRequest
 
     -- ** IndexConfig
-    IndexConfig (..),
-    newIndexConfig,
+    , IndexConfig (..)
+    , newIndexConfig
 
     -- ** IndexConfig_Type
-    IndexConfig_Type (..),
+    , IndexConfig_Type (..)
 
     -- ** LabelDescriptor
-    LabelDescriptor (..),
-    newLabelDescriptor,
+    , LabelDescriptor (..)
+    , newLabelDescriptor
 
     -- ** LabelDescriptor_ValueType
-    LabelDescriptor_ValueType (..),
+    , LabelDescriptor_ValueType (..)
 
     -- ** Linear
-    Linear (..),
-    newLinear,
+    , Linear (..)
+    , newLinear
 
     -- ** Link
-    Link (..),
-    newLink,
+    , Link (..)
+    , newLink
 
     -- ** Link_LifecycleState
-    Link_LifecycleState (..),
+    , Link_LifecycleState (..)
 
     -- ** LinkMetadata
-    LinkMetadata (..),
-    newLinkMetadata,
+    , LinkMetadata (..)
+    , newLinkMetadata
 
     -- ** LinkMetadata_State
-    LinkMetadata_State (..),
+    , LinkMetadata_State (..)
 
     -- ** ListBucketsResponse
-    ListBucketsResponse (..),
-    newListBucketsResponse,
+    , ListBucketsResponse (..)
+    , newListBucketsResponse
 
     -- ** ListExclusionsResponse
-    ListExclusionsResponse (..),
-    newListExclusionsResponse,
+    , ListExclusionsResponse (..)
+    , newListExclusionsResponse
 
     -- ** ListLinksResponse
-    ListLinksResponse (..),
-    newListLinksResponse,
+    , ListLinksResponse (..)
+    , newListLinksResponse
 
     -- ** ListLocationsResponse
-    ListLocationsResponse (..),
-    newListLocationsResponse,
+    , ListLocationsResponse (..)
+    , newListLocationsResponse
 
     -- ** ListLogEntriesRequest
-    ListLogEntriesRequest (..),
-    newListLogEntriesRequest,
+    , ListLogEntriesRequest (..)
+    , newListLogEntriesRequest
 
     -- ** ListLogEntriesResponse
-    ListLogEntriesResponse (..),
-    newListLogEntriesResponse,
+    , ListLogEntriesResponse (..)
+    , newListLogEntriesResponse
 
     -- ** ListLogMetricsResponse
-    ListLogMetricsResponse (..),
-    newListLogMetricsResponse,
+    , ListLogMetricsResponse (..)
+    , newListLogMetricsResponse
+
+    -- ** ListLogScopesResponse
+    , ListLogScopesResponse (..)
+    , newListLogScopesResponse
 
     -- ** ListLogsResponse
-    ListLogsResponse (..),
-    newListLogsResponse,
+    , ListLogsResponse (..)
+    , newListLogsResponse
 
     -- ** ListMonitoredResourceDescriptorsResponse
-    ListMonitoredResourceDescriptorsResponse (..),
-    newListMonitoredResourceDescriptorsResponse,
+    , ListMonitoredResourceDescriptorsResponse (..)
+    , newListMonitoredResourceDescriptorsResponse
 
     -- ** ListOperationsResponse
-    ListOperationsResponse (..),
-    newListOperationsResponse,
+    , ListOperationsResponse (..)
+    , newListOperationsResponse
+
+    -- ** ListRecentQueriesResponse
+    , ListRecentQueriesResponse (..)
+    , newListRecentQueriesResponse
+
+    -- ** ListSavedQueriesResponse
+    , ListSavedQueriesResponse (..)
+    , newListSavedQueriesResponse
 
     -- ** ListSinksResponse
-    ListSinksResponse (..),
-    newListSinksResponse,
+    , ListSinksResponse (..)
+    , newListSinksResponse
 
     -- ** ListViewsResponse
-    ListViewsResponse (..),
-    newListViewsResponse,
+    , ListViewsResponse (..)
+    , newListViewsResponse
 
     -- ** Location
-    Location (..),
-    newLocation,
+    , Location (..)
+    , newLocation
 
     -- ** Location_Labels
-    Location_Labels (..),
-    newLocation_Labels,
+    , Location_Labels (..)
+    , newLocation_Labels
 
     -- ** Location_Metadata
-    Location_Metadata (..),
-    newLocation_Metadata,
+    , Location_Metadata (..)
+    , newLocation_Metadata
 
     -- ** LocationMetadata
-    LocationMetadata (..),
-    newLocationMetadata,
+    , LocationMetadata (..)
+    , newLocationMetadata
 
     -- ** LogBucket
-    LogBucket (..),
-    newLogBucket,
+    , LogBucket (..)
+    , newLogBucket
 
     -- ** LogBucket_LifecycleState
-    LogBucket_LifecycleState (..),
+    , LogBucket_LifecycleState (..)
 
     -- ** LogEntry
-    LogEntry (..),
-    newLogEntry,
+    , LogEntry (..)
+    , newLogEntry
 
     -- ** LogEntry_JsonPayload
-    LogEntry_JsonPayload (..),
-    newLogEntry_JsonPayload,
+    , LogEntry_JsonPayload (..)
+    , newLogEntry_JsonPayload
 
     -- ** LogEntry_Labels
-    LogEntry_Labels (..),
-    newLogEntry_Labels,
+    , LogEntry_Labels (..)
+    , newLogEntry_Labels
 
     -- ** LogEntry_ProtoPayload
-    LogEntry_ProtoPayload (..),
-    newLogEntry_ProtoPayload,
+    , LogEntry_ProtoPayload (..)
+    , newLogEntry_ProtoPayload
 
     -- ** LogEntry_Severity
-    LogEntry_Severity (..),
+    , LogEntry_Severity (..)
 
     -- ** LogEntryOperation
-    LogEntryOperation (..),
-    newLogEntryOperation,
+    , LogEntryOperation (..)
+    , newLogEntryOperation
 
     -- ** LogEntrySourceLocation
-    LogEntrySourceLocation (..),
-    newLogEntrySourceLocation,
+    , LogEntrySourceLocation (..)
+    , newLogEntrySourceLocation
+
+    -- ** LogErrorGroup
+    , LogErrorGroup (..)
+    , newLogErrorGroup
 
     -- ** LogExclusion
-    LogExclusion (..),
-    newLogExclusion,
+    , LogExclusion (..)
+    , newLogExclusion
 
     -- ** LogLine
-    LogLine (..),
-    newLogLine,
+    , LogLine (..)
+    , newLogLine
 
     -- ** LogLine_Severity
-    LogLine_Severity (..),
+    , LogLine_Severity (..)
 
     -- ** LogMetric
-    LogMetric (..),
-    newLogMetric,
+    , LogMetric (..)
+    , newLogMetric
 
     -- ** LogMetric_LabelExtractors
-    LogMetric_LabelExtractors (..),
-    newLogMetric_LabelExtractors,
+    , LogMetric_LabelExtractors (..)
+    , newLogMetric_LabelExtractors
 
     -- ** LogMetric_Version
-    LogMetric_Version (..),
+    , LogMetric_Version (..)
+
+    -- ** LogScope
+    , LogScope (..)
+    , newLogScope
 
     -- ** LogSink
-    LogSink (..),
-    newLogSink,
+    , LogSink (..)
+    , newLogSink
 
     -- ** LogSink_OutputVersionFormat
-    LogSink_OutputVersionFormat (..),
+    , LogSink_OutputVersionFormat (..)
 
     -- ** LogSplit
-    LogSplit (..),
-    newLogSplit,
+    , LogSplit (..)
+    , newLogSplit
 
     -- ** LogView
-    LogView (..),
-    newLogView,
+    , LogView (..)
+    , newLogView
+
+    -- ** LoggingQuery
+    , LoggingQuery (..)
+    , newLoggingQuery
 
     -- ** MetricDescriptor
-    MetricDescriptor (..),
-    newMetricDescriptor,
+    , MetricDescriptor (..)
+    , newMetricDescriptor
 
     -- ** MetricDescriptor_LaunchStage
-    MetricDescriptor_LaunchStage (..),
+    , MetricDescriptor_LaunchStage (..)
 
     -- ** MetricDescriptor_MetricKind
-    MetricDescriptor_MetricKind (..),
+    , MetricDescriptor_MetricKind (..)
 
     -- ** MetricDescriptor_ValueType
-    MetricDescriptor_ValueType (..),
+    , MetricDescriptor_ValueType (..)
 
     -- ** MetricDescriptorMetadata
-    MetricDescriptorMetadata (..),
-    newMetricDescriptorMetadata,
+    , MetricDescriptorMetadata (..)
+    , newMetricDescriptorMetadata
 
     -- ** MetricDescriptorMetadata_LaunchStage
-    MetricDescriptorMetadata_LaunchStage (..),
+    , MetricDescriptorMetadata_LaunchStage (..)
+
+    -- ** MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+    , MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem (..)
 
     -- ** MonitoredResource
-    MonitoredResource (..),
-    newMonitoredResource,
+    , MonitoredResource (..)
+    , newMonitoredResource
 
     -- ** MonitoredResource_Labels
-    MonitoredResource_Labels (..),
-    newMonitoredResource_Labels,
+    , MonitoredResource_Labels (..)
+    , newMonitoredResource_Labels
 
     -- ** MonitoredResourceDescriptor
-    MonitoredResourceDescriptor (..),
-    newMonitoredResourceDescriptor,
+    , MonitoredResourceDescriptor (..)
+    , newMonitoredResourceDescriptor
 
     -- ** MonitoredResourceDescriptor_LaunchStage
-    MonitoredResourceDescriptor_LaunchStage (..),
+    , MonitoredResourceDescriptor_LaunchStage (..)
 
     -- ** MonitoredResourceMetadata
-    MonitoredResourceMetadata (..),
-    newMonitoredResourceMetadata,
+    , MonitoredResourceMetadata (..)
+    , newMonitoredResourceMetadata
 
     -- ** MonitoredResourceMetadata_SystemLabels
-    MonitoredResourceMetadata_SystemLabels (..),
-    newMonitoredResourceMetadata_SystemLabels,
+    , MonitoredResourceMetadata_SystemLabels (..)
+    , newMonitoredResourceMetadata_SystemLabels
 
     -- ** MonitoredResourceMetadata_UserLabels
-    MonitoredResourceMetadata_UserLabels (..),
-    newMonitoredResourceMetadata_UserLabels,
+    , MonitoredResourceMetadata_UserLabels (..)
+    , newMonitoredResourceMetadata_UserLabels
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
+
+    -- ** OpsAnalyticsQuery
+    , OpsAnalyticsQuery (..)
+    , newOpsAnalyticsQuery
+
+    -- ** Policy
+    , Policy (..)
+    , newPolicy
+
+    -- ** RecentQuery
+    , RecentQuery (..)
+    , newRecentQuery
 
     -- ** RequestLog
-    RequestLog (..),
-    newRequestLog,
+    , RequestLog (..)
+    , newRequestLog
+
+    -- ** SavedQuery
+    , SavedQuery (..)
+    , newSavedQuery
+
+    -- ** SavedQuery_Visibility
+    , SavedQuery_Visibility (..)
+
+    -- ** SetIamPolicyRequest
+    , SetIamPolicyRequest (..)
+    , newSetIamPolicyRequest
 
     -- ** Settings
-    Settings (..),
-    newSettings,
+    , Settings (..)
+    , newSettings
 
     -- ** SourceLocation
-    SourceLocation (..),
-    newSourceLocation,
+    , SourceLocation (..)
+    , newSourceLocation
 
     -- ** SourceReference
-    SourceReference (..),
-    newSourceReference,
+    , SourceReference (..)
+    , newSourceReference
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
+
+    -- ** SummaryField
+    , SummaryField (..)
+    , newSummaryField
 
     -- ** SuppressionInfo
-    SuppressionInfo (..),
-    newSuppressionInfo,
+    , SuppressionInfo (..)
+    , newSuppressionInfo
 
     -- ** SuppressionInfo_Reason
-    SuppressionInfo_Reason (..),
+    , SuppressionInfo_Reason (..)
 
     -- ** TailLogEntriesRequest
-    TailLogEntriesRequest (..),
-    newTailLogEntriesRequest,
+    , TailLogEntriesRequest (..)
+    , newTailLogEntriesRequest
 
     -- ** TailLogEntriesResponse
-    TailLogEntriesResponse (..),
-    newTailLogEntriesResponse,
+    , TailLogEntriesResponse (..)
+    , newTailLogEntriesResponse
+
+    -- ** TestIamPermissionsRequest
+    , TestIamPermissionsRequest (..)
+    , newTestIamPermissionsRequest
+
+    -- ** TestIamPermissionsResponse
+    , TestIamPermissionsResponse (..)
+    , newTestIamPermissionsResponse
 
     -- ** UndeleteBucketRequest
-    UndeleteBucketRequest (..),
-    newUndeleteBucketRequest,
+    , UndeleteBucketRequest (..)
+    , newUndeleteBucketRequest
 
     -- ** UpdateBucketRequest
-    UpdateBucketRequest (..),
-    newUpdateBucketRequest,
+    , UpdateBucketRequest (..)
+    , newUpdateBucketRequest
 
     -- ** WriteLogEntriesRequest
-    WriteLogEntriesRequest (..),
-    newWriteLogEntriesRequest,
+    , WriteLogEntriesRequest (..)
+    , newWriteLogEntriesRequest
 
     -- ** WriteLogEntriesRequest_Labels
-    WriteLogEntriesRequest_Labels (..),
-    newWriteLogEntriesRequest_Labels,
+    , WriteLogEntriesRequest_Labels (..)
+    , newWriteLogEntriesRequest_Labels
 
     -- ** WriteLogEntriesResponse
-    WriteLogEntriesResponse (..),
-    newWriteLogEntriesResponse,
-  )
-where
+    , WriteLogEntriesResponse (..)
+    , newWriteLogEntriesResponse
+    ) where
 
 import Gogol.Logging.BillingAccounts.Exclusions.Create
 import Gogol.Logging.BillingAccounts.Exclusions.Delete
@@ -1449,6 +1801,12 @@ import Gogol.Logging.BillingAccounts.Locations.List
 import Gogol.Logging.BillingAccounts.Locations.Operations.Cancel
 import Gogol.Logging.BillingAccounts.Locations.Operations.Get
 import Gogol.Logging.BillingAccounts.Locations.Operations.List
+import Gogol.Logging.BillingAccounts.Locations.RecentQueries.List
+import Gogol.Logging.BillingAccounts.Locations.SavedQueries.Create
+import Gogol.Logging.BillingAccounts.Locations.SavedQueries.Delete
+import Gogol.Logging.BillingAccounts.Locations.SavedQueries.Get
+import Gogol.Logging.BillingAccounts.Locations.SavedQueries.List
+import Gogol.Logging.BillingAccounts.Locations.SavedQueries.Patch
 import Gogol.Logging.BillingAccounts.Logs.Delete
 import Gogol.Logging.BillingAccounts.Logs.List
 import Gogol.Logging.BillingAccounts.Sinks.Create
@@ -1488,14 +1846,28 @@ import Gogol.Logging.Folders.Locations.Buckets.UpdateAsync
 import Gogol.Logging.Folders.Locations.Buckets.Views.Create
 import Gogol.Logging.Folders.Locations.Buckets.Views.Delete
 import Gogol.Logging.Folders.Locations.Buckets.Views.Get
+import Gogol.Logging.Folders.Locations.Buckets.Views.GetIamPolicy
 import Gogol.Logging.Folders.Locations.Buckets.Views.List
 import Gogol.Logging.Folders.Locations.Buckets.Views.Logs.List
 import Gogol.Logging.Folders.Locations.Buckets.Views.Patch
+import Gogol.Logging.Folders.Locations.Buckets.Views.SetIamPolicy
+import Gogol.Logging.Folders.Locations.Buckets.Views.TestIamPermissions
 import Gogol.Logging.Folders.Locations.Get
 import Gogol.Logging.Folders.Locations.List
+import Gogol.Logging.Folders.Locations.LogScopes.Create
+import Gogol.Logging.Folders.Locations.LogScopes.Delete
+import Gogol.Logging.Folders.Locations.LogScopes.Get
+import Gogol.Logging.Folders.Locations.LogScopes.List
+import Gogol.Logging.Folders.Locations.LogScopes.Patch
 import Gogol.Logging.Folders.Locations.Operations.Cancel
 import Gogol.Logging.Folders.Locations.Operations.Get
 import Gogol.Logging.Folders.Locations.Operations.List
+import Gogol.Logging.Folders.Locations.RecentQueries.List
+import Gogol.Logging.Folders.Locations.SavedQueries.Create
+import Gogol.Logging.Folders.Locations.SavedQueries.Delete
+import Gogol.Logging.Folders.Locations.SavedQueries.Get
+import Gogol.Logging.Folders.Locations.SavedQueries.List
+import Gogol.Logging.Folders.Locations.SavedQueries.Patch
 import Gogol.Logging.Folders.Logs.Delete
 import Gogol.Logging.Folders.Logs.List
 import Gogol.Logging.Folders.Sinks.Create
@@ -1522,8 +1894,11 @@ import Gogol.Logging.Locations.Buckets.UpdateAsync
 import Gogol.Logging.Locations.Buckets.Views.Create
 import Gogol.Logging.Locations.Buckets.Views.Delete
 import Gogol.Logging.Locations.Buckets.Views.Get
+import Gogol.Logging.Locations.Buckets.Views.GetIamPolicy
 import Gogol.Logging.Locations.Buckets.Views.List
 import Gogol.Logging.Locations.Buckets.Views.Patch
+import Gogol.Logging.Locations.Buckets.Views.SetIamPolicy
+import Gogol.Logging.Locations.Buckets.Views.TestIamPermissions
 import Gogol.Logging.Locations.Get
 import Gogol.Logging.Locations.List
 import Gogol.Logging.Locations.Operations.Cancel
@@ -1554,14 +1929,28 @@ import Gogol.Logging.Organizations.Locations.Buckets.UpdateAsync
 import Gogol.Logging.Organizations.Locations.Buckets.Views.Create
 import Gogol.Logging.Organizations.Locations.Buckets.Views.Delete
 import Gogol.Logging.Organizations.Locations.Buckets.Views.Get
+import Gogol.Logging.Organizations.Locations.Buckets.Views.GetIamPolicy
 import Gogol.Logging.Organizations.Locations.Buckets.Views.List
 import Gogol.Logging.Organizations.Locations.Buckets.Views.Logs.List
 import Gogol.Logging.Organizations.Locations.Buckets.Views.Patch
+import Gogol.Logging.Organizations.Locations.Buckets.Views.SetIamPolicy
+import Gogol.Logging.Organizations.Locations.Buckets.Views.TestIamPermissions
 import Gogol.Logging.Organizations.Locations.Get
 import Gogol.Logging.Organizations.Locations.List
+import Gogol.Logging.Organizations.Locations.LogScopes.Create
+import Gogol.Logging.Organizations.Locations.LogScopes.Delete
+import Gogol.Logging.Organizations.Locations.LogScopes.Get
+import Gogol.Logging.Organizations.Locations.LogScopes.List
+import Gogol.Logging.Organizations.Locations.LogScopes.Patch
 import Gogol.Logging.Organizations.Locations.Operations.Cancel
 import Gogol.Logging.Organizations.Locations.Operations.Get
 import Gogol.Logging.Organizations.Locations.Operations.List
+import Gogol.Logging.Organizations.Locations.RecentQueries.List
+import Gogol.Logging.Organizations.Locations.SavedQueries.Create
+import Gogol.Logging.Organizations.Locations.SavedQueries.Delete
+import Gogol.Logging.Organizations.Locations.SavedQueries.Get
+import Gogol.Logging.Organizations.Locations.SavedQueries.List
+import Gogol.Logging.Organizations.Locations.SavedQueries.Patch
 import Gogol.Logging.Organizations.Logs.Delete
 import Gogol.Logging.Organizations.Logs.List
 import Gogol.Logging.Organizations.Sinks.Create
@@ -1594,14 +1983,28 @@ import Gogol.Logging.Projects.Locations.Buckets.UpdateAsync
 import Gogol.Logging.Projects.Locations.Buckets.Views.Create
 import Gogol.Logging.Projects.Locations.Buckets.Views.Delete
 import Gogol.Logging.Projects.Locations.Buckets.Views.Get
+import Gogol.Logging.Projects.Locations.Buckets.Views.GetIamPolicy
 import Gogol.Logging.Projects.Locations.Buckets.Views.List
 import Gogol.Logging.Projects.Locations.Buckets.Views.Logs.List
 import Gogol.Logging.Projects.Locations.Buckets.Views.Patch
+import Gogol.Logging.Projects.Locations.Buckets.Views.SetIamPolicy
+import Gogol.Logging.Projects.Locations.Buckets.Views.TestIamPermissions
 import Gogol.Logging.Projects.Locations.Get
 import Gogol.Logging.Projects.Locations.List
+import Gogol.Logging.Projects.Locations.LogScopes.Create
+import Gogol.Logging.Projects.Locations.LogScopes.Delete
+import Gogol.Logging.Projects.Locations.LogScopes.Get
+import Gogol.Logging.Projects.Locations.LogScopes.List
+import Gogol.Logging.Projects.Locations.LogScopes.Patch
 import Gogol.Logging.Projects.Locations.Operations.Cancel
 import Gogol.Logging.Projects.Locations.Operations.Get
 import Gogol.Logging.Projects.Locations.Operations.List
+import Gogol.Logging.Projects.Locations.RecentQueries.List
+import Gogol.Logging.Projects.Locations.SavedQueries.Create
+import Gogol.Logging.Projects.Locations.SavedQueries.Delete
+import Gogol.Logging.Projects.Locations.SavedQueries.Get
+import Gogol.Logging.Projects.Locations.SavedQueries.List
+import Gogol.Logging.Projects.Locations.SavedQueries.Patch
 import Gogol.Logging.Projects.Logs.Delete
 import Gogol.Logging.Projects.Logs.List
 import Gogol.Logging.Projects.Metrics.Create

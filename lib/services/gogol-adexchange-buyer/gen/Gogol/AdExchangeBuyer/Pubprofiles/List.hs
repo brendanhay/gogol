@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,67 +31,61 @@
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.pubprofiles.list@.
 module Gogol.AdExchangeBuyer.Pubprofiles.List
-  ( -- * Resource
-    AdExchangeBuyerPubprofilesListResource,
+    (
+    -- * Resource
+      AdExchangeBuyerPubprofilesListResource
 
     -- ** Constructing a Request
-    AdExchangeBuyerPubprofilesList (..),
-    newAdExchangeBuyerPubprofilesList,
-  )
-where
+    , AdExchangeBuyerPubprofilesList (..)
+    , newAdExchangeBuyerPubprofilesList
+    ) where
 
-import Gogol.AdExchangeBuyer.Types
 import qualified Gogol.Prelude as Core
+import Gogol.AdExchangeBuyer.Types
 
 -- | A resource alias for @adexchangebuyer.pubprofiles.list@ method which the
 -- 'AdExchangeBuyerPubprofilesList' request conforms to.
 type AdExchangeBuyerPubprofilesListResource =
-  "adexchangebuyer"
-    Core.:> "v1.4"
-    Core.:> "publisher"
-    Core.:> Core.Capture "accountId" Core.Int32
-    Core.:> "profiles"
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GetPublisherProfilesByAccountIdResponse
+     "adexchangebuyer" Core.:>
+       "v1.4" Core.:>
+         "publisher" Core.:>
+           Core.Capture "accountId" Core.Int32 Core.:>
+             "profiles" Core.:>
+               Core.QueryParam "alt" Core.AltJSON Core.:>
+                 Core.Get '[Core.JSON]
+                   GetPublisherProfilesByAccountIdResponse
 
 -- | Gets the requested publisher profile(s) by publisher accountId.
 --
 -- /See:/ 'newAdExchangeBuyerPubprofilesList' smart constructor.
 newtype AdExchangeBuyerPubprofilesList = AdExchangeBuyerPubprofilesList
-  { -- | The accountId of the publisher to get profiles for.
-    accountId :: Core.Int32
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | The accountId of the publisher to get profiles for.
+      accountId :: Core.Int32
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AdExchangeBuyerPubprofilesList' with the minimum fields required to make a request.
-newAdExchangeBuyerPubprofilesList ::
-  -- |  The accountId of the publisher to get profiles for. See 'accountId'.
-  Core.Int32 ->
-  AdExchangeBuyerPubprofilesList
+newAdExchangeBuyerPubprofilesList 
+    ::  Core.Int32
+       -- ^  The accountId of the publisher to get profiles for. See 'accountId'.
+    -> AdExchangeBuyerPubprofilesList
 newAdExchangeBuyerPubprofilesList accountId =
   AdExchangeBuyerPubprofilesList {accountId = accountId}
 
-instance
-  Core.GoogleRequest
-    AdExchangeBuyerPubprofilesList
-  where
-  type
-    Rs AdExchangeBuyerPubprofilesList =
-      GetPublisherProfilesByAccountIdResponse
-  type
-    Scopes AdExchangeBuyerPubprofilesList =
-      '[Adexchange'Buyer]
-  requestClient AdExchangeBuyerPubprofilesList {..} =
-    go
-      accountId
-      (Core.Just Core.AltJSON)
-      adExchangeBuyerService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AdExchangeBuyerPubprofilesListResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           AdExchangeBuyerPubprofilesList
+         where
+        type Rs AdExchangeBuyerPubprofilesList =
+             GetPublisherProfilesByAccountIdResponse
+        type Scopes AdExchangeBuyerPubprofilesList =
+             '[Adexchange'Buyer]
+        requestClient AdExchangeBuyerPubprofilesList{..}
+          = go accountId (Core.Just Core.AltJSON)
+              adExchangeBuyerService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy AdExchangeBuyerPubprofilesListResource)
+                      Core.mempty
+

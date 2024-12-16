@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,152 +26,153 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.FirebaseRules.Types
-  ( -- * Configuration
-    firebaseRulesService,
+    (
+    -- * Configuration
+      firebaseRulesService
 
     -- * OAuth Scopes
-    CloudPlatform'FullControl,
-    Firebase'FullControl,
-    Firebase'Readonly,
+    , CloudPlatform'FullControl
+    , Firebase'FullControl
+    , Firebase'Readonly
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Arg
-    Arg (..),
-    newArg,
+    , Arg (..)
+    , newArg
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** ExpressionReport
-    ExpressionReport (..),
-    newExpressionReport,
+    , ExpressionReport (..)
+    , newExpressionReport
 
     -- ** File
-    File (..),
-    newFile,
+    , File (..)
+    , newFile
 
     -- ** FunctionCall
-    FunctionCall (..),
-    newFunctionCall,
+    , FunctionCall (..)
+    , newFunctionCall
 
     -- ** FunctionMock
-    FunctionMock (..),
-    newFunctionMock,
+    , FunctionMock (..)
+    , newFunctionMock
 
     -- ** GetReleaseExecutableResponse
-    GetReleaseExecutableResponse (..),
-    newGetReleaseExecutableResponse,
+    , GetReleaseExecutableResponse (..)
+    , newGetReleaseExecutableResponse
 
     -- ** GetReleaseExecutableResponse_ExecutableVersion
-    GetReleaseExecutableResponse_ExecutableVersion (..),
+    , GetReleaseExecutableResponse_ExecutableVersion (..)
 
     -- ** GetReleaseExecutableResponse_Language
-    GetReleaseExecutableResponse_Language (..),
+    , GetReleaseExecutableResponse_Language (..)
 
     -- ** Issue
-    Issue (..),
-    newIssue,
+    , Issue (..)
+    , newIssue
 
     -- ** Issue_Severity
-    Issue_Severity (..),
+    , Issue_Severity (..)
 
     -- ** ListReleasesResponse
-    ListReleasesResponse (..),
-    newListReleasesResponse,
+    , ListReleasesResponse (..)
+    , newListReleasesResponse
 
     -- ** ListRulesetsResponse
-    ListRulesetsResponse (..),
-    newListRulesetsResponse,
+    , ListRulesetsResponse (..)
+    , newListRulesetsResponse
 
     -- ** Metadata
-    Metadata (..),
-    newMetadata,
+    , Metadata (..)
+    , newMetadata
 
     -- ** Release
-    Release (..),
-    newRelease,
+    , Release (..)
+    , newRelease
 
     -- ** Result
-    Result (..),
-    newResult,
+    , Result (..)
+    , newResult
 
     -- ** Ruleset
-    Ruleset (..),
-    newRuleset,
+    , Ruleset (..)
+    , newRuleset
 
     -- ** Source
-    Source (..),
-    newSource,
+    , Source (..)
+    , newSource
 
     -- ** SourcePosition
-    SourcePosition (..),
-    newSourcePosition,
+    , SourcePosition (..)
+    , newSourcePosition
 
     -- ** TestCase
-    TestCase (..),
-    newTestCase,
+    , TestCase (..)
+    , newTestCase
 
     -- ** TestCase_Expectation
-    TestCase_Expectation (..),
+    , TestCase_Expectation (..)
 
     -- ** TestCase_ExpressionReportLevel
-    TestCase_ExpressionReportLevel (..),
+    , TestCase_ExpressionReportLevel (..)
 
     -- ** TestCase_PathEncoding
-    TestCase_PathEncoding (..),
+    , TestCase_PathEncoding (..)
 
     -- ** TestResult
-    TestResult (..),
-    newTestResult,
+    , TestResult (..)
+    , newTestResult
 
     -- ** TestResult_State
-    TestResult_State (..),
+    , TestResult_State (..)
 
     -- ** TestRulesetRequest
-    TestRulesetRequest (..),
-    newTestRulesetRequest,
+    , TestRulesetRequest (..)
+    , newTestRulesetRequest
 
     -- ** TestRulesetResponse
-    TestRulesetResponse (..),
-    newTestRulesetResponse,
+    , TestRulesetResponse (..)
+    , newTestRulesetResponse
 
     -- ** TestSuite
-    TestSuite (..),
-    newTestSuite,
+    , TestSuite (..)
+    , newTestSuite
 
     -- ** UpdateReleaseRequest
-    UpdateReleaseRequest (..),
-    newUpdateReleaseRequest,
+    , UpdateReleaseRequest (..)
+    , newUpdateReleaseRequest
 
     -- ** ValueCount
-    ValueCount (..),
-    newValueCount,
+    , ValueCount (..)
+    , newValueCount
 
     -- ** VisitedExpression
-    VisitedExpression (..),
-    newVisitedExpression,
+    , VisitedExpression (..)
+    , newVisitedExpression
 
     -- ** ProjectsReleasesGetExecutableExecutableVersion
-    ProjectsReleasesGetExecutableExecutableVersion (..),
-  )
-where
+    , ProjectsReleasesGetExecutableExecutableVersion (..)
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.FirebaseRules.Internal.Product
 import Gogol.FirebaseRules.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Firebase Rules API. This contains the host and root path used as a starting point for constructing service requests.
 firebaseRulesService :: Core.ServiceConfig
-firebaseRulesService =
-  Core.defaultService
-    (Core.ServiceId "firebaserules:v1")
-    "firebaserules.googleapis.com"
+firebaseRulesService
+  = Core.defaultService
+      (Core.ServiceId "firebaserules:v1")
+      "firebaserules.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"

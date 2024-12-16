@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,14 +31,14 @@
 --
 -- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.liveChatModerators.insert@.
 module Gogol.YouTube.LiveChatModerators.Insert
-  ( -- * Resource
-    YouTubeLiveChatModeratorsInsertResource,
+    (
+    -- * Resource
+      YouTubeLiveChatModeratorsInsertResource
 
     -- ** Constructing a Request
-    YouTubeLiveChatModeratorsInsert (..),
-    newYouTubeLiveChatModeratorsInsert,
-  )
-where
+    , YouTubeLiveChatModeratorsInsert (..)
+    , newYouTubeLiveChatModeratorsInsert
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.YouTube.Types
@@ -45,84 +46,76 @@ import Gogol.YouTube.Types
 -- | A resource alias for @youtube.liveChatModerators.insert@ method which the
 -- 'YouTubeLiveChatModeratorsInsert' request conforms to.
 type YouTubeLiveChatModeratorsInsertResource =
-  "youtube"
-    Core.:> "v3"
-    Core.:> "liveChat"
-    Core.:> "moderators"
-    Core.:> Core.QueryParams "part" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] LiveChatModerator
-    Core.:> Core.Post '[Core.JSON] LiveChatModerator
+     "youtube" Core.:>
+       "v3" Core.:>
+         "liveChat" Core.:>
+           "moderators" Core.:>
+             Core.QueryParams "part" Core.Text Core.:>
+               Core.QueryParam "$.xgafv" Xgafv Core.:>
+                 Core.QueryParam "access_token" Core.Text Core.:>
+                   Core.QueryParam "callback" Core.Text Core.:>
+                     Core.QueryParam "uploadType" Core.Text Core.:>
+                       Core.QueryParam "upload_protocol" Core.Text Core.:>
+                         Core.QueryParam "alt" Core.AltJSON Core.:>
+                           Core.ReqBody '[Core.JSON] LiveChatModerator Core.:>
+                             Core.Post '[Core.JSON] LiveChatModerator
 
 -- | Inserts a new resource into this collection.
 --
 -- /See:/ 'newYouTubeLiveChatModeratorsInsert' smart constructor.
 data YouTubeLiveChatModeratorsInsert = YouTubeLiveChatModeratorsInsert
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | The /part/ parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response returns. Set the parameter value to snippet.
-    part :: [Core.Text],
-    -- | Multipart request metadata.
-    payload :: LiveChatModerator,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | The /part/ parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response returns. Set the parameter value to snippet.
+    , part :: [Core.Text]
+      -- | Multipart request metadata.
+    , payload :: LiveChatModerator
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'YouTubeLiveChatModeratorsInsert' with the minimum fields required to make a request.
-newYouTubeLiveChatModeratorsInsert ::
-  -- |  The /part/ parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response returns. Set the parameter value to snippet. See 'part'.
-  [Core.Text] ->
-  -- |  Multipart request metadata. See 'payload'.
-  LiveChatModerator ->
-  YouTubeLiveChatModeratorsInsert
+newYouTubeLiveChatModeratorsInsert 
+    ::  [Core.Text]
+       -- ^  The /part/ parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response returns. Set the parameter value to snippet. See 'part'.
+    -> LiveChatModerator
+       -- ^  Multipart request metadata. See 'payload'.
+    -> YouTubeLiveChatModeratorsInsert
 newYouTubeLiveChatModeratorsInsert part payload =
   YouTubeLiveChatModeratorsInsert
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      part = part,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , part = part
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    YouTubeLiveChatModeratorsInsert
-  where
-  type
-    Rs YouTubeLiveChatModeratorsInsert =
-      LiveChatModerator
-  type
-    Scopes YouTubeLiveChatModeratorsInsert =
-      '[Youtube'FullControl, Youtube'ForceSsl]
-  requestClient YouTubeLiveChatModeratorsInsert {..} =
-    go
-      part
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      payload
-      youTubeService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy YouTubeLiveChatModeratorsInsertResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           YouTubeLiveChatModeratorsInsert
+         where
+        type Rs YouTubeLiveChatModeratorsInsert =
+             LiveChatModerator
+        type Scopes YouTubeLiveChatModeratorsInsert =
+             '[Youtube'FullControl, Youtube'ForceSsl]
+        requestClient YouTubeLiveChatModeratorsInsert{..}
+          = go part xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              youTubeService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy YouTubeLiveChatModeratorsInsertResource)
+                      Core.mempty
+

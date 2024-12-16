@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -33,31 +34,32 @@
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.fhirStores.import@.
 module Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Import
-  ( -- * Resource
-    HealthcareProjectsLocationsDatasetsFhirStoresImportResource,
+    (
+    -- * Resource
+      HealthcareProjectsLocationsDatasetsFhirStoresImportResource
 
     -- ** Constructing a Request
-    HealthcareProjectsLocationsDatasetsFhirStoresImport (..),
-    newHealthcareProjectsLocationsDatasetsFhirStoresImport,
-  )
-where
+    , HealthcareProjectsLocationsDatasetsFhirStoresImport (..)
+    , newHealthcareProjectsLocationsDatasetsFhirStoresImport
+    ) where
 
-import Gogol.Healthcare.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Healthcare.Types
 
 -- | A resource alias for @healthcare.projects.locations.datasets.fhirStores.import@ method which the
 -- 'HealthcareProjectsLocationsDatasetsFhirStoresImport' request conforms to.
-type HealthcareProjectsLocationsDatasetsFhirStoresImportResource =
-  "v1"
-    Core.:> Core.CaptureMode "name" "import" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] ImportResourcesRequest
-    Core.:> Core.Post '[Core.JSON] Operation
+type HealthcareProjectsLocationsDatasetsFhirStoresImportResource
+     =
+     "v1" Core.:>
+       Core.CaptureMode "name" "import" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.ReqBody '[Core.JSON] ImportResourcesRequest
+                       Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Imports resources to the FHIR store by loading data from the specified sources. This method is optimized to load large quantities of data using import semantics that ignore some FHIR store configuration options and are not suitable for all use cases. It is primarily intended to load data into an empty FHIR store that is not being used by other clients. In cases where this method is not appropriate, consider using ExecuteBundle to load data. Every resource in the input must contain a client-supplied ID. Each resource is stored using the supplied ID regardless of the enable/update/create setting on the FHIR store. It is strongly advised not to include or encode any sensitive data such as patient identifiers in client-specified resource IDs. Those IDs are part of the FHIR resource path recorded in Cloud Audit Logs and Cloud Pub\/Sub notifications. Those IDs can also be contained in reference fields within other resources. The import process does not enforce referential integrity, regardless of the
 -- disable/referential/integrity setting on the FHIR store. This allows the import of resources with arbitrary interdependencies without considering grouping or ordering, but if the input data contains invalid references or if some resources fail to be imported, the FHIR store might be left in a state that violates referential integrity. The import process does not trigger Pub\/Sub notification or BigQuery streaming update, regardless of how those are configured on the FHIR store. If a resource with the specified ID already exists, the most recent version of the resource is overwritten without creating a new historical version, regardless of the disable/resource/versioning setting on the FHIR store. If transient failures occur during the import, it\'s possible that successfully imported resources will be overwritten more than once. The import operation is idempotent unless the input data contains multiple valid resources with the same ID but different contents. In that case, after the import completes, the store
@@ -66,70 +68,64 @@ type HealthcareProjectsLocationsDatasetsFhirStoresImportResource =
 --
 -- /See:/ 'newHealthcareProjectsLocationsDatasetsFhirStoresImport' smart constructor.
 data HealthcareProjectsLocationsDatasetsFhirStoresImport = HealthcareProjectsLocationsDatasetsFhirStoresImport
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | The name of the FHIR store to import FHIR resources to, in the format of @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@.
-    name :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: ImportResourcesRequest,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The name of the FHIR store to import FHIR resources to, in the format of @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@.
+    , name :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: ImportResourcesRequest
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsFhirStoresImport' with the minimum fields required to make a request.
-newHealthcareProjectsLocationsDatasetsFhirStoresImport ::
-  -- |  The name of the FHIR store to import FHIR resources to, in the format of @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@. See 'name'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  ImportResourcesRequest ->
-  HealthcareProjectsLocationsDatasetsFhirStoresImport
+newHealthcareProjectsLocationsDatasetsFhirStoresImport 
+    ::  Core.Text
+       -- ^  Required. The name of the FHIR store to import FHIR resources to, in the format of @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@. See 'name'.
+    -> ImportResourcesRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> HealthcareProjectsLocationsDatasetsFhirStoresImport
 newHealthcareProjectsLocationsDatasetsFhirStoresImport name payload =
   HealthcareProjectsLocationsDatasetsFhirStoresImport
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    HealthcareProjectsLocationsDatasetsFhirStoresImport
-  where
-  type
-    Rs
-      HealthcareProjectsLocationsDatasetsFhirStoresImport =
-      Operation
-  type
-    Scopes
-      HealthcareProjectsLocationsDatasetsFhirStoresImport =
-      '[CloudPlatform'FullControl]
-  requestClient
-    HealthcareProjectsLocationsDatasetsFhirStoresImport {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        healthcareService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  HealthcareProjectsLocationsDatasetsFhirStoresImportResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           HealthcareProjectsLocationsDatasetsFhirStoresImport
+         where
+        type Rs
+               HealthcareProjectsLocationsDatasetsFhirStoresImport
+             = Operation
+        type Scopes
+               HealthcareProjectsLocationsDatasetsFhirStoresImport
+             =
+             '[CloudHealthcare'FullControl,
+               CloudPlatform'FullControl]
+        requestClient
+          HealthcareProjectsLocationsDatasetsFhirStoresImport{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              healthcareService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           HealthcareProjectsLocationsDatasetsFhirStoresImportResource)
+                      Core.mempty
+

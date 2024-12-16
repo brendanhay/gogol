@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,277 +31,277 @@
 --
 -- /See:/ <https://cloud.google.com/genomics Genomics API Reference>
 module Gogol.Genomics
-  ( -- * Configuration
-    genomicsService,
+    (
+    -- * Configuration
+      genomicsService
 
     -- * OAuth Scopes
-    CloudPlatform'FullControl,
-    Genomics'FullControl,
+    , CloudPlatform'FullControl
+    , Genomics'FullControl
 
     -- * Resources
 
     -- ** genomics.pipelines.run
-    GenomicsPipelinesRunResource,
-    GenomicsPipelinesRun (..),
-    newGenomicsPipelinesRun,
+    , GenomicsPipelinesRunResource
+    , GenomicsPipelinesRun (..)
+    , newGenomicsPipelinesRun
 
     -- ** genomics.projects.operations.cancel
-    GenomicsProjectsOperationsCancelResource,
-    GenomicsProjectsOperationsCancel (..),
-    newGenomicsProjectsOperationsCancel,
+    , GenomicsProjectsOperationsCancelResource
+    , GenomicsProjectsOperationsCancel (..)
+    , newGenomicsProjectsOperationsCancel
 
     -- ** genomics.projects.operations.get
-    GenomicsProjectsOperationsGetResource,
-    GenomicsProjectsOperationsGet (..),
-    newGenomicsProjectsOperationsGet,
+    , GenomicsProjectsOperationsGetResource
+    , GenomicsProjectsOperationsGet (..)
+    , newGenomicsProjectsOperationsGet
 
     -- ** genomics.projects.operations.list
-    GenomicsProjectsOperationsListResource,
-    GenomicsProjectsOperationsList (..),
-    newGenomicsProjectsOperationsList,
+    , GenomicsProjectsOperationsListResource
+    , GenomicsProjectsOperationsList (..)
+    , newGenomicsProjectsOperationsList
 
     -- ** genomics.projects.workers.checkIn
-    GenomicsProjectsWorkersCheckInResource,
-    GenomicsProjectsWorkersCheckIn (..),
-    newGenomicsProjectsWorkersCheckIn,
+    , GenomicsProjectsWorkersCheckInResource
+    , GenomicsProjectsWorkersCheckIn (..)
+    , newGenomicsProjectsWorkersCheckIn
 
     -- ** genomics.workers.checkIn
-    GenomicsWorkersCheckInResource,
-    GenomicsWorkersCheckIn (..),
-    newGenomicsWorkersCheckIn,
+    , GenomicsWorkersCheckInResource
+    , GenomicsWorkersCheckIn (..)
+    , newGenomicsWorkersCheckIn
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Accelerator
-    Accelerator (..),
-    newAccelerator,
+    , Accelerator (..)
+    , newAccelerator
 
     -- ** Action
-    Action (..),
-    newAction,
+    , Action (..)
+    , newAction
 
     -- ** Action_Environment
-    Action_Environment (..),
-    newAction_Environment,
+    , Action_Environment (..)
+    , newAction_Environment
 
     -- ** Action_FlagsItem
-    Action_FlagsItem (..),
+    , Action_FlagsItem (..)
 
     -- ** Action_Labels
-    Action_Labels (..),
-    newAction_Labels,
+    , Action_Labels (..)
+    , newAction_Labels
 
     -- ** Action_PortMappings
-    Action_PortMappings (..),
-    newAction_PortMappings,
+    , Action_PortMappings (..)
+    , newAction_PortMappings
 
     -- ** CancelOperationRequest
-    CancelOperationRequest (..),
-    newCancelOperationRequest,
+    , CancelOperationRequest (..)
+    , newCancelOperationRequest
 
     -- ** CheckInRequest
-    CheckInRequest (..),
-    newCheckInRequest,
+    , CheckInRequest (..)
+    , newCheckInRequest
 
     -- ** CheckInRequest_Event
-    CheckInRequest_Event (..),
-    newCheckInRequest_Event,
+    , CheckInRequest_Event (..)
+    , newCheckInRequest_Event
 
     -- ** CheckInResponse
-    CheckInResponse (..),
-    newCheckInResponse,
+    , CheckInResponse (..)
+    , newCheckInResponse
 
     -- ** CheckInResponse_Features
-    CheckInResponse_Features (..),
-    newCheckInResponse_Features,
+    , CheckInResponse_Features (..)
+    , newCheckInResponse_Features
 
     -- ** CheckInResponse_Metadata
-    CheckInResponse_Metadata (..),
-    newCheckInResponse_Metadata,
+    , CheckInResponse_Metadata (..)
+    , newCheckInResponse_Metadata
 
     -- ** ContainerKilledEvent
-    ContainerKilledEvent (..),
-    newContainerKilledEvent,
+    , ContainerKilledEvent (..)
+    , newContainerKilledEvent
 
     -- ** ContainerStartedEvent
-    ContainerStartedEvent (..),
-    newContainerStartedEvent,
+    , ContainerStartedEvent (..)
+    , newContainerStartedEvent
 
     -- ** ContainerStartedEvent_PortMappings
-    ContainerStartedEvent_PortMappings (..),
-    newContainerStartedEvent_PortMappings,
+    , ContainerStartedEvent_PortMappings (..)
+    , newContainerStartedEvent_PortMappings
 
     -- ** ContainerStoppedEvent
-    ContainerStoppedEvent (..),
-    newContainerStoppedEvent,
+    , ContainerStoppedEvent (..)
+    , newContainerStoppedEvent
 
     -- ** DelayedEvent
-    DelayedEvent (..),
-    newDelayedEvent,
+    , DelayedEvent (..)
+    , newDelayedEvent
 
     -- ** Disk
-    Disk (..),
-    newDisk,
+    , Disk (..)
+    , newDisk
 
     -- ** DiskStatus
-    DiskStatus (..),
-    newDiskStatus,
+    , DiskStatus (..)
+    , newDiskStatus
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** Event
-    Event (..),
-    newEvent,
+    , Event (..)
+    , newEvent
 
     -- ** Event_Details
-    Event_Details (..),
-    newEvent_Details,
+    , Event_Details (..)
+    , newEvent_Details
 
     -- ** ExistingDisk
-    ExistingDisk (..),
-    newExistingDisk,
+    , ExistingDisk (..)
+    , newExistingDisk
 
     -- ** FailedEvent
-    FailedEvent (..),
-    newFailedEvent,
+    , FailedEvent (..)
+    , newFailedEvent
 
     -- ** FailedEvent_Code
-    FailedEvent_Code (..),
+    , FailedEvent_Code (..)
 
     -- ** ListOperationsResponse
-    ListOperationsResponse (..),
-    newListOperationsResponse,
+    , ListOperationsResponse (..)
+    , newListOperationsResponse
 
     -- ** Metadata
-    Metadata (..),
-    newMetadata,
+    , Metadata (..)
+    , newMetadata
 
     -- ** Metadata_Labels
-    Metadata_Labels (..),
-    newMetadata_Labels,
+    , Metadata_Labels (..)
+    , newMetadata_Labels
 
     -- ** Mount
-    Mount (..),
-    newMount,
+    , Mount (..)
+    , newMount
 
     -- ** NFSMount
-    NFSMount (..),
-    newNFSMount,
+    , NFSMount (..)
+    , newNFSMount
 
     -- ** Network
-    Network (..),
-    newNetwork,
+    , Network (..)
+    , newNetwork
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** PersistentDisk
-    PersistentDisk (..),
-    newPersistentDisk,
+    , PersistentDisk (..)
+    , newPersistentDisk
 
     -- ** Pipeline
-    Pipeline (..),
-    newPipeline,
+    , Pipeline (..)
+    , newPipeline
 
     -- ** Pipeline_Environment
-    Pipeline_Environment (..),
-    newPipeline_Environment,
+    , Pipeline_Environment (..)
+    , newPipeline_Environment
 
     -- ** PullStartedEvent
-    PullStartedEvent (..),
-    newPullStartedEvent,
+    , PullStartedEvent (..)
+    , newPullStartedEvent
 
     -- ** PullStoppedEvent
-    PullStoppedEvent (..),
-    newPullStoppedEvent,
+    , PullStoppedEvent (..)
+    , newPullStoppedEvent
 
     -- ** Resources
-    Resources (..),
-    newResources,
+    , Resources (..)
+    , newResources
 
     -- ** RunPipelineRequest
-    RunPipelineRequest (..),
-    newRunPipelineRequest,
+    , RunPipelineRequest (..)
+    , newRunPipelineRequest
 
     -- ** RunPipelineRequest_Labels
-    RunPipelineRequest_Labels (..),
-    newRunPipelineRequest_Labels,
+    , RunPipelineRequest_Labels (..)
+    , newRunPipelineRequest_Labels
 
     -- ** RunPipelineResponse
-    RunPipelineResponse (..),
-    newRunPipelineResponse,
+    , RunPipelineResponse (..)
+    , newRunPipelineResponse
 
     -- ** Secret
-    Secret (..),
-    newSecret,
+    , Secret (..)
+    , newSecret
 
     -- ** ServiceAccount
-    ServiceAccount (..),
-    newServiceAccount,
+    , ServiceAccount (..)
+    , newServiceAccount
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** TimestampedEvent
-    TimestampedEvent (..),
-    newTimestampedEvent,
+    , TimestampedEvent (..)
+    , newTimestampedEvent
 
     -- ** TimestampedEvent_Data
-    TimestampedEvent_Data (..),
-    newTimestampedEvent_Data,
+    , TimestampedEvent_Data (..)
+    , newTimestampedEvent_Data
 
     -- ** UnexpectedExitStatusEvent
-    UnexpectedExitStatusEvent (..),
-    newUnexpectedExitStatusEvent,
+    , UnexpectedExitStatusEvent (..)
+    , newUnexpectedExitStatusEvent
 
     -- ** VirtualMachine
-    VirtualMachine (..),
-    newVirtualMachine,
+    , VirtualMachine (..)
+    , newVirtualMachine
 
     -- ** VirtualMachine_Labels
-    VirtualMachine_Labels (..),
-    newVirtualMachine_Labels,
+    , VirtualMachine_Labels (..)
+    , newVirtualMachine_Labels
 
     -- ** Volume
-    Volume (..),
-    newVolume,
+    , Volume (..)
+    , newVolume
 
     -- ** WorkerAssignedEvent
-    WorkerAssignedEvent (..),
-    newWorkerAssignedEvent,
+    , WorkerAssignedEvent (..)
+    , newWorkerAssignedEvent
 
     -- ** WorkerReleasedEvent
-    WorkerReleasedEvent (..),
-    newWorkerReleasedEvent,
+    , WorkerReleasedEvent (..)
+    , newWorkerReleasedEvent
 
     -- ** WorkerStatus
-    WorkerStatus (..),
-    newWorkerStatus,
+    , WorkerStatus (..)
+    , newWorkerStatus
 
     -- ** WorkerStatus_AttachedDisks
-    WorkerStatus_AttachedDisks (..),
-    newWorkerStatus_AttachedDisks,
-  )
-where
+    , WorkerStatus_AttachedDisks (..)
+    , newWorkerStatus_AttachedDisks
+    ) where
 
 import Gogol.Genomics.Pipelines.Run
 import Gogol.Genomics.Projects.Operations.Cancel

@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,288 +31,288 @@
 --
 -- /See:/ <https://developers.google.com/analytics/devguides/reporting/core/v4/ Analytics Reporting API Reference>
 module Gogol.AnalyticsReporting
-  ( -- * Configuration
-    analyticsReportingService,
+    (
+    -- * Configuration
+      analyticsReportingService
 
     -- * OAuth Scopes
-    Analytics'FullControl,
-    Analytics'Readonly,
+    , Analytics'FullControl
+    , Analytics'Readonly
 
     -- * Resources
 
     -- ** analyticsreporting.reports.batchGet
-    AnalyticsReportingReportsBatchGetResource,
-    AnalyticsReportingReportsBatchGet (..),
-    newAnalyticsReportingReportsBatchGet,
+    , AnalyticsReportingReportsBatchGetResource
+    , AnalyticsReportingReportsBatchGet (..)
+    , newAnalyticsReportingReportsBatchGet
 
     -- ** analyticsreporting.userActivity.search
-    AnalyticsReportingUserActivitySearchResource,
-    AnalyticsReportingUserActivitySearch (..),
-    newAnalyticsReportingUserActivitySearch,
+    , AnalyticsReportingUserActivitySearchResource
+    , AnalyticsReportingUserActivitySearch (..)
+    , newAnalyticsReportingUserActivitySearch
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Activity
-    Activity (..),
-    newActivity,
+    , Activity (..)
+    , newActivity
 
     -- ** Activity_ActivityType
-    Activity_ActivityType (..),
+    , Activity_ActivityType (..)
 
     -- ** Cohort
-    Cohort (..),
-    newCohort,
+    , Cohort (..)
+    , newCohort
 
     -- ** Cohort_Type
-    Cohort_Type (..),
+    , Cohort_Type (..)
 
     -- ** CohortGroup
-    CohortGroup (..),
-    newCohortGroup,
+    , CohortGroup (..)
+    , newCohortGroup
 
     -- ** ColumnHeader
-    ColumnHeader (..),
-    newColumnHeader,
+    , ColumnHeader (..)
+    , newColumnHeader
 
     -- ** CustomDimension
-    CustomDimension (..),
-    newCustomDimension,
+    , CustomDimension (..)
+    , newCustomDimension
 
     -- ** DateRange
-    DateRange (..),
-    newDateRange,
+    , DateRange (..)
+    , newDateRange
 
     -- ** DateRangeValues
-    DateRangeValues (..),
-    newDateRangeValues,
+    , DateRangeValues (..)
+    , newDateRangeValues
 
     -- ** Dimension
-    Dimension (..),
-    newDimension,
+    , Dimension (..)
+    , newDimension
 
     -- ** DimensionFilter
-    DimensionFilter (..),
-    newDimensionFilter,
+    , DimensionFilter (..)
+    , newDimensionFilter
 
     -- ** DimensionFilter_Operator
-    DimensionFilter_Operator (..),
+    , DimensionFilter_Operator (..)
 
     -- ** DimensionFilterClause
-    DimensionFilterClause (..),
-    newDimensionFilterClause,
+    , DimensionFilterClause (..)
+    , newDimensionFilterClause
 
     -- ** DimensionFilterClause_Operator
-    DimensionFilterClause_Operator (..),
+    , DimensionFilterClause_Operator (..)
 
     -- ** DynamicSegment
-    DynamicSegment (..),
-    newDynamicSegment,
+    , DynamicSegment (..)
+    , newDynamicSegment
 
     -- ** EcommerceData
-    EcommerceData (..),
-    newEcommerceData,
+    , EcommerceData (..)
+    , newEcommerceData
 
     -- ** EcommerceData_ActionType
-    EcommerceData_ActionType (..),
+    , EcommerceData_ActionType (..)
 
     -- ** EcommerceData_EcommerceType
-    EcommerceData_EcommerceType (..),
+    , EcommerceData_EcommerceType (..)
 
     -- ** EventData
-    EventData (..),
-    newEventData,
+    , EventData (..)
+    , newEventData
 
     -- ** GetReportsRequest
-    GetReportsRequest (..),
-    newGetReportsRequest,
+    , GetReportsRequest (..)
+    , newGetReportsRequest
 
     -- ** GetReportsResponse
-    GetReportsResponse (..),
-    newGetReportsResponse,
+    , GetReportsResponse (..)
+    , newGetReportsResponse
 
     -- ** GoalData
-    GoalData (..),
-    newGoalData,
+    , GoalData (..)
+    , newGoalData
 
     -- ** GoalSetData
-    GoalSetData (..),
-    newGoalSetData,
+    , GoalSetData (..)
+    , newGoalSetData
 
     -- ** Metric
-    Metric (..),
-    newMetric,
+    , Metric (..)
+    , newMetric
 
     -- ** Metric_FormattingType
-    Metric_FormattingType (..),
+    , Metric_FormattingType (..)
 
     -- ** MetricFilter
-    MetricFilter (..),
-    newMetricFilter,
+    , MetricFilter (..)
+    , newMetricFilter
 
     -- ** MetricFilter_Operator
-    MetricFilter_Operator (..),
+    , MetricFilter_Operator (..)
 
     -- ** MetricFilterClause
-    MetricFilterClause (..),
-    newMetricFilterClause,
+    , MetricFilterClause (..)
+    , newMetricFilterClause
 
     -- ** MetricFilterClause_Operator
-    MetricFilterClause_Operator (..),
+    , MetricFilterClause_Operator (..)
 
     -- ** MetricHeader
-    MetricHeader (..),
-    newMetricHeader,
+    , MetricHeader (..)
+    , newMetricHeader
 
     -- ** MetricHeaderEntry
-    MetricHeaderEntry (..),
-    newMetricHeaderEntry,
+    , MetricHeaderEntry (..)
+    , newMetricHeaderEntry
 
     -- ** MetricHeaderEntry_Type
-    MetricHeaderEntry_Type (..),
+    , MetricHeaderEntry_Type (..)
 
     -- ** OrFiltersForSegment
-    OrFiltersForSegment (..),
-    newOrFiltersForSegment,
+    , OrFiltersForSegment (..)
+    , newOrFiltersForSegment
 
     -- ** OrderBy
-    OrderBy (..),
-    newOrderBy,
+    , OrderBy (..)
+    , newOrderBy
 
     -- ** OrderBy_OrderType
-    OrderBy_OrderType (..),
+    , OrderBy_OrderType (..)
 
     -- ** OrderBy_SortOrder
-    OrderBy_SortOrder (..),
+    , OrderBy_SortOrder (..)
 
     -- ** PageviewData
-    PageviewData (..),
-    newPageviewData,
+    , PageviewData (..)
+    , newPageviewData
 
     -- ** Pivot
-    Pivot (..),
-    newPivot,
+    , Pivot (..)
+    , newPivot
 
     -- ** PivotHeader
-    PivotHeader (..),
-    newPivotHeader,
+    , PivotHeader (..)
+    , newPivotHeader
 
     -- ** PivotHeaderEntry
-    PivotHeaderEntry (..),
-    newPivotHeaderEntry,
+    , PivotHeaderEntry (..)
+    , newPivotHeaderEntry
 
     -- ** PivotValueRegion
-    PivotValueRegion (..),
-    newPivotValueRegion,
+    , PivotValueRegion (..)
+    , newPivotValueRegion
 
     -- ** ProductData
-    ProductData (..),
-    newProductData,
+    , ProductData (..)
+    , newProductData
 
     -- ** Report
-    Report (..),
-    newReport,
+    , Report (..)
+    , newReport
 
     -- ** ReportData
-    ReportData (..),
-    newReportData,
+    , ReportData (..)
+    , newReportData
 
     -- ** ReportRequest
-    ReportRequest (..),
-    newReportRequest,
+    , ReportRequest (..)
+    , newReportRequest
 
     -- ** ReportRequest_SamplingLevel
-    ReportRequest_SamplingLevel (..),
+    , ReportRequest_SamplingLevel (..)
 
     -- ** ReportRow
-    ReportRow (..),
-    newReportRow,
+    , ReportRow (..)
+    , newReportRow
 
     -- ** ResourceQuotasRemaining
-    ResourceQuotasRemaining (..),
-    newResourceQuotasRemaining,
+    , ResourceQuotasRemaining (..)
+    , newResourceQuotasRemaining
 
     -- ** ScreenviewData
-    ScreenviewData (..),
-    newScreenviewData,
+    , ScreenviewData (..)
+    , newScreenviewData
 
     -- ** SearchUserActivityRequest
-    SearchUserActivityRequest (..),
-    newSearchUserActivityRequest,
+    , SearchUserActivityRequest (..)
+    , newSearchUserActivityRequest
 
     -- ** SearchUserActivityRequest_ActivityTypesItem
-    SearchUserActivityRequest_ActivityTypesItem (..),
+    , SearchUserActivityRequest_ActivityTypesItem (..)
 
     -- ** SearchUserActivityResponse
-    SearchUserActivityResponse (..),
-    newSearchUserActivityResponse,
+    , SearchUserActivityResponse (..)
+    , newSearchUserActivityResponse
 
     -- ** Segment
-    Segment (..),
-    newSegment,
+    , Segment (..)
+    , newSegment
 
     -- ** SegmentDefinition
-    SegmentDefinition (..),
-    newSegmentDefinition,
+    , SegmentDefinition (..)
+    , newSegmentDefinition
 
     -- ** SegmentDimensionFilter
-    SegmentDimensionFilter (..),
-    newSegmentDimensionFilter,
+    , SegmentDimensionFilter (..)
+    , newSegmentDimensionFilter
 
     -- ** SegmentDimensionFilter_Operator
-    SegmentDimensionFilter_Operator (..),
+    , SegmentDimensionFilter_Operator (..)
 
     -- ** SegmentFilter
-    SegmentFilter (..),
-    newSegmentFilter,
+    , SegmentFilter (..)
+    , newSegmentFilter
 
     -- ** SegmentFilterClause
-    SegmentFilterClause (..),
-    newSegmentFilterClause,
+    , SegmentFilterClause (..)
+    , newSegmentFilterClause
 
     -- ** SegmentMetricFilter
-    SegmentMetricFilter (..),
-    newSegmentMetricFilter,
+    , SegmentMetricFilter (..)
+    , newSegmentMetricFilter
 
     -- ** SegmentMetricFilter_Operator
-    SegmentMetricFilter_Operator (..),
+    , SegmentMetricFilter_Operator (..)
 
     -- ** SegmentMetricFilter_Scope
-    SegmentMetricFilter_Scope (..),
+    , SegmentMetricFilter_Scope (..)
 
     -- ** SegmentSequenceStep
-    SegmentSequenceStep (..),
-    newSegmentSequenceStep,
+    , SegmentSequenceStep (..)
+    , newSegmentSequenceStep
 
     -- ** SegmentSequenceStep_MatchType
-    SegmentSequenceStep_MatchType (..),
+    , SegmentSequenceStep_MatchType (..)
 
     -- ** SequenceSegment
-    SequenceSegment (..),
-    newSequenceSegment,
+    , SequenceSegment (..)
+    , newSequenceSegment
 
     -- ** SimpleSegment
-    SimpleSegment (..),
-    newSimpleSegment,
+    , SimpleSegment (..)
+    , newSimpleSegment
 
     -- ** TransactionData
-    TransactionData (..),
-    newTransactionData,
+    , TransactionData (..)
+    , newTransactionData
 
     -- ** User
-    User (..),
-    newUser,
+    , User (..)
+    , newUser
 
     -- ** User_Type
-    User_Type (..),
+    , User_Type (..)
 
     -- ** UserActivitySession
-    UserActivitySession (..),
-    newUserActivitySession,
-  )
-where
+    , UserActivitySession (..)
+    , newUserActivitySession
+    ) where
 
 import Gogol.AnalyticsReporting.Reports.BatchGet
 import Gogol.AnalyticsReporting.Types

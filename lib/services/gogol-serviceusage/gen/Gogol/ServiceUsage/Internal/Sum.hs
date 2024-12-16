@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +26,31 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.ServiceUsage.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
+        ..
+      ),
+
+    -- * Analysis_AnalysisType
+    Analysis_AnalysisType
+      (
+        Analysis_AnalysisType_ANALYSISTYPEUNSPECIFIED,
+        Analysis_AnalysisType_ANALYSISTYPEDEPENDENCY,
+        Analysis_AnalysisType_ANALYSISTYPERESOURCEUSAGE,
         ..
       ),
 
     -- * Api_Syntax
     Api_Syntax
-      ( Api_Syntax_SYNTAX_PROTO2,
+      (
+        Api_Syntax_SYNTAX_PROTO2,
         Api_Syntax_SYNTAX_PROTO3,
         Api_Syntax_SYNTAXEDITIONS,
         ..
@@ -43,7 +58,8 @@ module Gogol.ServiceUsage.Internal.Sum
 
     -- * BackendRule_PathTranslation
     BackendRule_PathTranslation
-      ( BackendRule_PathTranslation_PATHTRANSLATIONUNSPECIFIED,
+      (
+        BackendRule_PathTranslation_PATHTRANSLATIONUNSPECIFIED,
         BackendRule_PathTranslation_CONSTANTADDRESS,
         BackendRule_PathTranslation_APPENDPATHTOADDRESS,
         ..
@@ -51,7 +67,8 @@ module Gogol.ServiceUsage.Internal.Sum
 
     -- * ClientLibrarySettings_LaunchStage
     ClientLibrarySettings_LaunchStage
-      ( ClientLibrarySettings_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
+      (
+        ClientLibrarySettings_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
         ClientLibrarySettings_LaunchStage_Unimplemented,
         ClientLibrarySettings_LaunchStage_Prelaunch,
         ClientLibrarySettings_LaunchStage_EARLYACCESS,
@@ -64,7 +81,8 @@ module Gogol.ServiceUsage.Internal.Sum
 
     -- * CommonLanguageSettings_DestinationsItem
     CommonLanguageSettings_DestinationsItem
-      ( CommonLanguageSettings_DestinationsItem_CLIENTLIBRARYDESTINATIONUNSPECIFIED,
+      (
+        CommonLanguageSettings_DestinationsItem_CLIENTLIBRARYDESTINATIONUNSPECIFIED,
         CommonLanguageSettings_DestinationsItem_Github,
         CommonLanguageSettings_DestinationsItem_PACKAGEMANAGER,
         ..
@@ -72,15 +90,27 @@ module Gogol.ServiceUsage.Internal.Sum
 
     -- * DisableServiceRequest_CheckIfServiceHasUsage
     DisableServiceRequest_CheckIfServiceHasUsage
-      ( DisableServiceRequest_CheckIfServiceHasUsage_CHECKIFSERVICEHASUSAGEUNSPECIFIED,
+      (
+        DisableServiceRequest_CheckIfServiceHasUsage_CHECKIFSERVICEHASUSAGEUNSPECIFIED,
         DisableServiceRequest_CheckIfServiceHasUsage_Skip,
         DisableServiceRequest_CheckIfServiceHasUsage_Check,
         ..
       ),
 
+    -- * EnableRule_EnableType
+    EnableRule_EnableType
+      (
+        EnableRule_EnableType_ENABLETYPEUNSPECIFIED,
+        EnableRule_EnableType_Client,
+        EnableRule_EnableType_Resource,
+        EnableRule_EnableType_V1COMPATIBLE,
+        ..
+      ),
+
     -- * Enum_Syntax
     Enum_Syntax
-      ( Enum_Syntax_SYNTAX_PROTO2,
+      (
+        Enum_Syntax_SYNTAX_PROTO2,
         Enum_Syntax_SYNTAX_PROTO3,
         Enum_Syntax_SYNTAXEDITIONS,
         ..
@@ -88,7 +118,8 @@ module Gogol.ServiceUsage.Internal.Sum
 
     -- * Field_Cardinality
     Field_Cardinality
-      ( Field_Cardinality_CARDINALITYUNKNOWN,
+      (
+        Field_Cardinality_CARDINALITYUNKNOWN,
         Field_Cardinality_CARDINALITYOPTIONAL,
         Field_Cardinality_CARDINALITYREQUIRED,
         Field_Cardinality_CARDINALITYREPEATED,
@@ -97,7 +128,8 @@ module Gogol.ServiceUsage.Internal.Sum
 
     -- * Field_Kind
     Field_Kind
-      ( Field_Kind_TYPEUNKNOWN,
+      (
+        Field_Kind_TYPEUNKNOWN,
         Field_Kind_TYPEDOUBLE,
         Field_Kind_TYPEFLOAT,
         Field_Kind_TYPE_INT64,
@@ -121,14 +153,16 @@ module Gogol.ServiceUsage.Internal.Sum
 
     -- * GetServiceIdentityResponse_State
     GetServiceIdentityResponse_State
-      ( GetServiceIdentityResponse_State_IDENTITYSTATEUNSPECIFIED,
+      (
+        GetServiceIdentityResponse_State_IDENTITYSTATEUNSPECIFIED,
         GetServiceIdentityResponse_State_Active,
         ..
       ),
 
     -- * GoogleApiServiceusageV1Service_State
     GoogleApiServiceusageV1Service_State
-      ( GoogleApiServiceusageV1Service_State_STATEUNSPECIFIED,
+      (
+        GoogleApiServiceusageV1Service_State_STATEUNSPECIFIED,
         GoogleApiServiceusageV1Service_State_Disabled,
         GoogleApiServiceusageV1Service_State_Enabled,
         ..
@@ -136,14 +170,41 @@ module Gogol.ServiceUsage.Internal.Sum
 
     -- * GoogleApiServiceusageV1beta1GetServiceIdentityResponse_State
     GoogleApiServiceusageV1beta1GetServiceIdentityResponse_State
-      ( GoogleApiServiceusageV1beta1GetServiceIdentityResponse_State_IDENTITYSTATEUNSPECIFIED,
+      (
+        GoogleApiServiceusageV1beta1GetServiceIdentityResponse_State_IDENTITYSTATEUNSPECIFIED,
         GoogleApiServiceusageV1beta1GetServiceIdentityResponse_State_Active,
+        ..
+      ),
+
+    -- * GoogleApiServiceusageV2betaAnalysis_AnalysisType
+    GoogleApiServiceusageV2betaAnalysis_AnalysisType
+      (
+        GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPEUNSPECIFIED,
+        GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPEDEPENDENCY,
+        GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPERESOURCEUSAGE,
+        ..
+      ),
+
+    -- * GoogleApiServiceusageV2betaImpact_ImpactType
+    GoogleApiServiceusageV2betaImpact_ImpactType
+      (
+        GoogleApiServiceusageV2betaImpact_ImpactType_IMPACTTYPEUNSPECIFIED,
+        GoogleApiServiceusageV2betaImpact_ImpactType_DEPENDENCYMISSINGDEPENDENCIES,
+        ..
+      ),
+
+    -- * Impact_ImpactType
+    Impact_ImpactType
+      (
+        Impact_ImpactType_IMPACTTYPEUNSPECIFIED,
+        Impact_ImpactType_DEPENDENCYMISSINGDEPENDENCIES,
         ..
       ),
 
     -- * LabelDescriptor_ValueType
     LabelDescriptor_ValueType
-      ( LabelDescriptor_ValueType_String,
+      (
+        LabelDescriptor_ValueType_String,
         LabelDescriptor_ValueType_Bool,
         LabelDescriptor_ValueType_INT64,
         ..
@@ -151,7 +212,8 @@ module Gogol.ServiceUsage.Internal.Sum
 
     -- * Method_Syntax
     Method_Syntax
-      ( Method_Syntax_SYNTAX_PROTO2,
+      (
+        Method_Syntax_SYNTAX_PROTO2,
         Method_Syntax_SYNTAX_PROTO3,
         Method_Syntax_SYNTAXEDITIONS,
         ..
@@ -159,7 +221,8 @@ module Gogol.ServiceUsage.Internal.Sum
 
     -- * MetricDescriptor_LaunchStage
     MetricDescriptor_LaunchStage
-      ( MetricDescriptor_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
+      (
+        MetricDescriptor_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
         MetricDescriptor_LaunchStage_Unimplemented,
         MetricDescriptor_LaunchStage_Prelaunch,
         MetricDescriptor_LaunchStage_EARLYACCESS,
@@ -172,7 +235,8 @@ module Gogol.ServiceUsage.Internal.Sum
 
     -- * MetricDescriptor_MetricKind
     MetricDescriptor_MetricKind
-      ( MetricDescriptor_MetricKind_METRICKINDUNSPECIFIED,
+      (
+        MetricDescriptor_MetricKind_METRICKINDUNSPECIFIED,
         MetricDescriptor_MetricKind_Gauge,
         MetricDescriptor_MetricKind_Delta,
         MetricDescriptor_MetricKind_Cumulative,
@@ -181,7 +245,8 @@ module Gogol.ServiceUsage.Internal.Sum
 
     -- * MetricDescriptor_ValueType
     MetricDescriptor_ValueType
-      ( MetricDescriptor_ValueType_VALUETYPEUNSPECIFIED,
+      (
+        MetricDescriptor_ValueType_VALUETYPEUNSPECIFIED,
         MetricDescriptor_ValueType_Bool,
         MetricDescriptor_ValueType_INT64,
         MetricDescriptor_ValueType_Double,
@@ -193,7 +258,8 @@ module Gogol.ServiceUsage.Internal.Sum
 
     -- * MetricDescriptorMetadata_LaunchStage
     MetricDescriptorMetadata_LaunchStage
-      ( MetricDescriptorMetadata_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
+      (
+        MetricDescriptorMetadata_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
         MetricDescriptorMetadata_LaunchStage_Unimplemented,
         MetricDescriptorMetadata_LaunchStage_Prelaunch,
         MetricDescriptorMetadata_LaunchStage_EARLYACCESS,
@@ -204,9 +270,20 @@ module Gogol.ServiceUsage.Internal.Sum
         ..
       ),
 
+    -- * MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+    MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+      (
+        MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_TIMESERIESRESOURCEHIERARCHYLEVELUNSPECIFIED,
+        MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Project,
+        MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Organization,
+        MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Folder,
+        ..
+      ),
+
     -- * MonitoredResourceDescriptor_LaunchStage
     MonitoredResourceDescriptor_LaunchStage
-      ( MonitoredResourceDescriptor_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
+      (
+        MonitoredResourceDescriptor_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
         MonitoredResourceDescriptor_LaunchStage_Unimplemented,
         MonitoredResourceDescriptor_LaunchStage_Prelaunch,
         MonitoredResourceDescriptor_LaunchStage_EARLYACCESS,
@@ -219,38 +296,42 @@ module Gogol.ServiceUsage.Internal.Sum
 
     -- * Publishing_Organization
     Publishing_Organization
-      ( Publishing_Organization_CLIENTLIBRARYORGANIZATIONUNSPECIFIED,
+      (
+        Publishing_Organization_CLIENTLIBRARYORGANIZATIONUNSPECIFIED,
         Publishing_Organization_Cloud,
         Publishing_Organization_Ads,
         Publishing_Organization_Photos,
         Publishing_Organization_STREETVIEW,
+        Publishing_Organization_Shopping,
+        Publishing_Organization_Geo,
+        Publishing_Organization_GENERATIVEAI,
         ..
       ),
 
     -- * Type_Syntax
     Type_Syntax
-      ( Type_Syntax_SYNTAX_PROTO2,
+      (
+        Type_Syntax_SYNTAX_PROTO2,
         Type_Syntax_SYNTAX_PROTO3,
         Type_Syntax_SYNTAXEDITIONS,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -263,21 +344,51 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
+
+-- | Output only. The type of analysis.
+newtype Analysis_AnalysisType = Analysis_AnalysisType { fromAnalysis_AnalysisType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Unspecified analysis type. Do not use.
+pattern Analysis_AnalysisType_ANALYSISTYPEUNSPECIFIED :: Analysis_AnalysisType
+pattern Analysis_AnalysisType_ANALYSISTYPEUNSPECIFIED = Analysis_AnalysisType "ANALYSIS_TYPE_UNSPECIFIED"
+
+-- | The analysis of service dependencies.
+pattern Analysis_AnalysisType_ANALYSISTYPEDEPENDENCY :: Analysis_AnalysisType
+pattern Analysis_AnalysisType_ANALYSISTYPEDEPENDENCY = Analysis_AnalysisType "ANALYSIS_TYPE_DEPENDENCY"
+
+-- | The analysis of service resource usage.
+pattern Analysis_AnalysisType_ANALYSISTYPERESOURCEUSAGE :: Analysis_AnalysisType
+pattern Analysis_AnalysisType_ANALYSISTYPERESOURCEUSAGE = Analysis_AnalysisType "ANALYSIS_TYPE_RESOURCE_USAGE"
+
+{-# COMPLETE
+  Analysis_AnalysisType_ANALYSISTYPEUNSPECIFIED,
+  Analysis_AnalysisType_ANALYSISTYPEDEPENDENCY,
+  Analysis_AnalysisType_ANALYSISTYPERESOURCEUSAGE,
+  Analysis_AnalysisType #-}
 
 -- | The source syntax of the service.
-newtype Api_Syntax = Api_Syntax {fromApi_Syntax :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Api_Syntax = Api_Syntax { fromApi_Syntax :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Syntax @proto2@.
 pattern Api_Syntax_SYNTAX_PROTO2 :: Api_Syntax
@@ -295,22 +406,21 @@ pattern Api_Syntax_SYNTAXEDITIONS = Api_Syntax "SYNTAX_EDITIONS"
   Api_Syntax_SYNTAX_PROTO2,
   Api_Syntax_SYNTAX_PROTO3,
   Api_Syntax_SYNTAXEDITIONS,
-  Api_Syntax
-  #-}
+  Api_Syntax #-}
 
-newtype BackendRule_PathTranslation = BackendRule_PathTranslation {fromBackendRule_PathTranslation :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype BackendRule_PathTranslation = BackendRule_PathTranslation { fromBackendRule_PathTranslation :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- |
+-- | 
 pattern BackendRule_PathTranslation_PATHTRANSLATIONUNSPECIFIED :: BackendRule_PathTranslation
 pattern BackendRule_PathTranslation_PATHTRANSLATIONUNSPECIFIED = BackendRule_PathTranslation "PATH_TRANSLATION_UNSPECIFIED"
 
@@ -326,21 +436,20 @@ pattern BackendRule_PathTranslation_APPENDPATHTOADDRESS = BackendRule_PathTransl
   BackendRule_PathTranslation_PATHTRANSLATIONUNSPECIFIED,
   BackendRule_PathTranslation_CONSTANTADDRESS,
   BackendRule_PathTranslation_APPENDPATHTOADDRESS,
-  BackendRule_PathTranslation
-  #-}
+  BackendRule_PathTranslation #-}
 
 -- | Launch stage of this version of the API.
-newtype ClientLibrarySettings_LaunchStage = ClientLibrarySettings_LaunchStage {fromClientLibrarySettings_LaunchStage :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ClientLibrarySettings_LaunchStage = ClientLibrarySettings_LaunchStage { fromClientLibrarySettings_LaunchStage :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use this default value.
 pattern ClientLibrarySettings_LaunchStage_LAUNCHSTAGEUNSPECIFIED :: ClientLibrarySettings_LaunchStage
@@ -383,20 +492,19 @@ pattern ClientLibrarySettings_LaunchStage_Deprecated = ClientLibrarySettings_Lau
   ClientLibrarySettings_LaunchStage_Beta,
   ClientLibrarySettings_LaunchStage_GA,
   ClientLibrarySettings_LaunchStage_Deprecated,
-  ClientLibrarySettings_LaunchStage
-  #-}
+  ClientLibrarySettings_LaunchStage #-}
 
-newtype CommonLanguageSettings_DestinationsItem = CommonLanguageSettings_DestinationsItem {fromCommonLanguageSettings_DestinationsItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CommonLanguageSettings_DestinationsItem = CommonLanguageSettings_DestinationsItem { fromCommonLanguageSettings_DestinationsItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Client libraries will neither be generated nor published to package managers.
 pattern CommonLanguageSettings_DestinationsItem_CLIENTLIBRARYDESTINATIONUNSPECIFIED :: CommonLanguageSettings_DestinationsItem
@@ -414,21 +522,20 @@ pattern CommonLanguageSettings_DestinationsItem_PACKAGEMANAGER = CommonLanguageS
   CommonLanguageSettings_DestinationsItem_CLIENTLIBRARYDESTINATIONUNSPECIFIED,
   CommonLanguageSettings_DestinationsItem_Github,
   CommonLanguageSettings_DestinationsItem_PACKAGEMANAGER,
-  CommonLanguageSettings_DestinationsItem
-  #-}
+  CommonLanguageSettings_DestinationsItem #-}
 
 -- | Defines the behavior for checking service usage when disabling a service.
-newtype DisableServiceRequest_CheckIfServiceHasUsage = DisableServiceRequest_CheckIfServiceHasUsage {fromDisableServiceRequest_CheckIfServiceHasUsage :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DisableServiceRequest_CheckIfServiceHasUsage = DisableServiceRequest_CheckIfServiceHasUsage { fromDisableServiceRequest_CheckIfServiceHasUsage :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | When unset, the default behavior is used, which is SKIP.
 pattern DisableServiceRequest_CheckIfServiceHasUsage_CHECKIFSERVICEHASUSAGEUNSPECIFIED :: DisableServiceRequest_CheckIfServiceHasUsage
@@ -446,21 +553,56 @@ pattern DisableServiceRequest_CheckIfServiceHasUsage_Check = DisableServiceReque
   DisableServiceRequest_CheckIfServiceHasUsage_CHECKIFSERVICEHASUSAGEUNSPECIFIED,
   DisableServiceRequest_CheckIfServiceHasUsage_Skip,
   DisableServiceRequest_CheckIfServiceHasUsage_Check,
-  DisableServiceRequest_CheckIfServiceHasUsage
-  #-}
+  DisableServiceRequest_CheckIfServiceHasUsage #-}
+
+-- | Client and resource project enable type.
+newtype EnableRule_EnableType = EnableRule_EnableType { fromEnableRule_EnableType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Unspecified enable type, which means enabled as both client and resource project.
+pattern EnableRule_EnableType_ENABLETYPEUNSPECIFIED :: EnableRule_EnableType
+pattern EnableRule_EnableType_ENABLETYPEUNSPECIFIED = EnableRule_EnableType "ENABLE_TYPE_UNSPECIFIED"
+
+-- | Enable all clients under the CRM node specified by @ConsumerPolicy.name@ to use the listed services. A client can be an API key, an OAuth client, or a service account.
+pattern EnableRule_EnableType_Client :: EnableRule_EnableType
+pattern EnableRule_EnableType_Client = EnableRule_EnableType "CLIENT"
+
+-- | Enable resources in the list services to be created and used under the CRM node specified by the @ConsumerPolicy.name@.
+pattern EnableRule_EnableType_Resource :: EnableRule_EnableType
+pattern EnableRule_EnableType_Resource = EnableRule_EnableType "RESOURCE"
+
+-- | Activation made by Service Usage v1 API. This will be how consumers differentiate between policy changes made by v1 and v2 clients and understand what is actually possible based on those different policies.
+pattern EnableRule_EnableType_V1COMPATIBLE :: EnableRule_EnableType
+pattern EnableRule_EnableType_V1COMPATIBLE = EnableRule_EnableType "V1_COMPATIBLE"
+
+{-# COMPLETE
+  EnableRule_EnableType_ENABLETYPEUNSPECIFIED,
+  EnableRule_EnableType_Client,
+  EnableRule_EnableType_Resource,
+  EnableRule_EnableType_V1COMPATIBLE,
+  EnableRule_EnableType #-}
 
 -- | The source syntax.
-newtype Enum_Syntax = Enum_Syntax {fromEnum_Syntax :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Enum_Syntax = Enum_Syntax { fromEnum_Syntax :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Syntax @proto2@.
 pattern Enum_Syntax_SYNTAX_PROTO2 :: Enum_Syntax
@@ -478,21 +620,20 @@ pattern Enum_Syntax_SYNTAXEDITIONS = Enum_Syntax "SYNTAX_EDITIONS"
   Enum_Syntax_SYNTAX_PROTO2,
   Enum_Syntax_SYNTAX_PROTO3,
   Enum_Syntax_SYNTAXEDITIONS,
-  Enum_Syntax
-  #-}
+  Enum_Syntax #-}
 
 -- | The field cardinality.
-newtype Field_Cardinality = Field_Cardinality {fromField_Cardinality :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Field_Cardinality = Field_Cardinality { fromField_Cardinality :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | For fields with unknown cardinality.
 pattern Field_Cardinality_CARDINALITYUNKNOWN :: Field_Cardinality
@@ -515,21 +656,20 @@ pattern Field_Cardinality_CARDINALITYREPEATED = Field_Cardinality "CARDINALITY_R
   Field_Cardinality_CARDINALITYOPTIONAL,
   Field_Cardinality_CARDINALITYREQUIRED,
   Field_Cardinality_CARDINALITYREPEATED,
-  Field_Cardinality
-  #-}
+  Field_Cardinality #-}
 
 -- | The field type.
-newtype Field_Kind = Field_Kind {fromField_Kind :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Field_Kind = Field_Kind { fromField_Kind :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Field type unknown.
 pattern Field_Kind_TYPEUNKNOWN :: Field_Kind
@@ -627,21 +767,20 @@ pattern Field_Kind_TYPE_SINT64 = Field_Kind "TYPE_SINT64"
   Field_Kind_TYPE_SFIXED64,
   Field_Kind_TYPE_SINT32,
   Field_Kind_TYPE_SINT64,
-  Field_Kind
-  #-}
+  Field_Kind #-}
 
 -- | Service identity state.
-newtype GetServiceIdentityResponse_State = GetServiceIdentityResponse_State {fromGetServiceIdentityResponse_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GetServiceIdentityResponse_State = GetServiceIdentityResponse_State { fromGetServiceIdentityResponse_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default service identity state. This value is used if the state is omitted.
 pattern GetServiceIdentityResponse_State_IDENTITYSTATEUNSPECIFIED :: GetServiceIdentityResponse_State
@@ -654,21 +793,20 @@ pattern GetServiceIdentityResponse_State_Active = GetServiceIdentityResponse_Sta
 {-# COMPLETE
   GetServiceIdentityResponse_State_IDENTITYSTATEUNSPECIFIED,
   GetServiceIdentityResponse_State_Active,
-  GetServiceIdentityResponse_State
-  #-}
+  GetServiceIdentityResponse_State #-}
 
 -- | Whether or not the service has been enabled for use by the consumer.
-newtype GoogleApiServiceusageV1Service_State = GoogleApiServiceusageV1Service_State {fromGoogleApiServiceusageV1Service_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleApiServiceusageV1Service_State = GoogleApiServiceusageV1Service_State { fromGoogleApiServiceusageV1Service_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The default value, which indicates that the enabled state of the service is unspecified or not meaningful. Currently, all consumers other than projects (such as folders and organizations) are always in this state.
 pattern GoogleApiServiceusageV1Service_State_STATEUNSPECIFIED :: GoogleApiServiceusageV1Service_State
@@ -686,21 +824,20 @@ pattern GoogleApiServiceusageV1Service_State_Enabled = GoogleApiServiceusageV1Se
   GoogleApiServiceusageV1Service_State_STATEUNSPECIFIED,
   GoogleApiServiceusageV1Service_State_Disabled,
   GoogleApiServiceusageV1Service_State_Enabled,
-  GoogleApiServiceusageV1Service_State
-  #-}
+  GoogleApiServiceusageV1Service_State #-}
 
 -- | Service identity state.
-newtype GoogleApiServiceusageV1beta1GetServiceIdentityResponse_State = GoogleApiServiceusageV1beta1GetServiceIdentityResponse_State {fromGoogleApiServiceusageV1beta1GetServiceIdentityResponse_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GoogleApiServiceusageV1beta1GetServiceIdentityResponse_State = GoogleApiServiceusageV1beta1GetServiceIdentityResponse_State { fromGoogleApiServiceusageV1beta1GetServiceIdentityResponse_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default service identity state. This value is used if the state is omitted.
 pattern GoogleApiServiceusageV1beta1GetServiceIdentityResponse_State_IDENTITYSTATEUNSPECIFIED :: GoogleApiServiceusageV1beta1GetServiceIdentityResponse_State
@@ -713,21 +850,103 @@ pattern GoogleApiServiceusageV1beta1GetServiceIdentityResponse_State_Active = Go
 {-# COMPLETE
   GoogleApiServiceusageV1beta1GetServiceIdentityResponse_State_IDENTITYSTATEUNSPECIFIED,
   GoogleApiServiceusageV1beta1GetServiceIdentityResponse_State_Active,
-  GoogleApiServiceusageV1beta1GetServiceIdentityResponse_State
-  #-}
+  GoogleApiServiceusageV1beta1GetServiceIdentityResponse_State #-}
+
+-- | Output only. The type of analysis.
+newtype GoogleApiServiceusageV2betaAnalysis_AnalysisType = GoogleApiServiceusageV2betaAnalysis_AnalysisType { fromGoogleApiServiceusageV2betaAnalysis_AnalysisType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Unspecified analysis type. Do not use.
+pattern GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPEUNSPECIFIED :: GoogleApiServiceusageV2betaAnalysis_AnalysisType
+pattern GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPEUNSPECIFIED = GoogleApiServiceusageV2betaAnalysis_AnalysisType "ANALYSIS_TYPE_UNSPECIFIED"
+
+-- | The analysis of service dependencies.
+pattern GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPEDEPENDENCY :: GoogleApiServiceusageV2betaAnalysis_AnalysisType
+pattern GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPEDEPENDENCY = GoogleApiServiceusageV2betaAnalysis_AnalysisType "ANALYSIS_TYPE_DEPENDENCY"
+
+-- | The analysis of service resource usage.
+pattern GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPERESOURCEUSAGE :: GoogleApiServiceusageV2betaAnalysis_AnalysisType
+pattern GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPERESOURCEUSAGE = GoogleApiServiceusageV2betaAnalysis_AnalysisType "ANALYSIS_TYPE_RESOURCE_USAGE"
+
+{-# COMPLETE
+  GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPEUNSPECIFIED,
+  GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPEDEPENDENCY,
+  GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPERESOURCEUSAGE,
+  GoogleApiServiceusageV2betaAnalysis_AnalysisType #-}
+
+-- | Output only. The type of impact.
+newtype GoogleApiServiceusageV2betaImpact_ImpactType = GoogleApiServiceusageV2betaImpact_ImpactType { fromGoogleApiServiceusageV2betaImpact_ImpactType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Reserved Blocks (Block n contains codes from 100n to 100(n+1) -1 Block 0 - Special\/Admin codes Block 1 - Impact Type of ANALYSIS/TYPE/DEPENDENCY Block 2 - Impact Type of ANALYSIS/TYPE/RESOURCE_USAGE ...
+pattern GoogleApiServiceusageV2betaImpact_ImpactType_IMPACTTYPEUNSPECIFIED :: GoogleApiServiceusageV2betaImpact_ImpactType
+pattern GoogleApiServiceusageV2betaImpact_ImpactType_IMPACTTYPEUNSPECIFIED = GoogleApiServiceusageV2betaImpact_ImpactType "IMPACT_TYPE_UNSPECIFIED"
+
+-- | Block 1 - Impact Type of ANALYSIS/TYPE/DEPENDENCY
+pattern GoogleApiServiceusageV2betaImpact_ImpactType_DEPENDENCYMISSINGDEPENDENCIES :: GoogleApiServiceusageV2betaImpact_ImpactType
+pattern GoogleApiServiceusageV2betaImpact_ImpactType_DEPENDENCYMISSINGDEPENDENCIES = GoogleApiServiceusageV2betaImpact_ImpactType "DEPENDENCY_MISSING_DEPENDENCIES"
+
+{-# COMPLETE
+  GoogleApiServiceusageV2betaImpact_ImpactType_IMPACTTYPEUNSPECIFIED,
+  GoogleApiServiceusageV2betaImpact_ImpactType_DEPENDENCYMISSINGDEPENDENCIES,
+  GoogleApiServiceusageV2betaImpact_ImpactType #-}
+
+-- | Output only. The type of impact.
+newtype Impact_ImpactType = Impact_ImpactType { fromImpact_ImpactType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Reserved Blocks (Block n contains codes from 100n to 100(n+1) -1 Block 0 - Special\/Admin codes Block 1 - Impact Type of ANALYSIS/TYPE/DEPENDENCY Block 2 - Impact Type of ANALYSIS/TYPE/RESOURCE_USAGE ...
+pattern Impact_ImpactType_IMPACTTYPEUNSPECIFIED :: Impact_ImpactType
+pattern Impact_ImpactType_IMPACTTYPEUNSPECIFIED = Impact_ImpactType "IMPACT_TYPE_UNSPECIFIED"
+
+-- | Block 1 - Impact Type of ANALYSIS/TYPE/DEPENDENCY
+pattern Impact_ImpactType_DEPENDENCYMISSINGDEPENDENCIES :: Impact_ImpactType
+pattern Impact_ImpactType_DEPENDENCYMISSINGDEPENDENCIES = Impact_ImpactType "DEPENDENCY_MISSING_DEPENDENCIES"
+
+{-# COMPLETE
+  Impact_ImpactType_IMPACTTYPEUNSPECIFIED,
+  Impact_ImpactType_DEPENDENCYMISSINGDEPENDENCIES,
+  Impact_ImpactType #-}
 
 -- | The type of data that can be assigned to the label.
-newtype LabelDescriptor_ValueType = LabelDescriptor_ValueType {fromLabelDescriptor_ValueType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype LabelDescriptor_ValueType = LabelDescriptor_ValueType { fromLabelDescriptor_ValueType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | A variable-length string. This is the default.
 pattern LabelDescriptor_ValueType_String :: LabelDescriptor_ValueType
@@ -745,21 +964,20 @@ pattern LabelDescriptor_ValueType_INT64 = LabelDescriptor_ValueType "INT64"
   LabelDescriptor_ValueType_String,
   LabelDescriptor_ValueType_Bool,
   LabelDescriptor_ValueType_INT64,
-  LabelDescriptor_ValueType
-  #-}
+  LabelDescriptor_ValueType #-}
 
 -- | The source syntax of this method.
-newtype Method_Syntax = Method_Syntax {fromMethod_Syntax :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Method_Syntax = Method_Syntax { fromMethod_Syntax :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Syntax @proto2@.
 pattern Method_Syntax_SYNTAX_PROTO2 :: Method_Syntax
@@ -777,21 +995,20 @@ pattern Method_Syntax_SYNTAXEDITIONS = Method_Syntax "SYNTAX_EDITIONS"
   Method_Syntax_SYNTAX_PROTO2,
   Method_Syntax_SYNTAX_PROTO3,
   Method_Syntax_SYNTAXEDITIONS,
-  Method_Syntax
-  #-}
+  Method_Syntax #-}
 
 -- | Optional. The launch stage of the metric definition.
-newtype MetricDescriptor_LaunchStage = MetricDescriptor_LaunchStage {fromMetricDescriptor_LaunchStage :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MetricDescriptor_LaunchStage = MetricDescriptor_LaunchStage { fromMetricDescriptor_LaunchStage :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use this default value.
 pattern MetricDescriptor_LaunchStage_LAUNCHSTAGEUNSPECIFIED :: MetricDescriptor_LaunchStage
@@ -834,21 +1051,20 @@ pattern MetricDescriptor_LaunchStage_Deprecated = MetricDescriptor_LaunchStage "
   MetricDescriptor_LaunchStage_Beta,
   MetricDescriptor_LaunchStage_GA,
   MetricDescriptor_LaunchStage_Deprecated,
-  MetricDescriptor_LaunchStage
-  #-}
+  MetricDescriptor_LaunchStage #-}
 
 -- | Whether the metric records instantaneous values, changes to a value, etc. Some combinations of @metric_kind@ and @value_type@ might not be supported.
-newtype MetricDescriptor_MetricKind = MetricDescriptor_MetricKind {fromMetricDescriptor_MetricKind :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MetricDescriptor_MetricKind = MetricDescriptor_MetricKind { fromMetricDescriptor_MetricKind :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use this default value.
 pattern MetricDescriptor_MetricKind_METRICKINDUNSPECIFIED :: MetricDescriptor_MetricKind
@@ -871,21 +1087,20 @@ pattern MetricDescriptor_MetricKind_Cumulative = MetricDescriptor_MetricKind "CU
   MetricDescriptor_MetricKind_Gauge,
   MetricDescriptor_MetricKind_Delta,
   MetricDescriptor_MetricKind_Cumulative,
-  MetricDescriptor_MetricKind
-  #-}
+  MetricDescriptor_MetricKind #-}
 
 -- | Whether the measurement is an integer, a floating-point number, etc. Some combinations of @metric_kind@ and @value_type@ might not be supported.
-newtype MetricDescriptor_ValueType = MetricDescriptor_ValueType {fromMetricDescriptor_ValueType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MetricDescriptor_ValueType = MetricDescriptor_ValueType { fromMetricDescriptor_ValueType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use this default value.
 pattern MetricDescriptor_ValueType_VALUETYPEUNSPECIFIED :: MetricDescriptor_ValueType
@@ -923,21 +1138,20 @@ pattern MetricDescriptor_ValueType_Money = MetricDescriptor_ValueType "MONEY"
   MetricDescriptor_ValueType_String,
   MetricDescriptor_ValueType_Distribution,
   MetricDescriptor_ValueType_Money,
-  MetricDescriptor_ValueType
-  #-}
+  MetricDescriptor_ValueType #-}
 
 -- | Deprecated. Must use the MetricDescriptor.launch_stage instead.
-newtype MetricDescriptorMetadata_LaunchStage = MetricDescriptorMetadata_LaunchStage {fromMetricDescriptorMetadata_LaunchStage :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MetricDescriptorMetadata_LaunchStage = MetricDescriptorMetadata_LaunchStage { fromMetricDescriptorMetadata_LaunchStage :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use this default value.
 pattern MetricDescriptorMetadata_LaunchStage_LAUNCHSTAGEUNSPECIFIED :: MetricDescriptorMetadata_LaunchStage
@@ -980,21 +1194,55 @@ pattern MetricDescriptorMetadata_LaunchStage_Deprecated = MetricDescriptorMetada
   MetricDescriptorMetadata_LaunchStage_Beta,
   MetricDescriptorMetadata_LaunchStage_GA,
   MetricDescriptorMetadata_LaunchStage_Deprecated,
-  MetricDescriptorMetadata_LaunchStage
-  #-}
+  MetricDescriptorMetadata_LaunchStage #-}
+
+newtype MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem = MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem { fromMetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Do not use this default value.
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_TIMESERIESRESOURCEHIERARCHYLEVELUNSPECIFIED :: MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_TIMESERIESRESOURCEHIERARCHYLEVELUNSPECIFIED = MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem "TIME_SERIES_RESOURCE_HIERARCHY_LEVEL_UNSPECIFIED"
+
+-- | Scopes a metric to a project.
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Project :: MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Project = MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem "PROJECT"
+
+-- | Scopes a metric to an organization.
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Organization :: MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Organization = MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem "ORGANIZATION"
+
+-- | Scopes a metric to a folder.
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Folder :: MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Folder = MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem "FOLDER"
+
+{-# COMPLETE
+  MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_TIMESERIESRESOURCEHIERARCHYLEVELUNSPECIFIED,
+  MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Project,
+  MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Organization,
+  MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Folder,
+  MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem #-}
 
 -- | Optional. The launch stage of the monitored resource definition.
-newtype MonitoredResourceDescriptor_LaunchStage = MonitoredResourceDescriptor_LaunchStage {fromMonitoredResourceDescriptor_LaunchStage :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MonitoredResourceDescriptor_LaunchStage = MonitoredResourceDescriptor_LaunchStage { fromMonitoredResourceDescriptor_LaunchStage :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Do not use this default value.
 pattern MonitoredResourceDescriptor_LaunchStage_LAUNCHSTAGEUNSPECIFIED :: MonitoredResourceDescriptor_LaunchStage
@@ -1037,21 +1285,20 @@ pattern MonitoredResourceDescriptor_LaunchStage_Deprecated = MonitoredResourceDe
   MonitoredResourceDescriptor_LaunchStage_Beta,
   MonitoredResourceDescriptor_LaunchStage_GA,
   MonitoredResourceDescriptor_LaunchStage_Deprecated,
-  MonitoredResourceDescriptor_LaunchStage
-  #-}
+  MonitoredResourceDescriptor_LaunchStage #-}
 
 -- | For whom the client library is being published.
-newtype Publishing_Organization = Publishing_Organization {fromPublishing_Organization :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Publishing_Organization = Publishing_Organization { fromPublishing_Organization :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not useful.
 pattern Publishing_Organization_CLIENTLIBRARYORGANIZATIONUNSPECIFIED :: Publishing_Organization
@@ -1073,27 +1320,41 @@ pattern Publishing_Organization_Photos = Publishing_Organization "PHOTOS"
 pattern Publishing_Organization_STREETVIEW :: Publishing_Organization
 pattern Publishing_Organization_STREETVIEW = Publishing_Organization "STREET_VIEW"
 
+-- | Shopping Org.
+pattern Publishing_Organization_Shopping :: Publishing_Organization
+pattern Publishing_Organization_Shopping = Publishing_Organization "SHOPPING"
+
+-- | Geo Org.
+pattern Publishing_Organization_Geo :: Publishing_Organization
+pattern Publishing_Organization_Geo = Publishing_Organization "GEO"
+
+-- | Generative AI - https:\/\/developers.generativeai.google
+pattern Publishing_Organization_GENERATIVEAI :: Publishing_Organization
+pattern Publishing_Organization_GENERATIVEAI = Publishing_Organization "GENERATIVE_AI"
+
 {-# COMPLETE
   Publishing_Organization_CLIENTLIBRARYORGANIZATIONUNSPECIFIED,
   Publishing_Organization_Cloud,
   Publishing_Organization_Ads,
   Publishing_Organization_Photos,
   Publishing_Organization_STREETVIEW,
-  Publishing_Organization
-  #-}
+  Publishing_Organization_Shopping,
+  Publishing_Organization_Geo,
+  Publishing_Organization_GENERATIVEAI,
+  Publishing_Organization #-}
 
 -- | The source syntax.
-newtype Type_Syntax = Type_Syntax {fromType_Syntax :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Type_Syntax = Type_Syntax { fromType_Syntax :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Syntax @proto2@.
 pattern Type_Syntax_SYNTAX_PROTO2 :: Type_Syntax
@@ -1111,5 +1372,4 @@ pattern Type_Syntax_SYNTAXEDITIONS = Type_Syntax "SYNTAX_EDITIONS"
   Type_Syntax_SYNTAX_PROTO2,
   Type_Syntax_SYNTAX_PROTO3,
   Type_Syntax_SYNTAXEDITIONS,
-  Type_Syntax
-  #-}
+  Type_Syntax #-}

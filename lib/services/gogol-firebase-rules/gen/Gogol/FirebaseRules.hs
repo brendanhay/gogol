@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,197 +31,197 @@
 --
 -- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference>
 module Gogol.FirebaseRules
-  ( -- * Configuration
-    firebaseRulesService,
+    (
+    -- * Configuration
+      firebaseRulesService
 
     -- * OAuth Scopes
-    CloudPlatform'FullControl,
-    Firebase'FullControl,
-    Firebase'Readonly,
+    , CloudPlatform'FullControl
+    , Firebase'FullControl
+    , Firebase'Readonly
 
     -- * Resources
 
     -- ** firebaserules.projects.releases.create
-    FirebaseRulesProjectsReleasesCreateResource,
-    FirebaseRulesProjectsReleasesCreate (..),
-    newFirebaseRulesProjectsReleasesCreate,
+    , FirebaseRulesProjectsReleasesCreateResource
+    , FirebaseRulesProjectsReleasesCreate (..)
+    , newFirebaseRulesProjectsReleasesCreate
 
     -- ** firebaserules.projects.releases.delete
-    FirebaseRulesProjectsReleasesDeleteResource,
-    FirebaseRulesProjectsReleasesDelete (..),
-    newFirebaseRulesProjectsReleasesDelete,
+    , FirebaseRulesProjectsReleasesDeleteResource
+    , FirebaseRulesProjectsReleasesDelete (..)
+    , newFirebaseRulesProjectsReleasesDelete
 
     -- ** firebaserules.projects.releases.get
-    FirebaseRulesProjectsReleasesGetResource,
-    FirebaseRulesProjectsReleasesGet (..),
-    newFirebaseRulesProjectsReleasesGet,
+    , FirebaseRulesProjectsReleasesGetResource
+    , FirebaseRulesProjectsReleasesGet (..)
+    , newFirebaseRulesProjectsReleasesGet
 
     -- ** firebaserules.projects.releases.getExecutable
-    FirebaseRulesProjectsReleasesGetExecutableResource,
-    FirebaseRulesProjectsReleasesGetExecutable (..),
-    newFirebaseRulesProjectsReleasesGetExecutable,
+    , FirebaseRulesProjectsReleasesGetExecutableResource
+    , FirebaseRulesProjectsReleasesGetExecutable (..)
+    , newFirebaseRulesProjectsReleasesGetExecutable
 
     -- ** firebaserules.projects.releases.list
-    FirebaseRulesProjectsReleasesListResource,
-    FirebaseRulesProjectsReleasesList (..),
-    newFirebaseRulesProjectsReleasesList,
+    , FirebaseRulesProjectsReleasesListResource
+    , FirebaseRulesProjectsReleasesList (..)
+    , newFirebaseRulesProjectsReleasesList
 
     -- ** firebaserules.projects.releases.patch
-    FirebaseRulesProjectsReleasesPatchResource,
-    FirebaseRulesProjectsReleasesPatch (..),
-    newFirebaseRulesProjectsReleasesPatch,
+    , FirebaseRulesProjectsReleasesPatchResource
+    , FirebaseRulesProjectsReleasesPatch (..)
+    , newFirebaseRulesProjectsReleasesPatch
 
     -- ** firebaserules.projects.rulesets.create
-    FirebaseRulesProjectsRulesetsCreateResource,
-    FirebaseRulesProjectsRulesetsCreate (..),
-    newFirebaseRulesProjectsRulesetsCreate,
+    , FirebaseRulesProjectsRulesetsCreateResource
+    , FirebaseRulesProjectsRulesetsCreate (..)
+    , newFirebaseRulesProjectsRulesetsCreate
 
     -- ** firebaserules.projects.rulesets.delete
-    FirebaseRulesProjectsRulesetsDeleteResource,
-    FirebaseRulesProjectsRulesetsDelete (..),
-    newFirebaseRulesProjectsRulesetsDelete,
+    , FirebaseRulesProjectsRulesetsDeleteResource
+    , FirebaseRulesProjectsRulesetsDelete (..)
+    , newFirebaseRulesProjectsRulesetsDelete
 
     -- ** firebaserules.projects.rulesets.get
-    FirebaseRulesProjectsRulesetsGetResource,
-    FirebaseRulesProjectsRulesetsGet (..),
-    newFirebaseRulesProjectsRulesetsGet,
+    , FirebaseRulesProjectsRulesetsGetResource
+    , FirebaseRulesProjectsRulesetsGet (..)
+    , newFirebaseRulesProjectsRulesetsGet
 
     -- ** firebaserules.projects.rulesets.list
-    FirebaseRulesProjectsRulesetsListResource,
-    FirebaseRulesProjectsRulesetsList (..),
-    newFirebaseRulesProjectsRulesetsList,
+    , FirebaseRulesProjectsRulesetsListResource
+    , FirebaseRulesProjectsRulesetsList (..)
+    , newFirebaseRulesProjectsRulesetsList
 
     -- ** firebaserules.projects.test
-    FirebaseRulesProjectsTestResource,
-    FirebaseRulesProjectsTest (..),
-    newFirebaseRulesProjectsTest,
+    , FirebaseRulesProjectsTestResource
+    , FirebaseRulesProjectsTest (..)
+    , newFirebaseRulesProjectsTest
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Arg
-    Arg (..),
-    newArg,
+    , Arg (..)
+    , newArg
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** ExpressionReport
-    ExpressionReport (..),
-    newExpressionReport,
+    , ExpressionReport (..)
+    , newExpressionReport
 
     -- ** File
-    File (..),
-    newFile,
+    , File (..)
+    , newFile
 
     -- ** FunctionCall
-    FunctionCall (..),
-    newFunctionCall,
+    , FunctionCall (..)
+    , newFunctionCall
 
     -- ** FunctionMock
-    FunctionMock (..),
-    newFunctionMock,
+    , FunctionMock (..)
+    , newFunctionMock
 
     -- ** GetReleaseExecutableResponse
-    GetReleaseExecutableResponse (..),
-    newGetReleaseExecutableResponse,
+    , GetReleaseExecutableResponse (..)
+    , newGetReleaseExecutableResponse
 
     -- ** GetReleaseExecutableResponse_ExecutableVersion
-    GetReleaseExecutableResponse_ExecutableVersion (..),
+    , GetReleaseExecutableResponse_ExecutableVersion (..)
 
     -- ** GetReleaseExecutableResponse_Language
-    GetReleaseExecutableResponse_Language (..),
+    , GetReleaseExecutableResponse_Language (..)
 
     -- ** Issue
-    Issue (..),
-    newIssue,
+    , Issue (..)
+    , newIssue
 
     -- ** Issue_Severity
-    Issue_Severity (..),
+    , Issue_Severity (..)
 
     -- ** ListReleasesResponse
-    ListReleasesResponse (..),
-    newListReleasesResponse,
+    , ListReleasesResponse (..)
+    , newListReleasesResponse
 
     -- ** ListRulesetsResponse
-    ListRulesetsResponse (..),
-    newListRulesetsResponse,
+    , ListRulesetsResponse (..)
+    , newListRulesetsResponse
 
     -- ** Metadata
-    Metadata (..),
-    newMetadata,
+    , Metadata (..)
+    , newMetadata
 
     -- ** Release
-    Release (..),
-    newRelease,
+    , Release (..)
+    , newRelease
 
     -- ** Result
-    Result (..),
-    newResult,
+    , Result (..)
+    , newResult
 
     -- ** Ruleset
-    Ruleset (..),
-    newRuleset,
+    , Ruleset (..)
+    , newRuleset
 
     -- ** Source
-    Source (..),
-    newSource,
+    , Source (..)
+    , newSource
 
     -- ** SourcePosition
-    SourcePosition (..),
-    newSourcePosition,
+    , SourcePosition (..)
+    , newSourcePosition
 
     -- ** TestCase
-    TestCase (..),
-    newTestCase,
+    , TestCase (..)
+    , newTestCase
 
     -- ** TestCase_Expectation
-    TestCase_Expectation (..),
+    , TestCase_Expectation (..)
 
     -- ** TestCase_ExpressionReportLevel
-    TestCase_ExpressionReportLevel (..),
+    , TestCase_ExpressionReportLevel (..)
 
     -- ** TestCase_PathEncoding
-    TestCase_PathEncoding (..),
+    , TestCase_PathEncoding (..)
 
     -- ** TestResult
-    TestResult (..),
-    newTestResult,
+    , TestResult (..)
+    , newTestResult
 
     -- ** TestResult_State
-    TestResult_State (..),
+    , TestResult_State (..)
 
     -- ** TestRulesetRequest
-    TestRulesetRequest (..),
-    newTestRulesetRequest,
+    , TestRulesetRequest (..)
+    , newTestRulesetRequest
 
     -- ** TestRulesetResponse
-    TestRulesetResponse (..),
-    newTestRulesetResponse,
+    , TestRulesetResponse (..)
+    , newTestRulesetResponse
 
     -- ** TestSuite
-    TestSuite (..),
-    newTestSuite,
+    , TestSuite (..)
+    , newTestSuite
 
     -- ** UpdateReleaseRequest
-    UpdateReleaseRequest (..),
-    newUpdateReleaseRequest,
+    , UpdateReleaseRequest (..)
+    , newUpdateReleaseRequest
 
     -- ** ValueCount
-    ValueCount (..),
-    newValueCount,
+    , ValueCount (..)
+    , newValueCount
 
     -- ** VisitedExpression
-    VisitedExpression (..),
-    newVisitedExpression,
+    , VisitedExpression (..)
+    , newVisitedExpression
 
     -- ** ProjectsReleasesGetExecutableExecutableVersion
-    ProjectsReleasesGetExecutableExecutableVersion (..),
-  )
-where
+    , ProjectsReleasesGetExecutableExecutableVersion (..)
+    ) where
 
 import Gogol.FirebaseRules.Projects.Releases.Create
 import Gogol.FirebaseRules.Projects.Releases.Delete

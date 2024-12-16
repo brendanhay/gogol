@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,38 +26,39 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.PlayCustomApp.Types
-  ( -- * Configuration
-    playCustomAppService,
+    (
+    -- * Configuration
+      playCustomAppService
 
     -- * OAuth Scopes
-    Androidpublisher'FullControl,
+    , Androidpublisher'FullControl
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** CustomApp
-    CustomApp (..),
-    newCustomApp,
+    , CustomApp (..)
+    , newCustomApp
 
     -- ** Organization
-    Organization (..),
-    newOrganization,
-  )
-where
+    , Organization (..)
+    , newOrganization
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.PlayCustomApp.Internal.Product
 import Gogol.PlayCustomApp.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Google Play Custom App Publishing API. This contains the host and root path used as a starting point for constructing service requests.
 playCustomAppService :: Core.ServiceConfig
-playCustomAppService =
-  Core.defaultService
-    (Core.ServiceId "playcustomapp:v1")
-    "playcustomapp.googleapis.com"
+playCustomAppService
+  = Core.defaultService
+      (Core.ServiceId "playcustomapp:v1")
+      "playcustomapp.googleapis.com"
 
 -- | View and manage your Google Play Developer account
 type Androidpublisher'FullControl = "https://www.googleapis.com/auth/androidpublisher"

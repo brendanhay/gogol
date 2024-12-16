@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-vault
-version:            1.0.0.0
-synopsis:           Google Vault SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-vault
+version:               1.0.0
+synopsis:              Google Vault SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  Retention and eDiscovery for Google Workspace. To work with Vault resources, the account must have the <https://support.google.com/vault/answer/2799699 required Vault privileges> and access to the matter. To access a matter, the account must have created the matter, have the matter shared with them, or have the __View All Matters__ privilege. For example, to download an export, an account needs the __Manage Exports__ privilege and the matter shared with them.
+    Retention and eDiscovery for Google Workspace. To work with Vault resources, the account must have the <https://support.google.com/vault/answer/2799699 required Vault privileges> and access to the matter. To access a matter, the account must have created the matter, have the matter shared with them, or have the __View All Matters__ privilege. For example, to download an export, an account needs the __Manage Exports__ privilege and the matter shared with them.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -30,64 +27,65 @@ source-repository head
   subdir:   gogol-vault
 
 flag field-selectors
-  description:
-    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-
-  default:     False
-  manual:      True
+  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+  default: False
+  manual: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -Werror
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (!flag(field-selectors) && impl(ghc >=9.2))
+  if !flag(field-selectors) && impl(ghc >= 9.2)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.Vault
-    Gogol.Vault.Matters.AddPermissions
-    Gogol.Vault.Matters.Close
-    Gogol.Vault.Matters.Count
-    Gogol.Vault.Matters.Create
-    Gogol.Vault.Matters.Delete
-    Gogol.Vault.Matters.Exports.Create
-    Gogol.Vault.Matters.Exports.Delete
-    Gogol.Vault.Matters.Exports.Get
-    Gogol.Vault.Matters.Exports.List
-    Gogol.Vault.Matters.Get
-    Gogol.Vault.Matters.Holds.Accounts.Create
-    Gogol.Vault.Matters.Holds.Accounts.Delete
-    Gogol.Vault.Matters.Holds.Accounts.List
-    Gogol.Vault.Matters.Holds.AddHeldAccounts
-    Gogol.Vault.Matters.Holds.Create
-    Gogol.Vault.Matters.Holds.Delete
-    Gogol.Vault.Matters.Holds.Get
-    Gogol.Vault.Matters.Holds.List
-    Gogol.Vault.Matters.Holds.RemoveHeldAccounts
-    Gogol.Vault.Matters.Holds.Update
-    Gogol.Vault.Matters.List
-    Gogol.Vault.Matters.RemovePermissions
-    Gogol.Vault.Matters.Reopen
-    Gogol.Vault.Matters.SavedQueries.Create
-    Gogol.Vault.Matters.SavedQueries.Delete
-    Gogol.Vault.Matters.SavedQueries.Get
-    Gogol.Vault.Matters.SavedQueries.List
-    Gogol.Vault.Matters.Undelete
-    Gogol.Vault.Matters.Update
-    Gogol.Vault.Operations.Cancel
-    Gogol.Vault.Operations.Delete
-    Gogol.Vault.Operations.Get
-    Gogol.Vault.Operations.List
-    Gogol.Vault.Types
+      Gogol.Vault
+    , Gogol.Vault.Matters.AddPermissions
+    , Gogol.Vault.Matters.Close
+    , Gogol.Vault.Matters.Count
+    , Gogol.Vault.Matters.Create
+    , Gogol.Vault.Matters.Delete
+    , Gogol.Vault.Matters.Exports.Create
+    , Gogol.Vault.Matters.Exports.Delete
+    , Gogol.Vault.Matters.Exports.Get
+    , Gogol.Vault.Matters.Exports.List
+    , Gogol.Vault.Matters.Get
+    , Gogol.Vault.Matters.Holds.Accounts.Create
+    , Gogol.Vault.Matters.Holds.Accounts.Delete
+    , Gogol.Vault.Matters.Holds.Accounts.List
+    , Gogol.Vault.Matters.Holds.AddHeldAccounts
+    , Gogol.Vault.Matters.Holds.Create
+    , Gogol.Vault.Matters.Holds.Delete
+    , Gogol.Vault.Matters.Holds.Get
+    , Gogol.Vault.Matters.Holds.List
+    , Gogol.Vault.Matters.Holds.RemoveHeldAccounts
+    , Gogol.Vault.Matters.Holds.Update
+    , Gogol.Vault.Matters.List
+    , Gogol.Vault.Matters.RemovePermissions
+    , Gogol.Vault.Matters.Reopen
+    , Gogol.Vault.Matters.SavedQueries.Create
+    , Gogol.Vault.Matters.SavedQueries.Delete
+    , Gogol.Vault.Matters.SavedQueries.Get
+    , Gogol.Vault.Matters.SavedQueries.List
+    , Gogol.Vault.Matters.Undelete
+    , Gogol.Vault.Matters.Update
+    , Gogol.Vault.Operations.Cancel
+    , Gogol.Vault.Operations.Delete
+    , Gogol.Vault.Operations.Get
+    , Gogol.Vault.Operations.List
+    , Gogol.Vault.Types
 
   other-modules:
-    Gogol.Vault.Internal.Product
-    Gogol.Vault.Internal.Sum
+      Gogol.Vault.Internal.Product
+    , Gogol.Vault.Internal.Sum
 
   build-depends:
-    , base        >=4.12   && <5
-    , gogol-core  ^>=1.0.0
+      gogol-core ^>= 1.0.0

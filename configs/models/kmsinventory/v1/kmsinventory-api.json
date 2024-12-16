@@ -134,6 +134,12 @@
                   "location": "query",
                   "type": "string"
                 },
+                "resourceTypes": {
+                  "description": "Optional. A list of resource types that this request searches for. If empty, it will search all the [trackable resource types](https://cloud.google.com/kms/docs/view-key-usage#tracked-resource-types). Regular expressions are also supported. For example: * `compute.googleapis.com.*` snapshots resources whose type starts with `compute.googleapis.com`. * `.*Image` snapshots resources whose type ends with `Image`. * `.*Image.*` snapshots resources whose type contains `Image`. See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported regular expression syntax. If the regular expression does not match any supported resource type, an INVALID_ARGUMENT error will be returned.",
+                  "location": "query",
+                  "repeated": true,
+                  "type": "string"
+                },
                 "scope": {
                   "description": "Required. Resource name of the organization. Example: organizations/123",
                   "location": "path",
@@ -236,7 +242,7 @@
       }
     }
   },
-  "revision": "20230326",
+  "revision": "20240630",
   "rootUrl": "https://kmsinventory.googleapis.com/",
   "schemas": {
     "GoogleCloudKmsInventoryV1ListCryptoKeysResponse": {
@@ -390,13 +396,17 @@
           "type": "string"
         },
         "destroyScheduledDuration": {
-          "description": "Immutable. The period of time that versions of this key spend in the DESTROY_SCHEDULED state before transitioning to DESTROYED. If not specified at creation time, the default duration is 24 hours.",
+          "description": "Immutable. The period of time that versions of this key spend in the DESTROY_SCHEDULED state before transitioning to DESTROYED. If not specified at creation time, the default duration is 30 days.",
           "format": "google-duration",
           "type": "string"
         },
         "importOnly": {
           "description": "Immutable. Whether this key may contain imported versions only.",
           "type": "boolean"
+        },
+        "keyAccessJustificationsPolicy": {
+          "$ref": "GoogleCloudKmsV1KeyAccessJustificationsPolicy",
+          "description": "Optional. The policy used for Key Access Justifications Policy Enforcement. If this field is present and this key is enrolled in Key Access Justifications Policy Enforcement, the policy will be evaluated in encrypt, decrypt, and sign operations, and the operation will fail if rejected by the policy. The policy is defined by specifying zero or more allowed justification codes. https://cloud.google.com/assured-workloads/key-access-justifications/docs/justification-codes By default, this field is absent, and all justification codes are allowed."
         },
         "labels": {
           "additionalProperties": {
@@ -427,6 +437,7 @@
             "ENCRYPT_DECRYPT",
             "ASYMMETRIC_SIGN",
             "ASYMMETRIC_DECRYPT",
+            "RAW_ENCRYPT_DECRYPT",
             "MAC"
           ],
           "enumDescriptions": [
@@ -434,6 +445,7 @@
             "CryptoKeys with this purpose may be used with Encrypt and Decrypt.",
             "CryptoKeys with this purpose may be used with AsymmetricSign and GetPublicKey.",
             "CryptoKeys with this purpose may be used with AsymmetricDecrypt and GetPublicKey.",
+            "CryptoKeys with this purpose may be used with RawEncrypt and RawDecrypt. This purpose is meant to be used for interoperable symmetric encryption and does not support automatic CryptoKey rotation.",
             "CryptoKeys with this purpose may be used with MacSign."
           ],
           "type": "string"
@@ -459,6 +471,12 @@
           "enum": [
             "CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED",
             "GOOGLE_SYMMETRIC_ENCRYPTION",
+            "AES_128_GCM",
+            "AES_256_GCM",
+            "AES_128_CBC",
+            "AES_256_CBC",
+            "AES_128_CTR",
+            "AES_256_CTR",
             "RSA_SIGN_PSS_2048_SHA256",
             "RSA_SIGN_PSS_3072_SHA256",
             "RSA_SIGN_PSS_4096_SHA256",
@@ -480,6 +498,7 @@
             "EC_SIGN_P256_SHA256",
             "EC_SIGN_P384_SHA384",
             "EC_SIGN_SECP256K1_SHA256",
+            "EC_SIGN_ED25519",
             "HMAC_SHA256",
             "HMAC_SHA1",
             "HMAC_SHA384",
@@ -490,6 +509,12 @@
           "enumDescriptions": [
             "Not specified.",
             "Creates symmetric encryption keys.",
+            "AES-GCM (Galois Counter Mode) using 128-bit keys.",
+            "AES-GCM (Galois Counter Mode) using 256-bit keys.",
+            "AES-CBC (Cipher Block Chaining Mode) using 128-bit keys.",
+            "AES-CBC (Cipher Block Chaining Mode) using 256-bit keys.",
+            "AES-CTR (Counter Mode) using 128-bit keys.",
+            "AES-CTR (Counter Mode) using 256-bit keys.",
             "RSASSA-PSS 2048 bit key with a SHA256 digest.",
             "RSASSA-PSS 3072 bit key with a SHA256 digest.",
             "RSASSA-PSS 4096 bit key with a SHA256 digest.",
@@ -511,6 +536,7 @@
             "ECDSA on the NIST P-256 curve with a SHA256 digest. Other hash functions can also be used: https://cloud.google.com/kms/docs/create-validate-signatures#ecdsa_support_for_other_hash_algorithms",
             "ECDSA on the NIST P-384 curve with a SHA384 digest. Other hash functions can also be used: https://cloud.google.com/kms/docs/create-validate-signatures#ecdsa_support_for_other_hash_algorithms",
             "ECDSA on the non-NIST secp256k1 curve. This curve is only supported for HSM protection level. Other hash functions can also be used: https://cloud.google.com/kms/docs/create-validate-signatures#ecdsa_support_for_other_hash_algorithms",
+            "EdDSA on the Curve25519 in pure mode (taking data as input).",
             "HMAC-SHA256 signing with a 256 bit key.",
             "HMAC-SHA1 signing with a 160 bit key.",
             "HMAC-SHA384 signing with a 384 bit key.",
@@ -651,6 +677,12 @@
           "enum": [
             "CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED",
             "GOOGLE_SYMMETRIC_ENCRYPTION",
+            "AES_128_GCM",
+            "AES_256_GCM",
+            "AES_128_CBC",
+            "AES_256_CBC",
+            "AES_128_CTR",
+            "AES_256_CTR",
             "RSA_SIGN_PSS_2048_SHA256",
             "RSA_SIGN_PSS_3072_SHA256",
             "RSA_SIGN_PSS_4096_SHA256",
@@ -672,6 +704,7 @@
             "EC_SIGN_P256_SHA256",
             "EC_SIGN_P384_SHA384",
             "EC_SIGN_SECP256K1_SHA256",
+            "EC_SIGN_ED25519",
             "HMAC_SHA256",
             "HMAC_SHA1",
             "HMAC_SHA384",
@@ -682,6 +715,12 @@
           "enumDescriptions": [
             "Not specified.",
             "Creates symmetric encryption keys.",
+            "AES-GCM (Galois Counter Mode) using 128-bit keys.",
+            "AES-GCM (Galois Counter Mode) using 256-bit keys.",
+            "AES-CBC (Cipher Block Chaining Mode) using 128-bit keys.",
+            "AES-CBC (Cipher Block Chaining Mode) using 256-bit keys.",
+            "AES-CTR (Counter Mode) using 128-bit keys.",
+            "AES-CTR (Counter Mode) using 256-bit keys.",
             "RSASSA-PSS 2048 bit key with a SHA256 digest.",
             "RSASSA-PSS 3072 bit key with a SHA256 digest.",
             "RSASSA-PSS 4096 bit key with a SHA256 digest.",
@@ -703,6 +742,7 @@
             "ECDSA on the NIST P-256 curve with a SHA256 digest. Other hash functions can also be used: https://cloud.google.com/kms/docs/create-validate-signatures#ecdsa_support_for_other_hash_algorithms",
             "ECDSA on the NIST P-384 curve with a SHA384 digest. Other hash functions can also be used: https://cloud.google.com/kms/docs/create-validate-signatures#ecdsa_support_for_other_hash_algorithms",
             "ECDSA on the non-NIST secp256k1 curve. This curve is only supported for HSM protection level. Other hash functions can also be used: https://cloud.google.com/kms/docs/create-validate-signatures#ecdsa_support_for_other_hash_algorithms",
+            "EdDSA on the Curve25519 in pure mode (taking data as input).",
             "HMAC-SHA256 signing with a 256 bit key.",
             "HMAC-SHA1 signing with a 160 bit key.",
             "HMAC-SHA384 signing with a 384 bit key.",
@@ -744,6 +784,48 @@
         "externalKeyUri": {
           "description": "The URI for an external resource that this CryptoKeyVersion represents.",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudKmsV1KeyAccessJustificationsPolicy": {
+      "description": "A KeyAccessJustificationsPolicy specifies zero or more allowed AccessReason values for encrypt, decrypt, and sign operations on a CryptoKey.",
+      "id": "GoogleCloudKmsV1KeyAccessJustificationsPolicy",
+      "properties": {
+        "allowedAccessReasons": {
+          "description": "The list of allowed reasons for access to a CryptoKey. Zero allowed access reasons means all encrypt, decrypt, and sign operations for the CryptoKey associated with this policy will fail.",
+          "items": {
+            "enum": [
+              "REASON_UNSPECIFIED",
+              "CUSTOMER_INITIATED_SUPPORT",
+              "GOOGLE_INITIATED_SERVICE",
+              "THIRD_PARTY_DATA_REQUEST",
+              "GOOGLE_INITIATED_REVIEW",
+              "CUSTOMER_INITIATED_ACCESS",
+              "GOOGLE_INITIATED_SYSTEM_OPERATION",
+              "REASON_NOT_EXPECTED",
+              "MODIFIED_CUSTOMER_INITIATED_ACCESS",
+              "MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION",
+              "GOOGLE_RESPONSE_TO_PRODUCTION_ALERT",
+              "CUSTOMER_AUTHORIZED_WORKFLOW_SERVICING"
+            ],
+            "enumDescriptions": [
+              "Unspecified access reason.",
+              "Customer-initiated support.",
+              "Google-initiated access for system management and troubleshooting.",
+              "Google-initiated access in response to a legal request or legal process.",
+              "Google-initiated access for security, fraud, abuse, or compliance purposes.",
+              "Customer uses their account to perform any access to their own data which their IAM policy authorizes.",
+              "Google systems access customer data to help optimize the structure of the data or quality for future uses by the customer.",
+              "No reason is expected for this key request.",
+              "Customer uses their account to perform any access to their own data which their IAM policy authorizes, and one of the following is true: * A Google administrator has reset the root-access account associated with the user's organization within the past 7 days. * A Google-initiated emergency access operation has interacted with a resource in the same project or folder as the currently accessed resource within the past 7 days.",
+              "Google systems access customer data to help optimize the structure of the data or quality for future uses by the customer, and one of the following is true: * A Google administrator has reset the root-access account associated with the user's organization within the past 7 days. * A Google-initiated emergency access operation has interacted with a resource in the same project or folder as the currently accessed resource within the past 7 days.",
+              "Google-initiated access to maintain system reliability.",
+              "One of the following operations is being executed while simultaneously encountering an internal technical issue which prevented a more precise justification code from being generated: * Your account has been used to perform any access to your own data which your IAM policy authorizes. * An automated Google system operates on encrypted customer data which your IAM policy authorizes. * Customer-initiated Google support access. * Google-initiated support access to protect system reliability."
+            ],
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "type": "object"

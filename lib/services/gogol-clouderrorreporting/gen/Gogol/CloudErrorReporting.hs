@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,125 +31,162 @@
 --
 -- /See:/ <https://cloud.google.com/error-reporting/ Error Reporting API Reference>
 module Gogol.CloudErrorReporting
-  ( -- * Configuration
-    cloudErrorReportingService,
+    (
+    -- * Configuration
+      cloudErrorReportingService
 
     -- * OAuth Scopes
-    CloudPlatform'FullControl,
+    , CloudPlatform'FullControl
 
     -- * Resources
 
     -- ** clouderrorreporting.projects.deleteEvents
-    CloudErrorReportingProjectsDeleteEventsResource,
-    CloudErrorReportingProjectsDeleteEvents (..),
-    newCloudErrorReportingProjectsDeleteEvents,
+    , CloudErrorReportingProjectsDeleteEventsResource
+    , CloudErrorReportingProjectsDeleteEvents (..)
+    , newCloudErrorReportingProjectsDeleteEvents
 
     -- ** clouderrorreporting.projects.events.list
-    CloudErrorReportingProjectsEventsListResource,
-    CloudErrorReportingProjectsEventsList (..),
-    newCloudErrorReportingProjectsEventsList,
+    , CloudErrorReportingProjectsEventsListResource
+    , CloudErrorReportingProjectsEventsList (..)
+    , newCloudErrorReportingProjectsEventsList
 
     -- ** clouderrorreporting.projects.events.report
-    CloudErrorReportingProjectsEventsReportResource,
-    CloudErrorReportingProjectsEventsReport (..),
-    newCloudErrorReportingProjectsEventsReport,
+    , CloudErrorReportingProjectsEventsReportResource
+    , CloudErrorReportingProjectsEventsReport (..)
+    , newCloudErrorReportingProjectsEventsReport
 
     -- ** clouderrorreporting.projects.groupStats.list
-    CloudErrorReportingProjectsGroupStatsListResource,
-    CloudErrorReportingProjectsGroupStatsList (..),
-    newCloudErrorReportingProjectsGroupStatsList,
+    , CloudErrorReportingProjectsGroupStatsListResource
+    , CloudErrorReportingProjectsGroupStatsList (..)
+    , newCloudErrorReportingProjectsGroupStatsList
 
     -- ** clouderrorreporting.projects.groups.get
-    CloudErrorReportingProjectsGroupsGetResource,
-    CloudErrorReportingProjectsGroupsGet (..),
-    newCloudErrorReportingProjectsGroupsGet,
+    , CloudErrorReportingProjectsGroupsGetResource
+    , CloudErrorReportingProjectsGroupsGet (..)
+    , newCloudErrorReportingProjectsGroupsGet
 
     -- ** clouderrorreporting.projects.groups.update
-    CloudErrorReportingProjectsGroupsUpdateResource,
-    CloudErrorReportingProjectsGroupsUpdate (..),
-    newCloudErrorReportingProjectsGroupsUpdate,
+    , CloudErrorReportingProjectsGroupsUpdateResource
+    , CloudErrorReportingProjectsGroupsUpdate (..)
+    , newCloudErrorReportingProjectsGroupsUpdate
+
+    -- ** clouderrorreporting.projects.locations.deleteEvents
+    , CloudErrorReportingProjectsLocationsDeleteEventsResource
+    , CloudErrorReportingProjectsLocationsDeleteEvents (..)
+    , newCloudErrorReportingProjectsLocationsDeleteEvents
+
+    -- ** clouderrorreporting.projects.locations.events.list
+    , CloudErrorReportingProjectsLocationsEventsListResource
+    , CloudErrorReportingProjectsLocationsEventsList (..)
+    , newCloudErrorReportingProjectsLocationsEventsList
+
+    -- ** clouderrorreporting.projects.locations.groupStats.list
+    , CloudErrorReportingProjectsLocationsGroupStatsListResource
+    , CloudErrorReportingProjectsLocationsGroupStatsList (..)
+    , newCloudErrorReportingProjectsLocationsGroupStatsList
+
+    -- ** clouderrorreporting.projects.locations.groups.get
+    , CloudErrorReportingProjectsLocationsGroupsGetResource
+    , CloudErrorReportingProjectsLocationsGroupsGet (..)
+    , newCloudErrorReportingProjectsLocationsGroupsGet
+
+    -- ** clouderrorreporting.projects.locations.groups.update
+    , CloudErrorReportingProjectsLocationsGroupsUpdateResource
+    , CloudErrorReportingProjectsLocationsGroupsUpdate (..)
+    , newCloudErrorReportingProjectsLocationsGroupsUpdate
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** DeleteEventsResponse
-    DeleteEventsResponse (..),
-    newDeleteEventsResponse,
+    , DeleteEventsResponse (..)
+    , newDeleteEventsResponse
 
     -- ** ErrorContext
-    ErrorContext (..),
-    newErrorContext,
+    , ErrorContext (..)
+    , newErrorContext
 
     -- ** ErrorEvent
-    ErrorEvent (..),
-    newErrorEvent,
+    , ErrorEvent (..)
+    , newErrorEvent
 
     -- ** ErrorGroup
-    ErrorGroup (..),
-    newErrorGroup,
+    , ErrorGroup (..)
+    , newErrorGroup
 
     -- ** ErrorGroup_ResolutionStatus
-    ErrorGroup_ResolutionStatus (..),
+    , ErrorGroup_ResolutionStatus (..)
 
     -- ** ErrorGroupStats
-    ErrorGroupStats (..),
-    newErrorGroupStats,
+    , ErrorGroupStats (..)
+    , newErrorGroupStats
 
     -- ** HttpRequestContext
-    HttpRequestContext (..),
-    newHttpRequestContext,
+    , HttpRequestContext (..)
+    , newHttpRequestContext
 
     -- ** ListEventsResponse
-    ListEventsResponse (..),
-    newListEventsResponse,
+    , ListEventsResponse (..)
+    , newListEventsResponse
 
     -- ** ListGroupStatsResponse
-    ListGroupStatsResponse (..),
-    newListGroupStatsResponse,
+    , ListGroupStatsResponse (..)
+    , newListGroupStatsResponse
 
     -- ** ReportErrorEventResponse
-    ReportErrorEventResponse (..),
-    newReportErrorEventResponse,
+    , ReportErrorEventResponse (..)
+    , newReportErrorEventResponse
 
     -- ** ReportedErrorEvent
-    ReportedErrorEvent (..),
-    newReportedErrorEvent,
+    , ReportedErrorEvent (..)
+    , newReportedErrorEvent
 
     -- ** ServiceContext
-    ServiceContext (..),
-    newServiceContext,
+    , ServiceContext (..)
+    , newServiceContext
 
     -- ** SourceLocation
-    SourceLocation (..),
-    newSourceLocation,
+    , SourceLocation (..)
+    , newSourceLocation
 
     -- ** SourceReference
-    SourceReference (..),
-    newSourceReference,
+    , SourceReference (..)
+    , newSourceReference
 
     -- ** TimedCount
-    TimedCount (..),
-    newTimedCount,
+    , TimedCount (..)
+    , newTimedCount
 
     -- ** TrackingIssue
-    TrackingIssue (..),
-    newTrackingIssue,
+    , TrackingIssue (..)
+    , newTrackingIssue
 
     -- ** ProjectsEventsListTimeRangePeriod
-    ProjectsEventsListTimeRangePeriod (..),
+    , ProjectsEventsListTimeRangePeriod (..)
 
     -- ** ProjectsGroupStatsListAlignment
-    ProjectsGroupStatsListAlignment (..),
+    , ProjectsGroupStatsListAlignment (..)
 
     -- ** ProjectsGroupStatsListOrder
-    ProjectsGroupStatsListOrder (..),
+    , ProjectsGroupStatsListOrder (..)
 
     -- ** ProjectsGroupStatsListTimeRangePeriod
-    ProjectsGroupStatsListTimeRangePeriod (..),
-  )
-where
+    , ProjectsGroupStatsListTimeRangePeriod (..)
+
+    -- ** ProjectsLocationsEventsListTimeRangePeriod
+    , ProjectsLocationsEventsListTimeRangePeriod (..)
+
+    -- ** ProjectsLocationsGroupStatsListAlignment
+    , ProjectsLocationsGroupStatsListAlignment (..)
+
+    -- ** ProjectsLocationsGroupStatsListOrder
+    , ProjectsLocationsGroupStatsListOrder (..)
+
+    -- ** ProjectsLocationsGroupStatsListTimeRangePeriod
+    , ProjectsLocationsGroupStatsListTimeRangePeriod (..)
+    ) where
 
 import Gogol.CloudErrorReporting.Projects.DeleteEvents
 import Gogol.CloudErrorReporting.Projects.Events.List
@@ -156,4 +194,9 @@ import Gogol.CloudErrorReporting.Projects.Events.Report
 import Gogol.CloudErrorReporting.Projects.GroupStats.List
 import Gogol.CloudErrorReporting.Projects.Groups.Get
 import Gogol.CloudErrorReporting.Projects.Groups.Update
+import Gogol.CloudErrorReporting.Projects.Locations.DeleteEvents
+import Gogol.CloudErrorReporting.Projects.Locations.Events.List
+import Gogol.CloudErrorReporting.Projects.Locations.GroupStats.List
+import Gogol.CloudErrorReporting.Projects.Locations.Groups.Get
+import Gogol.CloudErrorReporting.Projects.Locations.Groups.Update
 import Gogol.CloudErrorReporting.Types

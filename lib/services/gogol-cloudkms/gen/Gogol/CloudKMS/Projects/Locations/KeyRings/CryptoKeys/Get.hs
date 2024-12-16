@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,93 +31,86 @@
 --
 -- /See:/ <https://cloud.google.com/kms/ Cloud Key Management Service (KMS) API Reference> for @cloudkms.projects.locations.keyRings.cryptoKeys.get@.
 module Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Get
-  ( -- * Resource
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysGetResource,
+    (
+    -- * Resource
+      CloudKMSProjectsLocationsKeyRingsCryptoKeysGetResource
 
     -- ** Constructing a Request
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysGet (..),
-    newCloudKMSProjectsLocationsKeyRingsCryptoKeysGet,
-  )
-where
+    , CloudKMSProjectsLocationsKeyRingsCryptoKeysGet (..)
+    , newCloudKMSProjectsLocationsKeyRingsCryptoKeysGet
+    ) where
 
-import Gogol.CloudKMS.Types
 import qualified Gogol.Prelude as Core
+import Gogol.CloudKMS.Types
 
 -- | A resource alias for @cloudkms.projects.locations.keyRings.cryptoKeys.get@ method which the
 -- 'CloudKMSProjectsLocationsKeyRingsCryptoKeysGet' request conforms to.
-type CloudKMSProjectsLocationsKeyRingsCryptoKeysGetResource =
-  "v1"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] CryptoKey
+type CloudKMSProjectsLocationsKeyRingsCryptoKeysGetResource
+     =
+     "v1" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Get '[Core.JSON] CryptoKey
 
 -- | Returns metadata for a given CryptoKey, as well as its primary CryptoKeyVersion.
 --
 -- /See:/ 'newCloudKMSProjectsLocationsKeyRingsCryptoKeysGet' smart constructor.
 data CloudKMSProjectsLocationsKeyRingsCryptoKeysGet = CloudKMSProjectsLocationsKeyRingsCryptoKeysGet
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. The name of the CryptoKey to get.
-    name :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The name of the CryptoKey to get.
+    , name :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'CloudKMSProjectsLocationsKeyRingsCryptoKeysGet' with the minimum fields required to make a request.
-newCloudKMSProjectsLocationsKeyRingsCryptoKeysGet ::
-  -- |  Required. The name of the CryptoKey to get. See 'name'.
-  Core.Text ->
-  CloudKMSProjectsLocationsKeyRingsCryptoKeysGet
+newCloudKMSProjectsLocationsKeyRingsCryptoKeysGet 
+    ::  Core.Text
+       -- ^  Required. The name of the CryptoKey to get. See 'name'.
+    -> CloudKMSProjectsLocationsKeyRingsCryptoKeysGet
 newCloudKMSProjectsLocationsKeyRingsCryptoKeysGet name =
   CloudKMSProjectsLocationsKeyRingsCryptoKeysGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysGet
-  where
-  type
-    Rs
-      CloudKMSProjectsLocationsKeyRingsCryptoKeysGet =
-      CryptoKey
-  type
-    Scopes
-      CloudKMSProjectsLocationsKeyRingsCryptoKeysGet =
-      '[CloudPlatform'FullControl, Cloudkms'FullControl]
-  requestClient
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        cloudKMSService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudKMSProjectsLocationsKeyRingsCryptoKeysGetResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           CloudKMSProjectsLocationsKeyRingsCryptoKeysGet
+         where
+        type Rs
+               CloudKMSProjectsLocationsKeyRingsCryptoKeysGet
+             = CryptoKey
+        type Scopes
+               CloudKMSProjectsLocationsKeyRingsCryptoKeysGet
+             = '[CloudPlatform'FullControl, Cloudkms'FullControl]
+        requestClient
+          CloudKMSProjectsLocationsKeyRingsCryptoKeysGet{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              cloudKMSService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           CloudKMSProjectsLocationsKeyRingsCryptoKeysGetResource)
+                      Core.mempty
+

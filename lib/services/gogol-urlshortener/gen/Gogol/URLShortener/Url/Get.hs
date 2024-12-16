@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,14 +31,14 @@
 --
 -- /See:/ <https://developers.google.com/url-shortener/v1/getting_started URL Shortener API Reference> for @urlshortener.url.get@.
 module Gogol.URLShortener.Url.Get
-  ( -- * Resource
-    URLShortenerUrlGetResource,
+    (
+    -- * Resource
+      URLShortenerUrlGetResource
 
     -- ** Constructing a Request
-    URLShortenerUrlGet (..),
-    newURLShortenerUrlGet,
-  )
-where
+    , URLShortenerUrlGet (..)
+    , newURLShortenerUrlGet
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.URLShortener.Types
@@ -45,46 +46,44 @@ import Gogol.URLShortener.Types
 -- | A resource alias for @urlshortener.url.get@ method which the
 -- 'URLShortenerUrlGet' request conforms to.
 type URLShortenerUrlGetResource =
-  "urlshortener"
-    Core.:> "v1"
-    Core.:> "url"
-    Core.:> Core.QueryParam "shortUrl" Core.Text
-    Core.:> Core.QueryParam "projection" UrlGetProjection
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Url
+     "urlshortener" Core.:>
+       "v1" Core.:>
+         "url" Core.:>
+           Core.QueryParam "shortUrl" Core.Text Core.:>
+             Core.QueryParam "projection" UrlGetProjection Core.:>
+               Core.QueryParam "alt" Core.AltJSON Core.:>
+                 Core.Get '[Core.JSON] Url
 
 -- | Expands a short URL or gets creation time and analytics.
 --
 -- /See:/ 'newURLShortenerUrlGet' smart constructor.
 data URLShortenerUrlGet = URLShortenerUrlGet
-  { -- | Additional information to return.
-    projection :: (Core.Maybe UrlGetProjection),
-    -- | The short URL, including the protocol.
-    shortUrl :: Core.Text
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Additional information to return.
+      projection :: (Core.Maybe UrlGetProjection)
+      -- | The short URL, including the protocol.
+    , shortUrl :: Core.Text
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'URLShortenerUrlGet' with the minimum fields required to make a request.
-newURLShortenerUrlGet ::
-  -- |  The short URL, including the protocol. See 'shortUrl'.
-  Core.Text ->
-  URLShortenerUrlGet
+newURLShortenerUrlGet 
+    ::  Core.Text
+       -- ^  The short URL, including the protocol. See 'shortUrl'.
+    -> URLShortenerUrlGet
 newURLShortenerUrlGet shortUrl =
   URLShortenerUrlGet {projection = Core.Nothing, shortUrl = shortUrl}
 
 instance Core.GoogleRequest URLShortenerUrlGet where
-  type Rs URLShortenerUrlGet = Url
-  type
-    Scopes URLShortenerUrlGet =
-      '[Urlshortener'FullControl]
-  requestClient URLShortenerUrlGet {..} =
-    go
-      (Core.Just shortUrl)
-      projection
-      (Core.Just Core.AltJSON)
-      uRLShortenerService
-    where
-      go =
-        Core.buildClient
-          (Core.Proxy :: Core.Proxy URLShortenerUrlGetResource)
-          Core.mempty
+        type Rs URLShortenerUrlGet = Url
+        type Scopes URLShortenerUrlGet =
+             '[Urlshortener'FullControl]
+        requestClient URLShortenerUrlGet{..}
+          = go (Core.Just shortUrl) projection
+              (Core.Just Core.AltJSON)
+              uRLShortenerService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy :: Core.Proxy URLShortenerUrlGetResource)
+                      Core.mempty
+

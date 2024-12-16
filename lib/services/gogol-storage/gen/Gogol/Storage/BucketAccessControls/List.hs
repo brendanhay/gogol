@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,14 +31,14 @@
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.bucketAccessControls.list@.
 module Gogol.Storage.BucketAccessControls.List
-  ( -- * Resource
-    StorageBucketAccessControlsListResource,
+    (
+    -- * Resource
+      StorageBucketAccessControlsListResource
 
     -- ** Constructing a Request
-    StorageBucketAccessControlsList (..),
-    newStorageBucketAccessControlsList,
-  )
-where
+    , StorageBucketAccessControlsList (..)
+    , newStorageBucketAccessControlsList
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.Storage.Types
@@ -45,62 +46,53 @@ import Gogol.Storage.Types
 -- | A resource alias for @storage.bucketAccessControls.list@ method which the
 -- 'StorageBucketAccessControlsList' request conforms to.
 type StorageBucketAccessControlsListResource =
-  "storage"
-    Core.:> "v1"
-    Core.:> "b"
-    Core.:> Core.Capture "bucket" Core.Text
-    Core.:> "acl"
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "userProject" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] BucketAccessControls
+     "storage" Core.:>
+       "v1" Core.:>
+         "b" Core.:>
+           Core.Capture "bucket" Core.Text Core.:>
+             "acl" Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "userProject" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Get '[Core.JSON] BucketAccessControls
 
 -- | Retrieves ACL entries on the specified bucket.
 --
 -- /See:/ 'newStorageBucketAccessControlsList' smart constructor.
 data StorageBucketAccessControlsList = StorageBucketAccessControlsList
-  { -- | Name of a bucket.
-    bucket :: Core.Text,
-    -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | The project to be billed for this request. Required for Requester Pays buckets.
-    userProject :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Name of a bucket.
+      bucket :: Core.Text
+      -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | The project to be billed for this request. Required for Requester Pays buckets.
+    , userProject :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'StorageBucketAccessControlsList' with the minimum fields required to make a request.
-newStorageBucketAccessControlsList ::
-  -- |  Name of a bucket. See 'bucket'.
-  Core.Text ->
-  StorageBucketAccessControlsList
+newStorageBucketAccessControlsList 
+    ::  Core.Text
+       -- ^  Name of a bucket. See 'bucket'.
+    -> StorageBucketAccessControlsList
 newStorageBucketAccessControlsList bucket =
   StorageBucketAccessControlsList
-    { bucket = bucket,
-      uploadType = Core.Nothing,
-      userProject = Core.Nothing
-    }
+    {bucket = bucket, uploadType = Core.Nothing, userProject = Core.Nothing}
 
-instance
-  Core.GoogleRequest
-    StorageBucketAccessControlsList
-  where
-  type
-    Rs StorageBucketAccessControlsList =
-      BucketAccessControls
-  type
-    Scopes StorageBucketAccessControlsList =
-      '[CloudPlatform'FullControl, Devstorage'FullControl]
-  requestClient StorageBucketAccessControlsList {..} =
-    go
-      bucket
-      uploadType
-      userProject
-      (Core.Just Core.AltJSON)
-      storageService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy StorageBucketAccessControlsListResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           StorageBucketAccessControlsList
+         where
+        type Rs StorageBucketAccessControlsList =
+             BucketAccessControls
+        type Scopes StorageBucketAccessControlsList =
+             '[CloudPlatform'FullControl, Devstorage'FullControl]
+        requestClient StorageBucketAccessControlsList{..}
+          = go bucket uploadType userProject
+              (Core.Just Core.AltJSON)
+              storageService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy StorageBucketAccessControlsListResource)
+                      Core.mempty
+

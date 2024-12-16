@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,96 +31,88 @@
 --
 -- /See:/ <https://cloud.google.com/bigquery-transfer/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.locations.dataSources.get@.
 module Gogol.BigQueryDataTransfer.Projects.Locations.DataSources.Get
-  ( -- * Resource
-    BigQueryDataTransferProjectsLocationsDataSourcesGetResource,
+    (
+    -- * Resource
+      BigQueryDataTransferProjectsLocationsDataSourcesGetResource
 
     -- ** Constructing a Request
-    BigQueryDataTransferProjectsLocationsDataSourcesGet (..),
-    newBigQueryDataTransferProjectsLocationsDataSourcesGet,
-  )
-where
+    , BigQueryDataTransferProjectsLocationsDataSourcesGet (..)
+    , newBigQueryDataTransferProjectsLocationsDataSourcesGet
+    ) where
 
-import Gogol.BigQueryDataTransfer.Types
 import qualified Gogol.Prelude as Core
+import Gogol.BigQueryDataTransfer.Types
 
 -- | A resource alias for @bigquerydatatransfer.projects.locations.dataSources.get@ method which the
 -- 'BigQueryDataTransferProjectsLocationsDataSourcesGet' request conforms to.
-type BigQueryDataTransferProjectsLocationsDataSourcesGetResource =
-  "v1"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] DataSource
+type BigQueryDataTransferProjectsLocationsDataSourcesGetResource
+     =
+     "v1" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Get '[Core.JSON] DataSource
 
 -- | Retrieves a supported data source and returns its settings.
 --
 -- /See:/ 'newBigQueryDataTransferProjectsLocationsDataSourcesGet' smart constructor.
 data BigQueryDataTransferProjectsLocationsDataSourcesGet = BigQueryDataTransferProjectsLocationsDataSourcesGet
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. The field will contain name of the resource requested, for example: @projects\/{project_id}\/dataSources\/{data_source_id}@ or @projects\/{project_id}\/locations\/{location_id}\/dataSources\/{data_source_id}@
-    name :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The field will contain name of the resource requested, for example: @projects\/{project_id}\/dataSources\/{data_source_id}@ or @projects\/{project_id}\/locations\/{location_id}\/dataSources\/{data_source_id}@
+    , name :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'BigQueryDataTransferProjectsLocationsDataSourcesGet' with the minimum fields required to make a request.
-newBigQueryDataTransferProjectsLocationsDataSourcesGet ::
-  -- |  Required. The field will contain name of the resource requested, for example: @projects\/{project_id}\/dataSources\/{data_source_id}@ or @projects\/{project_id}\/locations\/{location_id}\/dataSources\/{data_source_id}@ See 'name'.
-  Core.Text ->
-  BigQueryDataTransferProjectsLocationsDataSourcesGet
+newBigQueryDataTransferProjectsLocationsDataSourcesGet 
+    ::  Core.Text
+       -- ^  Required. The field will contain name of the resource requested, for example: @projects\/{project_id}\/dataSources\/{data_source_id}@ or @projects\/{project_id}\/locations\/{location_id}\/dataSources\/{data_source_id}@ See 'name'.
+    -> BigQueryDataTransferProjectsLocationsDataSourcesGet
 newBigQueryDataTransferProjectsLocationsDataSourcesGet name =
   BigQueryDataTransferProjectsLocationsDataSourcesGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    BigQueryDataTransferProjectsLocationsDataSourcesGet
-  where
-  type
-    Rs
-      BigQueryDataTransferProjectsLocationsDataSourcesGet =
-      DataSource
-  type
-    Scopes
-      BigQueryDataTransferProjectsLocationsDataSourcesGet =
-      '[ Bigquery'FullControl,
-         CloudPlatform'FullControl,
-         CloudPlatform'ReadOnly
-       ]
-  requestClient
-    BigQueryDataTransferProjectsLocationsDataSourcesGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        bigQueryDataTransferService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  BigQueryDataTransferProjectsLocationsDataSourcesGetResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           BigQueryDataTransferProjectsLocationsDataSourcesGet
+         where
+        type Rs
+               BigQueryDataTransferProjectsLocationsDataSourcesGet
+             = DataSource
+        type Scopes
+               BigQueryDataTransferProjectsLocationsDataSourcesGet
+             =
+             '[Bigquery'FullControl, CloudPlatform'FullControl,
+               CloudPlatform'ReadOnly]
+        requestClient
+          BigQueryDataTransferProjectsLocationsDataSourcesGet{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              bigQueryDataTransferService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           BigQueryDataTransferProjectsLocationsDataSourcesGetResource)
+                      Core.mempty
+

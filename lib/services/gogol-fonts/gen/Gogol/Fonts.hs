@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,37 +31,44 @@
 --
 -- /See:/ <https://developers.google.com/fonts/docs/developer_api Web Fonts Developer API Reference>
 module Gogol.Fonts
-  ( -- * Configuration
-    fontsService,
+    (
+    -- * Configuration
+      fontsService
 
     -- * Resources
 
     -- ** webfonts.webfonts.list
-    WebfontsWebfontsListResource,
-    WebfontsWebfontsList (..),
-    newWebfontsWebfontsList,
+    , WebfontsWebfontsListResource
+    , WebfontsWebfontsList (..)
+    , newWebfontsWebfontsList
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
+
+    -- ** Axis
+    , Axis (..)
+    , newAxis
 
     -- ** Webfont
-    Webfont (..),
-    newWebfont,
+    , Webfont (..)
+    , newWebfont
 
     -- ** Webfont_Files
-    Webfont_Files (..),
-    newWebfont_Files,
+    , Webfont_Files (..)
+    , newWebfont_Files
 
     -- ** WebfontList
-    WebfontList (..),
-    newWebfontList,
+    , WebfontList (..)
+    , newWebfontList
+
+    -- ** WebfontsListCapability
+    , WebfontsListCapability (..)
 
     -- ** WebfontsListSort
-    WebfontsListSort (..),
-  )
-where
+    , WebfontsListSort (..)
+    ) where
 
 import Gogol.Fonts.Types
 import Gogol.Fonts.Webfonts.List

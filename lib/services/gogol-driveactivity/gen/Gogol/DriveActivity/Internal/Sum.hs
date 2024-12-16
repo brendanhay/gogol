@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +26,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.DriveActivity.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * ApplicationReference_Type
     ApplicationReference_Type
-      ( ApplicationReference_Type_UNSPECIFIEDREFERENCETYPE,
+      (
+        ApplicationReference_Type_UNSPECIFIEDREFERENCETYPE,
         ApplicationReference_Type_Link,
         ApplicationReference_Type_Discuss,
         ..
@@ -43,7 +49,8 @@ module Gogol.DriveActivity.Internal.Sum
 
     -- * AppliedLabelChangeDetail_TypesItem
     AppliedLabelChangeDetail_TypesItem
-      ( AppliedLabelChangeDetail_TypesItem_TYPEUNSPECIFIED,
+      (
+        AppliedLabelChangeDetail_TypesItem_TYPEUNSPECIFIED,
         AppliedLabelChangeDetail_TypesItem_LABELADDED,
         AppliedLabelChangeDetail_TypesItem_LABELREMOVED,
         AppliedLabelChangeDetail_TypesItem_LABELFIELDVALUECHANGED,
@@ -53,7 +60,8 @@ module Gogol.DriveActivity.Internal.Sum
 
     -- * Assignment_Subtype
     Assignment_Subtype
-      ( Assignment_Subtype_SUBTYPEUNSPECIFIED,
+      (
+        Assignment_Subtype_SUBTYPEUNSPECIFIED,
         Assignment_Subtype_Added,
         Assignment_Subtype_Deleted,
         Assignment_Subtype_REPLYADDED,
@@ -66,7 +74,8 @@ module Gogol.DriveActivity.Internal.Sum
 
     -- * DataLeakPreventionChange_Type
     DataLeakPreventionChange_Type
-      ( DataLeakPreventionChange_Type_TYPEUNSPECIFIED,
+      (
+        DataLeakPreventionChange_Type_TYPEUNSPECIFIED,
         DataLeakPreventionChange_Type_Flagged,
         DataLeakPreventionChange_Type_Cleared,
         ..
@@ -74,7 +83,8 @@ module Gogol.DriveActivity.Internal.Sum
 
     -- * Delete_Type
     Delete_Type
-      ( Delete_Type_TYPEUNSPECIFIED,
+      (
+        Delete_Type_TYPEUNSPECIFIED,
         Delete_Type_Trash,
         Delete_Type_PERMANENTDELETE,
         ..
@@ -82,7 +92,8 @@ module Gogol.DriveActivity.Internal.Sum
 
     -- * DriveFolder_Type
     DriveFolder_Type
-      ( DriveFolder_Type_TYPEUNSPECIFIED,
+      (
+        DriveFolder_Type_TYPEUNSPECIFIED,
         DriveFolder_Type_MYDRIVEROOT,
         DriveFolder_Type_SHAREDDRIVEROOT,
         DriveFolder_Type_STANDARDFOLDER,
@@ -91,7 +102,8 @@ module Gogol.DriveActivity.Internal.Sum
 
     -- * Folder_Type
     Folder_Type
-      ( Folder_Type_TYPEUNSPECIFIED,
+      (
+        Folder_Type_TYPEUNSPECIFIED,
         Folder_Type_MYDRIVEROOT,
         Folder_Type_TEAMDRIVEROOT,
         Folder_Type_STANDARDFOLDER,
@@ -100,7 +112,8 @@ module Gogol.DriveActivity.Internal.Sum
 
     -- * Permission_Role
     Permission_Role
-      ( Permission_Role_ROLEUNSPECIFIED,
+      (
+        Permission_Role_ROLEUNSPECIFIED,
         Permission_Role_Owner,
         Permission_Role_Organizer,
         Permission_Role_FILEORGANIZER,
@@ -113,7 +126,8 @@ module Gogol.DriveActivity.Internal.Sum
 
     -- * Post_Subtype
     Post_Subtype
-      ( Post_Subtype_SUBTYPEUNSPECIFIED,
+      (
+        Post_Subtype_SUBTYPEUNSPECIFIED,
         Post_Subtype_Added,
         Post_Subtype_Deleted,
         Post_Subtype_REPLYADDED,
@@ -125,14 +139,16 @@ module Gogol.DriveActivity.Internal.Sum
 
     -- * Restore_Type
     Restore_Type
-      ( Restore_Type_TYPEUNSPECIFIED,
+      (
+        Restore_Type_TYPEUNSPECIFIED,
         Restore_Type_Untrash,
         ..
       ),
 
     -- * RestrictionChange_Feature
     RestrictionChange_Feature
-      ( RestrictionChange_Feature_FEATUREUNSPECIFIED,
+      (
+        RestrictionChange_Feature_FEATUREUNSPECIFIED,
         RestrictionChange_Feature_SHARINGOUTSIDEDOMAIN,
         RestrictionChange_Feature_DIRECTSHARING,
         RestrictionChange_Feature_ITEMDUPLICATION,
@@ -143,7 +159,8 @@ module Gogol.DriveActivity.Internal.Sum
 
     -- * RestrictionChange_NewRestriction
     RestrictionChange_NewRestriction
-      ( RestrictionChange_NewRestriction_RESTRICTIONUNSPECIFIED,
+      (
+        RestrictionChange_NewRestriction_RESTRICTIONUNSPECIFIED,
         RestrictionChange_NewRestriction_Unrestricted,
         RestrictionChange_NewRestriction_FULLYRESTRICTED,
         ..
@@ -151,7 +168,8 @@ module Gogol.DriveActivity.Internal.Sum
 
     -- * Suggestion_Subtype
     Suggestion_Subtype
-      ( Suggestion_Subtype_SUBTYPEUNSPECIFIED,
+      (
+        Suggestion_Subtype_SUBTYPEUNSPECIFIED,
         Suggestion_Subtype_Added,
         Suggestion_Subtype_Deleted,
         Suggestion_Subtype_REPLYADDED,
@@ -165,28 +183,28 @@ module Gogol.DriveActivity.Internal.Sum
 
     -- * SystemEvent_Type
     SystemEvent_Type
-      ( SystemEvent_Type_TYPEUNSPECIFIED,
+      (
+        SystemEvent_Type_TYPEUNSPECIFIED,
         SystemEvent_Type_USERDELETION,
         SystemEvent_Type_TRASHAUTOPURGE,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -199,21 +217,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
 -- | The reference type corresponding to this event.
-newtype ApplicationReference_Type = ApplicationReference_Type {fromApplicationReference_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ApplicationReference_Type = ApplicationReference_Type { fromApplicationReference_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The type is not available.
 pattern ApplicationReference_Type_UNSPECIFIEDREFERENCETYPE :: ApplicationReference_Type
@@ -231,20 +248,19 @@ pattern ApplicationReference_Type_Discuss = ApplicationReference_Type "DISCUSS"
   ApplicationReference_Type_UNSPECIFIEDREFERENCETYPE,
   ApplicationReference_Type_Link,
   ApplicationReference_Type_Discuss,
-  ApplicationReference_Type
-  #-}
+  ApplicationReference_Type #-}
 
-newtype AppliedLabelChangeDetail_TypesItem = AppliedLabelChangeDetail_TypesItem {fromAppliedLabelChangeDetail_TypesItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype AppliedLabelChangeDetail_TypesItem = AppliedLabelChangeDetail_TypesItem { fromAppliedLabelChangeDetail_TypesItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The type of change to this Label is not available.
 pattern AppliedLabelChangeDetail_TypesItem_TYPEUNSPECIFIED :: AppliedLabelChangeDetail_TypesItem
@@ -272,21 +288,20 @@ pattern AppliedLabelChangeDetail_TypesItem_LABELAPPLIEDBYITEMCREATE = AppliedLab
   AppliedLabelChangeDetail_TypesItem_LABELREMOVED,
   AppliedLabelChangeDetail_TypesItem_LABELFIELDVALUECHANGED,
   AppliedLabelChangeDetail_TypesItem_LABELAPPLIEDBYITEMCREATE,
-  AppliedLabelChangeDetail_TypesItem
-  #-}
+  AppliedLabelChangeDetail_TypesItem #-}
 
 -- | The sub-type of this event.
-newtype Assignment_Subtype = Assignment_Subtype {fromAssignment_Subtype :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Assignment_Subtype = Assignment_Subtype { fromAssignment_Subtype :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Subtype not available.
 pattern Assignment_Subtype_SUBTYPEUNSPECIFIED :: Assignment_Subtype
@@ -329,21 +344,20 @@ pattern Assignment_Subtype_Reassigned = Assignment_Subtype "REASSIGNED"
   Assignment_Subtype_Resolved,
   Assignment_Subtype_Reopened,
   Assignment_Subtype_Reassigned,
-  Assignment_Subtype
-  #-}
+  Assignment_Subtype #-}
 
 -- | The type of Data Leak Prevention (DLP) change.
-newtype DataLeakPreventionChange_Type = DataLeakPreventionChange_Type {fromDataLeakPreventionChange_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DataLeakPreventionChange_Type = DataLeakPreventionChange_Type { fromDataLeakPreventionChange_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | An update to the DLP state that is neither FLAGGED or CLEARED.
 pattern DataLeakPreventionChange_Type_TYPEUNSPECIFIED :: DataLeakPreventionChange_Type
@@ -361,21 +375,20 @@ pattern DataLeakPreventionChange_Type_Cleared = DataLeakPreventionChange_Type "C
   DataLeakPreventionChange_Type_TYPEUNSPECIFIED,
   DataLeakPreventionChange_Type_Flagged,
   DataLeakPreventionChange_Type_Cleared,
-  DataLeakPreventionChange_Type
-  #-}
+  DataLeakPreventionChange_Type #-}
 
 -- | The type of delete action taken.
-newtype Delete_Type = Delete_Type {fromDelete_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Delete_Type = Delete_Type { fromDelete_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Deletion type is not available.
 pattern Delete_Type_TYPEUNSPECIFIED :: Delete_Type
@@ -393,21 +406,20 @@ pattern Delete_Type_PERMANENTDELETE = Delete_Type "PERMANENT_DELETE"
   Delete_Type_TYPEUNSPECIFIED,
   Delete_Type_Trash,
   Delete_Type_PERMANENTDELETE,
-  Delete_Type
-  #-}
+  Delete_Type #-}
 
 -- | The type of Drive folder.
-newtype DriveFolder_Type = DriveFolder_Type {fromDriveFolder_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DriveFolder_Type = DriveFolder_Type { fromDriveFolder_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The folder type is unknown.
 pattern DriveFolder_Type_TYPEUNSPECIFIED :: DriveFolder_Type
@@ -430,21 +442,20 @@ pattern DriveFolder_Type_STANDARDFOLDER = DriveFolder_Type "STANDARD_FOLDER"
   DriveFolder_Type_MYDRIVEROOT,
   DriveFolder_Type_SHAREDDRIVEROOT,
   DriveFolder_Type_STANDARDFOLDER,
-  DriveFolder_Type
-  #-}
+  DriveFolder_Type #-}
 
 -- | This field is deprecated; please see @DriveFolder.type@ instead.
-newtype Folder_Type = Folder_Type {fromFolder_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Folder_Type = Folder_Type { fromFolder_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | This item is deprecated; please see @DriveFolder.Type@ instead.
 pattern Folder_Type_TYPEUNSPECIFIED :: Folder_Type
@@ -467,21 +478,20 @@ pattern Folder_Type_STANDARDFOLDER = Folder_Type "STANDARD_FOLDER"
   Folder_Type_MYDRIVEROOT,
   Folder_Type_TEAMDRIVEROOT,
   Folder_Type_STANDARDFOLDER,
-  Folder_Type
-  #-}
+  Folder_Type #-}
 
 -- | Indicates the <https://developers.google.com/drive/web/manage-sharing#roles Google Drive permissions role>. The role determines a user\'s ability to read, write, and comment on items.
-newtype Permission_Role = Permission_Role {fromPermission_Role :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Permission_Role = Permission_Role { fromPermission_Role :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The role is not available.
 pattern Permission_Role_ROLEUNSPECIFIED :: Permission_Role
@@ -524,21 +534,20 @@ pattern Permission_Role_PUBLISHEDVIEWER = Permission_Role "PUBLISHED_VIEWER"
   Permission_Role_Commenter,
   Permission_Role_Viewer,
   Permission_Role_PUBLISHEDVIEWER,
-  Permission_Role
-  #-}
+  Permission_Role #-}
 
 -- | The sub-type of this event.
-newtype Post_Subtype = Post_Subtype {fromPost_Subtype :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Post_Subtype = Post_Subtype { fromPost_Subtype :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Subtype not available.
 pattern Post_Subtype_SUBTYPEUNSPECIFIED :: Post_Subtype
@@ -576,21 +585,20 @@ pattern Post_Subtype_Reopened = Post_Subtype "REOPENED"
   Post_Subtype_REPLYDELETED,
   Post_Subtype_Resolved,
   Post_Subtype_Reopened,
-  Post_Subtype
-  #-}
+  Post_Subtype #-}
 
 -- | The type of restore action taken.
-newtype Restore_Type = Restore_Type {fromRestore_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Restore_Type = Restore_Type { fromRestore_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The type is not available.
 pattern Restore_Type_TYPEUNSPECIFIED :: Restore_Type
@@ -603,21 +611,20 @@ pattern Restore_Type_Untrash = Restore_Type "UNTRASH"
 {-# COMPLETE
   Restore_Type_TYPEUNSPECIFIED,
   Restore_Type_Untrash,
-  Restore_Type
-  #-}
+  Restore_Type #-}
 
 -- | The feature which had a change in restriction policy.
-newtype RestrictionChange_Feature = RestrictionChange_Feature {fromRestrictionChange_Feature :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype RestrictionChange_Feature = RestrictionChange_Feature { fromRestrictionChange_Feature :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The feature which changed restriction settings was not available.
 pattern RestrictionChange_Feature_FEATUREUNSPECIFIED :: RestrictionChange_Feature
@@ -650,21 +657,20 @@ pattern RestrictionChange_Feature_FILEORGANIZERCANSHAREFOLDERS = RestrictionChan
   RestrictionChange_Feature_ITEMDUPLICATION,
   RestrictionChange_Feature_DRIVEFILESTREAM,
   RestrictionChange_Feature_FILEORGANIZERCANSHAREFOLDERS,
-  RestrictionChange_Feature
-  #-}
+  RestrictionChange_Feature #-}
 
 -- | The restriction in place after the change.
-newtype RestrictionChange_NewRestriction = RestrictionChange_NewRestriction {fromRestrictionChange_NewRestriction :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype RestrictionChange_NewRestriction = RestrictionChange_NewRestriction { fromRestrictionChange_NewRestriction :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The type of restriction is not available.
 pattern RestrictionChange_NewRestriction_RESTRICTIONUNSPECIFIED :: RestrictionChange_NewRestriction
@@ -682,21 +688,20 @@ pattern RestrictionChange_NewRestriction_FULLYRESTRICTED = RestrictionChange_New
   RestrictionChange_NewRestriction_RESTRICTIONUNSPECIFIED,
   RestrictionChange_NewRestriction_Unrestricted,
   RestrictionChange_NewRestriction_FULLYRESTRICTED,
-  RestrictionChange_NewRestriction
-  #-}
+  RestrictionChange_NewRestriction #-}
 
 -- | The sub-type of this event.
-newtype Suggestion_Subtype = Suggestion_Subtype {fromSuggestion_Subtype :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Suggestion_Subtype = Suggestion_Subtype { fromSuggestion_Subtype :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Subtype not available.
 pattern Suggestion_Subtype_SUBTYPEUNSPECIFIED :: Suggestion_Subtype
@@ -744,21 +749,20 @@ pattern Suggestion_Subtype_REJECTDELETED = Suggestion_Subtype "REJECT_DELETED"
   Suggestion_Subtype_Rejected,
   Suggestion_Subtype_ACCEPTDELETED,
   Suggestion_Subtype_REJECTDELETED,
-  Suggestion_Subtype
-  #-}
+  Suggestion_Subtype #-}
 
 -- | The type of the system event that may triggered activity.
-newtype SystemEvent_Type = SystemEvent_Type {fromSystemEvent_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype SystemEvent_Type = SystemEvent_Type { fromSystemEvent_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | The event type is unspecified.
 pattern SystemEvent_Type_TYPEUNSPECIFIED :: SystemEvent_Type
@@ -776,5 +780,4 @@ pattern SystemEvent_Type_TRASHAUTOPURGE = SystemEvent_Type "TRASH_AUTO_PURGE"
   SystemEvent_Type_TYPEUNSPECIFIED,
   SystemEvent_Type_USERDELETION,
   SystemEvent_Type_TRASHAUTOPURGE,
-  SystemEvent_Type
-  #-}
+  SystemEvent_Type #-}

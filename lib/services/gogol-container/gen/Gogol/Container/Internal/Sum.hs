@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,17 +26,42 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Container.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
+        ..
+      ),
+
+    -- * AdvancedDatapathObservabilityConfig_RelayMode
+    AdvancedDatapathObservabilityConfig_RelayMode
+      (
+        AdvancedDatapathObservabilityConfig_RelayMode_RELAYMODEUNSPECIFIED,
+        AdvancedDatapathObservabilityConfig_RelayMode_Disabled,
+        AdvancedDatapathObservabilityConfig_RelayMode_INTERNALVPCLB,
+        AdvancedDatapathObservabilityConfig_RelayMode_EXTERNALLB,
+        ..
+      ),
+
+    -- * AutopilotCompatibilityIssue_IncompatibilityType
+    AutopilotCompatibilityIssue_IncompatibilityType
+      (
+        AutopilotCompatibilityIssue_IncompatibilityType_Unspecified,
+        AutopilotCompatibilityIssue_IncompatibilityType_Incompatibility,
+        AutopilotCompatibilityIssue_IncompatibilityType_ADDITIONALCONFIGREQUIRED,
+        AutopilotCompatibilityIssue_IncompatibilityType_PASSEDWITHOPTIONALCONFIG,
         ..
       ),
 
     -- * BinaryAuthorization_EvaluationMode
     BinaryAuthorization_EvaluationMode
-      ( BinaryAuthorization_EvaluationMode_EVALUATIONMODEUNSPECIFIED,
+      (
+        BinaryAuthorization_EvaluationMode_EVALUATIONMODEUNSPECIFIED,
         BinaryAuthorization_EvaluationMode_Disabled,
         BinaryAuthorization_EvaluationMode_PROJECTSINGLETONPOLICYENFORCE,
         ..
@@ -43,7 +69,8 @@ module Gogol.Container.Internal.Sum
 
     -- * BlueGreenInfo_Phase
     BlueGreenInfo_Phase
-      ( BlueGreenInfo_Phase_PHASEUNSPECIFIED,
+      (
+        BlueGreenInfo_Phase_PHASEUNSPECIFIED,
         BlueGreenInfo_Phase_UPDATESTARTED,
         BlueGreenInfo_Phase_CREATINGGREENPOOL,
         BlueGreenInfo_Phase_CORDONINGBLUEPOOL,
@@ -56,7 +83,8 @@ module Gogol.Container.Internal.Sum
 
     -- * CloudRunConfig_LoadBalancerType
     CloudRunConfig_LoadBalancerType
-      ( CloudRunConfig_LoadBalancerType_LOADBALANCERTYPEUNSPECIFIED,
+      (
+        CloudRunConfig_LoadBalancerType_LOADBALANCERTYPEUNSPECIFIED,
         CloudRunConfig_LoadBalancerType_LOADBALANCERTYPEEXTERNAL,
         CloudRunConfig_LoadBalancerType_LOADBALANCERTYPEINTERNAL,
         ..
@@ -64,7 +92,8 @@ module Gogol.Container.Internal.Sum
 
     -- * Cluster_Status
     Cluster_Status
-      ( Cluster_Status_STATUSUNSPECIFIED,
+      (
+        Cluster_Status_STATUSUNSPECIFIED,
         Cluster_Status_Provisioning,
         Cluster_Status_Running,
         Cluster_Status_Reconciling,
@@ -76,23 +105,43 @@ module Gogol.Container.Internal.Sum
 
     -- * ClusterAutoscaling_AutoscalingProfile
     ClusterAutoscaling_AutoscalingProfile
-      ( ClusterAutoscaling_AutoscalingProfile_PROFILEUNSPECIFIED,
+      (
+        ClusterAutoscaling_AutoscalingProfile_PROFILEUNSPECIFIED,
         ClusterAutoscaling_AutoscalingProfile_OPTIMIZEUTILIZATION,
         ClusterAutoscaling_AutoscalingProfile_Balanced,
         ..
       ),
 
+    -- * ClusterNetworkPerformanceConfig_TotalEgressBandwidthTier
+    ClusterNetworkPerformanceConfig_TotalEgressBandwidthTier
+      (
+        ClusterNetworkPerformanceConfig_TotalEgressBandwidthTier_TIERUNSPECIFIED,
+        ClusterNetworkPerformanceConfig_TotalEgressBandwidthTier_TIER_1,
+        ..
+      ),
+
     -- * ClusterUpdate_DesiredDatapathProvider
     ClusterUpdate_DesiredDatapathProvider
-      ( ClusterUpdate_DesiredDatapathProvider_DATAPATHPROVIDERUNSPECIFIED,
+      (
+        ClusterUpdate_DesiredDatapathProvider_DATAPATHPROVIDERUNSPECIFIED,
         ClusterUpdate_DesiredDatapathProvider_LEGACYDATAPATH,
         ClusterUpdate_DesiredDatapathProvider_ADVANCEDDATAPATH,
         ..
       ),
 
+    -- * ClusterUpdate_DesiredInTransitEncryptionConfig
+    ClusterUpdate_DesiredInTransitEncryptionConfig
+      (
+        ClusterUpdate_DesiredInTransitEncryptionConfig_INTRANSITENCRYPTIONCONFIGUNSPECIFIED,
+        ClusterUpdate_DesiredInTransitEncryptionConfig_INTRANSITENCRYPTIONDISABLED,
+        ClusterUpdate_DesiredInTransitEncryptionConfig_INTRANSITENCRYPTIONINTERNODETRANSPARENT,
+        ..
+      ),
+
     -- * ClusterUpdate_DesiredPrivateIpv6GoogleAccess
     ClusterUpdate_DesiredPrivateIpv6GoogleAccess
-      ( ClusterUpdate_DesiredPrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSUNSPECIFIED,
+      (
+        ClusterUpdate_DesiredPrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSUNSPECIFIED,
         ClusterUpdate_DesiredPrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSDISABLED,
         ClusterUpdate_DesiredPrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSTOGOOGLE,
         ClusterUpdate_DesiredPrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSBIDIRECTIONAL,
@@ -101,55 +150,123 @@ module Gogol.Container.Internal.Sum
 
     -- * ClusterUpdate_DesiredStackType
     ClusterUpdate_DesiredStackType
-      ( ClusterUpdate_DesiredStackType_STACKTYPEUNSPECIFIED,
+      (
+        ClusterUpdate_DesiredStackType_STACKTYPEUNSPECIFIED,
         ClusterUpdate_DesiredStackType_IPV4,
         ClusterUpdate_DesiredStackType_IPV4_IPV6,
         ..
       ),
 
+    -- * CompliancePostureConfig_Mode
+    CompliancePostureConfig_Mode
+      (
+        CompliancePostureConfig_Mode_MODEUNSPECIFIED,
+        CompliancePostureConfig_Mode_Disabled,
+        CompliancePostureConfig_Mode_Enabled,
+        ..
+      ),
+
     -- * DNSConfig_ClusterDns
     DNSConfig_ClusterDns
-      ( DNSConfig_ClusterDns_PROVIDERUNSPECIFIED,
+      (
+        DNSConfig_ClusterDns_PROVIDERUNSPECIFIED,
         DNSConfig_ClusterDns_PLATFORMDEFAULT,
         DNSConfig_ClusterDns_CLOUDDNS,
+        DNSConfig_ClusterDns_KUBEDNS,
         ..
       ),
 
     -- * DNSConfig_ClusterDnsScope
     DNSConfig_ClusterDnsScope
-      ( DNSConfig_ClusterDnsScope_DNSSCOPEUNSPECIFIED,
+      (
+        DNSConfig_ClusterDnsScope_DNSSCOPEUNSPECIFIED,
         DNSConfig_ClusterDnsScope_CLUSTERSCOPE,
         DNSConfig_ClusterDnsScope_VPCSCOPE,
         ..
       ),
 
+    -- * DatabaseEncryption_CurrentState
+    DatabaseEncryption_CurrentState
+      (
+        DatabaseEncryption_CurrentState_CURRENTSTATEUNSPECIFIED,
+        DatabaseEncryption_CurrentState_CURRENTSTATEENCRYPTED,
+        DatabaseEncryption_CurrentState_CURRENTSTATEDECRYPTED,
+        DatabaseEncryption_CurrentState_CURRENTSTATEENCRYPTIONPENDING,
+        DatabaseEncryption_CurrentState_CURRENTSTATEENCRYPTIONERROR,
+        DatabaseEncryption_CurrentState_CURRENTSTATEDECRYPTIONPENDING,
+        DatabaseEncryption_CurrentState_CURRENTSTATEDECRYPTIONERROR,
+        ..
+      ),
+
     -- * DatabaseEncryption_State
     DatabaseEncryption_State
-      ( DatabaseEncryption_State_Unknown,
+      (
+        DatabaseEncryption_State_Unknown,
         DatabaseEncryption_State_Encrypted,
         DatabaseEncryption_State_Decrypted,
         ..
       ),
 
+    -- * DesiredEnterpriseConfig_DesiredTier
+    DesiredEnterpriseConfig_DesiredTier
+      (
+        DesiredEnterpriseConfig_DesiredTier_CLUSTERTIERUNSPECIFIED,
+        DesiredEnterpriseConfig_DesiredTier_Standard,
+        DesiredEnterpriseConfig_DesiredTier_Enterprise,
+        ..
+      ),
+
+    -- * EnterpriseConfig_ClusterTier
+    EnterpriseConfig_ClusterTier
+      (
+        EnterpriseConfig_ClusterTier_CLUSTERTIERUNSPECIFIED,
+        EnterpriseConfig_ClusterTier_Standard,
+        EnterpriseConfig_ClusterTier_Enterprise,
+        ..
+      ),
+
+    -- * EnterpriseConfig_DesiredTier
+    EnterpriseConfig_DesiredTier
+      (
+        EnterpriseConfig_DesiredTier_CLUSTERTIERUNSPECIFIED,
+        EnterpriseConfig_DesiredTier_Standard,
+        EnterpriseConfig_DesiredTier_Enterprise,
+        ..
+      ),
+
     -- * Filter_EventTypeItem
     Filter_EventTypeItem
-      ( Filter_EventTypeItem_EVENTTYPEUNSPECIFIED,
+      (
+        Filter_EventTypeItem_EVENTTYPEUNSPECIFIED,
         Filter_EventTypeItem_UPGRADEAVAILABLEEVENT,
         Filter_EventTypeItem_UPGRADEEVENT,
         Filter_EventTypeItem_SECURITYBULLETINEVENT,
         ..
       ),
 
+    -- * GPUDriverInstallationConfig_GpuDriverVersion
+    GPUDriverInstallationConfig_GpuDriverVersion
+      (
+        GPUDriverInstallationConfig_GpuDriverVersion_GPUDRIVERVERSIONUNSPECIFIED,
+        GPUDriverInstallationConfig_GpuDriverVersion_INSTALLATIONDISABLED,
+        GPUDriverInstallationConfig_GpuDriverVersion_Default,
+        GPUDriverInstallationConfig_GpuDriverVersion_Latest,
+        ..
+      ),
+
     -- * GPUSharingConfig_GpuSharingStrategy
     GPUSharingConfig_GpuSharingStrategy
-      ( GPUSharingConfig_GpuSharingStrategy_GPUSHARINGSTRATEGYUNSPECIFIED,
+      (
+        GPUSharingConfig_GpuSharingStrategy_GPUSHARINGSTRATEGYUNSPECIFIED,
         GPUSharingConfig_GpuSharingStrategy_TIMESHARING,
+        GPUSharingConfig_GpuSharingStrategy_Mps,
         ..
       ),
 
     -- * GatewayAPIConfig_Channel
     GatewayAPIConfig_Channel
-      ( GatewayAPIConfig_Channel_CHANNELUNSPECIFIED,
+      (
+        GatewayAPIConfig_Channel_CHANNELUNSPECIFIED,
         GatewayAPIConfig_Channel_CHANNELDISABLED,
         GatewayAPIConfig_Channel_CHANNELEXPERIMENTAL,
         GatewayAPIConfig_Channel_CHANNELSTANDARD,
@@ -158,7 +275,8 @@ module Gogol.Container.Internal.Sum
 
     -- * IPAllocationPolicy_Ipv6AccessType
     IPAllocationPolicy_Ipv6AccessType
-      ( IPAllocationPolicy_Ipv6AccessType_IPV6ACCESSTYPEUNSPECIFIED,
+      (
+        IPAllocationPolicy_Ipv6AccessType_IPV6ACCESSTYPEUNSPECIFIED,
         IPAllocationPolicy_Ipv6AccessType_Internal,
         IPAllocationPolicy_Ipv6AccessType_External,
         ..
@@ -166,7 +284,8 @@ module Gogol.Container.Internal.Sum
 
     -- * IPAllocationPolicy_StackType
     IPAllocationPolicy_StackType
-      ( IPAllocationPolicy_StackType_STACKTYPEUNSPECIFIED,
+      (
+        IPAllocationPolicy_StackType_STACKTYPEUNSPECIFIED,
         IPAllocationPolicy_StackType_IPV4,
         IPAllocationPolicy_StackType_IPV4_IPV6,
         ..
@@ -174,7 +293,8 @@ module Gogol.Container.Internal.Sum
 
     -- * LinuxNodeConfig_CgroupMode
     LinuxNodeConfig_CgroupMode
-      ( LinuxNodeConfig_CgroupMode_CGROUPMODEUNSPECIFIED,
+      (
+        LinuxNodeConfig_CgroupMode_CGROUPMODEUNSPECIFIED,
         LinuxNodeConfig_CgroupMode_CGROUP_MODE_V1,
         LinuxNodeConfig_CgroupMode_CGROUP_MODE_V2,
         ..
@@ -182,18 +302,22 @@ module Gogol.Container.Internal.Sum
 
     -- * LoggingComponentConfig_EnableComponentsItem
     LoggingComponentConfig_EnableComponentsItem
-      ( LoggingComponentConfig_EnableComponentsItem_COMPONENTUNSPECIFIED,
+      (
+        LoggingComponentConfig_EnableComponentsItem_COMPONENTUNSPECIFIED,
         LoggingComponentConfig_EnableComponentsItem_SYSTEMCOMPONENTS,
         LoggingComponentConfig_EnableComponentsItem_Workloads,
         LoggingComponentConfig_EnableComponentsItem_Apiserver,
         LoggingComponentConfig_EnableComponentsItem_Scheduler,
         LoggingComponentConfig_EnableComponentsItem_CONTROLLERMANAGER,
+        LoggingComponentConfig_EnableComponentsItem_KCPSSHD,
+        LoggingComponentConfig_EnableComponentsItem_KCPCONNECTION,
         ..
       ),
 
     -- * LoggingVariantConfig_Variant
     LoggingVariantConfig_Variant
-      ( LoggingVariantConfig_Variant_VARIANTUNSPECIFIED,
+      (
+        LoggingVariantConfig_Variant_VARIANTUNSPECIFIED,
         LoggingVariantConfig_Variant_Default,
         LoggingVariantConfig_Variant_MAXTHROUGHPUT,
         ..
@@ -201,7 +325,8 @@ module Gogol.Container.Internal.Sum
 
     -- * MaintenanceExclusionOptions_Scope
     MaintenanceExclusionOptions_Scope
-      ( MaintenanceExclusionOptions_Scope_NOUPGRADES,
+      (
+        MaintenanceExclusionOptions_Scope_NOUPGRADES,
         MaintenanceExclusionOptions_Scope_NOMINORUPGRADES,
         MaintenanceExclusionOptions_Scope_NOMINORORNODEUPGRADES,
         ..
@@ -209,25 +334,46 @@ module Gogol.Container.Internal.Sum
 
     -- * MonitoringComponentConfig_EnableComponentsItem
     MonitoringComponentConfig_EnableComponentsItem
-      ( MonitoringComponentConfig_EnableComponentsItem_COMPONENTUNSPECIFIED,
+      (
+        MonitoringComponentConfig_EnableComponentsItem_COMPONENTUNSPECIFIED,
         MonitoringComponentConfig_EnableComponentsItem_SYSTEMCOMPONENTS,
         MonitoringComponentConfig_EnableComponentsItem_Apiserver,
         MonitoringComponentConfig_EnableComponentsItem_Scheduler,
         MonitoringComponentConfig_EnableComponentsItem_CONTROLLERMANAGER,
+        MonitoringComponentConfig_EnableComponentsItem_Storage,
+        MonitoringComponentConfig_EnableComponentsItem_Hpa,
+        MonitoringComponentConfig_EnableComponentsItem_Pod,
+        MonitoringComponentConfig_EnableComponentsItem_Daemonset,
+        MonitoringComponentConfig_EnableComponentsItem_Deployment,
+        MonitoringComponentConfig_EnableComponentsItem_Statefulset,
+        MonitoringComponentConfig_EnableComponentsItem_Cadvisor,
+        MonitoringComponentConfig_EnableComponentsItem_Kubelet,
+        MonitoringComponentConfig_EnableComponentsItem_Dcgm,
         ..
       ),
 
     -- * NetworkConfig_DatapathProvider
     NetworkConfig_DatapathProvider
-      ( NetworkConfig_DatapathProvider_DATAPATHPROVIDERUNSPECIFIED,
+      (
+        NetworkConfig_DatapathProvider_DATAPATHPROVIDERUNSPECIFIED,
         NetworkConfig_DatapathProvider_LEGACYDATAPATH,
         NetworkConfig_DatapathProvider_ADVANCEDDATAPATH,
         ..
       ),
 
+    -- * NetworkConfig_InTransitEncryptionConfig
+    NetworkConfig_InTransitEncryptionConfig
+      (
+        NetworkConfig_InTransitEncryptionConfig_INTRANSITENCRYPTIONCONFIGUNSPECIFIED,
+        NetworkConfig_InTransitEncryptionConfig_INTRANSITENCRYPTIONDISABLED,
+        NetworkConfig_InTransitEncryptionConfig_INTRANSITENCRYPTIONINTERNODETRANSPARENT,
+        ..
+      ),
+
     -- * NetworkConfig_PrivateIpv6GoogleAccess
     NetworkConfig_PrivateIpv6GoogleAccess
-      ( NetworkConfig_PrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSUNSPECIFIED,
+      (
+        NetworkConfig_PrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSUNSPECIFIED,
         NetworkConfig_PrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSDISABLED,
         NetworkConfig_PrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSTOGOOGLE,
         NetworkConfig_PrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSBIDIRECTIONAL,
@@ -236,21 +382,51 @@ module Gogol.Container.Internal.Sum
 
     -- * NetworkPerformanceConfig_TotalEgressBandwidthTier
     NetworkPerformanceConfig_TotalEgressBandwidthTier
-      ( NetworkPerformanceConfig_TotalEgressBandwidthTier_TIERUNSPECIFIED,
+      (
+        NetworkPerformanceConfig_TotalEgressBandwidthTier_TIERUNSPECIFIED,
         NetworkPerformanceConfig_TotalEgressBandwidthTier_TIER_1,
         ..
       ),
 
     -- * NetworkPolicy_Provider
     NetworkPolicy_Provider
-      ( NetworkPolicy_Provider_PROVIDERUNSPECIFIED,
+      (
+        NetworkPolicy_Provider_PROVIDERUNSPECIFIED,
         NetworkPolicy_Provider_Calico,
+        ..
+      ),
+
+    -- * NodeAffinity_Operator
+    NodeAffinity_Operator
+      (
+        NodeAffinity_Operator_OPERATORUNSPECIFIED,
+        NodeAffinity_Operator_IN,
+        NodeAffinity_Operator_NOTIN,
+        ..
+      ),
+
+    -- * NodeConfig_EffectiveCgroupMode
+    NodeConfig_EffectiveCgroupMode
+      (
+        NodeConfig_EffectiveCgroupMode_EFFECTIVECGROUPMODEUNSPECIFIED,
+        NodeConfig_EffectiveCgroupMode_EFFECTIVE_CGROUP_MODE_V1,
+        NodeConfig_EffectiveCgroupMode_EFFECTIVE_CGROUP_MODE_V2,
+        ..
+      ),
+
+    -- * NodeConfig_LocalSsdEncryptionMode
+    NodeConfig_LocalSsdEncryptionMode
+      (
+        NodeConfig_LocalSsdEncryptionMode_LOCALSSDENCRYPTIONMODEUNSPECIFIED,
+        NodeConfig_LocalSsdEncryptionMode_STANDARDENCRYPTION,
+        NodeConfig_LocalSsdEncryptionMode_EPHEMERALKEYENCRYPTION,
         ..
       ),
 
     -- * NodePool_Status
     NodePool_Status
-      ( NodePool_Status_STATUSUNSPECIFIED,
+      (
+        NodePool_Status_STATUSUNSPECIFIED,
         NodePool_Status_Provisioning,
         NodePool_Status_Running,
         NodePool_Status_RUNNINGWITHERROR,
@@ -262,7 +438,8 @@ module Gogol.Container.Internal.Sum
 
     -- * NodePoolAutoscaling_LocationPolicy
     NodePoolAutoscaling_LocationPolicy
-      ( NodePoolAutoscaling_LocationPolicy_LOCATIONPOLICYUNSPECIFIED,
+      (
+        NodePoolAutoscaling_LocationPolicy_LOCATIONPOLICYUNSPECIFIED,
         NodePoolAutoscaling_LocationPolicy_Balanced,
         NodePoolAutoscaling_LocationPolicy_Any,
         ..
@@ -270,7 +447,8 @@ module Gogol.Container.Internal.Sum
 
     -- * NodeTaint_Effect
     NodeTaint_Effect
-      ( NodeTaint_Effect_EFFECTUNSPECIFIED,
+      (
+        NodeTaint_Effect_EFFECTUNSPECIFIED,
         NodeTaint_Effect_NOSCHEDULE,
         NodeTaint_Effect_PREFERNOSCHEDULE,
         NodeTaint_Effect_NOEXECUTE,
@@ -279,7 +457,8 @@ module Gogol.Container.Internal.Sum
 
     -- * Operation_OperationType
     Operation_OperationType
-      ( Operation_OperationType_TYPEUNSPECIFIED,
+      (
+        Operation_OperationType_TYPEUNSPECIFIED,
         Operation_OperationType_CREATECLUSTER,
         Operation_OperationType_DELETECLUSTER,
         Operation_OperationType_UPGRADEMASTER,
@@ -296,12 +475,15 @@ module Gogol.Container.Internal.Sum
         Operation_OperationType_SETNODEPOOLSIZE,
         Operation_OperationType_SETNETWORKPOLICY,
         Operation_OperationType_SETMAINTENANCEPOLICY,
+        Operation_OperationType_RESIZECLUSTER,
+        Operation_OperationType_FLEETFEATUREUPGRADE,
         ..
       ),
 
     -- * Operation_Status
     Operation_Status
-      ( Operation_Status_STATUSUNSPECIFIED,
+      (
+        Operation_Status_STATUSUNSPECIFIED,
         Operation_Status_Pending,
         Operation_Status_Running,
         Operation_Status_Done,
@@ -311,7 +493,8 @@ module Gogol.Container.Internal.Sum
 
     -- * OperationProgress_Status
     OperationProgress_Status
-      ( OperationProgress_Status_STATUSUNSPECIFIED,
+      (
+        OperationProgress_Status_STATUSUNSPECIFIED,
         OperationProgress_Status_Pending,
         OperationProgress_Status_Running,
         OperationProgress_Status_Done,
@@ -321,32 +504,38 @@ module Gogol.Container.Internal.Sum
 
     -- * PlacementPolicy_Type
     PlacementPolicy_Type
-      ( PlacementPolicy_Type_TYPEUNSPECIFIED,
+      (
+        PlacementPolicy_Type_TYPEUNSPECIFIED,
         PlacementPolicy_Type_Compact,
         ..
       ),
 
     -- * ReleaseChannel_Channel
     ReleaseChannel_Channel
-      ( ReleaseChannel_Channel_Unspecified,
+      (
+        ReleaseChannel_Channel_Unspecified,
         ReleaseChannel_Channel_Rapid,
         ReleaseChannel_Channel_Regular,
         ReleaseChannel_Channel_Stable,
+        ReleaseChannel_Channel_Extended,
         ..
       ),
 
     -- * ReleaseChannelConfig_Channel
     ReleaseChannelConfig_Channel
-      ( ReleaseChannelConfig_Channel_Unspecified,
+      (
+        ReleaseChannelConfig_Channel_Unspecified,
         ReleaseChannelConfig_Channel_Rapid,
         ReleaseChannelConfig_Channel_Regular,
         ReleaseChannelConfig_Channel_Stable,
+        ReleaseChannelConfig_Channel_Extended,
         ..
       ),
 
     -- * ReservationAffinity_ConsumeReservationType
     ReservationAffinity_ConsumeReservationType
-      ( ReservationAffinity_ConsumeReservationType_Unspecified,
+      (
+        ReservationAffinity_ConsumeReservationType_Unspecified,
         ReservationAffinity_ConsumeReservationType_NORESERVATION,
         ReservationAffinity_ConsumeReservationType_ANYRESERVATION,
         ReservationAffinity_ConsumeReservationType_SPECIFICRESERVATION,
@@ -355,14 +544,44 @@ module Gogol.Container.Internal.Sum
 
     -- * SandboxConfig_Type
     SandboxConfig_Type
-      ( SandboxConfig_Type_Unspecified,
+      (
+        SandboxConfig_Type_Unspecified,
         SandboxConfig_Type_Gvisor,
+        ..
+      ),
+
+    -- * SecondaryBootDisk_Mode
+    SecondaryBootDisk_Mode
+      (
+        SecondaryBootDisk_Mode_MODEUNSPECIFIED,
+        SecondaryBootDisk_Mode_CONTAINERIMAGECACHE,
+        ..
+      ),
+
+    -- * SecurityPostureConfig_Mode
+    SecurityPostureConfig_Mode
+      (
+        SecurityPostureConfig_Mode_MODEUNSPECIFIED,
+        SecurityPostureConfig_Mode_Disabled,
+        SecurityPostureConfig_Mode_Basic,
+        SecurityPostureConfig_Mode_Enterprise,
+        ..
+      ),
+
+    -- * SecurityPostureConfig_VulnerabilityMode
+    SecurityPostureConfig_VulnerabilityMode
+      (
+        SecurityPostureConfig_VulnerabilityMode_VULNERABILITYMODEUNSPECIFIED,
+        SecurityPostureConfig_VulnerabilityMode_VULNERABILITYDISABLED,
+        SecurityPostureConfig_VulnerabilityMode_VULNERABILITYBASIC,
+        SecurityPostureConfig_VulnerabilityMode_VULNERABILITYENTERPRISE,
         ..
       ),
 
     -- * SetMasterAuthRequest_Action
     SetMasterAuthRequest_Action
-      ( SetMasterAuthRequest_Action_Unknown,
+      (
+        SetMasterAuthRequest_Action_Unknown,
         SetMasterAuthRequest_Action_SETPASSWORD,
         SetMasterAuthRequest_Action_GENERATEPASSWORD,
         SetMasterAuthRequest_Action_SETUSERNAME,
@@ -371,7 +590,8 @@ module Gogol.Container.Internal.Sum
 
     -- * StatusCondition_CanonicalCode
     StatusCondition_CanonicalCode
-      ( StatusCondition_CanonicalCode_OK,
+      (
+        StatusCondition_CanonicalCode_OK,
         StatusCondition_CanonicalCode_Cancelled,
         StatusCondition_CanonicalCode_Unknown,
         StatusCondition_CanonicalCode_INVALIDARGUMENT,
@@ -393,7 +613,8 @@ module Gogol.Container.Internal.Sum
 
     -- * StatusCondition_Code
     StatusCondition_Code
-      ( StatusCondition_Code_Unknown,
+      (
+        StatusCondition_Code_Unknown,
         StatusCondition_Code_GCESTOCKOUT,
         StatusCondition_Code_GKESERVICEACCOUNTDELETED,
         StatusCondition_Code_GCEQUOTAEXCEEDED,
@@ -405,7 +626,8 @@ module Gogol.Container.Internal.Sum
 
     -- * UpgradeAvailableEvent_ResourceType
     UpgradeAvailableEvent_ResourceType
-      ( UpgradeAvailableEvent_ResourceType_UPGRADERESOURCETYPEUNSPECIFIED,
+      (
+        UpgradeAvailableEvent_ResourceType_UPGRADERESOURCETYPEUNSPECIFIED,
         UpgradeAvailableEvent_ResourceType_Master,
         UpgradeAvailableEvent_ResourceType_NODEPOOL,
         ..
@@ -413,15 +635,37 @@ module Gogol.Container.Internal.Sum
 
     -- * UpgradeEvent_ResourceType
     UpgradeEvent_ResourceType
-      ( UpgradeEvent_ResourceType_UPGRADERESOURCETYPEUNSPECIFIED,
+      (
+        UpgradeEvent_ResourceType_UPGRADERESOURCETYPEUNSPECIFIED,
         UpgradeEvent_ResourceType_Master,
         UpgradeEvent_ResourceType_NODEPOOL,
         ..
       ),
 
+    -- * UpgradeInfoEvent_ResourceType
+    UpgradeInfoEvent_ResourceType
+      (
+        UpgradeInfoEvent_ResourceType_UPGRADERESOURCETYPEUNSPECIFIED,
+        UpgradeInfoEvent_ResourceType_Master,
+        UpgradeInfoEvent_ResourceType_NODEPOOL,
+        ..
+      ),
+
+    -- * UpgradeInfoEvent_State
+    UpgradeInfoEvent_State
+      (
+        UpgradeInfoEvent_State_STATEUNSPECIFIED,
+        UpgradeInfoEvent_State_Started,
+        UpgradeInfoEvent_State_Succeeded,
+        UpgradeInfoEvent_State_Failed,
+        UpgradeInfoEvent_State_Canceled,
+        ..
+      ),
+
     -- * UpgradeSettings_Strategy
     UpgradeSettings_Strategy
-      ( UpgradeSettings_Strategy_NODEPOOLUPDATESTRATEGYUNSPECIFIED,
+      (
+        UpgradeSettings_Strategy_NODEPOOLUPDATESTRATEGYUNSPECIFIED,
         UpgradeSettings_Strategy_BLUEGREEN,
         UpgradeSettings_Strategy_Surge,
         ..
@@ -429,7 +673,8 @@ module Gogol.Container.Internal.Sum
 
     -- * UsableSubnetworkSecondaryRange_Status
     UsableSubnetworkSecondaryRange_Status
-      ( UsableSubnetworkSecondaryRange_Status_Unknown,
+      (
+        UsableSubnetworkSecondaryRange_Status_Unknown,
         UsableSubnetworkSecondaryRange_Status_Unused,
         UsableSubnetworkSecondaryRange_Status_INUSESERVICE,
         UsableSubnetworkSecondaryRange_Status_INUSESHAREABLEPOD,
@@ -439,7 +684,8 @@ module Gogol.Container.Internal.Sum
 
     -- * WindowsNodeConfig_OsVersion
     WindowsNodeConfig_OsVersion
-      ( WindowsNodeConfig_OsVersion_OSVERSIONUNSPECIFIED,
+      (
+        WindowsNodeConfig_OsVersion_OSVERSIONUNSPECIFIED,
         WindowsNodeConfig_OsVersion_OS_VERSION_LTSC2019,
         WindowsNodeConfig_OsVersion_OS_VERSION_LTSC2022,
         ..
@@ -447,28 +693,28 @@ module Gogol.Container.Internal.Sum
 
     -- * WorkloadMetadataConfig_Mode
     WorkloadMetadataConfig_Mode
-      ( WorkloadMetadataConfig_Mode_MODEUNSPECIFIED,
+      (
+        WorkloadMetadataConfig_Mode_MODEUNSPECIFIED,
         WorkloadMetadataConfig_Mode_GCEMETADATA,
         WorkloadMetadataConfig_Mode_GKEMETADATA,
         ..
       ),
-  )
-where
+  ) where
 
 import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -481,21 +727,92 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
+
+-- | Method used to make Relay available
+newtype AdvancedDatapathObservabilityConfig_RelayMode = AdvancedDatapathObservabilityConfig_RelayMode { fromAdvancedDatapathObservabilityConfig_RelayMode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Default value. This shouldn\'t be used.
+pattern AdvancedDatapathObservabilityConfig_RelayMode_RELAYMODEUNSPECIFIED :: AdvancedDatapathObservabilityConfig_RelayMode
+pattern AdvancedDatapathObservabilityConfig_RelayMode_RELAYMODEUNSPECIFIED = AdvancedDatapathObservabilityConfig_RelayMode "RELAY_MODE_UNSPECIFIED"
+
+-- | disabled
+pattern AdvancedDatapathObservabilityConfig_RelayMode_Disabled :: AdvancedDatapathObservabilityConfig_RelayMode
+pattern AdvancedDatapathObservabilityConfig_RelayMode_Disabled = AdvancedDatapathObservabilityConfig_RelayMode "DISABLED"
+
+-- | exposed via internal load balancer
+pattern AdvancedDatapathObservabilityConfig_RelayMode_INTERNALVPCLB :: AdvancedDatapathObservabilityConfig_RelayMode
+pattern AdvancedDatapathObservabilityConfig_RelayMode_INTERNALVPCLB = AdvancedDatapathObservabilityConfig_RelayMode "INTERNAL_VPC_LB"
+
+-- | exposed via external load balancer
+pattern AdvancedDatapathObservabilityConfig_RelayMode_EXTERNALLB :: AdvancedDatapathObservabilityConfig_RelayMode
+pattern AdvancedDatapathObservabilityConfig_RelayMode_EXTERNALLB = AdvancedDatapathObservabilityConfig_RelayMode "EXTERNAL_LB"
+
+{-# COMPLETE
+  AdvancedDatapathObservabilityConfig_RelayMode_RELAYMODEUNSPECIFIED,
+  AdvancedDatapathObservabilityConfig_RelayMode_Disabled,
+  AdvancedDatapathObservabilityConfig_RelayMode_INTERNALVPCLB,
+  AdvancedDatapathObservabilityConfig_RelayMode_EXTERNALLB,
+  AdvancedDatapathObservabilityConfig_RelayMode #-}
+
+-- | The incompatibility type of this issue.
+newtype AutopilotCompatibilityIssue_IncompatibilityType = AutopilotCompatibilityIssue_IncompatibilityType { fromAutopilotCompatibilityIssue_IncompatibilityType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Default value, should not be used.
+pattern AutopilotCompatibilityIssue_IncompatibilityType_Unspecified :: AutopilotCompatibilityIssue_IncompatibilityType
+pattern AutopilotCompatibilityIssue_IncompatibilityType_Unspecified = AutopilotCompatibilityIssue_IncompatibilityType "UNSPECIFIED"
+
+-- | Indicates that the issue is a known incompatibility between the cluster and Autopilot mode.
+pattern AutopilotCompatibilityIssue_IncompatibilityType_Incompatibility :: AutopilotCompatibilityIssue_IncompatibilityType
+pattern AutopilotCompatibilityIssue_IncompatibilityType_Incompatibility = AutopilotCompatibilityIssue_IncompatibilityType "INCOMPATIBILITY"
+
+-- | Indicates the issue is an incompatibility if customers take no further action to resolve.
+pattern AutopilotCompatibilityIssue_IncompatibilityType_ADDITIONALCONFIGREQUIRED :: AutopilotCompatibilityIssue_IncompatibilityType
+pattern AutopilotCompatibilityIssue_IncompatibilityType_ADDITIONALCONFIGREQUIRED = AutopilotCompatibilityIssue_IncompatibilityType "ADDITIONAL_CONFIG_REQUIRED"
+
+-- | Indicates the issue is not an incompatibility, but depending on the workloads business logic, there is a potential that they won\'t work on Autopilot.
+pattern AutopilotCompatibilityIssue_IncompatibilityType_PASSEDWITHOPTIONALCONFIG :: AutopilotCompatibilityIssue_IncompatibilityType
+pattern AutopilotCompatibilityIssue_IncompatibilityType_PASSEDWITHOPTIONALCONFIG = AutopilotCompatibilityIssue_IncompatibilityType "PASSED_WITH_OPTIONAL_CONFIG"
+
+{-# COMPLETE
+  AutopilotCompatibilityIssue_IncompatibilityType_Unspecified,
+  AutopilotCompatibilityIssue_IncompatibilityType_Incompatibility,
+  AutopilotCompatibilityIssue_IncompatibilityType_ADDITIONALCONFIGREQUIRED,
+  AutopilotCompatibilityIssue_IncompatibilityType_PASSEDWITHOPTIONALCONFIG,
+  AutopilotCompatibilityIssue_IncompatibilityType #-}
 
 -- | Mode of operation for binauthz policy evaluation. If unspecified, defaults to DISABLED.
-newtype BinaryAuthorization_EvaluationMode = BinaryAuthorization_EvaluationMode {fromBinaryAuthorization_EvaluationMode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype BinaryAuthorization_EvaluationMode = BinaryAuthorization_EvaluationMode { fromBinaryAuthorization_EvaluationMode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value
 pattern BinaryAuthorization_EvaluationMode_EVALUATIONMODEUNSPECIFIED :: BinaryAuthorization_EvaluationMode
@@ -513,21 +830,20 @@ pattern BinaryAuthorization_EvaluationMode_PROJECTSINGLETONPOLICYENFORCE = Binar
   BinaryAuthorization_EvaluationMode_EVALUATIONMODEUNSPECIFIED,
   BinaryAuthorization_EvaluationMode_Disabled,
   BinaryAuthorization_EvaluationMode_PROJECTSINGLETONPOLICYENFORCE,
-  BinaryAuthorization_EvaluationMode
-  #-}
+  BinaryAuthorization_EvaluationMode #-}
 
 -- | Current blue-green upgrade phase.
-newtype BlueGreenInfo_Phase = BlueGreenInfo_Phase {fromBlueGreenInfo_Phase :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype BlueGreenInfo_Phase = BlueGreenInfo_Phase { fromBlueGreenInfo_Phase :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Unspecified phase.
 pattern BlueGreenInfo_Phase_PHASEUNSPECIFIED :: BlueGreenInfo_Phase
@@ -570,21 +886,20 @@ pattern BlueGreenInfo_Phase_ROLLBACKSTARTED = BlueGreenInfo_Phase "ROLLBACK_STAR
   BlueGreenInfo_Phase_NODEPOOLSOAKING,
   BlueGreenInfo_Phase_DELETINGBLUEPOOL,
   BlueGreenInfo_Phase_ROLLBACKSTARTED,
-  BlueGreenInfo_Phase
-  #-}
+  BlueGreenInfo_Phase #-}
 
 -- | Which load balancer type is installed for Cloud Run.
-newtype CloudRunConfig_LoadBalancerType = CloudRunConfig_LoadBalancerType {fromCloudRunConfig_LoadBalancerType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype CloudRunConfig_LoadBalancerType = CloudRunConfig_LoadBalancerType { fromCloudRunConfig_LoadBalancerType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Load balancer type for Cloud Run is unspecified.
 pattern CloudRunConfig_LoadBalancerType_LOADBALANCERTYPEUNSPECIFIED :: CloudRunConfig_LoadBalancerType
@@ -602,21 +917,20 @@ pattern CloudRunConfig_LoadBalancerType_LOADBALANCERTYPEINTERNAL = CloudRunConfi
   CloudRunConfig_LoadBalancerType_LOADBALANCERTYPEUNSPECIFIED,
   CloudRunConfig_LoadBalancerType_LOADBALANCERTYPEEXTERNAL,
   CloudRunConfig_LoadBalancerType_LOADBALANCERTYPEINTERNAL,
-  CloudRunConfig_LoadBalancerType
-  #-}
+  CloudRunConfig_LoadBalancerType #-}
 
--- | [Output only] The current status of this cluster.
-newtype Cluster_Status = Cluster_Status {fromCluster_Status :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Output only. The current status of this cluster.
+newtype Cluster_Status = Cluster_Status { fromCluster_Status :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not set.
 pattern Cluster_Status_STATUSUNSPECIFIED :: Cluster_Status
@@ -654,21 +968,20 @@ pattern Cluster_Status_Degraded = Cluster_Status "DEGRADED"
   Cluster_Status_Stopping,
   Cluster_Status_Error',
   Cluster_Status_Degraded,
-  Cluster_Status
-  #-}
+  Cluster_Status #-}
 
 -- | Defines autoscaling behaviour.
-newtype ClusterAutoscaling_AutoscalingProfile = ClusterAutoscaling_AutoscalingProfile {fromClusterAutoscaling_AutoscalingProfile :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ClusterAutoscaling_AutoscalingProfile = ClusterAutoscaling_AutoscalingProfile { fromClusterAutoscaling_AutoscalingProfile :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No change to autoscaling configuration.
 pattern ClusterAutoscaling_AutoscalingProfile_PROFILEUNSPECIFIED :: ClusterAutoscaling_AutoscalingProfile
@@ -686,21 +999,46 @@ pattern ClusterAutoscaling_AutoscalingProfile_Balanced = ClusterAutoscaling_Auto
   ClusterAutoscaling_AutoscalingProfile_PROFILEUNSPECIFIED,
   ClusterAutoscaling_AutoscalingProfile_OPTIMIZEUTILIZATION,
   ClusterAutoscaling_AutoscalingProfile_Balanced,
-  ClusterAutoscaling_AutoscalingProfile
-  #-}
+  ClusterAutoscaling_AutoscalingProfile #-}
+
+-- | Specifies the total network bandwidth tier for NodePools in the cluster.
+newtype ClusterNetworkPerformanceConfig_TotalEgressBandwidthTier = ClusterNetworkPerformanceConfig_TotalEgressBandwidthTier { fromClusterNetworkPerformanceConfig_TotalEgressBandwidthTier :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Default value
+pattern ClusterNetworkPerformanceConfig_TotalEgressBandwidthTier_TIERUNSPECIFIED :: ClusterNetworkPerformanceConfig_TotalEgressBandwidthTier
+pattern ClusterNetworkPerformanceConfig_TotalEgressBandwidthTier_TIERUNSPECIFIED = ClusterNetworkPerformanceConfig_TotalEgressBandwidthTier "TIER_UNSPECIFIED"
+
+-- | Higher bandwidth, actual values based on VM size.
+pattern ClusterNetworkPerformanceConfig_TotalEgressBandwidthTier_TIER_1 :: ClusterNetworkPerformanceConfig_TotalEgressBandwidthTier
+pattern ClusterNetworkPerformanceConfig_TotalEgressBandwidthTier_TIER_1 = ClusterNetworkPerformanceConfig_TotalEgressBandwidthTier "TIER_1"
+
+{-# COMPLETE
+  ClusterNetworkPerformanceConfig_TotalEgressBandwidthTier_TIERUNSPECIFIED,
+  ClusterNetworkPerformanceConfig_TotalEgressBandwidthTier_TIER_1,
+  ClusterNetworkPerformanceConfig_TotalEgressBandwidthTier #-}
 
 -- | The desired datapath provider for the cluster.
-newtype ClusterUpdate_DesiredDatapathProvider = ClusterUpdate_DesiredDatapathProvider {fromClusterUpdate_DesiredDatapathProvider :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ClusterUpdate_DesiredDatapathProvider = ClusterUpdate_DesiredDatapathProvider { fromClusterUpdate_DesiredDatapathProvider :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value.
 pattern ClusterUpdate_DesiredDatapathProvider_DATAPATHPROVIDERUNSPECIFIED :: ClusterUpdate_DesiredDatapathProvider
@@ -718,21 +1056,51 @@ pattern ClusterUpdate_DesiredDatapathProvider_ADVANCEDDATAPATH = ClusterUpdate_D
   ClusterUpdate_DesiredDatapathProvider_DATAPATHPROVIDERUNSPECIFIED,
   ClusterUpdate_DesiredDatapathProvider_LEGACYDATAPATH,
   ClusterUpdate_DesiredDatapathProvider_ADVANCEDDATAPATH,
-  ClusterUpdate_DesiredDatapathProvider
-  #-}
+  ClusterUpdate_DesiredDatapathProvider #-}
+
+-- | Specify the details of in-transit encryption.
+newtype ClusterUpdate_DesiredInTransitEncryptionConfig = ClusterUpdate_DesiredInTransitEncryptionConfig { fromClusterUpdate_DesiredInTransitEncryptionConfig :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Unspecified, will be inferred as default - IN/TRANSIT/ENCRYPTION_UNSPECIFIED.
+pattern ClusterUpdate_DesiredInTransitEncryptionConfig_INTRANSITENCRYPTIONCONFIGUNSPECIFIED :: ClusterUpdate_DesiredInTransitEncryptionConfig
+pattern ClusterUpdate_DesiredInTransitEncryptionConfig_INTRANSITENCRYPTIONCONFIGUNSPECIFIED = ClusterUpdate_DesiredInTransitEncryptionConfig "IN_TRANSIT_ENCRYPTION_CONFIG_UNSPECIFIED"
+
+-- | In-transit encryption is disabled.
+pattern ClusterUpdate_DesiredInTransitEncryptionConfig_INTRANSITENCRYPTIONDISABLED :: ClusterUpdate_DesiredInTransitEncryptionConfig
+pattern ClusterUpdate_DesiredInTransitEncryptionConfig_INTRANSITENCRYPTIONDISABLED = ClusterUpdate_DesiredInTransitEncryptionConfig "IN_TRANSIT_ENCRYPTION_DISABLED"
+
+-- | Data in-transit is encrypted using inter-node transparent encryption.
+pattern ClusterUpdate_DesiredInTransitEncryptionConfig_INTRANSITENCRYPTIONINTERNODETRANSPARENT :: ClusterUpdate_DesiredInTransitEncryptionConfig
+pattern ClusterUpdate_DesiredInTransitEncryptionConfig_INTRANSITENCRYPTIONINTERNODETRANSPARENT = ClusterUpdate_DesiredInTransitEncryptionConfig "IN_TRANSIT_ENCRYPTION_INTER_NODE_TRANSPARENT"
+
+{-# COMPLETE
+  ClusterUpdate_DesiredInTransitEncryptionConfig_INTRANSITENCRYPTIONCONFIGUNSPECIFIED,
+  ClusterUpdate_DesiredInTransitEncryptionConfig_INTRANSITENCRYPTIONDISABLED,
+  ClusterUpdate_DesiredInTransitEncryptionConfig_INTRANSITENCRYPTIONINTERNODETRANSPARENT,
+  ClusterUpdate_DesiredInTransitEncryptionConfig #-}
 
 -- | The desired state of IPv6 connectivity to Google Services.
-newtype ClusterUpdate_DesiredPrivateIpv6GoogleAccess = ClusterUpdate_DesiredPrivateIpv6GoogleAccess {fromClusterUpdate_DesiredPrivateIpv6GoogleAccess :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ClusterUpdate_DesiredPrivateIpv6GoogleAccess = ClusterUpdate_DesiredPrivateIpv6GoogleAccess { fromClusterUpdate_DesiredPrivateIpv6GoogleAccess :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. Same as DISABLED
 pattern ClusterUpdate_DesiredPrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSUNSPECIFIED :: ClusterUpdate_DesiredPrivateIpv6GoogleAccess
@@ -755,21 +1123,20 @@ pattern ClusterUpdate_DesiredPrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSBIDI
   ClusterUpdate_DesiredPrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSDISABLED,
   ClusterUpdate_DesiredPrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSTOGOOGLE,
   ClusterUpdate_DesiredPrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSBIDIRECTIONAL,
-  ClusterUpdate_DesiredPrivateIpv6GoogleAccess
-  #-}
+  ClusterUpdate_DesiredPrivateIpv6GoogleAccess #-}
 
 -- | The desired stack type of the cluster. If a stack type is provided and does not match the current stack type of the cluster, update will attempt to change the stack type to the new type.
-newtype ClusterUpdate_DesiredStackType = ClusterUpdate_DesiredStackType {fromClusterUpdate_DesiredStackType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ClusterUpdate_DesiredStackType = ClusterUpdate_DesiredStackType { fromClusterUpdate_DesiredStackType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value, will be defaulted as IPV4 only
 pattern ClusterUpdate_DesiredStackType_STACKTYPEUNSPECIFIED :: ClusterUpdate_DesiredStackType
@@ -787,21 +1154,51 @@ pattern ClusterUpdate_DesiredStackType_IPV4_IPV6 = ClusterUpdate_DesiredStackTyp
   ClusterUpdate_DesiredStackType_STACKTYPEUNSPECIFIED,
   ClusterUpdate_DesiredStackType_IPV4,
   ClusterUpdate_DesiredStackType_IPV4_IPV6,
-  ClusterUpdate_DesiredStackType
-  #-}
+  ClusterUpdate_DesiredStackType #-}
+
+-- | Defines the enablement mode for Compliance Posture.
+newtype CompliancePostureConfig_Mode = CompliancePostureConfig_Mode { fromCompliancePostureConfig_Mode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Default value not specified.
+pattern CompliancePostureConfig_Mode_MODEUNSPECIFIED :: CompliancePostureConfig_Mode
+pattern CompliancePostureConfig_Mode_MODEUNSPECIFIED = CompliancePostureConfig_Mode "MODE_UNSPECIFIED"
+
+-- | Disables Compliance Posture features on the cluster.
+pattern CompliancePostureConfig_Mode_Disabled :: CompliancePostureConfig_Mode
+pattern CompliancePostureConfig_Mode_Disabled = CompliancePostureConfig_Mode "DISABLED"
+
+-- | Enables Compliance Posture features on the cluster.
+pattern CompliancePostureConfig_Mode_Enabled :: CompliancePostureConfig_Mode
+pattern CompliancePostureConfig_Mode_Enabled = CompliancePostureConfig_Mode "ENABLED"
+
+{-# COMPLETE
+  CompliancePostureConfig_Mode_MODEUNSPECIFIED,
+  CompliancePostureConfig_Mode_Disabled,
+  CompliancePostureConfig_Mode_Enabled,
+  CompliancePostureConfig_Mode #-}
 
 -- | cluster_dns indicates which in-cluster DNS provider should be used.
-newtype DNSConfig_ClusterDns = DNSConfig_ClusterDns {fromDNSConfig_ClusterDns :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DNSConfig_ClusterDns = DNSConfig_ClusterDns { fromDNSConfig_ClusterDns :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value
 pattern DNSConfig_ClusterDns_PROVIDERUNSPECIFIED :: DNSConfig_ClusterDns
@@ -815,25 +1212,29 @@ pattern DNSConfig_ClusterDns_PLATFORMDEFAULT = DNSConfig_ClusterDns "PLATFORM_DE
 pattern DNSConfig_ClusterDns_CLOUDDNS :: DNSConfig_ClusterDns
 pattern DNSConfig_ClusterDns_CLOUDDNS = DNSConfig_ClusterDns "CLOUD_DNS"
 
+-- | Use KubeDNS for DNS resolution.
+pattern DNSConfig_ClusterDns_KUBEDNS :: DNSConfig_ClusterDns
+pattern DNSConfig_ClusterDns_KUBEDNS = DNSConfig_ClusterDns "KUBE_DNS"
+
 {-# COMPLETE
   DNSConfig_ClusterDns_PROVIDERUNSPECIFIED,
   DNSConfig_ClusterDns_PLATFORMDEFAULT,
   DNSConfig_ClusterDns_CLOUDDNS,
-  DNSConfig_ClusterDns
-  #-}
+  DNSConfig_ClusterDns_KUBEDNS,
+  DNSConfig_ClusterDns #-}
 
 -- | cluster/dns/scope indicates the scope of access to cluster DNS records.
-newtype DNSConfig_ClusterDnsScope = DNSConfig_ClusterDnsScope {fromDNSConfig_ClusterDnsScope :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype DNSConfig_ClusterDnsScope = DNSConfig_ClusterDnsScope { fromDNSConfig_ClusterDnsScope :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value, will be inferred as cluster scope.
 pattern DNSConfig_ClusterDnsScope_DNSSCOPEUNSPECIFIED :: DNSConfig_ClusterDnsScope
@@ -851,21 +1252,71 @@ pattern DNSConfig_ClusterDnsScope_VPCSCOPE = DNSConfig_ClusterDnsScope "VPC_SCOP
   DNSConfig_ClusterDnsScope_DNSSCOPEUNSPECIFIED,
   DNSConfig_ClusterDnsScope_CLUSTERSCOPE,
   DNSConfig_ClusterDnsScope_VPCSCOPE,
-  DNSConfig_ClusterDnsScope
-  #-}
+  DNSConfig_ClusterDnsScope #-}
 
--- | Denotes the state of etcd encryption.
-newtype DatabaseEncryption_State = DatabaseEncryption_State {fromDatabaseEncryption_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Output only. The current state of etcd encryption.
+newtype DatabaseEncryption_CurrentState = DatabaseEncryption_CurrentState { fromDatabaseEncryption_CurrentState :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Should never be set
+pattern DatabaseEncryption_CurrentState_CURRENTSTATEUNSPECIFIED :: DatabaseEncryption_CurrentState
+pattern DatabaseEncryption_CurrentState_CURRENTSTATEUNSPECIFIED = DatabaseEncryption_CurrentState "CURRENT_STATE_UNSPECIFIED"
+
+-- | Secrets in etcd are encrypted.
+pattern DatabaseEncryption_CurrentState_CURRENTSTATEENCRYPTED :: DatabaseEncryption_CurrentState
+pattern DatabaseEncryption_CurrentState_CURRENTSTATEENCRYPTED = DatabaseEncryption_CurrentState "CURRENT_STATE_ENCRYPTED"
+
+-- | Secrets in etcd are stored in plain text (at etcd level) - this is unrelated to Compute Engine level full disk encryption.
+pattern DatabaseEncryption_CurrentState_CURRENTSTATEDECRYPTED :: DatabaseEncryption_CurrentState
+pattern DatabaseEncryption_CurrentState_CURRENTSTATEDECRYPTED = DatabaseEncryption_CurrentState "CURRENT_STATE_DECRYPTED"
+
+-- | Encryption (or re-encryption with a different CloudKMS key) of Secrets is in progress.
+pattern DatabaseEncryption_CurrentState_CURRENTSTATEENCRYPTIONPENDING :: DatabaseEncryption_CurrentState
+pattern DatabaseEncryption_CurrentState_CURRENTSTATEENCRYPTIONPENDING = DatabaseEncryption_CurrentState "CURRENT_STATE_ENCRYPTION_PENDING"
+
+-- | Encryption (or re-encryption with a different CloudKMS key) of Secrets in etcd encountered an error.
+pattern DatabaseEncryption_CurrentState_CURRENTSTATEENCRYPTIONERROR :: DatabaseEncryption_CurrentState
+pattern DatabaseEncryption_CurrentState_CURRENTSTATEENCRYPTIONERROR = DatabaseEncryption_CurrentState "CURRENT_STATE_ENCRYPTION_ERROR"
+
+-- | De-crypting Secrets to plain text in etcd is in progress.
+pattern DatabaseEncryption_CurrentState_CURRENTSTATEDECRYPTIONPENDING :: DatabaseEncryption_CurrentState
+pattern DatabaseEncryption_CurrentState_CURRENTSTATEDECRYPTIONPENDING = DatabaseEncryption_CurrentState "CURRENT_STATE_DECRYPTION_PENDING"
+
+-- | De-crypting Secrets to plain text in etcd encountered an error.
+pattern DatabaseEncryption_CurrentState_CURRENTSTATEDECRYPTIONERROR :: DatabaseEncryption_CurrentState
+pattern DatabaseEncryption_CurrentState_CURRENTSTATEDECRYPTIONERROR = DatabaseEncryption_CurrentState "CURRENT_STATE_DECRYPTION_ERROR"
+
+{-# COMPLETE
+  DatabaseEncryption_CurrentState_CURRENTSTATEUNSPECIFIED,
+  DatabaseEncryption_CurrentState_CURRENTSTATEENCRYPTED,
+  DatabaseEncryption_CurrentState_CURRENTSTATEDECRYPTED,
+  DatabaseEncryption_CurrentState_CURRENTSTATEENCRYPTIONPENDING,
+  DatabaseEncryption_CurrentState_CURRENTSTATEENCRYPTIONERROR,
+  DatabaseEncryption_CurrentState_CURRENTSTATEDECRYPTIONPENDING,
+  DatabaseEncryption_CurrentState_CURRENTSTATEDECRYPTIONERROR,
+  DatabaseEncryption_CurrentState #-}
+
+-- | The desired state of etcd encryption.
+newtype DatabaseEncryption_State = DatabaseEncryption_State { fromDatabaseEncryption_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Should never be set
 pattern DatabaseEncryption_State_Unknown :: DatabaseEncryption_State
@@ -883,20 +1334,112 @@ pattern DatabaseEncryption_State_Decrypted = DatabaseEncryption_State "DECRYPTED
   DatabaseEncryption_State_Unknown,
   DatabaseEncryption_State_Encrypted,
   DatabaseEncryption_State_Decrypted,
-  DatabaseEncryption_State
-  #-}
+  DatabaseEncryption_State #-}
 
-newtype Filter_EventTypeItem = Filter_EventTypeItem {fromFilter_EventTypeItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | desired_tier specifies the desired tier of the cluster.
+newtype DesiredEnterpriseConfig_DesiredTier = DesiredEnterpriseConfig_DesiredTier { fromDesiredEnterpriseConfig_DesiredTier :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | CLUSTER/TIER/UNSPECIFIED is when cluster_tier is not set.
+pattern DesiredEnterpriseConfig_DesiredTier_CLUSTERTIERUNSPECIFIED :: DesiredEnterpriseConfig_DesiredTier
+pattern DesiredEnterpriseConfig_DesiredTier_CLUSTERTIERUNSPECIFIED = DesiredEnterpriseConfig_DesiredTier "CLUSTER_TIER_UNSPECIFIED"
+
+-- | STANDARD indicates a standard GKE cluster.
+pattern DesiredEnterpriseConfig_DesiredTier_Standard :: DesiredEnterpriseConfig_DesiredTier
+pattern DesiredEnterpriseConfig_DesiredTier_Standard = DesiredEnterpriseConfig_DesiredTier "STANDARD"
+
+-- | ENTERPRISE indicates a GKE Enterprise cluster.
+pattern DesiredEnterpriseConfig_DesiredTier_Enterprise :: DesiredEnterpriseConfig_DesiredTier
+pattern DesiredEnterpriseConfig_DesiredTier_Enterprise = DesiredEnterpriseConfig_DesiredTier "ENTERPRISE"
+
+{-# COMPLETE
+  DesiredEnterpriseConfig_DesiredTier_CLUSTERTIERUNSPECIFIED,
+  DesiredEnterpriseConfig_DesiredTier_Standard,
+  DesiredEnterpriseConfig_DesiredTier_Enterprise,
+  DesiredEnterpriseConfig_DesiredTier #-}
+
+-- | Output only. cluster_tier indicates the effective tier of the cluster.
+newtype EnterpriseConfig_ClusterTier = EnterpriseConfig_ClusterTier { fromEnterpriseConfig_ClusterTier :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | CLUSTER/TIER/UNSPECIFIED is when cluster_tier is not set.
+pattern EnterpriseConfig_ClusterTier_CLUSTERTIERUNSPECIFIED :: EnterpriseConfig_ClusterTier
+pattern EnterpriseConfig_ClusterTier_CLUSTERTIERUNSPECIFIED = EnterpriseConfig_ClusterTier "CLUSTER_TIER_UNSPECIFIED"
+
+-- | STANDARD indicates a standard GKE cluster.
+pattern EnterpriseConfig_ClusterTier_Standard :: EnterpriseConfig_ClusterTier
+pattern EnterpriseConfig_ClusterTier_Standard = EnterpriseConfig_ClusterTier "STANDARD"
+
+-- | ENTERPRISE indicates a GKE Enterprise cluster.
+pattern EnterpriseConfig_ClusterTier_Enterprise :: EnterpriseConfig_ClusterTier
+pattern EnterpriseConfig_ClusterTier_Enterprise = EnterpriseConfig_ClusterTier "ENTERPRISE"
+
+{-# COMPLETE
+  EnterpriseConfig_ClusterTier_CLUSTERTIERUNSPECIFIED,
+  EnterpriseConfig_ClusterTier_Standard,
+  EnterpriseConfig_ClusterTier_Enterprise,
+  EnterpriseConfig_ClusterTier #-}
+
+-- | desired_tier specifies the desired tier of the cluster.
+newtype EnterpriseConfig_DesiredTier = EnterpriseConfig_DesiredTier { fromEnterpriseConfig_DesiredTier :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | CLUSTER/TIER/UNSPECIFIED is when cluster_tier is not set.
+pattern EnterpriseConfig_DesiredTier_CLUSTERTIERUNSPECIFIED :: EnterpriseConfig_DesiredTier
+pattern EnterpriseConfig_DesiredTier_CLUSTERTIERUNSPECIFIED = EnterpriseConfig_DesiredTier "CLUSTER_TIER_UNSPECIFIED"
+
+-- | STANDARD indicates a standard GKE cluster.
+pattern EnterpriseConfig_DesiredTier_Standard :: EnterpriseConfig_DesiredTier
+pattern EnterpriseConfig_DesiredTier_Standard = EnterpriseConfig_DesiredTier "STANDARD"
+
+-- | ENTERPRISE indicates a GKE Enterprise cluster.
+pattern EnterpriseConfig_DesiredTier_Enterprise :: EnterpriseConfig_DesiredTier
+pattern EnterpriseConfig_DesiredTier_Enterprise = EnterpriseConfig_DesiredTier "ENTERPRISE"
+
+{-# COMPLETE
+  EnterpriseConfig_DesiredTier_CLUSTERTIERUNSPECIFIED,
+  EnterpriseConfig_DesiredTier_Standard,
+  EnterpriseConfig_DesiredTier_Enterprise,
+  EnterpriseConfig_DesiredTier #-}
+
+newtype Filter_EventTypeItem = Filter_EventTypeItem { fromFilter_EventTypeItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not set, will be ignored.
 pattern Filter_EventTypeItem_EVENTTYPEUNSPECIFIED :: Filter_EventTypeItem
@@ -919,21 +1462,56 @@ pattern Filter_EventTypeItem_SECURITYBULLETINEVENT = Filter_EventTypeItem "SECUR
   Filter_EventTypeItem_UPGRADEAVAILABLEEVENT,
   Filter_EventTypeItem_UPGRADEEVENT,
   Filter_EventTypeItem_SECURITYBULLETINEVENT,
-  Filter_EventTypeItem
-  #-}
+  Filter_EventTypeItem #-}
+
+-- | Mode for how the GPU driver is installed.
+newtype GPUDriverInstallationConfig_GpuDriverVersion = GPUDriverInstallationConfig_GpuDriverVersion { fromGPUDriverInstallationConfig_GpuDriverVersion :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Default value is to not install any GPU driver.
+pattern GPUDriverInstallationConfig_GpuDriverVersion_GPUDRIVERVERSIONUNSPECIFIED :: GPUDriverInstallationConfig_GpuDriverVersion
+pattern GPUDriverInstallationConfig_GpuDriverVersion_GPUDRIVERVERSIONUNSPECIFIED = GPUDriverInstallationConfig_GpuDriverVersion "GPU_DRIVER_VERSION_UNSPECIFIED"
+
+-- | Disable GPU driver auto installation and needs manual installation
+pattern GPUDriverInstallationConfig_GpuDriverVersion_INSTALLATIONDISABLED :: GPUDriverInstallationConfig_GpuDriverVersion
+pattern GPUDriverInstallationConfig_GpuDriverVersion_INSTALLATIONDISABLED = GPUDriverInstallationConfig_GpuDriverVersion "INSTALLATION_DISABLED"
+
+-- | \"Default\" GPU driver in COS and Ubuntu.
+pattern GPUDriverInstallationConfig_GpuDriverVersion_Default :: GPUDriverInstallationConfig_GpuDriverVersion
+pattern GPUDriverInstallationConfig_GpuDriverVersion_Default = GPUDriverInstallationConfig_GpuDriverVersion "DEFAULT"
+
+-- | \"Latest\" GPU driver in COS.
+pattern GPUDriverInstallationConfig_GpuDriverVersion_Latest :: GPUDriverInstallationConfig_GpuDriverVersion
+pattern GPUDriverInstallationConfig_GpuDriverVersion_Latest = GPUDriverInstallationConfig_GpuDriverVersion "LATEST"
+
+{-# COMPLETE
+  GPUDriverInstallationConfig_GpuDriverVersion_GPUDRIVERVERSIONUNSPECIFIED,
+  GPUDriverInstallationConfig_GpuDriverVersion_INSTALLATIONDISABLED,
+  GPUDriverInstallationConfig_GpuDriverVersion_Default,
+  GPUDriverInstallationConfig_GpuDriverVersion_Latest,
+  GPUDriverInstallationConfig_GpuDriverVersion #-}
 
 -- | The type of GPU sharing strategy to enable on the GPU node.
-newtype GPUSharingConfig_GpuSharingStrategy = GPUSharingConfig_GpuSharingStrategy {fromGPUSharingConfig_GpuSharingStrategy :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GPUSharingConfig_GpuSharingStrategy = GPUSharingConfig_GpuSharingStrategy { fromGPUSharingConfig_GpuSharingStrategy :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value.
 pattern GPUSharingConfig_GpuSharingStrategy_GPUSHARINGSTRATEGYUNSPECIFIED :: GPUSharingConfig_GpuSharingStrategy
@@ -943,24 +1521,28 @@ pattern GPUSharingConfig_GpuSharingStrategy_GPUSHARINGSTRATEGYUNSPECIFIED = GPUS
 pattern GPUSharingConfig_GpuSharingStrategy_TIMESHARING :: GPUSharingConfig_GpuSharingStrategy
 pattern GPUSharingConfig_GpuSharingStrategy_TIMESHARING = GPUSharingConfig_GpuSharingStrategy "TIME_SHARING"
 
+-- | GPUs are shared between containers with NVIDIA MPS.
+pattern GPUSharingConfig_GpuSharingStrategy_Mps :: GPUSharingConfig_GpuSharingStrategy
+pattern GPUSharingConfig_GpuSharingStrategy_Mps = GPUSharingConfig_GpuSharingStrategy "MPS"
+
 {-# COMPLETE
   GPUSharingConfig_GpuSharingStrategy_GPUSHARINGSTRATEGYUNSPECIFIED,
   GPUSharingConfig_GpuSharingStrategy_TIMESHARING,
-  GPUSharingConfig_GpuSharingStrategy
-  #-}
+  GPUSharingConfig_GpuSharingStrategy_Mps,
+  GPUSharingConfig_GpuSharingStrategy #-}
 
 -- | The Gateway API release channel to use for Gateway API.
-newtype GatewayAPIConfig_Channel = GatewayAPIConfig_Channel {fromGatewayAPIConfig_Channel :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype GatewayAPIConfig_Channel = GatewayAPIConfig_Channel { fromGatewayAPIConfig_Channel :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value.
 pattern GatewayAPIConfig_Channel_CHANNELUNSPECIFIED :: GatewayAPIConfig_Channel
@@ -970,7 +1552,7 @@ pattern GatewayAPIConfig_Channel_CHANNELUNSPECIFIED = GatewayAPIConfig_Channel "
 pattern GatewayAPIConfig_Channel_CHANNELDISABLED :: GatewayAPIConfig_Channel
 pattern GatewayAPIConfig_Channel_CHANNELDISABLED = GatewayAPIConfig_Channel "CHANNEL_DISABLED"
 
--- | Gateway API support is enabled, experimental CRDs are installed
+-- | Deprecated: use CHANNEL_STANDARD instead. Gateway API support is enabled, experimental CRDs are installed
 pattern GatewayAPIConfig_Channel_CHANNELEXPERIMENTAL :: GatewayAPIConfig_Channel
 pattern GatewayAPIConfig_Channel_CHANNELEXPERIMENTAL = GatewayAPIConfig_Channel "CHANNEL_EXPERIMENTAL"
 
@@ -983,21 +1565,20 @@ pattern GatewayAPIConfig_Channel_CHANNELSTANDARD = GatewayAPIConfig_Channel "CHA
   GatewayAPIConfig_Channel_CHANNELDISABLED,
   GatewayAPIConfig_Channel_CHANNELEXPERIMENTAL,
   GatewayAPIConfig_Channel_CHANNELSTANDARD,
-  GatewayAPIConfig_Channel
-  #-}
+  GatewayAPIConfig_Channel #-}
 
 -- | The ipv6 access type (internal or external) when create_subnetwork is true
-newtype IPAllocationPolicy_Ipv6AccessType = IPAllocationPolicy_Ipv6AccessType {fromIPAllocationPolicy_Ipv6AccessType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype IPAllocationPolicy_Ipv6AccessType = IPAllocationPolicy_Ipv6AccessType { fromIPAllocationPolicy_Ipv6AccessType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value, will be defaulted as type external.
 pattern IPAllocationPolicy_Ipv6AccessType_IPV6ACCESSTYPEUNSPECIFIED :: IPAllocationPolicy_Ipv6AccessType
@@ -1015,21 +1596,20 @@ pattern IPAllocationPolicy_Ipv6AccessType_External = IPAllocationPolicy_Ipv6Acce
   IPAllocationPolicy_Ipv6AccessType_IPV6ACCESSTYPEUNSPECIFIED,
   IPAllocationPolicy_Ipv6AccessType_Internal,
   IPAllocationPolicy_Ipv6AccessType_External,
-  IPAllocationPolicy_Ipv6AccessType
-  #-}
+  IPAllocationPolicy_Ipv6AccessType #-}
 
 -- | The IP stack type of the cluster
-newtype IPAllocationPolicy_StackType = IPAllocationPolicy_StackType {fromIPAllocationPolicy_StackType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype IPAllocationPolicy_StackType = IPAllocationPolicy_StackType { fromIPAllocationPolicy_StackType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value, will be defaulted as IPV4 only
 pattern IPAllocationPolicy_StackType_STACKTYPEUNSPECIFIED :: IPAllocationPolicy_StackType
@@ -1047,21 +1627,20 @@ pattern IPAllocationPolicy_StackType_IPV4_IPV6 = IPAllocationPolicy_StackType "I
   IPAllocationPolicy_StackType_STACKTYPEUNSPECIFIED,
   IPAllocationPolicy_StackType_IPV4,
   IPAllocationPolicy_StackType_IPV4_IPV6,
-  IPAllocationPolicy_StackType
-  #-}
+  IPAllocationPolicy_StackType #-}
 
 -- | cgroup_mode specifies the cgroup mode to be used on the node.
-newtype LinuxNodeConfig_CgroupMode = LinuxNodeConfig_CgroupMode {fromLinuxNodeConfig_CgroupMode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype LinuxNodeConfig_CgroupMode = LinuxNodeConfig_CgroupMode { fromLinuxNodeConfig_CgroupMode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | CGROUP/MODE/UNSPECIFIED is when unspecified cgroup configuration is used. The default for the GKE node OS image will be used.
 pattern LinuxNodeConfig_CgroupMode_CGROUPMODEUNSPECIFIED :: LinuxNodeConfig_CgroupMode
@@ -1079,20 +1658,19 @@ pattern LinuxNodeConfig_CgroupMode_CGROUP_MODE_V2 = LinuxNodeConfig_CgroupMode "
   LinuxNodeConfig_CgroupMode_CGROUPMODEUNSPECIFIED,
   LinuxNodeConfig_CgroupMode_CGROUP_MODE_V1,
   LinuxNodeConfig_CgroupMode_CGROUP_MODE_V2,
-  LinuxNodeConfig_CgroupMode
-  #-}
+  LinuxNodeConfig_CgroupMode #-}
 
-newtype LoggingComponentConfig_EnableComponentsItem = LoggingComponentConfig_EnableComponentsItem {fromLoggingComponentConfig_EnableComponentsItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype LoggingComponentConfig_EnableComponentsItem = LoggingComponentConfig_EnableComponentsItem { fromLoggingComponentConfig_EnableComponentsItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. This shouldn\'t be used.
 pattern LoggingComponentConfig_EnableComponentsItem_COMPONENTUNSPECIFIED :: LoggingComponentConfig_EnableComponentsItem
@@ -1118,6 +1696,14 @@ pattern LoggingComponentConfig_EnableComponentsItem_Scheduler = LoggingComponent
 pattern LoggingComponentConfig_EnableComponentsItem_CONTROLLERMANAGER :: LoggingComponentConfig_EnableComponentsItem
 pattern LoggingComponentConfig_EnableComponentsItem_CONTROLLERMANAGER = LoggingComponentConfig_EnableComponentsItem "CONTROLLER_MANAGER"
 
+-- | kcp-sshd
+pattern LoggingComponentConfig_EnableComponentsItem_KCPSSHD :: LoggingComponentConfig_EnableComponentsItem
+pattern LoggingComponentConfig_EnableComponentsItem_KCPSSHD = LoggingComponentConfig_EnableComponentsItem "KCP_SSHD"
+
+-- | kcp connection logs
+pattern LoggingComponentConfig_EnableComponentsItem_KCPCONNECTION :: LoggingComponentConfig_EnableComponentsItem
+pattern LoggingComponentConfig_EnableComponentsItem_KCPCONNECTION = LoggingComponentConfig_EnableComponentsItem "KCP_CONNECTION"
+
 {-# COMPLETE
   LoggingComponentConfig_EnableComponentsItem_COMPONENTUNSPECIFIED,
   LoggingComponentConfig_EnableComponentsItem_SYSTEMCOMPONENTS,
@@ -1125,21 +1711,22 @@ pattern LoggingComponentConfig_EnableComponentsItem_CONTROLLERMANAGER = LoggingC
   LoggingComponentConfig_EnableComponentsItem_Apiserver,
   LoggingComponentConfig_EnableComponentsItem_Scheduler,
   LoggingComponentConfig_EnableComponentsItem_CONTROLLERMANAGER,
-  LoggingComponentConfig_EnableComponentsItem
-  #-}
+  LoggingComponentConfig_EnableComponentsItem_KCPSSHD,
+  LoggingComponentConfig_EnableComponentsItem_KCPCONNECTION,
+  LoggingComponentConfig_EnableComponentsItem #-}
 
 -- | Logging variant deployed on nodes.
-newtype LoggingVariantConfig_Variant = LoggingVariantConfig_Variant {fromLoggingVariantConfig_Variant :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype LoggingVariantConfig_Variant = LoggingVariantConfig_Variant { fromLoggingVariantConfig_Variant :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. This shouldn\'t be used.
 pattern LoggingVariantConfig_Variant_VARIANTUNSPECIFIED :: LoggingVariantConfig_Variant
@@ -1157,21 +1744,20 @@ pattern LoggingVariantConfig_Variant_MAXTHROUGHPUT = LoggingVariantConfig_Varian
   LoggingVariantConfig_Variant_VARIANTUNSPECIFIED,
   LoggingVariantConfig_Variant_Default,
   LoggingVariantConfig_Variant_MAXTHROUGHPUT,
-  LoggingVariantConfig_Variant
-  #-}
+  LoggingVariantConfig_Variant #-}
 
 -- | Scope specifies the upgrade scope which upgrades are blocked by the exclusion.
-newtype MaintenanceExclusionOptions_Scope = MaintenanceExclusionOptions_Scope {fromMaintenanceExclusionOptions_Scope :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MaintenanceExclusionOptions_Scope = MaintenanceExclusionOptions_Scope { fromMaintenanceExclusionOptions_Scope :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | NO_UPGRADES excludes all upgrades, including patch upgrades and minor upgrades across control planes and nodes. This is the default exclusion behavior.
 pattern MaintenanceExclusionOptions_Scope_NOUPGRADES :: MaintenanceExclusionOptions_Scope
@@ -1189,20 +1775,19 @@ pattern MaintenanceExclusionOptions_Scope_NOMINORORNODEUPGRADES = MaintenanceExc
   MaintenanceExclusionOptions_Scope_NOUPGRADES,
   MaintenanceExclusionOptions_Scope_NOMINORUPGRADES,
   MaintenanceExclusionOptions_Scope_NOMINORORNODEUPGRADES,
-  MaintenanceExclusionOptions_Scope
-  #-}
+  MaintenanceExclusionOptions_Scope #-}
 
-newtype MonitoringComponentConfig_EnableComponentsItem = MonitoringComponentConfig_EnableComponentsItem {fromMonitoringComponentConfig_EnableComponentsItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype MonitoringComponentConfig_EnableComponentsItem = MonitoringComponentConfig_EnableComponentsItem { fromMonitoringComponentConfig_EnableComponentsItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. This shouldn\'t be used.
 pattern MonitoringComponentConfig_EnableComponentsItem_COMPONENTUNSPECIFIED :: MonitoringComponentConfig_EnableComponentsItem
@@ -1224,27 +1809,71 @@ pattern MonitoringComponentConfig_EnableComponentsItem_Scheduler = MonitoringCom
 pattern MonitoringComponentConfig_EnableComponentsItem_CONTROLLERMANAGER :: MonitoringComponentConfig_EnableComponentsItem
 pattern MonitoringComponentConfig_EnableComponentsItem_CONTROLLERMANAGER = MonitoringComponentConfig_EnableComponentsItem "CONTROLLER_MANAGER"
 
+-- | Storage
+pattern MonitoringComponentConfig_EnableComponentsItem_Storage :: MonitoringComponentConfig_EnableComponentsItem
+pattern MonitoringComponentConfig_EnableComponentsItem_Storage = MonitoringComponentConfig_EnableComponentsItem "STORAGE"
+
+-- | Horizontal Pod Autoscaling
+pattern MonitoringComponentConfig_EnableComponentsItem_Hpa :: MonitoringComponentConfig_EnableComponentsItem
+pattern MonitoringComponentConfig_EnableComponentsItem_Hpa = MonitoringComponentConfig_EnableComponentsItem "HPA"
+
+-- | Pod
+pattern MonitoringComponentConfig_EnableComponentsItem_Pod :: MonitoringComponentConfig_EnableComponentsItem
+pattern MonitoringComponentConfig_EnableComponentsItem_Pod = MonitoringComponentConfig_EnableComponentsItem "POD"
+
+-- | DaemonSet
+pattern MonitoringComponentConfig_EnableComponentsItem_Daemonset :: MonitoringComponentConfig_EnableComponentsItem
+pattern MonitoringComponentConfig_EnableComponentsItem_Daemonset = MonitoringComponentConfig_EnableComponentsItem "DAEMONSET"
+
+-- | Deployment
+pattern MonitoringComponentConfig_EnableComponentsItem_Deployment :: MonitoringComponentConfig_EnableComponentsItem
+pattern MonitoringComponentConfig_EnableComponentsItem_Deployment = MonitoringComponentConfig_EnableComponentsItem "DEPLOYMENT"
+
+-- | Statefulset
+pattern MonitoringComponentConfig_EnableComponentsItem_Statefulset :: MonitoringComponentConfig_EnableComponentsItem
+pattern MonitoringComponentConfig_EnableComponentsItem_Statefulset = MonitoringComponentConfig_EnableComponentsItem "STATEFULSET"
+
+-- | CADVISOR
+pattern MonitoringComponentConfig_EnableComponentsItem_Cadvisor :: MonitoringComponentConfig_EnableComponentsItem
+pattern MonitoringComponentConfig_EnableComponentsItem_Cadvisor = MonitoringComponentConfig_EnableComponentsItem "CADVISOR"
+
+-- | KUBELET
+pattern MonitoringComponentConfig_EnableComponentsItem_Kubelet :: MonitoringComponentConfig_EnableComponentsItem
+pattern MonitoringComponentConfig_EnableComponentsItem_Kubelet = MonitoringComponentConfig_EnableComponentsItem "KUBELET"
+
+-- | NVIDIA Data Center GPU Manager (DCGM)
+pattern MonitoringComponentConfig_EnableComponentsItem_Dcgm :: MonitoringComponentConfig_EnableComponentsItem
+pattern MonitoringComponentConfig_EnableComponentsItem_Dcgm = MonitoringComponentConfig_EnableComponentsItem "DCGM"
+
 {-# COMPLETE
   MonitoringComponentConfig_EnableComponentsItem_COMPONENTUNSPECIFIED,
   MonitoringComponentConfig_EnableComponentsItem_SYSTEMCOMPONENTS,
   MonitoringComponentConfig_EnableComponentsItem_Apiserver,
   MonitoringComponentConfig_EnableComponentsItem_Scheduler,
   MonitoringComponentConfig_EnableComponentsItem_CONTROLLERMANAGER,
-  MonitoringComponentConfig_EnableComponentsItem
-  #-}
+  MonitoringComponentConfig_EnableComponentsItem_Storage,
+  MonitoringComponentConfig_EnableComponentsItem_Hpa,
+  MonitoringComponentConfig_EnableComponentsItem_Pod,
+  MonitoringComponentConfig_EnableComponentsItem_Daemonset,
+  MonitoringComponentConfig_EnableComponentsItem_Deployment,
+  MonitoringComponentConfig_EnableComponentsItem_Statefulset,
+  MonitoringComponentConfig_EnableComponentsItem_Cadvisor,
+  MonitoringComponentConfig_EnableComponentsItem_Kubelet,
+  MonitoringComponentConfig_EnableComponentsItem_Dcgm,
+  MonitoringComponentConfig_EnableComponentsItem #-}
 
 -- | The desired datapath provider for this cluster. By default, uses the IPTables-based kube-proxy implementation.
-newtype NetworkConfig_DatapathProvider = NetworkConfig_DatapathProvider {fromNetworkConfig_DatapathProvider :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype NetworkConfig_DatapathProvider = NetworkConfig_DatapathProvider { fromNetworkConfig_DatapathProvider :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value.
 pattern NetworkConfig_DatapathProvider_DATAPATHPROVIDERUNSPECIFIED :: NetworkConfig_DatapathProvider
@@ -1262,21 +1891,51 @@ pattern NetworkConfig_DatapathProvider_ADVANCEDDATAPATH = NetworkConfig_Datapath
   NetworkConfig_DatapathProvider_DATAPATHPROVIDERUNSPECIFIED,
   NetworkConfig_DatapathProvider_LEGACYDATAPATH,
   NetworkConfig_DatapathProvider_ADVANCEDDATAPATH,
-  NetworkConfig_DatapathProvider
-  #-}
+  NetworkConfig_DatapathProvider #-}
+
+-- | Specify the details of in-transit encryption. Now named inter-node transparent encryption.
+newtype NetworkConfig_InTransitEncryptionConfig = NetworkConfig_InTransitEncryptionConfig { fromNetworkConfig_InTransitEncryptionConfig :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Unspecified, will be inferred as default - IN/TRANSIT/ENCRYPTION_UNSPECIFIED.
+pattern NetworkConfig_InTransitEncryptionConfig_INTRANSITENCRYPTIONCONFIGUNSPECIFIED :: NetworkConfig_InTransitEncryptionConfig
+pattern NetworkConfig_InTransitEncryptionConfig_INTRANSITENCRYPTIONCONFIGUNSPECIFIED = NetworkConfig_InTransitEncryptionConfig "IN_TRANSIT_ENCRYPTION_CONFIG_UNSPECIFIED"
+
+-- | In-transit encryption is disabled.
+pattern NetworkConfig_InTransitEncryptionConfig_INTRANSITENCRYPTIONDISABLED :: NetworkConfig_InTransitEncryptionConfig
+pattern NetworkConfig_InTransitEncryptionConfig_INTRANSITENCRYPTIONDISABLED = NetworkConfig_InTransitEncryptionConfig "IN_TRANSIT_ENCRYPTION_DISABLED"
+
+-- | Data in-transit is encrypted using inter-node transparent encryption.
+pattern NetworkConfig_InTransitEncryptionConfig_INTRANSITENCRYPTIONINTERNODETRANSPARENT :: NetworkConfig_InTransitEncryptionConfig
+pattern NetworkConfig_InTransitEncryptionConfig_INTRANSITENCRYPTIONINTERNODETRANSPARENT = NetworkConfig_InTransitEncryptionConfig "IN_TRANSIT_ENCRYPTION_INTER_NODE_TRANSPARENT"
+
+{-# COMPLETE
+  NetworkConfig_InTransitEncryptionConfig_INTRANSITENCRYPTIONCONFIGUNSPECIFIED,
+  NetworkConfig_InTransitEncryptionConfig_INTRANSITENCRYPTIONDISABLED,
+  NetworkConfig_InTransitEncryptionConfig_INTRANSITENCRYPTIONINTERNODETRANSPARENT,
+  NetworkConfig_InTransitEncryptionConfig #-}
 
 -- | The desired state of IPv6 connectivity to Google Services. By default, no private IPv6 access to or from Google Services (all access will be via IPv4)
-newtype NetworkConfig_PrivateIpv6GoogleAccess = NetworkConfig_PrivateIpv6GoogleAccess {fromNetworkConfig_PrivateIpv6GoogleAccess :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype NetworkConfig_PrivateIpv6GoogleAccess = NetworkConfig_PrivateIpv6GoogleAccess { fromNetworkConfig_PrivateIpv6GoogleAccess :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. Same as DISABLED
 pattern NetworkConfig_PrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSUNSPECIFIED :: NetworkConfig_PrivateIpv6GoogleAccess
@@ -1299,21 +1958,20 @@ pattern NetworkConfig_PrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSBIDIRECTION
   NetworkConfig_PrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSDISABLED,
   NetworkConfig_PrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSTOGOOGLE,
   NetworkConfig_PrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSBIDIRECTIONAL,
-  NetworkConfig_PrivateIpv6GoogleAccess
-  #-}
+  NetworkConfig_PrivateIpv6GoogleAccess #-}
 
 -- | Specifies the total network bandwidth tier for the NodePool.
-newtype NetworkPerformanceConfig_TotalEgressBandwidthTier = NetworkPerformanceConfig_TotalEgressBandwidthTier {fromNetworkPerformanceConfig_TotalEgressBandwidthTier :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype NetworkPerformanceConfig_TotalEgressBandwidthTier = NetworkPerformanceConfig_TotalEgressBandwidthTier { fromNetworkPerformanceConfig_TotalEgressBandwidthTier :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value
 pattern NetworkPerformanceConfig_TotalEgressBandwidthTier_TIERUNSPECIFIED :: NetworkPerformanceConfig_TotalEgressBandwidthTier
@@ -1326,21 +1984,20 @@ pattern NetworkPerformanceConfig_TotalEgressBandwidthTier_TIER_1 = NetworkPerfor
 {-# COMPLETE
   NetworkPerformanceConfig_TotalEgressBandwidthTier_TIERUNSPECIFIED,
   NetworkPerformanceConfig_TotalEgressBandwidthTier_TIER_1,
-  NetworkPerformanceConfig_TotalEgressBandwidthTier
-  #-}
+  NetworkPerformanceConfig_TotalEgressBandwidthTier #-}
 
 -- | The selected network policy provider.
-newtype NetworkPolicy_Provider = NetworkPolicy_Provider {fromNetworkPolicy_Provider :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype NetworkPolicy_Provider = NetworkPolicy_Provider { fromNetworkPolicy_Provider :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not set
 pattern NetworkPolicy_Provider_PROVIDERUNSPECIFIED :: NetworkPolicy_Provider
@@ -1353,21 +2010,113 @@ pattern NetworkPolicy_Provider_Calico = NetworkPolicy_Provider "CALICO"
 {-# COMPLETE
   NetworkPolicy_Provider_PROVIDERUNSPECIFIED,
   NetworkPolicy_Provider_Calico,
-  NetworkPolicy_Provider
-  #-}
+  NetworkPolicy_Provider #-}
 
--- | [Output only] The status of the nodes in this pool instance.
-newtype NodePool_Status = NodePool_Status {fromNodePool_Status :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Operator for NodeAffinity.
+newtype NodeAffinity_Operator = NodeAffinity_Operator { fromNodeAffinity_Operator :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Invalid or unspecified affinity operator.
+pattern NodeAffinity_Operator_OPERATORUNSPECIFIED :: NodeAffinity_Operator
+pattern NodeAffinity_Operator_OPERATORUNSPECIFIED = NodeAffinity_Operator "OPERATOR_UNSPECIFIED"
+
+-- | Affinity operator.
+pattern NodeAffinity_Operator_IN :: NodeAffinity_Operator
+pattern NodeAffinity_Operator_IN = NodeAffinity_Operator "IN"
+
+-- | Anti-affinity operator.
+pattern NodeAffinity_Operator_NOTIN :: NodeAffinity_Operator
+pattern NodeAffinity_Operator_NOTIN = NodeAffinity_Operator "NOT_IN"
+
+{-# COMPLETE
+  NodeAffinity_Operator_OPERATORUNSPECIFIED,
+  NodeAffinity_Operator_IN,
+  NodeAffinity_Operator_NOTIN,
+  NodeAffinity_Operator #-}
+
+-- | Output only. effective/cgroup/mode is the cgroup mode actually used by the node pool. It is determined by the cgroup mode specified in the LinuxNodeConfig or the default cgroup mode based on the cluster creation version.
+newtype NodeConfig_EffectiveCgroupMode = NodeConfig_EffectiveCgroupMode { fromNodeConfig_EffectiveCgroupMode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | EFFECTIVE/CGROUP/MODE_UNSPECIFIED means the cgroup configuration for the node pool is unspecified, i.e. the node pool is a Windows node pool.
+pattern NodeConfig_EffectiveCgroupMode_EFFECTIVECGROUPMODEUNSPECIFIED :: NodeConfig_EffectiveCgroupMode
+pattern NodeConfig_EffectiveCgroupMode_EFFECTIVECGROUPMODEUNSPECIFIED = NodeConfig_EffectiveCgroupMode "EFFECTIVE_CGROUP_MODE_UNSPECIFIED"
+
+-- | CGROUP/MODE/V1 means the node pool is configured to use cgroupv1 for the cgroup configuration.
+pattern NodeConfig_EffectiveCgroupMode_EFFECTIVE_CGROUP_MODE_V1 :: NodeConfig_EffectiveCgroupMode
+pattern NodeConfig_EffectiveCgroupMode_EFFECTIVE_CGROUP_MODE_V1 = NodeConfig_EffectiveCgroupMode "EFFECTIVE_CGROUP_MODE_V1"
+
+-- | CGROUP/MODE/V2 means the node pool is configured to use cgroupv2 for the cgroup configuration.
+pattern NodeConfig_EffectiveCgroupMode_EFFECTIVE_CGROUP_MODE_V2 :: NodeConfig_EffectiveCgroupMode
+pattern NodeConfig_EffectiveCgroupMode_EFFECTIVE_CGROUP_MODE_V2 = NodeConfig_EffectiveCgroupMode "EFFECTIVE_CGROUP_MODE_V2"
+
+{-# COMPLETE
+  NodeConfig_EffectiveCgroupMode_EFFECTIVECGROUPMODEUNSPECIFIED,
+  NodeConfig_EffectiveCgroupMode_EFFECTIVE_CGROUP_MODE_V1,
+  NodeConfig_EffectiveCgroupMode_EFFECTIVE_CGROUP_MODE_V2,
+  NodeConfig_EffectiveCgroupMode #-}
+
+-- | Specifies which method should be used for encrypting the Local SSDs attahced to the node.
+newtype NodeConfig_LocalSsdEncryptionMode = NodeConfig_LocalSsdEncryptionMode { fromNodeConfig_LocalSsdEncryptionMode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | The given node will be encrypted using keys managed by Google infrastructure and the keys will be deleted when the node is deleted.
+pattern NodeConfig_LocalSsdEncryptionMode_LOCALSSDENCRYPTIONMODEUNSPECIFIED :: NodeConfig_LocalSsdEncryptionMode
+pattern NodeConfig_LocalSsdEncryptionMode_LOCALSSDENCRYPTIONMODEUNSPECIFIED = NodeConfig_LocalSsdEncryptionMode "LOCAL_SSD_ENCRYPTION_MODE_UNSPECIFIED"
+
+-- | The given node will be encrypted using keys managed by Google infrastructure and the keys will be deleted when the node is deleted.
+pattern NodeConfig_LocalSsdEncryptionMode_STANDARDENCRYPTION :: NodeConfig_LocalSsdEncryptionMode
+pattern NodeConfig_LocalSsdEncryptionMode_STANDARDENCRYPTION = NodeConfig_LocalSsdEncryptionMode "STANDARD_ENCRYPTION"
+
+-- | The given node will opt-in for using ephemeral key for encryption of Local SSDs. The Local SSDs will not be able to recover data in case of node crash.
+pattern NodeConfig_LocalSsdEncryptionMode_EPHEMERALKEYENCRYPTION :: NodeConfig_LocalSsdEncryptionMode
+pattern NodeConfig_LocalSsdEncryptionMode_EPHEMERALKEYENCRYPTION = NodeConfig_LocalSsdEncryptionMode "EPHEMERAL_KEY_ENCRYPTION"
+
+{-# COMPLETE
+  NodeConfig_LocalSsdEncryptionMode_LOCALSSDENCRYPTIONMODEUNSPECIFIED,
+  NodeConfig_LocalSsdEncryptionMode_STANDARDENCRYPTION,
+  NodeConfig_LocalSsdEncryptionMode_EPHEMERALKEYENCRYPTION,
+  NodeConfig_LocalSsdEncryptionMode #-}
+
+-- | Output only. The status of the nodes in this pool instance.
+newtype NodePool_Status = NodePool_Status { fromNodePool_Status :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not set.
 pattern NodePool_Status_STATUSUNSPECIFIED :: NodePool_Status
@@ -1405,21 +2154,20 @@ pattern NodePool_Status_Error' = NodePool_Status "ERROR"
   NodePool_Status_Reconciling,
   NodePool_Status_Stopping,
   NodePool_Status_Error',
-  NodePool_Status
-  #-}
+  NodePool_Status #-}
 
 -- | Location policy used when scaling up a nodepool.
-newtype NodePoolAutoscaling_LocationPolicy = NodePoolAutoscaling_LocationPolicy {fromNodePoolAutoscaling_LocationPolicy :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype NodePoolAutoscaling_LocationPolicy = NodePoolAutoscaling_LocationPolicy { fromNodePoolAutoscaling_LocationPolicy :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not set.
 pattern NodePoolAutoscaling_LocationPolicy_LOCATIONPOLICYUNSPECIFIED :: NodePoolAutoscaling_LocationPolicy
@@ -1437,21 +2185,20 @@ pattern NodePoolAutoscaling_LocationPolicy_Any = NodePoolAutoscaling_LocationPol
   NodePoolAutoscaling_LocationPolicy_LOCATIONPOLICYUNSPECIFIED,
   NodePoolAutoscaling_LocationPolicy_Balanced,
   NodePoolAutoscaling_LocationPolicy_Any,
-  NodePoolAutoscaling_LocationPolicy
-  #-}
+  NodePoolAutoscaling_LocationPolicy #-}
 
 -- | Effect for taint.
-newtype NodeTaint_Effect = NodeTaint_Effect {fromNodeTaint_Effect :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype NodeTaint_Effect = NodeTaint_Effect { fromNodeTaint_Effect :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not set
 pattern NodeTaint_Effect_EFFECTUNSPECIFIED :: NodeTaint_Effect
@@ -1474,89 +2221,96 @@ pattern NodeTaint_Effect_NOEXECUTE = NodeTaint_Effect "NO_EXECUTE"
   NodeTaint_Effect_NOSCHEDULE,
   NodeTaint_Effect_PREFERNOSCHEDULE,
   NodeTaint_Effect_NOEXECUTE,
-  NodeTaint_Effect
-  #-}
+  NodeTaint_Effect #-}
 
--- | The operation type.
-newtype Operation_OperationType = Operation_OperationType {fromOperation_OperationType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Output only. The operation type.
+newtype Operation_OperationType = Operation_OperationType { fromOperation_OperationType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not set.
 pattern Operation_OperationType_TYPEUNSPECIFIED :: Operation_OperationType
 pattern Operation_OperationType_TYPEUNSPECIFIED = Operation_OperationType "TYPE_UNSPECIFIED"
 
--- | Cluster create.
+-- | The cluster is being created. The cluster should be assumed to be unusable until the operation finishes. In the event of the operation failing, the cluster will enter the ERROR state and eventually be deleted.
 pattern Operation_OperationType_CREATECLUSTER :: Operation_OperationType
 pattern Operation_OperationType_CREATECLUSTER = Operation_OperationType "CREATE_CLUSTER"
 
--- | Cluster delete.
+-- | The cluster is being deleted. The cluster should be assumed to be unusable as soon as this operation starts. In the event of the operation failing, the cluster will enter the ERROR state and the deletion will be automatically retried until completed.
 pattern Operation_OperationType_DELETECLUSTER :: Operation_OperationType
 pattern Operation_OperationType_DELETECLUSTER = Operation_OperationType "DELETE_CLUSTER"
 
--- | A master upgrade.
+-- | The cluster version is being updated. Note that this includes \"upgrades\" to the same version, which are simply a recreation. This also includes <https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-upgrades#upgrading_automatically auto-upgrades>. For more details, see <https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-upgrades#cluster_upgrades documentation on cluster upgrades>.
 pattern Operation_OperationType_UPGRADEMASTER :: Operation_OperationType
 pattern Operation_OperationType_UPGRADEMASTER = Operation_OperationType "UPGRADE_MASTER"
 
--- | A node upgrade.
+-- | A node pool is being updated. Despite calling this an \"upgrade\", this includes most forms of updates to node pools. This also includes <https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-upgrades auto-upgrades>. This operation sets the progress field and may be canceled. The upgrade strategy depends on <https://cloud.google.com/kubernetes-engine/docs/concepts/node-pool-upgrade-strategies node pool configuration>. The nodes are generally still usable during this operation.
 pattern Operation_OperationType_UPGRADENODES :: Operation_OperationType
 pattern Operation_OperationType_UPGRADENODES = Operation_OperationType "UPGRADE_NODES"
 
--- | Cluster repair.
+-- | A problem has been detected with the control plane and is being repaired. This operation type is initiated by GKE. For more details, see <https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions#repairs documentation on repairs>.
 pattern Operation_OperationType_REPAIRCLUSTER :: Operation_OperationType
 pattern Operation_OperationType_REPAIRCLUSTER = Operation_OperationType "REPAIR_CLUSTER"
 
--- | Cluster update.
+-- | The cluster is being updated. This is a broad category of operations and includes operations that only change metadata as well as those that must recreate the entire cluster. If the control plane must be recreated, this will cause temporary downtime for zonal clusters. Some features require recreating the nodes as well. Those will be recreated as separate operations and the update may not be completely functional until the node pools recreations finish. Node recreations will generally follow <https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions maintenance policies>. Some GKE-initiated operations use this type. This includes certain types of auto-upgrades and incident mitigations.
 pattern Operation_OperationType_UPDATECLUSTER :: Operation_OperationType
 pattern Operation_OperationType_UPDATECLUSTER = Operation_OperationType "UPDATE_CLUSTER"
 
--- | Node pool create.
+-- | A node pool is being created. The node pool should be assumed to be unusable until this operation finishes. In the event of an error, the node pool may be partially created. If enabled, <https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-provisioning node autoprovisioning> may have automatically initiated such operations.
 pattern Operation_OperationType_CREATENODEPOOL :: Operation_OperationType
 pattern Operation_OperationType_CREATENODEPOOL = Operation_OperationType "CREATE_NODE_POOL"
 
--- | Node pool delete.
+-- | The node pool is being deleted. The node pool should be assumed to be unusable as soon as this operation starts.
 pattern Operation_OperationType_DELETENODEPOOL :: Operation_OperationType
 pattern Operation_OperationType_DELETENODEPOOL = Operation_OperationType "DELETE_NODE_POOL"
 
--- | Set node pool management.
+-- | The node pool\'s manamagent field is being updated. These operations only update metadata and may be concurrent with most other operations.
 pattern Operation_OperationType_SETNODEPOOLMANAGEMENT :: Operation_OperationType
 pattern Operation_OperationType_SETNODEPOOLMANAGEMENT = Operation_OperationType "SET_NODE_POOL_MANAGEMENT"
 
--- | Automatic node pool repair.
+-- | A problem has been detected with nodes and <https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-repair they are being repaired>. This operation type is initiated by GKE, typically automatically. This operation may be concurrent with other operations and there may be multiple repairs occurring on the same node pool.
 pattern Operation_OperationType_AUTOREPAIRNODES :: Operation_OperationType
 pattern Operation_OperationType_AUTOREPAIRNODES = Operation_OperationType "AUTO_REPAIR_NODES"
 
--- | Automatic node upgrade.
+-- | Unused. Automatic node upgrade uses UPGRADE_NODES.
 pattern Operation_OperationType_AUTOUPGRADENODES :: Operation_OperationType
 pattern Operation_OperationType_AUTOUPGRADENODES = Operation_OperationType "AUTO_UPGRADE_NODES"
 
--- | Set labels.
+-- | Unused. Updating labels uses UPDATE_CLUSTER.
 pattern Operation_OperationType_SETLABELS :: Operation_OperationType
 pattern Operation_OperationType_SETLABELS = Operation_OperationType "SET_LABELS"
 
--- | Set\/generate master auth materials
+-- | Unused. Updating master auth uses UPDATE_CLUSTER.
 pattern Operation_OperationType_SETMASTERAUTH :: Operation_OperationType
 pattern Operation_OperationType_SETMASTERAUTH = Operation_OperationType "SET_MASTER_AUTH"
 
--- | Set node pool size.
+-- | The node pool is being resized. With the exception of resizing to or from size zero, the node pool is generally usable during this operation.
 pattern Operation_OperationType_SETNODEPOOLSIZE :: Operation_OperationType
 pattern Operation_OperationType_SETNODEPOOLSIZE = Operation_OperationType "SET_NODE_POOL_SIZE"
 
--- | Updates network policy for a cluster.
+-- | Unused. Updating network policy uses UPDATE_CLUSTER.
 pattern Operation_OperationType_SETNETWORKPOLICY :: Operation_OperationType
 pattern Operation_OperationType_SETNETWORKPOLICY = Operation_OperationType "SET_NETWORK_POLICY"
 
--- | Set the maintenance policy.
+-- | Unused. Updating maintenance policy uses UPDATE_CLUSTER.
 pattern Operation_OperationType_SETMAINTENANCEPOLICY :: Operation_OperationType
 pattern Operation_OperationType_SETMAINTENANCEPOLICY = Operation_OperationType "SET_MAINTENANCE_POLICY"
+
+-- | The control plane is being resized. This operation type is initiated by GKE. These operations are often performed preemptively to ensure that the control plane has sufficient resources and is not typically an indication of issues. For more details, see <https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions#repairs documentation on resizes>.
+pattern Operation_OperationType_RESIZECLUSTER :: Operation_OperationType
+pattern Operation_OperationType_RESIZECLUSTER = Operation_OperationType "RESIZE_CLUSTER"
+
+-- | Fleet features of GKE Enterprise are being upgraded. The cluster should be assumed to be blocked for other upgrades until the operation finishes.
+pattern Operation_OperationType_FLEETFEATUREUPGRADE :: Operation_OperationType
+pattern Operation_OperationType_FLEETFEATUREUPGRADE = Operation_OperationType "FLEET_FEATURE_UPGRADE"
 
 {-# COMPLETE
   Operation_OperationType_TYPEUNSPECIFIED,
@@ -1576,21 +2330,22 @@ pattern Operation_OperationType_SETMAINTENANCEPOLICY = Operation_OperationType "
   Operation_OperationType_SETNODEPOOLSIZE,
   Operation_OperationType_SETNETWORKPOLICY,
   Operation_OperationType_SETMAINTENANCEPOLICY,
-  Operation_OperationType
-  #-}
+  Operation_OperationType_RESIZECLUSTER,
+  Operation_OperationType_FLEETFEATUREUPGRADE,
+  Operation_OperationType #-}
 
--- | The current status of the operation.
-newtype Operation_Status = Operation_Status {fromOperation_Status :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Output only. The current status of the operation.
+newtype Operation_Status = Operation_Status { fromOperation_Status :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not set.
 pattern Operation_Status_STATUSUNSPECIFIED :: Operation_Status
@@ -1618,21 +2373,20 @@ pattern Operation_Status_Aborting = Operation_Status "ABORTING"
   Operation_Status_Running,
   Operation_Status_Done,
   Operation_Status_Aborting,
-  Operation_Status
-  #-}
+  Operation_Status #-}
 
 -- | Status of an operation stage. Unset for single-stage operations.
-newtype OperationProgress_Status = OperationProgress_Status {fromOperationProgress_Status :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype OperationProgress_Status = OperationProgress_Status { fromOperationProgress_Status :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not set.
 pattern OperationProgress_Status_STATUSUNSPECIFIED :: OperationProgress_Status
@@ -1660,21 +2414,20 @@ pattern OperationProgress_Status_Aborting = OperationProgress_Status "ABORTING"
   OperationProgress_Status_Running,
   OperationProgress_Status_Done,
   OperationProgress_Status_Aborting,
-  OperationProgress_Status
-  #-}
+  OperationProgress_Status #-}
 
 -- | The type of placement.
-newtype PlacementPolicy_Type = PlacementPolicy_Type {fromPlacementPolicy_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype PlacementPolicy_Type = PlacementPolicy_Type { fromPlacementPolicy_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | TYPE_UNSPECIFIED specifies no requirements on nodes placement.
 pattern PlacementPolicy_Type_TYPEUNSPECIFIED :: PlacementPolicy_Type
@@ -1687,21 +2440,20 @@ pattern PlacementPolicy_Type_Compact = PlacementPolicy_Type "COMPACT"
 {-# COMPLETE
   PlacementPolicy_Type_TYPEUNSPECIFIED,
   PlacementPolicy_Type_Compact,
-  PlacementPolicy_Type
-  #-}
+  PlacementPolicy_Type #-}
 
 -- | channel specifies which release channel the cluster is subscribed to.
-newtype ReleaseChannel_Channel = ReleaseChannel_Channel {fromReleaseChannel_Channel :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ReleaseChannel_Channel = ReleaseChannel_Channel { fromReleaseChannel_Channel :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No channel specified.
 pattern ReleaseChannel_Channel_Unspecified :: ReleaseChannel_Channel
@@ -1719,26 +2471,30 @@ pattern ReleaseChannel_Channel_Regular = ReleaseChannel_Channel "REGULAR"
 pattern ReleaseChannel_Channel_Stable :: ReleaseChannel_Channel
 pattern ReleaseChannel_Channel_Stable = ReleaseChannel_Channel "STABLE"
 
+-- | Clusters subscribed to EXTENDED receive extended support and availability for versions which are known to be stable and reliable in production.
+pattern ReleaseChannel_Channel_Extended :: ReleaseChannel_Channel
+pattern ReleaseChannel_Channel_Extended = ReleaseChannel_Channel "EXTENDED"
+
 {-# COMPLETE
   ReleaseChannel_Channel_Unspecified,
   ReleaseChannel_Channel_Rapid,
   ReleaseChannel_Channel_Regular,
   ReleaseChannel_Channel_Stable,
-  ReleaseChannel_Channel
-  #-}
+  ReleaseChannel_Channel_Extended,
+  ReleaseChannel_Channel #-}
 
 -- | The release channel this configuration applies to.
-newtype ReleaseChannelConfig_Channel = ReleaseChannelConfig_Channel {fromReleaseChannelConfig_Channel :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ReleaseChannelConfig_Channel = ReleaseChannelConfig_Channel { fromReleaseChannelConfig_Channel :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | No channel specified.
 pattern ReleaseChannelConfig_Channel_Unspecified :: ReleaseChannelConfig_Channel
@@ -1756,26 +2512,30 @@ pattern ReleaseChannelConfig_Channel_Regular = ReleaseChannelConfig_Channel "REG
 pattern ReleaseChannelConfig_Channel_Stable :: ReleaseChannelConfig_Channel
 pattern ReleaseChannelConfig_Channel_Stable = ReleaseChannelConfig_Channel "STABLE"
 
+-- | Clusters subscribed to EXTENDED receive extended support and availability for versions which are known to be stable and reliable in production.
+pattern ReleaseChannelConfig_Channel_Extended :: ReleaseChannelConfig_Channel
+pattern ReleaseChannelConfig_Channel_Extended = ReleaseChannelConfig_Channel "EXTENDED"
+
 {-# COMPLETE
   ReleaseChannelConfig_Channel_Unspecified,
   ReleaseChannelConfig_Channel_Rapid,
   ReleaseChannelConfig_Channel_Regular,
   ReleaseChannelConfig_Channel_Stable,
-  ReleaseChannelConfig_Channel
-  #-}
+  ReleaseChannelConfig_Channel_Extended,
+  ReleaseChannelConfig_Channel #-}
 
 -- | Corresponds to the type of reservation consumption.
-newtype ReservationAffinity_ConsumeReservationType = ReservationAffinity_ConsumeReservationType {fromReservationAffinity_ConsumeReservationType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype ReservationAffinity_ConsumeReservationType = ReservationAffinity_ConsumeReservationType { fromReservationAffinity_ConsumeReservationType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. This should not be used.
 pattern ReservationAffinity_ConsumeReservationType_Unspecified :: ReservationAffinity_ConsumeReservationType
@@ -1798,21 +2558,20 @@ pattern ReservationAffinity_ConsumeReservationType_SPECIFICRESERVATION = Reserva
   ReservationAffinity_ConsumeReservationType_NORESERVATION,
   ReservationAffinity_ConsumeReservationType_ANYRESERVATION,
   ReservationAffinity_ConsumeReservationType_SPECIFICRESERVATION,
-  ReservationAffinity_ConsumeReservationType
-  #-}
+  ReservationAffinity_ConsumeReservationType #-}
 
 -- | Type of the sandbox to use for the node.
-newtype SandboxConfig_Type = SandboxConfig_Type {fromSandboxConfig_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype SandboxConfig_Type = SandboxConfig_Type { fromSandboxConfig_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. This should not be used.
 pattern SandboxConfig_Type_Unspecified :: SandboxConfig_Type
@@ -1825,21 +2584,118 @@ pattern SandboxConfig_Type_Gvisor = SandboxConfig_Type "GVISOR"
 {-# COMPLETE
   SandboxConfig_Type_Unspecified,
   SandboxConfig_Type_Gvisor,
-  SandboxConfig_Type
-  #-}
+  SandboxConfig_Type #-}
+
+-- | Disk mode (container image cache, etc.)
+newtype SecondaryBootDisk_Mode = SecondaryBootDisk_Mode { fromSecondaryBootDisk_Mode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | MODE_UNSPECIFIED is when mode is not set.
+pattern SecondaryBootDisk_Mode_MODEUNSPECIFIED :: SecondaryBootDisk_Mode
+pattern SecondaryBootDisk_Mode_MODEUNSPECIFIED = SecondaryBootDisk_Mode "MODE_UNSPECIFIED"
+
+-- | CONTAINER/IMAGE/CACHE is for using the secondary boot disk as a container image cache.
+pattern SecondaryBootDisk_Mode_CONTAINERIMAGECACHE :: SecondaryBootDisk_Mode
+pattern SecondaryBootDisk_Mode_CONTAINERIMAGECACHE = SecondaryBootDisk_Mode "CONTAINER_IMAGE_CACHE"
+
+{-# COMPLETE
+  SecondaryBootDisk_Mode_MODEUNSPECIFIED,
+  SecondaryBootDisk_Mode_CONTAINERIMAGECACHE,
+  SecondaryBootDisk_Mode #-}
+
+-- | Sets which mode to use for Security Posture features.
+newtype SecurityPostureConfig_Mode = SecurityPostureConfig_Mode { fromSecurityPostureConfig_Mode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Default value not specified.
+pattern SecurityPostureConfig_Mode_MODEUNSPECIFIED :: SecurityPostureConfig_Mode
+pattern SecurityPostureConfig_Mode_MODEUNSPECIFIED = SecurityPostureConfig_Mode "MODE_UNSPECIFIED"
+
+-- | Disables Security Posture features on the cluster.
+pattern SecurityPostureConfig_Mode_Disabled :: SecurityPostureConfig_Mode
+pattern SecurityPostureConfig_Mode_Disabled = SecurityPostureConfig_Mode "DISABLED"
+
+-- | Applies Security Posture features on the cluster.
+pattern SecurityPostureConfig_Mode_Basic :: SecurityPostureConfig_Mode
+pattern SecurityPostureConfig_Mode_Basic = SecurityPostureConfig_Mode "BASIC"
+
+-- | Applies the Security Posture off cluster Enterprise level features.
+pattern SecurityPostureConfig_Mode_Enterprise :: SecurityPostureConfig_Mode
+pattern SecurityPostureConfig_Mode_Enterprise = SecurityPostureConfig_Mode "ENTERPRISE"
+
+{-# COMPLETE
+  SecurityPostureConfig_Mode_MODEUNSPECIFIED,
+  SecurityPostureConfig_Mode_Disabled,
+  SecurityPostureConfig_Mode_Basic,
+  SecurityPostureConfig_Mode_Enterprise,
+  SecurityPostureConfig_Mode #-}
+
+-- | Sets which mode to use for vulnerability scanning.
+newtype SecurityPostureConfig_VulnerabilityMode = SecurityPostureConfig_VulnerabilityMode { fromSecurityPostureConfig_VulnerabilityMode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Default value not specified.
+pattern SecurityPostureConfig_VulnerabilityMode_VULNERABILITYMODEUNSPECIFIED :: SecurityPostureConfig_VulnerabilityMode
+pattern SecurityPostureConfig_VulnerabilityMode_VULNERABILITYMODEUNSPECIFIED = SecurityPostureConfig_VulnerabilityMode "VULNERABILITY_MODE_UNSPECIFIED"
+
+-- | Disables vulnerability scanning on the cluster.
+pattern SecurityPostureConfig_VulnerabilityMode_VULNERABILITYDISABLED :: SecurityPostureConfig_VulnerabilityMode
+pattern SecurityPostureConfig_VulnerabilityMode_VULNERABILITYDISABLED = SecurityPostureConfig_VulnerabilityMode "VULNERABILITY_DISABLED"
+
+-- | Applies basic vulnerability scanning on the cluster.
+pattern SecurityPostureConfig_VulnerabilityMode_VULNERABILITYBASIC :: SecurityPostureConfig_VulnerabilityMode
+pattern SecurityPostureConfig_VulnerabilityMode_VULNERABILITYBASIC = SecurityPostureConfig_VulnerabilityMode "VULNERABILITY_BASIC"
+
+-- | Applies the Security Posture\'s vulnerability on cluster Enterprise level features.
+pattern SecurityPostureConfig_VulnerabilityMode_VULNERABILITYENTERPRISE :: SecurityPostureConfig_VulnerabilityMode
+pattern SecurityPostureConfig_VulnerabilityMode_VULNERABILITYENTERPRISE = SecurityPostureConfig_VulnerabilityMode "VULNERABILITY_ENTERPRISE"
+
+{-# COMPLETE
+  SecurityPostureConfig_VulnerabilityMode_VULNERABILITYMODEUNSPECIFIED,
+  SecurityPostureConfig_VulnerabilityMode_VULNERABILITYDISABLED,
+  SecurityPostureConfig_VulnerabilityMode_VULNERABILITYBASIC,
+  SecurityPostureConfig_VulnerabilityMode_VULNERABILITYENTERPRISE,
+  SecurityPostureConfig_VulnerabilityMode #-}
 
 -- | Required. The exact form of action to be taken on the master auth.
-newtype SetMasterAuthRequest_Action = SetMasterAuthRequest_Action {fromSetMasterAuthRequest_Action :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype SetMasterAuthRequest_Action = SetMasterAuthRequest_Action { fromSetMasterAuthRequest_Action :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Operation is unknown and will error out.
 pattern SetMasterAuthRequest_Action_Unknown :: SetMasterAuthRequest_Action
@@ -1862,21 +2718,20 @@ pattern SetMasterAuthRequest_Action_SETUSERNAME = SetMasterAuthRequest_Action "S
   SetMasterAuthRequest_Action_SETPASSWORD,
   SetMasterAuthRequest_Action_GENERATEPASSWORD,
   SetMasterAuthRequest_Action_SETUSERNAME,
-  SetMasterAuthRequest_Action
-  #-}
+  SetMasterAuthRequest_Action #-}
 
 -- | Canonical code of the condition.
-newtype StatusCondition_CanonicalCode = StatusCondition_CanonicalCode {fromStatusCondition_CanonicalCode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype StatusCondition_CanonicalCode = StatusCondition_CanonicalCode { fromStatusCondition_CanonicalCode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not an error; returned on success. HTTP Mapping: 200 OK
 pattern StatusCondition_CanonicalCode_OK :: StatusCondition_CanonicalCode
@@ -1964,21 +2819,20 @@ pattern StatusCondition_CanonicalCode_DATALOSS = StatusCondition_CanonicalCode "
   StatusCondition_CanonicalCode_Internal,
   StatusCondition_CanonicalCode_Unavailable,
   StatusCondition_CanonicalCode_DATALOSS,
-  StatusCondition_CanonicalCode
-  #-}
+  StatusCondition_CanonicalCode #-}
 
 -- | Machine-friendly representation of the condition Deprecated. Use canonical_code instead.
-newtype StatusCondition_Code = StatusCondition_Code {fromStatusCondition_Code :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype StatusCondition_Code = StatusCondition_Code { fromStatusCondition_Code :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | UNKNOWN indicates a generic condition.
 pattern StatusCondition_Code_Unknown :: StatusCondition_Code
@@ -2016,21 +2870,20 @@ pattern StatusCondition_Code_CAEXPIRING = StatusCondition_Code "CA_EXPIRING"
   StatusCondition_Code_SETBYOPERATOR,
   StatusCondition_Code_CLOUDKMSKEYERROR,
   StatusCondition_Code_CAEXPIRING,
-  StatusCondition_Code
-  #-}
+  StatusCondition_Code #-}
 
 -- | The resource type of the release version.
-newtype UpgradeAvailableEvent_ResourceType = UpgradeAvailableEvent_ResourceType {fromUpgradeAvailableEvent_ResourceType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UpgradeAvailableEvent_ResourceType = UpgradeAvailableEvent_ResourceType { fromUpgradeAvailableEvent_ResourceType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. This shouldn\'t be used.
 pattern UpgradeAvailableEvent_ResourceType_UPGRADERESOURCETYPEUNSPECIFIED :: UpgradeAvailableEvent_ResourceType
@@ -2048,21 +2901,20 @@ pattern UpgradeAvailableEvent_ResourceType_NODEPOOL = UpgradeAvailableEvent_Reso
   UpgradeAvailableEvent_ResourceType_UPGRADERESOURCETYPEUNSPECIFIED,
   UpgradeAvailableEvent_ResourceType_Master,
   UpgradeAvailableEvent_ResourceType_NODEPOOL,
-  UpgradeAvailableEvent_ResourceType
-  #-}
+  UpgradeAvailableEvent_ResourceType #-}
 
 -- | The resource type that is upgrading.
-newtype UpgradeEvent_ResourceType = UpgradeEvent_ResourceType {fromUpgradeEvent_ResourceType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UpgradeEvent_ResourceType = UpgradeEvent_ResourceType { fromUpgradeEvent_ResourceType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value. This shouldn\'t be used.
 pattern UpgradeEvent_ResourceType_UPGRADERESOURCETYPEUNSPECIFIED :: UpgradeEvent_ResourceType
@@ -2080,21 +2932,92 @@ pattern UpgradeEvent_ResourceType_NODEPOOL = UpgradeEvent_ResourceType "NODE_POO
   UpgradeEvent_ResourceType_UPGRADERESOURCETYPEUNSPECIFIED,
   UpgradeEvent_ResourceType_Master,
   UpgradeEvent_ResourceType_NODEPOOL,
-  UpgradeEvent_ResourceType
-  #-}
+  UpgradeEvent_ResourceType #-}
+
+-- | The resource type associated with the upgrade.
+newtype UpgradeInfoEvent_ResourceType = UpgradeInfoEvent_ResourceType { fromUpgradeInfoEvent_ResourceType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Default value. This shouldn\'t be used.
+pattern UpgradeInfoEvent_ResourceType_UPGRADERESOURCETYPEUNSPECIFIED :: UpgradeInfoEvent_ResourceType
+pattern UpgradeInfoEvent_ResourceType_UPGRADERESOURCETYPEUNSPECIFIED = UpgradeInfoEvent_ResourceType "UPGRADE_RESOURCE_TYPE_UNSPECIFIED"
+
+-- | Master \/ control plane
+pattern UpgradeInfoEvent_ResourceType_Master :: UpgradeInfoEvent_ResourceType
+pattern UpgradeInfoEvent_ResourceType_Master = UpgradeInfoEvent_ResourceType "MASTER"
+
+-- | Node pool
+pattern UpgradeInfoEvent_ResourceType_NODEPOOL :: UpgradeInfoEvent_ResourceType
+pattern UpgradeInfoEvent_ResourceType_NODEPOOL = UpgradeInfoEvent_ResourceType "NODE_POOL"
+
+{-# COMPLETE
+  UpgradeInfoEvent_ResourceType_UPGRADERESOURCETYPEUNSPECIFIED,
+  UpgradeInfoEvent_ResourceType_Master,
+  UpgradeInfoEvent_ResourceType_NODEPOOL,
+  UpgradeInfoEvent_ResourceType #-}
+
+-- | Output only. The state of the upgrade.
+newtype UpgradeInfoEvent_State = UpgradeInfoEvent_State { fromUpgradeInfoEvent_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | STATE_UNSPECIFIED indicates the state is unspecified.
+pattern UpgradeInfoEvent_State_STATEUNSPECIFIED :: UpgradeInfoEvent_State
+pattern UpgradeInfoEvent_State_STATEUNSPECIFIED = UpgradeInfoEvent_State "STATE_UNSPECIFIED"
+
+-- | STARTED indicates the upgrade has started.
+pattern UpgradeInfoEvent_State_Started :: UpgradeInfoEvent_State
+pattern UpgradeInfoEvent_State_Started = UpgradeInfoEvent_State "STARTED"
+
+-- | SUCCEEDED indicates the upgrade has completed successfully.
+pattern UpgradeInfoEvent_State_Succeeded :: UpgradeInfoEvent_State
+pattern UpgradeInfoEvent_State_Succeeded = UpgradeInfoEvent_State "SUCCEEDED"
+
+-- | FAILED indicates the upgrade has failed.
+pattern UpgradeInfoEvent_State_Failed :: UpgradeInfoEvent_State
+pattern UpgradeInfoEvent_State_Failed = UpgradeInfoEvent_State "FAILED"
+
+-- | CANCELED indicates the upgrade has canceled.
+pattern UpgradeInfoEvent_State_Canceled :: UpgradeInfoEvent_State
+pattern UpgradeInfoEvent_State_Canceled = UpgradeInfoEvent_State "CANCELED"
+
+{-# COMPLETE
+  UpgradeInfoEvent_State_STATEUNSPECIFIED,
+  UpgradeInfoEvent_State_Started,
+  UpgradeInfoEvent_State_Succeeded,
+  UpgradeInfoEvent_State_Failed,
+  UpgradeInfoEvent_State_Canceled,
+  UpgradeInfoEvent_State #-}
 
 -- | Update strategy of the node pool.
-newtype UpgradeSettings_Strategy = UpgradeSettings_Strategy {fromUpgradeSettings_Strategy :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UpgradeSettings_Strategy = UpgradeSettings_Strategy { fromUpgradeSettings_Strategy :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Default value if unset. GKE internally defaults the update strategy to SURGE for unspecified strategies.
 pattern UpgradeSettings_Strategy_NODEPOOLUPDATESTRATEGYUNSPECIFIED :: UpgradeSettings_Strategy
@@ -2112,21 +3035,20 @@ pattern UpgradeSettings_Strategy_Surge = UpgradeSettings_Strategy "SURGE"
   UpgradeSettings_Strategy_NODEPOOLUPDATESTRATEGYUNSPECIFIED,
   UpgradeSettings_Strategy_BLUEGREEN,
   UpgradeSettings_Strategy_Surge,
-  UpgradeSettings_Strategy
-  #-}
+  UpgradeSettings_Strategy #-}
 
 -- | This field is to determine the status of the secondary range programmably.
-newtype UsableSubnetworkSecondaryRange_Status = UsableSubnetworkSecondaryRange_Status {fromUsableSubnetworkSecondaryRange_Status :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype UsableSubnetworkSecondaryRange_Status = UsableSubnetworkSecondaryRange_Status { fromUsableSubnetworkSecondaryRange_Status :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | UNKNOWN is the zero value of the Status enum. It\'s not a valid status.
 pattern UsableSubnetworkSecondaryRange_Status_Unknown :: UsableSubnetworkSecondaryRange_Status
@@ -2154,21 +3076,20 @@ pattern UsableSubnetworkSecondaryRange_Status_INUSEMANAGEDPOD = UsableSubnetwork
   UsableSubnetworkSecondaryRange_Status_INUSESERVICE,
   UsableSubnetworkSecondaryRange_Status_INUSESHAREABLEPOD,
   UsableSubnetworkSecondaryRange_Status_INUSEMANAGEDPOD,
-  UsableSubnetworkSecondaryRange_Status
-  #-}
+  UsableSubnetworkSecondaryRange_Status #-}
 
 -- | OSVersion specifies the Windows node config to be used on the node
-newtype WindowsNodeConfig_OsVersion = WindowsNodeConfig_OsVersion {fromWindowsNodeConfig_OsVersion :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype WindowsNodeConfig_OsVersion = WindowsNodeConfig_OsVersion { fromWindowsNodeConfig_OsVersion :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | When OSVersion is not specified
 pattern WindowsNodeConfig_OsVersion_OSVERSIONUNSPECIFIED :: WindowsNodeConfig_OsVersion
@@ -2186,21 +3107,20 @@ pattern WindowsNodeConfig_OsVersion_OS_VERSION_LTSC2022 = WindowsNodeConfig_OsVe
   WindowsNodeConfig_OsVersion_OSVERSIONUNSPECIFIED,
   WindowsNodeConfig_OsVersion_OS_VERSION_LTSC2019,
   WindowsNodeConfig_OsVersion_OS_VERSION_LTSC2022,
-  WindowsNodeConfig_OsVersion
-  #-}
+  WindowsNodeConfig_OsVersion #-}
 
 -- | Mode is the configuration for how to expose metadata to workloads running on the node pool.
-newtype WorkloadMetadataConfig_Mode = WorkloadMetadataConfig_Mode {fromWorkloadMetadataConfig_Mode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype WorkloadMetadataConfig_Mode = WorkloadMetadataConfig_Mode { fromWorkloadMetadataConfig_Mode :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | Not set.
 pattern WorkloadMetadataConfig_Mode_MODEUNSPECIFIED :: WorkloadMetadataConfig_Mode
@@ -2218,5 +3138,4 @@ pattern WorkloadMetadataConfig_Mode_GKEMETADATA = WorkloadMetadataConfig_Mode "G
   WorkloadMetadataConfig_Mode_MODEUNSPECIFIED,
   WorkloadMetadataConfig_Mode_GCEMETADATA,
   WorkloadMetadataConfig_Mode_GKEMETADATA,
-  WorkloadMetadataConfig_Mode
-  #-}
+  WorkloadMetadataConfig_Mode #-}

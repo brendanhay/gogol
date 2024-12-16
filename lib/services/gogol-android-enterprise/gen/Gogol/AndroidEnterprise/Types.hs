@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,513 +26,524 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.AndroidEnterprise.Types
-  ( -- * Configuration
-    androidEnterpriseService,
+    (
+    -- * Configuration
+      androidEnterpriseService
 
     -- * OAuth Scopes
-    Androidenterprise'FullControl,
+    , Androidenterprise'FullControl
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** Administrator
-    Administrator (..),
-    newAdministrator,
+    , Administrator (..)
+    , newAdministrator
 
     -- ** AdministratorWebToken
-    AdministratorWebToken (..),
-    newAdministratorWebToken,
+    , AdministratorWebToken (..)
+    , newAdministratorWebToken
 
     -- ** AdministratorWebTokenSpec
-    AdministratorWebTokenSpec (..),
-    newAdministratorWebTokenSpec,
+    , AdministratorWebTokenSpec (..)
+    , newAdministratorWebTokenSpec
 
     -- ** AdministratorWebTokenSpec_PermissionItem
-    AdministratorWebTokenSpec_PermissionItem (..),
+    , AdministratorWebTokenSpec_PermissionItem (..)
 
     -- ** AdministratorWebTokenSpecManagedConfigurations
-    AdministratorWebTokenSpecManagedConfigurations (..),
-    newAdministratorWebTokenSpecManagedConfigurations,
+    , AdministratorWebTokenSpecManagedConfigurations (..)
+    , newAdministratorWebTokenSpecManagedConfigurations
 
     -- ** AdministratorWebTokenSpecPlaySearch
-    AdministratorWebTokenSpecPlaySearch (..),
-    newAdministratorWebTokenSpecPlaySearch,
+    , AdministratorWebTokenSpecPlaySearch (..)
+    , newAdministratorWebTokenSpecPlaySearch
 
     -- ** AdministratorWebTokenSpecPrivateApps
-    AdministratorWebTokenSpecPrivateApps (..),
-    newAdministratorWebTokenSpecPrivateApps,
+    , AdministratorWebTokenSpecPrivateApps (..)
+    , newAdministratorWebTokenSpecPrivateApps
 
     -- ** AdministratorWebTokenSpecStoreBuilder
-    AdministratorWebTokenSpecStoreBuilder (..),
-    newAdministratorWebTokenSpecStoreBuilder,
+    , AdministratorWebTokenSpecStoreBuilder (..)
+    , newAdministratorWebTokenSpecStoreBuilder
 
     -- ** AdministratorWebTokenSpecWebApps
-    AdministratorWebTokenSpecWebApps (..),
-    newAdministratorWebTokenSpecWebApps,
+    , AdministratorWebTokenSpecWebApps (..)
+    , newAdministratorWebTokenSpecWebApps
 
     -- ** AdministratorWebTokenSpecZeroTouch
-    AdministratorWebTokenSpecZeroTouch (..),
-    newAdministratorWebTokenSpecZeroTouch,
+    , AdministratorWebTokenSpecZeroTouch (..)
+    , newAdministratorWebTokenSpecZeroTouch
 
     -- ** AppRestrictionsSchema
-    AppRestrictionsSchema (..),
-    newAppRestrictionsSchema,
+    , AppRestrictionsSchema (..)
+    , newAppRestrictionsSchema
 
     -- ** AppRestrictionsSchemaChangeEvent
-    AppRestrictionsSchemaChangeEvent (..),
-    newAppRestrictionsSchemaChangeEvent,
+    , AppRestrictionsSchemaChangeEvent (..)
+    , newAppRestrictionsSchemaChangeEvent
 
     -- ** AppRestrictionsSchemaRestriction
-    AppRestrictionsSchemaRestriction (..),
-    newAppRestrictionsSchemaRestriction,
+    , AppRestrictionsSchemaRestriction (..)
+    , newAppRestrictionsSchemaRestriction
 
     -- ** AppRestrictionsSchemaRestriction_RestrictionType
-    AppRestrictionsSchemaRestriction_RestrictionType (..),
+    , AppRestrictionsSchemaRestriction_RestrictionType (..)
 
     -- ** AppRestrictionsSchemaRestrictionRestrictionValue
-    AppRestrictionsSchemaRestrictionRestrictionValue (..),
-    newAppRestrictionsSchemaRestrictionRestrictionValue,
+    , AppRestrictionsSchemaRestrictionRestrictionValue (..)
+    , newAppRestrictionsSchemaRestrictionRestrictionValue
 
     -- ** AppRestrictionsSchemaRestrictionRestrictionValue_Type
-    AppRestrictionsSchemaRestrictionRestrictionValue_Type (..),
+    , AppRestrictionsSchemaRestrictionRestrictionValue_Type (..)
 
     -- ** AppState
-    AppState (..),
-    newAppState,
+    , AppState (..)
+    , newAppState
 
     -- ** AppUpdateEvent
-    AppUpdateEvent (..),
-    newAppUpdateEvent,
+    , AppUpdateEvent (..)
+    , newAppUpdateEvent
 
     -- ** AppVersion
-    AppVersion (..),
-    newAppVersion,
+    , AppVersion (..)
+    , newAppVersion
 
     -- ** AppVersion_Track
-    AppVersion_Track (..),
+    , AppVersion_Track (..)
 
     -- ** ApprovalUrlInfo
-    ApprovalUrlInfo (..),
-    newApprovalUrlInfo,
+    , ApprovalUrlInfo (..)
+    , newApprovalUrlInfo
 
     -- ** AuthenticationToken
-    AuthenticationToken (..),
-    newAuthenticationToken,
+    , AuthenticationToken (..)
+    , newAuthenticationToken
 
     -- ** AutoInstallConstraint
-    AutoInstallConstraint (..),
-    newAutoInstallConstraint,
+    , AutoInstallConstraint (..)
+    , newAutoInstallConstraint
 
     -- ** AutoInstallConstraint_ChargingStateConstraint
-    AutoInstallConstraint_ChargingStateConstraint (..),
+    , AutoInstallConstraint_ChargingStateConstraint (..)
 
     -- ** AutoInstallConstraint_DeviceIdleStateConstraint
-    AutoInstallConstraint_DeviceIdleStateConstraint (..),
+    , AutoInstallConstraint_DeviceIdleStateConstraint (..)
 
     -- ** AutoInstallConstraint_NetworkTypeConstraint
-    AutoInstallConstraint_NetworkTypeConstraint (..),
+    , AutoInstallConstraint_NetworkTypeConstraint (..)
 
     -- ** AutoInstallPolicy
-    AutoInstallPolicy (..),
-    newAutoInstallPolicy,
+    , AutoInstallPolicy (..)
+    , newAutoInstallPolicy
 
     -- ** AutoInstallPolicy_AutoInstallMode
-    AutoInstallPolicy_AutoInstallMode (..),
+    , AutoInstallPolicy_AutoInstallMode (..)
 
     -- ** ConfigurationVariables
-    ConfigurationVariables (..),
-    newConfigurationVariables,
+    , ConfigurationVariables (..)
+    , newConfigurationVariables
 
     -- ** CreateEnrollmentTokenResponse
-    CreateEnrollmentTokenResponse (..),
-    newCreateEnrollmentTokenResponse,
+    , CreateEnrollmentTokenResponse (..)
+    , newCreateEnrollmentTokenResponse
 
     -- ** Device
-    Device (..),
-    newDevice,
+    , Device (..)
+    , newDevice
 
     -- ** Device_ManagementType
-    Device_ManagementType (..),
+    , Device_ManagementType (..)
 
     -- ** DeviceReport
-    DeviceReport (..),
-    newDeviceReport,
+    , DeviceReport (..)
+    , newDeviceReport
 
     -- ** DeviceReportUpdateEvent
-    DeviceReportUpdateEvent (..),
-    newDeviceReportUpdateEvent,
+    , DeviceReportUpdateEvent (..)
+    , newDeviceReportUpdateEvent
 
     -- ** DeviceState
-    DeviceState (..),
-    newDeviceState,
+    , DeviceState (..)
+    , newDeviceState
 
     -- ** DeviceState_AccountState
-    DeviceState_AccountState (..),
+    , DeviceState_AccountState (..)
 
     -- ** DevicesListResponse
-    DevicesListResponse (..),
-    newDevicesListResponse,
+    , DevicesListResponse (..)
+    , newDevicesListResponse
+
+    -- ** EnrollmentToken
+    , EnrollmentToken (..)
+    , newEnrollmentToken
+
+    -- ** EnrollmentToken_EnrollmentTokenType
+    , EnrollmentToken_EnrollmentTokenType (..)
 
     -- ** Enterprise
-    Enterprise (..),
-    newEnterprise,
+    , Enterprise (..)
+    , newEnterprise
 
     -- ** EnterpriseAccount
-    EnterpriseAccount (..),
-    newEnterpriseAccount,
+    , EnterpriseAccount (..)
+    , newEnterpriseAccount
 
     -- ** EnterpriseAuthenticationAppLinkConfig
-    EnterpriseAuthenticationAppLinkConfig (..),
-    newEnterpriseAuthenticationAppLinkConfig,
+    , EnterpriseAuthenticationAppLinkConfig (..)
+    , newEnterpriseAuthenticationAppLinkConfig
 
     -- ** EnterprisesListResponse
-    EnterprisesListResponse (..),
-    newEnterprisesListResponse,
+    , EnterprisesListResponse (..)
+    , newEnterprisesListResponse
 
     -- ** EnterprisesSendTestPushNotificationResponse
-    EnterprisesSendTestPushNotificationResponse (..),
-    newEnterprisesSendTestPushNotificationResponse,
+    , EnterprisesSendTestPushNotificationResponse (..)
+    , newEnterprisesSendTestPushNotificationResponse
 
     -- ** Entitlement
-    Entitlement (..),
-    newEntitlement,
+    , Entitlement (..)
+    , newEntitlement
 
     -- ** Entitlement_Reason
-    Entitlement_Reason (..),
+    , Entitlement_Reason (..)
 
     -- ** EntitlementsListResponse
-    EntitlementsListResponse (..),
-    newEntitlementsListResponse,
+    , EntitlementsListResponse (..)
+    , newEntitlementsListResponse
 
     -- ** GoogleAuthenticationSettings
-    GoogleAuthenticationSettings (..),
-    newGoogleAuthenticationSettings,
+    , GoogleAuthenticationSettings (..)
+    , newGoogleAuthenticationSettings
 
     -- ** GoogleAuthenticationSettings_DedicatedDevicesAllowed
-    GoogleAuthenticationSettings_DedicatedDevicesAllowed (..),
+    , GoogleAuthenticationSettings_DedicatedDevicesAllowed (..)
 
     -- ** GoogleAuthenticationSettings_GoogleAuthenticationRequired
-    GoogleAuthenticationSettings_GoogleAuthenticationRequired (..),
+    , GoogleAuthenticationSettings_GoogleAuthenticationRequired (..)
 
     -- ** GroupLicense
-    GroupLicense (..),
-    newGroupLicense,
+    , GroupLicense (..)
+    , newGroupLicense
 
     -- ** GroupLicense_AcquisitionKind
-    GroupLicense_AcquisitionKind (..),
+    , GroupLicense_AcquisitionKind (..)
 
     -- ** GroupLicense_Approval
-    GroupLicense_Approval (..),
+    , GroupLicense_Approval (..)
 
     -- ** GroupLicense_Permissions
-    GroupLicense_Permissions (..),
+    , GroupLicense_Permissions (..)
 
     -- ** GroupLicenseUsersListResponse
-    GroupLicenseUsersListResponse (..),
-    newGroupLicenseUsersListResponse,
+    , GroupLicenseUsersListResponse (..)
+    , newGroupLicenseUsersListResponse
 
     -- ** GroupLicensesListResponse
-    GroupLicensesListResponse (..),
-    newGroupLicensesListResponse,
+    , GroupLicensesListResponse (..)
+    , newGroupLicensesListResponse
 
     -- ** Install
-    Install (..),
-    newInstall,
+    , Install (..)
+    , newInstall
 
     -- ** Install_InstallState
-    Install_InstallState (..),
+    , Install_InstallState (..)
 
     -- ** InstallFailureEvent
-    InstallFailureEvent (..),
-    newInstallFailureEvent,
+    , InstallFailureEvent (..)
+    , newInstallFailureEvent
 
     -- ** InstallFailureEvent_FailureReason
-    InstallFailureEvent_FailureReason (..),
+    , InstallFailureEvent_FailureReason (..)
 
     -- ** InstallsListResponse
-    InstallsListResponse (..),
-    newInstallsListResponse,
+    , InstallsListResponse (..)
+    , newInstallsListResponse
 
     -- ** KeyedAppState
-    KeyedAppState (..),
-    newKeyedAppState,
+    , KeyedAppState (..)
+    , newKeyedAppState
 
     -- ** KeyedAppState_Severity
-    KeyedAppState_Severity (..),
+    , KeyedAppState_Severity (..)
 
     -- ** LocalizedText
-    LocalizedText (..),
-    newLocalizedText,
+    , LocalizedText (..)
+    , newLocalizedText
 
     -- ** MaintenanceWindow
-    MaintenanceWindow (..),
-    newMaintenanceWindow,
+    , MaintenanceWindow (..)
+    , newMaintenanceWindow
 
     -- ** ManagedConfiguration
-    ManagedConfiguration (..),
-    newManagedConfiguration,
+    , ManagedConfiguration (..)
+    , newManagedConfiguration
 
     -- ** ManagedConfigurationsForDeviceListResponse
-    ManagedConfigurationsForDeviceListResponse (..),
-    newManagedConfigurationsForDeviceListResponse,
+    , ManagedConfigurationsForDeviceListResponse (..)
+    , newManagedConfigurationsForDeviceListResponse
 
     -- ** ManagedConfigurationsForUserListResponse
-    ManagedConfigurationsForUserListResponse (..),
-    newManagedConfigurationsForUserListResponse,
+    , ManagedConfigurationsForUserListResponse (..)
+    , newManagedConfigurationsForUserListResponse
 
     -- ** ManagedConfigurationsSettings
-    ManagedConfigurationsSettings (..),
-    newManagedConfigurationsSettings,
+    , ManagedConfigurationsSettings (..)
+    , newManagedConfigurationsSettings
 
     -- ** ManagedConfigurationsSettingsListResponse
-    ManagedConfigurationsSettingsListResponse (..),
-    newManagedConfigurationsSettingsListResponse,
+    , ManagedConfigurationsSettingsListResponse (..)
+    , newManagedConfigurationsSettingsListResponse
 
     -- ** ManagedProperty
-    ManagedProperty (..),
-    newManagedProperty,
+    , ManagedProperty (..)
+    , newManagedProperty
 
     -- ** ManagedPropertyBundle
-    ManagedPropertyBundle (..),
-    newManagedPropertyBundle,
+    , ManagedPropertyBundle (..)
+    , newManagedPropertyBundle
 
     -- ** NewDeviceEvent
-    NewDeviceEvent (..),
-    newNewDeviceEvent,
+    , NewDeviceEvent (..)
+    , newNewDeviceEvent
 
     -- ** NewDeviceEvent_ManagementType
-    NewDeviceEvent_ManagementType (..),
+    , NewDeviceEvent_ManagementType (..)
 
     -- ** NewPermissionsEvent
-    NewPermissionsEvent (..),
-    newNewPermissionsEvent,
+    , NewPermissionsEvent (..)
+    , newNewPermissionsEvent
 
     -- ** Notification
-    Notification (..),
-    newNotification,
+    , Notification (..)
+    , newNotification
 
     -- ** Notification_NotificationType
-    Notification_NotificationType (..),
+    , Notification_NotificationType (..)
 
     -- ** NotificationSet
-    NotificationSet (..),
-    newNotificationSet,
+    , NotificationSet (..)
+    , newNotificationSet
 
     -- ** PageInfo
-    PageInfo (..),
-    newPageInfo,
+    , PageInfo (..)
+    , newPageInfo
 
     -- ** Permission
-    Permission (..),
-    newPermission,
+    , Permission (..)
+    , newPermission
 
     -- ** Policy
-    Policy (..),
-    newPolicy,
+    , Policy (..)
+    , newPolicy
 
     -- ** Policy_AutoUpdatePolicy
-    Policy_AutoUpdatePolicy (..),
+    , Policy_AutoUpdatePolicy (..)
 
     -- ** Policy_DeviceReportPolicy
-    Policy_DeviceReportPolicy (..),
+    , Policy_DeviceReportPolicy (..)
 
     -- ** Policy_ProductAvailabilityPolicy
-    Policy_ProductAvailabilityPolicy (..),
+    , Policy_ProductAvailabilityPolicy (..)
 
     -- ** Product
-    Product (..),
-    newProduct,
+    , Product (..)
+    , newProduct
 
     -- ** Product_AvailableTracksItem
-    Product_AvailableTracksItem (..),
+    , Product_AvailableTracksItem (..)
 
     -- ** Product_ContentRating
-    Product_ContentRating (..),
+    , Product_ContentRating (..)
 
     -- ** Product_DistributionChannel
-    Product_DistributionChannel (..),
+    , Product_DistributionChannel (..)
 
     -- ** Product_FeaturesItem
-    Product_FeaturesItem (..),
+    , Product_FeaturesItem (..)
 
     -- ** Product_ProductPricing
-    Product_ProductPricing (..),
+    , Product_ProductPricing (..)
 
     -- ** ProductApprovalEvent
-    ProductApprovalEvent (..),
-    newProductApprovalEvent,
+    , ProductApprovalEvent (..)
+    , newProductApprovalEvent
 
     -- ** ProductApprovalEvent_Approved
-    ProductApprovalEvent_Approved (..),
+    , ProductApprovalEvent_Approved (..)
 
     -- ** ProductAvailabilityChangeEvent
-    ProductAvailabilityChangeEvent (..),
-    newProductAvailabilityChangeEvent,
+    , ProductAvailabilityChangeEvent (..)
+    , newProductAvailabilityChangeEvent
 
     -- ** ProductAvailabilityChangeEvent_AvailabilityStatus
-    ProductAvailabilityChangeEvent_AvailabilityStatus (..),
+    , ProductAvailabilityChangeEvent_AvailabilityStatus (..)
 
     -- ** ProductPermission
-    ProductPermission (..),
-    newProductPermission,
+    , ProductPermission (..)
+    , newProductPermission
 
     -- ** ProductPermission_State
-    ProductPermission_State (..),
+    , ProductPermission_State (..)
 
     -- ** ProductPermissions
-    ProductPermissions (..),
-    newProductPermissions,
+    , ProductPermissions (..)
+    , newProductPermissions
 
     -- ** ProductPolicy
-    ProductPolicy (..),
-    newProductPolicy,
+    , ProductPolicy (..)
+    , newProductPolicy
 
     -- ** ProductPolicy_AutoUpdateMode
-    ProductPolicy_AutoUpdateMode (..),
+    , ProductPolicy_AutoUpdateMode (..)
 
     -- ** ProductPolicy_TracksItem
-    ProductPolicy_TracksItem (..),
+    , ProductPolicy_TracksItem (..)
 
     -- ** ProductSet
-    ProductSet (..),
-    newProductSet,
+    , ProductSet (..)
+    , newProductSet
 
     -- ** ProductSet_ProductSetBehavior
-    ProductSet_ProductSetBehavior (..),
+    , ProductSet_ProductSetBehavior (..)
 
     -- ** ProductSigningCertificate
-    ProductSigningCertificate (..),
-    newProductSigningCertificate,
+    , ProductSigningCertificate (..)
+    , newProductSigningCertificate
 
     -- ** ProductVisibility
-    ProductVisibility (..),
-    newProductVisibility,
+    , ProductVisibility (..)
+    , newProductVisibility
 
     -- ** ProductVisibility_TracksItem
-    ProductVisibility_TracksItem (..),
+    , ProductVisibility_TracksItem (..)
 
     -- ** ProductsApproveRequest
-    ProductsApproveRequest (..),
-    newProductsApproveRequest,
+    , ProductsApproveRequest (..)
+    , newProductsApproveRequest
 
     -- ** ProductsApproveRequest_ApprovedPermissions
-    ProductsApproveRequest_ApprovedPermissions (..),
+    , ProductsApproveRequest_ApprovedPermissions (..)
 
     -- ** ProductsGenerateApprovalUrlResponse
-    ProductsGenerateApprovalUrlResponse (..),
-    newProductsGenerateApprovalUrlResponse,
+    , ProductsGenerateApprovalUrlResponse (..)
+    , newProductsGenerateApprovalUrlResponse
 
     -- ** ProductsListResponse
-    ProductsListResponse (..),
-    newProductsListResponse,
+    , ProductsListResponse (..)
+    , newProductsListResponse
 
     -- ** ServiceAccount
-    ServiceAccount (..),
-    newServiceAccount,
+    , ServiceAccount (..)
+    , newServiceAccount
 
     -- ** ServiceAccountKey
-    ServiceAccountKey (..),
-    newServiceAccountKey,
+    , ServiceAccountKey (..)
+    , newServiceAccountKey
 
     -- ** ServiceAccountKey_Type
-    ServiceAccountKey_Type (..),
+    , ServiceAccountKey_Type (..)
 
     -- ** ServiceAccountKeysListResponse
-    ServiceAccountKeysListResponse (..),
-    newServiceAccountKeysListResponse,
+    , ServiceAccountKeysListResponse (..)
+    , newServiceAccountKeysListResponse
 
     -- ** SignupInfo
-    SignupInfo (..),
-    newSignupInfo,
+    , SignupInfo (..)
+    , newSignupInfo
 
     -- ** StoreCluster
-    StoreCluster (..),
-    newStoreCluster,
+    , StoreCluster (..)
+    , newStoreCluster
 
     -- ** StoreLayout
-    StoreLayout (..),
-    newStoreLayout,
+    , StoreLayout (..)
+    , newStoreLayout
 
     -- ** StoreLayout_StoreLayoutType
-    StoreLayout_StoreLayoutType (..),
+    , StoreLayout_StoreLayoutType (..)
 
     -- ** StoreLayoutClustersListResponse
-    StoreLayoutClustersListResponse (..),
-    newStoreLayoutClustersListResponse,
+    , StoreLayoutClustersListResponse (..)
+    , newStoreLayoutClustersListResponse
 
     -- ** StoreLayoutPagesListResponse
-    StoreLayoutPagesListResponse (..),
-    newStoreLayoutPagesListResponse,
+    , StoreLayoutPagesListResponse (..)
+    , newStoreLayoutPagesListResponse
 
     -- ** StorePage
-    StorePage (..),
-    newStorePage,
+    , StorePage (..)
+    , newStorePage
 
     -- ** TokenPagination
-    TokenPagination (..),
-    newTokenPagination,
+    , TokenPagination (..)
+    , newTokenPagination
 
     -- ** TrackInfo
-    TrackInfo (..),
-    newTrackInfo,
+    , TrackInfo (..)
+    , newTrackInfo
 
     -- ** User
-    User (..),
-    newUser,
+    , User (..)
+    , newUser
 
     -- ** User_AccountType
-    User_AccountType (..),
+    , User_AccountType (..)
 
     -- ** User_ManagementType
-    User_ManagementType (..),
+    , User_ManagementType (..)
 
     -- ** UsersListResponse
-    UsersListResponse (..),
-    newUsersListResponse,
+    , UsersListResponse (..)
+    , newUsersListResponse
 
     -- ** VariableSet
-    VariableSet (..),
-    newVariableSet,
+    , VariableSet (..)
+    , newVariableSet
 
     -- ** WebApp
-    WebApp (..),
-    newWebApp,
+    , WebApp (..)
+    , newWebApp
 
     -- ** WebApp_DisplayMode
-    WebApp_DisplayMode (..),
+    , WebApp_DisplayMode (..)
 
     -- ** WebAppIcon
-    WebAppIcon (..),
-    newWebAppIcon,
+    , WebAppIcon (..)
+    , newWebAppIcon
 
     -- ** WebAppsListResponse
-    WebAppsListResponse (..),
-    newWebAppsListResponse,
+    , WebAppsListResponse (..)
+    , newWebAppsListResponse
 
     -- ** EnterprisesCreateEnrollmentTokenDeviceType
-    EnterprisesCreateEnrollmentTokenDeviceType (..),
+    , EnterprisesCreateEnrollmentTokenDeviceType (..)
+
+    -- ** EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType
+    , EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType (..)
 
     -- ** EnterprisesGetServiceAccountKeyType
-    EnterprisesGetServiceAccountKeyType (..),
+    , EnterprisesGetServiceAccountKeyType (..)
 
     -- ** EnterprisesPullNotificationSetRequestMode
-    EnterprisesPullNotificationSetRequestMode (..),
-  )
-where
+    , EnterprisesPullNotificationSetRequestMode (..)
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.AndroidEnterprise.Internal.Product
 import Gogol.AndroidEnterprise.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Google Play EMM API. This contains the host and root path used as a starting point for constructing service requests.
 androidEnterpriseService :: Core.ServiceConfig
-androidEnterpriseService =
-  Core.defaultService
-    (Core.ServiceId "androidenterprise:v1")
-    "androidenterprise.googleapis.com"
+androidEnterpriseService
+  = Core.defaultService
+      (Core.ServiceId "androidenterprise:v1")
+      "androidenterprise.googleapis.com"
 
 -- | Manage corporate Android devices
 type Androidenterprise'FullControl = "https://www.googleapis.com/auth/androidenterprise"

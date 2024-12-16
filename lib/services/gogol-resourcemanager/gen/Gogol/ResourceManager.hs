@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,591 +31,609 @@
 --
 -- /See:/ <https://cloud.google.com/resource-manager Cloud Resource Manager API Reference>
 module Gogol.ResourceManager
-  ( -- * Configuration
-    resourceManagerService,
+    (
+    -- * Configuration
+      resourceManagerService
 
     -- * OAuth Scopes
-    CloudPlatform'FullControl,
-    CloudPlatform'ReadOnly,
+    , CloudPlatform'FullControl
+    , CloudPlatform'ReadOnly
 
     -- * Resources
 
     -- ** cloudresourcemanager.effectiveTags.list
-    CloudresourcemanagerEffectiveTagsListResource,
-    CloudresourcemanagerEffectiveTagsList (..),
-    newCloudresourcemanagerEffectiveTagsList,
+    , CloudresourcemanagerEffectiveTagsListResource
+    , CloudresourcemanagerEffectiveTagsList (..)
+    , newCloudresourcemanagerEffectiveTagsList
 
     -- ** cloudresourcemanager.folders.create
-    CloudresourcemanagerFoldersCreateResource,
-    CloudresourcemanagerFoldersCreate (..),
-    newCloudresourcemanagerFoldersCreate,
+    , CloudresourcemanagerFoldersCreateResource
+    , CloudresourcemanagerFoldersCreate (..)
+    , newCloudresourcemanagerFoldersCreate
 
     -- ** cloudresourcemanager.folders.delete
-    CloudresourcemanagerFoldersDeleteResource,
-    CloudresourcemanagerFoldersDelete (..),
-    newCloudresourcemanagerFoldersDelete,
+    , CloudresourcemanagerFoldersDeleteResource
+    , CloudresourcemanagerFoldersDelete (..)
+    , newCloudresourcemanagerFoldersDelete
 
     -- ** cloudresourcemanager.folders.get
-    CloudresourcemanagerFoldersGetResource,
-    CloudresourcemanagerFoldersGet (..),
-    newCloudresourcemanagerFoldersGet,
+    , CloudresourcemanagerFoldersGetResource
+    , CloudresourcemanagerFoldersGet (..)
+    , newCloudresourcemanagerFoldersGet
 
     -- ** cloudresourcemanager.folders.getIamPolicy
-    CloudresourcemanagerFoldersGetIamPolicyResource,
-    CloudresourcemanagerFoldersGetIamPolicy (..),
-    newCloudresourcemanagerFoldersGetIamPolicy,
+    , CloudresourcemanagerFoldersGetIamPolicyResource
+    , CloudresourcemanagerFoldersGetIamPolicy (..)
+    , newCloudresourcemanagerFoldersGetIamPolicy
 
     -- ** cloudresourcemanager.folders.list
-    CloudresourcemanagerFoldersListResource,
-    CloudresourcemanagerFoldersList (..),
-    newCloudresourcemanagerFoldersList,
+    , CloudresourcemanagerFoldersListResource
+    , CloudresourcemanagerFoldersList (..)
+    , newCloudresourcemanagerFoldersList
 
     -- ** cloudresourcemanager.folders.move
-    CloudresourcemanagerFoldersMoveResource,
-    CloudresourcemanagerFoldersMove (..),
-    newCloudresourcemanagerFoldersMove,
+    , CloudresourcemanagerFoldersMoveResource
+    , CloudresourcemanagerFoldersMove (..)
+    , newCloudresourcemanagerFoldersMove
 
     -- ** cloudresourcemanager.folders.patch
-    CloudresourcemanagerFoldersPatchResource,
-    CloudresourcemanagerFoldersPatch (..),
-    newCloudresourcemanagerFoldersPatch,
+    , CloudresourcemanagerFoldersPatchResource
+    , CloudresourcemanagerFoldersPatch (..)
+    , newCloudresourcemanagerFoldersPatch
 
     -- ** cloudresourcemanager.folders.search
-    CloudresourcemanagerFoldersSearchResource,
-    CloudresourcemanagerFoldersSearch (..),
-    newCloudresourcemanagerFoldersSearch,
+    , CloudresourcemanagerFoldersSearchResource
+    , CloudresourcemanagerFoldersSearch (..)
+    , newCloudresourcemanagerFoldersSearch
 
     -- ** cloudresourcemanager.folders.setIamPolicy
-    CloudresourcemanagerFoldersSetIamPolicyResource,
-    CloudresourcemanagerFoldersSetIamPolicy (..),
-    newCloudresourcemanagerFoldersSetIamPolicy,
+    , CloudresourcemanagerFoldersSetIamPolicyResource
+    , CloudresourcemanagerFoldersSetIamPolicy (..)
+    , newCloudresourcemanagerFoldersSetIamPolicy
 
     -- ** cloudresourcemanager.folders.testIamPermissions
-    CloudresourcemanagerFoldersTestIamPermissionsResource,
-    CloudresourcemanagerFoldersTestIamPermissions (..),
-    newCloudresourcemanagerFoldersTestIamPermissions,
+    , CloudresourcemanagerFoldersTestIamPermissionsResource
+    , CloudresourcemanagerFoldersTestIamPermissions (..)
+    , newCloudresourcemanagerFoldersTestIamPermissions
 
     -- ** cloudresourcemanager.folders.undelete
-    CloudresourcemanagerFoldersUndeleteResource,
-    CloudresourcemanagerFoldersUndelete (..),
-    newCloudresourcemanagerFoldersUndelete,
+    , CloudresourcemanagerFoldersUndeleteResource
+    , CloudresourcemanagerFoldersUndelete (..)
+    , newCloudresourcemanagerFoldersUndelete
 
     -- ** cloudresourcemanager.liens.create
-    CloudresourcemanagerLiensCreateResource,
-    CloudresourcemanagerLiensCreate (..),
-    newCloudresourcemanagerLiensCreate,
+    , CloudresourcemanagerLiensCreateResource
+    , CloudresourcemanagerLiensCreate (..)
+    , newCloudresourcemanagerLiensCreate
 
     -- ** cloudresourcemanager.liens.delete
-    CloudresourcemanagerLiensDeleteResource,
-    CloudresourcemanagerLiensDelete (..),
-    newCloudresourcemanagerLiensDelete,
+    , CloudresourcemanagerLiensDeleteResource
+    , CloudresourcemanagerLiensDelete (..)
+    , newCloudresourcemanagerLiensDelete
 
     -- ** cloudresourcemanager.liens.get
-    CloudresourcemanagerLiensGetResource,
-    CloudresourcemanagerLiensGet (..),
-    newCloudresourcemanagerLiensGet,
+    , CloudresourcemanagerLiensGetResource
+    , CloudresourcemanagerLiensGet (..)
+    , newCloudresourcemanagerLiensGet
 
     -- ** cloudresourcemanager.liens.list
-    CloudresourcemanagerLiensListResource,
-    CloudresourcemanagerLiensList (..),
-    newCloudresourcemanagerLiensList,
+    , CloudresourcemanagerLiensListResource
+    , CloudresourcemanagerLiensList (..)
+    , newCloudresourcemanagerLiensList
 
     -- ** cloudresourcemanager.operations.get
-    CloudresourcemanagerOperationsGetResource,
-    CloudresourcemanagerOperationsGet (..),
-    newCloudresourcemanagerOperationsGet,
+    , CloudresourcemanagerOperationsGetResource
+    , CloudresourcemanagerOperationsGet (..)
+    , newCloudresourcemanagerOperationsGet
 
     -- ** cloudresourcemanager.organizations.get
-    CloudresourcemanagerOrganizationsGetResource,
-    CloudresourcemanagerOrganizationsGet (..),
-    newCloudresourcemanagerOrganizationsGet,
+    , CloudresourcemanagerOrganizationsGetResource
+    , CloudresourcemanagerOrganizationsGet (..)
+    , newCloudresourcemanagerOrganizationsGet
 
     -- ** cloudresourcemanager.organizations.getIamPolicy
-    CloudresourcemanagerOrganizationsGetIamPolicyResource,
-    CloudresourcemanagerOrganizationsGetIamPolicy (..),
-    newCloudresourcemanagerOrganizationsGetIamPolicy,
+    , CloudresourcemanagerOrganizationsGetIamPolicyResource
+    , CloudresourcemanagerOrganizationsGetIamPolicy (..)
+    , newCloudresourcemanagerOrganizationsGetIamPolicy
 
     -- ** cloudresourcemanager.organizations.search
-    CloudresourcemanagerOrganizationsSearchResource,
-    CloudresourcemanagerOrganizationsSearch (..),
-    newCloudresourcemanagerOrganizationsSearch,
+    , CloudresourcemanagerOrganizationsSearchResource
+    , CloudresourcemanagerOrganizationsSearch (..)
+    , newCloudresourcemanagerOrganizationsSearch
 
     -- ** cloudresourcemanager.organizations.setIamPolicy
-    CloudresourcemanagerOrganizationsSetIamPolicyResource,
-    CloudresourcemanagerOrganizationsSetIamPolicy (..),
-    newCloudresourcemanagerOrganizationsSetIamPolicy,
+    , CloudresourcemanagerOrganizationsSetIamPolicyResource
+    , CloudresourcemanagerOrganizationsSetIamPolicy (..)
+    , newCloudresourcemanagerOrganizationsSetIamPolicy
 
     -- ** cloudresourcemanager.organizations.testIamPermissions
-    CloudresourcemanagerOrganizationsTestIamPermissionsResource,
-    CloudresourcemanagerOrganizationsTestIamPermissions (..),
-    newCloudresourcemanagerOrganizationsTestIamPermissions,
+    , CloudresourcemanagerOrganizationsTestIamPermissionsResource
+    , CloudresourcemanagerOrganizationsTestIamPermissions (..)
+    , newCloudresourcemanagerOrganizationsTestIamPermissions
 
     -- ** cloudresourcemanager.projects.create
-    CloudresourcemanagerProjectsCreateResource,
-    CloudresourcemanagerProjectsCreate (..),
-    newCloudresourcemanagerProjectsCreate,
+    , CloudresourcemanagerProjectsCreateResource
+    , CloudresourcemanagerProjectsCreate (..)
+    , newCloudresourcemanagerProjectsCreate
 
     -- ** cloudresourcemanager.projects.delete
-    CloudresourcemanagerProjectsDeleteResource,
-    CloudresourcemanagerProjectsDelete (..),
-    newCloudresourcemanagerProjectsDelete,
+    , CloudresourcemanagerProjectsDeleteResource
+    , CloudresourcemanagerProjectsDelete (..)
+    , newCloudresourcemanagerProjectsDelete
 
     -- ** cloudresourcemanager.projects.get
-    CloudresourcemanagerProjectsGetResource,
-    CloudresourcemanagerProjectsGet (..),
-    newCloudresourcemanagerProjectsGet,
+    , CloudresourcemanagerProjectsGetResource
+    , CloudresourcemanagerProjectsGet (..)
+    , newCloudresourcemanagerProjectsGet
 
     -- ** cloudresourcemanager.projects.getIamPolicy
-    CloudresourcemanagerProjectsGetIamPolicyResource,
-    CloudresourcemanagerProjectsGetIamPolicy (..),
-    newCloudresourcemanagerProjectsGetIamPolicy,
+    , CloudresourcemanagerProjectsGetIamPolicyResource
+    , CloudresourcemanagerProjectsGetIamPolicy (..)
+    , newCloudresourcemanagerProjectsGetIamPolicy
 
     -- ** cloudresourcemanager.projects.list
-    CloudresourcemanagerProjectsListResource,
-    CloudresourcemanagerProjectsList (..),
-    newCloudresourcemanagerProjectsList,
+    , CloudresourcemanagerProjectsListResource
+    , CloudresourcemanagerProjectsList (..)
+    , newCloudresourcemanagerProjectsList
 
     -- ** cloudresourcemanager.projects.move
-    CloudresourcemanagerProjectsMoveResource,
-    CloudresourcemanagerProjectsMove (..),
-    newCloudresourcemanagerProjectsMove,
+    , CloudresourcemanagerProjectsMoveResource
+    , CloudresourcemanagerProjectsMove (..)
+    , newCloudresourcemanagerProjectsMove
 
     -- ** cloudresourcemanager.projects.patch
-    CloudresourcemanagerProjectsPatchResource,
-    CloudresourcemanagerProjectsPatch (..),
-    newCloudresourcemanagerProjectsPatch,
+    , CloudresourcemanagerProjectsPatchResource
+    , CloudresourcemanagerProjectsPatch (..)
+    , newCloudresourcemanagerProjectsPatch
 
     -- ** cloudresourcemanager.projects.search
-    CloudresourcemanagerProjectsSearchResource,
-    CloudresourcemanagerProjectsSearch (..),
-    newCloudresourcemanagerProjectsSearch,
+    , CloudresourcemanagerProjectsSearchResource
+    , CloudresourcemanagerProjectsSearch (..)
+    , newCloudresourcemanagerProjectsSearch
 
     -- ** cloudresourcemanager.projects.setIamPolicy
-    CloudresourcemanagerProjectsSetIamPolicyResource,
-    CloudresourcemanagerProjectsSetIamPolicy (..),
-    newCloudresourcemanagerProjectsSetIamPolicy,
+    , CloudresourcemanagerProjectsSetIamPolicyResource
+    , CloudresourcemanagerProjectsSetIamPolicy (..)
+    , newCloudresourcemanagerProjectsSetIamPolicy
 
     -- ** cloudresourcemanager.projects.testIamPermissions
-    CloudresourcemanagerProjectsTestIamPermissionsResource,
-    CloudresourcemanagerProjectsTestIamPermissions (..),
-    newCloudresourcemanagerProjectsTestIamPermissions,
+    , CloudresourcemanagerProjectsTestIamPermissionsResource
+    , CloudresourcemanagerProjectsTestIamPermissions (..)
+    , newCloudresourcemanagerProjectsTestIamPermissions
 
     -- ** cloudresourcemanager.projects.undelete
-    CloudresourcemanagerProjectsUndeleteResource,
-    CloudresourcemanagerProjectsUndelete (..),
-    newCloudresourcemanagerProjectsUndelete,
+    , CloudresourcemanagerProjectsUndeleteResource
+    , CloudresourcemanagerProjectsUndelete (..)
+    , newCloudresourcemanagerProjectsUndelete
 
     -- ** cloudresourcemanager.tagBindings.create
-    CloudresourcemanagerTagBindingsCreateResource,
-    CloudresourcemanagerTagBindingsCreate (..),
-    newCloudresourcemanagerTagBindingsCreate,
+    , CloudresourcemanagerTagBindingsCreateResource
+    , CloudresourcemanagerTagBindingsCreate (..)
+    , newCloudresourcemanagerTagBindingsCreate
 
     -- ** cloudresourcemanager.tagBindings.delete
-    CloudresourcemanagerTagBindingsDeleteResource,
-    CloudresourcemanagerTagBindingsDelete (..),
-    newCloudresourcemanagerTagBindingsDelete,
+    , CloudresourcemanagerTagBindingsDeleteResource
+    , CloudresourcemanagerTagBindingsDelete (..)
+    , newCloudresourcemanagerTagBindingsDelete
 
     -- ** cloudresourcemanager.tagBindings.list
-    CloudresourcemanagerTagBindingsListResource,
-    CloudresourcemanagerTagBindingsList (..),
-    newCloudresourcemanagerTagBindingsList,
+    , CloudresourcemanagerTagBindingsListResource
+    , CloudresourcemanagerTagBindingsList (..)
+    , newCloudresourcemanagerTagBindingsList
 
     -- ** cloudresourcemanager.tagKeys.create
-    CloudresourcemanagerTagKeysCreateResource,
-    CloudresourcemanagerTagKeysCreate (..),
-    newCloudresourcemanagerTagKeysCreate,
+    , CloudresourcemanagerTagKeysCreateResource
+    , CloudresourcemanagerTagKeysCreate (..)
+    , newCloudresourcemanagerTagKeysCreate
 
     -- ** cloudresourcemanager.tagKeys.delete
-    CloudresourcemanagerTagKeysDeleteResource,
-    CloudresourcemanagerTagKeysDelete (..),
-    newCloudresourcemanagerTagKeysDelete,
+    , CloudresourcemanagerTagKeysDeleteResource
+    , CloudresourcemanagerTagKeysDelete (..)
+    , newCloudresourcemanagerTagKeysDelete
 
     -- ** cloudresourcemanager.tagKeys.get
-    CloudresourcemanagerTagKeysGetResource,
-    CloudresourcemanagerTagKeysGet (..),
-    newCloudresourcemanagerTagKeysGet,
+    , CloudresourcemanagerTagKeysGetResource
+    , CloudresourcemanagerTagKeysGet (..)
+    , newCloudresourcemanagerTagKeysGet
 
     -- ** cloudresourcemanager.tagKeys.getIamPolicy
-    CloudresourcemanagerTagKeysGetIamPolicyResource,
-    CloudresourcemanagerTagKeysGetIamPolicy (..),
-    newCloudresourcemanagerTagKeysGetIamPolicy,
+    , CloudresourcemanagerTagKeysGetIamPolicyResource
+    , CloudresourcemanagerTagKeysGetIamPolicy (..)
+    , newCloudresourcemanagerTagKeysGetIamPolicy
+
+    -- ** cloudresourcemanager.tagKeys.getNamespaced
+    , CloudresourcemanagerTagKeysGetNamespacedResource
+    , CloudresourcemanagerTagKeysGetNamespaced (..)
+    , newCloudresourcemanagerTagKeysGetNamespaced
 
     -- ** cloudresourcemanager.tagKeys.list
-    CloudresourcemanagerTagKeysListResource,
-    CloudresourcemanagerTagKeysList (..),
-    newCloudresourcemanagerTagKeysList,
+    , CloudresourcemanagerTagKeysListResource
+    , CloudresourcemanagerTagKeysList (..)
+    , newCloudresourcemanagerTagKeysList
 
     -- ** cloudresourcemanager.tagKeys.patch
-    CloudresourcemanagerTagKeysPatchResource,
-    CloudresourcemanagerTagKeysPatch (..),
-    newCloudresourcemanagerTagKeysPatch,
+    , CloudresourcemanagerTagKeysPatchResource
+    , CloudresourcemanagerTagKeysPatch (..)
+    , newCloudresourcemanagerTagKeysPatch
 
     -- ** cloudresourcemanager.tagKeys.setIamPolicy
-    CloudresourcemanagerTagKeysSetIamPolicyResource,
-    CloudresourcemanagerTagKeysSetIamPolicy (..),
-    newCloudresourcemanagerTagKeysSetIamPolicy,
+    , CloudresourcemanagerTagKeysSetIamPolicyResource
+    , CloudresourcemanagerTagKeysSetIamPolicy (..)
+    , newCloudresourcemanagerTagKeysSetIamPolicy
 
     -- ** cloudresourcemanager.tagKeys.testIamPermissions
-    CloudresourcemanagerTagKeysTestIamPermissionsResource,
-    CloudresourcemanagerTagKeysTestIamPermissions (..),
-    newCloudresourcemanagerTagKeysTestIamPermissions,
+    , CloudresourcemanagerTagKeysTestIamPermissionsResource
+    , CloudresourcemanagerTagKeysTestIamPermissions (..)
+    , newCloudresourcemanagerTagKeysTestIamPermissions
 
     -- ** cloudresourcemanager.tagValues.create
-    CloudresourcemanagerTagValuesCreateResource,
-    CloudresourcemanagerTagValuesCreate (..),
-    newCloudresourcemanagerTagValuesCreate,
+    , CloudresourcemanagerTagValuesCreateResource
+    , CloudresourcemanagerTagValuesCreate (..)
+    , newCloudresourcemanagerTagValuesCreate
 
     -- ** cloudresourcemanager.tagValues.delete
-    CloudresourcemanagerTagValuesDeleteResource,
-    CloudresourcemanagerTagValuesDelete (..),
-    newCloudresourcemanagerTagValuesDelete,
+    , CloudresourcemanagerTagValuesDeleteResource
+    , CloudresourcemanagerTagValuesDelete (..)
+    , newCloudresourcemanagerTagValuesDelete
 
     -- ** cloudresourcemanager.tagValues.get
-    CloudresourcemanagerTagValuesGetResource,
-    CloudresourcemanagerTagValuesGet (..),
-    newCloudresourcemanagerTagValuesGet,
+    , CloudresourcemanagerTagValuesGetResource
+    , CloudresourcemanagerTagValuesGet (..)
+    , newCloudresourcemanagerTagValuesGet
 
     -- ** cloudresourcemanager.tagValues.getIamPolicy
-    CloudresourcemanagerTagValuesGetIamPolicyResource,
-    CloudresourcemanagerTagValuesGetIamPolicy (..),
-    newCloudresourcemanagerTagValuesGetIamPolicy,
+    , CloudresourcemanagerTagValuesGetIamPolicyResource
+    , CloudresourcemanagerTagValuesGetIamPolicy (..)
+    , newCloudresourcemanagerTagValuesGetIamPolicy
+
+    -- ** cloudresourcemanager.tagValues.getNamespaced
+    , CloudresourcemanagerTagValuesGetNamespacedResource
+    , CloudresourcemanagerTagValuesGetNamespaced (..)
+    , newCloudresourcemanagerTagValuesGetNamespaced
 
     -- ** cloudresourcemanager.tagValues.list
-    CloudresourcemanagerTagValuesListResource,
-    CloudresourcemanagerTagValuesList (..),
-    newCloudresourcemanagerTagValuesList,
+    , CloudresourcemanagerTagValuesListResource
+    , CloudresourcemanagerTagValuesList (..)
+    , newCloudresourcemanagerTagValuesList
 
     -- ** cloudresourcemanager.tagValues.patch
-    CloudresourcemanagerTagValuesPatchResource,
-    CloudresourcemanagerTagValuesPatch (..),
-    newCloudresourcemanagerTagValuesPatch,
+    , CloudresourcemanagerTagValuesPatchResource
+    , CloudresourcemanagerTagValuesPatch (..)
+    , newCloudresourcemanagerTagValuesPatch
 
     -- ** cloudresourcemanager.tagValues.setIamPolicy
-    CloudresourcemanagerTagValuesSetIamPolicyResource,
-    CloudresourcemanagerTagValuesSetIamPolicy (..),
-    newCloudresourcemanagerTagValuesSetIamPolicy,
+    , CloudresourcemanagerTagValuesSetIamPolicyResource
+    , CloudresourcemanagerTagValuesSetIamPolicy (..)
+    , newCloudresourcemanagerTagValuesSetIamPolicy
 
     -- ** cloudresourcemanager.tagValues.tagHolds.create
-    CloudresourcemanagerTagValuesTagHoldsCreateResource,
-    CloudresourcemanagerTagValuesTagHoldsCreate (..),
-    newCloudresourcemanagerTagValuesTagHoldsCreate,
+    , CloudresourcemanagerTagValuesTagHoldsCreateResource
+    , CloudresourcemanagerTagValuesTagHoldsCreate (..)
+    , newCloudresourcemanagerTagValuesTagHoldsCreate
 
     -- ** cloudresourcemanager.tagValues.tagHolds.delete
-    CloudresourcemanagerTagValuesTagHoldsDeleteResource,
-    CloudresourcemanagerTagValuesTagHoldsDelete (..),
-    newCloudresourcemanagerTagValuesTagHoldsDelete,
+    , CloudresourcemanagerTagValuesTagHoldsDeleteResource
+    , CloudresourcemanagerTagValuesTagHoldsDelete (..)
+    , newCloudresourcemanagerTagValuesTagHoldsDelete
 
     -- ** cloudresourcemanager.tagValues.tagHolds.list
-    CloudresourcemanagerTagValuesTagHoldsListResource,
-    CloudresourcemanagerTagValuesTagHoldsList (..),
-    newCloudresourcemanagerTagValuesTagHoldsList,
+    , CloudresourcemanagerTagValuesTagHoldsListResource
+    , CloudresourcemanagerTagValuesTagHoldsList (..)
+    , newCloudresourcemanagerTagValuesTagHoldsList
 
     -- ** cloudresourcemanager.tagValues.testIamPermissions
-    CloudresourcemanagerTagValuesTestIamPermissionsResource,
-    CloudresourcemanagerTagValuesTestIamPermissions (..),
-    newCloudresourcemanagerTagValuesTestIamPermissions,
+    , CloudresourcemanagerTagValuesTestIamPermissionsResource
+    , CloudresourcemanagerTagValuesTestIamPermissions (..)
+    , newCloudresourcemanagerTagValuesTestIamPermissions
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AuditConfig
-    AuditConfig (..),
-    newAuditConfig,
+    , AuditConfig (..)
+    , newAuditConfig
 
     -- ** AuditLogConfig
-    AuditLogConfig (..),
-    newAuditLogConfig,
+    , AuditLogConfig (..)
+    , newAuditLogConfig
 
     -- ** AuditLogConfig_LogType
-    AuditLogConfig_LogType (..),
+    , AuditLogConfig_LogType (..)
 
     -- ** Binding
-    Binding (..),
-    newBinding,
+    , Binding (..)
+    , newBinding
 
     -- ** CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation
-    CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation (..),
-    newCloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation,
+    , CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation (..)
+    , newCloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation
 
     -- ** CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType
-    CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType (..),
+    , CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation_OperationType (..)
 
     -- ** CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation
-    CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation (..),
-    newCloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation,
+    , CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation (..)
+    , newCloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation
 
     -- ** CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType
-    CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType (..),
+    , CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation_OperationType (..)
 
     -- ** CreateFolderMetadata
-    CreateFolderMetadata (..),
-    newCreateFolderMetadata,
+    , CreateFolderMetadata (..)
+    , newCreateFolderMetadata
 
     -- ** CreateProjectMetadata
-    CreateProjectMetadata (..),
-    newCreateProjectMetadata,
+    , CreateProjectMetadata (..)
+    , newCreateProjectMetadata
 
     -- ** CreateTagBindingMetadata
-    CreateTagBindingMetadata (..),
-    newCreateTagBindingMetadata,
+    , CreateTagBindingMetadata (..)
+    , newCreateTagBindingMetadata
 
     -- ** CreateTagKeyMetadata
-    CreateTagKeyMetadata (..),
-    newCreateTagKeyMetadata,
+    , CreateTagKeyMetadata (..)
+    , newCreateTagKeyMetadata
 
     -- ** CreateTagValueMetadata
-    CreateTagValueMetadata (..),
-    newCreateTagValueMetadata,
+    , CreateTagValueMetadata (..)
+    , newCreateTagValueMetadata
 
     -- ** DeleteFolderMetadata
-    DeleteFolderMetadata (..),
-    newDeleteFolderMetadata,
+    , DeleteFolderMetadata (..)
+    , newDeleteFolderMetadata
 
     -- ** DeleteOrganizationMetadata
-    DeleteOrganizationMetadata (..),
-    newDeleteOrganizationMetadata,
+    , DeleteOrganizationMetadata (..)
+    , newDeleteOrganizationMetadata
 
     -- ** DeleteProjectMetadata
-    DeleteProjectMetadata (..),
-    newDeleteProjectMetadata,
+    , DeleteProjectMetadata (..)
+    , newDeleteProjectMetadata
 
     -- ** DeleteTagBindingMetadata
-    DeleteTagBindingMetadata (..),
-    newDeleteTagBindingMetadata,
+    , DeleteTagBindingMetadata (..)
+    , newDeleteTagBindingMetadata
 
     -- ** DeleteTagKeyMetadata
-    DeleteTagKeyMetadata (..),
-    newDeleteTagKeyMetadata,
+    , DeleteTagKeyMetadata (..)
+    , newDeleteTagKeyMetadata
 
     -- ** DeleteTagValueMetadata
-    DeleteTagValueMetadata (..),
-    newDeleteTagValueMetadata,
+    , DeleteTagValueMetadata (..)
+    , newDeleteTagValueMetadata
 
     -- ** EffectiveTag
-    EffectiveTag (..),
-    newEffectiveTag,
+    , EffectiveTag (..)
+    , newEffectiveTag
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** Expr
-    Expr (..),
-    newExpr,
+    , Expr (..)
+    , newExpr
 
     -- ** Folder
-    Folder (..),
-    newFolder,
+    , Folder (..)
+    , newFolder
 
     -- ** Folder_State
-    Folder_State (..),
+    , Folder_State (..)
+
+    -- ** Folder_Tags
+    , Folder_Tags (..)
+    , newFolder_Tags
 
     -- ** FolderOperation
-    FolderOperation (..),
-    newFolderOperation,
+    , FolderOperation (..)
+    , newFolderOperation
 
     -- ** FolderOperation_OperationType
-    FolderOperation_OperationType (..),
+    , FolderOperation_OperationType (..)
 
     -- ** FolderOperationError
-    FolderOperationError (..),
-    newFolderOperationError,
+    , FolderOperationError (..)
+    , newFolderOperationError
 
     -- ** FolderOperationError_ErrorMessageId
-    FolderOperationError_ErrorMessageId (..),
+    , FolderOperationError_ErrorMessageId (..)
 
     -- ** GetIamPolicyRequest
-    GetIamPolicyRequest (..),
-    newGetIamPolicyRequest,
+    , GetIamPolicyRequest (..)
+    , newGetIamPolicyRequest
 
     -- ** GetPolicyOptions
-    GetPolicyOptions (..),
-    newGetPolicyOptions,
+    , GetPolicyOptions (..)
+    , newGetPolicyOptions
 
     -- ** Lien
-    Lien (..),
-    newLien,
+    , Lien (..)
+    , newLien
 
     -- ** ListEffectiveTagsResponse
-    ListEffectiveTagsResponse (..),
-    newListEffectiveTagsResponse,
+    , ListEffectiveTagsResponse (..)
+    , newListEffectiveTagsResponse
 
     -- ** ListFoldersResponse
-    ListFoldersResponse (..),
-    newListFoldersResponse,
+    , ListFoldersResponse (..)
+    , newListFoldersResponse
 
     -- ** ListLiensResponse
-    ListLiensResponse (..),
-    newListLiensResponse,
+    , ListLiensResponse (..)
+    , newListLiensResponse
 
     -- ** ListProjectsResponse
-    ListProjectsResponse (..),
-    newListProjectsResponse,
+    , ListProjectsResponse (..)
+    , newListProjectsResponse
 
     -- ** ListTagBindingsResponse
-    ListTagBindingsResponse (..),
-    newListTagBindingsResponse,
+    , ListTagBindingsResponse (..)
+    , newListTagBindingsResponse
 
     -- ** ListTagHoldsResponse
-    ListTagHoldsResponse (..),
-    newListTagHoldsResponse,
+    , ListTagHoldsResponse (..)
+    , newListTagHoldsResponse
 
     -- ** ListTagKeysResponse
-    ListTagKeysResponse (..),
-    newListTagKeysResponse,
+    , ListTagKeysResponse (..)
+    , newListTagKeysResponse
 
     -- ** ListTagValuesResponse
-    ListTagValuesResponse (..),
-    newListTagValuesResponse,
+    , ListTagValuesResponse (..)
+    , newListTagValuesResponse
 
     -- ** MoveFolderMetadata
-    MoveFolderMetadata (..),
-    newMoveFolderMetadata,
+    , MoveFolderMetadata (..)
+    , newMoveFolderMetadata
 
     -- ** MoveFolderRequest
-    MoveFolderRequest (..),
-    newMoveFolderRequest,
+    , MoveFolderRequest (..)
+    , newMoveFolderRequest
 
     -- ** MoveProjectMetadata
-    MoveProjectMetadata (..),
-    newMoveProjectMetadata,
+    , MoveProjectMetadata (..)
+    , newMoveProjectMetadata
 
     -- ** MoveProjectRequest
-    MoveProjectRequest (..),
-    newMoveProjectRequest,
+    , MoveProjectRequest (..)
+    , newMoveProjectRequest
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** Organization
-    Organization (..),
-    newOrganization,
+    , Organization (..)
+    , newOrganization
 
     -- ** Organization_State
-    Organization_State (..),
+    , Organization_State (..)
 
     -- ** Policy
-    Policy (..),
-    newPolicy,
+    , Policy (..)
+    , newPolicy
 
     -- ** Project
-    Project (..),
-    newProject,
+    , Project (..)
+    , newProject
 
     -- ** Project_Labels
-    Project_Labels (..),
-    newProject_Labels,
+    , Project_Labels (..)
+    , newProject_Labels
 
     -- ** Project_State
-    Project_State (..),
+    , Project_State (..)
+
+    -- ** Project_Tags
+    , Project_Tags (..)
+    , newProject_Tags
 
     -- ** ProjectCreationStatus
-    ProjectCreationStatus (..),
-    newProjectCreationStatus,
+    , ProjectCreationStatus (..)
+    , newProjectCreationStatus
 
     -- ** SearchFoldersResponse
-    SearchFoldersResponse (..),
-    newSearchFoldersResponse,
+    , SearchFoldersResponse (..)
+    , newSearchFoldersResponse
 
     -- ** SearchOrganizationsResponse
-    SearchOrganizationsResponse (..),
-    newSearchOrganizationsResponse,
+    , SearchOrganizationsResponse (..)
+    , newSearchOrganizationsResponse
 
     -- ** SearchProjectsResponse
-    SearchProjectsResponse (..),
-    newSearchProjectsResponse,
+    , SearchProjectsResponse (..)
+    , newSearchProjectsResponse
 
     -- ** SetIamPolicyRequest
-    SetIamPolicyRequest (..),
-    newSetIamPolicyRequest,
+    , SetIamPolicyRequest (..)
+    , newSetIamPolicyRequest
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** TagBinding
-    TagBinding (..),
-    newTagBinding,
+    , TagBinding (..)
+    , newTagBinding
 
     -- ** TagHold
-    TagHold (..),
-    newTagHold,
+    , TagHold (..)
+    , newTagHold
 
     -- ** TagKey
-    TagKey (..),
-    newTagKey,
+    , TagKey (..)
+    , newTagKey
 
     -- ** TagKey_Purpose
-    TagKey_Purpose (..),
+    , TagKey_Purpose (..)
 
     -- ** TagKey_PurposeData
-    TagKey_PurposeData (..),
-    newTagKey_PurposeData,
+    , TagKey_PurposeData (..)
+    , newTagKey_PurposeData
 
     -- ** TagValue
-    TagValue (..),
-    newTagValue,
+    , TagValue (..)
+    , newTagValue
 
     -- ** TestIamPermissionsRequest
-    TestIamPermissionsRequest (..),
-    newTestIamPermissionsRequest,
+    , TestIamPermissionsRequest (..)
+    , newTestIamPermissionsRequest
 
     -- ** TestIamPermissionsResponse
-    TestIamPermissionsResponse (..),
-    newTestIamPermissionsResponse,
+    , TestIamPermissionsResponse (..)
+    , newTestIamPermissionsResponse
 
     -- ** UndeleteFolderMetadata
-    UndeleteFolderMetadata (..),
-    newUndeleteFolderMetadata,
+    , UndeleteFolderMetadata (..)
+    , newUndeleteFolderMetadata
 
     -- ** UndeleteFolderRequest
-    UndeleteFolderRequest (..),
-    newUndeleteFolderRequest,
+    , UndeleteFolderRequest (..)
+    , newUndeleteFolderRequest
 
     -- ** UndeleteOrganizationMetadata
-    UndeleteOrganizationMetadata (..),
-    newUndeleteOrganizationMetadata,
+    , UndeleteOrganizationMetadata (..)
+    , newUndeleteOrganizationMetadata
 
     -- ** UndeleteProjectMetadata
-    UndeleteProjectMetadata (..),
-    newUndeleteProjectMetadata,
+    , UndeleteProjectMetadata (..)
+    , newUndeleteProjectMetadata
 
     -- ** UndeleteProjectRequest
-    UndeleteProjectRequest (..),
-    newUndeleteProjectRequest,
+    , UndeleteProjectRequest (..)
+    , newUndeleteProjectRequest
 
     -- ** UpdateFolderMetadata
-    UpdateFolderMetadata (..),
-    newUpdateFolderMetadata,
+    , UpdateFolderMetadata (..)
+    , newUpdateFolderMetadata
 
     -- ** UpdateProjectMetadata
-    UpdateProjectMetadata (..),
-    newUpdateProjectMetadata,
+    , UpdateProjectMetadata (..)
+    , newUpdateProjectMetadata
 
     -- ** UpdateTagKeyMetadata
-    UpdateTagKeyMetadata (..),
-    newUpdateTagKeyMetadata,
+    , UpdateTagKeyMetadata (..)
+    , newUpdateTagKeyMetadata
 
     -- ** UpdateTagValueMetadata
-    UpdateTagValueMetadata (..),
-    newUpdateTagValueMetadata,
-  )
-where
+    , UpdateTagValueMetadata (..)
+    , newUpdateTagValueMetadata
+    ) where
 
 import Gogol.ResourceManager.Cloudresourcemanager.EffectiveTags.List
 import Gogol.ResourceManager.Cloudresourcemanager.Folders.Create
@@ -656,6 +675,7 @@ import Gogol.ResourceManager.Cloudresourcemanager.TagKeys.Create
 import Gogol.ResourceManager.Cloudresourcemanager.TagKeys.Delete
 import Gogol.ResourceManager.Cloudresourcemanager.TagKeys.Get
 import Gogol.ResourceManager.Cloudresourcemanager.TagKeys.GetIamPolicy
+import Gogol.ResourceManager.Cloudresourcemanager.TagKeys.GetNamespaced
 import Gogol.ResourceManager.Cloudresourcemanager.TagKeys.List
 import Gogol.ResourceManager.Cloudresourcemanager.TagKeys.Patch
 import Gogol.ResourceManager.Cloudresourcemanager.TagKeys.SetIamPolicy
@@ -664,6 +684,7 @@ import Gogol.ResourceManager.Cloudresourcemanager.TagValues.Create
 import Gogol.ResourceManager.Cloudresourcemanager.TagValues.Delete
 import Gogol.ResourceManager.Cloudresourcemanager.TagValues.Get
 import Gogol.ResourceManager.Cloudresourcemanager.TagValues.GetIamPolicy
+import Gogol.ResourceManager.Cloudresourcemanager.TagValues.GetNamespaced
 import Gogol.ResourceManager.Cloudresourcemanager.TagValues.List
 import Gogol.ResourceManager.Cloudresourcemanager.TagValues.Patch
 import Gogol.ResourceManager.Cloudresourcemanager.TagValues.SetIamPolicy

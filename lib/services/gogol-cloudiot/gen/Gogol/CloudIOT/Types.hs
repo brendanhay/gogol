@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,209 +26,209 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.CloudIOT.Types
-  ( -- * Configuration
-    cloudIOTService,
+    (
+    -- * Configuration
+      cloudIOTService
 
     -- * OAuth Scopes
-    CloudPlatform'FullControl,
-    Cloudiot'FullControl,
+    , CloudPlatform'FullControl
+    , Cloudiot'FullControl
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** BindDeviceToGatewayRequest
-    BindDeviceToGatewayRequest (..),
-    newBindDeviceToGatewayRequest,
+    , BindDeviceToGatewayRequest (..)
+    , newBindDeviceToGatewayRequest
 
     -- ** BindDeviceToGatewayResponse
-    BindDeviceToGatewayResponse (..),
-    newBindDeviceToGatewayResponse,
+    , BindDeviceToGatewayResponse (..)
+    , newBindDeviceToGatewayResponse
 
     -- ** Binding
-    Binding (..),
-    newBinding,
+    , Binding (..)
+    , newBinding
 
     -- ** Device
-    Device (..),
-    newDevice,
+    , Device (..)
+    , newDevice
 
     -- ** Device_LogLevel
-    Device_LogLevel (..),
+    , Device_LogLevel (..)
 
     -- ** Device_Metadata
-    Device_Metadata (..),
-    newDevice_Metadata,
+    , Device_Metadata (..)
+    , newDevice_Metadata
 
     -- ** DeviceConfig
-    DeviceConfig (..),
-    newDeviceConfig,
+    , DeviceConfig (..)
+    , newDeviceConfig
 
     -- ** DeviceCredential
-    DeviceCredential (..),
-    newDeviceCredential,
+    , DeviceCredential (..)
+    , newDeviceCredential
 
     -- ** DeviceRegistry
-    DeviceRegistry (..),
-    newDeviceRegistry,
+    , DeviceRegistry (..)
+    , newDeviceRegistry
 
     -- ** DeviceRegistry_LogLevel
-    DeviceRegistry_LogLevel (..),
+    , DeviceRegistry_LogLevel (..)
 
     -- ** DeviceState
-    DeviceState (..),
-    newDeviceState,
+    , DeviceState (..)
+    , newDeviceState
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
     -- ** EventNotificationConfig
-    EventNotificationConfig (..),
-    newEventNotificationConfig,
+    , EventNotificationConfig (..)
+    , newEventNotificationConfig
 
     -- ** Expr
-    Expr (..),
-    newExpr,
+    , Expr (..)
+    , newExpr
 
     -- ** GatewayConfig
-    GatewayConfig (..),
-    newGatewayConfig,
+    , GatewayConfig (..)
+    , newGatewayConfig
 
     -- ** GatewayConfig_GatewayAuthMethod
-    GatewayConfig_GatewayAuthMethod (..),
+    , GatewayConfig_GatewayAuthMethod (..)
 
     -- ** GatewayConfig_GatewayType
-    GatewayConfig_GatewayType (..),
+    , GatewayConfig_GatewayType (..)
 
     -- ** GetIamPolicyRequest
-    GetIamPolicyRequest (..),
-    newGetIamPolicyRequest,
+    , GetIamPolicyRequest (..)
+    , newGetIamPolicyRequest
 
     -- ** GetPolicyOptions
-    GetPolicyOptions (..),
-    newGetPolicyOptions,
+    , GetPolicyOptions (..)
+    , newGetPolicyOptions
 
     -- ** HttpConfig
-    HttpConfig (..),
-    newHttpConfig,
+    , HttpConfig (..)
+    , newHttpConfig
 
     -- ** HttpConfig_HttpEnabledState
-    HttpConfig_HttpEnabledState (..),
+    , HttpConfig_HttpEnabledState (..)
 
     -- ** ListDeviceConfigVersionsResponse
-    ListDeviceConfigVersionsResponse (..),
-    newListDeviceConfigVersionsResponse,
+    , ListDeviceConfigVersionsResponse (..)
+    , newListDeviceConfigVersionsResponse
 
     -- ** ListDeviceRegistriesResponse
-    ListDeviceRegistriesResponse (..),
-    newListDeviceRegistriesResponse,
+    , ListDeviceRegistriesResponse (..)
+    , newListDeviceRegistriesResponse
 
     -- ** ListDeviceStatesResponse
-    ListDeviceStatesResponse (..),
-    newListDeviceStatesResponse,
+    , ListDeviceStatesResponse (..)
+    , newListDeviceStatesResponse
 
     -- ** ListDevicesResponse
-    ListDevicesResponse (..),
-    newListDevicesResponse,
+    , ListDevicesResponse (..)
+    , newListDevicesResponse
 
     -- ** ModifyCloudToDeviceConfigRequest
-    ModifyCloudToDeviceConfigRequest (..),
-    newModifyCloudToDeviceConfigRequest,
+    , ModifyCloudToDeviceConfigRequest (..)
+    , newModifyCloudToDeviceConfigRequest
 
     -- ** MqttConfig
-    MqttConfig (..),
-    newMqttConfig,
+    , MqttConfig (..)
+    , newMqttConfig
 
     -- ** MqttConfig_MqttEnabledState
-    MqttConfig_MqttEnabledState (..),
+    , MqttConfig_MqttEnabledState (..)
 
     -- ** Policy
-    Policy (..),
-    newPolicy,
+    , Policy (..)
+    , newPolicy
 
     -- ** PublicKeyCertificate
-    PublicKeyCertificate (..),
-    newPublicKeyCertificate,
+    , PublicKeyCertificate (..)
+    , newPublicKeyCertificate
 
     -- ** PublicKeyCertificate_Format
-    PublicKeyCertificate_Format (..),
+    , PublicKeyCertificate_Format (..)
 
     -- ** PublicKeyCredential
-    PublicKeyCredential (..),
-    newPublicKeyCredential,
+    , PublicKeyCredential (..)
+    , newPublicKeyCredential
 
     -- ** PublicKeyCredential_Format
-    PublicKeyCredential_Format (..),
+    , PublicKeyCredential_Format (..)
 
     -- ** RegistryCredential
-    RegistryCredential (..),
-    newRegistryCredential,
+    , RegistryCredential (..)
+    , newRegistryCredential
 
     -- ** SendCommandToDeviceRequest
-    SendCommandToDeviceRequest (..),
-    newSendCommandToDeviceRequest,
+    , SendCommandToDeviceRequest (..)
+    , newSendCommandToDeviceRequest
 
     -- ** SendCommandToDeviceResponse
-    SendCommandToDeviceResponse (..),
-    newSendCommandToDeviceResponse,
+    , SendCommandToDeviceResponse (..)
+    , newSendCommandToDeviceResponse
 
     -- ** SetIamPolicyRequest
-    SetIamPolicyRequest (..),
-    newSetIamPolicyRequest,
+    , SetIamPolicyRequest (..)
+    , newSetIamPolicyRequest
 
     -- ** StateNotificationConfig
-    StateNotificationConfig (..),
-    newStateNotificationConfig,
+    , StateNotificationConfig (..)
+    , newStateNotificationConfig
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
     -- ** TestIamPermissionsRequest
-    TestIamPermissionsRequest (..),
-    newTestIamPermissionsRequest,
+    , TestIamPermissionsRequest (..)
+    , newTestIamPermissionsRequest
 
     -- ** TestIamPermissionsResponse
-    TestIamPermissionsResponse (..),
-    newTestIamPermissionsResponse,
+    , TestIamPermissionsResponse (..)
+    , newTestIamPermissionsResponse
 
     -- ** UnbindDeviceFromGatewayRequest
-    UnbindDeviceFromGatewayRequest (..),
-    newUnbindDeviceFromGatewayRequest,
+    , UnbindDeviceFromGatewayRequest (..)
+    , newUnbindDeviceFromGatewayRequest
 
     -- ** UnbindDeviceFromGatewayResponse
-    UnbindDeviceFromGatewayResponse (..),
-    newUnbindDeviceFromGatewayResponse,
+    , UnbindDeviceFromGatewayResponse (..)
+    , newUnbindDeviceFromGatewayResponse
 
     -- ** X509CertificateDetails
-    X509CertificateDetails (..),
-    newX509CertificateDetails,
+    , X509CertificateDetails (..)
+    , newX509CertificateDetails
 
     -- ** ProjectsLocationsRegistriesDevicesListGatewayListOptionsGatewayType
-    ProjectsLocationsRegistriesDevicesListGatewayListOptionsGatewayType (..),
+    , ProjectsLocationsRegistriesDevicesListGatewayListOptionsGatewayType (..)
 
     -- ** ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType
-    ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType (..),
-  )
-where
+    , ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType (..)
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.CloudIOT.Internal.Product
 import Gogol.CloudIOT.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Cloud IoT API. This contains the host and root path used as a starting point for constructing service requests.
 cloudIOTService :: Core.ServiceConfig
-cloudIOTService =
-  Core.defaultService
-    (Core.ServiceId "cloudiot:v1")
-    "cloudiot.googleapis.com"
+cloudIOTService
+  = Core.defaultService (Core.ServiceId "cloudiot:v1")
+      "cloudiot.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"

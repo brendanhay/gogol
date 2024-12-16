@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,14 +31,14 @@
 --
 -- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.orders.returnrefundlineitem@.
 module Gogol.ShoppingContent.Content.Orders.Returnrefundlineitem
-  ( -- * Resource
-    ContentOrdersReturnrefundlineitemResource,
+    (
+    -- * Resource
+      ContentOrdersReturnrefundlineitemResource
 
     -- ** Constructing a Request
-    ContentOrdersReturnrefundlineitem (..),
-    newContentOrdersReturnrefundlineitem,
-  )
-where
+    , ContentOrdersReturnrefundlineitem (..)
+    , newContentOrdersReturnrefundlineitem
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.ShoppingContent.Types
@@ -45,95 +46,86 @@ import Gogol.ShoppingContent.Types
 -- | A resource alias for @content.orders.returnrefundlineitem@ method which the
 -- 'ContentOrdersReturnrefundlineitem' request conforms to.
 type ContentOrdersReturnrefundlineitemResource =
-  "content"
-    Core.:> "v2.1"
-    Core.:> Core.Capture "merchantId" Core.Word64
-    Core.:> "orders"
-    Core.:> Core.Capture "orderId" Core.Text
-    Core.:> "returnRefundLineItem"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              OrdersReturnRefundLineItemRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              OrdersReturnRefundLineItemResponse
+     "content" Core.:>
+       "v2.1" Core.:>
+         Core.Capture "merchantId" Core.Word64 Core.:>
+           "orders" Core.:>
+             Core.Capture "orderId" Core.Text Core.:>
+               "returnRefundLineItem" Core.:>
+                 Core.QueryParam "$.xgafv" Xgafv Core.:>
+                   Core.QueryParam "access_token" Core.Text Core.:>
+                     Core.QueryParam "callback" Core.Text Core.:>
+                       Core.QueryParam "uploadType" Core.Text Core.:>
+                         Core.QueryParam "upload_protocol" Core.Text Core.:>
+                           Core.QueryParam "alt" Core.AltJSON Core.:>
+                             Core.ReqBody '[Core.JSON]
+                               OrdersReturnRefundLineItemRequest
+                               Core.:>
+                               Core.Post '[Core.JSON]
+                                 OrdersReturnRefundLineItemResponse
 
 -- | Returns and refunds a line item. Note that this method can only be called on fully shipped orders. The Orderreturns API is the preferred way to handle returns after you receive a return from a customer. You can use Orderreturns.list or Orderreturns.get to search for the return, and then use Orderreturns.processreturn to issue the refund. If the return cannot be found, then we recommend using this API to issue a refund.
 --
 -- /See:/ 'newContentOrdersReturnrefundlineitem' smart constructor.
 data ContentOrdersReturnrefundlineitem = ContentOrdersReturnrefundlineitem
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | The ID of the account that manages the order. This cannot be a multi-client account.
-    merchantId :: Core.Word64,
-    -- | The ID of the order.
-    orderId :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: OrdersReturnRefundLineItemRequest,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | The ID of the account that manages the order. This cannot be a multi-client account.
+    , merchantId :: Core.Word64
+      -- | The ID of the order.
+    , orderId :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: OrdersReturnRefundLineItemRequest
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ContentOrdersReturnrefundlineitem' with the minimum fields required to make a request.
-newContentOrdersReturnrefundlineitem ::
-  -- |  The ID of the account that manages the order. This cannot be a multi-client account. See 'merchantId'.
-  Core.Word64 ->
-  -- |  The ID of the order. See 'orderId'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  OrdersReturnRefundLineItemRequest ->
-  ContentOrdersReturnrefundlineitem
+newContentOrdersReturnrefundlineitem 
+    ::  Core.Word64
+       -- ^  The ID of the account that manages the order. This cannot be a multi-client account. See 'merchantId'.
+    -> Core.Text
+       -- ^  The ID of the order. See 'orderId'.
+    -> OrdersReturnRefundLineItemRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> ContentOrdersReturnrefundlineitem
 newContentOrdersReturnrefundlineitem merchantId orderId payload =
   ContentOrdersReturnrefundlineitem
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      merchantId = merchantId,
-      orderId = orderId,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , merchantId = merchantId
+    , orderId = orderId
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ContentOrdersReturnrefundlineitem
-  where
-  type
-    Rs ContentOrdersReturnrefundlineitem =
-      OrdersReturnRefundLineItemResponse
-  type
-    Scopes ContentOrdersReturnrefundlineitem =
-      '[Content'FullControl]
-  requestClient ContentOrdersReturnrefundlineitem {..} =
-    go
-      merchantId
-      orderId
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      payload
-      shoppingContentService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ContentOrdersReturnrefundlineitemResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           ContentOrdersReturnrefundlineitem
+         where
+        type Rs ContentOrdersReturnrefundlineitem =
+             OrdersReturnRefundLineItemResponse
+        type Scopes ContentOrdersReturnrefundlineitem =
+             '[Content'FullControl]
+        requestClient ContentOrdersReturnrefundlineitem{..}
+          = go merchantId orderId xgafv accessToken callback
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              shoppingContentService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy ContentOrdersReturnrefundlineitemResource)
+                      Core.mempty
+

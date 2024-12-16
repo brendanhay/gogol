@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,70 +31,65 @@
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.filters.insert@.
 module Gogol.Analytics.Management.Filters.Insert
-  ( -- * Resource
-    AnalyticsManagementFiltersInsertResource,
+    (
+    -- * Resource
+      AnalyticsManagementFiltersInsertResource
 
     -- ** Constructing a Request
-    AnalyticsManagementFiltersInsert (..),
-    newAnalyticsManagementFiltersInsert,
-  )
-where
+    , AnalyticsManagementFiltersInsert (..)
+    , newAnalyticsManagementFiltersInsert
+    ) where
 
-import Gogol.Analytics.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Analytics.Types
 
 -- | A resource alias for @analytics.management.filters.insert@ method which the
 -- 'AnalyticsManagementFiltersInsert' request conforms to.
 type AnalyticsManagementFiltersInsertResource =
-  "analytics"
-    Core.:> "v3"
-    Core.:> "management"
-    Core.:> "accounts"
-    Core.:> Core.Capture "accountId" Core.Text
-    Core.:> "filters"
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] Filter
-    Core.:> Core.Post '[Core.JSON] Filter
+     "analytics" Core.:>
+       "v3" Core.:>
+         "management" Core.:>
+           "accounts" Core.:>
+             Core.Capture "accountId" Core.Text Core.:>
+               "filters" Core.:>
+                 Core.QueryParam "alt" Core.AltJSON Core.:>
+                   Core.ReqBody '[Core.JSON] Filter Core.:>
+                     Core.Post '[Core.JSON] Filter
 
 -- | Create a new filter.
 --
 -- /See:/ 'newAnalyticsManagementFiltersInsert' smart constructor.
 data AnalyticsManagementFiltersInsert = AnalyticsManagementFiltersInsert
-  { -- | Account ID to create filter for.
-    accountId :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: Filter
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | Account ID to create filter for.
+      accountId :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: Filter
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AnalyticsManagementFiltersInsert' with the minimum fields required to make a request.
-newAnalyticsManagementFiltersInsert ::
-  -- |  Account ID to create filter for. See 'accountId'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  Filter ->
-  AnalyticsManagementFiltersInsert
+newAnalyticsManagementFiltersInsert 
+    ::  Core.Text
+       -- ^  Account ID to create filter for. See 'accountId'.
+    -> Filter
+       -- ^  Multipart request metadata. See 'payload'.
+    -> AnalyticsManagementFiltersInsert
 newAnalyticsManagementFiltersInsert accountId payload =
   AnalyticsManagementFiltersInsert {accountId = accountId, payload = payload}
 
-instance
-  Core.GoogleRequest
-    AnalyticsManagementFiltersInsert
-  where
-  type Rs AnalyticsManagementFiltersInsert = Filter
-  type
-    Scopes AnalyticsManagementFiltersInsert =
-      '[Analytics'Edit]
-  requestClient AnalyticsManagementFiltersInsert {..} =
-    go
-      accountId
-      (Core.Just Core.AltJSON)
-      payload
-      analyticsService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AnalyticsManagementFiltersInsertResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           AnalyticsManagementFiltersInsert
+         where
+        type Rs AnalyticsManagementFiltersInsert = Filter
+        type Scopes AnalyticsManagementFiltersInsert =
+             '[Analytics'Edit]
+        requestClient AnalyticsManagementFiltersInsert{..}
+          = go accountId (Core.Just Core.AltJSON) payload
+              analyticsService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy AnalyticsManagementFiltersInsertResource)
+                      Core.mempty
+

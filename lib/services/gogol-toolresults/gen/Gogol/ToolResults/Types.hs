@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,139 +26,140 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.ToolResults.Types
-  ( -- * Configuration
-    toolResultsService,
+    (
+    -- * Configuration
+      toolResultsService
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** ANR
-    ANR (..),
-    newANR,
+    , ANR (..)
+    , newANR
 
     -- ** AvailableDeepLinks
-    AvailableDeepLinks (..),
-    newAvailableDeepLinks,
+    , AvailableDeepLinks (..)
+    , newAvailableDeepLinks
 
     -- ** BlankScreen
-    BlankScreen (..),
-    newBlankScreen,
+    , BlankScreen (..)
+    , newBlankScreen
 
     -- ** CrashDialogError
-    CrashDialogError (..),
-    newCrashDialogError,
+    , CrashDialogError (..)
+    , newCrashDialogError
 
     -- ** EncounteredLoginScreen
-    EncounteredLoginScreen (..),
-    newEncounteredLoginScreen,
+    , EncounteredLoginScreen (..)
+    , newEncounteredLoginScreen
 
     -- ** EncounteredNonAndroidUiWidgetScreen
-    EncounteredNonAndroidUiWidgetScreen (..),
-    newEncounteredNonAndroidUiWidgetScreen,
+    , EncounteredNonAndroidUiWidgetScreen (..)
+    , newEncounteredNonAndroidUiWidgetScreen
 
     -- ** FailedToInstall
-    FailedToInstall (..),
-    newFailedToInstall,
+    , FailedToInstall (..)
+    , newFailedToInstall
 
     -- ** FatalException
-    FatalException (..),
-    newFatalException,
+    , FatalException (..)
+    , newFatalException
 
     -- ** InAppPurchasesFound
-    InAppPurchasesFound (..),
-    newInAppPurchasesFound,
+    , InAppPurchasesFound (..)
+    , newInAppPurchasesFound
 
     -- ** InsufficientCoverage
-    InsufficientCoverage (..),
-    newInsufficientCoverage,
+    , InsufficientCoverage (..)
+    , newInsufficientCoverage
 
     -- ** IosAppCrashed
-    IosAppCrashed (..),
-    newIosAppCrashed,
+    , IosAppCrashed (..)
+    , newIosAppCrashed
 
     -- ** LauncherActivityNotFound
-    LauncherActivityNotFound (..),
-    newLauncherActivityNotFound,
+    , LauncherActivityNotFound (..)
+    , newLauncherActivityNotFound
 
     -- ** NativeCrash
-    NativeCrash (..),
-    newNativeCrash,
+    , NativeCrash (..)
+    , newNativeCrash
 
     -- ** NonSdkApi
-    NonSdkApi (..),
-    newNonSdkApi,
+    , NonSdkApi (..)
+    , newNonSdkApi
 
     -- ** NonSdkApi_List
-    NonSdkApi_List (..),
+    , NonSdkApi_List (..)
 
     -- ** NonSdkApiInsight
-    NonSdkApiInsight (..),
-    newNonSdkApiInsight,
+    , NonSdkApiInsight (..)
+    , newNonSdkApiInsight
 
     -- ** NonSdkApiUsageViolation
-    NonSdkApiUsageViolation (..),
-    newNonSdkApiUsageViolation,
+    , NonSdkApiUsageViolation (..)
+    , newNonSdkApiUsageViolation
 
     -- ** NonSdkApiUsageViolationReport
-    NonSdkApiUsageViolationReport (..),
-    newNonSdkApiUsageViolationReport,
+    , NonSdkApiUsageViolationReport (..)
+    , newNonSdkApiUsageViolationReport
 
     -- ** OverlappingUIElements
-    OverlappingUIElements (..),
-    newOverlappingUIElements,
+    , OverlappingUIElements (..)
+    , newOverlappingUIElements
 
     -- ** PendingGoogleUpdateInsight
-    PendingGoogleUpdateInsight (..),
-    newPendingGoogleUpdateInsight,
+    , PendingGoogleUpdateInsight (..)
+    , newPendingGoogleUpdateInsight
 
     -- ** PerformedGoogleLogin
-    PerformedGoogleLogin (..),
-    newPerformedGoogleLogin,
+    , PerformedGoogleLogin (..)
+    , newPerformedGoogleLogin
 
     -- ** PerformedMonkeyActions
-    PerformedMonkeyActions (..),
-    newPerformedMonkeyActions,
+    , PerformedMonkeyActions (..)
+    , newPerformedMonkeyActions
 
     -- ** RoboScriptExecution
-    RoboScriptExecution (..),
-    newRoboScriptExecution,
+    , RoboScriptExecution (..)
+    , newRoboScriptExecution
 
     -- ** StackTrace
-    StackTrace (..),
-    newStackTrace,
+    , StackTrace (..)
+    , newStackTrace
 
     -- ** StartActivityNotFound
-    StartActivityNotFound (..),
-    newStartActivityNotFound,
+    , StartActivityNotFound (..)
+    , newStartActivityNotFound
 
     -- ** UIElementTooDeep
-    UIElementTooDeep (..),
-    newUIElementTooDeep,
+    , UIElementTooDeep (..)
+    , newUIElementTooDeep
 
     -- ** UnspecifiedWarning
-    UnspecifiedWarning (..),
-    newUnspecifiedWarning,
+    , UnspecifiedWarning (..)
+    , newUnspecifiedWarning
 
     -- ** UnusedRoboDirective
-    UnusedRoboDirective (..),
-    newUnusedRoboDirective,
+    , UnusedRoboDirective (..)
+    , newUnusedRoboDirective
 
     -- ** UpgradeInsight
-    UpgradeInsight (..),
-    newUpgradeInsight,
+    , UpgradeInsight (..)
+    , newUpgradeInsight
 
     -- ** UsedRoboDirective
-    UsedRoboDirective (..),
-    newUsedRoboDirective,
+    , UsedRoboDirective (..)
+    , newUsedRoboDirective
 
     -- ** UsedRoboIgnoreDirective
-    UsedRoboIgnoreDirective (..),
-    newUsedRoboIgnoreDirective,
-  )
-where
+    , UsedRoboIgnoreDirective (..)
+    , newUsedRoboIgnoreDirective
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.ToolResults.Internal.Product
@@ -165,7 +167,7 @@ import Gogol.ToolResults.Internal.Sum
 
 -- | Default request referring to version @v1@ of the Cloud Tool Results API. This contains the host and root path used as a starting point for constructing service requests.
 toolResultsService :: Core.ServiceConfig
-toolResultsService =
-  Core.defaultService
-    (Core.ServiceId "toolresults:v1")
-    "www.googleapis.com"
+toolResultsService
+  = Core.defaultService
+      (Core.ServiceId "toolresults:v1")
+      "www.googleapis.com"

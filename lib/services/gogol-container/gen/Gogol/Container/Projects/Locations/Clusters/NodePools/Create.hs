@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -28,103 +29,96 @@
 --
 -- Creates a node pool for a cluster.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.nodePools.create@.
+-- /See:/ <https://cloud.google.com/kubernetes-engine/docs/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.nodePools.create@.
 module Gogol.Container.Projects.Locations.Clusters.NodePools.Create
-  ( -- * Resource
-    ContainerProjectsLocationsClustersNodePoolsCreateResource,
+    (
+    -- * Resource
+      ContainerProjectsLocationsClustersNodePoolsCreateResource
 
     -- ** Constructing a Request
-    ContainerProjectsLocationsClustersNodePoolsCreate (..),
-    newContainerProjectsLocationsClustersNodePoolsCreate,
-  )
-where
+    , ContainerProjectsLocationsClustersNodePoolsCreate (..)
+    , newContainerProjectsLocationsClustersNodePoolsCreate
+    ) where
 
-import Gogol.Container.Types
 import qualified Gogol.Prelude as Core
+import Gogol.Container.Types
 
 -- | A resource alias for @container.projects.locations.clusters.nodePools.create@ method which the
 -- 'ContainerProjectsLocationsClustersNodePoolsCreate' request conforms to.
-type ContainerProjectsLocationsClustersNodePoolsCreateResource =
-  "v1"
-    Core.:> Core.Capture "parent" Core.Text
-    Core.:> "nodePools"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] CreateNodePoolRequest
-    Core.:> Core.Post '[Core.JSON] Operation
+type ContainerProjectsLocationsClustersNodePoolsCreateResource
+     =
+     "v1" Core.:>
+       Core.Capture "parent" Core.Text Core.:>
+         "nodePools" Core.:>
+           Core.QueryParam "$.xgafv" Xgafv Core.:>
+             Core.QueryParam "access_token" Core.Text Core.:>
+               Core.QueryParam "callback" Core.Text Core.:>
+                 Core.QueryParam "uploadType" Core.Text Core.:>
+                   Core.QueryParam "upload_protocol" Core.Text Core.:>
+                     Core.QueryParam "alt" Core.AltJSON Core.:>
+                       Core.ReqBody '[Core.JSON] CreateNodePoolRequest
+                         Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Creates a node pool for a cluster.
 --
 -- /See:/ 'newContainerProjectsLocationsClustersNodePoolsCreate' smart constructor.
 data ContainerProjectsLocationsClustersNodePoolsCreate = ContainerProjectsLocationsClustersNodePoolsCreate
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | The parent (project, location, cluster name) where the node pool will be created. Specified in the format @projects\/*\/locations\/*\/clusters\/*@.
-    parent :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: CreateNodePoolRequest,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | The parent (project, location, cluster name) where the node pool will be created. Specified in the format @projects\/*\/locations\/*\/clusters\/*@.
+    , parent :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: CreateNodePoolRequest
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ContainerProjectsLocationsClustersNodePoolsCreate' with the minimum fields required to make a request.
-newContainerProjectsLocationsClustersNodePoolsCreate ::
-  -- |  The parent (project, location, cluster name) where the node pool will be created. Specified in the format @projects\/*\/locations\/*\/clusters\/*@. See 'parent'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  CreateNodePoolRequest ->
-  ContainerProjectsLocationsClustersNodePoolsCreate
+newContainerProjectsLocationsClustersNodePoolsCreate 
+    ::  Core.Text
+       -- ^  The parent (project, location, cluster name) where the node pool will be created. Specified in the format @projects\/*\/locations\/*\/clusters\/*@. See 'parent'.
+    -> CreateNodePoolRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> ContainerProjectsLocationsClustersNodePoolsCreate
 newContainerProjectsLocationsClustersNodePoolsCreate parent payload =
   ContainerProjectsLocationsClustersNodePoolsCreate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , parent = parent
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ContainerProjectsLocationsClustersNodePoolsCreate
-  where
-  type
-    Rs
-      ContainerProjectsLocationsClustersNodePoolsCreate =
-      Operation
-  type
-    Scopes
-      ContainerProjectsLocationsClustersNodePoolsCreate =
-      '[CloudPlatform'FullControl]
-  requestClient
-    ContainerProjectsLocationsClustersNodePoolsCreate {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        containerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ContainerProjectsLocationsClustersNodePoolsCreateResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           ContainerProjectsLocationsClustersNodePoolsCreate
+         where
+        type Rs
+               ContainerProjectsLocationsClustersNodePoolsCreate
+             = Operation
+        type Scopes
+               ContainerProjectsLocationsClustersNodePoolsCreate
+             = '[CloudPlatform'FullControl]
+        requestClient
+          ContainerProjectsLocationsClustersNodePoolsCreate{..}
+          = go parent xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              containerService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           ContainerProjectsLocationsClustersNodePoolsCreateResource)
+                      Core.mempty
+

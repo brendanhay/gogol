@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,103 +31,95 @@
 --
 -- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.undelete@.
 module Gogol.CloudPrivateCatalogProducer.Catalogs.Undelete
-  ( -- * Resource
-    CloudPrivateCatalogProducerCatalogsUndeleteResource,
+    (
+    -- * Resource
+      CloudPrivateCatalogProducerCatalogsUndeleteResource
 
     -- ** Constructing a Request
-    CloudPrivateCatalogProducerCatalogsUndelete (..),
-    newCloudPrivateCatalogProducerCatalogsUndelete,
-  )
-where
+    , CloudPrivateCatalogProducerCatalogsUndelete (..)
+    , newCloudPrivateCatalogProducerCatalogsUndelete
+    ) where
 
-import Gogol.CloudPrivateCatalogProducer.Types
 import qualified Gogol.Prelude as Core
+import Gogol.CloudPrivateCatalogProducer.Types
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.undelete@ method which the
 -- 'CloudPrivateCatalogProducerCatalogsUndelete' request conforms to.
-type CloudPrivateCatalogProducerCatalogsUndeleteResource =
-  "v1beta1"
-    Core.:> Core.CaptureMode "name" "undelete" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              GoogleCloudPrivatecatalogproducerV1beta1Catalog
+type CloudPrivateCatalogProducerCatalogsUndeleteResource
+     =
+     "v1beta1" Core.:>
+       Core.CaptureMode "name" "undelete" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.ReqBody '[Core.JSON]
+                       GoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest
+                       Core.:>
+                       Core.Post '[Core.JSON]
+                         GoogleCloudPrivatecatalogproducerV1beta1Catalog
 
 -- | Undeletes a deleted Catalog and all resources under it.
 --
 -- /See:/ 'newCloudPrivateCatalogProducerCatalogsUndelete' smart constructor.
 data CloudPrivateCatalogProducerCatalogsUndelete = CloudPrivateCatalogProducerCatalogsUndelete
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | The resource name of the catalog.
-    name :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: GoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | The resource name of the catalog.
+    , name :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: GoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'CloudPrivateCatalogProducerCatalogsUndelete' with the minimum fields required to make a request.
-newCloudPrivateCatalogProducerCatalogsUndelete ::
-  -- |  The resource name of the catalog. See 'name'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  GoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest ->
-  CloudPrivateCatalogProducerCatalogsUndelete
+newCloudPrivateCatalogProducerCatalogsUndelete 
+    ::  Core.Text
+       -- ^  The resource name of the catalog. See 'name'.
+    -> GoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> CloudPrivateCatalogProducerCatalogsUndelete
 newCloudPrivateCatalogProducerCatalogsUndelete name payload =
   CloudPrivateCatalogProducerCatalogsUndelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudPrivateCatalogProducerCatalogsUndelete
-  where
-  type
-    Rs CloudPrivateCatalogProducerCatalogsUndelete =
-      GoogleCloudPrivatecatalogproducerV1beta1Catalog
-  type
-    Scopes
-      CloudPrivateCatalogProducerCatalogsUndelete =
-      '[CloudPlatform'FullControl]
-  requestClient
-    CloudPrivateCatalogProducerCatalogsUndelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        cloudPrivateCatalogProducerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudPrivateCatalogProducerCatalogsUndeleteResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           CloudPrivateCatalogProducerCatalogsUndelete
+         where
+        type Rs CloudPrivateCatalogProducerCatalogsUndelete =
+             GoogleCloudPrivatecatalogproducerV1beta1Catalog
+        type Scopes
+               CloudPrivateCatalogProducerCatalogsUndelete
+             = '[CloudPlatform'FullControl]
+        requestClient
+          CloudPrivateCatalogProducerCatalogsUndelete{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              cloudPrivateCatalogProducerService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           CloudPrivateCatalogProducerCatalogsUndeleteResource)
+                      Core.mempty
+

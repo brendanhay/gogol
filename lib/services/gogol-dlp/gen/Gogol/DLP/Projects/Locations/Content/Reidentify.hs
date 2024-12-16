@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -26,107 +27,98 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Re-identifies content that has been de-identified. See https:\/\/cloud.google.com\/dlp\/docs\/pseudonymization#re-identification/in/free/text/code_example to learn more.
+-- Re-identifies content that has been de-identified. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/pseudonymization#re-identification/in/free/text/code_example to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.projects.locations.content.reidentify@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.projects.locations.content.reidentify@.
 module Gogol.DLP.Projects.Locations.Content.Reidentify
-  ( -- * Resource
-    DLPProjectsLocationsContentReidentifyResource,
+    (
+    -- * Resource
+      DLPProjectsLocationsContentReidentifyResource
 
     -- ** Constructing a Request
-    DLPProjectsLocationsContentReidentify (..),
-    newDLPProjectsLocationsContentReidentify,
-  )
-where
+    , DLPProjectsLocationsContentReidentify (..)
+    , newDLPProjectsLocationsContentReidentify
+    ) where
 
-import Gogol.DLP.Types
 import qualified Gogol.Prelude as Core
+import Gogol.DLP.Types
 
 -- | A resource alias for @dlp.projects.locations.content.reidentify@ method which the
 -- 'DLPProjectsLocationsContentReidentify' request conforms to.
 type DLPProjectsLocationsContentReidentifyResource =
-  "v2"
-    Core.:> Core.Capture "parent" Core.Text
-    Core.:> "content:reidentify"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GooglePrivacyDlpV2ReidentifyContentRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              GooglePrivacyDlpV2ReidentifyContentResponse
+     "v2" Core.:>
+       Core.Capture "parent" Core.Text Core.:>
+         "content:reidentify" Core.:>
+           Core.QueryParam "$.xgafv" Xgafv Core.:>
+             Core.QueryParam "access_token" Core.Text Core.:>
+               Core.QueryParam "callback" Core.Text Core.:>
+                 Core.QueryParam "uploadType" Core.Text Core.:>
+                   Core.QueryParam "upload_protocol" Core.Text Core.:>
+                     Core.QueryParam "alt" Core.AltJSON Core.:>
+                       Core.ReqBody '[Core.JSON]
+                         GooglePrivacyDlpV2ReidentifyContentRequest
+                         Core.:>
+                         Core.Post '[Core.JSON]
+                           GooglePrivacyDlpV2ReidentifyContentResponse
 
--- | Re-identifies content that has been de-identified. See https:\/\/cloud.google.com\/dlp\/docs\/pseudonymization#re-identification/in/free/text/code_example to learn more.
+-- | Re-identifies content that has been de-identified. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/pseudonymization#re-identification/in/free/text/code_example to learn more.
 --
 -- /See:/ 'newDLPProjectsLocationsContentReidentify' smart constructor.
 data DLPProjectsLocationsContentReidentify = DLPProjectsLocationsContentReidentify
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. Parent resource name. The format of this value varies depending on whether you have <https://cloud.google.com/dlp/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/@PROJECT/ID@\/locations\/@LOCATION/ID + Projects scope, no location specified (defaults to global): @projects\/@PROJECT_ID The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3
-    parent :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: GooglePrivacyDlpV2ReidentifyContentRequest,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. Parent resource name. The format of this value varies depending on whether you have <https://cloud.google.com/sensitive-data-protection/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/{project_id}\/locations\/{location_id}@ + Projects scope, no location specified (defaults to global): @projects\/{project_id}@ The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3
+    , parent :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: GooglePrivacyDlpV2ReidentifyContentRequest
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DLPProjectsLocationsContentReidentify' with the minimum fields required to make a request.
-newDLPProjectsLocationsContentReidentify ::
-  -- |  Required. Parent resource name. The format of this value varies depending on whether you have <https://cloud.google.com/dlp/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/@PROJECT/ID@\/locations\/@LOCATION/ID + Projects scope, no location specified (defaults to global): @projects\/@PROJECT_ID The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3 See 'parent'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  GooglePrivacyDlpV2ReidentifyContentRequest ->
-  DLPProjectsLocationsContentReidentify
+newDLPProjectsLocationsContentReidentify 
+    ::  Core.Text
+       -- ^  Required. Parent resource name. The format of this value varies depending on whether you have <https://cloud.google.com/sensitive-data-protection/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/{project_id}\/locations\/{location_id}@ + Projects scope, no location specified (defaults to global): @projects\/{project_id}@ The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3 See 'parent'.
+    -> GooglePrivacyDlpV2ReidentifyContentRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> DLPProjectsLocationsContentReidentify
 newDLPProjectsLocationsContentReidentify parent payload =
   DLPProjectsLocationsContentReidentify
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , parent = parent
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DLPProjectsLocationsContentReidentify
-  where
-  type
-    Rs DLPProjectsLocationsContentReidentify =
-      GooglePrivacyDlpV2ReidentifyContentResponse
-  type
-    Scopes DLPProjectsLocationsContentReidentify =
-      '[CloudPlatform'FullControl]
-  requestClient
-    DLPProjectsLocationsContentReidentify {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dLPService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DLPProjectsLocationsContentReidentifyResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           DLPProjectsLocationsContentReidentify
+         where
+        type Rs DLPProjectsLocationsContentReidentify =
+             GooglePrivacyDlpV2ReidentifyContentResponse
+        type Scopes DLPProjectsLocationsContentReidentify =
+             '[CloudPlatform'FullControl]
+        requestClient
+          DLPProjectsLocationsContentReidentify{..}
+          = go parent xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              dLPService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           DLPProjectsLocationsContentReidentifyResource)
+                      Core.mempty
+

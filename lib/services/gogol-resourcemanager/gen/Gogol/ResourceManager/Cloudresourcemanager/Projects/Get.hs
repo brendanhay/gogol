@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,14 +31,14 @@
 --
 -- /See:/ <https://cloud.google.com/resource-manager Cloud Resource Manager API Reference> for @cloudresourcemanager.projects.get@.
 module Gogol.ResourceManager.Cloudresourcemanager.Projects.Get
-  ( -- * Resource
-    CloudresourcemanagerProjectsGetResource,
+    (
+    -- * Resource
+      CloudresourcemanagerProjectsGetResource
 
     -- ** Constructing a Request
-    CloudresourcemanagerProjectsGet (..),
-    newCloudresourcemanagerProjectsGet,
-  )
-where
+    , CloudresourcemanagerProjectsGet (..)
+    , newCloudresourcemanagerProjectsGet
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.ResourceManager.Types
@@ -45,72 +46,65 @@ import Gogol.ResourceManager.Types
 -- | A resource alias for @cloudresourcemanager.projects.get@ method which the
 -- 'CloudresourcemanagerProjectsGet' request conforms to.
 type CloudresourcemanagerProjectsGetResource =
-  "v3"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] Project
+     "v3" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.Get '[Core.JSON] Project
 
 -- | Retrieves the project identified by the specified @name@ (for example, @projects\/415104041262@). The caller must have @resourcemanager.projects.get@ permission for this project.
 --
 -- /See:/ 'newCloudresourcemanagerProjectsGet' smart constructor.
 data CloudresourcemanagerProjectsGet = CloudresourcemanagerProjectsGet
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. The name of the project (for example, @projects\/415104041262@).
-    name :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The name of the project (for example, @projects\/415104041262@).
+    , name :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'CloudresourcemanagerProjectsGet' with the minimum fields required to make a request.
-newCloudresourcemanagerProjectsGet ::
-  -- |  Required. The name of the project (for example, @projects\/415104041262@). See 'name'.
-  Core.Text ->
-  CloudresourcemanagerProjectsGet
+newCloudresourcemanagerProjectsGet 
+    ::  Core.Text
+       -- ^  Required. The name of the project (for example, @projects\/415104041262@). See 'name'.
+    -> CloudresourcemanagerProjectsGet
 newCloudresourcemanagerProjectsGet name =
   CloudresourcemanagerProjectsGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudresourcemanagerProjectsGet
-  where
-  type Rs CloudresourcemanagerProjectsGet = Project
-  type
-    Scopes CloudresourcemanagerProjectsGet =
-      '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
-  requestClient CloudresourcemanagerProjectsGet {..} =
-    go
-      name
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      resourceManagerService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy CloudresourcemanagerProjectsGetResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           CloudresourcemanagerProjectsGet
+         where
+        type Rs CloudresourcemanagerProjectsGet = Project
+        type Scopes CloudresourcemanagerProjectsGet =
+             '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
+        requestClient CloudresourcemanagerProjectsGet{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              resourceManagerService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy CloudresourcemanagerProjectsGetResource)
+                      Core.mempty
+

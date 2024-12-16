@@ -1,22 +1,19 @@
-cabal-version:      2.2
-name:               gogol-apps-calendar
-version:            1.0.0.0
-synopsis:           Google Calendar SDK.
-homepage:           https://github.com/brendanhay/gogol
-bug-reports:        https://github.com/brendanhay/gogol/issues
-license:            MPL-2.0
-license-file:       LICENSE
-author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
-category:           Google
-build-type:         Simple
-extra-source-files:
-  README.md
-  src/.gitkeep
-
+cabal-version:         2.2
+name:                  gogol-apps-calendar
+version:               1.0.0
+synopsis:              Google Calendar SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               MPL-2.0
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
+copyright:             Copyright (c) 2015-2022 Brendan Hay
+category:              Google
+build-type:            Simple
+extra-source-files:    README.md src/.gitkeep
 description:
-  Manipulates events and other calendar data.
+    Manipulates events and other calendar data.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -30,68 +27,69 @@ source-repository head
   subdir:   gogol-apps-calendar
 
 flag field-selectors
-  description:
-    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-
-  default:     False
-  manual:      True
+  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+  default: False
+  manual: True
 
 library
-  default-language: Haskell2010
-  hs-source-dirs:   src gen
+  default-language:  Haskell2010
+  hs-source-dirs:    src gen
+
   ghc-options:
-    -Wall -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates -funbox-strict-fields
+    -Wall
+    -Werror
+    -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates
+    -funbox-strict-fields
     -fwarn-unused-packages
 
-  if (!flag(field-selectors) && impl(ghc >=9.2))
+  if !flag(field-selectors) && impl(ghc >= 9.2)
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-    Gogol.AppsCalendar
-    Gogol.AppsCalendar.Calendar.Acl.Delete
-    Gogol.AppsCalendar.Calendar.Acl.Get
-    Gogol.AppsCalendar.Calendar.Acl.Insert
-    Gogol.AppsCalendar.Calendar.Acl.List
-    Gogol.AppsCalendar.Calendar.Acl.Patch
-    Gogol.AppsCalendar.Calendar.Acl.Update
-    Gogol.AppsCalendar.Calendar.Acl.Watch
-    Gogol.AppsCalendar.Calendar.CalendarList.Delete
-    Gogol.AppsCalendar.Calendar.CalendarList.Get
-    Gogol.AppsCalendar.Calendar.CalendarList.Insert
-    Gogol.AppsCalendar.Calendar.CalendarList.List
-    Gogol.AppsCalendar.Calendar.CalendarList.Patch
-    Gogol.AppsCalendar.Calendar.CalendarList.Update
-    Gogol.AppsCalendar.Calendar.CalendarList.Watch
-    Gogol.AppsCalendar.Calendar.Calendars.Clear
-    Gogol.AppsCalendar.Calendar.Calendars.Delete
-    Gogol.AppsCalendar.Calendar.Calendars.Get
-    Gogol.AppsCalendar.Calendar.Calendars.Insert
-    Gogol.AppsCalendar.Calendar.Calendars.Patch
-    Gogol.AppsCalendar.Calendar.Calendars.Update
-    Gogol.AppsCalendar.Calendar.Channels.Stop
-    Gogol.AppsCalendar.Calendar.Colors.Get
-    Gogol.AppsCalendar.Calendar.Events.Delete
-    Gogol.AppsCalendar.Calendar.Events.Get
-    Gogol.AppsCalendar.Calendar.Events.Import
-    Gogol.AppsCalendar.Calendar.Events.Insert
-    Gogol.AppsCalendar.Calendar.Events.Instances
-    Gogol.AppsCalendar.Calendar.Events.List
-    Gogol.AppsCalendar.Calendar.Events.Move
-    Gogol.AppsCalendar.Calendar.Events.Patch
-    Gogol.AppsCalendar.Calendar.Events.QuickAdd
-    Gogol.AppsCalendar.Calendar.Events.Update
-    Gogol.AppsCalendar.Calendar.Events.Watch
-    Gogol.AppsCalendar.Calendar.Freebusy.Query
-    Gogol.AppsCalendar.Calendar.Settings.Get
-    Gogol.AppsCalendar.Calendar.Settings.List
-    Gogol.AppsCalendar.Calendar.Settings.Watch
-    Gogol.AppsCalendar.Types
+      Gogol.AppsCalendar
+    , Gogol.AppsCalendar.Calendar.Acl.Delete
+    , Gogol.AppsCalendar.Calendar.Acl.Get
+    , Gogol.AppsCalendar.Calendar.Acl.Insert
+    , Gogol.AppsCalendar.Calendar.Acl.List
+    , Gogol.AppsCalendar.Calendar.Acl.Patch
+    , Gogol.AppsCalendar.Calendar.Acl.Update
+    , Gogol.AppsCalendar.Calendar.Acl.Watch
+    , Gogol.AppsCalendar.Calendar.CalendarList.Delete
+    , Gogol.AppsCalendar.Calendar.CalendarList.Get
+    , Gogol.AppsCalendar.Calendar.CalendarList.Insert
+    , Gogol.AppsCalendar.Calendar.CalendarList.List
+    , Gogol.AppsCalendar.Calendar.CalendarList.Patch
+    , Gogol.AppsCalendar.Calendar.CalendarList.Update
+    , Gogol.AppsCalendar.Calendar.CalendarList.Watch
+    , Gogol.AppsCalendar.Calendar.Calendars.Clear
+    , Gogol.AppsCalendar.Calendar.Calendars.Delete
+    , Gogol.AppsCalendar.Calendar.Calendars.Get
+    , Gogol.AppsCalendar.Calendar.Calendars.Insert
+    , Gogol.AppsCalendar.Calendar.Calendars.Patch
+    , Gogol.AppsCalendar.Calendar.Calendars.Update
+    , Gogol.AppsCalendar.Calendar.Channels.Stop
+    , Gogol.AppsCalendar.Calendar.Colors.Get
+    , Gogol.AppsCalendar.Calendar.Events.Delete
+    , Gogol.AppsCalendar.Calendar.Events.Get
+    , Gogol.AppsCalendar.Calendar.Events.Import
+    , Gogol.AppsCalendar.Calendar.Events.Insert
+    , Gogol.AppsCalendar.Calendar.Events.Instances
+    , Gogol.AppsCalendar.Calendar.Events.List
+    , Gogol.AppsCalendar.Calendar.Events.Move
+    , Gogol.AppsCalendar.Calendar.Events.Patch
+    , Gogol.AppsCalendar.Calendar.Events.QuickAdd
+    , Gogol.AppsCalendar.Calendar.Events.Update
+    , Gogol.AppsCalendar.Calendar.Events.Watch
+    , Gogol.AppsCalendar.Calendar.Freebusy.Query
+    , Gogol.AppsCalendar.Calendar.Settings.Get
+    , Gogol.AppsCalendar.Calendar.Settings.List
+    , Gogol.AppsCalendar.Calendar.Settings.Watch
+    , Gogol.AppsCalendar.Types
 
   other-modules:
-    Gogol.AppsCalendar.Internal.Product
-    Gogol.AppsCalendar.Internal.Sum
+      Gogol.AppsCalendar.Internal.Product
+    , Gogol.AppsCalendar.Internal.Sum
 
   build-depends:
-    , base        >=4.12   && <5
-    , gogol-core  ^>=1.0.0
+      gogol-core ^>= 1.0.0

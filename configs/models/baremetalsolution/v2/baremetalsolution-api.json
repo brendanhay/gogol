@@ -176,65 +176,8 @@
             }
           },
           "resources": {
-            "instanceProvisioningSettings": {
-              "methods": {
-                "fetch": {
-                  "description": "Get instance provisioning settings for a given project. This is hidden method used by UI only.",
-                  "flatPath": "v2/projects/{projectsId}/locations/{locationsId}/instanceProvisioningSettings:fetch",
-                  "httpMethod": "GET",
-                  "id": "baremetalsolution.projects.locations.instanceProvisioningSettings.fetch",
-                  "parameterOrder": [
-                    "location"
-                  ],
-                  "parameters": {
-                    "location": {
-                      "description": "Required. The parent project and location containing the ProvisioningSettings.",
-                      "location": "path",
-                      "pattern": "^projects/[^/]+/locations/[^/]+$",
-                      "required": true,
-                      "type": "string"
-                    }
-                  },
-                  "path": "v2/{+location}/instanceProvisioningSettings:fetch",
-                  "response": {
-                    "$ref": "FetchInstanceProvisioningSettingsResponse"
-                  },
-                  "scopes": [
-                    "https://www.googleapis.com/auth/cloud-platform"
-                  ]
-                }
-              }
-            },
             "instances": {
               "methods": {
-                "create": {
-                  "description": "Create an Instance.",
-                  "flatPath": "v2/projects/{projectsId}/locations/{locationsId}/instances",
-                  "httpMethod": "POST",
-                  "id": "baremetalsolution.projects.locations.instances.create",
-                  "parameterOrder": [
-                    "parent"
-                  ],
-                  "parameters": {
-                    "parent": {
-                      "description": "Required. The parent project and location.",
-                      "location": "path",
-                      "pattern": "^projects/[^/]+/locations/[^/]+$",
-                      "required": true,
-                      "type": "string"
-                    }
-                  },
-                  "path": "v2/{+parent}/instances",
-                  "request": {
-                    "$ref": "Instance"
-                  },
-                  "response": {
-                    "$ref": "Operation"
-                  },
-                  "scopes": [
-                    "https://www.googleapis.com/auth/cloud-platform"
-                  ]
-                },
                 "detachLun": {
                   "description": "Detach LUN from Instance.",
                   "flatPath": "v2/projects/{projectsId}/locations/{locationsId}/instances/{instancesId}:detachLun",
@@ -263,6 +206,34 @@
                     "https://www.googleapis.com/auth/cloud-platform"
                   ]
                 },
+                "disableHyperthreading": {
+                  "description": "Perform disable hyperthreading operation on a single server.",
+                  "flatPath": "v2/projects/{projectsId}/locations/{locationsId}/instances/{instancesId}:disableHyperthreading",
+                  "httpMethod": "POST",
+                  "id": "baremetalsolution.projects.locations.instances.disableHyperthreading",
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "parameters": {
+                    "name": {
+                      "description": "Required. The `name` field is used to identify the instance. Format: projects/{project}/locations/{location}/instances/{instance}",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+/instances/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v2/{+name}:disableHyperthreading",
+                  "request": {
+                    "$ref": "DisableHyperthreadingRequest"
+                  },
+                  "response": {
+                    "$ref": "Operation"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
                 "disableInteractiveSerialConsole": {
                   "description": "Disable the interactive serial console feature on an instance.",
                   "flatPath": "v2/projects/{projectsId}/locations/{locationsId}/instances/{instancesId}:disableInteractiveSerialConsole",
@@ -283,6 +254,34 @@
                   "path": "v2/{+name}:disableInteractiveSerialConsole",
                   "request": {
                     "$ref": "DisableInteractiveSerialConsoleRequest"
+                  },
+                  "response": {
+                    "$ref": "Operation"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
+                "enableHyperthreading": {
+                  "description": "Perform enable hyperthreading operation on a single server.",
+                  "flatPath": "v2/projects/{projectsId}/locations/{locationsId}/instances/{instancesId}:enableHyperthreading",
+                  "httpMethod": "POST",
+                  "id": "baremetalsolution.projects.locations.instances.enableHyperthreading",
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "parameters": {
+                    "name": {
+                      "description": "Required. The `name` field is used to identify the instance. Format: projects/{project}/locations/{location}/instances/{instance}",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+/instances/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v2/{+name}:enableHyperthreading",
+                  "request": {
+                    "$ref": "EnableHyperthreadingRequest"
                   },
                   "response": {
                     "$ref": "Operation"
@@ -385,6 +384,31 @@
                     "https://www.googleapis.com/auth/cloud-platform"
                   ]
                 },
+                "loadAuthInfo": {
+                  "description": "Load auth info for a server.",
+                  "flatPath": "v2/projects/{projectsId}/locations/{locationsId}/instances/{instancesId}:loadAuthInfo",
+                  "httpMethod": "GET",
+                  "id": "baremetalsolution.projects.locations.instances.loadAuthInfo",
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "parameters": {
+                    "name": {
+                      "description": "Required. Name of the server.",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+/instances/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v2/{+name}:loadAuthInfo",
+                  "response": {
+                    "$ref": "LoadInstanceAuthInfoResponse"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
                 "patch": {
                   "description": "Update details of a single server.",
                   "flatPath": "v2/projects/{projectsId}/locations/{locationsId}/instances/{instancesId}",
@@ -402,7 +426,7 @@
                       "type": "string"
                     },
                     "updateMask": {
-                      "description": "The list of fields to update. The currently supported fields are: `labels` `hyperthreading_enabled` `os_image`",
+                      "description": "The list of fields to update. The currently supported fields are: `labels` `hyperthreading_enabled` `os_image` `ssh_keys` `kms_key_version`",
                       "format": "google-fieldmask",
                       "location": "query",
                       "type": "string"
@@ -411,6 +435,34 @@
                   "path": "v2/{+name}",
                   "request": {
                     "$ref": "Instance"
+                  },
+                  "response": {
+                    "$ref": "Operation"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
+                "reimage": {
+                  "description": "Perform reimage operation on a single server.",
+                  "flatPath": "v2/projects/{projectsId}/locations/{locationsId}/instances/{instancesId}:reimage",
+                  "httpMethod": "POST",
+                  "id": "baremetalsolution.projects.locations.instances.reimage",
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "parameters": {
+                    "name": {
+                      "description": "Required. The `name` field is used to identify the instance. Format: projects/{project}/locations/{location}/instances/{instance}",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+/instances/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v2/{+name}:reimage",
+                  "request": {
+                    "$ref": "ReimageInstanceRequest"
                   },
                   "response": {
                     "$ref": "Operation"
@@ -897,6 +949,71 @@
                   "path": "v2/{+name}",
                   "response": {
                     "$ref": "Operation"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                }
+              }
+            },
+            "osImages": {
+              "methods": {
+                "get": {
+                  "description": "Get details of a single OS image.",
+                  "flatPath": "v2/projects/{projectsId}/locations/{locationsId}/osImages/{osImagesId}",
+                  "httpMethod": "GET",
+                  "id": "baremetalsolution.projects.locations.osImages.get",
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "parameters": {
+                    "name": {
+                      "description": "Required. Name of the OS image.",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+/osImages/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v2/{+name}",
+                  "response": {
+                    "$ref": "OSImage"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
+                "list": {
+                  "description": "Retrieves the list of OS images which are currently approved.",
+                  "flatPath": "v2/projects/{projectsId}/locations/{locationsId}/osImages",
+                  "httpMethod": "GET",
+                  "id": "baremetalsolution.projects.locations.osImages.list",
+                  "parameterOrder": [
+                    "parent"
+                  ],
+                  "parameters": {
+                    "pageSize": {
+                      "description": "Requested page size. The server might return fewer items than requested. If unspecified, server will pick an appropriate default. Notice that page_size field is not supported and won't be respected in the API request for now, will be updated when pagination is supported.",
+                      "format": "int32",
+                      "location": "query",
+                      "type": "integer"
+                    },
+                    "pageToken": {
+                      "description": "A token identifying a page of results from the server.",
+                      "location": "query",
+                      "type": "string"
+                    },
+                    "parent": {
+                      "description": "Required. Parent value for ListOSImagesRequest.",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v2/{+parent}/osImages",
+                  "response": {
+                    "$ref": "ListOSImagesResponse"
                   },
                   "scopes": [
                     "https://www.googleapis.com/auth/cloud-platform"
@@ -1605,7 +1722,7 @@
       }
     }
   },
-  "revision": "20230315",
+  "revision": "20240830",
   "rootUrl": "https://baremetalsolution.googleapis.com/",
   "schemas": {
     "AllowedClient": {
@@ -1674,9 +1791,21 @@
       },
       "type": "object"
     },
+    "DisableHyperthreadingRequest": {
+      "description": "Message requesting to perform disable hyperthreading operation on a server.",
+      "id": "DisableHyperthreadingRequest",
+      "properties": {},
+      "type": "object"
+    },
     "DisableInteractiveSerialConsoleRequest": {
       "description": "Message for disabling the interactive serial console on an instance.",
       "id": "DisableInteractiveSerialConsoleRequest",
+      "properties": {},
+      "type": "object"
+    },
+    "DisableInteractiveSerialConsoleResponse": {
+      "description": "Message for response of DisableInteractiveSerialConsole.",
+      "id": "DisableInteractiveSerialConsoleResponse",
       "properties": {},
       "type": "object"
     },
@@ -1686,9 +1815,21 @@
       "properties": {},
       "type": "object"
     },
+    "EnableHyperthreadingRequest": {
+      "description": "Message requesting to perform enable hyperthreading operation on a server.",
+      "id": "EnableHyperthreadingRequest",
+      "properties": {},
+      "type": "object"
+    },
     "EnableInteractiveSerialConsoleRequest": {
       "description": "Message for enabling the interactive serial console on an instance.",
       "id": "EnableInteractiveSerialConsoleRequest",
+      "properties": {},
+      "type": "object"
+    },
+    "EnableInteractiveSerialConsoleResponse": {
+      "description": "Message for response of EnableInteractiveSerialConsole.",
+      "id": "EnableInteractiveSerialConsoleResponse",
       "properties": {},
       "type": "object"
     },
@@ -1704,25 +1845,12 @@
       "properties": {},
       "type": "object"
     },
-    "FetchInstanceProvisioningSettingsResponse": {
-      "description": "Response with all provisioning settings.",
-      "id": "FetchInstanceProvisioningSettingsResponse",
-      "properties": {
-        "images": {
-          "description": "The OS images available.",
-          "items": {
-            "$ref": "OSImage"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
     "GoogleCloudBaremetalsolutionV2LogicalInterface": {
       "description": "Each logical interface represents a logical abstraction of the underlying physical interface (for eg. bond, nic) of the instance. Each logical interface can effectively map to multiple network-IP pairs and still be mapped to one underlying physical interface.",
       "id": "GoogleCloudBaremetalsolutionV2LogicalInterface",
       "properties": {
         "interfaceIndex": {
+          "deprecated": true,
           "description": "The index of the logical interface mapping to the index of the hardware bond or nic on the chosen network template. This field is deprecated.",
           "format": "int32",
           "type": "integer"
@@ -1799,6 +1927,10 @@
           "readOnly": true,
           "type": "boolean"
         },
+        "kmsKeyVersion": {
+          "description": "Optional. Name of the KMS crypto key version used to encrypt the initial passwords. The key has to have ASYMMETRIC_DECRYPT purpose. Format is `projects/{project}/locations/{location}/keyRings/{keyring}/cryptoKeys/{key}/cryptoKeyVersions/{version}`.",
+          "type": "string"
+        },
         "labels": {
           "additionalProperties": {
             "type": "string"
@@ -1850,8 +1982,15 @@
           "type": "string"
         },
         "pod": {
-          "description": "Immutable. Pod name. Pod is an independent part of infrastructure. Instance can be connected to the assets (networks, volumes) allocated in the same pod only.",
+          "description": "Immutable. Pod name. Pod is an independent part of infrastructure. Instance can only be connected to the assets (networks, volumes) allocated in the same pod.",
           "type": "string"
+        },
+        "sshKeys": {
+          "description": "Optional. List of SSH Keys used during instance provisioning.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "state": {
           "description": "Output only. The state of the server.",
@@ -1918,6 +2057,7 @@
         },
         "clientNetwork": {
           "$ref": "NetworkAddress",
+          "deprecated": true,
           "description": "Client network address. Filled if InstanceConfig.multivlan_config is false."
         },
         "hyperthreading": {
@@ -1925,11 +2065,16 @@
           "type": "boolean"
         },
         "id": {
+          "deprecated": true,
           "description": "A transient unique identifier to idenfity an instance within an ProvisioningConfig request.",
           "type": "string"
         },
         "instanceType": {
           "description": "Instance type. [Available types](https://cloud.google.com/bare-metal/docs/bms-planning#server_configurations)",
+          "type": "string"
+        },
+        "kmsKeyVersion": {
+          "description": "Name of the KMS crypto key version used to encrypt the initial passwords. The key has to have ASYMMETRIC_DECRYPT purpose.",
           "type": "string"
         },
         "logicalInterfaces": {
@@ -1940,8 +2085,7 @@
           "type": "array"
         },
         "name": {
-          "description": "Output only. The name of the instance config.",
-          "readOnly": true,
+          "description": "The name of the instance config.",
           "type": "string"
         },
         "networkConfig": {
@@ -1968,7 +2112,15 @@
         },
         "privateNetwork": {
           "$ref": "NetworkAddress",
+          "deprecated": true,
           "description": "Private network address, if any. Filled if InstanceConfig.multivlan_config is false."
+        },
+        "sshKeyNames": {
+          "description": "Optional. List of names of ssh keys used to provision the instance.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "userNote": {
           "description": "User note field, it can be used by customers to add additional information for the BMS Ops team .",
@@ -1991,6 +2143,7 @@
           "type": "string"
         },
         "instanceType": {
+          "deprecated": true,
           "description": "Instance type. Deprecated: use gcp_service.",
           "type": "string"
         },
@@ -2153,6 +2306,24 @@
       },
       "type": "object"
     },
+    "ListOSImagesResponse": {
+      "description": "Request for getting all available OS images.",
+      "id": "ListOSImagesResponse",
+      "properties": {
+        "nextPageToken": {
+          "description": "Token to retrieve the next page of results, or empty if there are no more results in the list.",
+          "type": "string"
+        },
+        "osImages": {
+          "description": "The OS images available.",
+          "items": {
+            "$ref": "OSImage"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "ListProvisioningQuotasResponse": {
       "description": "Response message for the list of provisioning quotas.",
       "id": "ListProvisioningQuotasResponse",
@@ -2239,8 +2410,29 @@
       },
       "type": "object"
     },
+    "LoadInstanceAuthInfoResponse": {
+      "description": "Response for LoadInstanceAuthInfo.",
+      "id": "LoadInstanceAuthInfoResponse",
+      "properties": {
+        "sshKeys": {
+          "description": "List of ssh keys.",
+          "items": {
+            "$ref": "SSHKey"
+          },
+          "type": "array"
+        },
+        "userAccounts": {
+          "additionalProperties": {
+            "$ref": "UserAccount"
+          },
+          "description": "Map of username to the user account info.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
     "Location": {
-      "description": "A resource that represents Google Cloud Platform location.",
+      "description": "A resource that represents a Google Cloud location.",
       "id": "Location",
       "properties": {
         "displayName": {
@@ -2358,7 +2550,7 @@
           "type": "boolean"
         },
         "sizeGb": {
-          "description": "The size of this LUN, in gigabytes.",
+          "description": "The size of this LUN, in GiB.",
           "format": "int64",
           "type": "string"
         },
@@ -2476,8 +2668,7 @@
           "type": "string"
         },
         "pod": {
-          "description": "Output only. Pod name.",
-          "readOnly": true,
+          "description": "Immutable. Pod name. Pod is an independent part of infrastructure. Network can only be connected to the assets (instances, nfsshares) allocated in the same pod.",
           "type": "string"
         },
         "reservations": {
@@ -2529,7 +2720,11 @@
         },
         "vrf": {
           "$ref": "VRF",
-          "description": "The vrf for the Network."
+          "description": "The Vrf for the Network. Use this only if a new Vrf needs to be created."
+        },
+        "vrfAttachment": {
+          "description": "Optional. The name of a pre-existing Vrf that the network should be attached to. Format is `vrfs/{vrf}`.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -2652,7 +2847,7 @@
           "type": "string"
         },
         "vlanAttachments": {
-          "description": "List of VLAN attachments. As of now there are always 2 attachments, but it is going to change in the future (multi vlan).",
+          "description": "List of VLAN attachments. As of now there are always 2 attachments, but it is going to change in the future (multi vlan). Use only one of vlan_attachments or vrf",
           "items": {
             "$ref": "IntakeVlanAttachment"
           },
@@ -2661,6 +2856,10 @@
         "vlanSameProject": {
           "description": "Whether the VLAN attachment pair is located in the same project.",
           "type": "boolean"
+        },
+        "vrf": {
+          "description": "Optional. The name of a pre-existing Vrf that the network should be attached to. Format is `vrfs/{vrf}`. If vrf is specified, vlan_attachments must be empty.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -2783,6 +2982,10 @@
           "readOnly": true,
           "type": "string"
         },
+        "pod": {
+          "description": "Immutable. Pod name. Pod is an independent part of infrastructure. NFSShare can only be connected to the assets (networks, instances) allocated in the same pod.",
+          "type": "string"
+        },
         "requestedSizeGib": {
           "description": "The requested size, in GiB.",
           "format": "int64",
@@ -2856,7 +3059,7 @@
         "supportedNetworkTemplates": {
           "description": "Network templates that can be used with this OS Image.",
           "items": {
-            "$ref": "ServerNetworkTemplate"
+            "type": "string"
           },
           "type": "array"
         }
@@ -2892,7 +3095,7 @@
             "description": "Properties of the object. Contains field @type with type URL.",
             "type": "any"
           },
-          "description": "The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.",
+          "description": "The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.",
           "type": "object"
         }
       },
@@ -2912,6 +3115,7 @@
           "type": "string"
         },
         "email": {
+          "deprecated": true,
           "description": "Email provided to send a confirmation with provisioning config to. Deprecated in favour of email field in request messages.",
           "type": "string"
         },
@@ -2941,6 +3145,10 @@
             "$ref": "NetworkConfig"
           },
           "type": "array"
+        },
+        "pod": {
+          "description": "Optional. Pod name. Pod is an independent part of infrastructure. Instance can be connected to the assets (networks, volumes, nfsshares) allocated in the same pod only.",
+          "type": "string"
         },
         "state": {
           "description": "Output only. State of ProvisioningConfig.",
@@ -3067,6 +3275,28 @@
       },
       "type": "object"
     },
+    "ReimageInstanceRequest": {
+      "description": "Message requesting to perform reimage operation on a server.",
+      "id": "ReimageInstanceRequest",
+      "properties": {
+        "kmsKeyVersion": {
+          "description": "Optional. Name of the KMS crypto key version used to encrypt the initial passwords. The key has to have ASYMMETRIC_DECRYPT purpose. Format is `projects/{project}/locations/{location}/keyRings/{keyring}/cryptoKeys/{key}/cryptoKeyVersions/{version}`.",
+          "type": "string"
+        },
+        "osImage": {
+          "description": "Required. The OS image code of the image which will be used in the reimage operation.",
+          "type": "string"
+        },
+        "sshKeys": {
+          "description": "Optional. List of SSH Keys used during reimaging an instance.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "RenameInstanceRequest": {
       "description": "Message requesting rename of a server.",
       "id": "RenameInstanceRequest",
@@ -3114,6 +3344,12 @@
     "ResetInstanceRequest": {
       "description": "Message requesting to reset a server.",
       "id": "ResetInstanceRequest",
+      "properties": {},
+      "type": "object"
+    },
+    "ResetInstanceResponse": {
+      "description": "Response message from resetting a server.",
+      "id": "ResetInstanceResponse",
       "properties": {},
       "type": "object"
     },
@@ -3210,6 +3446,12 @@
       "properties": {},
       "type": "object"
     },
+    "StartInstanceResponse": {
+      "description": "Response message from starting a server.",
+      "id": "StartInstanceResponse",
+      "properties": {},
+      "type": "object"
+    },
     "Status": {
       "description": "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).",
       "id": "Status",
@@ -3243,6 +3485,12 @@
       "properties": {},
       "type": "object"
     },
+    "StopInstanceResponse": {
+      "description": "Response message from stopping a server.",
+      "id": "StopInstanceResponse",
+      "properties": {},
+      "type": "object"
+    },
     "SubmitProvisioningConfigRequest": {
       "description": "Request for SubmitProvisioningConfig.",
       "id": "SubmitProvisioningConfigRequest",
@@ -3265,6 +3513,21 @@
         "provisioningConfig": {
           "$ref": "ProvisioningConfig",
           "description": "The submitted provisioning config."
+        }
+      },
+      "type": "object"
+    },
+    "UserAccount": {
+      "description": "User account provisioned for the customer.",
+      "id": "UserAccount",
+      "properties": {
+        "encryptedPassword": {
+          "description": "Encrypted initial password value.",
+          "type": "string"
+        },
+        "kmsKeyVersion": {
+          "description": "KMS CryptoKey Version used to encrypt the password.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -3311,6 +3574,10 @@
       "properties": {
         "id": {
           "description": "Immutable. The identifier of the attachment within vrf.",
+          "type": "string"
+        },
+        "interconnectAttachment": {
+          "description": "Optional. The name of the vlan attachment within vrf. This is of the form projects/{project_number}/regions/{region}/interconnectAttachments/{interconnect_attachment}",
           "type": "string"
         },
         "pairingKey": {
@@ -3416,18 +3683,20 @@
             "VOLUME_PERFORMANCE_TIER_UNSPECIFIED",
             "VOLUME_PERFORMANCE_TIER_SHARED",
             "VOLUME_PERFORMANCE_TIER_ASSIGNED",
-            "VOLUME_PERFORMANCE_TIER_HT"
+            "VOLUME_PERFORMANCE_TIER_HT",
+            "VOLUME_PERFORMANCE_TIER_QOS2_PERFORMANCE"
           ],
           "enumDescriptions": [
             "Value is not specified.",
             "Regular volumes, shared aggregates.",
             "Assigned aggregates.",
-            "High throughput aggregates."
+            "High throughput aggregates.",
+            "QoS 2.0 high performance storage."
           ],
           "type": "string"
         },
         "pod": {
-          "description": "Immutable. Pod name.",
+          "description": "Immutable. Pod name. Pod is an independent part of infrastructure. Volume can only be connected to the instances allocated in the same pod.",
           "type": "string"
         },
         "protocol": {
@@ -3479,10 +3748,6 @@
           "$ref": "SnapshotReservationDetail",
           "description": "Details about snapshot space reservation and usage on the storage volume."
         },
-        "snapshotSchedulePolicy": {
-          "description": "The name of the snapshot schedule policy in use for this volume, if any.",
-          "type": "string"
-        },
         "state": {
           "description": "The state of this storage volume.",
           "enum": [
@@ -3501,10 +3766,6 @@
             "The storage volume is being updated.",
             "The storage volume is in cool off state. It will be deleted after `expire_time`."
           ],
-          "type": "string"
-        },
-        "storageAggregatePool": {
-          "description": "Input only. Name of the storage aggregate pool to allocate the volume in. Can be used only for VOLUME_PERFORMANCE_TIER_ASSIGNED volumes.",
           "type": "string"
         },
         "storageType": {
@@ -3582,13 +3843,15 @@
             "VOLUME_PERFORMANCE_TIER_UNSPECIFIED",
             "VOLUME_PERFORMANCE_TIER_SHARED",
             "VOLUME_PERFORMANCE_TIER_ASSIGNED",
-            "VOLUME_PERFORMANCE_TIER_HT"
+            "VOLUME_PERFORMANCE_TIER_HT",
+            "VOLUME_PERFORMANCE_TIER_QOS2_PERFORMANCE"
           ],
           "enumDescriptions": [
             "Value is not specified.",
             "Regular volumes, shared aggregates.",
             "Assigned aggregates.",
-            "High throughput aggregates."
+            "High throughput aggregates.",
+            "QoS 2.0 high performance storage."
           ],
           "type": "string"
         },
@@ -3614,10 +3877,6 @@
         "snapshotsEnabled": {
           "description": "Whether snapshots should be enabled.",
           "type": "boolean"
-        },
-        "storageAggregatePool": {
-          "description": "Input only. Name of the storage aggregate pool to allocate the volume in. Can be used only for VOLUME_PERFORMANCE_TIER_ASSIGNED volumes.",
-          "type": "string"
         },
         "type": {
           "description": "The type of this Volume.",

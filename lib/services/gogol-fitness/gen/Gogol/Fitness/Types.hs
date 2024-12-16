@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,160 +26,160 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.Fitness.Types
-  ( -- * Configuration
-    fitnessService,
+    (
+    -- * Configuration
+      fitnessService
 
     -- * OAuth Scopes
-    Fitness'Activity'Read,
-    Fitness'Activity'Write,
-    Fitness'BloodGlucose'Read,
-    Fitness'BloodGlucose'Write,
-    Fitness'BloodPressure'Read,
-    Fitness'BloodPressure'Write,
-    Fitness'Body'Read,
-    Fitness'Body'Write,
-    Fitness'BodyTemperature'Read,
-    Fitness'BodyTemperature'Write,
-    Fitness'HeartRate'Read,
-    Fitness'HeartRate'Write,
-    Fitness'Location'Read,
-    Fitness'Location'Write,
-    Fitness'Nutrition'Read,
-    Fitness'Nutrition'Write,
-    Fitness'OxygenSaturation'Read,
-    Fitness'OxygenSaturation'Write,
-    Fitness'ReproductiveHealth'Read,
-    Fitness'ReproductiveHealth'Write,
-    Fitness'Sleep'Read,
-    Fitness'Sleep'Write,
+    , Fitness'Activity'Read
+    , Fitness'Activity'Write
+    , Fitness'BloodGlucose'Read
+    , Fitness'BloodGlucose'Write
+    , Fitness'BloodPressure'Read
+    , Fitness'BloodPressure'Write
+    , Fitness'Body'Read
+    , Fitness'Body'Write
+    , Fitness'BodyTemperature'Read
+    , Fitness'BodyTemperature'Write
+    , Fitness'HeartRate'Read
+    , Fitness'HeartRate'Write
+    , Fitness'Location'Read
+    , Fitness'Location'Write
+    , Fitness'Nutrition'Read
+    , Fitness'Nutrition'Write
+    , Fitness'OxygenSaturation'Read
+    , Fitness'OxygenSaturation'Write
+    , Fitness'ReproductiveHealth'Read
+    , Fitness'ReproductiveHealth'Write
+    , Fitness'Sleep'Read
+    , Fitness'Sleep'Write
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AggregateBucket
-    AggregateBucket (..),
-    newAggregateBucket,
+    , AggregateBucket (..)
+    , newAggregateBucket
 
     -- ** AggregateBucket_Type
-    AggregateBucket_Type (..),
+    , AggregateBucket_Type (..)
 
     -- ** AggregateBy
-    AggregateBy (..),
-    newAggregateBy,
+    , AggregateBy (..)
+    , newAggregateBy
 
     -- ** AggregateRequest
-    AggregateRequest (..),
-    newAggregateRequest,
+    , AggregateRequest (..)
+    , newAggregateRequest
 
     -- ** AggregateRequest_FilteredDataQualityStandardItem
-    AggregateRequest_FilteredDataQualityStandardItem (..),
+    , AggregateRequest_FilteredDataQualityStandardItem (..)
 
     -- ** AggregateResponse
-    AggregateResponse (..),
-    newAggregateResponse,
+    , AggregateResponse (..)
+    , newAggregateResponse
 
     -- ** Application
-    Application (..),
-    newApplication,
+    , Application (..)
+    , newApplication
 
     -- ** BucketByActivity
-    BucketByActivity (..),
-    newBucketByActivity,
+    , BucketByActivity (..)
+    , newBucketByActivity
 
     -- ** BucketBySession
-    BucketBySession (..),
-    newBucketBySession,
+    , BucketBySession (..)
+    , newBucketBySession
 
     -- ** BucketByTime
-    BucketByTime (..),
-    newBucketByTime,
+    , BucketByTime (..)
+    , newBucketByTime
 
     -- ** BucketByTimePeriod
-    BucketByTimePeriod (..),
-    newBucketByTimePeriod,
+    , BucketByTimePeriod (..)
+    , newBucketByTimePeriod
 
     -- ** BucketByTimePeriod_Type
-    BucketByTimePeriod_Type (..),
+    , BucketByTimePeriod_Type (..)
 
     -- ** DataPoint
-    DataPoint (..),
-    newDataPoint,
+    , DataPoint (..)
+    , newDataPoint
 
     -- ** DataSource
-    DataSource (..),
-    newDataSource,
+    , DataSource (..)
+    , newDataSource
 
     -- ** DataSource_DataQualityStandardItem
-    DataSource_DataQualityStandardItem (..),
+    , DataSource_DataQualityStandardItem (..)
 
     -- ** DataSource_Type
-    DataSource_Type (..),
+    , DataSource_Type (..)
 
     -- ** DataType
-    DataType (..),
-    newDataType,
+    , DataType (..)
+    , newDataType
 
     -- ** DataTypeField
-    DataTypeField (..),
-    newDataTypeField,
+    , DataTypeField (..)
+    , newDataTypeField
 
     -- ** DataTypeField_Format
-    DataTypeField_Format (..),
+    , DataTypeField_Format (..)
 
     -- ** Dataset
-    Dataset (..),
-    newDataset,
+    , Dataset (..)
+    , newDataset
 
     -- ** Device
-    Device (..),
-    newDevice,
+    , Device (..)
+    , newDevice
 
     -- ** Device_Type
-    Device_Type (..),
+    , Device_Type (..)
 
     -- ** ListDataPointChangesResponse
-    ListDataPointChangesResponse (..),
-    newListDataPointChangesResponse,
+    , ListDataPointChangesResponse (..)
+    , newListDataPointChangesResponse
 
     -- ** ListDataSourcesResponse
-    ListDataSourcesResponse (..),
-    newListDataSourcesResponse,
+    , ListDataSourcesResponse (..)
+    , newListDataSourcesResponse
 
     -- ** ListSessionsResponse
-    ListSessionsResponse (..),
-    newListSessionsResponse,
+    , ListSessionsResponse (..)
+    , newListSessionsResponse
 
     -- ** MapValue
-    MapValue (..),
-    newMapValue,
+    , MapValue (..)
+    , newMapValue
 
     -- ** Session
-    Session (..),
-    newSession,
+    , Session (..)
+    , newSession
 
     -- ** Value
-    Value (..),
-    newValue,
+    , Value (..)
+    , newValue
 
     -- ** ValueMapValEntry
-    ValueMapValEntry (..),
-    newValueMapValEntry,
-  )
-where
+    , ValueMapValEntry (..)
+    , newValueMapValEntry
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.Fitness.Internal.Product
 import Gogol.Fitness.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Fitness API. This contains the host and root path used as a starting point for constructing service requests.
 fitnessService :: Core.ServiceConfig
-fitnessService =
-  Core.defaultService
-    (Core.ServiceId "fitness:v1")
-    "fitness.googleapis.com"
+fitnessService
+  = Core.defaultService (Core.ServiceId "fitness:v1")
+      "fitness.googleapis.com"
 
 -- | Use Google Fit to see and store your physical activity data
 type Fitness'Activity'Read = "https://www.googleapis.com/auth/fitness.activity.read"

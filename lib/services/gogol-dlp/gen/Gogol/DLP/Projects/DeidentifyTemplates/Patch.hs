@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -26,105 +27,96 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the DeidentifyTemplate. See https:\/\/cloud.google.com\/dlp\/docs\/creating-templates-deid to learn more.
+-- Updates the DeidentifyTemplate. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-templates-deid to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.projects.deidentifyTemplates.patch@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.projects.deidentifyTemplates.patch@.
 module Gogol.DLP.Projects.DeidentifyTemplates.Patch
-  ( -- * Resource
-    DLPProjectsDeidentifyTemplatesPatchResource,
+    (
+    -- * Resource
+      DLPProjectsDeidentifyTemplatesPatchResource
 
     -- ** Constructing a Request
-    DLPProjectsDeidentifyTemplatesPatch (..),
-    newDLPProjectsDeidentifyTemplatesPatch,
-  )
-where
+    , DLPProjectsDeidentifyTemplatesPatch (..)
+    , newDLPProjectsDeidentifyTemplatesPatch
+    ) where
 
-import Gogol.DLP.Types
 import qualified Gogol.Prelude as Core
+import Gogol.DLP.Types
 
 -- | A resource alias for @dlp.projects.deidentifyTemplates.patch@ method which the
 -- 'DLPProjectsDeidentifyTemplatesPatch' request conforms to.
 type DLPProjectsDeidentifyTemplatesPatchResource =
-  "v2"
-    Core.:> Core.Capture "name" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest
-    Core.:> Core.Patch
-              '[Core.JSON]
-              GooglePrivacyDlpV2DeidentifyTemplate
+     "v2" Core.:>
+       Core.Capture "name" Core.Text Core.:>
+         Core.QueryParam "$.xgafv" Xgafv Core.:>
+           Core.QueryParam "access_token" Core.Text Core.:>
+             Core.QueryParam "callback" Core.Text Core.:>
+               Core.QueryParam "uploadType" Core.Text Core.:>
+                 Core.QueryParam "upload_protocol" Core.Text Core.:>
+                   Core.QueryParam "alt" Core.AltJSON Core.:>
+                     Core.ReqBody '[Core.JSON]
+                       GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest
+                       Core.:>
+                       Core.Patch '[Core.JSON]
+                         GooglePrivacyDlpV2DeidentifyTemplate
 
--- | Updates the DeidentifyTemplate. See https:\/\/cloud.google.com\/dlp\/docs\/creating-templates-deid to learn more.
+-- | Updates the DeidentifyTemplate. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-templates-deid to learn more.
 --
 -- /See:/ 'newDLPProjectsDeidentifyTemplatesPatch' smart constructor.
 data DLPProjectsDeidentifyTemplatesPatch = DLPProjectsDeidentifyTemplatesPatch
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. Resource name of organization and deidentify template to be updated, for example @organizations\/433245324\/deidentifyTemplates\/432452342@ or projects\/project-id\/deidentifyTemplates\/432452342.
-    name :: Core.Text,
-    -- | Multipart request metadata.
-    payload :: GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. Resource name of organization and deidentify template to be updated, for example @organizations\/433245324\/deidentifyTemplates\/432452342@ or projects\/project-id\/deidentifyTemplates\/432452342.
+    , name :: Core.Text
+      -- | Multipart request metadata.
+    , payload :: GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DLPProjectsDeidentifyTemplatesPatch' with the minimum fields required to make a request.
-newDLPProjectsDeidentifyTemplatesPatch ::
-  -- |  Required. Resource name of organization and deidentify template to be updated, for example @organizations\/433245324\/deidentifyTemplates\/432452342@ or projects\/project-id\/deidentifyTemplates\/432452342. See 'name'.
-  Core.Text ->
-  -- |  Multipart request metadata. See 'payload'.
-  GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest ->
-  DLPProjectsDeidentifyTemplatesPatch
+newDLPProjectsDeidentifyTemplatesPatch 
+    ::  Core.Text
+       -- ^  Required. Resource name of organization and deidentify template to be updated, for example @organizations\/433245324\/deidentifyTemplates\/432452342@ or projects\/project-id\/deidentifyTemplates\/432452342. See 'name'.
+    -> GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest
+       -- ^  Multipart request metadata. See 'payload'.
+    -> DLPProjectsDeidentifyTemplatesPatch
 newDLPProjectsDeidentifyTemplatesPatch name payload =
   DLPProjectsDeidentifyTemplatesPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , name = name
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DLPProjectsDeidentifyTemplatesPatch
-  where
-  type
-    Rs DLPProjectsDeidentifyTemplatesPatch =
-      GooglePrivacyDlpV2DeidentifyTemplate
-  type
-    Scopes DLPProjectsDeidentifyTemplatesPatch =
-      '[CloudPlatform'FullControl]
-  requestClient DLPProjectsDeidentifyTemplatesPatch {..} =
-    go
-      name
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      payload
-      dLPService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy
-                DLPProjectsDeidentifyTemplatesPatchResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           DLPProjectsDeidentifyTemplatesPatch
+         where
+        type Rs DLPProjectsDeidentifyTemplatesPatch =
+             GooglePrivacyDlpV2DeidentifyTemplate
+        type Scopes DLPProjectsDeidentifyTemplatesPatch =
+             '[CloudPlatform'FullControl]
+        requestClient DLPProjectsDeidentifyTemplatesPatch{..}
+          = go name xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              dLPService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           DLPProjectsDeidentifyTemplatesPatchResource)
+                      Core.mempty
+

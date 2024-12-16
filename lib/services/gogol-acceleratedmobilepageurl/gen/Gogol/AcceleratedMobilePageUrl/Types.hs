@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -25,46 +26,47 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.AcceleratedMobilePageUrl.Types
-  ( -- * Configuration
-    acceleratedMobilePageUrlService,
+    (
+    -- * Configuration
+      acceleratedMobilePageUrlService
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
     -- ** AmpUrl
-    AmpUrl (..),
-    newAmpUrl,
+    , AmpUrl (..)
+    , newAmpUrl
 
     -- ** AmpUrlError
-    AmpUrlError (..),
-    newAmpUrlError,
+    , AmpUrlError (..)
+    , newAmpUrlError
 
     -- ** AmpUrlError_ErrorCode
-    AmpUrlError_ErrorCode (..),
+    , AmpUrlError_ErrorCode (..)
 
     -- ** BatchGetAmpUrlsRequest
-    BatchGetAmpUrlsRequest (..),
-    newBatchGetAmpUrlsRequest,
+    , BatchGetAmpUrlsRequest (..)
+    , newBatchGetAmpUrlsRequest
 
     -- ** BatchGetAmpUrlsRequest_LookupStrategy
-    BatchGetAmpUrlsRequest_LookupStrategy (..),
+    , BatchGetAmpUrlsRequest_LookupStrategy (..)
 
     -- ** BatchGetAmpUrlsResponse
-    BatchGetAmpUrlsResponse (..),
-    newBatchGetAmpUrlsResponse,
-  )
-where
+    , BatchGetAmpUrlsResponse (..)
+    , newBatchGetAmpUrlsResponse
+    ) where
 
+import qualified Gogol.Prelude as Core
 import Gogol.AcceleratedMobilePageUrl.Internal.Product
 import Gogol.AcceleratedMobilePageUrl.Internal.Sum
-import qualified Gogol.Prelude as Core
 
 -- | Default request referring to version @v1@ of the Accelerated Mobile Pages (AMP) URL API. This contains the host and root path used as a starting point for constructing service requests.
 acceleratedMobilePageUrlService :: Core.ServiceConfig
-acceleratedMobilePageUrlService =
-  Core.defaultService
-    (Core.ServiceId "acceleratedmobilepageurl:v1")
-    "acceleratedmobilepageurl.googleapis.com"
+acceleratedMobilePageUrlService
+  = Core.defaultService
+      (Core.ServiceId "acceleratedmobilepageurl:v1")
+      "acceleratedmobilepageurl.googleapis.com"

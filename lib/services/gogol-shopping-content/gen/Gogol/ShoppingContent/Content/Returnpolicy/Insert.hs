@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,14 +31,14 @@
 --
 -- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.returnpolicy.insert@.
 module Gogol.ShoppingContent.Content.Returnpolicy.Insert
-  ( -- * Resource
-    ContentReturnpolicyInsertResource,
+    (
+    -- * Resource
+      ContentReturnpolicyInsertResource
 
     -- ** Constructing a Request
-    ContentReturnpolicyInsert (..),
-    newContentReturnpolicyInsert,
-  )
-where
+    , ContentReturnpolicyInsert (..)
+    , newContentReturnpolicyInsert
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.ShoppingContent.Types
@@ -45,78 +46,73 @@ import Gogol.ShoppingContent.Types
 -- | A resource alias for @content.returnpolicy.insert@ method which the
 -- 'ContentReturnpolicyInsert' request conforms to.
 type ContentReturnpolicyInsertResource =
-  "content"
-    Core.:> "v2.1"
-    Core.:> Core.Capture "merchantId" Core.Word64
-    Core.:> "returnpolicy"
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] ReturnPolicy
-    Core.:> Core.Post '[Core.JSON] ReturnPolicy
+     "content" Core.:>
+       "v2.1" Core.:>
+         Core.Capture "merchantId" Core.Word64 Core.:>
+           "returnpolicy" Core.:>
+             Core.QueryParam "$.xgafv" Xgafv Core.:>
+               Core.QueryParam "access_token" Core.Text Core.:>
+                 Core.QueryParam "callback" Core.Text Core.:>
+                   Core.QueryParam "uploadType" Core.Text Core.:>
+                     Core.QueryParam "upload_protocol" Core.Text Core.:>
+                       Core.QueryParam "alt" Core.AltJSON Core.:>
+                         Core.ReqBody '[Core.JSON] ReturnPolicy Core.:>
+                           Core.Post '[Core.JSON] ReturnPolicy
 
 -- | Inserts a return policy for the Merchant Center account.
 --
 -- /See:/ 'newContentReturnpolicyInsert' smart constructor.
 data ContentReturnpolicyInsert = ContentReturnpolicyInsert
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | The Merchant Center account to insert a return policy for.
-    merchantId :: Core.Word64,
-    -- | Multipart request metadata.
-    payload :: ReturnPolicy,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | The Merchant Center account to insert a return policy for.
+    , merchantId :: Core.Word64
+      -- | Multipart request metadata.
+    , payload :: ReturnPolicy
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ContentReturnpolicyInsert' with the minimum fields required to make a request.
-newContentReturnpolicyInsert ::
-  -- |  The Merchant Center account to insert a return policy for. See 'merchantId'.
-  Core.Word64 ->
-  -- |  Multipart request metadata. See 'payload'.
-  ReturnPolicy ->
-  ContentReturnpolicyInsert
+newContentReturnpolicyInsert 
+    ::  Core.Word64
+       -- ^  The Merchant Center account to insert a return policy for. See 'merchantId'.
+    -> ReturnPolicy
+       -- ^  Multipart request metadata. See 'payload'.
+    -> ContentReturnpolicyInsert
 newContentReturnpolicyInsert merchantId payload =
   ContentReturnpolicyInsert
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      merchantId = merchantId,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , merchantId = merchantId
+    , payload = payload
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest ContentReturnpolicyInsert where
-  type Rs ContentReturnpolicyInsert = ReturnPolicy
-  type
-    Scopes ContentReturnpolicyInsert =
-      '[Content'FullControl]
-  requestClient ContentReturnpolicyInsert {..} =
-    go
-      merchantId
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      payload
-      shoppingContentService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ContentReturnpolicyInsertResource
-          )
-          Core.mempty
+instance Core.GoogleRequest ContentReturnpolicyInsert
+         where
+        type Rs ContentReturnpolicyInsert = ReturnPolicy
+        type Scopes ContentReturnpolicyInsert =
+             '[Content'FullControl]
+        requestClient ContentReturnpolicyInsert{..}
+          = go merchantId xgafv accessToken callback uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              shoppingContentService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy ContentReturnpolicyInsertResource)
+                      Core.mempty
+

@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,108 +31,103 @@
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.floodlightActivityGroups.patch@.
 module Gogol.DFAReporting.FloodlightActivityGroups.Patch
-  ( -- * Resource
-    DFAReportingFloodlightActivityGroupsPatchResource,
+    (
+    -- * Resource
+      DFAReportingFloodlightActivityGroupsPatchResource
 
     -- ** Constructing a Request
-    DFAReportingFloodlightActivityGroupsPatch (..),
-    newDFAReportingFloodlightActivityGroupsPatch,
-  )
-where
+    , DFAReportingFloodlightActivityGroupsPatch (..)
+    , newDFAReportingFloodlightActivityGroupsPatch
+    ) where
 
-import Gogol.DFAReporting.Types
 import qualified Gogol.Prelude as Core
+import Gogol.DFAReporting.Types
 
 -- | A resource alias for @dfareporting.floodlightActivityGroups.patch@ method which the
 -- 'DFAReportingFloodlightActivityGroupsPatch' request conforms to.
-type DFAReportingFloodlightActivityGroupsPatchResource =
-  "dfareporting"
-    Core.:> "v4"
-    Core.:> "userprofiles"
-    Core.:> Core.Capture "profileId" Core.Int64
-    Core.:> "floodlightActivityGroups"
-    Core.:> Core.QueryParam "id" Core.Int64
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody '[Core.JSON] FloodlightActivityGroup
-    Core.:> Core.Patch '[Core.JSON] FloodlightActivityGroup
+type DFAReportingFloodlightActivityGroupsPatchResource
+     =
+     "dfareporting" Core.:>
+       "v4" Core.:>
+         "userprofiles" Core.:>
+           Core.Capture "profileId" Core.Int64 Core.:>
+             "floodlightActivityGroups" Core.:>
+               Core.QueryParam "id" Core.Int64 Core.:>
+                 Core.QueryParam "$.xgafv" Xgafv Core.:>
+                   Core.QueryParam "access_token" Core.Text Core.:>
+                     Core.QueryParam "callback" Core.Text Core.:>
+                       Core.QueryParam "uploadType" Core.Text Core.:>
+                         Core.QueryParam "upload_protocol" Core.Text Core.:>
+                           Core.QueryParam "alt" Core.AltJSON Core.:>
+                             Core.ReqBody '[Core.JSON] FloodlightActivityGroup
+                               Core.:>
+                               Core.Patch '[Core.JSON] FloodlightActivityGroup
 
 -- | Updates an existing floodlight activity group. This method supports patch semantics.
 --
 -- /See:/ 'newDFAReportingFloodlightActivityGroupsPatch' smart constructor.
 data DFAReportingFloodlightActivityGroupsPatch = DFAReportingFloodlightActivityGroupsPatch
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | FloodlightActivityGroup ID.
-    id :: Core.Int64,
-    -- | Multipart request metadata.
-    payload :: FloodlightActivityGroup,
-    -- | User profile ID associated with this request.
-    profileId :: Core.Int64,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. EventTag ID.
+    , id :: Core.Int64
+      -- | Multipart request metadata.
+    , payload :: FloodlightActivityGroup
+      -- | User profile ID associated with this request.
+    , profileId :: Core.Int64
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DFAReportingFloodlightActivityGroupsPatch' with the minimum fields required to make a request.
-newDFAReportingFloodlightActivityGroupsPatch ::
-  -- |  FloodlightActivityGroup ID. See 'id'.
-  Core.Int64 ->
-  -- |  Multipart request metadata. See 'payload'.
-  FloodlightActivityGroup ->
-  -- |  User profile ID associated with this request. See 'profileId'.
-  Core.Int64 ->
-  DFAReportingFloodlightActivityGroupsPatch
+newDFAReportingFloodlightActivityGroupsPatch 
+    ::  Core.Int64
+       -- ^  Required. EventTag ID. See 'id'.
+    -> FloodlightActivityGroup
+       -- ^  Multipart request metadata. See 'payload'.
+    -> Core.Int64
+       -- ^  User profile ID associated with this request. See 'profileId'.
+    -> DFAReportingFloodlightActivityGroupsPatch
 newDFAReportingFloodlightActivityGroupsPatch id payload profileId =
   DFAReportingFloodlightActivityGroupsPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      id = id,
-      payload = payload,
-      profileId = profileId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , id = id
+    , payload = payload
+    , profileId = profileId
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingFloodlightActivityGroupsPatch
-  where
-  type
-    Rs DFAReportingFloodlightActivityGroupsPatch =
-      FloodlightActivityGroup
-  type
-    Scopes DFAReportingFloodlightActivityGroupsPatch =
-      '[Dfatrafficking'FullControl]
-  requestClient
-    DFAReportingFloodlightActivityGroupsPatch {..} =
-      go
-        profileId
-        (Core.Just id)
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dFAReportingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DFAReportingFloodlightActivityGroupsPatchResource
-            )
-            Core.mempty
+instance Core.GoogleRequest
+           DFAReportingFloodlightActivityGroupsPatch
+         where
+        type Rs DFAReportingFloodlightActivityGroupsPatch =
+             FloodlightActivityGroup
+        type Scopes DFAReportingFloodlightActivityGroupsPatch
+             = '[Dfatrafficking'FullControl]
+        requestClient
+          DFAReportingFloodlightActivityGroupsPatch{..}
+          = go profileId (Core.Just id) xgafv accessToken
+              callback
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              payload
+              dFAReportingService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy
+                           DFAReportingFloodlightActivityGroupsPatchResource)
+                      Core.mempty
+

@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,52 +31,49 @@
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.accounts.list@.
 module Gogol.AdExchangeBuyer.Accounts.List
-  ( -- * Resource
-    AdExchangeBuyerAccountsListResource,
+    (
+    -- * Resource
+      AdExchangeBuyerAccountsListResource
 
     -- ** Constructing a Request
-    AdExchangeBuyerAccountsList (..),
-    newAdExchangeBuyerAccountsList,
-  )
-where
+    , AdExchangeBuyerAccountsList (..)
+    , newAdExchangeBuyerAccountsList
+    ) where
 
-import Gogol.AdExchangeBuyer.Types
 import qualified Gogol.Prelude as Core
+import Gogol.AdExchangeBuyer.Types
 
 -- | A resource alias for @adexchangebuyer.accounts.list@ method which the
 -- 'AdExchangeBuyerAccountsList' request conforms to.
 type AdExchangeBuyerAccountsListResource =
-  "adexchangebuyer"
-    Core.:> "v1.4"
-    Core.:> "accounts"
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] AccountsList
+     "adexchangebuyer" Core.:>
+       "v1.4" Core.:>
+         "accounts" Core.:>
+           Core.QueryParam "alt" Core.AltJSON Core.:>
+             Core.Get '[Core.JSON] AccountsList
 
 -- | Retrieves the authenticated user\'s list of accounts.
 --
 -- /See:/ 'newAdExchangeBuyerAccountsList' smart constructor.
 data AdExchangeBuyerAccountsList = AdExchangeBuyerAccountsList
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AdExchangeBuyerAccountsList' with the minimum fields required to make a request.
-newAdExchangeBuyerAccountsList ::
-  AdExchangeBuyerAccountsList
+newAdExchangeBuyerAccountsList 
+    ::  AdExchangeBuyerAccountsList
 newAdExchangeBuyerAccountsList = AdExchangeBuyerAccountsList
 
-instance
-  Core.GoogleRequest
-    AdExchangeBuyerAccountsList
-  where
-  type Rs AdExchangeBuyerAccountsList = AccountsList
-  type
-    Scopes AdExchangeBuyerAccountsList =
-      '[Adexchange'Buyer]
-  requestClient AdExchangeBuyerAccountsList {} =
-    go (Core.Just Core.AltJSON) adExchangeBuyerService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AdExchangeBuyerAccountsListResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           AdExchangeBuyerAccountsList
+         where
+        type Rs AdExchangeBuyerAccountsList = AccountsList
+        type Scopes AdExchangeBuyerAccountsList =
+             '[Adexchange'Buyer]
+        requestClient AdExchangeBuyerAccountsList{}
+          = go (Core.Just Core.AltJSON) adExchangeBuyerService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy AdExchangeBuyerAccountsListResource)
+                      Core.mempty
+

@@ -148,11 +148,6 @@
                   "location": "query",
                   "type": "string"
                 },
-                "includeUnrevealedLocations": {
-                  "description": "If true, the returned list will include locations which are not yet revealed.",
-                  "location": "query",
-                  "type": "boolean"
-                },
                 "name": {
                   "description": "The resource that owns the locations collection, if applicable.",
                   "location": "path",
@@ -194,7 +189,7 @@
                   ],
                   "parameters": {
                     "instanceId": {
-                      "description": "Required. The name of the instance to create.",
+                      "description": "Required. The name of the instance to create. Instance name can only contain lowercase alphanumeric characters and hyphens. It must start with a letter and must not end with a hyphen. It can have a maximum of 30 characters.",
                       "location": "query",
                       "type": "string"
                     },
@@ -567,7 +562,7 @@
             "operations": {
               "methods": {
                 "cancel": {
-                  "description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.",
+                  "description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of `1`, corresponding to `Code.CANCELLED`.",
                   "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/operations/{operationsId}:cancel",
                   "httpMethod": "POST",
                   "id": "datafusion.projects.locations.operations.cancel",
@@ -737,7 +732,7 @@
       }
     }
   },
-  "revision": "20230320",
+  "revision": "20241204",
   "rootUrl": "https://datafusion.googleapis.com/",
   "schemas": {
     "Accelerator": {
@@ -745,7 +740,7 @@
       "id": "Accelerator",
       "properties": {
         "acceleratorType": {
-          "description": "The type of an accelator for a CDF instance.",
+          "description": "Optional. The type of an accelator for a Cloud Data Fusion instance.",
           "enum": [
             "ACCELERATOR_TYPE_UNSPECIFIED",
             "CDC",
@@ -755,15 +750,15 @@
           ],
           "enumDescriptions": [
             "Default value, if unspecified.",
-            "Change Data Capture accelerator for CDF.",
-            "Cloud Healthcare accelerator for CDF. This accelerator is to enable Cloud Healthcare specific CDF plugins developed by Healthcare team.",
+            "Change Data Capture accelerator for Cloud Data Fusion.",
+            "Reserved for internal use.",
             "Contact Center AI Insights This accelerator is used to enable import and export pipelines custom built to streamline CCAI Insights processing.",
-            "Cloud search accelerator for CDF. This accelerator is to enable Cloud search specific CDF plugins developed by Cloudsearch team."
+            "Reserved for internal use."
           ],
           "type": "string"
         },
         "state": {
-          "description": "The state of the accelerator.",
+          "description": "Output only. The state of the accelerator.",
           "enum": [
             "STATE_UNSPECIFIED",
             "ENABLED",
@@ -776,6 +771,7 @@
             "Indicates that the accelerator is disabled and not available to use.",
             "Indicates that accelerator state is currently unknown. Requests for enable, disable could be retried while in this state."
           ],
+          "readOnly": true,
           "type": "string"
         }
       },
@@ -838,14 +834,14 @@
           "description": "The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies)."
         },
         "members": {
-          "description": "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]`: An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts). For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding.",
+          "description": "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]`: An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts). For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. * `principal://iam.googleapis.com/locations/global/workforcePools/{pool_id}/subject/{subject_attribute_value}`: A single identity in a workforce identity pool. * `principalSet://iam.googleapis.com/locations/global/workforcePools/{pool_id}/group/{group_id}`: All workforce identities in a group. * `principalSet://iam.googleapis.com/locations/global/workforcePools/{pool_id}/attribute.{attribute_name}/{attribute_value}`: All workforce identities with a specific attribute value. * `principalSet://iam.googleapis.com/locations/global/workforcePools/{pool_id}/*`: All identities in a workforce identity pool. * `principal://iam.googleapis.com/projects/{project_number}/locations/global/workloadIdentityPools/{pool_id}/subject/{subject_attribute_value}`: A single identity in a workload identity pool. * `principalSet://iam.googleapis.com/projects/{project_number}/locations/global/workloadIdentityPools/{pool_id}/group/{group_id}`: A workload identity pool group. * `principalSet://iam.googleapis.com/projects/{project_number}/locations/global/workloadIdentityPools/{pool_id}/attribute.{attribute_name}/{attribute_value}`: All identities in a workload identity pool with a certain attribute. * `principalSet://iam.googleapis.com/projects/{project_number}/locations/global/workloadIdentityPools/{pool_id}/*`: All identities in a workload identity pool. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. * `deleted:principal://iam.googleapis.com/locations/global/workforcePools/{pool_id}/subject/{subject_attribute_value}`: Deleted single identity in a workforce identity pool. For example, `deleted:principal://iam.googleapis.com/locations/global/workforcePools/my-pool-id/subject/my-subject-attribute-value`.",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "role": {
-          "description": "Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.",
+          "description": "Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`. For an overview of the IAM roles and permissions, see the [IAM documentation](https://cloud.google.com/iam/docs/roles-overview). For a list of the available pre-defined roles, see [here](https://cloud.google.com/iam/docs/understanding-roles).",
           "type": "string"
         }
       },
@@ -862,7 +858,7 @@
       "id": "CryptoKeyConfig",
       "properties": {
         "keyReference": {
-          "description": "The name of the key which is used to encrypt/decrypt customer data. For key in Cloud KMS, the key should be in the format of `projects/*/locations/*/keyRings/*/cryptoKeys/*`.",
+          "description": "Optional. The name of the key which is used to encrypt/decrypt customer data. For key in Cloud KMS, the key should be in the format of `projects/*/locations/*/keyRings/*/cryptoKeys/*`.",
           "type": "string"
         }
       },
@@ -881,7 +877,7 @@
           "type": "string"
         },
         "name": {
-          "description": "Required. The resource name of the dns peering zone. Format: projects/{project}/locations/{location}/instances/{instance}/dnsPeerings/{dns_peering}",
+          "description": "Identifier. The resource name of the dns peering zone. Format: projects/{project}/locations/{location}/instances/{instance}/dnsPeerings/{dns_peering}",
           "type": "string"
         },
         "targetNetwork": {
@@ -972,14 +968,18 @@
         },
         "cryptoKeyConfig": {
           "$ref": "CryptoKeyConfig",
-          "description": "The crypto key configuration. This field is used by the Customer-Managed Encryption Keys (CMEK) feature."
+          "description": "Optional. The crypto key configuration. This field is used by the Customer-Managed Encryption Keys (CMEK) feature."
+        },
+        "dataplexDataLineageIntegrationEnabled": {
+          "description": "Optional. Option to enable the Dataplex Lineage Integration feature.",
+          "type": "boolean"
         },
         "dataprocServiceAccount": {
-          "description": "User-managed service account to set on Dataproc when Cloud Data Fusion creates Dataproc to run data processing pipelines. This allows users to have fine-grained access control on Dataproc's accesses to cloud resources.",
+          "description": "Optional. User-managed service account to set on Dataproc when Cloud Data Fusion creates Dataproc to run data processing pipelines. This allows users to have fine-grained access control on Dataproc's accesses to cloud resources.",
           "type": "string"
         },
         "description": {
-          "description": "A description of this instance.",
+          "description": "Optional. A description of this instance.",
           "type": "string"
         },
         "disabledReason": {
@@ -999,28 +999,29 @@
           "type": "array"
         },
         "displayName": {
-          "description": "Display name for an instance.",
+          "description": "Optional. Display name for an instance.",
           "type": "string"
         },
         "enableRbac": {
-          "description": "Option to enable granular role-based access control.",
+          "description": "Optional. Option to enable granular role-based access control.",
           "type": "boolean"
         },
         "enableStackdriverLogging": {
-          "description": "Option to enable Stackdriver Logging.",
+          "description": "Optional. Option to enable Stackdriver Logging.",
           "type": "boolean"
         },
         "enableStackdriverMonitoring": {
-          "description": "Option to enable Stackdriver Monitoring.",
+          "description": "Optional. Option to enable Stackdriver Monitoring.",
           "type": "boolean"
         },
         "enableZoneSeparation": {
-          "description": "Option to enable granular zone separation.",
+          "description": "Output only. Option to enable granular zone separation.",
+          "readOnly": true,
           "type": "boolean"
         },
         "eventPublishConfig": {
           "$ref": "EventPublishConfig",
-          "description": "Option to enable and pass metadata for event publishing."
+          "description": "Optional. Option to enable and pass metadata for event publishing."
         },
         "gcsBucket": {
           "description": "Output only. Cloud Storage bucket generated by Data Fusion in the customer project.",
@@ -1034,6 +1035,10 @@
           "description": "The resource labels for instance to use to annotate any related underlying resources such as Compute Engine VMs. The character '=' is not allowed to be used within the labels.",
           "type": "object"
         },
+        "maintenancePolicy": {
+          "$ref": "MaintenancePolicy",
+          "description": "Optional. Configure the maintenance policy for this instance."
+        },
         "name": {
           "description": "Output only. The name of this instance is in the form of projects/{project}/locations/{location}/instances/{instance}.",
           "readOnly": true,
@@ -1041,7 +1046,7 @@
         },
         "networkConfig": {
           "$ref": "NetworkConfig",
-          "description": "Network configuration options. These are required when a private Data Fusion instance is to be created."
+          "description": "Optional. Network configuration options. These are required when a private Data Fusion instance is to be created."
         },
         "options": {
           "additionalProperties": {
@@ -1051,15 +1056,25 @@
           "type": "object"
         },
         "p4ServiceAccount": {
-          "description": "Output only. P4 service account for the customer project.",
+          "description": "Output only. Service agent for the customer project.",
           "readOnly": true,
           "type": "string"
         },
+        "patchRevision": {
+          "description": "Optional. Current patch revision of the Data Fusion.",
+          "type": "string"
+        },
         "privateInstance": {
-          "description": "Specifies whether the Data Fusion instance should be private. If set to true, all Data Fusion nodes will have private IP addresses and will not be able to access the public internet.",
+          "description": "Optional. Specifies whether the Data Fusion instance should be private. If set to true, all Data Fusion nodes will have private IP addresses and will not be able to access the public internet.",
+          "type": "boolean"
+        },
+        "satisfiesPzs": {
+          "description": "Output only. Reserved for future use.",
+          "readOnly": true,
           "type": "boolean"
         },
         "serviceAccount": {
+          "deprecated": true,
           "description": "Output only. Deprecated. Use tenant_project_id instead to extract the tenant project ID.",
           "readOnly": true,
           "type": "string"
@@ -1133,11 +1148,16 @@
           "type": "string"
         },
         "version": {
-          "description": "Current version of the Data Fusion. Only specifiable in Update.",
+          "description": "Optional. Current version of the Data Fusion. Only specifiable in Update.",
+          "type": "string"
+        },
+        "workforceIdentityServiceEndpoint": {
+          "description": "Output only. Endpoint on which the Data Fusion UI is accessible to third-party users",
+          "readOnly": true,
           "type": "string"
         },
         "zone": {
-          "description": "Name of the zone in which the Data Fusion instance will be created. Only DEVELOPER instances use this field.",
+          "description": "Optional. Name of the zone in which the Data Fusion instance will be created. Only DEVELOPER instances use this field.",
           "type": "string"
         }
       },
@@ -1148,7 +1168,8 @@
       "id": "ListAvailableVersionsResponse",
       "properties": {
         "availableVersions": {
-          "description": "Represents a list of versions that are supported.",
+          "deprecated": true,
+          "description": "Represents a list of versions that are supported. Deprecated: Use versions field instead.",
           "items": {
             "$ref": "Version"
           },
@@ -1157,6 +1178,13 @@
         "nextPageToken": {
           "description": "Token to retrieve the next page of results or empty if there are no more results in the list.",
           "type": "string"
+        },
+        "versions": {
+          "description": "Represents a list of all versions.",
+          "items": {
+            "$ref": "Version"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -1241,7 +1269,7 @@
       "type": "object"
     },
     "Location": {
-      "description": "A resource that represents Google Cloud Platform location.",
+      "description": "A resource that represents a Google Cloud location.",
       "id": "Location",
       "properties": {
         "displayName": {
@@ -1274,17 +1302,61 @@
       },
       "type": "object"
     },
+    "MaintenancePolicy": {
+      "description": "Maintenance policy of the instance.",
+      "id": "MaintenancePolicy",
+      "properties": {
+        "maintenanceExclusionWindow": {
+          "$ref": "TimeWindow",
+          "description": "Optional. The maintenance exclusion window of the instance."
+        },
+        "maintenanceWindow": {
+          "$ref": "MaintenanceWindow",
+          "description": "Optional. The maintenance window of the instance."
+        }
+      },
+      "type": "object"
+    },
+    "MaintenanceWindow": {
+      "description": "Maintenance window of the instance.",
+      "id": "MaintenanceWindow",
+      "properties": {
+        "recurringTimeWindow": {
+          "$ref": "RecurringTimeWindow",
+          "description": "Required. The recurring time window of the maintenance window."
+        }
+      },
+      "type": "object"
+    },
     "NetworkConfig": {
       "description": "Network configuration for a Data Fusion instance. These configurations are used for peering with the customer network. Configurations are optional when a public Data Fusion instance is to be created. However, providing these configurations allows several benefits, such as reduced network latency while accessing the customer resources from managed Data Fusion instance nodes, as well as access to the customer on-prem resources.",
       "id": "NetworkConfig",
       "properties": {
+        "connectionType": {
+          "description": "Optional. Type of connection for establishing private IP connectivity between the Data Fusion customer project VPC and the corresponding tenant project from a predefined list of available connection modes. If this field is unspecified for a private instance, VPC peering is used.",
+          "enum": [
+            "CONNECTION_TYPE_UNSPECIFIED",
+            "VPC_PEERING",
+            "PRIVATE_SERVICE_CONNECT_INTERFACES"
+          ],
+          "enumDescriptions": [
+            "No specific connection type was requested, the default value of VPC_PEERING is chosen.",
+            "Requests the use of VPC peerings for connecting the consumer and tenant projects.",
+            "Requests the use of Private Service Connect Interfaces for connecting the consumer and tenant projects."
+          ],
+          "type": "string"
+        },
         "ipAllocation": {
-          "description": "The IP range in CIDR notation to use for the managed Data Fusion instance nodes. This range must not overlap with any other ranges used in the customer network.",
+          "description": "Optional. The IP range in CIDR notation to use for the managed Data Fusion instance nodes. This range must not overlap with any other ranges used in the Data Fusion instance network. This is required only when using connection type VPC_PEERING. Format: a.b.c.d/22 Example: 192.168.0.0/22",
           "type": "string"
         },
         "network": {
-          "description": "Name of the network in the customer project with which the Tenant Project will be peered for executing pipelines. In case of shared VPC where the network resides in another host project the network should specified in the form of projects/{host-project-id}/global/networks/{network}",
+          "description": "Optional. Name of the network in the customer project with which the Tenant Project will be peered for executing pipelines. In case of shared VPC where the network resides in another host project the network should specified in the form of projects/{host-project-id}/global/networks/{network}. This is only required for connectivity type VPC_PEERING.",
           "type": "string"
+        },
+        "privateServiceConnectConfig": {
+          "$ref": "PrivateServiceConnectConfig",
+          "description": "Optional. Configuration for Private Service Connect. This is required only when using connection type PRIVATE_SERVICE_CONNECT_INTERFACES."
         }
       },
       "type": "object"
@@ -1318,7 +1390,7 @@
             "description": "Properties of the object. Contains field @type with type URL.",
             "type": "any"
           },
-          "description": "The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.",
+          "description": "The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.",
           "type": "object"
         }
       },
@@ -1369,7 +1441,7 @@
       "type": "object"
     },
     "Policy": {
-      "description": "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \u003c timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \u003c timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/).",
+      "description": "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** ``` { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \u003c timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } ``` **YAML example:** ``` bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \u003c timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 ``` For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/).",
       "id": "Policy",
       "properties": {
         "auditConfigs": {
@@ -1395,6 +1467,41 @@
           "description": "Specifies the format of the policy. Valid values are `0`, `1`, and `3`. Requests that specify an invalid value are rejected. Any operation that affects conditional role bindings must specify version `3`. This requirement applies to the following operations: * Getting a policy that includes a conditional role binding * Adding a conditional role binding to a policy * Changing a conditional role binding in a policy * Removing any role binding, with or without a condition, from a policy that includes conditions **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost. If a policy does not include any conditions, operations on that policy may specify any valid version or leave the field unset. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).",
           "format": "int32",
           "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "PrivateServiceConnectConfig": {
+      "description": "Configuration for using Private Service Connect to establish connectivity between the Data Fusion consumer project and the corresponding tenant project.",
+      "id": "PrivateServiceConnectConfig",
+      "properties": {
+        "effectiveUnreachableCidrBlock": {
+          "description": "Output only. The CIDR block to which the CDF instance can't route traffic to in the consumer project VPC. The size of this block is /25. The format of this field is governed by RFC 4632. Example: 240.0.0.0/25",
+          "readOnly": true,
+          "type": "string"
+        },
+        "networkAttachment": {
+          "description": "Required. The reference to the network attachment used to establish private connectivity. It will be of the form projects/{project-id}/regions/{region}/networkAttachments/{network-attachment-id}.",
+          "type": "string"
+        },
+        "unreachableCidrBlock": {
+          "description": "Optional. Input only. The CIDR block to which the CDF instance can't route traffic to in the consumer project VPC. The size of this block should be at least /25. This range should not overlap with the primary address range of any subnetwork used by the network attachment. This range can be used for other purposes in the consumer VPC as long as there is no requirement for CDF to reach destinations using these addresses. If this value is not provided, the server chooses a non RFC 1918 address range. The format of this field is governed by RFC 4632. Example: 192.168.0.0/25",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RecurringTimeWindow": {
+      "description": "Represents an arbitrary window of time that recurs.",
+      "id": "RecurringTimeWindow",
+      "properties": {
+        "recurrence": {
+          "description": "Required. An RRULE with format [RFC-5545](https://tools.ietf.org/html/rfc5545#section-3.8.5.3) for how this window reccurs. They go on for the span of time between the start and end time. The only supported FREQ value is \"WEEKLY\". To have something repeat every weekday, use: \"FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR\". This specifies how frequently the window starts. To have a 9 am - 5 pm UTC-4 window every weekday, use something like: ``` start time = 2019-01-01T09:00:00-0400 end time = 2019-01-01T17:00:00-0400 recurrence = FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR ```",
+          "type": "string"
+        },
+        "window": {
+          "$ref": "TimeWindow",
+          "description": "Required. The window representing the start and end time of recurrences. This field ignores the date components of the provided timestamps. Only the time of day and duration between start and end time are relevant."
         }
       },
       "type": "object"
@@ -1476,6 +1583,23 @@
       },
       "type": "object"
     },
+    "TimeWindow": {
+      "description": "Represents an arbitrary window of time.",
+      "id": "TimeWindow",
+      "properties": {
+        "endTime": {
+          "description": "Required. The end time of the time window provided in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. The end time should take place after the start time. Example: \"2024-01-02T12:04:06-06:00\"",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Required. The start time of the time window provided in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. Example: \"2024-01-01T12:04:06-04:00\"",
+          "format": "google-datetime",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Version": {
       "description": "The Data Fusion version. This proto message stores information about certain Data Fusion version, which is used for Data Fusion version upgrade.",
       "id": "Version",
@@ -1496,12 +1620,14 @@
           "enum": [
             "TYPE_UNSPECIFIED",
             "TYPE_PREVIEW",
-            "TYPE_GENERAL_AVAILABILITY"
+            "TYPE_GENERAL_AVAILABILITY",
+            "TYPE_DEPRECATED"
           ],
           "enumDescriptions": [
             "Version does not have availability yet",
             "Version is under development and not considered stable",
-            "Version is available for public use"
+            "Version is available for public use",
+            "Version is no longer supported."
           ],
           "type": "string"
         },

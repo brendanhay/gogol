@@ -5,13 +5,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -30,14 +31,14 @@
 --
 -- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferJobs.get@.
 module Gogol.StorageTransfer.TransferJobs.Get
-  ( -- * Resource
-    StorageTransferTransferJobsGetResource,
+    (
+    -- * Resource
+      StorageTransferTransferJobsGetResource
 
     -- ** Constructing a Request
-    StorageTransferTransferJobsGet (..),
-    newStorageTransferTransferJobsGet,
-  )
-where
+    , StorageTransferTransferJobsGet (..)
+    , newStorageTransferTransferJobsGet
+    ) where
 
 import qualified Gogol.Prelude as Core
 import Gogol.StorageTransfer.Types
@@ -45,79 +46,73 @@ import Gogol.StorageTransfer.Types
 -- | A resource alias for @storagetransfer.transferJobs.get@ method which the
 -- 'StorageTransferTransferJobsGet' request conforms to.
 type StorageTransferTransferJobsGetResource =
-  "v1"
-    Core.:> Core.Capture "jobName" Core.Text
-    Core.:> Core.QueryParam "projectId" Core.Text
-    Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get '[Core.JSON] TransferJob
+     "v1" Core.:>
+       Core.Capture "jobName" Core.Text Core.:>
+         Core.QueryParam "projectId" Core.Text Core.:>
+           Core.QueryParam "$.xgafv" Xgafv Core.:>
+             Core.QueryParam "access_token" Core.Text Core.:>
+               Core.QueryParam "callback" Core.Text Core.:>
+                 Core.QueryParam "uploadType" Core.Text Core.:>
+                   Core.QueryParam "upload_protocol" Core.Text Core.:>
+                     Core.QueryParam "alt" Core.AltJSON Core.:>
+                       Core.Get '[Core.JSON] TransferJob
 
 -- | Gets a transfer job.
 --
 -- /See:/ 'newStorageTransferTransferJobsGet' smart constructor.
 data StorageTransferTransferJobsGet = StorageTransferTransferJobsGet
-  { -- | V1 error format.
-    xgafv :: (Core.Maybe Xgafv),
-    -- | OAuth access token.
-    accessToken :: (Core.Maybe Core.Text),
-    -- | JSONP
-    callback :: (Core.Maybe Core.Text),
-    -- | Required. The job to get.
-    jobName :: Core.Text,
-    -- | Required. The ID of the Google Cloud project that owns the job.
-    projectId :: Core.Text,
-    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    uploadType :: (Core.Maybe Core.Text),
-    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
+    {
+      -- | V1 error format.
+      xgafv :: (Core.Maybe Xgafv)
+      -- | OAuth access token.
+    , accessToken :: (Core.Maybe Core.Text)
+      -- | JSONP
+    , callback :: (Core.Maybe Core.Text)
+      -- | Required. The job to get.
+    , jobName :: Core.Text
+      -- | Required. The ID of the Google Cloud project that owns the job.
+    , projectId :: Core.Text
+      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    , uploadType :: (Core.Maybe Core.Text)
+      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    , uploadProtocol :: (Core.Maybe Core.Text)
+    }
+    deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'StorageTransferTransferJobsGet' with the minimum fields required to make a request.
-newStorageTransferTransferJobsGet ::
-  -- |  Required. The job to get. See 'jobName'.
-  Core.Text ->
-  -- |  Required. The ID of the Google Cloud project that owns the job. See 'projectId'.
-  Core.Text ->
-  StorageTransferTransferJobsGet
+newStorageTransferTransferJobsGet 
+    ::  Core.Text
+       -- ^  Required. The job to get. See 'jobName'.
+    -> Core.Text
+       -- ^  Required. The ID of the Google Cloud project that owns the job. See 'projectId'.
+    -> StorageTransferTransferJobsGet
 newStorageTransferTransferJobsGet jobName projectId =
   StorageTransferTransferJobsGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      jobName = jobName,
-      projectId = projectId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing
+    , accessToken = Core.Nothing
+    , callback = Core.Nothing
+    , jobName = jobName
+    , projectId = projectId
+    , uploadType = Core.Nothing
+    , uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    StorageTransferTransferJobsGet
-  where
-  type Rs StorageTransferTransferJobsGet = TransferJob
-  type
-    Scopes StorageTransferTransferJobsGet =
-      '[CloudPlatform'FullControl]
-  requestClient StorageTransferTransferJobsGet {..} =
-    go
-      jobName
-      (Core.Just projectId)
-      xgafv
-      accessToken
-      callback
-      uploadType
-      uploadProtocol
-      (Core.Just Core.AltJSON)
-      storageTransferService
-    where
-      go =
-        Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy StorageTransferTransferJobsGetResource
-          )
-          Core.mempty
+instance Core.GoogleRequest
+           StorageTransferTransferJobsGet
+         where
+        type Rs StorageTransferTransferJobsGet = TransferJob
+        type Scopes StorageTransferTransferJobsGet =
+             '[CloudPlatform'FullControl]
+        requestClient StorageTransferTransferJobsGet{..}
+          = go jobName (Core.Just projectId) xgafv accessToken
+              callback
+              uploadType
+              uploadProtocol
+              (Core.Just Core.AltJSON)
+              storageTransferService
+          where go
+                  = Core.buildClient
+                      (Core.Proxy ::
+                         Core.Proxy StorageTransferTransferJobsGetResource)
+                      Core.mempty
+

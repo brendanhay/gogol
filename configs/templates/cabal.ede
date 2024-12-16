@@ -45,6 +45,7 @@ library
 
   ghc-options:
     -Wall
+    -Werror
     -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates
     -funbox-strict-fields
@@ -65,4 +66,3 @@ library
 
   build-depends:
       gogol-core ^>= {{ libraryVersion }}
-    , base       >=  4.12 && < 5
