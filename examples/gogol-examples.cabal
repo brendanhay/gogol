@@ -18,6 +18,7 @@ library
   exposed-modules:
     Example.Sheets
     Example.Storage
+    Example.Tutorial
 
   build-depends:
     , aeson
