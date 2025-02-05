@@ -249,7 +249,7 @@ upload env x =
   uploadEither env x
     >=> hoistEither
 
-hoistEither :: MonadIO m => Either Error a -> m a
+hoistEither :: (MonadIO m) => Either Error a -> m a
 hoistEither = either (liftIO . throwingM _Error) pure
 
 -- $usage
@@ -262,7 +262,7 @@ hoistEither = either (liftIO . throwingM _Error) pure
 --
 -- To get started we will need to specify our Google Service credentials and
 -- create an 'Env' environment containing configuration which will be used by
--- 'runGoogle' to perform any actions. Your Google 'Credentials' can be supplied
+-- calling functions to perform any actions. Your Google 'Credentials' can be supplied
 -- in a number of ways, by having Gogol retrieve
 -- <https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials>
 -- for use on Google App Engine and Google Compute Engine, or by explicitly
@@ -273,25 +273,38 @@ hoistEither = either (liftIO . throwingM _Error) pure
 -- <https://cloud.google.com/storage/ Cloud Storage> using 'ObjectsInsert' from
 -- <http://hackage.haskell.org/package/gogol-storage gogol-storage>:
 --
--- > import Control.Lens           ((&), (.~), (<&>), (?~))
--- > import Data.Text              (Text)
+--
+-- > {-# LANGUAGE DataKinds #-}
+-- > {-# LANGUAGE FlexibleContexts #-}
+-- > {-# LANGUAGE OverloadedLabels #-}
+-- > {-# LANGUAGE OverloadedStrings #-}
+-- > {-# LANGUAGE ScopedTypeVariables #-}
+-- >
+-- > import Control.Lens ((.~), (<&>), (?~))
+-- > import Control.Monad.Trans.Resource (liftResourceT)
+-- > import Data.Conduit (runConduit, (.|))
+-- > import qualified Data.Conduit.Binary as Conduit
+-- > import Data.Function ((&))
+-- > import Data.Generics.Labels ()
+-- > import Data.Proxy
+-- > import Data.Text
+-- > import qualified Data.Text as Text
 -- > import Gogol
--- > import Gogol.Storage
--- > import System.IO              (stdout)
+-- > import qualified Gogol.Storage as Storage
+-- > import System.IO (stdout)
 -- >
 -- > import qualified Data.Text as Text
 -- >
--- > example :: IO Object
+-- > example :: IO Storage.Object
 -- > example = do
--- >     lgr  <- newLogger Debug stdout                                               -- (1)
--- >     env  <- newEnv <&> (envLogger .~ lgr) . (envScopes .~ storageReadWriteScope) -- (2) (3)
--- >     body <- sourceBody "/path/to/image.jpg"                                      -- (4)
+-- >   lgr <- newLogger Debug stdout                                                                          -- (1)
+-- >   env <- newEnv <&> (envLogger .~ lgr) . (envScopes .~ (Proxy :: Proxy '[Storage.Devstorage'ReadWrite])) -- (2) (3)
+-- >   body <- sourceBody "/path/to/image.jpg"                                                                -- (4)
+-- >   let key = "image.jpg"
+-- >       bucket = "my-storage-bucket"
 -- >
--- >     let key = "image.jpg"
--- >         bkt = "my-storage-bucket"
--- >
--- >     runResourceT . runGoogle env $                                               -- (5)
--- >         upload (objectsInsert bkt object' & oiName ?~ key) body
+-- >   runResourceT $                                                                                         -- (5)
+-- >     upload env (Storage.newStorageObjectsInsert bucket (Storage.newObject & #name ?~ key)) body
 --
 -- Breaking down the above example, we have the following points of interest:
 --
@@ -304,7 +317,7 @@ hoistEither = either (liftIO . throwingM _Error) pure
 -- 3. The lenses 'envLogger' and 'envScopes' are used to set the newly created
 --    'Logger' and authorised OAuth2 scopes, respectively. Explicitly annotating the
 --    'Env' with the scopes ensures that any mismatch between the remote
---    operations performed in 'runGoogle' and the credential scopes are raised as
+--    operations performed in 'upload' and the credential scopes are raised as
 --    errors at compile time.
 --    See the <#authorization Authorization> section for more information.
 --
@@ -317,26 +330,26 @@ hoistEither = either (liftIO . throwingM _Error) pure
 --     >
 --     > body <- sourceBody f <&> bodyContentType .~ "application" // "json"
 --
--- 5. Finally, we run the 'Google' computation using @'runResourceT' . 'runGoogle'@
---    which serialises the 'ObjectsInsert' type to a HTTP request and sets the streaming 'Body'.
---    The resulting 'Object' metadata is then parsed from a successful HTTP response.
+-- 5. Finally, we run the 'Google' computation using @'runResourceT'@
+--    which serialises the 'StorageObjectsInsert' type to a HTTP request and sets the streaming 'Body'.
+--    The resulting 'Storage.Object' metadata is then parsed from a successful HTTP response.
 -- 1
 -- Additional examples can be found can be found in the
 -- <https://github.com/brendanhay/gogol/tree/develop/examples Gogol> project's
 -- source control.
 
 -- $authorization #authorization#
--- Each request within a particular 'runGoogle' context requires specific
+-- Each request within a particular 'send', 'upload' or 'download' context requires specific
 -- OAuth2 scopes to be have been authorized for the given credentials.
 --
--- For example, the Google Storage 'ObjectsInsert' has the associated scopes of:
+-- For example, the Google Storage 'StorageObjectsInsert' has the associated scopes of:
 --
 -- > type Scopes ObjectsInsert =
 -- >      '["https://www.googleapis.com/auth/cloud-platform",
 -- >        "https://www.googleapis.com/auth/devstorage.full_control",
 -- >        "https://www.googleapis.com/auth/devstorage.read_write"]
 --
--- Multiple differing requests within a given 'runGoogle' context will then require
+-- Multiple differing requests within a given function call context will then require
 -- the credentials to have a minimal set of these associated request scopes.
 -- This authorization information is represented as a type-level set,
 -- the 's' type parameter of 'Env'. A mismatch of the sent request scopes and the 'Env' credential scopes results in a informative
@@ -351,10 +364,11 @@ hoistEither = either (liftIO . throwingM _Error) pure
 -- > import Control.Lens ((<&>), (.~))
 -- > import Gogol
 -- > import Gogol.Monitoring
+-- > import Gogol.Compute
 -- >
 -- > main :: IO ()
 -- > main = do
--- >     env <- newEnv <&> envScopes .~ (monitoringReadScope ! monitoringWriteScope ! computeReadOnlyScope)
+-- >     env <- newEnv <&> envScopes .~ (Proxy :: Proxy '[Monitoring'Read, Monitoring'Write, Compute'ReadOnly])
 -- >     ...
 --
 -- >>> :type env
