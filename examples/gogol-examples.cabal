@@ -26,11 +26,13 @@ library
     , bytestring
     , conduit
     , conduit-extra
+    , generic-lens
     , gogol          >=1.0.0.0
+    , gogol-bigquery
     , gogol-core
     , gogol-sheets
     , gogol-storage
     , lens
-    , generic-lens
     , resourcet
     , text
+    , unordered-containers
