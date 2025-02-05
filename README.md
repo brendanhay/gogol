@@ -22,7 +22,7 @@ on Hackage under the [Google section](http://hackage.haskell.org/packages/#cat:G
 
 ### Getting started
 
-A simple tutorial for getting you started can be found in [`docs`](docs/tutorial.lhs)
+A simple tutorial for getting you started can be found in this [literate programming tutorial](examples/src/Example/Tutorial.lhs)
 
 ## Organisation
 
