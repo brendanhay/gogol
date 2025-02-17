@@ -20,6 +20,10 @@ A comprehensive Google Services SDK for Haskell supporting all of the publicly a
 You can find the latest stable release documentation for each respective library
 on Hackage under the [Google section](http://hackage.haskell.org/packages/#cat:Google).
 
+### Getting started
+
+A simple tutorial for getting you started can be found in this [literate programming tutorial](examples/src/Example/Tutorial.lhs)
+
 ## Organisation
 
 This repository is organised into the following directory structure:
