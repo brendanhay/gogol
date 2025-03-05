@@ -5,19 +5,19 @@ set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
 say() {
-  echo >&2 "$@"
+    echo >&2 "$@"
 }
 
 format_haskell() {
-  local -r dir="$1"
+    local -r dir="$1"
 
-  say "Formatting $dir"
+    say "Formatting $dir"
 
-  find "$dir" -type f -name '*.cabal' -print0 |
-    xargs -0 cabal-fmt --inplace --indent=2
+    find "$dir" -type f -name '*.cabal' -print0 |
+        xargs -0 cabal-fmt --inplace --indent=2
 
-  find "$dir" -type f -name '*.hs' -print0 |
-    xargs -0 ormolu --mode=inplace -o '-XPatternSynonyms' -o '-XTypeApplications'
+    find "$dir" -type f -name '*.hs' -print0 |
+        xargs -0 ormolu --mode=inplace -o '-XPatternSynonyms' -o '-XTypeApplications'
 }
 
 # Export the functions for use in GNU parallel.
@@ -29,32 +29,32 @@ all="false"
 
 case "${1:-}" in
 --all)
-  all="true"
-  ;;
+    all="true"
+    ;;
 esac
 
 targets=(
-  lib/gogol
-  lib/gogol-core
-  examples
+    lib/gogol
+    lib/gogol-core
+    examples
 )
 
 if [ "$all" = "true" ]; then
-  targets+=(lib/services/gogol-*)
+    targets+=(lib/services/gogol-*)
 fi
 
 say "Formatting shell"
 
 find scripts -type f -print0 |
-  xargs -0 shfmt -s -i 2 -ln bash -w
+    xargs -0 shfmt -s -i 2 -ln bash -w
 
 say "Formatting nix"
 
 find . -type f -name '*.nix' -print0 |
-  xargs -0 nixpkgs-fmt
+    xargs -0 nixpkgs-fmt
 
 say "Formatting haskell"
 
 # Run the format and copy/replace steps in parallel.
 printf '%s\n' "${targets[@]}" |
-  parallel --halt-on-error 2 format_haskell
+    parallel --halt-on-error 2 format_haskell
