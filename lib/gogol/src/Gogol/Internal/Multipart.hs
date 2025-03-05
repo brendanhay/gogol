@@ -37,7 +37,7 @@ import Network.HTTP.Types (Header, hContentType)
 
 newtype Boundary = Boundary ByteString
 
-genBoundary :: MonadIO m => m Boundary
+genBoundary :: (MonadIO m) => m Boundary
 genBoundary = Boundary <$> liftIO webkitBoundary
 
 multipartHeader :: Boundary -> Header

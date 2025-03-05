@@ -12,9 +12,9 @@ packages:
   original:
     hackage: ede-0.3.4.0
 - completed:
-    hackage: aeson-2.2.3.0@sha256:011fa2d67d7a821aa5ec5c825adc919bb067d42dde8fac7c6e5db23239a58866,6589
+    hackage: aeson-2.2.3.0@sha256:61e559f2bad61a98aac564f2a4fd892d21e9e1712e14e3db93326317aa944a9b,6378
     pantry-tree:
-      sha256: e928995a568c7437575160844341219a5b057fc8e27f51162da8595692e2500c
+      sha256: 79077b6ebb6978d5f843e9a128865dcd7e99258d627b35dfccf662f88c80b89f
       size: 83371
   original:
     hackage: aeson-2.2.3.0

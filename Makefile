@@ -1,9 +1,9 @@
-SHELL     :=	 /usr/bin/env bash
-TOP       := .
-BIN       :=	./bin
-MODEL_DIR :=	./configs/models
-OUT_DIR   :=	./lib/services
-STACK_YAML :=	./gen/stack.yaml
+SHELL      := /usr/bin/env bash
+TOP        := .
+BIN        := ./bin
+MODEL_DIR  := ./configs/models
+OUT_DIR    := ./lib/services
+STACK_YAML := ./gen/stack.yaml
 
 define version =
 $(shell sed -n 's/^version: *\([0-9]*\.[0-9]*\.[0-9]\).*$$/\1/p' $(1))
@@ -25,7 +25,7 @@ gen: $(BIN)/gogol-gen $(MODEL_DIR)
  $(addprefix --model=,$(MODELS))
 
 $(BIN)/gogol-gen: $(BIN)
-	stack build gogol-gen --stack-yaml=$(STACK_YAML) --nix --copy-bins --local-bin-path $(BIN)
+	stack build gogol-gen --stack-yaml=$(STACK_YAML) --copy-bins --local-bin-path $(BIN)
 
 $(BIN):
 	mkdir $@
@@ -38,7 +38,7 @@ full-clean: clean
 	rm -r ./vendor ./configs/models
 
 $(MODEL_DIR): ./vendor/google-api-go-client
-	@./scripts/copy-models $< $@
+	@./scripts/copy-models.sh $< $@
 
 vendor/google-api-go-client:
 	git clone https://github.com/google/google-api-go-client $@

@@ -6,7 +6,7 @@ import qualified Data.Map.Strict as Map
 import Data.Maybe
 
 vMapMaybe ::
-  Ord k =>
+  (Ord k) =>
   (a -> Maybe b) ->
   Map k a ->
   Map k b

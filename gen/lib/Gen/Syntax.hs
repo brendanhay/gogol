@@ -54,7 +54,7 @@ apiAlias n ls = TypeDecl () (DHead () n) alias
       [] -> unit_tycon ()
       x : xs -> foldl' (\l r -> TyInfix () l ((UnpromotedName () . UnQual ()) (sym ":<|>")) r) x xs
 
-verbAlias :: HasDescription a s => a -> Name () -> Method Solved -> Decl ()
+verbAlias :: (HasDescription a s) => a -> Name () -> Method Solved -> Decl ()
 verbAlias d n m = TypeDecl () (DHead () n) $ servantOr meta (catMaybes [down, up])
   where
     meta = path (metadataAlias m)
@@ -122,14 +122,14 @@ requestPath m = map go . extractPath
       Just x -> case c of
         Nothing
           | x ^. iRepeated ->
-            TyApp
-              ()
-              ( TyApp
-                  ()
-                  (TyCon () "Core.Captures")
-                  (sing (local l))
-              )
-              (terminalType (_type (_pParam x)))
+              TyApp
+                ()
+                ( TyApp
+                    ()
+                    (TyCon () "Core.Captures")
+                    (sing (local l))
+                )
+                (terminalType (_type (_pParam x)))
         Nothing ->
           TyApp
             ()
@@ -161,7 +161,7 @@ requestQuery m xs =
     go (k, x) = case _pLocation x of
       Query
         | x ^. iRepeated ->
-          Just $ TyApp () (TyApp () (TyCon () "Core.QueryParams") n) t
+            Just $ TyApp () (TyApp () (TyCon () "Core.QueryParams") n) t
       Query -> Just $ TyApp () (TyApp () (TyCon () "Core.QueryParam") n) t
       Path -> Nothing
       where
@@ -390,17 +390,17 @@ googleRequestDecl n assoc extras api url m pat prec =
             | _pLocation p == Query,
               defaulted p,
               p ^. iRepeated ->
-              v l
+                v l
           Just p
             | _pLocation p == Query,
               not (required p),
               p ^. iRepeated ->
-              infixApp (v l) "Core.^." (var "Core._Default")
+                infixApp (v l) "Core.^." (var "Core._Default")
           Just p
             | _pLocation p == Query,
               not (p ^. iRepeated),
               parameter p || defaulted p ->
-              app (var "Core.Just") (v l)
+                app (var "Core.Just") (v l)
           _ -> v l
 
         ps = _mParameters m
@@ -436,15 +436,15 @@ jsonDecls g (Map.toList -> rs) = [from', to']
       | optional = optJS l
       | text = reqJSText l
       | otherwise = reqJS l
-     where
-      text = textual (_type s)
+      where
+        text = textual (_type s)
 
-      optional =
+        optional =
           case _type s of
             TMaybe {} -> True
             _other -> False
 
-      optionalList =
+        optionalList =
           case _type s of
             TMaybe (TList {}) -> True
             _other -> False
@@ -452,14 +452,14 @@ jsonDecls g (Map.toList -> rs) = [from', to']
     to' = case rs of
       [(k, v)]
         | _additional v ->
-          InstDecl
-            ()
-            Nothing
-            (instrule "Core.ToJSON" (tycon g))
-            ( Just
-                [ wildcardD "toJSON" g head emptyObj [app (var "Core.toJSON") (var (fname k))]
-                ]
-            )
+            InstDecl
+              ()
+              Nothing
+              (instrule "Core.ToJSON" (tycon g))
+              ( Just
+                  [ wildcardD "toJSON" g head emptyObj [app (var "Core.toJSON") (var (fname k))]
+                  ]
+              )
       _ ->
         InstDecl
           ()
@@ -496,9 +496,9 @@ jsonDecls g (Map.toList -> rs) = [from', to']
             _other -> False
 
         optionalList =
-            case _type s of
-              TMaybe (TList {}) -> True
-              _other -> False
+          case _type s of
+            TMaybe (TList {}) -> True
+            _other -> False
 
 wildcardD ::
   String ->
@@ -592,8 +592,8 @@ ctorDecl n rs = sfun c ps (UnGuardedRhs () rhs) noBinds
     rhs
       | Map.null rs = var d
       | otherwise =
-        RecConstr () (UnQual () d) $
-          map (uncurry fieldUpdate) (Map.toList rs)
+          RecConstr () (UnQual () d) $
+            map (uncurry fieldUpdate) (Map.toList rs)
 
     ps = map fname . Map.keys $ Map.filter parameter rs
 

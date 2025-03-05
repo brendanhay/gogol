@@ -41,7 +41,7 @@ cloudSDKConfigDir = "CLOUDSDK_CONFIG"
 
 -- | Return the filepath to the Cloud SDK well known file location such as
 -- @~\/.config\/gcloud\/application_default_credentials.json@.
-cloudSDKConfigPath :: MonadIO m => m FilePath
+cloudSDKConfigPath :: (MonadIO m) => m FilePath
 cloudSDKConfigPath = do
   m <- liftIO (lookupEnv cloudSDKConfigDir)
   case m of
@@ -57,7 +57,7 @@ defaultCredentialsFile = "GOOGLE_APPLICATION_CREDENTIALS"
 
 -- | Lookup the @GOOGLE_APPLICATION_CREDENTIALS@ environment variable for the
 -- default application credentials filepath.
-defaultCredentialsPath :: MonadIO m => m (Maybe FilePath)
+defaultCredentialsPath :: (MonadIO m) => m (Maybe FilePath)
 defaultCredentialsPath = liftIO (lookupEnv defaultCredentialsFile)
 
 -- | Performs credentials discovery in the following order:
@@ -165,13 +165,14 @@ fromJSONCredentials bs = do
   case (x, y) of
     (Left xe, Left ye) ->
       Left $
-        "Failed parsing service_account: " ++ xe
+        "Failed parsing service_account: "
+          ++ xe
           ++ ", Failed parsing authorized_user: "
           ++ ye
     (Right a, _) -> Right a
     (_, Right u) -> Right u
 
-getConfigDirectory :: MonadIO m => m FilePath
+getConfigDirectory :: (MonadIO m) => m FilePath
 getConfigDirectory = do
   h <- liftIO getHomeDirectory
   if os == "windows"

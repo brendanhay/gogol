@@ -96,7 +96,7 @@ import Network.HTTP.Types (hAuthorization)
 --  by returning 'Right' if there is a 'FromClient'-constructed
 --  Credentials and a refreshed token; otherwise, returning
 --  'Left' with error message.
-authToAuthorizedUser :: KnownScopes s => Auth s -> Either Text AuthorizedUser
+authToAuthorizedUser :: (KnownScopes s) => Auth s -> Either Text AuthorizedUser
 authToAuthorizedUser a =
   AuthorizedUser
     <$> (_clientId <$> getClient)
@@ -121,7 +121,7 @@ data Auth (s :: [Symbol]) = Auth
 -- the '_tokenExpiry' field, unlike the
 -- <https://developers.google.com/accounts/docs/OAuth2Login#validatingtoken documented>
 -- validation method.
-validate :: MonadIO m => Auth s -> m Bool
+validate :: (MonadIO m) => Auth s -> m Bool
 validate a = (< _tokenExpiry (_token a)) <$> liftIO getCurrentTime
 
 -- | Data store which ensures thread-safe access of credentials.
@@ -217,8 +217,8 @@ authorize rq s l m = bearer <$> retrieveTokenFromStore s l m
         { Client.requestHeaders =
             ( hAuthorization,
               "Bearer " <> toHeader (_tokenAccess t)
-            ) :
-            Client.requestHeaders rq
+            )
+              : Client.requestHeaders rq
         }
 
 -- | Set the user to be impersonated for a service account with domain

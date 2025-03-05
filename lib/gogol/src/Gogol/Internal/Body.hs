@@ -20,7 +20,7 @@ import qualified Network.Mime as MIME
 import System.IO
 
 -- | Convenience function for obtaining the size of a file.
-getFileSize :: MonadIO m => FilePath -> m Integer
+getFileSize :: (MonadIO m) => FilePath -> m Integer
 getFileSize f = liftIO (withBinaryFile f ReadMode hFileSize)
 
 -- | Attempt to calculate the MIME type based on file extension.
@@ -38,7 +38,7 @@ getMIMEType =
 --
 -- This uses 'getMIMEType' to calculate the MIME type from the file extension,
 -- you can use 'bodyContentType' to set a MIME type explicitly.
-sourceBody :: MonadIO m => FilePath -> m GBody
+sourceBody :: (MonadIO m) => FilePath -> m GBody
 sourceBody f = do
   n <- getFileSize f
   pure $

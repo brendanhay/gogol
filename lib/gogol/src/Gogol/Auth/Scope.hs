@@ -156,7 +156,7 @@ instance (KnownSymbol x, KnownScopes xs) => KnownScopes (x ': xs) where
     where
       scope = OAuthScope . Text.pack . symbolVal
 
-instance KnownScopes s => KnownScopes (Credentials s) where
+instance (KnownScopes s) => KnownScopes (Credentials s) where
   scopeVals _ = scopeVals (Proxy :: Proxy s)
 
 -- | Concatenate a list of scopes using spaces.

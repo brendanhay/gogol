@@ -76,7 +76,7 @@ instance HasEnv scopes (Env scopes) where
 -- modified 'Env'.
 --
 -- /See:/ 'override'.
-configure :: HasEnv scopes a => (ServiceConfig -> ServiceConfig) -> a -> a
+configure :: (HasEnv scopes a) => (ServiceConfig -> ServiceConfig) -> a -> a
 configure f = envOverride <>~ Dual (Endo f)
 
 -- | Override a specific 'ServiceConfig'. All requests belonging to the
@@ -94,7 +94,7 @@ configure f = envOverride <>~ Dual (Endo f)
 -- >    ...
 --
 -- /See:/ 'configure'.
-override :: HasEnv scopes a => ServiceConfig -> a -> a
+override :: (HasEnv scopes a) => ServiceConfig -> a -> a
 override s = configure f
   where
     f x

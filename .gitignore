@@ -35,3 +35,6 @@ tags
 
 # Go
 *.go
+
+# Direnv
+.env

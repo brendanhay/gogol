@@ -1,11 +1,7 @@
 resolver: lts-22.43
+compiler: ghc-9.6.6
 
-nix:
-  enable: false
-  packages: 
-    - zlib
-    - icu67
-    - pkg-config
+notify-if-nix-on-path: false
 
 extra-deps:
   - ede-0.3.4.0
@@ -16,4 +12,4 @@ extra-deps:
   - hindent-6.2.1
 
 packages:
-  - '.'
+  - .
