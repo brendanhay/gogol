@@ -1,4 +1,5 @@
 { pkgs, ... }:
+
 {
   projectRootFile = "flake.nix";
 
@@ -11,17 +12,19 @@
     shfmt.indent_size = 4;
   };
 
-  settings.global.excludes = [
-    "CONTRIBUTORS"
-    "LICENSE"
-    "Makefile"
-    "*.md"
-    "*.yaml"
-    "*.yml"
-    ".gitkeep"
-    "configs/*"
-    "examples/*"
-    "gen/*"
-    "lib/*"
-  ];
+  settings = {
+    global.excludes = [
+      "CONTRIBUTORS"
+      "configs/*"
+      "*/LICENSE"
+      "*/Makefile"
+      "*/.gitkeep"
+      "*.md"
+      "*.yaml"
+    ];
+
+    formatter = {
+      cabal-fmt.options = [ "--indent=2" ];
+    };
+  };
 }
