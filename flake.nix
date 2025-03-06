@@ -1,6 +1,6 @@
 {
   nixConfig = {
-    # For `nix build` stack should download packages directly from Stackage and bypass Nix.
+    # For `nix build` stack should download packages directly from stackage and bypass nix.
     # See: https://zimbatm.com/notes/nix-packaging-the-heretic-way
     sandbox = "relaxed";
   };
@@ -55,7 +55,8 @@
           '';
         };
 
-        # Set of build inputs for any Haskell libraries that will be built by stack.
+        # Build inputs required by Haskell libraries built by stack. This corresponds to
+        # the total set of Cabal's `build-depends` fields in the package set.
         buildInputs = [
           pkgs.pkg-config
           pkgs.icu
@@ -87,18 +88,23 @@
             inherit buildInputs;
             name = "gogol-${ghc.version}";
             nativeBuildInputs = [
+              # The GHC version used for development.
               ghc
-              haskellPackages.cabal-fmt
               haskellPackages.haskell-language-server
-              haskellPackages.ormolu
 
-              pkgs.shellcheck
-              pkgs.shfmt
-
+              # A stack wrapper that uses the GHC version above.
               stack-wrapped
+
+              # Haskell tools that are not tied to the GHC version above.
+              pkgs.haskellPackages.cabal-fmt
+              pkgs.haskellPackages.ormolu
+
+              # Generic tools used by the shell.
+              pkgs.ncurses
             ];
 
             shellHook =
+              # Setup a git pre-commit hook to ensure the commit files are formatted.
               (git-hooks.lib.${system}.run {
                 src = ./.;
                 hooks = {
@@ -107,48 +113,55 @@
                     package = treefmt.config.build.wrapper;
                   };
                 };
-              }).shellHook;
+              }).shellHook
+              # Announce GHC version and STACK_YAML being used when entering the nix shell.
+              + ''
+                bold() {
+                    tput bold
+                    printf "$@"
+                    tput sgr0
+                }
+
+                printf >&2 'direnv: using %s with %s\n' "$(bold 'GHC ${ghc.version}')" "$(bold $STACK_YAML)"
+              '';
 
             LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath buildInputs;
             NIX_PATH = "nixpkgs=" + pkgs.path;
             STACK_YAML = "stack-${ghc.version}.yaml";
           };
 
-        # GHC version can be discovered via:
+        # Create an attrset by applying `f` to every GHC version's package set.
+        #   ```
+        #   ghcAttrs (haskellPackages: haskellPackages.ghc) == {
+        #     ghc910 = pkgs.haskell.packages.ghc910.ghc;
+        #     ...
+        #   };
+        #   ```
         #
-        # ```
-        # $ nix repl
-        # nix-repl> :load-flake nixpkgs
-        # nix-repl> legacyPackages.x86_64-linux.haskell.packages.<TAB>
-        # ```
-        ghc910Packages = pkgs.haskell.packages.ghc910;
-        ghc966Packages = pkgs.haskell.packages.ghc966;
+        # Available GHC versions can be discovered via:
+        #   ```
+        #   $ nix repl
+        #   nix-repl> :load-flake nixpkgs
+        #   nix-repl> legacyPackages.x86_64-linux.haskell.packages.<TAB>
+        #   ```
+        ghcAttrs =
+          f:
+          pkgs.lib.genAttrs [ "ghc910" "ghc984" "ghc966" ] (
+            ghcVersion: f pkgs.haskell.packages.${ghcVersion}
+          );
+
+        packages = ghcAttrs mkProject;
+        devShells = ghcAttrs mkShell;
       in
       {
-        # `nix build` for the 'default' package, or `nix build .#<package-name>`.
-        packages = rec {
-          default = ghc910;
-          ghc910 = mkProject ghc910Packages;
-          ghc966 = mkProject ghc966Packages;
-          gen = ghc966.overrideAttrs (
-            _finalAttrs: _prevAttrs: {
-              name = "gogol-gen";
-              STACK_YAML = "gen/stack.yaml";
-            }
-          );
+        # `nix build` for the 'default' package, or `nix build .#<ghcVersion>`.
+        packages = packages // {
+          default = packages.ghc910;
         };
 
-        # `nix develop` for the 'default' package, or `nix develop .#<shell-name>`
-        devShells = rec {
-          default = ghc910;
-          ghc910 = mkShell ghc910Packages;
-          ghc966 = mkShell ghc966Packages;
-          gen = ghc966.overrideAttrs (
-            _finalAttrs: _prevAttrs: {
-              name = "gogol-gen";
-              STACK_YAML = "gen/stack.yaml";
-            }
-          );
+        # `nix develop` for the 'default' package, or `nix develop .#<ghcVersion>`.
+        devShells = devShells // {
+          default = devShells.ghc910;
         };
 
         # `nix fmt` to format the entire repository.
