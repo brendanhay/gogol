@@ -16,9 +16,10 @@
     global.excludes = [
       "CONTRIBUTORS"
       "configs/*"
-      "*/LICENSE"
-      "*/Makefile"
-      "*/.gitkeep"
+      "**LICENSE"
+      "**Makefile"
+      "**.gitkeep"
+      "*.lhs"
       "*.md"
       "*.yaml"
     ];
