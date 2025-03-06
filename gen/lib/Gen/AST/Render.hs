@@ -6,20 +6,17 @@ where
 import Control.Applicative
 import Control.Error
 import Control.Lens hiding (enum, lens)
-import qualified Data.ByteString.Char8 as C8
-import qualified Data.ByteString.Lazy as BL
+import Data.ByteString.Char8 qualified as C8
 import Data.Char (isSpace)
 import Data.Map.Strict (Map)
-import qualified Data.Map.Strict as Map
+import Data.Map.Strict qualified as Map
 import Data.Maybe
 import Data.String
-import qualified Data.Text.Lazy as LText
-import qualified Data.Text.Lazy.Encoding as LText
+import Data.Text.Lazy qualified as LText
 import Gen.AST.Solve (getSolved)
 import Gen.Formatting
 import Gen.Syntax
 import Gen.Types
-import qualified HIndent
 import Language.Haskell.Exts.Build (name)
 import Language.Haskell.Exts.Pretty as PP
 import Prelude hiding (sum)
@@ -60,16 +57,16 @@ renderSchema s = go (_schema s)
           ts = maybe b (flip (Map.insert "additional") b) ab
 
       Prod (dname k) (i ^. iDescription)
-        <$> pp None (objDecl k ts)
+        <$> pp (objDecl k ts)
         <*> pure (objFields ts)
-        <*> pp None (objDerive ds)
-        <*> traverse (pp Print) (jsonDecls k ts)
+        <*> pp (objDerive ds)
+        <*> traverse pp (jsonDecls k ts)
         <*> ctor ts
       where
         ctor ts =
           Fun' (cname k) (Just help)
-            <$> (pp None (ctorSig k ts) <&> comments ts)
-            <*> pp Indent (ctorDecl k ts)
+            <$> (pp (ctorSig k ts) <&> comments ts)
+            <*> pp (ctorDecl k ts)
 
         help =
           rawHelpText $
@@ -85,7 +82,7 @@ renderAPI s = do
   rs <- traverse (renderResource s "Resource") (Map.elems (s ^. dResources)) <&> concat
   ms <- traverse (renderMethod s "Method") (s ^. dMethods)
 
-  d <- pp Print $ apiAlias alias (map _actAliasName (rs <> ms))
+  d <- pp $ apiAlias alias (map _actAliasName (rs <> ms))
 
   API alias d rs ms
     <$> svc
@@ -97,8 +94,8 @@ renderAPI s = do
 
     svc =
       Fun' url (Just (rawHelpText h))
-        <$> pp None (serviceSig url)
-        <*> pp Print (serviceDecl s url)
+        <$> pp (serviceSig url)
+        <*> pp (serviceDecl s url)
       where
         h =
           sformat
@@ -113,7 +110,7 @@ renderAPI s = do
 
     scope (k, h) =
       Prod n (Just h)
-        <$> pp None (scopeDecl n k)
+        <$> pp (scopeDecl n k)
         <*> pure []
         <*> pure mempty
         <*> pure []
@@ -132,14 +129,14 @@ renderMethod s suf m@Method {..} = do
       Nothing -> error "failed to render the schema"
       Just ok -> pure ok
 
-  i <- pp Print $ requestDecl _unique alias url (props _schema) m
-  dl <- pp Print $ downloadDecl _unique alias url (props _schema) m
-  ul <- pp Print $ uploadDecl _unique alias url (props _schema) m
+  i <- pp $ requestDecl _unique alias url (props _schema) m
+  dl <- pp $ downloadDecl _unique alias url (props _schema) m
+  ul <- pp $ uploadDecl _unique alias url (props _schema) m
 
   let inst = i : [dl | _mSupportsMediaDownload && not _mSupportsMediaUpload] ++ [ul | _mSupportsMediaUpload]
 
   Action (commasep _mId) _unique root _mDescription alias
-    <$> pp Print (verbAlias s alias m)
+    <$> pp (verbAlias s alias m)
     <*> pure (insts inst d)
   where
     root = collapseNS (tocNS s <> UnsafeNS namespace)
@@ -162,41 +159,14 @@ renderResource s suf Resource {..} =
     <$> (traverse (renderResource s suf) (Map.elems _rResources) <&> concat)
     <*> traverse (renderMethod s suf) _rMethods
 
-data PP
-  = Indent
-  | Print
-  | None
-  deriving (Eq)
-
-pp :: (Pretty a, Show a) => PP -> a -> AST Rendered
-pp i x
-  | i == Indent = result (HIndent.reformat HIndent.defaultConfig [] Nothing p)
-  | otherwise = pure (LText.pack (C8.unpack p))
-  where
-    result = hoistEither . bimap (e . LText.pack . HIndent.prettyParseError) (LText.decodeUtf8 . BL.fromStrict)
-
-    e = flip mappend ("\nSyntax:\n" <> LText.pack (C8.unpack p) <> "\nAST:\n" <> LText.pack (show x))
-
-    p =
-      C8.dropWhile isSpace
-        . C8.pack
-        $ prettyPrintStyleMode s m x
-
-    s =
-      style
-        { mode = PageMode,
-          lineLength = 80,
-          ribbonsPerLine = 1.5
-        }
-
-    m
-      | i == Print = defaultMode
-      | i == Indent = defaultMode
-      | otherwise =
-          defaultMode
-            { layout = PPNoLayout,
-              spacing = False
-            }
+pp :: (Pretty a) => a -> AST Rendered
+pp =
+  pure
+    . LText.pack
+    . C8.unpack
+    . C8.dropWhile isSpace
+    . C8.pack
+    . prettyPrintStyleMode style defaultMode
 
 -- FIXME: dirty hack to render smart ctor parameter comments.
 comments :: Map Local Solved -> Rendered -> Rendered
