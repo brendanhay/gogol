@@ -6,9 +6,23 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
-    treefmt-nix.url = "github:numtide/treefmt-nix";
+    nixpkgs = {
+      url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    };
+
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+    };
+
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -17,6 +31,7 @@
       nixpkgs,
       flake-utils,
       treefmt-nix,
+      git-hooks,
     }:
     flake-utils.lib.eachDefaultSystem (
       system:
@@ -47,13 +62,12 @@
           pkgs.zlib
         ];
 
-        # Create a nix expression to build the project for the specified GHC version.
+        # Create a nix derivation to build the project using the specified GHC version.
         mkProject =
           haskellPackages:
           let
             ghc = haskellPackages.ghc;
           in
-
           pkgs.haskell.lib.buildStackProject {
             inherit ghc buildInputs;
             name = "gogol-${ghc.version}";
@@ -63,7 +77,7 @@
             STACK_YAML = "stack-${ghc.version}.yaml";
           };
 
-        # Create a nix shell used for developing the project using the specified GHC version.
+        # Create a nix shell for developing the project using the specified GHC version.
         mkShell =
           haskellPackages:
           let
@@ -75,6 +89,7 @@
             nativeBuildInputs = [
               ghc
               haskellPackages.cabal-fmt
+              haskellPackages.haskell-language-server
               haskellPackages.ormolu
 
               pkgs.shellcheck
@@ -82,6 +97,17 @@
 
               stack-wrapped
             ];
+
+            shellHook =
+              (git-hooks.lib.${system}.run {
+                src = ./.;
+                hooks = {
+                  treefmt = {
+                    enable = true;
+                    package = treefmt.config.build.wrapper;
+                  };
+                };
+              }).shellHook;
 
             LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath buildInputs;
             NIX_PATH = "nixpkgs=" + pkgs.path;
@@ -129,7 +155,9 @@
         formatter = treefmt.config.build.wrapper;
 
         # `nix flake check`.
-        checks.formatter = treefmt.config.build.check self;
+        checks = {
+          formatter = treefmt.config.build.check self;
+        };
       }
     );
 }
