@@ -7,8 +7,10 @@ bug-reports:        https://github.com/brendanhay/gogol/issues
 license:            MPL-2.0
 license-file:       LICENSE
 author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
+maintainer:
+  Brendan Hay <brendan.g.hay+gogol@gmail.com>, Toni Cebrián <toni@tonicebrian.com>
+
+copyright:          Copyright (c) 2015-2025 Brendan Hay
 category:           Google
 build-type:         Simple
 extra-source-files:
