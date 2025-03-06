@@ -1,19 +1,24 @@
-cabal-version:         2.2
-name:                  gogol-cloudfunctions
-version:               1.0.0
-synopsis:              Google Cloud Functions SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-cloudfunctions
+version:            1.0.0
+synopsis:           Google Cloud Functions SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:
+  Brendan Hay <brendan.g.hay+gogol@gmail.com>, Toni Cebrián <toni@tonicebrian.com>
+
+copyright:          Copyright (c) 2015-2025 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    Manages lightweight user-provided functions executed in response to events.
+  Manages lightweight user-provided functions executed in response to events.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -27,51 +32,48 @@ source-repository head
   subdir:   gogol-cloudfunctions
 
 flag field-selectors
-  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-  default: False
-  manual: True
+  description:
+    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+
+  default:     False
+  manual:      True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: GHC2021
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -Werror
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if !flag(field-selectors) && impl(ghc >= 9.2)
+  if (!flag(field-selectors) && impl(ghc >=9.2))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.CloudFunctions
-    , Gogol.CloudFunctions.Projects.Locations.Functions.AbortFunctionUpgrade
-    , Gogol.CloudFunctions.Projects.Locations.Functions.CommitFunctionUpgrade
-    , Gogol.CloudFunctions.Projects.Locations.Functions.Create
-    , Gogol.CloudFunctions.Projects.Locations.Functions.Delete
-    , Gogol.CloudFunctions.Projects.Locations.Functions.GenerateDownloadUrl
-    , Gogol.CloudFunctions.Projects.Locations.Functions.GenerateUploadUrl
-    , Gogol.CloudFunctions.Projects.Locations.Functions.Get
-    , Gogol.CloudFunctions.Projects.Locations.Functions.GetIamPolicy
-    , Gogol.CloudFunctions.Projects.Locations.Functions.List
-    , Gogol.CloudFunctions.Projects.Locations.Functions.Patch
-    , Gogol.CloudFunctions.Projects.Locations.Functions.RedirectFunctionUpgradeTraffic
-    , Gogol.CloudFunctions.Projects.Locations.Functions.RollbackFunctionUpgradeTraffic
-    , Gogol.CloudFunctions.Projects.Locations.Functions.SetIamPolicy
-    , Gogol.CloudFunctions.Projects.Locations.Functions.SetupFunctionUpgradeConfig
-    , Gogol.CloudFunctions.Projects.Locations.Functions.TestIamPermissions
-    , Gogol.CloudFunctions.Projects.Locations.List
-    , Gogol.CloudFunctions.Projects.Locations.Operations.Get
-    , Gogol.CloudFunctions.Projects.Locations.Operations.List
-    , Gogol.CloudFunctions.Projects.Locations.Runtimes.List
-    , Gogol.CloudFunctions.Types
+    Gogol.CloudFunctions
+    Gogol.CloudFunctions.Projects.Locations.Functions.AbortFunctionUpgrade
+    Gogol.CloudFunctions.Projects.Locations.Functions.CommitFunctionUpgrade
+    Gogol.CloudFunctions.Projects.Locations.Functions.Create
+    Gogol.CloudFunctions.Projects.Locations.Functions.Delete
+    Gogol.CloudFunctions.Projects.Locations.Functions.GenerateDownloadUrl
+    Gogol.CloudFunctions.Projects.Locations.Functions.GenerateUploadUrl
+    Gogol.CloudFunctions.Projects.Locations.Functions.Get
+    Gogol.CloudFunctions.Projects.Locations.Functions.GetIamPolicy
+    Gogol.CloudFunctions.Projects.Locations.Functions.List
+    Gogol.CloudFunctions.Projects.Locations.Functions.Patch
+    Gogol.CloudFunctions.Projects.Locations.Functions.RedirectFunctionUpgradeTraffic
+    Gogol.CloudFunctions.Projects.Locations.Functions.RollbackFunctionUpgradeTraffic
+    Gogol.CloudFunctions.Projects.Locations.Functions.SetIamPolicy
+    Gogol.CloudFunctions.Projects.Locations.Functions.SetupFunctionUpgradeConfig
+    Gogol.CloudFunctions.Projects.Locations.Functions.TestIamPermissions
+    Gogol.CloudFunctions.Projects.Locations.List
+    Gogol.CloudFunctions.Projects.Locations.Operations.Get
+    Gogol.CloudFunctions.Projects.Locations.Operations.List
+    Gogol.CloudFunctions.Projects.Locations.Runtimes.List
+    Gogol.CloudFunctions.Types
 
   other-modules:
-      Gogol.CloudFunctions.Internal.Product
-    , Gogol.CloudFunctions.Internal.Sum
+    Gogol.CloudFunctions.Internal.Product
+    Gogol.CloudFunctions.Internal.Sum
 
-  build-depends:
-      gogol-core ^>= 1.0.0
+  build-depends:    gogol-core ^>=1.0.0

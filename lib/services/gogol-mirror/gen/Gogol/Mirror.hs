@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.Mirror
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,221 +27,221 @@
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference>
 module Gogol.Mirror
-    (
-    -- * Configuration
-      mirrorService
+  ( -- * Configuration
+    mirrorService,
 
     -- * OAuth Scopes
-    , Glass'Location
-    , Glass'Timeline
+    Glass'Location,
+    Glass'Timeline,
 
     -- * Resources
 
     -- ** mirror.accounts.insert
-    , MirrorAccountsInsertResource
-    , MirrorAccountsInsert (..)
-    , newMirrorAccountsInsert
+    MirrorAccountsInsertResource,
+    MirrorAccountsInsert (..),
+    newMirrorAccountsInsert,
 
     -- ** mirror.contacts.delete
-    , MirrorContactsDeleteResource
-    , MirrorContactsDelete (..)
-    , newMirrorContactsDelete
+    MirrorContactsDeleteResource,
+    MirrorContactsDelete (..),
+    newMirrorContactsDelete,
 
     -- ** mirror.contacts.get
-    , MirrorContactsGetResource
-    , MirrorContactsGet (..)
-    , newMirrorContactsGet
+    MirrorContactsGetResource,
+    MirrorContactsGet (..),
+    newMirrorContactsGet,
 
     -- ** mirror.contacts.insert
-    , MirrorContactsInsertResource
-    , MirrorContactsInsert (..)
-    , newMirrorContactsInsert
+    MirrorContactsInsertResource,
+    MirrorContactsInsert (..),
+    newMirrorContactsInsert,
 
     -- ** mirror.contacts.list
-    , MirrorContactsListResource
-    , MirrorContactsList (..)
-    , newMirrorContactsList
+    MirrorContactsListResource,
+    MirrorContactsList (..),
+    newMirrorContactsList,
 
     -- ** mirror.contacts.patch
-    , MirrorContactsPatchResource
-    , MirrorContactsPatch (..)
-    , newMirrorContactsPatch
+    MirrorContactsPatchResource,
+    MirrorContactsPatch (..),
+    newMirrorContactsPatch,
 
     -- ** mirror.contacts.update
-    , MirrorContactsUpdateResource
-    , MirrorContactsUpdate (..)
-    , newMirrorContactsUpdate
+    MirrorContactsUpdateResource,
+    MirrorContactsUpdate (..),
+    newMirrorContactsUpdate,
 
     -- ** mirror.locations.get
-    , MirrorLocationsGetResource
-    , MirrorLocationsGet (..)
-    , newMirrorLocationsGet
+    MirrorLocationsGetResource,
+    MirrorLocationsGet (..),
+    newMirrorLocationsGet,
 
     -- ** mirror.locations.list
-    , MirrorLocationsListResource
-    , MirrorLocationsList (..)
-    , newMirrorLocationsList
+    MirrorLocationsListResource,
+    MirrorLocationsList (..),
+    newMirrorLocationsList,
 
     -- ** mirror.settings.get
-    , MirrorSettingsGetResource
-    , MirrorSettingsGet (..)
-    , newMirrorSettingsGet
+    MirrorSettingsGetResource,
+    MirrorSettingsGet (..),
+    newMirrorSettingsGet,
 
     -- ** mirror.subscriptions.delete
-    , MirrorSubscriptionsDeleteResource
-    , MirrorSubscriptionsDelete (..)
-    , newMirrorSubscriptionsDelete
+    MirrorSubscriptionsDeleteResource,
+    MirrorSubscriptionsDelete (..),
+    newMirrorSubscriptionsDelete,
 
     -- ** mirror.subscriptions.insert
-    , MirrorSubscriptionsInsertResource
-    , MirrorSubscriptionsInsert (..)
-    , newMirrorSubscriptionsInsert
+    MirrorSubscriptionsInsertResource,
+    MirrorSubscriptionsInsert (..),
+    newMirrorSubscriptionsInsert,
 
     -- ** mirror.subscriptions.list
-    , MirrorSubscriptionsListResource
-    , MirrorSubscriptionsList (..)
-    , newMirrorSubscriptionsList
+    MirrorSubscriptionsListResource,
+    MirrorSubscriptionsList (..),
+    newMirrorSubscriptionsList,
 
     -- ** mirror.subscriptions.update
-    , MirrorSubscriptionsUpdateResource
-    , MirrorSubscriptionsUpdate (..)
-    , newMirrorSubscriptionsUpdate
+    MirrorSubscriptionsUpdateResource,
+    MirrorSubscriptionsUpdate (..),
+    newMirrorSubscriptionsUpdate,
 
     -- ** mirror.timeline.attachments.delete
-    , MirrorTimelineAttachmentsDeleteResource
-    , MirrorTimelineAttachmentsDelete (..)
-    , newMirrorTimelineAttachmentsDelete
+    MirrorTimelineAttachmentsDeleteResource,
+    MirrorTimelineAttachmentsDelete (..),
+    newMirrorTimelineAttachmentsDelete,
 
     -- ** mirror.timeline.attachments.get
-    , MirrorTimelineAttachmentsGetResource
-    , MirrorTimelineAttachmentsGet (..)
-    , newMirrorTimelineAttachmentsGet
+    MirrorTimelineAttachmentsGetResource,
+    MirrorTimelineAttachmentsGet (..),
+    newMirrorTimelineAttachmentsGet,
 
     -- ** mirror.timeline.attachments.insert
-    , MirrorTimelineAttachmentsInsertResource
-    , MirrorTimelineAttachmentsInsert (..)
-    , newMirrorTimelineAttachmentsInsert
+    MirrorTimelineAttachmentsInsertResource,
+    MirrorTimelineAttachmentsInsert (..),
+    newMirrorTimelineAttachmentsInsert,
 
     -- ** mirror.timeline.attachments.list
-    , MirrorTimelineAttachmentsListResource
-    , MirrorTimelineAttachmentsList (..)
-    , newMirrorTimelineAttachmentsList
+    MirrorTimelineAttachmentsListResource,
+    MirrorTimelineAttachmentsList (..),
+    newMirrorTimelineAttachmentsList,
 
     -- ** mirror.timeline.delete
-    , MirrorTimelineDeleteResource
-    , MirrorTimelineDelete (..)
-    , newMirrorTimelineDelete
+    MirrorTimelineDeleteResource,
+    MirrorTimelineDelete (..),
+    newMirrorTimelineDelete,
 
     -- ** mirror.timeline.get
-    , MirrorTimelineGetResource
-    , MirrorTimelineGet (..)
-    , newMirrorTimelineGet
+    MirrorTimelineGetResource,
+    MirrorTimelineGet (..),
+    newMirrorTimelineGet,
 
     -- ** mirror.timeline.insert
-    , MirrorTimelineInsertResource
-    , MirrorTimelineInsert (..)
-    , newMirrorTimelineInsert
+    MirrorTimelineInsertResource,
+    MirrorTimelineInsert (..),
+    newMirrorTimelineInsert,
 
     -- ** mirror.timeline.list
-    , MirrorTimelineListResource
-    , MirrorTimelineList (..)
-    , newMirrorTimelineList
+    MirrorTimelineListResource,
+    MirrorTimelineList (..),
+    newMirrorTimelineList,
 
     -- ** mirror.timeline.patch
-    , MirrorTimelinePatchResource
-    , MirrorTimelinePatch (..)
-    , newMirrorTimelinePatch
+    MirrorTimelinePatchResource,
+    MirrorTimelinePatch (..),
+    newMirrorTimelinePatch,
 
     -- ** mirror.timeline.update
-    , MirrorTimelineUpdateResource
-    , MirrorTimelineUpdate (..)
-    , newMirrorTimelineUpdate
+    MirrorTimelineUpdateResource,
+    MirrorTimelineUpdate (..),
+    newMirrorTimelineUpdate,
 
     -- * Types
 
     -- ** Account
-    , Account (..)
-    , newAccount
+    Account (..),
+    newAccount,
 
     -- ** Attachment
-    , Attachment (..)
-    , newAttachment
+    Attachment (..),
+    newAttachment,
 
     -- ** AttachmentsListResponse
-    , AttachmentsListResponse (..)
-    , newAttachmentsListResponse
+    AttachmentsListResponse (..),
+    newAttachmentsListResponse,
 
     -- ** AuthToken
-    , AuthToken (..)
-    , newAuthToken
+    AuthToken (..),
+    newAuthToken,
 
     -- ** Command
-    , Command (..)
-    , newCommand
+    Command (..),
+    newCommand,
 
     -- ** Contact
-    , Contact (..)
-    , newContact
+    Contact (..),
+    newContact,
 
     -- ** ContactsListResponse
-    , ContactsListResponse (..)
-    , newContactsListResponse
+    ContactsListResponse (..),
+    newContactsListResponse,
 
     -- ** Location
-    , Location (..)
-    , newLocation
+    Location (..),
+    newLocation,
 
     -- ** LocationsListResponse
-    , LocationsListResponse (..)
-    , newLocationsListResponse
+    LocationsListResponse (..),
+    newLocationsListResponse,
 
     -- ** MenuItem
-    , MenuItem (..)
-    , newMenuItem
+    MenuItem (..),
+    newMenuItem,
 
     -- ** MenuValue
-    , MenuValue (..)
-    , newMenuValue
+    MenuValue (..),
+    newMenuValue,
 
     -- ** Notification
-    , Notification (..)
-    , newNotification
+    Notification (..),
+    newNotification,
 
     -- ** NotificationConfig
-    , NotificationConfig (..)
-    , newNotificationConfig
+    NotificationConfig (..),
+    newNotificationConfig,
 
     -- ** Setting
-    , Setting (..)
-    , newSetting
+    Setting (..),
+    newSetting,
 
     -- ** Subscription
-    , Subscription (..)
-    , newSubscription
+    Subscription (..),
+    newSubscription,
 
     -- ** SubscriptionsListResponse
-    , SubscriptionsListResponse (..)
-    , newSubscriptionsListResponse
+    SubscriptionsListResponse (..),
+    newSubscriptionsListResponse,
 
     -- ** TimelineItem
-    , TimelineItem (..)
-    , newTimelineItem
+    TimelineItem (..),
+    newTimelineItem,
 
     -- ** TimelineListResponse
-    , TimelineListResponse (..)
-    , newTimelineListResponse
+    TimelineListResponse (..),
+    newTimelineListResponse,
 
     -- ** UserAction
-    , UserAction (..)
-    , newUserAction
+    UserAction (..),
+    newUserAction,
 
     -- ** UserData
-    , UserData (..)
-    , newUserData
+    UserData (..),
+    newUserData,
 
     -- ** TimelineListOrderBy
-    , TimelineListOrderBy (..)
-    ) where
+    TimelineListOrderBy (..),
+  )
+where
 
 import Gogol.Mirror.Accounts.Insert
 import Gogol.Mirror.Contacts.Delete

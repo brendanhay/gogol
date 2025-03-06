@@ -1,19 +1,24 @@
-cabal-version:         2.2
-name:                  gogol-datafusion
-version:               1.0.0
-synopsis:              Google Cloud Data Fusion SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-datafusion
+version:            1.0.0
+synopsis:           Google Cloud Data Fusion SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:
+  Brendan Hay <brendan.g.hay+gogol@gmail.com>, Toni Cebrián <toni@tonicebrian.com>
+
+copyright:          Copyright (c) 2015-2025 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    Cloud Data Fusion is a fully-managed, cloud native, enterprise data integration service for quickly building and managing data pipelines. It provides a graphical interface to increase time efficiency and reduce complexity, and allows business users, developers, and data scientists to easily and reliably build scalable data integration solutions to cleanse, prepare, blend, transfer and transform data without having to wrestle with infrastructure.
+  Cloud Data Fusion is a fully-managed, cloud native, enterprise data integration service for quickly building and managing data pipelines. It provides a graphical interface to increase time efficiency and reduce complexity, and allows business users, developers, and data scientists to easily and reliably build scalable data integration solutions to cleanse, prepare, blend, transfer and transform data without having to wrestle with infrastructure.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -27,51 +32,48 @@ source-repository head
   subdir:   gogol-datafusion
 
 flag field-selectors
-  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-  default: False
-  manual: True
+  description:
+    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+
+  default:     False
+  manual:      True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: GHC2021
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -Werror
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if !flag(field-selectors) && impl(ghc >= 9.2)
+  if (!flag(field-selectors) && impl(ghc >=9.2))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.DataFusion
-    , Gogol.DataFusion.Projects.Locations.Get
-    , Gogol.DataFusion.Projects.Locations.Instances.Create
-    , Gogol.DataFusion.Projects.Locations.Instances.Delete
-    , Gogol.DataFusion.Projects.Locations.Instances.DnsPeerings.Create
-    , Gogol.DataFusion.Projects.Locations.Instances.DnsPeerings.Delete
-    , Gogol.DataFusion.Projects.Locations.Instances.DnsPeerings.List
-    , Gogol.DataFusion.Projects.Locations.Instances.Get
-    , Gogol.DataFusion.Projects.Locations.Instances.GetIamPolicy
-    , Gogol.DataFusion.Projects.Locations.Instances.List
-    , Gogol.DataFusion.Projects.Locations.Instances.Patch
-    , Gogol.DataFusion.Projects.Locations.Instances.Restart
-    , Gogol.DataFusion.Projects.Locations.Instances.SetIamPolicy
-    , Gogol.DataFusion.Projects.Locations.Instances.TestIamPermissions
-    , Gogol.DataFusion.Projects.Locations.List
-    , Gogol.DataFusion.Projects.Locations.Operations.Cancel
-    , Gogol.DataFusion.Projects.Locations.Operations.Delete
-    , Gogol.DataFusion.Projects.Locations.Operations.Get
-    , Gogol.DataFusion.Projects.Locations.Operations.List
-    , Gogol.DataFusion.Projects.Locations.Versions.List
-    , Gogol.DataFusion.Types
+    Gogol.DataFusion
+    Gogol.DataFusion.Projects.Locations.Get
+    Gogol.DataFusion.Projects.Locations.Instances.Create
+    Gogol.DataFusion.Projects.Locations.Instances.Delete
+    Gogol.DataFusion.Projects.Locations.Instances.DnsPeerings.Create
+    Gogol.DataFusion.Projects.Locations.Instances.DnsPeerings.Delete
+    Gogol.DataFusion.Projects.Locations.Instances.DnsPeerings.List
+    Gogol.DataFusion.Projects.Locations.Instances.Get
+    Gogol.DataFusion.Projects.Locations.Instances.GetIamPolicy
+    Gogol.DataFusion.Projects.Locations.Instances.List
+    Gogol.DataFusion.Projects.Locations.Instances.Patch
+    Gogol.DataFusion.Projects.Locations.Instances.Restart
+    Gogol.DataFusion.Projects.Locations.Instances.SetIamPolicy
+    Gogol.DataFusion.Projects.Locations.Instances.TestIamPermissions
+    Gogol.DataFusion.Projects.Locations.List
+    Gogol.DataFusion.Projects.Locations.Operations.Cancel
+    Gogol.DataFusion.Projects.Locations.Operations.Delete
+    Gogol.DataFusion.Projects.Locations.Operations.Get
+    Gogol.DataFusion.Projects.Locations.Operations.List
+    Gogol.DataFusion.Projects.Locations.Versions.List
+    Gogol.DataFusion.Types
 
   other-modules:
-      Gogol.DataFusion.Internal.Product
-    , Gogol.DataFusion.Internal.Sum
+    Gogol.DataFusion.Internal.Product
+    Gogol.DataFusion.Internal.Sum
 
-  build-depends:
-      gogol-core ^>= 1.0.0
+  build-depends:    gogol-core ^>=1.0.0

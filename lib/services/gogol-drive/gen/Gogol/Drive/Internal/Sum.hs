@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.Drive.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Drive.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * ResolveAccessProposalRequest_Action
     ResolveAccessProposalRequest_Action
-      (
-        ResolveAccessProposalRequest_Action_ACTIONUNSPECIFIED,
+      ( ResolveAccessProposalRequest_Action_ACTIONUNSPECIFIED,
         ResolveAccessProposalRequest_Action_Accept,
         ResolveAccessProposalRequest_Action_Deny,
         ..
@@ -49,27 +40,27 @@ module Gogol.Drive.Internal.Sum
 
     -- * FilesListCorpus
     FilesListCorpus
-      (
-        FilesListCorpus_Domain,
+      ( FilesListCorpus_Domain,
         FilesListCorpus_User,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -82,20 +73,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | Required. The action to take on the AccessProposal.
-newtype ResolveAccessProposalRequest_Action = ResolveAccessProposalRequest_Action { fromResolveAccessProposalRequest_Action :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ResolveAccessProposalRequest_Action = ResolveAccessProposalRequest_Action {fromResolveAccessProposalRequest_Action :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified action
 pattern ResolveAccessProposalRequest_Action_ACTIONUNSPECIFIED :: ResolveAccessProposalRequest_Action
@@ -113,20 +105,21 @@ pattern ResolveAccessProposalRequest_Action_Deny = ResolveAccessProposalRequest_
   ResolveAccessProposalRequest_Action_ACTIONUNSPECIFIED,
   ResolveAccessProposalRequest_Action_Accept,
   ResolveAccessProposalRequest_Action_Deny,
-  ResolveAccessProposalRequest_Action #-}
+  ResolveAccessProposalRequest_Action
+  #-}
 
 -- | Deprecated: The source of files to list. Use \'corpora\' instead.
-newtype FilesListCorpus = FilesListCorpus { fromFilesListCorpus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype FilesListCorpus = FilesListCorpus {fromFilesListCorpus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Files shared to the user\'s domain.
 pattern FilesListCorpus_Domain :: FilesListCorpus
@@ -139,4 +132,5 @@ pattern FilesListCorpus_User = FilesListCorpus "user"
 {-# COMPLETE
   FilesListCorpus_Domain,
   FilesListCorpus_User,
-  FilesListCorpus #-}
+  FilesListCorpus
+  #-}

@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.StorageTransfer
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,347 +27,347 @@
 --
 -- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference>
 module Gogol.StorageTransfer
-    (
-    -- * Configuration
-      storageTransferService
+  ( -- * Configuration
+    storageTransferService,
 
     -- * OAuth Scopes
-    , CloudPlatform'FullControl
+    CloudPlatform'FullControl,
 
     -- * Resources
 
     -- ** storagetransfer.googleServiceAccounts.get
-    , StorageTransferGoogleServiceAccountsGetResource
-    , StorageTransferGoogleServiceAccountsGet (..)
-    , newStorageTransferGoogleServiceAccountsGet
+    StorageTransferGoogleServiceAccountsGetResource,
+    StorageTransferGoogleServiceAccountsGet (..),
+    newStorageTransferGoogleServiceAccountsGet,
 
     -- ** storagetransfer.projects.agentPools.create
-    , StorageTransferProjectsAgentPoolsCreateResource
-    , StorageTransferProjectsAgentPoolsCreate (..)
-    , newStorageTransferProjectsAgentPoolsCreate
+    StorageTransferProjectsAgentPoolsCreateResource,
+    StorageTransferProjectsAgentPoolsCreate (..),
+    newStorageTransferProjectsAgentPoolsCreate,
 
     -- ** storagetransfer.projects.agentPools.delete
-    , StorageTransferProjectsAgentPoolsDeleteResource
-    , StorageTransferProjectsAgentPoolsDelete (..)
-    , newStorageTransferProjectsAgentPoolsDelete
+    StorageTransferProjectsAgentPoolsDeleteResource,
+    StorageTransferProjectsAgentPoolsDelete (..),
+    newStorageTransferProjectsAgentPoolsDelete,
 
     -- ** storagetransfer.projects.agentPools.get
-    , StorageTransferProjectsAgentPoolsGetResource
-    , StorageTransferProjectsAgentPoolsGet (..)
-    , newStorageTransferProjectsAgentPoolsGet
+    StorageTransferProjectsAgentPoolsGetResource,
+    StorageTransferProjectsAgentPoolsGet (..),
+    newStorageTransferProjectsAgentPoolsGet,
 
     -- ** storagetransfer.projects.agentPools.list
-    , StorageTransferProjectsAgentPoolsListResource
-    , StorageTransferProjectsAgentPoolsList (..)
-    , newStorageTransferProjectsAgentPoolsList
+    StorageTransferProjectsAgentPoolsListResource,
+    StorageTransferProjectsAgentPoolsList (..),
+    newStorageTransferProjectsAgentPoolsList,
 
     -- ** storagetransfer.projects.agentPools.patch
-    , StorageTransferProjectsAgentPoolsPatchResource
-    , StorageTransferProjectsAgentPoolsPatch (..)
-    , newStorageTransferProjectsAgentPoolsPatch
+    StorageTransferProjectsAgentPoolsPatchResource,
+    StorageTransferProjectsAgentPoolsPatch (..),
+    newStorageTransferProjectsAgentPoolsPatch,
 
     -- ** storagetransfer.transferJobs.create
-    , StorageTransferTransferJobsCreateResource
-    , StorageTransferTransferJobsCreate (..)
-    , newStorageTransferTransferJobsCreate
+    StorageTransferTransferJobsCreateResource,
+    StorageTransferTransferJobsCreate (..),
+    newStorageTransferTransferJobsCreate,
 
     -- ** storagetransfer.transferJobs.delete
-    , StorageTransferTransferJobsDeleteResource
-    , StorageTransferTransferJobsDelete (..)
-    , newStorageTransferTransferJobsDelete
+    StorageTransferTransferJobsDeleteResource,
+    StorageTransferTransferJobsDelete (..),
+    newStorageTransferTransferJobsDelete,
 
     -- ** storagetransfer.transferJobs.get
-    , StorageTransferTransferJobsGetResource
-    , StorageTransferTransferJobsGet (..)
-    , newStorageTransferTransferJobsGet
+    StorageTransferTransferJobsGetResource,
+    StorageTransferTransferJobsGet (..),
+    newStorageTransferTransferJobsGet,
 
     -- ** storagetransfer.transferJobs.list
-    , StorageTransferTransferJobsListResource
-    , StorageTransferTransferJobsList (..)
-    , newStorageTransferTransferJobsList
+    StorageTransferTransferJobsListResource,
+    StorageTransferTransferJobsList (..),
+    newStorageTransferTransferJobsList,
 
     -- ** storagetransfer.transferJobs.patch
-    , StorageTransferTransferJobsPatchResource
-    , StorageTransferTransferJobsPatch (..)
-    , newStorageTransferTransferJobsPatch
+    StorageTransferTransferJobsPatchResource,
+    StorageTransferTransferJobsPatch (..),
+    newStorageTransferTransferJobsPatch,
 
     -- ** storagetransfer.transferJobs.run
-    , StorageTransferTransferJobsRunResource
-    , StorageTransferTransferJobsRun (..)
-    , newStorageTransferTransferJobsRun
+    StorageTransferTransferJobsRunResource,
+    StorageTransferTransferJobsRun (..),
+    newStorageTransferTransferJobsRun,
 
     -- ** storagetransfer.transferOperations.cancel
-    , StorageTransferTransferOperationsCancelResource
-    , StorageTransferTransferOperationsCancel (..)
-    , newStorageTransferTransferOperationsCancel
+    StorageTransferTransferOperationsCancelResource,
+    StorageTransferTransferOperationsCancel (..),
+    newStorageTransferTransferOperationsCancel,
 
     -- ** storagetransfer.transferOperations.get
-    , StorageTransferTransferOperationsGetResource
-    , StorageTransferTransferOperationsGet (..)
-    , newStorageTransferTransferOperationsGet
+    StorageTransferTransferOperationsGetResource,
+    StorageTransferTransferOperationsGet (..),
+    newStorageTransferTransferOperationsGet,
 
     -- ** storagetransfer.transferOperations.list
-    , StorageTransferTransferOperationsListResource
-    , StorageTransferTransferOperationsList (..)
-    , newStorageTransferTransferOperationsList
+    StorageTransferTransferOperationsListResource,
+    StorageTransferTransferOperationsList (..),
+    newStorageTransferTransferOperationsList,
 
     -- ** storagetransfer.transferOperations.pause
-    , StorageTransferTransferOperationsPauseResource
-    , StorageTransferTransferOperationsPause (..)
-    , newStorageTransferTransferOperationsPause
+    StorageTransferTransferOperationsPauseResource,
+    StorageTransferTransferOperationsPause (..),
+    newStorageTransferTransferOperationsPause,
 
     -- ** storagetransfer.transferOperations.resume
-    , StorageTransferTransferOperationsResumeResource
-    , StorageTransferTransferOperationsResume (..)
-    , newStorageTransferTransferOperationsResume
+    StorageTransferTransferOperationsResumeResource,
+    StorageTransferTransferOperationsResume (..),
+    newStorageTransferTransferOperationsResume,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AgentPool
-    , AgentPool (..)
-    , newAgentPool
+    AgentPool (..),
+    newAgentPool,
 
     -- ** AgentPool_State
-    , AgentPool_State (..)
+    AgentPool_State (..),
 
     -- ** AwsAccessKey
-    , AwsAccessKey (..)
-    , newAwsAccessKey
+    AwsAccessKey (..),
+    newAwsAccessKey,
 
     -- ** AwsS3CompatibleData
-    , AwsS3CompatibleData (..)
-    , newAwsS3CompatibleData
+    AwsS3CompatibleData (..),
+    newAwsS3CompatibleData,
 
     -- ** AwsS3Data
-    , AwsS3Data (..)
-    , newAwsS3Data
+    AwsS3Data (..),
+    newAwsS3Data,
 
     -- ** AzureBlobStorageData
-    , AzureBlobStorageData (..)
-    , newAzureBlobStorageData
+    AzureBlobStorageData (..),
+    newAzureBlobStorageData,
 
     -- ** AzureCredentials
-    , AzureCredentials (..)
-    , newAzureCredentials
+    AzureCredentials (..),
+    newAzureCredentials,
 
     -- ** BandwidthLimit
-    , BandwidthLimit (..)
-    , newBandwidthLimit
+    BandwidthLimit (..),
+    newBandwidthLimit,
 
     -- ** CancelOperationRequest
-    , CancelOperationRequest (..)
-    , newCancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
     -- ** Date
-    , Date (..)
-    , newDate
+    Date (..),
+    newDate,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** ErrorLogEntry
-    , ErrorLogEntry (..)
-    , newErrorLogEntry
+    ErrorLogEntry (..),
+    newErrorLogEntry,
 
     -- ** ErrorSummary
-    , ErrorSummary (..)
-    , newErrorSummary
+    ErrorSummary (..),
+    newErrorSummary,
 
     -- ** ErrorSummary_ErrorCode
-    , ErrorSummary_ErrorCode (..)
+    ErrorSummary_ErrorCode (..),
 
     -- ** EventStream
-    , EventStream (..)
-    , newEventStream
+    EventStream (..),
+    newEventStream,
 
     -- ** GcsData
-    , GcsData (..)
-    , newGcsData
+    GcsData (..),
+    newGcsData,
 
     -- ** GoogleServiceAccount
-    , GoogleServiceAccount (..)
-    , newGoogleServiceAccount
+    GoogleServiceAccount (..),
+    newGoogleServiceAccount,
 
     -- ** HdfsData
-    , HdfsData (..)
-    , newHdfsData
+    HdfsData (..),
+    newHdfsData,
 
     -- ** HttpData
-    , HttpData (..)
-    , newHttpData
+    HttpData (..),
+    newHttpData,
 
     -- ** ListAgentPoolsResponse
-    , ListAgentPoolsResponse (..)
-    , newListAgentPoolsResponse
+    ListAgentPoolsResponse (..),
+    newListAgentPoolsResponse,
 
     -- ** ListOperationsResponse
-    , ListOperationsResponse (..)
-    , newListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
     -- ** ListTransferJobsResponse
-    , ListTransferJobsResponse (..)
-    , newListTransferJobsResponse
+    ListTransferJobsResponse (..),
+    newListTransferJobsResponse,
 
     -- ** LoggingConfig
-    , LoggingConfig (..)
-    , newLoggingConfig
+    LoggingConfig (..),
+    newLoggingConfig,
 
     -- ** LoggingConfig_LogActionStatesItem
-    , LoggingConfig_LogActionStatesItem (..)
+    LoggingConfig_LogActionStatesItem (..),
 
     -- ** LoggingConfig_LogActionsItem
-    , LoggingConfig_LogActionsItem (..)
+    LoggingConfig_LogActionsItem (..),
 
     -- ** MetadataOptions
-    , MetadataOptions (..)
-    , newMetadataOptions
+    MetadataOptions (..),
+    newMetadataOptions,
 
     -- ** MetadataOptions_Acl
-    , MetadataOptions_Acl (..)
+    MetadataOptions_Acl (..),
 
     -- ** MetadataOptions_Gid
-    , MetadataOptions_Gid (..)
+    MetadataOptions_Gid (..),
 
     -- ** MetadataOptions_KmsKey
-    , MetadataOptions_KmsKey (..)
+    MetadataOptions_KmsKey (..),
 
     -- ** MetadataOptions_Mode
-    , MetadataOptions_Mode (..)
+    MetadataOptions_Mode (..),
 
     -- ** MetadataOptions_StorageClass
-    , MetadataOptions_StorageClass (..)
+    MetadataOptions_StorageClass (..),
 
     -- ** MetadataOptions_Symlink
-    , MetadataOptions_Symlink (..)
+    MetadataOptions_Symlink (..),
 
     -- ** MetadataOptions_TemporaryHold
-    , MetadataOptions_TemporaryHold (..)
+    MetadataOptions_TemporaryHold (..),
 
     -- ** MetadataOptions_TimeCreated
-    , MetadataOptions_TimeCreated (..)
+    MetadataOptions_TimeCreated (..),
 
     -- ** MetadataOptions_Uid
-    , MetadataOptions_Uid (..)
+    MetadataOptions_Uid (..),
 
     -- ** NotificationConfig
-    , NotificationConfig (..)
-    , newNotificationConfig
+    NotificationConfig (..),
+    newNotificationConfig,
 
     -- ** NotificationConfig_EventTypesItem
-    , NotificationConfig_EventTypesItem (..)
+    NotificationConfig_EventTypesItem (..),
 
     -- ** NotificationConfig_PayloadFormat
-    , NotificationConfig_PayloadFormat (..)
+    NotificationConfig_PayloadFormat (..),
 
     -- ** ObjectConditions
-    , ObjectConditions (..)
-    , newObjectConditions
+    ObjectConditions (..),
+    newObjectConditions,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** PauseTransferOperationRequest
-    , PauseTransferOperationRequest (..)
-    , newPauseTransferOperationRequest
+    PauseTransferOperationRequest (..),
+    newPauseTransferOperationRequest,
 
     -- ** PosixFilesystem
-    , PosixFilesystem (..)
-    , newPosixFilesystem
+    PosixFilesystem (..),
+    newPosixFilesystem,
 
     -- ** ReplicationSpec
-    , ReplicationSpec (..)
-    , newReplicationSpec
+    ReplicationSpec (..),
+    newReplicationSpec,
 
     -- ** ResumeTransferOperationRequest
-    , ResumeTransferOperationRequest (..)
-    , newResumeTransferOperationRequest
+    ResumeTransferOperationRequest (..),
+    newResumeTransferOperationRequest,
 
     -- ** RunTransferJobRequest
-    , RunTransferJobRequest (..)
-    , newRunTransferJobRequest
+    RunTransferJobRequest (..),
+    newRunTransferJobRequest,
 
     -- ** S3CompatibleMetadata
-    , S3CompatibleMetadata (..)
-    , newS3CompatibleMetadata
+    S3CompatibleMetadata (..),
+    newS3CompatibleMetadata,
 
     -- ** S3CompatibleMetadata_AuthMethod
-    , S3CompatibleMetadata_AuthMethod (..)
+    S3CompatibleMetadata_AuthMethod (..),
 
     -- ** S3CompatibleMetadata_ListApi
-    , S3CompatibleMetadata_ListApi (..)
+    S3CompatibleMetadata_ListApi (..),
 
     -- ** S3CompatibleMetadata_Protocol
-    , S3CompatibleMetadata_Protocol (..)
+    S3CompatibleMetadata_Protocol (..),
 
     -- ** S3CompatibleMetadata_RequestModel
-    , S3CompatibleMetadata_RequestModel (..)
+    S3CompatibleMetadata_RequestModel (..),
 
     -- ** Schedule
-    , Schedule (..)
-    , newSchedule
+    Schedule (..),
+    newSchedule,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** TimeOfDay'
-    , TimeOfDay' (..)
-    , newTimeOfDay
+    TimeOfDay' (..),
+    newTimeOfDay,
 
     -- ** TransferCounters
-    , TransferCounters (..)
-    , newTransferCounters
+    TransferCounters (..),
+    newTransferCounters,
 
     -- ** TransferJob
-    , TransferJob (..)
-    , newTransferJob
+    TransferJob (..),
+    newTransferJob,
 
     -- ** TransferJob_Status
-    , TransferJob_Status (..)
+    TransferJob_Status (..),
 
     -- ** TransferManifest
-    , TransferManifest (..)
-    , newTransferManifest
+    TransferManifest (..),
+    newTransferManifest,
 
     -- ** TransferOperation
-    , TransferOperation (..)
-    , newTransferOperation
+    TransferOperation (..),
+    newTransferOperation,
 
     -- ** TransferOperation_Status
-    , TransferOperation_Status (..)
+    TransferOperation_Status (..),
 
     -- ** TransferOptions
-    , TransferOptions (..)
-    , newTransferOptions
+    TransferOptions (..),
+    newTransferOptions,
 
     -- ** TransferOptions_OverwriteWhen
-    , TransferOptions_OverwriteWhen (..)
+    TransferOptions_OverwriteWhen (..),
 
     -- ** TransferSpec
-    , TransferSpec (..)
-    , newTransferSpec
+    TransferSpec (..),
+    newTransferSpec,
 
     -- ** UpdateTransferJobRequest
-    , UpdateTransferJobRequest (..)
-    , newUpdateTransferJobRequest
-    ) where
+    UpdateTransferJobRequest (..),
+    newUpdateTransferJobRequest,
+  )
+where
 
 import Gogol.StorageTransfer.GoogleServiceAccounts.Get
 import Gogol.StorageTransfer.Projects.AgentPools.Create

@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,117 +16,120 @@
 
 -- |
 -- Module      : Gogol.ConsumerSurveys.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.ConsumerSurveys.Types
-    (
-    -- * Configuration
-      consumerSurveysService
+  ( -- * Configuration
+    consumerSurveysService,
 
     -- * OAuth Scopes
-    , Consumersurveys'FullControl
-    , Consumersurveys'Readonly
-    , Userinfo'Email
+    Consumersurveys'FullControl,
+    Consumersurveys'Readonly,
+    Userinfo'Email,
 
     -- * Types
 
     -- ** FieldMask
-    , FieldMask (..)
-    , newFieldMask
+    FieldMask (..),
+    newFieldMask,
 
     -- ** MobileAppPanel
-    , MobileAppPanel (..)
-    , newMobileAppPanel
+    MobileAppPanel (..),
+    newMobileAppPanel,
 
     -- ** MobileAppPanelsListResponse
-    , MobileAppPanelsListResponse (..)
-    , newMobileAppPanelsListResponse
+    MobileAppPanelsListResponse (..),
+    newMobileAppPanelsListResponse,
 
     -- ** PageInfo
-    , PageInfo (..)
-    , newPageInfo
+    PageInfo (..),
+    newPageInfo,
 
     -- ** ResultsGetRequest
-    , ResultsGetRequest (..)
-    , newResultsGetRequest
+    ResultsGetRequest (..),
+    newResultsGetRequest,
 
     -- ** ResultsMask
-    , ResultsMask (..)
-    , newResultsMask
+    ResultsMask (..),
+    newResultsMask,
 
     -- ** Survey
-    , Survey (..)
-    , newSurvey
+    Survey (..),
+    newSurvey,
 
     -- ** SurveyAudience
-    , SurveyAudience (..)
-    , newSurveyAudience
+    SurveyAudience (..),
+    newSurveyAudience,
 
     -- ** SurveyCost
-    , SurveyCost (..)
-    , newSurveyCost
+    SurveyCost (..),
+    newSurveyCost,
 
     -- ** SurveyQuestion
-    , SurveyQuestion (..)
-    , newSurveyQuestion
+    SurveyQuestion (..),
+    newSurveyQuestion,
 
     -- ** SurveyQuestionImage
-    , SurveyQuestionImage (..)
-    , newSurveyQuestionImage
+    SurveyQuestionImage (..),
+    newSurveyQuestionImage,
 
     -- ** SurveyRejection
-    , SurveyRejection (..)
-    , newSurveyRejection
+    SurveyRejection (..),
+    newSurveyRejection,
 
     -- ** SurveyResults
-    , SurveyResults (..)
-    , newSurveyResults
+    SurveyResults (..),
+    newSurveyResults,
 
     -- ** SurveysDeleteResponse
-    , SurveysDeleteResponse (..)
-    , newSurveysDeleteResponse
+    SurveysDeleteResponse (..),
+    newSurveysDeleteResponse,
 
     -- ** SurveysListResponse
-    , SurveysListResponse (..)
-    , newSurveysListResponse
+    SurveysListResponse (..),
+    newSurveysListResponse,
 
     -- ** SurveysStartRequest
-    , SurveysStartRequest (..)
-    , newSurveysStartRequest
+    SurveysStartRequest (..),
+    newSurveysStartRequest,
 
     -- ** SurveysStartResponse
-    , SurveysStartResponse (..)
-    , newSurveysStartResponse
+    SurveysStartResponse (..),
+    newSurveysStartResponse,
 
     -- ** SurveysStopResponse
-    , SurveysStopResponse (..)
-    , newSurveysStopResponse
+    SurveysStopResponse (..),
+    newSurveysStopResponse,
 
     -- ** TokenPagination
-    , TokenPagination (..)
-    , newTokenPagination
-    ) where
+    TokenPagination (..),
+    newTokenPagination,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.ConsumerSurveys.Internal.Product
 import Gogol.ConsumerSurveys.Internal.Sum
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v2@ of the Consumer Surveys API. This contains the host and root path used as a starting point for constructing service requests.
 consumerSurveysService :: Core.ServiceConfig
-consumerSurveysService
-  = Core.defaultService
-      (Core.ServiceId "consumersurveys:v2")
-      "www.googleapis.com"
+consumerSurveysService =
+  Core.defaultService
+    (Core.ServiceId "consumersurveys:v2")
+    "www.googleapis.com"
 
 -- | View and edit your surveys and results
-type Consumersurveys'FullControl = "https://www.googleapis.com/auth/consumersurveys"
+type Consumersurveys'FullControl =
+  "https://www.googleapis.com/auth/consumersurveys"
 
 -- | View the results for your surveys
-type Consumersurveys'Readonly = "https://www.googleapis.com/auth/consumersurveys.readonly"
+type Consumersurveys'Readonly =
+  "https://www.googleapis.com/auth/consumersurveys.readonly"
 
 -- | View your email address
-type Userinfo'Email = "https://www.googleapis.com/auth/userinfo.email"
+type Userinfo'Email =
+  "https://www.googleapis.com/auth/userinfo.email"

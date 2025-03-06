@@ -5,14 +5,13 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -27,18 +26,18 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- 
+--
 --
 -- /See:/ <https://developers.google.com/safe-browsing/ Safe Browsing API Reference> for @safebrowsing.encodedUpdates.get@.
 module Gogol.SafeBrowsing.EncodedUpdates.Get
-    (
-    -- * Resource
-      SafeBrowsingEncodedUpdatesGetResource
+  ( -- * Resource
+    SafeBrowsingEncodedUpdatesGetResource,
 
     -- ** Constructing a Request
-    , SafeBrowsingEncodedUpdatesGet (..)
-    , newSafeBrowsingEncodedUpdatesGet
-    ) where
+    SafeBrowsingEncodedUpdatesGet (..),
+    newSafeBrowsingEncodedUpdatesGet,
+  )
+where
 
 import qualified Gogol.Prelude as Core
 import Gogol.SafeBrowsing.Types
@@ -46,78 +45,85 @@ import Gogol.SafeBrowsing.Types
 -- | A resource alias for @safebrowsing.encodedUpdates.get@ method which the
 -- 'SafeBrowsingEncodedUpdatesGet' request conforms to.
 type SafeBrowsingEncodedUpdatesGetResource =
-     "v4" Core.:>
-       "encodedUpdates" Core.:>
-         Core.Capture "encodedRequest" Core.Base64 Core.:>
-           Core.QueryParam "$.xgafv" Xgafv Core.:>
-             Core.QueryParam "access_token" Core.Text Core.:>
-               Core.QueryParam "callback" Core.Text Core.:>
-                 Core.QueryParam "clientId" Core.Text Core.:>
-                   Core.QueryParam "clientVersion" Core.Text Core.:>
-                     Core.QueryParam "uploadType" Core.Text Core.:>
-                       Core.QueryParam "upload_protocol" Core.Text Core.:>
-                         Core.QueryParam "alt" Core.AltJSON Core.:>
-                           Core.Get '[Core.JSON]
-                             GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponse
+  "v4"
+    Core.:> "encodedUpdates"
+    Core.:> Core.Capture "encodedRequest" Core.Base64
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "clientId" Core.Text
+    Core.:> Core.QueryParam "clientVersion" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get
+              '[Core.JSON]
+              GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponse
 
--- | 
+-- |
 --
 -- /See:/ 'newSafeBrowsingEncodedUpdatesGet' smart constructor.
 data SafeBrowsingEncodedUpdatesGet = SafeBrowsingEncodedUpdatesGet
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | A client ID that uniquely identifies the client implementation of the Safe Browsing API.
-    , clientId :: (Core.Maybe Core.Text)
-      -- | The version of the client implementation.
-    , clientVersion :: (Core.Maybe Core.Text)
-      -- | A serialized FetchThreatListUpdatesRequest proto.
-    , encodedRequest :: Core.Base64
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | A client ID that uniquely identifies the client implementation of the Safe Browsing API.
+    clientId :: (Core.Maybe Core.Text),
+    -- | The version of the client implementation.
+    clientVersion :: (Core.Maybe Core.Text),
+    -- | A serialized FetchThreatListUpdatesRequest proto.
+    encodedRequest :: Core.Base64,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'SafeBrowsingEncodedUpdatesGet' with the minimum fields required to make a request.
-newSafeBrowsingEncodedUpdatesGet 
-    ::  Core.Base64
-       -- ^  A serialized FetchThreatListUpdatesRequest proto. See 'encodedRequest'.
-    -> SafeBrowsingEncodedUpdatesGet
+newSafeBrowsingEncodedUpdatesGet ::
+  -- |  A serialized FetchThreatListUpdatesRequest proto. See 'encodedRequest'.
+  Core.Base64 ->
+  SafeBrowsingEncodedUpdatesGet
 newSafeBrowsingEncodedUpdatesGet encodedRequest =
   SafeBrowsingEncodedUpdatesGet
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , clientId = Core.Nothing
-    , clientVersion = Core.Nothing
-    , encodedRequest = encodedRequest
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      clientId = Core.Nothing,
+      clientVersion = Core.Nothing,
+      encodedRequest = encodedRequest,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           SafeBrowsingEncodedUpdatesGet
-         where
-        type Rs SafeBrowsingEncodedUpdatesGet =
-             GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponse
-        type Scopes SafeBrowsingEncodedUpdatesGet = '[]
-        requestClient SafeBrowsingEncodedUpdatesGet{..}
-          = go encodedRequest xgafv accessToken callback
-              clientId
-              clientVersion
-              uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              safeBrowsingService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy SafeBrowsingEncodedUpdatesGetResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    SafeBrowsingEncodedUpdatesGet
+  where
+  type
+    Rs SafeBrowsingEncodedUpdatesGet =
+      GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponse
+  type Scopes SafeBrowsingEncodedUpdatesGet = '[]
+  requestClient SafeBrowsingEncodedUpdatesGet {..} =
+    go
+      encodedRequest
+      xgafv
+      accessToken
+      callback
+      clientId
+      clientVersion
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      safeBrowsingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy SafeBrowsingEncodedUpdatesGetResource
+          )
+          Core.mempty

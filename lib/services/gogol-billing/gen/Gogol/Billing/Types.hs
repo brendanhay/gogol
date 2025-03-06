@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,152 +16,155 @@
 
 -- |
 -- Module      : Gogol.Billing.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Billing.Types
-    (
-    -- * Configuration
-      billingService
+  ( -- * Configuration
+    billingService,
 
     -- * OAuth Scopes
-    , CloudBilling'FullControl
-    , CloudBilling'Readonly
-    , CloudPlatform'FullControl
+    CloudBilling'FullControl,
+    CloudBilling'Readonly,
+    CloudPlatform'FullControl,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AggregationInfo
-    , AggregationInfo (..)
-    , newAggregationInfo
+    AggregationInfo (..),
+    newAggregationInfo,
 
     -- ** AggregationInfo_AggregationInterval
-    , AggregationInfo_AggregationInterval (..)
+    AggregationInfo_AggregationInterval (..),
 
     -- ** AggregationInfo_AggregationLevel
-    , AggregationInfo_AggregationLevel (..)
+    AggregationInfo_AggregationLevel (..),
 
     -- ** AuditConfig
-    , AuditConfig (..)
-    , newAuditConfig
+    AuditConfig (..),
+    newAuditConfig,
 
     -- ** AuditLogConfig
-    , AuditLogConfig (..)
-    , newAuditLogConfig
+    AuditLogConfig (..),
+    newAuditLogConfig,
 
     -- ** AuditLogConfig_LogType
-    , AuditLogConfig_LogType (..)
+    AuditLogConfig_LogType (..),
 
     -- ** BillingAccount
-    , BillingAccount (..)
-    , newBillingAccount
+    BillingAccount (..),
+    newBillingAccount,
 
     -- ** Binding
-    , Binding (..)
-    , newBinding
+    Binding (..),
+    newBinding,
 
     -- ** Category
-    , Category (..)
-    , newCategory
+    Category (..),
+    newCategory,
 
     -- ** Expr
-    , Expr (..)
-    , newExpr
+    Expr (..),
+    newExpr,
 
     -- ** GeoTaxonomy
-    , GeoTaxonomy (..)
-    , newGeoTaxonomy
+    GeoTaxonomy (..),
+    newGeoTaxonomy,
 
     -- ** GeoTaxonomy_Type
-    , GeoTaxonomy_Type (..)
+    GeoTaxonomy_Type (..),
 
     -- ** ListBillingAccountsResponse
-    , ListBillingAccountsResponse (..)
-    , newListBillingAccountsResponse
+    ListBillingAccountsResponse (..),
+    newListBillingAccountsResponse,
 
     -- ** ListProjectBillingInfoResponse
-    , ListProjectBillingInfoResponse (..)
-    , newListProjectBillingInfoResponse
+    ListProjectBillingInfoResponse (..),
+    newListProjectBillingInfoResponse,
 
     -- ** ListServicesResponse
-    , ListServicesResponse (..)
-    , newListServicesResponse
+    ListServicesResponse (..),
+    newListServicesResponse,
 
     -- ** ListSkusResponse
-    , ListSkusResponse (..)
-    , newListSkusResponse
+    ListSkusResponse (..),
+    newListSkusResponse,
 
     -- ** Money
-    , Money (..)
-    , newMoney
+    Money (..),
+    newMoney,
 
     -- ** MoveBillingAccountRequest
-    , MoveBillingAccountRequest (..)
-    , newMoveBillingAccountRequest
+    MoveBillingAccountRequest (..),
+    newMoveBillingAccountRequest,
 
     -- ** Policy
-    , Policy (..)
-    , newPolicy
+    Policy (..),
+    newPolicy,
 
     -- ** PricingExpression
-    , PricingExpression (..)
-    , newPricingExpression
+    PricingExpression (..),
+    newPricingExpression,
 
     -- ** PricingInfo
-    , PricingInfo (..)
-    , newPricingInfo
+    PricingInfo (..),
+    newPricingInfo,
 
     -- ** ProjectBillingInfo
-    , ProjectBillingInfo (..)
-    , newProjectBillingInfo
+    ProjectBillingInfo (..),
+    newProjectBillingInfo,
 
     -- ** Service
-    , Service (..)
-    , newService
+    Service (..),
+    newService,
 
     -- ** SetIamPolicyRequest
-    , SetIamPolicyRequest (..)
-    , newSetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
 
     -- ** Sku
-    , Sku (..)
-    , newSku
+    Sku (..),
+    newSku,
 
     -- ** TestIamPermissionsRequest
-    , TestIamPermissionsRequest (..)
-    , newTestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
 
     -- ** TestIamPermissionsResponse
-    , TestIamPermissionsResponse (..)
-    , newTestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
 
     -- ** TierRate
-    , TierRate (..)
-    , newTierRate
-    ) where
+    TierRate (..),
+    newTierRate,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Billing.Internal.Product
 import Gogol.Billing.Internal.Sum
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Cloud Billing API. This contains the host and root path used as a starting point for constructing service requests.
 billingService :: Core.ServiceConfig
-billingService
-  = Core.defaultService
-      (Core.ServiceId "cloudbilling:v1")
-      "cloudbilling.googleapis.com"
+billingService =
+  Core.defaultService
+    (Core.ServiceId "cloudbilling:v1")
+    "cloudbilling.googleapis.com"
 
 -- | View and manage your Google Cloud Platform billing accounts
-type CloudBilling'FullControl = "https://www.googleapis.com/auth/cloud-billing"
+type CloudBilling'FullControl =
+  "https://www.googleapis.com/auth/cloud-billing"
 
 -- | View your Google Cloud Platform billing accounts
-type CloudBilling'Readonly = "https://www.googleapis.com/auth/cloud-billing.readonly"
+type CloudBilling'Readonly =
+  "https://www.googleapis.com/auth/cloud-billing.readonly"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"

@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.Composer
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,484 +27,484 @@
 --
 -- /See:/ <https://cloud.google.com/composer/ Cloud Composer API Reference>
 module Gogol.Composer
-    (
-    -- * Configuration
-      composerService
+  ( -- * Configuration
+    composerService,
 
     -- * OAuth Scopes
-    , CloudPlatform'FullControl
+    CloudPlatform'FullControl,
 
     -- * Resources
 
     -- ** composer.projects.locations.environments.checkUpgrade
-    , ComposerProjectsLocationsEnvironmentsCheckUpgradeResource
-    , ComposerProjectsLocationsEnvironmentsCheckUpgrade (..)
-    , newComposerProjectsLocationsEnvironmentsCheckUpgrade
+    ComposerProjectsLocationsEnvironmentsCheckUpgradeResource,
+    ComposerProjectsLocationsEnvironmentsCheckUpgrade (..),
+    newComposerProjectsLocationsEnvironmentsCheckUpgrade,
 
     -- ** composer.projects.locations.environments.create
-    , ComposerProjectsLocationsEnvironmentsCreateResource
-    , ComposerProjectsLocationsEnvironmentsCreate (..)
-    , newComposerProjectsLocationsEnvironmentsCreate
+    ComposerProjectsLocationsEnvironmentsCreateResource,
+    ComposerProjectsLocationsEnvironmentsCreate (..),
+    newComposerProjectsLocationsEnvironmentsCreate,
 
     -- ** composer.projects.locations.environments.databaseFailover
-    , ComposerProjectsLocationsEnvironmentsDatabaseFailoverResource
-    , ComposerProjectsLocationsEnvironmentsDatabaseFailover (..)
-    , newComposerProjectsLocationsEnvironmentsDatabaseFailover
+    ComposerProjectsLocationsEnvironmentsDatabaseFailoverResource,
+    ComposerProjectsLocationsEnvironmentsDatabaseFailover (..),
+    newComposerProjectsLocationsEnvironmentsDatabaseFailover,
 
     -- ** composer.projects.locations.environments.delete
-    , ComposerProjectsLocationsEnvironmentsDeleteResource
-    , ComposerProjectsLocationsEnvironmentsDelete (..)
-    , newComposerProjectsLocationsEnvironmentsDelete
+    ComposerProjectsLocationsEnvironmentsDeleteResource,
+    ComposerProjectsLocationsEnvironmentsDelete (..),
+    newComposerProjectsLocationsEnvironmentsDelete,
 
     -- ** composer.projects.locations.environments.executeAirflowCommand
-    , ComposerProjectsLocationsEnvironmentsExecuteAirflowCommandResource
-    , ComposerProjectsLocationsEnvironmentsExecuteAirflowCommand (..)
-    , newComposerProjectsLocationsEnvironmentsExecuteAirflowCommand
+    ComposerProjectsLocationsEnvironmentsExecuteAirflowCommandResource,
+    ComposerProjectsLocationsEnvironmentsExecuteAirflowCommand (..),
+    newComposerProjectsLocationsEnvironmentsExecuteAirflowCommand,
 
     -- ** composer.projects.locations.environments.fetchDatabaseProperties
-    , ComposerProjectsLocationsEnvironmentsFetchDatabasePropertiesResource
-    , ComposerProjectsLocationsEnvironmentsFetchDatabaseProperties (..)
-    , newComposerProjectsLocationsEnvironmentsFetchDatabaseProperties
+    ComposerProjectsLocationsEnvironmentsFetchDatabasePropertiesResource,
+    ComposerProjectsLocationsEnvironmentsFetchDatabaseProperties (..),
+    newComposerProjectsLocationsEnvironmentsFetchDatabaseProperties,
 
     -- ** composer.projects.locations.environments.get
-    , ComposerProjectsLocationsEnvironmentsGetResource
-    , ComposerProjectsLocationsEnvironmentsGet (..)
-    , newComposerProjectsLocationsEnvironmentsGet
+    ComposerProjectsLocationsEnvironmentsGetResource,
+    ComposerProjectsLocationsEnvironmentsGet (..),
+    newComposerProjectsLocationsEnvironmentsGet,
 
     -- ** composer.projects.locations.environments.list
-    , ComposerProjectsLocationsEnvironmentsListResource
-    , ComposerProjectsLocationsEnvironmentsList (..)
-    , newComposerProjectsLocationsEnvironmentsList
+    ComposerProjectsLocationsEnvironmentsListResource,
+    ComposerProjectsLocationsEnvironmentsList (..),
+    newComposerProjectsLocationsEnvironmentsList,
 
     -- ** composer.projects.locations.environments.loadSnapshot
-    , ComposerProjectsLocationsEnvironmentsLoadSnapshotResource
-    , ComposerProjectsLocationsEnvironmentsLoadSnapshot (..)
-    , newComposerProjectsLocationsEnvironmentsLoadSnapshot
+    ComposerProjectsLocationsEnvironmentsLoadSnapshotResource,
+    ComposerProjectsLocationsEnvironmentsLoadSnapshot (..),
+    newComposerProjectsLocationsEnvironmentsLoadSnapshot,
 
     -- ** composer.projects.locations.environments.patch
-    , ComposerProjectsLocationsEnvironmentsPatchResource
-    , ComposerProjectsLocationsEnvironmentsPatch (..)
-    , newComposerProjectsLocationsEnvironmentsPatch
+    ComposerProjectsLocationsEnvironmentsPatchResource,
+    ComposerProjectsLocationsEnvironmentsPatch (..),
+    newComposerProjectsLocationsEnvironmentsPatch,
 
     -- ** composer.projects.locations.environments.pollAirflowCommand
-    , ComposerProjectsLocationsEnvironmentsPollAirflowCommandResource
-    , ComposerProjectsLocationsEnvironmentsPollAirflowCommand (..)
-    , newComposerProjectsLocationsEnvironmentsPollAirflowCommand
+    ComposerProjectsLocationsEnvironmentsPollAirflowCommandResource,
+    ComposerProjectsLocationsEnvironmentsPollAirflowCommand (..),
+    newComposerProjectsLocationsEnvironmentsPollAirflowCommand,
 
     -- ** composer.projects.locations.environments.saveSnapshot
-    , ComposerProjectsLocationsEnvironmentsSaveSnapshotResource
-    , ComposerProjectsLocationsEnvironmentsSaveSnapshot (..)
-    , newComposerProjectsLocationsEnvironmentsSaveSnapshot
+    ComposerProjectsLocationsEnvironmentsSaveSnapshotResource,
+    ComposerProjectsLocationsEnvironmentsSaveSnapshot (..),
+    newComposerProjectsLocationsEnvironmentsSaveSnapshot,
 
     -- ** composer.projects.locations.environments.stopAirflowCommand
-    , ComposerProjectsLocationsEnvironmentsStopAirflowCommandResource
-    , ComposerProjectsLocationsEnvironmentsStopAirflowCommand (..)
-    , newComposerProjectsLocationsEnvironmentsStopAirflowCommand
+    ComposerProjectsLocationsEnvironmentsStopAirflowCommandResource,
+    ComposerProjectsLocationsEnvironmentsStopAirflowCommand (..),
+    newComposerProjectsLocationsEnvironmentsStopAirflowCommand,
 
     -- ** composer.projects.locations.environments.userWorkloadsConfigMaps.create
-    , ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsCreateResource
-    , ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsCreate (..)
-    , newComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsCreate
+    ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsCreateResource,
+    ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsCreate (..),
+    newComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsCreate,
 
     -- ** composer.projects.locations.environments.userWorkloadsConfigMaps.delete
-    , ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsDeleteResource
-    , ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsDelete (..)
-    , newComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsDelete
+    ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsDeleteResource,
+    ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsDelete (..),
+    newComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsDelete,
 
     -- ** composer.projects.locations.environments.userWorkloadsConfigMaps.get
-    , ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsGetResource
-    , ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsGet (..)
-    , newComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsGet
+    ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsGetResource,
+    ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsGet (..),
+    newComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsGet,
 
     -- ** composer.projects.locations.environments.userWorkloadsConfigMaps.list
-    , ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsListResource
-    , ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsList (..)
-    , newComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsList
+    ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsListResource,
+    ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsList (..),
+    newComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsList,
 
     -- ** composer.projects.locations.environments.userWorkloadsConfigMaps.update
-    , ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsUpdateResource
-    , ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsUpdate (..)
-    , newComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsUpdate
+    ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsUpdateResource,
+    ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsUpdate (..),
+    newComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsUpdate,
 
     -- ** composer.projects.locations.environments.userWorkloadsSecrets.create
-    , ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsCreateResource
-    , ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsCreate (..)
-    , newComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsCreate
+    ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsCreateResource,
+    ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsCreate (..),
+    newComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsCreate,
 
     -- ** composer.projects.locations.environments.userWorkloadsSecrets.delete
-    , ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsDeleteResource
-    , ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsDelete (..)
-    , newComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsDelete
+    ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsDeleteResource,
+    ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsDelete (..),
+    newComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsDelete,
 
     -- ** composer.projects.locations.environments.userWorkloadsSecrets.get
-    , ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsGetResource
-    , ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsGet (..)
-    , newComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsGet
+    ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsGetResource,
+    ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsGet (..),
+    newComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsGet,
 
     -- ** composer.projects.locations.environments.userWorkloadsSecrets.list
-    , ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsListResource
-    , ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsList (..)
-    , newComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsList
+    ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsListResource,
+    ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsList (..),
+    newComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsList,
 
     -- ** composer.projects.locations.environments.userWorkloadsSecrets.update
-    , ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsUpdateResource
-    , ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsUpdate (..)
-    , newComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsUpdate
+    ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsUpdateResource,
+    ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsUpdate (..),
+    newComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsUpdate,
 
     -- ** composer.projects.locations.environments.workloads.list
-    , ComposerProjectsLocationsEnvironmentsWorkloadsListResource
-    , ComposerProjectsLocationsEnvironmentsWorkloadsList (..)
-    , newComposerProjectsLocationsEnvironmentsWorkloadsList
+    ComposerProjectsLocationsEnvironmentsWorkloadsListResource,
+    ComposerProjectsLocationsEnvironmentsWorkloadsList (..),
+    newComposerProjectsLocationsEnvironmentsWorkloadsList,
 
     -- ** composer.projects.locations.imageVersions.list
-    , ComposerProjectsLocationsImageVersionsListResource
-    , ComposerProjectsLocationsImageVersionsList (..)
-    , newComposerProjectsLocationsImageVersionsList
+    ComposerProjectsLocationsImageVersionsListResource,
+    ComposerProjectsLocationsImageVersionsList (..),
+    newComposerProjectsLocationsImageVersionsList,
 
     -- ** composer.projects.locations.operations.delete
-    , ComposerProjectsLocationsOperationsDeleteResource
-    , ComposerProjectsLocationsOperationsDelete (..)
-    , newComposerProjectsLocationsOperationsDelete
+    ComposerProjectsLocationsOperationsDeleteResource,
+    ComposerProjectsLocationsOperationsDelete (..),
+    newComposerProjectsLocationsOperationsDelete,
 
     -- ** composer.projects.locations.operations.get
-    , ComposerProjectsLocationsOperationsGetResource
-    , ComposerProjectsLocationsOperationsGet (..)
-    , newComposerProjectsLocationsOperationsGet
+    ComposerProjectsLocationsOperationsGetResource,
+    ComposerProjectsLocationsOperationsGet (..),
+    newComposerProjectsLocationsOperationsGet,
 
     -- ** composer.projects.locations.operations.list
-    , ComposerProjectsLocationsOperationsListResource
-    , ComposerProjectsLocationsOperationsList (..)
-    , newComposerProjectsLocationsOperationsList
+    ComposerProjectsLocationsOperationsListResource,
+    ComposerProjectsLocationsOperationsList (..),
+    newComposerProjectsLocationsOperationsList,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AirflowMetadataRetentionPolicyConfig
-    , AirflowMetadataRetentionPolicyConfig (..)
-    , newAirflowMetadataRetentionPolicyConfig
+    AirflowMetadataRetentionPolicyConfig (..),
+    newAirflowMetadataRetentionPolicyConfig,
 
     -- ** AirflowMetadataRetentionPolicyConfig_RetentionMode
-    , AirflowMetadataRetentionPolicyConfig_RetentionMode (..)
+    AirflowMetadataRetentionPolicyConfig_RetentionMode (..),
 
     -- ** AllowedIpRange
-    , AllowedIpRange (..)
-    , newAllowedIpRange
+    AllowedIpRange (..),
+    newAllowedIpRange,
 
     -- ** CheckUpgradeRequest
-    , CheckUpgradeRequest (..)
-    , newCheckUpgradeRequest
+    CheckUpgradeRequest (..),
+    newCheckUpgradeRequest,
 
     -- ** CheckUpgradeResponse
-    , CheckUpgradeResponse (..)
-    , newCheckUpgradeResponse
+    CheckUpgradeResponse (..),
+    newCheckUpgradeResponse,
 
     -- ** CheckUpgradeResponse_ContainsPypiModulesConflict
-    , CheckUpgradeResponse_ContainsPypiModulesConflict (..)
+    CheckUpgradeResponse_ContainsPypiModulesConflict (..),
 
     -- ** CheckUpgradeResponse_PypiDependencies
-    , CheckUpgradeResponse_PypiDependencies (..)
-    , newCheckUpgradeResponse_PypiDependencies
+    CheckUpgradeResponse_PypiDependencies (..),
+    newCheckUpgradeResponse_PypiDependencies,
 
     -- ** CidrBlock
-    , CidrBlock (..)
-    , newCidrBlock
+    CidrBlock (..),
+    newCidrBlock,
 
     -- ** CloudDataLineageIntegration
-    , CloudDataLineageIntegration (..)
-    , newCloudDataLineageIntegration
+    CloudDataLineageIntegration (..),
+    newCloudDataLineageIntegration,
 
     -- ** ComposerWorkload
-    , ComposerWorkload (..)
-    , newComposerWorkload
+    ComposerWorkload (..),
+    newComposerWorkload,
 
     -- ** ComposerWorkload_Type
-    , ComposerWorkload_Type (..)
+    ComposerWorkload_Type (..),
 
     -- ** ComposerWorkloadStatus
-    , ComposerWorkloadStatus (..)
-    , newComposerWorkloadStatus
+    ComposerWorkloadStatus (..),
+    newComposerWorkloadStatus,
 
     -- ** ComposerWorkloadStatus_State
-    , ComposerWorkloadStatus_State (..)
+    ComposerWorkloadStatus_State (..),
 
     -- ** DagProcessorResource
-    , DagProcessorResource (..)
-    , newDagProcessorResource
+    DagProcessorResource (..),
+    newDagProcessorResource,
 
     -- ** DataRetentionConfig
-    , DataRetentionConfig (..)
-    , newDataRetentionConfig
+    DataRetentionConfig (..),
+    newDataRetentionConfig,
 
     -- ** DatabaseConfig
-    , DatabaseConfig (..)
-    , newDatabaseConfig
+    DatabaseConfig (..),
+    newDatabaseConfig,
 
     -- ** DatabaseFailoverRequest
-    , DatabaseFailoverRequest (..)
-    , newDatabaseFailoverRequest
+    DatabaseFailoverRequest (..),
+    newDatabaseFailoverRequest,
 
     -- ** DatabaseFailoverResponse
-    , DatabaseFailoverResponse (..)
-    , newDatabaseFailoverResponse
+    DatabaseFailoverResponse (..),
+    newDatabaseFailoverResponse,
 
     -- ** Date
-    , Date (..)
-    , newDate
+    Date (..),
+    newDate,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** EncryptionConfig
-    , EncryptionConfig (..)
-    , newEncryptionConfig
+    EncryptionConfig (..),
+    newEncryptionConfig,
 
     -- ** Environment
-    , Environment (..)
-    , newEnvironment
+    Environment (..),
+    newEnvironment,
 
     -- ** Environment_Labels
-    , Environment_Labels (..)
-    , newEnvironment_Labels
+    Environment_Labels (..),
+    newEnvironment_Labels,
 
     -- ** Environment_State
-    , Environment_State (..)
+    Environment_State (..),
 
     -- ** EnvironmentConfig
-    , EnvironmentConfig (..)
-    , newEnvironmentConfig
+    EnvironmentConfig (..),
+    newEnvironmentConfig,
 
     -- ** EnvironmentConfig_EnvironmentSize
-    , EnvironmentConfig_EnvironmentSize (..)
+    EnvironmentConfig_EnvironmentSize (..),
 
     -- ** EnvironmentConfig_ResilienceMode
-    , EnvironmentConfig_ResilienceMode (..)
+    EnvironmentConfig_ResilienceMode (..),
 
     -- ** ExecuteAirflowCommandRequest
-    , ExecuteAirflowCommandRequest (..)
-    , newExecuteAirflowCommandRequest
+    ExecuteAirflowCommandRequest (..),
+    newExecuteAirflowCommandRequest,
 
     -- ** ExecuteAirflowCommandResponse
-    , ExecuteAirflowCommandResponse (..)
-    , newExecuteAirflowCommandResponse
+    ExecuteAirflowCommandResponse (..),
+    newExecuteAirflowCommandResponse,
 
     -- ** ExitInfo
-    , ExitInfo (..)
-    , newExitInfo
+    ExitInfo (..),
+    newExitInfo,
 
     -- ** FetchDatabasePropertiesResponse
-    , FetchDatabasePropertiesResponse (..)
-    , newFetchDatabasePropertiesResponse
+    FetchDatabasePropertiesResponse (..),
+    newFetchDatabasePropertiesResponse,
 
     -- ** IPAllocationPolicy
-    , IPAllocationPolicy (..)
-    , newIPAllocationPolicy
+    IPAllocationPolicy (..),
+    newIPAllocationPolicy,
 
     -- ** ImageVersion
-    , ImageVersion (..)
-    , newImageVersion
+    ImageVersion (..),
+    newImageVersion,
 
     -- ** Line
-    , Line (..)
-    , newLine
+    Line (..),
+    newLine,
 
     -- ** ListEnvironmentsResponse
-    , ListEnvironmentsResponse (..)
-    , newListEnvironmentsResponse
+    ListEnvironmentsResponse (..),
+    newListEnvironmentsResponse,
 
     -- ** ListImageVersionsResponse
-    , ListImageVersionsResponse (..)
-    , newListImageVersionsResponse
+    ListImageVersionsResponse (..),
+    newListImageVersionsResponse,
 
     -- ** ListOperationsResponse
-    , ListOperationsResponse (..)
-    , newListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
     -- ** ListUserWorkloadsConfigMapsResponse
-    , ListUserWorkloadsConfigMapsResponse (..)
-    , newListUserWorkloadsConfigMapsResponse
+    ListUserWorkloadsConfigMapsResponse (..),
+    newListUserWorkloadsConfigMapsResponse,
 
     -- ** ListUserWorkloadsSecretsResponse
-    , ListUserWorkloadsSecretsResponse (..)
-    , newListUserWorkloadsSecretsResponse
+    ListUserWorkloadsSecretsResponse (..),
+    newListUserWorkloadsSecretsResponse,
 
     -- ** ListWorkloadsResponse
-    , ListWorkloadsResponse (..)
-    , newListWorkloadsResponse
+    ListWorkloadsResponse (..),
+    newListWorkloadsResponse,
 
     -- ** LoadSnapshotRequest
-    , LoadSnapshotRequest (..)
-    , newLoadSnapshotRequest
+    LoadSnapshotRequest (..),
+    newLoadSnapshotRequest,
 
     -- ** LoadSnapshotResponse
-    , LoadSnapshotResponse (..)
-    , newLoadSnapshotResponse
+    LoadSnapshotResponse (..),
+    newLoadSnapshotResponse,
 
     -- ** MaintenanceWindow
-    , MaintenanceWindow (..)
-    , newMaintenanceWindow
+    MaintenanceWindow (..),
+    newMaintenanceWindow,
 
     -- ** MasterAuthorizedNetworksConfig
-    , MasterAuthorizedNetworksConfig (..)
-    , newMasterAuthorizedNetworksConfig
+    MasterAuthorizedNetworksConfig (..),
+    newMasterAuthorizedNetworksConfig,
 
     -- ** NetworkingConfig
-    , NetworkingConfig (..)
-    , newNetworkingConfig
+    NetworkingConfig (..),
+    newNetworkingConfig,
 
     -- ** NetworkingConfig_ConnectionType
-    , NetworkingConfig_ConnectionType (..)
+    NetworkingConfig_ConnectionType (..),
 
     -- ** NodeConfig
-    , NodeConfig (..)
-    , newNodeConfig
+    NodeConfig (..),
+    newNodeConfig,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** OperationMetadata
-    , OperationMetadata (..)
-    , newOperationMetadata
+    OperationMetadata (..),
+    newOperationMetadata,
 
     -- ** OperationMetadata_OperationType
-    , OperationMetadata_OperationType (..)
+    OperationMetadata_OperationType (..),
 
     -- ** OperationMetadata_State
-    , OperationMetadata_State (..)
+    OperationMetadata_State (..),
 
     -- ** PollAirflowCommandRequest
-    , PollAirflowCommandRequest (..)
-    , newPollAirflowCommandRequest
+    PollAirflowCommandRequest (..),
+    newPollAirflowCommandRequest,
 
     -- ** PollAirflowCommandResponse
-    , PollAirflowCommandResponse (..)
-    , newPollAirflowCommandResponse
+    PollAirflowCommandResponse (..),
+    newPollAirflowCommandResponse,
 
     -- ** PrivateClusterConfig
-    , PrivateClusterConfig (..)
-    , newPrivateClusterConfig
+    PrivateClusterConfig (..),
+    newPrivateClusterConfig,
 
     -- ** PrivateEnvironmentConfig
-    , PrivateEnvironmentConfig (..)
-    , newPrivateEnvironmentConfig
+    PrivateEnvironmentConfig (..),
+    newPrivateEnvironmentConfig,
 
     -- ** RecoveryConfig
-    , RecoveryConfig (..)
-    , newRecoveryConfig
+    RecoveryConfig (..),
+    newRecoveryConfig,
 
     -- ** SaveSnapshotRequest
-    , SaveSnapshotRequest (..)
-    , newSaveSnapshotRequest
+    SaveSnapshotRequest (..),
+    newSaveSnapshotRequest,
 
     -- ** SaveSnapshotResponse
-    , SaveSnapshotResponse (..)
-    , newSaveSnapshotResponse
+    SaveSnapshotResponse (..),
+    newSaveSnapshotResponse,
 
     -- ** ScheduledSnapshotsConfig
-    , ScheduledSnapshotsConfig (..)
-    , newScheduledSnapshotsConfig
+    ScheduledSnapshotsConfig (..),
+    newScheduledSnapshotsConfig,
 
     -- ** SchedulerResource
-    , SchedulerResource (..)
-    , newSchedulerResource
+    SchedulerResource (..),
+    newSchedulerResource,
 
     -- ** SoftwareConfig
-    , SoftwareConfig (..)
-    , newSoftwareConfig
+    SoftwareConfig (..),
+    newSoftwareConfig,
 
     -- ** SoftwareConfig_AirflowConfigOverrides
-    , SoftwareConfig_AirflowConfigOverrides (..)
-    , newSoftwareConfig_AirflowConfigOverrides
+    SoftwareConfig_AirflowConfigOverrides (..),
+    newSoftwareConfig_AirflowConfigOverrides,
 
     -- ** SoftwareConfig_EnvVariables
-    , SoftwareConfig_EnvVariables (..)
-    , newSoftwareConfig_EnvVariables
+    SoftwareConfig_EnvVariables (..),
+    newSoftwareConfig_EnvVariables,
 
     -- ** SoftwareConfig_PypiPackages
-    , SoftwareConfig_PypiPackages (..)
-    , newSoftwareConfig_PypiPackages
+    SoftwareConfig_PypiPackages (..),
+    newSoftwareConfig_PypiPackages,
 
     -- ** SoftwareConfig_WebServerPluginsMode
-    , SoftwareConfig_WebServerPluginsMode (..)
+    SoftwareConfig_WebServerPluginsMode (..),
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** StopAirflowCommandRequest
-    , StopAirflowCommandRequest (..)
-    , newStopAirflowCommandRequest
+    StopAirflowCommandRequest (..),
+    newStopAirflowCommandRequest,
 
     -- ** StopAirflowCommandResponse
-    , StopAirflowCommandResponse (..)
-    , newStopAirflowCommandResponse
+    StopAirflowCommandResponse (..),
+    newStopAirflowCommandResponse,
 
     -- ** StorageConfig
-    , StorageConfig (..)
-    , newStorageConfig
+    StorageConfig (..),
+    newStorageConfig,
 
     -- ** TaskLogsRetentionConfig
-    , TaskLogsRetentionConfig (..)
-    , newTaskLogsRetentionConfig
+    TaskLogsRetentionConfig (..),
+    newTaskLogsRetentionConfig,
 
     -- ** TaskLogsRetentionConfig_StorageMode
-    , TaskLogsRetentionConfig_StorageMode (..)
+    TaskLogsRetentionConfig_StorageMode (..),
 
     -- ** TriggererResource
-    , TriggererResource (..)
-    , newTriggererResource
+    TriggererResource (..),
+    newTriggererResource,
 
     -- ** UserWorkloadsConfigMap
-    , UserWorkloadsConfigMap (..)
-    , newUserWorkloadsConfigMap
+    UserWorkloadsConfigMap (..),
+    newUserWorkloadsConfigMap,
 
     -- ** UserWorkloadsConfigMap_Data
-    , UserWorkloadsConfigMap_Data (..)
-    , newUserWorkloadsConfigMap_Data
+    UserWorkloadsConfigMap_Data (..),
+    newUserWorkloadsConfigMap_Data,
 
     -- ** UserWorkloadsSecret
-    , UserWorkloadsSecret (..)
-    , newUserWorkloadsSecret
+    UserWorkloadsSecret (..),
+    newUserWorkloadsSecret,
 
     -- ** UserWorkloadsSecret_Data
-    , UserWorkloadsSecret_Data (..)
-    , newUserWorkloadsSecret_Data
+    UserWorkloadsSecret_Data (..),
+    newUserWorkloadsSecret_Data,
 
     -- ** WebServerConfig
-    , WebServerConfig (..)
-    , newWebServerConfig
+    WebServerConfig (..),
+    newWebServerConfig,
 
     -- ** WebServerNetworkAccessControl
-    , WebServerNetworkAccessControl (..)
-    , newWebServerNetworkAccessControl
+    WebServerNetworkAccessControl (..),
+    newWebServerNetworkAccessControl,
 
     -- ** WebServerResource
-    , WebServerResource (..)
-    , newWebServerResource
+    WebServerResource (..),
+    newWebServerResource,
 
     -- ** WorkerResource
-    , WorkerResource (..)
-    , newWorkerResource
+    WorkerResource (..),
+    newWorkerResource,
 
     -- ** WorkloadsConfig
-    , WorkloadsConfig (..)
-    , newWorkloadsConfig
-    ) where
+    WorkloadsConfig (..),
+    newWorkloadsConfig,
+  )
+where
 
 import Gogol.Composer.Projects.Locations.Environments.CheckUpgrade
 import Gogol.Composer.Projects.Locations.Environments.Create

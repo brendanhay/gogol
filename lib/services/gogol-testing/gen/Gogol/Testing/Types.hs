@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,438 +16,441 @@
 
 -- |
 -- Module      : Gogol.Testing.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Testing.Types
-    (
-    -- * Configuration
-      testingService
+  ( -- * Configuration
+    testingService,
 
     -- * OAuth Scopes
-    , CloudPlatform'FullControl
-    , CloudPlatform'ReadOnly
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Account
-    , Account (..)
-    , newAccount
+    Account (..),
+    newAccount,
 
     -- ** AndroidDevice
-    , AndroidDevice (..)
-    , newAndroidDevice
+    AndroidDevice (..),
+    newAndroidDevice,
 
     -- ** AndroidDeviceCatalog
-    , AndroidDeviceCatalog (..)
-    , newAndroidDeviceCatalog
+    AndroidDeviceCatalog (..),
+    newAndroidDeviceCatalog,
 
     -- ** AndroidDeviceList
-    , AndroidDeviceList (..)
-    , newAndroidDeviceList
+    AndroidDeviceList (..),
+    newAndroidDeviceList,
 
     -- ** AndroidInstrumentationTest
-    , AndroidInstrumentationTest (..)
-    , newAndroidInstrumentationTest
+    AndroidInstrumentationTest (..),
+    newAndroidInstrumentationTest,
 
     -- ** AndroidInstrumentationTest_OrchestratorOption
-    , AndroidInstrumentationTest_OrchestratorOption (..)
+    AndroidInstrumentationTest_OrchestratorOption (..),
 
     -- ** AndroidMatrix
-    , AndroidMatrix (..)
-    , newAndroidMatrix
+    AndroidMatrix (..),
+    newAndroidMatrix,
 
     -- ** AndroidModel
-    , AndroidModel (..)
-    , newAndroidModel
+    AndroidModel (..),
+    newAndroidModel,
 
     -- ** AndroidModel_Form
-    , AndroidModel_Form (..)
+    AndroidModel_Form (..),
 
     -- ** AndroidModel_FormFactor
-    , AndroidModel_FormFactor (..)
+    AndroidModel_FormFactor (..),
 
     -- ** AndroidRoboTest
-    , AndroidRoboTest (..)
-    , newAndroidRoboTest
+    AndroidRoboTest (..),
+    newAndroidRoboTest,
 
     -- ** AndroidRoboTest_RoboMode
-    , AndroidRoboTest_RoboMode (..)
+    AndroidRoboTest_RoboMode (..),
 
     -- ** AndroidRuntimeConfiguration
-    , AndroidRuntimeConfiguration (..)
-    , newAndroidRuntimeConfiguration
+    AndroidRuntimeConfiguration (..),
+    newAndroidRuntimeConfiguration,
 
     -- ** AndroidTestLoop
-    , AndroidTestLoop (..)
-    , newAndroidTestLoop
+    AndroidTestLoop (..),
+    newAndroidTestLoop,
 
     -- ** AndroidVersion
-    , AndroidVersion (..)
-    , newAndroidVersion
+    AndroidVersion (..),
+    newAndroidVersion,
 
     -- ** Apk
-    , Apk (..)
-    , newApk
+    Apk (..),
+    newApk,
 
     -- ** ApkDetail
-    , ApkDetail (..)
-    , newApkDetail
+    ApkDetail (..),
+    newApkDetail,
 
     -- ** ApkManifest
-    , ApkManifest (..)
-    , newApkManifest
+    ApkManifest (..),
+    newApkManifest,
 
     -- ** AppBundle
-    , AppBundle (..)
-    , newAppBundle
+    AppBundle (..),
+    newAppBundle,
 
     -- ** CancelDeviceSessionRequest
-    , CancelDeviceSessionRequest (..)
-    , newCancelDeviceSessionRequest
+    CancelDeviceSessionRequest (..),
+    newCancelDeviceSessionRequest,
 
     -- ** CancelTestMatrixResponse
-    , CancelTestMatrixResponse (..)
-    , newCancelTestMatrixResponse
+    CancelTestMatrixResponse (..),
+    newCancelTestMatrixResponse,
 
     -- ** CancelTestMatrixResponse_TestState
-    , CancelTestMatrixResponse_TestState (..)
+    CancelTestMatrixResponse_TestState (..),
 
     -- ** ClientInfo
-    , ClientInfo (..)
-    , newClientInfo
+    ClientInfo (..),
+    newClientInfo,
 
     -- ** ClientInfoDetail
-    , ClientInfoDetail (..)
-    , newClientInfoDetail
+    ClientInfoDetail (..),
+    newClientInfoDetail,
 
     -- ** Date
-    , Date (..)
-    , newDate
+    Date (..),
+    newDate,
 
     -- ** DeviceFile
-    , DeviceFile (..)
-    , newDeviceFile
+    DeviceFile (..),
+    newDeviceFile,
 
     -- ** DeviceIpBlock
-    , DeviceIpBlock (..)
-    , newDeviceIpBlock
+    DeviceIpBlock (..),
+    newDeviceIpBlock,
 
     -- ** DeviceIpBlock_Form
-    , DeviceIpBlock_Form (..)
+    DeviceIpBlock_Form (..),
 
     -- ** DeviceIpBlockCatalog
-    , DeviceIpBlockCatalog (..)
-    , newDeviceIpBlockCatalog
+    DeviceIpBlockCatalog (..),
+    newDeviceIpBlockCatalog,
 
     -- ** DeviceSession
-    , DeviceSession (..)
-    , newDeviceSession
+    DeviceSession (..),
+    newDeviceSession,
 
     -- ** DeviceSession_State
-    , DeviceSession_State (..)
+    DeviceSession_State (..),
 
     -- ** DirectAccessVersionInfo
-    , DirectAccessVersionInfo (..)
-    , newDirectAccessVersionInfo
+    DirectAccessVersionInfo (..),
+    newDirectAccessVersionInfo,
 
     -- ** Distribution
-    , Distribution (..)
-    , newDistribution
+    Distribution (..),
+    newDistribution,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** Environment
-    , Environment (..)
-    , newEnvironment
+    Environment (..),
+    newEnvironment,
 
     -- ** EnvironmentMatrix
-    , EnvironmentMatrix (..)
-    , newEnvironmentMatrix
+    EnvironmentMatrix (..),
+    newEnvironmentMatrix,
 
     -- ** EnvironmentVariable
-    , EnvironmentVariable (..)
-    , newEnvironmentVariable
+    EnvironmentVariable (..),
+    newEnvironmentVariable,
 
     -- ** FileReference
-    , FileReference (..)
-    , newFileReference
+    FileReference (..),
+    newFileReference,
 
     -- ** GetApkDetailsResponse
-    , GetApkDetailsResponse (..)
-    , newGetApkDetailsResponse
+    GetApkDetailsResponse (..),
+    newGetApkDetailsResponse,
 
     -- ** GoogleAuto
-    , GoogleAuto (..)
-    , newGoogleAuto
+    GoogleAuto (..),
+    newGoogleAuto,
 
     -- ** GoogleCloudStorage
-    , GoogleCloudStorage (..)
-    , newGoogleCloudStorage
+    GoogleCloudStorage (..),
+    newGoogleCloudStorage,
 
     -- ** IntentFilter
-    , IntentFilter (..)
-    , newIntentFilter
+    IntentFilter (..),
+    newIntentFilter,
 
     -- ** IosDevice
-    , IosDevice (..)
-    , newIosDevice
+    IosDevice (..),
+    newIosDevice,
 
     -- ** IosDeviceCatalog
-    , IosDeviceCatalog (..)
-    , newIosDeviceCatalog
+    IosDeviceCatalog (..),
+    newIosDeviceCatalog,
 
     -- ** IosDeviceFile
-    , IosDeviceFile (..)
-    , newIosDeviceFile
+    IosDeviceFile (..),
+    newIosDeviceFile,
 
     -- ** IosDeviceList
-    , IosDeviceList (..)
-    , newIosDeviceList
+    IosDeviceList (..),
+    newIosDeviceList,
 
     -- ** IosModel
-    , IosModel (..)
-    , newIosModel
+    IosModel (..),
+    newIosModel,
 
     -- ** IosModel_FormFactor
-    , IosModel_FormFactor (..)
+    IosModel_FormFactor (..),
 
     -- ** IosRoboTest
-    , IosRoboTest (..)
-    , newIosRoboTest
+    IosRoboTest (..),
+    newIosRoboTest,
 
     -- ** IosRuntimeConfiguration
-    , IosRuntimeConfiguration (..)
-    , newIosRuntimeConfiguration
+    IosRuntimeConfiguration (..),
+    newIosRuntimeConfiguration,
 
     -- ** IosTestLoop
-    , IosTestLoop (..)
-    , newIosTestLoop
+    IosTestLoop (..),
+    newIosTestLoop,
 
     -- ** IosTestSetup
-    , IosTestSetup (..)
-    , newIosTestSetup
+    IosTestSetup (..),
+    newIosTestSetup,
 
     -- ** IosVersion
-    , IosVersion (..)
-    , newIosVersion
+    IosVersion (..),
+    newIosVersion,
 
     -- ** IosXcTest
-    , IosXcTest (..)
-    , newIosXcTest
+    IosXcTest (..),
+    newIosXcTest,
 
     -- ** LabInfo
-    , LabInfo (..)
-    , newLabInfo
+    LabInfo (..),
+    newLabInfo,
 
     -- ** LauncherActivityIntent
-    , LauncherActivityIntent (..)
-    , newLauncherActivityIntent
+    LauncherActivityIntent (..),
+    newLauncherActivityIntent,
 
     -- ** ListDeviceSessionsResponse
-    , ListDeviceSessionsResponse (..)
-    , newListDeviceSessionsResponse
+    ListDeviceSessionsResponse (..),
+    newListDeviceSessionsResponse,
 
     -- ** Locale
-    , Locale (..)
-    , newLocale
+    Locale (..),
+    newLocale,
 
     -- ** ManualSharding
-    , ManualSharding (..)
-    , newManualSharding
+    ManualSharding (..),
+    newManualSharding,
 
     -- ** MatrixErrorDetail
-    , MatrixErrorDetail (..)
-    , newMatrixErrorDetail
+    MatrixErrorDetail (..),
+    newMatrixErrorDetail,
 
     -- ** Metadata
-    , Metadata (..)
-    , newMetadata
+    Metadata (..),
+    newMetadata,
 
     -- ** NetworkConfiguration
-    , NetworkConfiguration (..)
-    , newNetworkConfiguration
+    NetworkConfiguration (..),
+    newNetworkConfiguration,
 
     -- ** NetworkConfigurationCatalog
-    , NetworkConfigurationCatalog (..)
-    , newNetworkConfigurationCatalog
+    NetworkConfigurationCatalog (..),
+    newNetworkConfigurationCatalog,
 
     -- ** NoActivityIntent
-    , NoActivityIntent (..)
-    , newNoActivityIntent
+    NoActivityIntent (..),
+    newNoActivityIntent,
 
     -- ** ObbFile
-    , ObbFile (..)
-    , newObbFile
+    ObbFile (..),
+    newObbFile,
 
     -- ** Orientation
-    , Orientation (..)
-    , newOrientation
+    Orientation (..),
+    newOrientation,
 
     -- ** PerAndroidVersionInfo
-    , PerAndroidVersionInfo (..)
-    , newPerAndroidVersionInfo
+    PerAndroidVersionInfo (..),
+    newPerAndroidVersionInfo,
 
     -- ** PerAndroidVersionInfo_DeviceCapacity
-    , PerAndroidVersionInfo_DeviceCapacity (..)
+    PerAndroidVersionInfo_DeviceCapacity (..),
 
     -- ** PerIosVersionInfo
-    , PerIosVersionInfo (..)
-    , newPerIosVersionInfo
+    PerIosVersionInfo (..),
+    newPerIosVersionInfo,
 
     -- ** PerIosVersionInfo_DeviceCapacity
-    , PerIosVersionInfo_DeviceCapacity (..)
+    PerIosVersionInfo_DeviceCapacity (..),
 
     -- ** ProvidedSoftwareCatalog
-    , ProvidedSoftwareCatalog (..)
-    , newProvidedSoftwareCatalog
+    ProvidedSoftwareCatalog (..),
+    newProvidedSoftwareCatalog,
 
     -- ** RegularFile
-    , RegularFile (..)
-    , newRegularFile
+    RegularFile (..),
+    newRegularFile,
 
     -- ** ResultStorage
-    , ResultStorage (..)
-    , newResultStorage
+    ResultStorage (..),
+    newResultStorage,
 
     -- ** RoboDirective
-    , RoboDirective (..)
-    , newRoboDirective
+    RoboDirective (..),
+    newRoboDirective,
 
     -- ** RoboDirective_ActionType
-    , RoboDirective_ActionType (..)
+    RoboDirective_ActionType (..),
 
     -- ** RoboStartingIntent
-    , RoboStartingIntent (..)
-    , newRoboStartingIntent
+    RoboStartingIntent (..),
+    newRoboStartingIntent,
 
     -- ** Service
-    , Service (..)
-    , newService
+    Service (..),
+    newService,
 
     -- ** SessionStateEvent
-    , SessionStateEvent (..)
-    , newSessionStateEvent
+    SessionStateEvent (..),
+    newSessionStateEvent,
 
     -- ** SessionStateEvent_SessionState
-    , SessionStateEvent_SessionState (..)
+    SessionStateEvent_SessionState (..),
 
     -- ** Shard
-    , Shard (..)
-    , newShard
+    Shard (..),
+    newShard,
 
     -- ** ShardingOption
-    , ShardingOption (..)
-    , newShardingOption
+    ShardingOption (..),
+    newShardingOption,
 
     -- ** SmartSharding
-    , SmartSharding (..)
-    , newSmartSharding
+    SmartSharding (..),
+    newSmartSharding,
 
     -- ** StartActivityIntent
-    , StartActivityIntent (..)
-    , newStartActivityIntent
+    StartActivityIntent (..),
+    newStartActivityIntent,
 
     -- ** SystraceSetup
-    , SystraceSetup (..)
-    , newSystraceSetup
+    SystraceSetup (..),
+    newSystraceSetup,
 
     -- ** TestDetails
-    , TestDetails (..)
-    , newTestDetails
+    TestDetails (..),
+    newTestDetails,
 
     -- ** TestEnvironmentCatalog
-    , TestEnvironmentCatalog (..)
-    , newTestEnvironmentCatalog
+    TestEnvironmentCatalog (..),
+    newTestEnvironmentCatalog,
 
     -- ** TestExecution
-    , TestExecution (..)
-    , newTestExecution
+    TestExecution (..),
+    newTestExecution,
 
     -- ** TestExecution_State
-    , TestExecution_State (..)
+    TestExecution_State (..),
 
     -- ** TestMatrix
-    , TestMatrix (..)
-    , newTestMatrix
+    TestMatrix (..),
+    newTestMatrix,
 
     -- ** TestMatrix_InvalidMatrixDetails
-    , TestMatrix_InvalidMatrixDetails (..)
+    TestMatrix_InvalidMatrixDetails (..),
 
     -- ** TestMatrix_OutcomeSummary
-    , TestMatrix_OutcomeSummary (..)
+    TestMatrix_OutcomeSummary (..),
 
     -- ** TestMatrix_State
-    , TestMatrix_State (..)
+    TestMatrix_State (..),
 
     -- ** TestSetup
-    , TestSetup (..)
-    , newTestSetup
+    TestSetup (..),
+    newTestSetup,
 
     -- ** TestSpecification
-    , TestSpecification (..)
-    , newTestSpecification
+    TestSpecification (..),
+    newTestSpecification,
 
     -- ** TestTargetsForShard
-    , TestTargetsForShard (..)
-    , newTestTargetsForShard
+    TestTargetsForShard (..),
+    newTestTargetsForShard,
 
     -- ** ToolResultsExecution
-    , ToolResultsExecution (..)
-    , newToolResultsExecution
+    ToolResultsExecution (..),
+    newToolResultsExecution,
 
     -- ** ToolResultsHistory
-    , ToolResultsHistory (..)
-    , newToolResultsHistory
+    ToolResultsHistory (..),
+    newToolResultsHistory,
 
     -- ** ToolResultsStep
-    , ToolResultsStep (..)
-    , newToolResultsStep
+    ToolResultsStep (..),
+    newToolResultsStep,
 
     -- ** TrafficRule
-    , TrafficRule (..)
-    , newTrafficRule
+    TrafficRule (..),
+    newTrafficRule,
 
     -- ** UniformSharding
-    , UniformSharding (..)
-    , newUniformSharding
+    UniformSharding (..),
+    newUniformSharding,
 
     -- ** UsesFeature
-    , UsesFeature (..)
-    , newUsesFeature
+    UsesFeature (..),
+    newUsesFeature,
 
     -- ** UsesPermissionTag
-    , UsesPermissionTag (..)
-    , newUsesPermissionTag
+    UsesPermissionTag (..),
+    newUsesPermissionTag,
 
     -- ** XcodeVersion
-    , XcodeVersion (..)
-    , newXcodeVersion
+    XcodeVersion (..),
+    newXcodeVersion,
 
     -- ** TestEnvironmentCatalogGetEnvironmentType
-    , TestEnvironmentCatalogGetEnvironmentType (..)
-    ) where
+    TestEnvironmentCatalogGetEnvironmentType (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Testing.Internal.Product
 import Gogol.Testing.Internal.Sum
 
 -- | Default request referring to version @v1@ of the Cloud Testing API. This contains the host and root path used as a starting point for constructing service requests.
 testingService :: Core.ServiceConfig
-testingService
-  = Core.defaultService (Core.ServiceId "testing:v1")
-      "testing.googleapis.com"
+testingService =
+  Core.defaultService
+    (Core.ServiceId "testing:v1")
+    "testing.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View your data across Google Cloud services and see the email address of your Google Account
-type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"
+type CloudPlatform'ReadOnly =
+  "https://www.googleapis.com/auth/cloud-platform.read-only"

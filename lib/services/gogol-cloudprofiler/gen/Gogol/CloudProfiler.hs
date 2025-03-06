@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.CloudProfiler
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,72 +27,72 @@
 --
 -- /See:/ <https://cloud.google.com/profiler/ Cloud Profiler API Reference>
 module Gogol.CloudProfiler
-    (
-    -- * Configuration
-      cloudProfilerService
+  ( -- * Configuration
+    cloudProfilerService,
 
     -- * OAuth Scopes
-    , CloudPlatform'FullControl
-    , Monitoring'FullControl
-    , Monitoring'Write
+    CloudPlatform'FullControl,
+    Monitoring'FullControl,
+    Monitoring'Write,
 
     -- * Resources
 
     -- ** cloudprofiler.projects.profiles.create
-    , CloudProfilerProjectsProfilesCreateResource
-    , CloudProfilerProjectsProfilesCreate (..)
-    , newCloudProfilerProjectsProfilesCreate
+    CloudProfilerProjectsProfilesCreateResource,
+    CloudProfilerProjectsProfilesCreate (..),
+    newCloudProfilerProjectsProfilesCreate,
 
     -- ** cloudprofiler.projects.profiles.createOffline
-    , CloudProfilerProjectsProfilesCreateOfflineResource
-    , CloudProfilerProjectsProfilesCreateOffline (..)
-    , newCloudProfilerProjectsProfilesCreateOffline
+    CloudProfilerProjectsProfilesCreateOfflineResource,
+    CloudProfilerProjectsProfilesCreateOffline (..),
+    newCloudProfilerProjectsProfilesCreateOffline,
 
     -- ** cloudprofiler.projects.profiles.list
-    , CloudProfilerProjectsProfilesListResource
-    , CloudProfilerProjectsProfilesList (..)
-    , newCloudProfilerProjectsProfilesList
+    CloudProfilerProjectsProfilesListResource,
+    CloudProfilerProjectsProfilesList (..),
+    newCloudProfilerProjectsProfilesList,
 
     -- ** cloudprofiler.projects.profiles.patch
-    , CloudProfilerProjectsProfilesPatchResource
-    , CloudProfilerProjectsProfilesPatch (..)
-    , newCloudProfilerProjectsProfilesPatch
+    CloudProfilerProjectsProfilesPatchResource,
+    CloudProfilerProjectsProfilesPatch (..),
+    newCloudProfilerProjectsProfilesPatch,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** CreateProfileRequest
-    , CreateProfileRequest (..)
-    , newCreateProfileRequest
+    CreateProfileRequest (..),
+    newCreateProfileRequest,
 
     -- ** CreateProfileRequest_ProfileTypeItem
-    , CreateProfileRequest_ProfileTypeItem (..)
+    CreateProfileRequest_ProfileTypeItem (..),
 
     -- ** Deployment
-    , Deployment (..)
-    , newDeployment
+    Deployment (..),
+    newDeployment,
 
     -- ** Deployment_Labels
-    , Deployment_Labels (..)
-    , newDeployment_Labels
+    Deployment_Labels (..),
+    newDeployment_Labels,
 
     -- ** ListProfilesResponse
-    , ListProfilesResponse (..)
-    , newListProfilesResponse
+    ListProfilesResponse (..),
+    newListProfilesResponse,
 
     -- ** Profile
-    , Profile (..)
-    , newProfile
+    Profile (..),
+    newProfile,
 
     -- ** Profile_Labels
-    , Profile_Labels (..)
-    , newProfile_Labels
+    Profile_Labels (..),
+    newProfile_Labels,
 
     -- ** Profile_ProfileType
-    , Profile_ProfileType (..)
-    ) where
+    Profile_ProfileType (..),
+  )
+where
 
 import Gogol.CloudProfiler.Projects.Profiles.Create
 import Gogol.CloudProfiler.Projects.Profiles.CreateOffline

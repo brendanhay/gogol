@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.Admin.Directory
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,1314 +27,1314 @@
 --
 -- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference>
 module Gogol.Admin.Directory
-    (
-    -- * Configuration
-      adminDirectoryService
+  ( -- * Configuration
+    adminDirectoryService,
 
     -- * OAuth Scopes
-    , Admin'Chrome'Printers
-    , Admin'Chrome'Printers'Readonly
-    , Admin'Directory'Customer
-    , Admin'Directory'Customer'Readonly
-    , Admin'Directory'Device'Chromeos
-    , Admin'Directory'Device'Chromeos'Readonly
-    , Admin'Directory'Device'Mobile
-    , Admin'Directory'Device'Mobile'Action
-    , Admin'Directory'Device'Mobile'Readonly
-    , Admin'Directory'Domain
-    , Admin'Directory'Domain'Readonly
-    , Admin'Directory'Group
-    , Admin'Directory'Group'Member
-    , Admin'Directory'Group'Member'Readonly
-    , Admin'Directory'Group'Readonly
-    , Admin'Directory'Orgunit
-    , Admin'Directory'Orgunit'Readonly
-    , Admin'Directory'Resource'Calendar
-    , Admin'Directory'Resource'Calendar'Readonly
-    , Admin'Directory'Rolemanagement
-    , Admin'Directory'Rolemanagement'Readonly
-    , Admin'Directory'User
-    , Admin'Directory'User'Alias
-    , Admin'Directory'User'Alias'Readonly
-    , Admin'Directory'User'Readonly
-    , Admin'Directory'User'Security
-    , Admin'Directory'Userschema
-    , Admin'Directory'Userschema'Readonly
-    , CloudPlatform'FullControl
+    Admin'Chrome'Printers,
+    Admin'Chrome'Printers'Readonly,
+    Admin'Directory'Customer,
+    Admin'Directory'Customer'Readonly,
+    Admin'Directory'Device'Chromeos,
+    Admin'Directory'Device'Chromeos'Readonly,
+    Admin'Directory'Device'Mobile,
+    Admin'Directory'Device'Mobile'Action,
+    Admin'Directory'Device'Mobile'Readonly,
+    Admin'Directory'Domain,
+    Admin'Directory'Domain'Readonly,
+    Admin'Directory'Group,
+    Admin'Directory'Group'Member,
+    Admin'Directory'Group'Member'Readonly,
+    Admin'Directory'Group'Readonly,
+    Admin'Directory'Orgunit,
+    Admin'Directory'Orgunit'Readonly,
+    Admin'Directory'Resource'Calendar,
+    Admin'Directory'Resource'Calendar'Readonly,
+    Admin'Directory'Rolemanagement,
+    Admin'Directory'Rolemanagement'Readonly,
+    Admin'Directory'User,
+    Admin'Directory'User'Alias,
+    Admin'Directory'User'Alias'Readonly,
+    Admin'Directory'User'Readonly,
+    Admin'Directory'User'Security,
+    Admin'Directory'Userschema,
+    Admin'Directory'Userschema'Readonly,
+    CloudPlatform'FullControl,
 
     -- * Resources
 
     -- ** admin.channels.stop
-    , AdminChannelsStopResource
-    , AdminChannelsStop (..)
-    , newAdminChannelsStop
+    AdminChannelsStopResource,
+    AdminChannelsStop (..),
+    newAdminChannelsStop,
 
     -- ** admin.customer.devices.chromeos.batchChangeStatus
-    , AdminCustomerDevicesChromeosBatchChangeStatusResource
-    , AdminCustomerDevicesChromeosBatchChangeStatus (..)
-    , newAdminCustomerDevicesChromeosBatchChangeStatus
+    AdminCustomerDevicesChromeosBatchChangeStatusResource,
+    AdminCustomerDevicesChromeosBatchChangeStatus (..),
+    newAdminCustomerDevicesChromeosBatchChangeStatus,
 
     -- ** admin.customer.devices.chromeos.commands.get
-    , AdminCustomerDevicesChromeosCommandsGetResource
-    , AdminCustomerDevicesChromeosCommandsGet (..)
-    , newAdminCustomerDevicesChromeosCommandsGet
+    AdminCustomerDevicesChromeosCommandsGetResource,
+    AdminCustomerDevicesChromeosCommandsGet (..),
+    newAdminCustomerDevicesChromeosCommandsGet,
 
     -- ** admin.customer.devices.chromeos.issueCommand
-    , AdminCustomerDevicesChromeosIssueCommandResource
-    , AdminCustomerDevicesChromeosIssueCommand (..)
-    , newAdminCustomerDevicesChromeosIssueCommand
+    AdminCustomerDevicesChromeosIssueCommandResource,
+    AdminCustomerDevicesChromeosIssueCommand (..),
+    newAdminCustomerDevicesChromeosIssueCommand,
 
     -- ** admin.customers.chrome.printServers.batchCreatePrintServers
-    , AdminCustomersChromePrintServersBatchCreatePrintServersResource
-    , AdminCustomersChromePrintServersBatchCreatePrintServers (..)
-    , newAdminCustomersChromePrintServersBatchCreatePrintServers
+    AdminCustomersChromePrintServersBatchCreatePrintServersResource,
+    AdminCustomersChromePrintServersBatchCreatePrintServers (..),
+    newAdminCustomersChromePrintServersBatchCreatePrintServers,
 
     -- ** admin.customers.chrome.printServers.batchDeletePrintServers
-    , AdminCustomersChromePrintServersBatchDeletePrintServersResource
-    , AdminCustomersChromePrintServersBatchDeletePrintServers (..)
-    , newAdminCustomersChromePrintServersBatchDeletePrintServers
+    AdminCustomersChromePrintServersBatchDeletePrintServersResource,
+    AdminCustomersChromePrintServersBatchDeletePrintServers (..),
+    newAdminCustomersChromePrintServersBatchDeletePrintServers,
 
     -- ** admin.customers.chrome.printServers.create
-    , AdminCustomersChromePrintServersCreateResource
-    , AdminCustomersChromePrintServersCreate (..)
-    , newAdminCustomersChromePrintServersCreate
+    AdminCustomersChromePrintServersCreateResource,
+    AdminCustomersChromePrintServersCreate (..),
+    newAdminCustomersChromePrintServersCreate,
 
     -- ** admin.customers.chrome.printServers.delete
-    , AdminCustomersChromePrintServersDeleteResource
-    , AdminCustomersChromePrintServersDelete (..)
-    , newAdminCustomersChromePrintServersDelete
+    AdminCustomersChromePrintServersDeleteResource,
+    AdminCustomersChromePrintServersDelete (..),
+    newAdminCustomersChromePrintServersDelete,
 
     -- ** admin.customers.chrome.printServers.get
-    , AdminCustomersChromePrintServersGetResource
-    , AdminCustomersChromePrintServersGet (..)
-    , newAdminCustomersChromePrintServersGet
+    AdminCustomersChromePrintServersGetResource,
+    AdminCustomersChromePrintServersGet (..),
+    newAdminCustomersChromePrintServersGet,
 
     -- ** admin.customers.chrome.printServers.list
-    , AdminCustomersChromePrintServersListResource
-    , AdminCustomersChromePrintServersList (..)
-    , newAdminCustomersChromePrintServersList
+    AdminCustomersChromePrintServersListResource,
+    AdminCustomersChromePrintServersList (..),
+    newAdminCustomersChromePrintServersList,
 
     -- ** admin.customers.chrome.printServers.patch
-    , AdminCustomersChromePrintServersPatchResource
-    , AdminCustomersChromePrintServersPatch (..)
-    , newAdminCustomersChromePrintServersPatch
+    AdminCustomersChromePrintServersPatchResource,
+    AdminCustomersChromePrintServersPatch (..),
+    newAdminCustomersChromePrintServersPatch,
 
     -- ** admin.customers.chrome.printers.batchCreatePrinters
-    , AdminCustomersChromePrintersBatchCreatePrintersResource
-    , AdminCustomersChromePrintersBatchCreatePrinters (..)
-    , newAdminCustomersChromePrintersBatchCreatePrinters
+    AdminCustomersChromePrintersBatchCreatePrintersResource,
+    AdminCustomersChromePrintersBatchCreatePrinters (..),
+    newAdminCustomersChromePrintersBatchCreatePrinters,
 
     -- ** admin.customers.chrome.printers.batchDeletePrinters
-    , AdminCustomersChromePrintersBatchDeletePrintersResource
-    , AdminCustomersChromePrintersBatchDeletePrinters (..)
-    , newAdminCustomersChromePrintersBatchDeletePrinters
+    AdminCustomersChromePrintersBatchDeletePrintersResource,
+    AdminCustomersChromePrintersBatchDeletePrinters (..),
+    newAdminCustomersChromePrintersBatchDeletePrinters,
 
     -- ** admin.customers.chrome.printers.create
-    , AdminCustomersChromePrintersCreateResource
-    , AdminCustomersChromePrintersCreate (..)
-    , newAdminCustomersChromePrintersCreate
+    AdminCustomersChromePrintersCreateResource,
+    AdminCustomersChromePrintersCreate (..),
+    newAdminCustomersChromePrintersCreate,
 
     -- ** admin.customers.chrome.printers.delete
-    , AdminCustomersChromePrintersDeleteResource
-    , AdminCustomersChromePrintersDelete (..)
-    , newAdminCustomersChromePrintersDelete
+    AdminCustomersChromePrintersDeleteResource,
+    AdminCustomersChromePrintersDelete (..),
+    newAdminCustomersChromePrintersDelete,
 
     -- ** admin.customers.chrome.printers.get
-    , AdminCustomersChromePrintersGetResource
-    , AdminCustomersChromePrintersGet (..)
-    , newAdminCustomersChromePrintersGet
+    AdminCustomersChromePrintersGetResource,
+    AdminCustomersChromePrintersGet (..),
+    newAdminCustomersChromePrintersGet,
 
     -- ** admin.customers.chrome.printers.list
-    , AdminCustomersChromePrintersListResource
-    , AdminCustomersChromePrintersList (..)
-    , newAdminCustomersChromePrintersList
+    AdminCustomersChromePrintersListResource,
+    AdminCustomersChromePrintersList (..),
+    newAdminCustomersChromePrintersList,
 
     -- ** admin.customers.chrome.printers.listPrinterModels
-    , AdminCustomersChromePrintersListPrinterModelsResource
-    , AdminCustomersChromePrintersListPrinterModels (..)
-    , newAdminCustomersChromePrintersListPrinterModels
+    AdminCustomersChromePrintersListPrinterModelsResource,
+    AdminCustomersChromePrintersListPrinterModels (..),
+    newAdminCustomersChromePrintersListPrinterModels,
 
     -- ** admin.customers.chrome.printers.patch
-    , AdminCustomersChromePrintersPatchResource
-    , AdminCustomersChromePrintersPatch (..)
-    , newAdminCustomersChromePrintersPatch
+    AdminCustomersChromePrintersPatchResource,
+    AdminCustomersChromePrintersPatch (..),
+    newAdminCustomersChromePrintersPatch,
 
     -- ** directory.asps.delete
-    , DirectoryAspsDeleteResource
-    , DirectoryAspsDelete (..)
-    , newDirectoryAspsDelete
+    DirectoryAspsDeleteResource,
+    DirectoryAspsDelete (..),
+    newDirectoryAspsDelete,
 
     -- ** directory.asps.get
-    , DirectoryAspsGetResource
-    , DirectoryAspsGet (..)
-    , newDirectoryAspsGet
+    DirectoryAspsGetResource,
+    DirectoryAspsGet (..),
+    newDirectoryAspsGet,
 
     -- ** directory.asps.list
-    , DirectoryAspsListResource
-    , DirectoryAspsList (..)
-    , newDirectoryAspsList
+    DirectoryAspsListResource,
+    DirectoryAspsList (..),
+    newDirectoryAspsList,
 
     -- ** directory.chromeosdevices.action
-    , DirectoryChromeosdevicesActionResource
-    , DirectoryChromeosdevicesAction (..)
-    , newDirectoryChromeosdevicesAction
+    DirectoryChromeosdevicesActionResource,
+    DirectoryChromeosdevicesAction (..),
+    newDirectoryChromeosdevicesAction,
 
     -- ** directory.chromeosdevices.get
-    , DirectoryChromeosdevicesGetResource
-    , DirectoryChromeosdevicesGet (..)
-    , newDirectoryChromeosdevicesGet
+    DirectoryChromeosdevicesGetResource,
+    DirectoryChromeosdevicesGet (..),
+    newDirectoryChromeosdevicesGet,
 
     -- ** directory.chromeosdevices.list
-    , DirectoryChromeosdevicesListResource
-    , DirectoryChromeosdevicesList (..)
-    , newDirectoryChromeosdevicesList
+    DirectoryChromeosdevicesListResource,
+    DirectoryChromeosdevicesList (..),
+    newDirectoryChromeosdevicesList,
 
     -- ** directory.chromeosdevices.moveDevicesToOu
-    , DirectoryChromeosdevicesMoveDevicesToOuResource
-    , DirectoryChromeosdevicesMoveDevicesToOu (..)
-    , newDirectoryChromeosdevicesMoveDevicesToOu
+    DirectoryChromeosdevicesMoveDevicesToOuResource,
+    DirectoryChromeosdevicesMoveDevicesToOu (..),
+    newDirectoryChromeosdevicesMoveDevicesToOu,
 
     -- ** directory.chromeosdevices.patch
-    , DirectoryChromeosdevicesPatchResource
-    , DirectoryChromeosdevicesPatch (..)
-    , newDirectoryChromeosdevicesPatch
+    DirectoryChromeosdevicesPatchResource,
+    DirectoryChromeosdevicesPatch (..),
+    newDirectoryChromeosdevicesPatch,
 
     -- ** directory.chromeosdevices.update
-    , DirectoryChromeosdevicesUpdateResource
-    , DirectoryChromeosdevicesUpdate (..)
-    , newDirectoryChromeosdevicesUpdate
+    DirectoryChromeosdevicesUpdateResource,
+    DirectoryChromeosdevicesUpdate (..),
+    newDirectoryChromeosdevicesUpdate,
 
     -- ** directory.customers.get
-    , DirectoryCustomersGetResource
-    , DirectoryCustomersGet (..)
-    , newDirectoryCustomersGet
+    DirectoryCustomersGetResource,
+    DirectoryCustomersGet (..),
+    newDirectoryCustomersGet,
 
     -- ** directory.customers.patch
-    , DirectoryCustomersPatchResource
-    , DirectoryCustomersPatch (..)
-    , newDirectoryCustomersPatch
+    DirectoryCustomersPatchResource,
+    DirectoryCustomersPatch (..),
+    newDirectoryCustomersPatch,
 
     -- ** directory.customers.update
-    , DirectoryCustomersUpdateResource
-    , DirectoryCustomersUpdate (..)
-    , newDirectoryCustomersUpdate
+    DirectoryCustomersUpdateResource,
+    DirectoryCustomersUpdate (..),
+    newDirectoryCustomersUpdate,
 
     -- ** directory.domainAliases.delete
-    , DirectoryDomainAliasesDeleteResource
-    , DirectoryDomainAliasesDelete (..)
-    , newDirectoryDomainAliasesDelete
+    DirectoryDomainAliasesDeleteResource,
+    DirectoryDomainAliasesDelete (..),
+    newDirectoryDomainAliasesDelete,
 
     -- ** directory.domainAliases.get
-    , DirectoryDomainAliasesGetResource
-    , DirectoryDomainAliasesGet (..)
-    , newDirectoryDomainAliasesGet
+    DirectoryDomainAliasesGetResource,
+    DirectoryDomainAliasesGet (..),
+    newDirectoryDomainAliasesGet,
 
     -- ** directory.domainAliases.insert
-    , DirectoryDomainAliasesInsertResource
-    , DirectoryDomainAliasesInsert (..)
-    , newDirectoryDomainAliasesInsert
+    DirectoryDomainAliasesInsertResource,
+    DirectoryDomainAliasesInsert (..),
+    newDirectoryDomainAliasesInsert,
 
     -- ** directory.domainAliases.list
-    , DirectoryDomainAliasesListResource
-    , DirectoryDomainAliasesList (..)
-    , newDirectoryDomainAliasesList
+    DirectoryDomainAliasesListResource,
+    DirectoryDomainAliasesList (..),
+    newDirectoryDomainAliasesList,
 
     -- ** directory.domains.delete
-    , DirectoryDomainsDeleteResource
-    , DirectoryDomainsDelete (..)
-    , newDirectoryDomainsDelete
+    DirectoryDomainsDeleteResource,
+    DirectoryDomainsDelete (..),
+    newDirectoryDomainsDelete,
 
     -- ** directory.domains.get
-    , DirectoryDomainsGetResource
-    , DirectoryDomainsGet (..)
-    , newDirectoryDomainsGet
+    DirectoryDomainsGetResource,
+    DirectoryDomainsGet (..),
+    newDirectoryDomainsGet,
 
     -- ** directory.domains.insert
-    , DirectoryDomainsInsertResource
-    , DirectoryDomainsInsert (..)
-    , newDirectoryDomainsInsert
+    DirectoryDomainsInsertResource,
+    DirectoryDomainsInsert (..),
+    newDirectoryDomainsInsert,
 
     -- ** directory.domains.list
-    , DirectoryDomainsListResource
-    , DirectoryDomainsList (..)
-    , newDirectoryDomainsList
+    DirectoryDomainsListResource,
+    DirectoryDomainsList (..),
+    newDirectoryDomainsList,
 
     -- ** directory.groups.aliases.delete
-    , DirectoryGroupsAliasesDeleteResource
-    , DirectoryGroupsAliasesDelete (..)
-    , newDirectoryGroupsAliasesDelete
+    DirectoryGroupsAliasesDeleteResource,
+    DirectoryGroupsAliasesDelete (..),
+    newDirectoryGroupsAliasesDelete,
 
     -- ** directory.groups.aliases.insert
-    , DirectoryGroupsAliasesInsertResource
-    , DirectoryGroupsAliasesInsert (..)
-    , newDirectoryGroupsAliasesInsert
+    DirectoryGroupsAliasesInsertResource,
+    DirectoryGroupsAliasesInsert (..),
+    newDirectoryGroupsAliasesInsert,
 
     -- ** directory.groups.aliases.list
-    , DirectoryGroupsAliasesListResource
-    , DirectoryGroupsAliasesList (..)
-    , newDirectoryGroupsAliasesList
+    DirectoryGroupsAliasesListResource,
+    DirectoryGroupsAliasesList (..),
+    newDirectoryGroupsAliasesList,
 
     -- ** directory.groups.delete
-    , DirectoryGroupsDeleteResource
-    , DirectoryGroupsDelete (..)
-    , newDirectoryGroupsDelete
+    DirectoryGroupsDeleteResource,
+    DirectoryGroupsDelete (..),
+    newDirectoryGroupsDelete,
 
     -- ** directory.groups.get
-    , DirectoryGroupsGetResource
-    , DirectoryGroupsGet (..)
-    , newDirectoryGroupsGet
+    DirectoryGroupsGetResource,
+    DirectoryGroupsGet (..),
+    newDirectoryGroupsGet,
 
     -- ** directory.groups.insert
-    , DirectoryGroupsInsertResource
-    , DirectoryGroupsInsert (..)
-    , newDirectoryGroupsInsert
+    DirectoryGroupsInsertResource,
+    DirectoryGroupsInsert (..),
+    newDirectoryGroupsInsert,
 
     -- ** directory.groups.list
-    , DirectoryGroupsListResource
-    , DirectoryGroupsList (..)
-    , newDirectoryGroupsList
+    DirectoryGroupsListResource,
+    DirectoryGroupsList (..),
+    newDirectoryGroupsList,
 
     -- ** directory.groups.patch
-    , DirectoryGroupsPatchResource
-    , DirectoryGroupsPatch (..)
-    , newDirectoryGroupsPatch
+    DirectoryGroupsPatchResource,
+    DirectoryGroupsPatch (..),
+    newDirectoryGroupsPatch,
 
     -- ** directory.groups.update
-    , DirectoryGroupsUpdateResource
-    , DirectoryGroupsUpdate (..)
-    , newDirectoryGroupsUpdate
+    DirectoryGroupsUpdateResource,
+    DirectoryGroupsUpdate (..),
+    newDirectoryGroupsUpdate,
 
     -- ** directory.members.delete
-    , DirectoryMembersDeleteResource
-    , DirectoryMembersDelete (..)
-    , newDirectoryMembersDelete
+    DirectoryMembersDeleteResource,
+    DirectoryMembersDelete (..),
+    newDirectoryMembersDelete,
 
     -- ** directory.members.get
-    , DirectoryMembersGetResource
-    , DirectoryMembersGet (..)
-    , newDirectoryMembersGet
+    DirectoryMembersGetResource,
+    DirectoryMembersGet (..),
+    newDirectoryMembersGet,
 
     -- ** directory.members.hasMember
-    , DirectoryMembersHasMemberResource
-    , DirectoryMembersHasMember (..)
-    , newDirectoryMembersHasMember
+    DirectoryMembersHasMemberResource,
+    DirectoryMembersHasMember (..),
+    newDirectoryMembersHasMember,
 
     -- ** directory.members.insert
-    , DirectoryMembersInsertResource
-    , DirectoryMembersInsert (..)
-    , newDirectoryMembersInsert
+    DirectoryMembersInsertResource,
+    DirectoryMembersInsert (..),
+    newDirectoryMembersInsert,
 
     -- ** directory.members.list
-    , DirectoryMembersListResource
-    , DirectoryMembersList (..)
-    , newDirectoryMembersList
+    DirectoryMembersListResource,
+    DirectoryMembersList (..),
+    newDirectoryMembersList,
 
     -- ** directory.members.patch
-    , DirectoryMembersPatchResource
-    , DirectoryMembersPatch (..)
-    , newDirectoryMembersPatch
+    DirectoryMembersPatchResource,
+    DirectoryMembersPatch (..),
+    newDirectoryMembersPatch,
 
     -- ** directory.members.update
-    , DirectoryMembersUpdateResource
-    , DirectoryMembersUpdate (..)
-    , newDirectoryMembersUpdate
+    DirectoryMembersUpdateResource,
+    DirectoryMembersUpdate (..),
+    newDirectoryMembersUpdate,
 
     -- ** directory.mobiledevices.action
-    , DirectoryMobiledevicesActionResource
-    , DirectoryMobiledevicesAction (..)
-    , newDirectoryMobiledevicesAction
+    DirectoryMobiledevicesActionResource,
+    DirectoryMobiledevicesAction (..),
+    newDirectoryMobiledevicesAction,
 
     -- ** directory.mobiledevices.delete
-    , DirectoryMobiledevicesDeleteResource
-    , DirectoryMobiledevicesDelete (..)
-    , newDirectoryMobiledevicesDelete
+    DirectoryMobiledevicesDeleteResource,
+    DirectoryMobiledevicesDelete (..),
+    newDirectoryMobiledevicesDelete,
 
     -- ** directory.mobiledevices.get
-    , DirectoryMobiledevicesGetResource
-    , DirectoryMobiledevicesGet (..)
-    , newDirectoryMobiledevicesGet
+    DirectoryMobiledevicesGetResource,
+    DirectoryMobiledevicesGet (..),
+    newDirectoryMobiledevicesGet,
 
     -- ** directory.mobiledevices.list
-    , DirectoryMobiledevicesListResource
-    , DirectoryMobiledevicesList (..)
-    , newDirectoryMobiledevicesList
+    DirectoryMobiledevicesListResource,
+    DirectoryMobiledevicesList (..),
+    newDirectoryMobiledevicesList,
 
     -- ** directory.orgunits.delete
-    , DirectoryOrgunitsDeleteResource
-    , DirectoryOrgunitsDelete (..)
-    , newDirectoryOrgunitsDelete
+    DirectoryOrgunitsDeleteResource,
+    DirectoryOrgunitsDelete (..),
+    newDirectoryOrgunitsDelete,
 
     -- ** directory.orgunits.get
-    , DirectoryOrgunitsGetResource
-    , DirectoryOrgunitsGet (..)
-    , newDirectoryOrgunitsGet
+    DirectoryOrgunitsGetResource,
+    DirectoryOrgunitsGet (..),
+    newDirectoryOrgunitsGet,
 
     -- ** directory.orgunits.insert
-    , DirectoryOrgunitsInsertResource
-    , DirectoryOrgunitsInsert (..)
-    , newDirectoryOrgunitsInsert
+    DirectoryOrgunitsInsertResource,
+    DirectoryOrgunitsInsert (..),
+    newDirectoryOrgunitsInsert,
 
     -- ** directory.orgunits.list
-    , DirectoryOrgunitsListResource
-    , DirectoryOrgunitsList (..)
-    , newDirectoryOrgunitsList
+    DirectoryOrgunitsListResource,
+    DirectoryOrgunitsList (..),
+    newDirectoryOrgunitsList,
 
     -- ** directory.orgunits.patch
-    , DirectoryOrgunitsPatchResource
-    , DirectoryOrgunitsPatch (..)
-    , newDirectoryOrgunitsPatch
+    DirectoryOrgunitsPatchResource,
+    DirectoryOrgunitsPatch (..),
+    newDirectoryOrgunitsPatch,
 
     -- ** directory.orgunits.update
-    , DirectoryOrgunitsUpdateResource
-    , DirectoryOrgunitsUpdate (..)
-    , newDirectoryOrgunitsUpdate
+    DirectoryOrgunitsUpdateResource,
+    DirectoryOrgunitsUpdate (..),
+    newDirectoryOrgunitsUpdate,
 
     -- ** directory.privileges.list
-    , DirectoryPrivilegesListResource
-    , DirectoryPrivilegesList (..)
-    , newDirectoryPrivilegesList
+    DirectoryPrivilegesListResource,
+    DirectoryPrivilegesList (..),
+    newDirectoryPrivilegesList,
 
     -- ** directory.resources.buildings.delete
-    , DirectoryResourcesBuildingsDeleteResource
-    , DirectoryResourcesBuildingsDelete (..)
-    , newDirectoryResourcesBuildingsDelete
+    DirectoryResourcesBuildingsDeleteResource,
+    DirectoryResourcesBuildingsDelete (..),
+    newDirectoryResourcesBuildingsDelete,
 
     -- ** directory.resources.buildings.get
-    , DirectoryResourcesBuildingsGetResource
-    , DirectoryResourcesBuildingsGet (..)
-    , newDirectoryResourcesBuildingsGet
+    DirectoryResourcesBuildingsGetResource,
+    DirectoryResourcesBuildingsGet (..),
+    newDirectoryResourcesBuildingsGet,
 
     -- ** directory.resources.buildings.insert
-    , DirectoryResourcesBuildingsInsertResource
-    , DirectoryResourcesBuildingsInsert (..)
-    , newDirectoryResourcesBuildingsInsert
+    DirectoryResourcesBuildingsInsertResource,
+    DirectoryResourcesBuildingsInsert (..),
+    newDirectoryResourcesBuildingsInsert,
 
     -- ** directory.resources.buildings.list
-    , DirectoryResourcesBuildingsListResource
-    , DirectoryResourcesBuildingsList (..)
-    , newDirectoryResourcesBuildingsList
+    DirectoryResourcesBuildingsListResource,
+    DirectoryResourcesBuildingsList (..),
+    newDirectoryResourcesBuildingsList,
 
     -- ** directory.resources.buildings.patch
-    , DirectoryResourcesBuildingsPatchResource
-    , DirectoryResourcesBuildingsPatch (..)
-    , newDirectoryResourcesBuildingsPatch
+    DirectoryResourcesBuildingsPatchResource,
+    DirectoryResourcesBuildingsPatch (..),
+    newDirectoryResourcesBuildingsPatch,
 
     -- ** directory.resources.buildings.update
-    , DirectoryResourcesBuildingsUpdateResource
-    , DirectoryResourcesBuildingsUpdate (..)
-    , newDirectoryResourcesBuildingsUpdate
+    DirectoryResourcesBuildingsUpdateResource,
+    DirectoryResourcesBuildingsUpdate (..),
+    newDirectoryResourcesBuildingsUpdate,
 
     -- ** directory.resources.calendars.delete
-    , DirectoryResourcesCalendarsDeleteResource
-    , DirectoryResourcesCalendarsDelete (..)
-    , newDirectoryResourcesCalendarsDelete
+    DirectoryResourcesCalendarsDeleteResource,
+    DirectoryResourcesCalendarsDelete (..),
+    newDirectoryResourcesCalendarsDelete,
 
     -- ** directory.resources.calendars.get
-    , DirectoryResourcesCalendarsGetResource
-    , DirectoryResourcesCalendarsGet (..)
-    , newDirectoryResourcesCalendarsGet
+    DirectoryResourcesCalendarsGetResource,
+    DirectoryResourcesCalendarsGet (..),
+    newDirectoryResourcesCalendarsGet,
 
     -- ** directory.resources.calendars.insert
-    , DirectoryResourcesCalendarsInsertResource
-    , DirectoryResourcesCalendarsInsert (..)
-    , newDirectoryResourcesCalendarsInsert
+    DirectoryResourcesCalendarsInsertResource,
+    DirectoryResourcesCalendarsInsert (..),
+    newDirectoryResourcesCalendarsInsert,
 
     -- ** directory.resources.calendars.list
-    , DirectoryResourcesCalendarsListResource
-    , DirectoryResourcesCalendarsList (..)
-    , newDirectoryResourcesCalendarsList
+    DirectoryResourcesCalendarsListResource,
+    DirectoryResourcesCalendarsList (..),
+    newDirectoryResourcesCalendarsList,
 
     -- ** directory.resources.calendars.patch
-    , DirectoryResourcesCalendarsPatchResource
-    , DirectoryResourcesCalendarsPatch (..)
-    , newDirectoryResourcesCalendarsPatch
+    DirectoryResourcesCalendarsPatchResource,
+    DirectoryResourcesCalendarsPatch (..),
+    newDirectoryResourcesCalendarsPatch,
 
     -- ** directory.resources.calendars.update
-    , DirectoryResourcesCalendarsUpdateResource
-    , DirectoryResourcesCalendarsUpdate (..)
-    , newDirectoryResourcesCalendarsUpdate
+    DirectoryResourcesCalendarsUpdateResource,
+    DirectoryResourcesCalendarsUpdate (..),
+    newDirectoryResourcesCalendarsUpdate,
 
     -- ** directory.resources.features.delete
-    , DirectoryResourcesFeaturesDeleteResource
-    , DirectoryResourcesFeaturesDelete (..)
-    , newDirectoryResourcesFeaturesDelete
+    DirectoryResourcesFeaturesDeleteResource,
+    DirectoryResourcesFeaturesDelete (..),
+    newDirectoryResourcesFeaturesDelete,
 
     -- ** directory.resources.features.get
-    , DirectoryResourcesFeaturesGetResource
-    , DirectoryResourcesFeaturesGet (..)
-    , newDirectoryResourcesFeaturesGet
+    DirectoryResourcesFeaturesGetResource,
+    DirectoryResourcesFeaturesGet (..),
+    newDirectoryResourcesFeaturesGet,
 
     -- ** directory.resources.features.insert
-    , DirectoryResourcesFeaturesInsertResource
-    , DirectoryResourcesFeaturesInsert (..)
-    , newDirectoryResourcesFeaturesInsert
+    DirectoryResourcesFeaturesInsertResource,
+    DirectoryResourcesFeaturesInsert (..),
+    newDirectoryResourcesFeaturesInsert,
 
     -- ** directory.resources.features.list
-    , DirectoryResourcesFeaturesListResource
-    , DirectoryResourcesFeaturesList (..)
-    , newDirectoryResourcesFeaturesList
+    DirectoryResourcesFeaturesListResource,
+    DirectoryResourcesFeaturesList (..),
+    newDirectoryResourcesFeaturesList,
 
     -- ** directory.resources.features.patch
-    , DirectoryResourcesFeaturesPatchResource
-    , DirectoryResourcesFeaturesPatch (..)
-    , newDirectoryResourcesFeaturesPatch
+    DirectoryResourcesFeaturesPatchResource,
+    DirectoryResourcesFeaturesPatch (..),
+    newDirectoryResourcesFeaturesPatch,
 
     -- ** directory.resources.features.rename
-    , DirectoryResourcesFeaturesRenameResource
-    , DirectoryResourcesFeaturesRename (..)
-    , newDirectoryResourcesFeaturesRename
+    DirectoryResourcesFeaturesRenameResource,
+    DirectoryResourcesFeaturesRename (..),
+    newDirectoryResourcesFeaturesRename,
 
     -- ** directory.resources.features.update
-    , DirectoryResourcesFeaturesUpdateResource
-    , DirectoryResourcesFeaturesUpdate (..)
-    , newDirectoryResourcesFeaturesUpdate
+    DirectoryResourcesFeaturesUpdateResource,
+    DirectoryResourcesFeaturesUpdate (..),
+    newDirectoryResourcesFeaturesUpdate,
 
     -- ** directory.roleAssignments.delete
-    , DirectoryRoleAssignmentsDeleteResource
-    , DirectoryRoleAssignmentsDelete (..)
-    , newDirectoryRoleAssignmentsDelete
+    DirectoryRoleAssignmentsDeleteResource,
+    DirectoryRoleAssignmentsDelete (..),
+    newDirectoryRoleAssignmentsDelete,
 
     -- ** directory.roleAssignments.get
-    , DirectoryRoleAssignmentsGetResource
-    , DirectoryRoleAssignmentsGet (..)
-    , newDirectoryRoleAssignmentsGet
+    DirectoryRoleAssignmentsGetResource,
+    DirectoryRoleAssignmentsGet (..),
+    newDirectoryRoleAssignmentsGet,
 
     -- ** directory.roleAssignments.insert
-    , DirectoryRoleAssignmentsInsertResource
-    , DirectoryRoleAssignmentsInsert (..)
-    , newDirectoryRoleAssignmentsInsert
+    DirectoryRoleAssignmentsInsertResource,
+    DirectoryRoleAssignmentsInsert (..),
+    newDirectoryRoleAssignmentsInsert,
 
     -- ** directory.roleAssignments.list
-    , DirectoryRoleAssignmentsListResource
-    , DirectoryRoleAssignmentsList (..)
-    , newDirectoryRoleAssignmentsList
+    DirectoryRoleAssignmentsListResource,
+    DirectoryRoleAssignmentsList (..),
+    newDirectoryRoleAssignmentsList,
 
     -- ** directory.roles.delete
-    , DirectoryRolesDeleteResource
-    , DirectoryRolesDelete (..)
-    , newDirectoryRolesDelete
+    DirectoryRolesDeleteResource,
+    DirectoryRolesDelete (..),
+    newDirectoryRolesDelete,
 
     -- ** directory.roles.get
-    , DirectoryRolesGetResource
-    , DirectoryRolesGet (..)
-    , newDirectoryRolesGet
+    DirectoryRolesGetResource,
+    DirectoryRolesGet (..),
+    newDirectoryRolesGet,
 
     -- ** directory.roles.insert
-    , DirectoryRolesInsertResource
-    , DirectoryRolesInsert (..)
-    , newDirectoryRolesInsert
+    DirectoryRolesInsertResource,
+    DirectoryRolesInsert (..),
+    newDirectoryRolesInsert,
 
     -- ** directory.roles.list
-    , DirectoryRolesListResource
-    , DirectoryRolesList (..)
-    , newDirectoryRolesList
+    DirectoryRolesListResource,
+    DirectoryRolesList (..),
+    newDirectoryRolesList,
 
     -- ** directory.roles.patch
-    , DirectoryRolesPatchResource
-    , DirectoryRolesPatch (..)
-    , newDirectoryRolesPatch
+    DirectoryRolesPatchResource,
+    DirectoryRolesPatch (..),
+    newDirectoryRolesPatch,
 
     -- ** directory.roles.update
-    , DirectoryRolesUpdateResource
-    , DirectoryRolesUpdate (..)
-    , newDirectoryRolesUpdate
+    DirectoryRolesUpdateResource,
+    DirectoryRolesUpdate (..),
+    newDirectoryRolesUpdate,
 
     -- ** directory.schemas.delete
-    , DirectorySchemasDeleteResource
-    , DirectorySchemasDelete (..)
-    , newDirectorySchemasDelete
+    DirectorySchemasDeleteResource,
+    DirectorySchemasDelete (..),
+    newDirectorySchemasDelete,
 
     -- ** directory.schemas.get
-    , DirectorySchemasGetResource
-    , DirectorySchemasGet (..)
-    , newDirectorySchemasGet
+    DirectorySchemasGetResource,
+    DirectorySchemasGet (..),
+    newDirectorySchemasGet,
 
     -- ** directory.schemas.insert
-    , DirectorySchemasInsertResource
-    , DirectorySchemasInsert (..)
-    , newDirectorySchemasInsert
+    DirectorySchemasInsertResource,
+    DirectorySchemasInsert (..),
+    newDirectorySchemasInsert,
 
     -- ** directory.schemas.list
-    , DirectorySchemasListResource
-    , DirectorySchemasList (..)
-    , newDirectorySchemasList
+    DirectorySchemasListResource,
+    DirectorySchemasList (..),
+    newDirectorySchemasList,
 
     -- ** directory.schemas.patch
-    , DirectorySchemasPatchResource
-    , DirectorySchemasPatch (..)
-    , newDirectorySchemasPatch
+    DirectorySchemasPatchResource,
+    DirectorySchemasPatch (..),
+    newDirectorySchemasPatch,
 
     -- ** directory.schemas.update
-    , DirectorySchemasUpdateResource
-    , DirectorySchemasUpdate (..)
-    , newDirectorySchemasUpdate
+    DirectorySchemasUpdateResource,
+    DirectorySchemasUpdate (..),
+    newDirectorySchemasUpdate,
 
     -- ** directory.tokens.delete
-    , DirectoryTokensDeleteResource
-    , DirectoryTokensDelete (..)
-    , newDirectoryTokensDelete
+    DirectoryTokensDeleteResource,
+    DirectoryTokensDelete (..),
+    newDirectoryTokensDelete,
 
     -- ** directory.tokens.get
-    , DirectoryTokensGetResource
-    , DirectoryTokensGet (..)
-    , newDirectoryTokensGet
+    DirectoryTokensGetResource,
+    DirectoryTokensGet (..),
+    newDirectoryTokensGet,
 
     -- ** directory.tokens.list
-    , DirectoryTokensListResource
-    , DirectoryTokensList (..)
-    , newDirectoryTokensList
+    DirectoryTokensListResource,
+    DirectoryTokensList (..),
+    newDirectoryTokensList,
 
     -- ** directory.twoStepVerification.turnOff
-    , DirectoryTwoStepVerificationTurnOffResource
-    , DirectoryTwoStepVerificationTurnOff (..)
-    , newDirectoryTwoStepVerificationTurnOff
+    DirectoryTwoStepVerificationTurnOffResource,
+    DirectoryTwoStepVerificationTurnOff (..),
+    newDirectoryTwoStepVerificationTurnOff,
 
     -- ** directory.users.aliases.delete
-    , DirectoryUsersAliasesDeleteResource
-    , DirectoryUsersAliasesDelete (..)
-    , newDirectoryUsersAliasesDelete
+    DirectoryUsersAliasesDeleteResource,
+    DirectoryUsersAliasesDelete (..),
+    newDirectoryUsersAliasesDelete,
 
     -- ** directory.users.aliases.insert
-    , DirectoryUsersAliasesInsertResource
-    , DirectoryUsersAliasesInsert (..)
-    , newDirectoryUsersAliasesInsert
+    DirectoryUsersAliasesInsertResource,
+    DirectoryUsersAliasesInsert (..),
+    newDirectoryUsersAliasesInsert,
 
     -- ** directory.users.aliases.list
-    , DirectoryUsersAliasesListResource
-    , DirectoryUsersAliasesList (..)
-    , newDirectoryUsersAliasesList
+    DirectoryUsersAliasesListResource,
+    DirectoryUsersAliasesList (..),
+    newDirectoryUsersAliasesList,
 
     -- ** directory.users.aliases.watch
-    , DirectoryUsersAliasesWatchResource
-    , DirectoryUsersAliasesWatch (..)
-    , newDirectoryUsersAliasesWatch
+    DirectoryUsersAliasesWatchResource,
+    DirectoryUsersAliasesWatch (..),
+    newDirectoryUsersAliasesWatch,
 
     -- ** directory.users.delete
-    , DirectoryUsersDeleteResource
-    , DirectoryUsersDelete (..)
-    , newDirectoryUsersDelete
+    DirectoryUsersDeleteResource,
+    DirectoryUsersDelete (..),
+    newDirectoryUsersDelete,
 
     -- ** directory.users.get
-    , DirectoryUsersGetResource
-    , DirectoryUsersGet (..)
-    , newDirectoryUsersGet
+    DirectoryUsersGetResource,
+    DirectoryUsersGet (..),
+    newDirectoryUsersGet,
 
     -- ** directory.users.insert
-    , DirectoryUsersInsertResource
-    , DirectoryUsersInsert (..)
-    , newDirectoryUsersInsert
+    DirectoryUsersInsertResource,
+    DirectoryUsersInsert (..),
+    newDirectoryUsersInsert,
 
     -- ** directory.users.list
-    , DirectoryUsersListResource
-    , DirectoryUsersList (..)
-    , newDirectoryUsersList
+    DirectoryUsersListResource,
+    DirectoryUsersList (..),
+    newDirectoryUsersList,
 
     -- ** directory.users.makeAdmin
-    , DirectoryUsersMakeAdminResource
-    , DirectoryUsersMakeAdmin (..)
-    , newDirectoryUsersMakeAdmin
+    DirectoryUsersMakeAdminResource,
+    DirectoryUsersMakeAdmin (..),
+    newDirectoryUsersMakeAdmin,
 
     -- ** directory.users.patch
-    , DirectoryUsersPatchResource
-    , DirectoryUsersPatch (..)
-    , newDirectoryUsersPatch
+    DirectoryUsersPatchResource,
+    DirectoryUsersPatch (..),
+    newDirectoryUsersPatch,
 
     -- ** directory.users.photos.delete
-    , DirectoryUsersPhotosDeleteResource
-    , DirectoryUsersPhotosDelete (..)
-    , newDirectoryUsersPhotosDelete
+    DirectoryUsersPhotosDeleteResource,
+    DirectoryUsersPhotosDelete (..),
+    newDirectoryUsersPhotosDelete,
 
     -- ** directory.users.photos.get
-    , DirectoryUsersPhotosGetResource
-    , DirectoryUsersPhotosGet (..)
-    , newDirectoryUsersPhotosGet
+    DirectoryUsersPhotosGetResource,
+    DirectoryUsersPhotosGet (..),
+    newDirectoryUsersPhotosGet,
 
     -- ** directory.users.photos.patch
-    , DirectoryUsersPhotosPatchResource
-    , DirectoryUsersPhotosPatch (..)
-    , newDirectoryUsersPhotosPatch
+    DirectoryUsersPhotosPatchResource,
+    DirectoryUsersPhotosPatch (..),
+    newDirectoryUsersPhotosPatch,
 
     -- ** directory.users.photos.update
-    , DirectoryUsersPhotosUpdateResource
-    , DirectoryUsersPhotosUpdate (..)
-    , newDirectoryUsersPhotosUpdate
+    DirectoryUsersPhotosUpdateResource,
+    DirectoryUsersPhotosUpdate (..),
+    newDirectoryUsersPhotosUpdate,
 
     -- ** directory.users.signOut
-    , DirectoryUsersSignOutResource
-    , DirectoryUsersSignOut (..)
-    , newDirectoryUsersSignOut
+    DirectoryUsersSignOutResource,
+    DirectoryUsersSignOut (..),
+    newDirectoryUsersSignOut,
 
     -- ** directory.users.undelete
-    , DirectoryUsersUndeleteResource
-    , DirectoryUsersUndelete (..)
-    , newDirectoryUsersUndelete
+    DirectoryUsersUndeleteResource,
+    DirectoryUsersUndelete (..),
+    newDirectoryUsersUndelete,
 
     -- ** directory.users.update
-    , DirectoryUsersUpdateResource
-    , DirectoryUsersUpdate (..)
-    , newDirectoryUsersUpdate
+    DirectoryUsersUpdateResource,
+    DirectoryUsersUpdate (..),
+    newDirectoryUsersUpdate,
 
     -- ** directory.users.watch
-    , DirectoryUsersWatchResource
-    , DirectoryUsersWatch (..)
-    , newDirectoryUsersWatch
+    DirectoryUsersWatchResource,
+    DirectoryUsersWatch (..),
+    newDirectoryUsersWatch,
 
     -- ** directory.verificationCodes.generate
-    , DirectoryVerificationCodesGenerateResource
-    , DirectoryVerificationCodesGenerate (..)
-    , newDirectoryVerificationCodesGenerate
+    DirectoryVerificationCodesGenerateResource,
+    DirectoryVerificationCodesGenerate (..),
+    newDirectoryVerificationCodesGenerate,
 
     -- ** directory.verificationCodes.invalidate
-    , DirectoryVerificationCodesInvalidateResource
-    , DirectoryVerificationCodesInvalidate (..)
-    , newDirectoryVerificationCodesInvalidate
+    DirectoryVerificationCodesInvalidateResource,
+    DirectoryVerificationCodesInvalidate (..),
+    newDirectoryVerificationCodesInvalidate,
 
     -- ** directory.verificationCodes.list
-    , DirectoryVerificationCodesListResource
-    , DirectoryVerificationCodesList (..)
-    , newDirectoryVerificationCodesList
+    DirectoryVerificationCodesListResource,
+    DirectoryVerificationCodesList (..),
+    newDirectoryVerificationCodesList,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Alias
-    , Alias (..)
-    , newAlias
+    Alias (..),
+    newAlias,
 
     -- ** Aliases
-    , Aliases (..)
-    , newAliases
+    Aliases (..),
+    newAliases,
 
     -- ** Asp
-    , Asp (..)
-    , newAsp
+    Asp (..),
+    newAsp,
 
     -- ** Asps
-    , Asps (..)
-    , newAsps
+    Asps (..),
+    newAsps,
 
     -- ** AuxiliaryMessage
-    , AuxiliaryMessage (..)
-    , newAuxiliaryMessage
+    AuxiliaryMessage (..),
+    newAuxiliaryMessage,
 
     -- ** AuxiliaryMessage_Severity
-    , AuxiliaryMessage_Severity (..)
+    AuxiliaryMessage_Severity (..),
 
     -- ** BacklightInfo
-    , BacklightInfo (..)
-    , newBacklightInfo
+    BacklightInfo (..),
+    newBacklightInfo,
 
     -- ** BatchChangeChromeOsDeviceStatusRequest
-    , BatchChangeChromeOsDeviceStatusRequest (..)
-    , newBatchChangeChromeOsDeviceStatusRequest
+    BatchChangeChromeOsDeviceStatusRequest (..),
+    newBatchChangeChromeOsDeviceStatusRequest,
 
     -- ** BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction
-    , BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction (..)
+    BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction (..),
 
     -- ** BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
-    , BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason (..)
+    BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason (..),
 
     -- ** BatchChangeChromeOsDeviceStatusResponse
-    , BatchChangeChromeOsDeviceStatusResponse (..)
-    , newBatchChangeChromeOsDeviceStatusResponse
+    BatchChangeChromeOsDeviceStatusResponse (..),
+    newBatchChangeChromeOsDeviceStatusResponse,
 
     -- ** BatchCreatePrintServersRequest
-    , BatchCreatePrintServersRequest (..)
-    , newBatchCreatePrintServersRequest
+    BatchCreatePrintServersRequest (..),
+    newBatchCreatePrintServersRequest,
 
     -- ** BatchCreatePrintServersResponse
-    , BatchCreatePrintServersResponse (..)
-    , newBatchCreatePrintServersResponse
+    BatchCreatePrintServersResponse (..),
+    newBatchCreatePrintServersResponse,
 
     -- ** BatchCreatePrintersRequest
-    , BatchCreatePrintersRequest (..)
-    , newBatchCreatePrintersRequest
+    BatchCreatePrintersRequest (..),
+    newBatchCreatePrintersRequest,
 
     -- ** BatchCreatePrintersResponse
-    , BatchCreatePrintersResponse (..)
-    , newBatchCreatePrintersResponse
+    BatchCreatePrintersResponse (..),
+    newBatchCreatePrintersResponse,
 
     -- ** BatchDeletePrintServersRequest
-    , BatchDeletePrintServersRequest (..)
-    , newBatchDeletePrintServersRequest
+    BatchDeletePrintServersRequest (..),
+    newBatchDeletePrintServersRequest,
 
     -- ** BatchDeletePrintServersResponse
-    , BatchDeletePrintServersResponse (..)
-    , newBatchDeletePrintServersResponse
+    BatchDeletePrintServersResponse (..),
+    newBatchDeletePrintServersResponse,
 
     -- ** BatchDeletePrintersRequest
-    , BatchDeletePrintersRequest (..)
-    , newBatchDeletePrintersRequest
+    BatchDeletePrintersRequest (..),
+    newBatchDeletePrintersRequest,
 
     -- ** BatchDeletePrintersResponse
-    , BatchDeletePrintersResponse (..)
-    , newBatchDeletePrintersResponse
+    BatchDeletePrintersResponse (..),
+    newBatchDeletePrintersResponse,
 
     -- ** Building
-    , Building (..)
-    , newBuilding
+    Building (..),
+    newBuilding,
 
     -- ** BuildingAddress
-    , BuildingAddress (..)
-    , newBuildingAddress
+    BuildingAddress (..),
+    newBuildingAddress,
 
     -- ** BuildingCoordinates
-    , BuildingCoordinates (..)
-    , newBuildingCoordinates
+    BuildingCoordinates (..),
+    newBuildingCoordinates,
 
     -- ** Buildings
-    , Buildings (..)
-    , newBuildings
+    Buildings (..),
+    newBuildings,
 
     -- ** ByteUsage
-    , ByteUsage (..)
-    , newByteUsage
+    ByteUsage (..),
+    newByteUsage,
 
     -- ** CalendarResource
-    , CalendarResource (..)
-    , newCalendarResource
+    CalendarResource (..),
+    newCalendarResource,
 
     -- ** CalendarResources
-    , CalendarResources (..)
-    , newCalendarResources
+    CalendarResources (..),
+    newCalendarResources,
 
     -- ** ChangeChromeOsDeviceStatusResult
-    , ChangeChromeOsDeviceStatusResult (..)
-    , newChangeChromeOsDeviceStatusResult
+    ChangeChromeOsDeviceStatusResult (..),
+    newChangeChromeOsDeviceStatusResult,
 
     -- ** ChangeChromeOsDeviceStatusSucceeded
-    , ChangeChromeOsDeviceStatusSucceeded (..)
-    , newChangeChromeOsDeviceStatusSucceeded
+    ChangeChromeOsDeviceStatusSucceeded (..),
+    newChangeChromeOsDeviceStatusSucceeded,
 
     -- ** Channel
-    , Channel (..)
-    , newChannel
+    Channel (..),
+    newChannel,
 
     -- ** Channel_Params
-    , Channel_Params (..)
-    , newChannel_Params
+    Channel_Params (..),
+    newChannel_Params,
 
     -- ** ChromeOsDevice
-    , ChromeOsDevice (..)
-    , newChromeOsDevice
+    ChromeOsDevice (..),
+    newChromeOsDevice,
 
     -- ** ChromeOsDevice_ActiveTimeRangesItem
-    , ChromeOsDevice_ActiveTimeRangesItem (..)
-    , newChromeOsDevice_ActiveTimeRangesItem
+    ChromeOsDevice_ActiveTimeRangesItem (..),
+    newChromeOsDevice_ActiveTimeRangesItem,
 
     -- ** ChromeOsDevice_ChromeOsType
-    , ChromeOsDevice_ChromeOsType (..)
+    ChromeOsDevice_ChromeOsType (..),
 
     -- ** ChromeOsDevice_CpuInfoItem
-    , ChromeOsDevice_CpuInfoItem (..)
-    , newChromeOsDevice_CpuInfoItem
+    ChromeOsDevice_CpuInfoItem (..),
+    newChromeOsDevice_CpuInfoItem,
 
     -- ** ChromeOsDevice_CpuInfoItem_LogicalCpusItem
-    , ChromeOsDevice_CpuInfoItem_LogicalCpusItem (..)
-    , newChromeOsDevice_CpuInfoItem_LogicalCpusItem
+    ChromeOsDevice_CpuInfoItem_LogicalCpusItem (..),
+    newChromeOsDevice_CpuInfoItem_LogicalCpusItem,
 
     -- ** ChromeOsDevice_CpuInfoItem_LogicalCpusItem_CStatesItem
-    , ChromeOsDevice_CpuInfoItem_LogicalCpusItem_CStatesItem (..)
-    , newChromeOsDevice_CpuInfoItem_LogicalCpusItem_CStatesItem
+    ChromeOsDevice_CpuInfoItem_LogicalCpusItem_CStatesItem (..),
+    newChromeOsDevice_CpuInfoItem_LogicalCpusItem_CStatesItem,
 
     -- ** ChromeOsDevice_CpuStatusReportsItem
-    , ChromeOsDevice_CpuStatusReportsItem (..)
-    , newChromeOsDevice_CpuStatusReportsItem
+    ChromeOsDevice_CpuStatusReportsItem (..),
+    newChromeOsDevice_CpuStatusReportsItem,
 
     -- ** ChromeOsDevice_CpuStatusReportsItem_CpuTemperatureInfoItem
-    , ChromeOsDevice_CpuStatusReportsItem_CpuTemperatureInfoItem (..)
-    , newChromeOsDevice_CpuStatusReportsItem_CpuTemperatureInfoItem
+    ChromeOsDevice_CpuStatusReportsItem_CpuTemperatureInfoItem (..),
+    newChromeOsDevice_CpuStatusReportsItem_CpuTemperatureInfoItem,
 
     -- ** ChromeOsDevice_DeprovisionReason
-    , ChromeOsDevice_DeprovisionReason (..)
+    ChromeOsDevice_DeprovisionReason (..),
 
     -- ** ChromeOsDevice_DeviceFilesItem
-    , ChromeOsDevice_DeviceFilesItem (..)
-    , newChromeOsDevice_DeviceFilesItem
+    ChromeOsDevice_DeviceFilesItem (..),
+    newChromeOsDevice_DeviceFilesItem,
 
     -- ** ChromeOsDevice_DeviceLicenseType
-    , ChromeOsDevice_DeviceLicenseType (..)
+    ChromeOsDevice_DeviceLicenseType (..),
 
     -- ** ChromeOsDevice_DiskVolumeReportsItem
-    , ChromeOsDevice_DiskVolumeReportsItem (..)
-    , newChromeOsDevice_DiskVolumeReportsItem
+    ChromeOsDevice_DiskVolumeReportsItem (..),
+    newChromeOsDevice_DiskVolumeReportsItem,
 
     -- ** ChromeOsDevice_DiskVolumeReportsItem_VolumeInfoItem
-    , ChromeOsDevice_DiskVolumeReportsItem_VolumeInfoItem (..)
-    , newChromeOsDevice_DiskVolumeReportsItem_VolumeInfoItem
+    ChromeOsDevice_DiskVolumeReportsItem_VolumeInfoItem (..),
+    newChromeOsDevice_DiskVolumeReportsItem_VolumeInfoItem,
 
     -- ** ChromeOsDevice_LastKnownNetworkItem
-    , ChromeOsDevice_LastKnownNetworkItem (..)
-    , newChromeOsDevice_LastKnownNetworkItem
+    ChromeOsDevice_LastKnownNetworkItem (..),
+    newChromeOsDevice_LastKnownNetworkItem,
 
     -- ** ChromeOsDevice_RecentUsersItem
-    , ChromeOsDevice_RecentUsersItem (..)
-    , newChromeOsDevice_RecentUsersItem
+    ChromeOsDevice_RecentUsersItem (..),
+    newChromeOsDevice_RecentUsersItem,
 
     -- ** ChromeOsDevice_ScreenshotFilesItem
-    , ChromeOsDevice_ScreenshotFilesItem (..)
-    , newChromeOsDevice_ScreenshotFilesItem
+    ChromeOsDevice_ScreenshotFilesItem (..),
+    newChromeOsDevice_ScreenshotFilesItem,
 
     -- ** ChromeOsDevice_SystemRamFreeReportsItem
-    , ChromeOsDevice_SystemRamFreeReportsItem (..)
-    , newChromeOsDevice_SystemRamFreeReportsItem
+    ChromeOsDevice_SystemRamFreeReportsItem (..),
+    newChromeOsDevice_SystemRamFreeReportsItem,
 
     -- ** ChromeOsDevice_TpmVersionInfo
-    , ChromeOsDevice_TpmVersionInfo (..)
-    , newChromeOsDevice_TpmVersionInfo
+    ChromeOsDevice_TpmVersionInfo (..),
+    newChromeOsDevice_TpmVersionInfo,
 
     -- ** ChromeOsDeviceAction
-    , ChromeOsDeviceAction (..)
-    , newChromeOsDeviceAction
+    ChromeOsDeviceAction (..),
+    newChromeOsDeviceAction,
 
     -- ** ChromeOsDevices
-    , ChromeOsDevices (..)
-    , newChromeOsDevices
+    ChromeOsDevices (..),
+    newChromeOsDevices,
 
     -- ** ChromeOsMoveDevicesToOu
-    , ChromeOsMoveDevicesToOu (..)
-    , newChromeOsMoveDevicesToOu
+    ChromeOsMoveDevicesToOu (..),
+    newChromeOsMoveDevicesToOu,
 
     -- ** CreatePrintServerRequest
-    , CreatePrintServerRequest (..)
-    , newCreatePrintServerRequest
+    CreatePrintServerRequest (..),
+    newCreatePrintServerRequest,
 
     -- ** CreatePrinterRequest
-    , CreatePrinterRequest (..)
-    , newCreatePrinterRequest
+    CreatePrinterRequest (..),
+    newCreatePrinterRequest,
 
     -- ** Customer
-    , Customer (..)
-    , newCustomer
+    Customer (..),
+    newCustomer,
 
     -- ** CustomerPostalAddress
-    , CustomerPostalAddress (..)
-    , newCustomerPostalAddress
+    CustomerPostalAddress (..),
+    newCustomerPostalAddress,
 
     -- ** DirectoryChromeosdevicesCommand
-    , DirectoryChromeosdevicesCommand (..)
-    , newDirectoryChromeosdevicesCommand
+    DirectoryChromeosdevicesCommand (..),
+    newDirectoryChromeosdevicesCommand,
 
     -- ** DirectoryChromeosdevicesCommand_State
-    , DirectoryChromeosdevicesCommand_State (..)
+    DirectoryChromeosdevicesCommand_State (..),
 
     -- ** DirectoryChromeosdevicesCommand_Type
-    , DirectoryChromeosdevicesCommand_Type (..)
+    DirectoryChromeosdevicesCommand_Type (..),
 
     -- ** DirectoryChromeosdevicesCommandResult
-    , DirectoryChromeosdevicesCommandResult (..)
-    , newDirectoryChromeosdevicesCommandResult
+    DirectoryChromeosdevicesCommandResult (..),
+    newDirectoryChromeosdevicesCommandResult,
 
     -- ** DirectoryChromeosdevicesCommandResult_Result
-    , DirectoryChromeosdevicesCommandResult_Result (..)
+    DirectoryChromeosdevicesCommandResult_Result (..),
 
     -- ** DirectoryChromeosdevicesIssueCommandRequest
-    , DirectoryChromeosdevicesIssueCommandRequest (..)
-    , newDirectoryChromeosdevicesIssueCommandRequest
+    DirectoryChromeosdevicesIssueCommandRequest (..),
+    newDirectoryChromeosdevicesIssueCommandRequest,
 
     -- ** DirectoryChromeosdevicesIssueCommandRequest_CommandType
-    , DirectoryChromeosdevicesIssueCommandRequest_CommandType (..)
+    DirectoryChromeosdevicesIssueCommandRequest_CommandType (..),
 
     -- ** DirectoryChromeosdevicesIssueCommandResponse
-    , DirectoryChromeosdevicesIssueCommandResponse (..)
-    , newDirectoryChromeosdevicesIssueCommandResponse
+    DirectoryChromeosdevicesIssueCommandResponse (..),
+    newDirectoryChromeosdevicesIssueCommandResponse,
 
     -- ** DomainAlias
-    , DomainAlias (..)
-    , newDomainAlias
+    DomainAlias (..),
+    newDomainAlias,
 
     -- ** DomainAliases
-    , DomainAliases (..)
-    , newDomainAliases
+    DomainAliases (..),
+    newDomainAliases,
 
     -- ** Domains
-    , Domains (..)
-    , newDomains
+    Domains (..),
+    newDomains,
 
     -- ** Domains2
-    , Domains2 (..)
-    , newDomains2
+    Domains2 (..),
+    newDomains2,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** FailureInfo
-    , FailureInfo (..)
-    , newFailureInfo
+    FailureInfo (..),
+    newFailureInfo,
 
     -- ** FailureInfo_ErrorCode
-    , FailureInfo_ErrorCode (..)
+    FailureInfo_ErrorCode (..),
 
     -- ** FanInfo
-    , FanInfo (..)
-    , newFanInfo
+    FanInfo (..),
+    newFanInfo,
 
     -- ** Feature
-    , Feature (..)
-    , newFeature
+    Feature (..),
+    newFeature,
 
     -- ** FeatureInstance
-    , FeatureInstance (..)
-    , newFeatureInstance
+    FeatureInstance (..),
+    newFeatureInstance,
 
     -- ** FeatureRename
-    , FeatureRename (..)
-    , newFeatureRename
+    FeatureRename (..),
+    newFeatureRename,
 
     -- ** Features
-    , Features (..)
-    , newFeatures
+    Features (..),
+    newFeatures,
 
     -- ** Group
-    , Group (..)
-    , newGroup
+    Group (..),
+    newGroup,
 
     -- ** GroupAlias
-    , GroupAlias (..)
-    , newGroupAlias
+    GroupAlias (..),
+    newGroupAlias,
 
     -- ** Groups
-    , Groups (..)
-    , newGroups
+    Groups (..),
+    newGroups,
 
     -- ** ListPrintServersResponse
-    , ListPrintServersResponse (..)
-    , newListPrintServersResponse
+    ListPrintServersResponse (..),
+    newListPrintServersResponse,
 
     -- ** ListPrinterModelsResponse
-    , ListPrinterModelsResponse (..)
-    , newListPrinterModelsResponse
+    ListPrinterModelsResponse (..),
+    newListPrinterModelsResponse,
 
     -- ** ListPrintersResponse
-    , ListPrintersResponse (..)
-    , newListPrintersResponse
+    ListPrintersResponse (..),
+    newListPrintersResponse,
 
     -- ** Member
-    , Member (..)
-    , newMember
+    Member (..),
+    newMember,
 
     -- ** Members
-    , Members (..)
-    , newMembers
+    Members (..),
+    newMembers,
 
     -- ** MembersHasMember
-    , MembersHasMember (..)
-    , newMembersHasMember
+    MembersHasMember (..),
+    newMembersHasMember,
 
     -- ** MobileDevice
-    , MobileDevice (..)
-    , newMobileDevice
+    MobileDevice (..),
+    newMobileDevice,
 
     -- ** MobileDevice_ApplicationsItem
-    , MobileDevice_ApplicationsItem (..)
-    , newMobileDevice_ApplicationsItem
+    MobileDevice_ApplicationsItem (..),
+    newMobileDevice_ApplicationsItem,
 
     -- ** MobileDeviceAction
-    , MobileDeviceAction (..)
-    , newMobileDeviceAction
+    MobileDeviceAction (..),
+    newMobileDeviceAction,
 
     -- ** MobileDevices
-    , MobileDevices (..)
-    , newMobileDevices
+    MobileDevices (..),
+    newMobileDevices,
 
     -- ** OrgUnit
-    , OrgUnit (..)
-    , newOrgUnit
+    OrgUnit (..),
+    newOrgUnit,
 
     -- ** OrgUnits
-    , OrgUnits (..)
-    , newOrgUnits
+    OrgUnits (..),
+    newOrgUnits,
 
     -- ** OsUpdateStatus
-    , OsUpdateStatus (..)
-    , newOsUpdateStatus
+    OsUpdateStatus (..),
+    newOsUpdateStatus,
 
     -- ** OsUpdateStatus_State
-    , OsUpdateStatus_State (..)
+    OsUpdateStatus_State (..),
 
     -- ** PrintServer
-    , PrintServer (..)
-    , newPrintServer
+    PrintServer (..),
+    newPrintServer,
 
     -- ** PrintServerFailureInfo
-    , PrintServerFailureInfo (..)
-    , newPrintServerFailureInfo
+    PrintServerFailureInfo (..),
+    newPrintServerFailureInfo,
 
     -- ** PrintServerFailureInfo_ErrorCode
-    , PrintServerFailureInfo_ErrorCode (..)
+    PrintServerFailureInfo_ErrorCode (..),
 
     -- ** Printer
-    , Printer (..)
-    , newPrinter
+    Printer (..),
+    newPrinter,
 
     -- ** PrinterModel
-    , PrinterModel (..)
-    , newPrinterModel
+    PrinterModel (..),
+    newPrinterModel,
 
     -- ** Privilege
-    , Privilege (..)
-    , newPrivilege
+    Privilege (..),
+    newPrivilege,
 
     -- ** Privileges
-    , Privileges (..)
-    , newPrivileges
+    Privileges (..),
+    newPrivileges,
 
     -- ** Role
-    , Role (..)
-    , newRole
+    Role (..),
+    newRole,
 
     -- ** Role_RolePrivilegesItem
-    , Role_RolePrivilegesItem (..)
-    , newRole_RolePrivilegesItem
+    Role_RolePrivilegesItem (..),
+    newRole_RolePrivilegesItem,
 
     -- ** RoleAssignment
-    , RoleAssignment (..)
-    , newRoleAssignment
+    RoleAssignment (..),
+    newRoleAssignment,
 
     -- ** RoleAssignment_AssigneeType
-    , RoleAssignment_AssigneeType (..)
+    RoleAssignment_AssigneeType (..),
 
     -- ** RoleAssignments
-    , RoleAssignments (..)
-    , newRoleAssignments
+    RoleAssignments (..),
+    newRoleAssignments,
 
     -- ** Roles
-    , Roles (..)
-    , newRoles
+    Roles (..),
+    newRoles,
 
     -- ** Schema
-    , Schema (..)
-    , newSchema
+    Schema (..),
+    newSchema,
 
     -- ** SchemaFieldSpec
-    , SchemaFieldSpec (..)
-    , newSchemaFieldSpec
+    SchemaFieldSpec (..),
+    newSchemaFieldSpec,
 
     -- ** SchemaFieldSpec_NumericIndexingSpec
-    , SchemaFieldSpec_NumericIndexingSpec (..)
-    , newSchemaFieldSpec_NumericIndexingSpec
+    SchemaFieldSpec_NumericIndexingSpec (..),
+    newSchemaFieldSpec_NumericIndexingSpec,
 
     -- ** Schemas
-    , Schemas (..)
-    , newSchemas
+    Schemas (..),
+    newSchemas,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** Token
-    , Token (..)
-    , newToken
+    Token (..),
+    newToken,
 
     -- ** Tokens
-    , Tokens (..)
-    , newTokens
+    Tokens (..),
+    newTokens,
 
     -- ** User
-    , User (..)
-    , newUser
+    User (..),
+    newUser,
 
     -- ** User_CustomSchemas
-    , User_CustomSchemas (..)
-    , newUser_CustomSchemas
+    User_CustomSchemas (..),
+    newUser_CustomSchemas,
 
     -- ** UserAbout
-    , UserAbout (..)
-    , newUserAbout
+    UserAbout (..),
+    newUserAbout,
 
     -- ** UserAddress
-    , UserAddress (..)
-    , newUserAddress
+    UserAddress (..),
+    newUserAddress,
 
     -- ** UserAlias
-    , UserAlias (..)
-    , newUserAlias
+    UserAlias (..),
+    newUserAlias,
 
     -- ** UserCustomProperties
-    , UserCustomProperties (..)
-    , newUserCustomProperties
+    UserCustomProperties (..),
+    newUserCustomProperties,
 
     -- ** UserEmail
-    , UserEmail (..)
-    , newUserEmail
+    UserEmail (..),
+    newUserEmail,
 
     -- ** UserEmail_Public_key_encryption_certificates
-    , UserEmail_Public_key_encryption_certificates (..)
-    , newUserEmail_Public_key_encryption_certificates
+    UserEmail_Public_key_encryption_certificates (..),
+    newUserEmail_Public_key_encryption_certificates,
 
     -- ** UserExternalId
-    , UserExternalId (..)
-    , newUserExternalId
+    UserExternalId (..),
+    newUserExternalId,
 
     -- ** UserGender
-    , UserGender (..)
-    , newUserGender
+    UserGender (..),
+    newUserGender,
 
     -- ** UserIm
-    , UserIm (..)
-    , newUserIm
+    UserIm (..),
+    newUserIm,
 
     -- ** UserKeyword
-    , UserKeyword (..)
-    , newUserKeyword
+    UserKeyword (..),
+    newUserKeyword,
 
     -- ** UserLanguage
-    , UserLanguage (..)
-    , newUserLanguage
+    UserLanguage (..),
+    newUserLanguage,
 
     -- ** UserLocation
-    , UserLocation (..)
-    , newUserLocation
+    UserLocation (..),
+    newUserLocation,
 
     -- ** UserMakeAdmin
-    , UserMakeAdmin (..)
-    , newUserMakeAdmin
+    UserMakeAdmin (..),
+    newUserMakeAdmin,
 
     -- ** UserName
-    , UserName (..)
-    , newUserName
+    UserName (..),
+    newUserName,
 
     -- ** UserOrganization
-    , UserOrganization (..)
-    , newUserOrganization
+    UserOrganization (..),
+    newUserOrganization,
 
     -- ** UserPhone
-    , UserPhone (..)
-    , newUserPhone
+    UserPhone (..),
+    newUserPhone,
 
     -- ** UserPhoto
-    , UserPhoto (..)
-    , newUserPhoto
+    UserPhoto (..),
+    newUserPhoto,
 
     -- ** UserPosixAccount
-    , UserPosixAccount (..)
-    , newUserPosixAccount
+    UserPosixAccount (..),
+    newUserPosixAccount,
 
     -- ** UserRelation
-    , UserRelation (..)
-    , newUserRelation
+    UserRelation (..),
+    newUserRelation,
 
     -- ** UserSshPublicKey
-    , UserSshPublicKey (..)
-    , newUserSshPublicKey
+    UserSshPublicKey (..),
+    newUserSshPublicKey,
 
     -- ** UserUndelete
-    , UserUndelete (..)
-    , newUserUndelete
+    UserUndelete (..),
+    newUserUndelete,
 
     -- ** UserWebsite
-    , UserWebsite (..)
-    , newUserWebsite
+    UserWebsite (..),
+    newUserWebsite,
 
     -- ** Users
-    , Users (..)
-    , newUsers
+    Users (..),
+    newUsers,
 
     -- ** VerificationCode
-    , VerificationCode (..)
-    , newVerificationCode
+    VerificationCode (..),
+    newVerificationCode,
 
     -- ** VerificationCodes
-    , VerificationCodes (..)
-    , newVerificationCodes
+    VerificationCodes (..),
+    newVerificationCodes,
 
     -- ** ChromeosdevicesGetProjection
-    , ChromeosdevicesGetProjection (..)
+    ChromeosdevicesGetProjection (..),
 
     -- ** ChromeosdevicesListOrderBy
-    , ChromeosdevicesListOrderBy (..)
+    ChromeosdevicesListOrderBy (..),
 
     -- ** ChromeosdevicesListProjection
-    , ChromeosdevicesListProjection (..)
+    ChromeosdevicesListProjection (..),
 
     -- ** ChromeosdevicesListSortOrder
-    , ChromeosdevicesListSortOrder (..)
+    ChromeosdevicesListSortOrder (..),
 
     -- ** ChromeosdevicesPatchProjection
-    , ChromeosdevicesPatchProjection (..)
+    ChromeosdevicesPatchProjection (..),
 
     -- ** ChromeosdevicesUpdateProjection
-    , ChromeosdevicesUpdateProjection (..)
+    ChromeosdevicesUpdateProjection (..),
 
     -- ** GroupsListOrderBy
-    , GroupsListOrderBy (..)
+    GroupsListOrderBy (..),
 
     -- ** GroupsListSortOrder
-    , GroupsListSortOrder (..)
+    GroupsListSortOrder (..),
 
     -- ** MobiledevicesGetProjection
-    , MobiledevicesGetProjection (..)
+    MobiledevicesGetProjection (..),
 
     -- ** MobiledevicesListOrderBy
-    , MobiledevicesListOrderBy (..)
+    MobiledevicesListOrderBy (..),
 
     -- ** MobiledevicesListProjection
-    , MobiledevicesListProjection (..)
+    MobiledevicesListProjection (..),
 
     -- ** MobiledevicesListSortOrder
-    , MobiledevicesListSortOrder (..)
+    MobiledevicesListSortOrder (..),
 
     -- ** OrgunitsListType
-    , OrgunitsListType (..)
+    OrgunitsListType (..),
 
     -- ** ResourcesBuildingsInsertCoordinatesSource
-    , ResourcesBuildingsInsertCoordinatesSource (..)
+    ResourcesBuildingsInsertCoordinatesSource (..),
 
     -- ** ResourcesBuildingsPatchCoordinatesSource
-    , ResourcesBuildingsPatchCoordinatesSource (..)
+    ResourcesBuildingsPatchCoordinatesSource (..),
 
     -- ** ResourcesBuildingsUpdateCoordinatesSource
-    , ResourcesBuildingsUpdateCoordinatesSource (..)
+    ResourcesBuildingsUpdateCoordinatesSource (..),
 
     -- ** UsersAliasesListEvent
-    , UsersAliasesListEvent (..)
+    UsersAliasesListEvent (..),
 
     -- ** UsersAliasesWatchEvent
-    , UsersAliasesWatchEvent (..)
+    UsersAliasesWatchEvent (..),
 
     -- ** UsersGetProjection
-    , UsersGetProjection (..)
+    UsersGetProjection (..),
 
     -- ** UsersGetViewType
-    , UsersGetViewType (..)
+    UsersGetViewType (..),
 
     -- ** UsersListEvent
-    , UsersListEvent (..)
+    UsersListEvent (..),
 
     -- ** UsersListOrderBy
-    , UsersListOrderBy (..)
+    UsersListOrderBy (..),
 
     -- ** UsersListProjection
-    , UsersListProjection (..)
+    UsersListProjection (..),
 
     -- ** UsersListSortOrder
-    , UsersListSortOrder (..)
+    UsersListSortOrder (..),
 
     -- ** UsersListViewType
-    , UsersListViewType (..)
+    UsersListViewType (..),
 
     -- ** UsersWatchEvent
-    , UsersWatchEvent (..)
+    UsersWatchEvent (..),
 
     -- ** UsersWatchOrderBy
-    , UsersWatchOrderBy (..)
+    UsersWatchOrderBy (..),
 
     -- ** UsersWatchProjection
-    , UsersWatchProjection (..)
+    UsersWatchProjection (..),
 
     -- ** UsersWatchSortOrder
-    , UsersWatchSortOrder (..)
+    UsersWatchSortOrder (..),
 
     -- ** UsersWatchViewType
-    , UsersWatchViewType (..)
-    ) where
+    UsersWatchViewType (..),
+  )
+where
 
 import Gogol.Admin.Directory.Admin.Channels.Stop
 import Gogol.Admin.Directory.Admin.Customer.Devices.Chromeos.BatchChangeStatus

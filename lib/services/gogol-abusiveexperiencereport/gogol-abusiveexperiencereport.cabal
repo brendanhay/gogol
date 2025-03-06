@@ -1,19 +1,24 @@
-cabal-version:         2.2
-name:                  gogol-abusiveexperiencereport
-version:               1.0.0
-synopsis:              Google Abusive Experience Report SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-abusiveexperiencereport
+version:            1.0.0
+synopsis:           Google Abusive Experience Report SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:
+  Brendan Hay <brendan.g.hay+gogol@gmail.com>, Toni Cebrián <toni@tonicebrian.com>
+
+copyright:          Copyright (c) 2015-2025 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    Views Abusive Experience Report data, and gets a list of sites that have a significant number of abusive experiences.
+  Views Abusive Experience Report data, and gets a list of sites that have a significant number of abusive experiences.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -27,34 +32,31 @@ source-repository head
   subdir:   gogol-abusiveexperiencereport
 
 flag field-selectors
-  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-  default: False
-  manual: True
+  description:
+    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+
+  default:     False
+  manual:      True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: GHC2021
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -Werror
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if !flag(field-selectors) && impl(ghc >= 9.2)
+  if (!flag(field-selectors) && impl(ghc >=9.2))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.AbusiveExperienceReport
-    , Gogol.AbusiveExperienceReport.Sites.Get
-    , Gogol.AbusiveExperienceReport.Types
-    , Gogol.AbusiveExperienceReport.ViolatingSites.List
+    Gogol.AbusiveExperienceReport
+    Gogol.AbusiveExperienceReport.Sites.Get
+    Gogol.AbusiveExperienceReport.Types
+    Gogol.AbusiveExperienceReport.ViolatingSites.List
 
   other-modules:
-      Gogol.AbusiveExperienceReport.Internal.Product
-    , Gogol.AbusiveExperienceReport.Internal.Sum
+    Gogol.AbusiveExperienceReport.Internal.Product
+    Gogol.AbusiveExperienceReport.Internal.Sum
 
-  build-depends:
-      gogol-core ^>= 1.0.0
+  build-depends:    gogol-core ^>=1.0.0

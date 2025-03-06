@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.ContainerBuilder
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,575 +27,575 @@
 --
 -- /See:/ <https://cloud.google.com/cloud-build/docs/ Cloud Build API Reference>
 module Gogol.ContainerBuilder
-    (
-    -- * Configuration
-      containerBuilderService
+  ( -- * Configuration
+    containerBuilderService,
 
     -- * OAuth Scopes
-    , CloudPlatform'FullControl
+    CloudPlatform'FullControl,
 
     -- * Resources
 
     -- ** cloudbuild.projects.locations.connections.create
-    , CloudbuildProjectsLocationsConnectionsCreateResource
-    , CloudbuildProjectsLocationsConnectionsCreate (..)
-    , newCloudbuildProjectsLocationsConnectionsCreate
+    CloudbuildProjectsLocationsConnectionsCreateResource,
+    CloudbuildProjectsLocationsConnectionsCreate (..),
+    newCloudbuildProjectsLocationsConnectionsCreate,
 
     -- ** cloudbuild.projects.locations.connections.delete
-    , CloudbuildProjectsLocationsConnectionsDeleteResource
-    , CloudbuildProjectsLocationsConnectionsDelete (..)
-    , newCloudbuildProjectsLocationsConnectionsDelete
+    CloudbuildProjectsLocationsConnectionsDeleteResource,
+    CloudbuildProjectsLocationsConnectionsDelete (..),
+    newCloudbuildProjectsLocationsConnectionsDelete,
 
     -- ** cloudbuild.projects.locations.connections.fetchLinkableRepositories
-    , CloudbuildProjectsLocationsConnectionsFetchLinkableRepositoriesResource
-    , CloudbuildProjectsLocationsConnectionsFetchLinkableRepositories (..)
-    , newCloudbuildProjectsLocationsConnectionsFetchLinkableRepositories
+    CloudbuildProjectsLocationsConnectionsFetchLinkableRepositoriesResource,
+    CloudbuildProjectsLocationsConnectionsFetchLinkableRepositories (..),
+    newCloudbuildProjectsLocationsConnectionsFetchLinkableRepositories,
 
     -- ** cloudbuild.projects.locations.connections.get
-    , CloudbuildProjectsLocationsConnectionsGetResource
-    , CloudbuildProjectsLocationsConnectionsGet (..)
-    , newCloudbuildProjectsLocationsConnectionsGet
+    CloudbuildProjectsLocationsConnectionsGetResource,
+    CloudbuildProjectsLocationsConnectionsGet (..),
+    newCloudbuildProjectsLocationsConnectionsGet,
 
     -- ** cloudbuild.projects.locations.connections.getIamPolicy
-    , CloudbuildProjectsLocationsConnectionsGetIamPolicyResource
-    , CloudbuildProjectsLocationsConnectionsGetIamPolicy (..)
-    , newCloudbuildProjectsLocationsConnectionsGetIamPolicy
+    CloudbuildProjectsLocationsConnectionsGetIamPolicyResource,
+    CloudbuildProjectsLocationsConnectionsGetIamPolicy (..),
+    newCloudbuildProjectsLocationsConnectionsGetIamPolicy,
 
     -- ** cloudbuild.projects.locations.connections.list
-    , CloudbuildProjectsLocationsConnectionsListResource
-    , CloudbuildProjectsLocationsConnectionsList (..)
-    , newCloudbuildProjectsLocationsConnectionsList
+    CloudbuildProjectsLocationsConnectionsListResource,
+    CloudbuildProjectsLocationsConnectionsList (..),
+    newCloudbuildProjectsLocationsConnectionsList,
 
     -- ** cloudbuild.projects.locations.connections.patch
-    , CloudbuildProjectsLocationsConnectionsPatchResource
-    , CloudbuildProjectsLocationsConnectionsPatch (..)
-    , newCloudbuildProjectsLocationsConnectionsPatch
+    CloudbuildProjectsLocationsConnectionsPatchResource,
+    CloudbuildProjectsLocationsConnectionsPatch (..),
+    newCloudbuildProjectsLocationsConnectionsPatch,
 
     -- ** cloudbuild.projects.locations.connections.processWebhook
-    , CloudbuildProjectsLocationsConnectionsProcessWebhookResource
-    , CloudbuildProjectsLocationsConnectionsProcessWebhook (..)
-    , newCloudbuildProjectsLocationsConnectionsProcessWebhook
+    CloudbuildProjectsLocationsConnectionsProcessWebhookResource,
+    CloudbuildProjectsLocationsConnectionsProcessWebhook (..),
+    newCloudbuildProjectsLocationsConnectionsProcessWebhook,
 
     -- ** cloudbuild.projects.locations.connections.repositories.accessReadToken
-    , CloudbuildProjectsLocationsConnectionsRepositoriesAccessReadTokenResource
-    , CloudbuildProjectsLocationsConnectionsRepositoriesAccessReadToken (..)
-    , newCloudbuildProjectsLocationsConnectionsRepositoriesAccessReadToken
+    CloudbuildProjectsLocationsConnectionsRepositoriesAccessReadTokenResource,
+    CloudbuildProjectsLocationsConnectionsRepositoriesAccessReadToken (..),
+    newCloudbuildProjectsLocationsConnectionsRepositoriesAccessReadToken,
 
     -- ** cloudbuild.projects.locations.connections.repositories.accessReadWriteToken
-    , CloudbuildProjectsLocationsConnectionsRepositoriesAccessReadWriteTokenResource
-    , CloudbuildProjectsLocationsConnectionsRepositoriesAccessReadWriteToken (..)
-    , newCloudbuildProjectsLocationsConnectionsRepositoriesAccessReadWriteToken
+    CloudbuildProjectsLocationsConnectionsRepositoriesAccessReadWriteTokenResource,
+    CloudbuildProjectsLocationsConnectionsRepositoriesAccessReadWriteToken (..),
+    newCloudbuildProjectsLocationsConnectionsRepositoriesAccessReadWriteToken,
 
     -- ** cloudbuild.projects.locations.connections.repositories.batchCreate
-    , CloudbuildProjectsLocationsConnectionsRepositoriesBatchCreateResource
-    , CloudbuildProjectsLocationsConnectionsRepositoriesBatchCreate (..)
-    , newCloudbuildProjectsLocationsConnectionsRepositoriesBatchCreate
+    CloudbuildProjectsLocationsConnectionsRepositoriesBatchCreateResource,
+    CloudbuildProjectsLocationsConnectionsRepositoriesBatchCreate (..),
+    newCloudbuildProjectsLocationsConnectionsRepositoriesBatchCreate,
 
     -- ** cloudbuild.projects.locations.connections.repositories.create
-    , CloudbuildProjectsLocationsConnectionsRepositoriesCreateResource
-    , CloudbuildProjectsLocationsConnectionsRepositoriesCreate (..)
-    , newCloudbuildProjectsLocationsConnectionsRepositoriesCreate
+    CloudbuildProjectsLocationsConnectionsRepositoriesCreateResource,
+    CloudbuildProjectsLocationsConnectionsRepositoriesCreate (..),
+    newCloudbuildProjectsLocationsConnectionsRepositoriesCreate,
 
     -- ** cloudbuild.projects.locations.connections.repositories.delete
-    , CloudbuildProjectsLocationsConnectionsRepositoriesDeleteResource
-    , CloudbuildProjectsLocationsConnectionsRepositoriesDelete (..)
-    , newCloudbuildProjectsLocationsConnectionsRepositoriesDelete
+    CloudbuildProjectsLocationsConnectionsRepositoriesDeleteResource,
+    CloudbuildProjectsLocationsConnectionsRepositoriesDelete (..),
+    newCloudbuildProjectsLocationsConnectionsRepositoriesDelete,
 
     -- ** cloudbuild.projects.locations.connections.repositories.fetchGitRefs
-    , CloudbuildProjectsLocationsConnectionsRepositoriesFetchGitRefsResource
-    , CloudbuildProjectsLocationsConnectionsRepositoriesFetchGitRefs (..)
-    , newCloudbuildProjectsLocationsConnectionsRepositoriesFetchGitRefs
+    CloudbuildProjectsLocationsConnectionsRepositoriesFetchGitRefsResource,
+    CloudbuildProjectsLocationsConnectionsRepositoriesFetchGitRefs (..),
+    newCloudbuildProjectsLocationsConnectionsRepositoriesFetchGitRefs,
 
     -- ** cloudbuild.projects.locations.connections.repositories.get
-    , CloudbuildProjectsLocationsConnectionsRepositoriesGetResource
-    , CloudbuildProjectsLocationsConnectionsRepositoriesGet (..)
-    , newCloudbuildProjectsLocationsConnectionsRepositoriesGet
+    CloudbuildProjectsLocationsConnectionsRepositoriesGetResource,
+    CloudbuildProjectsLocationsConnectionsRepositoriesGet (..),
+    newCloudbuildProjectsLocationsConnectionsRepositoriesGet,
 
     -- ** cloudbuild.projects.locations.connections.repositories.list
-    , CloudbuildProjectsLocationsConnectionsRepositoriesListResource
-    , CloudbuildProjectsLocationsConnectionsRepositoriesList (..)
-    , newCloudbuildProjectsLocationsConnectionsRepositoriesList
+    CloudbuildProjectsLocationsConnectionsRepositoriesListResource,
+    CloudbuildProjectsLocationsConnectionsRepositoriesList (..),
+    newCloudbuildProjectsLocationsConnectionsRepositoriesList,
 
     -- ** cloudbuild.projects.locations.connections.setIamPolicy
-    , CloudbuildProjectsLocationsConnectionsSetIamPolicyResource
-    , CloudbuildProjectsLocationsConnectionsSetIamPolicy (..)
-    , newCloudbuildProjectsLocationsConnectionsSetIamPolicy
+    CloudbuildProjectsLocationsConnectionsSetIamPolicyResource,
+    CloudbuildProjectsLocationsConnectionsSetIamPolicy (..),
+    newCloudbuildProjectsLocationsConnectionsSetIamPolicy,
 
     -- ** cloudbuild.projects.locations.connections.testIamPermissions
-    , CloudbuildProjectsLocationsConnectionsTestIamPermissionsResource
-    , CloudbuildProjectsLocationsConnectionsTestIamPermissions (..)
-    , newCloudbuildProjectsLocationsConnectionsTestIamPermissions
+    CloudbuildProjectsLocationsConnectionsTestIamPermissionsResource,
+    CloudbuildProjectsLocationsConnectionsTestIamPermissions (..),
+    newCloudbuildProjectsLocationsConnectionsTestIamPermissions,
 
     -- ** cloudbuild.projects.locations.get
-    , CloudbuildProjectsLocationsGetResource
-    , CloudbuildProjectsLocationsGet (..)
-    , newCloudbuildProjectsLocationsGet
+    CloudbuildProjectsLocationsGetResource,
+    CloudbuildProjectsLocationsGet (..),
+    newCloudbuildProjectsLocationsGet,
 
     -- ** cloudbuild.projects.locations.list
-    , CloudbuildProjectsLocationsListResource
-    , CloudbuildProjectsLocationsList (..)
-    , newCloudbuildProjectsLocationsList
+    CloudbuildProjectsLocationsListResource,
+    CloudbuildProjectsLocationsList (..),
+    newCloudbuildProjectsLocationsList,
 
     -- ** cloudbuild.projects.locations.operations.cancel
-    , CloudbuildProjectsLocationsOperationsCancelResource
-    , CloudbuildProjectsLocationsOperationsCancel (..)
-    , newCloudbuildProjectsLocationsOperationsCancel
+    CloudbuildProjectsLocationsOperationsCancelResource,
+    CloudbuildProjectsLocationsOperationsCancel (..),
+    newCloudbuildProjectsLocationsOperationsCancel,
 
     -- ** cloudbuild.projects.locations.operations.get
-    , CloudbuildProjectsLocationsOperationsGetResource
-    , CloudbuildProjectsLocationsOperationsGet (..)
-    , newCloudbuildProjectsLocationsOperationsGet
+    CloudbuildProjectsLocationsOperationsGetResource,
+    CloudbuildProjectsLocationsOperationsGet (..),
+    newCloudbuildProjectsLocationsOperationsGet,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AuditConfig
-    , AuditConfig (..)
-    , newAuditConfig
+    AuditConfig (..),
+    newAuditConfig,
 
     -- ** AuditLogConfig
-    , AuditLogConfig (..)
-    , newAuditLogConfig
+    AuditLogConfig (..),
+    newAuditLogConfig,
 
     -- ** AuditLogConfig_LogType
-    , AuditLogConfig_LogType (..)
+    AuditLogConfig_LogType (..),
 
     -- ** BatchCreateRepositoriesRequest
-    , BatchCreateRepositoriesRequest (..)
-    , newBatchCreateRepositoriesRequest
+    BatchCreateRepositoriesRequest (..),
+    newBatchCreateRepositoriesRequest,
 
     -- ** BatchCreateRepositoriesResponse
-    , BatchCreateRepositoriesResponse (..)
-    , newBatchCreateRepositoriesResponse
+    BatchCreateRepositoriesResponse (..),
+    newBatchCreateRepositoriesResponse,
 
     -- ** Binding
-    , Binding (..)
-    , newBinding
+    Binding (..),
+    newBinding,
 
     -- ** BitbucketCloudConfig
-    , BitbucketCloudConfig (..)
-    , newBitbucketCloudConfig
+    BitbucketCloudConfig (..),
+    newBitbucketCloudConfig,
 
     -- ** BitbucketDataCenterConfig
-    , BitbucketDataCenterConfig (..)
-    , newBitbucketDataCenterConfig
+    BitbucketDataCenterConfig (..),
+    newBitbucketDataCenterConfig,
 
     -- ** CancelOperationRequest
-    , CancelOperationRequest (..)
-    , newCancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
     -- ** Capabilities
-    , Capabilities (..)
-    , newCapabilities
+    Capabilities (..),
+    newCapabilities,
 
     -- ** ChildStatusReference
-    , ChildStatusReference (..)
-    , newChildStatusReference
+    ChildStatusReference (..),
+    newChildStatusReference,
 
     -- ** ChildStatusReference_Type
-    , ChildStatusReference_Type (..)
+    ChildStatusReference_Type (..),
 
     -- ** Connection
-    , Connection (..)
-    , newConnection
+    Connection (..),
+    newConnection,
 
     -- ** Connection_Annotations
-    , Connection_Annotations (..)
-    , newConnection_Annotations
+    Connection_Annotations (..),
+    newConnection_Annotations,
 
     -- ** CreateRepositoryRequest
-    , CreateRepositoryRequest (..)
-    , newCreateRepositoryRequest
+    CreateRepositoryRequest (..),
+    newCreateRepositoryRequest,
 
     -- ** EmbeddedTask
-    , EmbeddedTask (..)
-    , newEmbeddedTask
+    EmbeddedTask (..),
+    newEmbeddedTask,
 
     -- ** EmbeddedTask_Annotations
-    , EmbeddedTask_Annotations (..)
-    , newEmbeddedTask_Annotations
+    EmbeddedTask_Annotations (..),
+    newEmbeddedTask_Annotations,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** EmptyDirVolumeSource
-    , EmptyDirVolumeSource (..)
-    , newEmptyDirVolumeSource
+    EmptyDirVolumeSource (..),
+    newEmptyDirVolumeSource,
 
     -- ** EnvVar
-    , EnvVar (..)
-    , newEnvVar
+    EnvVar (..),
+    newEnvVar,
 
     -- ** ExecAction
-    , ExecAction (..)
-    , newExecAction
+    ExecAction (..),
+    newExecAction,
 
     -- ** Expr
-    , Expr (..)
-    , newExpr
+    Expr (..),
+    newExpr,
 
     -- ** FetchGitRefsResponse
-    , FetchGitRefsResponse (..)
-    , newFetchGitRefsResponse
+    FetchGitRefsResponse (..),
+    newFetchGitRefsResponse,
 
     -- ** FetchLinkableRepositoriesResponse
-    , FetchLinkableRepositoriesResponse (..)
-    , newFetchLinkableRepositoriesResponse
+    FetchLinkableRepositoriesResponse (..),
+    newFetchLinkableRepositoriesResponse,
 
     -- ** FetchReadTokenRequest
-    , FetchReadTokenRequest (..)
-    , newFetchReadTokenRequest
+    FetchReadTokenRequest (..),
+    newFetchReadTokenRequest,
 
     -- ** FetchReadTokenResponse
-    , FetchReadTokenResponse (..)
-    , newFetchReadTokenResponse
+    FetchReadTokenResponse (..),
+    newFetchReadTokenResponse,
 
     -- ** FetchReadWriteTokenRequest
-    , FetchReadWriteTokenRequest (..)
-    , newFetchReadWriteTokenRequest
+    FetchReadWriteTokenRequest (..),
+    newFetchReadWriteTokenRequest,
 
     -- ** FetchReadWriteTokenResponse
-    , FetchReadWriteTokenResponse (..)
-    , newFetchReadWriteTokenResponse
+    FetchReadWriteTokenResponse (..),
+    newFetchReadWriteTokenResponse,
 
     -- ** GitHubConfig
-    , GitHubConfig (..)
-    , newGitHubConfig
+    GitHubConfig (..),
+    newGitHubConfig,
 
     -- ** GoogleDevtoolsCloudbuildV2Condition
-    , GoogleDevtoolsCloudbuildV2Condition (..)
-    , newGoogleDevtoolsCloudbuildV2Condition
+    GoogleDevtoolsCloudbuildV2Condition (..),
+    newGoogleDevtoolsCloudbuildV2Condition,
 
     -- ** GoogleDevtoolsCloudbuildV2Condition_Severity
-    , GoogleDevtoolsCloudbuildV2Condition_Severity (..)
+    GoogleDevtoolsCloudbuildV2Condition_Severity (..),
 
     -- ** GoogleDevtoolsCloudbuildV2Condition_Status
-    , GoogleDevtoolsCloudbuildV2Condition_Status (..)
+    GoogleDevtoolsCloudbuildV2Condition_Status (..),
 
     -- ** GoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig
-    , GoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig (..)
-    , newGoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig
+    GoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig (..),
+    newGoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig,
 
     -- ** GoogleDevtoolsCloudbuildV2GitLabConfig
-    , GoogleDevtoolsCloudbuildV2GitLabConfig (..)
-    , newGoogleDevtoolsCloudbuildV2GitLabConfig
+    GoogleDevtoolsCloudbuildV2GitLabConfig (..),
+    newGoogleDevtoolsCloudbuildV2GitLabConfig,
 
     -- ** GoogleDevtoolsCloudbuildV2OperationMetadata
-    , GoogleDevtoolsCloudbuildV2OperationMetadata (..)
-    , newGoogleDevtoolsCloudbuildV2OperationMetadata
+    GoogleDevtoolsCloudbuildV2OperationMetadata (..),
+    newGoogleDevtoolsCloudbuildV2OperationMetadata,
 
     -- ** GoogleDevtoolsCloudbuildV2ServiceDirectoryConfig
-    , GoogleDevtoolsCloudbuildV2ServiceDirectoryConfig (..)
-    , newGoogleDevtoolsCloudbuildV2ServiceDirectoryConfig
+    GoogleDevtoolsCloudbuildV2ServiceDirectoryConfig (..),
+    newGoogleDevtoolsCloudbuildV2ServiceDirectoryConfig,
 
     -- ** HttpBody
-    , HttpBody (..)
-    , newHttpBody
+    HttpBody (..),
+    newHttpBody,
 
     -- ** HttpBody_ExtensionsItem
-    , HttpBody_ExtensionsItem (..)
-    , newHttpBody_ExtensionsItem
+    HttpBody_ExtensionsItem (..),
+    newHttpBody_ExtensionsItem,
 
     -- ** InstallationState
-    , InstallationState (..)
-    , newInstallationState
+    InstallationState (..),
+    newInstallationState,
 
     -- ** InstallationState_Stage
-    , InstallationState_Stage (..)
+    InstallationState_Stage (..),
 
     -- ** ListConnectionsResponse
-    , ListConnectionsResponse (..)
-    , newListConnectionsResponse
+    ListConnectionsResponse (..),
+    newListConnectionsResponse,
 
     -- ** ListLocationsResponse
-    , ListLocationsResponse (..)
-    , newListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
 
     -- ** ListRepositoriesResponse
-    , ListRepositoriesResponse (..)
-    , newListRepositoriesResponse
+    ListRepositoriesResponse (..),
+    newListRepositoriesResponse,
 
     -- ** Location
-    , Location (..)
-    , newLocation
+    Location (..),
+    newLocation,
 
     -- ** Location_Labels
-    , Location_Labels (..)
-    , newLocation_Labels
+    Location_Labels (..),
+    newLocation_Labels,
 
     -- ** Location_Metadata
-    , Location_Metadata (..)
-    , newLocation_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
 
     -- ** OAuthCredential
-    , OAuthCredential (..)
-    , newOAuthCredential
+    OAuthCredential (..),
+    newOAuthCredential,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** OperationMetadata
-    , OperationMetadata (..)
-    , newOperationMetadata
+    OperationMetadata (..),
+    newOperationMetadata,
 
     -- ** Param
-    , Param (..)
-    , newParam
+    Param (..),
+    newParam,
 
     -- ** ParamSpec
-    , ParamSpec (..)
-    , newParamSpec
+    ParamSpec (..),
+    newParamSpec,
 
     -- ** ParamSpec_Type
-    , ParamSpec_Type (..)
+    ParamSpec_Type (..),
 
     -- ** ParamValue
-    , ParamValue (..)
-    , newParamValue
+    ParamValue (..),
+    newParamValue,
 
     -- ** ParamValue_ObjectVal
-    , ParamValue_ObjectVal (..)
-    , newParamValue_ObjectVal
+    ParamValue_ObjectVal (..),
+    newParamValue_ObjectVal,
 
     -- ** ParamValue_Type
-    , ParamValue_Type (..)
+    ParamValue_Type (..),
 
     -- ** PipelineRef
-    , PipelineRef (..)
-    , newPipelineRef
+    PipelineRef (..),
+    newPipelineRef,
 
     -- ** PipelineRef_Resolver
-    , PipelineRef_Resolver (..)
+    PipelineRef_Resolver (..),
 
     -- ** PipelineResult
-    , PipelineResult (..)
-    , newPipelineResult
+    PipelineResult (..),
+    newPipelineResult,
 
     -- ** PipelineResult_Type
-    , PipelineResult_Type (..)
+    PipelineResult_Type (..),
 
     -- ** PipelineRun
-    , PipelineRun (..)
-    , newPipelineRun
+    PipelineRun (..),
+    newPipelineRun,
 
     -- ** PipelineRun_Annotations
-    , PipelineRun_Annotations (..)
-    , newPipelineRun_Annotations
+    PipelineRun_Annotations (..),
+    newPipelineRun_Annotations,
 
     -- ** PipelineRun_GcbParams
-    , PipelineRun_GcbParams (..)
-    , newPipelineRun_GcbParams
+    PipelineRun_GcbParams (..),
+    newPipelineRun_GcbParams,
 
     -- ** PipelineRun_PipelineRunStatus
-    , PipelineRun_PipelineRunStatus (..)
+    PipelineRun_PipelineRunStatus (..),
 
     -- ** PipelineRunResult
-    , PipelineRunResult (..)
-    , newPipelineRunResult
+    PipelineRunResult (..),
+    newPipelineRunResult,
 
     -- ** PipelineSpec
-    , PipelineSpec (..)
-    , newPipelineSpec
+    PipelineSpec (..),
+    newPipelineSpec,
 
     -- ** PipelineTask
-    , PipelineTask (..)
-    , newPipelineTask
+    PipelineTask (..),
+    newPipelineTask,
 
     -- ** PipelineWorkspaceDeclaration
-    , PipelineWorkspaceDeclaration (..)
-    , newPipelineWorkspaceDeclaration
+    PipelineWorkspaceDeclaration (..),
+    newPipelineWorkspaceDeclaration,
 
     -- ** Policy
-    , Policy (..)
-    , newPolicy
+    Policy (..),
+    newPolicy,
 
     -- ** Probe
-    , Probe (..)
-    , newProbe
+    Probe (..),
+    newProbe,
 
     -- ** PropertySpec
-    , PropertySpec (..)
-    , newPropertySpec
+    PropertySpec (..),
+    newPropertySpec,
 
     -- ** PropertySpec_Type
-    , PropertySpec_Type (..)
+    PropertySpec_Type (..),
 
     -- ** Provenance
-    , Provenance (..)
-    , newProvenance
+    Provenance (..),
+    newProvenance,
 
     -- ** Provenance_Enabled
-    , Provenance_Enabled (..)
+    Provenance_Enabled (..),
 
     -- ** Provenance_Region
-    , Provenance_Region (..)
+    Provenance_Region (..),
 
     -- ** Provenance_Storage
-    , Provenance_Storage (..)
+    Provenance_Storage (..),
 
     -- ** Repository
-    , Repository (..)
-    , newRepository
+    Repository (..),
+    newRepository,
 
     -- ** Repository_Annotations
-    , Repository_Annotations (..)
-    , newRepository_Annotations
+    Repository_Annotations (..),
+    newRepository_Annotations,
 
     -- ** ResultValue
-    , ResultValue (..)
-    , newResultValue
+    ResultValue (..),
+    newResultValue,
 
     -- ** ResultValue_ObjectVal
-    , ResultValue_ObjectVal (..)
-    , newResultValue_ObjectVal
+    ResultValue_ObjectVal (..),
+    newResultValue_ObjectVal,
 
     -- ** ResultValue_Type
-    , ResultValue_Type (..)
+    ResultValue_Type (..),
 
     -- ** RunWorkflowCustomOperationMetadata
-    , RunWorkflowCustomOperationMetadata (..)
-    , newRunWorkflowCustomOperationMetadata
+    RunWorkflowCustomOperationMetadata (..),
+    newRunWorkflowCustomOperationMetadata,
 
     -- ** SecretVolumeSource
-    , SecretVolumeSource (..)
-    , newSecretVolumeSource
+    SecretVolumeSource (..),
+    newSecretVolumeSource,
 
     -- ** Security
-    , Security (..)
-    , newSecurity
+    Security (..),
+    newSecurity,
 
     -- ** Security_PrivilegeMode
-    , Security_PrivilegeMode (..)
+    Security_PrivilegeMode (..),
 
     -- ** SecurityContext
-    , SecurityContext (..)
-    , newSecurityContext
+    SecurityContext (..),
+    newSecurityContext,
 
     -- ** SetIamPolicyRequest
-    , SetIamPolicyRequest (..)
-    , newSetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
 
     -- ** Sidecar
-    , Sidecar (..)
-    , newSidecar
+    Sidecar (..),
+    newSidecar,
 
     -- ** SkippedTask
-    , SkippedTask (..)
-    , newSkippedTask
+    SkippedTask (..),
+    newSkippedTask,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** Step
-    , Step (..)
-    , newStep
+    Step (..),
+    newStep,
 
     -- ** Step_OnError
-    , Step_OnError (..)
+    Step_OnError (..),
 
     -- ** StepRef
-    , StepRef (..)
-    , newStepRef
+    StepRef (..),
+    newStepRef,
 
     -- ** StepRef_Resolver
-    , StepRef_Resolver (..)
+    StepRef_Resolver (..),
 
     -- ** StepTemplate
-    , StepTemplate (..)
-    , newStepTemplate
+    StepTemplate (..),
+    newStepTemplate,
 
     -- ** TaskRef
-    , TaskRef (..)
-    , newTaskRef
+    TaskRef (..),
+    newTaskRef,
 
     -- ** TaskRef_Resolver
-    , TaskRef_Resolver (..)
+    TaskRef_Resolver (..),
 
     -- ** TaskResult
-    , TaskResult (..)
-    , newTaskResult
+    TaskResult (..),
+    newTaskResult,
 
     -- ** TaskResult_Properties
-    , TaskResult_Properties (..)
-    , newTaskResult_Properties
+    TaskResult_Properties (..),
+    newTaskResult_Properties,
 
     -- ** TaskResult_Type
-    , TaskResult_Type (..)
+    TaskResult_Type (..),
 
     -- ** TaskSpec
-    , TaskSpec (..)
-    , newTaskSpec
+    TaskSpec (..),
+    newTaskSpec,
 
     -- ** TaskSpec_ManagedSidecarsItem
-    , TaskSpec_ManagedSidecarsItem (..)
+    TaskSpec_ManagedSidecarsItem (..),
 
     -- ** TestIamPermissionsRequest
-    , TestIamPermissionsRequest (..)
-    , newTestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
 
     -- ** TestIamPermissionsResponse
-    , TestIamPermissionsResponse (..)
-    , newTestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
 
     -- ** TimeoutFields
-    , TimeoutFields (..)
-    , newTimeoutFields
+    TimeoutFields (..),
+    newTimeoutFields,
 
     -- ** UserCredential
-    , UserCredential (..)
-    , newUserCredential
+    UserCredential (..),
+    newUserCredential,
 
     -- ** VolumeMount
-    , VolumeMount (..)
-    , newVolumeMount
+    VolumeMount (..),
+    newVolumeMount,
 
     -- ** VolumeSource
-    , VolumeSource (..)
-    , newVolumeSource
+    VolumeSource (..),
+    newVolumeSource,
 
     -- ** WhenExpression
-    , WhenExpression (..)
-    , newWhenExpression
+    WhenExpression (..),
+    newWhenExpression,
 
     -- ** WhenExpression_ExpressionOperator
-    , WhenExpression_ExpressionOperator (..)
+    WhenExpression_ExpressionOperator (..),
 
     -- ** Worker
-    , Worker (..)
-    , newWorker
+    Worker (..),
+    newWorker,
 
     -- ** WorkspaceBinding
-    , WorkspaceBinding (..)
-    , newWorkspaceBinding
+    WorkspaceBinding (..),
+    newWorkspaceBinding,
 
     -- ** WorkspaceDeclaration
-    , WorkspaceDeclaration (..)
-    , newWorkspaceDeclaration
+    WorkspaceDeclaration (..),
+    newWorkspaceDeclaration,
 
     -- ** WorkspacePipelineTaskBinding
-    , WorkspacePipelineTaskBinding (..)
-    , newWorkspacePipelineTaskBinding
+    WorkspacePipelineTaskBinding (..),
+    newWorkspacePipelineTaskBinding,
 
     -- ** ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType
-    , ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType (..)
-    ) where
+    ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType (..),
+  )
+where
 
 import Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Connections.Create
 import Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Connections.Delete

@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.CustomSearch.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.CustomSearch.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * CseListImgColorType
     CseListImgColorType
-      (
-        CseListImgColorType_ImgColorTypeUndefined,
+      ( CseListImgColorType_ImgColorTypeUndefined,
         CseListImgColorType_Mono,
         CseListImgColorType_Gray,
         CseListImgColorType_Color,
@@ -51,8 +42,7 @@ module Gogol.CustomSearch.Internal.Sum
 
     -- * CseListImgDominantColor
     CseListImgDominantColor
-      (
-        CseListImgDominantColor_ImgDominantColorUndefined,
+      ( CseListImgDominantColor_ImgDominantColorUndefined,
         CseListImgDominantColor_Black,
         CseListImgDominantColor_Blue,
         CseListImgDominantColor_Brown,
@@ -70,8 +60,7 @@ module Gogol.CustomSearch.Internal.Sum
 
     -- * CseListImgSize
     CseListImgSize
-      (
-        CseListImgSize_ImgSizeUndefined,
+      ( CseListImgSize_ImgSizeUndefined,
         CseListImgSize_Huge,
         CseListImgSize_Icon,
         CseListImgSize_Large,
@@ -84,8 +73,7 @@ module Gogol.CustomSearch.Internal.Sum
 
     -- * CseListImgType
     CseListImgType
-      (
-        CseListImgType_ImgTypeUndefined,
+      ( CseListImgType_ImgTypeUndefined,
         CseListImgType_Clipart,
         CseListImgType_Face,
         CseListImgType_Lineart,
@@ -97,8 +85,7 @@ module Gogol.CustomSearch.Internal.Sum
 
     -- * CseListSafe
     CseListSafe
-      (
-        CseListSafe_SafeUndefined,
+      ( CseListSafe_SafeUndefined,
         CseListSafe_Active,
         CseListSafe_High,
         CseListSafe_Medium,
@@ -108,16 +95,14 @@ module Gogol.CustomSearch.Internal.Sum
 
     -- * CseListSearchType
     CseListSearchType
-      (
-        CseListSearchType_SearchTypeUndefined,
+      ( CseListSearchType_SearchTypeUndefined,
         CseListSearchType_Image,
         ..
       ),
 
     -- * CseListSiteSearchFilter
     CseListSiteSearchFilter
-      (
-        CseListSiteSearchFilter_SiteSearchFilterUndefined,
+      ( CseListSiteSearchFilter_SiteSearchFilterUndefined,
         CseListSiteSearchFilter_E,
         CseListSiteSearchFilter_I,
         ..
@@ -125,8 +110,7 @@ module Gogol.CustomSearch.Internal.Sum
 
     -- * CseSiterestrictListImgColorType
     CseSiterestrictListImgColorType
-      (
-        CseSiterestrictListImgColorType_ImgColorTypeUndefined,
+      ( CseSiterestrictListImgColorType_ImgColorTypeUndefined,
         CseSiterestrictListImgColorType_Mono,
         CseSiterestrictListImgColorType_Gray,
         CseSiterestrictListImgColorType_Color,
@@ -136,8 +120,7 @@ module Gogol.CustomSearch.Internal.Sum
 
     -- * CseSiterestrictListImgDominantColor
     CseSiterestrictListImgDominantColor
-      (
-        CseSiterestrictListImgDominantColor_ImgDominantColorUndefined,
+      ( CseSiterestrictListImgDominantColor_ImgDominantColorUndefined,
         CseSiterestrictListImgDominantColor_Black,
         CseSiterestrictListImgDominantColor_Blue,
         CseSiterestrictListImgDominantColor_Brown,
@@ -155,8 +138,7 @@ module Gogol.CustomSearch.Internal.Sum
 
     -- * CseSiterestrictListImgSize
     CseSiterestrictListImgSize
-      (
-        CseSiterestrictListImgSize_ImgSizeUndefined,
+      ( CseSiterestrictListImgSize_ImgSizeUndefined,
         CseSiterestrictListImgSize_Huge,
         CseSiterestrictListImgSize_Icon,
         CseSiterestrictListImgSize_Large,
@@ -169,8 +151,7 @@ module Gogol.CustomSearch.Internal.Sum
 
     -- * CseSiterestrictListImgType
     CseSiterestrictListImgType
-      (
-        CseSiterestrictListImgType_ImgTypeUndefined,
+      ( CseSiterestrictListImgType_ImgTypeUndefined,
         CseSiterestrictListImgType_Clipart,
         CseSiterestrictListImgType_Face,
         CseSiterestrictListImgType_Lineart,
@@ -182,8 +163,7 @@ module Gogol.CustomSearch.Internal.Sum
 
     -- * CseSiterestrictListSafe
     CseSiterestrictListSafe
-      (
-        CseSiterestrictListSafe_SafeUndefined,
+      ( CseSiterestrictListSafe_SafeUndefined,
         CseSiterestrictListSafe_Active,
         CseSiterestrictListSafe_High,
         CseSiterestrictListSafe_Medium,
@@ -193,36 +173,35 @@ module Gogol.CustomSearch.Internal.Sum
 
     -- * CseSiterestrictListSearchType
     CseSiterestrictListSearchType
-      (
-        CseSiterestrictListSearchType_SearchTypeUndefined,
+      ( CseSiterestrictListSearchType_SearchTypeUndefined,
         CseSiterestrictListSearchType_Image,
         ..
       ),
 
     -- * CseSiterestrictListSiteSearchFilter
     CseSiterestrictListSiteSearchFilter
-      (
-        CseSiterestrictListSiteSearchFilter_SiteSearchFilterUndefined,
+      ( CseSiterestrictListSiteSearchFilter_SiteSearchFilterUndefined,
         CseSiterestrictListSiteSearchFilter_E,
         CseSiterestrictListSiteSearchFilter_I,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -235,20 +214,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | Returns black and white, grayscale, transparent, or color images. Acceptable values are: * @\"color\"@ * @\"gray\"@ * @\"mono\"@: black and white * @\"trans\"@: transparent background
-newtype CseListImgColorType = CseListImgColorType { fromCseListImgColorType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CseListImgColorType = CseListImgColorType {fromCseListImgColorType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No image color type specified.
 pattern CseListImgColorType_ImgColorTypeUndefined :: CseListImgColorType
@@ -276,20 +256,21 @@ pattern CseListImgColorType_Trans = CseListImgColorType "trans"
   CseListImgColorType_Gray,
   CseListImgColorType_Color,
   CseListImgColorType_Trans,
-  CseListImgColorType #-}
+  CseListImgColorType
+  #-}
 
 -- | Returns images of a specific dominant color. Acceptable values are: * @\"black\"@ * @\"blue\"@ * @\"brown\"@ * @\"gray\"@ * @\"green\"@ * @\"orange\"@ * @\"pink\"@ * @\"purple\"@ * @\"red\"@ * @\"teal\"@ * @\"white\"@ * @\"yellow\"@
-newtype CseListImgDominantColor = CseListImgDominantColor { fromCseListImgDominantColor :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CseListImgDominantColor = CseListImgDominantColor {fromCseListImgDominantColor :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No dominant color specified.
 pattern CseListImgDominantColor_ImgDominantColorUndefined :: CseListImgDominantColor
@@ -357,20 +338,21 @@ pattern CseListImgDominantColor_Yellow = CseListImgDominantColor "yellow"
   CseListImgDominantColor_Teal,
   CseListImgDominantColor_White,
   CseListImgDominantColor_Yellow,
-  CseListImgDominantColor #-}
+  CseListImgDominantColor
+  #-}
 
 -- | Returns images of a specified size. Acceptable values are: * @\"huge\"@ * @\"icon\"@ * @\"large\"@ * @\"medium\"@ * @\"small\"@ * @\"xlarge\"@ * @\"xxlarge\"@
-newtype CseListImgSize = CseListImgSize { fromCseListImgSize :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CseListImgSize = CseListImgSize {fromCseListImgSize :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No image size specified.
 pattern CseListImgSize_ImgSizeUndefined :: CseListImgSize
@@ -413,20 +395,21 @@ pattern CseListImgSize_Xxlarge = CseListImgSize "XXLARGE"
   CseListImgSize_Small,
   CseListImgSize_Xlarge,
   CseListImgSize_Xxlarge,
-  CseListImgSize #-}
+  CseListImgSize
+  #-}
 
 -- | Returns images of a type. Acceptable values are: * @\"clipart\"@ * @\"face\"@ * @\"lineart\"@ * @\"stock\"@ * @\"photo\"@ * @\"animated\"@
-newtype CseListImgType = CseListImgType { fromCseListImgType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CseListImgType = CseListImgType {fromCseListImgType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No image type specified.
 pattern CseListImgType_ImgTypeUndefined :: CseListImgType
@@ -464,20 +447,21 @@ pattern CseListImgType_Animated = CseListImgType "animated"
   CseListImgType_Stock,
   CseListImgType_Photo,
   CseListImgType_Animated,
-  CseListImgType #-}
+  CseListImgType
+  #-}
 
 -- | Search safety level. Acceptable values are: * @\"active\"@: Enables SafeSearch filtering. * @\"off\"@: Disables SafeSearch filtering. (default)
-newtype CseListSafe = CseListSafe { fromCseListSafe :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CseListSafe = CseListSafe {fromCseListSafe :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | SafeSearch mode unspecified. (Falls back to engine\'s configuration.)
 pattern CseListSafe_SafeUndefined :: CseListSafe
@@ -505,20 +489,21 @@ pattern CseListSafe_Off = CseListSafe "off"
   CseListSafe_High,
   CseListSafe_Medium,
   CseListSafe_Off,
-  CseListSafe #-}
+  CseListSafe
+  #-}
 
 -- | Specifies the search type: @image@. If unspecified, results are limited to webpages. Acceptable values are: * @\"image\"@: custom image search.
-newtype CseListSearchType = CseListSearchType { fromCseListSearchType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CseListSearchType = CseListSearchType {fromCseListSearchType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Search type unspecified (defaults to web search).
 pattern CseListSearchType_SearchTypeUndefined :: CseListSearchType
@@ -531,20 +516,21 @@ pattern CseListSearchType_Image = CseListSearchType "image"
 {-# COMPLETE
   CseListSearchType_SearchTypeUndefined,
   CseListSearchType_Image,
-  CseListSearchType #-}
+  CseListSearchType
+  #-}
 
 -- | Controls whether to include or exclude results from the site named in the @siteSearch@ parameter. Acceptable values are: * @\"e\"@: exclude * @\"i\"@: include
-newtype CseListSiteSearchFilter = CseListSiteSearchFilter { fromCseListSiteSearchFilter :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CseListSiteSearchFilter = CseListSiteSearchFilter {fromCseListSiteSearchFilter :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Filter mode unspecified.
 pattern CseListSiteSearchFilter_SiteSearchFilterUndefined :: CseListSiteSearchFilter
@@ -562,20 +548,21 @@ pattern CseListSiteSearchFilter_I = CseListSiteSearchFilter "i"
   CseListSiteSearchFilter_SiteSearchFilterUndefined,
   CseListSiteSearchFilter_E,
   CseListSiteSearchFilter_I,
-  CseListSiteSearchFilter #-}
+  CseListSiteSearchFilter
+  #-}
 
 -- | Returns black and white, grayscale, transparent, or color images. Acceptable values are: * @\"color\"@ * @\"gray\"@ * @\"mono\"@: black and white * @\"trans\"@: transparent background
-newtype CseSiterestrictListImgColorType = CseSiterestrictListImgColorType { fromCseSiterestrictListImgColorType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CseSiterestrictListImgColorType = CseSiterestrictListImgColorType {fromCseSiterestrictListImgColorType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No image color type specified.
 pattern CseSiterestrictListImgColorType_ImgColorTypeUndefined :: CseSiterestrictListImgColorType
@@ -603,20 +590,21 @@ pattern CseSiterestrictListImgColorType_Trans = CseSiterestrictListImgColorType 
   CseSiterestrictListImgColorType_Gray,
   CseSiterestrictListImgColorType_Color,
   CseSiterestrictListImgColorType_Trans,
-  CseSiterestrictListImgColorType #-}
+  CseSiterestrictListImgColorType
+  #-}
 
 -- | Returns images of a specific dominant color. Acceptable values are: * @\"black\"@ * @\"blue\"@ * @\"brown\"@ * @\"gray\"@ * @\"green\"@ * @\"orange\"@ * @\"pink\"@ * @\"purple\"@ * @\"red\"@ * @\"teal\"@ * @\"white\"@ * @\"yellow\"@
-newtype CseSiterestrictListImgDominantColor = CseSiterestrictListImgDominantColor { fromCseSiterestrictListImgDominantColor :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CseSiterestrictListImgDominantColor = CseSiterestrictListImgDominantColor {fromCseSiterestrictListImgDominantColor :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No dominant color specified.
 pattern CseSiterestrictListImgDominantColor_ImgDominantColorUndefined :: CseSiterestrictListImgDominantColor
@@ -684,20 +672,21 @@ pattern CseSiterestrictListImgDominantColor_Yellow = CseSiterestrictListImgDomin
   CseSiterestrictListImgDominantColor_Teal,
   CseSiterestrictListImgDominantColor_White,
   CseSiterestrictListImgDominantColor_Yellow,
-  CseSiterestrictListImgDominantColor #-}
+  CseSiterestrictListImgDominantColor
+  #-}
 
 -- | Returns images of a specified size. Acceptable values are: * @\"huge\"@ * @\"icon\"@ * @\"large\"@ * @\"medium\"@ * @\"small\"@ * @\"xlarge\"@ * @\"xxlarge\"@
-newtype CseSiterestrictListImgSize = CseSiterestrictListImgSize { fromCseSiterestrictListImgSize :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CseSiterestrictListImgSize = CseSiterestrictListImgSize {fromCseSiterestrictListImgSize :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No image size specified.
 pattern CseSiterestrictListImgSize_ImgSizeUndefined :: CseSiterestrictListImgSize
@@ -740,20 +729,21 @@ pattern CseSiterestrictListImgSize_Xxlarge = CseSiterestrictListImgSize "XXLARGE
   CseSiterestrictListImgSize_Small,
   CseSiterestrictListImgSize_Xlarge,
   CseSiterestrictListImgSize_Xxlarge,
-  CseSiterestrictListImgSize #-}
+  CseSiterestrictListImgSize
+  #-}
 
 -- | Returns images of a type. Acceptable values are: * @\"clipart\"@ * @\"face\"@ * @\"lineart\"@ * @\"stock\"@ * @\"photo\"@ * @\"animated\"@
-newtype CseSiterestrictListImgType = CseSiterestrictListImgType { fromCseSiterestrictListImgType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CseSiterestrictListImgType = CseSiterestrictListImgType {fromCseSiterestrictListImgType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No image type specified.
 pattern CseSiterestrictListImgType_ImgTypeUndefined :: CseSiterestrictListImgType
@@ -791,20 +781,21 @@ pattern CseSiterestrictListImgType_Animated = CseSiterestrictListImgType "animat
   CseSiterestrictListImgType_Stock,
   CseSiterestrictListImgType_Photo,
   CseSiterestrictListImgType_Animated,
-  CseSiterestrictListImgType #-}
+  CseSiterestrictListImgType
+  #-}
 
 -- | Search safety level. Acceptable values are: * @\"active\"@: Enables SafeSearch filtering. * @\"off\"@: Disables SafeSearch filtering. (default)
-newtype CseSiterestrictListSafe = CseSiterestrictListSafe { fromCseSiterestrictListSafe :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CseSiterestrictListSafe = CseSiterestrictListSafe {fromCseSiterestrictListSafe :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | SafeSearch mode unspecified. (Falls back to engine\'s configuration.)
 pattern CseSiterestrictListSafe_SafeUndefined :: CseSiterestrictListSafe
@@ -832,20 +823,21 @@ pattern CseSiterestrictListSafe_Off = CseSiterestrictListSafe "off"
   CseSiterestrictListSafe_High,
   CseSiterestrictListSafe_Medium,
   CseSiterestrictListSafe_Off,
-  CseSiterestrictListSafe #-}
+  CseSiterestrictListSafe
+  #-}
 
 -- | Specifies the search type: @image@. If unspecified, results are limited to webpages. Acceptable values are: * @\"image\"@: custom image search.
-newtype CseSiterestrictListSearchType = CseSiterestrictListSearchType { fromCseSiterestrictListSearchType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CseSiterestrictListSearchType = CseSiterestrictListSearchType {fromCseSiterestrictListSearchType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Search type unspecified (defaults to web search).
 pattern CseSiterestrictListSearchType_SearchTypeUndefined :: CseSiterestrictListSearchType
@@ -858,20 +850,21 @@ pattern CseSiterestrictListSearchType_Image = CseSiterestrictListSearchType "ima
 {-# COMPLETE
   CseSiterestrictListSearchType_SearchTypeUndefined,
   CseSiterestrictListSearchType_Image,
-  CseSiterestrictListSearchType #-}
+  CseSiterestrictListSearchType
+  #-}
 
 -- | Controls whether to include or exclude results from the site named in the @siteSearch@ parameter. Acceptable values are: * @\"e\"@: exclude * @\"i\"@: include
-newtype CseSiterestrictListSiteSearchFilter = CseSiterestrictListSiteSearchFilter { fromCseSiterestrictListSiteSearchFilter :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CseSiterestrictListSiteSearchFilter = CseSiterestrictListSiteSearchFilter {fromCseSiterestrictListSiteSearchFilter :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Filter mode unspecified.
 pattern CseSiterestrictListSiteSearchFilter_SiteSearchFilterUndefined :: CseSiterestrictListSiteSearchFilter
@@ -889,4 +882,5 @@ pattern CseSiterestrictListSiteSearchFilter_I = CseSiterestrictListSiteSearchFil
   CseSiterestrictListSiteSearchFilter_SiteSearchFilterUndefined,
   CseSiterestrictListSiteSearchFilter_E,
   CseSiterestrictListSiteSearchFilter_I,
-  CseSiterestrictListSiteSearchFilter #-}
+  CseSiterestrictListSiteSearchFilter
+  #-}

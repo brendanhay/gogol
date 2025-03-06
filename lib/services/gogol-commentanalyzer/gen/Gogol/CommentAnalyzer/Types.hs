@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,101 +16,102 @@
 
 -- |
 -- Module      : Gogol.CommentAnalyzer.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.CommentAnalyzer.Types
-    (
-    -- * Configuration
-      commentAnalyzerService
+  ( -- * Configuration
+    commentAnalyzerService,
 
     -- * OAuth Scopes
-    , Userinfo'Email
+    Userinfo'Email,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AnalyzeCommentRequest
-    , AnalyzeCommentRequest (..)
-    , newAnalyzeCommentRequest
+    AnalyzeCommentRequest (..),
+    newAnalyzeCommentRequest,
 
     -- ** AnalyzeCommentRequest_RequestedAttributes
-    , AnalyzeCommentRequest_RequestedAttributes (..)
-    , newAnalyzeCommentRequest_RequestedAttributes
+    AnalyzeCommentRequest_RequestedAttributes (..),
+    newAnalyzeCommentRequest_RequestedAttributes,
 
     -- ** AnalyzeCommentResponse
-    , AnalyzeCommentResponse (..)
-    , newAnalyzeCommentResponse
+    AnalyzeCommentResponse (..),
+    newAnalyzeCommentResponse,
 
     -- ** AnalyzeCommentResponse_AttributeScores
-    , AnalyzeCommentResponse_AttributeScores (..)
-    , newAnalyzeCommentResponse_AttributeScores
+    AnalyzeCommentResponse_AttributeScores (..),
+    newAnalyzeCommentResponse_AttributeScores,
 
     -- ** ArticleAndParentComment
-    , ArticleAndParentComment (..)
-    , newArticleAndParentComment
+    ArticleAndParentComment (..),
+    newArticleAndParentComment,
 
     -- ** AttributeParameters
-    , AttributeParameters (..)
-    , newAttributeParameters
+    AttributeParameters (..),
+    newAttributeParameters,
 
     -- ** AttributeParameters_ScoreType
-    , AttributeParameters_ScoreType (..)
+    AttributeParameters_ScoreType (..),
 
     -- ** AttributeScores
-    , AttributeScores (..)
-    , newAttributeScores
+    AttributeScores (..),
+    newAttributeScores,
 
     -- ** Context
-    , Context (..)
-    , newContext
+    Context (..),
+    newContext,
 
     -- ** Score
-    , Score (..)
-    , newScore
+    Score (..),
+    newScore,
 
     -- ** Score_Type
-    , Score_Type (..)
+    Score_Type (..),
 
     -- ** SpanScore
-    , SpanScore (..)
-    , newSpanScore
+    SpanScore (..),
+    newSpanScore,
 
     -- ** SuggestCommentScoreRequest
-    , SuggestCommentScoreRequest (..)
-    , newSuggestCommentScoreRequest
+    SuggestCommentScoreRequest (..),
+    newSuggestCommentScoreRequest,
 
     -- ** SuggestCommentScoreRequest_AttributeScores
-    , SuggestCommentScoreRequest_AttributeScores (..)
-    , newSuggestCommentScoreRequest_AttributeScores
+    SuggestCommentScoreRequest_AttributeScores (..),
+    newSuggestCommentScoreRequest_AttributeScores,
 
     -- ** SuggestCommentScoreResponse
-    , SuggestCommentScoreResponse (..)
-    , newSuggestCommentScoreResponse
+    SuggestCommentScoreResponse (..),
+    newSuggestCommentScoreResponse,
 
     -- ** TextEntry
-    , TextEntry (..)
-    , newTextEntry
+    TextEntry (..),
+    newTextEntry,
 
     -- ** TextEntry_Type
-    , TextEntry_Type (..)
-    ) where
+    TextEntry_Type (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.CommentAnalyzer.Internal.Product
 import Gogol.CommentAnalyzer.Internal.Sum
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1alpha1@ of the Perspective Comment Analyzer API. This contains the host and root path used as a starting point for constructing service requests.
 commentAnalyzerService :: Core.ServiceConfig
-commentAnalyzerService
-  = Core.defaultService
-      (Core.ServiceId "commentanalyzer:v1alpha1")
-      "commentanalyzer.googleapis.com"
+commentAnalyzerService =
+  Core.defaultService
+    (Core.ServiceId "commentanalyzer:v1alpha1")
+    "commentanalyzer.googleapis.com"
 
 -- | View your email address
-type Userinfo'Email = "https://www.googleapis.com/auth/userinfo.email"
+type Userinfo'Email =
+  "https://www.googleapis.com/auth/userinfo.email"

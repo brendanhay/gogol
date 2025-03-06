@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.AccessApproval
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,231 +27,231 @@
 --
 -- /See:/ <https://cloud.google.com/assured-workloads/access-approval/docs Access Approval API Reference>
 module Gogol.AccessApproval
-    (
-    -- * Configuration
-      accessApprovalService
+  ( -- * Configuration
+    accessApprovalService,
 
     -- * OAuth Scopes
-    , CloudPlatform'FullControl
+    CloudPlatform'FullControl,
 
     -- * Resources
 
     -- ** accessapproval.folders.approvalRequests.approve
-    , AccessApprovalFoldersApprovalRequestsApproveResource
-    , AccessApprovalFoldersApprovalRequestsApprove (..)
-    , newAccessApprovalFoldersApprovalRequestsApprove
+    AccessApprovalFoldersApprovalRequestsApproveResource,
+    AccessApprovalFoldersApprovalRequestsApprove (..),
+    newAccessApprovalFoldersApprovalRequestsApprove,
 
     -- ** accessapproval.folders.approvalRequests.dismiss
-    , AccessApprovalFoldersApprovalRequestsDismissResource
-    , AccessApprovalFoldersApprovalRequestsDismiss (..)
-    , newAccessApprovalFoldersApprovalRequestsDismiss
+    AccessApprovalFoldersApprovalRequestsDismissResource,
+    AccessApprovalFoldersApprovalRequestsDismiss (..),
+    newAccessApprovalFoldersApprovalRequestsDismiss,
 
     -- ** accessapproval.folders.approvalRequests.get
-    , AccessApprovalFoldersApprovalRequestsGetResource
-    , AccessApprovalFoldersApprovalRequestsGet (..)
-    , newAccessApprovalFoldersApprovalRequestsGet
+    AccessApprovalFoldersApprovalRequestsGetResource,
+    AccessApprovalFoldersApprovalRequestsGet (..),
+    newAccessApprovalFoldersApprovalRequestsGet,
 
     -- ** accessapproval.folders.approvalRequests.invalidate
-    , AccessApprovalFoldersApprovalRequestsInvalidateResource
-    , AccessApprovalFoldersApprovalRequestsInvalidate (..)
-    , newAccessApprovalFoldersApprovalRequestsInvalidate
+    AccessApprovalFoldersApprovalRequestsInvalidateResource,
+    AccessApprovalFoldersApprovalRequestsInvalidate (..),
+    newAccessApprovalFoldersApprovalRequestsInvalidate,
 
     -- ** accessapproval.folders.approvalRequests.list
-    , AccessApprovalFoldersApprovalRequestsListResource
-    , AccessApprovalFoldersApprovalRequestsList (..)
-    , newAccessApprovalFoldersApprovalRequestsList
+    AccessApprovalFoldersApprovalRequestsListResource,
+    AccessApprovalFoldersApprovalRequestsList (..),
+    newAccessApprovalFoldersApprovalRequestsList,
 
     -- ** accessapproval.folders.deleteAccessApprovalSettings
-    , AccessApprovalFoldersDeleteAccessApprovalSettingsResource
-    , AccessApprovalFoldersDeleteAccessApprovalSettings (..)
-    , newAccessApprovalFoldersDeleteAccessApprovalSettings
+    AccessApprovalFoldersDeleteAccessApprovalSettingsResource,
+    AccessApprovalFoldersDeleteAccessApprovalSettings (..),
+    newAccessApprovalFoldersDeleteAccessApprovalSettings,
 
     -- ** accessapproval.folders.getAccessApprovalSettings
-    , AccessApprovalFoldersGetAccessApprovalSettingsResource
-    , AccessApprovalFoldersGetAccessApprovalSettings (..)
-    , newAccessApprovalFoldersGetAccessApprovalSettings
+    AccessApprovalFoldersGetAccessApprovalSettingsResource,
+    AccessApprovalFoldersGetAccessApprovalSettings (..),
+    newAccessApprovalFoldersGetAccessApprovalSettings,
 
     -- ** accessapproval.folders.getServiceAccount
-    , AccessApprovalFoldersGetServiceAccountResource
-    , AccessApprovalFoldersGetServiceAccount (..)
-    , newAccessApprovalFoldersGetServiceAccount
+    AccessApprovalFoldersGetServiceAccountResource,
+    AccessApprovalFoldersGetServiceAccount (..),
+    newAccessApprovalFoldersGetServiceAccount,
 
     -- ** accessapproval.folders.updateAccessApprovalSettings
-    , AccessApprovalFoldersUpdateAccessApprovalSettingsResource
-    , AccessApprovalFoldersUpdateAccessApprovalSettings (..)
-    , newAccessApprovalFoldersUpdateAccessApprovalSettings
+    AccessApprovalFoldersUpdateAccessApprovalSettingsResource,
+    AccessApprovalFoldersUpdateAccessApprovalSettings (..),
+    newAccessApprovalFoldersUpdateAccessApprovalSettings,
 
     -- ** accessapproval.organizations.approvalRequests.approve
-    , AccessApprovalOrganizationsApprovalRequestsApproveResource
-    , AccessApprovalOrganizationsApprovalRequestsApprove (..)
-    , newAccessApprovalOrganizationsApprovalRequestsApprove
+    AccessApprovalOrganizationsApprovalRequestsApproveResource,
+    AccessApprovalOrganizationsApprovalRequestsApprove (..),
+    newAccessApprovalOrganizationsApprovalRequestsApprove,
 
     -- ** accessapproval.organizations.approvalRequests.dismiss
-    , AccessApprovalOrganizationsApprovalRequestsDismissResource
-    , AccessApprovalOrganizationsApprovalRequestsDismiss (..)
-    , newAccessApprovalOrganizationsApprovalRequestsDismiss
+    AccessApprovalOrganizationsApprovalRequestsDismissResource,
+    AccessApprovalOrganizationsApprovalRequestsDismiss (..),
+    newAccessApprovalOrganizationsApprovalRequestsDismiss,
 
     -- ** accessapproval.organizations.approvalRequests.get
-    , AccessApprovalOrganizationsApprovalRequestsGetResource
-    , AccessApprovalOrganizationsApprovalRequestsGet (..)
-    , newAccessApprovalOrganizationsApprovalRequestsGet
+    AccessApprovalOrganizationsApprovalRequestsGetResource,
+    AccessApprovalOrganizationsApprovalRequestsGet (..),
+    newAccessApprovalOrganizationsApprovalRequestsGet,
 
     -- ** accessapproval.organizations.approvalRequests.invalidate
-    , AccessApprovalOrganizationsApprovalRequestsInvalidateResource
-    , AccessApprovalOrganizationsApprovalRequestsInvalidate (..)
-    , newAccessApprovalOrganizationsApprovalRequestsInvalidate
+    AccessApprovalOrganizationsApprovalRequestsInvalidateResource,
+    AccessApprovalOrganizationsApprovalRequestsInvalidate (..),
+    newAccessApprovalOrganizationsApprovalRequestsInvalidate,
 
     -- ** accessapproval.organizations.approvalRequests.list
-    , AccessApprovalOrganizationsApprovalRequestsListResource
-    , AccessApprovalOrganizationsApprovalRequestsList (..)
-    , newAccessApprovalOrganizationsApprovalRequestsList
+    AccessApprovalOrganizationsApprovalRequestsListResource,
+    AccessApprovalOrganizationsApprovalRequestsList (..),
+    newAccessApprovalOrganizationsApprovalRequestsList,
 
     -- ** accessapproval.organizations.deleteAccessApprovalSettings
-    , AccessApprovalOrganizationsDeleteAccessApprovalSettingsResource
-    , AccessApprovalOrganizationsDeleteAccessApprovalSettings (..)
-    , newAccessApprovalOrganizationsDeleteAccessApprovalSettings
+    AccessApprovalOrganizationsDeleteAccessApprovalSettingsResource,
+    AccessApprovalOrganizationsDeleteAccessApprovalSettings (..),
+    newAccessApprovalOrganizationsDeleteAccessApprovalSettings,
 
     -- ** accessapproval.organizations.getAccessApprovalSettings
-    , AccessApprovalOrganizationsGetAccessApprovalSettingsResource
-    , AccessApprovalOrganizationsGetAccessApprovalSettings (..)
-    , newAccessApprovalOrganizationsGetAccessApprovalSettings
+    AccessApprovalOrganizationsGetAccessApprovalSettingsResource,
+    AccessApprovalOrganizationsGetAccessApprovalSettings (..),
+    newAccessApprovalOrganizationsGetAccessApprovalSettings,
 
     -- ** accessapproval.organizations.getServiceAccount
-    , AccessApprovalOrganizationsGetServiceAccountResource
-    , AccessApprovalOrganizationsGetServiceAccount (..)
-    , newAccessApprovalOrganizationsGetServiceAccount
+    AccessApprovalOrganizationsGetServiceAccountResource,
+    AccessApprovalOrganizationsGetServiceAccount (..),
+    newAccessApprovalOrganizationsGetServiceAccount,
 
     -- ** accessapproval.organizations.updateAccessApprovalSettings
-    , AccessApprovalOrganizationsUpdateAccessApprovalSettingsResource
-    , AccessApprovalOrganizationsUpdateAccessApprovalSettings (..)
-    , newAccessApprovalOrganizationsUpdateAccessApprovalSettings
+    AccessApprovalOrganizationsUpdateAccessApprovalSettingsResource,
+    AccessApprovalOrganizationsUpdateAccessApprovalSettings (..),
+    newAccessApprovalOrganizationsUpdateAccessApprovalSettings,
 
     -- ** accessapproval.projects.approvalRequests.approve
-    , AccessApprovalProjectsApprovalRequestsApproveResource
-    , AccessApprovalProjectsApprovalRequestsApprove (..)
-    , newAccessApprovalProjectsApprovalRequestsApprove
+    AccessApprovalProjectsApprovalRequestsApproveResource,
+    AccessApprovalProjectsApprovalRequestsApprove (..),
+    newAccessApprovalProjectsApprovalRequestsApprove,
 
     -- ** accessapproval.projects.approvalRequests.dismiss
-    , AccessApprovalProjectsApprovalRequestsDismissResource
-    , AccessApprovalProjectsApprovalRequestsDismiss (..)
-    , newAccessApprovalProjectsApprovalRequestsDismiss
+    AccessApprovalProjectsApprovalRequestsDismissResource,
+    AccessApprovalProjectsApprovalRequestsDismiss (..),
+    newAccessApprovalProjectsApprovalRequestsDismiss,
 
     -- ** accessapproval.projects.approvalRequests.get
-    , AccessApprovalProjectsApprovalRequestsGetResource
-    , AccessApprovalProjectsApprovalRequestsGet (..)
-    , newAccessApprovalProjectsApprovalRequestsGet
+    AccessApprovalProjectsApprovalRequestsGetResource,
+    AccessApprovalProjectsApprovalRequestsGet (..),
+    newAccessApprovalProjectsApprovalRequestsGet,
 
     -- ** accessapproval.projects.approvalRequests.invalidate
-    , AccessApprovalProjectsApprovalRequestsInvalidateResource
-    , AccessApprovalProjectsApprovalRequestsInvalidate (..)
-    , newAccessApprovalProjectsApprovalRequestsInvalidate
+    AccessApprovalProjectsApprovalRequestsInvalidateResource,
+    AccessApprovalProjectsApprovalRequestsInvalidate (..),
+    newAccessApprovalProjectsApprovalRequestsInvalidate,
 
     -- ** accessapproval.projects.approvalRequests.list
-    , AccessApprovalProjectsApprovalRequestsListResource
-    , AccessApprovalProjectsApprovalRequestsList (..)
-    , newAccessApprovalProjectsApprovalRequestsList
+    AccessApprovalProjectsApprovalRequestsListResource,
+    AccessApprovalProjectsApprovalRequestsList (..),
+    newAccessApprovalProjectsApprovalRequestsList,
 
     -- ** accessapproval.projects.deleteAccessApprovalSettings
-    , AccessApprovalProjectsDeleteAccessApprovalSettingsResource
-    , AccessApprovalProjectsDeleteAccessApprovalSettings (..)
-    , newAccessApprovalProjectsDeleteAccessApprovalSettings
+    AccessApprovalProjectsDeleteAccessApprovalSettingsResource,
+    AccessApprovalProjectsDeleteAccessApprovalSettings (..),
+    newAccessApprovalProjectsDeleteAccessApprovalSettings,
 
     -- ** accessapproval.projects.getAccessApprovalSettings
-    , AccessApprovalProjectsGetAccessApprovalSettingsResource
-    , AccessApprovalProjectsGetAccessApprovalSettings (..)
-    , newAccessApprovalProjectsGetAccessApprovalSettings
+    AccessApprovalProjectsGetAccessApprovalSettingsResource,
+    AccessApprovalProjectsGetAccessApprovalSettings (..),
+    newAccessApprovalProjectsGetAccessApprovalSettings,
 
     -- ** accessapproval.projects.getServiceAccount
-    , AccessApprovalProjectsGetServiceAccountResource
-    , AccessApprovalProjectsGetServiceAccount (..)
-    , newAccessApprovalProjectsGetServiceAccount
+    AccessApprovalProjectsGetServiceAccountResource,
+    AccessApprovalProjectsGetServiceAccount (..),
+    newAccessApprovalProjectsGetServiceAccount,
 
     -- ** accessapproval.projects.updateAccessApprovalSettings
-    , AccessApprovalProjectsUpdateAccessApprovalSettingsResource
-    , AccessApprovalProjectsUpdateAccessApprovalSettings (..)
-    , newAccessApprovalProjectsUpdateAccessApprovalSettings
+    AccessApprovalProjectsUpdateAccessApprovalSettingsResource,
+    AccessApprovalProjectsUpdateAccessApprovalSettings (..),
+    newAccessApprovalProjectsUpdateAccessApprovalSettings,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AccessApprovalServiceAccount
-    , AccessApprovalServiceAccount (..)
-    , newAccessApprovalServiceAccount
+    AccessApprovalServiceAccount (..),
+    newAccessApprovalServiceAccount,
 
     -- ** AccessApprovalSettings
-    , AccessApprovalSettings (..)
-    , newAccessApprovalSettings
+    AccessApprovalSettings (..),
+    newAccessApprovalSettings,
 
     -- ** AccessApprovalSettings_RequestScopeMaxWidthPreference
-    , AccessApprovalSettings_RequestScopeMaxWidthPreference (..)
+    AccessApprovalSettings_RequestScopeMaxWidthPreference (..),
 
     -- ** AccessLocations
-    , AccessLocations (..)
-    , newAccessLocations
+    AccessLocations (..),
+    newAccessLocations,
 
     -- ** AccessReason
-    , AccessReason (..)
-    , newAccessReason
+    AccessReason (..),
+    newAccessReason,
 
     -- ** AccessReason_Type
-    , AccessReason_Type (..)
+    AccessReason_Type (..),
 
     -- ** ApprovalRequest
-    , ApprovalRequest (..)
-    , newApprovalRequest
+    ApprovalRequest (..),
+    newApprovalRequest,
 
     -- ** ApproveApprovalRequestMessage
-    , ApproveApprovalRequestMessage (..)
-    , newApproveApprovalRequestMessage
+    ApproveApprovalRequestMessage (..),
+    newApproveApprovalRequestMessage,
 
     -- ** ApproveDecision
-    , ApproveDecision (..)
-    , newApproveDecision
+    ApproveDecision (..),
+    newApproveDecision,
 
     -- ** AugmentedInfo
-    , AugmentedInfo (..)
-    , newAugmentedInfo
+    AugmentedInfo (..),
+    newAugmentedInfo,
 
     -- ** DismissApprovalRequestMessage
-    , DismissApprovalRequestMessage (..)
-    , newDismissApprovalRequestMessage
+    DismissApprovalRequestMessage (..),
+    newDismissApprovalRequestMessage,
 
     -- ** DismissDecision
-    , DismissDecision (..)
-    , newDismissDecision
+    DismissDecision (..),
+    newDismissDecision,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** EnrolledService
-    , EnrolledService (..)
-    , newEnrolledService
+    EnrolledService (..),
+    newEnrolledService,
 
     -- ** EnrolledService_EnrollmentLevel
-    , EnrolledService_EnrollmentLevel (..)
+    EnrolledService_EnrollmentLevel (..),
 
     -- ** InvalidateApprovalRequestMessage
-    , InvalidateApprovalRequestMessage (..)
-    , newInvalidateApprovalRequestMessage
+    InvalidateApprovalRequestMessage (..),
+    newInvalidateApprovalRequestMessage,
 
     -- ** ListApprovalRequestsResponse
-    , ListApprovalRequestsResponse (..)
-    , newListApprovalRequestsResponse
+    ListApprovalRequestsResponse (..),
+    newListApprovalRequestsResponse,
 
     -- ** ResourceProperties
-    , ResourceProperties (..)
-    , newResourceProperties
+    ResourceProperties (..),
+    newResourceProperties,
 
     -- ** SignatureInfo
-    , SignatureInfo (..)
-    , newSignatureInfo
+    SignatureInfo (..),
+    newSignatureInfo,
 
     -- ** SignatureInfo_GoogleKeyAlgorithm
-    , SignatureInfo_GoogleKeyAlgorithm (..)
-    ) where
+    SignatureInfo_GoogleKeyAlgorithm (..),
+  )
+where
 
 import Gogol.AccessApproval.Folders.ApprovalRequests.Approve
 import Gogol.AccessApproval.Folders.ApprovalRequests.Dismiss

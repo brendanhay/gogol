@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.StreetViewPublish.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.StreetViewPublish.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * Photo_MapsPublishStatus
     Photo_MapsPublishStatus
-      (
-        Photo_MapsPublishStatus_UNSPECIFIEDMAPSPUBLISHSTATUS,
+      ( Photo_MapsPublishStatus_UNSPECIFIEDMAPSPUBLISHSTATUS,
         Photo_MapsPublishStatus_Published,
         Photo_MapsPublishStatus_REJECTEDUNKNOWN,
         ..
@@ -49,8 +40,7 @@ module Gogol.StreetViewPublish.Internal.Sum
 
     -- * Photo_TransferStatus
     Photo_TransferStatus
-      (
-        Photo_TransferStatus_TRANSFERSTATUSUNKNOWN,
+      ( Photo_TransferStatus_TRANSFERSTATUSUNKNOWN,
         Photo_TransferStatus_NEVERTRANSFERRED,
         Photo_TransferStatus_Pending,
         Photo_TransferStatus_Completed,
@@ -63,8 +53,7 @@ module Gogol.StreetViewPublish.Internal.Sum
 
     -- * PhotoSequence_FailureReason
     PhotoSequence_FailureReason
-      (
-        PhotoSequence_FailureReason_PROCESSINGFAILUREREASONUNSPECIFIED,
+      ( PhotoSequence_FailureReason_PROCESSINGFAILUREREASONUNSPECIFIED,
         PhotoSequence_FailureReason_LOWRESOLUTION,
         PhotoSequence_FailureReason_Duplicate,
         PhotoSequence_FailureReason_INSUFFICIENTGPS,
@@ -94,16 +83,14 @@ module Gogol.StreetViewPublish.Internal.Sum
 
     -- * PhotoSequence_GpsSource
     PhotoSequence_GpsSource
-      (
-        PhotoSequence_GpsSource_PHOTOSEQUENCE,
+      ( PhotoSequence_GpsSource_PHOTOSEQUENCE,
         PhotoSequence_GpsSource_CAMERAMOTIONMETADATATRACK,
         ..
       ),
 
     -- * PhotoSequence_ProcessingState
     PhotoSequence_ProcessingState
-      (
-        PhotoSequence_ProcessingState_PROCESSINGSTATEUNSPECIFIED,
+      ( PhotoSequence_ProcessingState_PROCESSINGSTATEUNSPECIFIED,
         PhotoSequence_ProcessingState_Pending,
         PhotoSequence_ProcessingState_Processing,
         PhotoSequence_ProcessingState_Processed,
@@ -113,16 +100,14 @@ module Gogol.StreetViewPublish.Internal.Sum
 
     -- * PhotoGetView
     PhotoGetView
-      (
-        PhotoGetView_Basic,
+      ( PhotoGetView_Basic,
         PhotoGetView_INCLUDEDOWNLOADURL,
         ..
       ),
 
     -- * PhotoSequenceCreateInputType
     PhotoSequenceCreateInputType
-      (
-        PhotoSequenceCreateInputType_INPUTTYPEUNSPECIFIED,
+      ( PhotoSequenceCreateInputType_INPUTTYPEUNSPECIFIED,
         PhotoSequenceCreateInputType_Video,
         PhotoSequenceCreateInputType_Xdm,
         ..
@@ -130,43 +115,41 @@ module Gogol.StreetViewPublish.Internal.Sum
 
     -- * PhotoSequenceGetView
     PhotoSequenceGetView
-      (
-        PhotoSequenceGetView_Basic,
+      ( PhotoSequenceGetView_Basic,
         PhotoSequenceGetView_INCLUDEDOWNLOADURL,
         ..
       ),
 
     -- * PhotosBatchGetView
     PhotosBatchGetView
-      (
-        PhotosBatchGetView_Basic,
+      ( PhotosBatchGetView_Basic,
         PhotosBatchGetView_INCLUDEDOWNLOADURL,
         ..
       ),
 
     -- * PhotosListView
     PhotosListView
-      (
-        PhotosListView_Basic,
+      ( PhotosListView_Basic,
         PhotosListView_INCLUDEDOWNLOADURL,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -179,20 +162,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | Output only. Status in Google Maps, whether this photo was published or rejected.
-newtype Photo_MapsPublishStatus = Photo_MapsPublishStatus { fromPhoto_MapsPublishStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Photo_MapsPublishStatus = Photo_MapsPublishStatus {fromPhoto_MapsPublishStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The status of the photo is unknown.
 pattern Photo_MapsPublishStatus_UNSPECIFIEDMAPSPUBLISHSTATUS :: Photo_MapsPublishStatus
@@ -210,20 +194,21 @@ pattern Photo_MapsPublishStatus_REJECTEDUNKNOWN = Photo_MapsPublishStatus "REJEC
   Photo_MapsPublishStatus_UNSPECIFIEDMAPSPUBLISHSTATUS,
   Photo_MapsPublishStatus_Published,
   Photo_MapsPublishStatus_REJECTEDUNKNOWN,
-  Photo_MapsPublishStatus #-}
+  Photo_MapsPublishStatus
+  #-}
 
 -- | Output only. Status of rights transfer on this photo.
-newtype Photo_TransferStatus = Photo_TransferStatus { fromPhoto_TransferStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Photo_TransferStatus = Photo_TransferStatus {fromPhoto_TransferStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The status of this transfer is unspecified.
 pattern Photo_TransferStatus_TRANSFERSTATUSUNKNOWN :: Photo_TransferStatus
@@ -266,20 +251,21 @@ pattern Photo_TransferStatus_RECEIVEDVIATRANSFER = Photo_TransferStatus "RECEIVE
   Photo_TransferStatus_Expired,
   Photo_TransferStatus_Cancelled,
   Photo_TransferStatus_RECEIVEDVIATRANSFER,
-  Photo_TransferStatus #-}
+  Photo_TransferStatus
+  #-}
 
 -- | Output only. If this sequence has processing/state = FAILED, this will contain the reason why it failed. If the processing/state is any other value, this field will be unset.
-newtype PhotoSequence_FailureReason = PhotoSequence_FailureReason { fromPhotoSequence_FailureReason :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PhotoSequence_FailureReason = PhotoSequence_FailureReason {fromPhotoSequence_FailureReason :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The failure reason is unspecified, this is the default value.
 pattern PhotoSequence_FailureReason_PROCESSINGFAILUREREASONUNSPECIFIED :: PhotoSequence_FailureReason
@@ -407,20 +393,21 @@ pattern PhotoSequence_FailureReason_CAMERACOVERED = PhotoSequence_FailureReason 
   PhotoSequence_FailureReason_INSUFFICIENTMOVEMENT,
   PhotoSequence_FailureReason_MASTDOWN,
   PhotoSequence_FailureReason_CAMERACOVERED,
-  PhotoSequence_FailureReason #-}
+  PhotoSequence_FailureReason
+  #-}
 
 -- | Input only. If both raw/gps/timeline and the Camera Motion Metadata Track (CAMM) contain GPS measurements, indicate which takes precedence.
-newtype PhotoSequence_GpsSource = PhotoSequence_GpsSource { fromPhotoSequence_GpsSource :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PhotoSequence_GpsSource = PhotoSequence_GpsSource {fromPhotoSequence_GpsSource :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | GPS in raw/gps/timeline takes precedence if it exists.
 pattern PhotoSequence_GpsSource_PHOTOSEQUENCE :: PhotoSequence_GpsSource
@@ -433,20 +420,21 @@ pattern PhotoSequence_GpsSource_CAMERAMOTIONMETADATATRACK = PhotoSequence_GpsSou
 {-# COMPLETE
   PhotoSequence_GpsSource_PHOTOSEQUENCE,
   PhotoSequence_GpsSource_CAMERAMOTIONMETADATATRACK,
-  PhotoSequence_GpsSource #-}
+  PhotoSequence_GpsSource
+  #-}
 
 -- | Output only. The processing state of this sequence.
-newtype PhotoSequence_ProcessingState = PhotoSequence_ProcessingState { fromPhotoSequence_ProcessingState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PhotoSequence_ProcessingState = PhotoSequence_ProcessingState {fromPhotoSequence_ProcessingState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The state is unspecified, this is the default value.
 pattern PhotoSequence_ProcessingState_PROCESSINGSTATEUNSPECIFIED :: PhotoSequence_ProcessingState
@@ -474,20 +462,21 @@ pattern PhotoSequence_ProcessingState_Failed = PhotoSequence_ProcessingState "FA
   PhotoSequence_ProcessingState_Processing,
   PhotoSequence_ProcessingState_Processed,
   PhotoSequence_ProcessingState_Failed,
-  PhotoSequence_ProcessingState #-}
+  PhotoSequence_ProcessingState
+  #-}
 
 -- | Required. Specifies if a download URL for the photo bytes should be returned in the Photo response.
-newtype PhotoGetView = PhotoGetView { fromPhotoGetView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PhotoGetView = PhotoGetView {fromPhotoGetView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Server responses do not include the download URL for the photo bytes. The default value.
 pattern PhotoGetView_Basic :: PhotoGetView
@@ -500,20 +489,21 @@ pattern PhotoGetView_INCLUDEDOWNLOADURL = PhotoGetView "INCLUDE_DOWNLOAD_URL"
 {-# COMPLETE
   PhotoGetView_Basic,
   PhotoGetView_INCLUDEDOWNLOADURL,
-  PhotoGetView #-}
+  PhotoGetView
+  #-}
 
 -- | Required. The input form of PhotoSequence.
-newtype PhotoSequenceCreateInputType = PhotoSequenceCreateInputType { fromPhotoSequenceCreateInputType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PhotoSequenceCreateInputType = PhotoSequenceCreateInputType {fromPhotoSequenceCreateInputType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not specified. Server will return google.rpc.Code.INVALID_ARGUMENT.
 pattern PhotoSequenceCreateInputType_INPUTTYPEUNSPECIFIED :: PhotoSequenceCreateInputType
@@ -531,20 +521,21 @@ pattern PhotoSequenceCreateInputType_Xdm = PhotoSequenceCreateInputType "XDM"
   PhotoSequenceCreateInputType_INPUTTYPEUNSPECIFIED,
   PhotoSequenceCreateInputType_Video,
   PhotoSequenceCreateInputType_Xdm,
-  PhotoSequenceCreateInputType #-}
+  PhotoSequenceCreateInputType
+  #-}
 
 -- | Specifies if a download URL for the photo sequence should be returned in @download_url@ of individual photos in the PhotoSequence response. > Note: Currently not implemented.
-newtype PhotoSequenceGetView = PhotoSequenceGetView { fromPhotoSequenceGetView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PhotoSequenceGetView = PhotoSequenceGetView {fromPhotoSequenceGetView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Server responses do not include the download URL for the photo bytes. The default value.
 pattern PhotoSequenceGetView_Basic :: PhotoSequenceGetView
@@ -557,20 +548,21 @@ pattern PhotoSequenceGetView_INCLUDEDOWNLOADURL = PhotoSequenceGetView "INCLUDE_
 {-# COMPLETE
   PhotoSequenceGetView_Basic,
   PhotoSequenceGetView_INCLUDEDOWNLOADURL,
-  PhotoSequenceGetView #-}
+  PhotoSequenceGetView
+  #-}
 
 -- | Required. Specifies if a download URL for the photo bytes should be returned in the Photo response.
-newtype PhotosBatchGetView = PhotosBatchGetView { fromPhotosBatchGetView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PhotosBatchGetView = PhotosBatchGetView {fromPhotosBatchGetView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Server responses do not include the download URL for the photo bytes. The default value.
 pattern PhotosBatchGetView_Basic :: PhotosBatchGetView
@@ -583,20 +575,21 @@ pattern PhotosBatchGetView_INCLUDEDOWNLOADURL = PhotosBatchGetView "INCLUDE_DOWN
 {-# COMPLETE
   PhotosBatchGetView_Basic,
   PhotosBatchGetView_INCLUDEDOWNLOADURL,
-  PhotosBatchGetView #-}
+  PhotosBatchGetView
+  #-}
 
 -- | Required. Specifies if a download URL for the photos bytes should be returned in the Photos response.
-newtype PhotosListView = PhotosListView { fromPhotosListView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PhotosListView = PhotosListView {fromPhotosListView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Server responses do not include the download URL for the photo bytes. The default value.
 pattern PhotosListView_Basic :: PhotosListView
@@ -609,4 +602,5 @@ pattern PhotosListView_INCLUDEDOWNLOADURL = PhotosListView "INCLUDE_DOWNLOAD_URL
 {-# COMPLETE
   PhotosListView_Basic,
   PhotosListView_INCLUDEDOWNLOADURL,
-  PhotosListView #-}
+  PhotosListView
+  #-}

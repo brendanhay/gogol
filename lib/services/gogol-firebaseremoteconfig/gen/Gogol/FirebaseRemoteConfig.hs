@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.FirebaseRemoteConfig
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,54 +27,54 @@
 --
 -- /See:/ <https://firebase.google.com/docs/remote-config/ Firebase Remote Config API Reference>
 module Gogol.FirebaseRemoteConfig
-    (
-    -- * Configuration
-      firebaseRemoteConfigService
+  ( -- * Configuration
+    firebaseRemoteConfigService,
 
     -- * Resources
 
     -- ** firebaseremoteconfig.projects.getRemoteConfig
-    , FirebaseRemoteConfigProjectsGetRemoteConfigResource
-    , FirebaseRemoteConfigProjectsGetRemoteConfig (..)
-    , newFirebaseRemoteConfigProjectsGetRemoteConfig
+    FirebaseRemoteConfigProjectsGetRemoteConfigResource,
+    FirebaseRemoteConfigProjectsGetRemoteConfig (..),
+    newFirebaseRemoteConfigProjectsGetRemoteConfig,
 
     -- ** firebaseremoteconfig.projects.updateRemoteConfig
-    , FirebaseRemoteConfigProjectsUpdateRemoteConfigResource
-    , FirebaseRemoteConfigProjectsUpdateRemoteConfig (..)
-    , newFirebaseRemoteConfigProjectsUpdateRemoteConfig
+    FirebaseRemoteConfigProjectsUpdateRemoteConfigResource,
+    FirebaseRemoteConfigProjectsUpdateRemoteConfig (..),
+    newFirebaseRemoteConfigProjectsUpdateRemoteConfig,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** RemoteConfig
-    , RemoteConfig (..)
-    , newRemoteConfig
+    RemoteConfig (..),
+    newRemoteConfig,
 
     -- ** RemoteConfig_Parameters
-    , RemoteConfig_Parameters (..)
-    , newRemoteConfig_Parameters
+    RemoteConfig_Parameters (..),
+    newRemoteConfig_Parameters,
 
     -- ** RemoteConfigCondition
-    , RemoteConfigCondition (..)
-    , newRemoteConfigCondition
+    RemoteConfigCondition (..),
+    newRemoteConfigCondition,
 
     -- ** RemoteConfigCondition_TagColor
-    , RemoteConfigCondition_TagColor (..)
+    RemoteConfigCondition_TagColor (..),
 
     -- ** RemoteConfigParameter
-    , RemoteConfigParameter (..)
-    , newRemoteConfigParameter
+    RemoteConfigParameter (..),
+    newRemoteConfigParameter,
 
     -- ** RemoteConfigParameter_ConditionalValues
-    , RemoteConfigParameter_ConditionalValues (..)
-    , newRemoteConfigParameter_ConditionalValues
+    RemoteConfigParameter_ConditionalValues (..),
+    newRemoteConfigParameter_ConditionalValues,
 
     -- ** RemoteConfigParameterValue
-    , RemoteConfigParameterValue (..)
-    , newRemoteConfigParameterValue
-    ) where
+    RemoteConfigParameterValue (..),
+    newRemoteConfigParameterValue,
+  )
+where
 
 import Gogol.FirebaseRemoteConfig.Projects.GetRemoteConfig
 import Gogol.FirebaseRemoteConfig.Projects.UpdateRemoteConfig

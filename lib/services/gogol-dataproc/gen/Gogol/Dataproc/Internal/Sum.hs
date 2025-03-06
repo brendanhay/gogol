@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,43 +16,37 @@
 
 -- |
 -- Module      : Gogol.Dataproc.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Dataproc.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AnalyzeOperationMetadata_AnalyzedWorkloadType
     AnalyzeOperationMetadata_AnalyzedWorkloadType
-      (
-        AnalyzeOperationMetadata_AnalyzedWorkloadType_WORKLOADTYPEUNSPECIFIED,
+      ( AnalyzeOperationMetadata_AnalyzedWorkloadType_WORKLOADTYPEUNSPECIFIED,
         AnalyzeOperationMetadata_AnalyzedWorkloadType_Batch,
         ..
       ),
 
     -- * ApplicationInfo_ApplicationContextIngestionStatus
     ApplicationInfo_ApplicationContextIngestionStatus
-      (
-        ApplicationInfo_ApplicationContextIngestionStatus_APPLICATIONCONTEXTINGESTIONSTATUSUNSPECIFIED,
+      ( ApplicationInfo_ApplicationContextIngestionStatus_APPLICATIONCONTEXTINGESTIONSTATUSUNSPECIFIED,
         ApplicationInfo_ApplicationContextIngestionStatus_APPLICATIONCONTEXTINGESTIONSTATUSCOMPLETED,
         ..
       ),
 
     -- * ApplicationInfo_QuantileDataStatus
     ApplicationInfo_QuantileDataStatus
-      (
-        ApplicationInfo_QuantileDataStatus_QUANTILEDATASTATUSUNSPECIFIED,
+      ( ApplicationInfo_QuantileDataStatus_QUANTILEDATASTATUSUNSPECIFIED,
         ApplicationInfo_QuantileDataStatus_QUANTILEDATASTATUSCOMPLETED,
         ApplicationInfo_QuantileDataStatus_QUANTILEDATASTATUSFAILED,
         ..
@@ -65,8 +54,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * AutotuningConfig_ScenariosItem
     AutotuningConfig_ScenariosItem
-      (
-        AutotuningConfig_ScenariosItem_SCENARIOUNSPECIFIED,
+      ( AutotuningConfig_ScenariosItem_SCENARIOUNSPECIFIED,
         AutotuningConfig_ScenariosItem_Scaling,
         AutotuningConfig_ScenariosItem_BROADCASTHASHJOIN,
         AutotuningConfig_ScenariosItem_Memory,
@@ -75,8 +63,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * Batch_State
     Batch_State
-      (
-        Batch_State_STATEUNSPECIFIED,
+      ( Batch_State_STATEUNSPECIFIED,
         Batch_State_Pending,
         Batch_State_Running,
         Batch_State_Cancelling,
@@ -88,16 +75,14 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * BatchOperationMetadata_OperationType
     BatchOperationMetadata_OperationType
-      (
-        BatchOperationMetadata_OperationType_BATCHOPERATIONTYPEUNSPECIFIED,
+      ( BatchOperationMetadata_OperationType_BATCHOPERATIONTYPEUNSPECIFIED,
         BatchOperationMetadata_OperationType_Batch,
         ..
       ),
 
     -- * ClusterOperationStatus_State
     ClusterOperationStatus_State
-      (
-        ClusterOperationStatus_State_Unknown,
+      ( ClusterOperationStatus_State_Unknown,
         ClusterOperationStatus_State_Pending,
         ClusterOperationStatus_State_Running,
         ClusterOperationStatus_State_Done,
@@ -106,8 +91,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * ClusterStatus_State
     ClusterStatus_State
-      (
-        ClusterStatus_State_Unknown,
+      ( ClusterStatus_State_Unknown,
         ClusterStatus_State_Creating,
         ClusterStatus_State_Running,
         ClusterStatus_State_Error',
@@ -123,8 +107,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * ClusterStatus_Substate
     ClusterStatus_Substate
-      (
-        ClusterStatus_Substate_Unspecified,
+      ( ClusterStatus_Substate_Unspecified,
         ClusterStatus_Substate_Unhealthy,
         ClusterStatus_Substate_STALESTATUS,
         ..
@@ -132,16 +115,14 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * ClusterToRepair_ClusterRepairAction
     ClusterToRepair_ClusterRepairAction
-      (
-        ClusterToRepair_ClusterRepairAction_CLUSTERREPAIRACTIONUNSPECIFIED,
+      ( ClusterToRepair_ClusterRepairAction_CLUSTERREPAIRACTIONUNSPECIFIED,
         ClusterToRepair_ClusterRepairAction_REPAIRERRORDUETOUPDATECLUSTER,
         ..
       ),
 
     -- * DiagnoseClusterRequest_TarballAccess
     DiagnoseClusterRequest_TarballAccess
-      (
-        DiagnoseClusterRequest_TarballAccess_TARBALLACCESSUNSPECIFIED,
+      ( DiagnoseClusterRequest_TarballAccess_TARBALLACCESSUNSPECIFIED,
         DiagnoseClusterRequest_TarballAccess_GOOGLECLOUDSUPPORT,
         DiagnoseClusterRequest_TarballAccess_GOOGLEDATAPROCDIAGNOSE,
         ..
@@ -149,8 +130,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * GceClusterConfig_PrivateIpv6GoogleAccess
     GceClusterConfig_PrivateIpv6GoogleAccess
-      (
-        GceClusterConfig_PrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSUNSPECIFIED,
+      ( GceClusterConfig_PrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSUNSPECIFIED,
         GceClusterConfig_PrivateIpv6GoogleAccess_INHERITFROMSUBNETWORK,
         GceClusterConfig_PrivateIpv6GoogleAccess_Outbound,
         GceClusterConfig_PrivateIpv6GoogleAccess_Bidirectional,
@@ -159,8 +139,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * GkeNodePoolTarget_RolesItem
     GkeNodePoolTarget_RolesItem
-      (
-        GkeNodePoolTarget_RolesItem_ROLEUNSPECIFIED,
+      ( GkeNodePoolTarget_RolesItem_ROLEUNSPECIFIED,
         GkeNodePoolTarget_RolesItem_Default,
         GkeNodePoolTarget_RolesItem_Controller,
         GkeNodePoolTarget_RolesItem_SPARKDRIVER,
@@ -170,8 +149,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * InstanceGroupConfig_Preemptibility
     InstanceGroupConfig_Preemptibility
-      (
-        InstanceGroupConfig_Preemptibility_PREEMPTIBILITYUNSPECIFIED,
+      ( InstanceGroupConfig_Preemptibility_PREEMPTIBILITYUNSPECIFIED,
         InstanceGroupConfig_Preemptibility_NONPREEMPTIBLE,
         InstanceGroupConfig_Preemptibility_Preemptible,
         InstanceGroupConfig_Preemptibility_Spot,
@@ -180,8 +158,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * JobData_Status
     JobData_Status
-      (
-        JobData_Status_JOBEXECUTIONSTATUSUNSPECIFIED,
+      ( JobData_Status_JOBEXECUTIONSTATUSUNSPECIFIED,
         JobData_Status_JOBEXECUTIONSTATUSRUNNING,
         JobData_Status_JOBEXECUTIONSTATUSSUCCEEDED,
         JobData_Status_JOBEXECUTIONSTATUSFAILED,
@@ -191,8 +168,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * JobStatus_State
     JobStatus_State
-      (
-        JobStatus_State_STATEUNSPECIFIED,
+      ( JobStatus_State_STATEUNSPECIFIED,
         JobStatus_State_Pending,
         JobStatus_State_SETUPDONE,
         JobStatus_State_Running,
@@ -207,8 +183,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * JobStatus_Substate
     JobStatus_Substate
-      (
-        JobStatus_Substate_Unspecified,
+      ( JobStatus_Substate_Unspecified,
         JobStatus_Substate_Submitted,
         JobStatus_Substate_Queued,
         JobStatus_Substate_STALESTATUS,
@@ -217,8 +192,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * JupyterConfig_Kernel
     JupyterConfig_Kernel
-      (
-        JupyterConfig_Kernel_KERNELUNSPECIFIED,
+      ( JupyterConfig_Kernel_KERNELUNSPECIFIED,
         JupyterConfig_Kernel_Python,
         JupyterConfig_Kernel_Scala,
         ..
@@ -226,8 +200,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * LoggingConfig_DriverLogLevelsAdditional
     LoggingConfig_DriverLogLevelsAdditional
-      (
-        LoggingConfig_DriverLogLevelsAdditional_LEVELUNSPECIFIED,
+      ( LoggingConfig_DriverLogLevelsAdditional_LEVELUNSPECIFIED,
         LoggingConfig_DriverLogLevelsAdditional_All,
         LoggingConfig_DriverLogLevelsAdditional_Trace,
         LoggingConfig_DriverLogLevelsAdditional_Debug,
@@ -241,8 +214,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * Metric_MetricSource
     Metric_MetricSource
-      (
-        Metric_MetricSource_METRICSOURCEUNSPECIFIED,
+      ( Metric_MetricSource_METRICSOURCEUNSPECIFIED,
         Metric_MetricSource_MONITORINGAGENTDEFAULTS,
         Metric_MetricSource_Hdfs,
         Metric_MetricSource_Spark,
@@ -256,16 +228,14 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * NodeGroup_RolesItem
     NodeGroup_RolesItem
-      (
-        NodeGroup_RolesItem_ROLEUNSPECIFIED,
+      ( NodeGroup_RolesItem_ROLEUNSPECIFIED,
         NodeGroup_RolesItem_Driver,
         ..
       ),
 
     -- * NodeGroupOperationMetadata_OperationType
     NodeGroupOperationMetadata_OperationType
-      (
-        NodeGroupOperationMetadata_OperationType_NODEGROUPOPERATIONTYPEUNSPECIFIED,
+      ( NodeGroupOperationMetadata_OperationType_NODEGROUPOPERATIONTYPEUNSPECIFIED,
         NodeGroupOperationMetadata_OperationType_Create,
         NodeGroupOperationMetadata_OperationType_Update,
         NodeGroupOperationMetadata_OperationType_Delete',
@@ -279,16 +249,14 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * NodePool_RepairAction
     NodePool_RepairAction
-      (
-        NodePool_RepairAction_REPAIRACTIONUNSPECIFIED,
+      ( NodePool_RepairAction_REPAIRACTIONUNSPECIFIED,
         NodePool_RepairAction_Delete',
         ..
       ),
 
     -- * RddOperationNode_OutputDeterministicLevel
     RddOperationNode_OutputDeterministicLevel
-      (
-        RddOperationNode_OutputDeterministicLevel_DETERMINISTICLEVELUNSPECIFIED,
+      ( RddOperationNode_OutputDeterministicLevel_DETERMINISTICLEVELUNSPECIFIED,
         RddOperationNode_OutputDeterministicLevel_DETERMINISTICLEVELDETERMINATE,
         RddOperationNode_OutputDeterministicLevel_DETERMINISTICLEVELUNORDERED,
         RddOperationNode_OutputDeterministicLevel_DETERMINISTICLEVELINDETERMINATE,
@@ -297,16 +265,14 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * RepairNodeGroupRequest_RepairAction
     RepairNodeGroupRequest_RepairAction
-      (
-        RepairNodeGroupRequest_RepairAction_REPAIRACTIONUNSPECIFIED,
+      ( RepairNodeGroupRequest_RepairAction_REPAIRACTIONUNSPECIFIED,
         RepairNodeGroupRequest_RepairAction_Replace,
         ..
       ),
 
     -- * ReservationAffinity_ConsumeReservationType
     ReservationAffinity_ConsumeReservationType
-      (
-        ReservationAffinity_ConsumeReservationType_TYPEUNSPECIFIED,
+      ( ReservationAffinity_ConsumeReservationType_TYPEUNSPECIFIED,
         ReservationAffinity_ConsumeReservationType_NORESERVATION,
         ReservationAffinity_ConsumeReservationType_ANYRESERVATION,
         ReservationAffinity_ConsumeReservationType_SPECIFICRESERVATION,
@@ -315,8 +281,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * Session_State
     Session_State
-      (
-        Session_State_STATEUNSPECIFIED,
+      ( Session_State_STATEUNSPECIFIED,
         Session_State_Creating,
         Session_State_Active,
         Session_State_Terminating,
@@ -327,8 +292,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * SessionOperationMetadata_OperationType
     SessionOperationMetadata_OperationType
-      (
-        SessionOperationMetadata_OperationType_SESSIONOPERATIONTYPEUNSPECIFIED,
+      ( SessionOperationMetadata_OperationType_SESSIONOPERATIONTYPEUNSPECIFIED,
         SessionOperationMetadata_OperationType_Create,
         SessionOperationMetadata_OperationType_Terminate,
         SessionOperationMetadata_OperationType_Delete',
@@ -337,8 +301,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * SessionStateHistory_State
     SessionStateHistory_State
-      (
-        SessionStateHistory_State_STATEUNSPECIFIED,
+      ( SessionStateHistory_State_STATEUNSPECIFIED,
         SessionStateHistory_State_Creating,
         SessionStateHistory_State_Active,
         SessionStateHistory_State_Terminating,
@@ -349,8 +312,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * SoftwareConfig_OptionalComponentsItem
     SoftwareConfig_OptionalComponentsItem
-      (
-        SoftwareConfig_OptionalComponentsItem_COMPONENTUNSPECIFIED,
+      ( SoftwareConfig_OptionalComponentsItem_COMPONENTUNSPECIFIED,
         SoftwareConfig_OptionalComponentsItem_Anaconda,
         SoftwareConfig_OptionalComponentsItem_Docker,
         SoftwareConfig_OptionalComponentsItem_Druid,
@@ -371,8 +333,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * SqlExecutionUiData_JobsAdditional
     SqlExecutionUiData_JobsAdditional
-      (
-        SqlExecutionUiData_JobsAdditional_JOBEXECUTIONSTATUSUNSPECIFIED,
+      ( SqlExecutionUiData_JobsAdditional_JOBEXECUTIONSTATUSUNSPECIFIED,
         SqlExecutionUiData_JobsAdditional_JOBEXECUTIONSTATUSRUNNING,
         SqlExecutionUiData_JobsAdditional_JOBEXECUTIONSTATUSSUCCEEDED,
         SqlExecutionUiData_JobsAdditional_JOBEXECUTIONSTATUSFAILED,
@@ -382,8 +343,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * StageData_Status
     StageData_Status
-      (
-        StageData_Status_STAGESTATUSUNSPECIFIED,
+      ( StageData_Status_STAGESTATUSUNSPECIFIED,
         StageData_Status_STAGESTATUSACTIVE,
         StageData_Status_STAGESTATUSCOMPLETE,
         StageData_Status_STAGESTATUSFAILED,
@@ -394,8 +354,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * StateHistory_State
     StateHistory_State
-      (
-        StateHistory_State_STATEUNSPECIFIED,
+      ( StateHistory_State_STATEUNSPECIFIED,
         StateHistory_State_Pending,
         StateHistory_State_Running,
         StateHistory_State_Cancelling,
@@ -407,8 +366,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * WorkflowMetadata_State
     WorkflowMetadata_State
-      (
-        WorkflowMetadata_State_Unknown,
+      ( WorkflowMetadata_State_Unknown,
         WorkflowMetadata_State_Pending,
         WorkflowMetadata_State_Running,
         WorkflowMetadata_State_Done,
@@ -417,8 +375,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * WorkflowNode_State
     WorkflowNode_State
-      (
-        WorkflowNode_State_NODESTATEUNSPECIFIED,
+      ( WorkflowNode_State_NODESTATEUNSPECIFIED,
         WorkflowNode_State_Blocked,
         WorkflowNode_State_Runnable,
         WorkflowNode_State_Running,
@@ -429,8 +386,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * YarnApplication_State
     YarnApplication_State
-      (
-        YarnApplication_State_STATEUNSPECIFIED,
+      ( YarnApplication_State_STATEUNSPECIFIED,
         YarnApplication_State_New,
         YarnApplication_State_NEWSAVING,
         YarnApplication_State_Submitted,
@@ -444,8 +400,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus
     ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus
-      (
-        ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSUNSPECIFIED,
+      ( ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSUNSPECIFIED,
         ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSRUNNING,
         ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSCOMPLETED,
         ..
@@ -453,8 +408,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus
     ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus
-      (
-        ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSUNSPECIFIED,
+      ( ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSUNSPECIFIED,
         ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSACTIVE,
         ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSDEAD,
         ..
@@ -462,8 +416,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus
     ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus
-      (
-        ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSUNSPECIFIED,
+      ( ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSUNSPECIFIED,
         ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSRUNNING,
         ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSSUCCEEDED,
         ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSFAILED,
@@ -473,8 +426,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus
     ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus
-      (
-        ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSUNSPECIFIED,
+      ( ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSUNSPECIFIED,
         ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSRUNNING,
         ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSSUCCESS,
         ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSFAILED,
@@ -485,8 +437,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus
     ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus
-      (
-        ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus_STAGESTATUSUNSPECIFIED,
+      ( ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus_STAGESTATUSUNSPECIFIED,
         ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus_STAGESTATUSACTIVE,
         ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus_STAGESTATUSCOMPLETE,
         ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus_STAGESTATUSFAILED,
@@ -497,8 +448,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus
     ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus
-      (
-        ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSUNSPECIFIED,
+      ( ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSUNSPECIFIED,
         ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSRUNNING,
         ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSCOMPLETED,
         ..
@@ -506,8 +456,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus
     ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus
-      (
-        ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSUNSPECIFIED,
+      ( ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSUNSPECIFIED,
         ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSACTIVE,
         ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSDEAD,
         ..
@@ -515,8 +464,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus
     ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus
-      (
-        ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSUNSPECIFIED,
+      ( ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSUNSPECIFIED,
         ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSRUNNING,
         ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSSUCCEEDED,
         ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSFAILED,
@@ -526,8 +474,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus
     ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus
-      (
-        ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSUNSPECIFIED,
+      ( ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSUNSPECIFIED,
         ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSRUNNING,
         ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSSUCCESS,
         ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSFAILED,
@@ -538,8 +485,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus
     ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus
-      (
-        ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus_STAGESTATUSUNSPECIFIED,
+      ( ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus_STAGESTATUSUNSPECIFIED,
         ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus_STAGESTATUSACTIVE,
         ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus_STAGESTATUSCOMPLETE,
         ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus_STAGESTATUSFAILED,
@@ -550,8 +496,7 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers
     ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers
-      (
-        ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers_FAILUREACTIONUNSPECIFIED,
+      ( ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers_FAILUREACTIONUNSPECIFIED,
         ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers_NOACTION,
         ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers_Delete',
         ..
@@ -559,28 +504,28 @@ module Gogol.Dataproc.Internal.Sum
 
     -- * ProjectsRegionsJobsListJobStateMatcher
     ProjectsRegionsJobsListJobStateMatcher
-      (
-        ProjectsRegionsJobsListJobStateMatcher_All,
+      ( ProjectsRegionsJobsListJobStateMatcher_All,
         ProjectsRegionsJobsListJobStateMatcher_Active,
         ProjectsRegionsJobsListJobStateMatcher_NONACTIVE,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -593,20 +538,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | Output only. Type of the workload being analyzed.
-newtype AnalyzeOperationMetadata_AnalyzedWorkloadType = AnalyzeOperationMetadata_AnalyzedWorkloadType { fromAnalyzeOperationMetadata_AnalyzedWorkloadType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AnalyzeOperationMetadata_AnalyzedWorkloadType = AnalyzeOperationMetadata_AnalyzedWorkloadType {fromAnalyzeOperationMetadata_AnalyzedWorkloadType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Undefined option
 pattern AnalyzeOperationMetadata_AnalyzedWorkloadType_WORKLOADTYPEUNSPECIFIED :: AnalyzeOperationMetadata_AnalyzedWorkloadType
@@ -619,54 +565,51 @@ pattern AnalyzeOperationMetadata_AnalyzedWorkloadType_Batch = AnalyzeOperationMe
 {-# COMPLETE
   AnalyzeOperationMetadata_AnalyzedWorkloadType_WORKLOADTYPEUNSPECIFIED,
   AnalyzeOperationMetadata_AnalyzedWorkloadType_Batch,
-  AnalyzeOperationMetadata_AnalyzedWorkloadType #-}
+  AnalyzeOperationMetadata_AnalyzedWorkloadType
+  #-}
 
-newtype ApplicationInfo_ApplicationContextIngestionStatus = ApplicationInfo_ApplicationContextIngestionStatus { fromApplicationInfo_ApplicationContextIngestionStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ApplicationInfo_ApplicationContextIngestionStatus = ApplicationInfo_ApplicationContextIngestionStatus {fromApplicationInfo_ApplicationContextIngestionStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern ApplicationInfo_ApplicationContextIngestionStatus_APPLICATIONCONTEXTINGESTIONSTATUSUNSPECIFIED :: ApplicationInfo_ApplicationContextIngestionStatus
 pattern ApplicationInfo_ApplicationContextIngestionStatus_APPLICATIONCONTEXTINGESTIONSTATUSUNSPECIFIED = ApplicationInfo_ApplicationContextIngestionStatus "APPLICATION_CONTEXT_INGESTION_STATUS_UNSPECIFIED"
 
--- | 
 pattern ApplicationInfo_ApplicationContextIngestionStatus_APPLICATIONCONTEXTINGESTIONSTATUSCOMPLETED :: ApplicationInfo_ApplicationContextIngestionStatus
 pattern ApplicationInfo_ApplicationContextIngestionStatus_APPLICATIONCONTEXTINGESTIONSTATUSCOMPLETED = ApplicationInfo_ApplicationContextIngestionStatus "APPLICATION_CONTEXT_INGESTION_STATUS_COMPLETED"
 
 {-# COMPLETE
   ApplicationInfo_ApplicationContextIngestionStatus_APPLICATIONCONTEXTINGESTIONSTATUSUNSPECIFIED,
   ApplicationInfo_ApplicationContextIngestionStatus_APPLICATIONCONTEXTINGESTIONSTATUSCOMPLETED,
-  ApplicationInfo_ApplicationContextIngestionStatus #-}
+  ApplicationInfo_ApplicationContextIngestionStatus
+  #-}
 
-newtype ApplicationInfo_QuantileDataStatus = ApplicationInfo_QuantileDataStatus { fromApplicationInfo_QuantileDataStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ApplicationInfo_QuantileDataStatus = ApplicationInfo_QuantileDataStatus {fromApplicationInfo_QuantileDataStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern ApplicationInfo_QuantileDataStatus_QUANTILEDATASTATUSUNSPECIFIED :: ApplicationInfo_QuantileDataStatus
 pattern ApplicationInfo_QuantileDataStatus_QUANTILEDATASTATUSUNSPECIFIED = ApplicationInfo_QuantileDataStatus "QUANTILE_DATA_STATUS_UNSPECIFIED"
 
--- | 
 pattern ApplicationInfo_QuantileDataStatus_QUANTILEDATASTATUSCOMPLETED :: ApplicationInfo_QuantileDataStatus
 pattern ApplicationInfo_QuantileDataStatus_QUANTILEDATASTATUSCOMPLETED = ApplicationInfo_QuantileDataStatus "QUANTILE_DATA_STATUS_COMPLETED"
 
--- | 
 pattern ApplicationInfo_QuantileDataStatus_QUANTILEDATASTATUSFAILED :: ApplicationInfo_QuantileDataStatus
 pattern ApplicationInfo_QuantileDataStatus_QUANTILEDATASTATUSFAILED = ApplicationInfo_QuantileDataStatus "QUANTILE_DATA_STATUS_FAILED"
 
@@ -674,19 +617,20 @@ pattern ApplicationInfo_QuantileDataStatus_QUANTILEDATASTATUSFAILED = Applicatio
   ApplicationInfo_QuantileDataStatus_QUANTILEDATASTATUSUNSPECIFIED,
   ApplicationInfo_QuantileDataStatus_QUANTILEDATASTATUSCOMPLETED,
   ApplicationInfo_QuantileDataStatus_QUANTILEDATASTATUSFAILED,
-  ApplicationInfo_QuantileDataStatus #-}
+  ApplicationInfo_QuantileDataStatus
+  #-}
 
-newtype AutotuningConfig_ScenariosItem = AutotuningConfig_ScenariosItem { fromAutotuningConfig_ScenariosItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AutotuningConfig_ScenariosItem = AutotuningConfig_ScenariosItem {fromAutotuningConfig_ScenariosItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern AutotuningConfig_ScenariosItem_SCENARIOUNSPECIFIED :: AutotuningConfig_ScenariosItem
@@ -709,20 +653,21 @@ pattern AutotuningConfig_ScenariosItem_Memory = AutotuningConfig_ScenariosItem "
   AutotuningConfig_ScenariosItem_Scaling,
   AutotuningConfig_ScenariosItem_BROADCASTHASHJOIN,
   AutotuningConfig_ScenariosItem_Memory,
-  AutotuningConfig_ScenariosItem #-}
+  AutotuningConfig_ScenariosItem
+  #-}
 
 -- | Output only. The state of the batch.
-newtype Batch_State = Batch_State { fromBatch_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Batch_State = Batch_State {fromBatch_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The batch state is unknown.
 pattern Batch_State_STATEUNSPECIFIED :: Batch_State
@@ -760,20 +705,21 @@ pattern Batch_State_Failed = Batch_State "FAILED"
   Batch_State_Cancelled,
   Batch_State_Succeeded,
   Batch_State_Failed,
-  Batch_State #-}
+  Batch_State
+  #-}
 
 -- | The operation type.
-newtype BatchOperationMetadata_OperationType = BatchOperationMetadata_OperationType { fromBatchOperationMetadata_OperationType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BatchOperationMetadata_OperationType = BatchOperationMetadata_OperationType {fromBatchOperationMetadata_OperationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Batch operation type is unknown.
 pattern BatchOperationMetadata_OperationType_BATCHOPERATIONTYPEUNSPECIFIED :: BatchOperationMetadata_OperationType
@@ -786,20 +732,21 @@ pattern BatchOperationMetadata_OperationType_Batch = BatchOperationMetadata_Oper
 {-# COMPLETE
   BatchOperationMetadata_OperationType_BATCHOPERATIONTYPEUNSPECIFIED,
   BatchOperationMetadata_OperationType_Batch,
-  BatchOperationMetadata_OperationType #-}
+  BatchOperationMetadata_OperationType
+  #-}
 
 -- | Output only. A message containing the operation state.
-newtype ClusterOperationStatus_State = ClusterOperationStatus_State { fromClusterOperationStatus_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ClusterOperationStatus_State = ClusterOperationStatus_State {fromClusterOperationStatus_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unused.
 pattern ClusterOperationStatus_State_Unknown :: ClusterOperationStatus_State
@@ -822,20 +769,21 @@ pattern ClusterOperationStatus_State_Done = ClusterOperationStatus_State "DONE"
   ClusterOperationStatus_State_Pending,
   ClusterOperationStatus_State_Running,
   ClusterOperationStatus_State_Done,
-  ClusterOperationStatus_State #-}
+  ClusterOperationStatus_State
+  #-}
 
 -- | Output only. The cluster\'s state.
-newtype ClusterStatus_State = ClusterStatus_State { fromClusterStatus_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ClusterStatus_State = ClusterStatus_State {fromClusterStatus_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The cluster state is unknown.
 pattern ClusterStatus_State_Unknown :: ClusterStatus_State
@@ -893,20 +841,21 @@ pattern ClusterStatus_State_Repairing = ClusterStatus_State "REPAIRING"
   ClusterStatus_State_Stopped,
   ClusterStatus_State_Starting,
   ClusterStatus_State_Repairing,
-  ClusterStatus_State #-}
+  ClusterStatus_State
+  #-}
 
 -- | Output only. Additional state information that includes status reported by the agent.
-newtype ClusterStatus_Substate = ClusterStatus_Substate { fromClusterStatus_Substate :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ClusterStatus_Substate = ClusterStatus_Substate {fromClusterStatus_Substate :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The cluster substate is unknown.
 pattern ClusterStatus_Substate_Unspecified :: ClusterStatus_Substate
@@ -924,20 +873,21 @@ pattern ClusterStatus_Substate_STALESTATUS = ClusterStatus_Substate "STALE_STATU
   ClusterStatus_Substate_Unspecified,
   ClusterStatus_Substate_Unhealthy,
   ClusterStatus_Substate_STALESTATUS,
-  ClusterStatus_Substate #-}
+  ClusterStatus_Substate
+  #-}
 
 -- | Required. Repair action to take on the cluster resource.
-newtype ClusterToRepair_ClusterRepairAction = ClusterToRepair_ClusterRepairAction { fromClusterToRepair_ClusterRepairAction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ClusterToRepair_ClusterRepairAction = ClusterToRepair_ClusterRepairAction {fromClusterToRepair_ClusterRepairAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No action will be taken by default.
 pattern ClusterToRepair_ClusterRepairAction_CLUSTERREPAIRACTIONUNSPECIFIED :: ClusterToRepair_ClusterRepairAction
@@ -950,20 +900,21 @@ pattern ClusterToRepair_ClusterRepairAction_REPAIRERRORDUETOUPDATECLUSTER = Clus
 {-# COMPLETE
   ClusterToRepair_ClusterRepairAction_CLUSTERREPAIRACTIONUNSPECIFIED,
   ClusterToRepair_ClusterRepairAction_REPAIRERRORDUETOUPDATECLUSTER,
-  ClusterToRepair_ClusterRepairAction #-}
+  ClusterToRepair_ClusterRepairAction
+  #-}
 
 -- | Optional. (Optional) The access type to the diagnostic tarball. If not specified, falls back to default access of the bucket
-newtype DiagnoseClusterRequest_TarballAccess = DiagnoseClusterRequest_TarballAccess { fromDiagnoseClusterRequest_TarballAccess :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DiagnoseClusterRequest_TarballAccess = DiagnoseClusterRequest_TarballAccess {fromDiagnoseClusterRequest_TarballAccess :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Tarball Access unspecified. Falls back to default access of the bucket
 pattern DiagnoseClusterRequest_TarballAccess_TARBALLACCESSUNSPECIFIED :: DiagnoseClusterRequest_TarballAccess
@@ -981,20 +932,21 @@ pattern DiagnoseClusterRequest_TarballAccess_GOOGLEDATAPROCDIAGNOSE = DiagnoseCl
   DiagnoseClusterRequest_TarballAccess_TARBALLACCESSUNSPECIFIED,
   DiagnoseClusterRequest_TarballAccess_GOOGLECLOUDSUPPORT,
   DiagnoseClusterRequest_TarballAccess_GOOGLEDATAPROCDIAGNOSE,
-  DiagnoseClusterRequest_TarballAccess #-}
+  DiagnoseClusterRequest_TarballAccess
+  #-}
 
 -- | Optional. The type of IPv6 access for a cluster.
-newtype GceClusterConfig_PrivateIpv6GoogleAccess = GceClusterConfig_PrivateIpv6GoogleAccess { fromGceClusterConfig_PrivateIpv6GoogleAccess :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GceClusterConfig_PrivateIpv6GoogleAccess = GceClusterConfig_PrivateIpv6GoogleAccess {fromGceClusterConfig_PrivateIpv6GoogleAccess :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | If unspecified, Compute Engine default behavior will apply, which is the same as INHERIT/FROM/SUBNETWORK.
 pattern GceClusterConfig_PrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSUNSPECIFIED :: GceClusterConfig_PrivateIpv6GoogleAccess
@@ -1017,19 +969,20 @@ pattern GceClusterConfig_PrivateIpv6GoogleAccess_Bidirectional = GceClusterConfi
   GceClusterConfig_PrivateIpv6GoogleAccess_INHERITFROMSUBNETWORK,
   GceClusterConfig_PrivateIpv6GoogleAccess_Outbound,
   GceClusterConfig_PrivateIpv6GoogleAccess_Bidirectional,
-  GceClusterConfig_PrivateIpv6GoogleAccess #-}
+  GceClusterConfig_PrivateIpv6GoogleAccess
+  #-}
 
-newtype GkeNodePoolTarget_RolesItem = GkeNodePoolTarget_RolesItem { fromGkeNodePoolTarget_RolesItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GkeNodePoolTarget_RolesItem = GkeNodePoolTarget_RolesItem {fromGkeNodePoolTarget_RolesItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Role is unspecified.
 pattern GkeNodePoolTarget_RolesItem_ROLEUNSPECIFIED :: GkeNodePoolTarget_RolesItem
@@ -1057,20 +1010,21 @@ pattern GkeNodePoolTarget_RolesItem_SPARKEXECUTOR = GkeNodePoolTarget_RolesItem 
   GkeNodePoolTarget_RolesItem_Controller,
   GkeNodePoolTarget_RolesItem_SPARKDRIVER,
   GkeNodePoolTarget_RolesItem_SPARKEXECUTOR,
-  GkeNodePoolTarget_RolesItem #-}
+  GkeNodePoolTarget_RolesItem
+  #-}
 
 -- | Optional. Specifies the preemptibility of the instance group.The default value for master and worker groups is NON_PREEMPTIBLE. This default cannot be changed.The default value for secondary instances is PREEMPTIBLE.
-newtype InstanceGroupConfig_Preemptibility = InstanceGroupConfig_Preemptibility { fromInstanceGroupConfig_Preemptibility :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InstanceGroupConfig_Preemptibility = InstanceGroupConfig_Preemptibility {fromInstanceGroupConfig_Preemptibility :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Preemptibility is unspecified, the system will choose the appropriate setting for each instance group.
 pattern InstanceGroupConfig_Preemptibility_PREEMPTIBILITYUNSPECIFIED :: InstanceGroupConfig_Preemptibility
@@ -1093,37 +1047,33 @@ pattern InstanceGroupConfig_Preemptibility_Spot = InstanceGroupConfig_Preemptibi
   InstanceGroupConfig_Preemptibility_NONPREEMPTIBLE,
   InstanceGroupConfig_Preemptibility_Preemptible,
   InstanceGroupConfig_Preemptibility_Spot,
-  InstanceGroupConfig_Preemptibility #-}
+  InstanceGroupConfig_Preemptibility
+  #-}
 
-newtype JobData_Status = JobData_Status { fromJobData_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype JobData_Status = JobData_Status {fromJobData_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern JobData_Status_JOBEXECUTIONSTATUSUNSPECIFIED :: JobData_Status
 pattern JobData_Status_JOBEXECUTIONSTATUSUNSPECIFIED = JobData_Status "JOB_EXECUTION_STATUS_UNSPECIFIED"
 
--- | 
 pattern JobData_Status_JOBEXECUTIONSTATUSRUNNING :: JobData_Status
 pattern JobData_Status_JOBEXECUTIONSTATUSRUNNING = JobData_Status "JOB_EXECUTION_STATUS_RUNNING"
 
--- | 
 pattern JobData_Status_JOBEXECUTIONSTATUSSUCCEEDED :: JobData_Status
 pattern JobData_Status_JOBEXECUTIONSTATUSSUCCEEDED = JobData_Status "JOB_EXECUTION_STATUS_SUCCEEDED"
 
--- | 
 pattern JobData_Status_JOBEXECUTIONSTATUSFAILED :: JobData_Status
 pattern JobData_Status_JOBEXECUTIONSTATUSFAILED = JobData_Status "JOB_EXECUTION_STATUS_FAILED"
 
--- | 
 pattern JobData_Status_JOBEXECUTIONSTATUSUNKNOWN :: JobData_Status
 pattern JobData_Status_JOBEXECUTIONSTATUSUNKNOWN = JobData_Status "JOB_EXECUTION_STATUS_UNKNOWN"
 
@@ -1133,20 +1083,21 @@ pattern JobData_Status_JOBEXECUTIONSTATUSUNKNOWN = JobData_Status "JOB_EXECUTION
   JobData_Status_JOBEXECUTIONSTATUSSUCCEEDED,
   JobData_Status_JOBEXECUTIONSTATUSFAILED,
   JobData_Status_JOBEXECUTIONSTATUSUNKNOWN,
-  JobData_Status #-}
+  JobData_Status
+  #-}
 
 -- | Output only. A state message specifying the overall job state.
-newtype JobStatus_State = JobStatus_State { fromJobStatus_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype JobStatus_State = JobStatus_State {fromJobStatus_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The job state is unknown.
 pattern JobStatus_State_STATEUNSPECIFIED :: JobStatus_State
@@ -1199,20 +1150,21 @@ pattern JobStatus_State_ATTEMPTFAILURE = JobStatus_State "ATTEMPT_FAILURE"
   JobStatus_State_Done,
   JobStatus_State_Error',
   JobStatus_State_ATTEMPTFAILURE,
-  JobStatus_State #-}
+  JobStatus_State
+  #-}
 
 -- | Output only. Additional state information, which includes status reported by the agent.
-newtype JobStatus_Substate = JobStatus_Substate { fromJobStatus_Substate :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype JobStatus_Substate = JobStatus_Substate {fromJobStatus_Substate :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The job substate is unknown.
 pattern JobStatus_Substate_Unspecified :: JobStatus_Substate
@@ -1235,20 +1187,21 @@ pattern JobStatus_Substate_STALESTATUS = JobStatus_Substate "STALE_STATUS"
   JobStatus_Substate_Submitted,
   JobStatus_Substate_Queued,
   JobStatus_Substate_STALESTATUS,
-  JobStatus_Substate #-}
+  JobStatus_Substate
+  #-}
 
 -- | Optional. Kernel
-newtype JupyterConfig_Kernel = JupyterConfig_Kernel { fromJupyterConfig_Kernel :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype JupyterConfig_Kernel = JupyterConfig_Kernel {fromJupyterConfig_Kernel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The kernel is unknown.
 pattern JupyterConfig_Kernel_KERNELUNSPECIFIED :: JupyterConfig_Kernel
@@ -1266,19 +1219,20 @@ pattern JupyterConfig_Kernel_Scala = JupyterConfig_Kernel "SCALA"
   JupyterConfig_Kernel_KERNELUNSPECIFIED,
   JupyterConfig_Kernel_Python,
   JupyterConfig_Kernel_Scala,
-  JupyterConfig_Kernel #-}
+  JupyterConfig_Kernel
+  #-}
 
-newtype LoggingConfig_DriverLogLevelsAdditional = LoggingConfig_DriverLogLevelsAdditional { fromLoggingConfig_DriverLogLevelsAdditional :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype LoggingConfig_DriverLogLevelsAdditional = LoggingConfig_DriverLogLevelsAdditional {fromLoggingConfig_DriverLogLevelsAdditional :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Level is unspecified. Use default level for log4j.
 pattern LoggingConfig_DriverLogLevelsAdditional_LEVELUNSPECIFIED :: LoggingConfig_DriverLogLevelsAdditional
@@ -1326,20 +1280,21 @@ pattern LoggingConfig_DriverLogLevelsAdditional_Off = LoggingConfig_DriverLogLev
   LoggingConfig_DriverLogLevelsAdditional_Error',
   LoggingConfig_DriverLogLevelsAdditional_Fatal,
   LoggingConfig_DriverLogLevelsAdditional_Off,
-  LoggingConfig_DriverLogLevelsAdditional #-}
+  LoggingConfig_DriverLogLevelsAdditional
+  #-}
 
 -- | Required. A standard set of metrics is collected unless metricOverrides are specified for the metric source (see Custom metrics (https:\/\/cloud.google.com\/dataproc\/docs\/guides\/dataproc-metrics#custom_metrics) for more information).
-newtype Metric_MetricSource = Metric_MetricSource { fromMetric_MetricSource :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Metric_MetricSource = Metric_MetricSource {fromMetric_MetricSource :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Required unspecified metric source.
 pattern Metric_MetricSource_METRICSOURCEUNSPECIFIED :: Metric_MetricSource
@@ -1387,19 +1342,20 @@ pattern Metric_MetricSource_Flink = Metric_MetricSource "FLINK"
   Metric_MetricSource_HIVESERVER2,
   Metric_MetricSource_Hivemetastore,
   Metric_MetricSource_Flink,
-  Metric_MetricSource #-}
+  Metric_MetricSource
+  #-}
 
-newtype NodeGroup_RolesItem = NodeGroup_RolesItem { fromNodeGroup_RolesItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NodeGroup_RolesItem = NodeGroup_RolesItem {fromNodeGroup_RolesItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Required unspecified role.
 pattern NodeGroup_RolesItem_ROLEUNSPECIFIED :: NodeGroup_RolesItem
@@ -1412,20 +1368,21 @@ pattern NodeGroup_RolesItem_Driver = NodeGroup_RolesItem "DRIVER"
 {-# COMPLETE
   NodeGroup_RolesItem_ROLEUNSPECIFIED,
   NodeGroup_RolesItem_Driver,
-  NodeGroup_RolesItem #-}
+  NodeGroup_RolesItem
+  #-}
 
 -- | The operation type.
-newtype NodeGroupOperationMetadata_OperationType = NodeGroupOperationMetadata_OperationType { fromNodeGroupOperationMetadata_OperationType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NodeGroupOperationMetadata_OperationType = NodeGroupOperationMetadata_OperationType {fromNodeGroupOperationMetadata_OperationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Node group operation type is unknown.
 pattern NodeGroupOperationMetadata_OperationType_NODEGROUPOPERATIONTYPEUNSPECIFIED :: NodeGroupOperationMetadata_OperationType
@@ -1473,20 +1430,21 @@ pattern NodeGroupOperationMetadata_OperationType_Stop = NodeGroupOperationMetada
   NodeGroupOperationMetadata_OperationType_UPDATELABELS,
   NodeGroupOperationMetadata_OperationType_Start,
   NodeGroupOperationMetadata_OperationType_Stop,
-  NodeGroupOperationMetadata_OperationType #-}
+  NodeGroupOperationMetadata_OperationType
+  #-}
 
 -- | Required. Repair action to take on specified resources of the node pool.
-newtype NodePool_RepairAction = NodePool_RepairAction { fromNodePool_RepairAction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NodePool_RepairAction = NodePool_RepairAction {fromNodePool_RepairAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No action will be taken by default.
 pattern NodePool_RepairAction_REPAIRACTIONUNSPECIFIED :: NodePool_RepairAction
@@ -1499,33 +1457,30 @@ pattern NodePool_RepairAction_Delete' = NodePool_RepairAction "DELETE"
 {-# COMPLETE
   NodePool_RepairAction_REPAIRACTIONUNSPECIFIED,
   NodePool_RepairAction_Delete',
-  NodePool_RepairAction #-}
+  NodePool_RepairAction
+  #-}
 
-newtype RddOperationNode_OutputDeterministicLevel = RddOperationNode_OutputDeterministicLevel { fromRddOperationNode_OutputDeterministicLevel :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RddOperationNode_OutputDeterministicLevel = RddOperationNode_OutputDeterministicLevel {fromRddOperationNode_OutputDeterministicLevel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern RddOperationNode_OutputDeterministicLevel_DETERMINISTICLEVELUNSPECIFIED :: RddOperationNode_OutputDeterministicLevel
 pattern RddOperationNode_OutputDeterministicLevel_DETERMINISTICLEVELUNSPECIFIED = RddOperationNode_OutputDeterministicLevel "DETERMINISTIC_LEVEL_UNSPECIFIED"
 
--- | 
 pattern RddOperationNode_OutputDeterministicLevel_DETERMINISTICLEVELDETERMINATE :: RddOperationNode_OutputDeterministicLevel
 pattern RddOperationNode_OutputDeterministicLevel_DETERMINISTICLEVELDETERMINATE = RddOperationNode_OutputDeterministicLevel "DETERMINISTIC_LEVEL_DETERMINATE"
 
--- | 
 pattern RddOperationNode_OutputDeterministicLevel_DETERMINISTICLEVELUNORDERED :: RddOperationNode_OutputDeterministicLevel
 pattern RddOperationNode_OutputDeterministicLevel_DETERMINISTICLEVELUNORDERED = RddOperationNode_OutputDeterministicLevel "DETERMINISTIC_LEVEL_UNORDERED"
 
--- | 
 pattern RddOperationNode_OutputDeterministicLevel_DETERMINISTICLEVELINDETERMINATE :: RddOperationNode_OutputDeterministicLevel
 pattern RddOperationNode_OutputDeterministicLevel_DETERMINISTICLEVELINDETERMINATE = RddOperationNode_OutputDeterministicLevel "DETERMINISTIC_LEVEL_INDETERMINATE"
 
@@ -1534,20 +1489,21 @@ pattern RddOperationNode_OutputDeterministicLevel_DETERMINISTICLEVELINDETERMINAT
   RddOperationNode_OutputDeterministicLevel_DETERMINISTICLEVELDETERMINATE,
   RddOperationNode_OutputDeterministicLevel_DETERMINISTICLEVELUNORDERED,
   RddOperationNode_OutputDeterministicLevel_DETERMINISTICLEVELINDETERMINATE,
-  RddOperationNode_OutputDeterministicLevel #-}
+  RddOperationNode_OutputDeterministicLevel
+  #-}
 
 -- | Required. Repair action to take on specified resources of the node pool.
-newtype RepairNodeGroupRequest_RepairAction = RepairNodeGroupRequest_RepairAction { fromRepairNodeGroupRequest_RepairAction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RepairNodeGroupRequest_RepairAction = RepairNodeGroupRequest_RepairAction {fromRepairNodeGroupRequest_RepairAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No action will be taken by default.
 pattern RepairNodeGroupRequest_RepairAction_REPAIRACTIONUNSPECIFIED :: RepairNodeGroupRequest_RepairAction
@@ -1560,22 +1516,22 @@ pattern RepairNodeGroupRequest_RepairAction_Replace = RepairNodeGroupRequest_Rep
 {-# COMPLETE
   RepairNodeGroupRequest_RepairAction_REPAIRACTIONUNSPECIFIED,
   RepairNodeGroupRequest_RepairAction_Replace,
-  RepairNodeGroupRequest_RepairAction #-}
+  RepairNodeGroupRequest_RepairAction
+  #-}
 
 -- | Optional. Type of reservation to consume
-newtype ReservationAffinity_ConsumeReservationType = ReservationAffinity_ConsumeReservationType { fromReservationAffinity_ConsumeReservationType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ReservationAffinity_ConsumeReservationType = ReservationAffinity_ConsumeReservationType {fromReservationAffinity_ConsumeReservationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern ReservationAffinity_ConsumeReservationType_TYPEUNSPECIFIED :: ReservationAffinity_ConsumeReservationType
 pattern ReservationAffinity_ConsumeReservationType_TYPEUNSPECIFIED = ReservationAffinity_ConsumeReservationType "TYPE_UNSPECIFIED"
 
@@ -1596,20 +1552,21 @@ pattern ReservationAffinity_ConsumeReservationType_SPECIFICRESERVATION = Reserva
   ReservationAffinity_ConsumeReservationType_NORESERVATION,
   ReservationAffinity_ConsumeReservationType_ANYRESERVATION,
   ReservationAffinity_ConsumeReservationType_SPECIFICRESERVATION,
-  ReservationAffinity_ConsumeReservationType #-}
+  ReservationAffinity_ConsumeReservationType
+  #-}
 
 -- | Output only. A state of the session.
-newtype Session_State = Session_State { fromSession_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Session_State = Session_State {fromSession_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The session state is unknown.
 pattern Session_State_STATEUNSPECIFIED :: Session_State
@@ -1642,20 +1599,21 @@ pattern Session_State_Failed = Session_State "FAILED"
   Session_State_Terminating,
   Session_State_Terminated,
   Session_State_Failed,
-  Session_State #-}
+  Session_State
+  #-}
 
 -- | The operation type.
-newtype SessionOperationMetadata_OperationType = SessionOperationMetadata_OperationType { fromSessionOperationMetadata_OperationType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SessionOperationMetadata_OperationType = SessionOperationMetadata_OperationType {fromSessionOperationMetadata_OperationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Session operation type is unknown.
 pattern SessionOperationMetadata_OperationType_SESSIONOPERATIONTYPEUNSPECIFIED :: SessionOperationMetadata_OperationType
@@ -1678,20 +1636,21 @@ pattern SessionOperationMetadata_OperationType_Delete' = SessionOperationMetadat
   SessionOperationMetadata_OperationType_Create,
   SessionOperationMetadata_OperationType_Terminate,
   SessionOperationMetadata_OperationType_Delete',
-  SessionOperationMetadata_OperationType #-}
+  SessionOperationMetadata_OperationType
+  #-}
 
 -- | Output only. The state of the session at this point in the session history.
-newtype SessionStateHistory_State = SessionStateHistory_State { fromSessionStateHistory_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SessionStateHistory_State = SessionStateHistory_State {fromSessionStateHistory_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The session state is unknown.
 pattern SessionStateHistory_State_STATEUNSPECIFIED :: SessionStateHistory_State
@@ -1724,19 +1683,20 @@ pattern SessionStateHistory_State_Failed = SessionStateHistory_State "FAILED"
   SessionStateHistory_State_Terminating,
   SessionStateHistory_State_Terminated,
   SessionStateHistory_State_Failed,
-  SessionStateHistory_State #-}
+  SessionStateHistory_State
+  #-}
 
-newtype SoftwareConfig_OptionalComponentsItem = SoftwareConfig_OptionalComponentsItem { fromSoftwareConfig_OptionalComponentsItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SoftwareConfig_OptionalComponentsItem = SoftwareConfig_OptionalComponentsItem {fromSoftwareConfig_OptionalComponentsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified component. Specifying this will cause Cluster creation to fail.
 pattern SoftwareConfig_OptionalComponentsItem_COMPONENTUNSPECIFIED :: SoftwareConfig_OptionalComponentsItem
@@ -1819,37 +1779,33 @@ pattern SoftwareConfig_OptionalComponentsItem_Zookeeper = SoftwareConfig_Optiona
   SoftwareConfig_OptionalComponentsItem_Solr,
   SoftwareConfig_OptionalComponentsItem_Zeppelin,
   SoftwareConfig_OptionalComponentsItem_Zookeeper,
-  SoftwareConfig_OptionalComponentsItem #-}
+  SoftwareConfig_OptionalComponentsItem
+  #-}
 
-newtype SqlExecutionUiData_JobsAdditional = SqlExecutionUiData_JobsAdditional { fromSqlExecutionUiData_JobsAdditional :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SqlExecutionUiData_JobsAdditional = SqlExecutionUiData_JobsAdditional {fromSqlExecutionUiData_JobsAdditional :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern SqlExecutionUiData_JobsAdditional_JOBEXECUTIONSTATUSUNSPECIFIED :: SqlExecutionUiData_JobsAdditional
 pattern SqlExecutionUiData_JobsAdditional_JOBEXECUTIONSTATUSUNSPECIFIED = SqlExecutionUiData_JobsAdditional "JOB_EXECUTION_STATUS_UNSPECIFIED"
 
--- | 
 pattern SqlExecutionUiData_JobsAdditional_JOBEXECUTIONSTATUSRUNNING :: SqlExecutionUiData_JobsAdditional
 pattern SqlExecutionUiData_JobsAdditional_JOBEXECUTIONSTATUSRUNNING = SqlExecutionUiData_JobsAdditional "JOB_EXECUTION_STATUS_RUNNING"
 
--- | 
 pattern SqlExecutionUiData_JobsAdditional_JOBEXECUTIONSTATUSSUCCEEDED :: SqlExecutionUiData_JobsAdditional
 pattern SqlExecutionUiData_JobsAdditional_JOBEXECUTIONSTATUSSUCCEEDED = SqlExecutionUiData_JobsAdditional "JOB_EXECUTION_STATUS_SUCCEEDED"
 
--- | 
 pattern SqlExecutionUiData_JobsAdditional_JOBEXECUTIONSTATUSFAILED :: SqlExecutionUiData_JobsAdditional
 pattern SqlExecutionUiData_JobsAdditional_JOBEXECUTIONSTATUSFAILED = SqlExecutionUiData_JobsAdditional "JOB_EXECUTION_STATUS_FAILED"
 
--- | 
 pattern SqlExecutionUiData_JobsAdditional_JOBEXECUTIONSTATUSUNKNOWN :: SqlExecutionUiData_JobsAdditional
 pattern SqlExecutionUiData_JobsAdditional_JOBEXECUTIONSTATUSUNKNOWN = SqlExecutionUiData_JobsAdditional "JOB_EXECUTION_STATUS_UNKNOWN"
 
@@ -1859,41 +1815,36 @@ pattern SqlExecutionUiData_JobsAdditional_JOBEXECUTIONSTATUSUNKNOWN = SqlExecuti
   SqlExecutionUiData_JobsAdditional_JOBEXECUTIONSTATUSSUCCEEDED,
   SqlExecutionUiData_JobsAdditional_JOBEXECUTIONSTATUSFAILED,
   SqlExecutionUiData_JobsAdditional_JOBEXECUTIONSTATUSUNKNOWN,
-  SqlExecutionUiData_JobsAdditional #-}
+  SqlExecutionUiData_JobsAdditional
+  #-}
 
-newtype StageData_Status = StageData_Status { fromStageData_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype StageData_Status = StageData_Status {fromStageData_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern StageData_Status_STAGESTATUSUNSPECIFIED :: StageData_Status
 pattern StageData_Status_STAGESTATUSUNSPECIFIED = StageData_Status "STAGE_STATUS_UNSPECIFIED"
 
--- | 
 pattern StageData_Status_STAGESTATUSACTIVE :: StageData_Status
 pattern StageData_Status_STAGESTATUSACTIVE = StageData_Status "STAGE_STATUS_ACTIVE"
 
--- | 
 pattern StageData_Status_STAGESTATUSCOMPLETE :: StageData_Status
 pattern StageData_Status_STAGESTATUSCOMPLETE = StageData_Status "STAGE_STATUS_COMPLETE"
 
--- | 
 pattern StageData_Status_STAGESTATUSFAILED :: StageData_Status
 pattern StageData_Status_STAGESTATUSFAILED = StageData_Status "STAGE_STATUS_FAILED"
 
--- | 
 pattern StageData_Status_STAGESTATUSPENDING :: StageData_Status
 pattern StageData_Status_STAGESTATUSPENDING = StageData_Status "STAGE_STATUS_PENDING"
 
--- | 
 pattern StageData_Status_STAGESTATUSSKIPPED :: StageData_Status
 pattern StageData_Status_STAGESTATUSSKIPPED = StageData_Status "STAGE_STATUS_SKIPPED"
 
@@ -1904,20 +1855,21 @@ pattern StageData_Status_STAGESTATUSSKIPPED = StageData_Status "STAGE_STATUS_SKI
   StageData_Status_STAGESTATUSFAILED,
   StageData_Status_STAGESTATUSPENDING,
   StageData_Status_STAGESTATUSSKIPPED,
-  StageData_Status #-}
+  StageData_Status
+  #-}
 
 -- | Output only. The state of the batch at this point in history.
-newtype StateHistory_State = StateHistory_State { fromStateHistory_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype StateHistory_State = StateHistory_State {fromStateHistory_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The batch state is unknown.
 pattern StateHistory_State_STATEUNSPECIFIED :: StateHistory_State
@@ -1955,20 +1907,21 @@ pattern StateHistory_State_Failed = StateHistory_State "FAILED"
   StateHistory_State_Cancelled,
   StateHistory_State_Succeeded,
   StateHistory_State_Failed,
-  StateHistory_State #-}
+  StateHistory_State
+  #-}
 
 -- | Output only. The workflow state.
-newtype WorkflowMetadata_State = WorkflowMetadata_State { fromWorkflowMetadata_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype WorkflowMetadata_State = WorkflowMetadata_State {fromWorkflowMetadata_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unused.
 pattern WorkflowMetadata_State_Unknown :: WorkflowMetadata_State
@@ -1991,20 +1944,21 @@ pattern WorkflowMetadata_State_Done = WorkflowMetadata_State "DONE"
   WorkflowMetadata_State_Pending,
   WorkflowMetadata_State_Running,
   WorkflowMetadata_State_Done,
-  WorkflowMetadata_State #-}
+  WorkflowMetadata_State
+  #-}
 
 -- | Output only. The node state.
-newtype WorkflowNode_State = WorkflowNode_State { fromWorkflowNode_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype WorkflowNode_State = WorkflowNode_State {fromWorkflowNode_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | State is unspecified.
 pattern WorkflowNode_State_NODESTATEUNSPECIFIED :: WorkflowNode_State
@@ -2037,20 +1991,21 @@ pattern WorkflowNode_State_Failed = WorkflowNode_State "FAILED"
   WorkflowNode_State_Running,
   WorkflowNode_State_Completed,
   WorkflowNode_State_Failed,
-  WorkflowNode_State #-}
+  WorkflowNode_State
+  #-}
 
 -- | Required. The application state.
-newtype YarnApplication_State = YarnApplication_State { fromYarnApplication_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype YarnApplication_State = YarnApplication_State {fromYarnApplication_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Status is unspecified.
 pattern YarnApplication_State_STATEUNSPECIFIED :: YarnApplication_State
@@ -2098,30 +2053,28 @@ pattern YarnApplication_State_Killed = YarnApplication_State "KILLED"
   YarnApplication_State_Finished,
   YarnApplication_State_Failed,
   YarnApplication_State_Killed,
-  YarnApplication_State #-}
+  YarnApplication_State
+  #-}
 
 -- | Optional. Search only applications in the chosen state.
-newtype ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus = ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus { fromProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus = ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus {fromProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSUNSPECIFIED :: ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus
 pattern ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSUNSPECIFIED = ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus "APPLICATION_STATUS_UNSPECIFIED"
 
--- | 
 pattern ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSRUNNING :: ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus
 pattern ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSRUNNING = ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus "APPLICATION_STATUS_RUNNING"
 
--- | 
 pattern ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSCOMPLETED :: ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus
 pattern ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSCOMPLETED = ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus "APPLICATION_STATUS_COMPLETED"
 
@@ -2129,30 +2082,28 @@ pattern ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus_APPLICA
   ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSUNSPECIFIED,
   ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSRUNNING,
   ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSCOMPLETED,
-  ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus #-}
+  ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus
+  #-}
 
 -- | Optional. Filter to select whether active\/ dead or all executors should be selected.
-newtype ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus = ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus { fromProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus = ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus {fromProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSUNSPECIFIED :: ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus
 pattern ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSUNSPECIFIED = ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus "EXECUTOR_STATUS_UNSPECIFIED"
 
--- | 
 pattern ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSACTIVE :: ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus
 pattern ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSACTIVE = ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus "EXECUTOR_STATUS_ACTIVE"
 
--- | 
 pattern ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSDEAD :: ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus
 pattern ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSDEAD = ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus "EXECUTOR_STATUS_DEAD"
 
@@ -2160,38 +2111,34 @@ pattern ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus_E
   ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSUNSPECIFIED,
   ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSACTIVE,
   ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSDEAD,
-  ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus #-}
+  ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus
+  #-}
 
 -- | Optional. List only jobs in the specific state.
-newtype ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus = ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus { fromProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus = ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus {fromProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSUNSPECIFIED :: ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus
 pattern ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSUNSPECIFIED = ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus "JOB_EXECUTION_STATUS_UNSPECIFIED"
 
--- | 
 pattern ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSRUNNING :: ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus
 pattern ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSRUNNING = ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus "JOB_EXECUTION_STATUS_RUNNING"
 
--- | 
 pattern ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSSUCCEEDED :: ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus
 pattern ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSSUCCEEDED = ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus "JOB_EXECUTION_STATUS_SUCCEEDED"
 
--- | 
 pattern ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSFAILED :: ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus
 pattern ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSFAILED = ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus "JOB_EXECUTION_STATUS_FAILED"
 
--- | 
 pattern ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSUNKNOWN :: ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus
 pattern ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSUNKNOWN = ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus "JOB_EXECUTION_STATUS_UNKNOWN"
 
@@ -2201,42 +2148,37 @@ pattern ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus_JOBEXECUTIO
   ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSSUCCEEDED,
   ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSFAILED,
   ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSUNKNOWN,
-  ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus #-}
+  ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus
+  #-}
 
 -- | Optional. List only tasks in the state.
-newtype ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus = ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus { fromProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus = ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus {fromProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSUNSPECIFIED :: ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSUNSPECIFIED = ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus "TASK_STATUS_UNSPECIFIED"
 
--- | 
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSRUNNING :: ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSRUNNING = ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus "TASK_STATUS_RUNNING"
 
--- | 
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSSUCCESS :: ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSSUCCESS = ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus "TASK_STATUS_SUCCESS"
 
--- | 
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSFAILED :: ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSFAILED = ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus "TASK_STATUS_FAILED"
 
--- | 
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSKILLED :: ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSKILLED = ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus "TASK_STATUS_KILLED"
 
--- | 
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSPENDING :: ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSPENDING = ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus "TASK_STATUS_PENDING"
 
@@ -2247,42 +2189,37 @@ pattern ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStat
   ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSFAILED,
   ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSKILLED,
   ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSPENDING,
-  ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus #-}
+  ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus
+  #-}
 
 -- | Optional. List only stages in the given state.
-newtype ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus = ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus { fromProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus = ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus {fromProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus_STAGESTATUSUNSPECIFIED :: ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus_STAGESTATUSUNSPECIFIED = ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus "STAGE_STATUS_UNSPECIFIED"
 
--- | 
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus_STAGESTATUSACTIVE :: ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus_STAGESTATUSACTIVE = ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus "STAGE_STATUS_ACTIVE"
 
--- | 
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus_STAGESTATUSCOMPLETE :: ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus_STAGESTATUSCOMPLETE = ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus "STAGE_STATUS_COMPLETE"
 
--- | 
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus_STAGESTATUSFAILED :: ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus_STAGESTATUSFAILED = ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus "STAGE_STATUS_FAILED"
 
--- | 
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus_STAGESTATUSPENDING :: ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus_STAGESTATUSPENDING = ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus "STAGE_STATUS_PENDING"
 
--- | 
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus_STAGESTATUSSKIPPED :: ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus
 pattern ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus_STAGESTATUSSKIPPED = ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus "STAGE_STATUS_SKIPPED"
 
@@ -2293,30 +2230,28 @@ pattern ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus_STAGEST
   ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus_STAGESTATUSFAILED,
   ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus_STAGESTATUSPENDING,
   ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus_STAGESTATUSSKIPPED,
-  ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus #-}
+  ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus
+  #-}
 
 -- | Optional. Search only applications in the chosen state.
-newtype ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus = ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus { fromProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus = ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus {fromProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSUNSPECIFIED :: ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus
 pattern ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSUNSPECIFIED = ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus "APPLICATION_STATUS_UNSPECIFIED"
 
--- | 
 pattern ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSRUNNING :: ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus
 pattern ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSRUNNING = ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus "APPLICATION_STATUS_RUNNING"
 
--- | 
 pattern ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSCOMPLETED :: ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus
 pattern ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSCOMPLETED = ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus "APPLICATION_STATUS_COMPLETED"
 
@@ -2324,30 +2259,28 @@ pattern ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus_APPLIC
   ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSUNSPECIFIED,
   ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSRUNNING,
   ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus_APPLICATIONSTATUSCOMPLETED,
-  ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus #-}
+  ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus
+  #-}
 
 -- | Optional. Filter to select whether active\/ dead or all executors should be selected.
-newtype ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus = ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus { fromProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus = ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus {fromProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSUNSPECIFIED :: ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus
 pattern ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSUNSPECIFIED = ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus "EXECUTOR_STATUS_UNSPECIFIED"
 
--- | 
 pattern ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSACTIVE :: ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus
 pattern ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSACTIVE = ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus "EXECUTOR_STATUS_ACTIVE"
 
--- | 
 pattern ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSDEAD :: ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus
 pattern ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSDEAD = ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus "EXECUTOR_STATUS_DEAD"
 
@@ -2355,38 +2288,34 @@ pattern ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus_
   ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSUNSPECIFIED,
   ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSACTIVE,
   ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus_EXECUTORSTATUSDEAD,
-  ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus #-}
+  ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus
+  #-}
 
 -- | Optional. List only jobs in the specific state.
-newtype ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus = ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus { fromProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus = ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus {fromProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSUNSPECIFIED :: ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus
 pattern ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSUNSPECIFIED = ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus "JOB_EXECUTION_STATUS_UNSPECIFIED"
 
--- | 
 pattern ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSRUNNING :: ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus
 pattern ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSRUNNING = ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus "JOB_EXECUTION_STATUS_RUNNING"
 
--- | 
 pattern ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSSUCCEEDED :: ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus
 pattern ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSSUCCEEDED = ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus "JOB_EXECUTION_STATUS_SUCCEEDED"
 
--- | 
 pattern ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSFAILED :: ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus
 pattern ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSFAILED = ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus "JOB_EXECUTION_STATUS_FAILED"
 
--- | 
 pattern ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSUNKNOWN :: ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus
 pattern ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSUNKNOWN = ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus "JOB_EXECUTION_STATUS_UNKNOWN"
 
@@ -2396,42 +2325,37 @@ pattern ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus_JOBEXECUTI
   ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSSUCCEEDED,
   ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSFAILED,
   ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus_JOBEXECUTIONSTATUSUNKNOWN,
-  ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus #-}
+  ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus
+  #-}
 
 -- | Optional. List only tasks in the state.
-newtype ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus = ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus { fromProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus = ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus {fromProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSUNSPECIFIED :: ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSUNSPECIFIED = ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus "TASK_STATUS_UNSPECIFIED"
 
--- | 
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSRUNNING :: ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSRUNNING = ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus "TASK_STATUS_RUNNING"
 
--- | 
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSSUCCESS :: ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSSUCCESS = ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus "TASK_STATUS_SUCCESS"
 
--- | 
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSFAILED :: ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSFAILED = ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus "TASK_STATUS_FAILED"
 
--- | 
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSKILLED :: ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSKILLED = ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus "TASK_STATUS_KILLED"
 
--- | 
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSPENDING :: ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSPENDING = ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus "TASK_STATUS_PENDING"
 
@@ -2442,42 +2366,37 @@ pattern ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskSta
   ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSFAILED,
   ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSKILLED,
   ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus_TASKSTATUSPENDING,
-  ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus #-}
+  ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus
+  #-}
 
 -- | Optional. List only stages in the given state.
-newtype ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus = ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus { fromProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus = ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus {fromProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus_STAGESTATUSUNSPECIFIED :: ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus_STAGESTATUSUNSPECIFIED = ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus "STAGE_STATUS_UNSPECIFIED"
 
--- | 
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus_STAGESTATUSACTIVE :: ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus_STAGESTATUSACTIVE = ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus "STAGE_STATUS_ACTIVE"
 
--- | 
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus_STAGESTATUSCOMPLETE :: ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus_STAGESTATUSCOMPLETE = ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus "STAGE_STATUS_COMPLETE"
 
--- | 
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus_STAGESTATUSFAILED :: ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus_STAGESTATUSFAILED = ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus "STAGE_STATUS_FAILED"
 
--- | 
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus_STAGESTATUSPENDING :: ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus_STAGESTATUSPENDING = ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus "STAGE_STATUS_PENDING"
 
--- | 
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus_STAGESTATUSSKIPPED :: ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus
 pattern ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus_STAGESTATUSSKIPPED = ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus "STAGE_STATUS_SKIPPED"
 
@@ -2488,20 +2407,21 @@ pattern ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus_STAGES
   ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus_STAGESTATUSFAILED,
   ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus_STAGESTATUSPENDING,
   ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus_STAGESTATUSSKIPPED,
-  ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus #-}
+  ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus
+  #-}
 
 -- | Optional. Failure action when primary worker creation fails.
-newtype ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers = ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers { fromProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers = ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers {fromProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | When FailureAction is unspecified, failure action defaults to NO_ACTION.
 pattern ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers_FAILUREACTIONUNSPECIFIED :: ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers
@@ -2519,20 +2439,21 @@ pattern ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers_Delete' = Proj
   ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers_FAILUREACTIONUNSPECIFIED,
   ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers_NOACTION,
   ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers_Delete',
-  ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers #-}
+  ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers
+  #-}
 
 -- | Optional. Specifies enumerated categories of jobs to list. (default = match ALL jobs).If filter is provided, jobStateMatcher will be ignored.
-newtype ProjectsRegionsJobsListJobStateMatcher = ProjectsRegionsJobsListJobStateMatcher { fromProjectsRegionsJobsListJobStateMatcher :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsRegionsJobsListJobStateMatcher = ProjectsRegionsJobsListJobStateMatcher {fromProjectsRegionsJobsListJobStateMatcher :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Match all jobs, regardless of state.
 pattern ProjectsRegionsJobsListJobStateMatcher_All :: ProjectsRegionsJobsListJobStateMatcher
@@ -2550,4 +2471,5 @@ pattern ProjectsRegionsJobsListJobStateMatcher_NONACTIVE = ProjectsRegionsJobsLi
   ProjectsRegionsJobsListJobStateMatcher_All,
   ProjectsRegionsJobsListJobStateMatcher_Active,
   ProjectsRegionsJobsListJobStateMatcher_NONACTIVE,
-  ProjectsRegionsJobsListJobStateMatcher #-}
+  ProjectsRegionsJobsListJobStateMatcher
+  #-}

@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,113 +16,114 @@
 
 -- |
 -- Module      : Gogol.Poly.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Poly.Types
-    (
-    -- * Configuration
-      polyService
+  ( -- * Configuration
+    polyService,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Asset
-    , Asset (..)
-    , newAsset
+    Asset (..),
+    newAsset,
 
     -- ** Asset_License
-    , Asset_License (..)
+    Asset_License (..),
 
     -- ** Asset_Visibility
-    , Asset_Visibility (..)
+    Asset_Visibility (..),
 
     -- ** AssetImportMessage
-    , AssetImportMessage (..)
-    , newAssetImportMessage
+    AssetImportMessage (..),
+    newAssetImportMessage,
 
     -- ** AssetImportMessage_Code
-    , AssetImportMessage_Code (..)
+    AssetImportMessage_Code (..),
 
     -- ** File
-    , File (..)
-    , newFile
+    File (..),
+    newFile,
 
     -- ** Format
-    , Format (..)
-    , newFormat
+    Format (..),
+    newFormat,
 
     -- ** FormatComplexity
-    , FormatComplexity (..)
-    , newFormatComplexity
+    FormatComplexity (..),
+    newFormatComplexity,
 
     -- ** ImageError
-    , ImageError (..)
-    , newImageError
+    ImageError (..),
+    newImageError,
 
     -- ** ImageError_Code
-    , ImageError_Code (..)
+    ImageError_Code (..),
 
     -- ** ListAssetsResponse
-    , ListAssetsResponse (..)
-    , newListAssetsResponse
+    ListAssetsResponse (..),
+    newListAssetsResponse,
 
     -- ** ListLikedAssetsResponse
-    , ListLikedAssetsResponse (..)
-    , newListLikedAssetsResponse
+    ListLikedAssetsResponse (..),
+    newListLikedAssetsResponse,
 
     -- ** ListUserAssetsResponse
-    , ListUserAssetsResponse (..)
-    , newListUserAssetsResponse
+    ListUserAssetsResponse (..),
+    newListUserAssetsResponse,
 
     -- ** ObjParseError
-    , ObjParseError (..)
-    , newObjParseError
+    ObjParseError (..),
+    newObjParseError,
 
     -- ** ObjParseError_Code
-    , ObjParseError_Code (..)
+    ObjParseError_Code (..),
 
     -- ** PresentationParams
-    , PresentationParams (..)
-    , newPresentationParams
+    PresentationParams (..),
+    newPresentationParams,
 
     -- ** PresentationParams_ColorSpace
-    , PresentationParams_ColorSpace (..)
+    PresentationParams_ColorSpace (..),
 
     -- ** Quaternion
-    , Quaternion (..)
-    , newQuaternion
+    Quaternion (..),
+    newQuaternion,
 
     -- ** RemixInfo
-    , RemixInfo (..)
-    , newRemixInfo
+    RemixInfo (..),
+    newRemixInfo,
 
     -- ** StartAssetImportResponse
-    , StartAssetImportResponse (..)
-    , newStartAssetImportResponse
+    StartAssetImportResponse (..),
+    newStartAssetImportResponse,
 
     -- ** UserAsset
-    , UserAsset (..)
-    , newUserAsset
+    UserAsset (..),
+    newUserAsset,
 
     -- ** AssetsListMaxComplexity
-    , AssetsListMaxComplexity (..)
+    AssetsListMaxComplexity (..),
 
     -- ** UsersAssetsListVisibility
-    , UsersAssetsListVisibility (..)
-    ) where
+    UsersAssetsListVisibility (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Poly.Internal.Product
 import Gogol.Poly.Internal.Sum
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Poly API. This contains the host and root path used as a starting point for constructing service requests.
 polyService :: Core.ServiceConfig
-polyService
-  = Core.defaultService (Core.ServiceId "poly:v1")
-      "poly.googleapis.com"
+polyService =
+  Core.defaultService
+    (Core.ServiceId "poly:v1")
+    "poly.googleapis.com"

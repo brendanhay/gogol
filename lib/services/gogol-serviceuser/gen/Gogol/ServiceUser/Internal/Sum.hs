@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,43 +16,37 @@
 
 -- |
 -- Module      : Gogol.ServiceUser.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.ServiceUser.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * Api_Syntax
     Api_Syntax
-      (
-        Api_Syntax_SYNTAX_PROTO2,
+      ( Api_Syntax_SYNTAX_PROTO2,
         Api_Syntax_SYNTAX_PROTO3,
         ..
       ),
 
     -- * Enum_Syntax
     Enum_Syntax
-      (
-        Enum_Syntax_SYNTAX_PROTO2,
+      ( Enum_Syntax_SYNTAX_PROTO2,
         Enum_Syntax_SYNTAX_PROTO3,
         ..
       ),
 
     -- * Field_Cardinality
     Field_Cardinality
-      (
-        Field_Cardinality_CARDINALITYUNKNOWN,
+      ( Field_Cardinality_CARDINALITYUNKNOWN,
         Field_Cardinality_CARDINALITYOPTIONAL,
         Field_Cardinality_CARDINALITYREQUIRED,
         Field_Cardinality_CARDINALITYREPEATED,
@@ -66,8 +55,7 @@ module Gogol.ServiceUser.Internal.Sum
 
     -- * Field_Kind
     Field_Kind
-      (
-        Field_Kind_TYPEUNKNOWN,
+      ( Field_Kind_TYPEUNKNOWN,
         Field_Kind_TYPEDOUBLE,
         Field_Kind_TYPEFLOAT,
         Field_Kind_TYPE_INT64,
@@ -91,8 +79,7 @@ module Gogol.ServiceUser.Internal.Sum
 
     -- * LabelDescriptor_ValueType
     LabelDescriptor_ValueType
-      (
-        LabelDescriptor_ValueType_String,
+      ( LabelDescriptor_ValueType_String,
         LabelDescriptor_ValueType_Bool,
         LabelDescriptor_ValueType_INT64,
         ..
@@ -100,16 +87,14 @@ module Gogol.ServiceUser.Internal.Sum
 
     -- * Method_Syntax
     Method_Syntax
-      (
-        Method_Syntax_SYNTAX_PROTO2,
+      ( Method_Syntax_SYNTAX_PROTO2,
         Method_Syntax_SYNTAX_PROTO3,
         ..
       ),
 
     -- * MetricDescriptor_MetricKind
     MetricDescriptor_MetricKind
-      (
-        MetricDescriptor_MetricKind_METRICKINDUNSPECIFIED,
+      ( MetricDescriptor_MetricKind_METRICKINDUNSPECIFIED,
         MetricDescriptor_MetricKind_Gauge,
         MetricDescriptor_MetricKind_Delta,
         MetricDescriptor_MetricKind_Cumulative,
@@ -118,8 +103,7 @@ module Gogol.ServiceUser.Internal.Sum
 
     -- * MetricDescriptor_ValueType
     MetricDescriptor_ValueType
-      (
-        MetricDescriptor_ValueType_VALUETYPEUNSPECIFIED,
+      ( MetricDescriptor_ValueType_VALUETYPEUNSPECIFIED,
         MetricDescriptor_ValueType_Bool,
         MetricDescriptor_ValueType_INT64,
         MetricDescriptor_ValueType_Double,
@@ -131,8 +115,7 @@ module Gogol.ServiceUser.Internal.Sum
 
     -- * MetricDescriptorMetadata_LaunchStage
     MetricDescriptorMetadata_LaunchStage
-      (
-        MetricDescriptorMetadata_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
+      ( MetricDescriptorMetadata_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
         MetricDescriptorMetadata_LaunchStage_EARLYACCESS,
         MetricDescriptorMetadata_LaunchStage_Alpha,
         MetricDescriptorMetadata_LaunchStage_Beta,
@@ -143,8 +126,7 @@ module Gogol.ServiceUser.Internal.Sum
 
     -- * Step_Status
     Step_Status
-      (
-        Step_Status_STATUSUNSPECIFIED,
+      ( Step_Status_STATUSUNSPECIFIED,
         Step_Status_Done,
         Step_Status_NOTSTARTED,
         Step_Status_INPROGRESS,
@@ -155,27 +137,27 @@ module Gogol.ServiceUser.Internal.Sum
 
     -- * Type_Syntax
     Type_Syntax
-      (
-        Type_Syntax_SYNTAX_PROTO2,
+      ( Type_Syntax_SYNTAX_PROTO2,
         Type_Syntax_SYNTAX_PROTO3,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -188,20 +170,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | The source syntax of the service.
-newtype Api_Syntax = Api_Syntax { fromApi_Syntax :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Api_Syntax = Api_Syntax {fromApi_Syntax :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Syntax @proto2@.
 pattern Api_Syntax_SYNTAX_PROTO2 :: Api_Syntax
@@ -214,20 +197,21 @@ pattern Api_Syntax_SYNTAX_PROTO3 = Api_Syntax "SYNTAX_PROTO3"
 {-# COMPLETE
   Api_Syntax_SYNTAX_PROTO2,
   Api_Syntax_SYNTAX_PROTO3,
-  Api_Syntax #-}
+  Api_Syntax
+  #-}
 
 -- | The source syntax.
-newtype Enum_Syntax = Enum_Syntax { fromEnum_Syntax :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Enum_Syntax = Enum_Syntax {fromEnum_Syntax :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Syntax @proto2@.
 pattern Enum_Syntax_SYNTAX_PROTO2 :: Enum_Syntax
@@ -240,20 +224,21 @@ pattern Enum_Syntax_SYNTAX_PROTO3 = Enum_Syntax "SYNTAX_PROTO3"
 {-# COMPLETE
   Enum_Syntax_SYNTAX_PROTO2,
   Enum_Syntax_SYNTAX_PROTO3,
-  Enum_Syntax #-}
+  Enum_Syntax
+  #-}
 
 -- | The field cardinality.
-newtype Field_Cardinality = Field_Cardinality { fromField_Cardinality :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Field_Cardinality = Field_Cardinality {fromField_Cardinality :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | For fields with unknown cardinality.
 pattern Field_Cardinality_CARDINALITYUNKNOWN :: Field_Cardinality
@@ -276,20 +261,21 @@ pattern Field_Cardinality_CARDINALITYREPEATED = Field_Cardinality "CARDINALITY_R
   Field_Cardinality_CARDINALITYOPTIONAL,
   Field_Cardinality_CARDINALITYREQUIRED,
   Field_Cardinality_CARDINALITYREPEATED,
-  Field_Cardinality #-}
+  Field_Cardinality
+  #-}
 
 -- | The field type.
-newtype Field_Kind = Field_Kind { fromField_Kind :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Field_Kind = Field_Kind {fromField_Kind :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Field type unknown.
 pattern Field_Kind_TYPEUNKNOWN :: Field_Kind
@@ -387,20 +373,21 @@ pattern Field_Kind_TYPE_SINT64 = Field_Kind "TYPE_SINT64"
   Field_Kind_TYPE_SFIXED64,
   Field_Kind_TYPE_SINT32,
   Field_Kind_TYPE_SINT64,
-  Field_Kind #-}
+  Field_Kind
+  #-}
 
 -- | The type of data that can be assigned to the label.
-newtype LabelDescriptor_ValueType = LabelDescriptor_ValueType { fromLabelDescriptor_ValueType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype LabelDescriptor_ValueType = LabelDescriptor_ValueType {fromLabelDescriptor_ValueType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | A variable-length string. This is the default.
 pattern LabelDescriptor_ValueType_String :: LabelDescriptor_ValueType
@@ -418,20 +405,21 @@ pattern LabelDescriptor_ValueType_INT64 = LabelDescriptor_ValueType "INT64"
   LabelDescriptor_ValueType_String,
   LabelDescriptor_ValueType_Bool,
   LabelDescriptor_ValueType_INT64,
-  LabelDescriptor_ValueType #-}
+  LabelDescriptor_ValueType
+  #-}
 
 -- | The source syntax of this method.
-newtype Method_Syntax = Method_Syntax { fromMethod_Syntax :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Method_Syntax = Method_Syntax {fromMethod_Syntax :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Syntax @proto2@.
 pattern Method_Syntax_SYNTAX_PROTO2 :: Method_Syntax
@@ -444,20 +432,21 @@ pattern Method_Syntax_SYNTAX_PROTO3 = Method_Syntax "SYNTAX_PROTO3"
 {-# COMPLETE
   Method_Syntax_SYNTAX_PROTO2,
   Method_Syntax_SYNTAX_PROTO3,
-  Method_Syntax #-}
+  Method_Syntax
+  #-}
 
 -- | Whether the metric records instantaneous values, changes to a value, etc. Some combinations of @metric_kind@ and @value_type@ might not be supported.
-newtype MetricDescriptor_MetricKind = MetricDescriptor_MetricKind { fromMetricDescriptor_MetricKind :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MetricDescriptor_MetricKind = MetricDescriptor_MetricKind {fromMetricDescriptor_MetricKind :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Do not use this default value.
 pattern MetricDescriptor_MetricKind_METRICKINDUNSPECIFIED :: MetricDescriptor_MetricKind
@@ -480,20 +469,21 @@ pattern MetricDescriptor_MetricKind_Cumulative = MetricDescriptor_MetricKind "CU
   MetricDescriptor_MetricKind_Gauge,
   MetricDescriptor_MetricKind_Delta,
   MetricDescriptor_MetricKind_Cumulative,
-  MetricDescriptor_MetricKind #-}
+  MetricDescriptor_MetricKind
+  #-}
 
 -- | Whether the measurement is an integer, a floating-point number, etc. Some combinations of @metric_kind@ and @value_type@ might not be supported.
-newtype MetricDescriptor_ValueType = MetricDescriptor_ValueType { fromMetricDescriptor_ValueType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MetricDescriptor_ValueType = MetricDescriptor_ValueType {fromMetricDescriptor_ValueType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Do not use this default value.
 pattern MetricDescriptor_ValueType_VALUETYPEUNSPECIFIED :: MetricDescriptor_ValueType
@@ -531,20 +521,21 @@ pattern MetricDescriptor_ValueType_Money = MetricDescriptor_ValueType "MONEY"
   MetricDescriptor_ValueType_String,
   MetricDescriptor_ValueType_Distribution,
   MetricDescriptor_ValueType_Money,
-  MetricDescriptor_ValueType #-}
+  MetricDescriptor_ValueType
+  #-}
 
 -- | The launch stage of the metric definition.
-newtype MetricDescriptorMetadata_LaunchStage = MetricDescriptorMetadata_LaunchStage { fromMetricDescriptorMetadata_LaunchStage :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MetricDescriptorMetadata_LaunchStage = MetricDescriptorMetadata_LaunchStage {fromMetricDescriptorMetadata_LaunchStage :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Do not use this default value.
 pattern MetricDescriptorMetadata_LaunchStage_LAUNCHSTAGEUNSPECIFIED :: MetricDescriptorMetadata_LaunchStage
@@ -577,20 +568,21 @@ pattern MetricDescriptorMetadata_LaunchStage_Deprecated = MetricDescriptorMetada
   MetricDescriptorMetadata_LaunchStage_Beta,
   MetricDescriptorMetadata_LaunchStage_GA,
   MetricDescriptorMetadata_LaunchStage_Deprecated,
-  MetricDescriptorMetadata_LaunchStage #-}
+  MetricDescriptorMetadata_LaunchStage
+  #-}
 
 -- | The status code.
-newtype Step_Status = Step_Status { fromStep_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Step_Status = Step_Status {fromStep_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecifed code.
 pattern Step_Status_STATUSUNSPECIFIED :: Step_Status
@@ -623,20 +615,21 @@ pattern Step_Status_Cancelled = Step_Status "CANCELLED"
   Step_Status_INPROGRESS,
   Step_Status_Failed,
   Step_Status_Cancelled,
-  Step_Status #-}
+  Step_Status
+  #-}
 
 -- | The source syntax.
-newtype Type_Syntax = Type_Syntax { fromType_Syntax :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Type_Syntax = Type_Syntax {fromType_Syntax :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Syntax @proto2@.
 pattern Type_Syntax_SYNTAX_PROTO2 :: Type_Syntax
@@ -649,4 +642,5 @@ pattern Type_Syntax_SYNTAX_PROTO3 = Type_Syntax "SYNTAX_PROTO3"
 {-# COMPLETE
   Type_Syntax_SYNTAX_PROTO2,
   Type_Syntax_SYNTAX_PROTO3,
-  Type_Syntax #-}
+  Type_Syntax
+  #-}

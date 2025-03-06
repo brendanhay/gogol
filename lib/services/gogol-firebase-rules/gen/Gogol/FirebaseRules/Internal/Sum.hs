@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.FirebaseRules.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.FirebaseRules.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * GetReleaseExecutableResponse_ExecutableVersion
     GetReleaseExecutableResponse_ExecutableVersion
-      (
-        GetReleaseExecutableResponse_ExecutableVersion_RELEASEEXECUTABLEVERSIONUNSPECIFIED,
+      ( GetReleaseExecutableResponse_ExecutableVersion_RELEASEEXECUTABLEVERSIONUNSPECIFIED,
         GetReleaseExecutableResponse_ExecutableVersion_FIREBASE_RULES_EXECUTABLE_V1,
         GetReleaseExecutableResponse_ExecutableVersion_FIREBASE_RULES_EXECUTABLE_V2,
         ..
@@ -49,8 +40,7 @@ module Gogol.FirebaseRules.Internal.Sum
 
     -- * GetReleaseExecutableResponse_Language
     GetReleaseExecutableResponse_Language
-      (
-        GetReleaseExecutableResponse_Language_LANGUAGEUNSPECIFIED,
+      ( GetReleaseExecutableResponse_Language_LANGUAGEUNSPECIFIED,
         GetReleaseExecutableResponse_Language_FIREBASERULES,
         GetReleaseExecutableResponse_Language_EVENTFLOWTRIGGERS,
         ..
@@ -58,8 +48,7 @@ module Gogol.FirebaseRules.Internal.Sum
 
     -- * Issue_Severity
     Issue_Severity
-      (
-        Issue_Severity_SEVERITYUNSPECIFIED,
+      ( Issue_Severity_SEVERITYUNSPECIFIED,
         Issue_Severity_Deprecation,
         Issue_Severity_Warning,
         Issue_Severity_Error',
@@ -68,8 +57,7 @@ module Gogol.FirebaseRules.Internal.Sum
 
     -- * TestCase_Expectation
     TestCase_Expectation
-      (
-        TestCase_Expectation_EXPECTATIONUNSPECIFIED,
+      ( TestCase_Expectation_EXPECTATIONUNSPECIFIED,
         TestCase_Expectation_Allow,
         TestCase_Expectation_Deny,
         ..
@@ -77,8 +65,7 @@ module Gogol.FirebaseRules.Internal.Sum
 
     -- * TestCase_ExpressionReportLevel
     TestCase_ExpressionReportLevel
-      (
-        TestCase_ExpressionReportLevel_LEVELUNSPECIFIED,
+      ( TestCase_ExpressionReportLevel_LEVELUNSPECIFIED,
         TestCase_ExpressionReportLevel_None,
         TestCase_ExpressionReportLevel_Full,
         TestCase_ExpressionReportLevel_Visited,
@@ -87,8 +74,7 @@ module Gogol.FirebaseRules.Internal.Sum
 
     -- * TestCase_PathEncoding
     TestCase_PathEncoding
-      (
-        TestCase_PathEncoding_ENCODINGUNSPECIFIED,
+      ( TestCase_PathEncoding_ENCODINGUNSPECIFIED,
         TestCase_PathEncoding_URLENCODED,
         TestCase_PathEncoding_Plain,
         ..
@@ -96,8 +82,7 @@ module Gogol.FirebaseRules.Internal.Sum
 
     -- * TestResult_State
     TestResult_State
-      (
-        TestResult_State_STATEUNSPECIFIED,
+      ( TestResult_State_STATEUNSPECIFIED,
         TestResult_State_Success,
         TestResult_State_Failure,
         ..
@@ -105,28 +90,28 @@ module Gogol.FirebaseRules.Internal.Sum
 
     -- * ProjectsReleasesGetExecutableExecutableVersion
     ProjectsReleasesGetExecutableExecutableVersion
-      (
-        ProjectsReleasesGetExecutableExecutableVersion_RELEASEEXECUTABLEVERSIONUNSPECIFIED,
+      ( ProjectsReleasesGetExecutableExecutableVersion_RELEASEEXECUTABLEVERSIONUNSPECIFIED,
         ProjectsReleasesGetExecutableExecutableVersion_FIREBASE_RULES_EXECUTABLE_V1,
         ProjectsReleasesGetExecutableExecutableVersion_FIREBASE_RULES_EXECUTABLE_V2,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -139,20 +124,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | The Rules runtime version of the executable.
-newtype GetReleaseExecutableResponse_ExecutableVersion = GetReleaseExecutableResponse_ExecutableVersion { fromGetReleaseExecutableResponse_ExecutableVersion :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GetReleaseExecutableResponse_ExecutableVersion = GetReleaseExecutableResponse_ExecutableVersion {fromGetReleaseExecutableResponse_ExecutableVersion :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Executable format unspecified. Defaults to FIREBASE/RULES/EXECUTABLE_V1
 pattern GetReleaseExecutableResponse_ExecutableVersion_RELEASEEXECUTABLEVERSIONUNSPECIFIED :: GetReleaseExecutableResponse_ExecutableVersion
@@ -170,20 +156,21 @@ pattern GetReleaseExecutableResponse_ExecutableVersion_FIREBASE_RULES_EXECUTABLE
   GetReleaseExecutableResponse_ExecutableVersion_RELEASEEXECUTABLEVERSIONUNSPECIFIED,
   GetReleaseExecutableResponse_ExecutableVersion_FIREBASE_RULES_EXECUTABLE_V1,
   GetReleaseExecutableResponse_ExecutableVersion_FIREBASE_RULES_EXECUTABLE_V2,
-  GetReleaseExecutableResponse_ExecutableVersion #-}
+  GetReleaseExecutableResponse_ExecutableVersion
+  #-}
 
 -- | @Language@ used to generate the executable bytes.
-newtype GetReleaseExecutableResponse_Language = GetReleaseExecutableResponse_Language { fromGetReleaseExecutableResponse_Language :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GetReleaseExecutableResponse_Language = GetReleaseExecutableResponse_Language {fromGetReleaseExecutableResponse_Language :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Language unspecified. Defaults to FIREBASE_RULES.
 pattern GetReleaseExecutableResponse_Language_LANGUAGEUNSPECIFIED :: GetReleaseExecutableResponse_Language
@@ -201,20 +188,21 @@ pattern GetReleaseExecutableResponse_Language_EVENTFLOWTRIGGERS = GetReleaseExec
   GetReleaseExecutableResponse_Language_LANGUAGEUNSPECIFIED,
   GetReleaseExecutableResponse_Language_FIREBASERULES,
   GetReleaseExecutableResponse_Language_EVENTFLOWTRIGGERS,
-  GetReleaseExecutableResponse_Language #-}
+  GetReleaseExecutableResponse_Language
+  #-}
 
 -- | The severity of the issue.
-newtype Issue_Severity = Issue_Severity { fromIssue_Severity :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Issue_Severity = Issue_Severity {fromIssue_Severity :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | An unspecified severity.
 pattern Issue_Severity_SEVERITYUNSPECIFIED :: Issue_Severity
@@ -237,20 +225,21 @@ pattern Issue_Severity_Error' = Issue_Severity "ERROR"
   Issue_Severity_Deprecation,
   Issue_Severity_Warning,
   Issue_Severity_Error',
-  Issue_Severity #-}
+  Issue_Severity
+  #-}
 
 -- | Test expectation.
-newtype TestCase_Expectation = TestCase_Expectation { fromTestCase_Expectation :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TestCase_Expectation = TestCase_Expectation {fromTestCase_Expectation :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified expectation.
 pattern TestCase_Expectation_EXPECTATIONUNSPECIFIED :: TestCase_Expectation
@@ -268,20 +257,21 @@ pattern TestCase_Expectation_Deny = TestCase_Expectation "DENY"
   TestCase_Expectation_EXPECTATIONUNSPECIFIED,
   TestCase_Expectation_Allow,
   TestCase_Expectation_Deny,
-  TestCase_Expectation #-}
+  TestCase_Expectation
+  #-}
 
 -- | Specifies what should be included in the response.
-newtype TestCase_ExpressionReportLevel = TestCase_ExpressionReportLevel { fromTestCase_ExpressionReportLevel :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TestCase_ExpressionReportLevel = TestCase_ExpressionReportLevel {fromTestCase_ExpressionReportLevel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No level has been specified. Defaults to \"NONE\" behavior.
 pattern TestCase_ExpressionReportLevel_LEVELUNSPECIFIED :: TestCase_ExpressionReportLevel
@@ -304,20 +294,21 @@ pattern TestCase_ExpressionReportLevel_Visited = TestCase_ExpressionReportLevel 
   TestCase_ExpressionReportLevel_None,
   TestCase_ExpressionReportLevel_Full,
   TestCase_ExpressionReportLevel_Visited,
-  TestCase_ExpressionReportLevel #-}
+  TestCase_ExpressionReportLevel
+  #-}
 
 -- | Specifies whether paths (such as request.path) are encoded and how.
-newtype TestCase_PathEncoding = TestCase_PathEncoding { fromTestCase_PathEncoding :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TestCase_PathEncoding = TestCase_PathEncoding {fromTestCase_PathEncoding :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No encoding has been specified. Defaults to \"URL_ENCODED\" behavior.
 pattern TestCase_PathEncoding_ENCODINGUNSPECIFIED :: TestCase_PathEncoding
@@ -335,20 +326,21 @@ pattern TestCase_PathEncoding_Plain = TestCase_PathEncoding "PLAIN"
   TestCase_PathEncoding_ENCODINGUNSPECIFIED,
   TestCase_PathEncoding_URLENCODED,
   TestCase_PathEncoding_Plain,
-  TestCase_PathEncoding #-}
+  TestCase_PathEncoding
+  #-}
 
 -- | State of the test.
-newtype TestResult_State = TestResult_State { fromTestResult_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TestResult_State = TestResult_State {fromTestResult_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Test state is not set.
 pattern TestResult_State_STATEUNSPECIFIED :: TestResult_State
@@ -366,20 +358,21 @@ pattern TestResult_State_Failure = TestResult_State "FAILURE"
   TestResult_State_STATEUNSPECIFIED,
   TestResult_State_Success,
   TestResult_State_Failure,
-  TestResult_State #-}
+  TestResult_State
+  #-}
 
 -- | Optional. The requested runtime executable version. Defaults to FIREBASE/RULES/EXECUTABLE_V1.
-newtype ProjectsReleasesGetExecutableExecutableVersion = ProjectsReleasesGetExecutableExecutableVersion { fromProjectsReleasesGetExecutableExecutableVersion :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsReleasesGetExecutableExecutableVersion = ProjectsReleasesGetExecutableExecutableVersion {fromProjectsReleasesGetExecutableExecutableVersion :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Executable format unspecified. Defaults to FIREBASE/RULES/EXECUTABLE_V1
 pattern ProjectsReleasesGetExecutableExecutableVersion_RELEASEEXECUTABLEVERSIONUNSPECIFIED :: ProjectsReleasesGetExecutableExecutableVersion
@@ -397,4 +390,5 @@ pattern ProjectsReleasesGetExecutableExecutableVersion_FIREBASE_RULES_EXECUTABLE
   ProjectsReleasesGetExecutableExecutableVersion_RELEASEEXECUTABLEVERSIONUNSPECIFIED,
   ProjectsReleasesGetExecutableExecutableVersion_FIREBASE_RULES_EXECUTABLE_V1,
   ProjectsReleasesGetExecutableExecutableVersion_FIREBASE_RULES_EXECUTABLE_V2,
-  ProjectsReleasesGetExecutableExecutableVersion #-}
+  ProjectsReleasesGetExecutableExecutableVersion
+  #-}

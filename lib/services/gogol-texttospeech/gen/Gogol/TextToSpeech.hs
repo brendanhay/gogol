@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.TextToSpeech
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,170 +27,170 @@
 --
 -- /See:/ <https://cloud.google.com/text-to-speech/ Cloud Text-to-Speech API Reference>
 module Gogol.TextToSpeech
-    (
-    -- * Configuration
-      textToSpeechService
+  ( -- * Configuration
+    textToSpeechService,
 
     -- * OAuth Scopes
-    , CloudPlatform'FullControl
+    CloudPlatform'FullControl,
 
     -- * Resources
 
     -- ** texttospeech.operations.cancel
-    , TextToSpeechOperationsCancelResource
-    , TextToSpeechOperationsCancel (..)
-    , newTextToSpeechOperationsCancel
+    TextToSpeechOperationsCancelResource,
+    TextToSpeechOperationsCancel (..),
+    newTextToSpeechOperationsCancel,
 
     -- ** texttospeech.operations.delete
-    , TextToSpeechOperationsDeleteResource
-    , TextToSpeechOperationsDelete (..)
-    , newTextToSpeechOperationsDelete
+    TextToSpeechOperationsDeleteResource,
+    TextToSpeechOperationsDelete (..),
+    newTextToSpeechOperationsDelete,
 
     -- ** texttospeech.projects.locations.operations.get
-    , TextToSpeechProjectsLocationsOperationsGetResource
-    , TextToSpeechProjectsLocationsOperationsGet (..)
-    , newTextToSpeechProjectsLocationsOperationsGet
+    TextToSpeechProjectsLocationsOperationsGetResource,
+    TextToSpeechProjectsLocationsOperationsGet (..),
+    newTextToSpeechProjectsLocationsOperationsGet,
 
     -- ** texttospeech.projects.locations.operations.list
-    , TextToSpeechProjectsLocationsOperationsListResource
-    , TextToSpeechProjectsLocationsOperationsList (..)
-    , newTextToSpeechProjectsLocationsOperationsList
+    TextToSpeechProjectsLocationsOperationsListResource,
+    TextToSpeechProjectsLocationsOperationsList (..),
+    newTextToSpeechProjectsLocationsOperationsList,
 
     -- ** texttospeech.projects.locations.synthesizeLongAudio
-    , TextToSpeechProjectsLocationsSynthesizeLongAudioResource
-    , TextToSpeechProjectsLocationsSynthesizeLongAudio (..)
-    , newTextToSpeechProjectsLocationsSynthesizeLongAudio
+    TextToSpeechProjectsLocationsSynthesizeLongAudioResource,
+    TextToSpeechProjectsLocationsSynthesizeLongAudio (..),
+    newTextToSpeechProjectsLocationsSynthesizeLongAudio,
 
     -- ** texttospeech.text.synthesize
-    , TextToSpeechTextSynthesizeResource
-    , TextToSpeechTextSynthesize (..)
-    , newTextToSpeechTextSynthesize
+    TextToSpeechTextSynthesizeResource,
+    TextToSpeechTextSynthesize (..),
+    newTextToSpeechTextSynthesize,
 
     -- ** texttospeech.voices.list
-    , TextToSpeechVoicesListResource
-    , TextToSpeechVoicesList (..)
-    , newTextToSpeechVoicesList
+    TextToSpeechVoicesListResource,
+    TextToSpeechVoicesList (..),
+    newTextToSpeechVoicesList,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AdvancedVoiceOptions
-    , AdvancedVoiceOptions (..)
-    , newAdvancedVoiceOptions
+    AdvancedVoiceOptions (..),
+    newAdvancedVoiceOptions,
 
     -- ** AudioConfig
-    , AudioConfig (..)
-    , newAudioConfig
+    AudioConfig (..),
+    newAudioConfig,
 
     -- ** AudioConfig_AudioEncoding
-    , AudioConfig_AudioEncoding (..)
+    AudioConfig_AudioEncoding (..),
 
     -- ** CancelOperationRequest
-    , CancelOperationRequest (..)
-    , newCancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
     -- ** CustomPronunciationParams
-    , CustomPronunciationParams (..)
-    , newCustomPronunciationParams
+    CustomPronunciationParams (..),
+    newCustomPronunciationParams,
 
     -- ** CustomPronunciationParams_PhoneticEncoding
-    , CustomPronunciationParams_PhoneticEncoding (..)
+    CustomPronunciationParams_PhoneticEncoding (..),
 
     -- ** CustomPronunciations
-    , CustomPronunciations (..)
-    , newCustomPronunciations
+    CustomPronunciations (..),
+    newCustomPronunciations,
 
     -- ** CustomVoiceParams
-    , CustomVoiceParams (..)
-    , newCustomVoiceParams
+    CustomVoiceParams (..),
+    newCustomVoiceParams,
 
     -- ** CustomVoiceParams_ReportedUsage
-    , CustomVoiceParams_ReportedUsage (..)
+    CustomVoiceParams_ReportedUsage (..),
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** GoogleCloudTexttospeechV1SynthesizeLongAudioMetadata
-    , GoogleCloudTexttospeechV1SynthesizeLongAudioMetadata (..)
-    , newGoogleCloudTexttospeechV1SynthesizeLongAudioMetadata
+    GoogleCloudTexttospeechV1SynthesizeLongAudioMetadata (..),
+    newGoogleCloudTexttospeechV1SynthesizeLongAudioMetadata,
 
     -- ** ListOperationsResponse
-    , ListOperationsResponse (..)
-    , newListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
     -- ** ListVoicesResponse
-    , ListVoicesResponse (..)
-    , newListVoicesResponse
+    ListVoicesResponse (..),
+    newListVoicesResponse,
 
     -- ** MultiSpeakerMarkup
-    , MultiSpeakerMarkup (..)
-    , newMultiSpeakerMarkup
+    MultiSpeakerMarkup (..),
+    newMultiSpeakerMarkup,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** SynthesisInput
-    , SynthesisInput (..)
-    , newSynthesisInput
+    SynthesisInput (..),
+    newSynthesisInput,
 
     -- ** SynthesizeLongAudioMetadata
-    , SynthesizeLongAudioMetadata (..)
-    , newSynthesizeLongAudioMetadata
+    SynthesizeLongAudioMetadata (..),
+    newSynthesizeLongAudioMetadata,
 
     -- ** SynthesizeLongAudioRequest
-    , SynthesizeLongAudioRequest (..)
-    , newSynthesizeLongAudioRequest
+    SynthesizeLongAudioRequest (..),
+    newSynthesizeLongAudioRequest,
 
     -- ** SynthesizeSpeechRequest
-    , SynthesizeSpeechRequest (..)
-    , newSynthesizeSpeechRequest
+    SynthesizeSpeechRequest (..),
+    newSynthesizeSpeechRequest,
 
     -- ** SynthesizeSpeechResponse
-    , SynthesizeSpeechResponse (..)
-    , newSynthesizeSpeechResponse
+    SynthesizeSpeechResponse (..),
+    newSynthesizeSpeechResponse,
 
     -- ** Turn
-    , Turn (..)
-    , newTurn
+    Turn (..),
+    newTurn,
 
     -- ** Voice
-    , Voice (..)
-    , newVoice
+    Voice (..),
+    newVoice,
 
     -- ** Voice_SsmlGender
-    , Voice_SsmlGender (..)
+    Voice_SsmlGender (..),
 
     -- ** VoiceCloneParams
-    , VoiceCloneParams (..)
-    , newVoiceCloneParams
+    VoiceCloneParams (..),
+    newVoiceCloneParams,
 
     -- ** VoiceSelectionParams
-    , VoiceSelectionParams (..)
-    , newVoiceSelectionParams
+    VoiceSelectionParams (..),
+    newVoiceSelectionParams,
 
     -- ** VoiceSelectionParams_SsmlGender
-    , VoiceSelectionParams_SsmlGender (..)
-    ) where
+    VoiceSelectionParams_SsmlGender (..),
+  )
+where
 
 import Gogol.TextToSpeech.Operations.Cancel
 import Gogol.TextToSpeech.Operations.Delete

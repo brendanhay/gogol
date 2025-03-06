@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.DigitalAssetLinks.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.DigitalAssetLinks.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * CheckResponse_ErrorCodeItem
     CheckResponse_ErrorCodeItem
-      (
-        CheckResponse_ErrorCodeItem_ERRORCODEUNSPECIFIED,
+      ( CheckResponse_ErrorCodeItem_ERRORCODEUNSPECIFIED,
         CheckResponse_ErrorCodeItem_ERRORCODEINVALIDQUERY,
         CheckResponse_ErrorCodeItem_ERRORCODEFETCHERROR,
         CheckResponse_ErrorCodeItem_ERRORCODEFAILEDSSLVALIDATION,
@@ -57,8 +48,7 @@ module Gogol.DigitalAssetLinks.Internal.Sum
 
     -- * ListResponse_ErrorCodeItem
     ListResponse_ErrorCodeItem
-      (
-        ListResponse_ErrorCodeItem_ERRORCODEUNSPECIFIED,
+      ( ListResponse_ErrorCodeItem_ERRORCODEUNSPECIFIED,
         ListResponse_ErrorCodeItem_ERRORCODEINVALIDQUERY,
         ListResponse_ErrorCodeItem_ERRORCODEFETCHERROR,
         ListResponse_ErrorCodeItem_ERRORCODEFAILEDSSLVALIDATION,
@@ -71,22 +61,23 @@ module Gogol.DigitalAssetLinks.Internal.Sum
         ListResponse_ErrorCodeItem_ERRORCODEFETCHBUDGETEXHAUSTED,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -99,19 +90,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
-newtype CheckResponse_ErrorCodeItem = CheckResponse_ErrorCodeItem { fromCheckResponse_ErrorCodeItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CheckResponse_ErrorCodeItem = CheckResponse_ErrorCodeItem {fromCheckResponse_ErrorCodeItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value, otherwise unused.
 pattern CheckResponse_ErrorCodeItem_ERRORCODEUNSPECIFIED :: CheckResponse_ErrorCodeItem
@@ -169,19 +161,20 @@ pattern CheckResponse_ErrorCodeItem_ERRORCODEFETCHBUDGETEXHAUSTED = CheckRespons
   CheckResponse_ErrorCodeItem_ERRORCODEMALFORMEDCONTENT,
   CheckResponse_ErrorCodeItem_ERRORCODESECUREASSETINCLUDESINSECURE,
   CheckResponse_ErrorCodeItem_ERRORCODEFETCHBUDGETEXHAUSTED,
-  CheckResponse_ErrorCodeItem #-}
+  CheckResponse_ErrorCodeItem
+  #-}
 
-newtype ListResponse_ErrorCodeItem = ListResponse_ErrorCodeItem { fromListResponse_ErrorCodeItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ListResponse_ErrorCodeItem = ListResponse_ErrorCodeItem {fromListResponse_ErrorCodeItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value, otherwise unused.
 pattern ListResponse_ErrorCodeItem_ERRORCODEUNSPECIFIED :: ListResponse_ErrorCodeItem
@@ -239,4 +232,5 @@ pattern ListResponse_ErrorCodeItem_ERRORCODEFETCHBUDGETEXHAUSTED = ListResponse_
   ListResponse_ErrorCodeItem_ERRORCODEMALFORMEDCONTENT,
   ListResponse_ErrorCodeItem_ERRORCODESECUREASSETINCLUDESINSECURE,
   ListResponse_ErrorCodeItem_ERRORCODEFETCHBUDGETEXHAUSTED,
-  ListResponse_ErrorCodeItem #-}
+  ListResponse_ErrorCodeItem
+  #-}

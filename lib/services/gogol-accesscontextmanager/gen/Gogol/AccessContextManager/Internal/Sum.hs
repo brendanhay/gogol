@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.AccessContextManager.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.AccessContextManager.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AuditLogConfig_LogType
     AuditLogConfig_LogType
-      (
-        AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
+      ( AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
         AuditLogConfig_LogType_ADMINREAD,
         AuditLogConfig_LogType_DATAWRITE,
         AuditLogConfig_LogType_DATAREAD,
@@ -50,8 +41,7 @@ module Gogol.AccessContextManager.Internal.Sum
 
     -- * AuthorizedOrgsDesc_AssetType
     AuthorizedOrgsDesc_AssetType
-      (
-        AuthorizedOrgsDesc_AssetType_ASSETTYPEUNSPECIFIED,
+      ( AuthorizedOrgsDesc_AssetType_ASSETTYPEUNSPECIFIED,
         AuthorizedOrgsDesc_AssetType_ASSETTYPEDEVICE,
         AuthorizedOrgsDesc_AssetType_ASSETTYPECREDENTIALSTRENGTH,
         ..
@@ -59,8 +49,7 @@ module Gogol.AccessContextManager.Internal.Sum
 
     -- * AuthorizedOrgsDesc_AuthorizationDirection
     AuthorizedOrgsDesc_AuthorizationDirection
-      (
-        AuthorizedOrgsDesc_AuthorizationDirection_AUTHORIZATIONDIRECTIONUNSPECIFIED,
+      ( AuthorizedOrgsDesc_AuthorizationDirection_AUTHORIZATIONDIRECTIONUNSPECIFIED,
         AuthorizedOrgsDesc_AuthorizationDirection_AUTHORIZATIONDIRECTIONTO,
         AuthorizedOrgsDesc_AuthorizationDirection_AUTHORIZATIONDIRECTIONFROM,
         ..
@@ -68,24 +57,21 @@ module Gogol.AccessContextManager.Internal.Sum
 
     -- * AuthorizedOrgsDesc_AuthorizationType
     AuthorizedOrgsDesc_AuthorizationType
-      (
-        AuthorizedOrgsDesc_AuthorizationType_AUTHORIZATIONTYPEUNSPECIFIED,
+      ( AuthorizedOrgsDesc_AuthorizationType_AUTHORIZATIONTYPEUNSPECIFIED,
         AuthorizedOrgsDesc_AuthorizationType_AUTHORIZATIONTYPETRUST,
         ..
       ),
 
     -- * BasicLevel_CombiningFunction
     BasicLevel_CombiningFunction
-      (
-        BasicLevel_CombiningFunction_And,
+      ( BasicLevel_CombiningFunction_And,
         BasicLevel_CombiningFunction_OR,
         ..
       ),
 
     -- * DevicePolicy_AllowedDeviceManagementLevelsItem
     DevicePolicy_AllowedDeviceManagementLevelsItem
-      (
-        DevicePolicy_AllowedDeviceManagementLevelsItem_MANAGEMENTUNSPECIFIED,
+      ( DevicePolicy_AllowedDeviceManagementLevelsItem_MANAGEMENTUNSPECIFIED,
         DevicePolicy_AllowedDeviceManagementLevelsItem_None,
         DevicePolicy_AllowedDeviceManagementLevelsItem_Basic,
         DevicePolicy_AllowedDeviceManagementLevelsItem_Complete,
@@ -94,8 +80,7 @@ module Gogol.AccessContextManager.Internal.Sum
 
     -- * DevicePolicy_AllowedEncryptionStatusesItem
     DevicePolicy_AllowedEncryptionStatusesItem
-      (
-        DevicePolicy_AllowedEncryptionStatusesItem_ENCRYPTIONUNSPECIFIED,
+      ( DevicePolicy_AllowedEncryptionStatusesItem_ENCRYPTIONUNSPECIFIED,
         DevicePolicy_AllowedEncryptionStatusesItem_ENCRYPTIONUNSUPPORTED,
         DevicePolicy_AllowedEncryptionStatusesItem_Unencrypted,
         DevicePolicy_AllowedEncryptionStatusesItem_Encrypted,
@@ -104,8 +89,7 @@ module Gogol.AccessContextManager.Internal.Sum
 
     -- * EgressFrom_IdentityType
     EgressFrom_IdentityType
-      (
-        EgressFrom_IdentityType_IDENTITYTYPEUNSPECIFIED,
+      ( EgressFrom_IdentityType_IDENTITYTYPEUNSPECIFIED,
         EgressFrom_IdentityType_ANYIDENTITY,
         EgressFrom_IdentityType_ANYUSERACCOUNT,
         EgressFrom_IdentityType_ANYSERVICEACCOUNT,
@@ -114,8 +98,7 @@ module Gogol.AccessContextManager.Internal.Sum
 
     -- * EgressFrom_SourceRestriction
     EgressFrom_SourceRestriction
-      (
-        EgressFrom_SourceRestriction_SOURCERESTRICTIONUNSPECIFIED,
+      ( EgressFrom_SourceRestriction_SOURCERESTRICTIONUNSPECIFIED,
         EgressFrom_SourceRestriction_SOURCERESTRICTIONENABLED,
         EgressFrom_SourceRestriction_SOURCERESTRICTIONDISABLED,
         ..
@@ -123,8 +106,7 @@ module Gogol.AccessContextManager.Internal.Sum
 
     -- * IngressFrom_IdentityType
     IngressFrom_IdentityType
-      (
-        IngressFrom_IdentityType_IDENTITYTYPEUNSPECIFIED,
+      ( IngressFrom_IdentityType_IDENTITYTYPEUNSPECIFIED,
         IngressFrom_IdentityType_ANYIDENTITY,
         IngressFrom_IdentityType_ANYUSERACCOUNT,
         IngressFrom_IdentityType_ANYSERVICEACCOUNT,
@@ -133,8 +115,7 @@ module Gogol.AccessContextManager.Internal.Sum
 
     -- * OsConstraint_OsType
     OsConstraint_OsType
-      (
-        OsConstraint_OsType_OSUNSPECIFIED,
+      ( OsConstraint_OsType_OSUNSPECIFIED,
         OsConstraint_OsType_DESKTOPMAC,
         OsConstraint_OsType_DESKTOPWINDOWS,
         OsConstraint_OsType_DESKTOPLINUX,
@@ -146,16 +127,14 @@ module Gogol.AccessContextManager.Internal.Sum
 
     -- * ServicePerimeter_PerimeterType
     ServicePerimeter_PerimeterType
-      (
-        ServicePerimeter_PerimeterType_PERIMETERTYPEREGULAR,
+      ( ServicePerimeter_PerimeterType_PERIMETERTYPEREGULAR,
         ServicePerimeter_PerimeterType_PERIMETERTYPEBRIDGE,
         ..
       ),
 
     -- * SessionSettings_SessionReauthMethod
     SessionSettings_SessionReauthMethod
-      (
-        SessionSettings_SessionReauthMethod_SESSIONREAUTHMETHODUNSPECIFIED,
+      ( SessionSettings_SessionReauthMethod_SESSIONREAUTHMETHODUNSPECIFIED,
         SessionSettings_SessionReauthMethod_Login,
         SessionSettings_SessionReauthMethod_SECURITYKEY,
         SessionSettings_SessionReauthMethod_Password,
@@ -164,8 +143,7 @@ module Gogol.AccessContextManager.Internal.Sum
 
     -- * SupportedService_ServiceSupportStage
     SupportedService_ServiceSupportStage
-      (
-        SupportedService_ServiceSupportStage_SERVICESUPPORTSTAGEUNSPECIFIED,
+      ( SupportedService_ServiceSupportStage_SERVICESUPPORTSTAGEUNSPECIFIED,
         SupportedService_ServiceSupportStage_GA,
         SupportedService_ServiceSupportStage_Preview,
         SupportedService_ServiceSupportStage_Deprecated,
@@ -174,8 +152,7 @@ module Gogol.AccessContextManager.Internal.Sum
 
     -- * SupportedService_SupportStage
     SupportedService_SupportStage
-      (
-        SupportedService_SupportStage_LAUNCHSTAGEUNSPECIFIED,
+      ( SupportedService_SupportStage_LAUNCHSTAGEUNSPECIFIED,
         SupportedService_SupportStage_Unimplemented,
         SupportedService_SupportStage_Prelaunch,
         SupportedService_SupportStage_EARLYACCESS,
@@ -188,8 +165,7 @@ module Gogol.AccessContextManager.Internal.Sum
 
     -- * AccessPoliciesAccessLevelsGetAccessLevelFormat
     AccessPoliciesAccessLevelsGetAccessLevelFormat
-      (
-        AccessPoliciesAccessLevelsGetAccessLevelFormat_LEVELFORMATUNSPECIFIED,
+      ( AccessPoliciesAccessLevelsGetAccessLevelFormat_LEVELFORMATUNSPECIFIED,
         AccessPoliciesAccessLevelsGetAccessLevelFormat_ASDEFINED,
         AccessPoliciesAccessLevelsGetAccessLevelFormat_Cel,
         ..
@@ -197,28 +173,28 @@ module Gogol.AccessContextManager.Internal.Sum
 
     -- * AccessPoliciesAccessLevelsListAccessLevelFormat
     AccessPoliciesAccessLevelsListAccessLevelFormat
-      (
-        AccessPoliciesAccessLevelsListAccessLevelFormat_LEVELFORMATUNSPECIFIED,
+      ( AccessPoliciesAccessLevelsListAccessLevelFormat_LEVELFORMATUNSPECIFIED,
         AccessPoliciesAccessLevelsListAccessLevelFormat_ASDEFINED,
         AccessPoliciesAccessLevelsListAccessLevelFormat_Cel,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -231,20 +207,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | The log type that this config enables.
-newtype AuditLogConfig_LogType = AuditLogConfig_LogType { fromAuditLogConfig_LogType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AuditLogConfig_LogType = AuditLogConfig_LogType {fromAuditLogConfig_LogType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default case. Should never be this.
 pattern AuditLogConfig_LogType_LOGTYPEUNSPECIFIED :: AuditLogConfig_LogType
@@ -267,20 +244,21 @@ pattern AuditLogConfig_LogType_DATAREAD = AuditLogConfig_LogType "DATA_READ"
   AuditLogConfig_LogType_ADMINREAD,
   AuditLogConfig_LogType_DATAWRITE,
   AuditLogConfig_LogType_DATAREAD,
-  AuditLogConfig_LogType #-}
+  AuditLogConfig_LogType
+  #-}
 
 -- | The asset type of this authorized orgs desc. Valid values are @ASSET_TYPE_DEVICE@, and @ASSET_TYPE_CREDENTIAL_STRENGTH@.
-newtype AuthorizedOrgsDesc_AssetType = AuthorizedOrgsDesc_AssetType { fromAuthorizedOrgsDesc_AssetType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AuthorizedOrgsDesc_AssetType = AuthorizedOrgsDesc_AssetType {fromAuthorizedOrgsDesc_AssetType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No asset type specified.
 pattern AuthorizedOrgsDesc_AssetType_ASSETTYPEUNSPECIFIED :: AuthorizedOrgsDesc_AssetType
@@ -298,20 +276,21 @@ pattern AuthorizedOrgsDesc_AssetType_ASSETTYPECREDENTIALSTRENGTH = AuthorizedOrg
   AuthorizedOrgsDesc_AssetType_ASSETTYPEUNSPECIFIED,
   AuthorizedOrgsDesc_AssetType_ASSETTYPEDEVICE,
   AuthorizedOrgsDesc_AssetType_ASSETTYPECREDENTIALSTRENGTH,
-  AuthorizedOrgsDesc_AssetType #-}
+  AuthorizedOrgsDesc_AssetType
+  #-}
 
 -- | The direction of the authorization relationship between this organization and the organizations listed in the @orgs@ field. The valid values for this field include the following: @AUTHORIZATION_DIRECTION_FROM@: Allows this organization to evaluate traffic in the organizations listed in the @orgs@ field. @AUTHORIZATION_DIRECTION_TO@: Allows the organizations listed in the @orgs@ field to evaluate the traffic in this organization. For the authorization relationship to take effect, all of the organizations must authorize and specify the appropriate relationship direction. For example, if organization A authorized organization B and C to evaluate its traffic, by specifying @AUTHORIZATION_DIRECTION_TO@ as the authorization direction, organizations B and C must specify @AUTHORIZATION_DIRECTION_FROM@ as the authorization direction in their @AuthorizedOrgsDesc@ resource.
-newtype AuthorizedOrgsDesc_AuthorizationDirection = AuthorizedOrgsDesc_AuthorizationDirection { fromAuthorizedOrgsDesc_AuthorizationDirection :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AuthorizedOrgsDesc_AuthorizationDirection = AuthorizedOrgsDesc_AuthorizationDirection {fromAuthorizedOrgsDesc_AuthorizationDirection :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No direction specified.
 pattern AuthorizedOrgsDesc_AuthorizationDirection_AUTHORIZATIONDIRECTIONUNSPECIFIED :: AuthorizedOrgsDesc_AuthorizationDirection
@@ -329,20 +308,21 @@ pattern AuthorizedOrgsDesc_AuthorizationDirection_AUTHORIZATIONDIRECTIONFROM = A
   AuthorizedOrgsDesc_AuthorizationDirection_AUTHORIZATIONDIRECTIONUNSPECIFIED,
   AuthorizedOrgsDesc_AuthorizationDirection_AUTHORIZATIONDIRECTIONTO,
   AuthorizedOrgsDesc_AuthorizationDirection_AUTHORIZATIONDIRECTIONFROM,
-  AuthorizedOrgsDesc_AuthorizationDirection #-}
+  AuthorizedOrgsDesc_AuthorizationDirection
+  #-}
 
 -- | A granular control type for authorization levels. Valid value is @AUTHORIZATION_TYPE_TRUST@.
-newtype AuthorizedOrgsDesc_AuthorizationType = AuthorizedOrgsDesc_AuthorizationType { fromAuthorizedOrgsDesc_AuthorizationType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AuthorizedOrgsDesc_AuthorizationType = AuthorizedOrgsDesc_AuthorizationType {fromAuthorizedOrgsDesc_AuthorizationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No authorization type specified.
 pattern AuthorizedOrgsDesc_AuthorizationType_AUTHORIZATIONTYPEUNSPECIFIED :: AuthorizedOrgsDesc_AuthorizationType
@@ -355,20 +335,21 @@ pattern AuthorizedOrgsDesc_AuthorizationType_AUTHORIZATIONTYPETRUST = Authorized
 {-# COMPLETE
   AuthorizedOrgsDesc_AuthorizationType_AUTHORIZATIONTYPEUNSPECIFIED,
   AuthorizedOrgsDesc_AuthorizationType_AUTHORIZATIONTYPETRUST,
-  AuthorizedOrgsDesc_AuthorizationType #-}
+  AuthorizedOrgsDesc_AuthorizationType
+  #-}
 
 -- | How the @conditions@ list should be combined to determine if a request is granted this @AccessLevel@. If AND is used, each @Condition@ in @conditions@ must be satisfied for the @AccessLevel@ to be applied. If OR is used, at least one @Condition@ in @conditions@ must be satisfied for the @AccessLevel@ to be applied. Default behavior is AND.
-newtype BasicLevel_CombiningFunction = BasicLevel_CombiningFunction { fromBasicLevel_CombiningFunction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BasicLevel_CombiningFunction = BasicLevel_CombiningFunction {fromBasicLevel_CombiningFunction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | All @Conditions@ must be true for the @BasicLevel@ to be true.
 pattern BasicLevel_CombiningFunction_And :: BasicLevel_CombiningFunction
@@ -381,19 +362,20 @@ pattern BasicLevel_CombiningFunction_OR = BasicLevel_CombiningFunction "OR"
 {-# COMPLETE
   BasicLevel_CombiningFunction_And,
   BasicLevel_CombiningFunction_OR,
-  BasicLevel_CombiningFunction #-}
+  BasicLevel_CombiningFunction
+  #-}
 
-newtype DevicePolicy_AllowedDeviceManagementLevelsItem = DevicePolicy_AllowedDeviceManagementLevelsItem { fromDevicePolicy_AllowedDeviceManagementLevelsItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DevicePolicy_AllowedDeviceManagementLevelsItem = DevicePolicy_AllowedDeviceManagementLevelsItem {fromDevicePolicy_AllowedDeviceManagementLevelsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The device\'s management level is not specified or not known.
 pattern DevicePolicy_AllowedDeviceManagementLevelsItem_MANAGEMENTUNSPECIFIED :: DevicePolicy_AllowedDeviceManagementLevelsItem
@@ -416,19 +398,20 @@ pattern DevicePolicy_AllowedDeviceManagementLevelsItem_Complete = DevicePolicy_A
   DevicePolicy_AllowedDeviceManagementLevelsItem_None,
   DevicePolicy_AllowedDeviceManagementLevelsItem_Basic,
   DevicePolicy_AllowedDeviceManagementLevelsItem_Complete,
-  DevicePolicy_AllowedDeviceManagementLevelsItem #-}
+  DevicePolicy_AllowedDeviceManagementLevelsItem
+  #-}
 
-newtype DevicePolicy_AllowedEncryptionStatusesItem = DevicePolicy_AllowedEncryptionStatusesItem { fromDevicePolicy_AllowedEncryptionStatusesItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DevicePolicy_AllowedEncryptionStatusesItem = DevicePolicy_AllowedEncryptionStatusesItem {fromDevicePolicy_AllowedEncryptionStatusesItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The encryption status of the device is not specified or not known.
 pattern DevicePolicy_AllowedEncryptionStatusesItem_ENCRYPTIONUNSPECIFIED :: DevicePolicy_AllowedEncryptionStatusesItem
@@ -451,20 +434,21 @@ pattern DevicePolicy_AllowedEncryptionStatusesItem_Encrypted = DevicePolicy_Allo
   DevicePolicy_AllowedEncryptionStatusesItem_ENCRYPTIONUNSUPPORTED,
   DevicePolicy_AllowedEncryptionStatusesItem_Unencrypted,
   DevicePolicy_AllowedEncryptionStatusesItem_Encrypted,
-  DevicePolicy_AllowedEncryptionStatusesItem #-}
+  DevicePolicy_AllowedEncryptionStatusesItem
+  #-}
 
 -- | Specifies the type of identities that are allowed access to outside the perimeter. If left unspecified, then members of @identities@ field will be allowed access.
-newtype EgressFrom_IdentityType = EgressFrom_IdentityType { fromEgressFrom_IdentityType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype EgressFrom_IdentityType = EgressFrom_IdentityType {fromEgressFrom_IdentityType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No blanket identity group specified.
 pattern EgressFrom_IdentityType_IDENTITYTYPEUNSPECIFIED :: EgressFrom_IdentityType
@@ -487,20 +471,21 @@ pattern EgressFrom_IdentityType_ANYSERVICEACCOUNT = EgressFrom_IdentityType "ANY
   EgressFrom_IdentityType_ANYIDENTITY,
   EgressFrom_IdentityType_ANYUSERACCOUNT,
   EgressFrom_IdentityType_ANYSERVICEACCOUNT,
-  EgressFrom_IdentityType #-}
+  EgressFrom_IdentityType
+  #-}
 
 -- | Whether to enforce traffic restrictions based on @sources@ field. If the @sources@ fields is non-empty, then this field must be set to @SOURCE_RESTRICTION_ENABLED@.
-newtype EgressFrom_SourceRestriction = EgressFrom_SourceRestriction { fromEgressFrom_SourceRestriction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype EgressFrom_SourceRestriction = EgressFrom_SourceRestriction {fromEgressFrom_SourceRestriction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Enforcement preference unspecified, will not enforce traffic restrictions based on @sources@ in EgressFrom.
 pattern EgressFrom_SourceRestriction_SOURCERESTRICTIONUNSPECIFIED :: EgressFrom_SourceRestriction
@@ -518,20 +503,21 @@ pattern EgressFrom_SourceRestriction_SOURCERESTRICTIONDISABLED = EgressFrom_Sour
   EgressFrom_SourceRestriction_SOURCERESTRICTIONUNSPECIFIED,
   EgressFrom_SourceRestriction_SOURCERESTRICTIONENABLED,
   EgressFrom_SourceRestriction_SOURCERESTRICTIONDISABLED,
-  EgressFrom_SourceRestriction #-}
+  EgressFrom_SourceRestriction
+  #-}
 
 -- | Specifies the type of identities that are allowed access from outside the perimeter. If left unspecified, then members of @identities@ field will be allowed access.
-newtype IngressFrom_IdentityType = IngressFrom_IdentityType { fromIngressFrom_IdentityType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype IngressFrom_IdentityType = IngressFrom_IdentityType {fromIngressFrom_IdentityType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No blanket identity group specified.
 pattern IngressFrom_IdentityType_IDENTITYTYPEUNSPECIFIED :: IngressFrom_IdentityType
@@ -554,20 +540,21 @@ pattern IngressFrom_IdentityType_ANYSERVICEACCOUNT = IngressFrom_IdentityType "A
   IngressFrom_IdentityType_ANYIDENTITY,
   IngressFrom_IdentityType_ANYUSERACCOUNT,
   IngressFrom_IdentityType_ANYSERVICEACCOUNT,
-  IngressFrom_IdentityType #-}
+  IngressFrom_IdentityType
+  #-}
 
 -- | Required. The allowed OS type.
-newtype OsConstraint_OsType = OsConstraint_OsType { fromOsConstraint_OsType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype OsConstraint_OsType = OsConstraint_OsType {fromOsConstraint_OsType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The operating system of the device is not specified or not known.
 pattern OsConstraint_OsType_OSUNSPECIFIED :: OsConstraint_OsType
@@ -605,20 +592,21 @@ pattern OsConstraint_OsType_Ios = OsConstraint_OsType "IOS"
   OsConstraint_OsType_DESKTOPCHROMEOS,
   OsConstraint_OsType_Android,
   OsConstraint_OsType_Ios,
-  OsConstraint_OsType #-}
+  OsConstraint_OsType
+  #-}
 
 -- | Perimeter type indicator. A single project or VPC network is allowed to be a member of single regular perimeter, but multiple service perimeter bridges. A project cannot be a included in a perimeter bridge without being included in regular perimeter. For perimeter bridges, the restricted service list as well as access level lists must be empty.
-newtype ServicePerimeter_PerimeterType = ServicePerimeter_PerimeterType { fromServicePerimeter_PerimeterType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ServicePerimeter_PerimeterType = ServicePerimeter_PerimeterType {fromServicePerimeter_PerimeterType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Regular Perimeter. When no value is specified, the perimeter uses this type.
 pattern ServicePerimeter_PerimeterType_PERIMETERTYPEREGULAR :: ServicePerimeter_PerimeterType
@@ -631,20 +619,21 @@ pattern ServicePerimeter_PerimeterType_PERIMETERTYPEBRIDGE = ServicePerimeter_Pe
 {-# COMPLETE
   ServicePerimeter_PerimeterType_PERIMETERTYPEREGULAR,
   ServicePerimeter_PerimeterType_PERIMETERTYPEBRIDGE,
-  ServicePerimeter_PerimeterType #-}
+  ServicePerimeter_PerimeterType
+  #-}
 
 -- | Optional. Session method when user\'s Google Cloud session is up.
-newtype SessionSettings_SessionReauthMethod = SessionSettings_SessionReauthMethod { fromSessionSettings_SessionReauthMethod :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SessionSettings_SessionReauthMethod = SessionSettings_SessionReauthMethod {fromSessionSettings_SessionReauthMethod :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | If method is undefined in the API, LOGIN will be used by default.
 pattern SessionSettings_SessionReauthMethod_SESSIONREAUTHMETHODUNSPECIFIED :: SessionSettings_SessionReauthMethod
@@ -667,20 +656,21 @@ pattern SessionSettings_SessionReauthMethod_Password = SessionSettings_SessionRe
   SessionSettings_SessionReauthMethod_Login,
   SessionSettings_SessionReauthMethod_SECURITYKEY,
   SessionSettings_SessionReauthMethod_Password,
-  SessionSettings_SessionReauthMethod #-}
+  SessionSettings_SessionReauthMethod
+  #-}
 
 -- | The support stage of the service.
-newtype SupportedService_ServiceSupportStage = SupportedService_ServiceSupportStage { fromSupportedService_ServiceSupportStage :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SupportedService_ServiceSupportStage = SupportedService_ServiceSupportStage {fromSupportedService_ServiceSupportStage :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Do not use this default value.
 pattern SupportedService_ServiceSupportStage_SERVICESUPPORTSTAGEUNSPECIFIED :: SupportedService_ServiceSupportStage
@@ -703,20 +693,21 @@ pattern SupportedService_ServiceSupportStage_Deprecated = SupportedService_Servi
   SupportedService_ServiceSupportStage_GA,
   SupportedService_ServiceSupportStage_Preview,
   SupportedService_ServiceSupportStage_Deprecated,
-  SupportedService_ServiceSupportStage #-}
+  SupportedService_ServiceSupportStage
+  #-}
 
 -- | The support stage of the service.
-newtype SupportedService_SupportStage = SupportedService_SupportStage { fromSupportedService_SupportStage :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SupportedService_SupportStage = SupportedService_SupportStage {fromSupportedService_SupportStage :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Do not use this default value.
 pattern SupportedService_SupportStage_LAUNCHSTAGEUNSPECIFIED :: SupportedService_SupportStage
@@ -759,20 +750,21 @@ pattern SupportedService_SupportStage_Deprecated = SupportedService_SupportStage
   SupportedService_SupportStage_Beta,
   SupportedService_SupportStage_GA,
   SupportedService_SupportStage_Deprecated,
-  SupportedService_SupportStage #-}
+  SupportedService_SupportStage
+  #-}
 
 -- | Whether to return @BasicLevels@ in the Cloud Common Expression Language rather than as @BasicLevels@. Defaults to AS_DEFINED, where Access Levels are returned as @BasicLevels@ or @CustomLevels@ based on how they were created. If set to CEL, all Access Levels are returned as @CustomLevels@. In the CEL case, @BasicLevels@ are translated to equivalent @CustomLevels@.
-newtype AccessPoliciesAccessLevelsGetAccessLevelFormat = AccessPoliciesAccessLevelsGetAccessLevelFormat { fromAccessPoliciesAccessLevelsGetAccessLevelFormat :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AccessPoliciesAccessLevelsGetAccessLevelFormat = AccessPoliciesAccessLevelsGetAccessLevelFormat {fromAccessPoliciesAccessLevelsGetAccessLevelFormat :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The format was not specified.
 pattern AccessPoliciesAccessLevelsGetAccessLevelFormat_LEVELFORMATUNSPECIFIED :: AccessPoliciesAccessLevelsGetAccessLevelFormat
@@ -790,20 +782,21 @@ pattern AccessPoliciesAccessLevelsGetAccessLevelFormat_Cel = AccessPoliciesAcces
   AccessPoliciesAccessLevelsGetAccessLevelFormat_LEVELFORMATUNSPECIFIED,
   AccessPoliciesAccessLevelsGetAccessLevelFormat_ASDEFINED,
   AccessPoliciesAccessLevelsGetAccessLevelFormat_Cel,
-  AccessPoliciesAccessLevelsGetAccessLevelFormat #-}
+  AccessPoliciesAccessLevelsGetAccessLevelFormat
+  #-}
 
 -- | Whether to return @BasicLevels@ in the Cloud Common Expression language, as @CustomLevels@, rather than as @BasicLevels@. Defaults to returning @AccessLevels@ in the format they were defined.
-newtype AccessPoliciesAccessLevelsListAccessLevelFormat = AccessPoliciesAccessLevelsListAccessLevelFormat { fromAccessPoliciesAccessLevelsListAccessLevelFormat :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AccessPoliciesAccessLevelsListAccessLevelFormat = AccessPoliciesAccessLevelsListAccessLevelFormat {fromAccessPoliciesAccessLevelsListAccessLevelFormat :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The format was not specified.
 pattern AccessPoliciesAccessLevelsListAccessLevelFormat_LEVELFORMATUNSPECIFIED :: AccessPoliciesAccessLevelsListAccessLevelFormat
@@ -821,4 +814,5 @@ pattern AccessPoliciesAccessLevelsListAccessLevelFormat_Cel = AccessPoliciesAcce
   AccessPoliciesAccessLevelsListAccessLevelFormat_LEVELFORMATUNSPECIFIED,
   AccessPoliciesAccessLevelsListAccessLevelFormat_ASDEFINED,
   AccessPoliciesAccessLevelsListAccessLevelFormat_Cel,
-  AccessPoliciesAccessLevelsListAccessLevelFormat #-}
+  AccessPoliciesAccessLevelsListAccessLevelFormat
+  #-}

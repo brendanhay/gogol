@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,104 +16,106 @@
 
 -- |
 -- Module      : Gogol.AppsReseller.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.AppsReseller.Types
-    (
-    -- * Configuration
-      appsResellerService
+  ( -- * Configuration
+    appsResellerService,
 
     -- * OAuth Scopes
-    , Apps'Order
-    , Apps'Order'Readonly
+    Apps'Order,
+    Apps'Order'Readonly,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Address
-    , Address (..)
-    , newAddress
+    Address (..),
+    newAddress,
 
     -- ** ChangePlanRequest
-    , ChangePlanRequest (..)
-    , newChangePlanRequest
+    ChangePlanRequest (..),
+    newChangePlanRequest,
 
     -- ** Customer
-    , Customer (..)
-    , newCustomer
+    Customer (..),
+    newCustomer,
 
     -- ** Customer_CustomerType
-    , Customer_CustomerType (..)
+    Customer_CustomerType (..),
 
     -- ** PrimaryAdmin
-    , PrimaryAdmin (..)
-    , newPrimaryAdmin
+    PrimaryAdmin (..),
+    newPrimaryAdmin,
 
     -- ** RenewalSettings
-    , RenewalSettings (..)
-    , newRenewalSettings
+    RenewalSettings (..),
+    newRenewalSettings,
 
     -- ** ResellernotifyGetwatchdetailsResponse
-    , ResellernotifyGetwatchdetailsResponse (..)
-    , newResellernotifyGetwatchdetailsResponse
+    ResellernotifyGetwatchdetailsResponse (..),
+    newResellernotifyGetwatchdetailsResponse,
 
     -- ** ResellernotifyResource
-    , ResellernotifyResource (..)
-    , newResellernotifyResource
+    ResellernotifyResource (..),
+    newResellernotifyResource,
 
     -- ** Seats
-    , Seats (..)
-    , newSeats
+    Seats (..),
+    newSeats,
 
     -- ** Subscription
-    , Subscription (..)
-    , newSubscription
+    Subscription (..),
+    newSubscription,
 
     -- ** Subscription_Plan
-    , Subscription_Plan (..)
-    , newSubscription_Plan
+    Subscription_Plan (..),
+    newSubscription_Plan,
 
     -- ** Subscription_Plan_CommitmentInterval
-    , Subscription_Plan_CommitmentInterval (..)
-    , newSubscription_Plan_CommitmentInterval
+    Subscription_Plan_CommitmentInterval (..),
+    newSubscription_Plan_CommitmentInterval,
 
     -- ** Subscription_TransferInfo
-    , Subscription_TransferInfo (..)
-    , newSubscription_TransferInfo
+    Subscription_TransferInfo (..),
+    newSubscription_TransferInfo,
 
     -- ** Subscription_TrialSettings
-    , Subscription_TrialSettings (..)
-    , newSubscription_TrialSettings
+    Subscription_TrialSettings (..),
+    newSubscription_TrialSettings,
 
     -- ** Subscriptions
-    , Subscriptions (..)
-    , newSubscriptions
+    Subscriptions (..),
+    newSubscriptions,
 
     -- ** SubscriptionsDeleteDeletionType
-    , SubscriptionsDeleteDeletionType (..)
+    SubscriptionsDeleteDeletionType (..),
 
     -- ** SubscriptionsInsertAction
-    , SubscriptionsInsertAction (..)
-    ) where
+    SubscriptionsInsertAction (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.AppsReseller.Internal.Product
 import Gogol.AppsReseller.Internal.Sum
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Google Workspace Reseller API. This contains the host and root path used as a starting point for constructing service requests.
 appsResellerService :: Core.ServiceConfig
-appsResellerService
-  = Core.defaultService (Core.ServiceId "reseller:v1")
-      "reseller.googleapis.com"
+appsResellerService =
+  Core.defaultService
+    (Core.ServiceId "reseller:v1")
+    "reseller.googleapis.com"
 
 -- | Manage users on your domain
 type Apps'Order = "https://www.googleapis.com/auth/apps.order"
 
 -- | Manage users on your domain
-type Apps'Order'Readonly = "https://www.googleapis.com/auth/apps.order.readonly"
+type Apps'Order'Readonly =
+  "https://www.googleapis.com/auth/apps.order.readonly"

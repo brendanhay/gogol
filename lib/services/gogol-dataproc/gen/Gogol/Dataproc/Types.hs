@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,1495 +16,1497 @@
 
 -- |
 -- Module      : Gogol.Dataproc.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Dataproc.Types
-    (
-    -- * Configuration
-      dataprocService
+  ( -- * Configuration
+    dataprocService,
 
     -- * OAuth Scopes
-    , CloudPlatform'FullControl
+    CloudPlatform'FullControl,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AcceleratorConfig
-    , AcceleratorConfig (..)
-    , newAcceleratorConfig
+    AcceleratorConfig (..),
+    newAcceleratorConfig,
 
     -- ** AccessSessionSparkApplicationEnvironmentInfoResponse
-    , AccessSessionSparkApplicationEnvironmentInfoResponse (..)
-    , newAccessSessionSparkApplicationEnvironmentInfoResponse
+    AccessSessionSparkApplicationEnvironmentInfoResponse (..),
+    newAccessSessionSparkApplicationEnvironmentInfoResponse,
 
     -- ** AccessSessionSparkApplicationJobResponse
-    , AccessSessionSparkApplicationJobResponse (..)
-    , newAccessSessionSparkApplicationJobResponse
+    AccessSessionSparkApplicationJobResponse (..),
+    newAccessSessionSparkApplicationJobResponse,
 
     -- ** AccessSessionSparkApplicationResponse
-    , AccessSessionSparkApplicationResponse (..)
-    , newAccessSessionSparkApplicationResponse
+    AccessSessionSparkApplicationResponse (..),
+    newAccessSessionSparkApplicationResponse,
 
     -- ** AccessSessionSparkApplicationSqlQueryResponse
-    , AccessSessionSparkApplicationSqlQueryResponse (..)
-    , newAccessSessionSparkApplicationSqlQueryResponse
+    AccessSessionSparkApplicationSqlQueryResponse (..),
+    newAccessSessionSparkApplicationSqlQueryResponse,
 
     -- ** AccessSessionSparkApplicationSqlSparkPlanGraphResponse
-    , AccessSessionSparkApplicationSqlSparkPlanGraphResponse (..)
-    , newAccessSessionSparkApplicationSqlSparkPlanGraphResponse
+    AccessSessionSparkApplicationSqlSparkPlanGraphResponse (..),
+    newAccessSessionSparkApplicationSqlSparkPlanGraphResponse,
 
     -- ** AccessSessionSparkApplicationStageAttemptResponse
-    , AccessSessionSparkApplicationStageAttemptResponse (..)
-    , newAccessSessionSparkApplicationStageAttemptResponse
+    AccessSessionSparkApplicationStageAttemptResponse (..),
+    newAccessSessionSparkApplicationStageAttemptResponse,
 
     -- ** AccessSessionSparkApplicationStageRddOperationGraphResponse
-    , AccessSessionSparkApplicationStageRddOperationGraphResponse (..)
-    , newAccessSessionSparkApplicationStageRddOperationGraphResponse
+    AccessSessionSparkApplicationStageRddOperationGraphResponse (..),
+    newAccessSessionSparkApplicationStageRddOperationGraphResponse,
 
     -- ** AccessSparkApplicationEnvironmentInfoResponse
-    , AccessSparkApplicationEnvironmentInfoResponse (..)
-    , newAccessSparkApplicationEnvironmentInfoResponse
+    AccessSparkApplicationEnvironmentInfoResponse (..),
+    newAccessSparkApplicationEnvironmentInfoResponse,
 
     -- ** AccessSparkApplicationJobResponse
-    , AccessSparkApplicationJobResponse (..)
-    , newAccessSparkApplicationJobResponse
+    AccessSparkApplicationJobResponse (..),
+    newAccessSparkApplicationJobResponse,
 
     -- ** AccessSparkApplicationResponse
-    , AccessSparkApplicationResponse (..)
-    , newAccessSparkApplicationResponse
+    AccessSparkApplicationResponse (..),
+    newAccessSparkApplicationResponse,
 
     -- ** AccessSparkApplicationSqlQueryResponse
-    , AccessSparkApplicationSqlQueryResponse (..)
-    , newAccessSparkApplicationSqlQueryResponse
+    AccessSparkApplicationSqlQueryResponse (..),
+    newAccessSparkApplicationSqlQueryResponse,
 
     -- ** AccessSparkApplicationSqlSparkPlanGraphResponse
-    , AccessSparkApplicationSqlSparkPlanGraphResponse (..)
-    , newAccessSparkApplicationSqlSparkPlanGraphResponse
+    AccessSparkApplicationSqlSparkPlanGraphResponse (..),
+    newAccessSparkApplicationSqlSparkPlanGraphResponse,
 
     -- ** AccessSparkApplicationStageAttemptResponse
-    , AccessSparkApplicationStageAttemptResponse (..)
-    , newAccessSparkApplicationStageAttemptResponse
+    AccessSparkApplicationStageAttemptResponse (..),
+    newAccessSparkApplicationStageAttemptResponse,
 
     -- ** AccessSparkApplicationStageRddOperationGraphResponse
-    , AccessSparkApplicationStageRddOperationGraphResponse (..)
-    , newAccessSparkApplicationStageRddOperationGraphResponse
+    AccessSparkApplicationStageRddOperationGraphResponse (..),
+    newAccessSparkApplicationStageRddOperationGraphResponse,
 
     -- ** AccumulableInfo
-    , AccumulableInfo (..)
-    , newAccumulableInfo
+    AccumulableInfo (..),
+    newAccumulableInfo,
 
     -- ** AnalyzeBatchRequest
-    , AnalyzeBatchRequest (..)
-    , newAnalyzeBatchRequest
+    AnalyzeBatchRequest (..),
+    newAnalyzeBatchRequest,
 
     -- ** AnalyzeOperationMetadata
-    , AnalyzeOperationMetadata (..)
-    , newAnalyzeOperationMetadata
+    AnalyzeOperationMetadata (..),
+    newAnalyzeOperationMetadata,
 
     -- ** AnalyzeOperationMetadata_AnalyzedWorkloadType
-    , AnalyzeOperationMetadata_AnalyzedWorkloadType (..)
+    AnalyzeOperationMetadata_AnalyzedWorkloadType (..),
 
     -- ** AnalyzeOperationMetadata_Labels
-    , AnalyzeOperationMetadata_Labels (..)
-    , newAnalyzeOperationMetadata_Labels
+    AnalyzeOperationMetadata_Labels (..),
+    newAnalyzeOperationMetadata_Labels,
 
     -- ** AppSummary
-    , AppSummary (..)
-    , newAppSummary
+    AppSummary (..),
+    newAppSummary,
 
     -- ** ApplicationAttemptInfo
-    , ApplicationAttemptInfo (..)
-    , newApplicationAttemptInfo
+    ApplicationAttemptInfo (..),
+    newApplicationAttemptInfo,
 
     -- ** ApplicationEnvironmentInfo
-    , ApplicationEnvironmentInfo (..)
-    , newApplicationEnvironmentInfo
+    ApplicationEnvironmentInfo (..),
+    newApplicationEnvironmentInfo,
 
     -- ** ApplicationEnvironmentInfo_ClasspathEntries
-    , ApplicationEnvironmentInfo_ClasspathEntries (..)
-    , newApplicationEnvironmentInfo_ClasspathEntries
+    ApplicationEnvironmentInfo_ClasspathEntries (..),
+    newApplicationEnvironmentInfo_ClasspathEntries,
 
     -- ** ApplicationEnvironmentInfo_HadoopProperties
-    , ApplicationEnvironmentInfo_HadoopProperties (..)
-    , newApplicationEnvironmentInfo_HadoopProperties
+    ApplicationEnvironmentInfo_HadoopProperties (..),
+    newApplicationEnvironmentInfo_HadoopProperties,
 
     -- ** ApplicationEnvironmentInfo_MetricsProperties
-    , ApplicationEnvironmentInfo_MetricsProperties (..)
-    , newApplicationEnvironmentInfo_MetricsProperties
+    ApplicationEnvironmentInfo_MetricsProperties (..),
+    newApplicationEnvironmentInfo_MetricsProperties,
 
     -- ** ApplicationEnvironmentInfo_SparkProperties
-    , ApplicationEnvironmentInfo_SparkProperties (..)
-    , newApplicationEnvironmentInfo_SparkProperties
+    ApplicationEnvironmentInfo_SparkProperties (..),
+    newApplicationEnvironmentInfo_SparkProperties,
 
     -- ** ApplicationEnvironmentInfo_SystemProperties
-    , ApplicationEnvironmentInfo_SystemProperties (..)
-    , newApplicationEnvironmentInfo_SystemProperties
+    ApplicationEnvironmentInfo_SystemProperties (..),
+    newApplicationEnvironmentInfo_SystemProperties,
 
     -- ** ApplicationInfo
-    , ApplicationInfo (..)
-    , newApplicationInfo
+    ApplicationInfo (..),
+    newApplicationInfo,
 
     -- ** ApplicationInfo_ApplicationContextIngestionStatus
-    , ApplicationInfo_ApplicationContextIngestionStatus (..)
+    ApplicationInfo_ApplicationContextIngestionStatus (..),
 
     -- ** ApplicationInfo_QuantileDataStatus
-    , ApplicationInfo_QuantileDataStatus (..)
+    ApplicationInfo_QuantileDataStatus (..),
 
     -- ** AutoscalingConfig
-    , AutoscalingConfig (..)
-    , newAutoscalingConfig
+    AutoscalingConfig (..),
+    newAutoscalingConfig,
 
     -- ** AutoscalingPolicy
-    , AutoscalingPolicy (..)
-    , newAutoscalingPolicy
+    AutoscalingPolicy (..),
+    newAutoscalingPolicy,
 
     -- ** AutoscalingPolicy_Labels
-    , AutoscalingPolicy_Labels (..)
-    , newAutoscalingPolicy_Labels
+    AutoscalingPolicy_Labels (..),
+    newAutoscalingPolicy_Labels,
 
     -- ** AutotuningConfig
-    , AutotuningConfig (..)
-    , newAutotuningConfig
+    AutotuningConfig (..),
+    newAutotuningConfig,
 
     -- ** AutotuningConfig_ScenariosItem
-    , AutotuningConfig_ScenariosItem (..)
+    AutotuningConfig_ScenariosItem (..),
 
     -- ** AuxiliaryNodeGroup
-    , AuxiliaryNodeGroup (..)
-    , newAuxiliaryNodeGroup
+    AuxiliaryNodeGroup (..),
+    newAuxiliaryNodeGroup,
 
     -- ** AuxiliaryServicesConfig
-    , AuxiliaryServicesConfig (..)
-    , newAuxiliaryServicesConfig
+    AuxiliaryServicesConfig (..),
+    newAuxiliaryServicesConfig,
 
     -- ** BasicAutoscalingAlgorithm
-    , BasicAutoscalingAlgorithm (..)
-    , newBasicAutoscalingAlgorithm
+    BasicAutoscalingAlgorithm (..),
+    newBasicAutoscalingAlgorithm,
 
     -- ** BasicYarnAutoscalingConfig
-    , BasicYarnAutoscalingConfig (..)
-    , newBasicYarnAutoscalingConfig
+    BasicYarnAutoscalingConfig (..),
+    newBasicYarnAutoscalingConfig,
 
     -- ** Batch
-    , Batch (..)
-    , newBatch
+    Batch (..),
+    newBatch,
 
     -- ** Batch_Labels
-    , Batch_Labels (..)
-    , newBatch_Labels
+    Batch_Labels (..),
+    newBatch_Labels,
 
     -- ** Batch_State
-    , Batch_State (..)
+    Batch_State (..),
 
     -- ** BatchOperationMetadata
-    , BatchOperationMetadata (..)
-    , newBatchOperationMetadata
+    BatchOperationMetadata (..),
+    newBatchOperationMetadata,
 
     -- ** BatchOperationMetadata_Labels
-    , BatchOperationMetadata_Labels (..)
-    , newBatchOperationMetadata_Labels
+    BatchOperationMetadata_Labels (..),
+    newBatchOperationMetadata_Labels,
 
     -- ** BatchOperationMetadata_OperationType
-    , BatchOperationMetadata_OperationType (..)
+    BatchOperationMetadata_OperationType (..),
 
     -- ** Binding
-    , Binding (..)
-    , newBinding
+    Binding (..),
+    newBinding,
 
     -- ** CancelJobRequest
-    , CancelJobRequest (..)
-    , newCancelJobRequest
+    CancelJobRequest (..),
+    newCancelJobRequest,
 
     -- ** Cluster
-    , Cluster (..)
-    , newCluster
+    Cluster (..),
+    newCluster,
 
     -- ** Cluster_Labels
-    , Cluster_Labels (..)
-    , newCluster_Labels
+    Cluster_Labels (..),
+    newCluster_Labels,
 
     -- ** ClusterConfig
-    , ClusterConfig (..)
-    , newClusterConfig
+    ClusterConfig (..),
+    newClusterConfig,
 
     -- ** ClusterMetrics
-    , ClusterMetrics (..)
-    , newClusterMetrics
+    ClusterMetrics (..),
+    newClusterMetrics,
 
     -- ** ClusterMetrics_HdfsMetrics
-    , ClusterMetrics_HdfsMetrics (..)
-    , newClusterMetrics_HdfsMetrics
+    ClusterMetrics_HdfsMetrics (..),
+    newClusterMetrics_HdfsMetrics,
 
     -- ** ClusterMetrics_YarnMetrics
-    , ClusterMetrics_YarnMetrics (..)
-    , newClusterMetrics_YarnMetrics
+    ClusterMetrics_YarnMetrics (..),
+    newClusterMetrics_YarnMetrics,
 
     -- ** ClusterOperation
-    , ClusterOperation (..)
-    , newClusterOperation
+    ClusterOperation (..),
+    newClusterOperation,
 
     -- ** ClusterOperationMetadata
-    , ClusterOperationMetadata (..)
-    , newClusterOperationMetadata
+    ClusterOperationMetadata (..),
+    newClusterOperationMetadata,
 
     -- ** ClusterOperationMetadata_Labels
-    , ClusterOperationMetadata_Labels (..)
-    , newClusterOperationMetadata_Labels
+    ClusterOperationMetadata_Labels (..),
+    newClusterOperationMetadata_Labels,
 
     -- ** ClusterOperationStatus
-    , ClusterOperationStatus (..)
-    , newClusterOperationStatus
+    ClusterOperationStatus (..),
+    newClusterOperationStatus,
 
     -- ** ClusterOperationStatus_State
-    , ClusterOperationStatus_State (..)
+    ClusterOperationStatus_State (..),
 
     -- ** ClusterSelector
-    , ClusterSelector (..)
-    , newClusterSelector
+    ClusterSelector (..),
+    newClusterSelector,
 
     -- ** ClusterSelector_ClusterLabels
-    , ClusterSelector_ClusterLabels (..)
-    , newClusterSelector_ClusterLabels
+    ClusterSelector_ClusterLabels (..),
+    newClusterSelector_ClusterLabels,
 
     -- ** ClusterStatus
-    , ClusterStatus (..)
-    , newClusterStatus
+    ClusterStatus (..),
+    newClusterStatus,
 
     -- ** ClusterStatus_State
-    , ClusterStatus_State (..)
+    ClusterStatus_State (..),
 
     -- ** ClusterStatus_Substate
-    , ClusterStatus_Substate (..)
+    ClusterStatus_Substate (..),
 
     -- ** ClusterToRepair
-    , ClusterToRepair (..)
-    , newClusterToRepair
+    ClusterToRepair (..),
+    newClusterToRepair,
 
     -- ** ClusterToRepair_ClusterRepairAction
-    , ClusterToRepair_ClusterRepairAction (..)
+    ClusterToRepair_ClusterRepairAction (..),
 
     -- ** ConfidentialInstanceConfig
-    , ConfidentialInstanceConfig (..)
-    , newConfidentialInstanceConfig
+    ConfidentialInstanceConfig (..),
+    newConfidentialInstanceConfig,
 
     -- ** ConsolidatedExecutorSummary
-    , ConsolidatedExecutorSummary (..)
-    , newConsolidatedExecutorSummary
+    ConsolidatedExecutorSummary (..),
+    newConsolidatedExecutorSummary,
 
     -- ** DataprocMetricConfig
-    , DataprocMetricConfig (..)
-    , newDataprocMetricConfig
+    DataprocMetricConfig (..),
+    newDataprocMetricConfig,
 
     -- ** DiagnoseClusterRequest
-    , DiagnoseClusterRequest (..)
-    , newDiagnoseClusterRequest
+    DiagnoseClusterRequest (..),
+    newDiagnoseClusterRequest,
 
     -- ** DiagnoseClusterRequest_TarballAccess
-    , DiagnoseClusterRequest_TarballAccess (..)
+    DiagnoseClusterRequest_TarballAccess (..),
 
     -- ** DiagnoseClusterResults
-    , DiagnoseClusterResults (..)
-    , newDiagnoseClusterResults
+    DiagnoseClusterResults (..),
+    newDiagnoseClusterResults,
 
     -- ** DiskConfig
-    , DiskConfig (..)
-    , newDiskConfig
+    DiskConfig (..),
+    newDiskConfig,
 
     -- ** DriverSchedulingConfig
-    , DriverSchedulingConfig (..)
-    , newDriverSchedulingConfig
+    DriverSchedulingConfig (..),
+    newDriverSchedulingConfig,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** EncryptionConfig
-    , EncryptionConfig (..)
-    , newEncryptionConfig
+    EncryptionConfig (..),
+    newEncryptionConfig,
 
     -- ** EndpointConfig
-    , EndpointConfig (..)
-    , newEndpointConfig
+    EndpointConfig (..),
+    newEndpointConfig,
 
     -- ** EndpointConfig_HttpPorts
-    , EndpointConfig_HttpPorts (..)
-    , newEndpointConfig_HttpPorts
+    EndpointConfig_HttpPorts (..),
+    newEndpointConfig_HttpPorts,
 
     -- ** EnvironmentConfig
-    , EnvironmentConfig (..)
-    , newEnvironmentConfig
+    EnvironmentConfig (..),
+    newEnvironmentConfig,
 
     -- ** ExecutionConfig
-    , ExecutionConfig (..)
-    , newExecutionConfig
+    ExecutionConfig (..),
+    newExecutionConfig,
 
     -- ** ExecutorMetrics
-    , ExecutorMetrics (..)
-    , newExecutorMetrics
+    ExecutorMetrics (..),
+    newExecutorMetrics,
 
     -- ** ExecutorMetrics_Metrics
-    , ExecutorMetrics_Metrics (..)
-    , newExecutorMetrics_Metrics
+    ExecutorMetrics_Metrics (..),
+    newExecutorMetrics_Metrics,
 
     -- ** ExecutorMetricsDistributions
-    , ExecutorMetricsDistributions (..)
-    , newExecutorMetricsDistributions
+    ExecutorMetricsDistributions (..),
+    newExecutorMetricsDistributions,
 
     -- ** ExecutorPeakMetricsDistributions
-    , ExecutorPeakMetricsDistributions (..)
-    , newExecutorPeakMetricsDistributions
+    ExecutorPeakMetricsDistributions (..),
+    newExecutorPeakMetricsDistributions,
 
     -- ** ExecutorResourceRequest
-    , ExecutorResourceRequest (..)
-    , newExecutorResourceRequest
+    ExecutorResourceRequest (..),
+    newExecutorResourceRequest,
 
     -- ** ExecutorStageSummary
-    , ExecutorStageSummary (..)
-    , newExecutorStageSummary
+    ExecutorStageSummary (..),
+    newExecutorStageSummary,
 
     -- ** ExecutorSummary
-    , ExecutorSummary (..)
-    , newExecutorSummary
+    ExecutorSummary (..),
+    newExecutorSummary,
 
     -- ** ExecutorSummary_Attributes
-    , ExecutorSummary_Attributes (..)
-    , newExecutorSummary_Attributes
+    ExecutorSummary_Attributes (..),
+    newExecutorSummary_Attributes,
 
     -- ** ExecutorSummary_ExecutorLogs
-    , ExecutorSummary_ExecutorLogs (..)
-    , newExecutorSummary_ExecutorLogs
+    ExecutorSummary_ExecutorLogs (..),
+    newExecutorSummary_ExecutorLogs,
 
     -- ** ExecutorSummary_Resources
-    , ExecutorSummary_Resources (..)
-    , newExecutorSummary_Resources
+    ExecutorSummary_Resources (..),
+    newExecutorSummary_Resources,
 
     -- ** Expr
-    , Expr (..)
-    , newExpr
+    Expr (..),
+    newExpr,
 
     -- ** FlinkJob
-    , FlinkJob (..)
-    , newFlinkJob
+    FlinkJob (..),
+    newFlinkJob,
 
     -- ** FlinkJob_Properties
-    , FlinkJob_Properties (..)
-    , newFlinkJob_Properties
+    FlinkJob_Properties (..),
+    newFlinkJob_Properties,
 
     -- ** GceClusterConfig
-    , GceClusterConfig (..)
-    , newGceClusterConfig
+    GceClusterConfig (..),
+    newGceClusterConfig,
 
     -- ** GceClusterConfig_Metadata
-    , GceClusterConfig_Metadata (..)
-    , newGceClusterConfig_Metadata
+    GceClusterConfig_Metadata (..),
+    newGceClusterConfig_Metadata,
 
     -- ** GceClusterConfig_PrivateIpv6GoogleAccess
-    , GceClusterConfig_PrivateIpv6GoogleAccess (..)
+    GceClusterConfig_PrivateIpv6GoogleAccess (..),
 
     -- ** GetIamPolicyRequest
-    , GetIamPolicyRequest (..)
-    , newGetIamPolicyRequest
+    GetIamPolicyRequest (..),
+    newGetIamPolicyRequest,
 
     -- ** GetPolicyOptions
-    , GetPolicyOptions (..)
-    , newGetPolicyOptions
+    GetPolicyOptions (..),
+    newGetPolicyOptions,
 
     -- ** GkeClusterConfig
-    , GkeClusterConfig (..)
-    , newGkeClusterConfig
+    GkeClusterConfig (..),
+    newGkeClusterConfig,
 
     -- ** GkeNodeConfig
-    , GkeNodeConfig (..)
-    , newGkeNodeConfig
+    GkeNodeConfig (..),
+    newGkeNodeConfig,
 
     -- ** GkeNodePoolAcceleratorConfig
-    , GkeNodePoolAcceleratorConfig (..)
-    , newGkeNodePoolAcceleratorConfig
+    GkeNodePoolAcceleratorConfig (..),
+    newGkeNodePoolAcceleratorConfig,
 
     -- ** GkeNodePoolAutoscalingConfig
-    , GkeNodePoolAutoscalingConfig (..)
-    , newGkeNodePoolAutoscalingConfig
+    GkeNodePoolAutoscalingConfig (..),
+    newGkeNodePoolAutoscalingConfig,
 
     -- ** GkeNodePoolConfig
-    , GkeNodePoolConfig (..)
-    , newGkeNodePoolConfig
+    GkeNodePoolConfig (..),
+    newGkeNodePoolConfig,
 
     -- ** GkeNodePoolTarget
-    , GkeNodePoolTarget (..)
-    , newGkeNodePoolTarget
+    GkeNodePoolTarget (..),
+    newGkeNodePoolTarget,
 
     -- ** GkeNodePoolTarget_RolesItem
-    , GkeNodePoolTarget_RolesItem (..)
+    GkeNodePoolTarget_RolesItem (..),
 
     -- ** GoogleCloudDataprocV1WorkflowTemplateEncryptionConfig
-    , GoogleCloudDataprocV1WorkflowTemplateEncryptionConfig (..)
-    , newGoogleCloudDataprocV1WorkflowTemplateEncryptionConfig
+    GoogleCloudDataprocV1WorkflowTemplateEncryptionConfig (..),
+    newGoogleCloudDataprocV1WorkflowTemplateEncryptionConfig,
 
     -- ** HadoopJob
-    , HadoopJob (..)
-    , newHadoopJob
+    HadoopJob (..),
+    newHadoopJob,
 
     -- ** HadoopJob_Properties
-    , HadoopJob_Properties (..)
-    , newHadoopJob_Properties
+    HadoopJob_Properties (..),
+    newHadoopJob_Properties,
 
     -- ** HiveJob
-    , HiveJob (..)
-    , newHiveJob
+    HiveJob (..),
+    newHiveJob,
 
     -- ** HiveJob_Properties
-    , HiveJob_Properties (..)
-    , newHiveJob_Properties
+    HiveJob_Properties (..),
+    newHiveJob_Properties,
 
     -- ** HiveJob_ScriptVariables
-    , HiveJob_ScriptVariables (..)
-    , newHiveJob_ScriptVariables
+    HiveJob_ScriptVariables (..),
+    newHiveJob_ScriptVariables,
 
     -- ** IdentityConfig
-    , IdentityConfig (..)
-    , newIdentityConfig
+    IdentityConfig (..),
+    newIdentityConfig,
 
     -- ** IdentityConfig_UserServiceAccountMapping
-    , IdentityConfig_UserServiceAccountMapping (..)
-    , newIdentityConfig_UserServiceAccountMapping
+    IdentityConfig_UserServiceAccountMapping (..),
+    newIdentityConfig_UserServiceAccountMapping,
 
     -- ** InjectCredentialsRequest
-    , InjectCredentialsRequest (..)
-    , newInjectCredentialsRequest
+    InjectCredentialsRequest (..),
+    newInjectCredentialsRequest,
 
     -- ** InputMetrics
-    , InputMetrics (..)
-    , newInputMetrics
+    InputMetrics (..),
+    newInputMetrics,
 
     -- ** InputQuantileMetrics
-    , InputQuantileMetrics (..)
-    , newInputQuantileMetrics
+    InputQuantileMetrics (..),
+    newInputQuantileMetrics,
 
     -- ** InstanceFlexibilityPolicy
-    , InstanceFlexibilityPolicy (..)
-    , newInstanceFlexibilityPolicy
+    InstanceFlexibilityPolicy (..),
+    newInstanceFlexibilityPolicy,
 
     -- ** InstanceGroupAutoscalingPolicyConfig
-    , InstanceGroupAutoscalingPolicyConfig (..)
-    , newInstanceGroupAutoscalingPolicyConfig
+    InstanceGroupAutoscalingPolicyConfig (..),
+    newInstanceGroupAutoscalingPolicyConfig,
 
     -- ** InstanceGroupConfig
-    , InstanceGroupConfig (..)
-    , newInstanceGroupConfig
+    InstanceGroupConfig (..),
+    newInstanceGroupConfig,
 
     -- ** InstanceGroupConfig_Preemptibility
-    , InstanceGroupConfig_Preemptibility (..)
+    InstanceGroupConfig_Preemptibility (..),
 
     -- ** InstanceReference
-    , InstanceReference (..)
-    , newInstanceReference
+    InstanceReference (..),
+    newInstanceReference,
 
     -- ** InstanceSelection
-    , InstanceSelection (..)
-    , newInstanceSelection
+    InstanceSelection (..),
+    newInstanceSelection,
 
     -- ** InstanceSelectionResult
-    , InstanceSelectionResult (..)
-    , newInstanceSelectionResult
+    InstanceSelectionResult (..),
+    newInstanceSelectionResult,
 
     -- ** InstantiateWorkflowTemplateRequest
-    , InstantiateWorkflowTemplateRequest (..)
-    , newInstantiateWorkflowTemplateRequest
+    InstantiateWorkflowTemplateRequest (..),
+    newInstantiateWorkflowTemplateRequest,
 
     -- ** InstantiateWorkflowTemplateRequest_Parameters
-    , InstantiateWorkflowTemplateRequest_Parameters (..)
-    , newInstantiateWorkflowTemplateRequest_Parameters
+    InstantiateWorkflowTemplateRequest_Parameters (..),
+    newInstantiateWorkflowTemplateRequest_Parameters,
 
     -- ** Interval
-    , Interval (..)
-    , newInterval
+    Interval (..),
+    newInterval,
 
     -- ** Job
-    , Job (..)
-    , newJob
+    Job (..),
+    newJob,
 
     -- ** Job_Labels
-    , Job_Labels (..)
-    , newJob_Labels
+    Job_Labels (..),
+    newJob_Labels,
 
     -- ** JobData
-    , JobData (..)
-    , newJobData
+    JobData (..),
+    newJobData,
 
     -- ** JobData_KillTasksSummary
-    , JobData_KillTasksSummary (..)
-    , newJobData_KillTasksSummary
+    JobData_KillTasksSummary (..),
+    newJobData_KillTasksSummary,
 
     -- ** JobData_Status
-    , JobData_Status (..)
+    JobData_Status (..),
 
     -- ** JobMetadata
-    , JobMetadata (..)
-    , newJobMetadata
+    JobMetadata (..),
+    newJobMetadata,
 
     -- ** JobPlacement
-    , JobPlacement (..)
-    , newJobPlacement
+    JobPlacement (..),
+    newJobPlacement,
 
     -- ** JobPlacement_ClusterLabels
-    , JobPlacement_ClusterLabels (..)
-    , newJobPlacement_ClusterLabels
+    JobPlacement_ClusterLabels (..),
+    newJobPlacement_ClusterLabels,
 
     -- ** JobReference
-    , JobReference (..)
-    , newJobReference
+    JobReference (..),
+    newJobReference,
 
     -- ** JobScheduling
-    , JobScheduling (..)
-    , newJobScheduling
+    JobScheduling (..),
+    newJobScheduling,
 
     -- ** JobStatus
-    , JobStatus (..)
-    , newJobStatus
+    JobStatus (..),
+    newJobStatus,
 
     -- ** JobStatus_State
-    , JobStatus_State (..)
+    JobStatus_State (..),
 
     -- ** JobStatus_Substate
-    , JobStatus_Substate (..)
+    JobStatus_Substate (..),
 
     -- ** JobsSummary
-    , JobsSummary (..)
-    , newJobsSummary
+    JobsSummary (..),
+    newJobsSummary,
 
     -- ** JupyterConfig
-    , JupyterConfig (..)
-    , newJupyterConfig
+    JupyterConfig (..),
+    newJupyterConfig,
 
     -- ** JupyterConfig_Kernel
-    , JupyterConfig_Kernel (..)
+    JupyterConfig_Kernel (..),
 
     -- ** KerberosConfig
-    , KerberosConfig (..)
-    , newKerberosConfig
+    KerberosConfig (..),
+    newKerberosConfig,
 
     -- ** KubernetesClusterConfig
-    , KubernetesClusterConfig (..)
-    , newKubernetesClusterConfig
+    KubernetesClusterConfig (..),
+    newKubernetesClusterConfig,
 
     -- ** KubernetesSoftwareConfig
-    , KubernetesSoftwareConfig (..)
-    , newKubernetesSoftwareConfig
+    KubernetesSoftwareConfig (..),
+    newKubernetesSoftwareConfig,
 
     -- ** KubernetesSoftwareConfig_ComponentVersion
-    , KubernetesSoftwareConfig_ComponentVersion (..)
-    , newKubernetesSoftwareConfig_ComponentVersion
+    KubernetesSoftwareConfig_ComponentVersion (..),
+    newKubernetesSoftwareConfig_ComponentVersion,
 
     -- ** KubernetesSoftwareConfig_Properties
-    , KubernetesSoftwareConfig_Properties (..)
-    , newKubernetesSoftwareConfig_Properties
+    KubernetesSoftwareConfig_Properties (..),
+    newKubernetesSoftwareConfig_Properties,
 
     -- ** LifecycleConfig
-    , LifecycleConfig (..)
-    , newLifecycleConfig
+    LifecycleConfig (..),
+    newLifecycleConfig,
 
     -- ** ListAutoscalingPoliciesResponse
-    , ListAutoscalingPoliciesResponse (..)
-    , newListAutoscalingPoliciesResponse
+    ListAutoscalingPoliciesResponse (..),
+    newListAutoscalingPoliciesResponse,
 
     -- ** ListBatchesResponse
-    , ListBatchesResponse (..)
-    , newListBatchesResponse
+    ListBatchesResponse (..),
+    newListBatchesResponse,
 
     -- ** ListClustersResponse
-    , ListClustersResponse (..)
-    , newListClustersResponse
+    ListClustersResponse (..),
+    newListClustersResponse,
 
     -- ** ListJobsResponse
-    , ListJobsResponse (..)
-    , newListJobsResponse
+    ListJobsResponse (..),
+    newListJobsResponse,
 
     -- ** ListOperationsResponse
-    , ListOperationsResponse (..)
-    , newListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
     -- ** ListSessionTemplatesResponse
-    , ListSessionTemplatesResponse (..)
-    , newListSessionTemplatesResponse
+    ListSessionTemplatesResponse (..),
+    newListSessionTemplatesResponse,
 
     -- ** ListSessionsResponse
-    , ListSessionsResponse (..)
-    , newListSessionsResponse
+    ListSessionsResponse (..),
+    newListSessionsResponse,
 
     -- ** ListWorkflowTemplatesResponse
-    , ListWorkflowTemplatesResponse (..)
-    , newListWorkflowTemplatesResponse
+    ListWorkflowTemplatesResponse (..),
+    newListWorkflowTemplatesResponse,
 
     -- ** LoggingConfig
-    , LoggingConfig (..)
-    , newLoggingConfig
+    LoggingConfig (..),
+    newLoggingConfig,
 
     -- ** LoggingConfig_DriverLogLevels
-    , LoggingConfig_DriverLogLevels (..)
-    , newLoggingConfig_DriverLogLevels
+    LoggingConfig_DriverLogLevels (..),
+    newLoggingConfig_DriverLogLevels,
 
     -- ** LoggingConfig_DriverLogLevelsAdditional
-    , LoggingConfig_DriverLogLevelsAdditional (..)
+    LoggingConfig_DriverLogLevelsAdditional (..),
 
     -- ** ManagedCluster
-    , ManagedCluster (..)
-    , newManagedCluster
+    ManagedCluster (..),
+    newManagedCluster,
 
     -- ** ManagedCluster_Labels
-    , ManagedCluster_Labels (..)
-    , newManagedCluster_Labels
+    ManagedCluster_Labels (..),
+    newManagedCluster_Labels,
 
     -- ** ManagedGroupConfig
-    , ManagedGroupConfig (..)
-    , newManagedGroupConfig
+    ManagedGroupConfig (..),
+    newManagedGroupConfig,
 
     -- ** MemoryMetrics
-    , MemoryMetrics (..)
-    , newMemoryMetrics
+    MemoryMetrics (..),
+    newMemoryMetrics,
 
     -- ** MetastoreConfig
-    , MetastoreConfig (..)
-    , newMetastoreConfig
+    MetastoreConfig (..),
+    newMetastoreConfig,
 
     -- ** Metric
-    , Metric (..)
-    , newMetric
+    Metric (..),
+    newMetric,
 
     -- ** Metric_MetricSource
-    , Metric_MetricSource (..)
+    Metric_MetricSource (..),
 
     -- ** NamespacedGkeDeploymentTarget
-    , NamespacedGkeDeploymentTarget (..)
-    , newNamespacedGkeDeploymentTarget
+    NamespacedGkeDeploymentTarget (..),
+    newNamespacedGkeDeploymentTarget,
 
     -- ** NodeGroup
-    , NodeGroup (..)
-    , newNodeGroup
+    NodeGroup (..),
+    newNodeGroup,
 
     -- ** NodeGroup_Labels
-    , NodeGroup_Labels (..)
-    , newNodeGroup_Labels
+    NodeGroup_Labels (..),
+    newNodeGroup_Labels,
 
     -- ** NodeGroup_RolesItem
-    , NodeGroup_RolesItem (..)
+    NodeGroup_RolesItem (..),
 
     -- ** NodeGroupAffinity
-    , NodeGroupAffinity (..)
-    , newNodeGroupAffinity
+    NodeGroupAffinity (..),
+    newNodeGroupAffinity,
 
     -- ** NodeGroupOperationMetadata
-    , NodeGroupOperationMetadata (..)
-    , newNodeGroupOperationMetadata
+    NodeGroupOperationMetadata (..),
+    newNodeGroupOperationMetadata,
 
     -- ** NodeGroupOperationMetadata_Labels
-    , NodeGroupOperationMetadata_Labels (..)
-    , newNodeGroupOperationMetadata_Labels
+    NodeGroupOperationMetadata_Labels (..),
+    newNodeGroupOperationMetadata_Labels,
 
     -- ** NodeGroupOperationMetadata_OperationType
-    , NodeGroupOperationMetadata_OperationType (..)
+    NodeGroupOperationMetadata_OperationType (..),
 
     -- ** NodeInitializationAction
-    , NodeInitializationAction (..)
-    , newNodeInitializationAction
+    NodeInitializationAction (..),
+    newNodeInitializationAction,
 
     -- ** NodePool
-    , NodePool (..)
-    , newNodePool
+    NodePool (..),
+    newNodePool,
 
     -- ** NodePool_RepairAction
-    , NodePool_RepairAction (..)
+    NodePool_RepairAction (..),
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** OrderedJob
-    , OrderedJob (..)
-    , newOrderedJob
+    OrderedJob (..),
+    newOrderedJob,
 
     -- ** OrderedJob_Labels
-    , OrderedJob_Labels (..)
-    , newOrderedJob_Labels
+    OrderedJob_Labels (..),
+    newOrderedJob_Labels,
 
     -- ** OutputMetrics
-    , OutputMetrics (..)
-    , newOutputMetrics
+    OutputMetrics (..),
+    newOutputMetrics,
 
     -- ** OutputQuantileMetrics
-    , OutputQuantileMetrics (..)
-    , newOutputQuantileMetrics
+    OutputQuantileMetrics (..),
+    newOutputQuantileMetrics,
 
     -- ** ParameterValidation
-    , ParameterValidation (..)
-    , newParameterValidation
+    ParameterValidation (..),
+    newParameterValidation,
 
     -- ** PeripheralsConfig
-    , PeripheralsConfig (..)
-    , newPeripheralsConfig
+    PeripheralsConfig (..),
+    newPeripheralsConfig,
 
     -- ** PigJob
-    , PigJob (..)
-    , newPigJob
+    PigJob (..),
+    newPigJob,
 
     -- ** PigJob_Properties
-    , PigJob_Properties (..)
-    , newPigJob_Properties
+    PigJob_Properties (..),
+    newPigJob_Properties,
 
     -- ** PigJob_ScriptVariables
-    , PigJob_ScriptVariables (..)
-    , newPigJob_ScriptVariables
+    PigJob_ScriptVariables (..),
+    newPigJob_ScriptVariables,
 
     -- ** Policy
-    , Policy (..)
-    , newPolicy
+    Policy (..),
+    newPolicy,
 
     -- ** PoolData
-    , PoolData (..)
-    , newPoolData
+    PoolData (..),
+    newPoolData,
 
     -- ** PrestoJob
-    , PrestoJob (..)
-    , newPrestoJob
+    PrestoJob (..),
+    newPrestoJob,
 
     -- ** PrestoJob_Properties
-    , PrestoJob_Properties (..)
-    , newPrestoJob_Properties
+    PrestoJob_Properties (..),
+    newPrestoJob_Properties,
 
     -- ** ProcessSummary
-    , ProcessSummary (..)
-    , newProcessSummary
+    ProcessSummary (..),
+    newProcessSummary,
 
     -- ** ProcessSummary_ProcessLogs
-    , ProcessSummary_ProcessLogs (..)
-    , newProcessSummary_ProcessLogs
+    ProcessSummary_ProcessLogs (..),
+    newProcessSummary_ProcessLogs,
 
     -- ** ProvisioningModelMix
-    , ProvisioningModelMix (..)
-    , newProvisioningModelMix
+    ProvisioningModelMix (..),
+    newProvisioningModelMix,
 
     -- ** PyPiRepositoryConfig
-    , PyPiRepositoryConfig (..)
-    , newPyPiRepositoryConfig
+    PyPiRepositoryConfig (..),
+    newPyPiRepositoryConfig,
 
     -- ** PySparkBatch
-    , PySparkBatch (..)
-    , newPySparkBatch
+    PySparkBatch (..),
+    newPySparkBatch,
 
     -- ** PySparkJob
-    , PySparkJob (..)
-    , newPySparkJob
+    PySparkJob (..),
+    newPySparkJob,
 
     -- ** PySparkJob_Properties
-    , PySparkJob_Properties (..)
-    , newPySparkJob_Properties
+    PySparkJob_Properties (..),
+    newPySparkJob_Properties,
 
     -- ** Quantiles
-    , Quantiles (..)
-    , newQuantiles
+    Quantiles (..),
+    newQuantiles,
 
     -- ** QueryList
-    , QueryList (..)
-    , newQueryList
+    QueryList (..),
+    newQueryList,
 
     -- ** RddDataDistribution
-    , RddDataDistribution (..)
-    , newRddDataDistribution
+    RddDataDistribution (..),
+    newRddDataDistribution,
 
     -- ** RddOperationCluster
-    , RddOperationCluster (..)
-    , newRddOperationCluster
+    RddOperationCluster (..),
+    newRddOperationCluster,
 
     -- ** RddOperationEdge
-    , RddOperationEdge (..)
-    , newRddOperationEdge
+    RddOperationEdge (..),
+    newRddOperationEdge,
 
     -- ** RddOperationGraph
-    , RddOperationGraph (..)
-    , newRddOperationGraph
+    RddOperationGraph (..),
+    newRddOperationGraph,
 
     -- ** RddOperationNode
-    , RddOperationNode (..)
-    , newRddOperationNode
+    RddOperationNode (..),
+    newRddOperationNode,
 
     -- ** RddOperationNode_OutputDeterministicLevel
-    , RddOperationNode_OutputDeterministicLevel (..)
+    RddOperationNode_OutputDeterministicLevel (..),
 
     -- ** RddPartitionInfo
-    , RddPartitionInfo (..)
-    , newRddPartitionInfo
+    RddPartitionInfo (..),
+    newRddPartitionInfo,
 
     -- ** RddStorageInfo
-    , RddStorageInfo (..)
-    , newRddStorageInfo
+    RddStorageInfo (..),
+    newRddStorageInfo,
 
     -- ** RegexValidation
-    , RegexValidation (..)
-    , newRegexValidation
+    RegexValidation (..),
+    newRegexValidation,
 
     -- ** RepairClusterRequest
-    , RepairClusterRequest (..)
-    , newRepairClusterRequest
+    RepairClusterRequest (..),
+    newRepairClusterRequest,
 
     -- ** RepairNodeGroupRequest
-    , RepairNodeGroupRequest (..)
-    , newRepairNodeGroupRequest
+    RepairNodeGroupRequest (..),
+    newRepairNodeGroupRequest,
 
     -- ** RepairNodeGroupRequest_RepairAction
-    , RepairNodeGroupRequest_RepairAction (..)
+    RepairNodeGroupRequest_RepairAction (..),
 
     -- ** RepositoryConfig
-    , RepositoryConfig (..)
-    , newRepositoryConfig
+    RepositoryConfig (..),
+    newRepositoryConfig,
 
     -- ** ReservationAffinity
-    , ReservationAffinity (..)
-    , newReservationAffinity
+    ReservationAffinity (..),
+    newReservationAffinity,
 
     -- ** ReservationAffinity_ConsumeReservationType
-    , ReservationAffinity_ConsumeReservationType (..)
+    ReservationAffinity_ConsumeReservationType (..),
 
     -- ** ResizeNodeGroupRequest
-    , ResizeNodeGroupRequest (..)
-    , newResizeNodeGroupRequest
+    ResizeNodeGroupRequest (..),
+    newResizeNodeGroupRequest,
 
     -- ** ResourceInformation
-    , ResourceInformation (..)
-    , newResourceInformation
+    ResourceInformation (..),
+    newResourceInformation,
 
     -- ** ResourceProfileInfo
-    , ResourceProfileInfo (..)
-    , newResourceProfileInfo
+    ResourceProfileInfo (..),
+    newResourceProfileInfo,
 
     -- ** ResourceProfileInfo_ExecutorResources
-    , ResourceProfileInfo_ExecutorResources (..)
-    , newResourceProfileInfo_ExecutorResources
+    ResourceProfileInfo_ExecutorResources (..),
+    newResourceProfileInfo_ExecutorResources,
 
     -- ** ResourceProfileInfo_TaskResources
-    , ResourceProfileInfo_TaskResources (..)
-    , newResourceProfileInfo_TaskResources
+    ResourceProfileInfo_TaskResources (..),
+    newResourceProfileInfo_TaskResources,
 
     -- ** RuntimeConfig
-    , RuntimeConfig (..)
-    , newRuntimeConfig
+    RuntimeConfig (..),
+    newRuntimeConfig,
 
     -- ** RuntimeConfig_Properties
-    , RuntimeConfig_Properties (..)
-    , newRuntimeConfig_Properties
+    RuntimeConfig_Properties (..),
+    newRuntimeConfig_Properties,
 
     -- ** RuntimeInfo
-    , RuntimeInfo (..)
-    , newRuntimeInfo
+    RuntimeInfo (..),
+    newRuntimeInfo,
 
     -- ** RuntimeInfo_Endpoints
-    , RuntimeInfo_Endpoints (..)
-    , newRuntimeInfo_Endpoints
+    RuntimeInfo_Endpoints (..),
+    newRuntimeInfo_Endpoints,
 
     -- ** SearchSessionSparkApplicationExecutorStageSummaryResponse
-    , SearchSessionSparkApplicationExecutorStageSummaryResponse (..)
-    , newSearchSessionSparkApplicationExecutorStageSummaryResponse
+    SearchSessionSparkApplicationExecutorStageSummaryResponse (..),
+    newSearchSessionSparkApplicationExecutorStageSummaryResponse,
 
     -- ** SearchSessionSparkApplicationExecutorsResponse
-    , SearchSessionSparkApplicationExecutorsResponse (..)
-    , newSearchSessionSparkApplicationExecutorsResponse
+    SearchSessionSparkApplicationExecutorsResponse (..),
+    newSearchSessionSparkApplicationExecutorsResponse,
 
     -- ** SearchSessionSparkApplicationJobsResponse
-    , SearchSessionSparkApplicationJobsResponse (..)
-    , newSearchSessionSparkApplicationJobsResponse
+    SearchSessionSparkApplicationJobsResponse (..),
+    newSearchSessionSparkApplicationJobsResponse,
 
     -- ** SearchSessionSparkApplicationSqlQueriesResponse
-    , SearchSessionSparkApplicationSqlQueriesResponse (..)
-    , newSearchSessionSparkApplicationSqlQueriesResponse
+    SearchSessionSparkApplicationSqlQueriesResponse (..),
+    newSearchSessionSparkApplicationSqlQueriesResponse,
 
     -- ** SearchSessionSparkApplicationStageAttemptTasksResponse
-    , SearchSessionSparkApplicationStageAttemptTasksResponse (..)
-    , newSearchSessionSparkApplicationStageAttemptTasksResponse
+    SearchSessionSparkApplicationStageAttemptTasksResponse (..),
+    newSearchSessionSparkApplicationStageAttemptTasksResponse,
 
     -- ** SearchSessionSparkApplicationStageAttemptsResponse
-    , SearchSessionSparkApplicationStageAttemptsResponse (..)
-    , newSearchSessionSparkApplicationStageAttemptsResponse
+    SearchSessionSparkApplicationStageAttemptsResponse (..),
+    newSearchSessionSparkApplicationStageAttemptsResponse,
 
     -- ** SearchSessionSparkApplicationStagesResponse
-    , SearchSessionSparkApplicationStagesResponse (..)
-    , newSearchSessionSparkApplicationStagesResponse
+    SearchSessionSparkApplicationStagesResponse (..),
+    newSearchSessionSparkApplicationStagesResponse,
 
     -- ** SearchSessionSparkApplicationsResponse
-    , SearchSessionSparkApplicationsResponse (..)
-    , newSearchSessionSparkApplicationsResponse
+    SearchSessionSparkApplicationsResponse (..),
+    newSearchSessionSparkApplicationsResponse,
 
     -- ** SearchSparkApplicationExecutorStageSummaryResponse
-    , SearchSparkApplicationExecutorStageSummaryResponse (..)
-    , newSearchSparkApplicationExecutorStageSummaryResponse
+    SearchSparkApplicationExecutorStageSummaryResponse (..),
+    newSearchSparkApplicationExecutorStageSummaryResponse,
 
     -- ** SearchSparkApplicationExecutorsResponse
-    , SearchSparkApplicationExecutorsResponse (..)
-    , newSearchSparkApplicationExecutorsResponse
+    SearchSparkApplicationExecutorsResponse (..),
+    newSearchSparkApplicationExecutorsResponse,
 
     -- ** SearchSparkApplicationJobsResponse
-    , SearchSparkApplicationJobsResponse (..)
-    , newSearchSparkApplicationJobsResponse
+    SearchSparkApplicationJobsResponse (..),
+    newSearchSparkApplicationJobsResponse,
 
     -- ** SearchSparkApplicationSqlQueriesResponse
-    , SearchSparkApplicationSqlQueriesResponse (..)
-    , newSearchSparkApplicationSqlQueriesResponse
+    SearchSparkApplicationSqlQueriesResponse (..),
+    newSearchSparkApplicationSqlQueriesResponse,
 
     -- ** SearchSparkApplicationStageAttemptTasksResponse
-    , SearchSparkApplicationStageAttemptTasksResponse (..)
-    , newSearchSparkApplicationStageAttemptTasksResponse
+    SearchSparkApplicationStageAttemptTasksResponse (..),
+    newSearchSparkApplicationStageAttemptTasksResponse,
 
     -- ** SearchSparkApplicationStageAttemptsResponse
-    , SearchSparkApplicationStageAttemptsResponse (..)
-    , newSearchSparkApplicationStageAttemptsResponse
+    SearchSparkApplicationStageAttemptsResponse (..),
+    newSearchSparkApplicationStageAttemptsResponse,
 
     -- ** SearchSparkApplicationStagesResponse
-    , SearchSparkApplicationStagesResponse (..)
-    , newSearchSparkApplicationStagesResponse
+    SearchSparkApplicationStagesResponse (..),
+    newSearchSparkApplicationStagesResponse,
 
     -- ** SearchSparkApplicationsResponse
-    , SearchSparkApplicationsResponse (..)
-    , newSearchSparkApplicationsResponse
+    SearchSparkApplicationsResponse (..),
+    newSearchSparkApplicationsResponse,
 
     -- ** SecurityConfig
-    , SecurityConfig (..)
-    , newSecurityConfig
+    SecurityConfig (..),
+    newSecurityConfig,
 
     -- ** Session
-    , Session (..)
-    , newSession
+    Session (..),
+    newSession,
 
     -- ** Session_Labels
-    , Session_Labels (..)
-    , newSession_Labels
+    Session_Labels (..),
+    newSession_Labels,
 
     -- ** Session_State
-    , Session_State (..)
+    Session_State (..),
 
     -- ** SessionOperationMetadata
-    , SessionOperationMetadata (..)
-    , newSessionOperationMetadata
+    SessionOperationMetadata (..),
+    newSessionOperationMetadata,
 
     -- ** SessionOperationMetadata_Labels
-    , SessionOperationMetadata_Labels (..)
-    , newSessionOperationMetadata_Labels
+    SessionOperationMetadata_Labels (..),
+    newSessionOperationMetadata_Labels,
 
     -- ** SessionOperationMetadata_OperationType
-    , SessionOperationMetadata_OperationType (..)
+    SessionOperationMetadata_OperationType (..),
 
     -- ** SessionStateHistory
-    , SessionStateHistory (..)
-    , newSessionStateHistory
+    SessionStateHistory (..),
+    newSessionStateHistory,
 
     -- ** SessionStateHistory_State
-    , SessionStateHistory_State (..)
+    SessionStateHistory_State (..),
 
     -- ** SessionTemplate
-    , SessionTemplate (..)
-    , newSessionTemplate
+    SessionTemplate (..),
+    newSessionTemplate,
 
     -- ** SessionTemplate_Labels
-    , SessionTemplate_Labels (..)
-    , newSessionTemplate_Labels
+    SessionTemplate_Labels (..),
+    newSessionTemplate_Labels,
 
     -- ** SetIamPolicyRequest
-    , SetIamPolicyRequest (..)
-    , newSetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
 
     -- ** ShieldedInstanceConfig
-    , ShieldedInstanceConfig (..)
-    , newShieldedInstanceConfig
+    ShieldedInstanceConfig (..),
+    newShieldedInstanceConfig,
 
     -- ** ShufflePushReadMetrics
-    , ShufflePushReadMetrics (..)
-    , newShufflePushReadMetrics
+    ShufflePushReadMetrics (..),
+    newShufflePushReadMetrics,
 
     -- ** ShufflePushReadQuantileMetrics
-    , ShufflePushReadQuantileMetrics (..)
-    , newShufflePushReadQuantileMetrics
+    ShufflePushReadQuantileMetrics (..),
+    newShufflePushReadQuantileMetrics,
 
     -- ** ShuffleReadMetrics
-    , ShuffleReadMetrics (..)
-    , newShuffleReadMetrics
+    ShuffleReadMetrics (..),
+    newShuffleReadMetrics,
 
     -- ** ShuffleReadQuantileMetrics
-    , ShuffleReadQuantileMetrics (..)
-    , newShuffleReadQuantileMetrics
+    ShuffleReadQuantileMetrics (..),
+    newShuffleReadQuantileMetrics,
 
     -- ** ShuffleWriteMetrics
-    , ShuffleWriteMetrics (..)
-    , newShuffleWriteMetrics
+    ShuffleWriteMetrics (..),
+    newShuffleWriteMetrics,
 
     -- ** ShuffleWriteQuantileMetrics
-    , ShuffleWriteQuantileMetrics (..)
-    , newShuffleWriteQuantileMetrics
+    ShuffleWriteQuantileMetrics (..),
+    newShuffleWriteQuantileMetrics,
 
     -- ** SinkProgress
-    , SinkProgress (..)
-    , newSinkProgress
+    SinkProgress (..),
+    newSinkProgress,
 
     -- ** SinkProgress_Metrics
-    , SinkProgress_Metrics (..)
-    , newSinkProgress_Metrics
+    SinkProgress_Metrics (..),
+    newSinkProgress_Metrics,
 
     -- ** SoftwareConfig
-    , SoftwareConfig (..)
-    , newSoftwareConfig
+    SoftwareConfig (..),
+    newSoftwareConfig,
 
     -- ** SoftwareConfig_OptionalComponentsItem
-    , SoftwareConfig_OptionalComponentsItem (..)
+    SoftwareConfig_OptionalComponentsItem (..),
 
     -- ** SoftwareConfig_Properties
-    , SoftwareConfig_Properties (..)
-    , newSoftwareConfig_Properties
+    SoftwareConfig_Properties (..),
+    newSoftwareConfig_Properties,
 
     -- ** SourceProgress
-    , SourceProgress (..)
-    , newSourceProgress
+    SourceProgress (..),
+    newSourceProgress,
 
     -- ** SourceProgress_Metrics
-    , SourceProgress_Metrics (..)
-    , newSourceProgress_Metrics
+    SourceProgress_Metrics (..),
+    newSourceProgress_Metrics,
 
     -- ** SparkApplication
-    , SparkApplication (..)
-    , newSparkApplication
+    SparkApplication (..),
+    newSparkApplication,
 
     -- ** SparkBatch
-    , SparkBatch (..)
-    , newSparkBatch
+    SparkBatch (..),
+    newSparkBatch,
 
     -- ** SparkConnectConfig
-    , SparkConnectConfig (..)
-    , newSparkConnectConfig
+    SparkConnectConfig (..),
+    newSparkConnectConfig,
 
     -- ** SparkHistoryServerConfig
-    , SparkHistoryServerConfig (..)
-    , newSparkHistoryServerConfig
+    SparkHistoryServerConfig (..),
+    newSparkHistoryServerConfig,
 
     -- ** SparkJob
-    , SparkJob (..)
-    , newSparkJob
+    SparkJob (..),
+    newSparkJob,
 
     -- ** SparkJob_Properties
-    , SparkJob_Properties (..)
-    , newSparkJob_Properties
+    SparkJob_Properties (..),
+    newSparkJob_Properties,
 
     -- ** SparkPlanGraph
-    , SparkPlanGraph (..)
-    , newSparkPlanGraph
+    SparkPlanGraph (..),
+    newSparkPlanGraph,
 
     -- ** SparkPlanGraphCluster
-    , SparkPlanGraphCluster (..)
-    , newSparkPlanGraphCluster
+    SparkPlanGraphCluster (..),
+    newSparkPlanGraphCluster,
 
     -- ** SparkPlanGraphEdge
-    , SparkPlanGraphEdge (..)
-    , newSparkPlanGraphEdge
+    SparkPlanGraphEdge (..),
+    newSparkPlanGraphEdge,
 
     -- ** SparkPlanGraphNode
-    , SparkPlanGraphNode (..)
-    , newSparkPlanGraphNode
+    SparkPlanGraphNode (..),
+    newSparkPlanGraphNode,
 
     -- ** SparkPlanGraphNodeWrapper
-    , SparkPlanGraphNodeWrapper (..)
-    , newSparkPlanGraphNodeWrapper
+    SparkPlanGraphNodeWrapper (..),
+    newSparkPlanGraphNodeWrapper,
 
     -- ** SparkRBatch
-    , SparkRBatch (..)
-    , newSparkRBatch
+    SparkRBatch (..),
+    newSparkRBatch,
 
     -- ** SparkRJob
-    , SparkRJob (..)
-    , newSparkRJob
+    SparkRJob (..),
+    newSparkRJob,
 
     -- ** SparkRJob_Properties
-    , SparkRJob_Properties (..)
-    , newSparkRJob_Properties
+    SparkRJob_Properties (..),
+    newSparkRJob_Properties,
 
     -- ** SparkRuntimeInfo
-    , SparkRuntimeInfo (..)
-    , newSparkRuntimeInfo
+    SparkRuntimeInfo (..),
+    newSparkRuntimeInfo,
 
     -- ** SparkSqlBatch
-    , SparkSqlBatch (..)
-    , newSparkSqlBatch
+    SparkSqlBatch (..),
+    newSparkSqlBatch,
 
     -- ** SparkSqlBatch_QueryVariables
-    , SparkSqlBatch_QueryVariables (..)
-    , newSparkSqlBatch_QueryVariables
+    SparkSqlBatch_QueryVariables (..),
+    newSparkSqlBatch_QueryVariables,
 
     -- ** SparkSqlJob
-    , SparkSqlJob (..)
-    , newSparkSqlJob
+    SparkSqlJob (..),
+    newSparkSqlJob,
 
     -- ** SparkSqlJob_Properties
-    , SparkSqlJob_Properties (..)
-    , newSparkSqlJob_Properties
+    SparkSqlJob_Properties (..),
+    newSparkSqlJob_Properties,
 
     -- ** SparkSqlJob_ScriptVariables
-    , SparkSqlJob_ScriptVariables (..)
-    , newSparkSqlJob_ScriptVariables
+    SparkSqlJob_ScriptVariables (..),
+    newSparkSqlJob_ScriptVariables,
 
     -- ** SparkStandaloneAutoscalingConfig
-    , SparkStandaloneAutoscalingConfig (..)
-    , newSparkStandaloneAutoscalingConfig
+    SparkStandaloneAutoscalingConfig (..),
+    newSparkStandaloneAutoscalingConfig,
 
     -- ** SparkWrapperObject
-    , SparkWrapperObject (..)
-    , newSparkWrapperObject
+    SparkWrapperObject (..),
+    newSparkWrapperObject,
 
     -- ** SpeculationStageSummary
-    , SpeculationStageSummary (..)
-    , newSpeculationStageSummary
+    SpeculationStageSummary (..),
+    newSpeculationStageSummary,
 
     -- ** SqlExecutionUiData
-    , SqlExecutionUiData (..)
-    , newSqlExecutionUiData
+    SqlExecutionUiData (..),
+    newSqlExecutionUiData,
 
     -- ** SqlExecutionUiData_Jobs
-    , SqlExecutionUiData_Jobs (..)
-    , newSqlExecutionUiData_Jobs
+    SqlExecutionUiData_Jobs (..),
+    newSqlExecutionUiData_Jobs,
 
     -- ** SqlExecutionUiData_JobsAdditional
-    , SqlExecutionUiData_JobsAdditional (..)
+    SqlExecutionUiData_JobsAdditional (..),
 
     -- ** SqlExecutionUiData_MetricValues
-    , SqlExecutionUiData_MetricValues (..)
-    , newSqlExecutionUiData_MetricValues
+    SqlExecutionUiData_MetricValues (..),
+    newSqlExecutionUiData_MetricValues,
 
     -- ** SqlExecutionUiData_ModifiedConfigs
-    , SqlExecutionUiData_ModifiedConfigs (..)
-    , newSqlExecutionUiData_ModifiedConfigs
+    SqlExecutionUiData_ModifiedConfigs (..),
+    newSqlExecutionUiData_ModifiedConfigs,
 
     -- ** SqlPlanMetric
-    , SqlPlanMetric (..)
-    , newSqlPlanMetric
+    SqlPlanMetric (..),
+    newSqlPlanMetric,
 
     -- ** StageAttemptTasksSummary
-    , StageAttemptTasksSummary (..)
-    , newStageAttemptTasksSummary
+    StageAttemptTasksSummary (..),
+    newStageAttemptTasksSummary,
 
     -- ** StageData
-    , StageData (..)
-    , newStageData
+    StageData (..),
+    newStageData,
 
     -- ** StageData_ExecutorSummary
-    , StageData_ExecutorSummary (..)
-    , newStageData_ExecutorSummary
+    StageData_ExecutorSummary (..),
+    newStageData_ExecutorSummary,
 
     -- ** StageData_KilledTasksSummary
-    , StageData_KilledTasksSummary (..)
-    , newStageData_KilledTasksSummary
+    StageData_KilledTasksSummary (..),
+    newStageData_KilledTasksSummary,
 
     -- ** StageData_Locality
-    , StageData_Locality (..)
-    , newStageData_Locality
+    StageData_Locality (..),
+    newStageData_Locality,
 
     -- ** StageData_Status
-    , StageData_Status (..)
+    StageData_Status (..),
 
     -- ** StageData_Tasks
-    , StageData_Tasks (..)
-    , newStageData_Tasks
+    StageData_Tasks (..),
+    newStageData_Tasks,
 
     -- ** StageInputMetrics
-    , StageInputMetrics (..)
-    , newStageInputMetrics
+    StageInputMetrics (..),
+    newStageInputMetrics,
 
     -- ** StageMetrics
-    , StageMetrics (..)
-    , newStageMetrics
+    StageMetrics (..),
+    newStageMetrics,
 
     -- ** StageOutputMetrics
-    , StageOutputMetrics (..)
-    , newStageOutputMetrics
+    StageOutputMetrics (..),
+    newStageOutputMetrics,
 
     -- ** StageShufflePushReadMetrics
-    , StageShufflePushReadMetrics (..)
-    , newStageShufflePushReadMetrics
+    StageShufflePushReadMetrics (..),
+    newStageShufflePushReadMetrics,
 
     -- ** StageShuffleReadMetrics
-    , StageShuffleReadMetrics (..)
-    , newStageShuffleReadMetrics
+    StageShuffleReadMetrics (..),
+    newStageShuffleReadMetrics,
 
     -- ** StageShuffleWriteMetrics
-    , StageShuffleWriteMetrics (..)
-    , newStageShuffleWriteMetrics
+    StageShuffleWriteMetrics (..),
+    newStageShuffleWriteMetrics,
 
     -- ** StagesSummary
-    , StagesSummary (..)
-    , newStagesSummary
+    StagesSummary (..),
+    newStagesSummary,
 
     -- ** StartClusterRequest
-    , StartClusterRequest (..)
-    , newStartClusterRequest
+    StartClusterRequest (..),
+    newStartClusterRequest,
 
     -- ** StartupConfig
-    , StartupConfig (..)
-    , newStartupConfig
+    StartupConfig (..),
+    newStartupConfig,
 
     -- ** StateHistory
-    , StateHistory (..)
-    , newStateHistory
+    StateHistory (..),
+    newStateHistory,
 
     -- ** StateHistory_State
-    , StateHistory_State (..)
+    StateHistory_State (..),
 
     -- ** StateOperatorProgress
-    , StateOperatorProgress (..)
-    , newStateOperatorProgress
+    StateOperatorProgress (..),
+    newStateOperatorProgress,
 
     -- ** StateOperatorProgress_CustomMetrics
-    , StateOperatorProgress_CustomMetrics (..)
-    , newStateOperatorProgress_CustomMetrics
+    StateOperatorProgress_CustomMetrics (..),
+    newStateOperatorProgress_CustomMetrics,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** StopClusterRequest
-    , StopClusterRequest (..)
-    , newStopClusterRequest
+    StopClusterRequest (..),
+    newStopClusterRequest,
 
     -- ** StreamBlockData
-    , StreamBlockData (..)
-    , newStreamBlockData
+    StreamBlockData (..),
+    newStreamBlockData,
 
     -- ** StreamingQueryData
-    , StreamingQueryData (..)
-    , newStreamingQueryData
+    StreamingQueryData (..),
+    newStreamingQueryData,
 
     -- ** StreamingQueryProgress
-    , StreamingQueryProgress (..)
-    , newStreamingQueryProgress
+    StreamingQueryProgress (..),
+    newStreamingQueryProgress,
 
     -- ** StreamingQueryProgress_DurationMillis
-    , StreamingQueryProgress_DurationMillis (..)
-    , newStreamingQueryProgress_DurationMillis
+    StreamingQueryProgress_DurationMillis (..),
+    newStreamingQueryProgress_DurationMillis,
 
     -- ** StreamingQueryProgress_EventTime
-    , StreamingQueryProgress_EventTime (..)
-    , newStreamingQueryProgress_EventTime
+    StreamingQueryProgress_EventTime (..),
+    newStreamingQueryProgress_EventTime,
 
     -- ** StreamingQueryProgress_ObservedMetrics
-    , StreamingQueryProgress_ObservedMetrics (..)
-    , newStreamingQueryProgress_ObservedMetrics
+    StreamingQueryProgress_ObservedMetrics (..),
+    newStreamingQueryProgress_ObservedMetrics,
 
     -- ** SubmitJobRequest
-    , SubmitJobRequest (..)
-    , newSubmitJobRequest
+    SubmitJobRequest (..),
+    newSubmitJobRequest,
 
     -- ** SummarizeSessionSparkApplicationExecutorsResponse
-    , SummarizeSessionSparkApplicationExecutorsResponse (..)
-    , newSummarizeSessionSparkApplicationExecutorsResponse
+    SummarizeSessionSparkApplicationExecutorsResponse (..),
+    newSummarizeSessionSparkApplicationExecutorsResponse,
 
     -- ** SummarizeSessionSparkApplicationJobsResponse
-    , SummarizeSessionSparkApplicationJobsResponse (..)
-    , newSummarizeSessionSparkApplicationJobsResponse
+    SummarizeSessionSparkApplicationJobsResponse (..),
+    newSummarizeSessionSparkApplicationJobsResponse,
 
     -- ** SummarizeSessionSparkApplicationStageAttemptTasksResponse
-    , SummarizeSessionSparkApplicationStageAttemptTasksResponse (..)
-    , newSummarizeSessionSparkApplicationStageAttemptTasksResponse
+    SummarizeSessionSparkApplicationStageAttemptTasksResponse (..),
+    newSummarizeSessionSparkApplicationStageAttemptTasksResponse,
 
     -- ** SummarizeSessionSparkApplicationStagesResponse
-    , SummarizeSessionSparkApplicationStagesResponse (..)
-    , newSummarizeSessionSparkApplicationStagesResponse
+    SummarizeSessionSparkApplicationStagesResponse (..),
+    newSummarizeSessionSparkApplicationStagesResponse,
 
     -- ** SummarizeSparkApplicationExecutorsResponse
-    , SummarizeSparkApplicationExecutorsResponse (..)
-    , newSummarizeSparkApplicationExecutorsResponse
+    SummarizeSparkApplicationExecutorsResponse (..),
+    newSummarizeSparkApplicationExecutorsResponse,
 
     -- ** SummarizeSparkApplicationJobsResponse
-    , SummarizeSparkApplicationJobsResponse (..)
-    , newSummarizeSparkApplicationJobsResponse
+    SummarizeSparkApplicationJobsResponse (..),
+    newSummarizeSparkApplicationJobsResponse,
 
     -- ** SummarizeSparkApplicationStageAttemptTasksResponse
-    , SummarizeSparkApplicationStageAttemptTasksResponse (..)
-    , newSummarizeSparkApplicationStageAttemptTasksResponse
+    SummarizeSparkApplicationStageAttemptTasksResponse (..),
+    newSummarizeSparkApplicationStageAttemptTasksResponse,
 
     -- ** SummarizeSparkApplicationStagesResponse
-    , SummarizeSparkApplicationStagesResponse (..)
-    , newSummarizeSparkApplicationStagesResponse
+    SummarizeSparkApplicationStagesResponse (..),
+    newSummarizeSparkApplicationStagesResponse,
 
     -- ** TaskData
-    , TaskData (..)
-    , newTaskData
+    TaskData (..),
+    newTaskData,
 
     -- ** TaskData_ExecutorLogs
-    , TaskData_ExecutorLogs (..)
-    , newTaskData_ExecutorLogs
+    TaskData_ExecutorLogs (..),
+    newTaskData_ExecutorLogs,
 
     -- ** TaskMetrics
-    , TaskMetrics (..)
-    , newTaskMetrics
+    TaskMetrics (..),
+    newTaskMetrics,
 
     -- ** TaskQuantileMetrics
-    , TaskQuantileMetrics (..)
-    , newTaskQuantileMetrics
+    TaskQuantileMetrics (..),
+    newTaskQuantileMetrics,
 
     -- ** TaskResourceRequest
-    , TaskResourceRequest (..)
-    , newTaskResourceRequest
+    TaskResourceRequest (..),
+    newTaskResourceRequest,
 
     -- ** TemplateParameter
-    , TemplateParameter (..)
-    , newTemplateParameter
+    TemplateParameter (..),
+    newTemplateParameter,
 
     -- ** TerminateSessionRequest
-    , TerminateSessionRequest (..)
-    , newTerminateSessionRequest
+    TerminateSessionRequest (..),
+    newTerminateSessionRequest,
 
     -- ** TestIamPermissionsRequest
-    , TestIamPermissionsRequest (..)
-    , newTestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
 
     -- ** TestIamPermissionsResponse
-    , TestIamPermissionsResponse (..)
-    , newTestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
 
     -- ** TrinoJob
-    , TrinoJob (..)
-    , newTrinoJob
+    TrinoJob (..),
+    newTrinoJob,
 
     -- ** TrinoJob_Properties
-    , TrinoJob_Properties (..)
-    , newTrinoJob_Properties
+    TrinoJob_Properties (..),
+    newTrinoJob_Properties,
 
     -- ** UsageMetrics
-    , UsageMetrics (..)
-    , newUsageMetrics
+    UsageMetrics (..),
+    newUsageMetrics,
 
     -- ** UsageSnapshot
-    , UsageSnapshot (..)
-    , newUsageSnapshot
+    UsageSnapshot (..),
+    newUsageSnapshot,
 
     -- ** ValueValidation
-    , ValueValidation (..)
-    , newValueValidation
+    ValueValidation (..),
+    newValueValidation,
 
     -- ** VirtualClusterConfig
-    , VirtualClusterConfig (..)
-    , newVirtualClusterConfig
+    VirtualClusterConfig (..),
+    newVirtualClusterConfig,
 
     -- ** WorkflowGraph
-    , WorkflowGraph (..)
-    , newWorkflowGraph
+    WorkflowGraph (..),
+    newWorkflowGraph,
 
     -- ** WorkflowMetadata
-    , WorkflowMetadata (..)
-    , newWorkflowMetadata
+    WorkflowMetadata (..),
+    newWorkflowMetadata,
 
     -- ** WorkflowMetadata_Parameters
-    , WorkflowMetadata_Parameters (..)
-    , newWorkflowMetadata_Parameters
+    WorkflowMetadata_Parameters (..),
+    newWorkflowMetadata_Parameters,
 
     -- ** WorkflowMetadata_State
-    , WorkflowMetadata_State (..)
+    WorkflowMetadata_State (..),
 
     -- ** WorkflowNode
-    , WorkflowNode (..)
-    , newWorkflowNode
+    WorkflowNode (..),
+    newWorkflowNode,
 
     -- ** WorkflowNode_State
-    , WorkflowNode_State (..)
+    WorkflowNode_State (..),
 
     -- ** WorkflowTemplate
-    , WorkflowTemplate (..)
-    , newWorkflowTemplate
+    WorkflowTemplate (..),
+    newWorkflowTemplate,
 
     -- ** WorkflowTemplate_Labels
-    , WorkflowTemplate_Labels (..)
-    , newWorkflowTemplate_Labels
+    WorkflowTemplate_Labels (..),
+    newWorkflowTemplate_Labels,
 
     -- ** WorkflowTemplatePlacement
-    , WorkflowTemplatePlacement (..)
-    , newWorkflowTemplatePlacement
+    WorkflowTemplatePlacement (..),
+    newWorkflowTemplatePlacement,
 
     -- ** WriteSessionSparkApplicationContextRequest
-    , WriteSessionSparkApplicationContextRequest (..)
-    , newWriteSessionSparkApplicationContextRequest
+    WriteSessionSparkApplicationContextRequest (..),
+    newWriteSessionSparkApplicationContextRequest,
 
     -- ** WriteSessionSparkApplicationContextResponse
-    , WriteSessionSparkApplicationContextResponse (..)
-    , newWriteSessionSparkApplicationContextResponse
+    WriteSessionSparkApplicationContextResponse (..),
+    newWriteSessionSparkApplicationContextResponse,
 
     -- ** WriteSparkApplicationContextRequest
-    , WriteSparkApplicationContextRequest (..)
-    , newWriteSparkApplicationContextRequest
+    WriteSparkApplicationContextRequest (..),
+    newWriteSparkApplicationContextRequest,
 
     -- ** WriteSparkApplicationContextResponse
-    , WriteSparkApplicationContextResponse (..)
-    , newWriteSparkApplicationContextResponse
+    WriteSparkApplicationContextResponse (..),
+    newWriteSparkApplicationContextResponse,
 
     -- ** YarnApplication
-    , YarnApplication (..)
-    , newYarnApplication
+    YarnApplication (..),
+    newYarnApplication,
 
     -- ** YarnApplication_State
-    , YarnApplication_State (..)
+    YarnApplication_State (..),
 
     -- ** ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus
-    , ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus (..)
+    ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus (..),
 
     -- ** ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus
-    , ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus (..)
+    ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus (..),
 
     -- ** ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus
-    , ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus (..)
+    ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus (..),
 
     -- ** ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus
-    , ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus (..)
+    ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus (..),
 
     -- ** ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus
-    , ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus (..)
+    ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus (..),
 
     -- ** ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus
-    , ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus (..)
+    ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus (..),
 
     -- ** ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus
-    , ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus (..)
+    ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus (..),
 
     -- ** ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus
-    , ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus (..)
+    ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus (..),
 
     -- ** ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus
-    , ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus (..)
+    ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus (..),
 
     -- ** ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus
-    , ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus (..)
+    ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus (..),
 
     -- ** ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers
-    , ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers (..)
+    ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers (..),
 
     -- ** ProjectsRegionsJobsListJobStateMatcher
-    , ProjectsRegionsJobsListJobStateMatcher (..)
-    ) where
+    ProjectsRegionsJobsListJobStateMatcher (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Dataproc.Internal.Product
 import Gogol.Dataproc.Internal.Sum
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Cloud Dataproc API. This contains the host and root path used as a starting point for constructing service requests.
 dataprocService :: Core.ServiceConfig
-dataprocService
-  = Core.defaultService (Core.ServiceId "dataproc:v1")
-      "dataproc.googleapis.com"
+dataprocService =
+  Core.defaultService
+    (Core.ServiceId "dataproc:v1")
+    "dataproc.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"

@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.Surveys.Start
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,62 +27,59 @@
 --
 -- /See:/ <https://developers.google.com/surveys/ Surveys API Reference> for @surveys.surveys.start@.
 module Gogol.Surveys.Start
-    (
-    -- * Resource
-      SurveysSurveysStartResource
+  ( -- * Resource
+    SurveysSurveysStartResource,
 
     -- ** Constructing a Request
-    , SurveysSurveysStart (..)
-    , newSurveysSurveysStart
-    ) where
+    SurveysSurveysStart (..),
+    newSurveysSurveysStart,
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Surveys.Types
 
 -- | A resource alias for @surveys.surveys.start@ method which the
 -- 'SurveysSurveysStart' request conforms to.
 type SurveysSurveysStartResource =
-     "surveys" Core.:>
-       "v2" Core.:>
-         "surveys" Core.:>
-           Core.Capture "resourceId" Core.Text Core.:>
-             "start" Core.:>
-               Core.QueryParam "alt" Core.AltJSON Core.:>
-                 Core.ReqBody '[Core.JSON] SurveysStartRequest Core.:>
-                   Core.Post '[Core.JSON] SurveysStartResponse
+  "surveys"
+    Core.:> "v2"
+    Core.:> "surveys"
+    Core.:> Core.Capture "resourceId" Core.Text
+    Core.:> "start"
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] SurveysStartRequest
+    Core.:> Core.Post '[Core.JSON] SurveysStartResponse
 
 -- | Begins running a survey.
 --
 -- /See:/ 'newSurveysSurveysStart' smart constructor.
 data SurveysSurveysStart = SurveysSurveysStart
-    {
-      -- | Multipart request metadata.
-      payload :: SurveysStartRequest
-      -- | 
-    , resourceId :: Core.Text
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | Multipart request metadata.
+    payload :: SurveysStartRequest,
+    resourceId :: Core.Text
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'SurveysSurveysStart' with the minimum fields required to make a request.
-newSurveysSurveysStart 
-    ::  SurveysStartRequest
-       -- ^  Multipart request metadata. See 'payload'.
-    -> Core.Text
-       -- ^  See 'resourceId'.
-    -> SurveysSurveysStart
+newSurveysSurveysStart ::
+  -- |  Multipart request metadata. See 'payload'.
+  SurveysStartRequest ->
+  -- |  See 'resourceId'.
+  Core.Text ->
+  SurveysSurveysStart
 newSurveysSurveysStart payload resourceId =
   SurveysSurveysStart {payload = payload, resourceId = resourceId}
 
 instance Core.GoogleRequest SurveysSurveysStart where
-        type Rs SurveysSurveysStart = SurveysStartResponse
-        type Scopes SurveysSurveysStart =
-             '[Surveys'FullControl, Userinfo'Email]
-        requestClient SurveysSurveysStart{..}
-          = go resourceId (Core.Just Core.AltJSON) payload
-              surveysService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy SurveysSurveysStartResource)
-                      Core.mempty
-
+  type Rs SurveysSurveysStart = SurveysStartResponse
+  type
+    Scopes SurveysSurveysStart =
+      '[Surveys'FullControl, Userinfo'Email]
+  requestClient SurveysSurveysStart {..} =
+    go resourceId (Core.Just Core.AltJSON) payload surveysService
+    where
+      go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy SurveysSurveysStartResource)
+          Core.mempty

@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,784 +16,813 @@
 
 -- |
 -- Module      : Gogol.Admin.Directory.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Admin.Directory.Types
-    (
-    -- * Configuration
-      adminDirectoryService
+  ( -- * Configuration
+    adminDirectoryService,
 
     -- * OAuth Scopes
-    , Admin'Chrome'Printers
-    , Admin'Chrome'Printers'Readonly
-    , Admin'Directory'Customer
-    , Admin'Directory'Customer'Readonly
-    , Admin'Directory'Device'Chromeos
-    , Admin'Directory'Device'Chromeos'Readonly
-    , Admin'Directory'Device'Mobile
-    , Admin'Directory'Device'Mobile'Action
-    , Admin'Directory'Device'Mobile'Readonly
-    , Admin'Directory'Domain
-    , Admin'Directory'Domain'Readonly
-    , Admin'Directory'Group
-    , Admin'Directory'Group'Member
-    , Admin'Directory'Group'Member'Readonly
-    , Admin'Directory'Group'Readonly
-    , Admin'Directory'Orgunit
-    , Admin'Directory'Orgunit'Readonly
-    , Admin'Directory'Resource'Calendar
-    , Admin'Directory'Resource'Calendar'Readonly
-    , Admin'Directory'Rolemanagement
-    , Admin'Directory'Rolemanagement'Readonly
-    , Admin'Directory'User
-    , Admin'Directory'User'Alias
-    , Admin'Directory'User'Alias'Readonly
-    , Admin'Directory'User'Readonly
-    , Admin'Directory'User'Security
-    , Admin'Directory'Userschema
-    , Admin'Directory'Userschema'Readonly
-    , CloudPlatform'FullControl
+    Admin'Chrome'Printers,
+    Admin'Chrome'Printers'Readonly,
+    Admin'Directory'Customer,
+    Admin'Directory'Customer'Readonly,
+    Admin'Directory'Device'Chromeos,
+    Admin'Directory'Device'Chromeos'Readonly,
+    Admin'Directory'Device'Mobile,
+    Admin'Directory'Device'Mobile'Action,
+    Admin'Directory'Device'Mobile'Readonly,
+    Admin'Directory'Domain,
+    Admin'Directory'Domain'Readonly,
+    Admin'Directory'Group,
+    Admin'Directory'Group'Member,
+    Admin'Directory'Group'Member'Readonly,
+    Admin'Directory'Group'Readonly,
+    Admin'Directory'Orgunit,
+    Admin'Directory'Orgunit'Readonly,
+    Admin'Directory'Resource'Calendar,
+    Admin'Directory'Resource'Calendar'Readonly,
+    Admin'Directory'Rolemanagement,
+    Admin'Directory'Rolemanagement'Readonly,
+    Admin'Directory'User,
+    Admin'Directory'User'Alias,
+    Admin'Directory'User'Alias'Readonly,
+    Admin'Directory'User'Readonly,
+    Admin'Directory'User'Security,
+    Admin'Directory'Userschema,
+    Admin'Directory'Userschema'Readonly,
+    CloudPlatform'FullControl,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Alias
-    , Alias (..)
-    , newAlias
+    Alias (..),
+    newAlias,
 
     -- ** Aliases
-    , Aliases (..)
-    , newAliases
+    Aliases (..),
+    newAliases,
 
     -- ** Asp
-    , Asp (..)
-    , newAsp
+    Asp (..),
+    newAsp,
 
     -- ** Asps
-    , Asps (..)
-    , newAsps
+    Asps (..),
+    newAsps,
 
     -- ** AuxiliaryMessage
-    , AuxiliaryMessage (..)
-    , newAuxiliaryMessage
+    AuxiliaryMessage (..),
+    newAuxiliaryMessage,
 
     -- ** AuxiliaryMessage_Severity
-    , AuxiliaryMessage_Severity (..)
+    AuxiliaryMessage_Severity (..),
 
     -- ** BacklightInfo
-    , BacklightInfo (..)
-    , newBacklightInfo
+    BacklightInfo (..),
+    newBacklightInfo,
 
     -- ** BatchChangeChromeOsDeviceStatusRequest
-    , BatchChangeChromeOsDeviceStatusRequest (..)
-    , newBatchChangeChromeOsDeviceStatusRequest
+    BatchChangeChromeOsDeviceStatusRequest (..),
+    newBatchChangeChromeOsDeviceStatusRequest,
 
     -- ** BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction
-    , BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction (..)
+    BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction (..),
 
     -- ** BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
-    , BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason (..)
+    BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason (..),
 
     -- ** BatchChangeChromeOsDeviceStatusResponse
-    , BatchChangeChromeOsDeviceStatusResponse (..)
-    , newBatchChangeChromeOsDeviceStatusResponse
+    BatchChangeChromeOsDeviceStatusResponse (..),
+    newBatchChangeChromeOsDeviceStatusResponse,
 
     -- ** BatchCreatePrintServersRequest
-    , BatchCreatePrintServersRequest (..)
-    , newBatchCreatePrintServersRequest
+    BatchCreatePrintServersRequest (..),
+    newBatchCreatePrintServersRequest,
 
     -- ** BatchCreatePrintServersResponse
-    , BatchCreatePrintServersResponse (..)
-    , newBatchCreatePrintServersResponse
+    BatchCreatePrintServersResponse (..),
+    newBatchCreatePrintServersResponse,
 
     -- ** BatchCreatePrintersRequest
-    , BatchCreatePrintersRequest (..)
-    , newBatchCreatePrintersRequest
+    BatchCreatePrintersRequest (..),
+    newBatchCreatePrintersRequest,
 
     -- ** BatchCreatePrintersResponse
-    , BatchCreatePrintersResponse (..)
-    , newBatchCreatePrintersResponse
+    BatchCreatePrintersResponse (..),
+    newBatchCreatePrintersResponse,
 
     -- ** BatchDeletePrintServersRequest
-    , BatchDeletePrintServersRequest (..)
-    , newBatchDeletePrintServersRequest
+    BatchDeletePrintServersRequest (..),
+    newBatchDeletePrintServersRequest,
 
     -- ** BatchDeletePrintServersResponse
-    , BatchDeletePrintServersResponse (..)
-    , newBatchDeletePrintServersResponse
+    BatchDeletePrintServersResponse (..),
+    newBatchDeletePrintServersResponse,
 
     -- ** BatchDeletePrintersRequest
-    , BatchDeletePrintersRequest (..)
-    , newBatchDeletePrintersRequest
+    BatchDeletePrintersRequest (..),
+    newBatchDeletePrintersRequest,
 
     -- ** BatchDeletePrintersResponse
-    , BatchDeletePrintersResponse (..)
-    , newBatchDeletePrintersResponse
+    BatchDeletePrintersResponse (..),
+    newBatchDeletePrintersResponse,
 
     -- ** Building
-    , Building (..)
-    , newBuilding
+    Building (..),
+    newBuilding,
 
     -- ** BuildingAddress
-    , BuildingAddress (..)
-    , newBuildingAddress
+    BuildingAddress (..),
+    newBuildingAddress,
 
     -- ** BuildingCoordinates
-    , BuildingCoordinates (..)
-    , newBuildingCoordinates
+    BuildingCoordinates (..),
+    newBuildingCoordinates,
 
     -- ** Buildings
-    , Buildings (..)
-    , newBuildings
+    Buildings (..),
+    newBuildings,
 
     -- ** ByteUsage
-    , ByteUsage (..)
-    , newByteUsage
+    ByteUsage (..),
+    newByteUsage,
 
     -- ** CalendarResource
-    , CalendarResource (..)
-    , newCalendarResource
+    CalendarResource (..),
+    newCalendarResource,
 
     -- ** CalendarResources
-    , CalendarResources (..)
-    , newCalendarResources
+    CalendarResources (..),
+    newCalendarResources,
 
     -- ** ChangeChromeOsDeviceStatusResult
-    , ChangeChromeOsDeviceStatusResult (..)
-    , newChangeChromeOsDeviceStatusResult
+    ChangeChromeOsDeviceStatusResult (..),
+    newChangeChromeOsDeviceStatusResult,
 
     -- ** ChangeChromeOsDeviceStatusSucceeded
-    , ChangeChromeOsDeviceStatusSucceeded (..)
-    , newChangeChromeOsDeviceStatusSucceeded
+    ChangeChromeOsDeviceStatusSucceeded (..),
+    newChangeChromeOsDeviceStatusSucceeded,
 
     -- ** Channel
-    , Channel (..)
-    , newChannel
+    Channel (..),
+    newChannel,
 
     -- ** Channel_Params
-    , Channel_Params (..)
-    , newChannel_Params
+    Channel_Params (..),
+    newChannel_Params,
 
     -- ** ChromeOsDevice
-    , ChromeOsDevice (..)
-    , newChromeOsDevice
+    ChromeOsDevice (..),
+    newChromeOsDevice,
 
     -- ** ChromeOsDevice_ActiveTimeRangesItem
-    , ChromeOsDevice_ActiveTimeRangesItem (..)
-    , newChromeOsDevice_ActiveTimeRangesItem
+    ChromeOsDevice_ActiveTimeRangesItem (..),
+    newChromeOsDevice_ActiveTimeRangesItem,
 
     -- ** ChromeOsDevice_ChromeOsType
-    , ChromeOsDevice_ChromeOsType (..)
+    ChromeOsDevice_ChromeOsType (..),
 
     -- ** ChromeOsDevice_CpuInfoItem
-    , ChromeOsDevice_CpuInfoItem (..)
-    , newChromeOsDevice_CpuInfoItem
+    ChromeOsDevice_CpuInfoItem (..),
+    newChromeOsDevice_CpuInfoItem,
 
     -- ** ChromeOsDevice_CpuInfoItem_LogicalCpusItem
-    , ChromeOsDevice_CpuInfoItem_LogicalCpusItem (..)
-    , newChromeOsDevice_CpuInfoItem_LogicalCpusItem
+    ChromeOsDevice_CpuInfoItem_LogicalCpusItem (..),
+    newChromeOsDevice_CpuInfoItem_LogicalCpusItem,
 
     -- ** ChromeOsDevice_CpuInfoItem_LogicalCpusItem_CStatesItem
-    , ChromeOsDevice_CpuInfoItem_LogicalCpusItem_CStatesItem (..)
-    , newChromeOsDevice_CpuInfoItem_LogicalCpusItem_CStatesItem
+    ChromeOsDevice_CpuInfoItem_LogicalCpusItem_CStatesItem (..),
+    newChromeOsDevice_CpuInfoItem_LogicalCpusItem_CStatesItem,
 
     -- ** ChromeOsDevice_CpuStatusReportsItem
-    , ChromeOsDevice_CpuStatusReportsItem (..)
-    , newChromeOsDevice_CpuStatusReportsItem
+    ChromeOsDevice_CpuStatusReportsItem (..),
+    newChromeOsDevice_CpuStatusReportsItem,
 
     -- ** ChromeOsDevice_CpuStatusReportsItem_CpuTemperatureInfoItem
-    , ChromeOsDevice_CpuStatusReportsItem_CpuTemperatureInfoItem (..)
-    , newChromeOsDevice_CpuStatusReportsItem_CpuTemperatureInfoItem
+    ChromeOsDevice_CpuStatusReportsItem_CpuTemperatureInfoItem (..),
+    newChromeOsDevice_CpuStatusReportsItem_CpuTemperatureInfoItem,
 
     -- ** ChromeOsDevice_DeprovisionReason
-    , ChromeOsDevice_DeprovisionReason (..)
+    ChromeOsDevice_DeprovisionReason (..),
 
     -- ** ChromeOsDevice_DeviceFilesItem
-    , ChromeOsDevice_DeviceFilesItem (..)
-    , newChromeOsDevice_DeviceFilesItem
+    ChromeOsDevice_DeviceFilesItem (..),
+    newChromeOsDevice_DeviceFilesItem,
 
     -- ** ChromeOsDevice_DeviceLicenseType
-    , ChromeOsDevice_DeviceLicenseType (..)
+    ChromeOsDevice_DeviceLicenseType (..),
 
     -- ** ChromeOsDevice_DiskVolumeReportsItem
-    , ChromeOsDevice_DiskVolumeReportsItem (..)
-    , newChromeOsDevice_DiskVolumeReportsItem
+    ChromeOsDevice_DiskVolumeReportsItem (..),
+    newChromeOsDevice_DiskVolumeReportsItem,
 
     -- ** ChromeOsDevice_DiskVolumeReportsItem_VolumeInfoItem
-    , ChromeOsDevice_DiskVolumeReportsItem_VolumeInfoItem (..)
-    , newChromeOsDevice_DiskVolumeReportsItem_VolumeInfoItem
+    ChromeOsDevice_DiskVolumeReportsItem_VolumeInfoItem (..),
+    newChromeOsDevice_DiskVolumeReportsItem_VolumeInfoItem,
 
     -- ** ChromeOsDevice_LastKnownNetworkItem
-    , ChromeOsDevice_LastKnownNetworkItem (..)
-    , newChromeOsDevice_LastKnownNetworkItem
+    ChromeOsDevice_LastKnownNetworkItem (..),
+    newChromeOsDevice_LastKnownNetworkItem,
 
     -- ** ChromeOsDevice_RecentUsersItem
-    , ChromeOsDevice_RecentUsersItem (..)
-    , newChromeOsDevice_RecentUsersItem
+    ChromeOsDevice_RecentUsersItem (..),
+    newChromeOsDevice_RecentUsersItem,
 
     -- ** ChromeOsDevice_ScreenshotFilesItem
-    , ChromeOsDevice_ScreenshotFilesItem (..)
-    , newChromeOsDevice_ScreenshotFilesItem
+    ChromeOsDevice_ScreenshotFilesItem (..),
+    newChromeOsDevice_ScreenshotFilesItem,
 
     -- ** ChromeOsDevice_SystemRamFreeReportsItem
-    , ChromeOsDevice_SystemRamFreeReportsItem (..)
-    , newChromeOsDevice_SystemRamFreeReportsItem
+    ChromeOsDevice_SystemRamFreeReportsItem (..),
+    newChromeOsDevice_SystemRamFreeReportsItem,
 
     -- ** ChromeOsDevice_TpmVersionInfo
-    , ChromeOsDevice_TpmVersionInfo (..)
-    , newChromeOsDevice_TpmVersionInfo
+    ChromeOsDevice_TpmVersionInfo (..),
+    newChromeOsDevice_TpmVersionInfo,
 
     -- ** ChromeOsDeviceAction
-    , ChromeOsDeviceAction (..)
-    , newChromeOsDeviceAction
+    ChromeOsDeviceAction (..),
+    newChromeOsDeviceAction,
 
     -- ** ChromeOsDevices
-    , ChromeOsDevices (..)
-    , newChromeOsDevices
+    ChromeOsDevices (..),
+    newChromeOsDevices,
 
     -- ** ChromeOsMoveDevicesToOu
-    , ChromeOsMoveDevicesToOu (..)
-    , newChromeOsMoveDevicesToOu
+    ChromeOsMoveDevicesToOu (..),
+    newChromeOsMoveDevicesToOu,
 
     -- ** CreatePrintServerRequest
-    , CreatePrintServerRequest (..)
-    , newCreatePrintServerRequest
+    CreatePrintServerRequest (..),
+    newCreatePrintServerRequest,
 
     -- ** CreatePrinterRequest
-    , CreatePrinterRequest (..)
-    , newCreatePrinterRequest
+    CreatePrinterRequest (..),
+    newCreatePrinterRequest,
 
     -- ** Customer
-    , Customer (..)
-    , newCustomer
+    Customer (..),
+    newCustomer,
 
     -- ** CustomerPostalAddress
-    , CustomerPostalAddress (..)
-    , newCustomerPostalAddress
+    CustomerPostalAddress (..),
+    newCustomerPostalAddress,
 
     -- ** DirectoryChromeosdevicesCommand
-    , DirectoryChromeosdevicesCommand (..)
-    , newDirectoryChromeosdevicesCommand
+    DirectoryChromeosdevicesCommand (..),
+    newDirectoryChromeosdevicesCommand,
 
     -- ** DirectoryChromeosdevicesCommand_State
-    , DirectoryChromeosdevicesCommand_State (..)
+    DirectoryChromeosdevicesCommand_State (..),
 
     -- ** DirectoryChromeosdevicesCommand_Type
-    , DirectoryChromeosdevicesCommand_Type (..)
+    DirectoryChromeosdevicesCommand_Type (..),
 
     -- ** DirectoryChromeosdevicesCommandResult
-    , DirectoryChromeosdevicesCommandResult (..)
-    , newDirectoryChromeosdevicesCommandResult
+    DirectoryChromeosdevicesCommandResult (..),
+    newDirectoryChromeosdevicesCommandResult,
 
     -- ** DirectoryChromeosdevicesCommandResult_Result
-    , DirectoryChromeosdevicesCommandResult_Result (..)
+    DirectoryChromeosdevicesCommandResult_Result (..),
 
     -- ** DirectoryChromeosdevicesIssueCommandRequest
-    , DirectoryChromeosdevicesIssueCommandRequest (..)
-    , newDirectoryChromeosdevicesIssueCommandRequest
+    DirectoryChromeosdevicesIssueCommandRequest (..),
+    newDirectoryChromeosdevicesIssueCommandRequest,
 
     -- ** DirectoryChromeosdevicesIssueCommandRequest_CommandType
-    , DirectoryChromeosdevicesIssueCommandRequest_CommandType (..)
+    DirectoryChromeosdevicesIssueCommandRequest_CommandType (..),
 
     -- ** DirectoryChromeosdevicesIssueCommandResponse
-    , DirectoryChromeosdevicesIssueCommandResponse (..)
-    , newDirectoryChromeosdevicesIssueCommandResponse
+    DirectoryChromeosdevicesIssueCommandResponse (..),
+    newDirectoryChromeosdevicesIssueCommandResponse,
 
     -- ** DomainAlias
-    , DomainAlias (..)
-    , newDomainAlias
+    DomainAlias (..),
+    newDomainAlias,
 
     -- ** DomainAliases
-    , DomainAliases (..)
-    , newDomainAliases
+    DomainAliases (..),
+    newDomainAliases,
 
     -- ** Domains
-    , Domains (..)
-    , newDomains
+    Domains (..),
+    newDomains,
 
     -- ** Domains2
-    , Domains2 (..)
-    , newDomains2
+    Domains2 (..),
+    newDomains2,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** FailureInfo
-    , FailureInfo (..)
-    , newFailureInfo
+    FailureInfo (..),
+    newFailureInfo,
 
     -- ** FailureInfo_ErrorCode
-    , FailureInfo_ErrorCode (..)
+    FailureInfo_ErrorCode (..),
 
     -- ** FanInfo
-    , FanInfo (..)
-    , newFanInfo
+    FanInfo (..),
+    newFanInfo,
 
     -- ** Feature
-    , Feature (..)
-    , newFeature
+    Feature (..),
+    newFeature,
 
     -- ** FeatureInstance
-    , FeatureInstance (..)
-    , newFeatureInstance
+    FeatureInstance (..),
+    newFeatureInstance,
 
     -- ** FeatureRename
-    , FeatureRename (..)
-    , newFeatureRename
+    FeatureRename (..),
+    newFeatureRename,
 
     -- ** Features
-    , Features (..)
-    , newFeatures
+    Features (..),
+    newFeatures,
 
     -- ** Group
-    , Group (..)
-    , newGroup
+    Group (..),
+    newGroup,
 
     -- ** GroupAlias
-    , GroupAlias (..)
-    , newGroupAlias
+    GroupAlias (..),
+    newGroupAlias,
 
     -- ** Groups
-    , Groups (..)
-    , newGroups
+    Groups (..),
+    newGroups,
 
     -- ** ListPrintServersResponse
-    , ListPrintServersResponse (..)
-    , newListPrintServersResponse
+    ListPrintServersResponse (..),
+    newListPrintServersResponse,
 
     -- ** ListPrinterModelsResponse
-    , ListPrinterModelsResponse (..)
-    , newListPrinterModelsResponse
+    ListPrinterModelsResponse (..),
+    newListPrinterModelsResponse,
 
     -- ** ListPrintersResponse
-    , ListPrintersResponse (..)
-    , newListPrintersResponse
+    ListPrintersResponse (..),
+    newListPrintersResponse,
 
     -- ** Member
-    , Member (..)
-    , newMember
+    Member (..),
+    newMember,
 
     -- ** Members
-    , Members (..)
-    , newMembers
+    Members (..),
+    newMembers,
 
     -- ** MembersHasMember
-    , MembersHasMember (..)
-    , newMembersHasMember
+    MembersHasMember (..),
+    newMembersHasMember,
 
     -- ** MobileDevice
-    , MobileDevice (..)
-    , newMobileDevice
+    MobileDevice (..),
+    newMobileDevice,
 
     -- ** MobileDevice_ApplicationsItem
-    , MobileDevice_ApplicationsItem (..)
-    , newMobileDevice_ApplicationsItem
+    MobileDevice_ApplicationsItem (..),
+    newMobileDevice_ApplicationsItem,
 
     -- ** MobileDeviceAction
-    , MobileDeviceAction (..)
-    , newMobileDeviceAction
+    MobileDeviceAction (..),
+    newMobileDeviceAction,
 
     -- ** MobileDevices
-    , MobileDevices (..)
-    , newMobileDevices
+    MobileDevices (..),
+    newMobileDevices,
 
     -- ** OrgUnit
-    , OrgUnit (..)
-    , newOrgUnit
+    OrgUnit (..),
+    newOrgUnit,
 
     -- ** OrgUnits
-    , OrgUnits (..)
-    , newOrgUnits
+    OrgUnits (..),
+    newOrgUnits,
 
     -- ** OsUpdateStatus
-    , OsUpdateStatus (..)
-    , newOsUpdateStatus
+    OsUpdateStatus (..),
+    newOsUpdateStatus,
 
     -- ** OsUpdateStatus_State
-    , OsUpdateStatus_State (..)
+    OsUpdateStatus_State (..),
 
     -- ** PrintServer
-    , PrintServer (..)
-    , newPrintServer
+    PrintServer (..),
+    newPrintServer,
 
     -- ** PrintServerFailureInfo
-    , PrintServerFailureInfo (..)
-    , newPrintServerFailureInfo
+    PrintServerFailureInfo (..),
+    newPrintServerFailureInfo,
 
     -- ** PrintServerFailureInfo_ErrorCode
-    , PrintServerFailureInfo_ErrorCode (..)
+    PrintServerFailureInfo_ErrorCode (..),
 
     -- ** Printer
-    , Printer (..)
-    , newPrinter
+    Printer (..),
+    newPrinter,
 
     -- ** PrinterModel
-    , PrinterModel (..)
-    , newPrinterModel
+    PrinterModel (..),
+    newPrinterModel,
 
     -- ** Privilege
-    , Privilege (..)
-    , newPrivilege
+    Privilege (..),
+    newPrivilege,
 
     -- ** Privileges
-    , Privileges (..)
-    , newPrivileges
+    Privileges (..),
+    newPrivileges,
 
     -- ** Role
-    , Role (..)
-    , newRole
+    Role (..),
+    newRole,
 
     -- ** Role_RolePrivilegesItem
-    , Role_RolePrivilegesItem (..)
-    , newRole_RolePrivilegesItem
+    Role_RolePrivilegesItem (..),
+    newRole_RolePrivilegesItem,
 
     -- ** RoleAssignment
-    , RoleAssignment (..)
-    , newRoleAssignment
+    RoleAssignment (..),
+    newRoleAssignment,
 
     -- ** RoleAssignment_AssigneeType
-    , RoleAssignment_AssigneeType (..)
+    RoleAssignment_AssigneeType (..),
 
     -- ** RoleAssignments
-    , RoleAssignments (..)
-    , newRoleAssignments
+    RoleAssignments (..),
+    newRoleAssignments,
 
     -- ** Roles
-    , Roles (..)
-    , newRoles
+    Roles (..),
+    newRoles,
 
     -- ** Schema
-    , Schema (..)
-    , newSchema
+    Schema (..),
+    newSchema,
 
     -- ** SchemaFieldSpec
-    , SchemaFieldSpec (..)
-    , newSchemaFieldSpec
+    SchemaFieldSpec (..),
+    newSchemaFieldSpec,
 
     -- ** SchemaFieldSpec_NumericIndexingSpec
-    , SchemaFieldSpec_NumericIndexingSpec (..)
-    , newSchemaFieldSpec_NumericIndexingSpec
+    SchemaFieldSpec_NumericIndexingSpec (..),
+    newSchemaFieldSpec_NumericIndexingSpec,
 
     -- ** Schemas
-    , Schemas (..)
-    , newSchemas
+    Schemas (..),
+    newSchemas,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** Token
-    , Token (..)
-    , newToken
+    Token (..),
+    newToken,
 
     -- ** Tokens
-    , Tokens (..)
-    , newTokens
+    Tokens (..),
+    newTokens,
 
     -- ** User
-    , User (..)
-    , newUser
+    User (..),
+    newUser,
 
     -- ** User_CustomSchemas
-    , User_CustomSchemas (..)
-    , newUser_CustomSchemas
+    User_CustomSchemas (..),
+    newUser_CustomSchemas,
 
     -- ** UserAbout
-    , UserAbout (..)
-    , newUserAbout
+    UserAbout (..),
+    newUserAbout,
 
     -- ** UserAddress
-    , UserAddress (..)
-    , newUserAddress
+    UserAddress (..),
+    newUserAddress,
 
     -- ** UserAlias
-    , UserAlias (..)
-    , newUserAlias
+    UserAlias (..),
+    newUserAlias,
 
     -- ** UserCustomProperties
-    , UserCustomProperties (..)
-    , newUserCustomProperties
+    UserCustomProperties (..),
+    newUserCustomProperties,
 
     -- ** UserEmail
-    , UserEmail (..)
-    , newUserEmail
+    UserEmail (..),
+    newUserEmail,
 
     -- ** UserEmail_Public_key_encryption_certificates
-    , UserEmail_Public_key_encryption_certificates (..)
-    , newUserEmail_Public_key_encryption_certificates
+    UserEmail_Public_key_encryption_certificates (..),
+    newUserEmail_Public_key_encryption_certificates,
 
     -- ** UserExternalId
-    , UserExternalId (..)
-    , newUserExternalId
+    UserExternalId (..),
+    newUserExternalId,
 
     -- ** UserGender
-    , UserGender (..)
-    , newUserGender
+    UserGender (..),
+    newUserGender,
 
     -- ** UserIm
-    , UserIm (..)
-    , newUserIm
+    UserIm (..),
+    newUserIm,
 
     -- ** UserKeyword
-    , UserKeyword (..)
-    , newUserKeyword
+    UserKeyword (..),
+    newUserKeyword,
 
     -- ** UserLanguage
-    , UserLanguage (..)
-    , newUserLanguage
+    UserLanguage (..),
+    newUserLanguage,
 
     -- ** UserLocation
-    , UserLocation (..)
-    , newUserLocation
+    UserLocation (..),
+    newUserLocation,
 
     -- ** UserMakeAdmin
-    , UserMakeAdmin (..)
-    , newUserMakeAdmin
+    UserMakeAdmin (..),
+    newUserMakeAdmin,
 
     -- ** UserName
-    , UserName (..)
-    , newUserName
+    UserName (..),
+    newUserName,
 
     -- ** UserOrganization
-    , UserOrganization (..)
-    , newUserOrganization
+    UserOrganization (..),
+    newUserOrganization,
 
     -- ** UserPhone
-    , UserPhone (..)
-    , newUserPhone
+    UserPhone (..),
+    newUserPhone,
 
     -- ** UserPhoto
-    , UserPhoto (..)
-    , newUserPhoto
+    UserPhoto (..),
+    newUserPhoto,
 
     -- ** UserPosixAccount
-    , UserPosixAccount (..)
-    , newUserPosixAccount
+    UserPosixAccount (..),
+    newUserPosixAccount,
 
     -- ** UserRelation
-    , UserRelation (..)
-    , newUserRelation
+    UserRelation (..),
+    newUserRelation,
 
     -- ** UserSshPublicKey
-    , UserSshPublicKey (..)
-    , newUserSshPublicKey
+    UserSshPublicKey (..),
+    newUserSshPublicKey,
 
     -- ** UserUndelete
-    , UserUndelete (..)
-    , newUserUndelete
+    UserUndelete (..),
+    newUserUndelete,
 
     -- ** UserWebsite
-    , UserWebsite (..)
-    , newUserWebsite
+    UserWebsite (..),
+    newUserWebsite,
 
     -- ** Users
-    , Users (..)
-    , newUsers
+    Users (..),
+    newUsers,
 
     -- ** VerificationCode
-    , VerificationCode (..)
-    , newVerificationCode
+    VerificationCode (..),
+    newVerificationCode,
 
     -- ** VerificationCodes
-    , VerificationCodes (..)
-    , newVerificationCodes
+    VerificationCodes (..),
+    newVerificationCodes,
 
     -- ** ChromeosdevicesGetProjection
-    , ChromeosdevicesGetProjection (..)
+    ChromeosdevicesGetProjection (..),
 
     -- ** ChromeosdevicesListOrderBy
-    , ChromeosdevicesListOrderBy (..)
+    ChromeosdevicesListOrderBy (..),
 
     -- ** ChromeosdevicesListProjection
-    , ChromeosdevicesListProjection (..)
+    ChromeosdevicesListProjection (..),
 
     -- ** ChromeosdevicesListSortOrder
-    , ChromeosdevicesListSortOrder (..)
+    ChromeosdevicesListSortOrder (..),
 
     -- ** ChromeosdevicesPatchProjection
-    , ChromeosdevicesPatchProjection (..)
+    ChromeosdevicesPatchProjection (..),
 
     -- ** ChromeosdevicesUpdateProjection
-    , ChromeosdevicesUpdateProjection (..)
+    ChromeosdevicesUpdateProjection (..),
 
     -- ** GroupsListOrderBy
-    , GroupsListOrderBy (..)
+    GroupsListOrderBy (..),
 
     -- ** GroupsListSortOrder
-    , GroupsListSortOrder (..)
+    GroupsListSortOrder (..),
 
     -- ** MobiledevicesGetProjection
-    , MobiledevicesGetProjection (..)
+    MobiledevicesGetProjection (..),
 
     -- ** MobiledevicesListOrderBy
-    , MobiledevicesListOrderBy (..)
+    MobiledevicesListOrderBy (..),
 
     -- ** MobiledevicesListProjection
-    , MobiledevicesListProjection (..)
+    MobiledevicesListProjection (..),
 
     -- ** MobiledevicesListSortOrder
-    , MobiledevicesListSortOrder (..)
+    MobiledevicesListSortOrder (..),
 
     -- ** OrgunitsListType
-    , OrgunitsListType (..)
+    OrgunitsListType (..),
 
     -- ** ResourcesBuildingsInsertCoordinatesSource
-    , ResourcesBuildingsInsertCoordinatesSource (..)
+    ResourcesBuildingsInsertCoordinatesSource (..),
 
     -- ** ResourcesBuildingsPatchCoordinatesSource
-    , ResourcesBuildingsPatchCoordinatesSource (..)
+    ResourcesBuildingsPatchCoordinatesSource (..),
 
     -- ** ResourcesBuildingsUpdateCoordinatesSource
-    , ResourcesBuildingsUpdateCoordinatesSource (..)
+    ResourcesBuildingsUpdateCoordinatesSource (..),
 
     -- ** UsersAliasesListEvent
-    , UsersAliasesListEvent (..)
+    UsersAliasesListEvent (..),
 
     -- ** UsersAliasesWatchEvent
-    , UsersAliasesWatchEvent (..)
+    UsersAliasesWatchEvent (..),
 
     -- ** UsersGetProjection
-    , UsersGetProjection (..)
+    UsersGetProjection (..),
 
     -- ** UsersGetViewType
-    , UsersGetViewType (..)
+    UsersGetViewType (..),
 
     -- ** UsersListEvent
-    , UsersListEvent (..)
+    UsersListEvent (..),
 
     -- ** UsersListOrderBy
-    , UsersListOrderBy (..)
+    UsersListOrderBy (..),
 
     -- ** UsersListProjection
-    , UsersListProjection (..)
+    UsersListProjection (..),
 
     -- ** UsersListSortOrder
-    , UsersListSortOrder (..)
+    UsersListSortOrder (..),
 
     -- ** UsersListViewType
-    , UsersListViewType (..)
+    UsersListViewType (..),
 
     -- ** UsersWatchEvent
-    , UsersWatchEvent (..)
+    UsersWatchEvent (..),
 
     -- ** UsersWatchOrderBy
-    , UsersWatchOrderBy (..)
+    UsersWatchOrderBy (..),
 
     -- ** UsersWatchProjection
-    , UsersWatchProjection (..)
+    UsersWatchProjection (..),
 
     -- ** UsersWatchSortOrder
-    , UsersWatchSortOrder (..)
+    UsersWatchSortOrder (..),
 
     -- ** UsersWatchViewType
-    , UsersWatchViewType (..)
-    ) where
+    UsersWatchViewType (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Admin.Directory.Internal.Product
 import Gogol.Admin.Directory.Internal.Sum
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @directory_v1@ of the Admin SDK API. This contains the host and root path used as a starting point for constructing service requests.
 adminDirectoryService :: Core.ServiceConfig
-adminDirectoryService
-  = Core.defaultService
-      (Core.ServiceId "admin:directory_v1")
-      "admin.googleapis.com"
+adminDirectoryService =
+  Core.defaultService
+    (Core.ServiceId "admin:directory_v1")
+    "admin.googleapis.com"
 
 -- | See, add, edit, and permanently delete the printers that your organization can use with Chrome
-type Admin'Chrome'Printers = "https://www.googleapis.com/auth/admin.chrome.printers"
+type Admin'Chrome'Printers =
+  "https://www.googleapis.com/auth/admin.chrome.printers"
 
 -- | See the printers that your organization can use with Chrome
-type Admin'Chrome'Printers'Readonly = "https://www.googleapis.com/auth/admin.chrome.printers.readonly"
+type Admin'Chrome'Printers'Readonly =
+  "https://www.googleapis.com/auth/admin.chrome.printers.readonly"
 
 -- | View and manage customer related information
-type Admin'Directory'Customer = "https://www.googleapis.com/auth/admin.directory.customer"
+type Admin'Directory'Customer =
+  "https://www.googleapis.com/auth/admin.directory.customer"
 
 -- | View customer related information
-type Admin'Directory'Customer'Readonly = "https://www.googleapis.com/auth/admin.directory.customer.readonly"
+type Admin'Directory'Customer'Readonly =
+  "https://www.googleapis.com/auth/admin.directory.customer.readonly"
 
 -- | View and manage your ChromeOS devices\' metadata
-type Admin'Directory'Device'Chromeos = "https://www.googleapis.com/auth/admin.directory.device.chromeos"
+type Admin'Directory'Device'Chromeos =
+  "https://www.googleapis.com/auth/admin.directory.device.chromeos"
 
 -- | View your ChromeOS devices\' metadata
-type Admin'Directory'Device'Chromeos'Readonly = "https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly"
+type Admin'Directory'Device'Chromeos'Readonly =
+  "https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly"
 
 -- | View and manage your mobile devices\' metadata
-type Admin'Directory'Device'Mobile = "https://www.googleapis.com/auth/admin.directory.device.mobile"
+type Admin'Directory'Device'Mobile =
+  "https://www.googleapis.com/auth/admin.directory.device.mobile"
 
 -- | Manage your mobile devices by performing administrative tasks
-type Admin'Directory'Device'Mobile'Action = "https://www.googleapis.com/auth/admin.directory.device.mobile.action"
+type Admin'Directory'Device'Mobile'Action =
+  "https://www.googleapis.com/auth/admin.directory.device.mobile.action"
 
 -- | View your mobile devices\' metadata
-type Admin'Directory'Device'Mobile'Readonly = "https://www.googleapis.com/auth/admin.directory.device.mobile.readonly"
+type Admin'Directory'Device'Mobile'Readonly =
+  "https://www.googleapis.com/auth/admin.directory.device.mobile.readonly"
 
 -- | View and manage the provisioning of domains for your customers
-type Admin'Directory'Domain = "https://www.googleapis.com/auth/admin.directory.domain"
+type Admin'Directory'Domain =
+  "https://www.googleapis.com/auth/admin.directory.domain"
 
 -- | View domains related to your customers
-type Admin'Directory'Domain'Readonly = "https://www.googleapis.com/auth/admin.directory.domain.readonly"
+type Admin'Directory'Domain'Readonly =
+  "https://www.googleapis.com/auth/admin.directory.domain.readonly"
 
 -- | View and manage the provisioning of groups on your domain
-type Admin'Directory'Group = "https://www.googleapis.com/auth/admin.directory.group"
+type Admin'Directory'Group =
+  "https://www.googleapis.com/auth/admin.directory.group"
 
 -- | View and manage group subscriptions on your domain
-type Admin'Directory'Group'Member = "https://www.googleapis.com/auth/admin.directory.group.member"
+type Admin'Directory'Group'Member =
+  "https://www.googleapis.com/auth/admin.directory.group.member"
 
 -- | View group subscriptions on your domain
-type Admin'Directory'Group'Member'Readonly = "https://www.googleapis.com/auth/admin.directory.group.member.readonly"
+type Admin'Directory'Group'Member'Readonly =
+  "https://www.googleapis.com/auth/admin.directory.group.member.readonly"
 
 -- | View groups on your domain
-type Admin'Directory'Group'Readonly = "https://www.googleapis.com/auth/admin.directory.group.readonly"
+type Admin'Directory'Group'Readonly =
+  "https://www.googleapis.com/auth/admin.directory.group.readonly"
 
 -- | View and manage organization units on your domain
-type Admin'Directory'Orgunit = "https://www.googleapis.com/auth/admin.directory.orgunit"
+type Admin'Directory'Orgunit =
+  "https://www.googleapis.com/auth/admin.directory.orgunit"
 
 -- | View organization units on your domain
-type Admin'Directory'Orgunit'Readonly = "https://www.googleapis.com/auth/admin.directory.orgunit.readonly"
+type Admin'Directory'Orgunit'Readonly =
+  "https://www.googleapis.com/auth/admin.directory.orgunit.readonly"
 
 -- | View and manage the provisioning of calendar resources on your domain
-type Admin'Directory'Resource'Calendar = "https://www.googleapis.com/auth/admin.directory.resource.calendar"
+type Admin'Directory'Resource'Calendar =
+  "https://www.googleapis.com/auth/admin.directory.resource.calendar"
 
 -- | View calendar resources on your domain
-type Admin'Directory'Resource'Calendar'Readonly = "https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly"
+type Admin'Directory'Resource'Calendar'Readonly =
+  "https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly"
 
 -- | Manage delegated admin roles for your domain
-type Admin'Directory'Rolemanagement = "https://www.googleapis.com/auth/admin.directory.rolemanagement"
+type Admin'Directory'Rolemanagement =
+  "https://www.googleapis.com/auth/admin.directory.rolemanagement"
 
 -- | View delegated admin roles for your domain
-type Admin'Directory'Rolemanagement'Readonly = "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"
+type Admin'Directory'Rolemanagement'Readonly =
+  "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"
 
 -- | View and manage the provisioning of users on your domain
-type Admin'Directory'User = "https://www.googleapis.com/auth/admin.directory.user"
+type Admin'Directory'User =
+  "https://www.googleapis.com/auth/admin.directory.user"
 
 -- | View and manage user aliases on your domain
-type Admin'Directory'User'Alias = "https://www.googleapis.com/auth/admin.directory.user.alias"
+type Admin'Directory'User'Alias =
+  "https://www.googleapis.com/auth/admin.directory.user.alias"
 
 -- | View user aliases on your domain
-type Admin'Directory'User'Alias'Readonly = "https://www.googleapis.com/auth/admin.directory.user.alias.readonly"
+type Admin'Directory'User'Alias'Readonly =
+  "https://www.googleapis.com/auth/admin.directory.user.alias.readonly"
 
 -- | See info about users on your domain
-type Admin'Directory'User'Readonly = "https://www.googleapis.com/auth/admin.directory.user.readonly"
+type Admin'Directory'User'Readonly =
+  "https://www.googleapis.com/auth/admin.directory.user.readonly"
 
 -- | Manage data access permissions for users on your domain
-type Admin'Directory'User'Security = "https://www.googleapis.com/auth/admin.directory.user.security"
+type Admin'Directory'User'Security =
+  "https://www.googleapis.com/auth/admin.directory.user.security"
 
 -- | View and manage the provisioning of user schemas on your domain
-type Admin'Directory'Userschema = "https://www.googleapis.com/auth/admin.directory.userschema"
+type Admin'Directory'Userschema =
+  "https://www.googleapis.com/auth/admin.directory.userschema"
 
 -- | View user schemas on your domain
-type Admin'Directory'Userschema'Readonly = "https://www.googleapis.com/auth/admin.directory.userschema.readonly"
+type Admin'Directory'Userschema'Readonly =
+  "https://www.googleapis.com/auth/admin.directory.userschema.readonly"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"

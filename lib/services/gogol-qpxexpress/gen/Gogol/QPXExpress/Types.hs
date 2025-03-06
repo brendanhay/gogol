@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,123 +16,123 @@
 
 -- |
 -- Module      : Gogol.QPXExpress.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.QPXExpress.Types
-    (
-    -- * Configuration
-      qPXExpressService
+  ( -- * Configuration
+    qPXExpressService,
 
     -- * Types
 
     -- ** AircraftData
-    , AircraftData (..)
-    , newAircraftData
+    AircraftData (..),
+    newAircraftData,
 
     -- ** AirportData
-    , AirportData (..)
-    , newAirportData
+    AirportData (..),
+    newAirportData,
 
     -- ** BagDescriptor
-    , BagDescriptor (..)
-    , newBagDescriptor
+    BagDescriptor (..),
+    newBagDescriptor,
 
     -- ** CarrierData
-    , CarrierData (..)
-    , newCarrierData
+    CarrierData (..),
+    newCarrierData,
 
     -- ** CityData
-    , CityData (..)
-    , newCityData
+    CityData (..),
+    newCityData,
 
     -- ** Data'
-    , Data' (..)
-    , newData
+    Data' (..),
+    newData,
 
     -- ** FareInfo
-    , FareInfo (..)
-    , newFareInfo
+    FareInfo (..),
+    newFareInfo,
 
     -- ** FlightInfo
-    , FlightInfo (..)
-    , newFlightInfo
+    FlightInfo (..),
+    newFlightInfo,
 
     -- ** FreeBaggageAllowance
-    , FreeBaggageAllowance (..)
-    , newFreeBaggageAllowance
+    FreeBaggageAllowance (..),
+    newFreeBaggageAllowance,
 
     -- ** LegInfo
-    , LegInfo (..)
-    , newLegInfo
+    LegInfo (..),
+    newLegInfo,
 
     -- ** PassengerCounts
-    , PassengerCounts (..)
-    , newPassengerCounts
+    PassengerCounts (..),
+    newPassengerCounts,
 
     -- ** PricingInfo
-    , PricingInfo (..)
-    , newPricingInfo
+    PricingInfo (..),
+    newPricingInfo,
 
     -- ** SegmentInfo
-    , SegmentInfo (..)
-    , newSegmentInfo
+    SegmentInfo (..),
+    newSegmentInfo,
 
     -- ** SegmentPricing
-    , SegmentPricing (..)
-    , newSegmentPricing
+    SegmentPricing (..),
+    newSegmentPricing,
 
     -- ** SliceInfo
-    , SliceInfo (..)
-    , newSliceInfo
+    SliceInfo (..),
+    newSliceInfo,
 
     -- ** SliceInput
-    , SliceInput (..)
-    , newSliceInput
+    SliceInput (..),
+    newSliceInput,
 
     -- ** TaxData
-    , TaxData (..)
-    , newTaxData
+    TaxData (..),
+    newTaxData,
 
     -- ** TaxInfo
-    , TaxInfo (..)
-    , newTaxInfo
+    TaxInfo (..),
+    newTaxInfo,
 
     -- ** TimeOfDayRange
-    , TimeOfDayRange (..)
-    , newTimeOfDayRange
+    TimeOfDayRange (..),
+    newTimeOfDayRange,
 
     -- ** TripOption
-    , TripOption (..)
-    , newTripOption
+    TripOption (..),
+    newTripOption,
 
     -- ** TripOptionsRequest
-    , TripOptionsRequest (..)
-    , newTripOptionsRequest
+    TripOptionsRequest (..),
+    newTripOptionsRequest,
 
     -- ** TripOptionsResponse
-    , TripOptionsResponse (..)
-    , newTripOptionsResponse
+    TripOptionsResponse (..),
+    newTripOptionsResponse,
 
     -- ** TripsSearchRequest
-    , TripsSearchRequest (..)
-    , newTripsSearchRequest
+    TripsSearchRequest (..),
+    newTripsSearchRequest,
 
     -- ** TripsSearchResponse
-    , TripsSearchResponse (..)
-    , newTripsSearchResponse
-    ) where
+    TripsSearchResponse (..),
+    newTripsSearchResponse,
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.QPXExpress.Internal.Product
 import Gogol.QPXExpress.Internal.Sum
 
 -- | Default request referring to version @v1@ of the QPX Express API. This contains the host and root path used as a starting point for constructing service requests.
 qPXExpressService :: Core.ServiceConfig
-qPXExpressService
-  = Core.defaultService
-      (Core.ServiceId "qpxExpress:v1")
-      "www.googleapis.com"
+qPXExpressService =
+  Core.defaultService
+    (Core.ServiceId "qpxExpress:v1")
+    "www.googleapis.com"

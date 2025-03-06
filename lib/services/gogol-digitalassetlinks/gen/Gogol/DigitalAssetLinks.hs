@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.DigitalAssetLinks
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,61 +27,61 @@
 --
 -- /See:/ <https://developers.google.com/digital-asset-links/ Digital Asset Links API Reference>
 module Gogol.DigitalAssetLinks
-    (
-    -- * Configuration
-      digitalAssetLinksService
+  ( -- * Configuration
+    digitalAssetLinksService,
 
     -- * Resources
 
     -- ** digitalassetlinks.assetlinks.check
-    , DigitalAssetLinksAssetlinksCheckResource
-    , DigitalAssetLinksAssetlinksCheck (..)
-    , newDigitalAssetLinksAssetlinksCheck
+    DigitalAssetLinksAssetlinksCheckResource,
+    DigitalAssetLinksAssetlinksCheck (..),
+    newDigitalAssetLinksAssetlinksCheck,
 
     -- ** digitalassetlinks.statements.list
-    , DigitalAssetLinksStatementsListResource
-    , DigitalAssetLinksStatementsList (..)
-    , newDigitalAssetLinksStatementsList
+    DigitalAssetLinksStatementsListResource,
+    DigitalAssetLinksStatementsList (..),
+    newDigitalAssetLinksStatementsList,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AndroidAppAsset
-    , AndroidAppAsset (..)
-    , newAndroidAppAsset
+    AndroidAppAsset (..),
+    newAndroidAppAsset,
 
     -- ** Asset
-    , Asset (..)
-    , newAsset
+    Asset (..),
+    newAsset,
 
     -- ** CertificateInfo
-    , CertificateInfo (..)
-    , newCertificateInfo
+    CertificateInfo (..),
+    newCertificateInfo,
 
     -- ** CheckResponse
-    , CheckResponse (..)
-    , newCheckResponse
+    CheckResponse (..),
+    newCheckResponse,
 
     -- ** CheckResponse_ErrorCodeItem
-    , CheckResponse_ErrorCodeItem (..)
+    CheckResponse_ErrorCodeItem (..),
 
     -- ** ListResponse
-    , ListResponse (..)
-    , newListResponse
+    ListResponse (..),
+    newListResponse,
 
     -- ** ListResponse_ErrorCodeItem
-    , ListResponse_ErrorCodeItem (..)
+    ListResponse_ErrorCodeItem (..),
 
     -- ** Statement
-    , Statement (..)
-    , newStatement
+    Statement (..),
+    newStatement,
 
     -- ** WebAsset
-    , WebAsset (..)
-    , newWebAsset
-    ) where
+    WebAsset (..),
+    newWebAsset,
+  )
+where
 
 import Gogol.DigitalAssetLinks.Assetlinks.Check
 import Gogol.DigitalAssetLinks.Statements.List

@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.SQLAdmin
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,967 +27,967 @@
 --
 -- /See:/ <https://developers.google.com/cloud-sql/ Cloud SQL Admin API Reference>
 module Gogol.SQLAdmin
-    (
-    -- * Configuration
-      sQLAdminService
+  ( -- * Configuration
+    sQLAdminService,
 
     -- * OAuth Scopes
-    , CloudPlatform'FullControl
-    , Sqlservice'Admin
+    CloudPlatform'FullControl,
+    Sqlservice'Admin,
 
     -- * Resources
 
     -- ** sql.backupRuns.delete
-    , SqlBackupRunsDeleteResource
-    , SqlBackupRunsDelete (..)
-    , newSqlBackupRunsDelete
+    SqlBackupRunsDeleteResource,
+    SqlBackupRunsDelete (..),
+    newSqlBackupRunsDelete,
 
     -- ** sql.backupRuns.get
-    , SqlBackupRunsGetResource
-    , SqlBackupRunsGet (..)
-    , newSqlBackupRunsGet
+    SqlBackupRunsGetResource,
+    SqlBackupRunsGet (..),
+    newSqlBackupRunsGet,
 
     -- ** sql.backupRuns.insert
-    , SqlBackupRunsInsertResource
-    , SqlBackupRunsInsert (..)
-    , newSqlBackupRunsInsert
+    SqlBackupRunsInsertResource,
+    SqlBackupRunsInsert (..),
+    newSqlBackupRunsInsert,
 
     -- ** sql.backupRuns.list
-    , SqlBackupRunsListResource
-    , SqlBackupRunsList (..)
-    , newSqlBackupRunsList
+    SqlBackupRunsListResource,
+    SqlBackupRunsList (..),
+    newSqlBackupRunsList,
 
     -- ** sql.connect.generateEphemeral
-    , SqlConnectGenerateEphemeralResource
-    , SqlConnectGenerateEphemeral (..)
-    , newSqlConnectGenerateEphemeral
+    SqlConnectGenerateEphemeralResource,
+    SqlConnectGenerateEphemeral (..),
+    newSqlConnectGenerateEphemeral,
 
     -- ** sql.connect.get
-    , SqlConnectGetResource
-    , SqlConnectGet (..)
-    , newSqlConnectGet
+    SqlConnectGetResource,
+    SqlConnectGet (..),
+    newSqlConnectGet,
 
     -- ** sql.databases.delete
-    , SqlDatabasesDeleteResource
-    , SqlDatabasesDelete (..)
-    , newSqlDatabasesDelete
+    SqlDatabasesDeleteResource,
+    SqlDatabasesDelete (..),
+    newSqlDatabasesDelete,
 
     -- ** sql.databases.get
-    , SqlDatabasesGetResource
-    , SqlDatabasesGet (..)
-    , newSqlDatabasesGet
+    SqlDatabasesGetResource,
+    SqlDatabasesGet (..),
+    newSqlDatabasesGet,
 
     -- ** sql.databases.insert
-    , SqlDatabasesInsertResource
-    , SqlDatabasesInsert (..)
-    , newSqlDatabasesInsert
+    SqlDatabasesInsertResource,
+    SqlDatabasesInsert (..),
+    newSqlDatabasesInsert,
 
     -- ** sql.databases.list
-    , SqlDatabasesListResource
-    , SqlDatabasesList (..)
-    , newSqlDatabasesList
+    SqlDatabasesListResource,
+    SqlDatabasesList (..),
+    newSqlDatabasesList,
 
     -- ** sql.databases.patch
-    , SqlDatabasesPatchResource
-    , SqlDatabasesPatch (..)
-    , newSqlDatabasesPatch
+    SqlDatabasesPatchResource,
+    SqlDatabasesPatch (..),
+    newSqlDatabasesPatch,
 
     -- ** sql.databases.update
-    , SqlDatabasesUpdateResource
-    , SqlDatabasesUpdate (..)
-    , newSqlDatabasesUpdate
+    SqlDatabasesUpdateResource,
+    SqlDatabasesUpdate (..),
+    newSqlDatabasesUpdate,
 
     -- ** sql.flags.list
-    , SqlFlagsListResource
-    , SqlFlagsList (..)
-    , newSqlFlagsList
+    SqlFlagsListResource,
+    SqlFlagsList (..),
+    newSqlFlagsList,
 
     -- ** sql.instances.ListServerCertificates
-    , SqlInstancesListServerCertificatesResource
-    , SqlInstancesListServerCertificates (..)
-    , newSqlInstancesListServerCertificates
+    SqlInstancesListServerCertificatesResource,
+    SqlInstancesListServerCertificates (..),
+    newSqlInstancesListServerCertificates,
 
     -- ** sql.instances.RotateServerCertificate
-    , SqlInstancesRotateServerCertificateResource
-    , SqlInstancesRotateServerCertificate (..)
-    , newSqlInstancesRotateServerCertificate
+    SqlInstancesRotateServerCertificateResource,
+    SqlInstancesRotateServerCertificate (..),
+    newSqlInstancesRotateServerCertificate,
 
     -- ** sql.instances.acquireSsrsLease
-    , SqlInstancesAcquireSsrsLeaseResource
-    , SqlInstancesAcquireSsrsLease (..)
-    , newSqlInstancesAcquireSsrsLease
+    SqlInstancesAcquireSsrsLeaseResource,
+    SqlInstancesAcquireSsrsLease (..),
+    newSqlInstancesAcquireSsrsLease,
 
     -- ** sql.instances.addServerCa
-    , SqlInstancesAddServerCaResource
-    , SqlInstancesAddServerCa (..)
-    , newSqlInstancesAddServerCa
+    SqlInstancesAddServerCaResource,
+    SqlInstancesAddServerCa (..),
+    newSqlInstancesAddServerCa,
 
     -- ** sql.instances.addServerCertificate
-    , SqlInstancesAddServerCertificateResource
-    , SqlInstancesAddServerCertificate (..)
-    , newSqlInstancesAddServerCertificate
+    SqlInstancesAddServerCertificateResource,
+    SqlInstancesAddServerCertificate (..),
+    newSqlInstancesAddServerCertificate,
 
     -- ** sql.instances.clone
-    , SqlInstancesCloneResource
-    , SqlInstancesClone (..)
-    , newSqlInstancesClone
+    SqlInstancesCloneResource,
+    SqlInstancesClone (..),
+    newSqlInstancesClone,
 
     -- ** sql.instances.delete
-    , SqlInstancesDeleteResource
-    , SqlInstancesDelete (..)
-    , newSqlInstancesDelete
+    SqlInstancesDeleteResource,
+    SqlInstancesDelete (..),
+    newSqlInstancesDelete,
 
     -- ** sql.instances.demote
-    , SqlInstancesDemoteResource
-    , SqlInstancesDemote (..)
-    , newSqlInstancesDemote
+    SqlInstancesDemoteResource,
+    SqlInstancesDemote (..),
+    newSqlInstancesDemote,
 
     -- ** sql.instances.demoteMaster
-    , SqlInstancesDemoteMasterResource
-    , SqlInstancesDemoteMaster (..)
-    , newSqlInstancesDemoteMaster
+    SqlInstancesDemoteMasterResource,
+    SqlInstancesDemoteMaster (..),
+    newSqlInstancesDemoteMaster,
 
     -- ** sql.instances.export
-    , SqlInstancesExportResource
-    , SqlInstancesExport (..)
-    , newSqlInstancesExport
+    SqlInstancesExportResource,
+    SqlInstancesExport (..),
+    newSqlInstancesExport,
 
     -- ** sql.instances.failover
-    , SqlInstancesFailoverResource
-    , SqlInstancesFailover (..)
-    , newSqlInstancesFailover
+    SqlInstancesFailoverResource,
+    SqlInstancesFailover (..),
+    newSqlInstancesFailover,
 
     -- ** sql.instances.get
-    , SqlInstancesGetResource
-    , SqlInstancesGet (..)
-    , newSqlInstancesGet
+    SqlInstancesGetResource,
+    SqlInstancesGet (..),
+    newSqlInstancesGet,
 
     -- ** sql.instances.import
-    , SqlInstancesImportResource
-    , SqlInstancesImport (..)
-    , newSqlInstancesImport
+    SqlInstancesImportResource,
+    SqlInstancesImport (..),
+    newSqlInstancesImport,
 
     -- ** sql.instances.insert
-    , SqlInstancesInsertResource
-    , SqlInstancesInsert (..)
-    , newSqlInstancesInsert
+    SqlInstancesInsertResource,
+    SqlInstancesInsert (..),
+    newSqlInstancesInsert,
 
     -- ** sql.instances.list
-    , SqlInstancesListResource
-    , SqlInstancesList (..)
-    , newSqlInstancesList
+    SqlInstancesListResource,
+    SqlInstancesList (..),
+    newSqlInstancesList,
 
     -- ** sql.instances.listServerCas
-    , SqlInstancesListServerCasResource
-    , SqlInstancesListServerCas (..)
-    , newSqlInstancesListServerCas
+    SqlInstancesListServerCasResource,
+    SqlInstancesListServerCas (..),
+    newSqlInstancesListServerCas,
 
     -- ** sql.instances.patch
-    , SqlInstancesPatchResource
-    , SqlInstancesPatch (..)
-    , newSqlInstancesPatch
+    SqlInstancesPatchResource,
+    SqlInstancesPatch (..),
+    newSqlInstancesPatch,
 
     -- ** sql.instances.promoteReplica
-    , SqlInstancesPromoteReplicaResource
-    , SqlInstancesPromoteReplica (..)
-    , newSqlInstancesPromoteReplica
+    SqlInstancesPromoteReplicaResource,
+    SqlInstancesPromoteReplica (..),
+    newSqlInstancesPromoteReplica,
 
     -- ** sql.instances.reencrypt
-    , SqlInstancesReencryptResource
-    , SqlInstancesReencrypt (..)
-    , newSqlInstancesReencrypt
+    SqlInstancesReencryptResource,
+    SqlInstancesReencrypt (..),
+    newSqlInstancesReencrypt,
 
     -- ** sql.instances.releaseSsrsLease
-    , SqlInstancesReleaseSsrsLeaseResource
-    , SqlInstancesReleaseSsrsLease (..)
-    , newSqlInstancesReleaseSsrsLease
+    SqlInstancesReleaseSsrsLeaseResource,
+    SqlInstancesReleaseSsrsLease (..),
+    newSqlInstancesReleaseSsrsLease,
 
     -- ** sql.instances.resetSslConfig
-    , SqlInstancesResetSslConfigResource
-    , SqlInstancesResetSslConfig (..)
-    , newSqlInstancesResetSslConfig
+    SqlInstancesResetSslConfigResource,
+    SqlInstancesResetSslConfig (..),
+    newSqlInstancesResetSslConfig,
 
     -- ** sql.instances.restart
-    , SqlInstancesRestartResource
-    , SqlInstancesRestart (..)
-    , newSqlInstancesRestart
+    SqlInstancesRestartResource,
+    SqlInstancesRestart (..),
+    newSqlInstancesRestart,
 
     -- ** sql.instances.restoreBackup
-    , SqlInstancesRestoreBackupResource
-    , SqlInstancesRestoreBackup (..)
-    , newSqlInstancesRestoreBackup
+    SqlInstancesRestoreBackupResource,
+    SqlInstancesRestoreBackup (..),
+    newSqlInstancesRestoreBackup,
 
     -- ** sql.instances.rotateServerCa
-    , SqlInstancesRotateServerCaResource
-    , SqlInstancesRotateServerCa (..)
-    , newSqlInstancesRotateServerCa
+    SqlInstancesRotateServerCaResource,
+    SqlInstancesRotateServerCa (..),
+    newSqlInstancesRotateServerCa,
 
     -- ** sql.instances.startReplica
-    , SqlInstancesStartReplicaResource
-    , SqlInstancesStartReplica (..)
-    , newSqlInstancesStartReplica
+    SqlInstancesStartReplicaResource,
+    SqlInstancesStartReplica (..),
+    newSqlInstancesStartReplica,
 
     -- ** sql.instances.stopReplica
-    , SqlInstancesStopReplicaResource
-    , SqlInstancesStopReplica (..)
-    , newSqlInstancesStopReplica
+    SqlInstancesStopReplicaResource,
+    SqlInstancesStopReplica (..),
+    newSqlInstancesStopReplica,
 
     -- ** sql.instances.switchover
-    , SqlInstancesSwitchoverResource
-    , SqlInstancesSwitchover (..)
-    , newSqlInstancesSwitchover
+    SqlInstancesSwitchoverResource,
+    SqlInstancesSwitchover (..),
+    newSqlInstancesSwitchover,
 
     -- ** sql.instances.truncateLog
-    , SqlInstancesTruncateLogResource
-    , SqlInstancesTruncateLog (..)
-    , newSqlInstancesTruncateLog
+    SqlInstancesTruncateLogResource,
+    SqlInstancesTruncateLog (..),
+    newSqlInstancesTruncateLog,
 
     -- ** sql.instances.update
-    , SqlInstancesUpdateResource
-    , SqlInstancesUpdate (..)
-    , newSqlInstancesUpdate
+    SqlInstancesUpdateResource,
+    SqlInstancesUpdate (..),
+    newSqlInstancesUpdate,
 
     -- ** sql.operations.cancel
-    , SqlOperationsCancelResource
-    , SqlOperationsCancel (..)
-    , newSqlOperationsCancel
+    SqlOperationsCancelResource,
+    SqlOperationsCancel (..),
+    newSqlOperationsCancel,
 
     -- ** sql.operations.get
-    , SqlOperationsGetResource
-    , SqlOperationsGet (..)
-    , newSqlOperationsGet
+    SqlOperationsGetResource,
+    SqlOperationsGet (..),
+    newSqlOperationsGet,
 
     -- ** sql.operations.list
-    , SqlOperationsListResource
-    , SqlOperationsList (..)
-    , newSqlOperationsList
+    SqlOperationsListResource,
+    SqlOperationsList (..),
+    newSqlOperationsList,
 
     -- ** sql.projects.instances.getDiskShrinkConfig
-    , SqlProjectsInstancesGetDiskShrinkConfigResource
-    , SqlProjectsInstancesGetDiskShrinkConfig (..)
-    , newSqlProjectsInstancesGetDiskShrinkConfig
+    SqlProjectsInstancesGetDiskShrinkConfigResource,
+    SqlProjectsInstancesGetDiskShrinkConfig (..),
+    newSqlProjectsInstancesGetDiskShrinkConfig,
 
     -- ** sql.projects.instances.getLatestRecoveryTime
-    , SqlProjectsInstancesGetLatestRecoveryTimeResource
-    , SqlProjectsInstancesGetLatestRecoveryTime (..)
-    , newSqlProjectsInstancesGetLatestRecoveryTime
+    SqlProjectsInstancesGetLatestRecoveryTimeResource,
+    SqlProjectsInstancesGetLatestRecoveryTime (..),
+    newSqlProjectsInstancesGetLatestRecoveryTime,
 
     -- ** sql.projects.instances.performDiskShrink
-    , SqlProjectsInstancesPerformDiskShrinkResource
-    , SqlProjectsInstancesPerformDiskShrink (..)
-    , newSqlProjectsInstancesPerformDiskShrink
+    SqlProjectsInstancesPerformDiskShrinkResource,
+    SqlProjectsInstancesPerformDiskShrink (..),
+    newSqlProjectsInstancesPerformDiskShrink,
 
     -- ** sql.projects.instances.rescheduleMaintenance
-    , SqlProjectsInstancesRescheduleMaintenanceResource
-    , SqlProjectsInstancesRescheduleMaintenance (..)
-    , newSqlProjectsInstancesRescheduleMaintenance
+    SqlProjectsInstancesRescheduleMaintenanceResource,
+    SqlProjectsInstancesRescheduleMaintenance (..),
+    newSqlProjectsInstancesRescheduleMaintenance,
 
     -- ** sql.projects.instances.resetReplicaSize
-    , SqlProjectsInstancesResetReplicaSizeResource
-    , SqlProjectsInstancesResetReplicaSize (..)
-    , newSqlProjectsInstancesResetReplicaSize
+    SqlProjectsInstancesResetReplicaSizeResource,
+    SqlProjectsInstancesResetReplicaSize (..),
+    newSqlProjectsInstancesResetReplicaSize,
 
     -- ** sql.projects.instances.startExternalSync
-    , SqlProjectsInstancesStartExternalSyncResource
-    , SqlProjectsInstancesStartExternalSync (..)
-    , newSqlProjectsInstancesStartExternalSync
+    SqlProjectsInstancesStartExternalSyncResource,
+    SqlProjectsInstancesStartExternalSync (..),
+    newSqlProjectsInstancesStartExternalSync,
 
     -- ** sql.projects.instances.verifyExternalSyncSettings
-    , SqlProjectsInstancesVerifyExternalSyncSettingsResource
-    , SqlProjectsInstancesVerifyExternalSyncSettings (..)
-    , newSqlProjectsInstancesVerifyExternalSyncSettings
+    SqlProjectsInstancesVerifyExternalSyncSettingsResource,
+    SqlProjectsInstancesVerifyExternalSyncSettings (..),
+    newSqlProjectsInstancesVerifyExternalSyncSettings,
 
     -- ** sql.sslCerts.createEphemeral
-    , SqlSslCertsCreateEphemeralResource
-    , SqlSslCertsCreateEphemeral (..)
-    , newSqlSslCertsCreateEphemeral
+    SqlSslCertsCreateEphemeralResource,
+    SqlSslCertsCreateEphemeral (..),
+    newSqlSslCertsCreateEphemeral,
 
     -- ** sql.sslCerts.delete
-    , SqlSslCertsDeleteResource
-    , SqlSslCertsDelete (..)
-    , newSqlSslCertsDelete
+    SqlSslCertsDeleteResource,
+    SqlSslCertsDelete (..),
+    newSqlSslCertsDelete,
 
     -- ** sql.sslCerts.get
-    , SqlSslCertsGetResource
-    , SqlSslCertsGet (..)
-    , newSqlSslCertsGet
+    SqlSslCertsGetResource,
+    SqlSslCertsGet (..),
+    newSqlSslCertsGet,
 
     -- ** sql.sslCerts.insert
-    , SqlSslCertsInsertResource
-    , SqlSslCertsInsert (..)
-    , newSqlSslCertsInsert
+    SqlSslCertsInsertResource,
+    SqlSslCertsInsert (..),
+    newSqlSslCertsInsert,
 
     -- ** sql.sslCerts.list
-    , SqlSslCertsListResource
-    , SqlSslCertsList (..)
-    , newSqlSslCertsList
+    SqlSslCertsListResource,
+    SqlSslCertsList (..),
+    newSqlSslCertsList,
 
     -- ** sql.tiers.list
-    , SqlTiersListResource
-    , SqlTiersList (..)
-    , newSqlTiersList
+    SqlTiersListResource,
+    SqlTiersList (..),
+    newSqlTiersList,
 
     -- ** sql.users.delete
-    , SqlUsersDeleteResource
-    , SqlUsersDelete (..)
-    , newSqlUsersDelete
+    SqlUsersDeleteResource,
+    SqlUsersDelete (..),
+    newSqlUsersDelete,
 
     -- ** sql.users.get
-    , SqlUsersGetResource
-    , SqlUsersGet (..)
-    , newSqlUsersGet
+    SqlUsersGetResource,
+    SqlUsersGet (..),
+    newSqlUsersGet,
 
     -- ** sql.users.insert
-    , SqlUsersInsertResource
-    , SqlUsersInsert (..)
-    , newSqlUsersInsert
+    SqlUsersInsertResource,
+    SqlUsersInsert (..),
+    newSqlUsersInsert,
 
     -- ** sql.users.list
-    , SqlUsersListResource
-    , SqlUsersList (..)
-    , newSqlUsersList
+    SqlUsersListResource,
+    SqlUsersList (..),
+    newSqlUsersList,
 
     -- ** sql.users.update
-    , SqlUsersUpdateResource
-    , SqlUsersUpdate (..)
-    , newSqlUsersUpdate
+    SqlUsersUpdateResource,
+    SqlUsersUpdate (..),
+    newSqlUsersUpdate,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AclEntry
-    , AclEntry (..)
-    , newAclEntry
+    AclEntry (..),
+    newAclEntry,
 
     -- ** AcquireSsrsLeaseContext
-    , AcquireSsrsLeaseContext (..)
-    , newAcquireSsrsLeaseContext
+    AcquireSsrsLeaseContext (..),
+    newAcquireSsrsLeaseContext,
 
     -- ** AdvancedMachineFeatures
-    , AdvancedMachineFeatures (..)
-    , newAdvancedMachineFeatures
+    AdvancedMachineFeatures (..),
+    newAdvancedMachineFeatures,
 
     -- ** ApiWarning
-    , ApiWarning (..)
-    , newApiWarning
+    ApiWarning (..),
+    newApiWarning,
 
     -- ** ApiWarning_Code
-    , ApiWarning_Code (..)
+    ApiWarning_Code (..),
 
     -- ** AvailableDatabaseVersion
-    , AvailableDatabaseVersion (..)
-    , newAvailableDatabaseVersion
+    AvailableDatabaseVersion (..),
+    newAvailableDatabaseVersion,
 
     -- ** BackupConfiguration
-    , BackupConfiguration (..)
-    , newBackupConfiguration
+    BackupConfiguration (..),
+    newBackupConfiguration,
 
     -- ** BackupConfiguration_TransactionalLogStorageState
-    , BackupConfiguration_TransactionalLogStorageState (..)
+    BackupConfiguration_TransactionalLogStorageState (..),
 
     -- ** BackupContext
-    , BackupContext (..)
-    , newBackupContext
+    BackupContext (..),
+    newBackupContext,
 
     -- ** BackupReencryptionConfig
-    , BackupReencryptionConfig (..)
-    , newBackupReencryptionConfig
+    BackupReencryptionConfig (..),
+    newBackupReencryptionConfig,
 
     -- ** BackupReencryptionConfig_BackupType
-    , BackupReencryptionConfig_BackupType (..)
+    BackupReencryptionConfig_BackupType (..),
 
     -- ** BackupRetentionSettings
-    , BackupRetentionSettings (..)
-    , newBackupRetentionSettings
+    BackupRetentionSettings (..),
+    newBackupRetentionSettings,
 
     -- ** BackupRetentionSettings_RetentionUnit
-    , BackupRetentionSettings_RetentionUnit (..)
+    BackupRetentionSettings_RetentionUnit (..),
 
     -- ** BackupRun
-    , BackupRun (..)
-    , newBackupRun
+    BackupRun (..),
+    newBackupRun,
 
     -- ** BackupRun_BackupKind
-    , BackupRun_BackupKind (..)
+    BackupRun_BackupKind (..),
 
     -- ** BackupRun_Status
-    , BackupRun_Status (..)
+    BackupRun_Status (..),
 
     -- ** BackupRun_Type
-    , BackupRun_Type (..)
+    BackupRun_Type (..),
 
     -- ** BackupRunsListResponse
-    , BackupRunsListResponse (..)
-    , newBackupRunsListResponse
+    BackupRunsListResponse (..),
+    newBackupRunsListResponse,
 
     -- ** BinLogCoordinates
-    , BinLogCoordinates (..)
-    , newBinLogCoordinates
+    BinLogCoordinates (..),
+    newBinLogCoordinates,
 
     -- ** CloneContext
-    , CloneContext (..)
-    , newCloneContext
+    CloneContext (..),
+    newCloneContext,
 
     -- ** ConnectSettings
-    , ConnectSettings (..)
-    , newConnectSettings
+    ConnectSettings (..),
+    newConnectSettings,
 
     -- ** ConnectSettings_BackendType
-    , ConnectSettings_BackendType (..)
+    ConnectSettings_BackendType (..),
 
     -- ** ConnectSettings_DatabaseVersion
-    , ConnectSettings_DatabaseVersion (..)
+    ConnectSettings_DatabaseVersion (..),
 
     -- ** ConnectSettings_ServerCaMode
-    , ConnectSettings_ServerCaMode (..)
+    ConnectSettings_ServerCaMode (..),
 
     -- ** DataCacheConfig
-    , DataCacheConfig (..)
-    , newDataCacheConfig
+    DataCacheConfig (..),
+    newDataCacheConfig,
 
     -- ** Database
-    , Database (..)
-    , newDatabase
+    Database (..),
+    newDatabase,
 
     -- ** DatabaseFlags
-    , DatabaseFlags (..)
-    , newDatabaseFlags
+    DatabaseFlags (..),
+    newDatabaseFlags,
 
     -- ** DatabaseInstance
-    , DatabaseInstance (..)
-    , newDatabaseInstance
+    DatabaseInstance (..),
+    newDatabaseInstance,
 
     -- ** DatabaseInstance_BackendType
-    , DatabaseInstance_BackendType (..)
+    DatabaseInstance_BackendType (..),
 
     -- ** DatabaseInstance_DatabaseVersion
-    , DatabaseInstance_DatabaseVersion (..)
+    DatabaseInstance_DatabaseVersion (..),
 
     -- ** DatabaseInstance_FailoverReplica
-    , DatabaseInstance_FailoverReplica (..)
-    , newDatabaseInstance_FailoverReplica
+    DatabaseInstance_FailoverReplica (..),
+    newDatabaseInstance_FailoverReplica,
 
     -- ** DatabaseInstance_InstanceType
-    , DatabaseInstance_InstanceType (..)
+    DatabaseInstance_InstanceType (..),
 
     -- ** DatabaseInstance_SqlNetworkArchitecture
-    , DatabaseInstance_SqlNetworkArchitecture (..)
+    DatabaseInstance_SqlNetworkArchitecture (..),
 
     -- ** DatabaseInstance_State
-    , DatabaseInstance_State (..)
+    DatabaseInstance_State (..),
 
     -- ** DatabaseInstance_SuspensionReasonItem
-    , DatabaseInstance_SuspensionReasonItem (..)
+    DatabaseInstance_SuspensionReasonItem (..),
 
     -- ** DatabaseInstance_Tags
-    , DatabaseInstance_Tags (..)
-    , newDatabaseInstance_Tags
+    DatabaseInstance_Tags (..),
+    newDatabaseInstance_Tags,
 
     -- ** DatabasesListResponse
-    , DatabasesListResponse (..)
-    , newDatabasesListResponse
+    DatabasesListResponse (..),
+    newDatabasesListResponse,
 
     -- ** DemoteContext
-    , DemoteContext (..)
-    , newDemoteContext
+    DemoteContext (..),
+    newDemoteContext,
 
     -- ** DemoteMasterConfiguration
-    , DemoteMasterConfiguration (..)
-    , newDemoteMasterConfiguration
+    DemoteMasterConfiguration (..),
+    newDemoteMasterConfiguration,
 
     -- ** DemoteMasterContext
-    , DemoteMasterContext (..)
-    , newDemoteMasterContext
+    DemoteMasterContext (..),
+    newDemoteMasterContext,
 
     -- ** DemoteMasterMySqlReplicaConfiguration
-    , DemoteMasterMySqlReplicaConfiguration (..)
-    , newDemoteMasterMySqlReplicaConfiguration
+    DemoteMasterMySqlReplicaConfiguration (..),
+    newDemoteMasterMySqlReplicaConfiguration,
 
     -- ** DenyMaintenancePeriod
-    , DenyMaintenancePeriod (..)
-    , newDenyMaintenancePeriod
+    DenyMaintenancePeriod (..),
+    newDenyMaintenancePeriod,
 
     -- ** DiskEncryptionConfiguration
-    , DiskEncryptionConfiguration (..)
-    , newDiskEncryptionConfiguration
+    DiskEncryptionConfiguration (..),
+    newDiskEncryptionConfiguration,
 
     -- ** DiskEncryptionStatus
-    , DiskEncryptionStatus (..)
-    , newDiskEncryptionStatus
+    DiskEncryptionStatus (..),
+    newDiskEncryptionStatus,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** ExportContext
-    , ExportContext (..)
-    , newExportContext
+    ExportContext (..),
+    newExportContext,
 
     -- ** ExportContext_BakExportOptions
-    , ExportContext_BakExportOptions (..)
-    , newExportContext_BakExportOptions
+    ExportContext_BakExportOptions (..),
+    newExportContext_BakExportOptions,
 
     -- ** ExportContext_BakExportOptions_BakType
-    , ExportContext_BakExportOptions_BakType (..)
+    ExportContext_BakExportOptions_BakType (..),
 
     -- ** ExportContext_CsvExportOptions
-    , ExportContext_CsvExportOptions (..)
-    , newExportContext_CsvExportOptions
+    ExportContext_CsvExportOptions (..),
+    newExportContext_CsvExportOptions,
 
     -- ** ExportContext_FileType
-    , ExportContext_FileType (..)
+    ExportContext_FileType (..),
 
     -- ** ExportContext_SqlExportOptions
-    , ExportContext_SqlExportOptions (..)
-    , newExportContext_SqlExportOptions
+    ExportContext_SqlExportOptions (..),
+    newExportContext_SqlExportOptions,
 
     -- ** ExportContext_SqlExportOptions_MysqlExportOptions
-    , ExportContext_SqlExportOptions_MysqlExportOptions (..)
-    , newExportContext_SqlExportOptions_MysqlExportOptions
+    ExportContext_SqlExportOptions_MysqlExportOptions (..),
+    newExportContext_SqlExportOptions_MysqlExportOptions,
 
     -- ** ExportContext_SqlExportOptions_PostgresExportOptions
-    , ExportContext_SqlExportOptions_PostgresExportOptions (..)
-    , newExportContext_SqlExportOptions_PostgresExportOptions
+    ExportContext_SqlExportOptions_PostgresExportOptions (..),
+    newExportContext_SqlExportOptions_PostgresExportOptions,
 
     -- ** ExternalSyncSelectedObject
-    , ExternalSyncSelectedObject (..)
-    , newExternalSyncSelectedObject
+    ExternalSyncSelectedObject (..),
+    newExternalSyncSelectedObject,
 
     -- ** FailoverContext
-    , FailoverContext (..)
-    , newFailoverContext
+    FailoverContext (..),
+    newFailoverContext,
 
     -- ** Flag
-    , Flag (..)
-    , newFlag
+    Flag (..),
+    newFlag,
 
     -- ** Flag_AppliesToItem
-    , Flag_AppliesToItem (..)
+    Flag_AppliesToItem (..),
 
     -- ** Flag_Type
-    , Flag_Type (..)
+    Flag_Type (..),
 
     -- ** FlagsListResponse
-    , FlagsListResponse (..)
-    , newFlagsListResponse
+    FlagsListResponse (..),
+    newFlagsListResponse,
 
     -- ** GeminiInstanceConfig
-    , GeminiInstanceConfig (..)
-    , newGeminiInstanceConfig
+    GeminiInstanceConfig (..),
+    newGeminiInstanceConfig,
 
     -- ** GenerateEphemeralCertRequest
-    , GenerateEphemeralCertRequest (..)
-    , newGenerateEphemeralCertRequest
+    GenerateEphemeralCertRequest (..),
+    newGenerateEphemeralCertRequest,
 
     -- ** GenerateEphemeralCertResponse
-    , GenerateEphemeralCertResponse (..)
-    , newGenerateEphemeralCertResponse
+    GenerateEphemeralCertResponse (..),
+    newGenerateEphemeralCertResponse,
 
     -- ** ImportContext
-    , ImportContext (..)
-    , newImportContext
+    ImportContext (..),
+    newImportContext,
 
     -- ** ImportContext_BakImportOptions
-    , ImportContext_BakImportOptions (..)
-    , newImportContext_BakImportOptions
+    ImportContext_BakImportOptions (..),
+    newImportContext_BakImportOptions,
 
     -- ** ImportContext_BakImportOptions_BakType
-    , ImportContext_BakImportOptions_BakType (..)
+    ImportContext_BakImportOptions_BakType (..),
 
     -- ** ImportContext_BakImportOptions_EncryptionOptions
-    , ImportContext_BakImportOptions_EncryptionOptions (..)
-    , newImportContext_BakImportOptions_EncryptionOptions
+    ImportContext_BakImportOptions_EncryptionOptions (..),
+    newImportContext_BakImportOptions_EncryptionOptions,
 
     -- ** ImportContext_CsvImportOptions
-    , ImportContext_CsvImportOptions (..)
-    , newImportContext_CsvImportOptions
+    ImportContext_CsvImportOptions (..),
+    newImportContext_CsvImportOptions,
 
     -- ** ImportContext_FileType
-    , ImportContext_FileType (..)
+    ImportContext_FileType (..),
 
     -- ** ImportContext_SqlImportOptions
-    , ImportContext_SqlImportOptions (..)
-    , newImportContext_SqlImportOptions
+    ImportContext_SqlImportOptions (..),
+    newImportContext_SqlImportOptions,
 
     -- ** ImportContext_SqlImportOptions_PostgresImportOptions
-    , ImportContext_SqlImportOptions_PostgresImportOptions (..)
-    , newImportContext_SqlImportOptions_PostgresImportOptions
+    ImportContext_SqlImportOptions_PostgresImportOptions (..),
+    newImportContext_SqlImportOptions_PostgresImportOptions,
 
     -- ** InsightsConfig
-    , InsightsConfig (..)
-    , newInsightsConfig
+    InsightsConfig (..),
+    newInsightsConfig,
 
     -- ** InstanceReference
-    , InstanceReference (..)
-    , newInstanceReference
+    InstanceReference (..),
+    newInstanceReference,
 
     -- ** InstancesAcquireSsrsLeaseRequest
-    , InstancesAcquireSsrsLeaseRequest (..)
-    , newInstancesAcquireSsrsLeaseRequest
+    InstancesAcquireSsrsLeaseRequest (..),
+    newInstancesAcquireSsrsLeaseRequest,
 
     -- ** InstancesCloneRequest
-    , InstancesCloneRequest (..)
-    , newInstancesCloneRequest
+    InstancesCloneRequest (..),
+    newInstancesCloneRequest,
 
     -- ** InstancesDemoteMasterRequest
-    , InstancesDemoteMasterRequest (..)
-    , newInstancesDemoteMasterRequest
+    InstancesDemoteMasterRequest (..),
+    newInstancesDemoteMasterRequest,
 
     -- ** InstancesDemoteRequest
-    , InstancesDemoteRequest (..)
-    , newInstancesDemoteRequest
+    InstancesDemoteRequest (..),
+    newInstancesDemoteRequest,
 
     -- ** InstancesExportRequest
-    , InstancesExportRequest (..)
-    , newInstancesExportRequest
+    InstancesExportRequest (..),
+    newInstancesExportRequest,
 
     -- ** InstancesFailoverRequest
-    , InstancesFailoverRequest (..)
-    , newInstancesFailoverRequest
+    InstancesFailoverRequest (..),
+    newInstancesFailoverRequest,
 
     -- ** InstancesImportRequest
-    , InstancesImportRequest (..)
-    , newInstancesImportRequest
+    InstancesImportRequest (..),
+    newInstancesImportRequest,
 
     -- ** InstancesListResponse
-    , InstancesListResponse (..)
-    , newInstancesListResponse
+    InstancesListResponse (..),
+    newInstancesListResponse,
 
     -- ** InstancesListServerCasResponse
-    , InstancesListServerCasResponse (..)
-    , newInstancesListServerCasResponse
+    InstancesListServerCasResponse (..),
+    newInstancesListServerCasResponse,
 
     -- ** InstancesListServerCertificatesResponse
-    , InstancesListServerCertificatesResponse (..)
-    , newInstancesListServerCertificatesResponse
+    InstancesListServerCertificatesResponse (..),
+    newInstancesListServerCertificatesResponse,
 
     -- ** InstancesReencryptRequest
-    , InstancesReencryptRequest (..)
-    , newInstancesReencryptRequest
+    InstancesReencryptRequest (..),
+    newInstancesReencryptRequest,
 
     -- ** InstancesRestoreBackupRequest
-    , InstancesRestoreBackupRequest (..)
-    , newInstancesRestoreBackupRequest
+    InstancesRestoreBackupRequest (..),
+    newInstancesRestoreBackupRequest,
 
     -- ** InstancesRotateServerCaRequest
-    , InstancesRotateServerCaRequest (..)
-    , newInstancesRotateServerCaRequest
+    InstancesRotateServerCaRequest (..),
+    newInstancesRotateServerCaRequest,
 
     -- ** InstancesRotateServerCertificateRequest
-    , InstancesRotateServerCertificateRequest (..)
-    , newInstancesRotateServerCertificateRequest
+    InstancesRotateServerCertificateRequest (..),
+    newInstancesRotateServerCertificateRequest,
 
     -- ** InstancesTruncateLogRequest
-    , InstancesTruncateLogRequest (..)
-    , newInstancesTruncateLogRequest
+    InstancesTruncateLogRequest (..),
+    newInstancesTruncateLogRequest,
 
     -- ** IpConfiguration
-    , IpConfiguration (..)
-    , newIpConfiguration
+    IpConfiguration (..),
+    newIpConfiguration,
 
     -- ** IpConfiguration_ServerCaMode
-    , IpConfiguration_ServerCaMode (..)
+    IpConfiguration_ServerCaMode (..),
 
     -- ** IpConfiguration_SslMode
-    , IpConfiguration_SslMode (..)
+    IpConfiguration_SslMode (..),
 
     -- ** IpMapping
-    , IpMapping (..)
-    , newIpMapping
+    IpMapping (..),
+    newIpMapping,
 
     -- ** IpMapping_Type
-    , IpMapping_Type (..)
+    IpMapping_Type (..),
 
     -- ** LocationPreference
-    , LocationPreference (..)
-    , newLocationPreference
+    LocationPreference (..),
+    newLocationPreference,
 
     -- ** MaintenanceWindow
-    , MaintenanceWindow (..)
-    , newMaintenanceWindow
+    MaintenanceWindow (..),
+    newMaintenanceWindow,
 
     -- ** MaintenanceWindow_UpdateTrack
-    , MaintenanceWindow_UpdateTrack (..)
+    MaintenanceWindow_UpdateTrack (..),
 
     -- ** MySqlReplicaConfiguration
-    , MySqlReplicaConfiguration (..)
-    , newMySqlReplicaConfiguration
+    MySqlReplicaConfiguration (..),
+    newMySqlReplicaConfiguration,
 
     -- ** MySqlSyncConfig
-    , MySqlSyncConfig (..)
-    , newMySqlSyncConfig
+    MySqlSyncConfig (..),
+    newMySqlSyncConfig,
 
     -- ** OnPremisesConfiguration
-    , OnPremisesConfiguration (..)
-    , newOnPremisesConfiguration
+    OnPremisesConfiguration (..),
+    newOnPremisesConfiguration,
 
     -- ** OnPremisesConfiguration_SslOption
-    , OnPremisesConfiguration_SslOption (..)
+    OnPremisesConfiguration_SslOption (..),
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_OperationType
-    , Operation_OperationType (..)
+    Operation_OperationType (..),
 
     -- ** Operation_Status
-    , Operation_Status (..)
+    Operation_Status (..),
 
     -- ** OperationError
-    , OperationError (..)
-    , newOperationError
+    OperationError (..),
+    newOperationError,
 
     -- ** OperationErrors
-    , OperationErrors (..)
-    , newOperationErrors
+    OperationErrors (..),
+    newOperationErrors,
 
     -- ** OperationMetadata
-    , OperationMetadata (..)
-    , newOperationMetadata
+    OperationMetadata (..),
+    newOperationMetadata,
 
     -- ** OperationsListResponse
-    , OperationsListResponse (..)
-    , newOperationsListResponse
+    OperationsListResponse (..),
+    newOperationsListResponse,
 
     -- ** PasswordStatus
-    , PasswordStatus (..)
-    , newPasswordStatus
+    PasswordStatus (..),
+    newPasswordStatus,
 
     -- ** PasswordValidationPolicy
-    , PasswordValidationPolicy (..)
-    , newPasswordValidationPolicy
+    PasswordValidationPolicy (..),
+    newPasswordValidationPolicy,
 
     -- ** PasswordValidationPolicy_Complexity
-    , PasswordValidationPolicy_Complexity (..)
+    PasswordValidationPolicy_Complexity (..),
 
     -- ** PerformDiskShrinkContext
-    , PerformDiskShrinkContext (..)
-    , newPerformDiskShrinkContext
+    PerformDiskShrinkContext (..),
+    newPerformDiskShrinkContext,
 
     -- ** PscAutoConnectionConfig
-    , PscAutoConnectionConfig (..)
-    , newPscAutoConnectionConfig
+    PscAutoConnectionConfig (..),
+    newPscAutoConnectionConfig,
 
     -- ** PscConfig
-    , PscConfig (..)
-    , newPscConfig
+    PscConfig (..),
+    newPscConfig,
 
     -- ** ReplicaConfiguration
-    , ReplicaConfiguration (..)
-    , newReplicaConfiguration
+    ReplicaConfiguration (..),
+    newReplicaConfiguration,
 
     -- ** ReplicationCluster
-    , ReplicationCluster (..)
-    , newReplicationCluster
+    ReplicationCluster (..),
+    newReplicationCluster,
 
     -- ** Reschedule
-    , Reschedule (..)
-    , newReschedule
+    Reschedule (..),
+    newReschedule,
 
     -- ** Reschedule_RescheduleType
-    , Reschedule_RescheduleType (..)
+    Reschedule_RescheduleType (..),
 
     -- ** RestoreBackupContext
-    , RestoreBackupContext (..)
-    , newRestoreBackupContext
+    RestoreBackupContext (..),
+    newRestoreBackupContext,
 
     -- ** RotateServerCaContext
-    , RotateServerCaContext (..)
-    , newRotateServerCaContext
+    RotateServerCaContext (..),
+    newRotateServerCaContext,
 
     -- ** RotateServerCertificateContext
-    , RotateServerCertificateContext (..)
-    , newRotateServerCertificateContext
+    RotateServerCertificateContext (..),
+    newRotateServerCertificateContext,
 
     -- ** SelectedObjects
-    , SelectedObjects (..)
-    , newSelectedObjects
+    SelectedObjects (..),
+    newSelectedObjects,
 
     -- ** Settings
-    , Settings (..)
-    , newSettings
+    Settings (..),
+    newSettings,
 
     -- ** Settings_ActivationPolicy
-    , Settings_ActivationPolicy (..)
+    Settings_ActivationPolicy (..),
 
     -- ** Settings_AvailabilityType
-    , Settings_AvailabilityType (..)
+    Settings_AvailabilityType (..),
 
     -- ** Settings_ConnectorEnforcement
-    , Settings_ConnectorEnforcement (..)
+    Settings_ConnectorEnforcement (..),
 
     -- ** Settings_DataDiskType
-    , Settings_DataDiskType (..)
+    Settings_DataDiskType (..),
 
     -- ** Settings_Edition
-    , Settings_Edition (..)
+    Settings_Edition (..),
 
     -- ** Settings_PricingPlan
-    , Settings_PricingPlan (..)
+    Settings_PricingPlan (..),
 
     -- ** Settings_ReplicationType
-    , Settings_ReplicationType (..)
+    Settings_ReplicationType (..),
 
     -- ** Settings_UserLabels
-    , Settings_UserLabels (..)
-    , newSettings_UserLabels
+    Settings_UserLabels (..),
+    newSettings_UserLabels,
 
     -- ** SqlActiveDirectoryConfig
-    , SqlActiveDirectoryConfig (..)
-    , newSqlActiveDirectoryConfig
+    SqlActiveDirectoryConfig (..),
+    newSqlActiveDirectoryConfig,
 
     -- ** SqlExternalSyncSettingError
-    , SqlExternalSyncSettingError (..)
-    , newSqlExternalSyncSettingError
+    SqlExternalSyncSettingError (..),
+    newSqlExternalSyncSettingError,
 
     -- ** SqlExternalSyncSettingError_Type
-    , SqlExternalSyncSettingError_Type (..)
+    SqlExternalSyncSettingError_Type (..),
 
     -- ** SqlInstancesAcquireSsrsLeaseResponse
-    , SqlInstancesAcquireSsrsLeaseResponse (..)
-    , newSqlInstancesAcquireSsrsLeaseResponse
+    SqlInstancesAcquireSsrsLeaseResponse (..),
+    newSqlInstancesAcquireSsrsLeaseResponse,
 
     -- ** SqlInstancesGetDiskShrinkConfigResponse
-    , SqlInstancesGetDiskShrinkConfigResponse (..)
-    , newSqlInstancesGetDiskShrinkConfigResponse
+    SqlInstancesGetDiskShrinkConfigResponse (..),
+    newSqlInstancesGetDiskShrinkConfigResponse,
 
     -- ** SqlInstancesGetLatestRecoveryTimeResponse
-    , SqlInstancesGetLatestRecoveryTimeResponse (..)
-    , newSqlInstancesGetLatestRecoveryTimeResponse
+    SqlInstancesGetLatestRecoveryTimeResponse (..),
+    newSqlInstancesGetLatestRecoveryTimeResponse,
 
     -- ** SqlInstancesReleaseSsrsLeaseResponse
-    , SqlInstancesReleaseSsrsLeaseResponse (..)
-    , newSqlInstancesReleaseSsrsLeaseResponse
+    SqlInstancesReleaseSsrsLeaseResponse (..),
+    newSqlInstancesReleaseSsrsLeaseResponse,
 
     -- ** SqlInstancesRescheduleMaintenanceRequestBody
-    , SqlInstancesRescheduleMaintenanceRequestBody (..)
-    , newSqlInstancesRescheduleMaintenanceRequestBody
+    SqlInstancesRescheduleMaintenanceRequestBody (..),
+    newSqlInstancesRescheduleMaintenanceRequestBody,
 
     -- ** SqlInstancesResetReplicaSizeRequest
-    , SqlInstancesResetReplicaSizeRequest (..)
-    , newSqlInstancesResetReplicaSizeRequest
+    SqlInstancesResetReplicaSizeRequest (..),
+    newSqlInstancesResetReplicaSizeRequest,
 
     -- ** SqlInstancesStartExternalSyncRequest
-    , SqlInstancesStartExternalSyncRequest (..)
-    , newSqlInstancesStartExternalSyncRequest
+    SqlInstancesStartExternalSyncRequest (..),
+    newSqlInstancesStartExternalSyncRequest,
 
     -- ** SqlInstancesStartExternalSyncRequest_MigrationType
-    , SqlInstancesStartExternalSyncRequest_MigrationType (..)
+    SqlInstancesStartExternalSyncRequest_MigrationType (..),
 
     -- ** SqlInstancesStartExternalSyncRequest_SyncMode
-    , SqlInstancesStartExternalSyncRequest_SyncMode (..)
+    SqlInstancesStartExternalSyncRequest_SyncMode (..),
 
     -- ** SqlInstancesStartExternalSyncRequest_SyncParallelLevel
-    , SqlInstancesStartExternalSyncRequest_SyncParallelLevel (..)
+    SqlInstancesStartExternalSyncRequest_SyncParallelLevel (..),
 
     -- ** SqlInstancesVerifyExternalSyncSettingsRequest
-    , SqlInstancesVerifyExternalSyncSettingsRequest (..)
-    , newSqlInstancesVerifyExternalSyncSettingsRequest
+    SqlInstancesVerifyExternalSyncSettingsRequest (..),
+    newSqlInstancesVerifyExternalSyncSettingsRequest,
 
     -- ** SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType
-    , SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType (..)
+    SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType (..),
 
     -- ** SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode
-    , SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode (..)
+    SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode (..),
 
     -- ** SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel
-    , SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel (..)
+    SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel (..),
 
     -- ** SqlInstancesVerifyExternalSyncSettingsResponse
-    , SqlInstancesVerifyExternalSyncSettingsResponse (..)
-    , newSqlInstancesVerifyExternalSyncSettingsResponse
+    SqlInstancesVerifyExternalSyncSettingsResponse (..),
+    newSqlInstancesVerifyExternalSyncSettingsResponse,
 
     -- ** SqlOutOfDiskReport
-    , SqlOutOfDiskReport (..)
-    , newSqlOutOfDiskReport
+    SqlOutOfDiskReport (..),
+    newSqlOutOfDiskReport,
 
     -- ** SqlOutOfDiskReport_SqlOutOfDiskState
-    , SqlOutOfDiskReport_SqlOutOfDiskState (..)
+    SqlOutOfDiskReport_SqlOutOfDiskState (..),
 
     -- ** SqlScheduledMaintenance
-    , SqlScheduledMaintenance (..)
-    , newSqlScheduledMaintenance
+    SqlScheduledMaintenance (..),
+    newSqlScheduledMaintenance,
 
     -- ** SqlServerAuditConfig
-    , SqlServerAuditConfig (..)
-    , newSqlServerAuditConfig
+    SqlServerAuditConfig (..),
+    newSqlServerAuditConfig,
 
     -- ** SqlServerDatabaseDetails
-    , SqlServerDatabaseDetails (..)
-    , newSqlServerDatabaseDetails
+    SqlServerDatabaseDetails (..),
+    newSqlServerDatabaseDetails,
 
     -- ** SqlServerUserDetails
-    , SqlServerUserDetails (..)
-    , newSqlServerUserDetails
+    SqlServerUserDetails (..),
+    newSqlServerUserDetails,
 
     -- ** SqlSubOperationType
-    , SqlSubOperationType (..)
-    , newSqlSubOperationType
+    SqlSubOperationType (..),
+    newSqlSubOperationType,
 
     -- ** SqlSubOperationType_MaintenanceType
-    , SqlSubOperationType_MaintenanceType (..)
+    SqlSubOperationType_MaintenanceType (..),
 
     -- ** SslCert
-    , SslCert (..)
-    , newSslCert
+    SslCert (..),
+    newSslCert,
 
     -- ** SslCertDetail
-    , SslCertDetail (..)
-    , newSslCertDetail
+    SslCertDetail (..),
+    newSslCertDetail,
 
     -- ** SslCertsCreateEphemeralRequest
-    , SslCertsCreateEphemeralRequest (..)
-    , newSslCertsCreateEphemeralRequest
+    SslCertsCreateEphemeralRequest (..),
+    newSslCertsCreateEphemeralRequest,
 
     -- ** SslCertsInsertRequest
-    , SslCertsInsertRequest (..)
-    , newSslCertsInsertRequest
+    SslCertsInsertRequest (..),
+    newSslCertsInsertRequest,
 
     -- ** SslCertsInsertResponse
-    , SslCertsInsertResponse (..)
-    , newSslCertsInsertResponse
+    SslCertsInsertResponse (..),
+    newSslCertsInsertResponse,
 
     -- ** SslCertsListResponse
-    , SslCertsListResponse (..)
-    , newSslCertsListResponse
+    SslCertsListResponse (..),
+    newSslCertsListResponse,
 
     -- ** SyncFlags
-    , SyncFlags (..)
-    , newSyncFlags
+    SyncFlags (..),
+    newSyncFlags,
 
     -- ** Tier
-    , Tier (..)
-    , newTier
+    Tier (..),
+    newTier,
 
     -- ** TiersListResponse
-    , TiersListResponse (..)
-    , newTiersListResponse
+    TiersListResponse (..),
+    newTiersListResponse,
 
     -- ** TruncateLogContext
-    , TruncateLogContext (..)
-    , newTruncateLogContext
+    TruncateLogContext (..),
+    newTruncateLogContext,
 
     -- ** User
-    , User (..)
-    , newUser
+    User (..),
+    newUser,
 
     -- ** User_DualPasswordType
-    , User_DualPasswordType (..)
+    User_DualPasswordType (..),
 
     -- ** User_Type
-    , User_Type (..)
+    User_Type (..),
 
     -- ** UserPasswordValidationPolicy
-    , UserPasswordValidationPolicy (..)
-    , newUserPasswordValidationPolicy
+    UserPasswordValidationPolicy (..),
+    newUserPasswordValidationPolicy,
 
     -- ** UsersListResponse
-    , UsersListResponse (..)
-    , newUsersListResponse
-    ) where
+    UsersListResponse (..),
+    newUsersListResponse,
+  )
+where
 
 import Gogol.SQLAdmin.Sql.BackupRuns.Delete
 import Gogol.SQLAdmin.Sql.BackupRuns.Get

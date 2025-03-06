@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.RemoteBuildExecution.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.RemoteBuildExecution.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * BuildBazelRemoteExecutionV2CacheCapabilities_DigestFunctionItem
     BuildBazelRemoteExecutionV2CacheCapabilities_DigestFunctionItem
-      (
-        BuildBazelRemoteExecutionV2CacheCapabilities_DigestFunctionItem_Unknown,
+      ( BuildBazelRemoteExecutionV2CacheCapabilities_DigestFunctionItem_Unknown,
         BuildBazelRemoteExecutionV2CacheCapabilities_DigestFunctionItem_SHA256,
         BuildBazelRemoteExecutionV2CacheCapabilities_DigestFunctionItem_SHA1,
         BuildBazelRemoteExecutionV2CacheCapabilities_DigestFunctionItem_MD5,
@@ -54,16 +45,14 @@ module Gogol.RemoteBuildExecution.Internal.Sum
 
     -- * BuildBazelRemoteExecutionV2CacheCapabilities_SupportedCompressorItem
     BuildBazelRemoteExecutionV2CacheCapabilities_SupportedCompressorItem
-      (
-        BuildBazelRemoteExecutionV2CacheCapabilities_SupportedCompressorItem_Identity,
+      ( BuildBazelRemoteExecutionV2CacheCapabilities_SupportedCompressorItem_Identity,
         BuildBazelRemoteExecutionV2CacheCapabilities_SupportedCompressorItem_Zstd,
         ..
       ),
 
     -- * BuildBazelRemoteExecutionV2CacheCapabilities_SymlinkAbsolutePathStrategy
     BuildBazelRemoteExecutionV2CacheCapabilities_SymlinkAbsolutePathStrategy
-      (
-        BuildBazelRemoteExecutionV2CacheCapabilities_SymlinkAbsolutePathStrategy_Unknown,
+      ( BuildBazelRemoteExecutionV2CacheCapabilities_SymlinkAbsolutePathStrategy_Unknown,
         BuildBazelRemoteExecutionV2CacheCapabilities_SymlinkAbsolutePathStrategy_Disallowed,
         BuildBazelRemoteExecutionV2CacheCapabilities_SymlinkAbsolutePathStrategy_Allowed,
         ..
@@ -71,8 +60,7 @@ module Gogol.RemoteBuildExecution.Internal.Sum
 
     -- * BuildBazelRemoteExecutionV2ExecuteOperationMetadata_Stage
     BuildBazelRemoteExecutionV2ExecuteOperationMetadata_Stage
-      (
-        BuildBazelRemoteExecutionV2ExecuteOperationMetadata_Stage_Unknown,
+      ( BuildBazelRemoteExecutionV2ExecuteOperationMetadata_Stage_Unknown,
         BuildBazelRemoteExecutionV2ExecuteOperationMetadata_Stage_CACHECHECK,
         BuildBazelRemoteExecutionV2ExecuteOperationMetadata_Stage_Queued,
         BuildBazelRemoteExecutionV2ExecuteOperationMetadata_Stage_Executing,
@@ -82,8 +70,7 @@ module Gogol.RemoteBuildExecution.Internal.Sum
 
     -- * BuildBazelRemoteExecutionV2ExecutionCapabilities_DigestFunction
     BuildBazelRemoteExecutionV2ExecutionCapabilities_DigestFunction
-      (
-        BuildBazelRemoteExecutionV2ExecutionCapabilities_DigestFunction_Unknown,
+      ( BuildBazelRemoteExecutionV2ExecutionCapabilities_DigestFunction_Unknown,
         BuildBazelRemoteExecutionV2ExecutionCapabilities_DigestFunction_SHA256,
         BuildBazelRemoteExecutionV2ExecutionCapabilities_DigestFunction_SHA1,
         BuildBazelRemoteExecutionV2ExecutionCapabilities_DigestFunction_MD5,
@@ -96,8 +83,7 @@ module Gogol.RemoteBuildExecution.Internal.Sum
 
     -- * GoogleDevtoolsRemotebuildbotCommandEvents_CmUsage
     GoogleDevtoolsRemotebuildbotCommandEvents_CmUsage
-      (
-        GoogleDevtoolsRemotebuildbotCommandEvents_CmUsage_CONFIGNONE,
+      ( GoogleDevtoolsRemotebuildbotCommandEvents_CmUsage_CONFIGNONE,
         GoogleDevtoolsRemotebuildbotCommandEvents_CmUsage_CONFIGMATCH,
         GoogleDevtoolsRemotebuildbotCommandEvents_CmUsage_CONFIGMISMATCH,
         ..
@@ -105,8 +91,7 @@ module Gogol.RemoteBuildExecution.Internal.Sum
 
     -- * GoogleDevtoolsRemotebuildbotCommandEvents_OutputLocation
     GoogleDevtoolsRemotebuildbotCommandEvents_OutputLocation
-      (
-        GoogleDevtoolsRemotebuildbotCommandEvents_OutputLocation_LOCATIONUNDEFINED,
+      ( GoogleDevtoolsRemotebuildbotCommandEvents_OutputLocation_LOCATIONUNDEFINED,
         GoogleDevtoolsRemotebuildbotCommandEvents_OutputLocation_LOCATIONNONE,
         GoogleDevtoolsRemotebuildbotCommandEvents_OutputLocation_LOCATIONEXECROOTRELATIVE,
         GoogleDevtoolsRemotebuildbotCommandEvents_OutputLocation_LOCATIONWORKINGDIRRELATIVE,
@@ -118,8 +103,7 @@ module Gogol.RemoteBuildExecution.Internal.Sum
 
     -- * GoogleDevtoolsRemotebuildbotCommandStatus_Code
     GoogleDevtoolsRemotebuildbotCommandStatus_Code
-      (
-        GoogleDevtoolsRemotebuildbotCommandStatus_Code_OK,
+      ( GoogleDevtoolsRemotebuildbotCommandStatus_Code_OK,
         GoogleDevtoolsRemotebuildbotCommandStatus_Code_INVALIDARGUMENT,
         GoogleDevtoolsRemotebuildbotCommandStatus_Code_DEADLINEEXCEEDED,
         GoogleDevtoolsRemotebuildbotCommandStatus_Code_NOTFOUND,
@@ -167,8 +151,7 @@ module Gogol.RemoteBuildExecution.Internal.Sum
 
     -- * GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy_LinuxIsolation
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy_LinuxIsolation
-      (
-        GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy_LinuxIsolation_LINUXISOLATIONUNSPECIFIED,
+      ( GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy_LinuxIsolation_LINUXISOLATIONUNSPECIFIED,
         GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy_LinuxIsolation_Gvisor,
         GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy_LinuxIsolation_Off,
         ..
@@ -176,8 +159,7 @@ module Gogol.RemoteBuildExecution.Internal.Sum
 
     -- * GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature_Policy
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature_Policy
-      (
-        GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature_Policy_POLICYUNSPECIFIED,
+      ( GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature_Policy_POLICYUNSPECIFIED,
         GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature_Policy_Allowed,
         GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature_Policy_Forbidden,
         GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature_Policy_Restricted,
@@ -186,8 +168,7 @@ module Gogol.RemoteBuildExecution.Internal.Sum
 
     -- * GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance_State
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance_State
-      (
-        GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance_State_STATEUNSPECIFIED,
+      ( GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance_State_STATEUNSPECIFIED,
         GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance_State_Creating,
         GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance_State_Running,
         GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance_State_Inactive,
@@ -196,8 +177,7 @@ module Gogol.RemoteBuildExecution.Internal.Sum
 
     -- * GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool_State
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool_State
-      (
-        GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool_State_STATEUNSPECIFIED,
+      ( GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool_State_STATEUNSPECIFIED,
         GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool_State_Creating,
         GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool_State_Running,
         GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool_State_Updating,
@@ -208,30 +188,30 @@ module Gogol.RemoteBuildExecution.Internal.Sum
 
     -- * GoogleDevtoolsRemoteworkersV1test2AdminTemp_Command
     GoogleDevtoolsRemoteworkersV1test2AdminTemp_Command
-      (
-        GoogleDevtoolsRemoteworkersV1test2AdminTemp_Command_Unspecified,
+      ( GoogleDevtoolsRemoteworkersV1test2AdminTemp_Command_Unspecified,
         GoogleDevtoolsRemoteworkersV1test2AdminTemp_Command_BOTUPDATE,
         GoogleDevtoolsRemoteworkersV1test2AdminTemp_Command_BOTRESTART,
         GoogleDevtoolsRemoteworkersV1test2AdminTemp_Command_BOTTERMINATE,
         GoogleDevtoolsRemoteworkersV1test2AdminTemp_Command_HOSTRESTART,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -244,19 +224,20 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
-newtype BuildBazelRemoteExecutionV2CacheCapabilities_DigestFunctionItem = BuildBazelRemoteExecutionV2CacheCapabilities_DigestFunctionItem { fromBuildBazelRemoteExecutionV2CacheCapabilities_DigestFunctionItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BuildBazelRemoteExecutionV2CacheCapabilities_DigestFunctionItem = BuildBazelRemoteExecutionV2CacheCapabilities_DigestFunctionItem {fromBuildBazelRemoteExecutionV2CacheCapabilities_DigestFunctionItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | It is an error for the server to return this value.
 pattern BuildBazelRemoteExecutionV2CacheCapabilities_DigestFunctionItem_Unknown :: BuildBazelRemoteExecutionV2CacheCapabilities_DigestFunctionItem
@@ -299,19 +280,20 @@ pattern BuildBazelRemoteExecutionV2CacheCapabilities_DigestFunctionItem_MURMUR3 
   BuildBazelRemoteExecutionV2CacheCapabilities_DigestFunctionItem_SHA384,
   BuildBazelRemoteExecutionV2CacheCapabilities_DigestFunctionItem_SHA512,
   BuildBazelRemoteExecutionV2CacheCapabilities_DigestFunctionItem_MURMUR3,
-  BuildBazelRemoteExecutionV2CacheCapabilities_DigestFunctionItem #-}
+  BuildBazelRemoteExecutionV2CacheCapabilities_DigestFunctionItem
+  #-}
 
-newtype BuildBazelRemoteExecutionV2CacheCapabilities_SupportedCompressorItem = BuildBazelRemoteExecutionV2CacheCapabilities_SupportedCompressorItem { fromBuildBazelRemoteExecutionV2CacheCapabilities_SupportedCompressorItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BuildBazelRemoteExecutionV2CacheCapabilities_SupportedCompressorItem = BuildBazelRemoteExecutionV2CacheCapabilities_SupportedCompressorItem {fromBuildBazelRemoteExecutionV2CacheCapabilities_SupportedCompressorItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No compression. Servers and clients MUST always support this, and do not need to advertise it.
 pattern BuildBazelRemoteExecutionV2CacheCapabilities_SupportedCompressorItem_Identity :: BuildBazelRemoteExecutionV2CacheCapabilities_SupportedCompressorItem
@@ -324,20 +306,21 @@ pattern BuildBazelRemoteExecutionV2CacheCapabilities_SupportedCompressorItem_Zst
 {-# COMPLETE
   BuildBazelRemoteExecutionV2CacheCapabilities_SupportedCompressorItem_Identity,
   BuildBazelRemoteExecutionV2CacheCapabilities_SupportedCompressorItem_Zstd,
-  BuildBazelRemoteExecutionV2CacheCapabilities_SupportedCompressorItem #-}
+  BuildBazelRemoteExecutionV2CacheCapabilities_SupportedCompressorItem
+  #-}
 
 -- | Whether absolute symlink targets are supported.
-newtype BuildBazelRemoteExecutionV2CacheCapabilities_SymlinkAbsolutePathStrategy = BuildBazelRemoteExecutionV2CacheCapabilities_SymlinkAbsolutePathStrategy { fromBuildBazelRemoteExecutionV2CacheCapabilities_SymlinkAbsolutePathStrategy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BuildBazelRemoteExecutionV2CacheCapabilities_SymlinkAbsolutePathStrategy = BuildBazelRemoteExecutionV2CacheCapabilities_SymlinkAbsolutePathStrategy {fromBuildBazelRemoteExecutionV2CacheCapabilities_SymlinkAbsolutePathStrategy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Invalid value.
 pattern BuildBazelRemoteExecutionV2CacheCapabilities_SymlinkAbsolutePathStrategy_Unknown :: BuildBazelRemoteExecutionV2CacheCapabilities_SymlinkAbsolutePathStrategy
@@ -355,20 +338,21 @@ pattern BuildBazelRemoteExecutionV2CacheCapabilities_SymlinkAbsolutePathStrategy
   BuildBazelRemoteExecutionV2CacheCapabilities_SymlinkAbsolutePathStrategy_Unknown,
   BuildBazelRemoteExecutionV2CacheCapabilities_SymlinkAbsolutePathStrategy_Disallowed,
   BuildBazelRemoteExecutionV2CacheCapabilities_SymlinkAbsolutePathStrategy_Allowed,
-  BuildBazelRemoteExecutionV2CacheCapabilities_SymlinkAbsolutePathStrategy #-}
+  BuildBazelRemoteExecutionV2CacheCapabilities_SymlinkAbsolutePathStrategy
+  #-}
 
 -- | The current stage of execution.
-newtype BuildBazelRemoteExecutionV2ExecuteOperationMetadata_Stage = BuildBazelRemoteExecutionV2ExecuteOperationMetadata_Stage { fromBuildBazelRemoteExecutionV2ExecuteOperationMetadata_Stage :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BuildBazelRemoteExecutionV2ExecuteOperationMetadata_Stage = BuildBazelRemoteExecutionV2ExecuteOperationMetadata_Stage {fromBuildBazelRemoteExecutionV2ExecuteOperationMetadata_Stage :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Invalid value.
 pattern BuildBazelRemoteExecutionV2ExecuteOperationMetadata_Stage_Unknown :: BuildBazelRemoteExecutionV2ExecuteOperationMetadata_Stage
@@ -396,20 +380,21 @@ pattern BuildBazelRemoteExecutionV2ExecuteOperationMetadata_Stage_Completed = Bu
   BuildBazelRemoteExecutionV2ExecuteOperationMetadata_Stage_Queued,
   BuildBazelRemoteExecutionV2ExecuteOperationMetadata_Stage_Executing,
   BuildBazelRemoteExecutionV2ExecuteOperationMetadata_Stage_Completed,
-  BuildBazelRemoteExecutionV2ExecuteOperationMetadata_Stage #-}
+  BuildBazelRemoteExecutionV2ExecuteOperationMetadata_Stage
+  #-}
 
 -- | Remote execution may only support a single digest function.
-newtype BuildBazelRemoteExecutionV2ExecutionCapabilities_DigestFunction = BuildBazelRemoteExecutionV2ExecutionCapabilities_DigestFunction { fromBuildBazelRemoteExecutionV2ExecutionCapabilities_DigestFunction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BuildBazelRemoteExecutionV2ExecutionCapabilities_DigestFunction = BuildBazelRemoteExecutionV2ExecutionCapabilities_DigestFunction {fromBuildBazelRemoteExecutionV2ExecutionCapabilities_DigestFunction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | It is an error for the server to return this value.
 pattern BuildBazelRemoteExecutionV2ExecutionCapabilities_DigestFunction_Unknown :: BuildBazelRemoteExecutionV2ExecutionCapabilities_DigestFunction
@@ -452,20 +437,21 @@ pattern BuildBazelRemoteExecutionV2ExecutionCapabilities_DigestFunction_MURMUR3 
   BuildBazelRemoteExecutionV2ExecutionCapabilities_DigestFunction_SHA384,
   BuildBazelRemoteExecutionV2ExecutionCapabilities_DigestFunction_SHA512,
   BuildBazelRemoteExecutionV2ExecutionCapabilities_DigestFunction_MURMUR3,
-  BuildBazelRemoteExecutionV2ExecutionCapabilities_DigestFunction #-}
+  BuildBazelRemoteExecutionV2ExecutionCapabilities_DigestFunction
+  #-}
 
 -- | Indicates if and how Container Manager is being used for task execution.
-newtype GoogleDevtoolsRemotebuildbotCommandEvents_CmUsage = GoogleDevtoolsRemotebuildbotCommandEvents_CmUsage { fromGoogleDevtoolsRemotebuildbotCommandEvents_CmUsage :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleDevtoolsRemotebuildbotCommandEvents_CmUsage = GoogleDevtoolsRemotebuildbotCommandEvents_CmUsage {fromGoogleDevtoolsRemotebuildbotCommandEvents_CmUsage :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Container Manager is disabled or not running for this execution.
 pattern GoogleDevtoolsRemotebuildbotCommandEvents_CmUsage_CONFIGNONE :: GoogleDevtoolsRemotebuildbotCommandEvents_CmUsage
@@ -483,20 +469,21 @@ pattern GoogleDevtoolsRemotebuildbotCommandEvents_CmUsage_CONFIGMISMATCH = Googl
   GoogleDevtoolsRemotebuildbotCommandEvents_CmUsage_CONFIGNONE,
   GoogleDevtoolsRemotebuildbotCommandEvents_CmUsage_CONFIGMATCH,
   GoogleDevtoolsRemotebuildbotCommandEvents_CmUsage_CONFIGMISMATCH,
-  GoogleDevtoolsRemotebuildbotCommandEvents_CmUsage #-}
+  GoogleDevtoolsRemotebuildbotCommandEvents_CmUsage
+  #-}
 
 -- | Indicates whether output files and\/or output directories were found relative to the execution root or to the user provided work directory or both or none.
-newtype GoogleDevtoolsRemotebuildbotCommandEvents_OutputLocation = GoogleDevtoolsRemotebuildbotCommandEvents_OutputLocation { fromGoogleDevtoolsRemotebuildbotCommandEvents_OutputLocation :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleDevtoolsRemotebuildbotCommandEvents_OutputLocation = GoogleDevtoolsRemotebuildbotCommandEvents_OutputLocation {fromGoogleDevtoolsRemotebuildbotCommandEvents_OutputLocation :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Location is set to LOCATION_UNDEFINED for tasks where the working directorty is not specified or is identical to the execution root directory.
 pattern GoogleDevtoolsRemotebuildbotCommandEvents_OutputLocation_LOCATIONUNDEFINED :: GoogleDevtoolsRemotebuildbotCommandEvents_OutputLocation
@@ -534,20 +521,21 @@ pattern GoogleDevtoolsRemotebuildbotCommandEvents_OutputLocation_LOCATIONEXECROO
   GoogleDevtoolsRemotebuildbotCommandEvents_OutputLocation_LOCATIONEXECROOTANDWORKINGDIRRELATIVE,
   GoogleDevtoolsRemotebuildbotCommandEvents_OutputLocation_LOCATIONEXECROOTRELATIVEOUTPUTOUTSIDEWORKINGDIR,
   GoogleDevtoolsRemotebuildbotCommandEvents_OutputLocation_LOCATIONEXECROOTANDWORKINGDIRRELATIVEOUTPUTOUTSIDEWORKINGDIR,
-  GoogleDevtoolsRemotebuildbotCommandEvents_OutputLocation #-}
+  GoogleDevtoolsRemotebuildbotCommandEvents_OutputLocation
+  #-}
 
 -- | The status code.
-newtype GoogleDevtoolsRemotebuildbotCommandStatus_Code = GoogleDevtoolsRemotebuildbotCommandStatus_Code { fromGoogleDevtoolsRemotebuildbotCommandStatus_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleDevtoolsRemotebuildbotCommandStatus_Code = GoogleDevtoolsRemotebuildbotCommandStatus_Code {fromGoogleDevtoolsRemotebuildbotCommandStatus_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The command succeeded.
 pattern GoogleDevtoolsRemotebuildbotCommandStatus_Code_OK :: GoogleDevtoolsRemotebuildbotCommandStatus_Code
@@ -765,20 +753,21 @@ pattern GoogleDevtoolsRemotebuildbotCommandStatus_Code_DOCKERMISSINGCONTAINER = 
   GoogleDevtoolsRemotebuildbotCommandStatus_Code_DOCKERIMAGEVPCSCPERMISSIONDENIED,
   GoogleDevtoolsRemotebuildbotCommandStatus_Code_WORKINGDIRNOTRELATIVE,
   GoogleDevtoolsRemotebuildbotCommandStatus_Code_DOCKERMISSINGCONTAINER,
-  GoogleDevtoolsRemotebuildbotCommandStatus_Code #-}
+  GoogleDevtoolsRemotebuildbotCommandStatus_Code
+  #-}
 
 -- | linux_isolation allows overriding the docker runtime used for containers started on Linux.
-newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy_LinuxIsolation = GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy_LinuxIsolation { fromGoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy_LinuxIsolation :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy_LinuxIsolation = GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy_LinuxIsolation {fromGoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy_LinuxIsolation :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value. Will be using Linux default runtime.
 pattern GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy_LinuxIsolation_LINUXISOLATIONUNSPECIFIED :: GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy_LinuxIsolation
@@ -796,20 +785,21 @@ pattern GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy_LinuxIsolati
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy_LinuxIsolation_LINUXISOLATIONUNSPECIFIED,
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy_LinuxIsolation_Gvisor,
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy_LinuxIsolation_Off,
-  GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy_LinuxIsolation #-}
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy_LinuxIsolation
+  #-}
 
 -- | The policy of the feature.
-newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature_Policy = GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature_Policy { fromGoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature_Policy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature_Policy = GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature_Policy {fromGoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature_Policy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value, if not explicitly set. Equivalent to FORBIDDEN, unless otherwise documented on a specific Feature.
 pattern GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature_Policy_POLICYUNSPECIFIED :: GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature_Policy
@@ -832,20 +822,21 @@ pattern GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature_Polic
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature_Policy_Allowed,
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature_Policy_Forbidden,
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature_Policy_Restricted,
-  GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature_Policy #-}
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature_Policy
+  #-}
 
 -- | Output only. State of the instance.
-newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance_State = GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance_State { fromGoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance_State = GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance_State {fromGoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not a valid state, but the default value of the enum.
 pattern GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance_State_STATEUNSPECIFIED :: GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance_State
@@ -868,20 +859,21 @@ pattern GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance_State_Inactive = 
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance_State_Creating,
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance_State_Running,
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance_State_Inactive,
-  GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance_State #-}
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance_State
+  #-}
 
 -- | Output only. State of the worker pool.
-newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool_State = GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool_State { fromGoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool_State = GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool_State {fromGoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not a valid state, but the default value of the enum.
 pattern GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool_State_STATEUNSPECIFIED :: GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool_State
@@ -914,20 +906,21 @@ pattern GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool_State_Inactive 
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool_State_Updating,
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool_State_Deleting,
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool_State_Inactive,
-  GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool_State #-}
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool_State
+  #-}
 
 -- | The admin action; see @Command@ for legal values.
-newtype GoogleDevtoolsRemoteworkersV1test2AdminTemp_Command = GoogleDevtoolsRemoteworkersV1test2AdminTemp_Command { fromGoogleDevtoolsRemoteworkersV1test2AdminTemp_Command :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleDevtoolsRemoteworkersV1test2AdminTemp_Command = GoogleDevtoolsRemoteworkersV1test2AdminTemp_Command {fromGoogleDevtoolsRemoteworkersV1test2AdminTemp_Command :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Illegal value.
 pattern GoogleDevtoolsRemoteworkersV1test2AdminTemp_Command_Unspecified :: GoogleDevtoolsRemoteworkersV1test2AdminTemp_Command
@@ -955,4 +948,5 @@ pattern GoogleDevtoolsRemoteworkersV1test2AdminTemp_Command_HOSTRESTART = Google
   GoogleDevtoolsRemoteworkersV1test2AdminTemp_Command_BOTRESTART,
   GoogleDevtoolsRemoteworkersV1test2AdminTemp_Command_BOTTERMINATE,
   GoogleDevtoolsRemoteworkersV1test2AdminTemp_Command_HOSTRESTART,
-  GoogleDevtoolsRemoteworkersV1test2AdminTemp_Command #-}
+  GoogleDevtoolsRemoteworkersV1test2AdminTemp_Command
+  #-}

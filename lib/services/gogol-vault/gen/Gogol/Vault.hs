@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.Vault
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,543 +27,543 @@
 --
 -- /See:/ <https://developers.google.com/vault Google Vault API Reference>
 module Gogol.Vault
-    (
-    -- * Configuration
-      vaultService
+  ( -- * Configuration
+    vaultService,
 
     -- * OAuth Scopes
-    , Ediscovery'FullControl
-    , Ediscovery'Readonly
+    Ediscovery'FullControl,
+    Ediscovery'Readonly,
 
     -- * Resources
 
     -- ** vault.matters.addPermissions
-    , VaultMattersAddPermissionsResource
-    , VaultMattersAddPermissions (..)
-    , newVaultMattersAddPermissions
+    VaultMattersAddPermissionsResource,
+    VaultMattersAddPermissions (..),
+    newVaultMattersAddPermissions,
 
     -- ** vault.matters.close
-    , VaultMattersCloseResource
-    , VaultMattersClose (..)
-    , newVaultMattersClose
+    VaultMattersCloseResource,
+    VaultMattersClose (..),
+    newVaultMattersClose,
 
     -- ** vault.matters.count
-    , VaultMattersCountResource
-    , VaultMattersCount (..)
-    , newVaultMattersCount
+    VaultMattersCountResource,
+    VaultMattersCount (..),
+    newVaultMattersCount,
 
     -- ** vault.matters.create
-    , VaultMattersCreateResource
-    , VaultMattersCreate (..)
-    , newVaultMattersCreate
+    VaultMattersCreateResource,
+    VaultMattersCreate (..),
+    newVaultMattersCreate,
 
     -- ** vault.matters.delete
-    , VaultMattersDeleteResource
-    , VaultMattersDelete (..)
-    , newVaultMattersDelete
+    VaultMattersDeleteResource,
+    VaultMattersDelete (..),
+    newVaultMattersDelete,
 
     -- ** vault.matters.exports.create
-    , VaultMattersExportsCreateResource
-    , VaultMattersExportsCreate (..)
-    , newVaultMattersExportsCreate
+    VaultMattersExportsCreateResource,
+    VaultMattersExportsCreate (..),
+    newVaultMattersExportsCreate,
 
     -- ** vault.matters.exports.delete
-    , VaultMattersExportsDeleteResource
-    , VaultMattersExportsDelete (..)
-    , newVaultMattersExportsDelete
+    VaultMattersExportsDeleteResource,
+    VaultMattersExportsDelete (..),
+    newVaultMattersExportsDelete,
 
     -- ** vault.matters.exports.get
-    , VaultMattersExportsGetResource
-    , VaultMattersExportsGet (..)
-    , newVaultMattersExportsGet
+    VaultMattersExportsGetResource,
+    VaultMattersExportsGet (..),
+    newVaultMattersExportsGet,
 
     -- ** vault.matters.exports.list
-    , VaultMattersExportsListResource
-    , VaultMattersExportsList (..)
-    , newVaultMattersExportsList
+    VaultMattersExportsListResource,
+    VaultMattersExportsList (..),
+    newVaultMattersExportsList,
 
     -- ** vault.matters.get
-    , VaultMattersGetResource
-    , VaultMattersGet (..)
-    , newVaultMattersGet
+    VaultMattersGetResource,
+    VaultMattersGet (..),
+    newVaultMattersGet,
 
     -- ** vault.matters.holds.accounts.create
-    , VaultMattersHoldsAccountsCreateResource
-    , VaultMattersHoldsAccountsCreate (..)
-    , newVaultMattersHoldsAccountsCreate
+    VaultMattersHoldsAccountsCreateResource,
+    VaultMattersHoldsAccountsCreate (..),
+    newVaultMattersHoldsAccountsCreate,
 
     -- ** vault.matters.holds.accounts.delete
-    , VaultMattersHoldsAccountsDeleteResource
-    , VaultMattersHoldsAccountsDelete (..)
-    , newVaultMattersHoldsAccountsDelete
+    VaultMattersHoldsAccountsDeleteResource,
+    VaultMattersHoldsAccountsDelete (..),
+    newVaultMattersHoldsAccountsDelete,
 
     -- ** vault.matters.holds.accounts.list
-    , VaultMattersHoldsAccountsListResource
-    , VaultMattersHoldsAccountsList (..)
-    , newVaultMattersHoldsAccountsList
+    VaultMattersHoldsAccountsListResource,
+    VaultMattersHoldsAccountsList (..),
+    newVaultMattersHoldsAccountsList,
 
     -- ** vault.matters.holds.addHeldAccounts
-    , VaultMattersHoldsAddHeldAccountsResource
-    , VaultMattersHoldsAddHeldAccounts (..)
-    , newVaultMattersHoldsAddHeldAccounts
+    VaultMattersHoldsAddHeldAccountsResource,
+    VaultMattersHoldsAddHeldAccounts (..),
+    newVaultMattersHoldsAddHeldAccounts,
 
     -- ** vault.matters.holds.create
-    , VaultMattersHoldsCreateResource
-    , VaultMattersHoldsCreate (..)
-    , newVaultMattersHoldsCreate
+    VaultMattersHoldsCreateResource,
+    VaultMattersHoldsCreate (..),
+    newVaultMattersHoldsCreate,
 
     -- ** vault.matters.holds.delete
-    , VaultMattersHoldsDeleteResource
-    , VaultMattersHoldsDelete (..)
-    , newVaultMattersHoldsDelete
+    VaultMattersHoldsDeleteResource,
+    VaultMattersHoldsDelete (..),
+    newVaultMattersHoldsDelete,
 
     -- ** vault.matters.holds.get
-    , VaultMattersHoldsGetResource
-    , VaultMattersHoldsGet (..)
-    , newVaultMattersHoldsGet
+    VaultMattersHoldsGetResource,
+    VaultMattersHoldsGet (..),
+    newVaultMattersHoldsGet,
 
     -- ** vault.matters.holds.list
-    , VaultMattersHoldsListResource
-    , VaultMattersHoldsList (..)
-    , newVaultMattersHoldsList
+    VaultMattersHoldsListResource,
+    VaultMattersHoldsList (..),
+    newVaultMattersHoldsList,
 
     -- ** vault.matters.holds.removeHeldAccounts
-    , VaultMattersHoldsRemoveHeldAccountsResource
-    , VaultMattersHoldsRemoveHeldAccounts (..)
-    , newVaultMattersHoldsRemoveHeldAccounts
+    VaultMattersHoldsRemoveHeldAccountsResource,
+    VaultMattersHoldsRemoveHeldAccounts (..),
+    newVaultMattersHoldsRemoveHeldAccounts,
 
     -- ** vault.matters.holds.update
-    , VaultMattersHoldsUpdateResource
-    , VaultMattersHoldsUpdate (..)
-    , newVaultMattersHoldsUpdate
+    VaultMattersHoldsUpdateResource,
+    VaultMattersHoldsUpdate (..),
+    newVaultMattersHoldsUpdate,
 
     -- ** vault.matters.list
-    , VaultMattersListResource
-    , VaultMattersList (..)
-    , newVaultMattersList
+    VaultMattersListResource,
+    VaultMattersList (..),
+    newVaultMattersList,
 
     -- ** vault.matters.removePermissions
-    , VaultMattersRemovePermissionsResource
-    , VaultMattersRemovePermissions (..)
-    , newVaultMattersRemovePermissions
+    VaultMattersRemovePermissionsResource,
+    VaultMattersRemovePermissions (..),
+    newVaultMattersRemovePermissions,
 
     -- ** vault.matters.reopen
-    , VaultMattersReopenResource
-    , VaultMattersReopen (..)
-    , newVaultMattersReopen
+    VaultMattersReopenResource,
+    VaultMattersReopen (..),
+    newVaultMattersReopen,
 
     -- ** vault.matters.savedQueries.create
-    , VaultMattersSavedQueriesCreateResource
-    , VaultMattersSavedQueriesCreate (..)
-    , newVaultMattersSavedQueriesCreate
+    VaultMattersSavedQueriesCreateResource,
+    VaultMattersSavedQueriesCreate (..),
+    newVaultMattersSavedQueriesCreate,
 
     -- ** vault.matters.savedQueries.delete
-    , VaultMattersSavedQueriesDeleteResource
-    , VaultMattersSavedQueriesDelete (..)
-    , newVaultMattersSavedQueriesDelete
+    VaultMattersSavedQueriesDeleteResource,
+    VaultMattersSavedQueriesDelete (..),
+    newVaultMattersSavedQueriesDelete,
 
     -- ** vault.matters.savedQueries.get
-    , VaultMattersSavedQueriesGetResource
-    , VaultMattersSavedQueriesGet (..)
-    , newVaultMattersSavedQueriesGet
+    VaultMattersSavedQueriesGetResource,
+    VaultMattersSavedQueriesGet (..),
+    newVaultMattersSavedQueriesGet,
 
     -- ** vault.matters.savedQueries.list
-    , VaultMattersSavedQueriesListResource
-    , VaultMattersSavedQueriesList (..)
-    , newVaultMattersSavedQueriesList
+    VaultMattersSavedQueriesListResource,
+    VaultMattersSavedQueriesList (..),
+    newVaultMattersSavedQueriesList,
 
     -- ** vault.matters.undelete
-    , VaultMattersUndeleteResource
-    , VaultMattersUndelete (..)
-    , newVaultMattersUndelete
+    VaultMattersUndeleteResource,
+    VaultMattersUndelete (..),
+    newVaultMattersUndelete,
 
     -- ** vault.matters.update
-    , VaultMattersUpdateResource
-    , VaultMattersUpdate (..)
-    , newVaultMattersUpdate
+    VaultMattersUpdateResource,
+    VaultMattersUpdate (..),
+    newVaultMattersUpdate,
 
     -- ** vault.operations.cancel
-    , VaultOperationsCancelResource
-    , VaultOperationsCancel (..)
-    , newVaultOperationsCancel
+    VaultOperationsCancelResource,
+    VaultOperationsCancel (..),
+    newVaultOperationsCancel,
 
     -- ** vault.operations.delete
-    , VaultOperationsDeleteResource
-    , VaultOperationsDelete (..)
-    , newVaultOperationsDelete
+    VaultOperationsDeleteResource,
+    VaultOperationsDelete (..),
+    newVaultOperationsDelete,
 
     -- ** vault.operations.get
-    , VaultOperationsGetResource
-    , VaultOperationsGet (..)
-    , newVaultOperationsGet
+    VaultOperationsGetResource,
+    VaultOperationsGet (..),
+    newVaultOperationsGet,
 
     -- ** vault.operations.list
-    , VaultOperationsListResource
-    , VaultOperationsList (..)
-    , newVaultOperationsList
+    VaultOperationsListResource,
+    VaultOperationsList (..),
+    newVaultOperationsList,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AccountCount
-    , AccountCount (..)
-    , newAccountCount
+    AccountCount (..),
+    newAccountCount,
 
     -- ** AccountCountError
-    , AccountCountError (..)
-    , newAccountCountError
+    AccountCountError (..),
+    newAccountCountError,
 
     -- ** AccountCountError_ErrorType
-    , AccountCountError_ErrorType (..)
+    AccountCountError_ErrorType (..),
 
     -- ** AccountInfo
-    , AccountInfo (..)
-    , newAccountInfo
+    AccountInfo (..),
+    newAccountInfo,
 
     -- ** AddHeldAccountResult
-    , AddHeldAccountResult (..)
-    , newAddHeldAccountResult
+    AddHeldAccountResult (..),
+    newAddHeldAccountResult,
 
     -- ** AddHeldAccountsRequest
-    , AddHeldAccountsRequest (..)
-    , newAddHeldAccountsRequest
+    AddHeldAccountsRequest (..),
+    newAddHeldAccountsRequest,
 
     -- ** AddHeldAccountsResponse
-    , AddHeldAccountsResponse (..)
-    , newAddHeldAccountsResponse
+    AddHeldAccountsResponse (..),
+    newAddHeldAccountsResponse,
 
     -- ** AddMatterPermissionsRequest
-    , AddMatterPermissionsRequest (..)
-    , newAddMatterPermissionsRequest
+    AddMatterPermissionsRequest (..),
+    newAddMatterPermissionsRequest,
 
     -- ** CalendarExportOptions
-    , CalendarExportOptions (..)
-    , newCalendarExportOptions
+    CalendarExportOptions (..),
+    newCalendarExportOptions,
 
     -- ** CalendarExportOptions_ExportFormat
-    , CalendarExportOptions_ExportFormat (..)
+    CalendarExportOptions_ExportFormat (..),
 
     -- ** CalendarOptions
-    , CalendarOptions (..)
-    , newCalendarOptions
+    CalendarOptions (..),
+    newCalendarOptions,
 
     -- ** CalendarOptions_ResponseStatusesItem
-    , CalendarOptions_ResponseStatusesItem (..)
+    CalendarOptions_ResponseStatusesItem (..),
 
     -- ** CancelOperationRequest
-    , CancelOperationRequest (..)
-    , newCancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
     -- ** CloseMatterRequest
-    , CloseMatterRequest (..)
-    , newCloseMatterRequest
+    CloseMatterRequest (..),
+    newCloseMatterRequest,
 
     -- ** CloseMatterResponse
-    , CloseMatterResponse (..)
-    , newCloseMatterResponse
+    CloseMatterResponse (..),
+    newCloseMatterResponse,
 
     -- ** CloudStorageFile
-    , CloudStorageFile (..)
-    , newCloudStorageFile
+    CloudStorageFile (..),
+    newCloudStorageFile,
 
     -- ** CloudStorageSink
-    , CloudStorageSink (..)
-    , newCloudStorageSink
+    CloudStorageSink (..),
+    newCloudStorageSink,
 
     -- ** CorpusQuery
-    , CorpusQuery (..)
-    , newCorpusQuery
+    CorpusQuery (..),
+    newCorpusQuery,
 
     -- ** CountArtifactsMetadata
-    , CountArtifactsMetadata (..)
-    , newCountArtifactsMetadata
+    CountArtifactsMetadata (..),
+    newCountArtifactsMetadata,
 
     -- ** CountArtifactsRequest
-    , CountArtifactsRequest (..)
-    , newCountArtifactsRequest
+    CountArtifactsRequest (..),
+    newCountArtifactsRequest,
 
     -- ** CountArtifactsRequest_View
-    , CountArtifactsRequest_View (..)
+    CountArtifactsRequest_View (..),
 
     -- ** CountArtifactsResponse
-    , CountArtifactsResponse (..)
-    , newCountArtifactsResponse
+    CountArtifactsResponse (..),
+    newCountArtifactsResponse,
 
     -- ** DriveExportOptions
-    , DriveExportOptions (..)
-    , newDriveExportOptions
+    DriveExportOptions (..),
+    newDriveExportOptions,
 
     -- ** DriveOptions
-    , DriveOptions (..)
-    , newDriveOptions
+    DriveOptions (..),
+    newDriveOptions,
 
     -- ** DriveOptions_ClientSideEncryptedOption
-    , DriveOptions_ClientSideEncryptedOption (..)
+    DriveOptions_ClientSideEncryptedOption (..),
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** Export
-    , Export (..)
-    , newExport
+    Export (..),
+    newExport,
 
     -- ** Export_Status
-    , Export_Status (..)
+    Export_Status (..),
 
     -- ** ExportOptions
-    , ExportOptions (..)
-    , newExportOptions
+    ExportOptions (..),
+    newExportOptions,
 
     -- ** ExportOptions_Region
-    , ExportOptions_Region (..)
+    ExportOptions_Region (..),
 
     -- ** ExportStats
-    , ExportStats (..)
-    , newExportStats
+    ExportStats (..),
+    newExportStats,
 
     -- ** GroupsCountResult
-    , GroupsCountResult (..)
-    , newGroupsCountResult
+    GroupsCountResult (..),
+    newGroupsCountResult,
 
     -- ** GroupsExportOptions
-    , GroupsExportOptions (..)
-    , newGroupsExportOptions
+    GroupsExportOptions (..),
+    newGroupsExportOptions,
 
     -- ** GroupsExportOptions_ExportFormat
-    , GroupsExportOptions_ExportFormat (..)
+    GroupsExportOptions_ExportFormat (..),
 
     -- ** HangoutsChatExportOptions
-    , HangoutsChatExportOptions (..)
-    , newHangoutsChatExportOptions
+    HangoutsChatExportOptions (..),
+    newHangoutsChatExportOptions,
 
     -- ** HangoutsChatExportOptions_ExportFormat
-    , HangoutsChatExportOptions_ExportFormat (..)
+    HangoutsChatExportOptions_ExportFormat (..),
 
     -- ** HangoutsChatInfo
-    , HangoutsChatInfo (..)
-    , newHangoutsChatInfo
+    HangoutsChatInfo (..),
+    newHangoutsChatInfo,
 
     -- ** HangoutsChatOptions
-    , HangoutsChatOptions (..)
-    , newHangoutsChatOptions
+    HangoutsChatOptions (..),
+    newHangoutsChatOptions,
 
     -- ** HeldAccount
-    , HeldAccount (..)
-    , newHeldAccount
+    HeldAccount (..),
+    newHeldAccount,
 
     -- ** HeldCalendarQuery
-    , HeldCalendarQuery (..)
-    , newHeldCalendarQuery
+    HeldCalendarQuery (..),
+    newHeldCalendarQuery,
 
     -- ** HeldDriveQuery
-    , HeldDriveQuery (..)
-    , newHeldDriveQuery
+    HeldDriveQuery (..),
+    newHeldDriveQuery,
 
     -- ** HeldGroupsQuery
-    , HeldGroupsQuery (..)
-    , newHeldGroupsQuery
+    HeldGroupsQuery (..),
+    newHeldGroupsQuery,
 
     -- ** HeldHangoutsChatQuery
-    , HeldHangoutsChatQuery (..)
-    , newHeldHangoutsChatQuery
+    HeldHangoutsChatQuery (..),
+    newHeldHangoutsChatQuery,
 
     -- ** HeldMailQuery
-    , HeldMailQuery (..)
-    , newHeldMailQuery
+    HeldMailQuery (..),
+    newHeldMailQuery,
 
     -- ** HeldOrgUnit
-    , HeldOrgUnit (..)
-    , newHeldOrgUnit
+    HeldOrgUnit (..),
+    newHeldOrgUnit,
 
     -- ** HeldVoiceQuery
-    , HeldVoiceQuery (..)
-    , newHeldVoiceQuery
+    HeldVoiceQuery (..),
+    newHeldVoiceQuery,
 
     -- ** HeldVoiceQuery_CoveredDataItem
-    , HeldVoiceQuery_CoveredDataItem (..)
+    HeldVoiceQuery_CoveredDataItem (..),
 
     -- ** Hold
-    , Hold (..)
-    , newHold
+    Hold (..),
+    newHold,
 
     -- ** Hold_Corpus
-    , Hold_Corpus (..)
+    Hold_Corpus (..),
 
     -- ** ListExportsResponse
-    , ListExportsResponse (..)
-    , newListExportsResponse
+    ListExportsResponse (..),
+    newListExportsResponse,
 
     -- ** ListHeldAccountsResponse
-    , ListHeldAccountsResponse (..)
-    , newListHeldAccountsResponse
+    ListHeldAccountsResponse (..),
+    newListHeldAccountsResponse,
 
     -- ** ListHoldsResponse
-    , ListHoldsResponse (..)
-    , newListHoldsResponse
+    ListHoldsResponse (..),
+    newListHoldsResponse,
 
     -- ** ListMattersResponse
-    , ListMattersResponse (..)
-    , newListMattersResponse
+    ListMattersResponse (..),
+    newListMattersResponse,
 
     -- ** ListOperationsResponse
-    , ListOperationsResponse (..)
-    , newListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
     -- ** ListSavedQueriesResponse
-    , ListSavedQueriesResponse (..)
-    , newListSavedQueriesResponse
+    ListSavedQueriesResponse (..),
+    newListSavedQueriesResponse,
 
     -- ** MailCountResult
-    , MailCountResult (..)
-    , newMailCountResult
+    MailCountResult (..),
+    newMailCountResult,
 
     -- ** MailExportOptions
-    , MailExportOptions (..)
-    , newMailExportOptions
+    MailExportOptions (..),
+    newMailExportOptions,
 
     -- ** MailExportOptions_ExportFormat
-    , MailExportOptions_ExportFormat (..)
+    MailExportOptions_ExportFormat (..),
 
     -- ** MailOptions
-    , MailOptions (..)
-    , newMailOptions
+    MailOptions (..),
+    newMailOptions,
 
     -- ** MailOptions_ClientSideEncryptedOption
-    , MailOptions_ClientSideEncryptedOption (..)
+    MailOptions_ClientSideEncryptedOption (..),
 
     -- ** Matter
-    , Matter (..)
-    , newMatter
+    Matter (..),
+    newMatter,
 
     -- ** Matter_MatterRegion
-    , Matter_MatterRegion (..)
+    Matter_MatterRegion (..),
 
     -- ** Matter_State
-    , Matter_State (..)
+    Matter_State (..),
 
     -- ** MatterPermission
-    , MatterPermission (..)
-    , newMatterPermission
+    MatterPermission (..),
+    newMatterPermission,
 
     -- ** MatterPermission_Role
-    , MatterPermission_Role (..)
+    MatterPermission_Role (..),
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** OrgUnitInfo
-    , OrgUnitInfo (..)
-    , newOrgUnitInfo
+    OrgUnitInfo (..),
+    newOrgUnitInfo,
 
     -- ** Query
-    , Query (..)
-    , newQuery
+    Query (..),
+    newQuery,
 
     -- ** Query_Corpus
-    , Query_Corpus (..)
+    Query_Corpus (..),
 
     -- ** Query_DataScope
-    , Query_DataScope (..)
+    Query_DataScope (..),
 
     -- ** Query_Method
-    , Query_Method (..)
+    Query_Method (..),
 
     -- ** Query_SearchMethod
-    , Query_SearchMethod (..)
+    Query_SearchMethod (..),
 
     -- ** RemoveHeldAccountsRequest
-    , RemoveHeldAccountsRequest (..)
-    , newRemoveHeldAccountsRequest
+    RemoveHeldAccountsRequest (..),
+    newRemoveHeldAccountsRequest,
 
     -- ** RemoveHeldAccountsResponse
-    , RemoveHeldAccountsResponse (..)
-    , newRemoveHeldAccountsResponse
+    RemoveHeldAccountsResponse (..),
+    newRemoveHeldAccountsResponse,
 
     -- ** RemoveMatterPermissionsRequest
-    , RemoveMatterPermissionsRequest (..)
-    , newRemoveMatterPermissionsRequest
+    RemoveMatterPermissionsRequest (..),
+    newRemoveMatterPermissionsRequest,
 
     -- ** ReopenMatterRequest
-    , ReopenMatterRequest (..)
-    , newReopenMatterRequest
+    ReopenMatterRequest (..),
+    newReopenMatterRequest,
 
     -- ** ReopenMatterResponse
-    , ReopenMatterResponse (..)
-    , newReopenMatterResponse
+    ReopenMatterResponse (..),
+    newReopenMatterResponse,
 
     -- ** SavedQuery
-    , SavedQuery (..)
-    , newSavedQuery
+    SavedQuery (..),
+    newSavedQuery,
 
     -- ** SharedDriveInfo
-    , SharedDriveInfo (..)
-    , newSharedDriveInfo
+    SharedDriveInfo (..),
+    newSharedDriveInfo,
 
     -- ** SitesUrlInfo
-    , SitesUrlInfo (..)
-    , newSitesUrlInfo
+    SitesUrlInfo (..),
+    newSitesUrlInfo,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** TeamDriveInfo
-    , TeamDriveInfo (..)
-    , newTeamDriveInfo
+    TeamDriveInfo (..),
+    newTeamDriveInfo,
 
     -- ** UndeleteMatterRequest
-    , UndeleteMatterRequest (..)
-    , newUndeleteMatterRequest
+    UndeleteMatterRequest (..),
+    newUndeleteMatterRequest,
 
     -- ** UserInfo
-    , UserInfo (..)
-    , newUserInfo
+    UserInfo (..),
+    newUserInfo,
 
     -- ** VoiceExportOptions
-    , VoiceExportOptions (..)
-    , newVoiceExportOptions
+    VoiceExportOptions (..),
+    newVoiceExportOptions,
 
     -- ** VoiceExportOptions_ExportFormat
-    , VoiceExportOptions_ExportFormat (..)
+    VoiceExportOptions_ExportFormat (..),
 
     -- ** VoiceOptions
-    , VoiceOptions (..)
-    , newVoiceOptions
+    VoiceOptions (..),
+    newVoiceOptions,
 
     -- ** VoiceOptions_CoveredDataItem
-    , VoiceOptions_CoveredDataItem (..)
+    VoiceOptions_CoveredDataItem (..),
 
     -- ** MattersGetView
-    , MattersGetView (..)
+    MattersGetView (..),
 
     -- ** MattersHoldsGetView
-    , MattersHoldsGetView (..)
+    MattersHoldsGetView (..),
 
     -- ** MattersHoldsListView
-    , MattersHoldsListView (..)
+    MattersHoldsListView (..),
 
     -- ** MattersListState
-    , MattersListState (..)
+    MattersListState (..),
 
     -- ** MattersListView
-    , MattersListView (..)
-    ) where
+    MattersListView (..),
+  )
+where
 
 import Gogol.Vault.Matters.AddPermissions
 import Gogol.Vault.Matters.Close

@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,114 +16,115 @@
 
 -- |
 -- Module      : Gogol.DoubleClickBids.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.DoubleClickBids.Types
-    (
-    -- * Configuration
-      doubleClickBidsService
+  ( -- * Configuration
+    doubleClickBidsService,
 
     -- * OAuth Scopes
-    , Doubleclickbidmanager'FullControl
+    Doubleclickbidmanager'FullControl,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** DataRange
-    , DataRange (..)
-    , newDataRange
+    DataRange (..),
+    newDataRange,
 
     -- ** DataRange_Range
-    , DataRange_Range (..)
+    DataRange_Range (..),
 
     -- ** Date
-    , Date (..)
-    , newDate
+    Date (..),
+    newDate,
 
     -- ** FilterPair
-    , FilterPair (..)
-    , newFilterPair
+    FilterPair (..),
+    newFilterPair,
 
     -- ** ListQueriesResponse
-    , ListQueriesResponse (..)
-    , newListQueriesResponse
+    ListQueriesResponse (..),
+    newListQueriesResponse,
 
     -- ** ListReportsResponse
-    , ListReportsResponse (..)
-    , newListReportsResponse
+    ListReportsResponse (..),
+    newListReportsResponse,
 
     -- ** Options
-    , Options (..)
-    , newOptions
+    Options (..),
+    newOptions,
 
     -- ** Parameters
-    , Parameters (..)
-    , newParameters
+    Parameters (..),
+    newParameters,
 
     -- ** Parameters_Type
-    , Parameters_Type (..)
+    Parameters_Type (..),
 
     -- ** Query
-    , Query (..)
-    , newQuery
+    Query (..),
+    newQuery,
 
     -- ** QueryMetadata
-    , QueryMetadata (..)
-    , newQueryMetadata
+    QueryMetadata (..),
+    newQueryMetadata,
 
     -- ** QueryMetadata_Format
-    , QueryMetadata_Format (..)
+    QueryMetadata_Format (..),
 
     -- ** QuerySchedule
-    , QuerySchedule (..)
-    , newQuerySchedule
+    QuerySchedule (..),
+    newQuerySchedule,
 
     -- ** QuerySchedule_Frequency
-    , QuerySchedule_Frequency (..)
+    QuerySchedule_Frequency (..),
 
     -- ** Report
-    , Report (..)
-    , newReport
+    Report (..),
+    newReport,
 
     -- ** ReportKey
-    , ReportKey (..)
-    , newReportKey
+    ReportKey (..),
+    newReportKey,
 
     -- ** ReportMetadata
-    , ReportMetadata (..)
-    , newReportMetadata
+    ReportMetadata (..),
+    newReportMetadata,
 
     -- ** ReportStatus
-    , ReportStatus (..)
-    , newReportStatus
+    ReportStatus (..),
+    newReportStatus,
 
     -- ** ReportStatus_Format
-    , ReportStatus_Format (..)
+    ReportStatus_Format (..),
 
     -- ** ReportStatus_State
-    , ReportStatus_State (..)
+    ReportStatus_State (..),
 
     -- ** RunQueryRequest
-    , RunQueryRequest (..)
-    , newRunQueryRequest
-    ) where
+    RunQueryRequest (..),
+    newRunQueryRequest,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.DoubleClickBids.Internal.Product
 import Gogol.DoubleClickBids.Internal.Sum
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v2@ of the DoubleClick Bid Manager API. This contains the host and root path used as a starting point for constructing service requests.
 doubleClickBidsService :: Core.ServiceConfig
-doubleClickBidsService
-  = Core.defaultService
-      (Core.ServiceId "doubleclickbidmanager:v2")
-      "doubleclickbidmanager.googleapis.com"
+doubleClickBidsService =
+  Core.defaultService
+    (Core.ServiceId "doubleclickbidmanager:v2")
+    "doubleclickbidmanager.googleapis.com"
 
 -- | View and manage your reports in DoubleClick Bid Manager
-type Doubleclickbidmanager'FullControl = "https://www.googleapis.com/auth/doubleclickbidmanager"
+type Doubleclickbidmanager'FullControl =
+  "https://www.googleapis.com/auth/doubleclickbidmanager"

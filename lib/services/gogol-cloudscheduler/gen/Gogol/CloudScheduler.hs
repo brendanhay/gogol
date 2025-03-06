@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.CloudScheduler
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,219 +27,219 @@
 --
 -- /See:/ <https://cloud.google.com/scheduler/ Cloud Scheduler API Reference>
 module Gogol.CloudScheduler
-    (
-    -- * Configuration
-      cloudSchedulerService
+  ( -- * Configuration
+    cloudSchedulerService,
 
     -- * OAuth Scopes
-    , CloudPlatform'FullControl
+    CloudPlatform'FullControl,
 
     -- * Resources
 
     -- ** cloudscheduler.operations.cancel
-    , CloudSchedulerOperationsCancelResource
-    , CloudSchedulerOperationsCancel (..)
-    , newCloudSchedulerOperationsCancel
+    CloudSchedulerOperationsCancelResource,
+    CloudSchedulerOperationsCancel (..),
+    newCloudSchedulerOperationsCancel,
 
     -- ** cloudscheduler.operations.delete
-    , CloudSchedulerOperationsDeleteResource
-    , CloudSchedulerOperationsDelete (..)
-    , newCloudSchedulerOperationsDelete
+    CloudSchedulerOperationsDeleteResource,
+    CloudSchedulerOperationsDelete (..),
+    newCloudSchedulerOperationsDelete,
 
     -- ** cloudscheduler.operations.get
-    , CloudSchedulerOperationsGetResource
-    , CloudSchedulerOperationsGet (..)
-    , newCloudSchedulerOperationsGet
+    CloudSchedulerOperationsGetResource,
+    CloudSchedulerOperationsGet (..),
+    newCloudSchedulerOperationsGet,
 
     -- ** cloudscheduler.operations.list
-    , CloudSchedulerOperationsListResource
-    , CloudSchedulerOperationsList (..)
-    , newCloudSchedulerOperationsList
+    CloudSchedulerOperationsListResource,
+    CloudSchedulerOperationsList (..),
+    newCloudSchedulerOperationsList,
 
     -- ** cloudscheduler.projects.locations.get
-    , CloudSchedulerProjectsLocationsGetResource
-    , CloudSchedulerProjectsLocationsGet (..)
-    , newCloudSchedulerProjectsLocationsGet
+    CloudSchedulerProjectsLocationsGetResource,
+    CloudSchedulerProjectsLocationsGet (..),
+    newCloudSchedulerProjectsLocationsGet,
 
     -- ** cloudscheduler.projects.locations.jobs.create
-    , CloudSchedulerProjectsLocationsJobsCreateResource
-    , CloudSchedulerProjectsLocationsJobsCreate (..)
-    , newCloudSchedulerProjectsLocationsJobsCreate
+    CloudSchedulerProjectsLocationsJobsCreateResource,
+    CloudSchedulerProjectsLocationsJobsCreate (..),
+    newCloudSchedulerProjectsLocationsJobsCreate,
 
     -- ** cloudscheduler.projects.locations.jobs.delete
-    , CloudSchedulerProjectsLocationsJobsDeleteResource
-    , CloudSchedulerProjectsLocationsJobsDelete (..)
-    , newCloudSchedulerProjectsLocationsJobsDelete
+    CloudSchedulerProjectsLocationsJobsDeleteResource,
+    CloudSchedulerProjectsLocationsJobsDelete (..),
+    newCloudSchedulerProjectsLocationsJobsDelete,
 
     -- ** cloudscheduler.projects.locations.jobs.get
-    , CloudSchedulerProjectsLocationsJobsGetResource
-    , CloudSchedulerProjectsLocationsJobsGet (..)
-    , newCloudSchedulerProjectsLocationsJobsGet
+    CloudSchedulerProjectsLocationsJobsGetResource,
+    CloudSchedulerProjectsLocationsJobsGet (..),
+    newCloudSchedulerProjectsLocationsJobsGet,
 
     -- ** cloudscheduler.projects.locations.jobs.list
-    , CloudSchedulerProjectsLocationsJobsListResource
-    , CloudSchedulerProjectsLocationsJobsList (..)
-    , newCloudSchedulerProjectsLocationsJobsList
+    CloudSchedulerProjectsLocationsJobsListResource,
+    CloudSchedulerProjectsLocationsJobsList (..),
+    newCloudSchedulerProjectsLocationsJobsList,
 
     -- ** cloudscheduler.projects.locations.jobs.patch
-    , CloudSchedulerProjectsLocationsJobsPatchResource
-    , CloudSchedulerProjectsLocationsJobsPatch (..)
-    , newCloudSchedulerProjectsLocationsJobsPatch
+    CloudSchedulerProjectsLocationsJobsPatchResource,
+    CloudSchedulerProjectsLocationsJobsPatch (..),
+    newCloudSchedulerProjectsLocationsJobsPatch,
 
     -- ** cloudscheduler.projects.locations.jobs.pause
-    , CloudSchedulerProjectsLocationsJobsPauseResource
-    , CloudSchedulerProjectsLocationsJobsPause (..)
-    , newCloudSchedulerProjectsLocationsJobsPause
+    CloudSchedulerProjectsLocationsJobsPauseResource,
+    CloudSchedulerProjectsLocationsJobsPause (..),
+    newCloudSchedulerProjectsLocationsJobsPause,
 
     -- ** cloudscheduler.projects.locations.jobs.resume
-    , CloudSchedulerProjectsLocationsJobsResumeResource
-    , CloudSchedulerProjectsLocationsJobsResume (..)
-    , newCloudSchedulerProjectsLocationsJobsResume
+    CloudSchedulerProjectsLocationsJobsResumeResource,
+    CloudSchedulerProjectsLocationsJobsResume (..),
+    newCloudSchedulerProjectsLocationsJobsResume,
 
     -- ** cloudscheduler.projects.locations.jobs.run
-    , CloudSchedulerProjectsLocationsJobsRunResource
-    , CloudSchedulerProjectsLocationsJobsRun (..)
-    , newCloudSchedulerProjectsLocationsJobsRun
+    CloudSchedulerProjectsLocationsJobsRunResource,
+    CloudSchedulerProjectsLocationsJobsRun (..),
+    newCloudSchedulerProjectsLocationsJobsRun,
 
     -- ** cloudscheduler.projects.locations.list
-    , CloudSchedulerProjectsLocationsListResource
-    , CloudSchedulerProjectsLocationsList (..)
-    , newCloudSchedulerProjectsLocationsList
+    CloudSchedulerProjectsLocationsListResource,
+    CloudSchedulerProjectsLocationsList (..),
+    newCloudSchedulerProjectsLocationsList,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AppEngineHttpTarget
-    , AppEngineHttpTarget (..)
-    , newAppEngineHttpTarget
+    AppEngineHttpTarget (..),
+    newAppEngineHttpTarget,
 
     -- ** AppEngineHttpTarget_Headers
-    , AppEngineHttpTarget_Headers (..)
-    , newAppEngineHttpTarget_Headers
+    AppEngineHttpTarget_Headers (..),
+    newAppEngineHttpTarget_Headers,
 
     -- ** AppEngineHttpTarget_HttpMethod
-    , AppEngineHttpTarget_HttpMethod (..)
+    AppEngineHttpTarget_HttpMethod (..),
 
     -- ** AppEngineRouting
-    , AppEngineRouting (..)
-    , newAppEngineRouting
+    AppEngineRouting (..),
+    newAppEngineRouting,
 
     -- ** CancelOperationRequest
-    , CancelOperationRequest (..)
-    , newCancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** HttpTarget
-    , HttpTarget (..)
-    , newHttpTarget
+    HttpTarget (..),
+    newHttpTarget,
 
     -- ** HttpTarget_Headers
-    , HttpTarget_Headers (..)
-    , newHttpTarget_Headers
+    HttpTarget_Headers (..),
+    newHttpTarget_Headers,
 
     -- ** HttpTarget_HttpMethod
-    , HttpTarget_HttpMethod (..)
+    HttpTarget_HttpMethod (..),
 
     -- ** Job
-    , Job (..)
-    , newJob
+    Job (..),
+    newJob,
 
     -- ** Job_State
-    , Job_State (..)
+    Job_State (..),
 
     -- ** ListJobsResponse
-    , ListJobsResponse (..)
-    , newListJobsResponse
+    ListJobsResponse (..),
+    newListJobsResponse,
 
     -- ** ListLocationsResponse
-    , ListLocationsResponse (..)
-    , newListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
 
     -- ** ListOperationsResponse
-    , ListOperationsResponse (..)
-    , newListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
     -- ** Location
-    , Location (..)
-    , newLocation
+    Location (..),
+    newLocation,
 
     -- ** Location_Labels
-    , Location_Labels (..)
-    , newLocation_Labels
+    Location_Labels (..),
+    newLocation_Labels,
 
     -- ** Location_Metadata
-    , Location_Metadata (..)
-    , newLocation_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
 
     -- ** OAuthToken
-    , OAuthToken (..)
-    , newOAuthToken
+    OAuthToken (..),
+    newOAuthToken,
 
     -- ** OidcToken
-    , OidcToken (..)
-    , newOidcToken
+    OidcToken (..),
+    newOidcToken,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** OperationMetadata
-    , OperationMetadata (..)
-    , newOperationMetadata
+    OperationMetadata (..),
+    newOperationMetadata,
 
     -- ** PauseJobRequest
-    , PauseJobRequest (..)
-    , newPauseJobRequest
+    PauseJobRequest (..),
+    newPauseJobRequest,
 
     -- ** PubsubMessage
-    , PubsubMessage (..)
-    , newPubsubMessage
+    PubsubMessage (..),
+    newPubsubMessage,
 
     -- ** PubsubMessage_Attributes
-    , PubsubMessage_Attributes (..)
-    , newPubsubMessage_Attributes
+    PubsubMessage_Attributes (..),
+    newPubsubMessage_Attributes,
 
     -- ** PubsubTarget
-    , PubsubTarget (..)
-    , newPubsubTarget
+    PubsubTarget (..),
+    newPubsubTarget,
 
     -- ** PubsubTarget_Attributes
-    , PubsubTarget_Attributes (..)
-    , newPubsubTarget_Attributes
+    PubsubTarget_Attributes (..),
+    newPubsubTarget_Attributes,
 
     -- ** ResumeJobRequest
-    , ResumeJobRequest (..)
-    , newResumeJobRequest
+    ResumeJobRequest (..),
+    newResumeJobRequest,
 
     -- ** RetryConfig
-    , RetryConfig (..)
-    , newRetryConfig
+    RetryConfig (..),
+    newRetryConfig,
 
     -- ** RunJobRequest
-    , RunJobRequest (..)
-    , newRunJobRequest
+    RunJobRequest (..),
+    newRunJobRequest,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
-    ) where
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+  )
+where
 
 import Gogol.CloudScheduler.Operations.Cancel
 import Gogol.CloudScheduler.Operations.Delete

@@ -1,19 +1,24 @@
-cabal-version:         2.2
-name:                  gogol-chat
-version:               1.0.0
-synopsis:              Google Chat SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-chat
+version:            1.0.0
+synopsis:           Google Chat SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:
+  Brendan Hay <brendan.g.hay+gogol@gmail.com>, Toni Cebrián <toni@tonicebrian.com>
+
+copyright:          Copyright (c) 2015-2025 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    The Google Chat API lets you build Chat apps to integrate your services with Google Chat and manage Chat resources such as spaces, members, and messages.
+  The Google Chat API lets you build Chat apps to integrate your services with Google Chat and manage Chat resources such as spaces, members, and messages.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -27,63 +32,60 @@ source-repository head
   subdir:   gogol-chat
 
 flag field-selectors
-  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-  default: False
-  manual: True
+  description:
+    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+
+  default:     False
+  manual:      True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: GHC2021
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -Werror
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if !flag(field-selectors) && impl(ghc >= 9.2)
+  if (!flag(field-selectors) && impl(ghc >=9.2))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.Chat
-    , Gogol.Chat.Media.Download
-    , Gogol.Chat.Media.Upload
-    , Gogol.Chat.Spaces.CompleteImport
-    , Gogol.Chat.Spaces.Create
-    , Gogol.Chat.Spaces.Delete
-    , Gogol.Chat.Spaces.FindDirectMessage
-    , Gogol.Chat.Spaces.Get
-    , Gogol.Chat.Spaces.List
-    , Gogol.Chat.Spaces.Members.Create
-    , Gogol.Chat.Spaces.Members.Delete
-    , Gogol.Chat.Spaces.Members.Get
-    , Gogol.Chat.Spaces.Members.List
-    , Gogol.Chat.Spaces.Members.Patch
-    , Gogol.Chat.Spaces.Messages.Attachments.Get
-    , Gogol.Chat.Spaces.Messages.Create
-    , Gogol.Chat.Spaces.Messages.Delete
-    , Gogol.Chat.Spaces.Messages.Get
-    , Gogol.Chat.Spaces.Messages.List
-    , Gogol.Chat.Spaces.Messages.Patch
-    , Gogol.Chat.Spaces.Messages.Reactions.Create
-    , Gogol.Chat.Spaces.Messages.Reactions.Delete
-    , Gogol.Chat.Spaces.Messages.Reactions.List
-    , Gogol.Chat.Spaces.Messages.Update
-    , Gogol.Chat.Spaces.Patch
-    , Gogol.Chat.Spaces.Search
-    , Gogol.Chat.Spaces.Setup
-    , Gogol.Chat.Spaces.SpaceEvents.Get
-    , Gogol.Chat.Spaces.SpaceEvents.List
-    , Gogol.Chat.Types
-    , Gogol.Chat.Users.Spaces.GetSpaceReadState
-    , Gogol.Chat.Users.Spaces.Threads.GetThreadReadState
-    , Gogol.Chat.Users.Spaces.UpdateSpaceReadState
+    Gogol.Chat
+    Gogol.Chat.Media.Download
+    Gogol.Chat.Media.Upload
+    Gogol.Chat.Spaces.CompleteImport
+    Gogol.Chat.Spaces.Create
+    Gogol.Chat.Spaces.Delete
+    Gogol.Chat.Spaces.FindDirectMessage
+    Gogol.Chat.Spaces.Get
+    Gogol.Chat.Spaces.List
+    Gogol.Chat.Spaces.Members.Create
+    Gogol.Chat.Spaces.Members.Delete
+    Gogol.Chat.Spaces.Members.Get
+    Gogol.Chat.Spaces.Members.List
+    Gogol.Chat.Spaces.Members.Patch
+    Gogol.Chat.Spaces.Messages.Attachments.Get
+    Gogol.Chat.Spaces.Messages.Create
+    Gogol.Chat.Spaces.Messages.Delete
+    Gogol.Chat.Spaces.Messages.Get
+    Gogol.Chat.Spaces.Messages.List
+    Gogol.Chat.Spaces.Messages.Patch
+    Gogol.Chat.Spaces.Messages.Reactions.Create
+    Gogol.Chat.Spaces.Messages.Reactions.Delete
+    Gogol.Chat.Spaces.Messages.Reactions.List
+    Gogol.Chat.Spaces.Messages.Update
+    Gogol.Chat.Spaces.Patch
+    Gogol.Chat.Spaces.Search
+    Gogol.Chat.Spaces.Setup
+    Gogol.Chat.Spaces.SpaceEvents.Get
+    Gogol.Chat.Spaces.SpaceEvents.List
+    Gogol.Chat.Types
+    Gogol.Chat.Users.Spaces.GetSpaceReadState
+    Gogol.Chat.Users.Spaces.Threads.GetThreadReadState
+    Gogol.Chat.Users.Spaces.UpdateSpaceReadState
 
   other-modules:
-      Gogol.Chat.Internal.Product
-    , Gogol.Chat.Internal.Sum
+    Gogol.Chat.Internal.Product
+    Gogol.Chat.Internal.Sum
 
-  build-depends:
-      gogol-core ^>= 1.0.0
+  build-depends:    gogol-core ^>=1.0.0

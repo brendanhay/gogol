@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.Drive
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,613 +27,613 @@
 --
 -- /See:/ <https://developers.google.com/drive/ Google Drive API Reference>
 module Gogol.Drive
-    (
-    -- * Configuration
-      driveService
+  ( -- * Configuration
+    driveService,
 
     -- * OAuth Scopes
-    , Drive'FullControl
-    , Drive'Appdata
-    , Drive'Apps'Readonly
-    , Drive'File
-    , Drive'Meet'Readonly
-    , Drive'Metadata
-    , Drive'Metadata'Readonly
-    , Drive'Photos'Readonly
-    , Drive'Readonly
-    , Drive'Scripts
+    Drive'FullControl,
+    Drive'Appdata,
+    Drive'Apps'Readonly,
+    Drive'File,
+    Drive'Meet'Readonly,
+    Drive'Metadata,
+    Drive'Metadata'Readonly,
+    Drive'Photos'Readonly,
+    Drive'Readonly,
+    Drive'Scripts,
 
     -- * Resources
 
     -- ** drive.about.get
-    , DriveAboutGetResource
-    , DriveAboutGet (..)
-    , newDriveAboutGet
+    DriveAboutGetResource,
+    DriveAboutGet (..),
+    newDriveAboutGet,
 
     -- ** drive.accessproposals.get
-    , DriveAccessproposalsGetResource
-    , DriveAccessproposalsGet (..)
-    , newDriveAccessproposalsGet
+    DriveAccessproposalsGetResource,
+    DriveAccessproposalsGet (..),
+    newDriveAccessproposalsGet,
 
     -- ** drive.accessproposals.list
-    , DriveAccessproposalsListResource
-    , DriveAccessproposalsList (..)
-    , newDriveAccessproposalsList
+    DriveAccessproposalsListResource,
+    DriveAccessproposalsList (..),
+    newDriveAccessproposalsList,
 
     -- ** drive.accessproposals.resolve
-    , DriveAccessproposalsResolveResource
-    , DriveAccessproposalsResolve (..)
-    , newDriveAccessproposalsResolve
+    DriveAccessproposalsResolveResource,
+    DriveAccessproposalsResolve (..),
+    newDriveAccessproposalsResolve,
 
     -- ** drive.apps.get
-    , DriveAppsGetResource
-    , DriveAppsGet (..)
-    , newDriveAppsGet
+    DriveAppsGetResource,
+    DriveAppsGet (..),
+    newDriveAppsGet,
 
     -- ** drive.apps.list
-    , DriveAppsListResource
-    , DriveAppsList (..)
-    , newDriveAppsList
+    DriveAppsListResource,
+    DriveAppsList (..),
+    newDriveAppsList,
 
     -- ** drive.changes.getStartPageToken
-    , DriveChangesGetStartPageTokenResource
-    , DriveChangesGetStartPageToken (..)
-    , newDriveChangesGetStartPageToken
+    DriveChangesGetStartPageTokenResource,
+    DriveChangesGetStartPageToken (..),
+    newDriveChangesGetStartPageToken,
 
     -- ** drive.changes.list
-    , DriveChangesListResource
-    , DriveChangesList (..)
-    , newDriveChangesList
+    DriveChangesListResource,
+    DriveChangesList (..),
+    newDriveChangesList,
 
     -- ** drive.changes.watch
-    , DriveChangesWatchResource
-    , DriveChangesWatch (..)
-    , newDriveChangesWatch
+    DriveChangesWatchResource,
+    DriveChangesWatch (..),
+    newDriveChangesWatch,
 
     -- ** drive.channels.stop
-    , DriveChannelsStopResource
-    , DriveChannelsStop (..)
-    , newDriveChannelsStop
+    DriveChannelsStopResource,
+    DriveChannelsStop (..),
+    newDriveChannelsStop,
 
     -- ** drive.comments.create
-    , DriveCommentsCreateResource
-    , DriveCommentsCreate (..)
-    , newDriveCommentsCreate
+    DriveCommentsCreateResource,
+    DriveCommentsCreate (..),
+    newDriveCommentsCreate,
 
     -- ** drive.comments.delete
-    , DriveCommentsDeleteResource
-    , DriveCommentsDelete (..)
-    , newDriveCommentsDelete
+    DriveCommentsDeleteResource,
+    DriveCommentsDelete (..),
+    newDriveCommentsDelete,
 
     -- ** drive.comments.get
-    , DriveCommentsGetResource
-    , DriveCommentsGet (..)
-    , newDriveCommentsGet
+    DriveCommentsGetResource,
+    DriveCommentsGet (..),
+    newDriveCommentsGet,
 
     -- ** drive.comments.list
-    , DriveCommentsListResource
-    , DriveCommentsList (..)
-    , newDriveCommentsList
+    DriveCommentsListResource,
+    DriveCommentsList (..),
+    newDriveCommentsList,
 
     -- ** drive.comments.update
-    , DriveCommentsUpdateResource
-    , DriveCommentsUpdate (..)
-    , newDriveCommentsUpdate
+    DriveCommentsUpdateResource,
+    DriveCommentsUpdate (..),
+    newDriveCommentsUpdate,
 
     -- ** drive.drives.create
-    , DriveDrivesCreateResource
-    , DriveDrivesCreate (..)
-    , newDriveDrivesCreate
+    DriveDrivesCreateResource,
+    DriveDrivesCreate (..),
+    newDriveDrivesCreate,
 
     -- ** drive.drives.delete
-    , DriveDrivesDeleteResource
-    , DriveDrivesDelete (..)
-    , newDriveDrivesDelete
+    DriveDrivesDeleteResource,
+    DriveDrivesDelete (..),
+    newDriveDrivesDelete,
 
     -- ** drive.drives.get
-    , DriveDrivesGetResource
-    , DriveDrivesGet (..)
-    , newDriveDrivesGet
+    DriveDrivesGetResource,
+    DriveDrivesGet (..),
+    newDriveDrivesGet,
 
     -- ** drive.drives.hide
-    , DriveDrivesHideResource
-    , DriveDrivesHide (..)
-    , newDriveDrivesHide
+    DriveDrivesHideResource,
+    DriveDrivesHide (..),
+    newDriveDrivesHide,
 
     -- ** drive.drives.list
-    , DriveDrivesListResource
-    , DriveDrivesList (..)
-    , newDriveDrivesList
+    DriveDrivesListResource,
+    DriveDrivesList (..),
+    newDriveDrivesList,
 
     -- ** drive.drives.unhide
-    , DriveDrivesUnhideResource
-    , DriveDrivesUnhide (..)
-    , newDriveDrivesUnhide
+    DriveDrivesUnhideResource,
+    DriveDrivesUnhide (..),
+    newDriveDrivesUnhide,
 
     -- ** drive.drives.update
-    , DriveDrivesUpdateResource
-    , DriveDrivesUpdate (..)
-    , newDriveDrivesUpdate
+    DriveDrivesUpdateResource,
+    DriveDrivesUpdate (..),
+    newDriveDrivesUpdate,
 
     -- ** drive.files.copy
-    , DriveFilesCopyResource
-    , DriveFilesCopy (..)
-    , newDriveFilesCopy
+    DriveFilesCopyResource,
+    DriveFilesCopy (..),
+    newDriveFilesCopy,
 
     -- ** drive.files.create
-    , DriveFilesCreateResource
-    , DriveFilesCreate (..)
-    , newDriveFilesCreate
+    DriveFilesCreateResource,
+    DriveFilesCreate (..),
+    newDriveFilesCreate,
 
     -- ** drive.files.delete
-    , DriveFilesDeleteResource
-    , DriveFilesDelete (..)
-    , newDriveFilesDelete
+    DriveFilesDeleteResource,
+    DriveFilesDelete (..),
+    newDriveFilesDelete,
 
     -- ** drive.files.download
-    , DriveFilesDownloadResource
-    , DriveFilesDownload (..)
-    , newDriveFilesDownload
+    DriveFilesDownloadResource,
+    DriveFilesDownload (..),
+    newDriveFilesDownload,
 
     -- ** drive.files.emptyTrash
-    , DriveFilesEmptyTrashResource
-    , DriveFilesEmptyTrash (..)
-    , newDriveFilesEmptyTrash
+    DriveFilesEmptyTrashResource,
+    DriveFilesEmptyTrash (..),
+    newDriveFilesEmptyTrash,
 
     -- ** drive.files.export
-    , DriveFilesExportResource
-    , DriveFilesExport (..)
-    , newDriveFilesExport
+    DriveFilesExportResource,
+    DriveFilesExport (..),
+    newDriveFilesExport,
 
     -- ** drive.files.generateIds
-    , DriveFilesGenerateIdsResource
-    , DriveFilesGenerateIds (..)
-    , newDriveFilesGenerateIds
+    DriveFilesGenerateIdsResource,
+    DriveFilesGenerateIds (..),
+    newDriveFilesGenerateIds,
 
     -- ** drive.files.get
-    , DriveFilesGetResource
-    , DriveFilesGet (..)
-    , newDriveFilesGet
+    DriveFilesGetResource,
+    DriveFilesGet (..),
+    newDriveFilesGet,
 
     -- ** drive.files.list
-    , DriveFilesListResource
-    , DriveFilesList (..)
-    , newDriveFilesList
+    DriveFilesListResource,
+    DriveFilesList (..),
+    newDriveFilesList,
 
     -- ** drive.files.listLabels
-    , DriveFilesListLabelsResource
-    , DriveFilesListLabels (..)
-    , newDriveFilesListLabels
+    DriveFilesListLabelsResource,
+    DriveFilesListLabels (..),
+    newDriveFilesListLabels,
 
     -- ** drive.files.modifyLabels
-    , DriveFilesModifyLabelsResource
-    , DriveFilesModifyLabels (..)
-    , newDriveFilesModifyLabels
+    DriveFilesModifyLabelsResource,
+    DriveFilesModifyLabels (..),
+    newDriveFilesModifyLabels,
 
     -- ** drive.files.update
-    , DriveFilesUpdateResource
-    , DriveFilesUpdate (..)
-    , newDriveFilesUpdate
+    DriveFilesUpdateResource,
+    DriveFilesUpdate (..),
+    newDriveFilesUpdate,
 
     -- ** drive.files.watch
-    , DriveFilesWatchResource
-    , DriveFilesWatch (..)
-    , newDriveFilesWatch
+    DriveFilesWatchResource,
+    DriveFilesWatch (..),
+    newDriveFilesWatch,
 
     -- ** drive.operation.cancel
-    , DriveOperationCancelResource
-    , DriveOperationCancel (..)
-    , newDriveOperationCancel
+    DriveOperationCancelResource,
+    DriveOperationCancel (..),
+    newDriveOperationCancel,
 
     -- ** drive.operation.delete
-    , DriveOperationDeleteResource
-    , DriveOperationDelete (..)
-    , newDriveOperationDelete
+    DriveOperationDeleteResource,
+    DriveOperationDelete (..),
+    newDriveOperationDelete,
 
     -- ** drive.operations.get
-    , DriveOperationsGetResource
-    , DriveOperationsGet (..)
-    , newDriveOperationsGet
+    DriveOperationsGetResource,
+    DriveOperationsGet (..),
+    newDriveOperationsGet,
 
     -- ** drive.operations.list
-    , DriveOperationsListResource
-    , DriveOperationsList (..)
-    , newDriveOperationsList
+    DriveOperationsListResource,
+    DriveOperationsList (..),
+    newDriveOperationsList,
 
     -- ** drive.permissions.create
-    , DrivePermissionsCreateResource
-    , DrivePermissionsCreate (..)
-    , newDrivePermissionsCreate
+    DrivePermissionsCreateResource,
+    DrivePermissionsCreate (..),
+    newDrivePermissionsCreate,
 
     -- ** drive.permissions.delete
-    , DrivePermissionsDeleteResource
-    , DrivePermissionsDelete (..)
-    , newDrivePermissionsDelete
+    DrivePermissionsDeleteResource,
+    DrivePermissionsDelete (..),
+    newDrivePermissionsDelete,
 
     -- ** drive.permissions.get
-    , DrivePermissionsGetResource
-    , DrivePermissionsGet (..)
-    , newDrivePermissionsGet
+    DrivePermissionsGetResource,
+    DrivePermissionsGet (..),
+    newDrivePermissionsGet,
 
     -- ** drive.permissions.list
-    , DrivePermissionsListResource
-    , DrivePermissionsList (..)
-    , newDrivePermissionsList
+    DrivePermissionsListResource,
+    DrivePermissionsList (..),
+    newDrivePermissionsList,
 
     -- ** drive.permissions.update
-    , DrivePermissionsUpdateResource
-    , DrivePermissionsUpdate (..)
-    , newDrivePermissionsUpdate
+    DrivePermissionsUpdateResource,
+    DrivePermissionsUpdate (..),
+    newDrivePermissionsUpdate,
 
     -- ** drive.replies.create
-    , DriveRepliesCreateResource
-    , DriveRepliesCreate (..)
-    , newDriveRepliesCreate
+    DriveRepliesCreateResource,
+    DriveRepliesCreate (..),
+    newDriveRepliesCreate,
 
     -- ** drive.replies.delete
-    , DriveRepliesDeleteResource
-    , DriveRepliesDelete (..)
-    , newDriveRepliesDelete
+    DriveRepliesDeleteResource,
+    DriveRepliesDelete (..),
+    newDriveRepliesDelete,
 
     -- ** drive.replies.get
-    , DriveRepliesGetResource
-    , DriveRepliesGet (..)
-    , newDriveRepliesGet
+    DriveRepliesGetResource,
+    DriveRepliesGet (..),
+    newDriveRepliesGet,
 
     -- ** drive.replies.list
-    , DriveRepliesListResource
-    , DriveRepliesList (..)
-    , newDriveRepliesList
+    DriveRepliesListResource,
+    DriveRepliesList (..),
+    newDriveRepliesList,
 
     -- ** drive.replies.update
-    , DriveRepliesUpdateResource
-    , DriveRepliesUpdate (..)
-    , newDriveRepliesUpdate
+    DriveRepliesUpdateResource,
+    DriveRepliesUpdate (..),
+    newDriveRepliesUpdate,
 
     -- ** drive.revisions.delete
-    , DriveRevisionsDeleteResource
-    , DriveRevisionsDelete (..)
-    , newDriveRevisionsDelete
+    DriveRevisionsDeleteResource,
+    DriveRevisionsDelete (..),
+    newDriveRevisionsDelete,
 
     -- ** drive.revisions.get
-    , DriveRevisionsGetResource
-    , DriveRevisionsGet (..)
-    , newDriveRevisionsGet
+    DriveRevisionsGetResource,
+    DriveRevisionsGet (..),
+    newDriveRevisionsGet,
 
     -- ** drive.revisions.list
-    , DriveRevisionsListResource
-    , DriveRevisionsList (..)
-    , newDriveRevisionsList
+    DriveRevisionsListResource,
+    DriveRevisionsList (..),
+    newDriveRevisionsList,
 
     -- ** drive.revisions.update
-    , DriveRevisionsUpdateResource
-    , DriveRevisionsUpdate (..)
-    , newDriveRevisionsUpdate
+    DriveRevisionsUpdateResource,
+    DriveRevisionsUpdate (..),
+    newDriveRevisionsUpdate,
 
     -- ** drive.teamdrives.create
-    , DriveTeamdrivesCreateResource
-    , DriveTeamdrivesCreate (..)
-    , newDriveTeamdrivesCreate
+    DriveTeamdrivesCreateResource,
+    DriveTeamdrivesCreate (..),
+    newDriveTeamdrivesCreate,
 
     -- ** drive.teamdrives.delete
-    , DriveTeamdrivesDeleteResource
-    , DriveTeamdrivesDelete (..)
-    , newDriveTeamdrivesDelete
+    DriveTeamdrivesDeleteResource,
+    DriveTeamdrivesDelete (..),
+    newDriveTeamdrivesDelete,
 
     -- ** drive.teamdrives.get
-    , DriveTeamdrivesGetResource
-    , DriveTeamdrivesGet (..)
-    , newDriveTeamdrivesGet
+    DriveTeamdrivesGetResource,
+    DriveTeamdrivesGet (..),
+    newDriveTeamdrivesGet,
 
     -- ** drive.teamdrives.list
-    , DriveTeamdrivesListResource
-    , DriveTeamdrivesList (..)
-    , newDriveTeamdrivesList
+    DriveTeamdrivesListResource,
+    DriveTeamdrivesList (..),
+    newDriveTeamdrivesList,
 
     -- ** drive.teamdrives.update
-    , DriveTeamdrivesUpdateResource
-    , DriveTeamdrivesUpdate (..)
-    , newDriveTeamdrivesUpdate
+    DriveTeamdrivesUpdateResource,
+    DriveTeamdrivesUpdate (..),
+    newDriveTeamdrivesUpdate,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** About
-    , About (..)
-    , newAbout
+    About (..),
+    newAbout,
 
     -- ** About_DriveThemesItem
-    , About_DriveThemesItem (..)
-    , newAbout_DriveThemesItem
+    About_DriveThemesItem (..),
+    newAbout_DriveThemesItem,
 
     -- ** About_ExportFormats
-    , About_ExportFormats (..)
-    , newAbout_ExportFormats
+    About_ExportFormats (..),
+    newAbout_ExportFormats,
 
     -- ** About_ImportFormats
-    , About_ImportFormats (..)
-    , newAbout_ImportFormats
+    About_ImportFormats (..),
+    newAbout_ImportFormats,
 
     -- ** About_MaxImportSizes
-    , About_MaxImportSizes (..)
-    , newAbout_MaxImportSizes
+    About_MaxImportSizes (..),
+    newAbout_MaxImportSizes,
 
     -- ** About_StorageQuota
-    , About_StorageQuota (..)
-    , newAbout_StorageQuota
+    About_StorageQuota (..),
+    newAbout_StorageQuota,
 
     -- ** About_TeamDriveThemesItem
-    , About_TeamDriveThemesItem (..)
-    , newAbout_TeamDriveThemesItem
+    About_TeamDriveThemesItem (..),
+    newAbout_TeamDriveThemesItem,
 
     -- ** AccessProposal
-    , AccessProposal (..)
-    , newAccessProposal
+    AccessProposal (..),
+    newAccessProposal,
 
     -- ** AccessProposalRoleAndView
-    , AccessProposalRoleAndView (..)
-    , newAccessProposalRoleAndView
+    AccessProposalRoleAndView (..),
+    newAccessProposalRoleAndView,
 
     -- ** App
-    , App (..)
-    , newApp
+    App (..),
+    newApp,
 
     -- ** AppIcons
-    , AppIcons (..)
-    , newAppIcons
+    AppIcons (..),
+    newAppIcons,
 
     -- ** AppList
-    , AppList (..)
-    , newAppList
+    AppList (..),
+    newAppList,
 
     -- ** Change
-    , Change (..)
-    , newChange
+    Change (..),
+    newChange,
 
     -- ** ChangeList
-    , ChangeList (..)
-    , newChangeList
+    ChangeList (..),
+    newChangeList,
 
     -- ** Channel
-    , Channel (..)
-    , newChannel
+    Channel (..),
+    newChannel,
 
     -- ** Channel_Params
-    , Channel_Params (..)
-    , newChannel_Params
+    Channel_Params (..),
+    newChannel_Params,
 
     -- ** Comment
-    , Comment (..)
-    , newComment
+    Comment (..),
+    newComment,
 
     -- ** Comment_QuotedFileContent
-    , Comment_QuotedFileContent (..)
-    , newComment_QuotedFileContent
+    Comment_QuotedFileContent (..),
+    newComment_QuotedFileContent,
 
     -- ** CommentList
-    , CommentList (..)
-    , newCommentList
+    CommentList (..),
+    newCommentList,
 
     -- ** ContentRestriction
-    , ContentRestriction (..)
-    , newContentRestriction
+    ContentRestriction (..),
+    newContentRestriction,
 
     -- ** Drive
-    , Drive (..)
-    , newDrive
+    Drive (..),
+    newDrive,
 
     -- ** Drive_BackgroundImageFile
-    , Drive_BackgroundImageFile (..)
-    , newDrive_BackgroundImageFile
+    Drive_BackgroundImageFile (..),
+    newDrive_BackgroundImageFile,
 
     -- ** Drive_Capabilities
-    , Drive_Capabilities (..)
-    , newDrive_Capabilities
+    Drive_Capabilities (..),
+    newDrive_Capabilities,
 
     -- ** Drive_Restrictions
-    , Drive_Restrictions (..)
-    , newDrive_Restrictions
+    Drive_Restrictions (..),
+    newDrive_Restrictions,
 
     -- ** DriveList
-    , DriveList (..)
-    , newDriveList
+    DriveList (..),
+    newDriveList,
 
     -- ** File
-    , File (..)
-    , newFile
+    File (..),
+    newFile,
 
     -- ** File_AppProperties
-    , File_AppProperties (..)
-    , newFile_AppProperties
+    File_AppProperties (..),
+    newFile_AppProperties,
 
     -- ** File_Capabilities
-    , File_Capabilities (..)
-    , newFile_Capabilities
+    File_Capabilities (..),
+    newFile_Capabilities,
 
     -- ** File_ContentHints
-    , File_ContentHints (..)
-    , newFile_ContentHints
+    File_ContentHints (..),
+    newFile_ContentHints,
 
     -- ** File_ContentHints_Thumbnail
-    , File_ContentHints_Thumbnail (..)
-    , newFile_ContentHints_Thumbnail
+    File_ContentHints_Thumbnail (..),
+    newFile_ContentHints_Thumbnail,
 
     -- ** File_ExportLinks
-    , File_ExportLinks (..)
-    , newFile_ExportLinks
+    File_ExportLinks (..),
+    newFile_ExportLinks,
 
     -- ** File_ImageMediaMetadata
-    , File_ImageMediaMetadata (..)
-    , newFile_ImageMediaMetadata
+    File_ImageMediaMetadata (..),
+    newFile_ImageMediaMetadata,
 
     -- ** File_ImageMediaMetadata_Location
-    , File_ImageMediaMetadata_Location (..)
-    , newFile_ImageMediaMetadata_Location
+    File_ImageMediaMetadata_Location (..),
+    newFile_ImageMediaMetadata_Location,
 
     -- ** File_LabelInfo
-    , File_LabelInfo (..)
-    , newFile_LabelInfo
+    File_LabelInfo (..),
+    newFile_LabelInfo,
 
     -- ** File_LinkShareMetadata
-    , File_LinkShareMetadata (..)
-    , newFile_LinkShareMetadata
+    File_LinkShareMetadata (..),
+    newFile_LinkShareMetadata,
 
     -- ** File_Properties
-    , File_Properties (..)
-    , newFile_Properties
+    File_Properties (..),
+    newFile_Properties,
 
     -- ** File_ShortcutDetails
-    , File_ShortcutDetails (..)
-    , newFile_ShortcutDetails
+    File_ShortcutDetails (..),
+    newFile_ShortcutDetails,
 
     -- ** File_VideoMediaMetadata
-    , File_VideoMediaMetadata (..)
-    , newFile_VideoMediaMetadata
+    File_VideoMediaMetadata (..),
+    newFile_VideoMediaMetadata,
 
     -- ** FileList
-    , FileList (..)
-    , newFileList
+    FileList (..),
+    newFileList,
 
     -- ** GeneratedIds
-    , GeneratedIds (..)
-    , newGeneratedIds
+    GeneratedIds (..),
+    newGeneratedIds,
 
     -- ** Label
-    , Label (..)
-    , newLabel
+    Label (..),
+    newLabel,
 
     -- ** Label_Fields
-    , Label_Fields (..)
-    , newLabel_Fields
+    Label_Fields (..),
+    newLabel_Fields,
 
     -- ** LabelField
-    , LabelField (..)
-    , newLabelField
+    LabelField (..),
+    newLabelField,
 
     -- ** LabelFieldModification
-    , LabelFieldModification (..)
-    , newLabelFieldModification
+    LabelFieldModification (..),
+    newLabelFieldModification,
 
     -- ** LabelList
-    , LabelList (..)
-    , newLabelList
+    LabelList (..),
+    newLabelList,
 
     -- ** LabelModification
-    , LabelModification (..)
-    , newLabelModification
+    LabelModification (..),
+    newLabelModification,
 
     -- ** ListAccessProposalsResponse
-    , ListAccessProposalsResponse (..)
-    , newListAccessProposalsResponse
+    ListAccessProposalsResponse (..),
+    newListAccessProposalsResponse,
 
     -- ** ListOperationsResponse
-    , ListOperationsResponse (..)
-    , newListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
     -- ** ModifyLabelsRequest
-    , ModifyLabelsRequest (..)
-    , newModifyLabelsRequest
+    ModifyLabelsRequest (..),
+    newModifyLabelsRequest,
 
     -- ** ModifyLabelsResponse
-    , ModifyLabelsResponse (..)
-    , newModifyLabelsResponse
+    ModifyLabelsResponse (..),
+    newModifyLabelsResponse,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** Permission
-    , Permission (..)
-    , newPermission
+    Permission (..),
+    newPermission,
 
     -- ** Permission_PermissionDetailsItem
-    , Permission_PermissionDetailsItem (..)
-    , newPermission_PermissionDetailsItem
+    Permission_PermissionDetailsItem (..),
+    newPermission_PermissionDetailsItem,
 
     -- ** Permission_TeamDrivePermissionDetailsItem
-    , Permission_TeamDrivePermissionDetailsItem (..)
-    , newPermission_TeamDrivePermissionDetailsItem
+    Permission_TeamDrivePermissionDetailsItem (..),
+    newPermission_TeamDrivePermissionDetailsItem,
 
     -- ** PermissionList
-    , PermissionList (..)
-    , newPermissionList
+    PermissionList (..),
+    newPermissionList,
 
     -- ** Reply
-    , Reply (..)
-    , newReply
+    Reply (..),
+    newReply,
 
     -- ** ReplyList
-    , ReplyList (..)
-    , newReplyList
+    ReplyList (..),
+    newReplyList,
 
     -- ** ResolveAccessProposalRequest
-    , ResolveAccessProposalRequest (..)
-    , newResolveAccessProposalRequest
+    ResolveAccessProposalRequest (..),
+    newResolveAccessProposalRequest,
 
     -- ** ResolveAccessProposalRequest_Action
-    , ResolveAccessProposalRequest_Action (..)
+    ResolveAccessProposalRequest_Action (..),
 
     -- ** Revision
-    , Revision (..)
-    , newRevision
+    Revision (..),
+    newRevision,
 
     -- ** Revision_ExportLinks
-    , Revision_ExportLinks (..)
-    , newRevision_ExportLinks
+    Revision_ExportLinks (..),
+    newRevision_ExportLinks,
 
     -- ** RevisionList
-    , RevisionList (..)
-    , newRevisionList
+    RevisionList (..),
+    newRevisionList,
 
     -- ** StartPageToken
-    , StartPageToken (..)
-    , newStartPageToken
+    StartPageToken (..),
+    newStartPageToken,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** TeamDrive
-    , TeamDrive (..)
-    , newTeamDrive
+    TeamDrive (..),
+    newTeamDrive,
 
     -- ** TeamDrive_BackgroundImageFile
-    , TeamDrive_BackgroundImageFile (..)
-    , newTeamDrive_BackgroundImageFile
+    TeamDrive_BackgroundImageFile (..),
+    newTeamDrive_BackgroundImageFile,
 
     -- ** TeamDrive_Capabilities
-    , TeamDrive_Capabilities (..)
-    , newTeamDrive_Capabilities
+    TeamDrive_Capabilities (..),
+    newTeamDrive_Capabilities,
 
     -- ** TeamDrive_Restrictions
-    , TeamDrive_Restrictions (..)
-    , newTeamDrive_Restrictions
+    TeamDrive_Restrictions (..),
+    newTeamDrive_Restrictions,
 
     -- ** TeamDriveList
-    , TeamDriveList (..)
-    , newTeamDriveList
+    TeamDriveList (..),
+    newTeamDriveList,
 
     -- ** User
-    , User (..)
-    , newUser
+    User (..),
+    newUser,
 
     -- ** FilesListCorpus
-    , FilesListCorpus (..)
-    ) where
+    FilesListCorpus (..),
+  )
+where
 
 import Gogol.Drive.About.Get
 import Gogol.Drive.Accessproposals.Get

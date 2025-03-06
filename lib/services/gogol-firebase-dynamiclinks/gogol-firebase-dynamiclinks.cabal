@@ -1,19 +1,24 @@
-cabal-version:         2.2
-name:                  gogol-firebase-dynamiclinks
-version:               1.0.0
-synopsis:              Google Firebase Dynamic Links SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-firebase-dynamiclinks
+version:            1.0.0
+synopsis:           Google Firebase Dynamic Links SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:
+  Brendan Hay <brendan.g.hay+gogol@gmail.com>, Toni Cebrián <toni@tonicebrian.com>
+
+copyright:          Copyright (c) 2015-2025 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    Programmatically creates and manages Firebase Dynamic Links.
+  Programmatically creates and manages Firebase Dynamic Links.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -27,37 +32,34 @@ source-repository head
   subdir:   gogol-firebase-dynamiclinks
 
 flag field-selectors
-  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-  default: False
-  manual: True
+  description:
+    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+
+  default:     False
+  manual:      True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: GHC2021
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -Werror
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if !flag(field-selectors) && impl(ghc >= 9.2)
+  if (!flag(field-selectors) && impl(ghc >=9.2))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.FirebaseDynamicLinks
-    , Gogol.FirebaseDynamicLinks.GetLinkStats
-    , Gogol.FirebaseDynamicLinks.InstallAttribution
-    , Gogol.FirebaseDynamicLinks.ManagedShortLinks.Create
-    , Gogol.FirebaseDynamicLinks.ReopenAttribution
-    , Gogol.FirebaseDynamicLinks.ShortLinks.Create
-    , Gogol.FirebaseDynamicLinks.Types
+    Gogol.FirebaseDynamicLinks
+    Gogol.FirebaseDynamicLinks.GetLinkStats
+    Gogol.FirebaseDynamicLinks.InstallAttribution
+    Gogol.FirebaseDynamicLinks.ManagedShortLinks.Create
+    Gogol.FirebaseDynamicLinks.ReopenAttribution
+    Gogol.FirebaseDynamicLinks.ShortLinks.Create
+    Gogol.FirebaseDynamicLinks.Types
 
   other-modules:
-      Gogol.FirebaseDynamicLinks.Internal.Product
-    , Gogol.FirebaseDynamicLinks.Internal.Sum
+    Gogol.FirebaseDynamicLinks.Internal.Product
+    Gogol.FirebaseDynamicLinks.Internal.Sum
 
-  build-depends:
-      gogol-core ^>= 1.0.0
+  build-depends:    gogol-core ^>=1.0.0

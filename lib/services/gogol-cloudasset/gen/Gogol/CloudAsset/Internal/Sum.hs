@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.CloudAsset.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.CloudAsset.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AuditLogConfig_LogType
     AuditLogConfig_LogType
-      (
-        AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
+      ( AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
         AuditLogConfig_LogType_ADMINREAD,
         AuditLogConfig_LogType_DATAWRITE,
         AuditLogConfig_LogType_DATAREAD,
@@ -50,8 +41,7 @@ module Gogol.CloudAsset.Internal.Sum
 
     -- * GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType
     GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType
-      (
-        GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType_CONTENTTYPEUNSPECIFIED,
+      ( GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType_CONTENTTYPEUNSPECIFIED,
         GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType_Resource,
         GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType_IAMPOLICY,
         GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType_ORGPOLICY,
@@ -62,8 +52,7 @@ module Gogol.CloudAsset.Internal.Sum
 
     -- * GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey
     GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey
-      (
-        GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey_PARTITIONKEYUNSPECIFIED,
+      ( GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey_PARTITIONKEYUNSPECIFIED,
         GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey_READTIME,
         GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey_REQUESTTIME,
         ..
@@ -71,8 +60,7 @@ module Gogol.CloudAsset.Internal.Sum
 
     -- * GoogleCloudOrgpolicyV1ListPolicy_AllValues
     GoogleCloudOrgpolicyV1ListPolicy_AllValues
-      (
-        GoogleCloudOrgpolicyV1ListPolicy_AllValues_ALLVALUESUNSPECIFIED,
+      ( GoogleCloudOrgpolicyV1ListPolicy_AllValues_ALLVALUESUNSPECIFIED,
         GoogleCloudOrgpolicyV1ListPolicy_AllValues_Allow,
         GoogleCloudOrgpolicyV1ListPolicy_AllValues_Deny,
         ..
@@ -80,16 +68,14 @@ module Gogol.CloudAsset.Internal.Sum
 
     -- * GoogleIdentityAccesscontextmanagerV1BasicLevel_CombiningFunction
     GoogleIdentityAccesscontextmanagerV1BasicLevel_CombiningFunction
-      (
-        GoogleIdentityAccesscontextmanagerV1BasicLevel_CombiningFunction_And,
+      ( GoogleIdentityAccesscontextmanagerV1BasicLevel_CombiningFunction_And,
         GoogleIdentityAccesscontextmanagerV1BasicLevel_CombiningFunction_OR,
         ..
       ),
 
     -- * GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedDeviceManagementLevelsItem
     GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedDeviceManagementLevelsItem
-      (
-        GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedDeviceManagementLevelsItem_MANAGEMENTUNSPECIFIED,
+      ( GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedDeviceManagementLevelsItem_MANAGEMENTUNSPECIFIED,
         GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedDeviceManagementLevelsItem_None,
         GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedDeviceManagementLevelsItem_Basic,
         GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedDeviceManagementLevelsItem_Complete,
@@ -98,8 +84,7 @@ module Gogol.CloudAsset.Internal.Sum
 
     -- * GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedEncryptionStatusesItem
     GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedEncryptionStatusesItem
-      (
-        GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedEncryptionStatusesItem_ENCRYPTIONUNSPECIFIED,
+      ( GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedEncryptionStatusesItem_ENCRYPTIONUNSPECIFIED,
         GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedEncryptionStatusesItem_ENCRYPTIONUNSUPPORTED,
         GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedEncryptionStatusesItem_Unencrypted,
         GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedEncryptionStatusesItem_Encrypted,
@@ -108,8 +93,7 @@ module Gogol.CloudAsset.Internal.Sum
 
     -- * GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType
     GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType
-      (
-        GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType_IDENTITYTYPEUNSPECIFIED,
+      ( GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType_IDENTITYTYPEUNSPECIFIED,
         GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType_ANYIDENTITY,
         GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType_ANYUSERACCOUNT,
         GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType_ANYSERVICEACCOUNT,
@@ -118,8 +102,7 @@ module Gogol.CloudAsset.Internal.Sum
 
     -- * GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction
     GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction
-      (
-        GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction_SOURCERESTRICTIONUNSPECIFIED,
+      ( GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction_SOURCERESTRICTIONUNSPECIFIED,
         GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction_SOURCERESTRICTIONENABLED,
         GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction_SOURCERESTRICTIONDISABLED,
         ..
@@ -127,8 +110,7 @@ module Gogol.CloudAsset.Internal.Sum
 
     -- * GoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType
     GoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType
-      (
-        GoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType_IDENTITYTYPEUNSPECIFIED,
+      ( GoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType_IDENTITYTYPEUNSPECIFIED,
         GoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType_ANYIDENTITY,
         GoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType_ANYUSERACCOUNT,
         GoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType_ANYSERVICEACCOUNT,
@@ -137,8 +119,7 @@ module Gogol.CloudAsset.Internal.Sum
 
     -- * GoogleIdentityAccesscontextmanagerV1OsConstraint_OsType
     GoogleIdentityAccesscontextmanagerV1OsConstraint_OsType
-      (
-        GoogleIdentityAccesscontextmanagerV1OsConstraint_OsType_OSUNSPECIFIED,
+      ( GoogleIdentityAccesscontextmanagerV1OsConstraint_OsType_OSUNSPECIFIED,
         GoogleIdentityAccesscontextmanagerV1OsConstraint_OsType_DESKTOPMAC,
         GoogleIdentityAccesscontextmanagerV1OsConstraint_OsType_DESKTOPWINDOWS,
         GoogleIdentityAccesscontextmanagerV1OsConstraint_OsType_DESKTOPLINUX,
@@ -150,27 +131,27 @@ module Gogol.CloudAsset.Internal.Sum
 
     -- * GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType
     GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType
-      (
-        GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType_PERIMETERTYPEREGULAR,
+      ( GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType_PERIMETERTYPEREGULAR,
         GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType_PERIMETERTYPEBRIDGE,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -183,20 +164,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | The log type that this config enables.
-newtype AuditLogConfig_LogType = AuditLogConfig_LogType { fromAuditLogConfig_LogType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AuditLogConfig_LogType = AuditLogConfig_LogType {fromAuditLogConfig_LogType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default case. Should never be this.
 pattern AuditLogConfig_LogType_LOGTYPEUNSPECIFIED :: AuditLogConfig_LogType
@@ -219,20 +201,21 @@ pattern AuditLogConfig_LogType_DATAREAD = AuditLogConfig_LogType "DATA_READ"
   AuditLogConfig_LogType_ADMINREAD,
   AuditLogConfig_LogType_DATAWRITE,
   AuditLogConfig_LogType_DATAREAD,
-  AuditLogConfig_LogType #-}
+  AuditLogConfig_LogType
+  #-}
 
 -- | Asset content type. If not specified, no content but the asset name will be returned.
-newtype GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType = GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType { fromGoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType = GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType {fromGoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified content type.
 pattern GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType_CONTENTTYPEUNSPECIFIED :: GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType
@@ -265,20 +248,21 @@ pattern GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType_Relationship = 
   GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType_ORGPOLICY,
   GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType_ACCESSPOLICY,
   GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType_Relationship,
-  GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType #-}
+  GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType
+  #-}
 
 -- | The partition key for BigQuery partitioned table.
-newtype GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey = GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey { fromGoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey = GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey {fromGoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified partition key. If used, it means using non-partitioned table.
 pattern GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey_PARTITIONKEYUNSPECIFIED :: GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey
@@ -296,20 +280,21 @@ pattern GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey_REQUESTTIME = Google
   GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey_PARTITIONKEYUNSPECIFIED,
   GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey_READTIME,
   GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey_REQUESTTIME,
-  GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey #-}
+  GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey
+  #-}
 
 -- | The policy all_values state.
-newtype GoogleCloudOrgpolicyV1ListPolicy_AllValues = GoogleCloudOrgpolicyV1ListPolicy_AllValues { fromGoogleCloudOrgpolicyV1ListPolicy_AllValues :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudOrgpolicyV1ListPolicy_AllValues = GoogleCloudOrgpolicyV1ListPolicy_AllValues {fromGoogleCloudOrgpolicyV1ListPolicy_AllValues :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Indicates that allowed/values or denied/values must be set.
 pattern GoogleCloudOrgpolicyV1ListPolicy_AllValues_ALLVALUESUNSPECIFIED :: GoogleCloudOrgpolicyV1ListPolicy_AllValues
@@ -327,20 +312,21 @@ pattern GoogleCloudOrgpolicyV1ListPolicy_AllValues_Deny = GoogleCloudOrgpolicyV1
   GoogleCloudOrgpolicyV1ListPolicy_AllValues_ALLVALUESUNSPECIFIED,
   GoogleCloudOrgpolicyV1ListPolicy_AllValues_Allow,
   GoogleCloudOrgpolicyV1ListPolicy_AllValues_Deny,
-  GoogleCloudOrgpolicyV1ListPolicy_AllValues #-}
+  GoogleCloudOrgpolicyV1ListPolicy_AllValues
+  #-}
 
 -- | How the @conditions@ list should be combined to determine if a request is granted this @AccessLevel@. If AND is used, each @Condition@ in @conditions@ must be satisfied for the @AccessLevel@ to be applied. If OR is used, at least one @Condition@ in @conditions@ must be satisfied for the @AccessLevel@ to be applied. Default behavior is AND.
-newtype GoogleIdentityAccesscontextmanagerV1BasicLevel_CombiningFunction = GoogleIdentityAccesscontextmanagerV1BasicLevel_CombiningFunction { fromGoogleIdentityAccesscontextmanagerV1BasicLevel_CombiningFunction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleIdentityAccesscontextmanagerV1BasicLevel_CombiningFunction = GoogleIdentityAccesscontextmanagerV1BasicLevel_CombiningFunction {fromGoogleIdentityAccesscontextmanagerV1BasicLevel_CombiningFunction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | All @Conditions@ must be true for the @BasicLevel@ to be true.
 pattern GoogleIdentityAccesscontextmanagerV1BasicLevel_CombiningFunction_And :: GoogleIdentityAccesscontextmanagerV1BasicLevel_CombiningFunction
@@ -353,19 +339,20 @@ pattern GoogleIdentityAccesscontextmanagerV1BasicLevel_CombiningFunction_OR = Go
 {-# COMPLETE
   GoogleIdentityAccesscontextmanagerV1BasicLevel_CombiningFunction_And,
   GoogleIdentityAccesscontextmanagerV1BasicLevel_CombiningFunction_OR,
-  GoogleIdentityAccesscontextmanagerV1BasicLevel_CombiningFunction #-}
+  GoogleIdentityAccesscontextmanagerV1BasicLevel_CombiningFunction
+  #-}
 
-newtype GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedDeviceManagementLevelsItem = GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedDeviceManagementLevelsItem { fromGoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedDeviceManagementLevelsItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedDeviceManagementLevelsItem = GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedDeviceManagementLevelsItem {fromGoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedDeviceManagementLevelsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The device\'s management level is not specified or not known.
 pattern GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedDeviceManagementLevelsItem_MANAGEMENTUNSPECIFIED :: GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedDeviceManagementLevelsItem
@@ -388,19 +375,20 @@ pattern GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedDeviceManagement
   GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedDeviceManagementLevelsItem_None,
   GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedDeviceManagementLevelsItem_Basic,
   GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedDeviceManagementLevelsItem_Complete,
-  GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedDeviceManagementLevelsItem #-}
+  GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedDeviceManagementLevelsItem
+  #-}
 
-newtype GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedEncryptionStatusesItem = GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedEncryptionStatusesItem { fromGoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedEncryptionStatusesItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedEncryptionStatusesItem = GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedEncryptionStatusesItem {fromGoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedEncryptionStatusesItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The encryption status of the device is not specified or not known.
 pattern GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedEncryptionStatusesItem_ENCRYPTIONUNSPECIFIED :: GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedEncryptionStatusesItem
@@ -423,20 +411,21 @@ pattern GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedEncryptionStatus
   GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedEncryptionStatusesItem_ENCRYPTIONUNSUPPORTED,
   GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedEncryptionStatusesItem_Unencrypted,
   GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedEncryptionStatusesItem_Encrypted,
-  GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedEncryptionStatusesItem #-}
+  GoogleIdentityAccesscontextmanagerV1DevicePolicy_AllowedEncryptionStatusesItem
+  #-}
 
 -- | Specifies the type of identities that are allowed access to outside the perimeter. If left unspecified, then members of @identities@ field will be allowed access.
-newtype GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType = GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType { fromGoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType = GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType {fromGoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No blanket identity group specified.
 pattern GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType_IDENTITYTYPEUNSPECIFIED :: GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType
@@ -459,20 +448,21 @@ pattern GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType_ANYSERVICEAC
   GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType_ANYIDENTITY,
   GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType_ANYUSERACCOUNT,
   GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType_ANYSERVICEACCOUNT,
-  GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType #-}
+  GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType
+  #-}
 
 -- | Whether to enforce traffic restrictions based on @sources@ field. If the @sources@ fields is non-empty, then this field must be set to @SOURCE_RESTRICTION_ENABLED@.
-newtype GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction = GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction { fromGoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction = GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction {fromGoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Enforcement preference unspecified, will not enforce traffic restrictions based on @sources@ in EgressFrom.
 pattern GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction_SOURCERESTRICTIONUNSPECIFIED :: GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction
@@ -490,20 +480,21 @@ pattern GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction_SOURCER
   GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction_SOURCERESTRICTIONUNSPECIFIED,
   GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction_SOURCERESTRICTIONENABLED,
   GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction_SOURCERESTRICTIONDISABLED,
-  GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction #-}
+  GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction
+  #-}
 
 -- | Specifies the type of identities that are allowed access from outside the perimeter. If left unspecified, then members of @identities@ field will be allowed access.
-newtype GoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType = GoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType { fromGoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType = GoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType {fromGoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No blanket identity group specified.
 pattern GoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType_IDENTITYTYPEUNSPECIFIED :: GoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType
@@ -526,20 +517,21 @@ pattern GoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType_ANYSERVICEA
   GoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType_ANYIDENTITY,
   GoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType_ANYUSERACCOUNT,
   GoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType_ANYSERVICEACCOUNT,
-  GoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType #-}
+  GoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType
+  #-}
 
 -- | Required. The allowed OS type.
-newtype GoogleIdentityAccesscontextmanagerV1OsConstraint_OsType = GoogleIdentityAccesscontextmanagerV1OsConstraint_OsType { fromGoogleIdentityAccesscontextmanagerV1OsConstraint_OsType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleIdentityAccesscontextmanagerV1OsConstraint_OsType = GoogleIdentityAccesscontextmanagerV1OsConstraint_OsType {fromGoogleIdentityAccesscontextmanagerV1OsConstraint_OsType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The operating system of the device is not specified or not known.
 pattern GoogleIdentityAccesscontextmanagerV1OsConstraint_OsType_OSUNSPECIFIED :: GoogleIdentityAccesscontextmanagerV1OsConstraint_OsType
@@ -577,20 +569,21 @@ pattern GoogleIdentityAccesscontextmanagerV1OsConstraint_OsType_Ios = GoogleIden
   GoogleIdentityAccesscontextmanagerV1OsConstraint_OsType_DESKTOPCHROMEOS,
   GoogleIdentityAccesscontextmanagerV1OsConstraint_OsType_Android,
   GoogleIdentityAccesscontextmanagerV1OsConstraint_OsType_Ios,
-  GoogleIdentityAccesscontextmanagerV1OsConstraint_OsType #-}
+  GoogleIdentityAccesscontextmanagerV1OsConstraint_OsType
+  #-}
 
 -- | Perimeter type indicator. A single project or VPC network is allowed to be a member of single regular perimeter, but multiple service perimeter bridges. A project cannot be a included in a perimeter bridge without being included in regular perimeter. For perimeter bridges, the restricted service list as well as access level lists must be empty.
-newtype GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType = GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType { fromGoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType = GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType {fromGoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Regular Perimeter. When no value is specified, the perimeter uses this type.
 pattern GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType_PERIMETERTYPEREGULAR :: GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType
@@ -603,4 +596,5 @@ pattern GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType_PERIM
 {-# COMPLETE
   GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType_PERIMETERTYPEREGULAR,
   GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType_PERIMETERTYPEBRIDGE,
-  GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType #-}
+  GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType
+  #-}

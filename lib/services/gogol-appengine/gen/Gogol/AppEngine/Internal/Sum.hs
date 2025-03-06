@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.AppEngine.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.AppEngine.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * ApiConfigHandler_AuthFailAction
     ApiConfigHandler_AuthFailAction
-      (
-        ApiConfigHandler_AuthFailAction_AUTHFAILACTIONUNSPECIFIED,
+      ( ApiConfigHandler_AuthFailAction_AUTHFAILACTIONUNSPECIFIED,
         ApiConfigHandler_AuthFailAction_AUTHFAILACTIONREDIRECT,
         ApiConfigHandler_AuthFailAction_AUTHFAILACTIONUNAUTHORIZED,
         ..
@@ -49,8 +40,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * ApiConfigHandler_Login
     ApiConfigHandler_Login
-      (
-        ApiConfigHandler_Login_LOGINUNSPECIFIED,
+      ( ApiConfigHandler_Login_LOGINUNSPECIFIED,
         ApiConfigHandler_Login_LOGINOPTIONAL,
         ApiConfigHandler_Login_LOGINADMIN,
         ApiConfigHandler_Login_LOGINREQUIRED,
@@ -59,8 +49,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * ApiConfigHandler_SecurityLevel
     ApiConfigHandler_SecurityLevel
-      (
-        ApiConfigHandler_SecurityLevel_SECUREUNSPECIFIED,
+      ( ApiConfigHandler_SecurityLevel_SECUREUNSPECIFIED,
         ApiConfigHandler_SecurityLevel_SECUREDEFAULT,
         ApiConfigHandler_SecurityLevel_SECURENEVER,
         ApiConfigHandler_SecurityLevel_SECUREOPTIONAL,
@@ -70,8 +59,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * Application_DatabaseType
     Application_DatabaseType
-      (
-        Application_DatabaseType_DATABASETYPEUNSPECIFIED,
+      ( Application_DatabaseType_DATABASETYPEUNSPECIFIED,
         Application_DatabaseType_CLOUDDATASTORE,
         Application_DatabaseType_CLOUDFIRESTORE,
         Application_DatabaseType_CLOUDDATASTORECOMPATIBILITY,
@@ -80,8 +68,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * Application_ServingStatus
     Application_ServingStatus
-      (
-        Application_ServingStatus_Unspecified,
+      ( Application_ServingStatus_Unspecified,
         Application_ServingStatus_Serving,
         Application_ServingStatus_USERDISABLED,
         Application_ServingStatus_SYSTEMDISABLED,
@@ -90,8 +77,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * ContainerState_State
     ContainerState_State
-      (
-        ContainerState_State_UNKNOWNSTATE,
+      ( ContainerState_State_UNKNOWNSTATE,
         ContainerState_State_ON,
         ContainerState_State_Off,
         ContainerState_State_Deleted,
@@ -100,8 +86,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * EndpointsApiService_RolloutStrategy
     EndpointsApiService_RolloutStrategy
-      (
-        EndpointsApiService_RolloutStrategy_UNSPECIFIEDROLLOUTSTRATEGY,
+      ( EndpointsApiService_RolloutStrategy_UNSPECIFIEDROLLOUTSTRATEGY,
         EndpointsApiService_RolloutStrategy_Fixed,
         EndpointsApiService_RolloutStrategy_Managed,
         ..
@@ -109,8 +94,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * ErrorHandler_ErrorCode
     ErrorHandler_ErrorCode
-      (
-        ErrorHandler_ErrorCode_ERRORCODEUNSPECIFIED,
+      ( ErrorHandler_ErrorCode_ERRORCODEUNSPECIFIED,
         ErrorHandler_ErrorCode_ERRORCODEDEFAULT,
         ErrorHandler_ErrorCode_ERRORCODEOVERQUOTA,
         ErrorHandler_ErrorCode_ERRORCODEDOSAPIDENIAL,
@@ -120,8 +104,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * FirewallRule_Action
     FirewallRule_Action
-      (
-        FirewallRule_Action_UNSPECIFIEDACTION,
+      ( FirewallRule_Action_UNSPECIFIEDACTION,
         FirewallRule_Action_Allow,
         FirewallRule_Action_Deny,
         ..
@@ -129,8 +112,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * Instance_Availability
     Instance_Availability
-      (
-        Instance_Availability_Unspecified,
+      ( Instance_Availability_Unspecified,
         Instance_Availability_Resident,
         Instance_Availability_Dynamic,
         ..
@@ -138,8 +120,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * Instance_VmLiveness
     Instance_VmLiveness
-      (
-        Instance_VmLiveness_LIVENESSSTATEUNSPECIFIED,
+      ( Instance_VmLiveness_LIVENESSSTATEUNSPECIFIED,
         Instance_VmLiveness_Unknown,
         Instance_VmLiveness_Healthy,
         Instance_VmLiveness_Unhealthy,
@@ -150,8 +131,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * ManagedCertificate_Status
     ManagedCertificate_Status
-      (
-        ManagedCertificate_Status_MANAGEMENTSTATUSUNSPECIFIED,
+      ( ManagedCertificate_Status_MANAGEMENTSTATUSUNSPECIFIED,
         ManagedCertificate_Status_OK,
         ManagedCertificate_Status_Pending,
         ManagedCertificate_Status_FAILEDRETRYINGNOTVISIBLE,
@@ -163,8 +143,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * Network_InstanceIpMode
     Network_InstanceIpMode
-      (
-        Network_InstanceIpMode_INSTANCEIPMODEUNSPECIFIED,
+      ( Network_InstanceIpMode_INSTANCEIPMODEUNSPECIFIED,
         Network_InstanceIpMode_External,
         Network_InstanceIpMode_Internal,
         ..
@@ -172,8 +151,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * NetworkSettings_IngressTrafficAllowed
     NetworkSettings_IngressTrafficAllowed
-      (
-        NetworkSettings_IngressTrafficAllowed_INGRESSTRAFFICALLOWEDUNSPECIFIED,
+      ( NetworkSettings_IngressTrafficAllowed_INGRESSTRAFFICALLOWEDUNSPECIFIED,
         NetworkSettings_IngressTrafficAllowed_INGRESSTRAFFICALLOWEDALL,
         NetworkSettings_IngressTrafficAllowed_INGRESSTRAFFICALLOWEDINTERNALONLY,
         NetworkSettings_IngressTrafficAllowed_INGRESSTRAFFICALLOWEDINTERNALANDLB,
@@ -182,8 +160,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * ProjectEvent_Phase
     ProjectEvent_Phase
-      (
-        ProjectEvent_Phase_CONTAINEREVENTPHASEUNSPECIFIED,
+      ( ProjectEvent_Phase_CONTAINEREVENTPHASEUNSPECIFIED,
         ProjectEvent_Phase_BEFORERESOURCEHANDLING,
         ProjectEvent_Phase_AFTERRESOURCEHANDLING,
         ..
@@ -191,8 +168,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * ProjectsMetadata_ConsumerProjectState
     ProjectsMetadata_ConsumerProjectState
-      (
-        ProjectsMetadata_ConsumerProjectState_UNKNOWNSTATE,
+      ( ProjectsMetadata_ConsumerProjectState_UNKNOWNSTATE,
         ProjectsMetadata_ConsumerProjectState_ON,
         ProjectsMetadata_ConsumerProjectState_Off,
         ProjectsMetadata_ConsumerProjectState_Deleted,
@@ -201,8 +177,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * Reasons_Abuse
     Reasons_Abuse
-      (
-        Reasons_Abuse_ABUSEUNKNOWNREASON,
+      ( Reasons_Abuse_ABUSEUNKNOWNREASON,
         Reasons_Abuse_ABUSECONTROLPLANESYNC,
         Reasons_Abuse_Suspend,
         Reasons_Abuse_Reinstate,
@@ -211,8 +186,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * Reasons_Billing
     Reasons_Billing
-      (
-        Reasons_Billing_BILLINGUNKNOWNREASON,
+      ( Reasons_Billing_BILLINGUNKNOWNREASON,
         Reasons_Billing_BILLINGCONTROLPLANESYNC,
         Reasons_Billing_Probation,
         Reasons_Billing_Close,
@@ -222,8 +196,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * Reasons_DataGovernance
     Reasons_DataGovernance
-      (
-        Reasons_DataGovernance_DATAGOVERNANCEUNKNOWNREASON,
+      ( Reasons_DataGovernance_DATAGOVERNANCEUNKNOWNREASON,
         Reasons_DataGovernance_DATAGOVERNANCECONTROLPLANESYNC,
         Reasons_DataGovernance_Hide,
         Reasons_DataGovernance_Unhide,
@@ -233,8 +206,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * Reasons_ServiceActivation
     Reasons_ServiceActivation
-      (
-        Reasons_ServiceActivation_SERVICEACTIVATIONSTATUSUNSPECIFIED,
+      ( Reasons_ServiceActivation_SERVICEACTIVATIONSTATUSUNSPECIFIED,
         Reasons_ServiceActivation_SERVICEACTIVATIONENABLED,
         Reasons_ServiceActivation_SERVICEACTIVATIONDISABLED,
         Reasons_ServiceActivation_SERVICEACTIVATIONDISABLEDFULL,
@@ -244,8 +216,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * Reasons_ServiceManagement
     Reasons_ServiceManagement
-      (
-        Reasons_ServiceManagement_SERVICEMANAGEMENTUNKNOWNREASON,
+      ( Reasons_ServiceManagement_SERVICEMANAGEMENTUNKNOWNREASON,
         Reasons_ServiceManagement_SERVICEMANAGEMENTCONTROLPLANESYNC,
         Reasons_ServiceManagement_Activation,
         Reasons_ServiceManagement_PREPAREDEACTIVATION,
@@ -256,8 +227,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * ResourceRecord_Type
     ResourceRecord_Type
-      (
-        ResourceRecord_Type_RECORDTYPEUNSPECIFIED,
+      ( ResourceRecord_Type_RECORDTYPEUNSPECIFIED,
         ResourceRecord_Type_A,
         ResourceRecord_Type_Aaaa,
         ResourceRecord_Type_Cname,
@@ -266,8 +236,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * Runtime_Environment
     Runtime_Environment
-      (
-        Runtime_Environment_ENVIRONMENTUNSPECIFIED,
+      ( Runtime_Environment_ENVIRONMENTUNSPECIFIED,
         Runtime_Environment_Standard,
         Runtime_Environment_Flexible,
         ..
@@ -275,8 +244,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * Runtime_Stage
     Runtime_Stage
-      (
-        Runtime_Stage_RUNTIMESTAGEUNSPECIFIED,
+      ( Runtime_Stage_RUNTIMESTAGEUNSPECIFIED,
         Runtime_Stage_Development,
         Runtime_Stage_Alpha,
         Runtime_Stage_Beta,
@@ -289,8 +257,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * SslSettings_SslManagementType
     SslSettings_SslManagementType
-      (
-        SslSettings_SslManagementType_SSLMANAGEMENTTYPEUNSPECIFIED,
+      ( SslSettings_SslManagementType_SSLMANAGEMENTTYPEUNSPECIFIED,
         SslSettings_SslManagementType_Automatic,
         SslSettings_SslManagementType_Manual,
         ..
@@ -298,8 +265,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * TrafficSplit_ShardBy
     TrafficSplit_ShardBy
-      (
-        TrafficSplit_ShardBy_Unspecified,
+      ( TrafficSplit_ShardBy_Unspecified,
         TrafficSplit_ShardBy_Cookie,
         TrafficSplit_ShardBy_IP,
         TrafficSplit_ShardBy_Random,
@@ -308,8 +274,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * UrlMap_AuthFailAction
     UrlMap_AuthFailAction
-      (
-        UrlMap_AuthFailAction_AUTHFAILACTIONUNSPECIFIED,
+      ( UrlMap_AuthFailAction_AUTHFAILACTIONUNSPECIFIED,
         UrlMap_AuthFailAction_AUTHFAILACTIONREDIRECT,
         UrlMap_AuthFailAction_AUTHFAILACTIONUNAUTHORIZED,
         ..
@@ -317,8 +282,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * UrlMap_Login
     UrlMap_Login
-      (
-        UrlMap_Login_LOGINUNSPECIFIED,
+      ( UrlMap_Login_LOGINUNSPECIFIED,
         UrlMap_Login_LOGINOPTIONAL,
         UrlMap_Login_LOGINADMIN,
         UrlMap_Login_LOGINREQUIRED,
@@ -327,8 +291,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * UrlMap_RedirectHttpResponseCode
     UrlMap_RedirectHttpResponseCode
-      (
-        UrlMap_RedirectHttpResponseCode_REDIRECTHTTPRESPONSECODEUNSPECIFIED,
+      ( UrlMap_RedirectHttpResponseCode_REDIRECTHTTPRESPONSECODEUNSPECIFIED,
         UrlMap_RedirectHttpResponseCode_REDIRECT_HTTP_RESPONSE_CODE_301,
         UrlMap_RedirectHttpResponseCode_REDIRECT_HTTP_RESPONSE_CODE_302,
         UrlMap_RedirectHttpResponseCode_REDIRECT_HTTP_RESPONSE_CODE_303,
@@ -338,8 +301,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * UrlMap_SecurityLevel
     UrlMap_SecurityLevel
-      (
-        UrlMap_SecurityLevel_SECUREUNSPECIFIED,
+      ( UrlMap_SecurityLevel_SECUREUNSPECIFIED,
         UrlMap_SecurityLevel_SECUREDEFAULT,
         UrlMap_SecurityLevel_SECURENEVER,
         UrlMap_SecurityLevel_SECUREOPTIONAL,
@@ -349,8 +311,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * Version_InboundServicesItem
     Version_InboundServicesItem
-      (
-        Version_InboundServicesItem_INBOUNDSERVICEUNSPECIFIED,
+      ( Version_InboundServicesItem_INBOUNDSERVICEUNSPECIFIED,
         Version_InboundServicesItem_INBOUNDSERVICEMAIL,
         Version_InboundServicesItem_INBOUNDSERVICEMAILBOUNCE,
         Version_InboundServicesItem_INBOUNDSERVICEXMPPERROR,
@@ -364,8 +325,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * Version_ServingStatus
     Version_ServingStatus
-      (
-        Version_ServingStatus_SERVINGSTATUSUNSPECIFIED,
+      ( Version_ServingStatus_SERVINGSTATUSUNSPECIFIED,
         Version_ServingStatus_Serving,
         Version_ServingStatus_Stopped,
         ..
@@ -373,8 +333,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * VpcAccessConnector_EgressSetting
     VpcAccessConnector_EgressSetting
-      (
-        VpcAccessConnector_EgressSetting_EGRESSSETTINGUNSPECIFIED,
+      ( VpcAccessConnector_EgressSetting_EGRESSSETTINGUNSPECIFIED,
         VpcAccessConnector_EgressSetting_ALLTRAFFIC,
         VpcAccessConnector_EgressSetting_PRIVATEIPRANGES,
         ..
@@ -382,24 +341,21 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * AppsAuthorizedCertificatesGetView
     AppsAuthorizedCertificatesGetView
-      (
-        AppsAuthorizedCertificatesGetView_BASICCERTIFICATE,
+      ( AppsAuthorizedCertificatesGetView_BASICCERTIFICATE,
         AppsAuthorizedCertificatesGetView_FULLCERTIFICATE,
         ..
       ),
 
     -- * AppsAuthorizedCertificatesListView
     AppsAuthorizedCertificatesListView
-      (
-        AppsAuthorizedCertificatesListView_BASICCERTIFICATE,
+      ( AppsAuthorizedCertificatesListView_BASICCERTIFICATE,
         AppsAuthorizedCertificatesListView_FULLCERTIFICATE,
         ..
       ),
 
     -- * AppsDomainMappingsCreateOverrideStrategy
     AppsDomainMappingsCreateOverrideStrategy
-      (
-        AppsDomainMappingsCreateOverrideStrategy_UNSPECIFIEDDOMAINOVERRIDESTRATEGY,
+      ( AppsDomainMappingsCreateOverrideStrategy_UNSPECIFIEDDOMAINOVERRIDESTRATEGY,
         AppsDomainMappingsCreateOverrideStrategy_Strict,
         AppsDomainMappingsCreateOverrideStrategy_Override,
         ..
@@ -407,8 +363,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * AppsGetIncludeExtraData
     AppsGetIncludeExtraData
-      (
-        AppsGetIncludeExtraData_INCLUDEEXTRADATAUNSPECIFIED,
+      ( AppsGetIncludeExtraData_INCLUDEEXTRADATAUNSPECIFIED,
         AppsGetIncludeExtraData_INCLUDEEXTRADATANONE,
         AppsGetIncludeExtraData_INCLUDEGOOGLEGENERATEDMETADATA,
         ..
@@ -416,8 +371,7 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * AppsListRuntimesEnvironment
     AppsListRuntimesEnvironment
-      (
-        AppsListRuntimesEnvironment_ENVIRONMENTUNSPECIFIED,
+      ( AppsListRuntimesEnvironment_ENVIRONMENTUNSPECIFIED,
         AppsListRuntimesEnvironment_Standard,
         AppsListRuntimesEnvironment_Flexible,
         ..
@@ -425,35 +379,34 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * AppsServicesVersionsGetView
     AppsServicesVersionsGetView
-      (
-        AppsServicesVersionsGetView_Basic,
+      ( AppsServicesVersionsGetView_Basic,
         AppsServicesVersionsGetView_Full,
         ..
       ),
 
     -- * AppsServicesVersionsListView
     AppsServicesVersionsListView
-      (
-        AppsServicesVersionsListView_Basic,
+      ( AppsServicesVersionsListView_Basic,
         AppsServicesVersionsListView_Full,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -466,20 +419,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | Action to take when users access resources that require authentication. Defaults to redirect.
-newtype ApiConfigHandler_AuthFailAction = ApiConfigHandler_AuthFailAction { fromApiConfigHandler_AuthFailAction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ApiConfigHandler_AuthFailAction = ApiConfigHandler_AuthFailAction {fromApiConfigHandler_AuthFailAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not specified. AUTH/FAIL/ACTION_REDIRECT is assumed.
 pattern ApiConfigHandler_AuthFailAction_AUTHFAILACTIONUNSPECIFIED :: ApiConfigHandler_AuthFailAction
@@ -497,20 +451,21 @@ pattern ApiConfigHandler_AuthFailAction_AUTHFAILACTIONUNAUTHORIZED = ApiConfigHa
   ApiConfigHandler_AuthFailAction_AUTHFAILACTIONUNSPECIFIED,
   ApiConfigHandler_AuthFailAction_AUTHFAILACTIONREDIRECT,
   ApiConfigHandler_AuthFailAction_AUTHFAILACTIONUNAUTHORIZED,
-  ApiConfigHandler_AuthFailAction #-}
+  ApiConfigHandler_AuthFailAction
+  #-}
 
 -- | Level of login required to access this resource. Defaults to optional.
-newtype ApiConfigHandler_Login = ApiConfigHandler_Login { fromApiConfigHandler_Login :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ApiConfigHandler_Login = ApiConfigHandler_Login {fromApiConfigHandler_Login :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not specified. LOGIN_OPTIONAL is assumed.
 pattern ApiConfigHandler_Login_LOGINUNSPECIFIED :: ApiConfigHandler_Login
@@ -533,20 +488,21 @@ pattern ApiConfigHandler_Login_LOGINREQUIRED = ApiConfigHandler_Login "LOGIN_REQ
   ApiConfigHandler_Login_LOGINOPTIONAL,
   ApiConfigHandler_Login_LOGINADMIN,
   ApiConfigHandler_Login_LOGINREQUIRED,
-  ApiConfigHandler_Login #-}
+  ApiConfigHandler_Login
+  #-}
 
 -- | Security (HTTPS) enforcement for this URL.
-newtype ApiConfigHandler_SecurityLevel = ApiConfigHandler_SecurityLevel { fromApiConfigHandler_SecurityLevel :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ApiConfigHandler_SecurityLevel = ApiConfigHandler_SecurityLevel {fromApiConfigHandler_SecurityLevel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not specified.
 pattern ApiConfigHandler_SecurityLevel_SECUREUNSPECIFIED :: ApiConfigHandler_SecurityLevel
@@ -574,20 +530,21 @@ pattern ApiConfigHandler_SecurityLevel_SECUREALWAYS = ApiConfigHandler_SecurityL
   ApiConfigHandler_SecurityLevel_SECURENEVER,
   ApiConfigHandler_SecurityLevel_SECUREOPTIONAL,
   ApiConfigHandler_SecurityLevel_SECUREALWAYS,
-  ApiConfigHandler_SecurityLevel #-}
+  ApiConfigHandler_SecurityLevel
+  #-}
 
 -- | The type of the Cloud Firestore or Cloud Datastore database associated with this application.
-newtype Application_DatabaseType = Application_DatabaseType { fromApplication_DatabaseType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Application_DatabaseType = Application_DatabaseType {fromApplication_DatabaseType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Database type is unspecified.
 pattern Application_DatabaseType_DATABASETYPEUNSPECIFIED :: Application_DatabaseType
@@ -610,20 +567,21 @@ pattern Application_DatabaseType_CLOUDDATASTORECOMPATIBILITY = Application_Datab
   Application_DatabaseType_CLOUDDATASTORE,
   Application_DatabaseType_CLOUDFIRESTORE,
   Application_DatabaseType_CLOUDDATASTORECOMPATIBILITY,
-  Application_DatabaseType #-}
+  Application_DatabaseType
+  #-}
 
 -- | Serving status of this application.
-newtype Application_ServingStatus = Application_ServingStatus { fromApplication_ServingStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Application_ServingStatus = Application_ServingStatus {fromApplication_ServingStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Serving status is unspecified.
 pattern Application_ServingStatus_Unspecified :: Application_ServingStatus
@@ -646,20 +604,21 @@ pattern Application_ServingStatus_SYSTEMDISABLED = Application_ServingStatus "SY
   Application_ServingStatus_Serving,
   Application_ServingStatus_USERDISABLED,
   Application_ServingStatus_SYSTEMDISABLED,
-  Application_ServingStatus #-}
+  Application_ServingStatus
+  #-}
 
 -- | The current state of the container. This state is the culmination of all of the opinions from external systems that CCFE knows about of the container.
-newtype ContainerState_State = ContainerState_State { fromContainerState_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ContainerState_State = ContainerState_State {fromContainerState_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | A container should never be in an unknown state. Receipt of a container with this state is an error.
 pattern ContainerState_State_UNKNOWNSTATE :: ContainerState_State
@@ -682,20 +641,21 @@ pattern ContainerState_State_Deleted = ContainerState_State "DELETED"
   ContainerState_State_ON,
   ContainerState_State_Off,
   ContainerState_State_Deleted,
-  ContainerState_State #-}
+  ContainerState_State
+  #-}
 
 -- | Endpoints rollout strategy. If FIXED, config/id must be specified. If MANAGED, config/id must be omitted.
-newtype EndpointsApiService_RolloutStrategy = EndpointsApiService_RolloutStrategy { fromEndpointsApiService_RolloutStrategy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype EndpointsApiService_RolloutStrategy = EndpointsApiService_RolloutStrategy {fromEndpointsApiService_RolloutStrategy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not specified. Defaults to FIXED.
 pattern EndpointsApiService_RolloutStrategy_UNSPECIFIEDROLLOUTSTRATEGY :: EndpointsApiService_RolloutStrategy
@@ -713,20 +673,21 @@ pattern EndpointsApiService_RolloutStrategy_Managed = EndpointsApiService_Rollou
   EndpointsApiService_RolloutStrategy_UNSPECIFIEDROLLOUTSTRATEGY,
   EndpointsApiService_RolloutStrategy_Fixed,
   EndpointsApiService_RolloutStrategy_Managed,
-  EndpointsApiService_RolloutStrategy #-}
+  EndpointsApiService_RolloutStrategy
+  #-}
 
 -- | Error condition this handler applies to.
-newtype ErrorHandler_ErrorCode = ErrorHandler_ErrorCode { fromErrorHandler_ErrorCode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ErrorHandler_ErrorCode = ErrorHandler_ErrorCode {fromErrorHandler_ErrorCode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not specified. ERROR/CODE/DEFAULT is assumed.
 pattern ErrorHandler_ErrorCode_ERRORCODEUNSPECIFIED :: ErrorHandler_ErrorCode
@@ -754,22 +715,22 @@ pattern ErrorHandler_ErrorCode_ERRORCODETIMEOUT = ErrorHandler_ErrorCode "ERROR_
   ErrorHandler_ErrorCode_ERRORCODEOVERQUOTA,
   ErrorHandler_ErrorCode_ERRORCODEDOSAPIDENIAL,
   ErrorHandler_ErrorCode_ERRORCODETIMEOUT,
-  ErrorHandler_ErrorCode #-}
+  ErrorHandler_ErrorCode
+  #-}
 
 -- | The action to take on matched requests.
-newtype FirewallRule_Action = FirewallRule_Action { fromFirewallRule_Action :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype FirewallRule_Action = FirewallRule_Action {fromFirewallRule_Action :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern FirewallRule_Action_UNSPECIFIEDACTION :: FirewallRule_Action
 pattern FirewallRule_Action_UNSPECIFIEDACTION = FirewallRule_Action "UNSPECIFIED_ACTION"
 
@@ -785,30 +746,28 @@ pattern FirewallRule_Action_Deny = FirewallRule_Action "DENY"
   FirewallRule_Action_UNSPECIFIEDACTION,
   FirewallRule_Action_Allow,
   FirewallRule_Action_Deny,
-  FirewallRule_Action #-}
+  FirewallRule_Action
+  #-}
 
 -- | Output only. Availability of the instance.
-newtype Instance_Availability = Instance_Availability { fromInstance_Availability :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Instance_Availability = Instance_Availability {fromInstance_Availability :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern Instance_Availability_Unspecified :: Instance_Availability
 pattern Instance_Availability_Unspecified = Instance_Availability "UNSPECIFIED"
 
--- | 
 pattern Instance_Availability_Resident :: Instance_Availability
 pattern Instance_Availability_Resident = Instance_Availability "RESIDENT"
 
--- | 
 pattern Instance_Availability_Dynamic :: Instance_Availability
 pattern Instance_Availability_Dynamic = Instance_Availability "DYNAMIC"
 
@@ -816,20 +775,21 @@ pattern Instance_Availability_Dynamic = Instance_Availability "DYNAMIC"
   Instance_Availability_Unspecified,
   Instance_Availability_Resident,
   Instance_Availability_Dynamic,
-  Instance_Availability #-}
+  Instance_Availability
+  #-}
 
 -- | Output only. The liveness health check of this instance. Only applicable for instances in App Engine flexible environment.
-newtype Instance_VmLiveness = Instance_VmLiveness { fromInstance_VmLiveness :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Instance_VmLiveness = Instance_VmLiveness {fromInstance_VmLiveness :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | There is no liveness health check for the instance. Only applicable for instances in App Engine standard environment.
 pattern Instance_VmLiveness_LIVENESSSTATEUNSPECIFIED :: Instance_VmLiveness
@@ -862,22 +822,22 @@ pattern Instance_VmLiveness_Timeout = Instance_VmLiveness "TIMEOUT"
   Instance_VmLiveness_Unhealthy,
   Instance_VmLiveness_Draining,
   Instance_VmLiveness_Timeout,
-  Instance_VmLiveness #-}
+  Instance_VmLiveness
+  #-}
 
 -- | Status of certificate management. Refers to the most recent certificate acquisition or renewal attempt.\@OutputOnly
-newtype ManagedCertificate_Status = ManagedCertificate_Status { fromManagedCertificate_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ManagedCertificate_Status = ManagedCertificate_Status {fromManagedCertificate_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern ManagedCertificate_Status_MANAGEMENTSTATUSUNSPECIFIED :: ManagedCertificate_Status
 pattern ManagedCertificate_Status_MANAGEMENTSTATUSUNSPECIFIED = ManagedCertificate_Status "MANAGEMENT_STATUS_UNSPECIFIED"
 
@@ -913,20 +873,21 @@ pattern ManagedCertificate_Status_FAILEDRETRYINGCAACHECKING = ManagedCertificate
   ManagedCertificate_Status_FAILEDPERMANENT,
   ManagedCertificate_Status_FAILEDRETRYINGCAAFORBIDDEN,
   ManagedCertificate_Status_FAILEDRETRYINGCAACHECKING,
-  ManagedCertificate_Status #-}
+  ManagedCertificate_Status
+  #-}
 
 -- | The IP mode for instances. Only applicable in the App Engine flexible environment.
-newtype Network_InstanceIpMode = Network_InstanceIpMode { fromNetwork_InstanceIpMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Network_InstanceIpMode = Network_InstanceIpMode {fromNetwork_InstanceIpMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified is treated as EXTERNAL.
 pattern Network_InstanceIpMode_INSTANCEIPMODEUNSPECIFIED :: Network_InstanceIpMode
@@ -944,20 +905,21 @@ pattern Network_InstanceIpMode_Internal = Network_InstanceIpMode "INTERNAL"
   Network_InstanceIpMode_INSTANCEIPMODEUNSPECIFIED,
   Network_InstanceIpMode_External,
   Network_InstanceIpMode_Internal,
-  Network_InstanceIpMode #-}
+  Network_InstanceIpMode
+  #-}
 
 -- | The ingress settings for version or service.
-newtype NetworkSettings_IngressTrafficAllowed = NetworkSettings_IngressTrafficAllowed { fromNetworkSettings_IngressTrafficAllowed :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NetworkSettings_IngressTrafficAllowed = NetworkSettings_IngressTrafficAllowed {fromNetworkSettings_IngressTrafficAllowed :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified
 pattern NetworkSettings_IngressTrafficAllowed_INGRESSTRAFFICALLOWEDUNSPECIFIED :: NetworkSettings_IngressTrafficAllowed
@@ -980,30 +942,28 @@ pattern NetworkSettings_IngressTrafficAllowed_INGRESSTRAFFICALLOWEDINTERNALANDLB
   NetworkSettings_IngressTrafficAllowed_INGRESSTRAFFICALLOWEDALL,
   NetworkSettings_IngressTrafficAllowed_INGRESSTRAFFICALLOWEDINTERNALONLY,
   NetworkSettings_IngressTrafficAllowed_INGRESSTRAFFICALLOWEDINTERNALANDLB,
-  NetworkSettings_IngressTrafficAllowed #-}
+  NetworkSettings_IngressTrafficAllowed
+  #-}
 
 -- | Phase indicates when in the container event propagation this event is being communicated. Events are sent before and after the per-resource events are propagated. required
-newtype ProjectEvent_Phase = ProjectEvent_Phase { fromProjectEvent_Phase :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectEvent_Phase = ProjectEvent_Phase {fromProjectEvent_Phase :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern ProjectEvent_Phase_CONTAINEREVENTPHASEUNSPECIFIED :: ProjectEvent_Phase
 pattern ProjectEvent_Phase_CONTAINEREVENTPHASEUNSPECIFIED = ProjectEvent_Phase "CONTAINER_EVENT_PHASE_UNSPECIFIED"
 
--- | 
 pattern ProjectEvent_Phase_BEFORERESOURCEHANDLING :: ProjectEvent_Phase
 pattern ProjectEvent_Phase_BEFORERESOURCEHANDLING = ProjectEvent_Phase "BEFORE_RESOURCE_HANDLING"
 
--- | 
 pattern ProjectEvent_Phase_AFTERRESOURCEHANDLING :: ProjectEvent_Phase
 pattern ProjectEvent_Phase_AFTERRESOURCEHANDLING = ProjectEvent_Phase "AFTER_RESOURCE_HANDLING"
 
@@ -1011,20 +971,21 @@ pattern ProjectEvent_Phase_AFTERRESOURCEHANDLING = ProjectEvent_Phase "AFTER_RES
   ProjectEvent_Phase_CONTAINEREVENTPHASEUNSPECIFIED,
   ProjectEvent_Phase_BEFORERESOURCEHANDLING,
   ProjectEvent_Phase_AFTERRESOURCEHANDLING,
-  ProjectEvent_Phase #-}
+  ProjectEvent_Phase
+  #-}
 
 -- | The CCFE state of the consumer project. It is the same state that is communicated to the CLH during project events. Notice that this field is not set in the DB, it is only set in this proto when communicated to CLH in the side channel.
-newtype ProjectsMetadata_ConsumerProjectState = ProjectsMetadata_ConsumerProjectState { fromProjectsMetadata_ConsumerProjectState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsMetadata_ConsumerProjectState = ProjectsMetadata_ConsumerProjectState {fromProjectsMetadata_ConsumerProjectState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | A container should never be in an unknown state. Receipt of a container with this state is an error.
 pattern ProjectsMetadata_ConsumerProjectState_UNKNOWNSTATE :: ProjectsMetadata_ConsumerProjectState
@@ -1047,19 +1008,20 @@ pattern ProjectsMetadata_ConsumerProjectState_Deleted = ProjectsMetadata_Consume
   ProjectsMetadata_ConsumerProjectState_ON,
   ProjectsMetadata_ConsumerProjectState_Off,
   ProjectsMetadata_ConsumerProjectState_Deleted,
-  ProjectsMetadata_ConsumerProjectState #-}
+  ProjectsMetadata_ConsumerProjectState
+  #-}
 
-newtype Reasons_Abuse = Reasons_Abuse { fromReasons_Abuse :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Reasons_Abuse = Reasons_Abuse {fromReasons_Abuse :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | An unknown reason indicates that the abuse system has not sent a signal for this container.
 pattern Reasons_Abuse_ABUSEUNKNOWNREASON :: Reasons_Abuse
@@ -1082,19 +1044,20 @@ pattern Reasons_Abuse_Reinstate = Reasons_Abuse "REINSTATE"
   Reasons_Abuse_ABUSECONTROLPLANESYNC,
   Reasons_Abuse_Suspend,
   Reasons_Abuse_Reinstate,
-  Reasons_Abuse #-}
+  Reasons_Abuse
+  #-}
 
-newtype Reasons_Billing = Reasons_Billing { fromReasons_Billing :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Reasons_Billing = Reasons_Billing {fromReasons_Billing :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | An unknown reason indicates that the billing system has not sent a signal for this container.
 pattern Reasons_Billing_BILLINGUNKNOWNREASON :: Reasons_Billing
@@ -1122,19 +1085,20 @@ pattern Reasons_Billing_Open = Reasons_Billing "OPEN"
   Reasons_Billing_Probation,
   Reasons_Billing_Close,
   Reasons_Billing_Open,
-  Reasons_Billing #-}
+  Reasons_Billing
+  #-}
 
-newtype Reasons_DataGovernance = Reasons_DataGovernance { fromReasons_DataGovernance :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Reasons_DataGovernance = Reasons_DataGovernance {fromReasons_DataGovernance :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | An unknown reason indicates that data governance has not sent a signal for this container.
 pattern Reasons_DataGovernance_DATAGOVERNANCEUNKNOWNREASON :: Reasons_DataGovernance
@@ -1162,20 +1126,21 @@ pattern Reasons_DataGovernance_Purge = Reasons_DataGovernance "PURGE"
   Reasons_DataGovernance_Hide,
   Reasons_DataGovernance_Unhide,
   Reasons_DataGovernance_Purge,
-  Reasons_DataGovernance #-}
+  Reasons_DataGovernance
+  #-}
 
 -- | Consumer Container denotes if the service is active within a project or not. This information could be used to clean up resources in case service in DISABLED_FULL i.e. Service is inactive > 30 days.
-newtype Reasons_ServiceActivation = Reasons_ServiceActivation { fromReasons_ServiceActivation :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Reasons_ServiceActivation = Reasons_ServiceActivation {fromReasons_ServiceActivation :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default Unspecified status
 pattern Reasons_ServiceActivation_SERVICEACTIVATIONSTATUSUNSPECIFIED :: Reasons_ServiceActivation
@@ -1203,19 +1168,20 @@ pattern Reasons_ServiceActivation_SERVICEACTIVATIONUNKNOWNREASON = Reasons_Servi
   Reasons_ServiceActivation_SERVICEACTIVATIONDISABLED,
   Reasons_ServiceActivation_SERVICEACTIVATIONDISABLEDFULL,
   Reasons_ServiceActivation_SERVICEACTIVATIONUNKNOWNREASON,
-  Reasons_ServiceActivation #-}
+  Reasons_ServiceActivation
+  #-}
 
-newtype Reasons_ServiceManagement = Reasons_ServiceManagement { fromReasons_ServiceManagement :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Reasons_ServiceManagement = Reasons_ServiceManagement {fromReasons_ServiceManagement :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | An unknown reason indicates that we have not received a signal from service management about this container. Since containers are created by request of service management, this reason should never be set.
 pattern Reasons_ServiceManagement_SERVICEMANAGEMENTUNKNOWNREASON :: Reasons_ServiceManagement
@@ -1248,20 +1214,21 @@ pattern Reasons_ServiceManagement_COMMITDEACTIVATION = Reasons_ServiceManagement
   Reasons_ServiceManagement_PREPAREDEACTIVATION,
   Reasons_ServiceManagement_ABORTDEACTIVATION,
   Reasons_ServiceManagement_COMMITDEACTIVATION,
-  Reasons_ServiceManagement #-}
+  Reasons_ServiceManagement
+  #-}
 
 -- | Resource record type. Example: AAAA.
-newtype ResourceRecord_Type = ResourceRecord_Type { fromResourceRecord_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ResourceRecord_Type = ResourceRecord_Type {fromResourceRecord_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | An unknown resource record.
 pattern ResourceRecord_Type_RECORDTYPEUNSPECIFIED :: ResourceRecord_Type
@@ -1284,20 +1251,21 @@ pattern ResourceRecord_Type_Cname = ResourceRecord_Type "CNAME"
   ResourceRecord_Type_A,
   ResourceRecord_Type_Aaaa,
   ResourceRecord_Type_Cname,
-  ResourceRecord_Type #-}
+  ResourceRecord_Type
+  #-}
 
 -- | The environment of the runtime.
-newtype Runtime_Environment = Runtime_Environment { fromRuntime_Environment :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Runtime_Environment = Runtime_Environment {fromRuntime_Environment :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern Runtime_Environment_ENVIRONMENTUNSPECIFIED :: Runtime_Environment
@@ -1315,20 +1283,21 @@ pattern Runtime_Environment_Flexible = Runtime_Environment "FLEXIBLE"
   Runtime_Environment_ENVIRONMENTUNSPECIFIED,
   Runtime_Environment_Standard,
   Runtime_Environment_Flexible,
-  Runtime_Environment #-}
+  Runtime_Environment
+  #-}
 
 -- | The stage of life this runtime is in, e.g., BETA, GA, etc.
-newtype Runtime_Stage = Runtime_Stage { fromRuntime_Stage :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Runtime_Stage = Runtime_Stage {fromRuntime_Stage :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not specified.
 pattern Runtime_Stage_RUNTIMESTAGEUNSPECIFIED :: Runtime_Stage
@@ -1371,20 +1340,21 @@ pattern Runtime_Stage_ENDOFSUPPORT = Runtime_Stage "END_OF_SUPPORT"
   Runtime_Stage_Deprecated,
   Runtime_Stage_Decommissioned,
   Runtime_Stage_ENDOFSUPPORT,
-  Runtime_Stage #-}
+  Runtime_Stage
+  #-}
 
 -- | SSL management type for this domain. If AUTOMATIC, a managed certificate is automatically provisioned. If MANUAL, certificate_id must be manually specified in order to configure SSL for this domain.
-newtype SslSettings_SslManagementType = SslSettings_SslManagementType { fromSslSettings_SslManagementType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SslSettings_SslManagementType = SslSettings_SslManagementType {fromSslSettings_SslManagementType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Defaults to AUTOMATIC.
 pattern SslSettings_SslManagementType_SSLMANAGEMENTTYPEUNSPECIFIED :: SslSettings_SslManagementType
@@ -1402,20 +1372,21 @@ pattern SslSettings_SslManagementType_Manual = SslSettings_SslManagementType "MA
   SslSettings_SslManagementType_SSLMANAGEMENTTYPEUNSPECIFIED,
   SslSettings_SslManagementType_Automatic,
   SslSettings_SslManagementType_Manual,
-  SslSettings_SslManagementType #-}
+  SslSettings_SslManagementType
+  #-}
 
 -- | Mechanism used to determine which version a request is sent to. The traffic selection algorithm will be stable for either type until allocations are changed.
-newtype TrafficSplit_ShardBy = TrafficSplit_ShardBy { fromTrafficSplit_ShardBy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TrafficSplit_ShardBy = TrafficSplit_ShardBy {fromTrafficSplit_ShardBy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Diversion method unspecified.
 pattern TrafficSplit_ShardBy_Unspecified :: TrafficSplit_ShardBy
@@ -1438,20 +1409,21 @@ pattern TrafficSplit_ShardBy_Random = TrafficSplit_ShardBy "RANDOM"
   TrafficSplit_ShardBy_Cookie,
   TrafficSplit_ShardBy_IP,
   TrafficSplit_ShardBy_Random,
-  TrafficSplit_ShardBy #-}
+  TrafficSplit_ShardBy
+  #-}
 
 -- | Action to take when users access resources that require authentication. Defaults to redirect.
-newtype UrlMap_AuthFailAction = UrlMap_AuthFailAction { fromUrlMap_AuthFailAction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UrlMap_AuthFailAction = UrlMap_AuthFailAction {fromUrlMap_AuthFailAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not specified. AUTH/FAIL/ACTION_REDIRECT is assumed.
 pattern UrlMap_AuthFailAction_AUTHFAILACTIONUNSPECIFIED :: UrlMap_AuthFailAction
@@ -1469,20 +1441,21 @@ pattern UrlMap_AuthFailAction_AUTHFAILACTIONUNAUTHORIZED = UrlMap_AuthFailAction
   UrlMap_AuthFailAction_AUTHFAILACTIONUNSPECIFIED,
   UrlMap_AuthFailAction_AUTHFAILACTIONREDIRECT,
   UrlMap_AuthFailAction_AUTHFAILACTIONUNAUTHORIZED,
-  UrlMap_AuthFailAction #-}
+  UrlMap_AuthFailAction
+  #-}
 
 -- | Level of login required to access this resource. Not supported for Node.js in the App Engine standard environment.
-newtype UrlMap_Login = UrlMap_Login { fromUrlMap_Login :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UrlMap_Login = UrlMap_Login {fromUrlMap_Login :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not specified. LOGIN_OPTIONAL is assumed.
 pattern UrlMap_Login_LOGINUNSPECIFIED :: UrlMap_Login
@@ -1505,20 +1478,21 @@ pattern UrlMap_Login_LOGINREQUIRED = UrlMap_Login "LOGIN_REQUIRED"
   UrlMap_Login_LOGINOPTIONAL,
   UrlMap_Login_LOGINADMIN,
   UrlMap_Login_LOGINREQUIRED,
-  UrlMap_Login #-}
+  UrlMap_Login
+  #-}
 
 -- | 30x code to use when performing redirects for the secure field. Defaults to 302.
-newtype UrlMap_RedirectHttpResponseCode = UrlMap_RedirectHttpResponseCode { fromUrlMap_RedirectHttpResponseCode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UrlMap_RedirectHttpResponseCode = UrlMap_RedirectHttpResponseCode {fromUrlMap_RedirectHttpResponseCode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not specified. 302 is assumed.
 pattern UrlMap_RedirectHttpResponseCode_REDIRECTHTTPRESPONSECODEUNSPECIFIED :: UrlMap_RedirectHttpResponseCode
@@ -1546,20 +1520,21 @@ pattern UrlMap_RedirectHttpResponseCode_REDIRECT_HTTP_RESPONSE_CODE_307 = UrlMap
   UrlMap_RedirectHttpResponseCode_REDIRECT_HTTP_RESPONSE_CODE_302,
   UrlMap_RedirectHttpResponseCode_REDIRECT_HTTP_RESPONSE_CODE_303,
   UrlMap_RedirectHttpResponseCode_REDIRECT_HTTP_RESPONSE_CODE_307,
-  UrlMap_RedirectHttpResponseCode #-}
+  UrlMap_RedirectHttpResponseCode
+  #-}
 
 -- | Security (HTTPS) enforcement for this URL.
-newtype UrlMap_SecurityLevel = UrlMap_SecurityLevel { fromUrlMap_SecurityLevel :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UrlMap_SecurityLevel = UrlMap_SecurityLevel {fromUrlMap_SecurityLevel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not specified.
 pattern UrlMap_SecurityLevel_SECUREUNSPECIFIED :: UrlMap_SecurityLevel
@@ -1587,19 +1562,20 @@ pattern UrlMap_SecurityLevel_SECUREALWAYS = UrlMap_SecurityLevel "SECURE_ALWAYS"
   UrlMap_SecurityLevel_SECURENEVER,
   UrlMap_SecurityLevel_SECUREOPTIONAL,
   UrlMap_SecurityLevel_SECUREALWAYS,
-  UrlMap_SecurityLevel #-}
+  UrlMap_SecurityLevel
+  #-}
 
-newtype Version_InboundServicesItem = Version_InboundServicesItem { fromVersion_InboundServicesItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Version_InboundServicesItem = Version_InboundServicesItem {fromVersion_InboundServicesItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not specified.
 pattern Version_InboundServicesItem_INBOUNDSERVICEUNSPECIFIED :: Version_InboundServicesItem
@@ -1647,20 +1623,21 @@ pattern Version_InboundServicesItem_INBOUNDSERVICEWARMUP = Version_InboundServic
   Version_InboundServicesItem_INBOUNDSERVICEXMPPPRESENCE,
   Version_InboundServicesItem_INBOUNDSERVICECHANNELPRESENCE,
   Version_InboundServicesItem_INBOUNDSERVICEWARMUP,
-  Version_InboundServicesItem #-}
+  Version_InboundServicesItem
+  #-}
 
 -- | Current serving status of this version. Only the versions with a SERVING status create instances and can be billed.SERVING/STATUS/UNSPECIFIED is an invalid value. Defaults to SERVING.
-newtype Version_ServingStatus = Version_ServingStatus { fromVersion_ServingStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Version_ServingStatus = Version_ServingStatus {fromVersion_ServingStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not specified.
 pattern Version_ServingStatus_SERVINGSTATUSUNSPECIFIED :: Version_ServingStatus
@@ -1678,22 +1655,22 @@ pattern Version_ServingStatus_Stopped = Version_ServingStatus "STOPPED"
   Version_ServingStatus_SERVINGSTATUSUNSPECIFIED,
   Version_ServingStatus_Serving,
   Version_ServingStatus_Stopped,
-  Version_ServingStatus #-}
+  Version_ServingStatus
+  #-}
 
 -- | The egress setting for the connector, controlling what traffic is diverted through it.
-newtype VpcAccessConnector_EgressSetting = VpcAccessConnector_EgressSetting { fromVpcAccessConnector_EgressSetting :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype VpcAccessConnector_EgressSetting = VpcAccessConnector_EgressSetting {fromVpcAccessConnector_EgressSetting :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern VpcAccessConnector_EgressSetting_EGRESSSETTINGUNSPECIFIED :: VpcAccessConnector_EgressSetting
 pattern VpcAccessConnector_EgressSetting_EGRESSSETTINGUNSPECIFIED = VpcAccessConnector_EgressSetting "EGRESS_SETTING_UNSPECIFIED"
 
@@ -1709,20 +1686,21 @@ pattern VpcAccessConnector_EgressSetting_PRIVATEIPRANGES = VpcAccessConnector_Eg
   VpcAccessConnector_EgressSetting_EGRESSSETTINGUNSPECIFIED,
   VpcAccessConnector_EgressSetting_ALLTRAFFIC,
   VpcAccessConnector_EgressSetting_PRIVATEIPRANGES,
-  VpcAccessConnector_EgressSetting #-}
+  VpcAccessConnector_EgressSetting
+  #-}
 
 -- | Controls the set of fields returned in the GET response.
-newtype AppsAuthorizedCertificatesGetView = AppsAuthorizedCertificatesGetView { fromAppsAuthorizedCertificatesGetView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AppsAuthorizedCertificatesGetView = AppsAuthorizedCertificatesGetView {fromAppsAuthorizedCertificatesGetView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Basic certificate information, including applicable domains and expiration date.
 pattern AppsAuthorizedCertificatesGetView_BASICCERTIFICATE :: AppsAuthorizedCertificatesGetView
@@ -1735,20 +1713,21 @@ pattern AppsAuthorizedCertificatesGetView_FULLCERTIFICATE = AppsAuthorizedCertif
 {-# COMPLETE
   AppsAuthorizedCertificatesGetView_BASICCERTIFICATE,
   AppsAuthorizedCertificatesGetView_FULLCERTIFICATE,
-  AppsAuthorizedCertificatesGetView #-}
+  AppsAuthorizedCertificatesGetView
+  #-}
 
 -- | Controls the set of fields returned in the LIST response.
-newtype AppsAuthorizedCertificatesListView = AppsAuthorizedCertificatesListView { fromAppsAuthorizedCertificatesListView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AppsAuthorizedCertificatesListView = AppsAuthorizedCertificatesListView {fromAppsAuthorizedCertificatesListView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Basic certificate information, including applicable domains and expiration date.
 pattern AppsAuthorizedCertificatesListView_BASICCERTIFICATE :: AppsAuthorizedCertificatesListView
@@ -1761,20 +1740,21 @@ pattern AppsAuthorizedCertificatesListView_FULLCERTIFICATE = AppsAuthorizedCerti
 {-# COMPLETE
   AppsAuthorizedCertificatesListView_BASICCERTIFICATE,
   AppsAuthorizedCertificatesListView_FULLCERTIFICATE,
-  AppsAuthorizedCertificatesListView #-}
+  AppsAuthorizedCertificatesListView
+  #-}
 
 -- | Whether the domain creation should override any existing mappings for this domain. By default, overrides are rejected.
-newtype AppsDomainMappingsCreateOverrideStrategy = AppsDomainMappingsCreateOverrideStrategy { fromAppsDomainMappingsCreateOverrideStrategy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AppsDomainMappingsCreateOverrideStrategy = AppsDomainMappingsCreateOverrideStrategy {fromAppsDomainMappingsCreateOverrideStrategy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Strategy unspecified. Defaults to STRICT.
 pattern AppsDomainMappingsCreateOverrideStrategy_UNSPECIFIEDDOMAINOVERRIDESTRATEGY :: AppsDomainMappingsCreateOverrideStrategy
@@ -1792,20 +1772,21 @@ pattern AppsDomainMappingsCreateOverrideStrategy_Override = AppsDomainMappingsCr
   AppsDomainMappingsCreateOverrideStrategy_UNSPECIFIEDDOMAINOVERRIDESTRATEGY,
   AppsDomainMappingsCreateOverrideStrategy_Strict,
   AppsDomainMappingsCreateOverrideStrategy_Override,
-  AppsDomainMappingsCreateOverrideStrategy #-}
+  AppsDomainMappingsCreateOverrideStrategy
+  #-}
 
 -- | Options to include extra data
-newtype AppsGetIncludeExtraData = AppsGetIncludeExtraData { fromAppsGetIncludeExtraData :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AppsGetIncludeExtraData = AppsGetIncludeExtraData {fromAppsGetIncludeExtraData :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified: No extra data will be returned
 pattern AppsGetIncludeExtraData_INCLUDEEXTRADATAUNSPECIFIED :: AppsGetIncludeExtraData
@@ -1823,20 +1804,21 @@ pattern AppsGetIncludeExtraData_INCLUDEGOOGLEGENERATEDMETADATA = AppsGetIncludeE
   AppsGetIncludeExtraData_INCLUDEEXTRADATAUNSPECIFIED,
   AppsGetIncludeExtraData_INCLUDEEXTRADATANONE,
   AppsGetIncludeExtraData_INCLUDEGOOGLEGENERATEDMETADATA,
-  AppsGetIncludeExtraData #-}
+  AppsGetIncludeExtraData
+  #-}
 
 -- | Optional. The environment of the Application.
-newtype AppsListRuntimesEnvironment = AppsListRuntimesEnvironment { fromAppsListRuntimesEnvironment :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AppsListRuntimesEnvironment = AppsListRuntimesEnvironment {fromAppsListRuntimesEnvironment :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern AppsListRuntimesEnvironment_ENVIRONMENTUNSPECIFIED :: AppsListRuntimesEnvironment
@@ -1854,20 +1836,21 @@ pattern AppsListRuntimesEnvironment_Flexible = AppsListRuntimesEnvironment "FLEX
   AppsListRuntimesEnvironment_ENVIRONMENTUNSPECIFIED,
   AppsListRuntimesEnvironment_Standard,
   AppsListRuntimesEnvironment_Flexible,
-  AppsListRuntimesEnvironment #-}
+  AppsListRuntimesEnvironment
+  #-}
 
 -- | Controls the set of fields returned in the Get response.
-newtype AppsServicesVersionsGetView = AppsServicesVersionsGetView { fromAppsServicesVersionsGetView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AppsServicesVersionsGetView = AppsServicesVersionsGetView {fromAppsServicesVersionsGetView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Basic version information including scaling and inbound services, but not detailed deployment information.
 pattern AppsServicesVersionsGetView_Basic :: AppsServicesVersionsGetView
@@ -1880,20 +1863,21 @@ pattern AppsServicesVersionsGetView_Full = AppsServicesVersionsGetView "FULL"
 {-# COMPLETE
   AppsServicesVersionsGetView_Basic,
   AppsServicesVersionsGetView_Full,
-  AppsServicesVersionsGetView #-}
+  AppsServicesVersionsGetView
+  #-}
 
 -- | Controls the set of fields returned in the List response.
-newtype AppsServicesVersionsListView = AppsServicesVersionsListView { fromAppsServicesVersionsListView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AppsServicesVersionsListView = AppsServicesVersionsListView {fromAppsServicesVersionsListView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Basic version information including scaling and inbound services, but not detailed deployment information.
 pattern AppsServicesVersionsListView_Basic :: AppsServicesVersionsListView
@@ -1906,4 +1890,5 @@ pattern AppsServicesVersionsListView_Full = AppsServicesVersionsListView "FULL"
 {-# COMPLETE
   AppsServicesVersionsListView_Basic,
   AppsServicesVersionsListView_Full,
-  AppsServicesVersionsListView #-}
+  AppsServicesVersionsListView
+  #-}
