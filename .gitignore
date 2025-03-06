@@ -38,3 +38,6 @@ tags
 
 # Direnv
 .env
+
+# Git pre-commit hooks
+/.pre-commit-config.yaml
