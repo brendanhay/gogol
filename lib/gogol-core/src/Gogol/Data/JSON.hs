@@ -50,7 +50,7 @@ instance (FromJSON a, FromHttpApiData a) => FromJSON (AsText a) where
   parseJSON (String s) = either (fail . Text.unpack) (pure . AsText) (parseQueryParam s)
   parseJSON o = AsText <$> parseJSON o
 
-instance ToHttpApiData a => ToJSON (AsText a) where
+instance (ToHttpApiData a) => ToJSON (AsText a) where
   toJSON (AsText x) = String (toQueryParam x)
 
 #if MIN_VERSION_aeson(2,0,0)
@@ -60,10 +60,10 @@ parseJSONObject :: FromJSON a => HashMap Text Value -> Parser a
 #endif
 parseJSONObject = parseJSON . toJSON
 
-parseJSONText :: FromHttpApiData a => String -> Value -> Parser a
+parseJSONText :: (FromHttpApiData a) => String -> Value -> Parser a
 parseJSONText n = withText n (either (fail . f) pure . parseQueryParam)
   where
     f x = n ++ " - " ++ Text.unpack x
 
-toJSONText :: ToHttpApiData a => a -> Value
+toJSONText :: (ToHttpApiData a) => a -> Value
 toJSONText = String . toQueryParam

@@ -1,13 +1,9 @@
 resolver: lts-22.43
+compiler: ghc-9.6.6
 
 local-bin-path: bin
 
-nix:
-  enable: false
-  packages: 
-    - zlib
-    - icu
-    - pkg-config
+notify-if-nix-on-path: false
 
 extra-deps:
   - base64-1.0

@@ -20,7 +20,7 @@ import Gogol.Types (AccessToken (..))
 serviceAccountTokenFile :: FilePath
 serviceAccountTokenFile = "/var/run/secrets/kubernetes.io/serviceaccount/token"
 
-readTokenFile :: MonadIO m => FilePath -> m (OAuthToken s)
+readTokenFile :: (MonadIO m) => FilePath -> m (OAuthToken s)
 readTokenFile path =
   liftIO $ do
     access <- Text.strip . Text.Encoding.decodeUtf8 <$> ByteString.readFile path

@@ -170,7 +170,7 @@ _Coerce = iso coerce coerce
 
 -- | Invalid Iso, exists for ease of composition with the current 'Lens . Iso'
 -- chaining to hide internal types from the user.
-_Default :: Monoid a => Iso' (Maybe a) a
+_Default :: (Monoid a) => Iso' (Maybe a) a
 _Default = iso f Just
   where
     f (Just x) = x
@@ -322,7 +322,7 @@ instance Semigroup Request where
 appendPath :: Request -> Builder -> Request
 appendPath rq x = rq {_rqPath = _rqPath rq <> "/" <> x}
 
-appendPaths :: ToHttpApiData a => Request -> [a] -> Request
+appendPaths :: (ToHttpApiData a) => Request -> [a] -> Request
 appendPaths rq = appendPath rq . foldMap (mappend "/" . buildText)
 
 appendQuery :: Request -> ByteString -> Maybe Text -> Request
@@ -355,7 +355,7 @@ clientService :: Lens' (GClient a) ServiceConfig
 clientService = lens _cliService (\s a -> s {_cliService = a})
 
 mime ::
-  FromStream c a =>
+  (FromStream c a) =>
   Proxy c ->
   Method ->
   [Int] ->
@@ -390,7 +390,7 @@ gClient f cs m statuses rq s =
       _cliResponse = f
     }
 
-class Accept c => ToBody c a where
+class (Accept c) => ToBody c a where
   toBody :: Proxy c -> a -> GBody
 
 instance ToBody OctetStream ByteString where
@@ -405,10 +405,10 @@ instance ToBody PlainText ByteString where
 instance ToBody PlainText LBS.ByteString where
   toBody p = GBody (contentType p) . RequestBodyLBS
 
-instance ToJSON a => ToBody JSON a where
+instance (ToJSON a) => ToBody JSON a where
   toBody p = GBody (contentType p) . RequestBodyLBS . encode
 
-class Accept c => FromStream c a where
+class (Accept c) => FromStream c a where
   fromStream ::
     Proxy c ->
     Stream ->
@@ -417,7 +417,7 @@ class Accept c => FromStream c a where
 instance FromStream OctetStream Stream where
   fromStream Proxy = pure . Right
 
-instance FromJSON a => FromStream JSON a where
+instance (FromJSON a) => FromStream JSON a where
   fromStream Proxy s = do
     bs <- sinkLBS s
     case eitherDecode bs of
@@ -455,7 +455,7 @@ instance
     buildClient (Proxy :: Proxy fn) $
       setBody rq [toBody (Proxy :: Proxy c) m, b]
 
-instance GoogleClient fn => GoogleClient (AltMedia :> fn) where
+instance (GoogleClient fn) => GoogleClient (AltMedia :> fn) where
   type Fn (AltMedia :> fn) = GBody -> Fn fn
 
   buildClient Proxy rq b =
@@ -579,7 +579,7 @@ instance
     buildClient (Proxy :: Proxy fn) $
       setBody rq [toBody (Proxy :: Proxy c) x]
 
-instance {-# OVERLAPPABLE #-} FromStream c a => GoogleClient (Get (c ': cs) a) where
+instance {-# OVERLAPPABLE #-} (FromStream c a) => GoogleClient (Get (c ': cs) a) where
   type Fn (Get (c ': cs) a) = ServiceConfig -> GClient a
 
   buildClient Proxy = mime (Proxy :: Proxy c) methodGet [200, 203]
@@ -599,7 +599,7 @@ instance {-# OVERLAPPING #-} GoogleClient (Post cs ()) where
 
   buildClient Proxy = discard methodPost [204]
 
-instance {-# OVERLAPPABLE #-} FromStream c a => GoogleClient (Put (c ': cs) a) where
+instance {-# OVERLAPPABLE #-} (FromStream c a) => GoogleClient (Put (c ': cs) a) where
   type Fn (Put (c ': cs) a) = ServiceConfig -> GClient a
 
   buildClient Proxy = mime (Proxy :: Proxy c) methodPut [200, 201]
@@ -609,7 +609,7 @@ instance {-# OVERLAPPING #-} GoogleClient (Put (c ': cs) ()) where
 
   buildClient Proxy = discard methodPut [204]
 
-instance {-# OVERLAPPABLE #-} FromStream c a => GoogleClient (Patch (c ': cs) a) where
+instance {-# OVERLAPPABLE #-} (FromStream c a) => GoogleClient (Patch (c ': cs) a) where
   type Fn (Patch (c ': cs) a) = ServiceConfig -> GClient a
 
   buildClient Proxy = mime (Proxy :: Proxy c) methodPatch [200, 201]
@@ -619,7 +619,7 @@ instance {-# OVERLAPPING #-} GoogleClient (Patch (c ': cs) ()) where
 
   buildClient Proxy = discard methodPatch [204]
 
-instance {-# OVERLAPPABLE #-} FromStream c a => GoogleClient (Delete (c ': cs) a) where
+instance {-# OVERLAPPABLE #-} (FromStream c a) => GoogleClient (Delete (c ': cs) a) where
   type Fn (Delete (c ': cs) a) = ServiceConfig -> GClient a
 
   buildClient Proxy = mime (Proxy :: Proxy c) methodDelete [200, 202]
@@ -632,13 +632,13 @@ instance {-# OVERLAPPING #-} GoogleClient (Delete (c ': cs) ()) where
 sinkLBS :: Stream -> ResourceT IO LBS.ByteString
 sinkLBS = runConduit . (.| Conduit.sinkLazy)
 
-buildText :: ToHttpApiData a => a -> Builder
+buildText :: (ToHttpApiData a) => a -> Builder
 buildText = Build.fromText . toQueryParam
 
-buildSymbol :: forall n proxy. KnownSymbol n => proxy n -> Builder
+buildSymbol :: forall n proxy. (KnownSymbol n) => proxy n -> Builder
 buildSymbol = Build.fromString . symbolVal
 
-byteSymbol :: forall n proxy. KnownSymbol n => proxy n -> ByteString
+byteSymbol :: forall n proxy. (KnownSymbol n) => proxy n -> ByteString
 byteSymbol = BS8.pack . symbolVal
 
 -- | An integral value representing seconds.

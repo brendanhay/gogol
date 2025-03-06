@@ -20,7 +20,7 @@ type Rendered = LText.Text
 
 newtype Syn a = Syn {syntax :: a}
 
-instance Pretty a => ToJSON (Syn a) where
+instance (Pretty a) => ToJSON (Syn a) where
   toJSON = toJSON . prettyPrint . syntax
 
 data Fun = Fun' (Name ()) (Maybe Help) Rendered Rendered

@@ -2,8 +2,6 @@
 
 module Gen.Types.Schema where
 
-import qualified Data.List as List
-import qualified Data.Char as Char
 import Control.Applicative
 import Control.Lens hiding ((.=))
 import Control.Monad
@@ -11,7 +9,9 @@ import Data.Aeson hiding (Array, Bool, Object, String)
 import qualified Data.Aeson as A
 import Data.Aeson.TH
 import Data.Aeson.Types (Parser)
+import qualified Data.Char as Char
 import Data.Function (on)
+import qualified Data.List as List
 import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
 import Data.Maybe
@@ -79,7 +79,7 @@ instance FromJSON Info where
       <*> o .:? "repeated" .!= False
       <*> o .:? "annotations" .!= mempty
 
-defaulted, required, parameter :: HasInfo a => a -> Bool
+defaulted, required, parameter :: (HasInfo a) => a -> Bool
 defaulted = isJust . view iDefault
 required = view iRequired
 parameter s = required s && not (defaulted s)
@@ -104,7 +104,7 @@ emptyInfo =
 requiredInfo :: Info
 requiredInfo = setRequired emptyInfo
 
-setRequired :: HasInfo a => a -> a
+setRequired :: (HasInfo a) => a -> a
 setRequired = iRequired .~ True
 
 data Schema a
@@ -155,7 +155,10 @@ checkType x o = do
   y <- o .: "type"
 
   unless (x == y) . fail . Text.unpack $
-    "Schema type mismatch, expected " <> x <> ", but got " <> y
+    "Schema type mismatch, expected "
+      <> x
+      <> ", but got "
+      <> y
       <> "\n"
       <> Text.pack (show o)
 
@@ -248,7 +251,7 @@ instance FromJSON Enm where
 newtype Arr a = Arr {_aItem :: a}
   deriving (Eq, Show)
 
-instance FromJSON a => FromJSON (Arr a) where
+instance (FromJSON a) => FromJSON (Arr a) where
   parseJSON = withObject "array" $ \o -> do
     checkType "array" o
     Arr <$> o .: "items"
@@ -259,10 +262,11 @@ data Obj a = Obj
   }
   deriving (Eq, Show)
 
-instance FromJSON a => FromJSON (Obj a) where
+instance (FromJSON a) => FromJSON (Obj a) where
   parseJSON = withObject "object" $ \o -> do
     checkType "object" o
-    Obj <$> o .:? "additionalProperties"
+    Obj
+      <$> o .:? "additionalProperties"
       <*> o .:? "properties" .!= mempty
 
 data Param a = Param
@@ -273,13 +277,13 @@ data Param a = Param
 
 makeLenses ''Param
 
-instance FromJSON a => FromJSON (Param a) where
+instance (FromJSON a) => FromJSON (Param a) where
   parseJSON = withObject "param" $ \o ->
     Param
       <$> o .: "location"
       <*> parseJSON (A.Object o)
 
-instance HasInfo a => HasInfo (Param a) where
+instance (HasInfo a) => HasInfo (Param a) where
   info = pParam . info
 
 data MediaUpload = MediaUpload
@@ -315,7 +319,7 @@ data Method a = Method
   }
   deriving (Eq, Show, Functor, Foldable, Traversable)
 
-instance FromJSON a => FromJSON (Method a) where
+instance (FromJSON a) => FromJSON (Method a) where
   parseJSON = withObject "method" $ \o ->
     Method
       <$> o .: "id"
@@ -338,7 +342,7 @@ data Resource a = Resource
   }
   deriving (Eq, Show, Functor, Foldable, Traversable)
 
-instance FromJSON a => FromJSON (Resource a) where
+instance (FromJSON a) => FromJSON (Resource a) where
   parseJSON = withObject "resource" $ \o ->
     Resource
       <$> o .:? "resources" .!= mempty
@@ -404,7 +408,7 @@ data Description a = Description
 
 makeClassy ''Description
 
-instance FromJSON a => FromJSON (Description a) where
+instance (FromJSON a) => FromJSON (Description a) where
   parseJSON = withObject "description" $ \o ->
     Description
       <$> o .: "kind"
@@ -442,7 +446,7 @@ data Service a = Service
 
 makeClassy ''Service
 
-instance FromJSON a => FromJSON (Service a) where
+instance (FromJSON a) => FromJSON (Service a) where
   parseJSON = withObject "service" $ \o ->
     Service
       <$> (o .: "library" <&> renameLibrary)

@@ -3,8 +3,8 @@
 module Main where
 
 import Control.Error
-import Control.Monad
 import Control.Lens hiding ((<.>))
+import Control.Monad
 import Control.Monad.State
 import qualified Data.IORef as IORef
 import Data.List (nub, sort)
@@ -83,7 +83,7 @@ version = eitherReader (Right . Version . Text.pack)
 options :: ParserInfo Opt
 options = info (helper <*> parser) fullDesc
 
-validate :: MonadIO m => Opt -> m Opt
+validate :: (MonadIO m) => Opt -> m Opt
 validate o = flip execStateT o $ do
   sequence_
     [ check optOutput,
@@ -96,7 +96,7 @@ validate o = flip execStateT o $ do
     check :: (MonadIO m, MonadState s m) => Lens' s Path -> m ()
     check l = gets (view l) >>= canon >>= assign l
 
-    canon :: MonadIO m => Path -> m Path
+    canon :: (MonadIO m) => Path -> m Path
     canon = liftIO . FS.canonicalizePath
 
 main :: IO ()

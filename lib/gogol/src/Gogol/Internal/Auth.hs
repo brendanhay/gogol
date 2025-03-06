@@ -295,7 +295,7 @@ tokenRequest =
     }
 
 refreshRequest ::
-  MonadIO m =>
+  (MonadIO m) =>
   Client.Request ->
   Logger ->
   Manager ->
@@ -333,19 +333,19 @@ refreshRequest rq l m = do
             "[Parse Error] Failure parsing token refresh " <> build e
           refreshErr s e Nothing
 
-    refreshErr :: MonadIO m => Status -> Text -> Maybe Text -> m a
+    refreshErr :: (MonadIO m) => Status -> Text -> Maybe Text -> m a
     refreshErr s e = liftIO . throwIO . TokenRefreshError s e
 
     host = Text.decodeUtf8 (Client.host rq)
     path = Text.decodeUtf8 (Client.path rq)
 
-parseLBS :: FromJSON a => LBS.ByteString -> Either Text a
+parseLBS :: (FromJSON a) => LBS.ByteString -> Either Text a
 parseLBS = either (Left . Text.pack) Right . eitherDecode'
 
 base64Encode :: [Pair] -> ByteString
 base64Encode = base64 . LBS.toStrict . encode . object
 
-base64 :: ByteArray a => a -> ByteString
+base64 :: (ByteArray a) => a -> ByteString
 base64 = convertToBase Base64URLUnpadded
 
 textBody :: Text -> RequestBody

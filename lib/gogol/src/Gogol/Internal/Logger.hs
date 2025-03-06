@@ -72,7 +72,7 @@ data LogLevel
 -- <http://hackage.haskell.org/package/tinylog tinylog> or
 -- <http://hackage.haskell.org/package/FastLogger fast-logger>
 -- should be used in production code.
-newLogger :: MonadIO m => LogLevel -> Handle -> m Logger
+newLogger :: (MonadIO m) => LogLevel -> Handle -> m Logger
 newLogger x hd = liftIO $ do
   hSetBinaryMode hd True
   hSetBuffering hd LineBuffering
@@ -142,10 +142,10 @@ instance ToLog StdMethod where build = build . renderStdMethod
 buildLines :: [Builder] -> Builder
 buildLines = mconcat . intersperse "\n"
 
-instance ToLog a => ToLog (CI a) where
+instance (ToLog a) => ToLog (CI a) where
   build = build . CI.foldedCase
 
-instance ToLog a => ToLog (Maybe a) where
+instance (ToLog a) => ToLog (Maybe a) where
   build Nothing = "Nothing"
   build (Just x) = "Just " <> build x
 
