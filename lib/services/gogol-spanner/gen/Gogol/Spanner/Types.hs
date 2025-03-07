@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,874 +16,877 @@
 
 -- |
 -- Module      : Gogol.Spanner.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Spanner.Types
-    (
-    -- * Configuration
-      spannerService
+  ( -- * Configuration
+    spannerService,
 
     -- * OAuth Scopes
-    , CloudPlatform'FullControl
-    , Spanner'Admin
-    , Spanner'Data
+    CloudPlatform'FullControl,
+    Spanner'Admin,
+    Spanner'Data,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AsymmetricAutoscalingOption
-    , AsymmetricAutoscalingOption (..)
-    , newAsymmetricAutoscalingOption
+    AsymmetricAutoscalingOption (..),
+    newAsymmetricAutoscalingOption,
 
     -- ** AutoscalingConfig
-    , AutoscalingConfig (..)
-    , newAutoscalingConfig
+    AutoscalingConfig (..),
+    newAutoscalingConfig,
 
     -- ** AutoscalingConfigOverrides
-    , AutoscalingConfigOverrides (..)
-    , newAutoscalingConfigOverrides
+    AutoscalingConfigOverrides (..),
+    newAutoscalingConfigOverrides,
 
     -- ** AutoscalingLimits
-    , AutoscalingLimits (..)
-    , newAutoscalingLimits
+    AutoscalingLimits (..),
+    newAutoscalingLimits,
 
     -- ** AutoscalingTargets
-    , AutoscalingTargets (..)
-    , newAutoscalingTargets
+    AutoscalingTargets (..),
+    newAutoscalingTargets,
 
     -- ** Backup
-    , Backup (..)
-    , newBackup
+    Backup (..),
+    newBackup,
 
     -- ** Backup_DatabaseDialect
-    , Backup_DatabaseDialect (..)
+    Backup_DatabaseDialect (..),
 
     -- ** Backup_State
-    , Backup_State (..)
+    Backup_State (..),
 
     -- ** BackupInfo
-    , BackupInfo (..)
-    , newBackupInfo
+    BackupInfo (..),
+    newBackupInfo,
 
     -- ** BackupSchedule
-    , BackupSchedule (..)
-    , newBackupSchedule
+    BackupSchedule (..),
+    newBackupSchedule,
 
     -- ** BackupScheduleSpec
-    , BackupScheduleSpec (..)
-    , newBackupScheduleSpec
+    BackupScheduleSpec (..),
+    newBackupScheduleSpec,
 
     -- ** BatchCreateSessionsRequest
-    , BatchCreateSessionsRequest (..)
-    , newBatchCreateSessionsRequest
+    BatchCreateSessionsRequest (..),
+    newBatchCreateSessionsRequest,
 
     -- ** BatchCreateSessionsResponse
-    , BatchCreateSessionsResponse (..)
-    , newBatchCreateSessionsResponse
+    BatchCreateSessionsResponse (..),
+    newBatchCreateSessionsResponse,
 
     -- ** BatchWriteRequest
-    , BatchWriteRequest (..)
-    , newBatchWriteRequest
+    BatchWriteRequest (..),
+    newBatchWriteRequest,
 
     -- ** BatchWriteResponse
-    , BatchWriteResponse (..)
-    , newBatchWriteResponse
+    BatchWriteResponse (..),
+    newBatchWriteResponse,
 
     -- ** BeginTransactionRequest
-    , BeginTransactionRequest (..)
-    , newBeginTransactionRequest
+    BeginTransactionRequest (..),
+    newBeginTransactionRequest,
 
     -- ** Binding
-    , Binding (..)
-    , newBinding
+    Binding (..),
+    newBinding,
 
     -- ** ChangeQuorumMetadata
-    , ChangeQuorumMetadata (..)
-    , newChangeQuorumMetadata
+    ChangeQuorumMetadata (..),
+    newChangeQuorumMetadata,
 
     -- ** ChangeQuorumRequest
-    , ChangeQuorumRequest (..)
-    , newChangeQuorumRequest
+    ChangeQuorumRequest (..),
+    newChangeQuorumRequest,
 
     -- ** ChildLink
-    , ChildLink (..)
-    , newChildLink
+    ChildLink (..),
+    newChildLink,
 
     -- ** CommitRequest
-    , CommitRequest (..)
-    , newCommitRequest
+    CommitRequest (..),
+    newCommitRequest,
 
     -- ** CommitResponse
-    , CommitResponse (..)
-    , newCommitResponse
+    CommitResponse (..),
+    newCommitResponse,
 
     -- ** CommitStats
-    , CommitStats (..)
-    , newCommitStats
+    CommitStats (..),
+    newCommitStats,
 
     -- ** ContextValue
-    , ContextValue (..)
-    , newContextValue
+    ContextValue (..),
+    newContextValue,
 
     -- ** ContextValue_Severity
-    , ContextValue_Severity (..)
+    ContextValue_Severity (..),
 
     -- ** CopyBackupEncryptionConfig
-    , CopyBackupEncryptionConfig (..)
-    , newCopyBackupEncryptionConfig
+    CopyBackupEncryptionConfig (..),
+    newCopyBackupEncryptionConfig,
 
     -- ** CopyBackupEncryptionConfig_EncryptionType
-    , CopyBackupEncryptionConfig_EncryptionType (..)
+    CopyBackupEncryptionConfig_EncryptionType (..),
 
     -- ** CopyBackupMetadata
-    , CopyBackupMetadata (..)
-    , newCopyBackupMetadata
+    CopyBackupMetadata (..),
+    newCopyBackupMetadata,
 
     -- ** CopyBackupRequest
-    , CopyBackupRequest (..)
-    , newCopyBackupRequest
+    CopyBackupRequest (..),
+    newCopyBackupRequest,
 
     -- ** CreateBackupEncryptionConfig
-    , CreateBackupEncryptionConfig (..)
-    , newCreateBackupEncryptionConfig
+    CreateBackupEncryptionConfig (..),
+    newCreateBackupEncryptionConfig,
 
     -- ** CreateBackupEncryptionConfig_EncryptionType
-    , CreateBackupEncryptionConfig_EncryptionType (..)
+    CreateBackupEncryptionConfig_EncryptionType (..),
 
     -- ** CreateBackupMetadata
-    , CreateBackupMetadata (..)
-    , newCreateBackupMetadata
+    CreateBackupMetadata (..),
+    newCreateBackupMetadata,
 
     -- ** CreateDatabaseMetadata
-    , CreateDatabaseMetadata (..)
-    , newCreateDatabaseMetadata
+    CreateDatabaseMetadata (..),
+    newCreateDatabaseMetadata,
 
     -- ** CreateDatabaseRequest
-    , CreateDatabaseRequest (..)
-    , newCreateDatabaseRequest
+    CreateDatabaseRequest (..),
+    newCreateDatabaseRequest,
 
     -- ** CreateDatabaseRequest_DatabaseDialect
-    , CreateDatabaseRequest_DatabaseDialect (..)
+    CreateDatabaseRequest_DatabaseDialect (..),
 
     -- ** CreateInstanceConfigMetadata
-    , CreateInstanceConfigMetadata (..)
-    , newCreateInstanceConfigMetadata
+    CreateInstanceConfigMetadata (..),
+    newCreateInstanceConfigMetadata,
 
     -- ** CreateInstanceConfigRequest
-    , CreateInstanceConfigRequest (..)
-    , newCreateInstanceConfigRequest
+    CreateInstanceConfigRequest (..),
+    newCreateInstanceConfigRequest,
 
     -- ** CreateInstanceMetadata
-    , CreateInstanceMetadata (..)
-    , newCreateInstanceMetadata
+    CreateInstanceMetadata (..),
+    newCreateInstanceMetadata,
 
     -- ** CreateInstanceMetadata_ExpectedFulfillmentPeriod
-    , CreateInstanceMetadata_ExpectedFulfillmentPeriod (..)
+    CreateInstanceMetadata_ExpectedFulfillmentPeriod (..),
 
     -- ** CreateInstancePartitionMetadata
-    , CreateInstancePartitionMetadata (..)
-    , newCreateInstancePartitionMetadata
+    CreateInstancePartitionMetadata (..),
+    newCreateInstancePartitionMetadata,
 
     -- ** CreateInstancePartitionRequest
-    , CreateInstancePartitionRequest (..)
-    , newCreateInstancePartitionRequest
+    CreateInstancePartitionRequest (..),
+    newCreateInstancePartitionRequest,
 
     -- ** CreateInstanceRequest
-    , CreateInstanceRequest (..)
-    , newCreateInstanceRequest
+    CreateInstanceRequest (..),
+    newCreateInstanceRequest,
 
     -- ** CreateSessionRequest
-    , CreateSessionRequest (..)
-    , newCreateSessionRequest
+    CreateSessionRequest (..),
+    newCreateSessionRequest,
 
     -- ** CrontabSpec
-    , CrontabSpec (..)
-    , newCrontabSpec
+    CrontabSpec (..),
+    newCrontabSpec,
 
     -- ** Database
-    , Database (..)
-    , newDatabase
+    Database (..),
+    newDatabase,
 
     -- ** Database_DatabaseDialect
-    , Database_DatabaseDialect (..)
+    Database_DatabaseDialect (..),
 
     -- ** Database_State
-    , Database_State (..)
+    Database_State (..),
 
     -- ** DatabaseRole
-    , DatabaseRole (..)
-    , newDatabaseRole
+    DatabaseRole (..),
+    newDatabaseRole,
 
     -- ** DdlStatementActionInfo
-    , DdlStatementActionInfo (..)
-    , newDdlStatementActionInfo
+    DdlStatementActionInfo (..),
+    newDdlStatementActionInfo,
 
     -- ** Delete'
-    , Delete' (..)
-    , newDelete
+    Delete' (..),
+    newDelete,
 
     -- ** DerivedMetric
-    , DerivedMetric (..)
-    , newDerivedMetric
+    DerivedMetric (..),
+    newDerivedMetric,
 
     -- ** DiagnosticMessage
-    , DiagnosticMessage (..)
-    , newDiagnosticMessage
+    DiagnosticMessage (..),
+    newDiagnosticMessage,
 
     -- ** DiagnosticMessage_Severity
-    , DiagnosticMessage_Severity (..)
+    DiagnosticMessage_Severity (..),
 
     -- ** DirectedReadOptions
-    , DirectedReadOptions (..)
-    , newDirectedReadOptions
+    DirectedReadOptions (..),
+    newDirectedReadOptions,
 
     -- ** DualRegionQuorum
-    , DualRegionQuorum (..)
-    , newDualRegionQuorum
+    DualRegionQuorum (..),
+    newDualRegionQuorum,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** EncryptionConfig
-    , EncryptionConfig (..)
-    , newEncryptionConfig
+    EncryptionConfig (..),
+    newEncryptionConfig,
 
     -- ** EncryptionInfo
-    , EncryptionInfo (..)
-    , newEncryptionInfo
+    EncryptionInfo (..),
+    newEncryptionInfo,
 
     -- ** EncryptionInfo_EncryptionType
-    , EncryptionInfo_EncryptionType (..)
+    EncryptionInfo_EncryptionType (..),
 
     -- ** ExcludeReplicas
-    , ExcludeReplicas (..)
-    , newExcludeReplicas
+    ExcludeReplicas (..),
+    newExcludeReplicas,
 
     -- ** ExecuteBatchDmlRequest
-    , ExecuteBatchDmlRequest (..)
-    , newExecuteBatchDmlRequest
+    ExecuteBatchDmlRequest (..),
+    newExecuteBatchDmlRequest,
 
     -- ** ExecuteBatchDmlResponse
-    , ExecuteBatchDmlResponse (..)
-    , newExecuteBatchDmlResponse
+    ExecuteBatchDmlResponse (..),
+    newExecuteBatchDmlResponse,
 
     -- ** ExecuteSqlRequest
-    , ExecuteSqlRequest (..)
-    , newExecuteSqlRequest
+    ExecuteSqlRequest (..),
+    newExecuteSqlRequest,
 
     -- ** ExecuteSqlRequest_ParamTypes
-    , ExecuteSqlRequest_ParamTypes (..)
-    , newExecuteSqlRequest_ParamTypes
+    ExecuteSqlRequest_ParamTypes (..),
+    newExecuteSqlRequest_ParamTypes,
 
     -- ** ExecuteSqlRequest_Params
-    , ExecuteSqlRequest_Params (..)
-    , newExecuteSqlRequest_Params
+    ExecuteSqlRequest_Params (..),
+    newExecuteSqlRequest_Params,
 
     -- ** ExecuteSqlRequest_QueryMode
-    , ExecuteSqlRequest_QueryMode (..)
+    ExecuteSqlRequest_QueryMode (..),
 
     -- ** Expr
-    , Expr (..)
-    , newExpr
+    Expr (..),
+    newExpr,
 
     -- ** Field
-    , Field (..)
-    , newField
+    Field (..),
+    newField,
 
     -- ** FreeInstanceMetadata
-    , FreeInstanceMetadata (..)
-    , newFreeInstanceMetadata
+    FreeInstanceMetadata (..),
+    newFreeInstanceMetadata,
 
     -- ** FreeInstanceMetadata_ExpireBehavior
-    , FreeInstanceMetadata_ExpireBehavior (..)
+    FreeInstanceMetadata_ExpireBehavior (..),
 
     -- ** FullBackupSpec
-    , FullBackupSpec (..)
-    , newFullBackupSpec
+    FullBackupSpec (..),
+    newFullBackupSpec,
 
     -- ** GetDatabaseDdlResponse
-    , GetDatabaseDdlResponse (..)
-    , newGetDatabaseDdlResponse
+    GetDatabaseDdlResponse (..),
+    newGetDatabaseDdlResponse,
 
     -- ** GetIamPolicyRequest
-    , GetIamPolicyRequest (..)
-    , newGetIamPolicyRequest
+    GetIamPolicyRequest (..),
+    newGetIamPolicyRequest,
 
     -- ** GetPolicyOptions
-    , GetPolicyOptions (..)
-    , newGetPolicyOptions
+    GetPolicyOptions (..),
+    newGetPolicyOptions,
 
     -- ** IncludeReplicas
-    , IncludeReplicas (..)
-    , newIncludeReplicas
+    IncludeReplicas (..),
+    newIncludeReplicas,
 
     -- ** IncrementalBackupSpec
-    , IncrementalBackupSpec (..)
-    , newIncrementalBackupSpec
+    IncrementalBackupSpec (..),
+    newIncrementalBackupSpec,
 
     -- ** IndexAdvice
-    , IndexAdvice (..)
-    , newIndexAdvice
+    IndexAdvice (..),
+    newIndexAdvice,
 
     -- ** IndexedHotKey
-    , IndexedHotKey (..)
-    , newIndexedHotKey
+    IndexedHotKey (..),
+    newIndexedHotKey,
 
     -- ** IndexedHotKey_SparseHotKeys
-    , IndexedHotKey_SparseHotKeys (..)
-    , newIndexedHotKey_SparseHotKeys
+    IndexedHotKey_SparseHotKeys (..),
+    newIndexedHotKey_SparseHotKeys,
 
     -- ** IndexedKeyRangeInfos
-    , IndexedKeyRangeInfos (..)
-    , newIndexedKeyRangeInfos
+    IndexedKeyRangeInfos (..),
+    newIndexedKeyRangeInfos,
 
     -- ** IndexedKeyRangeInfos_KeyRangeInfos
-    , IndexedKeyRangeInfos_KeyRangeInfos (..)
-    , newIndexedKeyRangeInfos_KeyRangeInfos
+    IndexedKeyRangeInfos_KeyRangeInfos (..),
+    newIndexedKeyRangeInfos_KeyRangeInfos,
 
     -- ** Instance
-    , Instance (..)
-    , newInstance
+    Instance (..),
+    newInstance,
 
     -- ** Instance_DefaultBackupScheduleType
-    , Instance_DefaultBackupScheduleType (..)
+    Instance_DefaultBackupScheduleType (..),
 
     -- ** Instance_Edition
-    , Instance_Edition (..)
+    Instance_Edition (..),
 
     -- ** Instance_InstanceType
-    , Instance_InstanceType (..)
+    Instance_InstanceType (..),
 
     -- ** Instance_Labels
-    , Instance_Labels (..)
-    , newInstance_Labels
+    Instance_Labels (..),
+    newInstance_Labels,
 
     -- ** Instance_State
-    , Instance_State (..)
+    Instance_State (..),
 
     -- ** InstanceConfig
-    , InstanceConfig (..)
-    , newInstanceConfig
+    InstanceConfig (..),
+    newInstanceConfig,
 
     -- ** InstanceConfig_ConfigType
-    , InstanceConfig_ConfigType (..)
+    InstanceConfig_ConfigType (..),
 
     -- ** InstanceConfig_FreeInstanceAvailability
-    , InstanceConfig_FreeInstanceAvailability (..)
+    InstanceConfig_FreeInstanceAvailability (..),
 
     -- ** InstanceConfig_Labels
-    , InstanceConfig_Labels (..)
-    , newInstanceConfig_Labels
+    InstanceConfig_Labels (..),
+    newInstanceConfig_Labels,
 
     -- ** InstanceConfig_QuorumType
-    , InstanceConfig_QuorumType (..)
+    InstanceConfig_QuorumType (..),
 
     -- ** InstanceConfig_State
-    , InstanceConfig_State (..)
+    InstanceConfig_State (..),
 
     -- ** InstanceOperationProgress
-    , InstanceOperationProgress (..)
-    , newInstanceOperationProgress
+    InstanceOperationProgress (..),
+    newInstanceOperationProgress,
 
     -- ** InstancePartition
-    , InstancePartition (..)
-    , newInstancePartition
+    InstancePartition (..),
+    newInstancePartition,
 
     -- ** InstancePartition_State
-    , InstancePartition_State (..)
+    InstancePartition_State (..),
 
     -- ** InstanceReplicaSelection
-    , InstanceReplicaSelection (..)
-    , newInstanceReplicaSelection
+    InstanceReplicaSelection (..),
+    newInstanceReplicaSelection,
 
     -- ** KeyRange
-    , KeyRange (..)
-    , newKeyRange
+    KeyRange (..),
+    newKeyRange,
 
     -- ** KeyRangeInfo
-    , KeyRangeInfo (..)
-    , newKeyRangeInfo
+    KeyRangeInfo (..),
+    newKeyRangeInfo,
 
     -- ** KeyRangeInfos
-    , KeyRangeInfos (..)
-    , newKeyRangeInfos
+    KeyRangeInfos (..),
+    newKeyRangeInfos,
 
     -- ** KeySet
-    , KeySet (..)
-    , newKeySet
+    KeySet (..),
+    newKeySet,
 
     -- ** ListBackupOperationsResponse
-    , ListBackupOperationsResponse (..)
-    , newListBackupOperationsResponse
+    ListBackupOperationsResponse (..),
+    newListBackupOperationsResponse,
 
     -- ** ListBackupSchedulesResponse
-    , ListBackupSchedulesResponse (..)
-    , newListBackupSchedulesResponse
+    ListBackupSchedulesResponse (..),
+    newListBackupSchedulesResponse,
 
     -- ** ListBackupsResponse
-    , ListBackupsResponse (..)
-    , newListBackupsResponse
+    ListBackupsResponse (..),
+    newListBackupsResponse,
 
     -- ** ListDatabaseOperationsResponse
-    , ListDatabaseOperationsResponse (..)
-    , newListDatabaseOperationsResponse
+    ListDatabaseOperationsResponse (..),
+    newListDatabaseOperationsResponse,
 
     -- ** ListDatabaseRolesResponse
-    , ListDatabaseRolesResponse (..)
-    , newListDatabaseRolesResponse
+    ListDatabaseRolesResponse (..),
+    newListDatabaseRolesResponse,
 
     -- ** ListDatabasesResponse
-    , ListDatabasesResponse (..)
-    , newListDatabasesResponse
+    ListDatabasesResponse (..),
+    newListDatabasesResponse,
 
     -- ** ListInstanceConfigOperationsResponse
-    , ListInstanceConfigOperationsResponse (..)
-    , newListInstanceConfigOperationsResponse
+    ListInstanceConfigOperationsResponse (..),
+    newListInstanceConfigOperationsResponse,
 
     -- ** ListInstanceConfigsResponse
-    , ListInstanceConfigsResponse (..)
-    , newListInstanceConfigsResponse
+    ListInstanceConfigsResponse (..),
+    newListInstanceConfigsResponse,
 
     -- ** ListInstancePartitionOperationsResponse
-    , ListInstancePartitionOperationsResponse (..)
-    , newListInstancePartitionOperationsResponse
+    ListInstancePartitionOperationsResponse (..),
+    newListInstancePartitionOperationsResponse,
 
     -- ** ListInstancePartitionsResponse
-    , ListInstancePartitionsResponse (..)
-    , newListInstancePartitionsResponse
+    ListInstancePartitionsResponse (..),
+    newListInstancePartitionsResponse,
 
     -- ** ListInstancesResponse
-    , ListInstancesResponse (..)
-    , newListInstancesResponse
+    ListInstancesResponse (..),
+    newListInstancesResponse,
 
     -- ** ListOperationsResponse
-    , ListOperationsResponse (..)
-    , newListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
     -- ** ListScansResponse
-    , ListScansResponse (..)
-    , newListScansResponse
+    ListScansResponse (..),
+    newListScansResponse,
 
     -- ** ListSessionsResponse
-    , ListSessionsResponse (..)
-    , newListSessionsResponse
+    ListSessionsResponse (..),
+    newListSessionsResponse,
 
     -- ** LocalizedString
-    , LocalizedString (..)
-    , newLocalizedString
+    LocalizedString (..),
+    newLocalizedString,
 
     -- ** LocalizedString_Args
-    , LocalizedString_Args (..)
-    , newLocalizedString_Args
+    LocalizedString_Args (..),
+    newLocalizedString_Args,
 
     -- ** Metric
-    , Metric (..)
-    , newMetric
+    Metric (..),
+    newMetric,
 
     -- ** Metric_Aggregation
-    , Metric_Aggregation (..)
+    Metric_Aggregation (..),
 
     -- ** Metric_IndexedHotKeys
-    , Metric_IndexedHotKeys (..)
-    , newMetric_IndexedHotKeys
+    Metric_IndexedHotKeys (..),
+    newMetric_IndexedHotKeys,
 
     -- ** Metric_IndexedKeyRangeInfos
-    , Metric_IndexedKeyRangeInfos (..)
-    , newMetric_IndexedKeyRangeInfos
+    Metric_IndexedKeyRangeInfos (..),
+    newMetric_IndexedKeyRangeInfos,
 
     -- ** MetricMatrix
-    , MetricMatrix (..)
-    , newMetricMatrix
+    MetricMatrix (..),
+    newMetricMatrix,
 
     -- ** MetricMatrixRow
-    , MetricMatrixRow (..)
-    , newMetricMatrixRow
+    MetricMatrixRow (..),
+    newMetricMatrixRow,
 
     -- ** MoveInstanceRequest
-    , MoveInstanceRequest (..)
-    , newMoveInstanceRequest
+    MoveInstanceRequest (..),
+    newMoveInstanceRequest,
 
     -- ** MultiplexedSessionPrecommitToken
-    , MultiplexedSessionPrecommitToken (..)
-    , newMultiplexedSessionPrecommitToken
+    MultiplexedSessionPrecommitToken (..),
+    newMultiplexedSessionPrecommitToken,
 
     -- ** Mutation
-    , Mutation (..)
-    , newMutation
+    Mutation (..),
+    newMutation,
 
     -- ** MutationGroup
-    , MutationGroup (..)
-    , newMutationGroup
+    MutationGroup (..),
+    newMutationGroup,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** OperationProgress
-    , OperationProgress (..)
-    , newOperationProgress
+    OperationProgress (..),
+    newOperationProgress,
 
     -- ** OptimizeRestoredDatabaseMetadata
-    , OptimizeRestoredDatabaseMetadata (..)
-    , newOptimizeRestoredDatabaseMetadata
+    OptimizeRestoredDatabaseMetadata (..),
+    newOptimizeRestoredDatabaseMetadata,
 
     -- ** PartialResultSet
-    , PartialResultSet (..)
-    , newPartialResultSet
+    PartialResultSet (..),
+    newPartialResultSet,
 
     -- ** Partition
-    , Partition (..)
-    , newPartition
+    Partition (..),
+    newPartition,
 
     -- ** PartitionOptions
-    , PartitionOptions (..)
-    , newPartitionOptions
+    PartitionOptions (..),
+    newPartitionOptions,
 
     -- ** PartitionQueryRequest
-    , PartitionQueryRequest (..)
-    , newPartitionQueryRequest
+    PartitionQueryRequest (..),
+    newPartitionQueryRequest,
 
     -- ** PartitionQueryRequest_ParamTypes
-    , PartitionQueryRequest_ParamTypes (..)
-    , newPartitionQueryRequest_ParamTypes
+    PartitionQueryRequest_ParamTypes (..),
+    newPartitionQueryRequest_ParamTypes,
 
     -- ** PartitionQueryRequest_Params
-    , PartitionQueryRequest_Params (..)
-    , newPartitionQueryRequest_Params
+    PartitionQueryRequest_Params (..),
+    newPartitionQueryRequest_Params,
 
     -- ** PartitionReadRequest
-    , PartitionReadRequest (..)
-    , newPartitionReadRequest
+    PartitionReadRequest (..),
+    newPartitionReadRequest,
 
     -- ** PartitionResponse
-    , PartitionResponse (..)
-    , newPartitionResponse
+    PartitionResponse (..),
+    newPartitionResponse,
 
     -- ** PartitionedDml
-    , PartitionedDml (..)
-    , newPartitionedDml
+    PartitionedDml (..),
+    newPartitionedDml,
 
     -- ** PlanNode
-    , PlanNode (..)
-    , newPlanNode
+    PlanNode (..),
+    newPlanNode,
 
     -- ** PlanNode_ExecutionStats
-    , PlanNode_ExecutionStats (..)
-    , newPlanNode_ExecutionStats
+    PlanNode_ExecutionStats (..),
+    newPlanNode_ExecutionStats,
 
     -- ** PlanNode_Kind
-    , PlanNode_Kind (..)
+    PlanNode_Kind (..),
 
     -- ** PlanNode_Metadata
-    , PlanNode_Metadata (..)
-    , newPlanNode_Metadata
+    PlanNode_Metadata (..),
+    newPlanNode_Metadata,
 
     -- ** Policy
-    , Policy (..)
-    , newPolicy
+    Policy (..),
+    newPolicy,
 
     -- ** PrefixNode
-    , PrefixNode (..)
-    , newPrefixNode
+    PrefixNode (..),
+    newPrefixNode,
 
     -- ** QueryAdvisorResult
-    , QueryAdvisorResult (..)
-    , newQueryAdvisorResult
+    QueryAdvisorResult (..),
+    newQueryAdvisorResult,
 
     -- ** QueryOptions
-    , QueryOptions (..)
-    , newQueryOptions
+    QueryOptions (..),
+    newQueryOptions,
 
     -- ** QueryPlan
-    , QueryPlan (..)
-    , newQueryPlan
+    QueryPlan (..),
+    newQueryPlan,
 
     -- ** QuorumInfo
-    , QuorumInfo (..)
-    , newQuorumInfo
+    QuorumInfo (..),
+    newQuorumInfo,
 
     -- ** QuorumInfo_Initiator
-    , QuorumInfo_Initiator (..)
+    QuorumInfo_Initiator (..),
 
     -- ** QuorumType
-    , QuorumType (..)
-    , newQuorumType
+    QuorumType (..),
+    newQuorumType,
 
     -- ** ReadOnly
-    , ReadOnly (..)
-    , newReadOnly
+    ReadOnly (..),
+    newReadOnly,
 
     -- ** ReadRequest
-    , ReadRequest (..)
-    , newReadRequest
+    ReadRequest (..),
+    newReadRequest,
 
     -- ** ReadRequest_LockHint
-    , ReadRequest_LockHint (..)
+    ReadRequest_LockHint (..),
 
     -- ** ReadRequest_OrderBy
-    , ReadRequest_OrderBy (..)
+    ReadRequest_OrderBy (..),
 
     -- ** ReadWrite
-    , ReadWrite (..)
-    , newReadWrite
+    ReadWrite (..),
+    newReadWrite,
 
     -- ** ReadWrite_ReadLockMode
-    , ReadWrite_ReadLockMode (..)
+    ReadWrite_ReadLockMode (..),
 
     -- ** ReplicaComputeCapacity
-    , ReplicaComputeCapacity (..)
-    , newReplicaComputeCapacity
+    ReplicaComputeCapacity (..),
+    newReplicaComputeCapacity,
 
     -- ** ReplicaInfo
-    , ReplicaInfo (..)
-    , newReplicaInfo
+    ReplicaInfo (..),
+    newReplicaInfo,
 
     -- ** ReplicaInfo_Type
-    , ReplicaInfo_Type (..)
+    ReplicaInfo_Type (..),
 
     -- ** ReplicaSelection
-    , ReplicaSelection (..)
-    , newReplicaSelection
+    ReplicaSelection (..),
+    newReplicaSelection,
 
     -- ** ReplicaSelection_Type
-    , ReplicaSelection_Type (..)
+    ReplicaSelection_Type (..),
 
     -- ** RequestOptions
-    , RequestOptions (..)
-    , newRequestOptions
+    RequestOptions (..),
+    newRequestOptions,
 
     -- ** RequestOptions_Priority
-    , RequestOptions_Priority (..)
+    RequestOptions_Priority (..),
 
     -- ** RestoreDatabaseEncryptionConfig
-    , RestoreDatabaseEncryptionConfig (..)
-    , newRestoreDatabaseEncryptionConfig
+    RestoreDatabaseEncryptionConfig (..),
+    newRestoreDatabaseEncryptionConfig,
 
     -- ** RestoreDatabaseEncryptionConfig_EncryptionType
-    , RestoreDatabaseEncryptionConfig_EncryptionType (..)
+    RestoreDatabaseEncryptionConfig_EncryptionType (..),
 
     -- ** RestoreDatabaseMetadata
-    , RestoreDatabaseMetadata (..)
-    , newRestoreDatabaseMetadata
+    RestoreDatabaseMetadata (..),
+    newRestoreDatabaseMetadata,
 
     -- ** RestoreDatabaseMetadata_SourceType
-    , RestoreDatabaseMetadata_SourceType (..)
+    RestoreDatabaseMetadata_SourceType (..),
 
     -- ** RestoreDatabaseRequest
-    , RestoreDatabaseRequest (..)
-    , newRestoreDatabaseRequest
+    RestoreDatabaseRequest (..),
+    newRestoreDatabaseRequest,
 
     -- ** RestoreInfo
-    , RestoreInfo (..)
-    , newRestoreInfo
+    RestoreInfo (..),
+    newRestoreInfo,
 
     -- ** RestoreInfo_SourceType
-    , RestoreInfo_SourceType (..)
+    RestoreInfo_SourceType (..),
 
     -- ** ResultSet
-    , ResultSet (..)
-    , newResultSet
+    ResultSet (..),
+    newResultSet,
 
     -- ** ResultSetMetadata
-    , ResultSetMetadata (..)
-    , newResultSetMetadata
+    ResultSetMetadata (..),
+    newResultSetMetadata,
 
     -- ** ResultSetStats
-    , ResultSetStats (..)
-    , newResultSetStats
+    ResultSetStats (..),
+    newResultSetStats,
 
     -- ** ResultSetStats_QueryStats
-    , ResultSetStats_QueryStats (..)
-    , newResultSetStats_QueryStats
+    ResultSetStats_QueryStats (..),
+    newResultSetStats_QueryStats,
 
     -- ** RollbackRequest
-    , RollbackRequest (..)
-    , newRollbackRequest
+    RollbackRequest (..),
+    newRollbackRequest,
 
     -- ** Scan
-    , Scan (..)
-    , newScan
+    Scan (..),
+    newScan,
 
     -- ** Scan_Details
-    , Scan_Details (..)
-    , newScan_Details
+    Scan_Details (..),
+    newScan_Details,
 
     -- ** ScanData
-    , ScanData (..)
-    , newScanData
+    ScanData (..),
+    newScanData,
 
     -- ** Session
-    , Session (..)
-    , newSession
+    Session (..),
+    newSession,
 
     -- ** Session_Labels
-    , Session_Labels (..)
-    , newSession_Labels
+    Session_Labels (..),
+    newSession_Labels,
 
     -- ** SetIamPolicyRequest
-    , SetIamPolicyRequest (..)
-    , newSetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
 
     -- ** ShortRepresentation
-    , ShortRepresentation (..)
-    , newShortRepresentation
+    ShortRepresentation (..),
+    newShortRepresentation,
 
     -- ** ShortRepresentation_Subqueries
-    , ShortRepresentation_Subqueries (..)
-    , newShortRepresentation_Subqueries
+    ShortRepresentation_Subqueries (..),
+    newShortRepresentation_Subqueries,
 
     -- ** SingleRegionQuorum
-    , SingleRegionQuorum (..)
-    , newSingleRegionQuorum
+    SingleRegionQuorum (..),
+    newSingleRegionQuorum,
 
     -- ** Statement
-    , Statement (..)
-    , newStatement
+    Statement (..),
+    newStatement,
 
     -- ** Statement_ParamTypes
-    , Statement_ParamTypes (..)
-    , newStatement_ParamTypes
+    Statement_ParamTypes (..),
+    newStatement_ParamTypes,
 
     -- ** Statement_Params
-    , Statement_Params (..)
-    , newStatement_Params
+    Statement_Params (..),
+    newStatement_Params,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** StructType
-    , StructType (..)
-    , newStructType
+    StructType (..),
+    newStructType,
 
     -- ** TestIamPermissionsRequest
-    , TestIamPermissionsRequest (..)
-    , newTestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
 
     -- ** TestIamPermissionsResponse
-    , TestIamPermissionsResponse (..)
-    , newTestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
 
     -- ** Transaction
-    , Transaction (..)
-    , newTransaction
+    Transaction (..),
+    newTransaction,
 
     -- ** TransactionOptions
-    , TransactionOptions (..)
-    , newTransactionOptions
+    TransactionOptions (..),
+    newTransactionOptions,
 
     -- ** TransactionSelector
-    , TransactionSelector (..)
-    , newTransactionSelector
+    TransactionSelector (..),
+    newTransactionSelector,
 
     -- ** Type
-    , Type (..)
-    , newType
+    Type (..),
+    newType,
 
     -- ** Type_Code
-    , Type_Code (..)
+    Type_Code (..),
 
     -- ** Type_TypeAnnotation
-    , Type_TypeAnnotation (..)
+    Type_TypeAnnotation (..),
 
     -- ** UpdateDatabaseDdlMetadata
-    , UpdateDatabaseDdlMetadata (..)
-    , newUpdateDatabaseDdlMetadata
+    UpdateDatabaseDdlMetadata (..),
+    newUpdateDatabaseDdlMetadata,
 
     -- ** UpdateDatabaseDdlRequest
-    , UpdateDatabaseDdlRequest (..)
-    , newUpdateDatabaseDdlRequest
+    UpdateDatabaseDdlRequest (..),
+    newUpdateDatabaseDdlRequest,
 
     -- ** UpdateDatabaseMetadata
-    , UpdateDatabaseMetadata (..)
-    , newUpdateDatabaseMetadata
+    UpdateDatabaseMetadata (..),
+    newUpdateDatabaseMetadata,
 
     -- ** UpdateDatabaseRequest
-    , UpdateDatabaseRequest (..)
-    , newUpdateDatabaseRequest
+    UpdateDatabaseRequest (..),
+    newUpdateDatabaseRequest,
 
     -- ** UpdateInstanceConfigMetadata
-    , UpdateInstanceConfigMetadata (..)
-    , newUpdateInstanceConfigMetadata
+    UpdateInstanceConfigMetadata (..),
+    newUpdateInstanceConfigMetadata,
 
     -- ** UpdateInstanceConfigRequest
-    , UpdateInstanceConfigRequest (..)
-    , newUpdateInstanceConfigRequest
+    UpdateInstanceConfigRequest (..),
+    newUpdateInstanceConfigRequest,
 
     -- ** UpdateInstanceMetadata
-    , UpdateInstanceMetadata (..)
-    , newUpdateInstanceMetadata
+    UpdateInstanceMetadata (..),
+    newUpdateInstanceMetadata,
 
     -- ** UpdateInstanceMetadata_ExpectedFulfillmentPeriod
-    , UpdateInstanceMetadata_ExpectedFulfillmentPeriod (..)
+    UpdateInstanceMetadata_ExpectedFulfillmentPeriod (..),
 
     -- ** UpdateInstancePartitionMetadata
-    , UpdateInstancePartitionMetadata (..)
-    , newUpdateInstancePartitionMetadata
+    UpdateInstancePartitionMetadata (..),
+    newUpdateInstancePartitionMetadata,
 
     -- ** UpdateInstancePartitionRequest
-    , UpdateInstancePartitionRequest (..)
-    , newUpdateInstancePartitionRequest
+    UpdateInstancePartitionRequest (..),
+    newUpdateInstancePartitionRequest,
 
     -- ** UpdateInstanceRequest
-    , UpdateInstanceRequest (..)
-    , newUpdateInstanceRequest
+    UpdateInstanceRequest (..),
+    newUpdateInstanceRequest,
 
     -- ** VisualizationData
-    , VisualizationData (..)
-    , newVisualizationData
+    VisualizationData (..),
+    newVisualizationData,
 
     -- ** VisualizationData_KeyUnit
-    , VisualizationData_KeyUnit (..)
+    VisualizationData_KeyUnit (..),
 
     -- ** Write
-    , Write (..)
-    , newWrite
+    Write (..),
+    newWrite,
 
     -- ** ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType
-    , ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType (..)
+    ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType (..),
 
     -- ** ProjectsInstancesDatabasesGetScansView
-    , ProjectsInstancesDatabasesGetScansView (..)
+    ProjectsInstancesDatabasesGetScansView (..),
 
     -- ** ScansListView
-    , ScansListView (..)
-    ) where
+    ScansListView (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Spanner.Internal.Product
 import Gogol.Spanner.Internal.Sum
 
 -- | Default request referring to version @v1@ of the Cloud Spanner API. This contains the host and root path used as a starting point for constructing service requests.
 spannerService :: Core.ServiceConfig
-spannerService
-  = Core.defaultService (Core.ServiceId "spanner:v1")
-      "spanner.googleapis.com"
+spannerService =
+  Core.defaultService
+    (Core.ServiceId "spanner:v1")
+    "spanner.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | Administer your Spanner databases
-type Spanner'Admin = "https://www.googleapis.com/auth/spanner.admin"
+type Spanner'Admin =
+  "https://www.googleapis.com/auth/spanner.admin"
 
 -- | View and manage the contents of your Spanner databases
 type Spanner'Data = "https://www.googleapis.com/auth/spanner.data"

@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.FirebaseDynamicLinks.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.FirebaseDynamicLinks.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * DynamicLinkEventStat_Event
     DynamicLinkEventStat_Event
-      (
-        DynamicLinkEventStat_Event_DYNAMICLINKEVENTUNSPECIFIED,
+      ( DynamicLinkEventStat_Event_DYNAMICLINKEVENTUNSPECIFIED,
         DynamicLinkEventStat_Event_Click,
         DynamicLinkEventStat_Event_Redirect,
         DynamicLinkEventStat_Event_APPINSTALL,
@@ -52,8 +43,7 @@ module Gogol.FirebaseDynamicLinks.Internal.Sum
 
     -- * DynamicLinkEventStat_Platform
     DynamicLinkEventStat_Platform
-      (
-        DynamicLinkEventStat_Platform_DYNAMICLINKPLATFORMUNSPECIFIED,
+      ( DynamicLinkEventStat_Platform_DYNAMICLINKPLATFORMUNSPECIFIED,
         DynamicLinkEventStat_Platform_Android,
         DynamicLinkEventStat_Platform_Ios,
         DynamicLinkEventStat_Platform_Desktop,
@@ -63,8 +53,7 @@ module Gogol.FirebaseDynamicLinks.Internal.Sum
 
     -- * DynamicLinkWarning_WarningCode
     DynamicLinkWarning_WarningCode
-      (
-        DynamicLinkWarning_WarningCode_CODEUNSPECIFIED,
+      ( DynamicLinkWarning_WarningCode_CODEUNSPECIFIED,
         DynamicLinkWarning_WarningCode_NOTINPROJECTANDROIDPACKAGENAME,
         DynamicLinkWarning_WarningCode_NOTINTEGERANDROIDPACKAGEMINVERSION,
         DynamicLinkWarning_WarningCode_UNNECESSARYANDROIDPACKAGEMINVERSION,
@@ -99,8 +88,7 @@ module Gogol.FirebaseDynamicLinks.Internal.Sum
 
     -- * GetIosPostInstallAttributionRequest_RetrievalMethod
     GetIosPostInstallAttributionRequest_RetrievalMethod
-      (
-        GetIosPostInstallAttributionRequest_RetrievalMethod_UNKNOWNPAYLOADRETRIEVALMETHOD,
+      ( GetIosPostInstallAttributionRequest_RetrievalMethod_UNKNOWNPAYLOADRETRIEVALMETHOD,
         GetIosPostInstallAttributionRequest_RetrievalMethod_IMPLICITWEAKMATCH,
         GetIosPostInstallAttributionRequest_RetrievalMethod_EXPLICITWEAKMATCH,
         GetIosPostInstallAttributionRequest_RetrievalMethod_EXPLICITSTRONGAFTERWEAKMATCH,
@@ -109,8 +97,7 @@ module Gogol.FirebaseDynamicLinks.Internal.Sum
 
     -- * GetIosPostInstallAttributionRequest_VisualStyle
     GetIosPostInstallAttributionRequest_VisualStyle
-      (
-        GetIosPostInstallAttributionRequest_VisualStyle_UNKNOWNVISUALSTYLE,
+      ( GetIosPostInstallAttributionRequest_VisualStyle_UNKNOWNVISUALSTYLE,
         GetIosPostInstallAttributionRequest_VisualStyle_DEFAULTSTYLE,
         GetIosPostInstallAttributionRequest_VisualStyle_CUSTOMSTYLE,
         ..
@@ -118,8 +105,7 @@ module Gogol.FirebaseDynamicLinks.Internal.Sum
 
     -- * GetIosPostInstallAttributionResponse_AttributionConfidence
     GetIosPostInstallAttributionResponse_AttributionConfidence
-      (
-        GetIosPostInstallAttributionResponse_AttributionConfidence_UNKNOWNATTRIBUTIONCONFIDENCE,
+      ( GetIosPostInstallAttributionResponse_AttributionConfidence_UNKNOWNATTRIBUTIONCONFIDENCE,
         GetIosPostInstallAttributionResponse_AttributionConfidence_Weak,
         GetIosPostInstallAttributionResponse_AttributionConfidence_Default,
         GetIosPostInstallAttributionResponse_AttributionConfidence_Unique,
@@ -128,8 +114,7 @@ module Gogol.FirebaseDynamicLinks.Internal.Sum
 
     -- * GetIosPostInstallAttributionResponse_RequestIpVersion
     GetIosPostInstallAttributionResponse_RequestIpVersion
-      (
-        GetIosPostInstallAttributionResponse_RequestIpVersion_UNKNOWNIPVERSION,
+      ( GetIosPostInstallAttributionResponse_RequestIpVersion_UNKNOWNIPVERSION,
         GetIosPostInstallAttributionResponse_RequestIpVersion_IP_V4,
         GetIosPostInstallAttributionResponse_RequestIpVersion_IP_V6,
         ..
@@ -137,16 +122,14 @@ module Gogol.FirebaseDynamicLinks.Internal.Sum
 
     -- * ManagedShortLink_FlaggedAttributeItem
     ManagedShortLink_FlaggedAttributeItem
-      (
-        ManagedShortLink_FlaggedAttributeItem_UNSPECIFIEDATTRIBUTE,
+      ( ManagedShortLink_FlaggedAttributeItem_UNSPECIFIEDATTRIBUTE,
         ManagedShortLink_FlaggedAttributeItem_Spam,
         ..
       ),
 
     -- * ManagedShortLink_Visibility
     ManagedShortLink_Visibility
-      (
-        ManagedShortLink_Visibility_UNSPECIFIEDVISIBILITY,
+      ( ManagedShortLink_Visibility_UNSPECIFIEDVISIBILITY,
         ManagedShortLink_Visibility_Unarchived,
         ManagedShortLink_Visibility_Archived,
         ManagedShortLink_Visibility_NEVERSHOWN,
@@ -155,29 +138,29 @@ module Gogol.FirebaseDynamicLinks.Internal.Sum
 
     -- * Suffix_Option
     Suffix_Option
-      (
-        Suffix_Option_OPTIONUNSPECIFIED,
+      ( Suffix_Option_OPTIONUNSPECIFIED,
         Suffix_Option_Unguessable,
         Suffix_Option_Short,
         Suffix_Option_Custom,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -190,20 +173,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | Link event.
-newtype DynamicLinkEventStat_Event = DynamicLinkEventStat_Event { fromDynamicLinkEventStat_Event :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DynamicLinkEventStat_Event = DynamicLinkEventStat_Event {fromDynamicLinkEventStat_Event :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified type.
 pattern DynamicLinkEventStat_Event_DYNAMICLINKEVENTUNSPECIFIED :: DynamicLinkEventStat_Event
@@ -236,20 +220,21 @@ pattern DynamicLinkEventStat_Event_APPREOPEN = DynamicLinkEventStat_Event "APP_R
   DynamicLinkEventStat_Event_APPINSTALL,
   DynamicLinkEventStat_Event_APPFIRSTOPEN,
   DynamicLinkEventStat_Event_APPREOPEN,
-  DynamicLinkEventStat_Event #-}
+  DynamicLinkEventStat_Event
+  #-}
 
 -- | Requested platform.
-newtype DynamicLinkEventStat_Platform = DynamicLinkEventStat_Platform { fromDynamicLinkEventStat_Platform :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DynamicLinkEventStat_Platform = DynamicLinkEventStat_Platform {fromDynamicLinkEventStat_Platform :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified platform.
 pattern DynamicLinkEventStat_Platform_DYNAMICLINKPLATFORMUNSPECIFIED :: DynamicLinkEventStat_Platform
@@ -277,20 +262,21 @@ pattern DynamicLinkEventStat_Platform_Other = DynamicLinkEventStat_Platform "OTH
   DynamicLinkEventStat_Platform_Ios,
   DynamicLinkEventStat_Platform_Desktop,
   DynamicLinkEventStat_Platform_Other,
-  DynamicLinkEventStat_Platform #-}
+  DynamicLinkEventStat_Platform
+  #-}
 
 -- | The warning code.
-newtype DynamicLinkWarning_WarningCode = DynamicLinkWarning_WarningCode { fromDynamicLinkWarning_WarningCode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DynamicLinkWarning_WarningCode = DynamicLinkWarning_WarningCode {fromDynamicLinkWarning_WarningCode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown code.
 pattern DynamicLinkWarning_WarningCode_CODEUNSPECIFIED :: DynamicLinkWarning_WarningCode
@@ -388,11 +374,9 @@ pattern DynamicLinkWarning_WarningCode_NOTURISOCIALIMAGELINK = DynamicLinkWarnin
 pattern DynamicLinkWarning_WarningCode_BADURISCHEMESOCIALIMAGELINK :: DynamicLinkWarning_WarningCode
 pattern DynamicLinkWarning_WarningCode_BADURISCHEMESOCIALIMAGELINK = DynamicLinkWarning_WarningCode "BAD_URI_SCHEME_SOCIAL_IMAGE_LINK"
 
--- | 
 pattern DynamicLinkWarning_WarningCode_NOTURISOCIALURL :: DynamicLinkWarning_WarningCode
 pattern DynamicLinkWarning_WarningCode_NOTURISOCIALURL = DynamicLinkWarning_WarningCode "NOT_URI_SOCIAL_URL"
 
--- | 
 pattern DynamicLinkWarning_WarningCode_BADURISCHEMESOCIALURL :: DynamicLinkWarning_WarningCode
 pattern DynamicLinkWarning_WarningCode_BADURISCHEMESOCIALURL = DynamicLinkWarning_WarningCode "BAD_URI_SCHEME_SOCIAL_URL"
 
@@ -443,20 +427,21 @@ pattern DynamicLinkWarning_WarningCode_APIDEPRECATED = DynamicLinkWarning_Warnin
   DynamicLinkWarning_WarningCode_LINKWITHFRAGMENTS,
   DynamicLinkWarning_WarningCode_NOTMATCHINGIOSBUNDLEIDANDSTOREID,
   DynamicLinkWarning_WarningCode_APIDEPRECATED,
-  DynamicLinkWarning_WarningCode #-}
+  DynamicLinkWarning_WarningCode
+  #-}
 
 -- | App post install attribution retrieval information. Disambiguates mechanism (iSDK or developer invoked) to retrieve payload from clicked link.
-newtype GetIosPostInstallAttributionRequest_RetrievalMethod = GetIosPostInstallAttributionRequest_RetrievalMethod { fromGetIosPostInstallAttributionRequest_RetrievalMethod :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GetIosPostInstallAttributionRequest_RetrievalMethod = GetIosPostInstallAttributionRequest_RetrievalMethod {fromGetIosPostInstallAttributionRequest_RetrievalMethod :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown method.
 pattern GetIosPostInstallAttributionRequest_RetrievalMethod_UNKNOWNPAYLOADRETRIEVALMETHOD :: GetIosPostInstallAttributionRequest_RetrievalMethod
@@ -479,20 +464,21 @@ pattern GetIosPostInstallAttributionRequest_RetrievalMethod_EXPLICITSTRONGAFTERW
   GetIosPostInstallAttributionRequest_RetrievalMethod_IMPLICITWEAKMATCH,
   GetIosPostInstallAttributionRequest_RetrievalMethod_EXPLICITWEAKMATCH,
   GetIosPostInstallAttributionRequest_RetrievalMethod_EXPLICITSTRONGAFTERWEAKMATCH,
-  GetIosPostInstallAttributionRequest_RetrievalMethod #-}
+  GetIosPostInstallAttributionRequest_RetrievalMethod
+  #-}
 
 -- | Strong match page information. Disambiguates between default UI and custom page to present when strong match succeeds\/fails to find cookie.
-newtype GetIosPostInstallAttributionRequest_VisualStyle = GetIosPostInstallAttributionRequest_VisualStyle { fromGetIosPostInstallAttributionRequest_VisualStyle :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GetIosPostInstallAttributionRequest_VisualStyle = GetIosPostInstallAttributionRequest_VisualStyle {fromGetIosPostInstallAttributionRequest_VisualStyle :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown style.
 pattern GetIosPostInstallAttributionRequest_VisualStyle_UNKNOWNVISUALSTYLE :: GetIosPostInstallAttributionRequest_VisualStyle
@@ -510,20 +496,21 @@ pattern GetIosPostInstallAttributionRequest_VisualStyle_CUSTOMSTYLE = GetIosPost
   GetIosPostInstallAttributionRequest_VisualStyle_UNKNOWNVISUALSTYLE,
   GetIosPostInstallAttributionRequest_VisualStyle_DEFAULTSTYLE,
   GetIosPostInstallAttributionRequest_VisualStyle_CUSTOMSTYLE,
-  GetIosPostInstallAttributionRequest_VisualStyle #-}
+  GetIosPostInstallAttributionRequest_VisualStyle
+  #-}
 
 -- | The confidence of the returned attribution.
-newtype GetIosPostInstallAttributionResponse_AttributionConfidence = GetIosPostInstallAttributionResponse_AttributionConfidence { fromGetIosPostInstallAttributionResponse_AttributionConfidence :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GetIosPostInstallAttributionResponse_AttributionConfidence = GetIosPostInstallAttributionResponse_AttributionConfidence {fromGetIosPostInstallAttributionResponse_AttributionConfidence :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unset.
 pattern GetIosPostInstallAttributionResponse_AttributionConfidence_UNKNOWNATTRIBUTIONCONFIDENCE :: GetIosPostInstallAttributionResponse_AttributionConfidence
@@ -546,20 +533,21 @@ pattern GetIosPostInstallAttributionResponse_AttributionConfidence_Unique = GetI
   GetIosPostInstallAttributionResponse_AttributionConfidence_Weak,
   GetIosPostInstallAttributionResponse_AttributionConfidence_Default,
   GetIosPostInstallAttributionResponse_AttributionConfidence_Unique,
-  GetIosPostInstallAttributionResponse_AttributionConfidence #-}
+  GetIosPostInstallAttributionResponse_AttributionConfidence
+  #-}
 
 -- | Which IP version the request was made from.
-newtype GetIosPostInstallAttributionResponse_RequestIpVersion = GetIosPostInstallAttributionResponse_RequestIpVersion { fromGetIosPostInstallAttributionResponse_RequestIpVersion :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GetIosPostInstallAttributionResponse_RequestIpVersion = GetIosPostInstallAttributionResponse_RequestIpVersion {fromGetIosPostInstallAttributionResponse_RequestIpVersion :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unset.
 pattern GetIosPostInstallAttributionResponse_RequestIpVersion_UNKNOWNIPVERSION :: GetIosPostInstallAttributionResponse_RequestIpVersion
@@ -577,19 +565,20 @@ pattern GetIosPostInstallAttributionResponse_RequestIpVersion_IP_V6 = GetIosPost
   GetIosPostInstallAttributionResponse_RequestIpVersion_UNKNOWNIPVERSION,
   GetIosPostInstallAttributionResponse_RequestIpVersion_IP_V4,
   GetIosPostInstallAttributionResponse_RequestIpVersion_IP_V6,
-  GetIosPostInstallAttributionResponse_RequestIpVersion #-}
+  GetIosPostInstallAttributionResponse_RequestIpVersion
+  #-}
 
-newtype ManagedShortLink_FlaggedAttributeItem = ManagedShortLink_FlaggedAttributeItem { fromManagedShortLink_FlaggedAttributeItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ManagedShortLink_FlaggedAttributeItem = ManagedShortLink_FlaggedAttributeItem {fromManagedShortLink_FlaggedAttributeItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Indicates that no attributes were found for this short url.
 pattern ManagedShortLink_FlaggedAttributeItem_UNSPECIFIEDATTRIBUTE :: ManagedShortLink_FlaggedAttributeItem
@@ -602,20 +591,21 @@ pattern ManagedShortLink_FlaggedAttributeItem_Spam = ManagedShortLink_FlaggedAtt
 {-# COMPLETE
   ManagedShortLink_FlaggedAttributeItem_UNSPECIFIEDATTRIBUTE,
   ManagedShortLink_FlaggedAttributeItem_Spam,
-  ManagedShortLink_FlaggedAttributeItem #-}
+  ManagedShortLink_FlaggedAttributeItem
+  #-}
 
 -- | Visibility status of link.
-newtype ManagedShortLink_Visibility = ManagedShortLink_Visibility { fromManagedShortLink_Visibility :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ManagedShortLink_Visibility = ManagedShortLink_Visibility {fromManagedShortLink_Visibility :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Visibility of the link is not specified.
 pattern ManagedShortLink_Visibility_UNSPECIFIEDVISIBILITY :: ManagedShortLink_Visibility
@@ -638,20 +628,21 @@ pattern ManagedShortLink_Visibility_NEVERSHOWN = ManagedShortLink_Visibility "NE
   ManagedShortLink_Visibility_Unarchived,
   ManagedShortLink_Visibility_Archived,
   ManagedShortLink_Visibility_NEVERSHOWN,
-  ManagedShortLink_Visibility #-}
+  ManagedShortLink_Visibility
+  #-}
 
 -- | Suffix option.
-newtype Suffix_Option = Suffix_Option { fromSuffix_Option :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Suffix_Option = Suffix_Option {fromSuffix_Option :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The suffix option is not specified, performs as UNGUESSABLE .
 pattern Suffix_Option_OPTIONUNSPECIFIED :: Suffix_Option
@@ -674,4 +665,5 @@ pattern Suffix_Option_Custom = Suffix_Option "CUSTOM"
   Suffix_Option_Unguessable,
   Suffix_Option_Short,
   Suffix_Option_Custom,
-  Suffix_Option #-}
+  Suffix_Option
+  #-}

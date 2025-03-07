@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.Books.Mylibrary.Bookshelves.ClearVolumes
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,91 +27,93 @@
 --
 -- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.mylibrary.bookshelves.clearVolumes@.
 module Gogol.Books.Mylibrary.Bookshelves.ClearVolumes
-    (
-    -- * Resource
-      BooksMylibraryBookshelvesClearVolumesResource
+  ( -- * Resource
+    BooksMylibraryBookshelvesClearVolumesResource,
 
     -- ** Constructing a Request
-    , BooksMylibraryBookshelvesClearVolumes (..)
-    , newBooksMylibraryBookshelvesClearVolumes
-    ) where
+    BooksMylibraryBookshelvesClearVolumes (..),
+    newBooksMylibraryBookshelvesClearVolumes,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Books.Types
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @books.mylibrary.bookshelves.clearVolumes@ method which the
 -- 'BooksMylibraryBookshelvesClearVolumes' request conforms to.
 type BooksMylibraryBookshelvesClearVolumesResource =
-     "books" Core.:>
-       "v1" Core.:>
-         "mylibrary" Core.:>
-           "bookshelves" Core.:>
-             Core.Capture "shelf" Core.Text Core.:>
-               "clearVolumes" Core.:>
-                 Core.QueryParam "$.xgafv" Xgafv Core.:>
-                   Core.QueryParam "access_token" Core.Text Core.:>
-                     Core.QueryParam "callback" Core.Text Core.:>
-                       Core.QueryParam "source" Core.Text Core.:>
-                         Core.QueryParam "uploadType" Core.Text Core.:>
-                           Core.QueryParam "upload_protocol" Core.Text Core.:>
-                             Core.QueryParam "alt" Core.AltJSON Core.:>
-                               Core.Post '[Core.JSON] Empty
+  "books"
+    Core.:> "v1"
+    Core.:> "mylibrary"
+    Core.:> "bookshelves"
+    Core.:> Core.Capture "shelf" Core.Text
+    Core.:> "clearVolumes"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "source" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Post '[Core.JSON] Empty
 
 -- | Clears all volumes from a bookshelf.
 --
 -- /See:/ 'newBooksMylibraryBookshelvesClearVolumes' smart constructor.
 data BooksMylibraryBookshelvesClearVolumes = BooksMylibraryBookshelvesClearVolumes
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | ID of bookshelf from which to remove a volume.
-    , shelf :: Core.Text
-      -- | String to identify the originator of this request.
-    , source :: (Core.Maybe Core.Text)
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | ID of bookshelf from which to remove a volume.
+    shelf :: Core.Text,
+    -- | String to identify the originator of this request.
+    source :: (Core.Maybe Core.Text),
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'BooksMylibraryBookshelvesClearVolumes' with the minimum fields required to make a request.
-newBooksMylibraryBookshelvesClearVolumes 
-    ::  Core.Text
-       -- ^  ID of bookshelf from which to remove a volume. See 'shelf'.
-    -> BooksMylibraryBookshelvesClearVolumes
+newBooksMylibraryBookshelvesClearVolumes ::
+  -- |  ID of bookshelf from which to remove a volume. See 'shelf'.
+  Core.Text ->
+  BooksMylibraryBookshelvesClearVolumes
 newBooksMylibraryBookshelvesClearVolumes shelf =
   BooksMylibraryBookshelvesClearVolumes
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , shelf = shelf
-    , source = Core.Nothing
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      shelf = shelf,
+      source = Core.Nothing,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           BooksMylibraryBookshelvesClearVolumes
-         where
-        type Rs BooksMylibraryBookshelvesClearVolumes = Empty
-        type Scopes BooksMylibraryBookshelvesClearVolumes =
-             '[Books'FullControl]
-        requestClient
-          BooksMylibraryBookshelvesClearVolumes{..}
-          = go shelf xgafv accessToken callback source
-              uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              booksService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           BooksMylibraryBookshelvesClearVolumesResource)
-                      Core.mempty
-
+instance Core.GoogleRequest BooksMylibraryBookshelvesClearVolumes where
+  type Rs BooksMylibraryBookshelvesClearVolumes = Empty
+  type
+    Scopes BooksMylibraryBookshelvesClearVolumes =
+      '[Books'FullControl]
+  requestClient BooksMylibraryBookshelvesClearVolumes {..} =
+    go
+      shelf
+      xgafv
+      accessToken
+      callback
+      source
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      booksService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy BooksMylibraryBookshelvesClearVolumesResource
+          )
+          Core.mempty

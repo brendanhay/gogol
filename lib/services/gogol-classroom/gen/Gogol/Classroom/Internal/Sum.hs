@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.Classroom.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Classroom.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AddOnAttachmentStudentSubmission_PostSubmissionState
     AddOnAttachmentStudentSubmission_PostSubmissionState
-      (
-        AddOnAttachmentStudentSubmission_PostSubmissionState_SUBMISSIONSTATEUNSPECIFIED,
+      ( AddOnAttachmentStudentSubmission_PostSubmissionState_SUBMISSIONSTATEUNSPECIFIED,
         AddOnAttachmentStudentSubmission_PostSubmissionState_New,
         AddOnAttachmentStudentSubmission_PostSubmissionState_Created,
         AddOnAttachmentStudentSubmission_PostSubmissionState_TURNEDIN,
@@ -52,8 +43,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * Announcement_AssigneeMode
     Announcement_AssigneeMode
-      (
-        Announcement_AssigneeMode_ASSIGNEEMODEUNSPECIFIED,
+      ( Announcement_AssigneeMode_ASSIGNEEMODEUNSPECIFIED,
         Announcement_AssigneeMode_ALLSTUDENTS,
         Announcement_AssigneeMode_INDIVIDUALSTUDENTS,
         ..
@@ -61,8 +51,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * Announcement_State
     Announcement_State
-      (
-        Announcement_State_ANNOUNCEMENTSTATEUNSPECIFIED,
+      ( Announcement_State_ANNOUNCEMENTSTATEUNSPECIFIED,
         Announcement_State_Published,
         Announcement_State_Draft,
         Announcement_State_Deleted,
@@ -71,8 +60,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * Course_CourseState
     Course_CourseState
-      (
-        Course_CourseState_COURSESTATEUNSPECIFIED,
+      ( Course_CourseState_COURSESTATEUNSPECIFIED,
         Course_CourseState_Active,
         Course_CourseState_Archived,
         Course_CourseState_Provisioned,
@@ -83,8 +71,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * CourseWork_AssigneeMode
     CourseWork_AssigneeMode
-      (
-        CourseWork_AssigneeMode_ASSIGNEEMODEUNSPECIFIED,
+      ( CourseWork_AssigneeMode_ASSIGNEEMODEUNSPECIFIED,
         CourseWork_AssigneeMode_ALLSTUDENTS,
         CourseWork_AssigneeMode_INDIVIDUALSTUDENTS,
         ..
@@ -92,8 +79,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * CourseWork_State
     CourseWork_State
-      (
-        CourseWork_State_COURSEWORKSTATEUNSPECIFIED,
+      ( CourseWork_State_COURSEWORKSTATEUNSPECIFIED,
         CourseWork_State_Published,
         CourseWork_State_Draft,
         CourseWork_State_Deleted,
@@ -102,8 +88,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * CourseWork_SubmissionModificationMode
     CourseWork_SubmissionModificationMode
-      (
-        CourseWork_SubmissionModificationMode_SUBMISSIONMODIFICATIONMODEUNSPECIFIED,
+      ( CourseWork_SubmissionModificationMode_SUBMISSIONMODIFICATIONMODEUNSPECIFIED,
         CourseWork_SubmissionModificationMode_MODIFIABLEUNTILTURNEDIN,
         CourseWork_SubmissionModificationMode_Modifiable,
         ..
@@ -111,8 +96,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * CourseWork_WorkType
     CourseWork_WorkType
-      (
-        CourseWork_WorkType_COURSEWORKTYPEUNSPECIFIED,
+      ( CourseWork_WorkType_COURSEWORKTYPEUNSPECIFIED,
         CourseWork_WorkType_Assignment,
         CourseWork_WorkType_SHORTANSWERQUESTION,
         CourseWork_WorkType_MULTIPLECHOICEQUESTION,
@@ -121,8 +105,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * CourseWorkMaterial_AssigneeMode
     CourseWorkMaterial_AssigneeMode
-      (
-        CourseWorkMaterial_AssigneeMode_ASSIGNEEMODEUNSPECIFIED,
+      ( CourseWorkMaterial_AssigneeMode_ASSIGNEEMODEUNSPECIFIED,
         CourseWorkMaterial_AssigneeMode_ALLSTUDENTS,
         CourseWorkMaterial_AssigneeMode_INDIVIDUALSTUDENTS,
         ..
@@ -130,8 +113,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * CourseWorkMaterial_State
     CourseWorkMaterial_State
-      (
-        CourseWorkMaterial_State_COURSEWORKMATERIALSTATEUNSPECIFIED,
+      ( CourseWorkMaterial_State_COURSEWORKMATERIALSTATEUNSPECIFIED,
         CourseWorkMaterial_State_Published,
         CourseWorkMaterial_State_Draft,
         CourseWorkMaterial_State_Deleted,
@@ -140,8 +122,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * Feed_FeedType
     Feed_FeedType
-      (
-        Feed_FeedType_FEEDTYPEUNSPECIFIED,
+      ( Feed_FeedType_FEEDTYPEUNSPECIFIED,
         Feed_FeedType_DOMAINROSTERCHANGES,
         Feed_FeedType_COURSEROSTERCHANGES,
         Feed_FeedType_COURSEWORKCHANGES,
@@ -150,16 +131,14 @@ module Gogol.Classroom.Internal.Sum
 
     -- * GlobalPermission_Permission
     GlobalPermission_Permission
-      (
-        GlobalPermission_Permission_PERMISSIONUNSPECIFIED,
+      ( GlobalPermission_Permission_PERMISSIONUNSPECIFIED,
         GlobalPermission_Permission_CREATECOURSE,
         ..
       ),
 
     -- * GradeHistory_GradeChangeType
     GradeHistory_GradeChangeType
-      (
-        GradeHistory_GradeChangeType_UNKNOWNGRADECHANGETYPE,
+      ( GradeHistory_GradeChangeType_UNKNOWNGRADECHANGETYPE,
         GradeHistory_GradeChangeType_DRAFTGRADEPOINTSEARNEDCHANGE,
         GradeHistory_GradeChangeType_ASSIGNEDGRADEPOINTSEARNEDCHANGE,
         GradeHistory_GradeChangeType_MAXPOINTSCHANGE,
@@ -168,8 +147,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * GradebookSettings_CalculationType
     GradebookSettings_CalculationType
-      (
-        GradebookSettings_CalculationType_CALCULATIONTYPEUNSPECIFIED,
+      ( GradebookSettings_CalculationType_CALCULATIONTYPEUNSPECIFIED,
         GradebookSettings_CalculationType_TOTALPOINTS,
         GradebookSettings_CalculationType_WEIGHTEDCATEGORIES,
         ..
@@ -177,8 +155,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * GradebookSettings_DisplaySetting
     GradebookSettings_DisplaySetting
-      (
-        GradebookSettings_DisplaySetting_DISPLAYSETTINGUNSPECIFIED,
+      ( GradebookSettings_DisplaySetting_DISPLAYSETTINGUNSPECIFIED,
         GradebookSettings_DisplaySetting_SHOWOVERALLGRADE,
         GradebookSettings_DisplaySetting_HIDEOVERALLGRADE,
         GradebookSettings_DisplaySetting_SHOWTEACHERSONLY,
@@ -187,8 +164,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * GuardianInvitation_State
     GuardianInvitation_State
-      (
-        GuardianInvitation_State_GUARDIANINVITATIONSTATEUNSPECIFIED,
+      ( GuardianInvitation_State_GUARDIANINVITATIONSTATEUNSPECIFIED,
         GuardianInvitation_State_Pending,
         GuardianInvitation_State_Complete,
         ..
@@ -196,8 +172,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * Invitation_Role
     Invitation_Role
-      (
-        Invitation_Role_COURSEROLEUNSPECIFIED,
+      ( Invitation_Role_COURSEROLEUNSPECIFIED,
         Invitation_Role_Student,
         Invitation_Role_Teacher,
         Invitation_Role_Owner,
@@ -206,8 +181,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * ModifyAnnouncementAssigneesRequest_AssigneeMode
     ModifyAnnouncementAssigneesRequest_AssigneeMode
-      (
-        ModifyAnnouncementAssigneesRequest_AssigneeMode_ASSIGNEEMODEUNSPECIFIED,
+      ( ModifyAnnouncementAssigneesRequest_AssigneeMode_ASSIGNEEMODEUNSPECIFIED,
         ModifyAnnouncementAssigneesRequest_AssigneeMode_ALLSTUDENTS,
         ModifyAnnouncementAssigneesRequest_AssigneeMode_INDIVIDUALSTUDENTS,
         ..
@@ -215,8 +189,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * ModifyCourseWorkAssigneesRequest_AssigneeMode
     ModifyCourseWorkAssigneesRequest_AssigneeMode
-      (
-        ModifyCourseWorkAssigneesRequest_AssigneeMode_ASSIGNEEMODEUNSPECIFIED,
+      ( ModifyCourseWorkAssigneesRequest_AssigneeMode_ASSIGNEEMODEUNSPECIFIED,
         ModifyCourseWorkAssigneesRequest_AssigneeMode_ALLSTUDENTS,
         ModifyCourseWorkAssigneesRequest_AssigneeMode_INDIVIDUALSTUDENTS,
         ..
@@ -224,8 +197,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * SharedDriveFile_ShareMode
     SharedDriveFile_ShareMode
-      (
-        SharedDriveFile_ShareMode_UNKNOWNSHAREMODE,
+      ( SharedDriveFile_ShareMode_UNKNOWNSHAREMODE,
         SharedDriveFile_ShareMode_View,
         SharedDriveFile_ShareMode_Edit,
         SharedDriveFile_ShareMode_STUDENTCOPY,
@@ -234,8 +206,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * StateHistory_State
     StateHistory_State
-      (
-        StateHistory_State_STATEUNSPECIFIED,
+      ( StateHistory_State_STATEUNSPECIFIED,
         StateHistory_State_Created,
         StateHistory_State_TURNEDIN,
         StateHistory_State_Returned,
@@ -246,8 +217,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * StudentSubmission_CourseWorkType
     StudentSubmission_CourseWorkType
-      (
-        StudentSubmission_CourseWorkType_COURSEWORKTYPEUNSPECIFIED,
+      ( StudentSubmission_CourseWorkType_COURSEWORKTYPEUNSPECIFIED,
         StudentSubmission_CourseWorkType_Assignment,
         StudentSubmission_CourseWorkType_SHORTANSWERQUESTION,
         StudentSubmission_CourseWorkType_MULTIPLECHOICEQUESTION,
@@ -256,8 +226,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * StudentSubmission_State
     StudentSubmission_State
-      (
-        StudentSubmission_State_SUBMISSIONSTATEUNSPECIFIED,
+      ( StudentSubmission_State_SUBMISSIONSTATEUNSPECIFIED,
         StudentSubmission_State_New,
         StudentSubmission_State_Created,
         StudentSubmission_State_TURNEDIN,
@@ -268,8 +237,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * CoursesAnnouncementsListAnnouncementStates
     CoursesAnnouncementsListAnnouncementStates
-      (
-        CoursesAnnouncementsListAnnouncementStates_ANNOUNCEMENTSTATEUNSPECIFIED,
+      ( CoursesAnnouncementsListAnnouncementStates_ANNOUNCEMENTSTATEUNSPECIFIED,
         CoursesAnnouncementsListAnnouncementStates_Published,
         CoursesAnnouncementsListAnnouncementStates_Draft,
         CoursesAnnouncementsListAnnouncementStates_Deleted,
@@ -278,8 +246,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * CoursesCourseWorkListCourseWorkStates
     CoursesCourseWorkListCourseWorkStates
-      (
-        CoursesCourseWorkListCourseWorkStates_COURSEWORKSTATEUNSPECIFIED,
+      ( CoursesCourseWorkListCourseWorkStates_COURSEWORKSTATEUNSPECIFIED,
         CoursesCourseWorkListCourseWorkStates_Published,
         CoursesCourseWorkListCourseWorkStates_Draft,
         CoursesCourseWorkListCourseWorkStates_Deleted,
@@ -288,8 +255,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * CoursesCourseWorkStudentSubmissionsListLate
     CoursesCourseWorkStudentSubmissionsListLate
-      (
-        CoursesCourseWorkStudentSubmissionsListLate_LATEVALUESUNSPECIFIED,
+      ( CoursesCourseWorkStudentSubmissionsListLate_LATEVALUESUNSPECIFIED,
         CoursesCourseWorkStudentSubmissionsListLate_LATEONLY,
         CoursesCourseWorkStudentSubmissionsListLate_NOTLATEONLY,
         ..
@@ -297,8 +263,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * CoursesCourseWorkStudentSubmissionsListStates
     CoursesCourseWorkStudentSubmissionsListStates
-      (
-        CoursesCourseWorkStudentSubmissionsListStates_SUBMISSIONSTATEUNSPECIFIED,
+      ( CoursesCourseWorkStudentSubmissionsListStates_SUBMISSIONSTATEUNSPECIFIED,
         CoursesCourseWorkStudentSubmissionsListStates_New,
         CoursesCourseWorkStudentSubmissionsListStates_Created,
         CoursesCourseWorkStudentSubmissionsListStates_TURNEDIN,
@@ -309,8 +274,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * CoursesCourseWorkMaterialsListCourseWorkMaterialStates
     CoursesCourseWorkMaterialsListCourseWorkMaterialStates
-      (
-        CoursesCourseWorkMaterialsListCourseWorkMaterialStates_COURSEWORKMATERIALSTATEUNSPECIFIED,
+      ( CoursesCourseWorkMaterialsListCourseWorkMaterialStates_COURSEWORKMATERIALSTATEUNSPECIFIED,
         CoursesCourseWorkMaterialsListCourseWorkMaterialStates_Published,
         CoursesCourseWorkMaterialsListCourseWorkMaterialStates_Draft,
         CoursesCourseWorkMaterialsListCourseWorkMaterialStates_Deleted,
@@ -319,8 +283,7 @@ module Gogol.Classroom.Internal.Sum
 
     -- * CoursesListCourseStates
     CoursesListCourseStates
-      (
-        CoursesListCourseStates_COURSESTATEUNSPECIFIED,
+      ( CoursesListCourseStates_COURSESTATEUNSPECIFIED,
         CoursesListCourseStates_Active,
         CoursesListCourseStates_Archived,
         CoursesListCourseStates_Provisioned,
@@ -331,28 +294,28 @@ module Gogol.Classroom.Internal.Sum
 
     -- * UserProfilesGuardianInvitationsListStates
     UserProfilesGuardianInvitationsListStates
-      (
-        UserProfilesGuardianInvitationsListStates_GUARDIANINVITATIONSTATEUNSPECIFIED,
+      ( UserProfilesGuardianInvitationsListStates_GUARDIANINVITATIONSTATEUNSPECIFIED,
         UserProfilesGuardianInvitationsListStates_Pending,
         UserProfilesGuardianInvitationsListStates_Complete,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -365,20 +328,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | Submission state of add-on attachment\'s parent post (i.e. assignment).
-newtype AddOnAttachmentStudentSubmission_PostSubmissionState = AddOnAttachmentStudentSubmission_PostSubmissionState { fromAddOnAttachmentStudentSubmission_PostSubmissionState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AddOnAttachmentStudentSubmission_PostSubmissionState = AddOnAttachmentStudentSubmission_PostSubmissionState {fromAddOnAttachmentStudentSubmission_PostSubmissionState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No state specified. This should never be returned.
 pattern AddOnAttachmentStudentSubmission_PostSubmissionState_SUBMISSIONSTATEUNSPECIFIED :: AddOnAttachmentStudentSubmission_PostSubmissionState
@@ -411,20 +375,21 @@ pattern AddOnAttachmentStudentSubmission_PostSubmissionState_RECLAIMEDBYSTUDENT 
   AddOnAttachmentStudentSubmission_PostSubmissionState_TURNEDIN,
   AddOnAttachmentStudentSubmission_PostSubmissionState_Returned,
   AddOnAttachmentStudentSubmission_PostSubmissionState_RECLAIMEDBYSTUDENT,
-  AddOnAttachmentStudentSubmission_PostSubmissionState #-}
+  AddOnAttachmentStudentSubmission_PostSubmissionState
+  #-}
 
 -- | Assignee mode of the announcement. If unspecified, the default value is @ALL_STUDENTS@.
-newtype Announcement_AssigneeMode = Announcement_AssigneeMode { fromAnnouncement_AssigneeMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Announcement_AssigneeMode = Announcement_AssigneeMode {fromAnnouncement_AssigneeMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No mode specified. This is never returned.
 pattern Announcement_AssigneeMode_ASSIGNEEMODEUNSPECIFIED :: Announcement_AssigneeMode
@@ -442,20 +407,21 @@ pattern Announcement_AssigneeMode_INDIVIDUALSTUDENTS = Announcement_AssigneeMode
   Announcement_AssigneeMode_ASSIGNEEMODEUNSPECIFIED,
   Announcement_AssigneeMode_ALLSTUDENTS,
   Announcement_AssigneeMode_INDIVIDUALSTUDENTS,
-  Announcement_AssigneeMode #-}
+  Announcement_AssigneeMode
+  #-}
 
 -- | Status of this announcement. If unspecified, the default state is @DRAFT@.
-newtype Announcement_State = Announcement_State { fromAnnouncement_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Announcement_State = Announcement_State {fromAnnouncement_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No state specified. This is never returned.
 pattern Announcement_State_ANNOUNCEMENTSTATEUNSPECIFIED :: Announcement_State
@@ -478,20 +444,21 @@ pattern Announcement_State_Deleted = Announcement_State "DELETED"
   Announcement_State_Published,
   Announcement_State_Draft,
   Announcement_State_Deleted,
-  Announcement_State #-}
+  Announcement_State
+  #-}
 
 -- | State of the course. If unspecified, the default state is @PROVISIONED@.
-newtype Course_CourseState = Course_CourseState { fromCourse_CourseState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Course_CourseState = Course_CourseState {fromCourse_CourseState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No course state. No returned Course message will use this value.
 pattern Course_CourseState_COURSESTATEUNSPECIFIED :: Course_CourseState
@@ -524,20 +491,21 @@ pattern Course_CourseState_Suspended = Course_CourseState "SUSPENDED"
   Course_CourseState_Provisioned,
   Course_CourseState_Declined,
   Course_CourseState_Suspended,
-  Course_CourseState #-}
+  Course_CourseState
+  #-}
 
 -- | Assignee mode of the coursework. If unspecified, the default value is @ALL_STUDENTS@.
-newtype CourseWork_AssigneeMode = CourseWork_AssigneeMode { fromCourseWork_AssigneeMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CourseWork_AssigneeMode = CourseWork_AssigneeMode {fromCourseWork_AssigneeMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No mode specified. This is never returned.
 pattern CourseWork_AssigneeMode_ASSIGNEEMODEUNSPECIFIED :: CourseWork_AssigneeMode
@@ -555,20 +523,21 @@ pattern CourseWork_AssigneeMode_INDIVIDUALSTUDENTS = CourseWork_AssigneeMode "IN
   CourseWork_AssigneeMode_ASSIGNEEMODEUNSPECIFIED,
   CourseWork_AssigneeMode_ALLSTUDENTS,
   CourseWork_AssigneeMode_INDIVIDUALSTUDENTS,
-  CourseWork_AssigneeMode #-}
+  CourseWork_AssigneeMode
+  #-}
 
 -- | Status of this course work. If unspecified, the default state is @DRAFT@.
-newtype CourseWork_State = CourseWork_State { fromCourseWork_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CourseWork_State = CourseWork_State {fromCourseWork_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No state specified. This is never returned.
 pattern CourseWork_State_COURSEWORKSTATEUNSPECIFIED :: CourseWork_State
@@ -591,20 +560,21 @@ pattern CourseWork_State_Deleted = CourseWork_State "DELETED"
   CourseWork_State_Published,
   CourseWork_State_Draft,
   CourseWork_State_Deleted,
-  CourseWork_State #-}
+  CourseWork_State
+  #-}
 
 -- | Setting to determine when students are allowed to modify submissions. If unspecified, the default value is @MODIFIABLE_UNTIL_TURNED_IN@.
-newtype CourseWork_SubmissionModificationMode = CourseWork_SubmissionModificationMode { fromCourseWork_SubmissionModificationMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CourseWork_SubmissionModificationMode = CourseWork_SubmissionModificationMode {fromCourseWork_SubmissionModificationMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No modification mode specified. This is never returned.
 pattern CourseWork_SubmissionModificationMode_SUBMISSIONMODIFICATIONMODEUNSPECIFIED :: CourseWork_SubmissionModificationMode
@@ -622,20 +592,21 @@ pattern CourseWork_SubmissionModificationMode_Modifiable = CourseWork_Submission
   CourseWork_SubmissionModificationMode_SUBMISSIONMODIFICATIONMODEUNSPECIFIED,
   CourseWork_SubmissionModificationMode_MODIFIABLEUNTILTURNEDIN,
   CourseWork_SubmissionModificationMode_Modifiable,
-  CourseWork_SubmissionModificationMode #-}
+  CourseWork_SubmissionModificationMode
+  #-}
 
 -- | Type of this course work. The type is set when the course work is created and cannot be changed.
-newtype CourseWork_WorkType = CourseWork_WorkType { fromCourseWork_WorkType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CourseWork_WorkType = CourseWork_WorkType {fromCourseWork_WorkType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No work type specified. This is never returned.
 pattern CourseWork_WorkType_COURSEWORKTYPEUNSPECIFIED :: CourseWork_WorkType
@@ -658,20 +629,21 @@ pattern CourseWork_WorkType_MULTIPLECHOICEQUESTION = CourseWork_WorkType "MULTIP
   CourseWork_WorkType_Assignment,
   CourseWork_WorkType_SHORTANSWERQUESTION,
   CourseWork_WorkType_MULTIPLECHOICEQUESTION,
-  CourseWork_WorkType #-}
+  CourseWork_WorkType
+  #-}
 
 -- | Assignee mode of the course work material. If unspecified, the default value is @ALL_STUDENTS@.
-newtype CourseWorkMaterial_AssigneeMode = CourseWorkMaterial_AssigneeMode { fromCourseWorkMaterial_AssigneeMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CourseWorkMaterial_AssigneeMode = CourseWorkMaterial_AssigneeMode {fromCourseWorkMaterial_AssigneeMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No mode specified. This is never returned.
 pattern CourseWorkMaterial_AssigneeMode_ASSIGNEEMODEUNSPECIFIED :: CourseWorkMaterial_AssigneeMode
@@ -689,20 +661,21 @@ pattern CourseWorkMaterial_AssigneeMode_INDIVIDUALSTUDENTS = CourseWorkMaterial_
   CourseWorkMaterial_AssigneeMode_ASSIGNEEMODEUNSPECIFIED,
   CourseWorkMaterial_AssigneeMode_ALLSTUDENTS,
   CourseWorkMaterial_AssigneeMode_INDIVIDUALSTUDENTS,
-  CourseWorkMaterial_AssigneeMode #-}
+  CourseWorkMaterial_AssigneeMode
+  #-}
 
 -- | Status of this course work material. If unspecified, the default state is @DRAFT@.
-newtype CourseWorkMaterial_State = CourseWorkMaterial_State { fromCourseWorkMaterial_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CourseWorkMaterial_State = CourseWorkMaterial_State {fromCourseWorkMaterial_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No state specified. This is never returned.
 pattern CourseWorkMaterial_State_COURSEWORKMATERIALSTATEUNSPECIFIED :: CourseWorkMaterial_State
@@ -725,20 +698,21 @@ pattern CourseWorkMaterial_State_Deleted = CourseWorkMaterial_State "DELETED"
   CourseWorkMaterial_State_Published,
   CourseWorkMaterial_State_Draft,
   CourseWorkMaterial_State_Deleted,
-  CourseWorkMaterial_State #-}
+  CourseWorkMaterial_State
+  #-}
 
 -- | The type of feed.
-newtype Feed_FeedType = Feed_FeedType { fromFeed_FeedType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Feed_FeedType = Feed_FeedType {fromFeed_FeedType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Should never be returned or provided.
 pattern Feed_FeedType_FEEDTYPEUNSPECIFIED :: Feed_FeedType
@@ -761,20 +735,21 @@ pattern Feed_FeedType_COURSEWORKCHANGES = Feed_FeedType "COURSE_WORK_CHANGES"
   Feed_FeedType_DOMAINROSTERCHANGES,
   Feed_FeedType_COURSEROSTERCHANGES,
   Feed_FeedType_COURSEWORKCHANGES,
-  Feed_FeedType #-}
+  Feed_FeedType
+  #-}
 
 -- | Permission value.
-newtype GlobalPermission_Permission = GlobalPermission_Permission { fromGlobalPermission_Permission :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GlobalPermission_Permission = GlobalPermission_Permission {fromGlobalPermission_Permission :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No permission is specified. This is not returned and is not a valid value.
 pattern GlobalPermission_Permission_PERMISSIONUNSPECIFIED :: GlobalPermission_Permission
@@ -787,20 +762,21 @@ pattern GlobalPermission_Permission_CREATECOURSE = GlobalPermission_Permission "
 {-# COMPLETE
   GlobalPermission_Permission_PERMISSIONUNSPECIFIED,
   GlobalPermission_Permission_CREATECOURSE,
-  GlobalPermission_Permission #-}
+  GlobalPermission_Permission
+  #-}
 
 -- | The type of grade change at this time in the submission grade history.
-newtype GradeHistory_GradeChangeType = GradeHistory_GradeChangeType { fromGradeHistory_GradeChangeType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GradeHistory_GradeChangeType = GradeHistory_GradeChangeType {fromGradeHistory_GradeChangeType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No grade change type specified. This should never be returned.
 pattern GradeHistory_GradeChangeType_UNKNOWNGRADECHANGETYPE :: GradeHistory_GradeChangeType
@@ -823,20 +799,21 @@ pattern GradeHistory_GradeChangeType_MAXPOINTSCHANGE = GradeHistory_GradeChangeT
   GradeHistory_GradeChangeType_DRAFTGRADEPOINTSEARNEDCHANGE,
   GradeHistory_GradeChangeType_ASSIGNEDGRADEPOINTSEARNEDCHANGE,
   GradeHistory_GradeChangeType_MAXPOINTSCHANGE,
-  GradeHistory_GradeChangeType #-}
+  GradeHistory_GradeChangeType
+  #-}
 
 -- | Indicates how the overall grade is calculated.
-newtype GradebookSettings_CalculationType = GradebookSettings_CalculationType { fromGradebookSettings_CalculationType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GradebookSettings_CalculationType = GradebookSettings_CalculationType {fromGradebookSettings_CalculationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No method specified. This is never returned.
 pattern GradebookSettings_CalculationType_CALCULATIONTYPEUNSPECIFIED :: GradebookSettings_CalculationType
@@ -854,20 +831,21 @@ pattern GradebookSettings_CalculationType_WEIGHTEDCATEGORIES = GradebookSettings
   GradebookSettings_CalculationType_CALCULATIONTYPEUNSPECIFIED,
   GradebookSettings_CalculationType_TOTALPOINTS,
   GradebookSettings_CalculationType_WEIGHTEDCATEGORIES,
-  GradebookSettings_CalculationType #-}
+  GradebookSettings_CalculationType
+  #-}
 
 -- | Indicates who can see the overall grade..
-newtype GradebookSettings_DisplaySetting = GradebookSettings_DisplaySetting { fromGradebookSettings_DisplaySetting :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GradebookSettings_DisplaySetting = GradebookSettings_DisplaySetting {fromGradebookSettings_DisplaySetting :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No setting specified. This is never returned.
 pattern GradebookSettings_DisplaySetting_DISPLAYSETTINGUNSPECIFIED :: GradebookSettings_DisplaySetting
@@ -890,20 +868,21 @@ pattern GradebookSettings_DisplaySetting_SHOWTEACHERSONLY = GradebookSettings_Di
   GradebookSettings_DisplaySetting_SHOWOVERALLGRADE,
   GradebookSettings_DisplaySetting_HIDEOVERALLGRADE,
   GradebookSettings_DisplaySetting_SHOWTEACHERSONLY,
-  GradebookSettings_DisplaySetting #-}
+  GradebookSettings_DisplaySetting
+  #-}
 
 -- | The state that this invitation is in.
-newtype GuardianInvitation_State = GuardianInvitation_State { fromGuardianInvitation_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GuardianInvitation_State = GuardianInvitation_State {fromGuardianInvitation_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Should never be returned.
 pattern GuardianInvitation_State_GUARDIANINVITATIONSTATEUNSPECIFIED :: GuardianInvitation_State
@@ -921,20 +900,21 @@ pattern GuardianInvitation_State_Complete = GuardianInvitation_State "COMPLETE"
   GuardianInvitation_State_GUARDIANINVITATIONSTATEUNSPECIFIED,
   GuardianInvitation_State_Pending,
   GuardianInvitation_State_Complete,
-  GuardianInvitation_State #-}
+  GuardianInvitation_State
+  #-}
 
 -- | Role to invite the user to have. Must not be @COURSE_ROLE_UNSPECIFIED@.
-newtype Invitation_Role = Invitation_Role { fromInvitation_Role :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Invitation_Role = Invitation_Role {fromInvitation_Role :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No course role.
 pattern Invitation_Role_COURSEROLEUNSPECIFIED :: Invitation_Role
@@ -957,20 +937,21 @@ pattern Invitation_Role_Owner = Invitation_Role "OWNER"
   Invitation_Role_Student,
   Invitation_Role_Teacher,
   Invitation_Role_Owner,
-  Invitation_Role #-}
+  Invitation_Role
+  #-}
 
 -- | Mode of the announcement describing whether it is accessible by all students or specified individual students.
-newtype ModifyAnnouncementAssigneesRequest_AssigneeMode = ModifyAnnouncementAssigneesRequest_AssigneeMode { fromModifyAnnouncementAssigneesRequest_AssigneeMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ModifyAnnouncementAssigneesRequest_AssigneeMode = ModifyAnnouncementAssigneesRequest_AssigneeMode {fromModifyAnnouncementAssigneesRequest_AssigneeMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No mode specified. This is never returned.
 pattern ModifyAnnouncementAssigneesRequest_AssigneeMode_ASSIGNEEMODEUNSPECIFIED :: ModifyAnnouncementAssigneesRequest_AssigneeMode
@@ -988,20 +969,21 @@ pattern ModifyAnnouncementAssigneesRequest_AssigneeMode_INDIVIDUALSTUDENTS = Mod
   ModifyAnnouncementAssigneesRequest_AssigneeMode_ASSIGNEEMODEUNSPECIFIED,
   ModifyAnnouncementAssigneesRequest_AssigneeMode_ALLSTUDENTS,
   ModifyAnnouncementAssigneesRequest_AssigneeMode_INDIVIDUALSTUDENTS,
-  ModifyAnnouncementAssigneesRequest_AssigneeMode #-}
+  ModifyAnnouncementAssigneesRequest_AssigneeMode
+  #-}
 
 -- | Mode of the coursework describing whether it will be assigned to all students or specified individual students.
-newtype ModifyCourseWorkAssigneesRequest_AssigneeMode = ModifyCourseWorkAssigneesRequest_AssigneeMode { fromModifyCourseWorkAssigneesRequest_AssigneeMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ModifyCourseWorkAssigneesRequest_AssigneeMode = ModifyCourseWorkAssigneesRequest_AssigneeMode {fromModifyCourseWorkAssigneesRequest_AssigneeMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No mode specified. This is never returned.
 pattern ModifyCourseWorkAssigneesRequest_AssigneeMode_ASSIGNEEMODEUNSPECIFIED :: ModifyCourseWorkAssigneesRequest_AssigneeMode
@@ -1019,20 +1001,21 @@ pattern ModifyCourseWorkAssigneesRequest_AssigneeMode_INDIVIDUALSTUDENTS = Modif
   ModifyCourseWorkAssigneesRequest_AssigneeMode_ASSIGNEEMODEUNSPECIFIED,
   ModifyCourseWorkAssigneesRequest_AssigneeMode_ALLSTUDENTS,
   ModifyCourseWorkAssigneesRequest_AssigneeMode_INDIVIDUALSTUDENTS,
-  ModifyCourseWorkAssigneesRequest_AssigneeMode #-}
+  ModifyCourseWorkAssigneesRequest_AssigneeMode
+  #-}
 
 -- | Mechanism by which students access the Drive item.
-newtype SharedDriveFile_ShareMode = SharedDriveFile_ShareMode { fromSharedDriveFile_ShareMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SharedDriveFile_ShareMode = SharedDriveFile_ShareMode {fromSharedDriveFile_ShareMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No sharing mode specified. This should never be returned.
 pattern SharedDriveFile_ShareMode_UNKNOWNSHAREMODE :: SharedDriveFile_ShareMode
@@ -1055,20 +1038,21 @@ pattern SharedDriveFile_ShareMode_STUDENTCOPY = SharedDriveFile_ShareMode "STUDE
   SharedDriveFile_ShareMode_View,
   SharedDriveFile_ShareMode_Edit,
   SharedDriveFile_ShareMode_STUDENTCOPY,
-  SharedDriveFile_ShareMode #-}
+  SharedDriveFile_ShareMode
+  #-}
 
 -- | The workflow pipeline stage.
-newtype StateHistory_State = StateHistory_State { fromStateHistory_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype StateHistory_State = StateHistory_State {fromStateHistory_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No state specified. This should never be returned.
 pattern StateHistory_State_STATEUNSPECIFIED :: StateHistory_State
@@ -1101,20 +1085,21 @@ pattern StateHistory_State_STUDENTEDITEDAFTERTURNIN = StateHistory_State "STUDEN
   StateHistory_State_Returned,
   StateHistory_State_RECLAIMEDBYSTUDENT,
   StateHistory_State_STUDENTEDITEDAFTERTURNIN,
-  StateHistory_State #-}
+  StateHistory_State
+  #-}
 
 -- | Type of course work this submission is for. Read-only.
-newtype StudentSubmission_CourseWorkType = StudentSubmission_CourseWorkType { fromStudentSubmission_CourseWorkType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype StudentSubmission_CourseWorkType = StudentSubmission_CourseWorkType {fromStudentSubmission_CourseWorkType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No work type specified. This is never returned.
 pattern StudentSubmission_CourseWorkType_COURSEWORKTYPEUNSPECIFIED :: StudentSubmission_CourseWorkType
@@ -1137,20 +1122,21 @@ pattern StudentSubmission_CourseWorkType_MULTIPLECHOICEQUESTION = StudentSubmiss
   StudentSubmission_CourseWorkType_Assignment,
   StudentSubmission_CourseWorkType_SHORTANSWERQUESTION,
   StudentSubmission_CourseWorkType_MULTIPLECHOICEQUESTION,
-  StudentSubmission_CourseWorkType #-}
+  StudentSubmission_CourseWorkType
+  #-}
 
 -- | State of this submission. Read-only.
-newtype StudentSubmission_State = StudentSubmission_State { fromStudentSubmission_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype StudentSubmission_State = StudentSubmission_State {fromStudentSubmission_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No state specified. This should never be returned.
 pattern StudentSubmission_State_SUBMISSIONSTATEUNSPECIFIED :: StudentSubmission_State
@@ -1183,20 +1169,21 @@ pattern StudentSubmission_State_RECLAIMEDBYSTUDENT = StudentSubmission_State "RE
   StudentSubmission_State_TURNEDIN,
   StudentSubmission_State_Returned,
   StudentSubmission_State_RECLAIMEDBYSTUDENT,
-  StudentSubmission_State #-}
+  StudentSubmission_State
+  #-}
 
 -- | Restriction on the @state@ of announcements returned. If this argument is left unspecified, the default value is @PUBLISHED@.
-newtype CoursesAnnouncementsListAnnouncementStates = CoursesAnnouncementsListAnnouncementStates { fromCoursesAnnouncementsListAnnouncementStates :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CoursesAnnouncementsListAnnouncementStates = CoursesAnnouncementsListAnnouncementStates {fromCoursesAnnouncementsListAnnouncementStates :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No state specified. This is never returned.
 pattern CoursesAnnouncementsListAnnouncementStates_ANNOUNCEMENTSTATEUNSPECIFIED :: CoursesAnnouncementsListAnnouncementStates
@@ -1219,20 +1206,21 @@ pattern CoursesAnnouncementsListAnnouncementStates_Deleted = CoursesAnnouncement
   CoursesAnnouncementsListAnnouncementStates_Published,
   CoursesAnnouncementsListAnnouncementStates_Draft,
   CoursesAnnouncementsListAnnouncementStates_Deleted,
-  CoursesAnnouncementsListAnnouncementStates #-}
+  CoursesAnnouncementsListAnnouncementStates
+  #-}
 
 -- | Restriction on the work status to return. Only courseWork that matches is returned. If unspecified, items with a work status of @PUBLISHED@ is returned.
-newtype CoursesCourseWorkListCourseWorkStates = CoursesCourseWorkListCourseWorkStates { fromCoursesCourseWorkListCourseWorkStates :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CoursesCourseWorkListCourseWorkStates = CoursesCourseWorkListCourseWorkStates {fromCoursesCourseWorkListCourseWorkStates :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No state specified. This is never returned.
 pattern CoursesCourseWorkListCourseWorkStates_COURSEWORKSTATEUNSPECIFIED :: CoursesCourseWorkListCourseWorkStates
@@ -1255,20 +1243,21 @@ pattern CoursesCourseWorkListCourseWorkStates_Deleted = CoursesCourseWorkListCou
   CoursesCourseWorkListCourseWorkStates_Published,
   CoursesCourseWorkListCourseWorkStates_Draft,
   CoursesCourseWorkListCourseWorkStates_Deleted,
-  CoursesCourseWorkListCourseWorkStates #-}
+  CoursesCourseWorkListCourseWorkStates
+  #-}
 
 -- | Requested lateness value. If specified, returned student submissions are restricted by the requested value. If unspecified, submissions are returned regardless of @late@ value.
-newtype CoursesCourseWorkStudentSubmissionsListLate = CoursesCourseWorkStudentSubmissionsListLate { fromCoursesCourseWorkStudentSubmissionsListLate :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CoursesCourseWorkStudentSubmissionsListLate = CoursesCourseWorkStudentSubmissionsListLate {fromCoursesCourseWorkStudentSubmissionsListLate :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No restriction on submission late values specified.
 pattern CoursesCourseWorkStudentSubmissionsListLate_LATEVALUESUNSPECIFIED :: CoursesCourseWorkStudentSubmissionsListLate
@@ -1286,20 +1275,21 @@ pattern CoursesCourseWorkStudentSubmissionsListLate_NOTLATEONLY = CoursesCourseW
   CoursesCourseWorkStudentSubmissionsListLate_LATEVALUESUNSPECIFIED,
   CoursesCourseWorkStudentSubmissionsListLate_LATEONLY,
   CoursesCourseWorkStudentSubmissionsListLate_NOTLATEONLY,
-  CoursesCourseWorkStudentSubmissionsListLate #-}
+  CoursesCourseWorkStudentSubmissionsListLate
+  #-}
 
 -- | Requested submission states. If specified, returned student submissions match one of the specified submission states.
-newtype CoursesCourseWorkStudentSubmissionsListStates = CoursesCourseWorkStudentSubmissionsListStates { fromCoursesCourseWorkStudentSubmissionsListStates :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CoursesCourseWorkStudentSubmissionsListStates = CoursesCourseWorkStudentSubmissionsListStates {fromCoursesCourseWorkStudentSubmissionsListStates :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No state specified. This should never be returned.
 pattern CoursesCourseWorkStudentSubmissionsListStates_SUBMISSIONSTATEUNSPECIFIED :: CoursesCourseWorkStudentSubmissionsListStates
@@ -1332,20 +1322,21 @@ pattern CoursesCourseWorkStudentSubmissionsListStates_RECLAIMEDBYSTUDENT = Cours
   CoursesCourseWorkStudentSubmissionsListStates_TURNEDIN,
   CoursesCourseWorkStudentSubmissionsListStates_Returned,
   CoursesCourseWorkStudentSubmissionsListStates_RECLAIMEDBYSTUDENT,
-  CoursesCourseWorkStudentSubmissionsListStates #-}
+  CoursesCourseWorkStudentSubmissionsListStates
+  #-}
 
 -- | Restriction on the work status to return. Only course work material that matches is returned. If unspecified, items with a work status of @PUBLISHED@ is returned.
-newtype CoursesCourseWorkMaterialsListCourseWorkMaterialStates = CoursesCourseWorkMaterialsListCourseWorkMaterialStates { fromCoursesCourseWorkMaterialsListCourseWorkMaterialStates :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CoursesCourseWorkMaterialsListCourseWorkMaterialStates = CoursesCourseWorkMaterialsListCourseWorkMaterialStates {fromCoursesCourseWorkMaterialsListCourseWorkMaterialStates :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No state specified. This is never returned.
 pattern CoursesCourseWorkMaterialsListCourseWorkMaterialStates_COURSEWORKMATERIALSTATEUNSPECIFIED :: CoursesCourseWorkMaterialsListCourseWorkMaterialStates
@@ -1368,20 +1359,21 @@ pattern CoursesCourseWorkMaterialsListCourseWorkMaterialStates_Deleted = Courses
   CoursesCourseWorkMaterialsListCourseWorkMaterialStates_Published,
   CoursesCourseWorkMaterialsListCourseWorkMaterialStates_Draft,
   CoursesCourseWorkMaterialsListCourseWorkMaterialStates_Deleted,
-  CoursesCourseWorkMaterialsListCourseWorkMaterialStates #-}
+  CoursesCourseWorkMaterialsListCourseWorkMaterialStates
+  #-}
 
 -- | Restricts returned courses to those in one of the specified states The default value is ACTIVE, ARCHIVED, PROVISIONED, DECLINED.
-newtype CoursesListCourseStates = CoursesListCourseStates { fromCoursesListCourseStates :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CoursesListCourseStates = CoursesListCourseStates {fromCoursesListCourseStates :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No course state. No returned Course message will use this value.
 pattern CoursesListCourseStates_COURSESTATEUNSPECIFIED :: CoursesListCourseStates
@@ -1414,20 +1406,21 @@ pattern CoursesListCourseStates_Suspended = CoursesListCourseStates "SUSPENDED"
   CoursesListCourseStates_Provisioned,
   CoursesListCourseStates_Declined,
   CoursesListCourseStates_Suspended,
-  CoursesListCourseStates #-}
+  CoursesListCourseStates
+  #-}
 
 -- | If specified, only results with the specified @state@ values are returned. Otherwise, results with a @state@ of @PENDING@ are returned.
-newtype UserProfilesGuardianInvitationsListStates = UserProfilesGuardianInvitationsListStates { fromUserProfilesGuardianInvitationsListStates :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UserProfilesGuardianInvitationsListStates = UserProfilesGuardianInvitationsListStates {fromUserProfilesGuardianInvitationsListStates :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Should never be returned.
 pattern UserProfilesGuardianInvitationsListStates_GUARDIANINVITATIONSTATEUNSPECIFIED :: UserProfilesGuardianInvitationsListStates
@@ -1445,4 +1438,5 @@ pattern UserProfilesGuardianInvitationsListStates_Complete = UserProfilesGuardia
   UserProfilesGuardianInvitationsListStates_GUARDIANINVITATIONSTATEUNSPECIFIED,
   UserProfilesGuardianInvitationsListStates_Pending,
   UserProfilesGuardianInvitationsListStates_Complete,
-  UserProfilesGuardianInvitationsListStates #-}
+  UserProfilesGuardianInvitationsListStates
+  #-}

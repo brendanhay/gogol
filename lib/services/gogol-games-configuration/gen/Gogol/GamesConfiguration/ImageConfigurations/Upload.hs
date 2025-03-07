@@ -61,23 +61,23 @@ type GamesConfigurationImageConfigurationsUploadResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] ImageConfiguration
     Core.:<|> "upload"
-      Core.:> "games"
-      Core.:> "v1configuration"
-      Core.:> "images"
-      Core.:> Core.Capture "resourceId" Core.Text
-      Core.:> "imageType"
-      Core.:> Core.Capture
-                "imageType"
-                ImageConfigurationsUploadImageType
-      Core.:> Core.QueryParam "$.xgafv" Xgafv
-      Core.:> Core.QueryParam "access_token" Core.Text
-      Core.:> Core.QueryParam "callback" Core.Text
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "upload_protocol" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam "uploadType" Core.AltMedia
-      Core.:> Core.AltMedia
-      Core.:> Core.Post '[Core.JSON] ImageConfiguration
+    Core.:> "games"
+    Core.:> "v1configuration"
+    Core.:> "images"
+    Core.:> Core.Capture "resourceId" Core.Text
+    Core.:> "imageType"
+    Core.:> Core.Capture
+              "imageType"
+              ImageConfigurationsUploadImageType
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.AltMedia
+    Core.:> Core.AltMedia
+    Core.:> Core.Post '[Core.JSON] ImageConfiguration
 
 -- | Uploads an image for a resource with the given ID and image type.
 --

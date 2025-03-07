@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.CloudTasks.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.CloudTasks.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AppEngineHttpRequest_HttpMethod
     AppEngineHttpRequest_HttpMethod
-      (
-        AppEngineHttpRequest_HttpMethod_HTTPMETHODUNSPECIFIED,
+      ( AppEngineHttpRequest_HttpMethod_HTTPMETHODUNSPECIFIED,
         AppEngineHttpRequest_HttpMethod_Post',
         AppEngineHttpRequest_HttpMethod_Get',
         AppEngineHttpRequest_HttpMethod_Head',
@@ -54,8 +45,7 @@ module Gogol.CloudTasks.Internal.Sum
 
     -- * CreateTaskRequest_ResponseView
     CreateTaskRequest_ResponseView
-      (
-        CreateTaskRequest_ResponseView_VIEWUNSPECIFIED,
+      ( CreateTaskRequest_ResponseView_VIEWUNSPECIFIED,
         CreateTaskRequest_ResponseView_Basic,
         CreateTaskRequest_ResponseView_Full,
         ..
@@ -63,8 +53,7 @@ module Gogol.CloudTasks.Internal.Sum
 
     -- * HttpRequest_HttpMethod
     HttpRequest_HttpMethod
-      (
-        HttpRequest_HttpMethod_HTTPMETHODUNSPECIFIED,
+      ( HttpRequest_HttpMethod_HTTPMETHODUNSPECIFIED,
         HttpRequest_HttpMethod_Post',
         HttpRequest_HttpMethod_Get',
         HttpRequest_HttpMethod_Head',
@@ -77,8 +66,7 @@ module Gogol.CloudTasks.Internal.Sum
 
     -- * HttpTarget_HttpMethod
     HttpTarget_HttpMethod
-      (
-        HttpTarget_HttpMethod_HTTPMETHODUNSPECIFIED,
+      ( HttpTarget_HttpMethod_HTTPMETHODUNSPECIFIED,
         HttpTarget_HttpMethod_Post',
         HttpTarget_HttpMethod_Get',
         HttpTarget_HttpMethod_Head',
@@ -91,8 +79,7 @@ module Gogol.CloudTasks.Internal.Sum
 
     -- * Queue_State
     Queue_State
-      (
-        Queue_State_STATEUNSPECIFIED,
+      ( Queue_State_STATEUNSPECIFIED,
         Queue_State_Running,
         Queue_State_Paused,
         Queue_State_Disabled,
@@ -101,8 +88,7 @@ module Gogol.CloudTasks.Internal.Sum
 
     -- * RunTaskRequest_ResponseView
     RunTaskRequest_ResponseView
-      (
-        RunTaskRequest_ResponseView_VIEWUNSPECIFIED,
+      ( RunTaskRequest_ResponseView_VIEWUNSPECIFIED,
         RunTaskRequest_ResponseView_Basic,
         RunTaskRequest_ResponseView_Full,
         ..
@@ -110,8 +96,7 @@ module Gogol.CloudTasks.Internal.Sum
 
     -- * Task_View
     Task_View
-      (
-        Task_View_VIEWUNSPECIFIED,
+      ( Task_View_VIEWUNSPECIFIED,
         Task_View_Basic,
         Task_View_Full,
         ..
@@ -119,8 +104,7 @@ module Gogol.CloudTasks.Internal.Sum
 
     -- * UriOverride_Scheme
     UriOverride_Scheme
-      (
-        UriOverride_Scheme_SCHEMEUNSPECIFIED,
+      ( UriOverride_Scheme_SCHEMEUNSPECIFIED,
         UriOverride_Scheme_Http,
         UriOverride_Scheme_Https,
         ..
@@ -128,8 +112,7 @@ module Gogol.CloudTasks.Internal.Sum
 
     -- * UriOverride_UriOverrideEnforceMode
     UriOverride_UriOverrideEnforceMode
-      (
-        UriOverride_UriOverrideEnforceMode_URIOVERRIDEENFORCEMODEUNSPECIFIED,
+      ( UriOverride_UriOverrideEnforceMode_URIOVERRIDEENFORCEMODEUNSPECIFIED,
         UriOverride_UriOverrideEnforceMode_IFNOTEXISTS,
         UriOverride_UriOverrideEnforceMode_Always,
         ..
@@ -137,8 +120,7 @@ module Gogol.CloudTasks.Internal.Sum
 
     -- * ProjectsLocationsQueuesTasksGetResponseView
     ProjectsLocationsQueuesTasksGetResponseView
-      (
-        ProjectsLocationsQueuesTasksGetResponseView_VIEWUNSPECIFIED,
+      ( ProjectsLocationsQueuesTasksGetResponseView_VIEWUNSPECIFIED,
         ProjectsLocationsQueuesTasksGetResponseView_Basic,
         ProjectsLocationsQueuesTasksGetResponseView_Full,
         ..
@@ -146,28 +128,28 @@ module Gogol.CloudTasks.Internal.Sum
 
     -- * ProjectsLocationsQueuesTasksListResponseView
     ProjectsLocationsQueuesTasksListResponseView
-      (
-        ProjectsLocationsQueuesTasksListResponseView_VIEWUNSPECIFIED,
+      ( ProjectsLocationsQueuesTasksListResponseView_VIEWUNSPECIFIED,
         ProjectsLocationsQueuesTasksListResponseView_Basic,
         ProjectsLocationsQueuesTasksListResponseView_Full,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -180,20 +162,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | The HTTP method to use for the request. The default is POST. The app\'s request handler for the task\'s target URL must be able to handle HTTP requests with this http_method, otherwise the task attempt fails with error code 405 (Method Not Allowed). See <https://cloud.google.com/appengine/docs/java/taskqueue/push/creating-handlers#writing_a_push_task_request_handler Writing a push task request handler> and the App Engine documentation for your runtime on <https://cloud.google.com/appengine/docs/standard/python3/how-requests-are-handled How Requests are Handled>.
-newtype AppEngineHttpRequest_HttpMethod = AppEngineHttpRequest_HttpMethod { fromAppEngineHttpRequest_HttpMethod :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AppEngineHttpRequest_HttpMethod = AppEngineHttpRequest_HttpMethod {fromAppEngineHttpRequest_HttpMethod :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | HTTP method unspecified
 pattern AppEngineHttpRequest_HttpMethod_HTTPMETHODUNSPECIFIED :: AppEngineHttpRequest_HttpMethod
@@ -236,20 +219,21 @@ pattern AppEngineHttpRequest_HttpMethod_Options = AppEngineHttpRequest_HttpMetho
   AppEngineHttpRequest_HttpMethod_Delete',
   AppEngineHttpRequest_HttpMethod_Patch',
   AppEngineHttpRequest_HttpMethod_Options,
-  AppEngineHttpRequest_HttpMethod #-}
+  AppEngineHttpRequest_HttpMethod
+  #-}
 
 -- | The response/view specifies which subset of the Task will be returned. By default response/view is BASIC; not all information is retrieved by default because some data, such as payloads, might be desirable to return only when needed because of its large size or because of the sensitivity of data that it contains. Authorization for FULL requires @cloudtasks.tasks.fullView@ <https://cloud.google.com/iam/ Google IAM> permission on the Task resource.
-newtype CreateTaskRequest_ResponseView = CreateTaskRequest_ResponseView { fromCreateTaskRequest_ResponseView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CreateTaskRequest_ResponseView = CreateTaskRequest_ResponseView {fromCreateTaskRequest_ResponseView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified. Defaults to BASIC.
 pattern CreateTaskRequest_ResponseView_VIEWUNSPECIFIED :: CreateTaskRequest_ResponseView
@@ -267,20 +251,21 @@ pattern CreateTaskRequest_ResponseView_Full = CreateTaskRequest_ResponseView "FU
   CreateTaskRequest_ResponseView_VIEWUNSPECIFIED,
   CreateTaskRequest_ResponseView_Basic,
   CreateTaskRequest_ResponseView_Full,
-  CreateTaskRequest_ResponseView #-}
+  CreateTaskRequest_ResponseView
+  #-}
 
 -- | The HTTP method to use for the request. The default is POST.
-newtype HttpRequest_HttpMethod = HttpRequest_HttpMethod { fromHttpRequest_HttpMethod :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype HttpRequest_HttpMethod = HttpRequest_HttpMethod {fromHttpRequest_HttpMethod :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | HTTP method unspecified
 pattern HttpRequest_HttpMethod_HTTPMETHODUNSPECIFIED :: HttpRequest_HttpMethod
@@ -323,20 +308,21 @@ pattern HttpRequest_HttpMethod_Options = HttpRequest_HttpMethod "OPTIONS"
   HttpRequest_HttpMethod_Delete',
   HttpRequest_HttpMethod_Patch',
   HttpRequest_HttpMethod_Options,
-  HttpRequest_HttpMethod #-}
+  HttpRequest_HttpMethod
+  #-}
 
 -- | The HTTP method to use for the request. When specified, it overrides HttpRequest for the task. Note that if the value is set to HttpMethod the HttpRequest of the task will be ignored at execution time.
-newtype HttpTarget_HttpMethod = HttpTarget_HttpMethod { fromHttpTarget_HttpMethod :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype HttpTarget_HttpMethod = HttpTarget_HttpMethod {fromHttpTarget_HttpMethod :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | HTTP method unspecified
 pattern HttpTarget_HttpMethod_HTTPMETHODUNSPECIFIED :: HttpTarget_HttpMethod
@@ -379,20 +365,21 @@ pattern HttpTarget_HttpMethod_Options = HttpTarget_HttpMethod "OPTIONS"
   HttpTarget_HttpMethod_Delete',
   HttpTarget_HttpMethod_Patch',
   HttpTarget_HttpMethod_Options,
-  HttpTarget_HttpMethod #-}
+  HttpTarget_HttpMethod
+  #-}
 
 -- | Output only. The state of the queue. @state@ can only be changed by calling PauseQueue, ResumeQueue, or uploading <https://cloud.google.com/appengine/docs/python/config/queueref queue.yaml\/xml>. UpdateQueue cannot be used to change @state@.
-newtype Queue_State = Queue_State { fromQueue_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Queue_State = Queue_State {fromQueue_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified state.
 pattern Queue_State_STATEUNSPECIFIED :: Queue_State
@@ -415,20 +402,21 @@ pattern Queue_State_Disabled = Queue_State "DISABLED"
   Queue_State_Running,
   Queue_State_Paused,
   Queue_State_Disabled,
-  Queue_State #-}
+  Queue_State
+  #-}
 
 -- | The response/view specifies which subset of the Task will be returned. By default response/view is BASIC; not all information is retrieved by default because some data, such as payloads, might be desirable to return only when needed because of its large size or because of the sensitivity of data that it contains. Authorization for FULL requires @cloudtasks.tasks.fullView@ <https://cloud.google.com/iam/ Google IAM> permission on the Task resource.
-newtype RunTaskRequest_ResponseView = RunTaskRequest_ResponseView { fromRunTaskRequest_ResponseView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RunTaskRequest_ResponseView = RunTaskRequest_ResponseView {fromRunTaskRequest_ResponseView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified. Defaults to BASIC.
 pattern RunTaskRequest_ResponseView_VIEWUNSPECIFIED :: RunTaskRequest_ResponseView
@@ -446,20 +434,21 @@ pattern RunTaskRequest_ResponseView_Full = RunTaskRequest_ResponseView "FULL"
   RunTaskRequest_ResponseView_VIEWUNSPECIFIED,
   RunTaskRequest_ResponseView_Basic,
   RunTaskRequest_ResponseView_Full,
-  RunTaskRequest_ResponseView #-}
+  RunTaskRequest_ResponseView
+  #-}
 
 -- | Output only. The view specifies which subset of the Task has been returned.
-newtype Task_View = Task_View { fromTask_View :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Task_View = Task_View {fromTask_View :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified. Defaults to BASIC.
 pattern Task_View_VIEWUNSPECIFIED :: Task_View
@@ -477,20 +466,21 @@ pattern Task_View_Full = Task_View "FULL"
   Task_View_VIEWUNSPECIFIED,
   Task_View_Basic,
   Task_View_Full,
-  Task_View #-}
+  Task_View
+  #-}
 
 -- | Scheme override. When specified, the task URI scheme is replaced by the provided value (HTTP or HTTPS).
-newtype UriOverride_Scheme = UriOverride_Scheme { fromUriOverride_Scheme :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UriOverride_Scheme = UriOverride_Scheme {fromUriOverride_Scheme :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Scheme unspecified. Defaults to HTTPS.
 pattern UriOverride_Scheme_SCHEMEUNSPECIFIED :: UriOverride_Scheme
@@ -508,20 +498,21 @@ pattern UriOverride_Scheme_Https = UriOverride_Scheme "HTTPS"
   UriOverride_Scheme_SCHEMEUNSPECIFIED,
   UriOverride_Scheme_Http,
   UriOverride_Scheme_Https,
-  UriOverride_Scheme #-}
+  UriOverride_Scheme
+  #-}
 
 -- | URI Override Enforce Mode When specified, determines the Target UriOverride mode. If not specified, it defaults to ALWAYS.
-newtype UriOverride_UriOverrideEnforceMode = UriOverride_UriOverrideEnforceMode { fromUriOverride_UriOverrideEnforceMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UriOverride_UriOverrideEnforceMode = UriOverride_UriOverrideEnforceMode {fromUriOverride_UriOverrideEnforceMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | UriOverrideEnforceMode Unspecified. Defaults to ALWAYS.
 pattern UriOverride_UriOverrideEnforceMode_URIOVERRIDEENFORCEMODEUNSPECIFIED :: UriOverride_UriOverrideEnforceMode
@@ -539,20 +530,21 @@ pattern UriOverride_UriOverrideEnforceMode_Always = UriOverride_UriOverrideEnfor
   UriOverride_UriOverrideEnforceMode_URIOVERRIDEENFORCEMODEUNSPECIFIED,
   UriOverride_UriOverrideEnforceMode_IFNOTEXISTS,
   UriOverride_UriOverrideEnforceMode_Always,
-  UriOverride_UriOverrideEnforceMode #-}
+  UriOverride_UriOverrideEnforceMode
+  #-}
 
 -- | The response/view specifies which subset of the Task will be returned. By default response/view is BASIC; not all information is retrieved by default because some data, such as payloads, might be desirable to return only when needed because of its large size or because of the sensitivity of data that it contains. Authorization for FULL requires @cloudtasks.tasks.fullView@ <https://cloud.google.com/iam/ Google IAM> permission on the Task resource.
-newtype ProjectsLocationsQueuesTasksGetResponseView = ProjectsLocationsQueuesTasksGetResponseView { fromProjectsLocationsQueuesTasksGetResponseView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsLocationsQueuesTasksGetResponseView = ProjectsLocationsQueuesTasksGetResponseView {fromProjectsLocationsQueuesTasksGetResponseView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified. Defaults to BASIC.
 pattern ProjectsLocationsQueuesTasksGetResponseView_VIEWUNSPECIFIED :: ProjectsLocationsQueuesTasksGetResponseView
@@ -570,20 +562,21 @@ pattern ProjectsLocationsQueuesTasksGetResponseView_Full = ProjectsLocationsQueu
   ProjectsLocationsQueuesTasksGetResponseView_VIEWUNSPECIFIED,
   ProjectsLocationsQueuesTasksGetResponseView_Basic,
   ProjectsLocationsQueuesTasksGetResponseView_Full,
-  ProjectsLocationsQueuesTasksGetResponseView #-}
+  ProjectsLocationsQueuesTasksGetResponseView
+  #-}
 
 -- | The response/view specifies which subset of the Task will be returned. By default response/view is BASIC; not all information is retrieved by default because some data, such as payloads, might be desirable to return only when needed because of its large size or because of the sensitivity of data that it contains. Authorization for FULL requires @cloudtasks.tasks.fullView@ <https://cloud.google.com/iam/ Google IAM> permission on the Task resource.
-newtype ProjectsLocationsQueuesTasksListResponseView = ProjectsLocationsQueuesTasksListResponseView { fromProjectsLocationsQueuesTasksListResponseView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsLocationsQueuesTasksListResponseView = ProjectsLocationsQueuesTasksListResponseView {fromProjectsLocationsQueuesTasksListResponseView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified. Defaults to BASIC.
 pattern ProjectsLocationsQueuesTasksListResponseView_VIEWUNSPECIFIED :: ProjectsLocationsQueuesTasksListResponseView
@@ -601,4 +594,5 @@ pattern ProjectsLocationsQueuesTasksListResponseView_Full = ProjectsLocationsQue
   ProjectsLocationsQueuesTasksListResponseView_VIEWUNSPECIFIED,
   ProjectsLocationsQueuesTasksListResponseView_Basic,
   ProjectsLocationsQueuesTasksListResponseView_Full,
-  ProjectsLocationsQueuesTasksListResponseView #-}
+  ProjectsLocationsQueuesTasksListResponseView
+  #-}

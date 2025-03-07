@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.BinaryAuthorization
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,377 +27,377 @@
 --
 -- /See:/ <https://cloud.google.com/binary-authorization/ Binary Authorization API Reference>
 module Gogol.BinaryAuthorization
-    (
-    -- * Configuration
-      binaryAuthorizationService
+  ( -- * Configuration
+    binaryAuthorizationService,
 
     -- * OAuth Scopes
-    , CloudPlatform'FullControl
+    CloudPlatform'FullControl,
 
     -- * Resources
 
     -- ** binaryauthorization.projects.attestors.create
-    , BinaryAuthorizationProjectsAttestorsCreateResource
-    , BinaryAuthorizationProjectsAttestorsCreate (..)
-    , newBinaryAuthorizationProjectsAttestorsCreate
+    BinaryAuthorizationProjectsAttestorsCreateResource,
+    BinaryAuthorizationProjectsAttestorsCreate (..),
+    newBinaryAuthorizationProjectsAttestorsCreate,
 
     -- ** binaryauthorization.projects.attestors.delete
-    , BinaryAuthorizationProjectsAttestorsDeleteResource
-    , BinaryAuthorizationProjectsAttestorsDelete (..)
-    , newBinaryAuthorizationProjectsAttestorsDelete
+    BinaryAuthorizationProjectsAttestorsDeleteResource,
+    BinaryAuthorizationProjectsAttestorsDelete (..),
+    newBinaryAuthorizationProjectsAttestorsDelete,
 
     -- ** binaryauthorization.projects.attestors.get
-    , BinaryAuthorizationProjectsAttestorsGetResource
-    , BinaryAuthorizationProjectsAttestorsGet (..)
-    , newBinaryAuthorizationProjectsAttestorsGet
+    BinaryAuthorizationProjectsAttestorsGetResource,
+    BinaryAuthorizationProjectsAttestorsGet (..),
+    newBinaryAuthorizationProjectsAttestorsGet,
 
     -- ** binaryauthorization.projects.attestors.getIamPolicy
-    , BinaryAuthorizationProjectsAttestorsGetIamPolicyResource
-    , BinaryAuthorizationProjectsAttestorsGetIamPolicy (..)
-    , newBinaryAuthorizationProjectsAttestorsGetIamPolicy
+    BinaryAuthorizationProjectsAttestorsGetIamPolicyResource,
+    BinaryAuthorizationProjectsAttestorsGetIamPolicy (..),
+    newBinaryAuthorizationProjectsAttestorsGetIamPolicy,
 
     -- ** binaryauthorization.projects.attestors.list
-    , BinaryAuthorizationProjectsAttestorsListResource
-    , BinaryAuthorizationProjectsAttestorsList (..)
-    , newBinaryAuthorizationProjectsAttestorsList
+    BinaryAuthorizationProjectsAttestorsListResource,
+    BinaryAuthorizationProjectsAttestorsList (..),
+    newBinaryAuthorizationProjectsAttestorsList,
 
     -- ** binaryauthorization.projects.attestors.setIamPolicy
-    , BinaryAuthorizationProjectsAttestorsSetIamPolicyResource
-    , BinaryAuthorizationProjectsAttestorsSetIamPolicy (..)
-    , newBinaryAuthorizationProjectsAttestorsSetIamPolicy
+    BinaryAuthorizationProjectsAttestorsSetIamPolicyResource,
+    BinaryAuthorizationProjectsAttestorsSetIamPolicy (..),
+    newBinaryAuthorizationProjectsAttestorsSetIamPolicy,
 
     -- ** binaryauthorization.projects.attestors.testIamPermissions
-    , BinaryAuthorizationProjectsAttestorsTestIamPermissionsResource
-    , BinaryAuthorizationProjectsAttestorsTestIamPermissions (..)
-    , newBinaryAuthorizationProjectsAttestorsTestIamPermissions
+    BinaryAuthorizationProjectsAttestorsTestIamPermissionsResource,
+    BinaryAuthorizationProjectsAttestorsTestIamPermissions (..),
+    newBinaryAuthorizationProjectsAttestorsTestIamPermissions,
 
     -- ** binaryauthorization.projects.attestors.update
-    , BinaryAuthorizationProjectsAttestorsUpdateResource
-    , BinaryAuthorizationProjectsAttestorsUpdate (..)
-    , newBinaryAuthorizationProjectsAttestorsUpdate
+    BinaryAuthorizationProjectsAttestorsUpdateResource,
+    BinaryAuthorizationProjectsAttestorsUpdate (..),
+    newBinaryAuthorizationProjectsAttestorsUpdate,
 
     -- ** binaryauthorization.projects.attestors.validateAttestationOccurrence
-    , BinaryAuthorizationProjectsAttestorsValidateAttestationOccurrenceResource
-    , BinaryAuthorizationProjectsAttestorsValidateAttestationOccurrence (..)
-    , newBinaryAuthorizationProjectsAttestorsValidateAttestationOccurrence
+    BinaryAuthorizationProjectsAttestorsValidateAttestationOccurrenceResource,
+    BinaryAuthorizationProjectsAttestorsValidateAttestationOccurrence (..),
+    newBinaryAuthorizationProjectsAttestorsValidateAttestationOccurrence,
 
     -- ** binaryauthorization.projects.getPolicy
-    , BinaryAuthorizationProjectsGetPolicyResource
-    , BinaryAuthorizationProjectsGetPolicy (..)
-    , newBinaryAuthorizationProjectsGetPolicy
+    BinaryAuthorizationProjectsGetPolicyResource,
+    BinaryAuthorizationProjectsGetPolicy (..),
+    newBinaryAuthorizationProjectsGetPolicy,
 
     -- ** binaryauthorization.projects.platforms.gke.policies.evaluate
-    , BinaryAuthorizationProjectsPlatformsGkePoliciesEvaluateResource
-    , BinaryAuthorizationProjectsPlatformsGkePoliciesEvaluate (..)
-    , newBinaryAuthorizationProjectsPlatformsGkePoliciesEvaluate
+    BinaryAuthorizationProjectsPlatformsGkePoliciesEvaluateResource,
+    BinaryAuthorizationProjectsPlatformsGkePoliciesEvaluate (..),
+    newBinaryAuthorizationProjectsPlatformsGkePoliciesEvaluate,
 
     -- ** binaryauthorization.projects.platforms.policies.create
-    , BinaryAuthorizationProjectsPlatformsPoliciesCreateResource
-    , BinaryAuthorizationProjectsPlatformsPoliciesCreate (..)
-    , newBinaryAuthorizationProjectsPlatformsPoliciesCreate
+    BinaryAuthorizationProjectsPlatformsPoliciesCreateResource,
+    BinaryAuthorizationProjectsPlatformsPoliciesCreate (..),
+    newBinaryAuthorizationProjectsPlatformsPoliciesCreate,
 
     -- ** binaryauthorization.projects.platforms.policies.delete
-    , BinaryAuthorizationProjectsPlatformsPoliciesDeleteResource
-    , BinaryAuthorizationProjectsPlatformsPoliciesDelete (..)
-    , newBinaryAuthorizationProjectsPlatformsPoliciesDelete
+    BinaryAuthorizationProjectsPlatformsPoliciesDeleteResource,
+    BinaryAuthorizationProjectsPlatformsPoliciesDelete (..),
+    newBinaryAuthorizationProjectsPlatformsPoliciesDelete,
 
     -- ** binaryauthorization.projects.platforms.policies.get
-    , BinaryAuthorizationProjectsPlatformsPoliciesGetResource
-    , BinaryAuthorizationProjectsPlatformsPoliciesGet (..)
-    , newBinaryAuthorizationProjectsPlatformsPoliciesGet
+    BinaryAuthorizationProjectsPlatformsPoliciesGetResource,
+    BinaryAuthorizationProjectsPlatformsPoliciesGet (..),
+    newBinaryAuthorizationProjectsPlatformsPoliciesGet,
 
     -- ** binaryauthorization.projects.platforms.policies.list
-    , BinaryAuthorizationProjectsPlatformsPoliciesListResource
-    , BinaryAuthorizationProjectsPlatformsPoliciesList (..)
-    , newBinaryAuthorizationProjectsPlatformsPoliciesList
+    BinaryAuthorizationProjectsPlatformsPoliciesListResource,
+    BinaryAuthorizationProjectsPlatformsPoliciesList (..),
+    newBinaryAuthorizationProjectsPlatformsPoliciesList,
 
     -- ** binaryauthorization.projects.platforms.policies.replacePlatformPolicy
-    , BinaryAuthorizationProjectsPlatformsPoliciesReplacePlatformPolicyResource
-    , BinaryAuthorizationProjectsPlatformsPoliciesReplacePlatformPolicy (..)
-    , newBinaryAuthorizationProjectsPlatformsPoliciesReplacePlatformPolicy
+    BinaryAuthorizationProjectsPlatformsPoliciesReplacePlatformPolicyResource,
+    BinaryAuthorizationProjectsPlatformsPoliciesReplacePlatformPolicy (..),
+    newBinaryAuthorizationProjectsPlatformsPoliciesReplacePlatformPolicy,
 
     -- ** binaryauthorization.projects.policy.getIamPolicy
-    , BinaryAuthorizationProjectsPolicyGetIamPolicyResource
-    , BinaryAuthorizationProjectsPolicyGetIamPolicy (..)
-    , newBinaryAuthorizationProjectsPolicyGetIamPolicy
+    BinaryAuthorizationProjectsPolicyGetIamPolicyResource,
+    BinaryAuthorizationProjectsPolicyGetIamPolicy (..),
+    newBinaryAuthorizationProjectsPolicyGetIamPolicy,
 
     -- ** binaryauthorization.projects.policy.setIamPolicy
-    , BinaryAuthorizationProjectsPolicySetIamPolicyResource
-    , BinaryAuthorizationProjectsPolicySetIamPolicy (..)
-    , newBinaryAuthorizationProjectsPolicySetIamPolicy
+    BinaryAuthorizationProjectsPolicySetIamPolicyResource,
+    BinaryAuthorizationProjectsPolicySetIamPolicy (..),
+    newBinaryAuthorizationProjectsPolicySetIamPolicy,
 
     -- ** binaryauthorization.projects.policy.testIamPermissions
-    , BinaryAuthorizationProjectsPolicyTestIamPermissionsResource
-    , BinaryAuthorizationProjectsPolicyTestIamPermissions (..)
-    , newBinaryAuthorizationProjectsPolicyTestIamPermissions
+    BinaryAuthorizationProjectsPolicyTestIamPermissionsResource,
+    BinaryAuthorizationProjectsPolicyTestIamPermissions (..),
+    newBinaryAuthorizationProjectsPolicyTestIamPermissions,
 
     -- ** binaryauthorization.projects.updatePolicy
-    , BinaryAuthorizationProjectsUpdatePolicyResource
-    , BinaryAuthorizationProjectsUpdatePolicy (..)
-    , newBinaryAuthorizationProjectsUpdatePolicy
+    BinaryAuthorizationProjectsUpdatePolicyResource,
+    BinaryAuthorizationProjectsUpdatePolicy (..),
+    newBinaryAuthorizationProjectsUpdatePolicy,
 
     -- ** binaryauthorization.systempolicy.getPolicy
-    , BinaryAuthorizationSystempolicyGetPolicyResource
-    , BinaryAuthorizationSystempolicyGetPolicy (..)
-    , newBinaryAuthorizationSystempolicyGetPolicy
+    BinaryAuthorizationSystempolicyGetPolicyResource,
+    BinaryAuthorizationSystempolicyGetPolicy (..),
+    newBinaryAuthorizationSystempolicyGetPolicy,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AdmissionRule
-    , AdmissionRule (..)
-    , newAdmissionRule
+    AdmissionRule (..),
+    newAdmissionRule,
 
     -- ** AdmissionRule_EnforcementMode
-    , AdmissionRule_EnforcementMode (..)
+    AdmissionRule_EnforcementMode (..),
 
     -- ** AdmissionRule_EvaluationMode
-    , AdmissionRule_EvaluationMode (..)
+    AdmissionRule_EvaluationMode (..),
 
     -- ** AdmissionWhitelistPattern
-    , AdmissionWhitelistPattern (..)
-    , newAdmissionWhitelistPattern
+    AdmissionWhitelistPattern (..),
+    newAdmissionWhitelistPattern,
 
     -- ** AllowlistResult
-    , AllowlistResult (..)
-    , newAllowlistResult
+    AllowlistResult (..),
+    newAllowlistResult,
 
     -- ** AttestationAuthenticator
-    , AttestationAuthenticator (..)
-    , newAttestationAuthenticator
+    AttestationAuthenticator (..),
+    newAttestationAuthenticator,
 
     -- ** AttestationOccurrence
-    , AttestationOccurrence (..)
-    , newAttestationOccurrence
+    AttestationOccurrence (..),
+    newAttestationOccurrence,
 
     -- ** AttestationSource
-    , AttestationSource (..)
-    , newAttestationSource
+    AttestationSource (..),
+    newAttestationSource,
 
     -- ** Attestor
-    , Attestor (..)
-    , newAttestor
+    Attestor (..),
+    newAttestor,
 
     -- ** AttestorPublicKey
-    , AttestorPublicKey (..)
-    , newAttestorPublicKey
+    AttestorPublicKey (..),
+    newAttestorPublicKey,
 
     -- ** Binding
-    , Binding (..)
-    , newBinding
+    Binding (..),
+    newBinding,
 
     -- ** Check
-    , Check (..)
-    , newCheck
+    Check (..),
+    newCheck,
 
     -- ** CheckResult
-    , CheckResult (..)
-    , newCheckResult
+    CheckResult (..),
+    newCheckResult,
 
     -- ** CheckResults
-    , CheckResults (..)
-    , newCheckResults
+    CheckResults (..),
+    newCheckResults,
 
     -- ** CheckSet
-    , CheckSet (..)
-    , newCheckSet
+    CheckSet (..),
+    newCheckSet,
 
     -- ** CheckSetResult
-    , CheckSetResult (..)
-    , newCheckSetResult
+    CheckSetResult (..),
+    newCheckSetResult,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** EvaluateGkePolicyRequest
-    , EvaluateGkePolicyRequest (..)
-    , newEvaluateGkePolicyRequest
+    EvaluateGkePolicyRequest (..),
+    newEvaluateGkePolicyRequest,
 
     -- ** EvaluateGkePolicyRequest_Resource
-    , EvaluateGkePolicyRequest_Resource (..)
-    , newEvaluateGkePolicyRequest_Resource
+    EvaluateGkePolicyRequest_Resource (..),
+    newEvaluateGkePolicyRequest_Resource,
 
     -- ** EvaluateGkePolicyResponse
-    , EvaluateGkePolicyResponse (..)
-    , newEvaluateGkePolicyResponse
+    EvaluateGkePolicyResponse (..),
+    newEvaluateGkePolicyResponse,
 
     -- ** EvaluateGkePolicyResponse_Verdict
-    , EvaluateGkePolicyResponse_Verdict (..)
+    EvaluateGkePolicyResponse_Verdict (..),
 
     -- ** EvaluationResult
-    , EvaluationResult (..)
-    , newEvaluationResult
+    EvaluationResult (..),
+    newEvaluationResult,
 
     -- ** EvaluationResult_Verdict
-    , EvaluationResult_Verdict (..)
+    EvaluationResult_Verdict (..),
 
     -- ** Expr
-    , Expr (..)
-    , newExpr
+    Expr (..),
+    newExpr,
 
     -- ** GkePolicy
-    , GkePolicy (..)
-    , newGkePolicy
+    GkePolicy (..),
+    newGkePolicy,
 
     -- ** IamPolicy
-    , IamPolicy (..)
-    , newIamPolicy
+    IamPolicy (..),
+    newIamPolicy,
 
     -- ** ImageAllowlist
-    , ImageAllowlist (..)
-    , newImageAllowlist
+    ImageAllowlist (..),
+    newImageAllowlist,
 
     -- ** ImageFreshnessCheck
-    , ImageFreshnessCheck (..)
-    , newImageFreshnessCheck
+    ImageFreshnessCheck (..),
+    newImageFreshnessCheck,
 
     -- ** ImageResult
-    , ImageResult (..)
-    , newImageResult
+    ImageResult (..),
+    newImageResult,
 
     -- ** ImageResult_Verdict
-    , ImageResult_Verdict (..)
+    ImageResult_Verdict (..),
 
     -- ** Jwt
-    , Jwt (..)
-    , newJwt
+    Jwt (..),
+    newJwt,
 
     -- ** ListAttestorsResponse
-    , ListAttestorsResponse (..)
-    , newListAttestorsResponse
+    ListAttestorsResponse (..),
+    newListAttestorsResponse,
 
     -- ** ListPlatformPoliciesResponse
-    , ListPlatformPoliciesResponse (..)
-    , newListPlatformPoliciesResponse
+    ListPlatformPoliciesResponse (..),
+    newListPlatformPoliciesResponse,
 
     -- ** PkixPublicKey
-    , PkixPublicKey (..)
-    , newPkixPublicKey
+    PkixPublicKey (..),
+    newPkixPublicKey,
 
     -- ** PkixPublicKey_SignatureAlgorithm
-    , PkixPublicKey_SignatureAlgorithm (..)
+    PkixPublicKey_SignatureAlgorithm (..),
 
     -- ** PkixPublicKeySet
-    , PkixPublicKeySet (..)
-    , newPkixPublicKeySet
+    PkixPublicKeySet (..),
+    newPkixPublicKeySet,
 
     -- ** PlatformPolicy
-    , PlatformPolicy (..)
-    , newPlatformPolicy
+    PlatformPolicy (..),
+    newPlatformPolicy,
 
     -- ** PodResult
-    , PodResult (..)
-    , newPodResult
+    PodResult (..),
+    newPodResult,
 
     -- ** PodResult_Verdict
-    , PodResult_Verdict (..)
+    PodResult_Verdict (..),
 
     -- ** Policy
-    , Policy (..)
-    , newPolicy
+    Policy (..),
+    newPolicy,
 
     -- ** Policy_ClusterAdmissionRules
-    , Policy_ClusterAdmissionRules (..)
-    , newPolicy_ClusterAdmissionRules
+    Policy_ClusterAdmissionRules (..),
+    newPolicy_ClusterAdmissionRules,
 
     -- ** Policy_GlobalPolicyEvaluationMode
-    , Policy_GlobalPolicyEvaluationMode (..)
+    Policy_GlobalPolicyEvaluationMode (..),
 
     -- ** Policy_IstioServiceIdentityAdmissionRules
-    , Policy_IstioServiceIdentityAdmissionRules (..)
-    , newPolicy_IstioServiceIdentityAdmissionRules
+    Policy_IstioServiceIdentityAdmissionRules (..),
+    newPolicy_IstioServiceIdentityAdmissionRules,
 
     -- ** Policy_KubernetesNamespaceAdmissionRules
-    , Policy_KubernetesNamespaceAdmissionRules (..)
-    , newPolicy_KubernetesNamespaceAdmissionRules
+    Policy_KubernetesNamespaceAdmissionRules (..),
+    newPolicy_KubernetesNamespaceAdmissionRules,
 
     -- ** Policy_KubernetesServiceAccountAdmissionRules
-    , Policy_KubernetesServiceAccountAdmissionRules (..)
-    , newPolicy_KubernetesServiceAccountAdmissionRules
+    Policy_KubernetesServiceAccountAdmissionRules (..),
+    newPolicy_KubernetesServiceAccountAdmissionRules,
 
     -- ** Scope
-    , Scope (..)
-    , newScope
+    Scope (..),
+    newScope,
 
     -- ** SetIamPolicyRequest
-    , SetIamPolicyRequest (..)
-    , newSetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
 
     -- ** Signature
-    , Signature (..)
-    , newSignature
+    Signature (..),
+    newSignature,
 
     -- ** SigstoreAuthority
-    , SigstoreAuthority (..)
-    , newSigstoreAuthority
+    SigstoreAuthority (..),
+    newSigstoreAuthority,
 
     -- ** SigstorePublicKey
-    , SigstorePublicKey (..)
-    , newSigstorePublicKey
+    SigstorePublicKey (..),
+    newSigstorePublicKey,
 
     -- ** SigstorePublicKeySet
-    , SigstorePublicKeySet (..)
-    , newSigstorePublicKeySet
+    SigstorePublicKeySet (..),
+    newSigstorePublicKeySet,
 
     -- ** SigstoreSignatureCheck
-    , SigstoreSignatureCheck (..)
-    , newSigstoreSignatureCheck
+    SigstoreSignatureCheck (..),
+    newSigstoreSignatureCheck,
 
     -- ** SimpleSigningAttestationCheck
-    , SimpleSigningAttestationCheck (..)
-    , newSimpleSigningAttestationCheck
+    SimpleSigningAttestationCheck (..),
+    newSimpleSigningAttestationCheck,
 
     -- ** SlsaCheck
-    , SlsaCheck (..)
-    , newSlsaCheck
+    SlsaCheck (..),
+    newSlsaCheck,
 
     -- ** TestIamPermissionsRequest
-    , TestIamPermissionsRequest (..)
-    , newTestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
 
     -- ** TestIamPermissionsResponse
-    , TestIamPermissionsResponse (..)
-    , newTestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
 
     -- ** TrustedDirectoryCheck
-    , TrustedDirectoryCheck (..)
-    , newTrustedDirectoryCheck
+    TrustedDirectoryCheck (..),
+    newTrustedDirectoryCheck,
 
     -- ** UserOwnedGrafeasNote
-    , UserOwnedGrafeasNote (..)
-    , newUserOwnedGrafeasNote
+    UserOwnedGrafeasNote (..),
+    newUserOwnedGrafeasNote,
 
     -- ** ValidateAttestationOccurrenceRequest
-    , ValidateAttestationOccurrenceRequest (..)
-    , newValidateAttestationOccurrenceRequest
+    ValidateAttestationOccurrenceRequest (..),
+    newValidateAttestationOccurrenceRequest,
 
     -- ** ValidateAttestationOccurrenceResponse
-    , ValidateAttestationOccurrenceResponse (..)
-    , newValidateAttestationOccurrenceResponse
+    ValidateAttestationOccurrenceResponse (..),
+    newValidateAttestationOccurrenceResponse,
 
     -- ** ValidateAttestationOccurrenceResponse_Result
-    , ValidateAttestationOccurrenceResponse_Result (..)
+    ValidateAttestationOccurrenceResponse_Result (..),
 
     -- ** VerificationRule
-    , VerificationRule (..)
-    , newVerificationRule
+    VerificationRule (..),
+    newVerificationRule,
 
     -- ** VerificationRule_TrustedBuilder
-    , VerificationRule_TrustedBuilder (..)
+    VerificationRule_TrustedBuilder (..),
 
     -- ** VulnerabilityCheck
-    , VulnerabilityCheck (..)
-    , newVulnerabilityCheck
+    VulnerabilityCheck (..),
+    newVulnerabilityCheck,
 
     -- ** VulnerabilityCheck_MaximumFixableSeverity
-    , VulnerabilityCheck_MaximumFixableSeverity (..)
+    VulnerabilityCheck_MaximumFixableSeverity (..),
 
     -- ** VulnerabilityCheck_MaximumUnfixableSeverity
-    , VulnerabilityCheck_MaximumUnfixableSeverity (..)
-    ) where
+    VulnerabilityCheck_MaximumUnfixableSeverity (..),
+  )
+where
 
 import Gogol.BinaryAuthorization.Projects.Attestors.Create
 import Gogol.BinaryAuthorization.Projects.Attestors.Delete

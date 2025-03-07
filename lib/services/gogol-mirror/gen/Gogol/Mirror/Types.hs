@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,119 +16,122 @@
 
 -- |
 -- Module      : Gogol.Mirror.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Mirror.Types
-    (
-    -- * Configuration
-      mirrorService
+  ( -- * Configuration
+    mirrorService,
 
     -- * OAuth Scopes
-    , Glass'Location
-    , Glass'Timeline
+    Glass'Location,
+    Glass'Timeline,
 
     -- * Types
 
     -- ** Account
-    , Account (..)
-    , newAccount
+    Account (..),
+    newAccount,
 
     -- ** Attachment
-    , Attachment (..)
-    , newAttachment
+    Attachment (..),
+    newAttachment,
 
     -- ** AttachmentsListResponse
-    , AttachmentsListResponse (..)
-    , newAttachmentsListResponse
+    AttachmentsListResponse (..),
+    newAttachmentsListResponse,
 
     -- ** AuthToken
-    , AuthToken (..)
-    , newAuthToken
+    AuthToken (..),
+    newAuthToken,
 
     -- ** Command
-    , Command (..)
-    , newCommand
+    Command (..),
+    newCommand,
 
     -- ** Contact
-    , Contact (..)
-    , newContact
+    Contact (..),
+    newContact,
 
     -- ** ContactsListResponse
-    , ContactsListResponse (..)
-    , newContactsListResponse
+    ContactsListResponse (..),
+    newContactsListResponse,
 
     -- ** Location
-    , Location (..)
-    , newLocation
+    Location (..),
+    newLocation,
 
     -- ** LocationsListResponse
-    , LocationsListResponse (..)
-    , newLocationsListResponse
+    LocationsListResponse (..),
+    newLocationsListResponse,
 
     -- ** MenuItem
-    , MenuItem (..)
-    , newMenuItem
+    MenuItem (..),
+    newMenuItem,
 
     -- ** MenuValue
-    , MenuValue (..)
-    , newMenuValue
+    MenuValue (..),
+    newMenuValue,
 
     -- ** Notification
-    , Notification (..)
-    , newNotification
+    Notification (..),
+    newNotification,
 
     -- ** NotificationConfig
-    , NotificationConfig (..)
-    , newNotificationConfig
+    NotificationConfig (..),
+    newNotificationConfig,
 
     -- ** Setting
-    , Setting (..)
-    , newSetting
+    Setting (..),
+    newSetting,
 
     -- ** Subscription
-    , Subscription (..)
-    , newSubscription
+    Subscription (..),
+    newSubscription,
 
     -- ** SubscriptionsListResponse
-    , SubscriptionsListResponse (..)
-    , newSubscriptionsListResponse
+    SubscriptionsListResponse (..),
+    newSubscriptionsListResponse,
 
     -- ** TimelineItem
-    , TimelineItem (..)
-    , newTimelineItem
+    TimelineItem (..),
+    newTimelineItem,
 
     -- ** TimelineListResponse
-    , TimelineListResponse (..)
-    , newTimelineListResponse
+    TimelineListResponse (..),
+    newTimelineListResponse,
 
     -- ** UserAction
-    , UserAction (..)
-    , newUserAction
+    UserAction (..),
+    newUserAction,
 
     -- ** UserData
-    , UserData (..)
-    , newUserData
+    UserData (..),
+    newUserData,
 
     -- ** TimelineListOrderBy
-    , TimelineListOrderBy (..)
-    ) where
+    TimelineListOrderBy (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Mirror.Internal.Product
 import Gogol.Mirror.Internal.Sum
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Google Mirror API. This contains the host and root path used as a starting point for constructing service requests.
 mirrorService :: Core.ServiceConfig
-mirrorService
-  = Core.defaultService (Core.ServiceId "mirror:v1")
-      "www.googleapis.com"
+mirrorService =
+  Core.defaultService
+    (Core.ServiceId "mirror:v1")
+    "www.googleapis.com"
 
 -- | View your location
-type Glass'Location = "https://www.googleapis.com/auth/glass.location"
+type Glass'Location =
+  "https://www.googleapis.com/auth/glass.location"
 
 -- | View and manage your Glass timeline
-type Glass'Timeline = "https://www.googleapis.com/auth/glass.timeline"
+type Glass'Timeline =
+  "https://www.googleapis.com/auth/glass.timeline"

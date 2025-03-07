@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.OSLogin
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,85 +27,85 @@
 --
 -- /See:/ <https://cloud.google.com/compute/docs/oslogin/ Cloud OS Login API Reference>
 module Gogol.OSLogin
-    (
-    -- * Configuration
-      oSLoginService
+  ( -- * Configuration
+    oSLoginService,
 
     -- * OAuth Scopes
-    , CloudPlatform'FullControl
-    , CloudPlatform'ReadOnly
-    , Compute'FullControl
-    , Compute'Readonly
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
+    Compute'FullControl,
+    Compute'Readonly,
 
     -- * Resources
 
     -- ** oslogin.users.getLoginProfile
-    , OSLoginUsersGetLoginProfileResource
-    , OSLoginUsersGetLoginProfile (..)
-    , newOSLoginUsersGetLoginProfile
+    OSLoginUsersGetLoginProfileResource,
+    OSLoginUsersGetLoginProfile (..),
+    newOSLoginUsersGetLoginProfile,
 
     -- ** oslogin.users.importSshPublicKey
-    , OSLoginUsersImportSshPublicKeyResource
-    , OSLoginUsersImportSshPublicKey (..)
-    , newOSLoginUsersImportSshPublicKey
+    OSLoginUsersImportSshPublicKeyResource,
+    OSLoginUsersImportSshPublicKey (..),
+    newOSLoginUsersImportSshPublicKey,
 
     -- ** oslogin.users.projects.delete
-    , OSLoginUsersProjectsDeleteResource
-    , OSLoginUsersProjectsDelete (..)
-    , newOSLoginUsersProjectsDelete
+    OSLoginUsersProjectsDeleteResource,
+    OSLoginUsersProjectsDelete (..),
+    newOSLoginUsersProjectsDelete,
 
     -- ** oslogin.users.sshPublicKeys.create
-    , OSLoginUsersSshPublicKeysCreateResource
-    , OSLoginUsersSshPublicKeysCreate (..)
-    , newOSLoginUsersSshPublicKeysCreate
+    OSLoginUsersSshPublicKeysCreateResource,
+    OSLoginUsersSshPublicKeysCreate (..),
+    newOSLoginUsersSshPublicKeysCreate,
 
     -- ** oslogin.users.sshPublicKeys.delete
-    , OSLoginUsersSshPublicKeysDeleteResource
-    , OSLoginUsersSshPublicKeysDelete (..)
-    , newOSLoginUsersSshPublicKeysDelete
+    OSLoginUsersSshPublicKeysDeleteResource,
+    OSLoginUsersSshPublicKeysDelete (..),
+    newOSLoginUsersSshPublicKeysDelete,
 
     -- ** oslogin.users.sshPublicKeys.get
-    , OSLoginUsersSshPublicKeysGetResource
-    , OSLoginUsersSshPublicKeysGet (..)
-    , newOSLoginUsersSshPublicKeysGet
+    OSLoginUsersSshPublicKeysGetResource,
+    OSLoginUsersSshPublicKeysGet (..),
+    newOSLoginUsersSshPublicKeysGet,
 
     -- ** oslogin.users.sshPublicKeys.patch
-    , OSLoginUsersSshPublicKeysPatchResource
-    , OSLoginUsersSshPublicKeysPatch (..)
-    , newOSLoginUsersSshPublicKeysPatch
+    OSLoginUsersSshPublicKeysPatchResource,
+    OSLoginUsersSshPublicKeysPatch (..),
+    newOSLoginUsersSshPublicKeysPatch,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** ImportSshPublicKeyResponse
-    , ImportSshPublicKeyResponse (..)
-    , newImportSshPublicKeyResponse
+    ImportSshPublicKeyResponse (..),
+    newImportSshPublicKeyResponse,
 
     -- ** LoginProfile
-    , LoginProfile (..)
-    , newLoginProfile
+    LoginProfile (..),
+    newLoginProfile,
 
     -- ** LoginProfile_SshPublicKeys
-    , LoginProfile_SshPublicKeys (..)
-    , newLoginProfile_SshPublicKeys
+    LoginProfile_SshPublicKeys (..),
+    newLoginProfile_SshPublicKeys,
 
     -- ** PosixAccount
-    , PosixAccount (..)
-    , newPosixAccount
+    PosixAccount (..),
+    newPosixAccount,
 
     -- ** PosixAccount_OperatingSystemType
-    , PosixAccount_OperatingSystemType (..)
+    PosixAccount_OperatingSystemType (..),
 
     -- ** SshPublicKey
-    , SshPublicKey (..)
-    , newSshPublicKey
-    ) where
+    SshPublicKey (..),
+    newSshPublicKey,
+  )
+where
 
 import Gogol.OSLogin.Types
 import Gogol.OSLogin.Users.GetLoginProfile

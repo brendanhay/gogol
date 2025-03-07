@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.FusionTables
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,284 +27,284 @@
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference>
 module Gogol.FusionTables
-    (
-    -- * Configuration
-      fusionTablesService
+  ( -- * Configuration
+    fusionTablesService,
 
     -- * OAuth Scopes
-    , Fusiontables'FullControl
-    , Fusiontables'Readonly
+    Fusiontables'FullControl,
+    Fusiontables'Readonly,
 
     -- * Resources
 
     -- ** fusiontables.column.delete
-    , FusionTablesColumnDeleteResource
-    , FusionTablesColumnDelete (..)
-    , newFusionTablesColumnDelete
+    FusionTablesColumnDeleteResource,
+    FusionTablesColumnDelete (..),
+    newFusionTablesColumnDelete,
 
     -- ** fusiontables.column.get
-    , FusionTablesColumnGetResource
-    , FusionTablesColumnGet (..)
-    , newFusionTablesColumnGet
+    FusionTablesColumnGetResource,
+    FusionTablesColumnGet (..),
+    newFusionTablesColumnGet,
 
     -- ** fusiontables.column.insert
-    , FusionTablesColumnInsertResource
-    , FusionTablesColumnInsert (..)
-    , newFusionTablesColumnInsert
+    FusionTablesColumnInsertResource,
+    FusionTablesColumnInsert (..),
+    newFusionTablesColumnInsert,
 
     -- ** fusiontables.column.list
-    , FusionTablesColumnListResource
-    , FusionTablesColumnList (..)
-    , newFusionTablesColumnList
+    FusionTablesColumnListResource,
+    FusionTablesColumnList (..),
+    newFusionTablesColumnList,
 
     -- ** fusiontables.column.patch
-    , FusionTablesColumnPatchResource
-    , FusionTablesColumnPatch (..)
-    , newFusionTablesColumnPatch
+    FusionTablesColumnPatchResource,
+    FusionTablesColumnPatch (..),
+    newFusionTablesColumnPatch,
 
     -- ** fusiontables.column.update
-    , FusionTablesColumnUpdateResource
-    , FusionTablesColumnUpdate (..)
-    , newFusionTablesColumnUpdate
+    FusionTablesColumnUpdateResource,
+    FusionTablesColumnUpdate (..),
+    newFusionTablesColumnUpdate,
 
     -- ** fusiontables.query.sql
-    , FusionTablesQuerySqlResource
-    , FusionTablesQuerySql (..)
-    , newFusionTablesQuerySql
+    FusionTablesQuerySqlResource,
+    FusionTablesQuerySql (..),
+    newFusionTablesQuerySql,
 
     -- ** fusiontables.query.sqlGet
-    , FusionTablesQuerySqlGetResource
-    , FusionTablesQuerySqlGet (..)
-    , newFusionTablesQuerySqlGet
+    FusionTablesQuerySqlGetResource,
+    FusionTablesQuerySqlGet (..),
+    newFusionTablesQuerySqlGet,
 
     -- ** fusiontables.style.delete
-    , FusionTablesStyleDeleteResource
-    , FusionTablesStyleDelete (..)
-    , newFusionTablesStyleDelete
+    FusionTablesStyleDeleteResource,
+    FusionTablesStyleDelete (..),
+    newFusionTablesStyleDelete,
 
     -- ** fusiontables.style.get
-    , FusionTablesStyleGetResource
-    , FusionTablesStyleGet (..)
-    , newFusionTablesStyleGet
+    FusionTablesStyleGetResource,
+    FusionTablesStyleGet (..),
+    newFusionTablesStyleGet,
 
     -- ** fusiontables.style.insert
-    , FusionTablesStyleInsertResource
-    , FusionTablesStyleInsert (..)
-    , newFusionTablesStyleInsert
+    FusionTablesStyleInsertResource,
+    FusionTablesStyleInsert (..),
+    newFusionTablesStyleInsert,
 
     -- ** fusiontables.style.list
-    , FusionTablesStyleListResource
-    , FusionTablesStyleList (..)
-    , newFusionTablesStyleList
+    FusionTablesStyleListResource,
+    FusionTablesStyleList (..),
+    newFusionTablesStyleList,
 
     -- ** fusiontables.style.patch
-    , FusionTablesStylePatchResource
-    , FusionTablesStylePatch (..)
-    , newFusionTablesStylePatch
+    FusionTablesStylePatchResource,
+    FusionTablesStylePatch (..),
+    newFusionTablesStylePatch,
 
     -- ** fusiontables.style.update
-    , FusionTablesStyleUpdateResource
-    , FusionTablesStyleUpdate (..)
-    , newFusionTablesStyleUpdate
+    FusionTablesStyleUpdateResource,
+    FusionTablesStyleUpdate (..),
+    newFusionTablesStyleUpdate,
 
     -- ** fusiontables.table.copy
-    , FusionTablesTableCopyResource
-    , FusionTablesTableCopy (..)
-    , newFusionTablesTableCopy
+    FusionTablesTableCopyResource,
+    FusionTablesTableCopy (..),
+    newFusionTablesTableCopy,
 
     -- ** fusiontables.table.delete
-    , FusionTablesTableDeleteResource
-    , FusionTablesTableDelete (..)
-    , newFusionTablesTableDelete
+    FusionTablesTableDeleteResource,
+    FusionTablesTableDelete (..),
+    newFusionTablesTableDelete,
 
     -- ** fusiontables.table.get
-    , FusionTablesTableGetResource
-    , FusionTablesTableGet (..)
-    , newFusionTablesTableGet
+    FusionTablesTableGetResource,
+    FusionTablesTableGet (..),
+    newFusionTablesTableGet,
 
     -- ** fusiontables.table.importRows
-    , FusionTablesTableImportRowsResource
-    , FusionTablesTableImportRows (..)
-    , newFusionTablesTableImportRows
+    FusionTablesTableImportRowsResource,
+    FusionTablesTableImportRows (..),
+    newFusionTablesTableImportRows,
 
     -- ** fusiontables.table.importTable
-    , FusionTablesTableImportTableResource
-    , FusionTablesTableImportTable (..)
-    , newFusionTablesTableImportTable
+    FusionTablesTableImportTableResource,
+    FusionTablesTableImportTable (..),
+    newFusionTablesTableImportTable,
 
     -- ** fusiontables.table.insert
-    , FusionTablesTableInsertResource
-    , FusionTablesTableInsert (..)
-    , newFusionTablesTableInsert
+    FusionTablesTableInsertResource,
+    FusionTablesTableInsert (..),
+    newFusionTablesTableInsert,
 
     -- ** fusiontables.table.list
-    , FusionTablesTableListResource
-    , FusionTablesTableList (..)
-    , newFusionTablesTableList
+    FusionTablesTableListResource,
+    FusionTablesTableList (..),
+    newFusionTablesTableList,
 
     -- ** fusiontables.table.patch
-    , FusionTablesTablePatchResource
-    , FusionTablesTablePatch (..)
-    , newFusionTablesTablePatch
+    FusionTablesTablePatchResource,
+    FusionTablesTablePatch (..),
+    newFusionTablesTablePatch,
 
     -- ** fusiontables.table.refetchSheet
-    , FusionTablesTableRefetchSheetResource
-    , FusionTablesTableRefetchSheet (..)
-    , newFusionTablesTableRefetchSheet
+    FusionTablesTableRefetchSheetResource,
+    FusionTablesTableRefetchSheet (..),
+    newFusionTablesTableRefetchSheet,
 
     -- ** fusiontables.table.replaceRows
-    , FusionTablesTableReplaceRowsResource
-    , FusionTablesTableReplaceRows (..)
-    , newFusionTablesTableReplaceRows
+    FusionTablesTableReplaceRowsResource,
+    FusionTablesTableReplaceRows (..),
+    newFusionTablesTableReplaceRows,
 
     -- ** fusiontables.table.update
-    , FusionTablesTableUpdateResource
-    , FusionTablesTableUpdate (..)
-    , newFusionTablesTableUpdate
+    FusionTablesTableUpdateResource,
+    FusionTablesTableUpdate (..),
+    newFusionTablesTableUpdate,
 
     -- ** fusiontables.task.delete
-    , FusionTablesTaskDeleteResource
-    , FusionTablesTaskDelete (..)
-    , newFusionTablesTaskDelete
+    FusionTablesTaskDeleteResource,
+    FusionTablesTaskDelete (..),
+    newFusionTablesTaskDelete,
 
     -- ** fusiontables.task.get
-    , FusionTablesTaskGetResource
-    , FusionTablesTaskGet (..)
-    , newFusionTablesTaskGet
+    FusionTablesTaskGetResource,
+    FusionTablesTaskGet (..),
+    newFusionTablesTaskGet,
 
     -- ** fusiontables.task.list
-    , FusionTablesTaskListResource
-    , FusionTablesTaskList (..)
-    , newFusionTablesTaskList
+    FusionTablesTaskListResource,
+    FusionTablesTaskList (..),
+    newFusionTablesTaskList,
 
     -- ** fusiontables.template.delete
-    , FusionTablesTemplateDeleteResource
-    , FusionTablesTemplateDelete (..)
-    , newFusionTablesTemplateDelete
+    FusionTablesTemplateDeleteResource,
+    FusionTablesTemplateDelete (..),
+    newFusionTablesTemplateDelete,
 
     -- ** fusiontables.template.get
-    , FusionTablesTemplateGetResource
-    , FusionTablesTemplateGet (..)
-    , newFusionTablesTemplateGet
+    FusionTablesTemplateGetResource,
+    FusionTablesTemplateGet (..),
+    newFusionTablesTemplateGet,
 
     -- ** fusiontables.template.insert
-    , FusionTablesTemplateInsertResource
-    , FusionTablesTemplateInsert (..)
-    , newFusionTablesTemplateInsert
+    FusionTablesTemplateInsertResource,
+    FusionTablesTemplateInsert (..),
+    newFusionTablesTemplateInsert,
 
     -- ** fusiontables.template.list
-    , FusionTablesTemplateListResource
-    , FusionTablesTemplateList (..)
-    , newFusionTablesTemplateList
+    FusionTablesTemplateListResource,
+    FusionTablesTemplateList (..),
+    newFusionTablesTemplateList,
 
     -- ** fusiontables.template.patch
-    , FusionTablesTemplatePatchResource
-    , FusionTablesTemplatePatch (..)
-    , newFusionTablesTemplatePatch
+    FusionTablesTemplatePatchResource,
+    FusionTablesTemplatePatch (..),
+    newFusionTablesTemplatePatch,
 
     -- ** fusiontables.template.update
-    , FusionTablesTemplateUpdateResource
-    , FusionTablesTemplateUpdate (..)
-    , newFusionTablesTemplateUpdate
+    FusionTablesTemplateUpdateResource,
+    FusionTablesTemplateUpdate (..),
+    newFusionTablesTemplateUpdate,
 
     -- * Types
 
     -- ** Bucket
-    , Bucket (..)
-    , newBucket
+    Bucket (..),
+    newBucket,
 
     -- ** Column
-    , Column (..)
-    , newColumn
+    Column (..),
+    newColumn,
 
     -- ** Column_BaseColumn
-    , Column_BaseColumn (..)
-    , newColumn_BaseColumn
+    Column_BaseColumn (..),
+    newColumn_BaseColumn,
 
     -- ** ColumnList
-    , ColumnList (..)
-    , newColumnList
+    ColumnList (..),
+    newColumnList,
 
     -- ** Geometry
-    , Geometry (..)
-    , newGeometry
+    Geometry (..),
+    newGeometry,
 
     -- ** Import
-    , Import (..)
-    , newImport
+    Import (..),
+    newImport,
 
     -- ** Line
-    , Line (..)
-    , newLine
+    Line (..),
+    newLine,
 
     -- ** LineStyle
-    , LineStyle (..)
-    , newLineStyle
+    LineStyle (..),
+    newLineStyle,
 
     -- ** Point
-    , Point (..)
-    , newPoint
+    Point (..),
+    newPoint,
 
     -- ** PointStyle
-    , PointStyle (..)
-    , newPointStyle
+    PointStyle (..),
+    newPointStyle,
 
     -- ** Polygon
-    , Polygon (..)
-    , newPolygon
+    Polygon (..),
+    newPolygon,
 
     -- ** PolygonStyle
-    , PolygonStyle (..)
-    , newPolygonStyle
+    PolygonStyle (..),
+    newPolygonStyle,
 
     -- ** Sqlresponse
-    , Sqlresponse (..)
-    , newSqlresponse
+    Sqlresponse (..),
+    newSqlresponse,
 
     -- ** StyleFunction
-    , StyleFunction (..)
-    , newStyleFunction
+    StyleFunction (..),
+    newStyleFunction,
 
     -- ** StyleFunction_Gradient
-    , StyleFunction_Gradient (..)
-    , newStyleFunction_Gradient
+    StyleFunction_Gradient (..),
+    newStyleFunction_Gradient,
 
     -- ** StyleFunction_Gradient_ColorsItem
-    , StyleFunction_Gradient_ColorsItem (..)
-    , newStyleFunction_Gradient_ColorsItem
+    StyleFunction_Gradient_ColorsItem (..),
+    newStyleFunction_Gradient_ColorsItem,
 
     -- ** StyleSetting
-    , StyleSetting (..)
-    , newStyleSetting
+    StyleSetting (..),
+    newStyleSetting,
 
     -- ** StyleSettingList
-    , StyleSettingList (..)
-    , newStyleSettingList
+    StyleSettingList (..),
+    newStyleSettingList,
 
     -- ** Table
-    , Table (..)
-    , newTable
+    Table (..),
+    newTable,
 
     -- ** TableList
-    , TableList (..)
-    , newTableList
+    TableList (..),
+    newTableList,
 
     -- ** Task
-    , Task (..)
-    , newTask
+    Task (..),
+    newTask,
 
     -- ** TaskList
-    , TaskList (..)
-    , newTaskList
+    TaskList (..),
+    newTaskList,
 
     -- ** Template
-    , Template (..)
-    , newTemplate
+    Template (..),
+    newTemplate,
 
     -- ** TemplateList
-    , TemplateList (..)
-    , newTemplateList
-    ) where
+    TemplateList (..),
+    newTemplateList,
+  )
+where
 
 import Gogol.FusionTables.Column.Delete
 import Gogol.FusionTables.Column.Get

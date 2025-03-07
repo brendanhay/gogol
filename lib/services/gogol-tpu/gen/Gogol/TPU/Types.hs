@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,291 +16,293 @@
 
 -- |
 -- Module      : Gogol.TPU.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.TPU.Types
-    (
-    -- * Configuration
-      tPUService
+  ( -- * Configuration
+    tPUService,
 
     -- * OAuth Scopes
-    , CloudPlatform'FullControl
+    CloudPlatform'FullControl,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AcceleratorConfig
-    , AcceleratorConfig (..)
-    , newAcceleratorConfig
+    AcceleratorConfig (..),
+    newAcceleratorConfig,
 
     -- ** AcceleratorConfig_Type
-    , AcceleratorConfig_Type (..)
+    AcceleratorConfig_Type (..),
 
     -- ** AcceleratorType
-    , AcceleratorType (..)
-    , newAcceleratorType
+    AcceleratorType (..),
+    newAcceleratorType,
 
     -- ** AcceptedData
-    , AcceptedData (..)
-    , newAcceptedData
+    AcceptedData (..),
+    newAcceptedData,
 
     -- ** AccessConfig
-    , AccessConfig (..)
-    , newAccessConfig
+    AccessConfig (..),
+    newAccessConfig,
 
     -- ** ActiveData
-    , ActiveData (..)
-    , newActiveData
+    ActiveData (..),
+    newActiveData,
 
     -- ** AttachedDisk
-    , AttachedDisk (..)
-    , newAttachedDisk
+    AttachedDisk (..),
+    newAttachedDisk,
 
     -- ** AttachedDisk_Mode
-    , AttachedDisk_Mode (..)
+    AttachedDisk_Mode (..),
 
     -- ** CreatingData
-    , CreatingData (..)
-    , newCreatingData
+    CreatingData (..),
+    newCreatingData,
 
     -- ** DeletingData
-    , DeletingData (..)
-    , newDeletingData
+    DeletingData (..),
+    newDeletingData,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** FailedData
-    , FailedData (..)
-    , newFailedData
+    FailedData (..),
+    newFailedData,
 
     -- ** GenerateServiceIdentityRequest
-    , GenerateServiceIdentityRequest (..)
-    , newGenerateServiceIdentityRequest
+    GenerateServiceIdentityRequest (..),
+    newGenerateServiceIdentityRequest,
 
     -- ** GenerateServiceIdentityResponse
-    , GenerateServiceIdentityResponse (..)
-    , newGenerateServiceIdentityResponse
+    GenerateServiceIdentityResponse (..),
+    newGenerateServiceIdentityResponse,
 
     -- ** GetGuestAttributesRequest
-    , GetGuestAttributesRequest (..)
-    , newGetGuestAttributesRequest
+    GetGuestAttributesRequest (..),
+    newGetGuestAttributesRequest,
 
     -- ** GetGuestAttributesResponse
-    , GetGuestAttributesResponse (..)
-    , newGetGuestAttributesResponse
+    GetGuestAttributesResponse (..),
+    newGetGuestAttributesResponse,
 
     -- ** Guaranteed
-    , Guaranteed (..)
-    , newGuaranteed
+    Guaranteed (..),
+    newGuaranteed,
 
     -- ** GuestAttributes
-    , GuestAttributes (..)
-    , newGuestAttributes
+    GuestAttributes (..),
+    newGuestAttributes,
 
     -- ** GuestAttributesEntry
-    , GuestAttributesEntry (..)
-    , newGuestAttributesEntry
+    GuestAttributesEntry (..),
+    newGuestAttributesEntry,
 
     -- ** GuestAttributesValue
-    , GuestAttributesValue (..)
-    , newGuestAttributesValue
+    GuestAttributesValue (..),
+    newGuestAttributesValue,
 
     -- ** Interval
-    , Interval (..)
-    , newInterval
+    Interval (..),
+    newInterval,
 
     -- ** ListAcceleratorTypesResponse
-    , ListAcceleratorTypesResponse (..)
-    , newListAcceleratorTypesResponse
+    ListAcceleratorTypesResponse (..),
+    newListAcceleratorTypesResponse,
 
     -- ** ListLocationsResponse
-    , ListLocationsResponse (..)
-    , newListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
 
     -- ** ListNodesResponse
-    , ListNodesResponse (..)
-    , newListNodesResponse
+    ListNodesResponse (..),
+    newListNodesResponse,
 
     -- ** ListOperationsResponse
-    , ListOperationsResponse (..)
-    , newListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
     -- ** ListQueuedResourcesResponse
-    , ListQueuedResourcesResponse (..)
-    , newListQueuedResourcesResponse
+    ListQueuedResourcesResponse (..),
+    newListQueuedResourcesResponse,
 
     -- ** ListRuntimeVersionsResponse
-    , ListRuntimeVersionsResponse (..)
-    , newListRuntimeVersionsResponse
+    ListRuntimeVersionsResponse (..),
+    newListRuntimeVersionsResponse,
 
     -- ** Location
-    , Location (..)
-    , newLocation
+    Location (..),
+    newLocation,
 
     -- ** Location_Labels
-    , Location_Labels (..)
-    , newLocation_Labels
+    Location_Labels (..),
+    newLocation_Labels,
 
     -- ** Location_Metadata
-    , Location_Metadata (..)
-    , newLocation_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
 
     -- ** MultisliceParams
-    , MultisliceParams (..)
-    , newMultisliceParams
+    MultisliceParams (..),
+    newMultisliceParams,
 
     -- ** NetworkConfig
-    , NetworkConfig (..)
-    , newNetworkConfig
+    NetworkConfig (..),
+    newNetworkConfig,
 
     -- ** NetworkEndpoint
-    , NetworkEndpoint (..)
-    , newNetworkEndpoint
+    NetworkEndpoint (..),
+    newNetworkEndpoint,
 
     -- ** Node
-    , Node (..)
-    , newNode
+    Node (..),
+    newNode,
 
     -- ** Node_ApiVersion
-    , Node_ApiVersion (..)
+    Node_ApiVersion (..),
 
     -- ** Node_Health
-    , Node_Health (..)
+    Node_Health (..),
 
     -- ** Node_Labels
-    , Node_Labels (..)
-    , newNode_Labels
+    Node_Labels (..),
+    newNode_Labels,
 
     -- ** Node_Metadata
-    , Node_Metadata (..)
-    , newNode_Metadata
+    Node_Metadata (..),
+    newNode_Metadata,
 
     -- ** Node_State
-    , Node_State (..)
+    Node_State (..),
 
     -- ** NodeSpec
-    , NodeSpec (..)
-    , newNodeSpec
+    NodeSpec (..),
+    newNodeSpec,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** OperationMetadata
-    , OperationMetadata (..)
-    , newOperationMetadata
+    OperationMetadata (..),
+    newOperationMetadata,
 
     -- ** ProvisioningData
-    , ProvisioningData (..)
-    , newProvisioningData
+    ProvisioningData (..),
+    newProvisioningData,
 
     -- ** QueuedResource
-    , QueuedResource (..)
-    , newQueuedResource
+    QueuedResource (..),
+    newQueuedResource,
 
     -- ** QueuedResourceState
-    , QueuedResourceState (..)
-    , newQueuedResourceState
+    QueuedResourceState (..),
+    newQueuedResourceState,
 
     -- ** QueuedResourceState_State
-    , QueuedResourceState_State (..)
+    QueuedResourceState_State (..),
 
     -- ** QueuedResourceState_StateInitiator
-    , QueuedResourceState_StateInitiator (..)
+    QueuedResourceState_StateInitiator (..),
 
     -- ** QueueingPolicy
-    , QueueingPolicy (..)
-    , newQueueingPolicy
+    QueueingPolicy (..),
+    newQueueingPolicy,
 
     -- ** ResetQueuedResourceRequest
-    , ResetQueuedResourceRequest (..)
-    , newResetQueuedResourceRequest
+    ResetQueuedResourceRequest (..),
+    newResetQueuedResourceRequest,
 
     -- ** RuntimeVersion
-    , RuntimeVersion (..)
-    , newRuntimeVersion
+    RuntimeVersion (..),
+    newRuntimeVersion,
 
     -- ** SchedulingConfig
-    , SchedulingConfig (..)
-    , newSchedulingConfig
+    SchedulingConfig (..),
+    newSchedulingConfig,
 
     -- ** ServiceAccount
-    , ServiceAccount (..)
-    , newServiceAccount
+    ServiceAccount (..),
+    newServiceAccount,
 
     -- ** ServiceIdentity
-    , ServiceIdentity (..)
-    , newServiceIdentity
+    ServiceIdentity (..),
+    newServiceIdentity,
 
     -- ** ShieldedInstanceConfig
-    , ShieldedInstanceConfig (..)
-    , newShieldedInstanceConfig
+    ShieldedInstanceConfig (..),
+    newShieldedInstanceConfig,
 
     -- ** Spot
-    , Spot (..)
-    , newSpot
+    Spot (..),
+    newSpot,
 
     -- ** StartNodeRequest
-    , StartNodeRequest (..)
-    , newStartNodeRequest
+    StartNodeRequest (..),
+    newStartNodeRequest,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** StopNodeRequest
-    , StopNodeRequest (..)
-    , newStopNodeRequest
+    StopNodeRequest (..),
+    newStopNodeRequest,
 
     -- ** SuspendedData
-    , SuspendedData (..)
-    , newSuspendedData
+    SuspendedData (..),
+    newSuspendedData,
 
     -- ** SuspendingData
-    , SuspendingData (..)
-    , newSuspendingData
+    SuspendingData (..),
+    newSuspendingData,
 
     -- ** Symptom
-    , Symptom (..)
-    , newSymptom
+    Symptom (..),
+    newSymptom,
 
     -- ** Symptom_SymptomType
-    , Symptom_SymptomType (..)
+    Symptom_SymptomType (..),
 
     -- ** Tpu
-    , Tpu (..)
-    , newTpu
-    ) where
+    Tpu (..),
+    newTpu,
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.TPU.Internal.Product
 import Gogol.TPU.Internal.Sum
 
 -- | Default request referring to version @v2@ of the Cloud TPU API. This contains the host and root path used as a starting point for constructing service requests.
 tPUService :: Core.ServiceConfig
-tPUService
-  = Core.defaultService (Core.ServiceId "tpu:v2")
-      "tpu.googleapis.com"
+tPUService =
+  Core.defaultService
+    (Core.ServiceId "tpu:v2")
+    "tpu.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"

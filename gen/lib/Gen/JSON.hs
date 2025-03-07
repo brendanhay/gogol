@@ -8,15 +8,14 @@ import Data.Aeson.KeyMap (unionWith)
 import Data.Aeson.Types
 import Data.Bifunctor
 import Data.ByteString (ByteString)
-import qualified Data.ByteString.Lazy as LBS
+import Data.ByteString.Lazy qualified as LBS
 import Data.HashMap.Strict (HashMap)
-import Data.List (foldl')
 import Data.Text (Text)
-import qualified Data.Text.Lazy as LText
+import Data.Text.Lazy qualified as LText
 import Gen.Formatting
 import Gen.IO
 import Gen.Types
-import qualified Text.EDE as EDE
+import Text.EDE qualified as EDE
 
 objectErr :: (ToJSON a) => String -> a -> Either Error (HashMap Text Value)
 objectErr n =

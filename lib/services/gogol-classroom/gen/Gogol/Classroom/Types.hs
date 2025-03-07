@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,521 +16,544 @@
 
 -- |
 -- Module      : Gogol.Classroom.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Classroom.Types
-    (
-    -- * Configuration
-      classroomService
+  ( -- * Configuration
+    classroomService,
 
     -- * OAuth Scopes
-    , Classroom'Announcements
-    , Classroom'Announcements'Readonly
-    , Classroom'Courses
-    , Classroom'Courses'Readonly
-    , Classroom'Coursework'Me
-    , Classroom'Coursework'Me'Readonly
-    , Classroom'Coursework'Students
-    , Classroom'Coursework'Students'Readonly
-    , Classroom'Courseworkmaterials
-    , Classroom'Courseworkmaterials'Readonly
-    , Classroom'Guardianlinks'Me'Readonly
-    , Classroom'Guardianlinks'Students
-    , Classroom'Guardianlinks'Students'Readonly
-    , Classroom'Profile'Emails
-    , Classroom'Profile'Photos
-    , Classroom'PushNotifications
-    , Classroom'Rosters
-    , Classroom'Rosters'Readonly
-    , Classroom'StudentSubmissions'Me'Readonly
-    , Classroom'StudentSubmissions'Students'Readonly
-    , Classroom'Topics
-    , Classroom'Topics'Readonly
+    Classroom'Announcements,
+    Classroom'Announcements'Readonly,
+    Classroom'Courses,
+    Classroom'Courses'Readonly,
+    Classroom'Coursework'Me,
+    Classroom'Coursework'Me'Readonly,
+    Classroom'Coursework'Students,
+    Classroom'Coursework'Students'Readonly,
+    Classroom'Courseworkmaterials,
+    Classroom'Courseworkmaterials'Readonly,
+    Classroom'Guardianlinks'Me'Readonly,
+    Classroom'Guardianlinks'Students,
+    Classroom'Guardianlinks'Students'Readonly,
+    Classroom'Profile'Emails,
+    Classroom'Profile'Photos,
+    Classroom'PushNotifications,
+    Classroom'Rosters,
+    Classroom'Rosters'Readonly,
+    Classroom'StudentSubmissions'Me'Readonly,
+    Classroom'StudentSubmissions'Students'Readonly,
+    Classroom'Topics,
+    Classroom'Topics'Readonly,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AddOnAttachment
-    , AddOnAttachment (..)
-    , newAddOnAttachment
+    AddOnAttachment (..),
+    newAddOnAttachment,
 
     -- ** AddOnAttachmentStudentSubmission
-    , AddOnAttachmentStudentSubmission (..)
-    , newAddOnAttachmentStudentSubmission
+    AddOnAttachmentStudentSubmission (..),
+    newAddOnAttachmentStudentSubmission,
 
     -- ** AddOnAttachmentStudentSubmission_PostSubmissionState
-    , AddOnAttachmentStudentSubmission_PostSubmissionState (..)
+    AddOnAttachmentStudentSubmission_PostSubmissionState (..),
 
     -- ** AddOnContext
-    , AddOnContext (..)
-    , newAddOnContext
+    AddOnContext (..),
+    newAddOnContext,
 
     -- ** Announcement
-    , Announcement (..)
-    , newAnnouncement
+    Announcement (..),
+    newAnnouncement,
 
     -- ** Announcement_AssigneeMode
-    , Announcement_AssigneeMode (..)
+    Announcement_AssigneeMode (..),
 
     -- ** Announcement_State
-    , Announcement_State (..)
+    Announcement_State (..),
 
     -- ** Assignment
-    , Assignment (..)
-    , newAssignment
+    Assignment (..),
+    newAssignment,
 
     -- ** AssignmentSubmission
-    , AssignmentSubmission (..)
-    , newAssignmentSubmission
+    AssignmentSubmission (..),
+    newAssignmentSubmission,
 
     -- ** Attachment
-    , Attachment (..)
-    , newAttachment
+    Attachment (..),
+    newAttachment,
 
     -- ** CloudPubsubTopic
-    , CloudPubsubTopic (..)
-    , newCloudPubsubTopic
+    CloudPubsubTopic (..),
+    newCloudPubsubTopic,
 
     -- ** CopyHistory
-    , CopyHistory (..)
-    , newCopyHistory
+    CopyHistory (..),
+    newCopyHistory,
 
     -- ** Course
-    , Course (..)
-    , newCourse
+    Course (..),
+    newCourse,
 
     -- ** Course_CourseState
-    , Course_CourseState (..)
+    Course_CourseState (..),
 
     -- ** CourseAlias
-    , CourseAlias (..)
-    , newCourseAlias
+    CourseAlias (..),
+    newCourseAlias,
 
     -- ** CourseMaterial
-    , CourseMaterial (..)
-    , newCourseMaterial
+    CourseMaterial (..),
+    newCourseMaterial,
 
     -- ** CourseMaterialSet
-    , CourseMaterialSet (..)
-    , newCourseMaterialSet
+    CourseMaterialSet (..),
+    newCourseMaterialSet,
 
     -- ** CourseRosterChangesInfo
-    , CourseRosterChangesInfo (..)
-    , newCourseRosterChangesInfo
+    CourseRosterChangesInfo (..),
+    newCourseRosterChangesInfo,
 
     -- ** CourseWork
-    , CourseWork (..)
-    , newCourseWork
+    CourseWork (..),
+    newCourseWork,
 
     -- ** CourseWork_AssigneeMode
-    , CourseWork_AssigneeMode (..)
+    CourseWork_AssigneeMode (..),
 
     -- ** CourseWork_State
-    , CourseWork_State (..)
+    CourseWork_State (..),
 
     -- ** CourseWork_SubmissionModificationMode
-    , CourseWork_SubmissionModificationMode (..)
+    CourseWork_SubmissionModificationMode (..),
 
     -- ** CourseWork_WorkType
-    , CourseWork_WorkType (..)
+    CourseWork_WorkType (..),
 
     -- ** CourseWorkChangesInfo
-    , CourseWorkChangesInfo (..)
-    , newCourseWorkChangesInfo
+    CourseWorkChangesInfo (..),
+    newCourseWorkChangesInfo,
 
     -- ** CourseWorkMaterial
-    , CourseWorkMaterial (..)
-    , newCourseWorkMaterial
+    CourseWorkMaterial (..),
+    newCourseWorkMaterial,
 
     -- ** CourseWorkMaterial_AssigneeMode
-    , CourseWorkMaterial_AssigneeMode (..)
+    CourseWorkMaterial_AssigneeMode (..),
 
     -- ** CourseWorkMaterial_State
-    , CourseWorkMaterial_State (..)
+    CourseWorkMaterial_State (..),
 
     -- ** Criterion
-    , Criterion (..)
-    , newCriterion
+    Criterion (..),
+    newCriterion,
 
     -- ** Date
-    , Date (..)
-    , newDate
+    Date (..),
+    newDate,
 
     -- ** DriveFile
-    , DriveFile (..)
-    , newDriveFile
+    DriveFile (..),
+    newDriveFile,
 
     -- ** DriveFolder
-    , DriveFolder (..)
-    , newDriveFolder
+    DriveFolder (..),
+    newDriveFolder,
 
     -- ** EmbedUri
-    , EmbedUri (..)
-    , newEmbedUri
+    EmbedUri (..),
+    newEmbedUri,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** Feed
-    , Feed (..)
-    , newFeed
+    Feed (..),
+    newFeed,
 
     -- ** Feed_FeedType
-    , Feed_FeedType (..)
+    Feed_FeedType (..),
 
     -- ** Form
-    , Form (..)
-    , newForm
+    Form (..),
+    newForm,
 
     -- ** GlobalPermission
-    , GlobalPermission (..)
-    , newGlobalPermission
+    GlobalPermission (..),
+    newGlobalPermission,
 
     -- ** GlobalPermission_Permission
-    , GlobalPermission_Permission (..)
+    GlobalPermission_Permission (..),
 
     -- ** GradeCategory
-    , GradeCategory (..)
-    , newGradeCategory
+    GradeCategory (..),
+    newGradeCategory,
 
     -- ** GradeHistory
-    , GradeHistory (..)
-    , newGradeHistory
+    GradeHistory (..),
+    newGradeHistory,
 
     -- ** GradeHistory_GradeChangeType
-    , GradeHistory_GradeChangeType (..)
+    GradeHistory_GradeChangeType (..),
 
     -- ** GradebookSettings
-    , GradebookSettings (..)
-    , newGradebookSettings
+    GradebookSettings (..),
+    newGradebookSettings,
 
     -- ** GradebookSettings_CalculationType
-    , GradebookSettings_CalculationType (..)
+    GradebookSettings_CalculationType (..),
 
     -- ** GradebookSettings_DisplaySetting
-    , GradebookSettings_DisplaySetting (..)
+    GradebookSettings_DisplaySetting (..),
 
     -- ** Guardian
-    , Guardian (..)
-    , newGuardian
+    Guardian (..),
+    newGuardian,
 
     -- ** GuardianInvitation
-    , GuardianInvitation (..)
-    , newGuardianInvitation
+    GuardianInvitation (..),
+    newGuardianInvitation,
 
     -- ** GuardianInvitation_State
-    , GuardianInvitation_State (..)
+    GuardianInvitation_State (..),
 
     -- ** IndividualStudentsOptions
-    , IndividualStudentsOptions (..)
-    , newIndividualStudentsOptions
+    IndividualStudentsOptions (..),
+    newIndividualStudentsOptions,
 
     -- ** Invitation
-    , Invitation (..)
-    , newInvitation
+    Invitation (..),
+    newInvitation,
 
     -- ** Invitation_Role
-    , Invitation_Role (..)
+    Invitation_Role (..),
 
     -- ** Level
-    , Level (..)
-    , newLevel
+    Level (..),
+    newLevel,
 
     -- ** Link
-    , Link (..)
-    , newLink
+    Link (..),
+    newLink,
 
     -- ** ListAddOnAttachmentsResponse
-    , ListAddOnAttachmentsResponse (..)
-    , newListAddOnAttachmentsResponse
+    ListAddOnAttachmentsResponse (..),
+    newListAddOnAttachmentsResponse,
 
     -- ** ListAnnouncementsResponse
-    , ListAnnouncementsResponse (..)
-    , newListAnnouncementsResponse
+    ListAnnouncementsResponse (..),
+    newListAnnouncementsResponse,
 
     -- ** ListCourseAliasesResponse
-    , ListCourseAliasesResponse (..)
-    , newListCourseAliasesResponse
+    ListCourseAliasesResponse (..),
+    newListCourseAliasesResponse,
 
     -- ** ListCourseWorkMaterialResponse
-    , ListCourseWorkMaterialResponse (..)
-    , newListCourseWorkMaterialResponse
+    ListCourseWorkMaterialResponse (..),
+    newListCourseWorkMaterialResponse,
 
     -- ** ListCourseWorkResponse
-    , ListCourseWorkResponse (..)
-    , newListCourseWorkResponse
+    ListCourseWorkResponse (..),
+    newListCourseWorkResponse,
 
     -- ** ListCoursesResponse
-    , ListCoursesResponse (..)
-    , newListCoursesResponse
+    ListCoursesResponse (..),
+    newListCoursesResponse,
 
     -- ** ListGuardianInvitationsResponse
-    , ListGuardianInvitationsResponse (..)
-    , newListGuardianInvitationsResponse
+    ListGuardianInvitationsResponse (..),
+    newListGuardianInvitationsResponse,
 
     -- ** ListGuardiansResponse
-    , ListGuardiansResponse (..)
-    , newListGuardiansResponse
+    ListGuardiansResponse (..),
+    newListGuardiansResponse,
 
     -- ** ListInvitationsResponse
-    , ListInvitationsResponse (..)
-    , newListInvitationsResponse
+    ListInvitationsResponse (..),
+    newListInvitationsResponse,
 
     -- ** ListRubricsResponse
-    , ListRubricsResponse (..)
-    , newListRubricsResponse
+    ListRubricsResponse (..),
+    newListRubricsResponse,
 
     -- ** ListStudentSubmissionsResponse
-    , ListStudentSubmissionsResponse (..)
-    , newListStudentSubmissionsResponse
+    ListStudentSubmissionsResponse (..),
+    newListStudentSubmissionsResponse,
 
     -- ** ListStudentsResponse
-    , ListStudentsResponse (..)
-    , newListStudentsResponse
+    ListStudentsResponse (..),
+    newListStudentsResponse,
 
     -- ** ListTeachersResponse
-    , ListTeachersResponse (..)
-    , newListTeachersResponse
+    ListTeachersResponse (..),
+    newListTeachersResponse,
 
     -- ** ListTopicResponse
-    , ListTopicResponse (..)
-    , newListTopicResponse
+    ListTopicResponse (..),
+    newListTopicResponse,
 
     -- ** Material
-    , Material (..)
-    , newMaterial
+    Material (..),
+    newMaterial,
 
     -- ** ModifyAnnouncementAssigneesRequest
-    , ModifyAnnouncementAssigneesRequest (..)
-    , newModifyAnnouncementAssigneesRequest
+    ModifyAnnouncementAssigneesRequest (..),
+    newModifyAnnouncementAssigneesRequest,
 
     -- ** ModifyAnnouncementAssigneesRequest_AssigneeMode
-    , ModifyAnnouncementAssigneesRequest_AssigneeMode (..)
+    ModifyAnnouncementAssigneesRequest_AssigneeMode (..),
 
     -- ** ModifyAttachmentsRequest
-    , ModifyAttachmentsRequest (..)
-    , newModifyAttachmentsRequest
+    ModifyAttachmentsRequest (..),
+    newModifyAttachmentsRequest,
 
     -- ** ModifyCourseWorkAssigneesRequest
-    , ModifyCourseWorkAssigneesRequest (..)
-    , newModifyCourseWorkAssigneesRequest
+    ModifyCourseWorkAssigneesRequest (..),
+    newModifyCourseWorkAssigneesRequest,
 
     -- ** ModifyCourseWorkAssigneesRequest_AssigneeMode
-    , ModifyCourseWorkAssigneesRequest_AssigneeMode (..)
+    ModifyCourseWorkAssigneesRequest_AssigneeMode (..),
 
     -- ** ModifyIndividualStudentsOptions
-    , ModifyIndividualStudentsOptions (..)
-    , newModifyIndividualStudentsOptions
+    ModifyIndividualStudentsOptions (..),
+    newModifyIndividualStudentsOptions,
 
     -- ** MultipleChoiceQuestion
-    , MultipleChoiceQuestion (..)
-    , newMultipleChoiceQuestion
+    MultipleChoiceQuestion (..),
+    newMultipleChoiceQuestion,
 
     -- ** MultipleChoiceSubmission
-    , MultipleChoiceSubmission (..)
-    , newMultipleChoiceSubmission
+    MultipleChoiceSubmission (..),
+    newMultipleChoiceSubmission,
 
     -- ** Name
-    , Name (..)
-    , newName
+    Name (..),
+    newName,
 
     -- ** ReclaimStudentSubmissionRequest
-    , ReclaimStudentSubmissionRequest (..)
-    , newReclaimStudentSubmissionRequest
+    ReclaimStudentSubmissionRequest (..),
+    newReclaimStudentSubmissionRequest,
 
     -- ** Registration
-    , Registration (..)
-    , newRegistration
+    Registration (..),
+    newRegistration,
 
     -- ** ReturnStudentSubmissionRequest
-    , ReturnStudentSubmissionRequest (..)
-    , newReturnStudentSubmissionRequest
+    ReturnStudentSubmissionRequest (..),
+    newReturnStudentSubmissionRequest,
 
     -- ** Rubric
-    , Rubric (..)
-    , newRubric
+    Rubric (..),
+    newRubric,
 
     -- ** RubricGrade
-    , RubricGrade (..)
-    , newRubricGrade
+    RubricGrade (..),
+    newRubricGrade,
 
     -- ** SharedDriveFile
-    , SharedDriveFile (..)
-    , newSharedDriveFile
+    SharedDriveFile (..),
+    newSharedDriveFile,
 
     -- ** SharedDriveFile_ShareMode
-    , SharedDriveFile_ShareMode (..)
+    SharedDriveFile_ShareMode (..),
 
     -- ** ShortAnswerSubmission
-    , ShortAnswerSubmission (..)
-    , newShortAnswerSubmission
+    ShortAnswerSubmission (..),
+    newShortAnswerSubmission,
 
     -- ** StateHistory
-    , StateHistory (..)
-    , newStateHistory
+    StateHistory (..),
+    newStateHistory,
 
     -- ** StateHistory_State
-    , StateHistory_State (..)
+    StateHistory_State (..),
 
     -- ** Student
-    , Student (..)
-    , newStudent
+    Student (..),
+    newStudent,
 
     -- ** StudentContext
-    , StudentContext (..)
-    , newStudentContext
+    StudentContext (..),
+    newStudentContext,
 
     -- ** StudentSubmission
-    , StudentSubmission (..)
-    , newStudentSubmission
+    StudentSubmission (..),
+    newStudentSubmission,
 
     -- ** StudentSubmission_AssignedRubricGrades
-    , StudentSubmission_AssignedRubricGrades (..)
-    , newStudentSubmission_AssignedRubricGrades
+    StudentSubmission_AssignedRubricGrades (..),
+    newStudentSubmission_AssignedRubricGrades,
 
     -- ** StudentSubmission_CourseWorkType
-    , StudentSubmission_CourseWorkType (..)
+    StudentSubmission_CourseWorkType (..),
 
     -- ** StudentSubmission_DraftRubricGrades
-    , StudentSubmission_DraftRubricGrades (..)
-    , newStudentSubmission_DraftRubricGrades
+    StudentSubmission_DraftRubricGrades (..),
+    newStudentSubmission_DraftRubricGrades,
 
     -- ** StudentSubmission_State
-    , StudentSubmission_State (..)
+    StudentSubmission_State (..),
 
     -- ** SubmissionHistory
-    , SubmissionHistory (..)
-    , newSubmissionHistory
+    SubmissionHistory (..),
+    newSubmissionHistory,
 
     -- ** Teacher
-    , Teacher (..)
-    , newTeacher
+    Teacher (..),
+    newTeacher,
 
     -- ** TeacherContext
-    , TeacherContext (..)
-    , newTeacherContext
+    TeacherContext (..),
+    newTeacherContext,
 
     -- ** TimeOfDay'
-    , TimeOfDay' (..)
-    , newTimeOfDay
+    TimeOfDay' (..),
+    newTimeOfDay,
 
     -- ** Topic
-    , Topic (..)
-    , newTopic
+    Topic (..),
+    newTopic,
 
     -- ** TurnInStudentSubmissionRequest
-    , TurnInStudentSubmissionRequest (..)
-    , newTurnInStudentSubmissionRequest
+    TurnInStudentSubmissionRequest (..),
+    newTurnInStudentSubmissionRequest,
 
     -- ** UserProfile
-    , UserProfile (..)
-    , newUserProfile
+    UserProfile (..),
+    newUserProfile,
 
     -- ** YouTubeVideo
-    , YouTubeVideo (..)
-    , newYouTubeVideo
+    YouTubeVideo (..),
+    newYouTubeVideo,
 
     -- ** CoursesAnnouncementsListAnnouncementStates
-    , CoursesAnnouncementsListAnnouncementStates (..)
+    CoursesAnnouncementsListAnnouncementStates (..),
 
     -- ** CoursesCourseWorkListCourseWorkStates
-    , CoursesCourseWorkListCourseWorkStates (..)
+    CoursesCourseWorkListCourseWorkStates (..),
 
     -- ** CoursesCourseWorkStudentSubmissionsListLate
-    , CoursesCourseWorkStudentSubmissionsListLate (..)
+    CoursesCourseWorkStudentSubmissionsListLate (..),
 
     -- ** CoursesCourseWorkStudentSubmissionsListStates
-    , CoursesCourseWorkStudentSubmissionsListStates (..)
+    CoursesCourseWorkStudentSubmissionsListStates (..),
 
     -- ** CoursesCourseWorkMaterialsListCourseWorkMaterialStates
-    , CoursesCourseWorkMaterialsListCourseWorkMaterialStates (..)
+    CoursesCourseWorkMaterialsListCourseWorkMaterialStates (..),
 
     -- ** CoursesListCourseStates
-    , CoursesListCourseStates (..)
+    CoursesListCourseStates (..),
 
     -- ** UserProfilesGuardianInvitationsListStates
-    , UserProfilesGuardianInvitationsListStates (..)
-    ) where
+    UserProfilesGuardianInvitationsListStates (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Classroom.Internal.Product
 import Gogol.Classroom.Internal.Sum
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Google Classroom API. This contains the host and root path used as a starting point for constructing service requests.
 classroomService :: Core.ServiceConfig
-classroomService
-  = Core.defaultService (Core.ServiceId "classroom:v1")
-      "classroom.googleapis.com"
+classroomService =
+  Core.defaultService
+    (Core.ServiceId "classroom:v1")
+    "classroom.googleapis.com"
 
 -- | View and manage announcements in Google Classroom
-type Classroom'Announcements = "https://www.googleapis.com/auth/classroom.announcements"
+type Classroom'Announcements =
+  "https://www.googleapis.com/auth/classroom.announcements"
 
 -- | View announcements in Google Classroom
-type Classroom'Announcements'Readonly = "https://www.googleapis.com/auth/classroom.announcements.readonly"
+type Classroom'Announcements'Readonly =
+  "https://www.googleapis.com/auth/classroom.announcements.readonly"
 
 -- | See, edit, create, and permanently delete your Google Classroom classes
-type Classroom'Courses = "https://www.googleapis.com/auth/classroom.courses"
+type Classroom'Courses =
+  "https://www.googleapis.com/auth/classroom.courses"
 
 -- | View your Google Classroom classes
-type Classroom'Courses'Readonly = "https://www.googleapis.com/auth/classroom.courses.readonly"
+type Classroom'Courses'Readonly =
+  "https://www.googleapis.com/auth/classroom.courses.readonly"
 
 -- | See, create and edit coursework items including assignments, questions, and grades
-type Classroom'Coursework'Me = "https://www.googleapis.com/auth/classroom.coursework.me"
+type Classroom'Coursework'Me =
+  "https://www.googleapis.com/auth/classroom.coursework.me"
 
 -- | View your course work and grades in Google Classroom
-type Classroom'Coursework'Me'Readonly = "https://www.googleapis.com/auth/classroom.coursework.me.readonly"
+type Classroom'Coursework'Me'Readonly =
+  "https://www.googleapis.com/auth/classroom.coursework.me.readonly"
 
 -- | Manage course work and grades for students in the Google Classroom classes you teach and view the course work and grades for classes you administer
-type Classroom'Coursework'Students = "https://www.googleapis.com/auth/classroom.coursework.students"
+type Classroom'Coursework'Students =
+  "https://www.googleapis.com/auth/classroom.coursework.students"
 
 -- | View course work and grades for students in the Google Classroom classes you teach or administer
-type Classroom'Coursework'Students'Readonly = "https://www.googleapis.com/auth/classroom.coursework.students.readonly"
+type Classroom'Coursework'Students'Readonly =
+  "https://www.googleapis.com/auth/classroom.coursework.students.readonly"
 
 -- | See, edit, and create classwork materials in Google Classroom
-type Classroom'Courseworkmaterials = "https://www.googleapis.com/auth/classroom.courseworkmaterials"
+type Classroom'Courseworkmaterials =
+  "https://www.googleapis.com/auth/classroom.courseworkmaterials"
 
 -- | See all classwork materials for your Google Classroom classes
-type Classroom'Courseworkmaterials'Readonly = "https://www.googleapis.com/auth/classroom.courseworkmaterials.readonly"
+type Classroom'Courseworkmaterials'Readonly =
+  "https://www.googleapis.com/auth/classroom.courseworkmaterials.readonly"
 
 -- | View your Google Classroom guardians
-type Classroom'Guardianlinks'Me'Readonly = "https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly"
+type Classroom'Guardianlinks'Me'Readonly =
+  "https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly"
 
 -- | View and manage guardians for students in your Google Classroom classes
-type Classroom'Guardianlinks'Students = "https://www.googleapis.com/auth/classroom.guardianlinks.students"
+type Classroom'Guardianlinks'Students =
+  "https://www.googleapis.com/auth/classroom.guardianlinks.students"
 
 -- | View guardians for students in your Google Classroom classes
-type Classroom'Guardianlinks'Students'Readonly = "https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly"
+type Classroom'Guardianlinks'Students'Readonly =
+  "https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly"
 
 -- | View the email addresses of people in your classes
-type Classroom'Profile'Emails = "https://www.googleapis.com/auth/classroom.profile.emails"
+type Classroom'Profile'Emails =
+  "https://www.googleapis.com/auth/classroom.profile.emails"
 
 -- | View the profile photos of people in your classes
-type Classroom'Profile'Photos = "https://www.googleapis.com/auth/classroom.profile.photos"
+type Classroom'Profile'Photos =
+  "https://www.googleapis.com/auth/classroom.profile.photos"
 
 -- | Receive notifications about your Google Classroom data
-type Classroom'PushNotifications = "https://www.googleapis.com/auth/classroom.push-notifications"
+type Classroom'PushNotifications =
+  "https://www.googleapis.com/auth/classroom.push-notifications"
 
 -- | Manage your Google Classroom class rosters
-type Classroom'Rosters = "https://www.googleapis.com/auth/classroom.rosters"
+type Classroom'Rosters =
+  "https://www.googleapis.com/auth/classroom.rosters"
 
 -- | View your Google Classroom class rosters
-type Classroom'Rosters'Readonly = "https://www.googleapis.com/auth/classroom.rosters.readonly"
+type Classroom'Rosters'Readonly =
+  "https://www.googleapis.com/auth/classroom.rosters.readonly"
 
 -- | View your course work and grades in Google Classroom
-type Classroom'StudentSubmissions'Me'Readonly = "https://www.googleapis.com/auth/classroom.student-submissions.me.readonly"
+type Classroom'StudentSubmissions'Me'Readonly =
+  "https://www.googleapis.com/auth/classroom.student-submissions.me.readonly"
 
 -- | View course work and grades for students in the Google Classroom classes you teach or administer
-type Classroom'StudentSubmissions'Students'Readonly = "https://www.googleapis.com/auth/classroom.student-submissions.students.readonly"
+type Classroom'StudentSubmissions'Students'Readonly =
+  "https://www.googleapis.com/auth/classroom.student-submissions.students.readonly"
 
 -- | See, create, and edit topics in Google Classroom
-type Classroom'Topics = "https://www.googleapis.com/auth/classroom.topics"
+type Classroom'Topics =
+  "https://www.googleapis.com/auth/classroom.topics"
 
 -- | View topics in Google Classroom
-type Classroom'Topics'Readonly = "https://www.googleapis.com/auth/classroom.topics.readonly"
+type Classroom'Topics'Readonly =
+  "https://www.googleapis.com/auth/classroom.topics.readonly"

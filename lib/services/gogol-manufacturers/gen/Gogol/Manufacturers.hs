@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.Manufacturers
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,161 +27,161 @@
 --
 -- /See:/ <https://developers.google.com/manufacturers/ Manufacturer Center API Reference>
 module Gogol.Manufacturers
-    (
-    -- * Configuration
-      manufacturersService
+  ( -- * Configuration
+    manufacturersService,
 
     -- * OAuth Scopes
-    , Manufacturercenter'FullControl
+    Manufacturercenter'FullControl,
 
     -- * Resources
 
     -- ** manufacturers.accounts.languages.productCertifications.delete
-    , ManufacturersAccountsLanguagesProductCertificationsDeleteResource
-    , ManufacturersAccountsLanguagesProductCertificationsDelete (..)
-    , newManufacturersAccountsLanguagesProductCertificationsDelete
+    ManufacturersAccountsLanguagesProductCertificationsDeleteResource,
+    ManufacturersAccountsLanguagesProductCertificationsDelete (..),
+    newManufacturersAccountsLanguagesProductCertificationsDelete,
 
     -- ** manufacturers.accounts.languages.productCertifications.get
-    , ManufacturersAccountsLanguagesProductCertificationsGetResource
-    , ManufacturersAccountsLanguagesProductCertificationsGet (..)
-    , newManufacturersAccountsLanguagesProductCertificationsGet
+    ManufacturersAccountsLanguagesProductCertificationsGetResource,
+    ManufacturersAccountsLanguagesProductCertificationsGet (..),
+    newManufacturersAccountsLanguagesProductCertificationsGet,
 
     -- ** manufacturers.accounts.languages.productCertifications.list
-    , ManufacturersAccountsLanguagesProductCertificationsListResource
-    , ManufacturersAccountsLanguagesProductCertificationsList (..)
-    , newManufacturersAccountsLanguagesProductCertificationsList
+    ManufacturersAccountsLanguagesProductCertificationsListResource,
+    ManufacturersAccountsLanguagesProductCertificationsList (..),
+    newManufacturersAccountsLanguagesProductCertificationsList,
 
     -- ** manufacturers.accounts.languages.productCertifications.patch
-    , ManufacturersAccountsLanguagesProductCertificationsPatchResource
-    , ManufacturersAccountsLanguagesProductCertificationsPatch (..)
-    , newManufacturersAccountsLanguagesProductCertificationsPatch
+    ManufacturersAccountsLanguagesProductCertificationsPatchResource,
+    ManufacturersAccountsLanguagesProductCertificationsPatch (..),
+    newManufacturersAccountsLanguagesProductCertificationsPatch,
 
     -- ** manufacturers.accounts.products.delete
-    , ManufacturersAccountsProductsDeleteResource
-    , ManufacturersAccountsProductsDelete (..)
-    , newManufacturersAccountsProductsDelete
+    ManufacturersAccountsProductsDeleteResource,
+    ManufacturersAccountsProductsDelete (..),
+    newManufacturersAccountsProductsDelete,
 
     -- ** manufacturers.accounts.products.get
-    , ManufacturersAccountsProductsGetResource
-    , ManufacturersAccountsProductsGet (..)
-    , newManufacturersAccountsProductsGet
+    ManufacturersAccountsProductsGetResource,
+    ManufacturersAccountsProductsGet (..),
+    newManufacturersAccountsProductsGet,
 
     -- ** manufacturers.accounts.products.list
-    , ManufacturersAccountsProductsListResource
-    , ManufacturersAccountsProductsList (..)
-    , newManufacturersAccountsProductsList
+    ManufacturersAccountsProductsListResource,
+    ManufacturersAccountsProductsList (..),
+    newManufacturersAccountsProductsList,
 
     -- ** manufacturers.accounts.products.update
-    , ManufacturersAccountsProductsUpdateResource
-    , ManufacturersAccountsProductsUpdate (..)
-    , newManufacturersAccountsProductsUpdate
+    ManufacturersAccountsProductsUpdateResource,
+    ManufacturersAccountsProductsUpdate (..),
+    newManufacturersAccountsProductsUpdate,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Attributes
-    , Attributes (..)
-    , newAttributes
+    Attributes (..),
+    newAttributes,
 
     -- ** Capacity
-    , Capacity (..)
-    , newCapacity
+    Capacity (..),
+    newCapacity,
 
     -- ** Certification
-    , Certification (..)
-    , newCertification
+    Certification (..),
+    newCertification,
 
     -- ** Count
-    , Count (..)
-    , newCount
+    Count (..),
+    newCount,
 
     -- ** DestinationStatus
-    , DestinationStatus (..)
-    , newDestinationStatus
+    DestinationStatus (..),
+    newDestinationStatus,
 
     -- ** DestinationStatus_Status
-    , DestinationStatus_Status (..)
+    DestinationStatus_Status (..),
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** FeatureDescription
-    , FeatureDescription (..)
-    , newFeatureDescription
+    FeatureDescription (..),
+    newFeatureDescription,
 
     -- ** FloatUnit
-    , FloatUnit (..)
-    , newFloatUnit
+    FloatUnit (..),
+    newFloatUnit,
 
     -- ** GoogleShoppingManufacturersV1ProductCertification
-    , GoogleShoppingManufacturersV1ProductCertification (..)
-    , newGoogleShoppingManufacturersV1ProductCertification
+    GoogleShoppingManufacturersV1ProductCertification (..),
+    newGoogleShoppingManufacturersV1ProductCertification,
 
     -- ** Grocery
-    , Grocery (..)
-    , newGrocery
+    Grocery (..),
+    newGrocery,
 
     -- ** Image
-    , Image (..)
-    , newImage
+    Image (..),
+    newImage,
 
     -- ** Image_Status
-    , Image_Status (..)
+    Image_Status (..),
 
     -- ** Image_Type
-    , Image_Type (..)
+    Image_Type (..),
 
     -- ** Issue
-    , Issue (..)
-    , newIssue
+    Issue (..),
+    newIssue,
 
     -- ** Issue_Resolution
-    , Issue_Resolution (..)
+    Issue_Resolution (..),
 
     -- ** Issue_Severity
-    , Issue_Severity (..)
+    Issue_Severity (..),
 
     -- ** ListProductCertificationsResponse
-    , ListProductCertificationsResponse (..)
-    , newListProductCertificationsResponse
+    ListProductCertificationsResponse (..),
+    newListProductCertificationsResponse,
 
     -- ** ListProductsResponse
-    , ListProductsResponse (..)
-    , newListProductsResponse
+    ListProductsResponse (..),
+    newListProductsResponse,
 
     -- ** Nutrition
-    , Nutrition (..)
-    , newNutrition
+    Nutrition (..),
+    newNutrition,
 
     -- ** Price
-    , Price (..)
-    , newPrice
+    Price (..),
+    newPrice,
 
     -- ** Product
-    , Product (..)
-    , newProduct
+    Product (..),
+    newProduct,
 
     -- ** ProductCertification
-    , ProductCertification (..)
-    , newProductCertification
+    ProductCertification (..),
+    newProductCertification,
 
     -- ** ProductDetail
-    , ProductDetail (..)
-    , newProductDetail
+    ProductDetail (..),
+    newProductDetail,
 
     -- ** VoluntaryNutritionFact
-    , VoluntaryNutritionFact (..)
-    , newVoluntaryNutritionFact
+    VoluntaryNutritionFact (..),
+    newVoluntaryNutritionFact,
 
     -- ** AccountsProductsGetInclude
-    , AccountsProductsGetInclude (..)
+    AccountsProductsGetInclude (..),
 
     -- ** AccountsProductsListInclude
-    , AccountsProductsListInclude (..)
-    ) where
+    AccountsProductsListInclude (..),
+  )
+where
 
 import Gogol.Manufacturers.Accounts.Languages.ProductCertifications.Delete
 import Gogol.Manufacturers.Accounts.Languages.ProductCertifications.Get

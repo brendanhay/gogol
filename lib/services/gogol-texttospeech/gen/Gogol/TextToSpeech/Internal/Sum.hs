@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.TextToSpeech.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.TextToSpeech.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AudioConfig_AudioEncoding
     AudioConfig_AudioEncoding
-      (
-        AudioConfig_AudioEncoding_AUDIOENCODINGUNSPECIFIED,
+      ( AudioConfig_AudioEncoding_AUDIOENCODINGUNSPECIFIED,
         AudioConfig_AudioEncoding_LINEAR16,
         AudioConfig_AudioEncoding_MP3,
         AudioConfig_AudioEncoding_OGGOPUS,
@@ -52,8 +43,7 @@ module Gogol.TextToSpeech.Internal.Sum
 
     -- * CustomPronunciationParams_PhoneticEncoding
     CustomPronunciationParams_PhoneticEncoding
-      (
-        CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGUNSPECIFIED,
+      ( CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGUNSPECIFIED,
         CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGIPA,
         CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGXSAMPA,
         ..
@@ -61,8 +51,7 @@ module Gogol.TextToSpeech.Internal.Sum
 
     -- * CustomVoiceParams_ReportedUsage
     CustomVoiceParams_ReportedUsage
-      (
-        CustomVoiceParams_ReportedUsage_REPORTEDUSAGEUNSPECIFIED,
+      ( CustomVoiceParams_ReportedUsage_REPORTEDUSAGEUNSPECIFIED,
         CustomVoiceParams_ReportedUsage_Realtime,
         CustomVoiceParams_ReportedUsage_Offline,
         ..
@@ -70,8 +59,7 @@ module Gogol.TextToSpeech.Internal.Sum
 
     -- * Voice_SsmlGender
     Voice_SsmlGender
-      (
-        Voice_SsmlGender_SSMLVOICEGENDERUNSPECIFIED,
+      ( Voice_SsmlGender_SSMLVOICEGENDERUNSPECIFIED,
         Voice_SsmlGender_Male,
         Voice_SsmlGender_Female,
         Voice_SsmlGender_Neutral,
@@ -80,29 +68,29 @@ module Gogol.TextToSpeech.Internal.Sum
 
     -- * VoiceSelectionParams_SsmlGender
     VoiceSelectionParams_SsmlGender
-      (
-        VoiceSelectionParams_SsmlGender_SSMLVOICEGENDERUNSPECIFIED,
+      ( VoiceSelectionParams_SsmlGender_SSMLVOICEGENDERUNSPECIFIED,
         VoiceSelectionParams_SsmlGender_Male,
         VoiceSelectionParams_SsmlGender_Female,
         VoiceSelectionParams_SsmlGender_Neutral,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -115,20 +103,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | Required. The format of the audio byte stream.
-newtype AudioConfig_AudioEncoding = AudioConfig_AudioEncoding { fromAudioConfig_AudioEncoding :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AudioConfig_AudioEncoding = AudioConfig_AudioEncoding {fromAudioConfig_AudioEncoding :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not specified. Will return result google.rpc.Code.INVALID_ARGUMENT.
 pattern AudioConfig_AudioEncoding_AUDIOENCODINGUNSPECIFIED :: AudioConfig_AudioEncoding
@@ -161,20 +150,21 @@ pattern AudioConfig_AudioEncoding_Alaw = AudioConfig_AudioEncoding "ALAW"
   AudioConfig_AudioEncoding_OGGOPUS,
   AudioConfig_AudioEncoding_Mulaw,
   AudioConfig_AudioEncoding_Alaw,
-  AudioConfig_AudioEncoding #-}
+  AudioConfig_AudioEncoding
+  #-}
 
 -- | The phonetic encoding of the phrase.
-newtype CustomPronunciationParams_PhoneticEncoding = CustomPronunciationParams_PhoneticEncoding { fromCustomPronunciationParams_PhoneticEncoding :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CustomPronunciationParams_PhoneticEncoding = CustomPronunciationParams_PhoneticEncoding {fromCustomPronunciationParams_PhoneticEncoding :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not specified.
 pattern CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGUNSPECIFIED :: CustomPronunciationParams_PhoneticEncoding
@@ -192,20 +182,21 @@ pattern CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGXSAMPA = Cust
   CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGUNSPECIFIED,
   CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGIPA,
   CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGXSAMPA,
-  CustomPronunciationParams_PhoneticEncoding #-}
+  CustomPronunciationParams_PhoneticEncoding
+  #-}
 
 -- | Optional. Deprecated. The usage of the synthesized audio to be reported.
-newtype CustomVoiceParams_ReportedUsage = CustomVoiceParams_ReportedUsage { fromCustomVoiceParams_ReportedUsage :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CustomVoiceParams_ReportedUsage = CustomVoiceParams_ReportedUsage {fromCustomVoiceParams_ReportedUsage :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Request with reported usage unspecified will be rejected.
 pattern CustomVoiceParams_ReportedUsage_REPORTEDUSAGEUNSPECIFIED :: CustomVoiceParams_ReportedUsage
@@ -223,20 +214,21 @@ pattern CustomVoiceParams_ReportedUsage_Offline = CustomVoiceParams_ReportedUsag
   CustomVoiceParams_ReportedUsage_REPORTEDUSAGEUNSPECIFIED,
   CustomVoiceParams_ReportedUsage_Realtime,
   CustomVoiceParams_ReportedUsage_Offline,
-  CustomVoiceParams_ReportedUsage #-}
+  CustomVoiceParams_ReportedUsage
+  #-}
 
 -- | The gender of this voice.
-newtype Voice_SsmlGender = Voice_SsmlGender { fromVoice_SsmlGender :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Voice_SsmlGender = Voice_SsmlGender {fromVoice_SsmlGender :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | An unspecified gender. In VoiceSelectionParams, this means that the client doesn\'t care which gender the selected voice will have. In the Voice field of ListVoicesResponse, this may mean that the voice doesn\'t fit any of the other categories in this enum, or that the gender of the voice isn\'t known.
 pattern Voice_SsmlGender_SSMLVOICEGENDERUNSPECIFIED :: Voice_SsmlGender
@@ -259,20 +251,21 @@ pattern Voice_SsmlGender_Neutral = Voice_SsmlGender "NEUTRAL"
   Voice_SsmlGender_Male,
   Voice_SsmlGender_Female,
   Voice_SsmlGender_Neutral,
-  Voice_SsmlGender #-}
+  Voice_SsmlGender
+  #-}
 
 -- | The preferred gender of the voice. If not set, the service will choose a voice based on the other parameters such as language_code and name. Note that this is only a preference, not requirement; if a voice of the appropriate gender is not available, the synthesizer should substitute a voice with a different gender rather than failing the request.
-newtype VoiceSelectionParams_SsmlGender = VoiceSelectionParams_SsmlGender { fromVoiceSelectionParams_SsmlGender :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype VoiceSelectionParams_SsmlGender = VoiceSelectionParams_SsmlGender {fromVoiceSelectionParams_SsmlGender :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | An unspecified gender. In VoiceSelectionParams, this means that the client doesn\'t care which gender the selected voice will have. In the Voice field of ListVoicesResponse, this may mean that the voice doesn\'t fit any of the other categories in this enum, or that the gender of the voice isn\'t known.
 pattern VoiceSelectionParams_SsmlGender_SSMLVOICEGENDERUNSPECIFIED :: VoiceSelectionParams_SsmlGender
@@ -295,4 +288,5 @@ pattern VoiceSelectionParams_SsmlGender_Neutral = VoiceSelectionParams_SsmlGende
   VoiceSelectionParams_SsmlGender_Male,
   VoiceSelectionParams_SsmlGender_Female,
   VoiceSelectionParams_SsmlGender_Neutral,
-  VoiceSelectionParams_SsmlGender #-}
+  VoiceSelectionParams_SsmlGender
+  #-}

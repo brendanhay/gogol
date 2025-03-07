@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,189 +16,190 @@
 
 -- |
 -- Module      : Gogol.WebSecurityScanner.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.WebSecurityScanner.Types
-    (
-    -- * Configuration
-      webSecurityScannerService
+  ( -- * Configuration
+    webSecurityScannerService,
 
     -- * OAuth Scopes
-    , CloudPlatform'FullControl
+    CloudPlatform'FullControl,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Authentication
-    , Authentication (..)
-    , newAuthentication
+    Authentication (..),
+    newAuthentication,
 
     -- ** CrawledUrl
-    , CrawledUrl (..)
-    , newCrawledUrl
+    CrawledUrl (..),
+    newCrawledUrl,
 
     -- ** CustomAccount
-    , CustomAccount (..)
-    , newCustomAccount
+    CustomAccount (..),
+    newCustomAccount,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** Finding
-    , Finding (..)
-    , newFinding
+    Finding (..),
+    newFinding,
 
     -- ** Finding_Severity
-    , Finding_Severity (..)
+    Finding_Severity (..),
 
     -- ** FindingTypeStats
-    , FindingTypeStats (..)
-    , newFindingTypeStats
+    FindingTypeStats (..),
+    newFindingTypeStats,
 
     -- ** Form
-    , Form (..)
-    , newForm
+    Form (..),
+    newForm,
 
     -- ** GoogleAccount
-    , GoogleAccount (..)
-    , newGoogleAccount
+    GoogleAccount (..),
+    newGoogleAccount,
 
     -- ** Header
-    , Header (..)
-    , newHeader
+    Header (..),
+    newHeader,
 
     -- ** IapCredential
-    , IapCredential (..)
-    , newIapCredential
+    IapCredential (..),
+    newIapCredential,
 
     -- ** IapTestServiceAccountInfo
-    , IapTestServiceAccountInfo (..)
-    , newIapTestServiceAccountInfo
+    IapTestServiceAccountInfo (..),
+    newIapTestServiceAccountInfo,
 
     -- ** ListCrawledUrlsResponse
-    , ListCrawledUrlsResponse (..)
-    , newListCrawledUrlsResponse
+    ListCrawledUrlsResponse (..),
+    newListCrawledUrlsResponse,
 
     -- ** ListFindingTypeStatsResponse
-    , ListFindingTypeStatsResponse (..)
-    , newListFindingTypeStatsResponse
+    ListFindingTypeStatsResponse (..),
+    newListFindingTypeStatsResponse,
 
     -- ** ListFindingsResponse
-    , ListFindingsResponse (..)
-    , newListFindingsResponse
+    ListFindingsResponse (..),
+    newListFindingsResponse,
 
     -- ** ListScanConfigsResponse
-    , ListScanConfigsResponse (..)
-    , newListScanConfigsResponse
+    ListScanConfigsResponse (..),
+    newListScanConfigsResponse,
 
     -- ** ListScanRunsResponse
-    , ListScanRunsResponse (..)
-    , newListScanRunsResponse
+    ListScanRunsResponse (..),
+    newListScanRunsResponse,
 
     -- ** OutdatedLibrary
-    , OutdatedLibrary (..)
-    , newOutdatedLibrary
+    OutdatedLibrary (..),
+    newOutdatedLibrary,
 
     -- ** ScanConfig
-    , ScanConfig (..)
-    , newScanConfig
+    ScanConfig (..),
+    newScanConfig,
 
     -- ** ScanConfig_ExportToSecurityCommandCenter
-    , ScanConfig_ExportToSecurityCommandCenter (..)
+    ScanConfig_ExportToSecurityCommandCenter (..),
 
     -- ** ScanConfig_RiskLevel
-    , ScanConfig_RiskLevel (..)
+    ScanConfig_RiskLevel (..),
 
     -- ** ScanConfig_UserAgent
-    , ScanConfig_UserAgent (..)
+    ScanConfig_UserAgent (..),
 
     -- ** ScanConfigError
-    , ScanConfigError (..)
-    , newScanConfigError
+    ScanConfigError (..),
+    newScanConfigError,
 
     -- ** ScanConfigError_Code
-    , ScanConfigError_Code (..)
+    ScanConfigError_Code (..),
 
     -- ** ScanRun
-    , ScanRun (..)
-    , newScanRun
+    ScanRun (..),
+    newScanRun,
 
     -- ** ScanRun_ExecutionState
-    , ScanRun_ExecutionState (..)
+    ScanRun_ExecutionState (..),
 
     -- ** ScanRun_ResultState
-    , ScanRun_ResultState (..)
+    ScanRun_ResultState (..),
 
     -- ** ScanRunErrorTrace
-    , ScanRunErrorTrace (..)
-    , newScanRunErrorTrace
+    ScanRunErrorTrace (..),
+    newScanRunErrorTrace,
 
     -- ** ScanRunErrorTrace_Code
-    , ScanRunErrorTrace_Code (..)
+    ScanRunErrorTrace_Code (..),
 
     -- ** ScanRunWarningTrace
-    , ScanRunWarningTrace (..)
-    , newScanRunWarningTrace
+    ScanRunWarningTrace (..),
+    newScanRunWarningTrace,
 
     -- ** ScanRunWarningTrace_Code
-    , ScanRunWarningTrace_Code (..)
+    ScanRunWarningTrace_Code (..),
 
     -- ** Schedule
-    , Schedule (..)
-    , newSchedule
+    Schedule (..),
+    newSchedule,
 
     -- ** StartScanRunRequest
-    , StartScanRunRequest (..)
-    , newStartScanRunRequest
+    StartScanRunRequest (..),
+    newStartScanRunRequest,
 
     -- ** StopScanRunRequest
-    , StopScanRunRequest (..)
-    , newStopScanRunRequest
+    StopScanRunRequest (..),
+    newStopScanRunRequest,
 
     -- ** ViolatingResource
-    , ViolatingResource (..)
-    , newViolatingResource
+    ViolatingResource (..),
+    newViolatingResource,
 
     -- ** VulnerableHeaders
-    , VulnerableHeaders (..)
-    , newVulnerableHeaders
+    VulnerableHeaders (..),
+    newVulnerableHeaders,
 
     -- ** VulnerableParameters
-    , VulnerableParameters (..)
-    , newVulnerableParameters
+    VulnerableParameters (..),
+    newVulnerableParameters,
 
     -- ** Xss
-    , Xss (..)
-    , newXss
+    Xss (..),
+    newXss,
 
     -- ** Xss_AttackVector
-    , Xss_AttackVector (..)
+    Xss_AttackVector (..),
 
     -- ** Xxe
-    , Xxe (..)
-    , newXxe
+    Xxe (..),
+    newXxe,
 
     -- ** Xxe_PayloadLocation
-    , Xxe_PayloadLocation (..)
-    ) where
+    Xxe_PayloadLocation (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.WebSecurityScanner.Internal.Product
 import Gogol.WebSecurityScanner.Internal.Sum
 
 -- | Default request referring to version @v1@ of the Web Security Scanner API. This contains the host and root path used as a starting point for constructing service requests.
 webSecurityScannerService :: Core.ServiceConfig
-webSecurityScannerService
-  = Core.defaultService
-      (Core.ServiceId "websecurityscanner:v1")
-      "websecurityscanner.googleapis.com"
+webSecurityScannerService =
+  Core.defaultService
+    (Core.ServiceId "websecurityscanner:v1")
+    "websecurityscanner.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"

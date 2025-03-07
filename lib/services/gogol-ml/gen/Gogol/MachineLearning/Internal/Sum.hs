@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.MachineLearning.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.MachineLearning.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * GoogleCloudMlV1_StudyConfig_MetricSpec_Goal
     GoogleCloudMlV1_StudyConfig_MetricSpec_Goal
-      (
-        GoogleCloudMlV1_StudyConfig_MetricSpec_Goal_GOALTYPEUNSPECIFIED,
+      ( GoogleCloudMlV1_StudyConfig_MetricSpec_Goal_GOALTYPEUNSPECIFIED,
         GoogleCloudMlV1_StudyConfig_MetricSpec_Goal_Maximize,
         GoogleCloudMlV1_StudyConfig_MetricSpec_Goal_Minimize,
         ..
@@ -49,8 +40,7 @@ module Gogol.MachineLearning.Internal.Sum
 
     -- * GoogleCloudMlV1_StudyConfig_ParameterSpec_ScaleType
     GoogleCloudMlV1_StudyConfig_ParameterSpec_ScaleType
-      (
-        GoogleCloudMlV1_StudyConfig_ParameterSpec_ScaleType_SCALETYPEUNSPECIFIED,
+      ( GoogleCloudMlV1_StudyConfig_ParameterSpec_ScaleType_SCALETYPEUNSPECIFIED,
         GoogleCloudMlV1_StudyConfig_ParameterSpec_ScaleType_UNITLINEARSCALE,
         GoogleCloudMlV1_StudyConfig_ParameterSpec_ScaleType_UNITLOGSCALE,
         GoogleCloudMlV1_StudyConfig_ParameterSpec_ScaleType_UNITREVERSELOGSCALE,
@@ -59,8 +49,7 @@ module Gogol.MachineLearning.Internal.Sum
 
     -- * GoogleCloudMlV1_StudyConfig_ParameterSpec_Type
     GoogleCloudMlV1_StudyConfig_ParameterSpec_Type
-      (
-        GoogleCloudMlV1_StudyConfig_ParameterSpec_Type_PARAMETERTYPEUNSPECIFIED,
+      ( GoogleCloudMlV1_StudyConfig_ParameterSpec_Type_PARAMETERTYPEUNSPECIFIED,
         GoogleCloudMlV1_StudyConfig_ParameterSpec_Type_Double,
         GoogleCloudMlV1_StudyConfig_ParameterSpec_Type_Integer,
         GoogleCloudMlV1_StudyConfig_ParameterSpec_Type_Categorical,
@@ -70,8 +59,7 @@ module Gogol.MachineLearning.Internal.Sum
 
     -- * GoogleCloudMlV1__AcceleratorConfig_Type
     GoogleCloudMlV1__AcceleratorConfig_Type
-      (
-        GoogleCloudMlV1__AcceleratorConfig_Type_ACCELERATORTYPEUNSPECIFIED,
+      ( GoogleCloudMlV1__AcceleratorConfig_Type_ACCELERATORTYPEUNSPECIFIED,
         GoogleCloudMlV1__AcceleratorConfig_Type_NVIDIA_TESLA_K80,
         GoogleCloudMlV1__AcceleratorConfig_Type_NVIDIA_TESLA_P100,
         GoogleCloudMlV1__AcceleratorConfig_Type_NVIDIA_TESLA_V100,
@@ -88,8 +76,7 @@ module Gogol.MachineLearning.Internal.Sum
 
     -- * GoogleCloudMlV1__Capability_AvailableAcceleratorsItem
     GoogleCloudMlV1__Capability_AvailableAcceleratorsItem
-      (
-        GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_ACCELERATORTYPEUNSPECIFIED,
+      ( GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_ACCELERATORTYPEUNSPECIFIED,
         GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_NVIDIA_TESLA_K80,
         GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_NVIDIA_TESLA_P100,
         GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_NVIDIA_TESLA_V100,
@@ -106,8 +93,7 @@ module Gogol.MachineLearning.Internal.Sum
 
     -- * GoogleCloudMlV1__Capability_Type
     GoogleCloudMlV1__Capability_Type
-      (
-        GoogleCloudMlV1__Capability_Type_TYPEUNSPECIFIED,
+      ( GoogleCloudMlV1__Capability_Type_TYPEUNSPECIFIED,
         GoogleCloudMlV1__Capability_Type_Training,
         GoogleCloudMlV1__Capability_Type_BATCHPREDICTION,
         GoogleCloudMlV1__Capability_Type_ONLINEPREDICTION,
@@ -116,8 +102,7 @@ module Gogol.MachineLearning.Internal.Sum
 
     -- * GoogleCloudMlV1__HyperparameterOutput_State
     GoogleCloudMlV1__HyperparameterOutput_State
-      (
-        GoogleCloudMlV1__HyperparameterOutput_State_STATEUNSPECIFIED,
+      ( GoogleCloudMlV1__HyperparameterOutput_State_STATEUNSPECIFIED,
         GoogleCloudMlV1__HyperparameterOutput_State_Queued,
         GoogleCloudMlV1__HyperparameterOutput_State_Preparing,
         GoogleCloudMlV1__HyperparameterOutput_State_Running,
@@ -130,8 +115,7 @@ module Gogol.MachineLearning.Internal.Sum
 
     -- * GoogleCloudMlV1__HyperparameterSpec_Algorithm
     GoogleCloudMlV1__HyperparameterSpec_Algorithm
-      (
-        GoogleCloudMlV1__HyperparameterSpec_Algorithm_ALGORITHMUNSPECIFIED,
+      ( GoogleCloudMlV1__HyperparameterSpec_Algorithm_ALGORITHMUNSPECIFIED,
         GoogleCloudMlV1__HyperparameterSpec_Algorithm_GRIDSEARCH,
         GoogleCloudMlV1__HyperparameterSpec_Algorithm_RANDOMSEARCH,
         ..
@@ -139,8 +123,7 @@ module Gogol.MachineLearning.Internal.Sum
 
     -- * GoogleCloudMlV1__HyperparameterSpec_Goal
     GoogleCloudMlV1__HyperparameterSpec_Goal
-      (
-        GoogleCloudMlV1__HyperparameterSpec_Goal_GOALTYPEUNSPECIFIED,
+      ( GoogleCloudMlV1__HyperparameterSpec_Goal_GOALTYPEUNSPECIFIED,
         GoogleCloudMlV1__HyperparameterSpec_Goal_Maximize,
         GoogleCloudMlV1__HyperparameterSpec_Goal_Minimize,
         ..
@@ -148,8 +131,7 @@ module Gogol.MachineLearning.Internal.Sum
 
     -- * GoogleCloudMlV1__Job_State
     GoogleCloudMlV1__Job_State
-      (
-        GoogleCloudMlV1__Job_State_STATEUNSPECIFIED,
+      ( GoogleCloudMlV1__Job_State_STATEUNSPECIFIED,
         GoogleCloudMlV1__Job_State_Queued,
         GoogleCloudMlV1__Job_State_Preparing,
         GoogleCloudMlV1__Job_State_Running,
@@ -162,8 +144,7 @@ module Gogol.MachineLearning.Internal.Sum
 
     -- * GoogleCloudMlV1__MetricSpec_Name
     GoogleCloudMlV1__MetricSpec_Name
-      (
-        GoogleCloudMlV1__MetricSpec_Name_METRICNAMEUNSPECIFIED,
+      ( GoogleCloudMlV1__MetricSpec_Name_METRICNAMEUNSPECIFIED,
         GoogleCloudMlV1__MetricSpec_Name_CPUUSAGE,
         GoogleCloudMlV1__MetricSpec_Name_GPUDUTYCYCLE,
         ..
@@ -171,8 +152,7 @@ module Gogol.MachineLearning.Internal.Sum
 
     -- * GoogleCloudMlV1__OperationMetadata_OperationType
     GoogleCloudMlV1__OperationMetadata_OperationType
-      (
-        GoogleCloudMlV1__OperationMetadata_OperationType_OPERATIONTYPEUNSPECIFIED,
+      ( GoogleCloudMlV1__OperationMetadata_OperationType_OPERATIONTYPEUNSPECIFIED,
         GoogleCloudMlV1__OperationMetadata_OperationType_CREATEVERSION,
         GoogleCloudMlV1__OperationMetadata_OperationType_DELETEVERSION,
         GoogleCloudMlV1__OperationMetadata_OperationType_DELETEMODEL,
@@ -184,8 +164,7 @@ module Gogol.MachineLearning.Internal.Sum
 
     -- * GoogleCloudMlV1__ParameterSpec_ScaleType
     GoogleCloudMlV1__ParameterSpec_ScaleType
-      (
-        GoogleCloudMlV1__ParameterSpec_ScaleType_None,
+      ( GoogleCloudMlV1__ParameterSpec_ScaleType_None,
         GoogleCloudMlV1__ParameterSpec_ScaleType_UNITLINEARSCALE,
         GoogleCloudMlV1__ParameterSpec_ScaleType_UNITLOGSCALE,
         GoogleCloudMlV1__ParameterSpec_ScaleType_UNITREVERSELOGSCALE,
@@ -194,8 +173,7 @@ module Gogol.MachineLearning.Internal.Sum
 
     -- * GoogleCloudMlV1__ParameterSpec_Type
     GoogleCloudMlV1__ParameterSpec_Type
-      (
-        GoogleCloudMlV1__ParameterSpec_Type_PARAMETERTYPEUNSPECIFIED,
+      ( GoogleCloudMlV1__ParameterSpec_Type_PARAMETERTYPEUNSPECIFIED,
         GoogleCloudMlV1__ParameterSpec_Type_Double,
         GoogleCloudMlV1__ParameterSpec_Type_Integer,
         GoogleCloudMlV1__ParameterSpec_Type_Categorical,
@@ -205,8 +183,7 @@ module Gogol.MachineLearning.Internal.Sum
 
     -- * GoogleCloudMlV1__PredictionInput_DataFormat
     GoogleCloudMlV1__PredictionInput_DataFormat
-      (
-        GoogleCloudMlV1__PredictionInput_DataFormat_DATAFORMATUNSPECIFIED,
+      ( GoogleCloudMlV1__PredictionInput_DataFormat_DATAFORMATUNSPECIFIED,
         GoogleCloudMlV1__PredictionInput_DataFormat_Json,
         GoogleCloudMlV1__PredictionInput_DataFormat_Text,
         GoogleCloudMlV1__PredictionInput_DataFormat_TFRECORD,
@@ -217,8 +194,7 @@ module Gogol.MachineLearning.Internal.Sum
 
     -- * GoogleCloudMlV1__PredictionInput_OutputDataFormat
     GoogleCloudMlV1__PredictionInput_OutputDataFormat
-      (
-        GoogleCloudMlV1__PredictionInput_OutputDataFormat_DATAFORMATUNSPECIFIED,
+      ( GoogleCloudMlV1__PredictionInput_OutputDataFormat_DATAFORMATUNSPECIFIED,
         GoogleCloudMlV1__PredictionInput_OutputDataFormat_Json,
         GoogleCloudMlV1__PredictionInput_OutputDataFormat_Text,
         GoogleCloudMlV1__PredictionInput_OutputDataFormat_TFRECORD,
@@ -229,8 +205,7 @@ module Gogol.MachineLearning.Internal.Sum
 
     -- * GoogleCloudMlV1__Study_State
     GoogleCloudMlV1__Study_State
-      (
-        GoogleCloudMlV1__Study_State_STATEUNSPECIFIED,
+      ( GoogleCloudMlV1__Study_State_STATEUNSPECIFIED,
         GoogleCloudMlV1__Study_State_Active,
         GoogleCloudMlV1__Study_State_Inactive,
         GoogleCloudMlV1__Study_State_Completed,
@@ -239,8 +214,7 @@ module Gogol.MachineLearning.Internal.Sum
 
     -- * GoogleCloudMlV1__StudyConfig_Algorithm
     GoogleCloudMlV1__StudyConfig_Algorithm
-      (
-        GoogleCloudMlV1__StudyConfig_Algorithm_ALGORITHMUNSPECIFIED,
+      ( GoogleCloudMlV1__StudyConfig_Algorithm_ALGORITHMUNSPECIFIED,
         GoogleCloudMlV1__StudyConfig_Algorithm_GAUSSIANPROCESSBANDIT,
         GoogleCloudMlV1__StudyConfig_Algorithm_GRIDSEARCH,
         GoogleCloudMlV1__StudyConfig_Algorithm_RANDOMSEARCH,
@@ -249,8 +223,7 @@ module Gogol.MachineLearning.Internal.Sum
 
     -- * GoogleCloudMlV1__SuggestTrialsResponse_StudyState
     GoogleCloudMlV1__SuggestTrialsResponse_StudyState
-      (
-        GoogleCloudMlV1__SuggestTrialsResponse_StudyState_STATEUNSPECIFIED,
+      ( GoogleCloudMlV1__SuggestTrialsResponse_StudyState_STATEUNSPECIFIED,
         GoogleCloudMlV1__SuggestTrialsResponse_StudyState_Active,
         GoogleCloudMlV1__SuggestTrialsResponse_StudyState_Inactive,
         GoogleCloudMlV1__SuggestTrialsResponse_StudyState_Completed,
@@ -259,8 +232,7 @@ module Gogol.MachineLearning.Internal.Sum
 
     -- * GoogleCloudMlV1__TrainingInput_ScaleTier
     GoogleCloudMlV1__TrainingInput_ScaleTier
-      (
-        GoogleCloudMlV1__TrainingInput_ScaleTier_Basic,
+      ( GoogleCloudMlV1__TrainingInput_ScaleTier_Basic,
         GoogleCloudMlV1__TrainingInput_ScaleTier_STANDARD_1,
         GoogleCloudMlV1__TrainingInput_ScaleTier_PREMIUM_1,
         GoogleCloudMlV1__TrainingInput_ScaleTier_BASICGPU,
@@ -271,8 +243,7 @@ module Gogol.MachineLearning.Internal.Sum
 
     -- * GoogleCloudMlV1__Trial_State
     GoogleCloudMlV1__Trial_State
-      (
-        GoogleCloudMlV1__Trial_State_STATEUNSPECIFIED,
+      ( GoogleCloudMlV1__Trial_State_STATEUNSPECIFIED,
         GoogleCloudMlV1__Trial_State_Requested,
         GoogleCloudMlV1__Trial_State_Active,
         GoogleCloudMlV1__Trial_State_Completed,
@@ -282,8 +253,7 @@ module Gogol.MachineLearning.Internal.Sum
 
     -- * GoogleCloudMlV1__Version_Framework
     GoogleCloudMlV1__Version_Framework
-      (
-        GoogleCloudMlV1__Version_Framework_FRAMEWORKUNSPECIFIED,
+      ( GoogleCloudMlV1__Version_Framework_FRAMEWORKUNSPECIFIED,
         GoogleCloudMlV1__Version_Framework_Tensorflow,
         GoogleCloudMlV1__Version_Framework_SCIKITLEARN,
         GoogleCloudMlV1__Version_Framework_Xgboost,
@@ -292,8 +262,7 @@ module Gogol.MachineLearning.Internal.Sum
 
     -- * GoogleCloudMlV1__Version_State
     GoogleCloudMlV1__Version_State
-      (
-        GoogleCloudMlV1__Version_State_Unknown,
+      ( GoogleCloudMlV1__Version_State_Unknown,
         GoogleCloudMlV1__Version_State_Ready,
         GoogleCloudMlV1__Version_State_Creating,
         GoogleCloudMlV1__Version_State_Failed,
@@ -304,29 +273,29 @@ module Gogol.MachineLearning.Internal.Sum
 
     -- * GoogleIamV1__AuditLogConfig_LogType
     GoogleIamV1__AuditLogConfig_LogType
-      (
-        GoogleIamV1__AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
+      ( GoogleIamV1__AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
         GoogleIamV1__AuditLogConfig_LogType_ADMINREAD,
         GoogleIamV1__AuditLogConfig_LogType_DATAWRITE,
         GoogleIamV1__AuditLogConfig_LogType_DATAREAD,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -339,20 +308,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | Required. The optimization goal of the metric.
-newtype GoogleCloudMlV1_StudyConfig_MetricSpec_Goal = GoogleCloudMlV1_StudyConfig_MetricSpec_Goal { fromGoogleCloudMlV1_StudyConfig_MetricSpec_Goal :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudMlV1_StudyConfig_MetricSpec_Goal = GoogleCloudMlV1_StudyConfig_MetricSpec_Goal {fromGoogleCloudMlV1_StudyConfig_MetricSpec_Goal :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Goal Type will default to maximize.
 pattern GoogleCloudMlV1_StudyConfig_MetricSpec_Goal_GOALTYPEUNSPECIFIED :: GoogleCloudMlV1_StudyConfig_MetricSpec_Goal
@@ -370,20 +340,21 @@ pattern GoogleCloudMlV1_StudyConfig_MetricSpec_Goal_Minimize = GoogleCloudMlV1_S
   GoogleCloudMlV1_StudyConfig_MetricSpec_Goal_GOALTYPEUNSPECIFIED,
   GoogleCloudMlV1_StudyConfig_MetricSpec_Goal_Maximize,
   GoogleCloudMlV1_StudyConfig_MetricSpec_Goal_Minimize,
-  GoogleCloudMlV1_StudyConfig_MetricSpec_Goal #-}
+  GoogleCloudMlV1_StudyConfig_MetricSpec_Goal
+  #-}
 
 -- | How the parameter should be scaled. Leave unset for categorical parameters.
-newtype GoogleCloudMlV1_StudyConfig_ParameterSpec_ScaleType = GoogleCloudMlV1_StudyConfig_ParameterSpec_ScaleType { fromGoogleCloudMlV1_StudyConfig_ParameterSpec_ScaleType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudMlV1_StudyConfig_ParameterSpec_ScaleType = GoogleCloudMlV1_StudyConfig_ParameterSpec_ScaleType {fromGoogleCloudMlV1_StudyConfig_ParameterSpec_ScaleType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | By default, no scaling is applied.
 pattern GoogleCloudMlV1_StudyConfig_ParameterSpec_ScaleType_SCALETYPEUNSPECIFIED :: GoogleCloudMlV1_StudyConfig_ParameterSpec_ScaleType
@@ -406,20 +377,21 @@ pattern GoogleCloudMlV1_StudyConfig_ParameterSpec_ScaleType_UNITREVERSELOGSCALE 
   GoogleCloudMlV1_StudyConfig_ParameterSpec_ScaleType_UNITLINEARSCALE,
   GoogleCloudMlV1_StudyConfig_ParameterSpec_ScaleType_UNITLOGSCALE,
   GoogleCloudMlV1_StudyConfig_ParameterSpec_ScaleType_UNITREVERSELOGSCALE,
-  GoogleCloudMlV1_StudyConfig_ParameterSpec_ScaleType #-}
+  GoogleCloudMlV1_StudyConfig_ParameterSpec_ScaleType
+  #-}
 
 -- | Required. The type of the parameter.
-newtype GoogleCloudMlV1_StudyConfig_ParameterSpec_Type = GoogleCloudMlV1_StudyConfig_ParameterSpec_Type { fromGoogleCloudMlV1_StudyConfig_ParameterSpec_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudMlV1_StudyConfig_ParameterSpec_Type = GoogleCloudMlV1_StudyConfig_ParameterSpec_Type {fromGoogleCloudMlV1_StudyConfig_ParameterSpec_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | You must specify a valid type. Using this unspecified type will result in an error.
 pattern GoogleCloudMlV1_StudyConfig_ParameterSpec_Type_PARAMETERTYPEUNSPECIFIED :: GoogleCloudMlV1_StudyConfig_ParameterSpec_Type
@@ -447,20 +419,21 @@ pattern GoogleCloudMlV1_StudyConfig_ParameterSpec_Type_Discrete = GoogleCloudMlV
   GoogleCloudMlV1_StudyConfig_ParameterSpec_Type_Integer,
   GoogleCloudMlV1_StudyConfig_ParameterSpec_Type_Categorical,
   GoogleCloudMlV1_StudyConfig_ParameterSpec_Type_Discrete,
-  GoogleCloudMlV1_StudyConfig_ParameterSpec_Type #-}
+  GoogleCloudMlV1_StudyConfig_ParameterSpec_Type
+  #-}
 
 -- | The type of accelerator to use.
-newtype GoogleCloudMlV1__AcceleratorConfig_Type = GoogleCloudMlV1__AcceleratorConfig_Type { fromGoogleCloudMlV1__AcceleratorConfig_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudMlV1__AcceleratorConfig_Type = GoogleCloudMlV1__AcceleratorConfig_Type {fromGoogleCloudMlV1__AcceleratorConfig_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified accelerator type. Default to no GPU.
 pattern GoogleCloudMlV1__AcceleratorConfig_Type_ACCELERATORTYPEUNSPECIFIED :: GoogleCloudMlV1__AcceleratorConfig_Type
@@ -523,19 +496,20 @@ pattern GoogleCloudMlV1__AcceleratorConfig_Type_TPUV4POD = GoogleCloudMlV1__Acce
   GoogleCloudMlV1__AcceleratorConfig_Type_TPUV2POD,
   GoogleCloudMlV1__AcceleratorConfig_Type_TPUV3POD,
   GoogleCloudMlV1__AcceleratorConfig_Type_TPUV4POD,
-  GoogleCloudMlV1__AcceleratorConfig_Type #-}
+  GoogleCloudMlV1__AcceleratorConfig_Type
+  #-}
 
-newtype GoogleCloudMlV1__Capability_AvailableAcceleratorsItem = GoogleCloudMlV1__Capability_AvailableAcceleratorsItem { fromGoogleCloudMlV1__Capability_AvailableAcceleratorsItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudMlV1__Capability_AvailableAcceleratorsItem = GoogleCloudMlV1__Capability_AvailableAcceleratorsItem {fromGoogleCloudMlV1__Capability_AvailableAcceleratorsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified accelerator type. Default to no GPU.
 pattern GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_ACCELERATORTYPEUNSPECIFIED :: GoogleCloudMlV1__Capability_AvailableAcceleratorsItem
@@ -598,33 +572,30 @@ pattern GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_TPUV4POD = GoogleC
   GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_TPUV2POD,
   GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_TPUV3POD,
   GoogleCloudMlV1__Capability_AvailableAcceleratorsItem_TPUV4POD,
-  GoogleCloudMlV1__Capability_AvailableAcceleratorsItem #-}
+  GoogleCloudMlV1__Capability_AvailableAcceleratorsItem
+  #-}
 
-newtype GoogleCloudMlV1__Capability_Type = GoogleCloudMlV1__Capability_Type { fromGoogleCloudMlV1__Capability_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudMlV1__Capability_Type = GoogleCloudMlV1__Capability_Type {fromGoogleCloudMlV1__Capability_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern GoogleCloudMlV1__Capability_Type_TYPEUNSPECIFIED :: GoogleCloudMlV1__Capability_Type
 pattern GoogleCloudMlV1__Capability_Type_TYPEUNSPECIFIED = GoogleCloudMlV1__Capability_Type "TYPE_UNSPECIFIED"
 
--- | 
 pattern GoogleCloudMlV1__Capability_Type_Training :: GoogleCloudMlV1__Capability_Type
 pattern GoogleCloudMlV1__Capability_Type_Training = GoogleCloudMlV1__Capability_Type "TRAINING"
 
--- | 
 pattern GoogleCloudMlV1__Capability_Type_BATCHPREDICTION :: GoogleCloudMlV1__Capability_Type
 pattern GoogleCloudMlV1__Capability_Type_BATCHPREDICTION = GoogleCloudMlV1__Capability_Type "BATCH_PREDICTION"
 
--- | 
 pattern GoogleCloudMlV1__Capability_Type_ONLINEPREDICTION :: GoogleCloudMlV1__Capability_Type
 pattern GoogleCloudMlV1__Capability_Type_ONLINEPREDICTION = GoogleCloudMlV1__Capability_Type "ONLINE_PREDICTION"
 
@@ -633,20 +604,21 @@ pattern GoogleCloudMlV1__Capability_Type_ONLINEPREDICTION = GoogleCloudMlV1__Cap
   GoogleCloudMlV1__Capability_Type_Training,
   GoogleCloudMlV1__Capability_Type_BATCHPREDICTION,
   GoogleCloudMlV1__Capability_Type_ONLINEPREDICTION,
-  GoogleCloudMlV1__Capability_Type #-}
+  GoogleCloudMlV1__Capability_Type
+  #-}
 
 -- | Output only. The detailed state of the trial.
-newtype GoogleCloudMlV1__HyperparameterOutput_State = GoogleCloudMlV1__HyperparameterOutput_State { fromGoogleCloudMlV1__HyperparameterOutput_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudMlV1__HyperparameterOutput_State = GoogleCloudMlV1__HyperparameterOutput_State {fromGoogleCloudMlV1__HyperparameterOutput_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The job state is unspecified.
 pattern GoogleCloudMlV1__HyperparameterOutput_State_STATEUNSPECIFIED :: GoogleCloudMlV1__HyperparameterOutput_State
@@ -689,20 +661,21 @@ pattern GoogleCloudMlV1__HyperparameterOutput_State_Cancelled = GoogleCloudMlV1_
   GoogleCloudMlV1__HyperparameterOutput_State_Failed,
   GoogleCloudMlV1__HyperparameterOutput_State_Cancelling,
   GoogleCloudMlV1__HyperparameterOutput_State_Cancelled,
-  GoogleCloudMlV1__HyperparameterOutput_State #-}
+  GoogleCloudMlV1__HyperparameterOutput_State
+  #-}
 
 -- | Optional. The search algorithm specified for the hyperparameter tuning job. Uses the default AI Platform hyperparameter tuning algorithm if unspecified.
-newtype GoogleCloudMlV1__HyperparameterSpec_Algorithm = GoogleCloudMlV1__HyperparameterSpec_Algorithm { fromGoogleCloudMlV1__HyperparameterSpec_Algorithm :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudMlV1__HyperparameterSpec_Algorithm = GoogleCloudMlV1__HyperparameterSpec_Algorithm {fromGoogleCloudMlV1__HyperparameterSpec_Algorithm :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The default algorithm used by the hyperparameter tuning service. This is a Bayesian optimization algorithm.
 pattern GoogleCloudMlV1__HyperparameterSpec_Algorithm_ALGORITHMUNSPECIFIED :: GoogleCloudMlV1__HyperparameterSpec_Algorithm
@@ -720,20 +693,21 @@ pattern GoogleCloudMlV1__HyperparameterSpec_Algorithm_RANDOMSEARCH = GoogleCloud
   GoogleCloudMlV1__HyperparameterSpec_Algorithm_ALGORITHMUNSPECIFIED,
   GoogleCloudMlV1__HyperparameterSpec_Algorithm_GRIDSEARCH,
   GoogleCloudMlV1__HyperparameterSpec_Algorithm_RANDOMSEARCH,
-  GoogleCloudMlV1__HyperparameterSpec_Algorithm #-}
+  GoogleCloudMlV1__HyperparameterSpec_Algorithm
+  #-}
 
 -- | Required. The type of goal to use for tuning. Available types are @MAXIMIZE@ and @MINIMIZE@. Defaults to @MAXIMIZE@.
-newtype GoogleCloudMlV1__HyperparameterSpec_Goal = GoogleCloudMlV1__HyperparameterSpec_Goal { fromGoogleCloudMlV1__HyperparameterSpec_Goal :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudMlV1__HyperparameterSpec_Goal = GoogleCloudMlV1__HyperparameterSpec_Goal {fromGoogleCloudMlV1__HyperparameterSpec_Goal :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Goal Type will default to maximize.
 pattern GoogleCloudMlV1__HyperparameterSpec_Goal_GOALTYPEUNSPECIFIED :: GoogleCloudMlV1__HyperparameterSpec_Goal
@@ -751,20 +725,21 @@ pattern GoogleCloudMlV1__HyperparameterSpec_Goal_Minimize = GoogleCloudMlV1__Hyp
   GoogleCloudMlV1__HyperparameterSpec_Goal_GOALTYPEUNSPECIFIED,
   GoogleCloudMlV1__HyperparameterSpec_Goal_Maximize,
   GoogleCloudMlV1__HyperparameterSpec_Goal_Minimize,
-  GoogleCloudMlV1__HyperparameterSpec_Goal #-}
+  GoogleCloudMlV1__HyperparameterSpec_Goal
+  #-}
 
 -- | Output only. The detailed state of a job.
-newtype GoogleCloudMlV1__Job_State = GoogleCloudMlV1__Job_State { fromGoogleCloudMlV1__Job_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudMlV1__Job_State = GoogleCloudMlV1__Job_State {fromGoogleCloudMlV1__Job_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The job state is unspecified.
 pattern GoogleCloudMlV1__Job_State_STATEUNSPECIFIED :: GoogleCloudMlV1__Job_State
@@ -807,20 +782,21 @@ pattern GoogleCloudMlV1__Job_State_Cancelled = GoogleCloudMlV1__Job_State "CANCE
   GoogleCloudMlV1__Job_State_Failed,
   GoogleCloudMlV1__Job_State_Cancelling,
   GoogleCloudMlV1__Job_State_Cancelled,
-  GoogleCloudMlV1__Job_State #-}
+  GoogleCloudMlV1__Job_State
+  #-}
 
 -- | metric name.
-newtype GoogleCloudMlV1__MetricSpec_Name = GoogleCloudMlV1__MetricSpec_Name { fromGoogleCloudMlV1__MetricSpec_Name :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudMlV1__MetricSpec_Name = GoogleCloudMlV1__MetricSpec_Name {fromGoogleCloudMlV1__MetricSpec_Name :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified MetricName.
 pattern GoogleCloudMlV1__MetricSpec_Name_METRICNAMEUNSPECIFIED :: GoogleCloudMlV1__MetricSpec_Name
@@ -838,20 +814,21 @@ pattern GoogleCloudMlV1__MetricSpec_Name_GPUDUTYCYCLE = GoogleCloudMlV1__MetricS
   GoogleCloudMlV1__MetricSpec_Name_METRICNAMEUNSPECIFIED,
   GoogleCloudMlV1__MetricSpec_Name_CPUUSAGE,
   GoogleCloudMlV1__MetricSpec_Name_GPUDUTYCYCLE,
-  GoogleCloudMlV1__MetricSpec_Name #-}
+  GoogleCloudMlV1__MetricSpec_Name
+  #-}
 
 -- | The operation type.
-newtype GoogleCloudMlV1__OperationMetadata_OperationType = GoogleCloudMlV1__OperationMetadata_OperationType { fromGoogleCloudMlV1__OperationMetadata_OperationType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudMlV1__OperationMetadata_OperationType = GoogleCloudMlV1__OperationMetadata_OperationType {fromGoogleCloudMlV1__OperationMetadata_OperationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified operation type.
 pattern GoogleCloudMlV1__OperationMetadata_OperationType_OPERATIONTYPEUNSPECIFIED :: GoogleCloudMlV1__OperationMetadata_OperationType
@@ -889,20 +866,21 @@ pattern GoogleCloudMlV1__OperationMetadata_OperationType_UPDATECONFIG = GoogleCl
   GoogleCloudMlV1__OperationMetadata_OperationType_UPDATEMODEL,
   GoogleCloudMlV1__OperationMetadata_OperationType_UPDATEVERSION,
   GoogleCloudMlV1__OperationMetadata_OperationType_UPDATECONFIG,
-  GoogleCloudMlV1__OperationMetadata_OperationType #-}
+  GoogleCloudMlV1__OperationMetadata_OperationType
+  #-}
 
 -- | Optional. How the parameter should be scaled to the hypercube. Leave unset for categorical parameters. Some kind of scaling is strongly recommended for real or integral parameters (e.g., @UNIT_LINEAR_SCALE@).
-newtype GoogleCloudMlV1__ParameterSpec_ScaleType = GoogleCloudMlV1__ParameterSpec_ScaleType { fromGoogleCloudMlV1__ParameterSpec_ScaleType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudMlV1__ParameterSpec_ScaleType = GoogleCloudMlV1__ParameterSpec_ScaleType {fromGoogleCloudMlV1__ParameterSpec_ScaleType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | By default, no scaling is applied.
 pattern GoogleCloudMlV1__ParameterSpec_ScaleType_None :: GoogleCloudMlV1__ParameterSpec_ScaleType
@@ -925,20 +903,21 @@ pattern GoogleCloudMlV1__ParameterSpec_ScaleType_UNITREVERSELOGSCALE = GoogleClo
   GoogleCloudMlV1__ParameterSpec_ScaleType_UNITLINEARSCALE,
   GoogleCloudMlV1__ParameterSpec_ScaleType_UNITLOGSCALE,
   GoogleCloudMlV1__ParameterSpec_ScaleType_UNITREVERSELOGSCALE,
-  GoogleCloudMlV1__ParameterSpec_ScaleType #-}
+  GoogleCloudMlV1__ParameterSpec_ScaleType
+  #-}
 
 -- | Required. The type of the parameter.
-newtype GoogleCloudMlV1__ParameterSpec_Type = GoogleCloudMlV1__ParameterSpec_Type { fromGoogleCloudMlV1__ParameterSpec_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudMlV1__ParameterSpec_Type = GoogleCloudMlV1__ParameterSpec_Type {fromGoogleCloudMlV1__ParameterSpec_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | You must specify a valid type. Using this unspecified type will result in an error.
 pattern GoogleCloudMlV1__ParameterSpec_Type_PARAMETERTYPEUNSPECIFIED :: GoogleCloudMlV1__ParameterSpec_Type
@@ -966,20 +945,21 @@ pattern GoogleCloudMlV1__ParameterSpec_Type_Discrete = GoogleCloudMlV1__Paramete
   GoogleCloudMlV1__ParameterSpec_Type_Integer,
   GoogleCloudMlV1__ParameterSpec_Type_Categorical,
   GoogleCloudMlV1__ParameterSpec_Type_Discrete,
-  GoogleCloudMlV1__ParameterSpec_Type #-}
+  GoogleCloudMlV1__ParameterSpec_Type
+  #-}
 
 -- | Required. The format of the input data files.
-newtype GoogleCloudMlV1__PredictionInput_DataFormat = GoogleCloudMlV1__PredictionInput_DataFormat { fromGoogleCloudMlV1__PredictionInput_DataFormat :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudMlV1__PredictionInput_DataFormat = GoogleCloudMlV1__PredictionInput_DataFormat {fromGoogleCloudMlV1__PredictionInput_DataFormat :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified format.
 pattern GoogleCloudMlV1__PredictionInput_DataFormat_DATAFORMATUNSPECIFIED :: GoogleCloudMlV1__PredictionInput_DataFormat
@@ -1012,20 +992,21 @@ pattern GoogleCloudMlV1__PredictionInput_DataFormat_Csv = GoogleCloudMlV1__Predi
   GoogleCloudMlV1__PredictionInput_DataFormat_TFRECORD,
   GoogleCloudMlV1__PredictionInput_DataFormat_TFRECORDGZIP,
   GoogleCloudMlV1__PredictionInput_DataFormat_Csv,
-  GoogleCloudMlV1__PredictionInput_DataFormat #-}
+  GoogleCloudMlV1__PredictionInput_DataFormat
+  #-}
 
 -- | Optional. Format of the output data files, defaults to JSON.
-newtype GoogleCloudMlV1__PredictionInput_OutputDataFormat = GoogleCloudMlV1__PredictionInput_OutputDataFormat { fromGoogleCloudMlV1__PredictionInput_OutputDataFormat :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudMlV1__PredictionInput_OutputDataFormat = GoogleCloudMlV1__PredictionInput_OutputDataFormat {fromGoogleCloudMlV1__PredictionInput_OutputDataFormat :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified format.
 pattern GoogleCloudMlV1__PredictionInput_OutputDataFormat_DATAFORMATUNSPECIFIED :: GoogleCloudMlV1__PredictionInput_OutputDataFormat
@@ -1058,20 +1039,21 @@ pattern GoogleCloudMlV1__PredictionInput_OutputDataFormat_Csv = GoogleCloudMlV1_
   GoogleCloudMlV1__PredictionInput_OutputDataFormat_TFRECORD,
   GoogleCloudMlV1__PredictionInput_OutputDataFormat_TFRECORDGZIP,
   GoogleCloudMlV1__PredictionInput_OutputDataFormat_Csv,
-  GoogleCloudMlV1__PredictionInput_OutputDataFormat #-}
+  GoogleCloudMlV1__PredictionInput_OutputDataFormat
+  #-}
 
 -- | Output only. The detailed state of a study.
-newtype GoogleCloudMlV1__Study_State = GoogleCloudMlV1__Study_State { fromGoogleCloudMlV1__Study_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudMlV1__Study_State = GoogleCloudMlV1__Study_State {fromGoogleCloudMlV1__Study_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The study state is unspecified.
 pattern GoogleCloudMlV1__Study_State_STATEUNSPECIFIED :: GoogleCloudMlV1__Study_State
@@ -1094,20 +1076,21 @@ pattern GoogleCloudMlV1__Study_State_Completed = GoogleCloudMlV1__Study_State "C
   GoogleCloudMlV1__Study_State_Active,
   GoogleCloudMlV1__Study_State_Inactive,
   GoogleCloudMlV1__Study_State_Completed,
-  GoogleCloudMlV1__Study_State #-}
+  GoogleCloudMlV1__Study_State
+  #-}
 
 -- | The search algorithm specified for the study.
-newtype GoogleCloudMlV1__StudyConfig_Algorithm = GoogleCloudMlV1__StudyConfig_Algorithm { fromGoogleCloudMlV1__StudyConfig_Algorithm :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudMlV1__StudyConfig_Algorithm = GoogleCloudMlV1__StudyConfig_Algorithm {fromGoogleCloudMlV1__StudyConfig_Algorithm :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The default algorithm used by the Cloud AI Platform Vizier service.
 pattern GoogleCloudMlV1__StudyConfig_Algorithm_ALGORITHMUNSPECIFIED :: GoogleCloudMlV1__StudyConfig_Algorithm
@@ -1130,20 +1113,21 @@ pattern GoogleCloudMlV1__StudyConfig_Algorithm_RANDOMSEARCH = GoogleCloudMlV1__S
   GoogleCloudMlV1__StudyConfig_Algorithm_GAUSSIANPROCESSBANDIT,
   GoogleCloudMlV1__StudyConfig_Algorithm_GRIDSEARCH,
   GoogleCloudMlV1__StudyConfig_Algorithm_RANDOMSEARCH,
-  GoogleCloudMlV1__StudyConfig_Algorithm #-}
+  GoogleCloudMlV1__StudyConfig_Algorithm
+  #-}
 
 -- | The state of the study.
-newtype GoogleCloudMlV1__SuggestTrialsResponse_StudyState = GoogleCloudMlV1__SuggestTrialsResponse_StudyState { fromGoogleCloudMlV1__SuggestTrialsResponse_StudyState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudMlV1__SuggestTrialsResponse_StudyState = GoogleCloudMlV1__SuggestTrialsResponse_StudyState {fromGoogleCloudMlV1__SuggestTrialsResponse_StudyState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The study state is unspecified.
 pattern GoogleCloudMlV1__SuggestTrialsResponse_StudyState_STATEUNSPECIFIED :: GoogleCloudMlV1__SuggestTrialsResponse_StudyState
@@ -1166,20 +1150,21 @@ pattern GoogleCloudMlV1__SuggestTrialsResponse_StudyState_Completed = GoogleClou
   GoogleCloudMlV1__SuggestTrialsResponse_StudyState_Active,
   GoogleCloudMlV1__SuggestTrialsResponse_StudyState_Inactive,
   GoogleCloudMlV1__SuggestTrialsResponse_StudyState_Completed,
-  GoogleCloudMlV1__SuggestTrialsResponse_StudyState #-}
+  GoogleCloudMlV1__SuggestTrialsResponse_StudyState
+  #-}
 
 -- | Required. Specifies the machine types, the number of replicas for workers and parameter servers.
-newtype GoogleCloudMlV1__TrainingInput_ScaleTier = GoogleCloudMlV1__TrainingInput_ScaleTier { fromGoogleCloudMlV1__TrainingInput_ScaleTier :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudMlV1__TrainingInput_ScaleTier = GoogleCloudMlV1__TrainingInput_ScaleTier {fromGoogleCloudMlV1__TrainingInput_ScaleTier :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | A single worker instance. This tier is suitable for learning how to use Cloud ML, and for experimenting with new models using small datasets.
 pattern GoogleCloudMlV1__TrainingInput_ScaleTier_Basic :: GoogleCloudMlV1__TrainingInput_ScaleTier
@@ -1213,20 +1198,21 @@ pattern GoogleCloudMlV1__TrainingInput_ScaleTier_Custom = GoogleCloudMlV1__Train
   GoogleCloudMlV1__TrainingInput_ScaleTier_BASICGPU,
   GoogleCloudMlV1__TrainingInput_ScaleTier_BASICTPU,
   GoogleCloudMlV1__TrainingInput_ScaleTier_Custom,
-  GoogleCloudMlV1__TrainingInput_ScaleTier #-}
+  GoogleCloudMlV1__TrainingInput_ScaleTier
+  #-}
 
 -- | The detailed state of a trial.
-newtype GoogleCloudMlV1__Trial_State = GoogleCloudMlV1__Trial_State { fromGoogleCloudMlV1__Trial_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudMlV1__Trial_State = GoogleCloudMlV1__Trial_State {fromGoogleCloudMlV1__Trial_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The trial state is unspecified.
 pattern GoogleCloudMlV1__Trial_State_STATEUNSPECIFIED :: GoogleCloudMlV1__Trial_State
@@ -1254,20 +1240,21 @@ pattern GoogleCloudMlV1__Trial_State_Stopping = GoogleCloudMlV1__Trial_State "ST
   GoogleCloudMlV1__Trial_State_Active,
   GoogleCloudMlV1__Trial_State_Completed,
   GoogleCloudMlV1__Trial_State_Stopping,
-  GoogleCloudMlV1__Trial_State #-}
+  GoogleCloudMlV1__Trial_State
+  #-}
 
 -- | Optional. The machine learning framework AI Platform uses to train this version of the model. Valid values are @TENSORFLOW@, @SCIKIT_LEARN@, @XGBOOST@. If you do not specify a framework, AI Platform will analyze files in the deployment_uri to determine a framework. If you choose @SCIKIT_LEARN@ or @XGBOOST@, you must also set the runtime version of the model to 1.4 or greater. Do __not__ specify a framework if you\'re deploying a </ai-platform/prediction/docs/custom-prediction-routines custom prediction routine> or if you\'re using a </ai-platform/prediction/docs/use-custom-container custom container>.
-newtype GoogleCloudMlV1__Version_Framework = GoogleCloudMlV1__Version_Framework { fromGoogleCloudMlV1__Version_Framework :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudMlV1__Version_Framework = GoogleCloudMlV1__Version_Framework {fromGoogleCloudMlV1__Version_Framework :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified framework. Assigns a value based on the file suffix.
 pattern GoogleCloudMlV1__Version_Framework_FRAMEWORKUNSPECIFIED :: GoogleCloudMlV1__Version_Framework
@@ -1290,20 +1277,21 @@ pattern GoogleCloudMlV1__Version_Framework_Xgboost = GoogleCloudMlV1__Version_Fr
   GoogleCloudMlV1__Version_Framework_Tensorflow,
   GoogleCloudMlV1__Version_Framework_SCIKITLEARN,
   GoogleCloudMlV1__Version_Framework_Xgboost,
-  GoogleCloudMlV1__Version_Framework #-}
+  GoogleCloudMlV1__Version_Framework
+  #-}
 
 -- | Output only. The state of a version.
-newtype GoogleCloudMlV1__Version_State = GoogleCloudMlV1__Version_State { fromGoogleCloudMlV1__Version_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleCloudMlV1__Version_State = GoogleCloudMlV1__Version_State {fromGoogleCloudMlV1__Version_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The version state is unspecified.
 pattern GoogleCloudMlV1__Version_State_Unknown :: GoogleCloudMlV1__Version_State
@@ -1336,20 +1324,21 @@ pattern GoogleCloudMlV1__Version_State_Updating = GoogleCloudMlV1__Version_State
   GoogleCloudMlV1__Version_State_Failed,
   GoogleCloudMlV1__Version_State_Deleting,
   GoogleCloudMlV1__Version_State_Updating,
-  GoogleCloudMlV1__Version_State #-}
+  GoogleCloudMlV1__Version_State
+  #-}
 
 -- | The log type that this config enables.
-newtype GoogleIamV1__AuditLogConfig_LogType = GoogleIamV1__AuditLogConfig_LogType { fromGoogleIamV1__AuditLogConfig_LogType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleIamV1__AuditLogConfig_LogType = GoogleIamV1__AuditLogConfig_LogType {fromGoogleIamV1__AuditLogConfig_LogType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default case. Should never be this.
 pattern GoogleIamV1__AuditLogConfig_LogType_LOGTYPEUNSPECIFIED :: GoogleIamV1__AuditLogConfig_LogType
@@ -1372,4 +1361,5 @@ pattern GoogleIamV1__AuditLogConfig_LogType_DATAREAD = GoogleIamV1__AuditLogConf
   GoogleIamV1__AuditLogConfig_LogType_ADMINREAD,
   GoogleIamV1__AuditLogConfig_LogType_DATAWRITE,
   GoogleIamV1__AuditLogConfig_LogType_DATAREAD,
-  GoogleIamV1__AuditLogConfig_LogType #-}
+  GoogleIamV1__AuditLogConfig_LogType
+  #-}

@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.DoubleClickBids.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.DoubleClickBids.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * DataRange_Range
     DataRange_Range
-      (
-        DataRange_Range_RANGEUNSPECIFIED,
+      ( DataRange_Range_RANGEUNSPECIFIED,
         DataRange_Range_CUSTOMDATES,
         DataRange_Range_CURRENTDAY,
         DataRange_Range_PREVIOUSDAY,
@@ -65,8 +56,7 @@ module Gogol.DoubleClickBids.Internal.Sum
 
     -- * Parameters_Type
     Parameters_Type
-      (
-        Parameters_Type_REPORTTYPEUNSPECIFIED,
+      ( Parameters_Type_REPORTTYPEUNSPECIFIED,
         Parameters_Type_Standard,
         Parameters_Type_INVENTORYAVAILABILITY,
         Parameters_Type_AUDIENCECOMPOSITION,
@@ -83,8 +73,7 @@ module Gogol.DoubleClickBids.Internal.Sum
 
     -- * QueryMetadata_Format
     QueryMetadata_Format
-      (
-        QueryMetadata_Format_FORMATUNSPECIFIED,
+      ( QueryMetadata_Format_FORMATUNSPECIFIED,
         QueryMetadata_Format_Csv,
         QueryMetadata_Format_Xlsx,
         ..
@@ -92,8 +81,7 @@ module Gogol.DoubleClickBids.Internal.Sum
 
     -- * QuerySchedule_Frequency
     QuerySchedule_Frequency
-      (
-        QuerySchedule_Frequency_FREQUENCYUNSPECIFIED,
+      ( QuerySchedule_Frequency_FREQUENCYUNSPECIFIED,
         QuerySchedule_Frequency_ONETIME,
         QuerySchedule_Frequency_Daily,
         QuerySchedule_Frequency_Weekly,
@@ -106,8 +94,7 @@ module Gogol.DoubleClickBids.Internal.Sum
 
     -- * ReportStatus_Format
     ReportStatus_Format
-      (
-        ReportStatus_Format_FORMATUNSPECIFIED,
+      ( ReportStatus_Format_FORMATUNSPECIFIED,
         ReportStatus_Format_Csv,
         ReportStatus_Format_Xlsx,
         ..
@@ -115,30 +102,30 @@ module Gogol.DoubleClickBids.Internal.Sum
 
     -- * ReportStatus_State
     ReportStatus_State
-      (
-        ReportStatus_State_STATEUNSPECIFIED,
+      ( ReportStatus_State_STATEUNSPECIFIED,
         ReportStatus_State_Queued,
         ReportStatus_State_Running,
         ReportStatus_State_Done,
         ReportStatus_State_Failed,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -151,20 +138,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | The preset date range to be reported on. If @CUSTOM_DATES@ is assigned to this field, fields custom/start/date and custom/end/date must be set to specify the custom date range.
-newtype DataRange_Range = DataRange_Range { fromDataRange_Range :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DataRange_Range = DataRange_Range {fromDataRange_Range :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value when range is not specified or is unknown in this version.
 pattern DataRange_Range_RANGEUNSPECIFIED :: DataRange_Range
@@ -262,20 +250,21 @@ pattern DataRange_Range_LAST60DAYS = DataRange_Range "LAST_60_DAYS"
   DataRange_Range_ALLTIME,
   DataRange_Range_LAST14DAYS,
   DataRange_Range_LAST60DAYS,
-  DataRange_Range #-}
+  DataRange_Range
+  #-}
 
 -- | The type of the report. The type of the report determines the dimesions, filters, and metrics that can be used.
-newtype Parameters_Type = Parameters_Type { fromParameters_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Parameters_Type = Parameters_Type {fromParameters_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value when report type is not specified or is unknown in this version.
 pattern Parameters_Type_REPORTTYPEUNSPECIFIED :: Parameters_Type
@@ -338,20 +327,21 @@ pattern Parameters_Type_PATHATTRIBUTION = Parameters_Type "PATH_ATTRIBUTION"
   Parameters_Type_UNIQUEREACHAUDIENCE,
   Parameters_Type_FULLPATH,
   Parameters_Type_PATHATTRIBUTION,
-  Parameters_Type #-}
+  Parameters_Type
+  #-}
 
 -- | The format of the report generated by the query.
-newtype QueryMetadata_Format = QueryMetadata_Format { fromQueryMetadata_Format :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype QueryMetadata_Format = QueryMetadata_Format {fromQueryMetadata_Format :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value when format is not specified or is unknown in this version.
 pattern QueryMetadata_Format_FORMATUNSPECIFIED :: QueryMetadata_Format
@@ -369,20 +359,21 @@ pattern QueryMetadata_Format_Xlsx = QueryMetadata_Format "XLSX"
   QueryMetadata_Format_FORMATUNSPECIFIED,
   QueryMetadata_Format_Csv,
   QueryMetadata_Format_Xlsx,
-  QueryMetadata_Format #-}
+  QueryMetadata_Format
+  #-}
 
 -- | How frequently to run the query. If set to @ONE_TIME@, the query will only be run when queries.run is called.
-newtype QuerySchedule_Frequency = QuerySchedule_Frequency { fromQuerySchedule_Frequency :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype QuerySchedule_Frequency = QuerySchedule_Frequency {fromQuerySchedule_Frequency :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value when frequency is not specified or is unknown in this version.
 pattern QuerySchedule_Frequency_FREQUENCYUNSPECIFIED :: QuerySchedule_Frequency
@@ -425,20 +416,21 @@ pattern QuerySchedule_Frequency_Yearly = QuerySchedule_Frequency "YEARLY"
   QuerySchedule_Frequency_Monthly,
   QuerySchedule_Frequency_Quarterly,
   QuerySchedule_Frequency_Yearly,
-  QuerySchedule_Frequency #-}
+  QuerySchedule_Frequency
+  #-}
 
 -- | The format of the generated report file.
-newtype ReportStatus_Format = ReportStatus_Format { fromReportStatus_Format :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ReportStatus_Format = ReportStatus_Format {fromReportStatus_Format :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value when format is not specified or is unknown in this version.
 pattern ReportStatus_Format_FORMATUNSPECIFIED :: ReportStatus_Format
@@ -456,20 +448,21 @@ pattern ReportStatus_Format_Xlsx = ReportStatus_Format "XLSX"
   ReportStatus_Format_FORMATUNSPECIFIED,
   ReportStatus_Format_Csv,
   ReportStatus_Format_Xlsx,
-  ReportStatus_Format #-}
+  ReportStatus_Format
+  #-}
 
 -- | Output only. The state of the report generation.
-newtype ReportStatus_State = ReportStatus_State { fromReportStatus_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ReportStatus_State = ReportStatus_State {fromReportStatus_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value when state is not specified or is unknown in this version.
 pattern ReportStatus_State_STATEUNSPECIFIED :: ReportStatus_State
@@ -497,4 +490,5 @@ pattern ReportStatus_State_Failed = ReportStatus_State "FAILED"
   ReportStatus_State_Running,
   ReportStatus_State_Done,
   ReportStatus_State_Failed,
-  ReportStatus_State #-}
+  ReportStatus_State
+  #-}

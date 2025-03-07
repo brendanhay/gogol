@@ -1,19 +1,24 @@
-cabal-version:         2.2
-name:                  gogol-securitycenter
-version:               1.0.0
-synopsis:              Google Security Command Center SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-securitycenter
+version:            1.0.0
+synopsis:           Google Security Command Center SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:
+  Brendan Hay <brendan.g.hay+gogol@gmail.com>, Toni Cebrián <toni@tonicebrian.com>
+
+copyright:          Copyright (c) 2015-2025 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    Security Command Center API provides access to temporal views of assets and findings within an organization.
+  Security Command Center API provides access to temporal views of assets and findings within an organization.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -27,60 +32,57 @@ source-repository head
   subdir:   gogol-securitycenter
 
 flag field-selectors
-  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-  default: False
-  manual: True
+  description:
+    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+
+  default:     False
+  manual:      True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: GHC2021
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -Werror
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if !flag(field-selectors) && impl(ghc >= 9.2)
+  if (!flag(field-selectors) && impl(ghc >=9.2))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.SecurityCenter
-    , Gogol.SecurityCenter.Organizations.Assets.Group
-    , Gogol.SecurityCenter.Organizations.Assets.List
-    , Gogol.SecurityCenter.Organizations.Assets.RunDiscovery
-    , Gogol.SecurityCenter.Organizations.Assets.UpdateSecurityMarks
-    , Gogol.SecurityCenter.Organizations.GetOrganizationSettings
-    , Gogol.SecurityCenter.Organizations.NotificationConfigs.Create
-    , Gogol.SecurityCenter.Organizations.NotificationConfigs.Delete
-    , Gogol.SecurityCenter.Organizations.NotificationConfigs.Get
-    , Gogol.SecurityCenter.Organizations.NotificationConfigs.List
-    , Gogol.SecurityCenter.Organizations.NotificationConfigs.Patch
-    , Gogol.SecurityCenter.Organizations.Operations.Cancel
-    , Gogol.SecurityCenter.Organizations.Operations.Delete
-    , Gogol.SecurityCenter.Organizations.Operations.Get
-    , Gogol.SecurityCenter.Organizations.Operations.List
-    , Gogol.SecurityCenter.Organizations.Sources.Create
-    , Gogol.SecurityCenter.Organizations.Sources.Findings.Create
-    , Gogol.SecurityCenter.Organizations.Sources.Findings.Group
-    , Gogol.SecurityCenter.Organizations.Sources.Findings.List
-    , Gogol.SecurityCenter.Organizations.Sources.Findings.Patch
-    , Gogol.SecurityCenter.Organizations.Sources.Findings.SetState
-    , Gogol.SecurityCenter.Organizations.Sources.Findings.UpdateSecurityMarks
-    , Gogol.SecurityCenter.Organizations.Sources.Get
-    , Gogol.SecurityCenter.Organizations.Sources.GetIamPolicy
-    , Gogol.SecurityCenter.Organizations.Sources.List
-    , Gogol.SecurityCenter.Organizations.Sources.Patch
-    , Gogol.SecurityCenter.Organizations.Sources.SetIamPolicy
-    , Gogol.SecurityCenter.Organizations.Sources.TestIamPermissions
-    , Gogol.SecurityCenter.Organizations.UpdateOrganizationSettings
-    , Gogol.SecurityCenter.Types
+    Gogol.SecurityCenter
+    Gogol.SecurityCenter.Organizations.Assets.Group
+    Gogol.SecurityCenter.Organizations.Assets.List
+    Gogol.SecurityCenter.Organizations.Assets.RunDiscovery
+    Gogol.SecurityCenter.Organizations.Assets.UpdateSecurityMarks
+    Gogol.SecurityCenter.Organizations.GetOrganizationSettings
+    Gogol.SecurityCenter.Organizations.NotificationConfigs.Create
+    Gogol.SecurityCenter.Organizations.NotificationConfigs.Delete
+    Gogol.SecurityCenter.Organizations.NotificationConfigs.Get
+    Gogol.SecurityCenter.Organizations.NotificationConfigs.List
+    Gogol.SecurityCenter.Organizations.NotificationConfigs.Patch
+    Gogol.SecurityCenter.Organizations.Operations.Cancel
+    Gogol.SecurityCenter.Organizations.Operations.Delete
+    Gogol.SecurityCenter.Organizations.Operations.Get
+    Gogol.SecurityCenter.Organizations.Operations.List
+    Gogol.SecurityCenter.Organizations.Sources.Create
+    Gogol.SecurityCenter.Organizations.Sources.Findings.Create
+    Gogol.SecurityCenter.Organizations.Sources.Findings.Group
+    Gogol.SecurityCenter.Organizations.Sources.Findings.List
+    Gogol.SecurityCenter.Organizations.Sources.Findings.Patch
+    Gogol.SecurityCenter.Organizations.Sources.Findings.SetState
+    Gogol.SecurityCenter.Organizations.Sources.Findings.UpdateSecurityMarks
+    Gogol.SecurityCenter.Organizations.Sources.Get
+    Gogol.SecurityCenter.Organizations.Sources.GetIamPolicy
+    Gogol.SecurityCenter.Organizations.Sources.List
+    Gogol.SecurityCenter.Organizations.Sources.Patch
+    Gogol.SecurityCenter.Organizations.Sources.SetIamPolicy
+    Gogol.SecurityCenter.Organizations.Sources.TestIamPermissions
+    Gogol.SecurityCenter.Organizations.UpdateOrganizationSettings
+    Gogol.SecurityCenter.Types
 
   other-modules:
-      Gogol.SecurityCenter.Internal.Product
-    , Gogol.SecurityCenter.Internal.Sum
+    Gogol.SecurityCenter.Internal.Product
+    Gogol.SecurityCenter.Internal.Sum
 
-  build-depends:
-      gogol-core ^>= 1.0.0
+  build-depends:    gogol-core ^>=1.0.0

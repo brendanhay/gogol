@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.CloudIdentity.Groups.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,88 +27,88 @@
 --
 -- /See:/ <https://cloud.google.com/identity/ Cloud Identity API Reference> for @cloudidentity.groups.create@.
 module Gogol.CloudIdentity.Groups.Create
-    (
-    -- * Resource
-      CloudIdentityGroupsCreateResource
+  ( -- * Resource
+    CloudIdentityGroupsCreateResource,
 
     -- ** Constructing a Request
-    , CloudIdentityGroupsCreate (..)
-    , newCloudIdentityGroupsCreate
-    ) where
+    CloudIdentityGroupsCreate (..),
+    newCloudIdentityGroupsCreate,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.CloudIdentity.Types
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudidentity.groups.create@ method which the
 -- 'CloudIdentityGroupsCreate' request conforms to.
 type CloudIdentityGroupsCreateResource =
-     "v1" Core.:>
-       "groups" Core.:>
-         Core.QueryParam "$.xgafv" Xgafv Core.:>
-           Core.QueryParam "access_token" Core.Text Core.:>
-             Core.QueryParam "callback" Core.Text Core.:>
-               Core.QueryParam "initialGroupConfig"
-                 GroupsCreateInitialGroupConfig
-                 Core.:>
-                 Core.QueryParam "uploadType" Core.Text Core.:>
-                   Core.QueryParam "upload_protocol" Core.Text Core.:>
-                     Core.QueryParam "alt" Core.AltJSON Core.:>
-                       Core.ReqBody '[Core.JSON] Group Core.:>
-                         Core.Post '[Core.JSON] Operation
+  "v1"
+    Core.:> "groups"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "initialGroupConfig" GroupsCreateInitialGroupConfig
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] Group
+    Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Creates a Group.
 --
 -- /See:/ 'newCloudIdentityGroupsCreate' smart constructor.
 data CloudIdentityGroupsCreate = CloudIdentityGroupsCreate
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Optional. The initial configuration option for the @Group@.
-    , initialGroupConfig :: (Core.Maybe GroupsCreateInitialGroupConfig)
-      -- | Multipart request metadata.
-    , payload :: Group
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Optional. The initial configuration option for the @Group@.
+    initialGroupConfig :: (Core.Maybe GroupsCreateInitialGroupConfig),
+    -- | Multipart request metadata.
+    payload :: Group,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'CloudIdentityGroupsCreate' with the minimum fields required to make a request.
-newCloudIdentityGroupsCreate 
-    ::  Group
-       -- ^  Multipart request metadata. See 'payload'.
-    -> CloudIdentityGroupsCreate
+newCloudIdentityGroupsCreate ::
+  -- |  Multipart request metadata. See 'payload'.
+  Group ->
+  CloudIdentityGroupsCreate
 newCloudIdentityGroupsCreate payload =
   CloudIdentityGroupsCreate
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , initialGroupConfig = Core.Nothing
-    , payload = payload
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      initialGroupConfig = Core.Nothing,
+      payload = payload,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest CloudIdentityGroupsCreate
-         where
-        type Rs CloudIdentityGroupsCreate = Operation
-        type Scopes CloudIdentityGroupsCreate =
-             '[CloudIdentity'Groups, CloudPlatform'FullControl]
-        requestClient CloudIdentityGroupsCreate{..}
-          = go xgafv accessToken callback initialGroupConfig
-              uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              payload
-              cloudIdentityService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy CloudIdentityGroupsCreateResource)
-                      Core.mempty
-
+instance Core.GoogleRequest CloudIdentityGroupsCreate where
+  type Rs CloudIdentityGroupsCreate = Operation
+  type
+    Scopes CloudIdentityGroupsCreate =
+      '[CloudIdentity'Groups, CloudPlatform'FullControl]
+  requestClient CloudIdentityGroupsCreate {..} =
+    go
+      xgafv
+      accessToken
+      callback
+      initialGroupConfig
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      cloudIdentityService
+    where
+      go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy CloudIdentityGroupsCreateResource)
+          Core.mempty

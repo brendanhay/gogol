@@ -12,59 +12,19 @@ build-type:    Simple
 description:   Code generator for Gogol related Google SDKs
 
 common base
-  default-language:   Haskell2010
+  default-language:   GHC2021
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
     -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  default-extensions:
-    BinaryLiterals
-    ConstraintKinds
-    DataKinds
-    DefaultSignatures
-    DeriveFoldable
-    DeriveFunctor
-    DeriveGeneric
-    DeriveTraversable
-    DerivingStrategies
-    DerivingVia
-    DoAndIfThenElse
-    DuplicateRecordFields
-    EmptyDataDecls
-    ExistentialQuantification
-    ExplicitNamespaces
-    FlexibleContexts
-    FlexibleInstances
-    FunctionalDependencies
-    GADTs
-    GeneralizedNewtypeDeriving
-    InstanceSigs
-    KindSignatures
-    LambdaCase
-    MultiParamTypeClasses
-    MultiWayIf
-    NamedFieldPuns
-    NumericUnderscores
-    OverloadedLabels
-    OverloadedStrings
-    PartialTypeSignatures
-    PatternGuards
-    PatternSynonyms
-    PolyKinds
-    RankNTypes
-    RecordWildCards
-    ScopedTypeVariables
-    StandaloneDeriving
-    StrictData
-    TupleSections
-    TypeApplications
-    TypeFamilies
-    TypeOperators
-    TypeSynonymInstances
-    ViewPatterns
-
   build-depends:      base >=4.12
+  default-extensions:
+    FunctionalDependencies
+    LambdaCase
+    OverloadedStrings
+    RecordWildCards
+    ViewPatterns
 
 library
   import:          base
@@ -81,7 +41,6 @@ library
     , formatting
     , hashable
     , haskell-src-exts      ==1.23.1
-    , hindent
     , lens
     , mtl
     , pandoc

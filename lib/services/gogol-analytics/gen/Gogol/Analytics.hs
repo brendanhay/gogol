@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.Analytics
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,916 +27,916 @@
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference>
 module Gogol.Analytics
-    (
-    -- * Configuration
-      analyticsService
+  ( -- * Configuration
+    analyticsService,
 
     -- * OAuth Scopes
-    , Analytics'FullControl
-    , Analytics'Edit
-    , Analytics'Manage'Users
-    , Analytics'Manage'Users'Readonly
-    , Analytics'Provision
-    , Analytics'Readonly
-    , Analytics'User'Deletion
+    Analytics'FullControl,
+    Analytics'Edit,
+    Analytics'Manage'Users,
+    Analytics'Manage'Users'Readonly,
+    Analytics'Provision,
+    Analytics'Readonly,
+    Analytics'User'Deletion,
 
     -- * Resources
 
     -- ** analytics.data.ga.get
-    , AnalyticsDataGaGetResource
-    , AnalyticsDataGaGet (..)
-    , newAnalyticsDataGaGet
+    AnalyticsDataGaGetResource,
+    AnalyticsDataGaGet (..),
+    newAnalyticsDataGaGet,
 
     -- ** analytics.data.mcf.get
-    , AnalyticsDataMcfGetResource
-    , AnalyticsDataMcfGet (..)
-    , newAnalyticsDataMcfGet
+    AnalyticsDataMcfGetResource,
+    AnalyticsDataMcfGet (..),
+    newAnalyticsDataMcfGet,
 
     -- ** analytics.data.realtime.get
-    , AnalyticsDataRealtimeGetResource
-    , AnalyticsDataRealtimeGet (..)
-    , newAnalyticsDataRealtimeGet
+    AnalyticsDataRealtimeGetResource,
+    AnalyticsDataRealtimeGet (..),
+    newAnalyticsDataRealtimeGet,
 
     -- ** analytics.management.accountSummaries.list
-    , AnalyticsManagementAccountSummariesListResource
-    , AnalyticsManagementAccountSummariesList (..)
-    , newAnalyticsManagementAccountSummariesList
+    AnalyticsManagementAccountSummariesListResource,
+    AnalyticsManagementAccountSummariesList (..),
+    newAnalyticsManagementAccountSummariesList,
 
     -- ** analytics.management.accountUserLinks.delete
-    , AnalyticsManagementAccountUserLinksDeleteResource
-    , AnalyticsManagementAccountUserLinksDelete (..)
-    , newAnalyticsManagementAccountUserLinksDelete
+    AnalyticsManagementAccountUserLinksDeleteResource,
+    AnalyticsManagementAccountUserLinksDelete (..),
+    newAnalyticsManagementAccountUserLinksDelete,
 
     -- ** analytics.management.accountUserLinks.insert
-    , AnalyticsManagementAccountUserLinksInsertResource
-    , AnalyticsManagementAccountUserLinksInsert (..)
-    , newAnalyticsManagementAccountUserLinksInsert
+    AnalyticsManagementAccountUserLinksInsertResource,
+    AnalyticsManagementAccountUserLinksInsert (..),
+    newAnalyticsManagementAccountUserLinksInsert,
 
     -- ** analytics.management.accountUserLinks.list
-    , AnalyticsManagementAccountUserLinksListResource
-    , AnalyticsManagementAccountUserLinksList (..)
-    , newAnalyticsManagementAccountUserLinksList
+    AnalyticsManagementAccountUserLinksListResource,
+    AnalyticsManagementAccountUserLinksList (..),
+    newAnalyticsManagementAccountUserLinksList,
 
     -- ** analytics.management.accountUserLinks.update
-    , AnalyticsManagementAccountUserLinksUpdateResource
-    , AnalyticsManagementAccountUserLinksUpdate (..)
-    , newAnalyticsManagementAccountUserLinksUpdate
+    AnalyticsManagementAccountUserLinksUpdateResource,
+    AnalyticsManagementAccountUserLinksUpdate (..),
+    newAnalyticsManagementAccountUserLinksUpdate,
 
     -- ** analytics.management.accounts.list
-    , AnalyticsManagementAccountsListResource
-    , AnalyticsManagementAccountsList (..)
-    , newAnalyticsManagementAccountsList
+    AnalyticsManagementAccountsListResource,
+    AnalyticsManagementAccountsList (..),
+    newAnalyticsManagementAccountsList,
 
     -- ** analytics.management.clientId.hashClientId
-    , AnalyticsManagementClientIdHashClientIdResource
-    , AnalyticsManagementClientIdHashClientId (..)
-    , newAnalyticsManagementClientIdHashClientId
+    AnalyticsManagementClientIdHashClientIdResource,
+    AnalyticsManagementClientIdHashClientId (..),
+    newAnalyticsManagementClientIdHashClientId,
 
     -- ** analytics.management.customDataSources.list
-    , AnalyticsManagementCustomDataSourcesListResource
-    , AnalyticsManagementCustomDataSourcesList (..)
-    , newAnalyticsManagementCustomDataSourcesList
+    AnalyticsManagementCustomDataSourcesListResource,
+    AnalyticsManagementCustomDataSourcesList (..),
+    newAnalyticsManagementCustomDataSourcesList,
 
     -- ** analytics.management.customDimensions.get
-    , AnalyticsManagementCustomDimensionsGetResource
-    , AnalyticsManagementCustomDimensionsGet (..)
-    , newAnalyticsManagementCustomDimensionsGet
+    AnalyticsManagementCustomDimensionsGetResource,
+    AnalyticsManagementCustomDimensionsGet (..),
+    newAnalyticsManagementCustomDimensionsGet,
 
     -- ** analytics.management.customDimensions.insert
-    , AnalyticsManagementCustomDimensionsInsertResource
-    , AnalyticsManagementCustomDimensionsInsert (..)
-    , newAnalyticsManagementCustomDimensionsInsert
+    AnalyticsManagementCustomDimensionsInsertResource,
+    AnalyticsManagementCustomDimensionsInsert (..),
+    newAnalyticsManagementCustomDimensionsInsert,
 
     -- ** analytics.management.customDimensions.list
-    , AnalyticsManagementCustomDimensionsListResource
-    , AnalyticsManagementCustomDimensionsList (..)
-    , newAnalyticsManagementCustomDimensionsList
+    AnalyticsManagementCustomDimensionsListResource,
+    AnalyticsManagementCustomDimensionsList (..),
+    newAnalyticsManagementCustomDimensionsList,
 
     -- ** analytics.management.customDimensions.patch
-    , AnalyticsManagementCustomDimensionsPatchResource
-    , AnalyticsManagementCustomDimensionsPatch (..)
-    , newAnalyticsManagementCustomDimensionsPatch
+    AnalyticsManagementCustomDimensionsPatchResource,
+    AnalyticsManagementCustomDimensionsPatch (..),
+    newAnalyticsManagementCustomDimensionsPatch,
 
     -- ** analytics.management.customDimensions.update
-    , AnalyticsManagementCustomDimensionsUpdateResource
-    , AnalyticsManagementCustomDimensionsUpdate (..)
-    , newAnalyticsManagementCustomDimensionsUpdate
+    AnalyticsManagementCustomDimensionsUpdateResource,
+    AnalyticsManagementCustomDimensionsUpdate (..),
+    newAnalyticsManagementCustomDimensionsUpdate,
 
     -- ** analytics.management.customMetrics.get
-    , AnalyticsManagementCustomMetricsGetResource
-    , AnalyticsManagementCustomMetricsGet (..)
-    , newAnalyticsManagementCustomMetricsGet
+    AnalyticsManagementCustomMetricsGetResource,
+    AnalyticsManagementCustomMetricsGet (..),
+    newAnalyticsManagementCustomMetricsGet,
 
     -- ** analytics.management.customMetrics.insert
-    , AnalyticsManagementCustomMetricsInsertResource
-    , AnalyticsManagementCustomMetricsInsert (..)
-    , newAnalyticsManagementCustomMetricsInsert
+    AnalyticsManagementCustomMetricsInsertResource,
+    AnalyticsManagementCustomMetricsInsert (..),
+    newAnalyticsManagementCustomMetricsInsert,
 
     -- ** analytics.management.customMetrics.list
-    , AnalyticsManagementCustomMetricsListResource
-    , AnalyticsManagementCustomMetricsList (..)
-    , newAnalyticsManagementCustomMetricsList
+    AnalyticsManagementCustomMetricsListResource,
+    AnalyticsManagementCustomMetricsList (..),
+    newAnalyticsManagementCustomMetricsList,
 
     -- ** analytics.management.customMetrics.patch
-    , AnalyticsManagementCustomMetricsPatchResource
-    , AnalyticsManagementCustomMetricsPatch (..)
-    , newAnalyticsManagementCustomMetricsPatch
+    AnalyticsManagementCustomMetricsPatchResource,
+    AnalyticsManagementCustomMetricsPatch (..),
+    newAnalyticsManagementCustomMetricsPatch,
 
     -- ** analytics.management.customMetrics.update
-    , AnalyticsManagementCustomMetricsUpdateResource
-    , AnalyticsManagementCustomMetricsUpdate (..)
-    , newAnalyticsManagementCustomMetricsUpdate
+    AnalyticsManagementCustomMetricsUpdateResource,
+    AnalyticsManagementCustomMetricsUpdate (..),
+    newAnalyticsManagementCustomMetricsUpdate,
 
     -- ** analytics.management.experiments.delete
-    , AnalyticsManagementExperimentsDeleteResource
-    , AnalyticsManagementExperimentsDelete (..)
-    , newAnalyticsManagementExperimentsDelete
+    AnalyticsManagementExperimentsDeleteResource,
+    AnalyticsManagementExperimentsDelete (..),
+    newAnalyticsManagementExperimentsDelete,
 
     -- ** analytics.management.experiments.get
-    , AnalyticsManagementExperimentsGetResource
-    , AnalyticsManagementExperimentsGet (..)
-    , newAnalyticsManagementExperimentsGet
+    AnalyticsManagementExperimentsGetResource,
+    AnalyticsManagementExperimentsGet (..),
+    newAnalyticsManagementExperimentsGet,
 
     -- ** analytics.management.experiments.insert
-    , AnalyticsManagementExperimentsInsertResource
-    , AnalyticsManagementExperimentsInsert (..)
-    , newAnalyticsManagementExperimentsInsert
+    AnalyticsManagementExperimentsInsertResource,
+    AnalyticsManagementExperimentsInsert (..),
+    newAnalyticsManagementExperimentsInsert,
 
     -- ** analytics.management.experiments.list
-    , AnalyticsManagementExperimentsListResource
-    , AnalyticsManagementExperimentsList (..)
-    , newAnalyticsManagementExperimentsList
+    AnalyticsManagementExperimentsListResource,
+    AnalyticsManagementExperimentsList (..),
+    newAnalyticsManagementExperimentsList,
 
     -- ** analytics.management.experiments.patch
-    , AnalyticsManagementExperimentsPatchResource
-    , AnalyticsManagementExperimentsPatch (..)
-    , newAnalyticsManagementExperimentsPatch
+    AnalyticsManagementExperimentsPatchResource,
+    AnalyticsManagementExperimentsPatch (..),
+    newAnalyticsManagementExperimentsPatch,
 
     -- ** analytics.management.experiments.update
-    , AnalyticsManagementExperimentsUpdateResource
-    , AnalyticsManagementExperimentsUpdate (..)
-    , newAnalyticsManagementExperimentsUpdate
+    AnalyticsManagementExperimentsUpdateResource,
+    AnalyticsManagementExperimentsUpdate (..),
+    newAnalyticsManagementExperimentsUpdate,
 
     -- ** analytics.management.filters.delete
-    , AnalyticsManagementFiltersDeleteResource
-    , AnalyticsManagementFiltersDelete (..)
-    , newAnalyticsManagementFiltersDelete
+    AnalyticsManagementFiltersDeleteResource,
+    AnalyticsManagementFiltersDelete (..),
+    newAnalyticsManagementFiltersDelete,
 
     -- ** analytics.management.filters.get
-    , AnalyticsManagementFiltersGetResource
-    , AnalyticsManagementFiltersGet (..)
-    , newAnalyticsManagementFiltersGet
+    AnalyticsManagementFiltersGetResource,
+    AnalyticsManagementFiltersGet (..),
+    newAnalyticsManagementFiltersGet,
 
     -- ** analytics.management.filters.insert
-    , AnalyticsManagementFiltersInsertResource
-    , AnalyticsManagementFiltersInsert (..)
-    , newAnalyticsManagementFiltersInsert
+    AnalyticsManagementFiltersInsertResource,
+    AnalyticsManagementFiltersInsert (..),
+    newAnalyticsManagementFiltersInsert,
 
     -- ** analytics.management.filters.list
-    , AnalyticsManagementFiltersListResource
-    , AnalyticsManagementFiltersList (..)
-    , newAnalyticsManagementFiltersList
+    AnalyticsManagementFiltersListResource,
+    AnalyticsManagementFiltersList (..),
+    newAnalyticsManagementFiltersList,
 
     -- ** analytics.management.filters.patch
-    , AnalyticsManagementFiltersPatchResource
-    , AnalyticsManagementFiltersPatch (..)
-    , newAnalyticsManagementFiltersPatch
+    AnalyticsManagementFiltersPatchResource,
+    AnalyticsManagementFiltersPatch (..),
+    newAnalyticsManagementFiltersPatch,
 
     -- ** analytics.management.filters.update
-    , AnalyticsManagementFiltersUpdateResource
-    , AnalyticsManagementFiltersUpdate (..)
-    , newAnalyticsManagementFiltersUpdate
+    AnalyticsManagementFiltersUpdateResource,
+    AnalyticsManagementFiltersUpdate (..),
+    newAnalyticsManagementFiltersUpdate,
 
     -- ** analytics.management.goals.get
-    , AnalyticsManagementGoalsGetResource
-    , AnalyticsManagementGoalsGet (..)
-    , newAnalyticsManagementGoalsGet
+    AnalyticsManagementGoalsGetResource,
+    AnalyticsManagementGoalsGet (..),
+    newAnalyticsManagementGoalsGet,
 
     -- ** analytics.management.goals.insert
-    , AnalyticsManagementGoalsInsertResource
-    , AnalyticsManagementGoalsInsert (..)
-    , newAnalyticsManagementGoalsInsert
+    AnalyticsManagementGoalsInsertResource,
+    AnalyticsManagementGoalsInsert (..),
+    newAnalyticsManagementGoalsInsert,
 
     -- ** analytics.management.goals.list
-    , AnalyticsManagementGoalsListResource
-    , AnalyticsManagementGoalsList (..)
-    , newAnalyticsManagementGoalsList
+    AnalyticsManagementGoalsListResource,
+    AnalyticsManagementGoalsList (..),
+    newAnalyticsManagementGoalsList,
 
     -- ** analytics.management.goals.patch
-    , AnalyticsManagementGoalsPatchResource
-    , AnalyticsManagementGoalsPatch (..)
-    , newAnalyticsManagementGoalsPatch
+    AnalyticsManagementGoalsPatchResource,
+    AnalyticsManagementGoalsPatch (..),
+    newAnalyticsManagementGoalsPatch,
 
     -- ** analytics.management.goals.update
-    , AnalyticsManagementGoalsUpdateResource
-    , AnalyticsManagementGoalsUpdate (..)
-    , newAnalyticsManagementGoalsUpdate
+    AnalyticsManagementGoalsUpdateResource,
+    AnalyticsManagementGoalsUpdate (..),
+    newAnalyticsManagementGoalsUpdate,
 
     -- ** analytics.management.profileFilterLinks.delete
-    , AnalyticsManagementProfileFilterLinksDeleteResource
-    , AnalyticsManagementProfileFilterLinksDelete (..)
-    , newAnalyticsManagementProfileFilterLinksDelete
+    AnalyticsManagementProfileFilterLinksDeleteResource,
+    AnalyticsManagementProfileFilterLinksDelete (..),
+    newAnalyticsManagementProfileFilterLinksDelete,
 
     -- ** analytics.management.profileFilterLinks.get
-    , AnalyticsManagementProfileFilterLinksGetResource
-    , AnalyticsManagementProfileFilterLinksGet (..)
-    , newAnalyticsManagementProfileFilterLinksGet
+    AnalyticsManagementProfileFilterLinksGetResource,
+    AnalyticsManagementProfileFilterLinksGet (..),
+    newAnalyticsManagementProfileFilterLinksGet,
 
     -- ** analytics.management.profileFilterLinks.insert
-    , AnalyticsManagementProfileFilterLinksInsertResource
-    , AnalyticsManagementProfileFilterLinksInsert (..)
-    , newAnalyticsManagementProfileFilterLinksInsert
+    AnalyticsManagementProfileFilterLinksInsertResource,
+    AnalyticsManagementProfileFilterLinksInsert (..),
+    newAnalyticsManagementProfileFilterLinksInsert,
 
     -- ** analytics.management.profileFilterLinks.list
-    , AnalyticsManagementProfileFilterLinksListResource
-    , AnalyticsManagementProfileFilterLinksList (..)
-    , newAnalyticsManagementProfileFilterLinksList
+    AnalyticsManagementProfileFilterLinksListResource,
+    AnalyticsManagementProfileFilterLinksList (..),
+    newAnalyticsManagementProfileFilterLinksList,
 
     -- ** analytics.management.profileFilterLinks.patch
-    , AnalyticsManagementProfileFilterLinksPatchResource
-    , AnalyticsManagementProfileFilterLinksPatch (..)
-    , newAnalyticsManagementProfileFilterLinksPatch
+    AnalyticsManagementProfileFilterLinksPatchResource,
+    AnalyticsManagementProfileFilterLinksPatch (..),
+    newAnalyticsManagementProfileFilterLinksPatch,
 
     -- ** analytics.management.profileFilterLinks.update
-    , AnalyticsManagementProfileFilterLinksUpdateResource
-    , AnalyticsManagementProfileFilterLinksUpdate (..)
-    , newAnalyticsManagementProfileFilterLinksUpdate
+    AnalyticsManagementProfileFilterLinksUpdateResource,
+    AnalyticsManagementProfileFilterLinksUpdate (..),
+    newAnalyticsManagementProfileFilterLinksUpdate,
 
     -- ** analytics.management.profileUserLinks.delete
-    , AnalyticsManagementProfileUserLinksDeleteResource
-    , AnalyticsManagementProfileUserLinksDelete (..)
-    , newAnalyticsManagementProfileUserLinksDelete
+    AnalyticsManagementProfileUserLinksDeleteResource,
+    AnalyticsManagementProfileUserLinksDelete (..),
+    newAnalyticsManagementProfileUserLinksDelete,
 
     -- ** analytics.management.profileUserLinks.insert
-    , AnalyticsManagementProfileUserLinksInsertResource
-    , AnalyticsManagementProfileUserLinksInsert (..)
-    , newAnalyticsManagementProfileUserLinksInsert
+    AnalyticsManagementProfileUserLinksInsertResource,
+    AnalyticsManagementProfileUserLinksInsert (..),
+    newAnalyticsManagementProfileUserLinksInsert,
 
     -- ** analytics.management.profileUserLinks.list
-    , AnalyticsManagementProfileUserLinksListResource
-    , AnalyticsManagementProfileUserLinksList (..)
-    , newAnalyticsManagementProfileUserLinksList
+    AnalyticsManagementProfileUserLinksListResource,
+    AnalyticsManagementProfileUserLinksList (..),
+    newAnalyticsManagementProfileUserLinksList,
 
     -- ** analytics.management.profileUserLinks.update
-    , AnalyticsManagementProfileUserLinksUpdateResource
-    , AnalyticsManagementProfileUserLinksUpdate (..)
-    , newAnalyticsManagementProfileUserLinksUpdate
+    AnalyticsManagementProfileUserLinksUpdateResource,
+    AnalyticsManagementProfileUserLinksUpdate (..),
+    newAnalyticsManagementProfileUserLinksUpdate,
 
     -- ** analytics.management.profiles.delete
-    , AnalyticsManagementProfilesDeleteResource
-    , AnalyticsManagementProfilesDelete (..)
-    , newAnalyticsManagementProfilesDelete
+    AnalyticsManagementProfilesDeleteResource,
+    AnalyticsManagementProfilesDelete (..),
+    newAnalyticsManagementProfilesDelete,
 
     -- ** analytics.management.profiles.get
-    , AnalyticsManagementProfilesGetResource
-    , AnalyticsManagementProfilesGet (..)
-    , newAnalyticsManagementProfilesGet
+    AnalyticsManagementProfilesGetResource,
+    AnalyticsManagementProfilesGet (..),
+    newAnalyticsManagementProfilesGet,
 
     -- ** analytics.management.profiles.insert
-    , AnalyticsManagementProfilesInsertResource
-    , AnalyticsManagementProfilesInsert (..)
-    , newAnalyticsManagementProfilesInsert
+    AnalyticsManagementProfilesInsertResource,
+    AnalyticsManagementProfilesInsert (..),
+    newAnalyticsManagementProfilesInsert,
 
     -- ** analytics.management.profiles.list
-    , AnalyticsManagementProfilesListResource
-    , AnalyticsManagementProfilesList (..)
-    , newAnalyticsManagementProfilesList
+    AnalyticsManagementProfilesListResource,
+    AnalyticsManagementProfilesList (..),
+    newAnalyticsManagementProfilesList,
 
     -- ** analytics.management.profiles.patch
-    , AnalyticsManagementProfilesPatchResource
-    , AnalyticsManagementProfilesPatch (..)
-    , newAnalyticsManagementProfilesPatch
+    AnalyticsManagementProfilesPatchResource,
+    AnalyticsManagementProfilesPatch (..),
+    newAnalyticsManagementProfilesPatch,
 
     -- ** analytics.management.profiles.update
-    , AnalyticsManagementProfilesUpdateResource
-    , AnalyticsManagementProfilesUpdate (..)
-    , newAnalyticsManagementProfilesUpdate
+    AnalyticsManagementProfilesUpdateResource,
+    AnalyticsManagementProfilesUpdate (..),
+    newAnalyticsManagementProfilesUpdate,
 
     -- ** analytics.management.remarketingAudience.delete
-    , AnalyticsManagementRemarketingAudienceDeleteResource
-    , AnalyticsManagementRemarketingAudienceDelete (..)
-    , newAnalyticsManagementRemarketingAudienceDelete
+    AnalyticsManagementRemarketingAudienceDeleteResource,
+    AnalyticsManagementRemarketingAudienceDelete (..),
+    newAnalyticsManagementRemarketingAudienceDelete,
 
     -- ** analytics.management.remarketingAudience.get
-    , AnalyticsManagementRemarketingAudienceGetResource
-    , AnalyticsManagementRemarketingAudienceGet (..)
-    , newAnalyticsManagementRemarketingAudienceGet
+    AnalyticsManagementRemarketingAudienceGetResource,
+    AnalyticsManagementRemarketingAudienceGet (..),
+    newAnalyticsManagementRemarketingAudienceGet,
 
     -- ** analytics.management.remarketingAudience.insert
-    , AnalyticsManagementRemarketingAudienceInsertResource
-    , AnalyticsManagementRemarketingAudienceInsert (..)
-    , newAnalyticsManagementRemarketingAudienceInsert
+    AnalyticsManagementRemarketingAudienceInsertResource,
+    AnalyticsManagementRemarketingAudienceInsert (..),
+    newAnalyticsManagementRemarketingAudienceInsert,
 
     -- ** analytics.management.remarketingAudience.list
-    , AnalyticsManagementRemarketingAudienceListResource
-    , AnalyticsManagementRemarketingAudienceList (..)
-    , newAnalyticsManagementRemarketingAudienceList
+    AnalyticsManagementRemarketingAudienceListResource,
+    AnalyticsManagementRemarketingAudienceList (..),
+    newAnalyticsManagementRemarketingAudienceList,
 
     -- ** analytics.management.remarketingAudience.patch
-    , AnalyticsManagementRemarketingAudiencePatchResource
-    , AnalyticsManagementRemarketingAudiencePatch (..)
-    , newAnalyticsManagementRemarketingAudiencePatch
+    AnalyticsManagementRemarketingAudiencePatchResource,
+    AnalyticsManagementRemarketingAudiencePatch (..),
+    newAnalyticsManagementRemarketingAudiencePatch,
 
     -- ** analytics.management.remarketingAudience.update
-    , AnalyticsManagementRemarketingAudienceUpdateResource
-    , AnalyticsManagementRemarketingAudienceUpdate (..)
-    , newAnalyticsManagementRemarketingAudienceUpdate
+    AnalyticsManagementRemarketingAudienceUpdateResource,
+    AnalyticsManagementRemarketingAudienceUpdate (..),
+    newAnalyticsManagementRemarketingAudienceUpdate,
 
     -- ** analytics.management.segments.list
-    , AnalyticsManagementSegmentsListResource
-    , AnalyticsManagementSegmentsList (..)
-    , newAnalyticsManagementSegmentsList
+    AnalyticsManagementSegmentsListResource,
+    AnalyticsManagementSegmentsList (..),
+    newAnalyticsManagementSegmentsList,
 
     -- ** analytics.management.unsampledReports.delete
-    , AnalyticsManagementUnsampledReportsDeleteResource
-    , AnalyticsManagementUnsampledReportsDelete (..)
-    , newAnalyticsManagementUnsampledReportsDelete
+    AnalyticsManagementUnsampledReportsDeleteResource,
+    AnalyticsManagementUnsampledReportsDelete (..),
+    newAnalyticsManagementUnsampledReportsDelete,
 
     -- ** analytics.management.unsampledReports.get
-    , AnalyticsManagementUnsampledReportsGetResource
-    , AnalyticsManagementUnsampledReportsGet (..)
-    , newAnalyticsManagementUnsampledReportsGet
+    AnalyticsManagementUnsampledReportsGetResource,
+    AnalyticsManagementUnsampledReportsGet (..),
+    newAnalyticsManagementUnsampledReportsGet,
 
     -- ** analytics.management.unsampledReports.insert
-    , AnalyticsManagementUnsampledReportsInsertResource
-    , AnalyticsManagementUnsampledReportsInsert (..)
-    , newAnalyticsManagementUnsampledReportsInsert
+    AnalyticsManagementUnsampledReportsInsertResource,
+    AnalyticsManagementUnsampledReportsInsert (..),
+    newAnalyticsManagementUnsampledReportsInsert,
 
     -- ** analytics.management.unsampledReports.list
-    , AnalyticsManagementUnsampledReportsListResource
-    , AnalyticsManagementUnsampledReportsList (..)
-    , newAnalyticsManagementUnsampledReportsList
+    AnalyticsManagementUnsampledReportsListResource,
+    AnalyticsManagementUnsampledReportsList (..),
+    newAnalyticsManagementUnsampledReportsList,
 
     -- ** analytics.management.uploads.deleteUploadData
-    , AnalyticsManagementUploadsDeleteUploadDataResource
-    , AnalyticsManagementUploadsDeleteUploadData (..)
-    , newAnalyticsManagementUploadsDeleteUploadData
+    AnalyticsManagementUploadsDeleteUploadDataResource,
+    AnalyticsManagementUploadsDeleteUploadData (..),
+    newAnalyticsManagementUploadsDeleteUploadData,
 
     -- ** analytics.management.uploads.get
-    , AnalyticsManagementUploadsGetResource
-    , AnalyticsManagementUploadsGet (..)
-    , newAnalyticsManagementUploadsGet
+    AnalyticsManagementUploadsGetResource,
+    AnalyticsManagementUploadsGet (..),
+    newAnalyticsManagementUploadsGet,
 
     -- ** analytics.management.uploads.list
-    , AnalyticsManagementUploadsListResource
-    , AnalyticsManagementUploadsList (..)
-    , newAnalyticsManagementUploadsList
+    AnalyticsManagementUploadsListResource,
+    AnalyticsManagementUploadsList (..),
+    newAnalyticsManagementUploadsList,
 
     -- ** analytics.management.uploads.uploadData
-    , AnalyticsManagementUploadsUploadDataResource
-    , AnalyticsManagementUploadsUploadData (..)
-    , newAnalyticsManagementUploadsUploadData
+    AnalyticsManagementUploadsUploadDataResource,
+    AnalyticsManagementUploadsUploadData (..),
+    newAnalyticsManagementUploadsUploadData,
 
     -- ** analytics.management.webPropertyAdWordsLinks.delete
-    , AnalyticsManagementWebPropertyAdWordsLinksDeleteResource
-    , AnalyticsManagementWebPropertyAdWordsLinksDelete (..)
-    , newAnalyticsManagementWebPropertyAdWordsLinksDelete
+    AnalyticsManagementWebPropertyAdWordsLinksDeleteResource,
+    AnalyticsManagementWebPropertyAdWordsLinksDelete (..),
+    newAnalyticsManagementWebPropertyAdWordsLinksDelete,
 
     -- ** analytics.management.webPropertyAdWordsLinks.get
-    , AnalyticsManagementWebPropertyAdWordsLinksGetResource
-    , AnalyticsManagementWebPropertyAdWordsLinksGet (..)
-    , newAnalyticsManagementWebPropertyAdWordsLinksGet
+    AnalyticsManagementWebPropertyAdWordsLinksGetResource,
+    AnalyticsManagementWebPropertyAdWordsLinksGet (..),
+    newAnalyticsManagementWebPropertyAdWordsLinksGet,
 
     -- ** analytics.management.webPropertyAdWordsLinks.insert
-    , AnalyticsManagementWebPropertyAdWordsLinksInsertResource
-    , AnalyticsManagementWebPropertyAdWordsLinksInsert (..)
-    , newAnalyticsManagementWebPropertyAdWordsLinksInsert
+    AnalyticsManagementWebPropertyAdWordsLinksInsertResource,
+    AnalyticsManagementWebPropertyAdWordsLinksInsert (..),
+    newAnalyticsManagementWebPropertyAdWordsLinksInsert,
 
     -- ** analytics.management.webPropertyAdWordsLinks.list
-    , AnalyticsManagementWebPropertyAdWordsLinksListResource
-    , AnalyticsManagementWebPropertyAdWordsLinksList (..)
-    , newAnalyticsManagementWebPropertyAdWordsLinksList
+    AnalyticsManagementWebPropertyAdWordsLinksListResource,
+    AnalyticsManagementWebPropertyAdWordsLinksList (..),
+    newAnalyticsManagementWebPropertyAdWordsLinksList,
 
     -- ** analytics.management.webPropertyAdWordsLinks.patch
-    , AnalyticsManagementWebPropertyAdWordsLinksPatchResource
-    , AnalyticsManagementWebPropertyAdWordsLinksPatch (..)
-    , newAnalyticsManagementWebPropertyAdWordsLinksPatch
+    AnalyticsManagementWebPropertyAdWordsLinksPatchResource,
+    AnalyticsManagementWebPropertyAdWordsLinksPatch (..),
+    newAnalyticsManagementWebPropertyAdWordsLinksPatch,
 
     -- ** analytics.management.webPropertyAdWordsLinks.update
-    , AnalyticsManagementWebPropertyAdWordsLinksUpdateResource
-    , AnalyticsManagementWebPropertyAdWordsLinksUpdate (..)
-    , newAnalyticsManagementWebPropertyAdWordsLinksUpdate
+    AnalyticsManagementWebPropertyAdWordsLinksUpdateResource,
+    AnalyticsManagementWebPropertyAdWordsLinksUpdate (..),
+    newAnalyticsManagementWebPropertyAdWordsLinksUpdate,
 
     -- ** analytics.management.webproperties.get
-    , AnalyticsManagementWebpropertiesGetResource
-    , AnalyticsManagementWebpropertiesGet (..)
-    , newAnalyticsManagementWebpropertiesGet
+    AnalyticsManagementWebpropertiesGetResource,
+    AnalyticsManagementWebpropertiesGet (..),
+    newAnalyticsManagementWebpropertiesGet,
 
     -- ** analytics.management.webproperties.insert
-    , AnalyticsManagementWebpropertiesInsertResource
-    , AnalyticsManagementWebpropertiesInsert (..)
-    , newAnalyticsManagementWebpropertiesInsert
+    AnalyticsManagementWebpropertiesInsertResource,
+    AnalyticsManagementWebpropertiesInsert (..),
+    newAnalyticsManagementWebpropertiesInsert,
 
     -- ** analytics.management.webproperties.list
-    , AnalyticsManagementWebpropertiesListResource
-    , AnalyticsManagementWebpropertiesList (..)
-    , newAnalyticsManagementWebpropertiesList
+    AnalyticsManagementWebpropertiesListResource,
+    AnalyticsManagementWebpropertiesList (..),
+    newAnalyticsManagementWebpropertiesList,
 
     -- ** analytics.management.webproperties.patch
-    , AnalyticsManagementWebpropertiesPatchResource
-    , AnalyticsManagementWebpropertiesPatch (..)
-    , newAnalyticsManagementWebpropertiesPatch
+    AnalyticsManagementWebpropertiesPatchResource,
+    AnalyticsManagementWebpropertiesPatch (..),
+    newAnalyticsManagementWebpropertiesPatch,
 
     -- ** analytics.management.webproperties.update
-    , AnalyticsManagementWebpropertiesUpdateResource
-    , AnalyticsManagementWebpropertiesUpdate (..)
-    , newAnalyticsManagementWebpropertiesUpdate
+    AnalyticsManagementWebpropertiesUpdateResource,
+    AnalyticsManagementWebpropertiesUpdate (..),
+    newAnalyticsManagementWebpropertiesUpdate,
 
     -- ** analytics.management.webpropertyUserLinks.delete
-    , AnalyticsManagementWebpropertyUserLinksDeleteResource
-    , AnalyticsManagementWebpropertyUserLinksDelete (..)
-    , newAnalyticsManagementWebpropertyUserLinksDelete
+    AnalyticsManagementWebpropertyUserLinksDeleteResource,
+    AnalyticsManagementWebpropertyUserLinksDelete (..),
+    newAnalyticsManagementWebpropertyUserLinksDelete,
 
     -- ** analytics.management.webpropertyUserLinks.insert
-    , AnalyticsManagementWebpropertyUserLinksInsertResource
-    , AnalyticsManagementWebpropertyUserLinksInsert (..)
-    , newAnalyticsManagementWebpropertyUserLinksInsert
+    AnalyticsManagementWebpropertyUserLinksInsertResource,
+    AnalyticsManagementWebpropertyUserLinksInsert (..),
+    newAnalyticsManagementWebpropertyUserLinksInsert,
 
     -- ** analytics.management.webpropertyUserLinks.list
-    , AnalyticsManagementWebpropertyUserLinksListResource
-    , AnalyticsManagementWebpropertyUserLinksList (..)
-    , newAnalyticsManagementWebpropertyUserLinksList
+    AnalyticsManagementWebpropertyUserLinksListResource,
+    AnalyticsManagementWebpropertyUserLinksList (..),
+    newAnalyticsManagementWebpropertyUserLinksList,
 
     -- ** analytics.management.webpropertyUserLinks.update
-    , AnalyticsManagementWebpropertyUserLinksUpdateResource
-    , AnalyticsManagementWebpropertyUserLinksUpdate (..)
-    , newAnalyticsManagementWebpropertyUserLinksUpdate
+    AnalyticsManagementWebpropertyUserLinksUpdateResource,
+    AnalyticsManagementWebpropertyUserLinksUpdate (..),
+    newAnalyticsManagementWebpropertyUserLinksUpdate,
 
     -- ** analytics.metadata.columns.list
-    , AnalyticsMetadataColumnsListResource
-    , AnalyticsMetadataColumnsList (..)
-    , newAnalyticsMetadataColumnsList
+    AnalyticsMetadataColumnsListResource,
+    AnalyticsMetadataColumnsList (..),
+    newAnalyticsMetadataColumnsList,
 
     -- ** analytics.provisioning.createAccountTicket
-    , AnalyticsProvisioningCreateAccountTicketResource
-    , AnalyticsProvisioningCreateAccountTicket (..)
-    , newAnalyticsProvisioningCreateAccountTicket
+    AnalyticsProvisioningCreateAccountTicketResource,
+    AnalyticsProvisioningCreateAccountTicket (..),
+    newAnalyticsProvisioningCreateAccountTicket,
 
     -- ** analytics.provisioning.createAccountTree
-    , AnalyticsProvisioningCreateAccountTreeResource
-    , AnalyticsProvisioningCreateAccountTree (..)
-    , newAnalyticsProvisioningCreateAccountTree
+    AnalyticsProvisioningCreateAccountTreeResource,
+    AnalyticsProvisioningCreateAccountTree (..),
+    newAnalyticsProvisioningCreateAccountTree,
 
     -- ** analytics.userDeletion.userDeletionRequest.upsert
-    , AnalyticsUserDeletionUserDeletionRequestUpsertResource
-    , AnalyticsUserDeletionUserDeletionRequestUpsert (..)
-    , newAnalyticsUserDeletionUserDeletionRequestUpsert
+    AnalyticsUserDeletionUserDeletionRequestUpsertResource,
+    AnalyticsUserDeletionUserDeletionRequestUpsert (..),
+    newAnalyticsUserDeletionUserDeletionRequestUpsert,
 
     -- * Types
 
     -- ** Account
-    , Account (..)
-    , newAccount
+    Account (..),
+    newAccount,
 
     -- ** Account_ChildLink
-    , Account_ChildLink (..)
-    , newAccount_ChildLink
+    Account_ChildLink (..),
+    newAccount_ChildLink,
 
     -- ** Account_Permissions
-    , Account_Permissions (..)
-    , newAccount_Permissions
+    Account_Permissions (..),
+    newAccount_Permissions,
 
     -- ** AccountRef
-    , AccountRef (..)
-    , newAccountRef
+    AccountRef (..),
+    newAccountRef,
 
     -- ** AccountSummaries
-    , AccountSummaries (..)
-    , newAccountSummaries
+    AccountSummaries (..),
+    newAccountSummaries,
 
     -- ** AccountSummary
-    , AccountSummary (..)
-    , newAccountSummary
+    AccountSummary (..),
+    newAccountSummary,
 
     -- ** AccountTicket
-    , AccountTicket (..)
-    , newAccountTicket
+    AccountTicket (..),
+    newAccountTicket,
 
     -- ** AccountTreeRequest
-    , AccountTreeRequest (..)
-    , newAccountTreeRequest
+    AccountTreeRequest (..),
+    newAccountTreeRequest,
 
     -- ** AccountTreeResponse
-    , AccountTreeResponse (..)
-    , newAccountTreeResponse
+    AccountTreeResponse (..),
+    newAccountTreeResponse,
 
     -- ** Accounts
-    , Accounts (..)
-    , newAccounts
+    Accounts (..),
+    newAccounts,
 
     -- ** AdWordsAccount
-    , AdWordsAccount (..)
-    , newAdWordsAccount
+    AdWordsAccount (..),
+    newAdWordsAccount,
 
     -- ** AnalyticsDataimportDeleteUploadDataRequest
-    , AnalyticsDataimportDeleteUploadDataRequest (..)
-    , newAnalyticsDataimportDeleteUploadDataRequest
+    AnalyticsDataimportDeleteUploadDataRequest (..),
+    newAnalyticsDataimportDeleteUploadDataRequest,
 
     -- ** Column
-    , Column (..)
-    , newColumn
+    Column (..),
+    newColumn,
 
     -- ** Column_Attributes
-    , Column_Attributes (..)
-    , newColumn_Attributes
+    Column_Attributes (..),
+    newColumn_Attributes,
 
     -- ** Columns
-    , Columns (..)
-    , newColumns
+    Columns (..),
+    newColumns,
 
     -- ** CustomDataSource
-    , CustomDataSource (..)
-    , newCustomDataSource
+    CustomDataSource (..),
+    newCustomDataSource,
 
     -- ** CustomDataSource_ChildLink
-    , CustomDataSource_ChildLink (..)
-    , newCustomDataSource_ChildLink
+    CustomDataSource_ChildLink (..),
+    newCustomDataSource_ChildLink,
 
     -- ** CustomDataSource_ParentLink
-    , CustomDataSource_ParentLink (..)
-    , newCustomDataSource_ParentLink
+    CustomDataSource_ParentLink (..),
+    newCustomDataSource_ParentLink,
 
     -- ** CustomDataSources
-    , CustomDataSources (..)
-    , newCustomDataSources
+    CustomDataSources (..),
+    newCustomDataSources,
 
     -- ** CustomDimension
-    , CustomDimension (..)
-    , newCustomDimension
+    CustomDimension (..),
+    newCustomDimension,
 
     -- ** CustomDimension_ParentLink
-    , CustomDimension_ParentLink (..)
-    , newCustomDimension_ParentLink
+    CustomDimension_ParentLink (..),
+    newCustomDimension_ParentLink,
 
     -- ** CustomDimensions
-    , CustomDimensions (..)
-    , newCustomDimensions
+    CustomDimensions (..),
+    newCustomDimensions,
 
     -- ** CustomMetric
-    , CustomMetric (..)
-    , newCustomMetric
+    CustomMetric (..),
+    newCustomMetric,
 
     -- ** CustomMetric_ParentLink
-    , CustomMetric_ParentLink (..)
-    , newCustomMetric_ParentLink
+    CustomMetric_ParentLink (..),
+    newCustomMetric_ParentLink,
 
     -- ** CustomMetrics
-    , CustomMetrics (..)
-    , newCustomMetrics
+    CustomMetrics (..),
+    newCustomMetrics,
 
     -- ** EntityAdWordsLink
-    , EntityAdWordsLink (..)
-    , newEntityAdWordsLink
+    EntityAdWordsLink (..),
+    newEntityAdWordsLink,
 
     -- ** EntityAdWordsLink_Entity
-    , EntityAdWordsLink_Entity (..)
-    , newEntityAdWordsLink_Entity
+    EntityAdWordsLink_Entity (..),
+    newEntityAdWordsLink_Entity,
 
     -- ** EntityAdWordsLinks
-    , EntityAdWordsLinks (..)
-    , newEntityAdWordsLinks
+    EntityAdWordsLinks (..),
+    newEntityAdWordsLinks,
 
     -- ** EntityUserLink
-    , EntityUserLink (..)
-    , newEntityUserLink
+    EntityUserLink (..),
+    newEntityUserLink,
 
     -- ** EntityUserLink_Entity
-    , EntityUserLink_Entity (..)
-    , newEntityUserLink_Entity
+    EntityUserLink_Entity (..),
+    newEntityUserLink_Entity,
 
     -- ** EntityUserLink_Permissions
-    , EntityUserLink_Permissions (..)
-    , newEntityUserLink_Permissions
+    EntityUserLink_Permissions (..),
+    newEntityUserLink_Permissions,
 
     -- ** EntityUserLinks
-    , EntityUserLinks (..)
-    , newEntityUserLinks
+    EntityUserLinks (..),
+    newEntityUserLinks,
 
     -- ** Experiment
-    , Experiment (..)
-    , newExperiment
+    Experiment (..),
+    newExperiment,
 
     -- ** Experiment_ParentLink
-    , Experiment_ParentLink (..)
-    , newExperiment_ParentLink
+    Experiment_ParentLink (..),
+    newExperiment_ParentLink,
 
     -- ** Experiment_VariationsItem
-    , Experiment_VariationsItem (..)
-    , newExperiment_VariationsItem
+    Experiment_VariationsItem (..),
+    newExperiment_VariationsItem,
 
     -- ** Experiments
-    , Experiments (..)
-    , newExperiments
+    Experiments (..),
+    newExperiments,
 
     -- ** Filter
-    , Filter (..)
-    , newFilter
+    Filter (..),
+    newFilter,
 
     -- ** Filter_AdvancedDetails
-    , Filter_AdvancedDetails (..)
-    , newFilter_AdvancedDetails
+    Filter_AdvancedDetails (..),
+    newFilter_AdvancedDetails,
 
     -- ** Filter_LowercaseDetails
-    , Filter_LowercaseDetails (..)
-    , newFilter_LowercaseDetails
+    Filter_LowercaseDetails (..),
+    newFilter_LowercaseDetails,
 
     -- ** Filter_ParentLink
-    , Filter_ParentLink (..)
-    , newFilter_ParentLink
+    Filter_ParentLink (..),
+    newFilter_ParentLink,
 
     -- ** Filter_SearchAndReplaceDetails
-    , Filter_SearchAndReplaceDetails (..)
-    , newFilter_SearchAndReplaceDetails
+    Filter_SearchAndReplaceDetails (..),
+    newFilter_SearchAndReplaceDetails,
 
     -- ** Filter_UppercaseDetails
-    , Filter_UppercaseDetails (..)
-    , newFilter_UppercaseDetails
+    Filter_UppercaseDetails (..),
+    newFilter_UppercaseDetails,
 
     -- ** FilterExpression
-    , FilterExpression (..)
-    , newFilterExpression
+    FilterExpression (..),
+    newFilterExpression,
 
     -- ** FilterRef
-    , FilterRef (..)
-    , newFilterRef
+    FilterRef (..),
+    newFilterRef,
 
     -- ** Filters
-    , Filters (..)
-    , newFilters
+    Filters (..),
+    newFilters,
 
     -- ** GaData
-    , GaData (..)
-    , newGaData
+    GaData (..),
+    newGaData,
 
     -- ** GaData_ColumnHeadersItem
-    , GaData_ColumnHeadersItem (..)
-    , newGaData_ColumnHeadersItem
+    GaData_ColumnHeadersItem (..),
+    newGaData_ColumnHeadersItem,
 
     -- ** GaData_DataTable
-    , GaData_DataTable (..)
-    , newGaData_DataTable
+    GaData_DataTable (..),
+    newGaData_DataTable,
 
     -- ** GaData_DataTable_ColsItem
-    , GaData_DataTable_ColsItem (..)
-    , newGaData_DataTable_ColsItem
+    GaData_DataTable_ColsItem (..),
+    newGaData_DataTable_ColsItem,
 
     -- ** GaData_DataTable_RowsItem
-    , GaData_DataTable_RowsItem (..)
-    , newGaData_DataTable_RowsItem
+    GaData_DataTable_RowsItem (..),
+    newGaData_DataTable_RowsItem,
 
     -- ** GaData_DataTable_RowsItem_CItem
-    , GaData_DataTable_RowsItem_CItem (..)
-    , newGaData_DataTable_RowsItem_CItem
+    GaData_DataTable_RowsItem_CItem (..),
+    newGaData_DataTable_RowsItem_CItem,
 
     -- ** GaData_ProfileInfo
-    , GaData_ProfileInfo (..)
-    , newGaData_ProfileInfo
+    GaData_ProfileInfo (..),
+    newGaData_ProfileInfo,
 
     -- ** GaData_Query
-    , GaData_Query (..)
-    , newGaData_Query
+    GaData_Query (..),
+    newGaData_Query,
 
     -- ** GaData_TotalsForAllResults
-    , GaData_TotalsForAllResults (..)
-    , newGaData_TotalsForAllResults
+    GaData_TotalsForAllResults (..),
+    newGaData_TotalsForAllResults,
 
     -- ** Goal
-    , Goal (..)
-    , newGoal
+    Goal (..),
+    newGoal,
 
     -- ** Goal_EventDetails
-    , Goal_EventDetails (..)
-    , newGoal_EventDetails
+    Goal_EventDetails (..),
+    newGoal_EventDetails,
 
     -- ** Goal_EventDetails_EventConditionsItem
-    , Goal_EventDetails_EventConditionsItem (..)
-    , newGoal_EventDetails_EventConditionsItem
+    Goal_EventDetails_EventConditionsItem (..),
+    newGoal_EventDetails_EventConditionsItem,
 
     -- ** Goal_ParentLink
-    , Goal_ParentLink (..)
-    , newGoal_ParentLink
+    Goal_ParentLink (..),
+    newGoal_ParentLink,
 
     -- ** Goal_UrlDestinationDetails
-    , Goal_UrlDestinationDetails (..)
-    , newGoal_UrlDestinationDetails
+    Goal_UrlDestinationDetails (..),
+    newGoal_UrlDestinationDetails,
 
     -- ** Goal_UrlDestinationDetails_StepsItem
-    , Goal_UrlDestinationDetails_StepsItem (..)
-    , newGoal_UrlDestinationDetails_StepsItem
+    Goal_UrlDestinationDetails_StepsItem (..),
+    newGoal_UrlDestinationDetails_StepsItem,
 
     -- ** Goal_VisitNumPagesDetails
-    , Goal_VisitNumPagesDetails (..)
-    , newGoal_VisitNumPagesDetails
+    Goal_VisitNumPagesDetails (..),
+    newGoal_VisitNumPagesDetails,
 
     -- ** Goal_VisitTimeOnSiteDetails
-    , Goal_VisitTimeOnSiteDetails (..)
-    , newGoal_VisitTimeOnSiteDetails
+    Goal_VisitTimeOnSiteDetails (..),
+    newGoal_VisitTimeOnSiteDetails,
 
     -- ** Goals
-    , Goals (..)
-    , newGoals
+    Goals (..),
+    newGoals,
 
     -- ** HashClientIdRequest
-    , HashClientIdRequest (..)
-    , newHashClientIdRequest
+    HashClientIdRequest (..),
+    newHashClientIdRequest,
 
     -- ** HashClientIdResponse
-    , HashClientIdResponse (..)
-    , newHashClientIdResponse
+    HashClientIdResponse (..),
+    newHashClientIdResponse,
 
     -- ** IncludeConditions
-    , IncludeConditions (..)
-    , newIncludeConditions
+    IncludeConditions (..),
+    newIncludeConditions,
 
     -- ** LinkedForeignAccount
-    , LinkedForeignAccount (..)
-    , newLinkedForeignAccount
+    LinkedForeignAccount (..),
+    newLinkedForeignAccount,
 
     -- ** McfData
-    , McfData (..)
-    , newMcfData
+    McfData (..),
+    newMcfData,
 
     -- ** McfData_ColumnHeadersItem
-    , McfData_ColumnHeadersItem (..)
-    , newMcfData_ColumnHeadersItem
+    McfData_ColumnHeadersItem (..),
+    newMcfData_ColumnHeadersItem,
 
     -- ** McfData_ProfileInfo
-    , McfData_ProfileInfo (..)
-    , newMcfData_ProfileInfo
+    McfData_ProfileInfo (..),
+    newMcfData_ProfileInfo,
 
     -- ** McfData_Query
-    , McfData_Query (..)
-    , newMcfData_Query
+    McfData_Query (..),
+    newMcfData_Query,
 
     -- ** McfData_RowsItemItem
-    , McfData_RowsItemItem (..)
-    , newMcfData_RowsItemItem
+    McfData_RowsItemItem (..),
+    newMcfData_RowsItemItem,
 
     -- ** McfData_RowsItemItem_ConversionPathValueItem
-    , McfData_RowsItemItem_ConversionPathValueItem (..)
-    , newMcfData_RowsItemItem_ConversionPathValueItem
+    McfData_RowsItemItem_ConversionPathValueItem (..),
+    newMcfData_RowsItemItem_ConversionPathValueItem,
 
     -- ** McfData_TotalsForAllResults
-    , McfData_TotalsForAllResults (..)
-    , newMcfData_TotalsForAllResults
+    McfData_TotalsForAllResults (..),
+    newMcfData_TotalsForAllResults,
 
     -- ** Profile
-    , Profile (..)
-    , newProfile
+    Profile (..),
+    newProfile,
 
     -- ** Profile_ChildLink
-    , Profile_ChildLink (..)
-    , newProfile_ChildLink
+    Profile_ChildLink (..),
+    newProfile_ChildLink,
 
     -- ** Profile_ParentLink
-    , Profile_ParentLink (..)
-    , newProfile_ParentLink
+    Profile_ParentLink (..),
+    newProfile_ParentLink,
 
     -- ** Profile_Permissions
-    , Profile_Permissions (..)
-    , newProfile_Permissions
+    Profile_Permissions (..),
+    newProfile_Permissions,
 
     -- ** ProfileFilterLink
-    , ProfileFilterLink (..)
-    , newProfileFilterLink
+    ProfileFilterLink (..),
+    newProfileFilterLink,
 
     -- ** ProfileFilterLinks
-    , ProfileFilterLinks (..)
-    , newProfileFilterLinks
+    ProfileFilterLinks (..),
+    newProfileFilterLinks,
 
     -- ** ProfileRef
-    , ProfileRef (..)
-    , newProfileRef
+    ProfileRef (..),
+    newProfileRef,
 
     -- ** ProfileSummary
-    , ProfileSummary (..)
-    , newProfileSummary
+    ProfileSummary (..),
+    newProfileSummary,
 
     -- ** Profiles
-    , Profiles (..)
-    , newProfiles
+    Profiles (..),
+    newProfiles,
 
     -- ** RealtimeData
-    , RealtimeData (..)
-    , newRealtimeData
+    RealtimeData (..),
+    newRealtimeData,
 
     -- ** RealtimeData_ColumnHeadersItem
-    , RealtimeData_ColumnHeadersItem (..)
-    , newRealtimeData_ColumnHeadersItem
+    RealtimeData_ColumnHeadersItem (..),
+    newRealtimeData_ColumnHeadersItem,
 
     -- ** RealtimeData_ProfileInfo
-    , RealtimeData_ProfileInfo (..)
-    , newRealtimeData_ProfileInfo
+    RealtimeData_ProfileInfo (..),
+    newRealtimeData_ProfileInfo,
 
     -- ** RealtimeData_Query
-    , RealtimeData_Query (..)
-    , newRealtimeData_Query
+    RealtimeData_Query (..),
+    newRealtimeData_Query,
 
     -- ** RealtimeData_TotalsForAllResults
-    , RealtimeData_TotalsForAllResults (..)
-    , newRealtimeData_TotalsForAllResults
+    RealtimeData_TotalsForAllResults (..),
+    newRealtimeData_TotalsForAllResults,
 
     -- ** RemarketingAudience
-    , RemarketingAudience (..)
-    , newRemarketingAudience
+    RemarketingAudience (..),
+    newRemarketingAudience,
 
     -- ** RemarketingAudience_AudienceDefinition
-    , RemarketingAudience_AudienceDefinition (..)
-    , newRemarketingAudience_AudienceDefinition
+    RemarketingAudience_AudienceDefinition (..),
+    newRemarketingAudience_AudienceDefinition,
 
     -- ** RemarketingAudience_StateBasedAudienceDefinition
-    , RemarketingAudience_StateBasedAudienceDefinition (..)
-    , newRemarketingAudience_StateBasedAudienceDefinition
+    RemarketingAudience_StateBasedAudienceDefinition (..),
+    newRemarketingAudience_StateBasedAudienceDefinition,
 
     -- ** RemarketingAudience_StateBasedAudienceDefinition_ExcludeConditions
-    , RemarketingAudience_StateBasedAudienceDefinition_ExcludeConditions (..)
-    , newRemarketingAudience_StateBasedAudienceDefinition_ExcludeConditions
+    RemarketingAudience_StateBasedAudienceDefinition_ExcludeConditions (..),
+    newRemarketingAudience_StateBasedAudienceDefinition_ExcludeConditions,
 
     -- ** RemarketingAudiences
-    , RemarketingAudiences (..)
-    , newRemarketingAudiences
+    RemarketingAudiences (..),
+    newRemarketingAudiences,
 
     -- ** Segment
-    , Segment (..)
-    , newSegment
+    Segment (..),
+    newSegment,
 
     -- ** Segments
-    , Segments (..)
-    , newSegments
+    Segments (..),
+    newSegments,
 
     -- ** UnsampledReport
-    , UnsampledReport (..)
-    , newUnsampledReport
+    UnsampledReport (..),
+    newUnsampledReport,
 
     -- ** UnsampledReport_CloudStorageDownloadDetails
-    , UnsampledReport_CloudStorageDownloadDetails (..)
-    , newUnsampledReport_CloudStorageDownloadDetails
+    UnsampledReport_CloudStorageDownloadDetails (..),
+    newUnsampledReport_CloudStorageDownloadDetails,
 
     -- ** UnsampledReport_DriveDownloadDetails
-    , UnsampledReport_DriveDownloadDetails (..)
-    , newUnsampledReport_DriveDownloadDetails
+    UnsampledReport_DriveDownloadDetails (..),
+    newUnsampledReport_DriveDownloadDetails,
 
     -- ** UnsampledReports
-    , UnsampledReports (..)
-    , newUnsampledReports
+    UnsampledReports (..),
+    newUnsampledReports,
 
     -- ** Upload
-    , Upload (..)
-    , newUpload
+    Upload (..),
+    newUpload,
 
     -- ** Uploads
-    , Uploads (..)
-    , newUploads
+    Uploads (..),
+    newUploads,
 
     -- ** UserDeletionRequest
-    , UserDeletionRequest (..)
-    , newUserDeletionRequest
+    UserDeletionRequest (..),
+    newUserDeletionRequest,
 
     -- ** UserDeletionRequest_Id
-    , UserDeletionRequest_Id (..)
-    , newUserDeletionRequest_Id
+    UserDeletionRequest_Id (..),
+    newUserDeletionRequest_Id,
 
     -- ** UserRef
-    , UserRef (..)
-    , newUserRef
+    UserRef (..),
+    newUserRef,
 
     -- ** WebPropertyRef
-    , WebPropertyRef (..)
-    , newWebPropertyRef
+    WebPropertyRef (..),
+    newWebPropertyRef,
 
     -- ** WebPropertySummary
-    , WebPropertySummary (..)
-    , newWebPropertySummary
+    WebPropertySummary (..),
+    newWebPropertySummary,
 
     -- ** Webproperties
-    , Webproperties (..)
-    , newWebproperties
+    Webproperties (..),
+    newWebproperties,
 
     -- ** Webproperty
-    , Webproperty (..)
-    , newWebproperty
+    Webproperty (..),
+    newWebproperty,
 
     -- ** Webproperty_ChildLink
-    , Webproperty_ChildLink (..)
-    , newWebproperty_ChildLink
+    Webproperty_ChildLink (..),
+    newWebproperty_ChildLink,
 
     -- ** Webproperty_ParentLink
-    , Webproperty_ParentLink (..)
-    , newWebproperty_ParentLink
+    Webproperty_ParentLink (..),
+    newWebproperty_ParentLink,
 
     -- ** Webproperty_Permissions
-    , Webproperty_Permissions (..)
-    , newWebproperty_Permissions
+    Webproperty_Permissions (..),
+    newWebproperty_Permissions,
 
     -- ** DataGaGetOutput
-    , DataGaGetOutput (..)
+    DataGaGetOutput (..),
 
     -- ** DataGaGetSamplingLevel
-    , DataGaGetSamplingLevel (..)
+    DataGaGetSamplingLevel (..),
 
     -- ** DataMcfGetSamplingLevel
-    , DataMcfGetSamplingLevel (..)
-    ) where
+    DataMcfGetSamplingLevel (..),
+  )
+where
 
 import Gogol.Analytics.Data.Ga.Get
 import Gogol.Analytics.Data.Mcf.Get

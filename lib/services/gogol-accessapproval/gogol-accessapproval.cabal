@@ -1,19 +1,24 @@
-cabal-version:         2.2
-name:                  gogol-accessapproval
-version:               1.0.0
-synopsis:              Google Access Approval SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-accessapproval
+version:            1.0.0
+synopsis:           Google Access Approval SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:
+  Brendan Hay <brendan.g.hay+gogol@gmail.com>, Toni Cebrián <toni@tonicebrian.com>
+
+copyright:          Copyright (c) 2015-2025 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    An API for controlling access to data by Google personnel.
+  An API for controlling access to data by Google personnel.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -27,59 +32,56 @@ source-repository head
   subdir:   gogol-accessapproval
 
 flag field-selectors
-  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-  default: False
-  manual: True
+  description:
+    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+
+  default:     False
+  manual:      True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: GHC2021
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -Werror
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if !flag(field-selectors) && impl(ghc >= 9.2)
+  if (!flag(field-selectors) && impl(ghc >=9.2))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.AccessApproval
-    , Gogol.AccessApproval.Folders.ApprovalRequests.Approve
-    , Gogol.AccessApproval.Folders.ApprovalRequests.Dismiss
-    , Gogol.AccessApproval.Folders.ApprovalRequests.Get
-    , Gogol.AccessApproval.Folders.ApprovalRequests.Invalidate
-    , Gogol.AccessApproval.Folders.ApprovalRequests.List
-    , Gogol.AccessApproval.Folders.DeleteAccessApprovalSettings
-    , Gogol.AccessApproval.Folders.GetAccessApprovalSettings
-    , Gogol.AccessApproval.Folders.GetServiceAccount
-    , Gogol.AccessApproval.Folders.UpdateAccessApprovalSettings
-    , Gogol.AccessApproval.Organizations.ApprovalRequests.Approve
-    , Gogol.AccessApproval.Organizations.ApprovalRequests.Dismiss
-    , Gogol.AccessApproval.Organizations.ApprovalRequests.Get
-    , Gogol.AccessApproval.Organizations.ApprovalRequests.Invalidate
-    , Gogol.AccessApproval.Organizations.ApprovalRequests.List
-    , Gogol.AccessApproval.Organizations.DeleteAccessApprovalSettings
-    , Gogol.AccessApproval.Organizations.GetAccessApprovalSettings
-    , Gogol.AccessApproval.Organizations.GetServiceAccount
-    , Gogol.AccessApproval.Organizations.UpdateAccessApprovalSettings
-    , Gogol.AccessApproval.Projects.ApprovalRequests.Approve
-    , Gogol.AccessApproval.Projects.ApprovalRequests.Dismiss
-    , Gogol.AccessApproval.Projects.ApprovalRequests.Get
-    , Gogol.AccessApproval.Projects.ApprovalRequests.Invalidate
-    , Gogol.AccessApproval.Projects.ApprovalRequests.List
-    , Gogol.AccessApproval.Projects.DeleteAccessApprovalSettings
-    , Gogol.AccessApproval.Projects.GetAccessApprovalSettings
-    , Gogol.AccessApproval.Projects.GetServiceAccount
-    , Gogol.AccessApproval.Projects.UpdateAccessApprovalSettings
-    , Gogol.AccessApproval.Types
+    Gogol.AccessApproval
+    Gogol.AccessApproval.Folders.ApprovalRequests.Approve
+    Gogol.AccessApproval.Folders.ApprovalRequests.Dismiss
+    Gogol.AccessApproval.Folders.ApprovalRequests.Get
+    Gogol.AccessApproval.Folders.ApprovalRequests.Invalidate
+    Gogol.AccessApproval.Folders.ApprovalRequests.List
+    Gogol.AccessApproval.Folders.DeleteAccessApprovalSettings
+    Gogol.AccessApproval.Folders.GetAccessApprovalSettings
+    Gogol.AccessApproval.Folders.GetServiceAccount
+    Gogol.AccessApproval.Folders.UpdateAccessApprovalSettings
+    Gogol.AccessApproval.Organizations.ApprovalRequests.Approve
+    Gogol.AccessApproval.Organizations.ApprovalRequests.Dismiss
+    Gogol.AccessApproval.Organizations.ApprovalRequests.Get
+    Gogol.AccessApproval.Organizations.ApprovalRequests.Invalidate
+    Gogol.AccessApproval.Organizations.ApprovalRequests.List
+    Gogol.AccessApproval.Organizations.DeleteAccessApprovalSettings
+    Gogol.AccessApproval.Organizations.GetAccessApprovalSettings
+    Gogol.AccessApproval.Organizations.GetServiceAccount
+    Gogol.AccessApproval.Organizations.UpdateAccessApprovalSettings
+    Gogol.AccessApproval.Projects.ApprovalRequests.Approve
+    Gogol.AccessApproval.Projects.ApprovalRequests.Dismiss
+    Gogol.AccessApproval.Projects.ApprovalRequests.Get
+    Gogol.AccessApproval.Projects.ApprovalRequests.Invalidate
+    Gogol.AccessApproval.Projects.ApprovalRequests.List
+    Gogol.AccessApproval.Projects.DeleteAccessApprovalSettings
+    Gogol.AccessApproval.Projects.GetAccessApprovalSettings
+    Gogol.AccessApproval.Projects.GetServiceAccount
+    Gogol.AccessApproval.Projects.UpdateAccessApprovalSettings
+    Gogol.AccessApproval.Types
 
   other-modules:
-      Gogol.AccessApproval.Internal.Product
-    , Gogol.AccessApproval.Internal.Sum
+    Gogol.AccessApproval.Internal.Product
+    Gogol.AccessApproval.Internal.Sum
 
-  build-depends:
-      gogol-core ^>= 1.0.0
+  build-depends:    gogol-core ^>=1.0.0

@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.AppsActivity
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,81 +27,81 @@
 --
 -- /See:/ <https://developers.google.com/google-apps/activity/ Drive Activity API Reference>
 module Gogol.AppsActivity
-    (
-    -- * Configuration
-      appsActivityService
+  ( -- * Configuration
+    appsActivityService,
 
     -- * OAuth Scopes
-    , Activity'FullControl
+    Activity'FullControl,
 
     -- * Resources
 
     -- ** appsactivity.activities.list
-    , AppsActivityActivitiesListResource
-    , AppsActivityActivitiesList (..)
-    , newAppsActivityActivitiesList
+    AppsActivityActivitiesListResource,
+    AppsActivityActivitiesList (..),
+    newAppsActivityActivitiesList,
 
     -- * Types
 
     -- ** Activity
-    , Activity (..)
-    , newActivity
+    Activity (..),
+    newActivity,
 
     -- ** Event
-    , Event (..)
-    , newEvent
+    Event (..),
+    newEvent,
 
     -- ** Event_AdditionalEventTypesItem
-    , Event_AdditionalEventTypesItem (..)
+    Event_AdditionalEventTypesItem (..),
 
     -- ** Event_PrimaryEventType
-    , Event_PrimaryEventType (..)
+    Event_PrimaryEventType (..),
 
     -- ** ListActivitiesResponse
-    , ListActivitiesResponse (..)
-    , newListActivitiesResponse
+    ListActivitiesResponse (..),
+    newListActivitiesResponse,
 
     -- ** Move
-    , Move (..)
-    , newMove
+    Move (..),
+    newMove,
 
     -- ** Parent
-    , Parent (..)
-    , newParent
+    Parent (..),
+    newParent,
 
     -- ** Permission
-    , Permission (..)
-    , newPermission
+    Permission (..),
+    newPermission,
 
     -- ** Permission_Role
-    , Permission_Role (..)
+    Permission_Role (..),
 
     -- ** Permission_Type
-    , Permission_Type (..)
+    Permission_Type (..),
 
     -- ** PermissionChange
-    , PermissionChange (..)
-    , newPermissionChange
+    PermissionChange (..),
+    newPermissionChange,
 
     -- ** Photo
-    , Photo (..)
-    , newPhoto
+    Photo (..),
+    newPhoto,
 
     -- ** Rename
-    , Rename (..)
-    , newRename
+    Rename (..),
+    newRename,
 
     -- ** Target
-    , Target (..)
-    , newTarget
+    Target (..),
+    newTarget,
 
     -- ** User
-    , User (..)
-    , newUser
+    User (..),
+    newUser,
 
     -- ** ActivitiesListGroupingStrategy
-    , ActivitiesListGroupingStrategy (..)
-    ) where
+    ActivitiesListGroupingStrategy (..),
+  )
+where
 
 import Gogol.AppsActivity.Activities.List
 import Gogol.AppsActivity.Types

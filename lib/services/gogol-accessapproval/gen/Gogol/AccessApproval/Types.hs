@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,112 +16,113 @@
 
 -- |
 -- Module      : Gogol.AccessApproval.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.AccessApproval.Types
-    (
-    -- * Configuration
-      accessApprovalService
+  ( -- * Configuration
+    accessApprovalService,
 
     -- * OAuth Scopes
-    , CloudPlatform'FullControl
+    CloudPlatform'FullControl,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AccessApprovalServiceAccount
-    , AccessApprovalServiceAccount (..)
-    , newAccessApprovalServiceAccount
+    AccessApprovalServiceAccount (..),
+    newAccessApprovalServiceAccount,
 
     -- ** AccessApprovalSettings
-    , AccessApprovalSettings (..)
-    , newAccessApprovalSettings
+    AccessApprovalSettings (..),
+    newAccessApprovalSettings,
 
     -- ** AccessApprovalSettings_RequestScopeMaxWidthPreference
-    , AccessApprovalSettings_RequestScopeMaxWidthPreference (..)
+    AccessApprovalSettings_RequestScopeMaxWidthPreference (..),
 
     -- ** AccessLocations
-    , AccessLocations (..)
-    , newAccessLocations
+    AccessLocations (..),
+    newAccessLocations,
 
     -- ** AccessReason
-    , AccessReason (..)
-    , newAccessReason
+    AccessReason (..),
+    newAccessReason,
 
     -- ** AccessReason_Type
-    , AccessReason_Type (..)
+    AccessReason_Type (..),
 
     -- ** ApprovalRequest
-    , ApprovalRequest (..)
-    , newApprovalRequest
+    ApprovalRequest (..),
+    newApprovalRequest,
 
     -- ** ApproveApprovalRequestMessage
-    , ApproveApprovalRequestMessage (..)
-    , newApproveApprovalRequestMessage
+    ApproveApprovalRequestMessage (..),
+    newApproveApprovalRequestMessage,
 
     -- ** ApproveDecision
-    , ApproveDecision (..)
-    , newApproveDecision
+    ApproveDecision (..),
+    newApproveDecision,
 
     -- ** AugmentedInfo
-    , AugmentedInfo (..)
-    , newAugmentedInfo
+    AugmentedInfo (..),
+    newAugmentedInfo,
 
     -- ** DismissApprovalRequestMessage
-    , DismissApprovalRequestMessage (..)
-    , newDismissApprovalRequestMessage
+    DismissApprovalRequestMessage (..),
+    newDismissApprovalRequestMessage,
 
     -- ** DismissDecision
-    , DismissDecision (..)
-    , newDismissDecision
+    DismissDecision (..),
+    newDismissDecision,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** EnrolledService
-    , EnrolledService (..)
-    , newEnrolledService
+    EnrolledService (..),
+    newEnrolledService,
 
     -- ** EnrolledService_EnrollmentLevel
-    , EnrolledService_EnrollmentLevel (..)
+    EnrolledService_EnrollmentLevel (..),
 
     -- ** InvalidateApprovalRequestMessage
-    , InvalidateApprovalRequestMessage (..)
-    , newInvalidateApprovalRequestMessage
+    InvalidateApprovalRequestMessage (..),
+    newInvalidateApprovalRequestMessage,
 
     -- ** ListApprovalRequestsResponse
-    , ListApprovalRequestsResponse (..)
-    , newListApprovalRequestsResponse
+    ListApprovalRequestsResponse (..),
+    newListApprovalRequestsResponse,
 
     -- ** ResourceProperties
-    , ResourceProperties (..)
-    , newResourceProperties
+    ResourceProperties (..),
+    newResourceProperties,
 
     -- ** SignatureInfo
-    , SignatureInfo (..)
-    , newSignatureInfo
+    SignatureInfo (..),
+    newSignatureInfo,
 
     -- ** SignatureInfo_GoogleKeyAlgorithm
-    , SignatureInfo_GoogleKeyAlgorithm (..)
-    ) where
+    SignatureInfo_GoogleKeyAlgorithm (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.AccessApproval.Internal.Product
 import Gogol.AccessApproval.Internal.Sum
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Access Approval API. This contains the host and root path used as a starting point for constructing service requests.
 accessApprovalService :: Core.ServiceConfig
-accessApprovalService
-  = Core.defaultService
-      (Core.ServiceId "accessapproval:v1")
-      "accessapproval.googleapis.com"
+accessApprovalService =
+  Core.defaultService
+    (Core.ServiceId "accessapproval:v1")
+    "accessapproval.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"

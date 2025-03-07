@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,223 +16,226 @@
 
 -- |
 -- Module      : Gogol.BigQueryDataTransfer.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.BigQueryDataTransfer.Types
-    (
-    -- * Configuration
-      bigQueryDataTransferService
+  ( -- * Configuration
+    bigQueryDataTransferService,
 
     -- * OAuth Scopes
-    , Bigquery'FullControl
-    , CloudPlatform'FullControl
-    , CloudPlatform'ReadOnly
+    Bigquery'FullControl,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** CheckValidCredsRequest
-    , CheckValidCredsRequest (..)
-    , newCheckValidCredsRequest
+    CheckValidCredsRequest (..),
+    newCheckValidCredsRequest,
 
     -- ** CheckValidCredsResponse
-    , CheckValidCredsResponse (..)
-    , newCheckValidCredsResponse
+    CheckValidCredsResponse (..),
+    newCheckValidCredsResponse,
 
     -- ** DataSource
-    , DataSource (..)
-    , newDataSource
+    DataSource (..),
+    newDataSource,
 
     -- ** DataSource_AuthorizationType
-    , DataSource_AuthorizationType (..)
+    DataSource_AuthorizationType (..),
 
     -- ** DataSource_DataRefreshType
-    , DataSource_DataRefreshType (..)
+    DataSource_DataRefreshType (..),
 
     -- ** DataSource_TransferType
-    , DataSource_TransferType (..)
+    DataSource_TransferType (..),
 
     -- ** DataSourceParameter
-    , DataSourceParameter (..)
-    , newDataSourceParameter
+    DataSourceParameter (..),
+    newDataSourceParameter,
 
     -- ** DataSourceParameter_Type
-    , DataSourceParameter_Type (..)
+    DataSourceParameter_Type (..),
 
     -- ** EmailPreferences
-    , EmailPreferences (..)
-    , newEmailPreferences
+    EmailPreferences (..),
+    newEmailPreferences,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** EncryptionConfiguration
-    , EncryptionConfiguration (..)
-    , newEncryptionConfiguration
+    EncryptionConfiguration (..),
+    newEncryptionConfiguration,
 
     -- ** EnrollDataSourcesRequest
-    , EnrollDataSourcesRequest (..)
-    , newEnrollDataSourcesRequest
+    EnrollDataSourcesRequest (..),
+    newEnrollDataSourcesRequest,
 
     -- ** EventDrivenSchedule
-    , EventDrivenSchedule (..)
-    , newEventDrivenSchedule
+    EventDrivenSchedule (..),
+    newEventDrivenSchedule,
 
     -- ** ListDataSourcesResponse
-    , ListDataSourcesResponse (..)
-    , newListDataSourcesResponse
+    ListDataSourcesResponse (..),
+    newListDataSourcesResponse,
 
     -- ** ListLocationsResponse
-    , ListLocationsResponse (..)
-    , newListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
 
     -- ** ListTransferConfigsResponse
-    , ListTransferConfigsResponse (..)
-    , newListTransferConfigsResponse
+    ListTransferConfigsResponse (..),
+    newListTransferConfigsResponse,
 
     -- ** ListTransferLogsResponse
-    , ListTransferLogsResponse (..)
-    , newListTransferLogsResponse
+    ListTransferLogsResponse (..),
+    newListTransferLogsResponse,
 
     -- ** ListTransferRunsResponse
-    , ListTransferRunsResponse (..)
-    , newListTransferRunsResponse
+    ListTransferRunsResponse (..),
+    newListTransferRunsResponse,
 
     -- ** Location
-    , Location (..)
-    , newLocation
+    Location (..),
+    newLocation,
 
     -- ** Location_Labels
-    , Location_Labels (..)
-    , newLocation_Labels
+    Location_Labels (..),
+    newLocation_Labels,
 
     -- ** Location_Metadata
-    , Location_Metadata (..)
-    , newLocation_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
 
     -- ** ManualSchedule
-    , ManualSchedule (..)
-    , newManualSchedule
+    ManualSchedule (..),
+    newManualSchedule,
 
     -- ** ScheduleOptions
-    , ScheduleOptions (..)
-    , newScheduleOptions
+    ScheduleOptions (..),
+    newScheduleOptions,
 
     -- ** ScheduleOptionsV2
-    , ScheduleOptionsV2 (..)
-    , newScheduleOptionsV2
+    ScheduleOptionsV2 (..),
+    newScheduleOptionsV2,
 
     -- ** ScheduleTransferRunsRequest
-    , ScheduleTransferRunsRequest (..)
-    , newScheduleTransferRunsRequest
+    ScheduleTransferRunsRequest (..),
+    newScheduleTransferRunsRequest,
 
     -- ** ScheduleTransferRunsResponse
-    , ScheduleTransferRunsResponse (..)
-    , newScheduleTransferRunsResponse
+    ScheduleTransferRunsResponse (..),
+    newScheduleTransferRunsResponse,
 
     -- ** StartManualTransferRunsRequest
-    , StartManualTransferRunsRequest (..)
-    , newStartManualTransferRunsRequest
+    StartManualTransferRunsRequest (..),
+    newStartManualTransferRunsRequest,
 
     -- ** StartManualTransferRunsResponse
-    , StartManualTransferRunsResponse (..)
-    , newStartManualTransferRunsResponse
+    StartManualTransferRunsResponse (..),
+    newStartManualTransferRunsResponse,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** TimeBasedSchedule
-    , TimeBasedSchedule (..)
-    , newTimeBasedSchedule
+    TimeBasedSchedule (..),
+    newTimeBasedSchedule,
 
     -- ** TimeRange
-    , TimeRange (..)
-    , newTimeRange
+    TimeRange (..),
+    newTimeRange,
 
     -- ** TransferConfig
-    , TransferConfig (..)
-    , newTransferConfig
+    TransferConfig (..),
+    newTransferConfig,
 
     -- ** TransferConfig_Params
-    , TransferConfig_Params (..)
-    , newTransferConfig_Params
+    TransferConfig_Params (..),
+    newTransferConfig_Params,
 
     -- ** TransferConfig_State
-    , TransferConfig_State (..)
+    TransferConfig_State (..),
 
     -- ** TransferMessage
-    , TransferMessage (..)
-    , newTransferMessage
+    TransferMessage (..),
+    newTransferMessage,
 
     -- ** TransferMessage_Severity
-    , TransferMessage_Severity (..)
+    TransferMessage_Severity (..),
 
     -- ** TransferRun
-    , TransferRun (..)
-    , newTransferRun
+    TransferRun (..),
+    newTransferRun,
 
     -- ** TransferRun_Params
-    , TransferRun_Params (..)
-    , newTransferRun_Params
+    TransferRun_Params (..),
+    newTransferRun_Params,
 
     -- ** TransferRun_State
-    , TransferRun_State (..)
+    TransferRun_State (..),
 
     -- ** UnenrollDataSourcesRequest
-    , UnenrollDataSourcesRequest (..)
-    , newUnenrollDataSourcesRequest
+    UnenrollDataSourcesRequest (..),
+    newUnenrollDataSourcesRequest,
 
     -- ** UserInfo
-    , UserInfo (..)
-    , newUserInfo
+    UserInfo (..),
+    newUserInfo,
 
     -- ** ProjectsLocationsTransferConfigsRunsListRunAttempt
-    , ProjectsLocationsTransferConfigsRunsListRunAttempt (..)
+    ProjectsLocationsTransferConfigsRunsListRunAttempt (..),
 
     -- ** ProjectsLocationsTransferConfigsRunsListStates
-    , ProjectsLocationsTransferConfigsRunsListStates (..)
+    ProjectsLocationsTransferConfigsRunsListStates (..),
 
     -- ** ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes
-    , ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes (..)
+    ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes (..),
 
     -- ** ProjectsTransferConfigsRunsListRunAttempt
-    , ProjectsTransferConfigsRunsListRunAttempt (..)
+    ProjectsTransferConfigsRunsListRunAttempt (..),
 
     -- ** ProjectsTransferConfigsRunsListStates
-    , ProjectsTransferConfigsRunsListStates (..)
+    ProjectsTransferConfigsRunsListStates (..),
 
     -- ** ProjectsTransferConfigsRunsTransferLogsListMessageTypes
-    , ProjectsTransferConfigsRunsTransferLogsListMessageTypes (..)
-    ) where
+    ProjectsTransferConfigsRunsTransferLogsListMessageTypes (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.BigQueryDataTransfer.Internal.Product
 import Gogol.BigQueryDataTransfer.Internal.Sum
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the BigQuery Data Transfer API. This contains the host and root path used as a starting point for constructing service requests.
 bigQueryDataTransferService :: Core.ServiceConfig
-bigQueryDataTransferService
-  = Core.defaultService
-      (Core.ServiceId "bigquerydatatransfer:v1")
-      "bigquerydatatransfer.googleapis.com"
+bigQueryDataTransferService =
+  Core.defaultService
+    (Core.ServiceId "bigquerydatatransfer:v1")
+    "bigquerydatatransfer.googleapis.com"
 
 -- | View and manage your data in Google BigQuery and see the email address for your Google Account
-type Bigquery'FullControl = "https://www.googleapis.com/auth/bigquery"
+type Bigquery'FullControl =
+  "https://www.googleapis.com/auth/bigquery"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View your data across Google Cloud services and see the email address of your Google Account
-type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"
+type CloudPlatform'ReadOnly =
+  "https://www.googleapis.com/auth/cloud-platform.read-only"

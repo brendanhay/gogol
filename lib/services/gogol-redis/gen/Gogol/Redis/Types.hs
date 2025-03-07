@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,596 +16,598 @@
 
 -- |
 -- Module      : Gogol.Redis.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Redis.Types
-    (
-    -- * Configuration
-      redisService
+  ( -- * Configuration
+    redisService,
 
     -- * OAuth Scopes
-    , CloudPlatform'FullControl
+    CloudPlatform'FullControl,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AOFConfig
-    , AOFConfig (..)
-    , newAOFConfig
+    AOFConfig (..),
+    newAOFConfig,
 
     -- ** AOFConfig_AppendFsync
-    , AOFConfig_AppendFsync (..)
+    AOFConfig_AppendFsync (..),
 
     -- ** AutomatedBackupConfig
-    , AutomatedBackupConfig (..)
-    , newAutomatedBackupConfig
+    AutomatedBackupConfig (..),
+    newAutomatedBackupConfig,
 
     -- ** AutomatedBackupConfig_AutomatedBackupMode
-    , AutomatedBackupConfig_AutomatedBackupMode (..)
+    AutomatedBackupConfig_AutomatedBackupMode (..),
 
     -- ** AvailabilityConfiguration
-    , AvailabilityConfiguration (..)
-    , newAvailabilityConfiguration
+    AvailabilityConfiguration (..),
+    newAvailabilityConfiguration,
 
     -- ** AvailabilityConfiguration_AvailabilityType
-    , AvailabilityConfiguration_AvailabilityType (..)
+    AvailabilityConfiguration_AvailabilityType (..),
 
     -- ** Backup
-    , Backup (..)
-    , newBackup
+    Backup (..),
+    newBackup,
 
     -- ** Backup_BackupType
-    , Backup_BackupType (..)
+    Backup_BackupType (..),
 
     -- ** Backup_NodeType
-    , Backup_NodeType (..)
+    Backup_NodeType (..),
 
     -- ** Backup_State
-    , Backup_State (..)
+    Backup_State (..),
 
     -- ** BackupClusterRequest
-    , BackupClusterRequest (..)
-    , newBackupClusterRequest
+    BackupClusterRequest (..),
+    newBackupClusterRequest,
 
     -- ** BackupCollection
-    , BackupCollection (..)
-    , newBackupCollection
+    BackupCollection (..),
+    newBackupCollection,
 
     -- ** BackupConfiguration
-    , BackupConfiguration (..)
-    , newBackupConfiguration
+    BackupConfiguration (..),
+    newBackupConfiguration,
 
     -- ** BackupFile
-    , BackupFile (..)
-    , newBackupFile
+    BackupFile (..),
+    newBackupFile,
 
     -- ** BackupRun
-    , BackupRun (..)
-    , newBackupRun
+    BackupRun (..),
+    newBackupRun,
 
     -- ** BackupRun_Status
-    , BackupRun_Status (..)
+    BackupRun_Status (..),
 
     -- ** CertChain
-    , CertChain (..)
-    , newCertChain
+    CertChain (..),
+    newCertChain,
 
     -- ** CertificateAuthority
-    , CertificateAuthority (..)
-    , newCertificateAuthority
+    CertificateAuthority (..),
+    newCertificateAuthority,
 
     -- ** Cluster
-    , Cluster (..)
-    , newCluster
+    Cluster (..),
+    newCluster,
 
     -- ** Cluster_AuthorizationMode
-    , Cluster_AuthorizationMode (..)
+    Cluster_AuthorizationMode (..),
 
     -- ** Cluster_NodeType
-    , Cluster_NodeType (..)
+    Cluster_NodeType (..),
 
     -- ** Cluster_RedisConfigs
-    , Cluster_RedisConfigs (..)
-    , newCluster_RedisConfigs
+    Cluster_RedisConfigs (..),
+    newCluster_RedisConfigs,
 
     -- ** Cluster_State
-    , Cluster_State (..)
+    Cluster_State (..),
 
     -- ** Cluster_TransitEncryptionMode
-    , Cluster_TransitEncryptionMode (..)
+    Cluster_TransitEncryptionMode (..),
 
     -- ** ClusterEndpoint
-    , ClusterEndpoint (..)
-    , newClusterEndpoint
+    ClusterEndpoint (..),
+    newClusterEndpoint,
 
     -- ** ClusterMaintenancePolicy
-    , ClusterMaintenancePolicy (..)
-    , newClusterMaintenancePolicy
+    ClusterMaintenancePolicy (..),
+    newClusterMaintenancePolicy,
 
     -- ** ClusterMaintenanceSchedule
-    , ClusterMaintenanceSchedule (..)
-    , newClusterMaintenanceSchedule
+    ClusterMaintenanceSchedule (..),
+    newClusterMaintenanceSchedule,
 
     -- ** ClusterPersistenceConfig
-    , ClusterPersistenceConfig (..)
-    , newClusterPersistenceConfig
+    ClusterPersistenceConfig (..),
+    newClusterPersistenceConfig,
 
     -- ** ClusterPersistenceConfig_Mode
-    , ClusterPersistenceConfig_Mode (..)
+    ClusterPersistenceConfig_Mode (..),
 
     -- ** ClusterWeeklyMaintenanceWindow
-    , ClusterWeeklyMaintenanceWindow (..)
-    , newClusterWeeklyMaintenanceWindow
+    ClusterWeeklyMaintenanceWindow (..),
+    newClusterWeeklyMaintenanceWindow,
 
     -- ** ClusterWeeklyMaintenanceWindow_Day
-    , ClusterWeeklyMaintenanceWindow_Day (..)
+    ClusterWeeklyMaintenanceWindow_Day (..),
 
     -- ** Compliance
-    , Compliance (..)
-    , newCompliance
+    Compliance (..),
+    newCompliance,
 
     -- ** ConnectionDetail
-    , ConnectionDetail (..)
-    , newConnectionDetail
+    ConnectionDetail (..),
+    newConnectionDetail,
 
     -- ** CrossClusterReplicationConfig
-    , CrossClusterReplicationConfig (..)
-    , newCrossClusterReplicationConfig
+    CrossClusterReplicationConfig (..),
+    newCrossClusterReplicationConfig,
 
     -- ** CrossClusterReplicationConfig_ClusterRole
-    , CrossClusterReplicationConfig_ClusterRole (..)
+    CrossClusterReplicationConfig_ClusterRole (..),
 
     -- ** CustomMetadataData
-    , CustomMetadataData (..)
-    , newCustomMetadataData
+    CustomMetadataData (..),
+    newCustomMetadataData,
 
     -- ** DatabaseResourceFeed
-    , DatabaseResourceFeed (..)
-    , newDatabaseResourceFeed
+    DatabaseResourceFeed (..),
+    newDatabaseResourceFeed,
 
     -- ** DatabaseResourceFeed_FeedType
-    , DatabaseResourceFeed_FeedType (..)
+    DatabaseResourceFeed_FeedType (..),
 
     -- ** DatabaseResourceHealthSignalData
-    , DatabaseResourceHealthSignalData (..)
-    , newDatabaseResourceHealthSignalData
+    DatabaseResourceHealthSignalData (..),
+    newDatabaseResourceHealthSignalData,
 
     -- ** DatabaseResourceHealthSignalData_AdditionalMetadata
-    , DatabaseResourceHealthSignalData_AdditionalMetadata (..)
-    , newDatabaseResourceHealthSignalData_AdditionalMetadata
+    DatabaseResourceHealthSignalData_AdditionalMetadata (..),
+    newDatabaseResourceHealthSignalData_AdditionalMetadata,
 
     -- ** DatabaseResourceHealthSignalData_Provider
-    , DatabaseResourceHealthSignalData_Provider (..)
+    DatabaseResourceHealthSignalData_Provider (..),
 
     -- ** DatabaseResourceHealthSignalData_SignalClass
-    , DatabaseResourceHealthSignalData_SignalClass (..)
+    DatabaseResourceHealthSignalData_SignalClass (..),
 
     -- ** DatabaseResourceHealthSignalData_SignalSeverity
-    , DatabaseResourceHealthSignalData_SignalSeverity (..)
+    DatabaseResourceHealthSignalData_SignalSeverity (..),
 
     -- ** DatabaseResourceHealthSignalData_SignalType
-    , DatabaseResourceHealthSignalData_SignalType (..)
+    DatabaseResourceHealthSignalData_SignalType (..),
 
     -- ** DatabaseResourceHealthSignalData_State
-    , DatabaseResourceHealthSignalData_State (..)
+    DatabaseResourceHealthSignalData_State (..),
 
     -- ** DatabaseResourceId
-    , DatabaseResourceId (..)
-    , newDatabaseResourceId
+    DatabaseResourceId (..),
+    newDatabaseResourceId,
 
     -- ** DatabaseResourceId_Provider
-    , DatabaseResourceId_Provider (..)
+    DatabaseResourceId_Provider (..),
 
     -- ** DatabaseResourceMetadata
-    , DatabaseResourceMetadata (..)
-    , newDatabaseResourceMetadata
+    DatabaseResourceMetadata (..),
+    newDatabaseResourceMetadata,
 
     -- ** DatabaseResourceMetadata_CurrentState
-    , DatabaseResourceMetadata_CurrentState (..)
+    DatabaseResourceMetadata_CurrentState (..),
 
     -- ** DatabaseResourceMetadata_Edition
-    , DatabaseResourceMetadata_Edition (..)
+    DatabaseResourceMetadata_Edition (..),
 
     -- ** DatabaseResourceMetadata_ExpectedState
-    , DatabaseResourceMetadata_ExpectedState (..)
+    DatabaseResourceMetadata_ExpectedState (..),
 
     -- ** DatabaseResourceMetadata_InstanceType
-    , DatabaseResourceMetadata_InstanceType (..)
+    DatabaseResourceMetadata_InstanceType (..),
 
     -- ** DatabaseResourceRecommendationSignalData
-    , DatabaseResourceRecommendationSignalData (..)
-    , newDatabaseResourceRecommendationSignalData
+    DatabaseResourceRecommendationSignalData (..),
+    newDatabaseResourceRecommendationSignalData,
 
     -- ** DatabaseResourceRecommendationSignalData_AdditionalMetadata
-    , DatabaseResourceRecommendationSignalData_AdditionalMetadata (..)
-    , newDatabaseResourceRecommendationSignalData_AdditionalMetadata
+    DatabaseResourceRecommendationSignalData_AdditionalMetadata (..),
+    newDatabaseResourceRecommendationSignalData_AdditionalMetadata,
 
     -- ** DatabaseResourceRecommendationSignalData_RecommendationState
-    , DatabaseResourceRecommendationSignalData_RecommendationState (..)
+    DatabaseResourceRecommendationSignalData_RecommendationState (..),
 
     -- ** DatabaseResourceRecommendationSignalData_SignalType
-    , DatabaseResourceRecommendationSignalData_SignalType (..)
+    DatabaseResourceRecommendationSignalData_SignalType (..),
 
     -- ** DiscoveryEndpoint
-    , DiscoveryEndpoint (..)
-    , newDiscoveryEndpoint
+    DiscoveryEndpoint (..),
+    newDiscoveryEndpoint,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** Entitlement
-    , Entitlement (..)
-    , newEntitlement
+    Entitlement (..),
+    newEntitlement,
 
     -- ** Entitlement_EntitlementState
-    , Entitlement_EntitlementState (..)
+    Entitlement_EntitlementState (..),
 
     -- ** Entitlement_Type
-    , Entitlement_Type (..)
+    Entitlement_Type (..),
 
     -- ** ExportBackupRequest
-    , ExportBackupRequest (..)
-    , newExportBackupRequest
+    ExportBackupRequest (..),
+    newExportBackupRequest,
 
     -- ** ExportInstanceRequest
-    , ExportInstanceRequest (..)
-    , newExportInstanceRequest
+    ExportInstanceRequest (..),
+    newExportInstanceRequest,
 
     -- ** FailoverInstanceRequest
-    , FailoverInstanceRequest (..)
-    , newFailoverInstanceRequest
+    FailoverInstanceRequest (..),
+    newFailoverInstanceRequest,
 
     -- ** FailoverInstanceRequest_DataProtectionMode
-    , FailoverInstanceRequest_DataProtectionMode (..)
+    FailoverInstanceRequest_DataProtectionMode (..),
 
     -- ** FixedFrequencySchedule
-    , FixedFrequencySchedule (..)
-    , newFixedFrequencySchedule
+    FixedFrequencySchedule (..),
+    newFixedFrequencySchedule,
 
     -- ** GcsBackupSource
-    , GcsBackupSource (..)
-    , newGcsBackupSource
+    GcsBackupSource (..),
+    newGcsBackupSource,
 
     -- ** GcsDestination
-    , GcsDestination (..)
-    , newGcsDestination
+    GcsDestination (..),
+    newGcsDestination,
 
     -- ** GcsSource
-    , GcsSource (..)
-    , newGcsSource
+    GcsSource (..),
+    newGcsSource,
 
     -- ** GoogleCloudRedisV1LocationMetadata
-    , GoogleCloudRedisV1LocationMetadata (..)
-    , newGoogleCloudRedisV1LocationMetadata
+    GoogleCloudRedisV1LocationMetadata (..),
+    newGoogleCloudRedisV1LocationMetadata,
 
     -- ** GoogleCloudRedisV1LocationMetadata_AvailableZones
-    , GoogleCloudRedisV1LocationMetadata_AvailableZones (..)
-    , newGoogleCloudRedisV1LocationMetadata_AvailableZones
+    GoogleCloudRedisV1LocationMetadata_AvailableZones (..),
+    newGoogleCloudRedisV1LocationMetadata_AvailableZones,
 
     -- ** GoogleCloudRedisV1OperationMetadata
-    , GoogleCloudRedisV1OperationMetadata (..)
-    , newGoogleCloudRedisV1OperationMetadata
+    GoogleCloudRedisV1OperationMetadata (..),
+    newGoogleCloudRedisV1OperationMetadata,
 
     -- ** GoogleCloudRedisV1ZoneMetadata
-    , GoogleCloudRedisV1ZoneMetadata (..)
-    , newGoogleCloudRedisV1ZoneMetadata
+    GoogleCloudRedisV1ZoneMetadata (..),
+    newGoogleCloudRedisV1ZoneMetadata,
 
     -- ** ImportInstanceRequest
-    , ImportInstanceRequest (..)
-    , newImportInstanceRequest
+    ImportInstanceRequest (..),
+    newImportInstanceRequest,
 
     -- ** InputConfig
-    , InputConfig (..)
-    , newInputConfig
+    InputConfig (..),
+    newInputConfig,
 
     -- ** Instance
-    , Instance (..)
-    , newInstance
+    Instance (..),
+    newInstance,
 
     -- ** Instance_ConnectMode
-    , Instance_ConnectMode (..)
+    Instance_ConnectMode (..),
 
     -- ** Instance_Labels
-    , Instance_Labels (..)
-    , newInstance_Labels
+    Instance_Labels (..),
+    newInstance_Labels,
 
     -- ** Instance_ReadReplicasMode
-    , Instance_ReadReplicasMode (..)
+    Instance_ReadReplicasMode (..),
 
     -- ** Instance_RedisConfigs
-    , Instance_RedisConfigs (..)
-    , newInstance_RedisConfigs
+    Instance_RedisConfigs (..),
+    newInstance_RedisConfigs,
 
     -- ** Instance_State
-    , Instance_State (..)
+    Instance_State (..),
 
     -- ** Instance_SuspensionReasonsItem
-    , Instance_SuspensionReasonsItem (..)
+    Instance_SuspensionReasonsItem (..),
 
     -- ** Instance_Tier
-    , Instance_Tier (..)
+    Instance_Tier (..),
 
     -- ** Instance_TransitEncryptionMode
-    , Instance_TransitEncryptionMode (..)
+    Instance_TransitEncryptionMode (..),
 
     -- ** InstanceAuthString
-    , InstanceAuthString (..)
-    , newInstanceAuthString
+    InstanceAuthString (..),
+    newInstanceAuthString,
 
     -- ** InternalResourceMetadata
-    , InternalResourceMetadata (..)
-    , newInternalResourceMetadata
+    InternalResourceMetadata (..),
+    newInternalResourceMetadata,
 
     -- ** ListBackupCollectionsResponse
-    , ListBackupCollectionsResponse (..)
-    , newListBackupCollectionsResponse
+    ListBackupCollectionsResponse (..),
+    newListBackupCollectionsResponse,
 
     -- ** ListBackupsResponse
-    , ListBackupsResponse (..)
-    , newListBackupsResponse
+    ListBackupsResponse (..),
+    newListBackupsResponse,
 
     -- ** ListClustersResponse
-    , ListClustersResponse (..)
-    , newListClustersResponse
+    ListClustersResponse (..),
+    newListClustersResponse,
 
     -- ** ListInstancesResponse
-    , ListInstancesResponse (..)
-    , newListInstancesResponse
+    ListInstancesResponse (..),
+    newListInstancesResponse,
 
     -- ** ListLocationsResponse
-    , ListLocationsResponse (..)
-    , newListLocationsResponse
+    ListLocationsResponse (..),
+    newListLocationsResponse,
 
     -- ** ListOperationsResponse
-    , ListOperationsResponse (..)
-    , newListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
     -- ** Location
-    , Location (..)
-    , newLocation
+    Location (..),
+    newLocation,
 
     -- ** Location_Labels
-    , Location_Labels (..)
-    , newLocation_Labels
+    Location_Labels (..),
+    newLocation_Labels,
 
     -- ** Location_Metadata
-    , Location_Metadata (..)
-    , newLocation_Metadata
+    Location_Metadata (..),
+    newLocation_Metadata,
 
     -- ** MachineConfiguration
-    , MachineConfiguration (..)
-    , newMachineConfiguration
+    MachineConfiguration (..),
+    newMachineConfiguration,
 
     -- ** MaintenancePolicy
-    , MaintenancePolicy (..)
-    , newMaintenancePolicy
+    MaintenancePolicy (..),
+    newMaintenancePolicy,
 
     -- ** MaintenanceSchedule
-    , MaintenanceSchedule (..)
-    , newMaintenanceSchedule
+    MaintenanceSchedule (..),
+    newMaintenanceSchedule,
 
     -- ** ManagedBackupSource
-    , ManagedBackupSource (..)
-    , newManagedBackupSource
+    ManagedBackupSource (..),
+    newManagedBackupSource,
 
     -- ** ManagedCertificateAuthority
-    , ManagedCertificateAuthority (..)
-    , newManagedCertificateAuthority
+    ManagedCertificateAuthority (..),
+    newManagedCertificateAuthority,
 
     -- ** Membership
-    , Membership (..)
-    , newMembership
+    Membership (..),
+    newMembership,
 
     -- ** NodeInfo
-    , NodeInfo (..)
-    , newNodeInfo
+    NodeInfo (..),
+    newNodeInfo,
 
     -- ** ObservabilityMetricData
-    , ObservabilityMetricData (..)
-    , newObservabilityMetricData
+    ObservabilityMetricData (..),
+    newObservabilityMetricData,
 
     -- ** ObservabilityMetricData_AggregationType
-    , ObservabilityMetricData_AggregationType (..)
+    ObservabilityMetricData_AggregationType (..),
 
     -- ** ObservabilityMetricData_MetricType
-    , ObservabilityMetricData_MetricType (..)
+    ObservabilityMetricData_MetricType (..),
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** OperationError
-    , OperationError (..)
-    , newOperationError
+    OperationError (..),
+    newOperationError,
 
     -- ** OperationError_ErrorType
-    , OperationError_ErrorType (..)
+    OperationError_ErrorType (..),
 
     -- ** OperationMetadata
-    , OperationMetadata (..)
-    , newOperationMetadata
+    OperationMetadata (..),
+    newOperationMetadata,
 
     -- ** OutputConfig
-    , OutputConfig (..)
-    , newOutputConfig
+    OutputConfig (..),
+    newOutputConfig,
 
     -- ** PersistenceConfig
-    , PersistenceConfig (..)
-    , newPersistenceConfig
+    PersistenceConfig (..),
+    newPersistenceConfig,
 
     -- ** PersistenceConfig_PersistenceMode
-    , PersistenceConfig_PersistenceMode (..)
+    PersistenceConfig_PersistenceMode (..),
 
     -- ** PersistenceConfig_RdbSnapshotPeriod
-    , PersistenceConfig_RdbSnapshotPeriod (..)
+    PersistenceConfig_RdbSnapshotPeriod (..),
 
     -- ** Product
-    , Product (..)
-    , newProduct
+    Product (..),
+    newProduct,
 
     -- ** Product_Engine
-    , Product_Engine (..)
+    Product_Engine (..),
 
     -- ** Product_Type
-    , Product_Type (..)
+    Product_Type (..),
 
     -- ** PscAutoConnection
-    , PscAutoConnection (..)
-    , newPscAutoConnection
+    PscAutoConnection (..),
+    newPscAutoConnection,
 
     -- ** PscAutoConnection_ConnectionType
-    , PscAutoConnection_ConnectionType (..)
+    PscAutoConnection_ConnectionType (..),
 
     -- ** PscAutoConnection_PscConnectionStatus
-    , PscAutoConnection_PscConnectionStatus (..)
+    PscAutoConnection_PscConnectionStatus (..),
 
     -- ** PscConfig
-    , PscConfig (..)
-    , newPscConfig
+    PscConfig (..),
+    newPscConfig,
 
     -- ** PscConnection
-    , PscConnection (..)
-    , newPscConnection
+    PscConnection (..),
+    newPscConnection,
 
     -- ** PscConnection_ConnectionType
-    , PscConnection_ConnectionType (..)
+    PscConnection_ConnectionType (..),
 
     -- ** PscConnection_PscConnectionStatus
-    , PscConnection_PscConnectionStatus (..)
+    PscConnection_PscConnectionStatus (..),
 
     -- ** PscServiceAttachment
-    , PscServiceAttachment (..)
-    , newPscServiceAttachment
+    PscServiceAttachment (..),
+    newPscServiceAttachment,
 
     -- ** PscServiceAttachment_ConnectionType
-    , PscServiceAttachment_ConnectionType (..)
+    PscServiceAttachment_ConnectionType (..),
 
     -- ** RDBConfig
-    , RDBConfig (..)
-    , newRDBConfig
+    RDBConfig (..),
+    newRDBConfig,
 
     -- ** RDBConfig_RdbSnapshotPeriod
-    , RDBConfig_RdbSnapshotPeriod (..)
+    RDBConfig_RdbSnapshotPeriod (..),
 
     -- ** ReconciliationOperationMetadata
-    , ReconciliationOperationMetadata (..)
-    , newReconciliationOperationMetadata
+    ReconciliationOperationMetadata (..),
+    newReconciliationOperationMetadata,
 
     -- ** ReconciliationOperationMetadata_ExclusiveAction
-    , ReconciliationOperationMetadata_ExclusiveAction (..)
+    ReconciliationOperationMetadata_ExclusiveAction (..),
 
     -- ** RemoteCluster
-    , RemoteCluster (..)
-    , newRemoteCluster
+    RemoteCluster (..),
+    newRemoteCluster,
 
     -- ** RescheduleClusterMaintenanceRequest
-    , RescheduleClusterMaintenanceRequest (..)
-    , newRescheduleClusterMaintenanceRequest
+    RescheduleClusterMaintenanceRequest (..),
+    newRescheduleClusterMaintenanceRequest,
 
     -- ** RescheduleClusterMaintenanceRequest_RescheduleType
-    , RescheduleClusterMaintenanceRequest_RescheduleType (..)
+    RescheduleClusterMaintenanceRequest_RescheduleType (..),
 
     -- ** RescheduleMaintenanceRequest
-    , RescheduleMaintenanceRequest (..)
-    , newRescheduleMaintenanceRequest
+    RescheduleMaintenanceRequest (..),
+    newRescheduleMaintenanceRequest,
 
     -- ** RescheduleMaintenanceRequest_RescheduleType
-    , RescheduleMaintenanceRequest_RescheduleType (..)
+    RescheduleMaintenanceRequest_RescheduleType (..),
 
     -- ** RetentionSettings
-    , RetentionSettings (..)
-    , newRetentionSettings
+    RetentionSettings (..),
+    newRetentionSettings,
 
     -- ** RetentionSettings_RetentionUnit
-    , RetentionSettings_RetentionUnit (..)
+    RetentionSettings_RetentionUnit (..),
 
     -- ** StateInfo
-    , StateInfo (..)
-    , newStateInfo
+    StateInfo (..),
+    newStateInfo,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** Tags
-    , Tags (..)
-    , newTags
+    Tags (..),
+    newTags,
 
     -- ** Tags_Tags
-    , Tags_Tags (..)
-    , newTags_Tags
+    Tags_Tags (..),
+    newTags_Tags,
 
     -- ** TimeOfDay'
-    , TimeOfDay' (..)
-    , newTimeOfDay
+    TimeOfDay' (..),
+    newTimeOfDay,
 
     -- ** TlsCertificate
-    , TlsCertificate (..)
-    , newTlsCertificate
+    TlsCertificate (..),
+    newTlsCertificate,
 
     -- ** TypedValue
-    , TypedValue (..)
-    , newTypedValue
+    TypedValue (..),
+    newTypedValue,
 
     -- ** UpdateInfo
-    , UpdateInfo (..)
-    , newUpdateInfo
+    UpdateInfo (..),
+    newUpdateInfo,
 
     -- ** UpgradeInstanceRequest
-    , UpgradeInstanceRequest (..)
-    , newUpgradeInstanceRequest
+    UpgradeInstanceRequest (..),
+    newUpgradeInstanceRequest,
 
     -- ** UserLabels
-    , UserLabels (..)
-    , newUserLabels
+    UserLabels (..),
+    newUserLabels,
 
     -- ** UserLabels_Labels
-    , UserLabels_Labels (..)
-    , newUserLabels_Labels
+    UserLabels_Labels (..),
+    newUserLabels_Labels,
 
     -- ** WeeklyMaintenanceWindow
-    , WeeklyMaintenanceWindow (..)
-    , newWeeklyMaintenanceWindow
+    WeeklyMaintenanceWindow (..),
+    newWeeklyMaintenanceWindow,
 
     -- ** WeeklyMaintenanceWindow_Day
-    , WeeklyMaintenanceWindow_Day (..)
+    WeeklyMaintenanceWindow_Day (..),
 
     -- ** ZoneDistributionConfig
-    , ZoneDistributionConfig (..)
-    , newZoneDistributionConfig
+    ZoneDistributionConfig (..),
+    newZoneDistributionConfig,
 
     -- ** ZoneDistributionConfig_Mode
-    , ZoneDistributionConfig_Mode (..)
-    ) where
+    ZoneDistributionConfig_Mode (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Redis.Internal.Product
 import Gogol.Redis.Internal.Sum
 
 -- | Default request referring to version @v1@ of the Google Cloud Memorystore for Redis API. This contains the host and root path used as a starting point for constructing service requests.
 redisService :: Core.ServiceConfig
-redisService
-  = Core.defaultService (Core.ServiceId "redis:v1")
-      "redis.googleapis.com"
+redisService =
+  Core.defaultService
+    (Core.ServiceId "redis:v1")
+    "redis.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"

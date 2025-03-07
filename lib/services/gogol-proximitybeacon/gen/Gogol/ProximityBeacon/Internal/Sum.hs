@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.ProximityBeacon.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.ProximityBeacon.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AdvertisedId_Type
     AdvertisedId_Type
-      (
-        AdvertisedId_Type_TYPEUNSPECIFIED,
+      ( AdvertisedId_Type_TYPEUNSPECIFIED,
         AdvertisedId_Type_Eddystone,
         AdvertisedId_Type_Ibeacon,
         AdvertisedId_Type_Altbeacon,
@@ -51,8 +42,7 @@ module Gogol.ProximityBeacon.Internal.Sum
 
     -- * Beacon_ExpectedStability
     Beacon_ExpectedStability
-      (
-        Beacon_ExpectedStability_STABILITYUNSPECIFIED,
+      ( Beacon_ExpectedStability_STABILITYUNSPECIFIED,
         Beacon_ExpectedStability_Stable,
         Beacon_ExpectedStability_Portable,
         Beacon_ExpectedStability_Mobile,
@@ -62,8 +52,7 @@ module Gogol.ProximityBeacon.Internal.Sum
 
     -- * Beacon_Status
     Beacon_Status
-      (
-        Beacon_Status_STATUSUNSPECIFIED,
+      ( Beacon_Status_STATUSUNSPECIFIED,
         Beacon_Status_Active,
         Beacon_Status_Decommissioned,
         Beacon_Status_Inactive,
@@ -72,28 +61,28 @@ module Gogol.ProximityBeacon.Internal.Sum
 
     -- * Namespace_ServingVisibility
     Namespace_ServingVisibility
-      (
-        Namespace_ServingVisibility_VISIBILITYUNSPECIFIED,
+      ( Namespace_ServingVisibility_VISIBILITYUNSPECIFIED,
         Namespace_ServingVisibility_Unlisted,
         Namespace_ServingVisibility_Public,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -106,20 +95,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | Specifies the identifier type. Required.
-newtype AdvertisedId_Type = AdvertisedId_Type { fromAdvertisedId_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AdvertisedId_Type = AdvertisedId_Type {fromAdvertisedId_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Do not use this value.
 pattern AdvertisedId_Type_TYPEUNSPECIFIED :: AdvertisedId_Type
@@ -147,20 +137,21 @@ pattern AdvertisedId_Type_EDDYSTONEEID = AdvertisedId_Type "EDDYSTONE_EID"
   AdvertisedId_Type_Ibeacon,
   AdvertisedId_Type_Altbeacon,
   AdvertisedId_Type_EDDYSTONEEID,
-  AdvertisedId_Type #-}
+  AdvertisedId_Type
+  #-}
 
 -- | Expected location stability. This is set when the beacon is registered or updated, not automatically detected in any way. Optional.
-newtype Beacon_ExpectedStability = Beacon_ExpectedStability { fromBeacon_ExpectedStability :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Beacon_ExpectedStability = Beacon_ExpectedStability {fromBeacon_ExpectedStability :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Do not use this value.
 pattern Beacon_ExpectedStability_STABILITYUNSPECIFIED :: Beacon_ExpectedStability
@@ -188,20 +179,21 @@ pattern Beacon_ExpectedStability_Roving = Beacon_ExpectedStability "ROVING"
   Beacon_ExpectedStability_Portable,
   Beacon_ExpectedStability_Mobile,
   Beacon_ExpectedStability_Roving,
-  Beacon_ExpectedStability #-}
+  Beacon_ExpectedStability
+  #-}
 
 -- | Current status of the beacon. Required.
-newtype Beacon_Status = Beacon_Status { fromBeacon_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Beacon_Status = Beacon_Status {fromBeacon_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Do not use this value.
 pattern Beacon_Status_STATUSUNSPECIFIED :: Beacon_Status
@@ -224,20 +216,21 @@ pattern Beacon_Status_Inactive = Beacon_Status "INACTIVE"
   Beacon_Status_Active,
   Beacon_Status_Decommissioned,
   Beacon_Status_Inactive,
-  Beacon_Status #-}
+  Beacon_Status
+  #-}
 
 -- | Specifies what clients may receive attachments under this namespace via @beaconinfo.getforobserved@.
-newtype Namespace_ServingVisibility = Namespace_ServingVisibility { fromNamespace_ServingVisibility :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Namespace_ServingVisibility = Namespace_ServingVisibility {fromNamespace_ServingVisibility :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Do not use this value.
 pattern Namespace_ServingVisibility_VISIBILITYUNSPECIFIED :: Namespace_ServingVisibility
@@ -255,4 +248,5 @@ pattern Namespace_ServingVisibility_Public = Namespace_ServingVisibility "PUBLIC
   Namespace_ServingVisibility_VISIBILITYUNSPECIFIED,
   Namespace_ServingVisibility_Unlisted,
   Namespace_ServingVisibility_Public,
-  Namespace_ServingVisibility #-}
+  Namespace_ServingVisibility
+  #-}

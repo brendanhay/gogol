@@ -12,6 +12,7 @@ dist
 vendor
 .stack-work
 .direnv
+result
 
 # CTAGS
 TAGS

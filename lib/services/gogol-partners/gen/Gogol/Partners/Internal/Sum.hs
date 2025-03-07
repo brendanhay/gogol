@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.Partners.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Partners.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AvailableOffer_OfferLevel
     AvailableOffer_OfferLevel
-      (
-        AvailableOffer_OfferLevel_OFFERLEVELUNSPECIFIED,
+      ( AvailableOffer_OfferLevel_OFFERLEVELUNSPECIFIED,
         AvailableOffer_OfferLevel_OFFERLEVELDENYPROBLEM,
         AvailableOffer_OfferLevel_OFFERLEVELDENYCONTRACT,
         AvailableOffer_OfferLevel_OFFERLEVELMANUAL,
@@ -54,8 +45,7 @@ module Gogol.Partners.Internal.Sum
 
     -- * AvailableOffer_OfferType
     AvailableOffer_OfferType
-      (
-        AvailableOffer_OfferType_OFFERTYPEUNSPECIFIED,
+      ( AvailableOffer_OfferType_OFFERTYPEUNSPECIFIED,
         AvailableOffer_OfferType_OFFERTYPESPENDXGETY,
         AvailableOffer_OfferType_OFFERTYPEVIDEO,
         AvailableOffer_OfferType_OFFERTYPESPENDMATCH,
@@ -64,8 +54,7 @@ module Gogol.Partners.Internal.Sum
 
     -- * Certification_CertificationType
     Certification_CertificationType
-      (
-        Certification_CertificationType_CERTIFICATIONTYPEUNSPECIFIED,
+      ( Certification_CertificationType_CERTIFICATIONTYPEUNSPECIFIED,
         Certification_CertificationType_CTADWORDS,
         Certification_CertificationType_CTYOUTUBE,
         Certification_CertificationType_CTVIDEOADS,
@@ -82,8 +71,7 @@ module Gogol.Partners.Internal.Sum
 
     -- * CertificationExamStatus_Type
     CertificationExamStatus_Type
-      (
-        CertificationExamStatus_Type_CERTIFICATIONEXAMTYPEUNSPECIFIED,
+      ( CertificationExamStatus_Type_CERTIFICATIONEXAMTYPEUNSPECIFIED,
         CertificationExamStatus_Type_CETADWORDSFUNDAMENTALS,
         CertificationExamStatus_Type_CETADWORDSADVANCEDSEARCH,
         CertificationExamStatus_Type_CETADWORDSADVANCEDDISPLAY,
@@ -99,8 +87,7 @@ module Gogol.Partners.Internal.Sum
 
     -- * CertificationStatus_Type
     CertificationStatus_Type
-      (
-        CertificationStatus_Type_CERTIFICATIONTYPEUNSPECIFIED,
+      ( CertificationStatus_Type_CERTIFICATIONTYPEUNSPECIFIED,
         CertificationStatus_Type_CTADWORDS,
         CertificationStatus_Type_CTYOUTUBE,
         CertificationStatus_Type_CTVIDEOADS,
@@ -117,8 +104,7 @@ module Gogol.Partners.Internal.Sum
 
     -- * Company_BadgeTier
     Company_BadgeTier
-      (
-        Company_BadgeTier_BADGETIERNONE,
+      ( Company_BadgeTier_BADGETIERNONE,
         Company_BadgeTier_BADGETIERREGULAR,
         Company_BadgeTier_BADGETIERPREMIER,
         ..
@@ -126,8 +112,7 @@ module Gogol.Partners.Internal.Sum
 
     -- * Company_ProfileStatus
     Company_ProfileStatus
-      (
-        Company_ProfileStatus_COMPANYPROFILESTATUSUNSPECIFIED,
+      ( Company_ProfileStatus_COMPANYPROFILESTATUSUNSPECIFIED,
         Company_ProfileStatus_Hidden,
         Company_ProfileStatus_Published,
         Company_ProfileStatus_Searchable,
@@ -136,8 +121,7 @@ module Gogol.Partners.Internal.Sum
 
     -- * CompanyRelation_BadgeTier
     CompanyRelation_BadgeTier
-      (
-        CompanyRelation_BadgeTier_BADGETIERNONE,
+      ( CompanyRelation_BadgeTier_BADGETIERNONE,
         CompanyRelation_BadgeTier_BADGETIERREGULAR,
         CompanyRelation_BadgeTier_BADGETIERPREMIER,
         ..
@@ -145,8 +129,7 @@ module Gogol.Partners.Internal.Sum
 
     -- * CompanyRelation_State
     CompanyRelation_State
-      (
-        CompanyRelation_State_USERCOMPANYREATIONSTATENONESPECIFIED,
+      ( CompanyRelation_State_USERCOMPANYREATIONSTATENONESPECIFIED,
         CompanyRelation_State_USERCOMPANYRELATIONSTATEAWAITEMAIL,
         CompanyRelation_State_USERCOMPANYRELATIONSTATEAWAITADMIN,
         CompanyRelation_State_USERCOMPANYRELATIONSTATEAPPROVED,
@@ -155,8 +138,7 @@ module Gogol.Partners.Internal.Sum
 
     -- * CountryOfferInfo_OfferType
     CountryOfferInfo_OfferType
-      (
-        CountryOfferInfo_OfferType_OFFERTYPEUNSPECIFIED,
+      ( CountryOfferInfo_OfferType_OFFERTYPEUNSPECIFIED,
         CountryOfferInfo_OfferType_OFFERTYPESPENDXGETY,
         CountryOfferInfo_OfferType_OFFERTYPEVIDEO,
         CountryOfferInfo_OfferType_OFFERTYPESPENDMATCH,
@@ -165,8 +147,7 @@ module Gogol.Partners.Internal.Sum
 
     -- * CreateLeadResponse_RecaptchaStatus
     CreateLeadResponse_RecaptchaStatus
-      (
-        CreateLeadResponse_RecaptchaStatus_RECAPTCHASTATUSUNSPECIFIED,
+      ( CreateLeadResponse_RecaptchaStatus_RECAPTCHASTATUSUNSPECIFIED,
         CreateLeadResponse_RecaptchaStatus_RSNOTNEEDED,
         CreateLeadResponse_RecaptchaStatus_RSPASSED,
         CreateLeadResponse_RecaptchaStatus_RSFAILED,
@@ -175,8 +156,7 @@ module Gogol.Partners.Internal.Sum
 
     -- * EventData_Key
     EventData_Key
-      (
-        EventData_Key_EVENTDATATYPEUNSPECIFIED,
+      ( EventData_Key_EVENTDATATYPEUNSPECIFIED,
         EventData_Key_Action,
         EventData_Key_AGENCYID,
         EventData_Key_AGENCYNAME,
@@ -219,8 +199,7 @@ module Gogol.Partners.Internal.Sum
 
     -- * ExamStatus_ExamType
     ExamStatus_ExamType
-      (
-        ExamStatus_ExamType_CERTIFICATIONEXAMTYPEUNSPECIFIED,
+      ( ExamStatus_ExamType_CERTIFICATIONEXAMTYPEUNSPECIFIED,
         ExamStatus_ExamType_CETADWORDSFUNDAMENTALS,
         ExamStatus_ExamType_CETADWORDSADVANCEDSEARCH,
         ExamStatus_ExamType_CETADWORDSADVANCEDDISPLAY,
@@ -236,8 +215,7 @@ module Gogol.Partners.Internal.Sum
 
     -- * HistoricalOffer_OfferType
     HistoricalOffer_OfferType
-      (
-        HistoricalOffer_OfferType_OFFERTYPEUNSPECIFIED,
+      ( HistoricalOffer_OfferType_OFFERTYPEUNSPECIFIED,
         HistoricalOffer_OfferType_OFFERTYPESPENDXGETY,
         HistoricalOffer_OfferType_OFFERTYPEVIDEO,
         HistoricalOffer_OfferType_OFFERTYPESPENDMATCH,
@@ -246,8 +224,7 @@ module Gogol.Partners.Internal.Sum
 
     -- * HistoricalOffer_Status
     HistoricalOffer_Status
-      (
-        HistoricalOffer_Status_OFFERSTATUSUNSPECIFIED,
+      ( HistoricalOffer_Status_OFFERSTATUSUNSPECIFIED,
         HistoricalOffer_Status_OFFERSTATUSDISTRIBUTED,
         HistoricalOffer_Status_OFFERSTATUSREDEEMED,
         HistoricalOffer_Status_OFFERSTATUSAWARDED,
@@ -257,8 +234,7 @@ module Gogol.Partners.Internal.Sum
 
     -- * Lead_State
     Lead_State
-      (
-        Lead_State_LEADSTATEUNSPECIFIED,
+      ( Lead_State_LEADSTATEUNSPECIFIED,
         Lead_State_Lead,
         Lead_State_Contacted,
         Lead_State_Client,
@@ -268,16 +244,14 @@ module Gogol.Partners.Internal.Sum
 
     -- * Lead_Type
     Lead_Type
-      (
-        Lead_Type_LEADTYPEUNSPECIFIED,
+      ( Lead_Type_LEADTYPEUNSPECIFIED,
         Lead_Type_LTGPS,
         ..
       ),
 
     -- * ListOffersResponse_NoOfferReason
     ListOffersResponse_NoOfferReason
-      (
-        ListOffersResponse_NoOfferReason_NOOFFERREASONUNSPECIFIED,
+      ( ListOffersResponse_NoOfferReason_NOOFFERREASONUNSPECIFIED,
         ListOffersResponse_NoOfferReason_NOOFFERREASONNOMCC,
         ListOffersResponse_NoOfferReason_NOOFFERREASONLIMITREACHED,
         ListOffersResponse_NoOfferReason_NOOFFERREASONINELIGIBLE,
@@ -286,8 +260,7 @@ module Gogol.Partners.Internal.Sum
 
     -- * LogMessageRequest_Level
     LogMessageRequest_Level
-      (
-        LogMessageRequest_Level_MESSAGELEVELUNSPECIFIED,
+      ( LogMessageRequest_Level_MESSAGELEVELUNSPECIFIED,
         LogMessageRequest_Level_MLFINE,
         LogMessageRequest_Level_MLINFO,
         LogMessageRequest_Level_MLWARNING,
@@ -297,8 +270,7 @@ module Gogol.Partners.Internal.Sum
 
     -- * LogUserEventRequest_EventAction
     LogUserEventRequest_EventAction
-      (
-        LogUserEventRequest_EventAction_EVENTACTIONUNSPECIFIED,
+      ( LogUserEventRequest_EventAction_EVENTACTIONUNSPECIFIED,
         LogUserEventRequest_EventAction_SMBCLICKEDFINDAPARTNERBUTTONBOTTOM,
         LogUserEventRequest_EventAction_SMBCLICKEDFINDAPARTNERBUTTONTOP,
         LogUserEventRequest_EventAction_AGENCYCLICKEDJOINNOWBUTTONBOTTOM,
@@ -462,8 +434,7 @@ module Gogol.Partners.Internal.Sum
 
     -- * LogUserEventRequest_EventCategory
     LogUserEventRequest_EventCategory
-      (
-        LogUserEventRequest_EventCategory_EVENTCATEGORYUNSPECIFIED,
+      ( LogUserEventRequest_EventCategory_EVENTCATEGORYUNSPECIFIED,
         LogUserEventRequest_EventCategory_GOOGLEPARTNERSEARCH,
         LogUserEventRequest_EventCategory_GOOGLEPARTNERSIGNUPFLOW,
         LogUserEventRequest_EventCategory_GOOGLEPARTNERPORTAL,
@@ -484,8 +455,7 @@ module Gogol.Partners.Internal.Sum
 
     -- * LogUserEventRequest_EventScope
     LogUserEventRequest_EventScope
-      (
-        LogUserEventRequest_EventScope_EVENTSCOPEUNSPECIFIED,
+      ( LogUserEventRequest_EventScope_EVENTSCOPEUNSPECIFIED,
         LogUserEventRequest_EventScope_Visitor,
         LogUserEventRequest_EventScope_Session,
         LogUserEventRequest_EventScope_Page,
@@ -494,8 +464,7 @@ module Gogol.Partners.Internal.Sum
 
     -- * OfferCustomer_OfferType
     OfferCustomer_OfferType
-      (
-        OfferCustomer_OfferType_OFFERTYPEUNSPECIFIED,
+      ( OfferCustomer_OfferType_OFFERTYPEUNSPECIFIED,
         OfferCustomer_OfferType_OFFERTYPESPENDXGETY,
         OfferCustomer_OfferType_OFFERTYPEVIDEO,
         OfferCustomer_OfferType_OFFERTYPESPENDMATCH,
@@ -504,16 +473,14 @@ module Gogol.Partners.Internal.Sum
 
     -- * Rank_Type
     Rank_Type
-      (
-        Rank_Type_RANKTYPEUNSPECIFIED,
+      ( Rank_Type_RANKTYPEUNSPECIFIED,
         Rank_Type_RTFINALSCORE,
         ..
       ),
 
     -- * SpecializationStatus_BadgeSpecialization
     SpecializationStatus_BadgeSpecialization
-      (
-        SpecializationStatus_BadgeSpecialization_BADGESPECIALIZATIONUNKNOWN,
+      ( SpecializationStatus_BadgeSpecialization_BADGESPECIALIZATIONUNKNOWN,
         SpecializationStatus_BadgeSpecialization_BADGESPECIALIZATIONADWORDSSEARCH,
         SpecializationStatus_BadgeSpecialization_BADGESPECIALIZATIONADWORDSDISPLAY,
         SpecializationStatus_BadgeSpecialization_BADGESPECIALIZATIONADWORDSMOBILE,
@@ -524,29 +491,29 @@ module Gogol.Partners.Internal.Sum
 
     -- * SpecializationStatus_BadgeSpecializationState
     SpecializationStatus_BadgeSpecializationState
-      (
-        SpecializationStatus_BadgeSpecializationState_BADGESPECIALIZATIONSTATEUNKNOWN,
+      ( SpecializationStatus_BadgeSpecializationState_BADGESPECIALIZATIONSTATEUNKNOWN,
         SpecializationStatus_BadgeSpecializationState_BADGESPECIALIZATIONSTATEPASSED,
         SpecializationStatus_BadgeSpecializationState_BADGESPECIALIZATIONSTATENOTPASSED,
         SpecializationStatus_BadgeSpecializationState_BADGESPECIALIZATIONSTATEINGRACE,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -559,20 +526,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | Level of this offer.
-newtype AvailableOffer_OfferLevel = AvailableOffer_OfferLevel { fromAvailableOffer_OfferLevel :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AvailableOffer_OfferLevel = AvailableOffer_OfferLevel {fromAvailableOffer_OfferLevel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unset.
 pattern AvailableOffer_OfferLevel_OFFERLEVELUNSPECIFIED :: AvailableOffer_OfferLevel
@@ -615,20 +583,21 @@ pattern AvailableOffer_OfferLevel_OFFER_LEVEL_LIMIT_50 = AvailableOffer_OfferLev
   AvailableOffer_OfferLevel_OFFER_LEVEL_LIMIT_5,
   AvailableOffer_OfferLevel_OFFER_LEVEL_LIMIT_15,
   AvailableOffer_OfferLevel_OFFER_LEVEL_LIMIT_50,
-  AvailableOffer_OfferLevel #-}
+  AvailableOffer_OfferLevel
+  #-}
 
 -- | Type of offer.
-newtype AvailableOffer_OfferType = AvailableOffer_OfferType { fromAvailableOffer_OfferType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AvailableOffer_OfferType = AvailableOffer_OfferType {fromAvailableOffer_OfferType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unset.
 pattern AvailableOffer_OfferType_OFFERTYPEUNSPECIFIED :: AvailableOffer_OfferType
@@ -651,20 +620,21 @@ pattern AvailableOffer_OfferType_OFFERTYPESPENDMATCH = AvailableOffer_OfferType 
   AvailableOffer_OfferType_OFFERTYPESPENDXGETY,
   AvailableOffer_OfferType_OFFERTYPEVIDEO,
   AvailableOffer_OfferType_OFFERTYPESPENDMATCH,
-  AvailableOffer_OfferType #-}
+  AvailableOffer_OfferType
+  #-}
 
 -- | The type of certification, the area of expertise.
-newtype Certification_CertificationType = Certification_CertificationType { fromCertification_CertificationType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Certification_CertificationType = Certification_CertificationType {fromCertification_CertificationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unchosen.
 pattern Certification_CertificationType_CERTIFICATIONTYPEUNSPECIFIED :: Certification_CertificationType
@@ -727,20 +697,21 @@ pattern Certification_CertificationType_CTMOBILESITES = Certification_Certificat
   Certification_CertificationType_CTADWORDSSEARCH,
   Certification_CertificationType_CTADWORDSDISPLAY,
   Certification_CertificationType_CTMOBILESITES,
-  Certification_CertificationType #-}
+  Certification_CertificationType
+  #-}
 
 -- | The type of certification exam.
-newtype CertificationExamStatus_Type = CertificationExamStatus_Type { fromCertificationExamStatus_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CertificationExamStatus_Type = CertificationExamStatus_Type {fromCertificationExamStatus_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unchosen.
 pattern CertificationExamStatus_Type_CERTIFICATIONEXAMTYPEUNSPECIFIED :: CertificationExamStatus_Type
@@ -798,20 +769,21 @@ pattern CertificationExamStatus_Type_CETMOBILESITES = CertificationExamStatus_Ty
   CertificationExamStatus_Type_CETMOBILE,
   CertificationExamStatus_Type_CETDIGITALSALES,
   CertificationExamStatus_Type_CETMOBILESITES,
-  CertificationExamStatus_Type #-}
+  CertificationExamStatus_Type
+  #-}
 
 -- | The type of the certification.
-newtype CertificationStatus_Type = CertificationStatus_Type { fromCertificationStatus_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CertificationStatus_Type = CertificationStatus_Type {fromCertificationStatus_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unchosen.
 pattern CertificationStatus_Type_CERTIFICATIONTYPEUNSPECIFIED :: CertificationStatus_Type
@@ -874,20 +846,21 @@ pattern CertificationStatus_Type_CTMOBILESITES = CertificationStatus_Type "CT_MO
   CertificationStatus_Type_CTADWORDSSEARCH,
   CertificationStatus_Type_CTADWORDSDISPLAY,
   CertificationStatus_Type_CTMOBILESITES,
-  CertificationStatus_Type #-}
+  CertificationStatus_Type
+  #-}
 
 -- | Partner badge tier
-newtype Company_BadgeTier = Company_BadgeTier { fromCompany_BadgeTier :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Company_BadgeTier = Company_BadgeTier {fromCompany_BadgeTier :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Tier badge is not set.
 pattern Company_BadgeTier_BADGETIERNONE :: Company_BadgeTier
@@ -905,20 +878,21 @@ pattern Company_BadgeTier_BADGETIERPREMIER = Company_BadgeTier "BADGE_TIER_PREMI
   Company_BadgeTier_BADGETIERNONE,
   Company_BadgeTier_BADGETIERREGULAR,
   Company_BadgeTier_BADGETIERPREMIER,
-  Company_BadgeTier #-}
+  Company_BadgeTier
+  #-}
 
 -- | The public viewability status of the company\'s profile.
-newtype Company_ProfileStatus = Company_ProfileStatus { fromCompany_ProfileStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Company_ProfileStatus = Company_ProfileStatus {fromCompany_ProfileStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unchosen.
 pattern Company_ProfileStatus_COMPANYPROFILESTATUSUNSPECIFIED :: Company_ProfileStatus
@@ -941,20 +915,21 @@ pattern Company_ProfileStatus_Searchable = Company_ProfileStatus "SEARCHABLE"
   Company_ProfileStatus_Hidden,
   Company_ProfileStatus_Published,
   Company_ProfileStatus_Searchable,
-  Company_ProfileStatus #-}
+  Company_ProfileStatus
+  #-}
 
 -- | Whether the company is a Partner.
-newtype CompanyRelation_BadgeTier = CompanyRelation_BadgeTier { fromCompanyRelation_BadgeTier :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CompanyRelation_BadgeTier = CompanyRelation_BadgeTier {fromCompanyRelation_BadgeTier :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Tier badge is not set.
 pattern CompanyRelation_BadgeTier_BADGETIERNONE :: CompanyRelation_BadgeTier
@@ -972,20 +947,21 @@ pattern CompanyRelation_BadgeTier_BADGETIERPREMIER = CompanyRelation_BadgeTier "
   CompanyRelation_BadgeTier_BADGETIERNONE,
   CompanyRelation_BadgeTier_BADGETIERREGULAR,
   CompanyRelation_BadgeTier_BADGETIERPREMIER,
-  CompanyRelation_BadgeTier #-}
+  CompanyRelation_BadgeTier
+  #-}
 
 -- | The state of relationship, in terms of approvals.
-newtype CompanyRelation_State = CompanyRelation_State { fromCompanyRelation_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CompanyRelation_State = CompanyRelation_State {fromCompanyRelation_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default unspecified value.
 pattern CompanyRelation_State_USERCOMPANYREATIONSTATENONESPECIFIED :: CompanyRelation_State
@@ -1008,20 +984,21 @@ pattern CompanyRelation_State_USERCOMPANYRELATIONSTATEAPPROVED = CompanyRelation
   CompanyRelation_State_USERCOMPANYRELATIONSTATEAWAITEMAIL,
   CompanyRelation_State_USERCOMPANYRELATIONSTATEAWAITADMIN,
   CompanyRelation_State_USERCOMPANYRELATIONSTATEAPPROVED,
-  CompanyRelation_State #-}
+  CompanyRelation_State
+  #-}
 
 -- | Type of offer country is eligible for.
-newtype CountryOfferInfo_OfferType = CountryOfferInfo_OfferType { fromCountryOfferInfo_OfferType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CountryOfferInfo_OfferType = CountryOfferInfo_OfferType {fromCountryOfferInfo_OfferType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unset.
 pattern CountryOfferInfo_OfferType_OFFERTYPEUNSPECIFIED :: CountryOfferInfo_OfferType
@@ -1044,20 +1021,21 @@ pattern CountryOfferInfo_OfferType_OFFERTYPESPENDMATCH = CountryOfferInfo_OfferT
   CountryOfferInfo_OfferType_OFFERTYPESPENDXGETY,
   CountryOfferInfo_OfferType_OFFERTYPEVIDEO,
   CountryOfferInfo_OfferType_OFFERTYPESPENDMATCH,
-  CountryOfferInfo_OfferType #-}
+  CountryOfferInfo_OfferType
+  #-}
 
 -- | The outcome of \<a href=\"https:\/\/www.google.com\/recaptcha\/\">reCaptcha\<\/a> validation.
-newtype CreateLeadResponse_RecaptchaStatus = CreateLeadResponse_RecaptchaStatus { fromCreateLeadResponse_RecaptchaStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CreateLeadResponse_RecaptchaStatus = CreateLeadResponse_RecaptchaStatus {fromCreateLeadResponse_RecaptchaStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unchosen.
 pattern CreateLeadResponse_RecaptchaStatus_RECAPTCHASTATUSUNSPECIFIED :: CreateLeadResponse_RecaptchaStatus
@@ -1080,20 +1058,21 @@ pattern CreateLeadResponse_RecaptchaStatus_RSFAILED = CreateLeadResponse_Recaptc
   CreateLeadResponse_RecaptchaStatus_RSNOTNEEDED,
   CreateLeadResponse_RecaptchaStatus_RSPASSED,
   CreateLeadResponse_RecaptchaStatus_RSFAILED,
-  CreateLeadResponse_RecaptchaStatus #-}
+  CreateLeadResponse_RecaptchaStatus
+  #-}
 
 -- | Data type.
-newtype EventData_Key = EventData_Key { fromEventData_Key :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype EventData_Key = EventData_Key {fromEventData_Key :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unchosen.
 pattern EventData_Key_EVENTDATATYPEUNSPECIFIED :: EventData_Key
@@ -1286,20 +1265,21 @@ pattern EventData_Key_Progress = EventData_Key "PROGRESS"
   EventData_Key_Url,
   EventData_Key_ELEMENTFOCUS,
   EventData_Key_Progress,
-  EventData_Key #-}
+  EventData_Key
+  #-}
 
 -- | The type of the exam.
-newtype ExamStatus_ExamType = ExamStatus_ExamType { fromExamStatus_ExamType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ExamStatus_ExamType = ExamStatus_ExamType {fromExamStatus_ExamType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unchosen.
 pattern ExamStatus_ExamType_CERTIFICATIONEXAMTYPEUNSPECIFIED :: ExamStatus_ExamType
@@ -1357,20 +1337,21 @@ pattern ExamStatus_ExamType_CETMOBILESITES = ExamStatus_ExamType "CET_MOBILE_SIT
   ExamStatus_ExamType_CETMOBILE,
   ExamStatus_ExamType_CETDIGITALSALES,
   ExamStatus_ExamType_CETMOBILESITES,
-  ExamStatus_ExamType #-}
+  ExamStatus_ExamType
+  #-}
 
 -- | Type of offer.
-newtype HistoricalOffer_OfferType = HistoricalOffer_OfferType { fromHistoricalOffer_OfferType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype HistoricalOffer_OfferType = HistoricalOffer_OfferType {fromHistoricalOffer_OfferType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unset.
 pattern HistoricalOffer_OfferType_OFFERTYPEUNSPECIFIED :: HistoricalOffer_OfferType
@@ -1393,20 +1374,21 @@ pattern HistoricalOffer_OfferType_OFFERTYPESPENDMATCH = HistoricalOffer_OfferTyp
   HistoricalOffer_OfferType_OFFERTYPESPENDXGETY,
   HistoricalOffer_OfferType_OFFERTYPEVIDEO,
   HistoricalOffer_OfferType_OFFERTYPESPENDMATCH,
-  HistoricalOffer_OfferType #-}
+  HistoricalOffer_OfferType
+  #-}
 
 -- | Status of the offer.
-newtype HistoricalOffer_Status = HistoricalOffer_Status { fromHistoricalOffer_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype HistoricalOffer_Status = HistoricalOffer_Status {fromHistoricalOffer_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unset.
 pattern HistoricalOffer_Status_OFFERSTATUSUNSPECIFIED :: HistoricalOffer_Status
@@ -1434,20 +1416,21 @@ pattern HistoricalOffer_Status_OFFERSTATUSEXPIRED = HistoricalOffer_Status "OFFE
   HistoricalOffer_Status_OFFERSTATUSREDEEMED,
   HistoricalOffer_Status_OFFERSTATUSAWARDED,
   HistoricalOffer_Status_OFFERSTATUSEXPIRED,
-  HistoricalOffer_Status #-}
+  HistoricalOffer_Status
+  #-}
 
 -- | The lead\'s state in relation to the company.
-newtype Lead_State = Lead_State { fromLead_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Lead_State = Lead_State {fromLead_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unchosen.
 pattern Lead_State_LEADSTATEUNSPECIFIED :: Lead_State
@@ -1475,20 +1458,21 @@ pattern Lead_State_Other = Lead_State "OTHER"
   Lead_State_Contacted,
   Lead_State_Client,
   Lead_State_Other,
-  Lead_State #-}
+  Lead_State
+  #-}
 
 -- | Type of lead.
-newtype Lead_Type = Lead_Type { fromLead_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Lead_Type = Lead_Type {fromLead_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unchosen.
 pattern Lead_Type_LEADTYPEUNSPECIFIED :: Lead_Type
@@ -1501,20 +1485,21 @@ pattern Lead_Type_LTGPS = Lead_Type "LT_GPS"
 {-# COMPLETE
   Lead_Type_LEADTYPEUNSPECIFIED,
   Lead_Type_LTGPS,
-  Lead_Type #-}
+  Lead_Type
+  #-}
 
 -- | Reason why no Offers are available.
-newtype ListOffersResponse_NoOfferReason = ListOffersResponse_NoOfferReason { fromListOffersResponse_NoOfferReason :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ListOffersResponse_NoOfferReason = ListOffersResponse_NoOfferReason {fromListOffersResponse_NoOfferReason :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unset.
 pattern ListOffersResponse_NoOfferReason_NOOFFERREASONUNSPECIFIED :: ListOffersResponse_NoOfferReason
@@ -1537,20 +1522,21 @@ pattern ListOffersResponse_NoOfferReason_NOOFFERREASONINELIGIBLE = ListOffersRes
   ListOffersResponse_NoOfferReason_NOOFFERREASONNOMCC,
   ListOffersResponse_NoOfferReason_NOOFFERREASONLIMITREACHED,
   ListOffersResponse_NoOfferReason_NOOFFERREASONINELIGIBLE,
-  ListOffersResponse_NoOfferReason #-}
+  ListOffersResponse_NoOfferReason
+  #-}
 
 -- | Message level of client message.
-newtype LogMessageRequest_Level = LogMessageRequest_Level { fromLogMessageRequest_Level :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype LogMessageRequest_Level = LogMessageRequest_Level {fromLogMessageRequest_Level :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unchosen.
 pattern LogMessageRequest_Level_MESSAGELEVELUNSPECIFIED :: LogMessageRequest_Level
@@ -1578,20 +1564,21 @@ pattern LogMessageRequest_Level_MLSEVERE = LogMessageRequest_Level "ML_SEVERE"
   LogMessageRequest_Level_MLINFO,
   LogMessageRequest_Level_MLWARNING,
   LogMessageRequest_Level_MLSEVERE,
-  LogMessageRequest_Level #-}
+  LogMessageRequest_Level
+  #-}
 
 -- | The action that occurred.
-newtype LogUserEventRequest_EventAction = LogUserEventRequest_EventAction { fromLogUserEventRequest_EventAction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype LogUserEventRequest_EventAction = LogUserEventRequest_EventAction {fromLogUserEventRequest_EventAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unchosen.
 pattern LogUserEventRequest_EventAction_EVENTACTIONUNSPECIFIED :: LogUserEventRequest_EventAction
@@ -2389,20 +2376,21 @@ pattern LogUserEventRequest_EventAction_AGENCYSELECTEDOPTOUTAFAMIGRATION = LogUs
   LogUserEventRequest_EventAction_SMBENTEREDWEBSITEINCONTACTPARTNERFORM,
   LogUserEventRequest_EventAction_AGENCYSELECTEDOPTINAFAMIGRATION,
   LogUserEventRequest_EventAction_AGENCYSELECTEDOPTOUTAFAMIGRATION,
-  LogUserEventRequest_EventAction #-}
+  LogUserEventRequest_EventAction
+  #-}
 
 -- | The category the action belongs to.
-newtype LogUserEventRequest_EventCategory = LogUserEventRequest_EventCategory { fromLogUserEventRequest_EventCategory :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype LogUserEventRequest_EventCategory = LogUserEventRequest_EventCategory {fromLogUserEventRequest_EventCategory :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unchosen.
 pattern LogUserEventRequest_EventCategory_EVENTCATEGORYUNSPECIFIED :: LogUserEventRequest_EventCategory
@@ -2485,20 +2473,21 @@ pattern LogUserEventRequest_EventCategory_GOOGLEPARTNERLANDING = LogUserEventReq
   LogUserEventRequest_EventCategory_GOOGLEPARTNERPORTALCOMPANYPROFILE,
   LogUserEventRequest_EventCategory_EXTERNALLINKS,
   LogUserEventRequest_EventCategory_GOOGLEPARTNERLANDING,
-  LogUserEventRequest_EventCategory #-}
+  LogUserEventRequest_EventCategory
+  #-}
 
 -- | The scope of the event.
-newtype LogUserEventRequest_EventScope = LogUserEventRequest_EventScope { fromLogUserEventRequest_EventScope :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype LogUserEventRequest_EventScope = LogUserEventRequest_EventScope {fromLogUserEventRequest_EventScope :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unchosen.
 pattern LogUserEventRequest_EventScope_EVENTSCOPEUNSPECIFIED :: LogUserEventRequest_EventScope
@@ -2521,20 +2510,21 @@ pattern LogUserEventRequest_EventScope_Page = LogUserEventRequest_EventScope "PA
   LogUserEventRequest_EventScope_Visitor,
   LogUserEventRequest_EventScope_Session,
   LogUserEventRequest_EventScope_Page,
-  LogUserEventRequest_EventScope #-}
+  LogUserEventRequest_EventScope
+  #-}
 
 -- | Type of the offer
-newtype OfferCustomer_OfferType = OfferCustomer_OfferType { fromOfferCustomer_OfferType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype OfferCustomer_OfferType = OfferCustomer_OfferType {fromOfferCustomer_OfferType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unset.
 pattern OfferCustomer_OfferType_OFFERTYPEUNSPECIFIED :: OfferCustomer_OfferType
@@ -2557,20 +2547,21 @@ pattern OfferCustomer_OfferType_OFFERTYPESPENDMATCH = OfferCustomer_OfferType "O
   OfferCustomer_OfferType_OFFERTYPESPENDXGETY,
   OfferCustomer_OfferType_OFFERTYPEVIDEO,
   OfferCustomer_OfferType_OFFERTYPESPENDMATCH,
-  OfferCustomer_OfferType #-}
+  OfferCustomer_OfferType
+  #-}
 
 -- | The type of rank.
-newtype Rank_Type = Rank_Type { fromRank_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Rank_Type = Rank_Type {fromRank_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unchosen.
 pattern Rank_Type_RANKTYPEUNSPECIFIED :: Rank_Type
@@ -2583,20 +2574,21 @@ pattern Rank_Type_RTFINALSCORE = Rank_Type "RT_FINAL_SCORE"
 {-# COMPLETE
   Rank_Type_RANKTYPEUNSPECIFIED,
   Rank_Type_RTFINALSCORE,
-  Rank_Type #-}
+  Rank_Type
+  #-}
 
 -- | The specialization this status is for.
-newtype SpecializationStatus_BadgeSpecialization = SpecializationStatus_BadgeSpecialization { fromSpecializationStatus_BadgeSpecialization :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SpecializationStatus_BadgeSpecialization = SpecializationStatus_BadgeSpecialization {fromSpecializationStatus_BadgeSpecialization :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown specialization
 pattern SpecializationStatus_BadgeSpecialization_BADGESPECIALIZATIONUNKNOWN :: SpecializationStatus_BadgeSpecialization
@@ -2629,20 +2621,21 @@ pattern SpecializationStatus_BadgeSpecialization_BADGESPECIALIZATIONADWORDSSHOPP
   SpecializationStatus_BadgeSpecialization_BADGESPECIALIZATIONADWORDSMOBILE,
   SpecializationStatus_BadgeSpecialization_BADGESPECIALIZATIONADWORDSVIDEO,
   SpecializationStatus_BadgeSpecialization_BADGESPECIALIZATIONADWORDSSHOPPING,
-  SpecializationStatus_BadgeSpecialization #-}
+  SpecializationStatus_BadgeSpecialization
+  #-}
 
 -- | State of agency specialization.
-newtype SpecializationStatus_BadgeSpecializationState = SpecializationStatus_BadgeSpecializationState { fromSpecializationStatus_BadgeSpecializationState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SpecializationStatus_BadgeSpecializationState = SpecializationStatus_BadgeSpecializationState {fromSpecializationStatus_BadgeSpecializationState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown state
 pattern SpecializationStatus_BadgeSpecializationState_BADGESPECIALIZATIONSTATEUNKNOWN :: SpecializationStatus_BadgeSpecializationState
@@ -2665,4 +2658,5 @@ pattern SpecializationStatus_BadgeSpecializationState_BADGESPECIALIZATIONSTATEIN
   SpecializationStatus_BadgeSpecializationState_BADGESPECIALIZATIONSTATEPASSED,
   SpecializationStatus_BadgeSpecializationState_BADGESPECIALIZATIONSTATENOTPASSED,
   SpecializationStatus_BadgeSpecializationState_BADGESPECIALIZATIONSTATEINGRACE,
-  SpecializationStatus_BadgeSpecializationState #-}
+  SpecializationStatus_BadgeSpecializationState
+  #-}

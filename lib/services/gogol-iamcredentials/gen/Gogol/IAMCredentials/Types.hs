@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,72 +16,73 @@
 
 -- |
 -- Module      : Gogol.IAMCredentials.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.IAMCredentials.Types
-    (
-    -- * Configuration
-      iAMCredentialsService
+  ( -- * Configuration
+    iAMCredentialsService,
 
     -- * OAuth Scopes
-    , CloudPlatform'FullControl
+    CloudPlatform'FullControl,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** GenerateAccessTokenRequest
-    , GenerateAccessTokenRequest (..)
-    , newGenerateAccessTokenRequest
+    GenerateAccessTokenRequest (..),
+    newGenerateAccessTokenRequest,
 
     -- ** GenerateAccessTokenResponse
-    , GenerateAccessTokenResponse (..)
-    , newGenerateAccessTokenResponse
+    GenerateAccessTokenResponse (..),
+    newGenerateAccessTokenResponse,
 
     -- ** GenerateIdTokenRequest
-    , GenerateIdTokenRequest (..)
-    , newGenerateIdTokenRequest
+    GenerateIdTokenRequest (..),
+    newGenerateIdTokenRequest,
 
     -- ** GenerateIdTokenResponse
-    , GenerateIdTokenResponse (..)
-    , newGenerateIdTokenResponse
+    GenerateIdTokenResponse (..),
+    newGenerateIdTokenResponse,
 
     -- ** ServiceAccountAllowedLocations
-    , ServiceAccountAllowedLocations (..)
-    , newServiceAccountAllowedLocations
+    ServiceAccountAllowedLocations (..),
+    newServiceAccountAllowedLocations,
 
     -- ** SignBlobRequest
-    , SignBlobRequest (..)
-    , newSignBlobRequest
+    SignBlobRequest (..),
+    newSignBlobRequest,
 
     -- ** SignBlobResponse
-    , SignBlobResponse (..)
-    , newSignBlobResponse
+    SignBlobResponse (..),
+    newSignBlobResponse,
 
     -- ** SignJwtRequest
-    , SignJwtRequest (..)
-    , newSignJwtRequest
+    SignJwtRequest (..),
+    newSignJwtRequest,
 
     -- ** SignJwtResponse
-    , SignJwtResponse (..)
-    , newSignJwtResponse
-    ) where
+    SignJwtResponse (..),
+    newSignJwtResponse,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.IAMCredentials.Internal.Product
 import Gogol.IAMCredentials.Internal.Sum
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the IAM Service Account Credentials API. This contains the host and root path used as a starting point for constructing service requests.
 iAMCredentialsService :: Core.ServiceConfig
-iAMCredentialsService
-  = Core.defaultService
-      (Core.ServiceId "iamcredentials:v1")
-      "iamcredentials.googleapis.com"
+iAMCredentialsService =
+  Core.defaultService
+    (Core.ServiceId "iamcredentials:v1")
+    "iamcredentials.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"

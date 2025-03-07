@@ -9,12 +9,12 @@ library=(lib/services/gogol-*)
 for config in stack-*.yaml; do
     echo "Updating ${config}"
 
-    sed -i -e '/# GENERATED/,/# END GENERATED/d' "${config}"
+    sed -i -e '/^ *# GENERATED/,/^ *# END GENERATED/d' "${config}"
 
     {
-        printf "# GENERATED\n"
+        printf "  # GENERATED\n"
         printf '  - %s\n' "${library[@]}"
-        printf "# END GENERATED\n"
+        printf "  # END GENERATED\n"
     } >>"${config}"
 done
 

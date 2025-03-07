@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,269 +16,272 @@
 
 -- |
 -- Module      : Gogol.Blogger.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Blogger.Types
-    (
-    -- * Configuration
-      bloggerService
+  ( -- * Configuration
+    bloggerService,
 
     -- * OAuth Scopes
-    , Blogger'FullControl
-    , Blogger'Readonly
+    Blogger'FullControl,
+    Blogger'Readonly,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Blog
-    , Blog (..)
-    , newBlog
+    Blog (..),
+    newBlog,
 
     -- ** Blog_Locale
-    , Blog_Locale (..)
-    , newBlog_Locale
+    Blog_Locale (..),
+    newBlog_Locale,
 
     -- ** Blog_Pages
-    , Blog_Pages (..)
-    , newBlog_Pages
+    Blog_Pages (..),
+    newBlog_Pages,
 
     -- ** Blog_Posts
-    , Blog_Posts (..)
-    , newBlog_Posts
+    Blog_Posts (..),
+    newBlog_Posts,
 
     -- ** Blog_Status
-    , Blog_Status (..)
+    Blog_Status (..),
 
     -- ** BlogList
-    , BlogList (..)
-    , newBlogList
+    BlogList (..),
+    newBlogList,
 
     -- ** BlogPerUserInfo
-    , BlogPerUserInfo (..)
-    , newBlogPerUserInfo
+    BlogPerUserInfo (..),
+    newBlogPerUserInfo,
 
     -- ** BlogPerUserInfo_Role
-    , BlogPerUserInfo_Role (..)
+    BlogPerUserInfo_Role (..),
 
     -- ** BlogUserInfo
-    , BlogUserInfo (..)
-    , newBlogUserInfo
+    BlogUserInfo (..),
+    newBlogUserInfo,
 
     -- ** Comment
-    , Comment (..)
-    , newComment
+    Comment (..),
+    newComment,
 
     -- ** Comment_Author
-    , Comment_Author (..)
-    , newComment_Author
+    Comment_Author (..),
+    newComment_Author,
 
     -- ** Comment_Author_Image
-    , Comment_Author_Image (..)
-    , newComment_Author_Image
+    Comment_Author_Image (..),
+    newComment_Author_Image,
 
     -- ** Comment_Blog
-    , Comment_Blog (..)
-    , newComment_Blog
+    Comment_Blog (..),
+    newComment_Blog,
 
     -- ** Comment_InReplyTo
-    , Comment_InReplyTo (..)
-    , newComment_InReplyTo
+    Comment_InReplyTo (..),
+    newComment_InReplyTo,
 
     -- ** Comment_Post
-    , Comment_Post (..)
-    , newComment_Post
+    Comment_Post (..),
+    newComment_Post,
 
     -- ** Comment_Status
-    , Comment_Status (..)
+    Comment_Status (..),
 
     -- ** CommentList
-    , CommentList (..)
-    , newCommentList
+    CommentList (..),
+    newCommentList,
 
     -- ** Page
-    , Page (..)
-    , newPage
+    Page (..),
+    newPage,
 
     -- ** Page_Author
-    , Page_Author (..)
-    , newPage_Author
+    Page_Author (..),
+    newPage_Author,
 
     -- ** Page_Author_Image
-    , Page_Author_Image (..)
-    , newPage_Author_Image
+    Page_Author_Image (..),
+    newPage_Author_Image,
 
     -- ** Page_Blog
-    , Page_Blog (..)
-    , newPage_Blog
+    Page_Blog (..),
+    newPage_Blog,
 
     -- ** Page_Status
-    , Page_Status (..)
+    Page_Status (..),
 
     -- ** PageList
-    , PageList (..)
-    , newPageList
+    PageList (..),
+    newPageList,
 
     -- ** Pageviews
-    , Pageviews (..)
-    , newPageviews
+    Pageviews (..),
+    newPageviews,
 
     -- ** Pageviews_CountsItem
-    , Pageviews_CountsItem (..)
-    , newPageviews_CountsItem
+    Pageviews_CountsItem (..),
+    newPageviews_CountsItem,
 
     -- ** Pageviews_CountsItem_TimeRange
-    , Pageviews_CountsItem_TimeRange (..)
+    Pageviews_CountsItem_TimeRange (..),
 
     -- ** Post'
-    , Post' (..)
-    , newPost
+    Post' (..),
+    newPost,
 
     -- ** Post_Author
-    , Post_Author (..)
-    , newPost_Author
+    Post_Author (..),
+    newPost_Author,
 
     -- ** Post_Author_Image
-    , Post_Author_Image (..)
-    , newPost_Author_Image
+    Post_Author_Image (..),
+    newPost_Author_Image,
 
     -- ** Post_Blog
-    , Post_Blog (..)
-    , newPost_Blog
+    Post_Blog (..),
+    newPost_Blog,
 
     -- ** Post_ImagesItem
-    , Post_ImagesItem (..)
-    , newPost_ImagesItem
+    Post_ImagesItem (..),
+    newPost_ImagesItem,
 
     -- ** Post_Location
-    , Post_Location (..)
-    , newPost_Location
+    Post_Location (..),
+    newPost_Location,
 
     -- ** Post_ReaderComments
-    , Post_ReaderComments (..)
+    Post_ReaderComments (..),
 
     -- ** Post_Replies
-    , Post_Replies (..)
-    , newPost_Replies
+    Post_Replies (..),
+    newPost_Replies,
 
     -- ** Post_Status
-    , Post_Status (..)
+    Post_Status (..),
 
     -- ** PostList
-    , PostList (..)
-    , newPostList
+    PostList (..),
+    newPostList,
 
     -- ** PostPerUserInfo
-    , PostPerUserInfo (..)
-    , newPostPerUserInfo
+    PostPerUserInfo (..),
+    newPostPerUserInfo,
 
     -- ** PostUserInfo
-    , PostUserInfo (..)
-    , newPostUserInfo
+    PostUserInfo (..),
+    newPostUserInfo,
 
     -- ** PostUserInfosList
-    , PostUserInfosList (..)
-    , newPostUserInfosList
+    PostUserInfosList (..),
+    newPostUserInfosList,
 
     -- ** User
-    , User (..)
-    , newUser
+    User (..),
+    newUser,
 
     -- ** User_Blogs
-    , User_Blogs (..)
-    , newUser_Blogs
+    User_Blogs (..),
+    newUser_Blogs,
 
     -- ** User_Locale
-    , User_Locale (..)
-    , newUser_Locale
+    User_Locale (..),
+    newUser_Locale,
 
     -- ** BlogsGetView
-    , BlogsGetView (..)
+    BlogsGetView (..),
 
     -- ** BlogsGetByUrlView
-    , BlogsGetByUrlView (..)
+    BlogsGetByUrlView (..),
 
     -- ** BlogsListByUserRole
-    , BlogsListByUserRole (..)
+    BlogsListByUserRole (..),
 
     -- ** BlogsListByUserStatus
-    , BlogsListByUserStatus (..)
+    BlogsListByUserStatus (..),
 
     -- ** BlogsListByUserView
-    , BlogsListByUserView (..)
+    BlogsListByUserView (..),
 
     -- ** CommentsGetView
-    , CommentsGetView (..)
+    CommentsGetView (..),
 
     -- ** CommentsListStatus
-    , CommentsListStatus (..)
+    CommentsListStatus (..),
 
     -- ** CommentsListView
-    , CommentsListView (..)
+    CommentsListView (..),
 
     -- ** CommentsListByBlogStatus
-    , CommentsListByBlogStatus (..)
+    CommentsListByBlogStatus (..),
 
     -- ** PageViewsGetRange
-    , PageViewsGetRange (..)
+    PageViewsGetRange (..),
 
     -- ** PagesGetView
-    , PagesGetView (..)
+    PagesGetView (..),
 
     -- ** PagesListStatus
-    , PagesListStatus (..)
+    PagesListStatus (..),
 
     -- ** PagesListView
-    , PagesListView (..)
+    PagesListView (..),
 
     -- ** PostUserInfosListOrderBy
-    , PostUserInfosListOrderBy (..)
+    PostUserInfosListOrderBy (..),
 
     -- ** PostUserInfosListStatus
-    , PostUserInfosListStatus (..)
+    PostUserInfosListStatus (..),
 
     -- ** PostUserInfosListView
-    , PostUserInfosListView (..)
+    PostUserInfosListView (..),
 
     -- ** PostsGetView
-    , PostsGetView (..)
+    PostsGetView (..),
 
     -- ** PostsGetByPathView
-    , PostsGetByPathView (..)
+    PostsGetByPathView (..),
 
     -- ** PostsListOrderBy
-    , PostsListOrderBy (..)
+    PostsListOrderBy (..),
 
     -- ** PostsListSortOption
-    , PostsListSortOption (..)
+    PostsListSortOption (..),
 
     -- ** PostsListStatus
-    , PostsListStatus (..)
+    PostsListStatus (..),
 
     -- ** PostsListView
-    , PostsListView (..)
+    PostsListView (..),
 
     -- ** PostsSearchOrderBy
-    , PostsSearchOrderBy (..)
-    ) where
+    PostsSearchOrderBy (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Blogger.Internal.Product
 import Gogol.Blogger.Internal.Sum
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v3@ of the Blogger API. This contains the host and root path used as a starting point for constructing service requests.
 bloggerService :: Core.ServiceConfig
-bloggerService
-  = Core.defaultService (Core.ServiceId "blogger:v3")
-      "blogger.googleapis.com"
+bloggerService =
+  Core.defaultService
+    (Core.ServiceId "blogger:v3")
+    "blogger.googleapis.com"
 
 -- | Manage your Blogger account
-type Blogger'FullControl = "https://www.googleapis.com/auth/blogger"
+type Blogger'FullControl =
+  "https://www.googleapis.com/auth/blogger"
 
 -- | View your Blogger account
-type Blogger'Readonly = "https://www.googleapis.com/auth/blogger.readonly"
+type Blogger'Readonly =
+  "https://www.googleapis.com/auth/blogger.readonly"

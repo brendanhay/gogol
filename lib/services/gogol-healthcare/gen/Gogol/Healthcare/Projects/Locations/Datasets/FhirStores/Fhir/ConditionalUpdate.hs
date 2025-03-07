@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.ConditionalUpdate
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -32,104 +28,114 @@
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.fhirStores.fhir.conditionalUpdate@.
 module Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.ConditionalUpdate
-    (
-    -- * Resource
-      HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdateResource
+  ( -- * Resource
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdateResource,
 
     -- ** Constructing a Request
-    , HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate (..)
-    , newHealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate
-    ) where
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate (..),
+    newHealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Healthcare.Types
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.fhirStores.fhir.conditionalUpdate@ method which the
 -- 'HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate' request conforms to.
-type HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdateResource
-     =
-     "v1" Core.:>
-       Core.Capture "parent" Core.Text Core.:>
-         "fhir" Core.:>
-           Core.Capture "type" Core.Text Core.:>
-             Core.QueryParam "$.xgafv" Xgafv Core.:>
-               Core.QueryParam "access_token" Core.Text Core.:>
-                 Core.QueryParam "callback" Core.Text Core.:>
-                   Core.QueryParam "uploadType" Core.Text Core.:>
-                     Core.QueryParam "upload_protocol" Core.Text Core.:>
-                       Core.QueryParam "alt" Core.AltJSON Core.:>
-                         Core.ReqBody '[Core.JSON] HttpBody Core.:>
-                           Core.Put '[Core.JSON] HttpBody
+type HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdateResource =
+  "v1"
+    Core.:> Core.Capture "parent" Core.Text
+    Core.:> "fhir"
+    Core.:> Core.Capture "type" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] HttpBody
+    Core.:> Core.Put '[Core.JSON] HttpBody
 
 -- | If a resource is found with the identifier specified in the query parameters, updates the entire contents of that resource. Implements the FHIR standard conditional update interaction, limited to searching by resource identifier. Search term for identifier should be in the pattern @identifier=system|value@ or @identifier=value@ - similar to the @search@ method on resources with a specific identifier. If the search criteria identify more than one match, the request returns a @412 Precondition Failed@ error. If the search criteria identify zero matches, and the supplied resource body contains an @id@, and the FHIR store has enable/update/create set, creates the resource with the client-specified ID. It is strongly advised not to include or encode any sensitive data such as patient identifiers in client-specified resource IDs. Those IDs are part of the FHIR resource path recorded in Cloud Audit Logs and Pub\/Sub notifications. Those IDs can also be contained in reference fields within other resources. If the
 -- search criteria identify zero matches, and the supplied resource body does not contain an @id@, the resource is created with a server-assigned ID as per the create method. The request body must contain a JSON-encoded FHIR resource, and the request headers must contain @Content-Type: application\/fhir+json@. On success, the response body contains a JSON-encoded representation of the updated resource, including the server-assigned version ID. Errors generated by the FHIR store contain a JSON-encoded @OperationOutcome@ resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead. For samples that show how to call @conditionalUpdate@, see <https://cloud.google.com/healthcare/docs/how-tos/fhir-resources#conditionally_updating_a_fhir_resource Conditionally updating a FHIR resource>.
 --
 -- /See:/ 'newHealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate' smart constructor.
 data HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate = HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Required. The name of the FHIR store this resource belongs to.
-    , parent :: Core.Text
-      -- | Multipart request metadata.
-    , payload :: HttpBody
-      -- | Required. The FHIR resource type to update, such as Patient or Observation. For a complete list, see the FHIR Resource Index (<https://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html DSTU2>, <https://hl7.org/implement/standards/fhir/STU3/resourcelist.html STU3>, <https://hl7.org/implement/standards/fhir/R4/resourcelist.html R4>). Must match the resource type in the provided content.
-    , type' :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Required. The name of the FHIR store this resource belongs to.
+    parent :: Core.Text,
+    -- | Multipart request metadata.
+    payload :: HttpBody,
+    -- | Required. The FHIR resource type to update, such as Patient or Observation. For a complete list, see the FHIR Resource Index (<https://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html DSTU2>, <https://hl7.org/implement/standards/fhir/STU3/resourcelist.html STU3>, <https://hl7.org/implement/standards/fhir/R4/resourcelist.html R4>). Must match the resource type in the provided content.
+    type' :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate' with the minimum fields required to make a request.
-newHealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate 
-    ::  Core.Text
-       -- ^  Required. The name of the FHIR store this resource belongs to. See 'parent'.
-    -> HttpBody
-       -- ^  Multipart request metadata. See 'payload'.
-    -> Core.Text
-       -- ^  Required. The FHIR resource type to update, such as Patient or Observation. For a complete list, see the FHIR Resource Index (<https://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html DSTU2>, <https://hl7.org/implement/standards/fhir/STU3/resourcelist.html STU3>, <https://hl7.org/implement/standards/fhir/R4/resourcelist.html R4>). Must match the resource type in the provided content. See 'type''.
-    -> HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate
-newHealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate parent payload type' =
+newHealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate ::
+  -- |  Required. The name of the FHIR store this resource belongs to. See 'parent'.
+  Core.Text ->
+  -- |  Multipart request metadata. See 'payload'.
+  HttpBody ->
+  -- |  Required. The FHIR resource type to update, such as Patient or Observation. For a complete list, see the FHIR Resource Index (<https://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html DSTU2>, <https://hl7.org/implement/standards/fhir/STU3/resourcelist.html STU3>, <https://hl7.org/implement/standards/fhir/R4/resourcelist.html R4>). Must match the resource type in the provided content. See 'type''.
+  Core.Text ->
   HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , parent = parent
-    , payload = payload
-    , type' = type'
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
-    }
+newHealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate
+  parent
+  payload
+  type' =
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        parent = parent,
+        payload = payload,
+        type' = type',
+        uploadType = Core.Nothing,
+        uploadProtocol =
+          Core.Nothing
+      }
 
-instance Core.GoogleRequest
-           HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate
-         where
-        type Rs
-               HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate
-             = HttpBody
-        type Scopes
-               HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate
-             =
-             '[CloudHealthcare'FullControl,
-               CloudPlatform'FullControl]
-        requestClient
-          HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate{..}
-          = go parent type' xgafv accessToken callback
-              uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              payload
-              healthcareService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdateResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate
+  where
+  type
+    Rs
+      HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate =
+      HttpBody
+  type
+    Scopes
+      HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate =
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
+  requestClient
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate {..} =
+      go
+        parent
+        type'
+        xgafv
+        accessToken
+        callback
+        uploadType
+        uploadProtocol
+        (Core.Just Core.AltJSON)
+        payload
+        healthcareService
+      where
+        go =
+          Core.buildClient
+            ( Core.Proxy ::
+                Core.Proxy
+                  HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdateResource
+            )
+            Core.mempty

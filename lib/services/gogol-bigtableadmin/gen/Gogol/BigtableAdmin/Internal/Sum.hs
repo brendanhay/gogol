@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.BigtableAdmin.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.BigtableAdmin.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AppProfile_Priority
     AppProfile_Priority
-      (
-        AppProfile_Priority_PRIORITYUNSPECIFIED,
+      ( AppProfile_Priority_PRIORITYUNSPECIFIED,
         AppProfile_Priority_PRIORITYLOW,
         AppProfile_Priority_PRIORITYMEDIUM,
         AppProfile_Priority_PRIORITYHIGH,
@@ -50,8 +41,7 @@ module Gogol.BigtableAdmin.Internal.Sum
 
     -- * AuditLogConfig_LogType
     AuditLogConfig_LogType
-      (
-        AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
+      ( AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
         AuditLogConfig_LogType_ADMINREAD,
         AuditLogConfig_LogType_DATAWRITE,
         AuditLogConfig_LogType_DATAREAD,
@@ -60,8 +50,7 @@ module Gogol.BigtableAdmin.Internal.Sum
 
     -- * Backup_BackupType
     Backup_BackupType
-      (
-        Backup_BackupType_BACKUPTYPEUNSPECIFIED,
+      ( Backup_BackupType_BACKUPTYPEUNSPECIFIED,
         Backup_BackupType_Standard,
         Backup_BackupType_Hot,
         ..
@@ -69,8 +58,7 @@ module Gogol.BigtableAdmin.Internal.Sum
 
     -- * Backup_State
     Backup_State
-      (
-        Backup_State_STATEUNSPECIFIED,
+      ( Backup_State_STATEUNSPECIFIED,
         Backup_State_Creating,
         Backup_State_Ready,
         ..
@@ -78,8 +66,7 @@ module Gogol.BigtableAdmin.Internal.Sum
 
     -- * Cluster_DefaultStorageType
     Cluster_DefaultStorageType
-      (
-        Cluster_DefaultStorageType_STORAGETYPEUNSPECIFIED,
+      ( Cluster_DefaultStorageType_STORAGETYPEUNSPECIFIED,
         Cluster_DefaultStorageType_Ssd,
         Cluster_DefaultStorageType_Hdd,
         ..
@@ -87,8 +74,7 @@ module Gogol.BigtableAdmin.Internal.Sum
 
     -- * Cluster_NodeScalingFactor
     Cluster_NodeScalingFactor
-      (
-        Cluster_NodeScalingFactor_NODESCALINGFACTORUNSPECIFIED,
+      ( Cluster_NodeScalingFactor_NODESCALINGFACTORUNSPECIFIED,
         Cluster_NodeScalingFactor_NODESCALINGFACTOR1X,
         Cluster_NodeScalingFactor_NODESCALINGFACTOR2X,
         ..
@@ -96,8 +82,7 @@ module Gogol.BigtableAdmin.Internal.Sum
 
     -- * Cluster_State
     Cluster_State
-      (
-        Cluster_State_STATENOTKNOWN,
+      ( Cluster_State_STATENOTKNOWN,
         Cluster_State_Ready,
         Cluster_State_Creating,
         Cluster_State_Resizing,
@@ -107,8 +92,7 @@ module Gogol.BigtableAdmin.Internal.Sum
 
     -- * ClusterState_ReplicationState
     ClusterState_ReplicationState
-      (
-        ClusterState_ReplicationState_STATENOTKNOWN,
+      ( ClusterState_ReplicationState_STATENOTKNOWN,
         ClusterState_ReplicationState_Initializing,
         ClusterState_ReplicationState_PLANNEDMAINTENANCE,
         ClusterState_ReplicationState_UNPLANNEDMAINTENANCE,
@@ -119,16 +103,14 @@ module Gogol.BigtableAdmin.Internal.Sum
 
     -- * DataBoostIsolationReadOnly_ComputeBillingOwner
     DataBoostIsolationReadOnly_ComputeBillingOwner
-      (
-        DataBoostIsolationReadOnly_ComputeBillingOwner_COMPUTEBILLINGOWNERUNSPECIFIED,
+      ( DataBoostIsolationReadOnly_ComputeBillingOwner_COMPUTEBILLINGOWNERUNSPECIFIED,
         DataBoostIsolationReadOnly_ComputeBillingOwner_HOSTPAYS,
         ..
       ),
 
     -- * EncryptionInfo_EncryptionType
     EncryptionInfo_EncryptionType
-      (
-        EncryptionInfo_EncryptionType_ENCRYPTIONTYPEUNSPECIFIED,
+      ( EncryptionInfo_EncryptionType_ENCRYPTIONTYPEUNSPECIFIED,
         EncryptionInfo_EncryptionType_GOOGLEDEFAULTENCRYPTION,
         EncryptionInfo_EncryptionType_CUSTOMERMANAGEDENCRYPTION,
         ..
@@ -136,8 +118,7 @@ module Gogol.BigtableAdmin.Internal.Sum
 
     -- * Instance_State
     Instance_State
-      (
-        Instance_State_STATENOTKNOWN,
+      ( Instance_State_STATENOTKNOWN,
         Instance_State_Ready,
         Instance_State_Creating,
         ..
@@ -145,8 +126,7 @@ module Gogol.BigtableAdmin.Internal.Sum
 
     -- * Instance_Type
     Instance_Type
-      (
-        Instance_Type_TYPEUNSPECIFIED,
+      ( Instance_Type_TYPEUNSPECIFIED,
         Instance_Type_Production,
         Instance_Type_Development,
         ..
@@ -154,24 +134,21 @@ module Gogol.BigtableAdmin.Internal.Sum
 
     -- * RestoreInfo_SourceType
     RestoreInfo_SourceType
-      (
-        RestoreInfo_SourceType_RESTORESOURCETYPEUNSPECIFIED,
+      ( RestoreInfo_SourceType_RESTORESOURCETYPEUNSPECIFIED,
         RestoreInfo_SourceType_Backup,
         ..
       ),
 
     -- * RestoreTableMetadata_SourceType
     RestoreTableMetadata_SourceType
-      (
-        RestoreTableMetadata_SourceType_RESTORESOURCETYPEUNSPECIFIED,
+      ( RestoreTableMetadata_SourceType_RESTORESOURCETYPEUNSPECIFIED,
         RestoreTableMetadata_SourceType_Backup,
         ..
       ),
 
     -- * StandardIsolation_Priority
     StandardIsolation_Priority
-      (
-        StandardIsolation_Priority_PRIORITYUNSPECIFIED,
+      ( StandardIsolation_Priority_PRIORITYUNSPECIFIED,
         StandardIsolation_Priority_PRIORITYLOW,
         StandardIsolation_Priority_PRIORITYMEDIUM,
         StandardIsolation_Priority_PRIORITYHIGH,
@@ -180,16 +157,14 @@ module Gogol.BigtableAdmin.Internal.Sum
 
     -- * Table_Granularity
     Table_Granularity
-      (
-        Table_Granularity_TIMESTAMPGRANULARITYUNSPECIFIED,
+      ( Table_Granularity_TIMESTAMPGRANULARITYUNSPECIFIED,
         Table_Granularity_Millis,
         ..
       ),
 
     -- * TableProgress_State
     TableProgress_State
-      (
-        TableProgress_State_STATEUNSPECIFIED,
+      ( TableProgress_State_STATEUNSPECIFIED,
         TableProgress_State_Pending,
         TableProgress_State_Copying,
         TableProgress_State_Completed,
@@ -199,8 +174,7 @@ module Gogol.BigtableAdmin.Internal.Sum
 
     -- * ProjectsInstancesTablesAuthorizedViewsGetView
     ProjectsInstancesTablesAuthorizedViewsGetView
-      (
-        ProjectsInstancesTablesAuthorizedViewsGetView_RESPONSEVIEWUNSPECIFIED,
+      ( ProjectsInstancesTablesAuthorizedViewsGetView_RESPONSEVIEWUNSPECIFIED,
         ProjectsInstancesTablesAuthorizedViewsGetView_NAMEONLY,
         ProjectsInstancesTablesAuthorizedViewsGetView_Basic,
         ProjectsInstancesTablesAuthorizedViewsGetView_Full,
@@ -209,8 +183,7 @@ module Gogol.BigtableAdmin.Internal.Sum
 
     -- * ProjectsInstancesTablesAuthorizedViewsListView
     ProjectsInstancesTablesAuthorizedViewsListView
-      (
-        ProjectsInstancesTablesAuthorizedViewsListView_RESPONSEVIEWUNSPECIFIED,
+      ( ProjectsInstancesTablesAuthorizedViewsListView_RESPONSEVIEWUNSPECIFIED,
         ProjectsInstancesTablesAuthorizedViewsListView_NAMEONLY,
         ProjectsInstancesTablesAuthorizedViewsListView_Basic,
         ProjectsInstancesTablesAuthorizedViewsListView_Full,
@@ -219,8 +192,7 @@ module Gogol.BigtableAdmin.Internal.Sum
 
     -- * ProjectsInstancesTablesGetView
     ProjectsInstancesTablesGetView
-      (
-        ProjectsInstancesTablesGetView_VIEWUNSPECIFIED,
+      ( ProjectsInstancesTablesGetView_VIEWUNSPECIFIED,
         ProjectsInstancesTablesGetView_NAMEONLY,
         ProjectsInstancesTablesGetView_SCHEMAVIEW,
         ProjectsInstancesTablesGetView_REPLICATIONVIEW,
@@ -232,8 +204,7 @@ module Gogol.BigtableAdmin.Internal.Sum
 
     -- * ProjectsInstancesTablesListView
     ProjectsInstancesTablesListView
-      (
-        ProjectsInstancesTablesListView_VIEWUNSPECIFIED,
+      ( ProjectsInstancesTablesListView_VIEWUNSPECIFIED,
         ProjectsInstancesTablesListView_NAMEONLY,
         ProjectsInstancesTablesListView_SCHEMAVIEW,
         ProjectsInstancesTablesListView_REPLICATIONVIEW,
@@ -242,22 +213,23 @@ module Gogol.BigtableAdmin.Internal.Sum
         ProjectsInstancesTablesListView_Full,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -270,34 +242,32 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | This field has been deprecated in favor of @standard_isolation.priority@. If you set this field, @standard_isolation.priority@ will be set instead. The priority of requests sent using this app profile.
-newtype AppProfile_Priority = AppProfile_Priority { fromAppProfile_Priority :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AppProfile_Priority = AppProfile_Priority {fromAppProfile_Priority :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value. Mapped to PRIORITY_HIGH (the legacy behavior) on creation.
 pattern AppProfile_Priority_PRIORITYUNSPECIFIED :: AppProfile_Priority
 pattern AppProfile_Priority_PRIORITYUNSPECIFIED = AppProfile_Priority "PRIORITY_UNSPECIFIED"
 
--- | 
 pattern AppProfile_Priority_PRIORITYLOW :: AppProfile_Priority
 pattern AppProfile_Priority_PRIORITYLOW = AppProfile_Priority "PRIORITY_LOW"
 
--- | 
 pattern AppProfile_Priority_PRIORITYMEDIUM :: AppProfile_Priority
 pattern AppProfile_Priority_PRIORITYMEDIUM = AppProfile_Priority "PRIORITY_MEDIUM"
 
--- | 
 pattern AppProfile_Priority_PRIORITYHIGH :: AppProfile_Priority
 pattern AppProfile_Priority_PRIORITYHIGH = AppProfile_Priority "PRIORITY_HIGH"
 
@@ -306,20 +276,21 @@ pattern AppProfile_Priority_PRIORITYHIGH = AppProfile_Priority "PRIORITY_HIGH"
   AppProfile_Priority_PRIORITYLOW,
   AppProfile_Priority_PRIORITYMEDIUM,
   AppProfile_Priority_PRIORITYHIGH,
-  AppProfile_Priority #-}
+  AppProfile_Priority
+  #-}
 
 -- | The log type that this config enables.
-newtype AuditLogConfig_LogType = AuditLogConfig_LogType { fromAuditLogConfig_LogType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AuditLogConfig_LogType = AuditLogConfig_LogType {fromAuditLogConfig_LogType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default case. Should never be this.
 pattern AuditLogConfig_LogType_LOGTYPEUNSPECIFIED :: AuditLogConfig_LogType
@@ -342,20 +313,21 @@ pattern AuditLogConfig_LogType_DATAREAD = AuditLogConfig_LogType "DATA_READ"
   AuditLogConfig_LogType_ADMINREAD,
   AuditLogConfig_LogType_DATAWRITE,
   AuditLogConfig_LogType_DATAREAD,
-  AuditLogConfig_LogType #-}
+  AuditLogConfig_LogType
+  #-}
 
 -- | Indicates the backup type of the backup.
-newtype Backup_BackupType = Backup_BackupType { fromBackup_BackupType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Backup_BackupType = Backup_BackupType {fromBackup_BackupType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not specified.
 pattern Backup_BackupType_BACKUPTYPEUNSPECIFIED :: Backup_BackupType
@@ -373,20 +345,21 @@ pattern Backup_BackupType_Hot = Backup_BackupType "HOT"
   Backup_BackupType_BACKUPTYPEUNSPECIFIED,
   Backup_BackupType_Standard,
   Backup_BackupType_Hot,
-  Backup_BackupType #-}
+  Backup_BackupType
+  #-}
 
 -- | Output only. The current state of the backup.
-newtype Backup_State = Backup_State { fromBackup_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Backup_State = Backup_State {fromBackup_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not specified.
 pattern Backup_State_STATEUNSPECIFIED :: Backup_State
@@ -404,20 +377,21 @@ pattern Backup_State_Ready = Backup_State "READY"
   Backup_State_STATEUNSPECIFIED,
   Backup_State_Creating,
   Backup_State_Ready,
-  Backup_State #-}
+  Backup_State
+  #-}
 
 -- | Immutable. The type of storage used by this cluster to serve its parent instance\'s tables, unless explicitly overridden.
-newtype Cluster_DefaultStorageType = Cluster_DefaultStorageType { fromCluster_DefaultStorageType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Cluster_DefaultStorageType = Cluster_DefaultStorageType {fromCluster_DefaultStorageType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The user did not specify a storage type.
 pattern Cluster_DefaultStorageType_STORAGETYPEUNSPECIFIED :: Cluster_DefaultStorageType
@@ -435,20 +409,21 @@ pattern Cluster_DefaultStorageType_Hdd = Cluster_DefaultStorageType "HDD"
   Cluster_DefaultStorageType_STORAGETYPEUNSPECIFIED,
   Cluster_DefaultStorageType_Ssd,
   Cluster_DefaultStorageType_Hdd,
-  Cluster_DefaultStorageType #-}
+  Cluster_DefaultStorageType
+  #-}
 
 -- | Immutable. The node scaling factor of this cluster.
-newtype Cluster_NodeScalingFactor = Cluster_NodeScalingFactor { fromCluster_NodeScalingFactor :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Cluster_NodeScalingFactor = Cluster_NodeScalingFactor {fromCluster_NodeScalingFactor :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No node scaling specified. Defaults to NODE/SCALING/FACTOR_1X.
 pattern Cluster_NodeScalingFactor_NODESCALINGFACTORUNSPECIFIED :: Cluster_NodeScalingFactor
@@ -466,20 +441,21 @@ pattern Cluster_NodeScalingFactor_NODESCALINGFACTOR2X = Cluster_NodeScalingFacto
   Cluster_NodeScalingFactor_NODESCALINGFACTORUNSPECIFIED,
   Cluster_NodeScalingFactor_NODESCALINGFACTOR1X,
   Cluster_NodeScalingFactor_NODESCALINGFACTOR2X,
-  Cluster_NodeScalingFactor #-}
+  Cluster_NodeScalingFactor
+  #-}
 
 -- | Output only. The current state of the cluster.
-newtype Cluster_State = Cluster_State { fromCluster_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Cluster_State = Cluster_State {fromCluster_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The state of the cluster could not be determined.
 pattern Cluster_State_STATENOTKNOWN :: Cluster_State
@@ -507,20 +483,21 @@ pattern Cluster_State_Disabled = Cluster_State "DISABLED"
   Cluster_State_Creating,
   Cluster_State_Resizing,
   Cluster_State_Disabled,
-  Cluster_State #-}
+  Cluster_State
+  #-}
 
 -- | Output only. The state of replication for the table in this cluster.
-newtype ClusterState_ReplicationState = ClusterState_ReplicationState { fromClusterState_ReplicationState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ClusterState_ReplicationState = ClusterState_ReplicationState {fromClusterState_ReplicationState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The replication state of the table is unknown in this cluster.
 pattern ClusterState_ReplicationState_STATENOTKNOWN :: ClusterState_ReplicationState
@@ -553,20 +530,21 @@ pattern ClusterState_ReplicationState_READYOPTIMIZING = ClusterState_Replication
   ClusterState_ReplicationState_UNPLANNEDMAINTENANCE,
   ClusterState_ReplicationState_Ready,
   ClusterState_ReplicationState_READYOPTIMIZING,
-  ClusterState_ReplicationState #-}
+  ClusterState_ReplicationState
+  #-}
 
 -- | The Compute Billing Owner for this Data Boost App Profile.
-newtype DataBoostIsolationReadOnly_ComputeBillingOwner = DataBoostIsolationReadOnly_ComputeBillingOwner { fromDataBoostIsolationReadOnly_ComputeBillingOwner :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DataBoostIsolationReadOnly_ComputeBillingOwner = DataBoostIsolationReadOnly_ComputeBillingOwner {fromDataBoostIsolationReadOnly_ComputeBillingOwner :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified value.
 pattern DataBoostIsolationReadOnly_ComputeBillingOwner_COMPUTEBILLINGOWNERUNSPECIFIED :: DataBoostIsolationReadOnly_ComputeBillingOwner
@@ -579,20 +557,21 @@ pattern DataBoostIsolationReadOnly_ComputeBillingOwner_HOSTPAYS = DataBoostIsola
 {-# COMPLETE
   DataBoostIsolationReadOnly_ComputeBillingOwner_COMPUTEBILLINGOWNERUNSPECIFIED,
   DataBoostIsolationReadOnly_ComputeBillingOwner_HOSTPAYS,
-  DataBoostIsolationReadOnly_ComputeBillingOwner #-}
+  DataBoostIsolationReadOnly_ComputeBillingOwner
+  #-}
 
 -- | Output only. The type of encryption used to protect this resource.
-newtype EncryptionInfo_EncryptionType = EncryptionInfo_EncryptionType { fromEncryptionInfo_EncryptionType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype EncryptionInfo_EncryptionType = EncryptionInfo_EncryptionType {fromEncryptionInfo_EncryptionType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Encryption type was not specified, though data at rest remains encrypted.
 pattern EncryptionInfo_EncryptionType_ENCRYPTIONTYPEUNSPECIFIED :: EncryptionInfo_EncryptionType
@@ -610,20 +589,21 @@ pattern EncryptionInfo_EncryptionType_CUSTOMERMANAGEDENCRYPTION = EncryptionInfo
   EncryptionInfo_EncryptionType_ENCRYPTIONTYPEUNSPECIFIED,
   EncryptionInfo_EncryptionType_GOOGLEDEFAULTENCRYPTION,
   EncryptionInfo_EncryptionType_CUSTOMERMANAGEDENCRYPTION,
-  EncryptionInfo_EncryptionType #-}
+  EncryptionInfo_EncryptionType
+  #-}
 
 -- | Output only. The current state of the instance.
-newtype Instance_State = Instance_State { fromInstance_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Instance_State = Instance_State {fromInstance_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The state of the instance could not be determined.
 pattern Instance_State_STATENOTKNOWN :: Instance_State
@@ -641,20 +621,21 @@ pattern Instance_State_Creating = Instance_State "CREATING"
   Instance_State_STATENOTKNOWN,
   Instance_State_Ready,
   Instance_State_Creating,
-  Instance_State #-}
+  Instance_State
+  #-}
 
 -- | The type of the instance. Defaults to @PRODUCTION@.
-newtype Instance_Type = Instance_Type { fromInstance_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Instance_Type = Instance_Type {fromInstance_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The type of the instance is unspecified. If set when creating an instance, a @PRODUCTION@ instance will be created. If set when updating an instance, the type will be left unchanged.
 pattern Instance_Type_TYPEUNSPECIFIED :: Instance_Type
@@ -672,20 +653,21 @@ pattern Instance_Type_Development = Instance_Type "DEVELOPMENT"
   Instance_Type_TYPEUNSPECIFIED,
   Instance_Type_Production,
   Instance_Type_Development,
-  Instance_Type #-}
+  Instance_Type
+  #-}
 
 -- | The type of the restore source.
-newtype RestoreInfo_SourceType = RestoreInfo_SourceType { fromRestoreInfo_SourceType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RestoreInfo_SourceType = RestoreInfo_SourceType {fromRestoreInfo_SourceType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No restore associated.
 pattern RestoreInfo_SourceType_RESTORESOURCETYPEUNSPECIFIED :: RestoreInfo_SourceType
@@ -698,20 +680,21 @@ pattern RestoreInfo_SourceType_Backup = RestoreInfo_SourceType "BACKUP"
 {-# COMPLETE
   RestoreInfo_SourceType_RESTORESOURCETYPEUNSPECIFIED,
   RestoreInfo_SourceType_Backup,
-  RestoreInfo_SourceType #-}
+  RestoreInfo_SourceType
+  #-}
 
 -- | The type of the restore source.
-newtype RestoreTableMetadata_SourceType = RestoreTableMetadata_SourceType { fromRestoreTableMetadata_SourceType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RestoreTableMetadata_SourceType = RestoreTableMetadata_SourceType {fromRestoreTableMetadata_SourceType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No restore associated.
 pattern RestoreTableMetadata_SourceType_RESTORESOURCETYPEUNSPECIFIED :: RestoreTableMetadata_SourceType
@@ -724,34 +707,32 @@ pattern RestoreTableMetadata_SourceType_Backup = RestoreTableMetadata_SourceType
 {-# COMPLETE
   RestoreTableMetadata_SourceType_RESTORESOURCETYPEUNSPECIFIED,
   RestoreTableMetadata_SourceType_Backup,
-  RestoreTableMetadata_SourceType #-}
+  RestoreTableMetadata_SourceType
+  #-}
 
 -- | The priority of requests sent using this app profile.
-newtype StandardIsolation_Priority = StandardIsolation_Priority { fromStandardIsolation_Priority :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype StandardIsolation_Priority = StandardIsolation_Priority {fromStandardIsolation_Priority :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value. Mapped to PRIORITY_HIGH (the legacy behavior) on creation.
 pattern StandardIsolation_Priority_PRIORITYUNSPECIFIED :: StandardIsolation_Priority
 pattern StandardIsolation_Priority_PRIORITYUNSPECIFIED = StandardIsolation_Priority "PRIORITY_UNSPECIFIED"
 
--- | 
 pattern StandardIsolation_Priority_PRIORITYLOW :: StandardIsolation_Priority
 pattern StandardIsolation_Priority_PRIORITYLOW = StandardIsolation_Priority "PRIORITY_LOW"
 
--- | 
 pattern StandardIsolation_Priority_PRIORITYMEDIUM :: StandardIsolation_Priority
 pattern StandardIsolation_Priority_PRIORITYMEDIUM = StandardIsolation_Priority "PRIORITY_MEDIUM"
 
--- | 
 pattern StandardIsolation_Priority_PRIORITYHIGH :: StandardIsolation_Priority
 pattern StandardIsolation_Priority_PRIORITYHIGH = StandardIsolation_Priority "PRIORITY_HIGH"
 
@@ -760,20 +741,21 @@ pattern StandardIsolation_Priority_PRIORITYHIGH = StandardIsolation_Priority "PR
   StandardIsolation_Priority_PRIORITYLOW,
   StandardIsolation_Priority_PRIORITYMEDIUM,
   StandardIsolation_Priority_PRIORITYHIGH,
-  StandardIsolation_Priority #-}
+  StandardIsolation_Priority
+  #-}
 
 -- | Immutable. The granularity (i.e. @MILLIS@) at which timestamps are stored in this table. Timestamps not matching the granularity will be rejected. If unspecified at creation time, the value will be set to @MILLIS@. Views: @SCHEMA_VIEW@, @FULL@.
-newtype Table_Granularity = Table_Granularity { fromTable_Granularity :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Table_Granularity = Table_Granularity {fromTable_Granularity :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The user did not specify a granularity. Should not be returned. When specified during table creation, MILLIS will be used.
 pattern Table_Granularity_TIMESTAMPGRANULARITYUNSPECIFIED :: Table_Granularity
@@ -786,21 +768,21 @@ pattern Table_Granularity_Millis = Table_Granularity "MILLIS"
 {-# COMPLETE
   Table_Granularity_TIMESTAMPGRANULARITYUNSPECIFIED,
   Table_Granularity_Millis,
-  Table_Granularity #-}
+  Table_Granularity
+  #-}
 
-newtype TableProgress_State = TableProgress_State { fromTableProgress_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TableProgress_State = TableProgress_State {fromTableProgress_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern TableProgress_State_STATEUNSPECIFIED :: TableProgress_State
 pattern TableProgress_State_STATEUNSPECIFIED = TableProgress_State "STATE_UNSPECIFIED"
 
@@ -826,20 +808,21 @@ pattern TableProgress_State_Cancelled = TableProgress_State "CANCELLED"
   TableProgress_State_Copying,
   TableProgress_State_Completed,
   TableProgress_State_Cancelled,
-  TableProgress_State #-}
+  TableProgress_State
+  #-}
 
 -- | Optional. The resource_view to be applied to the returned AuthorizedView\'s fields. Default to BASIC.
-newtype ProjectsInstancesTablesAuthorizedViewsGetView = ProjectsInstancesTablesAuthorizedViewsGetView { fromProjectsInstancesTablesAuthorizedViewsGetView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsInstancesTablesAuthorizedViewsGetView = ProjectsInstancesTablesAuthorizedViewsGetView {fromProjectsInstancesTablesAuthorizedViewsGetView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Uses the default view for each method as documented in the request.
 pattern ProjectsInstancesTablesAuthorizedViewsGetView_RESPONSEVIEWUNSPECIFIED :: ProjectsInstancesTablesAuthorizedViewsGetView
@@ -862,20 +845,21 @@ pattern ProjectsInstancesTablesAuthorizedViewsGetView_Full = ProjectsInstancesTa
   ProjectsInstancesTablesAuthorizedViewsGetView_NAMEONLY,
   ProjectsInstancesTablesAuthorizedViewsGetView_Basic,
   ProjectsInstancesTablesAuthorizedViewsGetView_Full,
-  ProjectsInstancesTablesAuthorizedViewsGetView #-}
+  ProjectsInstancesTablesAuthorizedViewsGetView
+  #-}
 
 -- | Optional. The resource/view to be applied to the returned AuthorizedViews\' fields. Default to NAME/ONLY.
-newtype ProjectsInstancesTablesAuthorizedViewsListView = ProjectsInstancesTablesAuthorizedViewsListView { fromProjectsInstancesTablesAuthorizedViewsListView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsInstancesTablesAuthorizedViewsListView = ProjectsInstancesTablesAuthorizedViewsListView {fromProjectsInstancesTablesAuthorizedViewsListView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Uses the default view for each method as documented in the request.
 pattern ProjectsInstancesTablesAuthorizedViewsListView_RESPONSEVIEWUNSPECIFIED :: ProjectsInstancesTablesAuthorizedViewsListView
@@ -898,20 +882,21 @@ pattern ProjectsInstancesTablesAuthorizedViewsListView_Full = ProjectsInstancesT
   ProjectsInstancesTablesAuthorizedViewsListView_NAMEONLY,
   ProjectsInstancesTablesAuthorizedViewsListView_Basic,
   ProjectsInstancesTablesAuthorizedViewsListView_Full,
-  ProjectsInstancesTablesAuthorizedViewsListView #-}
+  ProjectsInstancesTablesAuthorizedViewsListView
+  #-}
 
 -- | The view to be applied to the returned table\'s fields. Defaults to @SCHEMA_VIEW@ if unspecified.
-newtype ProjectsInstancesTablesGetView = ProjectsInstancesTablesGetView { fromProjectsInstancesTablesGetView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsInstancesTablesGetView = ProjectsInstancesTablesGetView {fromProjectsInstancesTablesGetView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Uses the default view for each method as documented in its request.
 pattern ProjectsInstancesTablesGetView_VIEWUNSPECIFIED :: ProjectsInstancesTablesGetView
@@ -949,20 +934,21 @@ pattern ProjectsInstancesTablesGetView_Full = ProjectsInstancesTablesGetView "FU
   ProjectsInstancesTablesGetView_ENCRYPTIONVIEW,
   ProjectsInstancesTablesGetView_STATSVIEW,
   ProjectsInstancesTablesGetView_Full,
-  ProjectsInstancesTablesGetView #-}
+  ProjectsInstancesTablesGetView
+  #-}
 
 -- | The view to be applied to the returned tables\' fields. Only NAME/ONLY view (default), REPLICATION/VIEW and ENCRYPTION_VIEW are supported.
-newtype ProjectsInstancesTablesListView = ProjectsInstancesTablesListView { fromProjectsInstancesTablesListView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ProjectsInstancesTablesListView = ProjectsInstancesTablesListView {fromProjectsInstancesTablesListView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Uses the default view for each method as documented in its request.
 pattern ProjectsInstancesTablesListView_VIEWUNSPECIFIED :: ProjectsInstancesTablesListView
@@ -1000,4 +986,5 @@ pattern ProjectsInstancesTablesListView_Full = ProjectsInstancesTablesListView "
   ProjectsInstancesTablesListView_ENCRYPTIONVIEW,
   ProjectsInstancesTablesListView_STATSVIEW,
   ProjectsInstancesTablesListView_Full,
-  ProjectsInstancesTablesListView #-}
+  ProjectsInstancesTablesListView
+  #-}

@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.Debugger.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Debugger.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AliasContext_Kind
     AliasContext_Kind
-      (
-        AliasContext_Kind_Any,
+      ( AliasContext_Kind_Any,
         AliasContext_Kind_Fixed,
         AliasContext_Kind_Movable,
         AliasContext_Kind_Other,
@@ -50,16 +41,14 @@ module Gogol.Debugger.Internal.Sum
 
     -- * Breakpoint_Action
     Breakpoint_Action
-      (
-        Breakpoint_Action_Capture,
+      ( Breakpoint_Action_Capture,
         Breakpoint_Action_Log,
         ..
       ),
 
     -- * Breakpoint_LogLevel
     Breakpoint_LogLevel
-      (
-        Breakpoint_LogLevel_Info,
+      ( Breakpoint_LogLevel_Info,
         Breakpoint_LogLevel_Warning,
         Breakpoint_LogLevel_Error',
         ..
@@ -67,8 +56,7 @@ module Gogol.Debugger.Internal.Sum
 
     -- * Breakpoint_State
     Breakpoint_State
-      (
-        Breakpoint_State_STATEUNSPECIFIED,
+      ( Breakpoint_State_STATEUNSPECIFIED,
         Breakpoint_State_STATECANARYPENDINGAGENTS,
         Breakpoint_State_STATECANARYACTIVE,
         Breakpoint_State_STATEROLLINGTOALL,
@@ -78,8 +66,7 @@ module Gogol.Debugger.Internal.Sum
 
     -- * Debuggee_CanaryMode
     Debuggee_CanaryMode
-      (
-        Debuggee_CanaryMode_CANARYMODEUNSPECIFIED,
+      ( Debuggee_CanaryMode_CANARYMODEUNSPECIFIED,
         Debuggee_CanaryMode_CANARYMODEALWAYSENABLED,
         Debuggee_CanaryMode_CANARYMODEALWAYSDISABLED,
         Debuggee_CanaryMode_CANARYMODEDEFAULTENABLED,
@@ -89,8 +76,7 @@ module Gogol.Debugger.Internal.Sum
 
     -- * StatusMessage_RefersTo
     StatusMessage_RefersTo
-      (
-        StatusMessage_RefersTo_Unspecified,
+      ( StatusMessage_RefersTo_Unspecified,
         StatusMessage_RefersTo_BREAKPOINTSOURCELOCATION,
         StatusMessage_RefersTo_BREAKPOINTCONDITION,
         StatusMessage_RefersTo_BREAKPOINTEXPRESSION,
@@ -103,36 +89,35 @@ module Gogol.Debugger.Internal.Sum
 
     -- * DebuggerDebuggeesBreakpointsListActionValue
     DebuggerDebuggeesBreakpointsListActionValue
-      (
-        DebuggerDebuggeesBreakpointsListActionValue_Capture,
+      ( DebuggerDebuggeesBreakpointsListActionValue_Capture,
         DebuggerDebuggeesBreakpointsListActionValue_Log,
         ..
       ),
 
     -- * DebuggerDebuggeesBreakpointsSetCanaryOption
     DebuggerDebuggeesBreakpointsSetCanaryOption
-      (
-        DebuggerDebuggeesBreakpointsSetCanaryOption_CANARYOPTIONUNSPECIFIED,
+      ( DebuggerDebuggeesBreakpointsSetCanaryOption_CANARYOPTIONUNSPECIFIED,
         DebuggerDebuggeesBreakpointsSetCanaryOption_CANARYOPTIONTRYENABLE,
         DebuggerDebuggeesBreakpointsSetCanaryOption_CANARYOPTIONTRYDISABLE,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -145,20 +130,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | The alias kind.
-newtype AliasContext_Kind = AliasContext_Kind { fromAliasContext_Kind :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AliasContext_Kind = AliasContext_Kind {fromAliasContext_Kind :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Do not use.
 pattern AliasContext_Kind_Any :: AliasContext_Kind
@@ -181,20 +167,21 @@ pattern AliasContext_Kind_Other = AliasContext_Kind "OTHER"
   AliasContext_Kind_Fixed,
   AliasContext_Kind_Movable,
   AliasContext_Kind_Other,
-  AliasContext_Kind #-}
+  AliasContext_Kind
+  #-}
 
 -- | Action that the agent should perform when the code at the breakpoint location is hit.
-newtype Breakpoint_Action = Breakpoint_Action { fromBreakpoint_Action :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Breakpoint_Action = Breakpoint_Action {fromBreakpoint_Action :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Capture stack frame and variables and update the breakpoint. The data is only captured once. After that the breakpoint is set in a final state.
 pattern Breakpoint_Action_Capture :: Breakpoint_Action
@@ -207,20 +194,21 @@ pattern Breakpoint_Action_Log = Breakpoint_Action "LOG"
 {-# COMPLETE
   Breakpoint_Action_Capture,
   Breakpoint_Action_Log,
-  Breakpoint_Action #-}
+  Breakpoint_Action
+  #-}
 
 -- | Indicates the severity of the log. Only relevant when action is @LOG@.
-newtype Breakpoint_LogLevel = Breakpoint_LogLevel { fromBreakpoint_LogLevel :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Breakpoint_LogLevel = Breakpoint_LogLevel {fromBreakpoint_LogLevel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Information log message.
 pattern Breakpoint_LogLevel_Info :: Breakpoint_LogLevel
@@ -238,20 +226,21 @@ pattern Breakpoint_LogLevel_Error' = Breakpoint_LogLevel "ERROR"
   Breakpoint_LogLevel_Info,
   Breakpoint_LogLevel_Warning,
   Breakpoint_LogLevel_Error',
-  Breakpoint_LogLevel #-}
+  Breakpoint_LogLevel
+  #-}
 
 -- | The current state of the breakpoint.
-newtype Breakpoint_State = Breakpoint_State { fromBreakpoint_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Breakpoint_State = Breakpoint_State {fromBreakpoint_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Breakpoint state UNSPECIFIED.
 pattern Breakpoint_State_STATEUNSPECIFIED :: Breakpoint_State
@@ -279,20 +268,21 @@ pattern Breakpoint_State_STATEISFINAL = Breakpoint_State "STATE_IS_FINAL"
   Breakpoint_State_STATECANARYACTIVE,
   Breakpoint_State_STATEROLLINGTOALL,
   Breakpoint_State_STATEISFINAL,
-  Breakpoint_State #-}
+  Breakpoint_State
+  #-}
 
 -- | Used when setting breakpoint canary for this debuggee.
-newtype Debuggee_CanaryMode = Debuggee_CanaryMode { fromDebuggee_CanaryMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Debuggee_CanaryMode = Debuggee_CanaryMode {fromDebuggee_CanaryMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | CANARY/MODE/UNSPECIFIED is equivalent to CANARY/MODE/ALWAYS_DISABLED so that if the debuggee is not configured to use the canary feature, the feature will be disabled.
 pattern Debuggee_CanaryMode_CANARYMODEUNSPECIFIED :: Debuggee_CanaryMode
@@ -320,20 +310,21 @@ pattern Debuggee_CanaryMode_CANARYMODEDEFAULTDISABLED = Debuggee_CanaryMode "CAN
   Debuggee_CanaryMode_CANARYMODEALWAYSDISABLED,
   Debuggee_CanaryMode_CANARYMODEDEFAULTENABLED,
   Debuggee_CanaryMode_CANARYMODEDEFAULTDISABLED,
-  Debuggee_CanaryMode #-}
+  Debuggee_CanaryMode
+  #-}
 
 -- | Reference to which the message applies.
-newtype StatusMessage_RefersTo = StatusMessage_RefersTo { fromStatusMessage_RefersTo :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype StatusMessage_RefersTo = StatusMessage_RefersTo {fromStatusMessage_RefersTo :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Status doesn\'t refer to any particular input.
 pattern StatusMessage_RefersTo_Unspecified :: StatusMessage_RefersTo
@@ -376,20 +367,21 @@ pattern StatusMessage_RefersTo_VARIABLEVALUE = StatusMessage_RefersTo "VARIABLE_
   StatusMessage_RefersTo_BREAKPOINTCANARYFAILED,
   StatusMessage_RefersTo_VARIABLENAME,
   StatusMessage_RefersTo_VARIABLEVALUE,
-  StatusMessage_RefersTo #-}
+  StatusMessage_RefersTo
+  #-}
 
 -- | Only breakpoints with the specified action will pass the filter.
-newtype DebuggerDebuggeesBreakpointsListActionValue = DebuggerDebuggeesBreakpointsListActionValue { fromDebuggerDebuggeesBreakpointsListActionValue :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DebuggerDebuggeesBreakpointsListActionValue = DebuggerDebuggeesBreakpointsListActionValue {fromDebuggerDebuggeesBreakpointsListActionValue :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Capture stack frame and variables and update the breakpoint. The data is only captured once. After that the breakpoint is set in a final state.
 pattern DebuggerDebuggeesBreakpointsListActionValue_Capture :: DebuggerDebuggeesBreakpointsListActionValue
@@ -402,20 +394,21 @@ pattern DebuggerDebuggeesBreakpointsListActionValue_Log = DebuggerDebuggeesBreak
 {-# COMPLETE
   DebuggerDebuggeesBreakpointsListActionValue_Capture,
   DebuggerDebuggeesBreakpointsListActionValue_Log,
-  DebuggerDebuggeesBreakpointsListActionValue #-}
+  DebuggerDebuggeesBreakpointsListActionValue
+  #-}
 
 -- | The canary option set by the user upon setting breakpoint.
-newtype DebuggerDebuggeesBreakpointsSetCanaryOption = DebuggerDebuggeesBreakpointsSetCanaryOption { fromDebuggerDebuggeesBreakpointsSetCanaryOption :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DebuggerDebuggeesBreakpointsSetCanaryOption = DebuggerDebuggeesBreakpointsSetCanaryOption {fromDebuggerDebuggeesBreakpointsSetCanaryOption :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Depends on the canary_mode of the debuggee.
 pattern DebuggerDebuggeesBreakpointsSetCanaryOption_CANARYOPTIONUNSPECIFIED :: DebuggerDebuggeesBreakpointsSetCanaryOption
@@ -433,4 +426,5 @@ pattern DebuggerDebuggeesBreakpointsSetCanaryOption_CANARYOPTIONTRYDISABLE = Deb
   DebuggerDebuggeesBreakpointsSetCanaryOption_CANARYOPTIONUNSPECIFIED,
   DebuggerDebuggeesBreakpointsSetCanaryOption_CANARYOPTIONTRYENABLE,
   DebuggerDebuggeesBreakpointsSetCanaryOption_CANARYOPTIONTRYDISABLE,
-  DebuggerDebuggeesBreakpointsSetCanaryOption #-}
+  DebuggerDebuggeesBreakpointsSetCanaryOption
+  #-}

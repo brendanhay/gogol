@@ -1,19 +1,24 @@
-cabal-version:         2.2
-name:                  gogol-containeranalysis
-version:               1.0.0
-synopsis:              Google Container Analysis SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-containeranalysis
+version:            1.0.0
+synopsis:           Google Container Analysis SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:
+  Brendan Hay <brendan.g.hay+gogol@gmail.com>, Toni Cebrián <toni@tonicebrian.com>
+
+copyright:          Copyright (c) 2015-2025 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    This API is a prerequisite for leveraging Artifact Analysis scanning capabilities in both Artifact Registry and with Advanced Vulnerability Insights (runtime scanning) in GKE. In addition, the Container Analysis API is an implementation of the Grafeas API, which enables storing, querying, and retrieval of critical metadata about all of your software artifacts.
+  This API is a prerequisite for leveraging Artifact Analysis scanning capabilities in both Artifact Registry and with Advanced Vulnerability Insights (runtime scanning) in GKE. In addition, the Container Analysis API is an implementation of the Grafeas API, which enables storing, querying, and retrieval of critical metadata about all of your software artifacts.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -27,76 +32,73 @@ source-repository head
   subdir:   gogol-containeranalysis
 
 flag field-selectors
-  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-  default: False
-  manual: True
+  description:
+    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+
+  default:     False
+  manual:      True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: GHC2021
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -Werror
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if !flag(field-selectors) && impl(ghc >= 9.2)
+  if (!flag(field-selectors) && impl(ghc >=9.2))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.ContainerAnalysis
-    , Gogol.ContainerAnalysis.Projects.Locations.Notes.BatchCreate
-    , Gogol.ContainerAnalysis.Projects.Locations.Notes.Create
-    , Gogol.ContainerAnalysis.Projects.Locations.Notes.Delete
-    , Gogol.ContainerAnalysis.Projects.Locations.Notes.Get
-    , Gogol.ContainerAnalysis.Projects.Locations.Notes.GetIamPolicy
-    , Gogol.ContainerAnalysis.Projects.Locations.Notes.List
-    , Gogol.ContainerAnalysis.Projects.Locations.Notes.Occurrences.List
-    , Gogol.ContainerAnalysis.Projects.Locations.Notes.Patch
-    , Gogol.ContainerAnalysis.Projects.Locations.Notes.SetIamPolicy
-    , Gogol.ContainerAnalysis.Projects.Locations.Notes.TestIamPermissions
-    , Gogol.ContainerAnalysis.Projects.Locations.Occurrences.BatchCreate
-    , Gogol.ContainerAnalysis.Projects.Locations.Occurrences.Create
-    , Gogol.ContainerAnalysis.Projects.Locations.Occurrences.Delete
-    , Gogol.ContainerAnalysis.Projects.Locations.Occurrences.Get
-    , Gogol.ContainerAnalysis.Projects.Locations.Occurrences.GetIamPolicy
-    , Gogol.ContainerAnalysis.Projects.Locations.Occurrences.GetNotes
-    , Gogol.ContainerAnalysis.Projects.Locations.Occurrences.GetVulnerabilitySummary
-    , Gogol.ContainerAnalysis.Projects.Locations.Occurrences.List
-    , Gogol.ContainerAnalysis.Projects.Locations.Occurrences.Patch
-    , Gogol.ContainerAnalysis.Projects.Locations.Occurrences.SetIamPolicy
-    , Gogol.ContainerAnalysis.Projects.Locations.Occurrences.TestIamPermissions
-    , Gogol.ContainerAnalysis.Projects.Locations.Resources.ExportSBOM
-    , Gogol.ContainerAnalysis.Projects.Notes.BatchCreate
-    , Gogol.ContainerAnalysis.Projects.Notes.Create
-    , Gogol.ContainerAnalysis.Projects.Notes.Delete
-    , Gogol.ContainerAnalysis.Projects.Notes.Get
-    , Gogol.ContainerAnalysis.Projects.Notes.GetIamPolicy
-    , Gogol.ContainerAnalysis.Projects.Notes.List
-    , Gogol.ContainerAnalysis.Projects.Notes.Occurrences.List
-    , Gogol.ContainerAnalysis.Projects.Notes.Patch
-    , Gogol.ContainerAnalysis.Projects.Notes.SetIamPolicy
-    , Gogol.ContainerAnalysis.Projects.Notes.TestIamPermissions
-    , Gogol.ContainerAnalysis.Projects.Occurrences.BatchCreate
-    , Gogol.ContainerAnalysis.Projects.Occurrences.Create
-    , Gogol.ContainerAnalysis.Projects.Occurrences.Delete
-    , Gogol.ContainerAnalysis.Projects.Occurrences.Get
-    , Gogol.ContainerAnalysis.Projects.Occurrences.GetIamPolicy
-    , Gogol.ContainerAnalysis.Projects.Occurrences.GetNotes
-    , Gogol.ContainerAnalysis.Projects.Occurrences.GetVulnerabilitySummary
-    , Gogol.ContainerAnalysis.Projects.Occurrences.List
-    , Gogol.ContainerAnalysis.Projects.Occurrences.Patch
-    , Gogol.ContainerAnalysis.Projects.Occurrences.SetIamPolicy
-    , Gogol.ContainerAnalysis.Projects.Occurrences.TestIamPermissions
-    , Gogol.ContainerAnalysis.Projects.Resources.ExportSBOM
-    , Gogol.ContainerAnalysis.Types
+    Gogol.ContainerAnalysis
+    Gogol.ContainerAnalysis.Projects.Locations.Notes.BatchCreate
+    Gogol.ContainerAnalysis.Projects.Locations.Notes.Create
+    Gogol.ContainerAnalysis.Projects.Locations.Notes.Delete
+    Gogol.ContainerAnalysis.Projects.Locations.Notes.Get
+    Gogol.ContainerAnalysis.Projects.Locations.Notes.GetIamPolicy
+    Gogol.ContainerAnalysis.Projects.Locations.Notes.List
+    Gogol.ContainerAnalysis.Projects.Locations.Notes.Occurrences.List
+    Gogol.ContainerAnalysis.Projects.Locations.Notes.Patch
+    Gogol.ContainerAnalysis.Projects.Locations.Notes.SetIamPolicy
+    Gogol.ContainerAnalysis.Projects.Locations.Notes.TestIamPermissions
+    Gogol.ContainerAnalysis.Projects.Locations.Occurrences.BatchCreate
+    Gogol.ContainerAnalysis.Projects.Locations.Occurrences.Create
+    Gogol.ContainerAnalysis.Projects.Locations.Occurrences.Delete
+    Gogol.ContainerAnalysis.Projects.Locations.Occurrences.Get
+    Gogol.ContainerAnalysis.Projects.Locations.Occurrences.GetIamPolicy
+    Gogol.ContainerAnalysis.Projects.Locations.Occurrences.GetNotes
+    Gogol.ContainerAnalysis.Projects.Locations.Occurrences.GetVulnerabilitySummary
+    Gogol.ContainerAnalysis.Projects.Locations.Occurrences.List
+    Gogol.ContainerAnalysis.Projects.Locations.Occurrences.Patch
+    Gogol.ContainerAnalysis.Projects.Locations.Occurrences.SetIamPolicy
+    Gogol.ContainerAnalysis.Projects.Locations.Occurrences.TestIamPermissions
+    Gogol.ContainerAnalysis.Projects.Locations.Resources.ExportSBOM
+    Gogol.ContainerAnalysis.Projects.Notes.BatchCreate
+    Gogol.ContainerAnalysis.Projects.Notes.Create
+    Gogol.ContainerAnalysis.Projects.Notes.Delete
+    Gogol.ContainerAnalysis.Projects.Notes.Get
+    Gogol.ContainerAnalysis.Projects.Notes.GetIamPolicy
+    Gogol.ContainerAnalysis.Projects.Notes.List
+    Gogol.ContainerAnalysis.Projects.Notes.Occurrences.List
+    Gogol.ContainerAnalysis.Projects.Notes.Patch
+    Gogol.ContainerAnalysis.Projects.Notes.SetIamPolicy
+    Gogol.ContainerAnalysis.Projects.Notes.TestIamPermissions
+    Gogol.ContainerAnalysis.Projects.Occurrences.BatchCreate
+    Gogol.ContainerAnalysis.Projects.Occurrences.Create
+    Gogol.ContainerAnalysis.Projects.Occurrences.Delete
+    Gogol.ContainerAnalysis.Projects.Occurrences.Get
+    Gogol.ContainerAnalysis.Projects.Occurrences.GetIamPolicy
+    Gogol.ContainerAnalysis.Projects.Occurrences.GetNotes
+    Gogol.ContainerAnalysis.Projects.Occurrences.GetVulnerabilitySummary
+    Gogol.ContainerAnalysis.Projects.Occurrences.List
+    Gogol.ContainerAnalysis.Projects.Occurrences.Patch
+    Gogol.ContainerAnalysis.Projects.Occurrences.SetIamPolicy
+    Gogol.ContainerAnalysis.Projects.Occurrences.TestIamPermissions
+    Gogol.ContainerAnalysis.Projects.Resources.ExportSBOM
+    Gogol.ContainerAnalysis.Types
 
   other-modules:
-      Gogol.ContainerAnalysis.Internal.Product
-    , Gogol.ContainerAnalysis.Internal.Sum
+    Gogol.ContainerAnalysis.Internal.Product
+    Gogol.ContainerAnalysis.Internal.Sum
 
-  build-depends:
-      gogol-core ^>= 1.0.0
+  build-depends:    gogol-core ^>=1.0.0

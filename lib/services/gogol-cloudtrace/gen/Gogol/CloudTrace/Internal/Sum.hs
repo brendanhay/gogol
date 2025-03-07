@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.CloudTrace.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.CloudTrace.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * Link_Type
     Link_Type
-      (
-        Link_Type_TYPEUNSPECIFIED,
+      ( Link_Type_TYPEUNSPECIFIED,
         Link_Type_CHILDLINKEDSPAN,
         Link_Type_PARENTLINKEDSPAN,
         ..
@@ -49,8 +40,7 @@ module Gogol.CloudTrace.Internal.Sum
 
     -- * MessageEvent_Type
     MessageEvent_Type
-      (
-        MessageEvent_Type_TYPEUNSPECIFIED,
+      ( MessageEvent_Type_TYPEUNSPECIFIED,
         MessageEvent_Type_Sent,
         MessageEvent_Type_Received,
         ..
@@ -58,8 +48,7 @@ module Gogol.CloudTrace.Internal.Sum
 
     -- * Span_SpanKind
     Span_SpanKind
-      (
-        Span_SpanKind_SPANKINDUNSPECIFIED,
+      ( Span_SpanKind_SPANKINDUNSPECIFIED,
         Span_SpanKind_Internal,
         Span_SpanKind_Server,
         Span_SpanKind_Client,
@@ -67,22 +56,23 @@ module Gogol.CloudTrace.Internal.Sum
         Span_SpanKind_Consumer,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -95,20 +85,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | The relationship of the current span relative to the linked span.
-newtype Link_Type = Link_Type { fromLink_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Link_Type = Link_Type {fromLink_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The relationship of the two spans is unknown.
 pattern Link_Type_TYPEUNSPECIFIED :: Link_Type
@@ -126,20 +117,21 @@ pattern Link_Type_PARENTLINKEDSPAN = Link_Type "PARENT_LINKED_SPAN"
   Link_Type_TYPEUNSPECIFIED,
   Link_Type_CHILDLINKEDSPAN,
   Link_Type_PARENTLINKEDSPAN,
-  Link_Type #-}
+  Link_Type
+  #-}
 
 -- | Type of MessageEvent. Indicates whether the message was sent or received.
-newtype MessageEvent_Type = MessageEvent_Type { fromMessageEvent_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MessageEvent_Type = MessageEvent_Type {fromMessageEvent_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown event type.
 pattern MessageEvent_Type_TYPEUNSPECIFIED :: MessageEvent_Type
@@ -157,20 +149,21 @@ pattern MessageEvent_Type_Received = MessageEvent_Type "RECEIVED"
   MessageEvent_Type_TYPEUNSPECIFIED,
   MessageEvent_Type_Sent,
   MessageEvent_Type_Received,
-  MessageEvent_Type #-}
+  MessageEvent_Type
+  #-}
 
 -- | Optional. Distinguishes between spans generated in a particular context. For example, two spans with the same name may be distinguished using @CLIENT@ (caller) and @SERVER@ (callee) to identify an RPC call.
-newtype Span_SpanKind = Span_SpanKind { fromSpan_SpanKind :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Span_SpanKind = Span_SpanKind {fromSpan_SpanKind :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified. Do NOT use as default. Implementations MAY assume SpanKind.INTERNAL to be default.
 pattern Span_SpanKind_SPANKINDUNSPECIFIED :: Span_SpanKind
@@ -203,4 +196,5 @@ pattern Span_SpanKind_Consumer = Span_SpanKind "CONSUMER"
   Span_SpanKind_Client,
   Span_SpanKind_Producer,
   Span_SpanKind_Consumer,
-  Span_SpanKind #-}
+  Span_SpanKind
+  #-}

@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,77 +16,79 @@
 
 -- |
 -- Module      : Gogol.WebmasterTools.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.WebmasterTools.Types
-    (
-    -- * Configuration
-      webmasterToolsService
+  ( -- * Configuration
+    webmasterToolsService,
 
     -- * OAuth Scopes
-    , Webmasters'FullControl
-    , Webmasters'Readonly
+    Webmasters'FullControl,
+    Webmasters'Readonly,
 
     -- * Types
 
     -- ** ApiDataRow
-    , ApiDataRow (..)
-    , newApiDataRow
+    ApiDataRow (..),
+    newApiDataRow,
 
     -- ** ApiDimensionFilter
-    , ApiDimensionFilter (..)
-    , newApiDimensionFilter
+    ApiDimensionFilter (..),
+    newApiDimensionFilter,
 
     -- ** ApiDimensionFilterGroup
-    , ApiDimensionFilterGroup (..)
-    , newApiDimensionFilterGroup
+    ApiDimensionFilterGroup (..),
+    newApiDimensionFilterGroup,
 
     -- ** SearchAnalyticsQueryRequest
-    , SearchAnalyticsQueryRequest (..)
-    , newSearchAnalyticsQueryRequest
+    SearchAnalyticsQueryRequest (..),
+    newSearchAnalyticsQueryRequest,
 
     -- ** SearchAnalyticsQueryResponse
-    , SearchAnalyticsQueryResponse (..)
-    , newSearchAnalyticsQueryResponse
+    SearchAnalyticsQueryResponse (..),
+    newSearchAnalyticsQueryResponse,
 
     -- ** SitemapsListResponse
-    , SitemapsListResponse (..)
-    , newSitemapsListResponse
+    SitemapsListResponse (..),
+    newSitemapsListResponse,
 
     -- ** SitesListResponse
-    , SitesListResponse (..)
-    , newSitesListResponse
+    SitesListResponse (..),
+    newSitesListResponse,
 
     -- ** WmxSite
-    , WmxSite (..)
-    , newWmxSite
+    WmxSite (..),
+    newWmxSite,
 
     -- ** WmxSitemap
-    , WmxSitemap (..)
-    , newWmxSitemap
+    WmxSitemap (..),
+    newWmxSitemap,
 
     -- ** WmxSitemapContent
-    , WmxSitemapContent (..)
-    , newWmxSitemapContent
-    ) where
+    WmxSitemapContent (..),
+    newWmxSitemapContent,
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.WebmasterTools.Internal.Product
 import Gogol.WebmasterTools.Internal.Sum
 
 -- | Default request referring to version @v3@ of the Search Console API. This contains the host and root path used as a starting point for constructing service requests.
 webmasterToolsService :: Core.ServiceConfig
-webmasterToolsService
-  = Core.defaultService
-      (Core.ServiceId "webmasters:v3")
-      "www.googleapis.com"
+webmasterToolsService =
+  Core.defaultService
+    (Core.ServiceId "webmasters:v3")
+    "www.googleapis.com"
 
 -- | View and manage Search Console data for your verified sites
-type Webmasters'FullControl = "https://www.googleapis.com/auth/webmasters"
+type Webmasters'FullControl =
+  "https://www.googleapis.com/auth/webmasters"
 
 -- | View Search Console data for your verified sites
-type Webmasters'Readonly = "https://www.googleapis.com/auth/webmasters.readonly"
+type Webmasters'Readonly =
+  "https://www.googleapis.com/auth/webmasters.readonly"

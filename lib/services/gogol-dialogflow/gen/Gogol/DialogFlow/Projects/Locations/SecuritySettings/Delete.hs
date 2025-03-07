@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.SecuritySettings.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,87 +27,91 @@
 --
 -- /See:/ <https://cloud.google.com/dialogflow/ Dialogflow API Reference> for @dialogflow.projects.locations.securitySettings.delete@.
 module Gogol.DialogFlow.Projects.Locations.SecuritySettings.Delete
-    (
-    -- * Resource
-      DialogFlowProjectsLocationsSecuritySettingsDeleteResource
+  ( -- * Resource
+    DialogFlowProjectsLocationsSecuritySettingsDeleteResource,
 
     -- ** Constructing a Request
-    , DialogFlowProjectsLocationsSecuritySettingsDelete (..)
-    , newDialogFlowProjectsLocationsSecuritySettingsDelete
-    ) where
+    DialogFlowProjectsLocationsSecuritySettingsDelete (..),
+    newDialogFlowProjectsLocationsSecuritySettingsDelete,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.DialogFlow.Types
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.securitySettings.delete@ method which the
 -- 'DialogFlowProjectsLocationsSecuritySettingsDelete' request conforms to.
-type DialogFlowProjectsLocationsSecuritySettingsDeleteResource
-     =
-     "v3" Core.:>
-       Core.Capture "name" Core.Text Core.:>
-         Core.QueryParam "$.xgafv" Xgafv Core.:>
-           Core.QueryParam "access_token" Core.Text Core.:>
-             Core.QueryParam "callback" Core.Text Core.:>
-               Core.QueryParam "uploadType" Core.Text Core.:>
-                 Core.QueryParam "upload_protocol" Core.Text Core.:>
-                   Core.QueryParam "alt" Core.AltJSON Core.:>
-                     Core.Delete '[Core.JSON] GoogleProtobufEmpty
+type DialogFlowProjectsLocationsSecuritySettingsDeleteResource =
+  "v3"
+    Core.:> Core.Capture "name" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Delete '[Core.JSON] GoogleProtobufEmpty
 
 -- | Deletes the specified SecuritySettings.
 --
 -- /See:/ 'newDialogFlowProjectsLocationsSecuritySettingsDelete' smart constructor.
 data DialogFlowProjectsLocationsSecuritySettingsDelete = DialogFlowProjectsLocationsSecuritySettingsDelete
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Required. The name of the SecuritySettings to delete. Format: @projects\/\/locations\/\/securitySettings\/@.
-    , name :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Required. The name of the SecuritySettings to delete. Format: @projects\/\/locations\/\/securitySettings\/@.
+    name :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DialogFlowProjectsLocationsSecuritySettingsDelete' with the minimum fields required to make a request.
-newDialogFlowProjectsLocationsSecuritySettingsDelete 
-    ::  Core.Text
-       -- ^  Required. The name of the SecuritySettings to delete. Format: @projects\/\/locations\/\/securitySettings\/@. See 'name'.
-    -> DialogFlowProjectsLocationsSecuritySettingsDelete
+newDialogFlowProjectsLocationsSecuritySettingsDelete ::
+  -- |  Required. The name of the SecuritySettings to delete. Format: @projects\/\/locations\/\/securitySettings\/@. See 'name'.
+  Core.Text ->
+  DialogFlowProjectsLocationsSecuritySettingsDelete
 newDialogFlowProjectsLocationsSecuritySettingsDelete name =
   DialogFlowProjectsLocationsSecuritySettingsDelete
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , name = name
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv =
+        Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      name = name,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           DialogFlowProjectsLocationsSecuritySettingsDelete
-         where
-        type Rs
-               DialogFlowProjectsLocationsSecuritySettingsDelete
-             = GoogleProtobufEmpty
-        type Scopes
-               DialogFlowProjectsLocationsSecuritySettingsDelete
-             =
-             '[CloudPlatform'FullControl, Dialogflow'FullControl]
-        requestClient
-          DialogFlowProjectsLocationsSecuritySettingsDelete{..}
-          = go name xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              dialogFlowService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           DialogFlowProjectsLocationsSecuritySettingsDeleteResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    DialogFlowProjectsLocationsSecuritySettingsDelete
+  where
+  type
+    Rs DialogFlowProjectsLocationsSecuritySettingsDelete =
+      GoogleProtobufEmpty
+  type
+    Scopes DialogFlowProjectsLocationsSecuritySettingsDelete =
+      '[CloudPlatform'FullControl, Dialogflow'FullControl]
+  requestClient DialogFlowProjectsLocationsSecuritySettingsDelete {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dialogFlowService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                DialogFlowProjectsLocationsSecuritySettingsDeleteResource
+          )
+          Core.mempty

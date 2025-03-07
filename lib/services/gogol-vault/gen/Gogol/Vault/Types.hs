@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,396 +16,399 @@
 
 -- |
 -- Module      : Gogol.Vault.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Vault.Types
-    (
-    -- * Configuration
-      vaultService
+  ( -- * Configuration
+    vaultService,
 
     -- * OAuth Scopes
-    , Ediscovery'FullControl
-    , Ediscovery'Readonly
+    Ediscovery'FullControl,
+    Ediscovery'Readonly,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AccountCount
-    , AccountCount (..)
-    , newAccountCount
+    AccountCount (..),
+    newAccountCount,
 
     -- ** AccountCountError
-    , AccountCountError (..)
-    , newAccountCountError
+    AccountCountError (..),
+    newAccountCountError,
 
     -- ** AccountCountError_ErrorType
-    , AccountCountError_ErrorType (..)
+    AccountCountError_ErrorType (..),
 
     -- ** AccountInfo
-    , AccountInfo (..)
-    , newAccountInfo
+    AccountInfo (..),
+    newAccountInfo,
 
     -- ** AddHeldAccountResult
-    , AddHeldAccountResult (..)
-    , newAddHeldAccountResult
+    AddHeldAccountResult (..),
+    newAddHeldAccountResult,
 
     -- ** AddHeldAccountsRequest
-    , AddHeldAccountsRequest (..)
-    , newAddHeldAccountsRequest
+    AddHeldAccountsRequest (..),
+    newAddHeldAccountsRequest,
 
     -- ** AddHeldAccountsResponse
-    , AddHeldAccountsResponse (..)
-    , newAddHeldAccountsResponse
+    AddHeldAccountsResponse (..),
+    newAddHeldAccountsResponse,
 
     -- ** AddMatterPermissionsRequest
-    , AddMatterPermissionsRequest (..)
-    , newAddMatterPermissionsRequest
+    AddMatterPermissionsRequest (..),
+    newAddMatterPermissionsRequest,
 
     -- ** CalendarExportOptions
-    , CalendarExportOptions (..)
-    , newCalendarExportOptions
+    CalendarExportOptions (..),
+    newCalendarExportOptions,
 
     -- ** CalendarExportOptions_ExportFormat
-    , CalendarExportOptions_ExportFormat (..)
+    CalendarExportOptions_ExportFormat (..),
 
     -- ** CalendarOptions
-    , CalendarOptions (..)
-    , newCalendarOptions
+    CalendarOptions (..),
+    newCalendarOptions,
 
     -- ** CalendarOptions_ResponseStatusesItem
-    , CalendarOptions_ResponseStatusesItem (..)
+    CalendarOptions_ResponseStatusesItem (..),
 
     -- ** CancelOperationRequest
-    , CancelOperationRequest (..)
-    , newCancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
 
     -- ** CloseMatterRequest
-    , CloseMatterRequest (..)
-    , newCloseMatterRequest
+    CloseMatterRequest (..),
+    newCloseMatterRequest,
 
     -- ** CloseMatterResponse
-    , CloseMatterResponse (..)
-    , newCloseMatterResponse
+    CloseMatterResponse (..),
+    newCloseMatterResponse,
 
     -- ** CloudStorageFile
-    , CloudStorageFile (..)
-    , newCloudStorageFile
+    CloudStorageFile (..),
+    newCloudStorageFile,
 
     -- ** CloudStorageSink
-    , CloudStorageSink (..)
-    , newCloudStorageSink
+    CloudStorageSink (..),
+    newCloudStorageSink,
 
     -- ** CorpusQuery
-    , CorpusQuery (..)
-    , newCorpusQuery
+    CorpusQuery (..),
+    newCorpusQuery,
 
     -- ** CountArtifactsMetadata
-    , CountArtifactsMetadata (..)
-    , newCountArtifactsMetadata
+    CountArtifactsMetadata (..),
+    newCountArtifactsMetadata,
 
     -- ** CountArtifactsRequest
-    , CountArtifactsRequest (..)
-    , newCountArtifactsRequest
+    CountArtifactsRequest (..),
+    newCountArtifactsRequest,
 
     -- ** CountArtifactsRequest_View
-    , CountArtifactsRequest_View (..)
+    CountArtifactsRequest_View (..),
 
     -- ** CountArtifactsResponse
-    , CountArtifactsResponse (..)
-    , newCountArtifactsResponse
+    CountArtifactsResponse (..),
+    newCountArtifactsResponse,
 
     -- ** DriveExportOptions
-    , DriveExportOptions (..)
-    , newDriveExportOptions
+    DriveExportOptions (..),
+    newDriveExportOptions,
 
     -- ** DriveOptions
-    , DriveOptions (..)
-    , newDriveOptions
+    DriveOptions (..),
+    newDriveOptions,
 
     -- ** DriveOptions_ClientSideEncryptedOption
-    , DriveOptions_ClientSideEncryptedOption (..)
+    DriveOptions_ClientSideEncryptedOption (..),
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** Export
-    , Export (..)
-    , newExport
+    Export (..),
+    newExport,
 
     -- ** Export_Status
-    , Export_Status (..)
+    Export_Status (..),
 
     -- ** ExportOptions
-    , ExportOptions (..)
-    , newExportOptions
+    ExportOptions (..),
+    newExportOptions,
 
     -- ** ExportOptions_Region
-    , ExportOptions_Region (..)
+    ExportOptions_Region (..),
 
     -- ** ExportStats
-    , ExportStats (..)
-    , newExportStats
+    ExportStats (..),
+    newExportStats,
 
     -- ** GroupsCountResult
-    , GroupsCountResult (..)
-    , newGroupsCountResult
+    GroupsCountResult (..),
+    newGroupsCountResult,
 
     -- ** GroupsExportOptions
-    , GroupsExportOptions (..)
-    , newGroupsExportOptions
+    GroupsExportOptions (..),
+    newGroupsExportOptions,
 
     -- ** GroupsExportOptions_ExportFormat
-    , GroupsExportOptions_ExportFormat (..)
+    GroupsExportOptions_ExportFormat (..),
 
     -- ** HangoutsChatExportOptions
-    , HangoutsChatExportOptions (..)
-    , newHangoutsChatExportOptions
+    HangoutsChatExportOptions (..),
+    newHangoutsChatExportOptions,
 
     -- ** HangoutsChatExportOptions_ExportFormat
-    , HangoutsChatExportOptions_ExportFormat (..)
+    HangoutsChatExportOptions_ExportFormat (..),
 
     -- ** HangoutsChatInfo
-    , HangoutsChatInfo (..)
-    , newHangoutsChatInfo
+    HangoutsChatInfo (..),
+    newHangoutsChatInfo,
 
     -- ** HangoutsChatOptions
-    , HangoutsChatOptions (..)
-    , newHangoutsChatOptions
+    HangoutsChatOptions (..),
+    newHangoutsChatOptions,
 
     -- ** HeldAccount
-    , HeldAccount (..)
-    , newHeldAccount
+    HeldAccount (..),
+    newHeldAccount,
 
     -- ** HeldCalendarQuery
-    , HeldCalendarQuery (..)
-    , newHeldCalendarQuery
+    HeldCalendarQuery (..),
+    newHeldCalendarQuery,
 
     -- ** HeldDriveQuery
-    , HeldDriveQuery (..)
-    , newHeldDriveQuery
+    HeldDriveQuery (..),
+    newHeldDriveQuery,
 
     -- ** HeldGroupsQuery
-    , HeldGroupsQuery (..)
-    , newHeldGroupsQuery
+    HeldGroupsQuery (..),
+    newHeldGroupsQuery,
 
     -- ** HeldHangoutsChatQuery
-    , HeldHangoutsChatQuery (..)
-    , newHeldHangoutsChatQuery
+    HeldHangoutsChatQuery (..),
+    newHeldHangoutsChatQuery,
 
     -- ** HeldMailQuery
-    , HeldMailQuery (..)
-    , newHeldMailQuery
+    HeldMailQuery (..),
+    newHeldMailQuery,
 
     -- ** HeldOrgUnit
-    , HeldOrgUnit (..)
-    , newHeldOrgUnit
+    HeldOrgUnit (..),
+    newHeldOrgUnit,
 
     -- ** HeldVoiceQuery
-    , HeldVoiceQuery (..)
-    , newHeldVoiceQuery
+    HeldVoiceQuery (..),
+    newHeldVoiceQuery,
 
     -- ** HeldVoiceQuery_CoveredDataItem
-    , HeldVoiceQuery_CoveredDataItem (..)
+    HeldVoiceQuery_CoveredDataItem (..),
 
     -- ** Hold
-    , Hold (..)
-    , newHold
+    Hold (..),
+    newHold,
 
     -- ** Hold_Corpus
-    , Hold_Corpus (..)
+    Hold_Corpus (..),
 
     -- ** ListExportsResponse
-    , ListExportsResponse (..)
-    , newListExportsResponse
+    ListExportsResponse (..),
+    newListExportsResponse,
 
     -- ** ListHeldAccountsResponse
-    , ListHeldAccountsResponse (..)
-    , newListHeldAccountsResponse
+    ListHeldAccountsResponse (..),
+    newListHeldAccountsResponse,
 
     -- ** ListHoldsResponse
-    , ListHoldsResponse (..)
-    , newListHoldsResponse
+    ListHoldsResponse (..),
+    newListHoldsResponse,
 
     -- ** ListMattersResponse
-    , ListMattersResponse (..)
-    , newListMattersResponse
+    ListMattersResponse (..),
+    newListMattersResponse,
 
     -- ** ListOperationsResponse
-    , ListOperationsResponse (..)
-    , newListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
 
     -- ** ListSavedQueriesResponse
-    , ListSavedQueriesResponse (..)
-    , newListSavedQueriesResponse
+    ListSavedQueriesResponse (..),
+    newListSavedQueriesResponse,
 
     -- ** MailCountResult
-    , MailCountResult (..)
-    , newMailCountResult
+    MailCountResult (..),
+    newMailCountResult,
 
     -- ** MailExportOptions
-    , MailExportOptions (..)
-    , newMailExportOptions
+    MailExportOptions (..),
+    newMailExportOptions,
 
     -- ** MailExportOptions_ExportFormat
-    , MailExportOptions_ExportFormat (..)
+    MailExportOptions_ExportFormat (..),
 
     -- ** MailOptions
-    , MailOptions (..)
-    , newMailOptions
+    MailOptions (..),
+    newMailOptions,
 
     -- ** MailOptions_ClientSideEncryptedOption
-    , MailOptions_ClientSideEncryptedOption (..)
+    MailOptions_ClientSideEncryptedOption (..),
 
     -- ** Matter
-    , Matter (..)
-    , newMatter
+    Matter (..),
+    newMatter,
 
     -- ** Matter_MatterRegion
-    , Matter_MatterRegion (..)
+    Matter_MatterRegion (..),
 
     -- ** Matter_State
-    , Matter_State (..)
+    Matter_State (..),
 
     -- ** MatterPermission
-    , MatterPermission (..)
-    , newMatterPermission
+    MatterPermission (..),
+    newMatterPermission,
 
     -- ** MatterPermission_Role
-    , MatterPermission_Role (..)
+    MatterPermission_Role (..),
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** OrgUnitInfo
-    , OrgUnitInfo (..)
-    , newOrgUnitInfo
+    OrgUnitInfo (..),
+    newOrgUnitInfo,
 
     -- ** Query
-    , Query (..)
-    , newQuery
+    Query (..),
+    newQuery,
 
     -- ** Query_Corpus
-    , Query_Corpus (..)
+    Query_Corpus (..),
 
     -- ** Query_DataScope
-    , Query_DataScope (..)
+    Query_DataScope (..),
 
     -- ** Query_Method
-    , Query_Method (..)
+    Query_Method (..),
 
     -- ** Query_SearchMethod
-    , Query_SearchMethod (..)
+    Query_SearchMethod (..),
 
     -- ** RemoveHeldAccountsRequest
-    , RemoveHeldAccountsRequest (..)
-    , newRemoveHeldAccountsRequest
+    RemoveHeldAccountsRequest (..),
+    newRemoveHeldAccountsRequest,
 
     -- ** RemoveHeldAccountsResponse
-    , RemoveHeldAccountsResponse (..)
-    , newRemoveHeldAccountsResponse
+    RemoveHeldAccountsResponse (..),
+    newRemoveHeldAccountsResponse,
 
     -- ** RemoveMatterPermissionsRequest
-    , RemoveMatterPermissionsRequest (..)
-    , newRemoveMatterPermissionsRequest
+    RemoveMatterPermissionsRequest (..),
+    newRemoveMatterPermissionsRequest,
 
     -- ** ReopenMatterRequest
-    , ReopenMatterRequest (..)
-    , newReopenMatterRequest
+    ReopenMatterRequest (..),
+    newReopenMatterRequest,
 
     -- ** ReopenMatterResponse
-    , ReopenMatterResponse (..)
-    , newReopenMatterResponse
+    ReopenMatterResponse (..),
+    newReopenMatterResponse,
 
     -- ** SavedQuery
-    , SavedQuery (..)
-    , newSavedQuery
+    SavedQuery (..),
+    newSavedQuery,
 
     -- ** SharedDriveInfo
-    , SharedDriveInfo (..)
-    , newSharedDriveInfo
+    SharedDriveInfo (..),
+    newSharedDriveInfo,
 
     -- ** SitesUrlInfo
-    , SitesUrlInfo (..)
-    , newSitesUrlInfo
+    SitesUrlInfo (..),
+    newSitesUrlInfo,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** TeamDriveInfo
-    , TeamDriveInfo (..)
-    , newTeamDriveInfo
+    TeamDriveInfo (..),
+    newTeamDriveInfo,
 
     -- ** UndeleteMatterRequest
-    , UndeleteMatterRequest (..)
-    , newUndeleteMatterRequest
+    UndeleteMatterRequest (..),
+    newUndeleteMatterRequest,
 
     -- ** UserInfo
-    , UserInfo (..)
-    , newUserInfo
+    UserInfo (..),
+    newUserInfo,
 
     -- ** VoiceExportOptions
-    , VoiceExportOptions (..)
-    , newVoiceExportOptions
+    VoiceExportOptions (..),
+    newVoiceExportOptions,
 
     -- ** VoiceExportOptions_ExportFormat
-    , VoiceExportOptions_ExportFormat (..)
+    VoiceExportOptions_ExportFormat (..),
 
     -- ** VoiceOptions
-    , VoiceOptions (..)
-    , newVoiceOptions
+    VoiceOptions (..),
+    newVoiceOptions,
 
     -- ** VoiceOptions_CoveredDataItem
-    , VoiceOptions_CoveredDataItem (..)
+    VoiceOptions_CoveredDataItem (..),
 
     -- ** MattersGetView
-    , MattersGetView (..)
+    MattersGetView (..),
 
     -- ** MattersHoldsGetView
-    , MattersHoldsGetView (..)
+    MattersHoldsGetView (..),
 
     -- ** MattersHoldsListView
-    , MattersHoldsListView (..)
+    MattersHoldsListView (..),
 
     -- ** MattersListState
-    , MattersListState (..)
+    MattersListState (..),
 
     -- ** MattersListView
-    , MattersListView (..)
-    ) where
+    MattersListView (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Vault.Internal.Product
 import Gogol.Vault.Internal.Sum
 
 -- | Default request referring to version @v1@ of the Google Vault API. This contains the host and root path used as a starting point for constructing service requests.
 vaultService :: Core.ServiceConfig
-vaultService
-  = Core.defaultService (Core.ServiceId "vault:v1")
-      "vault.googleapis.com"
+vaultService =
+  Core.defaultService
+    (Core.ServiceId "vault:v1")
+    "vault.googleapis.com"
 
 -- | Manage your eDiscovery data
-type Ediscovery'FullControl = "https://www.googleapis.com/auth/ediscovery"
+type Ediscovery'FullControl =
+  "https://www.googleapis.com/auth/ediscovery"
 
 -- | View your eDiscovery data
-type Ediscovery'Readonly = "https://www.googleapis.com/auth/ediscovery.readonly"
+type Ediscovery'Readonly =
+  "https://www.googleapis.com/auth/ediscovery.readonly"

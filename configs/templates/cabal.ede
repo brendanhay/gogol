@@ -40,7 +40,7 @@ flag field-selectors
   manual: True
 
 library
-  default-language:  Haskell2010
+  default-language:  GHC2021
   hs-source-dirs:    src gen
 
   ghc-options:

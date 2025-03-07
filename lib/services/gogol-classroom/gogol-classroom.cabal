@@ -1,19 +1,24 @@
-cabal-version:         2.2
-name:                  gogol-classroom
-version:               1.0.0
-synopsis:              Google Classroom SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-classroom
+version:            1.0.0
+synopsis:           Google Classroom SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:
+  Brendan Hay <brendan.g.hay+gogol@gmail.com>, Toni Cebrián <toni@tonicebrian.com>
+
+copyright:          Copyright (c) 2015-2025 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    Manages classes, rosters, and invitations in Google Classroom.
+  Manages classes, rosters, and invitations in Google Classroom.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -27,127 +32,124 @@ source-repository head
   subdir:   gogol-classroom
 
 flag field-selectors
-  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-  default: False
-  manual: True
+  description:
+    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+
+  default:     False
+  manual:      True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: GHC2021
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -Werror
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if !flag(field-selectors) && impl(ghc >= 9.2)
+  if (!flag(field-selectors) && impl(ghc >=9.2))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.Classroom
-    , Gogol.Classroom.Courses.Aliases.Create
-    , Gogol.Classroom.Courses.Aliases.Delete
-    , Gogol.Classroom.Courses.Aliases.List
-    , Gogol.Classroom.Courses.Announcements.AddOnAttachments.Create
-    , Gogol.Classroom.Courses.Announcements.AddOnAttachments.Delete
-    , Gogol.Classroom.Courses.Announcements.AddOnAttachments.Get
-    , Gogol.Classroom.Courses.Announcements.AddOnAttachments.List
-    , Gogol.Classroom.Courses.Announcements.AddOnAttachments.Patch
-    , Gogol.Classroom.Courses.Announcements.Create
-    , Gogol.Classroom.Courses.Announcements.Delete
-    , Gogol.Classroom.Courses.Announcements.Get
-    , Gogol.Classroom.Courses.Announcements.GetAddOnContext
-    , Gogol.Classroom.Courses.Announcements.List
-    , Gogol.Classroom.Courses.Announcements.ModifyAssignees
-    , Gogol.Classroom.Courses.Announcements.Patch
-    , Gogol.Classroom.Courses.CourseWork.AddOnAttachments.Create
-    , Gogol.Classroom.Courses.CourseWork.AddOnAttachments.Delete
-    , Gogol.Classroom.Courses.CourseWork.AddOnAttachments.Get
-    , Gogol.Classroom.Courses.CourseWork.AddOnAttachments.List
-    , Gogol.Classroom.Courses.CourseWork.AddOnAttachments.Patch
-    , Gogol.Classroom.Courses.CourseWork.AddOnAttachments.StudentSubmissions.Get
-    , Gogol.Classroom.Courses.CourseWork.AddOnAttachments.StudentSubmissions.Patch
-    , Gogol.Classroom.Courses.CourseWork.Create
-    , Gogol.Classroom.Courses.CourseWork.Delete
-    , Gogol.Classroom.Courses.CourseWork.Get
-    , Gogol.Classroom.Courses.CourseWork.GetAddOnContext
-    , Gogol.Classroom.Courses.CourseWork.List
-    , Gogol.Classroom.Courses.CourseWork.ModifyAssignees
-    , Gogol.Classroom.Courses.CourseWork.Patch
-    , Gogol.Classroom.Courses.CourseWork.Rubrics.Create
-    , Gogol.Classroom.Courses.CourseWork.Rubrics.Delete
-    , Gogol.Classroom.Courses.CourseWork.Rubrics.Get
-    , Gogol.Classroom.Courses.CourseWork.Rubrics.List
-    , Gogol.Classroom.Courses.CourseWork.Rubrics.Patch
-    , Gogol.Classroom.Courses.CourseWork.StudentSubmissions.Get
-    , Gogol.Classroom.Courses.CourseWork.StudentSubmissions.List
-    , Gogol.Classroom.Courses.CourseWork.StudentSubmissions.ModifyAttachments
-    , Gogol.Classroom.Courses.CourseWork.StudentSubmissions.Patch
-    , Gogol.Classroom.Courses.CourseWork.StudentSubmissions.Reclaim
-    , Gogol.Classroom.Courses.CourseWork.StudentSubmissions.Return
-    , Gogol.Classroom.Courses.CourseWork.StudentSubmissions.TurnIn
-    , Gogol.Classroom.Courses.CourseWork.UpdateRubric
-    , Gogol.Classroom.Courses.CourseWorkMaterials.AddOnAttachments.Create
-    , Gogol.Classroom.Courses.CourseWorkMaterials.AddOnAttachments.Delete
-    , Gogol.Classroom.Courses.CourseWorkMaterials.AddOnAttachments.Get
-    , Gogol.Classroom.Courses.CourseWorkMaterials.AddOnAttachments.List
-    , Gogol.Classroom.Courses.CourseWorkMaterials.AddOnAttachments.Patch
-    , Gogol.Classroom.Courses.CourseWorkMaterials.Create
-    , Gogol.Classroom.Courses.CourseWorkMaterials.Delete
-    , Gogol.Classroom.Courses.CourseWorkMaterials.Get
-    , Gogol.Classroom.Courses.CourseWorkMaterials.GetAddOnContext
-    , Gogol.Classroom.Courses.CourseWorkMaterials.List
-    , Gogol.Classroom.Courses.CourseWorkMaterials.Patch
-    , Gogol.Classroom.Courses.Create
-    , Gogol.Classroom.Courses.Delete
-    , Gogol.Classroom.Courses.Get
-    , Gogol.Classroom.Courses.List
-    , Gogol.Classroom.Courses.Patch
-    , Gogol.Classroom.Courses.Posts.AddOnAttachments.Create
-    , Gogol.Classroom.Courses.Posts.AddOnAttachments.Delete
-    , Gogol.Classroom.Courses.Posts.AddOnAttachments.Get
-    , Gogol.Classroom.Courses.Posts.AddOnAttachments.List
-    , Gogol.Classroom.Courses.Posts.AddOnAttachments.Patch
-    , Gogol.Classroom.Courses.Posts.AddOnAttachments.StudentSubmissions.Get
-    , Gogol.Classroom.Courses.Posts.AddOnAttachments.StudentSubmissions.Patch
-    , Gogol.Classroom.Courses.Posts.GetAddOnContext
-    , Gogol.Classroom.Courses.Students.Create
-    , Gogol.Classroom.Courses.Students.Delete
-    , Gogol.Classroom.Courses.Students.Get
-    , Gogol.Classroom.Courses.Students.List
-    , Gogol.Classroom.Courses.Teachers.Create
-    , Gogol.Classroom.Courses.Teachers.Delete
-    , Gogol.Classroom.Courses.Teachers.Get
-    , Gogol.Classroom.Courses.Teachers.List
-    , Gogol.Classroom.Courses.Topics.Create
-    , Gogol.Classroom.Courses.Topics.Delete
-    , Gogol.Classroom.Courses.Topics.Get
-    , Gogol.Classroom.Courses.Topics.List
-    , Gogol.Classroom.Courses.Topics.Patch
-    , Gogol.Classroom.Courses.Update
-    , Gogol.Classroom.Invitations.Accept
-    , Gogol.Classroom.Invitations.Create
-    , Gogol.Classroom.Invitations.Delete
-    , Gogol.Classroom.Invitations.Get
-    , Gogol.Classroom.Invitations.List
-    , Gogol.Classroom.Registrations.Create
-    , Gogol.Classroom.Registrations.Delete
-    , Gogol.Classroom.Types
-    , Gogol.Classroom.UserProfiles.Get
-    , Gogol.Classroom.UserProfiles.GuardianInvitations.Create
-    , Gogol.Classroom.UserProfiles.GuardianInvitations.Get
-    , Gogol.Classroom.UserProfiles.GuardianInvitations.List
-    , Gogol.Classroom.UserProfiles.GuardianInvitations.Patch
-    , Gogol.Classroom.UserProfiles.Guardians.Delete
-    , Gogol.Classroom.UserProfiles.Guardians.Get
-    , Gogol.Classroom.UserProfiles.Guardians.List
+    Gogol.Classroom
+    Gogol.Classroom.Courses.Aliases.Create
+    Gogol.Classroom.Courses.Aliases.Delete
+    Gogol.Classroom.Courses.Aliases.List
+    Gogol.Classroom.Courses.Announcements.AddOnAttachments.Create
+    Gogol.Classroom.Courses.Announcements.AddOnAttachments.Delete
+    Gogol.Classroom.Courses.Announcements.AddOnAttachments.Get
+    Gogol.Classroom.Courses.Announcements.AddOnAttachments.List
+    Gogol.Classroom.Courses.Announcements.AddOnAttachments.Patch
+    Gogol.Classroom.Courses.Announcements.Create
+    Gogol.Classroom.Courses.Announcements.Delete
+    Gogol.Classroom.Courses.Announcements.Get
+    Gogol.Classroom.Courses.Announcements.GetAddOnContext
+    Gogol.Classroom.Courses.Announcements.List
+    Gogol.Classroom.Courses.Announcements.ModifyAssignees
+    Gogol.Classroom.Courses.Announcements.Patch
+    Gogol.Classroom.Courses.CourseWork.AddOnAttachments.Create
+    Gogol.Classroom.Courses.CourseWork.AddOnAttachments.Delete
+    Gogol.Classroom.Courses.CourseWork.AddOnAttachments.Get
+    Gogol.Classroom.Courses.CourseWork.AddOnAttachments.List
+    Gogol.Classroom.Courses.CourseWork.AddOnAttachments.Patch
+    Gogol.Classroom.Courses.CourseWork.AddOnAttachments.StudentSubmissions.Get
+    Gogol.Classroom.Courses.CourseWork.AddOnAttachments.StudentSubmissions.Patch
+    Gogol.Classroom.Courses.CourseWork.Create
+    Gogol.Classroom.Courses.CourseWork.Delete
+    Gogol.Classroom.Courses.CourseWork.Get
+    Gogol.Classroom.Courses.CourseWork.GetAddOnContext
+    Gogol.Classroom.Courses.CourseWork.List
+    Gogol.Classroom.Courses.CourseWork.ModifyAssignees
+    Gogol.Classroom.Courses.CourseWork.Patch
+    Gogol.Classroom.Courses.CourseWork.Rubrics.Create
+    Gogol.Classroom.Courses.CourseWork.Rubrics.Delete
+    Gogol.Classroom.Courses.CourseWork.Rubrics.Get
+    Gogol.Classroom.Courses.CourseWork.Rubrics.List
+    Gogol.Classroom.Courses.CourseWork.Rubrics.Patch
+    Gogol.Classroom.Courses.CourseWork.StudentSubmissions.Get
+    Gogol.Classroom.Courses.CourseWork.StudentSubmissions.List
+    Gogol.Classroom.Courses.CourseWork.StudentSubmissions.ModifyAttachments
+    Gogol.Classroom.Courses.CourseWork.StudentSubmissions.Patch
+    Gogol.Classroom.Courses.CourseWork.StudentSubmissions.Reclaim
+    Gogol.Classroom.Courses.CourseWork.StudentSubmissions.Return
+    Gogol.Classroom.Courses.CourseWork.StudentSubmissions.TurnIn
+    Gogol.Classroom.Courses.CourseWork.UpdateRubric
+    Gogol.Classroom.Courses.CourseWorkMaterials.AddOnAttachments.Create
+    Gogol.Classroom.Courses.CourseWorkMaterials.AddOnAttachments.Delete
+    Gogol.Classroom.Courses.CourseWorkMaterials.AddOnAttachments.Get
+    Gogol.Classroom.Courses.CourseWorkMaterials.AddOnAttachments.List
+    Gogol.Classroom.Courses.CourseWorkMaterials.AddOnAttachments.Patch
+    Gogol.Classroom.Courses.CourseWorkMaterials.Create
+    Gogol.Classroom.Courses.CourseWorkMaterials.Delete
+    Gogol.Classroom.Courses.CourseWorkMaterials.Get
+    Gogol.Classroom.Courses.CourseWorkMaterials.GetAddOnContext
+    Gogol.Classroom.Courses.CourseWorkMaterials.List
+    Gogol.Classroom.Courses.CourseWorkMaterials.Patch
+    Gogol.Classroom.Courses.Create
+    Gogol.Classroom.Courses.Delete
+    Gogol.Classroom.Courses.Get
+    Gogol.Classroom.Courses.List
+    Gogol.Classroom.Courses.Patch
+    Gogol.Classroom.Courses.Posts.AddOnAttachments.Create
+    Gogol.Classroom.Courses.Posts.AddOnAttachments.Delete
+    Gogol.Classroom.Courses.Posts.AddOnAttachments.Get
+    Gogol.Classroom.Courses.Posts.AddOnAttachments.List
+    Gogol.Classroom.Courses.Posts.AddOnAttachments.Patch
+    Gogol.Classroom.Courses.Posts.AddOnAttachments.StudentSubmissions.Get
+    Gogol.Classroom.Courses.Posts.AddOnAttachments.StudentSubmissions.Patch
+    Gogol.Classroom.Courses.Posts.GetAddOnContext
+    Gogol.Classroom.Courses.Students.Create
+    Gogol.Classroom.Courses.Students.Delete
+    Gogol.Classroom.Courses.Students.Get
+    Gogol.Classroom.Courses.Students.List
+    Gogol.Classroom.Courses.Teachers.Create
+    Gogol.Classroom.Courses.Teachers.Delete
+    Gogol.Classroom.Courses.Teachers.Get
+    Gogol.Classroom.Courses.Teachers.List
+    Gogol.Classroom.Courses.Topics.Create
+    Gogol.Classroom.Courses.Topics.Delete
+    Gogol.Classroom.Courses.Topics.Get
+    Gogol.Classroom.Courses.Topics.List
+    Gogol.Classroom.Courses.Topics.Patch
+    Gogol.Classroom.Courses.Update
+    Gogol.Classroom.Invitations.Accept
+    Gogol.Classroom.Invitations.Create
+    Gogol.Classroom.Invitations.Delete
+    Gogol.Classroom.Invitations.Get
+    Gogol.Classroom.Invitations.List
+    Gogol.Classroom.Registrations.Create
+    Gogol.Classroom.Registrations.Delete
+    Gogol.Classroom.Types
+    Gogol.Classroom.UserProfiles.Get
+    Gogol.Classroom.UserProfiles.GuardianInvitations.Create
+    Gogol.Classroom.UserProfiles.GuardianInvitations.Get
+    Gogol.Classroom.UserProfiles.GuardianInvitations.List
+    Gogol.Classroom.UserProfiles.GuardianInvitations.Patch
+    Gogol.Classroom.UserProfiles.Guardians.Delete
+    Gogol.Classroom.UserProfiles.Guardians.Get
+    Gogol.Classroom.UserProfiles.Guardians.List
 
   other-modules:
-      Gogol.Classroom.Internal.Product
-    , Gogol.Classroom.Internal.Sum
+    Gogol.Classroom.Internal.Product
+    Gogol.Classroom.Internal.Sum
 
-  build-depends:
-      gogol-core ^>= 1.0.0
+  build-depends:    gogol-core ^>=1.0.0

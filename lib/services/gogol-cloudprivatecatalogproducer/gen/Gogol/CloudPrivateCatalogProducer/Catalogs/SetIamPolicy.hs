@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.CloudPrivateCatalogProducer.Catalogs.SetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,95 +27,97 @@
 --
 -- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.setIamPolicy@.
 module Gogol.CloudPrivateCatalogProducer.Catalogs.SetIamPolicy
-    (
-    -- * Resource
-      CloudPrivateCatalogProducerCatalogsSetIamPolicyResource
+  ( -- * Resource
+    CloudPrivateCatalogProducerCatalogsSetIamPolicyResource,
 
     -- ** Constructing a Request
-    , CloudPrivateCatalogProducerCatalogsSetIamPolicy (..)
-    , newCloudPrivateCatalogProducerCatalogsSetIamPolicy
-    ) where
+    CloudPrivateCatalogProducerCatalogsSetIamPolicy (..),
+    newCloudPrivateCatalogProducerCatalogsSetIamPolicy,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.CloudPrivateCatalogProducer.Types
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.setIamPolicy@ method which the
 -- 'CloudPrivateCatalogProducerCatalogsSetIamPolicy' request conforms to.
-type CloudPrivateCatalogProducerCatalogsSetIamPolicyResource
-     =
-     "v1beta1" Core.:>
-       Core.CaptureMode "resource" "setIamPolicy" Core.Text
-         Core.:>
-         Core.QueryParam "$.xgafv" Xgafv Core.:>
-           Core.QueryParam "access_token" Core.Text Core.:>
-             Core.QueryParam "callback" Core.Text Core.:>
-               Core.QueryParam "uploadType" Core.Text Core.:>
-                 Core.QueryParam "upload_protocol" Core.Text Core.:>
-                   Core.QueryParam "alt" Core.AltJSON Core.:>
-                     Core.ReqBody '[Core.JSON]
-                       GoogleIamV1SetIamPolicyRequest
-                       Core.:> Core.Post '[Core.JSON] GoogleIamV1Policy
+type CloudPrivateCatalogProducerCatalogsSetIamPolicyResource =
+  "v1beta1"
+    Core.:> Core.CaptureMode "resource" "setIamPolicy" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] GoogleIamV1SetIamPolicyRequest
+    Core.:> Core.Post '[Core.JSON] GoogleIamV1Policy
 
 -- | Sets the IAM policy for the specified Catalog.
 --
 -- /See:/ 'newCloudPrivateCatalogProducerCatalogsSetIamPolicy' smart constructor.
 data CloudPrivateCatalogProducerCatalogsSetIamPolicy = CloudPrivateCatalogProducerCatalogsSetIamPolicy
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Multipart request metadata.
-    , payload :: GoogleIamV1SetIamPolicyRequest
-      -- | REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
-    , resource :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Multipart request metadata.
+    payload :: GoogleIamV1SetIamPolicyRequest,
+    -- | REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
+    resource :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'CloudPrivateCatalogProducerCatalogsSetIamPolicy' with the minimum fields required to make a request.
-newCloudPrivateCatalogProducerCatalogsSetIamPolicy 
-    ::  GoogleIamV1SetIamPolicyRequest
-       -- ^  Multipart request metadata. See 'payload'.
-    -> Core.Text
-       -- ^  REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field. See 'resource'.
-    -> CloudPrivateCatalogProducerCatalogsSetIamPolicy
+newCloudPrivateCatalogProducerCatalogsSetIamPolicy ::
+  -- |  Multipart request metadata. See 'payload'.
+  GoogleIamV1SetIamPolicyRequest ->
+  -- |  REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field. See 'resource'.
+  Core.Text ->
+  CloudPrivateCatalogProducerCatalogsSetIamPolicy
 newCloudPrivateCatalogProducerCatalogsSetIamPolicy payload resource =
   CloudPrivateCatalogProducerCatalogsSetIamPolicy
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , payload = payload
-    , resource = resource
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv =
+        Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      payload = payload,
+      resource = resource,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           CloudPrivateCatalogProducerCatalogsSetIamPolicy
-         where
-        type Rs
-               CloudPrivateCatalogProducerCatalogsSetIamPolicy
-             = GoogleIamV1Policy
-        type Scopes
-               CloudPrivateCatalogProducerCatalogsSetIamPolicy
-             = '[CloudPlatform'FullControl]
-        requestClient
-          CloudPrivateCatalogProducerCatalogsSetIamPolicy{..}
-          = go resource xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              payload
-              cloudPrivateCatalogProducerService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           CloudPrivateCatalogProducerCatalogsSetIamPolicyResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    CloudPrivateCatalogProducerCatalogsSetIamPolicy
+  where
+  type
+    Rs CloudPrivateCatalogProducerCatalogsSetIamPolicy =
+      GoogleIamV1Policy
+  type
+    Scopes CloudPrivateCatalogProducerCatalogsSetIamPolicy =
+      '[CloudPlatform'FullControl]
+  requestClient CloudPrivateCatalogProducerCatalogsSetIamPolicy {..} =
+    go
+      resource
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      cloudPrivateCatalogProducerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudPrivateCatalogProducerCatalogsSetIamPolicyResource
+          )
+          Core.mempty

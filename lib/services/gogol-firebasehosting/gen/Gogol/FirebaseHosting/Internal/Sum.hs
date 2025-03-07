@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.FirebaseHosting.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.FirebaseHosting.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * CustomDomainMetadata_CertState
     CustomDomainMetadata_CertState
-      (
-        CustomDomainMetadata_CertState_CERTSTATEUNSPECIFIED,
+      ( CustomDomainMetadata_CertState_CERTSTATEUNSPECIFIED,
         CustomDomainMetadata_CertState_CERTPREPARING,
         CustomDomainMetadata_CertState_CERTVALIDATING,
         CustomDomainMetadata_CertState_CERTPROPAGATING,
@@ -53,8 +44,7 @@ module Gogol.FirebaseHosting.Internal.Sum
 
     -- * CustomDomainMetadata_HostState
     CustomDomainMetadata_HostState
-      (
-        CustomDomainMetadata_HostState_HOSTSTATEUNSPECIFIED,
+      ( CustomDomainMetadata_HostState_HOSTSTATEUNSPECIFIED,
         CustomDomainMetadata_HostState_HOSTUNHOSTED,
         CustomDomainMetadata_HostState_HOSTUNREACHABLE,
         CustomDomainMetadata_HostState_HOSTMISMATCH,
@@ -65,8 +55,7 @@ module Gogol.FirebaseHosting.Internal.Sum
 
     -- * CustomDomainMetadata_OwnershipState
     CustomDomainMetadata_OwnershipState
-      (
-        CustomDomainMetadata_OwnershipState_OWNERSHIPSTATEUNSPECIFIED,
+      ( CustomDomainMetadata_OwnershipState_OWNERSHIPSTATEUNSPECIFIED,
         CustomDomainMetadata_OwnershipState_OWNERSHIPMISSING,
         CustomDomainMetadata_OwnershipState_OWNERSHIPUNREACHABLE,
         CustomDomainMetadata_OwnershipState_OWNERSHIPMISMATCH,
@@ -78,8 +67,7 @@ module Gogol.FirebaseHosting.Internal.Sum
 
     -- * DnsRecord_RequiredAction
     DnsRecord_RequiredAction
-      (
-        DnsRecord_RequiredAction_None,
+      ( DnsRecord_RequiredAction_None,
         DnsRecord_RequiredAction_Add,
         DnsRecord_RequiredAction_Remove,
         ..
@@ -87,8 +75,7 @@ module Gogol.FirebaseHosting.Internal.Sum
 
     -- * DnsRecord_Type
     DnsRecord_Type
-      (
-        DnsRecord_Type_TYPEUNSPECIFIED,
+      ( DnsRecord_Type_TYPEUNSPECIFIED,
         DnsRecord_Type_A,
         DnsRecord_Type_Cname,
         DnsRecord_Type_Txt,
@@ -99,8 +86,7 @@ module Gogol.FirebaseHosting.Internal.Sum
 
     -- * LiveMigrationStep_State
     LiveMigrationStep_State
-      (
-        LiveMigrationStep_State_STATEUNSPECIFIED,
+      ( LiveMigrationStep_State_STATEUNSPECIFIED,
         LiveMigrationStep_State_Preparing,
         LiveMigrationStep_State_Pending,
         LiveMigrationStep_State_Incomplete,
@@ -108,22 +94,23 @@ module Gogol.FirebaseHosting.Internal.Sum
         LiveMigrationStep_State_Complete,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -136,20 +123,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | The @CertState@ of the domain name\'s SSL certificate.
-newtype CustomDomainMetadata_CertState = CustomDomainMetadata_CertState { fromCustomDomainMetadata_CertState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CustomDomainMetadata_CertState = CustomDomainMetadata_CertState {fromCustomDomainMetadata_CertState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The certificate\'s state is unspecified. The message is invalid if this is unspecified.
 pattern CustomDomainMetadata_CertState_CERTSTATEUNSPECIFIED :: CustomDomainMetadata_CertState
@@ -187,20 +175,21 @@ pattern CustomDomainMetadata_CertState_CERTEXPIRED = CustomDomainMetadata_CertSt
   CustomDomainMetadata_CertState_CERTACTIVE,
   CustomDomainMetadata_CertState_CERTEXPIRINGSOON,
   CustomDomainMetadata_CertState_CERTEXPIRED,
-  CustomDomainMetadata_CertState #-}
+  CustomDomainMetadata_CertState
+  #-}
 
 -- | The @HostState@ of the domain name this @CustomDomain@ refers to.
-newtype CustomDomainMetadata_HostState = CustomDomainMetadata_HostState { fromCustomDomainMetadata_HostState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CustomDomainMetadata_HostState = CustomDomainMetadata_HostState {fromCustomDomainMetadata_HostState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Your custom domain\'s host state is unspecified. The message is invalid if this is unspecified.
 pattern CustomDomainMetadata_HostState_HOSTSTATEUNSPECIFIED :: CustomDomainMetadata_HostState
@@ -233,20 +222,21 @@ pattern CustomDomainMetadata_HostState_HOSTACTIVE = CustomDomainMetadata_HostSta
   CustomDomainMetadata_HostState_HOSTMISMATCH,
   CustomDomainMetadata_HostState_HOSTCONFLICT,
   CustomDomainMetadata_HostState_HOSTACTIVE,
-  CustomDomainMetadata_HostState #-}
+  CustomDomainMetadata_HostState
+  #-}
 
 -- | The @OwnershipState@ of the domain name this @CustomDomain@ refers to.
-newtype CustomDomainMetadata_OwnershipState = CustomDomainMetadata_OwnershipState { fromCustomDomainMetadata_OwnershipState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CustomDomainMetadata_OwnershipState = CustomDomainMetadata_OwnershipState {fromCustomDomainMetadata_OwnershipState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Your custom domain\'s ownership state is unspecified. This should never happen.
 pattern CustomDomainMetadata_OwnershipState_OWNERSHIPSTATEUNSPECIFIED :: CustomDomainMetadata_OwnershipState
@@ -284,20 +274,21 @@ pattern CustomDomainMetadata_OwnershipState_OWNERSHIPACTIVE = CustomDomainMetada
   CustomDomainMetadata_OwnershipState_OWNERSHIPCONFLICT,
   CustomDomainMetadata_OwnershipState_OWNERSHIPPENDING,
   CustomDomainMetadata_OwnershipState_OWNERSHIPACTIVE,
-  CustomDomainMetadata_OwnershipState #-}
+  CustomDomainMetadata_OwnershipState
+  #-}
 
 -- | Output only. An enum that indicates the a required action for this record.
-newtype DnsRecord_RequiredAction = DnsRecord_RequiredAction { fromDnsRecord_RequiredAction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DnsRecord_RequiredAction = DnsRecord_RequiredAction {fromDnsRecord_RequiredAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No action necessary.
 pattern DnsRecord_RequiredAction_None :: DnsRecord_RequiredAction
@@ -315,20 +306,21 @@ pattern DnsRecord_RequiredAction_Remove = DnsRecord_RequiredAction "REMOVE"
   DnsRecord_RequiredAction_None,
   DnsRecord_RequiredAction_Add,
   DnsRecord_RequiredAction_Remove,
-  DnsRecord_RequiredAction #-}
+  DnsRecord_RequiredAction
+  #-}
 
 -- | Output only. The record\'s type, which determines what data the record contains.
-newtype DnsRecord_Type = DnsRecord_Type { fromDnsRecord_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DnsRecord_Type = DnsRecord_Type {fromDnsRecord_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The record\'s type is unspecified. The message is invalid if this is unspecified.
 pattern DnsRecord_Type_TYPEUNSPECIFIED :: DnsRecord_Type
@@ -361,20 +353,21 @@ pattern DnsRecord_Type_Caa = DnsRecord_Type "CAA"
   DnsRecord_Type_Txt,
   DnsRecord_Type_Aaaa,
   DnsRecord_Type_Caa,
-  DnsRecord_Type #-}
+  DnsRecord_Type
+  #-}
 
 -- | Output only. The state of the live migration step, indicates whether you should work to complete the step now, in the future, or have already completed it.
-newtype LiveMigrationStep_State = LiveMigrationStep_State { fromLiveMigrationStep_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype LiveMigrationStep_State = LiveMigrationStep_State {fromLiveMigrationStep_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The step\'s state is unspecified. The message is invalid if this is unspecified.
 pattern LiveMigrationStep_State_STATEUNSPECIFIED :: LiveMigrationStep_State
@@ -407,4 +400,5 @@ pattern LiveMigrationStep_State_Complete = LiveMigrationStep_State "COMPLETE"
   LiveMigrationStep_State_Incomplete,
   LiveMigrationStep_State_Processing,
   LiveMigrationStep_State_Complete,
-  LiveMigrationStep_State #-}
+  LiveMigrationStep_State
+  #-}

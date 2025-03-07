@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.CivicInfo
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,177 +27,177 @@
 --
 -- /See:/ <https://developers.google.com/civic-information/ Google Civic Information API Reference>
 module Gogol.CivicInfo
-    (
-    -- * Configuration
-      civicInfoService
+  ( -- * Configuration
+    civicInfoService,
 
     -- * Resources
 
     -- ** civicinfo.divisions.queryDivisionByAddress
-    , CivicInfoDivisionsQueryDivisionByAddressResource
-    , CivicInfoDivisionsQueryDivisionByAddress (..)
-    , newCivicInfoDivisionsQueryDivisionByAddress
+    CivicInfoDivisionsQueryDivisionByAddressResource,
+    CivicInfoDivisionsQueryDivisionByAddress (..),
+    newCivicInfoDivisionsQueryDivisionByAddress,
 
     -- ** civicinfo.divisions.search
-    , CivicInfoDivisionsSearchResource
-    , CivicInfoDivisionsSearch (..)
-    , newCivicInfoDivisionsSearch
+    CivicInfoDivisionsSearchResource,
+    CivicInfoDivisionsSearch (..),
+    newCivicInfoDivisionsSearch,
 
     -- ** civicinfo.elections.electionQuery
-    , CivicInfoElectionsElectionQueryResource
-    , CivicInfoElectionsElectionQuery (..)
-    , newCivicInfoElectionsElectionQuery
+    CivicInfoElectionsElectionQueryResource,
+    CivicInfoElectionsElectionQuery (..),
+    newCivicInfoElectionsElectionQuery,
 
     -- ** civicinfo.elections.voterInfoQuery
-    , CivicInfoElectionsVoterInfoQueryResource
-    , CivicInfoElectionsVoterInfoQuery (..)
-    , newCivicInfoElectionsVoterInfoQuery
+    CivicInfoElectionsVoterInfoQueryResource,
+    CivicInfoElectionsVoterInfoQuery (..),
+    newCivicInfoElectionsVoterInfoQuery,
 
     -- ** civicinfo.representatives.representativeInfoByAddress
-    , CivicInfoRepresentativesRepresentativeInfoByAddressResource
-    , CivicInfoRepresentativesRepresentativeInfoByAddress (..)
-    , newCivicInfoRepresentativesRepresentativeInfoByAddress
+    CivicInfoRepresentativesRepresentativeInfoByAddressResource,
+    CivicInfoRepresentativesRepresentativeInfoByAddress (..),
+    newCivicInfoRepresentativesRepresentativeInfoByAddress,
 
     -- ** civicinfo.representatives.representativeInfoByDivision
-    , CivicInfoRepresentativesRepresentativeInfoByDivisionResource
-    , CivicInfoRepresentativesRepresentativeInfoByDivision (..)
-    , newCivicInfoRepresentativesRepresentativeInfoByDivision
+    CivicInfoRepresentativesRepresentativeInfoByDivisionResource,
+    CivicInfoRepresentativesRepresentativeInfoByDivision (..),
+    newCivicInfoRepresentativesRepresentativeInfoByDivision,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AdministrationRegion
-    , AdministrationRegion (..)
-    , newAdministrationRegion
+    AdministrationRegion (..),
+    newAdministrationRegion,
 
     -- ** AdministrativeBody
-    , AdministrativeBody (..)
-    , newAdministrativeBody
+    AdministrativeBody (..),
+    newAdministrativeBody,
 
     -- ** Candidate
-    , Candidate (..)
-    , newCandidate
+    Candidate (..),
+    newCandidate,
 
     -- ** Channel
-    , Channel (..)
-    , newChannel
+    Channel (..),
+    newChannel,
 
     -- ** Contest
-    , Contest (..)
-    , newContest
+    Contest (..),
+    newContest,
 
     -- ** Contest_LevelItem
-    , Contest_LevelItem (..)
+    Contest_LevelItem (..),
 
     -- ** Contest_RolesItem
-    , Contest_RolesItem (..)
+    Contest_RolesItem (..),
 
     -- ** DivisionByAddressResponse
-    , DivisionByAddressResponse (..)
-    , newDivisionByAddressResponse
+    DivisionByAddressResponse (..),
+    newDivisionByAddressResponse,
 
     -- ** DivisionByAddressResponse_Divisions
-    , DivisionByAddressResponse_Divisions (..)
-    , newDivisionByAddressResponse_Divisions
+    DivisionByAddressResponse_Divisions (..),
+    newDivisionByAddressResponse_Divisions,
 
     -- ** DivisionSearchResponse
-    , DivisionSearchResponse (..)
-    , newDivisionSearchResponse
+    DivisionSearchResponse (..),
+    newDivisionSearchResponse,
 
     -- ** DivisionSearchResult
-    , DivisionSearchResult (..)
-    , newDivisionSearchResult
+    DivisionSearchResult (..),
+    newDivisionSearchResult,
 
     -- ** Election
-    , Election (..)
-    , newElection
+    Election (..),
+    newElection,
 
     -- ** Election_ShapeLookupBehavior
-    , Election_ShapeLookupBehavior (..)
+    Election_ShapeLookupBehavior (..),
 
     -- ** ElectionOfficial
-    , ElectionOfficial (..)
-    , newElectionOfficial
+    ElectionOfficial (..),
+    newElectionOfficial,
 
     -- ** ElectionsQueryResponse
-    , ElectionsQueryResponse (..)
-    , newElectionsQueryResponse
+    ElectionsQueryResponse (..),
+    newElectionsQueryResponse,
 
     -- ** ElectoralDistrict
-    , ElectoralDistrict (..)
-    , newElectoralDistrict
+    ElectoralDistrict (..),
+    newElectoralDistrict,
 
     -- ** ElectoralDistrict_Scope
-    , ElectoralDistrict_Scope (..)
+    ElectoralDistrict_Scope (..),
 
     -- ** GeographicDivision
-    , GeographicDivision (..)
-    , newGeographicDivision
+    GeographicDivision (..),
+    newGeographicDivision,
 
     -- ** Office
-    , Office (..)
-    , newOffice
+    Office (..),
+    newOffice,
 
     -- ** Office_LevelsItem
-    , Office_LevelsItem (..)
+    Office_LevelsItem (..),
 
     -- ** Office_RolesItem
-    , Office_RolesItem (..)
+    Office_RolesItem (..),
 
     -- ** Official
-    , Official (..)
-    , newOfficial
+    Official (..),
+    newOfficial,
 
     -- ** PollingLocation
-    , PollingLocation (..)
-    , newPollingLocation
+    PollingLocation (..),
+    newPollingLocation,
 
     -- ** Precinct
-    , Precinct (..)
-    , newPrecinct
+    Precinct (..),
+    newPrecinct,
 
     -- ** RepresentativeInfoData
-    , RepresentativeInfoData (..)
-    , newRepresentativeInfoData
+    RepresentativeInfoData (..),
+    newRepresentativeInfoData,
 
     -- ** RepresentativeInfoData_Divisions
-    , RepresentativeInfoData_Divisions (..)
-    , newRepresentativeInfoData_Divisions
+    RepresentativeInfoData_Divisions (..),
+    newRepresentativeInfoData_Divisions,
 
     -- ** RepresentativeInfoResponse
-    , RepresentativeInfoResponse (..)
-    , newRepresentativeInfoResponse
+    RepresentativeInfoResponse (..),
+    newRepresentativeInfoResponse,
 
     -- ** RepresentativeInfoResponse_Divisions
-    , RepresentativeInfoResponse_Divisions (..)
-    , newRepresentativeInfoResponse_Divisions
+    RepresentativeInfoResponse_Divisions (..),
+    newRepresentativeInfoResponse_Divisions,
 
     -- ** SimpleAddressType
-    , SimpleAddressType (..)
-    , newSimpleAddressType
+    SimpleAddressType (..),
+    newSimpleAddressType,
 
     -- ** Source
-    , Source (..)
-    , newSource
+    Source (..),
+    newSource,
 
     -- ** VoterInfoResponse
-    , VoterInfoResponse (..)
-    , newVoterInfoResponse
+    VoterInfoResponse (..),
+    newVoterInfoResponse,
 
     -- ** RepresentativesRepresentativeInfoByAddressLevels
-    , RepresentativesRepresentativeInfoByAddressLevels (..)
+    RepresentativesRepresentativeInfoByAddressLevels (..),
 
     -- ** RepresentativesRepresentativeInfoByAddressRoles
-    , RepresentativesRepresentativeInfoByAddressRoles (..)
+    RepresentativesRepresentativeInfoByAddressRoles (..),
 
     -- ** RepresentativesRepresentativeInfoByDivisionLevels
-    , RepresentativesRepresentativeInfoByDivisionLevels (..)
+    RepresentativesRepresentativeInfoByDivisionLevels (..),
 
     -- ** RepresentativesRepresentativeInfoByDivisionRoles
-    , RepresentativesRepresentativeInfoByDivisionRoles (..)
-    ) where
+    RepresentativesRepresentativeInfoByDivisionRoles (..),
+  )
+where
 
 import Gogol.CivicInfo.Divisions.QueryDivisionByAddress
 import Gogol.CivicInfo.Divisions.Search

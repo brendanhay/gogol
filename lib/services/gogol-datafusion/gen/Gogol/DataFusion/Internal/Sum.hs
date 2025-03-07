@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.DataFusion.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.DataFusion.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * Accelerator_AcceleratorType
     Accelerator_AcceleratorType
-      (
-        Accelerator_AcceleratorType_ACCELERATORTYPEUNSPECIFIED,
+      ( Accelerator_AcceleratorType_ACCELERATORTYPEUNSPECIFIED,
         Accelerator_AcceleratorType_Cdc,
         Accelerator_AcceleratorType_Healthcare,
         Accelerator_AcceleratorType_CCAIINSIGHTS,
@@ -51,8 +42,7 @@ module Gogol.DataFusion.Internal.Sum
 
     -- * Accelerator_State
     Accelerator_State
-      (
-        Accelerator_State_STATEUNSPECIFIED,
+      ( Accelerator_State_STATEUNSPECIFIED,
         Accelerator_State_Enabled,
         Accelerator_State_Disabled,
         Accelerator_State_Unknown,
@@ -61,8 +51,7 @@ module Gogol.DataFusion.Internal.Sum
 
     -- * AuditLogConfig_LogType
     AuditLogConfig_LogType
-      (
-        AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
+      ( AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
         AuditLogConfig_LogType_ADMINREAD,
         AuditLogConfig_LogType_DATAWRITE,
         AuditLogConfig_LogType_DATAREAD,
@@ -71,16 +60,14 @@ module Gogol.DataFusion.Internal.Sum
 
     -- * Instance_DisabledReasonItem
     Instance_DisabledReasonItem
-      (
-        Instance_DisabledReasonItem_DISABLEDREASONUNSPECIFIED,
+      ( Instance_DisabledReasonItem_DISABLEDREASONUNSPECIFIED,
         Instance_DisabledReasonItem_KMSKEYISSUE,
         ..
       ),
 
     -- * Instance_State
     Instance_State
-      (
-        Instance_State_STATEUNSPECIFIED,
+      ( Instance_State_STATEUNSPECIFIED,
         Instance_State_Creating,
         Instance_State_Active,
         Instance_State_Failed,
@@ -96,8 +83,7 @@ module Gogol.DataFusion.Internal.Sum
 
     -- * Instance_Type
     Instance_Type
-      (
-        Instance_Type_TYPEUNSPECIFIED,
+      ( Instance_Type_TYPEUNSPECIFIED,
         Instance_Type_Basic,
         Instance_Type_Enterprise,
         Instance_Type_Developer,
@@ -106,8 +92,7 @@ module Gogol.DataFusion.Internal.Sum
 
     -- * NetworkConfig_ConnectionType
     NetworkConfig_ConnectionType
-      (
-        NetworkConfig_ConnectionType_CONNECTIONTYPEUNSPECIFIED,
+      ( NetworkConfig_ConnectionType_CONNECTIONTYPEUNSPECIFIED,
         NetworkConfig_ConnectionType_VPCPEERING,
         NetworkConfig_ConnectionType_PRIVATESERVICECONNECTINTERFACES,
         ..
@@ -115,29 +100,29 @@ module Gogol.DataFusion.Internal.Sum
 
     -- * Version_Type
     Version_Type
-      (
-        Version_Type_TYPEUNSPECIFIED,
+      ( Version_Type_TYPEUNSPECIFIED,
         Version_Type_TYPEPREVIEW,
         Version_Type_TYPEGENERALAVAILABILITY,
         Version_Type_TYPEDEPRECATED,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -150,20 +135,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | Optional. The type of an accelator for a Cloud Data Fusion instance.
-newtype Accelerator_AcceleratorType = Accelerator_AcceleratorType { fromAccelerator_AcceleratorType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Accelerator_AcceleratorType = Accelerator_AcceleratorType {fromAccelerator_AcceleratorType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value, if unspecified.
 pattern Accelerator_AcceleratorType_ACCELERATORTYPEUNSPECIFIED :: Accelerator_AcceleratorType
@@ -191,20 +177,21 @@ pattern Accelerator_AcceleratorType_Cloudsearch = Accelerator_AcceleratorType "C
   Accelerator_AcceleratorType_Healthcare,
   Accelerator_AcceleratorType_CCAIINSIGHTS,
   Accelerator_AcceleratorType_Cloudsearch,
-  Accelerator_AcceleratorType #-}
+  Accelerator_AcceleratorType
+  #-}
 
 -- | Output only. The state of the accelerator.
-newtype Accelerator_State = Accelerator_State { fromAccelerator_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Accelerator_State = Accelerator_State {fromAccelerator_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value, do not use.
 pattern Accelerator_State_STATEUNSPECIFIED :: Accelerator_State
@@ -227,20 +214,21 @@ pattern Accelerator_State_Unknown = Accelerator_State "UNKNOWN"
   Accelerator_State_Enabled,
   Accelerator_State_Disabled,
   Accelerator_State_Unknown,
-  Accelerator_State #-}
+  Accelerator_State
+  #-}
 
 -- | The log type that this config enables.
-newtype AuditLogConfig_LogType = AuditLogConfig_LogType { fromAuditLogConfig_LogType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AuditLogConfig_LogType = AuditLogConfig_LogType {fromAuditLogConfig_LogType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default case. Should never be this.
 pattern AuditLogConfig_LogType_LOGTYPEUNSPECIFIED :: AuditLogConfig_LogType
@@ -263,19 +251,20 @@ pattern AuditLogConfig_LogType_DATAREAD = AuditLogConfig_LogType "DATA_READ"
   AuditLogConfig_LogType_ADMINREAD,
   AuditLogConfig_LogType_DATAWRITE,
   AuditLogConfig_LogType_DATAREAD,
-  AuditLogConfig_LogType #-}
+  AuditLogConfig_LogType
+  #-}
 
-newtype Instance_DisabledReasonItem = Instance_DisabledReasonItem { fromInstance_DisabledReasonItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Instance_DisabledReasonItem = Instance_DisabledReasonItem {fromInstance_DisabledReasonItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This is an unknown reason for disabling.
 pattern Instance_DisabledReasonItem_DISABLEDREASONUNSPECIFIED :: Instance_DisabledReasonItem
@@ -288,20 +277,21 @@ pattern Instance_DisabledReasonItem_KMSKEYISSUE = Instance_DisabledReasonItem "K
 {-# COMPLETE
   Instance_DisabledReasonItem_DISABLEDREASONUNSPECIFIED,
   Instance_DisabledReasonItem_KMSKEYISSUE,
-  Instance_DisabledReasonItem #-}
+  Instance_DisabledReasonItem
+  #-}
 
 -- | Output only. The current state of this Data Fusion instance.
-newtype Instance_State = Instance_State { fromInstance_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Instance_State = Instance_State {fromInstance_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Instance does not have a state yet
 pattern Instance_State_STATEUNSPECIFIED :: Instance_State
@@ -359,20 +349,21 @@ pattern Instance_State_Disabled = Instance_State "DISABLED"
   Instance_State_AUTOUPDATING,
   Instance_State_AUTOUPGRADING,
   Instance_State_Disabled,
-  Instance_State #-}
+  Instance_State
+  #-}
 
 -- | Required. Instance type.
-newtype Instance_Type = Instance_Type { fromInstance_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Instance_Type = Instance_Type {fromInstance_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No type specified. The instance creation will fail.
 pattern Instance_Type_TYPEUNSPECIFIED :: Instance_Type
@@ -395,20 +386,21 @@ pattern Instance_Type_Developer = Instance_Type "DEVELOPER"
   Instance_Type_Basic,
   Instance_Type_Enterprise,
   Instance_Type_Developer,
-  Instance_Type #-}
+  Instance_Type
+  #-}
 
 -- | Optional. Type of connection for establishing private IP connectivity between the Data Fusion customer project VPC and the corresponding tenant project from a predefined list of available connection modes. If this field is unspecified for a private instance, VPC peering is used.
-newtype NetworkConfig_ConnectionType = NetworkConfig_ConnectionType { fromNetworkConfig_ConnectionType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype NetworkConfig_ConnectionType = NetworkConfig_ConnectionType {fromNetworkConfig_ConnectionType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No specific connection type was requested, the default value of VPC_PEERING is chosen.
 pattern NetworkConfig_ConnectionType_CONNECTIONTYPEUNSPECIFIED :: NetworkConfig_ConnectionType
@@ -426,20 +418,21 @@ pattern NetworkConfig_ConnectionType_PRIVATESERVICECONNECTINTERFACES = NetworkCo
   NetworkConfig_ConnectionType_CONNECTIONTYPEUNSPECIFIED,
   NetworkConfig_ConnectionType_VPCPEERING,
   NetworkConfig_ConnectionType_PRIVATESERVICECONNECTINTERFACES,
-  NetworkConfig_ConnectionType #-}
+  NetworkConfig_ConnectionType
+  #-}
 
 -- | Type represents the release availability of the version
-newtype Version_Type = Version_Type { fromVersion_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Version_Type = Version_Type {fromVersion_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Version does not have availability yet
 pattern Version_Type_TYPEUNSPECIFIED :: Version_Type
@@ -462,4 +455,5 @@ pattern Version_Type_TYPEDEPRECATED = Version_Type "TYPE_DEPRECATED"
   Version_Type_TYPEPREVIEW,
   Version_Type_TYPEGENERALAVAILABILITY,
   Version_Type_TYPEDEPRECATED,
-  Version_Type #-}
+  Version_Type
+  #-}

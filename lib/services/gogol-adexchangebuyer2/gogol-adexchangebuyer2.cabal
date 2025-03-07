@@ -1,19 +1,24 @@
-cabal-version:         2.2
-name:                  gogol-adexchangebuyer2
-version:               1.0.0
-synopsis:              Google Ad Exchange Buyer API II SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-adexchangebuyer2
+version:            1.0.0
+synopsis:           Google Ad Exchange Buyer API II SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:
+  Brendan Hay <brendan.g.hay+gogol@gmail.com>, Toni Cebrián <toni@tonicebrian.com>
+
+copyright:          Copyright (c) 2015-2025 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    Accesses the latest features for managing Authorized Buyers accounts, Real-Time Bidding configurations and auction metrics, and Marketplace programmatic deals.
+  Accesses the latest features for managing Authorized Buyers accounts, Real-Time Bidding configurations and auction metrics, and Marketplace programmatic deals.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -27,110 +32,107 @@ source-repository head
   subdir:   gogol-adexchangebuyer2
 
 flag field-selectors
-  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-  default: False
-  manual: True
+  description:
+    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+
+  default:     False
+  manual:      True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: GHC2021
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -Werror
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if !flag(field-selectors) && impl(ghc >= 9.2)
+  if (!flag(field-selectors) && impl(ghc >=9.2))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.AdExchangeBuyer2
-    , Gogol.AdExchangeBuyer2.Accounts.Clients.Create
-    , Gogol.AdExchangeBuyer2.Accounts.Clients.Get
-    , Gogol.AdExchangeBuyer2.Accounts.Clients.Invitations.Create
-    , Gogol.AdExchangeBuyer2.Accounts.Clients.Invitations.Get
-    , Gogol.AdExchangeBuyer2.Accounts.Clients.Invitations.List
-    , Gogol.AdExchangeBuyer2.Accounts.Clients.List
-    , Gogol.AdExchangeBuyer2.Accounts.Clients.Update
-    , Gogol.AdExchangeBuyer2.Accounts.Clients.Users.Get
-    , Gogol.AdExchangeBuyer2.Accounts.Clients.Users.List
-    , Gogol.AdExchangeBuyer2.Accounts.Clients.Users.Update
-    , Gogol.AdExchangeBuyer2.Accounts.Creatives.Create
-    , Gogol.AdExchangeBuyer2.Accounts.Creatives.DealAssociations.Add
-    , Gogol.AdExchangeBuyer2.Accounts.Creatives.DealAssociations.List
-    , Gogol.AdExchangeBuyer2.Accounts.Creatives.DealAssociations.Remove
-    , Gogol.AdExchangeBuyer2.Accounts.Creatives.Get
-    , Gogol.AdExchangeBuyer2.Accounts.Creatives.List
-    , Gogol.AdExchangeBuyer2.Accounts.Creatives.StopWatching
-    , Gogol.AdExchangeBuyer2.Accounts.Creatives.Update
-    , Gogol.AdExchangeBuyer2.Accounts.Creatives.Watch
-    , Gogol.AdExchangeBuyer2.Accounts.FinalizedProposals.List
-    , Gogol.AdExchangeBuyer2.Accounts.FinalizedProposals.Pause
-    , Gogol.AdExchangeBuyer2.Accounts.FinalizedProposals.Resume
-    , Gogol.AdExchangeBuyer2.Accounts.Products.Get
-    , Gogol.AdExchangeBuyer2.Accounts.Products.List
-    , Gogol.AdExchangeBuyer2.Accounts.Proposals.Accept
-    , Gogol.AdExchangeBuyer2.Accounts.Proposals.AddNote
-    , Gogol.AdExchangeBuyer2.Accounts.Proposals.CancelNegotiation
-    , Gogol.AdExchangeBuyer2.Accounts.Proposals.CompleteSetup
-    , Gogol.AdExchangeBuyer2.Accounts.Proposals.Create
-    , Gogol.AdExchangeBuyer2.Accounts.Proposals.Get
-    , Gogol.AdExchangeBuyer2.Accounts.Proposals.List
-    , Gogol.AdExchangeBuyer2.Accounts.Proposals.Pause
-    , Gogol.AdExchangeBuyer2.Accounts.Proposals.Resume
-    , Gogol.AdExchangeBuyer2.Accounts.Proposals.Update
-    , Gogol.AdExchangeBuyer2.Accounts.PublisherProfiles.Get
-    , Gogol.AdExchangeBuyer2.Accounts.PublisherProfiles.List
-    , Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.BidMetrics.List
-    , Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.BidResponseErrors.List
-    , Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.BidResponsesWithoutBids.List
-    , Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.Create
-    , Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.Delete
-    , Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.FilteredBidRequests.List
-    , Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.FilteredBids.Creatives.List
-    , Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.FilteredBids.Details.List
-    , Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.FilteredBids.List
-    , Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.Get
-    , Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.ImpressionMetrics.List
-    , Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.List
-    , Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.LosingBids.List
-    , Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.NonBillableWinningBids.List
-    , Gogol.AdExchangeBuyer2.Bidders.FilterSets.BidMetrics.List
-    , Gogol.AdExchangeBuyer2.Bidders.FilterSets.BidResponseErrors.List
-    , Gogol.AdExchangeBuyer2.Bidders.FilterSets.BidResponsesWithoutBids.List
-    , Gogol.AdExchangeBuyer2.Bidders.FilterSets.Create
-    , Gogol.AdExchangeBuyer2.Bidders.FilterSets.Delete
-    , Gogol.AdExchangeBuyer2.Bidders.FilterSets.FilteredBidRequests.List
-    , Gogol.AdExchangeBuyer2.Bidders.FilterSets.FilteredBids.Creatives.List
-    , Gogol.AdExchangeBuyer2.Bidders.FilterSets.FilteredBids.Details.List
-    , Gogol.AdExchangeBuyer2.Bidders.FilterSets.FilteredBids.List
-    , Gogol.AdExchangeBuyer2.Bidders.FilterSets.Get
-    , Gogol.AdExchangeBuyer2.Bidders.FilterSets.ImpressionMetrics.List
-    , Gogol.AdExchangeBuyer2.Bidders.FilterSets.List
-    , Gogol.AdExchangeBuyer2.Bidders.FilterSets.LosingBids.List
-    , Gogol.AdExchangeBuyer2.Bidders.FilterSets.NonBillableWinningBids.List
-    , Gogol.AdExchangeBuyer2.Buyers.FilterSets.BidMetrics.List
-    , Gogol.AdExchangeBuyer2.Buyers.FilterSets.BidResponseErrors.List
-    , Gogol.AdExchangeBuyer2.Buyers.FilterSets.BidResponsesWithoutBids.List
-    , Gogol.AdExchangeBuyer2.Buyers.FilterSets.Create
-    , Gogol.AdExchangeBuyer2.Buyers.FilterSets.Delete
-    , Gogol.AdExchangeBuyer2.Buyers.FilterSets.FilteredBidRequests.List
-    , Gogol.AdExchangeBuyer2.Buyers.FilterSets.FilteredBids.Creatives.List
-    , Gogol.AdExchangeBuyer2.Buyers.FilterSets.FilteredBids.Details.List
-    , Gogol.AdExchangeBuyer2.Buyers.FilterSets.FilteredBids.List
-    , Gogol.AdExchangeBuyer2.Buyers.FilterSets.Get
-    , Gogol.AdExchangeBuyer2.Buyers.FilterSets.ImpressionMetrics.List
-    , Gogol.AdExchangeBuyer2.Buyers.FilterSets.List
-    , Gogol.AdExchangeBuyer2.Buyers.FilterSets.LosingBids.List
-    , Gogol.AdExchangeBuyer2.Buyers.FilterSets.NonBillableWinningBids.List
-    , Gogol.AdExchangeBuyer2.Types
+    Gogol.AdExchangeBuyer2
+    Gogol.AdExchangeBuyer2.Accounts.Clients.Create
+    Gogol.AdExchangeBuyer2.Accounts.Clients.Get
+    Gogol.AdExchangeBuyer2.Accounts.Clients.Invitations.Create
+    Gogol.AdExchangeBuyer2.Accounts.Clients.Invitations.Get
+    Gogol.AdExchangeBuyer2.Accounts.Clients.Invitations.List
+    Gogol.AdExchangeBuyer2.Accounts.Clients.List
+    Gogol.AdExchangeBuyer2.Accounts.Clients.Update
+    Gogol.AdExchangeBuyer2.Accounts.Clients.Users.Get
+    Gogol.AdExchangeBuyer2.Accounts.Clients.Users.List
+    Gogol.AdExchangeBuyer2.Accounts.Clients.Users.Update
+    Gogol.AdExchangeBuyer2.Accounts.Creatives.Create
+    Gogol.AdExchangeBuyer2.Accounts.Creatives.DealAssociations.Add
+    Gogol.AdExchangeBuyer2.Accounts.Creatives.DealAssociations.List
+    Gogol.AdExchangeBuyer2.Accounts.Creatives.DealAssociations.Remove
+    Gogol.AdExchangeBuyer2.Accounts.Creatives.Get
+    Gogol.AdExchangeBuyer2.Accounts.Creatives.List
+    Gogol.AdExchangeBuyer2.Accounts.Creatives.StopWatching
+    Gogol.AdExchangeBuyer2.Accounts.Creatives.Update
+    Gogol.AdExchangeBuyer2.Accounts.Creatives.Watch
+    Gogol.AdExchangeBuyer2.Accounts.FinalizedProposals.List
+    Gogol.AdExchangeBuyer2.Accounts.FinalizedProposals.Pause
+    Gogol.AdExchangeBuyer2.Accounts.FinalizedProposals.Resume
+    Gogol.AdExchangeBuyer2.Accounts.Products.Get
+    Gogol.AdExchangeBuyer2.Accounts.Products.List
+    Gogol.AdExchangeBuyer2.Accounts.Proposals.Accept
+    Gogol.AdExchangeBuyer2.Accounts.Proposals.AddNote
+    Gogol.AdExchangeBuyer2.Accounts.Proposals.CancelNegotiation
+    Gogol.AdExchangeBuyer2.Accounts.Proposals.CompleteSetup
+    Gogol.AdExchangeBuyer2.Accounts.Proposals.Create
+    Gogol.AdExchangeBuyer2.Accounts.Proposals.Get
+    Gogol.AdExchangeBuyer2.Accounts.Proposals.List
+    Gogol.AdExchangeBuyer2.Accounts.Proposals.Pause
+    Gogol.AdExchangeBuyer2.Accounts.Proposals.Resume
+    Gogol.AdExchangeBuyer2.Accounts.Proposals.Update
+    Gogol.AdExchangeBuyer2.Accounts.PublisherProfiles.Get
+    Gogol.AdExchangeBuyer2.Accounts.PublisherProfiles.List
+    Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.BidMetrics.List
+    Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.BidResponseErrors.List
+    Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.BidResponsesWithoutBids.List
+    Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.Create
+    Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.Delete
+    Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.FilteredBidRequests.List
+    Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.FilteredBids.Creatives.List
+    Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.FilteredBids.Details.List
+    Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.FilteredBids.List
+    Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.Get
+    Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.ImpressionMetrics.List
+    Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.List
+    Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.LosingBids.List
+    Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.NonBillableWinningBids.List
+    Gogol.AdExchangeBuyer2.Bidders.FilterSets.BidMetrics.List
+    Gogol.AdExchangeBuyer2.Bidders.FilterSets.BidResponseErrors.List
+    Gogol.AdExchangeBuyer2.Bidders.FilterSets.BidResponsesWithoutBids.List
+    Gogol.AdExchangeBuyer2.Bidders.FilterSets.Create
+    Gogol.AdExchangeBuyer2.Bidders.FilterSets.Delete
+    Gogol.AdExchangeBuyer2.Bidders.FilterSets.FilteredBidRequests.List
+    Gogol.AdExchangeBuyer2.Bidders.FilterSets.FilteredBids.Creatives.List
+    Gogol.AdExchangeBuyer2.Bidders.FilterSets.FilteredBids.Details.List
+    Gogol.AdExchangeBuyer2.Bidders.FilterSets.FilteredBids.List
+    Gogol.AdExchangeBuyer2.Bidders.FilterSets.Get
+    Gogol.AdExchangeBuyer2.Bidders.FilterSets.ImpressionMetrics.List
+    Gogol.AdExchangeBuyer2.Bidders.FilterSets.List
+    Gogol.AdExchangeBuyer2.Bidders.FilterSets.LosingBids.List
+    Gogol.AdExchangeBuyer2.Bidders.FilterSets.NonBillableWinningBids.List
+    Gogol.AdExchangeBuyer2.Buyers.FilterSets.BidMetrics.List
+    Gogol.AdExchangeBuyer2.Buyers.FilterSets.BidResponseErrors.List
+    Gogol.AdExchangeBuyer2.Buyers.FilterSets.BidResponsesWithoutBids.List
+    Gogol.AdExchangeBuyer2.Buyers.FilterSets.Create
+    Gogol.AdExchangeBuyer2.Buyers.FilterSets.Delete
+    Gogol.AdExchangeBuyer2.Buyers.FilterSets.FilteredBidRequests.List
+    Gogol.AdExchangeBuyer2.Buyers.FilterSets.FilteredBids.Creatives.List
+    Gogol.AdExchangeBuyer2.Buyers.FilterSets.FilteredBids.Details.List
+    Gogol.AdExchangeBuyer2.Buyers.FilterSets.FilteredBids.List
+    Gogol.AdExchangeBuyer2.Buyers.FilterSets.Get
+    Gogol.AdExchangeBuyer2.Buyers.FilterSets.ImpressionMetrics.List
+    Gogol.AdExchangeBuyer2.Buyers.FilterSets.List
+    Gogol.AdExchangeBuyer2.Buyers.FilterSets.LosingBids.List
+    Gogol.AdExchangeBuyer2.Buyers.FilterSets.NonBillableWinningBids.List
+    Gogol.AdExchangeBuyer2.Types
 
   other-modules:
-      Gogol.AdExchangeBuyer2.Internal.Product
-    , Gogol.AdExchangeBuyer2.Internal.Sum
+    Gogol.AdExchangeBuyer2.Internal.Product
+    Gogol.AdExchangeBuyer2.Internal.Sum
 
-  build-depends:
-      gogol-core ^>= 1.0.0
+  build-depends:    gogol-core ^>=1.0.0

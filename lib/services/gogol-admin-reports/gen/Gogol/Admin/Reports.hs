@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.Admin.Reports
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,132 +27,132 @@
 --
 -- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference>
 module Gogol.Admin.Reports
-    (
-    -- * Configuration
-      adminReportsService
+  ( -- * Configuration
+    adminReportsService,
 
     -- * OAuth Scopes
-    , Admin'Reports'Audit'Readonly
-    , Admin'Reports'Usage'Readonly
+    Admin'Reports'Audit'Readonly,
+    Admin'Reports'Usage'Readonly,
 
     -- * Resources
 
     -- ** admin.channels.stop
-    , AdminChannelsStopResource
-    , AdminChannelsStop (..)
-    , newAdminChannelsStop
+    AdminChannelsStopResource,
+    AdminChannelsStop (..),
+    newAdminChannelsStop,
 
     -- ** reports.activities.list
-    , ReportsActivitiesListResource
-    , ReportsActivitiesList (..)
-    , newReportsActivitiesList
+    ReportsActivitiesListResource,
+    ReportsActivitiesList (..),
+    newReportsActivitiesList,
 
     -- ** reports.activities.watch
-    , ReportsActivitiesWatchResource
-    , ReportsActivitiesWatch (..)
-    , newReportsActivitiesWatch
+    ReportsActivitiesWatchResource,
+    ReportsActivitiesWatch (..),
+    newReportsActivitiesWatch,
 
     -- ** reports.customerUsageReports.get
-    , ReportsCustomerUsageReportsGetResource
-    , ReportsCustomerUsageReportsGet (..)
-    , newReportsCustomerUsageReportsGet
+    ReportsCustomerUsageReportsGetResource,
+    ReportsCustomerUsageReportsGet (..),
+    newReportsCustomerUsageReportsGet,
 
     -- ** reports.entityUsageReports.get
-    , ReportsEntityUsageReportsGetResource
-    , ReportsEntityUsageReportsGet (..)
-    , newReportsEntityUsageReportsGet
+    ReportsEntityUsageReportsGetResource,
+    ReportsEntityUsageReportsGet (..),
+    newReportsEntityUsageReportsGet,
 
     -- ** reports.userUsageReport.get
-    , ReportsUserUsageReportGetResource
-    , ReportsUserUsageReportGet (..)
-    , newReportsUserUsageReportGet
+    ReportsUserUsageReportGetResource,
+    ReportsUserUsageReportGet (..),
+    newReportsUserUsageReportGet,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Activities
-    , Activities (..)
-    , newActivities
+    Activities (..),
+    newActivities,
 
     -- ** Activity
-    , Activity (..)
-    , newActivity
+    Activity (..),
+    newActivity,
 
     -- ** Activity_Actor
-    , Activity_Actor (..)
-    , newActivity_Actor
+    Activity_Actor (..),
+    newActivity_Actor,
 
     -- ** Activity_EventsItem
-    , Activity_EventsItem (..)
-    , newActivity_EventsItem
+    Activity_EventsItem (..),
+    newActivity_EventsItem,
 
     -- ** Activity_EventsItem_ParametersItem
-    , Activity_EventsItem_ParametersItem (..)
-    , newActivity_EventsItem_ParametersItem
+    Activity_EventsItem_ParametersItem (..),
+    newActivity_EventsItem_ParametersItem,
 
     -- ** Activity_EventsItem_ParametersItem_MessageValue
-    , Activity_EventsItem_ParametersItem_MessageValue (..)
-    , newActivity_EventsItem_ParametersItem_MessageValue
+    Activity_EventsItem_ParametersItem_MessageValue (..),
+    newActivity_EventsItem_ParametersItem_MessageValue,
 
     -- ** Activity_EventsItem_ParametersItem_MultiMessageValueItem
-    , Activity_EventsItem_ParametersItem_MultiMessageValueItem (..)
-    , newActivity_EventsItem_ParametersItem_MultiMessageValueItem
+    Activity_EventsItem_ParametersItem_MultiMessageValueItem (..),
+    newActivity_EventsItem_ParametersItem_MultiMessageValueItem,
 
     -- ** Activity_Id
-    , Activity_Id (..)
-    , newActivity_Id
+    Activity_Id (..),
+    newActivity_Id,
 
     -- ** Channel
-    , Channel (..)
-    , newChannel
+    Channel (..),
+    newChannel,
 
     -- ** Channel_Params
-    , Channel_Params (..)
-    , newChannel_Params
+    Channel_Params (..),
+    newChannel_Params,
 
     -- ** NestedParameter
-    , NestedParameter (..)
-    , newNestedParameter
+    NestedParameter (..),
+    newNestedParameter,
 
     -- ** UsageReport
-    , UsageReport (..)
-    , newUsageReport
+    UsageReport (..),
+    newUsageReport,
 
     -- ** UsageReport_Entity
-    , UsageReport_Entity (..)
-    , newUsageReport_Entity
+    UsageReport_Entity (..),
+    newUsageReport_Entity,
 
     -- ** UsageReport_ParametersItem
-    , UsageReport_ParametersItem (..)
-    , newUsageReport_ParametersItem
+    UsageReport_ParametersItem (..),
+    newUsageReport_ParametersItem,
 
     -- ** UsageReport_ParametersItem_MsgValueItem
-    , UsageReport_ParametersItem_MsgValueItem (..)
-    , newUsageReport_ParametersItem_MsgValueItem
+    UsageReport_ParametersItem_MsgValueItem (..),
+    newUsageReport_ParametersItem_MsgValueItem,
 
     -- ** UsageReports
-    , UsageReports (..)
-    , newUsageReports
+    UsageReports (..),
+    newUsageReports,
 
     -- ** UsageReports_WarningsItem
-    , UsageReports_WarningsItem (..)
-    , newUsageReports_WarningsItem
+    UsageReports_WarningsItem (..),
+    newUsageReports_WarningsItem,
 
     -- ** UsageReports_WarningsItem_DataItem
-    , UsageReports_WarningsItem_DataItem (..)
-    , newUsageReports_WarningsItem_DataItem
+    UsageReports_WarningsItem_DataItem (..),
+    newUsageReports_WarningsItem_DataItem,
 
     -- ** ActivitiesListApplicationName
-    , ActivitiesListApplicationName (..)
+    ActivitiesListApplicationName (..),
 
     -- ** ActivitiesWatchApplicationName
-    , ActivitiesWatchApplicationName (..)
+    ActivitiesWatchApplicationName (..),
 
     -- ** EntityUsageReportsGetEntityType
-    , EntityUsageReportsGetEntityType (..)
-    ) where
+    EntityUsageReportsGetEntityType (..),
+  )
+where
 
 import Gogol.Admin.Reports.Activities.List
 import Gogol.Admin.Reports.Activities.Watch

@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.PlayMoviesPartner.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.PlayMoviesPartner.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * Avail_FormatProfile
     Avail_FormatProfile
-      (
-        Avail_FormatProfile_FORMATPROFILEUNSPECIFIED,
+      ( Avail_FormatProfile_FORMATPROFILEUNSPECIFIED,
         Avail_FormatProfile_SD,
         Avail_FormatProfile_HD,
         Avail_FormatProfile_Uhd,
@@ -50,8 +41,7 @@ module Gogol.PlayMoviesPartner.Internal.Sum
 
     -- * Avail_LicenseType
     Avail_LicenseType
-      (
-        Avail_LicenseType_LICENSETYPEUNSPECIFIED,
+      ( Avail_LicenseType_LICENSETYPEUNSPECIFIED,
         Avail_LicenseType_Est,
         Avail_LicenseType_Vod,
         Avail_LicenseType_Svod,
@@ -61,8 +51,7 @@ module Gogol.PlayMoviesPartner.Internal.Sum
 
     -- * Avail_WorkType
     Avail_WorkType
-      (
-        Avail_WorkType_TITLETYPEUNSPECIFIED,
+      ( Avail_WorkType_TITLETYPEUNSPECIFIED,
         Avail_WorkType_Movie,
         Avail_WorkType_Season,
         Avail_WorkType_Episode,
@@ -72,8 +61,7 @@ module Gogol.PlayMoviesPartner.Internal.Sum
 
     -- * Order_NormalizedPriority
     Order_NormalizedPriority
-      (
-        Order_NormalizedPriority_NORMALIZEDPRIORITYUNSPECIFIED,
+      ( Order_NormalizedPriority_NORMALIZEDPRIORITYUNSPECIFIED,
         Order_NormalizedPriority_LOWPRIORITY,
         Order_NormalizedPriority_HIGHPRIORITY,
         ..
@@ -81,8 +69,7 @@ module Gogol.PlayMoviesPartner.Internal.Sum
 
     -- * Order_Status
     Order_Status
-      (
-        Order_Status_STATUSUNSPECIFIED,
+      ( Order_Status_STATUSUNSPECIFIED,
         Order_Status_STATUSAPPROVED,
         Order_Status_STATUSFAILED,
         Order_Status_STATUSPROCESSING,
@@ -93,8 +80,7 @@ module Gogol.PlayMoviesPartner.Internal.Sum
 
     -- * Order_StatusDetail
     Order_StatusDetail
-      (
-        Order_StatusDetail_ORDERSTATUSUNSPECIFIED,
+      ( Order_StatusDetail_ORDERSTATUSUNSPECIFIED,
         Order_StatusDetail_ORDERSTATUSQCAPPROVED,
         Order_StatusDetail_ORDERSTATUSQCREJECTION,
         Order_StatusDetail_ORDERSTATUSINTERNALFIX,
@@ -108,8 +94,7 @@ module Gogol.PlayMoviesPartner.Internal.Sum
 
     -- * Order_Type
     Order_Type
-      (
-        Order_Type_TITLETYPEUNSPECIFIED,
+      ( Order_Type_TITLETYPEUNSPECIFIED,
         Order_Type_Movie,
         Order_Type_Season,
         Order_Type_Episode,
@@ -119,30 +104,30 @@ module Gogol.PlayMoviesPartner.Internal.Sum
 
     -- * StoreInfo_Type
     StoreInfo_Type
-      (
-        StoreInfo_Type_TITLETYPEUNSPECIFIED,
+      ( StoreInfo_Type_TITLETYPEUNSPECIFIED,
         StoreInfo_Type_Movie,
         StoreInfo_Type_Season,
         StoreInfo_Type_Episode,
         StoreInfo_Type_Bundle,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -155,20 +140,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | Indicates the format profile covered by the transaction.
-newtype Avail_FormatProfile = Avail_FormatProfile { fromAvail_FormatProfile :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Avail_FormatProfile = Avail_FormatProfile {fromAvail_FormatProfile :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Value could not be determined, please contact technical support if it should.
 pattern Avail_FormatProfile_FORMATPROFILEUNSPECIFIED :: Avail_FormatProfile
@@ -191,20 +177,21 @@ pattern Avail_FormatProfile_Uhd = Avail_FormatProfile "UHD"
   Avail_FormatProfile_SD,
   Avail_FormatProfile_HD,
   Avail_FormatProfile_Uhd,
-  Avail_FormatProfile #-}
+  Avail_FormatProfile
+  #-}
 
 -- | Type of transaction.
-newtype Avail_LicenseType = Avail_LicenseType { fromAvail_LicenseType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Avail_LicenseType = Avail_LicenseType {fromAvail_LicenseType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Value could not be determined, please contact technical support if it should.
 pattern Avail_LicenseType_LICENSETYPEUNSPECIFIED :: Avail_LicenseType
@@ -232,20 +219,21 @@ pattern Avail_LicenseType_Poest = Avail_LicenseType "POEST"
   Avail_LicenseType_Vod,
   Avail_LicenseType_Svod,
   Avail_LicenseType_Poest,
-  Avail_LicenseType #-}
+  Avail_LicenseType
+  #-}
 
 -- | Work type as enumerated in EMA.
-newtype Avail_WorkType = Avail_WorkType { fromAvail_WorkType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Avail_WorkType = Avail_WorkType {fromAvail_WorkType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Value could not be determined, please contact technical support if it should.
 pattern Avail_WorkType_TITLETYPEUNSPECIFIED :: Avail_WorkType
@@ -273,20 +261,21 @@ pattern Avail_WorkType_Bundle = Avail_WorkType "BUNDLE"
   Avail_WorkType_Season,
   Avail_WorkType_Episode,
   Avail_WorkType_Bundle,
-  Avail_WorkType #-}
+  Avail_WorkType
+  #-}
 
 -- | A simpler representation of the priority.
-newtype Order_NormalizedPriority = Order_NormalizedPriority { fromOrder_NormalizedPriority :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Order_NormalizedPriority = Order_NormalizedPriority {fromOrder_NormalizedPriority :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Value could not be determined, please contact technical support if it should.
 pattern Order_NormalizedPriority_NORMALIZEDPRIORITYUNSPECIFIED :: Order_NormalizedPriority
@@ -304,20 +293,21 @@ pattern Order_NormalizedPriority_HIGHPRIORITY = Order_NormalizedPriority "HIGH_P
   Order_NormalizedPriority_NORMALIZEDPRIORITYUNSPECIFIED,
   Order_NormalizedPriority_LOWPRIORITY,
   Order_NormalizedPriority_HIGHPRIORITY,
-  Order_NormalizedPriority #-}
+  Order_NormalizedPriority
+  #-}
 
 -- | High-level status of the order.
-newtype Order_Status = Order_Status { fromOrder_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Order_Status = Order_Status {fromOrder_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Value could not be determined, please contact technical support if it should.
 pattern Order_Status_STATUSUNSPECIFIED :: Order_Status
@@ -350,20 +340,21 @@ pattern Order_Status_STATUSNOTAVAILABLE = Order_Status "STATUS_NOT_AVAILABLE"
   Order_Status_STATUSPROCESSING,
   Order_Status_STATUSUNFULFILLED,
   Order_Status_STATUSNOTAVAILABLE,
-  Order_Status #-}
+  Order_Status
+  #-}
 
 -- | Detailed status of the order
-newtype Order_StatusDetail = Order_StatusDetail { fromOrder_StatusDetail :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Order_StatusDetail = Order_StatusDetail {fromOrder_StatusDetail :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Value could not be determined, please contact technical support if it should.
 pattern Order_StatusDetail_ORDERSTATUSUNSPECIFIED :: Order_StatusDetail
@@ -411,20 +402,21 @@ pattern Order_StatusDetail_ORDERSTATUSFILEPROCESSING = Order_StatusDetail "ORDER
   Order_StatusDetail_ORDERSTATUSAWAITINGREDELIVERY,
   Order_StatusDetail_ORDERSTATUSREADYFORQC,
   Order_StatusDetail_ORDERSTATUSFILEPROCESSING,
-  Order_StatusDetail #-}
+  Order_StatusDetail
+  #-}
 
 -- | Type of the Edit linked to the Order.
-newtype Order_Type = Order_Type { fromOrder_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Order_Type = Order_Type {fromOrder_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Value could not be determined, please contact technical support if it should.
 pattern Order_Type_TITLETYPEUNSPECIFIED :: Order_Type
@@ -452,20 +444,21 @@ pattern Order_Type_Bundle = Order_Type "BUNDLE"
   Order_Type_Season,
   Order_Type_Episode,
   Order_Type_Bundle,
-  Order_Type #-}
+  Order_Type
+  #-}
 
 -- | Edit type, like Movie, Episode or Season.
-newtype StoreInfo_Type = StoreInfo_Type { fromStoreInfo_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype StoreInfo_Type = StoreInfo_Type {fromStoreInfo_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Value could not be determined, please contact technical support if it should.
 pattern StoreInfo_Type_TITLETYPEUNSPECIFIED :: StoreInfo_Type
@@ -493,4 +486,5 @@ pattern StoreInfo_Type_Bundle = StoreInfo_Type "BUNDLE"
   StoreInfo_Type_Season,
   StoreInfo_Type_Episode,
   StoreInfo_Type_Bundle,
-  StoreInfo_Type #-}
+  StoreInfo_Type
+  #-}

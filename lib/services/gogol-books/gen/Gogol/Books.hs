@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.Books
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,788 +27,788 @@
 --
 -- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference>
 module Gogol.Books
-    (
-    -- * Configuration
-      booksService
+  ( -- * Configuration
+    booksService,
 
     -- * OAuth Scopes
-    , Books'FullControl
+    Books'FullControl,
 
     -- * Resources
 
     -- ** books.bookshelves.get
-    , BooksBookshelvesGetResource
-    , BooksBookshelvesGet (..)
-    , newBooksBookshelvesGet
+    BooksBookshelvesGetResource,
+    BooksBookshelvesGet (..),
+    newBooksBookshelvesGet,
 
     -- ** books.bookshelves.list
-    , BooksBookshelvesListResource
-    , BooksBookshelvesList (..)
-    , newBooksBookshelvesList
+    BooksBookshelvesListResource,
+    BooksBookshelvesList (..),
+    newBooksBookshelvesList,
 
     -- ** books.bookshelves.volumes.list
-    , BooksBookshelvesVolumesListResource
-    , BooksBookshelvesVolumesList (..)
-    , newBooksBookshelvesVolumesList
+    BooksBookshelvesVolumesListResource,
+    BooksBookshelvesVolumesList (..),
+    newBooksBookshelvesVolumesList,
 
     -- ** books.cloudloading.addBook
-    , BooksCloudloadingAddBookResource
-    , BooksCloudloadingAddBook (..)
-    , newBooksCloudloadingAddBook
+    BooksCloudloadingAddBookResource,
+    BooksCloudloadingAddBook (..),
+    newBooksCloudloadingAddBook,
 
     -- ** books.cloudloading.deleteBook
-    , BooksCloudloadingDeleteBookResource
-    , BooksCloudloadingDeleteBook (..)
-    , newBooksCloudloadingDeleteBook
+    BooksCloudloadingDeleteBookResource,
+    BooksCloudloadingDeleteBook (..),
+    newBooksCloudloadingDeleteBook,
 
     -- ** books.cloudloading.updateBook
-    , BooksCloudloadingUpdateBookResource
-    , BooksCloudloadingUpdateBook (..)
-    , newBooksCloudloadingUpdateBook
+    BooksCloudloadingUpdateBookResource,
+    BooksCloudloadingUpdateBook (..),
+    newBooksCloudloadingUpdateBook,
 
     -- ** books.dictionary.listOfflineMetadata
-    , BooksDictionaryListOfflineMetadataResource
-    , BooksDictionaryListOfflineMetadata (..)
-    , newBooksDictionaryListOfflineMetadata
+    BooksDictionaryListOfflineMetadataResource,
+    BooksDictionaryListOfflineMetadata (..),
+    newBooksDictionaryListOfflineMetadata,
 
     -- ** books.familysharing.getFamilyInfo
-    , BooksFamilysharingGetFamilyInfoResource
-    , BooksFamilysharingGetFamilyInfo (..)
-    , newBooksFamilysharingGetFamilyInfo
+    BooksFamilysharingGetFamilyInfoResource,
+    BooksFamilysharingGetFamilyInfo (..),
+    newBooksFamilysharingGetFamilyInfo,
 
     -- ** books.familysharing.share
-    , BooksFamilysharingShareResource
-    , BooksFamilysharingShare (..)
-    , newBooksFamilysharingShare
+    BooksFamilysharingShareResource,
+    BooksFamilysharingShare (..),
+    newBooksFamilysharingShare,
 
     -- ** books.familysharing.unshare
-    , BooksFamilysharingUnshareResource
-    , BooksFamilysharingUnshare (..)
-    , newBooksFamilysharingUnshare
+    BooksFamilysharingUnshareResource,
+    BooksFamilysharingUnshare (..),
+    newBooksFamilysharingUnshare,
 
     -- ** books.layers.annotationData.get
-    , BooksLayersAnnotationDataGetResource
-    , BooksLayersAnnotationDataGet (..)
-    , newBooksLayersAnnotationDataGet
+    BooksLayersAnnotationDataGetResource,
+    BooksLayersAnnotationDataGet (..),
+    newBooksLayersAnnotationDataGet,
 
     -- ** books.layers.annotationData.list
-    , BooksLayersAnnotationDataListResource
-    , BooksLayersAnnotationDataList (..)
-    , newBooksLayersAnnotationDataList
+    BooksLayersAnnotationDataListResource,
+    BooksLayersAnnotationDataList (..),
+    newBooksLayersAnnotationDataList,
 
     -- ** books.layers.get
-    , BooksLayersGetResource
-    , BooksLayersGet (..)
-    , newBooksLayersGet
+    BooksLayersGetResource,
+    BooksLayersGet (..),
+    newBooksLayersGet,
 
     -- ** books.layers.list
-    , BooksLayersListResource
-    , BooksLayersList (..)
-    , newBooksLayersList
+    BooksLayersListResource,
+    BooksLayersList (..),
+    newBooksLayersList,
 
     -- ** books.layers.volumeAnnotations.get
-    , BooksLayersVolumeAnnotationsGetResource
-    , BooksLayersVolumeAnnotationsGet (..)
-    , newBooksLayersVolumeAnnotationsGet
+    BooksLayersVolumeAnnotationsGetResource,
+    BooksLayersVolumeAnnotationsGet (..),
+    newBooksLayersVolumeAnnotationsGet,
 
     -- ** books.layers.volumeAnnotations.list
-    , BooksLayersVolumeAnnotationsListResource
-    , BooksLayersVolumeAnnotationsList (..)
-    , newBooksLayersVolumeAnnotationsList
+    BooksLayersVolumeAnnotationsListResource,
+    BooksLayersVolumeAnnotationsList (..),
+    newBooksLayersVolumeAnnotationsList,
 
     -- ** books.myconfig.getUserSettings
-    , BooksMyconfigGetUserSettingsResource
-    , BooksMyconfigGetUserSettings (..)
-    , newBooksMyconfigGetUserSettings
+    BooksMyconfigGetUserSettingsResource,
+    BooksMyconfigGetUserSettings (..),
+    newBooksMyconfigGetUserSettings,
 
     -- ** books.myconfig.releaseDownloadAccess
-    , BooksMyconfigReleaseDownloadAccessResource
-    , BooksMyconfigReleaseDownloadAccess (..)
-    , newBooksMyconfigReleaseDownloadAccess
+    BooksMyconfigReleaseDownloadAccessResource,
+    BooksMyconfigReleaseDownloadAccess (..),
+    newBooksMyconfigReleaseDownloadAccess,
 
     -- ** books.myconfig.requestAccess
-    , BooksMyconfigRequestAccessResource
-    , BooksMyconfigRequestAccess (..)
-    , newBooksMyconfigRequestAccess
+    BooksMyconfigRequestAccessResource,
+    BooksMyconfigRequestAccess (..),
+    newBooksMyconfigRequestAccess,
 
     -- ** books.myconfig.syncVolumeLicenses
-    , BooksMyconfigSyncVolumeLicensesResource
-    , BooksMyconfigSyncVolumeLicenses (..)
-    , newBooksMyconfigSyncVolumeLicenses
+    BooksMyconfigSyncVolumeLicensesResource,
+    BooksMyconfigSyncVolumeLicenses (..),
+    newBooksMyconfigSyncVolumeLicenses,
 
     -- ** books.myconfig.updateUserSettings
-    , BooksMyconfigUpdateUserSettingsResource
-    , BooksMyconfigUpdateUserSettings (..)
-    , newBooksMyconfigUpdateUserSettings
+    BooksMyconfigUpdateUserSettingsResource,
+    BooksMyconfigUpdateUserSettings (..),
+    newBooksMyconfigUpdateUserSettings,
 
     -- ** books.mylibrary.annotations.delete
-    , BooksMylibraryAnnotationsDeleteResource
-    , BooksMylibraryAnnotationsDelete (..)
-    , newBooksMylibraryAnnotationsDelete
+    BooksMylibraryAnnotationsDeleteResource,
+    BooksMylibraryAnnotationsDelete (..),
+    newBooksMylibraryAnnotationsDelete,
 
     -- ** books.mylibrary.annotations.insert
-    , BooksMylibraryAnnotationsInsertResource
-    , BooksMylibraryAnnotationsInsert (..)
-    , newBooksMylibraryAnnotationsInsert
+    BooksMylibraryAnnotationsInsertResource,
+    BooksMylibraryAnnotationsInsert (..),
+    newBooksMylibraryAnnotationsInsert,
 
     -- ** books.mylibrary.annotations.list
-    , BooksMylibraryAnnotationsListResource
-    , BooksMylibraryAnnotationsList (..)
-    , newBooksMylibraryAnnotationsList
+    BooksMylibraryAnnotationsListResource,
+    BooksMylibraryAnnotationsList (..),
+    newBooksMylibraryAnnotationsList,
 
     -- ** books.mylibrary.annotations.summary
-    , BooksMylibraryAnnotationsSummaryResource
-    , BooksMylibraryAnnotationsSummary (..)
-    , newBooksMylibraryAnnotationsSummary
+    BooksMylibraryAnnotationsSummaryResource,
+    BooksMylibraryAnnotationsSummary (..),
+    newBooksMylibraryAnnotationsSummary,
 
     -- ** books.mylibrary.annotations.update
-    , BooksMylibraryAnnotationsUpdateResource
-    , BooksMylibraryAnnotationsUpdate (..)
-    , newBooksMylibraryAnnotationsUpdate
+    BooksMylibraryAnnotationsUpdateResource,
+    BooksMylibraryAnnotationsUpdate (..),
+    newBooksMylibraryAnnotationsUpdate,
 
     -- ** books.mylibrary.bookshelves.addVolume
-    , BooksMylibraryBookshelvesAddVolumeResource
-    , BooksMylibraryBookshelvesAddVolume (..)
-    , newBooksMylibraryBookshelvesAddVolume
+    BooksMylibraryBookshelvesAddVolumeResource,
+    BooksMylibraryBookshelvesAddVolume (..),
+    newBooksMylibraryBookshelvesAddVolume,
 
     -- ** books.mylibrary.bookshelves.clearVolumes
-    , BooksMylibraryBookshelvesClearVolumesResource
-    , BooksMylibraryBookshelvesClearVolumes (..)
-    , newBooksMylibraryBookshelvesClearVolumes
+    BooksMylibraryBookshelvesClearVolumesResource,
+    BooksMylibraryBookshelvesClearVolumes (..),
+    newBooksMylibraryBookshelvesClearVolumes,
 
     -- ** books.mylibrary.bookshelves.get
-    , BooksMylibraryBookshelvesGetResource
-    , BooksMylibraryBookshelvesGet (..)
-    , newBooksMylibraryBookshelvesGet
+    BooksMylibraryBookshelvesGetResource,
+    BooksMylibraryBookshelvesGet (..),
+    newBooksMylibraryBookshelvesGet,
 
     -- ** books.mylibrary.bookshelves.list
-    , BooksMylibraryBookshelvesListResource
-    , BooksMylibraryBookshelvesList (..)
-    , newBooksMylibraryBookshelvesList
+    BooksMylibraryBookshelvesListResource,
+    BooksMylibraryBookshelvesList (..),
+    newBooksMylibraryBookshelvesList,
 
     -- ** books.mylibrary.bookshelves.moveVolume
-    , BooksMylibraryBookshelvesMoveVolumeResource
-    , BooksMylibraryBookshelvesMoveVolume (..)
-    , newBooksMylibraryBookshelvesMoveVolume
+    BooksMylibraryBookshelvesMoveVolumeResource,
+    BooksMylibraryBookshelvesMoveVolume (..),
+    newBooksMylibraryBookshelvesMoveVolume,
 
     -- ** books.mylibrary.bookshelves.removeVolume
-    , BooksMylibraryBookshelvesRemoveVolumeResource
-    , BooksMylibraryBookshelvesRemoveVolume (..)
-    , newBooksMylibraryBookshelvesRemoveVolume
+    BooksMylibraryBookshelvesRemoveVolumeResource,
+    BooksMylibraryBookshelvesRemoveVolume (..),
+    newBooksMylibraryBookshelvesRemoveVolume,
 
     -- ** books.mylibrary.bookshelves.volumes.list
-    , BooksMylibraryBookshelvesVolumesListResource
-    , BooksMylibraryBookshelvesVolumesList (..)
-    , newBooksMylibraryBookshelvesVolumesList
+    BooksMylibraryBookshelvesVolumesListResource,
+    BooksMylibraryBookshelvesVolumesList (..),
+    newBooksMylibraryBookshelvesVolumesList,
 
     -- ** books.mylibrary.readingpositions.get
-    , BooksMylibraryReadingpositionsGetResource
-    , BooksMylibraryReadingpositionsGet (..)
-    , newBooksMylibraryReadingpositionsGet
+    BooksMylibraryReadingpositionsGetResource,
+    BooksMylibraryReadingpositionsGet (..),
+    newBooksMylibraryReadingpositionsGet,
 
     -- ** books.mylibrary.readingpositions.setPosition
-    , BooksMylibraryReadingpositionsSetPositionResource
-    , BooksMylibraryReadingpositionsSetPosition (..)
-    , newBooksMylibraryReadingpositionsSetPosition
+    BooksMylibraryReadingpositionsSetPositionResource,
+    BooksMylibraryReadingpositionsSetPosition (..),
+    newBooksMylibraryReadingpositionsSetPosition,
 
     -- ** books.notification.get
-    , BooksNotificationGetResource
-    , BooksNotificationGet (..)
-    , newBooksNotificationGet
+    BooksNotificationGetResource,
+    BooksNotificationGet (..),
+    newBooksNotificationGet,
 
     -- ** books.onboarding.listCategories
-    , BooksOnboardingListCategoriesResource
-    , BooksOnboardingListCategories (..)
-    , newBooksOnboardingListCategories
+    BooksOnboardingListCategoriesResource,
+    BooksOnboardingListCategories (..),
+    newBooksOnboardingListCategories,
 
     -- ** books.onboarding.listCategoryVolumes
-    , BooksOnboardingListCategoryVolumesResource
-    , BooksOnboardingListCategoryVolumes (..)
-    , newBooksOnboardingListCategoryVolumes
+    BooksOnboardingListCategoryVolumesResource,
+    BooksOnboardingListCategoryVolumes (..),
+    newBooksOnboardingListCategoryVolumes,
 
     -- ** books.personalizedstream.get
-    , BooksPersonalizedstreamGetResource
-    , BooksPersonalizedstreamGet (..)
-    , newBooksPersonalizedstreamGet
+    BooksPersonalizedstreamGetResource,
+    BooksPersonalizedstreamGet (..),
+    newBooksPersonalizedstreamGet,
 
     -- ** books.promooffer.accept
-    , BooksPromoofferAcceptResource
-    , BooksPromoofferAccept (..)
-    , newBooksPromoofferAccept
+    BooksPromoofferAcceptResource,
+    BooksPromoofferAccept (..),
+    newBooksPromoofferAccept,
 
     -- ** books.promooffer.dismiss
-    , BooksPromoofferDismissResource
-    , BooksPromoofferDismiss (..)
-    , newBooksPromoofferDismiss
+    BooksPromoofferDismissResource,
+    BooksPromoofferDismiss (..),
+    newBooksPromoofferDismiss,
 
     -- ** books.promooffer.get
-    , BooksPromoofferGetResource
-    , BooksPromoofferGet (..)
-    , newBooksPromoofferGet
+    BooksPromoofferGetResource,
+    BooksPromoofferGet (..),
+    newBooksPromoofferGet,
 
     -- ** books.series.get
-    , BooksSeriesGetResource
-    , BooksSeriesGet (..)
-    , newBooksSeriesGet
+    BooksSeriesGetResource,
+    BooksSeriesGet (..),
+    newBooksSeriesGet,
 
     -- ** books.series.membership.get
-    , BooksSeriesMembershipGetResource
-    , BooksSeriesMembershipGet (..)
-    , newBooksSeriesMembershipGet
+    BooksSeriesMembershipGetResource,
+    BooksSeriesMembershipGet (..),
+    newBooksSeriesMembershipGet,
 
     -- ** books.volumes.associated.list
-    , BooksVolumesAssociatedListResource
-    , BooksVolumesAssociatedList (..)
-    , newBooksVolumesAssociatedList
+    BooksVolumesAssociatedListResource,
+    BooksVolumesAssociatedList (..),
+    newBooksVolumesAssociatedList,
 
     -- ** books.volumes.get
-    , BooksVolumesGetResource
-    , BooksVolumesGet (..)
-    , newBooksVolumesGet
+    BooksVolumesGetResource,
+    BooksVolumesGet (..),
+    newBooksVolumesGet,
 
     -- ** books.volumes.list
-    , BooksVolumesListResource
-    , BooksVolumesList (..)
-    , newBooksVolumesList
+    BooksVolumesListResource,
+    BooksVolumesList (..),
+    newBooksVolumesList,
 
     -- ** books.volumes.mybooks.list
-    , BooksVolumesMybooksListResource
-    , BooksVolumesMybooksList (..)
-    , newBooksVolumesMybooksList
+    BooksVolumesMybooksListResource,
+    BooksVolumesMybooksList (..),
+    newBooksVolumesMybooksList,
 
     -- ** books.volumes.recommended.list
-    , BooksVolumesRecommendedListResource
-    , BooksVolumesRecommendedList (..)
-    , newBooksVolumesRecommendedList
+    BooksVolumesRecommendedListResource,
+    BooksVolumesRecommendedList (..),
+    newBooksVolumesRecommendedList,
 
     -- ** books.volumes.recommended.rate
-    , BooksVolumesRecommendedRateResource
-    , BooksVolumesRecommendedRate (..)
-    , newBooksVolumesRecommendedRate
+    BooksVolumesRecommendedRateResource,
+    BooksVolumesRecommendedRate (..),
+    newBooksVolumesRecommendedRate,
 
     -- ** books.volumes.useruploaded.list
-    , BooksVolumesUseruploadedListResource
-    , BooksVolumesUseruploadedList (..)
-    , newBooksVolumesUseruploadedList
+    BooksVolumesUseruploadedListResource,
+    BooksVolumesUseruploadedList (..),
+    newBooksVolumesUseruploadedList,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Annotation
-    , Annotation (..)
-    , newAnnotation
+    Annotation (..),
+    newAnnotation,
 
     -- ** Annotation_ClientVersionRanges
-    , Annotation_ClientVersionRanges (..)
-    , newAnnotation_ClientVersionRanges
+    Annotation_ClientVersionRanges (..),
+    newAnnotation_ClientVersionRanges,
 
     -- ** Annotation_CurrentVersionRanges
-    , Annotation_CurrentVersionRanges (..)
-    , newAnnotation_CurrentVersionRanges
+    Annotation_CurrentVersionRanges (..),
+    newAnnotation_CurrentVersionRanges,
 
     -- ** Annotation_LayerSummary
-    , Annotation_LayerSummary (..)
-    , newAnnotation_LayerSummary
+    Annotation_LayerSummary (..),
+    newAnnotation_LayerSummary,
 
     -- ** Annotations
-    , Annotations (..)
-    , newAnnotations
+    Annotations (..),
+    newAnnotations,
 
     -- ** AnnotationsSummary
-    , AnnotationsSummary (..)
-    , newAnnotationsSummary
+    AnnotationsSummary (..),
+    newAnnotationsSummary,
 
     -- ** AnnotationsSummary_LayersItem
-    , AnnotationsSummary_LayersItem (..)
-    , newAnnotationsSummary_LayersItem
+    AnnotationsSummary_LayersItem (..),
+    newAnnotationsSummary_LayersItem,
 
     -- ** Annotationsdata
-    , Annotationsdata (..)
-    , newAnnotationsdata
+    Annotationsdata (..),
+    newAnnotationsdata,
 
     -- ** BooksAnnotationsRange
-    , BooksAnnotationsRange (..)
-    , newBooksAnnotationsRange
+    BooksAnnotationsRange (..),
+    newBooksAnnotationsRange,
 
     -- ** BooksCloudloadingResource
-    , BooksCloudloadingResource (..)
-    , newBooksCloudloadingResource
+    BooksCloudloadingResource (..),
+    newBooksCloudloadingResource,
 
     -- ** BooksVolumesRecommendedRateResponse
-    , BooksVolumesRecommendedRateResponse (..)
-    , newBooksVolumesRecommendedRateResponse
+    BooksVolumesRecommendedRateResponse (..),
+    newBooksVolumesRecommendedRateResponse,
 
     -- ** Bookshelf
-    , Bookshelf (..)
-    , newBookshelf
+    Bookshelf (..),
+    newBookshelf,
 
     -- ** Bookshelves
-    , Bookshelves (..)
-    , newBookshelves
+    Bookshelves (..),
+    newBookshelves,
 
     -- ** Category
-    , Category (..)
-    , newCategory
+    Category (..),
+    newCategory,
 
     -- ** Category_ItemsItem
-    , Category_ItemsItem (..)
-    , newCategory_ItemsItem
+    Category_ItemsItem (..),
+    newCategory_ItemsItem,
 
     -- ** ConcurrentAccessRestriction
-    , ConcurrentAccessRestriction (..)
-    , newConcurrentAccessRestriction
+    ConcurrentAccessRestriction (..),
+    newConcurrentAccessRestriction,
 
     -- ** DictionaryAnnotationdata
-    , DictionaryAnnotationdata (..)
-    , newDictionaryAnnotationdata
+    DictionaryAnnotationdata (..),
+    newDictionaryAnnotationdata,
 
     -- ** Dictlayerdata
-    , Dictlayerdata (..)
-    , newDictlayerdata
+    Dictlayerdata (..),
+    newDictlayerdata,
 
     -- ** Dictlayerdata_Common
-    , Dictlayerdata_Common (..)
-    , newDictlayerdata_Common
+    Dictlayerdata_Common (..),
+    newDictlayerdata_Common,
 
     -- ** Dictlayerdata_Dict
-    , Dictlayerdata_Dict (..)
-    , newDictlayerdata_Dict
+    Dictlayerdata_Dict (..),
+    newDictlayerdata_Dict,
 
     -- ** Dictlayerdata_Dict_Source
-    , Dictlayerdata_Dict_Source (..)
-    , newDictlayerdata_Dict_Source
+    Dictlayerdata_Dict_Source (..),
+    newDictlayerdata_Dict_Source,
 
     -- ** Dictlayerdata_Dict_WordsItem
-    , Dictlayerdata_Dict_WordsItem (..)
-    , newDictlayerdata_Dict_WordsItem
+    Dictlayerdata_Dict_WordsItem (..),
+    newDictlayerdata_Dict_WordsItem,
 
     -- ** Dictlayerdata_Dict_WordsItem_DerivativesItem
-    , Dictlayerdata_Dict_WordsItem_DerivativesItem (..)
-    , newDictlayerdata_Dict_WordsItem_DerivativesItem
+    Dictlayerdata_Dict_WordsItem_DerivativesItem (..),
+    newDictlayerdata_Dict_WordsItem_DerivativesItem,
 
     -- ** Dictlayerdata_Dict_WordsItem_DerivativesItem_Source
-    , Dictlayerdata_Dict_WordsItem_DerivativesItem_Source (..)
-    , newDictlayerdata_Dict_WordsItem_DerivativesItem_Source
+    Dictlayerdata_Dict_WordsItem_DerivativesItem_Source (..),
+    newDictlayerdata_Dict_WordsItem_DerivativesItem_Source,
 
     -- ** Dictlayerdata_Dict_WordsItem_ExamplesItem
-    , Dictlayerdata_Dict_WordsItem_ExamplesItem (..)
-    , newDictlayerdata_Dict_WordsItem_ExamplesItem
+    Dictlayerdata_Dict_WordsItem_ExamplesItem (..),
+    newDictlayerdata_Dict_WordsItem_ExamplesItem,
 
     -- ** Dictlayerdata_Dict_WordsItem_ExamplesItem_Source
-    , Dictlayerdata_Dict_WordsItem_ExamplesItem_Source (..)
-    , newDictlayerdata_Dict_WordsItem_ExamplesItem_Source
+    Dictlayerdata_Dict_WordsItem_ExamplesItem_Source (..),
+    newDictlayerdata_Dict_WordsItem_ExamplesItem_Source,
 
     -- ** Dictlayerdata_Dict_WordsItem_SensesItem
-    , Dictlayerdata_Dict_WordsItem_SensesItem (..)
-    , newDictlayerdata_Dict_WordsItem_SensesItem
+    Dictlayerdata_Dict_WordsItem_SensesItem (..),
+    newDictlayerdata_Dict_WordsItem_SensesItem,
 
     -- ** Dictlayerdata_Dict_WordsItem_SensesItem_ConjugationsItem
-    , Dictlayerdata_Dict_WordsItem_SensesItem_ConjugationsItem (..)
-    , newDictlayerdata_Dict_WordsItem_SensesItem_ConjugationsItem
+    Dictlayerdata_Dict_WordsItem_SensesItem_ConjugationsItem (..),
+    newDictlayerdata_Dict_WordsItem_SensesItem_ConjugationsItem,
 
     -- ** Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem
-    , Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem (..)
-    , newDictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem
+    Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem (..),
+    newDictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem,
 
     -- ** Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem
-    , Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem (..)
-    , newDictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem
+    Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem (..),
+    newDictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem,
 
     -- ** Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem_Source
-    , Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem_Source (..)
-    , newDictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem_Source
+    Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem_Source (..),
+    newDictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem_Source,
 
     -- ** Dictlayerdata_Dict_WordsItem_SensesItem_Source
-    , Dictlayerdata_Dict_WordsItem_SensesItem_Source (..)
-    , newDictlayerdata_Dict_WordsItem_SensesItem_Source
+    Dictlayerdata_Dict_WordsItem_SensesItem_Source (..),
+    newDictlayerdata_Dict_WordsItem_SensesItem_Source,
 
     -- ** Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem
-    , Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem (..)
-    , newDictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem
+    Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem (..),
+    newDictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem,
 
     -- ** Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem_Source
-    , Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem_Source (..)
-    , newDictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem_Source
+    Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem_Source (..),
+    newDictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem_Source,
 
     -- ** Dictlayerdata_Dict_WordsItem_Source
-    , Dictlayerdata_Dict_WordsItem_Source (..)
-    , newDictlayerdata_Dict_WordsItem_Source
+    Dictlayerdata_Dict_WordsItem_Source (..),
+    newDictlayerdata_Dict_WordsItem_Source,
 
     -- ** Discoveryclusters
-    , Discoveryclusters (..)
-    , newDiscoveryclusters
+    Discoveryclusters (..),
+    newDiscoveryclusters,
 
     -- ** Discoveryclusters_ClustersItem
-    , Discoveryclusters_ClustersItem (..)
-    , newDiscoveryclusters_ClustersItem
+    Discoveryclusters_ClustersItem (..),
+    newDiscoveryclusters_ClustersItem,
 
     -- ** Discoveryclusters_ClustersItem_Banner_with_content_container
-    , Discoveryclusters_ClustersItem_Banner_with_content_container (..)
-    , newDiscoveryclusters_ClustersItem_Banner_with_content_container
+    Discoveryclusters_ClustersItem_Banner_with_content_container (..),
+    newDiscoveryclusters_ClustersItem_Banner_with_content_container,
 
     -- ** DownloadAccessRestriction
-    , DownloadAccessRestriction (..)
-    , newDownloadAccessRestriction
+    DownloadAccessRestriction (..),
+    newDownloadAccessRestriction,
 
     -- ** DownloadAccesses
-    , DownloadAccesses (..)
-    , newDownloadAccesses
+    DownloadAccesses (..),
+    newDownloadAccesses,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** FamilyInfo
-    , FamilyInfo (..)
-    , newFamilyInfo
+    FamilyInfo (..),
+    newFamilyInfo,
 
     -- ** FamilyInfo_Membership
-    , FamilyInfo_Membership (..)
-    , newFamilyInfo_Membership
+    FamilyInfo_Membership (..),
+    newFamilyInfo_Membership,
 
     -- ** GeoAnnotationdata
-    , GeoAnnotationdata (..)
-    , newGeoAnnotationdata
+    GeoAnnotationdata (..),
+    newGeoAnnotationdata,
 
     -- ** Geolayerdata
-    , Geolayerdata (..)
-    , newGeolayerdata
+    Geolayerdata (..),
+    newGeolayerdata,
 
     -- ** Geolayerdata_Common
-    , Geolayerdata_Common (..)
-    , newGeolayerdata_Common
+    Geolayerdata_Common (..),
+    newGeolayerdata_Common,
 
     -- ** Geolayerdata_Geo
-    , Geolayerdata_Geo (..)
-    , newGeolayerdata_Geo
+    Geolayerdata_Geo (..),
+    newGeolayerdata_Geo,
 
     -- ** Geolayerdata_Geo_Viewport
-    , Geolayerdata_Geo_Viewport (..)
-    , newGeolayerdata_Geo_Viewport
+    Geolayerdata_Geo_Viewport (..),
+    newGeolayerdata_Geo_Viewport,
 
     -- ** Geolayerdata_Geo_Viewport_Hi
-    , Geolayerdata_Geo_Viewport_Hi (..)
-    , newGeolayerdata_Geo_Viewport_Hi
+    Geolayerdata_Geo_Viewport_Hi (..),
+    newGeolayerdata_Geo_Viewport_Hi,
 
     -- ** Geolayerdata_Geo_Viewport_Lo
-    , Geolayerdata_Geo_Viewport_Lo (..)
-    , newGeolayerdata_Geo_Viewport_Lo
+    Geolayerdata_Geo_Viewport_Lo (..),
+    newGeolayerdata_Geo_Viewport_Lo,
 
     -- ** Layersummaries
-    , Layersummaries (..)
-    , newLayersummaries
+    Layersummaries (..),
+    newLayersummaries,
 
     -- ** Layersummary
-    , Layersummary (..)
-    , newLayersummary
+    Layersummary (..),
+    newLayersummary,
 
     -- ** Metadata
-    , Metadata (..)
-    , newMetadata
+    Metadata (..),
+    newMetadata,
 
     -- ** Metadata_ItemsItem
-    , Metadata_ItemsItem (..)
-    , newMetadata_ItemsItem
+    Metadata_ItemsItem (..),
+    newMetadata_ItemsItem,
 
     -- ** Notification
-    , Notification (..)
-    , newNotification
+    Notification (..),
+    newNotification,
 
     -- ** Offers
-    , Offers (..)
-    , newOffers
+    Offers (..),
+    newOffers,
 
     -- ** Offers_ItemsItem
-    , Offers_ItemsItem (..)
-    , newOffers_ItemsItem
+    Offers_ItemsItem (..),
+    newOffers_ItemsItem,
 
     -- ** Offers_ItemsItem_ItemsItem
-    , Offers_ItemsItem_ItemsItem (..)
-    , newOffers_ItemsItem_ItemsItem
+    Offers_ItemsItem_ItemsItem (..),
+    newOffers_ItemsItem_ItemsItem,
 
     -- ** ReadingPosition
-    , ReadingPosition (..)
-    , newReadingPosition
+    ReadingPosition (..),
+    newReadingPosition,
 
     -- ** RequestAccessData
-    , RequestAccessData (..)
-    , newRequestAccessData
+    RequestAccessData (..),
+    newRequestAccessData,
 
     -- ** Review
-    , Review (..)
-    , newReview
+    Review (..),
+    newReview,
 
     -- ** Review_Author
-    , Review_Author (..)
-    , newReview_Author
+    Review_Author (..),
+    newReview_Author,
 
     -- ** Review_Source
-    , Review_Source (..)
-    , newReview_Source
+    Review_Source (..),
+    newReview_Source,
 
     -- ** Series
-    , Series (..)
-    , newSeries
+    Series (..),
+    newSeries,
 
     -- ** Series_SeriesItem
-    , Series_SeriesItem (..)
-    , newSeries_SeriesItem
+    Series_SeriesItem (..),
+    newSeries_SeriesItem,
 
     -- ** Series_SeriesItem_SeriesSubscriptionReleaseInfo
-    , Series_SeriesItem_SeriesSubscriptionReleaseInfo (..)
-    , newSeries_SeriesItem_SeriesSubscriptionReleaseInfo
+    Series_SeriesItem_SeriesSubscriptionReleaseInfo (..),
+    newSeries_SeriesItem_SeriesSubscriptionReleaseInfo,
 
     -- ** Series_SeriesItem_SeriesSubscriptionReleaseInfo_CurrentReleaseInfo
-    , Series_SeriesItem_SeriesSubscriptionReleaseInfo_CurrentReleaseInfo (..)
-    , newSeries_SeriesItem_SeriesSubscriptionReleaseInfo_CurrentReleaseInfo
+    Series_SeriesItem_SeriesSubscriptionReleaseInfo_CurrentReleaseInfo (..),
+    newSeries_SeriesItem_SeriesSubscriptionReleaseInfo_CurrentReleaseInfo,
 
     -- ** Series_SeriesItem_SeriesSubscriptionReleaseInfo_NextReleaseInfo
-    , Series_SeriesItem_SeriesSubscriptionReleaseInfo_NextReleaseInfo (..)
-    , newSeries_SeriesItem_SeriesSubscriptionReleaseInfo_NextReleaseInfo
+    Series_SeriesItem_SeriesSubscriptionReleaseInfo_NextReleaseInfo (..),
+    newSeries_SeriesItem_SeriesSubscriptionReleaseInfo_NextReleaseInfo,
 
     -- ** Seriesmembership
-    , Seriesmembership (..)
-    , newSeriesmembership
+    Seriesmembership (..),
+    newSeriesmembership,
 
     -- ** Usersettings
-    , Usersettings (..)
-    , newUsersettings
+    Usersettings (..),
+    newUsersettings,
 
     -- ** Usersettings_NotesExport
-    , Usersettings_NotesExport (..)
-    , newUsersettings_NotesExport
+    Usersettings_NotesExport (..),
+    newUsersettings_NotesExport,
 
     -- ** Usersettings_Notification
-    , Usersettings_Notification (..)
-    , newUsersettings_Notification
+    Usersettings_Notification (..),
+    newUsersettings_Notification,
 
     -- ** Usersettings_Notification_MatchMyInterests
-    , Usersettings_Notification_MatchMyInterests (..)
-    , newUsersettings_Notification_MatchMyInterests
+    Usersettings_Notification_MatchMyInterests (..),
+    newUsersettings_Notification_MatchMyInterests,
 
     -- ** Usersettings_Notification_MoreFromAuthors
-    , Usersettings_Notification_MoreFromAuthors (..)
-    , newUsersettings_Notification_MoreFromAuthors
+    Usersettings_Notification_MoreFromAuthors (..),
+    newUsersettings_Notification_MoreFromAuthors,
 
     -- ** Usersettings_Notification_MoreFromSeries
-    , Usersettings_Notification_MoreFromSeries (..)
-    , newUsersettings_Notification_MoreFromSeries
+    Usersettings_Notification_MoreFromSeries (..),
+    newUsersettings_Notification_MoreFromSeries,
 
     -- ** Usersettings_Notification_PriceDrop
-    , Usersettings_Notification_PriceDrop (..)
-    , newUsersettings_Notification_PriceDrop
+    Usersettings_Notification_PriceDrop (..),
+    newUsersettings_Notification_PriceDrop,
 
     -- ** Usersettings_Notification_RewardExpirations
-    , Usersettings_Notification_RewardExpirations (..)
-    , newUsersettings_Notification_RewardExpirations
+    Usersettings_Notification_RewardExpirations (..),
+    newUsersettings_Notification_RewardExpirations,
 
     -- ** Volume
-    , Volume (..)
-    , newVolume
+    Volume (..),
+    newVolume,
 
     -- ** Volume_AccessInfo
-    , Volume_AccessInfo (..)
-    , newVolume_AccessInfo
+    Volume_AccessInfo (..),
+    newVolume_AccessInfo,
 
     -- ** Volume_AccessInfo_Epub
-    , Volume_AccessInfo_Epub (..)
-    , newVolume_AccessInfo_Epub
+    Volume_AccessInfo_Epub (..),
+    newVolume_AccessInfo_Epub,
 
     -- ** Volume_AccessInfo_Pdf
-    , Volume_AccessInfo_Pdf (..)
-    , newVolume_AccessInfo_Pdf
+    Volume_AccessInfo_Pdf (..),
+    newVolume_AccessInfo_Pdf,
 
     -- ** Volume_LayerInfo
-    , Volume_LayerInfo (..)
-    , newVolume_LayerInfo
+    Volume_LayerInfo (..),
+    newVolume_LayerInfo,
 
     -- ** Volume_LayerInfo_LayersItem
-    , Volume_LayerInfo_LayersItem (..)
-    , newVolume_LayerInfo_LayersItem
+    Volume_LayerInfo_LayersItem (..),
+    newVolume_LayerInfo_LayersItem,
 
     -- ** Volume_RecommendedInfo
-    , Volume_RecommendedInfo (..)
-    , newVolume_RecommendedInfo
+    Volume_RecommendedInfo (..),
+    newVolume_RecommendedInfo,
 
     -- ** Volume_SaleInfo
-    , Volume_SaleInfo (..)
-    , newVolume_SaleInfo
+    Volume_SaleInfo (..),
+    newVolume_SaleInfo,
 
     -- ** Volume_SaleInfo_ListPrice
-    , Volume_SaleInfo_ListPrice (..)
-    , newVolume_SaleInfo_ListPrice
+    Volume_SaleInfo_ListPrice (..),
+    newVolume_SaleInfo_ListPrice,
 
     -- ** Volume_SaleInfo_OffersItem
-    , Volume_SaleInfo_OffersItem (..)
-    , newVolume_SaleInfo_OffersItem
+    Volume_SaleInfo_OffersItem (..),
+    newVolume_SaleInfo_OffersItem,
 
     -- ** Volume_SaleInfo_OffersItem_ListPrice
-    , Volume_SaleInfo_OffersItem_ListPrice (..)
-    , newVolume_SaleInfo_OffersItem_ListPrice
+    Volume_SaleInfo_OffersItem_ListPrice (..),
+    newVolume_SaleInfo_OffersItem_ListPrice,
 
     -- ** Volume_SaleInfo_OffersItem_RentalDuration
-    , Volume_SaleInfo_OffersItem_RentalDuration (..)
-    , newVolume_SaleInfo_OffersItem_RentalDuration
+    Volume_SaleInfo_OffersItem_RentalDuration (..),
+    newVolume_SaleInfo_OffersItem_RentalDuration,
 
     -- ** Volume_SaleInfo_OffersItem_RetailPrice
-    , Volume_SaleInfo_OffersItem_RetailPrice (..)
-    , newVolume_SaleInfo_OffersItem_RetailPrice
+    Volume_SaleInfo_OffersItem_RetailPrice (..),
+    newVolume_SaleInfo_OffersItem_RetailPrice,
 
     -- ** Volume_SaleInfo_RetailPrice
-    , Volume_SaleInfo_RetailPrice (..)
-    , newVolume_SaleInfo_RetailPrice
+    Volume_SaleInfo_RetailPrice (..),
+    newVolume_SaleInfo_RetailPrice,
 
     -- ** Volume_SearchInfo
-    , Volume_SearchInfo (..)
-    , newVolume_SearchInfo
+    Volume_SearchInfo (..),
+    newVolume_SearchInfo,
 
     -- ** Volume_UserInfo
-    , Volume_UserInfo (..)
-    , newVolume_UserInfo
+    Volume_UserInfo (..),
+    newVolume_UserInfo,
 
     -- ** Volume_UserInfo_Copy
-    , Volume_UserInfo_Copy (..)
-    , newVolume_UserInfo_Copy
+    Volume_UserInfo_Copy (..),
+    newVolume_UserInfo_Copy,
 
     -- ** Volume_UserInfo_FamilySharing
-    , Volume_UserInfo_FamilySharing (..)
-    , newVolume_UserInfo_FamilySharing
+    Volume_UserInfo_FamilySharing (..),
+    newVolume_UserInfo_FamilySharing,
 
     -- ** Volume_UserInfo_RentalPeriod
-    , Volume_UserInfo_RentalPeriod (..)
-    , newVolume_UserInfo_RentalPeriod
+    Volume_UserInfo_RentalPeriod (..),
+    newVolume_UserInfo_RentalPeriod,
 
     -- ** Volume_UserInfo_UserUploadedVolumeInfo
-    , Volume_UserInfo_UserUploadedVolumeInfo (..)
-    , newVolume_UserInfo_UserUploadedVolumeInfo
+    Volume_UserInfo_UserUploadedVolumeInfo (..),
+    newVolume_UserInfo_UserUploadedVolumeInfo,
 
     -- ** Volume_VolumeInfo
-    , Volume_VolumeInfo (..)
-    , newVolume_VolumeInfo
+    Volume_VolumeInfo (..),
+    newVolume_VolumeInfo,
 
     -- ** Volume_VolumeInfo_Dimensions
-    , Volume_VolumeInfo_Dimensions (..)
-    , newVolume_VolumeInfo_Dimensions
+    Volume_VolumeInfo_Dimensions (..),
+    newVolume_VolumeInfo_Dimensions,
 
     -- ** Volume_VolumeInfo_ImageLinks
-    , Volume_VolumeInfo_ImageLinks (..)
-    , newVolume_VolumeInfo_ImageLinks
+    Volume_VolumeInfo_ImageLinks (..),
+    newVolume_VolumeInfo_ImageLinks,
 
     -- ** Volume_VolumeInfo_IndustryIdentifiersItem
-    , Volume_VolumeInfo_IndustryIdentifiersItem (..)
-    , newVolume_VolumeInfo_IndustryIdentifiersItem
+    Volume_VolumeInfo_IndustryIdentifiersItem (..),
+    newVolume_VolumeInfo_IndustryIdentifiersItem,
 
     -- ** Volume_VolumeInfo_PanelizationSummary
-    , Volume_VolumeInfo_PanelizationSummary (..)
-    , newVolume_VolumeInfo_PanelizationSummary
+    Volume_VolumeInfo_PanelizationSummary (..),
+    newVolume_VolumeInfo_PanelizationSummary,
 
     -- ** Volume_VolumeInfo_ReadingModes
-    , Volume_VolumeInfo_ReadingModes (..)
-    , newVolume_VolumeInfo_ReadingModes
+    Volume_VolumeInfo_ReadingModes (..),
+    newVolume_VolumeInfo_ReadingModes,
 
     -- ** Volume2
-    , Volume2 (..)
-    , newVolume2
+    Volume2 (..),
+    newVolume2,
 
     -- ** Volumeannotation
-    , Volumeannotation (..)
-    , newVolumeannotation
+    Volumeannotation (..),
+    newVolumeannotation,
 
     -- ** Volumeannotation_ContentRanges
-    , Volumeannotation_ContentRanges (..)
-    , newVolumeannotation_ContentRanges
+    Volumeannotation_ContentRanges (..),
+    newVolumeannotation_ContentRanges,
 
     -- ** Volumeannotations
-    , Volumeannotations (..)
-    , newVolumeannotations
+    Volumeannotations (..),
+    newVolumeannotations,
 
     -- ** Volumes
-    , Volumes (..)
-    , newVolumes
+    Volumes (..),
+    newVolumes,
 
     -- ** Volumeseriesinfo
-    , Volumeseriesinfo (..)
-    , newVolumeseriesinfo
+    Volumeseriesinfo (..),
+    newVolumeseriesinfo,
 
     -- ** Volumeseriesinfo_VolumeSeriesItem
-    , Volumeseriesinfo_VolumeSeriesItem (..)
-    , newVolumeseriesinfo_VolumeSeriesItem
+    Volumeseriesinfo_VolumeSeriesItem (..),
+    newVolumeseriesinfo_VolumeSeriesItem,
 
     -- ** Volumeseriesinfo_VolumeSeriesItem_IssueItem
-    , Volumeseriesinfo_VolumeSeriesItem_IssueItem (..)
-    , newVolumeseriesinfo_VolumeSeriesItem_IssueItem
+    Volumeseriesinfo_VolumeSeriesItem_IssueItem (..),
+    newVolumeseriesinfo_VolumeSeriesItem_IssueItem,
 
     -- ** MyconfigRequestAccessLicenseTypes
-    , MyconfigRequestAccessLicenseTypes (..)
+    MyconfigRequestAccessLicenseTypes (..),
 
     -- ** MyconfigSyncVolumeLicensesFeatures
-    , MyconfigSyncVolumeLicensesFeatures (..)
+    MyconfigSyncVolumeLicensesFeatures (..),
 
     -- ** MylibraryBookshelvesAddVolumeReason
-    , MylibraryBookshelvesAddVolumeReason (..)
+    MylibraryBookshelvesAddVolumeReason (..),
 
     -- ** MylibraryBookshelvesRemoveVolumeReason
-    , MylibraryBookshelvesRemoveVolumeReason (..)
+    MylibraryBookshelvesRemoveVolumeReason (..),
 
     -- ** MylibraryBookshelvesVolumesListProjection
-    , MylibraryBookshelvesVolumesListProjection (..)
+    MylibraryBookshelvesVolumesListProjection (..),
 
     -- ** MylibraryReadingpositionsSetPositionAction
-    , MylibraryReadingpositionsSetPositionAction (..)
+    MylibraryReadingpositionsSetPositionAction (..),
 
     -- ** OnboardingListCategoryVolumesMaxAllowedMaturityRating
-    , OnboardingListCategoryVolumesMaxAllowedMaturityRating (..)
+    OnboardingListCategoryVolumesMaxAllowedMaturityRating (..),
 
     -- ** PersonalizedstreamGetMaxAllowedMaturityRating
-    , PersonalizedstreamGetMaxAllowedMaturityRating (..)
+    PersonalizedstreamGetMaxAllowedMaturityRating (..),
 
     -- ** VolumesAssociatedListAssociation
-    , VolumesAssociatedListAssociation (..)
+    VolumesAssociatedListAssociation (..),
 
     -- ** VolumesAssociatedListMaxAllowedMaturityRating
-    , VolumesAssociatedListMaxAllowedMaturityRating (..)
+    VolumesAssociatedListMaxAllowedMaturityRating (..),
 
     -- ** VolumesGetProjection
-    , VolumesGetProjection (..)
+    VolumesGetProjection (..),
 
     -- ** VolumesListDownload
-    , VolumesListDownload (..)
+    VolumesListDownload (..),
 
     -- ** VolumesListFilter
-    , VolumesListFilter (..)
+    VolumesListFilter (..),
 
     -- ** VolumesListLibraryRestrict
-    , VolumesListLibraryRestrict (..)
+    VolumesListLibraryRestrict (..),
 
     -- ** VolumesListMaxAllowedMaturityRating
-    , VolumesListMaxAllowedMaturityRating (..)
+    VolumesListMaxAllowedMaturityRating (..),
 
     -- ** VolumesListOrderBy
-    , VolumesListOrderBy (..)
+    VolumesListOrderBy (..),
 
     -- ** VolumesListPrintType
-    , VolumesListPrintType (..)
+    VolumesListPrintType (..),
 
     -- ** VolumesListProjection
-    , VolumesListProjection (..)
+    VolumesListProjection (..),
 
     -- ** VolumesMybooksListAcquireMethod
-    , VolumesMybooksListAcquireMethod (..)
+    VolumesMybooksListAcquireMethod (..),
 
     -- ** VolumesMybooksListProcessingState
-    , VolumesMybooksListProcessingState (..)
+    VolumesMybooksListProcessingState (..),
 
     -- ** VolumesRecommendedListMaxAllowedMaturityRating
-    , VolumesRecommendedListMaxAllowedMaturityRating (..)
+    VolumesRecommendedListMaxAllowedMaturityRating (..),
 
     -- ** VolumesRecommendedRateRating
-    , VolumesRecommendedRateRating (..)
+    VolumesRecommendedRateRating (..),
 
     -- ** VolumesUseruploadedListProcessingState
-    , VolumesUseruploadedListProcessingState (..)
-    ) where
+    VolumesUseruploadedListProcessingState (..),
+  )
+where
 
 import Gogol.Books.Bookshelves.Get
 import Gogol.Books.Bookshelves.List

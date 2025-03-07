@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.Operations.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,88 +27,91 @@
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.operations.get@.
 module Gogol.Healthcare.Projects.Locations.Datasets.Operations.Get
-    (
-    -- * Resource
-      HealthcareProjectsLocationsDatasetsOperationsGetResource
+  ( -- * Resource
+    HealthcareProjectsLocationsDatasetsOperationsGetResource,
 
     -- ** Constructing a Request
-    , HealthcareProjectsLocationsDatasetsOperationsGet (..)
-    , newHealthcareProjectsLocationsDatasetsOperationsGet
-    ) where
+    HealthcareProjectsLocationsDatasetsOperationsGet (..),
+    newHealthcareProjectsLocationsDatasetsOperationsGet,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Healthcare.Types
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.operations.get@ method which the
 -- 'HealthcareProjectsLocationsDatasetsOperationsGet' request conforms to.
-type HealthcareProjectsLocationsDatasetsOperationsGetResource
-     =
-     "v1" Core.:>
-       Core.Capture "name" Core.Text Core.:>
-         Core.QueryParam "$.xgafv" Xgafv Core.:>
-           Core.QueryParam "access_token" Core.Text Core.:>
-             Core.QueryParam "callback" Core.Text Core.:>
-               Core.QueryParam "uploadType" Core.Text Core.:>
-                 Core.QueryParam "upload_protocol" Core.Text Core.:>
-                   Core.QueryParam "alt" Core.AltJSON Core.:>
-                     Core.Get '[Core.JSON] Operation
+type HealthcareProjectsLocationsDatasetsOperationsGetResource =
+  "v1"
+    Core.:> Core.Capture "name" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] Operation
 
 -- | Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
 --
 -- /See:/ 'newHealthcareProjectsLocationsDatasetsOperationsGet' smart constructor.
 data HealthcareProjectsLocationsDatasetsOperationsGet = HealthcareProjectsLocationsDatasetsOperationsGet
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | The name of the operation resource.
-    , name :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | The name of the operation resource.
+    name :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsOperationsGet' with the minimum fields required to make a request.
-newHealthcareProjectsLocationsDatasetsOperationsGet 
-    ::  Core.Text
-       -- ^  The name of the operation resource. See 'name'.
-    -> HealthcareProjectsLocationsDatasetsOperationsGet
+newHealthcareProjectsLocationsDatasetsOperationsGet ::
+  -- |  The name of the operation resource. See 'name'.
+  Core.Text ->
+  HealthcareProjectsLocationsDatasetsOperationsGet
 newHealthcareProjectsLocationsDatasetsOperationsGet name =
   HealthcareProjectsLocationsDatasetsOperationsGet
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , name = name
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv =
+        Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      name = name,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           HealthcareProjectsLocationsDatasetsOperationsGet
-         where
-        type Rs
-               HealthcareProjectsLocationsDatasetsOperationsGet
-             = Operation
-        type Scopes
-               HealthcareProjectsLocationsDatasetsOperationsGet
-             =
-             '[CloudHealthcare'FullControl,
-               CloudPlatform'FullControl]
-        requestClient
-          HealthcareProjectsLocationsDatasetsOperationsGet{..}
-          = go name xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              healthcareService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           HealthcareProjectsLocationsDatasetsOperationsGetResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    HealthcareProjectsLocationsDatasetsOperationsGet
+  where
+  type
+    Rs HealthcareProjectsLocationsDatasetsOperationsGet =
+      Operation
+  type
+    Scopes HealthcareProjectsLocationsDatasetsOperationsGet =
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
+  requestClient HealthcareProjectsLocationsDatasetsOperationsGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      healthcareService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                HealthcareProjectsLocationsDatasetsOperationsGetResource
+          )
+          Core.mempty

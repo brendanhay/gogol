@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.Datastore.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Datastore.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * AggregationResultBatch_MoreResults
     AggregationResultBatch_MoreResults
-      (
-        AggregationResultBatch_MoreResults_MORERESULTSTYPEUNSPECIFIED,
+      ( AggregationResultBatch_MoreResults_MORERESULTSTYPEUNSPECIFIED,
         AggregationResultBatch_MoreResults_NOTFINISHED,
         AggregationResultBatch_MoreResults_MORERESULTSAFTERLIMIT,
         AggregationResultBatch_MoreResults_MORERESULTSAFTERCURSOR,
@@ -51,8 +42,7 @@ module Gogol.Datastore.Internal.Sum
 
     -- * CommitRequest_Mode
     CommitRequest_Mode
-      (
-        CommitRequest_Mode_MODEUNSPECIFIED,
+      ( CommitRequest_Mode_MODEUNSPECIFIED,
         CommitRequest_Mode_Transactional,
         CommitRequest_Mode_NONTRANSACTIONAL,
         ..
@@ -60,8 +50,7 @@ module Gogol.Datastore.Internal.Sum
 
     -- * CompositeFilter_Op
     CompositeFilter_Op
-      (
-        CompositeFilter_Op_OPERATORUNSPECIFIED,
+      ( CompositeFilter_Op_OPERATORUNSPECIFIED,
         CompositeFilter_Op_And,
         CompositeFilter_Op_OR,
         ..
@@ -69,8 +58,7 @@ module Gogol.Datastore.Internal.Sum
 
     -- * FindNearest_DistanceMeasure
     FindNearest_DistanceMeasure
-      (
-        FindNearest_DistanceMeasure_DISTANCEMEASUREUNSPECIFIED,
+      ( FindNearest_DistanceMeasure_DISTANCEMEASUREUNSPECIFIED,
         FindNearest_DistanceMeasure_Euclidean,
         FindNearest_DistanceMeasure_Cosine,
         FindNearest_DistanceMeasure_DOTPRODUCT,
@@ -79,8 +67,7 @@ module Gogol.Datastore.Internal.Sum
 
     -- * GoogleDatastoreAdminV1CommonMetadata_OperationType
     GoogleDatastoreAdminV1CommonMetadata_OperationType
-      (
-        GoogleDatastoreAdminV1CommonMetadata_OperationType_OPERATIONTYPEUNSPECIFIED,
+      ( GoogleDatastoreAdminV1CommonMetadata_OperationType_OPERATIONTYPEUNSPECIFIED,
         GoogleDatastoreAdminV1CommonMetadata_OperationType_EXPORTENTITIES,
         GoogleDatastoreAdminV1CommonMetadata_OperationType_IMPORTENTITIES,
         GoogleDatastoreAdminV1CommonMetadata_OperationType_CREATEINDEX,
@@ -90,8 +77,7 @@ module Gogol.Datastore.Internal.Sum
 
     -- * GoogleDatastoreAdminV1CommonMetadata_State
     GoogleDatastoreAdminV1CommonMetadata_State
-      (
-        GoogleDatastoreAdminV1CommonMetadata_State_STATEUNSPECIFIED,
+      ( GoogleDatastoreAdminV1CommonMetadata_State_STATEUNSPECIFIED,
         GoogleDatastoreAdminV1CommonMetadata_State_Initializing,
         GoogleDatastoreAdminV1CommonMetadata_State_Processing,
         GoogleDatastoreAdminV1CommonMetadata_State_Cancelling,
@@ -104,8 +90,7 @@ module Gogol.Datastore.Internal.Sum
 
     -- * GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationState
     GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationState
-      (
-        GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationState_MIGRATIONSTATEUNSPECIFIED,
+      ( GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationState_MIGRATIONSTATEUNSPECIFIED,
         GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationState_Running,
         GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationState_Paused,
         GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationState_Complete,
@@ -114,8 +99,7 @@ module Gogol.Datastore.Internal.Sum
 
     -- * GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationStep
     GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationStep
-      (
-        GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationStep_MIGRATIONSTEPUNSPECIFIED,
+      ( GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationStep_MIGRATIONSTEPUNSPECIFIED,
         GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationStep_Prepare,
         GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationStep_Start,
         GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationStep_APPLYWRITESSYNCHRONOUSLY,
@@ -128,8 +112,7 @@ module Gogol.Datastore.Internal.Sum
 
     -- * GoogleDatastoreAdminV1Index_Ancestor
     GoogleDatastoreAdminV1Index_Ancestor
-      (
-        GoogleDatastoreAdminV1Index_Ancestor_ANCESTORMODEUNSPECIFIED,
+      ( GoogleDatastoreAdminV1Index_Ancestor_ANCESTORMODEUNSPECIFIED,
         GoogleDatastoreAdminV1Index_Ancestor_None,
         GoogleDatastoreAdminV1Index_Ancestor_ALLANCESTORS,
         ..
@@ -137,8 +120,7 @@ module Gogol.Datastore.Internal.Sum
 
     -- * GoogleDatastoreAdminV1Index_State
     GoogleDatastoreAdminV1Index_State
-      (
-        GoogleDatastoreAdminV1Index_State_STATEUNSPECIFIED,
+      ( GoogleDatastoreAdminV1Index_State_STATEUNSPECIFIED,
         GoogleDatastoreAdminV1Index_State_Creating,
         GoogleDatastoreAdminV1Index_State_Ready,
         GoogleDatastoreAdminV1Index_State_Deleting,
@@ -148,8 +130,7 @@ module Gogol.Datastore.Internal.Sum
 
     -- * GoogleDatastoreAdminV1IndexedProperty_Direction
     GoogleDatastoreAdminV1IndexedProperty_Direction
-      (
-        GoogleDatastoreAdminV1IndexedProperty_Direction_DIRECTIONUNSPECIFIED,
+      ( GoogleDatastoreAdminV1IndexedProperty_Direction_DIRECTIONUNSPECIFIED,
         GoogleDatastoreAdminV1IndexedProperty_Direction_Ascending,
         GoogleDatastoreAdminV1IndexedProperty_Direction_Descending,
         ..
@@ -157,8 +138,7 @@ module Gogol.Datastore.Internal.Sum
 
     -- * GoogleDatastoreAdminV1MigrationProgressEvent_Step
     GoogleDatastoreAdminV1MigrationProgressEvent_Step
-      (
-        GoogleDatastoreAdminV1MigrationProgressEvent_Step_MIGRATIONSTEPUNSPECIFIED,
+      ( GoogleDatastoreAdminV1MigrationProgressEvent_Step_MIGRATIONSTEPUNSPECIFIED,
         GoogleDatastoreAdminV1MigrationProgressEvent_Step_Prepare,
         GoogleDatastoreAdminV1MigrationProgressEvent_Step_Start,
         GoogleDatastoreAdminV1MigrationProgressEvent_Step_APPLYWRITESSYNCHRONOUSLY,
@@ -171,8 +151,7 @@ module Gogol.Datastore.Internal.Sum
 
     -- * GoogleDatastoreAdminV1MigrationStateEvent_State
     GoogleDatastoreAdminV1MigrationStateEvent_State
-      (
-        GoogleDatastoreAdminV1MigrationStateEvent_State_MIGRATIONSTATEUNSPECIFIED,
+      ( GoogleDatastoreAdminV1MigrationStateEvent_State_MIGRATIONSTATEUNSPECIFIED,
         GoogleDatastoreAdminV1MigrationStateEvent_State_Running,
         GoogleDatastoreAdminV1MigrationStateEvent_State_Paused,
         GoogleDatastoreAdminV1MigrationStateEvent_State_Complete,
@@ -181,8 +160,7 @@ module Gogol.Datastore.Internal.Sum
 
     -- * GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode
     GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode
-      (
-        GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode_CONCURRENCYMODEUNSPECIFIED,
+      ( GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode_CONCURRENCYMODEUNSPECIFIED,
         GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode_Pessimistic,
         GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode_Optimistic,
         GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode_OPTIMISTICWITHENTITYGROUPS,
@@ -191,8 +169,7 @@ module Gogol.Datastore.Internal.Sum
 
     -- * GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode
     GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode
-      (
-        GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode_CONCURRENCYMODEUNSPECIFIED,
+      ( GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode_CONCURRENCYMODEUNSPECIFIED,
         GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode_Pessimistic,
         GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode_Optimistic,
         GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode_OPTIMISTICWITHENTITYGROUPS,
@@ -201,8 +178,7 @@ module Gogol.Datastore.Internal.Sum
 
     -- * GoogleDatastoreAdminV1beta1CommonMetadata_OperationType
     GoogleDatastoreAdminV1beta1CommonMetadata_OperationType
-      (
-        GoogleDatastoreAdminV1beta1CommonMetadata_OperationType_OPERATIONTYPEUNSPECIFIED,
+      ( GoogleDatastoreAdminV1beta1CommonMetadata_OperationType_OPERATIONTYPEUNSPECIFIED,
         GoogleDatastoreAdminV1beta1CommonMetadata_OperationType_EXPORTENTITIES,
         GoogleDatastoreAdminV1beta1CommonMetadata_OperationType_IMPORTENTITIES,
         ..
@@ -210,8 +186,7 @@ module Gogol.Datastore.Internal.Sum
 
     -- * GoogleDatastoreAdminV1beta1CommonMetadata_State
     GoogleDatastoreAdminV1beta1CommonMetadata_State
-      (
-        GoogleDatastoreAdminV1beta1CommonMetadata_State_STATEUNSPECIFIED,
+      ( GoogleDatastoreAdminV1beta1CommonMetadata_State_STATEUNSPECIFIED,
         GoogleDatastoreAdminV1beta1CommonMetadata_State_Initializing,
         GoogleDatastoreAdminV1beta1CommonMetadata_State_Processing,
         GoogleDatastoreAdminV1beta1CommonMetadata_State_Cancelling,
@@ -224,8 +199,7 @@ module Gogol.Datastore.Internal.Sum
 
     -- * Mutation_ConflictResolutionStrategy
     Mutation_ConflictResolutionStrategy
-      (
-        Mutation_ConflictResolutionStrategy_STRATEGYUNSPECIFIED,
+      ( Mutation_ConflictResolutionStrategy_STRATEGYUNSPECIFIED,
         Mutation_ConflictResolutionStrategy_SERVERVALUE,
         Mutation_ConflictResolutionStrategy_Fail,
         ..
@@ -233,8 +207,7 @@ module Gogol.Datastore.Internal.Sum
 
     -- * PropertyFilter_Op
     PropertyFilter_Op
-      (
-        PropertyFilter_Op_OPERATORUNSPECIFIED,
+      ( PropertyFilter_Op_OPERATORUNSPECIFIED,
         PropertyFilter_Op_LESSTHAN,
         PropertyFilter_Op_LESSTHANOREQUAL,
         PropertyFilter_Op_GREATERTHAN,
@@ -249,8 +222,7 @@ module Gogol.Datastore.Internal.Sum
 
     -- * PropertyOrder_Direction
     PropertyOrder_Direction
-      (
-        PropertyOrder_Direction_DIRECTIONUNSPECIFIED,
+      ( PropertyOrder_Direction_DIRECTIONUNSPECIFIED,
         PropertyOrder_Direction_Ascending,
         PropertyOrder_Direction_Descending,
         ..
@@ -258,16 +230,14 @@ module Gogol.Datastore.Internal.Sum
 
     -- * PropertyTransform_SetToServerValue
     PropertyTransform_SetToServerValue
-      (
-        PropertyTransform_SetToServerValue_SERVERVALUEUNSPECIFIED,
+      ( PropertyTransform_SetToServerValue_SERVERVALUEUNSPECIFIED,
         PropertyTransform_SetToServerValue_REQUESTTIME,
         ..
       ),
 
     -- * QueryResultBatch_EntityResultType
     QueryResultBatch_EntityResultType
-      (
-        QueryResultBatch_EntityResultType_RESULTTYPEUNSPECIFIED,
+      ( QueryResultBatch_EntityResultType_RESULTTYPEUNSPECIFIED,
         QueryResultBatch_EntityResultType_Full,
         QueryResultBatch_EntityResultType_Projection,
         QueryResultBatch_EntityResultType_KEYONLY,
@@ -276,8 +246,7 @@ module Gogol.Datastore.Internal.Sum
 
     -- * QueryResultBatch_MoreResults
     QueryResultBatch_MoreResults
-      (
-        QueryResultBatch_MoreResults_MORERESULTSTYPEUNSPECIFIED,
+      ( QueryResultBatch_MoreResults_MORERESULTSTYPEUNSPECIFIED,
         QueryResultBatch_MoreResults_NOTFINISHED,
         QueryResultBatch_MoreResults_MORERESULTSAFTERLIMIT,
         QueryResultBatch_MoreResults_MORERESULTSAFTERCURSOR,
@@ -287,8 +256,7 @@ module Gogol.Datastore.Internal.Sum
 
     -- * ReadOptions_ReadConsistency
     ReadOptions_ReadConsistency
-      (
-        ReadOptions_ReadConsistency_READCONSISTENCYUNSPECIFIED,
+      ( ReadOptions_ReadConsistency_READCONSISTENCYUNSPECIFIED,
         ReadOptions_ReadConsistency_Strong,
         ReadOptions_ReadConsistency_Eventual,
         ..
@@ -296,26 +264,26 @@ module Gogol.Datastore.Internal.Sum
 
     -- * Value_NullValue
     Value_NullValue
-      (
-        Value_NullValue_NULLVALUE,
+      ( Value_NullValue_NULLVALUE,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -328,20 +296,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | The state of the query after the current batch. Only COUNT(*) aggregations are supported in the initial launch. Therefore, expected result type is limited to @NO_MORE_RESULTS@.
-newtype AggregationResultBatch_MoreResults = AggregationResultBatch_MoreResults { fromAggregationResultBatch_MoreResults :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AggregationResultBatch_MoreResults = AggregationResultBatch_MoreResults {fromAggregationResultBatch_MoreResults :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified. This value is never used.
 pattern AggregationResultBatch_MoreResults_MORERESULTSTYPEUNSPECIFIED :: AggregationResultBatch_MoreResults
@@ -369,20 +338,21 @@ pattern AggregationResultBatch_MoreResults_NOMORERESULTS = AggregationResultBatc
   AggregationResultBatch_MoreResults_MORERESULTSAFTERLIMIT,
   AggregationResultBatch_MoreResults_MORERESULTSAFTERCURSOR,
   AggregationResultBatch_MoreResults_NOMORERESULTS,
-  AggregationResultBatch_MoreResults #-}
+  AggregationResultBatch_MoreResults
+  #-}
 
 -- | The type of commit to perform. Defaults to @TRANSACTIONAL@.
-newtype CommitRequest_Mode = CommitRequest_Mode { fromCommitRequest_Mode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CommitRequest_Mode = CommitRequest_Mode {fromCommitRequest_Mode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified. This value must not be used.
 pattern CommitRequest_Mode_MODEUNSPECIFIED :: CommitRequest_Mode
@@ -400,20 +370,21 @@ pattern CommitRequest_Mode_NONTRANSACTIONAL = CommitRequest_Mode "NON_TRANSACTIO
   CommitRequest_Mode_MODEUNSPECIFIED,
   CommitRequest_Mode_Transactional,
   CommitRequest_Mode_NONTRANSACTIONAL,
-  CommitRequest_Mode #-}
+  CommitRequest_Mode
+  #-}
 
 -- | The operator for combining multiple filters.
-newtype CompositeFilter_Op = CompositeFilter_Op { fromCompositeFilter_Op :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype CompositeFilter_Op = CompositeFilter_Op {fromCompositeFilter_Op :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified. This value must not be used.
 pattern CompositeFilter_Op_OPERATORUNSPECIFIED :: CompositeFilter_Op
@@ -431,20 +402,21 @@ pattern CompositeFilter_Op_OR = CompositeFilter_Op "OR"
   CompositeFilter_Op_OPERATORUNSPECIFIED,
   CompositeFilter_Op_And,
   CompositeFilter_Op_OR,
-  CompositeFilter_Op #-}
+  CompositeFilter_Op
+  #-}
 
 -- | Required. The Distance Measure to use, required.
-newtype FindNearest_DistanceMeasure = FindNearest_DistanceMeasure { fromFindNearest_DistanceMeasure :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype FindNearest_DistanceMeasure = FindNearest_DistanceMeasure {fromFindNearest_DistanceMeasure :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Should not be set.
 pattern FindNearest_DistanceMeasure_DISTANCEMEASUREUNSPECIFIED :: FindNearest_DistanceMeasure
@@ -467,20 +439,21 @@ pattern FindNearest_DistanceMeasure_DOTPRODUCT = FindNearest_DistanceMeasure "DO
   FindNearest_DistanceMeasure_Euclidean,
   FindNearest_DistanceMeasure_Cosine,
   FindNearest_DistanceMeasure_DOTPRODUCT,
-  FindNearest_DistanceMeasure #-}
+  FindNearest_DistanceMeasure
+  #-}
 
 -- | The type of the operation. Can be used as a filter in ListOperationsRequest.
-newtype GoogleDatastoreAdminV1CommonMetadata_OperationType = GoogleDatastoreAdminV1CommonMetadata_OperationType { fromGoogleDatastoreAdminV1CommonMetadata_OperationType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleDatastoreAdminV1CommonMetadata_OperationType = GoogleDatastoreAdminV1CommonMetadata_OperationType {fromGoogleDatastoreAdminV1CommonMetadata_OperationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified.
 pattern GoogleDatastoreAdminV1CommonMetadata_OperationType_OPERATIONTYPEUNSPECIFIED :: GoogleDatastoreAdminV1CommonMetadata_OperationType
@@ -508,20 +481,21 @@ pattern GoogleDatastoreAdminV1CommonMetadata_OperationType_DELETEINDEX = GoogleD
   GoogleDatastoreAdminV1CommonMetadata_OperationType_IMPORTENTITIES,
   GoogleDatastoreAdminV1CommonMetadata_OperationType_CREATEINDEX,
   GoogleDatastoreAdminV1CommonMetadata_OperationType_DELETEINDEX,
-  GoogleDatastoreAdminV1CommonMetadata_OperationType #-}
+  GoogleDatastoreAdminV1CommonMetadata_OperationType
+  #-}
 
 -- | The current state of the Operation.
-newtype GoogleDatastoreAdminV1CommonMetadata_State = GoogleDatastoreAdminV1CommonMetadata_State { fromGoogleDatastoreAdminV1CommonMetadata_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleDatastoreAdminV1CommonMetadata_State = GoogleDatastoreAdminV1CommonMetadata_State {fromGoogleDatastoreAdminV1CommonMetadata_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified.
 pattern GoogleDatastoreAdminV1CommonMetadata_State_STATEUNSPECIFIED :: GoogleDatastoreAdminV1CommonMetadata_State
@@ -564,20 +538,21 @@ pattern GoogleDatastoreAdminV1CommonMetadata_State_Cancelled = GoogleDatastoreAd
   GoogleDatastoreAdminV1CommonMetadata_State_Successful,
   GoogleDatastoreAdminV1CommonMetadata_State_Failed,
   GoogleDatastoreAdminV1CommonMetadata_State_Cancelled,
-  GoogleDatastoreAdminV1CommonMetadata_State #-}
+  GoogleDatastoreAdminV1CommonMetadata_State
+  #-}
 
 -- | The current state of migration from Cloud Datastore to Cloud Firestore in Datastore mode.
-newtype GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationState = GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationState { fromGoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationState = GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationState {fromGoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified.
 pattern GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationState_MIGRATIONSTATEUNSPECIFIED :: GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationState
@@ -600,20 +575,21 @@ pattern GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationState
   GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationState_Running,
   GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationState_Paused,
   GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationState_Complete,
-  GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationState #-}
+  GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationState
+  #-}
 
 -- | The current step of migration from Cloud Datastore to Cloud Firestore in Datastore mode.
-newtype GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationStep = GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationStep { fromGoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationStep :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationStep = GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationStep {fromGoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationStep :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified.
 pattern GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationStep_MIGRATIONSTEPUNSPECIFIED :: GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationStep
@@ -656,20 +632,21 @@ pattern GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationStep_
   GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationStep_REDIRECTEVENTUALLYCONSISTENTREADS,
   GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationStep_REDIRECTSTRONGLYCONSISTENTREADS,
   GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationStep_REDIRECTWRITES,
-  GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationStep #-}
+  GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata_MigrationStep
+  #-}
 
 -- | Required. The index\'s ancestor mode. Must not be ANCESTOR/MODE/UNSPECIFIED.
-newtype GoogleDatastoreAdminV1Index_Ancestor = GoogleDatastoreAdminV1Index_Ancestor { fromGoogleDatastoreAdminV1Index_Ancestor :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleDatastoreAdminV1Index_Ancestor = GoogleDatastoreAdminV1Index_Ancestor {fromGoogleDatastoreAdminV1Index_Ancestor :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The ancestor mode is unspecified.
 pattern GoogleDatastoreAdminV1Index_Ancestor_ANCESTORMODEUNSPECIFIED :: GoogleDatastoreAdminV1Index_Ancestor
@@ -687,20 +664,21 @@ pattern GoogleDatastoreAdminV1Index_Ancestor_ALLANCESTORS = GoogleDatastoreAdmin
   GoogleDatastoreAdminV1Index_Ancestor_ANCESTORMODEUNSPECIFIED,
   GoogleDatastoreAdminV1Index_Ancestor_None,
   GoogleDatastoreAdminV1Index_Ancestor_ALLANCESTORS,
-  GoogleDatastoreAdminV1Index_Ancestor #-}
+  GoogleDatastoreAdminV1Index_Ancestor
+  #-}
 
 -- | Output only. The state of the index.
-newtype GoogleDatastoreAdminV1Index_State = GoogleDatastoreAdminV1Index_State { fromGoogleDatastoreAdminV1Index_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleDatastoreAdminV1Index_State = GoogleDatastoreAdminV1Index_State {fromGoogleDatastoreAdminV1Index_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The state is unspecified.
 pattern GoogleDatastoreAdminV1Index_State_STATEUNSPECIFIED :: GoogleDatastoreAdminV1Index_State
@@ -728,20 +706,21 @@ pattern GoogleDatastoreAdminV1Index_State_Error' = GoogleDatastoreAdminV1Index_S
   GoogleDatastoreAdminV1Index_State_Ready,
   GoogleDatastoreAdminV1Index_State_Deleting,
   GoogleDatastoreAdminV1Index_State_Error',
-  GoogleDatastoreAdminV1Index_State #-}
+  GoogleDatastoreAdminV1Index_State
+  #-}
 
 -- | Required. The indexed property\'s direction. Must not be DIRECTION_UNSPECIFIED.
-newtype GoogleDatastoreAdminV1IndexedProperty_Direction = GoogleDatastoreAdminV1IndexedProperty_Direction { fromGoogleDatastoreAdminV1IndexedProperty_Direction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleDatastoreAdminV1IndexedProperty_Direction = GoogleDatastoreAdminV1IndexedProperty_Direction {fromGoogleDatastoreAdminV1IndexedProperty_Direction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The direction is unspecified.
 pattern GoogleDatastoreAdminV1IndexedProperty_Direction_DIRECTIONUNSPECIFIED :: GoogleDatastoreAdminV1IndexedProperty_Direction
@@ -759,20 +738,21 @@ pattern GoogleDatastoreAdminV1IndexedProperty_Direction_Descending = GoogleDatas
   GoogleDatastoreAdminV1IndexedProperty_Direction_DIRECTIONUNSPECIFIED,
   GoogleDatastoreAdminV1IndexedProperty_Direction_Ascending,
   GoogleDatastoreAdminV1IndexedProperty_Direction_Descending,
-  GoogleDatastoreAdminV1IndexedProperty_Direction #-}
+  GoogleDatastoreAdminV1IndexedProperty_Direction
+  #-}
 
 -- | The step that is starting. An event with step set to @START@ indicates that the migration has been reverted back to the initial pre-migration state.
-newtype GoogleDatastoreAdminV1MigrationProgressEvent_Step = GoogleDatastoreAdminV1MigrationProgressEvent_Step { fromGoogleDatastoreAdminV1MigrationProgressEvent_Step :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleDatastoreAdminV1MigrationProgressEvent_Step = GoogleDatastoreAdminV1MigrationProgressEvent_Step {fromGoogleDatastoreAdminV1MigrationProgressEvent_Step :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified.
 pattern GoogleDatastoreAdminV1MigrationProgressEvent_Step_MIGRATIONSTEPUNSPECIFIED :: GoogleDatastoreAdminV1MigrationProgressEvent_Step
@@ -815,20 +795,21 @@ pattern GoogleDatastoreAdminV1MigrationProgressEvent_Step_REDIRECTWRITES = Googl
   GoogleDatastoreAdminV1MigrationProgressEvent_Step_REDIRECTEVENTUALLYCONSISTENTREADS,
   GoogleDatastoreAdminV1MigrationProgressEvent_Step_REDIRECTSTRONGLYCONSISTENTREADS,
   GoogleDatastoreAdminV1MigrationProgressEvent_Step_REDIRECTWRITES,
-  GoogleDatastoreAdminV1MigrationProgressEvent_Step #-}
+  GoogleDatastoreAdminV1MigrationProgressEvent_Step
+  #-}
 
 -- | The new state of the migration.
-newtype GoogleDatastoreAdminV1MigrationStateEvent_State = GoogleDatastoreAdminV1MigrationStateEvent_State { fromGoogleDatastoreAdminV1MigrationStateEvent_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleDatastoreAdminV1MigrationStateEvent_State = GoogleDatastoreAdminV1MigrationStateEvent_State {fromGoogleDatastoreAdminV1MigrationStateEvent_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified.
 pattern GoogleDatastoreAdminV1MigrationStateEvent_State_MIGRATIONSTATEUNSPECIFIED :: GoogleDatastoreAdminV1MigrationStateEvent_State
@@ -851,20 +832,21 @@ pattern GoogleDatastoreAdminV1MigrationStateEvent_State_Complete = GoogleDatasto
   GoogleDatastoreAdminV1MigrationStateEvent_State_Running,
   GoogleDatastoreAdminV1MigrationStateEvent_State_Paused,
   GoogleDatastoreAdminV1MigrationStateEvent_State_Complete,
-  GoogleDatastoreAdminV1MigrationStateEvent_State #-}
+  GoogleDatastoreAdminV1MigrationStateEvent_State
+  #-}
 
 -- | The concurrency mode this database will use when it reaches the @REDIRECT_WRITES@ step.
-newtype GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode = GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode { fromGoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode = GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode {fromGoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified.
 pattern GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode_CONCURRENCYMODEUNSPECIFIED :: GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode
@@ -887,20 +869,21 @@ pattern GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode_OPTIMISTICWITHE
   GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode_Pessimistic,
   GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode_Optimistic,
   GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode_OPTIMISTICWITHENTITYGROUPS,
-  GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode #-}
+  GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode
+  #-}
 
 -- | Ths concurrency mode for this database.
-newtype GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode = GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode { fromGoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode = GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode {fromGoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified.
 pattern GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode_CONCURRENCYMODEUNSPECIFIED :: GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode
@@ -923,20 +906,21 @@ pattern GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode_OPTIMIST
   GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode_Pessimistic,
   GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode_Optimistic,
   GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode_OPTIMISTICWITHENTITYGROUPS,
-  GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode #-}
+  GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode
+  #-}
 
 -- | The type of the operation. Can be used as a filter in ListOperationsRequest.
-newtype GoogleDatastoreAdminV1beta1CommonMetadata_OperationType = GoogleDatastoreAdminV1beta1CommonMetadata_OperationType { fromGoogleDatastoreAdminV1beta1CommonMetadata_OperationType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleDatastoreAdminV1beta1CommonMetadata_OperationType = GoogleDatastoreAdminV1beta1CommonMetadata_OperationType {fromGoogleDatastoreAdminV1beta1CommonMetadata_OperationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified.
 pattern GoogleDatastoreAdminV1beta1CommonMetadata_OperationType_OPERATIONTYPEUNSPECIFIED :: GoogleDatastoreAdminV1beta1CommonMetadata_OperationType
@@ -954,20 +938,21 @@ pattern GoogleDatastoreAdminV1beta1CommonMetadata_OperationType_IMPORTENTITIES =
   GoogleDatastoreAdminV1beta1CommonMetadata_OperationType_OPERATIONTYPEUNSPECIFIED,
   GoogleDatastoreAdminV1beta1CommonMetadata_OperationType_EXPORTENTITIES,
   GoogleDatastoreAdminV1beta1CommonMetadata_OperationType_IMPORTENTITIES,
-  GoogleDatastoreAdminV1beta1CommonMetadata_OperationType #-}
+  GoogleDatastoreAdminV1beta1CommonMetadata_OperationType
+  #-}
 
 -- | The current state of the Operation.
-newtype GoogleDatastoreAdminV1beta1CommonMetadata_State = GoogleDatastoreAdminV1beta1CommonMetadata_State { fromGoogleDatastoreAdminV1beta1CommonMetadata_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleDatastoreAdminV1beta1CommonMetadata_State = GoogleDatastoreAdminV1beta1CommonMetadata_State {fromGoogleDatastoreAdminV1beta1CommonMetadata_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified.
 pattern GoogleDatastoreAdminV1beta1CommonMetadata_State_STATEUNSPECIFIED :: GoogleDatastoreAdminV1beta1CommonMetadata_State
@@ -1010,20 +995,21 @@ pattern GoogleDatastoreAdminV1beta1CommonMetadata_State_Cancelled = GoogleDatast
   GoogleDatastoreAdminV1beta1CommonMetadata_State_Successful,
   GoogleDatastoreAdminV1beta1CommonMetadata_State_Failed,
   GoogleDatastoreAdminV1beta1CommonMetadata_State_Cancelled,
-  GoogleDatastoreAdminV1beta1CommonMetadata_State #-}
+  GoogleDatastoreAdminV1beta1CommonMetadata_State
+  #-}
 
 -- | The strategy to use when a conflict is detected. Defaults to @SERVER_VALUE@. If this is set, then @conflict_detection_strategy@ must also be set.
-newtype Mutation_ConflictResolutionStrategy = Mutation_ConflictResolutionStrategy { fromMutation_ConflictResolutionStrategy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Mutation_ConflictResolutionStrategy = Mutation_ConflictResolutionStrategy {fromMutation_ConflictResolutionStrategy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified. Defaults to @SERVER_VALUE@.
 pattern Mutation_ConflictResolutionStrategy_STRATEGYUNSPECIFIED :: Mutation_ConflictResolutionStrategy
@@ -1041,20 +1027,21 @@ pattern Mutation_ConflictResolutionStrategy_Fail = Mutation_ConflictResolutionSt
   Mutation_ConflictResolutionStrategy_STRATEGYUNSPECIFIED,
   Mutation_ConflictResolutionStrategy_SERVERVALUE,
   Mutation_ConflictResolutionStrategy_Fail,
-  Mutation_ConflictResolutionStrategy #-}
+  Mutation_ConflictResolutionStrategy
+  #-}
 
 -- | The operator to filter by.
-newtype PropertyFilter_Op = PropertyFilter_Op { fromPropertyFilter_Op :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PropertyFilter_Op = PropertyFilter_Op {fromPropertyFilter_Op :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified. This value must not be used.
 pattern PropertyFilter_Op_OPERATORUNSPECIFIED :: PropertyFilter_Op
@@ -1107,20 +1094,21 @@ pattern PropertyFilter_Op_NOTIN = PropertyFilter_Op "NOT_IN"
   PropertyFilter_Op_NOTEQUAL,
   PropertyFilter_Op_HASANCESTOR,
   PropertyFilter_Op_NOTIN,
-  PropertyFilter_Op #-}
+  PropertyFilter_Op
+  #-}
 
 -- | The direction to order by. Defaults to @ASCENDING@.
-newtype PropertyOrder_Direction = PropertyOrder_Direction { fromPropertyOrder_Direction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PropertyOrder_Direction = PropertyOrder_Direction {fromPropertyOrder_Direction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified. This value must not be used.
 pattern PropertyOrder_Direction_DIRECTIONUNSPECIFIED :: PropertyOrder_Direction
@@ -1138,20 +1126,21 @@ pattern PropertyOrder_Direction_Descending = PropertyOrder_Direction "DESCENDING
   PropertyOrder_Direction_DIRECTIONUNSPECIFIED,
   PropertyOrder_Direction_Ascending,
   PropertyOrder_Direction_Descending,
-  PropertyOrder_Direction #-}
+  PropertyOrder_Direction
+  #-}
 
 -- | Sets the property to the given server value.
-newtype PropertyTransform_SetToServerValue = PropertyTransform_SetToServerValue { fromPropertyTransform_SetToServerValue :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype PropertyTransform_SetToServerValue = PropertyTransform_SetToServerValue {fromPropertyTransform_SetToServerValue :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified. This value must not be used.
 pattern PropertyTransform_SetToServerValue_SERVERVALUEUNSPECIFIED :: PropertyTransform_SetToServerValue
@@ -1164,20 +1153,21 @@ pattern PropertyTransform_SetToServerValue_REQUESTTIME = PropertyTransform_SetTo
 {-# COMPLETE
   PropertyTransform_SetToServerValue_SERVERVALUEUNSPECIFIED,
   PropertyTransform_SetToServerValue_REQUESTTIME,
-  PropertyTransform_SetToServerValue #-}
+  PropertyTransform_SetToServerValue
+  #-}
 
 -- | The result type for every entity in @entity_results@.
-newtype QueryResultBatch_EntityResultType = QueryResultBatch_EntityResultType { fromQueryResultBatch_EntityResultType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype QueryResultBatch_EntityResultType = QueryResultBatch_EntityResultType {fromQueryResultBatch_EntityResultType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified. This value is never used.
 pattern QueryResultBatch_EntityResultType_RESULTTYPEUNSPECIFIED :: QueryResultBatch_EntityResultType
@@ -1200,20 +1190,21 @@ pattern QueryResultBatch_EntityResultType_KEYONLY = QueryResultBatch_EntityResul
   QueryResultBatch_EntityResultType_Full,
   QueryResultBatch_EntityResultType_Projection,
   QueryResultBatch_EntityResultType_KEYONLY,
-  QueryResultBatch_EntityResultType #-}
+  QueryResultBatch_EntityResultType
+  #-}
 
 -- | The state of the query after the current batch.
-newtype QueryResultBatch_MoreResults = QueryResultBatch_MoreResults { fromQueryResultBatch_MoreResults :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype QueryResultBatch_MoreResults = QueryResultBatch_MoreResults {fromQueryResultBatch_MoreResults :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified. This value is never used.
 pattern QueryResultBatch_MoreResults_MORERESULTSTYPEUNSPECIFIED :: QueryResultBatch_MoreResults
@@ -1241,20 +1232,21 @@ pattern QueryResultBatch_MoreResults_NOMORERESULTS = QueryResultBatch_MoreResult
   QueryResultBatch_MoreResults_MORERESULTSAFTERLIMIT,
   QueryResultBatch_MoreResults_MORERESULTSAFTERCURSOR,
   QueryResultBatch_MoreResults_NOMORERESULTS,
-  QueryResultBatch_MoreResults #-}
+  QueryResultBatch_MoreResults
+  #-}
 
 -- | The non-transactional read consistency to use.
-newtype ReadOptions_ReadConsistency = ReadOptions_ReadConsistency { fromReadOptions_ReadConsistency :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ReadOptions_ReadConsistency = ReadOptions_ReadConsistency {fromReadOptions_ReadConsistency :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified. This value must not be used.
 pattern ReadOptions_ReadConsistency_READCONSISTENCYUNSPECIFIED :: ReadOptions_ReadConsistency
@@ -1272,20 +1264,21 @@ pattern ReadOptions_ReadConsistency_Eventual = ReadOptions_ReadConsistency "EVEN
   ReadOptions_ReadConsistency_READCONSISTENCYUNSPECIFIED,
   ReadOptions_ReadConsistency_Strong,
   ReadOptions_ReadConsistency_Eventual,
-  ReadOptions_ReadConsistency #-}
+  ReadOptions_ReadConsistency
+  #-}
 
 -- | A null value.
-newtype Value_NullValue = Value_NullValue { fromValue_NullValue :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Value_NullValue = Value_NullValue {fromValue_NullValue :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Null value.
 pattern Value_NullValue_NULLVALUE :: Value_NullValue
@@ -1293,4 +1286,5 @@ pattern Value_NullValue_NULLVALUE = Value_NullValue "NULL_VALUE"
 
 {-# COMPLETE
   Value_NullValue_NULLVALUE,
-  Value_NullValue #-}
+  Value_NullValue
+  #-}

@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.CloudPrivateCatalogProducer
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,292 +27,292 @@
 --
 -- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference>
 module Gogol.CloudPrivateCatalogProducer
-    (
-    -- * Configuration
-      cloudPrivateCatalogProducerService
+  ( -- * Configuration
+    cloudPrivateCatalogProducerService,
 
     -- * OAuth Scopes
-    , CloudPlatform'FullControl
+    CloudPlatform'FullControl,
 
     -- * Resources
 
     -- ** cloudprivatecatalogproducer.catalogs.associations.create
-    , CloudPrivateCatalogProducerCatalogsAssociationsCreateResource
-    , CloudPrivateCatalogProducerCatalogsAssociationsCreate (..)
-    , newCloudPrivateCatalogProducerCatalogsAssociationsCreate
+    CloudPrivateCatalogProducerCatalogsAssociationsCreateResource,
+    CloudPrivateCatalogProducerCatalogsAssociationsCreate (..),
+    newCloudPrivateCatalogProducerCatalogsAssociationsCreate,
 
     -- ** cloudprivatecatalogproducer.catalogs.associations.delete
-    , CloudPrivateCatalogProducerCatalogsAssociationsDeleteResource
-    , CloudPrivateCatalogProducerCatalogsAssociationsDelete (..)
-    , newCloudPrivateCatalogProducerCatalogsAssociationsDelete
+    CloudPrivateCatalogProducerCatalogsAssociationsDeleteResource,
+    CloudPrivateCatalogProducerCatalogsAssociationsDelete (..),
+    newCloudPrivateCatalogProducerCatalogsAssociationsDelete,
 
     -- ** cloudprivatecatalogproducer.catalogs.associations.get
-    , CloudPrivateCatalogProducerCatalogsAssociationsGetResource
-    , CloudPrivateCatalogProducerCatalogsAssociationsGet (..)
-    , newCloudPrivateCatalogProducerCatalogsAssociationsGet
+    CloudPrivateCatalogProducerCatalogsAssociationsGetResource,
+    CloudPrivateCatalogProducerCatalogsAssociationsGet (..),
+    newCloudPrivateCatalogProducerCatalogsAssociationsGet,
 
     -- ** cloudprivatecatalogproducer.catalogs.associations.list
-    , CloudPrivateCatalogProducerCatalogsAssociationsListResource
-    , CloudPrivateCatalogProducerCatalogsAssociationsList (..)
-    , newCloudPrivateCatalogProducerCatalogsAssociationsList
+    CloudPrivateCatalogProducerCatalogsAssociationsListResource,
+    CloudPrivateCatalogProducerCatalogsAssociationsList (..),
+    newCloudPrivateCatalogProducerCatalogsAssociationsList,
 
     -- ** cloudprivatecatalogproducer.catalogs.create
-    , CloudPrivateCatalogProducerCatalogsCreateResource
-    , CloudPrivateCatalogProducerCatalogsCreate (..)
-    , newCloudPrivateCatalogProducerCatalogsCreate
+    CloudPrivateCatalogProducerCatalogsCreateResource,
+    CloudPrivateCatalogProducerCatalogsCreate (..),
+    newCloudPrivateCatalogProducerCatalogsCreate,
 
     -- ** cloudprivatecatalogproducer.catalogs.delete
-    , CloudPrivateCatalogProducerCatalogsDeleteResource
-    , CloudPrivateCatalogProducerCatalogsDelete (..)
-    , newCloudPrivateCatalogProducerCatalogsDelete
+    CloudPrivateCatalogProducerCatalogsDeleteResource,
+    CloudPrivateCatalogProducerCatalogsDelete (..),
+    newCloudPrivateCatalogProducerCatalogsDelete,
 
     -- ** cloudprivatecatalogproducer.catalogs.get
-    , CloudPrivateCatalogProducerCatalogsGetResource
-    , CloudPrivateCatalogProducerCatalogsGet (..)
-    , newCloudPrivateCatalogProducerCatalogsGet
+    CloudPrivateCatalogProducerCatalogsGetResource,
+    CloudPrivateCatalogProducerCatalogsGet (..),
+    newCloudPrivateCatalogProducerCatalogsGet,
 
     -- ** cloudprivatecatalogproducer.catalogs.getIamPolicy
-    , CloudPrivateCatalogProducerCatalogsGetIamPolicyResource
-    , CloudPrivateCatalogProducerCatalogsGetIamPolicy (..)
-    , newCloudPrivateCatalogProducerCatalogsGetIamPolicy
+    CloudPrivateCatalogProducerCatalogsGetIamPolicyResource,
+    CloudPrivateCatalogProducerCatalogsGetIamPolicy (..),
+    newCloudPrivateCatalogProducerCatalogsGetIamPolicy,
 
     -- ** cloudprivatecatalogproducer.catalogs.list
-    , CloudPrivateCatalogProducerCatalogsListResource
-    , CloudPrivateCatalogProducerCatalogsList (..)
-    , newCloudPrivateCatalogProducerCatalogsList
+    CloudPrivateCatalogProducerCatalogsListResource,
+    CloudPrivateCatalogProducerCatalogsList (..),
+    newCloudPrivateCatalogProducerCatalogsList,
 
     -- ** cloudprivatecatalogproducer.catalogs.patch
-    , CloudPrivateCatalogProducerCatalogsPatchResource
-    , CloudPrivateCatalogProducerCatalogsPatch (..)
-    , newCloudPrivateCatalogProducerCatalogsPatch
+    CloudPrivateCatalogProducerCatalogsPatchResource,
+    CloudPrivateCatalogProducerCatalogsPatch (..),
+    newCloudPrivateCatalogProducerCatalogsPatch,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.copy
-    , CloudPrivateCatalogProducerCatalogsProductsCopyResource
-    , CloudPrivateCatalogProducerCatalogsProductsCopy (..)
-    , newCloudPrivateCatalogProducerCatalogsProductsCopy
+    CloudPrivateCatalogProducerCatalogsProductsCopyResource,
+    CloudPrivateCatalogProducerCatalogsProductsCopy (..),
+    newCloudPrivateCatalogProducerCatalogsProductsCopy,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.create
-    , CloudPrivateCatalogProducerCatalogsProductsCreateResource
-    , CloudPrivateCatalogProducerCatalogsProductsCreate (..)
-    , newCloudPrivateCatalogProducerCatalogsProductsCreate
+    CloudPrivateCatalogProducerCatalogsProductsCreateResource,
+    CloudPrivateCatalogProducerCatalogsProductsCreate (..),
+    newCloudPrivateCatalogProducerCatalogsProductsCreate,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.delete
-    , CloudPrivateCatalogProducerCatalogsProductsDeleteResource
-    , CloudPrivateCatalogProducerCatalogsProductsDelete (..)
-    , newCloudPrivateCatalogProducerCatalogsProductsDelete
+    CloudPrivateCatalogProducerCatalogsProductsDeleteResource,
+    CloudPrivateCatalogProducerCatalogsProductsDelete (..),
+    newCloudPrivateCatalogProducerCatalogsProductsDelete,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.get
-    , CloudPrivateCatalogProducerCatalogsProductsGetResource
-    , CloudPrivateCatalogProducerCatalogsProductsGet (..)
-    , newCloudPrivateCatalogProducerCatalogsProductsGet
+    CloudPrivateCatalogProducerCatalogsProductsGetResource,
+    CloudPrivateCatalogProducerCatalogsProductsGet (..),
+    newCloudPrivateCatalogProducerCatalogsProductsGet,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.icons.upload
-    , CloudPrivateCatalogProducerCatalogsProductsIconsUploadResource
-    , CloudPrivateCatalogProducerCatalogsProductsIconsUpload (..)
-    , newCloudPrivateCatalogProducerCatalogsProductsIconsUpload
+    CloudPrivateCatalogProducerCatalogsProductsIconsUploadResource,
+    CloudPrivateCatalogProducerCatalogsProductsIconsUpload (..),
+    newCloudPrivateCatalogProducerCatalogsProductsIconsUpload,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.list
-    , CloudPrivateCatalogProducerCatalogsProductsListResource
-    , CloudPrivateCatalogProducerCatalogsProductsList (..)
-    , newCloudPrivateCatalogProducerCatalogsProductsList
+    CloudPrivateCatalogProducerCatalogsProductsListResource,
+    CloudPrivateCatalogProducerCatalogsProductsList (..),
+    newCloudPrivateCatalogProducerCatalogsProductsList,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.patch
-    , CloudPrivateCatalogProducerCatalogsProductsPatchResource
-    , CloudPrivateCatalogProducerCatalogsProductsPatch (..)
-    , newCloudPrivateCatalogProducerCatalogsProductsPatch
+    CloudPrivateCatalogProducerCatalogsProductsPatchResource,
+    CloudPrivateCatalogProducerCatalogsProductsPatch (..),
+    newCloudPrivateCatalogProducerCatalogsProductsPatch,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.versions.create
-    , CloudPrivateCatalogProducerCatalogsProductsVersionsCreateResource
-    , CloudPrivateCatalogProducerCatalogsProductsVersionsCreate (..)
-    , newCloudPrivateCatalogProducerCatalogsProductsVersionsCreate
+    CloudPrivateCatalogProducerCatalogsProductsVersionsCreateResource,
+    CloudPrivateCatalogProducerCatalogsProductsVersionsCreate (..),
+    newCloudPrivateCatalogProducerCatalogsProductsVersionsCreate,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.versions.delete
-    , CloudPrivateCatalogProducerCatalogsProductsVersionsDeleteResource
-    , CloudPrivateCatalogProducerCatalogsProductsVersionsDelete (..)
-    , newCloudPrivateCatalogProducerCatalogsProductsVersionsDelete
+    CloudPrivateCatalogProducerCatalogsProductsVersionsDeleteResource,
+    CloudPrivateCatalogProducerCatalogsProductsVersionsDelete (..),
+    newCloudPrivateCatalogProducerCatalogsProductsVersionsDelete,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.versions.get
-    , CloudPrivateCatalogProducerCatalogsProductsVersionsGetResource
-    , CloudPrivateCatalogProducerCatalogsProductsVersionsGet (..)
-    , newCloudPrivateCatalogProducerCatalogsProductsVersionsGet
+    CloudPrivateCatalogProducerCatalogsProductsVersionsGetResource,
+    CloudPrivateCatalogProducerCatalogsProductsVersionsGet (..),
+    newCloudPrivateCatalogProducerCatalogsProductsVersionsGet,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.versions.list
-    , CloudPrivateCatalogProducerCatalogsProductsVersionsListResource
-    , CloudPrivateCatalogProducerCatalogsProductsVersionsList (..)
-    , newCloudPrivateCatalogProducerCatalogsProductsVersionsList
+    CloudPrivateCatalogProducerCatalogsProductsVersionsListResource,
+    CloudPrivateCatalogProducerCatalogsProductsVersionsList (..),
+    newCloudPrivateCatalogProducerCatalogsProductsVersionsList,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.versions.patch
-    , CloudPrivateCatalogProducerCatalogsProductsVersionsPatchResource
-    , CloudPrivateCatalogProducerCatalogsProductsVersionsPatch (..)
-    , newCloudPrivateCatalogProducerCatalogsProductsVersionsPatch
+    CloudPrivateCatalogProducerCatalogsProductsVersionsPatchResource,
+    CloudPrivateCatalogProducerCatalogsProductsVersionsPatch (..),
+    newCloudPrivateCatalogProducerCatalogsProductsVersionsPatch,
 
     -- ** cloudprivatecatalogproducer.catalogs.setIamPolicy
-    , CloudPrivateCatalogProducerCatalogsSetIamPolicyResource
-    , CloudPrivateCatalogProducerCatalogsSetIamPolicy (..)
-    , newCloudPrivateCatalogProducerCatalogsSetIamPolicy
+    CloudPrivateCatalogProducerCatalogsSetIamPolicyResource,
+    CloudPrivateCatalogProducerCatalogsSetIamPolicy (..),
+    newCloudPrivateCatalogProducerCatalogsSetIamPolicy,
 
     -- ** cloudprivatecatalogproducer.catalogs.testIamPermissions
-    , CloudPrivateCatalogProducerCatalogsTestIamPermissionsResource
-    , CloudPrivateCatalogProducerCatalogsTestIamPermissions (..)
-    , newCloudPrivateCatalogProducerCatalogsTestIamPermissions
+    CloudPrivateCatalogProducerCatalogsTestIamPermissionsResource,
+    CloudPrivateCatalogProducerCatalogsTestIamPermissions (..),
+    newCloudPrivateCatalogProducerCatalogsTestIamPermissions,
 
     -- ** cloudprivatecatalogproducer.catalogs.undelete
-    , CloudPrivateCatalogProducerCatalogsUndeleteResource
-    , CloudPrivateCatalogProducerCatalogsUndelete (..)
-    , newCloudPrivateCatalogProducerCatalogsUndelete
+    CloudPrivateCatalogProducerCatalogsUndeleteResource,
+    CloudPrivateCatalogProducerCatalogsUndelete (..),
+    newCloudPrivateCatalogProducerCatalogsUndelete,
 
     -- ** cloudprivatecatalogproducer.operations.cancel
-    , CloudPrivateCatalogProducerOperationsCancelResource
-    , CloudPrivateCatalogProducerOperationsCancel (..)
-    , newCloudPrivateCatalogProducerOperationsCancel
+    CloudPrivateCatalogProducerOperationsCancelResource,
+    CloudPrivateCatalogProducerOperationsCancel (..),
+    newCloudPrivateCatalogProducerOperationsCancel,
 
     -- ** cloudprivatecatalogproducer.operations.delete
-    , CloudPrivateCatalogProducerOperationsDeleteResource
-    , CloudPrivateCatalogProducerOperationsDelete (..)
-    , newCloudPrivateCatalogProducerOperationsDelete
+    CloudPrivateCatalogProducerOperationsDeleteResource,
+    CloudPrivateCatalogProducerOperationsDelete (..),
+    newCloudPrivateCatalogProducerOperationsDelete,
 
     -- ** cloudprivatecatalogproducer.operations.get
-    , CloudPrivateCatalogProducerOperationsGetResource
-    , CloudPrivateCatalogProducerOperationsGet (..)
-    , newCloudPrivateCatalogProducerOperationsGet
+    CloudPrivateCatalogProducerOperationsGetResource,
+    CloudPrivateCatalogProducerOperationsGet (..),
+    newCloudPrivateCatalogProducerOperationsGet,
 
     -- ** cloudprivatecatalogproducer.operations.list
-    , CloudPrivateCatalogProducerOperationsListResource
-    , CloudPrivateCatalogProducerOperationsList (..)
-    , newCloudPrivateCatalogProducerOperationsList
+    CloudPrivateCatalogProducerOperationsListResource,
+    CloudPrivateCatalogProducerOperationsList (..),
+    newCloudPrivateCatalogProducerOperationsList,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** GoogleCloudPrivatecatalogproducerV1beta1Association
-    , GoogleCloudPrivatecatalogproducerV1beta1Association (..)
-    , newGoogleCloudPrivatecatalogproducerV1beta1Association
+    GoogleCloudPrivatecatalogproducerV1beta1Association (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1Association,
 
     -- ** GoogleCloudPrivatecatalogproducerV1beta1Catalog
-    , GoogleCloudPrivatecatalogproducerV1beta1Catalog (..)
-    , newGoogleCloudPrivatecatalogproducerV1beta1Catalog
+    GoogleCloudPrivatecatalogproducerV1beta1Catalog (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1Catalog,
 
     -- ** GoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest
-    , GoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest (..)
-    , newGoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest
+    GoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest,
 
     -- ** GoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest
-    , GoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest (..)
-    , newGoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest
+    GoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest,
 
     -- ** GoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse
-    , GoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse (..)
-    , newGoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse
+    GoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse,
 
     -- ** GoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse
-    , GoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse (..)
-    , newGoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse
+    GoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse,
 
     -- ** GoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse
-    , GoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse (..)
-    , newGoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse
+    GoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse,
 
     -- ** GoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse
-    , GoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse (..)
-    , newGoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse
+    GoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse,
 
     -- ** GoogleCloudPrivatecatalogproducerV1beta1Product
-    , GoogleCloudPrivatecatalogproducerV1beta1Product (..)
-    , newGoogleCloudPrivatecatalogproducerV1beta1Product
+    GoogleCloudPrivatecatalogproducerV1beta1Product (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1Product,
 
     -- ** GoogleCloudPrivatecatalogproducerV1beta1Product_DisplayMetadata
-    , GoogleCloudPrivatecatalogproducerV1beta1Product_DisplayMetadata (..)
-    , newGoogleCloudPrivatecatalogproducerV1beta1Product_DisplayMetadata
+    GoogleCloudPrivatecatalogproducerV1beta1Product_DisplayMetadata (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1Product_DisplayMetadata,
 
     -- ** GoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest
-    , GoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest (..)
-    , newGoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest
+    GoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest,
 
     -- ** GoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest
-    , GoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest (..)
-    , newGoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest
+    GoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest,
 
     -- ** GoogleCloudPrivatecatalogproducerV1beta1Version
-    , GoogleCloudPrivatecatalogproducerV1beta1Version (..)
-    , newGoogleCloudPrivatecatalogproducerV1beta1Version
+    GoogleCloudPrivatecatalogproducerV1beta1Version (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1Version,
 
     -- ** GoogleCloudPrivatecatalogproducerV1beta1Version_Asset
-    , GoogleCloudPrivatecatalogproducerV1beta1Version_Asset (..)
-    , newGoogleCloudPrivatecatalogproducerV1beta1Version_Asset
+    GoogleCloudPrivatecatalogproducerV1beta1Version_Asset (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1Version_Asset,
 
     -- ** GoogleCloudPrivatecatalogproducerV1beta1Version_OriginalAsset
-    , GoogleCloudPrivatecatalogproducerV1beta1Version_OriginalAsset (..)
-    , newGoogleCloudPrivatecatalogproducerV1beta1Version_OriginalAsset
+    GoogleCloudPrivatecatalogproducerV1beta1Version_OriginalAsset (..),
+    newGoogleCloudPrivatecatalogproducerV1beta1Version_OriginalAsset,
 
     -- ** GoogleIamV1AuditConfig
-    , GoogleIamV1AuditConfig (..)
-    , newGoogleIamV1AuditConfig
+    GoogleIamV1AuditConfig (..),
+    newGoogleIamV1AuditConfig,
 
     -- ** GoogleIamV1AuditLogConfig
-    , GoogleIamV1AuditLogConfig (..)
-    , newGoogleIamV1AuditLogConfig
+    GoogleIamV1AuditLogConfig (..),
+    newGoogleIamV1AuditLogConfig,
 
     -- ** GoogleIamV1AuditLogConfig_LogType
-    , GoogleIamV1AuditLogConfig_LogType (..)
+    GoogleIamV1AuditLogConfig_LogType (..),
 
     -- ** GoogleIamV1Binding
-    , GoogleIamV1Binding (..)
-    , newGoogleIamV1Binding
+    GoogleIamV1Binding (..),
+    newGoogleIamV1Binding,
 
     -- ** GoogleIamV1Policy
-    , GoogleIamV1Policy (..)
-    , newGoogleIamV1Policy
+    GoogleIamV1Policy (..),
+    newGoogleIamV1Policy,
 
     -- ** GoogleIamV1SetIamPolicyRequest
-    , GoogleIamV1SetIamPolicyRequest (..)
-    , newGoogleIamV1SetIamPolicyRequest
+    GoogleIamV1SetIamPolicyRequest (..),
+    newGoogleIamV1SetIamPolicyRequest,
 
     -- ** GoogleIamV1TestIamPermissionsRequest
-    , GoogleIamV1TestIamPermissionsRequest (..)
-    , newGoogleIamV1TestIamPermissionsRequest
+    GoogleIamV1TestIamPermissionsRequest (..),
+    newGoogleIamV1TestIamPermissionsRequest,
 
     -- ** GoogleIamV1TestIamPermissionsResponse
-    , GoogleIamV1TestIamPermissionsResponse (..)
-    , newGoogleIamV1TestIamPermissionsResponse
+    GoogleIamV1TestIamPermissionsResponse (..),
+    newGoogleIamV1TestIamPermissionsResponse,
 
     -- ** GoogleLongrunningCancelOperationRequest
-    , GoogleLongrunningCancelOperationRequest (..)
-    , newGoogleLongrunningCancelOperationRequest
+    GoogleLongrunningCancelOperationRequest (..),
+    newGoogleLongrunningCancelOperationRequest,
 
     -- ** GoogleLongrunningListOperationsResponse
-    , GoogleLongrunningListOperationsResponse (..)
-    , newGoogleLongrunningListOperationsResponse
+    GoogleLongrunningListOperationsResponse (..),
+    newGoogleLongrunningListOperationsResponse,
 
     -- ** GoogleLongrunningOperation
-    , GoogleLongrunningOperation (..)
-    , newGoogleLongrunningOperation
+    GoogleLongrunningOperation (..),
+    newGoogleLongrunningOperation,
 
     -- ** GoogleLongrunningOperation_Metadata
-    , GoogleLongrunningOperation_Metadata (..)
-    , newGoogleLongrunningOperation_Metadata
+    GoogleLongrunningOperation_Metadata (..),
+    newGoogleLongrunningOperation_Metadata,
 
     -- ** GoogleLongrunningOperation_Response
-    , GoogleLongrunningOperation_Response (..)
-    , newGoogleLongrunningOperation_Response
+    GoogleLongrunningOperation_Response (..),
+    newGoogleLongrunningOperation_Response,
 
     -- ** GoogleProtobufEmpty
-    , GoogleProtobufEmpty (..)
-    , newGoogleProtobufEmpty
+    GoogleProtobufEmpty (..),
+    newGoogleProtobufEmpty,
 
     -- ** GoogleRpcStatus
-    , GoogleRpcStatus (..)
-    , newGoogleRpcStatus
+    GoogleRpcStatus (..),
+    newGoogleRpcStatus,
 
     -- ** GoogleRpcStatus_DetailsItem
-    , GoogleRpcStatus_DetailsItem (..)
-    , newGoogleRpcStatus_DetailsItem
+    GoogleRpcStatus_DetailsItem (..),
+    newGoogleRpcStatus_DetailsItem,
 
     -- ** GoogleTypeExpr
-    , GoogleTypeExpr (..)
-    , newGoogleTypeExpr
-    ) where
+    GoogleTypeExpr (..),
+    newGoogleTypeExpr,
+  )
+where
 
 import Gogol.CloudPrivateCatalogProducer.Catalogs.Associations.Create
 import Gogol.CloudPrivateCatalogProducer.Catalogs.Associations.Delete

@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,123 +16,124 @@
 
 -- |
 -- Module      : Gogol.CloudErrorReporting.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.CloudErrorReporting.Types
-    (
-    -- * Configuration
-      cloudErrorReportingService
+  ( -- * Configuration
+    cloudErrorReportingService,
 
     -- * OAuth Scopes
-    , CloudPlatform'FullControl
+    CloudPlatform'FullControl,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** DeleteEventsResponse
-    , DeleteEventsResponse (..)
-    , newDeleteEventsResponse
+    DeleteEventsResponse (..),
+    newDeleteEventsResponse,
 
     -- ** ErrorContext
-    , ErrorContext (..)
-    , newErrorContext
+    ErrorContext (..),
+    newErrorContext,
 
     -- ** ErrorEvent
-    , ErrorEvent (..)
-    , newErrorEvent
+    ErrorEvent (..),
+    newErrorEvent,
 
     -- ** ErrorGroup
-    , ErrorGroup (..)
-    , newErrorGroup
+    ErrorGroup (..),
+    newErrorGroup,
 
     -- ** ErrorGroup_ResolutionStatus
-    , ErrorGroup_ResolutionStatus (..)
+    ErrorGroup_ResolutionStatus (..),
 
     -- ** ErrorGroupStats
-    , ErrorGroupStats (..)
-    , newErrorGroupStats
+    ErrorGroupStats (..),
+    newErrorGroupStats,
 
     -- ** HttpRequestContext
-    , HttpRequestContext (..)
-    , newHttpRequestContext
+    HttpRequestContext (..),
+    newHttpRequestContext,
 
     -- ** ListEventsResponse
-    , ListEventsResponse (..)
-    , newListEventsResponse
+    ListEventsResponse (..),
+    newListEventsResponse,
 
     -- ** ListGroupStatsResponse
-    , ListGroupStatsResponse (..)
-    , newListGroupStatsResponse
+    ListGroupStatsResponse (..),
+    newListGroupStatsResponse,
 
     -- ** ReportErrorEventResponse
-    , ReportErrorEventResponse (..)
-    , newReportErrorEventResponse
+    ReportErrorEventResponse (..),
+    newReportErrorEventResponse,
 
     -- ** ReportedErrorEvent
-    , ReportedErrorEvent (..)
-    , newReportedErrorEvent
+    ReportedErrorEvent (..),
+    newReportedErrorEvent,
 
     -- ** ServiceContext
-    , ServiceContext (..)
-    , newServiceContext
+    ServiceContext (..),
+    newServiceContext,
 
     -- ** SourceLocation
-    , SourceLocation (..)
-    , newSourceLocation
+    SourceLocation (..),
+    newSourceLocation,
 
     -- ** SourceReference
-    , SourceReference (..)
-    , newSourceReference
+    SourceReference (..),
+    newSourceReference,
 
     -- ** TimedCount
-    , TimedCount (..)
-    , newTimedCount
+    TimedCount (..),
+    newTimedCount,
 
     -- ** TrackingIssue
-    , TrackingIssue (..)
-    , newTrackingIssue
+    TrackingIssue (..),
+    newTrackingIssue,
 
     -- ** ProjectsEventsListTimeRangePeriod
-    , ProjectsEventsListTimeRangePeriod (..)
+    ProjectsEventsListTimeRangePeriod (..),
 
     -- ** ProjectsGroupStatsListAlignment
-    , ProjectsGroupStatsListAlignment (..)
+    ProjectsGroupStatsListAlignment (..),
 
     -- ** ProjectsGroupStatsListOrder
-    , ProjectsGroupStatsListOrder (..)
+    ProjectsGroupStatsListOrder (..),
 
     -- ** ProjectsGroupStatsListTimeRangePeriod
-    , ProjectsGroupStatsListTimeRangePeriod (..)
+    ProjectsGroupStatsListTimeRangePeriod (..),
 
     -- ** ProjectsLocationsEventsListTimeRangePeriod
-    , ProjectsLocationsEventsListTimeRangePeriod (..)
+    ProjectsLocationsEventsListTimeRangePeriod (..),
 
     -- ** ProjectsLocationsGroupStatsListAlignment
-    , ProjectsLocationsGroupStatsListAlignment (..)
+    ProjectsLocationsGroupStatsListAlignment (..),
 
     -- ** ProjectsLocationsGroupStatsListOrder
-    , ProjectsLocationsGroupStatsListOrder (..)
+    ProjectsLocationsGroupStatsListOrder (..),
 
     -- ** ProjectsLocationsGroupStatsListTimeRangePeriod
-    , ProjectsLocationsGroupStatsListTimeRangePeriod (..)
-    ) where
+    ProjectsLocationsGroupStatsListTimeRangePeriod (..),
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.CloudErrorReporting.Internal.Product
 import Gogol.CloudErrorReporting.Internal.Sum
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1beta1@ of the Error Reporting API. This contains the host and root path used as a starting point for constructing service requests.
 cloudErrorReportingService :: Core.ServiceConfig
-cloudErrorReportingService
-  = Core.defaultService
-      (Core.ServiceId "clouderrorreporting:v1beta1")
-      "clouderrorreporting.googleapis.com"
+cloudErrorReportingService =
+  Core.defaultService
+    (Core.ServiceId "clouderrorreporting:v1beta1")
+    "clouderrorreporting.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"

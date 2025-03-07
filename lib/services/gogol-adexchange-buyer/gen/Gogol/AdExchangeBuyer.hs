@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,547 +27,547 @@
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference>
 module Gogol.AdExchangeBuyer
-    (
-    -- * Configuration
-      adExchangeBuyerService
+  ( -- * Configuration
+    adExchangeBuyerService,
 
     -- * OAuth Scopes
-    , Adexchange'Buyer
+    Adexchange'Buyer,
 
     -- * Resources
 
     -- ** adexchangebuyer.accounts.get
-    , AdExchangeBuyerAccountsGetResource
-    , AdExchangeBuyerAccountsGet (..)
-    , newAdExchangeBuyerAccountsGet
+    AdExchangeBuyerAccountsGetResource,
+    AdExchangeBuyerAccountsGet (..),
+    newAdExchangeBuyerAccountsGet,
 
     -- ** adexchangebuyer.accounts.list
-    , AdExchangeBuyerAccountsListResource
-    , AdExchangeBuyerAccountsList (..)
-    , newAdExchangeBuyerAccountsList
+    AdExchangeBuyerAccountsListResource,
+    AdExchangeBuyerAccountsList (..),
+    newAdExchangeBuyerAccountsList,
 
     -- ** adexchangebuyer.accounts.patch
-    , AdExchangeBuyerAccountsPatchResource
-    , AdExchangeBuyerAccountsPatch (..)
-    , newAdExchangeBuyerAccountsPatch
+    AdExchangeBuyerAccountsPatchResource,
+    AdExchangeBuyerAccountsPatch (..),
+    newAdExchangeBuyerAccountsPatch,
 
     -- ** adexchangebuyer.accounts.update
-    , AdExchangeBuyerAccountsUpdateResource
-    , AdExchangeBuyerAccountsUpdate (..)
-    , newAdExchangeBuyerAccountsUpdate
+    AdExchangeBuyerAccountsUpdateResource,
+    AdExchangeBuyerAccountsUpdate (..),
+    newAdExchangeBuyerAccountsUpdate,
 
     -- ** adexchangebuyer.billingInfo.get
-    , AdExchangeBuyerBillingInfoGetResource
-    , AdExchangeBuyerBillingInfoGet (..)
-    , newAdExchangeBuyerBillingInfoGet
+    AdExchangeBuyerBillingInfoGetResource,
+    AdExchangeBuyerBillingInfoGet (..),
+    newAdExchangeBuyerBillingInfoGet,
 
     -- ** adexchangebuyer.billingInfo.list
-    , AdExchangeBuyerBillingInfoListResource
-    , AdExchangeBuyerBillingInfoList (..)
-    , newAdExchangeBuyerBillingInfoList
+    AdExchangeBuyerBillingInfoListResource,
+    AdExchangeBuyerBillingInfoList (..),
+    newAdExchangeBuyerBillingInfoList,
 
     -- ** adexchangebuyer.budget.get
-    , AdExchangeBuyerBudgetGetResource
-    , AdExchangeBuyerBudgetGet (..)
-    , newAdExchangeBuyerBudgetGet
+    AdExchangeBuyerBudgetGetResource,
+    AdExchangeBuyerBudgetGet (..),
+    newAdExchangeBuyerBudgetGet,
 
     -- ** adexchangebuyer.budget.patch
-    , AdExchangeBuyerBudgetPatchResource
-    , AdExchangeBuyerBudgetPatch (..)
-    , newAdExchangeBuyerBudgetPatch
+    AdExchangeBuyerBudgetPatchResource,
+    AdExchangeBuyerBudgetPatch (..),
+    newAdExchangeBuyerBudgetPatch,
 
     -- ** adexchangebuyer.budget.update
-    , AdExchangeBuyerBudgetUpdateResource
-    , AdExchangeBuyerBudgetUpdate (..)
-    , newAdExchangeBuyerBudgetUpdate
+    AdExchangeBuyerBudgetUpdateResource,
+    AdExchangeBuyerBudgetUpdate (..),
+    newAdExchangeBuyerBudgetUpdate,
 
     -- ** adexchangebuyer.creatives.addDeal
-    , AdExchangeBuyerCreativesAddDealResource
-    , AdExchangeBuyerCreativesAddDeal (..)
-    , newAdExchangeBuyerCreativesAddDeal
+    AdExchangeBuyerCreativesAddDealResource,
+    AdExchangeBuyerCreativesAddDeal (..),
+    newAdExchangeBuyerCreativesAddDeal,
 
     -- ** adexchangebuyer.creatives.get
-    , AdExchangeBuyerCreativesGetResource
-    , AdExchangeBuyerCreativesGet (..)
-    , newAdExchangeBuyerCreativesGet
+    AdExchangeBuyerCreativesGetResource,
+    AdExchangeBuyerCreativesGet (..),
+    newAdExchangeBuyerCreativesGet,
 
     -- ** adexchangebuyer.creatives.insert
-    , AdExchangeBuyerCreativesInsertResource
-    , AdExchangeBuyerCreativesInsert (..)
-    , newAdExchangeBuyerCreativesInsert
+    AdExchangeBuyerCreativesInsertResource,
+    AdExchangeBuyerCreativesInsert (..),
+    newAdExchangeBuyerCreativesInsert,
 
     -- ** adexchangebuyer.creatives.list
-    , AdExchangeBuyerCreativesListResource
-    , AdExchangeBuyerCreativesList (..)
-    , newAdExchangeBuyerCreativesList
+    AdExchangeBuyerCreativesListResource,
+    AdExchangeBuyerCreativesList (..),
+    newAdExchangeBuyerCreativesList,
 
     -- ** adexchangebuyer.creatives.listDeals
-    , AdExchangeBuyerCreativesListDealsResource
-    , AdExchangeBuyerCreativesListDeals (..)
-    , newAdExchangeBuyerCreativesListDeals
+    AdExchangeBuyerCreativesListDealsResource,
+    AdExchangeBuyerCreativesListDeals (..),
+    newAdExchangeBuyerCreativesListDeals,
 
     -- ** adexchangebuyer.creatives.removeDeal
-    , AdExchangeBuyerCreativesRemoveDealResource
-    , AdExchangeBuyerCreativesRemoveDeal (..)
-    , newAdExchangeBuyerCreativesRemoveDeal
+    AdExchangeBuyerCreativesRemoveDealResource,
+    AdExchangeBuyerCreativesRemoveDeal (..),
+    newAdExchangeBuyerCreativesRemoveDeal,
 
     -- ** adexchangebuyer.marketplacedeals.delete
-    , AdExchangeBuyerMarketplacedealsDeleteResource
-    , AdExchangeBuyerMarketplacedealsDelete (..)
-    , newAdExchangeBuyerMarketplacedealsDelete
+    AdExchangeBuyerMarketplacedealsDeleteResource,
+    AdExchangeBuyerMarketplacedealsDelete (..),
+    newAdExchangeBuyerMarketplacedealsDelete,
 
     -- ** adexchangebuyer.marketplacedeals.insert
-    , AdExchangeBuyerMarketplacedealsInsertResource
-    , AdExchangeBuyerMarketplacedealsInsert (..)
-    , newAdExchangeBuyerMarketplacedealsInsert
+    AdExchangeBuyerMarketplacedealsInsertResource,
+    AdExchangeBuyerMarketplacedealsInsert (..),
+    newAdExchangeBuyerMarketplacedealsInsert,
 
     -- ** adexchangebuyer.marketplacedeals.list
-    , AdExchangeBuyerMarketplacedealsListResource
-    , AdExchangeBuyerMarketplacedealsList (..)
-    , newAdExchangeBuyerMarketplacedealsList
+    AdExchangeBuyerMarketplacedealsListResource,
+    AdExchangeBuyerMarketplacedealsList (..),
+    newAdExchangeBuyerMarketplacedealsList,
 
     -- ** adexchangebuyer.marketplacedeals.update
-    , AdExchangeBuyerMarketplacedealsUpdateResource
-    , AdExchangeBuyerMarketplacedealsUpdate (..)
-    , newAdExchangeBuyerMarketplacedealsUpdate
+    AdExchangeBuyerMarketplacedealsUpdateResource,
+    AdExchangeBuyerMarketplacedealsUpdate (..),
+    newAdExchangeBuyerMarketplacedealsUpdate,
 
     -- ** adexchangebuyer.marketplacenotes.insert
-    , AdExchangeBuyerMarketplacenotesInsertResource
-    , AdExchangeBuyerMarketplacenotesInsert (..)
-    , newAdExchangeBuyerMarketplacenotesInsert
+    AdExchangeBuyerMarketplacenotesInsertResource,
+    AdExchangeBuyerMarketplacenotesInsert (..),
+    newAdExchangeBuyerMarketplacenotesInsert,
 
     -- ** adexchangebuyer.marketplacenotes.list
-    , AdExchangeBuyerMarketplacenotesListResource
-    , AdExchangeBuyerMarketplacenotesList (..)
-    , newAdExchangeBuyerMarketplacenotesList
+    AdExchangeBuyerMarketplacenotesListResource,
+    AdExchangeBuyerMarketplacenotesList (..),
+    newAdExchangeBuyerMarketplacenotesList,
 
     -- ** adexchangebuyer.marketplaceprivateauction.updateproposal
-    , AdExchangeBuyerMarketplaceprivateauctionUpdateproposalResource
-    , AdExchangeBuyerMarketplaceprivateauctionUpdateproposal (..)
-    , newAdExchangeBuyerMarketplaceprivateauctionUpdateproposal
+    AdExchangeBuyerMarketplaceprivateauctionUpdateproposalResource,
+    AdExchangeBuyerMarketplaceprivateauctionUpdateproposal (..),
+    newAdExchangeBuyerMarketplaceprivateauctionUpdateproposal,
 
     -- ** adexchangebuyer.performanceReport.list
-    , AdExchangeBuyerPerformanceReportListResource
-    , AdExchangeBuyerPerformanceReportList (..)
-    , newAdExchangeBuyerPerformanceReportList
+    AdExchangeBuyerPerformanceReportListResource,
+    AdExchangeBuyerPerformanceReportList (..),
+    newAdExchangeBuyerPerformanceReportList,
 
     -- ** adexchangebuyer.pretargetingConfig.delete
-    , AdExchangeBuyerPretargetingConfigDeleteResource
-    , AdExchangeBuyerPretargetingConfigDelete (..)
-    , newAdExchangeBuyerPretargetingConfigDelete
+    AdExchangeBuyerPretargetingConfigDeleteResource,
+    AdExchangeBuyerPretargetingConfigDelete (..),
+    newAdExchangeBuyerPretargetingConfigDelete,
 
     -- ** adexchangebuyer.pretargetingConfig.get
-    , AdExchangeBuyerPretargetingConfigGetResource
-    , AdExchangeBuyerPretargetingConfigGet (..)
-    , newAdExchangeBuyerPretargetingConfigGet
+    AdExchangeBuyerPretargetingConfigGetResource,
+    AdExchangeBuyerPretargetingConfigGet (..),
+    newAdExchangeBuyerPretargetingConfigGet,
 
     -- ** adexchangebuyer.pretargetingConfig.insert
-    , AdExchangeBuyerPretargetingConfigInsertResource
-    , AdExchangeBuyerPretargetingConfigInsert (..)
-    , newAdExchangeBuyerPretargetingConfigInsert
+    AdExchangeBuyerPretargetingConfigInsertResource,
+    AdExchangeBuyerPretargetingConfigInsert (..),
+    newAdExchangeBuyerPretargetingConfigInsert,
 
     -- ** adexchangebuyer.pretargetingConfig.list
-    , AdExchangeBuyerPretargetingConfigListResource
-    , AdExchangeBuyerPretargetingConfigList (..)
-    , newAdExchangeBuyerPretargetingConfigList
+    AdExchangeBuyerPretargetingConfigListResource,
+    AdExchangeBuyerPretargetingConfigList (..),
+    newAdExchangeBuyerPretargetingConfigList,
 
     -- ** adexchangebuyer.pretargetingConfig.patch
-    , AdExchangeBuyerPretargetingConfigPatchResource
-    , AdExchangeBuyerPretargetingConfigPatch (..)
-    , newAdExchangeBuyerPretargetingConfigPatch
+    AdExchangeBuyerPretargetingConfigPatchResource,
+    AdExchangeBuyerPretargetingConfigPatch (..),
+    newAdExchangeBuyerPretargetingConfigPatch,
 
     -- ** adexchangebuyer.pretargetingConfig.update
-    , AdExchangeBuyerPretargetingConfigUpdateResource
-    , AdExchangeBuyerPretargetingConfigUpdate (..)
-    , newAdExchangeBuyerPretargetingConfigUpdate
+    AdExchangeBuyerPretargetingConfigUpdateResource,
+    AdExchangeBuyerPretargetingConfigUpdate (..),
+    newAdExchangeBuyerPretargetingConfigUpdate,
 
     -- ** adexchangebuyer.products.get
-    , AdExchangeBuyerProductsGetResource
-    , AdExchangeBuyerProductsGet (..)
-    , newAdExchangeBuyerProductsGet
+    AdExchangeBuyerProductsGetResource,
+    AdExchangeBuyerProductsGet (..),
+    newAdExchangeBuyerProductsGet,
 
     -- ** adexchangebuyer.products.search
-    , AdExchangeBuyerProductsSearchResource
-    , AdExchangeBuyerProductsSearch (..)
-    , newAdExchangeBuyerProductsSearch
+    AdExchangeBuyerProductsSearchResource,
+    AdExchangeBuyerProductsSearch (..),
+    newAdExchangeBuyerProductsSearch,
 
     -- ** adexchangebuyer.proposals.get
-    , AdExchangeBuyerProposalsGetResource
-    , AdExchangeBuyerProposalsGet (..)
-    , newAdExchangeBuyerProposalsGet
+    AdExchangeBuyerProposalsGetResource,
+    AdExchangeBuyerProposalsGet (..),
+    newAdExchangeBuyerProposalsGet,
 
     -- ** adexchangebuyer.proposals.insert
-    , AdExchangeBuyerProposalsInsertResource
-    , AdExchangeBuyerProposalsInsert (..)
-    , newAdExchangeBuyerProposalsInsert
+    AdExchangeBuyerProposalsInsertResource,
+    AdExchangeBuyerProposalsInsert (..),
+    newAdExchangeBuyerProposalsInsert,
 
     -- ** adexchangebuyer.proposals.patch
-    , AdExchangeBuyerProposalsPatchResource
-    , AdExchangeBuyerProposalsPatch (..)
-    , newAdExchangeBuyerProposalsPatch
+    AdExchangeBuyerProposalsPatchResource,
+    AdExchangeBuyerProposalsPatch (..),
+    newAdExchangeBuyerProposalsPatch,
 
     -- ** adexchangebuyer.proposals.search
-    , AdExchangeBuyerProposalsSearchResource
-    , AdExchangeBuyerProposalsSearch (..)
-    , newAdExchangeBuyerProposalsSearch
+    AdExchangeBuyerProposalsSearchResource,
+    AdExchangeBuyerProposalsSearch (..),
+    newAdExchangeBuyerProposalsSearch,
 
     -- ** adexchangebuyer.proposals.setupcomplete
-    , AdExchangeBuyerProposalsSetupcompleteResource
-    , AdExchangeBuyerProposalsSetupcomplete (..)
-    , newAdExchangeBuyerProposalsSetupcomplete
+    AdExchangeBuyerProposalsSetupcompleteResource,
+    AdExchangeBuyerProposalsSetupcomplete (..),
+    newAdExchangeBuyerProposalsSetupcomplete,
 
     -- ** adexchangebuyer.proposals.update
-    , AdExchangeBuyerProposalsUpdateResource
-    , AdExchangeBuyerProposalsUpdate (..)
-    , newAdExchangeBuyerProposalsUpdate
+    AdExchangeBuyerProposalsUpdateResource,
+    AdExchangeBuyerProposalsUpdate (..),
+    newAdExchangeBuyerProposalsUpdate,
 
     -- ** adexchangebuyer.pubprofiles.list
-    , AdExchangeBuyerPubprofilesListResource
-    , AdExchangeBuyerPubprofilesList (..)
-    , newAdExchangeBuyerPubprofilesList
+    AdExchangeBuyerPubprofilesListResource,
+    AdExchangeBuyerPubprofilesList (..),
+    newAdExchangeBuyerPubprofilesList,
 
     -- * Types
 
     -- ** Account
-    , Account (..)
-    , newAccount
+    Account (..),
+    newAccount,
 
     -- ** Account_BidderLocationItem
-    , Account_BidderLocationItem (..)
-    , newAccount_BidderLocationItem
+    Account_BidderLocationItem (..),
+    newAccount_BidderLocationItem,
 
     -- ** AccountsList
-    , AccountsList (..)
-    , newAccountsList
+    AccountsList (..),
+    newAccountsList,
 
     -- ** AddOrderDealsRequest
-    , AddOrderDealsRequest (..)
-    , newAddOrderDealsRequest
+    AddOrderDealsRequest (..),
+    newAddOrderDealsRequest,
 
     -- ** AddOrderDealsResponse
-    , AddOrderDealsResponse (..)
-    , newAddOrderDealsResponse
+    AddOrderDealsResponse (..),
+    newAddOrderDealsResponse,
 
     -- ** AddOrderNotesRequest
-    , AddOrderNotesRequest (..)
-    , newAddOrderNotesRequest
+    AddOrderNotesRequest (..),
+    newAddOrderNotesRequest,
 
     -- ** AddOrderNotesResponse
-    , AddOrderNotesResponse (..)
-    , newAddOrderNotesResponse
+    AddOrderNotesResponse (..),
+    newAddOrderNotesResponse,
 
     -- ** BillingInfo
-    , BillingInfo (..)
-    , newBillingInfo
+    BillingInfo (..),
+    newBillingInfo,
 
     -- ** BillingInfoList
-    , BillingInfoList (..)
-    , newBillingInfoList
+    BillingInfoList (..),
+    newBillingInfoList,
 
     -- ** Budget
-    , Budget (..)
-    , newBudget
+    Budget (..),
+    newBudget,
 
     -- ** Buyer
-    , Buyer (..)
-    , newBuyer
+    Buyer (..),
+    newBuyer,
 
     -- ** ContactInformation
-    , ContactInformation (..)
-    , newContactInformation
+    ContactInformation (..),
+    newContactInformation,
 
     -- ** CreateOrdersRequest
-    , CreateOrdersRequest (..)
-    , newCreateOrdersRequest
+    CreateOrdersRequest (..),
+    newCreateOrdersRequest,
 
     -- ** CreateOrdersResponse
-    , CreateOrdersResponse (..)
-    , newCreateOrdersResponse
+    CreateOrdersResponse (..),
+    newCreateOrdersResponse,
 
     -- ** Creative
-    , Creative (..)
-    , newCreative
+    Creative (..),
+    newCreative,
 
     -- ** Creative_AdTechnologyProviders
-    , Creative_AdTechnologyProviders (..)
-    , newCreative_AdTechnologyProviders
+    Creative_AdTechnologyProviders (..),
+    newCreative_AdTechnologyProviders,
 
     -- ** Creative_CorrectionsItem
-    , Creative_CorrectionsItem (..)
-    , newCreative_CorrectionsItem
+    Creative_CorrectionsItem (..),
+    newCreative_CorrectionsItem,
 
     -- ** Creative_CorrectionsItem_ContextsItem
-    , Creative_CorrectionsItem_ContextsItem (..)
-    , newCreative_CorrectionsItem_ContextsItem
+    Creative_CorrectionsItem_ContextsItem (..),
+    newCreative_CorrectionsItem_ContextsItem,
 
     -- ** Creative_FilteringReasons
-    , Creative_FilteringReasons (..)
-    , newCreative_FilteringReasons
+    Creative_FilteringReasons (..),
+    newCreative_FilteringReasons,
 
     -- ** Creative_FilteringReasons_ReasonsItem
-    , Creative_FilteringReasons_ReasonsItem (..)
-    , newCreative_FilteringReasons_ReasonsItem
+    Creative_FilteringReasons_ReasonsItem (..),
+    newCreative_FilteringReasons_ReasonsItem,
 
     -- ** Creative_NativeAd
-    , Creative_NativeAd (..)
-    , newCreative_NativeAd
+    Creative_NativeAd (..),
+    newCreative_NativeAd,
 
     -- ** Creative_NativeAd_AppIcon
-    , Creative_NativeAd_AppIcon (..)
-    , newCreative_NativeAd_AppIcon
+    Creative_NativeAd_AppIcon (..),
+    newCreative_NativeAd_AppIcon,
 
     -- ** Creative_NativeAd_Image
-    , Creative_NativeAd_Image (..)
-    , newCreative_NativeAd_Image
+    Creative_NativeAd_Image (..),
+    newCreative_NativeAd_Image,
 
     -- ** Creative_NativeAd_Logo
-    , Creative_NativeAd_Logo (..)
-    , newCreative_NativeAd_Logo
+    Creative_NativeAd_Logo (..),
+    newCreative_NativeAd_Logo,
 
     -- ** Creative_ServingRestrictionsItem
-    , Creative_ServingRestrictionsItem (..)
-    , newCreative_ServingRestrictionsItem
+    Creative_ServingRestrictionsItem (..),
+    newCreative_ServingRestrictionsItem,
 
     -- ** Creative_ServingRestrictionsItem_ContextsItem
-    , Creative_ServingRestrictionsItem_ContextsItem (..)
-    , newCreative_ServingRestrictionsItem_ContextsItem
+    Creative_ServingRestrictionsItem_ContextsItem (..),
+    newCreative_ServingRestrictionsItem_ContextsItem,
 
     -- ** Creative_ServingRestrictionsItem_DisapprovalReasonsItem
-    , Creative_ServingRestrictionsItem_DisapprovalReasonsItem (..)
-    , newCreative_ServingRestrictionsItem_DisapprovalReasonsItem
+    Creative_ServingRestrictionsItem_DisapprovalReasonsItem (..),
+    newCreative_ServingRestrictionsItem_DisapprovalReasonsItem,
 
     -- ** CreativeDealIds
-    , CreativeDealIds (..)
-    , newCreativeDealIds
+    CreativeDealIds (..),
+    newCreativeDealIds,
 
     -- ** CreativeDealIds_DealStatusesItem
-    , CreativeDealIds_DealStatusesItem (..)
-    , newCreativeDealIds_DealStatusesItem
+    CreativeDealIds_DealStatusesItem (..),
+    newCreativeDealIds_DealStatusesItem,
 
     -- ** CreativesList
-    , CreativesList (..)
-    , newCreativesList
+    CreativesList (..),
+    newCreativesList,
 
     -- ** DealServingMetadata
-    , DealServingMetadata (..)
-    , newDealServingMetadata
+    DealServingMetadata (..),
+    newDealServingMetadata,
 
     -- ** DealServingMetadataDealPauseStatus
-    , DealServingMetadataDealPauseStatus (..)
-    , newDealServingMetadataDealPauseStatus
+    DealServingMetadataDealPauseStatus (..),
+    newDealServingMetadataDealPauseStatus,
 
     -- ** DealTerms
-    , DealTerms (..)
-    , newDealTerms
+    DealTerms (..),
+    newDealTerms,
 
     -- ** DealTermsGuaranteedFixedPriceTerms
-    , DealTermsGuaranteedFixedPriceTerms (..)
-    , newDealTermsGuaranteedFixedPriceTerms
+    DealTermsGuaranteedFixedPriceTerms (..),
+    newDealTermsGuaranteedFixedPriceTerms,
 
     -- ** DealTermsGuaranteedFixedPriceTermsBillingInfo
-    , DealTermsGuaranteedFixedPriceTermsBillingInfo (..)
-    , newDealTermsGuaranteedFixedPriceTermsBillingInfo
+    DealTermsGuaranteedFixedPriceTermsBillingInfo (..),
+    newDealTermsGuaranteedFixedPriceTermsBillingInfo,
 
     -- ** DealTermsNonGuaranteedAuctionTerms
-    , DealTermsNonGuaranteedAuctionTerms (..)
-    , newDealTermsNonGuaranteedAuctionTerms
+    DealTermsNonGuaranteedAuctionTerms (..),
+    newDealTermsNonGuaranteedAuctionTerms,
 
     -- ** DealTermsNonGuaranteedFixedPriceTerms
-    , DealTermsNonGuaranteedFixedPriceTerms (..)
-    , newDealTermsNonGuaranteedFixedPriceTerms
+    DealTermsNonGuaranteedFixedPriceTerms (..),
+    newDealTermsNonGuaranteedFixedPriceTerms,
 
     -- ** DealTermsRubiconNonGuaranteedTerms
-    , DealTermsRubiconNonGuaranteedTerms (..)
-    , newDealTermsRubiconNonGuaranteedTerms
+    DealTermsRubiconNonGuaranteedTerms (..),
+    newDealTermsRubiconNonGuaranteedTerms,
 
     -- ** DeleteOrderDealsRequest
-    , DeleteOrderDealsRequest (..)
-    , newDeleteOrderDealsRequest
+    DeleteOrderDealsRequest (..),
+    newDeleteOrderDealsRequest,
 
     -- ** DeleteOrderDealsResponse
-    , DeleteOrderDealsResponse (..)
-    , newDeleteOrderDealsResponse
+    DeleteOrderDealsResponse (..),
+    newDeleteOrderDealsResponse,
 
     -- ** DeliveryControl
-    , DeliveryControl (..)
-    , newDeliveryControl
+    DeliveryControl (..),
+    newDeliveryControl,
 
     -- ** DeliveryControlFrequencyCap
-    , DeliveryControlFrequencyCap (..)
-    , newDeliveryControlFrequencyCap
+    DeliveryControlFrequencyCap (..),
+    newDeliveryControlFrequencyCap,
 
     -- ** Dimension
-    , Dimension (..)
-    , newDimension
+    Dimension (..),
+    newDimension,
 
     -- ** DimensionDimensionValue
-    , DimensionDimensionValue (..)
-    , newDimensionDimensionValue
+    DimensionDimensionValue (..),
+    newDimensionDimensionValue,
 
     -- ** EditAllOrderDealsRequest
-    , EditAllOrderDealsRequest (..)
-    , newEditAllOrderDealsRequest
+    EditAllOrderDealsRequest (..),
+    newEditAllOrderDealsRequest,
 
     -- ** EditAllOrderDealsResponse
-    , EditAllOrderDealsResponse (..)
-    , newEditAllOrderDealsResponse
+    EditAllOrderDealsResponse (..),
+    newEditAllOrderDealsResponse,
 
     -- ** GetOffersResponse
-    , GetOffersResponse (..)
-    , newGetOffersResponse
+    GetOffersResponse (..),
+    newGetOffersResponse,
 
     -- ** GetOrderDealsResponse
-    , GetOrderDealsResponse (..)
-    , newGetOrderDealsResponse
+    GetOrderDealsResponse (..),
+    newGetOrderDealsResponse,
 
     -- ** GetOrderNotesResponse
-    , GetOrderNotesResponse (..)
-    , newGetOrderNotesResponse
+    GetOrderNotesResponse (..),
+    newGetOrderNotesResponse,
 
     -- ** GetOrdersResponse
-    , GetOrdersResponse (..)
-    , newGetOrdersResponse
+    GetOrdersResponse (..),
+    newGetOrdersResponse,
 
     -- ** GetPublisherProfilesByAccountIdResponse
-    , GetPublisherProfilesByAccountIdResponse (..)
-    , newGetPublisherProfilesByAccountIdResponse
+    GetPublisherProfilesByAccountIdResponse (..),
+    newGetPublisherProfilesByAccountIdResponse,
 
     -- ** MarketplaceDeal
-    , MarketplaceDeal (..)
-    , newMarketplaceDeal
+    MarketplaceDeal (..),
+    newMarketplaceDeal,
 
     -- ** MarketplaceDealParty
-    , MarketplaceDealParty (..)
-    , newMarketplaceDealParty
+    MarketplaceDealParty (..),
+    newMarketplaceDealParty,
 
     -- ** MarketplaceLabel
-    , MarketplaceLabel (..)
-    , newMarketplaceLabel
+    MarketplaceLabel (..),
+    newMarketplaceLabel,
 
     -- ** MarketplaceNote
-    , MarketplaceNote (..)
-    , newMarketplaceNote
+    MarketplaceNote (..),
+    newMarketplaceNote,
 
     -- ** MobileApplication
-    , MobileApplication (..)
-    , newMobileApplication
+    MobileApplication (..),
+    newMobileApplication,
 
     -- ** PerformanceReport
-    , PerformanceReport (..)
-    , newPerformanceReport
+    PerformanceReport (..),
+    newPerformanceReport,
 
     -- ** PerformanceReportList
-    , PerformanceReportList (..)
-    , newPerformanceReportList
+    PerformanceReportList (..),
+    newPerformanceReportList,
 
     -- ** PretargetingConfig
-    , PretargetingConfig (..)
-    , newPretargetingConfig
+    PretargetingConfig (..),
+    newPretargetingConfig,
 
     -- ** PretargetingConfig_DimensionsItem
-    , PretargetingConfig_DimensionsItem (..)
-    , newPretargetingConfig_DimensionsItem
+    PretargetingConfig_DimensionsItem (..),
+    newPretargetingConfig_DimensionsItem,
 
     -- ** PretargetingConfig_ExcludedPlacementsItem
-    , PretargetingConfig_ExcludedPlacementsItem (..)
-    , newPretargetingConfig_ExcludedPlacementsItem
+    PretargetingConfig_ExcludedPlacementsItem (..),
+    newPretargetingConfig_ExcludedPlacementsItem,
 
     -- ** PretargetingConfig_PlacementsItem
-    , PretargetingConfig_PlacementsItem (..)
-    , newPretargetingConfig_PlacementsItem
+    PretargetingConfig_PlacementsItem (..),
+    newPretargetingConfig_PlacementsItem,
 
     -- ** PretargetingConfig_VideoPlayerSizesItem
-    , PretargetingConfig_VideoPlayerSizesItem (..)
-    , newPretargetingConfig_VideoPlayerSizesItem
+    PretargetingConfig_VideoPlayerSizesItem (..),
+    newPretargetingConfig_VideoPlayerSizesItem,
 
     -- ** PretargetingConfigList
-    , PretargetingConfigList (..)
-    , newPretargetingConfigList
+    PretargetingConfigList (..),
+    newPretargetingConfigList,
 
     -- ** Price
-    , Price (..)
-    , newPrice
+    Price (..),
+    newPrice,
 
     -- ** PricePerBuyer
-    , PricePerBuyer (..)
-    , newPricePerBuyer
+    PricePerBuyer (..),
+    newPricePerBuyer,
 
     -- ** PrivateData
-    , PrivateData (..)
-    , newPrivateData
+    PrivateData (..),
+    newPrivateData,
 
     -- ** Product
-    , Product (..)
-    , newProduct
+    Product (..),
+    newProduct,
 
     -- ** Proposal
-    , Proposal (..)
-    , newProposal
+    Proposal (..),
+    newProposal,
 
     -- ** PublisherProfileApiProto
-    , PublisherProfileApiProto (..)
-    , newPublisherProfileApiProto
+    PublisherProfileApiProto (..),
+    newPublisherProfileApiProto,
 
     -- ** PublisherProvidedForecast
-    , PublisherProvidedForecast (..)
-    , newPublisherProvidedForecast
+    PublisherProvidedForecast (..),
+    newPublisherProvidedForecast,
 
     -- ** Seller
-    , Seller (..)
-    , newSeller
+    Seller (..),
+    newSeller,
 
     -- ** SharedTargeting
-    , SharedTargeting (..)
-    , newSharedTargeting
+    SharedTargeting (..),
+    newSharedTargeting,
 
     -- ** TargetingValue
-    , TargetingValue (..)
-    , newTargetingValue
+    TargetingValue (..),
+    newTargetingValue,
 
     -- ** TargetingValueCreativeSize
-    , TargetingValueCreativeSize (..)
-    , newTargetingValueCreativeSize
+    TargetingValueCreativeSize (..),
+    newTargetingValueCreativeSize,
 
     -- ** TargetingValueDayPartTargeting
-    , TargetingValueDayPartTargeting (..)
-    , newTargetingValueDayPartTargeting
+    TargetingValueDayPartTargeting (..),
+    newTargetingValueDayPartTargeting,
 
     -- ** TargetingValueDayPartTargetingDayPart
-    , TargetingValueDayPartTargetingDayPart (..)
-    , newTargetingValueDayPartTargetingDayPart
+    TargetingValueDayPartTargetingDayPart (..),
+    newTargetingValueDayPartTargetingDayPart,
 
     -- ** TargetingValueDemogAgeCriteria
-    , TargetingValueDemogAgeCriteria (..)
-    , newTargetingValueDemogAgeCriteria
+    TargetingValueDemogAgeCriteria (..),
+    newTargetingValueDemogAgeCriteria,
 
     -- ** TargetingValueDemogGenderCriteria
-    , TargetingValueDemogGenderCriteria (..)
-    , newTargetingValueDemogGenderCriteria
+    TargetingValueDemogGenderCriteria (..),
+    newTargetingValueDemogGenderCriteria,
 
     -- ** TargetingValueRequestPlatformTargeting
-    , TargetingValueRequestPlatformTargeting (..)
-    , newTargetingValueRequestPlatformTargeting
+    TargetingValueRequestPlatformTargeting (..),
+    newTargetingValueRequestPlatformTargeting,
 
     -- ** TargetingValueSize
-    , TargetingValueSize (..)
-    , newTargetingValueSize
+    TargetingValueSize (..),
+    newTargetingValueSize,
 
     -- ** UpdatePrivateAuctionProposalRequest
-    , UpdatePrivateAuctionProposalRequest (..)
-    , newUpdatePrivateAuctionProposalRequest
+    UpdatePrivateAuctionProposalRequest (..),
+    newUpdatePrivateAuctionProposalRequest,
 
     -- ** CreativesListDealsStatusFilter
-    , CreativesListDealsStatusFilter (..)
+    CreativesListDealsStatusFilter (..),
 
     -- ** CreativesListOpenAuctionStatusFilter
-    , CreativesListOpenAuctionStatusFilter (..)
+    CreativesListOpenAuctionStatusFilter (..),
 
     -- ** ProposalsPatchUpdateAction
-    , ProposalsPatchUpdateAction (..)
+    ProposalsPatchUpdateAction (..),
 
     -- ** ProposalsUpdateUpdateAction
-    , ProposalsUpdateUpdateAction (..)
-    ) where
+    ProposalsUpdateUpdateAction (..),
+  )
+where
 
 import Gogol.AdExchangeBuyer.Accounts.Get
 import Gogol.AdExchangeBuyer.Accounts.List

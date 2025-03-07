@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,345 +16,348 @@
 
 -- |
 -- Module      : Gogol.ServiceUser.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.ServiceUser.Types
-    (
-    -- * Configuration
-      serviceUserService
+  ( -- * Configuration
+    serviceUserService,
 
     -- * OAuth Scopes
-    , CloudPlatform'FullControl
-    , CloudPlatform'ReadOnly
-    , Service'Management
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
+    Service'Management,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Api
-    , Api (..)
-    , newApi
+    Api (..),
+    newApi,
 
     -- ** Api_Syntax
-    , Api_Syntax (..)
+    Api_Syntax (..),
 
     -- ** AuthProvider
-    , AuthProvider (..)
-    , newAuthProvider
+    AuthProvider (..),
+    newAuthProvider,
 
     -- ** AuthRequirement
-    , AuthRequirement (..)
-    , newAuthRequirement
+    AuthRequirement (..),
+    newAuthRequirement,
 
     -- ** Authentication
-    , Authentication (..)
-    , newAuthentication
+    Authentication (..),
+    newAuthentication,
 
     -- ** AuthenticationRule
-    , AuthenticationRule (..)
-    , newAuthenticationRule
+    AuthenticationRule (..),
+    newAuthenticationRule,
 
     -- ** AuthorizationConfig
-    , AuthorizationConfig (..)
-    , newAuthorizationConfig
+    AuthorizationConfig (..),
+    newAuthorizationConfig,
 
     -- ** Backend
-    , Backend (..)
-    , newBackend
+    Backend (..),
+    newBackend,
 
     -- ** BackendRule
-    , BackendRule (..)
-    , newBackendRule
+    BackendRule (..),
+    newBackendRule,
 
     -- ** Billing
-    , Billing (..)
-    , newBilling
+    Billing (..),
+    newBilling,
 
     -- ** BillingDestination
-    , BillingDestination (..)
-    , newBillingDestination
+    BillingDestination (..),
+    newBillingDestination,
 
     -- ** Context
-    , Context (..)
-    , newContext
+    Context (..),
+    newContext,
 
     -- ** ContextRule
-    , ContextRule (..)
-    , newContextRule
+    ContextRule (..),
+    newContextRule,
 
     -- ** Control
-    , Control (..)
-    , newControl
+    Control (..),
+    newControl,
 
     -- ** CustomError
-    , CustomError (..)
-    , newCustomError
+    CustomError (..),
+    newCustomError,
 
     -- ** CustomErrorRule
-    , CustomErrorRule (..)
-    , newCustomErrorRule
+    CustomErrorRule (..),
+    newCustomErrorRule,
 
     -- ** CustomHttpPattern
-    , CustomHttpPattern (..)
-    , newCustomHttpPattern
+    CustomHttpPattern (..),
+    newCustomHttpPattern,
 
     -- ** DisableServiceRequest
-    , DisableServiceRequest (..)
-    , newDisableServiceRequest
+    DisableServiceRequest (..),
+    newDisableServiceRequest,
 
     -- ** Documentation
-    , Documentation (..)
-    , newDocumentation
+    Documentation (..),
+    newDocumentation,
 
     -- ** DocumentationRule
-    , DocumentationRule (..)
-    , newDocumentationRule
+    DocumentationRule (..),
+    newDocumentationRule,
 
     -- ** EnableServiceRequest
-    , EnableServiceRequest (..)
-    , newEnableServiceRequest
+    EnableServiceRequest (..),
+    newEnableServiceRequest,
 
     -- ** Endpoint
-    , Endpoint (..)
-    , newEndpoint
+    Endpoint (..),
+    newEndpoint,
 
     -- ** Enum'
-    , Enum' (..)
-    , newEnum
+    Enum' (..),
+    newEnum,
 
     -- ** Enum_Syntax
-    , Enum_Syntax (..)
+    Enum_Syntax (..),
 
     -- ** EnumValue
-    , EnumValue (..)
-    , newEnumValue
+    EnumValue (..),
+    newEnumValue,
 
     -- ** Experimental
-    , Experimental (..)
-    , newExperimental
+    Experimental (..),
+    newExperimental,
 
     -- ** Field
-    , Field (..)
-    , newField
+    Field (..),
+    newField,
 
     -- ** Field_Cardinality
-    , Field_Cardinality (..)
+    Field_Cardinality (..),
 
     -- ** Field_Kind
-    , Field_Kind (..)
+    Field_Kind (..),
 
     -- ** Http
-    , Http (..)
-    , newHttp
+    Http (..),
+    newHttp,
 
     -- ** HttpRule
-    , HttpRule (..)
-    , newHttpRule
+    HttpRule (..),
+    newHttpRule,
 
     -- ** LabelDescriptor
-    , LabelDescriptor (..)
-    , newLabelDescriptor
+    LabelDescriptor (..),
+    newLabelDescriptor,
 
     -- ** LabelDescriptor_ValueType
-    , LabelDescriptor_ValueType (..)
+    LabelDescriptor_ValueType (..),
 
     -- ** ListEnabledServicesResponse
-    , ListEnabledServicesResponse (..)
-    , newListEnabledServicesResponse
+    ListEnabledServicesResponse (..),
+    newListEnabledServicesResponse,
 
     -- ** LogDescriptor
-    , LogDescriptor (..)
-    , newLogDescriptor
+    LogDescriptor (..),
+    newLogDescriptor,
 
     -- ** Logging
-    , Logging (..)
-    , newLogging
+    Logging (..),
+    newLogging,
 
     -- ** LoggingDestination
-    , LoggingDestination (..)
-    , newLoggingDestination
+    LoggingDestination (..),
+    newLoggingDestination,
 
     -- ** Method
-    , Method (..)
-    , newMethod
+    Method (..),
+    newMethod,
 
     -- ** Method_Syntax
-    , Method_Syntax (..)
+    Method_Syntax (..),
 
     -- ** MetricDescriptor
-    , MetricDescriptor (..)
-    , newMetricDescriptor
+    MetricDescriptor (..),
+    newMetricDescriptor,
 
     -- ** MetricDescriptor_MetricKind
-    , MetricDescriptor_MetricKind (..)
+    MetricDescriptor_MetricKind (..),
 
     -- ** MetricDescriptor_ValueType
-    , MetricDescriptor_ValueType (..)
+    MetricDescriptor_ValueType (..),
 
     -- ** MetricDescriptorMetadata
-    , MetricDescriptorMetadata (..)
-    , newMetricDescriptorMetadata
+    MetricDescriptorMetadata (..),
+    newMetricDescriptorMetadata,
 
     -- ** MetricDescriptorMetadata_LaunchStage
-    , MetricDescriptorMetadata_LaunchStage (..)
+    MetricDescriptorMetadata_LaunchStage (..),
 
     -- ** MetricRule
-    , MetricRule (..)
-    , newMetricRule
+    MetricRule (..),
+    newMetricRule,
 
     -- ** MetricRule_MetricCosts
-    , MetricRule_MetricCosts (..)
-    , newMetricRule_MetricCosts
+    MetricRule_MetricCosts (..),
+    newMetricRule_MetricCosts,
 
     -- ** Mixin
-    , Mixin (..)
-    , newMixin
+    Mixin (..),
+    newMixin,
 
     -- ** MonitoredResourceDescriptor
-    , MonitoredResourceDescriptor (..)
-    , newMonitoredResourceDescriptor
+    MonitoredResourceDescriptor (..),
+    newMonitoredResourceDescriptor,
 
     -- ** Monitoring
-    , Monitoring (..)
-    , newMonitoring
+    Monitoring (..),
+    newMonitoring,
 
     -- ** MonitoringDestination
-    , MonitoringDestination (..)
-    , newMonitoringDestination
+    MonitoringDestination (..),
+    newMonitoringDestination,
 
     -- ** OAuthRequirements
-    , OAuthRequirements (..)
-    , newOAuthRequirements
+    OAuthRequirements (..),
+    newOAuthRequirements,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** OperationMetadata
-    , OperationMetadata (..)
-    , newOperationMetadata
+    OperationMetadata (..),
+    newOperationMetadata,
 
     -- ** Option
-    , Option (..)
-    , newOption
+    Option (..),
+    newOption,
 
     -- ** Option_Value
-    , Option_Value (..)
-    , newOption_Value
+    Option_Value (..),
+    newOption_Value,
 
     -- ** Page
-    , Page (..)
-    , newPage
+    Page (..),
+    newPage,
 
     -- ** PublishedService
-    , PublishedService (..)
-    , newPublishedService
+    PublishedService (..),
+    newPublishedService,
 
     -- ** Quota
-    , Quota (..)
-    , newQuota
+    Quota (..),
+    newQuota,
 
     -- ** QuotaLimit
-    , QuotaLimit (..)
-    , newQuotaLimit
+    QuotaLimit (..),
+    newQuotaLimit,
 
     -- ** QuotaLimit_Values
-    , QuotaLimit_Values (..)
-    , newQuotaLimit_Values
+    QuotaLimit_Values (..),
+    newQuotaLimit_Values,
 
     -- ** SearchServicesResponse
-    , SearchServicesResponse (..)
-    , newSearchServicesResponse
+    SearchServicesResponse (..),
+    newSearchServicesResponse,
 
     -- ** Service
-    , Service (..)
-    , newService
+    Service (..),
+    newService,
 
     -- ** SourceContext
-    , SourceContext (..)
-    , newSourceContext
+    SourceContext (..),
+    newSourceContext,
 
     -- ** SourceInfo
-    , SourceInfo (..)
-    , newSourceInfo
+    SourceInfo (..),
+    newSourceInfo,
 
     -- ** SourceInfo_SourceFilesItem
-    , SourceInfo_SourceFilesItem (..)
-    , newSourceInfo_SourceFilesItem
+    SourceInfo_SourceFilesItem (..),
+    newSourceInfo_SourceFilesItem,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** Step
-    , Step (..)
-    , newStep
+    Step (..),
+    newStep,
 
     -- ** Step_Status
-    , Step_Status (..)
+    Step_Status (..),
 
     -- ** SystemParameter
-    , SystemParameter (..)
-    , newSystemParameter
+    SystemParameter (..),
+    newSystemParameter,
 
     -- ** SystemParameterRule
-    , SystemParameterRule (..)
-    , newSystemParameterRule
+    SystemParameterRule (..),
+    newSystemParameterRule,
 
     -- ** SystemParameters
-    , SystemParameters (..)
-    , newSystemParameters
+    SystemParameters (..),
+    newSystemParameters,
 
     -- ** Type
-    , Type (..)
-    , newType
+    Type (..),
+    newType,
 
     -- ** Type_Syntax
-    , Type_Syntax (..)
+    Type_Syntax (..),
 
     -- ** Usage
-    , Usage (..)
-    , newUsage
+    Usage (..),
+    newUsage,
 
     -- ** UsageRule
-    , UsageRule (..)
-    , newUsageRule
-    ) where
+    UsageRule (..),
+    newUsageRule,
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ServiceUser.Internal.Product
 import Gogol.ServiceUser.Internal.Sum
 
 -- | Default request referring to version @v1@ of the Service User API. This contains the host and root path used as a starting point for constructing service requests.
 serviceUserService :: Core.ServiceConfig
-serviceUserService
-  = Core.defaultService
-      (Core.ServiceId "serviceuser:v1")
-      "serviceuser.googleapis.com"
+serviceUserService =
+  Core.defaultService
+    (Core.ServiceId "serviceuser:v1")
+    "serviceuser.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View your data across Google Cloud Platform services
-type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"
+type CloudPlatform'ReadOnly =
+  "https://www.googleapis.com/auth/cloud-platform.read-only"
 
 -- | Manage your Google API service configuration
-type Service'Management = "https://www.googleapis.com/auth/service.management"
+type Service'Management =
+  "https://www.googleapis.com/auth/service.management"

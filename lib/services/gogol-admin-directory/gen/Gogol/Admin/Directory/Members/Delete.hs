@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.Admin.Directory.Members.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,91 +27,93 @@
 --
 -- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.members.delete@.
 module Gogol.Admin.Directory.Members.Delete
-    (
-    -- * Resource
-      DirectoryMembersDeleteResource
+  ( -- * Resource
+    DirectoryMembersDeleteResource,
 
     -- ** Constructing a Request
-    , DirectoryMembersDelete (..)
-    , newDirectoryMembersDelete
-    ) where
+    DirectoryMembersDelete (..),
+    newDirectoryMembersDelete,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Admin.Directory.Types
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @directory.members.delete@ method which the
 -- 'DirectoryMembersDelete' request conforms to.
 type DirectoryMembersDeleteResource =
-     "admin" Core.:>
-       "directory" Core.:>
-         "v1" Core.:>
-           "groups" Core.:>
-             Core.Capture "groupKey" Core.Text Core.:>
-               "members" Core.:>
-                 Core.Capture "memberKey" Core.Text Core.:>
-                   Core.QueryParam "$.xgafv" Xgafv Core.:>
-                     Core.QueryParam "access_token" Core.Text Core.:>
-                       Core.QueryParam "callback" Core.Text Core.:>
-                         Core.QueryParam "uploadType" Core.Text Core.:>
-                           Core.QueryParam "upload_protocol" Core.Text Core.:>
-                             Core.QueryParam "alt" Core.AltJSON Core.:>
-                               Core.Delete '[Core.JSON] ()
+  "admin"
+    Core.:> "directory"
+    Core.:> "v1"
+    Core.:> "groups"
+    Core.:> Core.Capture "groupKey" Core.Text
+    Core.:> "members"
+    Core.:> Core.Capture "memberKey" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Delete '[Core.JSON] ()
 
 -- | Removes a member from a group.
 --
 -- /See:/ 'newDirectoryMembersDelete' smart constructor.
 data DirectoryMembersDelete = DirectoryMembersDelete
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Identifies the group in the API request. The value can be the group\'s email address, group alias, or the unique group ID.
-    , groupKey :: Core.Text
-      -- | Identifies the group member in the API request. A group member can be a user or another group. The value can be the member\'s (group or user) primary email address, alias, or unique ID.
-    , memberKey :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Identifies the group in the API request. The value can be the group\'s email address, group alias, or the unique group ID.
+    groupKey :: Core.Text,
+    -- | Identifies the group member in the API request. A group member can be a user or another group. The value can be the member\'s (group or user) primary email address, alias, or unique ID.
+    memberKey :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DirectoryMembersDelete' with the minimum fields required to make a request.
-newDirectoryMembersDelete 
-    ::  Core.Text
-       -- ^  Identifies the group in the API request. The value can be the group\'s email address, group alias, or the unique group ID. See 'groupKey'.
-    -> Core.Text
-       -- ^  Identifies the group member in the API request. A group member can be a user or another group. The value can be the member\'s (group or user) primary email address, alias, or unique ID. See 'memberKey'.
-    -> DirectoryMembersDelete
+newDirectoryMembersDelete ::
+  -- |  Identifies the group in the API request. The value can be the group\'s email address, group alias, or the unique group ID. See 'groupKey'.
+  Core.Text ->
+  -- |  Identifies the group member in the API request. A group member can be a user or another group. The value can be the member\'s (group or user) primary email address, alias, or unique ID. See 'memberKey'.
+  Core.Text ->
+  DirectoryMembersDelete
 newDirectoryMembersDelete groupKey memberKey =
   DirectoryMembersDelete
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , groupKey = groupKey
-    , memberKey = memberKey
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      groupKey = groupKey,
+      memberKey = memberKey,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest DirectoryMembersDelete
-         where
-        type Rs DirectoryMembersDelete = ()
-        type Scopes DirectoryMembersDelete =
-             '[Admin'Directory'Group,
-               Admin'Directory'Group'Member]
-        requestClient DirectoryMembersDelete{..}
-          = go groupKey memberKey xgafv accessToken callback
-              uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              adminDirectoryService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy DirectoryMembersDeleteResource)
-                      Core.mempty
-
+instance Core.GoogleRequest DirectoryMembersDelete where
+  type Rs DirectoryMembersDelete = ()
+  type
+    Scopes DirectoryMembersDelete =
+      '[Admin'Directory'Group, Admin'Directory'Group'Member]
+  requestClient DirectoryMembersDelete {..} =
+    go
+      groupKey
+      memberKey
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      adminDirectoryService
+    where
+      go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy DirectoryMembersDeleteResource)
+          Core.mempty

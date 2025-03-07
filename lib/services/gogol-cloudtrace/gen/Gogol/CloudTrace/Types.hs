@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,125 +16,126 @@
 
 -- |
 -- Module      : Gogol.CloudTrace.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.CloudTrace.Types
-    (
-    -- * Configuration
-      cloudTraceService
+  ( -- * Configuration
+    cloudTraceService,
 
     -- * OAuth Scopes
-    , CloudPlatform'FullControl
-    , Trace'Append
+    CloudPlatform'FullControl,
+    Trace'Append,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** Annotation
-    , Annotation (..)
-    , newAnnotation
+    Annotation (..),
+    newAnnotation,
 
     -- ** AttributeValue
-    , AttributeValue (..)
-    , newAttributeValue
+    AttributeValue (..),
+    newAttributeValue,
 
     -- ** Attributes
-    , Attributes (..)
-    , newAttributes
+    Attributes (..),
+    newAttributes,
 
     -- ** Attributes_AttributeMap
-    , Attributes_AttributeMap (..)
-    , newAttributes_AttributeMap
+    Attributes_AttributeMap (..),
+    newAttributes_AttributeMap,
 
     -- ** BatchWriteSpansRequest
-    , BatchWriteSpansRequest (..)
-    , newBatchWriteSpansRequest
+    BatchWriteSpansRequest (..),
+    newBatchWriteSpansRequest,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** Link
-    , Link (..)
-    , newLink
+    Link (..),
+    newLink,
 
     -- ** Link_Type
-    , Link_Type (..)
+    Link_Type (..),
 
     -- ** Links
-    , Links (..)
-    , newLinks
+    Links (..),
+    newLinks,
 
     -- ** MessageEvent
-    , MessageEvent (..)
-    , newMessageEvent
+    MessageEvent (..),
+    newMessageEvent,
 
     -- ** MessageEvent_Type
-    , MessageEvent_Type (..)
+    MessageEvent_Type (..),
 
     -- ** Module
-    , Module (..)
-    , newModule
+    Module (..),
+    newModule,
 
     -- ** Span
-    , Span (..)
-    , newSpan
+    Span (..),
+    newSpan,
 
     -- ** Span_SpanKind
-    , Span_SpanKind (..)
+    Span_SpanKind (..),
 
     -- ** StackFrame
-    , StackFrame (..)
-    , newStackFrame
+    StackFrame (..),
+    newStackFrame,
 
     -- ** StackFrames
-    , StackFrames (..)
-    , newStackFrames
+    StackFrames (..),
+    newStackFrames,
 
     -- ** StackTrace
-    , StackTrace (..)
-    , newStackTrace
+    StackTrace (..),
+    newStackTrace,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** TimeEvent
-    , TimeEvent (..)
-    , newTimeEvent
+    TimeEvent (..),
+    newTimeEvent,
 
     -- ** TimeEvents
-    , TimeEvents (..)
-    , newTimeEvents
+    TimeEvents (..),
+    newTimeEvents,
 
     -- ** TruncatableString
-    , TruncatableString (..)
-    , newTruncatableString
-    ) where
+    TruncatableString (..),
+    newTruncatableString,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.CloudTrace.Internal.Product
 import Gogol.CloudTrace.Internal.Sum
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v2@ of the Cloud Trace API. This contains the host and root path used as a starting point for constructing service requests.
 cloudTraceService :: Core.ServiceConfig
-cloudTraceService
-  = Core.defaultService
-      (Core.ServiceId "cloudtrace:v2")
-      "cloudtrace.googleapis.com"
+cloudTraceService =
+  Core.defaultService
+    (Core.ServiceId "cloudtrace:v2")
+    "cloudtrace.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | Write Trace data for a project or application
 type Trace'Append = "https://www.googleapis.com/auth/trace.append"

@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeSeller
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,164 +27,164 @@
 --
 -- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference>
 module Gogol.AdExchangeSeller
-    (
-    -- * Configuration
-      adExchangeSellerService
+  ( -- * Configuration
+    adExchangeSellerService,
 
     -- * OAuth Scopes
-    , Adexchange'Seller
-    , Adexchange'Seller'Readonly
+    Adexchange'Seller,
+    Adexchange'Seller'Readonly,
 
     -- * Resources
 
     -- ** adexchangeseller.accounts.adclients.list
-    , AdExchangeSellerAccountsAdclientsListResource
-    , AdExchangeSellerAccountsAdclientsList (..)
-    , newAdExchangeSellerAccountsAdclientsList
+    AdExchangeSellerAccountsAdclientsListResource,
+    AdExchangeSellerAccountsAdclientsList (..),
+    newAdExchangeSellerAccountsAdclientsList,
 
     -- ** adexchangeseller.accounts.alerts.list
-    , AdExchangeSellerAccountsAlertsListResource
-    , AdExchangeSellerAccountsAlertsList (..)
-    , newAdExchangeSellerAccountsAlertsList
+    AdExchangeSellerAccountsAlertsListResource,
+    AdExchangeSellerAccountsAlertsList (..),
+    newAdExchangeSellerAccountsAlertsList,
 
     -- ** adexchangeseller.accounts.customchannels.get
-    , AdExchangeSellerAccountsCustomchannelsGetResource
-    , AdExchangeSellerAccountsCustomchannelsGet (..)
-    , newAdExchangeSellerAccountsCustomchannelsGet
+    AdExchangeSellerAccountsCustomchannelsGetResource,
+    AdExchangeSellerAccountsCustomchannelsGet (..),
+    newAdExchangeSellerAccountsCustomchannelsGet,
 
     -- ** adexchangeseller.accounts.customchannels.list
-    , AdExchangeSellerAccountsCustomchannelsListResource
-    , AdExchangeSellerAccountsCustomchannelsList (..)
-    , newAdExchangeSellerAccountsCustomchannelsList
+    AdExchangeSellerAccountsCustomchannelsListResource,
+    AdExchangeSellerAccountsCustomchannelsList (..),
+    newAdExchangeSellerAccountsCustomchannelsList,
 
     -- ** adexchangeseller.accounts.get
-    , AdExchangeSellerAccountsGetResource
-    , AdExchangeSellerAccountsGet (..)
-    , newAdExchangeSellerAccountsGet
+    AdExchangeSellerAccountsGetResource,
+    AdExchangeSellerAccountsGet (..),
+    newAdExchangeSellerAccountsGet,
 
     -- ** adexchangeseller.accounts.list
-    , AdExchangeSellerAccountsListResource
-    , AdExchangeSellerAccountsList (..)
-    , newAdExchangeSellerAccountsList
+    AdExchangeSellerAccountsListResource,
+    AdExchangeSellerAccountsList (..),
+    newAdExchangeSellerAccountsList,
 
     -- ** adexchangeseller.accounts.metadata.dimensions.list
-    , AdExchangeSellerAccountsMetadataDimensionsListResource
-    , AdExchangeSellerAccountsMetadataDimensionsList (..)
-    , newAdExchangeSellerAccountsMetadataDimensionsList
+    AdExchangeSellerAccountsMetadataDimensionsListResource,
+    AdExchangeSellerAccountsMetadataDimensionsList (..),
+    newAdExchangeSellerAccountsMetadataDimensionsList,
 
     -- ** adexchangeseller.accounts.metadata.metrics.list
-    , AdExchangeSellerAccountsMetadataMetricsListResource
-    , AdExchangeSellerAccountsMetadataMetricsList (..)
-    , newAdExchangeSellerAccountsMetadataMetricsList
+    AdExchangeSellerAccountsMetadataMetricsListResource,
+    AdExchangeSellerAccountsMetadataMetricsList (..),
+    newAdExchangeSellerAccountsMetadataMetricsList,
 
     -- ** adexchangeseller.accounts.preferreddeals.get
-    , AdExchangeSellerAccountsPreferreddealsGetResource
-    , AdExchangeSellerAccountsPreferreddealsGet (..)
-    , newAdExchangeSellerAccountsPreferreddealsGet
+    AdExchangeSellerAccountsPreferreddealsGetResource,
+    AdExchangeSellerAccountsPreferreddealsGet (..),
+    newAdExchangeSellerAccountsPreferreddealsGet,
 
     -- ** adexchangeseller.accounts.preferreddeals.list
-    , AdExchangeSellerAccountsPreferreddealsListResource
-    , AdExchangeSellerAccountsPreferreddealsList (..)
-    , newAdExchangeSellerAccountsPreferreddealsList
+    AdExchangeSellerAccountsPreferreddealsListResource,
+    AdExchangeSellerAccountsPreferreddealsList (..),
+    newAdExchangeSellerAccountsPreferreddealsList,
 
     -- ** adexchangeseller.accounts.reports.generate
-    , AdExchangeSellerAccountsReportsGenerateResource
-    , AdExchangeSellerAccountsReportsGenerate (..)
-    , newAdExchangeSellerAccountsReportsGenerate
+    AdExchangeSellerAccountsReportsGenerateResource,
+    AdExchangeSellerAccountsReportsGenerate (..),
+    newAdExchangeSellerAccountsReportsGenerate,
 
     -- ** adexchangeseller.accounts.reports.saved.generate
-    , AdExchangeSellerAccountsReportsSavedGenerateResource
-    , AdExchangeSellerAccountsReportsSavedGenerate (..)
-    , newAdExchangeSellerAccountsReportsSavedGenerate
+    AdExchangeSellerAccountsReportsSavedGenerateResource,
+    AdExchangeSellerAccountsReportsSavedGenerate (..),
+    newAdExchangeSellerAccountsReportsSavedGenerate,
 
     -- ** adexchangeseller.accounts.reports.saved.list
-    , AdExchangeSellerAccountsReportsSavedListResource
-    , AdExchangeSellerAccountsReportsSavedList (..)
-    , newAdExchangeSellerAccountsReportsSavedList
+    AdExchangeSellerAccountsReportsSavedListResource,
+    AdExchangeSellerAccountsReportsSavedList (..),
+    newAdExchangeSellerAccountsReportsSavedList,
 
     -- ** adexchangeseller.accounts.urlchannels.list
-    , AdExchangeSellerAccountsUrlchannelsListResource
-    , AdExchangeSellerAccountsUrlchannelsList (..)
-    , newAdExchangeSellerAccountsUrlchannelsList
+    AdExchangeSellerAccountsUrlchannelsListResource,
+    AdExchangeSellerAccountsUrlchannelsList (..),
+    newAdExchangeSellerAccountsUrlchannelsList,
 
     -- * Types
 
     -- ** Account
-    , Account (..)
-    , newAccount
+    Account (..),
+    newAccount,
 
     -- ** Accounts
-    , Accounts (..)
-    , newAccounts
+    Accounts (..),
+    newAccounts,
 
     -- ** AdClient
-    , AdClient (..)
-    , newAdClient
+    AdClient (..),
+    newAdClient,
 
     -- ** AdClients
-    , AdClients (..)
-    , newAdClients
+    AdClients (..),
+    newAdClients,
 
     -- ** Alert
-    , Alert (..)
-    , newAlert
+    Alert (..),
+    newAlert,
 
     -- ** Alerts
-    , Alerts (..)
-    , newAlerts
+    Alerts (..),
+    newAlerts,
 
     -- ** CustomChannel
-    , CustomChannel (..)
-    , newCustomChannel
+    CustomChannel (..),
+    newCustomChannel,
 
     -- ** CustomChannel_TargetingInfo
-    , CustomChannel_TargetingInfo (..)
-    , newCustomChannel_TargetingInfo
+    CustomChannel_TargetingInfo (..),
+    newCustomChannel_TargetingInfo,
 
     -- ** CustomChannels
-    , CustomChannels (..)
-    , newCustomChannels
+    CustomChannels (..),
+    newCustomChannels,
 
     -- ** Metadata
-    , Metadata (..)
-    , newMetadata
+    Metadata (..),
+    newMetadata,
 
     -- ** PreferredDeal
-    , PreferredDeal (..)
-    , newPreferredDeal
+    PreferredDeal (..),
+    newPreferredDeal,
 
     -- ** PreferredDeals
-    , PreferredDeals (..)
-    , newPreferredDeals
+    PreferredDeals (..),
+    newPreferredDeals,
 
     -- ** Report
-    , Report (..)
-    , newReport
+    Report (..),
+    newReport,
 
     -- ** Report_HeadersItem
-    , Report_HeadersItem (..)
-    , newReport_HeadersItem
+    Report_HeadersItem (..),
+    newReport_HeadersItem,
 
     -- ** ReportingMetadataEntry
-    , ReportingMetadataEntry (..)
-    , newReportingMetadataEntry
+    ReportingMetadataEntry (..),
+    newReportingMetadataEntry,
 
     -- ** SavedReport
-    , SavedReport (..)
-    , newSavedReport
+    SavedReport (..),
+    newSavedReport,
 
     -- ** SavedReports
-    , SavedReports (..)
-    , newSavedReports
+    SavedReports (..),
+    newSavedReports,
 
     -- ** UrlChannel
-    , UrlChannel (..)
-    , newUrlChannel
+    UrlChannel (..),
+    newUrlChannel,
 
     -- ** UrlChannels
-    , UrlChannels (..)
-    , newUrlChannels
-    ) where
+    UrlChannels (..),
+    newUrlChannels,
+  )
+where
 
 import Gogol.AdExchangeSeller.Accounts.Adclients.List
 import Gogol.AdExchangeSeller.Accounts.Alerts.List

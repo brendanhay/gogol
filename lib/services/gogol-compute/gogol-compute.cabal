@@ -1,19 +1,24 @@
-cabal-version:         2.2
-name:                  gogol-compute
-version:               1.0.0
-synopsis:              Google Compute Engine SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-compute
+version:            1.0.0
+synopsis:           Google Compute Engine SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:
+  Brendan Hay <brendan.g.hay+gogol@gmail.com>, Toni Cebrián <toni@tonicebrian.com>
+
+copyright:          Copyright (c) 2015-2025 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    Creates and runs virtual machines on Google Cloud Platform.
+  Creates and runs virtual machines on Google Cloud Platform.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -27,822 +32,819 @@ source-repository head
   subdir:   gogol-compute
 
 flag field-selectors
-  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-  default: False
-  manual: True
+  description:
+    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+
+  default:     False
+  manual:      True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: GHC2021
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -Werror
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if !flag(field-selectors) && impl(ghc >= 9.2)
+  if (!flag(field-selectors) && impl(ghc >=9.2))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.Compute
-    , Gogol.Compute.AcceleratorTypes.AggregatedList
-    , Gogol.Compute.AcceleratorTypes.Get
-    , Gogol.Compute.AcceleratorTypes.List
-    , Gogol.Compute.Addresses.AggregatedList
-    , Gogol.Compute.Addresses.Delete
-    , Gogol.Compute.Addresses.Get
-    , Gogol.Compute.Addresses.Insert
-    , Gogol.Compute.Addresses.List
-    , Gogol.Compute.Addresses.Move
-    , Gogol.Compute.Addresses.SetLabels
-    , Gogol.Compute.Autoscalers.AggregatedList
-    , Gogol.Compute.Autoscalers.Delete
-    , Gogol.Compute.Autoscalers.Get
-    , Gogol.Compute.Autoscalers.Insert
-    , Gogol.Compute.Autoscalers.List
-    , Gogol.Compute.Autoscalers.Patch
-    , Gogol.Compute.Autoscalers.Update
-    , Gogol.Compute.BackendBuckets.AddSignedUrlKey
-    , Gogol.Compute.BackendBuckets.Delete
-    , Gogol.Compute.BackendBuckets.DeleteSignedUrlKey
-    , Gogol.Compute.BackendBuckets.Get
-    , Gogol.Compute.BackendBuckets.GetIamPolicy
-    , Gogol.Compute.BackendBuckets.Insert
-    , Gogol.Compute.BackendBuckets.List
-    , Gogol.Compute.BackendBuckets.Patch
-    , Gogol.Compute.BackendBuckets.SetEdgeSecurityPolicy
-    , Gogol.Compute.BackendBuckets.SetIamPolicy
-    , Gogol.Compute.BackendBuckets.TestIamPermissions
-    , Gogol.Compute.BackendBuckets.Update
-    , Gogol.Compute.BackendServices.AddSignedUrlKey
-    , Gogol.Compute.BackendServices.AggregatedList
-    , Gogol.Compute.BackendServices.Delete
-    , Gogol.Compute.BackendServices.DeleteSignedUrlKey
-    , Gogol.Compute.BackendServices.Get
-    , Gogol.Compute.BackendServices.GetHealth
-    , Gogol.Compute.BackendServices.GetIamPolicy
-    , Gogol.Compute.BackendServices.Insert
-    , Gogol.Compute.BackendServices.List
-    , Gogol.Compute.BackendServices.ListUsable
-    , Gogol.Compute.BackendServices.Patch
-    , Gogol.Compute.BackendServices.SetEdgeSecurityPolicy
-    , Gogol.Compute.BackendServices.SetIamPolicy
-    , Gogol.Compute.BackendServices.SetSecurityPolicy
-    , Gogol.Compute.BackendServices.TestIamPermissions
-    , Gogol.Compute.BackendServices.Update
-    , Gogol.Compute.DiskTypes.AggregatedList
-    , Gogol.Compute.DiskTypes.Get
-    , Gogol.Compute.DiskTypes.List
-    , Gogol.Compute.Disks.AddResourcePolicies
-    , Gogol.Compute.Disks.AggregatedList
-    , Gogol.Compute.Disks.BulkInsert
-    , Gogol.Compute.Disks.CreateSnapshot
-    , Gogol.Compute.Disks.Delete
-    , Gogol.Compute.Disks.Get
-    , Gogol.Compute.Disks.GetIamPolicy
-    , Gogol.Compute.Disks.Insert
-    , Gogol.Compute.Disks.List
-    , Gogol.Compute.Disks.RemoveResourcePolicies
-    , Gogol.Compute.Disks.Resize
-    , Gogol.Compute.Disks.SetIamPolicy
-    , Gogol.Compute.Disks.SetLabels
-    , Gogol.Compute.Disks.StartAsyncReplication
-    , Gogol.Compute.Disks.StopAsyncReplication
-    , Gogol.Compute.Disks.StopGroupAsyncReplication
-    , Gogol.Compute.Disks.TestIamPermissions
-    , Gogol.Compute.Disks.Update
-    , Gogol.Compute.ExternalVpnGateways.Delete
-    , Gogol.Compute.ExternalVpnGateways.Get
-    , Gogol.Compute.ExternalVpnGateways.Insert
-    , Gogol.Compute.ExternalVpnGateways.List
-    , Gogol.Compute.ExternalVpnGateways.SetLabels
-    , Gogol.Compute.ExternalVpnGateways.TestIamPermissions
-    , Gogol.Compute.FirewallPolicies.AddAssociation
-    , Gogol.Compute.FirewallPolicies.AddRule
-    , Gogol.Compute.FirewallPolicies.CloneRules
-    , Gogol.Compute.FirewallPolicies.Delete
-    , Gogol.Compute.FirewallPolicies.Get
-    , Gogol.Compute.FirewallPolicies.GetAssociation
-    , Gogol.Compute.FirewallPolicies.GetIamPolicy
-    , Gogol.Compute.FirewallPolicies.GetRule
-    , Gogol.Compute.FirewallPolicies.Insert
-    , Gogol.Compute.FirewallPolicies.List
-    , Gogol.Compute.FirewallPolicies.ListAssociations
-    , Gogol.Compute.FirewallPolicies.Move
-    , Gogol.Compute.FirewallPolicies.Patch
-    , Gogol.Compute.FirewallPolicies.PatchRule
-    , Gogol.Compute.FirewallPolicies.RemoveAssociation
-    , Gogol.Compute.FirewallPolicies.RemoveRule
-    , Gogol.Compute.FirewallPolicies.SetIamPolicy
-    , Gogol.Compute.FirewallPolicies.TestIamPermissions
-    , Gogol.Compute.Firewalls.Delete
-    , Gogol.Compute.Firewalls.Get
-    , Gogol.Compute.Firewalls.Insert
-    , Gogol.Compute.Firewalls.List
-    , Gogol.Compute.Firewalls.Patch
-    , Gogol.Compute.Firewalls.Update
-    , Gogol.Compute.ForwardingRules.AggregatedList
-    , Gogol.Compute.ForwardingRules.Delete
-    , Gogol.Compute.ForwardingRules.Get
-    , Gogol.Compute.ForwardingRules.Insert
-    , Gogol.Compute.ForwardingRules.List
-    , Gogol.Compute.ForwardingRules.Patch
-    , Gogol.Compute.ForwardingRules.SetLabels
-    , Gogol.Compute.ForwardingRules.SetTarget
-    , Gogol.Compute.GlobalAddresses.Delete
-    , Gogol.Compute.GlobalAddresses.Get
-    , Gogol.Compute.GlobalAddresses.Insert
-    , Gogol.Compute.GlobalAddresses.List
-    , Gogol.Compute.GlobalAddresses.Move
-    , Gogol.Compute.GlobalAddresses.SetLabels
-    , Gogol.Compute.GlobalForwardingRules.Delete
-    , Gogol.Compute.GlobalForwardingRules.Get
-    , Gogol.Compute.GlobalForwardingRules.Insert
-    , Gogol.Compute.GlobalForwardingRules.List
-    , Gogol.Compute.GlobalForwardingRules.Patch
-    , Gogol.Compute.GlobalForwardingRules.SetLabels
-    , Gogol.Compute.GlobalForwardingRules.SetTarget
-    , Gogol.Compute.GlobalNetworkEndpointGroups.AttachNetworkEndpoints
-    , Gogol.Compute.GlobalNetworkEndpointGroups.Delete
-    , Gogol.Compute.GlobalNetworkEndpointGroups.DetachNetworkEndpoints
-    , Gogol.Compute.GlobalNetworkEndpointGroups.Get
-    , Gogol.Compute.GlobalNetworkEndpointGroups.Insert
-    , Gogol.Compute.GlobalNetworkEndpointGroups.List
-    , Gogol.Compute.GlobalNetworkEndpointGroups.ListNetworkEndpoints
-    , Gogol.Compute.GlobalOperations.AggregatedList
-    , Gogol.Compute.GlobalOperations.Delete
-    , Gogol.Compute.GlobalOperations.Get
-    , Gogol.Compute.GlobalOperations.List
-    , Gogol.Compute.GlobalOperations.Wait
-    , Gogol.Compute.GlobalOrganizationOperations.Delete
-    , Gogol.Compute.GlobalOrganizationOperations.Get
-    , Gogol.Compute.GlobalOrganizationOperations.List
-    , Gogol.Compute.GlobalPublicDelegatedPrefixes.Delete
-    , Gogol.Compute.GlobalPublicDelegatedPrefixes.Get
-    , Gogol.Compute.GlobalPublicDelegatedPrefixes.Insert
-    , Gogol.Compute.GlobalPublicDelegatedPrefixes.List
-    , Gogol.Compute.GlobalPublicDelegatedPrefixes.Patch
-    , Gogol.Compute.HealthChecks.AggregatedList
-    , Gogol.Compute.HealthChecks.Delete
-    , Gogol.Compute.HealthChecks.Get
-    , Gogol.Compute.HealthChecks.Insert
-    , Gogol.Compute.HealthChecks.List
-    , Gogol.Compute.HealthChecks.Patch
-    , Gogol.Compute.HealthChecks.Update
-    , Gogol.Compute.HttpHealthChecks.Delete
-    , Gogol.Compute.HttpHealthChecks.Get
-    , Gogol.Compute.HttpHealthChecks.Insert
-    , Gogol.Compute.HttpHealthChecks.List
-    , Gogol.Compute.HttpHealthChecks.Patch
-    , Gogol.Compute.HttpHealthChecks.Update
-    , Gogol.Compute.HttpsHealthChecks.Delete
-    , Gogol.Compute.HttpsHealthChecks.Get
-    , Gogol.Compute.HttpsHealthChecks.Insert
-    , Gogol.Compute.HttpsHealthChecks.List
-    , Gogol.Compute.HttpsHealthChecks.Patch
-    , Gogol.Compute.HttpsHealthChecks.Update
-    , Gogol.Compute.ImageFamilyViews.Get
-    , Gogol.Compute.Images.Delete
-    , Gogol.Compute.Images.Deprecate
-    , Gogol.Compute.Images.Get
-    , Gogol.Compute.Images.GetFromFamily
-    , Gogol.Compute.Images.GetIamPolicy
-    , Gogol.Compute.Images.Insert
-    , Gogol.Compute.Images.List
-    , Gogol.Compute.Images.Patch
-    , Gogol.Compute.Images.SetIamPolicy
-    , Gogol.Compute.Images.SetLabels
-    , Gogol.Compute.Images.TestIamPermissions
-    , Gogol.Compute.InstanceGroupManagerResizeRequests.Cancel
-    , Gogol.Compute.InstanceGroupManagerResizeRequests.Delete
-    , Gogol.Compute.InstanceGroupManagerResizeRequests.Get
-    , Gogol.Compute.InstanceGroupManagerResizeRequests.Insert
-    , Gogol.Compute.InstanceGroupManagerResizeRequests.List
-    , Gogol.Compute.InstanceGroupManagers.AbandonInstances
-    , Gogol.Compute.InstanceGroupManagers.AggregatedList
-    , Gogol.Compute.InstanceGroupManagers.ApplyUpdatesToInstances
-    , Gogol.Compute.InstanceGroupManagers.CreateInstances
-    , Gogol.Compute.InstanceGroupManagers.Delete
-    , Gogol.Compute.InstanceGroupManagers.DeleteInstances
-    , Gogol.Compute.InstanceGroupManagers.DeletePerInstanceConfigs
-    , Gogol.Compute.InstanceGroupManagers.Get
-    , Gogol.Compute.InstanceGroupManagers.Insert
-    , Gogol.Compute.InstanceGroupManagers.List
-    , Gogol.Compute.InstanceGroupManagers.ListErrors
-    , Gogol.Compute.InstanceGroupManagers.ListManagedInstances
-    , Gogol.Compute.InstanceGroupManagers.ListPerInstanceConfigs
-    , Gogol.Compute.InstanceGroupManagers.Patch
-    , Gogol.Compute.InstanceGroupManagers.PatchPerInstanceConfigs
-    , Gogol.Compute.InstanceGroupManagers.RecreateInstances
-    , Gogol.Compute.InstanceGroupManagers.Resize
-    , Gogol.Compute.InstanceGroupManagers.ResumeInstances
-    , Gogol.Compute.InstanceGroupManagers.SetInstanceTemplate
-    , Gogol.Compute.InstanceGroupManagers.SetTargetPools
-    , Gogol.Compute.InstanceGroupManagers.StartInstances
-    , Gogol.Compute.InstanceGroupManagers.StopInstances
-    , Gogol.Compute.InstanceGroupManagers.SuspendInstances
-    , Gogol.Compute.InstanceGroupManagers.UpdatePerInstanceConfigs
-    , Gogol.Compute.InstanceGroups.AddInstances
-    , Gogol.Compute.InstanceGroups.AggregatedList
-    , Gogol.Compute.InstanceGroups.Delete
-    , Gogol.Compute.InstanceGroups.Get
-    , Gogol.Compute.InstanceGroups.Insert
-    , Gogol.Compute.InstanceGroups.List
-    , Gogol.Compute.InstanceGroups.ListInstances
-    , Gogol.Compute.InstanceGroups.RemoveInstances
-    , Gogol.Compute.InstanceGroups.SetNamedPorts
-    , Gogol.Compute.InstanceSettings.Get
-    , Gogol.Compute.InstanceSettings.Patch
-    , Gogol.Compute.InstanceTemplates.AggregatedList
-    , Gogol.Compute.InstanceTemplates.Delete
-    , Gogol.Compute.InstanceTemplates.Get
-    , Gogol.Compute.InstanceTemplates.GetIamPolicy
-    , Gogol.Compute.InstanceTemplates.Insert
-    , Gogol.Compute.InstanceTemplates.List
-    , Gogol.Compute.InstanceTemplates.SetIamPolicy
-    , Gogol.Compute.InstanceTemplates.TestIamPermissions
-    , Gogol.Compute.Instances.AddAccessConfig
-    , Gogol.Compute.Instances.AddResourcePolicies
-    , Gogol.Compute.Instances.AggregatedList
-    , Gogol.Compute.Instances.AttachDisk
-    , Gogol.Compute.Instances.BulkInsert
-    , Gogol.Compute.Instances.Delete
-    , Gogol.Compute.Instances.DeleteAccessConfig
-    , Gogol.Compute.Instances.DetachDisk
-    , Gogol.Compute.Instances.Get
-    , Gogol.Compute.Instances.GetEffectiveFirewalls
-    , Gogol.Compute.Instances.GetGuestAttributes
-    , Gogol.Compute.Instances.GetIamPolicy
-    , Gogol.Compute.Instances.GetScreenshot
-    , Gogol.Compute.Instances.GetSerialPortOutput
-    , Gogol.Compute.Instances.GetShieldedInstanceIdentity
-    , Gogol.Compute.Instances.Insert
-    , Gogol.Compute.Instances.List
-    , Gogol.Compute.Instances.ListReferrers
-    , Gogol.Compute.Instances.PerformMaintenance
-    , Gogol.Compute.Instances.RemoveResourcePolicies
-    , Gogol.Compute.Instances.Reset
-    , Gogol.Compute.Instances.Resume
-    , Gogol.Compute.Instances.SendDiagnosticInterrupt
-    , Gogol.Compute.Instances.SetDeletionProtection
-    , Gogol.Compute.Instances.SetDiskAutoDelete
-    , Gogol.Compute.Instances.SetIamPolicy
-    , Gogol.Compute.Instances.SetLabels
-    , Gogol.Compute.Instances.SetMachineResources
-    , Gogol.Compute.Instances.SetMachineType
-    , Gogol.Compute.Instances.SetMetadata
-    , Gogol.Compute.Instances.SetMinCpuPlatform
-    , Gogol.Compute.Instances.SetName
-    , Gogol.Compute.Instances.SetScheduling
-    , Gogol.Compute.Instances.SetSecurityPolicy
-    , Gogol.Compute.Instances.SetServiceAccount
-    , Gogol.Compute.Instances.SetShieldedInstanceIntegrityPolicy
-    , Gogol.Compute.Instances.SetTags
-    , Gogol.Compute.Instances.SimulateMaintenanceEvent
-    , Gogol.Compute.Instances.Start
-    , Gogol.Compute.Instances.StartWithEncryptionKey
-    , Gogol.Compute.Instances.Stop
-    , Gogol.Compute.Instances.Suspend
-    , Gogol.Compute.Instances.TestIamPermissions
-    , Gogol.Compute.Instances.Update
-    , Gogol.Compute.Instances.UpdateAccessConfig
-    , Gogol.Compute.Instances.UpdateDisplayDevice
-    , Gogol.Compute.Instances.UpdateNetworkInterface
-    , Gogol.Compute.Instances.UpdateShieldedInstanceConfig
-    , Gogol.Compute.InstantSnapshots.AggregatedList
-    , Gogol.Compute.InstantSnapshots.Delete
-    , Gogol.Compute.InstantSnapshots.Get
-    , Gogol.Compute.InstantSnapshots.GetIamPolicy
-    , Gogol.Compute.InstantSnapshots.Insert
-    , Gogol.Compute.InstantSnapshots.List
-    , Gogol.Compute.InstantSnapshots.SetIamPolicy
-    , Gogol.Compute.InstantSnapshots.SetLabels
-    , Gogol.Compute.InstantSnapshots.TestIamPermissions
-    , Gogol.Compute.InterconnectAttachments.AggregatedList
-    , Gogol.Compute.InterconnectAttachments.Delete
-    , Gogol.Compute.InterconnectAttachments.Get
-    , Gogol.Compute.InterconnectAttachments.Insert
-    , Gogol.Compute.InterconnectAttachments.List
-    , Gogol.Compute.InterconnectAttachments.Patch
-    , Gogol.Compute.InterconnectAttachments.SetLabels
-    , Gogol.Compute.InterconnectLocations.Get
-    , Gogol.Compute.InterconnectLocations.List
-    , Gogol.Compute.InterconnectRemoteLocations.Get
-    , Gogol.Compute.InterconnectRemoteLocations.List
-    , Gogol.Compute.Interconnects.Delete
-    , Gogol.Compute.Interconnects.Get
-    , Gogol.Compute.Interconnects.GetDiagnostics
-    , Gogol.Compute.Interconnects.GetMacsecConfig
-    , Gogol.Compute.Interconnects.Insert
-    , Gogol.Compute.Interconnects.List
-    , Gogol.Compute.Interconnects.Patch
-    , Gogol.Compute.Interconnects.SetLabels
-    , Gogol.Compute.LicenseCodes.Get
-    , Gogol.Compute.LicenseCodes.TestIamPermissions
-    , Gogol.Compute.Licenses.Delete
-    , Gogol.Compute.Licenses.Get
-    , Gogol.Compute.Licenses.GetIamPolicy
-    , Gogol.Compute.Licenses.Insert
-    , Gogol.Compute.Licenses.List
-    , Gogol.Compute.Licenses.SetIamPolicy
-    , Gogol.Compute.Licenses.TestIamPermissions
-    , Gogol.Compute.MachineImages.Delete
-    , Gogol.Compute.MachineImages.Get
-    , Gogol.Compute.MachineImages.GetIamPolicy
-    , Gogol.Compute.MachineImages.Insert
-    , Gogol.Compute.MachineImages.List
-    , Gogol.Compute.MachineImages.SetIamPolicy
-    , Gogol.Compute.MachineImages.TestIamPermissions
-    , Gogol.Compute.MachineTypes.AggregatedList
-    , Gogol.Compute.MachineTypes.Get
-    , Gogol.Compute.MachineTypes.List
-    , Gogol.Compute.NetworkAttachments.AggregatedList
-    , Gogol.Compute.NetworkAttachments.Delete
-    , Gogol.Compute.NetworkAttachments.Get
-    , Gogol.Compute.NetworkAttachments.GetIamPolicy
-    , Gogol.Compute.NetworkAttachments.Insert
-    , Gogol.Compute.NetworkAttachments.List
-    , Gogol.Compute.NetworkAttachments.Patch
-    , Gogol.Compute.NetworkAttachments.SetIamPolicy
-    , Gogol.Compute.NetworkAttachments.TestIamPermissions
-    , Gogol.Compute.NetworkEdgeSecurityServices.AggregatedList
-    , Gogol.Compute.NetworkEdgeSecurityServices.Delete
-    , Gogol.Compute.NetworkEdgeSecurityServices.Get
-    , Gogol.Compute.NetworkEdgeSecurityServices.Insert
-    , Gogol.Compute.NetworkEdgeSecurityServices.Patch
-    , Gogol.Compute.NetworkEndpointGroups.AggregatedList
-    , Gogol.Compute.NetworkEndpointGroups.AttachNetworkEndpoints
-    , Gogol.Compute.NetworkEndpointGroups.Delete
-    , Gogol.Compute.NetworkEndpointGroups.DetachNetworkEndpoints
-    , Gogol.Compute.NetworkEndpointGroups.Get
-    , Gogol.Compute.NetworkEndpointGroups.Insert
-    , Gogol.Compute.NetworkEndpointGroups.List
-    , Gogol.Compute.NetworkEndpointGroups.ListNetworkEndpoints
-    , Gogol.Compute.NetworkEndpointGroups.TestIamPermissions
-    , Gogol.Compute.NetworkFirewallPolicies.AddAssociation
-    , Gogol.Compute.NetworkFirewallPolicies.AddRule
-    , Gogol.Compute.NetworkFirewallPolicies.CloneRules
-    , Gogol.Compute.NetworkFirewallPolicies.Delete
-    , Gogol.Compute.NetworkFirewallPolicies.Get
-    , Gogol.Compute.NetworkFirewallPolicies.GetAssociation
-    , Gogol.Compute.NetworkFirewallPolicies.GetIamPolicy
-    , Gogol.Compute.NetworkFirewallPolicies.GetRule
-    , Gogol.Compute.NetworkFirewallPolicies.Insert
-    , Gogol.Compute.NetworkFirewallPolicies.List
-    , Gogol.Compute.NetworkFirewallPolicies.Patch
-    , Gogol.Compute.NetworkFirewallPolicies.PatchRule
-    , Gogol.Compute.NetworkFirewallPolicies.RemoveAssociation
-    , Gogol.Compute.NetworkFirewallPolicies.RemoveRule
-    , Gogol.Compute.NetworkFirewallPolicies.SetIamPolicy
-    , Gogol.Compute.NetworkFirewallPolicies.TestIamPermissions
-    , Gogol.Compute.NetworkProfiles.Get
-    , Gogol.Compute.NetworkProfiles.List
-    , Gogol.Compute.Networks.AddPeering
-    , Gogol.Compute.Networks.Delete
-    , Gogol.Compute.Networks.Get
-    , Gogol.Compute.Networks.GetEffectiveFirewalls
-    , Gogol.Compute.Networks.Insert
-    , Gogol.Compute.Networks.List
-    , Gogol.Compute.Networks.ListPeeringRoutes
-    , Gogol.Compute.Networks.Patch
-    , Gogol.Compute.Networks.RemovePeering
-    , Gogol.Compute.Networks.SwitchToCustomMode
-    , Gogol.Compute.Networks.UpdatePeering
-    , Gogol.Compute.NodeGroups.AddNodes
-    , Gogol.Compute.NodeGroups.AggregatedList
-    , Gogol.Compute.NodeGroups.Delete
-    , Gogol.Compute.NodeGroups.DeleteNodes
-    , Gogol.Compute.NodeGroups.Get
-    , Gogol.Compute.NodeGroups.GetIamPolicy
-    , Gogol.Compute.NodeGroups.Insert
-    , Gogol.Compute.NodeGroups.List
-    , Gogol.Compute.NodeGroups.ListNodes
-    , Gogol.Compute.NodeGroups.Patch
-    , Gogol.Compute.NodeGroups.PerformMaintenance
-    , Gogol.Compute.NodeGroups.SetIamPolicy
-    , Gogol.Compute.NodeGroups.SetNodeTemplate
-    , Gogol.Compute.NodeGroups.SimulateMaintenanceEvent
-    , Gogol.Compute.NodeGroups.TestIamPermissions
-    , Gogol.Compute.NodeTemplates.AggregatedList
-    , Gogol.Compute.NodeTemplates.Delete
-    , Gogol.Compute.NodeTemplates.Get
-    , Gogol.Compute.NodeTemplates.GetIamPolicy
-    , Gogol.Compute.NodeTemplates.Insert
-    , Gogol.Compute.NodeTemplates.List
-    , Gogol.Compute.NodeTemplates.SetIamPolicy
-    , Gogol.Compute.NodeTemplates.TestIamPermissions
-    , Gogol.Compute.NodeTypes.AggregatedList
-    , Gogol.Compute.NodeTypes.Get
-    , Gogol.Compute.NodeTypes.List
-    , Gogol.Compute.PacketMirrorings.AggregatedList
-    , Gogol.Compute.PacketMirrorings.Delete
-    , Gogol.Compute.PacketMirrorings.Get
-    , Gogol.Compute.PacketMirrorings.Insert
-    , Gogol.Compute.PacketMirrorings.List
-    , Gogol.Compute.PacketMirrorings.Patch
-    , Gogol.Compute.PacketMirrorings.TestIamPermissions
-    , Gogol.Compute.Projects.DisableXpnHost
-    , Gogol.Compute.Projects.DisableXpnResource
-    , Gogol.Compute.Projects.EnableXpnHost
-    , Gogol.Compute.Projects.EnableXpnResource
-    , Gogol.Compute.Projects.Get
-    , Gogol.Compute.Projects.GetXpnHost
-    , Gogol.Compute.Projects.GetXpnResources
-    , Gogol.Compute.Projects.ListXpnHosts
-    , Gogol.Compute.Projects.MoveDisk
-    , Gogol.Compute.Projects.MoveInstance
-    , Gogol.Compute.Projects.SetCloudArmorTier
-    , Gogol.Compute.Projects.SetCommonInstanceMetadata
-    , Gogol.Compute.Projects.SetDefaultNetworkTier
-    , Gogol.Compute.Projects.SetUsageExportBucket
-    , Gogol.Compute.PublicAdvertisedPrefixes.Announce
-    , Gogol.Compute.PublicAdvertisedPrefixes.Delete
-    , Gogol.Compute.PublicAdvertisedPrefixes.Get
-    , Gogol.Compute.PublicAdvertisedPrefixes.Insert
-    , Gogol.Compute.PublicAdvertisedPrefixes.List
-    , Gogol.Compute.PublicAdvertisedPrefixes.Patch
-    , Gogol.Compute.PublicAdvertisedPrefixes.Withdraw
-    , Gogol.Compute.PublicDelegatedPrefixes.AggregatedList
-    , Gogol.Compute.PublicDelegatedPrefixes.Announce
-    , Gogol.Compute.PublicDelegatedPrefixes.Delete
-    , Gogol.Compute.PublicDelegatedPrefixes.Get
-    , Gogol.Compute.PublicDelegatedPrefixes.Insert
-    , Gogol.Compute.PublicDelegatedPrefixes.List
-    , Gogol.Compute.PublicDelegatedPrefixes.Patch
-    , Gogol.Compute.PublicDelegatedPrefixes.Withdraw
-    , Gogol.Compute.RegionAutoscalers.Delete
-    , Gogol.Compute.RegionAutoscalers.Get
-    , Gogol.Compute.RegionAutoscalers.Insert
-    , Gogol.Compute.RegionAutoscalers.List
-    , Gogol.Compute.RegionAutoscalers.Patch
-    , Gogol.Compute.RegionAutoscalers.Update
-    , Gogol.Compute.RegionBackendServices.Delete
-    , Gogol.Compute.RegionBackendServices.Get
-    , Gogol.Compute.RegionBackendServices.GetHealth
-    , Gogol.Compute.RegionBackendServices.GetIamPolicy
-    , Gogol.Compute.RegionBackendServices.Insert
-    , Gogol.Compute.RegionBackendServices.List
-    , Gogol.Compute.RegionBackendServices.ListUsable
-    , Gogol.Compute.RegionBackendServices.Patch
-    , Gogol.Compute.RegionBackendServices.SetIamPolicy
-    , Gogol.Compute.RegionBackendServices.SetSecurityPolicy
-    , Gogol.Compute.RegionBackendServices.TestIamPermissions
-    , Gogol.Compute.RegionBackendServices.Update
-    , Gogol.Compute.RegionCommitments.AggregatedList
-    , Gogol.Compute.RegionCommitments.Get
-    , Gogol.Compute.RegionCommitments.Insert
-    , Gogol.Compute.RegionCommitments.List
-    , Gogol.Compute.RegionCommitments.Update
-    , Gogol.Compute.RegionDiskTypes.Get
-    , Gogol.Compute.RegionDiskTypes.List
-    , Gogol.Compute.RegionDisks.AddResourcePolicies
-    , Gogol.Compute.RegionDisks.BulkInsert
-    , Gogol.Compute.RegionDisks.CreateSnapshot
-    , Gogol.Compute.RegionDisks.Delete
-    , Gogol.Compute.RegionDisks.Get
-    , Gogol.Compute.RegionDisks.GetIamPolicy
-    , Gogol.Compute.RegionDisks.Insert
-    , Gogol.Compute.RegionDisks.List
-    , Gogol.Compute.RegionDisks.RemoveResourcePolicies
-    , Gogol.Compute.RegionDisks.Resize
-    , Gogol.Compute.RegionDisks.SetIamPolicy
-    , Gogol.Compute.RegionDisks.SetLabels
-    , Gogol.Compute.RegionDisks.StartAsyncReplication
-    , Gogol.Compute.RegionDisks.StopAsyncReplication
-    , Gogol.Compute.RegionDisks.StopGroupAsyncReplication
-    , Gogol.Compute.RegionDisks.TestIamPermissions
-    , Gogol.Compute.RegionDisks.Update
-    , Gogol.Compute.RegionHealthCheckServices.Delete
-    , Gogol.Compute.RegionHealthCheckServices.Get
-    , Gogol.Compute.RegionHealthCheckServices.Insert
-    , Gogol.Compute.RegionHealthCheckServices.List
-    , Gogol.Compute.RegionHealthCheckServices.Patch
-    , Gogol.Compute.RegionHealthChecks.Delete
-    , Gogol.Compute.RegionHealthChecks.Get
-    , Gogol.Compute.RegionHealthChecks.Insert
-    , Gogol.Compute.RegionHealthChecks.List
-    , Gogol.Compute.RegionHealthChecks.Patch
-    , Gogol.Compute.RegionHealthChecks.Update
-    , Gogol.Compute.RegionInstanceGroupManagers.AbandonInstances
-    , Gogol.Compute.RegionInstanceGroupManagers.ApplyUpdatesToInstances
-    , Gogol.Compute.RegionInstanceGroupManagers.CreateInstances
-    , Gogol.Compute.RegionInstanceGroupManagers.Delete
-    , Gogol.Compute.RegionInstanceGroupManagers.DeleteInstances
-    , Gogol.Compute.RegionInstanceGroupManagers.DeletePerInstanceConfigs
-    , Gogol.Compute.RegionInstanceGroupManagers.Get
-    , Gogol.Compute.RegionInstanceGroupManagers.Insert
-    , Gogol.Compute.RegionInstanceGroupManagers.List
-    , Gogol.Compute.RegionInstanceGroupManagers.ListErrors
-    , Gogol.Compute.RegionInstanceGroupManagers.ListManagedInstances
-    , Gogol.Compute.RegionInstanceGroupManagers.ListPerInstanceConfigs
-    , Gogol.Compute.RegionInstanceGroupManagers.Patch
-    , Gogol.Compute.RegionInstanceGroupManagers.PatchPerInstanceConfigs
-    , Gogol.Compute.RegionInstanceGroupManagers.RecreateInstances
-    , Gogol.Compute.RegionInstanceGroupManagers.Resize
-    , Gogol.Compute.RegionInstanceGroupManagers.ResumeInstances
-    , Gogol.Compute.RegionInstanceGroupManagers.SetInstanceTemplate
-    , Gogol.Compute.RegionInstanceGroupManagers.SetTargetPools
-    , Gogol.Compute.RegionInstanceGroupManagers.StartInstances
-    , Gogol.Compute.RegionInstanceGroupManagers.StopInstances
-    , Gogol.Compute.RegionInstanceGroupManagers.SuspendInstances
-    , Gogol.Compute.RegionInstanceGroupManagers.UpdatePerInstanceConfigs
-    , Gogol.Compute.RegionInstanceGroups.Get
-    , Gogol.Compute.RegionInstanceGroups.List
-    , Gogol.Compute.RegionInstanceGroups.ListInstances
-    , Gogol.Compute.RegionInstanceGroups.SetNamedPorts
-    , Gogol.Compute.RegionInstanceTemplates.Delete
-    , Gogol.Compute.RegionInstanceTemplates.Get
-    , Gogol.Compute.RegionInstanceTemplates.Insert
-    , Gogol.Compute.RegionInstanceTemplates.List
-    , Gogol.Compute.RegionInstances.BulkInsert
-    , Gogol.Compute.RegionInstantSnapshots.Delete
-    , Gogol.Compute.RegionInstantSnapshots.Get
-    , Gogol.Compute.RegionInstantSnapshots.GetIamPolicy
-    , Gogol.Compute.RegionInstantSnapshots.Insert
-    , Gogol.Compute.RegionInstantSnapshots.List
-    , Gogol.Compute.RegionInstantSnapshots.SetIamPolicy
-    , Gogol.Compute.RegionInstantSnapshots.SetLabels
-    , Gogol.Compute.RegionInstantSnapshots.TestIamPermissions
-    , Gogol.Compute.RegionNetworkEndpointGroups.AttachNetworkEndpoints
-    , Gogol.Compute.RegionNetworkEndpointGroups.Delete
-    , Gogol.Compute.RegionNetworkEndpointGroups.DetachNetworkEndpoints
-    , Gogol.Compute.RegionNetworkEndpointGroups.Get
-    , Gogol.Compute.RegionNetworkEndpointGroups.Insert
-    , Gogol.Compute.RegionNetworkEndpointGroups.List
-    , Gogol.Compute.RegionNetworkEndpointGroups.ListNetworkEndpoints
-    , Gogol.Compute.RegionNetworkFirewallPolicies.AddAssociation
-    , Gogol.Compute.RegionNetworkFirewallPolicies.AddRule
-    , Gogol.Compute.RegionNetworkFirewallPolicies.CloneRules
-    , Gogol.Compute.RegionNetworkFirewallPolicies.Delete
-    , Gogol.Compute.RegionNetworkFirewallPolicies.Get
-    , Gogol.Compute.RegionNetworkFirewallPolicies.GetAssociation
-    , Gogol.Compute.RegionNetworkFirewallPolicies.GetEffectiveFirewalls
-    , Gogol.Compute.RegionNetworkFirewallPolicies.GetIamPolicy
-    , Gogol.Compute.RegionNetworkFirewallPolicies.GetRule
-    , Gogol.Compute.RegionNetworkFirewallPolicies.Insert
-    , Gogol.Compute.RegionNetworkFirewallPolicies.List
-    , Gogol.Compute.RegionNetworkFirewallPolicies.Patch
-    , Gogol.Compute.RegionNetworkFirewallPolicies.PatchRule
-    , Gogol.Compute.RegionNetworkFirewallPolicies.RemoveAssociation
-    , Gogol.Compute.RegionNetworkFirewallPolicies.RemoveRule
-    , Gogol.Compute.RegionNetworkFirewallPolicies.SetIamPolicy
-    , Gogol.Compute.RegionNetworkFirewallPolicies.TestIamPermissions
-    , Gogol.Compute.RegionNotificationEndpoints.Delete
-    , Gogol.Compute.RegionNotificationEndpoints.Get
-    , Gogol.Compute.RegionNotificationEndpoints.Insert
-    , Gogol.Compute.RegionNotificationEndpoints.List
-    , Gogol.Compute.RegionOperations.Delete
-    , Gogol.Compute.RegionOperations.Get
-    , Gogol.Compute.RegionOperations.List
-    , Gogol.Compute.RegionOperations.Wait
-    , Gogol.Compute.RegionSecurityPolicies.AddRule
-    , Gogol.Compute.RegionSecurityPolicies.Delete
-    , Gogol.Compute.RegionSecurityPolicies.Get
-    , Gogol.Compute.RegionSecurityPolicies.GetRule
-    , Gogol.Compute.RegionSecurityPolicies.Insert
-    , Gogol.Compute.RegionSecurityPolicies.List
-    , Gogol.Compute.RegionSecurityPolicies.Patch
-    , Gogol.Compute.RegionSecurityPolicies.PatchRule
-    , Gogol.Compute.RegionSecurityPolicies.RemoveRule
-    , Gogol.Compute.RegionSecurityPolicies.SetLabels
-    , Gogol.Compute.RegionSslCertificates.Delete
-    , Gogol.Compute.RegionSslCertificates.Get
-    , Gogol.Compute.RegionSslCertificates.Insert
-    , Gogol.Compute.RegionSslCertificates.List
-    , Gogol.Compute.RegionSslPolicies.Delete
-    , Gogol.Compute.RegionSslPolicies.Get
-    , Gogol.Compute.RegionSslPolicies.Insert
-    , Gogol.Compute.RegionSslPolicies.List
-    , Gogol.Compute.RegionSslPolicies.ListAvailableFeatures
-    , Gogol.Compute.RegionSslPolicies.Patch
-    , Gogol.Compute.RegionTargetHttpProxies.Delete
-    , Gogol.Compute.RegionTargetHttpProxies.Get
-    , Gogol.Compute.RegionTargetHttpProxies.Insert
-    , Gogol.Compute.RegionTargetHttpProxies.List
-    , Gogol.Compute.RegionTargetHttpProxies.SetUrlMap
-    , Gogol.Compute.RegionTargetHttpsProxies.Delete
-    , Gogol.Compute.RegionTargetHttpsProxies.Get
-    , Gogol.Compute.RegionTargetHttpsProxies.Insert
-    , Gogol.Compute.RegionTargetHttpsProxies.List
-    , Gogol.Compute.RegionTargetHttpsProxies.Patch
-    , Gogol.Compute.RegionTargetHttpsProxies.SetSslCertificates
-    , Gogol.Compute.RegionTargetHttpsProxies.SetUrlMap
-    , Gogol.Compute.RegionTargetTcpProxies.Delete
-    , Gogol.Compute.RegionTargetTcpProxies.Get
-    , Gogol.Compute.RegionTargetTcpProxies.Insert
-    , Gogol.Compute.RegionTargetTcpProxies.List
-    , Gogol.Compute.RegionUrlMaps.Delete
-    , Gogol.Compute.RegionUrlMaps.Get
-    , Gogol.Compute.RegionUrlMaps.Insert
-    , Gogol.Compute.RegionUrlMaps.List
-    , Gogol.Compute.RegionUrlMaps.Patch
-    , Gogol.Compute.RegionUrlMaps.Update
-    , Gogol.Compute.RegionUrlMaps.Validate
-    , Gogol.Compute.RegionZones.List
-    , Gogol.Compute.Regions.Get
-    , Gogol.Compute.Regions.List
-    , Gogol.Compute.Reservations.AggregatedList
-    , Gogol.Compute.Reservations.Delete
-    , Gogol.Compute.Reservations.Get
-    , Gogol.Compute.Reservations.GetIamPolicy
-    , Gogol.Compute.Reservations.Insert
-    , Gogol.Compute.Reservations.List
-    , Gogol.Compute.Reservations.Resize
-    , Gogol.Compute.Reservations.SetIamPolicy
-    , Gogol.Compute.Reservations.TestIamPermissions
-    , Gogol.Compute.Reservations.Update
-    , Gogol.Compute.ResourcePolicies.AggregatedList
-    , Gogol.Compute.ResourcePolicies.Delete
-    , Gogol.Compute.ResourcePolicies.Get
-    , Gogol.Compute.ResourcePolicies.GetIamPolicy
-    , Gogol.Compute.ResourcePolicies.Insert
-    , Gogol.Compute.ResourcePolicies.List
-    , Gogol.Compute.ResourcePolicies.Patch
-    , Gogol.Compute.ResourcePolicies.SetIamPolicy
-    , Gogol.Compute.ResourcePolicies.TestIamPermissions
-    , Gogol.Compute.Routers.AggregatedList
-    , Gogol.Compute.Routers.Delete
-    , Gogol.Compute.Routers.Get
-    , Gogol.Compute.Routers.GetNatIpInfo
-    , Gogol.Compute.Routers.GetNatMappingInfo
-    , Gogol.Compute.Routers.GetRouterStatus
-    , Gogol.Compute.Routers.Insert
-    , Gogol.Compute.Routers.List
-    , Gogol.Compute.Routers.Patch
-    , Gogol.Compute.Routers.Preview
-    , Gogol.Compute.Routers.Update
-    , Gogol.Compute.Routes.Delete
-    , Gogol.Compute.Routes.Get
-    , Gogol.Compute.Routes.Insert
-    , Gogol.Compute.Routes.List
-    , Gogol.Compute.SecurityPolicies.AddRule
-    , Gogol.Compute.SecurityPolicies.AggregatedList
-    , Gogol.Compute.SecurityPolicies.Delete
-    , Gogol.Compute.SecurityPolicies.Get
-    , Gogol.Compute.SecurityPolicies.GetRule
-    , Gogol.Compute.SecurityPolicies.Insert
-    , Gogol.Compute.SecurityPolicies.List
-    , Gogol.Compute.SecurityPolicies.ListPreconfiguredExpressionSets
-    , Gogol.Compute.SecurityPolicies.Patch
-    , Gogol.Compute.SecurityPolicies.PatchRule
-    , Gogol.Compute.SecurityPolicies.RemoveRule
-    , Gogol.Compute.SecurityPolicies.SetLabels
-    , Gogol.Compute.ServiceAttachments.AggregatedList
-    , Gogol.Compute.ServiceAttachments.Delete
-    , Gogol.Compute.ServiceAttachments.Get
-    , Gogol.Compute.ServiceAttachments.GetIamPolicy
-    , Gogol.Compute.ServiceAttachments.Insert
-    , Gogol.Compute.ServiceAttachments.List
-    , Gogol.Compute.ServiceAttachments.Patch
-    , Gogol.Compute.ServiceAttachments.SetIamPolicy
-    , Gogol.Compute.ServiceAttachments.TestIamPermissions
-    , Gogol.Compute.SnapshotSettings.Get
-    , Gogol.Compute.SnapshotSettings.Patch
-    , Gogol.Compute.Snapshots.Delete
-    , Gogol.Compute.Snapshots.Get
-    , Gogol.Compute.Snapshots.GetIamPolicy
-    , Gogol.Compute.Snapshots.Insert
-    , Gogol.Compute.Snapshots.List
-    , Gogol.Compute.Snapshots.SetIamPolicy
-    , Gogol.Compute.Snapshots.SetLabels
-    , Gogol.Compute.Snapshots.TestIamPermissions
-    , Gogol.Compute.SslCertificates.AggregatedList
-    , Gogol.Compute.SslCertificates.Delete
-    , Gogol.Compute.SslCertificates.Get
-    , Gogol.Compute.SslCertificates.Insert
-    , Gogol.Compute.SslCertificates.List
-    , Gogol.Compute.SslPolicies.AggregatedList
-    , Gogol.Compute.SslPolicies.Delete
-    , Gogol.Compute.SslPolicies.Get
-    , Gogol.Compute.SslPolicies.Insert
-    , Gogol.Compute.SslPolicies.List
-    , Gogol.Compute.SslPolicies.ListAvailableFeatures
-    , Gogol.Compute.SslPolicies.Patch
-    , Gogol.Compute.StoragePoolTypes.AggregatedList
-    , Gogol.Compute.StoragePoolTypes.Get
-    , Gogol.Compute.StoragePoolTypes.List
-    , Gogol.Compute.StoragePools.AggregatedList
-    , Gogol.Compute.StoragePools.Delete
-    , Gogol.Compute.StoragePools.Get
-    , Gogol.Compute.StoragePools.GetIamPolicy
-    , Gogol.Compute.StoragePools.Insert
-    , Gogol.Compute.StoragePools.List
-    , Gogol.Compute.StoragePools.ListDisks
-    , Gogol.Compute.StoragePools.SetIamPolicy
-    , Gogol.Compute.StoragePools.TestIamPermissions
-    , Gogol.Compute.StoragePools.Update
-    , Gogol.Compute.Subnetworks.AggregatedList
-    , Gogol.Compute.Subnetworks.Delete
-    , Gogol.Compute.Subnetworks.ExpandIpCidrRange
-    , Gogol.Compute.Subnetworks.Get
-    , Gogol.Compute.Subnetworks.GetIamPolicy
-    , Gogol.Compute.Subnetworks.Insert
-    , Gogol.Compute.Subnetworks.List
-    , Gogol.Compute.Subnetworks.ListUsable
-    , Gogol.Compute.Subnetworks.Patch
-    , Gogol.Compute.Subnetworks.SetIamPolicy
-    , Gogol.Compute.Subnetworks.SetPrivateIpGoogleAccess
-    , Gogol.Compute.Subnetworks.TestIamPermissions
-    , Gogol.Compute.TargetGrpcProxies.Delete
-    , Gogol.Compute.TargetGrpcProxies.Get
-    , Gogol.Compute.TargetGrpcProxies.Insert
-    , Gogol.Compute.TargetGrpcProxies.List
-    , Gogol.Compute.TargetGrpcProxies.Patch
-    , Gogol.Compute.TargetHttpProxies.AggregatedList
-    , Gogol.Compute.TargetHttpProxies.Delete
-    , Gogol.Compute.TargetHttpProxies.Get
-    , Gogol.Compute.TargetHttpProxies.Insert
-    , Gogol.Compute.TargetHttpProxies.List
-    , Gogol.Compute.TargetHttpProxies.Patch
-    , Gogol.Compute.TargetHttpProxies.SetUrlMap
-    , Gogol.Compute.TargetHttpsProxies.AggregatedList
-    , Gogol.Compute.TargetHttpsProxies.Delete
-    , Gogol.Compute.TargetHttpsProxies.Get
-    , Gogol.Compute.TargetHttpsProxies.Insert
-    , Gogol.Compute.TargetHttpsProxies.List
-    , Gogol.Compute.TargetHttpsProxies.Patch
-    , Gogol.Compute.TargetHttpsProxies.SetCertificateMap
-    , Gogol.Compute.TargetHttpsProxies.SetQuicOverride
-    , Gogol.Compute.TargetHttpsProxies.SetSslCertificates
-    , Gogol.Compute.TargetHttpsProxies.SetSslPolicy
-    , Gogol.Compute.TargetHttpsProxies.SetUrlMap
-    , Gogol.Compute.TargetInstances.AggregatedList
-    , Gogol.Compute.TargetInstances.Delete
-    , Gogol.Compute.TargetInstances.Get
-    , Gogol.Compute.TargetInstances.Insert
-    , Gogol.Compute.TargetInstances.List
-    , Gogol.Compute.TargetInstances.SetSecurityPolicy
-    , Gogol.Compute.TargetPools.AddHealthCheck
-    , Gogol.Compute.TargetPools.AddInstance
-    , Gogol.Compute.TargetPools.AggregatedList
-    , Gogol.Compute.TargetPools.Delete
-    , Gogol.Compute.TargetPools.Get
-    , Gogol.Compute.TargetPools.GetHealth
-    , Gogol.Compute.TargetPools.Insert
-    , Gogol.Compute.TargetPools.List
-    , Gogol.Compute.TargetPools.RemoveHealthCheck
-    , Gogol.Compute.TargetPools.RemoveInstance
-    , Gogol.Compute.TargetPools.SetBackup
-    , Gogol.Compute.TargetPools.SetSecurityPolicy
-    , Gogol.Compute.TargetSslProxies.Delete
-    , Gogol.Compute.TargetSslProxies.Get
-    , Gogol.Compute.TargetSslProxies.Insert
-    , Gogol.Compute.TargetSslProxies.List
-    , Gogol.Compute.TargetSslProxies.SetBackendService
-    , Gogol.Compute.TargetSslProxies.SetCertificateMap
-    , Gogol.Compute.TargetSslProxies.SetProxyHeader
-    , Gogol.Compute.TargetSslProxies.SetSslCertificates
-    , Gogol.Compute.TargetSslProxies.SetSslPolicy
-    , Gogol.Compute.TargetTcpProxies.AggregatedList
-    , Gogol.Compute.TargetTcpProxies.Delete
-    , Gogol.Compute.TargetTcpProxies.Get
-    , Gogol.Compute.TargetTcpProxies.Insert
-    , Gogol.Compute.TargetTcpProxies.List
-    , Gogol.Compute.TargetTcpProxies.SetBackendService
-    , Gogol.Compute.TargetTcpProxies.SetProxyHeader
-    , Gogol.Compute.TargetVpnGateways.AggregatedList
-    , Gogol.Compute.TargetVpnGateways.Delete
-    , Gogol.Compute.TargetVpnGateways.Get
-    , Gogol.Compute.TargetVpnGateways.Insert
-    , Gogol.Compute.TargetVpnGateways.List
-    , Gogol.Compute.TargetVpnGateways.SetLabels
-    , Gogol.Compute.Types
-    , Gogol.Compute.UrlMaps.AggregatedList
-    , Gogol.Compute.UrlMaps.Delete
-    , Gogol.Compute.UrlMaps.Get
-    , Gogol.Compute.UrlMaps.Insert
-    , Gogol.Compute.UrlMaps.InvalidateCache
-    , Gogol.Compute.UrlMaps.List
-    , Gogol.Compute.UrlMaps.Patch
-    , Gogol.Compute.UrlMaps.Update
-    , Gogol.Compute.UrlMaps.Validate
-    , Gogol.Compute.VpnGateways.AggregatedList
-    , Gogol.Compute.VpnGateways.Delete
-    , Gogol.Compute.VpnGateways.Get
-    , Gogol.Compute.VpnGateways.GetStatus
-    , Gogol.Compute.VpnGateways.Insert
-    , Gogol.Compute.VpnGateways.List
-    , Gogol.Compute.VpnGateways.SetLabels
-    , Gogol.Compute.VpnGateways.TestIamPermissions
-    , Gogol.Compute.VpnTunnels.AggregatedList
-    , Gogol.Compute.VpnTunnels.Delete
-    , Gogol.Compute.VpnTunnels.Get
-    , Gogol.Compute.VpnTunnels.Insert
-    , Gogol.Compute.VpnTunnels.List
-    , Gogol.Compute.VpnTunnels.SetLabels
-    , Gogol.Compute.ZoneOperations.Delete
-    , Gogol.Compute.ZoneOperations.Get
-    , Gogol.Compute.ZoneOperations.List
-    , Gogol.Compute.ZoneOperations.Wait
-    , Gogol.Compute.Zones.Get
-    , Gogol.Compute.Zones.List
+    Gogol.Compute
+    Gogol.Compute.AcceleratorTypes.AggregatedList
+    Gogol.Compute.AcceleratorTypes.Get
+    Gogol.Compute.AcceleratorTypes.List
+    Gogol.Compute.Addresses.AggregatedList
+    Gogol.Compute.Addresses.Delete
+    Gogol.Compute.Addresses.Get
+    Gogol.Compute.Addresses.Insert
+    Gogol.Compute.Addresses.List
+    Gogol.Compute.Addresses.Move
+    Gogol.Compute.Addresses.SetLabels
+    Gogol.Compute.Autoscalers.AggregatedList
+    Gogol.Compute.Autoscalers.Delete
+    Gogol.Compute.Autoscalers.Get
+    Gogol.Compute.Autoscalers.Insert
+    Gogol.Compute.Autoscalers.List
+    Gogol.Compute.Autoscalers.Patch
+    Gogol.Compute.Autoscalers.Update
+    Gogol.Compute.BackendBuckets.AddSignedUrlKey
+    Gogol.Compute.BackendBuckets.Delete
+    Gogol.Compute.BackendBuckets.DeleteSignedUrlKey
+    Gogol.Compute.BackendBuckets.Get
+    Gogol.Compute.BackendBuckets.GetIamPolicy
+    Gogol.Compute.BackendBuckets.Insert
+    Gogol.Compute.BackendBuckets.List
+    Gogol.Compute.BackendBuckets.Patch
+    Gogol.Compute.BackendBuckets.SetEdgeSecurityPolicy
+    Gogol.Compute.BackendBuckets.SetIamPolicy
+    Gogol.Compute.BackendBuckets.TestIamPermissions
+    Gogol.Compute.BackendBuckets.Update
+    Gogol.Compute.BackendServices.AddSignedUrlKey
+    Gogol.Compute.BackendServices.AggregatedList
+    Gogol.Compute.BackendServices.Delete
+    Gogol.Compute.BackendServices.DeleteSignedUrlKey
+    Gogol.Compute.BackendServices.Get
+    Gogol.Compute.BackendServices.GetHealth
+    Gogol.Compute.BackendServices.GetIamPolicy
+    Gogol.Compute.BackendServices.Insert
+    Gogol.Compute.BackendServices.List
+    Gogol.Compute.BackendServices.ListUsable
+    Gogol.Compute.BackendServices.Patch
+    Gogol.Compute.BackendServices.SetEdgeSecurityPolicy
+    Gogol.Compute.BackendServices.SetIamPolicy
+    Gogol.Compute.BackendServices.SetSecurityPolicy
+    Gogol.Compute.BackendServices.TestIamPermissions
+    Gogol.Compute.BackendServices.Update
+    Gogol.Compute.Disks.AddResourcePolicies
+    Gogol.Compute.Disks.AggregatedList
+    Gogol.Compute.Disks.BulkInsert
+    Gogol.Compute.Disks.CreateSnapshot
+    Gogol.Compute.Disks.Delete
+    Gogol.Compute.Disks.Get
+    Gogol.Compute.Disks.GetIamPolicy
+    Gogol.Compute.Disks.Insert
+    Gogol.Compute.Disks.List
+    Gogol.Compute.Disks.RemoveResourcePolicies
+    Gogol.Compute.Disks.Resize
+    Gogol.Compute.Disks.SetIamPolicy
+    Gogol.Compute.Disks.SetLabels
+    Gogol.Compute.Disks.StartAsyncReplication
+    Gogol.Compute.Disks.StopAsyncReplication
+    Gogol.Compute.Disks.StopGroupAsyncReplication
+    Gogol.Compute.Disks.TestIamPermissions
+    Gogol.Compute.Disks.Update
+    Gogol.Compute.DiskTypes.AggregatedList
+    Gogol.Compute.DiskTypes.Get
+    Gogol.Compute.DiskTypes.List
+    Gogol.Compute.ExternalVpnGateways.Delete
+    Gogol.Compute.ExternalVpnGateways.Get
+    Gogol.Compute.ExternalVpnGateways.Insert
+    Gogol.Compute.ExternalVpnGateways.List
+    Gogol.Compute.ExternalVpnGateways.SetLabels
+    Gogol.Compute.ExternalVpnGateways.TestIamPermissions
+    Gogol.Compute.FirewallPolicies.AddAssociation
+    Gogol.Compute.FirewallPolicies.AddRule
+    Gogol.Compute.FirewallPolicies.CloneRules
+    Gogol.Compute.FirewallPolicies.Delete
+    Gogol.Compute.FirewallPolicies.Get
+    Gogol.Compute.FirewallPolicies.GetAssociation
+    Gogol.Compute.FirewallPolicies.GetIamPolicy
+    Gogol.Compute.FirewallPolicies.GetRule
+    Gogol.Compute.FirewallPolicies.Insert
+    Gogol.Compute.FirewallPolicies.List
+    Gogol.Compute.FirewallPolicies.ListAssociations
+    Gogol.Compute.FirewallPolicies.Move
+    Gogol.Compute.FirewallPolicies.Patch
+    Gogol.Compute.FirewallPolicies.PatchRule
+    Gogol.Compute.FirewallPolicies.RemoveAssociation
+    Gogol.Compute.FirewallPolicies.RemoveRule
+    Gogol.Compute.FirewallPolicies.SetIamPolicy
+    Gogol.Compute.FirewallPolicies.TestIamPermissions
+    Gogol.Compute.Firewalls.Delete
+    Gogol.Compute.Firewalls.Get
+    Gogol.Compute.Firewalls.Insert
+    Gogol.Compute.Firewalls.List
+    Gogol.Compute.Firewalls.Patch
+    Gogol.Compute.Firewalls.Update
+    Gogol.Compute.ForwardingRules.AggregatedList
+    Gogol.Compute.ForwardingRules.Delete
+    Gogol.Compute.ForwardingRules.Get
+    Gogol.Compute.ForwardingRules.Insert
+    Gogol.Compute.ForwardingRules.List
+    Gogol.Compute.ForwardingRules.Patch
+    Gogol.Compute.ForwardingRules.SetLabels
+    Gogol.Compute.ForwardingRules.SetTarget
+    Gogol.Compute.GlobalAddresses.Delete
+    Gogol.Compute.GlobalAddresses.Get
+    Gogol.Compute.GlobalAddresses.Insert
+    Gogol.Compute.GlobalAddresses.List
+    Gogol.Compute.GlobalAddresses.Move
+    Gogol.Compute.GlobalAddresses.SetLabels
+    Gogol.Compute.GlobalForwardingRules.Delete
+    Gogol.Compute.GlobalForwardingRules.Get
+    Gogol.Compute.GlobalForwardingRules.Insert
+    Gogol.Compute.GlobalForwardingRules.List
+    Gogol.Compute.GlobalForwardingRules.Patch
+    Gogol.Compute.GlobalForwardingRules.SetLabels
+    Gogol.Compute.GlobalForwardingRules.SetTarget
+    Gogol.Compute.GlobalNetworkEndpointGroups.AttachNetworkEndpoints
+    Gogol.Compute.GlobalNetworkEndpointGroups.Delete
+    Gogol.Compute.GlobalNetworkEndpointGroups.DetachNetworkEndpoints
+    Gogol.Compute.GlobalNetworkEndpointGroups.Get
+    Gogol.Compute.GlobalNetworkEndpointGroups.Insert
+    Gogol.Compute.GlobalNetworkEndpointGroups.List
+    Gogol.Compute.GlobalNetworkEndpointGroups.ListNetworkEndpoints
+    Gogol.Compute.GlobalOperations.AggregatedList
+    Gogol.Compute.GlobalOperations.Delete
+    Gogol.Compute.GlobalOperations.Get
+    Gogol.Compute.GlobalOperations.List
+    Gogol.Compute.GlobalOperations.Wait
+    Gogol.Compute.GlobalOrganizationOperations.Delete
+    Gogol.Compute.GlobalOrganizationOperations.Get
+    Gogol.Compute.GlobalOrganizationOperations.List
+    Gogol.Compute.GlobalPublicDelegatedPrefixes.Delete
+    Gogol.Compute.GlobalPublicDelegatedPrefixes.Get
+    Gogol.Compute.GlobalPublicDelegatedPrefixes.Insert
+    Gogol.Compute.GlobalPublicDelegatedPrefixes.List
+    Gogol.Compute.GlobalPublicDelegatedPrefixes.Patch
+    Gogol.Compute.HealthChecks.AggregatedList
+    Gogol.Compute.HealthChecks.Delete
+    Gogol.Compute.HealthChecks.Get
+    Gogol.Compute.HealthChecks.Insert
+    Gogol.Compute.HealthChecks.List
+    Gogol.Compute.HealthChecks.Patch
+    Gogol.Compute.HealthChecks.Update
+    Gogol.Compute.HttpHealthChecks.Delete
+    Gogol.Compute.HttpHealthChecks.Get
+    Gogol.Compute.HttpHealthChecks.Insert
+    Gogol.Compute.HttpHealthChecks.List
+    Gogol.Compute.HttpHealthChecks.Patch
+    Gogol.Compute.HttpHealthChecks.Update
+    Gogol.Compute.HttpsHealthChecks.Delete
+    Gogol.Compute.HttpsHealthChecks.Get
+    Gogol.Compute.HttpsHealthChecks.Insert
+    Gogol.Compute.HttpsHealthChecks.List
+    Gogol.Compute.HttpsHealthChecks.Patch
+    Gogol.Compute.HttpsHealthChecks.Update
+    Gogol.Compute.ImageFamilyViews.Get
+    Gogol.Compute.Images.Delete
+    Gogol.Compute.Images.Deprecate
+    Gogol.Compute.Images.Get
+    Gogol.Compute.Images.GetFromFamily
+    Gogol.Compute.Images.GetIamPolicy
+    Gogol.Compute.Images.Insert
+    Gogol.Compute.Images.List
+    Gogol.Compute.Images.Patch
+    Gogol.Compute.Images.SetIamPolicy
+    Gogol.Compute.Images.SetLabels
+    Gogol.Compute.Images.TestIamPermissions
+    Gogol.Compute.InstanceGroupManagerResizeRequests.Cancel
+    Gogol.Compute.InstanceGroupManagerResizeRequests.Delete
+    Gogol.Compute.InstanceGroupManagerResizeRequests.Get
+    Gogol.Compute.InstanceGroupManagerResizeRequests.Insert
+    Gogol.Compute.InstanceGroupManagerResizeRequests.List
+    Gogol.Compute.InstanceGroupManagers.AbandonInstances
+    Gogol.Compute.InstanceGroupManagers.AggregatedList
+    Gogol.Compute.InstanceGroupManagers.ApplyUpdatesToInstances
+    Gogol.Compute.InstanceGroupManagers.CreateInstances
+    Gogol.Compute.InstanceGroupManagers.Delete
+    Gogol.Compute.InstanceGroupManagers.DeleteInstances
+    Gogol.Compute.InstanceGroupManagers.DeletePerInstanceConfigs
+    Gogol.Compute.InstanceGroupManagers.Get
+    Gogol.Compute.InstanceGroupManagers.Insert
+    Gogol.Compute.InstanceGroupManagers.List
+    Gogol.Compute.InstanceGroupManagers.ListErrors
+    Gogol.Compute.InstanceGroupManagers.ListManagedInstances
+    Gogol.Compute.InstanceGroupManagers.ListPerInstanceConfigs
+    Gogol.Compute.InstanceGroupManagers.Patch
+    Gogol.Compute.InstanceGroupManagers.PatchPerInstanceConfigs
+    Gogol.Compute.InstanceGroupManagers.RecreateInstances
+    Gogol.Compute.InstanceGroupManagers.Resize
+    Gogol.Compute.InstanceGroupManagers.ResumeInstances
+    Gogol.Compute.InstanceGroupManagers.SetInstanceTemplate
+    Gogol.Compute.InstanceGroupManagers.SetTargetPools
+    Gogol.Compute.InstanceGroupManagers.StartInstances
+    Gogol.Compute.InstanceGroupManagers.StopInstances
+    Gogol.Compute.InstanceGroupManagers.SuspendInstances
+    Gogol.Compute.InstanceGroupManagers.UpdatePerInstanceConfigs
+    Gogol.Compute.InstanceGroups.AddInstances
+    Gogol.Compute.InstanceGroups.AggregatedList
+    Gogol.Compute.InstanceGroups.Delete
+    Gogol.Compute.InstanceGroups.Get
+    Gogol.Compute.InstanceGroups.Insert
+    Gogol.Compute.InstanceGroups.List
+    Gogol.Compute.InstanceGroups.ListInstances
+    Gogol.Compute.InstanceGroups.RemoveInstances
+    Gogol.Compute.InstanceGroups.SetNamedPorts
+    Gogol.Compute.Instances.AddAccessConfig
+    Gogol.Compute.Instances.AddResourcePolicies
+    Gogol.Compute.Instances.AggregatedList
+    Gogol.Compute.Instances.AttachDisk
+    Gogol.Compute.Instances.BulkInsert
+    Gogol.Compute.Instances.Delete
+    Gogol.Compute.Instances.DeleteAccessConfig
+    Gogol.Compute.Instances.DetachDisk
+    Gogol.Compute.Instances.Get
+    Gogol.Compute.Instances.GetEffectiveFirewalls
+    Gogol.Compute.Instances.GetGuestAttributes
+    Gogol.Compute.Instances.GetIamPolicy
+    Gogol.Compute.Instances.GetScreenshot
+    Gogol.Compute.Instances.GetSerialPortOutput
+    Gogol.Compute.Instances.GetShieldedInstanceIdentity
+    Gogol.Compute.Instances.Insert
+    Gogol.Compute.Instances.List
+    Gogol.Compute.Instances.ListReferrers
+    Gogol.Compute.Instances.PerformMaintenance
+    Gogol.Compute.Instances.RemoveResourcePolicies
+    Gogol.Compute.Instances.Reset
+    Gogol.Compute.Instances.Resume
+    Gogol.Compute.Instances.SendDiagnosticInterrupt
+    Gogol.Compute.Instances.SetDeletionProtection
+    Gogol.Compute.Instances.SetDiskAutoDelete
+    Gogol.Compute.Instances.SetIamPolicy
+    Gogol.Compute.Instances.SetLabels
+    Gogol.Compute.Instances.SetMachineResources
+    Gogol.Compute.Instances.SetMachineType
+    Gogol.Compute.Instances.SetMetadata
+    Gogol.Compute.Instances.SetMinCpuPlatform
+    Gogol.Compute.Instances.SetName
+    Gogol.Compute.Instances.SetScheduling
+    Gogol.Compute.Instances.SetSecurityPolicy
+    Gogol.Compute.Instances.SetServiceAccount
+    Gogol.Compute.Instances.SetShieldedInstanceIntegrityPolicy
+    Gogol.Compute.Instances.SetTags
+    Gogol.Compute.Instances.SimulateMaintenanceEvent
+    Gogol.Compute.Instances.Start
+    Gogol.Compute.Instances.StartWithEncryptionKey
+    Gogol.Compute.Instances.Stop
+    Gogol.Compute.Instances.Suspend
+    Gogol.Compute.Instances.TestIamPermissions
+    Gogol.Compute.Instances.Update
+    Gogol.Compute.Instances.UpdateAccessConfig
+    Gogol.Compute.Instances.UpdateDisplayDevice
+    Gogol.Compute.Instances.UpdateNetworkInterface
+    Gogol.Compute.Instances.UpdateShieldedInstanceConfig
+    Gogol.Compute.InstanceSettings.Get
+    Gogol.Compute.InstanceSettings.Patch
+    Gogol.Compute.InstanceTemplates.AggregatedList
+    Gogol.Compute.InstanceTemplates.Delete
+    Gogol.Compute.InstanceTemplates.Get
+    Gogol.Compute.InstanceTemplates.GetIamPolicy
+    Gogol.Compute.InstanceTemplates.Insert
+    Gogol.Compute.InstanceTemplates.List
+    Gogol.Compute.InstanceTemplates.SetIamPolicy
+    Gogol.Compute.InstanceTemplates.TestIamPermissions
+    Gogol.Compute.InstantSnapshots.AggregatedList
+    Gogol.Compute.InstantSnapshots.Delete
+    Gogol.Compute.InstantSnapshots.Get
+    Gogol.Compute.InstantSnapshots.GetIamPolicy
+    Gogol.Compute.InstantSnapshots.Insert
+    Gogol.Compute.InstantSnapshots.List
+    Gogol.Compute.InstantSnapshots.SetIamPolicy
+    Gogol.Compute.InstantSnapshots.SetLabels
+    Gogol.Compute.InstantSnapshots.TestIamPermissions
+    Gogol.Compute.InterconnectAttachments.AggregatedList
+    Gogol.Compute.InterconnectAttachments.Delete
+    Gogol.Compute.InterconnectAttachments.Get
+    Gogol.Compute.InterconnectAttachments.Insert
+    Gogol.Compute.InterconnectAttachments.List
+    Gogol.Compute.InterconnectAttachments.Patch
+    Gogol.Compute.InterconnectAttachments.SetLabels
+    Gogol.Compute.InterconnectLocations.Get
+    Gogol.Compute.InterconnectLocations.List
+    Gogol.Compute.InterconnectRemoteLocations.Get
+    Gogol.Compute.InterconnectRemoteLocations.List
+    Gogol.Compute.Interconnects.Delete
+    Gogol.Compute.Interconnects.Get
+    Gogol.Compute.Interconnects.GetDiagnostics
+    Gogol.Compute.Interconnects.GetMacsecConfig
+    Gogol.Compute.Interconnects.Insert
+    Gogol.Compute.Interconnects.List
+    Gogol.Compute.Interconnects.Patch
+    Gogol.Compute.Interconnects.SetLabels
+    Gogol.Compute.LicenseCodes.Get
+    Gogol.Compute.LicenseCodes.TestIamPermissions
+    Gogol.Compute.Licenses.Delete
+    Gogol.Compute.Licenses.Get
+    Gogol.Compute.Licenses.GetIamPolicy
+    Gogol.Compute.Licenses.Insert
+    Gogol.Compute.Licenses.List
+    Gogol.Compute.Licenses.SetIamPolicy
+    Gogol.Compute.Licenses.TestIamPermissions
+    Gogol.Compute.MachineImages.Delete
+    Gogol.Compute.MachineImages.Get
+    Gogol.Compute.MachineImages.GetIamPolicy
+    Gogol.Compute.MachineImages.Insert
+    Gogol.Compute.MachineImages.List
+    Gogol.Compute.MachineImages.SetIamPolicy
+    Gogol.Compute.MachineImages.TestIamPermissions
+    Gogol.Compute.MachineTypes.AggregatedList
+    Gogol.Compute.MachineTypes.Get
+    Gogol.Compute.MachineTypes.List
+    Gogol.Compute.NetworkAttachments.AggregatedList
+    Gogol.Compute.NetworkAttachments.Delete
+    Gogol.Compute.NetworkAttachments.Get
+    Gogol.Compute.NetworkAttachments.GetIamPolicy
+    Gogol.Compute.NetworkAttachments.Insert
+    Gogol.Compute.NetworkAttachments.List
+    Gogol.Compute.NetworkAttachments.Patch
+    Gogol.Compute.NetworkAttachments.SetIamPolicy
+    Gogol.Compute.NetworkAttachments.TestIamPermissions
+    Gogol.Compute.NetworkEdgeSecurityServices.AggregatedList
+    Gogol.Compute.NetworkEdgeSecurityServices.Delete
+    Gogol.Compute.NetworkEdgeSecurityServices.Get
+    Gogol.Compute.NetworkEdgeSecurityServices.Insert
+    Gogol.Compute.NetworkEdgeSecurityServices.Patch
+    Gogol.Compute.NetworkEndpointGroups.AggregatedList
+    Gogol.Compute.NetworkEndpointGroups.AttachNetworkEndpoints
+    Gogol.Compute.NetworkEndpointGroups.Delete
+    Gogol.Compute.NetworkEndpointGroups.DetachNetworkEndpoints
+    Gogol.Compute.NetworkEndpointGroups.Get
+    Gogol.Compute.NetworkEndpointGroups.Insert
+    Gogol.Compute.NetworkEndpointGroups.List
+    Gogol.Compute.NetworkEndpointGroups.ListNetworkEndpoints
+    Gogol.Compute.NetworkEndpointGroups.TestIamPermissions
+    Gogol.Compute.NetworkFirewallPolicies.AddAssociation
+    Gogol.Compute.NetworkFirewallPolicies.AddRule
+    Gogol.Compute.NetworkFirewallPolicies.CloneRules
+    Gogol.Compute.NetworkFirewallPolicies.Delete
+    Gogol.Compute.NetworkFirewallPolicies.Get
+    Gogol.Compute.NetworkFirewallPolicies.GetAssociation
+    Gogol.Compute.NetworkFirewallPolicies.GetIamPolicy
+    Gogol.Compute.NetworkFirewallPolicies.GetRule
+    Gogol.Compute.NetworkFirewallPolicies.Insert
+    Gogol.Compute.NetworkFirewallPolicies.List
+    Gogol.Compute.NetworkFirewallPolicies.Patch
+    Gogol.Compute.NetworkFirewallPolicies.PatchRule
+    Gogol.Compute.NetworkFirewallPolicies.RemoveAssociation
+    Gogol.Compute.NetworkFirewallPolicies.RemoveRule
+    Gogol.Compute.NetworkFirewallPolicies.SetIamPolicy
+    Gogol.Compute.NetworkFirewallPolicies.TestIamPermissions
+    Gogol.Compute.NetworkProfiles.Get
+    Gogol.Compute.NetworkProfiles.List
+    Gogol.Compute.Networks.AddPeering
+    Gogol.Compute.Networks.Delete
+    Gogol.Compute.Networks.Get
+    Gogol.Compute.Networks.GetEffectiveFirewalls
+    Gogol.Compute.Networks.Insert
+    Gogol.Compute.Networks.List
+    Gogol.Compute.Networks.ListPeeringRoutes
+    Gogol.Compute.Networks.Patch
+    Gogol.Compute.Networks.RemovePeering
+    Gogol.Compute.Networks.SwitchToCustomMode
+    Gogol.Compute.Networks.UpdatePeering
+    Gogol.Compute.NodeGroups.AddNodes
+    Gogol.Compute.NodeGroups.AggregatedList
+    Gogol.Compute.NodeGroups.Delete
+    Gogol.Compute.NodeGroups.DeleteNodes
+    Gogol.Compute.NodeGroups.Get
+    Gogol.Compute.NodeGroups.GetIamPolicy
+    Gogol.Compute.NodeGroups.Insert
+    Gogol.Compute.NodeGroups.List
+    Gogol.Compute.NodeGroups.ListNodes
+    Gogol.Compute.NodeGroups.Patch
+    Gogol.Compute.NodeGroups.PerformMaintenance
+    Gogol.Compute.NodeGroups.SetIamPolicy
+    Gogol.Compute.NodeGroups.SetNodeTemplate
+    Gogol.Compute.NodeGroups.SimulateMaintenanceEvent
+    Gogol.Compute.NodeGroups.TestIamPermissions
+    Gogol.Compute.NodeTemplates.AggregatedList
+    Gogol.Compute.NodeTemplates.Delete
+    Gogol.Compute.NodeTemplates.Get
+    Gogol.Compute.NodeTemplates.GetIamPolicy
+    Gogol.Compute.NodeTemplates.Insert
+    Gogol.Compute.NodeTemplates.List
+    Gogol.Compute.NodeTemplates.SetIamPolicy
+    Gogol.Compute.NodeTemplates.TestIamPermissions
+    Gogol.Compute.NodeTypes.AggregatedList
+    Gogol.Compute.NodeTypes.Get
+    Gogol.Compute.NodeTypes.List
+    Gogol.Compute.PacketMirrorings.AggregatedList
+    Gogol.Compute.PacketMirrorings.Delete
+    Gogol.Compute.PacketMirrorings.Get
+    Gogol.Compute.PacketMirrorings.Insert
+    Gogol.Compute.PacketMirrorings.List
+    Gogol.Compute.PacketMirrorings.Patch
+    Gogol.Compute.PacketMirrorings.TestIamPermissions
+    Gogol.Compute.Projects.DisableXpnHost
+    Gogol.Compute.Projects.DisableXpnResource
+    Gogol.Compute.Projects.EnableXpnHost
+    Gogol.Compute.Projects.EnableXpnResource
+    Gogol.Compute.Projects.Get
+    Gogol.Compute.Projects.GetXpnHost
+    Gogol.Compute.Projects.GetXpnResources
+    Gogol.Compute.Projects.ListXpnHosts
+    Gogol.Compute.Projects.MoveDisk
+    Gogol.Compute.Projects.MoveInstance
+    Gogol.Compute.Projects.SetCloudArmorTier
+    Gogol.Compute.Projects.SetCommonInstanceMetadata
+    Gogol.Compute.Projects.SetDefaultNetworkTier
+    Gogol.Compute.Projects.SetUsageExportBucket
+    Gogol.Compute.PublicAdvertisedPrefixes.Announce
+    Gogol.Compute.PublicAdvertisedPrefixes.Delete
+    Gogol.Compute.PublicAdvertisedPrefixes.Get
+    Gogol.Compute.PublicAdvertisedPrefixes.Insert
+    Gogol.Compute.PublicAdvertisedPrefixes.List
+    Gogol.Compute.PublicAdvertisedPrefixes.Patch
+    Gogol.Compute.PublicAdvertisedPrefixes.Withdraw
+    Gogol.Compute.PublicDelegatedPrefixes.AggregatedList
+    Gogol.Compute.PublicDelegatedPrefixes.Announce
+    Gogol.Compute.PublicDelegatedPrefixes.Delete
+    Gogol.Compute.PublicDelegatedPrefixes.Get
+    Gogol.Compute.PublicDelegatedPrefixes.Insert
+    Gogol.Compute.PublicDelegatedPrefixes.List
+    Gogol.Compute.PublicDelegatedPrefixes.Patch
+    Gogol.Compute.PublicDelegatedPrefixes.Withdraw
+    Gogol.Compute.RegionAutoscalers.Delete
+    Gogol.Compute.RegionAutoscalers.Get
+    Gogol.Compute.RegionAutoscalers.Insert
+    Gogol.Compute.RegionAutoscalers.List
+    Gogol.Compute.RegionAutoscalers.Patch
+    Gogol.Compute.RegionAutoscalers.Update
+    Gogol.Compute.RegionBackendServices.Delete
+    Gogol.Compute.RegionBackendServices.Get
+    Gogol.Compute.RegionBackendServices.GetHealth
+    Gogol.Compute.RegionBackendServices.GetIamPolicy
+    Gogol.Compute.RegionBackendServices.Insert
+    Gogol.Compute.RegionBackendServices.List
+    Gogol.Compute.RegionBackendServices.ListUsable
+    Gogol.Compute.RegionBackendServices.Patch
+    Gogol.Compute.RegionBackendServices.SetIamPolicy
+    Gogol.Compute.RegionBackendServices.SetSecurityPolicy
+    Gogol.Compute.RegionBackendServices.TestIamPermissions
+    Gogol.Compute.RegionBackendServices.Update
+    Gogol.Compute.RegionCommitments.AggregatedList
+    Gogol.Compute.RegionCommitments.Get
+    Gogol.Compute.RegionCommitments.Insert
+    Gogol.Compute.RegionCommitments.List
+    Gogol.Compute.RegionCommitments.Update
+    Gogol.Compute.RegionDisks.AddResourcePolicies
+    Gogol.Compute.RegionDisks.BulkInsert
+    Gogol.Compute.RegionDisks.CreateSnapshot
+    Gogol.Compute.RegionDisks.Delete
+    Gogol.Compute.RegionDisks.Get
+    Gogol.Compute.RegionDisks.GetIamPolicy
+    Gogol.Compute.RegionDisks.Insert
+    Gogol.Compute.RegionDisks.List
+    Gogol.Compute.RegionDisks.RemoveResourcePolicies
+    Gogol.Compute.RegionDisks.Resize
+    Gogol.Compute.RegionDisks.SetIamPolicy
+    Gogol.Compute.RegionDisks.SetLabels
+    Gogol.Compute.RegionDisks.StartAsyncReplication
+    Gogol.Compute.RegionDisks.StopAsyncReplication
+    Gogol.Compute.RegionDisks.StopGroupAsyncReplication
+    Gogol.Compute.RegionDisks.TestIamPermissions
+    Gogol.Compute.RegionDisks.Update
+    Gogol.Compute.RegionDiskTypes.Get
+    Gogol.Compute.RegionDiskTypes.List
+    Gogol.Compute.RegionHealthChecks.Delete
+    Gogol.Compute.RegionHealthChecks.Get
+    Gogol.Compute.RegionHealthChecks.Insert
+    Gogol.Compute.RegionHealthChecks.List
+    Gogol.Compute.RegionHealthChecks.Patch
+    Gogol.Compute.RegionHealthChecks.Update
+    Gogol.Compute.RegionHealthCheckServices.Delete
+    Gogol.Compute.RegionHealthCheckServices.Get
+    Gogol.Compute.RegionHealthCheckServices.Insert
+    Gogol.Compute.RegionHealthCheckServices.List
+    Gogol.Compute.RegionHealthCheckServices.Patch
+    Gogol.Compute.RegionInstanceGroupManagers.AbandonInstances
+    Gogol.Compute.RegionInstanceGroupManagers.ApplyUpdatesToInstances
+    Gogol.Compute.RegionInstanceGroupManagers.CreateInstances
+    Gogol.Compute.RegionInstanceGroupManagers.Delete
+    Gogol.Compute.RegionInstanceGroupManagers.DeleteInstances
+    Gogol.Compute.RegionInstanceGroupManagers.DeletePerInstanceConfigs
+    Gogol.Compute.RegionInstanceGroupManagers.Get
+    Gogol.Compute.RegionInstanceGroupManagers.Insert
+    Gogol.Compute.RegionInstanceGroupManagers.List
+    Gogol.Compute.RegionInstanceGroupManagers.ListErrors
+    Gogol.Compute.RegionInstanceGroupManagers.ListManagedInstances
+    Gogol.Compute.RegionInstanceGroupManagers.ListPerInstanceConfigs
+    Gogol.Compute.RegionInstanceGroupManagers.Patch
+    Gogol.Compute.RegionInstanceGroupManagers.PatchPerInstanceConfigs
+    Gogol.Compute.RegionInstanceGroupManagers.RecreateInstances
+    Gogol.Compute.RegionInstanceGroupManagers.Resize
+    Gogol.Compute.RegionInstanceGroupManagers.ResumeInstances
+    Gogol.Compute.RegionInstanceGroupManagers.SetInstanceTemplate
+    Gogol.Compute.RegionInstanceGroupManagers.SetTargetPools
+    Gogol.Compute.RegionInstanceGroupManagers.StartInstances
+    Gogol.Compute.RegionInstanceGroupManagers.StopInstances
+    Gogol.Compute.RegionInstanceGroupManagers.SuspendInstances
+    Gogol.Compute.RegionInstanceGroupManagers.UpdatePerInstanceConfigs
+    Gogol.Compute.RegionInstanceGroups.Get
+    Gogol.Compute.RegionInstanceGroups.List
+    Gogol.Compute.RegionInstanceGroups.ListInstances
+    Gogol.Compute.RegionInstanceGroups.SetNamedPorts
+    Gogol.Compute.RegionInstances.BulkInsert
+    Gogol.Compute.RegionInstanceTemplates.Delete
+    Gogol.Compute.RegionInstanceTemplates.Get
+    Gogol.Compute.RegionInstanceTemplates.Insert
+    Gogol.Compute.RegionInstanceTemplates.List
+    Gogol.Compute.RegionInstantSnapshots.Delete
+    Gogol.Compute.RegionInstantSnapshots.Get
+    Gogol.Compute.RegionInstantSnapshots.GetIamPolicy
+    Gogol.Compute.RegionInstantSnapshots.Insert
+    Gogol.Compute.RegionInstantSnapshots.List
+    Gogol.Compute.RegionInstantSnapshots.SetIamPolicy
+    Gogol.Compute.RegionInstantSnapshots.SetLabels
+    Gogol.Compute.RegionInstantSnapshots.TestIamPermissions
+    Gogol.Compute.RegionNetworkEndpointGroups.AttachNetworkEndpoints
+    Gogol.Compute.RegionNetworkEndpointGroups.Delete
+    Gogol.Compute.RegionNetworkEndpointGroups.DetachNetworkEndpoints
+    Gogol.Compute.RegionNetworkEndpointGroups.Get
+    Gogol.Compute.RegionNetworkEndpointGroups.Insert
+    Gogol.Compute.RegionNetworkEndpointGroups.List
+    Gogol.Compute.RegionNetworkEndpointGroups.ListNetworkEndpoints
+    Gogol.Compute.RegionNetworkFirewallPolicies.AddAssociation
+    Gogol.Compute.RegionNetworkFirewallPolicies.AddRule
+    Gogol.Compute.RegionNetworkFirewallPolicies.CloneRules
+    Gogol.Compute.RegionNetworkFirewallPolicies.Delete
+    Gogol.Compute.RegionNetworkFirewallPolicies.Get
+    Gogol.Compute.RegionNetworkFirewallPolicies.GetAssociation
+    Gogol.Compute.RegionNetworkFirewallPolicies.GetEffectiveFirewalls
+    Gogol.Compute.RegionNetworkFirewallPolicies.GetIamPolicy
+    Gogol.Compute.RegionNetworkFirewallPolicies.GetRule
+    Gogol.Compute.RegionNetworkFirewallPolicies.Insert
+    Gogol.Compute.RegionNetworkFirewallPolicies.List
+    Gogol.Compute.RegionNetworkFirewallPolicies.Patch
+    Gogol.Compute.RegionNetworkFirewallPolicies.PatchRule
+    Gogol.Compute.RegionNetworkFirewallPolicies.RemoveAssociation
+    Gogol.Compute.RegionNetworkFirewallPolicies.RemoveRule
+    Gogol.Compute.RegionNetworkFirewallPolicies.SetIamPolicy
+    Gogol.Compute.RegionNetworkFirewallPolicies.TestIamPermissions
+    Gogol.Compute.RegionNotificationEndpoints.Delete
+    Gogol.Compute.RegionNotificationEndpoints.Get
+    Gogol.Compute.RegionNotificationEndpoints.Insert
+    Gogol.Compute.RegionNotificationEndpoints.List
+    Gogol.Compute.RegionOperations.Delete
+    Gogol.Compute.RegionOperations.Get
+    Gogol.Compute.RegionOperations.List
+    Gogol.Compute.RegionOperations.Wait
+    Gogol.Compute.Regions.Get
+    Gogol.Compute.Regions.List
+    Gogol.Compute.RegionSecurityPolicies.AddRule
+    Gogol.Compute.RegionSecurityPolicies.Delete
+    Gogol.Compute.RegionSecurityPolicies.Get
+    Gogol.Compute.RegionSecurityPolicies.GetRule
+    Gogol.Compute.RegionSecurityPolicies.Insert
+    Gogol.Compute.RegionSecurityPolicies.List
+    Gogol.Compute.RegionSecurityPolicies.Patch
+    Gogol.Compute.RegionSecurityPolicies.PatchRule
+    Gogol.Compute.RegionSecurityPolicies.RemoveRule
+    Gogol.Compute.RegionSecurityPolicies.SetLabels
+    Gogol.Compute.RegionSslCertificates.Delete
+    Gogol.Compute.RegionSslCertificates.Get
+    Gogol.Compute.RegionSslCertificates.Insert
+    Gogol.Compute.RegionSslCertificates.List
+    Gogol.Compute.RegionSslPolicies.Delete
+    Gogol.Compute.RegionSslPolicies.Get
+    Gogol.Compute.RegionSslPolicies.Insert
+    Gogol.Compute.RegionSslPolicies.List
+    Gogol.Compute.RegionSslPolicies.ListAvailableFeatures
+    Gogol.Compute.RegionSslPolicies.Patch
+    Gogol.Compute.RegionTargetHttpProxies.Delete
+    Gogol.Compute.RegionTargetHttpProxies.Get
+    Gogol.Compute.RegionTargetHttpProxies.Insert
+    Gogol.Compute.RegionTargetHttpProxies.List
+    Gogol.Compute.RegionTargetHttpProxies.SetUrlMap
+    Gogol.Compute.RegionTargetHttpsProxies.Delete
+    Gogol.Compute.RegionTargetHttpsProxies.Get
+    Gogol.Compute.RegionTargetHttpsProxies.Insert
+    Gogol.Compute.RegionTargetHttpsProxies.List
+    Gogol.Compute.RegionTargetHttpsProxies.Patch
+    Gogol.Compute.RegionTargetHttpsProxies.SetSslCertificates
+    Gogol.Compute.RegionTargetHttpsProxies.SetUrlMap
+    Gogol.Compute.RegionTargetTcpProxies.Delete
+    Gogol.Compute.RegionTargetTcpProxies.Get
+    Gogol.Compute.RegionTargetTcpProxies.Insert
+    Gogol.Compute.RegionTargetTcpProxies.List
+    Gogol.Compute.RegionUrlMaps.Delete
+    Gogol.Compute.RegionUrlMaps.Get
+    Gogol.Compute.RegionUrlMaps.Insert
+    Gogol.Compute.RegionUrlMaps.List
+    Gogol.Compute.RegionUrlMaps.Patch
+    Gogol.Compute.RegionUrlMaps.Update
+    Gogol.Compute.RegionUrlMaps.Validate
+    Gogol.Compute.RegionZones.List
+    Gogol.Compute.Reservations.AggregatedList
+    Gogol.Compute.Reservations.Delete
+    Gogol.Compute.Reservations.Get
+    Gogol.Compute.Reservations.GetIamPolicy
+    Gogol.Compute.Reservations.Insert
+    Gogol.Compute.Reservations.List
+    Gogol.Compute.Reservations.Resize
+    Gogol.Compute.Reservations.SetIamPolicy
+    Gogol.Compute.Reservations.TestIamPermissions
+    Gogol.Compute.Reservations.Update
+    Gogol.Compute.ResourcePolicies.AggregatedList
+    Gogol.Compute.ResourcePolicies.Delete
+    Gogol.Compute.ResourcePolicies.Get
+    Gogol.Compute.ResourcePolicies.GetIamPolicy
+    Gogol.Compute.ResourcePolicies.Insert
+    Gogol.Compute.ResourcePolicies.List
+    Gogol.Compute.ResourcePolicies.Patch
+    Gogol.Compute.ResourcePolicies.SetIamPolicy
+    Gogol.Compute.ResourcePolicies.TestIamPermissions
+    Gogol.Compute.Routers.AggregatedList
+    Gogol.Compute.Routers.Delete
+    Gogol.Compute.Routers.Get
+    Gogol.Compute.Routers.GetNatIpInfo
+    Gogol.Compute.Routers.GetNatMappingInfo
+    Gogol.Compute.Routers.GetRouterStatus
+    Gogol.Compute.Routers.Insert
+    Gogol.Compute.Routers.List
+    Gogol.Compute.Routers.Patch
+    Gogol.Compute.Routers.Preview
+    Gogol.Compute.Routers.Update
+    Gogol.Compute.Routes.Delete
+    Gogol.Compute.Routes.Get
+    Gogol.Compute.Routes.Insert
+    Gogol.Compute.Routes.List
+    Gogol.Compute.SecurityPolicies.AddRule
+    Gogol.Compute.SecurityPolicies.AggregatedList
+    Gogol.Compute.SecurityPolicies.Delete
+    Gogol.Compute.SecurityPolicies.Get
+    Gogol.Compute.SecurityPolicies.GetRule
+    Gogol.Compute.SecurityPolicies.Insert
+    Gogol.Compute.SecurityPolicies.List
+    Gogol.Compute.SecurityPolicies.ListPreconfiguredExpressionSets
+    Gogol.Compute.SecurityPolicies.Patch
+    Gogol.Compute.SecurityPolicies.PatchRule
+    Gogol.Compute.SecurityPolicies.RemoveRule
+    Gogol.Compute.SecurityPolicies.SetLabels
+    Gogol.Compute.ServiceAttachments.AggregatedList
+    Gogol.Compute.ServiceAttachments.Delete
+    Gogol.Compute.ServiceAttachments.Get
+    Gogol.Compute.ServiceAttachments.GetIamPolicy
+    Gogol.Compute.ServiceAttachments.Insert
+    Gogol.Compute.ServiceAttachments.List
+    Gogol.Compute.ServiceAttachments.Patch
+    Gogol.Compute.ServiceAttachments.SetIamPolicy
+    Gogol.Compute.ServiceAttachments.TestIamPermissions
+    Gogol.Compute.Snapshots.Delete
+    Gogol.Compute.Snapshots.Get
+    Gogol.Compute.Snapshots.GetIamPolicy
+    Gogol.Compute.Snapshots.Insert
+    Gogol.Compute.Snapshots.List
+    Gogol.Compute.Snapshots.SetIamPolicy
+    Gogol.Compute.Snapshots.SetLabels
+    Gogol.Compute.Snapshots.TestIamPermissions
+    Gogol.Compute.SnapshotSettings.Get
+    Gogol.Compute.SnapshotSettings.Patch
+    Gogol.Compute.SslCertificates.AggregatedList
+    Gogol.Compute.SslCertificates.Delete
+    Gogol.Compute.SslCertificates.Get
+    Gogol.Compute.SslCertificates.Insert
+    Gogol.Compute.SslCertificates.List
+    Gogol.Compute.SslPolicies.AggregatedList
+    Gogol.Compute.SslPolicies.Delete
+    Gogol.Compute.SslPolicies.Get
+    Gogol.Compute.SslPolicies.Insert
+    Gogol.Compute.SslPolicies.List
+    Gogol.Compute.SslPolicies.ListAvailableFeatures
+    Gogol.Compute.SslPolicies.Patch
+    Gogol.Compute.StoragePools.AggregatedList
+    Gogol.Compute.StoragePools.Delete
+    Gogol.Compute.StoragePools.Get
+    Gogol.Compute.StoragePools.GetIamPolicy
+    Gogol.Compute.StoragePools.Insert
+    Gogol.Compute.StoragePools.List
+    Gogol.Compute.StoragePools.ListDisks
+    Gogol.Compute.StoragePools.SetIamPolicy
+    Gogol.Compute.StoragePools.TestIamPermissions
+    Gogol.Compute.StoragePools.Update
+    Gogol.Compute.StoragePoolTypes.AggregatedList
+    Gogol.Compute.StoragePoolTypes.Get
+    Gogol.Compute.StoragePoolTypes.List
+    Gogol.Compute.Subnetworks.AggregatedList
+    Gogol.Compute.Subnetworks.Delete
+    Gogol.Compute.Subnetworks.ExpandIpCidrRange
+    Gogol.Compute.Subnetworks.Get
+    Gogol.Compute.Subnetworks.GetIamPolicy
+    Gogol.Compute.Subnetworks.Insert
+    Gogol.Compute.Subnetworks.List
+    Gogol.Compute.Subnetworks.ListUsable
+    Gogol.Compute.Subnetworks.Patch
+    Gogol.Compute.Subnetworks.SetIamPolicy
+    Gogol.Compute.Subnetworks.SetPrivateIpGoogleAccess
+    Gogol.Compute.Subnetworks.TestIamPermissions
+    Gogol.Compute.TargetGrpcProxies.Delete
+    Gogol.Compute.TargetGrpcProxies.Get
+    Gogol.Compute.TargetGrpcProxies.Insert
+    Gogol.Compute.TargetGrpcProxies.List
+    Gogol.Compute.TargetGrpcProxies.Patch
+    Gogol.Compute.TargetHttpProxies.AggregatedList
+    Gogol.Compute.TargetHttpProxies.Delete
+    Gogol.Compute.TargetHttpProxies.Get
+    Gogol.Compute.TargetHttpProxies.Insert
+    Gogol.Compute.TargetHttpProxies.List
+    Gogol.Compute.TargetHttpProxies.Patch
+    Gogol.Compute.TargetHttpProxies.SetUrlMap
+    Gogol.Compute.TargetHttpsProxies.AggregatedList
+    Gogol.Compute.TargetHttpsProxies.Delete
+    Gogol.Compute.TargetHttpsProxies.Get
+    Gogol.Compute.TargetHttpsProxies.Insert
+    Gogol.Compute.TargetHttpsProxies.List
+    Gogol.Compute.TargetHttpsProxies.Patch
+    Gogol.Compute.TargetHttpsProxies.SetCertificateMap
+    Gogol.Compute.TargetHttpsProxies.SetQuicOverride
+    Gogol.Compute.TargetHttpsProxies.SetSslCertificates
+    Gogol.Compute.TargetHttpsProxies.SetSslPolicy
+    Gogol.Compute.TargetHttpsProxies.SetUrlMap
+    Gogol.Compute.TargetInstances.AggregatedList
+    Gogol.Compute.TargetInstances.Delete
+    Gogol.Compute.TargetInstances.Get
+    Gogol.Compute.TargetInstances.Insert
+    Gogol.Compute.TargetInstances.List
+    Gogol.Compute.TargetInstances.SetSecurityPolicy
+    Gogol.Compute.TargetPools.AddHealthCheck
+    Gogol.Compute.TargetPools.AddInstance
+    Gogol.Compute.TargetPools.AggregatedList
+    Gogol.Compute.TargetPools.Delete
+    Gogol.Compute.TargetPools.Get
+    Gogol.Compute.TargetPools.GetHealth
+    Gogol.Compute.TargetPools.Insert
+    Gogol.Compute.TargetPools.List
+    Gogol.Compute.TargetPools.RemoveHealthCheck
+    Gogol.Compute.TargetPools.RemoveInstance
+    Gogol.Compute.TargetPools.SetBackup
+    Gogol.Compute.TargetPools.SetSecurityPolicy
+    Gogol.Compute.TargetSslProxies.Delete
+    Gogol.Compute.TargetSslProxies.Get
+    Gogol.Compute.TargetSslProxies.Insert
+    Gogol.Compute.TargetSslProxies.List
+    Gogol.Compute.TargetSslProxies.SetBackendService
+    Gogol.Compute.TargetSslProxies.SetCertificateMap
+    Gogol.Compute.TargetSslProxies.SetProxyHeader
+    Gogol.Compute.TargetSslProxies.SetSslCertificates
+    Gogol.Compute.TargetSslProxies.SetSslPolicy
+    Gogol.Compute.TargetTcpProxies.AggregatedList
+    Gogol.Compute.TargetTcpProxies.Delete
+    Gogol.Compute.TargetTcpProxies.Get
+    Gogol.Compute.TargetTcpProxies.Insert
+    Gogol.Compute.TargetTcpProxies.List
+    Gogol.Compute.TargetTcpProxies.SetBackendService
+    Gogol.Compute.TargetTcpProxies.SetProxyHeader
+    Gogol.Compute.TargetVpnGateways.AggregatedList
+    Gogol.Compute.TargetVpnGateways.Delete
+    Gogol.Compute.TargetVpnGateways.Get
+    Gogol.Compute.TargetVpnGateways.Insert
+    Gogol.Compute.TargetVpnGateways.List
+    Gogol.Compute.TargetVpnGateways.SetLabels
+    Gogol.Compute.Types
+    Gogol.Compute.UrlMaps.AggregatedList
+    Gogol.Compute.UrlMaps.Delete
+    Gogol.Compute.UrlMaps.Get
+    Gogol.Compute.UrlMaps.Insert
+    Gogol.Compute.UrlMaps.InvalidateCache
+    Gogol.Compute.UrlMaps.List
+    Gogol.Compute.UrlMaps.Patch
+    Gogol.Compute.UrlMaps.Update
+    Gogol.Compute.UrlMaps.Validate
+    Gogol.Compute.VpnGateways.AggregatedList
+    Gogol.Compute.VpnGateways.Delete
+    Gogol.Compute.VpnGateways.Get
+    Gogol.Compute.VpnGateways.GetStatus
+    Gogol.Compute.VpnGateways.Insert
+    Gogol.Compute.VpnGateways.List
+    Gogol.Compute.VpnGateways.SetLabels
+    Gogol.Compute.VpnGateways.TestIamPermissions
+    Gogol.Compute.VpnTunnels.AggregatedList
+    Gogol.Compute.VpnTunnels.Delete
+    Gogol.Compute.VpnTunnels.Get
+    Gogol.Compute.VpnTunnels.Insert
+    Gogol.Compute.VpnTunnels.List
+    Gogol.Compute.VpnTunnels.SetLabels
+    Gogol.Compute.ZoneOperations.Delete
+    Gogol.Compute.ZoneOperations.Get
+    Gogol.Compute.ZoneOperations.List
+    Gogol.Compute.ZoneOperations.Wait
+    Gogol.Compute.Zones.Get
+    Gogol.Compute.Zones.List
 
   other-modules:
-      Gogol.Compute.Internal.Product
-    , Gogol.Compute.Internal.Sum
+    Gogol.Compute.Internal.Product
+    Gogol.Compute.Internal.Sum
 
-  build-depends:
-      gogol-core ^>= 1.0.0
+  build-depends:    gogol-core ^>=1.0.0

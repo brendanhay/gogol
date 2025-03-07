@@ -1,19 +1,24 @@
-cabal-version:         2.2
-name:                  gogol-adsense
-version:               1.0.0
-synopsis:              Google AdSense Management SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-adsense
+version:            1.0.0
+synopsis:           Google AdSense Management SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:
+  Brendan Hay <brendan.g.hay+gogol@gmail.com>, Toni Cebrián <toni@tonicebrian.com>
+
+copyright:          Copyright (c) 2015-2025 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    The AdSense Management API allows publishers to access their inventory and run earnings and performance reports.
+  The AdSense Management API allows publishers to access their inventory and run earnings and performance reports.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -27,65 +32,62 @@ source-repository head
   subdir:   gogol-adsense
 
 flag field-selectors
-  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-  default: False
-  manual: True
+  description:
+    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+
+  default:     False
+  manual:      True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: GHC2021
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -Werror
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if !flag(field-selectors) && impl(ghc >= 9.2)
+  if (!flag(field-selectors) && impl(ghc >=9.2))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.AdSense
-    , Gogol.AdSense.Accounts.Adclients.Adunits.Create
-    , Gogol.AdSense.Accounts.Adclients.Adunits.Get
-    , Gogol.AdSense.Accounts.Adclients.Adunits.GetAdcode
-    , Gogol.AdSense.Accounts.Adclients.Adunits.List
-    , Gogol.AdSense.Accounts.Adclients.Adunits.ListLinkedCustomChannels
-    , Gogol.AdSense.Accounts.Adclients.Adunits.Patch
-    , Gogol.AdSense.Accounts.Adclients.Customchannels.Create
-    , Gogol.AdSense.Accounts.Adclients.Customchannels.Delete
-    , Gogol.AdSense.Accounts.Adclients.Customchannels.Get
-    , Gogol.AdSense.Accounts.Adclients.Customchannels.List
-    , Gogol.AdSense.Accounts.Adclients.Customchannels.ListLinkedAdUnits
-    , Gogol.AdSense.Accounts.Adclients.Customchannels.Patch
-    , Gogol.AdSense.Accounts.Adclients.Get
-    , Gogol.AdSense.Accounts.Adclients.GetAdcode
-    , Gogol.AdSense.Accounts.Adclients.List
-    , Gogol.AdSense.Accounts.Adclients.Urlchannels.Get
-    , Gogol.AdSense.Accounts.Adclients.Urlchannels.List
-    , Gogol.AdSense.Accounts.Alerts.List
-    , Gogol.AdSense.Accounts.Get
-    , Gogol.AdSense.Accounts.GetAdBlockingRecoveryTag
-    , Gogol.AdSense.Accounts.List
-    , Gogol.AdSense.Accounts.ListChildAccounts
-    , Gogol.AdSense.Accounts.Payments.List
-    , Gogol.AdSense.Accounts.PolicyIssues.Get
-    , Gogol.AdSense.Accounts.PolicyIssues.List
-    , Gogol.AdSense.Accounts.Reports.Generate
-    , Gogol.AdSense.Accounts.Reports.GenerateCsv
-    , Gogol.AdSense.Accounts.Reports.GetSaved
-    , Gogol.AdSense.Accounts.Reports.Saved.Generate
-    , Gogol.AdSense.Accounts.Reports.Saved.GenerateCsv
-    , Gogol.AdSense.Accounts.Reports.Saved.List
-    , Gogol.AdSense.Accounts.Sites.Get
-    , Gogol.AdSense.Accounts.Sites.List
-    , Gogol.AdSense.Types
+    Gogol.AdSense
+    Gogol.AdSense.Accounts.Adclients.Adunits.Create
+    Gogol.AdSense.Accounts.Adclients.Adunits.Get
+    Gogol.AdSense.Accounts.Adclients.Adunits.GetAdcode
+    Gogol.AdSense.Accounts.Adclients.Adunits.List
+    Gogol.AdSense.Accounts.Adclients.Adunits.ListLinkedCustomChannels
+    Gogol.AdSense.Accounts.Adclients.Adunits.Patch
+    Gogol.AdSense.Accounts.Adclients.Customchannels.Create
+    Gogol.AdSense.Accounts.Adclients.Customchannels.Delete
+    Gogol.AdSense.Accounts.Adclients.Customchannels.Get
+    Gogol.AdSense.Accounts.Adclients.Customchannels.List
+    Gogol.AdSense.Accounts.Adclients.Customchannels.ListLinkedAdUnits
+    Gogol.AdSense.Accounts.Adclients.Customchannels.Patch
+    Gogol.AdSense.Accounts.Adclients.Get
+    Gogol.AdSense.Accounts.Adclients.GetAdcode
+    Gogol.AdSense.Accounts.Adclients.List
+    Gogol.AdSense.Accounts.Adclients.Urlchannels.Get
+    Gogol.AdSense.Accounts.Adclients.Urlchannels.List
+    Gogol.AdSense.Accounts.Alerts.List
+    Gogol.AdSense.Accounts.Get
+    Gogol.AdSense.Accounts.GetAdBlockingRecoveryTag
+    Gogol.AdSense.Accounts.List
+    Gogol.AdSense.Accounts.ListChildAccounts
+    Gogol.AdSense.Accounts.Payments.List
+    Gogol.AdSense.Accounts.PolicyIssues.Get
+    Gogol.AdSense.Accounts.PolicyIssues.List
+    Gogol.AdSense.Accounts.Reports.Generate
+    Gogol.AdSense.Accounts.Reports.GenerateCsv
+    Gogol.AdSense.Accounts.Reports.GetSaved
+    Gogol.AdSense.Accounts.Reports.Saved.Generate
+    Gogol.AdSense.Accounts.Reports.Saved.GenerateCsv
+    Gogol.AdSense.Accounts.Reports.Saved.List
+    Gogol.AdSense.Accounts.Sites.Get
+    Gogol.AdSense.Accounts.Sites.List
+    Gogol.AdSense.Types
 
   other-modules:
-      Gogol.AdSense.Internal.Product
-    , Gogol.AdSense.Internal.Sum
+    Gogol.AdSense.Internal.Product
+    Gogol.AdSense.Internal.Sum
 
-  build-depends:
-      gogol-core ^>= 1.0.0
+  build-depends:    gogol-core ^>=1.0.0

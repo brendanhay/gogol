@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,50 +16,52 @@
 
 -- |
 -- Module      : Gogol.Indexing.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.Indexing.Types
-    (
-    -- * Configuration
-      indexingService
+  ( -- * Configuration
+    indexingService,
 
     -- * OAuth Scopes
-    , Indexing'FullControl
+    Indexing'FullControl,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** PublishUrlNotificationResponse
-    , PublishUrlNotificationResponse (..)
-    , newPublishUrlNotificationResponse
+    PublishUrlNotificationResponse (..),
+    newPublishUrlNotificationResponse,
 
     -- ** UrlNotification
-    , UrlNotification (..)
-    , newUrlNotification
+    UrlNotification (..),
+    newUrlNotification,
 
     -- ** UrlNotification_Type
-    , UrlNotification_Type (..)
+    UrlNotification_Type (..),
 
     -- ** UrlNotificationMetadata
-    , UrlNotificationMetadata (..)
-    , newUrlNotificationMetadata
-    ) where
+    UrlNotificationMetadata (..),
+    newUrlNotificationMetadata,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Indexing.Internal.Product
 import Gogol.Indexing.Internal.Sum
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v3@ of the Web Search Indexing API. This contains the host and root path used as a starting point for constructing service requests.
 indexingService :: Core.ServiceConfig
-indexingService
-  = Core.defaultService (Core.ServiceId "indexing:v3")
-      "indexing.googleapis.com"
+indexingService =
+  Core.defaultService
+    (Core.ServiceId "indexing:v3")
+    "indexing.googleapis.com"
 
 -- | Submit data to Google for indexing
-type Indexing'FullControl = "https://www.googleapis.com/auth/indexing"
+type Indexing'FullControl =
+  "https://www.googleapis.com/auth/indexing"

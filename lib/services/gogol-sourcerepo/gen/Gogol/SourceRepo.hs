@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.SourceRepo
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,184 +27,184 @@
 --
 -- /See:/ <https://cloud.google.com/source-repositories/docs Cloud Source Repositories API Reference>
 module Gogol.SourceRepo
-    (
-    -- * Configuration
-      sourceRepoService
+  ( -- * Configuration
+    sourceRepoService,
 
     -- * OAuth Scopes
-    , CloudPlatform'FullControl
-    , Source'FullControl
-    , Source'ReadOnly
-    , Source'ReadWrite
+    CloudPlatform'FullControl,
+    Source'FullControl,
+    Source'ReadOnly,
+    Source'ReadWrite,
 
     -- * Resources
 
     -- ** sourcerepo.projects.getConfig
-    , SourceRepoProjectsGetConfigResource
-    , SourceRepoProjectsGetConfig (..)
-    , newSourceRepoProjectsGetConfig
+    SourceRepoProjectsGetConfigResource,
+    SourceRepoProjectsGetConfig (..),
+    newSourceRepoProjectsGetConfig,
 
     -- ** sourcerepo.projects.repos.create
-    , SourceRepoProjectsReposCreateResource
-    , SourceRepoProjectsReposCreate (..)
-    , newSourceRepoProjectsReposCreate
+    SourceRepoProjectsReposCreateResource,
+    SourceRepoProjectsReposCreate (..),
+    newSourceRepoProjectsReposCreate,
 
     -- ** sourcerepo.projects.repos.delete
-    , SourceRepoProjectsReposDeleteResource
-    , SourceRepoProjectsReposDelete (..)
-    , newSourceRepoProjectsReposDelete
+    SourceRepoProjectsReposDeleteResource,
+    SourceRepoProjectsReposDelete (..),
+    newSourceRepoProjectsReposDelete,
 
     -- ** sourcerepo.projects.repos.get
-    , SourceRepoProjectsReposGetResource
-    , SourceRepoProjectsReposGet (..)
-    , newSourceRepoProjectsReposGet
+    SourceRepoProjectsReposGetResource,
+    SourceRepoProjectsReposGet (..),
+    newSourceRepoProjectsReposGet,
 
     -- ** sourcerepo.projects.repos.getIamPolicy
-    , SourceRepoProjectsReposGetIamPolicyResource
-    , SourceRepoProjectsReposGetIamPolicy (..)
-    , newSourceRepoProjectsReposGetIamPolicy
+    SourceRepoProjectsReposGetIamPolicyResource,
+    SourceRepoProjectsReposGetIamPolicy (..),
+    newSourceRepoProjectsReposGetIamPolicy,
 
     -- ** sourcerepo.projects.repos.list
-    , SourceRepoProjectsReposListResource
-    , SourceRepoProjectsReposList (..)
-    , newSourceRepoProjectsReposList
+    SourceRepoProjectsReposListResource,
+    SourceRepoProjectsReposList (..),
+    newSourceRepoProjectsReposList,
 
     -- ** sourcerepo.projects.repos.patch
-    , SourceRepoProjectsReposPatchResource
-    , SourceRepoProjectsReposPatch (..)
-    , newSourceRepoProjectsReposPatch
+    SourceRepoProjectsReposPatchResource,
+    SourceRepoProjectsReposPatch (..),
+    newSourceRepoProjectsReposPatch,
 
     -- ** sourcerepo.projects.repos.setIamPolicy
-    , SourceRepoProjectsReposSetIamPolicyResource
-    , SourceRepoProjectsReposSetIamPolicy (..)
-    , newSourceRepoProjectsReposSetIamPolicy
+    SourceRepoProjectsReposSetIamPolicyResource,
+    SourceRepoProjectsReposSetIamPolicy (..),
+    newSourceRepoProjectsReposSetIamPolicy,
 
     -- ** sourcerepo.projects.repos.sync
-    , SourceRepoProjectsReposSyncResource
-    , SourceRepoProjectsReposSync (..)
-    , newSourceRepoProjectsReposSync
+    SourceRepoProjectsReposSyncResource,
+    SourceRepoProjectsReposSync (..),
+    newSourceRepoProjectsReposSync,
 
     -- ** sourcerepo.projects.repos.testIamPermissions
-    , SourceRepoProjectsReposTestIamPermissionsResource
-    , SourceRepoProjectsReposTestIamPermissions (..)
-    , newSourceRepoProjectsReposTestIamPermissions
+    SourceRepoProjectsReposTestIamPermissionsResource,
+    SourceRepoProjectsReposTestIamPermissions (..),
+    newSourceRepoProjectsReposTestIamPermissions,
 
     -- ** sourcerepo.projects.updateConfig
-    , SourceRepoProjectsUpdateConfigResource
-    , SourceRepoProjectsUpdateConfig (..)
-    , newSourceRepoProjectsUpdateConfig
+    SourceRepoProjectsUpdateConfigResource,
+    SourceRepoProjectsUpdateConfig (..),
+    newSourceRepoProjectsUpdateConfig,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AuditConfig
-    , AuditConfig (..)
-    , newAuditConfig
+    AuditConfig (..),
+    newAuditConfig,
 
     -- ** AuditLogConfig
-    , AuditLogConfig (..)
-    , newAuditLogConfig
+    AuditLogConfig (..),
+    newAuditLogConfig,
 
     -- ** AuditLogConfig_LogType
-    , AuditLogConfig_LogType (..)
+    AuditLogConfig_LogType (..),
 
     -- ** Binding
-    , Binding (..)
-    , newBinding
+    Binding (..),
+    newBinding,
 
     -- ** Empty
-    , Empty (..)
-    , newEmpty
+    Empty (..),
+    newEmpty,
 
     -- ** Expr
-    , Expr (..)
-    , newExpr
+    Expr (..),
+    newExpr,
 
     -- ** ListReposResponse
-    , ListReposResponse (..)
-    , newListReposResponse
+    ListReposResponse (..),
+    newListReposResponse,
 
     -- ** MirrorConfig
-    , MirrorConfig (..)
-    , newMirrorConfig
+    MirrorConfig (..),
+    newMirrorConfig,
 
     -- ** Operation
-    , Operation (..)
-    , newOperation
+    Operation (..),
+    newOperation,
 
     -- ** Operation_Metadata
-    , Operation_Metadata (..)
-    , newOperation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
 
     -- ** Operation_Response
-    , Operation_Response (..)
-    , newOperation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** Policy
-    , Policy (..)
-    , newPolicy
+    Policy (..),
+    newPolicy,
 
     -- ** ProjectConfig
-    , ProjectConfig (..)
-    , newProjectConfig
+    ProjectConfig (..),
+    newProjectConfig,
 
     -- ** ProjectConfig_PubsubConfigs
-    , ProjectConfig_PubsubConfigs (..)
-    , newProjectConfig_PubsubConfigs
+    ProjectConfig_PubsubConfigs (..),
+    newProjectConfig_PubsubConfigs,
 
     -- ** PubsubConfig
-    , PubsubConfig (..)
-    , newPubsubConfig
+    PubsubConfig (..),
+    newPubsubConfig,
 
     -- ** PubsubConfig_MessageFormat
-    , PubsubConfig_MessageFormat (..)
+    PubsubConfig_MessageFormat (..),
 
     -- ** Repo
-    , Repo (..)
-    , newRepo
+    Repo (..),
+    newRepo,
 
     -- ** Repo_PubsubConfigs
-    , Repo_PubsubConfigs (..)
-    , newRepo_PubsubConfigs
+    Repo_PubsubConfigs (..),
+    newRepo_PubsubConfigs,
 
     -- ** SetIamPolicyRequest
-    , SetIamPolicyRequest (..)
-    , newSetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** SyncRepoMetadata
-    , SyncRepoMetadata (..)
-    , newSyncRepoMetadata
+    SyncRepoMetadata (..),
+    newSyncRepoMetadata,
 
     -- ** SyncRepoRequest
-    , SyncRepoRequest (..)
-    , newSyncRepoRequest
+    SyncRepoRequest (..),
+    newSyncRepoRequest,
 
     -- ** TestIamPermissionsRequest
-    , TestIamPermissionsRequest (..)
-    , newTestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
 
     -- ** TestIamPermissionsResponse
-    , TestIamPermissionsResponse (..)
-    , newTestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
 
     -- ** UpdateProjectConfigRequest
-    , UpdateProjectConfigRequest (..)
-    , newUpdateProjectConfigRequest
+    UpdateProjectConfigRequest (..),
+    newUpdateProjectConfigRequest,
 
     -- ** UpdateRepoRequest
-    , UpdateRepoRequest (..)
-    , newUpdateRepoRequest
-    ) where
+    UpdateRepoRequest (..),
+    newUpdateRepoRequest,
+  )
+where
 
 import Gogol.SourceRepo.Projects.GetConfig
 import Gogol.SourceRepo.Projects.Repos.Create

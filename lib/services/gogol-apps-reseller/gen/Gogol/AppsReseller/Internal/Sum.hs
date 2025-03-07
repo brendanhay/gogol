@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.AppsReseller.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.AppsReseller.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * Customer_CustomerType
     Customer_CustomerType
-      (
-        Customer_CustomerType_CustomerTypeUnspecified,
+      ( Customer_CustomerType_CustomerTypeUnspecified,
         Customer_CustomerType_Domain,
         Customer_CustomerType_Team,
         ..
@@ -49,8 +40,7 @@ module Gogol.AppsReseller.Internal.Sum
 
     -- * SubscriptionsDeleteDeletionType
     SubscriptionsDeleteDeletionType
-      (
-        SubscriptionsDeleteDeletionType_DeletionTypeUndefined,
+      ( SubscriptionsDeleteDeletionType_DeletionTypeUndefined,
         SubscriptionsDeleteDeletionType_Cancel,
         SubscriptionsDeleteDeletionType_TransferToDirect,
         ..
@@ -58,28 +48,28 @@ module Gogol.AppsReseller.Internal.Sum
 
     -- * SubscriptionsInsertAction
     SubscriptionsInsertAction
-      (
-        SubscriptionsInsertAction_ActionUnspecified,
+      ( SubscriptionsInsertAction_ActionUnspecified,
         SubscriptionsInsertAction_Buy,
         SubscriptionsInsertAction_Switch,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -92,20 +82,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | Identifies the type of the customer. Acceptable values include: * @domain@: Implies a domain-verified customer (default). * @team@: Implies an email-verified customer. For more information, see <https://support.google.com/a/users/answer/9939479 managed teams>.
-newtype Customer_CustomerType = Customer_CustomerType { fromCustomer_CustomerType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Customer_CustomerType = Customer_CustomerType {fromCustomer_CustomerType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Customer type not known
 pattern Customer_CustomerType_CustomerTypeUnspecified :: Customer_CustomerType
@@ -123,22 +114,22 @@ pattern Customer_CustomerType_Team = Customer_CustomerType "team"
   Customer_CustomerType_CustomerTypeUnspecified,
   Customer_CustomerType_Domain,
   Customer_CustomerType_Team,
-  Customer_CustomerType #-}
+  Customer_CustomerType
+  #-}
 
 -- | The @deletionType@ query string enables the cancellation, downgrade, or suspension of a subscription.
-newtype SubscriptionsDeleteDeletionType = SubscriptionsDeleteDeletionType { fromSubscriptionsDeleteDeletionType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SubscriptionsDeleteDeletionType = SubscriptionsDeleteDeletionType {fromSubscriptionsDeleteDeletionType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
--- | 
 pattern SubscriptionsDeleteDeletionType_DeletionTypeUndefined :: SubscriptionsDeleteDeletionType
 pattern SubscriptionsDeleteDeletionType_DeletionTypeUndefined = SubscriptionsDeleteDeletionType "deletion_type_undefined"
 
@@ -154,20 +145,21 @@ pattern SubscriptionsDeleteDeletionType_TransferToDirect = SubscriptionsDeleteDe
   SubscriptionsDeleteDeletionType_DeletionTypeUndefined,
   SubscriptionsDeleteDeletionType_Cancel,
   SubscriptionsDeleteDeletionType_TransferToDirect,
-  SubscriptionsDeleteDeletionType #-}
+  SubscriptionsDeleteDeletionType
+  #-}
 
 -- | The intented insert action. The usage of this field is governed by certain policies which are being developed & tested currently. Hence, these might not work as intended. Once this is fully tested & available to consume, we will share more information about its usage, limitations and policy documentation.
-newtype SubscriptionsInsertAction = SubscriptionsInsertAction { fromSubscriptionsInsertAction :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SubscriptionsInsertAction = SubscriptionsInsertAction {fromSubscriptionsInsertAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Auto determines whether to create new subscription, upgrade or downagrade existing subscription or transfer the existing subscription
 pattern SubscriptionsInsertAction_ActionUnspecified :: SubscriptionsInsertAction
@@ -185,4 +177,5 @@ pattern SubscriptionsInsertAction_Switch = SubscriptionsInsertAction "switch"
   SubscriptionsInsertAction_ActionUnspecified,
   SubscriptionsInsertAction_Buy,
   SubscriptionsInsertAction_Switch,
-  SubscriptionsInsertAction #-}
+  SubscriptionsInsertAction
+  #-}

@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.Language
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,771 +27,771 @@
 --
 -- /See:/ <https://cloud.google.com/natural-language/ Cloud Natural Language API Reference>
 module Gogol.Language
-    (
-    -- * Configuration
-      languageService
+  ( -- * Configuration
+    languageService,
 
     -- * OAuth Scopes
-    , CloudLanguage'FullControl
-    , CloudPlatform'FullControl
+    CloudLanguage'FullControl,
+    CloudPlatform'FullControl,
 
     -- * Resources
 
     -- ** language.documents.analyzeEntities
-    , LanguageDocumentsAnalyzeEntitiesResource
-    , LanguageDocumentsAnalyzeEntities (..)
-    , newLanguageDocumentsAnalyzeEntities
+    LanguageDocumentsAnalyzeEntitiesResource,
+    LanguageDocumentsAnalyzeEntities (..),
+    newLanguageDocumentsAnalyzeEntities,
 
     -- ** language.documents.analyzeSentiment
-    , LanguageDocumentsAnalyzeSentimentResource
-    , LanguageDocumentsAnalyzeSentiment (..)
-    , newLanguageDocumentsAnalyzeSentiment
+    LanguageDocumentsAnalyzeSentimentResource,
+    LanguageDocumentsAnalyzeSentiment (..),
+    newLanguageDocumentsAnalyzeSentiment,
 
     -- ** language.documents.annotateText
-    , LanguageDocumentsAnnotateTextResource
-    , LanguageDocumentsAnnotateText (..)
-    , newLanguageDocumentsAnnotateText
+    LanguageDocumentsAnnotateTextResource,
+    LanguageDocumentsAnnotateText (..),
+    newLanguageDocumentsAnnotateText,
 
     -- ** language.documents.classifyText
-    , LanguageDocumentsClassifyTextResource
-    , LanguageDocumentsClassifyText (..)
-    , newLanguageDocumentsClassifyText
+    LanguageDocumentsClassifyTextResource,
+    LanguageDocumentsClassifyText (..),
+    newLanguageDocumentsClassifyText,
 
     -- ** language.documents.moderateText
-    , LanguageDocumentsModerateTextResource
-    , LanguageDocumentsModerateText (..)
-    , newLanguageDocumentsModerateText
+    LanguageDocumentsModerateTextResource,
+    LanguageDocumentsModerateText (..),
+    newLanguageDocumentsModerateText,
 
     -- * Types
 
     -- ** Xgafv
-    , Xgafv (..)
+    Xgafv (..),
 
     -- ** AnalyzeEntitiesRequest
-    , AnalyzeEntitiesRequest (..)
-    , newAnalyzeEntitiesRequest
+    AnalyzeEntitiesRequest (..),
+    newAnalyzeEntitiesRequest,
 
     -- ** AnalyzeEntitiesRequest_EncodingType
-    , AnalyzeEntitiesRequest_EncodingType (..)
+    AnalyzeEntitiesRequest_EncodingType (..),
 
     -- ** AnalyzeEntitiesResponse
-    , AnalyzeEntitiesResponse (..)
-    , newAnalyzeEntitiesResponse
+    AnalyzeEntitiesResponse (..),
+    newAnalyzeEntitiesResponse,
 
     -- ** AnalyzeSentimentRequest
-    , AnalyzeSentimentRequest (..)
-    , newAnalyzeSentimentRequest
+    AnalyzeSentimentRequest (..),
+    newAnalyzeSentimentRequest,
 
     -- ** AnalyzeSentimentRequest_EncodingType
-    , AnalyzeSentimentRequest_EncodingType (..)
+    AnalyzeSentimentRequest_EncodingType (..),
 
     -- ** AnalyzeSentimentResponse
-    , AnalyzeSentimentResponse (..)
-    , newAnalyzeSentimentResponse
+    AnalyzeSentimentResponse (..),
+    newAnalyzeSentimentResponse,
 
     -- ** AnnotateTextRequest
-    , AnnotateTextRequest (..)
-    , newAnnotateTextRequest
+    AnnotateTextRequest (..),
+    newAnnotateTextRequest,
 
     -- ** AnnotateTextRequest_EncodingType
-    , AnnotateTextRequest_EncodingType (..)
+    AnnotateTextRequest_EncodingType (..),
 
     -- ** AnnotateTextRequestFeatures
-    , AnnotateTextRequestFeatures (..)
-    , newAnnotateTextRequestFeatures
+    AnnotateTextRequestFeatures (..),
+    newAnnotateTextRequestFeatures,
 
     -- ** AnnotateTextResponse
-    , AnnotateTextResponse (..)
-    , newAnnotateTextResponse
+    AnnotateTextResponse (..),
+    newAnnotateTextResponse,
 
     -- ** ClassificationCategory
-    , ClassificationCategory (..)
-    , newClassificationCategory
+    ClassificationCategory (..),
+    newClassificationCategory,
 
     -- ** ClassifyTextRequest
-    , ClassifyTextRequest (..)
-    , newClassifyTextRequest
+    ClassifyTextRequest (..),
+    newClassifyTextRequest,
 
     -- ** ClassifyTextResponse
-    , ClassifyTextResponse (..)
-    , newClassifyTextResponse
+    ClassifyTextResponse (..),
+    newClassifyTextResponse,
 
     -- ** Color
-    , Color (..)
-    , newColor
+    Color (..),
+    newColor,
 
     -- ** CpuMetric
-    , CpuMetric (..)
-    , newCpuMetric
+    CpuMetric (..),
+    newCpuMetric,
 
     -- ** CpuMetric_CpuType
-    , CpuMetric_CpuType (..)
+    CpuMetric_CpuType (..),
 
     -- ** CpuMetric_MachineSpec
-    , CpuMetric_MachineSpec (..)
+    CpuMetric_MachineSpec (..),
 
     -- ** CpuMetric_TrackingLabels
-    , CpuMetric_TrackingLabels (..)
-    , newCpuMetric_TrackingLabels
+    CpuMetric_TrackingLabels (..),
+    newCpuMetric_TrackingLabels,
 
     -- ** DiskMetric
-    , DiskMetric (..)
-    , newDiskMetric
+    DiskMetric (..),
+    newDiskMetric,
 
     -- ** DiskMetric_DiskType
-    , DiskMetric_DiskType (..)
+    DiskMetric_DiskType (..),
 
     -- ** Document
-    , Document (..)
-    , newDocument
+    Document (..),
+    newDocument,
 
     -- ** Document_Type
-    , Document_Type (..)
+    Document_Type (..),
 
     -- ** Entity
-    , Entity (..)
-    , newEntity
+    Entity (..),
+    newEntity,
 
     -- ** Entity_Metadata
-    , Entity_Metadata (..)
-    , newEntity_Metadata
+    Entity_Metadata (..),
+    newEntity_Metadata,
 
     -- ** Entity_Type
-    , Entity_Type (..)
+    Entity_Type (..),
 
     -- ** EntityMention
-    , EntityMention (..)
-    , newEntityMention
+    EntityMention (..),
+    newEntityMention,
 
     -- ** EntityMention_Type
-    , EntityMention_Type (..)
+    EntityMention_Type (..),
 
     -- ** GpuMetric
-    , GpuMetric (..)
-    , newGpuMetric
+    GpuMetric (..),
+    newGpuMetric,
 
     -- ** GpuMetric_GpuType
-    , GpuMetric_GpuType (..)
+    GpuMetric_GpuType (..),
 
     -- ** GpuMetric_MachineSpec
-    , GpuMetric_MachineSpec (..)
+    GpuMetric_MachineSpec (..),
 
     -- ** GpuMetric_TrackingLabels
-    , GpuMetric_TrackingLabels (..)
-    , newGpuMetric_TrackingLabels
+    GpuMetric_TrackingLabels (..),
+    newGpuMetric_TrackingLabels,
 
     -- ** InfraUsage
-    , InfraUsage (..)
-    , newInfraUsage
+    InfraUsage (..),
+    newInfraUsage,
 
     -- ** ModerateTextRequest
-    , ModerateTextRequest (..)
-    , newModerateTextRequest
+    ModerateTextRequest (..),
+    newModerateTextRequest,
 
     -- ** ModerateTextRequest_ModelVersion
-    , ModerateTextRequest_ModelVersion (..)
+    ModerateTextRequest_ModelVersion (..),
 
     -- ** ModerateTextResponse
-    , ModerateTextResponse (..)
-    , newModerateTextResponse
+    ModerateTextResponse (..),
+    newModerateTextResponse,
 
     -- ** RamMetric
-    , RamMetric (..)
-    , newRamMetric
+    RamMetric (..),
+    newRamMetric,
 
     -- ** RamMetric_MachineSpec
-    , RamMetric_MachineSpec (..)
+    RamMetric_MachineSpec (..),
 
     -- ** RamMetric_RamType
-    , RamMetric_RamType (..)
+    RamMetric_RamType (..),
 
     -- ** RamMetric_TrackingLabels
-    , RamMetric_TrackingLabels (..)
-    , newRamMetric_TrackingLabels
+    RamMetric_TrackingLabels (..),
+    newRamMetric_TrackingLabels,
 
     -- ** Sentence
-    , Sentence (..)
-    , newSentence
+    Sentence (..),
+    newSentence,
 
     -- ** Sentiment
-    , Sentiment (..)
-    , newSentiment
+    Sentiment (..),
+    newSentiment,
 
     -- ** Status
-    , Status (..)
-    , newStatus
+    Status (..),
+    newStatus,
 
     -- ** Status_DetailsItem
-    , Status_DetailsItem (..)
-    , newStatus_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** TextSpan
-    , TextSpan (..)
-    , newTextSpan
+    TextSpan (..),
+    newTextSpan,
 
     -- ** TpuMetric
-    , TpuMetric (..)
-    , newTpuMetric
+    TpuMetric (..),
+    newTpuMetric,
 
     -- ** TpuMetric_TpuType
-    , TpuMetric_TpuType (..)
+    TpuMetric_TpuType (..),
 
     -- ** XPSArrayStats
-    , XPSArrayStats (..)
-    , newXPSArrayStats
+    XPSArrayStats (..),
+    newXPSArrayStats,
 
     -- ** XPSBatchPredictResponse
-    , XPSBatchPredictResponse (..)
-    , newXPSBatchPredictResponse
+    XPSBatchPredictResponse (..),
+    newXPSBatchPredictResponse,
 
     -- ** XPSBoundingBoxMetricsEntry
-    , XPSBoundingBoxMetricsEntry (..)
-    , newXPSBoundingBoxMetricsEntry
+    XPSBoundingBoxMetricsEntry (..),
+    newXPSBoundingBoxMetricsEntry,
 
     -- ** XPSBoundingBoxMetricsEntryConfidenceMetricsEntry
-    , XPSBoundingBoxMetricsEntryConfidenceMetricsEntry (..)
-    , newXPSBoundingBoxMetricsEntryConfidenceMetricsEntry
+    XPSBoundingBoxMetricsEntryConfidenceMetricsEntry (..),
+    newXPSBoundingBoxMetricsEntryConfidenceMetricsEntry,
 
     -- ** XPSCategoryStats
-    , XPSCategoryStats (..)
-    , newXPSCategoryStats
+    XPSCategoryStats (..),
+    newXPSCategoryStats,
 
     -- ** XPSCategoryStatsSingleCategoryStats
-    , XPSCategoryStatsSingleCategoryStats (..)
-    , newXPSCategoryStatsSingleCategoryStats
+    XPSCategoryStatsSingleCategoryStats (..),
+    newXPSCategoryStatsSingleCategoryStats,
 
     -- ** XPSClassificationEvaluationMetrics
-    , XPSClassificationEvaluationMetrics (..)
-    , newXPSClassificationEvaluationMetrics
+    XPSClassificationEvaluationMetrics (..),
+    newXPSClassificationEvaluationMetrics,
 
     -- ** XPSColorMap
-    , XPSColorMap (..)
-    , newXPSColorMap
+    XPSColorMap (..),
+    newXPSColorMap,
 
     -- ** XPSColorMapIntColor
-    , XPSColorMapIntColor (..)
-    , newXPSColorMapIntColor
+    XPSColorMapIntColor (..),
+    newXPSColorMapIntColor,
 
     -- ** XPSColumnSpec
-    , XPSColumnSpec (..)
-    , newXPSColumnSpec
+    XPSColumnSpec (..),
+    newXPSColumnSpec,
 
     -- ** XPSColumnSpecCorrelatedColumn
-    , XPSColumnSpecCorrelatedColumn (..)
-    , newXPSColumnSpecCorrelatedColumn
+    XPSColumnSpecCorrelatedColumn (..),
+    newXPSColumnSpecCorrelatedColumn,
 
     -- ** XPSColumnSpecForecastingMetadata
-    , XPSColumnSpecForecastingMetadata (..)
-    , newXPSColumnSpecForecastingMetadata
+    XPSColumnSpecForecastingMetadata (..),
+    newXPSColumnSpecForecastingMetadata,
 
     -- ** XPSColumnSpecForecastingMetadata_ColumnType
-    , XPSColumnSpecForecastingMetadata_ColumnType (..)
+    XPSColumnSpecForecastingMetadata_ColumnType (..),
 
     -- ** XPSCommonStats
-    , XPSCommonStats (..)
-    , newXPSCommonStats
+    XPSCommonStats (..),
+    newXPSCommonStats,
 
     -- ** XPSConfidenceMetricsEntry
-    , XPSConfidenceMetricsEntry (..)
-    , newXPSConfidenceMetricsEntry
+    XPSConfidenceMetricsEntry (..),
+    newXPSConfidenceMetricsEntry,
 
     -- ** XPSConfusionMatrix
-    , XPSConfusionMatrix (..)
-    , newXPSConfusionMatrix
+    XPSConfusionMatrix (..),
+    newXPSConfusionMatrix,
 
     -- ** XPSConfusionMatrixRow
-    , XPSConfusionMatrixRow (..)
-    , newXPSConfusionMatrixRow
+    XPSConfusionMatrixRow (..),
+    newXPSConfusionMatrixRow,
 
     -- ** XPSCoreMlFormat
-    , XPSCoreMlFormat (..)
-    , newXPSCoreMlFormat
+    XPSCoreMlFormat (..),
+    newXPSCoreMlFormat,
 
     -- ** XPSCorrelationStats
-    , XPSCorrelationStats (..)
-    , newXPSCorrelationStats
+    XPSCorrelationStats (..),
+    newXPSCorrelationStats,
 
     -- ** XPSDataErrors
-    , XPSDataErrors (..)
-    , newXPSDataErrors
+    XPSDataErrors (..),
+    newXPSDataErrors,
 
     -- ** XPSDataErrors_ErrorType
-    , XPSDataErrors_ErrorType (..)
+    XPSDataErrors_ErrorType (..),
 
     -- ** XPSDataStats
-    , XPSDataStats (..)
-    , newXPSDataStats
+    XPSDataStats (..),
+    newXPSDataStats,
 
     -- ** XPSDataType
-    , XPSDataType (..)
-    , newXPSDataType
+    XPSDataType (..),
+    newXPSDataType,
 
     -- ** XPSDataType_TypeCode
-    , XPSDataType_TypeCode (..)
+    XPSDataType_TypeCode (..),
 
     -- ** XPSDockerFormat
-    , XPSDockerFormat (..)
-    , newXPSDockerFormat
+    XPSDockerFormat (..),
+    newXPSDockerFormat,
 
     -- ** XPSDockerFormat_CpuArchitecture
-    , XPSDockerFormat_CpuArchitecture (..)
+    XPSDockerFormat_CpuArchitecture (..),
 
     -- ** XPSDockerFormat_GpuArchitecture
-    , XPSDockerFormat_GpuArchitecture (..)
+    XPSDockerFormat_GpuArchitecture (..),
 
     -- ** XPSEdgeTpuTfLiteFormat
-    , XPSEdgeTpuTfLiteFormat (..)
-    , newXPSEdgeTpuTfLiteFormat
+    XPSEdgeTpuTfLiteFormat (..),
+    newXPSEdgeTpuTfLiteFormat,
 
     -- ** XPSEvaluationMetrics
-    , XPSEvaluationMetrics (..)
-    , newXPSEvaluationMetrics
+    XPSEvaluationMetrics (..),
+    newXPSEvaluationMetrics,
 
     -- ** XPSEvaluationMetricsSet
-    , XPSEvaluationMetricsSet (..)
-    , newXPSEvaluationMetricsSet
+    XPSEvaluationMetricsSet (..),
+    newXPSEvaluationMetricsSet,
 
     -- ** XPSExampleSet
-    , XPSExampleSet (..)
-    , newXPSExampleSet
+    XPSExampleSet (..),
+    newXPSExampleSet,
 
     -- ** XPSExportModelOutputConfig
-    , XPSExportModelOutputConfig (..)
-    , newXPSExportModelOutputConfig
+    XPSExportModelOutputConfig (..),
+    newXPSExportModelOutputConfig,
 
     -- ** XPSFileSpec
-    , XPSFileSpec (..)
-    , newXPSFileSpec
+    XPSFileSpec (..),
+    newXPSFileSpec,
 
     -- ** XPSFileSpec_FileFormat
-    , XPSFileSpec_FileFormat (..)
+    XPSFileSpec_FileFormat (..),
 
     -- ** XPSFloat64Stats
-    , XPSFloat64Stats (..)
-    , newXPSFloat64Stats
+    XPSFloat64Stats (..),
+    newXPSFloat64Stats,
 
     -- ** XPSFloat64StatsHistogramBucket
-    , XPSFloat64StatsHistogramBucket (..)
-    , newXPSFloat64StatsHistogramBucket
+    XPSFloat64StatsHistogramBucket (..),
+    newXPSFloat64StatsHistogramBucket,
 
     -- ** XPSImageClassificationTrainResponse
-    , XPSImageClassificationTrainResponse (..)
-    , newXPSImageClassificationTrainResponse
+    XPSImageClassificationTrainResponse (..),
+    newXPSImageClassificationTrainResponse,
 
     -- ** XPSImageClassificationTrainResponse_StopReason
-    , XPSImageClassificationTrainResponse_StopReason (..)
+    XPSImageClassificationTrainResponse_StopReason (..),
 
     -- ** XPSImageExportModelSpec
-    , XPSImageExportModelSpec (..)
-    , newXPSImageExportModelSpec
+    XPSImageExportModelSpec (..),
+    newXPSImageExportModelSpec,
 
     -- ** XPSImageModelArtifactSpec
-    , XPSImageModelArtifactSpec (..)
-    , newXPSImageModelArtifactSpec
+    XPSImageModelArtifactSpec (..),
+    newXPSImageModelArtifactSpec,
 
     -- ** XPSImageModelServingSpec
-    , XPSImageModelServingSpec (..)
-    , newXPSImageModelServingSpec
+    XPSImageModelServingSpec (..),
+    newXPSImageModelServingSpec,
 
     -- ** XPSImageModelServingSpecModelThroughputEstimation
-    , XPSImageModelServingSpecModelThroughputEstimation (..)
-    , newXPSImageModelServingSpecModelThroughputEstimation
+    XPSImageModelServingSpecModelThroughputEstimation (..),
+    newXPSImageModelServingSpecModelThroughputEstimation,
 
     -- ** XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType
-    , XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType (..)
+    XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType (..),
 
     -- ** XPSImageModelServingSpecModelThroughputEstimation_ServomaticPartitionType
-    , XPSImageModelServingSpecModelThroughputEstimation_ServomaticPartitionType (..)
+    XPSImageModelServingSpecModelThroughputEstimation_ServomaticPartitionType (..),
 
     -- ** XPSImageObjectDetectionEvaluationMetrics
-    , XPSImageObjectDetectionEvaluationMetrics (..)
-    , newXPSImageObjectDetectionEvaluationMetrics
+    XPSImageObjectDetectionEvaluationMetrics (..),
+    newXPSImageObjectDetectionEvaluationMetrics,
 
     -- ** XPSImageObjectDetectionModelSpec
-    , XPSImageObjectDetectionModelSpec (..)
-    , newXPSImageObjectDetectionModelSpec
+    XPSImageObjectDetectionModelSpec (..),
+    newXPSImageObjectDetectionModelSpec,
 
     -- ** XPSImageObjectDetectionModelSpec_StopReason
-    , XPSImageObjectDetectionModelSpec_StopReason (..)
+    XPSImageObjectDetectionModelSpec_StopReason (..),
 
     -- ** XPSImageSegmentationEvaluationMetrics
-    , XPSImageSegmentationEvaluationMetrics (..)
-    , newXPSImageSegmentationEvaluationMetrics
+    XPSImageSegmentationEvaluationMetrics (..),
+    newXPSImageSegmentationEvaluationMetrics,
 
     -- ** XPSImageSegmentationEvaluationMetricsConfidenceMetricsEntry
-    , XPSImageSegmentationEvaluationMetricsConfidenceMetricsEntry (..)
-    , newXPSImageSegmentationEvaluationMetricsConfidenceMetricsEntry
+    XPSImageSegmentationEvaluationMetricsConfidenceMetricsEntry (..),
+    newXPSImageSegmentationEvaluationMetricsConfidenceMetricsEntry,
 
     -- ** XPSImageSegmentationTrainResponse
-    , XPSImageSegmentationTrainResponse (..)
-    , newXPSImageSegmentationTrainResponse
+    XPSImageSegmentationTrainResponse (..),
+    newXPSImageSegmentationTrainResponse,
 
     -- ** XPSImageSegmentationTrainResponse_StopReason
-    , XPSImageSegmentationTrainResponse_StopReason (..)
+    XPSImageSegmentationTrainResponse_StopReason (..),
 
     -- ** XPSIntegratedGradientsAttribution
-    , XPSIntegratedGradientsAttribution (..)
-    , newXPSIntegratedGradientsAttribution
+    XPSIntegratedGradientsAttribution (..),
+    newXPSIntegratedGradientsAttribution,
 
     -- ** XPSMetricEntry
-    , XPSMetricEntry (..)
-    , newXPSMetricEntry
+    XPSMetricEntry (..),
+    newXPSMetricEntry,
 
     -- ** XPSMetricEntryLabel
-    , XPSMetricEntryLabel (..)
-    , newXPSMetricEntryLabel
+    XPSMetricEntryLabel (..),
+    newXPSMetricEntryLabel,
 
     -- ** XPSModelArtifactItem
-    , XPSModelArtifactItem (..)
-    , newXPSModelArtifactItem
+    XPSModelArtifactItem (..),
+    newXPSModelArtifactItem,
 
     -- ** XPSModelArtifactItem_ArtifactFormat
-    , XPSModelArtifactItem_ArtifactFormat (..)
+    XPSModelArtifactItem_ArtifactFormat (..),
 
     -- ** XPSPreprocessResponse
-    , XPSPreprocessResponse (..)
-    , newXPSPreprocessResponse
+    XPSPreprocessResponse (..),
+    newXPSPreprocessResponse,
 
     -- ** XPSRegressionEvaluationMetrics
-    , XPSRegressionEvaluationMetrics (..)
-    , newXPSRegressionEvaluationMetrics
+    XPSRegressionEvaluationMetrics (..),
+    newXPSRegressionEvaluationMetrics,
 
     -- ** XPSRegressionMetricsEntry
-    , XPSRegressionMetricsEntry (..)
-    , newXPSRegressionMetricsEntry
+    XPSRegressionMetricsEntry (..),
+    newXPSRegressionMetricsEntry,
 
     -- ** XPSReportingMetrics
-    , XPSReportingMetrics (..)
-    , newXPSReportingMetrics
+    XPSReportingMetrics (..),
+    newXPSReportingMetrics,
 
     -- ** XPSResponseExplanationMetadata
-    , XPSResponseExplanationMetadata (..)
-    , newXPSResponseExplanationMetadata
+    XPSResponseExplanationMetadata (..),
+    newXPSResponseExplanationMetadata,
 
     -- ** XPSResponseExplanationMetadata_Inputs
-    , XPSResponseExplanationMetadata_Inputs (..)
-    , newXPSResponseExplanationMetadata_Inputs
+    XPSResponseExplanationMetadata_Inputs (..),
+    newXPSResponseExplanationMetadata_Inputs,
 
     -- ** XPSResponseExplanationMetadata_Outputs
-    , XPSResponseExplanationMetadata_Outputs (..)
-    , newXPSResponseExplanationMetadata_Outputs
+    XPSResponseExplanationMetadata_Outputs (..),
+    newXPSResponseExplanationMetadata_Outputs,
 
     -- ** XPSResponseExplanationMetadataInputMetadata
-    , XPSResponseExplanationMetadataInputMetadata (..)
-    , newXPSResponseExplanationMetadataInputMetadata
+    XPSResponseExplanationMetadataInputMetadata (..),
+    newXPSResponseExplanationMetadataInputMetadata,
 
     -- ** XPSResponseExplanationMetadataInputMetadata_Modality
-    , XPSResponseExplanationMetadataInputMetadata_Modality (..)
+    XPSResponseExplanationMetadataInputMetadata_Modality (..),
 
     -- ** XPSResponseExplanationMetadataOutputMetadata
-    , XPSResponseExplanationMetadataOutputMetadata (..)
-    , newXPSResponseExplanationMetadataOutputMetadata
+    XPSResponseExplanationMetadataOutputMetadata (..),
+    newXPSResponseExplanationMetadataOutputMetadata,
 
     -- ** XPSResponseExplanationParameters
-    , XPSResponseExplanationParameters (..)
-    , newXPSResponseExplanationParameters
+    XPSResponseExplanationParameters (..),
+    newXPSResponseExplanationParameters,
 
     -- ** XPSResponseExplanationSpec
-    , XPSResponseExplanationSpec (..)
-    , newXPSResponseExplanationSpec
+    XPSResponseExplanationSpec (..),
+    newXPSResponseExplanationSpec,
 
     -- ** XPSRow
-    , XPSRow (..)
-    , newXPSRow
+    XPSRow (..),
+    newXPSRow,
 
     -- ** XPSSpeechEvaluationMetrics
-    , XPSSpeechEvaluationMetrics (..)
-    , newXPSSpeechEvaluationMetrics
+    XPSSpeechEvaluationMetrics (..),
+    newXPSSpeechEvaluationMetrics,
 
     -- ** XPSSpeechEvaluationMetricsSubModelEvaluationMetric
-    , XPSSpeechEvaluationMetricsSubModelEvaluationMetric (..)
-    , newXPSSpeechEvaluationMetricsSubModelEvaluationMetric
+    XPSSpeechEvaluationMetricsSubModelEvaluationMetric (..),
+    newXPSSpeechEvaluationMetricsSubModelEvaluationMetric,
 
     -- ** XPSSpeechEvaluationMetricsSubModelEvaluationMetric_BiasingModelType
-    , XPSSpeechEvaluationMetricsSubModelEvaluationMetric_BiasingModelType (..)
+    XPSSpeechEvaluationMetricsSubModelEvaluationMetric_BiasingModelType (..),
 
     -- ** XPSSpeechModelSpec
-    , XPSSpeechModelSpec (..)
-    , newXPSSpeechModelSpec
+    XPSSpeechModelSpec (..),
+    newXPSSpeechModelSpec,
 
     -- ** XPSSpeechModelSpecSubModelSpec
-    , XPSSpeechModelSpecSubModelSpec (..)
-    , newXPSSpeechModelSpecSubModelSpec
+    XPSSpeechModelSpecSubModelSpec (..),
+    newXPSSpeechModelSpecSubModelSpec,
 
     -- ** XPSSpeechModelSpecSubModelSpec_BiasingModelType
-    , XPSSpeechModelSpecSubModelSpec_BiasingModelType (..)
+    XPSSpeechModelSpecSubModelSpec_BiasingModelType (..),
 
     -- ** XPSSpeechPreprocessResponse
-    , XPSSpeechPreprocessResponse (..)
-    , newXPSSpeechPreprocessResponse
+    XPSSpeechPreprocessResponse (..),
+    newXPSSpeechPreprocessResponse,
 
     -- ** XPSSpeechPreprocessStats
-    , XPSSpeechPreprocessStats (..)
-    , newXPSSpeechPreprocessStats
+    XPSSpeechPreprocessStats (..),
+    newXPSSpeechPreprocessStats,
 
     -- ** XPSStringStats
-    , XPSStringStats (..)
-    , newXPSStringStats
+    XPSStringStats (..),
+    newXPSStringStats,
 
     -- ** XPSStringStatsUnigramStats
-    , XPSStringStatsUnigramStats (..)
-    , newXPSStringStatsUnigramStats
+    XPSStringStatsUnigramStats (..),
+    newXPSStringStatsUnigramStats,
 
     -- ** XPSStructStats
-    , XPSStructStats (..)
-    , newXPSStructStats
+    XPSStructStats (..),
+    newXPSStructStats,
 
     -- ** XPSStructStats_FieldStats
-    , XPSStructStats_FieldStats (..)
-    , newXPSStructStats_FieldStats
+    XPSStructStats_FieldStats (..),
+    newXPSStructStats_FieldStats,
 
     -- ** XPSStructType
-    , XPSStructType (..)
-    , newXPSStructType
+    XPSStructType (..),
+    newXPSStructType,
 
     -- ** XPSStructType_Fields
-    , XPSStructType_Fields (..)
-    , newXPSStructType_Fields
+    XPSStructType_Fields (..),
+    newXPSStructType_Fields,
 
     -- ** XPSTableSpec
-    , XPSTableSpec (..)
-    , newXPSTableSpec
+    XPSTableSpec (..),
+    newXPSTableSpec,
 
     -- ** XPSTableSpec_ColumnSpecs
-    , XPSTableSpec_ColumnSpecs (..)
-    , newXPSTableSpec_ColumnSpecs
+    XPSTableSpec_ColumnSpecs (..),
+    newXPSTableSpec_ColumnSpecs,
 
     -- ** XPSTablesClassificationMetrics
-    , XPSTablesClassificationMetrics (..)
-    , newXPSTablesClassificationMetrics
+    XPSTablesClassificationMetrics (..),
+    newXPSTablesClassificationMetrics,
 
     -- ** XPSTablesClassificationMetricsCurveMetrics
-    , XPSTablesClassificationMetricsCurveMetrics (..)
-    , newXPSTablesClassificationMetricsCurveMetrics
+    XPSTablesClassificationMetricsCurveMetrics (..),
+    newXPSTablesClassificationMetricsCurveMetrics,
 
     -- ** XPSTablesConfidenceMetricsEntry
-    , XPSTablesConfidenceMetricsEntry (..)
-    , newXPSTablesConfidenceMetricsEntry
+    XPSTablesConfidenceMetricsEntry (..),
+    newXPSTablesConfidenceMetricsEntry,
 
     -- ** XPSTablesDatasetMetadata
-    , XPSTablesDatasetMetadata (..)
-    , newXPSTablesDatasetMetadata
+    XPSTablesDatasetMetadata (..),
+    newXPSTablesDatasetMetadata,
 
     -- ** XPSTablesDatasetMetadata_TargetColumnCorrelations
-    , XPSTablesDatasetMetadata_TargetColumnCorrelations (..)
-    , newXPSTablesDatasetMetadata_TargetColumnCorrelations
+    XPSTablesDatasetMetadata_TargetColumnCorrelations (..),
+    newXPSTablesDatasetMetadata_TargetColumnCorrelations,
 
     -- ** XPSTablesEvaluationMetrics
-    , XPSTablesEvaluationMetrics (..)
-    , newXPSTablesEvaluationMetrics
+    XPSTablesEvaluationMetrics (..),
+    newXPSTablesEvaluationMetrics,
 
     -- ** XPSTablesModelColumnInfo
-    , XPSTablesModelColumnInfo (..)
-    , newXPSTablesModelColumnInfo
+    XPSTablesModelColumnInfo (..),
+    newXPSTablesModelColumnInfo,
 
     -- ** XPSTablesModelStructure
-    , XPSTablesModelStructure (..)
-    , newXPSTablesModelStructure
+    XPSTablesModelStructure (..),
+    newXPSTablesModelStructure,
 
     -- ** XPSTablesModelStructureModelParameters
-    , XPSTablesModelStructureModelParameters (..)
-    , newXPSTablesModelStructureModelParameters
+    XPSTablesModelStructureModelParameters (..),
+    newXPSTablesModelStructureModelParameters,
 
     -- ** XPSTablesModelStructureModelParametersParameter
-    , XPSTablesModelStructureModelParametersParameter (..)
-    , newXPSTablesModelStructureModelParametersParameter
+    XPSTablesModelStructureModelParametersParameter (..),
+    newXPSTablesModelStructureModelParametersParameter,
 
     -- ** XPSTablesPreprocessResponse
-    , XPSTablesPreprocessResponse (..)
-    , newXPSTablesPreprocessResponse
+    XPSTablesPreprocessResponse (..),
+    newXPSTablesPreprocessResponse,
 
     -- ** XPSTablesRegressionMetrics
-    , XPSTablesRegressionMetrics (..)
-    , newXPSTablesRegressionMetrics
+    XPSTablesRegressionMetrics (..),
+    newXPSTablesRegressionMetrics,
 
     -- ** XPSTablesTrainResponse
-    , XPSTablesTrainResponse (..)
-    , newXPSTablesTrainResponse
+    XPSTablesTrainResponse (..),
+    newXPSTablesTrainResponse,
 
     -- ** XPSTablesTrainingOperationMetadata
-    , XPSTablesTrainingOperationMetadata (..)
-    , newXPSTablesTrainingOperationMetadata
+    XPSTablesTrainingOperationMetadata (..),
+    newXPSTablesTrainingOperationMetadata,
 
     -- ** XPSTablesTrainingOperationMetadata_CreateModelStage
-    , XPSTablesTrainingOperationMetadata_CreateModelStage (..)
+    XPSTablesTrainingOperationMetadata_CreateModelStage (..),
 
     -- ** XPSTextComponentModel
-    , XPSTextComponentModel (..)
-    , newXPSTextComponentModel
+    XPSTextComponentModel (..),
+    newXPSTextComponentModel,
 
     -- ** XPSTextComponentModel_Partition
-    , XPSTextComponentModel_Partition (..)
+    XPSTextComponentModel_Partition (..),
 
     -- ** XPSTextComponentModel_SubmodelType
-    , XPSTextComponentModel_SubmodelType (..)
+    XPSTextComponentModel_SubmodelType (..),
 
     -- ** XPSTextExtractionEvaluationMetrics
-    , XPSTextExtractionEvaluationMetrics (..)
-    , newXPSTextExtractionEvaluationMetrics
+    XPSTextExtractionEvaluationMetrics (..),
+    newXPSTextExtractionEvaluationMetrics,
 
     -- ** XPSTextExtractionEvaluationMetrics_PerLabelConfidenceMetrics
-    , XPSTextExtractionEvaluationMetrics_PerLabelConfidenceMetrics (..)
-    , newXPSTextExtractionEvaluationMetrics_PerLabelConfidenceMetrics
+    XPSTextExtractionEvaluationMetrics_PerLabelConfidenceMetrics (..),
+    newXPSTextExtractionEvaluationMetrics_PerLabelConfidenceMetrics,
 
     -- ** XPSTextSentimentEvaluationMetrics
-    , XPSTextSentimentEvaluationMetrics (..)
-    , newXPSTextSentimentEvaluationMetrics
+    XPSTextSentimentEvaluationMetrics (..),
+    newXPSTextSentimentEvaluationMetrics,
 
     -- ** XPSTextToSpeechTrainResponse
-    , XPSTextToSpeechTrainResponse (..)
-    , newXPSTextToSpeechTrainResponse
+    XPSTextToSpeechTrainResponse (..),
+    newXPSTextToSpeechTrainResponse,
 
     -- ** XPSTextTrainResponse
-    , XPSTextTrainResponse (..)
-    , newXPSTextTrainResponse
+    XPSTextTrainResponse (..),
+    newXPSTextTrainResponse,
 
     -- ** XPSTfJsFormat
-    , XPSTfJsFormat (..)
-    , newXPSTfJsFormat
+    XPSTfJsFormat (..),
+    newXPSTfJsFormat,
 
     -- ** XPSTfLiteFormat
-    , XPSTfLiteFormat (..)
-    , newXPSTfLiteFormat
+    XPSTfLiteFormat (..),
+    newXPSTfLiteFormat,
 
     -- ** XPSTfSavedModelFormat
-    , XPSTfSavedModelFormat (..)
-    , newXPSTfSavedModelFormat
+    XPSTfSavedModelFormat (..),
+    newXPSTfSavedModelFormat,
 
     -- ** XPSTimestampStats
-    , XPSTimestampStats (..)
-    , newXPSTimestampStats
+    XPSTimestampStats (..),
+    newXPSTimestampStats,
 
     -- ** XPSTimestampStats_GranularStats
-    , XPSTimestampStats_GranularStats (..)
-    , newXPSTimestampStats_GranularStats
+    XPSTimestampStats_GranularStats (..),
+    newXPSTimestampStats_GranularStats,
 
     -- ** XPSTimestampStatsGranularStats
-    , XPSTimestampStatsGranularStats (..)
-    , newXPSTimestampStatsGranularStats
+    XPSTimestampStatsGranularStats (..),
+    newXPSTimestampStatsGranularStats,
 
     -- ** XPSTimestampStatsGranularStats_Buckets
-    , XPSTimestampStatsGranularStats_Buckets (..)
-    , newXPSTimestampStatsGranularStats_Buckets
+    XPSTimestampStatsGranularStats_Buckets (..),
+    newXPSTimestampStatsGranularStats_Buckets,
 
     -- ** XPSTrackMetricsEntry
-    , XPSTrackMetricsEntry (..)
-    , newXPSTrackMetricsEntry
+    XPSTrackMetricsEntry (..),
+    newXPSTrackMetricsEntry,
 
     -- ** XPSTrackMetricsEntryConfidenceMetricsEntry
-    , XPSTrackMetricsEntryConfidenceMetricsEntry (..)
-    , newXPSTrackMetricsEntryConfidenceMetricsEntry
+    XPSTrackMetricsEntryConfidenceMetricsEntry (..),
+    newXPSTrackMetricsEntryConfidenceMetricsEntry,
 
     -- ** XPSTrainResponse
-    , XPSTrainResponse (..)
-    , newXPSTrainResponse
+    XPSTrainResponse (..),
+    newXPSTrainResponse,
 
     -- ** XPSTrainingObjectivePoint
-    , XPSTrainingObjectivePoint (..)
-    , newXPSTrainingObjectivePoint
+    XPSTrainingObjectivePoint (..),
+    newXPSTrainingObjectivePoint,
 
     -- ** XPSTranslationEvaluationMetrics
-    , XPSTranslationEvaluationMetrics (..)
-    , newXPSTranslationEvaluationMetrics
+    XPSTranslationEvaluationMetrics (..),
+    newXPSTranslationEvaluationMetrics,
 
     -- ** XPSTranslationPreprocessResponse
-    , XPSTranslationPreprocessResponse (..)
-    , newXPSTranslationPreprocessResponse
+    XPSTranslationPreprocessResponse (..),
+    newXPSTranslationPreprocessResponse,
 
     -- ** XPSTranslationTrainResponse
-    , XPSTranslationTrainResponse (..)
-    , newXPSTranslationTrainResponse
+    XPSTranslationTrainResponse (..),
+    newXPSTranslationTrainResponse,
 
     -- ** XPSTranslationTrainResponse_ModelType
-    , XPSTranslationTrainResponse_ModelType (..)
+    XPSTranslationTrainResponse_ModelType (..),
 
     -- ** XPSTuningTrial
-    , XPSTuningTrial (..)
-    , newXPSTuningTrial
+    XPSTuningTrial (..),
+    newXPSTuningTrial,
 
     -- ** XPSVideoActionMetricsEntry
-    , XPSVideoActionMetricsEntry (..)
-    , newXPSVideoActionMetricsEntry
+    XPSVideoActionMetricsEntry (..),
+    newXPSVideoActionMetricsEntry,
 
     -- ** XPSVideoActionMetricsEntryConfidenceMetricsEntry
-    , XPSVideoActionMetricsEntryConfidenceMetricsEntry (..)
-    , newXPSVideoActionMetricsEntryConfidenceMetricsEntry
+    XPSVideoActionMetricsEntryConfidenceMetricsEntry (..),
+    newXPSVideoActionMetricsEntryConfidenceMetricsEntry,
 
     -- ** XPSVideoActionRecognitionEvaluationMetrics
-    , XPSVideoActionRecognitionEvaluationMetrics (..)
-    , newXPSVideoActionRecognitionEvaluationMetrics
+    XPSVideoActionRecognitionEvaluationMetrics (..),
+    newXPSVideoActionRecognitionEvaluationMetrics,
 
     -- ** XPSVideoActionRecognitionTrainResponse
-    , XPSVideoActionRecognitionTrainResponse (..)
-    , newXPSVideoActionRecognitionTrainResponse
+    XPSVideoActionRecognitionTrainResponse (..),
+    newXPSVideoActionRecognitionTrainResponse,
 
     -- ** XPSVideoBatchPredictOperationMetadata
-    , XPSVideoBatchPredictOperationMetadata (..)
-    , newXPSVideoBatchPredictOperationMetadata
+    XPSVideoBatchPredictOperationMetadata (..),
+    newXPSVideoBatchPredictOperationMetadata,
 
     -- ** XPSVideoClassificationTrainResponse
-    , XPSVideoClassificationTrainResponse (..)
-    , newXPSVideoClassificationTrainResponse
+    XPSVideoClassificationTrainResponse (..),
+    newXPSVideoClassificationTrainResponse,
 
     -- ** XPSVideoExportModelSpec
-    , XPSVideoExportModelSpec (..)
-    , newXPSVideoExportModelSpec
+    XPSVideoExportModelSpec (..),
+    newXPSVideoExportModelSpec,
 
     -- ** XPSVideoModelArtifactSpec
-    , XPSVideoModelArtifactSpec (..)
-    , newXPSVideoModelArtifactSpec
+    XPSVideoModelArtifactSpec (..),
+    newXPSVideoModelArtifactSpec,
 
     -- ** XPSVideoObjectTrackingEvaluationMetrics
-    , XPSVideoObjectTrackingEvaluationMetrics (..)
-    , newXPSVideoObjectTrackingEvaluationMetrics
+    XPSVideoObjectTrackingEvaluationMetrics (..),
+    newXPSVideoObjectTrackingEvaluationMetrics,
 
     -- ** XPSVideoObjectTrackingTrainResponse
-    , XPSVideoObjectTrackingTrainResponse (..)
-    , newXPSVideoObjectTrackingTrainResponse
+    XPSVideoObjectTrackingTrainResponse (..),
+    newXPSVideoObjectTrackingTrainResponse,
 
     -- ** XPSVideoTrainingOperationMetadata
-    , XPSVideoTrainingOperationMetadata (..)
-    , newXPSVideoTrainingOperationMetadata
+    XPSVideoTrainingOperationMetadata (..),
+    newXPSVideoTrainingOperationMetadata,
 
     -- ** XPSVisionErrorAnalysisConfig
-    , XPSVisionErrorAnalysisConfig (..)
-    , newXPSVisionErrorAnalysisConfig
+    XPSVisionErrorAnalysisConfig (..),
+    newXPSVisionErrorAnalysisConfig,
 
     -- ** XPSVisionErrorAnalysisConfig_QueryType
-    , XPSVisionErrorAnalysisConfig_QueryType (..)
+    XPSVisionErrorAnalysisConfig_QueryType (..),
 
     -- ** XPSVisionTrainingOperationMetadata
-    , XPSVisionTrainingOperationMetadata (..)
-    , newXPSVisionTrainingOperationMetadata
+    XPSVisionTrainingOperationMetadata (..),
+    newXPSVisionTrainingOperationMetadata,
 
     -- ** XPSVisualization
-    , XPSVisualization (..)
-    , newXPSVisualization
+    XPSVisualization (..),
+    newXPSVisualization,
 
     -- ** XPSVisualization_ColorMap
-    , XPSVisualization_ColorMap (..)
+    XPSVisualization_ColorMap (..),
 
     -- ** XPSVisualization_OverlayType
-    , XPSVisualization_OverlayType (..)
+    XPSVisualization_OverlayType (..),
 
     -- ** XPSVisualization_Polarity
-    , XPSVisualization_Polarity (..)
+    XPSVisualization_Polarity (..),
 
     -- ** XPSVisualization_Type
-    , XPSVisualization_Type (..)
+    XPSVisualization_Type (..),
 
     -- ** XPSXpsOperationMetadata
-    , XPSXpsOperationMetadata (..)
-    , newXPSXpsOperationMetadata
+    XPSXpsOperationMetadata (..),
+    newXPSXpsOperationMetadata,
 
     -- ** XPSXraiAttribution
-    , XPSXraiAttribution (..)
-    , newXPSXraiAttribution
-    ) where
+    XPSXraiAttribution (..),
+    newXPSXraiAttribution,
+  )
+where
 
 import Gogol.Language.Documents.AnalyzeEntities
 import Gogol.Language.Documents.AnalyzeSentiment

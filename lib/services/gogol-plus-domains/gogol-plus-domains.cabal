@@ -1,19 +1,24 @@
-cabal-version:         2.2
-name:                  gogol-plus-domains
-version:               1.0.0
-synopsis:              Google + Domains SDK.
-homepage:              https://github.com/brendanhay/gogol
-bug-reports:           https://github.com/brendanhay/gogol/issues
-license:               MPL-2.0
-license-file:          LICENSE
-author:                Brendan Hay
-maintainer:            Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:             Copyright (c) 2015-2022 Brendan Hay
-category:              Google
-build-type:            Simple
-extra-source-files:    README.md src/.gitkeep
+cabal-version:      2.2
+name:               gogol-plus-domains
+version:            1.0.0
+synopsis:           Google + Domains SDK.
+homepage:           https://github.com/brendanhay/gogol
+bug-reports:        https://github.com/brendanhay/gogol/issues
+license:            MPL-2.0
+license-file:       LICENSE
+author:             Brendan Hay
+maintainer:
+  Brendan Hay <brendan.g.hay+gogol@gmail.com>, Toni Cebrián <toni@tonicebrian.com>
+
+copyright:          Copyright (c) 2015-2025 Brendan Hay
+category:           Google
+build-type:         Simple
+extra-source-files:
+  README.md
+  src/.gitkeep
+
 description:
-    Builds on top of the Google+ platform for Google Apps Domains.
+  Builds on top of the Google+ platform for Google Apps Domains.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -27,42 +32,39 @@ source-repository head
   subdir:   gogol-plus-domains
 
 flag field-selectors
-  description: If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
-  default: False
-  manual: True
+  description:
+    If record field selectors should be enabled. Disabling this requires GHC >=9.2 and the NoFieldSelectors extension.
+
+  default:     False
+  manual:      True
 
 library
-  default-language:  Haskell2010
-  hs-source-dirs:    src gen
-
+  default-language: GHC2021
+  hs-source-dirs:   src gen
   ghc-options:
-    -Wall
-    -Werror
-    -fwarn-incomplete-uni-patterns
-    -fwarn-incomplete-record-updates
-    -funbox-strict-fields
+    -Wall -fwarn-incomplete-uni-patterns
+    -fwarn-incomplete-record-updates -funbox-strict-fields
     -fwarn-unused-packages
 
-  if !flag(field-selectors) && impl(ghc >= 9.2)
+  if (!flag(field-selectors) && impl(ghc >=9.2))
     default-extensions: NoFieldSelectors
 
   exposed-modules:
-      Gogol.PlusDomains
-    , Gogol.PlusDomains.Activities.Get
-    , Gogol.PlusDomains.Activities.List
-    , Gogol.PlusDomains.Audiences.List
-    , Gogol.PlusDomains.Circles.List
-    , Gogol.PlusDomains.Comments.Get
-    , Gogol.PlusDomains.Comments.List
-    , Gogol.PlusDomains.Media.Insert
-    , Gogol.PlusDomains.People.Get
-    , Gogol.PlusDomains.People.List
-    , Gogol.PlusDomains.People.ListByActivity
-    , Gogol.PlusDomains.Types
+    Gogol.PlusDomains
+    Gogol.PlusDomains.Activities.Get
+    Gogol.PlusDomains.Activities.List
+    Gogol.PlusDomains.Audiences.List
+    Gogol.PlusDomains.Circles.List
+    Gogol.PlusDomains.Comments.Get
+    Gogol.PlusDomains.Comments.List
+    Gogol.PlusDomains.Media.Insert
+    Gogol.PlusDomains.People.Get
+    Gogol.PlusDomains.People.List
+    Gogol.PlusDomains.People.ListByActivity
+    Gogol.PlusDomains.Types
 
   other-modules:
-      Gogol.PlusDomains.Internal.Product
-    , Gogol.PlusDomains.Internal.Sum
+    Gogol.PlusDomains.Internal.Product
+    Gogol.PlusDomains.Internal.Sum
 
-  build-depends:
-      gogol-core ^>= 1.0.0
+  build-depends:    gogol-core ^>=1.0.0

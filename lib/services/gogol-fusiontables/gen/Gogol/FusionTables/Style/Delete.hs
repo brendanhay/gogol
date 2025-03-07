@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.FusionTables.Style.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,63 +27,58 @@
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.style.delete@.
 module Gogol.FusionTables.Style.Delete
-    (
-    -- * Resource
-      FusionTablesStyleDeleteResource
+  ( -- * Resource
+    FusionTablesStyleDeleteResource,
 
     -- ** Constructing a Request
-    , FusionTablesStyleDelete (..)
-    , newFusionTablesStyleDelete
-    ) where
+    FusionTablesStyleDelete (..),
+    newFusionTablesStyleDelete,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.FusionTables.Types
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @fusiontables.style.delete@ method which the
 -- 'FusionTablesStyleDelete' request conforms to.
 type FusionTablesStyleDeleteResource =
-     "fusiontables" Core.:>
-       "v2" Core.:>
-         "tables" Core.:>
-           Core.Capture "tableId" Core.Text Core.:>
-             "styles" Core.:>
-               Core.Capture "styleId" Core.Int32 Core.:>
-                 Core.QueryParam "alt" Core.AltJSON Core.:>
-                   Core.Delete '[Core.JSON] ()
+  "fusiontables"
+    Core.:> "v2"
+    Core.:> "tables"
+    Core.:> Core.Capture "tableId" Core.Text
+    Core.:> "styles"
+    Core.:> Core.Capture "styleId" Core.Int32
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Delete '[Core.JSON] ()
 
 -- | Deletes a style.
 --
 -- /See:/ 'newFusionTablesStyleDelete' smart constructor.
 data FusionTablesStyleDelete = FusionTablesStyleDelete
-    {
-      -- | Identifier (within a table) for the style being deleted
-      styleId :: Core.Int32
-      -- | Table from which the style is being deleted
-    , tableId :: Core.Text
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | Identifier (within a table) for the style being deleted
+    styleId :: Core.Int32,
+    -- | Table from which the style is being deleted
+    tableId :: Core.Text
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'FusionTablesStyleDelete' with the minimum fields required to make a request.
-newFusionTablesStyleDelete 
-    ::  Core.Int32
-       -- ^  Identifier (within a table) for the style being deleted See 'styleId'.
-    -> Core.Text
-       -- ^  Table from which the style is being deleted See 'tableId'.
-    -> FusionTablesStyleDelete
+newFusionTablesStyleDelete ::
+  -- |  Identifier (within a table) for the style being deleted See 'styleId'.
+  Core.Int32 ->
+  -- |  Table from which the style is being deleted See 'tableId'.
+  Core.Text ->
+  FusionTablesStyleDelete
 newFusionTablesStyleDelete styleId tableId =
   FusionTablesStyleDelete {styleId = styleId, tableId = tableId}
 
-instance Core.GoogleRequest FusionTablesStyleDelete
-         where
-        type Rs FusionTablesStyleDelete = ()
-        type Scopes FusionTablesStyleDelete =
-             '[Fusiontables'FullControl]
-        requestClient FusionTablesStyleDelete{..}
-          = go tableId styleId (Core.Just Core.AltJSON)
-              fusionTablesService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy FusionTablesStyleDeleteResource)
-                      Core.mempty
-
+instance Core.GoogleRequest FusionTablesStyleDelete where
+  type Rs FusionTablesStyleDelete = ()
+  type Scopes FusionTablesStyleDelete = '[Fusiontables'FullControl]
+  requestClient FusionTablesStyleDelete {..} =
+    go tableId styleId (Core.Just Core.AltJSON) fusionTablesService
+    where
+      go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy FusionTablesStyleDeleteResource)
+          Core.mempty

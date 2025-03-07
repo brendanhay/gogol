@@ -10,17 +10,18 @@
     shellcheck.enable = true;
     shfmt.enable = true;
     shfmt.indent_size = 4;
+    yamlfmt.enable = true;
   };
 
   settings = {
     global.excludes = [
       "CONTRIBUTORS"
       "configs/*"
-      "*/LICENSE"
-      "*/Makefile"
-      "*/.gitkeep"
+      "**LICENSE"
+      "**Makefile"
+      "**.gitkeep"
+      "*.lhs"
       "*.md"
-      "*.yaml"
     ];
 
     formatter = {

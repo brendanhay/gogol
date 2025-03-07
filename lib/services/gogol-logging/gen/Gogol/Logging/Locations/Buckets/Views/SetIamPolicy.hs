@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,9 +16,10 @@
 
 -- |
 -- Module      : Gogol.Logging.Locations.Buckets.Views.SetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -31,92 +27,94 @@
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.locations.buckets.views.setIamPolicy@.
 module Gogol.Logging.Locations.Buckets.Views.SetIamPolicy
-    (
-    -- * Resource
-      LoggingLocationsBucketsViewsSetIamPolicyResource
+  ( -- * Resource
+    LoggingLocationsBucketsViewsSetIamPolicyResource,
 
     -- ** Constructing a Request
-    , LoggingLocationsBucketsViewsSetIamPolicy (..)
-    , newLoggingLocationsBucketsViewsSetIamPolicy
-    ) where
+    LoggingLocationsBucketsViewsSetIamPolicy (..),
+    newLoggingLocationsBucketsViewsSetIamPolicy,
+  )
+where
 
-import qualified Gogol.Prelude as Core
 import Gogol.Logging.Types
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @logging.locations.buckets.views.setIamPolicy@ method which the
 -- 'LoggingLocationsBucketsViewsSetIamPolicy' request conforms to.
-type LoggingLocationsBucketsViewsSetIamPolicyResource
-     =
-     "v2" Core.:>
-       Core.CaptureMode "resource" "setIamPolicy" Core.Text
-         Core.:>
-         Core.QueryParam "$.xgafv" Xgafv Core.:>
-           Core.QueryParam "access_token" Core.Text Core.:>
-             Core.QueryParam "callback" Core.Text Core.:>
-               Core.QueryParam "uploadType" Core.Text Core.:>
-                 Core.QueryParam "upload_protocol" Core.Text Core.:>
-                   Core.QueryParam "alt" Core.AltJSON Core.:>
-                     Core.ReqBody '[Core.JSON] SetIamPolicyRequest Core.:>
-                       Core.Post '[Core.JSON] Policy
+type LoggingLocationsBucketsViewsSetIamPolicyResource =
+  "v2"
+    Core.:> Core.CaptureMode "resource" "setIamPolicy" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] SetIamPolicyRequest
+    Core.:> Core.Post '[Core.JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any existing policy.Can return NOT/FOUND, INVALID/ARGUMENT, and PERMISSION_DENIED errors.
 --
 -- /See:/ 'newLoggingLocationsBucketsViewsSetIamPolicy' smart constructor.
 data LoggingLocationsBucketsViewsSetIamPolicy = LoggingLocationsBucketsViewsSetIamPolicy
-    {
-      -- | V1 error format.
-      xgafv :: (Core.Maybe Xgafv)
-      -- | OAuth access token.
-    , accessToken :: (Core.Maybe Core.Text)
-      -- | JSONP
-    , callback :: (Core.Maybe Core.Text)
-      -- | Multipart request metadata.
-    , payload :: SetIamPolicyRequest
-      -- | REQUIRED: The resource for which the policy is being specified. See Resource names (https:\/\/cloud.google.com\/apis\/design\/resource_names) for the appropriate value for this field.
-    , resource :: Core.Text
-      -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-    , uploadType :: (Core.Maybe Core.Text)
-      -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    , uploadProtocol :: (Core.Maybe Core.Text)
-    }
-    deriving (Core.Eq, Core.Show, Core.Generic)
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Multipart request metadata.
+    payload :: SetIamPolicyRequest,
+    -- | REQUIRED: The resource for which the policy is being specified. See Resource names (https:\/\/cloud.google.com\/apis\/design\/resource_names) for the appropriate value for this field.
+    resource :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'LoggingLocationsBucketsViewsSetIamPolicy' with the minimum fields required to make a request.
-newLoggingLocationsBucketsViewsSetIamPolicy 
-    ::  SetIamPolicyRequest
-       -- ^  Multipart request metadata. See 'payload'.
-    -> Core.Text
-       -- ^  REQUIRED: The resource for which the policy is being specified. See Resource names (https:\/\/cloud.google.com\/apis\/design\/resource_names) for the appropriate value for this field. See 'resource'.
-    -> LoggingLocationsBucketsViewsSetIamPolicy
+newLoggingLocationsBucketsViewsSetIamPolicy ::
+  -- |  Multipart request metadata. See 'payload'.
+  SetIamPolicyRequest ->
+  -- |  REQUIRED: The resource for which the policy is being specified. See Resource names (https:\/\/cloud.google.com\/apis\/design\/resource_names) for the appropriate value for this field. See 'resource'.
+  Core.Text ->
+  LoggingLocationsBucketsViewsSetIamPolicy
 newLoggingLocationsBucketsViewsSetIamPolicy payload resource =
   LoggingLocationsBucketsViewsSetIamPolicy
-    { xgafv = Core.Nothing
-    , accessToken = Core.Nothing
-    , callback = Core.Nothing
-    , payload = payload
-    , resource = resource
-    , uploadType = Core.Nothing
-    , uploadProtocol = Core.Nothing
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      payload = payload,
+      resource = resource,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance Core.GoogleRequest
-           LoggingLocationsBucketsViewsSetIamPolicy
-         where
-        type Rs LoggingLocationsBucketsViewsSetIamPolicy =
-             Policy
-        type Scopes LoggingLocationsBucketsViewsSetIamPolicy
-             = '[CloudPlatform'FullControl, Logging'Admin]
-        requestClient
-          LoggingLocationsBucketsViewsSetIamPolicy{..}
-          = go resource xgafv accessToken callback uploadType
-              uploadProtocol
-              (Core.Just Core.AltJSON)
-              payload
-              loggingService
-          where go
-                  = Core.buildClient
-                      (Core.Proxy ::
-                         Core.Proxy
-                           LoggingLocationsBucketsViewsSetIamPolicyResource)
-                      Core.mempty
-
+instance
+  Core.GoogleRequest
+    LoggingLocationsBucketsViewsSetIamPolicy
+  where
+  type Rs LoggingLocationsBucketsViewsSetIamPolicy = Policy
+  type
+    Scopes LoggingLocationsBucketsViewsSetIamPolicy =
+      '[CloudPlatform'FullControl, Logging'Admin]
+  requestClient LoggingLocationsBucketsViewsSetIamPolicy {..} =
+    go
+      resource
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      loggingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy LoggingLocationsBucketsViewsSetIamPolicyResource
+          )
+          Core.mempty

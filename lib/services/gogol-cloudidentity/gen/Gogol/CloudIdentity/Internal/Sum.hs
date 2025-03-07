@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,35 +16,30 @@
 
 -- |
 -- Module      : Gogol.CloudIdentity.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.CloudIdentity.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * DynamicGroupQuery_ResourceType
     DynamicGroupQuery_ResourceType
-      (
-        DynamicGroupQuery_ResourceType_RESOURCETYPEUNSPECIFIED,
+      ( DynamicGroupQuery_ResourceType_RESOURCETYPEUNSPECIFIED,
         DynamicGroupQuery_ResourceType_User,
         ..
       ),
 
     -- * DynamicGroupStatus_Status
     DynamicGroupStatus_Status
-      (
-        DynamicGroupStatus_Status_STATUSUNSPECIFIED,
+      ( DynamicGroupStatus_Status_STATUSUNSPECIFIED,
         DynamicGroupStatus_Status_UPTODATE,
         DynamicGroupStatus_Status_UPDATINGMEMBERSHIPS,
         DynamicGroupStatus_Status_INVALIDQUERY,
@@ -58,8 +48,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege
     GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege
-      (
-        GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege_OWNERSHIPPRIVILEGEUNSPECIFIED,
+      ( GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege_OWNERSHIPPRIVILEGEUNSPECIFIED,
         GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege_DEVICEADMINISTRATOR,
         GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege_PROFILEOWNER,
         GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege_DEVICEOWNER,
@@ -68,8 +57,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState
     GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState
-      (
-        GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_Unspecified,
+      ( GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_Unspecified,
         GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_Unmanaged,
         GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_MANAGEDBYOTHERDOMAIN,
         GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_PROFILEMANAGED,
@@ -79,8 +67,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger
     GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger
-      (
-        GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PASSWORDPROTECTIONTRIGGERUNSPECIFIED,
+      ( GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PASSWORDPROTECTIONTRIGGERUNSPECIFIED,
         GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PROTECTIONOFF,
         GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PASSWORDREUSE,
         GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PHISHINGREUSE,
@@ -89,8 +76,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel
     GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel
-      (
-        GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_SAFEBROWSINGLEVELUNSPECIFIED,
+      ( GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_SAFEBROWSINGLEVELUNSPECIFIED,
         GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_Disabled,
         GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_Standard,
         GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_Enhanced,
@@ -99,8 +85,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState
     GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState
-      (
-        GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState_CERTIFICATEVALIDATIONSTATEUNSPECIFIED,
+      ( GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState_CERTIFICATEVALIDATIONSTATEUNSPECIFIED,
         GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState_VALIDATIONSUCCESSFUL,
         GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState_VALIDATIONFAILED,
         ..
@@ -108,8 +93,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * GoogleAppsCloudidentityDevicesV1ClientState_ComplianceState
     GoogleAppsCloudidentityDevicesV1ClientState_ComplianceState
-      (
-        GoogleAppsCloudidentityDevicesV1ClientState_ComplianceState_COMPLIANCESTATEUNSPECIFIED,
+      ( GoogleAppsCloudidentityDevicesV1ClientState_ComplianceState_COMPLIANCESTATEUNSPECIFIED,
         GoogleAppsCloudidentityDevicesV1ClientState_ComplianceState_Compliant,
         GoogleAppsCloudidentityDevicesV1ClientState_ComplianceState_NONCOMPLIANT,
         ..
@@ -117,8 +101,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * GoogleAppsCloudidentityDevicesV1ClientState_HealthScore
     GoogleAppsCloudidentityDevicesV1ClientState_HealthScore
-      (
-        GoogleAppsCloudidentityDevicesV1ClientState_HealthScore_HEALTHSCOREUNSPECIFIED,
+      ( GoogleAppsCloudidentityDevicesV1ClientState_HealthScore_HEALTHSCOREUNSPECIFIED,
         GoogleAppsCloudidentityDevicesV1ClientState_HealthScore_VERYPOOR,
         GoogleAppsCloudidentityDevicesV1ClientState_HealthScore_Poor,
         GoogleAppsCloudidentityDevicesV1ClientState_HealthScore_Neutral,
@@ -129,8 +112,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * GoogleAppsCloudidentityDevicesV1ClientState_Managed
     GoogleAppsCloudidentityDevicesV1ClientState_Managed
-      (
-        GoogleAppsCloudidentityDevicesV1ClientState_Managed_MANAGEDSTATEUNSPECIFIED,
+      ( GoogleAppsCloudidentityDevicesV1ClientState_Managed_MANAGEDSTATEUNSPECIFIED,
         GoogleAppsCloudidentityDevicesV1ClientState_Managed_Managed,
         GoogleAppsCloudidentityDevicesV1ClientState_Managed_Unmanaged,
         ..
@@ -138,8 +120,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * GoogleAppsCloudidentityDevicesV1ClientState_OwnerType
     GoogleAppsCloudidentityDevicesV1ClientState_OwnerType
-      (
-        GoogleAppsCloudidentityDevicesV1ClientState_OwnerType_OWNERTYPEUNSPECIFIED,
+      ( GoogleAppsCloudidentityDevicesV1ClientState_OwnerType_OWNERTYPEUNSPECIFIED,
         GoogleAppsCloudidentityDevicesV1ClientState_OwnerType_OWNERTYPECUSTOMER,
         GoogleAppsCloudidentityDevicesV1ClientState_OwnerType_OWNERTYPEPARTNER,
         ..
@@ -147,8 +128,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * GoogleAppsCloudidentityDevicesV1Device_CompromisedState
     GoogleAppsCloudidentityDevicesV1Device_CompromisedState
-      (
-        GoogleAppsCloudidentityDevicesV1Device_CompromisedState_COMPROMISEDSTATEUNSPECIFIED,
+      ( GoogleAppsCloudidentityDevicesV1Device_CompromisedState_COMPROMISEDSTATEUNSPECIFIED,
         GoogleAppsCloudidentityDevicesV1Device_CompromisedState_Compromised,
         GoogleAppsCloudidentityDevicesV1Device_CompromisedState_Uncompromised,
         ..
@@ -156,8 +136,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * GoogleAppsCloudidentityDevicesV1Device_DeviceType
     GoogleAppsCloudidentityDevicesV1Device_DeviceType
-      (
-        GoogleAppsCloudidentityDevicesV1Device_DeviceType_DEVICETYPEUNSPECIFIED,
+      ( GoogleAppsCloudidentityDevicesV1Device_DeviceType_DEVICETYPEUNSPECIFIED,
         GoogleAppsCloudidentityDevicesV1Device_DeviceType_Android,
         GoogleAppsCloudidentityDevicesV1Device_DeviceType_Ios,
         GoogleAppsCloudidentityDevicesV1Device_DeviceType_GOOGLESYNC,
@@ -170,8 +149,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * GoogleAppsCloudidentityDevicesV1Device_EncryptionState
     GoogleAppsCloudidentityDevicesV1Device_EncryptionState
-      (
-        GoogleAppsCloudidentityDevicesV1Device_EncryptionState_ENCRYPTIONSTATEUNSPECIFIED,
+      ( GoogleAppsCloudidentityDevicesV1Device_EncryptionState_ENCRYPTIONSTATEUNSPECIFIED,
         GoogleAppsCloudidentityDevicesV1Device_EncryptionState_UNSUPPORTEDBYDEVICE,
         GoogleAppsCloudidentityDevicesV1Device_EncryptionState_Encrypted,
         GoogleAppsCloudidentityDevicesV1Device_EncryptionState_NOTENCRYPTED,
@@ -180,8 +158,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * GoogleAppsCloudidentityDevicesV1Device_ManagementState
     GoogleAppsCloudidentityDevicesV1Device_ManagementState
-      (
-        GoogleAppsCloudidentityDevicesV1Device_ManagementState_MANAGEMENTSTATEUNSPECIFIED,
+      ( GoogleAppsCloudidentityDevicesV1Device_ManagementState_MANAGEMENTSTATEUNSPECIFIED,
         GoogleAppsCloudidentityDevicesV1Device_ManagementState_Approved,
         GoogleAppsCloudidentityDevicesV1Device_ManagementState_Blocked,
         GoogleAppsCloudidentityDevicesV1Device_ManagementState_Pending,
@@ -193,8 +170,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * GoogleAppsCloudidentityDevicesV1Device_OwnerType
     GoogleAppsCloudidentityDevicesV1Device_OwnerType
-      (
-        GoogleAppsCloudidentityDevicesV1Device_OwnerType_DEVICEOWNERSHIPUNSPECIFIED,
+      ( GoogleAppsCloudidentityDevicesV1Device_OwnerType_DEVICEOWNERSHIPUNSPECIFIED,
         GoogleAppsCloudidentityDevicesV1Device_OwnerType_Company,
         GoogleAppsCloudidentityDevicesV1Device_OwnerType_Byod,
         ..
@@ -202,8 +178,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * GoogleAppsCloudidentityDevicesV1DeviceUser_CompromisedState
     GoogleAppsCloudidentityDevicesV1DeviceUser_CompromisedState
-      (
-        GoogleAppsCloudidentityDevicesV1DeviceUser_CompromisedState_COMPROMISEDSTATEUNSPECIFIED,
+      ( GoogleAppsCloudidentityDevicesV1DeviceUser_CompromisedState_COMPROMISEDSTATEUNSPECIFIED,
         GoogleAppsCloudidentityDevicesV1DeviceUser_CompromisedState_Compromised,
         GoogleAppsCloudidentityDevicesV1DeviceUser_CompromisedState_NOTCOMPROMISED,
         ..
@@ -211,8 +186,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * GoogleAppsCloudidentityDevicesV1DeviceUser_ManagementState
     GoogleAppsCloudidentityDevicesV1DeviceUser_ManagementState
-      (
-        GoogleAppsCloudidentityDevicesV1DeviceUser_ManagementState_MANAGEMENTSTATEUNSPECIFIED,
+      ( GoogleAppsCloudidentityDevicesV1DeviceUser_ManagementState_MANAGEMENTSTATEUNSPECIFIED,
         GoogleAppsCloudidentityDevicesV1DeviceUser_ManagementState_Wiping,
         GoogleAppsCloudidentityDevicesV1DeviceUser_ManagementState_Wiped,
         GoogleAppsCloudidentityDevicesV1DeviceUser_ManagementState_Approved,
@@ -224,8 +198,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState
     GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState
-      (
-        GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState_PASSWORDSTATEUNSPECIFIED,
+      ( GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState_PASSWORDSTATEUNSPECIFIED,
         GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState_PASSWORDSET,
         GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState_PASSWORDNOTSET,
         ..
@@ -233,8 +206,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * GroupRelation_RelationType
     GroupRelation_RelationType
-      (
-        GroupRelation_RelationType_RELATIONTYPEUNSPECIFIED,
+      ( GroupRelation_RelationType_RELATIONTYPEUNSPECIFIED,
         GroupRelation_RelationType_Direct,
         GroupRelation_RelationType_Indirect,
         GroupRelation_RelationType_DIRECTANDINDIRECT,
@@ -243,8 +215,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * InboundSsoAssignment_SsoMode
     InboundSsoAssignment_SsoMode
-      (
-        InboundSsoAssignment_SsoMode_SSOMODEUNSPECIFIED,
+      ( InboundSsoAssignment_SsoMode_SSOMODEUNSPECIFIED,
         InboundSsoAssignment_SsoMode_SSOOFF,
         InboundSsoAssignment_SsoMode_SAMLSSO,
         InboundSsoAssignment_SsoMode_DOMAINWIDESAMLIFENABLED,
@@ -253,8 +224,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * MemberRelation_RelationType
     MemberRelation_RelationType
-      (
-        MemberRelation_RelationType_RELATIONTYPEUNSPECIFIED,
+      ( MemberRelation_RelationType_RELATIONTYPEUNSPECIFIED,
         MemberRelation_RelationType_Direct,
         MemberRelation_RelationType_Indirect,
         MemberRelation_RelationType_DIRECTANDINDIRECT,
@@ -263,8 +233,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * Membership_DeliverySetting
     Membership_DeliverySetting
-      (
-        Membership_DeliverySetting_DELIVERYSETTINGUNSPECIFIED,
+      ( Membership_DeliverySetting_DELIVERYSETTINGUNSPECIFIED,
         Membership_DeliverySetting_ALLMAIL,
         Membership_DeliverySetting_Digest,
         Membership_DeliverySetting_Daily,
@@ -275,8 +244,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * Membership_Type
     Membership_Type
-      (
-        Membership_Type_TYPEUNSPECIFIED,
+      ( Membership_Type_TYPEUNSPECIFIED,
         Membership_Type_User,
         Membership_Type_SERVICEACCOUNT,
         Membership_Type_Group,
@@ -288,8 +256,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * MembershipRoleRestrictionEvaluation_State
     MembershipRoleRestrictionEvaluation_State
-      (
-        MembershipRoleRestrictionEvaluation_State_STATEUNSPECIFIED,
+      ( MembershipRoleRestrictionEvaluation_State_STATEUNSPECIFIED,
         MembershipRoleRestrictionEvaluation_State_Compliant,
         MembershipRoleRestrictionEvaluation_State_FORWARDCOMPLIANT,
         MembershipRoleRestrictionEvaluation_State_NONCOMPLIANT,
@@ -299,8 +266,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * Policy_Type
     Policy_Type
-      (
-        Policy_Type_POLICYTYPEUNSPECIFIED,
+      ( Policy_Type_POLICYTYPEUNSPECIFIED,
         Policy_Type_System,
         Policy_Type_Admin,
         ..
@@ -308,8 +274,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * RestrictionEvaluation_State
     RestrictionEvaluation_State
-      (
-        RestrictionEvaluation_State_STATEUNSPECIFIED,
+      ( RestrictionEvaluation_State_STATEUNSPECIFIED,
         RestrictionEvaluation_State_Evaluating,
         RestrictionEvaluation_State_Compliant,
         RestrictionEvaluation_State_FORWARDCOMPLIANT,
@@ -319,16 +284,14 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * SignInBehavior_RedirectCondition
     SignInBehavior_RedirectCondition
-      (
-        SignInBehavior_RedirectCondition_REDIRECTCONDITIONUNSPECIFIED,
+      ( SignInBehavior_RedirectCondition_REDIRECTCONDITIONUNSPECIFIED,
         SignInBehavior_RedirectCondition_Never,
         ..
       ),
 
     -- * UserInvitation_State
     UserInvitation_State
-      (
-        UserInvitation_State_STATEUNSPECIFIED,
+      ( UserInvitation_State_STATEUNSPECIFIED,
         UserInvitation_State_NOTYETSENT,
         UserInvitation_State_Invited,
         UserInvitation_State_Accepted,
@@ -338,8 +301,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * DevicesListView
     DevicesListView
-      (
-        DevicesListView_VIEWUNSPECIFIED,
+      ( DevicesListView_VIEWUNSPECIFIED,
         DevicesListView_COMPANYINVENTORY,
         DevicesListView_USERASSIGNEDDEVICES,
         ..
@@ -347,8 +309,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * GroupsCreateInitialGroupConfig
     GroupsCreateInitialGroupConfig
-      (
-        GroupsCreateInitialGroupConfig_INITIALGROUPCONFIGUNSPECIFIED,
+      ( GroupsCreateInitialGroupConfig_INITIALGROUPCONFIGUNSPECIFIED,
         GroupsCreateInitialGroupConfig_WITHINITIALOWNER,
         GroupsCreateInitialGroupConfig_Empty,
         ..
@@ -356,8 +317,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * GroupsListView
     GroupsListView
-      (
-        GroupsListView_VIEWUNSPECIFIED,
+      ( GroupsListView_VIEWUNSPECIFIED,
         GroupsListView_Basic,
         GroupsListView_Full,
         ..
@@ -365,8 +325,7 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * GroupsMembershipsListView
     GroupsMembershipsListView
-      (
-        GroupsMembershipsListView_VIEWUNSPECIFIED,
+      ( GroupsMembershipsListView_VIEWUNSPECIFIED,
         GroupsMembershipsListView_Basic,
         GroupsMembershipsListView_Full,
         ..
@@ -374,28 +333,28 @@ module Gogol.CloudIdentity.Internal.Sum
 
     -- * GroupsSearchView
     GroupsSearchView
-      (
-        GroupsSearchView_VIEWUNSPECIFIED,
+      ( GroupsSearchView_VIEWUNSPECIFIED,
         GroupsSearchView_Basic,
         GroupsSearchView_Full,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -408,20 +367,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | Resource type for the Dynamic Group Query
-newtype DynamicGroupQuery_ResourceType = DynamicGroupQuery_ResourceType { fromDynamicGroupQuery_ResourceType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DynamicGroupQuery_ResourceType = DynamicGroupQuery_ResourceType {fromDynamicGroupQuery_ResourceType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value (not valid)
 pattern DynamicGroupQuery_ResourceType_RESOURCETYPEUNSPECIFIED :: DynamicGroupQuery_ResourceType
@@ -434,20 +394,21 @@ pattern DynamicGroupQuery_ResourceType_User = DynamicGroupQuery_ResourceType "US
 {-# COMPLETE
   DynamicGroupQuery_ResourceType_RESOURCETYPEUNSPECIFIED,
   DynamicGroupQuery_ResourceType_User,
-  DynamicGroupQuery_ResourceType #-}
+  DynamicGroupQuery_ResourceType
+  #-}
 
 -- | Status of the dynamic group.
-newtype DynamicGroupStatus_Status = DynamicGroupStatus_Status { fromDynamicGroupStatus_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DynamicGroupStatus_Status = DynamicGroupStatus_Status {fromDynamicGroupStatus_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default.
 pattern DynamicGroupStatus_Status_STATUSUNSPECIFIED :: DynamicGroupStatus_Status
@@ -470,20 +431,21 @@ pattern DynamicGroupStatus_Status_INVALIDQUERY = DynamicGroupStatus_Status "INVA
   DynamicGroupStatus_Status_UPTODATE,
   DynamicGroupStatus_Status_UPDATINGMEMBERSHIPS,
   DynamicGroupStatus_Status_INVALIDQUERY,
-  DynamicGroupStatus_Status #-}
+  DynamicGroupStatus_Status
+  #-}
 
 -- | Ownership privileges on device.
-newtype GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege = GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege { fromGoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege = GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege {fromGoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Ownership privilege is not set.
 pattern GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege_OWNERSHIPPRIVILEGEUNSPECIFIED :: GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege
@@ -506,20 +468,21 @@ pattern GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege_DEV
   GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege_DEVICEADMINISTRATOR,
   GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege_PROFILEOWNER,
   GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege_DEVICEOWNER,
-  GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege #-}
+  GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege
+  #-}
 
 -- | Output only. Browser\'s management state.
-newtype GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState = GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState { fromGoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState = GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState {fromGoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Management state is not specified.
 pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_Unspecified :: GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState
@@ -547,20 +510,21 @@ pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_BROWS
   GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_MANAGEDBYOTHERDOMAIN,
   GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_PROFILEMANAGED,
   GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_BROWSERMANAGED,
-  GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState #-}
+  GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState
+  #-}
 
 -- | Current state of <https://chromeenterprise.google/policies/#PasswordProtectionWarningTrigger password protection trigger>.
-newtype GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger = GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger { fromGoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger = GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger {fromGoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Password protection is not specified.
 pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PASSWORDPROTECTIONTRIGGERUNSPECIFIED :: GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger
@@ -583,20 +547,21 @@ pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTri
   GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PROTECTIONOFF,
   GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PASSWORDREUSE,
   GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PHISHINGREUSE,
-  GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger #-}
+  GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger
+  #-}
 
 -- | Current state of <https://chromeenterprise.google/policies/#SafeBrowsingProtectionLevel Safe Browsing protection level>.
-newtype GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel = GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel { fromGoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel = GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel {fromGoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Browser protection level is not specified.
 pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_SAFEBROWSINGLEVELUNSPECIFIED :: GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel
@@ -619,20 +584,21 @@ pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_
   GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_Disabled,
   GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_Standard,
   GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_Enhanced,
-  GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel #-}
+  GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel
+  #-}
 
 -- | Output only. Validation state of this certificate.
-newtype GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState = GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState { fromGoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState = GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState {fromGoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState_CERTIFICATEVALIDATIONSTATEUNSPECIFIED :: GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState
@@ -650,20 +616,21 @@ pattern GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState_VA
   GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState_CERTIFICATEVALIDATIONSTATEUNSPECIFIED,
   GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState_VALIDATIONSUCCESSFUL,
   GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState_VALIDATIONFAILED,
-  GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState #-}
+  GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState
+  #-}
 
 -- | The compliance state of the resource as specified by the API client.
-newtype GoogleAppsCloudidentityDevicesV1ClientState_ComplianceState = GoogleAppsCloudidentityDevicesV1ClientState_ComplianceState { fromGoogleAppsCloudidentityDevicesV1ClientState_ComplianceState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleAppsCloudidentityDevicesV1ClientState_ComplianceState = GoogleAppsCloudidentityDevicesV1ClientState_ComplianceState {fromGoogleAppsCloudidentityDevicesV1ClientState_ComplianceState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The compliance state of the resource is unknown or unspecified.
 pattern GoogleAppsCloudidentityDevicesV1ClientState_ComplianceState_COMPLIANCESTATEUNSPECIFIED :: GoogleAppsCloudidentityDevicesV1ClientState_ComplianceState
@@ -681,20 +648,21 @@ pattern GoogleAppsCloudidentityDevicesV1ClientState_ComplianceState_NONCOMPLIANT
   GoogleAppsCloudidentityDevicesV1ClientState_ComplianceState_COMPLIANCESTATEUNSPECIFIED,
   GoogleAppsCloudidentityDevicesV1ClientState_ComplianceState_Compliant,
   GoogleAppsCloudidentityDevicesV1ClientState_ComplianceState_NONCOMPLIANT,
-  GoogleAppsCloudidentityDevicesV1ClientState_ComplianceState #-}
+  GoogleAppsCloudidentityDevicesV1ClientState_ComplianceState
+  #-}
 
 -- | The Health score of the resource. The Health score is the callers specification of the condition of the device from a usability point of view. For example, a third-party device management provider may specify a health score based on its compliance with organizational policies.
-newtype GoogleAppsCloudidentityDevicesV1ClientState_HealthScore = GoogleAppsCloudidentityDevicesV1ClientState_HealthScore { fromGoogleAppsCloudidentityDevicesV1ClientState_HealthScore :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleAppsCloudidentityDevicesV1ClientState_HealthScore = GoogleAppsCloudidentityDevicesV1ClientState_HealthScore {fromGoogleAppsCloudidentityDevicesV1ClientState_HealthScore :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value
 pattern GoogleAppsCloudidentityDevicesV1ClientState_HealthScore_HEALTHSCOREUNSPECIFIED :: GoogleAppsCloudidentityDevicesV1ClientState_HealthScore
@@ -727,20 +695,21 @@ pattern GoogleAppsCloudidentityDevicesV1ClientState_HealthScore_VERYGOOD = Googl
   GoogleAppsCloudidentityDevicesV1ClientState_HealthScore_Neutral,
   GoogleAppsCloudidentityDevicesV1ClientState_HealthScore_Good,
   GoogleAppsCloudidentityDevicesV1ClientState_HealthScore_VERYGOOD,
-  GoogleAppsCloudidentityDevicesV1ClientState_HealthScore #-}
+  GoogleAppsCloudidentityDevicesV1ClientState_HealthScore
+  #-}
 
 -- | The management state of the resource as specified by the API client.
-newtype GoogleAppsCloudidentityDevicesV1ClientState_Managed = GoogleAppsCloudidentityDevicesV1ClientState_Managed { fromGoogleAppsCloudidentityDevicesV1ClientState_Managed :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleAppsCloudidentityDevicesV1ClientState_Managed = GoogleAppsCloudidentityDevicesV1ClientState_Managed {fromGoogleAppsCloudidentityDevicesV1ClientState_Managed :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The management state of the resource is unknown or unspecified.
 pattern GoogleAppsCloudidentityDevicesV1ClientState_Managed_MANAGEDSTATEUNSPECIFIED :: GoogleAppsCloudidentityDevicesV1ClientState_Managed
@@ -758,20 +727,21 @@ pattern GoogleAppsCloudidentityDevicesV1ClientState_Managed_Unmanaged = GoogleAp
   GoogleAppsCloudidentityDevicesV1ClientState_Managed_MANAGEDSTATEUNSPECIFIED,
   GoogleAppsCloudidentityDevicesV1ClientState_Managed_Managed,
   GoogleAppsCloudidentityDevicesV1ClientState_Managed_Unmanaged,
-  GoogleAppsCloudidentityDevicesV1ClientState_Managed #-}
+  GoogleAppsCloudidentityDevicesV1ClientState_Managed
+  #-}
 
 -- | Output only. The owner of the ClientState
-newtype GoogleAppsCloudidentityDevicesV1ClientState_OwnerType = GoogleAppsCloudidentityDevicesV1ClientState_OwnerType { fromGoogleAppsCloudidentityDevicesV1ClientState_OwnerType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleAppsCloudidentityDevicesV1ClientState_OwnerType = GoogleAppsCloudidentityDevicesV1ClientState_OwnerType {fromGoogleAppsCloudidentityDevicesV1ClientState_OwnerType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown owner type
 pattern GoogleAppsCloudidentityDevicesV1ClientState_OwnerType_OWNERTYPEUNSPECIFIED :: GoogleAppsCloudidentityDevicesV1ClientState_OwnerType
@@ -789,20 +759,21 @@ pattern GoogleAppsCloudidentityDevicesV1ClientState_OwnerType_OWNERTYPEPARTNER =
   GoogleAppsCloudidentityDevicesV1ClientState_OwnerType_OWNERTYPEUNSPECIFIED,
   GoogleAppsCloudidentityDevicesV1ClientState_OwnerType_OWNERTYPECUSTOMER,
   GoogleAppsCloudidentityDevicesV1ClientState_OwnerType_OWNERTYPEPARTNER,
-  GoogleAppsCloudidentityDevicesV1ClientState_OwnerType #-}
+  GoogleAppsCloudidentityDevicesV1ClientState_OwnerType
+  #-}
 
 -- | Output only. Represents whether the Device is compromised.
-newtype GoogleAppsCloudidentityDevicesV1Device_CompromisedState = GoogleAppsCloudidentityDevicesV1Device_CompromisedState { fromGoogleAppsCloudidentityDevicesV1Device_CompromisedState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleAppsCloudidentityDevicesV1Device_CompromisedState = GoogleAppsCloudidentityDevicesV1Device_CompromisedState {fromGoogleAppsCloudidentityDevicesV1Device_CompromisedState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern GoogleAppsCloudidentityDevicesV1Device_CompromisedState_COMPROMISEDSTATEUNSPECIFIED :: GoogleAppsCloudidentityDevicesV1Device_CompromisedState
@@ -820,20 +791,21 @@ pattern GoogleAppsCloudidentityDevicesV1Device_CompromisedState_Uncompromised = 
   GoogleAppsCloudidentityDevicesV1Device_CompromisedState_COMPROMISEDSTATEUNSPECIFIED,
   GoogleAppsCloudidentityDevicesV1Device_CompromisedState_Compromised,
   GoogleAppsCloudidentityDevicesV1Device_CompromisedState_Uncompromised,
-  GoogleAppsCloudidentityDevicesV1Device_CompromisedState #-}
+  GoogleAppsCloudidentityDevicesV1Device_CompromisedState
+  #-}
 
 -- | Output only. Type of device.
-newtype GoogleAppsCloudidentityDevicesV1Device_DeviceType = GoogleAppsCloudidentityDevicesV1Device_DeviceType { fromGoogleAppsCloudidentityDevicesV1Device_DeviceType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleAppsCloudidentityDevicesV1Device_DeviceType = GoogleAppsCloudidentityDevicesV1Device_DeviceType {fromGoogleAppsCloudidentityDevicesV1Device_DeviceType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unknown device type
 pattern GoogleAppsCloudidentityDevicesV1Device_DeviceType_DEVICETYPEUNSPECIFIED :: GoogleAppsCloudidentityDevicesV1Device_DeviceType
@@ -876,20 +848,21 @@ pattern GoogleAppsCloudidentityDevicesV1Device_DeviceType_CHROMEOS = GoogleAppsC
   GoogleAppsCloudidentityDevicesV1Device_DeviceType_MACOS,
   GoogleAppsCloudidentityDevicesV1Device_DeviceType_Linux,
   GoogleAppsCloudidentityDevicesV1Device_DeviceType_CHROMEOS,
-  GoogleAppsCloudidentityDevicesV1Device_DeviceType #-}
+  GoogleAppsCloudidentityDevicesV1Device_DeviceType
+  #-}
 
 -- | Output only. Device encryption state.
-newtype GoogleAppsCloudidentityDevicesV1Device_EncryptionState = GoogleAppsCloudidentityDevicesV1Device_EncryptionState { fromGoogleAppsCloudidentityDevicesV1Device_EncryptionState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleAppsCloudidentityDevicesV1Device_EncryptionState = GoogleAppsCloudidentityDevicesV1Device_EncryptionState {fromGoogleAppsCloudidentityDevicesV1Device_EncryptionState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Encryption Status is not set.
 pattern GoogleAppsCloudidentityDevicesV1Device_EncryptionState_ENCRYPTIONSTATEUNSPECIFIED :: GoogleAppsCloudidentityDevicesV1Device_EncryptionState
@@ -912,20 +885,21 @@ pattern GoogleAppsCloudidentityDevicesV1Device_EncryptionState_NOTENCRYPTED = Go
   GoogleAppsCloudidentityDevicesV1Device_EncryptionState_UNSUPPORTEDBYDEVICE,
   GoogleAppsCloudidentityDevicesV1Device_EncryptionState_Encrypted,
   GoogleAppsCloudidentityDevicesV1Device_EncryptionState_NOTENCRYPTED,
-  GoogleAppsCloudidentityDevicesV1Device_EncryptionState #-}
+  GoogleAppsCloudidentityDevicesV1Device_EncryptionState
+  #-}
 
 -- | Output only. Management state of the device
-newtype GoogleAppsCloudidentityDevicesV1Device_ManagementState = GoogleAppsCloudidentityDevicesV1Device_ManagementState { fromGoogleAppsCloudidentityDevicesV1Device_ManagementState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleAppsCloudidentityDevicesV1Device_ManagementState = GoogleAppsCloudidentityDevicesV1Device_ManagementState {fromGoogleAppsCloudidentityDevicesV1Device_ManagementState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value. This value is unused.
 pattern GoogleAppsCloudidentityDevicesV1Device_ManagementState_MANAGEMENTSTATEUNSPECIFIED :: GoogleAppsCloudidentityDevicesV1Device_ManagementState
@@ -963,20 +937,21 @@ pattern GoogleAppsCloudidentityDevicesV1Device_ManagementState_Wiped = GoogleApp
   GoogleAppsCloudidentityDevicesV1Device_ManagementState_Unprovisioned,
   GoogleAppsCloudidentityDevicesV1Device_ManagementState_Wiping,
   GoogleAppsCloudidentityDevicesV1Device_ManagementState_Wiped,
-  GoogleAppsCloudidentityDevicesV1Device_ManagementState #-}
+  GoogleAppsCloudidentityDevicesV1Device_ManagementState
+  #-}
 
 -- | Output only. Whether the device is owned by the company or an individual
-newtype GoogleAppsCloudidentityDevicesV1Device_OwnerType = GoogleAppsCloudidentityDevicesV1Device_OwnerType { fromGoogleAppsCloudidentityDevicesV1Device_OwnerType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleAppsCloudidentityDevicesV1Device_OwnerType = GoogleAppsCloudidentityDevicesV1Device_OwnerType {fromGoogleAppsCloudidentityDevicesV1Device_OwnerType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value. The value is unused.
 pattern GoogleAppsCloudidentityDevicesV1Device_OwnerType_DEVICEOWNERSHIPUNSPECIFIED :: GoogleAppsCloudidentityDevicesV1Device_OwnerType
@@ -994,20 +969,21 @@ pattern GoogleAppsCloudidentityDevicesV1Device_OwnerType_Byod = GoogleAppsCloudi
   GoogleAppsCloudidentityDevicesV1Device_OwnerType_DEVICEOWNERSHIPUNSPECIFIED,
   GoogleAppsCloudidentityDevicesV1Device_OwnerType_Company,
   GoogleAppsCloudidentityDevicesV1Device_OwnerType_Byod,
-  GoogleAppsCloudidentityDevicesV1Device_OwnerType #-}
+  GoogleAppsCloudidentityDevicesV1Device_OwnerType
+  #-}
 
 -- | Compromised State of the DeviceUser object
-newtype GoogleAppsCloudidentityDevicesV1DeviceUser_CompromisedState = GoogleAppsCloudidentityDevicesV1DeviceUser_CompromisedState { fromGoogleAppsCloudidentityDevicesV1DeviceUser_CompromisedState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleAppsCloudidentityDevicesV1DeviceUser_CompromisedState = GoogleAppsCloudidentityDevicesV1DeviceUser_CompromisedState {fromGoogleAppsCloudidentityDevicesV1DeviceUser_CompromisedState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Compromised state of Device User account is unknown or unspecified.
 pattern GoogleAppsCloudidentityDevicesV1DeviceUser_CompromisedState_COMPROMISEDSTATEUNSPECIFIED :: GoogleAppsCloudidentityDevicesV1DeviceUser_CompromisedState
@@ -1025,20 +1001,21 @@ pattern GoogleAppsCloudidentityDevicesV1DeviceUser_CompromisedState_NOTCOMPROMIS
   GoogleAppsCloudidentityDevicesV1DeviceUser_CompromisedState_COMPROMISEDSTATEUNSPECIFIED,
   GoogleAppsCloudidentityDevicesV1DeviceUser_CompromisedState_Compromised,
   GoogleAppsCloudidentityDevicesV1DeviceUser_CompromisedState_NOTCOMPROMISED,
-  GoogleAppsCloudidentityDevicesV1DeviceUser_CompromisedState #-}
+  GoogleAppsCloudidentityDevicesV1DeviceUser_CompromisedState
+  #-}
 
 -- | Output only. Management state of the user on the device.
-newtype GoogleAppsCloudidentityDevicesV1DeviceUser_ManagementState = GoogleAppsCloudidentityDevicesV1DeviceUser_ManagementState { fromGoogleAppsCloudidentityDevicesV1DeviceUser_ManagementState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleAppsCloudidentityDevicesV1DeviceUser_ManagementState = GoogleAppsCloudidentityDevicesV1DeviceUser_ManagementState {fromGoogleAppsCloudidentityDevicesV1DeviceUser_ManagementState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value. This value is unused.
 pattern GoogleAppsCloudidentityDevicesV1DeviceUser_ManagementState_MANAGEMENTSTATEUNSPECIFIED :: GoogleAppsCloudidentityDevicesV1DeviceUser_ManagementState
@@ -1076,20 +1053,21 @@ pattern GoogleAppsCloudidentityDevicesV1DeviceUser_ManagementState_Unenrolled = 
   GoogleAppsCloudidentityDevicesV1DeviceUser_ManagementState_Blocked,
   GoogleAppsCloudidentityDevicesV1DeviceUser_ManagementState_PENDINGAPPROVAL,
   GoogleAppsCloudidentityDevicesV1DeviceUser_ManagementState_Unenrolled,
-  GoogleAppsCloudidentityDevicesV1DeviceUser_ManagementState #-}
+  GoogleAppsCloudidentityDevicesV1DeviceUser_ManagementState
+  #-}
 
 -- | Password state of the DeviceUser object
-newtype GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState = GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState { fromGoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState = GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState {fromGoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Password state not set.
 pattern GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState_PASSWORDSTATEUNSPECIFIED :: GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState
@@ -1107,20 +1085,21 @@ pattern GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState_PASSWORDNOTSET 
   GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState_PASSWORDSTATEUNSPECIFIED,
   GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState_PASSWORDSET,
   GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState_PASSWORDNOTSET,
-  GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState #-}
+  GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState
+  #-}
 
 -- | The relation between the member and the transitive group.
-newtype GroupRelation_RelationType = GroupRelation_RelationType { fromGroupRelation_RelationType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GroupRelation_RelationType = GroupRelation_RelationType {fromGroupRelation_RelationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The relation type is undefined or undetermined.
 pattern GroupRelation_RelationType_RELATIONTYPEUNSPECIFIED :: GroupRelation_RelationType
@@ -1143,20 +1122,21 @@ pattern GroupRelation_RelationType_DIRECTANDINDIRECT = GroupRelation_RelationTyp
   GroupRelation_RelationType_Direct,
   GroupRelation_RelationType_Indirect,
   GroupRelation_RelationType_DIRECTANDINDIRECT,
-  GroupRelation_RelationType #-}
+  GroupRelation_RelationType
+  #-}
 
 -- | Inbound SSO behavior.
-newtype InboundSsoAssignment_SsoMode = InboundSsoAssignment_SsoMode { fromInboundSsoAssignment_SsoMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype InboundSsoAssignment_SsoMode = InboundSsoAssignment_SsoMode {fromInboundSsoAssignment_SsoMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Not allowed.
 pattern InboundSsoAssignment_SsoMode_SSOMODEUNSPECIFIED :: InboundSsoAssignment_SsoMode
@@ -1179,20 +1159,21 @@ pattern InboundSsoAssignment_SsoMode_DOMAINWIDESAMLIFENABLED = InboundSsoAssignm
   InboundSsoAssignment_SsoMode_SSOOFF,
   InboundSsoAssignment_SsoMode_SAMLSSO,
   InboundSsoAssignment_SsoMode_DOMAINWIDESAMLIFENABLED,
-  InboundSsoAssignment_SsoMode #-}
+  InboundSsoAssignment_SsoMode
+  #-}
 
 -- | The relation between the group and the transitive member.
-newtype MemberRelation_RelationType = MemberRelation_RelationType { fromMemberRelation_RelationType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MemberRelation_RelationType = MemberRelation_RelationType {fromMemberRelation_RelationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The relation type is undefined or undetermined.
 pattern MemberRelation_RelationType_RELATIONTYPEUNSPECIFIED :: MemberRelation_RelationType
@@ -1215,20 +1196,21 @@ pattern MemberRelation_RelationType_DIRECTANDINDIRECT = MemberRelation_RelationT
   MemberRelation_RelationType_Direct,
   MemberRelation_RelationType_Indirect,
   MemberRelation_RelationType_DIRECTANDINDIRECT,
-  MemberRelation_RelationType #-}
+  MemberRelation_RelationType
+  #-}
 
 -- | Output only. Delivery setting associated with the membership.
-newtype Membership_DeliverySetting = Membership_DeliverySetting { fromMembership_DeliverySetting :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Membership_DeliverySetting = Membership_DeliverySetting {fromMembership_DeliverySetting :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default. Should not be used.
 pattern Membership_DeliverySetting_DELIVERYSETTINGUNSPECIFIED :: Membership_DeliverySetting
@@ -1261,20 +1243,21 @@ pattern Membership_DeliverySetting_Disabled = Membership_DeliverySetting "DISABL
   Membership_DeliverySetting_Daily,
   Membership_DeliverySetting_None,
   Membership_DeliverySetting_Disabled,
-  Membership_DeliverySetting #-}
+  Membership_DeliverySetting
+  #-}
 
 -- | Output only. The type of the membership.
-newtype Membership_Type = Membership_Type { fromMembership_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Membership_Type = Membership_Type {fromMembership_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default. Should not be used.
 pattern Membership_Type_TYPEUNSPECIFIED :: Membership_Type
@@ -1312,20 +1295,21 @@ pattern Membership_Type_Other = Membership_Type "OTHER"
   Membership_Type_SHAREDDRIVE,
   Membership_Type_CBCMBROWSER,
   Membership_Type_Other,
-  Membership_Type #-}
+  Membership_Type
+  #-}
 
 -- | Output only. The current state of the restriction
-newtype MembershipRoleRestrictionEvaluation_State = MembershipRoleRestrictionEvaluation_State { fromMembershipRoleRestrictionEvaluation_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MembershipRoleRestrictionEvaluation_State = MembershipRoleRestrictionEvaluation_State {fromMembershipRoleRestrictionEvaluation_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default. Should not be used.
 pattern MembershipRoleRestrictionEvaluation_State_STATEUNSPECIFIED :: MembershipRoleRestrictionEvaluation_State
@@ -1353,20 +1337,21 @@ pattern MembershipRoleRestrictionEvaluation_State_Evaluating = MembershipRoleRes
   MembershipRoleRestrictionEvaluation_State_FORWARDCOMPLIANT,
   MembershipRoleRestrictionEvaluation_State_NONCOMPLIANT,
   MembershipRoleRestrictionEvaluation_State_Evaluating,
-  MembershipRoleRestrictionEvaluation_State #-}
+  MembershipRoleRestrictionEvaluation_State
+  #-}
 
 -- | Output only. The type of the policy.
-newtype Policy_Type = Policy_Type { fromPolicy_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Policy_Type = Policy_Type {fromPolicy_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified policy type.
 pattern Policy_Type_POLICYTYPEUNSPECIFIED :: Policy_Type
@@ -1384,20 +1369,21 @@ pattern Policy_Type_Admin = Policy_Type "ADMIN"
   Policy_Type_POLICYTYPEUNSPECIFIED,
   Policy_Type_System,
   Policy_Type_Admin,
-  Policy_Type #-}
+  Policy_Type
+  #-}
 
 -- | Output only. The current state of the restriction
-newtype RestrictionEvaluation_State = RestrictionEvaluation_State { fromRestrictionEvaluation_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RestrictionEvaluation_State = RestrictionEvaluation_State {fromRestrictionEvaluation_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default. Should not be used.
 pattern RestrictionEvaluation_State_STATEUNSPECIFIED :: RestrictionEvaluation_State
@@ -1425,20 +1411,21 @@ pattern RestrictionEvaluation_State_NONCOMPLIANT = RestrictionEvaluation_State "
   RestrictionEvaluation_State_Compliant,
   RestrictionEvaluation_State_FORWARDCOMPLIANT,
   RestrictionEvaluation_State_NONCOMPLIANT,
-  RestrictionEvaluation_State #-}
+  RestrictionEvaluation_State
+  #-}
 
 -- | When to redirect sign-ins to the IdP.
-newtype SignInBehavior_RedirectCondition = SignInBehavior_RedirectCondition { fromSignInBehavior_RedirectCondition :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SignInBehavior_RedirectCondition = SignInBehavior_RedirectCondition {fromSignInBehavior_RedirectCondition :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default and means \"always\"
 pattern SignInBehavior_RedirectCondition_REDIRECTCONDITIONUNSPECIFIED :: SignInBehavior_RedirectCondition
@@ -1451,20 +1438,21 @@ pattern SignInBehavior_RedirectCondition_Never = SignInBehavior_RedirectConditio
 {-# COMPLETE
   SignInBehavior_RedirectCondition_REDIRECTCONDITIONUNSPECIFIED,
   SignInBehavior_RedirectCondition_Never,
-  SignInBehavior_RedirectCondition #-}
+  SignInBehavior_RedirectCondition
+  #-}
 
 -- | State of the @UserInvitation@.
-newtype UserInvitation_State = UserInvitation_State { fromUserInvitation_State :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype UserInvitation_State = UserInvitation_State {fromUserInvitation_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The default value. This value is used if the state is omitted.
 pattern UserInvitation_State_STATEUNSPECIFIED :: UserInvitation_State
@@ -1492,20 +1480,21 @@ pattern UserInvitation_State_Declined = UserInvitation_State "DECLINED"
   UserInvitation_State_Invited,
   UserInvitation_State_Accepted,
   UserInvitation_State_Declined,
-  UserInvitation_State #-}
+  UserInvitation_State
+  #-}
 
 -- | Optional. The view to use for the List request.
-newtype DevicesListView = DevicesListView { fromDevicesListView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DevicesListView = DevicesListView {fromDevicesListView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value. The value is unused.
 pattern DevicesListView_VIEWUNSPECIFIED :: DevicesListView
@@ -1523,20 +1512,21 @@ pattern DevicesListView_USERASSIGNEDDEVICES = DevicesListView "USER_ASSIGNED_DEV
   DevicesListView_VIEWUNSPECIFIED,
   DevicesListView_COMPANYINVENTORY,
   DevicesListView_USERASSIGNEDDEVICES,
-  DevicesListView #-}
+  DevicesListView
+  #-}
 
 -- | Optional. The initial configuration option for the @Group@.
-newtype GroupsCreateInitialGroupConfig = GroupsCreateInitialGroupConfig { fromGroupsCreateInitialGroupConfig :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GroupsCreateInitialGroupConfig = GroupsCreateInitialGroupConfig {fromGroupsCreateInitialGroupConfig :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default. Should not be used.
 pattern GroupsCreateInitialGroupConfig_INITIALGROUPCONFIGUNSPECIFIED :: GroupsCreateInitialGroupConfig
@@ -1554,20 +1544,21 @@ pattern GroupsCreateInitialGroupConfig_Empty = GroupsCreateInitialGroupConfig "E
   GroupsCreateInitialGroupConfig_INITIALGROUPCONFIGUNSPECIFIED,
   GroupsCreateInitialGroupConfig_WITHINITIALOWNER,
   GroupsCreateInitialGroupConfig_Empty,
-  GroupsCreateInitialGroupConfig #-}
+  GroupsCreateInitialGroupConfig
+  #-}
 
 -- | The level of detail to be returned. If unspecified, defaults to @View.BASIC@.
-newtype GroupsListView = GroupsListView { fromGroupsListView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GroupsListView = GroupsListView {fromGroupsListView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default. Should not be used.
 pattern GroupsListView_VIEWUNSPECIFIED :: GroupsListView
@@ -1585,20 +1576,21 @@ pattern GroupsListView_Full = GroupsListView "FULL"
   GroupsListView_VIEWUNSPECIFIED,
   GroupsListView_Basic,
   GroupsListView_Full,
-  GroupsListView #-}
+  GroupsListView
+  #-}
 
 -- | The level of detail to be returned. If unspecified, defaults to @View.BASIC@.
-newtype GroupsMembershipsListView = GroupsMembershipsListView { fromGroupsMembershipsListView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GroupsMembershipsListView = GroupsMembershipsListView {fromGroupsMembershipsListView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default. Should not be used.
 pattern GroupsMembershipsListView_VIEWUNSPECIFIED :: GroupsMembershipsListView
@@ -1616,20 +1608,21 @@ pattern GroupsMembershipsListView_Full = GroupsMembershipsListView "FULL"
   GroupsMembershipsListView_VIEWUNSPECIFIED,
   GroupsMembershipsListView_Basic,
   GroupsMembershipsListView_Full,
-  GroupsMembershipsListView #-}
+  GroupsMembershipsListView
+  #-}
 
 -- | The level of detail to be returned. If unspecified, defaults to @View.BASIC@.
-newtype GroupsSearchView = GroupsSearchView { fromGroupsSearchView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype GroupsSearchView = GroupsSearchView {fromGroupsSearchView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default. Should not be used.
 pattern GroupsSearchView_VIEWUNSPECIFIED :: GroupsSearchView
@@ -1647,4 +1640,5 @@ pattern GroupsSearchView_Full = GroupsSearchView "FULL"
   GroupsSearchView_VIEWUNSPECIFIED,
   GroupsSearchView_Basic,
   GroupsSearchView_Full,
-  GroupsSearchView #-}
+  GroupsSearchView
+  #-}

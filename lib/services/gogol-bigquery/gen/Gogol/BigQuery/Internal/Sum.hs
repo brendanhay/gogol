@@ -1,18 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
-
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -21,27 +16,23 @@
 
 -- |
 -- Module      : Gogol.BigQuery.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Gogol.BigQuery.Internal.Sum
-  (
-
-    -- * Xgafv
+  ( -- * Xgafv
     Xgafv
-      (
-        Xgafv_1,
+      ( Xgafv_1,
         Xgafv_2,
         ..
       ),
 
     -- * Argument_ArgumentKind
     Argument_ArgumentKind
-      (
-        Argument_ArgumentKind_ARGUMENTKINDUNSPECIFIED,
+      ( Argument_ArgumentKind_ARGUMENTKINDUNSPECIFIED,
         Argument_ArgumentKind_FIXEDTYPE,
         Argument_ArgumentKind_ANYTYPE,
         ..
@@ -49,8 +40,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * Argument_Mode
     Argument_Mode
-      (
-        Argument_Mode_MODEUNSPECIFIED,
+      ( Argument_Mode_MODEUNSPECIFIED,
         Argument_Mode_IN,
         Argument_Mode_Out,
         Argument_Mode_Inout,
@@ -59,8 +49,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * ArimaForecastingMetrics_SeasonalPeriodsItem
     ArimaForecastingMetrics_SeasonalPeriodsItem
-      (
-        ArimaForecastingMetrics_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED,
+      ( ArimaForecastingMetrics_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED,
         ArimaForecastingMetrics_SeasonalPeriodsItem_NOSEASONALITY,
         ArimaForecastingMetrics_SeasonalPeriodsItem_Daily,
         ArimaForecastingMetrics_SeasonalPeriodsItem_Weekly,
@@ -72,8 +61,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * ArimaModelInfo_SeasonalPeriodsItem
     ArimaModelInfo_SeasonalPeriodsItem
-      (
-        ArimaModelInfo_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED,
+      ( ArimaModelInfo_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED,
         ArimaModelInfo_SeasonalPeriodsItem_NOSEASONALITY,
         ArimaModelInfo_SeasonalPeriodsItem_Daily,
         ArimaModelInfo_SeasonalPeriodsItem_Weekly,
@@ -85,8 +73,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * ArimaResult_SeasonalPeriodsItem
     ArimaResult_SeasonalPeriodsItem
-      (
-        ArimaResult_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED,
+      ( ArimaResult_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED,
         ArimaResult_SeasonalPeriodsItem_NOSEASONALITY,
         ArimaResult_SeasonalPeriodsItem_Daily,
         ArimaResult_SeasonalPeriodsItem_Weekly,
@@ -98,8 +85,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem
     ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem
-      (
-        ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED,
+      ( ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED,
         ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem_NOSEASONALITY,
         ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem_Daily,
         ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem_Weekly,
@@ -111,8 +97,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * AuditLogConfig_LogType
     AuditLogConfig_LogType
-      (
-        AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
+      ( AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
         AuditLogConfig_LogType_ADMINREAD,
         AuditLogConfig_LogType_DATAWRITE,
         AuditLogConfig_LogType_DATAREAD,
@@ -121,8 +106,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * BiEngineReason_Code
     BiEngineReason_Code
-      (
-        BiEngineReason_Code_CODEUNSPECIFIED,
+      ( BiEngineReason_Code_CODEUNSPECIFIED,
         BiEngineReason_Code_NORESERVATION,
         BiEngineReason_Code_INSUFFICIENTRESERVATION,
         BiEngineReason_Code_UNSUPPORTEDSQLTEXT,
@@ -134,8 +118,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * BiEngineStatistics_AccelerationMode
     BiEngineStatistics_AccelerationMode
-      (
-        BiEngineStatistics_AccelerationMode_BIENGINEACCELERATIONMODEUNSPECIFIED,
+      ( BiEngineStatistics_AccelerationMode_BIENGINEACCELERATIONMODEUNSPECIFIED,
         BiEngineStatistics_AccelerationMode_BIENGINEDISABLED,
         BiEngineStatistics_AccelerationMode_PARTIALINPUT,
         BiEngineStatistics_AccelerationMode_FULLINPUT,
@@ -145,8 +128,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * BiEngineStatistics_BiEngineMode
     BiEngineStatistics_BiEngineMode
-      (
-        BiEngineStatistics_BiEngineMode_ACCELERATIONMODEUNSPECIFIED,
+      ( BiEngineStatistics_BiEngineMode_ACCELERATIONMODEUNSPECIFIED,
         BiEngineStatistics_BiEngineMode_Disabled,
         BiEngineStatistics_BiEngineMode_Partial,
         BiEngineStatistics_BiEngineMode_Full,
@@ -155,24 +137,21 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * BigLakeConfiguration_FileFormat
     BigLakeConfiguration_FileFormat
-      (
-        BigLakeConfiguration_FileFormat_FILEFORMATUNSPECIFIED,
+      ( BigLakeConfiguration_FileFormat_FILEFORMATUNSPECIFIED,
         BigLakeConfiguration_FileFormat_Parquet,
         ..
       ),
 
     -- * BigLakeConfiguration_TableFormat
     BigLakeConfiguration_TableFormat
-      (
-        BigLakeConfiguration_TableFormat_TABLEFORMATUNSPECIFIED,
+      ( BigLakeConfiguration_TableFormat_TABLEFORMATUNSPECIFIED,
         BigLakeConfiguration_TableFormat_Iceberg,
         ..
       ),
 
     -- * Dataset_DefaultRoundingMode
     Dataset_DefaultRoundingMode
-      (
-        Dataset_DefaultRoundingMode_ROUNDINGMODEUNSPECIFIED,
+      ( Dataset_DefaultRoundingMode_ROUNDINGMODEUNSPECIFIED,
         Dataset_DefaultRoundingMode_ROUNDHALFAWAYFROMZERO,
         Dataset_DefaultRoundingMode_ROUNDHALFEVEN,
         ..
@@ -180,8 +159,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * Dataset_StorageBillingModel
     Dataset_StorageBillingModel
-      (
-        Dataset_StorageBillingModel_STORAGEBILLINGMODELUNSPECIFIED,
+      ( Dataset_StorageBillingModel_STORAGEBILLINGMODELUNSPECIFIED,
         Dataset_StorageBillingModel_Logical,
         Dataset_StorageBillingModel_Physical,
         ..
@@ -189,8 +167,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * DatasetAccessEntry_TargetTypesItem
     DatasetAccessEntry_TargetTypesItem
-      (
-        DatasetAccessEntry_TargetTypesItem_TARGETTYPEUNSPECIFIED,
+      ( DatasetAccessEntry_TargetTypesItem_TARGETTYPEUNSPECIFIED,
         DatasetAccessEntry_TargetTypesItem_Views,
         DatasetAccessEntry_TargetTypesItem_Routines,
         ..
@@ -198,8 +175,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * ExplainQueryStage_ComputeMode
     ExplainQueryStage_ComputeMode
-      (
-        ExplainQueryStage_ComputeMode_COMPUTEMODEUNSPECIFIED,
+      ( ExplainQueryStage_ComputeMode_COMPUTEMODEUNSPECIFIED,
         ExplainQueryStage_ComputeMode_Bigquery,
         ExplainQueryStage_ComputeMode_BIENGINE,
         ..
@@ -207,8 +183,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * ExternalDataConfiguration_DecimalTargetTypesItem
     ExternalDataConfiguration_DecimalTargetTypesItem
-      (
-        ExternalDataConfiguration_DecimalTargetTypesItem_DECIMALTARGETTYPEUNSPECIFIED,
+      ( ExternalDataConfiguration_DecimalTargetTypesItem_DECIMALTARGETTYPEUNSPECIFIED,
         ExternalDataConfiguration_DecimalTargetTypesItem_Numeric,
         ExternalDataConfiguration_DecimalTargetTypesItem_Bignumeric,
         ExternalDataConfiguration_DecimalTargetTypesItem_String,
@@ -217,24 +192,21 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * ExternalDataConfiguration_FileSetSpecType
     ExternalDataConfiguration_FileSetSpecType
-      (
-        ExternalDataConfiguration_FileSetSpecType_FILESETSPECTYPEFILESYSTEMMATCH,
+      ( ExternalDataConfiguration_FileSetSpecType_FILESETSPECTYPEFILESYSTEMMATCH,
         ExternalDataConfiguration_FileSetSpecType_FILESETSPECTYPENEWLINEDELIMITEDMANIFEST,
         ..
       ),
 
     -- * ExternalDataConfiguration_JsonExtension
     ExternalDataConfiguration_JsonExtension
-      (
-        ExternalDataConfiguration_JsonExtension_JSONEXTENSIONUNSPECIFIED,
+      ( ExternalDataConfiguration_JsonExtension_JSONEXTENSIONUNSPECIFIED,
         ExternalDataConfiguration_JsonExtension_Geojson,
         ..
       ),
 
     -- * ExternalDataConfiguration_MetadataCacheMode
     ExternalDataConfiguration_MetadataCacheMode
-      (
-        ExternalDataConfiguration_MetadataCacheMode_METADATACACHEMODEUNSPECIFIED,
+      ( ExternalDataConfiguration_MetadataCacheMode_METADATACACHEMODEUNSPECIFIED,
         ExternalDataConfiguration_MetadataCacheMode_Automatic,
         ExternalDataConfiguration_MetadataCacheMode_Manual,
         ..
@@ -242,8 +214,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * ExternalDataConfiguration_ObjectMetadata
     ExternalDataConfiguration_ObjectMetadata
-      (
-        ExternalDataConfiguration_ObjectMetadata_OBJECTMETADATAUNSPECIFIED,
+      ( ExternalDataConfiguration_ObjectMetadata_OBJECTMETADATAUNSPECIFIED,
         ExternalDataConfiguration_ObjectMetadata_Directory,
         ExternalDataConfiguration_ObjectMetadata_Simple,
         ..
@@ -251,16 +222,14 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * ForeignTypeInfo_TypeSystem
     ForeignTypeInfo_TypeSystem
-      (
-        ForeignTypeInfo_TypeSystem_TYPESYSTEMUNSPECIFIED,
+      ( ForeignTypeInfo_TypeSystem_TYPESYSTEMUNSPECIFIED,
         ForeignTypeInfo_TypeSystem_Hive,
         ..
       ),
 
     -- * HparamTuningTrial_Status
     HparamTuningTrial_Status
-      (
-        HparamTuningTrial_Status_TRIALSTATUSUNSPECIFIED,
+      ( HparamTuningTrial_Status_TRIALSTATUSUNSPECIFIED,
         HparamTuningTrial_Status_NOTSTARTED,
         HparamTuningTrial_Status_Running,
         HparamTuningTrial_Status_Succeeded,
@@ -272,8 +241,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * IndexUnusedReason_Code
     IndexUnusedReason_Code
-      (
-        IndexUnusedReason_Code_CODEUNSPECIFIED,
+      ( IndexUnusedReason_Code_CODEUNSPECIFIED,
         IndexUnusedReason_Code_INDEXCONFIGNOTAVAILABLE,
         IndexUnusedReason_Code_PENDINGINDEXCREATION,
         IndexUnusedReason_Code_BASETABLETRUNCATED,
@@ -299,8 +267,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * JobConfigurationLoad_ColumnNameCharacterMap
     JobConfigurationLoad_ColumnNameCharacterMap
-      (
-        JobConfigurationLoad_ColumnNameCharacterMap_COLUMNNAMECHARACTERMAPUNSPECIFIED,
+      ( JobConfigurationLoad_ColumnNameCharacterMap_COLUMNNAMECHARACTERMAPUNSPECIFIED,
         JobConfigurationLoad_ColumnNameCharacterMap_Strict,
         JobConfigurationLoad_ColumnNameCharacterMap_V1,
         JobConfigurationLoad_ColumnNameCharacterMap_V2,
@@ -309,8 +276,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * JobConfigurationLoad_DecimalTargetTypesItem
     JobConfigurationLoad_DecimalTargetTypesItem
-      (
-        JobConfigurationLoad_DecimalTargetTypesItem_DECIMALTARGETTYPEUNSPECIFIED,
+      ( JobConfigurationLoad_DecimalTargetTypesItem_DECIMALTARGETTYPEUNSPECIFIED,
         JobConfigurationLoad_DecimalTargetTypesItem_Numeric,
         JobConfigurationLoad_DecimalTargetTypesItem_Bignumeric,
         JobConfigurationLoad_DecimalTargetTypesItem_String,
@@ -319,24 +285,21 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * JobConfigurationLoad_FileSetSpecType
     JobConfigurationLoad_FileSetSpecType
-      (
-        JobConfigurationLoad_FileSetSpecType_FILESETSPECTYPEFILESYSTEMMATCH,
+      ( JobConfigurationLoad_FileSetSpecType_FILESETSPECTYPEFILESYSTEMMATCH,
         JobConfigurationLoad_FileSetSpecType_FILESETSPECTYPENEWLINEDELIMITEDMANIFEST,
         ..
       ),
 
     -- * JobConfigurationLoad_JsonExtension
     JobConfigurationLoad_JsonExtension
-      (
-        JobConfigurationLoad_JsonExtension_JSONEXTENSIONUNSPECIFIED,
+      ( JobConfigurationLoad_JsonExtension_JSONEXTENSIONUNSPECIFIED,
         JobConfigurationLoad_JsonExtension_Geojson,
         ..
       ),
 
     -- * JobConfigurationTableCopy_OperationType
     JobConfigurationTableCopy_OperationType
-      (
-        JobConfigurationTableCopy_OperationType_OPERATIONTYPEUNSPECIFIED,
+      ( JobConfigurationTableCopy_OperationType_OPERATIONTYPEUNSPECIFIED,
         JobConfigurationTableCopy_OperationType_Copy,
         JobConfigurationTableCopy_OperationType_Snapshot,
         JobConfigurationTableCopy_OperationType_Restore,
@@ -346,8 +309,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * JobCreationReason_Code
     JobCreationReason_Code
-      (
-        JobCreationReason_Code_CODEUNSPECIFIED,
+      ( JobCreationReason_Code_CODEUNSPECIFIED,
         JobCreationReason_Code_Requested,
         JobCreationReason_Code_LONGRUNNING,
         JobCreationReason_Code_LARGERESULTS,
@@ -357,8 +319,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * JobStatistics_Edition
     JobStatistics_Edition
-      (
-        JobStatistics_Edition_RESERVATIONEDITIONUNSPECIFIED,
+      ( JobStatistics_Edition_RESERVATIONEDITIONUNSPECIFIED,
         JobStatistics_Edition_Standard,
         JobStatistics_Edition_Enterprise,
         JobStatistics_Edition_ENTERPRISEPLUS,
@@ -367,8 +328,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * JoinRestrictionPolicy_JoinCondition
     JoinRestrictionPolicy_JoinCondition
-      (
-        JoinRestrictionPolicy_JoinCondition_JOINCONDITIONUNSPECIFIED,
+      ( JoinRestrictionPolicy_JoinCondition_JOINCONDITIONUNSPECIFIED,
         JoinRestrictionPolicy_JoinCondition_JOINANY,
         JoinRestrictionPolicy_JoinCondition_JOINALL,
         JoinRestrictionPolicy_JoinCondition_JOINNOTREQUIRED,
@@ -378,8 +338,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * LinkedDatasetMetadata_LinkState
     LinkedDatasetMetadata_LinkState
-      (
-        LinkedDatasetMetadata_LinkState_LINKSTATEUNSPECIFIED,
+      ( LinkedDatasetMetadata_LinkState_LINKSTATEUNSPECIFIED,
         LinkedDatasetMetadata_LinkState_Linked,
         LinkedDatasetMetadata_LinkState_Unlinked,
         ..
@@ -387,8 +346,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * MaterializedView_RejectedReason
     MaterializedView_RejectedReason
-      (
-        MaterializedView_RejectedReason_REJECTEDREASONUNSPECIFIED,
+      ( MaterializedView_RejectedReason_REJECTEDREASONUNSPECIFIED,
         MaterializedView_RejectedReason_NODATA,
         MaterializedView_RejectedReason_Cost,
         MaterializedView_RejectedReason_BASETABLETRUNCATED,
@@ -405,8 +363,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * MlStatistics_ModelType
     MlStatistics_ModelType
-      (
-        MlStatistics_ModelType_MODELTYPEUNSPECIFIED,
+      ( MlStatistics_ModelType_MODELTYPEUNSPECIFIED,
         MlStatistics_ModelType_LINEARREGRESSION,
         MlStatistics_ModelType_LOGISTICREGRESSION,
         MlStatistics_ModelType_Kmeans,
@@ -437,8 +394,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * MlStatistics_TrainingType
     MlStatistics_TrainingType
-      (
-        MlStatistics_TrainingType_TRAININGTYPEUNSPECIFIED,
+      ( MlStatistics_TrainingType_TRAININGTYPEUNSPECIFIED,
         MlStatistics_TrainingType_SINGLETRAINING,
         MlStatistics_TrainingType_HPARAMTUNING,
         ..
@@ -446,8 +402,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * Model_ModelType
     Model_ModelType
-      (
-        Model_ModelType_MODELTYPEUNSPECIFIED,
+      ( Model_ModelType_MODELTYPEUNSPECIFIED,
         Model_ModelType_LINEARREGRESSION,
         Model_ModelType_LOGISTICREGRESSION,
         Model_ModelType_Kmeans,
@@ -478,16 +433,14 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * ParquetOptions_MapTargetType
     ParquetOptions_MapTargetType
-      (
-        ParquetOptions_MapTargetType_MAPTARGETTYPEUNSPECIFIED,
+      ( ParquetOptions_MapTargetType_MAPTARGETTYPEUNSPECIFIED,
         ParquetOptions_MapTargetType_ARRAYOFSTRUCT,
         ..
       ),
 
     -- * QueryRequest_JobCreationMode
     QueryRequest_JobCreationMode
-      (
-        QueryRequest_JobCreationMode_JOBCREATIONMODEUNSPECIFIED,
+      ( QueryRequest_JobCreationMode_JOBCREATIONMODEUNSPECIFIED,
         QueryRequest_JobCreationMode_JOBCREATIONREQUIRED,
         QueryRequest_JobCreationMode_JOBCREATIONOPTIONAL,
         ..
@@ -495,8 +448,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * RemoteModelInfo_RemoteServiceType
     RemoteModelInfo_RemoteServiceType
-      (
-        RemoteModelInfo_RemoteServiceType_REMOTESERVICETYPEUNSPECIFIED,
+      ( RemoteModelInfo_RemoteServiceType_REMOTESERVICETYPEUNSPECIFIED,
         RemoteModelInfo_RemoteServiceType_CLOUD_AI_TRANSLATE_V3,
         RemoteModelInfo_RemoteServiceType_CLOUD_AI_VISION_V1,
         RemoteModelInfo_RemoteServiceType_CLOUD_AI_NATURAL_LANGUAGE_V1,
@@ -506,24 +458,21 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * RestrictionConfig_Type
     RestrictionConfig_Type
-      (
-        RestrictionConfig_Type_RESTRICTIONTYPEUNSPECIFIED,
+      ( RestrictionConfig_Type_RESTRICTIONTYPEUNSPECIFIED,
         RestrictionConfig_Type_RESTRICTEDDATAEGRESS,
         ..
       ),
 
     -- * Routine_DataGovernanceType
     Routine_DataGovernanceType
-      (
-        Routine_DataGovernanceType_DATAGOVERNANCETYPEUNSPECIFIED,
+      ( Routine_DataGovernanceType_DATAGOVERNANCETYPEUNSPECIFIED,
         Routine_DataGovernanceType_DATAMASKING,
         ..
       ),
 
     -- * Routine_DeterminismLevel
     Routine_DeterminismLevel
-      (
-        Routine_DeterminismLevel_DETERMINISMLEVELUNSPECIFIED,
+      ( Routine_DeterminismLevel_DETERMINISMLEVELUNSPECIFIED,
         Routine_DeterminismLevel_Deterministic,
         Routine_DeterminismLevel_NOTDETERMINISTIC,
         ..
@@ -531,8 +480,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * Routine_Language
     Routine_Language
-      (
-        Routine_Language_LANGUAGEUNSPECIFIED,
+      ( Routine_Language_LANGUAGEUNSPECIFIED,
         Routine_Language_Sql,
         Routine_Language_Javascript,
         Routine_Language_Python,
@@ -543,8 +491,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * Routine_RoutineType
     Routine_RoutineType
-      (
-        Routine_RoutineType_ROUTINETYPEUNSPECIFIED,
+      ( Routine_RoutineType_ROUTINETYPEUNSPECIFIED,
         Routine_RoutineType_SCALARFUNCTION,
         Routine_RoutineType_Procedure,
         Routine_RoutineType_TABLEVALUEDFUNCTION,
@@ -554,8 +501,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * Routine_SecurityMode
     Routine_SecurityMode
-      (
-        Routine_SecurityMode_SECURITYMODEUNSPECIFIED,
+      ( Routine_SecurityMode_SECURITYMODEUNSPECIFIED,
         Routine_SecurityMode_Definer,
         Routine_SecurityMode_Invoker,
         ..
@@ -563,8 +509,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * ScriptOptions_KeyResultStatement
     ScriptOptions_KeyResultStatement
-      (
-        ScriptOptions_KeyResultStatement_KEYRESULTSTATEMENTKINDUNSPECIFIED,
+      ( ScriptOptions_KeyResultStatement_KEYRESULTSTATEMENTKINDUNSPECIFIED,
         ScriptOptions_KeyResultStatement_Last,
         ScriptOptions_KeyResultStatement_FIRSTSELECT,
         ..
@@ -572,8 +517,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * ScriptStatistics_EvaluationKind
     ScriptStatistics_EvaluationKind
-      (
-        ScriptStatistics_EvaluationKind_EVALUATIONKINDUNSPECIFIED,
+      ( ScriptStatistics_EvaluationKind_EVALUATIONKINDUNSPECIFIED,
         ScriptStatistics_EvaluationKind_Statement,
         ScriptStatistics_EvaluationKind_Expression,
         ..
@@ -581,8 +525,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * SearchStatistics_IndexUsageMode
     SearchStatistics_IndexUsageMode
-      (
-        SearchStatistics_IndexUsageMode_INDEXUSAGEMODEUNSPECIFIED,
+      ( SearchStatistics_IndexUsageMode_INDEXUSAGEMODEUNSPECIFIED,
         SearchStatistics_IndexUsageMode_Unused,
         SearchStatistics_IndexUsageMode_PARTIALLYUSED,
         SearchStatistics_IndexUsageMode_FULLYUSED,
@@ -591,8 +534,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * StandardSqlDataType_TypeKind
     StandardSqlDataType_TypeKind
-      (
-        StandardSqlDataType_TypeKind_TYPEKINDUNSPECIFIED,
+      ( StandardSqlDataType_TypeKind_TYPEKINDUNSPECIFIED,
         StandardSqlDataType_TypeKind_INT64,
         StandardSqlDataType_TypeKind_Bool,
         StandardSqlDataType_TypeKind_FLOAT64,
@@ -615,8 +557,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * Table_DefaultRoundingMode
     Table_DefaultRoundingMode
-      (
-        Table_DefaultRoundingMode_ROUNDINGMODEUNSPECIFIED,
+      ( Table_DefaultRoundingMode_ROUNDINGMODEUNSPECIFIED,
         Table_DefaultRoundingMode_ROUNDHALFAWAYFROMZERO,
         Table_DefaultRoundingMode_ROUNDHALFEVEN,
         ..
@@ -624,8 +565,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * Table_ManagedTableType
     Table_ManagedTableType
-      (
-        Table_ManagedTableType_MANAGEDTABLETYPEUNSPECIFIED,
+      ( Table_ManagedTableType_MANAGEDTABLETYPEUNSPECIFIED,
         Table_ManagedTableType_Native,
         Table_ManagedTableType_Iceberg,
         ..
@@ -633,8 +573,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TableFieldSchema_RoundingMode
     TableFieldSchema_RoundingMode
-      (
-        TableFieldSchema_RoundingMode_ROUNDINGMODEUNSPECIFIED,
+      ( TableFieldSchema_RoundingMode_ROUNDINGMODEUNSPECIFIED,
         TableFieldSchema_RoundingMode_ROUNDHALFAWAYFROMZERO,
         TableFieldSchema_RoundingMode_ROUNDHALFEVEN,
         ..
@@ -642,8 +581,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TableMetadataCacheUsage_UnusedReason
     TableMetadataCacheUsage_UnusedReason
-      (
-        TableMetadataCacheUsage_UnusedReason_UNUSEDREASONUNSPECIFIED,
+      ( TableMetadataCacheUsage_UnusedReason_UNUSEDREASONUNSPECIFIED,
         TableMetadataCacheUsage_UnusedReason_EXCEEDEDMAXSTALENESS,
         TableMetadataCacheUsage_UnusedReason_METADATACACHINGNOTENABLED,
         TableMetadataCacheUsage_UnusedReason_OTHERREASON,
@@ -652,8 +590,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TableReplicationInfo_ReplicationStatus
     TableReplicationInfo_ReplicationStatus
-      (
-        TableReplicationInfo_ReplicationStatus_REPLICATIONSTATUSUNSPECIFIED,
+      ( TableReplicationInfo_ReplicationStatus_REPLICATIONSTATUSUNSPECIFIED,
         TableReplicationInfo_ReplicationStatus_Active,
         TableReplicationInfo_ReplicationStatus_SOURCEDELETED,
         TableReplicationInfo_ReplicationStatus_PERMISSIONDENIED,
@@ -663,8 +600,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_BoosterType
     TrainingOptions_BoosterType
-      (
-        TrainingOptions_BoosterType_BOOSTERTYPEUNSPECIFIED,
+      ( TrainingOptions_BoosterType_BOOSTERTYPEUNSPECIFIED,
         TrainingOptions_BoosterType_Gbtree,
         TrainingOptions_BoosterType_Dart,
         ..
@@ -672,8 +608,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_CategoryEncodingMethod
     TrainingOptions_CategoryEncodingMethod
-      (
-        TrainingOptions_CategoryEncodingMethod_ENCODINGMETHODUNSPECIFIED,
+      ( TrainingOptions_CategoryEncodingMethod_ENCODINGMETHODUNSPECIFIED,
         TrainingOptions_CategoryEncodingMethod_ONEHOTENCODING,
         TrainingOptions_CategoryEncodingMethod_LABELENCODING,
         TrainingOptions_CategoryEncodingMethod_DUMMYENCODING,
@@ -682,8 +617,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_ColorSpace
     TrainingOptions_ColorSpace
-      (
-        TrainingOptions_ColorSpace_COLORSPACEUNSPECIFIED,
+      ( TrainingOptions_ColorSpace_COLORSPACEUNSPECIFIED,
         TrainingOptions_ColorSpace_Rgb,
         TrainingOptions_ColorSpace_Hsv,
         TrainingOptions_ColorSpace_Yiq,
@@ -694,8 +628,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_DartNormalizeType
     TrainingOptions_DartNormalizeType
-      (
-        TrainingOptions_DartNormalizeType_DARTNORMALIZETYPEUNSPECIFIED,
+      ( TrainingOptions_DartNormalizeType_DARTNORMALIZETYPEUNSPECIFIED,
         TrainingOptions_DartNormalizeType_Tree,
         TrainingOptions_DartNormalizeType_Forest,
         ..
@@ -703,8 +636,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_DataFrequency
     TrainingOptions_DataFrequency
-      (
-        TrainingOptions_DataFrequency_DATAFREQUENCYUNSPECIFIED,
+      ( TrainingOptions_DataFrequency_DATAFREQUENCYUNSPECIFIED,
         TrainingOptions_DataFrequency_AUTOFREQUENCY,
         TrainingOptions_DataFrequency_Yearly,
         TrainingOptions_DataFrequency_Quarterly,
@@ -718,8 +650,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_DataSplitMethod
     TrainingOptions_DataSplitMethod
-      (
-        TrainingOptions_DataSplitMethod_DATASPLITMETHODUNSPECIFIED,
+      ( TrainingOptions_DataSplitMethod_DATASPLITMETHODUNSPECIFIED,
         TrainingOptions_DataSplitMethod_Random,
         TrainingOptions_DataSplitMethod_Custom,
         TrainingOptions_DataSplitMethod_Sequential,
@@ -730,8 +661,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_DistanceType
     TrainingOptions_DistanceType
-      (
-        TrainingOptions_DistanceType_DISTANCETYPEUNSPECIFIED,
+      ( TrainingOptions_DistanceType_DISTANCETYPEUNSPECIFIED,
         TrainingOptions_DistanceType_Euclidean,
         TrainingOptions_DistanceType_Cosine,
         ..
@@ -739,8 +669,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_FeedbackType
     TrainingOptions_FeedbackType
-      (
-        TrainingOptions_FeedbackType_FEEDBACKTYPEUNSPECIFIED,
+      ( TrainingOptions_FeedbackType_FEEDBACKTYPEUNSPECIFIED,
         TrainingOptions_FeedbackType_Implicit,
         TrainingOptions_FeedbackType_Explicit,
         ..
@@ -748,8 +677,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_HolidayRegion
     TrainingOptions_HolidayRegion
-      (
-        TrainingOptions_HolidayRegion_HOLIDAYREGIONUNSPECIFIED,
+      ( TrainingOptions_HolidayRegion_HOLIDAYREGIONUNSPECIFIED,
         TrainingOptions_HolidayRegion_Global,
         TrainingOptions_HolidayRegion_NA,
         TrainingOptions_HolidayRegion_Japac,
@@ -823,8 +751,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_HolidayRegionsItem
     TrainingOptions_HolidayRegionsItem
-      (
-        TrainingOptions_HolidayRegionsItem_HOLIDAYREGIONUNSPECIFIED,
+      ( TrainingOptions_HolidayRegionsItem_HOLIDAYREGIONUNSPECIFIED,
         TrainingOptions_HolidayRegionsItem_Global,
         TrainingOptions_HolidayRegionsItem_NA,
         TrainingOptions_HolidayRegionsItem_Japac,
@@ -898,8 +825,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_HparamTuningObjectivesItem
     TrainingOptions_HparamTuningObjectivesItem
-      (
-        TrainingOptions_HparamTuningObjectivesItem_HPARAMTUNINGOBJECTIVEUNSPECIFIED,
+      ( TrainingOptions_HparamTuningObjectivesItem_HPARAMTUNINGOBJECTIVEUNSPECIFIED,
         TrainingOptions_HparamTuningObjectivesItem_MEANABSOLUTEERROR,
         TrainingOptions_HparamTuningObjectivesItem_MEANSQUAREDERROR,
         TrainingOptions_HparamTuningObjectivesItem_MEANSQUAREDLOGERROR,
@@ -921,8 +847,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_KmeansInitializationMethod
     TrainingOptions_KmeansInitializationMethod
-      (
-        TrainingOptions_KmeansInitializationMethod_KMEANSINITIALIZATIONMETHODUNSPECIFIED,
+      ( TrainingOptions_KmeansInitializationMethod_KMEANSINITIALIZATIONMETHODUNSPECIFIED,
         TrainingOptions_KmeansInitializationMethod_Random,
         TrainingOptions_KmeansInitializationMethod_Custom,
         TrainingOptions_KmeansInitializationMethod_KMEANSPLUSPLUS,
@@ -931,8 +856,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_LearnRateStrategy
     TrainingOptions_LearnRateStrategy
-      (
-        TrainingOptions_LearnRateStrategy_LEARNRATESTRATEGYUNSPECIFIED,
+      ( TrainingOptions_LearnRateStrategy_LEARNRATESTRATEGYUNSPECIFIED,
         TrainingOptions_LearnRateStrategy_LINESEARCH,
         TrainingOptions_LearnRateStrategy_Constant,
         ..
@@ -940,8 +864,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_LossType
     TrainingOptions_LossType
-      (
-        TrainingOptions_LossType_LOSSTYPEUNSPECIFIED,
+      ( TrainingOptions_LossType_LOSSTYPEUNSPECIFIED,
         TrainingOptions_LossType_MEANSQUAREDLOSS,
         TrainingOptions_LossType_MEANLOGLOSS,
         ..
@@ -949,16 +872,14 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_ModelRegistry
     TrainingOptions_ModelRegistry
-      (
-        TrainingOptions_ModelRegistry_MODELREGISTRYUNSPECIFIED,
+      ( TrainingOptions_ModelRegistry_MODELREGISTRYUNSPECIFIED,
         TrainingOptions_ModelRegistry_VERTEXAI,
         ..
       ),
 
     -- * TrainingOptions_OptimizationStrategy
     TrainingOptions_OptimizationStrategy
-      (
-        TrainingOptions_OptimizationStrategy_OPTIMIZATIONSTRATEGYUNSPECIFIED,
+      ( TrainingOptions_OptimizationStrategy_OPTIMIZATIONSTRATEGYUNSPECIFIED,
         TrainingOptions_OptimizationStrategy_BATCHGRADIENTDESCENT,
         TrainingOptions_OptimizationStrategy_NORMALEQUATION,
         ..
@@ -966,8 +887,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_PcaSolver
     TrainingOptions_PcaSolver
-      (
-        TrainingOptions_PcaSolver_Unspecified,
+      ( TrainingOptions_PcaSolver_Unspecified,
         TrainingOptions_PcaSolver_Full,
         TrainingOptions_PcaSolver_Randomized,
         TrainingOptions_PcaSolver_Auto,
@@ -976,8 +896,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TrainingOptions_TreeMethod
     TrainingOptions_TreeMethod
-      (
-        TrainingOptions_TreeMethod_TREEMETHODUNSPECIFIED,
+      ( TrainingOptions_TreeMethod_TREEMETHODUNSPECIFIED,
         TrainingOptions_TreeMethod_Auto,
         TrainingOptions_TreeMethod_Exact,
         TrainingOptions_TreeMethod_Approx,
@@ -987,8 +906,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * VectorSearchStatistics_IndexUsageMode
     VectorSearchStatistics_IndexUsageMode
-      (
-        VectorSearchStatistics_IndexUsageMode_INDEXUSAGEMODEUNSPECIFIED,
+      ( VectorSearchStatistics_IndexUsageMode_INDEXUSAGEMODEUNSPECIFIED,
         VectorSearchStatistics_IndexUsageMode_Unused,
         VectorSearchStatistics_IndexUsageMode_PARTIALLYUSED,
         VectorSearchStatistics_IndexUsageMode_FULLYUSED,
@@ -997,8 +915,7 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * DatasetsGetDatasetView
     DatasetsGetDatasetView
-      (
-        DatasetsGetDatasetView_DATASETVIEWUNSPECIFIED,
+      ( DatasetsGetDatasetView_DATASETVIEWUNSPECIFIED,
         DatasetsGetDatasetView_Metadata,
         DatasetsGetDatasetView_Acl,
         DatasetsGetDatasetView_Full,
@@ -1007,16 +924,14 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * JobsListProjection
     JobsListProjection
-      (
-        JobsListProjection_Full,
+      ( JobsListProjection_Full,
         JobsListProjection_Minimal,
         ..
       ),
 
     -- * JobsListStateFilter
     JobsListStateFilter
-      (
-        JobsListStateFilter_Done,
+      ( JobsListStateFilter_Done,
         JobsListStateFilter_Pending,
         JobsListStateFilter_Running,
         ..
@@ -1024,29 +939,29 @@ module Gogol.BigQuery.Internal.Sum
 
     -- * TablesGetView
     TablesGetView
-      (
-        TablesGetView_TABLEMETADATAVIEWUNSPECIFIED,
+      ( TablesGetView_TABLEMETADATAVIEWUNSPECIFIED,
         TablesGetView_Basic,
         TablesGetView_STORAGESTATS,
         TablesGetView_Full,
         ..
       ),
-  ) where
+  )
+where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -1059,20 +974,21 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv #-}
+  Xgafv
+  #-}
 
 -- | Optional. Defaults to FIXED_TYPE.
-newtype Argument_ArgumentKind = Argument_ArgumentKind { fromArgument_ArgumentKind :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Argument_ArgumentKind = Argument_ArgumentKind {fromArgument_ArgumentKind :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern Argument_ArgumentKind_ARGUMENTKINDUNSPECIFIED :: Argument_ArgumentKind
@@ -1090,20 +1006,21 @@ pattern Argument_ArgumentKind_ANYTYPE = Argument_ArgumentKind "ANY_TYPE"
   Argument_ArgumentKind_ARGUMENTKINDUNSPECIFIED,
   Argument_ArgumentKind_FIXEDTYPE,
   Argument_ArgumentKind_ANYTYPE,
-  Argument_ArgumentKind #-}
+  Argument_ArgumentKind
+  #-}
 
 -- | Optional. Specifies whether the argument is input or output. Can be set for procedures only.
-newtype Argument_Mode = Argument_Mode { fromArgument_Mode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Argument_Mode = Argument_Mode {fromArgument_Mode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern Argument_Mode_MODEUNSPECIFIED :: Argument_Mode
@@ -1126,19 +1043,20 @@ pattern Argument_Mode_Inout = Argument_Mode "INOUT"
   Argument_Mode_IN,
   Argument_Mode_Out,
   Argument_Mode_Inout,
-  Argument_Mode #-}
+  Argument_Mode
+  #-}
 
-newtype ArimaForecastingMetrics_SeasonalPeriodsItem = ArimaForecastingMetrics_SeasonalPeriodsItem { fromArimaForecastingMetrics_SeasonalPeriodsItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ArimaForecastingMetrics_SeasonalPeriodsItem = ArimaForecastingMetrics_SeasonalPeriodsItem {fromArimaForecastingMetrics_SeasonalPeriodsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified seasonal period.
 pattern ArimaForecastingMetrics_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED :: ArimaForecastingMetrics_SeasonalPeriodsItem
@@ -1176,19 +1094,20 @@ pattern ArimaForecastingMetrics_SeasonalPeriodsItem_Yearly = ArimaForecastingMet
   ArimaForecastingMetrics_SeasonalPeriodsItem_Monthly,
   ArimaForecastingMetrics_SeasonalPeriodsItem_Quarterly,
   ArimaForecastingMetrics_SeasonalPeriodsItem_Yearly,
-  ArimaForecastingMetrics_SeasonalPeriodsItem #-}
+  ArimaForecastingMetrics_SeasonalPeriodsItem
+  #-}
 
-newtype ArimaModelInfo_SeasonalPeriodsItem = ArimaModelInfo_SeasonalPeriodsItem { fromArimaModelInfo_SeasonalPeriodsItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ArimaModelInfo_SeasonalPeriodsItem = ArimaModelInfo_SeasonalPeriodsItem {fromArimaModelInfo_SeasonalPeriodsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified seasonal period.
 pattern ArimaModelInfo_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED :: ArimaModelInfo_SeasonalPeriodsItem
@@ -1226,19 +1145,20 @@ pattern ArimaModelInfo_SeasonalPeriodsItem_Yearly = ArimaModelInfo_SeasonalPerio
   ArimaModelInfo_SeasonalPeriodsItem_Monthly,
   ArimaModelInfo_SeasonalPeriodsItem_Quarterly,
   ArimaModelInfo_SeasonalPeriodsItem_Yearly,
-  ArimaModelInfo_SeasonalPeriodsItem #-}
+  ArimaModelInfo_SeasonalPeriodsItem
+  #-}
 
-newtype ArimaResult_SeasonalPeriodsItem = ArimaResult_SeasonalPeriodsItem { fromArimaResult_SeasonalPeriodsItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ArimaResult_SeasonalPeriodsItem = ArimaResult_SeasonalPeriodsItem {fromArimaResult_SeasonalPeriodsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified seasonal period.
 pattern ArimaResult_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED :: ArimaResult_SeasonalPeriodsItem
@@ -1276,19 +1196,20 @@ pattern ArimaResult_SeasonalPeriodsItem_Yearly = ArimaResult_SeasonalPeriodsItem
   ArimaResult_SeasonalPeriodsItem_Monthly,
   ArimaResult_SeasonalPeriodsItem_Quarterly,
   ArimaResult_SeasonalPeriodsItem_Yearly,
-  ArimaResult_SeasonalPeriodsItem #-}
+  ArimaResult_SeasonalPeriodsItem
+  #-}
 
-newtype ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem = ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem { fromArimaSingleModelForecastingMetrics_SeasonalPeriodsItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem = ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem {fromArimaSingleModelForecastingMetrics_SeasonalPeriodsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified seasonal period.
 pattern ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem_SEASONALPERIODTYPEUNSPECIFIED :: ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem
@@ -1326,20 +1247,21 @@ pattern ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem_Yearly = ArimaSin
   ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem_Monthly,
   ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem_Quarterly,
   ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem_Yearly,
-  ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem #-}
+  ArimaSingleModelForecastingMetrics_SeasonalPeriodsItem
+  #-}
 
 -- | The log type that this config enables.
-newtype AuditLogConfig_LogType = AuditLogConfig_LogType { fromAuditLogConfig_LogType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype AuditLogConfig_LogType = AuditLogConfig_LogType {fromAuditLogConfig_LogType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default case. Should never be this.
 pattern AuditLogConfig_LogType_LOGTYPEUNSPECIFIED :: AuditLogConfig_LogType
@@ -1362,20 +1284,21 @@ pattern AuditLogConfig_LogType_DATAREAD = AuditLogConfig_LogType "DATA_READ"
   AuditLogConfig_LogType_ADMINREAD,
   AuditLogConfig_LogType_DATAWRITE,
   AuditLogConfig_LogType_DATAREAD,
-  AuditLogConfig_LogType #-}
+  AuditLogConfig_LogType
+  #-}
 
 -- | Output only. High-level BI Engine reason for partial or disabled acceleration
-newtype BiEngineReason_Code = BiEngineReason_Code { fromBiEngineReason_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BiEngineReason_Code = BiEngineReason_Code {fromBiEngineReason_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | BiEngineReason not specified.
 pattern BiEngineReason_Code_CODEUNSPECIFIED :: BiEngineReason_Code
@@ -1413,20 +1336,21 @@ pattern BiEngineReason_Code_TABLEEXCLUDED = BiEngineReason_Code "TABLE_EXCLUDED"
   BiEngineReason_Code_INPUTTOOLARGE,
   BiEngineReason_Code_OTHERREASON,
   BiEngineReason_Code_TABLEEXCLUDED,
-  BiEngineReason_Code #-}
+  BiEngineReason_Code
+  #-}
 
 -- | Output only. Specifies which mode of BI Engine acceleration was performed (if any).
-newtype BiEngineStatistics_AccelerationMode = BiEngineStatistics_AccelerationMode { fromBiEngineStatistics_AccelerationMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BiEngineStatistics_AccelerationMode = BiEngineStatistics_AccelerationMode {fromBiEngineStatistics_AccelerationMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | BiEngineMode type not specified.
 pattern BiEngineStatistics_AccelerationMode_BIENGINEACCELERATIONMODEUNSPECIFIED :: BiEngineStatistics_AccelerationMode
@@ -1454,20 +1378,21 @@ pattern BiEngineStatistics_AccelerationMode_FULLQUERY = BiEngineStatistics_Accel
   BiEngineStatistics_AccelerationMode_PARTIALINPUT,
   BiEngineStatistics_AccelerationMode_FULLINPUT,
   BiEngineStatistics_AccelerationMode_FULLQUERY,
-  BiEngineStatistics_AccelerationMode #-}
+  BiEngineStatistics_AccelerationMode
+  #-}
 
 -- | Output only. Specifies which mode of BI Engine acceleration was performed (if any).
-newtype BiEngineStatistics_BiEngineMode = BiEngineStatistics_BiEngineMode { fromBiEngineStatistics_BiEngineMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BiEngineStatistics_BiEngineMode = BiEngineStatistics_BiEngineMode {fromBiEngineStatistics_BiEngineMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | BiEngineMode type not specified.
 pattern BiEngineStatistics_BiEngineMode_ACCELERATIONMODEUNSPECIFIED :: BiEngineStatistics_BiEngineMode
@@ -1490,20 +1415,21 @@ pattern BiEngineStatistics_BiEngineMode_Full = BiEngineStatistics_BiEngineMode "
   BiEngineStatistics_BiEngineMode_Disabled,
   BiEngineStatistics_BiEngineMode_Partial,
   BiEngineStatistics_BiEngineMode_Full,
-  BiEngineStatistics_BiEngineMode #-}
+  BiEngineStatistics_BiEngineMode
+  #-}
 
 -- | Optional. The file format the table data is stored in.
-newtype BigLakeConfiguration_FileFormat = BigLakeConfiguration_FileFormat { fromBigLakeConfiguration_FileFormat :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BigLakeConfiguration_FileFormat = BigLakeConfiguration_FileFormat {fromBigLakeConfiguration_FileFormat :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default Value.
 pattern BigLakeConfiguration_FileFormat_FILEFORMATUNSPECIFIED :: BigLakeConfiguration_FileFormat
@@ -1516,20 +1442,21 @@ pattern BigLakeConfiguration_FileFormat_Parquet = BigLakeConfiguration_FileForma
 {-# COMPLETE
   BigLakeConfiguration_FileFormat_FILEFORMATUNSPECIFIED,
   BigLakeConfiguration_FileFormat_Parquet,
-  BigLakeConfiguration_FileFormat #-}
+  BigLakeConfiguration_FileFormat
+  #-}
 
 -- | Optional. The table format the metadata only snapshots are stored in.
-newtype BigLakeConfiguration_TableFormat = BigLakeConfiguration_TableFormat { fromBigLakeConfiguration_TableFormat :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype BigLakeConfiguration_TableFormat = BigLakeConfiguration_TableFormat {fromBigLakeConfiguration_TableFormat :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default Value.
 pattern BigLakeConfiguration_TableFormat_TABLEFORMATUNSPECIFIED :: BigLakeConfiguration_TableFormat
@@ -1542,20 +1469,21 @@ pattern BigLakeConfiguration_TableFormat_Iceberg = BigLakeConfiguration_TableFor
 {-# COMPLETE
   BigLakeConfiguration_TableFormat_TABLEFORMATUNSPECIFIED,
   BigLakeConfiguration_TableFormat_Iceberg,
-  BigLakeConfiguration_TableFormat #-}
+  BigLakeConfiguration_TableFormat
+  #-}
 
 -- | Optional. Defines the default rounding mode specification of new tables created within this dataset. During table creation, if this field is specified, the table within this dataset will inherit the default rounding mode of the dataset. Setting the default rounding mode on a table overrides this option. Existing tables in the dataset are unaffected. If columns are defined during that table creation, they will immediately inherit the table\'s default rounding mode, unless otherwise specified.
-newtype Dataset_DefaultRoundingMode = Dataset_DefaultRoundingMode { fromDataset_DefaultRoundingMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Dataset_DefaultRoundingMode = Dataset_DefaultRoundingMode {fromDataset_DefaultRoundingMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified will default to using ROUND/HALF/AWAY/FROM/ZERO.
 pattern Dataset_DefaultRoundingMode_ROUNDINGMODEUNSPECIFIED :: Dataset_DefaultRoundingMode
@@ -1573,20 +1501,21 @@ pattern Dataset_DefaultRoundingMode_ROUNDHALFEVEN = Dataset_DefaultRoundingMode 
   Dataset_DefaultRoundingMode_ROUNDINGMODEUNSPECIFIED,
   Dataset_DefaultRoundingMode_ROUNDHALFAWAYFROMZERO,
   Dataset_DefaultRoundingMode_ROUNDHALFEVEN,
-  Dataset_DefaultRoundingMode #-}
+  Dataset_DefaultRoundingMode
+  #-}
 
 -- | Optional. Updates storage/billing/model for the dataset.
-newtype Dataset_StorageBillingModel = Dataset_StorageBillingModel { fromDataset_StorageBillingModel :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Dataset_StorageBillingModel = Dataset_StorageBillingModel {fromDataset_StorageBillingModel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Value not set.
 pattern Dataset_StorageBillingModel_STORAGEBILLINGMODELUNSPECIFIED :: Dataset_StorageBillingModel
@@ -1604,19 +1533,20 @@ pattern Dataset_StorageBillingModel_Physical = Dataset_StorageBillingModel "PHYS
   Dataset_StorageBillingModel_STORAGEBILLINGMODELUNSPECIFIED,
   Dataset_StorageBillingModel_Logical,
   Dataset_StorageBillingModel_Physical,
-  Dataset_StorageBillingModel #-}
+  Dataset_StorageBillingModel
+  #-}
 
-newtype DatasetAccessEntry_TargetTypesItem = DatasetAccessEntry_TargetTypesItem { fromDatasetAccessEntry_TargetTypesItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DatasetAccessEntry_TargetTypesItem = DatasetAccessEntry_TargetTypesItem {fromDatasetAccessEntry_TargetTypesItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Do not use. You must set a target type explicitly.
 pattern DatasetAccessEntry_TargetTypesItem_TARGETTYPEUNSPECIFIED :: DatasetAccessEntry_TargetTypesItem
@@ -1634,20 +1564,21 @@ pattern DatasetAccessEntry_TargetTypesItem_Routines = DatasetAccessEntry_TargetT
   DatasetAccessEntry_TargetTypesItem_TARGETTYPEUNSPECIFIED,
   DatasetAccessEntry_TargetTypesItem_Views,
   DatasetAccessEntry_TargetTypesItem_Routines,
-  DatasetAccessEntry_TargetTypesItem #-}
+  DatasetAccessEntry_TargetTypesItem
+  #-}
 
 -- | Output only. Compute mode for this stage.
-newtype ExplainQueryStage_ComputeMode = ExplainQueryStage_ComputeMode { fromExplainQueryStage_ComputeMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ExplainQueryStage_ComputeMode = ExplainQueryStage_ComputeMode {fromExplainQueryStage_ComputeMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | ComputeMode type not specified.
 pattern ExplainQueryStage_ComputeMode_COMPUTEMODEUNSPECIFIED :: ExplainQueryStage_ComputeMode
@@ -1665,19 +1596,20 @@ pattern ExplainQueryStage_ComputeMode_BIENGINE = ExplainQueryStage_ComputeMode "
   ExplainQueryStage_ComputeMode_COMPUTEMODEUNSPECIFIED,
   ExplainQueryStage_ComputeMode_Bigquery,
   ExplainQueryStage_ComputeMode_BIENGINE,
-  ExplainQueryStage_ComputeMode #-}
+  ExplainQueryStage_ComputeMode
+  #-}
 
-newtype ExternalDataConfiguration_DecimalTargetTypesItem = ExternalDataConfiguration_DecimalTargetTypesItem { fromExternalDataConfiguration_DecimalTargetTypesItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ExternalDataConfiguration_DecimalTargetTypesItem = ExternalDataConfiguration_DecimalTargetTypesItem {fromExternalDataConfiguration_DecimalTargetTypesItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Invalid type.
 pattern ExternalDataConfiguration_DecimalTargetTypesItem_DECIMALTARGETTYPEUNSPECIFIED :: ExternalDataConfiguration_DecimalTargetTypesItem
@@ -1700,20 +1632,21 @@ pattern ExternalDataConfiguration_DecimalTargetTypesItem_String = ExternalDataCo
   ExternalDataConfiguration_DecimalTargetTypesItem_Numeric,
   ExternalDataConfiguration_DecimalTargetTypesItem_Bignumeric,
   ExternalDataConfiguration_DecimalTargetTypesItem_String,
-  ExternalDataConfiguration_DecimalTargetTypesItem #-}
+  ExternalDataConfiguration_DecimalTargetTypesItem
+  #-}
 
 -- | Optional. Specifies how source URIs are interpreted for constructing the file set to load. By default source URIs are expanded against the underlying storage. Other options include specifying manifest files. Only applicable to object storage systems.
-newtype ExternalDataConfiguration_FileSetSpecType = ExternalDataConfiguration_FileSetSpecType { fromExternalDataConfiguration_FileSetSpecType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ExternalDataConfiguration_FileSetSpecType = ExternalDataConfiguration_FileSetSpecType {fromExternalDataConfiguration_FileSetSpecType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This option expands source URIs by listing files from the object store. It is the default behavior if FileSetSpecType is not set.
 pattern ExternalDataConfiguration_FileSetSpecType_FILESETSPECTYPEFILESYSTEMMATCH :: ExternalDataConfiguration_FileSetSpecType
@@ -1726,20 +1659,21 @@ pattern ExternalDataConfiguration_FileSetSpecType_FILESETSPECTYPENEWLINEDELIMITE
 {-# COMPLETE
   ExternalDataConfiguration_FileSetSpecType_FILESETSPECTYPEFILESYSTEMMATCH,
   ExternalDataConfiguration_FileSetSpecType_FILESETSPECTYPENEWLINEDELIMITEDMANIFEST,
-  ExternalDataConfiguration_FileSetSpecType #-}
+  ExternalDataConfiguration_FileSetSpecType
+  #-}
 
 -- | Optional. Load option to be used together with source/format newline-delimited JSON to indicate that a variant of JSON is being loaded. To load newline-delimited GeoJSON, specify GEOJSON (and source/format must be set to NEWLINE/DELIMITED/JSON).
-newtype ExternalDataConfiguration_JsonExtension = ExternalDataConfiguration_JsonExtension { fromExternalDataConfiguration_JsonExtension :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ExternalDataConfiguration_JsonExtension = ExternalDataConfiguration_JsonExtension {fromExternalDataConfiguration_JsonExtension :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The default if provided value is not one included in the enum, or the value is not specified. The source formate is parsed without any modification.
 pattern ExternalDataConfiguration_JsonExtension_JSONEXTENSIONUNSPECIFIED :: ExternalDataConfiguration_JsonExtension
@@ -1752,20 +1686,21 @@ pattern ExternalDataConfiguration_JsonExtension_Geojson = ExternalDataConfigurat
 {-# COMPLETE
   ExternalDataConfiguration_JsonExtension_JSONEXTENSIONUNSPECIFIED,
   ExternalDataConfiguration_JsonExtension_Geojson,
-  ExternalDataConfiguration_JsonExtension #-}
+  ExternalDataConfiguration_JsonExtension
+  #-}
 
 -- | Optional. Metadata Cache Mode for the table. Set this to enable caching of metadata from external data source.
-newtype ExternalDataConfiguration_MetadataCacheMode = ExternalDataConfiguration_MetadataCacheMode { fromExternalDataConfiguration_MetadataCacheMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ExternalDataConfiguration_MetadataCacheMode = ExternalDataConfiguration_MetadataCacheMode {fromExternalDataConfiguration_MetadataCacheMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified metadata cache mode.
 pattern ExternalDataConfiguration_MetadataCacheMode_METADATACACHEMODEUNSPECIFIED :: ExternalDataConfiguration_MetadataCacheMode
@@ -1783,20 +1718,21 @@ pattern ExternalDataConfiguration_MetadataCacheMode_Manual = ExternalDataConfigu
   ExternalDataConfiguration_MetadataCacheMode_METADATACACHEMODEUNSPECIFIED,
   ExternalDataConfiguration_MetadataCacheMode_Automatic,
   ExternalDataConfiguration_MetadataCacheMode_Manual,
-  ExternalDataConfiguration_MetadataCacheMode #-}
+  ExternalDataConfiguration_MetadataCacheMode
+  #-}
 
 -- | Optional. ObjectMetadata is used to create Object Tables. Object Tables contain a listing of objects (with their metadata) found at the source/uris. If ObjectMetadata is set, source/format should be omitted. Currently SIMPLE is the only supported Object Metadata type.
-newtype ExternalDataConfiguration_ObjectMetadata = ExternalDataConfiguration_ObjectMetadata { fromExternalDataConfiguration_ObjectMetadata :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ExternalDataConfiguration_ObjectMetadata = ExternalDataConfiguration_ObjectMetadata {fromExternalDataConfiguration_ObjectMetadata :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified by default.
 pattern ExternalDataConfiguration_ObjectMetadata_OBJECTMETADATAUNSPECIFIED :: ExternalDataConfiguration_ObjectMetadata
@@ -1814,20 +1750,21 @@ pattern ExternalDataConfiguration_ObjectMetadata_Simple = ExternalDataConfigurat
   ExternalDataConfiguration_ObjectMetadata_OBJECTMETADATAUNSPECIFIED,
   ExternalDataConfiguration_ObjectMetadata_Directory,
   ExternalDataConfiguration_ObjectMetadata_Simple,
-  ExternalDataConfiguration_ObjectMetadata #-}
+  ExternalDataConfiguration_ObjectMetadata
+  #-}
 
 -- | Required. Specifies the system which defines the foreign data type.
-newtype ForeignTypeInfo_TypeSystem = ForeignTypeInfo_TypeSystem { fromForeignTypeInfo_TypeSystem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ForeignTypeInfo_TypeSystem = ForeignTypeInfo_TypeSystem {fromForeignTypeInfo_TypeSystem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | TypeSystem not specified.
 pattern ForeignTypeInfo_TypeSystem_TYPESYSTEMUNSPECIFIED :: ForeignTypeInfo_TypeSystem
@@ -1840,20 +1777,21 @@ pattern ForeignTypeInfo_TypeSystem_Hive = ForeignTypeInfo_TypeSystem "HIVE"
 {-# COMPLETE
   ForeignTypeInfo_TypeSystem_TYPESYSTEMUNSPECIFIED,
   ForeignTypeInfo_TypeSystem_Hive,
-  ForeignTypeInfo_TypeSystem #-}
+  ForeignTypeInfo_TypeSystem
+  #-}
 
 -- | The status of the trial.
-newtype HparamTuningTrial_Status = HparamTuningTrial_Status { fromHparamTuningTrial_Status :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype HparamTuningTrial_Status = HparamTuningTrial_Status {fromHparamTuningTrial_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern HparamTuningTrial_Status_TRIALSTATUSUNSPECIFIED :: HparamTuningTrial_Status
@@ -1891,20 +1829,21 @@ pattern HparamTuningTrial_Status_STOPPEDEARLY = HparamTuningTrial_Status "STOPPE
   HparamTuningTrial_Status_Failed,
   HparamTuningTrial_Status_Infeasible,
   HparamTuningTrial_Status_STOPPEDEARLY,
-  HparamTuningTrial_Status #-}
+  HparamTuningTrial_Status
+  #-}
 
 -- | Specifies the high-level reason for the scenario when no search index was used.
-newtype IndexUnusedReason_Code = IndexUnusedReason_Code { fromIndexUnusedReason_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype IndexUnusedReason_Code = IndexUnusedReason_Code {fromIndexUnusedReason_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Code not specified.
 pattern IndexUnusedReason_Code_CODEUNSPECIFIED :: IndexUnusedReason_Code
@@ -2012,20 +1951,21 @@ pattern IndexUnusedReason_Code_OTHERREASON = IndexUnusedReason_Code "OTHER_REASO
   IndexUnusedReason_Code_STALEINDEX,
   IndexUnusedReason_Code_INTERNALERROR,
   IndexUnusedReason_Code_OTHERREASON,
-  IndexUnusedReason_Code #-}
+  IndexUnusedReason_Code
+  #-}
 
 -- | Optional. Character map supported for column names in CSV\/Parquet loads. Defaults to STRICT and can be overridden by Project Config Service. Using this option with unsupporting load formats will result in an error.
-newtype JobConfigurationLoad_ColumnNameCharacterMap = JobConfigurationLoad_ColumnNameCharacterMap { fromJobConfigurationLoad_ColumnNameCharacterMap :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype JobConfigurationLoad_ColumnNameCharacterMap = JobConfigurationLoad_ColumnNameCharacterMap {fromJobConfigurationLoad_ColumnNameCharacterMap :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified column name character map.
 pattern JobConfigurationLoad_ColumnNameCharacterMap_COLUMNNAMECHARACTERMAPUNSPECIFIED :: JobConfigurationLoad_ColumnNameCharacterMap
@@ -2048,19 +1988,20 @@ pattern JobConfigurationLoad_ColumnNameCharacterMap_V2 = JobConfigurationLoad_Co
   JobConfigurationLoad_ColumnNameCharacterMap_Strict,
   JobConfigurationLoad_ColumnNameCharacterMap_V1,
   JobConfigurationLoad_ColumnNameCharacterMap_V2,
-  JobConfigurationLoad_ColumnNameCharacterMap #-}
+  JobConfigurationLoad_ColumnNameCharacterMap
+  #-}
 
-newtype JobConfigurationLoad_DecimalTargetTypesItem = JobConfigurationLoad_DecimalTargetTypesItem { fromJobConfigurationLoad_DecimalTargetTypesItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype JobConfigurationLoad_DecimalTargetTypesItem = JobConfigurationLoad_DecimalTargetTypesItem {fromJobConfigurationLoad_DecimalTargetTypesItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Invalid type.
 pattern JobConfigurationLoad_DecimalTargetTypesItem_DECIMALTARGETTYPEUNSPECIFIED :: JobConfigurationLoad_DecimalTargetTypesItem
@@ -2083,20 +2024,21 @@ pattern JobConfigurationLoad_DecimalTargetTypesItem_String = JobConfigurationLoa
   JobConfigurationLoad_DecimalTargetTypesItem_Numeric,
   JobConfigurationLoad_DecimalTargetTypesItem_Bignumeric,
   JobConfigurationLoad_DecimalTargetTypesItem_String,
-  JobConfigurationLoad_DecimalTargetTypesItem #-}
+  JobConfigurationLoad_DecimalTargetTypesItem
+  #-}
 
 -- | Optional. Specifies how source URIs are interpreted for constructing the file set to load. By default, source URIs are expanded against the underlying storage. You can also specify manifest files to control how the file set is constructed. This option is only applicable to object storage systems.
-newtype JobConfigurationLoad_FileSetSpecType = JobConfigurationLoad_FileSetSpecType { fromJobConfigurationLoad_FileSetSpecType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype JobConfigurationLoad_FileSetSpecType = JobConfigurationLoad_FileSetSpecType {fromJobConfigurationLoad_FileSetSpecType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | This option expands source URIs by listing files from the object store. It is the default behavior if FileSetSpecType is not set.
 pattern JobConfigurationLoad_FileSetSpecType_FILESETSPECTYPEFILESYSTEMMATCH :: JobConfigurationLoad_FileSetSpecType
@@ -2109,20 +2051,21 @@ pattern JobConfigurationLoad_FileSetSpecType_FILESETSPECTYPENEWLINEDELIMITEDMANI
 {-# COMPLETE
   JobConfigurationLoad_FileSetSpecType_FILESETSPECTYPEFILESYSTEMMATCH,
   JobConfigurationLoad_FileSetSpecType_FILESETSPECTYPENEWLINEDELIMITEDMANIFEST,
-  JobConfigurationLoad_FileSetSpecType #-}
+  JobConfigurationLoad_FileSetSpecType
+  #-}
 
 -- | Optional. Load option to be used together with source/format newline-delimited JSON to indicate that a variant of JSON is being loaded. To load newline-delimited GeoJSON, specify GEOJSON (and source/format must be set to NEWLINE/DELIMITED/JSON).
-newtype JobConfigurationLoad_JsonExtension = JobConfigurationLoad_JsonExtension { fromJobConfigurationLoad_JsonExtension :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype JobConfigurationLoad_JsonExtension = JobConfigurationLoad_JsonExtension {fromJobConfigurationLoad_JsonExtension :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The default if provided value is not one included in the enum, or the value is not specified. The source formate is parsed without any modification.
 pattern JobConfigurationLoad_JsonExtension_JSONEXTENSIONUNSPECIFIED :: JobConfigurationLoad_JsonExtension
@@ -2135,20 +2078,21 @@ pattern JobConfigurationLoad_JsonExtension_Geojson = JobConfigurationLoad_JsonEx
 {-# COMPLETE
   JobConfigurationLoad_JsonExtension_JSONEXTENSIONUNSPECIFIED,
   JobConfigurationLoad_JsonExtension_Geojson,
-  JobConfigurationLoad_JsonExtension #-}
+  JobConfigurationLoad_JsonExtension
+  #-}
 
 -- | Optional. Supported operation types in table copy job.
-newtype JobConfigurationTableCopy_OperationType = JobConfigurationTableCopy_OperationType { fromJobConfigurationTableCopy_OperationType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype JobConfigurationTableCopy_OperationType = JobConfigurationTableCopy_OperationType {fromJobConfigurationTableCopy_OperationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified operation type.
 pattern JobConfigurationTableCopy_OperationType_OPERATIONTYPEUNSPECIFIED :: JobConfigurationTableCopy_OperationType
@@ -2176,20 +2120,21 @@ pattern JobConfigurationTableCopy_OperationType_Clone = JobConfigurationTableCop
   JobConfigurationTableCopy_OperationType_Snapshot,
   JobConfigurationTableCopy_OperationType_Restore,
   JobConfigurationTableCopy_OperationType_Clone,
-  JobConfigurationTableCopy_OperationType #-}
+  JobConfigurationTableCopy_OperationType
+  #-}
 
 -- | Output only. Specifies the high level reason why a Job was created.
-newtype JobCreationReason_Code = JobCreationReason_Code { fromJobCreationReason_Code :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype JobCreationReason_Code = JobCreationReason_Code {fromJobCreationReason_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Reason is not specified.
 pattern JobCreationReason_Code_CODEUNSPECIFIED :: JobCreationReason_Code
@@ -2217,20 +2162,21 @@ pattern JobCreationReason_Code_Other = JobCreationReason_Code "OTHER"
   JobCreationReason_Code_LONGRUNNING,
   JobCreationReason_Code_LARGERESULTS,
   JobCreationReason_Code_Other,
-  JobCreationReason_Code #-}
+  JobCreationReason_Code
+  #-}
 
 -- | Output only. Name of edition corresponding to the reservation for this job at the time of this update.
-newtype JobStatistics_Edition = JobStatistics_Edition { fromJobStatistics_Edition :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype JobStatistics_Edition = JobStatistics_Edition {fromJobStatistics_Edition :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value, which will be treated as ENTERPRISE.
 pattern JobStatistics_Edition_RESERVATIONEDITIONUNSPECIFIED :: JobStatistics_Edition
@@ -2253,20 +2199,21 @@ pattern JobStatistics_Edition_ENTERPRISEPLUS = JobStatistics_Edition "ENTERPRISE
   JobStatistics_Edition_Standard,
   JobStatistics_Edition_Enterprise,
   JobStatistics_Edition_ENTERPRISEPLUS,
-  JobStatistics_Edition #-}
+  JobStatistics_Edition
+  #-}
 
 -- | Optional. Specifies if a join is required or not on queries for the view. Default is JOIN/CONDITION/UNSPECIFIED.
-newtype JoinRestrictionPolicy_JoinCondition = JoinRestrictionPolicy_JoinCondition { fromJoinRestrictionPolicy_JoinCondition :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype JoinRestrictionPolicy_JoinCondition = JoinRestrictionPolicy_JoinCondition {fromJoinRestrictionPolicy_JoinCondition :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | A join is neither required nor restricted on any column. Default value.
 pattern JoinRestrictionPolicy_JoinCondition_JOINCONDITIONUNSPECIFIED :: JoinRestrictionPolicy_JoinCondition
@@ -2294,20 +2241,21 @@ pattern JoinRestrictionPolicy_JoinCondition_JOINBLOCKED = JoinRestrictionPolicy_
   JoinRestrictionPolicy_JoinCondition_JOINALL,
   JoinRestrictionPolicy_JoinCondition_JOINNOTREQUIRED,
   JoinRestrictionPolicy_JoinCondition_JOINBLOCKED,
-  JoinRestrictionPolicy_JoinCondition #-}
+  JoinRestrictionPolicy_JoinCondition
+  #-}
 
 -- | Output only. Specifies whether Linked Dataset is currently in a linked state or not.
-newtype LinkedDatasetMetadata_LinkState = LinkedDatasetMetadata_LinkState { fromLinkedDatasetMetadata_LinkState :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype LinkedDatasetMetadata_LinkState = LinkedDatasetMetadata_LinkState {fromLinkedDatasetMetadata_LinkState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The default value. Default to the LINKED state.
 pattern LinkedDatasetMetadata_LinkState_LINKSTATEUNSPECIFIED :: LinkedDatasetMetadata_LinkState
@@ -2325,20 +2273,21 @@ pattern LinkedDatasetMetadata_LinkState_Unlinked = LinkedDatasetMetadata_LinkSta
   LinkedDatasetMetadata_LinkState_LINKSTATEUNSPECIFIED,
   LinkedDatasetMetadata_LinkState_Linked,
   LinkedDatasetMetadata_LinkState_Unlinked,
-  LinkedDatasetMetadata_LinkState #-}
+  LinkedDatasetMetadata_LinkState
+  #-}
 
 -- | If present, specifies the reason why the materialized view was not chosen for the query.
-newtype MaterializedView_RejectedReason = MaterializedView_RejectedReason { fromMaterializedView_RejectedReason :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MaterializedView_RejectedReason = MaterializedView_RejectedReason {fromMaterializedView_RejectedReason :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default unspecified value.
 pattern MaterializedView_RejectedReason_REJECTEDREASONUNSPECIFIED :: MaterializedView_RejectedReason
@@ -2401,20 +2350,21 @@ pattern MaterializedView_RejectedReason_BASETABLETOOSTALE = MaterializedView_Rej
   MaterializedView_RejectedReason_OUTOFTIMETRAVELWINDOW,
   MaterializedView_RejectedReason_BASETABLEFINEGRAINEDSECURITYPOLICY,
   MaterializedView_RejectedReason_BASETABLETOOSTALE,
-  MaterializedView_RejectedReason #-}
+  MaterializedView_RejectedReason
+  #-}
 
 -- | Output only. The type of the model that is being trained.
-newtype MlStatistics_ModelType = MlStatistics_ModelType { fromMlStatistics_ModelType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MlStatistics_ModelType = MlStatistics_ModelType {fromMlStatistics_ModelType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern MlStatistics_ModelType_MODELTYPEUNSPECIFIED :: MlStatistics_ModelType
@@ -2547,20 +2497,21 @@ pattern MlStatistics_ModelType_CONTRIBUTIONANALYSIS = MlStatistics_ModelType "CO
   MlStatistics_ModelType_Onnx,
   MlStatistics_ModelType_TRANSFORMONLY,
   MlStatistics_ModelType_CONTRIBUTIONANALYSIS,
-  MlStatistics_ModelType #-}
+  MlStatistics_ModelType
+  #-}
 
 -- | Output only. Training type of the job.
-newtype MlStatistics_TrainingType = MlStatistics_TrainingType { fromMlStatistics_TrainingType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype MlStatistics_TrainingType = MlStatistics_TrainingType {fromMlStatistics_TrainingType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified training type.
 pattern MlStatistics_TrainingType_TRAININGTYPEUNSPECIFIED :: MlStatistics_TrainingType
@@ -2578,20 +2529,21 @@ pattern MlStatistics_TrainingType_HPARAMTUNING = MlStatistics_TrainingType "HPAR
   MlStatistics_TrainingType_TRAININGTYPEUNSPECIFIED,
   MlStatistics_TrainingType_SINGLETRAINING,
   MlStatistics_TrainingType_HPARAMTUNING,
-  MlStatistics_TrainingType #-}
+  MlStatistics_TrainingType
+  #-}
 
 -- | Output only. Type of the model resource.
-newtype Model_ModelType = Model_ModelType { fromModel_ModelType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Model_ModelType = Model_ModelType {fromModel_ModelType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern Model_ModelType_MODELTYPEUNSPECIFIED :: Model_ModelType
@@ -2724,20 +2676,21 @@ pattern Model_ModelType_CONTRIBUTIONANALYSIS = Model_ModelType "CONTRIBUTION_ANA
   Model_ModelType_Onnx,
   Model_ModelType_TRANSFORMONLY,
   Model_ModelType_CONTRIBUTIONANALYSIS,
-  Model_ModelType #-}
+  Model_ModelType
+  #-}
 
 -- | Optional. Indicates how to represent a Parquet map if present.
-newtype ParquetOptions_MapTargetType = ParquetOptions_MapTargetType { fromParquetOptions_MapTargetType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ParquetOptions_MapTargetType = ParquetOptions_MapTargetType {fromParquetOptions_MapTargetType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | In this mode, the map will have the following schema: struct map/field/name { repeated struct key_value { key value } }.
 pattern ParquetOptions_MapTargetType_MAPTARGETTYPEUNSPECIFIED :: ParquetOptions_MapTargetType
@@ -2750,20 +2703,21 @@ pattern ParquetOptions_MapTargetType_ARRAYOFSTRUCT = ParquetOptions_MapTargetTyp
 {-# COMPLETE
   ParquetOptions_MapTargetType_MAPTARGETTYPEUNSPECIFIED,
   ParquetOptions_MapTargetType_ARRAYOFSTRUCT,
-  ParquetOptions_MapTargetType #-}
+  ParquetOptions_MapTargetType
+  #-}
 
 -- | Optional. If not set, jobs are always required. If set, the query request will follow the behavior described JobCreationMode. <https://cloud.google.com/products/#product-launch-stages Preview>
-newtype QueryRequest_JobCreationMode = QueryRequest_JobCreationMode { fromQueryRequest_JobCreationMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype QueryRequest_JobCreationMode = QueryRequest_JobCreationMode {fromQueryRequest_JobCreationMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | If unspecified JOB/CREATION/REQUIRED is the default.
 pattern QueryRequest_JobCreationMode_JOBCREATIONMODEUNSPECIFIED :: QueryRequest_JobCreationMode
@@ -2781,20 +2735,21 @@ pattern QueryRequest_JobCreationMode_JOBCREATIONOPTIONAL = QueryRequest_JobCreat
   QueryRequest_JobCreationMode_JOBCREATIONMODEUNSPECIFIED,
   QueryRequest_JobCreationMode_JOBCREATIONREQUIRED,
   QueryRequest_JobCreationMode_JOBCREATIONOPTIONAL,
-  QueryRequest_JobCreationMode #-}
+  QueryRequest_JobCreationMode
+  #-}
 
 -- | Output only. The remote service type for remote model.
-newtype RemoteModelInfo_RemoteServiceType = RemoteModelInfo_RemoteServiceType { fromRemoteModelInfo_RemoteServiceType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RemoteModelInfo_RemoteServiceType = RemoteModelInfo_RemoteServiceType {fromRemoteModelInfo_RemoteServiceType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified remote service type.
 pattern RemoteModelInfo_RemoteServiceType_REMOTESERVICETYPEUNSPECIFIED :: RemoteModelInfo_RemoteServiceType
@@ -2822,20 +2777,21 @@ pattern RemoteModelInfo_RemoteServiceType_CLOUD_AI_SPEECH_TO_TEXT_V2 = RemoteMod
   RemoteModelInfo_RemoteServiceType_CLOUD_AI_VISION_V1,
   RemoteModelInfo_RemoteServiceType_CLOUD_AI_NATURAL_LANGUAGE_V1,
   RemoteModelInfo_RemoteServiceType_CLOUD_AI_SPEECH_TO_TEXT_V2,
-  RemoteModelInfo_RemoteServiceType #-}
+  RemoteModelInfo_RemoteServiceType
+  #-}
 
 -- | Output only. Specifies the type of dataset\/table restriction.
-newtype RestrictionConfig_Type = RestrictionConfig_Type { fromRestrictionConfig_Type :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype RestrictionConfig_Type = RestrictionConfig_Type {fromRestrictionConfig_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Should never be used.
 pattern RestrictionConfig_Type_RESTRICTIONTYPEUNSPECIFIED :: RestrictionConfig_Type
@@ -2848,20 +2804,21 @@ pattern RestrictionConfig_Type_RESTRICTEDDATAEGRESS = RestrictionConfig_Type "RE
 {-# COMPLETE
   RestrictionConfig_Type_RESTRICTIONTYPEUNSPECIFIED,
   RestrictionConfig_Type_RESTRICTEDDATAEGRESS,
-  RestrictionConfig_Type #-}
+  RestrictionConfig_Type
+  #-}
 
 -- | Optional. If set to @DATA_MASKING@, the function is validated and made available as a masking function. For more information, see <https://cloud.google.com/bigquery/docs/user-defined-functions#custom-mask Create custom masking routines>.
-newtype Routine_DataGovernanceType = Routine_DataGovernanceType { fromRoutine_DataGovernanceType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Routine_DataGovernanceType = Routine_DataGovernanceType {fromRoutine_DataGovernanceType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The data governance type is unspecified.
 pattern Routine_DataGovernanceType_DATAGOVERNANCETYPEUNSPECIFIED :: Routine_DataGovernanceType
@@ -2874,20 +2831,21 @@ pattern Routine_DataGovernanceType_DATAMASKING = Routine_DataGovernanceType "DAT
 {-# COMPLETE
   Routine_DataGovernanceType_DATAGOVERNANCETYPEUNSPECIFIED,
   Routine_DataGovernanceType_DATAMASKING,
-  Routine_DataGovernanceType #-}
+  Routine_DataGovernanceType
+  #-}
 
 -- | Optional. The determinism level of the JavaScript UDF, if defined.
-newtype Routine_DeterminismLevel = Routine_DeterminismLevel { fromRoutine_DeterminismLevel :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Routine_DeterminismLevel = Routine_DeterminismLevel {fromRoutine_DeterminismLevel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The determinism of the UDF is unspecified.
 pattern Routine_DeterminismLevel_DETERMINISMLEVELUNSPECIFIED :: Routine_DeterminismLevel
@@ -2905,20 +2863,21 @@ pattern Routine_DeterminismLevel_NOTDETERMINISTIC = Routine_DeterminismLevel "NO
   Routine_DeterminismLevel_DETERMINISMLEVELUNSPECIFIED,
   Routine_DeterminismLevel_Deterministic,
   Routine_DeterminismLevel_NOTDETERMINISTIC,
-  Routine_DeterminismLevel #-}
+  Routine_DeterminismLevel
+  #-}
 
 -- | Optional. Defaults to \"SQL\" if remote/function/options field is absent, not set otherwise.
-newtype Routine_Language = Routine_Language { fromRoutine_Language :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Routine_Language = Routine_Language {fromRoutine_Language :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern Routine_Language_LANGUAGEUNSPECIFIED :: Routine_Language
@@ -2951,20 +2910,21 @@ pattern Routine_Language_Scala = Routine_Language "SCALA"
   Routine_Language_Python,
   Routine_Language_Java,
   Routine_Language_Scala,
-  Routine_Language #-}
+  Routine_Language
+  #-}
 
 -- | Required. The type of routine.
-newtype Routine_RoutineType = Routine_RoutineType { fromRoutine_RoutineType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Routine_RoutineType = Routine_RoutineType {fromRoutine_RoutineType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern Routine_RoutineType_ROUTINETYPEUNSPECIFIED :: Routine_RoutineType
@@ -2992,20 +2952,21 @@ pattern Routine_RoutineType_AGGREGATEFUNCTION = Routine_RoutineType "AGGREGATE_F
   Routine_RoutineType_Procedure,
   Routine_RoutineType_TABLEVALUEDFUNCTION,
   Routine_RoutineType_AGGREGATEFUNCTION,
-  Routine_RoutineType #-}
+  Routine_RoutineType
+  #-}
 
 -- | Optional. The security mode of the routine, if defined. If not defined, the security mode is automatically determined from the routine\'s configuration.
-newtype Routine_SecurityMode = Routine_SecurityMode { fromRoutine_SecurityMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Routine_SecurityMode = Routine_SecurityMode {fromRoutine_SecurityMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The security mode of the routine is unspecified.
 pattern Routine_SecurityMode_SECURITYMODEUNSPECIFIED :: Routine_SecurityMode
@@ -3023,20 +2984,21 @@ pattern Routine_SecurityMode_Invoker = Routine_SecurityMode "INVOKER"
   Routine_SecurityMode_SECURITYMODEUNSPECIFIED,
   Routine_SecurityMode_Definer,
   Routine_SecurityMode_Invoker,
-  Routine_SecurityMode #-}
+  Routine_SecurityMode
+  #-}
 
 -- | Determines which statement in the script represents the \"key result\", used to populate the schema and query results of the script job. Default is LAST.
-newtype ScriptOptions_KeyResultStatement = ScriptOptions_KeyResultStatement { fromScriptOptions_KeyResultStatement :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ScriptOptions_KeyResultStatement = ScriptOptions_KeyResultStatement {fromScriptOptions_KeyResultStatement :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern ScriptOptions_KeyResultStatement_KEYRESULTSTATEMENTKINDUNSPECIFIED :: ScriptOptions_KeyResultStatement
@@ -3054,20 +3016,21 @@ pattern ScriptOptions_KeyResultStatement_FIRSTSELECT = ScriptOptions_KeyResultSt
   ScriptOptions_KeyResultStatement_KEYRESULTSTATEMENTKINDUNSPECIFIED,
   ScriptOptions_KeyResultStatement_Last,
   ScriptOptions_KeyResultStatement_FIRSTSELECT,
-  ScriptOptions_KeyResultStatement #-}
+  ScriptOptions_KeyResultStatement
+  #-}
 
 -- | Whether this child job was a statement or expression.
-newtype ScriptStatistics_EvaluationKind = ScriptStatistics_EvaluationKind { fromScriptStatistics_EvaluationKind :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype ScriptStatistics_EvaluationKind = ScriptStatistics_EvaluationKind {fromScriptStatistics_EvaluationKind :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern ScriptStatistics_EvaluationKind_EVALUATIONKINDUNSPECIFIED :: ScriptStatistics_EvaluationKind
@@ -3085,20 +3048,21 @@ pattern ScriptStatistics_EvaluationKind_Expression = ScriptStatistics_Evaluation
   ScriptStatistics_EvaluationKind_EVALUATIONKINDUNSPECIFIED,
   ScriptStatistics_EvaluationKind_Statement,
   ScriptStatistics_EvaluationKind_Expression,
-  ScriptStatistics_EvaluationKind #-}
+  ScriptStatistics_EvaluationKind
+  #-}
 
 -- | Specifies the index usage mode for the query.
-newtype SearchStatistics_IndexUsageMode = SearchStatistics_IndexUsageMode { fromSearchStatistics_IndexUsageMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype SearchStatistics_IndexUsageMode = SearchStatistics_IndexUsageMode {fromSearchStatistics_IndexUsageMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Index usage mode not specified.
 pattern SearchStatistics_IndexUsageMode_INDEXUSAGEMODEUNSPECIFIED :: SearchStatistics_IndexUsageMode
@@ -3121,20 +3085,21 @@ pattern SearchStatistics_IndexUsageMode_FULLYUSED = SearchStatistics_IndexUsageM
   SearchStatistics_IndexUsageMode_Unused,
   SearchStatistics_IndexUsageMode_PARTIALLYUSED,
   SearchStatistics_IndexUsageMode_FULLYUSED,
-  SearchStatistics_IndexUsageMode #-}
+  SearchStatistics_IndexUsageMode
+  #-}
 
 -- | Required. The top level type of this field. Can be any GoogleSQL data type (e.g., \"INT64\", \"DATE\", \"ARRAY\").
-newtype StandardSqlDataType_TypeKind = StandardSqlDataType_TypeKind { fromStandardSqlDataType_TypeKind :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype StandardSqlDataType_TypeKind = StandardSqlDataType_TypeKind {fromStandardSqlDataType_TypeKind :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Invalid type.
 pattern StandardSqlDataType_TypeKind_TYPEKINDUNSPECIFIED :: StandardSqlDataType_TypeKind
@@ -3227,20 +3192,21 @@ pattern StandardSqlDataType_TypeKind_Range = StandardSqlDataType_TypeKind "RANGE
   StandardSqlDataType_TypeKind_Array,
   StandardSqlDataType_TypeKind_Struct,
   StandardSqlDataType_TypeKind_Range,
-  StandardSqlDataType_TypeKind #-}
+  StandardSqlDataType_TypeKind
+  #-}
 
 -- | Optional. Defines the default rounding mode specification of new decimal fields (NUMERIC OR BIGNUMERIC) in the table. During table creation or update, if a decimal field is added to this table without an explicit rounding mode specified, then the field inherits the table default rounding mode. Changing this field doesn\'t affect existing fields.
-newtype Table_DefaultRoundingMode = Table_DefaultRoundingMode { fromTable_DefaultRoundingMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Table_DefaultRoundingMode = Table_DefaultRoundingMode {fromTable_DefaultRoundingMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified will default to using ROUND/HALF/AWAY/FROM/ZERO.
 pattern Table_DefaultRoundingMode_ROUNDINGMODEUNSPECIFIED :: Table_DefaultRoundingMode
@@ -3258,20 +3224,21 @@ pattern Table_DefaultRoundingMode_ROUNDHALFEVEN = Table_DefaultRoundingMode "ROU
   Table_DefaultRoundingMode_ROUNDINGMODEUNSPECIFIED,
   Table_DefaultRoundingMode_ROUNDHALFAWAYFROMZERO,
   Table_DefaultRoundingMode_ROUNDHALFEVEN,
-  Table_DefaultRoundingMode #-}
+  Table_DefaultRoundingMode
+  #-}
 
 -- | Optional. If set, overrides the default managed table type configured in the dataset.
-newtype Table_ManagedTableType = Table_ManagedTableType { fromTable_ManagedTableType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype Table_ManagedTableType = Table_ManagedTableType {fromTable_ManagedTableType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | No managed table type specified.
 pattern Table_ManagedTableType_MANAGEDTABLETYPEUNSPECIFIED :: Table_ManagedTableType
@@ -3289,20 +3256,21 @@ pattern Table_ManagedTableType_Iceberg = Table_ManagedTableType "ICEBERG"
   Table_ManagedTableType_MANAGEDTABLETYPEUNSPECIFIED,
   Table_ManagedTableType_Native,
   Table_ManagedTableType_Iceberg,
-  Table_ManagedTableType #-}
+  Table_ManagedTableType
+  #-}
 
 -- | Optional. Specifies the rounding mode to be used when storing values of NUMERIC and BIGNUMERIC type.
-newtype TableFieldSchema_RoundingMode = TableFieldSchema_RoundingMode { fromTableFieldSchema_RoundingMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TableFieldSchema_RoundingMode = TableFieldSchema_RoundingMode {fromTableFieldSchema_RoundingMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified will default to using ROUND/HALF/AWAY/FROM/ZERO.
 pattern TableFieldSchema_RoundingMode_ROUNDINGMODEUNSPECIFIED :: TableFieldSchema_RoundingMode
@@ -3320,20 +3288,21 @@ pattern TableFieldSchema_RoundingMode_ROUNDHALFEVEN = TableFieldSchema_RoundingM
   TableFieldSchema_RoundingMode_ROUNDINGMODEUNSPECIFIED,
   TableFieldSchema_RoundingMode_ROUNDHALFAWAYFROMZERO,
   TableFieldSchema_RoundingMode_ROUNDHALFEVEN,
-  TableFieldSchema_RoundingMode #-}
+  TableFieldSchema_RoundingMode
+  #-}
 
 -- | Reason for not using metadata caching for the table.
-newtype TableMetadataCacheUsage_UnusedReason = TableMetadataCacheUsage_UnusedReason { fromTableMetadataCacheUsage_UnusedReason :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TableMetadataCacheUsage_UnusedReason = TableMetadataCacheUsage_UnusedReason {fromTableMetadataCacheUsage_UnusedReason :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unused reasons not specified.
 pattern TableMetadataCacheUsage_UnusedReason_UNUSEDREASONUNSPECIFIED :: TableMetadataCacheUsage_UnusedReason
@@ -3356,20 +3325,21 @@ pattern TableMetadataCacheUsage_UnusedReason_OTHERREASON = TableMetadataCacheUsa
   TableMetadataCacheUsage_UnusedReason_EXCEEDEDMAXSTALENESS,
   TableMetadataCacheUsage_UnusedReason_METADATACACHINGNOTENABLED,
   TableMetadataCacheUsage_UnusedReason_OTHERREASON,
-  TableMetadataCacheUsage_UnusedReason #-}
+  TableMetadataCacheUsage_UnusedReason
+  #-}
 
 -- | Optional. Output only. Replication status of configured replication.
-newtype TableReplicationInfo_ReplicationStatus = TableReplicationInfo_ReplicationStatus { fromTableReplicationInfo_ReplicationStatus :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TableReplicationInfo_ReplicationStatus = TableReplicationInfo_ReplicationStatus {fromTableReplicationInfo_ReplicationStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern TableReplicationInfo_ReplicationStatus_REPLICATIONSTATUSUNSPECIFIED :: TableReplicationInfo_ReplicationStatus
@@ -3397,20 +3367,21 @@ pattern TableReplicationInfo_ReplicationStatus_UNSUPPORTEDCONFIGURATION = TableR
   TableReplicationInfo_ReplicationStatus_SOURCEDELETED,
   TableReplicationInfo_ReplicationStatus_PERMISSIONDENIED,
   TableReplicationInfo_ReplicationStatus_UNSUPPORTEDCONFIGURATION,
-  TableReplicationInfo_ReplicationStatus #-}
+  TableReplicationInfo_ReplicationStatus
+  #-}
 
 -- | Booster type for boosted tree models.
-newtype TrainingOptions_BoosterType = TrainingOptions_BoosterType { fromTrainingOptions_BoosterType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TrainingOptions_BoosterType = TrainingOptions_BoosterType {fromTrainingOptions_BoosterType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified booster type.
 pattern TrainingOptions_BoosterType_BOOSTERTYPEUNSPECIFIED :: TrainingOptions_BoosterType
@@ -3428,20 +3399,21 @@ pattern TrainingOptions_BoosterType_Dart = TrainingOptions_BoosterType "DART"
   TrainingOptions_BoosterType_BOOSTERTYPEUNSPECIFIED,
   TrainingOptions_BoosterType_Gbtree,
   TrainingOptions_BoosterType_Dart,
-  TrainingOptions_BoosterType #-}
+  TrainingOptions_BoosterType
+  #-}
 
 -- | Categorical feature encoding method.
-newtype TrainingOptions_CategoryEncodingMethod = TrainingOptions_CategoryEncodingMethod { fromTrainingOptions_CategoryEncodingMethod :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TrainingOptions_CategoryEncodingMethod = TrainingOptions_CategoryEncodingMethod {fromTrainingOptions_CategoryEncodingMethod :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified encoding method.
 pattern TrainingOptions_CategoryEncodingMethod_ENCODINGMETHODUNSPECIFIED :: TrainingOptions_CategoryEncodingMethod
@@ -3464,20 +3436,21 @@ pattern TrainingOptions_CategoryEncodingMethod_DUMMYENCODING = TrainingOptions_C
   TrainingOptions_CategoryEncodingMethod_ONEHOTENCODING,
   TrainingOptions_CategoryEncodingMethod_LABELENCODING,
   TrainingOptions_CategoryEncodingMethod_DUMMYENCODING,
-  TrainingOptions_CategoryEncodingMethod #-}
+  TrainingOptions_CategoryEncodingMethod
+  #-}
 
 -- | Enums for color space, used for processing images in Object Table. See more details at https:\/\/www.tensorflow.org\/io\/tutorials\/colorspace.
-newtype TrainingOptions_ColorSpace = TrainingOptions_ColorSpace { fromTrainingOptions_ColorSpace :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TrainingOptions_ColorSpace = TrainingOptions_ColorSpace {fromTrainingOptions_ColorSpace :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified color space
 pattern TrainingOptions_ColorSpace_COLORSPACEUNSPECIFIED :: TrainingOptions_ColorSpace
@@ -3510,20 +3483,21 @@ pattern TrainingOptions_ColorSpace_Grayscale = TrainingOptions_ColorSpace "GRAYS
   TrainingOptions_ColorSpace_Yiq,
   TrainingOptions_ColorSpace_Yuv,
   TrainingOptions_ColorSpace_Grayscale,
-  TrainingOptions_ColorSpace #-}
+  TrainingOptions_ColorSpace
+  #-}
 
 -- | Type of normalization algorithm for boosted tree models using dart booster.
-newtype TrainingOptions_DartNormalizeType = TrainingOptions_DartNormalizeType { fromTrainingOptions_DartNormalizeType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TrainingOptions_DartNormalizeType = TrainingOptions_DartNormalizeType {fromTrainingOptions_DartNormalizeType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified dart normalize type.
 pattern TrainingOptions_DartNormalizeType_DARTNORMALIZETYPEUNSPECIFIED :: TrainingOptions_DartNormalizeType
@@ -3541,20 +3515,21 @@ pattern TrainingOptions_DartNormalizeType_Forest = TrainingOptions_DartNormalize
   TrainingOptions_DartNormalizeType_DARTNORMALIZETYPEUNSPECIFIED,
   TrainingOptions_DartNormalizeType_Tree,
   TrainingOptions_DartNormalizeType_Forest,
-  TrainingOptions_DartNormalizeType #-}
+  TrainingOptions_DartNormalizeType
+  #-}
 
 -- | The data frequency of a time series.
-newtype TrainingOptions_DataFrequency = TrainingOptions_DataFrequency { fromTrainingOptions_DataFrequency :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TrainingOptions_DataFrequency = TrainingOptions_DataFrequency {fromTrainingOptions_DataFrequency :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern TrainingOptions_DataFrequency_DATAFREQUENCYUNSPECIFIED :: TrainingOptions_DataFrequency
@@ -3602,20 +3577,21 @@ pattern TrainingOptions_DataFrequency_PERMINUTE = TrainingOptions_DataFrequency 
   TrainingOptions_DataFrequency_Daily,
   TrainingOptions_DataFrequency_Hourly,
   TrainingOptions_DataFrequency_PERMINUTE,
-  TrainingOptions_DataFrequency #-}
+  TrainingOptions_DataFrequency
+  #-}
 
 -- | The data split type for training and evaluation, e.g. RANDOM.
-newtype TrainingOptions_DataSplitMethod = TrainingOptions_DataSplitMethod { fromTrainingOptions_DataSplitMethod :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TrainingOptions_DataSplitMethod = TrainingOptions_DataSplitMethod {fromTrainingOptions_DataSplitMethod :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern TrainingOptions_DataSplitMethod_DATASPLITMETHODUNSPECIFIED :: TrainingOptions_DataSplitMethod
@@ -3648,20 +3624,21 @@ pattern TrainingOptions_DataSplitMethod_AUTOSPLIT = TrainingOptions_DataSplitMet
   TrainingOptions_DataSplitMethod_Sequential,
   TrainingOptions_DataSplitMethod_NOSPLIT,
   TrainingOptions_DataSplitMethod_AUTOSPLIT,
-  TrainingOptions_DataSplitMethod #-}
+  TrainingOptions_DataSplitMethod
+  #-}
 
 -- | Distance type for clustering models.
-newtype TrainingOptions_DistanceType = TrainingOptions_DistanceType { fromTrainingOptions_DistanceType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TrainingOptions_DistanceType = TrainingOptions_DistanceType {fromTrainingOptions_DistanceType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern TrainingOptions_DistanceType_DISTANCETYPEUNSPECIFIED :: TrainingOptions_DistanceType
@@ -3679,20 +3656,21 @@ pattern TrainingOptions_DistanceType_Cosine = TrainingOptions_DistanceType "COSI
   TrainingOptions_DistanceType_DISTANCETYPEUNSPECIFIED,
   TrainingOptions_DistanceType_Euclidean,
   TrainingOptions_DistanceType_Cosine,
-  TrainingOptions_DistanceType #-}
+  TrainingOptions_DistanceType
+  #-}
 
 -- | Feedback type that specifies which algorithm to run for matrix factorization.
-newtype TrainingOptions_FeedbackType = TrainingOptions_FeedbackType { fromTrainingOptions_FeedbackType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TrainingOptions_FeedbackType = TrainingOptions_FeedbackType {fromTrainingOptions_FeedbackType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern TrainingOptions_FeedbackType_FEEDBACKTYPEUNSPECIFIED :: TrainingOptions_FeedbackType
@@ -3710,20 +3688,21 @@ pattern TrainingOptions_FeedbackType_Explicit = TrainingOptions_FeedbackType "EX
   TrainingOptions_FeedbackType_FEEDBACKTYPEUNSPECIFIED,
   TrainingOptions_FeedbackType_Implicit,
   TrainingOptions_FeedbackType_Explicit,
-  TrainingOptions_FeedbackType #-}
+  TrainingOptions_FeedbackType
+  #-}
 
 -- | The geographical region based on which the holidays are considered in time series modeling. If a valid value is specified, then holiday effects modeling is enabled.
-newtype TrainingOptions_HolidayRegion = TrainingOptions_HolidayRegion { fromTrainingOptions_HolidayRegion :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TrainingOptions_HolidayRegion = TrainingOptions_HolidayRegion {fromTrainingOptions_HolidayRegion :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Holiday region unspecified.
 pattern TrainingOptions_HolidayRegion_HOLIDAYREGIONUNSPECIFIED :: TrainingOptions_HolidayRegion
@@ -4071,19 +4050,20 @@ pattern TrainingOptions_HolidayRegion_ZA = TrainingOptions_HolidayRegion "ZA"
   TrainingOptions_HolidayRegion_VE,
   TrainingOptions_HolidayRegion_VN,
   TrainingOptions_HolidayRegion_ZA,
-  TrainingOptions_HolidayRegion #-}
+  TrainingOptions_HolidayRegion
+  #-}
 
-newtype TrainingOptions_HolidayRegionsItem = TrainingOptions_HolidayRegionsItem { fromTrainingOptions_HolidayRegionsItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TrainingOptions_HolidayRegionsItem = TrainingOptions_HolidayRegionsItem {fromTrainingOptions_HolidayRegionsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Holiday region unspecified.
 pattern TrainingOptions_HolidayRegionsItem_HOLIDAYREGIONUNSPECIFIED :: TrainingOptions_HolidayRegionsItem
@@ -4431,19 +4411,20 @@ pattern TrainingOptions_HolidayRegionsItem_ZA = TrainingOptions_HolidayRegionsIt
   TrainingOptions_HolidayRegionsItem_VE,
   TrainingOptions_HolidayRegionsItem_VN,
   TrainingOptions_HolidayRegionsItem_ZA,
-  TrainingOptions_HolidayRegionsItem #-}
+  TrainingOptions_HolidayRegionsItem
+  #-}
 
-newtype TrainingOptions_HparamTuningObjectivesItem = TrainingOptions_HparamTuningObjectivesItem { fromTrainingOptions_HparamTuningObjectivesItem :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TrainingOptions_HparamTuningObjectivesItem = TrainingOptions_HparamTuningObjectivesItem {fromTrainingOptions_HparamTuningObjectivesItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified evaluation metric.
 pattern TrainingOptions_HparamTuningObjectivesItem_HPARAMTUNINGOBJECTIVEUNSPECIFIED :: TrainingOptions_HparamTuningObjectivesItem
@@ -4531,20 +4512,21 @@ pattern TrainingOptions_HparamTuningObjectivesItem_AVERAGERANK = TrainingOptions
   TrainingOptions_HparamTuningObjectivesItem_MEANAVERAGEPRECISION,
   TrainingOptions_HparamTuningObjectivesItem_NORMALIZEDDISCOUNTEDCUMULATIVEGAIN,
   TrainingOptions_HparamTuningObjectivesItem_AVERAGERANK,
-  TrainingOptions_HparamTuningObjectivesItem #-}
+  TrainingOptions_HparamTuningObjectivesItem
+  #-}
 
 -- | The method used to initialize the centroids for kmeans algorithm.
-newtype TrainingOptions_KmeansInitializationMethod = TrainingOptions_KmeansInitializationMethod { fromTrainingOptions_KmeansInitializationMethod :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TrainingOptions_KmeansInitializationMethod = TrainingOptions_KmeansInitializationMethod {fromTrainingOptions_KmeansInitializationMethod :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified initialization method.
 pattern TrainingOptions_KmeansInitializationMethod_KMEANSINITIALIZATIONMETHODUNSPECIFIED :: TrainingOptions_KmeansInitializationMethod
@@ -4567,20 +4549,21 @@ pattern TrainingOptions_KmeansInitializationMethod_KMEANSPLUSPLUS = TrainingOpti
   TrainingOptions_KmeansInitializationMethod_Random,
   TrainingOptions_KmeansInitializationMethod_Custom,
   TrainingOptions_KmeansInitializationMethod_KMEANSPLUSPLUS,
-  TrainingOptions_KmeansInitializationMethod #-}
+  TrainingOptions_KmeansInitializationMethod
+  #-}
 
 -- | The strategy to determine learn rate for the current iteration.
-newtype TrainingOptions_LearnRateStrategy = TrainingOptions_LearnRateStrategy { fromTrainingOptions_LearnRateStrategy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TrainingOptions_LearnRateStrategy = TrainingOptions_LearnRateStrategy {fromTrainingOptions_LearnRateStrategy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern TrainingOptions_LearnRateStrategy_LEARNRATESTRATEGYUNSPECIFIED :: TrainingOptions_LearnRateStrategy
@@ -4598,20 +4581,21 @@ pattern TrainingOptions_LearnRateStrategy_Constant = TrainingOptions_LearnRateSt
   TrainingOptions_LearnRateStrategy_LEARNRATESTRATEGYUNSPECIFIED,
   TrainingOptions_LearnRateStrategy_LINESEARCH,
   TrainingOptions_LearnRateStrategy_Constant,
-  TrainingOptions_LearnRateStrategy #-}
+  TrainingOptions_LearnRateStrategy
+  #-}
 
 -- | Type of loss function used during training run.
-newtype TrainingOptions_LossType = TrainingOptions_LossType { fromTrainingOptions_LossType :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TrainingOptions_LossType = TrainingOptions_LossType {fromTrainingOptions_LossType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern TrainingOptions_LossType_LOSSTYPEUNSPECIFIED :: TrainingOptions_LossType
@@ -4629,20 +4613,21 @@ pattern TrainingOptions_LossType_MEANLOGLOSS = TrainingOptions_LossType "MEAN_LO
   TrainingOptions_LossType_LOSSTYPEUNSPECIFIED,
   TrainingOptions_LossType_MEANSQUAREDLOSS,
   TrainingOptions_LossType_MEANLOGLOSS,
-  TrainingOptions_LossType #-}
+  TrainingOptions_LossType
+  #-}
 
 -- | The model registry.
-newtype TrainingOptions_ModelRegistry = TrainingOptions_ModelRegistry { fromTrainingOptions_ModelRegistry :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TrainingOptions_ModelRegistry = TrainingOptions_ModelRegistry {fromTrainingOptions_ModelRegistry :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern TrainingOptions_ModelRegistry_MODELREGISTRYUNSPECIFIED :: TrainingOptions_ModelRegistry
@@ -4655,20 +4640,21 @@ pattern TrainingOptions_ModelRegistry_VERTEXAI = TrainingOptions_ModelRegistry "
 {-# COMPLETE
   TrainingOptions_ModelRegistry_MODELREGISTRYUNSPECIFIED,
   TrainingOptions_ModelRegistry_VERTEXAI,
-  TrainingOptions_ModelRegistry #-}
+  TrainingOptions_ModelRegistry
+  #-}
 
 -- | Optimization strategy for training linear regression models.
-newtype TrainingOptions_OptimizationStrategy = TrainingOptions_OptimizationStrategy { fromTrainingOptions_OptimizationStrategy :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TrainingOptions_OptimizationStrategy = TrainingOptions_OptimizationStrategy {fromTrainingOptions_OptimizationStrategy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern TrainingOptions_OptimizationStrategy_OPTIMIZATIONSTRATEGYUNSPECIFIED :: TrainingOptions_OptimizationStrategy
@@ -4686,20 +4672,21 @@ pattern TrainingOptions_OptimizationStrategy_NORMALEQUATION = TrainingOptions_Op
   TrainingOptions_OptimizationStrategy_OPTIMIZATIONSTRATEGYUNSPECIFIED,
   TrainingOptions_OptimizationStrategy_BATCHGRADIENTDESCENT,
   TrainingOptions_OptimizationStrategy_NORMALEQUATION,
-  TrainingOptions_OptimizationStrategy #-}
+  TrainingOptions_OptimizationStrategy
+  #-}
 
 -- | The solver for PCA.
-newtype TrainingOptions_PcaSolver = TrainingOptions_PcaSolver { fromTrainingOptions_PcaSolver :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TrainingOptions_PcaSolver = TrainingOptions_PcaSolver {fromTrainingOptions_PcaSolver :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Default value.
 pattern TrainingOptions_PcaSolver_Unspecified :: TrainingOptions_PcaSolver
@@ -4722,20 +4709,21 @@ pattern TrainingOptions_PcaSolver_Auto = TrainingOptions_PcaSolver "AUTO"
   TrainingOptions_PcaSolver_Full,
   TrainingOptions_PcaSolver_Randomized,
   TrainingOptions_PcaSolver_Auto,
-  TrainingOptions_PcaSolver #-}
+  TrainingOptions_PcaSolver
+  #-}
 
 -- | Tree construction algorithm for boosted tree models.
-newtype TrainingOptions_TreeMethod = TrainingOptions_TreeMethod { fromTrainingOptions_TreeMethod :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TrainingOptions_TreeMethod = TrainingOptions_TreeMethod {fromTrainingOptions_TreeMethod :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Unspecified tree method.
 pattern TrainingOptions_TreeMethod_TREEMETHODUNSPECIFIED :: TrainingOptions_TreeMethod
@@ -4763,20 +4751,21 @@ pattern TrainingOptions_TreeMethod_Hist = TrainingOptions_TreeMethod "HIST"
   TrainingOptions_TreeMethod_Exact,
   TrainingOptions_TreeMethod_Approx,
   TrainingOptions_TreeMethod_Hist,
-  TrainingOptions_TreeMethod #-}
+  TrainingOptions_TreeMethod
+  #-}
 
 -- | Specifies the index usage mode for the query.
-newtype VectorSearchStatistics_IndexUsageMode = VectorSearchStatistics_IndexUsageMode { fromVectorSearchStatistics_IndexUsageMode :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype VectorSearchStatistics_IndexUsageMode = VectorSearchStatistics_IndexUsageMode {fromVectorSearchStatistics_IndexUsageMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Index usage mode not specified.
 pattern VectorSearchStatistics_IndexUsageMode_INDEXUSAGEMODEUNSPECIFIED :: VectorSearchStatistics_IndexUsageMode
@@ -4799,20 +4788,21 @@ pattern VectorSearchStatistics_IndexUsageMode_FULLYUSED = VectorSearchStatistics
   VectorSearchStatistics_IndexUsageMode_Unused,
   VectorSearchStatistics_IndexUsageMode_PARTIALLYUSED,
   VectorSearchStatistics_IndexUsageMode_FULLYUSED,
-  VectorSearchStatistics_IndexUsageMode #-}
+  VectorSearchStatistics_IndexUsageMode
+  #-}
 
 -- | Optional. Specifies the view that determines which dataset information is returned. By default, metadata and ACL information are returned.
-newtype DatasetsGetDatasetView = DatasetsGetDatasetView { fromDatasetsGetDatasetView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype DatasetsGetDatasetView = DatasetsGetDatasetView {fromDatasetsGetDatasetView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The default value. Default to the FULL view.
 pattern DatasetsGetDatasetView_DATASETVIEWUNSPECIFIED :: DatasetsGetDatasetView
@@ -4835,20 +4825,21 @@ pattern DatasetsGetDatasetView_Full = DatasetsGetDatasetView "FULL"
   DatasetsGetDatasetView_Metadata,
   DatasetsGetDatasetView_Acl,
   DatasetsGetDatasetView_Full,
-  DatasetsGetDatasetView #-}
+  DatasetsGetDatasetView
+  #-}
 
 -- | Restrict information returned to a set of selected fields
-newtype JobsListProjection = JobsListProjection { fromJobsListProjection :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype JobsListProjection = JobsListProjection {fromJobsListProjection :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Includes all job data
 pattern JobsListProjection_Full :: JobsListProjection
@@ -4861,20 +4852,21 @@ pattern JobsListProjection_Minimal = JobsListProjection "minimal"
 {-# COMPLETE
   JobsListProjection_Full,
   JobsListProjection_Minimal,
-  JobsListProjection #-}
+  JobsListProjection
+  #-}
 
 -- | Filter for job state
-newtype JobsListStateFilter = JobsListStateFilter { fromJobsListStateFilter :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype JobsListStateFilter = JobsListStateFilter {fromJobsListStateFilter :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | Finished jobs
 pattern JobsListStateFilter_Done :: JobsListStateFilter
@@ -4892,20 +4884,21 @@ pattern JobsListStateFilter_Running = JobsListStateFilter "running"
   JobsListStateFilter_Done,
   JobsListStateFilter_Pending,
   JobsListStateFilter_Running,
-  JobsListStateFilter #-}
+  JobsListStateFilter
+  #-}
 
 -- | Optional. Specifies the view that determines which table information is returned. By default, basic table information and storage statistics (STORAGE_STATS) are returned.
-newtype TablesGetView = TablesGetView { fromTablesGetView :: Core.Text }
-    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-    deriving newtype
-      ( Core.Hashable
-      , Core.ToHttpApiData
-      , Core.FromHttpApiData
-      , Core.ToJSON
-      , Core.ToJSONKey
-      , Core.FromJSON
-      , Core.FromJSONKey
-      )
+newtype TablesGetView = TablesGetView {fromTablesGetView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
 
 -- | The default value. Default to the STORAGE_STATS view.
 pattern TablesGetView_TABLEMETADATAVIEWUNSPECIFIED :: TablesGetView
@@ -4928,4 +4921,5 @@ pattern TablesGetView_Full = TablesGetView "FULL"
   TablesGetView_Basic,
   TablesGetView_STORAGESTATS,
   TablesGetView_Full,
-  TablesGetView #-}
+  TablesGetView
+  #-}
