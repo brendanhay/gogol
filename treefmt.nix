@@ -10,6 +10,7 @@
     shellcheck.enable = true;
     shfmt.enable = true;
     shfmt.indent_size = 4;
+    yamlfmt.enable = true;
   };
 
   settings = {
@@ -21,7 +22,6 @@
       "**.gitkeep"
       "*.lhs"
       "*.md"
-      "*.yaml"
     ];
 
     formatter = {

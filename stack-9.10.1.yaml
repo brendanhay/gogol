@@ -1,19 +1,15 @@
 resolver: nightly-2025-03-06
 compiler: ghc-9.10.1
-
 local-bin-path: bin
-
 notify-if-nix-on-path: false
-
 extra-deps:
   - ede-0.3.4.0
-
 packages:
   - gen
   - examples
   - lib/gogol
   - lib/gogol-core
-# GENERATED
+  # GENERATED
   - lib/services/gogol-abusiveexperiencereport
   - lib/services/gogol-acceleratedmobilepageurl
   - lib/services/gogol-accessapproval
@@ -183,4 +179,4 @@ packages:
   - lib/services/gogol-youtube
   - lib/services/gogol-youtube-analytics
   - lib/services/gogol-youtube-reporting
-# END GENERATED
+  # END GENERATED

@@ -1,18 +1,14 @@
 resolver: lts-22.43
 compiler: ghc-9.6.6
-
 local-bin-path: bin
-
 notify-if-nix-on-path: false
-
 extra-deps:
   - base64-1.0
-
 packages:
   - examples
   - lib/gogol
   - lib/gogol-core
-# GENERATED
+  # GENERATED
   - lib/services/gogol-abusiveexperiencereport
   - lib/services/gogol-acceleratedmobilepageurl
   - lib/services/gogol-accessapproval
@@ -182,4 +178,4 @@ packages:
   - lib/services/gogol-youtube
   - lib/services/gogol-youtube-analytics
   - lib/services/gogol-youtube-reporting
-# END GENERATED
+  # END GENERATED

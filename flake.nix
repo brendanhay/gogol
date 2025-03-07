@@ -3,6 +3,11 @@
     # For `nix build` stack should download packages directly from stackage and bypass nix.
     # See: https://zimbatm.com/notes/nix-packaging-the-heretic-way
     sandbox = "relaxed";
+
+    # The public build cache which is populated by successful GitHub Action runs.
+    # See: https://app.cachix.org/cache/gogol#pull
+    extra-substituters = [ "https://gogol.cachix.org" ];
+    extra-trusted-public-keys = [ "gogol.cachix.org-1:SaJ8mHVUCv4mXLskv46OTBvmE68IgIPtMnc1jlxD09Q=" ];
   };
 
   inputs = {
@@ -36,6 +41,8 @@
     flake-utils.lib.eachDefaultSystem (
       system:
       let
+        inherit (pkgs) lib;
+
         pkgs = nixpkgs.legacyPackages.${system};
 
         treefmt = treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
@@ -71,10 +78,21 @@
           in
           pkgs.haskell.lib.buildStackProject {
             inherit ghc buildInputs;
-            name = "gogol-${ghc.version}";
-            src = ./.;
-            stack = stack-wrapped;
 
+            name = "gogol-${ghc.version}";
+            src = lib.sources.sourceFilesBySuffices (lib.cleanSource ./.) [
+              ".nix"
+              ".yaml"
+              ".lock"
+              ".cabal"
+              ".hs"
+              ".lhs"
+            ];
+
+            # Disable tests by default.
+            doCheck = false;
+
+            # Set the implicit stack.yaml to use.
             STACK_YAML = "stack-${ghc.version}.yaml";
           };
 
@@ -86,7 +104,10 @@
           in
           pkgs.mkShell {
             inherit buildInputs;
-            name = "gogol-${ghc.version}";
+
+            name = "gogol-${ghc.version}-shell";
+
+            # Tools to make available in the shell.
             nativeBuildInputs = [
               # The GHC version used for development.
               ghc
@@ -98,11 +119,31 @@
               # Haskell tools that are not tied to the GHC version above.
               pkgs.haskellPackages.cabal-fmt
               pkgs.haskellPackages.ormolu
+              pkgs.cachix
 
               # Generic tools used by the shell.
               pkgs.ncurses
             ];
 
+            # The following is so `stack` builds within the shell matches buildStackProject's behavior.
+            # https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/haskell-modules/generic-stack-builder.nix
+
+            # Set the implicit stack.yaml to use.
+            STACK_YAML = "stack-${ghc.version}.yaml";
+
+            # Non-NixOS git needs certificate bundle.
+            GIT_SSL_CAINFO = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+
+            # Fixes https://github.com/commercialhaskell/stack/issues/2358.
+            LANG = "en_US.UTF-8";
+
+            # Workaround for https://ghc.haskell.org/trac/ghc/ticket/11042.
+            LD_LIBRARY_PATH = lib.makeLibraryPath buildInputs;
+
+            # Convenience so `nix-env` works with the current shell's package set.
+            NIX_PATH = "nixpkgs=" + pkgs.path;
+
+            # Code that will run when the shell is entered.
             shellHook =
               # Setup a git pre-commit hook to ensure the commit files are formatted.
               (git-hooks.lib.${system}.run {
@@ -124,10 +165,6 @@
 
                 printf >&2 'direnv: using %s with %s\n' "$(bold 'GHC ${ghc.version}')" "$(bold $STACK_YAML)"
               '';
-
-            LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath buildInputs;
-            NIX_PATH = "nixpkgs=" + pkgs.path;
-            STACK_YAML = "stack-${ghc.version}.yaml";
           };
 
         # Create an attrset by applying `f` to every GHC version's package set.
@@ -145,10 +182,7 @@
         #   nix-repl> legacyPackages.x86_64-linux.haskell.packages.<TAB>
         #   ```
         ghcAttrs =
-          f:
-          pkgs.lib.genAttrs [ "ghc910" "ghc984" "ghc966" ] (
-            ghcVersion: f pkgs.haskell.packages.${ghcVersion}
-          );
+          f: lib.genAttrs [ "ghc910" "ghc984" "ghc966" ] (ghcVersion: f pkgs.haskell.packages.${ghcVersion});
 
         packages = ghcAttrs mkProject;
         devShells = ghcAttrs mkShell;
