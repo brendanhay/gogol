@@ -16,6 +16,7 @@
   settings = {
     global.excludes = [
       "CONTRIBUTORS"
+      ".github/**.yml"
       "configs/*"
       "**LICENSE"
       "**Makefile"
