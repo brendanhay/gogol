@@ -16,15 +16,16 @@ jobs:
       matrix:
         ghcVersion: ["ghc966", "ghc984", "ghc910"]
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Install nix
         uses: DeterminateSystems/nix-installer-action@main
         with:
           extra-conf: |
             accept-flake-config = true
             download-buffer-size = 512000000
-      - name: Setup caching
-      - uses: cachix/cachix-action@v14
+      - name: Setup nix caching
+        uses: cachix/cachix-action@v14
         with:
           name: gogol
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
