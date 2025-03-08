@@ -1,0 +1,72 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+env:
+  STACK_CACHE_VERSION: v1
+  TERM: dumb
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ghcVersion: ["ghc966", "ghc984", "ghc910"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install nix
+        uses: DeterminateSystems/nix-installer-action@main
+        with:
+          extra-conf: |
+            accept-flake-config = true
+            download-buffer-size = 512000000
+
+      - name: Cache nix
+        uses: cachix/cachix-action@v14
+        with:
+          name: gogol
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+
+      # There isn't any apparent sensible way to cache stack, so this more or less
+      # follows the imperfect ideas in https://github.com/commercialhaskell/stack/issues/5754
+
+      - name: Cache package index
+        id: pantry
+        uses: actions/cache@v4
+        with:
+          key: ci-stack-pantry-${{ matrix.ghcVersion }}
+          path: |
+            ~/.stack/pantry
+
+      - name: Update package index
+        if: steps.pantry.outputs.cache-hit != 'true'
+        run: |
+          stack update
+
+      - name: Cache ~/.stack
+        uses: actions/cache@v4
+        with:
+          key: ci-stack-${{ env.STACK_CACHE_VERSION }}-${{ matrix.ghcVersion }}-${{ hashFiles('stack-*.yaml.lock', '**/*.cabal') }}
+          restore-keys: |
+            ci-stack-${{ env.STACK_CACHE_VERSION }}-${{ matrix.ghcVersion }}-
+            ci-stack-${{ env.STACK_CACHE_VERSION }}-
+          path: |
+            ~/.stack/stack.sqlite3
+            ~/.stack/snapshots
+
+      - name: Cache .stack-work
+        uses: actions/cache@v4
+        with:
+          key: ci-stack-work-${{ env.STACK_CACHE_VERSION }}-${{ matrix.ghcVersion }}
+          path: |
+            .stack-work
+
+      - name: Build packages
+        run: |
+          nix develop .#${{ matrix.ghcVersion }} --print-build-logs --command stack build

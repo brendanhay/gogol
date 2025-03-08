@@ -1,5 +1,4 @@
 resolver: nightly-2025-03-06
-compiler: ghc-9.10.1
 local-bin-path: bin
 notify-if-nix-on-path: false
 extra-deps:
