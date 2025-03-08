@@ -23,11 +23,6 @@
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    git-hooks = {
-      url = "github:cachix/git-hooks.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -36,7 +31,6 @@
       nixpkgs,
       flake-utils,
       treefmt-nix,
-      git-hooks,
     }:
     flake-utils.lib.eachDefaultSystem (
       system:
@@ -45,7 +39,43 @@
 
         pkgs = nixpkgs.legacyPackages.${system};
 
-        treefmt = treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
+        # Setup the formatting configuration used by `nix fmt`.
+        treefmt = treefmt-nix.lib.evalModule pkgs (
+          { ... }:
+          {
+            projectRootFile = "flake.nix";
+
+            programs = {
+              cabal-fmt.enable = true;
+              hlint.enable = true;
+              nixfmt.enable = true;
+              ormolu.enable = true;
+              shellcheck.enable = true;
+              shfmt.enable = true;
+              shfmt.indent_size = 4;
+              yamlfmt.enable = true;
+              yamlfmt.settings.retain_line_breaks_single = true;
+            };
+
+            settings = {
+              global.excludes = [
+                "CONTRIBUTORS"
+                ".github/**.yml"
+                "configs/*"
+                "**LICENSE"
+                "**Makefile"
+                "**.gitkeep"
+                "*.lhs"
+                "*.md"
+              ];
+
+              formatter = {
+                cabal-fmt.options = [ "--indent=2" ];
+                hlint.ignores = [ "lib/services/**" ];
+              };
+            };
+          }
+        );
 
         # Adapted from https://www.tweag.io/blog/2022-06-02-haskell-stack-nix-shell/
         stack-wrapped = pkgs.symlinkJoin {
@@ -93,6 +123,7 @@
 
               # Haskell tools that are not tied to the GHC version above.
               pkgs.haskellPackages.cabal-fmt
+              pkgs.haskellPackages.hlint
               pkgs.haskellPackages.ormolu
 
               # Generic tools used by the shell.
@@ -120,28 +151,16 @@
             # Convenience so `nix-env` works with the current shell's package set.
             NIX_PATH = "nixpkgs=" + pkgs.path;
 
-            # Code that will run when the shell is entered.
-            shellHook =
-              # Setup a git pre-commit hook to ensure the commit files are formatted.
-              (git-hooks.lib.${system}.run {
-                src = ./.;
-                hooks = {
-                  treefmt = {
-                    enable = true;
-                    package = treefmt.config.build.wrapper;
-                  };
-                };
-              }).shellHook
-              # Announce GHC version and STACK_YAML being used when entering the nix shell.
-              + ''
-                bold() {
-                    tput bold
-                    printf "$@"
-                    tput sgr0
-                }
+            # Announce GHC version and STACK_YAML being used when entering the nix shell.
+            shellHook = ''
+              bold() {
+                  tput bold
+                  printf "$@"
+                  tput sgr0
+              }
 
-                printf >&2 'direnv: using %s with %s\n' "$(bold 'GHC ${ghc.version}')" "$(bold $STACK_YAML)"
-              '';
+              printf >&2 'direnv: using %s with %s\n' "$(bold 'GHC ${ghc.version}')" "$(bold $STACK_YAML)"
+            '';
           };
 
         # Create an attrset of devShells by applying `mkShell` above to every GHC version's package set.
