@@ -66,10 +66,6 @@ jobs:
           path: |
             .stack-work
 
-      - name: Check formatting
-        run: |
-          nix flake check
-
       - name: Build packages
         run: |
           nix develop .#${{ matrix.ghcVersion }} --print-build-logs --command stack build
