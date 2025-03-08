@@ -1,0 +1,46 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+env:
+  STACK_CACHE: v0
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ghcVersion: ["ghc966", "ghc984", "ghc910"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install nix
+        uses: DeterminateSystems/nix-installer-action@main
+        with:
+          extra-conf: |
+            accept-flake-config = true
+            download-buffer-size = 512000000
+      - name: Setup caching
+      - uses: cachix/cachix-action@v14
+        with:
+          name: gogol
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - name: Cache shared ~/.stack
+        uses: actions/cache@v4
+        with:
+          path: ~/.stack
+          key: stack-${{ matrix.ghcVersion }}-${{ hashFiles('stack-*.yaml.lock') }}
+          restore-keys: |
+            stack-${{ env.STACK_CACHE }}-${{ matrix.ghcVersion }}-
+            stack-${{ env.STACK_CACHE }}-
+      - name: Cache per-branch .stack-work
+        uses: actions/cache@v4
+        with:
+          path: .stack-work
+          key: stack-${{ env.STACK_CACHE }}-${{ matrix.ghcVersion }}
+      - name: Build packages
+        run: |
+          nix develop .#${{ matrix.ghcVersion }} --print-build-logs --command stack build
