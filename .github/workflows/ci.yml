@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [main]
 env:
-  STACK_CACHE: v0
+  STACK_CACHE_VERSION: v0
 concurrency:
   group: build-${{ github.ref }}
   cancel-in-progress: true
@@ -33,14 +33,15 @@ jobs:
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
 
       # There isn't any apparent sensible way to cache stack, so this more or less
-      # follows the thread in https://github.com/commercialhaskell/stack/issues/5754
+      # follows the imperfect ideas in https://github.com/commercialhaskell/stack/issues/5754
 
       - name: Cache package index
         id: pantry
         uses: actions/cache@v4
         with:
-          path: ~/.stack/pantry
-          key: CI-pantry-${{ matrix.ghcVersion }}
+          key: ci-stack-pantry-${{ matrix.ghcVersion }}
+          path: |
+            ~/.stack/pantry
 
       - name: Update package index
         if: steps.pantry.outputs.cache-hit != 'true'
@@ -50,17 +51,20 @@ jobs:
       - name: Cache ~/.stack
         uses: actions/cache@v4
         with:
-          path: ~/.stack
-          key: stack-${{ matrix.ghcVersion }}-${{ hashFiles('stack-*.yaml.lock', '**/*.cabal') }}
+          key: ci-stack-${{ env.STACK_CACHE_VERSION }}-${{ matrix.ghcVersion }}-${{ hashFiles('stack-*.yaml.lock', '**/*.cabal') }}
           restore-keys: |
-            stack-${{ env.STACK_CACHE }}-${{ matrix.ghcVersion }}-
-            stack-${{ env.STACK_CACHE }}-
+            ci-stack-${{ env.STACK_CACHE_VERSION }}-${{ matrix.ghcVersion }}-
+            ci-stack-${{ env.STACK_CACHE_VERSION }}-
+          path: |
+            ~/.stack/stack.sqlite3
+            ~/.stack/snapshots
 
       - name: Cache .stack-work
         uses: actions/cache@v4
         with:
-          path: .stack-work
-          key: stack-${{ env.STACK_CACHE }}-${{ matrix.ghcVersion }}
+          key: ci-stack-work-${{ env.STACK_CACHE_VERSION }}-${{ matrix.ghcVersion }}
+          path: |
+            .stack-work
 
       - name: Check formatting
         run: |
