@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [main]
 env:
-  STACK_CACHE_VERSION: v0
+  STACK_CACHE_VERSION: v1
   TERM: dumb
 concurrency:
   group: build-${{ github.ref }}
