@@ -6,6 +6,7 @@ on:
     branches: [main]
 env:
   STACK_CACHE_VERSION: v0
+  TERM: dumb
 concurrency:
   group: build-${{ github.ref }}
   cancel-in-progress: false
@@ -68,4 +69,4 @@ jobs:
 
       - name: Build packages
         run: |
-          nix develop .#${{ matrix.ghcVersion }} --print-build-logs --command stack build gogol gogol-core
+          nix develop .#${{ matrix.ghcVersion }} --print-build-logs --command stack build
