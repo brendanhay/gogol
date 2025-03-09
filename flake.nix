@@ -148,7 +148,7 @@
                 tput sgr0
             }
 
-            printf >&2 'direnv: using %s with %s\n' "$(bold 'GHC ${ghc.version}')" "$(bold $STACK_YAML)"
+            printf >&2 'Using %s with %s\n' "$(bold 'GHC ${ghc.version}')" "$(bold $STACK_YAML)"
           '';
         };
 
