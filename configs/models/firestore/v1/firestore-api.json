@@ -1711,7 +1711,7 @@
       }
     }
   },
-  "revision": "20241204",
+  "revision": "20250219",
   "rootUrl": "https://firestore.googleapis.com/",
   "schemas": {
     "Aggregation": {

@@ -1393,6 +1393,46 @@
             }
           },
           "resources": {
+            "debugsessions": {
+              "methods": {
+                "list": {
+                  "description": "Lists debug sessions that are currently active in the given API Proxy.",
+                  "flatPath": "v1/organizations/{organizationsId}/apis/{apisId}/debugsessions",
+                  "httpMethod": "GET",
+                  "id": "apigee.organizations.apis.debugsessions.list",
+                  "parameterOrder": [
+                    "parent"
+                  ],
+                  "parameters": {
+                    "pageSize": {
+                      "description": "Optional. Maximum number of debug sessions to return. The page size defaults to 25.",
+                      "format": "int32",
+                      "location": "query",
+                      "type": "integer"
+                    },
+                    "pageToken": {
+                      "description": "Optional. Page token, returned from a previous ListApiDebugSessions call, that you can use to retrieve the next page.",
+                      "location": "query",
+                      "type": "string"
+                    },
+                    "parent": {
+                      "description": "Required. The name of the API Proxy for which to list debug sessions. Must be of the form: `organizations/{organization}/apis/{api}`.",
+                      "location": "path",
+                      "pattern": "^organizations/[^/]+/apis/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v1/{+parent}/debugsessions",
+                  "response": {
+                    "$ref": "GoogleCloudApigeeV1ListApiDebugSessionsResponse"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                }
+              }
+            },
             "deployments": {
               "methods": {
                 "list": {
@@ -4915,7 +4955,7 @@
                 "revisions": {
                   "methods": {
                     "deploy": {
-                      "description": "Deploys a revision of an API proxy. If another revision of the same API proxy revision is currently deployed, set the `override` parameter to `true` to have this revision replace the currently deployed revision. You cannot invoke an API proxy until it has been deployed to an environment. After you deploy an API proxy revision, you cannot edit it. To edit the API proxy, you must create and deploy a new revision. For a request path `organizations/{org}/environments/{env}/apis/{api}/revisions/{rev}/deployments`, two permissions are required: * `apigee.deployments.create` on the resource `organizations/{org}/environments/{env}` * `apigee.proxyrevisions.deploy` on the resource `organizations/{org}/apis/{api}/revisions/{rev}` ",
+                      "description": "Deploys a revision of an API proxy. If another revision of the same API proxy revision is currently deployed, set the `override` parameter to `true` to have this revision replace the currently deployed revision. You cannot invoke an API proxy until it has been deployed to an environment. After you deploy an API proxy revision, you cannot edit it. To edit the API proxy, you must create and deploy a new revision. For a request path `organizations/{org}/environments/{env}/apis/{api}/revisions/{rev}/deployments`, two permissions are required: * `apigee.deployments.create` on the resource `organizations/{org}/environments/{env}` * `apigee.proxyrevisions.deploy` on the resource `organizations/{org}/apis/{api}/revisions/{rev}` Apigee hybrid validates the dependencies between shared flows and API proxies at deployment time. For example, if the Flow Callout policy in an API proxy references a shared flow that either doesn't exist or isn't deployed, the API proxy deployment fails.",
                       "flatPath": "v1/organizations/{organizationsId}/environments/{environmentsId}/apis/{apisId}/revisions/{revisionsId}/deployments",
                       "httpMethod": "POST",
                       "id": "apigee.organizations.environments.apis.revisions.deploy",
@@ -10385,7 +10425,7 @@
       }
     }
   },
-  "revision": "20241210",
+  "revision": "20250214",
   "rootUrl": "https://apigee.googleapis.com/",
   "schemas": {
     "EdgeConfigstoreBundleBadBundle": {
@@ -10734,6 +10774,30 @@
         },
         "status": {
           "description": "Status of the operation.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudApigeeV1ApiDebugSession": {
+      "description": "Session carries the debug session id and its creation time.",
+      "id": "GoogleCloudApigeeV1ApiDebugSession",
+      "properties": {
+        "apiProxyRevisionId": {
+          "description": "The revision ID of the deployed API proxy.",
+          "type": "string"
+        },
+        "createTime": {
+          "description": "The first transaction creation timestamp in millisecond, recorded by UAP.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "environmentId": {
+          "description": "The environment ID of the deployed API proxy.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The debug session ID.",
           "type": "string"
         }
       },
@@ -11745,13 +11809,13 @@
       "type": "object"
     },
     "GoogleCloudApigeeV1BatchComputeSecurityAssessmentResultsRequestIncludeAll": {
-      "description": "Message for include_all option.",
+      "description": "Message for include_all_resources option.",
       "id": "GoogleCloudApigeeV1BatchComputeSecurityAssessmentResultsRequestIncludeAll",
       "properties": {},
       "type": "object"
     },
     "GoogleCloudApigeeV1BatchComputeSecurityAssessmentResultsRequestResourceArray": {
-      "description": "An array of resource messages.",
+      "description": "Message for the array of resources. For Apigee, the proxies are resources.",
       "id": "GoogleCloudApigeeV1BatchComputeSecurityAssessmentResultsRequestResourceArray",
       "properties": {
         "resources": {
@@ -13390,6 +13454,10 @@
           ],
           "type": "string"
         },
+        "clientIpResolutionConfig": {
+          "$ref": "GoogleCloudApigeeV1EnvironmentClientIPResolutionConfig",
+          "description": "Optional. The algorithm to resolve IP. This will affect Analytics, API Security, and other features that use the client ip. To remove a client ip resolution config, update the field to an empty value. Example: '{ \"clientIpResolutionConfig\" = {} }' For more information, see: https://cloud.google.com/apigee/docs/api-platform/system-administration/client-ip-resolution."
+        },
         "createdAt": {
           "description": "Output only. Creation time of this environment as milliseconds since epoch.",
           "format": "int64",
@@ -13476,6 +13544,33 @@
             "Intermediate environment supports API management features and higher capacity than Base environment. Refer to Apigee's public documentation for more details.",
             "Comprehensive environment supports advanced capabilites and even higher capacity than Intermediate environment. Refer to Apigee's public documentation for more details."
           ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudApigeeV1EnvironmentClientIPResolutionConfig": {
+      "description": "Configuration for resolving the client ip.",
+      "id": "GoogleCloudApigeeV1EnvironmentClientIPResolutionConfig",
+      "properties": {
+        "headerIndexAlgorithm": {
+          "$ref": "GoogleCloudApigeeV1EnvironmentClientIPResolutionConfigHeaderIndexAlgorithm",
+          "description": "Resolves the client ip based on a custom header."
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudApigeeV1EnvironmentClientIPResolutionConfigHeaderIndexAlgorithm": {
+      "description": "Resolves the client ip based on a custom header.",
+      "id": "GoogleCloudApigeeV1EnvironmentClientIPResolutionConfigHeaderIndexAlgorithm",
+      "properties": {
+        "ipHeaderIndex": {
+          "description": "Required. The index of the ip in the header. Positive indices 0, 1, 2, 3 chooses indices from the left (first ips) Negative indices -1, -2, -3 chooses indices from the right (last ips)",
+          "format": "int32",
+          "type": "integer"
+        },
+        "ipHeaderName": {
+          "description": "Required. The name of the header to extract the client ip from. We are currently only supporting the X-Forwarded-For header.",
           "type": "string"
         }
       },
@@ -14442,6 +14537,24 @@
         "status": {
           "description": "Status of the operation.",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudApigeeV1ListApiDebugSessionsResponse": {
+      "description": "Response for ListApiDebugSessions.",
+      "id": "GoogleCloudApigeeV1ListApiDebugSessionsResponse",
+      "properties": {
+        "nextPageToken": {
+          "description": "Page token that you can include in a ListApiDebugSessionsRequest to retrieve the next page. If omitted, no subsequent pages exist.",
+          "type": "string"
+        },
+        "sessions": {
+          "description": "Session info that includes debug session ID, environment ID, api proxy revision ID and the first transaction creation timestamp.",
+          "items": {
+            "$ref": "GoogleCloudApigeeV1ApiDebugSession"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -17331,7 +17444,6 @@
           "type": "integer"
         },
         "severity": {
-          "description": "The severity of the assessment.",
           "enum": [
             "SEVERITY_UNSPECIFIED",
             "LOW",
