@@ -6,17 +6,17 @@ import Control.Error
 import Control.Lens hiding ((<.>))
 import Control.Monad
 import Control.Monad.State
-import qualified Data.IORef as IORef
+import Data.IORef qualified as IORef
 import Data.List (nub, sort)
 import Data.String
-import qualified Data.Text as Text
-import qualified Filesystem as FS
+import Data.Text qualified as Text
+import Filesystem qualified as FS
 import Filesystem.Path.CurrentOS
 import Gen.AST
 import Gen.Formatting
 import Gen.IO
-import qualified Gen.JSON as JS
-import qualified Gen.Tree as Tree
+import Gen.JSON qualified as JS
+import Gen.Tree qualified as Tree
 import Gen.Types hiding (info)
 import Options.Applicative
 

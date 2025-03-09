@@ -33,7 +33,7 @@ where
 
 import Data.Aeson
 import Data.Aeson.Types
-import qualified Data.Text as Text
+import Data.Text qualified as Text
 import Web.HttpApiData (FromHttpApiData (..), ToHttpApiData (..))
 
 #if MIN_VERSION_aeson(2,0,0)

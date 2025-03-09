@@ -89,7 +89,7 @@ import Gogol.Internal.Auth
 import Gogol.Internal.Logger (Logger)
 import Gogol.Prelude
 import Network.HTTP.Conduit (Manager)
-import qualified Network.HTTP.Conduit as Client
+import Network.HTTP.Conduit qualified as Client
 import Network.HTTP.Types (hAuthorization)
 
 -- | 'authToAuthorizedUser' converts 'Auth' into an 'AuthorizedUser'

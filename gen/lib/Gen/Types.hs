@@ -17,26 +17,26 @@ import Control.Monad (forM_, void)
 import Control.Monad.Except
 import Control.Monad.State.Strict
 import Data.Aeson hiding (Array, Bool, String)
-import qualified Data.Attoparsec.Text as A
+import Data.Attoparsec.Text qualified as A
 import Data.Bifunctor
 import Data.CaseInsensitive (CI)
-import qualified Data.CaseInsensitive as CI
-import qualified Data.Char as Char
+import Data.CaseInsensitive qualified as CI
+import Data.Char qualified as Char
 import Data.Function (on)
 import Data.List (sort)
 import Data.Map.Strict (Map)
-import qualified Data.Map.Strict as Map
+import Data.Map.Strict qualified as Map
 import Data.Maybe
 import Data.Ord
 import Data.Set (Set)
-import qualified Data.Set as Set
+import Data.Set qualified as Set
 import Data.String
 import Data.Text (Text)
-import qualified Data.Text as Text
-import qualified Data.Text.Lazy as LText
-import qualified Data.Text.Lazy.Builder as Build
+import Data.Text qualified as Text
+import Data.Text.Lazy qualified as LText
+import Data.Text.Lazy.Builder qualified as Build
 import Data.Text.Manipulate
-import qualified Filesystem.Path.CurrentOS as Path
+import Filesystem.Path.CurrentOS qualified as Path
 import Formatting
 import GHC.Stack (HasCallStack)
 import Gen.Orphans ()

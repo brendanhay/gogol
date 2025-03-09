@@ -8,10 +8,10 @@ module Gen.Types.NS
 where
 
 import Data.Aeson
-import qualified Data.CaseInsensitive as CI
+import Data.CaseInsensitive qualified as CI
 import Data.String
 import Data.Text (Text)
-import qualified Data.Text as Text
+import Data.Text qualified as Text
 import Data.Text.Manipulate
 
 newtype NS = UnsafeNS {unNS :: [Text]}

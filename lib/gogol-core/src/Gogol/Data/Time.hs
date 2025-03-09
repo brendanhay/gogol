@@ -23,18 +23,18 @@ where
 
 import Control.Lens
 import Data.Aeson
-import qualified Data.Aeson.Types as Aeson
+import Data.Aeson.Types qualified as Aeson
 import Data.Attoparsec.Text
 import Data.Bifunctor (first, second)
 import Data.Bits ((.&.))
 import Data.Char (ord)
 import Data.Scientific (Scientific)
-import qualified Data.Scientific as Sci
+import Data.Scientific qualified as Sci
 import Data.Text (Text)
-import qualified Data.Text as Text
-import qualified Data.Text.Lazy as LText
-import qualified Data.Text.Lazy.Builder as Build
-import qualified Data.Text.Lazy.Builder.Scientific as Sci
+import Data.Text qualified as Text
+import Data.Text.Lazy qualified as LText
+import Data.Text.Lazy.Builder qualified as Build
+import Data.Text.Lazy.Builder.Scientific qualified as Sci
 import Data.Time
 import GHC.Generics
 import Web.HttpApiData

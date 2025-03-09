@@ -9,9 +9,9 @@ import Control.Lens hiding (lens)
 import Control.Monad
 import Control.Monad.Except
 import Data.Map.Strict (Map)
-import qualified Data.Map.Strict as Map
+import Data.Map.Strict qualified as Map
 import Data.Maybe
-import qualified Data.Set as Set
+import Data.Set qualified as Set
 import Data.Text (Text)
 import GHC.Stack (HasCallStack)
 import Gen.Formatting

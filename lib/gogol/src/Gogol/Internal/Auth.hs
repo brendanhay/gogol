@@ -30,10 +30,10 @@ import Data.Aeson.Types (Pair)
 import Data.ByteArray (ByteArray)
 import Data.ByteArray.Encoding
 import Data.ByteString.Builder ()
-import qualified Data.ByteString.Lazy as LBS
+import Data.ByteString.Lazy qualified as LBS
 import Data.String (IsString)
-import qualified Data.Text as Text
-import qualified Data.Text.Encoding as Text
+import Data.Text qualified as Text
+import Data.Text.Encoding qualified as Text
 import Data.Time
 import Data.X509 (PrivKey (..))
 import Data.X509.Memory (readKeyFileFromMemory)
@@ -41,7 +41,7 @@ import GHC.TypeLits (Symbol)
 import Gogol.Internal.Logger
 import Gogol.Prelude
 import Network.HTTP.Conduit (HttpException, Manager)
-import qualified Network.HTTP.Conduit as Client
+import Network.HTTP.Conduit qualified as Client
 import Network.HTTP.Types (Status, hContentType)
 
 -- | The supported credential mechanisms.

@@ -32,18 +32,18 @@ where
 
 import Control.Monad (when)
 import Control.Monad.IO.Class (MonadIO (..))
-import qualified Data.ByteString as BS
+import Data.ByteString qualified as BS
 import Data.ByteString.Builder (Builder)
-import qualified Data.ByteString.Builder as Build
-import qualified Data.ByteString.Char8 as BS8
-import qualified Data.ByteString.Lazy as LBS
+import Data.ByteString.Builder qualified as Build
+import Data.ByteString.Char8 qualified as BS8
+import Data.ByteString.Lazy qualified as LBS
 import Data.CaseInsensitive (CI)
-import qualified Data.CaseInsensitive as CI
+import Data.CaseInsensitive qualified as CI
 import Data.Int (Int16, Int8)
 import Data.List (intersperse)
-import qualified Data.Text.Encoding as Text
-import qualified Data.Text.Lazy as LText
-import qualified Data.Text.Lazy.Encoding as LText
+import Data.Text.Encoding qualified as Text
+import Data.Text.Lazy qualified as LText
+import Data.Text.Lazy.Encoding qualified as LText
 import Data.Word (Word16)
 import Gogol.Prelude hiding (Request)
 import Network.HTTP.Conduit

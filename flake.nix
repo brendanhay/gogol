@@ -39,11 +39,11 @@
 
             programs = {
               cabal-fmt.enable = true;
-              hlint.enable = true;
               nixfmt.enable = true;
               ormolu.enable = true;
               shellcheck.enable = true;
               shfmt.enable = true;
+              shfmt.indent_size = 4;
               yamlfmt.enable = true;
               yamlfmt.settings.retain_line_breaks_single = true;
             };
@@ -62,7 +62,6 @@
 
               formatter = {
                 cabal-fmt.options = [ "--indent=2" ];
-                hlint.ignores = [ "lib/services/**" ];
               };
             };
           }

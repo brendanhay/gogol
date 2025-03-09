@@ -10,10 +10,10 @@
 module Gogol.Auth.TokenFile where
 
 import Control.Monad.IO.Class (MonadIO (liftIO))
-import qualified Data.ByteString as ByteString
-import qualified Data.Text as Text
-import qualified Data.Text.Encoding as Text.Encoding
-import qualified Data.Time as Time
+import Data.ByteString qualified as ByteString
+import Data.Text qualified as Text
+import Data.Text.Encoding qualified as Text.Encoding
+import Data.Time qualified as Time
 import Gogol.Internal.Auth
 import Gogol.Types (AccessToken (..))
 

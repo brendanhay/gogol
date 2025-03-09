@@ -24,8 +24,8 @@ import Control.Monad.Catch
 import Control.Monad.IO.Class (MonadIO (..))
 import Data.Aeson
 import Data.Aeson.Types (parseEither)
-import qualified Data.ByteString.Lazy as LBS
-import qualified Data.Text as Text
+import Data.ByteString.Lazy qualified as LBS
+import Data.Text qualified as Text
 import Gogol.Compute.Metadata (isGCE)
 import Gogol.Internal.Auth
 import Network.HTTP.Conduit (Manager)
