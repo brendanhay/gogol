@@ -1,46 +1,38 @@
 name: CI
-
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
-
 env:
-  CACHE_VERSION: v0
+  CACHE_VERSION: v1
   TERM: dumb
-
+  NO_COLOR: 1
 concurrency:
   group: build-${{ github.ref }}
   cancel-in-progress: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         ghc-version: ['ghc910', 'ghc984', 'ghc966']
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Install nix
         uses: DeterminateSystems/nix-installer-action@main
         with:
           extra-conf: |
             accept-flake-config = true
             download-buffer-size = 512000000
-
       - name: Cache nix
         uses: cachix/cachix-action@v14
         with:
           name: gogol
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-
       # There isn't any apparent sensible way to cache stack, so this more or less
       # follows the imperfect ideas in https://github.com/commercialhaskell/stack/issues/5754
-
       - name: Cache ~/.stack
         uses: actions/cache@v4
         with:
@@ -49,7 +41,6 @@ jobs:
             stack-${{ runner.os }}-${{ matrix.ghc-version }}-${{ env.CACHE_VERSION }}-
           path: |
             ~/.stack
-
       - name: Cache .stack-work
         uses: actions/cache@v4
         with:
@@ -60,27 +51,22 @@ jobs:
           path: |
             .stack-work
             **/.stack-work
-
       - name: Free disk space
         run: |
           sudo rm -rf /opt/hostedtoolcache /opt/ghc /usr/share/dotnet /usr/local/lib/android
           sudo df --human-readable
           sudo free --human
           sudo swapon --show
-
       - name: Build dependencies
         run: |
-          nix develop .#${{ matrix.ghc-version }} --print-build-logs --command stack build --only-dependencies
-
+          nix develop .#${{ matrix.ghc-version }} --print-build-logs --command stack build --fast --only-dependencies
       - name: Build libraries
         run: |
-          nix develop .#${{ matrix.ghc-version }} --print-build-logs --command stack build gogol gogol-core
-
+          nix develop .#${{ matrix.ghc-version }} --print-build-logs --command stack build --fast gogol gogol-core
       - name: Build generator
         if: matrix.ghc-version == 'ghc910'
         run: |
-          nix develop .#${{ matrix.ghc-version }} --print-build-logs --command stack build ./gen
-
+          nix develop .#${{ matrix.ghc-version }} --print-build-logs --command stack build --fast ./gen
       - name: Build services
         run: |
-          nix develop .#${{ matrix.ghc-version }} --print-build-logs --command stack build ./lib/services
+          nix develop .#${{ matrix.ghc-version }} --print-build-logs --command stack build --fast ./lib/services
