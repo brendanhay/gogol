@@ -5,9 +5,9 @@
 
 packages:
 - completed:
-    hackage: base64-1.0@sha256:ab8084608505f30d6cf7dd790271f927fd8a00956c5e7f5546f5cf56b298022c,2991
+    hackage: base64-1.0@sha256:15c8b91762010dd66c4db3f740db3bfd21302080bfc57845ab1b70920bbbe2ca,2991
     pantry-tree:
-      sha256: 62150ae24db8e07f966679024406de4cdfe13556c9afce807f4f24d7ec03d0b5
+      sha256: 1e79fc99fb065be808932d652f0b42994dd3814836f3e1b0d9facdb9e3b38728
       size: 2229
   original:
     hackage: base64-1.0

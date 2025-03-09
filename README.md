@@ -1,6 +1,6 @@
 # Gogol
 
-![CI](https://github.com/brendanhay/gogol/actions/workflows/haskell.yml/badge.svg)
+![CI](https://github.com/brendanhay/gogol/actions/workflows/ci.yml/badge.svg)
 [![Hackage Version](https://img.shields.io/hackage/v/gogol.svg)](http://hackage.haskell.org/package/gogol)
 
 * [Description](#description)

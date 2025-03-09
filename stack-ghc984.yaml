@@ -1,11 +1,8 @@
-resolver: nightly-2025-03-06
-compiler: ghc-9.10.1
+resolver: lts-23.11
+compiler: ghc-9.8.4
 local-bin-path: bin
 notify-if-nix-on-path: false
-extra-deps:
-  - ede-0.3.4.0
 packages:
-  - gen
   - examples
   - lib/gogol
   - lib/gogol-core

@@ -15,17 +15,8 @@
       url = "github:nixos/nixpkgs/nixpkgs-unstable";
     };
 
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-    };
-
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    git-hooks = {
-      url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -36,175 +27,163 @@
       nixpkgs,
       flake-utils,
       treefmt-nix,
-      git-hooks,
     }:
-    flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        inherit (pkgs) lib;
+    let
+      # Setup the various formatter's configuration.
+      mkFormatter =
+        pkgs:
+        treefmt-nix.lib.evalModule pkgs (
+          { ... }:
+          {
+            projectRootFile = "flake.nix";
 
-        pkgs = nixpkgs.legacyPackages.${system};
+            programs = {
+              cabal-fmt.enable = true;
+              hlint.enable = true;
+              nixfmt.enable = true;
+              ormolu.enable = true;
+              shellcheck.enable = true;
+              shfmt.enable = true;
+              yamlfmt.enable = true;
+              yamlfmt.settings.retain_line_breaks_single = true;
+            };
 
-        treefmt = treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
+            settings = {
+              global.excludes = [
+                "CONTRIBUTORS"
+                ".github/**.yml"
+                "configs/*"
+                "**LICENSE"
+                "**Makefile"
+                "**.gitkeep"
+                "*.lhs"
+                "*.md"
+              ];
 
-        # Adapted from https://www.tweag.io/blog/2022-06-02-haskell-stack-nix-shell/
-        stack-wrapped = pkgs.symlinkJoin {
-          name = "stack";
-          paths = [ pkgs.stack ];
-          buildInputs = [ pkgs.makeWrapper ];
-          postBuild = ''
-            wrapProgram $out/bin/stack \
-                --add-flags "\
-                    --no-nix \
-                    --no-install-ghc \
-                    --system-ghc \
-                "
+              formatter = {
+                cabal-fmt.options = [ "--indent=2" ];
+                hlint.ignores = [ "lib/services/**" ];
+              };
+            };
+          }
+        );
+
+      # Create a nix shell for developing the project using the specified GHC version.
+      mkShell =
+        pkgs: ghcVersion:
+        let
+          haskellPackages = pkgs.haskell.packages.${ghcVersion};
+          ghc = haskellPackages.ghc;
+
+          # Adapted from https://www.tweag.io/blog/2022-06-02-haskell-stack-nix-shell/
+          stack-wrapped = pkgs.symlinkJoin {
+            name = "stack";
+            paths = [ pkgs.stack ];
+            buildInputs = [ pkgs.makeWrapper ];
+            postBuild = ''
+              wrapProgram $out/bin/stack \
+                  --add-flags "\
+                      --no-nix \
+                      --no-install-ghc \
+                      --system-ghc \
+                  "
+            '';
+          };
+        in
+        pkgs.mkShell rec {
+          name = "gogol-${ghcVersion}-shell";
+
+          # Build inputs required by Haskell libraries built by stack. This corresponds to
+          # the total set of Cabal's `build-depends` fields in the package set.
+          buildInputs = [
+            pkgs.pkg-config
+            pkgs.icu
+            pkgs.zlib
+          ];
+
+          # Tools to make available in the shell.
+          nativeBuildInputs = [
+            # Tools specific to the GHC version.
+            ghc
+            haskellPackages.haskell-language-server
+
+            # The stack wrapper that uses the shell's GHC version.
+            stack-wrapped
+
+            # Haskell tools that are not tied to the GHC version above.
+            pkgs.haskellPackages.cabal-fmt
+            pkgs.haskellPackages.hlint
+            pkgs.haskellPackages.ormolu
+
+            # Generic tools used by the shell.
+            pkgs.cachix
+            pkgs.ncurses
+          ];
+
+          # The following environment variables is so `stack` builds within the shell
+          # matches buildStackProject's behavior.
+          #
+          # See: https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/haskell-modules/generic-stack-builder.nix
+
+          # Set the implicit stack.yaml to use.
+          STACK_YAML = "stack-${ghcVersion}.yaml";
+
+          # Non-NixOS git needs certificate bundle.
+          GIT_SSL_CAINFO = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+
+          # Fixes https://github.com/commercialhaskell/stack/issues/2358.
+          LANG = "en_US.UTF-8";
+
+          # Workaround for https://ghc.haskell.org/trac/ghc/ticket/11042.
+          LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath buildInputs;
+
+          # Convenience so `nix-env` works with the current shell's package set.
+          NIX_PATH = "nixpkgs=" + pkgs.path;
+
+          # Announce GHC version and STACK_YAML being used when entering the nix shell.
+          shellHook = ''
+            bold() {
+                tput bold
+                printf "$@"
+                tput sgr0
+            }
+
+            printf >&2 'Using %s with %s\n' "$(bold 'GHC ${ghc.version}')" "$(bold $STACK_YAML)"
           '';
         };
 
-        # Build inputs required by Haskell libraries built by stack. This corresponds to
-        # the total set of Cabal's `build-depends` fields in the package set.
-        buildInputs = [
-          pkgs.pkg-config
-          pkgs.icu
-          pkgs.zlib
-        ];
+      # Create the system-specific flake outputs by running a function per supported system.
+      forAllSystems =
+        f:
+        nixpkgs.lib.genAttrs [
+          "x86_64-linux"
+          "x86_64-darwin"
+          "aarch64-linux"
+          "aarch64-darwin"
+        ] (system: f nixpkgs.legacyPackages.${system});
+    in
+    {
+      # `nix develop` for the 'default' shell, or `nix develop .#<ghcVersion>` for a specific GHC version.
+      #
+      # Available GHC versions can be discovered via:
+      #   ```
+      #   $ nix repl
+      #   nix-repl> :load-flake nixpkgs
+      #   nix-repl> legacyPackages.x86_64-linux.haskell.packages.<TAB>
+      #   ```
+      devShells = forAllSystems (pkgs: rec {
+        default = ghc910;
+        ghc910 = mkShell pkgs "ghc910";
+        ghc984 = mkShell pkgs "ghc984";
+        ghc966 = mkShell pkgs "ghc966";
+      });
 
-        # Create a nix derivation to build the project using the specified GHC version.
-        mkProject =
-          haskellPackages:
-          let
-            ghc = haskellPackages.ghc;
-          in
-          pkgs.haskell.lib.buildStackProject {
-            inherit ghc buildInputs;
+      # `nix fmt` to format the entire repository.
+      formatter = forAllSystems (pkgs: (mkFormatter pkgs).config.build.wrapper);
 
-            name = "gogol-${ghc.version}";
-            src = lib.sources.sourceFilesBySuffices (lib.cleanSource ./.) [
-              ".nix"
-              ".yaml"
-              ".lock"
-              ".cabal"
-              ".hs"
-              ".lhs"
-            ];
-
-            # Disable tests by default.
-            doCheck = false;
-
-            # Set the implicit stack.yaml to use.
-            STACK_YAML = "stack-${ghc.version}.yaml";
-          };
-
-        # Create a nix shell for developing the project using the specified GHC version.
-        mkShell =
-          haskellPackages:
-          let
-            ghc = haskellPackages.ghc;
-          in
-          pkgs.mkShell {
-            inherit buildInputs;
-
-            name = "gogol-${ghc.version}-shell";
-
-            # Tools to make available in the shell.
-            nativeBuildInputs = [
-              # The GHC version used for development.
-              ghc
-              haskellPackages.haskell-language-server
-
-              # A stack wrapper that uses the GHC version above.
-              stack-wrapped
-
-              # Haskell tools that are not tied to the GHC version above.
-              pkgs.haskellPackages.cabal-fmt
-              pkgs.haskellPackages.ormolu
-              pkgs.cachix
-
-              # Generic tools used by the shell.
-              pkgs.ncurses
-            ];
-
-            # The following is so `stack` builds within the shell matches buildStackProject's behavior.
-            # https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/haskell-modules/generic-stack-builder.nix
-
-            # Set the implicit stack.yaml to use.
-            STACK_YAML = "stack-${ghc.version}.yaml";
-
-            # Non-NixOS git needs certificate bundle.
-            GIT_SSL_CAINFO = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-
-            # Fixes https://github.com/commercialhaskell/stack/issues/2358.
-            LANG = "en_US.UTF-8";
-
-            # Workaround for https://ghc.haskell.org/trac/ghc/ticket/11042.
-            LD_LIBRARY_PATH = lib.makeLibraryPath buildInputs;
-
-            # Convenience so `nix-env` works with the current shell's package set.
-            NIX_PATH = "nixpkgs=" + pkgs.path;
-
-            # Code that will run when the shell is entered.
-            shellHook =
-              # Setup a git pre-commit hook to ensure the commit files are formatted.
-              (git-hooks.lib.${system}.run {
-                src = ./.;
-                hooks = {
-                  treefmt = {
-                    enable = true;
-                    package = treefmt.config.build.wrapper;
-                  };
-                };
-              }).shellHook
-              # Announce GHC version and STACK_YAML being used when entering the nix shell.
-              + ''
-                bold() {
-                    tput bold
-                    printf "$@"
-                    tput sgr0
-                }
-
-                printf >&2 'direnv: using %s with %s\n' "$(bold 'GHC ${ghc.version}')" "$(bold $STACK_YAML)"
-              '';
-          };
-
-        # Create an attrset by applying `f` to every GHC version's package set.
-        #   ```
-        #   ghcAttrs (haskellPackages: haskellPackages.ghc) == {
-        #     ghc910 = pkgs.haskell.packages.ghc910.ghc;
-        #     ...
-        #   };
-        #   ```
-        #
-        # Available GHC versions can be discovered via:
-        #   ```
-        #   $ nix repl
-        #   nix-repl> :load-flake nixpkgs
-        #   nix-repl> legacyPackages.x86_64-linux.haskell.packages.<TAB>
-        #   ```
-        ghcAttrs =
-          f: lib.genAttrs [ "ghc910" "ghc984" "ghc966" ] (ghcVersion: f pkgs.haskell.packages.${ghcVersion});
-
-        packages = ghcAttrs mkProject;
-        devShells = ghcAttrs mkShell;
-      in
-      {
-        # `nix build` for the 'default' package, or `nix build .#<ghcVersion>`.
-        packages = packages // {
-          default = packages.ghc910;
-        };
-
-        # `nix develop` for the 'default' package, or `nix develop .#<ghcVersion>`.
-        devShells = devShells // {
-          default = devShells.ghc910;
-        };
-
-        # `nix fmt` to format the entire repository.
-        formatter = treefmt.config.build.wrapper;
-
-        # `nix flake check`.
-        checks = {
-          formatter = treefmt.config.build.check self;
-        };
-      }
-    );
+      # `nix flake check`.
+      checks = {
+        formatter = forAllSystems (pkgs: (mkFormatter pkgs).config.build.check self);
+      };
+    };
 }
