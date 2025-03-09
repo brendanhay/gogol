@@ -142,10 +142,6 @@ module Gogol.AndroidEnterprise.Types
     ConfigurationVariables (..),
     newConfigurationVariables,
 
-    -- ** CreateEnrollmentTokenResponse
-    CreateEnrollmentTokenResponse (..),
-    newCreateEnrollmentTokenResponse,
-
     -- ** Device
     Device (..),
     newDevice,
@@ -183,6 +179,12 @@ module Gogol.AndroidEnterprise.Types
     Enterprise (..),
     newEnterprise,
 
+    -- ** Enterprise_EnterpriseType
+    Enterprise_EnterpriseType (..),
+
+    -- ** Enterprise_ManagedGoogleDomainType
+    Enterprise_ManagedGoogleDomainType (..),
+
     -- ** EnterpriseAccount
     EnterpriseAccount (..),
     newEnterpriseAccount,
@@ -190,6 +192,13 @@ module Gogol.AndroidEnterprise.Types
     -- ** EnterpriseAuthenticationAppLinkConfig
     EnterpriseAuthenticationAppLinkConfig (..),
     newEnterpriseAuthenticationAppLinkConfig,
+
+    -- ** EnterpriseUpgradeEvent
+    EnterpriseUpgradeEvent (..),
+    newEnterpriseUpgradeEvent,
+
+    -- ** EnterpriseUpgradeEvent_UpgradeState
+    EnterpriseUpgradeEvent_UpgradeState (..),
 
     -- ** EnterprisesListResponse
     EnterprisesListResponse (..),
@@ -209,6 +218,10 @@ module Gogol.AndroidEnterprise.Types
     -- ** EntitlementsListResponse
     EntitlementsListResponse (..),
     newEntitlementsListResponse,
+
+    -- ** GenerateEnterpriseUpgradeUrlResponse
+    GenerateEnterpriseUpgradeUrlResponse (..),
+    newGenerateEnterpriseUpgradeUrlResponse,
 
     -- ** GoogleAuthenticationSettings
     GoogleAuthenticationSettings (..),
@@ -514,12 +527,6 @@ module Gogol.AndroidEnterprise.Types
     -- ** WebAppsListResponse
     WebAppsListResponse (..),
     newWebAppsListResponse,
-
-    -- ** EnterprisesCreateEnrollmentTokenDeviceType
-    EnterprisesCreateEnrollmentTokenDeviceType (..),
-
-    -- ** EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType
-    EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType (..),
 
     -- ** EnterprisesGetServiceAccountKeyType
     EnterprisesGetServiceAccountKeyType (..),

@@ -51,6 +51,7 @@ type CloudbuildProjectsLocationsConnectionsRepositoriesListResource =
     Core.:> Core.QueryParam "filter" Core.Text
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
+    Core.:> Core.QueryParam "returnPartialSuccess" Core.Bool
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -74,6 +75,8 @@ data CloudbuildProjectsLocationsConnectionsRepositoriesList = CloudbuildProjects
     pageToken :: (Core.Maybe Core.Text),
     -- | Required. The parent, which owns this collection of Repositories. Format: @projects\/*\/locations\/*\/connections\/*@.
     parent :: Core.Text,
+    -- | Optional. If set to true, the response will return partial results when some regions are unreachable. If set to false, the response will fail if any region is unreachable.
+    returnPartialSuccess :: (Core.Maybe Core.Bool),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -96,6 +99,7 @@ newCloudbuildProjectsLocationsConnectionsRepositoriesList parent =
       pageSize = Core.Nothing,
       pageToken = Core.Nothing,
       parent = parent,
+      returnPartialSuccess = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
@@ -120,6 +124,7 @@ instance
         filter
         pageSize
         pageToken
+        returnPartialSuccess
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)

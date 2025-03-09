@@ -48,6 +48,9 @@ type CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyRes
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam
+              "publicKeyFormat"
+              ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -65,6 +68,11 @@ data CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey = 
     callback :: (Core.Maybe Core.Text),
     -- | Required. The name of the CryptoKeyVersion public key to get.
     name :: Core.Text,
+    -- | Optional. The PublicKey format specified by the user. This field is required for PQC algorithms. If specified, the public key will be exported through the public_key field in the requested format. Otherwise, the pem field will be populated for non-PQC algorithms, and an error will be returned for PQC algorithms.
+    publicKeyFormat ::
+      ( Core.Maybe
+          ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat
+      ),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -87,6 +95,8 @@ newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey
         callback =
           Core.Nothing,
         name = name,
+        publicKeyFormat =
+          Core.Nothing,
         uploadType =
           Core.Nothing,
         uploadProtocol =
@@ -112,6 +122,7 @@ instance
         xgafv
         accessToken
         callback
+        publicKeyFormat
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)

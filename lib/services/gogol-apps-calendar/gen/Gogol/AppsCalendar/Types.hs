@@ -28,8 +28,20 @@ module Gogol.AppsCalendar.Types
 
     -- * OAuth Scopes
     Calendar'FullControl,
+    Calendar'Acls,
+    Calendar'Acls'Readonly,
+    Calendar'App'Created,
+    Calendar'Calendarlist,
+    Calendar'Calendarlist'Readonly,
+    Calendar'Calendars,
+    Calendar'Calendars'Readonly,
     Calendar'Events,
+    Calendar'Events'Freebusy,
+    Calendar'Events'Owned,
+    Calendar'Events'Owned'Readonly,
+    Calendar'Events'Public'Readonly,
     Calendar'Events'Readonly,
+    Calendar'Freebusy,
     Calendar'Readonly,
     Calendar'Settings'Readonly,
 
@@ -312,13 +324,61 @@ appsCalendarService =
 type Calendar'FullControl =
   "https://www.googleapis.com/auth/calendar"
 
+-- | See and change the sharing permissions of Google calendars you own
+type Calendar'Acls =
+  "https://www.googleapis.com/auth/calendar.acls"
+
+-- | See the sharing permissions of Google calendars you own
+type Calendar'Acls'Readonly =
+  "https://www.googleapis.com/auth/calendar.acls.readonly"
+
+-- | Make secondary Google calendars, and see, create, change, and delete events on them
+type Calendar'App'Created =
+  "https://www.googleapis.com/auth/calendar.app.created"
+
+-- | See, add, and remove Google calendars you’re subscribed to
+type Calendar'Calendarlist =
+  "https://www.googleapis.com/auth/calendar.calendarlist"
+
+-- | See the list of Google calendars you’re subscribed to
+type Calendar'Calendarlist'Readonly =
+  "https://www.googleapis.com/auth/calendar.calendarlist.readonly"
+
+-- | See and change the properties of Google calendars you have access to, and create secondary calendars
+type Calendar'Calendars =
+  "https://www.googleapis.com/auth/calendar.calendars"
+
+-- | See the title, description, default time zone, and other properties of Google calendars you have access to
+type Calendar'Calendars'Readonly =
+  "https://www.googleapis.com/auth/calendar.calendars.readonly"
+
 -- | View and edit events on all your calendars
 type Calendar'Events =
   "https://www.googleapis.com/auth/calendar.events"
 
+-- | See the availability on Google calendars you have access to
+type Calendar'Events'Freebusy =
+  "https://www.googleapis.com/auth/calendar.events.freebusy"
+
+-- | See, create, change, and delete events on Google calendars you own
+type Calendar'Events'Owned =
+  "https://www.googleapis.com/auth/calendar.events.owned"
+
+-- | See the events on Google calendars you own
+type Calendar'Events'Owned'Readonly =
+  "https://www.googleapis.com/auth/calendar.events.owned.readonly"
+
+-- | See the events on public calendars
+type Calendar'Events'Public'Readonly =
+  "https://www.googleapis.com/auth/calendar.events.public.readonly"
+
 -- | View events on all your calendars
 type Calendar'Events'Readonly =
   "https://www.googleapis.com/auth/calendar.events.readonly"
+
+-- | View your availability in your calendars
+type Calendar'Freebusy =
+  "https://www.googleapis.com/auth/calendar.freebusy"
 
 -- | See and download any calendar you can access using your Google Calendar
 type Calendar'Readonly =

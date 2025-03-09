@@ -131,6 +131,7 @@ library
     Gogol.YouTube.Videos.Rate
     Gogol.YouTube.Videos.ReportAbuse
     Gogol.YouTube.Videos.Update
+    Gogol.YouTube.VideoTrainability.Get
     Gogol.YouTube.Watermarks.Set
     Gogol.YouTube.Watermarks.Unset
 

@@ -68,7 +68,7 @@ data BigtableAdminProjectsInstancesTablesPatch = BigtableAdminProjectsInstancesT
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: Table,
-    -- | Required. The list of fields to update. A mask specifying which fields (e.g. @change_stream_config@) in the @table@ field should be updated. This mask is relative to the @table@ field, not to the request message. The wildcard (/) path is currently not supported. Currently UpdateTable is only supported for the following fields: / @change_stream_config@ * @change_stream_config.retention_period@ * @deletion_protection@ If @column_families@ is set in @update_mask@, it will return an UNIMPLEMENTED error.
+    -- | Required. The list of fields to update. A mask specifying which fields (e.g. @change_stream_config@) in the @table@ field should be updated. This mask is relative to the @table@ field, not to the request message. The wildcard (/) path is currently not supported. Currently UpdateTable is only supported for the following fields: / @change_stream_config@ * @change_stream_config.retention_period@ * @deletion_protection@ * @automated_backup_policy@ * @automated_backup_policy.retention_period@ * @automated_backup_policy.frequency@ * @row_key_schema@ If @column_families@ is set in @update_mask@, it will return an UNIMPLEMENTED error.
     updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),

@@ -69,7 +69,7 @@ data CloudFunctionsProjectsLocationsFunctionsList = CloudFunctionsProjectsLocati
     callback :: (Core.Maybe Core.Text),
     -- | The filter for Functions that match the filter expression, following the syntax outlined in https:\/\/google.aip.dev\/160.
     filter :: (Core.Maybe Core.Text),
-    -- | The sorting order of the resources returned. Value should be a comma separated list of fields. The default sorting oder is ascending. See https:\/\/google.aip.dev\/132#ordering.
+    -- | The sorting order of the resources returned. Value should be a comma separated list of fields. The default sorting order is ascending. See https:\/\/google.aip.dev\/132#ordering.
     orderBy :: (Core.Maybe Core.Text),
     -- | Maximum number of functions to return per call. The largest allowed page/size is 1,000, if the page/size is omitted or specified as greater than 1,000 then it will be replaced as 1,000. The size of the list response can be less than specified when used with filters.
     pageSize :: (Core.Maybe Core.Int32),

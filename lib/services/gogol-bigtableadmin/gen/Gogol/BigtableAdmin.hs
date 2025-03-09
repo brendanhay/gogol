@@ -183,6 +183,36 @@ module Gogol.BigtableAdmin
     BigtableAdminProjectsInstancesList (..),
     newBigtableAdminProjectsInstancesList,
 
+    -- ** bigtableadmin.projects.instances.logicalViews.getIamPolicy
+    BigtableAdminProjectsInstancesLogicalViewsGetIamPolicyResource,
+    BigtableAdminProjectsInstancesLogicalViewsGetIamPolicy (..),
+    newBigtableAdminProjectsInstancesLogicalViewsGetIamPolicy,
+
+    -- ** bigtableadmin.projects.instances.logicalViews.setIamPolicy
+    BigtableAdminProjectsInstancesLogicalViewsSetIamPolicyResource,
+    BigtableAdminProjectsInstancesLogicalViewsSetIamPolicy (..),
+    newBigtableAdminProjectsInstancesLogicalViewsSetIamPolicy,
+
+    -- ** bigtableadmin.projects.instances.logicalViews.testIamPermissions
+    BigtableAdminProjectsInstancesLogicalViewsTestIamPermissionsResource,
+    BigtableAdminProjectsInstancesLogicalViewsTestIamPermissions (..),
+    newBigtableAdminProjectsInstancesLogicalViewsTestIamPermissions,
+
+    -- ** bigtableadmin.projects.instances.materializedViews.getIamPolicy
+    BigtableAdminProjectsInstancesMaterializedViewsGetIamPolicyResource,
+    BigtableAdminProjectsInstancesMaterializedViewsGetIamPolicy (..),
+    newBigtableAdminProjectsInstancesMaterializedViewsGetIamPolicy,
+
+    -- ** bigtableadmin.projects.instances.materializedViews.setIamPolicy
+    BigtableAdminProjectsInstancesMaterializedViewsSetIamPolicyResource,
+    BigtableAdminProjectsInstancesMaterializedViewsSetIamPolicy (..),
+    newBigtableAdminProjectsInstancesMaterializedViewsSetIamPolicy,
+
+    -- ** bigtableadmin.projects.instances.materializedViews.testIamPermissions
+    BigtableAdminProjectsInstancesMaterializedViewsTestIamPermissionsResource,
+    BigtableAdminProjectsInstancesMaterializedViewsTestIamPermissions (..),
+    newBigtableAdminProjectsInstancesMaterializedViewsTestIamPermissions,
+
     -- ** bigtableadmin.projects.instances.partialUpdateInstance
     BigtableAdminProjectsInstancesPartialUpdateInstanceResource,
     BigtableAdminProjectsInstancesPartialUpdateInstance (..),
@@ -601,6 +631,10 @@ module Gogol.BigtableAdmin
     GoogleBigtableAdminV2TypeInt64EncodingBigEndianBytes (..),
     newGoogleBigtableAdminV2TypeInt64EncodingBigEndianBytes,
 
+    -- ** GoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes
+    GoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes (..),
+    newGoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes,
+
     -- ** GoogleBigtableAdminV2TypeMap
     GoogleBigtableAdminV2TypeMap (..),
     newGoogleBigtableAdminV2TypeMap,
@@ -625,6 +659,22 @@ module Gogol.BigtableAdmin
     GoogleBigtableAdminV2TypeStruct (..),
     newGoogleBigtableAdminV2TypeStruct,
 
+    -- ** GoogleBigtableAdminV2TypeStructEncoding
+    GoogleBigtableAdminV2TypeStructEncoding (..),
+    newGoogleBigtableAdminV2TypeStructEncoding,
+
+    -- ** GoogleBigtableAdminV2TypeStructEncodingDelimitedBytes
+    GoogleBigtableAdminV2TypeStructEncodingDelimitedBytes (..),
+    newGoogleBigtableAdminV2TypeStructEncodingDelimitedBytes,
+
+    -- ** GoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes
+    GoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes (..),
+    newGoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes,
+
+    -- ** GoogleBigtableAdminV2TypeStructEncodingSingleton
+    GoogleBigtableAdminV2TypeStructEncodingSingleton (..),
+    newGoogleBigtableAdminV2TypeStructEncodingSingleton,
+
     -- ** GoogleBigtableAdminV2TypeStructField
     GoogleBigtableAdminV2TypeStructField (..),
     newGoogleBigtableAdminV2TypeStructField,
@@ -632,6 +682,10 @@ module Gogol.BigtableAdmin
     -- ** GoogleBigtableAdminV2TypeTimestamp
     GoogleBigtableAdminV2TypeTimestamp (..),
     newGoogleBigtableAdminV2TypeTimestamp,
+
+    -- ** GoogleBigtableAdminV2TypeTimestampEncoding
+    GoogleBigtableAdminV2TypeTimestampEncoding (..),
+    newGoogleBigtableAdminV2TypeTimestampEncoding,
 
     -- ** HotTablet
     HotTablet (..),
@@ -920,6 +974,12 @@ import Gogol.BigtableAdmin.Projects.Instances.Delete
 import Gogol.BigtableAdmin.Projects.Instances.Get
 import Gogol.BigtableAdmin.Projects.Instances.GetIamPolicy
 import Gogol.BigtableAdmin.Projects.Instances.List
+import Gogol.BigtableAdmin.Projects.Instances.LogicalViews.GetIamPolicy
+import Gogol.BigtableAdmin.Projects.Instances.LogicalViews.SetIamPolicy
+import Gogol.BigtableAdmin.Projects.Instances.LogicalViews.TestIamPermissions
+import Gogol.BigtableAdmin.Projects.Instances.MaterializedViews.GetIamPolicy
+import Gogol.BigtableAdmin.Projects.Instances.MaterializedViews.SetIamPolicy
+import Gogol.BigtableAdmin.Projects.Instances.MaterializedViews.TestIamPermissions
 import Gogol.BigtableAdmin.Projects.Instances.PartialUpdateInstance
 import Gogol.BigtableAdmin.Projects.Instances.SetIamPolicy
 import Gogol.BigtableAdmin.Projects.Instances.Tables.AuthorizedViews.Create

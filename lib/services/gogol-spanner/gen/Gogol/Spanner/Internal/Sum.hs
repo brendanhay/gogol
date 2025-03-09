@@ -342,6 +342,7 @@ module Gogol.Spanner.Internal.Sum
       ( Type_TypeAnnotation_TYPEANNOTATIONCODEUNSPECIFIED,
         Type_TypeAnnotation_PGNUMERIC,
         Type_TypeAnnotation_PGJSONB,
+        Type_TypeAnnotation_PGOID,
         ..
       ),
 
@@ -878,7 +879,7 @@ pattern FreeInstanceMetadata_ExpireBehavior_REMOVEAFTERGRACEPERIOD = FreeInstanc
   FreeInstanceMetadata_ExpireBehavior
   #-}
 
--- | Optional. Controls the default backup behavior for new databases within the instance. Note that @AUTOMATIC@ is not permitted for free instances, as backups and backup schedules are not allowed for free instances. In the @GetInstance@ or @ListInstances@ response, if the value of default/backup/schedule_type is unset or NONE, no default backup schedule will be created for new databases within the instance.
+-- | Optional. Controls the default backup schedule behavior for new databases within the instance. By default, a backup schedule is created automatically when a new database is created in a new instance. Note that the @AUTOMATIC@ value isn\'t permitted for free instances, as backups and backup schedules aren\'t supported for free instances. In the @GetInstance@ or @ListInstances@ response, if the value of @default_backup_schedule_type@ isn\'t set, or set to @NONE@, Spanner doesn\'t create a default backup schedule for new databases in the instance.
 newtype Instance_DefaultBackupScheduleType = Instance_DefaultBackupScheduleType {fromInstance_DefaultBackupScheduleType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -895,11 +896,11 @@ newtype Instance_DefaultBackupScheduleType = Instance_DefaultBackupScheduleType 
 pattern Instance_DefaultBackupScheduleType_DEFAULTBACKUPSCHEDULETYPEUNSPECIFIED :: Instance_DefaultBackupScheduleType
 pattern Instance_DefaultBackupScheduleType_DEFAULTBACKUPSCHEDULETYPEUNSPECIFIED = Instance_DefaultBackupScheduleType "DEFAULT_BACKUP_SCHEDULE_TYPE_UNSPECIFIED"
 
--- | No default backup schedule will be created automatically on creation of a database within the instance.
+-- | A default backup schedule isn\'t created automatically when a new database is created in the instance.
 pattern Instance_DefaultBackupScheduleType_None :: Instance_DefaultBackupScheduleType
 pattern Instance_DefaultBackupScheduleType_None = Instance_DefaultBackupScheduleType "NONE"
 
--- | A default backup schedule will be created automatically on creation of a database within the instance. Once created, the default backup schedule can be edited or deleted just like any other backup schedule. Currently, the default backup schedule creates a full backup every 24 hours and retains the backup for a period of 7 days.
+-- | A default backup schedule is created automatically when a new database is created in the instance. The default backup schedule creates a full backup every 24 hours. These full backups are retained for 7 days. You can edit or delete the default backup schedule once it\'s created.
 pattern Instance_DefaultBackupScheduleType_Automatic :: Instance_DefaultBackupScheduleType
 pattern Instance_DefaultBackupScheduleType_Automatic = Instance_DefaultBackupScheduleType "AUTOMATIC"
 
@@ -1698,10 +1699,15 @@ pattern Type_TypeAnnotation_PGNUMERIC = Type_TypeAnnotation "PG_NUMERIC"
 pattern Type_TypeAnnotation_PGJSONB :: Type_TypeAnnotation
 pattern Type_TypeAnnotation_PGJSONB = Type_TypeAnnotation "PG_JSONB"
 
+-- | PostgreSQL compatible OID type. This annotation can be used by a client interacting with PostgreSQL-enabled Spanner database to specify that a value should be treated using the semantics of the OID type.
+pattern Type_TypeAnnotation_PGOID :: Type_TypeAnnotation
+pattern Type_TypeAnnotation_PGOID = Type_TypeAnnotation "PG_OID"
+
 {-# COMPLETE
   Type_TypeAnnotation_TYPEANNOTATIONCODEUNSPECIFIED,
   Type_TypeAnnotation_PGNUMERIC,
   Type_TypeAnnotation_PGJSONB,
+  Type_TypeAnnotation_PGOID,
   Type_TypeAnnotation
   #-}
 

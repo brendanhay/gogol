@@ -61,7 +61,7 @@ data StorageFoldersInsert = StorageFoldersInsert
     bucket :: Core.Text,
     -- | Multipart request metadata.
     payload :: Folder,
-    -- | If true, any parent folder which doesn’t exist will be created automatically.
+    -- | If true, any parent folder which doesn\'t exist will be created automatically.
     recursive :: (Core.Maybe Core.Bool),
     -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
     uploadType :: (Core.Maybe Core.Text)

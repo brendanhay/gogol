@@ -252,6 +252,7 @@ data AdmissionRule = AdmissionRule
     enforcementMode :: (Core.Maybe AdmissionRule_EnforcementMode),
     -- | Required. How this admission rule will be evaluated.
     evaluationMode :: (Core.Maybe AdmissionRule_EvaluationMode),
+    -- | Optional. The resource names of the attestors that must attest to a container image, in the format @projects\/*\/attestors\/*@. Each attestor must exist before a policy can reference it. To add an attestor to a policy the principal issuing the policy change request must be able to read the attestor resource. Note: this field must be non-empty when the @evaluation_mode@ field specifies @REQUIRE_ATTESTATION@, otherwise it must be empty.
     requireAttestationsBy :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1552,7 +1553,7 @@ instance Core.ToJSON PodResult where
 data Policy = Policy
   { -- | Optional. Admission policy allowlisting. A matching admission request will always be permitted. This feature is typically used to exclude Google or third-party infrastructure images from Binary Authorization policies.
     admissionWhitelistPatterns :: (Core.Maybe [AdmissionWhitelistPattern]),
-    -- | Optional. Per-cluster admission rules. Cluster spec format: @location.clusterId@. There can be at most one admission rule per cluster spec. A @location@ is either a compute zone (e.g. us-central1-a) or a region (e.g. us-central1). For @clusterId@ syntax restrictions see https:\/\/cloud.google.com\/container-engine\/reference\/rest\/v1\/projects.zones.clusters.
+    -- | Optional. A valid policy has only one of the following rule maps non-empty, i.e. only one of @cluster_admission_rules@, @kubernetes_namespace_admission_rules@, @kubernetes_service_account_admission_rules@, or @istio_service_identity_admission_rules@ can be non-empty. Per-cluster admission rules. Cluster spec format: @location.clusterId@. There can be at most one admission rule per cluster spec. A @location@ is either a compute zone (e.g. us-central1-a) or a region (e.g. us-central1). For @clusterId@ syntax restrictions see https:\/\/cloud.google.com\/container-engine\/reference\/rest\/v1\/projects.zones.clusters.
     clusterAdmissionRules :: (Core.Maybe Policy_ClusterAdmissionRules),
     -- | Required. Default admission rule for a cluster without a per-cluster, per- kubernetes-service-account, or per-istio-service-identity admission rule.
     defaultAdmissionRule :: (Core.Maybe AdmissionRule),
@@ -1635,7 +1636,7 @@ instance Core.ToJSON Policy where
           ]
       )
 
--- | Optional. Per-cluster admission rules. Cluster spec format: @location.clusterId@. There can be at most one admission rule per cluster spec. A @location@ is either a compute zone (e.g. us-central1-a) or a region (e.g. us-central1). For @clusterId@ syntax restrictions see https:\/\/cloud.google.com\/container-engine\/reference\/rest\/v1\/projects.zones.clusters.
+-- | Optional. A valid policy has only one of the following rule maps non-empty, i.e. only one of @cluster_admission_rules@, @kubernetes_namespace_admission_rules@, @kubernetes_service_account_admission_rules@, or @istio_service_identity_admission_rules@ can be non-empty. Per-cluster admission rules. Cluster spec format: @location.clusterId@. There can be at most one admission rule per cluster spec. A @location@ is either a compute zone (e.g. us-central1-a) or a region (e.g. us-central1). For @clusterId@ syntax restrictions see https:\/\/cloud.google.com\/container-engine\/reference\/rest\/v1\/projects.zones.clusters.
 --
 -- /See:/ 'newPolicy_ClusterAdmissionRules' smart constructor.
 newtype Policy_ClusterAdmissionRules = Policy_ClusterAdmissionRules

@@ -70,7 +70,7 @@ data BigQueryJobsDelete = BigQueryJobsDelete
     callback :: (Core.Maybe Core.Text),
     -- | Required. Job ID of the job for which metadata is to be deleted. If this is a parent job which has child jobs, the metadata from all child jobs will be deleted as well. Direct deletion of the metadata of child jobs is not allowed.
     jobId :: Core.Text,
-    -- | The geographic location of the job. Required. See details at: https:\/\/cloud.google.com\/bigquery\/docs\/locations#specifying/your/location.
+    -- | The geographic location of the job. Required. For more information, see how to <https://cloud.google.com/bigquery/docs/locations#specify_locations specify locations>.
     location :: (Core.Maybe Core.Text),
     -- | Required. Project ID of the job for which metadata is to be deleted.
     projectId :: Core.Text,

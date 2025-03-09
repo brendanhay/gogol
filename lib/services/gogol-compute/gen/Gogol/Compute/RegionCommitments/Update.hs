@@ -23,7 +23,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: auto_renew.
+-- Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be updated: auto_renew and plan.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.regionCommitments.update@.
 module Gogol.Compute.RegionCommitments.Update
@@ -62,7 +62,7 @@ type ComputeRegionCommitmentsUpdateResource =
     Core.:> Core.ReqBody '[Core.JSON] Commitment
     Core.:> Core.Patch '[Core.JSON] Operation
 
--- | Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: auto_renew.
+-- | Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be updated: auto_renew and plan.
 --
 -- /See:/ 'newComputeRegionCommitmentsUpdate' smart constructor.
 data ComputeRegionCommitmentsUpdate = ComputeRegionCommitmentsUpdate
@@ -72,7 +72,7 @@ data ComputeRegionCommitmentsUpdate = ComputeRegionCommitmentsUpdate
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Name of the commitment for which auto renew is being updated.
+    -- | Name of the commitment that you want to update.
     commitment :: Core.Text,
     paths :: (Core.Maybe [Core.Text]),
     -- | Multipart request metadata.
@@ -94,7 +94,7 @@ data ComputeRegionCommitmentsUpdate = ComputeRegionCommitmentsUpdate
 
 -- | Creates a value of 'ComputeRegionCommitmentsUpdate' with the minimum fields required to make a request.
 newComputeRegionCommitmentsUpdate ::
-  -- |  Name of the commitment for which auto renew is being updated. See 'commitment'.
+  -- |  Name of the commitment that you want to update. See 'commitment'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   Commitment ->

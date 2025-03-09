@@ -119,6 +119,14 @@ module Gogol.Vault.Types
     CountArtifactsResponse (..),
     newCountArtifactsResponse,
 
+    -- ** DriveDocumentIds
+    DriveDocumentIds (..),
+    newDriveDocumentIds,
+
+    -- ** DriveDocumentInfo
+    DriveDocumentInfo (..),
+    newDriveDocumentInfo,
+
     -- ** DriveExportOptions
     DriveExportOptions (..),
     newDriveExportOptions,
@@ -151,6 +159,17 @@ module Gogol.Vault.Types
     -- ** ExportStats
     ExportStats (..),
     newExportStats,
+
+    -- ** GeminiExportOptions
+    GeminiExportOptions (..),
+    newGeminiExportOptions,
+
+    -- ** GeminiExportOptions_ExportFormat
+    GeminiExportOptions_ExportFormat (..),
+
+    -- ** GeminiOptions
+    GeminiOptions (..),
+    newGeminiOptions,
 
     -- ** GroupsCountResult
     GroupsCountResult (..),

@@ -40,6 +40,35 @@ module Gogol.SQLAdmin.Internal.Sum
         ..
       ),
 
+    -- * Backup_BackupKind
+    Backup_BackupKind
+      ( Backup_BackupKind_SQLBACKUPKINDUNSPECIFIED,
+        Backup_BackupKind_Snapshot,
+        Backup_BackupKind_Physical,
+        ..
+      ),
+
+    -- * Backup_State
+    Backup_State
+      ( Backup_State_SQLBACKUPSTATEUNSPECIFIED,
+        Backup_State_Enqueued,
+        Backup_State_Running,
+        Backup_State_Failed,
+        Backup_State_Successful,
+        Backup_State_Deleting,
+        Backup_State_DELETIONFAILED,
+        ..
+      ),
+
+    -- * Backup_Type
+    Backup_Type
+      ( Backup_Type_SQLBACKUPTYPEUNSPECIFIED,
+        Backup_Type_Automated,
+        Backup_Type_ONDEMAND,
+        Backup_Type_Final,
+        ..
+      ),
+
     -- * BackupConfiguration_TransactionalLogStorageState
     BackupConfiguration_TransactionalLogStorageState
       ( BackupConfiguration_TransactionalLogStorageState_TRANSACTIONALLOGSTORAGESTATEUNSPECIFIED,
@@ -161,6 +190,7 @@ module Gogol.SQLAdmin.Internal.Sum
       ( ConnectSettings_ServerCaMode_CAMODEUNSPECIFIED,
         ConnectSettings_ServerCaMode_GOOGLEMANAGEDINTERNALCA,
         ConnectSettings_ServerCaMode_GOOGLEMANAGEDCASCA,
+        ConnectSettings_ServerCaMode_CUSTOMERMANAGEDCASCA,
         ..
       ),
 
@@ -264,6 +294,22 @@ module Gogol.SQLAdmin.Internal.Sum
         ..
       ),
 
+    -- * DnsNameMapping_ConnectionType
+    DnsNameMapping_ConnectionType
+      ( DnsNameMapping_ConnectionType_CONNECTIONTYPEUNSPECIFIED,
+        DnsNameMapping_ConnectionType_Public,
+        DnsNameMapping_ConnectionType_PRIVATESERVICESACCESS,
+        DnsNameMapping_ConnectionType_PRIVATESERVICECONNECT,
+        ..
+      ),
+
+    -- * DnsNameMapping_DnsScope
+    DnsNameMapping_DnsScope
+      ( DnsNameMapping_DnsScope_DNSSCOPEUNSPECIFIED,
+        DnsNameMapping_DnsScope_Instance,
+        ..
+      ),
+
     -- * ExportContext_BakExportOptions_BakType
     ExportContext_BakExportOptions_BakType
       ( ExportContext_BakExportOptions_BakType_BAKTYPEUNSPECIFIED,
@@ -279,6 +325,7 @@ module Gogol.SQLAdmin.Internal.Sum
         ExportContext_FileType_Sql,
         ExportContext_FileType_Csv,
         ExportContext_FileType_Bak,
+        ExportContext_FileType_Tde,
         ..
       ),
 
@@ -361,6 +408,7 @@ module Gogol.SQLAdmin.Internal.Sum
         ImportContext_FileType_Sql,
         ImportContext_FileType_Csv,
         ImportContext_FileType_Bak,
+        ImportContext_FileType_Tde,
         ..
       ),
 
@@ -451,6 +499,7 @@ module Gogol.SQLAdmin.Internal.Sum
         Operation_OperationType_AUTORESTART,
         Operation_OperationType_Reencrypt,
         Operation_OperationType_Switchover,
+        Operation_OperationType_UPDATEBACKUP,
         Operation_OperationType_ACQUIRESSRSLEASE,
         Operation_OperationType_RELEASESSRSLEASE,
         Operation_OperationType_RECONFIGUREOLDPRIMARY,
@@ -459,6 +508,8 @@ module Gogol.SQLAdmin.Internal.Sum
         Operation_OperationType_SWITCHOVERTOREPLICA,
         Operation_OperationType_MAJORVERSIONUPGRADE,
         Operation_OperationType_ADVANCEDBACKUP,
+        Operation_OperationType_MANAGEBACKUP,
+        Operation_OperationType_ENHANCEDBACKUP,
         ..
       ),
 
@@ -518,6 +569,7 @@ module Gogol.SQLAdmin.Internal.Sum
         Settings_DataDiskType_PDSSD,
         Settings_DataDiskType_PDHDD,
         Settings_DataDiskType_OBSOLETELOCALSSD,
+        Settings_DataDiskType_HYPERDISKBALANCED,
         ..
       ),
 
@@ -763,6 +815,127 @@ pattern ApiWarning_Code_INTERNALSTATEFAILURE = ApiWarning_Code "INTERNAL_STATE_F
   ApiWarning_Code_COMPROMISEDCREDENTIALS,
   ApiWarning_Code_INTERNALSTATEFAILURE,
   ApiWarning_Code
+  #-}
+
+-- | Output only. Specifies the kind of backup, PHYSICAL or DEFAULT_SNAPSHOT.
+newtype Backup_BackupKind = Backup_BackupKind {fromBackup_BackupKind :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | This is an unknown BackupKind.
+pattern Backup_BackupKind_SQLBACKUPKINDUNSPECIFIED :: Backup_BackupKind
+pattern Backup_BackupKind_SQLBACKUPKINDUNSPECIFIED = Backup_BackupKind "SQL_BACKUP_KIND_UNSPECIFIED"
+
+-- | Snapshot-based backups.
+pattern Backup_BackupKind_Snapshot :: Backup_BackupKind
+pattern Backup_BackupKind_Snapshot = Backup_BackupKind "SNAPSHOT"
+
+-- | Physical backups.
+pattern Backup_BackupKind_Physical :: Backup_BackupKind
+pattern Backup_BackupKind_Physical = Backup_BackupKind "PHYSICAL"
+
+{-# COMPLETE
+  Backup_BackupKind_SQLBACKUPKINDUNSPECIFIED,
+  Backup_BackupKind_Snapshot,
+  Backup_BackupKind_Physical,
+  Backup_BackupKind
+  #-}
+
+-- | Output only. The status of this backup.
+newtype Backup_State = Backup_State {fromBackup_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The state of the backup is unknown.
+pattern Backup_State_SQLBACKUPSTATEUNSPECIFIED :: Backup_State
+pattern Backup_State_SQLBACKUPSTATEUNSPECIFIED = Backup_State "SQL_BACKUP_STATE_UNSPECIFIED"
+
+-- | The backup that\'s added to a queue.
+pattern Backup_State_Enqueued :: Backup_State
+pattern Backup_State_Enqueued = Backup_State "ENQUEUED"
+
+-- | The backup is in progress.
+pattern Backup_State_Running :: Backup_State
+pattern Backup_State_Running = Backup_State "RUNNING"
+
+-- | The backup failed.
+pattern Backup_State_Failed :: Backup_State
+pattern Backup_State_Failed = Backup_State "FAILED"
+
+-- | The backup is successful.
+pattern Backup_State_Successful :: Backup_State
+pattern Backup_State_Successful = Backup_State "SUCCESSFUL"
+
+-- | The backup is being deleted.
+pattern Backup_State_Deleting :: Backup_State
+pattern Backup_State_Deleting = Backup_State "DELETING"
+
+-- | Deletion of the backup failed.
+pattern Backup_State_DELETIONFAILED :: Backup_State
+pattern Backup_State_DELETIONFAILED = Backup_State "DELETION_FAILED"
+
+{-# COMPLETE
+  Backup_State_SQLBACKUPSTATEUNSPECIFIED,
+  Backup_State_Enqueued,
+  Backup_State_Running,
+  Backup_State_Failed,
+  Backup_State_Successful,
+  Backup_State_Deleting,
+  Backup_State_DELETIONFAILED,
+  Backup_State
+  #-}
+
+-- | Output only. The type of this backup. The type can be \"AUTOMATED\", \"ON_DEMAND\" or “FINAL”.
+newtype Backup_Type = Backup_Type {fromBackup_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | This is an unknown backup type.
+pattern Backup_Type_SQLBACKUPTYPEUNSPECIFIED :: Backup_Type
+pattern Backup_Type_SQLBACKUPTYPEUNSPECIFIED = Backup_Type "SQL_BACKUP_TYPE_UNSPECIFIED"
+
+-- | The backup schedule triggers a backup automatically.
+pattern Backup_Type_Automated :: Backup_Type
+pattern Backup_Type_Automated = Backup_Type "AUTOMATED"
+
+-- | The user triggers a backup manually.
+pattern Backup_Type_ONDEMAND :: Backup_Type
+pattern Backup_Type_ONDEMAND = Backup_Type "ON_DEMAND"
+
+-- | The backup created when instance is deleted.
+pattern Backup_Type_Final :: Backup_Type
+pattern Backup_Type_Final = Backup_Type "FINAL"
+
+{-# COMPLETE
+  Backup_Type_SQLBACKUPTYPEUNSPECIFIED,
+  Backup_Type_Automated,
+  Backup_Type_ONDEMAND,
+  Backup_Type_Final,
+  Backup_Type
   #-}
 
 -- | Output only. This value contains the storage location of transactional logs used to perform point-in-time recovery (PITR) for the database.
@@ -1306,10 +1479,15 @@ pattern ConnectSettings_ServerCaMode_GOOGLEMANAGEDINTERNALCA = ConnectSettings_S
 pattern ConnectSettings_ServerCaMode_GOOGLEMANAGEDCASCA :: ConnectSettings_ServerCaMode
 pattern ConnectSettings_ServerCaMode_GOOGLEMANAGEDCASCA = ConnectSettings_ServerCaMode "GOOGLE_MANAGED_CAS_CA"
 
+-- | Customer-managed CA hosted on Google Cloud\'s Certificate Authority Service (CAS).
+pattern ConnectSettings_ServerCaMode_CUSTOMERMANAGEDCASCA :: ConnectSettings_ServerCaMode
+pattern ConnectSettings_ServerCaMode_CUSTOMERMANAGEDCASCA = ConnectSettings_ServerCaMode "CUSTOMER_MANAGED_CAS_CA"
+
 {-# COMPLETE
   ConnectSettings_ServerCaMode_CAMODEUNSPECIFIED,
   ConnectSettings_ServerCaMode_GOOGLEMANAGEDINTERNALCA,
   ConnectSettings_ServerCaMode_GOOGLEMANAGEDCASCA,
+  ConnectSettings_ServerCaMode_CUSTOMERMANAGEDCASCA,
   ConnectSettings_ServerCaMode
   #-}
 
@@ -1762,6 +1940,70 @@ pattern DatabaseInstance_SuspensionReasonItem_KMSKEYISSUE = DatabaseInstance_Sus
   DatabaseInstance_SuspensionReasonItem
   #-}
 
+-- | Output only. The connection type of the DNS name.
+newtype DnsNameMapping_ConnectionType = DnsNameMapping_ConnectionType {fromDnsNameMapping_ConnectionType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unknown connection type.
+pattern DnsNameMapping_ConnectionType_CONNECTIONTYPEUNSPECIFIED :: DnsNameMapping_ConnectionType
+pattern DnsNameMapping_ConnectionType_CONNECTIONTYPEUNSPECIFIED = DnsNameMapping_ConnectionType "CONNECTION_TYPE_UNSPECIFIED"
+
+-- | Public IP.
+pattern DnsNameMapping_ConnectionType_Public :: DnsNameMapping_ConnectionType
+pattern DnsNameMapping_ConnectionType_Public = DnsNameMapping_ConnectionType "PUBLIC"
+
+-- | Private services access (private IP).
+pattern DnsNameMapping_ConnectionType_PRIVATESERVICESACCESS :: DnsNameMapping_ConnectionType
+pattern DnsNameMapping_ConnectionType_PRIVATESERVICESACCESS = DnsNameMapping_ConnectionType "PRIVATE_SERVICES_ACCESS"
+
+-- | Private Service Connect.
+pattern DnsNameMapping_ConnectionType_PRIVATESERVICECONNECT :: DnsNameMapping_ConnectionType
+pattern DnsNameMapping_ConnectionType_PRIVATESERVICECONNECT = DnsNameMapping_ConnectionType "PRIVATE_SERVICE_CONNECT"
+
+{-# COMPLETE
+  DnsNameMapping_ConnectionType_CONNECTIONTYPEUNSPECIFIED,
+  DnsNameMapping_ConnectionType_Public,
+  DnsNameMapping_ConnectionType_PRIVATESERVICESACCESS,
+  DnsNameMapping_ConnectionType_PRIVATESERVICECONNECT,
+  DnsNameMapping_ConnectionType
+  #-}
+
+-- | Output only. The scope that the DNS name applies to.
+newtype DnsNameMapping_DnsScope = DnsNameMapping_DnsScope {fromDnsNameMapping_DnsScope :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unknown DNS scope.
+pattern DnsNameMapping_DnsScope_DNSSCOPEUNSPECIFIED :: DnsNameMapping_DnsScope
+pattern DnsNameMapping_DnsScope_DNSSCOPEUNSPECIFIED = DnsNameMapping_DnsScope "DNS_SCOPE_UNSPECIFIED"
+
+-- | Indicates a instance-level DNS name.
+pattern DnsNameMapping_DnsScope_Instance :: DnsNameMapping_DnsScope
+pattern DnsNameMapping_DnsScope_Instance = DnsNameMapping_DnsScope "INSTANCE"
+
+{-# COMPLETE
+  DnsNameMapping_DnsScope_DNSSCOPEUNSPECIFIED,
+  DnsNameMapping_DnsScope_Instance,
+  DnsNameMapping_DnsScope
+  #-}
+
 -- | Type of this bak file will be export, FULL or DIFF, SQL Server only
 newtype ExportContext_BakExportOptions_BakType = ExportContext_BakExportOptions_BakType {fromExportContext_BakExportOptions_BakType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1827,11 +2069,16 @@ pattern ExportContext_FileType_Csv = ExportContext_FileType "CSV"
 pattern ExportContext_FileType_Bak :: ExportContext_FileType
 pattern ExportContext_FileType_Bak = ExportContext_FileType "BAK"
 
+-- | TDE certificate.
+pattern ExportContext_FileType_Tde :: ExportContext_FileType
+pattern ExportContext_FileType_Tde = ExportContext_FileType "TDE"
+
 {-# COMPLETE
   ExportContext_FileType_SQLFILETYPEUNSPECIFIED,
   ExportContext_FileType_Sql,
   ExportContext_FileType_Csv,
   ExportContext_FileType_Bak,
+  ExportContext_FileType_Tde,
   ExportContext_FileType
   #-}
 
@@ -2203,11 +2450,16 @@ pattern ImportContext_FileType_Csv = ImportContext_FileType "CSV"
 pattern ImportContext_FileType_Bak :: ImportContext_FileType
 pattern ImportContext_FileType_Bak = ImportContext_FileType "BAK"
 
+-- | TDE certificate.
+pattern ImportContext_FileType_Tde :: ImportContext_FileType
+pattern ImportContext_FileType_Tde = ImportContext_FileType "TDE"
+
 {-# COMPLETE
   ImportContext_FileType_SQLFILETYPEUNSPECIFIED,
   ImportContext_FileType_Sql,
   ImportContext_FileType_Csv,
   ImportContext_FileType_Bak,
+  ImportContext_FileType_Tde,
   ImportContext_FileType
   #-}
 
@@ -2566,6 +2818,10 @@ pattern Operation_OperationType_Reencrypt = Operation_OperationType "REENCRYPT"
 pattern Operation_OperationType_Switchover :: Operation_OperationType
 pattern Operation_OperationType_Switchover = Operation_OperationType "SWITCHOVER"
 
+-- | Update a backup.
+pattern Operation_OperationType_UPDATEBACKUP :: Operation_OperationType
+pattern Operation_OperationType_UPDATEBACKUP = Operation_OperationType "UPDATE_BACKUP"
+
 -- | Acquire a lease for the setup of SQL Server Reporting Services (SSRS).
 pattern Operation_OperationType_ACQUIRESSRSLEASE :: Operation_OperationType
 pattern Operation_OperationType_ACQUIRESSRSLEASE = Operation_OperationType "ACQUIRE_SSRS_LEASE"
@@ -2594,9 +2850,17 @@ pattern Operation_OperationType_SWITCHOVERTOREPLICA = Operation_OperationType "S
 pattern Operation_OperationType_MAJORVERSIONUPGRADE :: Operation_OperationType
 pattern Operation_OperationType_MAJORVERSIONUPGRADE = Operation_OperationType "MAJOR_VERSION_UPGRADE"
 
--- | Creates a backup for an Advanced BackupTier Cloud SQL instance.
+-- | Deprecated: ADVANCED/BACKUP is deprecated. Use ENHANCED/BACKUP instead.
 pattern Operation_OperationType_ADVANCEDBACKUP :: Operation_OperationType
 pattern Operation_OperationType_ADVANCEDBACKUP = Operation_OperationType "ADVANCED_BACKUP"
+
+-- | Changes the BackupTier of a Cloud SQL instance.
+pattern Operation_OperationType_MANAGEBACKUP :: Operation_OperationType
+pattern Operation_OperationType_MANAGEBACKUP = Operation_OperationType "MANAGE_BACKUP"
+
+-- | Creates a backup for an Enhanced BackupTier Cloud SQL instance.
+pattern Operation_OperationType_ENHANCEDBACKUP :: Operation_OperationType
+pattern Operation_OperationType_ENHANCEDBACKUP = Operation_OperationType "ENHANCED_BACKUP"
 
 {-# COMPLETE
   Operation_OperationType_SQLOPERATIONTYPEUNSPECIFIED,
@@ -2638,6 +2902,7 @@ pattern Operation_OperationType_ADVANCEDBACKUP = Operation_OperationType "ADVANC
   Operation_OperationType_AUTORESTART,
   Operation_OperationType_Reencrypt,
   Operation_OperationType_Switchover,
+  Operation_OperationType_UPDATEBACKUP,
   Operation_OperationType_ACQUIRESSRSLEASE,
   Operation_OperationType_RELEASESSRSLEASE,
   Operation_OperationType_RECONFIGUREOLDPRIMARY,
@@ -2646,6 +2911,8 @@ pattern Operation_OperationType_ADVANCEDBACKUP = Operation_OperationType "ADVANC
   Operation_OperationType_SWITCHOVERTOREPLICA,
   Operation_OperationType_MAJORVERSIONUPGRADE,
   Operation_OperationType_ADVANCEDBACKUP,
+  Operation_OperationType_MANAGEBACKUP,
+  Operation_OperationType_ENHANCEDBACKUP,
   Operation_OperationType
   #-}
 
@@ -2879,11 +3146,16 @@ pattern Settings_DataDiskType_PDHDD = Settings_DataDiskType "PD_HDD"
 pattern Settings_DataDiskType_OBSOLETELOCALSSD :: Settings_DataDiskType
 pattern Settings_DataDiskType_OBSOLETELOCALSSD = Settings_DataDiskType "OBSOLETE_LOCAL_SSD"
 
+-- | A Hyperdisk Balanced data disk.
+pattern Settings_DataDiskType_HYPERDISKBALANCED :: Settings_DataDiskType
+pattern Settings_DataDiskType_HYPERDISKBALANCED = Settings_DataDiskType "HYPERDISK_BALANCED"
+
 {-# COMPLETE
   Settings_DataDiskType_SQLDATADISKTYPEUNSPECIFIED,
   Settings_DataDiskType_PDSSD,
   Settings_DataDiskType_PDHDD,
   Settings_DataDiskType_OBSOLETELOCALSSD,
+  Settings_DataDiskType_HYPERDISKBALANCED,
   Settings_DataDiskType
   #-}
 

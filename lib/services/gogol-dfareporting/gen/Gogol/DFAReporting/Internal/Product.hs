@@ -3346,11 +3346,11 @@ instance Core.ToJSON CampaignsListResponse where
 data CartData = CartData
   { -- | Data of the items purchased.
     items :: (Core.Maybe [CartDataItem]),
-    -- | The feed labels associated with the feed where your items are uploaded. For more information, please refer to ​​ https:\/\/support.google.com\/merchants\/answer\/12453549. This is a required field.
+    -- | The feed labels associated with the feed where your items are uploaded. For more information, please refer to ​​ https:\/\/support.google.com\/merchants\/answer\/12453549. Providing the feed label reduces ambiguity in identifying the right offer details.
     merchantFeedLabel :: (Core.Maybe Core.Text),
-    -- | The language associated with the feed where your items are uploaded. Use ISO 639-1 language codes. This field is needed only when item IDs are not unique across multiple Merchant Center feeds.
+    -- | The language associated with the feed where your items are uploaded. Use ISO 639-1 language codes. Providing the feed language reduces ambiguity in identifying the right offer details.
     merchantFeedLanguage :: (Core.Maybe Core.Text),
-    -- | The Merchant Center ID where the items are uploaded. This is a required field.
+    -- | The Merchant Center ID where the items are uploaded. Providing Merchant Center ID reduces ambiguity in identifying the right offer details.
     merchantId :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4208,7 +4208,7 @@ data Conversion = Conversion
     treatmentForUnderage :: (Core.Maybe Core.Bool),
     -- | The user identifiers to enhance the conversion. The maximum number of user identifiers for each conversion is 5.
     userIdentifiers :: (Core.Maybe [UserIdentifier]),
-    -- | The value of the conversion. This is a required field.
+    -- | The value of the conversion. Interpreted in CM360 Floodlight config parent advertiser\'s currency code. This is a required field.
     value :: (Core.Maybe Core.Double)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -14485,6 +14485,8 @@ data TagSetting = TagSetting
     includeClickThroughUrls :: (Core.Maybe Core.Bool),
     -- | Whether click-tracking string should be included in the tags.
     includeClickTracking :: (Core.Maybe Core.Bool),
+    -- | Optional. Indicates that the unescapedlpurl macro should be included in the tag for the static landing page. New placements will default to the value set on their site.
+    includeUnescapedlpurlMacro :: (Core.Maybe Core.Bool),
     -- | Option specifying how keywords are embedded in ad tags. This setting can be used to specify whether keyword placeholders are inserted in placement tags for this site. Publishers can then add keywords to those placeholders.
     keywordOption :: (Core.Maybe TagSetting_KeywordOption)
   }
@@ -14498,6 +14500,7 @@ newTagSetting =
     { additionalKeyValues = Core.Nothing,
       includeClickThroughUrls = Core.Nothing,
       includeClickTracking = Core.Nothing,
+      includeUnescapedlpurlMacro = Core.Nothing,
       keywordOption = Core.Nothing
     }
 
@@ -14510,6 +14513,7 @@ instance Core.FromJSON TagSetting where
             Core.<$> (o Core..:? "additionalKeyValues")
             Core.<*> (o Core..:? "includeClickThroughUrls")
             Core.<*> (o Core..:? "includeClickTracking")
+            Core.<*> (o Core..:? "includeUnescapedlpurlMacro")
             Core.<*> (o Core..:? "keywordOption")
       )
 
@@ -14521,6 +14525,8 @@ instance Core.ToJSON TagSetting where
             ("includeClickThroughUrls" Core..=)
               Core.<$> includeClickThroughUrls,
             ("includeClickTracking" Core..=) Core.<$> includeClickTracking,
+            ("includeUnescapedlpurlMacro" Core..=)
+              Core.<$> includeUnescapedlpurlMacro,
             ("keywordOption" Core..=) Core.<$> keywordOption
           ]
       )

@@ -82,7 +82,12 @@ newCalendarCalendarListPatch calendarId payload =
 
 instance Core.GoogleRequest CalendarCalendarListPatch where
   type Rs CalendarCalendarListPatch = CalendarListEntry
-  type Scopes CalendarCalendarListPatch = '[Calendar'FullControl]
+  type
+    Scopes CalendarCalendarListPatch =
+      '[ Calendar'FullControl,
+         Calendar'App'Created,
+         Calendar'Calendarlist
+       ]
   requestClient CalendarCalendarListPatch {..} =
     go
       calendarId

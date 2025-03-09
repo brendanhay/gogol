@@ -51,6 +51,7 @@ type DrivePermissionsUpdateResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "enforceExpansiveAccess" Core.Bool
     Core.:> Core.QueryParam "removeExpiration" Core.Bool
     Core.:> Core.QueryParam "supportsAllDrives" Core.Bool
     Core.:> Core.QueryParam "supportsTeamDrives" Core.Bool
@@ -72,6 +73,8 @@ data DrivePermissionsUpdate = DrivePermissionsUpdate
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | Whether the request should enforce expansive access rules.
+    enforceExpansiveAccess :: Core.Bool,
     -- | The ID of the file or shared drive.
     fileId :: Core.Text,
     -- | Multipart request metadata.
@@ -109,6 +112,7 @@ newDrivePermissionsUpdate fileId payload permissionId =
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      enforceExpansiveAccess = Core.False,
       fileId = fileId,
       payload = payload,
       permissionId = permissionId,
@@ -133,6 +137,7 @@ instance Core.GoogleRequest DrivePermissionsUpdate where
       xgafv
       accessToken
       callback
+      (Core.Just enforceExpansiveAccess)
       (Core.Just removeExpiration)
       (Core.Just supportsAllDrives)
       (Core.Just supportsTeamDrives)

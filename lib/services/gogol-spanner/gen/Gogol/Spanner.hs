@@ -187,6 +187,11 @@ module Gogol.Spanner
     SpannerProjectsInstancesDatabaseOperationsList (..),
     newSpannerProjectsInstancesDatabaseOperationsList,
 
+    -- ** spanner.projects.instances.databases.addSplitPoints
+    SpannerProjectsInstancesDatabasesAddSplitPointsResource,
+    SpannerProjectsInstancesDatabasesAddSplitPoints (..),
+    newSpannerProjectsInstancesDatabasesAddSplitPoints,
+
     -- ** spanner.projects.instances.databases.backupSchedules.create
     SpannerProjectsInstancesDatabasesBackupSchedulesCreateResource,
     SpannerProjectsInstancesDatabasesBackupSchedulesCreate (..),
@@ -306,6 +311,16 @@ module Gogol.Spanner
     SpannerProjectsInstancesDatabasesRestoreResource,
     SpannerProjectsInstancesDatabasesRestore (..),
     newSpannerProjectsInstancesDatabasesRestore,
+
+    -- ** spanner.projects.instances.databases.sessions.adaptMessage
+    SpannerProjectsInstancesDatabasesSessionsAdaptMessageResource,
+    SpannerProjectsInstancesDatabasesSessionsAdaptMessage (..),
+    newSpannerProjectsInstancesDatabasesSessionsAdaptMessage,
+
+    -- ** spanner.projects.instances.databases.sessions.adapter
+    SpannerProjectsInstancesDatabasesSessionsAdapterResource,
+    SpannerProjectsInstancesDatabasesSessionsAdapter (..),
+    newSpannerProjectsInstancesDatabasesSessionsAdapter,
 
     -- ** spanner.projects.instances.databases.sessions.batchCreate
     SpannerProjectsInstancesDatabasesSessionsBatchCreateResource,
@@ -522,6 +537,34 @@ module Gogol.Spanner
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** AdaptMessageRequest
+    AdaptMessageRequest (..),
+    newAdaptMessageRequest,
+
+    -- ** AdaptMessageRequest_Attachments
+    AdaptMessageRequest_Attachments (..),
+    newAdaptMessageRequest_Attachments,
+
+    -- ** AdaptMessageResponse
+    AdaptMessageResponse (..),
+    newAdaptMessageResponse,
+
+    -- ** AdaptMessageResponse_StateUpdates
+    AdaptMessageResponse_StateUpdates (..),
+    newAdaptMessageResponse_StateUpdates,
+
+    -- ** AdapterSession
+    AdapterSession (..),
+    newAdapterSession,
+
+    -- ** AddSplitPointsRequest
+    AddSplitPointsRequest (..),
+    newAddSplitPointsRequest,
+
+    -- ** AddSplitPointsResponse
+    AddSplitPointsResponse (..),
+    newAddSplitPointsResponse,
+
     -- ** AsymmetricAutoscalingOption
     AsymmetricAutoscalingOption (..),
     newAsymmetricAutoscalingOption,
@@ -555,6 +598,10 @@ module Gogol.Spanner
     -- ** BackupInfo
     BackupInfo (..),
     newBackupInfo,
+
+    -- ** BackupInstancePartition
+    BackupInstancePartition (..),
+    newBackupInstancePartition,
 
     -- ** BackupSchedule
     BackupSchedule (..),
@@ -887,6 +934,10 @@ module Gogol.Spanner
     -- ** InstanceReplicaSelection
     InstanceReplicaSelection (..),
     newInstanceReplicaSelection,
+
+    -- ** Key
+    Key (..),
+    newKey,
 
     -- ** KeyRange
     KeyRange (..),
@@ -1236,6 +1287,10 @@ module Gogol.Spanner
     SingleRegionQuorum (..),
     newSingleRegionQuorum,
 
+    -- ** SplitPoints
+    SplitPoints (..),
+    newSplitPoints,
+
     -- ** Statement
     Statement (..),
     newStatement,
@@ -1385,6 +1440,7 @@ import Gogol.Spanner.Projects.Instances.Backups.SetIamPolicy
 import Gogol.Spanner.Projects.Instances.Backups.TestIamPermissions
 import Gogol.Spanner.Projects.Instances.Create
 import Gogol.Spanner.Projects.Instances.DatabaseOperations.List
+import Gogol.Spanner.Projects.Instances.Databases.AddSplitPoints
 import Gogol.Spanner.Projects.Instances.Databases.BackupSchedules.Create
 import Gogol.Spanner.Projects.Instances.Databases.BackupSchedules.Delete
 import Gogol.Spanner.Projects.Instances.Databases.BackupSchedules.Get
@@ -1409,6 +1465,8 @@ import Gogol.Spanner.Projects.Instances.Databases.Operations.Get
 import Gogol.Spanner.Projects.Instances.Databases.Operations.List
 import Gogol.Spanner.Projects.Instances.Databases.Patch
 import Gogol.Spanner.Projects.Instances.Databases.Restore
+import Gogol.Spanner.Projects.Instances.Databases.Sessions.AdaptMessage
+import Gogol.Spanner.Projects.Instances.Databases.Sessions.Adapter
 import Gogol.Spanner.Projects.Instances.Databases.Sessions.BatchCreate
 import Gogol.Spanner.Projects.Instances.Databases.Sessions.BatchWrite
 import Gogol.Spanner.Projects.Instances.Databases.Sessions.BeginTransaction

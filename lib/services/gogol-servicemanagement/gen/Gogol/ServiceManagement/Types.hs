@@ -48,6 +48,14 @@ module Gogol.ServiceManagement.Types
     -- ** Api_Syntax
     Api_Syntax (..),
 
+    -- ** Aspect
+    Aspect (..),
+    newAspect,
+
+    -- ** Aspect_Spec
+    Aspect_Spec (..),
+    newAspect_Spec,
+
     -- ** AuditConfig
     AuditConfig (..),
     newAuditConfig,

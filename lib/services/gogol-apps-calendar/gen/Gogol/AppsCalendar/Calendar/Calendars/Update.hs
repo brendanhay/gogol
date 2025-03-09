@@ -76,7 +76,9 @@ newCalendarCalendarsUpdate calendarId payload =
 
 instance Core.GoogleRequest CalendarCalendarsUpdate where
   type Rs CalendarCalendarsUpdate = Calendar
-  type Scopes CalendarCalendarsUpdate = '[Calendar'FullControl]
+  type
+    Scopes CalendarCalendarsUpdate =
+      '[Calendar'FullControl, Calendar'App'Created, Calendar'Calendars]
   requestClient CalendarCalendarsUpdate {..} =
     go
       calendarId

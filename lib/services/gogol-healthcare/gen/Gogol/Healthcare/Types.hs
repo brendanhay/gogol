@@ -132,6 +132,10 @@ module Gogol.Healthcare.Types
     -- ** BlobStorageSettings_BlobStorageClass
     BlobStorageSettings_BlobStorageClass (..),
 
+    -- ** BulkExportGcsDestination
+    BulkExportGcsDestination (..),
+    newBulkExportGcsDestination,
+
     -- ** CancelOperationRequest
     CancelOperationRequest (..),
     newCancelOperationRequest,

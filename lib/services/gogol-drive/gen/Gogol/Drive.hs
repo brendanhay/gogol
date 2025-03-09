@@ -219,15 +219,15 @@ module Gogol.Drive
     DriveFilesWatch (..),
     newDriveFilesWatch,
 
-    -- ** drive.operation.cancel
-    DriveOperationCancelResource,
-    DriveOperationCancel (..),
-    newDriveOperationCancel,
+    -- ** drive.operations.cancel
+    DriveOperationsCancelResource,
+    DriveOperationsCancel (..),
+    newDriveOperationsCancel,
 
-    -- ** drive.operation.delete
-    DriveOperationDeleteResource,
-    DriveOperationDelete (..),
-    newDriveOperationDelete,
+    -- ** drive.operations.delete
+    DriveOperationsDeleteResource,
+    DriveOperationsDelete (..),
+    newDriveOperationsDelete,
 
     -- ** drive.operations.get
     DriveOperationsGetResource,
@@ -418,6 +418,10 @@ module Gogol.Drive
     -- ** ContentRestriction
     ContentRestriction (..),
     newContentRestriction,
+
+    -- ** DownloadRestriction
+    DownloadRestriction (..),
+    newDownloadRestriction,
 
     -- ** Drive
     Drive (..),
@@ -670,8 +674,8 @@ import Gogol.Drive.Files.ListLabels
 import Gogol.Drive.Files.ModifyLabels
 import Gogol.Drive.Files.Update
 import Gogol.Drive.Files.Watch
-import Gogol.Drive.Operation.Cancel
-import Gogol.Drive.Operation.Delete
+import Gogol.Drive.Operations.Cancel
+import Gogol.Drive.Operations.Delete
 import Gogol.Drive.Operations.Get
 import Gogol.Drive.Operations.List
 import Gogol.Drive.Permissions.Create

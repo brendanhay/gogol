@@ -516,6 +516,10 @@ module Gogol.YouTube.Internal.Sum
         ContentRating_DjctqRatingReasonsItem_DjctqInappropriateLanguage,
         ContentRating_DjctqRatingReasonsItem_DjctqCriminalActs,
         ContentRating_DjctqRatingReasonsItem_DjctqImpactingContent,
+        ContentRating_DjctqRatingReasonsItem_DjctqFear,
+        ContentRating_DjctqRatingReasonsItem_DjctqMedicalProcedures,
+        ContentRating_DjctqRatingReasonsItem_DjctqSensitiveTopics,
+        ContentRating_DjctqRatingReasonsItem_DjctqFantasyViolence,
         ..
       ),
 
@@ -3868,6 +3872,22 @@ pattern ContentRating_DjctqRatingReasonsItem_DjctqCriminalActs = ContentRating_D
 pattern ContentRating_DjctqRatingReasonsItem_DjctqImpactingContent :: ContentRating_DjctqRatingReasonsItem
 pattern ContentRating_DjctqRatingReasonsItem_DjctqImpactingContent = ContentRating_DjctqRatingReasonsItem "djctqImpactingContent"
 
+-- | Temer (Fear)
+pattern ContentRating_DjctqRatingReasonsItem_DjctqFear :: ContentRating_DjctqRatingReasonsItem
+pattern ContentRating_DjctqRatingReasonsItem_DjctqFear = ContentRating_DjctqRatingReasonsItem "djctqFear"
+
+-- | Procedimentos médicos (Medical Procedures)
+pattern ContentRating_DjctqRatingReasonsItem_DjctqMedicalProcedures :: ContentRating_DjctqRatingReasonsItem
+pattern ContentRating_DjctqRatingReasonsItem_DjctqMedicalProcedures = ContentRating_DjctqRatingReasonsItem "djctqMedicalProcedures"
+
+-- | Tópicos sensíveis (Sensitive Topics)
+pattern ContentRating_DjctqRatingReasonsItem_DjctqSensitiveTopics :: ContentRating_DjctqRatingReasonsItem
+pattern ContentRating_DjctqRatingReasonsItem_DjctqSensitiveTopics = ContentRating_DjctqRatingReasonsItem "djctqSensitiveTopics"
+
+-- | Fantasia Violência (Fantasy Violence)
+pattern ContentRating_DjctqRatingReasonsItem_DjctqFantasyViolence :: ContentRating_DjctqRatingReasonsItem
+pattern ContentRating_DjctqRatingReasonsItem_DjctqFantasyViolence = ContentRating_DjctqRatingReasonsItem "djctqFantasyViolence"
+
 {-# COMPLETE
   ContentRating_DjctqRatingReasonsItem_DjctqRatingReasonUnspecified,
   ContentRating_DjctqRatingReasonsItem_DjctqViolence,
@@ -3882,6 +3902,10 @@ pattern ContentRating_DjctqRatingReasonsItem_DjctqImpactingContent = ContentRati
   ContentRating_DjctqRatingReasonsItem_DjctqInappropriateLanguage,
   ContentRating_DjctqRatingReasonsItem_DjctqCriminalActs,
   ContentRating_DjctqRatingReasonsItem_DjctqImpactingContent,
+  ContentRating_DjctqRatingReasonsItem_DjctqFear,
+  ContentRating_DjctqRatingReasonsItem_DjctqMedicalProcedures,
+  ContentRating_DjctqRatingReasonsItem_DjctqSensitiveTopics,
+  ContentRating_DjctqRatingReasonsItem_DjctqFantasyViolence,
   ContentRating_DjctqRatingReasonsItem
   #-}
 

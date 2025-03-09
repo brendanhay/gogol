@@ -75,6 +75,14 @@ module Gogol.AppEngine.Internal.Sum
         ..
       ),
 
+    -- * Application_SslPolicy
+    Application_SslPolicy
+      ( Application_SslPolicy_SSLPOLICYUNSPECIFIED,
+        Application_SslPolicy_Default,
+        Application_SslPolicy_Modern,
+        ..
+      ),
+
     -- * ContainerState_State
     ContainerState_State
       ( ContainerState_State_UNKNOWNSTATE,
@@ -605,6 +613,38 @@ pattern Application_ServingStatus_SYSTEMDISABLED = Application_ServingStatus "SY
   Application_ServingStatus_USERDISABLED,
   Application_ServingStatus_SYSTEMDISABLED,
   Application_ServingStatus
+  #-}
+
+-- | The SSL policy that will be applied to the application. If set to Modern it will restrict traffic with TLS \< 1.2 and allow only Modern Ciphers suite
+newtype Application_SslPolicy = Application_SslPolicy {fromApplication_SslPolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Required by linter. Will work same as DEFAULT
+pattern Application_SslPolicy_SSLPOLICYUNSPECIFIED :: Application_SslPolicy
+pattern Application_SslPolicy_SSLPOLICYUNSPECIFIED = Application_SslPolicy "SSL_POLICY_UNSPECIFIED"
+
+-- | DEFAULT is to allow all TLS versions and cipher suites supported by App Engine
+pattern Application_SslPolicy_Default :: Application_SslPolicy
+pattern Application_SslPolicy_Default = Application_SslPolicy "DEFAULT"
+
+-- | MODERN is to allow only TLS 1.2 and TLS 1.3 along with Modern cipher suites only
+pattern Application_SslPolicy_Modern :: Application_SslPolicy
+pattern Application_SslPolicy_Modern = Application_SslPolicy "MODERN"
+
+{-# COMPLETE
+  Application_SslPolicy_SSLPOLICYUNSPECIFIED,
+  Application_SslPolicy_Default,
+  Application_SslPolicy_Modern,
+  Application_SslPolicy
   #-}
 
 -- | The current state of the container. This state is the culmination of all of the opinions from external systems that CCFE knows about of the container.
@@ -1364,7 +1404,7 @@ pattern SslSettings_SslManagementType_SSLMANAGEMENTTYPEUNSPECIFIED = SslSettings
 pattern SslSettings_SslManagementType_Automatic :: SslSettings_SslManagementType
 pattern SslSettings_SslManagementType_Automatic = SslSettings_SslManagementType "AUTOMATIC"
 
--- | SSL support for this domain is configured manually by the user. Either the domain has no SSL support or a user-obtained SSL certificate has been explictly mapped to this domain.
+-- | SSL support for this domain is configured manually by the user. Either the domain has no SSL support or a user-obtained SSL certificate has been explicitly mapped to this domain.
 pattern SslSettings_SslManagementType_Manual :: SslSettings_SslManagementType
 pattern SslSettings_SslManagementType_Manual = SslSettings_SslManagementType "MANUAL"
 

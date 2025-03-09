@@ -72,7 +72,7 @@ data RedisProjectsLocationsClustersCreate = RedisProjectsLocationsClustersCreate
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: Cluster,
-    -- | Idempotent request UUID.
+    -- | Optional. Idempotent request UUID.
     requestId :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),

@@ -119,7 +119,7 @@ instance
       AddOnContext
   type
     Scopes ClassroomCoursesCourseWorkMaterialsGetAddOnContext =
-      '[]
+      '[Classroom'Addons'Student, Classroom'Addons'Teacher]
   requestClient
     ClassroomCoursesCourseWorkMaterialsGetAddOnContext {..} =
       go

@@ -190,11 +190,11 @@ pattern AcceleratorConfig_Type_V4 = AcceleratorConfig_Type "V4"
 pattern AcceleratorConfig_Type_V5LITEPOD :: AcceleratorConfig_Type
 pattern AcceleratorConfig_Type_V5LITEPOD = AcceleratorConfig_Type "V5LITE_POD"
 
--- | TPU v5p
+-- | TPU v5p.
 pattern AcceleratorConfig_Type_V5P :: AcceleratorConfig_Type
 pattern AcceleratorConfig_Type_V5P = AcceleratorConfig_Type "V5P"
 
--- | TPU v6e
+-- | TPU v6e.
 pattern AcceleratorConfig_Type_V6E :: AcceleratorConfig_Type
 pattern AcceleratorConfig_Type_V6E = AcceleratorConfig_Type "V6E"
 

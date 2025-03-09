@@ -31,6 +31,8 @@ module Gogol.Classroom
     classroomService,
 
     -- * OAuth Scopes
+    Classroom'Addons'Student,
+    Classroom'Addons'Teacher,
     Classroom'Announcements,
     Classroom'Announcements'Readonly,
     Classroom'Courses,

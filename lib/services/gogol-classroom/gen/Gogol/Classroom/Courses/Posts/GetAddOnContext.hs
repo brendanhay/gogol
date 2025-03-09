@@ -109,7 +109,9 @@ newClassroomCoursesPostsGetAddOnContext courseId postId =
 
 instance Core.GoogleRequest ClassroomCoursesPostsGetAddOnContext where
   type Rs ClassroomCoursesPostsGetAddOnContext = AddOnContext
-  type Scopes ClassroomCoursesPostsGetAddOnContext = '[]
+  type
+    Scopes ClassroomCoursesPostsGetAddOnContext =
+      '[Classroom'Addons'Student, Classroom'Addons'Teacher]
   requestClient ClassroomCoursesPostsGetAddOnContext {..} =
     go
       courseId

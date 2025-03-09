@@ -117,7 +117,12 @@ instance Core.GoogleRequest CalendarEventsInstances where
   type
     Scopes CalendarEventsInstances =
       '[ Calendar'FullControl,
+         Calendar'App'Created,
          Calendar'Events,
+         Calendar'Events'Freebusy,
+         Calendar'Events'Owned,
+         Calendar'Events'Owned'Readonly,
+         Calendar'Events'Public'Readonly,
          Calendar'Events'Readonly,
          Calendar'Readonly
        ]

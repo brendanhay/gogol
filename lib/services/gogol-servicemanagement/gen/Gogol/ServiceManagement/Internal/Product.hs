@@ -31,6 +31,14 @@ module Gogol.ServiceManagement.Internal.Product
     Api (..),
     newApi,
 
+    -- * Aspect
+    Aspect (..),
+    newAspect,
+
+    -- * Aspect_Spec
+    Aspect_Spec (..),
+    newAspect_Spec,
+
     -- * AuditConfig
     AuditConfig (..),
     newAuditConfig,
@@ -597,6 +605,62 @@ instance Core.ToJSON Api where
           ]
       )
 
+-- | Aspect represents Generic aspect. It is used to configure an aspect without making direct changes to service.proto
+--
+-- /See:/ 'newAspect' smart constructor.
+data Aspect = Aspect
+  { -- | The type of this aspect configuration.
+    kind :: (Core.Maybe Core.Text),
+    -- | Content of the configuration. The underlying schema should be defined by Aspect owners as protobuf message under @apiserving\/configaspects\/proto@.
+    spec :: (Core.Maybe Aspect_Spec)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Aspect' with the minimum fields required to make a request.
+newAspect ::
+  Aspect
+newAspect = Aspect {kind = Core.Nothing, spec = Core.Nothing}
+
+instance Core.FromJSON Aspect where
+  parseJSON =
+    Core.withObject
+      "Aspect"
+      ( \o ->
+          Aspect Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "spec")
+      )
+
+instance Core.ToJSON Aspect where
+  toJSON Aspect {..} =
+    Core.object
+      ( Core.catMaybes
+          [("kind" Core..=) Core.<$> kind, ("spec" Core..=) Core.<$> spec]
+      )
+
+-- | Content of the configuration. The underlying schema should be defined by Aspect owners as protobuf message under @apiserving\/configaspects\/proto@.
+--
+-- /See:/ 'newAspect_Spec' smart constructor.
+newtype Aspect_Spec = Aspect_Spec
+  { -- | Properties of the object.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Aspect_Spec' with the minimum fields required to make a request.
+newAspect_Spec ::
+  -- |  Properties of the object. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  Aspect_Spec
+newAspect_Spec additional = Aspect_Spec {additional = additional}
+
+instance Core.FromJSON Aspect_Spec where
+  parseJSON =
+    Core.withObject
+      "Aspect_Spec"
+      (\o -> Aspect_Spec Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON Aspect_Spec where
+  toJSON Aspect_Spec {..} = Core.toJSON additional
+
 -- | Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs. If there are AuditConfigs for both @allServices@ and a specific service, the union of the two AuditConfigs is used for that service: the log/types specified in each AuditConfig are enabled, and the exempted/members in each AuditLogConfig are exempted. Example Policy with multiple AuditConfigs: { \"audit/configs\": [ { \"service\": \"allServices\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\", \"exempted/members\": [ \"user:jose\@example.com\" ] }, { \"log/type\": \"DATA/WRITE\" }, { \"log/type\": \"ADMIN/READ\" } ] }, { \"service\": \"sampleservice.googleapis.com\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\" }, { \"log/type\": \"DATA/WRITE\", \"exempted/members\": [ \"user:aliya\@example.com\" ] } ] } ] } For sampleservice, this policy enables DATA/READ, DATA/WRITE and
 -- ADMIN/READ logging. It also exempts @jose\@example.com@ from DATA/READ logging, and @aliya\@example.com@ from DATA/WRITE logging.
 --
@@ -896,6 +960,8 @@ data BackendRule = BackendRule
     disableAuth :: (Core.Maybe Core.Bool),
     -- | The JWT audience is used when generating a JWT ID token for the backend. This ID token will be added in the HTTP \"authorization\" header, and sent to the backend.
     jwtAudience :: (Core.Maybe Core.Text),
+    -- | The load balancing policy used for connection to the application backend. Defined as an arbitrary string to accomondate custom load balancing policies supported by the underlying channel, but suggest most users use one of the standard policies, such as the default, \"RoundRobin\".
+    loadBalancingPolicy :: (Core.Maybe Core.Text),
     -- | Deprecated, do not use.
     minDeadline :: (Core.Maybe Core.Double),
     -- | The number of seconds to wait for the completion of a long running operation. The default is no deadline.
@@ -919,6 +985,7 @@ newBackendRule =
       deadline = Core.Nothing,
       disableAuth = Core.Nothing,
       jwtAudience = Core.Nothing,
+      loadBalancingPolicy = Core.Nothing,
       minDeadline = Core.Nothing,
       operationDeadline = Core.Nothing,
       overridesByRequestProtocol = Core.Nothing,
@@ -937,6 +1004,7 @@ instance Core.FromJSON BackendRule where
             Core.<*> (o Core..:? "deadline")
             Core.<*> (o Core..:? "disableAuth")
             Core.<*> (o Core..:? "jwtAudience")
+            Core.<*> (o Core..:? "loadBalancingPolicy")
             Core.<*> (o Core..:? "minDeadline")
             Core.<*> (o Core..:? "operationDeadline")
             Core.<*> (o Core..:? "overridesByRequestProtocol")
@@ -953,6 +1021,7 @@ instance Core.ToJSON BackendRule where
             ("deadline" Core..=) Core.<$> deadline,
             ("disableAuth" Core..=) Core.<$> disableAuth,
             ("jwtAudience" Core..=) Core.<$> jwtAudience,
+            ("loadBalancingPolicy" Core..=) Core.<$> loadBalancingPolicy,
             ("minDeadline" Core..=) Core.<$> minDeadline,
             ("operationDeadline" Core..=) Core.<$> operationDeadline,
             ("overridesByRequestProtocol" Core..=)
@@ -1748,7 +1817,7 @@ data Documentation = Documentation
     pages :: (Core.Maybe [Page]),
     -- | A list of documentation rules that apply to individual API elements. __NOTE:__ All service configuration rules follow \"last one wins\" order.
     rules :: (Core.Maybe [DocumentationRule]),
-    -- | Specifies section and content to override boilerplate content provided by go\/api-docgen. Currently overrides following sections: 1. rest.service.client_libraries
+    -- | Specifies section and content to override the boilerplate content. Currently overrides following sections: 1. rest.service.client_libraries
     sectionOverrides :: (Core.Maybe [Page]),
     -- | Specifies the service root url if the default one (the service name from the yaml file) is not suitable. This can be seen in any fully specified service urls as well as sections that show a base that other urls are relative to.
     serviceRootUrl :: (Core.Maybe Core.Text),
@@ -1811,7 +1880,7 @@ data DocumentationRule = DocumentationRule
     deprecationDescription :: (Core.Maybe Core.Text),
     -- | Description of the selected proto element (e.g. a message, a method, a \'service\' definition, or a field). Defaults to leading & trailing comments taken from the proto source definition of the proto element.
     description :: (Core.Maybe Core.Text),
-    -- | String of comma or space separated case-sensitive words for which method\/field name replacement will be disabled by go\/api-docgen.
+    -- | String of comma or space separated case-sensitive words for which method\/field name replacement will be disabled.
     disableReplacementWords :: (Core.Maybe Core.Text),
     -- | The selector is a comma-separated list of patterns for any element such as a method, a field, an enum value. Each pattern is a qualified name of the element which may end in \"/\", indicating a wildcard. Wildcards are only allowed at the end and for a whole component of the qualified name, i.e. \"foo./\" is ok, but not \"foo.b/\" or \"foo./.bar\". A wildcard will match one or more components. To specify a default for all applicable elements, the whole pattern \"*\" is used.
     selector :: (Core.Maybe Core.Text)
@@ -2146,7 +2215,9 @@ data ExperimentalFeatures = ExperimentalFeatures
   { -- | Enables generation of protobuf code using new types that are more Pythonic which are included in @protobuf>=5.29.x@. This feature will be enabled by default 1 month after launching the feature in preview packages.
     protobufPythonicTypesEnabled :: (Core.Maybe Core.Bool),
     -- | Enables generation of asynchronous REST clients if @rest@ transport is enabled. By default, asynchronous REST clients will not be generated. This feature will be enabled by default 1 month after launching the feature in preview packages.
-    restAsyncIoEnabled :: (Core.Maybe Core.Bool)
+    restAsyncIoEnabled :: (Core.Maybe Core.Bool),
+    -- | Disables generation of an unversioned Python package for this client library. This means that the module names will need to be versioned in import statements. For example @import google.cloud.library_v2@ instead of @import google.cloud.library@.
+    unversionedPackageDisabled :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2156,7 +2227,8 @@ newExperimentalFeatures ::
 newExperimentalFeatures =
   ExperimentalFeatures
     { protobufPythonicTypesEnabled = Core.Nothing,
-      restAsyncIoEnabled = Core.Nothing
+      restAsyncIoEnabled = Core.Nothing,
+      unversionedPackageDisabled = Core.Nothing
     }
 
 instance Core.FromJSON ExperimentalFeatures where
@@ -2167,6 +2239,7 @@ instance Core.FromJSON ExperimentalFeatures where
           ExperimentalFeatures
             Core.<$> (o Core..:? "protobufPythonicTypesEnabled")
             Core.<*> (o Core..:? "restAsyncIoEnabled")
+            Core.<*> (o Core..:? "unversionedPackageDisabled")
       )
 
 instance Core.ToJSON ExperimentalFeatures where
@@ -2175,7 +2248,9 @@ instance Core.ToJSON ExperimentalFeatures where
       ( Core.catMaybes
           [ ("protobufPythonicTypesEnabled" Core..=)
               Core.<$> protobufPythonicTypesEnabled,
-            ("restAsyncIoEnabled" Core..=) Core.<$> restAsyncIoEnabled
+            ("restAsyncIoEnabled" Core..=) Core.<$> restAsyncIoEnabled,
+            ("unversionedPackageDisabled" Core..=)
+              Core.<$> unversionedPackageDisabled
           ]
       )
 
@@ -4148,7 +4223,7 @@ instance Core.ToJSON Option_Value where
 --
 -- /See:/ 'newPage' smart constructor.
 data Page = Page
-  { -- | The Markdown content of the page. You can use (== include {path} ==) to include content from a Markdown file. The content can be used to produce the documentation page such as HTML format page.
+  { -- | The Markdown content of the page. You can use @(== include {path} ==)@ to include content from a Markdown file. The content can be used to produce the documentation page such as HTML format page.
     content :: (Core.Maybe Core.Text),
     -- | The name of the page. It will be used as an identity of the page to generate URI of the page, text of the link to this page in navigation, etc. The full page name (start from the root page name to this page concatenated with @.@) can be used as reference to the page in your documentation. For example: pages: - name: Tutorial content: (== include tutorial.md ==) subpages: - name: Java content: (== include tutorial_java.md ==) You can reference @Java@ page using Markdown reference link syntax: @Java@.
     name :: (Core.Maybe Core.Text),
@@ -4657,8 +4732,10 @@ instance Core.ToJSON RubySettings where
 -- | This message is used to configure the generation of a subset of the RPCs in a service for client libraries.
 --
 -- /See:/ 'newSelectiveGapicGeneration' smart constructor.
-newtype SelectiveGapicGeneration = SelectiveGapicGeneration
-  { -- | An allowlist of the fully qualified names of RPCs that should be included on public client surfaces.
+data SelectiveGapicGeneration = SelectiveGapicGeneration
+  { -- | Setting this to true indicates to the client generators that methods that would be excluded from the generation should instead be generated in a way that indicates these methods should not be consumed by end users. How this is expressed is up to individual language implementations to decide. Some examples may be: added annotations, obfuscated identifiers, or other language idiomatic patterns.
+    generateOmittedAsInternal :: (Core.Maybe Core.Bool),
+    -- | An allowlist of the fully qualified names of RPCs that should be included on public client surfaces.
     methods :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4667,18 +4744,31 @@ newtype SelectiveGapicGeneration = SelectiveGapicGeneration
 newSelectiveGapicGeneration ::
   SelectiveGapicGeneration
 newSelectiveGapicGeneration =
-  SelectiveGapicGeneration {methods = Core.Nothing}
+  SelectiveGapicGeneration
+    { generateOmittedAsInternal =
+        Core.Nothing,
+      methods = Core.Nothing
+    }
 
 instance Core.FromJSON SelectiveGapicGeneration where
   parseJSON =
     Core.withObject
       "SelectiveGapicGeneration"
-      (\o -> SelectiveGapicGeneration Core.<$> (o Core..:? "methods"))
+      ( \o ->
+          SelectiveGapicGeneration
+            Core.<$> (o Core..:? "generateOmittedAsInternal")
+            Core.<*> (o Core..:? "methods")
+      )
 
 instance Core.ToJSON SelectiveGapicGeneration where
   toJSON SelectiveGapicGeneration {..} =
     Core.object
-      (Core.catMaybes [("methods" Core..=) Core.<$> methods])
+      ( Core.catMaybes
+          [ ("generateOmittedAsInternal" Core..=)
+              Core.<$> generateOmittedAsInternal,
+            ("methods" Core..=) Core.<$> methods
+          ]
+      )
 
 -- | @Service@ is the root object of Google API service configuration (service config). It describes the basic information about a logical service, such as the service name and the user-facing title, and delegates other aspects to sub-sections. Each sub-section is either a proto message or a repeated proto message that configures a specific aspect, such as auth. For more information, see each proto message definition. Example: type: google.api.Service name: calendar.googleapis.com title: Google Calendar API apis: - name: google.calendar.v3.Calendar visibility: rules: - selector: \"google.calendar.v3./\" restriction: PREVIEW backend: rules: - selector: \"google.calendar.v3./\" address: calendar.example.com authentication: providers: - id: google/calendar/auth jwks_uri: https:\/\/www.googleapis.com\/oauth2\/v1\/certs issuer: https:\/\/securetoken.google.com rules: - selector: \"*\" requirements: provider/id: google/calendar_auth
 --
@@ -4686,6 +4776,8 @@ instance Core.ToJSON SelectiveGapicGeneration where
 data Service = Service
   { -- | A list of API interfaces exported by this service. Only the @name@ field of the google.protobuf.Api needs to be provided by the configuration author, as the remaining fields will be derived from the IDL during the normalization process. It is an error to specify an API interface here which cannot be resolved against the associated IDL files.
     apis :: (Core.Maybe [Api]),
+    -- | Configuration aspects. This is a repeated field to allow multiple aspects to be configured. The kind field in each ConfigAspect specifies the type of aspect. The spec field contains the configuration for that aspect. The schema for the spec field is defined by the backend service owners.
+    aspects :: (Core.Maybe [Aspect]),
     -- | Auth configuration.
     authentication :: (Core.Maybe Authentication),
     -- | API backend configuration.
@@ -4749,6 +4841,7 @@ newService ::
 newService =
   Service
     { apis = Core.Nothing,
+      aspects = Core.Nothing,
       authentication = Core.Nothing,
       backend = Core.Nothing,
       billing = Core.Nothing,
@@ -4785,6 +4878,7 @@ instance Core.FromJSON Service where
       ( \o ->
           Service
             Core.<$> (o Core..:? "apis")
+            Core.<*> (o Core..:? "aspects")
             Core.<*> (o Core..:? "authentication")
             Core.<*> (o Core..:? "backend")
             Core.<*> (o Core..:? "billing")
@@ -4819,6 +4913,7 @@ instance Core.ToJSON Service where
     Core.object
       ( Core.catMaybes
           [ ("apis" Core..=) Core.<$> apis,
+            ("aspects" Core..=) Core.<$> aspects,
             ("authentication" Core..=) Core.<$> authentication,
             ("backend" Core..=) Core.<$> backend,
             ("billing" Core..=) Core.<$> billing,
@@ -5489,11 +5584,11 @@ instance Core.ToJSON Usage where
           ]
       )
 
--- | Usage configuration rules for the service. NOTE: Under development. Use this rule to configure unregistered calls for the service. Unregistered calls are calls that do not contain consumer project identity. (Example: calls that do not contain an API key). By default, API methods do not allow unregistered calls, and each method call must be identified by a consumer project identity. Use this rule to allow\/disallow unregistered calls. Example of an API that wants to allow unregistered calls for entire service. usage: rules: - selector: \"*\" allow/unregistered/calls: true Example of a method that wants to allow unregistered calls. usage: rules: - selector: \"google.example.library.v1.LibraryService.CreateBook\" allow/unregistered/calls: true
+-- | Usage configuration rules for the service.
 --
 -- /See:/ 'newUsageRule' smart constructor.
 data UsageRule = UsageRule
-  { -- | If true, the selected method allows unregistered calls, e.g. calls that don\'t identify any user or application.
+  { -- | Use this rule to configure unregistered calls for the service. Unregistered calls are calls that do not contain consumer project identity. (Example: calls that do not contain an API key). WARNING: By default, API methods do not allow unregistered calls, and each method call must be identified by a consumer project identity.
     allowUnregisteredCalls :: (Core.Maybe Core.Bool),
     -- | Selects the methods to which this rule applies. Use \'*\' to indicate all methods in all APIs. Refer to selector for syntax details.
     selector :: (Core.Maybe Core.Text),

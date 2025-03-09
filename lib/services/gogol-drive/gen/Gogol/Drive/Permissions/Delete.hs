@@ -51,6 +51,7 @@ type DrivePermissionsDeleteResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "enforceExpansiveAccess" Core.Bool
     Core.:> Core.QueryParam "supportsAllDrives" Core.Bool
     Core.:> Core.QueryParam "supportsTeamDrives" Core.Bool
     Core.:> Core.QueryParam "uploadType" Core.Text
@@ -69,6 +70,8 @@ data DrivePermissionsDelete = DrivePermissionsDelete
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | Whether the request should enforce expansive access rules.
+    enforceExpansiveAccess :: Core.Bool,
     -- | The ID of the file or shared drive.
     fileId :: Core.Text,
     -- | The ID of the permission.
@@ -98,6 +101,7 @@ newDrivePermissionsDelete fileId permissionId =
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      enforceExpansiveAccess = Core.False,
       fileId = fileId,
       permissionId = permissionId,
       supportsAllDrives = Core.False,
@@ -119,6 +123,7 @@ instance Core.GoogleRequest DrivePermissionsDelete where
       xgafv
       accessToken
       callback
+      (Core.Just enforceExpansiveAccess)
       (Core.Just supportsAllDrives)
       (Core.Just supportsTeamDrives)
       uploadType

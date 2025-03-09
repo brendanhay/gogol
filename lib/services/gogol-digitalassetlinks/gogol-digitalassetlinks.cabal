@@ -51,6 +51,7 @@ library
 
   exposed-modules:
     Gogol.DigitalAssetLinks
+    Gogol.DigitalAssetLinks.Assetlinks.BulkCheck
     Gogol.DigitalAssetLinks.Assetlinks.Check
     Gogol.DigitalAssetLinks.Statements.List
     Gogol.DigitalAssetLinks.Types

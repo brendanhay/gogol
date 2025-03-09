@@ -55,6 +55,10 @@ module Gogol.Container.Internal.Product
     AuthenticatorGroupsConfig (..),
     newAuthenticatorGroupsConfig,
 
+    -- * AutoMonitoringConfig
+    AutoMonitoringConfig (..),
+    newAutoMonitoringConfig,
+
     -- * AutoUpgradeOptions
     AutoUpgradeOptions (..),
     newAutoUpgradeOptions,
@@ -66,6 +70,10 @@ module Gogol.Container.Internal.Product
     -- * AutopilotCompatibilityIssue
     AutopilotCompatibilityIssue (..),
     newAutopilotCompatibilityIssue,
+
+    -- * AutopilotConfig
+    AutopilotConfig (..),
+    newAutopilotConfig,
 
     -- * AutoprovisioningNodePoolDefaults
     AutoprovisioningNodePoolDefaults (..),
@@ -1241,6 +1249,31 @@ instance Core.ToJSON AuthenticatorGroupsConfig where
           ]
       )
 
+-- | AutoMonitoringConfig defines the configuration for GKE Workload Auto-Monitoring.
+--
+-- /See:/ 'newAutoMonitoringConfig' smart constructor.
+newtype AutoMonitoringConfig = AutoMonitoringConfig
+  { -- | Scope for GKE Workload Auto-Monitoring.
+    scope :: (Core.Maybe AutoMonitoringConfig_Scope)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AutoMonitoringConfig' with the minimum fields required to make a request.
+newAutoMonitoringConfig ::
+  AutoMonitoringConfig
+newAutoMonitoringConfig =
+  AutoMonitoringConfig {scope = Core.Nothing}
+
+instance Core.FromJSON AutoMonitoringConfig where
+  parseJSON =
+    Core.withObject
+      "AutoMonitoringConfig"
+      (\o -> AutoMonitoringConfig Core.<$> (o Core..:? "scope"))
+
+instance Core.ToJSON AutoMonitoringConfig where
+  toJSON AutoMonitoringConfig {..} =
+    Core.object (Core.catMaybes [("scope" Core..=) Core.<$> scope])
+
 -- | AutoUpgradeOptions defines the set of options for the user to control how the Auto Upgrades will proceed.
 --
 -- /See:/ 'newAutoUpgradeOptions' smart constructor.
@@ -1327,7 +1360,7 @@ data AutopilotCompatibilityIssue = AutopilotCompatibilityIssue
     constraintType :: (Core.Maybe Core.Text),
     -- | The description of the issue.
     description :: (Core.Maybe Core.Text),
-    -- | A URL to a public documnetation, which addresses resolving this issue.
+    -- | A URL to a public documentation, which addresses resolving this issue.
     documentationUrl :: (Core.Maybe Core.Text),
     -- | The incompatibility type of this issue.
     incompatibilityType :: (Core.Maybe AutopilotCompatibilityIssue_IncompatibilityType),
@@ -1377,6 +1410,31 @@ instance Core.ToJSON AutopilotCompatibilityIssue where
             ("subjects" Core..=) Core.<$> subjects
           ]
       )
+
+-- | AutopilotConfig contains configuration of autopilot feature for this nodepool.
+--
+-- /See:/ 'newAutopilotConfig' smart constructor.
+newtype AutopilotConfig = AutopilotConfig
+  { -- | Denotes that nodes belonging to this node pool are Autopilot nodes.
+    enabled :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AutopilotConfig' with the minimum fields required to make a request.
+newAutopilotConfig ::
+  AutopilotConfig
+newAutopilotConfig = AutopilotConfig {enabled = Core.Nothing}
+
+instance Core.FromJSON AutopilotConfig where
+  parseJSON =
+    Core.withObject
+      "AutopilotConfig"
+      (\o -> AutopilotConfig Core.<$> (o Core..:? "enabled"))
+
+instance Core.ToJSON AutopilotConfig where
+  toJSON AutopilotConfig {..} =
+    Core.object
+      (Core.catMaybes [("enabled" Core..=) Core.<$> enabled])
 
 -- | AutoprovisioningNodePoolDefaults contains defaults for a node pool created by NAP.
 --
@@ -1714,7 +1772,7 @@ instance Core.ToJSON CancelOperationRequest where
 --
 -- /See:/ 'newCertificateAuthorityDomainConfig' smart constructor.
 data CertificateAuthorityDomainConfig = CertificateAuthorityDomainConfig
-  { -- | List of fully qualified domain names (FQDN). Specifying port is supported. Wilcards are NOT supported. Examples: - my.customdomain.com - 10.0.1.2:5000
+  { -- | List of fully qualified domain names (FQDN). Specifying port is supported. Wildcards are NOT supported. Examples: - my.customdomain.com - 10.0.1.2:5000
     fqdns :: (Core.Maybe [Core.Text]),
     -- | Google Secret Manager (GCP) certificate configuration.
     gcpSecretManagerCertificateConfig :: (Core.Maybe GCPSecretManagerCertificateConfig)
@@ -1941,7 +1999,7 @@ data Cluster = Cluster
     enableK8sBetaApis :: (Core.Maybe K8sBetaAPIConfig),
     -- | Kubernetes alpha features are enabled on this cluster. This includes alpha API groups (e.g. v1alpha1) and features that may not be production ready in the kubernetes version of the master and nodes. The cluster has no SLA for uptime and master\/node upgrades are disabled. Alpha enabled clusters are automatically deleted thirty days after creation.
     enableKubernetesAlpha :: (Core.Maybe Core.Bool),
-    -- | Enable the ability to use Cloud TPUs in this cluster.
+    -- | Enable the ability to use Cloud TPUs in this cluster. This field is deprecated due to the deprecation of 2VM TPU. The end of life date for 2VM TPU is 2025-04-25.
     enableTpu :: (Core.Maybe Core.Bool),
     -- | Output only. The IP address of this cluster\'s master endpoint. The endpoint can be accessed from the internet at @https:\/\/username:password\@endpoint\/@. See the @masterAuth@ property of this resource for username and password information.
     endpoint :: (Core.Maybe Core.Text),
@@ -1969,7 +2027,6 @@ data Cluster = Cluster
     labelFingerprint :: (Core.Maybe Core.Text),
     -- | Configuration for the legacy ABAC authorization mode.
     legacyAbac :: (Core.Maybe LegacyAbac),
-    -- | Output only. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/regions-zones/regions-zones#available zone> or <https://cloud.google.com/compute/docs/regions-zones/regions-zones#available region> in which the cluster resides.
     location :: (Core.Maybe Core.Text),
     -- | The list of Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zones> in which the cluster\'s nodes should be located. This field provides a default value if <https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters.nodePools#NodePool.FIELDS.locations NodePool.Locations> are not specified during node pool creation. Warning: changing cluster locations will update the <https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters.nodePools#NodePool.FIELDS.locations NodePool.Locations> of all node pools and will result in nodes being added and\/or removed.
     locations :: (Core.Maybe [Core.Text]),
@@ -2041,7 +2098,7 @@ data Cluster = Cluster
     statusMessage :: (Core.Maybe Core.Text),
     -- | The name of the Google Compute Engine <https://cloud.google.com/compute/docs/subnetworks subnetwork> to which the cluster is connected.
     subnetwork :: (Core.Maybe Core.Text),
-    -- | Output only. The IP address range of the Cloud TPUs in this cluster, in <http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing CIDR> notation (e.g. @1.2.3.4\/29@).
+    -- | Output only. The IP address range of the Cloud TPUs in this cluster, in <http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing CIDR> notation (e.g. @1.2.3.4\/29@). This field is deprecated due to the deprecation of 2VM TPU. The end of life date for 2VM TPU is 2025-04-25.
     tpuIpv4CidrBlock :: (Core.Maybe Core.Text),
     -- | The Custom keys configuration for the cluster.
     userManagedKeysConfig :: (Core.Maybe UserManagedKeysConfig),
@@ -2460,6 +2517,8 @@ data ClusterUpdate = ClusterUpdate
     desiredDefaultEnablePrivateNodes :: (Core.Maybe Core.Bool),
     -- | The desired status of whether to disable default sNAT for this cluster.
     desiredDefaultSnatStatus :: (Core.Maybe DefaultSnatStatus),
+    -- | Enable\/Disable L4 LB VPC firewall reconciliation for the cluster.
+    desiredDisableL4LbFirewallReconciliation :: (Core.Maybe Core.Bool),
     -- | DNSConfig contains clusterDNS config for this cluster.
     desiredDnsConfig :: (Core.Maybe DNSConfig),
     -- | Enable\/Disable Cilium Clusterwide Network Policy for the cluster.
@@ -2584,6 +2643,7 @@ newClusterUpdate =
       desiredDatapathProvider = Core.Nothing,
       desiredDefaultEnablePrivateNodes = Core.Nothing,
       desiredDefaultSnatStatus = Core.Nothing,
+      desiredDisableL4LbFirewallReconciliation = Core.Nothing,
       desiredDnsConfig = Core.Nothing,
       desiredEnableCiliumClusterwideNetworkPolicy = Core.Nothing,
       desiredEnableFqdnNetworkPolicy = Core.Nothing,
@@ -2657,6 +2717,7 @@ instance Core.FromJSON ClusterUpdate where
             Core.<*> (o Core..:? "desiredDatapathProvider")
             Core.<*> (o Core..:? "desiredDefaultEnablePrivateNodes")
             Core.<*> (o Core..:? "desiredDefaultSnatStatus")
+            Core.<*> (o Core..:? "desiredDisableL4LbFirewallReconciliation")
             Core.<*> (o Core..:? "desiredDnsConfig")
             Core.<*> (o Core..:? "desiredEnableCiliumClusterwideNetworkPolicy")
             Core.<*> (o Core..:? "desiredEnableFqdnNetworkPolicy")
@@ -2741,6 +2802,8 @@ instance Core.ToJSON ClusterUpdate where
               Core.<$> desiredDefaultEnablePrivateNodes,
             ("desiredDefaultSnatStatus" Core..=)
               Core.<$> desiredDefaultSnatStatus,
+            ("desiredDisableL4LbFirewallReconciliation" Core..=)
+              Core.<$> desiredDisableL4LbFirewallReconciliation,
             ("desiredDnsConfig" Core..=) Core.<$> desiredDnsConfig,
             ("desiredEnableCiliumClusterwideNetworkPolicy" Core..=)
               Core.<$> desiredEnableCiliumClusterwideNetworkPolicy,
@@ -3915,7 +3978,7 @@ instance Core.ToJSON GcsFuseCsiDriverConfig where
     Core.object
       (Core.catMaybes [("enabled" Core..=) Core.<$> enabled])
 
--- | GetJSONWebKeysResponse is a valid JSON Web Key Set as specififed in rfc 7517
+-- | GetJSONWebKeysResponse is a valid JSON Web Key Set as specified in rfc 7517
 --
 -- /See:/ 'newGetJSONWebKeysResponse' smart constructor.
 data GetJSONWebKeysResponse = GetJSONWebKeysResponse
@@ -4250,7 +4313,7 @@ data IPAllocationPolicy = IPAllocationPolicy
     subnetIpv6CidrBlock :: (Core.Maybe Core.Text),
     -- | A custom subnetwork name to be used if @create_subnetwork@ is true. If this field is empty, then an automatic name will be chosen for the new subnetwork.
     subnetworkName :: (Core.Maybe Core.Text),
-    -- | The IP address range of the Cloud TPUs in this cluster. If unspecified, a range will be automatically chosen with the default size. This field is only applicable when @use_ip_aliases@ is true. If unspecified, the range will use the default size. Set to \/netmask (e.g. @\/14@) to have a range chosen with a specific netmask. Set to a <http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing CIDR> notation (e.g. @10.96.0.0\/14@) from the RFC-1918 private networks (e.g. @10.0.0.0\/8@, @172.16.0.0\/12@, @192.168.0.0\/16@) to pick a specific range to use.
+    -- | The IP address range of the Cloud TPUs in this cluster. If unspecified, a range will be automatically chosen with the default size. This field is only applicable when @use_ip_aliases@ is true. If unspecified, the range will use the default size. Set to \/netmask (e.g. @\/14@) to have a range chosen with a specific netmask. Set to a <http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing CIDR> notation (e.g. @10.96.0.0\/14@) from the RFC-1918 private networks (e.g. @10.0.0.0\/8@, @172.16.0.0\/12@, @192.168.0.0\/16@) to pick a specific range to use. This field is deprecated due to the deprecation of 2VM TPU. The end of life date for 2VM TPU is 2025-04-25.
     tpuIpv4CidrBlock :: (Core.Maybe Core.Text),
     -- | Whether alias IPs will be used for pod IPs in the cluster. This is used in conjunction with use/routes. It cannot be true if use/routes is true. If both use/ip/aliases and use_routes are false, then the server picks the default IP allocation mode
     useIpAliases :: (Core.Maybe Core.Bool),
@@ -4622,7 +4685,7 @@ data LinuxNodeConfig = LinuxNodeConfig
     cgroupMode :: (Core.Maybe LinuxNodeConfig_CgroupMode),
     -- | Optional. Amounts for 2M and 1G hugepages
     hugepages :: (Core.Maybe HugepagesConfig),
-    -- | The Linux kernel parameters to be applied to the nodes and all pods running on the nodes. The following parameters are supported. net.core.busy/poll net.core.busy/read net.core.netdev/max/backlog net.core.rmem/max net.core.wmem/default net.core.wmem/max net.core.optmem/max net.core.somaxconn net.ipv4.tcp/rmem net.ipv4.tcp/wmem net.ipv4.tcp/tw/reuse kernel.shmmni kernel.shmmax kernel.shmall
+    -- | The Linux kernel parameters to be applied to the nodes and all pods running on the nodes. The following parameters are supported. net.core.busy/poll net.core.busy/read net.core.netdev/max/backlog net.core.rmem/max net.core.rmem/default net.core.wmem/default net.core.wmem/max net.core.optmem/max net.core.somaxconn net.ipv4.tcp/rmem net.ipv4.tcp/wmem net.ipv4.tcp/tw/reuse net.netfilter.nf/conntrack/max net.netfilter.nf/conntrack/buckets net.netfilter.nf/conntrack/tcp/timeout/close/wait net.netfilter.nf/conntrack/tcp/timeout/time/wait net.netfilter.nf/conntrack/tcp/timeout/established net.netfilter.nf/conntrack/acct kernel.shmmni kernel.shmmax kernel.shmall vm.max/map_count
     sysctls :: (Core.Maybe LinuxNodeConfig_Sysctls)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4658,7 +4721,7 @@ instance Core.ToJSON LinuxNodeConfig where
           ]
       )
 
--- | The Linux kernel parameters to be applied to the nodes and all pods running on the nodes. The following parameters are supported. net.core.busy/poll net.core.busy/read net.core.netdev/max/backlog net.core.rmem/max net.core.wmem/default net.core.wmem/max net.core.optmem/max net.core.somaxconn net.ipv4.tcp/rmem net.ipv4.tcp/wmem net.ipv4.tcp/tw/reuse kernel.shmmni kernel.shmmax kernel.shmall
+-- | The Linux kernel parameters to be applied to the nodes and all pods running on the nodes. The following parameters are supported. net.core.busy/poll net.core.busy/read net.core.netdev/max/backlog net.core.rmem/max net.core.rmem/default net.core.wmem/default net.core.wmem/max net.core.optmem/max net.core.somaxconn net.ipv4.tcp/rmem net.ipv4.tcp/wmem net.ipv4.tcp/tw/reuse net.netfilter.nf/conntrack/max net.netfilter.nf/conntrack/buckets net.netfilter.nf/conntrack/tcp/timeout/close/wait net.netfilter.nf/conntrack/tcp/timeout/time/wait net.netfilter.nf/conntrack/tcp/timeout/established net.netfilter.nf/conntrack/acct kernel.shmmni kernel.shmmax kernel.shmall vm.max/map_count
 --
 -- /See:/ 'newLinuxNodeConfig_Sysctls' smart constructor.
 newtype LinuxNodeConfig_Sysctls = LinuxNodeConfig_Sysctls
@@ -5078,8 +5141,10 @@ instance Core.ToJSON MaintenanceWindow_MaintenanceExclusions where
 -- | ManagedPrometheusConfig defines the configuration for Google Cloud Managed Service for Prometheus.
 --
 -- /See:/ 'newManagedPrometheusConfig' smart constructor.
-newtype ManagedPrometheusConfig = ManagedPrometheusConfig
-  { -- | Enable Managed Collection.
+data ManagedPrometheusConfig = ManagedPrometheusConfig
+  { -- | GKE Workload Auto-Monitoring Configuration.
+    autoMonitoringConfig :: (Core.Maybe AutoMonitoringConfig),
+    -- | Enable Managed Collection.
     enabled :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5088,18 +5153,29 @@ newtype ManagedPrometheusConfig = ManagedPrometheusConfig
 newManagedPrometheusConfig ::
   ManagedPrometheusConfig
 newManagedPrometheusConfig =
-  ManagedPrometheusConfig {enabled = Core.Nothing}
+  ManagedPrometheusConfig
+    { autoMonitoringConfig = Core.Nothing,
+      enabled = Core.Nothing
+    }
 
 instance Core.FromJSON ManagedPrometheusConfig where
   parseJSON =
     Core.withObject
       "ManagedPrometheusConfig"
-      (\o -> ManagedPrometheusConfig Core.<$> (o Core..:? "enabled"))
+      ( \o ->
+          ManagedPrometheusConfig
+            Core.<$> (o Core..:? "autoMonitoringConfig")
+            Core.<*> (o Core..:? "enabled")
+      )
 
 instance Core.ToJSON ManagedPrometheusConfig where
   toJSON ManagedPrometheusConfig {..} =
     Core.object
-      (Core.catMaybes [("enabled" Core..=) Core.<$> enabled])
+      ( Core.catMaybes
+          [ ("autoMonitoringConfig" Core..=) Core.<$> autoMonitoringConfig,
+            ("enabled" Core..=) Core.<$> enabled
+          ]
+      )
 
 -- | The authentication information for accessing the master endpoint. Authentication can be done using HTTP basic auth or using client certificates.
 --
@@ -5169,7 +5245,7 @@ data MasterAuthorizedNetworksConfig = MasterAuthorizedNetworksConfig
     cidrBlocks :: (Core.Maybe [CidrBlock]),
     -- | Whether or not master authorized networks is enabled.
     enabled :: (Core.Maybe Core.Bool),
-    -- | Whether master is accessbile via Google Compute Engine Public IP addresses.
+    -- | Whether master is accessible via Google Compute Engine Public IP addresses.
     gcpPublicCidrsAccessEnabled :: (Core.Maybe Core.Bool),
     -- | Whether master authorized networks is enforced on private endpoint or not.
     privateEndpointEnforcementEnabled :: (Core.Maybe Core.Bool)
@@ -5412,6 +5488,8 @@ data NetworkConfig = NetworkConfig
     defaultEnablePrivateNodes :: (Core.Maybe Core.Bool),
     -- | Whether the cluster disables default in-node sNAT rules. In-node sNAT rules will be disabled when default/snat/status is disabled. When disabled is set to false, default IP masquerade rules will be applied to the nodes to prevent sNAT on cluster internal traffic.
     defaultSnatStatus :: (Core.Maybe DefaultSnatStatus),
+    -- | Disable L4 load balancer VPC firewalls to enable firewall policies.
+    disableL4LbFirewallReconciliation :: (Core.Maybe Core.Bool),
     -- | DNSConfig contains clusterDNS config for this cluster.
     dnsConfig :: (Core.Maybe DNSConfig),
     -- | Whether CiliumClusterwideNetworkPolicy is enabled on this cluster.
@@ -5428,7 +5506,7 @@ data NetworkConfig = NetworkConfig
     gatewayApiConfig :: (Core.Maybe GatewayAPIConfig),
     -- | Specify the details of in-transit encryption. Now named inter-node transparent encryption.
     inTransitEncryptionConfig :: (Core.Maybe NetworkConfig_InTransitEncryptionConfig),
-    -- | Output only. The relative name of the Google Compute Engine network(https:\/\/cloud.google.com\/compute\/docs\/networks-and-firewalls#networks) to which the cluster is connected. Example: projects\/my-project\/global\/networks\/my-network
+    -- | Output only. The relative name of the Google Compute Engine <https://cloud.google.com/compute/docs/networks-and-firewalls#networks network> to which the cluster is connected. Example: projects\/my-project\/global\/networks\/my-network
     network :: (Core.Maybe Core.Text),
     -- | Network bandwidth tier configuration.
     networkPerformanceConfig :: (Core.Maybe ClusterNetworkPerformanceConfig),
@@ -5449,6 +5527,7 @@ newNetworkConfig =
     { datapathProvider = Core.Nothing,
       defaultEnablePrivateNodes = Core.Nothing,
       defaultSnatStatus = Core.Nothing,
+      disableL4LbFirewallReconciliation = Core.Nothing,
       dnsConfig = Core.Nothing,
       enableCiliumClusterwideNetworkPolicy = Core.Nothing,
       enableFqdnNetworkPolicy = Core.Nothing,
@@ -5473,6 +5552,7 @@ instance Core.FromJSON NetworkConfig where
             Core.<$> (o Core..:? "datapathProvider")
             Core.<*> (o Core..:? "defaultEnablePrivateNodes")
             Core.<*> (o Core..:? "defaultSnatStatus")
+            Core.<*> (o Core..:? "disableL4LbFirewallReconciliation")
             Core.<*> (o Core..:? "dnsConfig")
             Core.<*> (o Core..:? "enableCiliumClusterwideNetworkPolicy")
             Core.<*> (o Core..:? "enableFqdnNetworkPolicy")
@@ -5496,6 +5576,8 @@ instance Core.ToJSON NetworkConfig where
             ("defaultEnablePrivateNodes" Core..=)
               Core.<$> defaultEnablePrivateNodes,
             ("defaultSnatStatus" Core..=) Core.<$> defaultSnatStatus,
+            ("disableL4LbFirewallReconciliation" Core..=)
+              Core.<$> disableL4LbFirewallReconciliation,
             ("dnsConfig" Core..=) Core.<$> dnsConfig,
             ("enableCiliumClusterwideNetworkPolicy" Core..=)
               Core.<$> enableCiliumClusterwideNetworkPolicy,
@@ -5724,7 +5806,7 @@ data NodeConfig = NodeConfig
     localNvmeSsdBlockConfig :: (Core.Maybe LocalNvmeSsdBlockConfig),
     -- | The number of local SSD disks to be attached to the node. The limit for this value is dependent upon the maximum number of disks available on a machine per zone. See: https:\/\/cloud.google.com\/compute\/docs\/disks\/local-ssd for more information.
     localSsdCount :: (Core.Maybe Core.Int32),
-    -- | Specifies which method should be used for encrypting the Local SSDs attahced to the node.
+    -- | Specifies which method should be used for encrypting the Local SSDs attached to the node.
     localSsdEncryptionMode :: (Core.Maybe NodeConfig_LocalSsdEncryptionMode),
     -- | Logging configuration.
     loggingConfig :: (Core.Maybe NodePoolLoggingConfig),
@@ -6064,12 +6146,26 @@ instance Core.ToJSON NodeConfigDefaults where
 --
 -- /See:/ 'newNodeKubeletConfig' smart constructor.
 data NodeKubeletConfig = NodeKubeletConfig
-  { -- | Enable CPU CFS quota enforcement for containers that specify CPU limits. This option is enabled by default which makes kubelet use CFS quota (https:\/\/www.kernel.org\/doc\/Documentation\/scheduler\/sched-bwc.txt) to enforce container CPU limits. Otherwise, CPU limits will not be enforced at all. Disable this option to mitigate CPU throttling problems while still having your pods to be in Guaranteed QoS class by specifying the CPU limits. The default value is \'true\' if unspecified.
+  { -- | Optional. Defines a comma-separated allowlist of unsafe sysctls or sysctl patterns (ending in @*@). The unsafe namespaced sysctl groups are @kernel.shm*@, @kernel.msg*@, @kernel.sem@, @fs.mqueue.*@, and @net.*@. Leaving this allowlist empty means they cannot be set on Pods. To allow certain sysctls or sysctl patterns to be set on Pods, list them separated by commas. For example: @kernel.msg*,net.ipv4.route.min_pmtu@. See https:\/\/kubernetes.io\/docs\/tasks\/administer-cluster\/sysctl-cluster\/ for more details.
+    allowedUnsafeSysctls :: (Core.Maybe [Core.Text]),
+    -- | Optional. Defines the maximum number of container log files that can be present for a container. See https:\/\/kubernetes.io\/docs\/concepts\/cluster-administration\/logging\/#log-rotation The value must be an integer between 2 and 10, inclusive. The default value is 5 if unspecified.
+    containerLogMaxFiles :: (Core.Maybe Core.Int32),
+    -- | Optional. Defines the maximum size of the container log file before it is rotated. See https:\/\/kubernetes.io\/docs\/concepts\/cluster-administration\/logging\/#log-rotation Valid format is positive number + unit, e.g. 100Ki, 10Mi. Valid units are Ki, Mi, Gi. The value must be between 10Mi and 500Mi, inclusive. Note that the total container log size (container/log/max/size * container/log/max/files) cannot exceed 1% of the total storage of the node, to avoid disk pressure caused by log files. The default value is 10Mi if unspecified.
+    containerLogMaxSize :: (Core.Maybe Core.Text),
+    -- | Enable CPU CFS quota enforcement for containers that specify CPU limits. This option is enabled by default which makes kubelet use CFS quota (https:\/\/www.kernel.org\/doc\/Documentation\/scheduler\/sched-bwc.txt) to enforce container CPU limits. Otherwise, CPU limits will not be enforced at all. Disable this option to mitigate CPU throttling problems while still having your pods to be in Guaranteed QoS class by specifying the CPU limits. The default value is \'true\' if unspecified.
     cpuCfsQuota :: (Core.Maybe Core.Bool),
     -- | Set the CPU CFS quota period value \'cpu.cfs/period/us\'. The string must be a sequence of decimal numbers, each with optional fraction and a unit suffix, such as \"300ms\". Valid time units are \"ns\", \"us\" (or \"µs\"), \"ms\", \"s\", \"m\", \"h\". The value must be a positive duration.
     cpuCfsQuotaPeriod :: (Core.Maybe Core.Text),
     -- | Control the CPU management policy on the node. See https:\/\/kubernetes.io\/docs\/tasks\/administer-cluster\/cpu-management-policies\/ The following values are allowed. * \"none\": the default, which represents the existing scheduling behavior. * \"static\": allows pods with certain resource characteristics to be granted increased CPU affinity and exclusivity on the node. The default value is \'none\' if unspecified.
     cpuManagerPolicy :: (Core.Maybe Core.Text),
+    -- | Optional. Defines the percent of disk usage after which image garbage collection is always run. The percent is calculated as this field value out of 100. The value must be between 10 and 85, inclusive and greater than image/gc/low/threshold/percent. The default value is 85 if unspecified.
+    imageGcHighThresholdPercent :: (Core.Maybe Core.Int32),
+    -- | Optional. Defines the percent of disk usage before which image garbage collection is never run. Lowest disk usage to garbage collect to. The percent is calculated as this field value out of 100. The value must be between 10 and 85, inclusive and smaller than image/gc/high/threshold/percent. The default value is 80 if unspecified.
+    imageGcLowThresholdPercent :: (Core.Maybe Core.Int32),
+    -- | Optional. Defines the maximum age an image can be unused before it is garbage collected. The string must be a sequence of decimal numbers, each with optional fraction and a unit suffix, such as \"300s\", \"1.5h\", and \"2h45m\". Valid time units are \"ns\", \"us\" (or \"µs\"), \"ms\", \"s\", \"m\", \"h\". The value must be a positive duration greater than image/minimum/gc_age or \"0s\". The default value is \"0s\" if unspecified, which disables this field, meaning images won\'t be garbage collected based on being unused for too long.
+    imageMaximumGcAge :: (Core.Maybe Core.Text),
+    -- | Optional. Defines the minimum age for an unused image before it is garbage collected. The string must be a sequence of decimal numbers, each with optional fraction and a unit suffix, such as \"300s\", \"1.5h\", and \"2h45m\". Valid time units are \"ns\", \"us\" (or \"µs\"), \"ms\", \"s\", \"m\", \"h\". The value must be a positive duration less than or equal to 2 minutes. The default value is \"2m0s\" if unspecified.
+    imageMinimumGcAge :: (Core.Maybe Core.Text),
     -- | Enable or disable Kubelet read only port.
     insecureKubeletReadonlyPortEnabled :: (Core.Maybe Core.Bool),
     -- | Set the Pod PID limits. See https:\/\/kubernetes.io\/docs\/concepts\/policy\/pid-limiting\/#pod-pid-limits Controls the maximum number of processes allowed to run in a pod. The value must be greater than or equal to 1024 and less than 4194304.
@@ -6082,9 +6178,16 @@ newNodeKubeletConfig ::
   NodeKubeletConfig
 newNodeKubeletConfig =
   NodeKubeletConfig
-    { cpuCfsQuota = Core.Nothing,
+    { allowedUnsafeSysctls = Core.Nothing,
+      containerLogMaxFiles = Core.Nothing,
+      containerLogMaxSize = Core.Nothing,
+      cpuCfsQuota = Core.Nothing,
       cpuCfsQuotaPeriod = Core.Nothing,
       cpuManagerPolicy = Core.Nothing,
+      imageGcHighThresholdPercent = Core.Nothing,
+      imageGcLowThresholdPercent = Core.Nothing,
+      imageMaximumGcAge = Core.Nothing,
+      imageMinimumGcAge = Core.Nothing,
       insecureKubeletReadonlyPortEnabled = Core.Nothing,
       podPidsLimit = Core.Nothing
     }
@@ -6095,9 +6198,16 @@ instance Core.FromJSON NodeKubeletConfig where
       "NodeKubeletConfig"
       ( \o ->
           NodeKubeletConfig
-            Core.<$> (o Core..:? "cpuCfsQuota")
+            Core.<$> (o Core..:? "allowedUnsafeSysctls")
+            Core.<*> (o Core..:? "containerLogMaxFiles")
+            Core.<*> (o Core..:? "containerLogMaxSize")
+            Core.<*> (o Core..:? "cpuCfsQuota")
             Core.<*> (o Core..:? "cpuCfsQuotaPeriod")
             Core.<*> (o Core..:? "cpuManagerPolicy")
+            Core.<*> (o Core..:? "imageGcHighThresholdPercent")
+            Core.<*> (o Core..:? "imageGcLowThresholdPercent")
+            Core.<*> (o Core..:? "imageMaximumGcAge")
+            Core.<*> (o Core..:? "imageMinimumGcAge")
             Core.<*> (o Core..:? "insecureKubeletReadonlyPortEnabled")
             Core.<*> (o Core..:? "podPidsLimit" Core.<&> Core.fmap Core.fromAsText)
       )
@@ -6106,9 +6216,18 @@ instance Core.ToJSON NodeKubeletConfig where
   toJSON NodeKubeletConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("cpuCfsQuota" Core..=) Core.<$> cpuCfsQuota,
+          [ ("allowedUnsafeSysctls" Core..=) Core.<$> allowedUnsafeSysctls,
+            ("containerLogMaxFiles" Core..=) Core.<$> containerLogMaxFiles,
+            ("containerLogMaxSize" Core..=) Core.<$> containerLogMaxSize,
+            ("cpuCfsQuota" Core..=) Core.<$> cpuCfsQuota,
             ("cpuCfsQuotaPeriod" Core..=) Core.<$> cpuCfsQuotaPeriod,
             ("cpuManagerPolicy" Core..=) Core.<$> cpuManagerPolicy,
+            ("imageGcHighThresholdPercent" Core..=)
+              Core.<$> imageGcHighThresholdPercent,
+            ("imageGcLowThresholdPercent" Core..=)
+              Core.<$> imageGcLowThresholdPercent,
+            ("imageMaximumGcAge" Core..=) Core.<$> imageMaximumGcAge,
+            ("imageMinimumGcAge" Core..=) Core.<$> imageMinimumGcAge,
             ("insecureKubeletReadonlyPortEnabled" Core..=)
               Core.<$> insecureKubeletReadonlyPortEnabled,
             ("podPidsLimit" Core..=) Core.. Core.AsText Core.<$> podPidsLimit
@@ -6291,7 +6410,9 @@ instance Core.ToJSON NodeNetworkConfig where
 --
 -- /See:/ 'newNodePool' smart constructor.
 data NodePool = NodePool
-  { -- | Autoscaler configuration for this NodePool. Autoscaler is enabled only if a valid configuration is present.
+  { -- | Specifies the autopilot configuration for this node pool. This field is exclusively reserved for Cluster Autoscaler to implement go\/gke-managed-nodes-ccc-api
+    autopilotConfig :: (Core.Maybe AutopilotConfig),
+    -- | Autoscaler configuration for this NodePool. Autoscaler is enabled only if a valid configuration is present.
     autoscaling :: (Core.Maybe NodePoolAutoscaling),
     -- | Enable best effort provisioning for nodes
     bestEffortProvisioning :: (Core.Maybe BestEffortProvisioning),
@@ -6341,7 +6462,8 @@ newNodePool ::
   NodePool
 newNodePool =
   NodePool
-    { autoscaling = Core.Nothing,
+    { autopilotConfig = Core.Nothing,
+      autoscaling = Core.Nothing,
       bestEffortProvisioning = Core.Nothing,
       conditions = Core.Nothing,
       config = Core.Nothing,
@@ -6370,7 +6492,8 @@ instance Core.FromJSON NodePool where
       "NodePool"
       ( \o ->
           NodePool
-            Core.<$> (o Core..:? "autoscaling")
+            Core.<$> (o Core..:? "autopilotConfig")
+            Core.<*> (o Core..:? "autoscaling")
             Core.<*> (o Core..:? "bestEffortProvisioning")
             Core.<*> (o Core..:? "conditions")
             Core.<*> (o Core..:? "config")
@@ -6397,7 +6520,8 @@ instance Core.ToJSON NodePool where
   toJSON NodePool {..} =
     Core.object
       ( Core.catMaybes
-          [ ("autoscaling" Core..=) Core.<$> autoscaling,
+          [ ("autopilotConfig" Core..=) Core.<$> autopilotConfig,
+            ("autoscaling" Core..=) Core.<$> autoscaling,
             ("bestEffortProvisioning" Core..=) Core.<$> bestEffortProvisioning,
             ("conditions" Core..=) Core.<$> conditions,
             ("config" Core..=) Core.<$> config,
@@ -9668,12 +9792,18 @@ data UpgradeInfoEvent = UpgradeInfoEvent
     description :: (Core.Maybe Core.Text),
     -- | The time when the operation ended.
     endTime :: (Core.Maybe Core.DateTime),
+    -- | The type of the event.
+    eventType :: (Core.Maybe UpgradeInfoEvent_EventType),
+    -- | The end of extended support timestamp.
+    extendedSupportEndTime :: (Core.Maybe Core.DateTime),
     -- | The operation associated with this upgrade.
     operation :: (Core.Maybe Core.Text),
     -- | Optional relative path to the resource. For example in node pool upgrades, the relative path of the node pool.
     resource :: (Core.Maybe Core.Text),
     -- | The resource type associated with the upgrade.
     resourceType :: (Core.Maybe UpgradeInfoEvent_ResourceType),
+    -- | The end of standard support timestamp.
+    standardSupportEndTime :: (Core.Maybe Core.DateTime),
     -- | The time when the operation was started.
     startTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The state of the upgrade.
@@ -9691,9 +9821,12 @@ newUpgradeInfoEvent =
     { currentVersion = Core.Nothing,
       description = Core.Nothing,
       endTime = Core.Nothing,
+      eventType = Core.Nothing,
+      extendedSupportEndTime = Core.Nothing,
       operation = Core.Nothing,
       resource = Core.Nothing,
       resourceType = Core.Nothing,
+      standardSupportEndTime = Core.Nothing,
       startTime = Core.Nothing,
       state = Core.Nothing,
       targetVersion = Core.Nothing
@@ -9708,9 +9841,12 @@ instance Core.FromJSON UpgradeInfoEvent where
             Core.<$> (o Core..:? "currentVersion")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "eventType")
+            Core.<*> (o Core..:? "extendedSupportEndTime")
             Core.<*> (o Core..:? "operation")
             Core.<*> (o Core..:? "resource")
             Core.<*> (o Core..:? "resourceType")
+            Core.<*> (o Core..:? "standardSupportEndTime")
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "targetVersion")
@@ -9723,9 +9859,12 @@ instance Core.ToJSON UpgradeInfoEvent where
           [ ("currentVersion" Core..=) Core.<$> currentVersion,
             ("description" Core..=) Core.<$> description,
             ("endTime" Core..=) Core.<$> endTime,
+            ("eventType" Core..=) Core.<$> eventType,
+            ("extendedSupportEndTime" Core..=) Core.<$> extendedSupportEndTime,
             ("operation" Core..=) Core.<$> operation,
             ("resource" Core..=) Core.<$> resource,
             ("resourceType" Core..=) Core.<$> resourceType,
+            ("standardSupportEndTime" Core..=) Core.<$> standardSupportEndTime,
             ("startTime" Core..=) Core.<$> startTime,
             ("state" Core..=) Core.<$> state,
             ("targetVersion" Core..=) Core.<$> targetVersion
@@ -10086,9 +10225,11 @@ instance Core.ToJSON WorkloadMetadataConfig where
 -- | WorkloadPolicyConfig is the configuration related to GCW workload policy
 --
 -- /See:/ 'newWorkloadPolicyConfig' smart constructor.
-newtype WorkloadPolicyConfig = WorkloadPolicyConfig
+data WorkloadPolicyConfig = WorkloadPolicyConfig
   { -- | If true, workloads can use NET_ADMIN capability.
-    allowNetAdmin :: (Core.Maybe Core.Bool)
+    allowNetAdmin :: (Core.Maybe Core.Bool),
+    -- | If true, enables the GCW Auditor that audits workloads on standard clusters.
+    autopilotCompatibilityAuditingEnabled :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -10096,15 +10237,27 @@ newtype WorkloadPolicyConfig = WorkloadPolicyConfig
 newWorkloadPolicyConfig ::
   WorkloadPolicyConfig
 newWorkloadPolicyConfig =
-  WorkloadPolicyConfig {allowNetAdmin = Core.Nothing}
+  WorkloadPolicyConfig
+    { allowNetAdmin = Core.Nothing,
+      autopilotCompatibilityAuditingEnabled = Core.Nothing
+    }
 
 instance Core.FromJSON WorkloadPolicyConfig where
   parseJSON =
     Core.withObject
       "WorkloadPolicyConfig"
-      (\o -> WorkloadPolicyConfig Core.<$> (o Core..:? "allowNetAdmin"))
+      ( \o ->
+          WorkloadPolicyConfig
+            Core.<$> (o Core..:? "allowNetAdmin")
+            Core.<*> (o Core..:? "autopilotCompatibilityAuditingEnabled")
+      )
 
 instance Core.ToJSON WorkloadPolicyConfig where
   toJSON WorkloadPolicyConfig {..} =
     Core.object
-      (Core.catMaybes [("allowNetAdmin" Core..=) Core.<$> allowNetAdmin])
+      ( Core.catMaybes
+          [ ("allowNetAdmin" Core..=) Core.<$> allowNetAdmin,
+            ("autopilotCompatibilityAuditingEnabled" Core..=)
+              Core.<$> autopilotCompatibilityAuditingEnabled
+          ]
+      )

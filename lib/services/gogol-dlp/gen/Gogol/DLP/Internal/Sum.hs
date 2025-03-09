@@ -240,6 +240,15 @@ module Gogol.DLP.Internal.Sum
         ..
       ),
 
+    -- * GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility
+    GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility
+      ( GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility_RESOURCEVISIBILITYUNSPECIFIED,
+        GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility_RESOURCEVISIBILITYPUBLIC,
+        GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility_RESOURCEVISIBILITYINCONCLUSIVE,
+        GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility_RESOURCEVISIBILITYRESTRICTED,
+        ..
+      ),
+
     -- * GooglePrivacyDlpV2DataProfilePubSubMessage_Event
     GooglePrivacyDlpV2DataProfilePubSubMessage_Event
       ( GooglePrivacyDlpV2DataProfilePubSubMessage_Event_EVENTTYPEUNSPECIFIED,
@@ -423,6 +432,15 @@ module Gogol.DLP.Internal.Sum
         ..
       ),
 
+    -- * GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency
+    GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency
+      ( GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency_UPDATEFREQUENCYUNSPECIFIED,
+        GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency_UPDATEFREQUENCYNEVER,
+        GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency_UPDATEFREQUENCYDAILY,
+        GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency_UPDATEFREQUENCYMONTHLY,
+        ..
+      ),
+
     -- * GooglePrivacyDlpV2DlpJob_State
     GooglePrivacyDlpV2DlpJob_State
       ( GooglePrivacyDlpV2DlpJob_State_JOBSTATEUNSPECIFIED,
@@ -536,6 +554,7 @@ module Gogol.DLP.Internal.Sum
         GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_China,
         GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Colombia,
         GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Croatia,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Czechia,
         GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Denmark,
         GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_France,
         GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Finland,
@@ -586,6 +605,7 @@ module Gogol.DLP.Internal.Sum
         GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_GOVERNMENTID,
         GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Document,
         GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_CONTEXTUALINFORMATION,
+        GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Custom,
         ..
       ),
 
@@ -1823,6 +1843,43 @@ pattern GooglePrivacyDlpV2CustomInfoType_Likelihood_VERYLIKELY = GooglePrivacyDl
   GooglePrivacyDlpV2CustomInfoType_Likelihood
   #-}
 
+-- | How broadly a resource has been shared.
+newtype GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility = GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility {fromGooglePrivacyDlpV2DataProfileFinding_ResourceVisibility :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unused.
+pattern GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility_RESOURCEVISIBILITYUNSPECIFIED :: GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility
+pattern GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility_RESOURCEVISIBILITYUNSPECIFIED = GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility "RESOURCE_VISIBILITY_UNSPECIFIED"
+
+-- | Visible to any user.
+pattern GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility_RESOURCEVISIBILITYPUBLIC :: GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility
+pattern GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility_RESOURCEVISIBILITYPUBLIC = GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility "RESOURCE_VISIBILITY_PUBLIC"
+
+-- | May contain public items. For example, if a Cloud Storage bucket has uniform bucket level access disabled, some objects inside it may be public, but none are known yet.
+pattern GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility_RESOURCEVISIBILITYINCONCLUSIVE :: GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility
+pattern GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility_RESOURCEVISIBILITYINCONCLUSIVE = GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility "RESOURCE_VISIBILITY_INCONCLUSIVE"
+
+-- | Visible only to specific users.
+pattern GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility_RESOURCEVISIBILITYRESTRICTED :: GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility
+pattern GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility_RESOURCEVISIBILITYRESTRICTED = GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility "RESOURCE_VISIBILITY_RESTRICTED"
+
+{-# COMPLETE
+  GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility_RESOURCEVISIBILITYUNSPECIFIED,
+  GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility_RESOURCEVISIBILITYPUBLIC,
+  GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility_RESOURCEVISIBILITYINCONCLUSIVE,
+  GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility_RESOURCEVISIBILITYRESTRICTED,
+  GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility
+  #-}
+
 -- | The event that caused the Pub\/Sub message to be sent.
 newtype GooglePrivacyDlpV2DataProfilePubSubMessage_Event = GooglePrivacyDlpV2DataProfilePubSubMessage_Event {fromGooglePrivacyDlpV2DataProfilePubSubMessage_Event :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -2191,11 +2248,11 @@ pattern GooglePrivacyDlpV2DiscoveryCloudStorageConditions_IncludedBucketAttribut
 pattern GooglePrivacyDlpV2DiscoveryCloudStorageConditions_IncludedBucketAttributesItem_ALLSUPPORTEDBUCKETS :: GooglePrivacyDlpV2DiscoveryCloudStorageConditions_IncludedBucketAttributesItem
 pattern GooglePrivacyDlpV2DiscoveryCloudStorageConditions_IncludedBucketAttributesItem_ALLSUPPORTEDBUCKETS = GooglePrivacyDlpV2DiscoveryCloudStorageConditions_IncludedBucketAttributesItem "ALL_SUPPORTED_BUCKETS"
 
--- | Buckets with autoclass disabled (https:\/\/cloud.google.com\/storage\/docs\/autoclass). Only one of AUTOCLASS/DISABLED or AUTOCLASS/ENABLED should be set.
+-- | Buckets with <https://cloud.google.com/storage/docs/autoclass Autoclass> disabled. Only one of AUTOCLASS/DISABLED or AUTOCLASS/ENABLED should be set.
 pattern GooglePrivacyDlpV2DiscoveryCloudStorageConditions_IncludedBucketAttributesItem_AUTOCLASSDISABLED :: GooglePrivacyDlpV2DiscoveryCloudStorageConditions_IncludedBucketAttributesItem
 pattern GooglePrivacyDlpV2DiscoveryCloudStorageConditions_IncludedBucketAttributesItem_AUTOCLASSDISABLED = GooglePrivacyDlpV2DiscoveryCloudStorageConditions_IncludedBucketAttributesItem "AUTOCLASS_DISABLED"
 
--- | Buckets with autoclass enabled (https:\/\/cloud.google.com\/storage\/docs\/autoclass). Only one of AUTOCLASS/DISABLED or AUTOCLASS/ENABLED should be set. Scanning Autoclass-enabled buckets can affect object storage classes.
+-- | Buckets with <https://cloud.google.com/storage/docs/autoclass Autoclass> enabled. Only one of AUTOCLASS/DISABLED or AUTOCLASS/ENABLED should be set. Scanning Autoclass-enabled buckets can affect object storage classes.
 pattern GooglePrivacyDlpV2DiscoveryCloudStorageConditions_IncludedBucketAttributesItem_AUTOCLASSENABLED :: GooglePrivacyDlpV2DiscoveryCloudStorageConditions_IncludedBucketAttributesItem
 pattern GooglePrivacyDlpV2DiscoveryCloudStorageConditions_IncludedBucketAttributesItem_AUTOCLASSENABLED = GooglePrivacyDlpV2DiscoveryCloudStorageConditions_IncludedBucketAttributesItem "AUTOCLASS_ENABLED"
 
@@ -2577,6 +2634,43 @@ pattern GooglePrivacyDlpV2DiscoveryTableModifiedCadence_TypesItem_TABLEMODIFIEDT
   GooglePrivacyDlpV2DiscoveryTableModifiedCadence_TypesItem_TABLEMODIFICATIONUNSPECIFIED,
   GooglePrivacyDlpV2DiscoveryTableModifiedCadence_TypesItem_TABLEMODIFIEDTIMESTAMP,
   GooglePrivacyDlpV2DiscoveryTableModifiedCadence_TypesItem
+  #-}
+
+-- | If you set this field, profiles are refreshed at this frequency regardless of whether the underlying datasets have changed. Defaults to never.
+newtype GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency = GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency {fromGooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified.
+pattern GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency_UPDATEFREQUENCYUNSPECIFIED :: GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency
+pattern GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency_UPDATEFREQUENCYUNSPECIFIED = GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency "UPDATE_FREQUENCY_UNSPECIFIED"
+
+-- | After the data profile is created, it will never be updated.
+pattern GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency_UPDATEFREQUENCYNEVER :: GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency
+pattern GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency_UPDATEFREQUENCYNEVER = GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency "UPDATE_FREQUENCY_NEVER"
+
+-- | The data profile can be updated up to once every 24 hours.
+pattern GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency_UPDATEFREQUENCYDAILY :: GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency
+pattern GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency_UPDATEFREQUENCYDAILY = GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency "UPDATE_FREQUENCY_DAILY"
+
+-- | The data profile can be updated up to once every 30 days. Default.
+pattern GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency_UPDATEFREQUENCYMONTHLY :: GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency
+pattern GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency_UPDATEFREQUENCYMONTHLY = GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency "UPDATE_FREQUENCY_MONTHLY"
+
+{-# COMPLETE
+  GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency_UPDATEFREQUENCYUNSPECIFIED,
+  GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency_UPDATEFREQUENCYNEVER,
+  GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency_UPDATEFREQUENCYDAILY,
+  GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency_UPDATEFREQUENCYMONTHLY,
+  GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency
   #-}
 
 -- | State of a job.
@@ -3053,6 +3147,10 @@ pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Colombia = GooglePri
 pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Croatia :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
 pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Croatia = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "CROATIA"
 
+-- | The infoType is typically used in Czechia.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Czechia :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Czechia = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "CZECHIA"
+
 -- | The infoType is typically used in Denmark.
 pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Denmark :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
 pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Denmark = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "DENMARK"
@@ -3216,6 +3314,7 @@ pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Internal = GooglePri
   GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_China,
   GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Colombia,
   GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Croatia,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Czechia,
   GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Denmark,
   GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_France,
   GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Finland,
@@ -3301,6 +3400,10 @@ pattern GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Document = GooglePrivacy
 pattern GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_CONTEXTUALINFORMATION :: GooglePrivacyDlpV2InfoTypeCategory_TypeCategory
 pattern GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_CONTEXTUALINFORMATION = GooglePrivacyDlpV2InfoTypeCategory_TypeCategory "CONTEXTUAL_INFORMATION"
 
+-- | Category for @CustomInfoType@ types.
+pattern GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Custom :: GooglePrivacyDlpV2InfoTypeCategory_TypeCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Custom = GooglePrivacyDlpV2InfoTypeCategory_TypeCategory "CUSTOM"
+
 {-# COMPLETE
   GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_TYPEUNSPECIFIED,
   GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Pii,
@@ -3310,6 +3413,7 @@ pattern GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_CONTEXTUALINFORMATION = 
   GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_GOVERNMENTID,
   GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Document,
   GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_CONTEXTUALINFORMATION,
+  GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Custom,
   GooglePrivacyDlpV2InfoTypeCategory_TypeCategory
   #-}
 

@@ -88,6 +88,17 @@ library
     Gogol.Run.Projects.Locations.Services.Revisions.List
     Gogol.Run.Projects.Locations.Services.SetIamPolicy
     Gogol.Run.Projects.Locations.Services.TestIamPermissions
+    Gogol.Run.Projects.Locations.WorkerPools.Create
+    Gogol.Run.Projects.Locations.WorkerPools.Delete
+    Gogol.Run.Projects.Locations.WorkerPools.Get
+    Gogol.Run.Projects.Locations.WorkerPools.GetIamPolicy
+    Gogol.Run.Projects.Locations.WorkerPools.List
+    Gogol.Run.Projects.Locations.WorkerPools.Patch
+    Gogol.Run.Projects.Locations.WorkerPools.Revisions.Delete
+    Gogol.Run.Projects.Locations.WorkerPools.Revisions.Get
+    Gogol.Run.Projects.Locations.WorkerPools.Revisions.List
+    Gogol.Run.Projects.Locations.WorkerPools.SetIamPolicy
+    Gogol.Run.Projects.Locations.WorkerPools.TestIamPermissions
     Gogol.Run.Types
 
   other-modules:

@@ -231,6 +231,7 @@ module Gogol.ServiceNetworking.Internal.Sum
         ValidateConsumerConfigResponse_ValidationError_RANGESDELETEDLATER,
         ValidateConsumerConfigResponse_ValidationError_COMPUTEAPINOTENABLED,
         ValidateConsumerConfigResponse_ValidationError_USEPERMISSIONNOTFOUND,
+        ValidateConsumerConfigResponse_ValidationError_SNSERVICEAGENTPERMISSIONDENIEDONCONSUMERPROJECT,
         ..
       ),
   )
@@ -1116,6 +1117,10 @@ pattern ValidateConsumerConfigResponse_ValidationError_COMPUTEAPINOTENABLED = Va
 pattern ValidateConsumerConfigResponse_ValidationError_USEPERMISSIONNOTFOUND :: ValidateConsumerConfigResponse_ValidationError
 pattern ValidateConsumerConfigResponse_ValidationError_USEPERMISSIONNOTFOUND = ValidateConsumerConfigResponse_ValidationError "USE_PERMISSION_NOT_FOUND"
 
+-- | The SN service agent {service-\@service-networking.iam.gserviceaccount.com} does not have the SN service agent role on the consumer project.
+pattern ValidateConsumerConfigResponse_ValidationError_SNSERVICEAGENTPERMISSIONDENIEDONCONSUMERPROJECT :: ValidateConsumerConfigResponse_ValidationError
+pattern ValidateConsumerConfigResponse_ValidationError_SNSERVICEAGENTPERMISSIONDENIEDONCONSUMERPROJECT = ValidateConsumerConfigResponse_ValidationError "SN_SERVICE_AGENT_PERMISSION_DENIED_ON_CONSUMER_PROJECT"
+
 {-# COMPLETE
   ValidateConsumerConfigResponse_ValidationError_VALIDATIONERRORUNSPECIFIED,
   ValidateConsumerConfigResponse_ValidationError_VALIDATIONNOTREQUESTED,
@@ -1132,5 +1137,6 @@ pattern ValidateConsumerConfigResponse_ValidationError_USEPERMISSIONNOTFOUND = V
   ValidateConsumerConfigResponse_ValidationError_RANGESDELETEDLATER,
   ValidateConsumerConfigResponse_ValidationError_COMPUTEAPINOTENABLED,
   ValidateConsumerConfigResponse_ValidationError_USEPERMISSIONNOTFOUND,
+  ValidateConsumerConfigResponse_ValidationError_SNSERVICEAGENTPERMISSIONDENIEDONCONSUMERPROJECT,
   ValidateConsumerConfigResponse_ValidationError
   #-}

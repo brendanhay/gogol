@@ -1795,7 +1795,9 @@ instance Core.ToJSON Glossary where
 --
 -- /See:/ 'newGlossaryConfig' smart constructor.
 data GlossaryConfig = GlossaryConfig
-  { -- | Required. The @glossary@ to be applied for this translation. The format depends on the glossary: - User-provided custom glossary: @projects\/{project-number-or-id}\/locations\/{location-id}\/glossaries\/{glossary-id}@
+  { -- | Optional. If set to true, the glossary will be used for contextual translation.
+    contextualTranslationEnabled :: (Core.Maybe Core.Bool),
+    -- | Required. The @glossary@ to be applied for this translation. The format depends on the glossary: - User-provided custom glossary: @projects\/{project-number-or-id}\/locations\/{location-id}\/glossaries\/{glossary-id}@
     glossary :: (Core.Maybe Core.Text),
     -- | Optional. Indicates match is case insensitive. The default value is @false@ if missing.
     ignoreCase :: (Core.Maybe Core.Bool)
@@ -1807,7 +1809,8 @@ newGlossaryConfig ::
   GlossaryConfig
 newGlossaryConfig =
   GlossaryConfig
-    { glossary = Core.Nothing,
+    { contextualTranslationEnabled = Core.Nothing,
+      glossary = Core.Nothing,
       ignoreCase = Core.Nothing
     }
 
@@ -1817,7 +1820,8 @@ instance Core.FromJSON GlossaryConfig where
       "GlossaryConfig"
       ( \o ->
           GlossaryConfig
-            Core.<$> (o Core..:? "glossary")
+            Core.<$> (o Core..:? "contextualTranslationEnabled")
+            Core.<*> (o Core..:? "glossary")
             Core.<*> (o Core..:? "ignoreCase")
       )
 
@@ -1825,7 +1829,9 @@ instance Core.ToJSON GlossaryConfig where
   toJSON GlossaryConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("glossary" Core..=) Core.<$> glossary,
+          [ ("contextualTranslationEnabled" Core..=)
+              Core.<$> contextualTranslationEnabled,
+            ("glossary" Core..=) Core.<$> glossary,
             ("ignoreCase" Core..=) Core.<$> ignoreCase
           ]
       )
@@ -3482,7 +3488,9 @@ instance Core.ToJSON TranslateDocumentResponse where
 --
 -- /See:/ 'newTranslateTextGlossaryConfig' smart constructor.
 data TranslateTextGlossaryConfig = TranslateTextGlossaryConfig
-  { -- | Required. The @glossary@ to be applied for this translation. The format depends on the glossary: - User-provided custom glossary: @projects\/{project-number-or-id}\/locations\/{location-id}\/glossaries\/{glossary-id}@
+  { -- | Optional. If set to true, the glossary will be used for contextual translation.
+    contextualTranslationEnabled :: (Core.Maybe Core.Bool),
+    -- | Required. The @glossary@ to be applied for this translation. The format depends on the glossary: - User-provided custom glossary: @projects\/{project-number-or-id}\/locations\/{location-id}\/glossaries\/{glossary-id}@
     glossary :: (Core.Maybe Core.Text),
     -- | Optional. Indicates match is case insensitive. The default value is @false@ if missing.
     ignoreCase :: (Core.Maybe Core.Bool)
@@ -3494,7 +3502,9 @@ newTranslateTextGlossaryConfig ::
   TranslateTextGlossaryConfig
 newTranslateTextGlossaryConfig =
   TranslateTextGlossaryConfig
-    { glossary = Core.Nothing,
+    { contextualTranslationEnabled =
+        Core.Nothing,
+      glossary = Core.Nothing,
       ignoreCase = Core.Nothing
     }
 
@@ -3504,7 +3514,8 @@ instance Core.FromJSON TranslateTextGlossaryConfig where
       "TranslateTextGlossaryConfig"
       ( \o ->
           TranslateTextGlossaryConfig
-            Core.<$> (o Core..:? "glossary")
+            Core.<$> (o Core..:? "contextualTranslationEnabled")
+            Core.<*> (o Core..:? "glossary")
             Core.<*> (o Core..:? "ignoreCase")
       )
 
@@ -3512,7 +3523,9 @@ instance Core.ToJSON TranslateTextGlossaryConfig where
   toJSON TranslateTextGlossaryConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("glossary" Core..=) Core.<$> glossary,
+          [ ("contextualTranslationEnabled" Core..=)
+              Core.<$> contextualTranslationEnabled,
+            ("glossary" Core..=) Core.<$> glossary,
             ("ignoreCase" Core..=) Core.<$> ignoreCase
           ]
       )

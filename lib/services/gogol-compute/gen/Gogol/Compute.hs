@@ -1220,6 +1220,11 @@ module Gogol.Compute
     ComputeInstancesRemoveResourcePolicies (..),
     newComputeInstancesRemoveResourcePolicies,
 
+    -- ** compute.instances.reportHostAsFaulty
+    ComputeInstancesReportHostAsFaultyResource,
+    ComputeInstancesReportHostAsFaulty (..),
+    newComputeInstancesReportHostAsFaulty,
+
     -- ** compute.instances.reset
     ComputeInstancesResetResource,
     ComputeInstancesReset (..),
@@ -1715,10 +1720,20 @@ module Gogol.Compute
     ComputeNetworkFirewallPoliciesAddAssociation (..),
     newComputeNetworkFirewallPoliciesAddAssociation,
 
+    -- ** compute.networkFirewallPolicies.addPacketMirroringRule
+    ComputeNetworkFirewallPoliciesAddPacketMirroringRuleResource,
+    ComputeNetworkFirewallPoliciesAddPacketMirroringRule (..),
+    newComputeNetworkFirewallPoliciesAddPacketMirroringRule,
+
     -- ** compute.networkFirewallPolicies.addRule
     ComputeNetworkFirewallPoliciesAddRuleResource,
     ComputeNetworkFirewallPoliciesAddRule (..),
     newComputeNetworkFirewallPoliciesAddRule,
+
+    -- ** compute.networkFirewallPolicies.aggregatedList
+    ComputeNetworkFirewallPoliciesAggregatedListResource,
+    ComputeNetworkFirewallPoliciesAggregatedList (..),
+    newComputeNetworkFirewallPoliciesAggregatedList,
 
     -- ** compute.networkFirewallPolicies.cloneRules
     ComputeNetworkFirewallPoliciesCloneRulesResource,
@@ -1745,6 +1760,11 @@ module Gogol.Compute
     ComputeNetworkFirewallPoliciesGetIamPolicy (..),
     newComputeNetworkFirewallPoliciesGetIamPolicy,
 
+    -- ** compute.networkFirewallPolicies.getPacketMirroringRule
+    ComputeNetworkFirewallPoliciesGetPacketMirroringRuleResource,
+    ComputeNetworkFirewallPoliciesGetPacketMirroringRule (..),
+    newComputeNetworkFirewallPoliciesGetPacketMirroringRule,
+
     -- ** compute.networkFirewallPolicies.getRule
     ComputeNetworkFirewallPoliciesGetRuleResource,
     ComputeNetworkFirewallPoliciesGetRule (..),
@@ -1765,6 +1785,11 @@ module Gogol.Compute
     ComputeNetworkFirewallPoliciesPatch (..),
     newComputeNetworkFirewallPoliciesPatch,
 
+    -- ** compute.networkFirewallPolicies.patchPacketMirroringRule
+    ComputeNetworkFirewallPoliciesPatchPacketMirroringRuleResource,
+    ComputeNetworkFirewallPoliciesPatchPacketMirroringRule (..),
+    newComputeNetworkFirewallPoliciesPatchPacketMirroringRule,
+
     -- ** compute.networkFirewallPolicies.patchRule
     ComputeNetworkFirewallPoliciesPatchRuleResource,
     ComputeNetworkFirewallPoliciesPatchRule (..),
@@ -1774,6 +1799,11 @@ module Gogol.Compute
     ComputeNetworkFirewallPoliciesRemoveAssociationResource,
     ComputeNetworkFirewallPoliciesRemoveAssociation (..),
     newComputeNetworkFirewallPoliciesRemoveAssociation,
+
+    -- ** compute.networkFirewallPolicies.removePacketMirroringRule
+    ComputeNetworkFirewallPoliciesRemovePacketMirroringRuleResource,
+    ComputeNetworkFirewallPoliciesRemovePacketMirroringRule (..),
+    newComputeNetworkFirewallPoliciesRemovePacketMirroringRule,
 
     -- ** compute.networkFirewallPolicies.removeRule
     ComputeNetworkFirewallPoliciesRemoveRuleResource,
@@ -3125,6 +3155,11 @@ module Gogol.Compute
     ComputeRoutersDelete (..),
     newComputeRoutersDelete,
 
+    -- ** compute.routers.deleteRoutePolicy
+    ComputeRoutersDeleteRoutePolicyResource,
+    ComputeRoutersDeleteRoutePolicy (..),
+    newComputeRoutersDeleteRoutePolicy,
+
     -- ** compute.routers.get
     ComputeRoutersGetResource,
     ComputeRoutersGet (..),
@@ -3139,6 +3174,11 @@ module Gogol.Compute
     ComputeRoutersGetNatMappingInfoResource,
     ComputeRoutersGetNatMappingInfo (..),
     newComputeRoutersGetNatMappingInfo,
+
+    -- ** compute.routers.getRoutePolicy
+    ComputeRoutersGetRoutePolicyResource,
+    ComputeRoutersGetRoutePolicy (..),
+    newComputeRoutersGetRoutePolicy,
 
     -- ** compute.routers.getRouterStatus
     ComputeRoutersGetRouterStatusResource,
@@ -3155,10 +3195,25 @@ module Gogol.Compute
     ComputeRoutersList (..),
     newComputeRoutersList,
 
+    -- ** compute.routers.listBgpRoutes
+    ComputeRoutersListBgpRoutesResource,
+    ComputeRoutersListBgpRoutes (..),
+    newComputeRoutersListBgpRoutes,
+
+    -- ** compute.routers.listRoutePolicies
+    ComputeRoutersListRoutePoliciesResource,
+    ComputeRoutersListRoutePolicies (..),
+    newComputeRoutersListRoutePolicies,
+
     -- ** compute.routers.patch
     ComputeRoutersPatchResource,
     ComputeRoutersPatch (..),
     newComputeRoutersPatch,
+
+    -- ** compute.routers.patchRoutePolicy
+    ComputeRoutersPatchRoutePolicyResource,
+    ComputeRoutersPatchRoutePolicy (..),
+    newComputeRoutersPatchRoutePolicy,
 
     -- ** compute.routers.preview
     ComputeRoutersPreviewResource,
@@ -3169,6 +3224,11 @@ module Gogol.Compute
     ComputeRoutersUpdateResource,
     ComputeRoutersUpdate (..),
     newComputeRoutersUpdate,
+
+    -- ** compute.routers.updateRoutePolicy
+    ComputeRoutersUpdateRoutePolicyResource,
+    ComputeRoutersUpdateRoutePolicy (..),
+    newComputeRoutersUpdateRoutePolicy,
 
     -- ** compute.routes.delete
     ComputeRoutesDeleteResource,
@@ -4170,6 +4230,13 @@ module Gogol.Compute
     AllocationAggregateReservationReservedResourceInfoAccelerator (..),
     newAllocationAggregateReservationReservedResourceInfoAccelerator,
 
+    -- ** AllocationReservationSharingPolicy
+    AllocationReservationSharingPolicy (..),
+    newAllocationReservationSharingPolicy,
+
+    -- ** AllocationReservationSharingPolicy_ServiceShareType
+    AllocationReservationSharingPolicy_ServiceShareType (..),
+
     -- ** AllocationResourceStatus
     AllocationResourceStatus (..),
     newAllocationResourceStatus,
@@ -4177,6 +4244,10 @@ module Gogol.Compute
     -- ** AllocationResourceStatusSpecificSKUAllocation
     AllocationResourceStatusSpecificSKUAllocation (..),
     newAllocationResourceStatusSpecificSKUAllocation,
+
+    -- ** AllocationResourceStatusSpecificSKUAllocation_Utilizations
+    AllocationResourceStatusSpecificSKUAllocation_Utilizations (..),
+    newAllocationResourceStatusSpecificSKUAllocation_Utilizations,
 
     -- ** AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk
     AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk (..),
@@ -4400,6 +4471,10 @@ module Gogol.Compute
     BackendBucketUsedBy (..),
     newBackendBucketUsedBy,
 
+    -- ** BackendCustomMetric
+    BackendCustomMetric (..),
+    newBackendCustomMetric,
+
     -- ** BackendService
     BackendService (..),
     newBackendService,
@@ -4469,6 +4544,10 @@ module Gogol.Compute
 
     -- ** BackendServiceConnectionTrackingPolicy_TrackingMode
     BackendServiceConnectionTrackingPolicy_TrackingMode (..),
+
+    -- ** BackendServiceCustomMetric
+    BackendServiceCustomMetric (..),
+    newBackendServiceCustomMetric,
 
     -- ** BackendServiceFailoverPolicy
     BackendServiceFailoverPolicy (..),
@@ -4591,6 +4670,24 @@ module Gogol.Compute
     -- ** BfdStatusPacketCounts
     BfdStatusPacketCounts (..),
     newBfdStatusPacketCounts,
+
+    -- ** BgpRoute
+    BgpRoute (..),
+    newBgpRoute,
+
+    -- ** BgpRoute_Origin
+    BgpRoute_Origin (..),
+
+    -- ** BgpRouteAsPath
+    BgpRouteAsPath (..),
+    newBgpRouteAsPath,
+
+    -- ** BgpRouteAsPath_Type
+    BgpRouteAsPath_Type (..),
+
+    -- ** BgpRouteNetworkLayerReachabilityInformation
+    BgpRouteNetworkLayerReachabilityInformation (..),
+    newBgpRouteNetworkLayerReachabilityInformation,
 
     -- ** Binding
     Binding (..),
@@ -5061,6 +5158,21 @@ module Gogol.Compute
     -- ** FirewallPoliciesListAssociationsResponse
     FirewallPoliciesListAssociationsResponse (..),
     newFirewallPoliciesListAssociationsResponse,
+
+    -- ** FirewallPoliciesScopedList
+    FirewallPoliciesScopedList (..),
+    newFirewallPoliciesScopedList,
+
+    -- ** FirewallPoliciesScopedList_Warning
+    FirewallPoliciesScopedList_Warning (..),
+    newFirewallPoliciesScopedList_Warning,
+
+    -- ** FirewallPoliciesScopedList_Warning_Code
+    FirewallPoliciesScopedList_Warning_Code (..),
+
+    -- ** FirewallPoliciesScopedList_Warning_DataItem
+    FirewallPoliciesScopedList_Warning_DataItem (..),
+    newFirewallPoliciesScopedList_Warning_DataItem,
 
     -- ** FirewallPolicy
     FirewallPolicy (..),
@@ -5751,6 +5863,10 @@ module Gogol.Compute
     InstanceGroupManagerResizeRequestsListResponse_Warning_DataItem (..),
     newInstanceGroupManagerResizeRequestsListResponse_Warning_DataItem,
 
+    -- ** InstanceGroupManagerResourcePolicies
+    InstanceGroupManagerResourcePolicies (..),
+    newInstanceGroupManagerResourcePolicies,
+
     -- ** InstanceGroupManagerStandbyPolicy
     InstanceGroupManagerStandbyPolicy (..),
     newInstanceGroupManagerStandbyPolicy,
@@ -6139,6 +6255,20 @@ module Gogol.Compute
     -- ** InstancesRemoveResourcePoliciesRequest
     InstancesRemoveResourcePoliciesRequest (..),
     newInstancesRemoveResourcePoliciesRequest,
+
+    -- ** InstancesReportHostAsFaultyRequest
+    InstancesReportHostAsFaultyRequest (..),
+    newInstancesReportHostAsFaultyRequest,
+
+    -- ** InstancesReportHostAsFaultyRequest_DisruptionSchedule
+    InstancesReportHostAsFaultyRequest_DisruptionSchedule (..),
+
+    -- ** InstancesReportHostAsFaultyRequestFaultReason
+    InstancesReportHostAsFaultyRequestFaultReason (..),
+    newInstancesReportHostAsFaultyRequestFaultReason,
+
+    -- ** InstancesReportHostAsFaultyRequestFaultReason_Behavior
+    InstancesReportHostAsFaultyRequestFaultReason_Behavior (..),
 
     -- ** InstancesScopedList
     InstancesScopedList (..),
@@ -7029,6 +7159,25 @@ module Gogol.Compute
     NetworkEndpointWithHealthStatus (..),
     newNetworkEndpointWithHealthStatus,
 
+    -- ** NetworkFirewallPolicyAggregatedList
+    NetworkFirewallPolicyAggregatedList (..),
+    newNetworkFirewallPolicyAggregatedList,
+
+    -- ** NetworkFirewallPolicyAggregatedList_Items
+    NetworkFirewallPolicyAggregatedList_Items (..),
+    newNetworkFirewallPolicyAggregatedList_Items,
+
+    -- ** NetworkFirewallPolicyAggregatedList_Warning
+    NetworkFirewallPolicyAggregatedList_Warning (..),
+    newNetworkFirewallPolicyAggregatedList_Warning,
+
+    -- ** NetworkFirewallPolicyAggregatedList_Warning_Code
+    NetworkFirewallPolicyAggregatedList_Warning_Code (..),
+
+    -- ** NetworkFirewallPolicyAggregatedList_Warning_DataItem
+    NetworkFirewallPolicyAggregatedList_Warning_DataItem (..),
+    newNetworkFirewallPolicyAggregatedList_Warning_DataItem,
+
     -- ** NetworkInterface
     NetworkInterface (..),
     newNetworkInterface,
@@ -7179,6 +7328,9 @@ module Gogol.Compute
 
     -- ** NetworkRoutingConfig_BgpInterRegionCost
     NetworkRoutingConfig_BgpInterRegionCost (..),
+
+    -- ** NetworkRoutingConfig_EffectiveBgpInterRegionCost
+    NetworkRoutingConfig_EffectiveBgpInterRegionCost (..),
 
     -- ** NetworkRoutingConfig_RoutingMode
     NetworkRoutingConfig_RoutingMode (..),
@@ -8407,6 +8559,17 @@ module Gogol.Compute
     RouteList_Warning_DataItem (..),
     newRouteList_Warning_DataItem,
 
+    -- ** RoutePolicy
+    RoutePolicy (..),
+    newRoutePolicy,
+
+    -- ** RoutePolicy_Type
+    RoutePolicy_Type (..),
+
+    -- ** RoutePolicyPolicyTerm
+    RoutePolicyPolicyTerm (..),
+    newRoutePolicyPolicyTerm,
+
     -- ** Router
     Router (..),
     newRouter,
@@ -8566,6 +8729,40 @@ module Gogol.Compute
     -- ** RouterStatusResponse
     RouterStatusResponse (..),
     newRouterStatusResponse,
+
+    -- ** RoutersGetRoutePolicyResponse
+    RoutersGetRoutePolicyResponse (..),
+    newRoutersGetRoutePolicyResponse,
+
+    -- ** RoutersListBgpRoutes
+    RoutersListBgpRoutes (..),
+    newRoutersListBgpRoutes,
+
+    -- ** RoutersListBgpRoutes_Warning
+    RoutersListBgpRoutes_Warning (..),
+    newRoutersListBgpRoutes_Warning,
+
+    -- ** RoutersListBgpRoutes_Warning_Code
+    RoutersListBgpRoutes_Warning_Code (..),
+
+    -- ** RoutersListBgpRoutes_Warning_DataItem
+    RoutersListBgpRoutes_Warning_DataItem (..),
+    newRoutersListBgpRoutes_Warning_DataItem,
+
+    -- ** RoutersListRoutePolicies
+    RoutersListRoutePolicies (..),
+    newRoutersListRoutePolicies,
+
+    -- ** RoutersListRoutePolicies_Warning
+    RoutersListRoutePolicies_Warning (..),
+    newRoutersListRoutePolicies_Warning,
+
+    -- ** RoutersListRoutePolicies_Warning_Code
+    RoutersListRoutePolicies_Warning_Code (..),
+
+    -- ** RoutersListRoutePolicies_Warning_DataItem
+    RoutersListRoutePolicies_Warning_DataItem (..),
+    newRoutersListRoutePolicies_Warning_DataItem,
 
     -- ** RoutersPreviewResponse
     RoutersPreviewResponse (..),
@@ -10368,6 +10565,12 @@ module Gogol.Compute
 
     -- ** NetworksListPeeringRoutesDirection
     NetworksListPeeringRoutesDirection (..),
+
+    -- ** RoutersListBgpRoutesAddressFamily
+    RoutersListBgpRoutesAddressFamily (..),
+
+    -- ** RoutersListBgpRoutesRouteType
+    RoutersListBgpRoutesRouteType (..),
   )
 where
 
@@ -10607,6 +10810,7 @@ import Gogol.Compute.Instances.List
 import Gogol.Compute.Instances.ListReferrers
 import Gogol.Compute.Instances.PerformMaintenance
 import Gogol.Compute.Instances.RemoveResourcePolicies
+import Gogol.Compute.Instances.ReportHostAsFaulty
 import Gogol.Compute.Instances.Reset
 import Gogol.Compute.Instances.Resume
 import Gogol.Compute.Instances.SendDiagnosticInterrupt
@@ -10706,18 +10910,23 @@ import Gogol.Compute.NetworkEndpointGroups.List
 import Gogol.Compute.NetworkEndpointGroups.ListNetworkEndpoints
 import Gogol.Compute.NetworkEndpointGroups.TestIamPermissions
 import Gogol.Compute.NetworkFirewallPolicies.AddAssociation
+import Gogol.Compute.NetworkFirewallPolicies.AddPacketMirroringRule
 import Gogol.Compute.NetworkFirewallPolicies.AddRule
+import Gogol.Compute.NetworkFirewallPolicies.AggregatedList
 import Gogol.Compute.NetworkFirewallPolicies.CloneRules
 import Gogol.Compute.NetworkFirewallPolicies.Delete
 import Gogol.Compute.NetworkFirewallPolicies.Get
 import Gogol.Compute.NetworkFirewallPolicies.GetAssociation
 import Gogol.Compute.NetworkFirewallPolicies.GetIamPolicy
+import Gogol.Compute.NetworkFirewallPolicies.GetPacketMirroringRule
 import Gogol.Compute.NetworkFirewallPolicies.GetRule
 import Gogol.Compute.NetworkFirewallPolicies.Insert
 import Gogol.Compute.NetworkFirewallPolicies.List
 import Gogol.Compute.NetworkFirewallPolicies.Patch
+import Gogol.Compute.NetworkFirewallPolicies.PatchPacketMirroringRule
 import Gogol.Compute.NetworkFirewallPolicies.PatchRule
 import Gogol.Compute.NetworkFirewallPolicies.RemoveAssociation
+import Gogol.Compute.NetworkFirewallPolicies.RemovePacketMirroringRule
 import Gogol.Compute.NetworkFirewallPolicies.RemoveRule
 import Gogol.Compute.NetworkFirewallPolicies.SetIamPolicy
 import Gogol.Compute.NetworkFirewallPolicies.TestIamPermissions
@@ -10988,15 +11197,21 @@ import Gogol.Compute.ResourcePolicies.SetIamPolicy
 import Gogol.Compute.ResourcePolicies.TestIamPermissions
 import Gogol.Compute.Routers.AggregatedList
 import Gogol.Compute.Routers.Delete
+import Gogol.Compute.Routers.DeleteRoutePolicy
 import Gogol.Compute.Routers.Get
 import Gogol.Compute.Routers.GetNatIpInfo
 import Gogol.Compute.Routers.GetNatMappingInfo
+import Gogol.Compute.Routers.GetRoutePolicy
 import Gogol.Compute.Routers.GetRouterStatus
 import Gogol.Compute.Routers.Insert
 import Gogol.Compute.Routers.List
+import Gogol.Compute.Routers.ListBgpRoutes
+import Gogol.Compute.Routers.ListRoutePolicies
 import Gogol.Compute.Routers.Patch
+import Gogol.Compute.Routers.PatchRoutePolicy
 import Gogol.Compute.Routers.Preview
 import Gogol.Compute.Routers.Update
+import Gogol.Compute.Routers.UpdateRoutePolicy
 import Gogol.Compute.Routes.Delete
 import Gogol.Compute.Routes.Get
 import Gogol.Compute.Routes.Insert

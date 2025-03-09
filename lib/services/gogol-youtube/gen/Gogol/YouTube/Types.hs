@@ -1261,6 +1261,10 @@ module Gogol.YouTube.Types
     VideoTopicDetails (..),
     newVideoTopicDetails,
 
+    -- ** VideoTrainability
+    VideoTrainability (..),
+    newVideoTrainability,
+
     -- ** WatchSettings
     WatchSettings (..),
     newWatchSettings,

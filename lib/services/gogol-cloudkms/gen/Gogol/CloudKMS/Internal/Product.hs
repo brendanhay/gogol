@@ -63,6 +63,10 @@ module Gogol.CloudKMS.Internal.Product
     CertificateChains (..),
     newCertificateChains,
 
+    -- * ChecksummedData
+    ChecksummedData (..),
+    newChecksummedData,
+
     -- * CryptoKey
     CryptoKey (..),
     newCryptoKey,
@@ -786,6 +790,47 @@ instance Core.ToJSON CertificateChains where
           [ ("caviumCerts" Core..=) Core.<$> caviumCerts,
             ("googleCardCerts" Core..=) Core.<$> googleCardCerts,
             ("googlePartitionCerts" Core..=) Core.<$> googlePartitionCerts
+          ]
+      )
+
+-- | Data with integrity verification field.
+--
+-- /See:/ 'newChecksummedData' smart constructor.
+data ChecksummedData = ChecksummedData
+  { -- | Integrity verification field. A CRC32C checksum of the returned ChecksummedData.data. An integrity check of ChecksummedData.data can be performed by computing the CRC32C checksum of ChecksummedData.data and comparing your results to this field. Discard the response in case of non-matching checksum values, and perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed @2^32-1@, and can be safely downconverted to uint32 in languages that support this type.
+    crc32cChecksum :: (Core.Maybe Core.Int64),
+    -- | Raw Data.
+    data' :: (Core.Maybe Core.Base64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ChecksummedData' with the minimum fields required to make a request.
+newChecksummedData ::
+  ChecksummedData
+newChecksummedData =
+  ChecksummedData
+    { crc32cChecksum = Core.Nothing,
+      data' = Core.Nothing
+    }
+
+instance Core.FromJSON ChecksummedData where
+  parseJSON =
+    Core.withObject
+      "ChecksummedData"
+      ( \o ->
+          ChecksummedData
+            Core.<$> (o Core..:? "crc32cChecksum" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "data")
+      )
+
+instance Core.ToJSON ChecksummedData where
+  toJSON ChecksummedData {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("crc32cChecksum" Core..=)
+              Core.. Core.AsText
+              Core.<$> crc32cChecksum,
+            ("data" Core..=) Core.<$> data'
           ]
       )
 
@@ -2719,10 +2764,14 @@ data PublicKey = PublicKey
     name :: (Core.Maybe Core.Text),
     -- | The public key, encoded in PEM format. For more information, see the <https://tools.ietf.org/html/rfc7468 RFC 7468> sections for <https://tools.ietf.org/html/rfc7468#section-2 General Considerations> and [Textual Encoding of Subject Public Key Info] (https:\/\/tools.ietf.org\/html\/rfc7468#section-13).
     pem :: (Core.Maybe Core.Text),
-    -- | Integrity verification field. A CRC32C checksum of the returned PublicKey.pem. An integrity check of PublicKey.pem can be performed by computing the CRC32C checksum of PublicKey.pem and comparing your results to this field. Discard the response in case of non-matching checksum values, and perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed 2^32-1, and can be safely downconverted to uint32 in languages that support this type. NOTE: This field is in Beta.
+    -- | Integrity verification field. A CRC32C checksum of the returned PublicKey.pem. An integrity check of PublicKey.pem can be performed by computing the CRC32C checksum of PublicKey.pem and comparing your results to this field. Discard the response in case of non-matching checksum values, and perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed @2^32-1@, and can be safely downconverted to uint32 in languages that support this type. NOTE: This field is in Beta.
     pemCrc32c :: (Core.Maybe Core.Int64),
     -- | The ProtectionLevel of the CryptoKeyVersion public key.
-    protectionLevel :: (Core.Maybe PublicKey_ProtectionLevel)
+    protectionLevel :: (Core.Maybe PublicKey_ProtectionLevel),
+    -- | This field contains the public key (with integrity verification), formatted according to the public/key/format field.
+    publicKey :: (Core.Maybe ChecksummedData),
+    -- | The PublicKey format specified by the customer through the public/key/format field.
+    publicKeyFormat :: (Core.Maybe PublicKey_PublicKeyFormat)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2735,7 +2784,9 @@ newPublicKey =
       name = Core.Nothing,
       pem = Core.Nothing,
       pemCrc32c = Core.Nothing,
-      protectionLevel = Core.Nothing
+      protectionLevel = Core.Nothing,
+      publicKey = Core.Nothing,
+      publicKeyFormat = Core.Nothing
     }
 
 instance Core.FromJSON PublicKey where
@@ -2749,6 +2800,8 @@ instance Core.FromJSON PublicKey where
             Core.<*> (o Core..:? "pem")
             Core.<*> (o Core..:? "pemCrc32c" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "protectionLevel")
+            Core.<*> (o Core..:? "publicKey")
+            Core.<*> (o Core..:? "publicKeyFormat")
       )
 
 instance Core.ToJSON PublicKey where
@@ -2759,7 +2812,9 @@ instance Core.ToJSON PublicKey where
             ("name" Core..=) Core.<$> name,
             ("pem" Core..=) Core.<$> pem,
             ("pemCrc32c" Core..=) Core.. Core.AsText Core.<$> pemCrc32c,
-            ("protectionLevel" Core..=) Core.<$> protectionLevel
+            ("protectionLevel" Core..=) Core.<$> protectionLevel,
+            ("publicKey" Core..=) Core.<$> publicKey,
+            ("publicKeyFormat" Core..=) Core.<$> publicKeyFormat
           ]
       )
 

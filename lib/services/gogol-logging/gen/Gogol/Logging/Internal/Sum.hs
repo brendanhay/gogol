@@ -30,15 +30,6 @@ module Gogol.Logging.Internal.Sum
         ..
       ),
 
-    -- * AuditLogConfig_LogType
-    AuditLogConfig_LogType
-      ( AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
-        AuditLogConfig_LogType_ADMINREAD,
-        AuditLogConfig_LogType_DATAWRITE,
-        AuditLogConfig_LogType_DATAREAD,
-        ..
-      ),
-
     -- * BucketMetadata_State
     BucketMetadata_State
       ( BucketMetadata_State_OPERATIONSTATEUNSPECIFIED,
@@ -281,43 +272,6 @@ pattern Xgafv_2 = Xgafv "2"
   Xgafv_1,
   Xgafv_2,
   Xgafv
-  #-}
-
--- | The log type that this config enables.
-newtype AuditLogConfig_LogType = AuditLogConfig_LogType {fromAuditLogConfig_LogType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Default case. Should never be this.
-pattern AuditLogConfig_LogType_LOGTYPEUNSPECIFIED :: AuditLogConfig_LogType
-pattern AuditLogConfig_LogType_LOGTYPEUNSPECIFIED = AuditLogConfig_LogType "LOG_TYPE_UNSPECIFIED"
-
--- | Admin reads. Example: CloudIAM getIamPolicy
-pattern AuditLogConfig_LogType_ADMINREAD :: AuditLogConfig_LogType
-pattern AuditLogConfig_LogType_ADMINREAD = AuditLogConfig_LogType "ADMIN_READ"
-
--- | Data writes. Example: CloudSQL Users create
-pattern AuditLogConfig_LogType_DATAWRITE :: AuditLogConfig_LogType
-pattern AuditLogConfig_LogType_DATAWRITE = AuditLogConfig_LogType "DATA_WRITE"
-
--- | Data reads. Example: CloudSQL Users list
-pattern AuditLogConfig_LogType_DATAREAD :: AuditLogConfig_LogType
-pattern AuditLogConfig_LogType_DATAREAD = AuditLogConfig_LogType "DATA_READ"
-
-{-# COMPLETE
-  AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
-  AuditLogConfig_LogType_ADMINREAD,
-  AuditLogConfig_LogType_DATAWRITE,
-  AuditLogConfig_LogType_DATAREAD,
-  AuditLogConfig_LogType
   #-}
 
 -- | Output only. State of an operation.

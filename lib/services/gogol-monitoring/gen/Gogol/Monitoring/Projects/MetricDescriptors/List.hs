@@ -47,6 +47,7 @@ type MonitoringProjectsMetricDescriptorsListResource =
     Core.:> "metricDescriptors"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "activeOnly" Core.Bool
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "filter" Core.Text
     Core.:> Core.QueryParam "pageSize" Core.Int32
@@ -64,6 +65,8 @@ data MonitoringProjectsMetricDescriptorsList = MonitoringProjectsMetricDescripto
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
+    -- | Optional. If true, only metrics and monitored resource types that have recent data (within roughly 25 hours) will be included in the response. - If a metric descriptor enumerates monitored resource types, only the monitored resource types for which the metric type has recent data will be included in the returned metric descriptor, and if none of them have recent data, the metric descriptor will not be returned. - If a metric descriptor does not enumerate the compatible monitored resource types, it will be returned only if the metric type has recent data for some monitored resource type. The returned descriptor will not enumerate any monitored resource types.
+    activeOnly :: (Core.Maybe Core.Bool),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Optional. If this field is empty, all custom and system-defined metric descriptors are returned. Otherwise, the filter (https:\/\/cloud.google.com\/monitoring\/api\/v3\/filters) specifies which metric descriptors are to be returned. For example, the following filter matches all custom metrics (https:\/\/cloud.google.com\/monitoring\/custom-metrics): metric.type = starts_with(\"custom.googleapis.com\/\")
@@ -90,6 +93,7 @@ newMonitoringProjectsMetricDescriptorsList name =
   MonitoringProjectsMetricDescriptorsList
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
+      activeOnly = Core.Nothing,
       callback = Core.Nothing,
       filter = Core.Nothing,
       name = name,
@@ -115,6 +119,7 @@ instance Core.GoogleRequest MonitoringProjectsMetricDescriptorsList where
       name
       xgafv
       accessToken
+      activeOnly
       callback
       filter
       pageSize

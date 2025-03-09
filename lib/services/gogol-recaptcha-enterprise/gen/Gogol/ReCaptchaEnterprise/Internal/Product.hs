@@ -982,8 +982,10 @@ data GoogleCloudRecaptchaenterpriseV1Event = GoogleCloudRecaptchaenterpriseV1Eve
     hashedAccountId :: (Core.Maybe Core.Base64),
     -- | Optional. HTTP header information about the request.
     headers :: (Core.Maybe [Core.Text]),
-    -- | Optional. JA3 fingerprint for SSL clients.
+    -- | Optional. JA3 fingerprint for SSL clients. To learn how to compute this fingerprint, please refer to https:\/\/github.com\/salesforce\/ja3.
     ja3 :: (Core.Maybe Core.Text),
+    -- | Optional. JA4 fingerprint for SSL clients. To learn how to compute this fingerprint, please refer to https:\/\/github.com\/FoxIO-LLC\/ja4.
+    ja4 :: (Core.Maybe Core.Text),
     -- | Optional. The URI resource the user requested that triggered an assessment.
     requestedUri :: (Core.Maybe Core.Text),
     -- | Optional. The site key that was used to invoke reCAPTCHA Enterprise on your site and generate the token.
@@ -1016,6 +1018,7 @@ newGoogleCloudRecaptchaenterpriseV1Event =
       hashedAccountId = Core.Nothing,
       headers = Core.Nothing,
       ja3 = Core.Nothing,
+      ja4 = Core.Nothing,
       requestedUri = Core.Nothing,
       siteKey = Core.Nothing,
       token = Core.Nothing,
@@ -1039,6 +1042,7 @@ instance Core.FromJSON GoogleCloudRecaptchaenterpriseV1Event where
             Core.<*> (o Core..:? "hashedAccountId")
             Core.<*> (o Core..:? "headers")
             Core.<*> (o Core..:? "ja3")
+            Core.<*> (o Core..:? "ja4")
             Core.<*> (o Core..:? "requestedUri")
             Core.<*> (o Core..:? "siteKey")
             Core.<*> (o Core..:? "token")
@@ -1061,6 +1065,7 @@ instance Core.ToJSON GoogleCloudRecaptchaenterpriseV1Event where
             ("hashedAccountId" Core..=) Core.<$> hashedAccountId,
             ("headers" Core..=) Core.<$> headers,
             ("ja3" Core..=) Core.<$> ja3,
+            ("ja4" Core..=) Core.<$> ja4,
             ("requestedUri" Core..=) Core.<$> requestedUri,
             ("siteKey" Core..=) Core.<$> siteKey,
             ("token" Core..=) Core.<$> token,
@@ -2259,7 +2264,7 @@ data GoogleCloudRecaptchaenterpriseV1Metrics = GoogleCloudRecaptchaenterpriseV1M
     name :: (Core.Maybe Core.Text),
     -- | Metrics are continuous and in order by dates, and in the granularity of day. All Key types should have score-based data.
     scoreMetrics :: (Core.Maybe [GoogleCloudRecaptchaenterpriseV1ScoreMetrics]),
-    -- | Inclusive start time aligned to a day (UTC).
+    -- | Inclusive start time aligned to a day in the America\/Los_Angeles (Pacific) timezone.
     startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

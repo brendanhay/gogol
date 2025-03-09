@@ -53,6 +53,7 @@ module Gogol.Chat.Types
     Chat'Spaces'Readonly,
     Chat'Users'Readstate,
     Chat'Users'Readstate'Readonly,
+    Chat'Users'Spacesettings,
 
     -- * Types
 
@@ -94,6 +95,13 @@ module Gogol.Chat.Types
 
     -- ** Annotation_Type
     Annotation_Type (..),
+
+    -- ** AppCommandMetadata
+    AppCommandMetadata (..),
+    newAppCommandMetadata,
+
+    -- ** AppCommandMetadata_AppCommandType
+    AppCommandMetadata_AppCommandType (..),
 
     -- ** AttachedGif
     AttachedGif (..),
@@ -178,6 +186,10 @@ module Gogol.Chat.Types
     -- ** CustomEmoji
     CustomEmoji (..),
     newCustomEmoji,
+
+    -- ** CustomEmojiMetadata
+    CustomEmojiMetadata (..),
+    newCustomEmojiMetadata,
 
     -- ** DateInput
     DateInput (..),
@@ -462,6 +474,13 @@ module Gogol.Chat.Types
     GoogleAppsCardV1TextParagraph (..),
     newGoogleAppsCardV1TextParagraph,
 
+    -- ** GoogleAppsCardV1Validation
+    GoogleAppsCardV1Validation (..),
+    newGoogleAppsCardV1Validation,
+
+    -- ** GoogleAppsCardV1Validation_InputType
+    GoogleAppsCardV1Validation_InputType (..),
+
     -- ** GoogleAppsCardV1Widget
     GoogleAppsCardV1Widget (..),
     newGoogleAppsCardV1Widget,
@@ -706,6 +725,16 @@ module Gogol.Chat.Types
     SpaceEvent (..),
     newSpaceEvent,
 
+    -- ** SpaceNotificationSetting
+    SpaceNotificationSetting (..),
+    newSpaceNotificationSetting,
+
+    -- ** SpaceNotificationSetting_MuteSetting
+    SpaceNotificationSetting_MuteSetting (..),
+
+    -- ** SpaceNotificationSetting_NotificationSetting
+    SpaceNotificationSetting_NotificationSetting (..),
+
     -- ** SpaceReadState
     SpaceReadState (..),
     newSpaceReadState,
@@ -853,7 +882,7 @@ type Chat'Memberships'App =
 type Chat'Memberships'Readonly =
   "https://www.googleapis.com/auth/chat.memberships.readonly"
 
--- | See, compose, send, update, and delete messages and their associated attachments, and add, see, and delete reactions to messages.
+-- | See, compose, send, update, and delete messages as well as their message content; add, see, and delete reactions to messages.
 type Chat'Messages =
   "https://www.googleapis.com/auth/chat.messages"
 
@@ -861,7 +890,7 @@ type Chat'Messages =
 type Chat'Messages'Create =
   "https://www.googleapis.com/auth/chat.messages.create"
 
--- | See, add, and delete reactions to messages in Google Chat
+-- | See, add, and delete reactions as well as their reaction content to messages in Google Chat
 type Chat'Messages'Reactions =
   "https://www.googleapis.com/auth/chat.messages.reactions"
 
@@ -869,11 +898,11 @@ type Chat'Messages'Reactions =
 type Chat'Messages'Reactions'Create =
   "https://www.googleapis.com/auth/chat.messages.reactions.create"
 
--- | View reactions to messages in Google Chat
+-- | View reactions as well as their reaction content to messages in Google Chat
 type Chat'Messages'Reactions'Readonly =
   "https://www.googleapis.com/auth/chat.messages.reactions.readonly"
 
--- | See messages and their associated reactions and attachments in Google Chat
+-- | See messages as well as their reactions and message content in Google Chat
 type Chat'Messages'Readonly =
   "https://www.googleapis.com/auth/chat.messages.readonly"
 
@@ -895,3 +924,7 @@ type Chat'Users'Readstate =
 -- | View last read time for Google Chat conversations
 type Chat'Users'Readstate'Readonly =
   "https://www.googleapis.com/auth/chat.users.readstate.readonly"
+
+-- | Read and update your space settings
+type Chat'Users'Spacesettings =
+  "https://www.googleapis.com/auth/chat.users.spacesettings"

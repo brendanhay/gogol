@@ -113,7 +113,9 @@ instance
     ClassroomCoursesPostsAddOnAttachmentsDelete
   where
   type Rs ClassroomCoursesPostsAddOnAttachmentsDelete = Empty
-  type Scopes ClassroomCoursesPostsAddOnAttachmentsDelete = '[]
+  type
+    Scopes ClassroomCoursesPostsAddOnAttachmentsDelete =
+      '[Classroom'Addons'Teacher]
   requestClient ClassroomCoursesPostsAddOnAttachmentsDelete {..} =
     go
       courseId

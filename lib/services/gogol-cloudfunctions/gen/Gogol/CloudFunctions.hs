@@ -55,6 +55,11 @@ module Gogol.CloudFunctions
     CloudFunctionsProjectsLocationsFunctionsDelete (..),
     newCloudFunctionsProjectsLocationsFunctionsDelete,
 
+    -- ** cloudfunctions.projects.locations.functions.detachFunction
+    CloudFunctionsProjectsLocationsFunctionsDetachFunctionResource,
+    CloudFunctionsProjectsLocationsFunctionsDetachFunction (..),
+    newCloudFunctionsProjectsLocationsFunctionsDetachFunction,
+
     -- ** cloudfunctions.projects.locations.functions.generateDownloadUrl
     CloudFunctionsProjectsLocationsFunctionsGenerateDownloadUrlResource,
     CloudFunctionsProjectsLocationsFunctionsGenerateDownloadUrl (..),
@@ -176,6 +181,10 @@ module Gogol.CloudFunctions
     -- ** Date
     Date (..),
     newDate,
+
+    -- ** DetachFunctionRequest
+    DetachFunctionRequest (..),
+    newDetachFunctionRequest,
 
     -- ** EventFilter
     EventFilter (..),
@@ -419,6 +428,7 @@ import Gogol.CloudFunctions.Projects.Locations.Functions.AbortFunctionUpgrade
 import Gogol.CloudFunctions.Projects.Locations.Functions.CommitFunctionUpgrade
 import Gogol.CloudFunctions.Projects.Locations.Functions.Create
 import Gogol.CloudFunctions.Projects.Locations.Functions.Delete
+import Gogol.CloudFunctions.Projects.Locations.Functions.DetachFunction
 import Gogol.CloudFunctions.Projects.Locations.Functions.GenerateDownloadUrl
 import Gogol.CloudFunctions.Projects.Locations.Functions.GenerateUploadUrl
 import Gogol.CloudFunctions.Projects.Locations.Functions.Get

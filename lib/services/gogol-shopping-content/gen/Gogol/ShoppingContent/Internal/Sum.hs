@@ -298,6 +298,14 @@ module Gogol.ShoppingContent.Internal.Sum
         ..
       ),
 
+    -- * ProductSustainabilityIncentive_Type
+    ProductSustainabilityIncentive_Type
+      ( ProductSustainabilityIncentive_Type_TYPEUNSPECIFIED,
+        ProductSustainabilityIncentive_Type_EVTAXCREDIT,
+        ProductSustainabilityIncentive_Type_EVPRICEDISCOUNT,
+        ..
+      ),
+
     -- * ProductView_AggregatedDestinationStatus
     ProductView_AggregatedDestinationStatus
       ( ProductView_AggregatedDestinationStatus_AGGREGATEDSTATUSUNSPECIFIED,
@@ -764,7 +772,6 @@ pattern AccountReturnCarrier_CarrierCode_Ups = AccountReturnCarrier_CarrierCode 
   AccountReturnCarrier_CarrierCode
   #-}
 
--- | Required. Attribution model.
 newtype AttributionSettings_AttributionModel = AttributionSettings_AttributionModel {fromAttributionSettings_AttributionModel :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1745,6 +1752,38 @@ pattern ProductIssueImpact_Severity_Info = ProductIssueImpact_Severity "INFO"
   ProductIssueImpact_Severity
   #-}
 
+-- | Required. Sustainability incentive program.
+newtype ProductSustainabilityIncentive_Type = ProductSustainabilityIncentive_Type {fromProductSustainabilityIncentive_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified or unknown sustainability incentive type.
+pattern ProductSustainabilityIncentive_Type_TYPEUNSPECIFIED :: ProductSustainabilityIncentive_Type
+pattern ProductSustainabilityIncentive_Type_TYPEUNSPECIFIED = ProductSustainabilityIncentive_Type "TYPE_UNSPECIFIED"
+
+-- | Program offering tax liability reductions for electric vehicles and, in some countries, plug-in hybrids. These reductions can be based on a specific amount or a percentage of the sale price.
+pattern ProductSustainabilityIncentive_Type_EVTAXCREDIT :: ProductSustainabilityIncentive_Type
+pattern ProductSustainabilityIncentive_Type_EVTAXCREDIT = ProductSustainabilityIncentive_Type "EV_TAX_CREDIT"
+
+-- | A subsidy program, often called an environmental bonus, provides a purchase grant for electric vehicles and, in some countries, plug-in hybrids. The grant amount may be a fixed sum or a percentage of the sale price.
+pattern ProductSustainabilityIncentive_Type_EVPRICEDISCOUNT :: ProductSustainabilityIncentive_Type
+pattern ProductSustainabilityIncentive_Type_EVPRICEDISCOUNT = ProductSustainabilityIncentive_Type "EV_PRICE_DISCOUNT"
+
+{-# COMPLETE
+  ProductSustainabilityIncentive_Type_TYPEUNSPECIFIED,
+  ProductSustainabilityIncentive_Type_EVTAXCREDIT,
+  ProductSustainabilityIncentive_Type_EVPRICEDISCOUNT,
+  ProductSustainabilityIncentive_Type
+  #-}
+
 -- | Aggregated destination status.
 newtype ProductView_AggregatedDestinationStatus = ProductView_AggregatedDestinationStatus {fromProductView_AggregatedDestinationStatus :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -2536,7 +2575,7 @@ pattern ReturnPolicyOnlinePolicy_Type_LIFETIMERETURNS = ReturnPolicyOnlinePolicy
   ReturnPolicyOnlinePolicy_Type
   #-}
 
--- | The corresponding return label source.
+-- | The corresponding return label source. If the @ReturnMethod@ field includes @BY_MAIL@, it is required to specify @ReturnLabelSource@ for both @BUYER_REMORSE@ and @ITEM_DEFECT@ return reason categories.
 newtype ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource = ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource {fromReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype

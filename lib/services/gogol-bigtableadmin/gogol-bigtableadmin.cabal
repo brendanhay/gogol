@@ -79,6 +79,12 @@ library
     Gogol.BigtableAdmin.Projects.Instances.Get
     Gogol.BigtableAdmin.Projects.Instances.GetIamPolicy
     Gogol.BigtableAdmin.Projects.Instances.List
+    Gogol.BigtableAdmin.Projects.Instances.LogicalViews.GetIamPolicy
+    Gogol.BigtableAdmin.Projects.Instances.LogicalViews.SetIamPolicy
+    Gogol.BigtableAdmin.Projects.Instances.LogicalViews.TestIamPermissions
+    Gogol.BigtableAdmin.Projects.Instances.MaterializedViews.GetIamPolicy
+    Gogol.BigtableAdmin.Projects.Instances.MaterializedViews.SetIamPolicy
+    Gogol.BigtableAdmin.Projects.Instances.MaterializedViews.TestIamPermissions
     Gogol.BigtableAdmin.Projects.Instances.PartialUpdateInstance
     Gogol.BigtableAdmin.Projects.Instances.SetIamPolicy
     Gogol.BigtableAdmin.Projects.Instances.Tables.AuthorizedViews.Create

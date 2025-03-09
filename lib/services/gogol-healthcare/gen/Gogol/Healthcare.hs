@@ -441,6 +441,11 @@ module Gogol.Healthcare
     HealthcareProjectsLocationsDatasetsFhirStoresApplyConsents (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresApplyConsents,
 
+    -- ** healthcare.projects.locations.datasets.fhirStores.bulkexportgroup
+    HealthcareProjectsLocationsDatasetsFhirStoresBulkexportgroupResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresBulkexportgroup (..),
+    newHealthcareProjectsLocationsDatasetsFhirStoresBulkexportgroup,
+
     -- ** healthcare.projects.locations.datasets.fhirStores.create
     HealthcareProjectsLocationsDatasetsFhirStoresCreateResource,
     HealthcareProjectsLocationsDatasetsFhirStoresCreate (..),
@@ -510,6 +515,11 @@ module Gogol.Healthcare
     HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcevalidateResource,
     HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcevalidate (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresFhirResourcevalidate,
+
+    -- ** healthcare.projects.locations.datasets.fhirStores.fhir.bulkexport
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirBulkexportResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirBulkexport (..),
+    newHealthcareProjectsLocationsDatasetsFhirStoresFhirBulkexport,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.fhir.capabilities
     HealthcareProjectsLocationsDatasetsFhirStoresFhirCapabilitiesResource,
@@ -605,6 +615,16 @@ module Gogol.Healthcare
     HealthcareProjectsLocationsDatasetsFhirStoresListResource,
     HealthcareProjectsLocationsDatasetsFhirStoresList (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresList,
+
+    -- ** healthcare.projects.locations.datasets.fhirStores.operations.deletefhiroperation
+    HealthcareProjectsLocationsDatasetsFhirStoresOperationsDeletefhiroperationResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresOperationsDeletefhiroperation (..),
+    newHealthcareProjectsLocationsDatasetsFhirStoresOperationsDeletefhiroperation,
+
+    -- ** healthcare.projects.locations.datasets.fhirStores.operations.getfhiroperationstatus
+    HealthcareProjectsLocationsDatasetsFhirStoresOperationsGetfhiroperationstatusResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresOperationsGetfhiroperationstatus (..),
+    newHealthcareProjectsLocationsDatasetsFhirStoresOperationsGetfhiroperationstatus,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.patch
     HealthcareProjectsLocationsDatasetsFhirStoresPatchResource,
@@ -877,6 +897,10 @@ module Gogol.Healthcare
 
     -- ** BlobStorageSettings_BlobStorageClass
     BlobStorageSettings_BlobStorageClass (..),
+
+    -- ** BulkExportGcsDestination
+    BulkExportGcsDestination (..),
+    newBulkExportGcsDestination,
 
     -- ** CancelOperationRequest
     CancelOperationRequest (..),
@@ -1756,6 +1780,7 @@ import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.StoreIns
 import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.TestIamPermissions
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.ApplyAdminConsents
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.ApplyConsents
+import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Bulkexportgroup
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Create
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Deidentify
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Delete
@@ -1765,6 +1790,7 @@ import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Binarycreate
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Binaryread
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Binaryupdate
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Binaryvread
+import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Bulkexport
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Capabilities
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.ConditionalDelete
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.ConditionalPatch
@@ -1789,6 +1815,8 @@ import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.GetFHIRStoreMetri
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.GetIamPolicy
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Import
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.List
+import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Operations.Deletefhiroperation
+import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Operations.Getfhiroperationstatus
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Patch
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Rollback
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.SetIamPolicy

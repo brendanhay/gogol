@@ -68,7 +68,9 @@ newCalendarCalendarsInsert payload =
 
 instance Core.GoogleRequest CalendarCalendarsInsert where
   type Rs CalendarCalendarsInsert = Calendar
-  type Scopes CalendarCalendarsInsert = '[Calendar'FullControl]
+  type
+    Scopes CalendarCalendarsInsert =
+      '[Calendar'FullControl, Calendar'App'Created, Calendar'Calendars]
   requestClient CalendarCalendarsInsert {..} =
     go (Core.Just Core.AltJSON) payload appsCalendarService
     where

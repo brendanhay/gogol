@@ -39,6 +39,17 @@ module Gogol.DigitalAssetLinks.Types
     Asset (..),
     newAsset,
 
+    -- ** BulkCheckRequest
+    BulkCheckRequest (..),
+    newBulkCheckRequest,
+
+    -- ** BulkCheckResponse
+    BulkCheckResponse (..),
+    newBulkCheckResponse,
+
+    -- ** BulkCheckResponse_BulkErrorCode
+    BulkCheckResponse_BulkErrorCode (..),
+
     -- ** CertificateInfo
     CertificateInfo (..),
     newCertificateInfo,
@@ -60,6 +71,10 @@ module Gogol.DigitalAssetLinks.Types
     -- ** Statement
     Statement (..),
     newStatement,
+
+    -- ** StatementTemplate
+    StatementTemplate (..),
+    newStatementTemplate,
 
     -- ** WebAsset
     WebAsset (..),

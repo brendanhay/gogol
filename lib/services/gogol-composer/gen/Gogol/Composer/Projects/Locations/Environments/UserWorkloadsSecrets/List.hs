@@ -23,7 +23,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists user workloads Secrets. This method is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+-- Lists user workloads Secrets. This method is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
 --
 -- /See:/ <https://cloud.google.com/composer/ Cloud Composer API Reference> for @composer.projects.locations.environments.userWorkloadsSecrets.list@.
 module Gogol.Composer.Projects.Locations.Environments.UserWorkloadsSecrets.List
@@ -55,7 +55,7 @@ type ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] ListUserWorkloadsSecretsResponse
 
--- | Lists user workloads Secrets. This method is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+-- | Lists user workloads Secrets. This method is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
 --
 -- /See:/ 'newComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsList' smart constructor.
 data ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsList = ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsList

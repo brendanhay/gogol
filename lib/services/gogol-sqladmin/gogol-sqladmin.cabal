@@ -55,6 +55,11 @@ library
     Gogol.SQLAdmin.Sql.BackupRuns.Get
     Gogol.SQLAdmin.Sql.BackupRuns.Insert
     Gogol.SQLAdmin.Sql.BackupRuns.List
+    Gogol.SQLAdmin.Sql.Backups.CreateBackup
+    Gogol.SQLAdmin.Sql.Backups.DeleteBackup
+    Gogol.SQLAdmin.Sql.Backups.GetBackup
+    Gogol.SQLAdmin.Sql.Backups.ListBackups
+    Gogol.SQLAdmin.Sql.Backups.UpdateBackup
     Gogol.SQLAdmin.Sql.Connect.GenerateEphemeral
     Gogol.SQLAdmin.Sql.Connect.Get
     Gogol.SQLAdmin.Sql.Databases.Delete

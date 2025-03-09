@@ -372,6 +372,15 @@ module Gogol.AndroidManagement.Types
     -- ** Enterprise_EnabledNotificationTypesItem
     Enterprise_EnabledNotificationTypesItem (..),
 
+    -- ** Enterprise_EnterpriseType
+    Enterprise_EnterpriseType (..),
+
+    -- ** Enterprise_ManagedGoogleDomainType
+    Enterprise_ManagedGoogleDomainType (..),
+
+    -- ** Enterprise_ManagedGooglePlayAccountsEnterpriseType
+    Enterprise_ManagedGooglePlayAccountsEnterpriseType (..),
+
     -- ** ExtensionConfig
     ExtensionConfig (..),
     newExtensionConfig,
@@ -391,6 +400,14 @@ module Gogol.AndroidManagement.Types
     -- ** FreezePeriod
     FreezePeriod (..),
     newFreezePeriod,
+
+    -- ** GenerateEnterpriseUpgradeUrlRequest
+    GenerateEnterpriseUpgradeUrlRequest (..),
+    newGenerateEnterpriseUpgradeUrlRequest,
+
+    -- ** GenerateEnterpriseUpgradeUrlResponse
+    GenerateEnterpriseUpgradeUrlResponse (..),
+    newGenerateEnterpriseUpgradeUrlResponse,
 
     -- ** GoogleAuthenticationSettings
     GoogleAuthenticationSettings (..),

@@ -23,7 +23,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a user workloads Secret. This method is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+-- Updates a user workloads Secret. This method is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
 --
 -- /See:/ <https://cloud.google.com/composer/ Cloud Composer API Reference> for @composer.projects.locations.environments.userWorkloadsSecrets.update@.
 module Gogol.Composer.Projects.Locations.Environments.UserWorkloadsSecrets.Update
@@ -53,7 +53,7 @@ type ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsUpdateResource =
     Core.:> Core.ReqBody '[Core.JSON] UserWorkloadsSecret
     Core.:> Core.Put '[Core.JSON] UserWorkloadsSecret
 
--- | Updates a user workloads Secret. This method is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+-- | Updates a user workloads Secret. This method is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
 --
 -- /See:/ 'newComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsUpdate' smart constructor.
 data ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsUpdate = ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsUpdate

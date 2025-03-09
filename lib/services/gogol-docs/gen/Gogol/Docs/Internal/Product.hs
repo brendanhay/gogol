@@ -1574,7 +1574,7 @@ instance Core.ToJSON CreateParagraphBulletsRequest where
           ]
       )
 
--- | The crop properties of an image. The crop rectangle is represented using fractional offsets from the original content\'s 4 edges. - If the offset is in the interval (0, 1), the corresponding edge of crop rectangle is positioned inside of the image\'s original bounding rectangle. - If the offset is negative or greater than 1, the corresponding edge of crop rectangle is positioned outside of the image\'s original bounding rectangle. - If all offsets and rotation angle are 0, the image is not cropped.
+-- | The crop properties of an image. The crop rectangle is represented using fractional offsets from the original content\'s 4 edges. - If the offset is in the interval (0, 1), the corresponding edge of crop rectangle is positioned inside of the image\'s original bounding rectangle. - If the offset is negative or greater than 1, the corresponding edge of crop rectangle is positioned outside of the image\'s original bounding rectangle. - If all offsets and rotation angles are 0, the image is not cropped.
 --
 -- /See:/ 'newCropProperties' smart constructor.
 data CropProperties = CropProperties
@@ -2378,7 +2378,7 @@ data DocumentStyle = DocumentStyle
     pageNumberStart :: (Core.Maybe Core.Int32),
     -- | The size of a page in the document.
     pageSize :: (Core.Maybe Size),
-    -- | Indicates whether DocumentStyle margin/header, SectionStyle margin/header and DocumentStyle margin/footer, SectionStyle margin/footer are respected. When false, the default values in the Docs editor for header and footer margin are used. This property is read-only.
+    -- | Indicates whether DocumentStyle margin/header, SectionStyle margin/header and DocumentStyle margin/footer, SectionStyle margin/footer are respected. When false, the default values in the Docs editor for header and footer margin is used. This property is read-only.
     useCustomHeaderFooterMargins :: (Core.Maybe Core.Bool),
     -- | Indicates whether to use the even page header \/ footer IDs for the even pages.
     useEvenPageHeaderFooter :: (Core.Maybe Core.Bool),
@@ -4951,9 +4951,9 @@ data NestingLevel = NestingLevel
     -- | The format string used by bullets at this level of nesting. The glyph format contains one or more placeholders, and these placeholders are replaced with the appropriate values depending on the glyph/type or glyph/symbol. The placeholders follow the pattern @%[nesting_level]@. Furthermore, placeholders can have prefixes and suffixes. Thus, the glyph format follows the pattern @%[nesting_level]@. Note that the prefix and suffix are optional and can be arbitrary strings. For example, the glyph format @%0.@ indicates that the rendered glyph will replace the placeholder with the corresponding glyph for nesting level 0 followed by a period as the suffix. So a list with a glyph type of UPPER_ALPHA and glyph format @%0.@ at nesting level 0 will result in a list with rendered glyphs @A.@ @B.@ @C.@ The glyph format can contain placeholders for the current nesting level as well as placeholders for parent nesting levels. For example, a list can have a glyph format of @%0.@ at nesting level 0 and a glyph format of
     -- @%0.%1.@ at nesting level 1. Assuming both nesting levels have DECIMAL glyph types, this would result in a list with rendered glyphs @1.@ @2.@ @2.1.@ @2.2.@ @3.@ For nesting levels that are ordered, the string that replaces a placeholder in the glyph format for a particular paragraph depends on the paragraph\'s order within the list.
     glyphFormat :: (Core.Maybe Core.Text),
-    -- | A custom glyph symbol used by bullets when paragraphs at this level of nesting are unordered. The glyph symbol replaces placeholders within the glyph/format. For example, if the glyph/symbol is the solid circle corresponding to Unicode U+25cf code point and the glyph_format is @%0@, the rendered glyph would be the solid circle.
+    -- | A custom glyph symbol used by bullets when paragraphs at this level of nesting is unordered. The glyph symbol replaces placeholders within the glyph/format. For example, if the glyph/symbol is the solid circle corresponding to Unicode U+25cf code point and the glyph_format is @%0@, the rendered glyph would be the solid circle.
     glyphSymbol :: (Core.Maybe Core.Text),
-    -- | The type of glyph used by bullets when paragraphs at this level of nesting are ordered. The glyph type determines the type of glyph used to replace placeholders within the glyph/format when paragraphs at this level of nesting are ordered. For example, if the nesting level is 0, the glyph/format is @%0.@ and the glyph type is DECIMAL, then the rendered glyph would replace the placeholder @%0@ in the glyph format with a number corresponding to list item\'s order within the list.
+    -- | The type of glyph used by bullets when paragraphs at this level of nesting is ordered. The glyph type determines the type of glyph used to replace placeholders within the glyph/format when paragraphs at this level of nesting are ordered. For example, if the nesting level is 0, the glyph/format is @%0.@ and the glyph type is DECIMAL, then the rendered glyph would replace the placeholder @%0@ in the glyph format with a number corresponding to the list item\'s order within the list.
     glyphType :: (Core.Maybe NestingLevel_GlyphType),
     -- | The amount of indentation for the first line of paragraphs at this level of nesting.
     indentFirstLine :: (Core.Maybe Dimension),

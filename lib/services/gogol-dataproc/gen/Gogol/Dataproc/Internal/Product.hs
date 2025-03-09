@@ -187,6 +187,10 @@ module Gogol.Dataproc.Internal.Product
     Binding (..),
     newBinding,
 
+    -- * BuildInfo
+    BuildInfo (..),
+    newBuildInfo,
+
     -- * CancelJobRequest
     CancelJobRequest (..),
     newCancelJobRequest,
@@ -343,6 +347,10 @@ module Gogol.Dataproc.Internal.Product
     Expr (..),
     newExpr,
 
+    -- * FallbackReason
+    FallbackReason (..),
+    newFallbackReason,
+
     -- * FlinkJob
     FlinkJob (..),
     newFlinkJob,
@@ -358,6 +366,10 @@ module Gogol.Dataproc.Internal.Product
     -- * GceClusterConfig_Metadata
     GceClusterConfig_Metadata (..),
     newGceClusterConfig_Metadata,
+
+    -- * GceClusterConfig_ResourceManagerTags
+    GceClusterConfig_ResourceManagerTags (..),
+    newGceClusterConfig_ResourceManagerTags,
 
     -- * GetIamPolicyRequest
     GetIamPolicyRequest (..),
@@ -610,6 +622,14 @@ module Gogol.Dataproc.Internal.Product
     -- * NamespacedGkeDeploymentTarget
     NamespacedGkeDeploymentTarget (..),
     newNamespacedGkeDeploymentTarget,
+
+    -- * NativeBuildInfoUiData
+    NativeBuildInfoUiData (..),
+    newNativeBuildInfoUiData,
+
+    -- * NativeSqlExecutionUiData
+    NativeSqlExecutionUiData (..),
+    newNativeSqlExecutionUiData,
 
     -- * NodeGroup
     NodeGroup (..),
@@ -3019,6 +3039,42 @@ instance Core.ToJSON Binding where
           ]
       )
 
+-- | Native Build Info
+--
+-- /See:/ 'newBuildInfo' smart constructor.
+data BuildInfo = BuildInfo
+  { -- | Optional. Build key.
+    buildKey :: (Core.Maybe Core.Text),
+    -- | Optional. Build value.
+    buildValue :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BuildInfo' with the minimum fields required to make a request.
+newBuildInfo ::
+  BuildInfo
+newBuildInfo =
+  BuildInfo {buildKey = Core.Nothing, buildValue = Core.Nothing}
+
+instance Core.FromJSON BuildInfo where
+  parseJSON =
+    Core.withObject
+      "BuildInfo"
+      ( \o ->
+          BuildInfo
+            Core.<$> (o Core..:? "buildKey")
+            Core.<*> (o Core..:? "buildValue")
+      )
+
+instance Core.ToJSON BuildInfo where
+  toJSON BuildInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("buildKey" Core..=) Core.<$> buildKey,
+            ("buildValue" Core..=) Core.<$> buildValue
+          ]
+      )
+
 -- | A request to cancel a job.
 --
 -- /See:/ 'newCancelJobRequest' smart constructor.
@@ -3950,9 +4006,9 @@ instance Core.ToJSON DiagnoseClusterResults where
 --
 -- /See:/ 'newDiskConfig' smart constructor.
 data DiskConfig = DiskConfig
-  { -- | Optional. Indicates how many IOPS to provision for the disk. This sets the number of I\/O operations per second that the disk can handle. Note: This field is only supported if boot/disk/type is hyperdisk-balanced.
+  { -- | Optional. Indicates how many IOPS to provision for the disk. This sets the number of I\/O operations per second that the disk can handle. This field is supported only if boot/disk/type is hyperdisk-balanced.
     bootDiskProvisionedIops :: (Core.Maybe Core.Int64),
-    -- | Optional. Indicates how much throughput to provision for the disk. This sets the number of throughput mb per second that the disk can handle. Values must be greater than or equal to 1. Note: This field is only supported if boot/disk/type is hyperdisk-balanced.
+    -- | Optional. Indicates how much throughput to provision for the disk. This sets the number of throughput mb per second that the disk can handle. Values must be greater than or equal to 1. This field is supported only if boot/disk/type is hyperdisk-balanced.
     bootDiskProvisionedThroughput :: (Core.Maybe Core.Int64),
     -- | Optional. Size in GB of the boot disk (default is 500GB).
     bootDiskSizeGb :: (Core.Maybe Core.Int32),
@@ -4920,6 +4976,45 @@ instance Core.ToJSON Expr where
           ]
       )
 
+-- | Native SQL Execution Data
+--
+-- /See:/ 'newFallbackReason' smart constructor.
+data FallbackReason = FallbackReason
+  { -- | Optional. Fallback node information.
+    fallbackNode :: (Core.Maybe Core.Text),
+    -- | Optional. Fallback to Spark reason.
+    fallbackReason :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FallbackReason' with the minimum fields required to make a request.
+newFallbackReason ::
+  FallbackReason
+newFallbackReason =
+  FallbackReason
+    { fallbackNode = Core.Nothing,
+      fallbackReason = Core.Nothing
+    }
+
+instance Core.FromJSON FallbackReason where
+  parseJSON =
+    Core.withObject
+      "FallbackReason"
+      ( \o ->
+          FallbackReason
+            Core.<$> (o Core..:? "fallbackNode")
+            Core.<*> (o Core..:? "fallbackReason")
+      )
+
+instance Core.ToJSON FallbackReason where
+  toJSON FallbackReason {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("fallbackNode" Core..=) Core.<$> fallbackNode,
+            ("fallbackReason" Core..=) Core.<$> fallbackReason
+          ]
+      )
+
 -- | A Dataproc job for running Apache Flink applications on YARN.
 --
 -- /See:/ 'newFlinkJob' smart constructor.
@@ -5027,6 +5122,8 @@ data GceClusterConfig = GceClusterConfig
     privateIpv6GoogleAccess :: (Core.Maybe GceClusterConfig_PrivateIpv6GoogleAccess),
     -- | Optional. Reservation Affinity for consuming Zonal reservation.
     reservationAffinity :: (Core.Maybe ReservationAffinity),
+    -- | Optional. Resource manager tags to add to all instances (see Resource manager tags resources (https:\/\/cloud.google.com\/resource-manager\/docs\/tags\/tags-creating-and-managing)).
+    resourceManagerTags :: (Core.Maybe GceClusterConfig_ResourceManagerTags),
     -- | Optional. The Dataproc service account (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/configuring-clusters\/service-accounts#service/accounts/in/dataproc) (also see VM Data Plane identity (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/iam\/dataproc-principals#vm/service/account/data/plane/identity)) used by Dataproc cluster VM instances to access Google Cloud Platform services.If not specified, the Compute Engine default service account (https:\/\/cloud.google.com\/compute\/docs\/access\/service-accounts#default/service/account) is used.
     serviceAccount :: (Core.Maybe Core.Text),
     -- | Optional. The URIs of service account scopes to be included in Compute Engine instances. The following base set of scopes is always included: https:\/\/www.googleapis.com\/auth\/cloud.useraccounts.readonly https:\/\/www.googleapis.com\/auth\/devstorage.read/write https:\/\/www.googleapis.com\/auth\/logging.writeIf no scopes are specified, the following defaults are also provided: https:\/\/www.googleapis.com\/auth\/bigquery https:\/\/www.googleapis.com\/auth\/bigtable.admin.table https:\/\/www.googleapis.com\/auth\/bigtable.data https:\/\/www.googleapis.com\/auth\/devstorage.full/control
@@ -5054,6 +5151,7 @@ newGceClusterConfig =
       nodeGroupAffinity = Core.Nothing,
       privateIpv6GoogleAccess = Core.Nothing,
       reservationAffinity = Core.Nothing,
+      resourceManagerTags = Core.Nothing,
       serviceAccount = Core.Nothing,
       serviceAccountScopes = Core.Nothing,
       shieldedInstanceConfig = Core.Nothing,
@@ -5075,6 +5173,7 @@ instance Core.FromJSON GceClusterConfig where
             Core.<*> (o Core..:? "nodeGroupAffinity")
             Core.<*> (o Core..:? "privateIpv6GoogleAccess")
             Core.<*> (o Core..:? "reservationAffinity")
+            Core.<*> (o Core..:? "resourceManagerTags")
             Core.<*> (o Core..:? "serviceAccount")
             Core.<*> (o Core..:? "serviceAccountScopes")
             Core.<*> (o Core..:? "shieldedInstanceConfig")
@@ -5096,6 +5195,7 @@ instance Core.ToJSON GceClusterConfig where
             ("privateIpv6GoogleAccess" Core..=)
               Core.<$> privateIpv6GoogleAccess,
             ("reservationAffinity" Core..=) Core.<$> reservationAffinity,
+            ("resourceManagerTags" Core..=) Core.<$> resourceManagerTags,
             ("serviceAccount" Core..=) Core.<$> serviceAccount,
             ("serviceAccountScopes" Core..=) Core.<$> serviceAccountScopes,
             ("shieldedInstanceConfig" Core..=) Core.<$> shieldedInstanceConfig,
@@ -5131,6 +5231,35 @@ instance Core.FromJSON GceClusterConfig_Metadata where
 
 instance Core.ToJSON GceClusterConfig_Metadata where
   toJSON GceClusterConfig_Metadata {..} = Core.toJSON additional
+
+-- | Optional. Resource manager tags to add to all instances (see Resource manager tags resources (https:\/\/cloud.google.com\/resource-manager\/docs\/tags\/tags-creating-and-managing)).
+--
+-- /See:/ 'newGceClusterConfig_ResourceManagerTags' smart constructor.
+newtype GceClusterConfig_ResourceManagerTags = GceClusterConfig_ResourceManagerTags
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GceClusterConfig_ResourceManagerTags' with the minimum fields required to make a request.
+newGceClusterConfig_ResourceManagerTags ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GceClusterConfig_ResourceManagerTags
+newGceClusterConfig_ResourceManagerTags additional =
+  GceClusterConfig_ResourceManagerTags {additional = additional}
+
+instance Core.FromJSON GceClusterConfig_ResourceManagerTags where
+  parseJSON =
+    Core.withObject
+      "GceClusterConfig_ResourceManagerTags"
+      ( \o ->
+          GceClusterConfig_ResourceManagerTags
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON GceClusterConfig_ResourceManagerTags where
+  toJSON GceClusterConfig_ResourceManagerTags {..} =
+    Core.toJSON additional
 
 -- | Request message for GetIamPolicy method.
 --
@@ -7937,6 +8066,103 @@ instance Core.ToJSON NamespacedGkeDeploymentTarget where
       ( Core.catMaybes
           [ ("clusterNamespace" Core..=) Core.<$> clusterNamespace,
             ("targetGkeCluster" Core..=) Core.<$> targetGkeCluster
+          ]
+      )
+
+--
+-- /See:/ 'newNativeBuildInfoUiData' smart constructor.
+data NativeBuildInfoUiData = NativeBuildInfoUiData
+  { -- | Optional. Build class of Native.
+    buildClass :: (Core.Maybe Core.Text),
+    -- | Optional. Build related details.
+    buildInfo :: (Core.Maybe [BuildInfo])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NativeBuildInfoUiData' with the minimum fields required to make a request.
+newNativeBuildInfoUiData ::
+  NativeBuildInfoUiData
+newNativeBuildInfoUiData =
+  NativeBuildInfoUiData
+    { buildClass = Core.Nothing,
+      buildInfo = Core.Nothing
+    }
+
+instance Core.FromJSON NativeBuildInfoUiData where
+  parseJSON =
+    Core.withObject
+      "NativeBuildInfoUiData"
+      ( \o ->
+          NativeBuildInfoUiData
+            Core.<$> (o Core..:? "buildClass")
+            Core.<*> (o Core..:? "buildInfo")
+      )
+
+instance Core.ToJSON NativeBuildInfoUiData where
+  toJSON NativeBuildInfoUiData {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("buildClass" Core..=) Core.<$> buildClass,
+            ("buildInfo" Core..=) Core.<$> buildInfo
+          ]
+      )
+
+-- | Native SQL Execution Data
+--
+-- /See:/ 'newNativeSqlExecutionUiData' smart constructor.
+data NativeSqlExecutionUiData = NativeSqlExecutionUiData
+  { -- | Optional. Description of the execution.
+    description :: (Core.Maybe Core.Text),
+    -- | Required. Execution ID of the Native SQL Execution.
+    executionId :: (Core.Maybe Core.Int64),
+    -- | Optional. Description of the fallback.
+    fallbackDescription :: (Core.Maybe Core.Text),
+    -- | Optional. Fallback node to reason.
+    fallbackNodeToReason :: (Core.Maybe [FallbackReason]),
+    -- | Optional. Number of nodes fallen back to Spark.
+    numFallbackNodes :: (Core.Maybe Core.Int32),
+    -- | Optional. Number of nodes in Native.
+    numNativeNodes :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NativeSqlExecutionUiData' with the minimum fields required to make a request.
+newNativeSqlExecutionUiData ::
+  NativeSqlExecutionUiData
+newNativeSqlExecutionUiData =
+  NativeSqlExecutionUiData
+    { description = Core.Nothing,
+      executionId = Core.Nothing,
+      fallbackDescription = Core.Nothing,
+      fallbackNodeToReason = Core.Nothing,
+      numFallbackNodes = Core.Nothing,
+      numNativeNodes = Core.Nothing
+    }
+
+instance Core.FromJSON NativeSqlExecutionUiData where
+  parseJSON =
+    Core.withObject
+      "NativeSqlExecutionUiData"
+      ( \o ->
+          NativeSqlExecutionUiData
+            Core.<$> (o Core..:? "description")
+            Core.<*> (o Core..:? "executionId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "fallbackDescription")
+            Core.<*> (o Core..:? "fallbackNodeToReason")
+            Core.<*> (o Core..:? "numFallbackNodes")
+            Core.<*> (o Core..:? "numNativeNodes")
+      )
+
+instance Core.ToJSON NativeSqlExecutionUiData where
+  toJSON NativeSqlExecutionUiData {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("description" Core..=) Core.<$> description,
+            ("executionId" Core..=) Core.. Core.AsText Core.<$> executionId,
+            ("fallbackDescription" Core..=) Core.<$> fallbackDescription,
+            ("fallbackNodeToReason" Core..=) Core.<$> fallbackNodeToReason,
+            ("numFallbackNodes" Core..=) Core.<$> numFallbackNodes,
+            ("numNativeNodes" Core..=) Core.<$> numNativeNodes
           ]
       )
 
@@ -10949,7 +11175,7 @@ data Session = Session
     jupyterSession :: (Core.Maybe JupyterConfig),
     -- | Optional. The labels to associate with the session. Label keys must contain 1 to 63 characters, and must conform to RFC 1035 (https:\/\/www.ietf.org\/rfc\/rfc1035.txt). Label values may be empty, but, if present, must contain 1 to 63 characters, and must conform to RFC 1035 (https:\/\/www.ietf.org\/rfc\/rfc1035.txt). No more than 32 labels can be associated with a session.
     labels :: (Core.Maybe Session_Labels),
-    -- | Required. The resource name of the session.
+    -- | Identifier. The resource name of the session.
     name :: (Core.Maybe Core.Text),
     -- | Optional. Runtime configuration for the session execution.
     runtimeConfig :: (Core.Maybe RuntimeConfig),
@@ -12924,6 +13150,10 @@ data SparkWrapperObject = SparkWrapperObject
     executorStageSummary :: (Core.Maybe ExecutorStageSummary),
     executorSummary :: (Core.Maybe ExecutorSummary),
     jobData :: (Core.Maybe JobData),
+    -- | Native Build Info
+    nativeBuildInfoUiData :: (Core.Maybe NativeBuildInfoUiData),
+    -- | Native SQL Execution Info
+    nativeSqlExecutionUiData :: (Core.Maybe NativeSqlExecutionUiData),
     poolData :: (Core.Maybe PoolData),
     processSummary :: (Core.Maybe ProcessSummary),
     rddOperationGraph :: (Core.Maybe RddOperationGraph),
@@ -12953,6 +13183,8 @@ newSparkWrapperObject =
       executorStageSummary = Core.Nothing,
       executorSummary = Core.Nothing,
       jobData = Core.Nothing,
+      nativeBuildInfoUiData = Core.Nothing,
+      nativeSqlExecutionUiData = Core.Nothing,
       poolData = Core.Nothing,
       processSummary = Core.Nothing,
       rddOperationGraph = Core.Nothing,
@@ -12982,6 +13214,8 @@ instance Core.FromJSON SparkWrapperObject where
             Core.<*> (o Core..:? "executorStageSummary")
             Core.<*> (o Core..:? "executorSummary")
             Core.<*> (o Core..:? "jobData")
+            Core.<*> (o Core..:? "nativeBuildInfoUiData")
+            Core.<*> (o Core..:? "nativeSqlExecutionUiData")
             Core.<*> (o Core..:? "poolData")
             Core.<*> (o Core..:? "processSummary")
             Core.<*> (o Core..:? "rddOperationGraph")
@@ -13010,6 +13244,9 @@ instance Core.ToJSON SparkWrapperObject where
             ("executorStageSummary" Core..=) Core.<$> executorStageSummary,
             ("executorSummary" Core..=) Core.<$> executorSummary,
             ("jobData" Core..=) Core.<$> jobData,
+            ("nativeBuildInfoUiData" Core..=) Core.<$> nativeBuildInfoUiData,
+            ("nativeSqlExecutionUiData" Core..=)
+              Core.<$> nativeSqlExecutionUiData,
             ("poolData" Core..=) Core.<$> poolData,
             ("processSummary" Core..=) Core.<$> processSummary,
             ("rddOperationGraph" Core..=) Core.<$> rddOperationGraph,

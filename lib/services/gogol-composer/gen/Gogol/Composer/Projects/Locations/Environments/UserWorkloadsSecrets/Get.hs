@@ -23,7 +23,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets an existing user workloads Secret. Values of the \"data\" field in the response are cleared. This method is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+-- Gets an existing user workloads Secret. Values of the \"data\" field in the response are cleared. This method is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
 --
 -- /See:/ <https://cloud.google.com/composer/ Cloud Composer API Reference> for @composer.projects.locations.environments.userWorkloadsSecrets.get@.
 module Gogol.Composer.Projects.Locations.Environments.UserWorkloadsSecrets.Get
@@ -52,7 +52,7 @@ type ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] UserWorkloadsSecret
 
--- | Gets an existing user workloads Secret. Values of the \"data\" field in the response are cleared. This method is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+-- | Gets an existing user workloads Secret. Values of the \"data\" field in the response are cleared. This method is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
 --
 -- /See:/ 'newComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsGet' smart constructor.
 data ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsGet = ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsGet

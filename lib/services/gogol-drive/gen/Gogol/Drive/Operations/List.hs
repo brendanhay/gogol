@@ -100,7 +100,13 @@ newDriveOperationsList =
 
 instance Core.GoogleRequest DriveOperationsList where
   type Rs DriveOperationsList = ListOperationsResponse
-  type Scopes DriveOperationsList = '[]
+  type
+    Scopes DriveOperationsList =
+      '[ Drive'FullControl,
+         Drive'File,
+         Drive'Meet'Readonly,
+         Drive'Readonly
+       ]
   requestClient DriveOperationsList {..} =
     go
       xgafv

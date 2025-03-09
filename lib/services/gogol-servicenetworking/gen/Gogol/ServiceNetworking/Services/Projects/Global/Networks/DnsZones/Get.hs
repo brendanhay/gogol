@@ -62,7 +62,7 @@ data ServiceNetworkingServicesProjectsGlobalNetworksDnsZonesGet = ServiceNetwork
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The network that the consumer is using to connect with services. Must be in the form of services\/{service}\/projects\/{project}\/global\/networks\/{network}\/zones\/{zoneName} Where {service} is the peering service that is managing connectivity for the service producer\'s organization. For Google services that support this {project} is the project number, as in \'12345\' {network} is the network name. {zoneName} is the DNS zone name
+    -- | Required. The network that the consumer is using to connect with services. Must be in the form of services\/{service}\/projects\/{project}\/global\/networks\/{network}\/dnsZones\/{zoneName} Where {service} is the peering service that is managing connectivity for the service producer\'s organization. For Google services that support this {project} is the project number, as in \'12345\' {network} is the network name. {zoneName} is the DNS zone name
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -73,7 +73,7 @@ data ServiceNetworkingServicesProjectsGlobalNetworksDnsZonesGet = ServiceNetwork
 
 -- | Creates a value of 'ServiceNetworkingServicesProjectsGlobalNetworksDnsZonesGet' with the minimum fields required to make a request.
 newServiceNetworkingServicesProjectsGlobalNetworksDnsZonesGet ::
-  -- |  Required. The network that the consumer is using to connect with services. Must be in the form of services\/{service}\/projects\/{project}\/global\/networks\/{network}\/zones\/{zoneName} Where {service} is the peering service that is managing connectivity for the service producer\'s organization. For Google services that support this {project} is the project number, as in \'12345\' {network} is the network name. {zoneName} is the DNS zone name See 'name'.
+  -- |  Required. The network that the consumer is using to connect with services. Must be in the form of services\/{service}\/projects\/{project}\/global\/networks\/{network}\/dnsZones\/{zoneName} Where {service} is the peering service that is managing connectivity for the service producer\'s organization. For Google services that support this {project} is the project number, as in \'12345\' {network} is the network name. {zoneName} is the DNS zone name See 'name'.
   Core.Text ->
   ServiceNetworkingServicesProjectsGlobalNetworksDnsZonesGet
 newServiceNetworkingServicesProjectsGlobalNetworksDnsZonesGet name =

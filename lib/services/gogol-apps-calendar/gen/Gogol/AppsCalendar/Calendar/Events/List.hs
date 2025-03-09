@@ -160,7 +160,12 @@ instance Core.GoogleRequest CalendarEventsList where
   type
     Scopes CalendarEventsList =
       '[ Calendar'FullControl,
+         Calendar'App'Created,
          Calendar'Events,
+         Calendar'Events'Freebusy,
+         Calendar'Events'Owned,
+         Calendar'Events'Owned'Readonly,
+         Calendar'Events'Public'Readonly,
          Calendar'Events'Readonly,
          Calendar'Readonly
        ]

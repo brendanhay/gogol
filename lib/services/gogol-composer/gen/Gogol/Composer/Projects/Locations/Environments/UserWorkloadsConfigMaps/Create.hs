@@ -23,7 +23,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a user workloads ConfigMap. This method is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+-- Creates a user workloads ConfigMap. This method is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
 --
 -- /See:/ <https://cloud.google.com/composer/ Cloud Composer API Reference> for @composer.projects.locations.environments.userWorkloadsConfigMaps.create@.
 module Gogol.Composer.Projects.Locations.Environments.UserWorkloadsConfigMaps.Create
@@ -54,7 +54,7 @@ type ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsCreateResource 
     Core.:> Core.ReqBody '[Core.JSON] UserWorkloadsConfigMap
     Core.:> Core.Post '[Core.JSON] UserWorkloadsConfigMap
 
--- | Creates a user workloads ConfigMap. This method is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+-- | Creates a user workloads ConfigMap. This method is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
 --
 -- /See:/ 'newComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsCreate' smart constructor.
 data ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsCreate = ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsCreate

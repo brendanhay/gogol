@@ -72,7 +72,16 @@ instance Core.GoogleRequest CalendarChannelsStop where
   type
     Scopes CalendarChannelsStop =
       '[ Calendar'FullControl,
+         Calendar'Acls,
+         Calendar'Acls'Readonly,
+         Calendar'App'Created,
+         Calendar'Calendarlist,
+         Calendar'Calendarlist'Readonly,
          Calendar'Events,
+         Calendar'Events'Freebusy,
+         Calendar'Events'Owned,
+         Calendar'Events'Owned'Readonly,
+         Calendar'Events'Public'Readonly,
          Calendar'Events'Readonly,
          Calendar'Readonly,
          Calendar'Settings'Readonly

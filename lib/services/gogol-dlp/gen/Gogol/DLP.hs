@@ -1084,6 +1084,21 @@ module Gogol.DLP
     GooglePrivacyDlpV2DataProfileConfigSnapshot (..),
     newGooglePrivacyDlpV2DataProfileConfigSnapshot,
 
+    -- ** GooglePrivacyDlpV2DataProfileFinding
+    GooglePrivacyDlpV2DataProfileFinding (..),
+    newGooglePrivacyDlpV2DataProfileFinding,
+
+    -- ** GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility
+    GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility (..),
+
+    -- ** GooglePrivacyDlpV2DataProfileFindingLocation
+    GooglePrivacyDlpV2DataProfileFindingLocation (..),
+    newGooglePrivacyDlpV2DataProfileFindingLocation,
+
+    -- ** GooglePrivacyDlpV2DataProfileFindingRecordLocation
+    GooglePrivacyDlpV2DataProfileFindingRecordLocation (..),
+    newGooglePrivacyDlpV2DataProfileFindingRecordLocation,
+
     -- ** GooglePrivacyDlpV2DataProfileJobConfig
     GooglePrivacyDlpV2DataProfileJobConfig (..),
     newGooglePrivacyDlpV2DataProfileJobConfig,
@@ -1329,6 +1344,21 @@ module Gogol.DLP
     GooglePrivacyDlpV2DiscoveryTarget (..),
     newGooglePrivacyDlpV2DiscoveryTarget,
 
+    -- ** GooglePrivacyDlpV2DiscoveryVertexDatasetConditions
+    GooglePrivacyDlpV2DiscoveryVertexDatasetConditions (..),
+    newGooglePrivacyDlpV2DiscoveryVertexDatasetConditions,
+
+    -- ** GooglePrivacyDlpV2DiscoveryVertexDatasetFilter
+    GooglePrivacyDlpV2DiscoveryVertexDatasetFilter (..),
+    newGooglePrivacyDlpV2DiscoveryVertexDatasetFilter,
+
+    -- ** GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence
+    GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence (..),
+    newGooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence,
+
+    -- ** GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency
+    GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency (..),
+
     -- ** GooglePrivacyDlpV2DlpJob
     GooglePrivacyDlpV2DlpJob (..),
     newGooglePrivacyDlpV2DlpJob,
@@ -1464,6 +1494,10 @@ module Gogol.DLP
     GooglePrivacyDlpV2FixedSizeBucketingConfig (..),
     newGooglePrivacyDlpV2FixedSizeBucketingConfig,
 
+    -- ** GooglePrivacyDlpV2GlobalProcessing
+    GooglePrivacyDlpV2GlobalProcessing (..),
+    newGooglePrivacyDlpV2GlobalProcessing,
+
     -- ** GooglePrivacyDlpV2HotwordRule
     GooglePrivacyDlpV2HotwordRule (..),
     newGooglePrivacyDlpV2HotwordRule,
@@ -1503,6 +1537,10 @@ module Gogol.DLP
     -- ** GooglePrivacyDlpV2HybridOptions_Labels
     GooglePrivacyDlpV2HybridOptions_Labels (..),
     newGooglePrivacyDlpV2HybridOptions_Labels,
+
+    -- ** GooglePrivacyDlpV2ImageFallbackLocation
+    GooglePrivacyDlpV2ImageFallbackLocation (..),
+    newGooglePrivacyDlpV2ImageFallbackLocation,
 
     -- ** GooglePrivacyDlpV2ImageLocation
     GooglePrivacyDlpV2ImageLocation (..),
@@ -1766,6 +1804,10 @@ module Gogol.DLP
     -- ** GooglePrivacyDlpV2MetadataLocation_Type
     GooglePrivacyDlpV2MetadataLocation_Type (..),
 
+    -- ** GooglePrivacyDlpV2MultiRegionProcessing
+    GooglePrivacyDlpV2MultiRegionProcessing (..),
+    newGooglePrivacyDlpV2MultiRegionProcessing,
+
     -- ** GooglePrivacyDlpV2NumericalStatsConfig
     GooglePrivacyDlpV2NumericalStatsConfig (..),
     newGooglePrivacyDlpV2NumericalStatsConfig,
@@ -1832,6 +1874,10 @@ module Gogol.DLP
     -- ** GooglePrivacyDlpV2PrivacyMetric
     GooglePrivacyDlpV2PrivacyMetric (..),
     newGooglePrivacyDlpV2PrivacyMetric,
+
+    -- ** GooglePrivacyDlpV2ProcessingLocation
+    GooglePrivacyDlpV2ProcessingLocation (..),
+    newGooglePrivacyDlpV2ProcessingLocation,
 
     -- ** GooglePrivacyDlpV2ProfileStatus
     GooglePrivacyDlpV2ProfileStatus (..),
@@ -1963,6 +2009,10 @@ module Gogol.DLP
     -- ** GooglePrivacyDlpV2ReidentifyContentResponse
     GooglePrivacyDlpV2ReidentifyContentResponse (..),
     newGooglePrivacyDlpV2ReidentifyContentResponse,
+
+    -- ** GooglePrivacyDlpV2RelatedResource
+    GooglePrivacyDlpV2RelatedResource (..),
+    newGooglePrivacyDlpV2RelatedResource,
 
     -- ** GooglePrivacyDlpV2ReplaceDictionaryConfig
     GooglePrivacyDlpV2ReplaceDictionaryConfig (..),
@@ -2253,6 +2303,26 @@ module Gogol.DLP
     -- ** GooglePrivacyDlpV2VersionDescription
     GooglePrivacyDlpV2VersionDescription (..),
     newGooglePrivacyDlpV2VersionDescription,
+
+    -- ** GooglePrivacyDlpV2VertexDatasetCollection
+    GooglePrivacyDlpV2VertexDatasetCollection (..),
+    newGooglePrivacyDlpV2VertexDatasetCollection,
+
+    -- ** GooglePrivacyDlpV2VertexDatasetDiscoveryTarget
+    GooglePrivacyDlpV2VertexDatasetDiscoveryTarget (..),
+    newGooglePrivacyDlpV2VertexDatasetDiscoveryTarget,
+
+    -- ** GooglePrivacyDlpV2VertexDatasetRegex
+    GooglePrivacyDlpV2VertexDatasetRegex (..),
+    newGooglePrivacyDlpV2VertexDatasetRegex,
+
+    -- ** GooglePrivacyDlpV2VertexDatasetRegexes
+    GooglePrivacyDlpV2VertexDatasetRegexes (..),
+    newGooglePrivacyDlpV2VertexDatasetRegexes,
+
+    -- ** GooglePrivacyDlpV2VertexDatasetResourceReference
+    GooglePrivacyDlpV2VertexDatasetResourceReference (..),
+    newGooglePrivacyDlpV2VertexDatasetResourceReference,
 
     -- ** GooglePrivacyDlpV2WordList
     GooglePrivacyDlpV2WordList (..),

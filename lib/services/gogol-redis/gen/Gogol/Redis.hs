@@ -378,6 +378,9 @@ module Gogol.Redis
     -- ** DatabaseResourceMetadata_InstanceType
     DatabaseResourceMetadata_InstanceType (..),
 
+    -- ** DatabaseResourceMetadata_SuspensionReason
+    DatabaseResourceMetadata_SuspensionReason (..),
+
     -- ** DatabaseResourceRecommendationSignalData
     DatabaseResourceRecommendationSignalData (..),
     newDatabaseResourceRecommendationSignalData,
@@ -399,6 +402,16 @@ module Gogol.Redis
     -- ** Empty
     Empty (..),
     newEmpty,
+
+    -- ** EncryptionInfo
+    EncryptionInfo (..),
+    newEncryptionInfo,
+
+    -- ** EncryptionInfo_EncryptionType
+    EncryptionInfo_EncryptionType (..),
+
+    -- ** EncryptionInfo_KmsKeyPrimaryState
+    EncryptionInfo_KmsKeyPrimaryState (..),
 
     -- ** Entitlement
     Entitlement (..),
@@ -428,6 +441,10 @@ module Gogol.Redis
     -- ** FixedFrequencySchedule
     FixedFrequencySchedule (..),
     newFixedFrequencySchedule,
+
+    -- ** GCBDRConfiguration
+    GCBDRConfiguration (..),
+    newGCBDRConfiguration,
 
     -- ** GcsBackupSource
     GcsBackupSource (..),
@@ -729,6 +746,9 @@ module Gogol.Redis
     -- ** UpdateInfo
     UpdateInfo (..),
     newUpdateInfo,
+
+    -- ** UpdateInfo_TargetNodeType
+    UpdateInfo_TargetNodeType (..),
 
     -- ** UpgradeInstanceRequest
     UpgradeInstanceRequest (..),

@@ -23,7 +23,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a reaction to a message. Only unicode emojis are supported. For an example, see <https://developers.google.com/workspace/chat/delete-reactions Delete a reaction>. Requires <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user user authentication>.
+-- Deletes a reaction to a message. For an example, see <https://developers.google.com/workspace/chat/delete-reactions Delete a reaction>. Requires <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user user authentication>.
 --
 -- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference> for @chat.spaces.messages.reactions.delete@.
 module Gogol.Chat.Spaces.Messages.Reactions.Delete
@@ -52,7 +52,7 @@ type ChatSpacesMessagesReactionsDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] Empty
 
--- | Deletes a reaction to a message. Only unicode emojis are supported. For an example, see <https://developers.google.com/workspace/chat/delete-reactions Delete a reaction>. Requires <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user user authentication>.
+-- | Deletes a reaction to a message. For an example, see <https://developers.google.com/workspace/chat/delete-reactions Delete a reaction>. Requires <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user user authentication>.
 --
 -- /See:/ 'newChatSpacesMessagesReactionsDelete' smart constructor.
 data ChatSpacesMessagesReactionsDelete = ChatSpacesMessagesReactionsDelete

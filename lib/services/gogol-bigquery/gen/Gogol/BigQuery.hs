@@ -176,10 +176,30 @@ module Gogol.BigQuery
     BigQueryRoutinesUpdate (..),
     newBigQueryRoutinesUpdate,
 
+    -- ** bigquery.rowAccessPolicies.batchDelete
+    BigQueryRowAccessPoliciesBatchDeleteResource,
+    BigQueryRowAccessPoliciesBatchDelete (..),
+    newBigQueryRowAccessPoliciesBatchDelete,
+
+    -- ** bigquery.rowAccessPolicies.delete
+    BigQueryRowAccessPoliciesDeleteResource,
+    BigQueryRowAccessPoliciesDelete (..),
+    newBigQueryRowAccessPoliciesDelete,
+
+    -- ** bigquery.rowAccessPolicies.get
+    BigQueryRowAccessPoliciesGetResource,
+    BigQueryRowAccessPoliciesGet (..),
+    newBigQueryRowAccessPoliciesGet,
+
     -- ** bigquery.rowAccessPolicies.getIamPolicy
     BigQueryRowAccessPoliciesGetIamPolicyResource,
     BigQueryRowAccessPoliciesGetIamPolicy (..),
     newBigQueryRowAccessPoliciesGetIamPolicy,
+
+    -- ** bigquery.rowAccessPolicies.insert
+    BigQueryRowAccessPoliciesInsertResource,
+    BigQueryRowAccessPoliciesInsert (..),
+    newBigQueryRowAccessPoliciesInsert,
 
     -- ** bigquery.rowAccessPolicies.list
     BigQueryRowAccessPoliciesListResource,
@@ -190,6 +210,11 @@ module Gogol.BigQuery
     BigQueryRowAccessPoliciesTestIamPermissionsResource,
     BigQueryRowAccessPoliciesTestIamPermissions (..),
     newBigQueryRowAccessPoliciesTestIamPermissions,
+
+    -- ** bigquery.rowAccessPolicies.update
+    BigQueryRowAccessPoliciesUpdateResource,
+    BigQueryRowAccessPoliciesUpdate (..),
+    newBigQueryRowAccessPoliciesUpdate,
 
     -- ** bigquery.tabledata.insertAll
     BigQueryTabledataInsertAllResource,
@@ -323,6 +348,10 @@ module Gogol.BigQuery
     -- ** AvroOptions
     AvroOptions (..),
     newAvroOptions,
+
+    -- ** BatchDeleteRowAccessPoliciesRequest
+    BatchDeleteRowAccessPoliciesRequest (..),
+    newBatchDeleteRowAccessPoliciesRequest,
 
     -- ** BiEngineReason
     BiEngineReason (..),
@@ -1193,6 +1222,17 @@ module Gogol.BigQuery
     StorageDescriptor (..),
     newStorageDescriptor,
 
+    -- ** StoredColumnsUnusedReason
+    StoredColumnsUnusedReason (..),
+    newStoredColumnsUnusedReason,
+
+    -- ** StoredColumnsUnusedReason_Code
+    StoredColumnsUnusedReason_Code (..),
+
+    -- ** StoredColumnsUsage
+    StoredColumnsUsage (..),
+    newStoredColumnsUsage,
+
     -- ** Streamingbuffer
     Streamingbuffer (..),
     newStreamingbuffer,
@@ -1482,9 +1522,14 @@ import Gogol.BigQuery.Routines.Insert
 import Gogol.BigQuery.Routines.List
 import Gogol.BigQuery.Routines.SetIamPolicy
 import Gogol.BigQuery.Routines.Update
+import Gogol.BigQuery.RowAccessPolicies.BatchDelete
+import Gogol.BigQuery.RowAccessPolicies.Delete
+import Gogol.BigQuery.RowAccessPolicies.Get
 import Gogol.BigQuery.RowAccessPolicies.GetIamPolicy
+import Gogol.BigQuery.RowAccessPolicies.Insert
 import Gogol.BigQuery.RowAccessPolicies.List
 import Gogol.BigQuery.RowAccessPolicies.TestIamPermissions
+import Gogol.BigQuery.RowAccessPolicies.Update
 import Gogol.BigQuery.Tabledata.InsertAll
 import Gogol.BigQuery.Tabledata.List
 import Gogol.BigQuery.Tables.Delete

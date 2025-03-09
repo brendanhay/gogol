@@ -55,6 +55,18 @@ module Gogol.Dataflow.Internal.Product
     BigTableIODetails (..),
     newBigTableIODetails,
 
+    -- * BoundedTrie
+    BoundedTrie (..),
+    newBoundedTrie,
+
+    -- * BoundedTrieNode
+    BoundedTrieNode (..),
+    newBoundedTrieNode,
+
+    -- * BoundedTrieNode_Children
+    BoundedTrieNode_Children (..),
+    newBoundedTrieNode_Children,
+
     -- * BucketOptions
     BucketOptions (..),
     newBucketOptions,
@@ -1352,6 +1364,114 @@ instance Core.ToJSON BigTableIODetails where
           ]
       )
 
+-- | The message type used for encoding metrics of type bounded trie.
+--
+-- /See:/ 'newBoundedTrie' smart constructor.
+data BoundedTrie = BoundedTrie
+  { -- | The maximum number of elements to store before truncation.
+    bound :: (Core.Maybe Core.Int32),
+    -- | A compact representation of all the elements in this trie.
+    root :: (Core.Maybe BoundedTrieNode),
+    -- | A more efficient representation for metrics consisting of a single value.
+    singleton :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BoundedTrie' with the minimum fields required to make a request.
+newBoundedTrie ::
+  BoundedTrie
+newBoundedTrie =
+  BoundedTrie
+    { bound = Core.Nothing,
+      root = Core.Nothing,
+      singleton = Core.Nothing
+    }
+
+instance Core.FromJSON BoundedTrie where
+  parseJSON =
+    Core.withObject
+      "BoundedTrie"
+      ( \o ->
+          BoundedTrie
+            Core.<$> (o Core..:? "bound")
+            Core.<*> (o Core..:? "root")
+            Core.<*> (o Core..:? "singleton")
+      )
+
+instance Core.ToJSON BoundedTrie where
+  toJSON BoundedTrie {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("bound" Core..=) Core.<$> bound,
+            ("root" Core..=) Core.<$> root,
+            ("singleton" Core..=) Core.<$> singleton
+          ]
+      )
+
+-- | A single node in a BoundedTrie.
+--
+-- /See:/ 'newBoundedTrieNode' smart constructor.
+data BoundedTrieNode = BoundedTrieNode
+  { -- | Children of this node. Must be empty if truncated is true.
+    children :: (Core.Maybe BoundedTrieNode_Children),
+    -- | Whether this node has been truncated. A truncated leaf represents possibly many children with the same prefix.
+    truncated :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BoundedTrieNode' with the minimum fields required to make a request.
+newBoundedTrieNode ::
+  BoundedTrieNode
+newBoundedTrieNode =
+  BoundedTrieNode
+    { children = Core.Nothing,
+      truncated = Core.Nothing
+    }
+
+instance Core.FromJSON BoundedTrieNode where
+  parseJSON =
+    Core.withObject
+      "BoundedTrieNode"
+      ( \o ->
+          BoundedTrieNode
+            Core.<$> (o Core..:? "children")
+            Core.<*> (o Core..:? "truncated")
+      )
+
+instance Core.ToJSON BoundedTrieNode where
+  toJSON BoundedTrieNode {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("children" Core..=) Core.<$> children,
+            ("truncated" Core..=) Core.<$> truncated
+          ]
+      )
+
+-- | Children of this node. Must be empty if truncated is true.
+--
+-- /See:/ 'newBoundedTrieNode_Children' smart constructor.
+newtype BoundedTrieNode_Children = BoundedTrieNode_Children
+  { additional :: (Core.HashMap Core.Text BoundedTrieNode)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BoundedTrieNode_Children' with the minimum fields required to make a request.
+newBoundedTrieNode_Children ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text BoundedTrieNode ->
+  BoundedTrieNode_Children
+newBoundedTrieNode_Children additional =
+  BoundedTrieNode_Children {additional = additional}
+
+instance Core.FromJSON BoundedTrieNode_Children where
+  parseJSON =
+    Core.withObject
+      "BoundedTrieNode_Children"
+      (\o -> BoundedTrieNode_Children Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON BoundedTrieNode_Children where
+  toJSON BoundedTrieNode_Children {..} = Core.toJSON additional
+
 -- | @BucketOptions@ describes the bucket boundaries used in the histogram.
 --
 -- /See:/ 'newBucketOptions' smart constructor.
@@ -1851,12 +1971,14 @@ instance Core.ToJSON CounterStructuredNameAndMetadata where
           ]
       )
 
--- | An update to a Counter sent from a worker.
+-- | An update to a Counter sent from a worker. Next ID: 17
 --
 -- /See:/ 'newCounterUpdate' smart constructor.
 data CounterUpdate = CounterUpdate
   { -- | Boolean value for And, Or.
     boolean :: (Core.Maybe Core.Bool),
+    -- | Bounded trie data
+    boundedTrie :: (Core.Maybe BoundedTrie),
     -- | True if this counter is reported as the total cumulative aggregate value accumulated since the worker started working on this WorkItem. By default this is false, indicating that this counter is reported as a delta.
     cumulative :: (Core.Maybe Core.Bool),
     -- | Distribution data
@@ -1894,6 +2016,7 @@ newCounterUpdate ::
 newCounterUpdate =
   CounterUpdate
     { boolean = Core.Nothing,
+      boundedTrie = Core.Nothing,
       cumulative = Core.Nothing,
       distribution = Core.Nothing,
       floatingPoint = Core.Nothing,
@@ -1917,6 +2040,7 @@ instance Core.FromJSON CounterUpdate where
       ( \o ->
           CounterUpdate
             Core.<$> (o Core..:? "boolean")
+            Core.<*> (o Core..:? "boundedTrie")
             Core.<*> (o Core..:? "cumulative")
             Core.<*> (o Core..:? "distribution")
             Core.<*> (o Core..:? "floatingPoint")
@@ -1938,6 +2062,7 @@ instance Core.ToJSON CounterUpdate where
     Core.object
       ( Core.catMaybes
           [ ("boolean" Core..=) Core.<$> boolean,
+            ("boundedTrie" Core..=) Core.<$> boundedTrie,
             ("cumulative" Core..=) Core.<$> cumulative,
             ("distribution" Core..=) Core.<$> distribution,
             ("floatingPoint" Core..=) Core.<$> floatingPoint,
@@ -5487,7 +5612,7 @@ instance Core.FromJSON MetricStructuredName_Context where
 instance Core.ToJSON MetricStructuredName_Context where
   toJSON MetricStructuredName_Context {..} = Core.toJSON additional
 
--- | Describes the state of a metric.
+-- | Describes the state of a metric. Next ID: 14
 --
 -- /See:/ 'newMetricUpdate' smart constructor.
 data MetricUpdate = MetricUpdate
@@ -5509,8 +5634,10 @@ data MetricUpdate = MetricUpdate
     name :: (Core.Maybe MetricStructuredName),
     -- | Worker-computed aggregate value for aggregation kinds \"Sum\", \"Max\", \"Min\", \"And\", and \"Or\". The possible value types are Long, Double, and Boolean.
     scalar :: (Core.Maybe Core.Value),
-    -- | Worker-computed aggregate value for the \"Set\" aggregation kind. The only possible value type is a list of Values whose type can be Long, Double, or String, according to the metric\'s type. All Values in the list must be of the same type.
+    -- | Worker-computed aggregate value for the \"Set\" aggregation kind. The only possible value type is a list of Values whose type can be Long, Double, String, or BoundedTrie according to the metric\'s type. All Values in the list must be of the same type.
     set :: (Core.Maybe Core.Value),
+    -- | Worker-computed aggregate value for the \"Trie\" aggregation kind. The only possible value type is a BoundedTrieNode.
+    trie :: (Core.Maybe Core.Value),
     -- | Timestamp associated with the metric value. Optional when workers are reporting work progress; it will be filled in responses from the metrics API.
     updateTime :: (Core.Maybe Core.DateTime)
   }
@@ -5531,6 +5658,7 @@ newMetricUpdate =
       name = Core.Nothing,
       scalar = Core.Nothing,
       set = Core.Nothing,
+      trie = Core.Nothing,
       updateTime = Core.Nothing
     }
 
@@ -5550,6 +5678,7 @@ instance Core.FromJSON MetricUpdate where
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "scalar")
             Core.<*> (o Core..:? "set")
+            Core.<*> (o Core..:? "trie")
             Core.<*> (o Core..:? "updateTime")
       )
 
@@ -5567,6 +5696,7 @@ instance Core.ToJSON MetricUpdate where
             ("name" Core..=) Core.<$> name,
             ("scalar" Core..=) Core.<$> scalar,
             ("set" Core..=) Core.<$> set,
+            ("trie" Core..=) Core.<$> trie,
             ("updateTime" Core..=) Core.<$> updateTime
           ]
       )
@@ -10228,7 +10358,9 @@ data TemplateMetadata = TemplateMetadata
     -- | Optional. Indicates if the streaming template supports at least once mode.
     supportsAtLeastOnce :: (Core.Maybe Core.Bool),
     -- | Optional. Indicates if the streaming template supports exactly once mode.
-    supportsExactlyOnce :: (Core.Maybe Core.Bool)
+    supportsExactlyOnce :: (Core.Maybe Core.Bool),
+    -- | Optional. For future use.
+    yamlDefinition :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -10243,7 +10375,8 @@ newTemplateMetadata =
       parameters = Core.Nothing,
       streaming = Core.Nothing,
       supportsAtLeastOnce = Core.Nothing,
-      supportsExactlyOnce = Core.Nothing
+      supportsExactlyOnce = Core.Nothing,
+      yamlDefinition = Core.Nothing
     }
 
 instance Core.FromJSON TemplateMetadata where
@@ -10259,6 +10392,7 @@ instance Core.FromJSON TemplateMetadata where
             Core.<*> (o Core..:? "streaming")
             Core.<*> (o Core..:? "supportsAtLeastOnce")
             Core.<*> (o Core..:? "supportsExactlyOnce")
+            Core.<*> (o Core..:? "yamlDefinition")
       )
 
 instance Core.ToJSON TemplateMetadata where
@@ -10271,7 +10405,8 @@ instance Core.ToJSON TemplateMetadata where
             ("parameters" Core..=) Core.<$> parameters,
             ("streaming" Core..=) Core.<$> streaming,
             ("supportsAtLeastOnce" Core..=) Core.<$> supportsAtLeastOnce,
-            ("supportsExactlyOnce" Core..=) Core.<$> supportsExactlyOnce
+            ("supportsExactlyOnce" Core..=) Core.<$> supportsExactlyOnce,
+            ("yamlDefinition" Core..=) Core.<$> yamlDefinition
           ]
       )
 

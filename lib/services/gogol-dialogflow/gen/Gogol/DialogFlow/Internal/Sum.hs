@@ -70,6 +70,14 @@ module Gogol.DialogFlow.Internal.Sum
         ..
       ),
 
+    -- * GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode
+    GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode
+      ( GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode_DOCUMENTPROCESSINGMODEUNSPECIFIED,
+        GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode_Documents,
+        GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode_Chunks,
+        ..
+      ),
+
     -- * GoogleCloudDialogflowCxV3DataStoreConnectionSignalsGroundingSignals_Decision
     GoogleCloudDialogflowCxV3DataStoreConnectionSignalsGroundingSignals_Decision
       ( GoogleCloudDialogflowCxV3DataStoreConnectionSignalsGroundingSignals_Decision_GROUNDINGDECISIONUNSPECIFIED,
@@ -509,6 +517,14 @@ module Gogol.DialogFlow.Internal.Sum
         ..
       ),
 
+    -- * GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode
+    GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode
+      ( GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode_DOCUMENTPROCESSINGMODEUNSPECIFIED,
+        GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode_Documents,
+        GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode_Chunks,
+        ..
+      ),
+
     -- * GoogleCloudDialogflowCxV3beta1InputAudioConfig_AudioEncoding
     GoogleCloudDialogflowCxV3beta1InputAudioConfig_AudioEncoding
       ( GoogleCloudDialogflowCxV3beta1InputAudioConfig_AudioEncoding_AUDIOENCODINGUNSPECIFIED,
@@ -629,6 +645,7 @@ module Gogol.DialogFlow.Internal.Sum
         GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_ARTICLESUGGESTION,
         GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_Faq,
         GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_SMARTREPLY,
+        GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_CONVERSATIONSUMMARIZATION,
         GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_KNOWLEDGESEARCH,
         GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_KNOWLEDGEASSIST,
         ..
@@ -641,6 +658,7 @@ module Gogol.DialogFlow.Internal.Sum
         GoogleCloudDialogflowV2ConversationEvent_Type_CONVERSATIONFINISHED,
         GoogleCloudDialogflowV2ConversationEvent_Type_HUMANINTERVENTIONNEEDED,
         GoogleCloudDialogflowV2ConversationEvent_Type_NEWMESSAGE,
+        GoogleCloudDialogflowV2ConversationEvent_Type_NEWRECOGNITIONRESULT,
         GoogleCloudDialogflowV2ConversationEvent_Type_UNRECOVERABLEERROR,
         ..
       ),
@@ -819,6 +837,7 @@ module Gogol.DialogFlow.Internal.Sum
         GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_ARTICLESUGGESTION,
         GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_Faq,
         GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_SMARTREPLY,
+        GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_CONVERSATIONSUMMARIZATION,
         GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_KNOWLEDGESEARCH,
         GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_KNOWLEDGEASSIST,
         ..
@@ -829,6 +848,14 @@ module Gogol.DialogFlow.Internal.Sum
       ( GoogleCloudDialogflowV2SmartReplyModelMetadata_TrainingModelType_MODELTYPEUNSPECIFIED,
         GoogleCloudDialogflowV2SmartReplyModelMetadata_TrainingModelType_SMARTREPLYDUALENCODERMODEL,
         GoogleCloudDialogflowV2SmartReplyModelMetadata_TrainingModelType_SMARTREPLYBERTMODEL,
+        ..
+      ),
+
+    -- * GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType
+    GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType
+      ( GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType_MESSAGETYPEUNSPECIFIED,
+        GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType_Transcript,
+        GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType_ENDOFSINGLEUTTERANCE,
         ..
       ),
 
@@ -861,6 +888,7 @@ module Gogol.DialogFlow.Internal.Sum
         GoogleCloudDialogflowV2beta1ConversationEvent_Type_CONVERSATIONFINISHED,
         GoogleCloudDialogflowV2beta1ConversationEvent_Type_HUMANINTERVENTIONNEEDED,
         GoogleCloudDialogflowV2beta1ConversationEvent_Type_NEWMESSAGE,
+        GoogleCloudDialogflowV2beta1ConversationEvent_Type_NEWRECOGNITIONRESULT,
         GoogleCloudDialogflowV2beta1ConversationEvent_Type_UNRECOVERABLEERROR,
         ..
       ),
@@ -1050,6 +1078,38 @@ module Gogol.DialogFlow.Internal.Sum
         GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_CONVERSATIONSUMMARIZATION,
         GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_KNOWLEDGESEARCH,
         GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_KNOWLEDGEASSIST,
+        ..
+      ),
+
+    -- * GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType
+    GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType
+      ( GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType_MESSAGETYPEUNSPECIFIED,
+        GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType_Transcript,
+        GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType_DTMFDIGITS,
+        GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType_ENDOFSINGLEUTTERANCE,
+        GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType_PARTIALDTMFDIGITS,
+        ..
+      ),
+
+    -- * GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem
+    GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem
+      ( GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_TELEPHONYDTMFUNSPECIFIED,
+        GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFONE,
+        GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFTWO,
+        GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFTHREE,
+        GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFFOUR,
+        GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFFIVE,
+        GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFSIX,
+        GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFSEVEN,
+        GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFEIGHT,
+        GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFNINE,
+        GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFZERO,
+        GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFA,
+        GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFB,
+        GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFC,
+        GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFD,
+        GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFSTAR,
+        GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFPOUND,
         ..
       ),
 
@@ -1275,6 +1335,38 @@ pattern GoogleCloudDialogflowCxV3DataStoreConnection_DataStoreType_Structured = 
   GoogleCloudDialogflowCxV3DataStoreConnection_DataStoreType_Unstructured,
   GoogleCloudDialogflowCxV3DataStoreConnection_DataStoreType_Structured,
   GoogleCloudDialogflowCxV3DataStoreConnection_DataStoreType
+  #-}
+
+-- | The document processing mode for the data store connection. Should only be set for PUBLIC_WEB and UNSTRUCTURED data stores. If not set it is considered as DOCUMENTS, as this is the legacy mode.
+newtype GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode = GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode {fromGoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified. This should be set for STRUCTURED type data stores. Due to legacy reasons this is considered as DOCUMENTS for STRUCTURED and PUBLIC_WEB data stores.
+pattern GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode_DOCUMENTPROCESSINGMODEUNSPECIFIED :: GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode
+pattern GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode_DOCUMENTPROCESSINGMODEUNSPECIFIED = GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode "DOCUMENT_PROCESSING_MODE_UNSPECIFIED"
+
+-- | Documents are processed as documents.
+pattern GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode_Documents :: GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode
+pattern GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode_Documents = GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode "DOCUMENTS"
+
+-- | Documents are converted to chunks.
+pattern GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode_Chunks :: GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode
+pattern GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode_Chunks = GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode "CHUNKS"
+
+{-# COMPLETE
+  GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode_DOCUMENTPROCESSINGMODEUNSPECIFIED,
+  GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode_Documents,
+  GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode_Chunks,
+  GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode
   #-}
 
 -- | Represents the decision of the grounding check.
@@ -3094,6 +3186,38 @@ pattern GoogleCloudDialogflowCxV3beta1DataStoreConnection_DataStoreType_Structur
   GoogleCloudDialogflowCxV3beta1DataStoreConnection_DataStoreType
   #-}
 
+-- | The document processing mode for the data store connection. Should only be set for PUBLIC_WEB and UNSTRUCTURED data stores. If not set it is considered as DOCUMENTS, as this is the legacy mode.
+newtype GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode = GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode {fromGoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified. This should be set for STRUCTURED type data stores. Due to legacy reasons this is considered as DOCUMENTS for STRUCTURED and PUBLIC_WEB data stores.
+pattern GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode_DOCUMENTPROCESSINGMODEUNSPECIFIED :: GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode
+pattern GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode_DOCUMENTPROCESSINGMODEUNSPECIFIED = GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode "DOCUMENT_PROCESSING_MODE_UNSPECIFIED"
+
+-- | Documents are processed as documents.
+pattern GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode_Documents :: GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode
+pattern GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode_Documents = GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode "DOCUMENTS"
+
+-- | Documents are converted to chunks.
+pattern GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode_Chunks :: GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode
+pattern GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode_Chunks = GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode "CHUNKS"
+
+{-# COMPLETE
+  GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode_DOCUMENTPROCESSINGMODEUNSPECIFIED,
+  GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode_Documents,
+  GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode_Chunks,
+  GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode
+  #-}
+
 -- | Required. Audio encoding of the audio content to process.
 newtype GoogleCloudDialogflowCxV3beta1InputAudioConfig_AudioEncoding = GoogleCloudDialogflowCxV3beta1InputAudioConfig_AudioEncoding {fromGoogleCloudDialogflowCxV3beta1InputAudioConfig_AudioEncoding :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -3596,6 +3720,10 @@ pattern GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_Sug
 pattern GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_SMARTREPLY :: GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
 pattern GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_SMARTREPLY = GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "SMART_REPLY"
 
+-- | Run conversation summarization model for chat.
+pattern GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_CONVERSATIONSUMMARIZATION :: GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
+pattern GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_CONVERSATIONSUMMARIZATION = GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "CONVERSATION_SUMMARIZATION"
+
 -- | Run knowledge search with text input from agent or text generated query.
 pattern GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_KNOWLEDGESEARCH :: GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
 pattern GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_KNOWLEDGESEARCH = GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "KNOWLEDGE_SEARCH"
@@ -3609,6 +3737,7 @@ pattern GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_Sug
   GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_ARTICLESUGGESTION,
   GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_Faq,
   GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_SMARTREPLY,
+  GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_CONVERSATIONSUMMARIZATION,
   GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_KNOWLEDGESEARCH,
   GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_KNOWLEDGEASSIST,
   GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
@@ -3647,6 +3776,10 @@ pattern GoogleCloudDialogflowV2ConversationEvent_Type_HUMANINTERVENTIONNEEDED = 
 pattern GoogleCloudDialogflowV2ConversationEvent_Type_NEWMESSAGE :: GoogleCloudDialogflowV2ConversationEvent_Type
 pattern GoogleCloudDialogflowV2ConversationEvent_Type_NEWMESSAGE = GoogleCloudDialogflowV2ConversationEvent_Type "NEW_MESSAGE"
 
+-- | An existing conversation has received a new speech recognition result. This is mainly for delivering intermediate transcripts. The notification is configured in ConversationProfile.new/recognition/event/notification/config.
+pattern GoogleCloudDialogflowV2ConversationEvent_Type_NEWRECOGNITIONRESULT :: GoogleCloudDialogflowV2ConversationEvent_Type
+pattern GoogleCloudDialogflowV2ConversationEvent_Type_NEWRECOGNITIONRESULT = GoogleCloudDialogflowV2ConversationEvent_Type "NEW_RECOGNITION_RESULT"
+
 -- | Unrecoverable error during a telephone call. In general non-recoverable errors only occur if something was misconfigured in the ConversationProfile corresponding to the call. After a non-recoverable error, Dialogflow may stop responding. We don\'t fire this event: * in an API call because we can directly return the error, or, * when we can recover from an error.
 pattern GoogleCloudDialogflowV2ConversationEvent_Type_UNRECOVERABLEERROR :: GoogleCloudDialogflowV2ConversationEvent_Type
 pattern GoogleCloudDialogflowV2ConversationEvent_Type_UNRECOVERABLEERROR = GoogleCloudDialogflowV2ConversationEvent_Type "UNRECOVERABLE_ERROR"
@@ -3657,6 +3790,7 @@ pattern GoogleCloudDialogflowV2ConversationEvent_Type_UNRECOVERABLEERROR = Googl
   GoogleCloudDialogflowV2ConversationEvent_Type_CONVERSATIONFINISHED,
   GoogleCloudDialogflowV2ConversationEvent_Type_HUMANINTERVENTIONNEEDED,
   GoogleCloudDialogflowV2ConversationEvent_Type_NEWMESSAGE,
+  GoogleCloudDialogflowV2ConversationEvent_Type_NEWRECOGNITIONRESULT,
   GoogleCloudDialogflowV2ConversationEvent_Type_UNRECOVERABLEERROR,
   GoogleCloudDialogflowV2ConversationEvent_Type
   #-}
@@ -4393,6 +4527,10 @@ pattern GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_Sugge
 pattern GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_SMARTREPLY :: GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
 pattern GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_SMARTREPLY = GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "SMART_REPLY"
 
+-- | Run conversation summarization model for chat.
+pattern GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_CONVERSATIONSUMMARIZATION :: GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
+pattern GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_CONVERSATIONSUMMARIZATION = GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "CONVERSATION_SUMMARIZATION"
+
 -- | Run knowledge search with text input from agent or text generated query.
 pattern GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_KNOWLEDGESEARCH :: GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
 pattern GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_KNOWLEDGESEARCH = GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "KNOWLEDGE_SEARCH"
@@ -4406,6 +4544,7 @@ pattern GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_Sugge
   GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_ARTICLESUGGESTION,
   GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_Faq,
   GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_SMARTREPLY,
+  GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_CONVERSATIONSUMMARIZATION,
   GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_KNOWLEDGESEARCH,
   GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_KNOWLEDGEASSIST,
   GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
@@ -4441,6 +4580,38 @@ pattern GoogleCloudDialogflowV2SmartReplyModelMetadata_TrainingModelType_SMARTRE
   GoogleCloudDialogflowV2SmartReplyModelMetadata_TrainingModelType_SMARTREPLYDUALENCODERMODEL,
   GoogleCloudDialogflowV2SmartReplyModelMetadata_TrainingModelType_SMARTREPLYBERTMODEL,
   GoogleCloudDialogflowV2SmartReplyModelMetadata_TrainingModelType
+  #-}
+
+-- | Type of the result message.
+newtype GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType = GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType {fromGoogleCloudDialogflowV2StreamingRecognitionResult_MessageType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified. Should never be used.
+pattern GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType_MESSAGETYPEUNSPECIFIED :: GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType
+pattern GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType_MESSAGETYPEUNSPECIFIED = GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType "MESSAGE_TYPE_UNSPECIFIED"
+
+-- | Message contains a (possibly partial) transcript.
+pattern GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType_Transcript :: GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType
+pattern GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType_Transcript = GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType "TRANSCRIPT"
+
+-- | This event indicates that the server has detected the end of the user\'s speech utterance and expects no additional inputs. Therefore, the server will not process additional audio (although it may subsequently return additional results). The client should stop sending additional audio data, half-close the gRPC connection, and wait for any additional results until the server closes the gRPC connection. This message is only sent if @single_utterance@ was set to @true@, and is not used otherwise.
+pattern GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType_ENDOFSINGLEUTTERANCE :: GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType
+pattern GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType_ENDOFSINGLEUTTERANCE = GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType "END_OF_SINGLE_UTTERANCE"
+
+{-# COMPLETE
+  GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType_MESSAGETYPEUNSPECIFIED,
+  GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType_Transcript,
+  GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType_ENDOFSINGLEUTTERANCE,
+  GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType
   #-}
 
 -- | Required. The participant role to remove the suggestion feature config. Only HUMAN/AGENT or END/USER can be used.
@@ -4570,6 +4741,10 @@ pattern GoogleCloudDialogflowV2beta1ConversationEvent_Type_HUMANINTERVENTIONNEED
 pattern GoogleCloudDialogflowV2beta1ConversationEvent_Type_NEWMESSAGE :: GoogleCloudDialogflowV2beta1ConversationEvent_Type
 pattern GoogleCloudDialogflowV2beta1ConversationEvent_Type_NEWMESSAGE = GoogleCloudDialogflowV2beta1ConversationEvent_Type "NEW_MESSAGE"
 
+-- | An existing conversation has received a new speech recognition result. This is mainly for delivering intermediate transcripts. The notification is configured in ConversationProfile.new/recognition/event/notification/config.
+pattern GoogleCloudDialogflowV2beta1ConversationEvent_Type_NEWRECOGNITIONRESULT :: GoogleCloudDialogflowV2beta1ConversationEvent_Type
+pattern GoogleCloudDialogflowV2beta1ConversationEvent_Type_NEWRECOGNITIONRESULT = GoogleCloudDialogflowV2beta1ConversationEvent_Type "NEW_RECOGNITION_RESULT"
+
 -- | Unrecoverable error during a telephone call. In general non-recoverable errors only occur if something was misconfigured in the ConversationProfile corresponding to the call. After a non-recoverable error, Dialogflow may stop responding. We don\'t fire this event: * in an API call because we can directly return the error, or, * when we can recover from an error.
 pattern GoogleCloudDialogflowV2beta1ConversationEvent_Type_UNRECOVERABLEERROR :: GoogleCloudDialogflowV2beta1ConversationEvent_Type
 pattern GoogleCloudDialogflowV2beta1ConversationEvent_Type_UNRECOVERABLEERROR = GoogleCloudDialogflowV2beta1ConversationEvent_Type "UNRECOVERABLE_ERROR"
@@ -4580,6 +4755,7 @@ pattern GoogleCloudDialogflowV2beta1ConversationEvent_Type_UNRECOVERABLEERROR = 
   GoogleCloudDialogflowV2beta1ConversationEvent_Type_CONVERSATIONFINISHED,
   GoogleCloudDialogflowV2beta1ConversationEvent_Type_HUMANINTERVENTIONNEEDED,
   GoogleCloudDialogflowV2beta1ConversationEvent_Type_NEWMESSAGE,
+  GoogleCloudDialogflowV2beta1ConversationEvent_Type_NEWRECOGNITIONRESULT,
   GoogleCloudDialogflowV2beta1ConversationEvent_Type_UNRECOVERABLEERROR,
   GoogleCloudDialogflowV2beta1ConversationEvent_Type
   #-}
@@ -5361,6 +5537,149 @@ pattern GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_
   GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_KNOWLEDGESEARCH,
   GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_KNOWLEDGEASSIST,
   GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
+  #-}
+
+-- | Type of the result message.
+newtype GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType = GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType {fromGoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified. Should never be used.
+pattern GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType_MESSAGETYPEUNSPECIFIED :: GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType
+pattern GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType_MESSAGETYPEUNSPECIFIED = GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType "MESSAGE_TYPE_UNSPECIFIED"
+
+-- | Message contains a (possibly partial) transcript.
+pattern GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType_Transcript :: GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType
+pattern GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType_Transcript = GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType "TRANSCRIPT"
+
+-- | Message contains DTMF digits.
+pattern GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType_DTMFDIGITS :: GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType
+pattern GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType_DTMFDIGITS = GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType "DTMF_DIGITS"
+
+-- | This event indicates that the server has detected the end of the user\'s speech utterance and expects no additional speech. Therefore, the server will not process additional audio (although it may subsequently return additional results). The client should stop sending additional audio data, half-close the gRPC connection, and wait for any additional results until the server closes the gRPC connection. This message is only sent if @single_utterance@ was set to @true@, and is not used otherwise.
+pattern GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType_ENDOFSINGLEUTTERANCE :: GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType
+pattern GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType_ENDOFSINGLEUTTERANCE = GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType "END_OF_SINGLE_UTTERANCE"
+
+-- | Message contains DTMF digits. Before a message with DTMF/DIGITS is sent, a message with PARTIAL/DTMF_DIGITS may be sent with DTMF digits collected up to the time of sending, which represents an intermediate result.
+pattern GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType_PARTIALDTMFDIGITS :: GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType
+pattern GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType_PARTIALDTMFDIGITS = GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType "PARTIAL_DTMF_DIGITS"
+
+{-# COMPLETE
+  GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType_MESSAGETYPEUNSPECIFIED,
+  GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType_Transcript,
+  GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType_DTMFDIGITS,
+  GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType_ENDOFSINGLEUTTERANCE,
+  GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType_PARTIALDTMFDIGITS,
+  GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType
+  #-}
+
+newtype GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem = GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem {fromGoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified. This value may be used to indicate an absent digit.
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_TELEPHONYDTMFUNSPECIFIED :: GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_TELEPHONYDTMFUNSPECIFIED = GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem "TELEPHONY_DTMF_UNSPECIFIED"
+
+-- | Number: \'1\'.
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFONE :: GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFONE = GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem "DTMF_ONE"
+
+-- | Number: \'2\'.
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFTWO :: GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFTWO = GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem "DTMF_TWO"
+
+-- | Number: \'3\'.
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFTHREE :: GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFTHREE = GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem "DTMF_THREE"
+
+-- | Number: \'4\'.
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFFOUR :: GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFFOUR = GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem "DTMF_FOUR"
+
+-- | Number: \'5\'.
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFFIVE :: GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFFIVE = GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem "DTMF_FIVE"
+
+-- | Number: \'6\'.
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFSIX :: GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFSIX = GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem "DTMF_SIX"
+
+-- | Number: \'7\'.
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFSEVEN :: GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFSEVEN = GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem "DTMF_SEVEN"
+
+-- | Number: \'8\'.
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFEIGHT :: GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFEIGHT = GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem "DTMF_EIGHT"
+
+-- | Number: \'9\'.
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFNINE :: GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFNINE = GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem "DTMF_NINE"
+
+-- | Number: \'0\'.
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFZERO :: GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFZERO = GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem "DTMF_ZERO"
+
+-- | Letter: \'A\'.
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFA :: GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFA = GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem "DTMF_A"
+
+-- | Letter: \'B\'.
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFB :: GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFB = GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem "DTMF_B"
+
+-- | Letter: \'C\'.
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFC :: GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFC = GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem "DTMF_C"
+
+-- | Letter: \'D\'.
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFD :: GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFD = GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem "DTMF_D"
+
+-- | Asterisk\/star: \'*\'.
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFSTAR :: GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFSTAR = GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem "DTMF_STAR"
+
+-- | Pound\/diamond\/hash\/square\/gate\/octothorpe: \'#\'.
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFPOUND :: GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem
+pattern GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFPOUND = GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem "DTMF_POUND"
+
+{-# COMPLETE
+  GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_TELEPHONYDTMFUNSPECIFIED,
+  GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFONE,
+  GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFTWO,
+  GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFTHREE,
+  GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFFOUR,
+  GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFFIVE,
+  GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFSIX,
+  GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFSEVEN,
+  GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFEIGHT,
+  GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFNINE,
+  GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFZERO,
+  GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFA,
+  GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFB,
+  GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFC,
+  GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFD,
+  GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFSTAR,
+  GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem_DTMFPOUND,
+  GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem
   #-}
 
 newtype GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem = GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem {fromGoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem :: Core.Text}

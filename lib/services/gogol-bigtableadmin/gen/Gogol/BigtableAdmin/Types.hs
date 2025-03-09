@@ -320,6 +320,10 @@ module Gogol.BigtableAdmin.Types
     GoogleBigtableAdminV2TypeInt64EncodingBigEndianBytes (..),
     newGoogleBigtableAdminV2TypeInt64EncodingBigEndianBytes,
 
+    -- ** GoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes
+    GoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes (..),
+    newGoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes,
+
     -- ** GoogleBigtableAdminV2TypeMap
     GoogleBigtableAdminV2TypeMap (..),
     newGoogleBigtableAdminV2TypeMap,
@@ -344,6 +348,22 @@ module Gogol.BigtableAdmin.Types
     GoogleBigtableAdminV2TypeStruct (..),
     newGoogleBigtableAdminV2TypeStruct,
 
+    -- ** GoogleBigtableAdminV2TypeStructEncoding
+    GoogleBigtableAdminV2TypeStructEncoding (..),
+    newGoogleBigtableAdminV2TypeStructEncoding,
+
+    -- ** GoogleBigtableAdminV2TypeStructEncodingDelimitedBytes
+    GoogleBigtableAdminV2TypeStructEncodingDelimitedBytes (..),
+    newGoogleBigtableAdminV2TypeStructEncodingDelimitedBytes,
+
+    -- ** GoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes
+    GoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes (..),
+    newGoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes,
+
+    -- ** GoogleBigtableAdminV2TypeStructEncodingSingleton
+    GoogleBigtableAdminV2TypeStructEncodingSingleton (..),
+    newGoogleBigtableAdminV2TypeStructEncodingSingleton,
+
     -- ** GoogleBigtableAdminV2TypeStructField
     GoogleBigtableAdminV2TypeStructField (..),
     newGoogleBigtableAdminV2TypeStructField,
@@ -351,6 +371,10 @@ module Gogol.BigtableAdmin.Types
     -- ** GoogleBigtableAdminV2TypeTimestamp
     GoogleBigtableAdminV2TypeTimestamp (..),
     newGoogleBigtableAdminV2TypeTimestamp,
+
+    -- ** GoogleBigtableAdminV2TypeTimestampEncoding
+    GoogleBigtableAdminV2TypeTimestampEncoding (..),
+    newGoogleBigtableAdminV2TypeTimestampEncoding,
 
     -- ** HotTablet
     HotTablet (..),

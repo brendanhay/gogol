@@ -118,6 +118,10 @@ module Gogol.ServiceControl
     CheckResponse (..),
     newCheckResponse,
 
+    -- ** CheckResponse_DynamicMetadata
+    CheckResponse_DynamicMetadata (..),
+    newCheckResponse_DynamicMetadata,
+
     -- ** CheckResponse_Headers
     CheckResponse_Headers (..),
     newCheckResponse_Headers,

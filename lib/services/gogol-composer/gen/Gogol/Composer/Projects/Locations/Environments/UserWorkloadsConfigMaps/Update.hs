@@ -23,7 +23,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a user workloads ConfigMap. This method is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+-- Updates a user workloads ConfigMap. This method is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
 --
 -- /See:/ <https://cloud.google.com/composer/ Cloud Composer API Reference> for @composer.projects.locations.environments.userWorkloadsConfigMaps.update@.
 module Gogol.Composer.Projects.Locations.Environments.UserWorkloadsConfigMaps.Update
@@ -53,7 +53,7 @@ type ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsUpdateResource 
     Core.:> Core.ReqBody '[Core.JSON] UserWorkloadsConfigMap
     Core.:> Core.Put '[Core.JSON] UserWorkloadsConfigMap
 
--- | Updates a user workloads ConfigMap. This method is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+-- | Updates a user workloads ConfigMap. This method is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
 --
 -- /See:/ 'newComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsUpdate' smart constructor.
 data ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsUpdate = ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsUpdate

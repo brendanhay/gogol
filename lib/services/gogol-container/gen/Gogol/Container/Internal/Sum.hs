@@ -39,6 +39,14 @@ module Gogol.Container.Internal.Sum
         ..
       ),
 
+    -- * AutoMonitoringConfig_Scope
+    AutoMonitoringConfig_Scope
+      ( AutoMonitoringConfig_Scope_SCOPEUNSPECIFIED,
+        AutoMonitoringConfig_Scope_All,
+        AutoMonitoringConfig_Scope_None,
+        ..
+      ),
+
     -- * AutopilotCompatibilityIssue_IncompatibilityType
     AutopilotCompatibilityIssue_IncompatibilityType
       ( AutopilotCompatibilityIssue_IncompatibilityType_Unspecified,
@@ -212,6 +220,7 @@ module Gogol.Container.Internal.Sum
         Filter_EventTypeItem_UPGRADEAVAILABLEEVENT,
         Filter_EventTypeItem_UPGRADEEVENT,
         Filter_EventTypeItem_SECURITYBULLETINEVENT,
+        Filter_EventTypeItem_UPGRADEINFOEVENT,
         ..
       ),
 
@@ -275,6 +284,7 @@ module Gogol.Container.Internal.Sum
         LoggingComponentConfig_EnableComponentsItem_CONTROLLERMANAGER,
         LoggingComponentConfig_EnableComponentsItem_KCPSSHD,
         LoggingComponentConfig_EnableComponentsItem_KCPCONNECTION,
+        LoggingComponentConfig_EnableComponentsItem_KCPHPA,
         ..
       ),
 
@@ -310,6 +320,7 @@ module Gogol.Container.Internal.Sum
         MonitoringComponentConfig_EnableComponentsItem_Cadvisor,
         MonitoringComponentConfig_EnableComponentsItem_Kubelet,
         MonitoringComponentConfig_EnableComponentsItem_Dcgm,
+        MonitoringComponentConfig_EnableComponentsItem_Jobset,
         ..
       ),
 
@@ -557,6 +568,7 @@ module Gogol.Container.Internal.Sum
         StatusCondition_Code_SETBYOPERATOR,
         StatusCondition_Code_CLOUDKMSKEYERROR,
         StatusCondition_Code_CAEXPIRING,
+        StatusCondition_Code_NODESERVICEACCOUNTMISSINGPERMISSIONS,
         ..
       ),
 
@@ -573,6 +585,14 @@ module Gogol.Container.Internal.Sum
       ( UpgradeEvent_ResourceType_UPGRADERESOURCETYPEUNSPECIFIED,
         UpgradeEvent_ResourceType_Master,
         UpgradeEvent_ResourceType_NODEPOOL,
+        ..
+      ),
+
+    -- * UpgradeInfoEvent_EventType
+    UpgradeInfoEvent_EventType
+      ( UpgradeInfoEvent_EventType_EVENTTYPEUNSPECIFIED,
+        UpgradeInfoEvent_EventType_ENDOFSUPPORT,
+        UpgradeInfoEvent_EventType_COSMILESTONEVERSIONUPDATE,
         ..
       ),
 
@@ -694,6 +714,38 @@ pattern AdvancedDatapathObservabilityConfig_RelayMode_EXTERNALLB = AdvancedDatap
   AdvancedDatapathObservabilityConfig_RelayMode_INTERNALVPCLB,
   AdvancedDatapathObservabilityConfig_RelayMode_EXTERNALLB,
   AdvancedDatapathObservabilityConfig_RelayMode
+  #-}
+
+-- | Scope for GKE Workload Auto-Monitoring.
+newtype AutoMonitoringConfig_Scope = AutoMonitoringConfig_Scope {fromAutoMonitoringConfig_Scope :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not set.
+pattern AutoMonitoringConfig_Scope_SCOPEUNSPECIFIED :: AutoMonitoringConfig_Scope
+pattern AutoMonitoringConfig_Scope_SCOPEUNSPECIFIED = AutoMonitoringConfig_Scope "SCOPE_UNSPECIFIED"
+
+-- | Auto-Monitoring is enabled for all supported applications.
+pattern AutoMonitoringConfig_Scope_All :: AutoMonitoringConfig_Scope
+pattern AutoMonitoringConfig_Scope_All = AutoMonitoringConfig_Scope "ALL"
+
+-- | Disable Auto-Monitoring.
+pattern AutoMonitoringConfig_Scope_None :: AutoMonitoringConfig_Scope
+pattern AutoMonitoringConfig_Scope_None = AutoMonitoringConfig_Scope "NONE"
+
+{-# COMPLETE
+  AutoMonitoringConfig_Scope_SCOPEUNSPECIFIED,
+  AutoMonitoringConfig_Scope_All,
+  AutoMonitoringConfig_Scope_None,
+  AutoMonitoringConfig_Scope
   #-}
 
 -- | The incompatibility type of this issue.
@@ -1407,11 +1459,16 @@ pattern Filter_EventTypeItem_UPGRADEEVENT = Filter_EventTypeItem "UPGRADE_EVENT"
 pattern Filter_EventTypeItem_SECURITYBULLETINEVENT :: Filter_EventTypeItem
 pattern Filter_EventTypeItem_SECURITYBULLETINEVENT = Filter_EventTypeItem "SECURITY_BULLETIN_EVENT"
 
+-- | Corresponds with UpgradeInfoEvent.
+pattern Filter_EventTypeItem_UPGRADEINFOEVENT :: Filter_EventTypeItem
+pattern Filter_EventTypeItem_UPGRADEINFOEVENT = Filter_EventTypeItem "UPGRADE_INFO_EVENT"
+
 {-# COMPLETE
   Filter_EventTypeItem_EVENTTYPEUNSPECIFIED,
   Filter_EventTypeItem_UPGRADEAVAILABLEEVENT,
   Filter_EventTypeItem_UPGRADEEVENT,
   Filter_EventTypeItem_SECURITYBULLETINEVENT,
+  Filter_EventTypeItem_UPGRADEINFOEVENT,
   Filter_EventTypeItem
   #-}
 
@@ -1661,6 +1718,10 @@ pattern LoggingComponentConfig_EnableComponentsItem_KCPSSHD = LoggingComponentCo
 pattern LoggingComponentConfig_EnableComponentsItem_KCPCONNECTION :: LoggingComponentConfig_EnableComponentsItem
 pattern LoggingComponentConfig_EnableComponentsItem_KCPCONNECTION = LoggingComponentConfig_EnableComponentsItem "KCP_CONNECTION"
 
+-- | horizontal pod autoscaler decision logs
+pattern LoggingComponentConfig_EnableComponentsItem_KCPHPA :: LoggingComponentConfig_EnableComponentsItem
+pattern LoggingComponentConfig_EnableComponentsItem_KCPHPA = LoggingComponentConfig_EnableComponentsItem "KCP_HPA"
+
 {-# COMPLETE
   LoggingComponentConfig_EnableComponentsItem_COMPONENTUNSPECIFIED,
   LoggingComponentConfig_EnableComponentsItem_SYSTEMCOMPONENTS,
@@ -1670,6 +1731,7 @@ pattern LoggingComponentConfig_EnableComponentsItem_KCPCONNECTION = LoggingCompo
   LoggingComponentConfig_EnableComponentsItem_CONTROLLERMANAGER,
   LoggingComponentConfig_EnableComponentsItem_KCPSSHD,
   LoggingComponentConfig_EnableComponentsItem_KCPCONNECTION,
+  LoggingComponentConfig_EnableComponentsItem_KCPHPA,
   LoggingComponentConfig_EnableComponentsItem
   #-}
 
@@ -1805,6 +1867,10 @@ pattern MonitoringComponentConfig_EnableComponentsItem_Kubelet = MonitoringCompo
 pattern MonitoringComponentConfig_EnableComponentsItem_Dcgm :: MonitoringComponentConfig_EnableComponentsItem
 pattern MonitoringComponentConfig_EnableComponentsItem_Dcgm = MonitoringComponentConfig_EnableComponentsItem "DCGM"
 
+-- | JobSet
+pattern MonitoringComponentConfig_EnableComponentsItem_Jobset :: MonitoringComponentConfig_EnableComponentsItem
+pattern MonitoringComponentConfig_EnableComponentsItem_Jobset = MonitoringComponentConfig_EnableComponentsItem "JOBSET"
+
 {-# COMPLETE
   MonitoringComponentConfig_EnableComponentsItem_COMPONENTUNSPECIFIED,
   MonitoringComponentConfig_EnableComponentsItem_SYSTEMCOMPONENTS,
@@ -1820,6 +1886,7 @@ pattern MonitoringComponentConfig_EnableComponentsItem_Dcgm = MonitoringComponen
   MonitoringComponentConfig_EnableComponentsItem_Cadvisor,
   MonitoringComponentConfig_EnableComponentsItem_Kubelet,
   MonitoringComponentConfig_EnableComponentsItem_Dcgm,
+  MonitoringComponentConfig_EnableComponentsItem_Jobset,
   MonitoringComponentConfig_EnableComponentsItem
   #-}
 
@@ -2042,7 +2109,7 @@ pattern NodeConfig_EffectiveCgroupMode_EFFECTIVE_CGROUP_MODE_V2 = NodeConfig_Eff
   NodeConfig_EffectiveCgroupMode
   #-}
 
--- | Specifies which method should be used for encrypting the Local SSDs attahced to the node.
+-- | Specifies which method should be used for encrypting the Local SSDs attached to the node.
 newtype NodeConfig_LocalSsdEncryptionMode = NodeConfig_LocalSsdEncryptionMode {fromNodeConfig_LocalSsdEncryptionMode :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -2847,6 +2914,10 @@ pattern StatusCondition_Code_CLOUDKMSKEYERROR = StatusCondition_Code "CLOUD_KMS_
 pattern StatusCondition_Code_CAEXPIRING :: StatusCondition_Code
 pattern StatusCondition_Code_CAEXPIRING = StatusCondition_Code "CA_EXPIRING"
 
+-- | Node service account is missing permissions.
+pattern StatusCondition_Code_NODESERVICEACCOUNTMISSINGPERMISSIONS :: StatusCondition_Code
+pattern StatusCondition_Code_NODESERVICEACCOUNTMISSINGPERMISSIONS = StatusCondition_Code "NODE_SERVICE_ACCOUNT_MISSING_PERMISSIONS"
+
 {-# COMPLETE
   StatusCondition_Code_Unknown,
   StatusCondition_Code_GCESTOCKOUT,
@@ -2855,6 +2926,7 @@ pattern StatusCondition_Code_CAEXPIRING = StatusCondition_Code "CA_EXPIRING"
   StatusCondition_Code_SETBYOPERATOR,
   StatusCondition_Code_CLOUDKMSKEYERROR,
   StatusCondition_Code_CAEXPIRING,
+  StatusCondition_Code_NODESERVICEACCOUNTMISSINGPERMISSIONS,
   StatusCondition_Code
   #-}
 
@@ -2920,6 +2992,38 @@ pattern UpgradeEvent_ResourceType_NODEPOOL = UpgradeEvent_ResourceType "NODE_POO
   UpgradeEvent_ResourceType_Master,
   UpgradeEvent_ResourceType_NODEPOOL,
   UpgradeEvent_ResourceType
+  #-}
+
+-- | The type of the event.
+newtype UpgradeInfoEvent_EventType = UpgradeInfoEvent_EventType {fromUpgradeInfoEvent_EventType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | EVENT/TYPE/UNSPECIFIED indicates the event type is unspecified.
+pattern UpgradeInfoEvent_EventType_EVENTTYPEUNSPECIFIED :: UpgradeInfoEvent_EventType
+pattern UpgradeInfoEvent_EventType_EVENTTYPEUNSPECIFIED = UpgradeInfoEvent_EventType "EVENT_TYPE_UNSPECIFIED"
+
+-- | END/OF/SUPPORT indicates GKE version reaches end of support, check standard/support/end/time and extended/support/end/time for more details.
+pattern UpgradeInfoEvent_EventType_ENDOFSUPPORT :: UpgradeInfoEvent_EventType
+pattern UpgradeInfoEvent_EventType_ENDOFSUPPORT = UpgradeInfoEvent_EventType "END_OF_SUPPORT"
+
+-- | COS/MILESTONE/VERSION_UPDATE indicates that the COS node image will update COS milestone version for new patch versions starting with the one in the description.
+pattern UpgradeInfoEvent_EventType_COSMILESTONEVERSIONUPDATE :: UpgradeInfoEvent_EventType
+pattern UpgradeInfoEvent_EventType_COSMILESTONEVERSIONUPDATE = UpgradeInfoEvent_EventType "COS_MILESTONE_VERSION_UPDATE"
+
+{-# COMPLETE
+  UpgradeInfoEvent_EventType_EVENTTYPEUNSPECIFIED,
+  UpgradeInfoEvent_EventType_ENDOFSUPPORT,
+  UpgradeInfoEvent_EventType_COSMILESTONEVERSIONUPDATE,
+  UpgradeInfoEvent_EventType
   #-}
 
 -- | The resource type associated with the upgrade.

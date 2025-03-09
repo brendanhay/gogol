@@ -110,6 +110,11 @@ module Gogol.AndroidManagement
     AndroidManagementEnterprisesEnrollmentTokensList (..),
     newAndroidManagementEnterprisesEnrollmentTokensList,
 
+    -- ** androidmanagement.enterprises.generateEnterpriseUpgradeUrl
+    AndroidManagementEnterprisesGenerateEnterpriseUpgradeUrlResource,
+    AndroidManagementEnterprisesGenerateEnterpriseUpgradeUrl (..),
+    newAndroidManagementEnterprisesGenerateEnterpriseUpgradeUrl,
+
     -- ** androidmanagement.enterprises.get
     AndroidManagementEnterprisesGetResource,
     AndroidManagementEnterprisesGet (..),
@@ -543,6 +548,15 @@ module Gogol.AndroidManagement
     -- ** Enterprise_EnabledNotificationTypesItem
     Enterprise_EnabledNotificationTypesItem (..),
 
+    -- ** Enterprise_EnterpriseType
+    Enterprise_EnterpriseType (..),
+
+    -- ** Enterprise_ManagedGoogleDomainType
+    Enterprise_ManagedGoogleDomainType (..),
+
+    -- ** Enterprise_ManagedGooglePlayAccountsEnterpriseType
+    Enterprise_ManagedGooglePlayAccountsEnterpriseType (..),
+
     -- ** ExtensionConfig
     ExtensionConfig (..),
     newExtensionConfig,
@@ -562,6 +576,14 @@ module Gogol.AndroidManagement
     -- ** FreezePeriod
     FreezePeriod (..),
     newFreezePeriod,
+
+    -- ** GenerateEnterpriseUpgradeUrlRequest
+    GenerateEnterpriseUpgradeUrlRequest (..),
+    newGenerateEnterpriseUpgradeUrlRequest,
+
+    -- ** GenerateEnterpriseUpgradeUrlResponse
+    GenerateEnterpriseUpgradeUrlResponse (..),
+    newGenerateEnterpriseUpgradeUrlResponse,
 
     -- ** GoogleAuthenticationSettings
     GoogleAuthenticationSettings (..),
@@ -1172,6 +1194,7 @@ import Gogol.AndroidManagement.Enterprises.EnrollmentTokens.Create
 import Gogol.AndroidManagement.Enterprises.EnrollmentTokens.Delete
 import Gogol.AndroidManagement.Enterprises.EnrollmentTokens.Get
 import Gogol.AndroidManagement.Enterprises.EnrollmentTokens.List
+import Gogol.AndroidManagement.Enterprises.GenerateEnterpriseUpgradeUrl
 import Gogol.AndroidManagement.Enterprises.Get
 import Gogol.AndroidManagement.Enterprises.List
 import Gogol.AndroidManagement.Enterprises.MigrationTokens.Create

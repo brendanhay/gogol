@@ -1014,6 +1014,13 @@ module Gogol.ShoppingContent.Types
     ProductSubscriptionCost (..),
     newProductSubscriptionCost,
 
+    -- ** ProductSustainabilityIncentive
+    ProductSustainabilityIncentive (..),
+    newProductSustainabilityIncentive,
+
+    -- ** ProductSustainabilityIncentive_Type
+    ProductSustainabilityIncentive_Type (..),
+
     -- ** ProductTax
     ProductTax (..),
     newProductTax,

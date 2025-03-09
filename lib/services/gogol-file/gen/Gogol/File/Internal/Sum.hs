@@ -174,6 +174,7 @@ module Gogol.File.Internal.Sum
     ReplicaConfig_StateReasonsItem
       ( ReplicaConfig_StateReasonsItem_STATEREASONUNSPECIFIED,
         ReplicaConfig_StateReasonsItem_PEERINSTANCEUNREACHABLE,
+        ReplicaConfig_StateReasonsItem_REMOVEFAILED,
         ..
       ),
 
@@ -855,9 +856,14 @@ pattern ReplicaConfig_StateReasonsItem_STATEREASONUNSPECIFIED = ReplicaConfig_St
 pattern ReplicaConfig_StateReasonsItem_PEERINSTANCEUNREACHABLE :: ReplicaConfig_StateReasonsItem
 pattern ReplicaConfig_StateReasonsItem_PEERINSTANCEUNREACHABLE = ReplicaConfig_StateReasonsItem "PEER_INSTANCE_UNREACHABLE"
 
+-- | The remove replica peer instance operation failed.
+pattern ReplicaConfig_StateReasonsItem_REMOVEFAILED :: ReplicaConfig_StateReasonsItem
+pattern ReplicaConfig_StateReasonsItem_REMOVEFAILED = ReplicaConfig_StateReasonsItem "REMOVE_FAILED"
+
 {-# COMPLETE
   ReplicaConfig_StateReasonsItem_STATEREASONUNSPECIFIED,
   ReplicaConfig_StateReasonsItem_PEERINSTANCEUNREACHABLE,
+  ReplicaConfig_StateReasonsItem_REMOVEFAILED,
   ReplicaConfig_StateReasonsItem
   #-}
 

@@ -919,6 +919,10 @@ module Gogol.ShoppingContent.Internal.Product
     ProductSubscriptionCost (..),
     newProductSubscriptionCost,
 
+    -- * ProductSustainabilityIncentive
+    ProductSustainabilityIncentive (..),
+    newProductSustainabilityIncentive,
+
     -- * ProductTax
     ProductTax (..),
     newProductTax,
@@ -2049,6 +2053,10 @@ data AccountIssue = AccountIssue
     -- unordered list with items describing root causes of the issue, inside @issue-content@ * @root-causes-intro@ - intro text before the @root-causes@ list, inside @issue-content@ * @segment@ - section of the text, @span@ inside paragraph * @segment-attribute@ - section of the text that represents a product attribute, for example \'image_link\' * @segment-literal@ - section of the text that contains a special value, for example \'0-1000 kg\' * @segment-bold@ - section of the text that should be rendered as bold * @segment-italic@ - section of the text that should be rendered as italic * @tooltip@ - used on paragraphs that should be rendered with a tooltip. A section of the text in such a paragraph will have a class @tooltip-text@ and is intended to be shown in a mouse over dialog. If the style is not used, the @tooltip-text@ section would be shown on a new line, after the main part of the text. * @tooltip-text@ - marks a section of the text within a @tooltip@, that is intended to be shown in a mouse over dialog. *
     -- @tooltip-icon@ - marks a section of the text within a @tooltip@, that can be replaced with a tooltip icon, for example \'?\' or \'i\'. By default, this section contains a @br@ tag, that is separating the main text and the tooltip text when the style is not used. * @tooltip-style-question@ - the tooltip shows helpful information, can use the \'?\' as an icon. * @tooltip-style-info@ - the tooltip adds additional information fitting to the context, can use the \'i\' as an icon. * @content-moderation@ - marks the paragraph that explains how the issue was identified. * @new-element@ - Present for new elements added to the pre-rendered content in the future. To make sure that a new content element does not break your style, you can hide everything with this class.
     prerenderedContent :: (Core.Maybe Core.Text),
+    -- | Pre-rendered HTML that contains a link to the external location where the ODS can be requested and instructions for how to request it. HTML elements contain CSS classes that can be used to customize the style of this snippet. Always sanitize the HTML before embedding it directly to your application. The sanitizer needs to allow basic HTML tags, such as: @div@, @span@, @p@, @a@, @ul@, @li@, @table@, @tr@, @td@. For example, you can use <https://www.npmjs.com/package/dompurify DOMPurify>. CSS classes: * @ods-section@* - wrapper around the out-of-court dispute resolution section * @ods-description@* - intro text for the out-of-court dispute resolution. It may contain multiple segments and a link. * @ods-param@* - wrapper around the header-value pair for parameters that merchant may need to provide during the ODS process. * @ods-routing-id@* - ods param for the Routing ID. * @ods-reference-id@* - ods param for the Routing ID. * @ods-param-header@* - header for the ODS parameter * @ods-param-value@* - value of the
+    -- ODS parameter. This value should be rendered in a way that it is easy for merchants to identify and copy. * @segment@ - section of the text, @span@ inside paragraph * @segment-attribute@ - section of the text that represents a product attribute, for example \'image_link\' * @segment-literal@ - section of the text that contains a special value, for example \'0-1000 kg\' * @segment-bold@ - section of the text that should be rendered as bold * @segment-italic@ - section of the text that should be rendered as italic * @tooltip@ - used on paragraphs that should be rendered with a tooltip. A section of the text in such a paragraph will have a class @tooltip-text@ and is intended to be shown in a mouse over dialog. If the style is not used, the @tooltip-text@ section would be shown on a new line, after the main part of the text. * @tooltip-text@ - marks a section of the text within a @tooltip@, that is intended to be shown in a mouse over dialog. * @tooltip-icon@ - marks a section of the text within a @tooltip@,
+    -- that can be replaced with a tooltip icon, for example \'?\' or \'i\'. By default, this section contains a @br@ tag, that is separating the main text and the tooltip text when the style is not used. * @tooltip-style-question@ - the tooltip shows helpful information, can use the \'?\' as an icon. * @tooltip-style-info@ - the tooltip adds additional information fitting to the context, can use the \'i\' as an icon.
+    prerenderedOutOfCourtDisputeSettlement :: (Core.Maybe Core.Text),
     -- | Title of the issue.
     title :: (Core.Maybe Core.Text)
   }
@@ -2062,6 +2070,7 @@ newAccountIssue =
     { actions = Core.Nothing,
       impact = Core.Nothing,
       prerenderedContent = Core.Nothing,
+      prerenderedOutOfCourtDisputeSettlement = Core.Nothing,
       title = Core.Nothing
     }
 
@@ -2074,6 +2083,7 @@ instance Core.FromJSON AccountIssue where
             Core.<$> (o Core..:? "actions")
             Core.<*> (o Core..:? "impact")
             Core.<*> (o Core..:? "prerenderedContent")
+            Core.<*> (o Core..:? "prerenderedOutOfCourtDisputeSettlement")
             Core.<*> (o Core..:? "title")
       )
 
@@ -2084,6 +2094,8 @@ instance Core.ToJSON AccountIssue where
           [ ("actions" Core..=) Core.<$> actions,
             ("impact" Core..=) Core.<$> impact,
             ("prerenderedContent" Core..=) Core.<$> prerenderedContent,
+            ("prerenderedOutOfCourtDisputeSettlement" Core..=)
+              Core.<$> prerenderedOutOfCourtDisputeSettlement,
             ("title" Core..=) Core.<$> title
           ]
       )
@@ -4121,7 +4133,6 @@ instance Core.ToJSON AlternateDisputeResolution where
 data AttributionSettings = AttributionSettings
   { -- | Required. Lookback windows (in days) used for attribution in this source. Supported values are 7, 30, 40.
     attributionLookbackWindowInDays :: (Core.Maybe Core.Int32),
-    -- | Required. Attribution model.
     attributionModel :: (Core.Maybe AttributionSettings_AttributionModel),
     -- | Immutable. Unordered list. List of different conversion types a conversion event can be classified as. A standard \"purchase\" type will be automatically created if this list is empty at creation time.
     conversionType :: (Core.Maybe [AttributionSettingsConversionType])
@@ -11421,6 +11432,8 @@ data Product = Product
     structuredTitle :: (Core.Maybe ProductStructuredTitle),
     -- | Number of periods (months or years) and amount of payment per period for an item with an associated subscription contract.
     subscriptionCost :: (Core.Maybe ProductSubscriptionCost),
+    -- | Optional. The list of sustainability incentive programs.
+    sustainabilityIncentives :: (Core.Maybe [ProductSustainabilityIncentive]),
     -- | Required. The CLDR territory code for the item\'s country of sale.
     targetCountry :: (Core.Maybe Core.Text),
     -- | The tax category of the product, used to configure detailed tax nexus in account-level tax settings.
@@ -11539,6 +11552,7 @@ newProduct =
       structuredDescription = Core.Nothing,
       structuredTitle = Core.Nothing,
       subscriptionCost = Core.Nothing,
+      sustainabilityIncentives = Core.Nothing,
       targetCountry = Core.Nothing,
       taxCategory = Core.Nothing,
       taxes = Core.Nothing,
@@ -11652,6 +11666,7 @@ instance Core.FromJSON Product where
             Core.<*> (o Core..:? "structuredDescription")
             Core.<*> (o Core..:? "structuredTitle")
             Core.<*> (o Core..:? "subscriptionCost")
+            Core.<*> (o Core..:? "sustainabilityIncentives")
             Core.<*> (o Core..:? "targetCountry")
             Core.<*> (o Core..:? "taxCategory")
             Core.<*> (o Core..:? "taxes")
@@ -11770,6 +11785,8 @@ instance Core.ToJSON Product where
             ("structuredDescription" Core..=) Core.<$> structuredDescription,
             ("structuredTitle" Core..=) Core.<$> structuredTitle,
             ("subscriptionCost" Core..=) Core.<$> subscriptionCost,
+            ("sustainabilityIncentives" Core..=)
+              Core.<$> sustainabilityIncentives,
             ("targetCountry" Core..=) Core.<$> targetCountry,
             ("taxCategory" Core..=) Core.<$> taxCategory,
             ("taxes" Core..=) Core.<$> taxes,
@@ -12114,6 +12131,10 @@ data ProductIssue = ProductIssue
     -- unordered list with items describing root causes of the issue, inside @issue-content@ * @root-causes-intro@ - intro text before the @root-causes@ list, inside @issue-content@ * @segment@ - section of the text, @span@ inside paragraph * @segment-attribute@ - section of the text that represents a product attribute, for example \'image_link\' * @segment-literal@ - section of the text that contains a special value, for example \'0-1000 kg\' * @segment-bold@ - section of the text that should be rendered as bold * @segment-italic@ - section of the text that should be rendered as italic * @tooltip@ - used on paragraphs that should be rendered with a tooltip. A section of the text in such a paragraph will have a class @tooltip-text@ and is intended to be shown in a mouse over dialog. If the style is not used, the @tooltip-text@ section would be shown on a new line, after the main part of the text. * @tooltip-text@ - marks a section of the text within a @tooltip@, that is intended to be shown in a mouse over dialog. *
     -- @tooltip-icon@ - marks a section of the text within a @tooltip@, that can be replaced with a tooltip icon, for example \'?\' or \'i\'. By default, this section contains a @br@ tag, that is separating the main text and the tooltip text when the style is not used. * @tooltip-style-question@ - the tooltip shows helpful information, can use the \'?\' as an icon. * @tooltip-style-info@ - the tooltip adds additional information fitting to the context, can use the \'i\' as an icon. * @content-moderation@ - marks the paragraph that explains how the issue was identified. * @list-intro@ - marks the paragraph that contains an intro for a list. This paragraph will be always followed by a list. * @new-element@ - Present for new elements added to the pre-rendered content in the future. To make sure that a new content element does not break your style, you can hide everything with this class.
     prerenderedContent :: (Core.Maybe Core.Text),
+    -- | Pre-rendered HTML that contains a link to the external location where the ODS can be requested and instructions for how to request it. HTML elements contain CSS classes that can be used to customize the style of this snippet. Always sanitize the HTML before embedding it directly to your application. The sanitizer needs to allow basic HTML tags, such as: @div@, @span@, @p@, @a@, @ul@, @li@, @table@, @tr@, @td@. For example, you can use <https://www.npmjs.com/package/dompurify DOMPurify>. CSS classes: * @ods-section@* - wrapper around the out-of-court dispute resolution section * @ods-description@* - intro text for the out-of-court dispute resolution. It may contain multiple segments and a link. * @ods-param@* - wrapper around the header-value pair for parameters that merchant may need to provide during the ODS process. * @ods-routing-id@* - ods param for the Routing ID. * @ods-reference-id@* - ods param for the Routing ID. * @ods-param-header@* - header for the ODS parameter * @ods-param-value@* - value of the
+    -- ODS parameter. This value should be rendered in a way that it is easy for merchants to identify and copy. * @segment@ - section of the text, @span@ inside paragraph * @segment-attribute@ - section of the text that represents a product attribute, for example \'image_link\' * @segment-literal@ - section of the text that contains a special value, for example \'0-1000 kg\' * @segment-bold@ - section of the text that should be rendered as bold * @segment-italic@ - section of the text that should be rendered as italic * @tooltip@ - used on paragraphs that should be rendered with a tooltip. A section of the text in such a paragraph will have a class @tooltip-text@ and is intended to be shown in a mouse over dialog. If the style is not used, the @tooltip-text@ section would be shown on a new line, after the main part of the text. * @tooltip-text@ - marks a section of the text within a @tooltip@, that is intended to be shown in a mouse over dialog. * @tooltip-icon@ - marks a section of the text within a @tooltip@,
+    -- that can be replaced with a tooltip icon, for example \'?\' or \'i\'. By default, this section contains a @br@ tag, that is separating the main text and the tooltip text when the style is not used. * @tooltip-style-question@ - the tooltip shows helpful information, can use the \'?\' as an icon. * @tooltip-style-info@ - the tooltip adds additional information fitting to the context, can use the \'i\' as an icon.
+    prerenderedOutOfCourtDisputeSettlement :: (Core.Maybe Core.Text),
     -- | Title of the issue.
     title :: (Core.Maybe Core.Text)
   }
@@ -12127,6 +12148,7 @@ newProductIssue =
     { actions = Core.Nothing,
       impact = Core.Nothing,
       prerenderedContent = Core.Nothing,
+      prerenderedOutOfCourtDisputeSettlement = Core.Nothing,
       title = Core.Nothing
     }
 
@@ -12139,6 +12161,7 @@ instance Core.FromJSON ProductIssue where
             Core.<$> (o Core..:? "actions")
             Core.<*> (o Core..:? "impact")
             Core.<*> (o Core..:? "prerenderedContent")
+            Core.<*> (o Core..:? "prerenderedOutOfCourtDisputeSettlement")
             Core.<*> (o Core..:? "title")
       )
 
@@ -12149,6 +12172,8 @@ instance Core.ToJSON ProductIssue where
           [ ("actions" Core..=) Core.<$> actions,
             ("impact" Core..=) Core.<$> impact,
             ("prerenderedContent" Core..=) Core.<$> prerenderedContent,
+            ("prerenderedOutOfCourtDisputeSettlement" Core..=)
+              Core.<$> prerenderedOutOfCourtDisputeSettlement,
             ("title" Core..=) Core.<$> title
           ]
       )
@@ -12718,6 +12743,50 @@ instance Core.ToJSON ProductSubscriptionCost where
           [ ("amount" Core..=) Core.<$> amount,
             ("period" Core..=) Core.<$> period,
             ("periodLength" Core..=) Core.. Core.AsText Core.<$> periodLength
+          ]
+      )
+
+-- | Information regarding sustainability related incentive programs such as rebates or tax relief.
+--
+-- /See:/ 'newProductSustainabilityIncentive' smart constructor.
+data ProductSustainabilityIncentive = ProductSustainabilityIncentive
+  { -- | Optional. The fixed amount of the incentive.
+    amount :: (Core.Maybe Price),
+    -- | Optional. The percentage of the sale price that the incentive is applied to.
+    percentage :: (Core.Maybe Core.Double),
+    -- | Required. Sustainability incentive program.
+    type' :: (Core.Maybe ProductSustainabilityIncentive_Type)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ProductSustainabilityIncentive' with the minimum fields required to make a request.
+newProductSustainabilityIncentive ::
+  ProductSustainabilityIncentive
+newProductSustainabilityIncentive =
+  ProductSustainabilityIncentive
+    { amount = Core.Nothing,
+      percentage = Core.Nothing,
+      type' = Core.Nothing
+    }
+
+instance Core.FromJSON ProductSustainabilityIncentive where
+  parseJSON =
+    Core.withObject
+      "ProductSustainabilityIncentive"
+      ( \o ->
+          ProductSustainabilityIncentive
+            Core.<$> (o Core..:? "amount")
+            Core.<*> (o Core..:? "percentage")
+            Core.<*> (o Core..:? "type")
+      )
+
+instance Core.ToJSON ProductSustainabilityIncentive where
+  toJSON ProductSustainabilityIncentive {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("amount" Core..=) Core.<$> amount,
+            ("percentage" Core..=) Core.<$> percentage,
+            ("type" Core..=) Core.<$> type'
           ]
       )
 
@@ -14807,7 +14876,7 @@ instance Core.ToJSON RenderAccountIssuesRequestPayload where
 --
 -- /See:/ 'newRenderAccountIssuesResponse' smart constructor.
 data RenderAccountIssuesResponse = RenderAccountIssuesResponse
-  { -- | The Alternate Dispute Resolution (ADR) contains a link to a page where merchant can bring their appeal to an <https://support.google.com/european-union-digital-services-act-redress-options/answer/13535501 external body>. If the ADR is present, it MUST be available to the merchant on the page that shows the list with their account issues.
+  { -- | Alternate Dispute Resolution (ADR) is deprecated. Use @prerendered_out_of_court_dispute_settlement@ instead.
     alternateDisputeResolution :: (Core.Maybe AlternateDisputeResolution),
     -- | List of account issues for a given account. This list can be shown with compressed, expandable items. In the compressed form, the title and impact should be shown for each issue. Once the issue is expanded, the detailed content and available actions should be rendered.
     issues :: (Core.Maybe [AccountIssue])
@@ -14890,7 +14959,7 @@ instance Core.ToJSON RenderProductIssuesRequestPayload where
 --
 -- /See:/ 'newRenderProductIssuesResponse' smart constructor.
 data RenderProductIssuesResponse = RenderProductIssuesResponse
-  { -- | The Alternate Dispute Resolution (ADR) contains a link to a page where merchant can bring their appeal to an <https://support.google.com/european-union-digital-services-act-redress-options/answer/13535501 external body>. If present, the link should be shown on the same page as the list of issues.
+  { -- | Alternate Dispute Resolution (ADR) is deprecated. Use @prerendered_out_of_court_dispute_settlement@ instead.
     alternateDisputeResolution :: (Core.Maybe AlternateDisputeResolution),
     -- | List of issues for a given product. This list can be shown with compressed, expandable items. In the compressed form, the title and impact should be shown for each issue. Once the issue is expanded, the detailed content and available actions should be rendered.
     issues :: (Core.Maybe [ProductIssue])
@@ -15549,7 +15618,7 @@ instance Core.ToJSON ReturnPolicyOnlineRestockingFee where
 --
 -- /See:/ 'newReturnPolicyOnlineReturnReasonCategoryInfo' smart constructor.
 data ReturnPolicyOnlineReturnReasonCategoryInfo = ReturnPolicyOnlineReturnReasonCategoryInfo
-  { -- | The corresponding return label source.
+  { -- | The corresponding return label source. If the @ReturnMethod@ field includes @BY_MAIL@, it is required to specify @ReturnLabelSource@ for both @BUYER_REMORSE@ and @ITEM_DEFECT@ return reason categories.
     returnLabelSource ::
       ( Core.Maybe
           ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource

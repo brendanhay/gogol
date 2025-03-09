@@ -119,7 +119,9 @@ instance
   type
     Rs ClassroomCoursesPostsAddOnAttachmentsCreate =
       AddOnAttachment
-  type Scopes ClassroomCoursesPostsAddOnAttachmentsCreate = '[]
+  type
+    Scopes ClassroomCoursesPostsAddOnAttachmentsCreate =
+      '[Classroom'Addons'Teacher]
   requestClient ClassroomCoursesPostsAddOnAttachmentsCreate {..} =
     go
       courseId

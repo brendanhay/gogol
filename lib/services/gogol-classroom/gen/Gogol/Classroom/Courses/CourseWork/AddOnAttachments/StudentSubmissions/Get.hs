@@ -128,7 +128,10 @@ instance
   type
     Scopes
       ClassroomCoursesCourseWorkAddOnAttachmentsStudentSubmissionsGet =
-      '[Classroom'StudentSubmissions'Students'Readonly]
+      '[ Classroom'Addons'Student,
+         Classroom'Addons'Teacher,
+         Classroom'StudentSubmissions'Students'Readonly
+       ]
   requestClient
     ClassroomCoursesCourseWorkAddOnAttachmentsStudentSubmissionsGet {..} =
       go

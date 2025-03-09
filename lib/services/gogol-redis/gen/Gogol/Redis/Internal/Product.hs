@@ -147,6 +147,10 @@ module Gogol.Redis.Internal.Product
     Empty (..),
     newEmpty,
 
+    -- * EncryptionInfo
+    EncryptionInfo (..),
+    newEncryptionInfo,
+
     -- * Entitlement
     Entitlement (..),
     newEntitlement,
@@ -166,6 +170,10 @@ module Gogol.Redis.Internal.Product
     -- * FixedFrequencySchedule
     FixedFrequencySchedule (..),
     newFixedFrequencySchedule,
+
+    -- * GCBDRConfiguration
+    GCBDRConfiguration (..),
+    newGCBDRConfiguration,
 
     -- * GcsBackupSource
     GcsBackupSource (..),
@@ -564,6 +572,8 @@ data Backup = Backup
     clusterUid :: (Core.Maybe Core.Text),
     -- | Output only. The time when the backup was created.
     createTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. Encryption information of the backup.
+    encryptionInfo :: (Core.Maybe EncryptionInfo),
     -- | Output only. redis-7.2, valkey-7.5
     engineVersion :: (Core.Maybe Core.Text),
     -- | Output only. The time when the backup will expire.
@@ -595,6 +605,7 @@ newBackup =
       cluster = Core.Nothing,
       clusterUid = Core.Nothing,
       createTime = Core.Nothing,
+      encryptionInfo = Core.Nothing,
       engineVersion = Core.Nothing,
       expireTime = Core.Nothing,
       name = Core.Nothing,
@@ -617,6 +628,7 @@ instance Core.FromJSON Backup where
             Core.<*> (o Core..:? "cluster")
             Core.<*> (o Core..:? "clusterUid")
             Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "encryptionInfo")
             Core.<*> (o Core..:? "engineVersion")
             Core.<*> (o Core..:? "expireTime")
             Core.<*> (o Core..:? "name")
@@ -637,6 +649,7 @@ instance Core.ToJSON Backup where
             ("cluster" Core..=) Core.<$> cluster,
             ("clusterUid" Core..=) Core.<$> clusterUid,
             ("createTime" Core..=) Core.<$> createTime,
+            ("encryptionInfo" Core..=) Core.<$> encryptionInfo,
             ("engineVersion" Core..=) Core.<$> engineVersion,
             ("expireTime" Core..=) Core.<$> expireTime,
             ("name" Core..=) Core.<$> name,
@@ -695,6 +708,10 @@ data BackupCollection = BackupCollection
     cluster :: (Core.Maybe Core.Text),
     -- | Output only. The cluster uid of the backup collection.
     clusterUid :: (Core.Maybe Core.Text),
+    -- | Output only. The time when the backup collection was created.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. The KMS key used to encrypt the backups under this backup collection.
+    kmsKey :: (Core.Maybe Core.Text),
     -- | Identifier. Full resource path of the backup collection.
     name :: (Core.Maybe Core.Text),
     -- | Output only. System assigned unique identifier of the backup collection.
@@ -709,6 +726,8 @@ newBackupCollection =
   BackupCollection
     { cluster = Core.Nothing,
       clusterUid = Core.Nothing,
+      createTime = Core.Nothing,
+      kmsKey = Core.Nothing,
       name = Core.Nothing,
       uid = Core.Nothing
     }
@@ -721,6 +740,8 @@ instance Core.FromJSON BackupCollection where
           BackupCollection
             Core.<$> (o Core..:? "cluster")
             Core.<*> (o Core..:? "clusterUid")
+            Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "kmsKey")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "uid")
       )
@@ -731,6 +752,8 @@ instance Core.ToJSON BackupCollection where
       ( Core.catMaybes
           [ ("cluster" Core..=) Core.<$> cluster,
             ("clusterUid" Core..=) Core.<$> clusterUid,
+            ("createTime" Core..=) Core.<$> createTime,
+            ("kmsKey" Core..=) Core.<$> kmsKey,
             ("name" Core..=) Core.<$> name,
             ("uid" Core..=) Core.<$> uid
           ]
@@ -942,13 +965,15 @@ instance Core.ToJSON CertificateAuthority where
 --
 -- /See:/ 'newCluster' smart constructor.
 data Cluster = Cluster
-  { -- | Optional. The authorization mode of the Redis cluster. If not provided, auth feature is disabled for the cluster.
+  { -- | Optional. If true, cluster endpoints that are created and registered by customers can be deleted asynchronously. That is, such a cluster endpoint can be de-registered before the forwarding rules in the cluster endpoint are deleted.
+    asyncClusterEndpointsDeletionEnabled :: (Core.Maybe Core.Bool),
+    -- | Optional. The authorization mode of the Redis cluster. If not provided, auth feature is disabled for the cluster.
     authorizationMode :: (Core.Maybe Cluster_AuthorizationMode),
     -- | Optional. The automated backup config for the cluster.
     automatedBackupConfig :: (Core.Maybe AutomatedBackupConfig),
     -- | Optional. Output only. The backup collection full resource name. Example: projects\/{project}\/locations\/{location}\/backupCollections\/{collection}
     backupCollection :: (Core.Maybe Core.Text),
-    -- | Optional. A list of cluster enpoints.
+    -- | Optional. A list of cluster endpoints.
     clusterEndpoints :: (Core.Maybe [ClusterEndpoint]),
     -- | Output only. The timestamp associated with the cluster creation request.
     createTime :: (Core.Maybe Core.DateTime),
@@ -958,8 +983,12 @@ data Cluster = Cluster
     deletionProtectionEnabled :: (Core.Maybe Core.Bool),
     -- | Output only. Endpoints created on each given network, for Redis clients to connect to the cluster. Currently only one discovery endpoint is supported.
     discoveryEndpoints :: (Core.Maybe [DiscoveryEndpoint]),
+    -- | Output only. Encryption information of the data at rest of the cluster.
+    encryptionInfo :: (Core.Maybe EncryptionInfo),
     -- | Optional. Backups stored in Cloud Storage buckets. The Cloud Storage buckets need to be the same region as the clusters. Read permission is required to import from the provided Cloud Storage objects.
     gcsSource :: (Core.Maybe GcsBackupSource),
+    -- | Optional. The KMS key used to encrypt the at-rest data of the cluster.
+    kmsKey :: (Core.Maybe Core.Text),
     -- | Optional. ClusterMaintenancePolicy determines when to allow or deny updates.
     maintenancePolicy :: (Core.Maybe ClusterMaintenancePolicy),
     -- | Output only. ClusterMaintenanceSchedule Output only Published maintenance schedule.
@@ -970,6 +999,8 @@ data Cluster = Cluster
     name :: (Core.Maybe Core.Text),
     -- | Optional. The type of a redis node in the cluster. NodeType determines the underlying machine-type of a redis node.
     nodeType :: (Core.Maybe Cluster_NodeType),
+    -- | Optional. Input only. Ondemand maintenance for the cluster. This field can be used to trigger ondemand critical update on the cluster.
+    ondemandMaintenance :: (Core.Maybe Core.Bool),
     -- | Optional. Persistence config (RDB, AOF) for the cluster.
     persistenceConfig :: (Core.Maybe ClusterPersistenceConfig),
     -- | Output only. Precise value of redis memory size in GB for the entire cluster.
@@ -1006,7 +1037,8 @@ newCluster ::
   Cluster
 newCluster =
   Cluster
-    { authorizationMode = Core.Nothing,
+    { asyncClusterEndpointsDeletionEnabled = Core.Nothing,
+      authorizationMode = Core.Nothing,
       automatedBackupConfig = Core.Nothing,
       backupCollection = Core.Nothing,
       clusterEndpoints = Core.Nothing,
@@ -1014,12 +1046,15 @@ newCluster =
       crossClusterReplicationConfig = Core.Nothing,
       deletionProtectionEnabled = Core.Nothing,
       discoveryEndpoints = Core.Nothing,
+      encryptionInfo = Core.Nothing,
       gcsSource = Core.Nothing,
+      kmsKey = Core.Nothing,
       maintenancePolicy = Core.Nothing,
       maintenanceSchedule = Core.Nothing,
       managedBackupSource = Core.Nothing,
       name = Core.Nothing,
       nodeType = Core.Nothing,
+      ondemandMaintenance = Core.Nothing,
       persistenceConfig = Core.Nothing,
       preciseSizeGb = Core.Nothing,
       pscConfigs = Core.Nothing,
@@ -1042,7 +1077,8 @@ instance Core.FromJSON Cluster where
       "Cluster"
       ( \o ->
           Cluster
-            Core.<$> (o Core..:? "authorizationMode")
+            Core.<$> (o Core..:? "asyncClusterEndpointsDeletionEnabled")
+            Core.<*> (o Core..:? "authorizationMode")
             Core.<*> (o Core..:? "automatedBackupConfig")
             Core.<*> (o Core..:? "backupCollection")
             Core.<*> (o Core..:? "clusterEndpoints")
@@ -1050,12 +1086,15 @@ instance Core.FromJSON Cluster where
             Core.<*> (o Core..:? "crossClusterReplicationConfig")
             Core.<*> (o Core..:? "deletionProtectionEnabled")
             Core.<*> (o Core..:? "discoveryEndpoints")
+            Core.<*> (o Core..:? "encryptionInfo")
             Core.<*> (o Core..:? "gcsSource")
+            Core.<*> (o Core..:? "kmsKey")
             Core.<*> (o Core..:? "maintenancePolicy")
             Core.<*> (o Core..:? "maintenanceSchedule")
             Core.<*> (o Core..:? "managedBackupSource")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "nodeType")
+            Core.<*> (o Core..:? "ondemandMaintenance")
             Core.<*> (o Core..:? "persistenceConfig")
             Core.<*> (o Core..:? "preciseSizeGb")
             Core.<*> (o Core..:? "pscConfigs")
@@ -1076,7 +1115,9 @@ instance Core.ToJSON Cluster where
   toJSON Cluster {..} =
     Core.object
       ( Core.catMaybes
-          [ ("authorizationMode" Core..=) Core.<$> authorizationMode,
+          [ ("asyncClusterEndpointsDeletionEnabled" Core..=)
+              Core.<$> asyncClusterEndpointsDeletionEnabled,
+            ("authorizationMode" Core..=) Core.<$> authorizationMode,
             ("automatedBackupConfig" Core..=) Core.<$> automatedBackupConfig,
             ("backupCollection" Core..=) Core.<$> backupCollection,
             ("clusterEndpoints" Core..=) Core.<$> clusterEndpoints,
@@ -1086,12 +1127,15 @@ instance Core.ToJSON Cluster where
             ("deletionProtectionEnabled" Core..=)
               Core.<$> deletionProtectionEnabled,
             ("discoveryEndpoints" Core..=) Core.<$> discoveryEndpoints,
+            ("encryptionInfo" Core..=) Core.<$> encryptionInfo,
             ("gcsSource" Core..=) Core.<$> gcsSource,
+            ("kmsKey" Core..=) Core.<$> kmsKey,
             ("maintenancePolicy" Core..=) Core.<$> maintenancePolicy,
             ("maintenanceSchedule" Core..=) Core.<$> maintenanceSchedule,
             ("managedBackupSource" Core..=) Core.<$> managedBackupSource,
             ("name" Core..=) Core.<$> name,
             ("nodeType" Core..=) Core.<$> nodeType,
+            ("ondemandMaintenance" Core..=) Core.<$> ondemandMaintenance,
             ("persistenceConfig" Core..=) Core.<$> persistenceConfig,
             ("preciseSizeGb" Core..=) Core.<$> preciseSizeGb,
             ("pscConfigs" Core..=) Core.<$> pscConfigs,
@@ -1139,7 +1183,7 @@ instance Core.ToJSON Cluster_RedisConfigs where
 --
 -- /See:/ 'newClusterEndpoint' smart constructor.
 newtype ClusterEndpoint = ClusterEndpoint
-  { -- | A group of PSC connections. They are created in the same VPC network, one for each service attachment in the cluster.
+  { -- | Required. A group of PSC connections. They are created in the same VPC network, one for each service attachment in the cluster.
     connections :: (Core.Maybe [ConnectionDetail])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1205,7 +1249,7 @@ instance Core.ToJSON ClusterMaintenancePolicy where
           ]
       )
 
--- | Upcoming maitenance schedule.
+-- | Upcoming maintenance schedule.
 --
 -- /See:/ 'newClusterMaintenanceSchedule' smart constructor.
 data ClusterMaintenanceSchedule = ClusterMaintenanceSchedule
@@ -1739,7 +1783,7 @@ instance Core.ToJSON DatabaseResourceId where
           ]
       )
 
--- | Common model for database resource instance metadata. Next ID: 23
+-- | Common model for database resource instance metadata. Next ID: 25
 --
 -- /See:/ 'newDatabaseResourceMetadata' smart constructor.
 data DatabaseResourceMetadata = DatabaseResourceMetadata
@@ -1761,6 +1805,8 @@ data DatabaseResourceMetadata = DatabaseResourceMetadata
     entitlements :: (Core.Maybe [Entitlement]),
     -- | The state that the instance is expected to be in. For example, an instance state can transition to UNHEALTHY due to wrong patch update, while the expected state will remain at the HEALTHY.
     expectedState :: (Core.Maybe DatabaseResourceMetadata_ExpectedState),
+    -- | GCBDR configuration for the resource.
+    gcbdrConfiguration :: (Core.Maybe GCBDRConfiguration),
     -- | Required. Unique identifier for a Database resource
     id :: (Core.Maybe DatabaseResourceId),
     -- | The type of the instance. Specified at creation time.
@@ -1779,6 +1825,8 @@ data DatabaseResourceMetadata = DatabaseResourceMetadata
     resourceContainer :: (Core.Maybe Core.Text),
     -- | Required. Different from DatabaseResourceId.unique/id, a resource name can be reused over time. That is, after a resource named \"ABC\" is deleted, the name \"ABC\" can be used to to create a new resource within the same source. Resource name to follow CAIS resource/name format as noted here go\/condor-common-datamodel
     resourceName :: (Core.Maybe Core.Text),
+    -- | Optional. Suspension reason for the resource.
+    suspensionReason :: (Core.Maybe DatabaseResourceMetadata_SuspensionReason),
     -- | Optional. Tags associated with this resources.
     tagsSet :: (Core.Maybe Tags),
     -- | The time at which the resource was updated and recorded at partner service.
@@ -1803,6 +1851,7 @@ newDatabaseResourceMetadata =
       edition = Core.Nothing,
       entitlements = Core.Nothing,
       expectedState = Core.Nothing,
+      gcbdrConfiguration = Core.Nothing,
       id = Core.Nothing,
       instanceType = Core.Nothing,
       location = Core.Nothing,
@@ -1812,6 +1861,7 @@ newDatabaseResourceMetadata =
       product = Core.Nothing,
       resourceContainer = Core.Nothing,
       resourceName = Core.Nothing,
+      suspensionReason = Core.Nothing,
       tagsSet = Core.Nothing,
       updationTime = Core.Nothing,
       userLabelSet = Core.Nothing
@@ -1832,6 +1882,7 @@ instance Core.FromJSON DatabaseResourceMetadata where
             Core.<*> (o Core..:? "edition")
             Core.<*> (o Core..:? "entitlements")
             Core.<*> (o Core..:? "expectedState")
+            Core.<*> (o Core..:? "gcbdrConfiguration")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "instanceType")
             Core.<*> (o Core..:? "location")
@@ -1841,6 +1892,7 @@ instance Core.FromJSON DatabaseResourceMetadata where
             Core.<*> (o Core..:? "product")
             Core.<*> (o Core..:? "resourceContainer")
             Core.<*> (o Core..:? "resourceName")
+            Core.<*> (o Core..:? "suspensionReason")
             Core.<*> (o Core..:? "tagsSet")
             Core.<*> (o Core..:? "updationTime")
             Core.<*> (o Core..:? "userLabelSet")
@@ -1860,6 +1912,7 @@ instance Core.ToJSON DatabaseResourceMetadata where
             ("edition" Core..=) Core.<$> edition,
             ("entitlements" Core..=) Core.<$> entitlements,
             ("expectedState" Core..=) Core.<$> expectedState,
+            ("gcbdrConfiguration" Core..=) Core.<$> gcbdrConfiguration,
             ("id" Core..=) Core.<$> id,
             ("instanceType" Core..=) Core.<$> instanceType,
             ("location" Core..=) Core.<$> location,
@@ -1870,6 +1923,7 @@ instance Core.ToJSON DatabaseResourceMetadata where
             ("product" Core..=) Core.<$> product,
             ("resourceContainer" Core..=) Core.<$> resourceContainer,
             ("resourceName" Core..=) Core.<$> resourceName,
+            ("suspensionReason" Core..=) Core.<$> suspensionReason,
             ("tagsSet" Core..=) Core.<$> tagsSet,
             ("updationTime" Core..=) Core.<$> updationTime,
             ("userLabelSet" Core..=) Core.<$> userLabelSet
@@ -2054,6 +2108,55 @@ instance Core.FromJSON Empty where
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
 
+-- | EncryptionInfo describes the encryption information of a cluster or a backup.
+--
+-- /See:/ 'newEncryptionInfo' smart constructor.
+data EncryptionInfo = EncryptionInfo
+  { -- | Output only. Type of encryption.
+    encryptionType :: (Core.Maybe EncryptionInfo_EncryptionType),
+    -- | Output only. The state of the primary version of the KMS key perceived by the system. This field is not populated in backups.
+    kmsKeyPrimaryState :: (Core.Maybe EncryptionInfo_KmsKeyPrimaryState),
+    -- | Output only. KMS key versions that are being used to protect the data at-rest.
+    kmsKeyVersions :: (Core.Maybe [Core.Text]),
+    -- | Output only. The most recent time when the encryption info was updated.
+    lastUpdateTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'EncryptionInfo' with the minimum fields required to make a request.
+newEncryptionInfo ::
+  EncryptionInfo
+newEncryptionInfo =
+  EncryptionInfo
+    { encryptionType = Core.Nothing,
+      kmsKeyPrimaryState = Core.Nothing,
+      kmsKeyVersions = Core.Nothing,
+      lastUpdateTime = Core.Nothing
+    }
+
+instance Core.FromJSON EncryptionInfo where
+  parseJSON =
+    Core.withObject
+      "EncryptionInfo"
+      ( \o ->
+          EncryptionInfo
+            Core.<$> (o Core..:? "encryptionType")
+            Core.<*> (o Core..:? "kmsKeyPrimaryState")
+            Core.<*> (o Core..:? "kmsKeyVersions")
+            Core.<*> (o Core..:? "lastUpdateTime")
+      )
+
+instance Core.ToJSON EncryptionInfo where
+  toJSON EncryptionInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("encryptionType" Core..=) Core.<$> encryptionType,
+            ("kmsKeyPrimaryState" Core..=) Core.<$> kmsKeyPrimaryState,
+            ("kmsKeyVersions" Core..=) Core.<$> kmsKeyVersions,
+            ("lastUpdateTime" Core..=) Core.<$> lastUpdateTime
+          ]
+      )
+
 -- | Proto representing the access that a user has to a specific feature\/service. NextId: 3.
 --
 -- /See:/ 'newEntitlement' smart constructor.
@@ -2201,11 +2304,37 @@ instance Core.ToJSON FixedFrequencySchedule where
     Core.object
       (Core.catMaybes [("startTime" Core..=) Core.<$> startTime])
 
+-- | GCBDR Configuration for the resource.
+--
+-- /See:/ 'newGCBDRConfiguration' smart constructor.
+newtype GCBDRConfiguration = GCBDRConfiguration
+  { -- | Whether the resource is managed by GCBDR.
+    gcbdrManaged :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GCBDRConfiguration' with the minimum fields required to make a request.
+newGCBDRConfiguration ::
+  GCBDRConfiguration
+newGCBDRConfiguration =
+  GCBDRConfiguration {gcbdrManaged = Core.Nothing}
+
+instance Core.FromJSON GCBDRConfiguration where
+  parseJSON =
+    Core.withObject
+      "GCBDRConfiguration"
+      (\o -> GCBDRConfiguration Core.<$> (o Core..:? "gcbdrManaged"))
+
+instance Core.ToJSON GCBDRConfiguration where
+  toJSON GCBDRConfiguration {..} =
+    Core.object
+      (Core.catMaybes [("gcbdrManaged" Core..=) Core.<$> gcbdrManaged])
+
 -- | Backups stored in Cloud Storage buckets. The Cloud Storage buckets need to be the same region as the clusters.
 --
 -- /See:/ 'newGcsBackupSource' smart constructor.
 newtype GcsBackupSource = GcsBackupSource
-  { -- | Optional. URIs of the GCS objects to import. Example: gs:\/\/bucket1\/object1, gs:\/\/bucket2\/folder2\/object2
+  { -- | Optional. URIs of the Cloud Storage objects to import. Example: gs:\/\/bucket1\/object1, gs:\/\/bucket2\/folder2\/object2
     uris :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2533,7 +2662,7 @@ data Instance = Instance
     readReplicasMode :: (Core.Maybe Instance_ReadReplicasMode),
     -- | Optional. Redis configuration parameters, according to http:\/\/redis.io\/topics\/config. Currently, the only supported parameters are: Redis version 3.2 and newer: * maxmemory-policy * notify-keyspace-events Redis version 4.0 and newer: * activedefrag * lfu-decay-time * lfu-log-factor * maxmemory-gb Redis version 5.0 and newer: * stream-node-max-bytes * stream-node-max-entries
     redisConfigs :: (Core.Maybe Instance_RedisConfigs),
-    -- | Optional. The version of Redis software. If not provided, latest supported version will be used. Currently, the supported values are: * @REDIS_3_2@ for Redis 3.2 compatibility * @REDIS_4_0@ for Redis 4.0 compatibility (default) * @REDIS_5_0@ for Redis 5.0 compatibility * @REDIS_6_X@ for Redis 6.x compatibility * @REDIS_7_0@ for Redis 7.0 compatibility
+    -- | Optional. The version of Redis software. If not provided, the default version will be used. Currently, the supported values are: * @REDIS_3_2@ for Redis 3.2 compatibility * @REDIS_4_0@ for Redis 4.0 compatibility * @REDIS_5_0@ for Redis 5.0 compatibility * @REDIS_6_X@ for Redis 6.x compatibility * @REDIS_7_0@ for Redis 7.0 compatibility (default) * @REDIS_7_2@ for Redis 7.2 compatibility
     redisVersion :: (Core.Maybe Core.Text),
     -- | Optional. The number of replica nodes. The valid range for the Standard Tier with read replicas enabled is [1-5] and defaults to 2. If read replicas are not enabled for a Standard Tier instance, the only valid value is 1 and the default is 1. The valid value for basic tier is 0 and the default is also 0.
     replicaCount :: (Core.Maybe Core.Int32),
@@ -2778,6 +2907,8 @@ data InternalResourceMetadata = InternalResourceMetadata
     backupConfiguration :: (Core.Maybe BackupConfiguration),
     -- | Information about the last backup attempt for this database
     backupRun :: (Core.Maybe BackupRun),
+    -- | Whether deletion protection is enabled for this internal resource.
+    isDeletionProtectionEnabled :: (Core.Maybe Core.Bool),
     product :: (Core.Maybe Product),
     resourceId :: (Core.Maybe DatabaseResourceId),
     -- | Required. internal resource name for spanner this will be database name e.g.\"spanner.googleapis.com\/projects\/123\/abc\/instances\/inst1\/databases\/db1\"
@@ -2792,6 +2923,7 @@ newInternalResourceMetadata =
   InternalResourceMetadata
     { backupConfiguration = Core.Nothing,
       backupRun = Core.Nothing,
+      isDeletionProtectionEnabled = Core.Nothing,
       product = Core.Nothing,
       resourceId = Core.Nothing,
       resourceName = Core.Nothing
@@ -2805,6 +2937,7 @@ instance Core.FromJSON InternalResourceMetadata where
           InternalResourceMetadata
             Core.<$> (o Core..:? "backupConfiguration")
             Core.<*> (o Core..:? "backupRun")
+            Core.<*> (o Core..:? "isDeletionProtectionEnabled")
             Core.<*> (o Core..:? "product")
             Core.<*> (o Core..:? "resourceId")
             Core.<*> (o Core..:? "resourceName")
@@ -2816,6 +2949,8 @@ instance Core.ToJSON InternalResourceMetadata where
       ( Core.catMaybes
           [ ("backupConfiguration" Core..=) Core.<$> backupConfiguration,
             ("backupRun" Core..=) Core.<$> backupRun,
+            ("isDeletionProtectionEnabled" Core..=)
+              Core.<$> isDeletionProtectionEnabled,
             ("product" Core..=) Core.<$> product,
             ("resourceId" Core..=) Core.<$> resourceId,
             ("resourceName" Core..=) Core.<$> resourceName
@@ -3185,13 +3320,13 @@ instance Core.ToJSON Location_Metadata where
 --
 -- /See:/ 'newMachineConfiguration' smart constructor.
 data MachineConfiguration = MachineConfiguration
-  { -- | The number of CPUs. TODO(b\/342344482, b\/342346271) add proto validations again after bug fix.
+  { -- | The number of CPUs. Deprecated. Use vcpu_count instead. TODO(b\/342344482) add proto validations again after bug fix.
     cpuCount :: (Core.Maybe Core.Int32),
-    -- | Memory size in bytes. TODO(b\/342344482, b\/342346271) add proto validations again after bug fix.
+    -- | Memory size in bytes. TODO(b\/342344482) add proto validations again after bug fix.
     memorySizeInBytes :: (Core.Maybe Core.Int64),
     -- | Optional. Number of shards (if applicable).
     shardCount :: (Core.Maybe Core.Int32),
-    -- | Optional. The number of vCPUs. TODO(b\/342344482, b\/342346271) add proto validations again after bug fix.
+    -- | Optional. The number of vCPUs. TODO(b\/342344482) add proto validations again after bug fix.
     vcpuCount :: (Core.Maybe Core.Double)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3943,6 +4078,8 @@ data PscConnection = PscConnection
     forwardingRule :: (Core.Maybe Core.Text),
     -- | Required. The consumer network where the IP address resides, in the form of projects\/{project/id}\/global\/networks\/{network/id}.
     network :: (Core.Maybe Core.Text),
+    -- | Output only. The port number of the exposed discovery endpoint.
+    port :: (Core.Maybe Core.Int32),
     -- | Optional. Project ID of the consumer project where the forwarding rule is created in.
     projectId :: (Core.Maybe Core.Text),
     -- | Required. The PSC connection id of the forwarding rule connected to the service attachment.
@@ -3963,6 +4100,7 @@ newPscConnection =
       connectionType = Core.Nothing,
       forwardingRule = Core.Nothing,
       network = Core.Nothing,
+      port = Core.Nothing,
       projectId = Core.Nothing,
       pscConnectionId = Core.Nothing,
       pscConnectionStatus = Core.Nothing,
@@ -3979,6 +4117,7 @@ instance Core.FromJSON PscConnection where
             Core.<*> (o Core..:? "connectionType")
             Core.<*> (o Core..:? "forwardingRule")
             Core.<*> (o Core..:? "network")
+            Core.<*> (o Core..:? "port")
             Core.<*> (o Core..:? "projectId")
             Core.<*> (o Core..:? "pscConnectionId")
             Core.<*> (o Core..:? "pscConnectionStatus")
@@ -3993,6 +4132,7 @@ instance Core.ToJSON PscConnection where
             ("connectionType" Core..=) Core.<$> connectionType,
             ("forwardingRule" Core..=) Core.<$> forwardingRule,
             ("network" Core..=) Core.<$> network,
+            ("port" Core..=) Core.<$> port,
             ("projectId" Core..=) Core.<$> projectId,
             ("pscConnectionId" Core..=) Core.<$> pscConnectionId,
             ("pscConnectionStatus" Core..=) Core.<$> pscConnectionStatus,
@@ -4581,7 +4721,9 @@ instance Core.ToJSON TypedValue where
 --
 -- /See:/ 'newUpdateInfo' smart constructor.
 data UpdateInfo = UpdateInfo
-  { -- | Target number of replica nodes per shard.
+  { -- | Target node type for redis cluster.
+    targetNodeType :: (Core.Maybe UpdateInfo_TargetNodeType),
+    -- | Target number of replica nodes per shard.
     targetReplicaCount :: (Core.Maybe Core.Int32),
     -- | Target number of shards for redis cluster
     targetShardCount :: (Core.Maybe Core.Int32)
@@ -4593,7 +4735,8 @@ newUpdateInfo ::
   UpdateInfo
 newUpdateInfo =
   UpdateInfo
-    { targetReplicaCount = Core.Nothing,
+    { targetNodeType = Core.Nothing,
+      targetReplicaCount = Core.Nothing,
       targetShardCount = Core.Nothing
     }
 
@@ -4603,7 +4746,8 @@ instance Core.FromJSON UpdateInfo where
       "UpdateInfo"
       ( \o ->
           UpdateInfo
-            Core.<$> (o Core..:? "targetReplicaCount")
+            Core.<$> (o Core..:? "targetNodeType")
+            Core.<*> (o Core..:? "targetReplicaCount")
             Core.<*> (o Core..:? "targetShardCount")
       )
 
@@ -4611,7 +4755,8 @@ instance Core.ToJSON UpdateInfo where
   toJSON UpdateInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("targetReplicaCount" Core..=) Core.<$> targetReplicaCount,
+          [ ("targetNodeType" Core..=) Core.<$> targetNodeType,
+            ("targetReplicaCount" Core..=) Core.<$> targetReplicaCount,
             ("targetShardCount" Core..=) Core.<$> targetShardCount
           ]
       )

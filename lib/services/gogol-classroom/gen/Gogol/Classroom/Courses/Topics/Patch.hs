@@ -23,7 +23,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates one or more fields of a topic. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting developer project did not create the corresponding topic or for access errors. * @INVALID_ARGUMENT@ if the request is malformed. * @NOT_FOUND@ if the requested course or topic does not exist
+-- Updates one or more fields of a topic. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting developer project did not create the corresponding topic or for access errors. * @INVALID_ARGUMENT@ if the request is malformed. * @FAILED_PRECONDITION@ if there exists a topic in the course with the same name. * @NOT_FOUND@ if the requested course or topic does not exist
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.courses.topics.patch@.
 module Gogol.Classroom.Courses.Topics.Patch
@@ -57,7 +57,7 @@ type ClassroomCoursesTopicsPatchResource =
     Core.:> Core.ReqBody '[Core.JSON] Topic
     Core.:> Core.Patch '[Core.JSON] Topic
 
--- | Updates one or more fields of a topic. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting developer project did not create the corresponding topic or for access errors. * @INVALID_ARGUMENT@ if the request is malformed. * @NOT_FOUND@ if the requested course or topic does not exist
+-- | Updates one or more fields of a topic. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting developer project did not create the corresponding topic or for access errors. * @INVALID_ARGUMENT@ if the request is malformed. * @FAILED_PRECONDITION@ if there exists a topic in the course with the same name. * @NOT_FOUND@ if the requested course or topic does not exist
 --
 -- /See:/ 'newClassroomCoursesTopicsPatch' smart constructor.
 data ClassroomCoursesTopicsPatch = ClassroomCoursesTopicsPatch

@@ -147,6 +147,10 @@ module Gogol.Compute.Internal.Product
     AllocationAggregateReservationReservedResourceInfoAccelerator (..),
     newAllocationAggregateReservationReservedResourceInfoAccelerator,
 
+    -- * AllocationReservationSharingPolicy
+    AllocationReservationSharingPolicy (..),
+    newAllocationReservationSharingPolicy,
+
     -- * AllocationResourceStatus
     AllocationResourceStatus (..),
     newAllocationResourceStatus,
@@ -154,6 +158,10 @@ module Gogol.Compute.Internal.Product
     -- * AllocationResourceStatusSpecificSKUAllocation
     AllocationResourceStatusSpecificSKUAllocation (..),
     newAllocationResourceStatusSpecificSKUAllocation,
+
+    -- * AllocationResourceStatusSpecificSKUAllocation_Utilizations
+    AllocationResourceStatusSpecificSKUAllocation_Utilizations (..),
+    newAllocationResourceStatusSpecificSKUAllocation_Utilizations,
 
     -- * AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk
     AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk (..),
@@ -311,6 +319,10 @@ module Gogol.Compute.Internal.Product
     BackendBucketUsedBy (..),
     newBackendBucketUsedBy,
 
+    -- * BackendCustomMetric
+    BackendCustomMetric (..),
+    newBackendCustomMetric,
+
     -- * BackendService
     BackendService (..),
     newBackendService,
@@ -350,6 +362,10 @@ module Gogol.Compute.Internal.Product
     -- * BackendServiceConnectionTrackingPolicy
     BackendServiceConnectionTrackingPolicy (..),
     newBackendServiceConnectionTrackingPolicy,
+
+    -- * BackendServiceCustomMetric
+    BackendServiceCustomMetric (..),
+    newBackendServiceCustomMetric,
 
     -- * BackendServiceFailoverPolicy
     BackendServiceFailoverPolicy (..),
@@ -442,6 +458,18 @@ module Gogol.Compute.Internal.Product
     -- * BfdStatusPacketCounts
     BfdStatusPacketCounts (..),
     newBfdStatusPacketCounts,
+
+    -- * BgpRoute
+    BgpRoute (..),
+    newBgpRoute,
+
+    -- * BgpRouteAsPath
+    BgpRouteAsPath (..),
+    newBgpRouteAsPath,
+
+    -- * BgpRouteNetworkLayerReachabilityInformation
+    BgpRouteNetworkLayerReachabilityInformation (..),
+    newBgpRouteNetworkLayerReachabilityInformation,
 
     -- * Binding
     Binding (..),
@@ -822,6 +850,18 @@ module Gogol.Compute.Internal.Product
     -- * FirewallPoliciesListAssociationsResponse
     FirewallPoliciesListAssociationsResponse (..),
     newFirewallPoliciesListAssociationsResponse,
+
+    -- * FirewallPoliciesScopedList
+    FirewallPoliciesScopedList (..),
+    newFirewallPoliciesScopedList,
+
+    -- * FirewallPoliciesScopedList_Warning
+    FirewallPoliciesScopedList_Warning (..),
+    newFirewallPoliciesScopedList_Warning,
+
+    -- * FirewallPoliciesScopedList_Warning_DataItem
+    FirewallPoliciesScopedList_Warning_DataItem (..),
+    newFirewallPoliciesScopedList_Warning_DataItem,
 
     -- * FirewallPolicy
     FirewallPolicy (..),
@@ -1359,6 +1399,10 @@ module Gogol.Compute.Internal.Product
     InstanceGroupManagerResizeRequestsListResponse_Warning_DataItem (..),
     newInstanceGroupManagerResizeRequestsListResponse_Warning_DataItem,
 
+    -- * InstanceGroupManagerResourcePolicies
+    InstanceGroupManagerResourcePolicies (..),
+    newInstanceGroupManagerResourcePolicies,
+
     -- * InstanceGroupManagerStandbyPolicy
     InstanceGroupManagerStandbyPolicy (..),
     newInstanceGroupManagerStandbyPolicy,
@@ -1678,6 +1722,14 @@ module Gogol.Compute.Internal.Product
     -- * InstancesRemoveResourcePoliciesRequest
     InstancesRemoveResourcePoliciesRequest (..),
     newInstancesRemoveResourcePoliciesRequest,
+
+    -- * InstancesReportHostAsFaultyRequest
+    InstancesReportHostAsFaultyRequest (..),
+    newInstancesReportHostAsFaultyRequest,
+
+    -- * InstancesReportHostAsFaultyRequestFaultReason
+    InstancesReportHostAsFaultyRequestFaultReason (..),
+    newInstancesReportHostAsFaultyRequestFaultReason,
 
     -- * InstancesScopedList
     InstancesScopedList (..),
@@ -2342,6 +2394,22 @@ module Gogol.Compute.Internal.Product
     -- * NetworkEndpointWithHealthStatus
     NetworkEndpointWithHealthStatus (..),
     newNetworkEndpointWithHealthStatus,
+
+    -- * NetworkFirewallPolicyAggregatedList
+    NetworkFirewallPolicyAggregatedList (..),
+    newNetworkFirewallPolicyAggregatedList,
+
+    -- * NetworkFirewallPolicyAggregatedList_Items
+    NetworkFirewallPolicyAggregatedList_Items (..),
+    newNetworkFirewallPolicyAggregatedList_Items,
+
+    -- * NetworkFirewallPolicyAggregatedList_Warning
+    NetworkFirewallPolicyAggregatedList_Warning (..),
+    newNetworkFirewallPolicyAggregatedList_Warning,
+
+    -- * NetworkFirewallPolicyAggregatedList_Warning_DataItem
+    NetworkFirewallPolicyAggregatedList_Warning_DataItem (..),
+    newNetworkFirewallPolicyAggregatedList_Warning_DataItem,
 
     -- * NetworkInterface
     NetworkInterface (..),
@@ -3355,6 +3423,14 @@ module Gogol.Compute.Internal.Product
     RouteList_Warning_DataItem (..),
     newRouteList_Warning_DataItem,
 
+    -- * RoutePolicy
+    RoutePolicy (..),
+    newRoutePolicy,
+
+    -- * RoutePolicyPolicyTerm
+    RoutePolicyPolicyTerm (..),
+    newRoutePolicyPolicyTerm,
+
     -- * Router
     Router (..),
     newRouter,
@@ -3454,6 +3530,34 @@ module Gogol.Compute.Internal.Product
     -- * RouterStatusResponse
     RouterStatusResponse (..),
     newRouterStatusResponse,
+
+    -- * RoutersGetRoutePolicyResponse
+    RoutersGetRoutePolicyResponse (..),
+    newRoutersGetRoutePolicyResponse,
+
+    -- * RoutersListBgpRoutes
+    RoutersListBgpRoutes (..),
+    newRoutersListBgpRoutes,
+
+    -- * RoutersListBgpRoutes_Warning
+    RoutersListBgpRoutes_Warning (..),
+    newRoutersListBgpRoutes_Warning,
+
+    -- * RoutersListBgpRoutes_Warning_DataItem
+    RoutersListBgpRoutes_Warning_DataItem (..),
+    newRoutersListBgpRoutes_Warning_DataItem,
+
+    -- * RoutersListRoutePolicies
+    RoutersListRoutePolicies (..),
+    newRoutersListRoutePolicies,
+
+    -- * RoutersListRoutePolicies_Warning
+    RoutersListRoutePolicies_Warning (..),
+    newRoutersListRoutePolicies_Warning,
+
+    -- * RoutersListRoutePolicies_Warning_DataItem
+    RoutersListRoutePolicies_Warning_DataItem (..),
+    newRoutersListRoutePolicies_Warning_DataItem,
 
     -- * RoutersPreviewResponse
     RoutersPreviewResponse (..),
@@ -5454,7 +5558,7 @@ data AccessConfig = AccessConfig
     networkTier :: (Core.Maybe AccessConfig_NetworkTier),
     -- | The DNS domain name for the public PTR record. You can set this field only if the @setPublicPtr@ field is enabled in accessConfig. If this field is unspecified in ipv6AccessConfig, a default PTR record will be created for first IP in associated external IPv6 range.
     publicPtrDomainName :: (Core.Maybe Core.Text),
-    -- | [Output Only] The resource URL for the security policy associated with this access config.
+    -- | The resource URL for the security policy associated with this access config.
     securityPolicy :: (Core.Maybe Core.Text),
     -- | Specifies whether a public DNS \'PTR\' record should be created to map the external IP address of the instance to a DNS domain name. This field is not used in ipv6AccessConfig. A default PTR record will be created if the VM has external IPv6 range associated.
     setPublicPtr :: (Core.Maybe Core.Bool),
@@ -6335,6 +6439,39 @@ instance
             ]
         )
 
+--
+-- /See:/ 'newAllocationReservationSharingPolicy' smart constructor.
+newtype AllocationReservationSharingPolicy = AllocationReservationSharingPolicy
+  { -- | Sharing config for all Google Cloud services.
+    serviceShareType :: (Core.Maybe AllocationReservationSharingPolicy_ServiceShareType)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AllocationReservationSharingPolicy' with the minimum fields required to make a request.
+newAllocationReservationSharingPolicy ::
+  AllocationReservationSharingPolicy
+newAllocationReservationSharingPolicy =
+  AllocationReservationSharingPolicy
+    { serviceShareType =
+        Core.Nothing
+    }
+
+instance Core.FromJSON AllocationReservationSharingPolicy where
+  parseJSON =
+    Core.withObject
+      "AllocationReservationSharingPolicy"
+      ( \o ->
+          AllocationReservationSharingPolicy
+            Core.<$> (o Core..:? "serviceShareType")
+      )
+
+instance Core.ToJSON AllocationReservationSharingPolicy where
+  toJSON AllocationReservationSharingPolicy {..} =
+    Core.object
+      ( Core.catMaybes
+          [("serviceShareType" Core..=) Core.<$> serviceShareType]
+      )
+
 -- | [Output Only] Contains output only fields.
 --
 -- /See:/ 'newAllocationResourceStatus' smart constructor.
@@ -6369,9 +6506,14 @@ instance Core.ToJSON AllocationResourceStatus where
 -- | Contains Properties set for the reservation.
 --
 -- /See:/ 'newAllocationResourceStatusSpecificSKUAllocation' smart constructor.
-newtype AllocationResourceStatusSpecificSKUAllocation = AllocationResourceStatusSpecificSKUAllocation
+data AllocationResourceStatusSpecificSKUAllocation = AllocationResourceStatusSpecificSKUAllocation
   { -- | ID of the instance template used to populate reservation properties.
-    sourceInstanceTemplateId :: (Core.Maybe Core.Text)
+    sourceInstanceTemplateId :: (Core.Maybe Core.Text),
+    -- | Per service utilization breakdown. The Key is the Google Cloud managed service name.
+    utilizations ::
+      ( Core.Maybe
+          AllocationResourceStatusSpecificSKUAllocation_Utilizations
+      )
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6381,7 +6523,8 @@ newAllocationResourceStatusSpecificSKUAllocation ::
 newAllocationResourceStatusSpecificSKUAllocation =
   AllocationResourceStatusSpecificSKUAllocation
     { sourceInstanceTemplateId =
-        Core.Nothing
+        Core.Nothing,
+      utilizations = Core.Nothing
     }
 
 instance
@@ -6394,6 +6537,7 @@ instance
       ( \o ->
           AllocationResourceStatusSpecificSKUAllocation
             Core.<$> (o Core..:? "sourceInstanceTemplateId")
+            Core.<*> (o Core..:? "utilizations")
       )
 
 instance Core.ToJSON AllocationResourceStatusSpecificSKUAllocation where
@@ -6401,9 +6545,50 @@ instance Core.ToJSON AllocationResourceStatusSpecificSKUAllocation where
     Core.object
       ( Core.catMaybes
           [ ("sourceInstanceTemplateId" Core..=)
-              Core.<$> sourceInstanceTemplateId
+              Core.<$> sourceInstanceTemplateId,
+            ("utilizations" Core..=) Core.<$> utilizations
           ]
       )
+
+-- | Per service utilization breakdown. The Key is the Google Cloud managed service name.
+--
+-- /See:/ 'newAllocationResourceStatusSpecificSKUAllocation_Utilizations' smart constructor.
+newtype AllocationResourceStatusSpecificSKUAllocation_Utilizations = AllocationResourceStatusSpecificSKUAllocation_Utilizations
+  { additional :: (Core.HashMap Core.Text Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AllocationResourceStatusSpecificSKUAllocation_Utilizations' with the minimum fields required to make a request.
+newAllocationResourceStatusSpecificSKUAllocation_Utilizations ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Int64 ->
+  AllocationResourceStatusSpecificSKUAllocation_Utilizations
+newAllocationResourceStatusSpecificSKUAllocation_Utilizations
+  additional =
+    AllocationResourceStatusSpecificSKUAllocation_Utilizations
+      { additional =
+          additional
+      }
+
+instance
+  Core.FromJSON
+    AllocationResourceStatusSpecificSKUAllocation_Utilizations
+  where
+  parseJSON =
+    Core.withObject
+      "AllocationResourceStatusSpecificSKUAllocation_Utilizations"
+      ( \o ->
+          AllocationResourceStatusSpecificSKUAllocation_Utilizations
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    AllocationResourceStatusSpecificSKUAllocation_Utilizations
+  where
+  toJSON
+    AllocationResourceStatusSpecificSKUAllocation_Utilizations {..} =
+      Core.toJSON additional
 
 --
 -- /See:/ 'newAllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk' smart constructor.
@@ -6734,7 +6919,7 @@ data AttachedDiskInitializeParams = AttachedDiskInitializeParams
     sourceImage :: (Core.Maybe Core.Text),
     -- | The customer-supplied encryption key of the source image. Required if the source image is protected by a customer-supplied encryption key. InstanceTemplate and InstancePropertiesPatch do not store customer-supplied encryption keys, so you cannot create disks for instances in a managed instance group if the source images are encrypted with your own keys.
     sourceImageEncryptionKey :: (Core.Maybe CustomerEncryptionKey),
-    -- | The source snapshot to create this disk. When creating a new instance boot disk, one of initializeParams.sourceSnapshot or initializeParams.sourceImage or disks.source is required. To create a disk with a snapshot that you created, specify the snapshot name in the following format: global\/snapshots\/my-backup If the source snapshot is deleted later, this field will not be set.
+    -- | The source snapshot to create this disk. When creating a new instance boot disk, one of initializeParams.sourceSnapshot or initializeParams.sourceImage or disks.source is required. To create a disk with a snapshot that you created, specify the snapshot name in the following format: global\/snapshots\/my-backup If the source snapshot is deleted later, this field will not be set. Note: You cannot create VMs in bulk using a snapshot as the source. Use an image instead when you create VMs using the bulk insert method.
     sourceSnapshot :: (Core.Maybe Core.Text),
     -- | The customer-supplied encryption key of the source snapshot.
     sourceSnapshotEncryptionKey :: (Core.Maybe CustomerEncryptionKey),
@@ -7916,6 +8101,8 @@ data Backend = Backend
     balancingMode :: (Core.Maybe Backend_BalancingMode),
     -- | A multiplier applied to the backend\'s target capacity of its balancing mode. The default value is 1, which means the group serves up to 100% of its configured capacity (depending on balancingMode). A setting of 0 means the group is completely drained, offering 0% of its available capacity. The valid ranges are 0.0 and [0.1,1.0]. You cannot configure a setting larger than 0 and smaller than 0.1. You cannot configure a setting of 0 when there is only one backend attached to the backend service. Not available with backends that don\'t support using a balancingMode. This includes backends such as global internet NEGs, regional serverless NEGs, and PSC NEGs.
     capacityScaler :: (Core.Maybe Core.Double),
+    -- | List of custom metrics that are used for CUSTOM_METRICS BalancingMode.
+    customMetrics :: (Core.Maybe [BackendCustomMetric]),
     -- | An optional description of this resource. Provide this property when you create the resource.
     description :: (Core.Maybe Core.Text),
     -- | This field designates whether this is a failover backend. More than one failover backend can be configured for a given BackendService.
@@ -7948,6 +8135,7 @@ newBackend =
   Backend
     { balancingMode = Core.Nothing,
       capacityScaler = Core.Nothing,
+      customMetrics = Core.Nothing,
       description = Core.Nothing,
       failover = Core.Nothing,
       group' = Core.Nothing,
@@ -7969,6 +8157,7 @@ instance Core.FromJSON Backend where
           Backend
             Core.<$> (o Core..:? "balancingMode")
             Core.<*> (o Core..:? "capacityScaler")
+            Core.<*> (o Core..:? "customMetrics")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "failover")
             Core.<*> (o Core..:? "group")
@@ -7988,6 +8177,7 @@ instance Core.ToJSON Backend where
       ( Core.catMaybes
           [ ("balancingMode" Core..=) Core.<$> balancingMode,
             ("capacityScaler" Core..=) Core.<$> capacityScaler,
+            ("customMetrics" Core..=) Core.<$> customMetrics,
             ("description" Core..=) Core.<$> description,
             ("failover" Core..=) Core.<$> failover,
             ("group" Core..=) Core.<$> group',
@@ -8473,6 +8663,50 @@ instance Core.ToJSON BackendBucketUsedBy where
     Core.object
       (Core.catMaybes [("reference" Core..=) Core.<$> reference])
 
+-- | Custom Metrics are used for CUSTOM/METRICS balancing/mode.
+--
+-- /See:/ 'newBackendCustomMetric' smart constructor.
+data BackendCustomMetric = BackendCustomMetric
+  { -- | If true, the metric data is collected and reported to Cloud Monitoring, but is not used for load balancing.
+    dryRun :: (Core.Maybe Core.Bool),
+    -- | Optional parameter to define a target utilization for the Custom Metrics balancing mode. The valid range is [0.0, 1.0].
+    maxUtilization :: (Core.Maybe Core.Double),
+    -- | Name of a custom utilization signal. The name must be 1-64 characters long and match the regular expression <%5B-_.a-z0-9%5D*%5Ba-z0-9%5D a-z>? which means the first character must be a lowercase letter, and all following characters must be a dash, period, underscore, lowercase letter, or digit, except the last character, which cannot be a dash, period, or underscore. For usage guidelines, see Custom Metrics balancing mode. This field can only be used for a global or regional backend service with the loadBalancingScheme set to EXTERNAL/MANAGED, INTERNAL/MANAGED INTERNAL/SELF/MANAGED.
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BackendCustomMetric' with the minimum fields required to make a request.
+newBackendCustomMetric ::
+  BackendCustomMetric
+newBackendCustomMetric =
+  BackendCustomMetric
+    { dryRun = Core.Nothing,
+      maxUtilization = Core.Nothing,
+      name = Core.Nothing
+    }
+
+instance Core.FromJSON BackendCustomMetric where
+  parseJSON =
+    Core.withObject
+      "BackendCustomMetric"
+      ( \o ->
+          BackendCustomMetric
+            Core.<$> (o Core..:? "dryRun")
+            Core.<*> (o Core..:? "maxUtilization")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON BackendCustomMetric where
+  toJSON BackendCustomMetric {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("dryRun" Core..=) Core.<$> dryRun,
+            ("maxUtilization" Core..=) Core.<$> maxUtilization,
+            ("name" Core..=) Core.<$> name
+          ]
+      )
+
 -- | Represents a Backend Service resource. A backend service defines how Google Cloud load balancers distribute traffic. The backend service configuration contains a set of values, such as the protocol used to connect to backends, various distribution and session settings, health checks, and timeouts. These settings provide fine-grained control over how your load balancer behaves. Most of the settings have default values that allow for easy configuration if you need to get started quickly. Backend services in Google Compute Engine can be either regionally or globally scoped. * <https://cloud.google.com/compute/docs/reference/rest/v1/backendServices Global> * <https://cloud.google.com/compute/docs/reference/rest/v1/regionBackendServices Regional> For more information, see Backend Services.
 --
 -- /See:/ 'newBackendService' smart constructor.
@@ -8493,6 +8727,8 @@ data BackendService = BackendService
     consistentHash :: (Core.Maybe ConsistentHashLoadBalancerSettings),
     -- | [Output Only] Creation timestamp in RFC3339 text format.
     creationTimestamp :: (Core.Maybe Core.Text),
+    -- | List of custom metrics that are used for the WEIGHTED/ROUND/ROBIN locality/lb/policy.
+    customMetrics :: (Core.Maybe [BackendServiceCustomMetric]),
     -- | Headers that the load balancer adds to proxied requests. See <https://cloud.google.com/load-balancing/docs/custom-headers Creating custom headers>.
     customRequestHeaders :: (Core.Maybe [Core.Text]),
     -- | Headers that the load balancer adds to proxied responses. See <https://cloud.google.com/load-balancing/docs/custom-headers Creating custom headers>.
@@ -8582,6 +8818,7 @@ newBackendService =
       connectionTrackingPolicy = Core.Nothing,
       consistentHash = Core.Nothing,
       creationTimestamp = Core.Nothing,
+      customMetrics = Core.Nothing,
       customRequestHeaders = Core.Nothing,
       customResponseHeaders = Core.Nothing,
       description = Core.Nothing,
@@ -8634,6 +8871,7 @@ instance Core.FromJSON BackendService where
             Core.<*> (o Core..:? "connectionTrackingPolicy")
             Core.<*> (o Core..:? "consistentHash")
             Core.<*> (o Core..:? "creationTimestamp")
+            Core.<*> (o Core..:? "customMetrics")
             Core.<*> (o Core..:? "customRequestHeaders")
             Core.<*> (o Core..:? "customResponseHeaders")
             Core.<*> (o Core..:? "description")
@@ -8685,6 +8923,7 @@ instance Core.ToJSON BackendService where
               Core.<$> connectionTrackingPolicy,
             ("consistentHash" Core..=) Core.<$> consistentHash,
             ("creationTimestamp" Core..=) Core.<$> creationTimestamp,
+            ("customMetrics" Core..=) Core.<$> customMetrics,
             ("customRequestHeaders" Core..=) Core.<$> customRequestHeaders,
             ("customResponseHeaders" Core..=) Core.<$> customResponseHeaders,
             ("description" Core..=) Core.<$> description,
@@ -9150,6 +9389,45 @@ instance Core.ToJSON BackendServiceConnectionTrackingPolicy where
             ("enableStrongAffinity" Core..=) Core.<$> enableStrongAffinity,
             ("idleTimeoutSec" Core..=) Core.<$> idleTimeoutSec,
             ("trackingMode" Core..=) Core.<$> trackingMode
+          ]
+      )
+
+-- | Custom Metrics are used for WEIGHTED/ROUND/ROBIN locality/lb/policy.
+--
+-- /See:/ 'newBackendServiceCustomMetric' smart constructor.
+data BackendServiceCustomMetric = BackendServiceCustomMetric
+  { -- | If true, the metric data is not used for load balancing.
+    dryRun :: (Core.Maybe Core.Bool),
+    -- | Name of a custom utilization signal. The name must be 1-64 characters long and match the regular expression <%5B-_.a-z0-9%5D*%5Ba-z0-9%5D a-z>? which means the first character must be a lowercase letter, and all following characters must be a dash, period, underscore, lowercase letter, or digit, except the last character, which cannot be a dash, period, or underscore. For usage guidelines, see Custom Metrics balancing mode. This field can only be used for a global or regional backend service with the loadBalancingScheme set to EXTERNAL/MANAGED, INTERNAL/MANAGED INTERNAL/SELF/MANAGED.
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BackendServiceCustomMetric' with the minimum fields required to make a request.
+newBackendServiceCustomMetric ::
+  BackendServiceCustomMetric
+newBackendServiceCustomMetric =
+  BackendServiceCustomMetric
+    { dryRun = Core.Nothing,
+      name = Core.Nothing
+    }
+
+instance Core.FromJSON BackendServiceCustomMetric where
+  parseJSON =
+    Core.withObject
+      "BackendServiceCustomMetric"
+      ( \o ->
+          BackendServiceCustomMetric
+            Core.<$> (o Core..:? "dryRun")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON BackendServiceCustomMetric where
+  toJSON BackendServiceCustomMetric {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("dryRun" Core..=) Core.<$> dryRun,
+            ("name" Core..=) Core.<$> name
           ]
       )
 
@@ -10238,6 +10516,132 @@ instance Core.ToJSON BfdStatusPacketCounts where
           ]
       )
 
+--
+-- /See:/ 'newBgpRoute' smart constructor.
+data BgpRoute = BgpRoute
+  { -- | [Output only] AS-PATH for the route
+    asPaths :: (Core.Maybe [BgpRouteAsPath]),
+    -- | [Output only] BGP communities in human-readable A:B format.
+    communities :: (Core.Maybe [Core.Text]),
+    -- | [Output only] Destination IP range for the route, in human-readable CIDR format
+    destination :: (Core.Maybe BgpRouteNetworkLayerReachabilityInformation),
+    -- | [Output only] BGP multi-exit discriminator
+    med :: (Core.Maybe Core.Word32),
+    -- | [Output only] BGP origin (EGP, IGP or INCOMPLETE)
+    origin :: (Core.Maybe BgpRoute_Origin)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BgpRoute' with the minimum fields required to make a request.
+newBgpRoute ::
+  BgpRoute
+newBgpRoute =
+  BgpRoute
+    { asPaths = Core.Nothing,
+      communities = Core.Nothing,
+      destination = Core.Nothing,
+      med = Core.Nothing,
+      origin = Core.Nothing
+    }
+
+instance Core.FromJSON BgpRoute where
+  parseJSON =
+    Core.withObject
+      "BgpRoute"
+      ( \o ->
+          BgpRoute
+            Core.<$> (o Core..:? "asPaths")
+            Core.<*> (o Core..:? "communities")
+            Core.<*> (o Core..:? "destination")
+            Core.<*> (o Core..:? "med")
+            Core.<*> (o Core..:? "origin")
+      )
+
+instance Core.ToJSON BgpRoute where
+  toJSON BgpRoute {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("asPaths" Core..=) Core.<$> asPaths,
+            ("communities" Core..=) Core.<$> communities,
+            ("destination" Core..=) Core.<$> destination,
+            ("med" Core..=) Core.<$> med,
+            ("origin" Core..=) Core.<$> origin
+          ]
+      )
+
+--
+-- /See:/ 'newBgpRouteAsPath' smart constructor.
+data BgpRouteAsPath = BgpRouteAsPath
+  { -- | [Output only] ASNs in the path segment. When type is SEQUENCE, these are ordered.
+    asns :: (Core.Maybe [Core.Int32]),
+    -- | [Output only] Type of AS-PATH segment (SEQUENCE or SET)
+    type' :: (Core.Maybe BgpRouteAsPath_Type)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BgpRouteAsPath' with the minimum fields required to make a request.
+newBgpRouteAsPath ::
+  BgpRouteAsPath
+newBgpRouteAsPath =
+  BgpRouteAsPath {asns = Core.Nothing, type' = Core.Nothing}
+
+instance Core.FromJSON BgpRouteAsPath where
+  parseJSON =
+    Core.withObject
+      "BgpRouteAsPath"
+      ( \o ->
+          BgpRouteAsPath
+            Core.<$> (o Core..:? "asns")
+            Core.<*> (o Core..:? "type")
+      )
+
+instance Core.ToJSON BgpRouteAsPath where
+  toJSON BgpRouteAsPath {..} =
+    Core.object
+      ( Core.catMaybes
+          [("asns" Core..=) Core.<$> asns, ("type" Core..=) Core.<$> type']
+      )
+
+-- | Network Layer Reachability Information (NLRI) for a route.
+--
+-- /See:/ 'newBgpRouteNetworkLayerReachabilityInformation' smart constructor.
+data BgpRouteNetworkLayerReachabilityInformation = BgpRouteNetworkLayerReachabilityInformation
+  { -- | If the BGP session supports multiple paths (RFC 7911), the path identifier for this route.
+    pathId :: (Core.Maybe Core.Word32),
+    -- | Human readable CIDR notation for a prefix. E.g. 10.42.0.0\/16.
+    prefix :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BgpRouteNetworkLayerReachabilityInformation' with the minimum fields required to make a request.
+newBgpRouteNetworkLayerReachabilityInformation ::
+  BgpRouteNetworkLayerReachabilityInformation
+newBgpRouteNetworkLayerReachabilityInformation =
+  BgpRouteNetworkLayerReachabilityInformation
+    { pathId =
+        Core.Nothing,
+      prefix = Core.Nothing
+    }
+
+instance Core.FromJSON BgpRouteNetworkLayerReachabilityInformation where
+  parseJSON =
+    Core.withObject
+      "BgpRouteNetworkLayerReachabilityInformation"
+      ( \o ->
+          BgpRouteNetworkLayerReachabilityInformation
+            Core.<$> (o Core..:? "pathId")
+            Core.<*> (o Core..:? "prefix")
+      )
+
+instance Core.ToJSON BgpRouteNetworkLayerReachabilityInformation where
+  toJSON BgpRouteNetworkLayerReachabilityInformation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("pathId" Core..=) Core.<$> pathId,
+            ("prefix" Core..=) Core.<$> prefix
+          ]
+      )
+
 -- | Associates @members@, or principals, with a @role@.
 --
 -- /See:/ 'newBinding' smart constructor.
@@ -10681,23 +11085,22 @@ instance Core.ToJSON CircuitBreakers where
           ]
       )
 
--- | Represents a regional Commitment resource. Creating a commitment resource means that you are purchasing a committed use contract with an explicit start and end time. You can create commitments based on vCPUs and memory usage and receive discounted rates. For full details, read Signing Up for Committed Use Discounts.
+-- | Represents a regional resource-based commitment resource. Creating this commitment resource means that you are purchasing a resource-based committed use contract, with an explicit start and end time. You can purchase resource-based commitments for both hardware and software resources. For more information, read Resource-based committed use discounts
 --
 -- /See:/ 'newCommitment' smart constructor.
 data Commitment = Commitment
-  { -- | Specifies whether to enable automatic renewal for the commitment. The default value is false if not specified. The field can be updated until the day of the commitment expiration at 12:00am PST. If the field is set to true, the commitment will be automatically renewed for either one or three years according to the terms of the existing commitment.
+  { -- | Specifies whether to automatically renew the commitment at the end of its current term. The default value is false. If you set the field to true, each time your commitment reaches the end of its term, Compute Engine automatically renews it for another term. You can update this field anytime before the commitment expires. For example, if the commitment is set to expire at 12 AM UTC-8 on January 3, 2027, you can update this field until 11:59 PM UTC-8 on January 2, 2027.
     autoRenew :: (Core.Maybe Core.Bool),
-    -- | The category of the commitment. Category MACHINE specifies commitments composed of machine resources such as VCPU or MEMORY, listed in resources. Category LICENSE specifies commitments composed of software licenses, listed in licenseResources. Note that only MACHINE commitments should have a Type specified.
+    -- | The category of the commitment; specifies whether the commitment is for hardware or software resources. Category MACHINE specifies that you are committing to hardware machine resources such as VCPU or MEMORY, listed in resources. Category LICENSE specifies that you are committing to software licenses, listed in licenseResources. Note that if you specify MACHINE commitments, then you must also specify a type to indicate the machine series of the hardware resource that you are committing to.
     category :: (Core.Maybe Commitment_Category),
     -- | [Output Only] Creation timestamp in RFC3339 text format.
     creationTimestamp :: (Core.Maybe Core.Text),
-    -- | [Input Only] Optional, specifies the CUD end time requested by the customer in RFC3339 text format. Needed when the customer wants CUD\'s end date is later than the start date + term duration.
+    -- | [Input Only] Optional, specifies the requested commitment end time in RFC3339 text format. Use this option when the desired commitment\'s end date is later than the start date + term duration.
     customEndTimestamp :: (Core.Maybe Core.Text),
-    -- | An optional description of this resource. Provide this property when you create the resource.
+    -- | An optional description of the commitment. You can provide this property when you create the resource.
     description :: (Core.Maybe Core.Text),
     -- | [Output Only] Commitment end time in RFC3339 text format.
     endTimestamp :: (Core.Maybe Core.Text),
-    -- | Specifies the already existing reservations to attach to the Commitment. This field is optional, and it can be a full or partial URL. For example, the following are valid URLs to an reservation: - https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/zones\/zone \/reservations\/reservation - projects\/project\/zones\/zone\/reservations\/reservation
     existingReservations :: (Core.Maybe [Core.Text]),
     -- | [Output Only] The unique identifier for the resource. This identifier is defined by the server.
     id :: (Core.Maybe Core.Word64),
@@ -10705,31 +11108,31 @@ data Commitment = Commitment
     kind :: Core.Text,
     -- | The license specification required as part of a license commitment.
     licenseResource :: (Core.Maybe LicenseResourceCommitment),
-    -- | List of source commitments to be merged into a new commitment.
+    -- | The list of source commitments that you are merging to create the new merged commitment. For more information, see Merging commitments.
     mergeSourceCommitments :: (Core.Maybe [Core.Text]),
-    -- | Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression @[a-z]([-a-z0-9]*[a-z0-9])?@ which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+    -- | Name of the commitment. You must specify a name when you purchase the commitment. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression @[a-z]([-a-z0-9]*[a-z0-9])?@ which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
     name :: (Core.Maybe Core.Text),
-    -- | The plan for this commitment, which determines duration and discount rate. The currently supported plans are TWELVE/MONTH (1 year), and THIRTY/SIX_MONTH (3 years).
+    -- | The minimum time duration that you commit to purchasing resources. The plan that you choose determines the preset term length of the commitment (which is 1 year or 3 years) and affects the discount rate that you receive for your resources. Committing to a longer time duration typically gives you a higher discount rate. The supported values for this field are TWELVE/MONTH (1 year), and THIRTY/SIX_MONTH (3 years).
     plan :: (Core.Maybe Commitment_Plan),
-    -- | [Output Only] URL of the region where this commitment may be used.
+    -- | [Output Only] URL of the region where the commitment and committed resources are located.
     region :: (Core.Maybe Core.Text),
-    -- | List of create-on-create reservations for this commitment.
+    -- | The list of new reservations that you want to create and attach to this commitment. You must attach reservations to your commitment if your commitment specifies any GPUs or Local SSD disks. For more information, see Attach reservations to resource-based commitments. Specify this property only if you want to create new reservations to attach. To attach existing reservations, specify the existingReservations property instead.
     reservations :: (Core.Maybe [Reservation]),
     -- | [Output Only] Status information for Commitment resource.
     resourceStatus :: (Core.Maybe CommitmentResourceStatus),
-    -- | A list of commitment amounts for particular resources. Note that VCPU and MEMORY resource commitments must occur together.
+    -- | The list of all the hardware resources, with their types and amounts, that you want to commit to. Specify as a separate entry in the list for each individual resource type.
     resources :: (Core.Maybe [ResourceCommitment]),
     -- | [Output Only] Server-defined URL for the resource.
     selfLink :: (Core.Maybe Core.Text),
-    -- | Source commitment to be split into a new commitment.
+    -- | The source commitment from which you are transferring resources to create the new split commitment. For more information, see Split commitments.
     splitSourceCommitment :: (Core.Maybe Core.Text),
     -- | [Output Only] Commitment start time in RFC3339 text format.
     startTimestamp :: (Core.Maybe Core.Text),
-    -- | [Output Only] Status of the commitment with regards to eventual expiration (each commitment has an end date defined). One of the following values: NOT/YET/ACTIVE, ACTIVE, EXPIRED.
+    -- | [Output Only] Status of the commitment with regards to eventual expiration (each commitment has an end date defined). Status can be one of the following values: NOT/YET/ACTIVE, ACTIVE, or EXPIRED.
     status :: (Core.Maybe Commitment_Status),
     -- | [Output Only] An optional, human-readable explanation of the status.
     statusMessage :: (Core.Maybe Core.Text),
-    -- | The type of commitment, which affects the discount rate and the eligible resources. Type MEMORY/OPTIMIZED specifies a commitment that will only apply to memory optimized machines. Type ACCELERATOR/OPTIMIZED specifies a commitment that will only apply to accelerator optimized machines.
+    -- | The type of commitment; specifies the machine series for which you want to commit to purchasing resources. The choice of machine series affects the discount rate and the eligible resource types. The type must be one of the following: ACCELERATOR/OPTIMIZED, ACCELERATOR/OPTIMIZED/A3, ACCELERATOR/OPTIMIZED/A3/MEGA, COMPUTE/OPTIMIZED, COMPUTE/OPTIMIZED/C2D, COMPUTE/OPTIMIZED/C3, COMPUTE/OPTIMIZED/C3D, COMPUTE/OPTIMIZED/H3, GENERAL/PURPOSE, GENERAL/PURPOSE/C4, GENERAL/PURPOSE/E2, GENERAL/PURPOSE/N2, GENERAL/PURPOSE/N2D, GENERAL/PURPOSE/N4, GENERAL/PURPOSE/T2D, GRAPHICS/OPTIMIZED, MEMORY/OPTIMIZED, MEMORY/OPTIMIZED/M3, MEMORY/OPTIMIZED/X4, STORAGE/OPTIMIZED/Z3. For example, type MEMORY/OPTIMIZED specifies a commitment that applies only to eligible resources of memory optimized M1 and M2 machine series. Type GENERAL/PURPOSE specifies a commitment that applies only to eligible resources of general purpose N1 machine series.
     type' :: (Core.Maybe Commitment_Type)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -11174,7 +11577,7 @@ instance Core.ToJSON CommitmentResourceStatus where
 --
 -- /See:/ 'newCommitmentsScopedList' smart constructor.
 data CommitmentsScopedList = CommitmentsScopedList
-  { -- | [Output Only] A list of commitments contained in this scope.
+  { -- | [Output Only] The list of commitments contained in this scope.
     commitments :: (Core.Maybe [Commitment]),
     -- | [Output Only] Informational warning which replaces the list of commitments when the list is empty.
     warning :: (Core.Maybe CommitmentsScopedList_Warning)
@@ -13648,7 +14051,7 @@ instance Core.ToJSON Duration where
 data ErrorInfo = ErrorInfo
   { -- | The logical grouping to which the \"reason\" belongs. The error domain is typically the registered service name of the tool or product that generates the error. Example: \"pubsub.googleapis.com\". If the error is generated by some common infrastructure, the error domain must be a globally unique value that identifies the infrastructure. For Google API infrastructure, the error domain is \"googleapis.com\".
     domain :: (Core.Maybe Core.Text),
-    -- | Additional structured details about this error. Keys must match \/a-z+\/ but should ideally be lowerCamelCase. Also they must be limited to 64 characters in length. When identifying the current value of an exceeded limit, the units should be contained in the key, not the value. For example, rather than {\"instanceLimit\": \"100\/request\"}, should be returned as, {\"instanceLimitPerRequest\": \"100\"}, if the client exceeds the number of instances that can be created in a single (batch) request.
+    -- | Additional structured details about this error. Keys must match a regular expression of @a-z+@ but should ideally be lowerCamelCase. Also, they must be limited to 64 characters in length. When identifying the current value of an exceeded limit, the units should be contained in the key, not the value. For example, rather than @{\"instanceLimit\": \"100\/request\"}@, should be returned as, @{\"instanceLimitPerRequest\": \"100\"}@, if the client exceeds the number of instances that can be created in a single (batch) request.
     metadatas :: (Core.Maybe ErrorInfo_Metadatas),
     -- | The reason of the error. This is a constant value that identifies the proximate cause of the error. Error reasons are unique within a particular domain of errors. This should be at most 63 characters and match a regular expression of @A-Z+[A-Z0-9]@, which represents UPPER/SNAKE/CASE.
     reason :: (Core.Maybe Core.Text)
@@ -13686,7 +14089,7 @@ instance Core.ToJSON ErrorInfo where
           ]
       )
 
--- | Additional structured details about this error. Keys must match \/a-z+\/ but should ideally be lowerCamelCase. Also they must be limited to 64 characters in length. When identifying the current value of an exceeded limit, the units should be contained in the key, not the value. For example, rather than {\"instanceLimit\": \"100\/request\"}, should be returned as, {\"instanceLimitPerRequest\": \"100\"}, if the client exceeds the number of instances that can be created in a single (batch) request.
+-- | Additional structured details about this error. Keys must match a regular expression of @a-z+@ but should ideally be lowerCamelCase. Also, they must be limited to 64 characters in length. When identifying the current value of an exceeded limit, the units should be contained in the key, not the value. For example, rather than @{\"instanceLimit\": \"100\/request\"}@, should be returned as, @{\"instanceLimitPerRequest\": \"100\"}@, if the client exceeds the number of instances that can be created in a single (batch) request.
 --
 -- /See:/ 'newErrorInfo_Metadatas' smart constructor.
 newtype ErrorInfo_Metadatas = ErrorInfo_Metadatas
@@ -14701,6 +15104,124 @@ instance Core.ToJSON FirewallPoliciesListAssociationsResponse where
           ]
       )
 
+--
+-- /See:/ 'newFirewallPoliciesScopedList' smart constructor.
+data FirewallPoliciesScopedList = FirewallPoliciesScopedList
+  { -- | A list of firewall policies contained in this scope.
+    firewallPolicies :: (Core.Maybe [FirewallPolicy]),
+    -- | Informational warning which replaces the list of firewall policies when the list is empty.
+    warning :: (Core.Maybe FirewallPoliciesScopedList_Warning)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FirewallPoliciesScopedList' with the minimum fields required to make a request.
+newFirewallPoliciesScopedList ::
+  FirewallPoliciesScopedList
+newFirewallPoliciesScopedList =
+  FirewallPoliciesScopedList
+    { firewallPolicies = Core.Nothing,
+      warning = Core.Nothing
+    }
+
+instance Core.FromJSON FirewallPoliciesScopedList where
+  parseJSON =
+    Core.withObject
+      "FirewallPoliciesScopedList"
+      ( \o ->
+          FirewallPoliciesScopedList
+            Core.<$> (o Core..:? "firewallPolicies")
+            Core.<*> (o Core..:? "warning")
+      )
+
+instance Core.ToJSON FirewallPoliciesScopedList where
+  toJSON FirewallPoliciesScopedList {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("firewallPolicies" Core..=) Core.<$> firewallPolicies,
+            ("warning" Core..=) Core.<$> warning
+          ]
+      )
+
+-- | Informational warning which replaces the list of firewall policies when the list is empty.
+--
+-- /See:/ 'newFirewallPoliciesScopedList_Warning' smart constructor.
+data FirewallPoliciesScopedList_Warning = FirewallPoliciesScopedList_Warning
+  { -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
+    code :: (Core.Maybe FirewallPoliciesScopedList_Warning_Code),
+    -- | [Output Only] Metadata about this warning in key: value format. For example: \"data\": [ { \"key\": \"scope\", \"value\": \"zones\/us-east1-d\" }
+    data' :: (Core.Maybe [FirewallPoliciesScopedList_Warning_DataItem]),
+    -- | [Output Only] A human-readable description of the warning code.
+    message :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FirewallPoliciesScopedList_Warning' with the minimum fields required to make a request.
+newFirewallPoliciesScopedList_Warning ::
+  FirewallPoliciesScopedList_Warning
+newFirewallPoliciesScopedList_Warning =
+  FirewallPoliciesScopedList_Warning
+    { code = Core.Nothing,
+      data' = Core.Nothing,
+      message = Core.Nothing
+    }
+
+instance Core.FromJSON FirewallPoliciesScopedList_Warning where
+  parseJSON =
+    Core.withObject
+      "FirewallPoliciesScopedList_Warning"
+      ( \o ->
+          FirewallPoliciesScopedList_Warning
+            Core.<$> (o Core..:? "code")
+            Core.<*> (o Core..:? "data")
+            Core.<*> (o Core..:? "message")
+      )
+
+instance Core.ToJSON FirewallPoliciesScopedList_Warning where
+  toJSON FirewallPoliciesScopedList_Warning {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("code" Core..=) Core.<$> code,
+            ("data" Core..=) Core.<$> data',
+            ("message" Core..=) Core.<$> message
+          ]
+      )
+
+--
+-- /See:/ 'newFirewallPoliciesScopedList_Warning_DataItem' smart constructor.
+data FirewallPoliciesScopedList_Warning_DataItem = FirewallPoliciesScopedList_Warning_DataItem
+  { -- | [Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).
+    key :: (Core.Maybe Core.Text),
+    -- | [Output Only] A warning data value corresponding to the key.
+    value :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FirewallPoliciesScopedList_Warning_DataItem' with the minimum fields required to make a request.
+newFirewallPoliciesScopedList_Warning_DataItem ::
+  FirewallPoliciesScopedList_Warning_DataItem
+newFirewallPoliciesScopedList_Warning_DataItem =
+  FirewallPoliciesScopedList_Warning_DataItem
+    { key = Core.Nothing,
+      value = Core.Nothing
+    }
+
+instance Core.FromJSON FirewallPoliciesScopedList_Warning_DataItem where
+  parseJSON =
+    Core.withObject
+      "FirewallPoliciesScopedList_Warning_DataItem"
+      ( \o ->
+          FirewallPoliciesScopedList_Warning_DataItem
+            Core.<$> (o Core..:? "key")
+            Core.<*> (o Core..:? "value")
+      )
+
+instance Core.ToJSON FirewallPoliciesScopedList_Warning_DataItem where
+  toJSON FirewallPoliciesScopedList_Warning_DataItem {..} =
+    Core.object
+      ( Core.catMaybes
+          [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
+      )
+
 -- | Represents a Firewall Policy resource.
 --
 -- /See:/ 'newFirewallPolicy' smart constructor.
@@ -14721,6 +15242,8 @@ data FirewallPolicy = FirewallPolicy
     kind :: Core.Text,
     -- | Name of the resource. For Organization Firewall Policies it\'s a [Output Only] numeric ID allocated by Google Cloud which uniquely identifies the Organization Firewall Policy.
     name :: (Core.Maybe Core.Text),
+    -- | A list of packet mirroring rules that belong to this policy.
+    packetMirroringRules :: (Core.Maybe [FirewallPolicyRule]),
     -- | [Output Only] The parent of the firewall policy. This field is not applicable to network firewall policies.
     parent :: (Core.Maybe Core.Text),
     -- | [Output Only] URL of the region where the regional firewall policy resides. This field is not applicable to global firewall policies. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.
@@ -14751,6 +15274,7 @@ newFirewallPolicy =
       id = Core.Nothing,
       kind = "compute#firewallPolicy",
       name = Core.Nothing,
+      packetMirroringRules = Core.Nothing,
       parent = Core.Nothing,
       region = Core.Nothing,
       ruleTupleCount = Core.Nothing,
@@ -14774,6 +15298,7 @@ instance Core.FromJSON FirewallPolicy where
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#firewallPolicy")
             Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "packetMirroringRules")
             Core.<*> (o Core..:? "parent")
             Core.<*> (o Core..:? "region")
             Core.<*> (o Core..:? "ruleTupleCount")
@@ -14795,6 +15320,7 @@ instance Core.ToJSON FirewallPolicy where
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             Core.Just ("kind" Core..= kind),
             ("name" Core..=) Core.<$> name,
+            ("packetMirroringRules" Core..=) Core.<$> packetMirroringRules,
             ("parent" Core..=) Core.<$> parent,
             ("region" Core..=) Core.<$> region,
             ("ruleTupleCount" Core..=) Core.<$> ruleTupleCount,
@@ -19986,7 +20512,7 @@ data InstanceGroup = InstanceGroup
     kind :: Core.Text,
     -- | The name of the instance group. The name must be 1-63 characters long, and comply with RFC1035.
     name :: (Core.Maybe Core.Text),
-    -- | Assigns a name to a port number. For example: {name: \"http\", port: 80} This allows the system to reference ports by the assigned name instead of a port number. Named ports can also contain multiple ports. For example: [{name: \"app1\", port: 8080}, {name: \"app1\", port: 8081}, {name: \"app2\", port: 8082}] Named ports apply to all instances in this instance group.
+    -- | Optional. Assigns a name to a port number. For example: {name: \"http\", port: 80} This allows the system to reference ports by the assigned name instead of a port number. Named ports can also contain multiple ports. For example: [{name: \"app1\", port: 8080}, {name: \"app1\", port: 8081}, {name: \"app2\", port: 8082}] Named ports apply to all instances in this instance group.
     namedPorts :: (Core.Maybe [NamedPort]),
     -- | [Output Only] The URL of the network to which all instances in the instance group belong. If your instance has multiple network interfaces, then the network and subnetwork fields only refer to the network and subnet used by your primary interface (nic0).
     network :: (Core.Maybe Core.Text),
@@ -20416,6 +20942,8 @@ data InstanceGroupManager = InstanceGroupManager
     namedPorts :: (Core.Maybe [NamedPort]),
     -- | [Output Only] The URL of the region where the managed instance group resides (for regional resources).
     region :: (Core.Maybe Core.Text),
+    -- | Resource policies for this managed instance group.
+    resourcePolicies :: (Core.Maybe InstanceGroupManagerResourcePolicies),
     -- | [Output Only] Reserved for future use.
     satisfiesPzi :: (Core.Maybe Core.Bool),
     -- | [Output Only] Reserved for future use.
@@ -20468,6 +20996,7 @@ newInstanceGroupManager =
       name = Core.Nothing,
       namedPorts = Core.Nothing,
       region = Core.Nothing,
+      resourcePolicies = Core.Nothing,
       satisfiesPzi = Core.Nothing,
       satisfiesPzs = Core.Nothing,
       selfLink = Core.Nothing,
@@ -20507,6 +21036,7 @@ instance Core.FromJSON InstanceGroupManager where
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "namedPorts")
             Core.<*> (o Core..:? "region")
+            Core.<*> (o Core..:? "resourcePolicies")
             Core.<*> (o Core..:? "satisfiesPzi")
             Core.<*> (o Core..:? "satisfiesPzs")
             Core.<*> (o Core..:? "selfLink")
@@ -20547,6 +21077,7 @@ instance Core.ToJSON InstanceGroupManager where
             ("name" Core..=) Core.<$> name,
             ("namedPorts" Core..=) Core.<$> namedPorts,
             ("region" Core..=) Core.<$> region,
+            ("resourcePolicies" Core..=) Core.<$> resourcePolicies,
             ("satisfiesPzi" Core..=) Core.<$> satisfiesPzi,
             ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
             ("selfLink" Core..=) Core.<$> selfLink,
@@ -21860,6 +22391,39 @@ instance
         ( Core.catMaybes
             [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
         )
+
+--
+-- /See:/ 'newInstanceGroupManagerResourcePolicies' smart constructor.
+newtype InstanceGroupManagerResourcePolicies = InstanceGroupManagerResourcePolicies
+  { -- | The URL of the workload policy that is specified for this managed instance group. It can be a full or partial URL. For example, the following are all valid URLs to a workload policy: - https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/regions\/region \/resourcePolicies\/resourcePolicy - projects\/project\/regions\/region\/resourcePolicies\/resourcePolicy - regions\/region\/resourcePolicies\/resourcePolicy
+    workloadPolicy :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InstanceGroupManagerResourcePolicies' with the minimum fields required to make a request.
+newInstanceGroupManagerResourcePolicies ::
+  InstanceGroupManagerResourcePolicies
+newInstanceGroupManagerResourcePolicies =
+  InstanceGroupManagerResourcePolicies
+    { workloadPolicy =
+        Core.Nothing
+    }
+
+instance Core.FromJSON InstanceGroupManagerResourcePolicies where
+  parseJSON =
+    Core.withObject
+      "InstanceGroupManagerResourcePolicies"
+      ( \o ->
+          InstanceGroupManagerResourcePolicies
+            Core.<$> (o Core..:? "workloadPolicy")
+      )
+
+instance Core.ToJSON InstanceGroupManagerResourcePolicies where
+  toJSON InstanceGroupManagerResourcePolicies {..} =
+    Core.object
+      ( Core.catMaybes
+          [("workloadPolicy" Core..=) Core.<$> workloadPolicy]
+      )
 
 --
 -- /See:/ 'newInstanceGroupManagerStandbyPolicy' smart constructor.
@@ -25122,6 +25686,8 @@ data InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy = InstancesGe
     displayName :: (Core.Maybe Core.Text),
     -- | [Output Only] The name of the firewall policy.
     name :: (Core.Maybe Core.Text),
+    -- | [Output Only] The packet mirroring rules that apply to the instance.
+    packetMirroringRules :: (Core.Maybe [FirewallPolicyRule]),
     -- | [Output only] Priority of firewall policy association. Not applicable for type=HIERARCHY.
     priority :: (Core.Maybe Core.Int32),
     -- | [Output Only] The rules that apply to the instance. Only rules that target the specific VM instance are returned if target service accounts or target secure tags are specified in the rules.
@@ -25144,6 +25710,8 @@ newInstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy =
     { displayName =
         Core.Nothing,
       name = Core.Nothing,
+      packetMirroringRules =
+        Core.Nothing,
       priority = Core.Nothing,
       rules = Core.Nothing,
       shortName = Core.Nothing,
@@ -25161,6 +25729,7 @@ instance
           InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy
             Core.<$> (o Core..:? "displayName")
             Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "packetMirroringRules")
             Core.<*> (o Core..:? "priority")
             Core.<*> (o Core..:? "rules")
             Core.<*> (o Core..:? "shortName")
@@ -25177,6 +25746,7 @@ instance
         ( Core.catMaybes
             [ ("displayName" Core..=) Core.<$> displayName,
               ("name" Core..=) Core.<$> name,
+              ("packetMirroringRules" Core..=) Core.<$> packetMirroringRules,
               ("priority" Core..=) Core.<$> priority,
               ("rules" Core..=) Core.<$> rules,
               ("shortName" Core..=) Core.<$> shortName,
@@ -25215,6 +25785,84 @@ instance Core.ToJSON InstancesRemoveResourcePoliciesRequest where
     Core.object
       ( Core.catMaybes
           [("resourcePolicies" Core..=) Core.<$> resourcePolicies]
+      )
+
+--
+-- /See:/ 'newInstancesReportHostAsFaultyRequest' smart constructor.
+data InstancesReportHostAsFaultyRequest = InstancesReportHostAsFaultyRequest
+  { -- | The disruption schedule for the VM. Default to IMMEDIATE.
+    disruptionSchedule :: (Core.Maybe InstancesReportHostAsFaultyRequest_DisruptionSchedule),
+    faultReasons :: (Core.Maybe [InstancesReportHostAsFaultyRequestFaultReason])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InstancesReportHostAsFaultyRequest' with the minimum fields required to make a request.
+newInstancesReportHostAsFaultyRequest ::
+  InstancesReportHostAsFaultyRequest
+newInstancesReportHostAsFaultyRequest =
+  InstancesReportHostAsFaultyRequest
+    { disruptionSchedule =
+        Core.Nothing,
+      faultReasons = Core.Nothing
+    }
+
+instance Core.FromJSON InstancesReportHostAsFaultyRequest where
+  parseJSON =
+    Core.withObject
+      "InstancesReportHostAsFaultyRequest"
+      ( \o ->
+          InstancesReportHostAsFaultyRequest
+            Core.<$> (o Core..:? "disruptionSchedule")
+            Core.<*> (o Core..:? "faultReasons")
+      )
+
+instance Core.ToJSON InstancesReportHostAsFaultyRequest where
+  toJSON InstancesReportHostAsFaultyRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("disruptionSchedule" Core..=) Core.<$> disruptionSchedule,
+            ("faultReasons" Core..=) Core.<$> faultReasons
+          ]
+      )
+
+--
+-- /See:/ 'newInstancesReportHostAsFaultyRequestFaultReason' smart constructor.
+data InstancesReportHostAsFaultyRequestFaultReason = InstancesReportHostAsFaultyRequestFaultReason
+  { behavior :: (Core.Maybe InstancesReportHostAsFaultyRequestFaultReason_Behavior),
+    description :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InstancesReportHostAsFaultyRequestFaultReason' with the minimum fields required to make a request.
+newInstancesReportHostAsFaultyRequestFaultReason ::
+  InstancesReportHostAsFaultyRequestFaultReason
+newInstancesReportHostAsFaultyRequestFaultReason =
+  InstancesReportHostAsFaultyRequestFaultReason
+    { behavior =
+        Core.Nothing,
+      description = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    InstancesReportHostAsFaultyRequestFaultReason
+  where
+  parseJSON =
+    Core.withObject
+      "InstancesReportHostAsFaultyRequestFaultReason"
+      ( \o ->
+          InstancesReportHostAsFaultyRequestFaultReason
+            Core.<$> (o Core..:? "behavior")
+            Core.<*> (o Core..:? "description")
+      )
+
+instance Core.ToJSON InstancesReportHostAsFaultyRequestFaultReason where
+  toJSON InstancesReportHostAsFaultyRequestFaultReason {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("behavior" Core..=) Core.<$> behavior,
+            ("description" Core..=) Core.<$> description
+          ]
       )
 
 --
@@ -26500,11 +27148,11 @@ instance Core.ToJSON Interconnect_Labels where
 data InterconnectAttachment = InterconnectAttachment
   { -- | Determines whether this Attachment will carry packets. Not present for PARTNER_PROVIDER.
     adminEnabled :: (Core.Maybe Core.Bool),
-    -- | Provisioned bandwidth capacity for the interconnect attachment. For attachments of type DEDICATED, the user can set the bandwidth. For attachments of type PARTNER, the Google Partner that is operating the interconnect must set the bandwidth. Output only for PARTNER type, mutable for PARTNER/PROVIDER and DEDICATED, and can take one of the following values: - BPS/50M: 50 Mbit\/s - BPS/100M: 100 Mbit\/s - BPS/200M: 200 Mbit\/s - BPS/300M: 300 Mbit\/s - BPS/400M: 400 Mbit\/s - BPS/500M: 500 Mbit\/s - BPS/1G: 1 Gbit\/s - BPS/2G: 2 Gbit\/s - BPS/5G: 5 Gbit\/s - BPS/10G: 10 Gbit\/s - BPS/20G: 20 Gbit\/s - BPS_50G: 50 Gbit\/s
+    -- | Provisioned bandwidth capacity for the interconnect attachment. For attachments of type DEDICATED, the user can set the bandwidth. For attachments of type PARTNER, the Google Partner that is operating the interconnect must set the bandwidth. Output only for PARTNER type, mutable for PARTNER/PROVIDER and DEDICATED, and can take one of the following values: - BPS/50M: 50 Mbit\/s - BPS/100M: 100 Mbit\/s - BPS/200M: 200 Mbit\/s - BPS/300M: 300 Mbit\/s - BPS/400M: 400 Mbit\/s - BPS/500M: 500 Mbit\/s - BPS/1G: 1 Gbit\/s - BPS/2G: 2 Gbit\/s - BPS/5G: 5 Gbit\/s - BPS/10G: 10 Gbit\/s - BPS/20G: 20 Gbit\/s - BPS/50G: 50 Gbit\/s - BPS/100G: 100 Gbit\/s
     bandwidth :: (Core.Maybe InterconnectAttachment_Bandwidth),
     -- | This field is not available.
     candidateIpv6Subnets :: (Core.Maybe [Core.Text]),
-    -- | Up to 16 candidate prefixes that can be used to restrict the allocation of cloudRouterIpAddress and customerRouterIpAddress for this attachment. All prefixes must be within link-local address space (169.254.0.0\/16) and must be \/29 or shorter (\/28, \/27, etc). Google will attempt to select an unused \/29 from the supplied candidate prefix(es). The request will fail if all possible \/29s are in use on Google\'s edge. If not supplied, Google will randomly select an unused \/29 from all of link-local space.
+    -- | Input only. Up to 16 candidate prefixes that can be used to restrict the allocation of cloudRouterIpAddress and customerRouterIpAddress for this attachment. All prefixes must be within link-local address space (169.254.0.0\/16) and must be \/29 or shorter (\/28, \/27, etc). Google will attempt to select an unused \/29 from the supplied candidate prefix(es). The request will fail if all possible \/29s are in use on Google\'s edge. If not supplied, Google will randomly select an unused \/29 from all of link-local space.
     candidateSubnets :: (Core.Maybe [Core.Text]),
     -- | [Output Only] IPv4 address + prefix length to be configured on Cloud Router Interface for this interconnect attachment.
     cloudRouterIpAddress :: (Core.Maybe Core.Text),
@@ -26526,7 +27174,7 @@ data InterconnectAttachment = InterconnectAttachment
     dataplaneVersion :: (Core.Maybe Core.Int32),
     -- | An optional description of this resource.
     description :: (Core.Maybe Core.Text),
-    -- | Desired availability domain for the attachment. Only available for type PARTNER, at creation time, and can take one of the following values: - AVAILABILITY/DOMAIN/ANY - AVAILABILITY/DOMAIN/1 - AVAILABILITY/DOMAIN/2 For improved reliability, customers should configure a pair of attachments, one per availability domain. The selected availability domain will be provided to the Partner via the pairing key, so that the provisioned circuit will lie in the specified domain. If not specified, the value will default to AVAILABILITY/DOMAIN/ANY.
+    -- | Input only. Desired availability domain for the attachment. Only available for type PARTNER, at creation time, and can take one of the following values: - AVAILABILITY/DOMAIN/ANY - AVAILABILITY/DOMAIN/1 - AVAILABILITY/DOMAIN/2 For improved reliability, customers should configure a pair of attachments, one per availability domain. The selected availability domain will be provided to the Partner via the pairing key, so that the provisioned circuit will lie in the specified domain. If not specified, the value will default to AVAILABILITY/DOMAIN/ANY.
     edgeAvailabilityDomain :: (Core.Maybe InterconnectAttachment_EdgeAvailabilityDomain),
     -- | Indicates the user-supplied encryption option of this VLAN attachment (interconnectAttachment). Can only be specified at attachment creation for PARTNER or DEDICATED attachments. Possible values are: - NONE - This is the default value, which means that the VLAN attachment carries unencrypted traffic. VMs are able to send traffic to, or receive traffic from, such a VLAN attachment. - IPSEC - The VLAN attachment carries only encrypted traffic that is encrypted by an IPsec device, such as an HA VPN gateway or third-party IPsec VPN. VMs cannot directly send traffic to, or receive traffic from, such a VLAN attachment. To use /HA VPN over Cloud Interconnect/, the VLAN attachment must be created with this option.
     encryption :: (Core.Maybe InterconnectAttachment_Encryption),
@@ -26573,7 +27221,7 @@ data InterconnectAttachment = InterconnectAttachment
     -- | [Output Only] The current state of this attachment\'s functionality. Enum values ACTIVE and UNPROVISIONED are shared by DEDICATED\/PRIVATE, PARTNER, and PARTNER/PROVIDER interconnect attachments, while enum values PENDING/PARTNER, PARTNER/REQUEST/RECEIVED, and PENDING/CUSTOMER are used for only PARTNER and PARTNER/PROVIDER interconnect attachments. This state can take one of the following values: - ACTIVE: The attachment has been turned up and is ready to use. - UNPROVISIONED: The attachment is not ready to use yet, because turnup is not complete. - PENDING/PARTNER: A newly-created PARTNER attachment that has not yet been configured on the Partner side. - PARTNER/REQUEST/RECEIVED: A PARTNER attachment is in the process of provisioning after a PARTNER/PROVIDER attachment was created that references it. - PENDING/CUSTOMER: A PARTNER or PARTNER/PROVIDER attachment that is waiting for a customer to activate it. - DEFUNCT: The attachment was deleted externally and is no longer functional. This could be because the
     -- associated Interconnect was removed, or because the other side of a Partner attachment was deleted.
     state :: (Core.Maybe InterconnectAttachment_State),
-    -- | Length of the IPv4 subnet mask. Allowed values: - 29 (default) - 30 The default value is 29, except for Cross-Cloud Interconnect connections that use an InterconnectRemoteLocation with a constraints.subnetLengthRange.min equal to 30. For example, connections that use an Azure remote location fall into this category. In these cases, the default value is 30, and requesting 29 returns an error. Where both 29 and 30 are allowed, 29 is preferred, because it gives Google Cloud Support more debugging visibility.
+    -- | Input only. Length of the IPv4 subnet mask. Allowed values: - 29 (default) - 30 The default value is 29, except for Cross-Cloud Interconnect connections that use an InterconnectRemoteLocation with a constraints.subnetLengthRange.min equal to 30. For example, connections that use an Azure remote location fall into this category. In these cases, the default value is 30, and requesting 29 returns an error. Where both 29 and 30 are allowed, 29 is preferred, because it gives Google Cloud Support more debugging visibility.
     subnetLength :: (Core.Maybe Core.Int32),
     -- | The type of interconnect attachment this is, which can take one of the following values: - DEDICATED: an attachment to a Dedicated Interconnect. - PARTNER: an attachment to a Partner Interconnect, created by the customer. - PARTNER_PROVIDER: an attachment to a Partner Interconnect, created by the partner.
     type' :: (Core.Maybe InterconnectAttachment_Type),
@@ -29033,11 +29681,11 @@ instance Core.ToJSON LicenseCodeLicenseAlias where
 --
 -- /See:/ 'newLicenseResourceCommitment' smart constructor.
 data LicenseResourceCommitment = LicenseResourceCommitment
-  { -- | The number of licenses purchased.
+  { -- | The number of licenses you plan to purchase.
     amount :: (Core.Maybe Core.Int64),
-    -- | Specifies the core range of the instance for which this license applies.
+    -- | The number of cores per license.
     coresPerLicense :: (Core.Maybe Core.Text),
-    -- | Any applicable license URI.
+    -- | The applicable license URI.
     license :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -32128,13 +32776,13 @@ instance
 --
 -- /See:/ 'newNetworkEndpoint' smart constructor.
 data NetworkEndpoint = NetworkEndpoint
-  { -- | Metadata defined as annotations on the network endpoint.
+  { -- | Optional metadata defined as annotations on the network endpoint.
     annotations :: (Core.Maybe NetworkEndpoint_Annotations),
-    -- | Represents the port number to which PSC consumer sends packets. Only valid for network endpoint groups created with GCE/VM/IP_PORTMAP endpoint type.
+    -- | Represents the port number to which PSC consumer sends packets. Optional. Only valid for network endpoint groups created with GCE/VM/IP_PORTMAP endpoint type.
     clientDestinationPort :: (Core.Maybe Core.Int32),
     -- | Optional fully qualified domain name of network endpoint. This can only be specified when NetworkEndpointGroup.network/endpoint/type is NON/GCP/FQDN_PORT.
     fqdn :: (Core.Maybe Core.Text),
-    -- | The name or a URL of VM instance of this network endpoint. This field is required for network endpoints of type GCE/VM/IP and GCE/VM/IP_PORT. The instance must be in the same zone of network endpoint group (for zonal NEGs) or in the zone within the region of the NEG (for regional NEGs). If the ipAddress is specified, it must belongs to the VM instance. The name must be 1-63 characters long, and comply with RFC1035 or be a valid URL pointing to an existing instance.
+    -- | The name or a URL of VM instance of this network endpoint. Optional, the field presence depends on the network endpoint type. The field is required for network endpoints of type GCE/VM/IP and GCE/VM/IP_PORT. The instance must be in the same zone of network endpoint group (for zonal NEGs) or in the zone within the region of the NEG (for regional NEGs). If the ipAddress is specified, it must belongs to the VM instance. The name must be 1-63 characters long, and comply with RFC1035 or be a valid URL pointing to an existing instance.
     instance' :: (Core.Maybe Core.Text),
     -- | Optional IPv4 address of network endpoint. The IP address must belong to a VM in Compute Engine (either the primary IP or as part of an aliased IP range). If the IP address is not specified, then the primary IP address for the VM instance in the network that the network endpoint group belongs to will be used. This field is redundant and need not be set for network endpoints of type GCE/VM/IP. If set, it must be set to the primary internal IP address of the attached VM instance that matches the subnetwork of the NEG. The primary internal IP address from any NIC of a multi-NIC VM instance can be added to a NEG as long as it matches the NEG subnetwork.
     ipAddress :: (Core.Maybe Core.Text),
@@ -32188,7 +32836,7 @@ instance Core.ToJSON NetworkEndpoint where
           ]
       )
 
--- | Metadata defined as annotations on the network endpoint.
+-- | Optional metadata defined as annotations on the network endpoint.
 --
 -- /See:/ 'newNetworkEndpoint_Annotations' smart constructor.
 newtype NetworkEndpoint_Annotations = NetworkEndpoint_Annotations
@@ -32219,17 +32867,17 @@ instance Core.ToJSON NetworkEndpoint_Annotations where
 --
 -- /See:/ 'newNetworkEndpointGroup' smart constructor.
 data NetworkEndpointGroup = NetworkEndpointGroup
-  { -- | Metadata defined as annotations on the network endpoint group.
+  { -- | Optional. Metadata defined as annotations on the network endpoint group.
     annotations :: (Core.Maybe NetworkEndpointGroup_Annotations),
-    -- | Only valid when networkEndpointType is SERVERLESS. Only one of cloudRun, appEngine or cloudFunction may be set.
+    -- | Optional. Only valid when networkEndpointType is SERVERLESS. Only one of cloudRun, appEngine or cloudFunction may be set.
     appEngine :: (Core.Maybe NetworkEndpointGroupAppEngine),
-    -- | Only valid when networkEndpointType is SERVERLESS. Only one of cloudRun, appEngine or cloudFunction may be set.
+    -- | Optional. Only valid when networkEndpointType is SERVERLESS. Only one of cloudRun, appEngine or cloudFunction may be set.
     cloudFunction :: (Core.Maybe NetworkEndpointGroupCloudFunction),
-    -- | Only valid when networkEndpointType is SERVERLESS. Only one of cloudRun, appEngine or cloudFunction may be set.
+    -- | Optional. Only valid when networkEndpointType is SERVERLESS. Only one of cloudRun, appEngine or cloudFunction may be set.
     cloudRun :: (Core.Maybe NetworkEndpointGroupCloudRun),
     -- | [Output Only] Creation timestamp in RFC3339 text format.
     creationTimestamp :: (Core.Maybe Core.Text),
-    -- | The default port used if the port number is not specified in the network endpoint. If the network endpoint type is either GCE/VM/IP, SERVERLESS or PRIVATE/SERVICE/CONNECT, this field must not be specified.
+    -- | The default port used if the port number is not specified in the network endpoint. Optional. If the network endpoint type is either GCE/VM/IP, SERVERLESS or PRIVATE/SERVICE/CONNECT, this field must not be specified.
     defaultPort :: (Core.Maybe Core.Int32),
     -- | An optional description of this resource. Provide this property when you create the resource.
     description :: (Core.Maybe Core.Text),
@@ -32243,8 +32891,9 @@ data NetworkEndpointGroup = NetworkEndpointGroup
     network :: (Core.Maybe Core.Text),
     -- | Type of network endpoints in this network endpoint group. Can be one of GCE/VM/IP, GCE/VM/IP/PORT, NON/GCP/PRIVATE/IP/PORT, INTERNET/FQDN/PORT, INTERNET/IP/PORT, SERVERLESS, PRIVATE/SERVICE/CONNECT, GCE/VM/IP/PORTMAP.
     networkEndpointType :: (Core.Maybe NetworkEndpointGroup_NetworkEndpointType),
+    -- | Optional. Only valid when networkEndpointType is PRIVATE/SERVICE/CONNECT.
     pscData :: (Core.Maybe NetworkEndpointGroupPscData),
-    -- | The target service url used to set up private service connection to a Google API or a PSC Producer Service Attachment. An example value is: asia-northeast3-cloudkms.googleapis.com
+    -- | The target service url used to set up private service connection to a Google API or a PSC Producer Service Attachment. An example value is: asia-northeast3-cloudkms.googleapis.com. Optional. Only valid when networkEndpointType is PRIVATE/SERVICE/CONNECT.
     pscTargetService :: (Core.Maybe Core.Text),
     -- | [Output Only] The URL of the region where the network endpoint group is located.
     region :: (Core.Maybe Core.Text),
@@ -32338,7 +32987,7 @@ instance Core.ToJSON NetworkEndpointGroup where
           ]
       )
 
--- | Metadata defined as annotations on the network endpoint group.
+-- | Optional. Metadata defined as annotations on the network endpoint group.
 --
 -- /See:/ 'newNetworkEndpointGroup_Annotations' smart constructor.
 newtype NetworkEndpointGroup_Annotations = NetworkEndpointGroup_Annotations
@@ -33246,9 +33895,9 @@ instance
 --
 -- /See:/ 'newNetworkEndpointWithHealthStatus' smart constructor.
 data NetworkEndpointWithHealthStatus = NetworkEndpointWithHealthStatus
-  { -- | [Output only] The health status of network endpoint;
+  { -- | [Output only] The health status of network endpoint. Optional. Displayed only if the network endpoint has centralized health checking configured.
     healths :: (Core.Maybe [HealthStatusForNetworkEndpoint]),
-    -- | [Output only] The network endpoint;
+    -- | [Output only] The network endpoint.
     networkEndpoint :: (Core.Maybe NetworkEndpoint)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -33279,6 +33928,192 @@ instance Core.ToJSON NetworkEndpointWithHealthStatus where
           [ ("healths" Core..=) Core.<$> healths,
             ("networkEndpoint" Core..=) Core.<$> networkEndpoint
           ]
+      )
+
+--
+-- /See:/ 'newNetworkFirewallPolicyAggregatedList' smart constructor.
+data NetworkFirewallPolicyAggregatedList = NetworkFirewallPolicyAggregatedList
+  { -- | [Output Only] Unique identifier for the resource; defined by the server.
+    id :: (Core.Maybe Core.Text),
+    -- | A list of FirewallPoliciesScopedList resources.
+    items :: (Core.Maybe NetworkFirewallPolicyAggregatedList_Items),
+    -- | [Output Only] Type of resource. Always compute#networkFirewallPoliciesAggregatedList for lists of network firewall policies.
+    kind :: Core.Text,
+    -- | [Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | [Output Only] Server-defined URL for this resource.
+    selfLink :: (Core.Maybe Core.Text),
+    -- | [Output Only] Unreachable resources.
+    unreachables :: (Core.Maybe [Core.Text]),
+    -- | [Output Only] Informational warning message.
+    warning :: (Core.Maybe NetworkFirewallPolicyAggregatedList_Warning)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NetworkFirewallPolicyAggregatedList' with the minimum fields required to make a request.
+newNetworkFirewallPolicyAggregatedList ::
+  NetworkFirewallPolicyAggregatedList
+newNetworkFirewallPolicyAggregatedList =
+  NetworkFirewallPolicyAggregatedList
+    { id = Core.Nothing,
+      items = Core.Nothing,
+      kind = "compute#networkFirewallPolicyAggregatedList",
+      nextPageToken = Core.Nothing,
+      selfLink = Core.Nothing,
+      unreachables = Core.Nothing,
+      warning = Core.Nothing
+    }
+
+instance Core.FromJSON NetworkFirewallPolicyAggregatedList where
+  parseJSON =
+    Core.withObject
+      "NetworkFirewallPolicyAggregatedList"
+      ( \o ->
+          NetworkFirewallPolicyAggregatedList
+            Core.<$> (o Core..:? "id")
+            Core.<*> (o Core..:? "items")
+            Core.<*> ( o
+                         Core..:? "kind"
+                         Core..!= "compute#networkFirewallPolicyAggregatedList"
+                     )
+            Core.<*> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "selfLink")
+            Core.<*> (o Core..:? "unreachables")
+            Core.<*> (o Core..:? "warning")
+      )
+
+instance Core.ToJSON NetworkFirewallPolicyAggregatedList where
+  toJSON NetworkFirewallPolicyAggregatedList {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("id" Core..=) Core.<$> id,
+            ("items" Core..=) Core.<$> items,
+            Core.Just ("kind" Core..= kind),
+            ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("selfLink" Core..=) Core.<$> selfLink,
+            ("unreachables" Core..=) Core.<$> unreachables,
+            ("warning" Core..=) Core.<$> warning
+          ]
+      )
+
+-- | A list of FirewallPoliciesScopedList resources.
+--
+-- /See:/ 'newNetworkFirewallPolicyAggregatedList_Items' smart constructor.
+newtype NetworkFirewallPolicyAggregatedList_Items = NetworkFirewallPolicyAggregatedList_Items
+  { -- | Name of the scope containing this set of addresses.
+    additional :: (Core.HashMap Core.Text FirewallPoliciesScopedList)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NetworkFirewallPolicyAggregatedList_Items' with the minimum fields required to make a request.
+newNetworkFirewallPolicyAggregatedList_Items ::
+  -- |  Name of the scope containing this set of addresses. See 'additional'.
+  Core.HashMap Core.Text FirewallPoliciesScopedList ->
+  NetworkFirewallPolicyAggregatedList_Items
+newNetworkFirewallPolicyAggregatedList_Items additional =
+  NetworkFirewallPolicyAggregatedList_Items
+    { additional =
+        additional
+    }
+
+instance Core.FromJSON NetworkFirewallPolicyAggregatedList_Items where
+  parseJSON =
+    Core.withObject
+      "NetworkFirewallPolicyAggregatedList_Items"
+      ( \o ->
+          NetworkFirewallPolicyAggregatedList_Items
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON NetworkFirewallPolicyAggregatedList_Items where
+  toJSON NetworkFirewallPolicyAggregatedList_Items {..} =
+    Core.toJSON additional
+
+-- | [Output Only] Informational warning message.
+--
+-- /See:/ 'newNetworkFirewallPolicyAggregatedList_Warning' smart constructor.
+data NetworkFirewallPolicyAggregatedList_Warning = NetworkFirewallPolicyAggregatedList_Warning
+  { -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
+    code :: (Core.Maybe NetworkFirewallPolicyAggregatedList_Warning_Code),
+    -- | [Output Only] Metadata about this warning in key: value format. For example: \"data\": [ { \"key\": \"scope\", \"value\": \"zones\/us-east1-d\" }
+    data' :: (Core.Maybe [NetworkFirewallPolicyAggregatedList_Warning_DataItem]),
+    -- | [Output Only] A human-readable description of the warning code.
+    message :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NetworkFirewallPolicyAggregatedList_Warning' with the minimum fields required to make a request.
+newNetworkFirewallPolicyAggregatedList_Warning ::
+  NetworkFirewallPolicyAggregatedList_Warning
+newNetworkFirewallPolicyAggregatedList_Warning =
+  NetworkFirewallPolicyAggregatedList_Warning
+    { code = Core.Nothing,
+      data' = Core.Nothing,
+      message = Core.Nothing
+    }
+
+instance Core.FromJSON NetworkFirewallPolicyAggregatedList_Warning where
+  parseJSON =
+    Core.withObject
+      "NetworkFirewallPolicyAggregatedList_Warning"
+      ( \o ->
+          NetworkFirewallPolicyAggregatedList_Warning
+            Core.<$> (o Core..:? "code")
+            Core.<*> (o Core..:? "data")
+            Core.<*> (o Core..:? "message")
+      )
+
+instance Core.ToJSON NetworkFirewallPolicyAggregatedList_Warning where
+  toJSON NetworkFirewallPolicyAggregatedList_Warning {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("code" Core..=) Core.<$> code,
+            ("data" Core..=) Core.<$> data',
+            ("message" Core..=) Core.<$> message
+          ]
+      )
+
+--
+-- /See:/ 'newNetworkFirewallPolicyAggregatedList_Warning_DataItem' smart constructor.
+data NetworkFirewallPolicyAggregatedList_Warning_DataItem = NetworkFirewallPolicyAggregatedList_Warning_DataItem
+  { -- | [Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).
+    key :: (Core.Maybe Core.Text),
+    -- | [Output Only] A warning data value corresponding to the key.
+    value :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NetworkFirewallPolicyAggregatedList_Warning_DataItem' with the minimum fields required to make a request.
+newNetworkFirewallPolicyAggregatedList_Warning_DataItem ::
+  NetworkFirewallPolicyAggregatedList_Warning_DataItem
+newNetworkFirewallPolicyAggregatedList_Warning_DataItem =
+  NetworkFirewallPolicyAggregatedList_Warning_DataItem
+    { key =
+        Core.Nothing,
+      value = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    NetworkFirewallPolicyAggregatedList_Warning_DataItem
+  where
+  parseJSON =
+    Core.withObject
+      "NetworkFirewallPolicyAggregatedList_Warning_DataItem"
+      ( \o ->
+          NetworkFirewallPolicyAggregatedList_Warning_DataItem
+            Core.<$> (o Core..:? "key")
+            Core.<*> (o Core..:? "value")
+      )
+
+instance
+  Core.ToJSON
+    NetworkFirewallPolicyAggregatedList_Warning_DataItem
+  where
+  toJSON NetworkFirewallPolicyAggregatedList_Warning_DataItem {..} =
+    Core.object
+      ( Core.catMaybes
+          [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
       )
 
 -- | A network interface resource attached to an instance.
@@ -33673,9 +34508,7 @@ data NetworkProfile = NetworkProfile
     -- | [Output Only] Server-defined URL for the resource.
     selfLink :: (Core.Maybe Core.Text),
     -- | [Output Only] Server-defined URL for this resource with the resource id.
-    selfLinkWithId :: (Core.Maybe Core.Text),
-    -- | [Output Only] Zone to which the network is restricted.
-    zone :: (Core.Maybe Core.Text)
+    selfLinkWithId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -33692,8 +34525,7 @@ newNetworkProfile =
       location = Core.Nothing,
       name = Core.Nothing,
       selfLink = Core.Nothing,
-      selfLinkWithId = Core.Nothing,
-      zone = Core.Nothing
+      selfLinkWithId = Core.Nothing
     }
 
 instance Core.FromJSON NetworkProfile where
@@ -33711,7 +34543,6 @@ instance Core.FromJSON NetworkProfile where
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "selfLinkWithId")
-            Core.<*> (o Core..:? "zone")
       )
 
 instance Core.ToJSON NetworkProfile where
@@ -33726,8 +34557,7 @@ instance Core.ToJSON NetworkProfile where
             ("location" Core..=) Core.<$> location,
             ("name" Core..=) Core.<$> name,
             ("selfLink" Core..=) Core.<$> selfLink,
-            ("selfLinkWithId" Core..=) Core.<$> selfLinkWithId,
-            ("zone" Core..=) Core.<$> zone
+            ("selfLinkWithId" Core..=) Core.<$> selfLinkWithId
           ]
       )
 
@@ -34064,6 +34894,10 @@ data NetworkRoutingConfig = NetworkRoutingConfig
     bgpBestPathSelectionMode :: (Core.Maybe NetworkRoutingConfig_BgpBestPathSelectionMode),
     -- | Allows to define a preferred approach for handling inter-region cost in the selection process when using the STANDARD BGP best path selection algorithm. Can be DEFAULT or ADD/COST/TO_MED.
     bgpInterRegionCost :: (Core.Maybe NetworkRoutingConfig_BgpInterRegionCost),
+    -- | [Output Only] Effective value of the bgp/always/compare_med field.
+    effectiveBgpAlwaysCompareMed :: (Core.Maybe Core.Bool),
+    -- | [Output Only] Effective value of the bgp/inter/region_cost field.
+    effectiveBgpInterRegionCost :: (Core.Maybe NetworkRoutingConfig_EffectiveBgpInterRegionCost),
     -- | The network-wide routing mode to use. If set to REGIONAL, this network\'s Cloud Routers will only advertise routes with subnets of this network in the same region as the router. If set to GLOBAL, this network\'s Cloud Routers will advertise routes with all subnets of this network, across regions.
     routingMode :: (Core.Maybe NetworkRoutingConfig_RoutingMode)
   }
@@ -34077,6 +34911,8 @@ newNetworkRoutingConfig =
     { bgpAlwaysCompareMed = Core.Nothing,
       bgpBestPathSelectionMode = Core.Nothing,
       bgpInterRegionCost = Core.Nothing,
+      effectiveBgpAlwaysCompareMed = Core.Nothing,
+      effectiveBgpInterRegionCost = Core.Nothing,
       routingMode = Core.Nothing
     }
 
@@ -34089,6 +34925,8 @@ instance Core.FromJSON NetworkRoutingConfig where
             Core.<$> (o Core..:? "bgpAlwaysCompareMed")
             Core.<*> (o Core..:? "bgpBestPathSelectionMode")
             Core.<*> (o Core..:? "bgpInterRegionCost")
+            Core.<*> (o Core..:? "effectiveBgpAlwaysCompareMed")
+            Core.<*> (o Core..:? "effectiveBgpInterRegionCost")
             Core.<*> (o Core..:? "routingMode")
       )
 
@@ -34100,6 +34938,10 @@ instance Core.ToJSON NetworkRoutingConfig where
             ("bgpBestPathSelectionMode" Core..=)
               Core.<$> bgpBestPathSelectionMode,
             ("bgpInterRegionCost" Core..=) Core.<$> bgpInterRegionCost,
+            ("effectiveBgpAlwaysCompareMed" Core..=)
+              Core.<$> effectiveBgpAlwaysCompareMed,
+            ("effectiveBgpInterRegionCost" Core..=)
+              Core.<$> effectiveBgpInterRegionCost,
             ("routingMode" Core..=) Core.<$> routingMode
           ]
       )
@@ -34201,6 +35043,8 @@ data NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy = NetworksGetE
     displayName :: (Core.Maybe Core.Text),
     -- | [Output Only] The name of the firewall policy.
     name :: (Core.Maybe Core.Text),
+    -- | [Output Only] The packet mirroring rules that apply to the network.
+    packetMirroringRules :: (Core.Maybe [FirewallPolicyRule]),
     -- | [Output only] Priority of firewall policy association. Not applicable for type=HIERARCHY.
     priority :: (Core.Maybe Core.Int32),
     -- | [Output Only] The rules that apply to the network.
@@ -34223,6 +35067,8 @@ newNetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy =
     { displayName =
         Core.Nothing,
       name = Core.Nothing,
+      packetMirroringRules =
+        Core.Nothing,
       priority = Core.Nothing,
       rules = Core.Nothing,
       shortName = Core.Nothing,
@@ -34240,6 +35086,7 @@ instance
           NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy
             Core.<$> (o Core..:? "displayName")
             Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "packetMirroringRules")
             Core.<*> (o Core..:? "priority")
             Core.<*> (o Core..:? "rules")
             Core.<*> (o Core..:? "shortName")
@@ -34256,6 +35103,7 @@ instance
         ( Core.catMaybes
             [ ("displayName" Core..=) Core.<$> displayName,
               ("name" Core..=) Core.<$> name,
+              ("packetMirroringRules" Core..=) Core.<$> packetMirroringRules,
               ("priority" Core..=) Core.<$> priority,
               ("rules" Core..=) Core.<$> rules,
               ("shortName" Core..=) Core.<$> shortName,
@@ -35943,6 +36791,8 @@ data NodeType = NodeType
     kind :: Core.Text,
     -- | [Output Only] Local SSD available to the node type, defined in GB.
     localSsdGb :: (Core.Maybe Core.Int32),
+    -- | [Output Only] Maximum number of VMs that can be created for this node type.
+    maxVms :: (Core.Maybe Core.Int32),
     -- | [Output Only] The amount of physical memory available to the node type, defined in MB.
     memoryMb :: (Core.Maybe Core.Int32),
     -- | [Output Only] Name of the resource.
@@ -35967,6 +36817,7 @@ newNodeType =
       id = Core.Nothing,
       kind = "compute#nodeType",
       localSsdGb = Core.Nothing,
+      maxVms = Core.Nothing,
       memoryMb = Core.Nothing,
       name = Core.Nothing,
       selfLink = Core.Nothing,
@@ -35987,6 +36838,7 @@ instance Core.FromJSON NodeType where
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#nodeType")
             Core.<*> (o Core..:? "localSsdGb")
+            Core.<*> (o Core..:? "maxVms")
             Core.<*> (o Core..:? "memoryMb")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "selfLink")
@@ -36005,6 +36857,7 @@ instance Core.ToJSON NodeType where
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             Core.Just ("kind" Core..= kind),
             ("localSsdGb" Core..=) Core.<$> localSsdGb,
+            ("maxVms" Core..=) Core.<$> maxVms,
             ("memoryMb" Core..=) Core.<$> memoryMb,
             ("name" Core..=) Core.<$> name,
             ("selfLink" Core..=) Core.<$> selfLink,
@@ -42569,6 +43422,10 @@ data RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewall
     displayName :: (Core.Maybe Core.Text),
     -- | [Output Only] The name of the firewall policy.
     name :: (Core.Maybe Core.Text),
+    -- | [Output only] The packet mirroring rules that apply to the network.
+    packetMirroringRules :: (Core.Maybe [FirewallPolicyRule]),
+    -- | [Output only] Priority of firewall policy association. Not applicable for type=HIERARCHY.
+    priority :: (Core.Maybe Core.Int32),
     -- | [Output only] The rules that apply to the network.
     rules :: (Core.Maybe [FirewallPolicyRule]),
     -- | [Output Only] The type of the firewall policy. Can be one of HIERARCHY, NETWORK, NETWORK/REGIONAL, SYSTEM/GLOBAL, SYSTEM_REGIONAL.
@@ -42588,6 +43445,10 @@ newRegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPo
         Core.Nothing,
       name =
         Core.Nothing,
+      packetMirroringRules =
+        Core.Nothing,
+      priority =
+        Core.Nothing,
       rules =
         Core.Nothing,
       type' =
@@ -42605,6 +43466,8 @@ instance
           RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy
             Core.<$> (o Core..:? "displayName")
             Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "packetMirroringRules")
+            Core.<*> (o Core..:? "priority")
             Core.<*> (o Core..:? "rules")
             Core.<*> (o Core..:? "type")
       )
@@ -42619,6 +43482,8 @@ instance
         ( Core.catMaybes
             [ ("displayName" Core..=) Core.<$> displayName,
               ("name" Core..=) Core.<$> name,
+              ("packetMirroringRules" Core..=) Core.<$> packetMirroringRules,
+              ("priority" Core..=) Core.<$> priority,
               ("rules" Core..=) Core.<$> rules,
               ("type" Core..=) Core.<$> type'
             ]
@@ -42844,6 +43709,8 @@ data Reservation = Reservation
     kind :: Core.Text,
     -- | The name of the resource, provided by the client when initially creating the resource. The resource name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression @[a-z]([-a-z0-9]*[a-z0-9])?@ which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
     name :: (Core.Maybe Core.Text),
+    -- | Specify the reservation sharing policy. If unspecified, the reservation will not be shared with Google Cloud managed services.
+    reservationSharingPolicy :: (Core.Maybe AllocationReservationSharingPolicy),
     -- | Resource policies to be added to this reservation. The key is defined by user, and the value is resource policy url. This is to define placement policy with reservation.
     resourcePolicies :: (Core.Maybe Reservation_ResourcePolicies),
     -- | [Output Only] Status information for Reservation resource.
@@ -42877,6 +43744,7 @@ newReservation =
       id = Core.Nothing,
       kind = "compute#reservation",
       name = Core.Nothing,
+      reservationSharingPolicy = Core.Nothing,
       resourcePolicies = Core.Nothing,
       resourceStatus = Core.Nothing,
       satisfiesPzs = Core.Nothing,
@@ -42901,6 +43769,7 @@ instance Core.FromJSON Reservation where
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#reservation")
             Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "reservationSharingPolicy")
             Core.<*> (o Core..:? "resourcePolicies")
             Core.<*> (o Core..:? "resourceStatus")
             Core.<*> (o Core..:? "satisfiesPzs")
@@ -42923,6 +43792,8 @@ instance Core.ToJSON Reservation where
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             Core.Just ("kind" Core..= kind),
             ("name" Core..=) Core.<$> name,
+            ("reservationSharingPolicy" Core..=)
+              Core.<$> reservationSharingPolicy,
             ("resourcePolicies" Core..=) Core.<$> resourcePolicies,
             ("resourceStatus" Core..=) Core.<$> resourceStatus,
             ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
@@ -43469,15 +44340,15 @@ instance Core.ToJSON ReservationsScopedList_Warning_DataItem where
           [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
       )
 
--- | Commitment for a particular resource (a Commitment is composed of one or more of these).
+-- | Commitment for a particular hardware resource (a commitment is composed of one or more of these).
 --
 -- /See:/ 'newResourceCommitment' smart constructor.
 data ResourceCommitment = ResourceCommitment
-  { -- | Name of the accelerator type resource. Applicable only when the type is ACCELERATOR.
+  { -- | Name of the accelerator type or GPU resource. Specify this field only when the type of hardware resource is ACCELERATOR.
     acceleratorType :: (Core.Maybe Core.Text),
-    -- | The amount of the resource purchased (in a type-dependent unit, such as bytes). For vCPUs, this can just be an integer. For memory, this must be provided in MB. Memory must be a multiple of 256 MB, with up to 6.5GB of memory per every vCPU.
+    -- | The quantity of the hardware resource that you want to commit to purchasing (in a type-dependent unit). - For vCPUs, you must specify an integer value. - For memory, you specify the amount of MB that you want. The value you specify must be a multiple of 256 MB, with up to 6.5 GB of memory per every vCPU. - For GPUs, you must specify an integer value. - For Local SSD disks, you must specify the amount in GB. The size of a single Local SSD disk is 375 GB.
     amount :: (Core.Maybe Core.Int64),
-    -- | Type of resource for which this commitment applies. Possible values are VCPU, MEMORY, LOCAL_SSD, and ACCELERATOR.
+    -- | The type of hardware resource that you want to specify. You can specify any of the following values: - VCPU - MEMORY - LOCAL_SSD - ACCELERATOR Specify as a separate entry in the list for each individual resource type.
     type' :: (Core.Maybe ResourceCommitment_Type)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -45185,6 +46056,101 @@ instance Core.ToJSON RouteList_Warning_DataItem where
           [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
       )
 
+--
+-- /See:/ 'newRoutePolicy' smart constructor.
+data RoutePolicy = RoutePolicy
+  { -- | An optional description of route policy.
+    description :: (Core.Maybe Core.Text),
+    -- | A fingerprint for the Route Policy being applied to this Router, which is essentially a hash of the Route Policy used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update Route Policy. You must always provide an up-to-date fingerprint hash in order to update or change labels. To see the latest fingerprint, make a getRoutePolicy() request to retrieve a Route Policy.
+    fingerprint :: (Core.Maybe Core.Base64),
+    -- | Route Policy name, which must be a resource ID segment and unique within all the router\'s Route Policies. Name should conform to RFC1035.
+    name :: (Core.Maybe Core.Text),
+    -- | List of terms (the order in the list is not important, they are evaluated in order of priority). Order of policies is not retained and might change when getting policy later.
+    terms :: (Core.Maybe [RoutePolicyPolicyTerm]),
+    type' :: (Core.Maybe RoutePolicy_Type)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RoutePolicy' with the minimum fields required to make a request.
+newRoutePolicy ::
+  RoutePolicy
+newRoutePolicy =
+  RoutePolicy
+    { description = Core.Nothing,
+      fingerprint = Core.Nothing,
+      name = Core.Nothing,
+      terms = Core.Nothing,
+      type' = Core.Nothing
+    }
+
+instance Core.FromJSON RoutePolicy where
+  parseJSON =
+    Core.withObject
+      "RoutePolicy"
+      ( \o ->
+          RoutePolicy
+            Core.<$> (o Core..:? "description")
+            Core.<*> (o Core..:? "fingerprint")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "terms")
+            Core.<*> (o Core..:? "type")
+      )
+
+instance Core.ToJSON RoutePolicy where
+  toJSON RoutePolicy {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("description" Core..=) Core.<$> description,
+            ("fingerprint" Core..=) Core.<$> fingerprint,
+            ("name" Core..=) Core.<$> name,
+            ("terms" Core..=) Core.<$> terms,
+            ("type" Core..=) Core.<$> type'
+          ]
+      )
+
+--
+-- /See:/ 'newRoutePolicyPolicyTerm' smart constructor.
+data RoutePolicyPolicyTerm = RoutePolicyPolicyTerm
+  { -- | CEL expressions to evaluate to modify a route when this term matches.
+    actions :: (Core.Maybe [Expr]),
+    -- | CEL expression evaluated against a route to determine if this term applies. When not set, the term applies to all routes.
+    match :: (Core.Maybe Expr),
+    -- | The evaluation priority for this term, which must be between 0 (inclusive) and 2^31 (exclusive), and unique within the list.
+    priority :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RoutePolicyPolicyTerm' with the minimum fields required to make a request.
+newRoutePolicyPolicyTerm ::
+  RoutePolicyPolicyTerm
+newRoutePolicyPolicyTerm =
+  RoutePolicyPolicyTerm
+    { actions = Core.Nothing,
+      match = Core.Nothing,
+      priority = Core.Nothing
+    }
+
+instance Core.FromJSON RoutePolicyPolicyTerm where
+  parseJSON =
+    Core.withObject
+      "RoutePolicyPolicyTerm"
+      ( \o ->
+          RoutePolicyPolicyTerm
+            Core.<$> (o Core..:? "actions")
+            Core.<*> (o Core..:? "match")
+            Core.<*> (o Core..:? "priority")
+      )
+
+instance Core.ToJSON RoutePolicyPolicyTerm where
+  toJSON RoutePolicyPolicyTerm {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("actions" Core..=) Core.<$> actions,
+            ("match" Core..=) Core.<$> match,
+            ("priority" Core..=) Core.<$> priority
+          ]
+      )
+
 -- | Represents a Cloud Router resource. For more information about Cloud Router, read the Cloud Router overview.
 --
 -- /See:/ 'newRouter' smart constructor.
@@ -45577,9 +46543,9 @@ data RouterBgpPeer = RouterBgpPeer
     enableIpv4 :: (Core.Maybe Core.Bool),
     -- | Enable IPv6 traffic over BGP Peer. It is enabled by default if the peerIpAddress is version 6.
     enableIpv6 :: (Core.Maybe Core.Bool),
-    -- | List of export policies applied to this peer, in the order they must be evaluated. The name must correspond to an existing policy that has ROUTE/POLICY/TYPE_EXPORT type. Note that Route Policies are currently available in preview. Please use Beta API to use Route Policies.
+    -- | List of export policies applied to this peer, in the order they must be evaluated. The name must correspond to an existing policy that has ROUTE/POLICY/TYPE_EXPORT type.
     exportPolicies :: (Core.Maybe [Core.Text]),
-    -- | List of import policies applied to this peer, in the order they must be evaluated. The name must correspond to an existing policy that has ROUTE/POLICY/TYPE_IMPORT type. Note that Route Policies are currently available in preview. Please use Beta API to use Route Policies.
+    -- | List of import policies applied to this peer, in the order they must be evaluated. The name must correspond to an existing policy that has ROUTE/POLICY/TYPE_IMPORT type.
     importPolicies :: (Core.Maybe [Core.Text]),
     -- | Name of the interface the BGP peer is associated with.
     interfaceName :: (Core.Maybe Core.Text),
@@ -45784,7 +46750,7 @@ instance Core.ToJSON RouterBgpPeerCustomLearnedIpRange where
 --
 -- /See:/ 'newRouterInterface' smart constructor.
 data RouterInterface = RouterInterface
-  { -- | IP address and range of the interface. - For Internet Protocol version 4 (IPv4), the IP range must be in the RFC3927 link-local IP address space. The value must be a CIDR-formatted string, for example, 169.254.0.1\/30. Note: Do not truncate the IP address, as it represents the IP address of the interface. - For Internet Protocol version 6 (IPv6), the value must be a unique local address (ULA) range from fdff:1::\/64 with a mask length of 126 or less. This value should be a CIDR-formatted string, for example, fc00:0:1:1::1\/112. Within the router\'s VPC, this IPv6 prefix will be reserved exclusively for this connection and cannot be used for any other purpose.
+  { -- | IP address and range of the interface. - For Internet Protocol version 4 (IPv4), the IP range must be in the RFC3927 link-local IP address space. The value must be a CIDR-formatted string, for example, 169.254.0.1\/30. Note: Do not truncate the IP address, as it represents the IP address of the interface. - For Internet Protocol version 6 (IPv6), the value must be a unique local address (ULA) range from fdff:1::\/64 with a mask length of 126 or less. This value should be a CIDR-formatted string, for example, fdff:1::1\/112. Within the router\'s VPC, this IPv6 prefix will be reserved exclusively for this connection and cannot be used for any other purpose.
     ipRange :: (Core.Maybe Core.Text),
     -- | IP version of this interface.
     ipVersion :: (Core.Maybe RouterInterface_IpVersion),
@@ -46689,6 +47655,326 @@ instance Core.ToJSON RouterStatusResponse where
       )
 
 --
+-- /See:/ 'newRoutersGetRoutePolicyResponse' smart constructor.
+newtype RoutersGetRoutePolicyResponse = RoutersGetRoutePolicyResponse
+  { resource :: (Core.Maybe RoutePolicy)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RoutersGetRoutePolicyResponse' with the minimum fields required to make a request.
+newRoutersGetRoutePolicyResponse ::
+  RoutersGetRoutePolicyResponse
+newRoutersGetRoutePolicyResponse =
+  RoutersGetRoutePolicyResponse {resource = Core.Nothing}
+
+instance Core.FromJSON RoutersGetRoutePolicyResponse where
+  parseJSON =
+    Core.withObject
+      "RoutersGetRoutePolicyResponse"
+      ( \o ->
+          RoutersGetRoutePolicyResponse Core.<$> (o Core..:? "resource")
+      )
+
+instance Core.ToJSON RoutersGetRoutePolicyResponse where
+  toJSON RoutersGetRoutePolicyResponse {..} =
+    Core.object
+      (Core.catMaybes [("resource" Core..=) Core.<$> resource])
+
+--
+-- /See:/ 'newRoutersListBgpRoutes' smart constructor.
+data RoutersListBgpRoutes = RoutersListBgpRoutes
+  { etag :: (Core.Maybe Core.Text),
+    -- | [Output Only] The unique identifier for the resource. This identifier is defined by the server.
+    id :: (Core.Maybe Core.Text),
+    -- | [Output Only] Type of resource. Always compute#routersListBgpRoutes for lists of bgp routes.
+    kind :: Core.Text,
+    -- | [Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | [Output Only] A list of bgp routes.
+    result :: (Core.Maybe [BgpRoute]),
+    -- | [Output Only] Server-defined URL for this resource.
+    selfLink :: (Core.Maybe Core.Text),
+    -- | [Output Only] Unreachable resources.
+    unreachables :: (Core.Maybe [Core.Text]),
+    -- | [Output Only] Informational warning message.
+    warning :: (Core.Maybe RoutersListBgpRoutes_Warning)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RoutersListBgpRoutes' with the minimum fields required to make a request.
+newRoutersListBgpRoutes ::
+  RoutersListBgpRoutes
+newRoutersListBgpRoutes =
+  RoutersListBgpRoutes
+    { etag = Core.Nothing,
+      id = Core.Nothing,
+      kind = "compute#routersListBgpRoutes",
+      nextPageToken = Core.Nothing,
+      result = Core.Nothing,
+      selfLink = Core.Nothing,
+      unreachables = Core.Nothing,
+      warning = Core.Nothing
+    }
+
+instance Core.FromJSON RoutersListBgpRoutes where
+  parseJSON =
+    Core.withObject
+      "RoutersListBgpRoutes"
+      ( \o ->
+          RoutersListBgpRoutes
+            Core.<$> (o Core..:? "etag")
+            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "kind" Core..!= "compute#routersListBgpRoutes")
+            Core.<*> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "result")
+            Core.<*> (o Core..:? "selfLink")
+            Core.<*> (o Core..:? "unreachables")
+            Core.<*> (o Core..:? "warning")
+      )
+
+instance Core.ToJSON RoutersListBgpRoutes where
+  toJSON RoutersListBgpRoutes {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("etag" Core..=) Core.<$> etag,
+            ("id" Core..=) Core.<$> id,
+            Core.Just ("kind" Core..= kind),
+            ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("result" Core..=) Core.<$> result,
+            ("selfLink" Core..=) Core.<$> selfLink,
+            ("unreachables" Core..=) Core.<$> unreachables,
+            ("warning" Core..=) Core.<$> warning
+          ]
+      )
+
+-- | [Output Only] Informational warning message.
+--
+-- /See:/ 'newRoutersListBgpRoutes_Warning' smart constructor.
+data RoutersListBgpRoutes_Warning = RoutersListBgpRoutes_Warning
+  { -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
+    code :: (Core.Maybe RoutersListBgpRoutes_Warning_Code),
+    -- | [Output Only] Metadata about this warning in key: value format. For example: \"data\": [ { \"key\": \"scope\", \"value\": \"zones\/us-east1-d\" }
+    data' :: (Core.Maybe [RoutersListBgpRoutes_Warning_DataItem]),
+    -- | [Output Only] A human-readable description of the warning code.
+    message :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RoutersListBgpRoutes_Warning' with the minimum fields required to make a request.
+newRoutersListBgpRoutes_Warning ::
+  RoutersListBgpRoutes_Warning
+newRoutersListBgpRoutes_Warning =
+  RoutersListBgpRoutes_Warning
+    { code = Core.Nothing,
+      data' = Core.Nothing,
+      message = Core.Nothing
+    }
+
+instance Core.FromJSON RoutersListBgpRoutes_Warning where
+  parseJSON =
+    Core.withObject
+      "RoutersListBgpRoutes_Warning"
+      ( \o ->
+          RoutersListBgpRoutes_Warning
+            Core.<$> (o Core..:? "code")
+            Core.<*> (o Core..:? "data")
+            Core.<*> (o Core..:? "message")
+      )
+
+instance Core.ToJSON RoutersListBgpRoutes_Warning where
+  toJSON RoutersListBgpRoutes_Warning {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("code" Core..=) Core.<$> code,
+            ("data" Core..=) Core.<$> data',
+            ("message" Core..=) Core.<$> message
+          ]
+      )
+
+--
+-- /See:/ 'newRoutersListBgpRoutes_Warning_DataItem' smart constructor.
+data RoutersListBgpRoutes_Warning_DataItem = RoutersListBgpRoutes_Warning_DataItem
+  { -- | [Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).
+    key :: (Core.Maybe Core.Text),
+    -- | [Output Only] A warning data value corresponding to the key.
+    value :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RoutersListBgpRoutes_Warning_DataItem' with the minimum fields required to make a request.
+newRoutersListBgpRoutes_Warning_DataItem ::
+  RoutersListBgpRoutes_Warning_DataItem
+newRoutersListBgpRoutes_Warning_DataItem =
+  RoutersListBgpRoutes_Warning_DataItem
+    { key = Core.Nothing,
+      value = Core.Nothing
+    }
+
+instance Core.FromJSON RoutersListBgpRoutes_Warning_DataItem where
+  parseJSON =
+    Core.withObject
+      "RoutersListBgpRoutes_Warning_DataItem"
+      ( \o ->
+          RoutersListBgpRoutes_Warning_DataItem
+            Core.<$> (o Core..:? "key")
+            Core.<*> (o Core..:? "value")
+      )
+
+instance Core.ToJSON RoutersListBgpRoutes_Warning_DataItem where
+  toJSON RoutersListBgpRoutes_Warning_DataItem {..} =
+    Core.object
+      ( Core.catMaybes
+          [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
+      )
+
+--
+-- /See:/ 'newRoutersListRoutePolicies' smart constructor.
+data RoutersListRoutePolicies = RoutersListRoutePolicies
+  { etag :: (Core.Maybe Core.Text),
+    -- | [Output Only] The unique identifier for the resource. This identifier is defined by the server.
+    id :: (Core.Maybe Core.Text),
+    -- | [Output Only] Type of resource. Always compute#routersListRoutePolicies for lists of route policies.
+    kind :: Core.Text,
+    -- | [Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | [Output Only] A list of route policies.
+    result :: (Core.Maybe [RoutePolicy]),
+    -- | [Output Only] Server-defined URL for this resource.
+    selfLink :: (Core.Maybe Core.Text),
+    -- | [Output Only] Unreachable resources.
+    unreachables :: (Core.Maybe [Core.Text]),
+    -- | [Output Only] Informational warning message.
+    warning :: (Core.Maybe RoutersListRoutePolicies_Warning)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RoutersListRoutePolicies' with the minimum fields required to make a request.
+newRoutersListRoutePolicies ::
+  RoutersListRoutePolicies
+newRoutersListRoutePolicies =
+  RoutersListRoutePolicies
+    { etag = Core.Nothing,
+      id = Core.Nothing,
+      kind = "compute#routersListRoutePolicies",
+      nextPageToken = Core.Nothing,
+      result = Core.Nothing,
+      selfLink = Core.Nothing,
+      unreachables = Core.Nothing,
+      warning = Core.Nothing
+    }
+
+instance Core.FromJSON RoutersListRoutePolicies where
+  parseJSON =
+    Core.withObject
+      "RoutersListRoutePolicies"
+      ( \o ->
+          RoutersListRoutePolicies
+            Core.<$> (o Core..:? "etag")
+            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "kind" Core..!= "compute#routersListRoutePolicies")
+            Core.<*> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "result")
+            Core.<*> (o Core..:? "selfLink")
+            Core.<*> (o Core..:? "unreachables")
+            Core.<*> (o Core..:? "warning")
+      )
+
+instance Core.ToJSON RoutersListRoutePolicies where
+  toJSON RoutersListRoutePolicies {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("etag" Core..=) Core.<$> etag,
+            ("id" Core..=) Core.<$> id,
+            Core.Just ("kind" Core..= kind),
+            ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("result" Core..=) Core.<$> result,
+            ("selfLink" Core..=) Core.<$> selfLink,
+            ("unreachables" Core..=) Core.<$> unreachables,
+            ("warning" Core..=) Core.<$> warning
+          ]
+      )
+
+-- | [Output Only] Informational warning message.
+--
+-- /See:/ 'newRoutersListRoutePolicies_Warning' smart constructor.
+data RoutersListRoutePolicies_Warning = RoutersListRoutePolicies_Warning
+  { -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
+    code :: (Core.Maybe RoutersListRoutePolicies_Warning_Code),
+    -- | [Output Only] Metadata about this warning in key: value format. For example: \"data\": [ { \"key\": \"scope\", \"value\": \"zones\/us-east1-d\" }
+    data' :: (Core.Maybe [RoutersListRoutePolicies_Warning_DataItem]),
+    -- | [Output Only] A human-readable description of the warning code.
+    message :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RoutersListRoutePolicies_Warning' with the minimum fields required to make a request.
+newRoutersListRoutePolicies_Warning ::
+  RoutersListRoutePolicies_Warning
+newRoutersListRoutePolicies_Warning =
+  RoutersListRoutePolicies_Warning
+    { code = Core.Nothing,
+      data' = Core.Nothing,
+      message = Core.Nothing
+    }
+
+instance Core.FromJSON RoutersListRoutePolicies_Warning where
+  parseJSON =
+    Core.withObject
+      "RoutersListRoutePolicies_Warning"
+      ( \o ->
+          RoutersListRoutePolicies_Warning
+            Core.<$> (o Core..:? "code")
+            Core.<*> (o Core..:? "data")
+            Core.<*> (o Core..:? "message")
+      )
+
+instance Core.ToJSON RoutersListRoutePolicies_Warning where
+  toJSON RoutersListRoutePolicies_Warning {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("code" Core..=) Core.<$> code,
+            ("data" Core..=) Core.<$> data',
+            ("message" Core..=) Core.<$> message
+          ]
+      )
+
+--
+-- /See:/ 'newRoutersListRoutePolicies_Warning_DataItem' smart constructor.
+data RoutersListRoutePolicies_Warning_DataItem = RoutersListRoutePolicies_Warning_DataItem
+  { -- | [Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).
+    key :: (Core.Maybe Core.Text),
+    -- | [Output Only] A warning data value corresponding to the key.
+    value :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RoutersListRoutePolicies_Warning_DataItem' with the minimum fields required to make a request.
+newRoutersListRoutePolicies_Warning_DataItem ::
+  RoutersListRoutePolicies_Warning_DataItem
+newRoutersListRoutePolicies_Warning_DataItem =
+  RoutersListRoutePolicies_Warning_DataItem
+    { key = Core.Nothing,
+      value = Core.Nothing
+    }
+
+instance Core.FromJSON RoutersListRoutePolicies_Warning_DataItem where
+  parseJSON =
+    Core.withObject
+      "RoutersListRoutePolicies_Warning_DataItem"
+      ( \o ->
+          RoutersListRoutePolicies_Warning_DataItem
+            Core.<$> (o Core..:? "key")
+            Core.<*> (o Core..:? "value")
+      )
+
+instance Core.ToJSON RoutersListRoutePolicies_Warning_DataItem where
+  toJSON RoutersListRoutePolicies_Warning_DataItem {..} =
+    Core.object
+      ( Core.catMaybes
+          [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
+      )
+
+--
 -- /See:/ 'newRoutersPreviewResponse' smart constructor.
 newtype RoutersPreviewResponse = RoutersPreviewResponse
   { -- | Preview of given router.
@@ -47101,6 +48387,8 @@ data Scheduling = Scheduling
     automaticRestart :: (Core.Maybe Core.Bool),
     -- | Specifies the availability domain to place the instance in. The value must be a number between 1 and the number of availability domains specified in the spread placement policy attached to the instance.
     availabilityDomain :: (Core.Maybe Core.Int32),
+    -- | Specify the time in seconds for host error detection, the value must be within the range of [90, 330] with the increment of 30, if unset, the default behavior of host error recovery will be used.
+    hostErrorTimeoutSeconds :: (Core.Maybe Core.Int32),
     -- | Specifies the termination action for the instance.
     instanceTerminationAction :: (Core.Maybe Scheduling_InstanceTerminationAction),
     -- | Specifies the maximum amount of time a Local Ssd Vm should wait while recovery of the Local Ssd state is attempted. Its value should be in between 0 and 168 hours with hour granularity and the default value being 1 hour.
@@ -47132,6 +48420,7 @@ newScheduling =
   Scheduling
     { automaticRestart = Core.Nothing,
       availabilityDomain = Core.Nothing,
+      hostErrorTimeoutSeconds = Core.Nothing,
       instanceTerminationAction = Core.Nothing,
       localSsdRecoveryTimeout = Core.Nothing,
       locationHint = Core.Nothing,
@@ -47153,6 +48442,7 @@ instance Core.FromJSON Scheduling where
           Scheduling
             Core.<$> (o Core..:? "automaticRestart")
             Core.<*> (o Core..:? "availabilityDomain")
+            Core.<*> (o Core..:? "hostErrorTimeoutSeconds")
             Core.<*> (o Core..:? "instanceTerminationAction")
             Core.<*> (o Core..:? "localSsdRecoveryTimeout")
             Core.<*> (o Core..:? "locationHint")
@@ -47172,6 +48462,8 @@ instance Core.ToJSON Scheduling where
       ( Core.catMaybes
           [ ("automaticRestart" Core..=) Core.<$> automaticRestart,
             ("availabilityDomain" Core..=) Core.<$> availabilityDomain,
+            ("hostErrorTimeoutSeconds" Core..=)
+              Core.<$> hostErrorTimeoutSeconds,
             ("instanceTerminationAction" Core..=)
               Core.<$> instanceTerminationAction,
             ("localSsdRecoveryTimeout" Core..=)
@@ -50522,7 +51814,7 @@ data Snapshot = Snapshot
     sourceInstantSnapshot :: (Core.Maybe Core.Text),
     -- | Customer provided encryption key when creating Snapshot from Instant Snapshot.
     sourceInstantSnapshotEncryptionKey :: (Core.Maybe CustomerEncryptionKey),
-    -- | [Output Only] The unique ID of the instant snapshot used to create this snapshot. This value identifies the exact instant snapshot that was used to create this persistent disk. For example, if you created the persistent disk from an instant snapshot that was later deleted and recreated under the same name, the source instant snapshot ID would identify the exact instant snapshot that was used.
+    -- | [Output Only] The unique ID of the instant snapshot used to create this snapshot. This value identifies the exact instant snapshot that was used to create this snapshot. For example, if you created the snapshot from an instant snapshot that was later deleted and recreated under the same name, the source instant snapshot ID would identify the exact instant snapshot that was used.
     sourceInstantSnapshotId :: (Core.Maybe Core.Text),
     -- | [Output Only] URL of the resource policy which created this scheduled snapshot.
     sourceSnapshotSchedulePolicy :: (Core.Maybe Core.Text),
@@ -54360,7 +55652,7 @@ data Subnetwork = Subnetwork
     privateIpGoogleAccess :: (Core.Maybe Core.Bool),
     -- | This field is for internal use. This field can be both set at resource creation time and updated using patch.
     privateIpv6GoogleAccess :: (Core.Maybe Subnetwork_PrivateIpv6GoogleAccess),
-    -- | The purpose of the resource. This field can be either PRIVATE, GLOBAL/MANAGED/PROXY, REGIONAL/MANAGED/PROXY, PEER/MIGRATION or PRIVATE/SERVICE/CONNECT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL/MANAGED/PROXY or REGIONAL/MANAGED/PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE/SERVICE/CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER/MIGRATION is used for subnet migration from one peered VPC to another. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn\'t supported if the subnet purpose field is set to GLOBAL/MANAGED/PROXY or REGIONAL/MANAGED/PROXY.
+    -- | The purpose of the resource. This field can be either PRIVATE, GLOBAL/MANAGED/PROXY, REGIONAL/MANAGED/PROXY, PEER/MIGRATION, PRIVATE/SERVICE/CONNECT or PRIVATE/NAT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL/MANAGED/PROXY or REGIONAL/MANAGED/PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE/SERVICE/CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER/MIGRATION is used for subnet migration from one peered VPC to another. A subnet with purpose set to PRIVATE/NAT is used for Private NAT IP address by Private NAT Gateway. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn\'t supported if the subnet purpose field is set to GLOBAL/MANAGED/PROXY or REGIONAL/MANAGED/PROXY.
     purpose :: (Core.Maybe Subnetwork_Purpose),
     -- | URL of the region where the Subnetwork resides. This field can be set only at resource creation time.
     region :: (Core.Maybe Core.Text),
@@ -56083,10 +57375,10 @@ data TargetHttpsProxy = TargetHttpsProxy
     region :: (Core.Maybe Core.Text),
     -- | [Output Only] Server-defined URL for the resource.
     selfLink :: (Core.Maybe Core.Text),
-    -- | Optional. A URL referring to a networksecurity.ServerTlsPolicy resource that describes how the proxy should authenticate inbound traffic. serverTlsPolicy only applies to a global TargetHttpsProxy attached to globalForwardingRules with the loadBalancingScheme set to INTERNAL/SELF/MANAGED or EXTERNAL or EXTERNAL/MANAGED. For details which ServerTlsPolicy resources are accepted with INTERNAL/SELF/MANAGED and which with EXTERNAL, EXTERNAL/MANAGED loadBalancingScheme consult ServerTlsPolicy documentation. If left blank, communications are not encrypted.
+    -- | Optional. A URL referring to a networksecurity.ServerTlsPolicy resource that describes how the proxy should authenticate inbound traffic. serverTlsPolicy only applies to a global TargetHttpsProxy attached to globalForwardingRules with the loadBalancingScheme set to INTERNAL/SELF/MANAGED or EXTERNAL or EXTERNAL/MANAGED or INTERNAL/MANAGED. It also applies to a regional TargetHttpsProxy attached to regional forwardingRules with the loadBalancingScheme set to EXTERNAL/MANAGED or INTERNAL/MANAGED. For details which ServerTlsPolicy resources are accepted with INTERNAL/SELF/MANAGED and which with EXTERNAL, INTERNAL/MANAGED, EXTERNAL/MANAGED loadBalancingScheme consult ServerTlsPolicy documentation. If left blank, communications are not encrypted.
     serverTlsPolicy :: (Core.Maybe Core.Text),
-    -- | URLs to SslCertificate resources that are used to authenticate connections between users and the load balancer. At least one SSL certificate must be specified. SslCertificates do not apply when the load balancing scheme is set to INTERNAL/SELF/MANAGED. The URLs should refer to a SSL Certificate resource or Certificate Manager Certificate resource. Mixing Classic Certificates and Certificate Manager Certificates is not allowed. Certificate Manager Certificates must include the certificatemanager API. Certificate Manager Certificates are not supported by Global external Application Load Balancer or Classic Application Load Balancer, use certificate_map instead. Currently, you may specify up to 15 Classic SSL Certificates. Certificate Manager Certificates accepted formats are: - \/\/certificatemanager.googleapis.com\/projects\/{project}\/locations\/{ location}\/certificates\/{resourceName}. - https:\/\/certificatemanager.googleapis.com\/v1alpha1\/projects\/{project
-    -- }\/locations\/{location}\/certificates\/{resourceName}.
+    -- | URLs to SslCertificate resources that are used to authenticate connections between users and the load balancer. At least one SSL certificate must be specified. SslCertificates do not apply when the load balancing scheme is set to INTERNAL/SELF/MANAGED. The URLs should refer to a SSL Certificate resource or Certificate Manager Certificate resource. Mixing Classic Certificates and Certificate Manager Certificates is not allowed. Certificate Manager Certificates must include the certificatemanager API namespace. Using Certificate Manager Certificates in this field is not supported by Global external Application Load Balancer or Classic Application Load Balancer, use certificate_map instead. Currently, you may specify up to 15 Classic SSL Certificates or up to 100 Certificate Manager Certificates. Certificate Manager Certificates accepted formats are: - \/\/certificatemanager.googleapis.com\/projects\/{project}\/locations\/{ location}\/certificates\/{resourceName}. -
+    -- https:\/\/certificatemanager.googleapis.com\/v1alpha1\/projects\/{project }\/locations\/{location}\/certificates\/{resourceName}.
     sslCertificates :: (Core.Maybe [Core.Text]),
     -- | URL of SslPolicy resource that will be associated with the TargetHttpsProxy resource. If not set, the TargetHttpsProxy resource has no SSL policy configured.
     sslPolicy :: (Core.Maybe Core.Text),
@@ -60218,7 +61510,7 @@ data UsableSubnetwork = UsableSubnetwork
     ipv6AccessType :: (Core.Maybe UsableSubnetwork_Ipv6AccessType),
     -- | Network URL.
     network :: (Core.Maybe Core.Text),
-    -- | The purpose of the resource. This field can be either PRIVATE, GLOBAL/MANAGED/PROXY, REGIONAL/MANAGED/PROXY, PEER/MIGRATION or PRIVATE/SERVICE/CONNECT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL/MANAGED/PROXY or REGIONAL/MANAGED/PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE/SERVICE/CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER/MIGRATION is used for subnet migration from one peered VPC to another. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn\'t supported if the subnet purpose field is set to GLOBAL/MANAGED/PROXY or REGIONAL/MANAGED/PROXY.
+    -- | The purpose of the resource. This field can be either PRIVATE, GLOBAL/MANAGED/PROXY, REGIONAL/MANAGED/PROXY, PEER/MIGRATION, PRIVATE/SERVICE/CONNECT or PRIVATE/NAT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL/MANAGED/PROXY or REGIONAL/MANAGED/PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE/SERVICE/CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER/MIGRATION is used for subnet migration from one peered VPC to another. A subnet with purpose set to PRIVATE/NAT is used for Private NAT IP address by Private NAT Gateway. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn\'t supported if the subnet purpose field is set to GLOBAL/MANAGED/PROXY or REGIONAL/MANAGED/PROXY.
     purpose :: (Core.Maybe UsableSubnetwork_Purpose),
     -- | The role of subnetwork. Currently, this field is only used when purpose is set to GLOBAL/MANAGED/PROXY or REGIONAL/MANAGED/PROXY. The value can be set to ACTIVE or BACKUP. An ACTIVE subnetwork is one that is currently being used for Envoy-based load balancers in a region. A BACKUP subnetwork is one that is ready to be promoted to ACTIVE or is currently draining. This field can be updated with a patch request.
     role' :: (Core.Maybe UsableSubnetwork_Role),

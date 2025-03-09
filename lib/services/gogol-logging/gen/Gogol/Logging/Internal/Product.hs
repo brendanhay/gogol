@@ -23,15 +23,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Logging.Internal.Product
-  ( -- * AuditConfig
-    AuditConfig (..),
-    newAuditConfig,
-
-    -- * AuditLogConfig
-    AuditLogConfig (..),
-    newAuditLogConfig,
-
-    -- * BigQueryDataset
+  ( -- * BigQueryDataset
     BigQueryDataset (..),
     newBigQueryDataset,
 
@@ -416,85 +408,6 @@ where
 import Gogol.Logging.Internal.Sum
 import Gogol.Prelude qualified as Core
 
--- | Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs.If there are AuditConfigs for both allServices and a specific service, the union of the two AuditConfigs is used for that service: the log/types specified in each AuditConfig are enabled, and the exempted/members in each AuditLogConfig are exempted.Example Policy with multiple AuditConfigs: { \"audit/configs\": [ { \"service\": \"allServices\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\", \"exempted/members\": [ \"user:jose\@example.com\" ] }, { \"log/type\": \"DATA/WRITE\" }, { \"log/type\": \"ADMIN/READ\" } ] }, { \"service\": \"sampleservice.googleapis.com\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\" }, { \"log/type\": \"DATA/WRITE\", \"exempted/members\": [ \"user:aliya\@example.com\" ] } ] } ] } For sampleservice, this policy enables DATA/READ, DATA/WRITE and
--- ADMIN/READ logging. It also exempts jose\@example.com from DATA/READ logging, and aliya\@example.com from DATA/WRITE logging.
---
--- /See:/ 'newAuditConfig' smart constructor.
-data AuditConfig = AuditConfig
-  { -- | The configuration for logging of each type of permission.
-    auditLogConfigs :: (Core.Maybe [AuditLogConfig]),
-    -- | Specifies a service that will be enabled for audit logging. For example, storage.googleapis.com, cloudsql.googleapis.com. allServices is a special value that covers all services.
-    service :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
-newAuditConfig ::
-  AuditConfig
-newAuditConfig =
-  AuditConfig
-    { auditLogConfigs = Core.Nothing,
-      service = Core.Nothing
-    }
-
-instance Core.FromJSON AuditConfig where
-  parseJSON =
-    Core.withObject
-      "AuditConfig"
-      ( \o ->
-          AuditConfig
-            Core.<$> (o Core..:? "auditLogConfigs")
-            Core.<*> (o Core..:? "service")
-      )
-
-instance Core.ToJSON AuditConfig where
-  toJSON AuditConfig {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("auditLogConfigs" Core..=) Core.<$> auditLogConfigs,
-            ("service" Core..=) Core.<$> service
-          ]
-      )
-
--- | Provides the configuration for logging a type of permissions. Example: { \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\", \"exempted/members\": [ \"user:jose\@example.com\" ] }, { \"log/type\": \"DATA/WRITE\" } ] } This enables \'DATA/READ\' and \'DATA/WRITE\' logging, while exempting jose\@example.com from DATA/READ logging.
---
--- /See:/ 'newAuditLogConfig' smart constructor.
-data AuditLogConfig = AuditLogConfig
-  { -- | Specifies the identities that do not cause logging for this type of permission. Follows the same format of Binding.members.
-    exemptedMembers :: (Core.Maybe [Core.Text]),
-    -- | The log type that this config enables.
-    logType :: (Core.Maybe AuditLogConfig_LogType)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
-newAuditLogConfig ::
-  AuditLogConfig
-newAuditLogConfig =
-  AuditLogConfig
-    { exemptedMembers = Core.Nothing,
-      logType = Core.Nothing
-    }
-
-instance Core.FromJSON AuditLogConfig where
-  parseJSON =
-    Core.withObject
-      "AuditLogConfig"
-      ( \o ->
-          AuditLogConfig
-            Core.<$> (o Core..:? "exemptedMembers")
-            Core.<*> (o Core..:? "logType")
-      )
-
-instance Core.ToJSON AuditLogConfig where
-  toJSON AuditLogConfig {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("exemptedMembers" Core..=) Core.<$> exemptedMembers,
-            ("logType" Core..=) Core.<$> logType
-          ]
-      )
-
 -- | Describes a BigQuery dataset that was created by a link.
 --
 -- /See:/ 'newBigQueryDataset' smart constructor.
@@ -858,7 +771,7 @@ instance Core.ToJSON CopyLogEntriesMetadata where
 --
 -- /See:/ 'newCopyLogEntriesRequest' smart constructor.
 data CopyLogEntriesRequest = CopyLogEntriesRequest
-  { -- | Required. Destination to which to copy log entries.
+  { -- | Required. Destination to which to copy log entries. For example: \"storage.googleapis.com\/GCS_BUCKET\"
     destination :: (Core.Maybe Core.Text),
     -- | Optional. A filter specifying which log entries to copy. The filter must be no more than 20k characters. An empty filter matches all log entries.
     filter :: (Core.Maybe Core.Text),
@@ -3812,9 +3725,7 @@ instance Core.ToJSON OpsAnalyticsQuery where
 --
 -- /See:/ 'newPolicy' smart constructor.
 data Policy = Policy
-  { -- | Specifies cloud audit logging configuration for this policy.
-    auditConfigs :: (Core.Maybe [AuditConfig]),
-    -- | Associates a list of members, or principals, with a role. Optionally, may specify a condition that determines how and when the bindings are applied. Each of the bindings must contain at least one principal.The bindings in a Policy can refer to up to 1,500 principals; up to 250 of these principals can be Google groups. Each occurrence of a principal counts towards these limits. For example, if the bindings grant 50 different roles to user:alice\@example.com, and not to any other principal, then you can add another 1,450 principals to the bindings in the Policy.
+  { -- | Associates a list of members, or principals, with a role. Optionally, may specify a condition that determines how and when the bindings are applied. Each of the bindings must contain at least one principal.The bindings in a Policy can refer to up to 1,500 principals; up to 250 of these principals can be Google groups. Each occurrence of a principal counts towards these limits. For example, if the bindings grant 50 different roles to user:alice\@example.com, and not to any other principal, then you can add another 1,450 principals to the bindings in the Policy.
     bindings :: (Core.Maybe [Binding]),
     -- | etag is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the etag in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An etag is returned in the response to getIamPolicy, and systems are expected to put that etag in the request to setIamPolicy to ensure that their change will be applied to the same version of the policy.Important: If you use IAM Conditions, you must include the etag field whenever you call setIamPolicy. If you omit this field, then IAM allows you to overwrite a version 3 policy with a version 1 policy, and all of the conditions in the version 3 policy are lost.
     etag :: (Core.Maybe Core.Base64),
@@ -3829,8 +3740,7 @@ newPolicy ::
   Policy
 newPolicy =
   Policy
-    { auditConfigs = Core.Nothing,
-      bindings = Core.Nothing,
+    { bindings = Core.Nothing,
       etag = Core.Nothing,
       version = Core.Nothing
     }
@@ -3841,8 +3751,7 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> (o Core..:? "auditConfigs")
-            Core.<*> (o Core..:? "bindings")
+            Core.<$> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -3851,8 +3760,7 @@ instance Core.ToJSON Policy where
   toJSON Policy {..} =
     Core.object
       ( Core.catMaybes
-          [ ("auditConfigs" Core..=) Core.<$> auditConfigs,
-            ("bindings" Core..=) Core.<$> bindings,
+          [ ("bindings" Core..=) Core.<$> bindings,
             ("etag" Core..=) Core.<$> etag,
             ("version" Core..=) Core.<$> version
           ]

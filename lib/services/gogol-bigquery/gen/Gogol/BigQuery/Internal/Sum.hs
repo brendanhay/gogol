@@ -555,6 +555,18 @@ module Gogol.BigQuery.Internal.Sum
         ..
       ),
 
+    -- * StoredColumnsUnusedReason_Code
+    StoredColumnsUnusedReason_Code
+      ( StoredColumnsUnusedReason_Code_CODEUNSPECIFIED,
+        StoredColumnsUnusedReason_Code_STOREDCOLUMNSCOVERINSUFFICIENT,
+        StoredColumnsUnusedReason_Code_BASETABLEHASRLS,
+        StoredColumnsUnusedReason_Code_BASETABLEHASCLS,
+        StoredColumnsUnusedReason_Code_UNSUPPORTEDPREFILTER,
+        StoredColumnsUnusedReason_Code_INTERNALERROR,
+        StoredColumnsUnusedReason_Code_OTHERREASON,
+        ..
+      ),
+
     -- * Table_DefaultRoundingMode
     Table_DefaultRoundingMode
       ( Table_DefaultRoundingMode_ROUNDINGMODEUNSPECIFIED,
@@ -1675,7 +1687,7 @@ newtype ExternalDataConfiguration_JsonExtension = ExternalDataConfiguration_Json
       Core.FromJSONKey
     )
 
--- | The default if provided value is not one included in the enum, or the value is not specified. The source formate is parsed without any modification.
+-- | The default if provided value is not one included in the enum, or the value is not specified. The source format is parsed without any modification.
 pattern ExternalDataConfiguration_JsonExtension_JSONEXTENSIONUNSPECIFIED :: ExternalDataConfiguration_JsonExtension
 pattern ExternalDataConfiguration_JsonExtension_JSONEXTENSIONUNSPECIFIED = ExternalDataConfiguration_JsonExtension "JSON_EXTENSION_UNSPECIFIED"
 
@@ -2067,7 +2079,7 @@ newtype JobConfigurationLoad_JsonExtension = JobConfigurationLoad_JsonExtension 
       Core.FromJSONKey
     )
 
--- | The default if provided value is not one included in the enum, or the value is not specified. The source formate is parsed without any modification.
+-- | The default if provided value is not one included in the enum, or the value is not specified. The source format is parsed without any modification.
 pattern JobConfigurationLoad_JsonExtension_JSONEXTENSIONUNSPECIFIED :: JobConfigurationLoad_JsonExtension
 pattern JobConfigurationLoad_JsonExtension_JSONEXTENSIONUNSPECIFIED = JobConfigurationLoad_JsonExtension "JSON_EXTENSION_UNSPECIFIED"
 
@@ -2305,7 +2317,7 @@ pattern MaterializedView_RejectedReason_Cost = MaterializedView_RejectedReason "
 pattern MaterializedView_RejectedReason_BASETABLETRUNCATED :: MaterializedView_RejectedReason
 pattern MaterializedView_RejectedReason_BASETABLETRUNCATED = MaterializedView_RejectedReason "BASE_TABLE_TRUNCATED"
 
--- | View is invalidated because of a data change in one or more base tables. It could be any recent change if the <https://cloud.google.com/bigquery/docs/materialized-views-create#max_staleness max_staleness> option is not set for the view, or otherwise any change outside of the staleness window.
+-- | View is invalidated because of a data change in one or more base tables. It could be any recent change if the <https://cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.max_staleness maxStaleness> option is not set for the view, or otherwise any change outside of the staleness window.
 pattern MaterializedView_RejectedReason_BASETABLEDATACHANGE :: MaterializedView_RejectedReason
 pattern MaterializedView_RejectedReason_BASETABLEDATACHANGE = MaterializedView_RejectedReason "BASE_TABLE_DATA_CHANGE"
 
@@ -3195,6 +3207,58 @@ pattern StandardSqlDataType_TypeKind_Range = StandardSqlDataType_TypeKind "RANGE
   StandardSqlDataType_TypeKind
   #-}
 
+-- | Specifies the high-level reason for the unused scenario, each reason must have a code associated.
+newtype StoredColumnsUnusedReason_Code = StoredColumnsUnusedReason_Code {fromStoredColumnsUnusedReason_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value.
+pattern StoredColumnsUnusedReason_Code_CODEUNSPECIFIED :: StoredColumnsUnusedReason_Code
+pattern StoredColumnsUnusedReason_Code_CODEUNSPECIFIED = StoredColumnsUnusedReason_Code "CODE_UNSPECIFIED"
+
+-- | If stored columns do not fully cover the columns.
+pattern StoredColumnsUnusedReason_Code_STOREDCOLUMNSCOVERINSUFFICIENT :: StoredColumnsUnusedReason_Code
+pattern StoredColumnsUnusedReason_Code_STOREDCOLUMNSCOVERINSUFFICIENT = StoredColumnsUnusedReason_Code "STORED_COLUMNS_COVER_INSUFFICIENT"
+
+-- | If the base table has RLS (Row Level Security).
+pattern StoredColumnsUnusedReason_Code_BASETABLEHASRLS :: StoredColumnsUnusedReason_Code
+pattern StoredColumnsUnusedReason_Code_BASETABLEHASRLS = StoredColumnsUnusedReason_Code "BASE_TABLE_HAS_RLS"
+
+-- | If the base table has CLS (Column Level Security).
+pattern StoredColumnsUnusedReason_Code_BASETABLEHASCLS :: StoredColumnsUnusedReason_Code
+pattern StoredColumnsUnusedReason_Code_BASETABLEHASCLS = StoredColumnsUnusedReason_Code "BASE_TABLE_HAS_CLS"
+
+-- | If the provided prefilter is not supported.
+pattern StoredColumnsUnusedReason_Code_UNSUPPORTEDPREFILTER :: StoredColumnsUnusedReason_Code
+pattern StoredColumnsUnusedReason_Code_UNSUPPORTEDPREFILTER = StoredColumnsUnusedReason_Code "UNSUPPORTED_PREFILTER"
+
+-- | If an internal error is preventing stored columns from being used.
+pattern StoredColumnsUnusedReason_Code_INTERNALERROR :: StoredColumnsUnusedReason_Code
+pattern StoredColumnsUnusedReason_Code_INTERNALERROR = StoredColumnsUnusedReason_Code "INTERNAL_ERROR"
+
+-- | Indicates that the reason stored columns cannot be used in the query is not covered by any of the other StoredColumnsUnusedReason options.
+pattern StoredColumnsUnusedReason_Code_OTHERREASON :: StoredColumnsUnusedReason_Code
+pattern StoredColumnsUnusedReason_Code_OTHERREASON = StoredColumnsUnusedReason_Code "OTHER_REASON"
+
+{-# COMPLETE
+  StoredColumnsUnusedReason_Code_CODEUNSPECIFIED,
+  StoredColumnsUnusedReason_Code_STOREDCOLUMNSCOVERINSUFFICIENT,
+  StoredColumnsUnusedReason_Code_BASETABLEHASRLS,
+  StoredColumnsUnusedReason_Code_BASETABLEHASCLS,
+  StoredColumnsUnusedReason_Code_UNSUPPORTEDPREFILTER,
+  StoredColumnsUnusedReason_Code_INTERNALERROR,
+  StoredColumnsUnusedReason_Code_OTHERREASON,
+  StoredColumnsUnusedReason_Code
+  #-}
+
 -- | Optional. Defines the default rounding mode specification of new decimal fields (NUMERIC OR BIGNUMERIC) in the table. During table creation or update, if a decimal field is added to this table without an explicit rounding mode specified, then the field inherits the table default rounding mode. Changing this field doesn\'t affect existing fields.
 newtype Table_DefaultRoundingMode = Table_DefaultRoundingMode {fromTable_DefaultRoundingMode :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -3972,7 +4036,7 @@ pattern TrainingOptions_HolidayRegion_US = TrainingOptions_HolidayRegion "US"
 pattern TrainingOptions_HolidayRegion_VE :: TrainingOptions_HolidayRegion
 pattern TrainingOptions_HolidayRegion_VE = TrainingOptions_HolidayRegion "VE"
 
--- | Viet Nam
+-- | Vietnam
 pattern TrainingOptions_HolidayRegion_VN :: TrainingOptions_HolidayRegion
 pattern TrainingOptions_HolidayRegion_VN = TrainingOptions_HolidayRegion "VN"
 
@@ -4333,7 +4397,7 @@ pattern TrainingOptions_HolidayRegionsItem_US = TrainingOptions_HolidayRegionsIt
 pattern TrainingOptions_HolidayRegionsItem_VE :: TrainingOptions_HolidayRegionsItem
 pattern TrainingOptions_HolidayRegionsItem_VE = TrainingOptions_HolidayRegionsItem "VE"
 
--- | Viet Nam
+-- | Vietnam
 pattern TrainingOptions_HolidayRegionsItem_VN :: TrainingOptions_HolidayRegionsItem
 pattern TrainingOptions_HolidayRegionsItem_VN = TrainingOptions_HolidayRegionsItem "VN"
 
@@ -4470,7 +4534,7 @@ pattern TrainingOptions_HparamTuningObjectivesItem_Accuracy = TrainingOptions_Hp
 pattern TrainingOptions_HparamTuningObjectivesItem_F1SCORE :: TrainingOptions_HparamTuningObjectivesItem
 pattern TrainingOptions_HparamTuningObjectivesItem_F1SCORE = TrainingOptions_HparamTuningObjectivesItem "F1_SCORE"
 
--- | Logorithmic Loss. For multiclass this is a macro-averaged metric.
+-- | Logarithmic Loss. For multiclass this is a macro-averaged metric.
 pattern TrainingOptions_HparamTuningObjectivesItem_LOGLOSS :: TrainingOptions_HparamTuningObjectivesItem
 pattern TrainingOptions_HparamTuningObjectivesItem_LOGLOSS = TrainingOptions_HparamTuningObjectivesItem "LOG_LOSS"
 

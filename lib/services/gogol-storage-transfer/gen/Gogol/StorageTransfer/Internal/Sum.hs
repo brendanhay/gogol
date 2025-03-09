@@ -459,7 +459,7 @@ pattern LoggingConfig_LogActionsItem_Find = LoggingConfig_LogActionsItem "FIND"
 pattern LoggingConfig_LogActionsItem_Delete' :: LoggingConfig_LogActionsItem
 pattern LoggingConfig_LogActionsItem_Delete' = LoggingConfig_LogActionsItem "DELETE"
 
--- | Copying objects to Google Cloud Storage.
+-- | Copying objects to the destination.
 pattern LoggingConfig_LogActionsItem_Copy :: LoggingConfig_LogActionsItem
 pattern LoggingConfig_LogActionsItem_Copy = LoggingConfig_LogActionsItem "COPY"
 

@@ -2136,7 +2136,7 @@ instance Core.ToJSON GoogleDatastoreAdminV1Progress where
 --
 -- /See:/ 'newGoogleDatastoreAdminV1RedirectWritesStepDetails' smart constructor.
 newtype GoogleDatastoreAdminV1RedirectWritesStepDetails = GoogleDatastoreAdminV1RedirectWritesStepDetails
-  { -- | Ths concurrency mode for this database.
+  { -- | The concurrency mode for this database.
     concurrencyMode ::
       ( Core.Maybe
           GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode
@@ -4007,7 +4007,7 @@ instance Core.ToJSON RunQueryRequest where
 --
 -- /See:/ 'newRunQueryResponse' smart constructor.
 data RunQueryResponse = RunQueryResponse
-  { -- | A batch of query results (always present).
+  { -- | A batch of query results. This is always present unless running a query under explain-only mode: RunQueryRequest.explain_options was provided and ExplainOptions.analyze was set to false.
     batch :: (Core.Maybe QueryResultBatch),
     -- | Query explain metrics. This is only present when the RunQueryRequest.explain_options is provided, and it is sent only once with the last response in the stream.
     explainMetrics :: (Core.Maybe ExplainMetrics),

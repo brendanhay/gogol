@@ -48,6 +48,7 @@ type WebfontsWebfontsListResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParams "capability" WebfontsListCapability
+    Core.:> Core.QueryParam "category" Core.Text
     Core.:> Core.QueryParams "family" Core.Text
     Core.:> Core.QueryParam "sort" WebfontsListSort
     Core.:> Core.QueryParam "subset" Core.Text
@@ -68,6 +69,8 @@ data WebfontsWebfontsList = WebfontsWebfontsList
     callback :: (Core.Maybe Core.Text),
     -- | Controls the font urls in @Webfont.files@, by default, static ttf fonts are sent.
     capability :: (Core.Maybe [WebfontsListCapability]),
+    -- | Filters by Webfont.category, if category is found in Webfont.categories. If not set, returns all families.
+    category :: (Core.Maybe Core.Text),
     -- | Filters by Webfont.family, using literal match. If not set, returns all families
     family :: (Core.Maybe [Core.Text]),
     -- | Enables sorting of the list.
@@ -90,6 +93,7 @@ newWebfontsWebfontsList =
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       capability = Core.Nothing,
+      category = Core.Nothing,
       family = Core.Nothing,
       sort = Core.Nothing,
       subset = Core.Nothing,
@@ -106,6 +110,7 @@ instance Core.GoogleRequest WebfontsWebfontsList where
       accessToken
       callback
       (capability Core.^. Core._Default)
+      category
       (family Core.^. Core._Default)
       sort
       subset

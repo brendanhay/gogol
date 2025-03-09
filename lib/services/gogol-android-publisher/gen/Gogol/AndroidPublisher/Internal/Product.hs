@@ -1959,11 +1959,11 @@ instance Core.ToJSON AssetSliceSet where
 --
 -- /See:/ 'newAutoRenewingBasePlanType' smart constructor.
 data AutoRenewingBasePlanType = AutoRenewingBasePlanType
-  { -- | Optional. Account hold period of the subscription, specified in ISO 8601 format. Acceptable values must be in DAYS and in the range P0D (zero days) to P30D (30 days). If not specified, the default value is P30D (30 days).
+  { -- | Optional. Account hold period of the subscription, specified in ISO 8601 format. Acceptable values must be in days and between P0D and P60D. If not specified, the default value is P30D. The sum of gracePeriodDuration and accountHoldDuration must be between P30D and P60D days, inclusive.
     accountHoldDuration :: (Core.Maybe Core.Text),
     -- | Required. Immutable. Subscription period, specified in ISO 8601 format. For a list of acceptable billing periods, refer to the help center. The duration is immutable after the base plan is created.
     billingPeriodDuration :: (Core.Maybe Core.Text),
-    -- | Grace period of the subscription, specified in ISO 8601 format. Acceptable values are P0D (zero days), P3D (3 days), P7D (7 days), P14D (14 days), and P30D (30 days). If not specified, a default value will be used based on the recurring period duration.
+    -- | Grace period of the subscription, specified in ISO 8601 format. Acceptable values must be in days and between P0D and the lesser of 30D and base plan billing period. If not specified, a default value will be used based on the billing period. The sum of gracePeriodDuration and accountHoldDuration must be between P30D and P60D days, inclusive.
     gracePeriodDuration :: (Core.Maybe Core.Text),
     -- | Whether the renewing base plan is backward compatible. The backward compatible base plan is returned by the Google Play Billing Library deprecated method querySkuDetailsAsync(). Only one renewing base plan can be marked as legacy compatible for a given subscription.
     legacyCompatible :: (Core.Maybe Core.Bool),
@@ -2029,7 +2029,9 @@ data AutoRenewingPlan = AutoRenewingPlan
     -- | The installment plan commitment and state related info for the auto renewing plan.
     installmentDetails :: (Core.Maybe InstallmentPlan),
     -- | The information of the last price change for the item since subscription signup.
-    priceChangeDetails :: (Core.Maybe SubscriptionItemPriceChangeDetails)
+    priceChangeDetails :: (Core.Maybe SubscriptionItemPriceChangeDetails),
+    -- | The current recurring price of the auto renewing plan.
+    recurringPrice :: (Core.Maybe Money)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2040,7 +2042,8 @@ newAutoRenewingPlan =
   AutoRenewingPlan
     { autoRenewEnabled = Core.Nothing,
       installmentDetails = Core.Nothing,
-      priceChangeDetails = Core.Nothing
+      priceChangeDetails = Core.Nothing,
+      recurringPrice = Core.Nothing
     }
 
 instance Core.FromJSON AutoRenewingPlan where
@@ -2052,6 +2055,7 @@ instance Core.FromJSON AutoRenewingPlan where
             Core.<$> (o Core..:? "autoRenewEnabled")
             Core.<*> (o Core..:? "installmentDetails")
             Core.<*> (o Core..:? "priceChangeDetails")
+            Core.<*> (o Core..:? "recurringPrice")
       )
 
 instance Core.ToJSON AutoRenewingPlan where
@@ -2060,7 +2064,8 @@ instance Core.ToJSON AutoRenewingPlan where
       ( Core.catMaybes
           [ ("autoRenewEnabled" Core..=) Core.<$> autoRenewEnabled,
             ("installmentDetails" Core..=) Core.<$> installmentDetails,
-            ("priceChangeDetails" Core..=) Core.<$> priceChangeDetails
+            ("priceChangeDetails" Core..=) Core.<$> priceChangeDetails,
+            ("recurringPrice" Core..=) Core.<$> recurringPrice
           ]
       )
 
@@ -2809,7 +2814,9 @@ data ConvertRegionPricesResponse = ConvertRegionPricesResponse
   { -- | Converted other regions prices in USD and EUR, to use for countries where Play doesn\'t support a country\'s local currency.
     convertedOtherRegionsPrice :: (Core.Maybe ConvertedOtherRegionsPrice),
     -- | Map from region code to converted region price.
-    convertedRegionPrices :: (Core.Maybe ConvertRegionPricesResponse_ConvertedRegionPrices)
+    convertedRegionPrices :: (Core.Maybe ConvertRegionPricesResponse_ConvertedRegionPrices),
+    -- | The region version at which the prices were generated.
+    regionVersion :: (Core.Maybe RegionsVersion)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2820,7 +2827,8 @@ newConvertRegionPricesResponse =
   ConvertRegionPricesResponse
     { convertedOtherRegionsPrice =
         Core.Nothing,
-      convertedRegionPrices = Core.Nothing
+      convertedRegionPrices = Core.Nothing,
+      regionVersion = Core.Nothing
     }
 
 instance Core.FromJSON ConvertRegionPricesResponse where
@@ -2831,6 +2839,7 @@ instance Core.FromJSON ConvertRegionPricesResponse where
           ConvertRegionPricesResponse
             Core.<$> (o Core..:? "convertedOtherRegionsPrice")
             Core.<*> (o Core..:? "convertedRegionPrices")
+            Core.<*> (o Core..:? "regionVersion")
       )
 
 instance Core.ToJSON ConvertRegionPricesResponse where
@@ -2839,7 +2848,8 @@ instance Core.ToJSON ConvertRegionPricesResponse where
       ( Core.catMaybes
           [ ("convertedOtherRegionsPrice" Core..=)
               Core.<$> convertedOtherRegionsPrice,
-            ("convertedRegionPrices" Core..=) Core.<$> convertedRegionPrices
+            ("convertedRegionPrices" Core..=) Core.<$> convertedRegionPrices,
+            ("regionVersion" Core..=) Core.<$> regionVersion
           ]
       )
 
@@ -5269,13 +5279,13 @@ instance Core.ToJSON InstallmentPlan where
 --
 -- /See:/ 'newInstallmentsBasePlanType' smart constructor.
 data InstallmentsBasePlanType = InstallmentsBasePlanType
-  { -- | Optional. Account hold period of the subscription, specified exclusively in days and in ISO 8601 format. Acceptable values are P0D (zero days) to P30D (30days). If not specified, the default value is P30D (30 days).
+  { -- | Optional. Account hold period of the subscription, specified in ISO 8601 format. Acceptable values must be in days and between P0D and P60D. If not specified, the default value is P30D. The sum of gracePeriodDuration and accountHoldDuration must be between P30D and P60D days, inclusive.
     accountHoldDuration :: (Core.Maybe Core.Text),
     -- | Required. Immutable. Subscription period, specified in ISO 8601 format. For a list of acceptable billing periods, refer to the help center. The duration is immutable after the base plan is created.
     billingPeriodDuration :: (Core.Maybe Core.Text),
     -- | Required. Immutable. The number of payments the user is committed to. It is immutable after the base plan is created.
     committedPaymentsCount :: (Core.Maybe Core.Int32),
-    -- | Grace period of the subscription, specified in ISO 8601 format. Acceptable values are P0D (zero days), P3D (3 days), P7D (7 days), P14D (14 days), and P30D (30 days). If not specified, a default value will be used based on the recurring period duration.
+    -- | Grace period of the subscription, specified in ISO 8601 format. Acceptable values must be in days and between P0D and the lesser of 30D and base plan billing period. If not specified, a default value will be used based on the billing period. The sum of gracePeriodDuration and accountHoldDuration must be between P30D and P60D days, inclusive.
     gracePeriodDuration :: (Core.Maybe Core.Text),
     -- | The proration mode for the base plan determines what happens when a user switches to this plan from another base plan. If unspecified, defaults to CHARGE/ON/NEXT/BILLING/DATE.
     prorationMode :: (Core.Maybe InstallmentsBasePlanType_ProrationMode),
@@ -6213,7 +6223,7 @@ instance Core.ToJSON OfferDetails where
           ]
       )
 
--- | Represents a custom tag specified for base plans and subscription offers.
+-- | Represents a custom tag specified for a product offer.
 --
 -- /See:/ 'newOfferTag' smart constructor.
 newtype OfferTag = OfferTag

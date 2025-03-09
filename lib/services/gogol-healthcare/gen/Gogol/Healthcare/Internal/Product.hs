@@ -99,6 +99,10 @@ module Gogol.Healthcare.Internal.Product
     BlobStorageSettings (..),
     newBlobStorageSettings,
 
+    -- * BulkExportGcsDestination
+    BulkExportGcsDestination (..),
+    newBulkExportGcsDestination,
+
     -- * CancelOperationRequest
     CancelOperationRequest (..),
     newCancelOperationRequest,
@@ -1587,6 +1591,32 @@ instance Core.ToJSON BlobStorageSettings where
           [("blobStorageClass" Core..=) Core.<$> blobStorageClass]
       )
 
+-- | The configuration for exporting to Cloud Storage using the bulk export API.
+--
+-- /See:/ 'newBulkExportGcsDestination' smart constructor.
+newtype BulkExportGcsDestination = BulkExportGcsDestination
+  { -- | Optional. URI for a Cloud Storage directory where the server writes result files, in the format @gs:\/\/{bucket-id}\/{path\/to\/destination\/dir}@. If there is no trailing slash, the service appends one when composing the object path. The user is responsible for creating the Cloud Storage bucket referenced in @uri_prefix@.
+    uriPrefix :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BulkExportGcsDestination' with the minimum fields required to make a request.
+newBulkExportGcsDestination ::
+  BulkExportGcsDestination
+newBulkExportGcsDestination =
+  BulkExportGcsDestination {uriPrefix = Core.Nothing}
+
+instance Core.FromJSON BulkExportGcsDestination where
+  parseJSON =
+    Core.withObject
+      "BulkExportGcsDestination"
+      (\o -> BulkExportGcsDestination Core.<$> (o Core..:? "uriPrefix"))
+
+instance Core.ToJSON BulkExportGcsDestination where
+  toJSON BulkExportGcsDestination {..} =
+    Core.object
+      (Core.catMaybes [("uriPrefix" Core..=) Core.<$> uriPrefix])
+
 -- | The request message for Operations.CancelOperation.
 --
 -- /See:/ 'newCancelOperationRequest' smart constructor.
@@ -1893,9 +1923,9 @@ instance Core.ToJSON Consent_Metadata where
 data ConsentAccessorScope = ConsentAccessorScope
   { -- | An individual, group, or access role that identifies the accessor or a characteristic of the accessor. This can be a resource ID (such as @{resourceType}\/{id}@) or an external URI. This value must be present.
     actor :: (Core.Maybe Core.Text),
-    -- | An abstract identifier that describes the environment or conditions under which the accessor is acting. Can be \"*\" if it applies to all environments.
+    -- | An abstract identifier that describes the environment or conditions under which the accessor is acting. If it\'s not specified, it applies to all environments.
     environment :: (Core.Maybe Core.Text),
-    -- | The intent of data use. Can be \"*\" if it applies to all purposes.
+    -- | The intent of data use. If it\'s not specified, it applies to all purposes.
     purpose :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2342,6 +2372,10 @@ data Dataset = Dataset
     encryptionSpec :: (Core.Maybe EncryptionSpec),
     -- | Identifier. Resource name of the dataset, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}@.
     name :: (Core.Maybe Core.Text),
+    -- | Output only. For future use.
+    satisfiesPzi :: (Core.Maybe Core.Bool),
+    -- | Output only. For future use.
+    satisfiesPzs :: (Core.Maybe Core.Bool),
     -- | Optional. The default timezone used by this dataset. Must be a either a valid IANA time zone name such as \"America\/New_York\" or empty, which defaults to UTC. This is used for parsing times in resources, such as HL7 messages, where no explicit timezone is specified.
     timeZone :: (Core.Maybe Core.Text)
   }
@@ -2354,6 +2388,8 @@ newDataset =
   Dataset
     { encryptionSpec = Core.Nothing,
       name = Core.Nothing,
+      satisfiesPzi = Core.Nothing,
+      satisfiesPzs = Core.Nothing,
       timeZone = Core.Nothing
     }
 
@@ -2365,6 +2401,8 @@ instance Core.FromJSON Dataset where
           Dataset
             Core.<$> (o Core..:? "encryptionSpec")
             Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "satisfiesPzi")
+            Core.<*> (o Core..:? "satisfiesPzs")
             Core.<*> (o Core..:? "timeZone")
       )
 
@@ -2374,6 +2412,8 @@ instance Core.ToJSON Dataset where
       ( Core.catMaybes
           [ ("encryptionSpec" Core..=) Core.<$> encryptionSpec,
             ("name" Core..=) Core.<$> name,
+            ("satisfiesPzi" Core..=) Core.<$> satisfiesPzi,
+            ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
             ("timeZone" Core..=) Core.<$> timeZone
           ]
       )
@@ -3829,7 +3869,9 @@ instance Core.ToJSON FhirNotificationConfig where
 --
 -- /See:/ 'newFhirStore' smart constructor.
 data FhirStore = FhirStore
-  { -- | Optional. Enable parsing of references within complex FHIR data types such as Extensions. If this value is set to ENABLED, then features like referential integrity and Bundle reference rewriting apply to all references. If this flag has not been specified the behavior of the FHIR store will not change, references in complex data types will not be parsed. New stores will have this value set to ENABLED after a notification period. Warning: turning on this flag causes processing existing resources to fail if they contain references to non-existent resources.
+  { -- | Optional. FHIR bulk export exports resources to the specified Cloud Storage destination. A Cloud Storage destination is a URI for a Cloud Storage directory where result files will be written. Only used in the spec-defined bulk $export methods. The Cloud Healthcare Service Agent requires the @roles\/storage.objectAdmin@ Cloud IAM role on the destination.
+    bulkExportGcsDestination :: (Core.Maybe BulkExportGcsDestination),
+    -- | Optional. Enable parsing of references within complex FHIR data types such as Extensions. If this value is set to ENABLED, then features like referential integrity and Bundle reference rewriting apply to all references. If this flag has not been specified the behavior of the FHIR store will not change, references in complex data types will not be parsed. New stores will have this value set to ENABLED after a notification period. Warning: turning on this flag causes processing existing resources to fail if they contain references to non-existent resources.
     complexDataTypeReferenceParsing :: (Core.Maybe FhirStore_ComplexDataTypeReferenceParsing),
     -- | Optional. Specifies whether this store has consent enforcement. Not available for DSTU2 FHIR version due to absence of Consent resources.
     consentConfig :: (Core.Maybe ConsentConfig),
@@ -3863,7 +3905,8 @@ newFhirStore ::
   FhirStore
 newFhirStore =
   FhirStore
-    { complexDataTypeReferenceParsing = Core.Nothing,
+    { bulkExportGcsDestination = Core.Nothing,
+      complexDataTypeReferenceParsing = Core.Nothing,
       consentConfig = Core.Nothing,
       defaultSearchHandlingStrict = Core.Nothing,
       disableReferentialIntegrity = Core.Nothing,
@@ -3884,7 +3927,8 @@ instance Core.FromJSON FhirStore where
       "FhirStore"
       ( \o ->
           FhirStore
-            Core.<$> (o Core..:? "complexDataTypeReferenceParsing")
+            Core.<$> (o Core..:? "bulkExportGcsDestination")
+            Core.<*> (o Core..:? "complexDataTypeReferenceParsing")
             Core.<*> (o Core..:? "consentConfig")
             Core.<*> (o Core..:? "defaultSearchHandlingStrict")
             Core.<*> (o Core..:? "disableReferentialIntegrity")
@@ -3903,7 +3947,9 @@ instance Core.ToJSON FhirStore where
   toJSON FhirStore {..} =
     Core.object
       ( Core.catMaybes
-          [ ("complexDataTypeReferenceParsing" Core..=)
+          [ ("bulkExportGcsDestination" Core..=)
+              Core.<$> bulkExportGcsDestination,
+            ("complexDataTypeReferenceParsing" Core..=)
               Core.<$> complexDataTypeReferenceParsing,
             ("consentConfig" Core..=) Core.<$> consentConfig,
             ("defaultSearchHandlingStrict" Core..=)
@@ -7439,7 +7485,7 @@ instance Core.ToJSON SchematizedData where
 --
 -- /See:/ 'newSearchResourcesRequest' smart constructor.
 newtype SearchResourcesRequest = SearchResourcesRequest
-  { -- | Required. The FHIR resource type to search, such as Patient or Observation. For a complete list, see the FHIR Resource Index (<http://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html DSTU2>, <http://hl7.org/implement/standards/fhir/STU3/resourcelist.html STU3>, <http://hl7.org/implement/standards/fhir/R4/resourcelist.html R4>).
+  { -- | Optional. The FHIR resource type to search, such as Patient or Observation. For a complete list, see the FHIR Resource Index (<http://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html DSTU2>, <http://hl7.org/implement/standards/fhir/STU3/resourcelist.html STU3>, <http://hl7.org/implement/standards/fhir/R4/resourcelist.html R4>).
     resourceType :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

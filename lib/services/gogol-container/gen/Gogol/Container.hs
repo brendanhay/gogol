@@ -400,6 +400,13 @@ module Gogol.Container
     AuthenticatorGroupsConfig (..),
     newAuthenticatorGroupsConfig,
 
+    -- ** AutoMonitoringConfig
+    AutoMonitoringConfig (..),
+    newAutoMonitoringConfig,
+
+    -- ** AutoMonitoringConfig_Scope
+    AutoMonitoringConfig_Scope (..),
+
     -- ** AutoUpgradeOptions
     AutoUpgradeOptions (..),
     newAutoUpgradeOptions,
@@ -414,6 +421,10 @@ module Gogol.Container
 
     -- ** AutopilotCompatibilityIssue_IncompatibilityType
     AutopilotCompatibilityIssue_IncompatibilityType (..),
+
+    -- ** AutopilotConfig
+    AutopilotConfig (..),
+    newAutopilotConfig,
 
     -- ** AutoprovisioningNodePoolDefaults
     AutoprovisioningNodePoolDefaults (..),
@@ -1298,6 +1309,9 @@ module Gogol.Container
     -- ** UpgradeInfoEvent
     UpgradeInfoEvent (..),
     newUpgradeInfoEvent,
+
+    -- ** UpgradeInfoEvent_EventType
+    UpgradeInfoEvent_EventType (..),
 
     -- ** UpgradeInfoEvent_ResourceType
     UpgradeInfoEvent_ResourceType (..),

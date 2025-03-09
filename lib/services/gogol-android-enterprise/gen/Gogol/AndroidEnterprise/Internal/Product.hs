@@ -107,10 +107,6 @@ module Gogol.AndroidEnterprise.Internal.Product
     ConfigurationVariables (..),
     newConfigurationVariables,
 
-    -- * CreateEnrollmentTokenResponse
-    CreateEnrollmentTokenResponse (..),
-    newCreateEnrollmentTokenResponse,
-
     -- * Device
     Device (..),
     newDevice,
@@ -147,6 +143,10 @@ module Gogol.AndroidEnterprise.Internal.Product
     EnterpriseAuthenticationAppLinkConfig (..),
     newEnterpriseAuthenticationAppLinkConfig,
 
+    -- * EnterpriseUpgradeEvent
+    EnterpriseUpgradeEvent (..),
+    newEnterpriseUpgradeEvent,
+
     -- * EnterprisesListResponse
     EnterprisesListResponse (..),
     newEnterprisesListResponse,
@@ -162,6 +162,10 @@ module Gogol.AndroidEnterprise.Internal.Product
     -- * EntitlementsListResponse
     EntitlementsListResponse (..),
     newEntitlementsListResponse,
+
+    -- * GenerateEnterpriseUpgradeUrlResponse
+    GenerateEnterpriseUpgradeUrlResponse (..),
+    newGenerateEnterpriseUpgradeUrlResponse,
 
     -- * GoogleAuthenticationSettings
     GoogleAuthenticationSettings (..),
@@ -1182,45 +1186,6 @@ instance Core.ToJSON ConfigurationVariables where
           ]
       )
 
--- | Response message for create enrollment token.
---
--- /See:/ 'newCreateEnrollmentTokenResponse' smart constructor.
-data CreateEnrollmentTokenResponse = CreateEnrollmentTokenResponse
-  { -- | Deprecated: Use token instead. This field will be removed in the future.
-    enrollmentToken :: (Core.Maybe Core.Text),
-    -- | [Required] The created enrollment token.
-    token :: (Core.Maybe EnrollmentToken)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'CreateEnrollmentTokenResponse' with the minimum fields required to make a request.
-newCreateEnrollmentTokenResponse ::
-  CreateEnrollmentTokenResponse
-newCreateEnrollmentTokenResponse =
-  CreateEnrollmentTokenResponse
-    { enrollmentToken = Core.Nothing,
-      token = Core.Nothing
-    }
-
-instance Core.FromJSON CreateEnrollmentTokenResponse where
-  parseJSON =
-    Core.withObject
-      "CreateEnrollmentTokenResponse"
-      ( \o ->
-          CreateEnrollmentTokenResponse
-            Core.<$> (o Core..:? "enrollmentToken")
-            Core.<*> (o Core..:? "token")
-      )
-
-instance Core.ToJSON CreateEnrollmentTokenResponse where
-  toJSON CreateEnrollmentTokenResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("enrollmentToken" Core..=) Core.<$> enrollmentToken,
-            ("token" Core..=) Core.<$> token
-          ]
-      )
-
 -- | A Devices resource represents a mobile device managed by the EMM and belonging to a specific enterprise user.
 --
 -- /See:/ 'newDevice' smart constructor.
@@ -1491,10 +1456,14 @@ instance Core.ToJSON EnrollmentToken where
 data Enterprise = Enterprise
   { -- | Admins of the enterprise. This is only supported for enterprises created via the EMM-initiated flow.
     administrator :: (Core.Maybe [Administrator]),
+    -- | The type of the enterprise.
+    enterpriseType :: (Core.Maybe Enterprise_EnterpriseType),
     -- | Output only. Settings for Google-provided user authentication.
     googleAuthenticationSettings :: (Core.Maybe GoogleAuthenticationSettings),
     -- | The unique ID for the enterprise.
     id :: (Core.Maybe Core.Text),
+    -- | The type of managed Google domain
+    managedGoogleDomainType :: (Core.Maybe Enterprise_ManagedGoogleDomainType),
     -- | The name of the enterprise, for example, \"Example, Inc\".
     name :: (Core.Maybe Core.Text),
     -- | The enterprise\'s primary domain, such as \"example.com\".
@@ -1508,8 +1477,10 @@ newEnterprise ::
 newEnterprise =
   Enterprise
     { administrator = Core.Nothing,
+      enterpriseType = Core.Nothing,
       googleAuthenticationSettings = Core.Nothing,
       id = Core.Nothing,
+      managedGoogleDomainType = Core.Nothing,
       name = Core.Nothing,
       primaryDomain = Core.Nothing
     }
@@ -1521,8 +1492,10 @@ instance Core.FromJSON Enterprise where
       ( \o ->
           Enterprise
             Core.<$> (o Core..:? "administrator")
+            Core.<*> (o Core..:? "enterpriseType")
             Core.<*> (o Core..:? "googleAuthenticationSettings")
             Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "managedGoogleDomainType")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "primaryDomain")
       )
@@ -1532,9 +1505,12 @@ instance Core.ToJSON Enterprise where
     Core.object
       ( Core.catMaybes
           [ ("administrator" Core..=) Core.<$> administrator,
+            ("enterpriseType" Core..=) Core.<$> enterpriseType,
             ("googleAuthenticationSettings" Core..=)
               Core.<$> googleAuthenticationSettings,
             ("id" Core..=) Core.<$> id,
+            ("managedGoogleDomainType" Core..=)
+              Core.<$> managedGoogleDomainType,
             ("name" Core..=) Core.<$> name,
             ("primaryDomain" Core..=) Core.<$> primaryDomain
           ]
@@ -1592,6 +1568,34 @@ instance Core.FromJSON EnterpriseAuthenticationAppLinkConfig where
 instance Core.ToJSON EnterpriseAuthenticationAppLinkConfig where
   toJSON EnterpriseAuthenticationAppLinkConfig {..} =
     Core.object (Core.catMaybes [("uri" Core..=) Core.<$> uri])
+
+-- | An event generated when an enterprise is upgraded. __Note:__ This feature is not generally available.
+--
+-- /See:/ 'newEnterpriseUpgradeEvent' smart constructor.
+newtype EnterpriseUpgradeEvent = EnterpriseUpgradeEvent
+  { -- | The upgrade state.
+    upgradeState :: (Core.Maybe EnterpriseUpgradeEvent_UpgradeState)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'EnterpriseUpgradeEvent' with the minimum fields required to make a request.
+newEnterpriseUpgradeEvent ::
+  EnterpriseUpgradeEvent
+newEnterpriseUpgradeEvent =
+  EnterpriseUpgradeEvent {upgradeState = Core.Nothing}
+
+instance Core.FromJSON EnterpriseUpgradeEvent where
+  parseJSON =
+    Core.withObject
+      "EnterpriseUpgradeEvent"
+      ( \o ->
+          EnterpriseUpgradeEvent Core.<$> (o Core..:? "upgradeState")
+      )
+
+instance Core.ToJSON EnterpriseUpgradeEvent where
+  toJSON EnterpriseUpgradeEvent {..} =
+    Core.object
+      (Core.catMaybes [("upgradeState" Core..=) Core.<$> upgradeState])
 
 --
 -- /See:/ 'newEnterprisesListResponse' smart constructor.
@@ -1719,6 +1723,33 @@ instance Core.ToJSON EntitlementsListResponse where
   toJSON EntitlementsListResponse {..} =
     Core.object
       (Core.catMaybes [("entitlement" Core..=) Core.<$> entitlement])
+
+-- | Response message for generating a URL to upgrade an existing managed Google Play Accounts enterprise to a managed Google domain. __Note:__ This feature is not generally available.
+--
+-- /See:/ 'newGenerateEnterpriseUpgradeUrlResponse' smart constructor.
+newtype GenerateEnterpriseUpgradeUrlResponse = GenerateEnterpriseUpgradeUrlResponse
+  { -- | A URL for an enterprise admin to upgrade their enterprise. The page can\'t be rendered in an iframe.
+    url :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GenerateEnterpriseUpgradeUrlResponse' with the minimum fields required to make a request.
+newGenerateEnterpriseUpgradeUrlResponse ::
+  GenerateEnterpriseUpgradeUrlResponse
+newGenerateEnterpriseUpgradeUrlResponse =
+  GenerateEnterpriseUpgradeUrlResponse {url = Core.Nothing}
+
+instance Core.FromJSON GenerateEnterpriseUpgradeUrlResponse where
+  parseJSON =
+    Core.withObject
+      "GenerateEnterpriseUpgradeUrlResponse"
+      ( \o ->
+          GenerateEnterpriseUpgradeUrlResponse Core.<$> (o Core..:? "url")
+      )
+
+instance Core.ToJSON GenerateEnterpriseUpgradeUrlResponse where
+  toJSON GenerateEnterpriseUpgradeUrlResponse {..} =
+    Core.object (Core.catMaybes [("url" Core..=) Core.<$> url])
 
 -- | Contains settings for Google-provided user authentication.
 --
@@ -2542,6 +2573,8 @@ data Notification = Notification
     deviceReportUpdateEvent :: (Core.Maybe DeviceReportUpdateEvent),
     -- | The ID of the enterprise for which the notification is sent. This will always be present.
     enterpriseId :: (Core.Maybe Core.Text),
+    -- | Notifications about enterprise upgrade. __Note:__ This feature is not generally available.
+    enterpriseUpgradeEvent :: (Core.Maybe EnterpriseUpgradeEvent),
     -- | Notifications about an app installation failure.
     installFailureEvent :: (Core.Maybe InstallFailureEvent),
     -- | Notifications about new devices.
@@ -2568,6 +2601,7 @@ newNotification =
       appUpdateEvent = Core.Nothing,
       deviceReportUpdateEvent = Core.Nothing,
       enterpriseId = Core.Nothing,
+      enterpriseUpgradeEvent = Core.Nothing,
       installFailureEvent = Core.Nothing,
       newDeviceEvent' = Core.Nothing,
       newPermissionsEvent' = Core.Nothing,
@@ -2587,6 +2621,7 @@ instance Core.FromJSON Notification where
             Core.<*> (o Core..:? "appUpdateEvent")
             Core.<*> (o Core..:? "deviceReportUpdateEvent")
             Core.<*> (o Core..:? "enterpriseId")
+            Core.<*> (o Core..:? "enterpriseUpgradeEvent")
             Core.<*> (o Core..:? "installFailureEvent")
             Core.<*> (o Core..:? "newDeviceEvent")
             Core.<*> (o Core..:? "newPermissionsEvent")
@@ -2606,6 +2641,7 @@ instance Core.ToJSON Notification where
             ("deviceReportUpdateEvent" Core..=)
               Core.<$> deviceReportUpdateEvent,
             ("enterpriseId" Core..=) Core.<$> enterpriseId,
+            ("enterpriseUpgradeEvent" Core..=) Core.<$> enterpriseUpgradeEvent,
             ("installFailureEvent" Core..=) Core.<$> installFailureEvent,
             ("newDeviceEvent" Core..=) Core.<$> newDeviceEvent',
             ("newPermissionsEvent" Core..=) Core.<$> newPermissionsEvent',

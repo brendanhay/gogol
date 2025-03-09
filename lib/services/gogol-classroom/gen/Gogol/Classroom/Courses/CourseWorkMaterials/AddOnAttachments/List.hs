@@ -119,7 +119,7 @@ instance
       ListAddOnAttachmentsResponse
   type
     Scopes ClassroomCoursesCourseWorkMaterialsAddOnAttachmentsList =
-      '[]
+      '[Classroom'Addons'Student, Classroom'Addons'Teacher]
   requestClient
     ClassroomCoursesCourseWorkMaterialsAddOnAttachmentsList {..} =
       go

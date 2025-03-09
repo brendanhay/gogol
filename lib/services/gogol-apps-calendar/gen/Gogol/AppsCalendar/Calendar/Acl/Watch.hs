@@ -94,7 +94,9 @@ newCalendarAclWatch calendarId payload =
 
 instance Core.GoogleRequest CalendarAclWatch where
   type Rs CalendarAclWatch = Channel
-  type Scopes CalendarAclWatch = '[Calendar'FullControl]
+  type
+    Scopes CalendarAclWatch =
+      '[Calendar'FullControl, Calendar'Acls, Calendar'Acls'Readonly]
   requestClient CalendarAclWatch {..} =
     go
       calendarId

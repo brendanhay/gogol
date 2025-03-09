@@ -47,6 +47,7 @@ module Gogol.Vault.Internal.Sum
         CalendarExportOptions_ExportFormat_Mbox,
         CalendarExportOptions_ExportFormat_Pst,
         CalendarExportOptions_ExportFormat_Ics,
+        CalendarExportOptions_ExportFormat_Xml,
         ..
       ),
 
@@ -95,12 +96,23 @@ module Gogol.Vault.Internal.Sum
         ..
       ),
 
+    -- * GeminiExportOptions_ExportFormat
+    GeminiExportOptions_ExportFormat
+      ( GeminiExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED,
+        GeminiExportOptions_ExportFormat_Mbox,
+        GeminiExportOptions_ExportFormat_Pst,
+        GeminiExportOptions_ExportFormat_Ics,
+        GeminiExportOptions_ExportFormat_Xml,
+        ..
+      ),
+
     -- * GroupsExportOptions_ExportFormat
     GroupsExportOptions_ExportFormat
       ( GroupsExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED,
         GroupsExportOptions_ExportFormat_Mbox,
         GroupsExportOptions_ExportFormat_Pst,
         GroupsExportOptions_ExportFormat_Ics,
+        GroupsExportOptions_ExportFormat_Xml,
         ..
       ),
 
@@ -110,6 +122,7 @@ module Gogol.Vault.Internal.Sum
         HangoutsChatExportOptions_ExportFormat_Mbox,
         HangoutsChatExportOptions_ExportFormat_Pst,
         HangoutsChatExportOptions_ExportFormat_Ics,
+        HangoutsChatExportOptions_ExportFormat_Xml,
         ..
       ),
 
@@ -131,6 +144,7 @@ module Gogol.Vault.Internal.Sum
         Hold_Corpus_HANGOUTSCHAT,
         Hold_Corpus_Voice,
         Hold_Corpus_Calendar,
+        Hold_Corpus_Gemini,
         ..
       ),
 
@@ -140,6 +154,7 @@ module Gogol.Vault.Internal.Sum
         MailExportOptions_ExportFormat_Mbox,
         MailExportOptions_ExportFormat_Pst,
         MailExportOptions_ExportFormat_Ics,
+        MailExportOptions_ExportFormat_Xml,
         ..
       ),
 
@@ -187,6 +202,7 @@ module Gogol.Vault.Internal.Sum
         Query_Corpus_HANGOUTSCHAT,
         Query_Corpus_Voice,
         Query_Corpus_Calendar,
+        Query_Corpus_Gemini,
         ..
       ),
 
@@ -209,6 +225,7 @@ module Gogol.Vault.Internal.Sum
         Query_Method_Room,
         Query_Method_SITESURL,
         Query_Method_SHAREDDRIVE,
+        Query_Method_DRIVEDOCUMENT,
         ..
       ),
 
@@ -222,6 +239,7 @@ module Gogol.Vault.Internal.Sum
         Query_SearchMethod_Room,
         Query_SearchMethod_SITESURL,
         Query_SearchMethod_SHAREDDRIVE,
+        Query_SearchMethod_DRIVEDOCUMENT,
         ..
       ),
 
@@ -231,6 +249,7 @@ module Gogol.Vault.Internal.Sum
         VoiceExportOptions_ExportFormat_Mbox,
         VoiceExportOptions_ExportFormat_Pst,
         VoiceExportOptions_ExportFormat_Ics,
+        VoiceExportOptions_ExportFormat_Xml,
         ..
       ),
 
@@ -391,11 +410,16 @@ pattern CalendarExportOptions_ExportFormat_Pst = CalendarExportOptions_ExportFor
 pattern CalendarExportOptions_ExportFormat_Ics :: CalendarExportOptions_ExportFormat
 pattern CalendarExportOptions_ExportFormat_Ics = CalendarExportOptions_ExportFormat "ICS"
 
+-- | Export as XML. Only available for Gemini.
+pattern CalendarExportOptions_ExportFormat_Xml :: CalendarExportOptions_ExportFormat
+pattern CalendarExportOptions_ExportFormat_Xml = CalendarExportOptions_ExportFormat "XML"
+
 {-# COMPLETE
   CalendarExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED,
   CalendarExportOptions_ExportFormat_Mbox,
   CalendarExportOptions_ExportFormat_Pst,
   CalendarExportOptions_ExportFormat_Ics,
+  CalendarExportOptions_ExportFormat_Xml,
   CalendarExportOptions_ExportFormat
   #-}
 
@@ -584,6 +608,48 @@ pattern ExportOptions_Region_Europe = ExportOptions_Region "EUROPE"
   #-}
 
 -- | The file format for exported messages.
+newtype GeminiExportOptions_ExportFormat = GeminiExportOptions_ExportFormat {fromGeminiExportOptions_ExportFormat :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | No export format specified.
+pattern GeminiExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED :: GeminiExportOptions_ExportFormat
+pattern GeminiExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED = GeminiExportOptions_ExportFormat "EXPORT_FORMAT_UNSPECIFIED"
+
+-- | Export as MBOX. Only available for Gmail, Groups, Hangouts and Voice.
+pattern GeminiExportOptions_ExportFormat_Mbox :: GeminiExportOptions_ExportFormat
+pattern GeminiExportOptions_ExportFormat_Mbox = GeminiExportOptions_ExportFormat "MBOX"
+
+-- | Export as PST. Only available for Gmail, Groups, Hangouts, Voice and Calendar.
+pattern GeminiExportOptions_ExportFormat_Pst :: GeminiExportOptions_ExportFormat
+pattern GeminiExportOptions_ExportFormat_Pst = GeminiExportOptions_ExportFormat "PST"
+
+-- | Export as ICS. Only available for Calendar.
+pattern GeminiExportOptions_ExportFormat_Ics :: GeminiExportOptions_ExportFormat
+pattern GeminiExportOptions_ExportFormat_Ics = GeminiExportOptions_ExportFormat "ICS"
+
+-- | Export as XML. Only available for Gemini.
+pattern GeminiExportOptions_ExportFormat_Xml :: GeminiExportOptions_ExportFormat
+pattern GeminiExportOptions_ExportFormat_Xml = GeminiExportOptions_ExportFormat "XML"
+
+{-# COMPLETE
+  GeminiExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED,
+  GeminiExportOptions_ExportFormat_Mbox,
+  GeminiExportOptions_ExportFormat_Pst,
+  GeminiExportOptions_ExportFormat_Ics,
+  GeminiExportOptions_ExportFormat_Xml,
+  GeminiExportOptions_ExportFormat
+  #-}
+
+-- | The file format for exported messages.
 newtype GroupsExportOptions_ExportFormat = GroupsExportOptions_ExportFormat {fromGroupsExportOptions_ExportFormat :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -612,11 +678,16 @@ pattern GroupsExportOptions_ExportFormat_Pst = GroupsExportOptions_ExportFormat 
 pattern GroupsExportOptions_ExportFormat_Ics :: GroupsExportOptions_ExportFormat
 pattern GroupsExportOptions_ExportFormat_Ics = GroupsExportOptions_ExportFormat "ICS"
 
+-- | Export as XML. Only available for Gemini.
+pattern GroupsExportOptions_ExportFormat_Xml :: GroupsExportOptions_ExportFormat
+pattern GroupsExportOptions_ExportFormat_Xml = GroupsExportOptions_ExportFormat "XML"
+
 {-# COMPLETE
   GroupsExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED,
   GroupsExportOptions_ExportFormat_Mbox,
   GroupsExportOptions_ExportFormat_Pst,
   GroupsExportOptions_ExportFormat_Ics,
+  GroupsExportOptions_ExportFormat_Xml,
   GroupsExportOptions_ExportFormat
   #-}
 
@@ -649,11 +720,16 @@ pattern HangoutsChatExportOptions_ExportFormat_Pst = HangoutsChatExportOptions_E
 pattern HangoutsChatExportOptions_ExportFormat_Ics :: HangoutsChatExportOptions_ExportFormat
 pattern HangoutsChatExportOptions_ExportFormat_Ics = HangoutsChatExportOptions_ExportFormat "ICS"
 
+-- | Export as XML. Only available for Gemini.
+pattern HangoutsChatExportOptions_ExportFormat_Xml :: HangoutsChatExportOptions_ExportFormat
+pattern HangoutsChatExportOptions_ExportFormat_Xml = HangoutsChatExportOptions_ExportFormat "XML"
+
 {-# COMPLETE
   HangoutsChatExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED,
   HangoutsChatExportOptions_ExportFormat_Mbox,
   HangoutsChatExportOptions_ExportFormat_Pst,
   HangoutsChatExportOptions_ExportFormat_Ics,
+  HangoutsChatExportOptions_ExportFormat_Xml,
   HangoutsChatExportOptions_ExportFormat
   #-}
 
@@ -734,6 +810,10 @@ pattern Hold_Corpus_Voice = Hold_Corpus "VOICE"
 pattern Hold_Corpus_Calendar :: Hold_Corpus
 pattern Hold_Corpus_Calendar = Hold_Corpus "CALENDAR"
 
+-- | Gemini.
+pattern Hold_Corpus_Gemini :: Hold_Corpus
+pattern Hold_Corpus_Gemini = Hold_Corpus "GEMINI"
+
 {-# COMPLETE
   Hold_Corpus_CORPUSTYPEUNSPECIFIED,
   Hold_Corpus_Drive,
@@ -742,6 +822,7 @@ pattern Hold_Corpus_Calendar = Hold_Corpus "CALENDAR"
   Hold_Corpus_HANGOUTSCHAT,
   Hold_Corpus_Voice,
   Hold_Corpus_Calendar,
+  Hold_Corpus_Gemini,
   Hold_Corpus
   #-}
 
@@ -774,11 +855,16 @@ pattern MailExportOptions_ExportFormat_Pst = MailExportOptions_ExportFormat "PST
 pattern MailExportOptions_ExportFormat_Ics :: MailExportOptions_ExportFormat
 pattern MailExportOptions_ExportFormat_Ics = MailExportOptions_ExportFormat "ICS"
 
+-- | Export as XML. Only available for Gemini.
+pattern MailExportOptions_ExportFormat_Xml :: MailExportOptions_ExportFormat
+pattern MailExportOptions_ExportFormat_Xml = MailExportOptions_ExportFormat "XML"
+
 {-# COMPLETE
   MailExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED,
   MailExportOptions_ExportFormat_Mbox,
   MailExportOptions_ExportFormat_Pst,
   MailExportOptions_ExportFormat_Ics,
+  MailExportOptions_ExportFormat_Xml,
   MailExportOptions_ExportFormat
   #-}
 
@@ -966,6 +1052,10 @@ pattern Query_Corpus_Voice = Query_Corpus "VOICE"
 pattern Query_Corpus_Calendar :: Query_Corpus
 pattern Query_Corpus_Calendar = Query_Corpus "CALENDAR"
 
+-- | Gemini.
+pattern Query_Corpus_Gemini :: Query_Corpus
+pattern Query_Corpus_Gemini = Query_Corpus "GEMINI"
+
 {-# COMPLETE
   Query_Corpus_CORPUSTYPEUNSPECIFIED,
   Query_Corpus_Drive,
@@ -974,6 +1064,7 @@ pattern Query_Corpus_Calendar = Query_Corpus "CALENDAR"
   Query_Corpus_HANGOUTSCHAT,
   Query_Corpus_Voice,
   Query_Corpus_Calendar,
+  Query_Corpus_Gemini,
   Query_Corpus
   #-}
 
@@ -1059,6 +1150,10 @@ pattern Query_Method_SITESURL = Query_Method "SITES_URL"
 pattern Query_Method_SHAREDDRIVE :: Query_Method
 pattern Query_Method_SHAREDDRIVE = Query_Method "SHARED_DRIVE"
 
+-- | Retrieve the documents specified in DriveDocumentInfo.
+pattern Query_Method_DRIVEDOCUMENT :: Query_Method
+pattern Query_Method_DRIVEDOCUMENT = Query_Method "DRIVE_DOCUMENT"
+
 {-# COMPLETE
   Query_Method_SEARCHMETHODUNSPECIFIED,
   Query_Method_Account,
@@ -1068,6 +1163,7 @@ pattern Query_Method_SHAREDDRIVE = Query_Method "SHARED_DRIVE"
   Query_Method_Room,
   Query_Method_SITESURL,
   Query_Method_SHAREDDRIVE,
+  Query_Method_DRIVEDOCUMENT,
   Query_Method
   #-}
 
@@ -1116,6 +1212,10 @@ pattern Query_SearchMethod_SITESURL = Query_SearchMethod "SITES_URL"
 pattern Query_SearchMethod_SHAREDDRIVE :: Query_SearchMethod
 pattern Query_SearchMethod_SHAREDDRIVE = Query_SearchMethod "SHARED_DRIVE"
 
+-- | Retrieve the documents specified in DriveDocumentInfo.
+pattern Query_SearchMethod_DRIVEDOCUMENT :: Query_SearchMethod
+pattern Query_SearchMethod_DRIVEDOCUMENT = Query_SearchMethod "DRIVE_DOCUMENT"
+
 {-# COMPLETE
   Query_SearchMethod_SEARCHMETHODUNSPECIFIED,
   Query_SearchMethod_Account,
@@ -1125,6 +1225,7 @@ pattern Query_SearchMethod_SHAREDDRIVE = Query_SearchMethod "SHARED_DRIVE"
   Query_SearchMethod_Room,
   Query_SearchMethod_SITESURL,
   Query_SearchMethod_SHAREDDRIVE,
+  Query_SearchMethod_DRIVEDOCUMENT,
   Query_SearchMethod
   #-}
 
@@ -1157,11 +1258,16 @@ pattern VoiceExportOptions_ExportFormat_Pst = VoiceExportOptions_ExportFormat "P
 pattern VoiceExportOptions_ExportFormat_Ics :: VoiceExportOptions_ExportFormat
 pattern VoiceExportOptions_ExportFormat_Ics = VoiceExportOptions_ExportFormat "ICS"
 
+-- | Export as XML. Only available for Gemini.
+pattern VoiceExportOptions_ExportFormat_Xml :: VoiceExportOptions_ExportFormat
+pattern VoiceExportOptions_ExportFormat_Xml = VoiceExportOptions_ExportFormat "XML"
+
 {-# COMPLETE
   VoiceExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED,
   VoiceExportOptions_ExportFormat_Mbox,
   VoiceExportOptions_ExportFormat_Pst,
   VoiceExportOptions_ExportFormat_Ics,
+  VoiceExportOptions_ExportFormat_Xml,
   VoiceExportOptions_ExportFormat
   #-}
 

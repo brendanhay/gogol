@@ -75,6 +75,10 @@ module Gogol.BigQuery.Internal.Product
     AvroOptions (..),
     newAvroOptions,
 
+    -- * BatchDeleteRowAccessPoliciesRequest
+    BatchDeleteRowAccessPoliciesRequest (..),
+    newBatchDeleteRowAccessPoliciesRequest,
+
     -- * BiEngineReason
     BiEngineReason (..),
     newBiEngineReason,
@@ -815,6 +819,14 @@ module Gogol.BigQuery.Internal.Product
     StorageDescriptor (..),
     newStorageDescriptor,
 
+    -- * StoredColumnsUnusedReason
+    StoredColumnsUnusedReason (..),
+    newStoredColumnsUnusedReason,
+
+    -- * StoredColumnsUsage
+    StoredColumnsUsage (..),
+    newStoredColumnsUsage,
+
     -- * Streamingbuffer
     Streamingbuffer (..),
     newStreamingbuffer,
@@ -1012,7 +1024,7 @@ data AggregateClassificationMetrics = AggregateClassificationMetrics
     recall :: (Core.Maybe Core.Double),
     -- | Area Under a ROC Curve. For multiclass this is a macro-averaged metric.
     rocAuc :: (Core.Maybe Core.Double),
-    -- | Threshold at which the metrics are computed. For binary classification models this is the positive class threshold. For multi-class classfication models this is the confidence threshold.
+    -- | Threshold at which the metrics are computed. For binary classification models this is the positive class threshold. For multi-class classification models this is the confidence threshold.
     threshold :: (Core.Maybe Core.Double)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1643,6 +1655,45 @@ instance Core.ToJSON AvroOptions where
     Core.object
       ( Core.catMaybes
           [("useAvroLogicalTypes" Core..=) Core.<$> useAvroLogicalTypes]
+      )
+
+-- | Request message for the BatchDeleteRowAccessPoliciesRequest method.
+--
+-- /See:/ 'newBatchDeleteRowAccessPoliciesRequest' smart constructor.
+data BatchDeleteRowAccessPoliciesRequest = BatchDeleteRowAccessPoliciesRequest
+  { -- | If set to true, it deletes the row access policy even if it\'s the last row access policy on the table and the deletion will widen the access rather narrowing it.
+    force :: (Core.Maybe Core.Bool),
+    -- | Required. Policy IDs of the row access policies.
+    policyIds :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BatchDeleteRowAccessPoliciesRequest' with the minimum fields required to make a request.
+newBatchDeleteRowAccessPoliciesRequest ::
+  BatchDeleteRowAccessPoliciesRequest
+newBatchDeleteRowAccessPoliciesRequest =
+  BatchDeleteRowAccessPoliciesRequest
+    { force = Core.Nothing,
+      policyIds = Core.Nothing
+    }
+
+instance Core.FromJSON BatchDeleteRowAccessPoliciesRequest where
+  parseJSON =
+    Core.withObject
+      "BatchDeleteRowAccessPoliciesRequest"
+      ( \o ->
+          BatchDeleteRowAccessPoliciesRequest
+            Core.<$> (o Core..:? "force")
+            Core.<*> (o Core..:? "policyIds")
+      )
+
+instance Core.ToJSON BatchDeleteRowAccessPoliciesRequest where
+  toJSON BatchDeleteRowAccessPoliciesRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("force" Core..=) Core.<$> force,
+            ("policyIds" Core..=) Core.<$> policyIds
+          ]
       )
 
 -- | Reason why BI Engine didn\'t accelerate the query (or sub-query).
@@ -2525,7 +2576,7 @@ instance Core.ToJSON ClusterInfo where
 --
 -- /See:/ 'newClustering' smart constructor.
 newtype Clustering = Clustering
-  { -- | One or more fields on which data should be clustered. Only top-level, non-repeated, simple-type fields are supported. The ordering of the clustering fields should be prioritized from most to least important for filtering purposes. Additional information on limitations can be found here: https:\/\/cloud.google.com\/bigquery\/docs\/creating-clustered-tables#limitations
+  { -- | One or more fields on which data should be clustered. Only top-level, non-repeated, simple-type fields are supported. The ordering of the clustering fields should be prioritized from most to least important for filtering purposes. For additional information, see <https://cloud.google.com/bigquery/docs/clustered-tables#limitations Introduction to clustered tables>.
     fields :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4332,13 +4383,13 @@ instance Core.ToJSON Expr where
           ]
       )
 
--- | Options defining open source compatible datasets living in the BigQuery catalog. Contains metadata of open source database, schema or namespace represented by the current dataset.
+-- | Options defining open source compatible datasets living in the BigQuery catalog. Contains metadata of open source database, schema, or namespace represented by the current dataset.
 --
 -- /See:/ 'newExternalCatalogDatasetOptions' smart constructor.
 data ExternalCatalogDatasetOptions = ExternalCatalogDatasetOptions
   { -- | Optional. The storage location URI for all tables in the dataset. Equivalent to hive metastore\'s database locationUri. Maximum length of 1024 characters.
     defaultStorageLocationUri :: (Core.Maybe Core.Text),
-    -- | Optional. A map of key value pairs defining the parameters and properties of the open source schema. Maximum size of 2Mib.
+    -- | Optional. A map of key value pairs defining the parameters and properties of the open source schema. Maximum size of 2MiB.
     parameters :: (Core.Maybe ExternalCatalogDatasetOptions_Parameters)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4373,7 +4424,7 @@ instance Core.ToJSON ExternalCatalogDatasetOptions where
           ]
       )
 
--- | Optional. A map of key value pairs defining the parameters and properties of the open source schema. Maximum size of 2Mib.
+-- | Optional. A map of key value pairs defining the parameters and properties of the open source schema. Maximum size of 2MiB.
 --
 -- /See:/ 'newExternalCatalogDatasetOptions_Parameters' smart constructor.
 newtype ExternalCatalogDatasetOptions_Parameters = ExternalCatalogDatasetOptions_Parameters
@@ -4402,13 +4453,13 @@ instance Core.ToJSON ExternalCatalogDatasetOptions_Parameters where
   toJSON ExternalCatalogDatasetOptions_Parameters {..} =
     Core.toJSON additional
 
--- | Metadata about open source compatible table. The fields contained in these options correspond to hive metastore\'s table level properties.
+-- | Metadata about open source compatible table. The fields contained in these options correspond to Hive metastore\'s table-level properties.
 --
 -- /See:/ 'newExternalCatalogTableOptions' smart constructor.
 data ExternalCatalogTableOptions = ExternalCatalogTableOptions
-  { -- | Optional. The connection specifying the credentials to be used to read external storage, such as Azure Blob, Cloud Storage, or S3. The connection is needed to read the open source table from BigQuery Engine. The connection_id can have the form @..@ or @projects\/\/locations\/\/connections\/@.
+  { -- | Optional. A connection ID that specifies the credentials to be used to read external storage, such as Azure Blob, Cloud Storage, or Amazon S3. This connection is needed to read the open source table from BigQuery. The connection_id format must be either @..@ or @projects\/\/locations\/\/connections\/@.
     connectionId :: (Core.Maybe Core.Text),
-    -- | Optional. A map of key value pairs defining the parameters and properties of the open source table. Corresponds with hive meta store table parameters. Maximum size of 4Mib.
+    -- | Optional. A map of the key-value pairs defining the parameters and properties of the open source table. Corresponds with Hive metastore table parameters. Maximum size of 4MiB.
     parameters :: (Core.Maybe ExternalCatalogTableOptions_Parameters),
     -- | Optional. A storage descriptor containing information about the physical storage of this table.
     storageDescriptor :: (Core.Maybe StorageDescriptor)
@@ -4446,7 +4497,7 @@ instance Core.ToJSON ExternalCatalogTableOptions where
           ]
       )
 
--- | Optional. A map of key value pairs defining the parameters and properties of the open source table. Corresponds with hive meta store table parameters. Maximum size of 4Mib.
+-- | Optional. A map of the key-value pairs defining the parameters and properties of the open source table. Corresponds with Hive metastore table parameters. Maximum size of 4MiB.
 --
 -- /See:/ 'newExternalCatalogTableOptions_Parameters' smart constructor.
 newtype ExternalCatalogTableOptions_Parameters = ExternalCatalogTableOptions_Parameters
@@ -4490,7 +4541,11 @@ data ExternalDataConfiguration = ExternalDataConfiguration
     connectionId :: (Core.Maybe Core.Text),
     -- | Optional. Additional properties to set if sourceFormat is set to CSV.
     csvOptions :: (Core.Maybe CsvOptions),
-    -- | Defines the list of possible SQL data types to which the source decimal values are converted. This list and the precision and the scale parameters of the decimal field determine the target type. In the order of NUMERIC, BIGNUMERIC, and STRING, a type is picked if it is in the specified list and if it supports the precision and the scale. STRING supports all precision and scale values. If none of the listed types supports the precision and the scale, the type supporting the widest range in the specified list is picked, and if a value exceeds the supported range when reading the data, an error will be thrown. Example: Suppose the value of this field is [\"NUMERIC\", \"BIGNUMERIC\"]. If (precision,scale) is: * (38,9) -> NUMERIC; * (39,9) -> BIGNUMERIC (NUMERIC cannot hold 30 integer digits); * (38,10) -> BIGNUMERIC (NUMERIC cannot hold 10 fractional digits); * (76,38) -> BIGNUMERIC; * (77,38) -> BIGNUMERIC (error if value exeeds supported range). This field cannot contain duplicate types. The order of the types
+    -- | Optional. Format used to parse DATE values. Supports C-style and SQL-style values.
+    dateFormat :: (Core.Maybe Core.Text),
+    -- | Optional. Format used to parse DATETIME values. Supports C-style and SQL-style values.
+    datetimeFormat :: (Core.Maybe Core.Text),
+    -- | Defines the list of possible SQL data types to which the source decimal values are converted. This list and the precision and the scale parameters of the decimal field determine the target type. In the order of NUMERIC, BIGNUMERIC, and STRING, a type is picked if it is in the specified list and if it supports the precision and the scale. STRING supports all precision and scale values. If none of the listed types supports the precision and the scale, the type supporting the widest range in the specified list is picked, and if a value exceeds the supported range when reading the data, an error will be thrown. Example: Suppose the value of this field is [\"NUMERIC\", \"BIGNUMERIC\"]. If (precision,scale) is: * (38,9) -> NUMERIC; * (39,9) -> BIGNUMERIC (NUMERIC cannot hold 30 integer digits); * (38,10) -> BIGNUMERIC (NUMERIC cannot hold 10 fractional digits); * (76,38) -> BIGNUMERIC; * (77,38) -> BIGNUMERIC (error if value exceeds supported range). This field cannot contain duplicate types. The order of the types
     -- in this field is ignored. For example, [\"BIGNUMERIC\", \"NUMERIC\"] is the same as [\"NUMERIC\", \"BIGNUMERIC\"] and NUMERIC always takes precedence over BIGNUMERIC. Defaults to [\"NUMERIC\", \"STRING\"] for ORC and [\"NUMERIC\"] for the other file formats.
     decimalTargetTypes :: (Core.Maybe [ExternalDataConfiguration_DecimalTargetTypesItem]),
     -- | Optional. Specifies how source URIs are interpreted for constructing the file set to load. By default source URIs are expanded against the underlying storage. Other options include specifying manifest files. Only applicable to object storage systems.
@@ -4520,7 +4575,13 @@ data ExternalDataConfiguration = ExternalDataConfiguration
     -- | [Required] The data format. For CSV files, specify \"CSV\". For Google sheets, specify \"GOOGLE/SHEETS\". For newline-delimited JSON, specify \"NEWLINE/DELIMITED/JSON\". For Avro files, specify \"AVRO\". For Google Cloud Datastore backups, specify \"DATASTORE/BACKUP\". For Apache Iceberg tables, specify \"ICEBERG\". For ORC files, specify \"ORC\". For Parquet files, specify \"PARQUET\". [Beta] For Google Cloud Bigtable, specify \"BIGTABLE\".
     sourceFormat :: (Core.Maybe Core.Text),
     -- | [Required] The fully-qualified URIs that point to your data in Google Cloud. For Google Cloud Storage URIs: Each URI can contain one \'/\' wildcard character and it must come after the \'bucket\' name. Size limits related to load jobs apply to external data sources. For Google Cloud Bigtable URIs: Exactly one URI can be specified and it has be a fully specified and valid HTTPS URL for a Google Cloud Bigtable table. For Google Cloud Datastore backups, exactly one URI can be specified. Also, the \'/\' wildcard character is not allowed.
-    sourceUris :: (Core.Maybe [Core.Text])
+    sourceUris :: (Core.Maybe [Core.Text]),
+    -- | Optional. Format used to parse TIME values. Supports C-style and SQL-style values.
+    timeFormat :: (Core.Maybe Core.Text),
+    -- | Optional. Time zone used when parsing timestamp values that do not have specific time zone information (e.g. 2024-04-20 12:34:56). The expected format is a IANA timezone string (e.g. America\/Los_Angeles).
+    timeZone :: (Core.Maybe Core.Text),
+    -- | Optional. Format used to parse TIMESTAMP values. Supports C-style and SQL-style values.
+    timestampFormat :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4535,6 +4596,8 @@ newExternalDataConfiguration =
       compression = Core.Nothing,
       connectionId = Core.Nothing,
       csvOptions = Core.Nothing,
+      dateFormat = Core.Nothing,
+      datetimeFormat = Core.Nothing,
       decimalTargetTypes = Core.Nothing,
       fileSetSpecType = Core.Nothing,
       googleSheetsOptions = Core.Nothing,
@@ -4549,7 +4612,10 @@ newExternalDataConfiguration =
       referenceFileSchemaUri = Core.Nothing,
       schema = Core.Nothing,
       sourceFormat = Core.Nothing,
-      sourceUris = Core.Nothing
+      sourceUris = Core.Nothing,
+      timeFormat = Core.Nothing,
+      timeZone = Core.Nothing,
+      timestampFormat = Core.Nothing
     }
 
 instance Core.FromJSON ExternalDataConfiguration where
@@ -4564,6 +4630,8 @@ instance Core.FromJSON ExternalDataConfiguration where
             Core.<*> (o Core..:? "compression")
             Core.<*> (o Core..:? "connectionId")
             Core.<*> (o Core..:? "csvOptions")
+            Core.<*> (o Core..:? "dateFormat")
+            Core.<*> (o Core..:? "datetimeFormat")
             Core.<*> (o Core..:? "decimalTargetTypes")
             Core.<*> (o Core..:? "fileSetSpecType")
             Core.<*> (o Core..:? "googleSheetsOptions")
@@ -4579,6 +4647,9 @@ instance Core.FromJSON ExternalDataConfiguration where
             Core.<*> (o Core..:? "schema")
             Core.<*> (o Core..:? "sourceFormat")
             Core.<*> (o Core..:? "sourceUris")
+            Core.<*> (o Core..:? "timeFormat")
+            Core.<*> (o Core..:? "timeZone")
+            Core.<*> (o Core..:? "timestampFormat")
       )
 
 instance Core.ToJSON ExternalDataConfiguration where
@@ -4591,6 +4662,8 @@ instance Core.ToJSON ExternalDataConfiguration where
             ("compression" Core..=) Core.<$> compression,
             ("connectionId" Core..=) Core.<$> connectionId,
             ("csvOptions" Core..=) Core.<$> csvOptions,
+            ("dateFormat" Core..=) Core.<$> dateFormat,
+            ("datetimeFormat" Core..=) Core.<$> datetimeFormat,
             ("decimalTargetTypes" Core..=) Core.<$> decimalTargetTypes,
             ("fileSetSpecType" Core..=) Core.<$> fileSetSpecType,
             ("googleSheetsOptions" Core..=) Core.<$> googleSheetsOptions,
@@ -4606,7 +4679,10 @@ instance Core.ToJSON ExternalDataConfiguration where
             ("referenceFileSchemaUri" Core..=) Core.<$> referenceFileSchemaUri,
             ("schema" Core..=) Core.<$> schema,
             ("sourceFormat" Core..=) Core.<$> sourceFormat,
-            ("sourceUris" Core..=) Core.<$> sourceUris
+            ("sourceUris" Core..=) Core.<$> sourceUris,
+            ("timeFormat" Core..=) Core.<$> timeFormat,
+            ("timeZone" Core..=) Core.<$> timeZone,
+            ("timestampFormat" Core..=) Core.<$> timestampFormat
           ]
       )
 
@@ -6048,7 +6124,11 @@ data JobConfigurationLoad = JobConfigurationLoad
     createDisposition :: (Core.Maybe Core.Text),
     -- | Optional. If this property is true, the job creates a new session using a randomly generated session_id. To continue using a created session with subsequent queries, pass the existing session identifier as a @ConnectionProperty@ value. The session identifier is returned as part of the @SessionInfo@ message within the query statistics. The new session\'s location will be set to @Job.JobReference.location@ if it is present, otherwise it\'s set to the default location based on existing routing logic.
     createSession :: (Core.Maybe Core.Bool),
-    -- | Defines the list of possible SQL data types to which the source decimal values are converted. This list and the precision and the scale parameters of the decimal field determine the target type. In the order of NUMERIC, BIGNUMERIC, and STRING, a type is picked if it is in the specified list and if it supports the precision and the scale. STRING supports all precision and scale values. If none of the listed types supports the precision and the scale, the type supporting the widest range in the specified list is picked, and if a value exceeds the supported range when reading the data, an error will be thrown. Example: Suppose the value of this field is [\"NUMERIC\", \"BIGNUMERIC\"]. If (precision,scale) is: * (38,9) -> NUMERIC; * (39,9) -> BIGNUMERIC (NUMERIC cannot hold 30 integer digits); * (38,10) -> BIGNUMERIC (NUMERIC cannot hold 10 fractional digits); * (76,38) -> BIGNUMERIC; * (77,38) -> BIGNUMERIC (error if value exeeds supported range). This field cannot contain duplicate types. The order of the types
+    -- | Optional. Date format used for parsing DATE values.
+    dateFormat :: (Core.Maybe Core.Text),
+    -- | Optional. Date format used for parsing DATETIME values.
+    datetimeFormat :: (Core.Maybe Core.Text),
+    -- | Defines the list of possible SQL data types to which the source decimal values are converted. This list and the precision and the scale parameters of the decimal field determine the target type. In the order of NUMERIC, BIGNUMERIC, and STRING, a type is picked if it is in the specified list and if it supports the precision and the scale. STRING supports all precision and scale values. If none of the listed types supports the precision and the scale, the type supporting the widest range in the specified list is picked, and if a value exceeds the supported range when reading the data, an error will be thrown. Example: Suppose the value of this field is [\"NUMERIC\", \"BIGNUMERIC\"]. If (precision,scale) is: * (38,9) -> NUMERIC; * (39,9) -> BIGNUMERIC (NUMERIC cannot hold 30 integer digits); * (38,10) -> BIGNUMERIC (NUMERIC cannot hold 10 fractional digits); * (76,38) -> BIGNUMERIC; * (77,38) -> BIGNUMERIC (error if value exceeds supported range). This field cannot contain duplicate types. The order of the types
     -- in this field is ignored. For example, [\"BIGNUMERIC\", \"NUMERIC\"] is the same as [\"NUMERIC\", \"BIGNUMERIC\"] and NUMERIC always takes precedence over BIGNUMERIC. Defaults to [\"NUMERIC\", \"STRING\"] for ORC and [\"NUMERIC\"] for the other file formats.
     decimalTargetTypes :: (Core.Maybe [JobConfigurationLoad_DecimalTargetTypesItem]),
     -- | Custom encryption configuration (e.g., Cloud KMS keys)
@@ -6099,8 +6179,14 @@ data JobConfigurationLoad = JobConfigurationLoad
     sourceFormat :: (Core.Maybe Core.Text),
     -- | [Required] The fully-qualified URIs that point to your data in Google Cloud. For Google Cloud Storage URIs: Each URI can contain one \'/\' wildcard character and it must come after the \'bucket\' name. Size limits related to load jobs apply to external data sources. For Google Cloud Bigtable URIs: Exactly one URI can be specified and it has be a fully specified and valid HTTPS URL for a Google Cloud Bigtable table. For Google Cloud Datastore backups: Exactly one URI can be specified. Also, the \'/\' wildcard character is not allowed.
     sourceUris :: (Core.Maybe [Core.Text]),
+    -- | Optional. Date format used for parsing TIME values.
+    timeFormat :: (Core.Maybe Core.Text),
     -- | Time-based partitioning specification for the destination table. Only one of timePartitioning and rangePartitioning should be specified.
     timePartitioning :: (Core.Maybe TimePartitioning),
+    -- | Optional. [Experimental] Default time zone that will apply when parsing timestamp values that have no specific time zone.
+    timeZone :: (Core.Maybe Core.Text),
+    -- | Optional. Date format used for parsing TIMESTAMP values.
+    timestampFormat :: (Core.Maybe Core.Text),
     -- | Optional. If sourceFormat is set to \"AVRO\", indicates whether to interpret logical types as the corresponding BigQuery data type (for example, TIMESTAMP), instead of using the raw type (for example, INTEGER).
     useAvroLogicalTypes :: (Core.Maybe Core.Bool),
     -- | Optional. Specifies the action that occurs if the destination table already exists. The following values are supported: * WRITE/TRUNCATE: If the table already exists, BigQuery overwrites the data, removes the constraints and uses the schema from the load job. * WRITE/APPEND: If the table already exists, BigQuery appends the data to the table. * WRITE/EMPTY: If the table already exists and contains data, a \'duplicate\' error is returned in the job result. The default value is WRITE/APPEND. Each action is atomic and only occurs if BigQuery is able to complete the job successfully. Creation, truncation and append actions occur as one atomic update upon job completion.
@@ -6122,6 +6208,8 @@ newJobConfigurationLoad =
       copyFilesOnly = Core.Nothing,
       createDisposition = Core.Nothing,
       createSession = Core.Nothing,
+      dateFormat = Core.Nothing,
+      datetimeFormat = Core.Nothing,
       decimalTargetTypes = Core.Nothing,
       destinationEncryptionConfiguration = Core.Nothing,
       destinationTable = Core.Nothing,
@@ -6147,7 +6235,10 @@ newJobConfigurationLoad =
       skipLeadingRows = Core.Nothing,
       sourceFormat = Core.Nothing,
       sourceUris = Core.Nothing,
+      timeFormat = Core.Nothing,
       timePartitioning = Core.Nothing,
+      timeZone = Core.Nothing,
+      timestampFormat = Core.Nothing,
       useAvroLogicalTypes = Core.Nothing,
       writeDisposition = Core.Nothing
     }
@@ -6167,6 +6258,8 @@ instance Core.FromJSON JobConfigurationLoad where
             Core.<*> (o Core..:? "copyFilesOnly")
             Core.<*> (o Core..:? "createDisposition")
             Core.<*> (o Core..:? "createSession")
+            Core.<*> (o Core..:? "dateFormat")
+            Core.<*> (o Core..:? "datetimeFormat")
             Core.<*> (o Core..:? "decimalTargetTypes")
             Core.<*> (o Core..:? "destinationEncryptionConfiguration")
             Core.<*> (o Core..:? "destinationTable")
@@ -6192,7 +6285,10 @@ instance Core.FromJSON JobConfigurationLoad where
             Core.<*> (o Core..:? "skipLeadingRows")
             Core.<*> (o Core..:? "sourceFormat")
             Core.<*> (o Core..:? "sourceUris")
+            Core.<*> (o Core..:? "timeFormat")
             Core.<*> (o Core..:? "timePartitioning")
+            Core.<*> (o Core..:? "timeZone")
+            Core.<*> (o Core..:? "timestampFormat")
             Core.<*> (o Core..:? "useAvroLogicalTypes")
             Core.<*> (o Core..:? "writeDisposition")
       )
@@ -6210,6 +6306,8 @@ instance Core.ToJSON JobConfigurationLoad where
             ("copyFilesOnly" Core..=) Core.<$> copyFilesOnly,
             ("createDisposition" Core..=) Core.<$> createDisposition,
             ("createSession" Core..=) Core.<$> createSession,
+            ("dateFormat" Core..=) Core.<$> dateFormat,
+            ("datetimeFormat" Core..=) Core.<$> datetimeFormat,
             ("decimalTargetTypes" Core..=) Core.<$> decimalTargetTypes,
             ("destinationEncryptionConfiguration" Core..=)
               Core.<$> destinationEncryptionConfiguration,
@@ -6239,7 +6337,10 @@ instance Core.ToJSON JobConfigurationLoad where
             ("skipLeadingRows" Core..=) Core.<$> skipLeadingRows,
             ("sourceFormat" Core..=) Core.<$> sourceFormat,
             ("sourceUris" Core..=) Core.<$> sourceUris,
+            ("timeFormat" Core..=) Core.<$> timeFormat,
             ("timePartitioning" Core..=) Core.<$> timePartitioning,
+            ("timeZone" Core..=) Core.<$> timeZone,
+            ("timestampFormat" Core..=) Core.<$> timestampFormat,
             ("useAvroLogicalTypes" Core..=) Core.<$> useAvroLogicalTypes,
             ("writeDisposition" Core..=) Core.<$> writeDisposition
           ]
@@ -6302,7 +6403,9 @@ data JobConfigurationQuery = JobConfigurationQuery
     -- | Describes user-defined function resources used in the query.
     userDefinedFunctionResources :: (Core.Maybe [UserDefinedFunctionResource]),
     -- | Optional. Specifies the action that occurs if the destination table already exists. The following values are supported: * WRITE/TRUNCATE: If the table already exists, BigQuery overwrites the data, removes the constraints, and uses the schema from the query result. * WRITE/APPEND: If the table already exists, BigQuery appends the data to the table. * WRITE/EMPTY: If the table already exists and contains data, a \'duplicate\' error is returned in the job result. The default value is WRITE/EMPTY. Each action is atomic and only occurs if BigQuery is able to complete the job successfully. Creation, truncation and append actions occur as one atomic update upon job completion.
-    writeDisposition :: (Core.Maybe Core.Text)
+    writeDisposition :: (Core.Maybe Core.Text),
+    -- | Optional. This is only supported for a SELECT query using a temporary table. If set, the query is allowed to write results incrementally to the temporary result table. This may incur a performance penalty. This option cannot be used with Legacy SQL. This feature is not yet available.
+    writeIncrementalResults :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6337,7 +6440,8 @@ newJobConfigurationQuery =
       useLegacySql = Core.True,
       useQueryCache = Core.True,
       userDefinedFunctionResources = Core.Nothing,
-      writeDisposition = Core.Nothing
+      writeDisposition = Core.Nothing,
+      writeIncrementalResults = Core.Nothing
     }
 
 instance Core.FromJSON JobConfigurationQuery where
@@ -6376,6 +6480,7 @@ instance Core.FromJSON JobConfigurationQuery where
             Core.<*> (o Core..:? "useQueryCache" Core..!= Core.True)
             Core.<*> (o Core..:? "userDefinedFunctionResources")
             Core.<*> (o Core..:? "writeDisposition")
+            Core.<*> (o Core..:? "writeIncrementalResults")
       )
 
 instance Core.ToJSON JobConfigurationQuery where
@@ -6412,7 +6517,9 @@ instance Core.ToJSON JobConfigurationQuery where
             Core.Just ("useQueryCache" Core..= useQueryCache),
             ("userDefinedFunctionResources" Core..=)
               Core.<$> userDefinedFunctionResources,
-            ("writeDisposition" Core..=) Core.<$> writeDisposition
+            ("writeDisposition" Core..=) Core.<$> writeDisposition,
+            ("writeIncrementalResults" Core..=)
+              Core.<$> writeIncrementalResults
           ]
       )
 
@@ -6978,12 +7085,12 @@ data JobStatistics2 = JobStatistics2
     searchStatistics :: (Core.Maybe SearchStatistics),
     -- | Output only. Statistics of a Spark procedure job.
     sparkStatistics :: (Core.Maybe SparkStatistics),
-    -- | Output only. The type of query statement, if valid. Possible values: * @SELECT@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_list SELECT> statement. * @ASSERT@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/debugging-statements#assert ASSERT> statement. * @INSERT@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement INSERT> statement. * @UPDATE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#update_statement UPDATE> statement. * @DELETE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language DELETE> statement. * @MERGE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language MERGE> statement. * @CREATE_TABLE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement CREATE TABLE> statement, without @AS SELECT@. * @CREATE_TABLE_AS_SELECT@:
-    -- <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#query_statement CREATE TABLE AS SELECT> statement. * @CREATE_VIEW@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_view_statement CREATE VIEW> statement. * @CREATE_MODEL@: <https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create#create_model_statement CREATE MODEL> statement. * @CREATE_MATERIALIZED_VIEW@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_materialized_view_statement CREATE MATERIALIZED VIEW> statement. * @CREATE_FUNCTION@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement CREATE FUNCTION> statement. * @CREATE_TABLE_FUNCTION@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_function_statement CREATE TABLE FUNCTION> statement. * @CREATE_PROCEDURE@:
+    -- | Output only. The type of query statement, if valid. Possible values: * @SELECT@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_list SELECT> statement. * @ASSERT@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/debugging-statements#assert ASSERT> statement. * @INSERT@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement INSERT> statement. * @UPDATE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#update_statement UPDATE> statement. * @DELETE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language DELETE> statement. * @MERGE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language MERGE> statement. * @CREATE_TABLE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement CREATE TABLE> statement, without @AS SELECT@. * @CREATE_TABLE_AS_SELECT@:
+    -- <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement CREATE TABLE AS SELECT> statement. * @CREATE_VIEW@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_view_statement CREATE VIEW> statement. * @CREATE_MODEL@: <https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create#create_model_statement CREATE MODEL> statement. * @CREATE_MATERIALIZED_VIEW@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_materialized_view_statement CREATE MATERIALIZED VIEW> statement. * @CREATE_FUNCTION@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement CREATE FUNCTION> statement. * @CREATE_TABLE_FUNCTION@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_function_statement CREATE TABLE FUNCTION> statement. * @CREATE_PROCEDURE@:
     -- <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure CREATE PROCEDURE> statement. * @CREATE_ROW_ACCESS_POLICY@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_row_access_policy_statement CREATE ROW ACCESS POLICY> statement. * @CREATE_SCHEMA@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement CREATE SCHEMA> statement. * @CREATE_SNAPSHOT_TABLE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_snapshot_table_statement CREATE SNAPSHOT TABLE> statement. * @CREATE_SEARCH_INDEX@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement CREATE SEARCH INDEX> statement. * @DROP_TABLE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_table_statement DROP TABLE> statement. * @DROP_EXTERNAL_TABLE@:
     -- <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_external_table_statement DROP EXTERNAL TABLE> statement. * @DROP_VIEW@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_view_statement DROP VIEW> statement. * @DROP_MODEL@: <https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-drop-model DROP MODEL> statement. * @DROP_MATERIALIZED_VIEW@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_materialized_view_statement DROP MATERIALIZED VIEW> statement. * @DROP_FUNCTION@ : <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_function_statement DROP FUNCTION> statement. * @DROP_TABLE_FUNCTION@ : <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_table_function DROP TABLE FUNCTION> statement. * @DROP_PROCEDURE@:
     -- <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_procedure_statement DROP PROCEDURE> statement. * @DROP_SEARCH_INDEX@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_search_index DROP SEARCH INDEX> statement. * @DROP_SCHEMA@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_schema_statement DROP SCHEMA> statement. * @DROP_SNAPSHOT_TABLE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_snapshot_table_statement DROP SNAPSHOT TABLE> statement. * @DROP_ROW_ACCESS_POLICY@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_row_access_policy_statement DROP [ALL] ROW ACCESS POLICY|POLICIES> statement. * @ALTER_TABLE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement ALTER TABLE> statement. * @ALTER_VIEW@:
-    -- <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement ALTER VIEW> statement. * @ALTER_MATERIALIZED_VIEW@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_materialized_view_set_options_statement ALTER MATERIALIZED VIEW> statement. * @ALTER_SCHEMA@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#aalter_schema_set_options_statement ALTER SCHEMA> statement. * @SCRIPT@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language SCRIPT>. * @TRUNCATE_TABLE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#truncate_table_statement TRUNCATE TABLE> statement. * @CREATE_EXTERNAL_TABLE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement CREATE EXTERNAL TABLE> statement. * @EXPORT_DATA@:
+    -- <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement ALTER VIEW> statement. * @ALTER_MATERIALIZED_VIEW@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_materialized_view_set_options_statement ALTER MATERIALIZED VIEW> statement. * @ALTER_SCHEMA@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement ALTER SCHEMA> statement. * @SCRIPT@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language SCRIPT>. * @TRUNCATE_TABLE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#truncate_table_statement TRUNCATE TABLE> statement. * @CREATE_EXTERNAL_TABLE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement CREATE EXTERNAL TABLE> statement. * @EXPORT_DATA@:
     -- <https://cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#export_data_statement EXPORT DATA> statement. * @EXPORT_MODEL@: <https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-export-model EXPORT MODEL> statement. * @LOAD_DATA@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#load_data_statement LOAD DATA> statement. * @CALL@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#call CALL> statement.
     statementType :: (Core.Maybe Core.Text),
     -- | Output only. Describes a timeline of job execution.
@@ -7844,7 +7951,7 @@ instance Core.ToJSON MaterializedView where
 --
 -- /See:/ 'newMaterializedViewDefinition' smart constructor.
 data MaterializedViewDefinition = MaterializedViewDefinition
-  { -- | Optional. This option declares the intention to construct a materialized view that isn\'t refreshed incrementally.
+  { -- | Optional. This option declares the intention to construct a materialized view that isn\'t refreshed incrementally. Non-incremental materialized views support an expanded range of SQL queries. The @allow_non_incremental_definition@ option can\'t be changed after the materialized view is created.
     allowNonIncrementalDefinition :: (Core.Maybe Core.Bool),
     -- | Optional. Enable automatic refresh of the materialized view when the base table is updated. The default value is \"true\".
     enableRefresh :: (Core.Maybe Core.Bool),
@@ -7978,7 +8085,7 @@ instance Core.ToJSON MaterializedViewStatus where
           ]
       )
 
--- | Statistics for metadata caching in BigLake tables.
+-- | Statistics for metadata caching in queried tables.
 --
 -- /See:/ 'newMetadataCacheStatistics' smart constructor.
 newtype MetadataCacheStatistics = MetadataCacheStatistics
@@ -9173,17 +9280,21 @@ data QueryRequest = QueryRequest
     createSession :: (Core.Maybe Core.Bool),
     -- | Optional. Specifies the default datasetId and projectId to assume for any unqualified table names in the query. If not set, all table names in the query string must be qualified in the format \'datasetId.tableId\'.
     defaultDataset :: (Core.Maybe DatasetReference),
+    -- | Optional. Custom encryption configuration (e.g., Cloud KMS keys)
+    destinationEncryptionConfiguration :: (Core.Maybe EncryptionConfiguration),
     -- | Optional. If set to true, BigQuery doesn\'t run the job. Instead, if the query is valid, BigQuery returns statistics about the job such as how many bytes would be processed. If the query is invalid, an error returns. The default value is false.
     dryRun :: (Core.Maybe Core.Bool),
     -- | Optional. Output format adjustments.
     formatOptions :: (Core.Maybe DataFormatOptions),
     -- | Optional. If not set, jobs are always required. If set, the query request will follow the behavior described JobCreationMode. <https://cloud.google.com/products/#product-launch-stages Preview>
     jobCreationMode :: (Core.Maybe QueryRequest_JobCreationMode),
+    -- | Optional. Job timeout in milliseconds. If this time limit is exceeded, BigQuery will attempt to stop a longer job, but may not always succeed in canceling it before the job completes. For example, a job that takes more than 60 seconds to complete has a better chance of being stopped than a job that takes 10 seconds to complete. This timeout applies to the query even if a job does not need to be created.
+    jobTimeoutMs :: (Core.Maybe Core.Int64),
     -- | The resource type of the request.
     kind :: Core.Text,
     -- | Optional. The labels associated with this query. Labels can be used to organize and group query jobs. Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label keys must start with a letter and each label in the list must have a different key.
     labels :: (Core.Maybe QueryRequest_Labels),
-    -- | The geographic location where the job should run. See details at https:\/\/cloud.google.com\/bigquery\/docs\/locations#specifying/your/location.
+    -- | The geographic location where the job should run. For more information, see how to <https://cloud.google.com/bigquery/docs/locations#specify_locations specify locations>.
     location :: (Core.Maybe Core.Text),
     -- | Optional. The maximum number of rows of data to return per page of results. Setting this flag to a small value such as 1000 and then paging through results might improve reliability when the query result set is large. In addition to this limit, responses are also limited to 10 MB. By default, there is no maximum row count, and only the byte limit applies.
     maxResults :: (Core.Maybe Core.Word32),
@@ -9205,7 +9316,9 @@ data QueryRequest = QueryRequest
     -- | Specifies whether to use BigQuery\'s legacy SQL dialect for this query. The default value is true. If set to false, the query will use BigQuery\'s GoogleSQL: https:\/\/cloud.google.com\/bigquery\/sql-reference\/ When useLegacySql is set to false, the value of flattenResults is ignored; query will be run as if flattenResults is false.
     useLegacySql :: Core.Bool,
     -- | Optional. Whether to look for the result in the query cache. The query cache is a best-effort cache that will be flushed whenever tables in the query are modified. The default value is true.
-    useQueryCache :: Core.Bool
+    useQueryCache :: Core.Bool,
+    -- | Optional. This is only supported for SELECT query. If set, the query is allowed to write results incrementally to the temporary result table. This may incur a performance penalty. This option cannot be used with Legacy SQL. This feature is not yet available.
+    writeIncrementalResults :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -9218,9 +9331,11 @@ newQueryRequest =
       continuous = Core.Nothing,
       createSession = Core.Nothing,
       defaultDataset = Core.Nothing,
+      destinationEncryptionConfiguration = Core.Nothing,
       dryRun = Core.Nothing,
       formatOptions = Core.Nothing,
       jobCreationMode = Core.Nothing,
+      jobTimeoutMs = Core.Nothing,
       kind = "bigquery#queryRequest",
       labels = Core.Nothing,
       location = Core.Nothing,
@@ -9233,7 +9348,8 @@ newQueryRequest =
       requestId = Core.Nothing,
       timeoutMs = Core.Nothing,
       useLegacySql = Core.True,
-      useQueryCache = Core.True
+      useQueryCache = Core.True,
+      writeIncrementalResults = Core.Nothing
     }
 
 instance Core.FromJSON QueryRequest where
@@ -9246,9 +9362,11 @@ instance Core.FromJSON QueryRequest where
             Core.<*> (o Core..:? "continuous")
             Core.<*> (o Core..:? "createSession")
             Core.<*> (o Core..:? "defaultDataset")
+            Core.<*> (o Core..:? "destinationEncryptionConfiguration")
             Core.<*> (o Core..:? "dryRun")
             Core.<*> (o Core..:? "formatOptions")
             Core.<*> (o Core..:? "jobCreationMode")
+            Core.<*> (o Core..:? "jobTimeoutMs" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "bigquery#queryRequest")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "location")
@@ -9265,6 +9383,7 @@ instance Core.FromJSON QueryRequest where
             Core.<*> (o Core..:? "timeoutMs")
             Core.<*> (o Core..:? "useLegacySql" Core..!= Core.True)
             Core.<*> (o Core..:? "useQueryCache" Core..!= Core.True)
+            Core.<*> (o Core..:? "writeIncrementalResults")
       )
 
 instance Core.ToJSON QueryRequest where
@@ -9275,9 +9394,12 @@ instance Core.ToJSON QueryRequest where
             ("continuous" Core..=) Core.<$> continuous,
             ("createSession" Core..=) Core.<$> createSession,
             ("defaultDataset" Core..=) Core.<$> defaultDataset,
+            ("destinationEncryptionConfiguration" Core..=)
+              Core.<$> destinationEncryptionConfiguration,
             ("dryRun" Core..=) Core.<$> dryRun,
             ("formatOptions" Core..=) Core.<$> formatOptions,
             ("jobCreationMode" Core..=) Core.<$> jobCreationMode,
+            ("jobTimeoutMs" Core..=) Core.. Core.AsText Core.<$> jobTimeoutMs,
             Core.Just ("kind" Core..= kind),
             ("labels" Core..=) Core.<$> labels,
             ("location" Core..=) Core.<$> location,
@@ -9292,7 +9414,9 @@ instance Core.ToJSON QueryRequest where
             ("requestId" Core..=) Core.<$> requestId,
             ("timeoutMs" Core..=) Core.<$> timeoutMs,
             Core.Just ("useLegacySql" Core..= useLegacySql),
-            Core.Just ("useQueryCache" Core..= useQueryCache)
+            Core.Just ("useQueryCache" Core..= useQueryCache),
+            ("writeIncrementalResults" Core..=)
+              Core.<$> writeIncrementalResults
           ]
       )
 
@@ -9326,8 +9450,12 @@ instance Core.ToJSON QueryRequest_Labels where
 data QueryResponse = QueryResponse
   { -- | Whether the query result was fetched from the query cache.
     cacheHit :: (Core.Maybe Core.Bool),
+    -- | Output only. Creation time of this query, in milliseconds since the epoch. This field will be present on all queries.
+    creationTime :: (Core.Maybe Core.Int64),
     -- | Output only. Detailed statistics for DML statements INSERT, UPDATE, DELETE, MERGE or TRUNCATE.
     dmlStats :: (Core.Maybe DmlStatistics),
+    -- | Output only. End time of this query, in milliseconds since the epoch. This field will be present whenever a query job is in the DONE state.
+    endTime :: (Core.Maybe Core.Int64),
     -- | Output only. The first errors or warnings encountered during the running of the job. The final message includes the number of errors that caused the process to stop. Errors here do not necessarily mean that the job has completed or was unsuccessful. For more information about error messages, see <https://cloud.google.com/bigquery/docs/error-messages Error messages>.
     errors :: (Core.Maybe [ErrorProto]),
     -- | Whether the query has completed or not. If rows or totalRows are present, this will always be true. If this is false, totalRows will not be available.
@@ -9338,6 +9466,8 @@ data QueryResponse = QueryResponse
     jobReference :: (Core.Maybe JobReference),
     -- | The resource type.
     kind :: Core.Text,
+    -- | Output only. The geographic location of the query. For more information about BigQuery locations, see: https:\/\/cloud.google.com\/bigquery\/docs\/locations
+    location :: (Core.Maybe Core.Text),
     -- | Output only. The number of rows affected by a DML statement. Present only for DML statements INSERT, UPDATE or DELETE.
     numDmlAffectedRows :: (Core.Maybe Core.Int64),
     -- | A token used for paging results. A non-empty token indicates that additional results are available. To see additional results, query the <https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults jobs.getQueryResults> method. For more information, see <https://cloud.google.com/bigquery/docs/paging-results Paging through table data>.
@@ -9350,10 +9480,16 @@ data QueryResponse = QueryResponse
     schema :: (Core.Maybe TableSchema),
     -- | Output only. Information of the session if this job is part of one.
     sessionInfo :: (Core.Maybe SessionInfo),
+    -- | Output only. Start time of this query, in milliseconds since the epoch. This field will be present when the query job transitions from the PENDING state to either RUNNING or DONE.
+    startTime :: (Core.Maybe Core.Int64),
+    -- | Output only. If the project is configured to use on-demand pricing, then this field contains the total bytes billed for the job. If the project is configured to use flat-rate pricing, then you are not billed for bytes and this field is informational only.
+    totalBytesBilled :: (Core.Maybe Core.Int64),
     -- | The total number of bytes processed for this query. If this query was a dry run, this is the number of bytes that would be processed if the query were run.
     totalBytesProcessed :: (Core.Maybe Core.Int64),
     -- | The total number of rows in the complete query result set, which can be more than the number of rows in this single page of results.
-    totalRows :: (Core.Maybe Core.Word64)
+    totalRows :: (Core.Maybe Core.Word64),
+    -- | Output only. Number of slot ms the user is actually billed for.
+    totalSlotMs :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -9363,20 +9499,26 @@ newQueryResponse ::
 newQueryResponse =
   QueryResponse
     { cacheHit = Core.Nothing,
+      creationTime = Core.Nothing,
       dmlStats = Core.Nothing,
+      endTime = Core.Nothing,
       errors = Core.Nothing,
       jobComplete = Core.Nothing,
       jobCreationReason = Core.Nothing,
       jobReference = Core.Nothing,
       kind = "bigquery#queryResponse",
+      location = Core.Nothing,
       numDmlAffectedRows = Core.Nothing,
       pageToken = Core.Nothing,
       queryId = Core.Nothing,
       rows = Core.Nothing,
       schema = Core.Nothing,
       sessionInfo = Core.Nothing,
+      startTime = Core.Nothing,
+      totalBytesBilled = Core.Nothing,
       totalBytesProcessed = Core.Nothing,
-      totalRows = Core.Nothing
+      totalRows = Core.Nothing,
+      totalSlotMs = Core.Nothing
     }
 
 instance Core.FromJSON QueryResponse where
@@ -9386,12 +9528,15 @@ instance Core.FromJSON QueryResponse where
       ( \o ->
           QueryResponse
             Core.<$> (o Core..:? "cacheHit")
+            Core.<*> (o Core..:? "creationTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "dmlStats")
+            Core.<*> (o Core..:? "endTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "errors")
             Core.<*> (o Core..:? "jobComplete")
             Core.<*> (o Core..:? "jobCreationReason")
             Core.<*> (o Core..:? "jobReference")
             Core.<*> (o Core..:? "kind" Core..!= "bigquery#queryResponse")
+            Core.<*> (o Core..:? "location")
             Core.<*> ( o
                          Core..:? "numDmlAffectedRows"
                          Core.<&> Core.fmap Core.fromAsText
@@ -9401,11 +9546,14 @@ instance Core.FromJSON QueryResponse where
             Core.<*> (o Core..:? "rows")
             Core.<*> (o Core..:? "schema")
             Core.<*> (o Core..:? "sessionInfo")
+            Core.<*> (o Core..:? "startTime" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "totalBytesBilled" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> ( o
                          Core..:? "totalBytesProcessed"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "totalRows" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "totalSlotMs" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON QueryResponse where
@@ -9413,12 +9561,15 @@ instance Core.ToJSON QueryResponse where
     Core.object
       ( Core.catMaybes
           [ ("cacheHit" Core..=) Core.<$> cacheHit,
+            ("creationTime" Core..=) Core.. Core.AsText Core.<$> creationTime,
             ("dmlStats" Core..=) Core.<$> dmlStats,
+            ("endTime" Core..=) Core.. Core.AsText Core.<$> endTime,
             ("errors" Core..=) Core.<$> errors,
             ("jobComplete" Core..=) Core.<$> jobComplete,
             ("jobCreationReason" Core..=) Core.<$> jobCreationReason,
             ("jobReference" Core..=) Core.<$> jobReference,
             Core.Just ("kind" Core..= kind),
+            ("location" Core..=) Core.<$> location,
             ("numDmlAffectedRows" Core..=)
               Core.. Core.AsText
               Core.<$> numDmlAffectedRows,
@@ -9427,10 +9578,15 @@ instance Core.ToJSON QueryResponse where
             ("rows" Core..=) Core.<$> rows,
             ("schema" Core..=) Core.<$> schema,
             ("sessionInfo" Core..=) Core.<$> sessionInfo,
+            ("startTime" Core..=) Core.. Core.AsText Core.<$> startTime,
+            ("totalBytesBilled" Core..=)
+              Core.. Core.AsText
+              Core.<$> totalBytesBilled,
             ("totalBytesProcessed" Core..=)
               Core.. Core.AsText
               Core.<$> totalBytesProcessed,
-            ("totalRows" Core..=) Core.. Core.AsText Core.<$> totalRows
+            ("totalRows" Core..=) Core.. Core.AsText Core.<$> totalRows,
+            ("totalSlotMs" Core..=) Core.. Core.AsText Core.<$> totalSlotMs
           ]
       )
 
@@ -10091,6 +10247,9 @@ data RowAccessPolicy = RowAccessPolicy
     etag :: (Core.Maybe Core.Text),
     -- | Required. A SQL boolean expression that represents the rows defined by this row access policy, similar to the boolean expression in a WHERE clause of a SELECT query on a table. References to other tables, routines, and temporary functions are not supported. Examples: region=\"EU\" date/field = CAST(\'2019-9-27\' as DATE) nullable/field is not NULL numeric_field BETWEEN 1.0 AND 5.0
     filterPredicate :: (Core.Maybe Core.Text),
+    -- | Optional. Input only. The optional list of iam_member users or groups that specifies the initial members that the row-level access policy should be created with. grantees types: - \"user:alice\@example.com\": An email address that represents a specific Google account. - \"serviceAccount:my-other-app\@appspot.gserviceaccount.com\": An email address that represents a service account. - \"group:admins\@example.com\": An email address that represents a Google group. - \"domain:example.com\":The Google Workspace domain (primary) that represents all the users of that domain. - \"allAuthenticatedUsers\": A special identifier that represents all service accounts and all users on the internet who have authenticated with a Google Account. This identifier includes accounts that aren\'t connected to a Google Workspace or Cloud Identity domain, such as personal Gmail accounts. Users who aren\'t authenticated, such as anonymous visitors, aren\'t included. - \"allUsers\":A special identifier that represents anyone who is on
+    -- the internet, including authenticated and unauthenticated users. Because BigQuery requires authentication before a user can access the service, allUsers includes only authenticated users.
+    grantees :: (Core.Maybe [Core.Text]),
     -- | Output only. The time when this row access policy was last modified, in milliseconds since the epoch.
     lastModifiedTime :: (Core.Maybe Core.DateTime),
     -- | Required. Reference describing the ID of this row access policy.
@@ -10106,6 +10265,7 @@ newRowAccessPolicy =
     { creationTime = Core.Nothing,
       etag = Core.Nothing,
       filterPredicate = Core.Nothing,
+      grantees = Core.Nothing,
       lastModifiedTime = Core.Nothing,
       rowAccessPolicyReference = Core.Nothing
     }
@@ -10119,6 +10279,7 @@ instance Core.FromJSON RowAccessPolicy where
             Core.<$> (o Core..:? "creationTime")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "filterPredicate")
+            Core.<*> (o Core..:? "grantees")
             Core.<*> (o Core..:? "lastModifiedTime")
             Core.<*> (o Core..:? "rowAccessPolicyReference")
       )
@@ -10130,6 +10291,7 @@ instance Core.ToJSON RowAccessPolicy where
           [ ("creationTime" Core..=) Core.<$> creationTime,
             ("etag" Core..=) Core.<$> etag,
             ("filterPredicate" Core..=) Core.<$> filterPredicate,
+            ("grantees" Core..=) Core.<$> grantees,
             ("lastModifiedTime" Core..=) Core.<$> lastModifiedTime,
             ("rowAccessPolicyReference" Core..=)
               Core.<$> rowAccessPolicyReference
@@ -11122,6 +11284,95 @@ instance Core.ToJSON StorageDescriptor where
             ("locationUri" Core..=) Core.<$> locationUri,
             ("outputFormat" Core..=) Core.<$> outputFormat,
             ("serdeInfo" Core..=) Core.<$> serdeInfo
+          ]
+      )
+
+-- | If the stored column was not used, explain why.
+--
+-- /See:/ 'newStoredColumnsUnusedReason' smart constructor.
+data StoredColumnsUnusedReason = StoredColumnsUnusedReason
+  { -- | Specifies the high-level reason for the unused scenario, each reason must have a code associated.
+    code :: (Core.Maybe StoredColumnsUnusedReason_Code),
+    -- | Specifies the detailed description for the scenario.
+    message :: (Core.Maybe Core.Text),
+    -- | Specifies which columns were not covered by the stored columns for the specified code up to 20 columns. This is populated when the code is STORED/COLUMNS/COVER/INSUFFICIENT and BASE/TABLE/HAS/CLS.
+    uncoveredColumns :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'StoredColumnsUnusedReason' with the minimum fields required to make a request.
+newStoredColumnsUnusedReason ::
+  StoredColumnsUnusedReason
+newStoredColumnsUnusedReason =
+  StoredColumnsUnusedReason
+    { code = Core.Nothing,
+      message = Core.Nothing,
+      uncoveredColumns = Core.Nothing
+    }
+
+instance Core.FromJSON StoredColumnsUnusedReason where
+  parseJSON =
+    Core.withObject
+      "StoredColumnsUnusedReason"
+      ( \o ->
+          StoredColumnsUnusedReason
+            Core.<$> (o Core..:? "code")
+            Core.<*> (o Core..:? "message")
+            Core.<*> (o Core..:? "uncoveredColumns")
+      )
+
+instance Core.ToJSON StoredColumnsUnusedReason where
+  toJSON StoredColumnsUnusedReason {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("code" Core..=) Core.<$> code,
+            ("message" Core..=) Core.<$> message,
+            ("uncoveredColumns" Core..=) Core.<$> uncoveredColumns
+          ]
+      )
+
+-- | Indicates the stored columns usage in the query.
+--
+-- /See:/ 'newStoredColumnsUsage' smart constructor.
+data StoredColumnsUsage = StoredColumnsUsage
+  { -- | Specifies the base table.
+    baseTable :: (Core.Maybe TableReference),
+    -- | Specifies whether the query was accelerated with stored columns.
+    isQueryAccelerated :: (Core.Maybe Core.Bool),
+    -- | If stored columns were not used, explain why.
+    storedColumnsUnusedReasons :: (Core.Maybe [StoredColumnsUnusedReason])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'StoredColumnsUsage' with the minimum fields required to make a request.
+newStoredColumnsUsage ::
+  StoredColumnsUsage
+newStoredColumnsUsage =
+  StoredColumnsUsage
+    { baseTable = Core.Nothing,
+      isQueryAccelerated = Core.Nothing,
+      storedColumnsUnusedReasons = Core.Nothing
+    }
+
+instance Core.FromJSON StoredColumnsUsage where
+  parseJSON =
+    Core.withObject
+      "StoredColumnsUsage"
+      ( \o ->
+          StoredColumnsUsage
+            Core.<$> (o Core..:? "baseTable")
+            Core.<*> (o Core..:? "isQueryAccelerated")
+            Core.<*> (o Core..:? "storedColumnsUnusedReasons")
+      )
+
+instance Core.ToJSON StoredColumnsUsage where
+  toJSON StoredColumnsUsage {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("baseTable" Core..=) Core.<$> baseTable,
+            ("isQueryAccelerated" Core..=) Core.<$> isQueryAccelerated,
+            ("storedColumnsUnusedReasons" Core..=)
+              Core.<$> storedColumnsUnusedReasons
           ]
       )
 
@@ -12502,7 +12753,7 @@ instance Core.ToJSON TableList_TablesItem_Labels where
 --
 -- /See:/ 'newTableList_TablesItem_View' smart constructor.
 data TableList_TablesItem_View = TableList_TablesItem_View
-  { -- | Specifices the privacy policy for the view.
+  { -- | Specifies the privacy policy for the view.
     privacyPolicy :: (Core.Maybe PrivacyPolicy),
     -- | True if view is defined in legacy SQL dialect, false if in GoogleSQL.
     useLegacySql :: (Core.Maybe Core.Bool)
@@ -12910,7 +13161,7 @@ data TrainingOptions = TrainingOptions
     dartNormalizeType :: (Core.Maybe TrainingOptions_DartNormalizeType),
     -- | The data frequency of a time series.
     dataFrequency :: (Core.Maybe TrainingOptions_DataFrequency),
-    -- | The column to split data with. This column won\'t be used as a feature. 1. When data/split/method is CUSTOM, the corresponding column should be boolean. The rows with true value tag are eval data, and the false are training data. 2. When data/split/method is SEQ, the first DATA/SPLIT/EVAL_FRACTION rows (from smallest to largest) in the corresponding column are used as training data, and the rest are eval data. It respects the order in Orderable data types: https:\/\/cloud.google.com\/bigquery\/docs\/reference\/standard-sql\/data-types#data-type-properties
+    -- | The column to split data with. This column won\'t be used as a feature. 1. When data/split/method is CUSTOM, the corresponding column should be boolean. The rows with true value tag are eval data, and the false are training data. 2. When data/split/method is SEQ, the first DATA/SPLIT/EVAL/FRACTION rows (from smallest to largest) in the corresponding column are used as training data, and the rest are eval data. It respects the order in Orderable data types: https:\/\/cloud.google.com\/bigquery\/docs\/reference\/standard-sql\/data-types#data/type_properties
     dataSplitColumn :: (Core.Maybe Core.Text),
     -- | The fraction of evaluation data over the whole input data. The rest of data will be used as training data. The format should be double. Accurate to two decimal places. Default value is 0.2.
     dataSplitEvalFraction :: (Core.Maybe Core.Double),
@@ -12932,6 +13183,10 @@ data TrainingOptions = TrainingOptions
     feedbackType :: (Core.Maybe TrainingOptions_FeedbackType),
     -- | Whether the model should include intercept during model training.
     fitIntercept :: (Core.Maybe Core.Bool),
+    -- | The forecast limit lower bound that was used during ARIMA model training with limits. To see more details of the algorithm: https:\/\/otexts.com\/fpp2\/limits.html
+    forecastLimitLowerBound :: (Core.Maybe Core.Double),
+    -- | The forecast limit upper bound that was used during ARIMA model training with limits.
+    forecastLimitUpperBound :: (Core.Maybe Core.Double),
     -- | Hidden units for dnn models.
     hiddenUnits :: (Core.Maybe [Core.Int64]),
     -- | The geographical region based on which the holidays are considered in time series modeling. If a valid value is specified, then holiday effects modeling is enabled.
@@ -13089,6 +13344,8 @@ newTrainingOptions =
       enableGlobalExplain = Core.Nothing,
       feedbackType = Core.Nothing,
       fitIntercept = Core.Nothing,
+      forecastLimitLowerBound = Core.Nothing,
+      forecastLimitUpperBound = Core.Nothing,
       hiddenUnits = Core.Nothing,
       holidayRegion = Core.Nothing,
       holidayRegions = Core.Nothing,
@@ -13187,6 +13444,8 @@ instance Core.FromJSON TrainingOptions where
             Core.<*> (o Core..:? "enableGlobalExplain")
             Core.<*> (o Core..:? "feedbackType")
             Core.<*> (o Core..:? "fitIntercept")
+            Core.<*> (o Core..:? "forecastLimitLowerBound")
+            Core.<*> (o Core..:? "forecastLimitUpperBound")
             Core.<*> ( o
                          Core..:? "hiddenUnits"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
@@ -13312,6 +13571,10 @@ instance Core.ToJSON TrainingOptions where
             ("enableGlobalExplain" Core..=) Core.<$> enableGlobalExplain,
             ("feedbackType" Core..=) Core.<$> feedbackType,
             ("fitIntercept" Core..=) Core.<$> fitIntercept,
+            ("forecastLimitLowerBound" Core..=)
+              Core.<$> forecastLimitLowerBound,
+            ("forecastLimitUpperBound" Core..=)
+              Core.<$> forecastLimitUpperBound,
             ("hiddenUnits" Core..=)
               Core.. Core.fmap Core.AsText
               Core.<$> hiddenUnits,
@@ -13657,7 +13920,9 @@ data VectorSearchStatistics = VectorSearchStatistics
   { -- | When @indexUsageMode@ is @UNUSED@ or @PARTIALLY_USED@, this field explains why indexes were not used in all or part of the vector search query. If @indexUsageMode@ is @FULLY_USED@, this field is not populated.
     indexUnusedReasons :: (Core.Maybe [IndexUnusedReason]),
     -- | Specifies the index usage mode for the query.
-    indexUsageMode :: (Core.Maybe VectorSearchStatistics_IndexUsageMode)
+    indexUsageMode :: (Core.Maybe VectorSearchStatistics_IndexUsageMode),
+    -- | Specifies the usage of stored columns in the query when stored columns are used in the query.
+    storedColumnsUsages :: (Core.Maybe [StoredColumnsUsage])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -13667,7 +13932,8 @@ newVectorSearchStatistics ::
 newVectorSearchStatistics =
   VectorSearchStatistics
     { indexUnusedReasons = Core.Nothing,
-      indexUsageMode = Core.Nothing
+      indexUsageMode = Core.Nothing,
+      storedColumnsUsages = Core.Nothing
     }
 
 instance Core.FromJSON VectorSearchStatistics where
@@ -13678,6 +13944,7 @@ instance Core.FromJSON VectorSearchStatistics where
           VectorSearchStatistics
             Core.<$> (o Core..:? "indexUnusedReasons")
             Core.<*> (o Core..:? "indexUsageMode")
+            Core.<*> (o Core..:? "storedColumnsUsages")
       )
 
 instance Core.ToJSON VectorSearchStatistics where
@@ -13685,7 +13952,8 @@ instance Core.ToJSON VectorSearchStatistics where
     Core.object
       ( Core.catMaybes
           [ ("indexUnusedReasons" Core..=) Core.<$> indexUnusedReasons,
-            ("indexUsageMode" Core..=) Core.<$> indexUsageMode
+            ("indexUsageMode" Core..=) Core.<$> indexUsageMode,
+            ("storedColumnsUsages" Core..=) Core.<$> storedColumnsUsages
           ]
       )
 
@@ -13695,7 +13963,7 @@ instance Core.ToJSON VectorSearchStatistics where
 data ViewDefinition = ViewDefinition
   { -- | Optional. Foreign view representations.
     foreignDefinitions :: (Core.Maybe [ForeignViewDefinition]),
-    -- | Optional. Specifices the privacy policy for the view.
+    -- | Optional. Specifies the privacy policy for the view.
     privacyPolicy :: (Core.Maybe PrivacyPolicy),
     -- | Required. A query that BigQuery executes when the view is referenced.
     query :: (Core.Maybe Core.Text),

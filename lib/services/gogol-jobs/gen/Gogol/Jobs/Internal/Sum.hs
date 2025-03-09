@@ -406,6 +406,16 @@ module Gogol.Jobs.Internal.Sum
         ..
       ),
 
+    -- * SearchJobsRequest_RelevanceThreshold
+    SearchJobsRequest_RelevanceThreshold
+      ( SearchJobsRequest_RelevanceThreshold_RELEVANCETHRESHOLDUNSPECIFIED,
+        SearchJobsRequest_RelevanceThreshold_Lowest,
+        SearchJobsRequest_RelevanceThreshold_Low,
+        SearchJobsRequest_RelevanceThreshold_Medium,
+        SearchJobsRequest_RelevanceThreshold_High,
+        ..
+      ),
+
     -- * SearchJobsRequest_SearchMode
     SearchJobsRequest_SearchMode
       ( SearchJobsRequest_SearchMode_SEARCHMODEUNSPECIFIED,
@@ -1929,7 +1939,7 @@ pattern Location_LocationType_STREETADDRESS = Location_LocationType "STREET_ADDR
   Location_LocationType
   #-}
 
--- | Allows the client to return jobs without a set location, specifically, telecommuting jobs (telecommuting is considered by the service as a special location). Job.posting/region indicates if a job permits telecommuting. If this field is set to TelecommutePreference.TELECOMMUTE/ALLOWED, telecommuting jobs are searched, and address and lat/lng are ignored. If not set or set to TelecommutePreference.TELECOMMUTE/EXCLUDED, the telecommute status of the jobs is ignored. Jobs that have PostingRegion.TELECOMMUTE and have additional Job.addresses may still be matched based on other location filters using address or latlng. This filter can be used by itself to search exclusively for telecommuting jobs, or it can be combined with another location filter to search for a combination of job locations, such as \"Mountain View\" or \"telecommuting\" jobs. However, when used in combination with other location filters, telecommuting jobs can be treated as less relevant than other jobs in the search response. This field is only
+-- | Allows the client to return jobs without a set location, specifically, telecommuting jobs (telecommuting is considered by the service as a special location). Job.posting/region indicates if a job permits telecommuting. If this field is set to TelecommutePreference.TELECOMMUTE/ALLOWED, telecommuting jobs are searched, and address and lat/lng are ignored. If not set or set to TelecommutePreference.TELECOMMUTE/EXCLUDED, the telecommute status of the jobs is ignored. Jobs that have PostingRegion.TELECOMMUTE and have additional Job.addresses may still be matched based on other location filters using address or lat_lng. This filter can be used by itself to search exclusively for telecommuting jobs, or it can be combined with another location filter to search for a combination of job locations, such as \"Mountain View\" or \"telecommuting\" jobs. However, when used in combination with other location filters, telecommuting jobs can be treated as less relevant than other jobs in the search response. This field is only
 -- used for job search requests.
 newtype LocationFilter_TelecommutePreference = LocationFilter_TelecommutePreference {fromLocationFilter_TelecommutePreference :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -2128,6 +2138,48 @@ pattern SearchJobsRequest_KeywordMatchMode_KEYWORDMATCHTITLEONLY = SearchJobsReq
   SearchJobsRequest_KeywordMatchMode_KEYWORDMATCHALL,
   SearchJobsRequest_KeywordMatchMode_KEYWORDMATCHTITLEONLY,
   SearchJobsRequest_KeywordMatchMode
+  #-}
+
+-- | Optional. The relevance threshold of the search results. Default to Google defined threshold, leveraging a balance of precision and recall to deliver both highly accurate results and comprehensive coverage of relevant information.
+newtype SearchJobsRequest_RelevanceThreshold = SearchJobsRequest_RelevanceThreshold {fromSearchJobsRequest_RelevanceThreshold :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. In this case, server behavior defaults to Google defined threshold.
+pattern SearchJobsRequest_RelevanceThreshold_RELEVANCETHRESHOLDUNSPECIFIED :: SearchJobsRequest_RelevanceThreshold
+pattern SearchJobsRequest_RelevanceThreshold_RELEVANCETHRESHOLDUNSPECIFIED = SearchJobsRequest_RelevanceThreshold "RELEVANCE_THRESHOLD_UNSPECIFIED"
+
+-- | Lowest relevance threshold.
+pattern SearchJobsRequest_RelevanceThreshold_Lowest :: SearchJobsRequest_RelevanceThreshold
+pattern SearchJobsRequest_RelevanceThreshold_Lowest = SearchJobsRequest_RelevanceThreshold "LOWEST"
+
+-- | Low relevance threshold.
+pattern SearchJobsRequest_RelevanceThreshold_Low :: SearchJobsRequest_RelevanceThreshold
+pattern SearchJobsRequest_RelevanceThreshold_Low = SearchJobsRequest_RelevanceThreshold "LOW"
+
+-- | Medium relevance threshold.
+pattern SearchJobsRequest_RelevanceThreshold_Medium :: SearchJobsRequest_RelevanceThreshold
+pattern SearchJobsRequest_RelevanceThreshold_Medium = SearchJobsRequest_RelevanceThreshold "MEDIUM"
+
+-- | High relevance threshold.
+pattern SearchJobsRequest_RelevanceThreshold_High :: SearchJobsRequest_RelevanceThreshold
+pattern SearchJobsRequest_RelevanceThreshold_High = SearchJobsRequest_RelevanceThreshold "HIGH"
+
+{-# COMPLETE
+  SearchJobsRequest_RelevanceThreshold_RELEVANCETHRESHOLDUNSPECIFIED,
+  SearchJobsRequest_RelevanceThreshold_Lowest,
+  SearchJobsRequest_RelevanceThreshold_Low,
+  SearchJobsRequest_RelevanceThreshold_Medium,
+  SearchJobsRequest_RelevanceThreshold_High,
+  SearchJobsRequest_RelevanceThreshold
   #-}
 
 -- | Mode of a search. Defaults to SearchMode.JOB_SEARCH.

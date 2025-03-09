@@ -118,7 +118,7 @@ instance
       AddOnAttachment
   type
     Scopes ClassroomCoursesCourseWorkMaterialsAddOnAttachmentsGet =
-      '[]
+      '[Classroom'Addons'Student, Classroom'Addons'Teacher]
   requestClient
     ClassroomCoursesCourseWorkMaterialsAddOnAttachmentsGet {..} =
       go

@@ -1367,7 +1367,7 @@ data Job = Job
     -- | Output only. The timestamp when this job posting was created.
     postingCreateTime :: (Core.Maybe Core.DateTime),
     -- | Strongly recommended for the best service experience. The expiration timestamp of the job. After this timestamp, the job is marked as expired, and it no longer appears in search results. The expired job can\'t be listed by the ListJobs API, but it can be retrieved with the GetJob API or updated with the UpdateJob API or deleted with the DeleteJob API. An expired job can be updated and opened again by using a future expiration timestamp. Updating an expired job fails if there is another existing open job with same company, language/code and requisition/id. The expired jobs are retained in our system for 90 days. However, the overall expired job count cannot exceed 3 times the maximum number of open jobs over previous 7 days. If this threshold is exceeded, expired jobs are cleaned out in order of earliest expire time. Expired jobs are no longer accessible after they are cleaned out. Invalid timestamps are ignored, and treated as expire time not provided. If the timestamp is before the instant request is made,
-    -- the job is treated as expired immediately on creation. This kind of job can not be updated. And when creating a job with past timestamp, the posting/publish/time must be set before posting/expire/time. The purpose of this feature is to allow other objects, such as Application, to refer a job that didn\'t exist in the system prior to becoming expired. If you want to modify a job that was expired on creation, delete it and create a new one. If this value isn\'t provided at the time of job creation or is invalid, the job posting expires after 30 days from the job\'s creation time. For example, if the job was created on 2017\/01\/01 13:00AM UTC with an unspecified expiration date, the job expires after 2017\/01\/31 13:00AM UTC. If this value isn\'t provided on job update, it depends on the field masks set by UpdateJobRequest.update/mask. If the field masks include job/end_time, or the masks are empty meaning that every field is updated, the job posting expires after 30 days from the job\'s last update time.
+    -- the job is treated as expired immediately on creation. This kind of job can not be updated. And when creating a job with past timestamp, the posting/publish/time must be set before posting/expire/time. The purpose of this feature is to allow other objects, such as ApplicationInfo, to refer a job that didn\'t exist in the system prior to becoming expired. If you want to modify a job that was expired on creation, delete it and create a new one. If this value isn\'t provided at the time of job creation or is invalid, the job posting expires after 30 days from the job\'s creation time. For example, if the job was created on 2017\/01\/01 13:00AM UTC with an unspecified expiration date, the job expires after 2017\/01\/31 13:00AM UTC. If this value isn\'t provided on job update, it depends on the field masks set by UpdateJobRequest.update/mask. If the field masks include job/end_time, or the masks are empty meaning that every field is updated, the job posting expires after 30 days from the job\'s last update time.
     -- Otherwise the expiration date isn\'t updated.
     postingExpireTime :: (Core.Maybe Core.DateTime),
     -- | The timestamp this job posting was most recently published. The default value is the time the request arrives at the server. Invalid timestamps are ignored.
@@ -1961,7 +1961,7 @@ data LocationFilter = LocationFilter
     latLng :: (Core.Maybe LatLng),
     -- | CLDR region code of the country\/region. This field may be used in two ways: 1) If telecommute preference is not set, this field is used address ambiguity of the user-input address. For example, \"Liverpool\" may refer to \"Liverpool, NY, US\" or \"Liverpool, UK\". This region code biases the address resolution toward a specific country or territory. If this field is not set, address resolution is biased toward the United States by default. 2) If telecommute preference is set to TELECOMMUTE/ALLOWED, the telecommute location filter will be limited to the region specified in this field. If this field is not set, the telecommute job locations will not be See https:\/\/unicode-org.github.io\/cldr-staging\/charts\/latest\/supplemental\/territory/information.html for details. Example: \"CH\" for Switzerland.
     regionCode :: (Core.Maybe Core.Text),
-    -- | Allows the client to return jobs without a set location, specifically, telecommuting jobs (telecommuting is considered by the service as a special location). Job.posting/region indicates if a job permits telecommuting. If this field is set to TelecommutePreference.TELECOMMUTE/ALLOWED, telecommuting jobs are searched, and address and lat/lng are ignored. If not set or set to TelecommutePreference.TELECOMMUTE/EXCLUDED, the telecommute status of the jobs is ignored. Jobs that have PostingRegion.TELECOMMUTE and have additional Job.addresses may still be matched based on other location filters using address or latlng. This filter can be used by itself to search exclusively for telecommuting jobs, or it can be combined with another location filter to search for a combination of job locations, such as \"Mountain View\" or \"telecommuting\" jobs. However, when used in combination with other location filters, telecommuting jobs can be treated as less relevant than other jobs in the search response. This field is only
+    -- | Allows the client to return jobs without a set location, specifically, telecommuting jobs (telecommuting is considered by the service as a special location). Job.posting/region indicates if a job permits telecommuting. If this field is set to TelecommutePreference.TELECOMMUTE/ALLOWED, telecommuting jobs are searched, and address and lat/lng are ignored. If not set or set to TelecommutePreference.TELECOMMUTE/EXCLUDED, the telecommute status of the jobs is ignored. Jobs that have PostingRegion.TELECOMMUTE and have additional Job.addresses may still be matched based on other location filters using address or lat_lng. This filter can be used by itself to search exclusively for telecommuting jobs, or it can be combined with another location filter to search for a combination of job locations, such as \"Mountain View\" or \"telecommuting\" jobs. However, when used in combination with other location filters, telecommuting jobs can be treated as less relevant than other jobs in the search response. This field is only
     -- used for job search requests.
     telecommutePreference :: (Core.Maybe LocationFilter_TelecommutePreference)
   }
@@ -2208,14 +2208,14 @@ instance Core.FromJSON Operation_Response where
 instance Core.ToJSON Operation_Response where
   toJSON Operation_Response {..} = Core.toJSON additional
 
--- | Represents a postal address, e.g. for postal delivery or payments addresses. Given a postal address, a postal service can deliver items to a premise, P.O. Box or similar. It is not intended to model geographical locations (roads, towns, mountains). In typical usage an address would be created via user input or from importing existing data, depending on the type of process. Advice on address input \/ editing: - Use an internationalization-ready address widget such as https:\/\/github.com\/google\/libaddressinput) - Users should not be presented with UI elements for input or editing of fields outside countries where that field is used. For more guidance on how to use this schema, please see: https:\/\/support.google.com\/business\/answer\/6397478
+-- | Represents a postal address. For example for postal delivery or payments addresses. Given a postal address, a postal service can deliver items to a premise, P.O. Box or similar. It is not intended to model geographical locations (roads, towns, mountains). In typical usage an address would be created by user input or from importing existing data, depending on the type of process. Advice on address input \/ editing: - Use an internationalization-ready address widget such as https:\/\/github.com\/google\/libaddressinput) - Users should not be presented with UI elements for input or editing of fields outside countries where that field is used. For more guidance on how to use this schema, see: https:\/\/support.google.com\/business\/answer\/6397478
 --
 -- /See:/ 'newPostalAddress' smart constructor.
 data PostalAddress = PostalAddress
-  { -- | Unstructured address lines describing the lower levels of an address. Because values in address/lines do not have type information and may sometimes contain multiple values in a single field (e.g. \"Austin, TX\"), it is important that the line order is clear. The order of address lines should be \"envelope order\" for the country\/region of the address. In places where this can vary (e.g. Japan), address/language is used to make it explicit (e.g. \"ja\" for large-to-small ordering and \"ja-Latn\" or \"en\" for small-to-large). This way, the most specific line of an address can be selected based on the language. The minimum permitted structural representation of an address consists of a region/code with all remaining information placed in the address/lines. It would be possible to format such an address very approximately without geocoding, but no semantic reasoning could be made about any of the address components until it was at least partially resolved. Creating an address only containing a region/code and
-    -- address/lines, and then geocoding is the recommended way to handle completely unstructured addresses (as opposed to guessing which parts of the address should be localities or administrative areas).
+  { -- | Unstructured address lines describing the lower levels of an address. Because values in address/lines do not have type information and may sometimes contain multiple values in a single field (For example \"Austin, TX\"), it is important that the line order is clear. The order of address lines should be \"envelope order\" for the country\/region of the address. In places where this can vary (For example Japan), address/language is used to make it explicit (For example \"ja\" for large-to-small ordering and \"ja-Latn\" or \"en\" for small-to-large). This way, the most specific line of an address can be selected based on the language. The minimum permitted structural representation of an address consists of a region/code with all remaining information placed in the address/lines. It would be possible to format such an address very approximately without geocoding, but no semantic reasoning could be made about any of the address components until it was at least partially resolved. Creating an address only
+    -- containing a region/code and address/lines, and then geocoding is the recommended way to handle completely unstructured addresses (as opposed to guessing which parts of the address should be localities or administrative areas).
     addressLines :: (Core.Maybe [Core.Text]),
-    -- | Optional. Highest administrative subdivision which is used for postal addresses of a country or region. For example, this can be a state, a province, an oblast, or a prefecture. Specifically, for Spain this is the province and not the autonomous community (e.g. \"Barcelona\" and not \"Catalonia\"). Many countries don\'t use an administrative area in postal addresses. E.g. in Switzerland this should be left unpopulated.
+    -- | Optional. Highest administrative subdivision which is used for postal addresses of a country or region. For example, this can be a state, a province, an oblast, or a prefecture. Specifically, for Spain this is the province and not the autonomous community (For example \"Barcelona\" and not \"Catalonia\"). Many countries don\'t use an administrative area in postal addresses. For example in Switzerland this should be left unpopulated.
     administrativeArea :: (Core.Maybe Core.Text),
     -- | Optional. BCP-47 language code of the contents of this address (if known). This is often the UI language of the input form or is expected to match one of the languages used in the address\' country\/region, or their transliterated equivalents. This can affect formatting in certain countries, but is not critical to the correctness of the data and will never affect any validation or other non-formatting related operations. If this value is not known, it should be omitted (rather than specifying a possibly incorrect default). Examples: \"zh-Hant\", \"ja\", \"ja-Latn\", \"en\".
     languageCode :: (Core.Maybe Core.Text),
@@ -2223,7 +2223,7 @@ data PostalAddress = PostalAddress
     locality :: (Core.Maybe Core.Text),
     -- | Optional. The name of the organization at the address.
     organization :: (Core.Maybe Core.Text),
-    -- | Optional. Postal code of the address. Not all countries use or require postal codes to be present, but where they are used, they may trigger additional validation with other parts of the address (e.g. state\/zip validation in the U.S.A.).
+    -- | Optional. Postal code of the address. Not all countries use or require postal codes to be present, but where they are used, they may trigger additional validation with other parts of the address (For example state\/zip validation in the U.S.A.).
     postalCode :: (Core.Maybe Core.Text),
     -- | Optional. The recipient at the address. This field may, under certain circumstances, contain multiline information. For example, it might contain \"care of\" information.
     recipients :: (Core.Maybe [Core.Text]),
@@ -2231,7 +2231,7 @@ data PostalAddress = PostalAddress
     regionCode :: (Core.Maybe Core.Text),
     -- | The schema revision of the @PostalAddress@. This must be set to 0, which is the latest revision. All new revisions __must__ be backward compatible with old revisions.
     revision :: (Core.Maybe Core.Int32),
-    -- | Optional. Additional, country-specific, sorting code. This is not used in most regions. Where it is used, the value is either a string like \"CEDEX\", optionally followed by a number (e.g. \"CEDEX 7\"), or just a number alone, representing the \"sector code\" (Jamaica), \"delivery area indicator\" (Malawi) or \"post office indicator\" (e.g. Côte d\'Ivoire).
+    -- | Optional. Additional, country-specific, sorting code. This is not used in most regions. Where it is used, the value is either a string like \"CEDEX\", optionally followed by a number (For example \"CEDEX 7\"), or just a number alone, representing the \"sector code\" (Jamaica), \"delivery area indicator\" (Malawi) or \"post office indicator\" (For example Côte d\'Ivoire).
     sortingCode :: (Core.Maybe Core.Text),
     -- | Optional. Sublocality of the address. For example, this can be neighborhoods, boroughs, districts.
     sublocality :: (Core.Maybe Core.Text)
@@ -2447,6 +2447,8 @@ data SearchJobsRequest = SearchJobsRequest
     orderBy :: (Core.Maybe Core.Text),
     -- | The token specifying the current offset within search results. See SearchJobsResponse.next/page/token for an explanation of how to obtain the next set of query results.
     pageToken :: (Core.Maybe Core.Text),
+    -- | Optional. The relevance threshold of the search results. Default to Google defined threshold, leveraging a balance of precision and recall to deliver both highly accurate results and comprehensive coverage of relevant information.
+    relevanceThreshold :: (Core.Maybe SearchJobsRequest_RelevanceThreshold),
     -- | Required. The meta information collected about the job searcher, used to improve the search quality of the service. The identifiers (such as @user_id@) are provided by users, and must be unique and consistent.
     requestMetadata :: (Core.Maybe RequestMetadata),
     -- | Mode of a search. Defaults to SearchMode.JOB_SEARCH.
@@ -2471,6 +2473,7 @@ newSearchJobsRequest =
       offset = Core.Nothing,
       orderBy = Core.Nothing,
       pageToken = Core.Nothing,
+      relevanceThreshold = Core.Nothing,
       requestMetadata = Core.Nothing,
       searchMode = Core.Nothing
     }
@@ -2493,6 +2496,7 @@ instance Core.FromJSON SearchJobsRequest where
             Core.<*> (o Core..:? "offset")
             Core.<*> (o Core..:? "orderBy")
             Core.<*> (o Core..:? "pageToken")
+            Core.<*> (o Core..:? "relevanceThreshold")
             Core.<*> (o Core..:? "requestMetadata")
             Core.<*> (o Core..:? "searchMode")
       )
@@ -2513,6 +2517,7 @@ instance Core.ToJSON SearchJobsRequest where
             ("offset" Core..=) Core.<$> offset,
             ("orderBy" Core..=) Core.<$> orderBy,
             ("pageToken" Core..=) Core.<$> pageToken,
+            ("relevanceThreshold" Core..=) Core.<$> relevanceThreshold,
             ("requestMetadata" Core..=) Core.<$> requestMetadata,
             ("searchMode" Core..=) Core.<$> searchMode
           ]
@@ -2740,13 +2745,13 @@ instance Core.ToJSON Tenant where
 --
 -- /See:/ 'newTimeOfDay' smart constructor.
 data TimeOfDay' = TimeOfDay'
-  { -- | Hours of day in 24 hour format. Should be from 0 to 23. An API may choose to allow the value \"24:00:00\" for scenarios like business closing time.
+  { -- | Hours of a day in 24 hour format. Must be greater than or equal to 0 and typically must be less than or equal to 23. An API may choose to allow the value \"24:00:00\" for scenarios like business closing time.
     hours :: (Core.Maybe Core.Int32),
-    -- | Minutes of hour of day. Must be from 0 to 59.
+    -- | Minutes of an hour. Must be greater than or equal to 0 and less than or equal to 59.
     minutes :: (Core.Maybe Core.Int32),
-    -- | Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
+    -- | Fractions of seconds, in nanoseconds. Must be greater than or equal to 0 and less than or equal to 999,999,999.
     nanos :: (Core.Maybe Core.Int32),
-    -- | Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds.
+    -- | Seconds of a minute. Must be greater than or equal to 0 and typically must be less than or equal to 59. An API may allow the value 60 if it allows leap-seconds.
     seconds :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

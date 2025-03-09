@@ -117,7 +117,9 @@ instance
   type
     Rs ClassroomCoursesAnnouncementsAddOnAttachmentsList =
       ListAddOnAttachmentsResponse
-  type Scopes ClassroomCoursesAnnouncementsAddOnAttachmentsList = '[]
+  type
+    Scopes ClassroomCoursesAnnouncementsAddOnAttachmentsList =
+      '[Classroom'Addons'Student, Classroom'Addons'Teacher]
   requestClient ClassroomCoursesAnnouncementsAddOnAttachmentsList {..} =
     go
       courseId

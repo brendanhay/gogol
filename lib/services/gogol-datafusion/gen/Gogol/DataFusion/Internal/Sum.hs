@@ -90,6 +90,15 @@ module Gogol.DataFusion.Internal.Sum
         ..
       ),
 
+    -- * MaintenanceEvent_State
+    MaintenanceEvent_State
+      ( MaintenanceEvent_State_STATEUNSPECIFIED,
+        MaintenanceEvent_State_Scheduled,
+        MaintenanceEvent_State_Started,
+        MaintenanceEvent_State_Completed,
+        ..
+      ),
+
     -- * NetworkConfig_ConnectionType
     NetworkConfig_ConnectionType
       ( NetworkConfig_ConnectionType_CONNECTIONTYPEUNSPECIFIED,
@@ -387,6 +396,43 @@ pattern Instance_Type_Developer = Instance_Type "DEVELOPER"
   Instance_Type_Enterprise,
   Instance_Type_Developer,
   Instance_Type
+  #-}
+
+-- | Output only. The state of the maintenance event.
+newtype MaintenanceEvent_State = MaintenanceEvent_State {fromMaintenanceEvent_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The state of the maintenance event is unspecified.
+pattern MaintenanceEvent_State_STATEUNSPECIFIED :: MaintenanceEvent_State
+pattern MaintenanceEvent_State_STATEUNSPECIFIED = MaintenanceEvent_State "STATE_UNSPECIFIED"
+
+-- | The maintenance is scheduled but has not started.
+pattern MaintenanceEvent_State_Scheduled :: MaintenanceEvent_State
+pattern MaintenanceEvent_State_Scheduled = MaintenanceEvent_State "SCHEDULED"
+
+-- | The maintenance has been started.
+pattern MaintenanceEvent_State_Started :: MaintenanceEvent_State
+pattern MaintenanceEvent_State_Started = MaintenanceEvent_State "STARTED"
+
+-- | The maintenance has been completed.
+pattern MaintenanceEvent_State_Completed :: MaintenanceEvent_State
+pattern MaintenanceEvent_State_Completed = MaintenanceEvent_State "COMPLETED"
+
+{-# COMPLETE
+  MaintenanceEvent_State_STATEUNSPECIFIED,
+  MaintenanceEvent_State_Scheduled,
+  MaintenanceEvent_State_Started,
+  MaintenanceEvent_State_Completed,
+  MaintenanceEvent_State
   #-}
 
 -- | Optional. Type of connection for establishing private IP connectivity between the Data Fusion customer project VPC and the corresponding tenant project from a predefined list of available connection modes. If this field is unspecified for a private instance, VPC peering is used.

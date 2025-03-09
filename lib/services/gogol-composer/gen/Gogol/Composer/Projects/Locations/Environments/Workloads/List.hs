@@ -23,7 +23,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists workloads in a Cloud Composer environment. Workload is a unit that runs a single Composer component. This method is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+-- Lists workloads in a Cloud Composer environment. Workload is a unit that runs a single Composer component. This method is supported for Cloud Composer environments in versions composer-2././-airflow-/./.* and newer.
 --
 -- /See:/ <https://cloud.google.com/composer/ Cloud Composer API Reference> for @composer.projects.locations.environments.workloads.list@.
 module Gogol.Composer.Projects.Locations.Environments.Workloads.List
@@ -56,7 +56,7 @@ type ComposerProjectsLocationsEnvironmentsWorkloadsListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] ListWorkloadsResponse
 
--- | Lists workloads in a Cloud Composer environment. Workload is a unit that runs a single Composer component. This method is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+-- | Lists workloads in a Cloud Composer environment. Workload is a unit that runs a single Composer component. This method is supported for Cloud Composer environments in versions composer-2././-airflow-/./.* and newer.
 --
 -- /See:/ 'newComposerProjectsLocationsEnvironmentsWorkloadsList' smart constructor.
 data ComposerProjectsLocationsEnvironmentsWorkloadsList = ComposerProjectsLocationsEnvironmentsWorkloadsList

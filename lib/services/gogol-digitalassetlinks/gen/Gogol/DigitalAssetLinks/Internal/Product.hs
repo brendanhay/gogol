@@ -31,6 +31,14 @@ module Gogol.DigitalAssetLinks.Internal.Product
     Asset (..),
     newAsset,
 
+    -- * BulkCheckRequest
+    BulkCheckRequest (..),
+    newBulkCheckRequest,
+
+    -- * BulkCheckResponse
+    BulkCheckResponse (..),
+    newBulkCheckResponse,
+
     -- * CertificateInfo
     CertificateInfo (..),
     newCertificateInfo,
@@ -46,6 +54,10 @@ module Gogol.DigitalAssetLinks.Internal.Product
     -- * Statement
     Statement (..),
     newStatement,
+
+    -- * StatementTemplate
+    StatementTemplate (..),
+    newStatementTemplate,
 
     -- * WebAsset
     WebAsset (..),
@@ -127,6 +139,94 @@ instance Core.ToJSON Asset where
       ( Core.catMaybes
           [ ("androidApp" Core..=) Core.<$> androidApp,
             ("web" Core..=) Core.<$> web
+          ]
+      )
+
+-- | Message used to check for the existence of multiple digital asset links within a single RPC.
+--
+-- /See:/ 'newBulkCheckRequest' smart constructor.
+data BulkCheckRequest = BulkCheckRequest
+  { -- | If specified, will be used in any given template statement that doesn’t specify a relation.
+    defaultRelation :: (Core.Maybe Core.Text),
+    -- | If specified, will be used in any given template statement that doesn’t specify a source.
+    defaultSource :: (Core.Maybe Asset),
+    -- | If specified, will be used in any given template statement that doesn’t specify a target.
+    defaultTarget :: (Core.Maybe Asset),
+    -- | List of statements to check. For each statement, you can omit a field if the corresponding default_* field below was supplied. Minimum 1 statement; maximum 1,000 statements. Any additional statements will be ignored.
+    statements :: (Core.Maybe [StatementTemplate])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BulkCheckRequest' with the minimum fields required to make a request.
+newBulkCheckRequest ::
+  BulkCheckRequest
+newBulkCheckRequest =
+  BulkCheckRequest
+    { defaultRelation = Core.Nothing,
+      defaultSource = Core.Nothing,
+      defaultTarget = Core.Nothing,
+      statements = Core.Nothing
+    }
+
+instance Core.FromJSON BulkCheckRequest where
+  parseJSON =
+    Core.withObject
+      "BulkCheckRequest"
+      ( \o ->
+          BulkCheckRequest
+            Core.<$> (o Core..:? "defaultRelation")
+            Core.<*> (o Core..:? "defaultSource")
+            Core.<*> (o Core..:? "defaultTarget")
+            Core.<*> (o Core..:? "statements")
+      )
+
+instance Core.ToJSON BulkCheckRequest where
+  toJSON BulkCheckRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("defaultRelation" Core..=) Core.<$> defaultRelation,
+            ("defaultSource" Core..=) Core.<$> defaultSource,
+            ("defaultTarget" Core..=) Core.<$> defaultTarget,
+            ("statements" Core..=) Core.<$> statements
+          ]
+      )
+
+-- | Response for BulkCheck call. Results are sent in a list in the same order in which they were sent. Individual check errors are described in the appropriate check/results entry. If the entire call fails, the response will include a bulk/error_code field describing the error.
+--
+-- /See:/ 'newBulkCheckResponse' smart constructor.
+data BulkCheckResponse = BulkCheckResponse
+  { -- | Error code for the entire request. Present only if the entire request failed. Individual check errors will not trigger the presence of this field.
+    bulkErrorCode :: (Core.Maybe BulkCheckResponse_BulkErrorCode),
+    -- | List of results for each check request. Results are returned in the same order in which they were sent in the request.
+    checkResults :: (Core.Maybe [CheckResponse])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BulkCheckResponse' with the minimum fields required to make a request.
+newBulkCheckResponse ::
+  BulkCheckResponse
+newBulkCheckResponse =
+  BulkCheckResponse
+    { bulkErrorCode = Core.Nothing,
+      checkResults = Core.Nothing
+    }
+
+instance Core.FromJSON BulkCheckResponse where
+  parseJSON =
+    Core.withObject
+      "BulkCheckResponse"
+      ( \o ->
+          BulkCheckResponse
+            Core.<$> (o Core..:? "bulkErrorCode")
+            Core.<*> (o Core..:? "checkResults")
+      )
+
+instance Core.ToJSON BulkCheckResponse where
+  toJSON BulkCheckResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("bulkErrorCode" Core..=) Core.<$> bulkErrorCode,
+            ("checkResults" Core..=) Core.<$> checkResults
           ]
       )
 
@@ -292,6 +392,50 @@ instance Core.FromJSON Statement where
 
 instance Core.ToJSON Statement where
   toJSON Statement {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("relation" Core..=) Core.<$> relation,
+            ("source" Core..=) Core.<$> source,
+            ("target" Core..=) Core.<$> target
+          ]
+      )
+
+-- | A single statement to check in a bulk call using BulkCheck. See CheckRequest for details about each field.
+--
+-- /See:/ 'newStatementTemplate' smart constructor.
+data StatementTemplate = StatementTemplate
+  { -- | The relationship being asserted between the source and target. If omitted, you must specify a BulkCheckRequest.default_relation value to use here.
+    relation :: (Core.Maybe Core.Text),
+    -- | The source asset that is asserting the statement. If omitted, you must specify a BulkCheckRequest.default_source value to use here.
+    source :: (Core.Maybe Asset),
+    -- | The target that the source is declaring the relationship with. If omitted, you must specify a BulkCheckRequest.default_target to use here.
+    target :: (Core.Maybe Asset)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'StatementTemplate' with the minimum fields required to make a request.
+newStatementTemplate ::
+  StatementTemplate
+newStatementTemplate =
+  StatementTemplate
+    { relation = Core.Nothing,
+      source = Core.Nothing,
+      target = Core.Nothing
+    }
+
+instance Core.FromJSON StatementTemplate where
+  parseJSON =
+    Core.withObject
+      "StatementTemplate"
+      ( \o ->
+          StatementTemplate
+            Core.<$> (o Core..:? "relation")
+            Core.<*> (o Core..:? "source")
+            Core.<*> (o Core..:? "target")
+      )
+
+instance Core.ToJSON StatementTemplate where
+  toJSON StatementTemplate {..} =
     Core.object
       ( Core.catMaybes
           [ ("relation" Core..=) Core.<$> relation,

@@ -1314,17 +1314,6 @@ module Gogol.Logging
     -- ** Xgafv
     Xgafv (..),
 
-    -- ** AuditConfig
-    AuditConfig (..),
-    newAuditConfig,
-
-    -- ** AuditLogConfig
-    AuditLogConfig (..),
-    newAuditLogConfig,
-
-    -- ** AuditLogConfig_LogType
-    AuditLogConfig_LogType (..),
-
     -- ** BigQueryDataset
     BigQueryDataset (..),
     newBigQueryDataset,

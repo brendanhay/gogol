@@ -55,6 +55,7 @@ library
     Gogol.CloudFunctions.Projects.Locations.Functions.CommitFunctionUpgrade
     Gogol.CloudFunctions.Projects.Locations.Functions.Create
     Gogol.CloudFunctions.Projects.Locations.Functions.Delete
+    Gogol.CloudFunctions.Projects.Locations.Functions.DetachFunction
     Gogol.CloudFunctions.Projects.Locations.Functions.GenerateDownloadUrl
     Gogol.CloudFunctions.Projects.Locations.Functions.GenerateUploadUrl
     Gogol.CloudFunctions.Projects.Locations.Functions.Get

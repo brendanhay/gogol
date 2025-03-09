@@ -71,6 +71,8 @@ module Gogol.CloudFunctions.Internal.Sum
         Function_State_Deploying,
         Function_State_Deleting,
         Function_State_Unknown,
+        Function_State_Detaching,
+        Function_State_DETACHFAILED,
         ..
       ),
 
@@ -201,7 +203,6 @@ module Gogol.CloudFunctions.Internal.Sum
         UpgradeInfo_UpgradeState_REDIRECTFUNCTIONUPGRADETRAFFICERROR,
         UpgradeInfo_UpgradeState_ROLLBACKFUNCTIONUPGRADETRAFFICERROR,
         UpgradeInfo_UpgradeState_COMMITFUNCTIONUPGRADEERROR,
-        UpgradeInfo_UpgradeState_DETACHINPROGRESS,
         ..
       ),
   )
@@ -273,7 +274,7 @@ pattern AuditLogConfig_LogType_DATAREAD = AuditLogConfig_LogType "DATA_READ"
   AuditLogConfig_LogType
   #-}
 
--- | Docker Registry to use for this deployment. This configuration is only applicable to 1st Gen functions, 2nd Gen functions can only use Artifact Registry. If unspecified, it defaults to @ARTIFACT_REGISTRY@. If @docker_repository@ field is specified, this field should either be left unspecified or set to @ARTIFACT_REGISTRY@.
+-- | Docker Registry to use for this deployment. This configuration is only applicable to 1st Gen functions, 2nd Gen functions can only use Artifact Registry. Deprecated: Container Registry option will no longer be available after March 2025: https:\/\/cloud.google.com\/artifact-registry\/docs\/transition\/transition-from-gcr Please use Artifact Registry instead, which is the default choice. If unspecified, it defaults to @ARTIFACT_REGISTRY@. If @docker_repository@ field is specified, this field should either be left unspecified or set to @ARTIFACT_REGISTRY@.
 newtype BuildConfig_DockerRegistry = BuildConfig_DockerRegistry {fromBuildConfig_DockerRegistry :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -406,6 +407,14 @@ pattern Function_State_Deleting = Function_State "DELETING"
 pattern Function_State_Unknown :: Function_State
 pattern Function_State_Unknown = Function_State "UNKNOWN"
 
+-- | Function is being detached.
+pattern Function_State_Detaching :: Function_State
+pattern Function_State_Detaching = Function_State "DETACHING"
+
+-- | Function detach failed and the function is still serving.
+pattern Function_State_DETACHFAILED :: Function_State
+pattern Function_State_DETACHFAILED = Function_State "DETACH_FAILED"
+
 {-# COMPLETE
   Function_State_STATEUNSPECIFIED,
   Function_State_Active,
@@ -413,6 +422,8 @@ pattern Function_State_Unknown = Function_State "UNKNOWN"
   Function_State_Deploying,
   Function_State_Deleting,
   Function_State_Unknown,
+  Function_State_Detaching,
+  Function_State_DETACHFAILED,
   Function_State
   #-}
 
@@ -563,7 +574,7 @@ newtype GoogleCloudFunctionsV2Stage_Name = GoogleCloudFunctionsV2Stage_Name {fro
 pattern GoogleCloudFunctionsV2Stage_Name_NAMEUNSPECIFIED :: GoogleCloudFunctionsV2Stage_Name
 pattern GoogleCloudFunctionsV2Stage_Name_NAMEUNSPECIFIED = GoogleCloudFunctionsV2Stage_Name "NAME_UNSPECIFIED"
 
--- | Artifact Regsitry Stage
+-- | Artifact Registry Stage
 pattern GoogleCloudFunctionsV2Stage_Name_ARTIFACTREGISTRY :: GoogleCloudFunctionsV2Stage_Name
 pattern GoogleCloudFunctionsV2Stage_Name_ARTIFACTREGISTRY = GoogleCloudFunctionsV2Stage_Name "ARTIFACT_REGISTRY"
 
@@ -947,10 +958,6 @@ pattern UpgradeInfo_UpgradeState_ROLLBACKFUNCTIONUPGRADETRAFFICERROR = UpgradeIn
 pattern UpgradeInfo_UpgradeState_COMMITFUNCTIONUPGRADEERROR :: UpgradeInfo_UpgradeState
 pattern UpgradeInfo_UpgradeState_COMMITFUNCTIONUPGRADEERROR = UpgradeInfo_UpgradeState "COMMIT_FUNCTION_UPGRADE_ERROR"
 
--- | Function is requested to be detached from 2nd Gen to CRf.
-pattern UpgradeInfo_UpgradeState_DETACHINPROGRESS :: UpgradeInfo_UpgradeState
-pattern UpgradeInfo_UpgradeState_DETACHINPROGRESS = UpgradeInfo_UpgradeState "DETACH_IN_PROGRESS"
-
 {-# COMPLETE
   UpgradeInfo_UpgradeState_UPGRADESTATEUNSPECIFIED,
   UpgradeInfo_UpgradeState_ELIGIBLEFOR2NDGENUPGRADE,
@@ -962,6 +969,5 @@ pattern UpgradeInfo_UpgradeState_DETACHINPROGRESS = UpgradeInfo_UpgradeState "DE
   UpgradeInfo_UpgradeState_REDIRECTFUNCTIONUPGRADETRAFFICERROR,
   UpgradeInfo_UpgradeState_ROLLBACKFUNCTIONUPGRADETRAFFICERROR,
   UpgradeInfo_UpgradeState_COMMITFUNCTIONUPGRADEERROR,
-  UpgradeInfo_UpgradeState_DETACHINPROGRESS,
   UpgradeInfo_UpgradeState
   #-}

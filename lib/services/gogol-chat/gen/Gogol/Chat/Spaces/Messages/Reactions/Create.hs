@@ -23,7 +23,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a reaction and adds it to a message. Only unicode emojis are supported. For an example, see <https://developers.google.com/workspace/chat/create-reactions Add a reaction to a message>. Requires <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user user authentication>.
+-- Creates a reaction and adds it to a message. For an example, see <https://developers.google.com/workspace/chat/create-reactions Add a reaction to a message>. Requires <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user user authentication>.
 --
 -- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference> for @chat.spaces.messages.reactions.create@.
 module Gogol.Chat.Spaces.Messages.Reactions.Create
@@ -54,7 +54,7 @@ type ChatSpacesMessagesReactionsCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] Reaction
     Core.:> Core.Post '[Core.JSON] Reaction
 
--- | Creates a reaction and adds it to a message. Only unicode emojis are supported. For an example, see <https://developers.google.com/workspace/chat/create-reactions Add a reaction to a message>. Requires <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user user authentication>.
+-- | Creates a reaction and adds it to a message. For an example, see <https://developers.google.com/workspace/chat/create-reactions Add a reaction to a message>. Requires <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user user authentication>.
 --
 -- /See:/ 'newChatSpacesMessagesReactionsCreate' smart constructor.
 data ChatSpacesMessagesReactionsCreate = ChatSpacesMessagesReactionsCreate

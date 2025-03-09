@@ -103,6 +103,10 @@ module Gogol.Drive.Internal.Product
     ContentRestriction (..),
     newContentRestriction,
 
+    -- * DownloadRestriction
+    DownloadRestriction (..),
+    newDownloadRestriction,
+
     -- * Drive
     Drive (..),
     newDrive,
@@ -1443,6 +1447,45 @@ instance Core.ToJSON ContentRestriction where
           ]
       )
 
+-- | A restriction for copy and download of the file.
+--
+-- /See:/ 'newDownloadRestriction' smart constructor.
+data DownloadRestriction = DownloadRestriction
+  { -- | Whether download and copy is restricted for readers.
+    restrictedForReaders :: (Core.Maybe Core.Bool),
+    -- | Whether download and copy is restricted for writers. If true, download is also restricted for readers.
+    restrictedForWriters :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DownloadRestriction' with the minimum fields required to make a request.
+newDownloadRestriction ::
+  DownloadRestriction
+newDownloadRestriction =
+  DownloadRestriction
+    { restrictedForReaders = Core.Nothing,
+      restrictedForWriters = Core.Nothing
+    }
+
+instance Core.FromJSON DownloadRestriction where
+  parseJSON =
+    Core.withObject
+      "DownloadRestriction"
+      ( \o ->
+          DownloadRestriction
+            Core.<$> (o Core..:? "restrictedForReaders")
+            Core.<*> (o Core..:? "restrictedForWriters")
+      )
+
+instance Core.ToJSON DownloadRestriction where
+  toJSON DownloadRestriction {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("restrictedForReaders" Core..=) Core.<$> restrictedForReaders,
+            ("restrictedForWriters" Core..=) Core.<$> restrictedForWriters
+          ]
+      )
+
 -- | Representation of a shared drive. Some resource methods (such as @drives.update@) require a @driveId@. Use the @drives.list@ method to retrieve the ID for a shared drive.
 --
 -- /See:/ 'newDrive' smart constructor.
@@ -1731,6 +1774,8 @@ data Drive_Restrictions = Drive_Restrictions
     copyRequiresWriterPermission :: (Core.Maybe Core.Bool),
     -- | Whether access to this shared drive and items inside this shared drive is restricted to users of the domain to which this shared drive belongs. This restriction may be overridden by other sharing policies controlled outside of this shared drive.
     domainUsersOnly :: (Core.Maybe Core.Bool),
+    -- | Download restrictions applied by shared drive managers.
+    downloadRestriction :: (Core.Maybe DownloadRestriction),
     -- | Whether access to items inside this shared drive is restricted to its members.
     driveMembersOnly :: (Core.Maybe Core.Bool),
     -- | If true, only users with the organizer role can share folders. If false, users with either the organizer role or the file organizer role can share folders.
@@ -1746,6 +1791,7 @@ newDrive_Restrictions =
     { adminManagedRestrictions = Core.Nothing,
       copyRequiresWriterPermission = Core.Nothing,
       domainUsersOnly = Core.Nothing,
+      downloadRestriction = Core.Nothing,
       driveMembersOnly = Core.Nothing,
       sharingFoldersRequiresOrganizerPermission = Core.Nothing
     }
@@ -1759,6 +1805,7 @@ instance Core.FromJSON Drive_Restrictions where
             Core.<$> (o Core..:? "adminManagedRestrictions")
             Core.<*> (o Core..:? "copyRequiresWriterPermission")
             Core.<*> (o Core..:? "domainUsersOnly")
+            Core.<*> (o Core..:? "downloadRestriction")
             Core.<*> (o Core..:? "driveMembersOnly")
             Core.<*> (o Core..:? "sharingFoldersRequiresOrganizerPermission")
       )
@@ -1772,6 +1819,7 @@ instance Core.ToJSON Drive_Restrictions where
             ("copyRequiresWriterPermission" Core..=)
               Core.<$> copyRequiresWriterPermission,
             ("domainUsersOnly" Core..=) Core.<$> domainUsersOnly,
+            ("downloadRestriction" Core..=) Core.<$> downloadRestriction,
             ("driveMembersOnly" Core..=) Core.<$> driveMembersOnly,
             ("sharingFoldersRequiresOrganizerPermission" Core..=)
               Core.<$> sharingFoldersRequiresOrganizerPermission
@@ -1864,6 +1912,8 @@ data File = File
     id :: (Core.Maybe Core.Text),
     -- | Output only. Additional metadata about image media, if available.
     imageMediaMetadata :: (Core.Maybe File_ImageMediaMetadata),
+    -- | Whether this file has inherited permissions disabled. Inherited permissions are enabled by default.
+    inheritedPermissionsDisabled :: (Core.Maybe Core.Bool),
     -- | Output only. Whether the file was created or opened by the requesting app.
     isAppAuthorized :: (Core.Maybe Core.Bool),
     -- | Output only. Identifies what kind of resource this is. Value: the fixed string @\"drive#file\"@.
@@ -1977,6 +2027,7 @@ newFile =
       iconLink = Core.Nothing,
       id = Core.Nothing,
       imageMediaMetadata = Core.Nothing,
+      inheritedPermissionsDisabled = Core.Nothing,
       isAppAuthorized = Core.Nothing,
       kind = "drive#file",
       labelInfo = Core.Nothing,
@@ -2047,6 +2098,7 @@ instance Core.FromJSON File where
             Core.<*> (o Core..:? "iconLink")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "imageMediaMetadata")
+            Core.<*> (o Core..:? "inheritedPermissionsDisabled")
             Core.<*> (o Core..:? "isAppAuthorized")
             Core.<*> (o Core..:? "kind" Core..!= "drive#file")
             Core.<*> (o Core..:? "labelInfo")
@@ -2117,6 +2169,8 @@ instance Core.ToJSON File where
             ("iconLink" Core..=) Core.<$> iconLink,
             ("id" Core..=) Core.<$> id,
             ("imageMediaMetadata" Core..=) Core.<$> imageMediaMetadata,
+            ("inheritedPermissionsDisabled" Core..=)
+              Core.<$> inheritedPermissionsDisabled,
             ("isAppAuthorized" Core..=) Core.<$> isAppAuthorized,
             Core.Just ("kind" Core..= kind),
             ("labelInfo" Core..=) Core.<$> labelInfo,
@@ -2218,10 +2272,14 @@ data File_Capabilities = File_Capabilities
     canDelete :: (Core.Maybe Core.Bool),
     -- | Output only. Whether the current user can delete children of this folder. This is false when the item is not a folder. Only populated for items in shared drives.
     canDeleteChildren :: (Core.Maybe Core.Bool),
+    -- | Whether a user can disable inherited permissions.
+    canDisableInheritedPermissions :: (Core.Maybe Core.Bool),
     -- | Output only. Whether the current user can download this file.
     canDownload :: (Core.Maybe Core.Bool),
     -- | Output only. Whether the current user can edit this file. Other factors may limit the type of changes a user can make to a file. For example, see @canChangeCopyRequiresWriterPermission@ or @canModifyContent@.
     canEdit :: (Core.Maybe Core.Bool),
+    -- | Whether a user can re-enable inherited permissions.
+    canEnableInheritedPermissions :: (Core.Maybe Core.Bool),
     -- | Output only. Whether the current user can list the children of this folder. This is always false when the item is not a folder.
     canListChildren :: (Core.Maybe Core.Bool),
     -- | Output only. Whether the current user can modify the content of this file.
@@ -2297,8 +2355,10 @@ newFile_Capabilities =
       canCopy = Core.Nothing,
       canDelete = Core.Nothing,
       canDeleteChildren = Core.Nothing,
+      canDisableInheritedPermissions = Core.Nothing,
       canDownload = Core.Nothing,
       canEdit = Core.Nothing,
+      canEnableInheritedPermissions = Core.Nothing,
       canListChildren = Core.Nothing,
       canModifyContent = Core.Nothing,
       canModifyContentRestriction = Core.Nothing,
@@ -2346,8 +2406,10 @@ instance Core.FromJSON File_Capabilities where
             Core.<*> (o Core..:? "canCopy")
             Core.<*> (o Core..:? "canDelete")
             Core.<*> (o Core..:? "canDeleteChildren")
+            Core.<*> (o Core..:? "canDisableInheritedPermissions")
             Core.<*> (o Core..:? "canDownload")
             Core.<*> (o Core..:? "canEdit")
+            Core.<*> (o Core..:? "canEnableInheritedPermissions")
             Core.<*> (o Core..:? "canListChildren")
             Core.<*> (o Core..:? "canModifyContent")
             Core.<*> (o Core..:? "canModifyContentRestriction")
@@ -2397,8 +2459,12 @@ instance Core.ToJSON File_Capabilities where
             ("canCopy" Core..=) Core.<$> canCopy,
             ("canDelete" Core..=) Core.<$> canDelete,
             ("canDeleteChildren" Core..=) Core.<$> canDeleteChildren,
+            ("canDisableInheritedPermissions" Core..=)
+              Core.<$> canDisableInheritedPermissions,
             ("canDownload" Core..=) Core.<$> canDownload,
             ("canEdit" Core..=) Core.<$> canEdit,
+            ("canEnableInheritedPermissions" Core..=)
+              Core.<$> canEnableInheritedPermissions,
             ("canListChildren" Core..=) Core.<$> canListChildren,
             ("canModifyContent" Core..=) Core.<$> canModifyContent,
             ("canModifyContentRestriction" Core..=)
@@ -3586,11 +3652,13 @@ data Permission = Permission
     expirationTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The ID of this permission. This is a unique identifier for the grantee, and is published in User resources as @permissionId@. IDs should be treated as opaque values.
     id :: (Core.Maybe Core.Text),
+    -- | When true, only organizers, owners, and users with permissions added directly on the item can access it.
+    inheritedPermissionsDisabled :: (Core.Maybe Core.Bool),
     -- | Output only. Identifies what kind of resource this is. Value: the fixed string @\"drive#permission\"@.
     kind :: Core.Text,
     -- | Whether the account associated with this permission is a pending owner. Only populated for @user@ type permissions for files that are not in a shared drive.
     pendingOwner :: (Core.Maybe Core.Bool),
-    -- | Output only. Details of whether the permissions on this shared drive item are inherited or directly on this item. This is an output-only field which is present only for shared drive items.
+    -- | Output only. Details of whether the permissions on this item are inherited or directly on this item.
     permissionDetails :: (Core.Maybe [Permission_PermissionDetailsItem]),
     -- | Output only. A link to the user\'s profile photo, if available.
     photoLink :: (Core.Maybe Core.Text),
@@ -3600,7 +3668,7 @@ data Permission = Permission
     teamDrivePermissionDetails :: (Core.Maybe [Permission_TeamDrivePermissionDetailsItem]),
     -- | The type of the grantee. Valid values are: * @user@ * @group@ * @domain@ * @anyone@ When creating a permission, if @type@ is @user@ or @group@, you must provide an @emailAddress@ for the user or group. When @type@ is @domain@, you must provide a @domain@. There isn\'t extra information required for an @anyone@ type.
     type' :: (Core.Maybe Core.Text),
-    -- | Indicates the view for this permission. Only populated for permissions that belong to a view. \'published\' is the only supported value.
+    -- | Indicates the view for this permission. Only populated for permissions that belong to a view. published and metadata are the only supported values. - published: The permission\'s role is published_reader. - metadata: The item is only visible to the metadata view because the item has limited access and the scope has at least read access to the parent. Note: The metadata view is currently only supported on folders.
     view :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3617,6 +3685,7 @@ newPermission =
       emailAddress = Core.Nothing,
       expirationTime = Core.Nothing,
       id = Core.Nothing,
+      inheritedPermissionsDisabled = Core.Nothing,
       kind = "drive#permission",
       pendingOwner = Core.Nothing,
       permissionDetails = Core.Nothing,
@@ -3640,6 +3709,7 @@ instance Core.FromJSON Permission where
             Core.<*> (o Core..:? "emailAddress")
             Core.<*> (o Core..:? "expirationTime")
             Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "inheritedPermissionsDisabled")
             Core.<*> (o Core..:? "kind" Core..!= "drive#permission")
             Core.<*> (o Core..:? "pendingOwner")
             Core.<*> (o Core..:? "permissionDetails")
@@ -3661,6 +3731,8 @@ instance Core.ToJSON Permission where
             ("emailAddress" Core..=) Core.<$> emailAddress,
             ("expirationTime" Core..=) Core.<$> expirationTime,
             ("id" Core..=) Core.<$> id,
+            ("inheritedPermissionsDisabled" Core..=)
+              Core.<$> inheritedPermissionsDisabled,
             Core.Just ("kind" Core..= kind),
             ("pendingOwner" Core..=) Core.<$> pendingOwner,
             ("permissionDetails" Core..=) Core.<$> permissionDetails,
@@ -3678,11 +3750,11 @@ instance Core.ToJSON Permission where
 data Permission_PermissionDetailsItem = Permission_PermissionDetailsItem
   { -- | Output only. Whether this permission is inherited. This field is always populated. This is an output-only field.
     inherited :: (Core.Maybe Core.Bool),
-    -- | Output only. The ID of the item from which this permission is inherited. This is an output-only field.
+    -- | Output only. The ID of the item from which this permission is inherited. This is only populated for items in shared drives.
     inheritedFrom :: (Core.Maybe Core.Text),
     -- | Output only. The permission type for this user. While new values may be added in future, the following are currently possible: * @file@ * @member@
     permissionType :: (Core.Maybe Core.Text),
-    -- | Output only. The primary role for this user. While new values may be added in the future, the following are currently possible: * @organizer@ * @fileOrganizer@ * @writer@ * @commenter@ * @reader@
+    -- | Output only. The primary role for this user. While new values may be added in the future, the following are currently possible: * @owner@ * @organizer@ * @fileOrganizer@ * @writer@ * @commenter@ * @reader@
     role' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4008,7 +4080,7 @@ data Revision = Revision
     publishAuto :: (Core.Maybe Core.Bool),
     -- | Whether this revision is published. This is only applicable to Docs Editors files.
     published :: (Core.Maybe Core.Bool),
-    -- | Output only. A link to the published revision. This is only populated for Google Sites files.
+    -- | Output only. A link to the published revision. This is only populated for Docs Editors files.
     publishedLink :: (Core.Maybe Core.Text),
     -- | Whether this revision is published outside the domain. This is only applicable to Docs Editors files.
     publishedOutsideDomain :: (Core.Maybe Core.Bool),
@@ -4545,6 +4617,8 @@ data TeamDrive_Restrictions = TeamDrive_Restrictions
     copyRequiresWriterPermission :: (Core.Maybe Core.Bool),
     -- | Whether access to this Team Drive and items inside this Team Drive is restricted to users of the domain to which this Team Drive belongs. This restriction may be overridden by other sharing policies controlled outside of this Team Drive.
     domainUsersOnly :: (Core.Maybe Core.Bool),
+    -- | Download restrictions applied by shared drive managers.
+    downloadRestriction :: (Core.Maybe DownloadRestriction),
     -- | If true, only users with the organizer role can share folders. If false, users with either the organizer role or the file organizer role can share folders.
     sharingFoldersRequiresOrganizerPermission :: (Core.Maybe Core.Bool),
     -- | Whether access to items inside this Team Drive is restricted to members of this Team Drive.
@@ -4560,6 +4634,7 @@ newTeamDrive_Restrictions =
     { adminManagedRestrictions = Core.Nothing,
       copyRequiresWriterPermission = Core.Nothing,
       domainUsersOnly = Core.Nothing,
+      downloadRestriction = Core.Nothing,
       sharingFoldersRequiresOrganizerPermission = Core.Nothing,
       teamMembersOnly = Core.Nothing
     }
@@ -4573,6 +4648,7 @@ instance Core.FromJSON TeamDrive_Restrictions where
             Core.<$> (o Core..:? "adminManagedRestrictions")
             Core.<*> (o Core..:? "copyRequiresWriterPermission")
             Core.<*> (o Core..:? "domainUsersOnly")
+            Core.<*> (o Core..:? "downloadRestriction")
             Core.<*> (o Core..:? "sharingFoldersRequiresOrganizerPermission")
             Core.<*> (o Core..:? "teamMembersOnly")
       )
@@ -4586,6 +4662,7 @@ instance Core.ToJSON TeamDrive_Restrictions where
             ("copyRequiresWriterPermission" Core..=)
               Core.<$> copyRequiresWriterPermission,
             ("domainUsersOnly" Core..=) Core.<$> domainUsersOnly,
+            ("downloadRestriction" Core..=) Core.<$> downloadRestriction,
             ("sharingFoldersRequiresOrganizerPermission" Core..=)
               Core.<$> sharingFoldersRequiresOrganizerPermission,
             ("teamMembersOnly" Core..=) Core.<$> teamMembersOnly

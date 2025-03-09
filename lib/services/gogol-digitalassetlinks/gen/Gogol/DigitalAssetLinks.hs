@@ -32,6 +32,11 @@ module Gogol.DigitalAssetLinks
 
     -- * Resources
 
+    -- ** digitalassetlinks.assetlinks.bulkCheck
+    DigitalAssetLinksAssetlinksBulkCheckResource,
+    DigitalAssetLinksAssetlinksBulkCheck (..),
+    newDigitalAssetLinksAssetlinksBulkCheck,
+
     -- ** digitalassetlinks.assetlinks.check
     DigitalAssetLinksAssetlinksCheckResource,
     DigitalAssetLinksAssetlinksCheck (..),
@@ -55,6 +60,17 @@ module Gogol.DigitalAssetLinks
     Asset (..),
     newAsset,
 
+    -- ** BulkCheckRequest
+    BulkCheckRequest (..),
+    newBulkCheckRequest,
+
+    -- ** BulkCheckResponse
+    BulkCheckResponse (..),
+    newBulkCheckResponse,
+
+    -- ** BulkCheckResponse_BulkErrorCode
+    BulkCheckResponse_BulkErrorCode (..),
+
     -- ** CertificateInfo
     CertificateInfo (..),
     newCertificateInfo,
@@ -77,12 +93,17 @@ module Gogol.DigitalAssetLinks
     Statement (..),
     newStatement,
 
+    -- ** StatementTemplate
+    StatementTemplate (..),
+    newStatementTemplate,
+
     -- ** WebAsset
     WebAsset (..),
     newWebAsset,
   )
 where
 
+import Gogol.DigitalAssetLinks.Assetlinks.BulkCheck
 import Gogol.DigitalAssetLinks.Assetlinks.Check
 import Gogol.DigitalAssetLinks.Statements.List
 import Gogol.DigitalAssetLinks.Types

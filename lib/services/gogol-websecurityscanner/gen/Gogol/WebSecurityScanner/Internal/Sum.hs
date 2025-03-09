@@ -56,6 +56,16 @@ module Gogol.WebSecurityScanner.Internal.Sum
         ..
       ),
 
+    -- * ScanConfig_TargetPlatformsItem
+    ScanConfig_TargetPlatformsItem
+      ( ScanConfig_TargetPlatformsItem_TARGETPLATFORMUNSPECIFIED,
+        ScanConfig_TargetPlatformsItem_APPENGINE,
+        ScanConfig_TargetPlatformsItem_Compute,
+        ScanConfig_TargetPlatformsItem_CLOUDRUN,
+        ScanConfig_TargetPlatformsItem_CLOUDFUNCTIONS,
+        ..
+      ),
+
     -- * ScanConfig_UserAgent
     ScanConfig_UserAgent
       ( ScanConfig_UserAgent_USERAGENTUNSPECIFIED,
@@ -318,6 +328,47 @@ pattern ScanConfig_RiskLevel_Low = ScanConfig_RiskLevel "LOW"
   ScanConfig_RiskLevel_Normal,
   ScanConfig_RiskLevel_Low,
   ScanConfig_RiskLevel
+  #-}
+
+newtype ScanConfig_TargetPlatformsItem = ScanConfig_TargetPlatformsItem {fromScanConfig_TargetPlatformsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The target platform is unknown. Requests with this enum value will be rejected with INVALID_ARGUMENT error.
+pattern ScanConfig_TargetPlatformsItem_TARGETPLATFORMUNSPECIFIED :: ScanConfig_TargetPlatformsItem
+pattern ScanConfig_TargetPlatformsItem_TARGETPLATFORMUNSPECIFIED = ScanConfig_TargetPlatformsItem "TARGET_PLATFORM_UNSPECIFIED"
+
+-- | Google App Engine service.
+pattern ScanConfig_TargetPlatformsItem_APPENGINE :: ScanConfig_TargetPlatformsItem
+pattern ScanConfig_TargetPlatformsItem_APPENGINE = ScanConfig_TargetPlatformsItem "APP_ENGINE"
+
+-- | Google Compute Engine service.
+pattern ScanConfig_TargetPlatformsItem_Compute :: ScanConfig_TargetPlatformsItem
+pattern ScanConfig_TargetPlatformsItem_Compute = ScanConfig_TargetPlatformsItem "COMPUTE"
+
+-- | Google Cloud Run service.
+pattern ScanConfig_TargetPlatformsItem_CLOUDRUN :: ScanConfig_TargetPlatformsItem
+pattern ScanConfig_TargetPlatformsItem_CLOUDRUN = ScanConfig_TargetPlatformsItem "CLOUD_RUN"
+
+-- | Google Cloud Function service.
+pattern ScanConfig_TargetPlatformsItem_CLOUDFUNCTIONS :: ScanConfig_TargetPlatformsItem
+pattern ScanConfig_TargetPlatformsItem_CLOUDFUNCTIONS = ScanConfig_TargetPlatformsItem "CLOUD_FUNCTIONS"
+
+{-# COMPLETE
+  ScanConfig_TargetPlatformsItem_TARGETPLATFORMUNSPECIFIED,
+  ScanConfig_TargetPlatformsItem_APPENGINE,
+  ScanConfig_TargetPlatformsItem_Compute,
+  ScanConfig_TargetPlatformsItem_CLOUDRUN,
+  ScanConfig_TargetPlatformsItem_CLOUDFUNCTIONS,
+  ScanConfig_TargetPlatformsItem
   #-}
 
 -- | The user agent used during scanning.

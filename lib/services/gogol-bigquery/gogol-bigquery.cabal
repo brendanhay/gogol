@@ -78,9 +78,14 @@ library
     Gogol.BigQuery.Routines.List
     Gogol.BigQuery.Routines.SetIamPolicy
     Gogol.BigQuery.Routines.Update
+    Gogol.BigQuery.RowAccessPolicies.BatchDelete
+    Gogol.BigQuery.RowAccessPolicies.Delete
+    Gogol.BigQuery.RowAccessPolicies.Get
     Gogol.BigQuery.RowAccessPolicies.GetIamPolicy
+    Gogol.BigQuery.RowAccessPolicies.Insert
     Gogol.BigQuery.RowAccessPolicies.List
     Gogol.BigQuery.RowAccessPolicies.TestIamPermissions
+    Gogol.BigQuery.RowAccessPolicies.Update
     Gogol.BigQuery.Tabledata.InsertAll
     Gogol.BigQuery.Tabledata.List
     Gogol.BigQuery.Tables.Delete

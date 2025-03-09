@@ -136,6 +136,17 @@ module Gogol.DataFusion.Types
     Location_Metadata (..),
     newLocation_Metadata,
 
+    -- ** LoggingConfig
+    LoggingConfig (..),
+    newLoggingConfig,
+
+    -- ** MaintenanceEvent
+    MaintenanceEvent (..),
+    newMaintenanceEvent,
+
+    -- ** MaintenanceEvent_State
+    MaintenanceEvent_State (..),
+
     -- ** MaintenancePolicy
     MaintenancePolicy (..),
     newMaintenancePolicy,

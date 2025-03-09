@@ -23,7 +23,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets an existing user workloads ConfigMap. This method is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+-- Gets an existing user workloads ConfigMap. This method is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
 --
 -- /See:/ <https://cloud.google.com/composer/ Cloud Composer API Reference> for @composer.projects.locations.environments.userWorkloadsConfigMaps.get@.
 module Gogol.Composer.Projects.Locations.Environments.UserWorkloadsConfigMaps.Get
@@ -52,7 +52,7 @@ type ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] UserWorkloadsConfigMap
 
--- | Gets an existing user workloads ConfigMap. This method is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+-- | Gets an existing user workloads ConfigMap. This method is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
 --
 -- /See:/ 'newComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsGet' smart constructor.
 data ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsGet = ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsGet

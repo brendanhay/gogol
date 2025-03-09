@@ -50,6 +50,10 @@ type SqlInstancesDeleteResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "enableFinalBackup" Core.Bool
+    Core.:> Core.QueryParam "finalBackupDescription" Core.Text
+    Core.:> Core.QueryParam "finalBackupExpiryTime" Core.DateTime
+    Core.:> Core.QueryParam "finalBackupTtlDays" Core.Int64
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -65,6 +69,14 @@ data SqlInstancesDelete = SqlInstancesDelete
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | Flag to opt-in for final backup. By default, it is turned off.
+    enableFinalBackup :: (Core.Maybe Core.Bool),
+    -- | Optional. The description of the final backup.
+    finalBackupDescription :: (Core.Maybe Core.Text),
+    -- | Optional. Final Backup expiration time. Timestamp in UTC of when this resource is considered expired.
+    finalBackupExpiryTime :: (Core.Maybe Core.DateTime),
+    -- | Optional. Retention period of the final backup.
+    finalBackupTtlDays :: (Core.Maybe Core.Int64),
     -- | Cloud SQL instance ID. This does not include the project ID.
     instance' :: Core.Text,
     -- | Project ID of the project that contains the instance to be deleted.
@@ -88,6 +100,10 @@ newSqlInstancesDelete instance' project =
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      enableFinalBackup = Core.Nothing,
+      finalBackupDescription = Core.Nothing,
+      finalBackupExpiryTime = Core.Nothing,
+      finalBackupTtlDays = Core.Nothing,
       instance' = instance',
       project = project,
       uploadType = Core.Nothing,
@@ -106,6 +122,10 @@ instance Core.GoogleRequest SqlInstancesDelete where
       xgafv
       accessToken
       callback
+      enableFinalBackup
+      finalBackupDescription
+      finalBackupExpiryTime
+      finalBackupTtlDays
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)

@@ -102,6 +102,7 @@ module Gogol.Dataproc.Internal.Sum
         ClusterStatus_State_Stopped,
         ClusterStatus_State_Starting,
         ClusterStatus_State_Repairing,
+        ClusterStatus_State_Scheduled,
         ..
       ),
 
@@ -320,8 +321,8 @@ module Gogol.Dataproc.Internal.Sum
         SoftwareConfig_OptionalComponentsItem_Hbase,
         SoftwareConfig_OptionalComponentsItem_HIVEWEBHCAT,
         SoftwareConfig_OptionalComponentsItem_Hudi,
-        SoftwareConfig_OptionalComponentsItem_Iceberg,
         SoftwareConfig_OptionalComponentsItem_Jupyter,
+        SoftwareConfig_OptionalComponentsItem_Pig,
         SoftwareConfig_OptionalComponentsItem_Presto,
         SoftwareConfig_OptionalComponentsItem_Trino,
         SoftwareConfig_OptionalComponentsItem_Ranger,
@@ -829,6 +830,10 @@ pattern ClusterStatus_State_Starting = ClusterStatus_State "STARTING"
 pattern ClusterStatus_State_Repairing :: ClusterStatus_State
 pattern ClusterStatus_State_Repairing = ClusterStatus_State "REPAIRING"
 
+-- | Cluster creation is currently waiting for resources to be available. Once all resources are available, it will transition to CREATING and then RUNNING.
+pattern ClusterStatus_State_Scheduled :: ClusterStatus_State
+pattern ClusterStatus_State_Scheduled = ClusterStatus_State "SCHEDULED"
+
 {-# COMPLETE
   ClusterStatus_State_Unknown,
   ClusterStatus_State_Creating,
@@ -841,6 +846,7 @@ pattern ClusterStatus_State_Repairing = ClusterStatus_State "REPAIRING"
   ClusterStatus_State_Stopped,
   ClusterStatus_State_Starting,
   ClusterStatus_State_Repairing,
+  ClusterStatus_State_Scheduled,
   ClusterStatus_State
   #-}
 
@@ -1730,13 +1736,13 @@ pattern SoftwareConfig_OptionalComponentsItem_HIVEWEBHCAT = SoftwareConfig_Optio
 pattern SoftwareConfig_OptionalComponentsItem_Hudi :: SoftwareConfig_OptionalComponentsItem
 pattern SoftwareConfig_OptionalComponentsItem_Hudi = SoftwareConfig_OptionalComponentsItem "HUDI"
 
--- | Iceberg.
-pattern SoftwareConfig_OptionalComponentsItem_Iceberg :: SoftwareConfig_OptionalComponentsItem
-pattern SoftwareConfig_OptionalComponentsItem_Iceberg = SoftwareConfig_OptionalComponentsItem "ICEBERG"
-
 -- | The Jupyter Notebook.
 pattern SoftwareConfig_OptionalComponentsItem_Jupyter :: SoftwareConfig_OptionalComponentsItem
 pattern SoftwareConfig_OptionalComponentsItem_Jupyter = SoftwareConfig_OptionalComponentsItem "JUPYTER"
+
+-- | The Pig component.
+pattern SoftwareConfig_OptionalComponentsItem_Pig :: SoftwareConfig_OptionalComponentsItem
+pattern SoftwareConfig_OptionalComponentsItem_Pig = SoftwareConfig_OptionalComponentsItem "PIG"
 
 -- | The Presto query engine.
 pattern SoftwareConfig_OptionalComponentsItem_Presto :: SoftwareConfig_OptionalComponentsItem
@@ -1771,8 +1777,8 @@ pattern SoftwareConfig_OptionalComponentsItem_Zookeeper = SoftwareConfig_Optiona
   SoftwareConfig_OptionalComponentsItem_Hbase,
   SoftwareConfig_OptionalComponentsItem_HIVEWEBHCAT,
   SoftwareConfig_OptionalComponentsItem_Hudi,
-  SoftwareConfig_OptionalComponentsItem_Iceberg,
   SoftwareConfig_OptionalComponentsItem_Jupyter,
+  SoftwareConfig_OptionalComponentsItem_Pig,
   SoftwareConfig_OptionalComponentsItem_Presto,
   SoftwareConfig_OptionalComponentsItem_Trino,
   SoftwareConfig_OptionalComponentsItem_Ranger,

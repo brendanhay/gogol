@@ -32,8 +32,20 @@ module Gogol.AppsCalendar
 
     -- * OAuth Scopes
     Calendar'FullControl,
+    Calendar'Acls,
+    Calendar'Acls'Readonly,
+    Calendar'App'Created,
+    Calendar'Calendarlist,
+    Calendar'Calendarlist'Readonly,
+    Calendar'Calendars,
+    Calendar'Calendars'Readonly,
     Calendar'Events,
+    Calendar'Events'Freebusy,
+    Calendar'Events'Owned,
+    Calendar'Events'Owned'Readonly,
+    Calendar'Events'Public'Readonly,
     Calendar'Events'Readonly,
+    Calendar'Freebusy,
     Calendar'Readonly,
     Calendar'Settings'Readonly,
 

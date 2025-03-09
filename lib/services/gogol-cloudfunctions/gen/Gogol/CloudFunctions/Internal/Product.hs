@@ -59,6 +59,10 @@ module Gogol.CloudFunctions.Internal.Product
     Date (..),
     newDate,
 
+    -- * DetachFunctionRequest
+    DetachFunctionRequest (..),
+    newDetachFunctionRequest,
+
     -- * EventFilter
     EventFilter (..),
     newEventFilter,
@@ -426,7 +430,7 @@ data BuildConfig = BuildConfig
   { automaticUpdatePolicy :: (Core.Maybe AutomaticUpdatePolicy),
     -- | Output only. The Cloud Build name of the latest successful deployment of the function.
     build :: (Core.Maybe Core.Text),
-    -- | Docker Registry to use for this deployment. This configuration is only applicable to 1st Gen functions, 2nd Gen functions can only use Artifact Registry. If unspecified, it defaults to @ARTIFACT_REGISTRY@. If @docker_repository@ field is specified, this field should either be left unspecified or set to @ARTIFACT_REGISTRY@.
+    -- | Docker Registry to use for this deployment. This configuration is only applicable to 1st Gen functions, 2nd Gen functions can only use Artifact Registry. Deprecated: Container Registry option will no longer be available after March 2025: https:\/\/cloud.google.com\/artifact-registry\/docs\/transition\/transition-from-gcr Please use Artifact Registry instead, which is the default choice. If unspecified, it defaults to @ARTIFACT_REGISTRY@. If @docker_repository@ field is specified, this field should either be left unspecified or set to @ARTIFACT_REGISTRY@.
     dockerRegistry :: (Core.Maybe BuildConfig_DockerRegistry),
     -- | Repository in Artifact Registry to which the function docker image will be pushed after it is built by Cloud Build. If specified by user, it is created and managed by user with a customer managed encryption key. Otherwise, GCF will create and use a repository named \'gcf-artifacts\' for every deployed region. It must match the pattern @projects\/{project}\/locations\/{location}\/repositories\/{repository}@. Repository format must be \'DOCKER\'.
     dockerRepository :: (Core.Maybe Core.Text),
@@ -602,6 +606,26 @@ instance Core.ToJSON Date where
             ("year" Core..=) Core.<$> year
           ]
       )
+
+-- | Request for the @DetachFunction@ method.
+--
+-- /See:/ 'newDetachFunctionRequest' smart constructor.
+data DetachFunctionRequest = DetachFunctionRequest
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DetachFunctionRequest' with the minimum fields required to make a request.
+newDetachFunctionRequest ::
+  DetachFunctionRequest
+newDetachFunctionRequest = DetachFunctionRequest
+
+instance Core.FromJSON DetachFunctionRequest where
+  parseJSON =
+    Core.withObject
+      "DetachFunctionRequest"
+      (\o -> Core.pure DetachFunctionRequest)
+
+instance Core.ToJSON DetachFunctionRequest where
+  toJSON = Core.const Core.emptyObject
 
 -- | Filters events based on exact matches on the CloudEvents attributes.
 --
@@ -792,6 +816,8 @@ data Function = Function
     -- | A user-defined name of the function. Function names must be unique globally and match pattern @projects\/*\/locations\/*\/functions\/*@
     name :: (Core.Maybe Core.Text),
     -- | Output only. Reserved for future use.
+    satisfiesPzi :: (Core.Maybe Core.Bool),
+    -- | Output only. Reserved for future use.
     satisfiesPzs :: (Core.Maybe Core.Bool),
     -- | Describes the Service being deployed. Currently deploys services to Cloud Run (fully managed).
     serviceConfig :: (Core.Maybe ServiceConfig),
@@ -821,6 +847,7 @@ newFunction =
       kmsKeyName = Core.Nothing,
       labels = Core.Nothing,
       name = Core.Nothing,
+      satisfiesPzi = Core.Nothing,
       satisfiesPzs = Core.Nothing,
       serviceConfig = Core.Nothing,
       state = Core.Nothing,
@@ -844,6 +871,7 @@ instance Core.FromJSON Function where
             Core.<*> (o Core..:? "kmsKeyName")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "satisfiesPzi")
             Core.<*> (o Core..:? "satisfiesPzs")
             Core.<*> (o Core..:? "serviceConfig")
             Core.<*> (o Core..:? "state")
@@ -865,6 +893,7 @@ instance Core.ToJSON Function where
             ("kmsKeyName" Core..=) Core.<$> kmsKeyName,
             ("labels" Core..=) Core.<$> labels,
             ("name" Core..=) Core.<$> name,
+            ("satisfiesPzi" Core..=) Core.<$> satisfiesPzi,
             ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
             ("serviceConfig" Core..=) Core.<$> serviceConfig,
             ("state" Core..=) Core.<$> state,
@@ -1073,6 +1102,8 @@ data GoogleCloudFunctionsV2OperationMetadata = GoogleCloudFunctionsV2OperationMe
     cancelRequested :: (Core.Maybe Core.Bool),
     -- | The time the operation was created.
     createTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. Whether a custom IAM role binding was detected during the upgrade.
+    customIamRoleDetected :: (Core.Maybe Core.Bool),
     -- | The time the operation finished running.
     endTime :: (Core.Maybe Core.DateTime),
     -- | The operation type.
@@ -1105,6 +1136,7 @@ newGoogleCloudFunctionsV2OperationMetadata =
       buildName = Core.Nothing,
       cancelRequested = Core.Nothing,
       createTime = Core.Nothing,
+      customIamRoleDetected = Core.Nothing,
       endTime = Core.Nothing,
       operationType = Core.Nothing,
       requestResource = Core.Nothing,
@@ -1125,6 +1157,7 @@ instance Core.FromJSON GoogleCloudFunctionsV2OperationMetadata where
             Core.<*> (o Core..:? "buildName")
             Core.<*> (o Core..:? "cancelRequested")
             Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "customIamRoleDetected")
             Core.<*> (o Core..:? "endTime")
             Core.<*> (o Core..:? "operationType")
             Core.<*> (o Core..:? "requestResource")
@@ -1143,6 +1176,7 @@ instance Core.ToJSON GoogleCloudFunctionsV2OperationMetadata where
             ("buildName" Core..=) Core.<$> buildName,
             ("cancelRequested" Core..=) Core.<$> cancelRequested,
             ("createTime" Core..=) Core.<$> createTime,
+            ("customIamRoleDetected" Core..=) Core.<$> customIamRoleDetected,
             ("endTime" Core..=) Core.<$> endTime,
             ("operationType" Core..=) Core.<$> operationType,
             ("requestResource" Core..=) Core.<$> requestResource,
@@ -2614,7 +2648,7 @@ instance Core.ToJSON TestIamPermissionsResponse where
     Core.object
       (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
--- | Information related to: * A function\'s eligibility for 1st Gen to 2nd Gen migration and 2nd Gen to CRf detach. * Current state of migration for function undergoing migration\/detach.
+-- | Information related to: * A function\'s eligibility for 1st Gen to 2nd Gen migration. * Current state of migration for function undergoing migration.
 --
 -- /See:/ 'newUpgradeInfo' smart constructor.
 data UpgradeInfo = UpgradeInfo

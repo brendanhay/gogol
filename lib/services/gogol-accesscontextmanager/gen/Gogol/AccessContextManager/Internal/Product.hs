@@ -1123,27 +1123,38 @@ instance Core.ToJSON EgressPolicy where
 -- | The source that EgressPolicy authorizes access from inside the ServicePerimeter to somewhere outside the ServicePerimeter boundaries.
 --
 -- /See:/ 'newEgressSource' smart constructor.
-newtype EgressSource = EgressSource
+data EgressSource = EgressSource
   { -- | An AccessLevel resource name that allows protected resources inside the ServicePerimeters to access outside the ServicePerimeter boundaries. AccessLevels listed must be in the same policy as this ServicePerimeter. Referencing a nonexistent AccessLevel will cause an error. If an AccessLevel name is not specified, only resources within the perimeter can be accessed through Google Cloud calls with request origins within the perimeter. Example: @accessPolicies\/MY_POLICY\/accessLevels\/MY_LEVEL@. If a single @*@ is specified for @access_level@, then all EgressSources will be allowed.
-    accessLevel :: (Core.Maybe Core.Text)
+    accessLevel :: (Core.Maybe Core.Text),
+    -- | A Google Cloud resource from the service perimeter that you want to allow to access data outside the perimeter. This field supports only projects. The project format is @projects\/{project_number}@. You can\'t use @*@ in this field to allow all Google Cloud resources.
+    resource :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'EgressSource' with the minimum fields required to make a request.
 newEgressSource ::
   EgressSource
-newEgressSource = EgressSource {accessLevel = Core.Nothing}
+newEgressSource =
+  EgressSource {accessLevel = Core.Nothing, resource = Core.Nothing}
 
 instance Core.FromJSON EgressSource where
   parseJSON =
     Core.withObject
       "EgressSource"
-      (\o -> EgressSource Core.<$> (o Core..:? "accessLevel"))
+      ( \o ->
+          EgressSource
+            Core.<$> (o Core..:? "accessLevel")
+            Core.<*> (o Core..:? "resource")
+      )
 
 instance Core.ToJSON EgressSource where
   toJSON EgressSource {..} =
     Core.object
-      (Core.catMaybes [("accessLevel" Core..=) Core.<$> accessLevel])
+      ( Core.catMaybes
+          [ ("accessLevel" Core..=) Core.<$> accessLevel,
+            ("resource" Core..=) Core.<$> resource
+          ]
+      )
 
 -- | Defines the conditions under which an EgressPolicy matches a request. Conditions are based on information about the ApiOperation intended to be performed on the @resources@ specified. Note that if the destination of the request is also protected by a ServicePerimeter, then that ServicePerimeter must have an IngressPolicy which allows access in order for this request to succeed. The request must match @operations@ AND @resources@ fields in order to be allowed egress out of the perimeter.
 --
@@ -1321,7 +1332,7 @@ instance Core.ToJSON GcpUserAccessBinding where
           ]
       )
 
--- | Metadata of GCP Access Binding Long Running Operations.
+-- | Metadata of Google Cloud Access Binding Long Running Operations.
 --
 -- /See:/ 'newGcpUserAccessBindingOperationMetadata' smart constructor.
 data GcpUserAccessBindingOperationMetadata = GcpUserAccessBindingOperationMetadata

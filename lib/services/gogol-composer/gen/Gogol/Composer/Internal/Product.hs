@@ -656,7 +656,7 @@ instance Core.ToJSON ComposerWorkloadStatus where
           ]
       )
 
--- | Configuration for resources used by Airflow DAG processors. This field is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+-- | Configuration for resources used by Airflow DAG processors. This field is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
 --
 -- /See:/ 'newDagProcessorResource' smart constructor.
 data DagProcessorResource = DagProcessorResource
@@ -1865,7 +1865,7 @@ instance Core.ToJSON MasterAuthorizedNetworksConfig where
 --
 -- /See:/ 'newNetworkingConfig' smart constructor.
 newtype NetworkingConfig = NetworkingConfig
-  { -- | Optional. Indicates the user requested specifc connection type between Tenant and Customer projects. You cannot set networking connection type in public IP environment.
+  { -- | Optional. Indicates the user requested specific connection type between Tenant and Customer projects. You cannot set networking connection type in public IP environment.
     connectionType :: (Core.Maybe NetworkingConfig_ConnectionType)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1893,9 +1893,9 @@ instance Core.ToJSON NetworkingConfig where
 --
 -- /See:/ 'newNodeConfig' smart constructor.
 data NodeConfig = NodeConfig
-  { -- | Optional. The IP range in CIDR notation to use internally by Cloud Composer. IP addresses are not reserved - and the same range can be used by multiple Cloud Composer environments. In case of overlap, IPs from this range will not be accessible in the user\'s VPC network. Cannot be updated. If not specified, the default value of \'100.64.128.0\/20\' is used. This field is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+  { -- | Optional. The IP range in CIDR notation to use internally by Cloud Composer. IP addresses are not reserved - and the same range can be used by multiple Cloud Composer environments. In case of overlap, IPs from this range will not be accessible in the user\'s VPC network. Cannot be updated. If not specified, the default value of \'100.64.128.0\/20\' is used. This field is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
     composerInternalIpv4CidrBlock :: (Core.Maybe Core.Text),
-    -- | Optional. Network Attachment that Cloud Composer environment is connected to, which provides connectivity with a user\'s VPC network. Takes precedence over network and subnetwork settings. If not provided, but network and subnetwork are defined during environment, it will be provisioned. If not provided and network and subnetwork are also empty, then connectivity to user\'s VPC network is disabled. Network attachment must be provided in format projects\/{project}\/regions\/{region}\/networkAttachments\/{networkAttachment}. This field is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+    -- | Optional. Network Attachment that Cloud Composer environment is connected to, which provides connectivity with a user\'s VPC network. Takes precedence over network and subnetwork settings. If not provided, but network and subnetwork are defined during environment, it will be provisioned. If not provided and network and subnetwork are also empty, then connectivity to user\'s VPC network is disabled. Network attachment must be provided in format projects\/{project}\/regions\/{region}\/networkAttachments\/{networkAttachment}. This field is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
     composerNetworkAttachment :: (Core.Maybe Core.Text),
     -- | Optional. The disk size in GB used for node VMs. Minimum size is 30GB. If unspecified, defaults to 100GB. Cannot be updated. This field is supported for Cloud Composer environments in versions composer-1././-airflow-/./.*.
     diskSizeGb :: (Core.Maybe Core.Int32),
@@ -2296,7 +2296,7 @@ data PrivateEnvironmentConfig = PrivateEnvironmentConfig
     cloudComposerNetworkIpv4ReservedRange :: (Core.Maybe Core.Text),
     -- | Optional. The CIDR block from which IP range in tenant project will be reserved for Cloud SQL. Needs to be disjoint from @web_server_ipv4_cidr_block@.
     cloudSqlIpv4CidrBlock :: (Core.Maybe Core.Text),
-    -- | Optional. If @true@, builds performed during operations that install Python packages have only private connectivity to Google services (including Artifact Registry) and VPC network (if either @NodeConfig.network@ and @NodeConfig.subnetwork@ fields or @NodeConfig.composer_network_attachment@ field are specified). If @false@, the builds also have access to the internet. This field is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+    -- | Optional. If @true@, builds performed during operations that install Python packages have only private connectivity to Google services (including Artifact Registry) and VPC network (if either @NodeConfig.network@ and @NodeConfig.subnetwork@ fields or @NodeConfig.composer_network_attachment@ field are specified). If @false@, the builds also have access to the internet. This field is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
     enablePrivateBuildsOnly :: (Core.Maybe Core.Bool),
     -- | Optional. If @true@, a Private IP Cloud Composer environment is created. If this field is set to true, @IPAllocationPolicy.use_ip_aliases@ must be set to true for Cloud Composer environments in versions composer-1././-airflow-/./.*.
     enablePrivateEnvironment :: (Core.Maybe Core.Bool),
@@ -2582,7 +2582,7 @@ data SoftwareConfig = SoftwareConfig
     pythonVersion :: (Core.Maybe Core.Text),
     -- | Optional. The number of schedulers for Airflow. This field is supported for Cloud Composer environments in versions composer-1././-airflow-2././.
     schedulerCount :: (Core.Maybe Core.Int32),
-    -- | Optional. Whether or not the web server uses custom plugins. If unspecified, the field defaults to @PLUGINS_ENABLED@. This field is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+    -- | Optional. Whether or not the web server uses custom plugins. If unspecified, the field defaults to @PLUGINS_ENABLED@. This field is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
     webServerPluginsMode :: (Core.Maybe SoftwareConfig_WebServerPluginsMode)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3249,7 +3249,7 @@ instance Core.ToJSON WorkerResource where
 --
 -- /See:/ 'newWorkloadsConfig' smart constructor.
 data WorkloadsConfig = WorkloadsConfig
-  { -- | Optional. Resources used by Airflow DAG processors. This field is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+  { -- | Optional. Resources used by Airflow DAG processors. This field is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
     dagProcessor :: (Core.Maybe DagProcessorResource),
     -- | Optional. Resources used by Airflow schedulers.
     scheduler :: (Core.Maybe SchedulerResource),
