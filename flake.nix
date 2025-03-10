@@ -51,6 +51,7 @@
             settings = {
               global.excludes = [
                 "CONTRIBUTORS"
+                "cabal.project"
                 ".github/**.yml"
                 "configs/*"
                 "**LICENSE"
