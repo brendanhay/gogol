@@ -104,6 +104,7 @@
           nativeBuildInputs = [
             # Tools specific to the GHC version.
             ghc
+            haskellPackages.cabal-install
             haskellPackages.haskell-language-server
 
             # The stack wrapper that uses the shell's GHC version.

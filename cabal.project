@@ -1,0 +1,16 @@
+-- Writing environment files prevents reproducible builds.
+write-ghc-environment-files: never
+
+-- O1 by default. You can override this locally via:
+--   cabal configure --disable-optimization
+optimization: 1
+
+-- Local packages.
+packages:
+   examples/
+   lib/gogol/
+   lib/gogol-core/
+
+optional-packages:
+   gen/
+   lib/services/*/
